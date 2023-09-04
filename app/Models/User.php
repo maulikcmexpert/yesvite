@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\Passport;
 use Laravel\Passport\HasApiTokens;
+use App\Models\Device;
+use App\Models\Company;
+
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -21,6 +24,7 @@ class User extends Authenticatable
         'firstname',
         'lastname',
         'email',
+        'remember_token',
         'password',
     ];
 
@@ -42,4 +46,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    public function company()
+    {
+        return $this->hasOne(Company::class);
+    }
+    public function device()
+    {
+        return $this->hasOne(Device::class);
+    }
 }

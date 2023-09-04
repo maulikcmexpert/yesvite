@@ -13,17 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('companies', function (Blueprint $table) {
+        Schema::create('devices', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict');
-            $table->string('company_name');
-            $table->string('address')->nullable();
-            $table->string('city')->nullable();
-            $table->string('state')->nullable();
-            $table->string('zipcode')->nullable();
-            $table->enum('status', ['0', '1', '9'])->default('0');
-            $table->rememberToken();
+            $table->string('device_id')->nullable();
+            $table->string('device_token')->nullable();
+            $table->enum('model', ['And', 'Ios']);
             $table->timestamps();
         });
     }
@@ -35,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('companies');
+        Schema::dropIfExists('devices');
     }
 };

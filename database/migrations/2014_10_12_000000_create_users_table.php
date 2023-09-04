@@ -16,14 +16,22 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('firstname');
-            $table->string('lastname');            
+            $table->string('lastname');
+            $table->string('profile')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->enum('gender', ['male', 'female', 'other'])->nullable()->comment('Gender field');;
-            $table->enum('status', ['0', '1', '9'])->default('0')->comment('0 => Inactive, 1=> Active, 9=>Deleted');;
-            $table->enum('visible', ['0', '1'])->default('0')->comment('0=>Private, 1=>Public');;
+            $table->enum('gender', ['male', 'female', 'other'])->nullable()->comment('Gender field');
+            $table->date('birth_date');
+            $table->integer('country_code')->nullable();
+            $table->string('phone_number')->nullable();
             $table->text('about_me')->nullable();
+            $table->enum('status', ['0', '1', '9'])->default('0')->comment('0 => Inactive, 1=> Active, 9=>Deleted');;
+            $table->enum('visible', ['0', '1'])->default('0')->comment('0=>Private, 1=>Public');
+            $table->string('facbook_token_id')->nullable();
+            $table->string('instagram_token_id')->nullable();
+            $table->string('gmail_token_id')->nullable();
+            $table->string('apple_token_id')->nullable();
             $table->rememberToken()->nullable();
             $table->timestamps();
         });
