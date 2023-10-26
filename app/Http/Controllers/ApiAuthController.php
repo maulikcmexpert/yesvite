@@ -8,7 +8,6 @@ use App\Models\Password_reset;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\forgotpasswordMail;
-use App\Models\Company;
 use App\Models\Device;
 use Validator;
 use Illuminate\Support\Facades\Hash;
@@ -25,14 +24,19 @@ class ApiAuthController extends Controller
 {
     public function signup(Request $request)
     {
-        $input = $request->all();
+
+        $rawData = $request->getContent();
+
+
+        $input = json_decode($rawData, true);
 
         $validator = Validator::make($input, [
             'firstname' => 'required',
             'lastname' => 'required',
             'email' => 'required|email|unique:users',
-            'password' => 'required|min:6',
+            'password' => 'required|min:8',
         ]);
+
         if ($validator->fails()) {
             return response()->json([
                 'errors' => $validator->errors()->all(),
@@ -44,45 +48,42 @@ class ApiAuthController extends Controller
 
             $randomString = Str::random(30);
 
-            $image = $request->profile;
-            $imageName = time() . '_' . $image->getClientOriginalName();
-            Storage::disk('public')->putFileAs('profile', $image, $imageName);
 
-            $user = User::create([
-                'firstname' => $request->firstname,
-                'lastname' => $request->lastname,
-                'profile' => $imageName,
-                'email' => $request->email,
-                'account_type' => $request->account_type,
+            User::create([
+                'firstname' => $input['firstname'],
+                'lastname' => $input['lastname'],
+                'email' => $input['email'],
+                'account_type' => $input['account_type'],
+                'company_name' => ($input['account_type'] == '1') ? $input['company_name'] : "",
+                'password' => Hash::make($input['password']),
                 'remember_token' =>  $randomString,
-                'password' => Hash::make($request->password),
             ]);
 
-
-            if (!empty($request->company_name)) {
-                $companyDetail = new Company;
-                $companyDetail->user_id = $user->id;
-                $companyDetail->company_name = $request->company_name;
-                $companyDetail->save();
-            }
             DB::commit();
-            Mail::send('emails.emailVerificationEmail', ['token' => $randomString], function ($message) use ($request) {
-                $message->to($request->email);
+            Mail::send('emails.emailVerificationEmail', ['token' => $randomString], function ($message) use ($input) {
+                $message->to($input['email']);
                 $message->subject('Email Verification Mail');
             });
 
             return response()->json(['message' => "Please verify your email"], 201);
         } catch (QueryException $e) {
+
             DB::rollBack();
+            return response()->json(['error' => "something went wrong"], 500);
         }
     }
 
     public function login(Request $request)
     {
-        $input = $request->all();
+
+        $rawData = $request->getContent();
+
+
+        $input = json_decode($rawData, true);
+
         $validator = Validator::make($input, [
             'email' => 'required|email',
-            'password' => 'required',
+            'password' => 'required|min:8',
         ]);
         if ($validator->fails()) {
             return response()->json([
@@ -91,19 +92,25 @@ class ApiAuthController extends Controller
             ]);
         }
 
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+        if (Auth::attempt(['email' => $input['email'], 'password' => $input['password']])) {
 
             $user = Auth::user();
 
             if ($user->email_verified_at != NULL) {
 
                 // device  add//
+                if ($user->status == '9') {
+                    return response()->json(['error' => 'Account deleted'], 401);
+                }
 
-                $this->userDevice($user->id, $request);
+                $this->userDevice($user->id, $input);
 
                 // device  add//
                 $token = Token::where('user_id', $user->id)->first();
-                $token->revoke();
+
+                if ($token) {
+                    $token->revoke();
+                }
                 $token = Auth::user()->createToken('API Token')->accessToken;
 
                 $detail = [
@@ -115,13 +122,16 @@ class ApiAuthController extends Controller
 
                 return response()->json(['data' => $detail, 'token' => $token], 200);
             } else {
+
                 $randomString = Str::random(30);
                 $user->remember_token = $randomString;
                 $user->save();
-                Mail::send('emails.emailVerificationEmail', ['token' => $randomString], function ($message) use ($request) {
-                    $message->to($request->email);
+
+                Mail::send('emails.emailVerificationEmail', ['token' => $randomString], function ($message) use ($input) {
+                    $message->to($input['email']);
                     $message->subject('Email Verification Mail');
                 });
+
                 return response()->json(['message' => 'Please check your email'], 401);
             }
         } else {
@@ -147,7 +157,12 @@ class ApiAuthController extends Controller
 
     public function passwordLink(Request $request)
     {
-        $input = $request->all();
+
+        $rawData = $request->getContent();
+
+
+        $input = json_decode($rawData, true);
+
         $validator = Validator::make($input, [
             'email' => 'required|email',
         ]);
@@ -161,14 +176,14 @@ class ApiAuthController extends Controller
 
 
         DB::table('password_resets')->insert([
-            'email' => $request->email,
+            'email' => $input['email'],
             'token' => $token,
             'expires_at' => now()->addMinutes(5),
             'created_at' => now()
         ]);
 
 
-        Mail::to($request->input('email'))->send(new forgotpasswordMail($token));
+        Mail::to($input['email'])->send(new forgotpasswordMail($token));
         return response()->json(['message' => 'Email send successful'], 200);
     }
 

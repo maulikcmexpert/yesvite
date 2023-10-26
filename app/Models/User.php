@@ -8,8 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\Passport;
 use Laravel\Passport\HasApiTokens;
-use App\Models\Device;
-use App\Models\Company;
+use App\Models\{Device, Event, EventInvitedUser, EventCoHost};
 
 class User extends Authenticatable
 {
@@ -24,8 +23,10 @@ class User extends Authenticatable
         'firstname',
         'lastname',
         'email',
-        'remember_token',
+        'company_name',
         'password',
+        'account_type',
+        'remember_token',
     ];
 
     /**
@@ -48,12 +49,24 @@ class User extends Authenticatable
     ];
 
 
-    public function company()
-    {
-        return $this->hasOne(Company::class);
-    }
     public function device()
     {
         return $this->hasOne(Device::class);
+    }
+
+    public function invited_event()
+    {
+        return $this->hasMany(EventInvitedUser::class);
+    }
+
+    public function event_co_host()
+    {
+        return $this->hasMany(EventCoHost::class);
+    }
+
+    // event which create user //
+    public function event()
+    {
+        return $this->hasMany(Event::class);
     }
 }

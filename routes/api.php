@@ -30,6 +30,15 @@ Route::prefix('user')->middleware('checkUser')->group(function () {
     Route::get('home', [ApiController::class, 'home']);
     Route::post('update_profile', [ApiController::class, 'updateProfile']);
     Route::post('my_profile', [ApiController::class, 'myProfile']);
+    Route::post('privacy_setting', [ApiController::class, 'privacySetting']);
+    Route::post('general_setting', [ApiController::class, 'generalSetting']);
+    Route::post('delete_account', [ApiController::class, 'deleteAccount']);
+    Route::post('create_event', [ApiController::class, 'createEvent']);
+    Route::post('store_event_image', [ApiController::class, 'storeEventImage']);
+    Route::post('invite_user', [ApiController::class, 'inviteUser']);
+    Route::get('event_list', [ApiController::class, 'EventList']);
+    Route::post('sent_rsvp', [ApiController::class, 'sentRsvp']);
+    Route::post('event_about', [ApiController::class, 'eventAbout']);
 
     Route::get('logout', [ApiController::class, 'logout']);
 });

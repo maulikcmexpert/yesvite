@@ -4,21 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\User;
+use App\Models\{Event, User};
 
-class Company extends Model
+class EventInvitedUser extends Model
 {
-
-    protected $table = 'companies';
-    use HasFactory;
     protected $fillable = [
-        'firstname',
-        'lastname',
-        'company_name',
-        'email',
-        'password',
+        'event_id',
+        'user_id'
     ];
+    use HasFactory;
 
+    public function event()
+    {
+        return $this->belongsTo(Event::class);
+    }
     public function user()
     {
         return $this->belongsTo(User::class);
