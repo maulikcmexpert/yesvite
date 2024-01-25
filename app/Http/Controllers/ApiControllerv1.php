@@ -94,7 +94,13 @@ use Illuminate\Database\Query\Builder;
 class ApiControllerv1 extends Controller
 
 {
+    protected $perPage;
 
+    public function __construct()
+    {
+
+        $this->perPage = 5;
+    }
 
     public function sendThanks()
     {
@@ -271,15 +277,15 @@ class ApiControllerv1 extends Controller
 
 
             $page = $request->input('page');
-            // Pagination parameters
-            $perPage = 5; // Number of items per page
-            $pages = ($page != "") ? $page : 1; // Get current page number from request, default to 1
 
-            // Calculate offset based on current page and perPage
-            $offset = ($pages - 1) * $perPage;
+
+            $pages = ($page != "") ? $page : 1;
+
+            $offset = ($pages - 1) * $this->perPage;
+            $total_page =  ceil(count($allEvents) / $this->perPage);
 
             // Get paginated data using offset and take
-            $paginatedEvents = $allEvents->slice($offset)->take($perPage);
+            $paginatedEvents = $allEvents->slice($offset)->take($this->perPage);
             $eventList = [];
 
             if (count($paginatedEvents) != 0) {
@@ -365,7 +371,7 @@ class ApiControllerv1 extends Controller
                     $eventList[] = $eventDetail;
                 }
 
-                return response()->json(['status' => 1, 'count' => count($allEvents), 'total_page' => ceil(count($allEvents) / 5), 'data' => $eventList, 'message' => "Events Data"]);
+                return response()->json(['status' => 1, 'count' => count($allEvents), 'total_page' => $total_page, 'data' => $eventList, 'message' => "Events Data"]);
             } else {
 
                 return response()->json(['status' => 0, 'data' => $eventList, 'message' => "No upcoming events found"]);
@@ -3587,430 +3593,461 @@ class ApiControllerv1 extends Controller
 
                 $event_date = $input['event_date'];
             }
-
-
-
-            $usercreatedAllEventList = Event::with(['event_image', 'user'])
-
-                ->where('user_id', $user->id)
-                ->where('is_draft_save', '0')
-                ->when($event_date, function ($query, $event_date) {
-
-                    return $query->where('start_date', $event_date);
-                })->orderBy('id', 'DESC')->get();
-
-
-
-            $invitedEvents = EventInvitedUser::whereHas('user', function ($query) {
-
-                $query->where('app_user', '1');
-            })->where('user_id', $user->id)->get()->pluck('event_id');
-
-
-
-            $invitedEventsList = Event::with(['event_image', 'user'])
-
-                ->whereIn('id', $invitedEvents)
-                ->where('is_draft_save', '0')
-                ->orderBy('id', 'DESC')
-                ->get();
-
-
-
-            $allEvent = $usercreatedAllEventList->merge($invitedEventsList);
-
-            $allEvents = collect($allEvent)->sortByDesc('id')->values()->all();
-
-
-
-            $createdEventList = [];
-
-            if (count($allEvents) != 0) {
-
-
-                foreach ($allEvents as $value) {
-
-
-                    $eventDetail['id'] = $value->id;
-                    $eventDetail['event_name'] = $value->event_name;
-                    $eventDetail['is_event_owner'] = ($value->user->id == $user->id) ? 1 : 0;
-                    $eventDetail['user_id'] = $value->user->id;
-                    $eventDetail['host_profile'] = empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile);
-
-                    $eventDetail['host_name'] = $value->hosted_by;
-
-
-
-                    $images = EventImage::where('event_id', $value->id)->first();
-
-                    $eventDetail['event_images'] = ($images != null) ? asset('public/storage/event_images/' . $images->image) : "";
-
-                    $eventDetail['event_date'] = $value->start_date;
-
-                    $carbonDate = Carbon::createFromTimestamp($value->rsvp_start_time);
-
-                    // $carbonDate->setTimezone($value->rsvp_start_timezone);
-                    $timeInAMPM = $carbonDate->format('g:i A');
-
-                    $eventDetail['start_time'] = $timeInAMPM;
-
-                    $eventDetail['rsvp_start_timezone'] = $value->rsvp_start_timezone;
-
-                    $total_accept_event_user = EventInvitedUser::whereHas('user', function ($query) {
-
-                        $query->where('app_user', '1');
-                    })->where(['event_id' => $value->id, 'rsvp_status' => '1', 'rsvp_d' => '1'])->count();
-
-                    $eventDetail['total_accept_event_user'] = $total_accept_event_user;
-
-
-
-
-
-                    $total_invited_user = EventInvitedUser::whereHas('user', function ($query) {
-
-                        $query->where('app_user', '1');
-                    })->where(['event_id' => $value->id])->count();
-
-
-
-                    $eventDetail['total_invited_user'] = $total_invited_user;
-
-
-
-                    $total_refuse_event_user = EventInvitedUser::whereHas('user', function ($query) {
-
-                        $query->where('app_user', '1');
-                    })->where(['event_id' => $value->id, 'rsvp_status' => '0', 'rsvp_d' => '1'])->count();
-
-                    $eventDetail['total_refuse_event_user'] = $total_refuse_event_user;
-
-
-
-                    $total_notification = Notification::where(['event_id' => $value->id, 'user_id' => $user->id, 'notification_type' => '0'])->count();
-
-                    $eventDetail['total_notification'] = $total_notification;
-
-                    $totalEvent =  Event::where('user_id', $value->user->id)->count();
-                    $totalEventPhotos =  EventPostPhoto::where('user_id', $value->user->id)->count();
-                    $comments =  EventPostComment::where('user_id', $value->user->id)->count();
-                    $photocomments =  EventPostPhotoComment::where('user_id', $value->user->id)->count();
-                    $eventDetail['user_profile'] = [
-                        'id' => $value->user->id,
-                        'profile' => empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile),
-                        'username' => $value->user->firstname . ' ' . $value->user->lastname,
-                        'location' => ($value->user->city != NULL) ? $value->user->city : "",
-                        'about_me' => ($value->user->about_me != NULL) ? $value->user->about_me : "",
-                        'created_at' => empty($value->user->created_at) ? "" :   str_replace(' ', ', ', date('F Y', strtotime($value->user->created_at))),
-                        'total_events' => $totalEvent,
-                        'total_photos' => $totalEventPhotos,
-                        'comments' => $comments + $photocomments,
-                    ];
-
-                    $createdEventList[] = $eventDetail;
-                }
+            if (!isset($input['type'])) {
+                $input['type'] = null;
             }
+            $createdEventList = [];
+            $total_allEvent_page = 0;
+            if ((isset($input['type']) && $input['type'] == '1') || $input['type'] == null) {
+                $usercreatedAllEventList = Event::with(['event_image', 'user'])
+
+                    ->where('user_id', $user->id)
+                    ->where('is_draft_save', '0')
+                    ->when($event_date, function ($query, $event_date) {
+
+                        return $query->where('start_date', $event_date);
+                    })->orderBy('id', 'DESC')->get();
+
+
+
+                $invitedEvents = EventInvitedUser::whereHas('user', function ($query) {
+
+                    $query->where('app_user', '1');
+                })->where('user_id', $user->id)->get()->pluck('event_id');
+
+
+
+                $invitedEventsList = Event::with(['event_image', 'user'])
+
+                    ->whereIn('id', $invitedEvents)
+                    ->where('is_draft_save', '0')
+                    ->orderBy('id', 'DESC')
+                    ->get();
+
+
+
+                $allEvent = $usercreatedAllEventList->merge($invitedEventsList);
+
+
+                $page = $request->input('page');
+
+
+                $pages = ($page != "") ? $page : 1;
+
+                // Calculate offset based on current page and perPage
+                $offset = ($pages - 1) * $this->perPage;
+
+                $total_allEvent_page = ceil(count($allEvent) / $this->perPage);
+                $paginatedEvents =  collect($allEvent)->forPage($page, $this->perPage);
+                $paginatedEvents->sortByDesc('id')->values()->all();
+
+                if (count($paginatedEvents) != 0) {
+
+
+                    foreach ($paginatedEvents as $value) {
+
+
+                        $eventDetail['id'] = $value->id;
+                        $eventDetail['event_name'] = $value->event_name;
+                        $eventDetail['is_event_owner'] = ($value->user->id == $user->id) ? 1 : 0;
+                        $eventDetail['user_id'] = $value->user->id;
+                        $eventDetail['host_profile'] = empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile);
+
+                        $eventDetail['host_name'] = $value->hosted_by;
+
+
+
+                        $images = EventImage::where('event_id', $value->id)->first();
+
+                        $eventDetail['event_images'] = ($images != null) ? asset('public/storage/event_images/' . $images->image) : "";
+
+                        $eventDetail['event_date'] = $value->start_date;
+
+                        $carbonDate = Carbon::createFromTimestamp($value->rsvp_start_time);
+
+                        // $carbonDate->setTimezone($value->rsvp_start_timezone);
+                        $timeInAMPM = $carbonDate->format('g:i A');
+
+                        $eventDetail['start_time'] = $timeInAMPM;
+
+                        $eventDetail['rsvp_start_timezone'] = $value->rsvp_start_timezone;
+
+                        $total_accept_event_user = EventInvitedUser::whereHas('user', function ($query) {
+
+                            $query->where('app_user', '1');
+                        })->where(['event_id' => $value->id, 'rsvp_status' => '1', 'rsvp_d' => '1'])->count();
+
+                        $eventDetail['total_accept_event_user'] = $total_accept_event_user;
+
+
+
+
+
+                        $total_invited_user = EventInvitedUser::whereHas('user', function ($query) {
+
+                            $query->where('app_user', '1');
+                        })->where(['event_id' => $value->id])->count();
+
+
+
+                        $eventDetail['total_invited_user'] = $total_invited_user;
+
+
+
+                        $total_refuse_event_user = EventInvitedUser::whereHas('user', function ($query) {
+
+                            $query->where('app_user', '1');
+                        })->where(['event_id' => $value->id, 'rsvp_status' => '0', 'rsvp_d' => '1'])->count();
+
+                        $eventDetail['total_refuse_event_user'] = $total_refuse_event_user;
+
+
+
+                        $total_notification = Notification::where(['event_id' => $value->id, 'user_id' => $user->id, 'notification_type' => '0'])->count();
+
+                        $eventDetail['total_notification'] = $total_notification;
+
+                        $totalEvent =  Event::where('user_id', $value->user->id)->count();
+                        $totalEventPhotos =  EventPostPhoto::where('user_id', $value->user->id)->count();
+                        $comments =  EventPostComment::where('user_id', $value->user->id)->count();
+                        $photocomments =  EventPostPhotoComment::where('user_id', $value->user->id)->count();
+                        $eventDetail['user_profile'] = [
+                            'id' => $value->user->id,
+                            'profile' => empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile),
+                            'username' => $value->user->firstname . ' ' . $value->user->lastname,
+                            'location' => ($value->user->city != NULL) ? $value->user->city : "",
+                            'about_me' => ($value->user->about_me != NULL) ? $value->user->about_me : "",
+                            'created_at' => empty($value->user->created_at) ? "" :   str_replace(' ', ', ', date('F Y', strtotime($value->user->created_at))),
+                            'total_events' => $totalEvent,
+                            'total_photos' => $totalEventPhotos,
+                            'comments' => $comments + $photocomments,
+                        ];
+
+                        $createdEventList[] = $eventDetail;
+                    }
+                }
+                $eventList['all'] =  $createdEventList;
+            }
+
 
 
             // All  //
             // Invited To //
 
-            $userInvitedEventList = EventInvitedUser::whereHas('event', function ($query) use ($event_date) {
-                $query->where('is_draft_save', '0'); // Apply condition on the parent table
-            })->whereHas('user', function ($query) {
-                $query->where('app_user', '1');
-            })->with(['event' => function ($query) use ($event_date) {
-                $query->when($event_date, function ($query, $event_date) {
-                    return $query->where('start_date', $event_date);
-                })->with('event_image')->orderBy('id', 'DESC');
-            }])->where('user_id', $user->id)->get();
-
-
-            // $userInvitedEventList = EventInvitedUser::whereHas('user', function ($query) {
-            //     $query->where('app_user', '1');
-            // })->with(['event' => function ($query) use ($event_date) {
-
-            //     $query->when($event_date, function ($query, $event_date) {
-
-            //         return $query->where('start_date', $event_date);
-            //     })->with('event_image')->where('is_draft_save', '0')->orderBy('id', 'DESC');
-            // }])->where('user_id', $user->id)->get();
-
             $invitedeventList = [];
-
-            if (count($userInvitedEventList) != 0) {
-
-
-
-                foreach ($userInvitedEventList as $value) {
+            $total_invitedTo_page = 0;
+            if ((isset($input['type']) && $input['type'] == '2') || $input['type'] == null) {
 
 
+                $countsOfInvitedEvent = EventInvitedUser::whereHas('event', function ($query) use ($event_date) {
+                    $query->where('is_draft_save', '0'); // Apply condition on the parent table
+                })->whereHas('user', function ($query) {
+                    $query->where('app_user', '1');
+                })->with(['event' => function ($query) use ($event_date) {
+                    $query->when($event_date, function ($query, $event_date) {
+                        return $query->where('start_date', $event_date);
+                    })->with('event_image')->orderBy('id', 'DESC');
+                }])->where('user_id', $user->id)->count();
 
-                    $eventDetail['id'] = $value->event->id;
+                $total_invitedTo_page = ceil($countsOfInvitedEvent / $this->perPage);
 
-                    $eventDetail['event_name'] = $value->event->event_name;
-
-                    $eventDetail['host_profile'] = empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile);
-
-                    $eventDetail['host_name'] = $value->event->hosted_by;
-
-                    $images = EventImage::where('event_id', $value->event->id)->first();
-
-                    $eventDetail['event_images'] = "";
-
-                    if (!empty($images)) {
-
-                        $eventDetail['event_images'] = asset('public/storage/event_images/' . $images->image);
-                    }
-
-
-
-                    $eventDetail['event_date'] = $value->event->start_date;
-
-                    $carbonDate = Carbon::createFromTimestamp($value->event->rsvp_start_time);
-                    // $carbonDate->setTimezone($value->event->rsvp_start_timezone);
-                    $timeInAMPM = $carbonDate->format('g:i A');
-                    $eventDetail['start_time'] =  $timeInAMPM;
-
-                    $eventDetail['rsvp_start_timezone'] = $value->event->rsvp_start_timezone;
-
-
-
-                    $rsvp_status = "";
-
-
-
-                    if ($value->event->rsvp_end_time != "" || $value->event->rsvp_end_time != NULL) {
+                $userInvitedEventList = EventInvitedUser::whereHas('event', function ($query) use ($event_date) {
+                    $query->where('is_draft_save', '0'); // Apply condition on the parent table
+                })->whereHas('user', function ($query) {
+                    $query->where('app_user', '1');
+                })->with(['event' => function ($query) use ($event_date) {
+                    $query->when($event_date, function ($query, $event_date) {
+                        return $query->where('start_date', $event_date);
+                    })->with('event_image')->orderBy('id', 'DESC');
+                }])->where('user_id', $user->id)->paginate($this->perPage);
 
 
 
 
+                if (count($userInvitedEventList) != 0) {
 
 
 
-                        $checkUserrsvp = EventInvitedUser::whereHas('user', function ($query) {
-
-                            $query->where('app_user', '1');
-                        })->where(['user_id' => $user->id, 'event_id' => $value->event->id])->first();
+                    foreach ($userInvitedEventList as $value) {
 
 
 
-                        if ($checkUserrsvp->rsvp_status == '1') {
+                        $eventDetail['id'] = $value->event->id;
 
-                            $rsvp_status = '1'; // rsvp you'r going
+                        $eventDetail['event_name'] = $value->event->event_name;
 
-                        } else if ($checkUserrsvp->rsvp_status == '0') {
+                        $eventDetail['host_profile'] = empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile);
 
-                            $rsvp_status = '2'; // rsvp you'r not going
+                        $eventDetail['host_name'] = $value->event->hosted_by;
 
+                        $images = EventImage::where('event_id', $value->event->id)->first();
+
+                        $eventDetail['event_images'] = "";
+
+                        if (!empty($images)) {
+
+                            $eventDetail['event_images'] = asset('public/storage/event_images/' . $images->image);
                         }
 
 
 
-                        if ($checkUserrsvp->rsvp_status == '0') {
+                        $eventDetail['event_date'] = $value->event->start_date;
 
-                            if ($value->event->rsvp_start_time <= strtotime(env('DATE')) && strtotime(env('DATE')) <= $value->event->rsvp_end_time) {
+                        $carbonDate = Carbon::createFromTimestamp($value->event->rsvp_start_time);
+                        // $carbonDate->setTimezone($value->event->rsvp_start_timezone);
+                        $timeInAMPM = $carbonDate->format('g:i A');
+                        $eventDetail['start_time'] =  $timeInAMPM;
 
-                                $rsvp_status = '0'; // rsvp button//
+                        $eventDetail['rsvp_start_timezone'] = $value->event->rsvp_start_timezone;
+
+
+
+                        $rsvp_status = "";
+
+
+
+                        if ($value->event->rsvp_end_time != "" || $value->event->rsvp_end_time != NULL) {
+
+
+
+
+
+
+
+                            $checkUserrsvp = EventInvitedUser::whereHas('user', function ($query) {
+
+                                $query->where('app_user', '1');
+                            })->where(['user_id' => $user->id, 'event_id' => $value->event->id])->first();
+
+
+
+                            if ($checkUserrsvp->rsvp_status == '1') {
+
+                                $rsvp_status = '1'; // rsvp you'r going
+
+                            } else if ($checkUserrsvp->rsvp_status == '0') {
+
+                                $rsvp_status = '2'; // rsvp you'r not going
 
                             }
-                        }
-                    } else {
 
 
 
-                        $startEventTime = $value->event->start_date;
+                            if ($checkUserrsvp->rsvp_status == '0') {
 
-                        $oneDayBefore = date('Y-m-d', strtotime('-1 day', strtotime($startEventTime)));
+                                if ($value->event->rsvp_start_time <= strtotime(env('DATE')) && strtotime(env('DATE')) <= $value->event->rsvp_end_time) {
 
-                        $svrp_end_time = strtotime($oneDayBefore . ' 12:00:00');
+                                    $rsvp_status = '0'; // rsvp button//
 
-
-
-
-
-                        $checkUserrsvp = EventInvitedUser::whereHas('user', function ($query) {
-
-                            $query->where('app_user', '1');
-                        })->where(['user_id' => $user->id, 'event_id' => $value->event->id])->first();
-
-                        if ($checkUserrsvp->rsvp_status == '1') {
-
-                            $rsvp_status = '1'; // rsvp you'r going
-
-                        } else if ($checkUserrsvp->rsvp_status == '0' && $checkUserrsvp->rsvp_d == '1') {
-
-                            $rsvp_status = '2'; // rsvp you'r not going
-
-                        }
+                                }
+                            }
+                        } else {
 
 
 
-                        if ($checkUserrsvp->rsvp_status == '0') {
+                            $startEventTime = $value->event->start_date;
 
-                            if ($value->event->rsvp_start_time <= strtotime(env('DATE')) && strtotime(env('DATE')) <= $svrp_end_time) {
+                            $oneDayBefore = date('Y-m-d', strtotime('-1 day', strtotime($startEventTime)));
 
-                                $rsvp_status = '0'; // rsvp button//
+                            $svrp_end_time = strtotime($oneDayBefore . ' 12:00:00');
+
+
+
+
+
+                            $checkUserrsvp = EventInvitedUser::whereHas('user', function ($query) {
+
+                                $query->where('app_user', '1');
+                            })->where(['user_id' => $user->id, 'event_id' => $value->event->id])->first();
+
+                            if ($checkUserrsvp->rsvp_status == '1') {
+
+                                $rsvp_status = '1'; // rsvp you'r going
+
+                            } else if ($checkUserrsvp->rsvp_status == '0' && $checkUserrsvp->rsvp_d == '1') {
+
+                                $rsvp_status = '2'; // rsvp you'r not going
 
                             }
+
+
+
+                            if ($checkUserrsvp->rsvp_status == '0') {
+
+                                if ($value->event->rsvp_start_time <= strtotime(env('DATE')) && strtotime(env('DATE')) <= $svrp_end_time) {
+
+                                    $rsvp_status = '0'; // rsvp button//
+
+                                }
+                            }
                         }
+
+
+
+                        $eventDetail['rsvp_status'] = $rsvp_status;
+
+
+
+                        $total_notification = Notification::where(['event_id' => $value->event->id, 'user_id' => $user->id, 'notification_type' => '0'])->count();
+
+                        $eventDetail['total_notification'] = $total_notification;
+
+                        $totalEvent =  Event::where('user_id', $value->user->id)->count();
+                        $totalEventPhotos =  EventPostPhoto::where('user_id', $value->user->id)->count();
+                        $comments =  EventPostComment::where('user_id', $value->user->id)->count();
+                        $photocomments =  EventPostPhotoComment::where('user_id', $value->user->id)->count();
+                        $eventDetail['user_profile'] = [
+                            'id' => $value->user->id,
+                            'profile' => empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile),
+                            'username' => $value->user->firstname . ' ' . $value->user->lastname,
+                            'location' => ($value->user->city != NULL) ? $value->user->city : "",
+                            'about_me' => ($value->user->about_me != NULL) ? $value->user->about_me : "",
+                            'created_at' => empty($value->user->created_at) ? "" :   str_replace(' ', ', ', date('F Y', strtotime($value->user->created_at))),
+                            'total_events' => $totalEvent,
+                            'total_photos' => $totalEventPhotos,
+                            'comments' => $comments + $photocomments,
+                        ];
+
+                        $invitedeventList[] = $eventDetail;
                     }
-
-
-
-                    $eventDetail['rsvp_status'] = $rsvp_status;
-
-
-
-                    $total_notification = Notification::where(['event_id' => $value->event->id, 'user_id' => $user->id, 'notification_type' => '0'])->count();
-
-                    $eventDetail['total_notification'] = $total_notification;
-
-                    $totalEvent =  Event::where('user_id', $value->user->id)->count();
-                    $totalEventPhotos =  EventPostPhoto::where('user_id', $value->user->id)->count();
-                    $comments =  EventPostComment::where('user_id', $value->user->id)->count();
-                    $photocomments =  EventPostPhotoComment::where('user_id', $value->user->id)->count();
-                    $eventDetail['user_profile'] = [
-                        'id' => $value->user->id,
-                        'profile' => empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile),
-                        'username' => $value->user->firstname . ' ' . $value->user->lastname,
-                        'location' => ($value->user->city != NULL) ? $value->user->city : "",
-                        'about_me' => ($value->user->about_me != NULL) ? $value->user->about_me : "",
-                        'created_at' => empty($value->user->created_at) ? "" :   str_replace(' ', ', ', date('F Y', strtotime($value->user->created_at))),
-                        'total_events' => $totalEvent,
-                        'total_photos' => $totalEventPhotos,
-                        'comments' => $comments + $photocomments,
-                    ];
-
-                    $invitedeventList[] = $eventDetail;
                 }
+                $eventList['invited_to'] =  $invitedeventList;
             }
+
+
             // Invited To //
 
 
             // Past Event // 
-            $usercreatedAllPastEventList = Event::with(['event_image', 'user'])
-
-                ->where(['user_id' => $user->id])
-                ->where('start_date', '<', date('Y-m-d'))
-                ->where('is_draft_save', '0')
-                ->get();
-
-
-
-            $invitedPastEvents = EventInvitedUser::whereHas('user', function ($query) {
-
-                $query->where('app_user', '1');
-            })->where('user_id', $user->id)->get()->pluck('event_id');
-
-
-
-            $invitedPastEventsList = Event::with(['event_image', 'user'])
-
-                ->whereIn('id', $invitedPastEvents)
-                ->where('is_draft_save', '0')
-                ->where('start_date', '<', date('Y-m-d'))
-                ->orderBy('id', 'DESC')
-                ->get();
-
-
-
-            $allPastEvent = $usercreatedAllPastEventList->merge($invitedPastEventsList)->sortByDesc('id');
-
-            $allPastEvents = collect($allPastEvent)->sortByDesc('id')->values()->all();
-
             $PastEventList = [];
+            $total_pastEvent_page = 0;
 
-            if (count($allPastEvents) != 0) {
+            if ((isset($input['type']) && $input['type'] == '3') || $input['type'] == null) {
 
+                $usercreatedAllPastEventList = Event::with(['event_image', 'user'])
 
-                foreach ($allPastEvents as $value) {
-
-
-                    $eventDetail['id'] = $value->id;
-                    $eventDetail['event_name'] = $value->event_name;
-                    $eventDetail['user_id'] = $value->user->id;
-                    $eventDetail['host_profile'] = empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile);
-
-                    $eventDetail['host_name'] = $value->hosted_by;
+                    ->where(['user_id' => $user->id])
+                    ->where('start_date', '<', date('Y-m-d'))
+                    ->where('is_draft_save', '0')
+                    ->get();
 
 
 
-                    $images = EventImage::where('event_id', $value->id)->first();
+                $invitedPastEvents = EventInvitedUser::whereHas('user', function ($query) {
 
-                    $eventDetail['event_images'] = ($images != null) ? asset('public/storage/event_images/' . $images->image) : "";
-
-                    $eventDetail['event_date'] = $value->start_date;
-
-                    $carbonDate = Carbon::createFromTimestamp($value->rsvp_start_time);
-                    // $carbonDate->setTimezone($value->rsvp_start_timezone);
-                    $timeInAMPM = $carbonDate->format('g:i A');
-                    $eventDetail['start_time'] =  $timeInAMPM;
-
-                    $eventDetail['rsvp_start_timezone'] = $value->rsvp_start_timezone;
-
-                    $total_accept_event_user = EventInvitedUser::whereHas('user', function ($query) {
-
-                        $query->where('app_user', '1');
-                    })->where(['event_id' => $value->id, 'rsvp_status' => '1', 'rsvp_d' => '1'])->count();
-
-                    $eventDetail['total_accept_event_user'] = $total_accept_event_user;
+                    $query->where('app_user', '1');
+                })->where('user_id', $user->id)->get()->pluck('event_id');
 
 
 
+                $invitedPastEventsList = Event::with(['event_image', 'user'])
 
-
-                    $total_invited_user = EventInvitedUser::whereHas('user', function ($query) {
-
-                        $query->where('app_user', '1');
-                    })->where(['event_id' => $value->id])->count();
-
-
-
-                    $eventDetail['total_invited_user'] = $total_invited_user;
+                    ->whereIn('id', $invitedPastEvents)
+                    ->where('is_draft_save', '0')
+                    ->where('start_date', '<', date('Y-m-d'))
+                    ->orderBy('id', 'DESC')
+                    ->get();
 
 
 
-                    $total_refuse_event_user = EventInvitedUser::whereHas('user', function ($query) {
+                $allPastEvent = $usercreatedAllPastEventList->merge($invitedPastEventsList)->sortByDesc('id');
 
-                        $query->where('app_user', '1');
-                    })->where(['event_id' => $value->id, 'rsvp_status' => '0', 'rsvp_d' => '1'])->count();
-
-                    $eventDetail['total_refuse_event_user'] = $total_refuse_event_user;
-
+                $total_pastEvent_page = ceil(count($allPastEvent) / $this->perPage);
+                $allPastEvents =  collect($allPastEvent)->forPage($page, $this->perPage);
+                $allPastEvents->sortByDesc('id')->values()->all();
 
 
-                    $total_notification = Notification::where(['event_id' => $value->id, 'user_id' => $user->id, 'notification_type' => '0'])->count();
+                if (count($allPastEvents) != 0) {
 
-                    $eventDetail['total_notification'] = $total_notification;
 
-                    $totalEvent =  Event::where('user_id', $value->user->id)->count();
-                    $totalEventPhotos =  EventPostPhoto::where('user_id', $value->user->id)->count();
-                    $comments =  EventPostComment::where('user_id', $value->user->id)->count();
-                    $photocomments =  EventPostPhotoComment::where('user_id', $value->user->id)->count();
-                    $eventDetail['user_profile'] = [
-                        'id' => $value->user->id,
-                        'profile' => empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile),
-                        'username' => $value->user->firstname . ' ' . $value->user->lastname,
-                        'location' => ($value->user->city != NULL) ? $value->user->city : "",
-                        'about_me' => ($value->user->about_me != NULL) ? $value->user->about_me : "",
-                        'created_at' => empty($value->user->created_at) ? "" :   str_replace(' ', ', ', date('F Y', strtotime($value->user->created_at))),
-                        'total_events' => $totalEvent,
-                        'total_photos' => $totalEventPhotos,
-                        'comments' => $comments + $photocomments,
-                    ];
+                    foreach ($allPastEvents as $value) {
 
-                    $PastEventList[] = $eventDetail;
+
+                        $eventDetail['id'] = $value->id;
+                        $eventDetail['event_name'] = $value->event_name;
+                        $eventDetail['user_id'] = $value->user->id;
+                        $eventDetail['host_profile'] = empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile);
+
+                        $eventDetail['host_name'] = $value->hosted_by;
+
+
+
+                        $images = EventImage::where('event_id', $value->id)->first();
+
+                        $eventDetail['event_images'] = ($images != null) ? asset('public/storage/event_images/' . $images->image) : "";
+
+                        $eventDetail['event_date'] = $value->start_date;
+
+                        $carbonDate = Carbon::createFromTimestamp($value->rsvp_start_time);
+                        // $carbonDate->setTimezone($value->rsvp_start_timezone);
+                        $timeInAMPM = $carbonDate->format('g:i A');
+                        $eventDetail['start_time'] =  $timeInAMPM;
+
+                        $eventDetail['rsvp_start_timezone'] = $value->rsvp_start_timezone;
+
+                        $total_accept_event_user = EventInvitedUser::whereHas('user', function ($query) {
+
+                            $query->where('app_user', '1');
+                        })->where(['event_id' => $value->id, 'rsvp_status' => '1', 'rsvp_d' => '1'])->count();
+
+                        $eventDetail['total_accept_event_user'] = $total_accept_event_user;
+
+
+
+
+
+                        $total_invited_user = EventInvitedUser::whereHas('user', function ($query) {
+
+                            $query->where('app_user', '1');
+                        })->where(['event_id' => $value->id])->count();
+
+
+
+                        $eventDetail['total_invited_user'] = $total_invited_user;
+
+
+
+                        $total_refuse_event_user = EventInvitedUser::whereHas('user', function ($query) {
+
+                            $query->where('app_user', '1');
+                        })->where(['event_id' => $value->id, 'rsvp_status' => '0', 'rsvp_d' => '1'])->count();
+
+                        $eventDetail['total_refuse_event_user'] = $total_refuse_event_user;
+
+
+
+                        $total_notification = Notification::where(['event_id' => $value->id, 'user_id' => $user->id, 'notification_type' => '0'])->count();
+
+                        $eventDetail['total_notification'] = $total_notification;
+
+                        $totalEvent =  Event::where('user_id', $value->user->id)->count();
+                        $totalEventPhotos =  EventPostPhoto::where('user_id', $value->user->id)->count();
+                        $comments =  EventPostComment::where('user_id', $value->user->id)->count();
+                        $photocomments =  EventPostPhotoComment::where('user_id', $value->user->id)->count();
+                        $eventDetail['user_profile'] = [
+                            'id' => $value->user->id,
+                            'profile' => empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile),
+                            'username' => $value->user->firstname . ' ' . $value->user->lastname,
+                            'location' => ($value->user->city != NULL) ? $value->user->city : "",
+                            'about_me' => ($value->user->about_me != NULL) ? $value->user->about_me : "",
+                            'created_at' => empty($value->user->created_at) ? "" :   str_replace(' ', ', ', date('F Y', strtotime($value->user->created_at))),
+                            'total_events' => $totalEvent,
+                            'total_photos' => $totalEventPhotos,
+                            'comments' => $comments + $photocomments,
+                        ];
+
+                        $PastEventList[] = $eventDetail;
+                    }
                 }
+                $eventList['past_event'] =  $PastEventList;
             }
 
+
             // Past Event // 
-            $eventList['all'] =  $createdEventList;
 
-            $eventList['invited_to'] =  $invitedeventList;
-            $eventList['past_event'] =  $PastEventList;
 
-            return response()->json(['status' => 1, 'data' => $eventList, 'message' => "All events"]);
+
+            return response()->json(['status' => 1, 'total_allEvent_page' => $total_allEvent_page, 'total_invitedTo_page' => $total_invitedTo_page, "total_pastEvent_page" => $total_pastEvent_page, 'data' => $eventList, 'message' => "All events"]);
         } catch (QueryException $e) {
             return response()->json(['status' => 0, 'message' => "db error"]);
         }
