@@ -223,7 +223,6 @@ function sendNotification($notificationType, $postData)
         $notification = new Notification;
         $notification->event_id = $postData['event_id'];
         $notification->post_id = $postData['post_id'];
-        $notification->comment_id = $postData['comment_id'];
         $notification->user_id =  $getPostOwnerId->user_id;
         $notification->notification_type = $notificationType;
         $notification->sender_id = $postData['sender_id'];

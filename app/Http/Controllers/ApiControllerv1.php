@@ -666,13 +666,16 @@ class ApiControllerv1 extends Controller
 
 
 
-            $totalEvent =  Event::where('user_id', $user->id)->count();
+            $totalEvent =  Event::where(['user_id' => $user->id, 'is_draft_save' => '0'])->count();
+            $totalDraftEvent =  Event::where(['user_id' => $user->id, 'is_draft_save' => '1'])->count();
 
 
 
-            $totalEventPhotos = 0;
 
-            $comments = 0;
+            $totalEventPhotos = EventPostPhoto::where('user_id', $user->id)->count();
+
+            $postComments =  EventPostComment::where('user_id', $user->id)->count();
+            $postPhotocomments =  EventPostPhotoComment::where('user_id', $user->id)->count();
 
 
 
@@ -693,8 +696,9 @@ class ApiControllerv1 extends Controller
                     'created_at' => empty($user->created_at) ? "" :   str_replace(' ', ', ', date('F Y', strtotime($user->created_at))),
                     // 'created_at' => empty($user->created_at) ? "" :   date('F Y', strtotime($user->created_at)),
                     'total_events' => $totalEvent,
+                    'total_draft_events' => $totalDraftEvent,
                     'total_photos' => $totalEventPhotos,
-                    'comments' => $comments,
+                    'comments' => $postComments + $postPhotocomments,
                     'gender' => empty($user->gender) ? "" : $user->gender,
                     'country_code' => empty($user->country_code) ? "" : strval($user->country_code),
                     'phone_number' => empty($user->phone_number) ? "" : $user->phone_number,
