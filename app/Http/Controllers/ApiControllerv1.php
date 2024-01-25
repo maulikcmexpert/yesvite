@@ -365,7 +365,7 @@ class ApiControllerv1 extends Controller
                     $eventList[] = $eventDetail;
                 }
 
-                return response()->json(['status' => 1, 'count' => count($allEvents), 'data' => $eventList, 'message' => "Events Data"]);
+                return response()->json(['status' => 1, 'count' => count($allEvents), 'total_page' => ceil(count($allEvents) / 5), 'data' => $eventList, 'message' => "Events Data"]);
             } else {
 
                 return response()->json(['status' => 0, 'data' => $eventList, 'message' => "No upcoming events found"]);
