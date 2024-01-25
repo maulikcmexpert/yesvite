@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
+
 class AdminAuth
 {
     /**
@@ -18,10 +19,10 @@ class AdminAuth
      */
     public function handle(Request $request, Closure $next)
     {
-       
-        if(!Session::has('admin')){
-           return Redirect::to(URL::to('/admin/login'));
+
+        if (Session::has('admin')) {
+            return $next($request);
         }
-        return $next($request);
+        return Redirect::to(URL::to('/admin/login'));
     }
 }

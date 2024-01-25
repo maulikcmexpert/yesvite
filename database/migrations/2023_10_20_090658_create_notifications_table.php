@@ -17,11 +17,20 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('event_id')->nullable();
             $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');
+
+            $table->unsignedBigInteger('post_id')->nullable();
+            $table->foreign('post_id')->references('id')->on('event_posts')->onDelete('cascade');
+
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->enum('notification_type', ['0', '1'])->nullable(); // 0 = unread,1 = read
-            $table->enum('activity', ['0', '1', '2', '3', '4'])->nullable(); //0 = All,1 = Tag & Mentions,2 = Comments,3 = RSVP's,4 = Like's
-            $table->datetime('comment_time');
+
+            $table->string('notification_type')->nullable(); //'invite', 'upload_post', 'like', 'comment', 'reply', 'poll', 'rsvp'
+
+            $table->unsignedBigInteger('sender_id')->nullable();
+            $table->foreign('sender_id')->references('id')->on('users')->onDelete('cascade');
+
+            $table->text('notification_message')->nullable();
+            $table->enum('read', ['0', '1'])->default('0');
             $table->timestamps();
         });
     }

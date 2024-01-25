@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class EventGiftRegistry extends Model
 {
     protected $fillable = [
-        'event_id',
+        'user_id',
         'registry_recipient_name',
         'registry_link'
     ];

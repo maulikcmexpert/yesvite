@@ -20,6 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('event_post_id')->nullable();
             $table->foreign('event_post_id')->references('id')->on('event_posts')->onDelete('cascade');
             $table->string('post_image')->nullable();
+            $table->enum('type', ['image', 'video'])->nullable();
             $table->timestamps();
         });
     }

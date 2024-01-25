@@ -15,14 +15,14 @@ return new class extends Migration
     {
         Schema::create('event_gift_registries', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('event_id')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->string('registry_recipient_name');
             $table->string('registry_link');
             $table->timestamps();
         });
 
         Schema::table('event_gift_registries', function (Blueprint $table) {
-            $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

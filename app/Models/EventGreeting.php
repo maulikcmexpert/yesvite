@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class EventGreeting extends Model
 {
     protected $fillable = [
-        'event_id',
+        'user_id',
         "template_name",
         "message",
         "message_sent_time",

@@ -18,12 +18,10 @@ class forgotpasswordMail extends Mailable
      *
      * @return void
      */
-    public $token;
-    public function __construct($token)
+    public $userData;
+    public function __construct(array $userData)
     {
-        //
-        $this->token = $token;
-       
+        $this->userData = $userData;
     }
 
     /**
@@ -34,7 +32,7 @@ class forgotpasswordMail extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Forgotpassword Mail',
+            subject: 'Forgotpassword Mail OTP',
         );
     }
 
@@ -45,8 +43,12 @@ class forgotpasswordMail extends Mailable
      */
     public function content()
     {
+
         return new Content(
             markdown: 'emails.forgotpasswordMail',
+            with: [
+                'userData' => $this->userData
+            ]
         );
     }
 

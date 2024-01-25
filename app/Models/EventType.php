@@ -7,5 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class EventType extends Model
 {
+    protected $fillable = [
+        'event_type'
+    ];
     use HasFactory;
 }

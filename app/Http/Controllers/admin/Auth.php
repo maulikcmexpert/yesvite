@@ -49,7 +49,7 @@ class Auth extends Controller
                 Cookie::forget('email');
                 Cookie::forget('password');
             }
-            return Redirect::to(URL::to('/admin'))->with('success', 'Loggedin successfully!');;
+            return Redirect::to(URL::to('/admin/dashboard'))->with('success', 'Loggedin successfully!');;
         } else {
             return  Redirect::to('admin/login')->with('error', 'Invalid credentials!');
         }

@@ -30,7 +30,7 @@ return new class extends Migration
             $table->enum('rsvp_updates', ['0', '1'])->default('0');
             $table->enum('event_updates', ['0', '1'])->default('0');
             $table->enum('send_event_dater_reminders', ['0', '1'])->default('0');
-            $table->enum('rsvp_reminders_once_a_week', ['0', '1'])->default('0');
+            $table->enum('request_event_photos_from_guests', ['0', '1'])->default('0');
             $table->timestamps();
             $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');
         });

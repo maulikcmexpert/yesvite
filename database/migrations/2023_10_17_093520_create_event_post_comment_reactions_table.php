@@ -17,7 +17,10 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('event_post_comment_id')->nullable();
             $table->foreign('event_post_comment_id')->references('id')->on('event_post_comments')->onDelete('cascade');
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('reaction')->nullable();
+
             $table->timestamps();
         });
     }

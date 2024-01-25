@@ -15,13 +15,13 @@ return new class extends Migration
     {
         Schema::create('event_greetings', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('event_id')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->string('template_name')->nullable();
             $table->text('message')->nullable();
             $table->enum('message_sent_time', ['0', '1'])->default('0');
-            $table->integer('custom_hours_after_event')->nullable();
+            $table->string('custom_hours_after_event')->default('0');
             $table->timestamps();
-            $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

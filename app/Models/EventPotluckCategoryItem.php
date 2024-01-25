@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\{Event, EventPotluckCategory};
+
 class EventPotluckCategoryItem extends Model
 {
     protected $fillable = [
@@ -14,4 +16,14 @@ class EventPotluckCategoryItem extends Model
         'quantity'
     ];
     use HasFactory;
+
+    public function event()
+    {
+        return $this->belongsTo(Event::class);
+    }
+
+    public function event_potluck_category()
+    {
+        return $this->belongsTo(EventPotluckCategory::class);
+    }
 }

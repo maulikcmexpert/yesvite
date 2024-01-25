@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Event;
 
 class EventSetting extends Model
 {
@@ -23,7 +24,12 @@ class EventSetting extends Model
         'rsvp_updates',
         'event_updates',
         'send_event_dater_reminders',
-        'rsvp_reminders_once_a_week'
+        'request_event_photos_from_guests'
     ];
     use HasFactory;
+
+    public function events()
+    {
+        return $this->belongsTo(Event::class);
+    }
 }
