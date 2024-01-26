@@ -21,11 +21,15 @@ return new class extends Migration
             $table->foreign('event_post_id')->references('id')->on('event_posts')->onDelete('cascade');
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->integer('parent_comment_id')->nullable();
+            $table->unsignedBigInteger('parent_comment_id')->nullable();
+            $table->foreign('parent_comment_id')->references('id')->on('event_post_comments')->onDelete('cascade');
+            $table->unsignedBigInteger('main_parent_comment_id')->nullable();
+            $table->foreign('main_parent_comment_id')->references('id')->on('event_post_comments')->onDelete('cascade');
             $table->string('comment_text')->nullable();
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.

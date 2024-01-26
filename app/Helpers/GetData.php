@@ -145,7 +145,7 @@ function getPhotoReaction($event_post_photo_id)
 function getPostPhotoComments($event_post_photo_id)
 {
     return  EventPostPhotoComment::with(['user', 'replies' => function ($query) {
-        $query->withcount('post_photo_comment_reaction', 'replies');
+        $query->withcount('post_photo_comment_reaction', 'replies')->orderBy('id', 'DESC');
     }])->withcount('post_photo_comment_reaction', 'replies')->where(['event_post_photo_id' => $event_post_photo_id, 'parent_comment_id' => NULl])->get();
 }
 
@@ -158,7 +158,7 @@ function getPhotoCommentReaction($event_photo_comment_id)
 function getComments($event_post_id)
 {
     return  EventPostComment::with(['user', 'replies' => function ($query) {
-        $query->withcount('post_comment_reaction', 'replies');
+        $query->withcount('post_comment_reaction', 'replies')->orderBy('id', 'DESC');
     }])->withcount('post_comment_reaction', 'replies')->where(['event_post_id' => $event_post_id, 'parent_comment_id' => NULl])->orderBy('id', 'DESC')->get();
 }
 
