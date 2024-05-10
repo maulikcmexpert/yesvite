@@ -1,0 +1,5 @@
+@extends('admin.auth.layout')
+@section('content')
+@include('flashmessage')
+@include($page)
+@endsection('content')

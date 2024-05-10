@@ -1,0 +1,186 @@
+[27-Nov-2023 05:02:12 UTC] PHP Fatal error:  Cannot use Carbon\Carbon as Carbon because the name is already in use in /home4/cmexpx2z/public_html/yesvite/app/Http/Controllers/ApiController.php on line 74
+[27-Nov-2023 12:33:38 UTC] PHP Fatal error:  Cannot use try without catch or finally in /home4/cmexpx2z/public_html/yesvite/app/Http/Controllers/ApiController.php on line 2362
+[27-Nov-2023 12:33:41 UTC] PHP Fatal error:  Cannot use try without catch or finally in /home4/cmexpx2z/public_html/yesvite/app/Http/Controllers/ApiController.php on line 2362
+[27-Nov-2023 12:33:47 UTC] PHP Fatal error:  Cannot use try without catch or finally in /home4/cmexpx2z/public_html/yesvite/app/Http/Controllers/ApiController.php on line 2362
+[27-Nov-2023 12:34:05 UTC] PHP Fatal error:  Cannot use try without catch or finally in /home4/cmexpx2z/public_html/yesvite/app/Http/Controllers/ApiController.php on line 2362
+[27-Nov-2023 12:34:08 UTC] PHP Fatal error:  Cannot use try without catch or finally in /home4/cmexpx2z/public_html/yesvite/app/Http/Controllers/ApiController.php on line 2362
+[27-Nov-2023 12:34:28 UTC] PHP Fatal error:  Cannot use try without catch or finally in /home4/cmexpx2z/public_html/yesvite/app/Http/Controllers/ApiController.php on line 2361
+[27-Nov-2023 12:34:31 UTC] PHP Fatal error:  Cannot use try without catch or finally in /home4/cmexpx2z/public_html/yesvite/app/Http/Controllers/ApiController.php on line 2361
+[07-Dec-2023 10:20:44 UTC] PHP Fatal error:  Cannot declare class App\Http\Controllers\ApiController, because the name is already in use in /home4/cmexpx2z/public_html/yesvite/app/Http/Controllers/ApiControllerv1.php on line 84
+[08-Dec-2023 07:16:15 UTC] PHP Parse error:  syntax error, unexpected token "}", expecting ";" in /home4/cmexpx2z/public_html/yesvite/app/Helpers/Helper.php on line 34
+[08-Dec-2023 07:16:22 UTC] PHP Parse error:  syntax error, unexpected token "}", expecting ";" in /home4/cmexpx2z/public_html/yesvite/app/Helpers/Helper.php on line 34
+[08-Dec-2023 07:16:38 UTC] PHP Parse error:  syntax error, unexpected token "}", expecting ";" in /home4/cmexpx2z/public_html/yesvite/app/Helpers/Helper.php on line 34
+[08-Dec-2023 07:16:42 UTC] PHP Parse error:  syntax error, unexpected token "}", expecting ";" in /home4/cmexpx2z/public_html/yesvite/app/Helpers/Helper.php on line 34
+[08-Dec-2023 07:16:49 UTC] PHP Parse error:  syntax error, unexpected token "}", expecting ";" in /home4/cmexpx2z/public_html/yesvite/app/Helpers/Helper.php on line 34
+[08-Dec-2023 07:17:01 UTC] PHP Parse error:  syntax error, unexpected token "}", expecting ";" in /home4/cmexpx2z/public_html/yesvite/app/Helpers/Helper.php on line 34
+[08-Dec-2023 07:17:10 UTC] PHP Parse error:  syntax error, unexpected token "}", expecting ";" in /home4/cmexpx2z/public_html/yesvite/app/Helpers/Helper.php on line 34
+[08-Dec-2023 07:17:10 UTC] PHP Parse error:  syntax error, unexpected token "}", expecting ";" in /home4/cmexpx2z/public_html/yesvite/app/Helpers/Helper.php on line 34
+[08-Dec-2023 07:17:16 UTC] PHP Parse error:  syntax error, unexpected token "}", expecting ";" in /home4/cmexpx2z/public_html/yesvite/app/Helpers/Helper.php on line 34
+[08-Dec-2023 07:17:16 UTC] PHP Parse error:  syntax error, unexpected token "}", expecting ";" in /home4/cmexpx2z/public_html/yesvite/app/Helpers/Helper.php on line 34
+[08-Dec-2023 07:17:31 UTC] PHP Parse error:  syntax error, unexpected token "}", expecting ";" in /home4/cmexpx2z/public_html/yesvite/app/Helpers/Helper.php on line 34
+[08-Dec-2023 07:17:38 UTC] PHP Parse error:  syntax error, unexpected token "}", expecting ";" in /home4/cmexpx2z/public_html/yesvite/app/Helpers/Helper.php on line 34
+[08-Dec-2023 07:17:38 UTC] PHP Parse error:  syntax error, unexpected token "}", expecting ";" in /home4/cmexpx2z/public_html/yesvite/app/Helpers/Helper.php on line 34
+[03-Jan-2024 09:59:47 UTC] PHP Fatal error:  A void function must not return a value in /home1/cmexpknw/public_html/yesvite/app/Rules/AtLeastOnePresentRule.php on line 29
+[03-Jan-2024 10:02:12 UTC] PHP Fatal error:  Class App\Rules\AtLeastOnePresentRule contains 1 abstract method and must therefore be declared abstract or implement the remaining methods (Illuminate\Contracts\Validation\ValidationRule::validate) in /home1/cmexpknw/public_html/yesvite/app/Rules/AtLeastOnePresentRule.php on line 9
+[03-Jan-2024 10:06:19 UTC] PHP Fatal error:  Declaration of App\Rules\AtLeastOnePresentRule::validate($attribute, $value, Closure $fail) must be compatible with Illuminate\Contracts\Validation\ValidationRule::validate(string $attribute, mixed $value, Closure $fail): void in /home1/cmexpknw/public_html/yesvite/app/Rules/AtLeastOnePresentRule.php on line 10
+[12-Jan-2024 06:19:25 UTC] PHP Fatal error:  Cannot use [] for reading in /home1/cmexpknw/public_html/yesvite/app/Http/Controllers/ApiControllerv1.php on line 7752
+[12-Jan-2024 06:19:25 UTC] PHP Fatal error:  Cannot use [] for reading in /home1/cmexpknw/public_html/yesvite/app/Http/Controllers/ApiControllerv1.php on line 7752
+[12-Jan-2024 06:19:25 UTC] PHP Fatal error:  Cannot use [] for reading in /home1/cmexpknw/public_html/yesvite/app/Http/Controllers/ApiControllerv1.php on line 7752
+[12-Jan-2024 06:19:25 UTC] PHP Fatal error:  Cannot use [] for reading in /home1/cmexpknw/public_html/yesvite/app/Http/Controllers/ApiControllerv1.php on line 7752
+[12-Jan-2024 06:19:29 UTC] PHP Fatal error:  Cannot use [] for reading in /home1/cmexpknw/public_html/yesvite/app/Http/Controllers/ApiControllerv1.php on line 7752
+[12-Jan-2024 06:19:40 UTC] PHP Fatal error:  Cannot use [] for reading in /home1/cmexpknw/public_html/yesvite/app/Http/Controllers/ApiControllerv1.php on line 7752
+[12-Jan-2024 06:19:41 UTC] PHP Fatal error:  Cannot use [] for reading in /home1/cmexpknw/public_html/yesvite/app/Http/Controllers/ApiControllerv1.php on line 7752
+[12-Jan-2024 06:19:42 UTC] PHP Fatal error:  Cannot use [] for reading in /home1/cmexpknw/public_html/yesvite/app/Http/Controllers/ApiControllerv1.php on line 7752
+[12-Jan-2024 06:19:42 UTC] PHP Fatal error:  Cannot use [] for reading in /home1/cmexpknw/public_html/yesvite/app/Http/Controllers/ApiControllerv1.php on line 7752
+[12-Jan-2024 06:19:42 UTC] PHP Fatal error:  Cannot use [] for reading in /home1/cmexpknw/public_html/yesvite/app/Http/Controllers/ApiControllerv1.php on line 7752
+[12-Jan-2024 06:19:46 UTC] PHP Fatal error:  Cannot use [] for reading in /home1/cmexpknw/public_html/yesvite/app/Http/Controllers/ApiControllerv1.php on line 7752
+[12-Jan-2024 06:19:46 UTC] PHP Fatal error:  Cannot use [] for reading in /home1/cmexpknw/public_html/yesvite/app/Http/Controllers/ApiControllerv1.php on line 7752
+[12-Jan-2024 06:19:46 UTC] PHP Fatal error:  Cannot use [] for reading in /home1/cmexpknw/public_html/yesvite/app/Http/Controllers/ApiControllerv1.php on line 7752
+[12-Jan-2024 06:19:46 UTC] PHP Fatal error:  Cannot use [] for reading in /home1/cmexpknw/public_html/yesvite/app/Http/Controllers/ApiControllerv1.php on line 7752
+[12-Jan-2024 06:19:50 UTC] PHP Fatal error:  Cannot use [] for reading in /home1/cmexpknw/public_html/yesvite/app/Http/Controllers/ApiControllerv1.php on line 7752
+[12-Jan-2024 06:19:51 UTC] PHP Fatal error:  Cannot use [] for reading in /home1/cmexpknw/public_html/yesvite/app/Http/Controllers/ApiControllerv1.php on line 7752
+[12-Jan-2024 06:19:51 UTC] PHP Fatal error:  Cannot use [] for reading in /home1/cmexpknw/public_html/yesvite/app/Http/Controllers/ApiControllerv1.php on line 7752
+[12-Jan-2024 06:19:51 UTC] PHP Fatal error:  Cannot use [] for reading in /home1/cmexpknw/public_html/yesvite/app/Http/Controllers/ApiControllerv1.php on line 7752
+[12-Jan-2024 06:19:51 UTC] PHP Fatal error:  Cannot use [] for reading in /home1/cmexpknw/public_html/yesvite/app/Http/Controllers/ApiControllerv1.php on line 7752
+[18-Jan-2024 06:50:42 UTC] PHP Parse error:  Unmatched '}' in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 337
+[18-Jan-2024 06:51:01 UTC] PHP Parse error:  Unmatched '}' in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 337
+[18-Jan-2024 06:51:01 UTC] PHP Parse error:  Unmatched '}' in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 337
+[18-Jan-2024 06:51:01 UTC] PHP Parse error:  Unmatched '}' in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 337
+[18-Jan-2024 06:51:01 UTC] PHP Parse error:  Unmatched '}' in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 337
+[18-Jan-2024 06:51:07 UTC] PHP Parse error:  Unmatched '}' in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 337
+[18-Jan-2024 06:51:29 UTC] PHP Parse error:  Unmatched '}' in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 337
+[18-Jan-2024 06:53:10 UTC] PHP Parse error:  Unmatched '}' in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 337
+[18-Jan-2024 06:53:10 UTC] PHP Parse error:  Unmatched '}' in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 337
+[18-Jan-2024 06:53:10 UTC] PHP Parse error:  Unmatched '}' in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 337
+[18-Jan-2024 06:53:10 UTC] PHP Parse error:  Unmatched '}' in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 337
+[18-Jan-2024 06:53:18 UTC] PHP Parse error:  Unmatched '}' in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 337
+[18-Jan-2024 06:53:39 UTC] PHP Parse error:  Unmatched '}' in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 337
+[18-Jan-2024 06:53:41 UTC] PHP Parse error:  Unmatched '}' in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 337
+[18-Jan-2024 06:53:41 UTC] PHP Parse error:  Unmatched '}' in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 337
+[18-Jan-2024 06:53:41 UTC] PHP Parse error:  Unmatched '}' in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 337
+[18-Jan-2024 06:53:43 UTC] PHP Parse error:  Unmatched '}' in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 337
+[18-Jan-2024 06:53:46 UTC] PHP Parse error:  Unmatched '}' in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 337
+[18-Jan-2024 06:53:46 UTC] PHP Parse error:  Unmatched '}' in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 337
+[18-Jan-2024 06:53:46 UTC] PHP Parse error:  Unmatched '}' in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 337
+[18-Jan-2024 06:54:24 UTC] PHP Parse error:  Unmatched '}' in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 337
+[18-Jan-2024 06:54:29 UTC] PHP Parse error:  Unmatched '}' in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 337
+[18-Jan-2024 06:54:40 UTC] PHP Parse error:  Unmatched '}' in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 337
+[18-Jan-2024 12:54:54 Asia/Kolkata] PHP Fatal error:  Cannot use try without catch or finally in /home1/cmexpknw/public_html/yesvite/app/Http/Controllers/ApiControllerv1.php on line 8724
+[18-Jan-2024 12:55:07 Asia/Kolkata] PHP Fatal error:  Cannot use try without catch or finally in /home1/cmexpknw/public_html/yesvite/app/Http/Controllers/ApiControllerv1.php on line 8724
+[18-Jan-2024 12:55:07 Asia/Kolkata] PHP Fatal error:  Cannot use try without catch or finally in /home1/cmexpknw/public_html/yesvite/app/Http/Controllers/ApiControllerv1.php on line 8724
+[18-Jan-2024 12:55:07 Asia/Kolkata] PHP Fatal error:  Cannot use try without catch or finally in /home1/cmexpknw/public_html/yesvite/app/Http/Controllers/ApiControllerv1.php on line 8724
+[18-Jan-2024 12:55:07 Asia/Kolkata] PHP Fatal error:  Cannot use try without catch or finally in /home1/cmexpknw/public_html/yesvite/app/Http/Controllers/ApiControllerv1.php on line 8724
+[26-Jan-2024 17:49:55 Asia/Kolkata] PHP Fatal error:  Maximum execution time of 60 seconds exceeded in /home1/cmexpknw/public_html/yesvite/vendor/laravel/framework/src/Illuminate/Database/Connection.php on line 423
+[26-Jan-2024 17:52:48 Asia/Kolkata] PHP Fatal error:  Cannot use try without catch or finally in /home1/cmexpknw/public_html/yesvite/app/Http/Controllers/ApiControllerv1.php on line 9019
+[26-Jan-2024 17:52:48 Asia/Kolkata] PHP Fatal error:  Cannot use try without catch or finally in /home1/cmexpknw/public_html/yesvite/app/Http/Controllers/ApiControllerv1.php on line 9019
+[26-Jan-2024 17:52:48 Asia/Kolkata] PHP Fatal error:  Cannot use try without catch or finally in /home1/cmexpknw/public_html/yesvite/app/Http/Controllers/ApiControllerv1.php on line 9019
+[26-Jan-2024 17:52:48 Asia/Kolkata] PHP Fatal error:  Cannot use try without catch or finally in /home1/cmexpknw/public_html/yesvite/app/Http/Controllers/ApiControllerv1.php on line 9019
+[26-Jan-2024 17:52:50 Asia/Kolkata] PHP Fatal error:  Cannot use try without catch or finally in /home1/cmexpknw/public_html/yesvite/app/Http/Controllers/ApiControllerv1.php on line 9019
+[26-Jan-2024 17:52:51 Asia/Kolkata] PHP Fatal error:  Cannot use try without catch or finally in /home1/cmexpknw/public_html/yesvite/app/Http/Controllers/ApiControllerv1.php on line 9019
+[26-Jan-2024 17:52:59 Asia/Kolkata] PHP Fatal error:  Cannot use try without catch or finally in /home1/cmexpknw/public_html/yesvite/app/Http/Controllers/ApiControllerv1.php on line 9019
+[26-Jan-2024 17:52:59 Asia/Kolkata] PHP Fatal error:  Cannot use try without catch or finally in /home1/cmexpknw/public_html/yesvite/app/Http/Controllers/ApiControllerv1.php on line 9019
+[26-Jan-2024 17:52:59 Asia/Kolkata] PHP Fatal error:  Cannot use try without catch or finally in /home1/cmexpknw/public_html/yesvite/app/Http/Controllers/ApiControllerv1.php on line 9019
+[26-Jan-2024 17:53:01 Asia/Kolkata] PHP Fatal error:  Cannot use try without catch or finally in /home1/cmexpknw/public_html/yesvite/app/Http/Controllers/ApiControllerv1.php on line 9019
+[26-Jan-2024 17:53:03 Asia/Kolkata] PHP Fatal error:  Cannot use try without catch or finally in /home1/cmexpknw/public_html/yesvite/app/Http/Controllers/ApiControllerv1.php on line 9019
+[26-Jan-2024 17:53:03 Asia/Kolkata] PHP Fatal error:  Cannot use try without catch or finally in /home1/cmexpknw/public_html/yesvite/app/Http/Controllers/ApiControllerv1.php on line 9019
+[26-Jan-2024 17:53:03 Asia/Kolkata] PHP Fatal error:  Cannot use try without catch or finally in /home1/cmexpknw/public_html/yesvite/app/Http/Controllers/ApiControllerv1.php on line 9019
+[26-Jan-2024 17:53:07 Asia/Kolkata] PHP Fatal error:  Cannot use try without catch or finally in /home1/cmexpknw/public_html/yesvite/app/Http/Controllers/ApiControllerv1.php on line 9019
+[26-Jan-2024 17:53:39 Asia/Kolkata] PHP Fatal error:  Cannot use try without catch or finally in /home1/cmexpknw/public_html/yesvite/app/Http/Controllers/ApiControllerv1.php on line 9019
+[26-Jan-2024 17:53:39 Asia/Kolkata] PHP Fatal error:  Cannot use try without catch or finally in /home1/cmexpknw/public_html/yesvite/app/Http/Controllers/ApiControllerv1.php on line 9019
+[26-Jan-2024 17:53:39 Asia/Kolkata] PHP Fatal error:  Cannot use try without catch or finally in /home1/cmexpknw/public_html/yesvite/app/Http/Controllers/ApiControllerv1.php on line 9019
+[26-Jan-2024 17:53:39 Asia/Kolkata] PHP Fatal error:  Cannot use try without catch or finally in /home1/cmexpknw/public_html/yesvite/app/Http/Controllers/ApiControllerv1.php on line 9019
+[26-Jan-2024 17:54:19 Asia/Kolkata] PHP Fatal error:  Cannot use try without catch or finally in /home1/cmexpknw/public_html/yesvite/app/Http/Controllers/ApiControllerv1.php on line 9019
+[26-Jan-2024 17:54:20 Asia/Kolkata] PHP Fatal error:  Cannot use try without catch or finally in /home1/cmexpknw/public_html/yesvite/app/Http/Controllers/ApiControllerv1.php on line 9019
+[12-Mar-2024 12:46:44 Asia/Kolkata] PHP Fatal error:  Cannot declare class App\Http\Controllers\ApiControllerv1, because the name is already in use in /home1/cmexpknw/public_html/yesvite/app/Http/Controllers/ApiControllerv2.php on line 97
+[12-Mar-2024 12:48:22 Asia/Kolkata] PHP Fatal error:  Cannot declare class App\Http\Controllers\ApiControllerv1, because the name is already in use in /home1/cmexpknw/public_html/yesvite/app/Http/Controllers/ApiControllerv2.php on line 97
+[29-Mar-2024 12:59:06 Asia/Kolkata] PHP Fatal error:  Cannot use Laravel\Passport\Token as Token because the name is already in use in /home1/cmexpknw/public_html/yesvite/app/Http/Controllers/ApiControllerv2.php on line 101
+[29-Mar-2024 12:59:16 Asia/Kolkata] PHP Fatal error:  Cannot use Laravel\Passport\Token as Token because the name is already in use in /home1/cmexpknw/public_html/yesvite/app/Http/Controllers/ApiControllerv2.php on line 101
+[29-Mar-2024 12:59:16 Asia/Kolkata] PHP Fatal error:  Cannot use Laravel\Passport\Token as Token because the name is already in use in /home1/cmexpknw/public_html/yesvite/app/Http/Controllers/ApiControllerv2.php on line 101
+[29-Mar-2024 12:59:16 Asia/Kolkata] PHP Fatal error:  Cannot use Laravel\Passport\Token as Token because the name is already in use in /home1/cmexpknw/public_html/yesvite/app/Http/Controllers/ApiControllerv2.php on line 101
+[29-Mar-2024 13:00:09 Asia/Kolkata] PHP Fatal error:  Cannot use Laravel\Passport\Token as Token because the name is already in use in /home1/cmexpknw/public_html/yesvite/app/Http/Controllers/ApiControllerv2.php on line 101
+[29-Mar-2024 13:00:09 Asia/Kolkata] PHP Fatal error:  Cannot use Laravel\Passport\Token as Token because the name is already in use in /home1/cmexpknw/public_html/yesvite/app/Http/Controllers/ApiControllerv2.php on line 101
+[29-Mar-2024 13:00:09 Asia/Kolkata] PHP Fatal error:  Cannot use Laravel\Passport\Token as Token because the name is already in use in /home1/cmexpknw/public_html/yesvite/app/Http/Controllers/ApiControllerv2.php on line 101
+[10-Apr-2024 06:23:15 UTC] PHP Parse error:  Unclosed '{' on line 94 in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 805
+[10-Apr-2024 06:23:15 UTC] PHP Parse error:  Unclosed '{' on line 94 in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 805
+[10-Apr-2024 06:23:16 UTC] PHP Parse error:  Unclosed '{' on line 94 in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 805
+[10-Apr-2024 06:23:28 UTC] PHP Parse error:  Unclosed '{' on line 94 in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 805
+[10-Apr-2024 06:23:28 UTC] PHP Parse error:  Unclosed '{' on line 94 in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 805
+[10-Apr-2024 06:23:28 UTC] PHP Parse error:  Unclosed '{' on line 94 in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 805
+[10-Apr-2024 06:23:42 UTC] PHP Parse error:  Unclosed '{' on line 94 in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 805
+[10-Apr-2024 06:23:42 UTC] PHP Parse error:  Unclosed '{' on line 94 in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 805
+[10-Apr-2024 06:23:42 UTC] PHP Parse error:  Unclosed '{' on line 94 in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 805
+[10-Apr-2024 06:24:29 UTC] PHP Parse error:  Unclosed '{' on line 94 in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 805
+[10-Apr-2024 06:24:29 UTC] PHP Parse error:  Unclosed '{' on line 94 in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 805
+[10-Apr-2024 06:24:30 UTC] PHP Parse error:  Unclosed '{' on line 94 in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 805
+[10-Apr-2024 06:24:36 UTC] PHP Parse error:  Unclosed '{' on line 94 in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 805
+[10-Apr-2024 06:24:36 UTC] PHP Parse error:  Unclosed '{' on line 94 in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 805
+[10-Apr-2024 06:24:40 UTC] PHP Parse error:  Unclosed '{' on line 94 in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 805
+[10-Apr-2024 06:24:41 UTC] PHP Parse error:  Unclosed '{' on line 94 in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 805
+[10-Apr-2024 06:24:42 UTC] PHP Parse error:  Unclosed '{' on line 94 in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 805
+[10-Apr-2024 06:24:44 UTC] PHP Parse error:  Unclosed '{' on line 94 in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 805
+[10-Apr-2024 06:24:44 UTC] PHP Parse error:  Unclosed '{' on line 94 in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 805
+[10-Apr-2024 06:24:45 UTC] PHP Parse error:  Unclosed '{' on line 94 in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 805
+[10-Apr-2024 06:24:45 UTC] PHP Parse error:  Unclosed '{' on line 94 in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 805
+[10-Apr-2024 06:24:45 UTC] PHP Parse error:  Unclosed '{' on line 94 in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 805
+[10-Apr-2024 06:24:46 UTC] PHP Parse error:  Unclosed '{' on line 94 in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 805
+[10-Apr-2024 06:24:46 UTC] PHP Parse error:  Unclosed '{' on line 94 in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 805
+[10-Apr-2024 06:24:50 UTC] PHP Parse error:  Unclosed '{' on line 94 in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 805
+[10-Apr-2024 06:24:50 UTC] PHP Parse error:  Unclosed '{' on line 94 in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 805
+[10-Apr-2024 06:24:50 UTC] PHP Parse error:  Unclosed '{' on line 94 in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 805
+[10-Apr-2024 06:24:54 UTC] PHP Parse error:  Unclosed '{' on line 94 in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 805
+[10-Apr-2024 06:25:02 UTC] PHP Parse error:  Unclosed '{' on line 94 in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 805
+[10-Apr-2024 06:25:03 UTC] PHP Parse error:  Unclosed '{' on line 94 in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 805
+[10-Apr-2024 06:25:04 UTC] PHP Parse error:  Unclosed '{' on line 94 in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 805
+[10-Apr-2024 06:25:04 UTC] PHP Parse error:  Unclosed '{' on line 94 in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 805
+[10-Apr-2024 06:25:05 UTC] PHP Parse error:  Unclosed '{' on line 94 in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 805
+[10-Apr-2024 06:25:05 UTC] PHP Parse error:  Unclosed '{' on line 94 in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 805
+[10-Apr-2024 06:25:31 UTC] PHP Parse error:  Unclosed '{' on line 94 in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 805
+[10-Apr-2024 06:25:31 UTC] PHP Parse error:  Unclosed '{' on line 94 in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 805
+[10-Apr-2024 06:25:31 UTC] PHP Parse error:  Unclosed '{' on line 94 in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 805
+[10-Apr-2024 06:25:59 UTC] PHP Parse error:  Unclosed '{' on line 94 in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 805
+[10-Apr-2024 06:26:10 UTC] PHP Parse error:  Unclosed '{' on line 94 in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 805
+[10-Apr-2024 06:26:41 UTC] PHP Parse error:  Unclosed '{' on line 94 in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 805
+[10-Apr-2024 06:26:41 UTC] PHP Parse error:  Unclosed '{' on line 94 in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 805
+[10-Apr-2024 06:26:58 UTC] PHP Parse error:  Unclosed '{' on line 94 in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 805
+[10-Apr-2024 06:27:29 UTC] PHP Parse error:  Unclosed '{' on line 94 in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 805
+[10-Apr-2024 06:28:06 UTC] PHP Parse error:  Unclosed '{' on line 94 in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 809
+[10-Apr-2024 06:28:08 UTC] PHP Parse error:  Unclosed '{' on line 94 in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 809
+[10-Apr-2024 06:28:32 UTC] PHP Parse error:  Unclosed '{' on line 94 in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 809
+[10-Apr-2024 06:28:34 UTC] PHP Parse error:  Unclosed '{' on line 94 in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 809
+[10-Apr-2024 06:28:49 UTC] PHP Parse error:  Unclosed '{' on line 94 in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 809
+[10-Apr-2024 06:28:49 UTC] PHP Parse error:  Unclosed '{' on line 94 in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 809
+[10-Apr-2024 06:28:50 UTC] PHP Parse error:  Unclosed '{' on line 94 in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 809
+[10-Apr-2024 06:29:54 UTC] PHP Parse error:  Unclosed '{' on line 94 in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 809
+[10-Apr-2024 06:29:54 UTC] PHP Parse error:  Unclosed '{' on line 94 in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 809
+[10-Apr-2024 06:29:54 UTC] PHP Parse error:  Unclosed '{' on line 94 in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 809
+[10-Apr-2024 06:30:03 UTC] PHP Parse error:  Unclosed '{' on line 94 in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 809
+[25-Apr-2024 12:28:16 UTC] PHP Parse error:  syntax error, unexpected token "!=" in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 174
+[25-Apr-2024 12:28:16 UTC] PHP Parse error:  syntax error, unexpected token "!=" in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 174
+[25-Apr-2024 12:28:16 UTC] PHP Parse error:  syntax error, unexpected token "!=" in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 174
+[25-Apr-2024 12:28:21 UTC] PHP Parse error:  syntax error, unexpected token "!=" in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 174
+[25-Apr-2024 12:28:21 UTC] PHP Parse error:  syntax error, unexpected token "!=" in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 174
+[25-Apr-2024 12:29:26 UTC] PHP Parse error:  syntax error, unexpected token "!=" in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 174
+[25-Apr-2024 12:29:51 UTC] PHP Parse error:  syntax error, unexpected token "!=" in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 174
+[25-Apr-2024 12:29:52 UTC] PHP Parse error:  syntax error, unexpected token "!=" in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 174
+[25-Apr-2024 12:29:52 UTC] PHP Parse error:  syntax error, unexpected token "!=" in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 174
+[25-Apr-2024 12:29:52 UTC] PHP Parse error:  syntax error, unexpected token "!=" in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 174
+[25-Apr-2024 12:29:55 UTC] PHP Parse error:  syntax error, unexpected token "!=" in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 174
+[25-Apr-2024 12:29:58 UTC] PHP Parse error:  syntax error, unexpected token "!=" in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 174
+[25-Apr-2024 12:29:58 UTC] PHP Parse error:  syntax error, unexpected token "!=" in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 174
+[25-Apr-2024 12:29:58 UTC] PHP Parse error:  syntax error, unexpected token "!=" in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 174
+[25-Apr-2024 12:30:05 UTC] PHP Parse error:  syntax error, unexpected token "!=" in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 174
+[25-Apr-2024 12:30:40 UTC] PHP Parse error:  syntax error, unexpected token "!=" in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 174
+[25-Apr-2024 12:30:40 UTC] PHP Parse error:  syntax error, unexpected token "!=" in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 174
+[25-Apr-2024 12:30:41 UTC] PHP Parse error:  syntax error, unexpected token "!=" in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 174
+[06-May-2024 10:49:56 UTC] PHP Parse error:  syntax error, unexpected token "if" in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 202
+[06-May-2024 10:49:56 UTC] PHP Parse error:  syntax error, unexpected token "if" in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 202
+[06-May-2024 10:49:56 UTC] PHP Parse error:  syntax error, unexpected token "if" in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 202
+[06-May-2024 10:49:56 UTC] PHP Parse error:  syntax error, unexpected token "if" in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 202
+[06-May-2024 10:50:15 UTC] PHP Parse error:  syntax error, unexpected token "if" in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 202
+[06-May-2024 10:50:15 UTC] PHP Parse error:  syntax error, unexpected token "if" in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 202
+[06-May-2024 10:50:15 UTC] PHP Parse error:  syntax error, unexpected token "if" in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 202
+[06-May-2024 10:50:15 UTC] PHP Parse error:  syntax error, unexpected token "if" in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 202
+[06-May-2024 10:50:23 UTC] PHP Parse error:  syntax error, unexpected token "if" in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 202
+[06-May-2024 10:50:23 UTC] PHP Parse error:  syntax error, unexpected token "if" in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 202
+[06-May-2024 10:50:23 UTC] PHP Parse error:  syntax error, unexpected token "if" in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 202
+[06-May-2024 10:50:23 UTC] PHP Parse error:  syntax error, unexpected token "if" in /home1/cmexpknw/public_html/yesvite/app/Helpers/Helper.php on line 202
