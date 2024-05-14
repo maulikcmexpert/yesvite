@@ -8,9 +8,9 @@ $("#loginForm").validate({
     messages: {
         email: {
             required: "Email is required ",
-            email: "Please enter valid email",
+            email: "Please enter valid Email",
         },
-        password: { required: "Please enter password " },
+        password: { required: "Please enter Password " },
     },
 });
 $("#registerPost").validate({

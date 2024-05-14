@@ -25,7 +25,7 @@
                 <div class="input-form">
                     <label for="pwd" class="form-label">Password</label>
                     <div class="position-relative">
-                        <input type="password" class="form-control" id="password-field" placeholder="Enter password" name="pswd">
+                        <input type="password" class="form-control" id="password-field" placeholder="Enter password" name="password">
                         <span toggle="#password-field" class="fa-regular fa-fw fa-eye-slash field-icon toggle-password"></span>
                     </div>
                 </div>
