@@ -13,6 +13,7 @@ class Home extends Controller
         if (Session::exists('key')) {
             // Session key exists, retrieve its value
             $value = Session::get('key');
+            dd($value);
         } else {
             // Session key does not exist
         }
