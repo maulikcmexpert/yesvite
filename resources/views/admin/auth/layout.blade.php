@@ -47,7 +47,7 @@
         .login-box .brand-image {
             width: 100% !important;
             max-width: 150px !important;
-            box-shadow:inherit !important;
+            box-shadow: inherit !important;
         }
 
         .login-box .input-group-text {
@@ -88,12 +88,11 @@
             border: 2px solid var(--ButtonColor) !important;
         }
 
-        @media only screen and (max-width:575px){
-            .login-box .brand-image{
-                max-width:100px !important;
+        @media only screen and (max-width:575px) {
+            .login-box .brand-image {
+                max-width: 100px !important;
             }
         }
-
     </style>
 </head>
 
