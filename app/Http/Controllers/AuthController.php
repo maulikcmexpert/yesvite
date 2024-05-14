@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\URL;
+use Cookie;
 
 class AuthController extends Controller
 {
@@ -48,11 +52,22 @@ class AuthController extends Controller
         if (Auth::attempt($credentials, $remember)) {
             $user = Auth::guard('web')->user();
             dd($user);
-            // $sessionArray = ['id' => $adminData->id, 'name' => $adminData->name];
-            // Session::put(['admin' => $sessionArray]);
-            // $request->session()->regenerate();
+            $sessionArray = ['id' => encrypt($user->id), 'username' => $user->firstname . ' ' . $user->lastname];
+            Session::put(['user' => $sessionArray]);
+            if (Session::has('admin')) {
 
-            return redirect()->intended('home');
+                if ($remember != null) {
+                    Cookie::queue('email', $user->email, 120);
+                    Cookie::queue('password', $user->password, 120);
+                } else {
+
+                    Cookie::forget('email');
+                    Cookie::forget('password');
+                }
+                return Redirect::to(URL::to('/home'))->with('success', 'Loggedin successfully!');;
+            } else {
+                return  Redirect::to('/')->with('error', 'Invalid credentials!');
+            }
         }
 
         throw ValidationException::withMessages([
