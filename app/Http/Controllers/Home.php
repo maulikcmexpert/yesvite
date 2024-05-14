@@ -6,5 +6,8 @@ use Illuminate\Http\Request;
 
 class Home extends Controller
 {
-    //
+    public function index()
+    {
+        echo "Home";
+    }
 }
