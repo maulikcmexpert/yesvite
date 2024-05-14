@@ -1,0 +1,134 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'SF Pro Display', sans-serif;
+}
+
+ul,li{
+    list-style-type: none;
+}
+
+a{
+    text-decoration: none;
+}
+
+img{
+    width: 100%;
+    height: 100%;
+}
+
+h1{
+    font-size: 32px;
+    line-height: 40px;
+    color: var(--seondryColor);
+    font-weight: 700;
+}
+
+p{
+    font-size: 14px;
+    color: var(--lightColor);
+    margin-bottom: 0;
+}
+
+label{
+    font-size: 14px;
+    font-weight: 500 !important;
+    color: var(--secondryColor);
+    margin-bottom: 8px !important;
+    transition: 0.5s;
+    -webkit-transition: 0.5s;
+    -moz-transition: 0.5s;
+    -ms-transition: 0.5s;
+    -o-transition: 0.5s;
+}
+
+label:hover{
+    color: var(--primaryColor);
+}
+
+input,
+select
+{
+    height: 56px !important;
+    border: 1px solid var(--borderColor) !important;
+    border-radius: 16px !important;
+    -webkit-border-radius: 16px !important;
+    -moz-border-radius: 16px !important;
+    -ms-border-radius: 16px !important;
+    -o-border-radius: 16px !important;
+    padding-left: 20px !important;
+}
+
+input::placeholder{
+    font-size: 14px !important;
+    font-weight: 400 !important;
+    color: var(--secondryColor) !important;
+}
+
+input:focus,
+select:focus,
+textarea:focus
+{
+    border: 1px solid var(--primaryColor) !important;
+    box-shadow: none !important;
+}
+
+select.form-select{
+    background-image: url('../image/down-arrow.svg');
+}
+
+.cmn-btn{
+    padding: 10px 24px;
+    border-radius: 16px;
+    -webkit-border-radius: 16px;
+    -moz-border-radius: 16px;
+    -ms-border-radius: 16px;
+    -o-border-radius: 16px;
+    border:1px solid var(--borderColor);
+    display: block;
+    transition: 0.5s;
+    -webkit-transition: 0.5s;
+    -moz-transition: 0.5s;
+    -ms-transition: 0.5s;
+    -o-transition: 0.5s;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--secondryColor);
+    cursor: pointer;
+}
+
+.cmn-btn:hover{
+    transform: translateY(-5px);
+    -webkit-transform: translateY(-5px);
+    -moz-transform: translateY(-5px);
+    -ms-transform: translateY(-5px);
+    -o-transform: translateY(-5px);
+}
+
+.cmn-btn.bg-primary{
+    background-color: var(--primaryColor) !important;
+    color: #fff;
+    margin-left: 15px;
+}
+
+
+/* ======== Responsive ========= */
+@media only screen and (max-width:991px){
+    .cmn-btn{
+        padding: 10px 15px;
+    }
+}
+
+
+@media only screen and (max-width:768px){
+    h1{
+        font-size: 28px;
+        line-height: 33px;
+        margin-bottom: 5px !important;
+    }
+    
+}

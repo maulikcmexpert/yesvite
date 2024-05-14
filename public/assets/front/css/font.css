@@ -1,0 +1,19 @@
+@font-face {
+    font-family: 'SF Pro Display', sans-serif;
+    src: url("/assets/font/SFPRODISPLAYBOLD.woff");
+}
+
+@font-face {
+    font-family: 'SF Pro Display', sans-serif;
+    src: url("/assets/font/SFPRODISPLAYMEDIUM.woff");
+}
+
+@font-face {
+    font-family: 'SF Pro Display', sans-serif;
+    src: url("/assets/font/SFPRODISPLAYREGULAR.woff");
+}
+
+@font-face {
+    font-family: 'SF Pro Display', sans-serif;
+    src: url("/assets/font/SFPRODISPLAYSEMIBOLDITALIC.woff");
+}

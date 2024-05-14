@@ -1,0 +1,16 @@
+:root{
+    --primaryColor: #F73C71;
+    --secondryColor: #0F172A;
+    --lightColor: #64748B;
+    --borderColor: #E2E8F0;
+    --iconColor: #94A3B8;
+    --breadcrumbColor: #94A3B8;
+    --headerBorder: #F1F5F9;
+    --lightBg: #FFEAF3;
+    --tabBg: #F8F9FD;
+    --tabBorder: #F1F1F1;
+    --searchColor: #94A3B8;
+    --contactTitle: #020202;
+    --titleColor: #050505;
+    --rangeColor: #23AA26;
+}
