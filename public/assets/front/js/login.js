@@ -3,14 +3,17 @@ console.log(base_url);
 $("#loginForm").validate({
     rules: {
         email: { required: true, email: true },
-        password: { required: true },
+        password: { required: true, minlength: 8 },
     },
     messages: {
         email: {
-            required: "Email is required ",
+            required: "Please enter Email",
             email: "Please enter valid Email",
         },
-        password: { required: "Please enter Password " },
+        password: {
+            required: "Please enter Password",
+            minlength: "Password must be at least 8 characters",
+        },
     },
 });
 $("#registerPost").validate({
