@@ -5,7 +5,11 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Illuminate\Support\Facades\Auth;
+
+
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Redirect;
 
 class VerifyUserIsVerified
 {
@@ -16,9 +20,10 @@ class VerifyUserIsVerified
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check() && !Auth::user()->email_verified_at) {
-            return redirect()->route('auth.login');
+        if (Session::has('web')) {
+            return $next($request);
         }
+
 
         return $next($request);
     }
