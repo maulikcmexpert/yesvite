@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\{
+    Home
+};
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,19 +24,16 @@ use App\Http\Controllers\AuthController;
 // });
 
 
+Route::middleware('checkUserExist')->group(function () {
+
+
+    Route::get('home', [Home::class, 'home']);
+});
 
 Route::controller(AuthController::class)->group(function () {
 
-    Route::get('/', 'create');
-
-
-
-
-
+    Route::get('/', 'create')->name('auth.login');
     Route::post('/login', 'checkLogin');
-
-
-
     Route::get('/register', function () {
 
         $data['page'] = 'admin/auth/register';
@@ -42,9 +42,6 @@ Route::controller(AuthController::class)->group(function () {
 
         return view('admin/auth/main', $data);
     });
-
-
-
     Route::post('/checkEmail', 'checkEmail');
 
     Route::post('/register', 'registerAdmin');
