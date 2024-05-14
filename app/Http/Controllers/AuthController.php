@@ -46,6 +46,7 @@ class AuthController extends Controller
         $remember = $request->has('remember'); // Check if "Remember Me" checkbox is checked
 
         if (Auth::attempt($credentials, $remember)) {
+            dd("hi");
             $request->session()->regenerate();
 
             return redirect()->intended('home');
