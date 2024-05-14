@@ -69,10 +69,6 @@ class AuthController extends Controller
                 return  Redirect::to('/')->with('error', 'Invalid credentials!');
             }
         }
-
-        throw ValidationException::withMessages([
-            'email' => __('auth.failed'),
-        ]);
     }
 
     /**
