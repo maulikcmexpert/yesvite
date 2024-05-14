@@ -4,6 +4,9 @@
     box-sizing: border-box;
 }
 
+label.error{
+    color:red;
+}
 body{
     font-family: 'SF Pro Display', sans-serif;
 }
