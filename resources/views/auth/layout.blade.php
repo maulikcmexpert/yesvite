@@ -83,7 +83,7 @@
 
     @foreach($js as $value)
 
-    <script src="{{ asset('assets/front/js/') }}{{$value}}.js"></script>
+    <script src="{{ asset('assets/front') }}/js/{{$value}}.js"></script>
 
     @endforeach
 
