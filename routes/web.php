@@ -24,7 +24,7 @@ use App\Http\Controllers\AuthController;
 
 Route::controller(AuthController::class)->group(function () {
 
-    Route::get('/', 'index');
+    Route::get('/', 'create');
 
 
 

@@ -11,11 +11,6 @@ class AuthController extends Controller
      */
     public function index()
     {
-        $page = 'auth/login';
-        $title = "Login";
-        // $js = 'login';
-
-        return view('auth/main', compact('page', 'title'));
     }
 
     /**
@@ -23,7 +18,11 @@ class AuthController extends Controller
      */
     public function create()
     {
-        //
+        $page = 'auth/login';
+        $title = "Login";
+        // $js = 'login';
+
+        return view('auth/main', compact('page', 'title'));
     }
 
     /**
