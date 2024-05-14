@@ -79,6 +79,9 @@
             }
         });
     </script>
+    <script src="{{ asset('assets/admin/js/jquery-validate.js') }}"></script>
+
+    <script src="{{ asset('assets/admin/js/jquery-validate-additional.js') }}"></script>
     @if(isset($js))
 
     @foreach($js as $value)
