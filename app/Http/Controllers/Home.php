@@ -2,12 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Session;
+
 use Illuminate\Http\Request;
 
 class Home extends Controller
 {
     public function index()
     {
-        echo "Home";
+        if (Session::exists('key')) {
+            // Session key exists, retrieve its value
+            $value = Session::get('key');
+        } else {
+            // Session key does not exist
+        }
     }
 }
