@@ -37,7 +37,7 @@
                     </div>
                     <a href="#">Forgot Password</a>
                 </div>
-                <a href="" type="submit" class="btn btn-primary" value="">Sign In</a>
+                <input type="submit" class="btn btn-primary" value="Sign In">
             </form>
             <div class="social-links">
                 <a href="#">
