@@ -17,7 +17,7 @@
             <p>Please Sign In to continue</p>
         </div>
         <div class="login-form-wrap">
-            <form method="POST" action="" id="loginForm">
+            <form method="POST" action="{{ route('auth.checkLogin')}}" id="loginForm">
                 <div class="input-form">
                     <label for="email" class="form-label">Email Address</label>
                     <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">

@@ -33,7 +33,7 @@ Route::middleware('checkUserExist')->group(function () {
 Route::controller(AuthController::class)->group(function () {
 
     Route::get('/', 'create')->name('auth.login');
-    Route::post('/login', 'checkLogin');
+    Route::post('/login', 'checkLogin')->name('auth.checkLogin');;
     Route::get('/register', function () {
 
         $data['page'] = 'admin/auth/register';
