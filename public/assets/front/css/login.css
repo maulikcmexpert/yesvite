@@ -98,7 +98,7 @@
     border-color: var(--secondryColor) !important;
 }
 
-.login-form-wrap a.btn{
+.login-form-wrap .btn{
     width: 100%;
     background-color: var(--primaryColor);
     border: 1px solid var(--primaryColor) !important;
@@ -119,7 +119,7 @@
     text-transform: capitalize;
 }
 
-.login-form-wrap button.btn:hover{
+.login-form-wrap .btn:hover{
     background-color: transparent;
     color: var(--primaryColor);
 }
