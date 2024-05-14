@@ -39,7 +39,7 @@ class AuthController extends Controller
             'email.required' => 'Please enter Email',
             'email.email' => 'Please enter a valid Email',
             'password.required' => 'Please enter a Password',
-            'password.min' => 'The Password must be at least 8 characters.',
+            'password.min' => 'Password must be at least 8 characters',
         ]);
 
 
