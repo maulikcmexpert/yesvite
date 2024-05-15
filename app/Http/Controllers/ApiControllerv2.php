@@ -3890,7 +3890,7 @@ class ApiControllerv2 extends Controller
         }
 
         $validator = Validator::make($input, [
-            'group_ud' => ['required', 'exists:groups,id']
+            'group_id' => ['required', 'exists:groups,id']
         ]);
 
         if ($validator->fails()) {
