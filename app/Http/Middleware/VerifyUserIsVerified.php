@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Auth\Events\Login;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -20,6 +21,7 @@ class VerifyUserIsVerified
      */
     public function handle(Request $request, Closure $next): Response
     {
+        dd("Login");
         if (Session::has('user')) {
             return $next($request);
         }
