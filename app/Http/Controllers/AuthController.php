@@ -17,6 +17,7 @@ class AuthController extends Controller
      * Display a listing of the resource.
      */
 
+
     public function index()
     {
     }
@@ -30,7 +31,7 @@ class AuthController extends Controller
         $title = "Login";
         $js = ['login'];
 
-        return view('auth.main', compact('page', 'title', 'js'));
+        return view('auth/main', compact('page', 'title', 'js'));
     }
 
     /**
