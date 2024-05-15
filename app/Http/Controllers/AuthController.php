@@ -51,11 +51,10 @@ class AuthController extends Controller
 
 
         $remember = $request->has('remember'); // Check if "Remember Me" checkbox is checked
-        dd("hi");
-        exit;
+
         if (Auth::attempt($credentials, $remember)) {
             $user = Auth::guard('web')->user();
-            dd($user);
+
             $sessionArray = ['id' => encrypt($user->id), 'username' => $user->firstname . ' ' . $user->lastname];
             Session::put(['user' => $sessionArray]);
             if (Session::has('user')) {
