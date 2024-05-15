@@ -21,8 +21,8 @@ class IsAuthenticate
     {
 
         if (!Session::has('user')) {
-            return Redirect::to(URL::to('/'));
+            return $next($request);
         }
-        return $next($request);
+        return Redirect::to(URL::to('home'));
     }
 }
