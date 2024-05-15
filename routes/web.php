@@ -32,7 +32,7 @@ Route::middleware('checkUserExist')->group(function () {
 
 Route::controller(AuthController::class)->group(function () {
 
-    Route::get('/', 'create')->name('auth.login')->middleware('checkUserExist');;
+    Route::get('/', 'create')->name('auth.login')->middleware('checkUserExist');
     Route::post('login', 'checkLogin')->name('auth.checkLogin')->middleware('checkUserExist');
 
 
