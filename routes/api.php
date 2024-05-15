@@ -267,6 +267,7 @@ Route::prefix('user/v2/')->middleware('checkUser')->group(function () {
 
     Route::post('create_group', [ApiControllerv2::class, 'createGroup']);
     Route::post('group_list', [ApiControllerv2::class, 'groupList']);
+    Route::post('delete_group', [ApiControllerv2::class, 'deleteGroup']);
     Route::post('add_group_member', [ApiControllerv2::class, 'addGroupMember']);
     Route::post('member_list', [ApiControllerv2::class, 'memberList']);
     Route::post('remove_user_from_group', [ApiControllerv2::class, 'removeUserFromGroup']);

@@ -3878,6 +3878,47 @@ class ApiControllerv2 extends Controller
         }
     }
 
+    public function deleteGroup(Request $request)
+    {
+
+
+        $input = $request->getContent();
+
+        $input = json_decode($input, true);
+        if ($input == null) {
+            return response()->json(['status' => 0, 'message' => "Json invalid"]);
+        }
+
+        $validator = Validator::make($input, [
+            'group_ud' => ['required', 'exists:groups,id']
+        ]);
+
+        if ($validator->fails()) {
+
+            return response()->json([
+                'status' => 0,
+                'message' => $validator->errors()->first(),
+            ]);
+        }
+
+        try {
+
+            $deleteGroup = Group::where(['id' => $input['group_id']])->first();
+            if ($deleteGroup != null) {
+
+                $deleteGroup->delete();
+
+                return response()->json(['status' => 1, 'message' => 'Group deleted successfully']);
+            }
+            return response()->json(['status' => 0, 'message' => 'group is already deleted']);
+        } catch (QueryException $e) {
+            return response()->json(['status' => 0, 'message' => 'Db error']);
+        } catch (Exception $e) {
+
+            return response()->json(['status' => 0, 'message' => 'Something went wrong']);
+        }
+    }
+
     public function addGroupMember(Request $request)
     {
         $user  = Auth::guard('api')->user();
