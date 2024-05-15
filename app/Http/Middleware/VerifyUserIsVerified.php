@@ -21,8 +21,9 @@ class VerifyUserIsVerified
      */
     public function handle(Request $request, Closure $next): Response
     {
-        dd("Login");
+
         if (Session::has('user')) {
+            dd("Login in");
             return $next($request);
         }
 
