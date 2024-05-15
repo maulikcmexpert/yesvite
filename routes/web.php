@@ -27,7 +27,7 @@ use App\Http\Controllers\{
 Route::middleware('checkUserExist')->group(function () {
 
 
-    Route::get('home', [Home::class, 'index']);
+    Route::get('home', [Home::class, 'index'])->name('home');
 });
 
 Route::controller(AuthController::class)->group(function () {
