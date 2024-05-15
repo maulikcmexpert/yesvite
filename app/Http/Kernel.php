@@ -80,6 +80,7 @@ class Kernel extends HttpKernel
         'adminAuth' => \App\Http\Middleware\AdminAuth::class,
         'checkUser' => \App\Http\Middleware\checkUser::class,
         'checkUserExist' => \App\Http\Middleware\VerifyUserIsVerified::class,
+        'isAuthenticate' => \App\Http\Middleware\IsAuthenticate::class,
 
     ];
 }
