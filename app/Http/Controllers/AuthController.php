@@ -18,9 +18,10 @@ class AuthController extends Controller
 
     public function __construct()
     {
-        echo "hi";
-        exit;
+
         if (Session::has('user')) {
+            echo "hi";
+            exit;
             return redirect()->route('home');
         }
     }
