@@ -18,7 +18,7 @@ class AuthController extends Controller
 
     public function __construct()
     {
-        if (Auth::check()) {
+        if (Session::has('user')) {
             return redirect()->route('home');
         }
     }
