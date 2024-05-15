@@ -20,11 +20,11 @@ class VerifyUserIsVerified
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Session::has('web')) {
+        if (Session::has('user')) {
             return $next($request);
         }
 
 
-        return $next($request);
+        return Redirect::to(URL::to('/'))->with('error', 'Unauthorised');
     }
 }
