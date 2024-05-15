@@ -10,7 +10,13 @@ class Home extends Controller
 {
     public function index()
     {
-        $webData = Session::get('user');
-        dd($webData);
+
+        $title = 'Profile';
+        $page = 'front.profile';
+        return view('layout', compact(
+            'title',
+            'page',
+
+        ));
     }
 }
