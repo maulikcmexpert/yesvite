@@ -10,7 +10,7 @@ class Home extends Controller
 {
     public function index()
     {
-        $webData = Session::get('web');
+        $webData = Session::get('user');
         dd($webData);
     }
 }
