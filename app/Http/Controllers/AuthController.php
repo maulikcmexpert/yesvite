@@ -18,7 +18,7 @@ class AuthController extends Controller
 
     public function __construct()
     {
-
+        dd(Auth::guard('web')->check());
         if (Auth::guard('web')->check()) {
             echo "hi";
             exit;
