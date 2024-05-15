@@ -54,7 +54,7 @@ class AuthController extends Controller
 
             $sessionArray = ['id' => encrypt($user->id), 'username' => $user->firstname . ' ' . $user->lastname];
             Session::put(['user' => $sessionArray]);
-            if (Session::has('admin')) {
+            if (Session::has('user')) {
 
                 if ($remember != null) {
                     Cookie::queue('email', $user->email, 120);
