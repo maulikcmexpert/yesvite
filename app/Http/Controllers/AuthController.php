@@ -52,8 +52,7 @@ class AuthController extends Controller
         $remember = $request->has('remember'); // Check if "Remember Me" checkbox is checked
 
         if (Auth::attempt($credentials, $remember)) {
-            echo "ddhi";
-            exit;
+
             $user = Auth::guard('web')->user();
 
             $sessionArray = ['id' => encrypt($user->id), 'username' => $user->firstname . ' ' . $user->lastname];
@@ -73,8 +72,7 @@ class AuthController extends Controller
                 return  Redirect::to('/')->with('error', 'Invalid credentials!');
             }
         } else {
-            echo "hi";
-            exit;
+
             return  Redirect::to('/')->with('error', 'Email and Password invalid');
         }
     }
