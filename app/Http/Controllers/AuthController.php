@@ -19,7 +19,7 @@ class AuthController extends Controller
     public function __construct()
     {
         //   dd(Session::has('user'));
-        if (Auth::guard('web')->check()) {
+        if (Session::has('user')) {
             echo "hi";
             exit;
             return redirect()->route('home');
