@@ -15,6 +15,13 @@ class AuthController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    public function __construct()
+    {
+        if (Auth::check()) {
+            return redirect()->route('home');
+        }
+    }
     public function index()
     {
     }
@@ -65,7 +72,6 @@ class AuthController extends Controller
                     Cookie::forget('password');
                 }
                 return redirect()->route('home')->with('success', 'Logged in successfully!');
-                return Redirect::to(URL::to('home'))->with('success', 'Logged in successfully!');
             } else {
                 return  Redirect::to('/')->with('error', 'Invalid credentials!');
             }
