@@ -34,6 +34,8 @@ Route::controller(AuthController::class)->group(function () {
 
     Route::get('/', 'create')->name('auth.login');
     Route::post('login', 'checkLogin')->name('auth.checkLogin');;
+
+
     Route::get('register', function () {
 
         $data['page'] = 'admin/auth/register';
@@ -42,6 +44,7 @@ Route::controller(AuthController::class)->group(function () {
 
         return view('admin/auth/main', $data);
     });
+
     Route::post('/checkEmail', 'checkEmail');
 
     Route::post('/register', 'registerAdmin');

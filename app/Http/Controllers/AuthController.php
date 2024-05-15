@@ -51,7 +51,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials, $remember)) {
             $user = Auth::guard('web')->user();
-            dd($user);
+
             $sessionArray = ['id' => encrypt($user->id), 'username' => $user->firstname . ' ' . $user->lastname];
             Session::put(['user' => $sessionArray]);
             if (Session::has('admin')) {
@@ -64,7 +64,7 @@ class AuthController extends Controller
                     Cookie::forget('email');
                     Cookie::forget('password');
                 }
-                return Redirect::to(URL::to('/home'))->with('success', 'Loggedin successfully!');;
+                return Redirect::to(URL::to('/home'))->with('success', 'Logged in successfully!');;
             } else {
                 return  Redirect::to('/')->with('error', 'Invalid credentials!');
             }
