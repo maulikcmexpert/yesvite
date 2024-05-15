@@ -19,7 +19,7 @@ class IsAuthenticate
      */
     public function handle(Request $request, Closure $next): Response
     {
-        dd(Session::has('user'));
+
         if (Session::has('user')) {
             return Redirect::to(URL::to('home'));
         }
