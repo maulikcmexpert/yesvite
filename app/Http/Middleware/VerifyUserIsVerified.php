@@ -23,7 +23,7 @@ class VerifyUserIsVerified
     {
 
         if (Session::has('user')) {
-            dd("Login in");
+
             return $next($request);
         }
 
