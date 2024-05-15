@@ -17,15 +17,6 @@ class AuthController extends Controller
      * Display a listing of the resource.
      */
 
-    public function __construct()
-    {
-        //   dd(Session::has('user'));
-        if (Session::has('user')) {
-            echo "hi";
-            exit;
-            return redirect()->route('home');
-        }
-    }
     public function index()
     {
     }
