@@ -23,6 +23,6 @@ class IsAuthenticate
         if (Session::has('user')) {
             return Redirect::to(URL::to('home'));
         }
-        return Redirect::to(URL::to('/'))->with('error', 'Unauthorised');
+        //return Redirect::to(URL::to('/'))->with('error', 'Unauthorised');
     }
 }
