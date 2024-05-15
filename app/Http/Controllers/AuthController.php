@@ -70,6 +70,8 @@ class AuthController extends Controller
             } else {
                 return  Redirect::to('/')->with('error', 'Invalid credentials!');
             }
+        } else {
+            return  Redirect::to('/')->with('error', 'Email and Password invalid');
         }
     }
 
