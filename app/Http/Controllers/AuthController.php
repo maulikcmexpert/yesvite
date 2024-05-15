@@ -50,7 +50,7 @@ class AuthController extends Controller
 
 
         $remember = $request->has('remember'); // Check if "Remember Me" checkbox is checked
-
+        dd(Auth::attempt($credentials, $remember));
         if (Auth::attempt($credentials, $remember)) {
 
             $user = Auth::guard('web')->user();
