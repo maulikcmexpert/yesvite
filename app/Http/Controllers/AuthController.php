@@ -64,7 +64,7 @@ class AuthController extends Controller
                     Cookie::forget('email');
                     Cookie::forget('password');
                 }
-                return Redirect::to(URL::to('/home'))->with('success', 'Logged in successfully!');;
+                return Redirect::to(URL::to('home'))->with('success', 'Logged in successfully!');
             } else {
                 return  Redirect::to('/')->with('error', 'Invalid credentials!');
             }
