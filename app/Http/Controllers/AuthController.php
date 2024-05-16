@@ -55,7 +55,11 @@ class AuthController extends Controller
         if (Auth::attempt($credentials, $remember)) {
             $user = Auth::guard('web')->user();
 
-            $sessionArray = ['id' => encrypt($user->id), 'username' => $user->firstname . ' ' . $user->lastname];
+            $sessionArray = [
+                'id' => encrypt($user->id),
+                'username' => $user->firstname . ' ' . $user->lastname,
+                'profile' => asset('public/storage.profile/' . $user->profile)
+            ];
             Session::put(['user' => $sessionArray]);
             if (Session::has('user')) {
 
