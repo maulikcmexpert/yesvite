@@ -11,12 +11,11 @@ class Home extends Controller
     public function index()
     {
 
-        $title = 'Profile';
-        $page = 'front.profile';
+        $title = 'Home';
+        $page = 'front.home';
         return view('layout', compact(
             'title',
             'page',
-
         ));
     }
 }
