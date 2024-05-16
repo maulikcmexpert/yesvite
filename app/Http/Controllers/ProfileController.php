@@ -11,7 +11,7 @@ class ProfileController extends Controller
     protected $userid;
     public function __construct()
     {
-        dd(decrypt(Session::get('user')));
+        dd(decrypt(Session::get('user')['id']));
         $this->userid = decrypt(Session::get('user')['id']);
     }
     public function index()
