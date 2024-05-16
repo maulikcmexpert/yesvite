@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\{
 
@@ -70,8 +70,8 @@ Route::controller(AuthController::class)->group(function () {
 
     Route::get('/logout', function () {
 
-        Session::forget('admin');
+        Session::forget('user');
 
-        return redirect('/admin/login');
-    });
+        return redirect('/');
+    })->name('logout');
 });

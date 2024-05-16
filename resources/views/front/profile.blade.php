@@ -117,7 +117,7 @@
                         </div>
                     </div>
                     <div class="d-flex align-items-center">
-                        <a href="#" type="button" class="cmn-btn Logout-btn">
+                        <a href="{{route('logout')}}" type="button" class="cmn-btn Logout-btn">
                             <svg class="me-1" width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M7.91675 6.30001C8.17508 3.30001 9.71675 2.07501 13.0917 2.07501H13.2001C16.9251 2.07501 18.4167 3.56668 18.4167 7.29168V12.725C18.4167 16.45 16.9251 17.9417 13.2001 17.9417H13.0917C9.74175 17.9417 8.20008 16.7333 7.92508 13.7833" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                 <path d="M2.16675 10H12.9001" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
