@@ -16,6 +16,7 @@ class Controller extends BaseController
 
     public function __construct()
     {
+        dd(Session::get('user')['id']);
         if (Session::has('user')) {
 
             $this->userId = Session::get('user')['id'];

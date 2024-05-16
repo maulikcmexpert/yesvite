@@ -14,7 +14,7 @@ class Home extends Controller
     public function index()
     {
 
-        dd(Session::get('user')['id']);
+
         $title = 'Home';
         $page = 'front.home';
         return view('layout', compact(
