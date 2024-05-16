@@ -46,13 +46,14 @@ class Home extends Controller
         $contact = [];
 
         foreach ($lines as $line) {
-            dd(strpos($line, 'BEGIN:VCARD'));
+
             if (strpos($line, 'BEGIN:VCARD') !== false) {
                 $contact = [];
             } elseif (strpos($line, 'END:VCARD') !== false) {
                 $contacts[] = $contact;
             } else {
                 $parts = explode(':', $line);
+                dd($parts);
                 $key = trim($parts[0]);
                 $value = trim($parts[1]);
                 switch ($key) {
