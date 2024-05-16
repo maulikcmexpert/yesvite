@@ -11,10 +11,10 @@
                     </div>
                     <div class="user-name">
                         <div class="d-flex justify-content-center">
-                            <h3>Pristia Candra</h3>
+                            <h3>{{$user->firstname.' '.$user->lastname }}</h3>
                             <span>PRO</span>
                         </div>
-                        <p>Member Since: June, 2023</p>
+                        <p>Member Since: {{ date('F, Y', $user->created_at) }}</p>
                     </div>
                     <div>
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
