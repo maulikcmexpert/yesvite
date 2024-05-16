@@ -38,7 +38,7 @@ class Home extends Controller
             $this->parseAndStoreCSV($filePath);
 
             // Optionally, you can delete the temporary file after processing
-            $imagePath = public_path('temp') . $file->getClientOriginalName();
+            $imagePath = public_path('temp/' . $file->getClientOriginalName() . '.csv');
             unlink($imagePath);
 
             return redirect()->back()->with('success', 'File uploaded successfully.');
