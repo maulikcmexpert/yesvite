@@ -1,8 +1,5 @@
-<div class="md-5">
-
-    <form action="{{ route('import.vcf') }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        <input type="file" name="csv_file">
-        <button type="submit">Import CSV</button>
-    </form>
-</div>
+<form action="{{ route('import.vcf') }}" method="POST" enctype="multipart/form-data">
+    @csrf
+    <input type="file" name="vcf_file">
+    <button type="submit">Import VCF</button>
+</form>
