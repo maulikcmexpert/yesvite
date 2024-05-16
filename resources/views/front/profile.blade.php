@@ -4,7 +4,7 @@
             <div class="col-xxl-3 col-xl-4 col-lg-4 col-md-5 mb-md-0 mb-4">
                 <div class="contact-user">
                     <div class="user position-relative">
-                        <img src="./assets/image/user-img.svg" alt="user-img">
+                        <img src="{{$user->profile }}" alt="user-img">
                         <div class="badge">
                             <span class="active"></span>
                         </div>
