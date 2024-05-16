@@ -18,7 +18,7 @@ class Controller extends BaseController
     {
         if (Session::has('user')) {
 
-            $this->userId = Session::get('user');
+            $this->userId = Session::get('user')['id'];
             dd($this->userId);
         }
     }
