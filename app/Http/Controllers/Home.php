@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 
 use App\Services\CSVImportService;
+use Illuminate\Support\Facades\Validator;
 
 class Home extends Controller
 {
@@ -28,9 +29,21 @@ class Home extends Controller
 
     public function importCSV(Request $request, CSVImportService $importService)
     {
-        $request->validate([
+        // $request->validate([
+        //     'csv_file' => 'required|mimes:csv|max:2048', // Validate file type and size
+        // ]);
+
+        $validator = Validator::make($request, [
+
             'csv_file' => 'required|mimes:csv,txt|max:2048', // Validate file type and size
         ]);
+
+        if ($validator->fails()) {
+
+            return  redirect()->route('home')->with('error',  $validator->errors()->first());
+        }
+
+
         if ($request->hasFile('csv_file')) {
             $file = $request->file('csv_file');
             $filePath =  $file->move(public_path('temp'),  $file->getClientOriginalName());
