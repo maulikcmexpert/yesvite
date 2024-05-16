@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-
+use Illuminate\Support\Facades\Session;
 use App\Services\CSVImportService;
 use Illuminate\Support\Facades\Validator;
 
@@ -13,7 +13,7 @@ class HomeController extends Controller
     public function index()
     {
 
-
+        dd(session()->all());
         $title = 'Home';
         $page = 'front.home';
         return view('layout', compact(
