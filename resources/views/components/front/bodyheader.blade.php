@@ -55,7 +55,7 @@
                         <li><a class="dropdown-item" href="#">Link 3</a></li>
                     </ul>
                 </div>
-                <?php dd(Session::get('user')); ?>
+                <?php dd(Session::get('user')->profile); ?>
                 <a href="#" class="user-img">
                     <img src="{{}}" alt="user-img">
                 </a>
