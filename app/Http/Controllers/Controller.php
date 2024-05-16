@@ -7,6 +7,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class Controller extends BaseController
 {
@@ -15,7 +16,7 @@ class Controller extends BaseController
 
     public function __construct()
     {
-        $this->userId = Auth::guard('web')->user();
+        $this->userId = Session::get('user');
         dd($this->userId);
     }
 }
