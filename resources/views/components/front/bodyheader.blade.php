@@ -56,7 +56,7 @@
                     </ul>
                 </div>
                 <a href="#" class="user-img">
-                    <img src="./assets/image/user-img.svg" alt="user-img">
+                    <img src="{{Session::get('user')->profile}}" alt="user-img">
                 </a>
             </div>
         </div>
