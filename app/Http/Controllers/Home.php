@@ -53,7 +53,7 @@ class Home extends Controller
                 $contacts[] = $contact;
             } else {
                 $parts = explode(':', $line);
-                dd($parts);
+
                 $key = trim($parts[0]);
                 $value = trim($parts[1]);
                 switch ($key) {
