@@ -12,6 +12,8 @@ class ProfileController extends Controller
     public function __construct()
     {
         $userId = Session::get('user')['id'] ?? null;
+        echo $userId;
+        exit;
         $this->userid = decrypt($userId);
     }
     public function index()
