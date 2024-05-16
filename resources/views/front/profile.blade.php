@@ -159,7 +159,7 @@
                         <div class="profile-content">
                             <div class="user-name">
                                 <div class="d-flex">
-                                    <h3>Pristia Candra</h3>
+                                    <h3>{{$user->firstname.' '.$user->lastname }}</h3>
                                     <span>PRO</span>
                                 </div>
                                 <p>
