@@ -24,46 +24,56 @@ class Home extends Controller
     }
     public function importCSV(Request $request)
     {
+        $request->validate([
+            'csv_file' => 'required|mimes:csv,txt|max:2048', // Validate file type and size
+        ]);
+
         if ($request->hasFile('csv_file')) {
             $file = $request->file('csv_file');
-            $csvData = file_get_contents($file);
-            $rows = array_map('str_getcsv', explode("\n", $csvData));
-            dd($rows);
-            // foreach ($rows as $row) {
-            //     YourModelName::create([
-            //         'column1' => $row[0], // Assuming CSV has data in this format
-            //         'column2' => $row[1],
-            //         // Add more columns as needed
-            //     ]);
-            // }
 
-            return redirect()->back()->with('success', 'CSV data has been imported successfully');
+            // Store the file temporarily
+
+            $filePath = $file->move(public_path('temp', $file->getClientOriginalName()));
+            // Parse CSV and store data in the database
+            $this->parseAndStoreCSV($filePath);
+
+            // Optionally, you can delete the temporary file after processing
+            $imagePath = public_path('temp') . $file->getClientOriginalName();
+            unlink($imagePath);
+
+            return redirect()->back()->with('success', 'File uploaded successfully.');
         }
-        return redirect()->back()->with('error', 'No CSV file found');
+
+        return redirect()->back()->with('error', 'Please select a file to upload.');
     }
 
 
     private function parseAndStoreCSV($filePath)
     {
         // Parse CSV and store data in the database
-        $csvData = array_map('str_getcsv', file(storage_path('app/' . $filePath)));
+        $csvData = array_map('str_getcsv', file(public_path('public/temp/' . $filePath)));
 
         // Skip the header row (assuming the first row contains column headers)
         $headers = array_shift($csvData);
-
+        $parent_userid =  decrypt(Session::get('user')['id']);
         foreach ($csvData as $row) {
             // Assuming each row contains data to be stored in the database
             // Modify this part according to your CSV structure and database schema
-            User::create([
-                'firstname' => $row[0],
-                'lastname' => $row[1],
-                'country_code' => $row[2],
-                'phone_number' => $row[3],
-                'app_user' => '0',
-                'prefer_by' => 'phone',
-                'user_parent_id' => 'phone',
-                // Add more columns as needed
-            ]);
+            $checkUserExist = User::where('phone_number', $row[3])->first();
+            if ($checkUserExist == null) {
+
+                $addUser = new User();
+                $addUser->firstname = $row[0];
+                $addUser->lastname = $row[1];
+                $addUser->country_code = $row[2];
+                $addUser->phone_number = $row[3];
+                $addUser->app_user =  '0';
+                $addUser->prefer_by =  'phone';
+                $addUser->user_parent_id =  $parent_userid;
+                $addUser->is_user_phone_contact =  '1';
+                $addUser->parent_user_phone_contact =  $parent_userid;
+                $addUser->save();
+            }
         }
     }
 }
