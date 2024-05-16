@@ -46,27 +46,27 @@ class Home extends Controller
         $contact = [];
 
         foreach ($lines as $line) {
-
             if (strpos($line, 'BEGIN:VCARD') !== false) {
                 $contact = [];
             } elseif (strpos($line, 'END:VCARD') !== false) {
                 $contacts[] = $contact;
             } else {
                 $parts = explode(':', $line);
-
-                $key = trim($parts[0]);
-                $value = trim($parts[1]);
-                switch ($key) {
-                    case 'FN':
-                        $contact['name'] = $value;
-                        break;
-                    case 'EMAIL':
-                        $contact['email'] = $value;
-                        break;
-                    case 'TEL':
-                        $contact['phone'] = $value;
-                        break;
-                        // Add more fields as needed
+                if (count($parts) >= 2) {
+                    $key = trim($parts[0]);
+                    $value = trim($parts[1]);
+                    switch ($key) {
+                        case 'FN':
+                            $contact['name'] = $value;
+                            break;
+                        case 'EMAIL':
+                            $contact['email'] = $value;
+                            break;
+                        case 'TEL':
+                            $contact['phone'] = $value;
+                            break;
+                            // Add more fields as needed
+                    }
                 }
             }
         }
