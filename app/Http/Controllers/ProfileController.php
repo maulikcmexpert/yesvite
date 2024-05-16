@@ -8,19 +8,10 @@ use Illuminate\Support\Facades\Session;
 
 class ProfileController extends Controller
 {
-    protected $userid;
-    public function __construct()
-    {
-        dd(session()->all());
-        $userId = Session::get('user')['id'] ?? null;
-        echo $userId;
-        exit;
-        $this->userid = decrypt($userId);
-    }
     public function index()
     {
 
-
+        dd(session()->all());
         $title = 'Profile';
         $page = 'front.profile';
         $user = User::findOrFail($this->userid);
