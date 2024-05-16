@@ -2,7 +2,7 @@
     <div class="container">
         <div class="header-wrap">
             <div class="header-left">
-                <a href="" class="header-logo">
+                <a href="{{route('home')}}" class="header-logo">
                     <svg width="107" height="24" viewBox="0 0 107 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M12.4466 14.0336L6.87119 8.45816C5.74269 7.32966 5.17285 5.95535 5.17285 4.35757V0L10.7483 5.57546C11.8768 6.70396 12.4466 8.07827 12.4466 9.67605C12.4466 8.07827 13.0165 6.70396 14.145 5.57546L19.7204 0V4.35757C19.7204 5.95535 19.1506 7.32966 18.0221 8.45816L12.4466 14.0336Z" fill="#E73E71" />
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M21.4413 9.96627L15.8658 15.5417C14.7373 16.6702 14.1675 18.0445 14.1675 19.6423V23.9999L17.6088 20.5585L23.1843 14.9831C24.3128 13.8546 24.8826 12.4803 24.8826 10.8825V6.5249L21.4413 9.96627Z" fill="#E73E71" />
