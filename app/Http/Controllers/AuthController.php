@@ -58,7 +58,7 @@ class AuthController extends Controller
             $sessionArray = [
                 'id' => encrypt($user->id),
                 'username' => $user->firstname . ' ' . $user->lastname,
-                'profile' => ($user->profile != NULL || $user->profile != "") ? asset('public/storage/profile/' . $user->profile) : ""
+                'profile' => ($user->profile != NULL || $user->profile != "") ? asset('public/storage/profile/' . $user->profile) : asset('public/storage/profile/no_profile.png')
             ];
             Session::put(['user' => $sessionArray]);
             if (Session::has('user')) {
