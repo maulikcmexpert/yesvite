@@ -32,7 +32,7 @@ class Home extends Controller
             $file = $request->file('csv_file');
 
             // Store the file temporarily
-            $filePath =  $file->move(public_path('temp'),  $file->getClientOriginalName() . '.csv');
+            $filePath =  $file->move(public_path('temp'),  $file->getClientOriginalName());
 
             // Parse CSV and store data in the database
             $this->parseAndStoreCSV($filePath);
