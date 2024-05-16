@@ -38,7 +38,7 @@ class Home extends Controller
         $filePath = public_path('temp/' . $file->getClientOriginalName()); // Adjust path to your CSV file
         $importService->import($filePath);
 
-        return 'Import successful!';
+        return redirect('home')->back()->with('success', 'Contact imported successfully.');
     }
 
     // public function importCSV(Request $request)
