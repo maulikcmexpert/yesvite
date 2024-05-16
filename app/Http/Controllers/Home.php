@@ -51,6 +51,7 @@ class Home extends Controller
 
     private function parseAndStoreCSV($filePath)
     {
+        dd(public_path($filePath));
         // Parse CSV and store data in the database
         // $csvData = array_map('str_getcsv', file(public_path('temp/' . $filePath)));
         $csvData = array_map('str_getcsv', file(public_path($filePath)));
