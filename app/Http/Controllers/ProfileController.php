@@ -11,6 +11,7 @@ class ProfileController extends Controller
     protected $userid;
     public function __construct()
     {
+        dd(session()->all());
         $userId = Session::get('user')['id'] ?? null;
         echo $userId;
         exit;
