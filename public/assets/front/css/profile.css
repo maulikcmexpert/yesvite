@@ -211,12 +211,12 @@
     -ms-border-radius: 16px;
     -o-border-radius: 16px;
 }
-    [type="file"] {
+    /* [type="file"] {
     height: 0;  
     width: 0;
     overflow: hidden;
     display: none;
-}
+} */
 
 .Edit-img
 {
