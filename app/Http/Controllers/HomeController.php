@@ -2,18 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Session;
-
 use Illuminate\Http\Request;
 use App\Models\User;
 
 use App\Services\CSVImportService;
 use Illuminate\Support\Facades\Validator;
 
-class Home extends Controller
+class HomeController extends Controller
 {
-
-
     public function index()
     {
 

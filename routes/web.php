@@ -4,7 +4,9 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\{
-    Home
+
+    HomeController,
+    ProfileController
 };
 /*
 |--------------------------------------------------------------------------
@@ -27,8 +29,9 @@ use App\Http\Controllers\{
 Route::middleware('checkUserExist')->group(function () {
 
 
-    Route::get('home', [Home::class, 'index'])->name('home');
-    Route::post('/import-csv',  [Home::class, 'importCSV'])->name('import.csv');
+    Route::get('home', [HomeController::class, 'index'])->name('home');
+    Route::post('/import-csv',  [HomeController::class, 'importCSV'])->name('import.csv');
+    Route::post('profile',  [ProfileController::class, 'index'])->name('profile');
 });
 
 Route::controller(AuthController::class)->group(function () {
