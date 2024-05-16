@@ -28,7 +28,7 @@ Route::middleware('checkUserExist')->group(function () {
 
 
     Route::get('home', [Home::class, 'index'])->name('home');
-    Route::post('/import-vcf',  [Home::class, 'importVCF'])->name('import.vcf');
+    Route::post('/import-csv',  [Home::class, 'importCSV'])->name('import.csv');
 });
 
 Route::controller(AuthController::class)->group(function () {
