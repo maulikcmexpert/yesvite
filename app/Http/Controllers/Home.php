@@ -29,20 +29,16 @@ class Home extends Controller
 
     public function importCSV(Request $request, CSVImportService $importService)
     {
-        // $request->validate([
-        //     'csv_file' => 'required|mimes:csv|max:2048', // Validate file type and size
-        // ]);
-
-        $validator = Validator::make($request, [
-
-            'csv_file' => 'required|mimes:csv,txt|max:2048', // Validate file type and size
+        $validator = Validator::make($request->all(), [
+            'csv_file' => 'required|mimes:csv|max:2048', // Validate file type and size
         ]);
 
         if ($validator->fails()) {
-
-            return  redirect()->route('home')->with('error',  $validator->errors()->first());
+            // Validation failed
+            $errors = $validator->errors()->first();
+            // Handle the validation errors, log them, or return a response
+            return  redirect()->route('home')->with('error', $errors);
         }
-
 
         if ($request->hasFile('csv_file')) {
             $file = $request->file('csv_file');
