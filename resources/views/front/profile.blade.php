@@ -153,7 +153,7 @@
                         <div class="profile-img">
                             <img src="./assets/image/Frame 1000005835.png" alt="" class="bg-img">
                             <div class="user-img">
-                                <img src="./assets/image/user-img.svg" alt="user-img">
+                                <img src="{{$user->profile }}" alt="user-img">
                             </div>
                         </div>
                         <div class="profile-content">
