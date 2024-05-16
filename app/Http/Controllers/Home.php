@@ -44,8 +44,9 @@ class Home extends Controller
         $contacts = [];
         $lines = explode("\n", $vcfData);
         $contact = [];
-        dd($lines);
+
         foreach ($lines as $line) {
+            dd($line);
             if (strpos($line, 'BEGIN:VCARD') !== false) {
                 $contact = [];
             } elseif (strpos($line, 'END:VCARD') !== false) {
