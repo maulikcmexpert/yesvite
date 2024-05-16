@@ -10,4 +10,11 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    private $userId;
+
+    public function __construct()
+    {
+        $this->userId = Auth::guard('web')->user();
+        dd($this->userId);
+    }
 }
