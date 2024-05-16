@@ -14,7 +14,7 @@
                             <h3>{{$user->firstname.' '.$user->lastname }}</h3>
                             <span>PRO</span>
                         </div>
-                        <p>Member Since: {{ date('F, Y', $user->created_at) }}</p>
+                        <p>Member Since: {{ $user->join_date }}</p>
                     </div>
                     <div>
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
