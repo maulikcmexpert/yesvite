@@ -13,7 +13,7 @@ class HomeController extends Controller
     public function index()
     {
 
-        dd(session()->all());
+
         $title = 'Home';
         $page = 'front.home';
         return view('layout', compact(
