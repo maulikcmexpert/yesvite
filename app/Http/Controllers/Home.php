@@ -30,7 +30,7 @@ class Home extends Controller
     public function importCSV(Request $request, CSVImportService $importService)
     {
         $validator = Validator::make($request->all(), [
-            'csv_file' => 'required|mimes:csv|max:2048', // Validate file type and size
+            'csv_file' => 'required|mimes:csv,txt|max:2048', // Validate file type and size
         ]);
 
         if ($validator->fails()) {
