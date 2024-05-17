@@ -11,14 +11,10 @@ use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
-    public $user;
-    public function __construct()
-    {
-    }
+
     public function index()
     {
-        $user = Auth::guard('web')->user();
-        dd($user);
+
         $id = decrypt(session()->get('user')['id']);
         $title = 'Profile';
         $page = 'front.profile';
