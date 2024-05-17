@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $(document).on("click", "#save_changes", function () {
+    $("#save_changes").click(function () {
         var formActionURL = $("#updateUserForm").attr("action");
 
         $.ajax({
