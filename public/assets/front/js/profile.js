@@ -6,10 +6,10 @@ $(document).ready(function () {
             lastname: "required",
             gender: "required",
             birth_date: "required",
-            email: {
-                required: true,
-                email: true,
-            },
+            // email: {
+            //     required: true,
+            //     email: true,
+            // },
             phone_number: {
                 required: true,
                 digits: true,
@@ -28,7 +28,7 @@ $(document).ready(function () {
             lastname: "Please enter your last name",
             gender: "Please select your gender",
             birth_date: "Please enter your birth date",
-            email: "Please enter a valid email address",
+            // email: "Please enter a valid email address",
             phone_number: "Please enter a valid phone number",
             address: "Please enter your address",
             city: "Please enter your city",

@@ -474,12 +474,12 @@
                                     <input type="date" class="form-control" id="birth_date" placeholder="Birthday" value=" {{$user->birth_date}}" name="birth_date">
                                 </div>
                             </div>
-                            <div class="col-lg-12">
+                            <!-- <div class="col-lg-12">
                                 <div class="input-form">
                                     <label for="email" class="form-label">Email Address</label>
                                     <input type="email" class="form-control" id="email" placeholder="Email Address" value=" {{$user->email}}" name="email">
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="col-lg-12">
                                 <div class="input-form">
                                     <label for="phone" class="form-label">Phone Number</label>
