@@ -13,7 +13,8 @@ class ProfileController extends Controller
 {
     public function index()
     {
-
+        $user = Auth::guard('web')->user();
+        dd($user);
         $id = decrypt(session()->get('user')['id']);
         $title = 'Profile';
         $page = 'front.profile';
