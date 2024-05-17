@@ -53,12 +53,12 @@ class ProfileController extends Controller
             $userUpdate->firstname = $request->firstname;
 
             $userUpdate->lastname = $request->lastname;
-            $userUpdate->gender = ($request->gender != "") ? $request->gender : $userUpdate->gender;
-            $userUpdate->birth_date = ($request->birth_date != "") ? $request->birth_date : $userUpdate->birth_date;
-            $userUpdate->country_code = ($request->country_code != "") ? $request->country_code : $userUpdate->country_code;
-            $userUpdate->phone_number = ($request->phone_number != "") ? $request->phone_number : $userUpdate->phone_number;
-            $userUpdate->about_me = ($request->about_me != "") ? $request->about_me : $userUpdate->about_me;
-            $userUpdate->zip_code = ($request->zip_code != "") ? $request->zip_code : $userUpdate->zip_code;
+            $userUpdate->gender = ($request->gender != "" || $request->gender != NULL) ? $request->gender : $userUpdate->gender;
+            $userUpdate->birth_date = ($request->birth_date != "" || $request->birth_date != NULL) ? $request->birth_date : $userUpdate->birth_date;
+            $userUpdate->country_code = ($request->country_code != "" || $request->country_code != NULL) ? $request->country_code : $userUpdate->country_code;
+            $userUpdate->phone_number = ($request->phone_number != ""  || $request->phone_number != NULL)  ? $request->phone_number : $userUpdate->phone_number;
+            $userUpdate->about_me = ($request->about_me != "" || $request->about_me != NULL) ? $request->about_me : $userUpdate->about_me;
+            $userUpdate->zip_code = ($request->zip_code != "" || $request->zip_code != NULL) ? $request->zip_code : $userUpdate->zip_code;
             // if ($userUpdate->account_type == '1') {
             //     $validator = Validator::make($request, [
             //         'company_name' => 'required',
@@ -66,9 +66,9 @@ class ProfileController extends Controller
             //     $userUpdate->company_name = $request->company_name;
             // }
             $userUpdate->address = ($request->address != "") ? $request->address : $userUpdate->address;
-            $userUpdate->address_2 = (isset($request->address_2)  && $request->address_2 != "") ? $request->address_2 : $userUpdate->address_2;
-            $userUpdate->city = ($request->city != "") ? $request->city : $userUpdate->city;
-            $userUpdate->state = ($request->state != "") ? $request->state : $userUpdate->state;
+            $userUpdate->address_2 = (isset($request->address_2)  && $request->address_2 != "" || $request->address_2 != NULL) ? $request->address_2 : $userUpdate->address_2;
+            $userUpdate->city = ($request->city != "" || $request->city != NULL) ? $request->city : $userUpdate->city;
+            $userUpdate->state = ($request->state != "" ||  $request->state != NULL) ? $request->state : $userUpdate->state;
             $userUpdate->save();
             DB::commit();
 
