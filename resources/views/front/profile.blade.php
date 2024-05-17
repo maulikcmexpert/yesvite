@@ -438,7 +438,7 @@
                             </label>
                         </div> -->
                     </div>
-                    <form method="POST" action="route('')">
+                    <form method="POST" action="route('profile.update')">
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="input-form">

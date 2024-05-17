@@ -32,4 +32,10 @@ class ProfileController extends Controller
             'user',
         ));
     }
+
+    public function update(Request $request)
+    {
+        $user = Auth::guard('web')->user();
+        dd($user);
+    }
 }
