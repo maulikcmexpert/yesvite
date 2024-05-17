@@ -1,15 +1,14 @@
 $(document).ready(function () {
     $("#save_changes").click(function () {
         var formActionURL = $("#updateUserForm").attr("action");
-
+        var formData = $("#updateUserForm").serialize();
         $.ajax({
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
             method: "POST",
             url: formActionURL,
-            dataType: "json",
-
+            data: formData,
             success: function (output) {
                 if (output == true) {
                     table.ajax.reload();
