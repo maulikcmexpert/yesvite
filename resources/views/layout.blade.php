@@ -12,7 +12,7 @@
     @include($page)
 
 
-    <x-front.footer js={{array($js)}} />
+    <x-front.footer :js="json_encode($js)" />
 </body>
 
 </html>
