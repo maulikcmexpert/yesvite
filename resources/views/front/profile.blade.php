@@ -471,7 +471,7 @@
                             <div class="col-lg-12">
                                 <div class="input-form">
                                     <label for="birthday" class="form-label">Birthday</label>
-                                    <input type="date" class="form-control" id="birth_date" placeholder="Birthday" value=" {{$user->birth_date}}" name="birth_date">
+                                    <input type="date" class="form-control" id="birth_date" placeholder="Birthday" value=" {{ $user->birth_date }}" name="birth_date">
                                 </div>
                             </div>
                             <!-- <div class="col-lg-12">
