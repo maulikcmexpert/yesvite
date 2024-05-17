@@ -6,6 +6,7 @@
 <!-- custom-js -->
 <script src="./assets/js/common.js"></script>
 
+{{dd($js)}}
 @if(isset($js))
 
 @foreach($js as $value)
