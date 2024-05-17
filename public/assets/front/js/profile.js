@@ -9,7 +9,7 @@ $(document).ready(function () {
             method: "POST",
             url: formActionURL,
             dataType: "json",
-            data: { _token: "{{ csrf_token() }}" },
+
             success: function (output) {
                 if (output == true) {
                     table.ajax.reload();
