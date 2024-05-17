@@ -4182,7 +4182,7 @@ class ApiControllerv2 extends Controller
                         }
                     }
                 }
-                $eventDetail['events_schedule_list'] = [];
+                // $eventDetail['events_schedule_list'] = [];
                 $eventDetail['events_schedule_data'] = null;
                 if ($getEventData->event_schedule->isNotEmpty()) {
 
