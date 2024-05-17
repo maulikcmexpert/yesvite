@@ -8,9 +8,7 @@
 
 
 @if(isset($js))
-@php
-$js = json_decode($js);
-@endphp
+
 @foreach($js as $value)
 
 <script src="{{ asset('assets/front') }}/js/{{$value}}.js"></script>
