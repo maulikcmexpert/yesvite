@@ -459,13 +459,13 @@
                             <div class="col-lg-6">
                                 <div class="input-form">
                                     <input type="radio" id="male" name="gender" {{ ($user->gender=='male')?'checked':''}} />
-                                    <label for="option1">Male</label>
+                                    <label for="male">Male</label>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="input-form">
                                     <input type="radio" id="female" name="gender" {{ ($user->gender=='female')?'checked':''}} />
-                                    <label for="option2">Female</label>
+                                    <label for="female">Female</label>
                                 </div>
                             </div>
                             <div class="col-lg-12">
