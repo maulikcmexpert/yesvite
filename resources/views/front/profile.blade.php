@@ -439,6 +439,7 @@
                         </div> -->
                     </div>
                     <form method="POST" id="updateUserForm" action="{{route('profile.update',encrypt($user->id))}}">
+                        @csrf
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="input-form">
