@@ -438,7 +438,7 @@
                             </label>
                         </div> -->
                     </div>
-                    <form method="POST" action="{{route('profile.update',encrypt($user->id))}}">
+                    <form method="POST" id="updateUserForm" action="{{route('profile.update',encrypt($user->id))}}">
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="input-form">
