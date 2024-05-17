@@ -7,7 +7,7 @@
 <script src="{{ asset('assets/admin/js/jquery-validate.js') }}"></script>
 
 <script src="{{ asset('assets/admin/js/jquery-validate-additional.js') }}"></script>
-<script src="{{ asset('assets/admin/js/common.js') }}"></script>
+<script src="{{ asset('assets/front/js/common.js') }}"></script>
 
 @if(isset($js))
 
