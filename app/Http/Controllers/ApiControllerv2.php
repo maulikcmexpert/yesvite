@@ -4183,19 +4183,19 @@ class ApiControllerv2 extends Controller
                     }
                 }
                 // $eventDetail['events_schedule_list'] = [];
-                $eventDetail['events_schedule_data'] = null;
+                $eventDetail['events_schedule_list'] = null;
                 if ($getEventData->event_schedule->isNotEmpty()) {
 
-                    $eventDetail['events_schedule_data'] = new stdClass();
+                    $eventDetail['events_schedule_list'] = new stdClass();
                     if ($getEventData->event_schedule->first()->type == '1') {
 
 
-                        $eventDetail['events_schedule_data']->start_time =  ($getEventData->event_schedule->first()->start_time != NULL) ? $getEventData->event_schedule->first()->start_time : "";
+                        $eventDetail['events_schedule_list']->start_time =  ($getEventData->event_schedule->first()->start_time != NULL) ? $getEventData->event_schedule->first()->start_time : "";
 
-                        $eventDetail['events_schedule_data']->event_start_date = ($getEventData->event_schedule->first()->event_date != null) ? $getEventData->event_schedule->first()->event_date : "";
+                        $eventDetail['events_schedule_list']->event_start_date = ($getEventData->event_schedule->first()->event_date != null) ? $getEventData->event_schedule->first()->event_date : "";
                     }
 
-                    $eventDetail['events_schedule_data']->data = [];
+                    $eventDetail['events_schedule_list']->data = [];
                     foreach ($getEventData->event_schedule as $eventsScheduleVal) {
                         if ($eventsScheduleVal->type == '2') {
 
@@ -4205,13 +4205,13 @@ class ApiControllerv2 extends Controller
                             $eventscheduleData["end_time"] = ($eventsScheduleVal->end_time !== null) ? $eventsScheduleVal->end_time : "";
                             $eventscheduleData['event_date'] = ($eventsScheduleVal->event_date != null) ? $eventsScheduleVal->event_date : "";
                             $eventscheduleData["type"] = $eventsScheduleVal->type;
-                            $eventDetail['events_schedule_data']->data[] = $eventscheduleData;
+                            $eventDetail['events_schedule_list']->data[] = $eventscheduleData;
                         }
                     }
                     if ($getEventData->event_schedule->last()->type == '3') {
 
-                        $eventDetail['events_schedule_data']->end_time =  ($getEventData->event_schedule->last()->end_time !== null) ? $getEventData->event_schedule->last()->end_time : "";
-                        $eventDetail['events_schedule_data']->event_end_date = ($getEventData->event_schedule->last()->event_date != null) ? $getEventData->event_schedule->last()->event_date : "";
+                        $eventDetail['events_schedule_list']->end_time =  ($getEventData->event_schedule->last()->end_time !== null) ? $getEventData->event_schedule->last()->end_time : "";
+                        $eventDetail['events_schedule_list']->event_end_date = ($getEventData->event_schedule->last()->event_date != null) ? $getEventData->event_schedule->last()->event_date : "";
                     }
                 }
                 $eventDetail['greeting_card_list'] = [];
