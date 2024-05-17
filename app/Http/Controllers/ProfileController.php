@@ -23,7 +23,7 @@ class ProfileController extends Controller
         $formatted_date = $date->format('F, Y');
         $formattedNumber = phone($user->phone_number, 'US');
         $user['phone_number'] = $formattedNumber;
-        return $formattedNumber;
+
         $user['join_date'] = $formatted_date;
 
         return view('layout', compact(
