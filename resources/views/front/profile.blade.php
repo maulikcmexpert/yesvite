@@ -400,7 +400,7 @@
                         <form>
                             <div class="position-relative">
                                 <div id="img-preview">
-                                    <img src="./assets/image/Frame 1000005835.png" alt="" class="bg-img">
+                                    <img src="{{$user->bg_profile}}" alt="" class="bg-img">
                                 </div>
                                 <input type="file" id="choose-file" name="choose-file" accept="image/*" />
                                 <a href="#" class="Edit-img" for="choose-file" data-bs-toggle="modal" data-bs-target="#coverImg-modal">
@@ -412,7 +412,7 @@
                             </div>
                         </form>
                         <div class="user-img">
-                            <img src="./assets/image/user-img.svg" alt="user-img">
+                            <img src="{{$user->profile}}" alt="user-img">
                             <a href="#" data-bs-toggle="modal" data-bs-target="#coverProfile-modal">
                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M11.05 4.66652L4.20829 11.9082C3.94996 12.1832 3.69996 12.7249 3.64996 13.0999L3.34162 15.7999C3.23329 16.7749 3.93329 17.4415 4.89996 17.2749L7.58329 16.8165C7.95829 16.7499 8.48329 16.4749 8.74162 16.1915L15.5833 8.94985C16.7666 7.69985 17.3 6.27485 15.4583 4.53319C13.625 2.80819 12.2333 3.41652 11.05 4.66652Z" stroke="#0F172A" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
@@ -443,13 +443,13 @@
                             <div class="col-lg-6">
                                 <div class="input-form">
                                     <label for="text" class="form-label">First Name</label>
-                                    <input type="text" class="form-control" id="text" placeholder="Enter Fname" name="text">
+                                    <input type="text" class="form-control" id="text" placeholder="First Name" name="firstname" value="{{$user->firstname}}">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="input-form">
                                     <label for="text" class="form-label">Last Name</label>
-                                    <input type="text" class="form-control" id="text" placeholder="Enter Lname" name="text">
+                                    <input type="text" class="form-control" id="text" placeholder="Last Name" name="lastname" value="{{$user->lastname}}">
                                 </div>
                             </div>
                             <div class="col-lg-12">
@@ -457,39 +457,39 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="input-form">
-                                    <input type="radio" id="option1" name="foo" checked />
+                                    <input type="radio" id="male" name="gender" {{ ($user->gender=='male')?checked:''}} />
                                     <label for="option1">Male</label>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="input-form">
-                                    <input type="radio" id="option2" name="foo" />
+                                    <input type="radio" id="female" name="gender" {{ ($user->gender=='female')?checked:''}} />
                                     <label for="option2">Female</label>
                                 </div>
                             </div>
                             <div class="col-lg-12">
                                 <div class="input-form">
                                     <label for="birthday" class="form-label">Birthday</label>
-                                    <input type="date" class="form-control" id="birthday" placeholder="" name="birthday">
+                                    <input type="date" class="form-control" id="birth_date" placeholder="Birthday" value=" {{$user->birth_date}}" name="birth_date">
                                 </div>
                             </div>
                             <div class="col-lg-12">
                                 <div class="input-form">
-                                    <label for="email" class="form-label">Work Email Address</label>
-                                    <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+                                    <label for="email" class="form-label">Email Address</label>
+                                    <input type="email" class="form-control" id="email" placeholder="Email Address" value=" {{$user->email}}" name="email">
                                 </div>
                             </div>
                             <div class="col-lg-12">
                                 <div class="input-form">
                                     <label for="phone" class="form-label">Phone Number</label>
-                                    <input type="tel" class="form-control" id="phone" placeholder="Enter phone number" name="phone">
+                                    <input type="tel" class="form-control" id="phone" placeholder="Phone Number" value=" {{$user->phone_number}}" name="phone_number">
                                 </div>
                             </div>
                             <div class="col-lg-12">
                                 <div class="input-form">
                                     <label for="address" class="form-label">Address</label>
                                     <div class="position-relative address-input">
-                                        <input type="text" class="form-control" id="phone" placeholder="Enter Address" name="address">
+                                        <input type="text" class="form-control" id="phone" placeholder="Enter Address" value=" {{$user->address}}" name="address">
                                         <span>
                                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M11.9999 13.4304C13.723 13.4304 15.1199 12.0336 15.1199 10.3104C15.1199 8.5873 13.723 7.19043 11.9999 7.19043C10.2768 7.19043 8.87988 8.5873 8.87988 10.3104C8.87988 12.0336 10.2768 13.4304 11.9999 13.4304Z" stroke="#64748B" stroke-width="1.5" />
@@ -502,39 +502,25 @@
                             <div class="col-lg-12">
                                 <div class="input-form">
                                     <label for="address" class="form-label">City</label>
-                                    <div class="position-relative address-input">
-                                        <select class="form-select">
-                                            <option>New York</option>
-                                            <option>India</option>
-                                            <option>Us</option>
-                                            <option>Uk</option>
-                                        </select>
-                                    </div>
+                                    <input type="text" class="form-control" id="city" placeholder="City" value=" {{$user->city}}" name="city">
                                 </div>
                             </div>
                             <div class="col-lg-12">
                                 <div class="input-form">
                                     <label for="address" class="form-label">State</label>
-                                    <div class="position-relative address-input">
-                                        <select class="form-select">
-                                            <option>Brooklyn</option>
-                                            <option>Gujarat</option>
-                                            <option>Alabama</option>
-                                            <option>Hawaii</option>
-                                        </select>
-                                    </div>
+                                    <input type="text" class="form-control" id="state" placeholder="State" value="{{$user->state}}" name="state">
                                 </div>
                             </div>
                             <div class="col-lg-12">
                                 <div class="input-form">
                                     <label for="code" class="form-label">Zip Code</label>
-                                    <input type="tex" class="form-control" id="code" placeholder="Enter code" name="code">
+                                    <input type="text" class="form-control" id="zip_code" placeholder="Zip Code" name="zip_code">
                                 </div>
                             </div>
                             <div class="col-lg-12">
                                 <div class="input-form">
                                     <label for="code" class="form-label">About School</label>
-                                    <textarea name="" id="">Event Organizer that helps and makes it easier for Event Planners to achieve the goal of carrying out an event. 👋</textarea>
+                                    <textarea name="about_me" id="about_me">{{$user->about_me}}</textarea>
                                 </div>
                             </div>
                         </div>
