@@ -4,8 +4,10 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
 <!-- custom-js -->
-<script src="./assets/js/common.js"></script>
+<script src="{{ asset('assets/admin/js/jquery-validate.js') }}"></script>
 
+<script src="{{ asset('assets/admin/js/jquery-validate-additional.js') }}"></script>
+<script src="./assets/js/common.js"></script>
 
 @if(isset($js))
 
