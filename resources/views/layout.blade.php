@@ -12,7 +12,7 @@
     @include($page)
 
 
-    <x-front.footer />
+    <x-front.footer js={{$js}} />
 </body>
 
 </html>
