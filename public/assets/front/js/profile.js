@@ -49,11 +49,10 @@ $(document).ready(function () {
                 data: formData,
                 success: function (output) {
                     console.log(output.status);
-                    if (output == true) {
-                        table.ajax.reload();
-                        toastr.success("Category Deleted successfully!");
+                    if (output.status == 1) {
+                        toastr.success(output.message);
                     } else {
-                        toastr.error("Category not Deleted!");
+                        toastr.error(output.message);
                     }
                 },
             });
