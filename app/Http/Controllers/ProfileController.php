@@ -33,7 +33,7 @@ class ProfileController extends Controller
             'title',
             'page',
             'user',
-            'profile'
+            'js'
         ));
     }
 
