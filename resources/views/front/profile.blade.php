@@ -471,7 +471,7 @@
                             <div class="col-lg-12">
                                 <div class="input-form">
                                     <label for="birthday" class="form-label">Birthday</label>
-                                    <input type="date" class="form-control" id="birth_date" placeholder="Birthday" value=" {{ $user->birth_date }}" name="birth_date">
+                                    <input type="date" class="form-control" id="birth_date" placeholder="Birthday" value="{{ $user->birth_date }}" name="birth_date">
                                 </div>
                             </div>
                             <!-- <div class="col-lg-12">
@@ -483,14 +483,14 @@
                             <div class="col-lg-12">
                                 <div class="input-form">
                                     <label for="phone" class="form-label">Phone Number</label>
-                                    <input type="tel" class="form-control" id="phone" placeholder="Phone Number" value=" {{$user->phone_number}}" name="phone_number">
+                                    <input type="tel" class="form-control" id="phone" placeholder="Phone Number" value="{{$user->phone_number}}" name="phone_number">
                                 </div>
                             </div>
                             <div class="col-lg-12">
                                 <div class="input-form">
                                     <label for="address" class="form-label">Address</label>
                                     <div class="position-relative address-input">
-                                        <input type="text" class="form-control" id="phone" placeholder="Enter Address" value=" {{$user->address}}" name="address">
+                                        <input type="text" class="form-control" id="phone" placeholder="Enter Address" value="{{$user->address}}" name="address">
                                         <span>
                                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M11.9999 13.4304C13.723 13.4304 15.1199 12.0336 15.1199 10.3104C15.1199 8.5873 13.723 7.19043 11.9999 7.19043C10.2768 7.19043 8.87988 8.5873 8.87988 10.3104C8.87988 12.0336 10.2768 13.4304 11.9999 13.4304Z" stroke="#64748B" stroke-width="1.5" />
@@ -503,7 +503,7 @@
                             <div class="col-lg-12">
                                 <div class="input-form">
                                     <label for="address" class="form-label">City</label>
-                                    <input type="text" class="form-control" id="city" placeholder="City" value=" {{$user->city}}" name="city">
+                                    <input type="text" class="form-control" id="city" placeholder="City" value="{{$user->city}}" name="city">
                                 </div>
                             </div>
                             <div class="col-lg-12">
@@ -515,7 +515,7 @@
                             <div class="col-lg-12">
                                 <div class="input-form">
                                     <label for="code" class="form-label">Zip Code</label>
-                                    <input type="text" class="form-control" id="zip_code" placeholder="Zip Code" name="zip_code">
+                                    <input type="text" class="form-control" id="zip_code" placeholder="Zip Code" value="{{$user->zip_code}}" name="zip_code">
                                 </div>
                             </div>
                             <div class="col-lg-12">
