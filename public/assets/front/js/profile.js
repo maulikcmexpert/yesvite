@@ -3,9 +3,9 @@ $(document).ready(function () {
         var formActionURL = $("#updateUserForm").attr("action");
         var formData = $("#updateUserForm").serialize();
         $.ajax({
-            headers: {
-                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-            },
+            // headers: {
+            //     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            // },
             method: "POST",
             url: formActionURL,
             data: formData,
