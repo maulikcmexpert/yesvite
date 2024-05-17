@@ -5,3 +5,13 @@
 
 <!-- custom-js -->
 <script src="./assets/js/common.js"></script>
+
+@if(isset($js))
+
+@foreach($js as $value)
+
+<script src="{{ asset('assets/front') }}/js/{{$value}}.js"></script>
+
+@endforeach
+
+@endif
