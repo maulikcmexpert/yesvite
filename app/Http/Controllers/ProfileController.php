@@ -37,7 +37,8 @@ class ProfileController extends Controller
         ));
     }
 
-    public function update(Request $request)
+    public function update(string $id, Request $request)
     {
+        dd($request);
     }
 }
