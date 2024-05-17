@@ -11,10 +11,9 @@ use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
-    protected $user;
+    public $user;
     public function __construct()
     {
-
         $this->user = Auth::guard('web')->user();
     }
     public function index()
