@@ -2367,7 +2367,7 @@ class ApiControllerv2 extends Controller
             $user->visible = $input["privacy_visible"];
 
             if ($user->save()) {
-                if ($input["privacy_visible"] == '3') {
+                if ($input["privacy_visible"] == '1') {
                     $privacyData = UserProfilePrivacy::where('user_id', $user->id)->count();
                     if ($privacyData == 0) {
                         foreach ($input['profile_privacy'] as $value) {

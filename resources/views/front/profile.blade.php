@@ -438,7 +438,7 @@
                             </label>
                         </div> -->
                     </div>
-                    <form action="">
+                    <form method="POST" action="route('')">
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="input-form">
