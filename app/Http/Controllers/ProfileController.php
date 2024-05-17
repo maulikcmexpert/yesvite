@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use libphonenumber\PhoneNumberUtil;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
