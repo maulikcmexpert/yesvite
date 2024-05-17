@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
-
+use libphonenumber\PhoneNumberUtil;
 use Carbon\Carbon;
 
 class ProfileController extends Controller
@@ -21,7 +21,9 @@ class ProfileController extends Controller
         $user['bg_profile'] = ($user->bg_profile != null) ? asset('public/storage/bg_profile/' . $user->bg_profileprofile) : asset('public/assets/front/image/Frame 1000005835.png');
         $date = Carbon::parse($user->created_at);
         $formatted_date = $date->format('F, Y');
-
+        $formattedNumber = phone($user->phone_number, 'US');
+        $user['phone_number'] = $formattedNumber;
+        return $formattedNumber;
         $user['join_date'] = $formatted_date;
 
         return view('layout', compact(
