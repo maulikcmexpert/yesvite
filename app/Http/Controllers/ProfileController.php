@@ -18,6 +18,7 @@ class ProfileController extends Controller
         $id = decrypt(session()->get('user')['id']);
         $title = 'Profile';
         $page = 'front.profile';
+        $js = ['profile'];
         $user = User::findOrFail($id);
         $user['profile'] = ($user->profile != null) ? asset('public/storage/profile/' . $user->profile) : asset('public/storage/profile/no_profile.png');
         $user['bg_profile'] = ($user->bg_profile != null) ? asset('public/storage/bg_profile/' . $user->bg_profileprofile) : asset('public/assets/front/image/Frame 1000005835.png');
@@ -32,6 +33,7 @@ class ProfileController extends Controller
             'title',
             'page',
             'user',
+            'profile'
         ));
     }
 

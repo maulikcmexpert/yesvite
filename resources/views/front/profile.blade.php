@@ -531,7 +531,7 @@
             <div class="modal-footer">
                 <div class="d-flex justify-content-end">
                     <a href="#" class="cmn-btn">Edit Password</a>
-                    <button type="button" class="cmn-btn support-btn">Save Changes</button>
+                    <button type="button" class="cmn-btn support-btn" id="save_changes">Save Changes</button>
                 </div>
             </div>
         </div>
