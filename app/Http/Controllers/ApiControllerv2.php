@@ -2293,6 +2293,7 @@ class ApiControllerv2 extends Controller
                     'country_code' => empty($user->country_code) ? "" : strval($user->country_code),
                     'phone_number' => empty($user->phone_number) ? "" : $user->phone_number,
                     'visible' =>  $user->visible,
+                    'message_privacy' =>  $user->message_privacy,
                     'photo_via_wifi' =>  $user->photo_via_wifi,
                     'enable_face_id_login' =>  $user->enable_face_id_login,
                     'profile_privacy' =>  $getUserPrivacyPolicy,
