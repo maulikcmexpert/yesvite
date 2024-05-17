@@ -11,9 +11,11 @@ class footer extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct()
+
+    public $js = "";
+    public function __construct($js)
     {
-        //
+        $this->js = $js;
     }
 
     /**
