@@ -637,7 +637,8 @@ class ApiControllerv2 extends Controller
                         'total_events' => $totalEvent,
                         'visible' => $value->user->visible,
                         'total_photos' => $totalEventPhotos,
-                        'comments' => $comments
+                        'comments' => $comments,
+                        'message_privacy' => $value->user->message_privacy
                     ];
 
                     $eventList[] = $eventDetail;
@@ -6984,6 +6985,7 @@ class ApiControllerv2 extends Controller
             $coHostDetail['email'] = (empty($eventDetail->user->email) || $eventDetail->user->email == NULL) ? "" : $eventDetail->user->email;
 
             $coHostDetail['phone_number'] = (empty($eventDetail->user->phone_number) || $eventDetail->user->phone_number == NULL) ? "" : $eventDetail->user->phone_number;
+            $coHostDetail['message_privacy'] =  $eventDetail->user->message_privacy;
 
             $eventDetails['co_hosts'] = $coHostDetail;
 
@@ -10136,7 +10138,8 @@ class ApiControllerv2 extends Controller
                         'total_events' => $totalEvent,
                         'visible' => $value->user->visible,
                         'total_photos' => $totalEventPhotos,
-                        'comments' => $comments
+                        'comments' => $comments,
+                        'message_privacy' =>  $value->user->message_privacy
                     ];
 
 

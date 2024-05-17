@@ -73,6 +73,7 @@ class ProfileController extends Controller
             DB::commit();
 
             return response()->json(['status' => 1, 'message' => "Changes Saved!"]);
+            return  redirect()->route('home')->with('success', 'Contact imported successfully.');
         } catch (QueryException $e) {
             DB::Rollback();
             return response()->json(['status' => 0, 'message' => "db error"]);
