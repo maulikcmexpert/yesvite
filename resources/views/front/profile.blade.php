@@ -328,25 +328,25 @@
             <div class="modal-body">
                 <div class="profile-model profile-wrapper">
                     <div class="profile-img">
-                        <img src="./assets/image/Frame 1000005835.png" alt="" class="bg-img">
+                        <img src="{{$user->bg_profile }}" alt="" class="bg-img">
                         <div class="user-img">
-                            <img src="./assets/image/user-img.svg" alt="user-img">
+                            <img src="{{$user->profile }}" alt="user-img">
                         </div>
                     </div>
                     <div class="profile-content">
                         <div class="user-name">
                             <div class="d-flex">
-                                <h3>Pristia Candra</h3>
+                                <h3>{{$user->firstname.' '.$user->lastname }}</h3>
                                 <span>PRO</span>
                             </div>
-                            <p>
+                            <!-- <p>
                                 <svg class="me-1" width="11" height="12" viewBox="0 0 11 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M10.1691 4.07692C9.60035 1.57442 7.41743 0.447754 5.49993 0.447754C5.49993 0.447754 5.49993 0.447754 5.49451 0.447754C3.58243 0.447754 1.3941 1.569 0.825346 4.0715C0.191596 6.8665 1.90326 9.23359 3.45243 10.7232C4.0266 11.2757 4.76326 11.5519 5.49993 11.5519C6.2366 11.5519 6.97326 11.2757 7.54201 10.7232C9.09118 9.23359 10.8028 6.87192 10.1691 4.07692ZM5.49993 6.79067C4.55743 6.79067 3.79368 6.02692 3.79368 5.08442C3.79368 4.14192 4.55743 3.37817 5.49993 3.37817C6.44243 3.37817 7.20618 4.14192 7.20618 5.08442C7.20618 6.02692 6.44243 6.79067 5.49993 6.79067Z" fill="#CBD5E1" />
                                 </svg>
                                 New York, NY
-                            </p>
-                            <h6>Event Organizer that helps and makes it easier for Event Planners to achieve the goal of carrying out an event. 👋 </h6>
-                            <p>Member Since: June, 2023</p>
+                            </p> -->
+                            <h6>{{$user->about_me }}</h6>
+                            <p>Member Since:{{$user->join_date }}</p>
                         </div>
                         <div class="user-tab-content">
                             <div class="text-center">
@@ -368,7 +368,7 @@
                                     <path d="M7.99984 8.00016C9.84079 8.00016 11.3332 6.50778 11.3332 4.66683C11.3332 2.82588 9.84079 1.3335 7.99984 1.3335C6.15889 1.3335 4.6665 2.82588 4.6665 4.66683C4.6665 6.50778 6.15889 8.00016 7.99984 8.00016Z" fill="#CBD5E1" />
                                     <path d="M7.99994 9.6665C4.65994 9.6665 1.93994 11.9065 1.93994 14.6665C1.93994 14.8532 2.08661 14.9998 2.27327 14.9998H13.7266C13.9133 14.9998 14.0599 14.8532 14.0599 14.6665C14.0599 11.9065 11.3399 9.6665 7.99994 9.6665Z" fill="#CBD5E1" />
                                 </svg>
-                                <span>Female</span>
+                                <span>{{$user->gender }}</span>
                             </div>
 
                         </div>
