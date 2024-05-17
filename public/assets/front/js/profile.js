@@ -48,7 +48,7 @@ $(document).ready(function () {
                 url: formActionURL,
                 data: formData,
                 success: function (output) {
-                    console.log(output);
+                    console.log(output.status);
                     if (output == true) {
                         table.ajax.reload();
                         toastr.success("Category Deleted successfully!");
