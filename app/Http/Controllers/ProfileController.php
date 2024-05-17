@@ -14,11 +14,11 @@ class ProfileController extends Controller
     public $user;
     public function __construct()
     {
-        $this->user = Auth::guard('web')->user();
     }
     public function index()
     {
-        dd($this->user);
+        $user = Auth::guard('web')->user();
+        dd($user);
         $id = decrypt(session()->get('user')['id']);
         $title = 'Profile';
         $page = 'front.profile';
