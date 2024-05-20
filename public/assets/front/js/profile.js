@@ -50,10 +50,8 @@ $(document).ready(function () {
                 success: function (output) {
                     console.log(output.status);
                     if (output.status == 1) {
-                        Flasher.show({
-                            type: "success",
-                            message: "Changes saved",
-                        });
+                        toastr.success(output.message);
+                        window.location();
                     } else {
                         toastr.error(output.message);
                     }
