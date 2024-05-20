@@ -72,13 +72,13 @@ class ProfileController extends Controller
             $userUpdate->save();
             DB::commit();
 
-            return response()->json(['status' => 1, 'message' => "Changes Saved!"]);
+            // return response()->json(['status' => 1, 'message' => "Changes Saved!"]);
             return  redirect()->route('profile')->with('success', 'Changes Saved!');
         } catch (QueryException $e) {
             DB::Rollback();
-            return response()->json(['status' => 0, 'message' => "db error"]);
+            return redirect()->route('profile')->with('error', 'db error');
         } catch (Exception  $e) {
-            return response()->json(['status' => 0, 'message' => 'something went wrong']);
+            return redirect()->route('profile')->with('error', 'something went wrong');
         }
     }
 }
