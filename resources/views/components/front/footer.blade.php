@@ -2,7 +2,7 @@
 
 <!-- jquery-cdn -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-
+<script src="{{ asset('vendor/php-flasher/flasher/Resources/assets/flasher.min.js') }}"></script>
 <!-- custom-js -->
 <script src="{{ asset('assets/admin/js/jquery-validate.js') }}"></script>
 
