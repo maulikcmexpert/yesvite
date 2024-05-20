@@ -51,8 +51,10 @@ $(document).ready(function () {
                     console.log(output.status);
                     if (output.status == 1) {
                         toastr.success(output.message);
+                        $("#myModal3").modal("hide");
                     } else {
                         toastr.error(output.message);
+                        $("#myModal3").modal("hide");
                     }
                 },
             });
