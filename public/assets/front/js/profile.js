@@ -50,13 +50,13 @@ $(document).ready(function () {
                 success: function (output) {
                     console.log(output.status);
                     if (output.status == 1) {
+                        $("#myModal3").modal("hide");
+                        location.reload();
                         toastr.success(output.message);
-                        $("#myModal3").modal("hide");
-                        location.reload();
                     } else {
-                        toastr.error(output.message);
                         $("#myModal3").modal("hide");
                         location.reload();
+                        toastr.error(output.message);
                     }
                 },
             });
