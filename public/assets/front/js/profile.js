@@ -50,7 +50,7 @@ $(document).ready(function () {
                 success: function (output) {
                     console.log(output.status);
                     if (output.status == 1) {
-                        toastr.success(output.message);
+                        flash.success("Changes saved");
                     } else {
                         toastr.error(output.message);
                     }
