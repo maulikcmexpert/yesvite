@@ -51,10 +51,10 @@ $(document).ready(function () {
                     console.log(output.status);
                     if (output.status == 1) {
                         // toastr.success(output.message);
-                        window.location();
+                        location.reload();
                     } else {
                         // toastr.error(output.message);
-                        window.location();
+                        location.reload();
                     }
                 },
             });
