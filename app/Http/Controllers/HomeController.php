@@ -16,11 +16,9 @@ class HomeController extends Controller
 
         $title = 'Home';
         $page = 'front.home';
-        $js = "";
         return view('layout', compact(
             'title',
             'page',
-            'js'
         ));
     }
 
