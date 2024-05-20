@@ -12,7 +12,7 @@
     @include($page)
 
 
-    <x-front.footer :js="$js" />
+    <x-front.footer :js="isset($js)?$js:''" />
 </body>
 
 </html>
