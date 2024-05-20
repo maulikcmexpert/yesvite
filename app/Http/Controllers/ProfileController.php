@@ -46,7 +46,7 @@ class ProfileController extends Controller
         $id = decrypt($id);
 
         try {
-            dd($request);
+
             DB::beginTransaction();
             $userUpdate = User::where('id', $id)->first();
 
