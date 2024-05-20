@@ -52,9 +52,11 @@ $(document).ready(function () {
                     if (output.status == 1) {
                         toastr.success(output.message);
                         $("#myModal3").modal("hide");
+                        location.reload();
                     } else {
                         toastr.error(output.message);
                         $("#myModal3").modal("hide");
+                        location.reload();
                     }
                 },
             });
