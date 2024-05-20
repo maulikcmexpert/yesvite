@@ -7,7 +7,6 @@
 
 <!-- custom-style -->
 <link href="{{asset('public/assets/front/css/style.css')}}" rel="stylesheet">
-<link rel="stylesheet" href="{{ asset('vendor/php-flasher/flasher/Resources/assets/flasher.min.css') }}">
 
 <!-- font-awesome-cdn -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
