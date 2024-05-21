@@ -35,7 +35,7 @@ Route::middleware('checkUserExist')->group(function () {
     Route::post('profile/update/{id}',  [ProfileController::class, 'update'])->name('profile.update');
 
 
-    Route::get('upload',  [ProfileController::class, 'uploadProfile'])->name('profile.upload');
+    Route::post('upload',  [ProfileController::class, 'uploadProfile'])->name('profile.upload');
 });
 
 Route::controller(AuthController::class)->group(function () {
