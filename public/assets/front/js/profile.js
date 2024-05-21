@@ -74,16 +74,17 @@ $(document).ready(function () {
             formData.append("file", $(this)[0].files[0]);
 
             $.ajax({
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                        "content"
+                    ),
+                },
                 url: "upload",
                 type: "POST",
                 data: formData,
                 processData: false,
                 contentType: false,
-                // headers: {
-                //     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
-                //         "content"
-                //     ),
-                // },
+
                 success: function (response) {
                     alert("Image uploaded successfully!");
                     console.log(response);
