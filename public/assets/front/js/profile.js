@@ -86,12 +86,11 @@ $(document).ready(function () {
                 contentType: false,
 
                 success: function (response) {
-                    alert("Image uploaded successfully!");
-                    console.log(response);
+                    toastr.success("Profile updated successfully");
+                    $("#profileImg").attr("src", response);
                 },
                 error: function (response) {
-                    alert("Error uploading image.");
-                    console.log(response);
+                    toastr.error("Error uploading image.");
                 },
             });
         });

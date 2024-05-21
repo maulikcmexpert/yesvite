@@ -118,6 +118,6 @@ class ProfileController extends Controller
             $user->save();
             $imageData =   asset('public/storage/profile/' . $imageName);
         }
-        return true;
+        return $imageData;
     }
 }
