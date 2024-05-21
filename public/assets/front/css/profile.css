@@ -267,9 +267,6 @@
 
 .btn-file__preview{
     border-radius: 100%;
-    background-size: cover;
-    background-position: center;
-    background-image: url('../image/user-img.svg');
     width: 100%;
     max-width: 200px;
     height: 200px;
