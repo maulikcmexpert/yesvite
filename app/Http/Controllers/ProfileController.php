@@ -14,6 +14,7 @@ use Illuminate\Foundation\Exceptions\Handler as Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
+
 class ProfileController extends Controller
 {
 
@@ -116,7 +117,12 @@ class ProfileController extends Controller
             $user->profile = $imageName;
             $user->save();
             $imageData =   asset('public/storage/profile/' . $imageName);
-            $request->session()->put('profile', $imageData);
+
+            $sessionArray = [
+
+                'profile' => $imageData
+            ];
+            Session::put(['user' => $sessionArray]);
         }
         return true;
     }
