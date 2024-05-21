@@ -265,10 +265,9 @@
     position: absolute;
 } */
 
-.btn-file__preview img{
+.btn-file__preview{
     border-radius: 100%;
-    width: 100%;
-    max-width: 200px;
+    width: 200px;
     height: 200px;
     border-radius: 100%;
     -webkit-border-radius: 100%;
@@ -279,9 +278,9 @@
     margin: 0 auto;
 }
 
-/* .btn-file__preview img{
+.btn-file__preview img{
     border-radius: 100%;
-} */
+}
 
 input[type="date"]{
     position: relative;
