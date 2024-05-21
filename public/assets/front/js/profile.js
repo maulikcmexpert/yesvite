@@ -79,11 +79,11 @@ $(document).ready(function () {
                 data: formData,
                 processData: false,
                 contentType: false,
-                headers: {
-                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
-                        "content"
-                    ),
-                },
+                // headers: {
+                //     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                //         "content"
+                //     ),
+                // },
                 success: function (response) {
                     alert("Image uploaded successfully!");
                     console.log(response);
