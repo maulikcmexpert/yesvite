@@ -593,7 +593,7 @@
                     <label for="fileField" class="attachment w-100">
                         <div class="row flex-column btn-file w-100">
                             <div class="btn-file__preview">
-                                <img src="" alt="preview-img">
+                                <img src="{{$user->profile }}" alt="preview-img">
                             </div>
                             <div class="update-profile">
                                 <div class="update-content">
