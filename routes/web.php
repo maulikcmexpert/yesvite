@@ -33,6 +33,9 @@ Route::middleware('checkUserExist')->group(function () {
     Route::post('/import-csv',  [HomeController::class, 'importCSV'])->name('import.csv');
     Route::get('profile',  [ProfileController::class, 'index'])->name('profile');
     Route::post('profile/update/{id}',  [ProfileController::class, 'update'])->name('profile.update');
+
+
+    Route::get('upload',  [ProfileController::class, 'uploadProfile'])->name('profile.upload');
 });
 
 Route::controller(AuthController::class)->group(function () {
