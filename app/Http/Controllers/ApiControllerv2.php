@@ -10388,10 +10388,11 @@ class ApiControllerv2 extends Controller
 
                         $email = $value['email'];
 
-                        $eventInfo = Event::where('id', $input['event_id'])->first();
+                        $eventInfo = Event::with('user')->where('id', $input['event_id'])->first();
                         $eventData = [
                             'event_name' => $eventInfo->event_name,
                             'hosted_by' => $eventInfo->hosted_by,
+                            'profileUser' => ($eventInfo->user->profile != NULL || $eventInfo->user->profile != "") ? $eventInfo->user->profile : "no_profile.png",
                             'date' =>  date('l, M. jS', strtotime($eventInfo->start_date)),
                             'time' => '1PM',
                             'address' => $eventInfo->event_location_name . ' ' . $eventInfo->address_1 . ' ' . $eventInfo->address_2 . ' ' . $eventInfo->state . ' ' . $eventInfo->city . ' - ' . $eventInfo->zip_code,

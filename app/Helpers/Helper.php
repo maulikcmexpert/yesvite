@@ -254,6 +254,7 @@ function sendNotification($notificationType, $postData)
                             $notificationData = [
                                 'message' => $notification_message,
                                 'type' => $notificationType,
+
                                 'notification_image' => $push_notification_message,
                                 'event_id' => $postData['event_id'],
                                 'event_name' => $value->event->event_name,
