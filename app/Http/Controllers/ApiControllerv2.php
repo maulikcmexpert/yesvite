@@ -3817,7 +3817,12 @@ class ApiControllerv2 extends Controller
                 $createGroup->user_id = $user->id;
                 $createGroup->name = $input['name'];
                 $createGroup->save();
-                return response()->json(['status' => 1, 'message' => 'Group Created']);
+
+                $GroupData = [
+                    'id' => $createGroup->id,
+                    'name' => $input['name']
+                ];
+                return response()->json(['status' => 1, 'message' => 'Group Created', 'data' => $GroupData]);
             }
             return response()->json(['status' => 0, 'message' => 'Group name already exists, please choose another name']);
         } catch (QueryException $e) {
