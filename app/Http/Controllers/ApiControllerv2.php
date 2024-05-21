@@ -3818,7 +3818,7 @@ class ApiControllerv2 extends Controller
                 $createGroup->name = $input['name'];
                 $createGroup->save();
 
-                $GroupData = [
+                $GroupData[] = [
                     'id' => $createGroup->id,
                     'name' => $input['name']
                 ];
