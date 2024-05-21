@@ -3819,7 +3819,7 @@ class ApiControllerv2 extends Controller
                 $createGroup->save();
                 return response()->json(['status' => 1, 'message' => 'Group Created']);
             }
-            return response()->json(['status' => 0, 'message' => 'group is already created']);
+            return response()->json(['status' => 0, 'message' => 'Group name already exists, please choose another name']);
         } catch (QueryException $e) {
             return response()->json(['status' => 0, 'message' => 'Db error']);
         } catch (Exception $e) {
