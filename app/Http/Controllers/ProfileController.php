@@ -117,6 +117,9 @@ class ProfileController extends Controller
             $user->profile = $imageName;
             $user->save();
             $imageData =   asset('public/storage/profile/' . $imageName);
+            if (session()->has('user.profile')) {
+                session(['user.profile' => $imageData]); // Replace 'new_value' with your desired value
+            }
         }
         return $imageData;
     }
