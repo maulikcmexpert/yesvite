@@ -87,7 +87,9 @@ $(document).ready(function () {
 
                 success: function (response) {
                     toastr.success("Profile updated successfully");
-                    $(".UserImg").attr("src", response);
+                    $(document).ready(function () {
+                        $(".UserImg").attr("src", response);
+                    });
                     $("#coverProfile-modal").modal("hide");
                 },
                 error: function (response) {
