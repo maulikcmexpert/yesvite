@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as Exception;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class ProfileController extends Controller
 {
@@ -80,5 +81,25 @@ class ProfileController extends Controller
         } catch (Exception  $e) {
             return redirect()->route('profile')->with('error', 'something went wrong');
         }
+    }
+
+    public function uploadProfile(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'file' => 'required|image|max:2048', // max 2MB
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 400);
+        }
+
+        $file = $request->file('file');
+        $imageData = file_get_contents($file->getRealPath());
+        dd($imageData);
+        $image = User::create([
+            'image_data' => $imageData,
+        ]);
+
+        return response()->json(['id' => $image->id, 'upload_time' => $image->created_at], 201);
     }
 }

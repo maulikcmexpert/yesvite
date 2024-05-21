@@ -67,4 +67,32 @@ $(document).ready(function () {
     $("#save_changes").click(function () {
         $("#updateUserForm").submit();
     });
+
+    $(document).ready(function () {
+        $("#fileField").on("change", function () {
+            var formData = new FormData();
+            formData.append("file", $(this)[0].files[0]);
+
+            $.ajax({
+                url: "/upload",
+                type: "POST",
+                data: formData,
+                processData: false,
+                contentType: false,
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                        "content"
+                    ),
+                },
+                success: function (response) {
+                    alert("Image uploaded successfully!");
+                    console.log(response);
+                },
+                error: function (response) {
+                    alert("Error uploading image.");
+                    console.log(response);
+                },
+            });
+        });
+    });
 });
