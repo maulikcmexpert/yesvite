@@ -555,7 +555,7 @@
             <!-- Modal body -->
             <div class="modal-body">
                 <div class="cover-img" id="cover-img">
-                    <img src="./assets/image/Frame 1000005835.png" alt="cover-img">
+                    <img src="{{$user->bg_profile}}" alt="cover-img">
                 </div>
                 <div>
                     <div class="slidecontainer">
