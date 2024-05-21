@@ -115,6 +115,8 @@ class ProfileController extends Controller
             $file->move(public_path('storage/profile'), $imageName);
             $user->profile = $imageName;
             $user->save();
+            $imageData =   asset('public/storage/profile/' . $imageName);
+            $request->session()->put('profile', $imageData);
         }
         return true;
     }
