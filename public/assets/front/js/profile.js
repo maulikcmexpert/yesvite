@@ -88,9 +88,11 @@ $(document).ready(function () {
                 success: function (response) {
                     toastr.success("Profile updated successfully");
                     $(".UserImg").attr("src", response);
+                    $("#coverProfile-modal").modal("hide");
                 },
                 error: function (response) {
                     toastr.error("Error uploading image.");
+                    $("#coverProfile-modal").modal("hide");
                 },
             });
         });
