@@ -94,12 +94,28 @@ class ProfileController extends Controller
         }
 
         $file = $request->file('file');
-        $imageData = file_get_contents($file->getRealPath());
-        dd($imageData);
-        $image = User::create([
-            'image_data' => $imageData,
-        ]);
 
-        return response()->json(['id' => $image->id, 'upload_time' => $image->created_at], 201);
+        if (!empty($file)) {
+            $user = Auth::guard('web')->user();
+            if ($user->profile != "" || $user->profile != NULL) {
+
+                if (file_exists(public_path('storage/profile/') . $user->profile)) {
+                    $imagePath = public_path('storage/profile/') . $user->profile;
+                    unlink($imagePath);
+                }
+            }
+
+
+
+
+
+            $imageName = time() . '_' . $file->getClientOriginalName();
+
+
+            $file->move(public_path('storage/profile'), $imageName);
+            $user->profile = $imageName;
+            $user->save();
+        }
+        return true;
     }
 }
