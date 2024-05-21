@@ -265,7 +265,7 @@
     position: absolute;
 } */
 
-.btn-file__preview img{
+.btn-file__preview{
     border-radius: 100%;
     width: 100%;
     max-width: 200px;
@@ -275,7 +275,7 @@
     -moz-border-radius: 100%;
     -ms-border-radius: 100%;
     -o-border-radius: 100%;
-    border: 5px solid #fff;
+    border: 5px solid #ccc;
     margin: 0 auto;
 }
 
