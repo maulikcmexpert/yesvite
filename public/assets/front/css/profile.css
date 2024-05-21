@@ -265,7 +265,7 @@
     position: absolute;
 } */
 
-.btn-file__preview{
+.btn-file__preview img{
     border-radius: 100%;
     width: 100%;
     max-width: 200px;
