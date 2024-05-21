@@ -87,7 +87,7 @@ $(document).ready(function () {
 
                 success: function (response) {
                     toastr.success("Profile updated successfully");
-                    $("#profileImg").attr("src", response);
+                    $(".UserImg").attr("src", response);
                 },
                 error: function (response) {
                     toastr.error("Error uploading image.");

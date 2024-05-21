@@ -4,7 +4,7 @@
             <div class="col-xxl-3 col-xl-4 col-lg-4 col-md-5 mb-md-0 mb-4">
                 <div class="contact-user">
                     <div class="user position-relative">
-                        <img src="{{$user->profile }}" alt="user-img">
+                        <img src="{{$user->profile }}" alt="user-img" class="UserImg">
                         <div class="badge">
                             <span class="active"></span>
                         </div>
@@ -153,7 +153,7 @@
                         <div class="profile-img">
                             <img src="{{$user->bg_profile }}" alt="" class="bg-img">
                             <div class="user-img">
-                                <img src="{{$user->profile }}" alt="user-img">
+                                <img src="{{$user->profile }}" alt="user-img" class="UserImg">
                             </div>
                         </div>
                         <div class="profile-content">
@@ -330,7 +330,7 @@
                     <div class="profile-img">
                         <img src="{{$user->bg_profile }}" alt="" class="bg-img">
                         <div class="user-img">
-                            <img src="{{$user->profile }}" alt="user-img">
+                            <img src="{{$user->profile }}" alt="user-img" class="UserImg">
                         </div>
                     </div>
                     <div class="profile-content">
@@ -593,7 +593,7 @@
                     <label for="fileField" class="attachment w-100">
                         <div class="row flex-column btn-file w-100">
                             <div class="btn-file__preview">
-                                <img src="{{$user->profile }}" alt="preview-img" id="profileImg">
+                                <img src="{{$user->profile }}" alt="preview-img" class="UserImg">
                             </div>
                             <div class="update-profile">
                                 <div class="update-content">
