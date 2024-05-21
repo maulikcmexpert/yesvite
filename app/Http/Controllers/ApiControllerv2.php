@@ -2735,7 +2735,7 @@ class ApiControllerv2 extends Controller
                 'prefer_by' => $addedUser->prefer_by
             ];
 
-            return response()->json(['status' => 1, 'data' => $useData, 'message' => "Contact added sucessfully"]);
+            return response()->json(['status' => 1, 'data' => $useData, 'message' => "Contact Saved"]);
         } catch (QueryException $e) {
             DB::rollBack();
             return response()->json(['status' => 0, 'message' => "db error"]);
