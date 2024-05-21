@@ -3292,8 +3292,6 @@ class ApiControllerv2 extends Controller
                 }
             }
 
-            $rsvpStartTime = "";
-            $rsvpEndTime = "";
 
 
 
@@ -5448,17 +5446,21 @@ class ApiControllerv2 extends Controller
 
                     sendNotification('invite', $notificationParam);
                 }
-                $notificationParam = [
 
-                    'sender_id' => $user->id,
+                if ($checkUserInvited->is_draft_save == '0') {
 
-                    'event_id' => $input['event_id'],
+                    $notificationParam = [
 
-                    'post_id' => ""
+                        'sender_id' => $user->id,
 
-                ];
+                        'event_id' => $input['event_id'],
 
-                sendNotification('owner_notify', $notificationParam);
+                        'post_id' => ""
+
+                    ];
+
+                    sendNotification('owner_notify', $notificationParam);
+                }
             }
         }
 
