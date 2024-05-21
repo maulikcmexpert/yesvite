@@ -279,6 +279,10 @@
     margin: 0 auto;
 }
 
+.btn-file__preview img{
+    border-radius: 100%;
+}
+
 input[type="date"]{
     position: relative;
 }
