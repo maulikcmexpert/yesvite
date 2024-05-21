@@ -117,12 +117,6 @@ class ProfileController extends Controller
             $user->profile = $imageName;
             $user->save();
             $imageData =   asset('public/storage/profile/' . $imageName);
-
-            $sessionArray = [
-
-                'profile' => $imageData
-            ];
-            Session::put(['user' => $sessionArray]);
         }
         return true;
     }
