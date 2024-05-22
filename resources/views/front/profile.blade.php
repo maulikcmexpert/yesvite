@@ -398,7 +398,7 @@
             <!-- Modal body -->
             <div class="modal-body">
                 <div class="cover-img user-cover-img" id="cover-img">
-                    <img src="{{$user->bg_profile}}" alt="cover-img" class="bg-img">
+                    <img src="{{$user->profile}}" alt="cover-img" class="bg-img">
                 </div>
                 <div>
                     <div class="slidecontainer">
