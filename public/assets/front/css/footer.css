@@ -113,3 +113,70 @@ ul.footer-social-link {
     font-size: 14px;
     font-weight: 600;
 }
+
+
+@media only screen and (max-width:767px){
+    footer{
+        padding: 40px 20px 24px;
+    }
+
+    .footer-bottom{
+        padding: 36px 0;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center !important;
+    }
+    
+    .footer-content .nav {
+        gap: 50px;
+        margin-bottom: 5px;
+        padding-top: 36px;
+    }
+
+    .footer-bottom{
+        padding: 36px 0 !important;
+    }
+
+    .app-store .google-app, .app-store .mobile-app{
+        max-width: 130px;
+    }
+
+}
+
+@media only screen and (max-width:575px){
+
+    .footer-content .nav{
+        padding-top: 36px;
+        gap: 15px;
+    }
+
+    .footer-content{
+        flex-direction: column;
+    } 
+    
+    .footer-content .nav li{
+        flex-basis: 45%;
+    }
+
+    .app-store{
+        padding-top: 36px;
+    }
+
+    .footer-copyright{
+        flex-direction: column-reverse;
+        align-items: flex-start !important;
+    }
+
+    .footer-copyright ul{
+        justify-content: space-between;
+        padding-bottom: 24px;
+        width: 100%;
+        gap: 45px;
+
+    }
+
+    
+}
