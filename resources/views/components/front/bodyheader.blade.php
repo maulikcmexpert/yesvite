@@ -17,9 +17,7 @@
                     </svg>
                 </a>
             </div>
-            @php
-            @if(Session::has('user'))
-            @endphp
+
             <div class="header-right">
                 <div class="header-dropdown dropdown">
                     <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
@@ -63,9 +61,6 @@
                     <img src="{{Session::get('user')['profile']}}" class="" alt="user-img">
                 </a>
             </div>
-            @php
-            @endif
-            @endphp
         </div>
     </div>
 </header>
