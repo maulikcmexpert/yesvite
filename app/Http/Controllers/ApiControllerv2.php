@@ -7046,6 +7046,11 @@ class ApiControllerv2 extends Controller
                     } else if ($prevval->type == '1') {
                         $stattim =  $prevval->start_time;
                     }
+
+                    dd(
+                        $stattim,
+                        $endtim
+                    );
                     $totalTime =  getDeferentBetweenTime($stattim, $endtim);
                 }
                 $scheduleDetail['id'] = $value->id;
