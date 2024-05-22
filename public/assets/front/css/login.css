@@ -45,7 +45,7 @@
 
 
 
-.login-form-wrap .input-form label {
+/* .login-form-wrap .input-form label {
     position: absolute;
     top: 50%;
     left: 20px;
@@ -67,8 +67,33 @@
     left:10px;
     background: #ffffff;
     padding: 0px 5px 0px 5px;
-} 
+}  */
 
+
+.floating-label {
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    transition:0.2s ease all;
+    -moz-transition:0.2s ease all;
+    -webkit-transition:0.2s ease all;
+    pointer-events: none;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+}
+
+input:focus ~ .floating-label,
+input:not(:focus):valid ~ .floating-label {
+    font-size: 12px;
+    color: var(--primaryColor);
+    top: -5px;
+    left:10px;
+    background: #ffffff;
+    padding: 0px 5px 0px 5px;
+}
 
 
 .login-form-wrap .input-form:focus label {
