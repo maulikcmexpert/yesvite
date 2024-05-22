@@ -53,8 +53,6 @@ class SocialController extends Controller
      */
     public function findOrCreateUser($socialUser, $provider)
     {
-
-
         $user = User::where('email', $socialUser->getEmail())->first();
         if ($user) {
             if ($provider == 'google') {
@@ -80,5 +78,24 @@ class SocialController extends Controller
         $users->instagram_token_id = $socialUser->getId();
         $users->apple_token_id = $socialUser->getId();
         $users->save();
+
+        $newUser = User::where('id', $users->id)->first();
+        $sessionArray = [
+            'id' => encrypt($newUser->id),
+            'username' => $newUser->firstname . ' ' . $newUser->lastname,
+            'profile' => ($newUser->profile != NULL || $newUser->profile != "") ? asset('public/storage/profile/' . $newUser->profile) : asset('public/storage/profile/no_profile.png')
+        ];
+        Session::put(['user' => $sessionArray]);
+        if (Session::has('user')) {
+
+            if ($remember != null) {
+                Cookie::queue('email', $newUser->email, 120);
+                Cookie::queue('password', $newUser->password, 120);
+            } else {
+
+                Cookie::forget('email');
+                Cookie::forget('password');
+            }
+        return $newUser;
     }
 }
