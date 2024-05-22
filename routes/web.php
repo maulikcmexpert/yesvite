@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\{
 
     HomeController,
+    HomeFrontController,
     ProfileController
 };
 /*
@@ -24,12 +25,12 @@ use App\Http\Controllers\{
 
 //     return view('welcome');
 // });
-
+Route::get('/', [HomeFrontController::class, 'index'])->name('home');
 
 Route::middleware('checkUserExist')->group(function () {
 
 
-    Route::get('home', [HomeController::class, 'index'])->name('home');
+    Route::get('dashboard', [HomeController::class, 'index'])->name('home');
     Route::post('/import-csv',  [HomeController::class, 'importCSV'])->name('import.csv');
     Route::get('profile',  [ProfileController::class, 'index'])->name('profile');
     Route::post('profile/update/{id}',  [ProfileController::class, 'update'])->name('profile.update');
@@ -40,8 +41,9 @@ Route::middleware('checkUserExist')->group(function () {
 
 Route::controller(AuthController::class)->group(function () {
 
-    Route::get('/', 'create')->name('auth.login')->middleware('isAuthenticate');
+    Route::get('login', 'create')->name('auth.login')->middleware('isAuthenticate');
     Route::post('login', 'checkLogin')->name('auth.checkLogin');
+    Route::get('register', 'register')->name('auth.register')->middleware('isAuthenticate');
 
 
     Route::get('register', function () {
