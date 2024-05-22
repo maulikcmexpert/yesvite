@@ -51,6 +51,11 @@
     z-index: 1;
 }
 
+.login-form-wrap .input-form label.error{
+    position: absolute;
+    bottom: 0;
+}
+
 .login-form-wrap .input-form:focus label {
     color: var(--primaryColor);
 }
