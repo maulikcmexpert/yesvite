@@ -1,31 +1,31 @@
-.login-wrapper{
+.login-wrapper {
     width: 100%;
     max-width: 500px;
     margin: 0 auto;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    padding: 80px 0;
 }
 
-.login-content{
+.login-content {
     margin-bottom: 28px;
 }
 
-.login-content a.logo{
+.login-content a.logo {
     width: 70px;
     height: 70px;
     margin: 0 auto;
-    margin-bottom: 15px;
+    /* margin-bottom: 15px; */
     display: block;
 }
 
-.login-content h1{
+.login-content h1 {
     margin-bottom: 15px;
+    font-size: 32px;
+    line-height: 40px;
+    color: var(--secondryColor);
+    font-weight: 700;
 }
 
-
-.login-form-wrap{
+.login-form-wrap {
     border: 1px solid var(--borderColor);
     padding: 30px;
     border-radius: 16px;
@@ -36,13 +36,31 @@
     margin-bottom: 24px;
 }
 
-
-
-.input-form{
-   margin-bottom: 16px;
+.login-form-wrap .input-form {
+    margin-bottom: 25px;
+    position: relative;
 }
 
-.toggle-password{
+.login-form-wrap .input-form label {
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    background-color: #fff;
+    padding-left: 10px;
+    padding-right: 10px;
+    z-index: 1;
+}
+
+.login-form-wrap .input-form label.error{
+    position: absolute;
+    bottom: 0;
+}
+
+.login-form-wrap .input-form:focus label {
+    color: var(--primaryColor);
+}
+
+.toggle-password {
     position: absolute;
     right: 15px;
     top: 50%;
@@ -50,27 +68,26 @@
     color: var(--iconColor);
 }
 
-.login-form-wrap .form-check{
+.login-form-wrap .form-check {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 22px !important;
 }
 
-.login-form-wrap .form-check label{
+.login-form-wrap .form-check label {
     line-height: 25px;
 }
 
 .login-form-wrap .form-check label,
-.login-form-wrap .form-check a
-{
-   color: var(--lightColor) !important;
-   font-size: 14px;
-   margin-bottom: 0 !important;
-   text-transform: capitalize;
+.login-form-wrap .form-check a {
+    color: var(--lightColor) !important;
+    font-size: 14px;
+    margin-bottom: 0 !important;
+    text-transform: capitalize;
 }
 
-.login-form-wrap .form-check a{
+.login-form-wrap .form-check a {
     transition: 0.5x;
     -webkit-transition: 0.5x;
     -moz-transition: 0.5x;
@@ -78,11 +95,11 @@
     -o-transition: 0.5x;
 }
 
-.login-form-wrap .form-check a:hover{
+.login-form-wrap .form-check a:hover {
     color: var(--primaryColor) !important;
 }
 
-.form-check-input{
+.form-check-input {
     width: 18px !important;
     height: 18px !important;
     border-radius: 5px !important;
@@ -94,11 +111,11 @@
 }
 
 .form-check-input:checked {
-    background-color: var(--secondryColor) !important;
-    border-color: var(--secondryColor) !important;
+    background-color: var(--primaryColor) !important;
+    border-color: var(--primaryColor) !important;
 }
 
-.login-form-wrap .btn{
+.login-form-wrap .btn {
     width: 100%;
     background-color: var(--primaryColor);
     border: 1px solid var(--primaryColor) !important;
@@ -119,12 +136,12 @@
     text-transform: capitalize;
 }
 
-.login-form-wrap .btn:hover{
+.login-form-wrap .btn:hover {
     background-color: transparent;
     color: var(--primaryColor);
 }
 
-.login-wrapper .social-links{
+.login-wrapper .social-links {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -132,7 +149,7 @@
     margin-top: 24px;
 }
 
-.login-wrapper .social-links a{
+.login-wrapper .social-links a {
     width: 56px;
     height: 56px;
     border: 1px solid var(--borderColor);
@@ -151,7 +168,7 @@
     -o-transition: 0.5s;
 }
 
-.login-wrapper .social-links a:hover{
+.login-wrapper .social-links a:hover {
     transform: translateY(-10px);
     -webkit-transform: translateY(-10px);
     -moz-transform: translateY(-10px);
@@ -159,112 +176,173 @@
     -o-transform: translateY(-10px);
 }
 
-.create-link a{
+.create-link a {
     color: var(--secondryColor);
-    font-size: 14px;
+    font-size: 16px;
     transition: 0.5s;
     -webkit-transition: 0.5s;
     -moz-transition: 0.5s;
     -ms-transition: 0.5s;
     -o-transition: 0.5s;
-}
-
-.create-link a:hover{
-    color: var(--primaryColor);
-}
-
-
-
-
-/* ========= footer ========= */
-.footer-content{
-    padding: 22px 0;
-} 
-
-.footer-content .nav{
-    display: flex;
-    align-items: center;
-    gap: 22px;
-}
-
-.footer-content .nav .nav-link{
-    color: var(--lightColor);
-    font-size: 14px;
-    padding: 0;
     font-weight: 500;
-    transition: 0.5s;
-    -webkit-transition: 0.5s;
-    -moz-transition: 0.5s;
-    -ms-transition: 0.5s;
-    -o-transition: 0.5s;
 }
 
-.footer-content .nav .nav-link:hover{
+.create-link a:hover {
     color: var(--primaryColor);
 }
 
-.footer-meta select{
-    width: 100px;
-    font-size: 14px;
-    color: var(--lightColor);
+
+/* ========= register ========== */
+.login-form-wrap .contact-tab{
     border: none;
-    font-weight: 500;
-    margin-right: 8px;
-    box-shadow: none !important;
-    outline: 0 !important;
+    padding: 0;
 }
 
-.footer-meta a{
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--lightColor);
-    transition: 0.5s;
-    -webkit-transition: 0.5s;
-    -moz-transition: 0.5s;
-    -ms-transition: 0.5s;
-    -o-transition: 0.5s;
-    transition: 0.5s;
-    -webkit-transition: 0.5s;
-    -moz-transition: 0.5s;
-    -ms-transition: 0.5s;
-    -o-transition: 0.5s;
-}
-
-.footer-meta a:hover{
-    color: var(--primaryColor);
+.login-form-wrap .contact-tab form{
+    margin-top: 20px;
 }
 
 
-@media only screen and (max-width:768px){
-    .login-form-wrap{
+
+
+@media only screen and (max-width:768px) {
+    .login-form-wrap {
         padding: 20px;
+        border: none;
     }
 
     .login-content {
         margin-bottom: 20px;
     }
 
-    .login-wrapper .social-links{
+    .login-wrapper{
+        padding: 40px 0;
+
+    }
+
+    .login-wrapper .social-links {
         gap: 12px;
         margin-top: 22px;
     }
 
-    .login-wrapper .social-links a{
+    .login-wrapper .social-links a {
         width: 45px;
         height: 45px;
     }
 
-    .login-form-wrap button.btn{
+    .login-form-wrap button.btn {
         padding: 12px;
     }
 
-    .footer-content{
+    .footer-content {
         flex-wrap: wrap;
         justify-content: center !important;
     }
 
-    .footer-content .nav{
+    .footer-content .nav {
         gap: 15px;
         margin-bottom: 5px;
+        padding-top: 0px;
     }
+}
+
+@media only screen and (max-width:767px){
+    .navbar-collapse.collapse.show,
+    .navbar-collapse.collapsing
+    {
+        position: absolute;
+        width: 100%;
+        top: 60px;
+        left: 0;
+        z-index: 3;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        background-color: #fff;
+        padding: 24px;
+    }
+
+    header.login-header{
+        padding: 15px 0px 0;
+    }
+
+    .login-header .navbar{
+        padding: 0 15px 12px;
+    }
+
+    .login-header ul{
+        align-items: flex-start !important;
+    }
+
+    .login-header ul li{
+        width: 100%;
+        position: relative;
+    }
+
+    .login-header ul li::after{
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 0;
+        background-image: url('../image/left-arrow.svg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        width: 6px;
+        height: 11px;
+        color: #94A3B8;
+    }
+
+    .login-header ul li:last-child::after{
+        display: none;
+    }
+    
+    .login-content h1{
+        font-size: 22px;
+    }
+
+    footer{
+        padding: 40px 20px 24px;
+    }
+
+    .footer-bottom{
+        padding: 36px 0;
+    }
+
+    .app-store .google-app, .app-store .mobile-app{
+        max-width: 130px;
+    }
+
+    
+}
+
+@media only screen and (max-width:575px){
+
+    .footer-content .nav{
+        padding-top: 36px;
+    }
+
+    .footer-content{
+        flex-direction: column;
+    } 
+    
+    .footer-content .nav li{
+        flex-basis: 45%;
+    }
+
+    .app-store{
+        padding-top: 36px;
+    }
+
+    .footer-copyright{
+        flex-direction: column-reverse;
+        align-items: flex-start !important;
+    }
+
+    .footer-copyright ul{
+        justify-content: space-between;
+        padding-bottom: 24px;
+        width: 100%;
+        gap: 45px;
+
+    }
+
+    
 }
