@@ -31,7 +31,7 @@
             <div class="collapse navbar-collapse" id="mynavbar">
                 <ul class="navbar-nav align-items-center ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Home</a>
+                        <a class="nav-link" href="{{ route('front.home')}}">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">About</a>

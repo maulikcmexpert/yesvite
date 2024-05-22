@@ -25,7 +25,7 @@ use App\Http\Controllers\{
 
 //     return view('welcome');
 // });
-Route::get('/', [HomeFrontController::class, 'index'])->name('home');
+Route::get('/', [HomeFrontController::class, 'index'])->name('front.home');
 
 Route::middleware('checkUserExist')->group(function () {
 
