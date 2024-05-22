@@ -1,0 +1,115 @@
+/* ========= footer ========= */
+footer {
+    padding: 60px 50px 24px;
+    background-color: var(--footerBg);
+    border-top: 1px solid var(--borderColor);
+}
+
+.footer-content .nav {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+}
+
+.footer-content .nav .nav-link {
+    color: #000;
+    font-size: 16px;
+    padding: 0;
+    font-weight: 700;
+    transition: 0.5s;
+    -webkit-transition: 0.5s;
+    -moz-transition: 0.5s;
+    -ms-transition: 0.5s;
+    -o-transition: 0.5s;
+}
+
+.footer-content .nav .nav-link:hover {
+    color: var(--primaryColor);
+}
+
+.footer-meta select {
+    width: 100px;
+    font-size: 14px;
+    color: var(--lightColor);
+    border: none;
+    font-weight: 500;
+    margin-right: 8px;
+    box-shadow: none !important;
+    outline: 0 !important;
+}
+
+.footer-meta a {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--lightColor);
+    transition: 0.5s;
+    -webkit-transition: 0.5s;
+    -moz-transition: 0.5s;
+    -ms-transition: 0.5s;
+    -o-transition: 0.5s;
+    transition: 0.5s;
+    -webkit-transition: 0.5s;
+    -moz-transition: 0.5s;
+    -ms-transition: 0.5s;
+    -o-transition: 0.5s;
+}
+
+.footer-meta a:hover {
+    color: var(--primaryColor);
+}
+
+.footer-bottom {
+    padding: 50px 0;
+}
+
+ul.footer-social-link {
+    padding-left: 0;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 0;
+}
+
+.footer-social-link span {
+    width: 50px;
+    height: 50px;
+    background-color: #fff;
+    border-radius: 100%;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    -ms-border-radius: 100%;
+    -o-border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.app-store .google-app,
+.app-store .mobile-app {
+    width: 100%;
+    max-width: 162px;
+    height: 48px;
+}
+
+.footer-copyright {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.footer-copyright p {
+    font-size: 14px;
+}
+
+.footer-copyright ul {
+    display: flex;
+    align-items: center;
+    gap: 54px;
+    margin-bottom: 0;
+}
+
+.footer-copyright ul li a {
+    color: var(--secondryColor);
+    font-size: 14px;
+    font-weight: 600;
+}
