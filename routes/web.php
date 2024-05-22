@@ -7,7 +7,8 @@ use App\Http\Controllers\{
 
     HomeController,
     HomeFrontController,
-    ProfileController
+    ProfileController,
+    SocialController
 };
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +46,8 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('login', 'checkLogin')->name('auth.checkLogin');
     Route::get('register', 'register')->name('auth.register')->middleware('isAuthenticate');
 
+    Route::get('login/{provider}', [SocialController::class, 'redirectToProvider']);
+    Route::get('login/{provider}/callback', [SocialController::class, 'handleProviderCallback']);
 
     Route::get('register', function () {
 
