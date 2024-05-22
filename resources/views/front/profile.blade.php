@@ -575,20 +575,58 @@
 </div>
 
 
-<!-- ======== EditProfile-model ========= -->
-<div class="modal fade" id="coverProfile-modal">
+<!-- ======== coverprofile-model ========= -->
+<div class="modal fade" id="Edit-modal">
     <div class="modal-dialog">
         <div class="modal-content">
             <!-- Modal Header -->
             <div class="modal-header align-items-center">
                 <div>
-                    <h4 class="modal-title">Photo Profile</h4>
+                    <h4 class="modal-title">Edit Photo Profile</h4>
+                    <span>Recomendation Size : 730x200</span>
                 </div>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
 
             <!-- Modal body -->
             <div class="modal-body">
+                <div class="cover-img user-cover-img" id="cover-img">
+                    <img src="{{$user->profile }}" alt="preview-img" class="UserImg">
+                </div>
+                <div>
+                    <div class="slidecontainer">
+                        <h5>Zoom</h5>
+                        <input type="range" min="1" max="100" value="50">
+                    </div>
+                </div>
+                <div class="d-flex align-items-center justify-content-end">
+                    <label class="choosen-file cmn-btn mb-0" for="choose-file">
+                        Upload New Image
+                    </label>
+                    <button type="button" class="cmn-btn bg-primary">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- ======== EditProfile-model ========= -->
+<!-- <div class="modal fade" id="coverProfile-modal">
+    <div class="modal-dialog">
+        <div class="modal-content"> -->
+<!-- Modal Header -->
+<!-- <div class="modal-header align-items-center">
+                <div>
+                    <h4 class="modal-title">Photo Profile</h4>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div> -->
+
+<!-- Modal body -->
+<!-- <div class="modal-body">
                 <div class="form-group">
                     <label for="fileField" class="attachment w-100">
                         <div class="row flex-column btn-file w-100">
@@ -645,39 +683,4 @@
             </div>
         </div>
     </div>
-</div>
-
-<!-- ======== coverprofile-model ========= -->
-<div class="modal fade" id="Edit-modal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <!-- Modal Header -->
-            <div class="modal-header align-items-center">
-                <div>
-                    <h4 class="modal-title">Edit Photo Profile</h4>
-                    <span>Recomendation Size : 730x200</span>
-                </div>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-
-            <!-- Modal body -->
-            <div class="modal-body">
-                <div class="cover-img user-cover-img" id="cover-img">
-                    <img src="./assets/image/user-img.svg" alt="cover-img">
-                </div>
-                <div>
-                    <div class="slidecontainer">
-                        <h5>Zoom</h5>
-                        <input type="range" min="1" max="100" value="50">
-                    </div>
-                </div>
-                <div class="d-flex align-items-center justify-content-end">
-                    <label class="choosen-file cmn-btn mb-0" for="choose-file">
-                        Upload New Image
-                    </label>
-                    <button type="button" class="cmn-btn bg-primary">Save Changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+</div> -->
