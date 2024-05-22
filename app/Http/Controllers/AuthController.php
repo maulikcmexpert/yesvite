@@ -31,7 +31,7 @@ class AuthController extends Controller
         $title = "Login";
         $js = ['login'];
 
-        return view('auth/main', compact('page', 'title', 'js'));
+        return view('layout', compact('page', 'title', 'js'));
     }
 
     /**

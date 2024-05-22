@@ -57,7 +57,7 @@
                 </div>
 
                 <a href="{{ route('profile')}}" class="user-img">
-                    <img src="{{Session::get('user')['profile']}}" alt="user-img">
+                    <img src="{{Session::get('user')['profile']}}" class="" alt="user-img">
                 </a>
             </div>
         </div>
