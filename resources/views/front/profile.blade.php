@@ -381,6 +381,42 @@
 </div>
 
 
+
+<!-- ======== coverprofile-model ========= -->
+<div class="modal fade" id="Edit-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header align-items-center">
+                <div>
+                    <h4 class="modal-title">Edit Photo Profile</h4>
+                    <span>Recomendation Size : 730x200</span>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="cover-img user-cover-img" id="cover-img">
+                    <img src="{{$user->bg_profile}}" alt="cover-img" class="bg-img">
+                </div>
+                <div>
+                    <div class="slidecontainer">
+                        <h5>Zoom</h5>
+                        <input type="range" min="1" max="100" value="50">
+                    </div>
+                </div>
+                <div class="d-flex align-items-center justify-content-end">
+                    <label class="choosen-file cmn-btn mb-0" for="choose-file">
+                        Upload New Image
+                    </label>
+                    <button type="button" class="cmn-btn bg-primary">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- ======= profile-model ======= -->
 <div class="modal fade" id="myModal3">
     <div class="modal-dialog">
@@ -413,7 +449,7 @@
                         </form>
                         <div class="user-img">
                             <img src="{{$user->profile}}" alt="user-img">
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#coverProfile-modal">
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#Edit-modal">
                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M11.05 4.66652L4.20829 11.9082C3.94996 12.1832 3.69996 12.7249 3.64996 13.0999L3.34162 15.7999C3.23329 16.7749 3.93329 17.4415 4.89996 17.2749L7.58329 16.8165C7.95829 16.7499 8.48329 16.4749 8.74162 16.1915L15.5833 8.94985C16.7666 7.69985 17.3 6.27485 15.4583 4.53319C13.625 2.80819 12.2333 3.41652 11.05 4.66652Z" stroke="#0F172A" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
                                     <path d="M9.9082 5.875C10.2665 8.175 12.1332 9.93333 14.4499 10.1667" stroke="#0F172A" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
@@ -641,41 +677,6 @@
                         <input name="file" type="file" id="fileField">
                     </label>
 
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- ======== coverprofile-model ========= -->
-<div class="modal fade" id="Edit-modal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <!-- Modal Header -->
-            <div class="modal-header align-items-center">
-                <div>
-                    <h4 class="modal-title">Edit Photo Profile</h4>
-                    <span>Recomendation Size : 730x200</span>
-                </div>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-
-            <!-- Modal body -->
-            <div class="modal-body">
-                <div class="cover-img user-cover-img" id="cover-img">
-                    <img src="./assets/image/user-img.svg" alt="cover-img">
-                </div>
-                <div>
-                    <div class="slidecontainer">
-                        <h5>Zoom</h5>
-                        <input type="range" min="1" max="100" value="50">
-                    </div>
-                </div>
-                <div class="d-flex align-items-center justify-content-end">
-                    <label class="choosen-file cmn-btn mb-0" for="choose-file">
-                        Upload New Image
-                    </label>
-                    <button type="button" class="cmn-btn bg-primary">Save Changes</button>
                 </div>
             </div>
         </div>
