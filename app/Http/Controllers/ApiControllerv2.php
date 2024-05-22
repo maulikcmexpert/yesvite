@@ -7047,11 +7047,13 @@ class ApiControllerv2 extends Controller
                         $stattim =  $prevval->start_time;
                     }
 
-                    dd(
-                        $stattim,
-                        $endtim
-                    );
-                    $totalTime =  getDeferentBetweenTime($stattim, $endtim);
+                    if (
+                        $stattim != "" &&
+                        $endtim != ""
+                    ) {
+
+                        $totalTime =  getDeferentBetweenTime($stattim, $endtim);
+                    }
                 }
                 $scheduleDetail['id'] = $value->id;
                 $scheduleDetail['activity_title'] = $event_name;
