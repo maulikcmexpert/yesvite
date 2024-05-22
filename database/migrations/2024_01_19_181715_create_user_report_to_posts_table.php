@@ -20,9 +20,9 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id')->nullable();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->timestamps();
             $table->unsignedBigInteger('event_post_id')->nullable();
             $table->foreign('event_post_id')->references('id')->on('event_posts')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 

@@ -8,24 +8,30 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
-    public function up(): void
+    public function up()
     {
-        Schema::create('user_profile_privacies', function (Blueprint $table) {
+        Schema::create('event_post_comment_reactions', function (Blueprint $table) {
             $table->id();
-            $table->string('profile_privacy')->nullable();
+            $table->unsignedBigInteger('event_post_comment_id')->nullable();
+            $table->foreign('event_post_comment_id')->references('id')->on('event_post_comments')->onDelete('cascade');
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->enum('status', ['0', '1'])->default('0');
+            $table->string('reaction')->nullable();
+
             $table->timestamps();
         });
     }
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
-        Schema::dropIfExists('user_profile_privacies');
+        Schema::dropIfExists('event_post_comment_reactions');
     }
 };

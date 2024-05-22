@@ -22,6 +22,7 @@ return new class extends Migration
             $table->unsignedBigInteger('event_post_id')->nullable();
             $table->foreign('event_post_id')->references('id')->on('event_posts')->onDelete('cascade');
             $table->string('reaction')->nullable();
+            $table->string('unicode')->nullable();
             $table->timestamps();
         });
     }

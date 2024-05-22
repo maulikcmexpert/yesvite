@@ -21,6 +21,7 @@ return new class extends Migration
             $table->foreign('event_post_id')->references('id')->on('event_posts')->onDelete('cascade');
             $table->string('post_image')->nullable();
             $table->enum('type', ['image', 'video'])->nullable();
+            $table->string('duration')->nullable();
             $table->timestamps();
         });
     }

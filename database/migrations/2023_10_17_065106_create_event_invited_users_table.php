@@ -28,8 +28,11 @@ return new class extends Migration
             $table->enum('rsvp_d', ['0', '1'])->default(0);
             $table->date('event_view_date')->nullable();
             $table->enum('invitation_sent', ['0', '1'])->default(0);
+            $table->enum('prefer_by', ['email', 'phone'])->default('email');
             $table->enum('is_co_host', ['0', '1'])->default(0);
-            $table->enum('prefer_by', ['email', 'phone'])->default(0);
+            $table->string('rsvp_attempt')->nullable();
+            $table->enum('accept_as_co_host', ['0', '1', '2'])->default(0);
+            $table->enum('notification_on_off', ['0', '1'])->default(1);
             $table->timestamps();
         });
     }

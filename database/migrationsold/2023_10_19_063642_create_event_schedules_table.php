@@ -13,16 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('event_post_reactions', function (Blueprint $table) {
+        Schema::create('event_schedules', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('event_id')->nullable();
             $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');
-            $table->unsignedBigInteger('user_id')->nullable();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->unsignedBigInteger('event_post_id')->nullable();
-            $table->foreign('event_post_id')->references('id')->on('event_posts')->onDelete('cascade');
-            $table->string('reaction')->nullable();
-            $table->string('unicode')->nullable();
+            $table->string('activity_title')->nullable();
+            $table->string('start_time')->nullable();
+            $table->string('end_time')->nullable();
+            $table->enum('type', ['1', '2', '3']);
             $table->timestamps();
         });
     }
@@ -34,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('event_post_reactions');
+        Schema::dropIfExists('event_schedules');
     }
 };

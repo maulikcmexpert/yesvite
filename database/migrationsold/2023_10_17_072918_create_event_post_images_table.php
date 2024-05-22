@@ -13,15 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('event_schedules', function (Blueprint $table) {
+        Schema::create('event_post_images', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('event_id')->nullable();
             $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');
-            $table->date('event_date')->nullable();
-            $table->string('activity_title')->nullable();
-            $table->string('start_time')->nullable();
-            $table->string('end_time')->nullable();
-            $table->enum('type', ['1', '2', '3']);
+            $table->unsignedBigInteger('event_post_id')->nullable();
+            $table->foreign('event_post_id')->references('id')->on('event_posts')->onDelete('cascade');
+            $table->string('post_image')->nullable();
+            $table->enum('type', ['image', 'video'])->nullable();
             $table->timestamps();
         });
     }
@@ -33,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('event_schedules');
+        Schema::dropIfExists('event_post_images');
     }
 };

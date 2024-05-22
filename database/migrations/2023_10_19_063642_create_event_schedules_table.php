@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('event_id')->nullable();
             $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');
+            $table->date('event_date')->nullable();
             $table->string('activity_title')->nullable();
             $table->string('start_time')->nullable();
             $table->string('end_time')->nullable();

@@ -23,6 +23,7 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->text('description')->nullable();
             $table->integer('quantity')->nullable();
+            $table->enum('self_bring_item', ['0', '1'])->default('1');
             $table->timestamps();
         });
     }

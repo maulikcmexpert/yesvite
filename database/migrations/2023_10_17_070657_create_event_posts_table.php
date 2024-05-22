@@ -24,6 +24,7 @@ return new class extends Migration
             $table->enum('post_privacy', ['1', '2', '3', '4'])->default('1');
             $table->enum('post_type', ['0', '1', '2', '3'])->default('0');
             $table->enum('commenting_on_off', ['0', '1'])->default('0');
+            $table->enum('is_in_photo_moudle', ['0', '1'])->default('0')->comment('0 = is not in photo module,1 = is in photo module');
             $table->timestamps();
         });
     }

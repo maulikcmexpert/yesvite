@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('user_notification_types', function (Blueprint $table) {
             $table->id();
-            $table->string('type')->nullable();
+            $table->unsignedBigInteger('notification_type_id')->nullable();
+            $table->foreign('notification_type_id')->references('id')->on('notification_types')->onDelete('cascade');
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->enum('push', ['0', '1'])->default('1');

@@ -13,8 +13,7 @@ return new class extends Migration
     {
         Schema::create('user_profile_privacies', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('profile_privacy_id')->nullable();
-            $table->foreign('profile_privacy_id')->references('id')->on('profile_privacies')->onDelete('cascade');
+            $table->string('profile_privacy')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->enum('status', ['0', '1'])->default('0');
