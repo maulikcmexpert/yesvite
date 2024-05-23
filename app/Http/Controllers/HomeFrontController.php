@@ -2,12 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Event;
 use Illuminate\Http\Request;
+
+use Carbon\Carbon;
 
 class HomeFrontController extends Controller
 {
     public function index()
     {
+
+        $eventData = Event::with('user')->where('is_draft_save', '1')->get();
+
+        if (count($eventData) != 0) {
+
+            foreach ($eventData as $value) {
+                $dateAfterSevenDays = Carbon::parse($value->created_at)->addDays(7);
+                dd($dateAfterSevenDays);
+            }
+        }
+
+
         $title = 'Home';
         $page = 'front.homefront';
         return view('layout', compact(
