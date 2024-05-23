@@ -29,7 +29,7 @@ class NotifyPendingInvitation extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Notify Pending Invitation',
+            subject: 'A gentle reminder to complete your invite',
         );
     }
 

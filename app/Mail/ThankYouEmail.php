@@ -29,7 +29,7 @@ class ThankYouEmail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Thank You Email',
+            subject: 'Thanks for joining us!',
         );
     }
 
