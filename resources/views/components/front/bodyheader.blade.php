@@ -40,6 +40,7 @@
                             
                         </li> -->
                     @if(Session::has('user'))
+
                     @else
                     <li class="nav-item d-flex align-items-center gap-3">
                         <a class="nav-link signIn-btn" href="{{route('auth.login')}}">Sign In</a>

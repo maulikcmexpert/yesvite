@@ -20,7 +20,7 @@
             <p>Please Sign In</p>
         </div>
         <div class="login-form-wrap">
-            <form action="">
+            <form method="POST" action="{{route('auth.checkLogin')}}">
                 <div class="input-form">
                     <input type="email" class="form-control inputText" id="email" name="email">
                     <label for="email" class="form-label input-field floating-label">Email Address <span class="required">*</span></label>

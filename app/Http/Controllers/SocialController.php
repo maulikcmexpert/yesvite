@@ -67,7 +67,7 @@ class SocialController extends Controller
             }
             $user->save();
 
-            return $user;
+            return  $user;
         }
 
         $users =  new User();
@@ -96,6 +96,7 @@ class SocialController extends Controller
                 Cookie::forget('email');
                 Cookie::forget('password');
             }
-        return $newUser;
+            return $newUser;
+        }
     }
 }
