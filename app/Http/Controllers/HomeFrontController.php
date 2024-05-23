@@ -17,8 +17,9 @@ class HomeFrontController extends Controller
         if (count($eventData) != 0) {
 
             foreach ($eventData as $value) {
-                echo $value->created_at;
+
                 $dateAfterSevenDays = Carbon::parse($value->created_at)->addDays(7)->toDateString();
+                echo $currentDate;
                 echo $dateAfterSevenDays;
                 exit;
             }
