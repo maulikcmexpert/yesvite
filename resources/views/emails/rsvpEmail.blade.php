@@ -57,23 +57,43 @@
                     <td>
                         <div class="user-name" style="display: flex;align-items: center;gap: 15px;margin-bottom: 15px;">
                             <span style="display: block;width: 100%;max-width: 50px;height: 50px;border-radius: 50%;">
-                                <img src="./user-img.png" style="width: 100%;height: 100%;" alt="user-img">
+                                <img src="{{ asset('public/storage/profile/'.$eventData['profileUser'])}}" style="width: 100%;height: 100%;" alt="user-img">
                             </span>
                             <div>
-                                <h3 style="font-size: 20px;line-height: 40px;font-weight: 700;color: #0A090B;margin: 0px 0px;">James Clark <span style="font-weight: 400;">RSVP'd</span> YES <span style="font-weight: 400;">for</span></h3>
-                                <h4 style="color: #F73C71;font-size: 24px;line-height: 30px;font-weight: 700;margin: 0px 0px;">Sarah's Birthday</h4>
+                                <h3 style="font-size: 20px;line-height: 40px;font-weight: 700;color: #0A090B;margin: 0px 0px;">{{ $eventData['guest_name'] }} <span style="font-weight: 400;">RSVP'd</span> {{ ($eventData['rsvp_status'] == '1')?'YES':'NO' }} <span style="font-weight: 400;">for</span></h3>
+                                <h4 style="color: #F73C71;font-size: 24px;line-height: 30px;font-weight: 700;margin: 0px 0px;">{{ $eventData['event_name'] }} </h4>
                             </div>
                         </div>
-                        <div class="invited-persons" style="display: flex;align-items: center;justify-content: space-between; width: 100%;max-width: 250px;background-color: #F0FFE8;border: 1px solid #23AA26;padding: 5px 10px 5px 10px;border-radius: 100px;margin-left: 50px;">
-                            <div class="persons-left">
-                                <h5 style="font-size: 10px;line-height: normal;font-weight: 600;color: #0F172A;margin: 0px;">RSVP’d <span style="color: #23AA26;">YES</span></h5>
+                        <?php
+                        if ($eventData['rsvp_status'] == '1') {
+                        ?>
+
+                            <div class="invited-persons" style="display: flex;align-items: center;justify-content: space-between; width: 100%;max-width: 250px;background-color: #F0FFE8;border: 1px solid #23AA26;padding: 5px 10px 5px 10px;border-radius: 100px;margin-left: 50px;">
+                                <div class="persons-left">
+                                    <h5 style="font-size: 10px;line-height: normal;font-weight: 600;color: #0F172A;margin: 0px;">RSVP’d <span style="color: #23AA26;">YES</span></h5>
+                                </div>
+                                <div class="persons-right" style="display: flex;align-items: center;gap: 15px;">
+                                    <span class="person-span-1" style="font-size: 10px;line-height: normal;font-weight: 600;color: #0F172A;position: relative;"><i class="fa-solid fa-user-group" style="color: #DDE3E0;font-size: 8px;"></i> {{ $eventData['adults'] }} Adults</span>
+                                    <span style="font-size: 10px;line-height: normal;font-weight: 600;color: #0F172A;">{{ $eventData['kids'] }} Kids</span>
+                                </div>
                             </div>
-                            <div class="persons-right" style="display: flex;align-items: center;gap: 15px;">
-                                <span class="person-span-1" style="font-size: 10px;line-height: normal;font-weight: 600;color: #0F172A;position: relative;"><i class="fa-solid fa-user-group" style="color: #DDE3E0;font-size: 8px;"></i> 3 Adults</span>
-                                <span style="font-size: 10px;line-height: normal;font-weight: 600;color: #0F172A;">2 Kids</span>
+                        <?php } else { ?>
+
+                            <div class="invited-persons" style="display: flex;align-items: center;justify-content: space-between; width: 100%;max-width: 250px;background-color: #F0FFE8;border: 1px solid #23AA26;padding: 5px 10px 5px 10px;border-radius: 100px;margin-left: 50px;">
+                                <div class="persons-left">
+                                    <h5 style="font-size: 10px;line-height: normal;font-weight: 600;color: #0F172A;margin: 0px;">RSVP’d <span style="color: #23AA26;">NO</span></h5>
+                                </div>
+                                <div class="persons-right" style="display: flex;align-items: center;gap: 15px;">
+                                    <span class="person-span-1" style="font-size: 10px;line-height: normal;font-weight: 600;color: #0F172A;position: relative;"><i class="fa-solid fa-user-group" style="color: #DDE3E0;font-size: 8px;"></i> {{ $eventData['adults'] }} Adults</span>
+                                    <span style="font-size: 10px;line-height: normal;font-weight: 600;color: #0F172A;">{{ $eventData['kids'] }} Kids</span>
+                                </div>
                             </div>
-                        </div>
-                        <p style="font-size: 18px;line-height: 25px;font-weight: 400;color: #0F172A;margin: 0px 0px;margin-top: 15px !important;">“Thanks guys for the invite! Can’t wait to see you guys”</p>
+                        <?php }
+                        ?>
+
+
+
+                        <p style="font-size: 18px;line-height: 25px;font-weight: 400;color: #0F172A;margin: 0px 0px;margin-top: 15px !important;">{{ $eventData['rsvp_message'] }}</p>
                     </td>
                 </tr>
                 <tr>
