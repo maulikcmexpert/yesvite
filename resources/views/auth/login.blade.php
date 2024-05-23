@@ -85,7 +85,7 @@
         </div>
         <div class="create-link d-flex justify-content-center align-items-center gap-2">
             <p>New to Yesvite?</p>
-            <a href="#">Create an account</a>
+            <a href="register.html">Create an account</a>
         </div>
     </div>
 </section>
