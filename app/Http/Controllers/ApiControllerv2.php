@@ -7074,7 +7074,7 @@ class ApiControllerv2 extends Controller
                     $eventData[] = "Adults Only";
                 }
                 if ($eventDetail->event_settings->rsvp_by_date_status == '1') {
-                    $eventData[] = date('F d, Y', strtotime($eventDetail->rsvp_by_date));
+                    $eventData[] = 'RSVP By :- ' . date('F d, Y', strtotime($eventDetail->rsvp_by_date));
                 }
                 if ($eventDetail->event_settings->podluck == '1') {
                     $eventData[] = "Event Potluck";
