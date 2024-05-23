@@ -13,13 +13,14 @@ class HomeFrontController extends Controller
     {
 
         $eventData = Event::with('user')->where('is_draft_save', '1')->get();
-
+        $currentDate = Carbon::now();
         if (count($eventData) != 0) {
 
             foreach ($eventData as $value) {
                 echo $value->created_at;
-                $dateAfterSevenDays = Carbon::parse($value->created_at)->addDays(7);
-                dd($dateAfterSevenDays);
+                $dateAfterSevenDays = Carbon::parse($value->created_at)->addDays(7)->toDateString();
+                echo $dateAfterSevenDays;
+                exit;
             }
         }
 
