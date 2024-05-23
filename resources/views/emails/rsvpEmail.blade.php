@@ -79,9 +79,9 @@
                             </div>
                         <?php } else { ?>
 
-                            <div class="invited-persons" style="display: flex;align-items: center;justify-content: space-between; width: 100%;max-width: 250px;background-color: #F0FFE8;border: 1px solid #23AA26;padding: 5px 10px 5px 10px;border-radius: 100px;margin-left: 50px;">
+                            <div class="invited-persons" style="display: flex;align-items: center;justify-content: space-between; width: 100%;max-width: 250px;background-color: #d9a8a8;border: 1px solid #e52121;padding: 5px 10px 5px 10px;border-radius: 100px;margin-left: 50px;">
                                 <div class="persons-left">
-                                    <h5 style="font-size: 10px;line-height: normal;font-weight: 600;color: #0F172A;margin: 0px;">RSVP’d <span style="color: #23AA26;">NO</span></h5>
+                                    <h5 style="font-size: 10px;line-height: normal;font-weight: 600;color: #0F172A;margin: 0px;">RSVP’d <span style="color: #e52121;">NO</span></h5>
                                 </div>
                                 <div class="persons-right" style="display: flex;align-items: center;gap: 15px;">
                                     <span class="person-span-1" style="font-size: 10px;line-height: normal;font-weight: 600;color: #0F172A;position: relative;"><i class="fa-solid fa-user-group" style="color: #DDE3E0;font-size: 8px;"></i> {{ $eventData['adults'] }} Adults</span>
