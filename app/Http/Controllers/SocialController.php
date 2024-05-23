@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Socialite;
+use Laravel\Socialite\Facades\Socialite;
+
+
 use Auth;
 use Exception;
 use App\Models\User;
@@ -51,18 +53,49 @@ class SocialController extends Controller
      */
     public function findOrCreateUser($socialUser, $provider)
     {
-        $user = User::where('provider_id', $socialUser->getId())->where('provider', $provider)->first();
-
+        $user = User::where('email', $socialUser->getEmail())->first();
         if ($user) {
+            if ($provider == 'google') {
+
+                $user->gmail_token_id = $socialUser->getId();
+            } elseif ($provider == 'facebook') {
+                $user->facebook_token_id = $socialUser->getId();
+            } elseif ($provider == 'instagram') {
+                $user->instagram_token_id = $socialUser->getId();
+            } elseif ($provider == 'apple') {
+                $user->apple_token_id = $socialUser->getId();
+            }
+            $user->save();
+
             return $user;
         }
 
-        return User::create([
-            'name'     => $socialUser->getName(),
-            'email'    => $socialUser->getEmail(),
-            'provider' => $provider,
-            'provider_id' => $socialUser->getId(),
-            'avatar'   => $socialUser->getAvatar(),
-        ]);
+        $users =  new User();
+        $users->firstname = $socialUser->getName();
+        $users->email = $socialUser->getEmail();
+        $users->gmail_token_id = $socialUser->getId();
+        $users->facebook_token_id = $socialUser->getId();
+        $users->instagram_token_id = $socialUser->getId();
+        $users->apple_token_id = $socialUser->getId();
+        $users->save();
+
+        $newUser = User::where('id', $users->id)->first();
+        $sessionArray = [
+            'id' => encrypt($newUser->id),
+            'username' => $newUser->firstname . ' ' . $newUser->lastname,
+            'profile' => ($newUser->profile != NULL || $newUser->profile != "") ? asset('public/storage/profile/' . $newUser->profile) : asset('public/storage/profile/no_profile.png')
+        ];
+        Session::put(['user' => $sessionArray]);
+        if (Session::has('user')) {
+
+            if ($remember != null) {
+                Cookie::queue('email', $newUser->email, 120);
+                Cookie::queue('password', $newUser->password, 120);
+            } else {
+
+                Cookie::forget('email');
+                Cookie::forget('password');
+            }
+        return $newUser;
     }
 }
