@@ -102,7 +102,7 @@ use LogicException;
 use Illuminate\Database\Query\Builder;
 use App\Jobs\SendInvitationMailJob as sendInvitation;
 use stdClass;
-use App\Mail\NotifyPendingInvitation;
+
 
 
 class ApiControllerv2 extends Controller
@@ -6883,6 +6883,8 @@ class ApiControllerv2 extends Controller
             $eventDetail = Event::with(['user', 'event_image', 'event_schedule', 'event_settings', 'event_invited_user' => function ($query) {
 
                 $query->where('is_co_host', '1')->with('user');
+            }])->withCount(['event_invited_user' => function ($query) {
+                $query->where('rsvp_status', '1');
             }])->where('id', $input['event_id'])->first();
 
 
@@ -6915,7 +6917,7 @@ class ApiControllerv2 extends Controller
             $eventDetails['hosted_by'] = $eventDetail->hosted_by;
             $eventDetails['is_host'] = ($eventDetail->user_id == $user->id) ? 1 : 0;
             $eventDetails['event_date'] = $eventDetail->start_date;
-            $eventDetails['event_time'] = "-";
+            $eventDetails['event_time'] =  $eventDetail->event_start_time;
 
             if ($eventDetail->event_schedule->isNotEmpty()) {
                 if ($eventDetail->event_schedule->last()->end_time != NULL || $eventDetail->event_schedule->last()->end_time != "") {
@@ -6956,15 +6958,13 @@ class ApiControllerv2 extends Controller
                     $till_days = "Past";
                 }
             }
+
+
             $eventDetails['days_till_event'] = $till_days;
 
-
-
+            $eventDetails['guest_thus_far'] = $eventDetail->event_invited_user_count;
             $eventDetails['event_created_timestamp'] = Carbon::parse($eventDate)->timestamp;
             $eventDetails['message_to_guests'] = $eventDetail->message_to_guests;
-
-
-
 
 
             $coHostDetail['id'] = $eventDetail->user_id;
