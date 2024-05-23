@@ -24,6 +24,9 @@
                 <div class="input-form">
                     <input type="email" class="form-control inputText" id="email" name="email">
                     <label for="email" class="form-label input-field floating-label">Email Address <span class="required">*</span></label>
+
+                    <input type="email" class="form-control inputText" id="email" name="email" required>
+                    <label for="email" class="form-label input-field floating-label">Email Address <span class="required">*</span></label>
                 </div>
                 <div class="input-form">
                     <input type="password" class="form-control inputText" id="password" name="password">
