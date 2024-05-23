@@ -770,7 +770,7 @@ function sendNotification($notificationType, $postData)
                     ];
 
                     $checkNotificationSetting = checkNotificationSetting($getPostOwnerId->user_id);
-
+                    dd($getPostOwnerId->user_id);
                     if ((count($checkNotificationSetting) && $checkNotificationSetting['guest_rsvp']['push'] == '1') && $getPostOwnerId->notification_on_off == '1') {
 
                         if ($deviceData->model == 'And') {
