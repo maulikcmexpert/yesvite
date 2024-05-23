@@ -1,6 +1,6 @@
 .login-wrapper {
     width: 100%;
-    max-width: 500px;
+    max-width: 565px;
     margin: 0 auto;
     padding: 80px 0;
 }
@@ -26,6 +26,7 @@
 }
 
 .login-form-wrap {
+    max-width: 500px;
     border: 1px solid var(--borderColor);
     padding: 30px;
     border-radius: 16px;
@@ -33,37 +34,13 @@
     -moz-border-radius: 16px;
     -ms-border-radius: 16px;
     -o-border-radius: 16px;
-    margin-bottom: 24px;
+    margin: 0 auto 24px;
 }
 
 .login-form-wrap .input-form {
     margin-bottom: 25px;
     position: relative;
 }
-
-/* .login-form-wrap .input-form label {
-    position: absolute;
-    top: 50%;
-    left: 20px;
-    transition:0.2s ease all;
-    -moz-transition:0.2s ease all;
-    -webkit-transition:0.2s ease all;
-    pointer-events: none;
-    transform: translateY(-50%);
-    -webkit-transform: translateY(-50%);
-    -moz-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    -o-transform: translateY(-50%);
-}
-
-.login-form-wrap input:focus + label, .login-form-wrap input:not(:focus):valid ~ .floating-label{
-    font-size: 12px;
-    color: var(--primaryColor);
-    top: -5px;
-    left:10px;
-    background: #ffffff;
-    padding: 0px 5px 0px 5px;
-}  */
 
 
 .floating-label {
@@ -90,6 +67,7 @@ input:not(:focus):valid ~ .floating-label {
     background: #ffffff;
     padding: 0px 5px 0px 5px;
 }
+
 
 
 .login-form-wrap .input-form:focus label {
@@ -229,24 +207,50 @@ input:not(:focus):valid ~ .floating-label {
 
 
 /* ========= register ========== */
-.login-form-wrap .contact-tab{
-    border: none;
-    padding: 0;
+.register-wrap{
+    padding: 30px !important;
+    margin-bottom: 24px;
 }
 
-.login-form-wrap .contact-tab form{
+.contact-tab .login-form-wrap{
+    border: none;
+    padding: 0;
+    margin-bottom: 0;
+}
+
+.contact-tab form{
     margin-top: 20px;
 }
 
+.register-wrap .character-con{
+    font-size: 12px;
+    color: #0DAC5F;
+}
 
+.register-wrap form button[type="submit"]{
+    margin-top: 20px;
+}
+
+.register-wrap ~ .create-link{
+    margin-bottom: 24px;
+}
+
+.term-link span{
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--lightColor);
+}
+
+.term-link a{
+    color: #FF5A5F;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: underline !important;
+    margin-left: 5px;
+}
 
 
 @media only screen and (max-width:768px) {
-    .login-form-wrap {
-        padding: 20px;
-        border: none;
-    }
-
     .login-content {
         margin-bottom: 20px;
     }
@@ -272,4 +276,9 @@ input:not(:focus):valid ~ .floating-label {
     
 }
 
-
+@media only screen and (max-width:575px){
+    .login-form-wrap {
+        padding: 10px !important;
+        border: none !important;
+    }
+}
