@@ -784,7 +784,7 @@ function sendNotification($notificationType, $postData)
                         }
                     }
                     if ((count($checkNotificationSetting) && $checkNotificationSetting['guest_rsvp']['email'] == '1') && $getPostOwnerId->notification_on_off == '1') {
-
+                        dd($senderData->profile);
                         $invitedUserRsvpMsg = EventInvitedUser::where(['event_id' => $postData['event_id'], 'user_id' => $senderData->id])->first();
                         $eventData = [
                             'event_name' => $getPostOwnerId->event_name,
