@@ -3750,26 +3750,6 @@ class ApiControllerv2 extends Controller
                 }
             }
 
-            if ($eventData['is_draft_save'] == '1') {
-
-                $event = Event::with('event_image', 'event_schedule')->where('id', $eventCreation->id)->first();
-
-                $event_time = "";
-                if ($event->event_schedule->isNotEmpty()) {
-
-                    $event_time =  $event->event_schedule->first()->start_time;
-                }
-
-                $eventData = [
-                    'event_name' => $event->event_name,
-                    'event_image' => ($event->event_image->isNotEmpty()) ? $event->event_image[0]->image : "no_image.png",
-                    'date' =>   date('l - M jS, Y', strtotime($event->start_date)),
-                    'time' => $event_time,
-                ];
-
-                $invitation_email = new NotifyPendingInvitation($eventData);
-                Mail::to($user->email)->send($invitation_email);
-            }
             DB::commit();
             return response()->json(['status' => 1, 'event_id' => $eventCreation->id, 'event_name' => $eventData['event_name'], 'message' => "Event Created Successfully"]);
         } catch (QueryException $e) {

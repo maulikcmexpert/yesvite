@@ -9,14 +9,13 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class ThankYouEmail extends Mailable
+class NewRsvpsEmailNotify extends Mailable
 {
     use Queueable, SerializesModels;
 
     /**
      * Create a new message instance.
      */
-
     public $eventData;
     public function __construct(array $eventData)
     {
@@ -29,7 +28,7 @@ class ThankYouEmail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Thanks for joining us!',
+            subject: 'New Rsvps Email Notify',
         );
     }
 
@@ -40,7 +39,7 @@ class ThankYouEmail extends Mailable
     {
 
         return new Content(
-            view: 'emails.thankyou',
+            view: 'emails.rsvpEmail',
             with: [
                 'eventData' => $this->eventData
             ]

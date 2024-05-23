@@ -14,6 +14,7 @@ use App\Mail\InvitationEmail;
 use App\Models\PostControl;
 use Illuminate\Support\Facades\Mail;
 use App\Jobs\SendInvitationMailJob as sendInvitation;
+use App\Mail\NewRsvpsEmailNotify;
 use App\Models\EventImage;
 use App\Models\EventPostImage;
 use App\Models\EventPostComment;
@@ -210,6 +211,7 @@ function sendNotification($notificationType, $postData)
             }
         }
     }
+
     if ($notificationType == 'update_address' || $notificationType == 'update_time' || $notificationType == 'update_event') {
 
         if (count($invitedusers) != 0) {
@@ -279,7 +281,6 @@ function sendNotification($notificationType, $postData)
             }
         }
     }
-
 
     if ($notificationType == 'accept_reject_co_host') {
 
@@ -732,7 +733,7 @@ function sendNotification($notificationType, $postData)
     }
     if ($notificationType == 'sent_rsvp') {
 
-        $getPostOwnerId = Event::with('event_settings')->where('id', $postData['event_id'])->first();
+        $getPostOwnerId = Event::with(['event_settings', 'user'])->where('id', $postData['event_id'])->first();
 
         if ($postData['rsvp_status'] == '1') {
             $notification_message = $senderData->firstname . ' '  . $senderData->lastname . " RSVP'd Yes for" . $getPostOwnerId->event_name;
@@ -770,7 +771,7 @@ function sendNotification($notificationType, $postData)
 
                     $checkNotificationSetting = checkNotificationSetting($getPostOwnerId->user_id);
 
-                    if ((count($checkNotificationSetting) && $checkNotificationSetting['wall_post']['push'] == '1') && $getPostOwnerId->notification_on_off == '1') {
+                    if ((count($checkNotificationSetting) && $checkNotificationSetting['guest_rsvp']['push'] == '1') && $getPostOwnerId->notification_on_off == '1') {
 
                         if ($deviceData->model == 'And') {
 
@@ -781,6 +782,21 @@ function sendNotification($notificationType, $postData)
 
                             send_notification_FCM($deviceData->device_token, $notificationData);
                         }
+                    }
+                    if ((count($checkNotificationSetting) && $checkNotificationSetting['guest_rsvp']['email'] == '1') && $getPostOwnerId->notification_on_off == '1') {
+
+                        $invitedUserRsvpMsg = EventInvitedUser::where(['event_id' => $postData['event_id'], 'user_id' => $senderData->id])->first();
+                        $eventData = [
+                            'event_name' => $getPostOwnerId->event_name,
+                            'guest_name' => $senderData->firstname . ' '  . $senderData->lastname,
+                            'profileUser' => ($senderData->profile != NULL || $senderData->profile != "") ? $senderData->profile : "no_profile.png",
+                            'rsvp_status' =>  $postData['rsvp_status'],
+                            'kids' => $postData['kids'],
+                            'adults' => $postData['adults'],
+                            'rsvp_message' => ($invitedUserRsvpMsg->message_to_host != NULL || $invitedUserRsvpMsg->message_to_host != "") ? $invitedUserRsvpMsg->message_to_host : ""
+                        ];
+                        $invitation_email = new NewRsvpsEmailNotify($eventData);
+                        Mail::to($getPostOwnerId->user->email)->send($invitation_email);
                     }
                 }
             }
@@ -961,8 +977,6 @@ function send_notification_FCM($deviceToken, $notifyData)
 
     return $result_noti;
 }
-
-
 
 function send_notification_FCM_and($deviceToken, $notifyData)
 {
