@@ -32,7 +32,7 @@ class InvitationEmail extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Invitation Email',
+            subject: 'You have been invited to ' . $this->eventData['event_name'],
         );
     }
 
