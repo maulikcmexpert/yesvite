@@ -55,5 +55,6 @@ class SendUnFinishDraftsReminder extends Command
                     Mail::to($value->user->email)->send($invitation_email);
                 }
             }
+        }
     }
 }
