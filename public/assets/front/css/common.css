@@ -120,6 +120,51 @@ select.form-select{
 }
 
 
+.nav-tabs{
+    width: 100%;
+    height: 52px;
+    max-width: 100%;
+    justify-content: space-between;
+    background-color: var(--tabBg);
+    padding: 5px 4px;
+    border-radius: 100px;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    -ms-border-radius: 100px;
+    -o-border-radius: 100px;
+    padding: 5px !important;
+}
+
+.nav-tabs .nav-item{
+    width: 50%;
+}
+
+.nav-tabs .nav-link{
+    width: 100%;
+    height: 100%;
+    font-size: 14px;
+    padding: 8px 25px;
+    color: var(--secondryColor);
+    font-weight: 600;
+    outline: 0 !important;
+    border: none !important;
+}
+
+.nav-tabs .nav-link.active{
+    border-radius: 100px !important;
+    -webkit-border-radius: 100px !important;
+    -moz-border-radius: 100px !important;
+    -ms-border-radius: 100px !important;
+    -o-border-radius: 100px !important;
+    background-color: #fff;
+    box-shadow: 0px 4px 10px 0px #0000000D;
+}
+
+ul.nav-tabs .nav-link:focus{
+    border: none !important;
+    box-shadow: inherit !important;
+}
+
 /* ======== Responsive ========= */
 @media only screen and (max-width:991px){
     .cmn-btn{
