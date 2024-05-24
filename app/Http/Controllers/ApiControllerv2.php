@@ -7552,7 +7552,7 @@ class ApiControllerv2 extends Controller
                             $optionData['id'] = $optionValue->id;
 
                             $optionData['option'] = $optionValue->option;
-                            $optionData['total_vote'] =  "0 %";
+                            $optionData['total_vote'] =  "0%";
                             if (getOptionTotalVote($polls->id) != 0) {
 
                                 $optionData['total_vote'] =  round(getOptionTotalVote($optionValue->id) / getOptionAllTotalVote($polls->id) * 100) . "%";
@@ -7783,7 +7783,7 @@ class ApiControllerv2 extends Controller
                                 $optionData['id'] = $optionValue->id;
 
                                 $optionData['option'] = $optionValue->option;
-                                $optionData['total_vote'] =  "0 %";
+                                $optionData['total_vote'] =  "0%";
                                 if (getOptionTotalVote($polls->id) != 0) {
 
                                     $optionData['total_vote'] =  round(getOptionTotalVote($optionValue->id) / getOptionAllTotalVote($polls->id) * 100) . "%";
@@ -8143,7 +8143,7 @@ class ApiControllerv2 extends Controller
                     $optionData['id'] = $optionValue->id;
 
                     $optionData['option'] = $optionValue->option;
-                    $optionData['total_vote'] =  "0 %";
+                    $optionData['total_vote'] =  "0%";
                     if (getOptionTotalVote($polls->id) != 0) {
 
                         $optionData['total_vote'] =  round(getOptionTotalVote($optionValue->id) / getOptionAllTotalVote($polls->id) * 100) . "%";
@@ -9855,7 +9855,7 @@ class ApiControllerv2 extends Controller
                 $optionData['id'] = $optionValue->id;
 
                 $optionData['option'] = $optionValue->option;
-                $optionData['total_vote'] =  "0 %";
+                $optionData['total_vote'] =  "0%";
                 if (getOptionTotalVote($polls->id) != 0) {
 
                     $optionData['total_vote'] =  round(getOptionTotalVote($optionValue->id) / getOptionAllTotalVote($polls->id) * 100) . "%";
