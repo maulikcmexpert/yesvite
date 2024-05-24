@@ -9847,7 +9847,7 @@ class ApiControllerv2 extends Controller
 
                 $optionData['option'] = $optionValue->option;
 
-                $optionData['total_vote'] =  round(getOptionTotalVote($optionValue->id) * 100 / getTotalEventInvitedUser($polls->event_post->event_id)) . "%";
+                $optionData['total_vote'] =  round(getOptionTotalVote($optionValue->id) / getOptionAllTotalVote($polls->id) * 100) . "%";
 
                 $optionData['is_poll_selected'] = checkUserGivePoll($user->id, $polls->id, $optionValue->id);
 
