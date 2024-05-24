@@ -273,6 +273,11 @@ function getOptionTotalVote($event_poll_option_id)
     return UserEventPollData::where('event_poll_option_id', $event_poll_option_id)->count();
 }
 
+function getOptionAllTotalVote()
+{
+    return UserEventPollData::count();
+}
+
 
 
 function checkUserAttendOrNOt($event_id, $user_id)
