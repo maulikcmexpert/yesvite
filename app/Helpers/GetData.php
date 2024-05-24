@@ -273,9 +273,9 @@ function getOptionTotalVote($event_poll_option_id)
     return UserEventPollData::where('event_poll_option_id', $event_poll_option_id)->count();
 }
 
-function getOptionAllTotalVote()
+function getOptionAllTotalVote($id)
 {
-    return UserEventPollData::count();
+    return UserEventPollData::where('event_post_poll_id', $id)->count();
 }
 
 
