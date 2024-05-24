@@ -8076,11 +8076,12 @@ class ApiControllerv2 extends Controller
 
 
             $checkUserIsReaction = EventPostReaction::where(['event_id' => $eventDetails->event_id, 'event_post_id' => $input['event_post_id'], 'user_id' => $user->id])->first();
-
+            $ischeckEventOwner = Event::where(['id' => $eventDetails->event_id, 'user_id' => $eventDetails->user->id])->first();
 
             $postsDetail['id'] =  $eventDetails->id;
 
             $postsDetail['user_id'] =  $eventDetails->user->id;
+            $postsDetail['is_host'] =  ($ischeckEventOwner != null) ? 1 : 0;
 
             $postsDetail['username'] =  $eventDetails->user->firstname . ' ' . $eventDetails->user->lastname;
 
