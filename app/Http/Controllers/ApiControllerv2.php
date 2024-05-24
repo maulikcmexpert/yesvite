@@ -7554,7 +7554,7 @@ class ApiControllerv2 extends Controller
                             $optionData['option'] = $optionValue->option;
                             $optionData['total_vote'] =  "0%";
                             dd($polls->id);
-                            dd(getOptionTotalVote($polls->id));
+                            dd(getOptionAllTotalVote($polls->id));
                             if (getOptionTotalVote($polls->id) != 0) {
 
                                 $optionData['total_vote'] =  round(getOptionTotalVote($optionValue->id) / getOptionAllTotalVote($polls->id) * 100) . "%";
