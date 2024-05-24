@@ -7468,10 +7468,10 @@ class ApiControllerv2 extends Controller
 
 
 
-                foreach ($results as $value) {
+                foreach ($results as  $value) {
 
                     $checkUserRsvp = checkUserAttendOrNot($value->event_id, $value->user->id);
-
+                    $ischeckEventOwner = Event::where(['id' => $input['event_id'], 'user_id' => $value->user->id])->first();
                     $postControl = PostControl::where(['user_id' => $user->id, 'event_id' => $input['event_id'], 'event_post_id' => $value->id])->first();
 
                     if ($postControl != null) {
@@ -7485,7 +7485,7 @@ class ApiControllerv2 extends Controller
                     $postsNormalDetail['id'] =  $value->id;
 
                     $postsNormalDetail['user_id'] =  $value->user->id;
-                    $postsNormalDetail['is_host'] =  ($checkEventOwner != null) ? 1 : 0;
+                    $postsNormalDetail['is_host'] =  ($ischeckEventOwner != null) ? 1 : 0;
 
                     $postsNormalDetail['username'] =  $value->user->firstname . ' ' . $value->user->lastname;
 
@@ -7592,6 +7592,7 @@ class ApiControllerv2 extends Controller
 
                     $checkUserRsvp = checkUserAttendOrNot($value->event_id, $value->user->id);
 
+                    $ischeckEventOwner = Event::where(['id' => $input['event_id'], 'user_id' => $value->user->id])->first();
 
                     $postControl = PostControl::where(['user_id' => $user->id, 'event_id' => $input['event_id'], 'event_post_id' => $value->id])->first();
 
@@ -7612,7 +7613,8 @@ class ApiControllerv2 extends Controller
                         $postsNormalDetail['username'] =  $value->user->firstname . ' ' . $value->user->lastname;
 
                         $postsNormalDetail['profile'] =  empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile);
-                        $postsNormalDetail['is_host'] =  ($checkEventOwner != null) ? 1 : 0;
+
+                        $postsNormalDetail['is_host'] =  ($ischeckEventOwner != null) ? 1 : 0;
                         $postsNormalDetail['post_message'] = empty($value->post_message) ? "" :  $value->post_message;
 
                         $postsNormalDetail['rsvp_status'] = $checkUserRsvp;
@@ -7720,7 +7722,7 @@ class ApiControllerv2 extends Controller
                         $postsNormalDetail['user_id'] =  $value->user->id;
 
                         $postsNormalDetail['username'] =  $value->user->firstname . ' ' . $value->user->lastname;
-                        $postsNormalDetail['is_host'] =  ($checkEventOwner != null) ? 1 : 0;
+                        $postsNormalDetail['is_host'] =  ($ischeckEventOwner != null) ? 1 : 0;
                         $postsNormalDetail['profile'] =  empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile);
 
                         $postsNormalDetail['post_message'] = empty($value->post_message) ? "" :  $value->post_message;
@@ -7820,7 +7822,7 @@ class ApiControllerv2 extends Controller
                         $postsNormalDetail['user_id'] =  $value->user->id;
 
                         $postsNormalDetail['username'] =  $value->user->firstname . ' ' . $value->user->lastname;
-                        $postsNormalDetail['is_host'] =  ($checkEventOwner != null) ? 1 : 0;
+                        $postsNormalDetail['is_host'] =  ($ischeckEventOwner != null) ? 1 : 0;
                         $postsNormalDetail['profile'] =  empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile);
 
                         $postsNormalDetail['post_message'] = empty($value->post_message) ? "" :  $value->post_message;
@@ -7924,7 +7926,7 @@ class ApiControllerv2 extends Controller
                         $postsNormalDetail['user_id'] =  $value->user->id;
 
                         $postsNormalDetail['username'] =  $value->user->firstname . ' ' . $value->user->lastname;
-                        $postsNormalDetail['is_host'] =  ($checkEventOwner != null) ? 1 : 0;
+                        $postsNormalDetail['is_host'] =  ($ischeckEventOwner != null) ? 1 : 0;
                         $postsNormalDetail['profile'] =  empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile);
 
                         $postsNormalDetail['post_message'] = empty($value->post_message) ? "" :  $value->post_message;
