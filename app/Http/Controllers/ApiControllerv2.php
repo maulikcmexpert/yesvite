@@ -11578,21 +11578,11 @@ class ApiControllerv2 extends Controller
 
         try {
 
-            $updateNotification = Notification::where(['user_id' => $user->id])->get();
-            if (!empty($updateNotification)) {
-                foreach ($updateNotification as $val) {
+            $updateNotification = Notification::where('user_id', $user->id)->update(['read' => '1']);
 
-                    $readNotify = Notification::where(['id' => $val->id])->first();
-                    $readNotify->read = '1';
-                    $readNotify->save();
-                }
 
-                $unreadCount = Notification::where(['user_id' => $user->id, 'read' => '0'])->count();
-                return response()->json(['status' => 1, 'unread_count' => $unreadCount, 'message' => "Notification read successfully"]);
-            } else {
-
-                return response()->json(['status' => 0, 'message' => "data is incorrect"]);
-            }
+            $unreadCount = Notification::where(['user_id' => $user->id, 'read' => '0'])->count();
+            return response()->json(['status' => 1, 'unread_count' => $unreadCount, 'message' => "Notification read successfully"]);
         } catch (QueryException $e) {
 
             DB::rollBack();
