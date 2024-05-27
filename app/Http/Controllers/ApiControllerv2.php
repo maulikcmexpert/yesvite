@@ -11568,6 +11568,39 @@ class ApiControllerv2 extends Controller
         }
     }
 
+    public function notificationAllRead()
+
+    {
+
+        $user  = Auth::guard('api')->user();
+
+
+
+        try {
+            DB::beginTransaction();
+            $updateNotification = Notification::where(['user_id' => $user->id])->first();
+            if (!empty($updateNotification)) {
+                $updateNotification->read = '1';
+                $updateNotification->save();
+                DB::commit();
+                $unreadCount = Notification::where(['user_id' => $user->id, 'read' => '0'])->count();
+                return response()->json(['status' => 1, 'unread_count' => $unreadCount, 'message' => "Notification read successfully"]);
+            } else {
+
+                return response()->json(['status' => 0, 'message' => "data is incorrect"]);
+            }
+        } catch (QueryException $e) {
+
+            DB::rollBack();
+
+            return response()->json(['status' => 0, 'message' => "db error"]);
+        } catch (\Exception $e) {
+
+
+            return response()->json(['status' => 0, 'message' => "something went wrong"]);
+        }
+    }
+
     public function logout()
 
     {

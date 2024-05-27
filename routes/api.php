@@ -262,6 +262,7 @@ Route::prefix('user/v2/')->middleware('checkUser')->group(function () {
     Route::post('notification_list', [ApiControllerv2::class, 'notificationList']);
     Route::post('delete_notification', [ApiControllerv2::class, 'deleteNotification']);
     Route::post('notification_read_unread', [ApiControllerv2::class, 'notificationReadUnread']);
+    Route::get('notification_all_read', [ApiControllerv2::class, 'notificationAllRead']);
     Route::get('get_events_list', [ApiControllerv2::class, 'getEventsList']);
     Route::post('event_potluck', [ApiControllerv2::class, 'eventPotluck']);
 
