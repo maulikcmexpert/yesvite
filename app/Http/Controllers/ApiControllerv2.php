@@ -11577,12 +11577,12 @@ class ApiControllerv2 extends Controller
 
 
         try {
-            DB::beginTransaction();
+
             $updateNotification = Notification::where(['user_id' => $user->id])->first();
             if (!empty($updateNotification)) {
                 $updateNotification->read = '1';
                 $updateNotification->save();
-                DB::commit();
+
                 $unreadCount = Notification::where(['user_id' => $user->id, 'read' => '0'])->count();
                 return response()->json(['status' => 1, 'unread_count' => $unreadCount, 'message' => "Notification read successfully"]);
             } else {
