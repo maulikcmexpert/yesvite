@@ -6495,6 +6495,8 @@ class ApiControllerv2 extends Controller
                     'rsvp_status' => $request->rsvp_status,
                     'kids' => $request->kids,
                     'adults' => $request->adults,
+                    'rsvp_video' => $video,
+                    'rsvp_message' => $request->message_to_host,
                     'post_id' => "",
                     'rsvp_attempt' => $rsvp_attempt
                 ];

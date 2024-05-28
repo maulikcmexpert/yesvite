@@ -750,6 +750,8 @@ function sendNotification($notificationType, $postData)
             $notification->kids = $postData['kids'];
             $notification->adults = $postData['adults'];;
             $notification->rsvp_status = $postData['rsvp_status'];
+            $notification->rsvp_video = $postData['rsvp_video'];
+            $notification->rsvp_message = $postData['rsvp_message'];
             $notification->rsvp_attempt = $postData['rsvp_attempt'];
 
             if ($notification->save()) {
