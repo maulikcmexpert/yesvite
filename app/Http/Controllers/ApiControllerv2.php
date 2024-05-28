@@ -11384,7 +11384,7 @@ class ApiControllerv2 extends Controller
                 if ($values->notification_type == 'sent_rsvp') {
                     $getRsvpVideo =  EventInvitedUser::where(['user_id' => $values->sender_id, 'event_id' => $values->event_id])->first();
                     $notificationDetail['message_to_host'] = ($getRsvpVideo != null && $getRsvpVideo->message_to_host != null) ? $getRsvpVideo->message_to_host : "";
-                    $notificationDetail['rsvp_attempt'] = ($getRsvpVideo != null && $getRsvpVideo->rsvp_attempt != null) ? $getRsvpVideo->rsvp_attempt : "";
+                    $notificationDetail['rsvp_attempt'] = $values->rsvp_attempt;
                     $notificationDetail['video'] = ($getRsvpVideo != null && $getRsvpVideo->message_by_video != null) ? asset('public/storage/rsvp_video/' . $getRsvpVideo->message_by_video) : "";
                 }
                 if (isset($values->post->post_type) && $values->post->post_type == '1') {
