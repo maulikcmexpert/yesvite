@@ -11384,10 +11384,10 @@ class ApiControllerv2 extends Controller
                     $notificationDetail['count'] = $values->user_potluck_item_count;
                 }
                 if ($values->notification_type == 'sent_rsvp') {
-                    $getRsvpVideo =  EventInvitedUser::where(['user_id' => $values->sender_id, 'event_id' => $values->event_id])->first();
-                    $notificationDetail['message_to_host'] = ($getRsvpVideo != null && $getRsvpVideo->message_to_host != null) ? $getRsvpVideo->message_to_host : "";
+
+                    $notificationDetail['message_to_host'] = ($values->rsvp_message != null && $values->rsvp_message != "") ? $values->rsvp_message : "";
                     $notificationDetail['rsvp_attempt'] = $values->rsvp_attempt;
-                    $notificationDetail['video'] = ($getRsvpVideo != null && $getRsvpVideo->message_by_video != null) ? asset('public/storage/rsvp_video/' . $getRsvpVideo->message_by_video) : "";
+                    $notificationDetail['video'] = ($values->rsvp_video != null && $values->rsvp_video != null) ? asset('public/storage/rsvp_video/' . $values->rsvp_video) : "";
                 }
                 if (isset($values->post->post_type) && $values->post->post_type == '1') {
                     if ($values->post->post_image[0]->type == 'video') {
