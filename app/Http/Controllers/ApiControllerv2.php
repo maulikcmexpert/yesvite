@@ -1994,7 +1994,7 @@ class ApiControllerv2 extends Controller
 
 
         $user  = Auth::guard('api')->user();
-        dd($user->id);
+
         $rawData = $request->getContent();
 
         $input = json_decode($rawData, true);
@@ -2763,6 +2763,7 @@ class ApiControllerv2 extends Controller
                 'lastname' => ['required'],
                 'country_code' => ['required'],
                 'phone_number' => ['required', 'unique:users,phone_number'],
+                'email' => ['required', 'email:rfc,dns', 'unique:users,email'],
                 'prefer_by' => ['required', 'in:email,phone']
 
             ]);
