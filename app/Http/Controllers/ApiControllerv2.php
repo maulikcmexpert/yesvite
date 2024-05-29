@@ -1994,7 +1994,7 @@ class ApiControllerv2 extends Controller
 
 
         $user  = Auth::guard('api')->user();
-
+        dd($user->id);
         $rawData = $request->getContent();
 
         $input = json_decode($rawData, true);
