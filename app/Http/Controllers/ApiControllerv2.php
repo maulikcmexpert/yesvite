@@ -2033,7 +2033,7 @@ class ApiControllerv2 extends Controller
 
 
 
-        // try {
+        try {
 
             DB::beginTransaction();
             $userUpdate = User::where('id', $user->id)->first();
@@ -2139,12 +2139,12 @@ class ApiControllerv2 extends Controller
 
                 return response()->json(['status' => 0, 'message' => "User profile not found", 'message' => "The requested user profile data does not exist."]);
             }
-        // } catch (QueryException $e) {
-        //     DB::Rollback();
-        //     return response()->json(['status' => 0, 'message' => "db error"]);
-        // } catch (Exception  $e) {
-        //     return response()->json(['status' => 0, 'message' => 'something went wrong']);
-        // }
+        } catch (QueryException $e) {
+            DB::Rollback();
+            return response()->json(['status' => 0, 'message' => "db error"]);
+        } catch (Exception  $e) {
+            return response()->json(['status' => 0, 'message' => 'something went wrong']);
+        }
     }
 
     public function updateProfileOrBgProfile(Request $request)

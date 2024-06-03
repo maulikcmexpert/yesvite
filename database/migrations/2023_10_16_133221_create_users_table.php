@@ -44,8 +44,8 @@ return new class extends Migration
             $table->string('company_name', 255)->nullable();
             $table->text('address')->nullable();
             $table->text('address_2')->nullable();
-            $table->string('city', 10)->nullable();
-            $table->string('state', 20)->nullable();
+            $table->string('city', 255)->nullable();
+            $table->string('state', 255)->nullable();
             $table->string('zip_code', 6)->nullable();
             $table->text('about_me')->nullable();
             $table->enum('visible', ['1', '2', '3'])->default('1')->comment('1 = Only guests from event, 2 = No One 3 = Custom');
