@@ -46,6 +46,7 @@
                             </span>
                             <a href="mailto:{{$user->email }}">{{$user->email }}</a>
                         </div>
+                        @if($user->city != NULL && $user->state != NULL)
                         <div>
                             <span>
                                 <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -55,6 +56,7 @@
                             </span>
                             <span>{{$user->city.','.$user->state}}</span>
                         </div>
+                        @endif
                     </div>
                     <a href="#" class="switch-ac" data-bs-toggle="modal" data-bs-target="#manageModel">
                         <span>Manage | Switch Accounts</span>
