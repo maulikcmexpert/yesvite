@@ -159,6 +159,7 @@ Route::prefix('user/v1/')->middleware('checkUser')->group(function () {
 
 Route::get('send_thanks', [ApiControllerv2::class, 'sendThanks']);
 Route::get('install_app', [ApiControllerv2::class, 'installApp']);
+
 Route::prefix('user/v2/')->middleware('checkUser')->group(function () {
 
     Route::get('home', [ApiControllerv2::class, 'home']);
