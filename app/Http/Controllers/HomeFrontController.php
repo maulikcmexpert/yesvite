@@ -36,8 +36,14 @@ class HomeFrontController extends Controller
 
             return $event;
         });
+        $event = [];
+        foreach ($eventsWithDayDifference as $value) {
+            if ($value->days_difference <= 4) {
+                $event[] = $value->id;
+            }
+        }
 
-        dd($eventsWithDayDifference);
+        dd($event);
         $title = 'Home';
         $page = 'front.homefront';
         return view('layout', compact(
