@@ -21,6 +21,7 @@
         </div>
         <div class="login-form-wrap">
             <form method="POST" id="loginForm" action="{{route('auth.checkLogin')}}">
+                @csrf
                 <div class="input-form">
                     <!-- <input type="email" class="form-control inputText" id="email" name="email">
                     <label for="email" class="form-label input-field floating-label">Email Address <span class="required">*</span></label> -->
@@ -29,9 +30,9 @@
                     <label for="email" class="form-label input-field floating-label">Email Address <span class="required">*</span></label>
                 </div>
                 <div class="input-form">
-                        <input type="password" class="form-control inputText" id="password" name="password" required>
-                        <label for="password" class="form-label input-field floating-label">Password <span class="required">*</span></label>
-                        <span toggle="#password-field" class="fa-regular fa-fw fa-eye-slash field-icon toggle-password"></span>
+                    <input type="password" class="form-control inputText" id="password" name="password" required>
+                    <label for="password" class="form-label input-field floating-label">Password <span class="required">*</span></label>
+                    <span toggle="#password-field" class="fa-regular fa-fw fa-eye-slash field-icon toggle-password"></span>
                 </div>
                 <div class="form-check mb-3">
                     <div>
