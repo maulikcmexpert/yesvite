@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Laravel\Socialite\Facades\Socialite;
-
-
+use Illuminate\Support\Facades\Session;
+use Cookie;
 use Auth;
 use Exception;
 use App\Models\User;
