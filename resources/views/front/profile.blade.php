@@ -73,15 +73,15 @@
 
                     <div class="user-gallery">
                         <div>
-                            <h4>54</h4>
+                            <h4>{{formatNumber($user->events)}}</h4>
                             <p>Events</p>
                         </div>
                         <div>
-                            <h4>103</h4>
+                            <h4>{{formatNumber($user->photos)}}</h4>
                             <p>Photos</p>
                         </div>
                         <div>
-                            <h4>2.2k</h4>
+                            <h4>{{formatNumber($user->comments)}}</h4>
                             <p>Comments</p>
                         </div>
                     </div>

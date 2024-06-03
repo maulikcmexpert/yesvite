@@ -1032,3 +1032,23 @@ function dateDiffer($dateTime)
     // Calculate the difference in days
     return  $currentDateTime->diffInDays($createdDateTime);
 }
+
+
+function formatNumber($num)
+{
+    if ($num >= 1000 && $num < 1000000) {
+        // Divide the number by 1000 and round it to remove decimal points
+        $num = round($num / 1000, 1);
+        return $num . 'k';
+    } elseif ($num >= 1000000 && $num < 1000000000) {
+        // Divide the number by 1000000 and round it to remove decimal points
+        $num = round($num / 1000000, 1);
+        return $num . 'M';
+    } elseif ($num >= 1000000000) {
+        // Divide the number by 1000000000 and round it to remove decimal points
+        $num = round($num / 1000000000, 1);
+        return $num . 'B';
+    } else {
+        return $num;
+    }
+}
