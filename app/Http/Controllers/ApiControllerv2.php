@@ -7768,8 +7768,10 @@ class ApiControllerv2 extends Controller
                                 $optionData['id'] = $optionValue->id;
 
                                 $optionData['option'] = $optionValue->option;
-
-                                $optionData['total_vote'] =   round(getOptionTotalVote($optionValue->id) / getOptionAllTotalVote($polls->id) * 100) . "%";
+                                $optionData['total_vote'] = "0%";
+                                if (getOptionAllTotalVote($polls->id) != 0) {
+                                    $optionData['total_vote'] =   round(getOptionTotalVote($optionValue->id) / getOptionAllTotalVote($polls->id) * 100) . "%";
+                                }
                                 $optionData['is_poll_selected'] = checkUserGivePoll($user->id, $polls->id, $optionValue->id);
 
 
@@ -7980,8 +7982,10 @@ class ApiControllerv2 extends Controller
                                 $optionData['id'] = $optionValue->id;
 
                                 $optionData['option'] = $optionValue->option;
-
-                                $optionData['total_vote'] =   round(getOptionTotalVote($optionValue->id) / getOptionAllTotalVote($polls->id) * 100) . "%";
+                                $optionData['total_vote'] = "0%";
+                                if (getOptionAllTotalVote($polls->id) != 0) {
+                                    $optionData['total_vote'] =   round(getOptionTotalVote($optionValue->id) / getOptionAllTotalVote($polls->id) * 100) . "%";
+                                }
                                 $optionData['is_poll_selected'] = checkUserGivePoll($user->id, $polls->id, $optionValue->id);
 
 
@@ -8085,8 +8089,11 @@ class ApiControllerv2 extends Controller
                                 $optionData['id'] = $optionValue->id;
 
                                 $optionData['option'] = $optionValue->option;
+                                $optionData['total_vote'] = "0%";
+                                if (getOptionAllTotalVote($polls->id) != 0) {
 
-                                $optionData['total_vote'] =   round(getOptionTotalVote($optionValue->id) / getOptionAllTotalVote($polls->id) * 100) . "%";
+                                    $optionData['total_vote'] =   round(getOptionTotalVote($optionValue->id) / getOptionAllTotalVote($polls->id) * 100) . "%";
+                                }
                                 $optionData['is_poll_selected'] = checkUserGivePoll($user->id, $polls->id, $optionValue->id);
 
 
