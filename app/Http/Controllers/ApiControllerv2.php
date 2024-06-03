@@ -57,7 +57,8 @@ use App\Models\{
     GroupMember,
     UserNotificationType,
     UserProfilePrivacy,
-    UserSeenStory
+    UserSeenStory,
+    VersionSetting
 };
 // Rules //
 use Illuminate\Pagination\Paginator;
@@ -12027,5 +12028,12 @@ class ApiControllerv2 extends Controller
         } else {
             return response()->json(['status' => 0, 'message' => 'Email or password invalid']);
         }
+    }
+
+    public function installApp()
+    {
+        $versionSetting =  VersionSetting::first();
+
+        return response()->json(["status" => true, 'message' => 'Application', 'url' => asset('public/appversion/traditional.apk'), 'version' => $versionSetting->android_version]);
     }
 }
