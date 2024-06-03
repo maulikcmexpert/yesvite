@@ -44,7 +44,7 @@ class SocialController extends Controller
         $authUser = $this->findOrCreateUser($user, $provider);
 
         Auth::login($authUser, true);
-
+        dd(Auth::login($authUser, true));
         return redirect()->intended('/home');
     }
 
