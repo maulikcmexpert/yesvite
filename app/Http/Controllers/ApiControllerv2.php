@@ -12030,19 +12030,16 @@ class ApiControllerv2 extends Controller
         }
     }
 
-    public function installApp()
+    public function installAndroidApp()
     {
         $versionSetting =  VersionSetting::first();
 
-        return response()->json(
-            [
-                "status" => true,
-                'message' => 'Application',
-                'android_url' => asset('public/appversion/yesvite.apk'),
-                'android_version' => $versionSetting->android_version,
-                'ios_url' => asset('public/appversion/yesvite_ios.apk'),
-                'ios_version' => $versionSetting->ios_version
-            ]
-        );
+        return response()->json(["status" => true, 'message' => 'Application', 'url' => asset('public/appversion/yesvite_android.apk'), 'version' => $versionSetting->android_version]);
+    }
+    public function installIosApp()
+    {
+        $versionSetting =  VersionSetting::first();
+
+        return response()->json(["status" => true, 'message' => 'Application', 'url' => asset('public/appversion/yesvite_ios.apk'), 'version' => $versionSetting->ios_version]);
     }
 }
