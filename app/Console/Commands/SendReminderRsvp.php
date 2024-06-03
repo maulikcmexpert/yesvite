@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Models\Event;
 use Carbon\Carbon;
+use App\Models\EventInvitedUser;
 
 class SendReminderRsvp extends Command
 {

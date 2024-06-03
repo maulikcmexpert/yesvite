@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\EventInvitedUser;
 use Illuminate\Http\Request;
-
+use App\Mail\NewRsvpsReminderMail;
 use Carbon\Carbon;
 use App\Mail\NotifyPendingInvitation;
 use Illuminate\Support\Facades\Mail;
@@ -39,11 +40,24 @@ class HomeFrontController extends Controller
         $event = [];
         foreach ($eventsWithDayDifference as $value) {
             if ($value->days_difference <= 4) {
-                $event[] = $value->id;
+                $invitedUser = EventInvitedUser::with('user')->where('event_id', $value->id)->where('rsvp_status', '!=', '1')->get();
+                if (count($invitedUser) != 0) {
+
+                    foreach ($invitedUser as $val) {
+                        $eventData = [
+                            'event_name' => $value->event_name,
+
+                        ];
+
+                        $invitation_email = new NewRsvpsReminderMail($eventData);
+                        $invitation_email->from('notification@yesvite.com', 'Yesvite');
+                        Mail::to($val->user->email)->send($invitation_email);
+                    }
+                }
             }
         }
 
-        dd($event);
+
         $title = 'Home';
         $page = 'front.homefront';
         return view('layout', compact(
