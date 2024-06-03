@@ -31,12 +31,12 @@ class HomeController extends Controller
         });
 
         dd($eventsWithDayDifference);
-        $title = 'Home';
-        $page = 'front.home';
-        return view('layout', compact(
-            'title',
-            'page',
-        ));
+        // $title = 'Home';
+        // $page = 'front.home';
+        // return view('layout', compact(
+        //     'title',
+        //     'page',
+        // ));
     }
 
 
