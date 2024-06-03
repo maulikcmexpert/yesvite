@@ -29,34 +29,11 @@
                  <span class="line-toggle"></span>
                  <span class="line-toggle"></span>
              </button>
-             <div class="collapse navbar-collapse" id="mynavbar">
-                 <ul class="navbar-nav align-items-center ms-auto">
-                     <li class="nav-item">
-                         <a class="nav-link" href="home.html">Home</a>
-                     </li>
-                     <li class="nav-item">
-                         <a class="nav-link" href="about-us.html">About</a>
-                     </li>
-                     <li class="nav-item">
-                         <a class="nav-link" href="contact.html">contact</a>
-                     </li>
-                     <!-- <li class="nav-item">
-                            
-                        </li> -->
-                     <li class="nav-item d-flex align-items-center gap-3">
-                         <a class="nav-link signIn-btn" href="login.html">Sign In</a>
-                         <a class="nav-link signUp-btn" href="register.html">
-                             <span><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                     <path d="M4.15743 14.6397C3.69993 14.6397 3.27243 14.4822 2.96493 14.1897C2.57493 13.8222 2.38743 13.2672 2.45493 12.6672L2.73243 10.2372C2.78493 9.77967 3.06243 9.17217 3.38493 8.84217L9.54243 2.32467C11.0799 0.69717 12.6849 0.652171 14.3124 2.18967C15.9399 3.72717 15.9849 5.33217 14.4474 6.95967L8.28993 13.4772C7.97493 13.8147 7.38993 14.1297 6.93243 14.2047L4.51743 14.6172C4.38993 14.6247 4.27743 14.6397 4.15743 14.6397ZM11.9499 2.18217C11.3724 2.18217 10.8699 2.54217 10.3599 3.08217L4.20243 9.60717C4.05243 9.76467 3.87993 10.1397 3.84993 10.3572L3.57243 12.7872C3.54243 13.0347 3.60243 13.2372 3.73743 13.3647C3.87243 13.4922 4.07493 13.5372 4.32243 13.4997L6.73743 13.0872C6.95493 13.0497 7.31493 12.8547 7.46493 12.6972L13.6224 6.17967C14.5524 5.18967 14.8899 4.27467 13.5324 2.99967C12.9324 2.42217 12.4149 2.18217 11.9499 2.18217Z" fill="white" />
-                                     <path d="M13.0044 8.21165C12.9894 8.21165 12.9669 8.21165 12.9519 8.21165C10.6119 7.97915 8.72935 6.20165 8.36935 3.87665C8.32435 3.56915 8.53435 3.28415 8.84185 3.23165C9.14935 3.18665 9.43435 3.39665 9.48685 3.70415C9.77185 5.51916 11.2419 6.91415 13.0719 7.09415C13.3794 7.12415 13.6044 7.40165 13.5744 7.70915C13.5369 7.99415 13.2894 8.21165 13.0044 8.21165Z" fill="white" />
-                                     <path d="M15.75 17.0625H2.25C1.9425 17.0625 1.6875 16.8075 1.6875 16.5C1.6875 16.1925 1.9425 15.9375 2.25 15.9375H15.75C16.0575 15.9375 16.3125 16.1925 16.3125 16.5C16.3125 16.8075 16.0575 17.0625 15.75 17.0625Z" fill="white" />
-                                 </svg></span>
-                             Sign Up
-                         </a>
-                     </li>
-                 </ul>
-             </div>
-             <div class="header-right d-none">
+
+
+
+             @if(Session::has('user'))
+             <div class="header-right">
                  <div class="header-dropdown dropdown">
                      <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
                          <div class="drp-conent position-relative">
@@ -98,6 +75,36 @@
                      <img src="{{Session::get('user')['profile']}}" class="" alt="user-img">
                  </a>
              </div>
+             @else
+             <div class="collapse navbar-collapse" id="mynavbar">
+                 <ul class="navbar-nav align-items-center ms-auto">
+                     <li class="nav-item">
+                         <a class="nav-link" href="home.html">Home</a>
+                     </li>
+                     <li class="nav-item">
+                         <a class="nav-link" href="about-us.html">About</a>
+                     </li>
+                     <li class="nav-item">
+                         <a class="nav-link" href="contact.html">contact</a>
+                     </li>
+                     <!-- <li class="nav-item">
+                            
+                        </li> -->
+                     <li class="nav-item d-flex align-items-center gap-3">
+                         <a class="nav-link signIn-btn" href="login.html">Sign In</a>
+                         <a class="nav-link signUp-btn" href="register.html">
+                             <span><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                     <path d="M4.15743 14.6397C3.69993 14.6397 3.27243 14.4822 2.96493 14.1897C2.57493 13.8222 2.38743 13.2672 2.45493 12.6672L2.73243 10.2372C2.78493 9.77967 3.06243 9.17217 3.38493 8.84217L9.54243 2.32467C11.0799 0.69717 12.6849 0.652171 14.3124 2.18967C15.9399 3.72717 15.9849 5.33217 14.4474 6.95967L8.28993 13.4772C7.97493 13.8147 7.38993 14.1297 6.93243 14.2047L4.51743 14.6172C4.38993 14.6247 4.27743 14.6397 4.15743 14.6397ZM11.9499 2.18217C11.3724 2.18217 10.8699 2.54217 10.3599 3.08217L4.20243 9.60717C4.05243 9.76467 3.87993 10.1397 3.84993 10.3572L3.57243 12.7872C3.54243 13.0347 3.60243 13.2372 3.73743 13.3647C3.87243 13.4922 4.07493 13.5372 4.32243 13.4997L6.73743 13.0872C6.95493 13.0497 7.31493 12.8547 7.46493 12.6972L13.6224 6.17967C14.5524 5.18967 14.8899 4.27467 13.5324 2.99967C12.9324 2.42217 12.4149 2.18217 11.9499 2.18217Z" fill="white" />
+                                     <path d="M13.0044 8.21165C12.9894 8.21165 12.9669 8.21165 12.9519 8.21165C10.6119 7.97915 8.72935 6.20165 8.36935 3.87665C8.32435 3.56915 8.53435 3.28415 8.84185 3.23165C9.14935 3.18665 9.43435 3.39665 9.48685 3.70415C9.77185 5.51916 11.2419 6.91415 13.0719 7.09415C13.3794 7.12415 13.6044 7.40165 13.5744 7.70915C13.5369 7.99415 13.2894 8.21165 13.0044 8.21165Z" fill="white" />
+                                     <path d="M15.75 17.0625H2.25C1.9425 17.0625 1.6875 16.8075 1.6875 16.5C1.6875 16.1925 1.9425 15.9375 2.25 15.9375H15.75C16.0575 15.9375 16.3125 16.1925 16.3125 16.5C16.3125 16.8075 16.0575 17.0625 15.75 17.0625Z" fill="white" />
+                                 </svg></span>
+                             Sign Up
+                         </a>
+                     </li>
+                 </ul>
+             </div>
+
+             @endif
          </nav>
      </div>
  </header>
