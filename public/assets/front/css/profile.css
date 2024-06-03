@@ -7,6 +7,18 @@
     -o-border-radius: 20px;
 }
 
+.edit-btn{
+    padding: 12px 24px;
+    background-color: transparent;
+    border: 1px solid var(--borderColor);
+    color: var(--secondryColor);
+    border-radius: 16px;
+    -webkit-border-radius: 16px;
+    -moz-border-radius: 16px;
+    -ms-border-radius: 16px;
+    -o-border-radius: 16px;
+}
+
 .profile-wrapper .profile-img{
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
@@ -15,8 +27,8 @@
 }
 
 .profile-img .user-img a{
-    width: 36px;
-    height: 36px;
+    width: 32px;
+    height: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -56,21 +68,42 @@
 }
 
 .profile-content{
-    padding: 20px;
-    margin-top: 25px;
+    padding: 24px;
+    /* margin-top: 25px; */
+}
+
+.profile-content .user-name{
+    margin: 20px 0 24px;
+}
+
+.profile-content .user-name h3{
+    font-size: 20px;
+}
+
+.profile-content .user-name .d-flex{
+    margin-bottom: 5px;
 }
 
 .profile-content .user-name h6{
     margin: 16px 0;
-    font-size: 12px;
+    font-size: 14px;
     color: var(--secondryColor);
     line-height: 18px;
 }
 
+.profile-content .user-name p{
+    color: var(--lightColor);
+}
+
+.profile-wrapper .mob-edit-btn{
+    display: none;
+}
+
 .user-contact-data{
-    padding: 20px 0;
-    margin-bottom: 20px;
+    padding: 24px 0;
+    margin-bottom: 24px;
     border-bottom: 1px solid var(--borderColor);
+    border-top: 1px solid var(--borderColor);
 }
 
 .user-contact-data div{
@@ -205,18 +238,14 @@
     height: 100%;
     display: block;
     object-fit: cover;
-    border-radius: 16px;
-    -webkit-border-radius: 16px;
-    -moz-border-radius: 16px;
-    -ms-border-radius: 16px;
-    -o-border-radius: 16px;
 }
-    /* [type="file"] {
+
+[type="file"] {
     height: 0;  
     width: 0;
     overflow: hidden;
     display: none;
-} */
+}
 
 .Edit-img
 {
@@ -267,7 +296,11 @@
 
 .btn-file__preview{
     border-radius: 100%;
-    width: 200px;
+    background-size: cover;
+    background-position: center;
+    background-image: url('../image/user-img.svg');
+    width: 100%;
+    max-width: 200px;
     height: 200px;
     border-radius: 100%;
     -webkit-border-radius: 100%;
@@ -276,10 +309,6 @@
     -o-border-radius: 100%;
     border: 5px solid #fff;
     margin: 0 auto;
-}
-
-.btn-file__preview img{
-    border-radius: 100%;
 }
 
 input[type="date"]{
@@ -341,6 +370,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     font-size: 14px !important;
     font-weight: 400 !important;
     color: var(--secondryColor) !important;
+    outline: 0;
 }
 
 .modal-footer a,
@@ -356,10 +386,22 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 #coverImg-modal .cover-img{
     height: 495px;
+    background: #000;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+#coverImg-modal .cover-img img{
+    object-fit: contain;
 }
 
 .user-cover-img{
     background: #14b6c21a;
+    width: 375px;
+    height: 375px;
 }
 
 .user-cover-img img{
@@ -465,9 +507,92 @@ input::-webkit-slider-thumb{
     margin-top: 10px;
 }
 
+.public-wrp .user-contact-data{
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+.manage-account .users-data:last-child{
+    border-bottom: none !important;
+}
+
+#manageModel button.cmn-btn:hover{
+   background-color: var(--primaryColor) !important;
+   color: #fff !important;
+}
+
+.slidecontainer input[type="range"]{
+    box-shadow: none !important;
+}
+
 @media only screen and (max-width:991px){
     .profile-img .user-img{
         width: 80px;
         height: 80px;
+    }
+}
+
+@media only screen and (max-width:575px){
+    .profile-details .col-xxl-9{
+        padding: 0;
+    }
+
+    .profile-details .breadcrumb-nav{
+        padding: 0 20px;
+    }
+
+    .profile-details .contact-title{
+        padding: 0 20px;
+    }
+
+    .profile-wrapper .profile-img{
+        height: 130px;
+    }
+
+    .profile-wrapper{
+        border: none;
+        border-radius: 0;
+        -webkit-border-radius: 0;
+        -moz-border-radius: 0;
+        -ms-border-radius: 0;
+        -o-border-radius: 0;
+    }
+
+    .profile-img .bg-img{
+        border-radius: 0;
+        -webkit-border-radius: 0;
+        -moz-border-radius: 0;
+        -ms-border-radius: 0;
+        -o-border-radius: 0;
+    }
+
+    .profile-wrapper .mob-edit-btn{
+        display: block;
+        margin: 0 20px;
+    }
+
+    .profile-details .contact-title .edit-btn{
+        display: none;
+    }
+
+    .public-wrp .contact-list{
+        padding: 0;
+    }
+
+    .public-wrp .profile-content{
+        padding-bottom: 0;
+    }
+
+    #manageModel button.cmn-btn{
+        width: 100%;
+    }
+
+    .edit-btn{
+        padding: 12px 17px;
+    }
+
+    #img-preview{
+        height: 145px;
     }
 }

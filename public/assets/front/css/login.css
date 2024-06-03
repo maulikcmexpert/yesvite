@@ -3,10 +3,12 @@
     max-width: 565px;
     margin: 0 auto;
     padding: 80px 0;
+    border-bottom: 1px solid var(--borderColor);
+    border-top: 1px solid var(--borderColor);
 }
 
 .login-content {
-    margin-bottom: 28px;
+    margin-bottom: 24px;
 }
 
 .login-content a.logo {
@@ -62,7 +64,7 @@ input:focus ~ .floating-label,
 input:not(:focus):valid ~ .floating-label {
     font-size: 12px;
     color: var(--primaryColor);
-    top: -5px;
+    top: 0;
     left:10px;
     background: #ffffff;
     padding: 0px 5px 0px 5px;
@@ -86,7 +88,7 @@ input:not(:focus):valid ~ .floating-label {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 22px !important;
+    margin-bottom: 20px !important;
 }
 
 .login-form-wrap .form-check label {
@@ -212,6 +214,10 @@ input:not(:focus):valid ~ .floating-label {
     margin-bottom: 24px;
 }
 
+.register-wrap .nav-tabs{
+    margin-bottom: 20px;
+}
+
 .contact-tab .login-form-wrap{
     border: none;
     padding: 0;
@@ -256,7 +262,7 @@ input:not(:focus):valid ~ .floating-label {
     }
 
     .login-wrapper{
-        padding: 40px 0;
+        padding: 36px 0;
 
     }
 
@@ -272,6 +278,10 @@ input:not(:focus):valid ~ .floating-label {
 
     .login-form-wrap button.btn {
         padding: 12px;
+    }
+
+    .login-content h1{
+        font-size: 24px;
     }
     
 }

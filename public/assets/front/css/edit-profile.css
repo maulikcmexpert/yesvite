@@ -1,0 +1,99 @@
+.edit-profile .profile-content{
+    margin-top: 50px !important;
+}
+
+.edit-profile .login-form-wrap{
+    border: none;
+    max-width: 100%;
+    margin-bottom: 0 !important;    
+}
+
+.edit-profile .main-radio .radio-wrapper{
+    border: 1px solid var(--borderColor);
+    border-radius: 16px;
+    -webkit-border-radius: 16px;
+    -moz-border-radius: 16px;
+    -ms-border-radius: 16px;
+    -o-border-radius: 16px;
+    height: 48px;
+    padding-left: 20px !important;
+    padding-right: 8px !important;
+    padding: 10px 8px 10px 20px;
+   
+}
+
+.main-radio .radio-wrapper .row,
+.main-radio .radio-wrapper .col-lg-6
+{
+    height: 100%;
+}
+
+.main-radio .radio-wrapper .col-lg-6:nth-child(1){
+    border-right: 1px solid var(--borderColor);
+}
+
+.main-radio .radio-label{
+    position: absolute;
+    font-size: 12px;
+    color: var(--lightColor);
+    top: -10px;
+    left: 10px;
+    background: #ffffff;
+    padding: 0px 5px 0px 5px;
+}
+
+.edit-profile .login-form-wrap .form-check{
+    margin-bottom: 0 !important;
+    height: 100%;
+    
+}
+
+.edit-profile .floating-label{
+    color: var(--lightColor) !important;
+}
+
+/* .edit-profile input:focus ~ .floating-label, input:not(:focus):valid ~ .floating-label{
+    color: var(--primaryColor) !important;
+} */
+
+.edit-profile .about-label{
+    top: 0;
+    background-color: #fff;
+    padding: 0px 5px 0px 5px;
+}
+
+#Edit-modal .modal-dialog{
+    max-width: 417px;
+}
+
+#Edit-modal .user-cover-img{
+    width: 375px;
+    height: 375px;
+}
+
+/* =========== responsive =========== */
+@media only screen and (max-width:575px){
+    .edit-profile .profile-content {
+        padding: 20px 20px 0 !important;
+    }
+
+    .edit-profile-wrp .contact-title{
+        margin-bottom: 15px;
+    }
+
+    .edit-profile-wrp .contact-title .edit-btn{
+        display: block !important;
+    }
+
+    .edit-profile-wrp .contact-title div{
+        width: 100%;
+    }
+
+    #Edit-modal .modal-dialog{
+        max-width: 100%;
+    }
+    #Edit-modal .user-cover-img{
+        width: 100%;
+        height: 100%;
+    }
+}
