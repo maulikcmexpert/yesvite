@@ -94,8 +94,8 @@
                          <li><a class="dropdown-item" href="#">Link 3</a></li>
                      </ul>
                  </div>
-                 <a href="#" class="user-img">
-                     <img src="./assets/image/user-img.svg" alt="user-img">
+                 <a href="{{ route('profile')}}" class="user-img">
+                     <img src="{{Session::get('user')['profile']}}" class="" alt="user-img">
                  </a>
              </div>
          </nav>
