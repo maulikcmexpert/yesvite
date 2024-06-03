@@ -34,8 +34,9 @@ class SocialController extends Controller
     public function handleProviderCallback($provider)
     {
         try {
-            dd($provider);
+
             $user = Socialite::driver($provider)->user();
+            dd($user);
         } catch (Exception $e) {
             return redirect('/login');
         }
