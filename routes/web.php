@@ -31,7 +31,7 @@ Route::get('/', [HomeFrontController::class, 'index'])->name('front.home');
 Route::middleware('checkUserExist')->group(function () {
 
 
-    Route::get('dashboard', [HomeController::class, 'index'])->name('home');
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::post('/import-csv',  [HomeController::class, 'importCSV'])->name('import.csv');
     Route::get('profile',  [ProfileController::class, 'index'])->name('profile');
     Route::post('profile/update/{id}',  [ProfileController::class, 'update'])->name('profile.update');
