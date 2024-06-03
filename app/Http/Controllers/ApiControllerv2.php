@@ -12034,6 +12034,6 @@ class ApiControllerv2 extends Controller
     {
         $versionSetting =  VersionSetting::first();
 
-        return response()->json(["status" => true, 'message' => 'Application', 'url' => asset('public/appversion/traditional.apk'), 'version' => $versionSetting->android_version]);
+        return response()->json(["status" => true, 'message' => 'Application', 'url' => asset('public/appversion/yesvite.apk'), 'version' => $versionSetting->android_version]);
     }
 }
