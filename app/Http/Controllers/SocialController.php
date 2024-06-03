@@ -36,13 +36,13 @@ class SocialController extends Controller
         try {
 
             $user = Socialite::driver($provider)->user();
-            dd($user);
         } catch (Exception $e) {
             return redirect('/login');
         }
 
         // Check if the user already exists
         $authUser = $this->findOrCreateUser($user, $provider);
+        dd($authUser);
         Auth::login($authUser, true);
 
         return redirect()->intended('/home');
