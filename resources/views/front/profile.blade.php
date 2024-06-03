@@ -46,7 +46,7 @@
                             </span>
                             <a href="mailto:{{$user->email }}">{{$user->email }}</a>
                         </div>
-                        @if($user->city != NULL && $user->state != NULL)
+                        @if($user->city != NULL)
                         <div>
                             <span>
                                 <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
