@@ -42,11 +42,9 @@ class SocialController extends Controller
 
         // Check if the user already exists
         $authUser = $this->findOrCreateUser($user, $provider);
-        dd($authUser);
-        if ($authUser) {
-            return redirect()->intended('/home');
-        }
-        return redirect('/login');
+        Auth::login($authUser, true);
+
+        return redirect()->intended('/home');
     }
 
     /**
@@ -71,6 +69,13 @@ class SocialController extends Controller
                 $user->apple_token_id = $socialUser->getId();
             }
             $user->save();
+
+            $sessionArray = [
+                'id' => encrypt($user->id),
+                'username' => $user->firstname . ' ' . $user->lastname,
+                'profile' => ($user->profile != NULL || $user->profile != "") ? asset('public/storage/profile/' . $user->profile) : asset('public/storage/profile/no_profile.png')
+            ];
+            Session::put(['user' => $sessionArray]);
 
             return  $user;
         }
