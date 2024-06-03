@@ -4568,7 +4568,7 @@ class ApiControllerv2 extends Controller
 
                         $invitedGuestUsers = $eventData['invited_guests'];
 
-
+                        $alreadyinvitedUser = EventInvitedUser::where('event_id', $eventData['event_id'])->pluck('user_id')->toArray();
 
                         foreach ($invitedGuestUsers as $value) {
 
@@ -4610,17 +4610,20 @@ class ApiControllerv2 extends Controller
 
                                     $alreadyselectedUser =  collect($eventData['invited_user_id'])->pluck('user_id')->toArray();
 
+
                                     if (!in_array($checkUserExist->id, $alreadyselectedUser)) {
+                                        if (!in_array($checkUserExist->id, $alreadyinvitedUser)) {
 
-                                        EventInvitedUser::create([
+                                            EventInvitedUser::create([
 
-                                            'event_id' => $eventData['event_id'],
+                                                'event_id' => $eventData['event_id'],
 
-                                            'prefer_by' => (isset($value['prefer_by'])) ? $value['prefer_by'] : "email",
+                                                'prefer_by' => (isset($value['prefer_by'])) ? $value['prefer_by'] : "email",
 
-                                            'user_id' => $checkUserExist->id
+                                                'user_id' => $checkUserExist->id
 
-                                        ]);
+                                            ]);
+                                        }
                                     }
                                 }
                             } else if ($value['prefer_by'] == 'email') {
@@ -4658,14 +4661,16 @@ class ApiControllerv2 extends Controller
                                     $alreadyselectedUser =  collect($eventData['invited_user_id'])->pluck('user_id')->toArray();
 
                                     if (!in_array($checkUserExist->id, $alreadyselectedUser)) {
-                                        EventInvitedUser::create([
+                                        if (!in_array($checkUserExist->id, $alreadyinvitedUser)) {
+                                            EventInvitedUser::create([
 
-                                            'event_id' => $eventData['event_id'],
+                                                'event_id' => $eventData['event_id'],
 
-                                            'prefer_by' => (isset($value['prefer_by'])) ? $value['prefer_by'] : "email",
+                                                'prefer_by' => (isset($value['prefer_by'])) ? $value['prefer_by'] : "email",
 
-                                            'user_id' => $checkUserExist->id
-                                        ]);
+                                                'user_id' => $checkUserExist->id
+                                            ]);
+                                        }
                                     }
                                 }
                             }
