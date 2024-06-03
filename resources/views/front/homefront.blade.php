@@ -1,7 +1,7 @@
     <!-- ============= banner-wrapper ======== -->
     <section class="banner-wrapper">
-        <img src="./assets/image/left-banner.png" alt="left-banner" class="left-img wow fadeInLeft" data-wow-duration="5s" data-wow-delay="0" data-wow-offset="0">
-        <img src="./assets/image/right-banner.png" alt="right-banner" class="right-img wow fadeInRight" data-wow-duration="5s" data-wow-delay="0" data-wow-offset="0">
+        <img src="{{asset('assets/front/image/left-banner.png')}}" alt="left-banner" class="left-img wow fadeInLeft" data-wow-duration="5s" data-wow-delay="0" data-wow-offset="0">
+        <img src="{{asset('assets/front/image/right-banner.png')}}" alt="right-banner" class="right-img wow fadeInRight" data-wow-duration="5s" data-wow-delay="0" data-wow-offset="0">
         <div class="container">
             <div class="banner-content">
                 <h1 class="wow fadeInDown" data-wow-duration="1s" data-wow-delay="0" data-wow-offset="0">Celebrate Every Moment with Ease!</h1>
@@ -9,15 +9,15 @@
                     decorations, so you can relax and enjoy your celebration</p>
                 <div class="app-store d-flex justify-content-center gap-2">
                     <a href="#" class="google-app">
-                        <img src="./assets/image/google-app.png" alt="google-app">
+                        <img src="{{asset('assets/front/image/google-app.png')}}" alt="google-app">
                     </a>
                     <a href="#" class="mobile-app">
-                        <img src="./assets/image/mobile-app.png" alt="mobile-app">
+                        <img src="{{asset('assets/front/image/mobile-app.png')}}" alt="mobile-app">
                     </a>
                 </div>
             </div>
             <div class="banner-img">
-                <img src="./assets/image/birthday-card.png" alt="birthday-card">
+                <img src="{{asset('assets/front/image/birthday-card.png')}}" alt="birthday-card">
             </div>
         </div>
     </section>
@@ -111,7 +111,7 @@
                                 </div>
                                 <div class="col-lg-6 p-0">
                                     <div class="feature-img">
-                                        <img src="./assets/image/gallery-img1.png" alt="gallery-img">
+                                        <img src="{{asset('assets/front/image/gallery-img1.png')}}" alt="gallery-img">
                                     </div>
                                 </div>
                             </div>
@@ -128,7 +128,7 @@
                                 </div>
                                 <div class="col-lg-6 p-0">
                                     <div class="feature-img">
-                                        <img src="./assets/image/gallery-img1.png" alt="">
+                                        <img src="{{asset('assets/front/image/gallery-img1.png')}}" alt="">
                                     </div>
                                 </div>
                             </div>
@@ -145,7 +145,7 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="feature-img">
-                                        <img src="./assets/image/gallery-img1.png" alt="">
+                                        <img src="{{asset('assets/front/image/gallery-img1.png')}}" alt="">
                                     </div>
                                 </div>
                             </div>
@@ -162,7 +162,7 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="feature-img">
-                                        <img src="./assets/image/gallery-img1.png" alt="">
+                                        <img src="{{asset('assets/front/image/gallery-img1.png')}}" alt="">
                                     </div>
                                 </div>
                             </div>
@@ -179,7 +179,7 @@
                                 </div>
                                 <div class="col-lg-6 p-0">
                                     <div class="feature-img">
-                                        <img src="./assets/image/gallery-img1.png" alt="">
+                                        <img src="{{asset('assets/front/image/gallery-img1.png')}}" alt="">
                                     </div>
                                 </div>
                             </div>
@@ -196,7 +196,7 @@
                                 </div>
                                 <div class="col-lg-6 p-0">
                                     <div class="feature-img">
-                                        <img src="./assets/image/gallery-img1.png" alt="">
+                                        <img src="{{asset('assets/front/image/gallery-img1.png')}}" alt="">
                                     </div>
                                 </div>
                             </div>
@@ -213,7 +213,7 @@
                                 </div>
                                 <div class="col-lg-6 p-0">
                                     <div class="feature-img">
-                                        <img src="./assets/image/gallery-img1.png" alt="">
+                                        <img src="{{asset('assets/front/image/gallery-img1.png')}}" alt="">
                                     </div>
                                 </div>
                             </div>
@@ -230,7 +230,7 @@
                                 </div>
                                 <div class="col-lg-6 p-0">
                                     <div class="feature-img">
-                                        <img src="./assets/image/gallery-img1.png" alt="">
+                                        <img src="{{asset('assets/front/image/gallery-img1.png')}}" alt="">
                                     </div>
                                 </div>
                             </div>
@@ -247,7 +247,7 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="feature-img">
-                                        <img src="./assets/image/gallery-img1.png" alt="">
+                                        <img src="{{asset('assets/front/image/gallery-img1.png')}}" alt="">
                                     </div>
                                 </div>
                             </div>
@@ -284,7 +284,7 @@
                             </div>
                             <div class="col-lg-6 p-0">
                                 <div class="feature-img">
-                                    <img src="./assets/image/gallery-img1.png" alt="gallery-img">
+                                    <img src="{{asset('assets/front/image/gallery-img1.png')}}" alt="gallery-img">
                                 </div>
                             </div>
                         </div>
@@ -304,7 +304,7 @@
                             </div>
                             <div class="col-lg-6 p-0">
                                 <div class="feature-img">
-                                    <img src="./assets/image/gallery-img1.png" alt="gallery-img">
+                                    <img src="{{asset('assets/front/image/gallery-img1.png')}}" alt="gallery-img">
                                 </div>
                             </div>
                         </div>
@@ -324,7 +324,7 @@
                             </div>
                             <div class="col-lg-6 p-0">
                                 <div class="feature-img">
-                                    <img src="./assets/image/gallery-img2.png" alt="gallery-img">
+                                    <img src="{{asset('assets/front/image/gallery-img2.png')}}" alt="gallery-img">
                                 </div>
                             </div>
                         </div>
@@ -342,7 +342,7 @@
                             </div>
                             <div class="col-lg-6 p-0">
                                 <div class="feature-img">
-                                    <img src="./assets/image/gallery-img3.png" alt="gallery-img">
+                                    <img src="{{asset('assets/front/image/gallery-img3.png')}}" alt="gallery-img">
                                 </div>
                             </div>
                         </div>
@@ -361,7 +361,7 @@
                             </div>
                             <div class="col-lg-6 p-0">
                                 <div class="feature-img">
-                                    <img src="./assets/image/gallery-img4.png" alt="gallery-img">
+                                    <img src="{{asset('assets/front/image/gallery-img4.png')}}" alt="gallery-img">
                                 </div>
                             </div>
                         </div>
@@ -379,7 +379,7 @@
                             </div>
                             <div class="col-lg-6 p-0">
                                 <div class="feature-img">
-                                    <img src="./assets/image/gallery-img5.png" alt="gallery-img">
+                                    <img src="{{asset('assets/front/image/gallery-img5.png')}}" alt="gallery-img">
                                 </div>
                             </div>
                         </div>
@@ -397,7 +397,7 @@
                             </div>
                             <div class="col-lg-6 p-0">
                                 <div class="feature-img">
-                                    <img src="./assets/image/gallery-img6.png" alt="gallery-img">
+                                    <img src="{{asset('assets/front/image/gallery-img6.png')}}" alt="gallery-img">
                                 </div>
                             </div>
                         </div>
@@ -415,7 +415,7 @@
                             </div>
                             <div class="col-lg-6 p-0">
                                 <div class="feature-img">
-                                    <img src="./assets/image/gallery-img7.png" alt="gallery-img">
+                                    <img src="{{asset('assets/front/image/gallery-img7.png')}}" alt="gallery-img">
                                 </div>
                             </div>
                         </div>
@@ -433,7 +433,7 @@
                             </div>
                             <div class="col-lg-6 p-0">
                                 <div class="feature-img">
-                                    <img src="./assets/image/gallery-img8.png" alt="gallery-img">
+                                    <img src="{{asset('assets/front/image/gallery-img8.png')}}" alt="gallery-img">
                                 </div>
                             </div>
                         </div>
@@ -451,7 +451,7 @@
                             </div>
                             <div class="col-lg-6 p-0">
                                 <div class="feature-img">
-                                    <img src="./assets/image/gallery-img9.png" alt="gallery-img">
+                                    <img src="{{asset('assets/front/image/gallery-img9.png')}}" alt="gallery-img">
                                 </div>
                             </div>
                         </div>
@@ -469,7 +469,7 @@
                             </div>
                             <div class="col-lg-6 p-0">
                                 <div class="feature-img">
-                                    <img src="./assets/image/gallery-img10.png" alt="gallery-img">
+                                    <img src="{{asset('assets/front/image/gallery-img10.png')}}" alt="gallery-img">
                                 </div>
                             </div>
                         </div>
@@ -487,7 +487,7 @@
                             </div>
                             <div class="col-lg-6 p-0">
                                 <div class="feature-img">
-                                    <img src="./assets/image/gallery-img11.png" alt="gallery-img">
+                                    <img src="{{asset('assets/front/image/gallery-img11.png')}}" alt="gallery-img">
                                 </div>
                             </div>
                         </div>
@@ -508,7 +508,7 @@
                 <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown" data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0">
                     <a href="#" class="collection-card card-blue">
                         <div class="card-img">
-                            <img src="./assets/image/collect-card1.png" alt="shower-card">
+                            <img src="{{asset('assets/front/image/collect-card1.png')}}" alt="shower-card">
                         </div>
                         <h4>Baby Showers</h4>
                     </a>
@@ -516,7 +516,7 @@
                 <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown" data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0">
                     <a href="#" class="collection-card card-green">
                         <div class="card-img">
-                            <img src="./assets/image/collect-card2.png" alt="kids-card">
+                            <img src="{{asset('assets/front/image/collect-card2.png')}}" alt="kids-card">
                         </div>
                         <h4>Kids Birthdays</h4>
                     </a>
@@ -524,7 +524,7 @@
                 <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown" data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0">
                     <a href="#" class="collection-card card-red">
                         <div class="card-img">
-                            <img src="./assets/image/collect-card3.png" alt="collect-card">
+                            <img src="{{asset('assets/front/image/collect-card3.png')}}" alt="collect-card">
                         </div>
                         <h4>Simple Designs</h4>
                     </a>
@@ -532,7 +532,7 @@
                 <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown" data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0">
                     <a href="#" class="collection-card card-green">
                         <div class="card-img">
-                            <img src="./assets/image/collect-card4.png" alt="collect-card">
+                            <img src="{{asset('assets/front/image/collect-card4.png')}}" alt="collect-card">
                         </div>
                         <h4>Floral Delight</h4>
                     </a>
@@ -540,7 +540,7 @@
                 <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown" data-wow-duration="8s" data-wow-delay="0" data-wow-offset="0">
                     <a href="#" class="collection-card card-yellow">
                         <div class="card-img">
-                            <img src="./assets/image/collect-card5.png" alt="collect-card">
+                            <img src="{{asset('assets/front/image/collect-card5.png')}}" alt="collect-card">
                         </div>
                         <h4>Weddings</h4>
                     </a>
@@ -548,7 +548,7 @@
                 <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown" data-wow-duration="8s" data-wow-delay="0" data-wow-offset="0">
                     <a href="#" class="collection-card card-red">
                         <div class="card-img">
-                            <img src="./assets/image/collect-card6.png" alt="collect-card">
+                            <img src="{{asset('assets/front/image/collect-card6.png')}}" alt="collect-card">
                         </div>
                         <h4>Baby Announcements</h4>
                     </a>
@@ -556,7 +556,7 @@
                 <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown" data-wow-duration="8s" data-wow-delay="0" data-wow-offset="0">
                     <a href="#" class="collection-card card-green">
                         <div class="card-img">
-                            <img src="./assets/image/collect-card7.png" alt="collect-card">
+                            <img src="{{asset('assets/front/image/collect-card7.png')}}" alt="collect-card">
                         </div>
                         <h4>Minimalist Bliss</h4>
                     </a>
@@ -564,7 +564,7 @@
                 <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown" data-wow-duration="8s" data-wow-delay="0" data-wow-offset="0">
                     <a href="#" class="collection-card card-blue">
                         <div class="card-img">
-                            <img src="./assets/image/collect-card8.png" alt="collect-card">
+                            <img src="{{asset('assets/front/image/collect-card8.png')}}" alt="collect-card">
                         </div>
                         <h4>Vintage Romance</h4>
                     </a>
@@ -590,7 +590,7 @@
                                 analytics you get”</h5>
                             <div class="author-wrapper">
                                 <div class="author-img">
-                                    <img src="./assets/image/author-img.png" alt="author-img">
+                                    <img src="{{asset('assets/front/image/author-img.png')}}" alt="author-img">
                                 </div>
                                 <div class="author-name">
                                     <h6>Sophia Korhonen</h6>
@@ -629,7 +629,7 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="diff-img">
-                        <img class="wow fadeInRight" src="./assets/image/diff-img.png" alt="diff-img" data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0">
+                        <img class="wow fadeInRight" src="{{asset('assets/front/image/diff-img.png')}}" alt="diff-img" data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0">
                     </div>
                 </div>
             </div>
@@ -647,10 +647,10 @@
                             <p>Customizable Designs to Reflect Your Unique Event</p>
                             <div class="app-store d-flex gap-2">
                                 <a href="#" class="google-app">
-                                    <img src="./assets/image/google-app.png" alt="google-app">
+                                    <img src="{{asset('assets/front/image/google-app.png')}}" alt="google-app">
                                 </a>
                                 <a href="#" class="mobile-app">
-                                    <img src="./assets/image/mobile-app.png" alt="mobile-app">
+                                    <img src="{{asset('assets/front/image/mobile-app.png')}}" alt="mobile-app">
                                 </a>
                             </div>
                         </div>
@@ -659,12 +659,12 @@
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                                 <div class="platform-img">
-                                    <img src="./assets/image/platform-img1.png" alt="platform-img">
+                                    <img src="{{asset('assets/front/image/platform-img1.png')}}" alt="platform-img">
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                                 <div class="platform-img"></div>
-                                <img src="./assets/image/platform-img2.png" alt="platform-img">
+                                <img src="{{asset('assets/front/image/platform-img2.png')}}" alt="platform-img">
                             </div>
                         </div>
                     </div>
@@ -869,10 +869,10 @@
                 </ul>
                 <div class="app-store d-flex gap-2">
                     <a href="#" class="google-app">
-                        <img src="./assets/image/google-app.png" alt="google-app">
+                        <img src="{{asset('assets/front/image/google-app.png')}}" alt="google-app">
                     </a>
                     <a href="#" class="mobile-app">
-                        <img src="./assets/image/mobile-app.png" alt="mobile-app">
+                        <img src="{{asset('assets/front/image/mobile-app.png')}}" alt="mobile-app">
                     </a>
                 </div>
             </div>
