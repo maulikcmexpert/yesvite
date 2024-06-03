@@ -11633,17 +11633,23 @@ class ApiControllerv2 extends Controller
 
         try {
             DB::beginTransaction();
-            $updateNotification = Notification::where(['id' => $input['notification_id']])->first();
-            if (!empty($updateNotification)) {
-                $updateNotification->read = '1';
-                $updateNotification->save();
+            if (isset($input['type']) && $input['type'] == 'all_read') {
+                $user  = Auth::guard('api')->user();
+                $updateNotification = Notification::where('user_id', $user->id)->update(['read' => '1']);
                 DB::commit();
-                $unreadCount = Notification::where(['user_id' => $user->id, 'read' => '0'])->count();
-                return response()->json(['status' => 1, 'unread_count' => $unreadCount, 'message' => "Notification read successfully"]);
             } else {
+                $updateNotification = Notification::where(['id' => $input['notification_id']])->first();
+                if (!empty($updateNotification)) {
+                    $updateNotification->read = '1';
+                    $updateNotification->save();
+                    DB::commit();
+                } else {
 
-                return response()->json(['status' => 0, 'message' => "data is incorrect"]);
+                    return response()->json(['status' => 0, 'message' => "data is incorrect"]);
+                }
             }
+            $unreadCount = Notification::where(['user_id' => $user->id, 'read' => '0'])->count();
+            return response()->json(['status' => 1, 'unread_count' => $unreadCount, 'message' => "Notification read successfully"]);
         } catch (QueryException $e) {
 
             DB::rollBack();
@@ -11660,16 +11666,12 @@ class ApiControllerv2 extends Controller
 
     {
 
-        $user  = Auth::guard('api')->user();
 
 
 
         try {
 
-            $updateNotification = Notification::where('user_id', $user->id)->update(['read' => '1']);
 
-
-            $unreadCount = Notification::where(['user_id' => $user->id, 'read' => '0'])->count();
             return response()->json(['status' => 1, 'unread_count' => $unreadCount, 'message' => "Notification read successfully"]);
         } catch (QueryException $e) {
 
