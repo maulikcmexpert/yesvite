@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Session;
 use Cookie;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Exception;
 use App\Models\User;
 
@@ -90,6 +90,8 @@ class SocialController extends Controller
             'profile' => ($newUser->profile != NULL || $newUser->profile != "") ? asset('public/storage/profile/' . $newUser->profile) : asset('public/storage/profile/no_profile.png')
         ];
         Session::put(['user' => $sessionArray]);
+
+
         if (Session::has('user')) {
 
             if ($remember != null) {
