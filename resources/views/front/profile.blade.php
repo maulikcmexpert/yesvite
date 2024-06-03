@@ -24,17 +24,17 @@
             <div class="col-xxl-3 col-xl-4 col-lg-4 col-md-5 mb-md-0 mb-4">
                 <div class="contact-user">
                     <div class="user position-relative">
-                        <img src="./assets/image/user-img.svg" alt="user-img">
+                        <img src="{{$user->profile }}" alt="user-img">
                         <div class="badge">
                             <span class="active"></span>
                         </div>
                     </div>
                     <div class="user-name">
                         <div class="d-flex justify-content-center mb-2">
-                            <h3>Pristia Candra</h3>
+                            <h3>{{$user->firstname.' '.$user->lastname }}</h3>
                             <span>PRO</span>
                         </div>
-                        <p>Member Since: June, 2023</p>
+                        <p>Member Since: {{ $user->join_date }}</p>
                     </div>
                     <div class="user-location">
                         <div>
