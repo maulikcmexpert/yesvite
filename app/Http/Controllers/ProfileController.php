@@ -39,9 +39,6 @@ class ProfileController extends Controller
         $user['bg_profile'] = ($user->bg_profile != null) ? asset('public/storage/bg_profile/' . $user->bg_profileprofile) : asset('public/assets/front/image/Frame 1000005835.png');
         $date = Carbon::parse($user->created_at);
         $formatted_date = $date->format('F, Y');
-        $formattedNumber = phone($user->phone_number, 'US');
-        $user['phone_number'] = $formattedNumber;
-
         $user['join_date'] = $formatted_date;
 
         return view('layout', compact(
@@ -51,6 +48,25 @@ class ProfileController extends Controller
             'js'
         ));
     }
+
+    public function publicProfileView()
+    {
+        $id = decrypt(session()->get('user')['id']);
+        $user = User::findOrFail($id);
+        $title = 'Public Profile';
+        $page = 'front.public_profile';
+        $user['events'] =   Event::where(['user_id' => $user->id, 'is_draft_save' => '0'])->count();
+        $user['photos']   = EventPost::where(['user_id' => $user->id, 'post_type' => '1'])->count();
+        $user['comments']   =  EventPostComment::where('user_id', $user->id)->count();
+        $user['profile'] = ($user->profile != null) ? asset('public/storage/profile/' . $user->profile) : asset('public/storage/profile/no_profile.png');
+        $user['bg_profile'] = ($user->bg_profile != null) ? asset('public/storage/bg_profile/' . $user->bg_profileprofile) : asset('public/assets/front/image/Frame 1000005835.png');
+        return view('layout', compact(
+            'title',
+            'page',
+            'user',
+        ));
+    }
+
 
     public function update(Request $request, string $id)
     {
