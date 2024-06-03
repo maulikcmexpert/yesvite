@@ -33,7 +33,7 @@
 
             @if(Session::has('user'))
 
-            <div class="header-right">
+            <div class="header-right d-none">
                 <div class="header-dropdown dropdown">
                     <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
                         <div class="drp-conent position-relative">
