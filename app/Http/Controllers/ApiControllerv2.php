@@ -11618,18 +11618,19 @@ class ApiControllerv2 extends Controller
         if ($input == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
         }
-        $validator = Validator::make($input, [
 
-            'notification_id' => ['required', 'exists:notifications,id'],
+        // $validator = Validator::make($input, [
 
-        ]);
+        //     'notification_id' => ['required', 'exists:notifications,id'],
 
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => 0,
-                'message' => $validator->errors()->first(),
-            ]);
-        }
+        // ]);
+
+        // if ($validator->fails()) {
+        //     return response()->json([
+        //         'status' => 0,
+        //         'message' => $validator->errors()->first(),
+        //     ]);
+        // }
 
         try {
             DB::beginTransaction();
