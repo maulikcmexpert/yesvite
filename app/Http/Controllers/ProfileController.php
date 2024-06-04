@@ -122,10 +122,12 @@ class ProfileController extends Controller
 
             // return response()->json(['status' => 1, 'message' => "Changes Saved!"]);
             return  redirect()->route('profile')->with('success', 'Changes Saved!');
-        } catch (QueryException $e) {
-            DB::Rollback();
-            return redirect()->route('profile')->with('error', 'db error');
-        } catch (Exception  $e) {
+        }
+        // catch (QueryException $e) {
+        //     DB::Rollback();
+        //     return redirect()->route('profile')->with('error', 'db error');
+        // }
+        catch (Exception  $e) {
             return redirect()->route('profile')->with('error', 'something went wrong');
         }
     }
