@@ -3,7 +3,7 @@ toastr.options = {
     closeButton: true,
     newestOnTop: false,
     progressBar: true,
-    positionClass: "toast-bottom-center",
+    positionClass: "toast-top-right",
     preventDuplicates: false,
     onclick: null,
     showDuration: "300",
