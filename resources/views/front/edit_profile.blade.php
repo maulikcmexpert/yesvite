@@ -90,31 +90,31 @@
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="input-form">
-                                            <input type="date" class="form-control inputText" id="birthday" name="birthday">
+                                            <input type="date" class="form-control inputText" id="birthday" name="birthday" value="{{$user->birth_date}}">
                                             <label for="birthday" class="form-label input-field floating-label">Birthday</label>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="input-form">
-                                            <input type="email" class="form-control inputText" id="email" name="email">
-                                            <label for="email" class="form-label input-field floating-label">Work Email Address</label>
+                                            <input type="email" class="form-control inputText" id="email" name="email" value="{{ $user->email}}">
+                                            <label for="email" class="form-label input-field floating-label">Email Address</label>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="input-form">
-                                            <input type="tel" class="form-control inputText" id="phone" name="phone">
+                                            <input type="tel" class="form-control inputText" id="phone" name="phone" value="{{ $user->phone_number}}">
                                             <label for="phone" class="form-label input-field floating-label">Phone Number</label>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="input-form">
-                                            <input type="text" class="form-control inputText" id="code" name="code" required>
+                                            <input type="text" class="form-control inputText" id="code" name="code" value="{{ $user->zip_code}}">
                                             <label for="code" class="form-label input-field floating-label required">Zip Code <span>*</span></label>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="input-form mb-0">
-                                            <textarea name="" class="inputText" id="">Event Organizer that helps and makes it easier for Event Planners to achieve the goal of carrying out an event. 👋</textarea>
+                                            <textarea name="" class="inputText" id="">{{ $user->about_me}}</textarea>
                                             <label for="code" class="form-label input-field floating-label about-label">About Me</label>
                                         </div>
                                     </div>
