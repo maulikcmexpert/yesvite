@@ -111,6 +111,7 @@ $(document).ready(function () {
                 },
             });
         });
+
         $("#bg_profile_save").on("click", function () {
             var formData = new FormData();
             formData.append("file", $("#bg-choose-file")[0].files[0]);
