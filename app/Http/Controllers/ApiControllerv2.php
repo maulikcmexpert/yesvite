@@ -7685,7 +7685,7 @@ class ApiControllerv2 extends Controller
         } else {
 
             if (count($results) != 0) {
-
+                $postsNormalDetail = "";
                 foreach ($results as $value) {
 
                     $checkUserRsvp = checkUserAttendOrNot($value->event_id, $value->user->id);
