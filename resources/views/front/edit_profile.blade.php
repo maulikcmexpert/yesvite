@@ -1,3 +1,5 @@
+<x-front.advertise />
+<!-- ============ contact-details ========== -->
 <section class="contact-details profile-details">
     <div class="container">
         <div class="row">
@@ -261,3 +263,109 @@
         </div>
     </div>
 </section>
+
+
+<!-- ======== coverprofile-model ========= -->
+<div class="modal fade" id="Edit-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header align-items-center">
+                <div>
+                    <h4 class="modal-title">Edit Photo Profile</h4>
+                    <span>Recomendation Size : 730x200</span>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="cover-img user-cover-img" id="cover-img">
+                    <img src="./assets/image/user-img.svg" alt="cover-img">
+                </div>
+                <div>
+                    <div class="slidecontainer">
+                        <h5>Zoom</h5>
+                        <input type="range" min="1" max="100" value="50">
+                    </div>
+                </div>
+                <div class="d-flex align-items-center justify-content-end">
+                    <label class="choosen-file cmn-btn edit-btn mb-0" for="choose-file">
+                        Upload New Image
+                    </label>
+                    <button type="button" class="cmn-btn bg-primary">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ======== coverBg-model ========= -->
+<div class="modal fade" id="coverImg-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header align-items-center">
+                <div>
+                    <h4 class="modal-title">Edit Cover Photo</h4>
+                    <span>Recomendation Size : 730x200</span>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="cover-img" id="cover-img">
+                    <img src="./assets/image/Frame 1000005835.png" alt="cover-img">
+                </div>
+                <div>
+                    <div class="slidecontainer">
+                        <h5>Zoom</h5>
+                        <input type="range" min="1" max="100" value="50">
+                    </div>
+                </div>
+                <div class="d-flex align-items-center justify-content-end">
+                    <label class="choosen-file cmn-btn edit-btn mb-0" for="choose-file">
+                        Upload New Image
+                    </label>
+                    <button type="button" class="cmn-btn bg-primary">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== delete-model ========== -->
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog delete-model-wrap">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="delete-icon">
+                    <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 22.5C17.5 22.5 22 18 22 12.5C22 7 17.5 2.5 12 2.5C6.5 2.5 2 7 2 12.5C2 18 6.5 22.5 12 22.5Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M12 8.5V13.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M11.9946 16.5H12.0036" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <div class="contents">
+                    <h4>Delete Account</h4>
+                    <p>Are you sure want to delete your account? You will lose all your data, photos, messages. and
+                        can’t be recovered.</p>
+                    <p>Please confirm by typing <strong>“DELETE”</strong> in the text box below then tapping
+                        Confirm.</p>
+                    <input type="text" placeholder="DELETE">
+                </div>
+                <div class="d-flex justify-content-between gap-3">
+                    <button class="cmn-btn cancel-btn" type="button">Cancel</button>
+                    <button class="cmn-btn confirm-btn" type="button">Delete Account</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
