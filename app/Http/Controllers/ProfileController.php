@@ -137,6 +137,7 @@ class ProfileController extends Controller
 
     public function uploadProfile(Request $request)
     {
+        dd($request);
         $validator = Validator::make($request->all(), [
             'file' => 'required|image|max:2048', // max 2MB
         ]);
