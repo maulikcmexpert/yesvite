@@ -120,7 +120,8 @@ class ProfileController extends Controller
             $userUpdate->save();
             DB::commit();
 
-            // return response()->json(['status' => 1, 'message' => "Changes Saved!"]);
+            $userData =  getUser($id);
+            return response()->json(['status' => 1, 'message' => "Changes Saved!", 'user' => $userData]);
             return  redirect()->route('profile')->with('success', 'Changes Saved!');
         }
         // catch (QueryException $e) {

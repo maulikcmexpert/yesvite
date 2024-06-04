@@ -22,6 +22,11 @@ use App\Models\EventPhotoCommentReaction;
 use App\Models\UserPrivacyPolicy;
 use Carbon\Carbon;
 
+
+function getUser($id)
+{
+    return User::where('id', $id)->first();
+}
 function getEventType()
 {
     //     $result = EventDesignCategory::all();
