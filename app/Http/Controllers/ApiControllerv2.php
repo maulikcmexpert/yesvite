@@ -7501,7 +7501,38 @@ class ApiControllerv2 extends Controller
         $eventPostList = EventPost::query();
         $eventPostList->with(['user', 'post_image'])->withCount(['event_post_comment' => function ($query) {
             $query->where('parent_comment_id', NULL);
-        }, 'event_post_reaction'])->where(['event_id' => $input['event_id'], 'is_in_photo_moudle' => '0'])->orderBy('id', 'desc');
+        }, 'event_post_reaction'])->where(['event_id' => $input['event_id'], 'is_in_photo_moudle' => '0'])
+            ->whereDoesntHave('postControls', function ($query) use ($user) {
+                $query->where('user_id', $user->id)
+                    ->where('post_control', '!=', 'hide_post');
+            })
+            ->where(function ($query) use ($user, $input) {
+                $query->where('post_privacy', '!=', '1')
+                    ->orWhereHas('eventInvitedUser', function ($subQuery) use ($user, $input) {
+                        $subQuery->whereHas('user', function ($userQuery) {
+                            $userQuery->where('app_user', '1');
+                        })
+                            ->where('event_id', $input['event_id'])
+                            ->where('user_id', $user->id)
+                            ->where(function ($privacyQuery) {
+                                $privacyQuery->where(function ($q) {
+                                    $q->where('rsvp_d', '1')
+                                        ->where('rsvp_status', '1')
+                                        ->where('post_privacy', '2');
+                                })
+                                    ->orWhere(function ($q) {
+                                        $q->where('rsvp_d', '1')
+                                            ->where('rsvp_status', '0')
+                                            ->where('post_privacy', '3');
+                                    })
+                                    ->orWhere(function ($q) {
+                                        $q->where('rsvp_d', '0')
+                                            ->where('post_privacy', '4');
+                                    });
+                            });
+                    });
+            })
+            ->orderBy('id', 'desc');
 
 
 
@@ -7704,434 +7735,434 @@ class ApiControllerv2 extends Controller
 
                     $checkUserIsReaction = EventPostReaction::where(['event_id' => $input['event_id'], 'event_post_id' => $value->id, 'user_id' => $user->id])->first();
 
-                    if ($value->post_privacy == '1') {
-                        $postsNormalDetail['id'] =  $value->id;
+                    // if ($value->post_privacy == '1') {
+                    $postsNormalDetail['id'] =  $value->id;
 
-                        $postsNormalDetail['user_id'] =  $value->user->id;
+                    $postsNormalDetail['user_id'] =  $value->user->id;
 
-                        $postsNormalDetail['username'] =  $value->user->firstname . ' ' . $value->user->lastname;
+                    $postsNormalDetail['username'] =  $value->user->firstname . ' ' . $value->user->lastname;
 
-                        $postsNormalDetail['profile'] =  empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile);
+                    $postsNormalDetail['profile'] =  empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile);
 
-                        $postsNormalDetail['is_host'] =  ($ischeckEventOwner != null) ? 1 : 0;
-                        $postsNormalDetail['post_message'] = empty($value->post_message) ? "" :  $value->post_message;
+                    $postsNormalDetail['is_host'] =  ($ischeckEventOwner != null) ? 1 : 0;
+                    $postsNormalDetail['post_message'] = empty($value->post_message) ? "" :  $value->post_message;
 
-                        $postsNormalDetail['rsvp_status'] = $checkUserRsvp;
-                        $postsNormalDetail['location'] = ($value->user->city != NULL) ? $value->user->city : "";
-
-
-
-                        $postsNormalDetail['post_type'] = $value->post_type;
-
-                        $postsNormalDetail['created_at'] = $value->created_at;
-                        $postsNormalDetail['posttime'] = setpostTime($value->created_at);
-                        $postsNormalDetail['post_image'] = [];
+                    $postsNormalDetail['rsvp_status'] = $checkUserRsvp;
+                    $postsNormalDetail['location'] = ($value->user->city != NULL) ? $value->user->city : "";
 
 
-                        if ($value->post_type == '1' && !empty($value->post_image)) {
 
-                            foreach ($value->post_image as $imgVal) {
-                                $postMedia = [
-                                    'media_url' => asset('public/storage/post_image/' . $imgVal->post_image),
-                                    'type' => $imgVal->type,
-                                ];
+                    $postsNormalDetail['post_type'] = $value->post_type;
 
-                                if ($imgVal->type == 'video' && isset($imgVal->duration) && $imgVal->duration !== "") {
-                                    $postMedia['video_duration'] = $imgVal->duration;
-                                } else {
-                                    unset($postMedia['video_duration']);
-                                }
+                    $postsNormalDetail['created_at'] = $value->created_at;
+                    $postsNormalDetail['posttime'] = setpostTime($value->created_at);
+                    $postsNormalDetail['post_image'] = [];
 
-                                $postsNormalDetail['post_image'][] = $postMedia;
+
+                    if ($value->post_type == '1' && !empty($value->post_image)) {
+
+                        foreach ($value->post_image as $imgVal) {
+                            $postMedia = [
+                                'media_url' => asset('public/storage/post_image/' . $imgVal->post_image),
+                                'type' => $imgVal->type,
+                            ];
+
+                            if ($imgVal->type == 'video' && isset($imgVal->duration) && $imgVal->duration !== "") {
+                                $postMedia['video_duration'] = $imgVal->duration;
+                            } else {
+                                unset($postMedia['video_duration']);
                             }
+
+                            $postsNormalDetail['post_image'][] = $postMedia;
                         }
-                        $postsNormalDetail['total_poll_vote'] = 0;
-                        $postsNormalDetail['poll_duration'] = "";
-                        $postsNormalDetail['is_expired'] = false;
-                        $postsNormalDetail['poll_id'] = 0;
-                        $postsNormalDetail['poll_question'] = "";
-                        $postsNormalDetail['poll_option'] = [];
-                        if ($value->post_type == '2') { // Poll
-
-                            $polls = EventPostPoll::with('event_poll_option')->withCount('user_poll_data')->where(['event_id' => $input['event_id'], 'event_post_id' => $value->id])->first();
-
-                            $postsNormalDetail['total_poll_vote'] = $polls->user_poll_data_count;
-                            $pollDura = getLeftPollTime($polls->updated_at, $polls->poll_duration);
-                            $postsNormalDetail['poll_duration'] = $pollDura;
-                            // $postsNormalDetail['poll_duration'] =  empty($polls->poll_duration) ? "" :  $polls->poll_duration;
-                            $leftDay = (int) preg_replace('/[^0-9]/', '', $polls->poll_duration);
-
-                            $postsNormalDetail['is_expired'] =  ($pollDura == "") ? true : false;
-                            $postsNormalDetail['poll_id'] = $polls->id;
-
-                            $postsNormalDetail['poll_question'] = $polls->poll_question;
-
-
-                            foreach ($polls->event_poll_option as $optionValue) {
-
-                                $optionData['id'] = $optionValue->id;
-
-                                $optionData['option'] = $optionValue->option;
-                                $optionData['total_vote'] = "0%";
-                                if (getOptionAllTotalVote($polls->id) != 0) {
-                                    $optionData['total_vote'] =   round(getOptionTotalVote($optionValue->id) / getOptionAllTotalVote($polls->id) * 100) . "%";
-                                }
-                                $optionData['is_poll_selected'] = checkUserGivePoll($user->id, $polls->id, $optionValue->id);
-
-
-                                $postsNormalDetail['poll_option'][] = $optionData;
-                            }
-                        }
-
-                        $postsNormalDetail['post_recording'] = empty($value->post_recording) ? "" : asset('public/storage/event_post_recording/' . $value->post_recording);
-                        $reactionList = getOnlyReaction($value->id);
-
-                        $postsNormalDetail['reactionList'] = $reactionList;
-
-                        $postsNormalDetail['total_comment'] = $value->event_post_comment_count;
-
-                        $postsNormalDetail['total_likes'] = $value->event_post_reaction_count;
-
-                        $postsNormalDetail['is_reaction'] = ($checkUserIsReaction != NULL) ? '1' : '0';
-
-                        $postsNormalDetail['self_reaction'] = ($checkUserIsReaction != NULL) ? $checkUserIsReaction->reaction : "";
-
-                        $postsNormalDetail['is_owner_post'] = ($value->user->id == $user->id) ? 1 : 0;
-                        $postsNormalDetail['is_mute'] =  0;
-                        if ($postControl != null) {
-
-                            if ($postControl->post_control == 'mute') {
-                                $postsNormalDetail['is_mute'] =  1;
-                            }
-                        }
-                        $postList[] = $postsNormalDetail;
                     }
+                    $postsNormalDetail['total_poll_vote'] = 0;
+                    $postsNormalDetail['poll_duration'] = "";
+                    $postsNormalDetail['is_expired'] = false;
+                    $postsNormalDetail['poll_id'] = 0;
+                    $postsNormalDetail['poll_question'] = "";
+                    $postsNormalDetail['poll_option'] = [];
+                    if ($value->post_type == '2') { // Poll
+
+                        $polls = EventPostPoll::with('event_poll_option')->withCount('user_poll_data')->where(['event_id' => $input['event_id'], 'event_post_id' => $value->id])->first();
+
+                        $postsNormalDetail['total_poll_vote'] = $polls->user_poll_data_count;
+                        $pollDura = getLeftPollTime($polls->updated_at, $polls->poll_duration);
+                        $postsNormalDetail['poll_duration'] = $pollDura;
+                        // $postsNormalDetail['poll_duration'] =  empty($polls->poll_duration) ? "" :  $polls->poll_duration;
+                        $leftDay = (int) preg_replace('/[^0-9]/', '', $polls->poll_duration);
+
+                        $postsNormalDetail['is_expired'] =  ($pollDura == "") ? true : false;
+                        $postsNormalDetail['poll_id'] = $polls->id;
+
+                        $postsNormalDetail['poll_question'] = $polls->poll_question;
+
+
+                        foreach ($polls->event_poll_option as $optionValue) {
+
+                            $optionData['id'] = $optionValue->id;
+
+                            $optionData['option'] = $optionValue->option;
+                            $optionData['total_vote'] = "0%";
+                            if (getOptionAllTotalVote($polls->id) != 0) {
+                                $optionData['total_vote'] =   round(getOptionTotalVote($optionValue->id) / getOptionAllTotalVote($polls->id) * 100) . "%";
+                            }
+                            $optionData['is_poll_selected'] = checkUserGivePoll($user->id, $polls->id, $optionValue->id);
+
+
+                            $postsNormalDetail['poll_option'][] = $optionData;
+                        }
+                    }
+
+                    $postsNormalDetail['post_recording'] = empty($value->post_recording) ? "" : asset('public/storage/event_post_recording/' . $value->post_recording);
+                    $reactionList = getOnlyReaction($value->id);
+
+                    $postsNormalDetail['reactionList'] = $reactionList;
+
+                    $postsNormalDetail['total_comment'] = $value->event_post_comment_count;
+
+                    $postsNormalDetail['total_likes'] = $value->event_post_reaction_count;
+
+                    $postsNormalDetail['is_reaction'] = ($checkUserIsReaction != NULL) ? '1' : '0';
+
+                    $postsNormalDetail['self_reaction'] = ($checkUserIsReaction != NULL) ? $checkUserIsReaction->reaction : "";
+
+                    $postsNormalDetail['is_owner_post'] = ($value->user->id == $user->id) ? 1 : 0;
+                    $postsNormalDetail['is_mute'] =  0;
+                    if ($postControl != null) {
+
+                        if ($postControl->post_control == 'mute') {
+                            $postsNormalDetail['is_mute'] =  1;
+                        }
+                    }
+                    $postList[] = $postsNormalDetail;
+                    // }
 
                     //  reply by user and  RSVP
 
 
 
-                    $checkUserTypeForPost = EventInvitedUser::whereHas('user', function ($query) {
+                    // $checkUserTypeForPost = EventInvitedUser::whereHas('user', function ($query) {
 
-                        $query->where('app_user', '1');
-                    })->where(['event_id' => $input['event_id'], 'user_id' => $user->id])->first();
+                    //     $query->where('app_user', '1');
+                    // })->where(['event_id' => $input['event_id'], 'user_id' => $user->id])->first();
 
 
 
-                    if ($checkUserTypeForPost->rsvp_d == '1' && $checkUserTypeForPost->rsvp_status == '1'  && $value->post_privacy == '2') {
-                        $postsNormalDetail['id'] =  $value->id;
+                    // if ($checkUserTypeForPost->rsvp_d == '1' && $checkUserTypeForPost->rsvp_status == '1'  && $value->post_privacy == '2') {
+                    //     $postsNormalDetail['id'] =  $value->id;
 
-                        $postsNormalDetail['user_id'] =  $value->user->id;
+                    //     $postsNormalDetail['user_id'] =  $value->user->id;
 
-                        $postsNormalDetail['username'] =  $value->user->firstname . ' ' . $value->user->lastname;
-                        $postsNormalDetail['is_host'] =  ($ischeckEventOwner != null) ? 1 : 0;
-                        $postsNormalDetail['profile'] =  empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile);
+                    //     $postsNormalDetail['username'] =  $value->user->firstname . ' ' . $value->user->lastname;
+                    //     $postsNormalDetail['is_host'] =  ($ischeckEventOwner != null) ? 1 : 0;
+                    //     $postsNormalDetail['profile'] =  empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile);
 
-                        $postsNormalDetail['post_message'] = empty($value->post_message) ? "" :  $value->post_message;
+                    //     $postsNormalDetail['post_message'] = empty($value->post_message) ? "" :  $value->post_message;
 
-                        $postsNormalDetail['rsvp_status'] = $checkUserRsvp;
-                        $postsNormalDetail['location'] = ($value->user->city != NULL) ? $value->user->city : "";
+                    //     $postsNormalDetail['rsvp_status'] = $checkUserRsvp;
+                    //     $postsNormalDetail['location'] = ($value->user->city != NULL) ? $value->user->city : "";
 
 
 
-                        $postsNormalDetail['post_type'] = $value->post_type;
+                    //     $postsNormalDetail['post_type'] = $value->post_type;
 
-                        $postsNormalDetail['created_at'] = $value->created_at;
-                        $postsNormalDetail['posttime'] = setpostTime($value->created_at);
+                    //     $postsNormalDetail['created_at'] = $value->created_at;
+                    //     $postsNormalDetail['posttime'] = setpostTime($value->created_at);
 
 
 
-                        $postsNormalDetail['post_image'] = [];
-                        if ($value->post_type == '1' && !empty($value->post_image)) {
-                            foreach ($value->post_image as $imgVal) {
-                                $postMedia = [
-                                    'media_url' => asset('public/storage/post_image/' . $imgVal->post_image),
-                                    'type' => $imgVal->type,
-                                ];
+                    //     $postsNormalDetail['post_image'] = [];
+                    //     if ($value->post_type == '1' && !empty($value->post_image)) {
+                    //         foreach ($value->post_image as $imgVal) {
+                    //             $postMedia = [
+                    //                 'media_url' => asset('public/storage/post_image/' . $imgVal->post_image),
+                    //                 'type' => $imgVal->type,
+                    //             ];
 
-                                if ($imgVal->type == 'video' && isset($imgVal->duration) && $imgVal->duration !== "") {
-                                    $postMedia['video_duration'] = $imgVal->duration;
-                                } else {
-                                    unset($postMedia['video_duration']);
-                                }
+                    //             if ($imgVal->type == 'video' && isset($imgVal->duration) && $imgVal->duration !== "") {
+                    //                 $postMedia['video_duration'] = $imgVal->duration;
+                    //             } else {
+                    //                 unset($postMedia['video_duration']);
+                    //             }
 
-                                $postsNormalDetail['post_image'][] = $postMedia;
-                            }
-                        }
-                        $postsNormalDetail['total_poll_vote'] = 0;
-                        $postsNormalDetail['poll_duration'] = "";
-                        $postsNormalDetail['is_expired'] = false;
-                        $postsNormalDetail['poll_id'] = 0;
-                        $postsNormalDetail['poll_question'] = "";
-                        $postsNormalDetail['poll_option'] = [];
-                        if ($value->post_type == '2') { // Poll
+                    //             $postsNormalDetail['post_image'][] = $postMedia;
+                    //         }
+                    //     }
+                    //     $postsNormalDetail['total_poll_vote'] = 0;
+                    //     $postsNormalDetail['poll_duration'] = "";
+                    //     $postsNormalDetail['is_expired'] = false;
+                    //     $postsNormalDetail['poll_id'] = 0;
+                    //     $postsNormalDetail['poll_question'] = "";
+                    //     $postsNormalDetail['poll_option'] = [];
+                    //     if ($value->post_type == '2') { // Poll
 
-                            $polls = EventPostPoll::with('event_poll_option')->withCount('user_poll_data')->where(['event_id' => $input['event_id'], 'event_post_id' => $value->id])->first();
+                    //         $polls = EventPostPoll::with('event_poll_option')->withCount('user_poll_data')->where(['event_id' => $input['event_id'], 'event_post_id' => $value->id])->first();
 
-                            $postsNormalDetail['total_poll_vote'] = $polls->user_poll_data_count;
+                    //         $postsNormalDetail['total_poll_vote'] = $polls->user_poll_data_count;
 
-                            $postsNormalDetail['poll_duration'] =  empty($polls->poll_duration) ? "" :  $polls->poll_duration;
-                            $leftDay = (int) preg_replace('/[^0-9]/', '', $polls->poll_duration);
-                            $postsNormalDetail['is_expired'] =  (dateDiffer($polls->created_at) > $leftDay) ? true : false;
+                    //         $postsNormalDetail['poll_duration'] =  empty($polls->poll_duration) ? "" :  $polls->poll_duration;
+                    //         $leftDay = (int) preg_replace('/[^0-9]/', '', $polls->poll_duration);
+                    //         $postsNormalDetail['is_expired'] =  (dateDiffer($polls->created_at) > $leftDay) ? true : false;
 
-                            $postsNormalDetail['poll_id'] = $polls->id;
+                    //         $postsNormalDetail['poll_id'] = $polls->id;
 
-                            $postsNormalDetail['poll_question'] = $polls->poll_question;
+                    //         $postsNormalDetail['poll_question'] = $polls->poll_question;
 
 
-                            foreach ($polls->event_poll_option as $optionValue) {
+                    //         foreach ($polls->event_poll_option as $optionValue) {
 
-                                $optionData['id'] = $optionValue->id;
+                    //             $optionData['id'] = $optionValue->id;
 
-                                $optionData['option'] = $optionValue->option;
-                                $optionData['total_vote'] =  "0%";
-                                if (getOptionAllTotalVote($polls->id) != 0) {
+                    //             $optionData['option'] = $optionValue->option;
+                    //             $optionData['total_vote'] =  "0%";
+                    //             if (getOptionAllTotalVote($polls->id) != 0) {
 
-                                    $optionData['total_vote'] =  round(getOptionTotalVote($optionValue->id) / getOptionAllTotalVote($polls->id) * 100) . "%";
-                                }
-                                $optionData['is_poll_selected'] = checkUserGivePoll($user->id, $polls->id, $optionValue->id);
+                    //                 $optionData['total_vote'] =  round(getOptionTotalVote($optionValue->id) / getOptionAllTotalVote($polls->id) * 100) . "%";
+                    //             }
+                    //             $optionData['is_poll_selected'] = checkUserGivePoll($user->id, $polls->id, $optionValue->id);
 
 
-                                $postsNormalDetail['poll_option'][] = $optionData;
-                            }
-                        }
-                        $postsNormalDetail['post_recording'] = empty($value->post_recording) ? "" : asset('public/storage/event_post_recording/' . $value->post_recording);
-                        $reactionList = getOnlyReaction($value->id);
+                    //             $postsNormalDetail['poll_option'][] = $optionData;
+                    //         }
+                    //     }
+                    //     $postsNormalDetail['post_recording'] = empty($value->post_recording) ? "" : asset('public/storage/event_post_recording/' . $value->post_recording);
+                    //     $reactionList = getOnlyReaction($value->id);
 
-                        $postsNormalDetail['reactionList'] = $reactionList;
+                    //     $postsNormalDetail['reactionList'] = $reactionList;
 
-                        $postsNormalDetail['total_comment'] = $value->event_post_comment_count;
+                    //     $postsNormalDetail['total_comment'] = $value->event_post_comment_count;
 
-                        $postsNormalDetail['total_likes'] = $value->event_post_reaction_count;
+                    //     $postsNormalDetail['total_likes'] = $value->event_post_reaction_count;
 
-                        $postsNormalDetail['is_reaction'] = ($checkUserIsReaction != NULL) ? '1' : '0';
+                    //     $postsNormalDetail['is_reaction'] = ($checkUserIsReaction != NULL) ? '1' : '0';
 
-                        $postsNormalDetail['self_reaction'] = ($checkUserIsReaction != NULL) ? $checkUserIsReaction->reaction : "";
+                    //     $postsNormalDetail['self_reaction'] = ($checkUserIsReaction != NULL) ? $checkUserIsReaction->reaction : "";
 
-                        $postsNormalDetail['is_owner_post'] = ($value->user->id == $user->id) ? 1 : 0;
-                        $postsNormalDetail['is_mute'] =  0;
-                        if ($postControl != null) {
+                    //     $postsNormalDetail['is_owner_post'] = ($value->user->id == $user->id) ? 1 : 0;
+                    //     $postsNormalDetail['is_mute'] =  0;
+                    //     if ($postControl != null) {
 
-                            if ($postControl->post_control == 'mute') {
-                                $postsNormalDetail['is_mute'] =  1;
-                            }
-                        }
-                        $postList[] = $postsNormalDetail;
-                    }
+                    //         if ($postControl->post_control == 'mute') {
+                    //             $postsNormalDetail['is_mute'] =  1;
+                    //         }
+                    //     }
+                    //     $postList[] = $postsNormalDetail;
+                    // }
 
 
 
-                    if ($checkUserTypeForPost->rsvp_d == '1' && $checkUserTypeForPost->rsvp_status == '0' && $value->post_privacy == '3') {
+                    // if ($checkUserTypeForPost->rsvp_d == '1' && $checkUserTypeForPost->rsvp_status == '0' && $value->post_privacy == '3') {
 
-                        $postsNormalDetail['id'] =  $value->id;
+                    //     $postsNormalDetail['id'] =  $value->id;
 
-                        $postsNormalDetail['user_id'] =  $value->user->id;
+                    //     $postsNormalDetail['user_id'] =  $value->user->id;
 
-                        $postsNormalDetail['username'] =  $value->user->firstname . ' ' . $value->user->lastname;
-                        $postsNormalDetail['is_host'] =  ($ischeckEventOwner != null) ? 1 : 0;
-                        $postsNormalDetail['profile'] =  empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile);
+                    //     $postsNormalDetail['username'] =  $value->user->firstname . ' ' . $value->user->lastname;
+                    //     $postsNormalDetail['is_host'] =  ($ischeckEventOwner != null) ? 1 : 0;
+                    //     $postsNormalDetail['profile'] =  empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile);
 
-                        $postsNormalDetail['post_message'] = empty($value->post_message) ? "" :  $value->post_message;
+                    //     $postsNormalDetail['post_message'] = empty($value->post_message) ? "" :  $value->post_message;
 
-                        $postsNormalDetail['rsvp_status'] = $checkUserRsvp;
-                        $postsNormalDetail['location'] = ($value->user->city != NULL) ? $value->user->city : "";
+                    //     $postsNormalDetail['rsvp_status'] = $checkUserRsvp;
+                    //     $postsNormalDetail['location'] = ($value->user->city != NULL) ? $value->user->city : "";
 
 
 
-                        $postsNormalDetail['post_type'] = $value->post_type;
+                    //     $postsNormalDetail['post_type'] = $value->post_type;
 
-                        $postsNormalDetail['created_at'] = $value->created_at;
-                        $postsNormalDetail['posttime'] = setpostTime($value->created_at);
+                    //     $postsNormalDetail['created_at'] = $value->created_at;
+                    //     $postsNormalDetail['posttime'] = setpostTime($value->created_at);
 
 
-                        $postsNormalDetail['post_image'] = [];
-                        if ($value->post_type == '1' && !empty($value->post_image)) {
-                            foreach ($value->post_image as $imgVal) {
-                                $postMedia = [
-                                    'media_url' => asset('public/storage/post_image/' . $imgVal->post_image),
-                                    'type' => $imgVal->type,
-                                ];
+                    //     $postsNormalDetail['post_image'] = [];
+                    //     if ($value->post_type == '1' && !empty($value->post_image)) {
+                    //         foreach ($value->post_image as $imgVal) {
+                    //             $postMedia = [
+                    //                 'media_url' => asset('public/storage/post_image/' . $imgVal->post_image),
+                    //                 'type' => $imgVal->type,
+                    //             ];
 
-                                if ($imgVal->type == 'video' && isset($imgVal->duration) && $imgVal->duration !== "") {
-                                    $postMedia['video_duration'] = $imgVal->duration;
-                                } else {
-                                    unset($postMedia['video_duration']);
-                                }
+                    //             if ($imgVal->type == 'video' && isset($imgVal->duration) && $imgVal->duration !== "") {
+                    //                 $postMedia['video_duration'] = $imgVal->duration;
+                    //             } else {
+                    //                 unset($postMedia['video_duration']);
+                    //             }
 
-                                $postsNormalDetail['post_image'][] = $postMedia;
-                            }
-                        }
+                    //             $postsNormalDetail['post_image'][] = $postMedia;
+                    //         }
+                    //     }
 
-                        $postsNormalDetail['total_poll_vote'] = 0;
-                        $postsNormalDetail['poll_duration'] = "";
-                        $postsNormalDetail['is_expired'] = false;
-                        $postsNormalDetail['poll_id'] = 0;
-                        $postsNormalDetail['poll_question'] = "";
-                        $postsNormalDetail['poll_option'] = [];
-                        if ($value->post_type == '2') { // Poll
+                    //     $postsNormalDetail['total_poll_vote'] = 0;
+                    //     $postsNormalDetail['poll_duration'] = "";
+                    //     $postsNormalDetail['is_expired'] = false;
+                    //     $postsNormalDetail['poll_id'] = 0;
+                    //     $postsNormalDetail['poll_question'] = "";
+                    //     $postsNormalDetail['poll_option'] = [];
+                    //     if ($value->post_type == '2') { // Poll
 
-                            $polls = EventPostPoll::with('event_poll_option')->withCount('user_poll_data')->where(['event_id' => $input['event_id'], 'event_post_id' => $value->id])->first();
+                    //         $polls = EventPostPoll::with('event_poll_option')->withCount('user_poll_data')->where(['event_id' => $input['event_id'], 'event_post_id' => $value->id])->first();
 
-                            $postsNormalDetail['total_poll_vote'] = $polls->user_poll_data_count;
+                    //         $postsNormalDetail['total_poll_vote'] = $polls->user_poll_data_count;
 
-                            $postsNormalDetail['poll_duration'] =  empty($polls->poll_duration) ? "" :  $polls->poll_duration;
-                            $leftDay = (int) preg_replace('/[^0-9]/', '', $polls->poll_duration);
-                            $postsNormalDetail['is_expired'] =  (dateDiffer($polls->created_at) > $leftDay) ? true : false;
+                    //         $postsNormalDetail['poll_duration'] =  empty($polls->poll_duration) ? "" :  $polls->poll_duration;
+                    //         $leftDay = (int) preg_replace('/[^0-9]/', '', $polls->poll_duration);
+                    //         $postsNormalDetail['is_expired'] =  (dateDiffer($polls->created_at) > $leftDay) ? true : false;
 
-                            $postsNormalDetail['poll_id'] = $polls->id;
+                    //         $postsNormalDetail['poll_id'] = $polls->id;
 
-                            $postsNormalDetail['poll_question'] = $polls->poll_question;
+                    //         $postsNormalDetail['poll_question'] = $polls->poll_question;
 
 
-                            foreach ($polls->event_poll_option as $optionValue) {
+                    //         foreach ($polls->event_poll_option as $optionValue) {
 
-                                $optionData['id'] = $optionValue->id;
+                    //             $optionData['id'] = $optionValue->id;
 
-                                $optionData['option'] = $optionValue->option;
-                                $optionData['total_vote'] = "0%";
-                                if (getOptionAllTotalVote($polls->id) != 0) {
-                                    $optionData['total_vote'] =   round(getOptionTotalVote($optionValue->id) / getOptionAllTotalVote($polls->id) * 100) . "%";
-                                }
-                                $optionData['is_poll_selected'] = checkUserGivePoll($user->id, $polls->id, $optionValue->id);
+                    //             $optionData['option'] = $optionValue->option;
+                    //             $optionData['total_vote'] = "0%";
+                    //             if (getOptionAllTotalVote($polls->id) != 0) {
+                    //                 $optionData['total_vote'] =   round(getOptionTotalVote($optionValue->id) / getOptionAllTotalVote($polls->id) * 100) . "%";
+                    //             }
+                    //             $optionData['is_poll_selected'] = checkUserGivePoll($user->id, $polls->id, $optionValue->id);
 
 
-                                $postsNormalDetail['poll_option'][] = $optionData;
-                            }
-                        }
+                    //             $postsNormalDetail['poll_option'][] = $optionData;
+                    //         }
+                    //     }
 
-                        $postsNormalDetail['post_recording'] = empty($value->post_recording) ? "" : asset('public/storage/event_post_recording/' . $value->post_recording);
+                    //     $postsNormalDetail['post_recording'] = empty($value->post_recording) ? "" : asset('public/storage/event_post_recording/' . $value->post_recording);
 
-                        $reactionList = getOnlyReaction($value->id);
+                    //     $reactionList = getOnlyReaction($value->id);
 
-                        $postsNormalDetail['reactionList'] = $reactionList;
+                    //     $postsNormalDetail['reactionList'] = $reactionList;
 
-                        $postsNormalDetail['total_comment'] = $value->event_post_comment_count;
+                    //     $postsNormalDetail['total_comment'] = $value->event_post_comment_count;
 
-                        $postsNormalDetail['total_likes'] = $value->event_post_reaction_count;
+                    //     $postsNormalDetail['total_likes'] = $value->event_post_reaction_count;
 
-                        $postsNormalDetail['is_reaction'] = ($checkUserIsReaction != NULL) ? '1' : '0';
+                    //     $postsNormalDetail['is_reaction'] = ($checkUserIsReaction != NULL) ? '1' : '0';
 
-                        $postsNormalDetail['self_reaction'] = ($checkUserIsReaction != NULL) ? $checkUserIsReaction->reaction : "";
+                    //     $postsNormalDetail['self_reaction'] = ($checkUserIsReaction != NULL) ? $checkUserIsReaction->reaction : "";
 
-                        $postsNormalDetail['is_owner_post'] = ($value->user->id == $user->id) ? 1 : 0;
-                        $postsNormalDetail['is_mute'] =  0;
-                        if ($postControl != null) {
+                    //     $postsNormalDetail['is_owner_post'] = ($value->user->id == $user->id) ? 1 : 0;
+                    //     $postsNormalDetail['is_mute'] =  0;
+                    //     if ($postControl != null) {
 
-                            if ($postControl->post_control == 'mute') {
-                                $postsNormalDetail['is_mute'] =  1;
-                            }
-                        }
-                        $postList[] = $postsNormalDetail;
-                    }
+                    //         if ($postControl->post_control == 'mute') {
+                    //             $postsNormalDetail['is_mute'] =  1;
+                    //         }
+                    //     }
+                    //     $postList[] = $postsNormalDetail;
+                    // }
 
 
 
 
 
-                    if ($checkUserTypeForPost->rsvp_d == '0' && $value->post_privacy == '4') {
+                    // if ($checkUserTypeForPost->rsvp_d == '0' && $value->post_privacy == '4') {
 
-                        $postsNormalDetail['id'] =  $value->id;
+                    //     $postsNormalDetail['id'] =  $value->id;
 
-                        $postsNormalDetail['user_id'] =  $value->user->id;
+                    //     $postsNormalDetail['user_id'] =  $value->user->id;
 
-                        $postsNormalDetail['username'] =  $value->user->firstname . ' ' . $value->user->lastname;
-                        $postsNormalDetail['is_host'] =  ($ischeckEventOwner != null) ? 1 : 0;
-                        $postsNormalDetail['profile'] =  empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile);
+                    //     $postsNormalDetail['username'] =  $value->user->firstname . ' ' . $value->user->lastname;
+                    //     $postsNormalDetail['is_host'] =  ($ischeckEventOwner != null) ? 1 : 0;
+                    //     $postsNormalDetail['profile'] =  empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile);
 
-                        $postsNormalDetail['post_message'] = empty($value->post_message) ? "" :  $value->post_message;
+                    //     $postsNormalDetail['post_message'] = empty($value->post_message) ? "" :  $value->post_message;
 
-                        $postsNormalDetail['rsvp_status'] = $checkUserRsvp;
-                        $postsNormalDetail['location'] = ($value->user->city != NULL) ? $value->user->city : "";
+                    //     $postsNormalDetail['rsvp_status'] = $checkUserRsvp;
+                    //     $postsNormalDetail['location'] = ($value->user->city != NULL) ? $value->user->city : "";
 
 
 
-                        $postsNormalDetail['post_type'] = $value->post_type;
+                    //     $postsNormalDetail['post_type'] = $value->post_type;
 
-                        $postsNormalDetail['created_at'] = $value->created_at;
-                        $postsNormalDetail['posttime'] = setpostTime($value->created_at);
+                    //     $postsNormalDetail['created_at'] = $value->created_at;
+                    //     $postsNormalDetail['posttime'] = setpostTime($value->created_at);
 
 
 
-                        $postsNormalDetail['post_image'] = [];
-                        if ($value->post_type == '1' && !empty($value->post_image)) {
-                            foreach ($value->post_image as $imgVal) {
-                                $postMedia = [
-                                    'media_url' => asset('public/storage/post_image/' . $imgVal->post_image),
-                                    'type' => $imgVal->type,
-                                ];
+                    //     $postsNormalDetail['post_image'] = [];
+                    //     if ($value->post_type == '1' && !empty($value->post_image)) {
+                    //         foreach ($value->post_image as $imgVal) {
+                    //             $postMedia = [
+                    //                 'media_url' => asset('public/storage/post_image/' . $imgVal->post_image),
+                    //                 'type' => $imgVal->type,
+                    //             ];
 
-                                if ($imgVal->type == 'video' && isset($imgVal->duration) && $imgVal->duration !== "") {
-                                    $postMedia['video_duration'] = $imgVal->duration;
-                                } else {
-                                    unset($postMedia['video_duration']);
-                                }
+                    //             if ($imgVal->type == 'video' && isset($imgVal->duration) && $imgVal->duration !== "") {
+                    //                 $postMedia['video_duration'] = $imgVal->duration;
+                    //             } else {
+                    //                 unset($postMedia['video_duration']);
+                    //             }
 
-                                $postsNormalDetail['post_image'][] = $postMedia;
-                            }
-                        }
+                    //             $postsNormalDetail['post_image'][] = $postMedia;
+                    //         }
+                    //     }
 
-                        $postsNormalDetail['total_poll_vote'] = 0;
-                        $postsNormalDetail['poll_duration'] = "";
-                        $postsNormalDetail['is_expired'] = false;
-                        $postsNormalDetail['poll_id'] = 0;
-                        $postsNormalDetail['poll_question'] = "";
-                        $postsNormalDetail['poll_option'] = [];
-                        if ($value->post_type == '2') { // Poll
+                    //     $postsNormalDetail['total_poll_vote'] = 0;
+                    //     $postsNormalDetail['poll_duration'] = "";
+                    //     $postsNormalDetail['is_expired'] = false;
+                    //     $postsNormalDetail['poll_id'] = 0;
+                    //     $postsNormalDetail['poll_question'] = "";
+                    //     $postsNormalDetail['poll_option'] = [];
+                    //     if ($value->post_type == '2') { // Poll
 
-                            $polls = EventPostPoll::with('event_poll_option')->withCount('user_poll_data')->where(['event_id' => $input['event_id'], 'event_post_id' => $value->id])->first();
+                    //         $polls = EventPostPoll::with('event_poll_option')->withCount('user_poll_data')->where(['event_id' => $input['event_id'], 'event_post_id' => $value->id])->first();
 
-                            $postsNormalDetail['total_poll_vote'] = $polls->user_poll_data_count;
+                    //         $postsNormalDetail['total_poll_vote'] = $polls->user_poll_data_count;
 
-                            $postsNormalDetail['poll_duration'] =  empty($polls->poll_duration) ? "" :  $polls->poll_duration;
-                            $leftDay = (int) preg_replace('/[^0-9]/', '', $polls->poll_duration);
-                            $postsNormalDetail['is_expired'] =  (dateDiffer($polls->created_at) > $leftDay) ? true : false;
+                    //         $postsNormalDetail['poll_duration'] =  empty($polls->poll_duration) ? "" :  $polls->poll_duration;
+                    //         $leftDay = (int) preg_replace('/[^0-9]/', '', $polls->poll_duration);
+                    //         $postsNormalDetail['is_expired'] =  (dateDiffer($polls->created_at) > $leftDay) ? true : false;
 
-                            $postsNormalDetail['poll_id'] = $polls->id;
+                    //         $postsNormalDetail['poll_id'] = $polls->id;
 
-                            $postsNormalDetail['poll_question'] = $polls->poll_question;
+                    //         $postsNormalDetail['poll_question'] = $polls->poll_question;
 
 
-                            foreach ($polls->event_poll_option as $optionValue) {
+                    //         foreach ($polls->event_poll_option as $optionValue) {
 
-                                $optionData['id'] = $optionValue->id;
+                    //             $optionData['id'] = $optionValue->id;
 
-                                $optionData['option'] = $optionValue->option;
-                                $optionData['total_vote'] = "0%";
-                                if (getOptionAllTotalVote($polls->id) != 0) {
+                    //             $optionData['option'] = $optionValue->option;
+                    //             $optionData['total_vote'] = "0%";
+                    //             if (getOptionAllTotalVote($polls->id) != 0) {
 
-                                    $optionData['total_vote'] =   round(getOptionTotalVote($optionValue->id) / getOptionAllTotalVote($polls->id) * 100) . "%";
-                                }
-                                $optionData['is_poll_selected'] = checkUserGivePoll($user->id, $polls->id, $optionValue->id);
+                    //                 $optionData['total_vote'] =   round(getOptionTotalVote($optionValue->id) / getOptionAllTotalVote($polls->id) * 100) . "%";
+                    //             }
+                    //             $optionData['is_poll_selected'] = checkUserGivePoll($user->id, $polls->id, $optionValue->id);
 
 
-                                $postsNormalDetail['poll_option'][] = $optionData;
-                            }
-                        }
+                    //             $postsNormalDetail['poll_option'][] = $optionData;
+                    //         }
+                    //     }
 
-                        $postsNormalDetail['post_recording'] = empty($value->post_recording) ? "" : asset('public/storage/event_post_recording/' . $value->post_recording);
+                    //     $postsNormalDetail['post_recording'] = empty($value->post_recording) ? "" : asset('public/storage/event_post_recording/' . $value->post_recording);
 
-                        $reactionList = getOnlyReaction($value->id);
+                    //     $reactionList = getOnlyReaction($value->id);
 
-                        $postsNormalDetail['reactionList'] = $reactionList;
+                    //     $postsNormalDetail['reactionList'] = $reactionList;
 
-                        $postsNormalDetail['total_comment'] = $value->event_post_comment_count;
+                    //     $postsNormalDetail['total_comment'] = $value->event_post_comment_count;
 
-                        $postsNormalDetail['total_likes'] = $value->event_post_reaction_count;
+                    //     $postsNormalDetail['total_likes'] = $value->event_post_reaction_count;
 
-                        $postsNormalDetail['is_reaction'] = ($checkUserIsReaction != NULL) ? '1' : '0';
+                    //     $postsNormalDetail['is_reaction'] = ($checkUserIsReaction != NULL) ? '1' : '0';
 
-                        $postsNormalDetail['self_reaction'] = ($checkUserIsReaction != NULL) ? $checkUserIsReaction->reaction : "";
+                    //     $postsNormalDetail['self_reaction'] = ($checkUserIsReaction != NULL) ? $checkUserIsReaction->reaction : "";
 
-                        $postsNormalDetail['is_owner_post'] = ($value->user->id == $user->id) ? 1 : 0;
-                        $postsNormalDetail['is_mute'] =  0;
-                        if ($postControl != null) {
+                    //     $postsNormalDetail['is_owner_post'] = ($value->user->id == $user->id) ? 1 : 0;
+                    //     $postsNormalDetail['is_mute'] =  0;
+                    //     if ($postControl != null) {
 
-                            if ($postControl->post_control == 'mute') {
-                                $postsNormalDetail['is_mute'] =  1;
-                            }
-                        }
-                        $postList[] = $postsNormalDetail;
-                    }
+                    //         if ($postControl->post_control == 'mute') {
+                    //             $postsNormalDetail['is_mute'] =  1;
+                    //         }
+                    //     }
+                    //     $postList[] = $postsNormalDetail;
+                    // }
                 }
             }
         }
