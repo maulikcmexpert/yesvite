@@ -18,7 +18,7 @@
                         <div class="d-flex align-items-center gap-3">
                             <a href="change-password.html" class="cmn-btn edit-btn">
                                 Edit Password</a>
-                            <a href="#" class="btn cmn-btn" id="save_changes">Save Changes</a>
+                            <a href="#" class="cmn-btn" id="save_changes">Save Changes</a>
                         </div>
                     </div>
                     <div class="profile-wrapper edit-profile">
