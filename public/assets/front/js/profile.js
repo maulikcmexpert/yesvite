@@ -111,5 +111,36 @@ $(document).ready(function () {
                 },
             });
         });
+        $("#bg_profile_save").on("click", function () {
+            var formData = new FormData();
+            formData.append("file", $("#bg-choose-file")[0].files[0]);
+
+            $.ajax({
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                        "content"
+                    ),
+                },
+                url: base_url + "upload",
+                type: "POST",
+                data: formData,
+                processData: false,
+                contentType: false,
+
+                success: function (response) {
+                    toastr.success("background Profile updated successfully");
+                    $(document).ready(function () {
+                        $(".UserImg").attr("src", response);
+                    });
+                    $("#Edit-modal").modal("hide");
+                },
+                error: function (response) {
+                    if ((response = "")) {
+                        toastr.success("Profile updated successfully");
+                    }
+                    $("#Edit-modal").modal("hide");
+                },
+            });
+        });
     });
 });
