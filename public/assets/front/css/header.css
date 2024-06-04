@@ -208,7 +208,7 @@ header.login-header {
 }
 
 .user-img img{
-    object-fit: contain;
+    /* object-fit: contain; */
     border-radius: 100%;
     -webkit-border-radius: 100%;
     -moz-border-radius: 100%;

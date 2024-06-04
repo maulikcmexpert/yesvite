@@ -35,6 +35,10 @@
     margin: 0 auto;
 }
 
+.contact-user .user img{
+    border-radius: 100%;
+}
+
 .contact-user .badge{
     border: 3px solid #ffffff;
     width: 16px;
