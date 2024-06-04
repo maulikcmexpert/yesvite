@@ -46,9 +46,11 @@ $(document).ready(function () {
                 // },
                 method: "POST",
                 url: formActionURL,
+                dataType: "json",
                 data: formData,
+
                 success: function (output) {
-                    console.log(output.status);
+                    console.log(output.user);
                     if (output.status == 1) {
                         toastr.success(output.message);
                         location.reload();
