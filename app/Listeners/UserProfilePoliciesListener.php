@@ -46,11 +46,11 @@ class UserProfilePoliciesListener
 
 
         $notificationSet = [
-            "wall_post",
+            "guest_rsvp",
             "private_message",
             "potluck_activity",
             "invitations",
-            "guest_rsvp"
+            "wall_post",
         ];
 
         $checkNotification = UserNotificationType::where('user_id', $user->id)->count();
