@@ -7687,7 +7687,7 @@ class ApiControllerv2 extends Controller
             if (count($results) != 0) {
 
                 foreach ($results as $value) {
-                    $postsNormalDetail = []; // Initialize the variable here
+
 
                     $checkUserRsvp = checkUserAttendOrNot($value->event_id, $value->user->id);
 
@@ -7804,6 +7804,7 @@ class ApiControllerv2 extends Controller
                                 $postsNormalDetail['is_mute'] =  1;
                             }
                         }
+                        $postList[] = $postsNormalDetail;
                     }
 
                     //  reply by user and  RSVP
@@ -7915,6 +7916,7 @@ class ApiControllerv2 extends Controller
                                 $postsNormalDetail['is_mute'] =  1;
                             }
                         }
+                        $postList[] = $postsNormalDetail;
                     }
 
 
@@ -8019,6 +8021,7 @@ class ApiControllerv2 extends Controller
                                 $postsNormalDetail['is_mute'] =  1;
                             }
                         }
+                        $postList[] = $postsNormalDetail;
                     }
 
 
@@ -8127,9 +8130,8 @@ class ApiControllerv2 extends Controller
                                 $postsNormalDetail['is_mute'] =  1;
                             }
                         }
+                        $postList[] = $postsNormalDetail;
                     }
-
-                    $postList[] = $postsNormalDetail;
                 }
             }
         }
