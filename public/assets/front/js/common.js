@@ -48,6 +48,7 @@ jQuery(($) => {
 
 const chooseFile = document.getElementById("choose-file");
 const imgPreview = document.getElementById("cover-img");
+const bgimgPreview = document.getElementById("bg-cover-img");
 
 chooseFile.addEventListener("change", function () {
     getImgData();
@@ -61,6 +62,17 @@ function getImgData() {
         fileReader.addEventListener("load", function () {
             imgPreview.style.display = "block";
             imgPreview.innerHTML = '<img src="' + this.result + '" />';
+        });
+    }
+}
+function getImgData() {
+    const files = chooseFile.files[0];
+    if (files) {
+        const fileReader = new FileReader();
+        fileReader.readAsDataURL(files);
+        fileReader.addEventListener("load", function () {
+            bgimgPreview.style.display = "block";
+            bgimgPreview.innerHTML = '<img src="' + this.result + '" />';
         });
     }
 }
