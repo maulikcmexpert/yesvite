@@ -24,8 +24,8 @@ $(document).ready(function () {
             // about_me: "required",
         },
         messages: {
-            firstname: "Please enter your first name",
-            lastname: "Please enter your last name",
+            firstname: "Please enter your First name",
+            lastname: "Please enter your Last name",
             // gender: "Please select your gender",
             // birth_date: "Please enter your birth date",
             // email: "Please enter a valid email address",
@@ -33,7 +33,7 @@ $(document).ready(function () {
             // address: "Please enter your address",
             // city: "Please enter your city",
             //   state: "Please enter your state",
-            zip_code: "Please enter a valid zip code",
+            zip_code: "Please enter a valid Zip Code",
             //  about_me: "Please tell us about yourself",
         },
         submitHandler: function (form) {
