@@ -177,16 +177,16 @@ class ProfileController extends Controller
     }
     public function uploadBgProfile(Request $request)
     {
-        dd($request);
+
         $validator = Validator::make($request->all(), [
-            'bg_file' => 'required|image|max:2048', // max 2MB
+            'file' => 'required|image|max:2048', // max 2MB
         ]);
 
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 400);
         }
 
-        $file = $request->file('bg_file');
+        $file = $request->file('file');
         dd($file);
         if (!empty($file)) {
             $user = Auth::guard('web')->user();
