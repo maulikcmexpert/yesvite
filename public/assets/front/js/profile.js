@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    var base_url = $("#base_url").val();
     // Initialize jQuery validation
     $("#updateUserForm").validate({
         rules: {
@@ -89,7 +90,7 @@ $(document).ready(function () {
                         "content"
                     ),
                 },
-                url: "upload",
+                url: base_url + "upload",
                 type: "POST",
                 data: formData,
                 processData: false,
