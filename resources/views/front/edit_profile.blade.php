@@ -180,8 +180,8 @@
 
             <!-- Modal body -->
             <div class="modal-body">
-                <div class="cover-img" id="bg-cover-img">
-                    <img src="{{$user->bg_profile}}" alt="bg-cover-img">
+                <div class="cover-img" id="cover-img">
+                    <img src="{{$user->bg_profile}}" alt="cover-img">
                 </div>
                 <div>
                     <div class="slidecontainer">
