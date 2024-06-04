@@ -198,13 +198,7 @@ class ProfileController extends Controller
                 }
             }
 
-
-
-
-
             $imageName = time() . '_' . $file->getClientOriginalName();
-
-
             $file->move(public_path('storage/bg_profile'), $imageName);
             $user->bg_profile = $imageName;
             $user->save();
