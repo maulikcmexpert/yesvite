@@ -7502,13 +7502,13 @@ class ApiControllerv2 extends Controller
         $eventPostList->with(['user', 'post_image'])->withCount(['event_post_comment' => function ($query) {
             $query->where('parent_comment_id', NULL);
         }, 'event_post_reaction'])->where(['event_id' => $input['event_id'], 'is_in_photo_moudle' => '0'])
-            ->whereDoesntHave('postControls', function ($query) use ($user) {
+            ->whereDoesntHave('post_control', function ($query) use ($user) {
                 $query->where('user_id', $user->id)
                     ->where('post_control', '!=', 'hide_post');
             })
             ->where(function ($query) use ($user, $input) {
                 $query->where('post_privacy', '!=', '1')
-                    ->orWhereHas('eventInvitedUser', function ($subQuery) use ($user, $input) {
+                    ->orWhereHas('event.event_invited_user', function ($subQuery) use ($user, $input) {
                         $subQuery->whereHas('user', function ($userQuery) {
                             $userQuery->where('app_user', '1');
                         })
