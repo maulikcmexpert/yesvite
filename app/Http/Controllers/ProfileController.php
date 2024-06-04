@@ -187,7 +187,7 @@ class ProfileController extends Controller
         }
 
         $file = $request->file('bg_file');
-
+        dd($file);
         if (!empty($file)) {
             $user = Auth::guard('web')->user();
             if ($user->bg_profile != "" || $user->bg_profile != NULL) {
