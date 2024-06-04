@@ -49,7 +49,8 @@
 
                         </div>
                         <div class="profile-content login-form-wrap">
-                            <form action="">
+                            <form method="POST" action="{{route('profile.update',encrypt($user->id))}}" id="updateUserForm">
+                                @csrf
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="input-form">
