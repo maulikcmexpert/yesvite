@@ -2228,7 +2228,7 @@ class ApiControllerv2 extends Controller
             if (!empty($details)) {
                 $totalEvent =  Event::where('user_id', $user->id)->count();
 
-
+                $totalDraftEvent =  Event::where(['user_id' => $user->id, 'is_draft_save' => '1'])->count();
                 $totalEventPhotos = EventPost::where(['user_id' => $user->id, 'post_type' => '1'])->count();
 
                 $postComments =  EventPostComment::where('user_id', $user->id)->count();
