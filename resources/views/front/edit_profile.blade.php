@@ -54,13 +54,13 @@
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="input-form">
-                                            <input type="text" class="form-control inputText" id="text" name="firstname" value="{{$user->firstname}}">
+                                            <input type="text" class="form-control inputText" id="firstname" name="firstname" value="{{$user->firstname}}">
                                             <label for="text" class="form-label input-field floating-label">First Name <span class="required">*</span></label>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="input-form ">
-                                            <input type="text" class="form-control inputText" id="text" name="lastname" value="{{$user->lastname}}">
+                                            <input type="text" class="form-control inputText" id="lastname" name="lastname" value="{{$user->lastname}}">
                                             <label for="text" class="form-label input-field floating-label">Last Name</label>
                                         </div>
                                     </div>
@@ -74,7 +74,7 @@
                                                             <label class="form-check-label mb-0" for="flexRadioDefault1">
                                                                 <h6>Male</h6>
                                                             </label>
-                                                            <input class="form-check-input inputText" type="radio" name="gender" id="flexRadioDefault1" {{($user->gender == 'male')?'checked':''}}>
+                                                            <input class="form-check-input inputText" type="radio" name="gender" id="male" {{($user->gender == 'male')?'checked':''}}>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-6 col-6">
@@ -82,7 +82,7 @@
                                                             <label class="form-check-label  mb-0" for="flexRadioDefault2">
                                                                 <h6>Female</h6>
                                                             </label>
-                                                            <input class="form-check-input" type="radio" name="gender" id="flexRadioDefault2" {{($user->gender == 'female')?'checked':''}}>
+                                                            <input class="form-check-input" type="radio" name="gender" id="female" {{($user->gender == 'female')?'checked':''}}>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -91,7 +91,7 @@
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="input-form">
-                                            <input type="date" class="form-control inputText" id="birthday" name="birth_date" value="{{$user->birth_date}}">
+                                            <input type="date" class="form-control inputText" id="birth_date" name="birth_date" value="{{$user->birth_date}}">
                                             <label for="birthday" class="form-label input-field floating-label">Birthday</label>
                                         </div>
                                     </div>
@@ -103,19 +103,19 @@
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="input-form">
-                                            <input type="tel" class="form-control inputText" id="phone" name="phone_number" value="{{ $user->phone_number}}">
+                                            <input type="tel" class="form-control inputText" id="phone_number" name="phone_number" value="{{ $user->phone_number}}">
                                             <label for="phone" class="form-label input-field floating-label">Phone Number</label>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="input-form">
-                                            <input type="text" class="form-control inputText" id="code" name="zip_code" value="{{ $user->zip_code}}">
+                                            <input type="text" class="form-control inputText" id="zip_code" name="zip_code" value="{{ $user->zip_code}}">
                                             <label for="code" class="form-label input-field floating-label required">Zip Code <span>*</span></label>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="input-form mb-0">
-                                            <textarea name="about_me" class="inputText" id="">{{ $user->about_me}}</textarea>
+                                            <textarea name="about_me" class="inputText" id="about_me">{{ $user->about_me}}</textarea>
                                             <label for="code" class="form-label input-field floating-label about-label">About Me</label>
                                         </div>
                                     </div>
