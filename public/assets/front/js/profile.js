@@ -104,6 +104,7 @@ $(document).ready(function () {
                     $("#Edit-modal").modal("hide");
                 },
                 error: function (response) {
+                    alert(response);
                     toastr.error("Error uploading image.");
                     $("#Edit-modal").modal("hide");
                 },
