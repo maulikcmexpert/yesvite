@@ -74,7 +74,7 @@
                                                             <label class="form-check-label mb-0" for="flexRadioDefault1">
                                                                 <h6>Male</h6>
                                                             </label>
-                                                            <input class="form-check-input inputText" type="radio" name="gender" id="male" {{($user->gender == 'male')?'checked':''}}>
+                                                            <input class="form-check-input inputText" type="radio" value="male" name="gender" id="male" {{($user->gender == 'male')?'checked':''}}>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-6 col-6">
@@ -82,7 +82,7 @@
                                                             <label class="form-check-label  mb-0" for="flexRadioDefault2">
                                                                 <h6>Female</h6>
                                                             </label>
-                                                            <input class="form-check-input" type="radio" name="gender" id="female" {{($user->gender == 'female')?'checked':''}}>
+                                                            <input class="form-check-input" type="radio" name="gender" value="female" id="female" {{($user->gender == 'female')?'checked':''}}>
                                                         </div>
                                                     </div>
                                                 </div>
