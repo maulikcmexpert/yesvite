@@ -36,7 +36,7 @@ class ProfileController extends Controller
         $user['photos']   = EventPost::where(['user_id' => $user->id, 'post_type' => '1'])->count();
         $user['comments']   =  EventPostComment::where('user_id', $user->id)->count();
         $user['profile'] = ($user->profile != null) ? asset('public/storage/profile/' . $user->profile) : asset('public/storage/profile/no_profile.png');
-        $user['bg_profile'] = ($user->bg_profile != null) ? asset('public/storage/bg_profile/' . $user->bg_profileprofile) : asset('public/assets/front/image/Frame 1000005835.png');
+        $user['bg_profile'] = ($user->bg_profile != null) ? asset('public/storage/bg_profile/' . $user->bg_profile) : asset('public/assets/front/image/Frame 1000005835.png');
         $date = Carbon::parse($user->created_at);
         $formatted_date = $date->format('F, Y');
         $user['join_date'] = $formatted_date;
@@ -79,7 +79,7 @@ class ProfileController extends Controller
         $user['photos']   = EventPost::where(['user_id' => $user->id, 'post_type' => '1'])->count();
         $user['comments']   =  EventPostComment::where('user_id', $user->id)->count();
         $user['profile'] = ($user->profile != null) ? asset('public/storage/profile/' . $user->profile) : asset('public/storage/profile/no_profile.png');
-        $user['bg_profile'] = ($user->bg_profile != null) ? asset('public/storage/bg_profile/' . $user->bg_profileprofile) : asset('public/assets/front/image/Frame 1000005835.png');
+        $user['bg_profile'] = ($user->bg_profile != null) ? asset('public/storage/bg_profile/' . $user->bg_profile) : asset('public/assets/front/image/Frame 1000005835.png');
         return view('layout', compact(
             'title',
             'page',
