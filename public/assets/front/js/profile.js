@@ -53,9 +53,9 @@ $(document).ready(function () {
                     console.log(output.user);
                     if (output.status == 1) {
                         toastr.success(output.message);
-                        location.reload();
+                        //  location.reload();
                     } else {
-                        location.reload();
+                        //  location.reload();
                         toastr.error(output.message);
                     }
                 },
