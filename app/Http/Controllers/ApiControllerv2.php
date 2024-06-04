@@ -4740,7 +4740,7 @@ class ApiControllerv2 extends Controller
                         }
                         if (isset($eventData['guest_co_host_list'])) {
                             $guestcoHostList = $eventData['guest_co_host_list'];
-
+                            $alreadyselectedasguestCoUser =  collect($eventData['guest_co_host_list'])->pluck('user_id')->toArray();
                             if (!empty($guestcoHostList)) {
 
                                 foreach ($guestcoHostList as $value) {
@@ -4801,6 +4801,9 @@ class ApiControllerv2 extends Controller
                                                         $updateRecord->save();
                                                     }
                                                 }
+                                            } else if (!in_array($value['user_id'], $alreadyselectedasguestCoUser) && !in_array($value['user_id'], $getalreadyInviteduser)) {
+                                                // remove //
+                                                EventInvitedUser::where(['user_id' => $value['user_id'], 'event_id' => $eventData['event_id']])->delete();
                                             } else {
                                                 $updateRecord = EventInvitedUser::where(['user_id' => $checkUserExist->id, 'event_id' => $eventData['event_id']])->first();
                                                 $updateRecord->is_co_host = '1';
