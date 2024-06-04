@@ -48,9 +48,12 @@ $(document).ready(function () {
                 url: formActionURL,
                 data: formData,
                 success: function (output) {
+                    console.log(output.status);
                     if (output.status == 1) {
                         toastr.success(output.message);
+                        location.reload();
                     } else {
+                        location.reload();
                         toastr.error(output.message);
                     }
                 },
