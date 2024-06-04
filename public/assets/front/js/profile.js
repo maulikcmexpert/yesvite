@@ -117,24 +117,24 @@ $(document).ready(function () {
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
-            url: base_url + "upload",
+            url: base_url + "upload_bg_profile",
             type: "POST",
             data: formData,
             processData: false,
             contentType: false,
 
             success: function (response) {
-                toastr.success("background Profile updated successfully");
+                toastr.success("Background Profile updated successfully");
                 $(document).ready(function () {
-                    $(".UserImg").attr("src", response);
+                    $(".bg-img").attr("src", response);
                 });
-                $("#Edit-modal").modal("hide");
+                $("#coverImg-modal").modal("hide");
             },
             error: function (response) {
                 if ((response = "")) {
-                    toastr.success("Profile updated successfully");
+                    toastr.success("Background Profile updated successfully");
                 }
-                $("#Edit-modal").modal("hide");
+                $("#coverImg-modal").modal("hide");
             },
         });
     });

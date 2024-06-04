@@ -175,4 +175,44 @@ class ProfileController extends Controller
         }
         return $imageData;
     }
+    public function uploadBgProfile(Request $request)
+    {
+
+        $validator = Validator::make($request->all(), [
+            'bg_file' => 'required|image|max:2048', // max 2MB
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 400);
+        }
+
+        $file = $request->file('bg_file');
+
+        if (!empty($file)) {
+            $user = Auth::guard('web')->user();
+            if ($user->bg_profile != "" || $user->bg_profile != NULL) {
+
+                if (file_exists(public_path('storage/bg_profile/') . $user->bg_profile)) {
+                    $imagePath = public_path('storage/bg_profile/') . $user->bg_profile;
+                    unlink($imagePath);
+                }
+            }
+
+
+
+
+
+            $imageName = time() . '_' . $file->getClientOriginalName();
+
+
+            $file->move(public_path('storage/bg_profile'), $imageName);
+            $user->bg_profile = $imageName;
+            $user->save();
+            $imageData =   asset('public/storage/bg_profile/' . $imageName);
+            if (session()->has('user.bg_profile')) {
+                session(['user.bg_profile' => $imageData]); // Replace 'new_value' with your desired value
+            }
+        }
+        return $imageData;
+    }
 }

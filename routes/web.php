@@ -40,6 +40,7 @@ Route::middleware('checkUserExist')->group(function () {
 
 
     Route::post('upload',  [ProfileController::class, 'uploadProfile'])->name('profile.upload');
+    Route::post('upload_bg_profile',  [ProfileController::class, 'uploadBgProfile'])->name('profile.uploadbgprofile');
 });
 
 Route::controller(AuthController::class)->group(function () {
