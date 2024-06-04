@@ -181,7 +181,7 @@
             <!-- Modal body -->
             <div class="modal-body">
                 <div class="cover-img" id="cover-img">
-                    <img src="./assets/image/Frame 1000005835.png" alt="cover-img">
+                    <img src="{{$user->bg_profile}}" alt="cover-img">
                 </div>
                 <div>
                     <div class="slidecontainer">
@@ -193,7 +193,7 @@
                     <label class="choosen-file cmn-btn edit-btn mb-0" for="choose-file">
                         Upload New Image
                     </label>
-                    <button type="button" class="cmn-btn bg-primary">Save Changes</button>
+                    <button type="button" class="cmn-btn bg-primary" id="bg_profile_save">Save Changes</button>
                 </div>
             </div>
         </div>
