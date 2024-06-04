@@ -79,7 +79,7 @@ $(document).ready(function () {
     });
 
     $(document).ready(function () {
-        $("#fileField").on("change", function () {
+        $("#profile_save").on("click", function () {
             var formData = new FormData();
             formData.append("file", $(this)[0].files[0]);
 
@@ -100,11 +100,11 @@ $(document).ready(function () {
                     $(document).ready(function () {
                         $(".UserImg").attr("src", response);
                     });
-                    $("#coverProfile-modal").modal("hide");
+                    $("#Edit-modal").modal("hide");
                 },
                 error: function (response) {
                     toastr.error("Error uploading image.");
-                    $("#coverProfile-modal").modal("hide");
+                    $("#Edit-modal").modal("hide");
                 },
             });
         });
