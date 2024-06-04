@@ -153,7 +153,7 @@
                         <h3>My Profile</h3>
                         <!-- <a href="#" class="cmn-btn edit-btn" data-bs-toggle="modal" data-bs-target="#myModal3">
                                 Edit Profile</a> -->
-                        <a href="edit-profile.html" class="cmn-btn edit-btn">
+                        <a href="{{route('profile.edit')}}" class="cmn-btn edit-btn">
                             Edit Profile</a>
                     </div>
                     <div class="profile-wrapper">
