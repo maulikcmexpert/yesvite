@@ -104,8 +104,9 @@ $(document).ready(function () {
                     $("#Edit-modal").modal("hide");
                 },
                 error: function (response) {
-                    alert(response);
-                    toastr.error("Error uploading image.");
+                    if ((response = "")) {
+                        toastr.success("Profile updated successfully");
+                    }
                     $("#Edit-modal").modal("hide");
                 },
             });
