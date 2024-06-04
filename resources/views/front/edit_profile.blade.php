@@ -45,7 +45,7 @@
                                         <path d="M9.9082 5.875C10.2665 8.175 12.1332 9.93333 14.4499 10.1667" stroke="#0F172A" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
                                     </svg>
                                 </a>
-                                <input type="file" id="choose-file" name="file" accept="image/*" />
+                                <input type="file" id="bg-choose-file" name="file" accept="image/*" />
                                 <a href="#" class="Edit-img" for="choose-file" data-bs-toggle="modal" data-bs-target="#coverImg-modal">
                                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M8.84006 3.73332L3.36673 9.52665C3.16006 9.74665 2.96006 10.18 2.92006 10.48L2.6734 12.64C2.58673 13.42 3.14673 13.9533 3.92006 13.82L6.06673 13.4533C6.36673 13.4 6.78673 13.18 6.9934 12.9533L12.4667 7.15998C13.4134 6.15998 13.8401 5.01998 12.3667 3.62665C10.9001 2.24665 9.78673 2.73331 8.84006 3.73332Z" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
