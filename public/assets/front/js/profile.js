@@ -81,7 +81,7 @@ $(document).ready(function () {
     $(document).ready(function () {
         $("#profile_save").on("click", function () {
             var formData = new FormData();
-            formData.append("file", $(this)[0].files[0]);
+            formData.append("file", $("#choose-file")[0].files[0]);
 
             $.ajax({
                 headers: {
