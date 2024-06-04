@@ -193,7 +193,7 @@
                     </div>
                 </div>
                 <div class="d-flex align-items-center justify-content-end">
-                    <label class="choosen-file cmn-btn edit-btn mb-0" for="choose-file">
+                    <label class="choosen-file cmn-btn edit-btn mb-0" for="bg-choose-file">
                         Upload New Image
                     </label>
                     <button type="button" class="cmn-btn bg-primary" id="bg_profile_save">Save Changes</button>
