@@ -51,6 +51,16 @@ $(document).ready(function () {
 
                 success: function (output) {
                     console.log(output.user);
+
+                    $("#firstname").val(output.user.firstname);
+                    $("#lastname").val(output.user.lastname);
+                    // $("#male").val(output.user.male);
+                    // $("#female").val(output.user.female);
+                    $("#birth_date").val(output.user.birth_date);
+                    $("#email").val(output.user.email);
+                    $("#phone_number").val(output.user.phone_number);
+                    $("#zip_code").val(output.user.zip_code);
+                    $("#about_me").val(output.user.about_me);
                     if (output.status == 1) {
                         toastr.success(output.message);
                         //  location.reload();
