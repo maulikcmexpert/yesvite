@@ -43,7 +43,7 @@ chooseFile.addEventListener("change", function () {
 });
 
 bgChooseFile.addEventListener("change", function () {
-    getImgData();
+    getbgImgData();
 });
 
 function getImgData() {
