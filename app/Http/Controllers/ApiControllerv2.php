@@ -7520,12 +7520,12 @@ class ApiControllerv2 extends Controller
                                         ->where('rsvp_status', '1')
                                         ->where('post_privacy', '2');
                                 })
-                                    ->orWhere(function ($q) {
+                                    ->where(function ($q) {
                                         $q->where('rsvp_d', '1')
                                             ->where('rsvp_status', '0')
                                             ->where('post_privacy', '3');
                                     })
-                                    ->orWhere(function ($q) {
+                                    ->where(function ($q) {
                                         $q->where('rsvp_d', '0')
                                             ->where('post_privacy', '4');
                                     });
