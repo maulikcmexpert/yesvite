@@ -22,6 +22,7 @@ use Illuminate\Foundation\Exceptions\Handler as Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
+use Flasher\Toastr\Prime\ToastrInterface;
 
 class ProfileController extends Controller
 {
@@ -124,16 +125,16 @@ class ProfileController extends Controller
 
             $userData =  getUser($id);
             return response()->json(['status' => 1, 'message' => "Changes Saved!", 'user' => $userData]);
-            return  redirect()->route('profile')->with('success', 'Changes Saved!');
+          
         } catch (QueryException $e) {
             DB::Rollback();
             $userData =  getUser($id);
             return response()->json(['status' => 0, 'message' => "db error", 'user' => $userData]);
-            //  return redirect()->route('profile')->with('error', 'db error');
+           
         } catch (Exception  $e) {
             $userData =  getUser($id);
             return response()->json(['status' => 0, 'message' => "something went wrong", 'user' => $userData]);
-            // return redirect()->route('profile')->with('error', 'something went wrong');
+           
         }
     }
 
@@ -266,7 +267,9 @@ class ProfileController extends Controller
         $userUpdate->save();
 
         DB::commit();
+        
 
-        return  redirect()->route('profile.edit')->with('success', 'Password Changed!');
+        toastr()->success('Password Changed!');
+        return  redirect()->route('profile.edit');
     }
 }
