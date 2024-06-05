@@ -119,16 +119,21 @@ $(document).ready(function () {
             },
             url: base_url + "upload_bg_profile",
             type: "POST",
+            dataType: "json",
             data: formData,
             processData: false,
             contentType: false,
 
             success: function (response) {
-                toastr.success("Background Profile updated successfully");
-                $(document).ready(function () {
-                    $(".bg-img").attr("src", response);
-                });
-                $("#coverImg-modal").modal("hide");
+                if (response.status == 1) {
+                    toastr.success(response.message);
+                    $(document).ready(function () {
+                        $(".bg-img").attr("src", response);
+                    });
+                    $("#coverImg-modal").modal("hide");
+                } else {
+                    toastr.error(response.message);
+                }
             },
             error: function (response) {
                 if ((response = "")) {
@@ -188,7 +193,6 @@ $(document).ready(function () {
                 equalTo: "New Password did not matched",
             },
         },
-    
     });
 
     // Trigger form submission
