@@ -7500,52 +7500,62 @@ class ApiControllerv2 extends Controller
 
 
         $eventPostList = EventPost::query();
+
+        // Add related models and count specific relationships
         $eventPostList->with(['user', 'post_image'])
-            ->withCount(['event_post_comment' => function ($query) {
-                $query->where('parent_comment_id', NULL);
-            }, 'event_post_reaction'])
-            ->where(['event_id' => $input['event_id'], 'is_in_photo_moudle' => '0'])
+            ->withCount([
+                'event_post_comment' => function ($query) {
+                    $query->where('parent_comment_id', NULL);
+                },
+                'event_post_reaction'
+            ])
+            ->where([
+                'event_id' => $input['event_id'],
+                'is_in_photo_moudle' => '0'
+            ])
             ->whereDoesntHave('post_control', function ($query) use ($user) {
                 $query->where('user_id', $user->id)
                     ->where('post_control', '!=', 'hide_post');
             })
             ->where(function ($query) use ($user, $input) {
                 $query->where('post_privacy', '!=', '1')
-                    ->orWhere('post_privacy', '=', '2', function ($subQuery) use ($user, $input) {
-                        $subQuery->whereHas('event.event_invited_user', function ($subSubQuery) use ($user, $input) {
-                            $subSubQuery->whereHas('user', function ($userQuery) {
-                                $userQuery->where('app_user', '1');
-                            })
-                                ->where('event_id', $input['event_id'])
-                                ->orWhere('rsvp_d', '1')
-                                ->orWhere('rsvp_status', '1')
-                                ->where('user_id', $user->id);
-                        });
+                    ->orWhere(function ($subQuery) use ($user, $input) {
+                        $subQuery->where('post_privacy', '2')
+                            ->whereHas('event.event_invited_user', function ($subSubQuery) use ($user, $input) {
+                                $subSubQuery->whereHas('user', function ($userQuery) {
+                                    $userQuery->where('app_user', '1');
+                                })
+                                    ->where('event_id', $input['event_id'])
+                                    ->where('rsvp_d', '1')
+                                    ->where('rsvp_status', '1')
+                                    ->where('user_id', $user->id);
+                            });
                     })
-                    ->orWhere('post_privacy', '=', '3', function ($subQuery) use ($user, $input) {
-                        $subQuery->whereHas('event.event_invited_user', function ($subSubQuery) use ($user, $input) {
-                            $subSubQuery->whereHas('user', function ($userQuery) {
-                                $userQuery->where('app_user', '1');
-                            })
-                                ->where('event_id', $input['event_id'])
-                                ->orWhere('rsvp_d', '1')
-                                ->orWhere('rsvp_status', '0')
-                                ->where('user_id', $user->id);
-                        });
+                    ->orWhere(function ($subQuery) use ($user, $input) {
+                        $subQuery->where('post_privacy', '3')
+                            ->whereHas('event.event_invited_user', function ($subSubQuery) use ($user, $input) {
+                                $subSubQuery->whereHas('user', function ($userQuery) {
+                                    $userQuery->where('app_user', '1');
+                                })
+                                    ->where('event_id', $input['event_id'])
+                                    ->where('rsvp_d', '1')
+                                    ->where('rsvp_status', '0')
+                                    ->where('user_id', $user->id);
+                            });
                     })
-                    ->orWhere('post_privacy', '=', '4', function ($subQuery) use ($user, $input) {
-                        $subQuery->whereHas('event.event_invited_user', function ($subSubQuery) use ($user, $input) {
-                            $subSubQuery->whereHas('user', function ($userQuery) {
-                                $userQuery->where('app_user', '1');
-                            })
-                                ->where('event_id', $input['event_id'])
-                                ->orWhere('rsvp_d', '1')
-                                ->where('user_id', $user->id);
-                        });
+                    ->orWhere(function ($subQuery) use ($user, $input) {
+                        $subQuery->where('post_privacy', '4')
+                            ->whereHas('event.event_invited_user', function ($subSubQuery) use ($user, $input) {
+                                $subSubQuery->whereHas('user', function ($userQuery) {
+                                    $userQuery->where('app_user', '1');
+                                })
+                                    ->where('event_id', $input['event_id'])
+                                    ->where('rsvp_d', '1')
+                                    ->where('user_id', $user->id);
+                            });
                     });
             })
             ->orderBy('id', 'desc');
-
 
         // Apply filters if selected
         if (!empty($selectedFilters) && !in_array('all', $selectedFilters)) {
@@ -7586,7 +7596,9 @@ class ApiControllerv2 extends Controller
         // Handle pagination and count
         $totalPostWalls = $eventPostList->count();
         $results = $eventPostList->paginate($this->perPage, ['*'], 'page', $page);
+
         $total_page_of_eventPosts = ceil($totalPostWalls / $this->perPage);
+
 
         $postList = [];
 
@@ -7625,7 +7637,7 @@ class ApiControllerv2 extends Controller
 
                     $postsNormalDetail['post_message'] = empty($value->post_message) ? "" :  $value->post_message;
 
-                    $porWhereormalDetail['rsvp_status'] = $checkUserRsvp;
+                    $postsNormalDetail['rsvp_status'] = $checkUserRsvp;
                     $postsNormalDetail['location'] = ($value->user->city != NULL) ? $value->user->city : "";
 
 
