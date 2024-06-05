@@ -7496,7 +7496,7 @@ class ApiControllerv2 extends Controller
                     })
                         ->where('event_id', $input['event_id'])
                         ->where('user_id', $user->id)
-
+                        ->orWhere('post_privacy', '=', '1')
                         ->where(function ($privacyQuery) {
 
                             $privacyQuery->where(function ($q) {
