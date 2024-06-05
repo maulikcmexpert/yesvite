@@ -7594,30 +7594,37 @@ class ApiControllerv2 extends Controller
             })
             ->where(function ($query) use ($user, $input) {
                 $query->where('post_privacy', '!=', '1')
-                    ->orWhere(function ($subQuery) use ($user, $input) {
+                    ->orWhere('post_privacy', '=', '2', function ($subQuery) use ($user, $input) {
                         $subQuery->whereHas('event.event_invited_user', function ($subSubQuery) use ($user, $input) {
                             $subSubQuery->whereHas('user', function ($userQuery) {
                                 $userQuery->where('app_user', '1');
                             })
                                 ->where('event_id', $input['event_id'])
+                                ->where('rsvp_d', '1')
+                                ->where('rsvp_status', '1')
                                 ->where('user_id', $user->id);
-                        })
-                            ->where(function ($privacyQuery) {
-                                $privacyQuery->where(function ($q) {
-                                    $q->where('rsvp_d', '1')
-                                        ->where('rsvp_status', '1')
-                                        ->where('post_privacy', '2');
-                                })
-                                    ->orWhere(function ($q) {
-                                        $q->where('rsvp_d', '1')
-                                            ->where('rsvp_status', '0')
-                                            ->where('post_privacy', '3');
-                                    })
-                                    ->orWhere(function ($q) {
-                                        $q->where('rsvp_d', '0')
-                                            ->where('post_privacy', '4');
-                                    });
-                            });
+                        });
+                    })
+                    ->orWhere('post_privacy', '=', '3', function ($subQuery) use ($user, $input) {
+                        $subQuery->whereHas('event.event_invited_user', function ($subSubQuery) use ($user, $input) {
+                            $subSubQuery->whereHas('user', function ($userQuery) {
+                                $userQuery->where('app_user', '1');
+                            })
+                                ->where('event_id', $input['event_id'])
+                                ->where('rsvp_d', '1')
+                                ->where('rsvp_status', '0')
+                                ->where('user_id', $user->id);
+                        });
+                    })
+                    ->orWhere('post_privacy', '=', '4', function ($subQuery) use ($user, $input) {
+                        $subQuery->whereHas('event.event_invited_user', function ($subSubQuery) use ($user, $input) {
+                            $subSubQuery->whereHas('user', function ($userQuery) {
+                                $userQuery->where('app_user', '1');
+                            })
+                                ->where('event_id', $input['event_id'])
+                                ->where('rsvp_d', '1')
+                                ->where('user_id', $user->id);
+                        });
                     });
             })
             ->orderBy('id', 'desc');
