@@ -4679,20 +4679,23 @@ class ApiControllerv2 extends Controller
                                             'user_id' => $value['user_id'],
                                             'is_co_host' => '1'
                                         ]);
-                                    } else if (!in_array($value['user_id'], $alreadyselectedasCoUser) && !in_array($value['user_id'], $getalreadyInviteduser)) {
-                                        // remove //
-                                        EventInvitedUser::where(['user_id' => $value['user_id'], 'event_id' => $eventData['event_id']])->delete();
-                                    } else {
+                                    }
+                                    // else if (!in_array($value['user_id'], $alreadyselectedasCoUser) && !in_array($value['user_id'], $getalreadyInviteduser)) {
+                                    //     // remove //
+                                    //     EventInvitedUser::where(['user_id' => $value['user_id'], 'event_id' => $eventData['event_id']])->delete();
+                                    // }
+                                    else {
                                         $updateRecord = EventInvitedUser::where(['user_id' => $value['user_id'], 'event_id' => $eventData['event_id']])->first();
                                         $updateRecord->is_co_host = '1';
                                         $updateRecord->save();
                                     }
                                 }
-                            } else {
-                                // remove //
-
-                                EventInvitedUser::where(['event_id' => $eventData['event_id'], 'is_co_host' => '1'])->delete();
                             }
+                            // else {
+                            //     // remove //
+
+                            //     EventInvitedUser::where(['event_id' => $eventData['event_id'], 'is_co_host' => '1'])->delete();
+                            // }
                         }
                         if (isset($eventData['guest_co_host_list'])) {
                             $guestcoHostList = $eventData['guest_co_host_list'];
@@ -4757,10 +4760,12 @@ class ApiControllerv2 extends Controller
                                                         $updateRecord->save();
                                                     }
                                                 }
-                                            } else if (!in_array($value['user_id'], $alreadyselectedasguestCoUser) && !in_array($value['user_id'], $getalreadyInviteduser)) {
-                                                // remove //
-                                                EventInvitedUser::where(['user_id' => $value['user_id'], 'event_id' => $eventData['event_id']])->delete();
-                                            } else {
+                                            }
+                                            //  else if (!in_array($value['user_id'], $alreadyselectedasguestCoUser) && !in_array($value['user_id'], $getalreadyInviteduser)) {
+                                            //     // remove //
+                                            //     EventInvitedUser::where(['user_id' => $value['user_id'], 'event_id' => $eventData['event_id']])->delete();
+                                            // }
+                                            else {
                                                 $updateRecord = EventInvitedUser::where(['user_id' => $checkUserExist->id, 'event_id' => $eventData['event_id']])->first();
                                                 $updateRecord->is_co_host = '1';
                                                 $updateRecord->save();
@@ -4814,10 +4819,12 @@ class ApiControllerv2 extends Controller
                                                         ]);
                                                     }
                                                 }
-                                            } else if (!in_array($value['user_id'], $alreadyselectedasguestCoUser) && !in_array($value['user_id'], $getalreadyInviteduser)) {
-                                                // remove //
-                                                EventInvitedUser::where(['user_id' => $value['user_id'], 'event_id' => $eventData['event_id']])->delete();
-                                            } else {
+                                            }
+                                            // else if (!in_array($value['user_id'], $alreadyselectedasguestCoUser) && !in_array($value['user_id'], $getalreadyInviteduser)) {
+                                            //     // remove //
+                                            //     EventInvitedUser::where(['user_id' => $value['user_id'], 'event_id' => $eventData['event_id']])->delete();
+                                            // }
+                                            else {
                                                 $updateRecord = EventInvitedUser::where(['user_id' => $checkUserExist->id, 'event_id' => $eventData['event_id']])->first();
                                                 $updateRecord->is_co_host = '1';
                                                 $updateRecord->save();
@@ -4826,13 +4833,15 @@ class ApiControllerv2 extends Controller
                                     }
                                 }
                             }
-                        } else {
-                            // remove //
-                            EventInvitedUser::where(['event_id' => $eventData['event_id'], 'is_co_host' => '1'])->delete();
                         }
-                    } else {
-                        EventInvitedUser::where(['event_id' => $eventData['event_id'], 'is_co_host' => '1'])->delete();
+                        //  else {
+                        //     // remove //
+                        //     EventInvitedUser::where(['event_id' => $eventData['event_id'], 'is_co_host' => '1'])->delete();
+                        // }
                     }
+                    //  else {
+                    //     EventInvitedUser::where(['event_id' => $eventData['event_id'], 'is_co_host' => '1'])->delete();
+                    // }
 
 
 
