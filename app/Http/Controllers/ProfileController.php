@@ -112,16 +112,19 @@ class ProfileController extends Controller
 
     public function verifyPassword(Request $request)
     {
-        echo 1;
-        die;
-        $password = $request->input('password');
+
+        $password = $request->input('current_password');
 
         $id = decrypt(session()->get('user')['id']);
+
         $user = User::findOrFail($id);
+
+        //    print_r($request->input());
+        //    die;
         if (Hash::check($password, $user->password)) {
-            return response()->json(['valid' => true]);
+            return response()->json(true);
         } else {
-            return response()->json(['valid' => false]);
+            return response()->json(false);
         }
     }
 
@@ -195,9 +198,6 @@ class ProfileController extends Controller
             }
 
 
-
-
-
             $imageName = time() . '_' . $file->getClientOriginalName();
 
 
@@ -244,5 +244,42 @@ class ProfileController extends Controller
             }
         }
         return $imageData;
+    }
+
+    public function updatePassword(Request $request)
+    {
+        // $input=$request->all();
+        // $validator=$this->validate($request,[
+        //     'current_password' => 'required',
+        //     'new_password' => 'required',
+        //     'conform_password' => 'required',
+        // ]);
+
+        // if ($validator->fails()) {
+        //     return redirect()->route('profile.change_password')
+        //                      ->withErrors($validator)
+        //                      ->withInput();
+        // }
+        $validator = Validator::make($request->all(), [
+            'current_password' => 'required|min:8',
+            'new_password' => 'required|min:8',
+            'conform_password' => 'required|min:8|same:new_password',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->route('profile.change_password')
+                             ->withErrors($validator)
+                             ->withInput();
+        }
+        $id = decrypt(session()->get('user')['id']);
+        // $user = User::findOrFail($id);
+        $userUpdate = User::where('id', $id)->first();
+        $userUpdate->password = $request->conform_password;
+        $userUpdate->save();
+
+        DB::commit();
+
+        // return response()->json(['status' => 1, 'message' => "Password Changed!"]);
+        return  redirect()->route('profile.edit')->with('success', 'Password Changed!');
     }
 }

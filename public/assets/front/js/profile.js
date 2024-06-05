@@ -144,13 +144,14 @@ $(document).ready(function () {
     // Initialize jQuery validation
     $("#updateUserPassword").validate({
         rules: {
-           
             current_password: {
                 required: true,
                 minlength: 8,
                 remote: {
                     headers: {
-                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                            "content"
+                        ),
                     },
                     url: base_url + "profile/verify_password",
                     type: "post",
@@ -168,13 +169,14 @@ $(document).ready(function () {
             conform_password: {
                 required: true,
                 minlength: 8,
+                equalTo: "#new_password",
             },
         },
         messages: {
             current_password: {
                 required: "Please enter your Current password",
                 minlength: "Please enter minimum 8 character",
-                remote: "Incorrect password",
+                remote: "Please enter correct Current password",
             },
             new_password: {
                 required: "Please enter your New password",
@@ -183,43 +185,10 @@ $(document).ready(function () {
             conform_password: {
                 required: "Please Re-type your New password",
                 minlength: "Please enter minimum 8 character",
+                equalTo: "New Password did not matched",
             },
         },
-        submitHandler: function (form) {
-            // Form validation passed, submit the form via AJAX
-            var formActionURL = $("#updateUserPassword").attr("action");
-            var formData = $("#updateUserPassword").serialize();
-            $.ajax({
-                // headers: {
-                //     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-                // },
-                method: "POST",
-                url: formActionURL,
-                dataType: "json",
-                data: formData,
-
-                success: function (output) {
-                    console.log(output.user);
-
-                    $("#current_password").val(output.user.current_password);
-                    $("#new_password").val(output.user.new_password);
-                    // $("#male").val(output.user.male);
-                    // $("#female").val(output.user.female);
-                    $("#conform_password").val(output.user.conform_password);
-                    // $("#email").val(output.user.email);
-                    // $("#phone_number").val(output.user.phone_number);
-                    // $("#zip_code").val(output.user.zip_code);
-                    // $("#about_me").val(output.user.about_me);
-                    if (output.status == 1) {
-                        toastr.success(output.message);
-                        //  location.reload();
-                    } else {
-                        //  location.reload();
-                        toastr.error(output.message);
-                    }
-                },
-            });
-        },
+    
     });
 
     // Trigger form submission

@@ -40,6 +40,8 @@ Route::middleware('checkUserExist')->group(function () {
     Route::post('profile/verify_password', [ProfileController::class, 'verifyPassword'])->name('profile.verify_password');
 
     Route::post('profile/update/{id}',  [ProfileController::class, 'update'])->name('profile.update');
+    Route::post('profile/update_password',  [ProfileController::class, 'updatePassword'])->name('profile.update_password');
+
     Route::get('public_profile',  [ProfileController::class, 'publicProfileView'])->name('public_profile');
 
 

@@ -20,6 +20,7 @@
                         <a href="#" class="cmn-btn" id="save_password_changes">Save Changes</a>
 
                     </div>
+                  
                 </div>
                 <div class="change-password">
                     <div class="content">
@@ -30,25 +31,35 @@
                             special character</p>
                     </div>
                     <div class="login-form-wrap">
-                        <form action="" id="updateUserPassword">
+                        <form method="post" id="updateUserPassword" action="{{route('profile.update_password')}}">
+                            @csrf
                             <div class="input-form">
-                                <input type="password" class="form-control inputText" value="1" id="current_password" name="current_password" required>
+                                <input type="password" class="form-control inputText" id="current_password" name="current_password" required>
 
                                 @php
                                 use Carbon\Carbon;
                                 @endphp
                                 <label for="password" class="form-label input-field floating-label">Current password
-                                    (Updated {{ Carbon::parse($user->password_updated_date)->format('d/m/y') }})</label>
+                                    (Updated {{ Carbon::parse($user->password_updated_date)->format('d/m/Y') }})</label>
+                                @error('current_password')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="input-form">
                                 <input type="password" class="form-control inputText" id="new_password" name="new_password" required>
                                 <label for="password" class="form-label input-field floating-label">New
                                     Password</label>
+                                @error('new_password')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="input-form">
                                 <input type="password" class="form-control inputText" id="conform_password" name="conform_password" required>
                                 <label for="password" class="form-label input-field floating-label">Re-type New
                                     Password</label>
+                                @error('conform_password')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <a href="#">Forgot Password</a>
                         </form>
