@@ -7604,17 +7604,17 @@ class ApiControllerv2 extends Controller
                         })
                             ->where(function ($privacyQuery) {
                                 $privacyQuery->where(function ($q) {
-                                    $q->where('event.event_invited_user.rsvp_d', '1')
-                                        ->where('rsvp_status', '1')
+                                    $q->where('event_invited_users.rsvp_d', '1')
+                                        ->where('event_invited_users.rsvp_status', '1')
                                         ->where('post_privacy', '2');
                                 })
                                     ->orWhere(function ($q) {
-                                        $q->where('event.event_invited_user.rsvp_d', '1')
-                                            ->where('rsvp_status', '0')
+                                        $q->where('event_invited_users.rsvp_d', '1')
+                                            ->where('event_invited_users.rsvp_status', '0')
                                             ->where('post_privacy', '3');
                                     })
                                     ->orWhere(function ($q) {
-                                        $q->where('event.event_invited_user.rsvp_d', '0')
+                                        $q->where('event_invited_users.rsvp_d', '0')
                                             ->where('post_privacy', '4');
                                     });
                             });
