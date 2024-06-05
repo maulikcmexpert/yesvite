@@ -409,20 +409,20 @@ function sendNotification($notificationType, $postData)
 
             if ($postData['post_privacy'] != '2' && $value->rsvp_status != '1' &&  $value->rsvp_d != '1') {
                 echo "2";
-                dd($invitedusers);
+                dd($value);
                 continue;
             }
 
             if ($postData['post_privacy'] != '3' && $value->rsvp_status != '0' &&  $value->rsvp_d != '1') {
                 echo "3";
-                dd($invitedusers);
+                dd($value);
                 continue;
             }
 
 
             if ($postData['post_privacy'] != '4' &&  $value->rsvp_d != '0') {
                 echo "4";
-                dd($invitedusers);
+                dd($value);
                 continue;
             }
 
