@@ -404,7 +404,7 @@ function sendNotification($notificationType, $postData)
         }
 
         // post notify to  owner//
-        dd($invitedusers);
+
         foreach ($invitedusers as $key => $value) {
 
             if ($postData['post_privacy'] != '2' && $value->rsvp_status != '1' &&  $value->rsvp_d != '1') {
@@ -419,6 +419,7 @@ function sendNotification($notificationType, $postData)
             if ($postData['post_privacy'] != '4' &&  $value->rsvp_d != '0') {
                 continue;
             }
+            dd($invitedusers);
             $postControl = PostControl::with('event_posts')->where(['event_id' => $postData['event_id'], 'user_id' => $value->user_id, 'post_control' => 'mute'])->get();
             $postOwneruserId = [];
 
