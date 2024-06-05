@@ -7555,7 +7555,7 @@ class ApiControllerv2 extends Controller
                 });
             })
             ->orderBy('id', 'desc');
-        $sql = $eventPostList->toSql();
+        // $sql = $eventPostList->toSql();
 
         if (!empty($selectedFilters) && !in_array('all', $selectedFilters)) {
             $eventPostList->where(function ($query) use ($selectedFilters, $eventCreator) {
