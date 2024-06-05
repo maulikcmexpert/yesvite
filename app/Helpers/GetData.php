@@ -155,6 +155,8 @@ function getYesviteContactList($id)
         $yesviteUserDetail['country_code'] = (!empty($user->country_code) || $user->country_code != Null) ? strval($user->country_code) : "";
         $yesviteUserDetail['phone_number'] = (!empty($user->phone_number) || $user->phone_number != Null) ? $user->phone_number : "";
         $yesviteUserDetail['app_user']  = $user->app_user;
+        $yesviteUserDetail['visible'] =  $user->visible;
+        $yesviteUserDetail['message_privacy'] =  $user->message_privacy;
         $yesviteUserDetail['prefer_by']  = $user->prefer_by;
         $yesviteUser[] = $yesviteUserDetail;
     }
