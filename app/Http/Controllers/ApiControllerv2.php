@@ -7600,24 +7600,24 @@ class ApiControllerv2 extends Controller
                                 $userQuery->where('app_user', '1');
                             })
                                 ->where('event_id', $input['event_id'])
-                                ->where('user_id', $user->id);
-                        })
-                            ->where(function ($privacyQuery) {
-                                $privacyQuery->where(function ($q) {
-                                    $q->where('rsvp_d', '1')
-                                        ->where('rsvp_status', '1')
-                                        ->where('post_privacy', '2');
-                                })
-                                    ->orWhere(function ($q) {
+                                ->where('user_id', $user->id)
+                                ->where(function ($privacyQuery) {
+                                    $privacyQuery->where(function ($q) {
                                         $q->where('rsvp_d', '1')
-                                            ->where('rsvp_status', '0')
-                                            ->where('post_privacy', '3');
+                                            ->where('rsvp_status', '1')
+                                            ->where('post_privacy', '2');
                                     })
-                                    ->orWhere(function ($q) {
-                                        $q->where('rsvp_d', '0')
-                                            ->where('post_privacy', '4');
-                                    });
-                            });
+                                        ->orWhere(function ($q) {
+                                            $q->where('rsvp_d', '1')
+                                                ->where('rsvp_status', '0')
+                                                ->where('post_privacy', '3');
+                                        })
+                                        ->orWhere(function ($q) {
+                                            $q->where('rsvp_d', '0')
+                                                ->where('post_privacy', '4');
+                                        });
+                                });
+                        });
                     });
             })
             ->orderBy('id', 'desc');
