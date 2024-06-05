@@ -73,7 +73,7 @@ class AuthController extends Controller
                 }
                 return redirect()->route('home')->with('success', 'Logged in successfully!');
             } else {
-                return  Redirect::to('/')->with('error', 'Invalid credentials!');
+                return  Redirect::to('login')->with('error', 'Invalid credentials!');
             }
         }
         return  Redirect::to('/')->with('error', 'Email or Passqword invalid');
