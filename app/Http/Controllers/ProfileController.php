@@ -266,7 +266,7 @@ class ProfileController extends Controller
         $userUpdate->save();
 
         DB::commit();
-
-        return  redirect()->route('profile.edit')->with('success', 'Password Changed!');
+        toastr()->success('Password Changed');
+        return  redirect()->route('profile.edit');
     }
 }
