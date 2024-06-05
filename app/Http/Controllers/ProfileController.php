@@ -262,7 +262,7 @@ class ProfileController extends Controller
         $id = decrypt(session()->get('user')['id']);
 
         $userUpdate = User::where('id', $id)->first();
-        $userUpdate->password = $request->new_password;
+        $userUpdate->password = Hash::make($request->new_password);
         $userUpdate->password_updated_date = date('Y-m-d');
         $userUpdate->save();
 
