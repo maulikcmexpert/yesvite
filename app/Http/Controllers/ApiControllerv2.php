@@ -2063,12 +2063,12 @@ class ApiControllerv2 extends Controller
 
             $details = User::where('id', $user->id)->first();
             if (!empty($details)) {
-                $totalEvent =  Event::where('user_id', $user->id)->count();
-                $totalEventPhotos = EventPost::where(['user_id' => $user->id, 'post_type' => '1'])->count();
-                $postComments =  EventPostComment::where('user_id', $user->id)->count();
+                $totalEvent =  Event::where('user_id', $details->id)->count();
+                $totalEventPhotos = EventPost::where(['user_id' => $details->id, 'post_type' => '1'])->count();
+                $postComments =  EventPostComment::where('user_id', $details->id)->count();
 
-                $totalDraftEvent =  Event::where(['user_id' => $user->id, 'is_draft_save' => '1'])->count();
-                $getUserPrivacyPolicy = UserProfilePrivacy::select('profile_privacy', 'status')->where('user_id', $user->id)->get();
+                $totalDraftEvent =  Event::where(['user_id' => $details->id, 'is_draft_save' => '1'])->count();
+                $getUserPrivacyPolicy = UserProfilePrivacy::select('profile_privacy', 'status')->where('user_id', $details->id)->get();
                 // $profileData = [
                 //     'id' =>  empty($details->id) ? "" : $details->id,
                 //     'profile' =>  empty($details->profile) ?  "" : asset('public/storage/profile/' . $details->profile),
@@ -2096,17 +2096,17 @@ class ApiControllerv2 extends Controller
                 //     'zip_code' => empty($details->zip_code) ? "" : $details->zip_code
                 // ];
                 $profileData = [
-                    'id' =>  empty($user->id) ? "" : $user->id,
-                    'profile' =>  empty($user->profile) ?  "" : asset('public/storage/profile/' . $user->profile),
-                    'bg_profile' =>  empty($user->bg_profile) ? "" : asset('public/storage/bg_profile/' . $user->bg_profile),
-                    'firstname' => empty($user->firstname) ? "" : $user->firstname,
-                    'firstname' => empty($user->firstname) ? "" : $user->firstname,
-                    'lastname' => empty($user->lastname) ? "" : $user->lastname,
-                    'birth_date' => empty($user->birth_date) ? "" : $user->birth_date,
-                    'email' => empty($user->email) ? "" : $user->email,
-                    'about_me' => empty($user->about_me) ? "" : $user->about_me,
-                    'created_at' => empty($user->created_at) ? "" :   str_replace(' ', ', ', date('F Y', strtotime($user->created_at))),
-                    // 'created_at' => empty($user->created_at) ? "" :   date('F Y', strtotime($user->created_at)),
+                    'id' =>  empty($details->id) ? "" : $details->id,
+                    'profile' =>  empty($details->profile) ?  "" : asset('public/storage/profile/' . $details->profile),
+                    'bg_profile' =>  empty($details->bg_profile) ? "" : asset('public/storage/bg_profile/' . $details->bg_profile),
+                    'firstname' => empty($details->firstname) ? "" : $details->firstname,
+                    'firstname' => empty($details->firstname) ? "" : $details->firstname,
+                    'lastname' => empty($details->lastname) ? "" : $details->lastname,
+                    'birth_date' => empty($details->birth_date) ? "" : $details->birth_date,
+                    'email' => empty($details->email) ? "" : $details->email,
+                    'about_me' => empty($details->about_me) ? "" : $details->about_me,
+                    'created_at' => empty($details->created_at) ? "" :   str_replace(' ', ', ', date('F Y', strtotime($details->created_at))),
+                    // 'created_at' => empty($details->created_at) ? "" :   date('F Y', strtotime($details->created_at)),
                     'total_events' => $totalEvent,
                     'total_draft_events' => $totalDraftEvent,
                     'total_upcoming_events' => $this->upcomingEventCount,
@@ -2116,23 +2116,23 @@ class ApiControllerv2 extends Controller
                     'invitedTo_count' => $this->invitedToCount,
                     'total_photos' => $totalEventPhotos,
                     'comments' => $postComments,
-                    'gender' => empty($user->gender) ? "" : $user->gender,
-                    'country_code' => empty($user->country_code) ? "" : strval($user->country_code),
-                    'phone_number' => empty($user->phone_number) ? "" : $user->phone_number,
-                    'visible' =>  $user->visible,
-                    'message_privacy' =>  $user->message_privacy,
-                    'photo_via_wifi' =>  $user->photo_via_wifi,
-                    'enable_face_id_login' =>  $user->enable_face_id_login,
+                    'gender' => empty($details->gender) ? "" : $details->gender,
+                    'country_code' => empty($details->country_code) ? "" : strval($details->country_code),
+                    'phone_number' => empty($details->phone_number) ? "" : $details->phone_number,
+                    'visible' =>  $details->visible,
+                    'message_privacy' =>  $details->message_privacy,
+                    'photo_via_wifi' =>  $details->photo_via_wifi,
+                    'enable_face_id_login' =>  $details->enable_face_id_login,
                     'profile_privacy' =>  $getUserPrivacyPolicy,
-                    'account_type' =>  $user->account_type,
-                    'company_name' => empty($user->company_name) ? "" : $user->company_name,
-                    'address' => empty($user->address) ? "" : $user->address,
-                    'address_2' => empty($user->address_2) ? "" : $user->address_2,
-                    'city' => empty($user->city) ? "" : $user->city,
-                    'state' => empty($user->state) ? "" : $user->state,
-                    'zip_code' => empty($user->zip_code) ? "" : $user->zip_code,
-                    'password_updated_date' => empty($user->password_updated_date) ? "" : $user->password_updated_date,
-                    'total_notification' => Notification::where(['user_id' => $user->id, 'read' => '0'])->count()
+                    'account_type' =>  $details->account_type,
+                    'company_name' => empty($details->company_name) ? "" : $details->company_name,
+                    'address' => empty($details->address) ? "" : $details->address,
+                    'address_2' => empty($details->address_2) ? "" : $details->address_2,
+                    'city' => empty($details->city) ? "" : $details->city,
+                    'state' => empty($details->state) ? "" : $details->state,
+                    'zip_code' => empty($details->zip_code) ? "" : $details->zip_code,
+                    'password_updated_date' => empty($details->password_updated_date) ? "" : $details->password_updated_date,
+                    'total_notification' => Notification::where(['user_id' => $details->id, 'read' => '0'])->count()
                 ];
 
                 return response()->json(['status' => 1, 'data' => $profileData, 'message' => "Changes Saved!"]);
