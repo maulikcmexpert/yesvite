@@ -7499,22 +7499,25 @@ class ApiControllerv2 extends Controller
         $eventCreator = Event::where('id', $input['event_id'])->first();
 
         $eventPostList = EventPost::query();
-        $eventPostList->with(['user', 'post_image'])->withCount(['event_post_comment' => function ($query) {
-            $query->where('parent_comment_id', NULL);
-        }, 'event_post_reaction'])->where(['event_id' => $input['event_id'], 'is_in_photo_moudle' => '0'])
+        $eventPostList->with(['user', 'post_image'])
+            ->withCount(['event_post_comment' => function ($query) {
+                $query->where('parent_comment_id', NULL);
+            }, 'event_post_reaction'])
+            ->where(['event_id' => $input['event_id'], 'is_in_photo_moudle' => '0'])
             ->whereDoesntHave('post_control', function ($query) use ($user) {
                 $query->where('user_id', $user->id)
                     ->where('post_control', '!=', 'hide_post');
             })
             ->where(function ($query) use ($user, $input) {
                 $query->where('post_privacy', '!=', '1')
-
-                    ->orWhereHas('event.event_invited_user', function ($subQuery) use ($user, $input) {
-                        $subQuery->whereHas('user', function ($userQuery) {
-                            $userQuery->where('app_user', '1');
+                    ->orWhere(function ($subQuery) use ($user, $input) {
+                        $subQuery->whereHas('event.event_invited_user', function ($subSubQuery) use ($user, $input) {
+                            $subSubQuery->whereHas('user', function ($userQuery) {
+                                $userQuery->where('app_user', '1');
+                            })
+                                ->where('event_id', $input['event_id'])
+                                ->where('user_id', $user->id);
                         })
-                            ->where('event_id', $input['event_id'])
-                            ->where('user_id', $user->id)
                             ->where(function ($privacyQuery) {
                                 $privacyQuery->where(function ($q) {
                                     $q->where('rsvp_d', '1')
@@ -7535,8 +7538,7 @@ class ApiControllerv2 extends Controller
             })
             ->orderBy('id', 'desc');
 
-
-
+        // Apply filters if selected
         if (!empty($selectedFilters) && !in_array('all', $selectedFilters)) {
             $eventPostList->where(function ($query) use ($selectedFilters, $eventCreator) {
                 foreach ($selectedFilters as $filter) {
@@ -7545,17 +7547,19 @@ class ApiControllerv2 extends Controller
                             $query->orWhere('user_id', $eventCreator->user_id);
                             break;
                         case 'video_uploads':
-                            $query->orWhere(function ($qury) {
-                                $qury->where('post_type', '1')->whereHas('post_image', function ($q) {
-                                    $q->where('type', 'video');
-                                });
+                            $query->orWhere(function ($q) {
+                                $q->where('post_type', '1')
+                                    ->whereHas('post_image', function ($q) {
+                                        $q->where('type', 'video');
+                                    });
                             });
                             break;
                         case 'photo_uploads':
-                            $query->orWhere(function ($qury) {
-                                $qury->where('post_type', '1')->whereHas('post_image', function ($q) {
-                                    $q->where('type', 'image');
-                                });
+                            $query->orWhere(function ($q) {
+                                $q->where('post_type', '1')
+                                    ->whereHas('post_image', function ($q) {
+                                        $q->where('type', 'image');
+                                    });
                             });
                             break;
                         case 'polls':
@@ -7570,18 +7574,12 @@ class ApiControllerv2 extends Controller
             });
         }
 
+        // Handle pagination and count
+        $totalPostWalls = $eventPostList->count();
+        $results = $eventPostList->paginate($this->perPage, ['*'], 'page', $page);
+        $total_page_of_eventPosts = ceil($totalPostWalls / $this->perPage);
 
-        if (isset($input['type']) && ($input['type'] == '2')) {
 
-            $totalPostWalls = $eventPostList->count();
-            $results = $eventPostList->paginate($this->perPage, ['*'], 'page', $page);
-            $total_page_of_eventPosts = ceil($totalPostWalls / $this->perPage);
-        } else {
-
-            $totalPostWalls = $eventPostList->count();
-            $results = $eventPostList->paginate($this->perPage, ['*'], 'page', $page);
-            $total_page_of_eventPosts = ceil($totalPostWalls / $this->perPage);
-        }
 
         $postList = [];
 
