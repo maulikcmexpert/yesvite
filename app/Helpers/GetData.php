@@ -135,7 +135,7 @@ function getGroupList($id)
 }
 function getYesviteContactList($id)
 {
-    $yesviteRegisteredUser = User::select('id', 'firstname', 'profile', 'lastname', 'email', 'country_code', 'phone_number', 'app_user', 'prefer_by', 'email_verified_at', 'parent_user_phone_contact')->where('id', '!=', $id)->where(['is_user_phone_contact' => '0'])->orderBy('firstname')
+    $yesviteRegisteredUser = User::select('id', 'firstname', 'profile', 'lastname', 'email', 'country_code', 'phone_number', 'app_user', 'prefer_by', 'email_verified_at', 'parent_user_phone_contact', 'visible', 'message_privacy')->where('id', '!=', $id)->where(['is_user_phone_contact' => '0'])->orderBy('firstname')
         ->get();
     $yesviteUser = [];
     foreach ($yesviteRegisteredUser as $user) {
@@ -155,6 +155,8 @@ function getYesviteContactList($id)
         $yesviteUserDetail['country_code'] = (!empty($user->country_code) || $user->country_code != Null) ? strval($user->country_code) : "";
         $yesviteUserDetail['phone_number'] = (!empty($user->phone_number) || $user->phone_number != Null) ? $user->phone_number : "";
         $yesviteUserDetail['app_user']  = $user->app_user;
+        $yesviteUserDetail['visible'] =  $user->visible;
+        $yesviteUserDetail['message_privacy'] =  $user->message_privacy;
         $yesviteUserDetail['prefer_by']  = $user->prefer_by;
         $yesviteUser[] = $yesviteUserDetail;
     }

@@ -163,6 +163,8 @@ Route::get('install_ios_app', [ApiControllerv2::class, 'installIosApp']);
 
 Route::prefix('user/v2/')->middleware('checkUser')->group(function () {
 
+    Route::post('upload_application', [ApiControllerv2::class, 'uploadApplication']);
+
     Route::get('home', [ApiControllerv2::class, 'home']);
     Route::post('create_professional_account', [ApiControllerv2::class, 'createProfessionalAccount']);
     Route::post('update_profile', [ApiControllerv2::class, 'updateProfile']);

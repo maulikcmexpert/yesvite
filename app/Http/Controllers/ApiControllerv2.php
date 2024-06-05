@@ -133,59 +133,7 @@ class ApiControllerv2 extends Controller
     }
 
 
-    // public function sendThanks()
-    // {
-    //     $endedEvents =  Event::where('end_date', '<', now())->get();
 
-    //     foreach ($endedEvents as $event) {
-    //         if (!empty($event->greeting_card_id)) {
-
-    //             $greetingsCard = explode(',', $event->greeting_card_id);
-    //             $eventcards =   EventGreeting::whereIn('id', $greetingsCard)->first();
-
-
-    //             $currentDate = Carbon::now();
-
-    //             $endDate = Carbon::parse($event->end_date);
-
-    //             if ($endDate < $currentDate) {
-    //                 $hoursDifference = $endDate->diffInHours($currentDate);
-    //                 if ($event->id == 1237) {
-
-    //                     echo "greeting" . $eventcards->custom_hours_after_event;
-    //                     echo "current from" . $hoursDifference;
-    //                 }
-    //                 if ($hoursDifference == $eventcards->custom_hours_after_event) {
-
-    //                     $invitedUsers = EventInvitedUser::with('user')->where(['event_id' => $event->id])->get();
-
-    //                     foreach ($invitedUsers as $invitedUserVal) {
-    //                         if ($invitedUserVal->user->app_user == '0') {
-    //                             continue;
-    //                         }
-    //                         if ($event->id == 1237) {
-    //                             echo $invitedUserVal->user->email;
-    //                         }
-
-    //                         $eventData = [
-    //                             'event_name' => $event->event_name,
-    //                             'hosted_by' => $event->hosted_by,
-    //                             'date' =>  date('l, M. jS', strtotime($event->start_date)),
-    //                             'time' => $event,
-    //                             'address' => $event->event_location_name . ' ' . $event->address_1 . ' ' . $event->address_2 . ' ' . $event->state . ' ' . $event->city . ' - ' . $event->zip_code,
-    //                         ];
-    //                         $invitation_email = new ThankYouEmail($eventData);
-    //                         $recipientEmail = $invitedUserVal->user->email;
-
-
-    //                         Mail::to($recipientEmail)->send($invitation_email);
-    //                     }
-    //                     // $this->info('Successfully sent');
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
 
     public function sendThanks()
     {
@@ -397,10 +345,14 @@ class ApiControllerv2 extends Controller
 
 
                 $updateNotification = Event::where('id', $input['event_id'])->first();
-
+                $updatedDate = $updateNotification->updated_at;
                 if ($updateNotification != null) {
+                    $updateNotification->timestamps = false;  // Disable timestamps
                     $updateNotification->notification_on_off = $input['status'];
+
+
                     $updateNotification->save();
+                    $updateNotification->timestamps = true;  // Disable timestamps
                 }
             } else {
                 $updateUser = EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $user->id])->first();
@@ -4736,6 +4688,10 @@ class ApiControllerv2 extends Controller
                                         $updateRecord->save();
                                     }
                                 }
+                            } else {
+                                // remove //
+
+                                EventInvitedUser::where(['event_id' => $eventData['event_id'], 'is_co_host' => '1'])->delete();
                             }
                         }
                         if (isset($eventData['guest_co_host_list'])) {
@@ -4858,6 +4814,9 @@ class ApiControllerv2 extends Controller
                                                         ]);
                                                     }
                                                 }
+                                            } else if (!in_array($value['user_id'], $alreadyselectedasguestCoUser) && !in_array($value['user_id'], $getalreadyInviteduser)) {
+                                                // remove //
+                                                EventInvitedUser::where(['user_id' => $value['user_id'], 'event_id' => $eventData['event_id']])->delete();
                                             } else {
                                                 $updateRecord = EventInvitedUser::where(['user_id' => $checkUserExist->id, 'event_id' => $eventData['event_id']])->first();
                                                 $updateRecord->is_co_host = '1';
@@ -4867,7 +4826,12 @@ class ApiControllerv2 extends Controller
                                     }
                                 }
                             }
+                        } else {
+                            // remove //
+                            EventInvitedUser::where(['event_id' => $eventData['event_id'], 'is_co_host' => '1'])->delete();
                         }
+                    } else {
+                        EventInvitedUser::where(['event_id' => $eventData['event_id'], 'is_co_host' => '1'])->delete();
                     }
 
 
@@ -7497,57 +7461,54 @@ class ApiControllerv2 extends Controller
 
         $selectedFilters = $request->input('filters');
         $eventCreator = Event::where('id', $input['event_id'])->first();
-
-
         $eventPostList = EventPost::query();
         $eventPostList->with(['user', 'post_image'])
-            ->withCount(['event_post_comment' => function ($query) {
-                $query->where('parent_comment_id', NULL);
-            }, 'event_post_reaction'])
-            ->where(['event_id' => $input['event_id'], 'is_in_photo_moudle' => '0'])
+            ->withCount([
+                'event_post_comment' => function ($query) {
+                    $query->where('parent_comment_id', NULL);
+                },
+                'event_post_reaction'
+            ])
+            ->where([
+                'event_id' => $input['event_id'],
+                'is_in_photo_moudle' => '0'
+            ])
             ->whereDoesntHave('post_control', function ($query) use ($user) {
                 $query->where('user_id', $user->id)
                     ->where('post_control', '!=', 'hide_post');
-            })
-            ->where(function ($query) use ($user, $input) {
-                $query->where('post_privacy', '!=', '1')
-                    ->orWhere('post_privacy', '=', '2', function ($subQuery) use ($user, $input) {
-                        $subQuery->whereHas('event.event_invited_user', function ($subSubQuery) use ($user, $input) {
-                            $subSubQuery->whereHas('user', function ($userQuery) {
-                                $userQuery->where('app_user', '1');
-                            })
-                                ->where('event_id', $input['event_id'])
-                                ->orWhere('rsvp_d', '1')
-                                ->orWhere('rsvp_status', '1')
-                                ->where('user_id', $user->id);
-                        });
-                    })
-                    ->orWhere('post_privacy', '=', '3', function ($subQuery) use ($user, $input) {
-                        $subQuery->whereHas('event.event_invited_user', function ($subSubQuery) use ($user, $input) {
-                            $subSubQuery->whereHas('user', function ($userQuery) {
-                                $userQuery->where('app_user', '1');
-                            })
-                                ->where('event_id', $input['event_id'])
-                                ->orWhere('rsvp_d', '1')
-                                ->orWhere('rsvp_status', '0')
-                                ->where('user_id', $user->id);
-                        });
-                    })
-                    ->orWhere('post_privacy', '=', '4', function ($subQuery) use ($user, $input) {
-                        $subQuery->whereHas('event.event_invited_user', function ($subSubQuery) use ($user, $input) {
-                            $subSubQuery->whereHas('user', function ($userQuery) {
-                                $userQuery->where('app_user', '1');
-                            })
-                                ->where('event_id', $input['event_id'])
-                                ->orWhere('rsvp_d', '1')
-                                ->where('user_id', $user->id);
-                        });
-                    });
-            })
-            ->orderBy('id', 'desc');
+            });
+        $checkEventOwner = Event::where(['id' => $input['event_id'], 'user_id' => $user->id])->first();
+        if ($checkEventOwner == null) {
 
+            $eventPostList->where(function ($query) use ($user, $input) {
+                $query->orWhereHas('event.event_invited_user', function ($subQuery) use ($user, $input) {
+                    $subQuery->whereHas('user', function ($userQuery) {
+                        $userQuery->where('app_user', '1');
+                    })
+                        ->where('event_id', $input['event_id'])
+                        ->where('user_id', $user->id)
+                        ->where(function ($privacyQuery) {
+                            $privacyQuery->where(function ($q) {
+                                $q->where('rsvp_d', '1')
+                                    ->where('rsvp_status', '1')
+                                    ->where('post_privacy', '2');
+                            })
+                                ->orWhere(function ($q) {
+                                    $q->where('rsvp_d', '1')
+                                        ->where('rsvp_status', '0')
+                                        ->where('post_privacy', '3');
+                                })
+                                ->orWhere(function ($q) {
+                                    $q->where('rsvp_d', '0')
+                                        ->where('post_privacy', '4');
+                                });
+                        });
+                });
+            });
+        }
+        $eventPostList->orderBy('id', 'desc');
+        // $sql = $eventPostList->toSql();
 
-        // Apply filters if selected
         if (!empty($selectedFilters) && !in_array('all', $selectedFilters)) {
             $eventPostList->where(function ($query) use ($selectedFilters, $eventCreator) {
                 foreach ($selectedFilters as $filter) {
@@ -7556,16 +7517,16 @@ class ApiControllerv2 extends Controller
                             $query->orWhere('user_id', $eventCreator->user_id);
                             break;
                         case 'video_uploads':
-                            $query->orWhere(function ($q) {
-                                $q->where('post_type', '1')
+                            $query->orWhere(function ($qury) {
+                                $qury->where('post_type', '1')
                                     ->whereHas('post_image', function ($q) {
                                         $q->where('type', 'video');
                                     });
                             });
                             break;
                         case 'photo_uploads':
-                            $query->orWhere(function ($q) {
-                                $q->where('post_type', '1')
+                            $query->orWhere(function ($qury) {
+                                $qury->where('post_type', '1')
                                     ->whereHas('post_image', function ($q) {
                                         $q->where('type', 'image');
                                     });
@@ -7583,16 +7544,16 @@ class ApiControllerv2 extends Controller
             });
         }
 
-        // Handle pagination and count
         $totalPostWalls = $eventPostList->count();
         $results = $eventPostList->paginate($this->perPage, ['*'], 'page', $page);
+
         $total_page_of_eventPosts = ceil($totalPostWalls / $this->perPage);
+
+
 
         $postList = [];
 
-        // $this->checkUserTypeForPost($input['event_id'], $user->id);
 
-        $checkEventOwner = Event::where(['id' => $input['event_id'], 'user_id' => $user->id])->first();
 
         if (!empty($checkEventOwner)) {
 
@@ -7625,7 +7586,7 @@ class ApiControllerv2 extends Controller
 
                     $postsNormalDetail['post_message'] = empty($value->post_message) ? "" :  $value->post_message;
 
-                    $porWhereormalDetail['rsvp_status'] = $checkUserRsvp;
+                    $postsNormalDetail['rsvp_status'] = $checkUserRsvp;
                     $postsNormalDetail['location'] = ($value->user->city != NULL) ? $value->user->city : "";
 
 
@@ -12098,5 +12059,38 @@ class ApiControllerv2 extends Controller
         $versionSetting =  VersionSetting::first();
 
         return response()->json(["status" => true, 'message' => 'Application', 'url' => asset('public/appversion/yesvite_ios.apk'), 'version' => $versionSetting->ios_version]);
+    }
+
+    public function uploadApplication(Request $request)
+    {
+        try {
+
+            $input = $request->all();
+
+            $user = Auth::guard('api')->user();
+            if (!empty($request->application)) {
+
+
+
+                if (file_exists(public_path('appversion/yesvite_android.apk'))) {
+                    $imagePath = public_path('appversion/yesvite_android.apk');
+                    unlink($imagePath);
+                }
+
+
+
+                $image = $request->application;
+
+                $imageName = 'yesvite_android.apk';
+
+
+                $image->move(public_path('appversion'), $imageName);
+            }
+            return response()->json(['status' => 1, 'message' => "upload succesfully"]);
+        } catch (QueryException $e) {
+            return response()->json(['status' => 0, 'message' => "db error"]);
+        } catch (Exception  $e) {
+            return response()->json(['status' => 0, 'message' => 'something went wrong']);
+        }
     }
 }
