@@ -7497,7 +7497,7 @@ class ApiControllerv2 extends Controller
 
         $selectedFilters = $request->input('filters');
         $eventCreator = Event::where('id', $input['event_id'])->first();
-        dd($user->id);
+
 
         $eventPostList = EventPost::query();
 
