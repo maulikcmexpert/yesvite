@@ -12094,26 +12094,25 @@ class ApiControllerv2 extends Controller
 
 
                 $uploaded = $image->move(public_path('appversion'), $imageName);
-                if ($uploaded) {
-                    $versionSetting = VersionSetting::first();
-                    if ($versionSetting != NULL) {
-                        $versionSetting->android_version = $request->android_version;
-                        $versionSetting->android_in_force = $request->android_in_force;
-                        $versionSetting->ios_version = $request->ios_version;
-                        $versionSetting->ios_in_force = $request->ios_in_force;
-                        $versionSetting->save();
-                    } else {
-                        $newVersionSetting = new VersionSetting();
-                        $newVersionSetting->android_version = $request->android_version;
-                        $newVersionSetting->android_in_force = $request->android_in_force;
-                        $newVersionSetting->ios_version = $request->ios_version;
-                        $newVersionSetting->ios_in_force = $request->ios_in_force;
-                        $newVersionSetting->save();
-                    }
-                }
-
-                return response()->json(['status' => 1, 'message' => "upload succesfully"]);
             }
+
+            $versionSetting = VersionSetting::first();
+            if ($versionSetting != NULL) {
+                $versionSetting->android_version = $request->android_version;
+                $versionSetting->android_in_force = $request->android_in_force;
+                $versionSetting->ios_version = $request->ios_version;
+                $versionSetting->ios_in_force = $request->ios_in_force;
+                $versionSetting->save();
+            } else {
+                $newVersionSetting = new VersionSetting();
+                $newVersionSetting->android_version = $request->android_version;
+                $newVersionSetting->android_in_force = $request->android_in_force;
+                $newVersionSetting->ios_version = $request->ios_version;
+                $newVersionSetting->ios_in_force = $request->ios_in_force;
+                $newVersionSetting->save();
+            }
+
+            return response()->json(['status' => 1, 'message' => "version changed succesfully"]);
         } catch (QueryException $e) {
             return response()->json(['status' => 0, 'message' => "db error"]);
         } catch (Exception  $e) {
