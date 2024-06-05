@@ -144,13 +144,14 @@ $(document).ready(function () {
     // Initialize jQuery validation
     $("#updateUserPassword").validate({
         rules: {
-            headers: {
-                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-            },
+           
             current_password: {
                 required: true,
                 minlength: 8,
                 remote: {
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                    },
                     url: base_url + "profile/verify_password",
                     type: "post",
                     data: {
