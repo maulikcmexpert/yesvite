@@ -4862,6 +4862,9 @@ class ApiControllerv2 extends Controller
                                                         ]);
                                                     }
                                                 }
+                                            } else if (!in_array($value['user_id'], $alreadyselectedasguestCoUser) && !in_array($value['user_id'], $getalreadyInviteduser)) {
+                                                // remove //
+                                                EventInvitedUser::where(['user_id' => $value['user_id'], 'event_id' => $eventData['event_id']])->delete();
                                             } else {
                                                 $updateRecord = EventInvitedUser::where(['user_id' => $checkUserExist->id, 'event_id' => $eventData['event_id']])->first();
                                                 $updateRecord->is_co_host = '1';
