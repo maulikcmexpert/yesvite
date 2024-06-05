@@ -397,10 +397,10 @@ class ApiControllerv2 extends Controller
 
 
                 $updateNotification = Event::where('id', $input['event_id'])->first();
-
+                $updatedDate = $updateNotification->updated_at;
                 if ($updateNotification != null) {
                     $updateNotification->notification_on_off = $input['status'];
-                    $updateNotification->updated_at =  $updateNotification->updated_at;
+                    $updateNotification->updated_at =  $updatedDate;
 
                     $updateNotification->save();
                 }
