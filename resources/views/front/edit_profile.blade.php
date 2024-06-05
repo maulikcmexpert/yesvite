@@ -16,7 +16,7 @@
                     <div class="contact-title">
                         <h3>Edit Profile</h3>
                         <div class="d-flex align-items-center gap-3">
-                            <a href="change-password.html" class="cmn-btn edit-btn">
+                            <a href="{{route('profile.change_password')}}" class="cmn-btn edit-btn">
                                 Edit Password</a>
                             <a href="#" class="cmn-btn" id="save_changes">Save Changes</a>
                         </div>

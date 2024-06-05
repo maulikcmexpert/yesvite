@@ -16,6 +16,8 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Hash;
+
 use Illuminate\Foundation\Exceptions\Handler as Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -88,6 +90,40 @@ class ProfileController extends Controller
         ));
     }
 
+    public function changePassword()
+    {
+        $id = decrypt(session()->get('user')['id']);
+        $user = User::findOrFail($id);
+        $title = 'Change Password';
+        $page = 'front.change_password';
+        $js = ['profile'];
+        // $user['events'] =   Event::where(['user_id' => $user->id, 'is_draft_save' => '0'])->count();
+        // $user['photos']   = EventPost::where(['user_id' => $user->id, 'post_type' => '1'])->count();
+        // $user['comments']   =  EventPostComment::where('user_id', $user->id)->count();
+        $user['profile'] = ($user->profile != null) ? asset('storage/profile/' . $user->profile) : asset('storage/profile/no_profile.png');
+        $user['bg_profile'] = ($user->bg_profile != null) ? asset('storage/bg_profile/' . $user->bg_profile) : asset('assets/front/image/Frame 1000005835.png');
+        return view('layout', compact(
+            'title',
+            'page',
+            'user',
+            'js'
+        ));
+    }
+
+    public function verifyPassword(Request $request)
+    {
+        echo 1;
+        die;
+        $password = $request->input('password');
+
+        $id = decrypt(session()->get('user')['id']);
+        $user = User::findOrFail($id);
+        if (Hash::check($password, $user->password)) {
+            return response()->json(['valid' => true]);
+        } else {
+            return response()->json(['valid' => false]);
+        }
+    }
 
     public function update(Request $request, string $id)
     {
