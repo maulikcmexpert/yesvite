@@ -71,12 +71,15 @@ class AuthController extends Controller
                     Cookie::forget('email');
                     Cookie::forget('password');
                 }
-                return redirect()->route('home')->with('success', 'Logged in successfully!');
+                toastr()->success('Logged in successfully!');
+                return redirect()->route('home');
             } else {
-                return  Redirect::to('login')->with('error', 'Invalid credentials!');
+                toastr()->error('Invalid credentials!');
+                return  Redirect::to('login');
             }
         }
-        return  Redirect::to('/')->with('error', 'Email or Passqword invalid');
+        toastr()->error('Email or Passqword invalid');
+        return  Redirect::to('login');
     }
 
     /**
