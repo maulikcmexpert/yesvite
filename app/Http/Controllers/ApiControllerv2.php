@@ -12075,9 +12075,7 @@ class ApiControllerv2 extends Controller
     {
         try {
 
-            $input = $request->all();
 
-            $user = Auth::guard('api')->user();
             if (!empty($request->application)) {
 
 
