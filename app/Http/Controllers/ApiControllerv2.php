@@ -12076,6 +12076,8 @@ class ApiControllerv2 extends Controller
         try {
 
 
+            $versionSetting = VersionSetting::first();
+            dd($versionSetting);
             if (!empty($request->application)) {
 
 
@@ -12092,9 +12094,12 @@ class ApiControllerv2 extends Controller
                 $imageName = 'yesvite_android.apk';
 
 
-                $image->move(public_path('appversion'), $imageName);
+                $uploaded = $image->move(public_path('appversion'), $imageName);
+                if ($uploaded) {
+                }
+
+                return response()->json(['status' => 1, 'message' => "upload succesfully"]);
             }
-            return response()->json(['status' => 1, 'message' => "upload succesfully"]);
         } catch (QueryException $e) {
             return response()->json(['status' => 0, 'message' => "db error"]);
         } catch (Exception  $e) {
