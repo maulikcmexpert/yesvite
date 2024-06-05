@@ -8949,7 +8949,8 @@ class ApiControllerv2 extends Controller
 
                 'post_id' => $creatEventPost->id,
                 'is_in_photo_moudle' => $request->is_in_photo_moudle,
-                'post_type' => $request->post_type
+                'post_type' => $request->post_type,
+                'post_privacy' => $request->post_privacy
             ];
         }
 
