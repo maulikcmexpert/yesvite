@@ -142,7 +142,11 @@ class ProfileController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 400);
+            return response()->json([
+                'status' => 0,
+                'message' => $validator->errors()->first(),
+
+            ]);
         }
 
         $file = $request->file('file');
@@ -169,7 +173,12 @@ class ProfileController extends Controller
                 session(['user.profile' => $imageData]); // Replace 'new_value' with your desired value
             }
         }
-        return $imageData;
+
+        return response()->json([
+            'status' => 1,
+            'message' => "Profile updated successfully",
+            'image' => $imageData
+        ]);
     }
     public function uploadBgProfile(Request $request)
     {
