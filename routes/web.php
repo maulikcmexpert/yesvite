@@ -35,6 +35,10 @@ Route::middleware('checkUserExist')->group(function () {
     Route::post('/import-csv',  [HomeController::class, 'importCSV'])->name('import.csv');
     Route::get('profile',  [ProfileController::class, 'index'])->name('profile');
     Route::get('profile/edit',  [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::get('profile/change_password',  [ProfileController::class, 'changePassword'])->name('profile.change_password');
+    
+    Route::post('profile/verify_password', [ProfileController::class, 'verifyPassword'])->name('profile.verify_password');
+
     Route::post('profile/update/{id}',  [ProfileController::class, 'update'])->name('profile.update');
     Route::get('public_profile',  [ProfileController::class, 'publicProfileView'])->name('public_profile');
 
