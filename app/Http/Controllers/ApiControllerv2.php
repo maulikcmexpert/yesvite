@@ -4712,7 +4712,7 @@ class ApiControllerv2 extends Controller
                         if (isset($eventData['co_host_list'])) {
 
                             $coHostList = $eventData['co_host_list'];
-                            dd($coHostList);
+
                             if (!empty($coHostList)) {
 
                                 foreach ($coHostList as $value) {
@@ -4882,6 +4882,8 @@ class ApiControllerv2 extends Controller
                             // remove //
                             EventInvitedUser::where(['event_id' => $eventData['event_id'], 'is_co_host' => '1'])->delete();
                         }
+                    } else {
+                        EventInvitedUser::where(['event_id' => $eventData['event_id'], 'is_co_host' => '1'])->delete();
                     }
 
 
