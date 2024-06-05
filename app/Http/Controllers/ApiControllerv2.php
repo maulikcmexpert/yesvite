@@ -400,6 +400,8 @@ class ApiControllerv2 extends Controller
 
                 if ($updateNotification != null) {
                     $updateNotification->notification_on_off = $input['status'];
+                    $updateNotification->updated_at =  $updateNotification->updated_at;
+
                     $updateNotification->save();
                 }
             } else {
