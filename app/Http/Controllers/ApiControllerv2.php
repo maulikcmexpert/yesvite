@@ -4740,6 +4740,9 @@ class ApiControllerv2 extends Controller
                                         $updateRecord->save();
                                     }
                                 }
+                            } else {
+                                // remove //
+                                EventInvitedUser::where(['event_id' => $eventData['event_id'], 'is_co_host' => '1'])->delete();
                             }
                         }
                         if (isset($eventData['guest_co_host_list'])) {
@@ -4874,6 +4877,9 @@ class ApiControllerv2 extends Controller
                                     }
                                 }
                             }
+                        } else {
+                            // remove //
+                            EventInvitedUser::where(['event_id' => $eventData['event_id'], 'is_co_host' => '1'])->delete();
                         }
                     }
 
