@@ -4742,6 +4742,7 @@ class ApiControllerv2 extends Controller
                                 }
                             } else {
                                 // remove //
+                                dd($eventData['co_host_list']);
                                 EventInvitedUser::where(['event_id' => $eventData['event_id'], 'is_co_host' => '1'])->delete();
                             }
                         }
