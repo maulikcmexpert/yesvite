@@ -128,7 +128,7 @@ $(document).ready(function () {
                 if (response.status == 1) {
                     toastr.success(response.message);
                     $(document).ready(function () {
-                        $(".bg-img").attr("src", response);
+                        $(".bg-img").attr("src", response.image);
                     });
                     $("#coverImg-modal").modal("hide");
                 } else {
