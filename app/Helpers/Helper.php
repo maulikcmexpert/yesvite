@@ -408,18 +408,24 @@ function sendNotification($notificationType, $postData)
         foreach ($invitedusers as $key => $value) {
 
             if ($postData['post_privacy'] != '2' && $value->rsvp_status != '1' &&  $value->rsvp_d != '1') {
+                echo "2";
+                dd($invitedusers);
                 continue;
             }
 
             if ($postData['post_privacy'] != '3' && $value->rsvp_status != '0' &&  $value->rsvp_d != '1') {
+                echo "3";
+                dd($invitedusers);
                 continue;
             }
 
 
             if ($postData['post_privacy'] != '4' &&  $value->rsvp_d != '0') {
+                echo "4";
+                dd($invitedusers);
                 continue;
             }
-            dd($invitedusers);
+
             $postControl = PostControl::with('event_posts')->where(['event_id' => $postData['event_id'], 'user_id' => $value->user_id, 'post_control' => 'mute'])->get();
             $postOwneruserId = [];
 
