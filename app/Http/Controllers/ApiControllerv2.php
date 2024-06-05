@@ -7497,11 +7497,7 @@ class ApiControllerv2 extends Controller
 
         $selectedFilters = $request->input('filters');
         $eventCreator = Event::where('id', $input['event_id'])->first();
-
-
         $eventPostList = EventPost::query();
-
-        // Add related models and count specific relationships
         $eventPostList->with(['user', 'post_image'])
             ->withCount([
                 'event_post_comment' => function ($query) {
@@ -7512,56 +7508,39 @@ class ApiControllerv2 extends Controller
             ->where([
                 'event_id' => $input['event_id'],
                 'is_in_photo_moudle' => '0'
-            ]);
-        $checkEventOwner = Event::where(['id' => $input['event_id'], 'user_id' => $user->id])->first();
-        if ($checkEventOwner == null) {
-
-            $eventPostList->whereDoesntHave('post_control', function ($query) use ($user) {
+            ])
+            ->whereDoesntHave('post_control', function ($query) use ($user) {
                 $query->where('user_id', $user->id)
                     ->where('post_control', '!=', 'hide_post');
             })
-                ->where(function ($query) use ($user, $input) {
-                    $query->where('post_privacy', '!=', '1')
-                        ->orWhere(function ($subQuery) use ($user, $input) {
-                            $subQuery->where('post_privacy', '2')
-                                ->whereHas('event.event_invited_user', function ($subSubQuery) use ($user, $input) {
-                                    $subSubQuery->whereHas('user', function ($userQuery) {
-                                        $userQuery->where('app_user', '1');
-                                    })
-                                        ->where('event_id', $input['event_id'])
-                                        ->where('rsvp_d', '1')
+            ->where(function ($query) use ($user, $input) {
+                $query->where('post_privacy', '!=', '1')
+                    ->orWhereHas('event.event_invited_user', function ($subQuery) use ($user, $input) {
+                        $subQuery->whereHas('user', function ($userQuery) {
+                            $userQuery->where('app_user', '1');
+                        })
+                            ->where('event_id', $input['event_id'])
+                            ->where('user_id', $user->id)
+                            ->where(function ($privacyQuery) {
+                                $privacyQuery->where(function ($q) {
+                                    $q->where('rsvp_d', '1')
                                         ->where('rsvp_status', '1')
-                                        ->where('user_id', $user->id);
-                                });
-                        })
-                        ->orWhere(function ($subQuery) use ($user, $input) {
-                            $subQuery->where('post_privacy', '3')
-                                ->whereHas('event.event_invited_user', function ($subSubQuery) use ($user, $input) {
-                                    $subSubQuery->whereHas('user', function ($userQuery) {
-                                        $userQuery->where('app_user', '1');
+                                        ->where('post_privacy', '2');
+                                })
+                                    ->orWhere(function ($q) {
+                                        $q->where('rsvp_d', '1')
+                                            ->where('rsvp_status', '0')
+                                            ->where('post_privacy', '3');
                                     })
-                                        ->where('event_id', $input['event_id'])
-                                        ->where('rsvp_d', '1')
-                                        ->where('rsvp_status', '0')
-                                        ->where('user_id', $user->id);
-                                });
-                        })
-                        ->orWhere(function ($subQuery) use ($user, $input) {
-                            $subQuery->where('post_privacy', '4')
-                                ->whereHas('event.event_invited_user', function ($subSubQuery) use ($user, $input) {
-                                    $subSubQuery->whereHas('user', function ($userQuery) {
-                                        $userQuery->where('app_user', '1');
-                                    })
-                                        ->where('event_id', $input['event_id'])
-                                        ->where('rsvp_d', '1')
-                                        ->where('user_id', $user->id);
-                                });
-                        });
-                });
-        }
-        $eventPostList->orderBy('id', 'desc');
+                                    ->orWhere(function ($q) {
+                                        $q->where('rsvp_d', '0')
+                                            ->where('post_privacy', '4');
+                                    });
+                            });
+                    });
+            })
+            ->orderBy('id', 'desc');
 
-        // Apply filters if selected
         if (!empty($selectedFilters) && !in_array('all', $selectedFilters)) {
             $eventPostList->where(function ($query) use ($selectedFilters, $eventCreator) {
                 foreach ($selectedFilters as $filter) {
@@ -7570,16 +7549,16 @@ class ApiControllerv2 extends Controller
                             $query->orWhere('user_id', $eventCreator->user_id);
                             break;
                         case 'video_uploads':
-                            $query->orWhere(function ($q) {
-                                $q->where('post_type', '1')
+                            $query->orWhere(function ($qury) {
+                                $qury->where('post_type', '1')
                                     ->whereHas('post_image', function ($q) {
                                         $q->where('type', 'video');
                                     });
                             });
                             break;
                         case 'photo_uploads':
-                            $query->orWhere(function ($q) {
-                                $q->where('post_type', '1')
+                            $query->orWhere(function ($qury) {
+                                $qury->where('post_type', '1')
                                     ->whereHas('post_image', function ($q) {
                                         $q->where('type', 'image');
                                     });
@@ -7597,11 +7576,114 @@ class ApiControllerv2 extends Controller
             });
         }
 
-        // Handle pagination and count
         $totalPostWalls = $eventPostList->count();
         $results = $eventPostList->paginate($this->perPage, ['*'], 'page', $page);
-
         $total_page_of_eventPosts = ceil($totalPostWalls / $this->perPage);
+
+
+        // $eventPostList = EventPost::query();
+
+        // // Add related models and count specific relationships
+        // $eventPostList->with(['user', 'post_image'])
+        //     ->withCount([
+        //         'event_post_comment' => function ($query) {
+        //             $query->where('parent_comment_id', NULL);
+        //         },
+        //         'event_post_reaction'
+        //     ])
+        //     ->where([
+        //         'event_id' => $input['event_id'],
+        //         'is_in_photo_moudle' => '0'
+        //     ]);
+        // $checkEventOwner = Event::where(['id' => $input['event_id'], 'user_id' => $user->id])->first();
+        // if ($checkEventOwner == null) {
+
+        //     $eventPostList->whereDoesntHave('post_control', function ($query) use ($user) {
+        //         $query->where('user_id', $user->id)
+        //             ->where('post_control', '!=', 'hide_post');
+        //     })
+        //         ->where(function ($query) use ($user, $input) {
+        //             $query->where('post_privacy', '!=', '1')
+        //                 ->orWhere(function ($subQuery) use ($user, $input) {
+        //                     $subQuery->where('post_privacy', '2')
+        //                         ->whereHas('event.event_invited_user', function ($subSubQuery) use ($user, $input) {
+        //                             $subSubQuery->whereHas('user', function ($userQuery) {
+        //                                 $userQuery->where('app_user', '1');
+        //                             })
+        //                                 ->where('event_id', $input['event_id'])
+        //                                 ->where('rsvp_d', '1')
+        //                                 ->where('rsvp_status', '1')
+        //                                 ->where('user_id', $user->id);
+        //                         });
+        //                 })
+        //                 ->orWhere(function ($subQuery) use ($user, $input) {
+        //                     $subQuery->where('post_privacy', '3')
+        //                         ->whereHas('event.event_invited_user', function ($subSubQuery) use ($user, $input) {
+        //                             $subSubQuery->whereHas('user', function ($userQuery) {
+        //                                 $userQuery->where('app_user', '1');
+        //                             })
+        //                                 ->where('event_id', $input['event_id'])
+        //                                 ->where('rsvp_d', '1')
+        //                                 ->where('rsvp_status', '0')
+        //                                 ->where('user_id', $user->id);
+        //                         });
+        //                 })
+        //                 ->orWhere(function ($subQuery) use ($user, $input) {
+        //                     $subQuery->where('post_privacy', '4')
+        //                         ->whereHas('event.event_invited_user', function ($subSubQuery) use ($user, $input) {
+        //                             $subSubQuery->whereHas('user', function ($userQuery) {
+        //                                 $userQuery->where('app_user', '1');
+        //                             })
+        //                                 ->where('event_id', $input['event_id'])
+        //                                 ->where('rsvp_d', '1')
+        //                                 ->where('user_id', $user->id);
+        //                         });
+        //                 });
+        //         });
+        // }
+        // $eventPostList->orderBy('id', 'desc');
+
+        // // Apply filters if selected
+        // if (!empty($selectedFilters) && !in_array('all', $selectedFilters)) {
+        //     $eventPostList->where(function ($query) use ($selectedFilters, $eventCreator) {
+        //         foreach ($selectedFilters as $filter) {
+        //             switch ($filter) {
+        //                 case 'host_update':
+        //                     $query->orWhere('user_id', $eventCreator->user_id);
+        //                     break;
+        //                 case 'video_uploads':
+        //                     $query->orWhere(function ($q) {
+        //                         $q->where('post_type', '1')
+        //                             ->whereHas('post_image', function ($q) {
+        //                                 $q->where('type', 'video');
+        //                             });
+        //                     });
+        //                     break;
+        //                 case 'photo_uploads':
+        //                     $query->orWhere(function ($q) {
+        //                         $q->where('post_type', '1')
+        //                             ->whereHas('post_image', function ($q) {
+        //                                 $q->where('type', 'image');
+        //                             });
+        //                     });
+        //                     break;
+        //                 case 'polls':
+        //                     $query->orWhere('post_type', '2');
+        //                     break;
+        //                 case 'comments':
+        //                     $query->orWhere('post_type', '0');
+        //                     break;
+        //                     // Add more cases for other filters if needed
+        //             }
+        //         }
+        //     });
+        // }
+
+        // // Handle pagination and count
+        // $totalPostWalls = $eventPostList->count();
+        // $results = $eventPostList->paginate($this->perPage, ['*'], 'page', $page);
+
+        // $total_page_of_eventPosts = ceil($totalPostWalls / $this->perPage);
 
 
         $postList = [];
