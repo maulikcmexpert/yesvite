@@ -7496,7 +7496,9 @@ class ApiControllerv2 extends Controller
                     })
                         ->where('event_id', $input['event_id'])
                         ->where('user_id', $user->id)
+                        ->where('post_privacy', '!=', '1')
                         ->where(function ($privacyQuery) {
+
                             $privacyQuery->where(function ($q) {
                                 $q->where('rsvp_d', '1')
                                     ->where('rsvp_status', '1')
