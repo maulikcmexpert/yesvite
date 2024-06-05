@@ -133,59 +133,7 @@ class ApiControllerv2 extends Controller
     }
 
 
-    // public function sendThanks()
-    // {
-    //     $endedEvents =  Event::where('end_date', '<', now())->get();
 
-    //     foreach ($endedEvents as $event) {
-    //         if (!empty($event->greeting_card_id)) {
-
-    //             $greetingsCard = explode(',', $event->greeting_card_id);
-    //             $eventcards =   EventGreeting::whereIn('id', $greetingsCard)->first();
-
-
-    //             $currentDate = Carbon::now();
-
-    //             $endDate = Carbon::parse($event->end_date);
-
-    //             if ($endDate < $currentDate) {
-    //                 $hoursDifference = $endDate->diffInHours($currentDate);
-    //                 if ($event->id == 1237) {
-
-    //                     echo "greeting" . $eventcards->custom_hours_after_event;
-    //                     echo "current from" . $hoursDifference;
-    //                 }
-    //                 if ($hoursDifference == $eventcards->custom_hours_after_event) {
-
-    //                     $invitedUsers = EventInvitedUser::with('user')->where(['event_id' => $event->id])->get();
-
-    //                     foreach ($invitedUsers as $invitedUserVal) {
-    //                         if ($invitedUserVal->user->app_user == '0') {
-    //                             continue;
-    //                         }
-    //                         if ($event->id == 1237) {
-    //                             echo $invitedUserVal->user->email;
-    //                         }
-
-    //                         $eventData = [
-    //                             'event_name' => $event->event_name,
-    //                             'hosted_by' => $event->hosted_by,
-    //                             'date' =>  date('l, M. jS', strtotime($event->start_date)),
-    //                             'time' => $event,
-    //                             'address' => $event->event_location_name . ' ' . $event->address_1 . ' ' . $event->address_2 . ' ' . $event->state . ' ' . $event->city . ' - ' . $event->zip_code,
-    //                         ];
-    //                         $invitation_email = new ThankYouEmail($eventData);
-    //                         $recipientEmail = $invitedUserVal->user->email;
-
-
-    //                         Mail::to($recipientEmail)->send($invitation_email);
-    //                     }
-    //                     // $this->info('Successfully sent');
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
 
     public function sendThanks()
     {
@@ -12111,5 +12059,38 @@ class ApiControllerv2 extends Controller
         $versionSetting =  VersionSetting::first();
 
         return response()->json(["status" => true, 'message' => 'Application', 'url' => asset('public/appversion/yesvite_ios.apk'), 'version' => $versionSetting->ios_version]);
+    }
+
+    public function uploadApplication()
+    {
+        try {
+
+            $input = $request->all();
+
+            $user = Auth::guard('api')->user();
+            if (!empty($request->application)) {
+
+
+
+                if (file_exists(public_path('appversion/yesvite_android.apk'))) {
+                    $imagePath = public_path('appversion/yesvite_android.apk');
+                    unlink($imagePath);
+                }
+
+
+
+                $image = $request->application;
+
+                $imageName = 'yesvite_android.apk';
+
+
+                $image->move(public_path('appversion'), $imageName);
+            }
+            return response()->json(['status' => 1, 'message' => "upload succesfully"]);
+        } catch (QueryException $e) {
+            return response()->json(['status' => 0, 'message' => "db error"]);
+        } catch (Exception  $e) {
+            return response()->json(['status' => 0, 'message' => 'something went wrong']);
+        }
     }
 }
