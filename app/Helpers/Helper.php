@@ -404,7 +404,7 @@ function sendNotification($notificationType, $postData)
         }
 
         // post notify to  owner//
-
+        dd($invitedusers);
         foreach ($invitedusers as $key => $value) {
 
             if ($postData['post_privacy'] != '2' && $value->rsvp_status != '1' &&  $value->rsvp_d != '1') {
