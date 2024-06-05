@@ -399,10 +399,12 @@ class ApiControllerv2 extends Controller
                 $updateNotification = Event::where('id', $input['event_id'])->first();
                 $updatedDate = $updateNotification->updated_at;
                 if ($updateNotification != null) {
+                    $updateNotification->timestamps = false;  // Disable timestamps
                     $updateNotification->notification_on_off = $input['status'];
-                    $updateNotification->updated_at =  $updatedDate;
+
 
                     $updateNotification->save();
+                    $updateNotification->timestamps = true;  // Disable timestamps
                 }
             } else {
                 $updateUser = EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $user->id])->first();
