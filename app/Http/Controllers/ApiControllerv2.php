@@ -12061,7 +12061,7 @@ class ApiControllerv2 extends Controller
         return response()->json(["status" => true, 'message' => 'Application', 'url' => asset('public/appversion/yesvite_ios.apk'), 'version' => $versionSetting->ios_version]);
     }
 
-    public function uploadApplication()
+    public function uploadApplication(Request $request)
     {
         try {
 
