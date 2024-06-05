@@ -7518,11 +7518,11 @@ class ApiControllerv2 extends Controller
             ->withCount([
                 'event_post_comment' => function ($query) {
                     $query->where('parent_comment_id', NULL);
-                }, 
+                },
                 'event_post_reaction'
             ])
             ->where([
-                'event_id' => $input['event_id'], 
+                'event_id' => $input['event_id'],
                 'is_in_photo_moudle' => '0'
             ])
             ->whereDoesntHave('post_control', function ($query) use ($user) {
@@ -7535,27 +7535,29 @@ class ApiControllerv2 extends Controller
                         $subQuery->whereHas('user', function ($userQuery) {
                             $userQuery->where('app_user', '1');
                         })
-                        ->where('event_id', $input['event_id'])
-                        ->where('user_id', $user->id)
-                        ->where(function ($privacyQuery) {
-                            $privacyQuery->where(function ($q) {
-                                $q->where('rsvp_d', '1')
-                                    ->where('rsvp_status', '1')
-                                    ->where('post_privacy', '2');
-                            })
-                            ->orWhere(function ($q) {
-                                $q->where('rsvp_d', '1')
-                                    ->where('rsvp_status', '0')
-                                    ->where('post_privacy', '3');
-                            })
-                            ->orWhere(function ($q) {
-                                $q->where('rsvp_d', '0')
-                                    ->where('post_privacy', '4');
+                            ->where('event_id', $input['event_id'])
+                            ->where('user_id', $user->id)
+                            ->where(function ($privacyQuery) {
+                                $privacyQuery->where(function ($q) {
+                                    $q->where('rsvp_d', '1')
+                                        ->where('rsvp_status', '1')
+                                        ->where('post_privacy', '2');
+                                })
+                                    ->orWhere(function ($q) {
+                                        $q->where('rsvp_d', '1')
+                                            ->where('rsvp_status', '0')
+                                            ->where('post_privacy', '3');
+                                    })
+                                    ->orWhere(function ($q) {
+                                        $q->where('rsvp_d', '0')
+                                            ->where('post_privacy', '4');
+                                    });
                             });
-                        });
                     });
             })
             ->orderBy('id', 'desc');
+        $sql = $eventPostList->toSql();
+        dd($sql);
 
         if (!empty($selectedFilters) && !in_array('all', $selectedFilters)) {
             $eventPostList->where(function ($query) use ($selectedFilters, $eventCreator) {
@@ -7594,6 +7596,7 @@ class ApiControllerv2 extends Controller
 
         $totalPostWalls = $eventPostList->count();
         $results = $eventPostList->paginate($this->perPage, ['*'], 'page', $page);
+
         $total_page_of_eventPosts = ceil($totalPostWalls / $this->perPage);
 
 
