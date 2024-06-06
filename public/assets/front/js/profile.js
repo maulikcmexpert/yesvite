@@ -45,13 +45,9 @@ $(document).ready(function () {
             //  about_me: "Please tell us about yourself",
         },
         submitHandler: function (form) {
-            // Form validation passed, submit the form via AJAX
             var formActionURL = $("#updateUserForm").attr("action");
             var formData = $("#updateUserForm").serialize();
             $.ajax({
-                // headers: {
-                //     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-                // },
                 method: "POST",
                 url: formActionURL,
                 dataType: "json",
@@ -63,17 +59,14 @@ $(document).ready(function () {
                     if (output.status == 1) {
                         $("#firstname").val(output.user.firstname);
                         $("#lastname").val(output.user.lastname);
-                        // $("#male").val(output.user.male);
-                        // $("#female").val(output.user.female);
+
                         $("#birth_date").val(output.user.birth_date);
                         $("#email").val(output.user.email);
                         $("#phone_number").val(output.user.phone_number);
                         $("#zip_code").val(output.user.zip_code);
                         $("#about_me").val(output.user.about_me);
                         toastr.success(output.message);
-                        //  location.reload();
                     } else {
-                        //  location.reload();
                         toastr.error(output.message);
                     }
                 },
