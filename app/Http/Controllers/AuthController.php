@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\URL;
 use Cookie;
 use App\Models\User;
-
+use App\Rules\EmailExists;
 
 class AuthController extends Controller
 {
@@ -54,7 +54,7 @@ class AuthController extends Controller
         $validator = Validator::make($request->all(), [
             'firstname' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
+            'email' => ['required', 'email', new EmailExists], // Use the custom validation rule
             'zip_code' => 'required|string|max:10',
             'password' => 'required|string|min:8|regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/',
             'cpassword' => 'required|same:password',
