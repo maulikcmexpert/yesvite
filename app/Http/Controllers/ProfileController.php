@@ -259,7 +259,18 @@ class ProfileController extends Controller
     public function changePassword()
     {
         $id = decrypt(session()->get('user')['id']);
-        $user = User::findOrFail($id);
+        $user = User::withCount(
+
+            [
+                'event' => function ($query) {
+                    $query->where('is_draft_save', '0');
+                }, 'event_post' => function ($query) {
+                    $query->where('post_type', '1');
+                },
+                'event_post_comment'
+
+            ]
+        )->findOrFail($id);
         $title = 'Change Password';
         $page = 'front.change_password';
         $js = ['profile'];

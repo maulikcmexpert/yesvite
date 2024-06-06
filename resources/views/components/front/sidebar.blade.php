@@ -50,15 +50,15 @@
 
         <div class="user-gallery">
             <div>
-                <h4>{{formatNumber($profileData->events)}}</h4>
+                <h4>{{formatNumber($profileData->event_count)}}</h4>
                 <p>Events</p>
             </div>
             <div>
-                <h4>{{formatNumber($profileData->photos)}}</h4>
+                <h4>{{formatNumber($profileData->event_post_count)}}</h4>
                 <p>Photos</p>
             </div>
             <div>
-                <h4>{{formatNumber($profileData->comments)}}</h4>
+                <h4>{{formatNumber($profileData->event_post_comment_count)}}</h4>
                 <p>Comments</p>
             </div>
         </div>
