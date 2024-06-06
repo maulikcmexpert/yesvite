@@ -202,6 +202,7 @@ $(document).ready(function () {
 
     // Trigger form submission
     $("#save_password_changes").click(function () {
+        loaderHandle("#save_password_changes", "Saving");
         $("#updateUserPassword").submit();
     });
 });
