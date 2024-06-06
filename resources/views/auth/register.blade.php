@@ -39,7 +39,7 @@
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                                     <div class="input-form">
-                                        <input type="Fname" class="form-control inputText" id="firstname" name="firstname">
+                                        <input type="Fname" class="form-control inputText" id="firstname" name="firstname" value="{{ old('firstname')}}">
                                         <label for="Fname" class="form-label input-field floating-label">First Name <span class="required">*</span></label>
                                         @error('firstname')
                                         <label class="error">{{ $message }}</label>
