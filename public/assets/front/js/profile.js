@@ -15,6 +15,7 @@ $(document).ready(function () {
                 // required: true,
                 digits: true,
                 minlength: 10,
+                maxlength: 15,
             },
             // address: "required",
             // city: "required",
@@ -34,6 +35,7 @@ $(document).ready(function () {
                 // required: true,
                 digits: "Please enter a valid Phone Number",
                 minlength: "Phone Number must be minimum 10 digit",
+                maxlength: "Phone Number must be maxmimum 15 digit",
             },
             zip_code: {
                 required: "Please enter Zip Code",
