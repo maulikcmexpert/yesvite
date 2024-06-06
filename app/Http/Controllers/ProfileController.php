@@ -100,7 +100,7 @@ class ProfileController extends Controller
             $validator = Validator::make($request->all(), [
                 'firstname' => 'required|string', // max 2MB
                 'lastname' => 'required|string', // max 2MB
-                'phone_number' => 'numeric|regex:/^\d{10,15}$/',
+                'phone_number' => 'sometimes|numeric|regex:/^\d{10,15}$/',
                 'zip_code' => 'required|numeric|regex:/^\d{5,9}$/', // max 2MB
 
             ], [
