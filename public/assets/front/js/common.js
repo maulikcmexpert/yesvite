@@ -16,8 +16,8 @@ toastr.options = {
     hideMethod: "fadeOut",
 };
 
-function loaderHandle(btnName) {
-    var loaderbtn = document.querySelector(".loaderbtn");
+function loaderHandle(querySelectorId, btnName) {
+    var loaderbtn = document.querySelector(querySelectorId);
 
     loaderbtn.innerHTML = btnName;
     loaderbtn.classList.add("spinning");
@@ -28,8 +28,8 @@ function loaderHandle(btnName) {
     }, 6000);
 }
 
-function removeLoaderHandle(btnName) {
-    var loaderbtn = document.querySelector(".loaderbtn");
+function removeLoaderHandle(querySelectorId, btnName) {
+    var loaderbtn = document.querySelector(querySelectorId);
     loaderbtn.classList.remove("spinning");
     loaderbtn.innerHTML = btnName;
 }

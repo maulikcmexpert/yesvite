@@ -57,7 +57,7 @@ $(document).ready(function () {
                     console.log(output.user);
 
                     if (output.status == 1) {
-                        removeLoaderHandle("Save Changes");
+                        removeLoaderHandle("#save_changes", "Save Changes");
                         $("#firstname").val(output.user.firstname);
                         $("#lastname").val(output.user.lastname);
 
@@ -70,7 +70,6 @@ $(document).ready(function () {
                     } else {
                         toastr.error(output.message);
                     }
-                    $("#save_changes").addClass("loaderbtn");
                 },
             });
         },
@@ -78,12 +77,12 @@ $(document).ready(function () {
 
     // Trigger form submission
     $("#save_changes").click(function () {
-        loaderHandle("Saving");
+        loaderHandle("#save_changes", "Saving");
         $("#updateUserForm").submit();
     });
 
     $("#profile_save").on("click", function () {
-        loaderHandle("Saving");
+        loaderHandle("#profile_save", "Saving");
         var formData = new FormData();
         formData.append("file", $("#choose-file")[0].files[0]);
 
@@ -99,7 +98,7 @@ $(document).ready(function () {
 
             success: function (response) {
                 if (response.status == 1) {
-                    removeLoaderHandle("Save Changes");
+                    removeLoaderHandle("#profile_save", "Save Changes");
                     toastr.success(response.message);
                     $(document).ready(function () {
                         $(".UserImg").attr("src", response.image);
@@ -113,7 +112,8 @@ $(document).ready(function () {
     });
 
     $("#bg_profile_save").on("click", function () {
-        loaderHandle("Saving");
+        loaderHandle("#bg_profile_save", "Saving");
+
         var formData = new FormData();
         formData.append("file", $("#bg-choose-file")[0].files[0]);
 
@@ -130,7 +130,7 @@ $(document).ready(function () {
 
             success: function (response) {
                 if (response.status == 1) {
-                    removeLoaderHandle("Save Changes");
+                    removeLoaderHandle("#bg_profile_save", "Save Changes");
                     toastr.success(response.message);
                     $(document).ready(function () {
                         $(".bg-img").attr("src", response.image);
