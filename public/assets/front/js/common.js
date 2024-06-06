@@ -19,19 +19,13 @@ toastr.options = {
 function loaderHandle(btnName) {
     var loaderbtn = document.querySelector(".loaderbtn");
 
-    loaderbtn.addEventListener(
-        "click",
-        function () {
-            loaderbtn.innerHTML = btnName;
-            loaderbtn.classList.add("spinning");
+    loaderbtn.innerHTML = btnName;
+    loaderbtn.classList.add("spinning");
 
-            setTimeout(function () {
-                loaderbtn.classList.remove("spinning");
-                loaderbtn.innerHTML = "Save Changes";
-            }, 6000);
-        },
-        false
-    );
+    setTimeout(function () {
+        loaderbtn.classList.remove("spinning");
+        loaderbtn.innerHTML = "Save Changes";
+    }, 6000);
 }
 
 var buttonPlus = $(".qty-btn-plus");
