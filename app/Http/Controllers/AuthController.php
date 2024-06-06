@@ -45,6 +45,8 @@ class AuthController extends Controller
 
     public function userRegister(Request $request)
     {
+
+        dd($request);
     }
 
     /**

@@ -33,17 +33,18 @@
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                     <div class="">
-                        <form method="POST" action="{{route('auth.register')}}">
+                        <form method="POST" action="{{route('auth.userRegister')}}" id="register">
+                            <input type="hidden" name="account_type" value="0">
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                                     <div class="input-form">
-                                        <input type="Fname" class="form-control inputText" id="Fname" name="Fname" required>
+                                        <input type="Fname" class="form-control inputText" id="firstname" name="firstname" required>
                                         <label for="Fname" class="form-label input-field floating-label">First Name <span class="required">*</span></label>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                                     <div class="input-form">
-                                        <input type="Lname" class="form-control inputText" id="Lname" name="Lname" required>
+                                        <input type="Lname" class="form-control inputText" id="lastname" name="lastname" required>
                                         <label for="Lname" class="form-label input-field floating-label">Last Name <span class="required">*</span></label>
                                     </div>
                                 </div>
@@ -55,7 +56,7 @@
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div class="input-form">
-                                        <input type="text" class="form-control inputText" id="Zcode" name="Zcode" required>
+                                        <input type="text" class="form-control inputText" id="zip_code" name="zip_code" required>
                                         <label for="Zcode" class="form-label input-field floating-label">Zip Code <span class="required">*</span></label>
                                     </div>
                                 </div>
@@ -68,7 +69,7 @@
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div class="input-form mb-0">
-                                        <input type="password" class="form-control inputText" id="password" name="password" required>
+                                        <input type="password" class="form-control inputText" id="cpassword" name="cpassword" required>
                                         <label for="password" class="form-label input-field floating-label">Confirm Password <span class="required">*</span></label>
                                         <span toggle="#password-field" class="fa-regular fa-fw fa-eye-slash field-icon toggle-password"></span>
                                     </div>
