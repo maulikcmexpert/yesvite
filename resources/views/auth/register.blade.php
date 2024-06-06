@@ -42,7 +42,7 @@
                                         <input type="Fname" class="form-control inputText" id="firstname" name="firstname">
                                         <label for="Fname" class="form-label input-field floating-label">First Name <span class="required">*</span></label>
                                         @error('firstname')
-                                        <span class="error">{{ $message }}</span>
+                                        <label class="error">{{ $message }}</label>
                                         @enderror
                                     </div>
                                 </div>
@@ -51,7 +51,7 @@
                                         <input type="Lname" class="form-control inputText" id="lastname" name="lastname">
                                         <label for="Lname" class="form-label input-field floating-label">Last Name <span class="required">*</span></label>
                                         @error('lastname')
-                                        <span class="error">{{ $message }}</span>
+                                        <label class="error">{{ $message }}</label>
                                         @enderror
                                     </div>
                                 </div>
@@ -60,7 +60,7 @@
                                         <input type="email" class="form-control inputText" id="email" name="email">
                                         <label for="email" class="form-label input-field floating-label">Email Address <span class="required">*</span></label>
                                         @error('email')
-                                        <span class="error">{{ $message }}</span>
+                                        <label class="error">{{ $message }}</label>
                                         @enderror
                                     </div>
                                 </div>
@@ -69,7 +69,7 @@
                                         <input type="text" class="form-control inputText" id="zip_code" name="zip_code">
                                         <label for="Zcode" class="form-label input-field floating-label">Zip Code <span class="required">*</span></label>
                                         @error('zip_code')
-                                        <span class="error">{{ $message }}</span>
+                                        <label class="error">{{ $message }}</label>
                                         @enderror
                                     </div>
                                 </div>
@@ -79,7 +79,7 @@
                                         <label for="password" class="form-label input-field floating-label">Password <span class="required">*</span></label>
                                         <span toggle="#password-field" class="fa-regular fa-fw fa-eye-slash field-icon toggle-password"></span>
                                         @error('password')
-                                        <span class="error">{{ $message }}</span>
+                                        <label class="error">{{ $message }}</label>
                                         @enderror
                                     </div>
                                 </div>
@@ -89,7 +89,7 @@
                                         <label for="password" class="form-label input-field floating-label">Confirm Password <span class="required">*</span></label>
                                         <span toggle="#password-field" class="fa-regular fa-fw fa-eye-slash field-icon toggle-password"></span>
                                         @error('cpassword')
-                                        <span class="error">{{ $message }}</span>
+                                        <label class="error">{{ $message }}</label>
                                         @enderror
                                     </div>
                                 </div>
