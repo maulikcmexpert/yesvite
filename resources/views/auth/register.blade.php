@@ -248,7 +248,7 @@
         </div>
         <div class="create-link d-flex justify-content-center align-items-center gap-2">
             <p>Already in Yesvite?</p>
-            <a href="login.html">Sign In</a>
+            <a href="{{route('auth.login')}}">Sign In</a>
         </div>
         <div class="term-link text-center">
             <span>By signing up you agree to Yesvite’s</span>
