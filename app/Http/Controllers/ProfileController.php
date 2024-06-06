@@ -181,6 +181,7 @@ class ProfileController extends Controller
         $user = Auth::guard('web')->user();
         $imageData =   asset('storage/profile/' . $user->profile);
         if (!empty($file)) {
+            dd("hi");
             if ($user->profile != "" || $user->profile != NULL) {
 
                 if (file_exists(public_path('storage/profile/') . $user->profile)) {
