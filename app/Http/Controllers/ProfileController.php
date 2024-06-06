@@ -106,6 +106,7 @@ class ProfileController extends Controller
                 'firstname.required' => 'Please enter First Name',
                 'lastname.required' => 'Please enter Last Name',
                 'zip_code.required' => 'Please enter Zip Code',
+                'zip_code.numeric' => 'Please enter Zip Code in digit',
                 'zip_code.regex' => 'Zip Code format is invalid.',
             ]);
 
