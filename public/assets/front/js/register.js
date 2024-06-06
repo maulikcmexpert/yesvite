@@ -62,7 +62,6 @@ $(document).ready(function () {
         errorPlacement: function (error, element) {
             error.insertAfter(element);
             error.css("color", "red");
-            $("#passValidation").html("");
         },
         success: function (label, element) {
             if ($(element).attr("name") == "password") {
@@ -74,6 +73,14 @@ $(document).ready(function () {
         submitHandler: function (form) {
             form.submit();
         },
-        invalidHandler: function (event, validator) {},
+        invalidHandler: function (event, validator) {
+            if (
+                validator.errorList.some(
+                    (error) => error.element.name === "password"
+                )
+            ) {
+                $("#passValidation").html("");
+            }
+        },
     });
 });
