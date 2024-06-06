@@ -178,8 +178,9 @@ class ProfileController extends Controller
 
         $file = $request->file('file');
 
+        $user = Auth::guard('web')->user();
+        $imageData =   asset('storage/profile/' . $user->profile);
         if (!empty($file)) {
-            $user = Auth::guard('web')->user();
             if ($user->profile != "" || $user->profile != NULL) {
 
                 if (file_exists(public_path('storage/profile/') . $user->profile)) {
@@ -200,6 +201,7 @@ class ProfileController extends Controller
                 session(['user.profile' => $imageData]); // Replace 'new_value' with your desired value
             }
         }
+
 
         return response()->json([
             'status' => 1,
