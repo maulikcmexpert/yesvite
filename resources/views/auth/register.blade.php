@@ -48,7 +48,7 @@
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                                     <div class="input-form">
-                                        <input type="Lname" class="form-control inputText" id="lastname" name="lastname" value="{{ old('firstname')}}">
+                                        <input type="Lname" class="form-control inputText" id="lastname" name="lastname" value="{{ old('lastname')}}">
                                         <label for="Lname" class="form-label input-field floating-label">Last Name <span class="required">*</span></label>
                                         @error('lastname')
                                         <label class="error">{{ $message }}</label>
@@ -57,7 +57,7 @@
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div class="input-form">
-                                        <input type="email" class="form-control inputText" id="email" name="email" value="{{ old('firstname')}}">
+                                        <input type="email" class="form-control inputText" id="email" name="email" value="{{ old('email')}}">
                                         <label for="email" class="form-label input-field floating-label">Email Address <span class="required">*</span></label>
                                         @error('email')
                                         <label class="error">{{ $message }}</label>
@@ -66,7 +66,7 @@
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div class="input-form">
-                                        <input type="text" class="form-control inputText" id="zip_code" name="zip_code" value="{{ old('firstname')}}">
+                                        <input type="text" class="form-control inputText" id="zip_code" name="zip_code" value="{{ old('zip_code')}}">
                                         <label for="Zcode" class="form-label input-field floating-label">Zip Code <span class="required">*</span></label>
                                         @error('zip_code')
                                         <label class="error">{{ $message }}</label>
@@ -75,7 +75,7 @@
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div class="input-form">
-                                        <input type="password" class="form-control inputText" id="password" name="password" value="{{ old('firstname')}}">
+                                        <input type="password" class="form-control inputText" id="password" name="password" value="{{ old('password')}}">
                                         <label for="password" class="form-label input-field floating-label">Password <span class="required">*</span></label>
                                         <span toggle="#password-field" class="fa-regular fa-fw fa-eye-slash field-icon toggle-password"></span>
                                         @error('password')
@@ -85,7 +85,7 @@
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div class="input-form mb-0">
-                                        <input type="password" class="form-control inputText" id="cpassword" name="cpassword" value="{{ old('firstname')}}">
+                                        <input type="password" class="form-control inputText" id="cpassword" name="cpassword" value="{{ old('cpassword')}}">
                                         <label for="password" class="form-label input-field floating-label">Confirm Password <span class="required">*</span></label>
                                         <span toggle="#password-field" class="fa-regular fa-fw fa-eye-slash field-icon toggle-password"></span>
                                         @error('cpassword')
