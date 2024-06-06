@@ -25,6 +25,6 @@ class EmailExists implements Rule
 
     public function message()
     {
-        return 'Email already exists';
+        return 'Email is already exists';
     }
 }
