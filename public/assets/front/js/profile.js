@@ -57,7 +57,7 @@ $(document).ready(function () {
                     console.log(output.user);
 
                     if (output.status == 1) {
-                        $("#save_changes").removeClass("loaderbtn");
+                        removeLoaderHandle("Save Changes");
                         $("#firstname").val(output.user.firstname);
                         $("#lastname").val(output.user.lastname);
 

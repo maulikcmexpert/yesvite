@@ -28,6 +28,12 @@ function loaderHandle(btnName) {
     }, 6000);
 }
 
+function removeLoaderHandle(btnName) {
+    var loaderbtn = document.querySelector(".loaderbtn");
+    loaderbtn.classList.remove("spinning");
+    loaderbtn.innerHTML = btnName;
+}
+
 var buttonPlus = $(".qty-btn-plus");
 var buttonMinus = $(".qty-btn-minus");
 
