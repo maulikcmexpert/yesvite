@@ -11,12 +11,12 @@ $(document).ready(function () {
             //     required: true,
             //     email: true,
             // },
-            // phone_number: {
-            //     // required: true,
-            //     digits: true,
-            //     minlength: 10,
-            //     maxlength: 15,
-            // },
+            phone_number: {
+                // required: true,
+                digits: true,
+                minlength: 10,
+                maxlength: 15,
+            },
             // address: "required",
             // city: "required",
             // state: "required",
@@ -31,12 +31,12 @@ $(document).ready(function () {
         messages: {
             firstname: "Please enter your First name",
             lastname: "Please enter your Last name",
-            // phone_number: {
-            //     // required: true,
-            //     digits: "Please enter a valid Phone Number",
-            //     minlength: "Phone Number must be minimum 10 digit",
-            //     maxlength: "Phone Number must be maxmimum 15 digit",
-            // },
+            phone_number: {
+                // required: true,
+                digits: "Please enter a valid Phone Number",
+                minlength: "Phone Number must be minimum 10 digit",
+                maxlength: "Phone Number must be maxmimum 15 digit",
+            },
             zip_code: {
                 required: "Please enter Zip Code",
                 digit: "Please enter a valid Zip Code",
