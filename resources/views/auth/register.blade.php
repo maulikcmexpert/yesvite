@@ -147,7 +147,7 @@
                 </div>
                 <div class="tab-pane fade" id="phone" role="tabpanel" aria-labelledby="phone-tab">
                     <div class="">
-                        <form method="POST" action="{{route('store.register')}}" id="register">
+                        <form method="POST" action="{{route('store.register')}}" id="business">
                             @csrf
                             <input type="hidden" name="account_type" value="1">
                             <div class="row">
