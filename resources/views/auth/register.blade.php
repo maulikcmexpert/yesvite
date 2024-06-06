@@ -41,24 +41,36 @@
                                     <div class="input-form">
                                         <input type="Fname" class="form-control inputText" id="firstname" name="firstname">
                                         <label for="Fname" class="form-label input-field floating-label">First Name <span class="required">*</span></label>
+                                        @error('firstname')
+                                        <span class="error">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                                     <div class="input-form">
                                         <input type="Lname" class="form-control inputText" id="lastname" name="lastname">
                                         <label for="Lname" class="form-label input-field floating-label">Last Name <span class="required">*</span></label>
+                                        @error('lastname')
+                                        <span class="error">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div class="input-form">
                                         <input type="email" class="form-control inputText" id="email" name="email">
                                         <label for="email" class="form-label input-field floating-label">Email Address <span class="required">*</span></label>
+                                        @error('email')
+                                        <span class="error">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div class="input-form">
                                         <input type="text" class="form-control inputText" id="zip_code" name="zip_code">
                                         <label for="Zcode" class="form-label input-field floating-label">Zip Code <span class="required">*</span></label>
+                                        @error('zip_code')
+                                        <span class="error">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
@@ -66,6 +78,9 @@
                                         <input type="password" class="form-control inputText" id="password" name="password">
                                         <label for="password" class="form-label input-field floating-label">Password <span class="required">*</span></label>
                                         <span toggle="#password-field" class="fa-regular fa-fw fa-eye-slash field-icon toggle-password"></span>
+                                        @error('password')
+                                        <span class="error">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
@@ -73,6 +88,9 @@
                                         <input type="password" class="form-control inputText" id="cpassword" name="cpassword">
                                         <label for="password" class="form-label input-field floating-label">Confirm Password <span class="required">*</span></label>
                                         <span toggle="#password-field" class="fa-regular fa-fw fa-eye-slash field-icon toggle-password"></span>
+                                        @error('cpassword')
+                                        <span class="error">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
