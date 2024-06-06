@@ -41,7 +41,7 @@ class AuthController extends Controller
         $title = "Register";
         $js = ['register'];
 
-        return view('layout', compact('page', 'title'));
+        return view('layout', compact('page', 'title', 'js'));
     }
 
     public function userRegister(Request $request)
