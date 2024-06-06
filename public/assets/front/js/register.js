@@ -1,3 +1,4 @@
+var base_url = $("#base_url").val();
 $(document).ready(function () {
     // Add a custom validation method for the password
     $.validator.addMethod(
@@ -22,6 +23,15 @@ $(document).ready(function () {
             email: {
                 required: true,
                 email: true,
+                remote: {
+                    url: "/api/check-email", // Your Laravel API endpoint
+                    type: "POST",
+                    data: {
+                        email: function () {
+                            return $("#email").val();
+                        },
+                    },
+                },
             },
             zip_code: {
                 required: true,
@@ -45,6 +55,7 @@ $(document).ready(function () {
             email: {
                 required: "Please enter your email",
                 email: "Please enter a valid email address",
+                remote: "Email is already exists",
             },
             zip_code: {
                 required: "Please enter your zip code",
