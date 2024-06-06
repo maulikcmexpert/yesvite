@@ -59,14 +59,14 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('login/{provider}', [SocialController::class, 'redirectToProvider']);
     Route::get('login/{provider}/callback', [SocialController::class, 'handleProviderCallback']);
 
-    Route::get('register', function () {
+    // Route::get('register', function () {
 
-        $data['page'] = 'admin/auth/register';
+    //     $data['page'] = 'admin/auth/register';
 
-        $data['js'] = ['login'];
+    //     $data['js'] = ['login'];
 
-        return view('admin/auth/main', $data);
-    });
+    //     return view('admin/auth/main', $data);
+    // });
 
     Route::post('/checkEmail', 'checkEmail');
 
