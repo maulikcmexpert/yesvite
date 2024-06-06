@@ -76,9 +76,9 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                                    <div class="text-start mt-1">
+                                    <div class="text-start mt-1" id="passValidation">
 
-                                        <span class="character-con" id="passValidation"></span>
+
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
