@@ -3,8 +3,8 @@ $(document).ready(function () {
     // Initialize jQuery validation
     $("#updateUserForm").validate({
         rules: {
-            //    firstname: "required",
-            // lastname: "required",
+            firstname: "required",
+            lastname: "required",
             // gender: "required",
             // birth_date: "required",
             // email: {
@@ -18,31 +18,24 @@ $(document).ready(function () {
             // address: "required",
             // city: "required",
             // state: "required",
-            // zip_code: {
-            //     required: true,
-            //     digits: true,
-            //     min: 5,
-            //     max: 6,
-            // },
+            zip_code: {
+                required: true,
+                digits: true,
+                min: 5,
+                max: 9,
+            },
             // about_me: "required",
         },
         messages: {
-            //    firstname: "Please enter your First name",
-            //   lastname: "Please enter your Last name",
-            // gender: "Please select your gender",
-            // birth_date: "Please enter your birth date",
-            // email: "Please enter a valid email address",
-            // phone_number: "Please enter a valid phone number",
-            // address: "Please enter your address",
-            // city: "Please enter your city",
-            //   state: "Please enter your state",
-            // zip_code: {
-            //     required: "Please enter Zip Code",
-            //     digit: "Please enter a valid Zip Code",
-            //     minlength: "Zip Code must be minimum 5 digit",
-            //     maxlength: "Zip Code must be maxmimum 6 digit",
-            // },
-            //  about_me: "Please tell us about yourself",
+            firstname: "Please enter your First name",
+            lastname: "Please enter your Last name",
+
+            zip_code: {
+                required: "Please enter Zip Code",
+                digit: "Please enter a valid Zip Code",
+                minlength: "Zip Code must be minimum 5 digit",
+                maxlength: "Zip Code must be maxmimum 6 digit",
+            },
         },
         submitHandler: function (form) {
             var formActionURL = $("#updateUserForm").attr("action");
