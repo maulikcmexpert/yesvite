@@ -17,23 +17,21 @@ toastr.options = {
 };
 
 function loaderHandle(btnName) {
-    $(function () {
-        var loaderbtn = document.querySelector(".loaderbtn");
+    var loaderbtn = document.querySelector(".loaderbtn");
 
-        loaderbtn.addEventListener(
-            "click",
-            function () {
-                loaderbtn.innerHTML = btnName;
-                loaderbtn.classList.add("spinning");
+    loaderbtn.addEventListener(
+        "click",
+        function () {
+            loaderbtn.innerHTML = btnName;
+            loaderbtn.classList.add("spinning");
 
-                setTimeout(function () {
-                    loaderbtn.classList.remove("spinning");
-                    loaderbtn.innerHTML = "Save Changes";
-                }, 6000);
-            },
-            false
-        );
-    });
+            setTimeout(function () {
+                loaderbtn.classList.remove("spinning");
+                loaderbtn.innerHTML = "Save Changes";
+            }, 6000);
+        },
+        false
+    );
 }
 
 var buttonPlus = $(".qty-btn-plus");
