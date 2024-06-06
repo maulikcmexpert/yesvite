@@ -39,38 +39,38 @@
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                                     <div class="input-form">
-                                        <input type="Fname" class="form-control inputText" id="firstname" name="firstname" required>
+                                        <input type="Fname" class="form-control inputText" id="firstname" name="firstname">
                                         <label for="Fname" class="form-label input-field floating-label">First Name <span class="required">*</span></label>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                                     <div class="input-form">
-                                        <input type="Lname" class="form-control inputText" id="lastname" name="lastname" required>
+                                        <input type="Lname" class="form-control inputText" id="lastname" name="lastname">
                                         <label for="Lname" class="form-label input-field floating-label">Last Name <span class="required">*</span></label>
                                     </div>
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div class="input-form">
-                                        <input type="email" class="form-control inputText" id="email" name="email" required>
+                                        <input type="email" class="form-control inputText" id="email" name="email">
                                         <label for="email" class="form-label input-field floating-label">Email Address <span class="required">*</span></label>
                                     </div>
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div class="input-form">
-                                        <input type="text" class="form-control inputText" id="zip_code" name="zip_code" required>
+                                        <input type="text" class="form-control inputText" id="zip_code" name="zip_code">
                                         <label for="Zcode" class="form-label input-field floating-label">Zip Code <span class="required">*</span></label>
                                     </div>
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div class="input-form">
-                                        <input type="password" class="form-control inputText" id="password" name="password" required>
+                                        <input type="password" class="form-control inputText" id="password" name="password">
                                         <label for="password" class="form-label input-field floating-label">Password <span class="required">*</span></label>
                                         <span toggle="#password-field" class="fa-regular fa-fw fa-eye-slash field-icon toggle-password"></span>
                                     </div>
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div class="input-form mb-0">
-                                        <input type="password" class="form-control inputText" id="cpassword" name="cpassword" required>
+                                        <input type="password" class="form-control inputText" id="cpassword" name="cpassword">
                                         <label for="password" class="form-label input-field floating-label">Confirm Password <span class="required">*</span></label>
                                         <span toggle="#password-field" class="fa-regular fa-fw fa-eye-slash field-icon toggle-password"></span>
                                     </div>
@@ -138,38 +138,38 @@
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                                     <div class="input-form">
-                                        <input type="Fname" class="form-control inputText" id="Fname" name="Fname" required>
+                                        <input type="Fname" class="form-control inputText" id="Fname" name="Fname">
                                         <label for="Fname" class="form-label input-field floating-label">First Name <span class="required">*</span></label>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                                     <div class="input-form">
-                                        <input type="Lname" class="form-control inputText" id="Lname" name="Lname" required>
+                                        <input type="Lname" class="form-control inputText" id="Lname" name="Lname">
                                         <label for="Lname" class="form-label input-field floating-label">Last Name <span class="required">*</span></label>
                                     </div>
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div class="input-form">
-                                        <input type="email" class="form-control inputText" id="email" name="email" required>
+                                        <input type="email" class="form-control inputText" id="email" name="email">
                                         <label for="email" class="form-label input-field floating-label">Email Address <span class="required">*</span></label>
                                     </div>
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div class="input-form">
-                                        <input type="text" class="form-control inputText" id="Zcode" name="Zcode" required>
+                                        <input type="text" class="form-control inputText" id="Zcode" name="Zcode">
                                         <label for="Zcode" class="form-label input-field floating-label">Zip Code <span class="required">*</span></label>
                                     </div>
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div class="input-form">
-                                        <input type="password" class="form-control inputText" id="password" name="password" required>
+                                        <input type="password" class="form-control inputText" id="password" name="password">
                                         <label for="password" class="form-label input-field floating-label">Password <span class="required">*</span></label>
                                         <span toggle="#password-field" class="fa-regular fa-fw fa-eye-slash field-icon toggle-password"></span>
                                     </div>
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div class="input-form mb-0">
-                                        <input type="password" class="form-control inputText" id="password" name="password" required>
+                                        <input type="password" class="form-control inputText" id="password" name="password">
                                         <label for="password" class="form-label input-field floating-label">Confirm Password <span class="required">*</span></label>
                                         <span toggle="#password-field" class="fa-regular fa-fw fa-eye-slash field-icon toggle-password"></span>
                                     </div>
