@@ -201,8 +201,11 @@ $(document).ready(function () {
     });
 
     // Trigger form submission
-    $("#save_password_changes").click(function () {
-        loaderHandle("#save_password_changes", "Saving");
-        $("#updateUserPassword").submit();
+    $("#save_password_changes").click(function (event) {
+        event.preventDefault();
+        if ($("#updateUserPassword").valid()) {
+            loaderHandle("#save_password_changes", "Saving");
+            $("#updateUserPassword").submit();
+        }
     });
 });
