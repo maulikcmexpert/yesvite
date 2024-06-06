@@ -1,3 +1,4 @@
+<x-front.advertise />
 <section class="login-wrapper">
     <div class="container">
         <div class="login-content text-center">
@@ -86,7 +87,7 @@
         </div>
         <div class="create-link d-flex justify-content-center align-items-center gap-2">
             <p>New to Yesvite?</p>
-            <a href="register.html">Create an account</a>
+            <a href="{{route('auth.register')}}">Create an account</a>
         </div>
     </div>
 </section>

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\URL;
 use Cookie;
+use App\Models\User;
 
 class AuthController extends Controller
 {
@@ -32,6 +33,36 @@ class AuthController extends Controller
         $js = ['login'];
 
         return view('layout', compact('page', 'title', 'js'));
+    }
+
+    public function register()
+    {
+        $page = 'auth/register';
+        $title = "Register";
+        // $js = ['register'];
+
+        return view('layout', compact('page', 'title'));
+    }
+
+    public function userRegister(Request $request)
+    {
+
+
+
+        $storeUser = new User();
+
+        $storeUser->account_type =  $request->account_type;
+        $storeUser->firstname =  $request->firstname;
+        $storeUser->lastname =  $request->lastname;
+        $storeUser->email =  $request->email;
+        $storeUser->zip_code =  $request->zip_code;
+        $storeUser->password =  $request->password;
+        if ($storeUser->save()) {
+            toastr()->success('Register Successfully');
+            return  Redirect::to('login');
+        }
+        toastr()->success('Register not successfull');
+        return  Redirect::to('register');
     }
 
     /**

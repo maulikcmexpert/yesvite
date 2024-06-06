@@ -352,4 +352,30 @@ class ProfileController extends Controller
         toastr()->success('Password Changed');
         return  redirect()->route('profile.edit');
     }
+
+    public function profilePrivacy()
+    {
+        $id = decrypt(session()->get('user')['id']);
+        $user = User::withCount(
+
+            [
+                'event' => function ($query) {
+                    $query->where('is_draft_save', '0');
+                }, 'event_post' => function ($query) {
+                    $query->where('post_type', '1');
+                },
+                'event_post_comment'
+
+            ]
+        )->findOrFail($id);
+        $title = 'Profile Privacy';
+        $page = 'front.privacy';
+        $user['profile'] = ($user->profile != null) ? asset('storage/profile/' . $user->profile) : asset('storage/profile/no_profile.png');
+        $user['bg_profile'] = ($user->bg_profile != null) ? asset('storage/bg_profile/' . $user->bg_profile) : asset('assets/front/image/Frame 1000005835.png');
+        return view('layout', compact(
+            'title',
+            'page',
+            'user',
+        ));
+    }
 }

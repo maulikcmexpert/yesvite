@@ -36,13 +36,14 @@ Route::middleware('checkUserExist')->group(function () {
     Route::get('profile',  [ProfileController::class, 'index'])->name('profile');
     Route::get('profile/edit',  [ProfileController::class, 'edit'])->name('profile.edit');
     Route::get('profile/change_password',  [ProfileController::class, 'changePassword'])->name('profile.change_password');
-    
+
     Route::post('profile/verify_password', [ProfileController::class, 'verifyPassword'])->name('profile.verify_password');
 
     Route::post('profile/update/{id}',  [ProfileController::class, 'update'])->name('profile.update');
     Route::post('profile/update_password',  [ProfileController::class, 'updatePassword'])->name('profile.update_password');
 
-    Route::get('public_profile',  [ProfileController::class, 'publicProfileView'])->name('public_profile');
+    Route::get('public_profile',  [ProfileController::class, 'publicProfileView'])->name('profile.public_profile');
+    Route::get('profile_privacy',  [ProfileController::class, 'profilePrivacy'])->name('profile.privacy');
 
 
     Route::post('upload',  [ProfileController::class, 'uploadProfile'])->name('profile.upload');
@@ -54,18 +55,19 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('login', 'create')->name('auth.login')->middleware('isAuthenticate');
     Route::post('login', 'checkLogin')->name('auth.checkLogin');
     Route::get('register', 'register')->name('auth.register')->middleware('isAuthenticate');
+    Route::post('store_register', 'userRegister')->name('store.register');
 
     Route::get('login/{provider}', [SocialController::class, 'redirectToProvider']);
     Route::get('login/{provider}/callback', [SocialController::class, 'handleProviderCallback']);
 
-    Route::get('register', function () {
+    // Route::get('register', function () {
 
-        $data['page'] = 'admin/auth/register';
+    //     $data['page'] = 'admin/auth/register';
 
-        $data['js'] = ['login'];
+    //     $data['js'] = ['login'];
 
-        return view('admin/auth/main', $data);
-    });
+    //     return view('admin/auth/main', $data);
+    // });
 
     Route::post('/checkEmail', 'checkEmail');
 
