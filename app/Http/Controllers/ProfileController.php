@@ -168,20 +168,20 @@ class ProfileController extends Controller
             'file' => 'required|image|max:2048', // max 2MB
         ]);
 
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => 0,
-                'message' => $validator->errors()->first(),
+        // if ($validator->fails()) {
+        //     return response()->json([
+        //         'status' => 0,
+        //         'message' => $validator->errors()->first(),
 
-            ]);
-        }
+        //     ]);
+        // }
 
         $file = $request->file('file');
 
         $user = Auth::guard('web')->user();
         $imageData =   asset('storage/profile/' . $user->profile);
         if (!empty($file)) {
-            dd("hi");
+
             if ($user->profile != "" || $user->profile != NULL) {
 
                 if (file_exists(public_path('storage/profile/') . $user->profile)) {
@@ -213,22 +213,23 @@ class ProfileController extends Controller
     public function uploadBgProfile(Request $request)
     {
 
-        $validator = Validator::make($request->all(), [
-            'file' => 'required|image|max:2048', // max 2MB
-        ]);
+        // $validator = Validator::make($request->all(), [
+        //     'file' => 'required|image|max:2048', // max 2MB
+        // ]);
 
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => 0,
-                'message' => $validator->errors()->first(),
+        // if ($validator->fails()) {
+        //     return response()->json([
+        //         'status' => 0,
+        //         'message' => $validator->errors()->first(),
 
-            ]);
-        }
+        //     ]);
+        // }
 
         $file = $request->file('file');
 
+        $user = Auth::guard('web')->user();
+        $imageData =   asset('storage/profile/' . $user->bg_profile);
         if (!empty($file)) {
-            $user = Auth::guard('web')->user();
             if ($user->bg_profile != "" || $user->bg_profile != NULL) {
 
                 if (file_exists(public_path('storage/bg_profile/') . $user->bg_profile)) {
