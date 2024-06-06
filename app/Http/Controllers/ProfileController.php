@@ -100,7 +100,13 @@ class ProfileController extends Controller
             $validator = Validator::make($request->all(), [
                 'firstname' => 'required|string', // max 2MB
                 'lastname' => 'required|string', // max 2MB
-                'zip_code' => 'required|numeric', // max 2MB
+                'zip_code' => 'required|numeric|regex:/^\d{5}(-\d{4})?$/', // max 2MB
+
+            ], [
+                'firstname.required' => 'Please enter First Name',
+                'lastname.required' => 'Please enter Last Name',
+                'zip_code.required' => 'Please enter Zip Code',
+                'zip_code.regex' => 'Zip Code format is invalid.',
             ]);
 
             if ($validator->fails()) {
