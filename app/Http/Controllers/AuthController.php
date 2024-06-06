@@ -63,7 +63,7 @@ class AuthController extends Controller
             Session::put(['user' => $sessionArray]);
             if (Session::has('user')) {
 
-                if ($remember != null) {
+                if ($remember) {
                     Cookie::queue('email', $user->email, 120);
                     Cookie::queue('password', $user->password, 120);
                 } else {
