@@ -17,10 +17,10 @@
                     </nav>
                     <div class="contact-title">
                         <h3>Change Password</h3>
-                        <a href="#" class="cmn-btn" id="save_password_changes">Save Changes</a>
+                        <a href="#" class="cmn-btn loaderbtn" id="save_password_changes">Save Changes</a>
 
                     </div>
-                  
+
                 </div>
                 <div class="change-password">
                     <div class="content">
