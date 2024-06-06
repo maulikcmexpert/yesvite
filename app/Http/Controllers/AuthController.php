@@ -39,13 +39,14 @@ class AuthController extends Controller
     {
         $page = 'auth/register';
         $title = "Register";
-        // $js = ['register'];
+        $js = ['register'];
 
         return view('layout', compact('page', 'title'));
     }
 
     public function userRegister(Request $request)
     {
+
 
 
 
