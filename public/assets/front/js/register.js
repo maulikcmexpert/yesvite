@@ -24,7 +24,7 @@ $(document).ready(function () {
                 required: true,
                 email: true,
                 remote: {
-                    url: "/api/check-email", // Your Laravel API endpoint
+                    url: base_url + "check-email", // Your Laravel API endpoint
                     type: "POST",
                     data: {
                         email: function () {
