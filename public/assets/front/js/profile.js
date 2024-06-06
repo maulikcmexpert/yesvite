@@ -11,10 +11,11 @@ $(document).ready(function () {
             //     required: true,
             //     email: true,
             // },
-            // phone_number: {
-            //     required: true,
-            //     digits: true,
-            // },
+            phone_number: {
+                // required: true,
+                digits: true,
+                min: 10,
+            },
             // address: "required",
             // city: "required",
             // state: "required",
