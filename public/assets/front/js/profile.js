@@ -40,7 +40,7 @@ $(document).ready(function () {
                 required: "Please enter Zip Code",
                 digit: "Please enter a valid Zip Code",
                 minlength: "Zip Code must be minimum 5 digit",
-                maxlength: "Zip Code must be minimum 6 digit",
+                maxlength: "Zip Code must be maxmimum 6 digit",
             },
             //  about_me: "Please tell us about yourself",
         },
