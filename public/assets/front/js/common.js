@@ -15,6 +15,24 @@ toastr.options = {
     showMethod: "fadeIn",
     hideMethod: "fadeOut",
 };
+$(function () {
+    var loaderbtn = document.querySelector(".loaderbtn");
+
+    loaderbtn.addEventListener(
+        "click",
+        function () {
+            loaderbtn.innerHTML = "Save Changes";
+            loaderbtn.classList.add("spinning");
+
+            setTimeout(function () {
+                loaderbtn.classList.remove("spinning");
+                loaderbtn.innerHTML = "Save Changes";
+            }, 6000);
+        },
+        false
+    );
+});
+function loaderHandle(btnName) {}
 
 var buttonPlus = $(".qty-btn-plus");
 var buttonMinus = $(".qty-btn-minus");

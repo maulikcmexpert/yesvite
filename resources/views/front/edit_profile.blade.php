@@ -18,7 +18,7 @@
                         <div class="d-flex align-items-center gap-3">
                             <a href="{{route('profile.change_password')}}" class="cmn-btn edit-btn">
                                 Edit Password</a>
-                            <a href="#" class="cmn-btn" id="save_changes">Save Changes</a>
+                            <a href="#" class="cmn-btn loaderbtn" id="save_changes">Save Changes</a>
                         </div>
                     </div>
                     <div class="profile-wrapper edit-profile">
