@@ -24,6 +24,11 @@ $(document).ready(function () {
                 required: true,
                 email: true,
                 remote: {
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                            "content"
+                        ),
+                    },
                     url: base_url + "check-email", // Your Laravel API endpoint
                     type: "POST",
                     data: {
