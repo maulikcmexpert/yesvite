@@ -97,6 +97,21 @@ class ProfileController extends Controller
 
         try {
 
+            $validator = Validator::make($request->all(), [
+                'firstname' => 'required|string', // max 2MB
+                'lastname' => 'required|string', // max 2MB
+                'zip_code' => 'required|numeric|', // max 2MB
+            ]);
+
+            if ($validator->fails()) {
+                return response()->json([
+                    'status' => 0,
+                    'message' => $validator->errors()->first(),
+
+                ]);
+            }
+
+
             DB::beginTransaction();
             $userUpdate = User::where('id', $id)->first();
 
@@ -160,7 +175,7 @@ class ProfileController extends Controller
                     unlink($imagePath);
                 }
             }
-
+            dd('done');
 
             $imageName = time() . '_' . $file->getClientOriginalName();
 

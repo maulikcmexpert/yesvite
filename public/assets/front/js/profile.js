@@ -21,6 +21,8 @@ $(document).ready(function () {
             zip_code: {
                 required: true,
                 digits: true,
+                minlength: 5,
+                maxlength: 6,
             },
             // about_me: "required",
         },
@@ -34,7 +36,12 @@ $(document).ready(function () {
             // address: "Please enter your address",
             // city: "Please enter your city",
             //   state: "Please enter your state",
-            zip_code: "Please enter a valid Zip Code",
+            zip_code: {
+                required: "Please enter Zip Code",
+                digit: "Please enter a valid Zip Code",
+                minlength: "Zip Code must be minimum 5 digit",
+                maxlength: "Zip Code must be minimum 6 digit",
+            },
             //  about_me: "Please tell us about yourself",
         },
         submitHandler: function (form) {
