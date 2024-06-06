@@ -65,11 +65,9 @@ class AuthController extends Controller
 
                 if ($remember) {
                     Cookie::queue('email', $user->email, 120);
-                    Cookie::queue('password', $user->password, 120);
                 } else {
 
                     Cookie::forget('email');
-                    Cookie::forget('password');
                 }
                 toastr()->success('Logged in successfully!');
                 return redirect()->route('home');
