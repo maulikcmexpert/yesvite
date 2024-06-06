@@ -70,6 +70,7 @@ $(document).ready(function () {
                     } else {
                         toastr.error(output.message);
                     }
+                    $("#save_changes").addClass("loaderbtn");
                 },
             });
         },
