@@ -39,51 +39,64 @@
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                                     <div class="input-form">
-                                        <input type="Fname" class="form-control inputText" id="firstname" name="firstname" required>
+                                        <input type="Fname" class="form-control inputText" id="firstname" name="firstname" value="{{ old('firstname')}}">
                                         <label for="Fname" class="form-label input-field floating-label">First Name <span class="required">*</span></label>
+                                        @error('firstname')
+                                        <label class="error">{{ $message }}</label>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                                     <div class="input-form">
-                                        <input type="Lname" class="form-control inputText" id="lastname" name="lastname" required>
+                                        <input type="Lname" class="form-control inputText" id="lastname" name="lastname" value="{{ old('lastname')}}">
                                         <label for="Lname" class="form-label input-field floating-label">Last Name <span class="required">*</span></label>
+                                        @error('lastname')
+                                        <label class="error">{{ $message }}</label>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div class="input-form">
-                                        <input type="email" class="form-control inputText" id="email" name="email" required>
+                                        <input type="email" class="form-control inputText" id="email" name="email" value="{{ old('email')}}">
                                         <label for="email" class="form-label input-field floating-label">Email Address <span class="required">*</span></label>
+                                        @error('email')
+                                        <label class="error">{{ $message }}</label>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div class="input-form">
-                                        <input type="text" class="form-control inputText" id="zip_code" name="zip_code" required>
+                                        <input type="text" class="form-control inputText" id="zip_code" name="zip_code" value="{{ old('zip_code')}}">
                                         <label for="Zcode" class="form-label input-field floating-label">Zip Code <span class="required">*</span></label>
+                                        @error('zip_code')
+                                        <label class="error">{{ $message }}</label>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div class="input-form">
-                                        <input type="password" class="form-control inputText" id="password" name="password" required>
+                                        <input type="password" class="form-control inputText" id="password" name="password" value="{{ old('password')}}">
                                         <label for="password" class="form-label input-field floating-label">Password <span class="required">*</span></label>
                                         <span toggle="#password-field" class="fa-regular fa-fw fa-eye-slash field-icon toggle-password"></span>
+                                        @error('password')
+                                        <label class="error">{{ $message }}</label>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div class="input-form mb-0">
-                                        <input type="password" class="form-control inputText" id="cpassword" name="cpassword" required>
+                                        <input type="password" class="form-control inputText" id="cpassword" name="cpassword" value="{{ old('cpassword')}}">
                                         <label for="password" class="form-label input-field floating-label">Confirm Password <span class="required">*</span></label>
                                         <span toggle="#password-field" class="fa-regular fa-fw fa-eye-slash field-icon toggle-password"></span>
+                                        @error('cpassword')
+                                        <label class="error">{{ $message }}</label>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                                    <div class="text-start mt-1">
-                                        <span>
-                                            <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M10.5001 18.3346C15.0834 18.3346 18.8334 14.5846 18.8334 10.0013C18.8334 5.41797 15.0834 1.66797 10.5001 1.66797C5.91675 1.66797 2.16675 5.41797 2.16675 10.0013C2.16675 14.5846 5.91675 18.3346 10.5001 18.3346Z" fill="#0DAC5F" />
-                                                <path d="M6.95825 10.0014L9.31659 12.3597L14.0416 7.64307" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                        </span>
-                                        <span class="character-con">At least 8 characters with a combination of letters and numbers</span>
+                                    <div class="text-start mt-1" id="passValidation">
+
+
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
@@ -134,58 +147,73 @@
                 </div>
                 <div class="tab-pane fade" id="phone" role="tabpanel" aria-labelledby="phone-tab">
                     <div class="">
-                        <form action="">
+                        <form method="POST" action="{{route('store.register')}}" id="business">
+                            @csrf
+                            <input type="hidden" name="account_type" value="1">
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                                     <div class="input-form">
-                                        <input type="Fname" class="form-control inputText" id="Fname" name="Fname" required>
+                                        <input type="Fname" class="form-control inputText" id="firstname" name="firstname" value="{{ old('firstname')}}">
                                         <label for="Fname" class="form-label input-field floating-label">First Name <span class="required">*</span></label>
+                                        @error('firstname')
+                                        <label class="error">{{ $message }}</label>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                                     <div class="input-form">
-                                        <input type="Lname" class="form-control inputText" id="Lname" name="Lname" required>
+                                        <input type="Lname" class="form-control inputText" id="businesslastname" name="lastname" value="{{ old('lastname')}}">
                                         <label for="Lname" class="form-label input-field floating-label">Last Name <span class="required">*</span></label>
+                                        @error('lastname')
+                                        <label class="error">{{ $message }}</label>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div class="input-form">
-                                        <input type="email" class="form-control inputText" id="email" name="email" required>
+                                        <input type="email" class="form-control inputText" id="businessemail" name="email" value="{{ old('email')}}">
                                         <label for="email" class="form-label input-field floating-label">Email Address <span class="required">*</span></label>
+                                        @error('email')
+                                        <label class="error">{{ $message }}</label>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div class="input-form">
-                                        <input type="text" class="form-control inputText" id="Zcode" name="Zcode" required>
+                                        <input type="text" class="form-control inputText" id="businesszip_code" name="zip_code" value="{{ old('zip_code')}}">
                                         <label for="Zcode" class="form-label input-field floating-label">Zip Code <span class="required">*</span></label>
+                                        @error('zip_code')
+                                        <label class="error">{{ $message }}</label>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div class="input-form">
-                                        <input type="password" class="form-control inputText" id="password" name="password" required>
+                                        <input type="password" class="form-control inputText" id="businesspassword" name="password" value="{{ old('password')}}">
                                         <label for="password" class="form-label input-field floating-label">Password <span class="required">*</span></label>
                                         <span toggle="#password-field" class="fa-regular fa-fw fa-eye-slash field-icon toggle-password"></span>
+                                        @error('password')
+                                        <label class="error">{{ $message }}</label>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div class="input-form mb-0">
-                                        <input type="password" class="form-control inputText" id="password" name="password" required>
+                                        <input type="password" class="form-control inputText" id="businesscpassword" name="cpassword" value="{{ old('cpassword')}}">
                                         <label for="password" class="form-label input-field floating-label">Confirm Password <span class="required">*</span></label>
                                         <span toggle="#password-field" class="fa-regular fa-fw fa-eye-slash field-icon toggle-password"></span>
+                                        @error('cpassword')
+                                        <label class="error">{{ $message }}</label>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                                    <div class="text-start mt-1">
-                                        <span>
-                                            <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M10.5001 18.3346C15.0834 18.3346 18.8334 14.5846 18.8334 10.0013C18.8334 5.41797 15.0834 1.66797 10.5001 1.66797C5.91675 1.66797 2.16675 5.41797 2.16675 10.0013C2.16675 14.5846 5.91675 18.3346 10.5001 18.3346Z" fill="#0DAC5F" />
-                                                <path d="M6.95825 10.0014L9.31659 12.3597L14.0416 7.64307" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                        </span>
-                                        <span class="character-con">At least 8 characters with a combination of letters and numbers</span>
+                                    <div class="text-start mt-1" id="businesspassValidation">
+
+
                                     </div>
                                 </div>
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="col-lg-12">
                                     <button type="submit" class="btn btn-primary">Create account</button>
                                 </div>
                             </div>
@@ -235,7 +263,7 @@
         </div>
         <div class="create-link d-flex justify-content-center align-items-center gap-2">
             <p>Already in Yesvite?</p>
-            <a href="login.html">Sign In</a>
+            <a href="{{route('auth.login')}}">Sign In</a>
         </div>
         <div class="term-link text-center">
             <span>By signing up you agree to Yesvite’s</span>

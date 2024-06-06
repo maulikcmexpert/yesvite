@@ -2,15 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Database\QueryException;
+use Illuminate\Foundation\Exceptions\Handler as Exception;
+use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\URL;
 use Cookie;
 use App\Models\User;
+use App\Rules\EmailExists;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller
 {
@@ -39,9 +46,9 @@ class AuthController extends Controller
     {
         $page = 'auth/register';
         $title = "Register";
-        // $js = ['register'];
+        $js = ['register'];
 
-        return view('layout', compact('page', 'title'));
+        return view('layout', compact('page', 'title', 'js'));
     }
 
     public function userRegister(Request $request)
@@ -49,20 +56,70 @@ class AuthController extends Controller
 
 
 
-        $storeUser = new User();
-
-        $storeUser->account_type =  $request->account_type;
-        $storeUser->firstname =  $request->firstname;
-        $storeUser->lastname =  $request->lastname;
-        $storeUser->email =  $request->email;
-        $storeUser->zip_code =  $request->zip_code;
-        $storeUser->password =  $request->password;
-        if ($storeUser->save()) {
-            toastr()->success('Register Successfully');
-            return  Redirect::to('login');
+        $validator = Validator::make($request->all(), [
+            'firstname' => 'required|string|max:255',
+            'lastname' => 'required|string|max:255',
+            'email' => ['required', 'email', new EmailExists], // Use the custom validation rule
+            'zip_code' => 'required|string|max:10',
+            'password' => 'required|string|min:8|regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/',
+            'cpassword' => 'required|same:password',
+        ], [
+            'firstname.required' => 'Please enter your first name',
+            'lastname.required' => 'Please enter your last name',
+            'email.required' => 'Please enter your email',
+            'email.email' => 'Please enter a valid email address',
+            'zip_code.required' => 'Please enter your zip code',
+            'password.required' => 'Please enter your password',
+            'password.regex' => 'Your password must be at least 8 characters long and contain both letters and numbers',
+            'cpassword.required' => 'Please confirm your password',
+            'cpassword.same' => 'Passwords do not match',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
         }
-        toastr()->success('Register not successfull');
-        return  Redirect::to('register');
+
+        try {
+            $randomString = Str::random(30);
+
+            DB::beginTransaction();
+            $storeUser = new User();
+
+            $storeUser->account_type =  $request->account_type;
+            if ($request->account_type == '1') {
+
+                $storeUser->company_name = $request->company_name;
+            }
+
+            $storeUser->firstname =  $request->firstname;
+            $storeUser->lastname =  $request->lastname;
+            $storeUser->email =  $request->email;
+            $storeUser->zip_code =  $request->zip_code;
+            $storeUser->password =  $request->password;
+            $storeUser->password_updated_date =  date('Y-m-d');
+            $storeUser->remember_token =   $randomString;
+            $storeUser->save();
+            DB::commit();
+            $userDetails = User::where('id', $storeUser->id)->first();
+
+            $userData = [
+                'username' => $userDetails->firstname . ' ' . $userDetails->lastname,
+                'email' => $userDetails->email,
+                'token' => $randomString
+            ];
+            Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($request) {
+                $message->to($request->email);
+                $message->subject('Email Verification Mail');
+            });
+            toastr()->success('Account successfully created, please verify your email before you can log in');
+            return  Redirect::to('login');
+        } catch (QueryException $e) {
+            DB::Rollback();
+            toastr()->error('Register not successfull');
+            return  Redirect::to('register');
+        } catch (Exception  $e) {
+            toastr()->error('something went wrong');
+            return  Redirect::to('register');
+        }
     }
 
     /**
@@ -85,27 +142,46 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials, $remember)) {
             $user = Auth::guard('web')->user();
+            if ($user->email_verified_at != NULL) {
 
-            $sessionArray = [
-                'id' => encrypt($user->id),
-                'username' => $user->firstname . ' ' . $user->lastname,
-                'profile' => ($user->profile != NULL || $user->profile != "") ? asset('public/storage/profile/' . $user->profile) : asset('public/storage/profile/no_profile.png')
-            ];
-            Session::put(['user' => $sessionArray]);
-            if (Session::has('user')) {
+                $sessionArray = [
+                    'id' => encrypt($user->id),
+                    'username' => $user->firstname . ' ' . $user->lastname,
+                    'profile' => ($user->profile != NULL || $user->profile != "") ? asset('public/storage/profile/' . $user->profile) : asset('public/storage/profile/no_profile.png')
+                ];
+                Session::put(['user' => $sessionArray]);
+                if (Session::has('user')) {
 
-                if ($remember) {
-                    Cookie::queue('email', $user->email, 120);
-                    Cookie::queue('password', $request->password, 120);
+                    if ($remember) {
+                        Cookie::queue('email', $user->email, 120);
+                        Cookie::queue('password', $request->password, 120);
+                    } else {
+
+                        Cookie::forget('email');
+                        Cookie::forget('password');
+                    }
+                    toastr()->success('Logged in successfully!');
+                    return redirect()->route('home');
                 } else {
-
-                    Cookie::forget('email');
-                    Cookie::forget('password');
+                    toastr()->error('Invalid credentials!');
+                    return  Redirect::to('login');
                 }
-                toastr()->success('Logged in successfully!');
-                return redirect()->route('home');
             } else {
-                toastr()->error('Invalid credentials!');
+                $randomString = Str::random(30);
+                $user->remember_token = $randomString;
+                $user->save();
+
+                $userData = [
+                    'username' => $user->firstname . ' ' . $user->lastname,
+                    'email' => $user->email,
+                    'token' => $randomString,
+                    'is_first_login' => $user->is_first_login
+                ];
+                Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($user) {
+                    $message->to($user->email);
+                    $message->subject('Email Verification Mail');
+                });
+                toastr()->success('Please check and verify your email address.');
                 return  Redirect::to('login');
             }
         }
@@ -143,5 +219,17 @@ class AuthController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function checkEmailExistence(Request $request)
+    {
+        $email = $request->input('email');
+        $exists = User::where('email', $email)->exists();
+
+        if ($exists) {
+            return response()->json(false);
+        } else {
+            return response()->json(true);
+        }
     }
 }
