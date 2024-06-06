@@ -1,3 +1,4 @@
+<x-front.advertise />
 <section class="login-wrapper">
     <div class="container">
         <div class="login-content text-center">
