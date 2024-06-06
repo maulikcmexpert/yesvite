@@ -33,11 +33,20 @@ class ProfileController extends Controller
         $title = 'Profile';
         $page = 'front.profile';
 
-        $user = User::findOrFail($id);
+        $user = User::withCount(
+
+            [
+                'event' => function ($query) {
+                    $query->where('is_draft_save', '0');
+                }, 'event_post' => function ($query) {
+                    $query->where('post_type', '1');
+                },
+                'event_post_comment'
+
+            ]
+        )->findOrFail($id);
         $user['events'] =   Event::where(['user_id' => $user->id, 'is_draft_save' => '0'])->count();
-        $user['photos']   = EventPost::where(['user_id' => $user->id, 'post_type' => '1'])->count();
-        $user['comments']   =  EventPostComment::where('user_id', $user->id)->count();
-        $user['profile'] = ($user->profile != null) ? asset('storage/profile/' . $user->profile) : asset('storage/profile/no_profile.png');
+
         $user['bg_profile'] = ($user->bg_profile != null) ? asset('storage/bg_profile/' . $user->bg_profile) : asset('assets/front/image/Frame 1000005835.png');
         $date = Carbon::parse($user->created_at);
         $formatted_date = $date->format('F, Y');
@@ -54,12 +63,20 @@ class ProfileController extends Controller
     public function publicProfileView()
     {
         $id = decrypt(session()->get('user')['id']);
-        $user = User::findOrFail($id);
+        $user = User::withCount(
+
+            [
+                'event' => function ($query) {
+                    $query->where('is_draft_save', '0');
+                }, 'event_post' => function ($query) {
+                    $query->where('post_type', '1');
+                },
+                'event_post_comment'
+
+            ]
+        )->findOrFail($id);
         $title = 'Public Profile';
         $page = 'front.public_profile';
-        $user['events'] =   Event::where(['user_id' => $user->id, 'is_draft_save' => '0'])->count();
-        $user['photos']   = EventPost::where(['user_id' => $user->id, 'post_type' => '1'])->count();
-        $user['comments']   =  EventPostComment::where('user_id', $user->id)->count();
         $user['profile'] = ($user->profile != null) ? asset('storage/profile/' . $user->profile) : asset('storage/profile/no_profile.png');
         $user['bg_profile'] = ($user->bg_profile != null) ? asset('storage/bg_profile/' . $user->bg_profile) : asset('assets/front/image/Frame 1000005835.png');
         return view('layout', compact(
@@ -73,13 +90,21 @@ class ProfileController extends Controller
     public function edit()
     {
         $id = decrypt(session()->get('user')['id']);
-        $user = User::findOrFail($id);
+        $user = User::withCount(
+
+            [
+                'event' => function ($query) {
+                    $query->where('is_draft_save', '0');
+                }, 'event_post' => function ($query) {
+                    $query->where('post_type', '1');
+                },
+                'event_post_comment'
+
+            ]
+        )->findOrFail($id);
         $title = 'Edit Profile';
         $page = 'front.edit_profile';
         $js = ['profile'];
-        $user['events'] =   Event::where(['user_id' => $user->id, 'is_draft_save' => '0'])->count();
-        $user['photos']   = EventPost::where(['user_id' => $user->id, 'post_type' => '1'])->count();
-        $user['comments']   =  EventPostComment::where('user_id', $user->id)->count();
         $user['profile'] = ($user->profile != null) ? asset('storage/profile/' . $user->profile) : asset('storage/profile/no_profile.png');
         $user['bg_profile'] = ($user->bg_profile != null) ? asset('storage/bg_profile/' . $user->bg_profile) : asset('assets/front/image/Frame 1000005835.png');
         return view('layout', compact(
@@ -274,9 +299,7 @@ class ProfileController extends Controller
         $title = 'Change Password';
         $page = 'front.change_password';
         $js = ['profile'];
-        $user['events'] =   Event::where(['user_id' => $user->id, 'is_draft_save' => '0'])->count();
-        $user['photos']   = EventPost::where(['user_id' => $user->id, 'post_type' => '1'])->count();
-        $user['comments']   =  EventPostComment::where('user_id', $user->id)->count();
+
         $user['profile'] = ($user->profile != null) ? asset('storage/profile/' . $user->profile) : asset('storage/profile/no_profile.png');
         $user['bg_profile'] = ($user->bg_profile != null) ? asset('storage/bg_profile/' . $user->bg_profile) : asset('assets/front/image/Frame 1000005835.png');
         return view('layout', compact(
