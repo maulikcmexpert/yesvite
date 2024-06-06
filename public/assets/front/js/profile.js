@@ -100,7 +100,7 @@ $(document).ready(function () {
                 if (response.status == 1) {
                     toastr.success(response.message);
                     $(document).ready(function () {
-                        $(".UserImg").attr("src", response);
+                        $(".UserImg").attr("src", response.image);
                     });
                     $("#Edit-modal").modal("hide");
                 } else {
