@@ -33,7 +33,7 @@
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                     <div class="">
-                        <form method="POST" action="{{ route('auth.userRegister') }}" id="register">
+                        <form method="POST" action="{{route('userRegister')}}" id="register">
                             @csrf
                             <input type="hidden" name="account_type" value="0">
                             <div class="row">
