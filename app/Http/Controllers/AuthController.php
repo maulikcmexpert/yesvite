@@ -79,8 +79,10 @@ class AuthController extends Controller
         $storeUser->lastname =  $request->lastname;
         $storeUser->email =  $request->email;
         $storeUser->zip_code =  $request->zip_code;
+        $storeUser->password_updated_date =  date('Y-m-d');
         $storeUser->password =  $request->password;
         if ($storeUser->save()) {
+            $randomString = Str::random(30);
             toastr()->success('Register Successfully');
             return  Redirect::to('login');
         }
