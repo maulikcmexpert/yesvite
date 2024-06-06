@@ -4,7 +4,7 @@ $(document).ready(function () {
     $("#updateUserForm").validate({
         rules: {
             //    firstname: "required",
-            lastname: "required",
+            // lastname: "required",
             // gender: "required",
             // birth_date: "required",
             // email: {
@@ -18,12 +18,12 @@ $(document).ready(function () {
             // address: "required",
             // city: "required",
             // state: "required",
-            zip_code: {
-                required: true,
-                digits: true,
-                min: 5,
-                max: 6,
-            },
+            // zip_code: {
+            //     required: true,
+            //     digits: true,
+            //     min: 5,
+            //     max: 6,
+            // },
             // about_me: "required",
         },
         messages: {
