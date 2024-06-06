@@ -36,13 +36,14 @@ Route::middleware('checkUserExist')->group(function () {
     Route::get('profile',  [ProfileController::class, 'index'])->name('profile');
     Route::get('profile/edit',  [ProfileController::class, 'edit'])->name('profile.edit');
     Route::get('profile/change_password',  [ProfileController::class, 'changePassword'])->name('profile.change_password');
-    
+
     Route::post('profile/verify_password', [ProfileController::class, 'verifyPassword'])->name('profile.verify_password');
 
     Route::post('profile/update/{id}',  [ProfileController::class, 'update'])->name('profile.update');
     Route::post('profile/update_password',  [ProfileController::class, 'updatePassword'])->name('profile.update_password');
 
-    Route::get('public_profile',  [ProfileController::class, 'publicProfileView'])->name('public_profile');
+    Route::get('public_profile',  [ProfileController::class, 'publicProfileView'])->name('profile.public_profile');
+    Route::get('profile_privacy',  [ProfileController::class, 'profilePrivacy'])->name('profile.privacy');
 
 
     Route::post('upload',  [ProfileController::class, 'uploadProfile'])->name('profile.upload');
