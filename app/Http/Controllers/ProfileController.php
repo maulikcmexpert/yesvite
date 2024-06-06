@@ -221,7 +221,7 @@ class ProfileController extends Controller
                     unlink($imagePath);
                 }
             }
-            dd('don be');
+
             $imageName = time() . '_' . $file->getClientOriginalName();
             $file->move(public_path('storage/bg_profile'), $imageName);
             $user->bg_profile = $imageName;
