@@ -21,8 +21,8 @@ $(document).ready(function () {
             zip_code: {
                 required: true,
                 digits: true,
-                minlength: 5,
-                maxlength: 6,
+                min: 5,
+                max: 6,
             },
             // about_me: "required",
         },
