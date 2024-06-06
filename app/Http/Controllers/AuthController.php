@@ -174,9 +174,9 @@ class AuthController extends Controller
         $exists = User::where('email', $email)->exists();
 
         if ($exists) {
-            return response()->json(true);
-        } else {
             return response()->json(false);
+        } else {
+            return response()->json(true);
         }
     }
 }
