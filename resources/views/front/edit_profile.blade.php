@@ -18,7 +18,7 @@
                         <div class="d-flex align-items-center gap-3">
                             <a href="{{route('profile.change_password')}}" class="cmn-btn edit-btn">
                                 Edit Password</a>
-                            <a href="#" class="cmn-btn" id="save_changes">Save Changes</a>
+                            <a href="#" class="cmn-btn loaderbtn" id="save_changes">Save Changes</a>
                         </div>
                     </div>
                     <div class="profile-wrapper edit-profile">
@@ -161,7 +161,7 @@
                     <label class="choosen-file cmn-btn edit-btn mb-0" for="choose-file">
                         Upload New Image
                     </label>
-                    <button type="button" class="cmn-btn bg-primary" id="profile_save">Save Changes</button>
+                    <button type="button" class="cmn-btn bg-primary loaderbtn" id="profile_save">Save Changes</button>
                 </div>
             </div>
         </div>
@@ -196,7 +196,7 @@
                     <label class="choosen-file cmn-btn edit-btn mb-0" for="bg-choose-file">
                         Upload New Image
                     </label>
-                    <button type="button" class="cmn-btn bg-primary" id="bg_profile_save">Save Changes</button>
+                    <button type="button" class="cmn-btn bg-primary loaderbtn" id="bg_profile_save">Save Changes</button>
                 </div>
             </div>
         </div>

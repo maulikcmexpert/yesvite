@@ -16,6 +16,24 @@ toastr.options = {
     hideMethod: "fadeOut",
 };
 
+function loaderHandle(querySelectorId, btnName) {
+    var loaderbtn = document.querySelector(querySelectorId);
+
+    loaderbtn.innerHTML = btnName;
+    loaderbtn.classList.add("spinning");
+
+    setTimeout(function () {
+        loaderbtn.classList.remove("spinning");
+        loaderbtn.innerHTML = "Save Changes";
+    }, 6000);
+}
+
+function removeLoaderHandle(querySelectorId, btnName) {
+    var loaderbtn = document.querySelector(querySelectorId);
+    loaderbtn.classList.remove("spinning");
+    loaderbtn.innerHTML = btnName;
+}
+
 var buttonPlus = $(".qty-btn-plus");
 var buttonMinus = $(".qty-btn-minus");
 

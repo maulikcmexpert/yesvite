@@ -2149,14 +2149,13 @@ class ApiControllerv2 extends Controller
 
             if (!empty($request->bg_profile)) {
 
+                if ($user->bg_profile != "" || $user->bg_profile != NULL) {
 
-
-                if (file_exists(public_path('storage/bg_profile/') . $user->profile)) {
-                    $imagePath = public_path('storage/bg_profile/') . $user->profile;
-                    unlink($imagePath);
+                    if (file_exists(public_path('storage/bg_profile/') . $user->bg_profile)) {
+                        $imagePath = public_path('storage/bg_profile/') . $user->bg_profile;
+                        unlink($imagePath);
+                    }
                 }
-
-
 
 
                 $bgimage = $request->bg_profile;
@@ -4679,20 +4678,23 @@ class ApiControllerv2 extends Controller
                                             'user_id' => $value['user_id'],
                                             'is_co_host' => '1'
                                         ]);
-                                    } else if (!in_array($value['user_id'], $alreadyselectedasCoUser) && !in_array($value['user_id'], $getalreadyInviteduser)) {
-                                        // remove //
-                                        EventInvitedUser::where(['user_id' => $value['user_id'], 'event_id' => $eventData['event_id']])->delete();
-                                    } else {
+                                    }
+                                    // else if (!in_array($value['user_id'], $alreadyselectedasCoUser) && !in_array($value['user_id'], $getalreadyInviteduser)) {
+                                    //     // remove //
+                                    //     EventInvitedUser::where(['user_id' => $value['user_id'], 'event_id' => $eventData['event_id']])->delete();
+                                    // }
+                                    else {
                                         $updateRecord = EventInvitedUser::where(['user_id' => $value['user_id'], 'event_id' => $eventData['event_id']])->first();
                                         $updateRecord->is_co_host = '1';
                                         $updateRecord->save();
                                     }
                                 }
-                            } else {
-                                // remove //
-
-                                EventInvitedUser::where(['event_id' => $eventData['event_id'], 'is_co_host' => '1'])->delete();
                             }
+                            // else {
+                            //     // remove //
+
+                            //     EventInvitedUser::where(['event_id' => $eventData['event_id'], 'is_co_host' => '1'])->delete();
+                            // }
                         }
                         if (isset($eventData['guest_co_host_list'])) {
                             $guestcoHostList = $eventData['guest_co_host_list'];
@@ -4757,10 +4759,12 @@ class ApiControllerv2 extends Controller
                                                         $updateRecord->save();
                                                     }
                                                 }
-                                            } else if (!in_array($value['user_id'], $alreadyselectedasguestCoUser) && !in_array($value['user_id'], $getalreadyInviteduser)) {
-                                                // remove //
-                                                EventInvitedUser::where(['user_id' => $value['user_id'], 'event_id' => $eventData['event_id']])->delete();
-                                            } else {
+                                            }
+                                            //  else if (!in_array($value['user_id'], $alreadyselectedasguestCoUser) && !in_array($value['user_id'], $getalreadyInviteduser)) {
+                                            //     // remove //
+                                            //     EventInvitedUser::where(['user_id' => $value['user_id'], 'event_id' => $eventData['event_id']])->delete();
+                                            // }
+                                            else {
                                                 $updateRecord = EventInvitedUser::where(['user_id' => $checkUserExist->id, 'event_id' => $eventData['event_id']])->first();
                                                 $updateRecord->is_co_host = '1';
                                                 $updateRecord->save();
@@ -4814,10 +4818,12 @@ class ApiControllerv2 extends Controller
                                                         ]);
                                                     }
                                                 }
-                                            } else if (!in_array($value['user_id'], $alreadyselectedasguestCoUser) && !in_array($value['user_id'], $getalreadyInviteduser)) {
-                                                // remove //
-                                                EventInvitedUser::where(['user_id' => $value['user_id'], 'event_id' => $eventData['event_id']])->delete();
-                                            } else {
+                                            }
+                                            // else if (!in_array($value['user_id'], $alreadyselectedasguestCoUser) && !in_array($value['user_id'], $getalreadyInviteduser)) {
+                                            //     // remove //
+                                            //     EventInvitedUser::where(['user_id' => $value['user_id'], 'event_id' => $eventData['event_id']])->delete();
+                                            // }
+                                            else {
                                                 $updateRecord = EventInvitedUser::where(['user_id' => $checkUserExist->id, 'event_id' => $eventData['event_id']])->first();
                                                 $updateRecord->is_co_host = '1';
                                                 $updateRecord->save();
@@ -4826,13 +4832,15 @@ class ApiControllerv2 extends Controller
                                     }
                                 }
                             }
-                        } else {
-                            // remove //
-                            EventInvitedUser::where(['event_id' => $eventData['event_id'], 'is_co_host' => '1'])->delete();
                         }
-                    } else {
-                        EventInvitedUser::where(['event_id' => $eventData['event_id'], 'is_co_host' => '1'])->delete();
+                        //  else {
+                        //     // remove //
+                        //     EventInvitedUser::where(['event_id' => $eventData['event_id'], 'is_co_host' => '1'])->delete();
+                        // }
                     }
+                    //  else {
+                    //     EventInvitedUser::where(['event_id' => $eventData['event_id'], 'is_co_host' => '1'])->delete();
+                    // }
 
 
 
@@ -7487,7 +7495,9 @@ class ApiControllerv2 extends Controller
                     })
                         ->where('event_id', $input['event_id'])
                         ->where('user_id', $user->id)
+
                         ->where(function ($privacyQuery) {
+
                             $privacyQuery->where(function ($q) {
                                 $q->where('rsvp_d', '1')
                                     ->where('rsvp_status', '1')
@@ -7501,6 +7511,10 @@ class ApiControllerv2 extends Controller
                                 ->orWhere(function ($q) {
                                     $q->where('rsvp_d', '0')
                                         ->where('post_privacy', '4');
+                                })
+                                ->orWhere(function ($q) {
+                                    // This block is for post_privacy == 1
+                                    $q->where('post_privacy', '1');
                                 });
                         });
                 });
@@ -8940,7 +8954,8 @@ class ApiControllerv2 extends Controller
 
                 'post_id' => $creatEventPost->id,
                 'is_in_photo_moudle' => $request->is_in_photo_moudle,
-                'post_type' => $request->post_type
+                'post_type' => $request->post_type,
+                'post_privacy' => $request->post_privacy
             ];
         }
 
@@ -12065,9 +12080,8 @@ class ApiControllerv2 extends Controller
     {
         try {
 
-            $input = $request->all();
 
-            $user = Auth::guard('api')->user();
+
             if (!empty($request->application)) {
 
 
@@ -12084,9 +12098,26 @@ class ApiControllerv2 extends Controller
                 $imageName = 'yesvite_android.apk';
 
 
-                $image->move(public_path('appversion'), $imageName);
+                $uploaded = $image->move(public_path('appversion'), $imageName);
             }
-            return response()->json(['status' => 1, 'message' => "upload succesfully"]);
+
+            $versionSetting = VersionSetting::first();
+            if ($versionSetting != NULL) {
+                $versionSetting->android_version = $request->android_version;
+                $versionSetting->android_in_force = $request->android_in_force;
+                $versionSetting->ios_version = $request->ios_version;
+                $versionSetting->ios_in_force = $request->ios_in_force;
+                $versionSetting->save();
+            } else {
+                $newVersionSetting = new VersionSetting();
+                $newVersionSetting->android_version = $request->android_version;
+                $newVersionSetting->android_in_force = $request->android_in_force;
+                $newVersionSetting->ios_version = $request->ios_version;
+                $newVersionSetting->ios_in_force = $request->ios_in_force;
+                $newVersionSetting->save();
+            }
+
+            return response()->json(['status' => 1, 'message' => "version changed succesfully"]);
         } catch (QueryException $e) {
             return response()->json(['status' => 0, 'message' => "db error"]);
         } catch (Exception  $e) {

@@ -26,18 +26,18 @@
                     <!-- <input type="email" class="form-control inputText" id="email" name="email">
                     <label for="email" class="form-label input-field floating-label">Email Address <span class="required">*</span></label> -->
 
-                    <input type="email" class="form-control inputText" id="email" name="email" required>
+                    <input type="email" class="form-control inputText" id="email" name="email" value="{{ old('email', Cookie::get('email')) }}">
                     <label for="email" class="form-label input-field floating-label">Email Address <span class="required">*</span></label>
                 </div>
                 <div class="input-form">
-                    <input type="password" class="form-control inputText" id="password" name="password" required>
+                    <input type="password" class="form-control inputText" id="password" name="password" value="{{ old('password', Cookie::get('password')) }}">
                     <label for="password" class="form-label input-field floating-label">Password <span class="required">*</span></label>
                     <span toggle="#password-field" class="fa-regular fa-fw fa-eye-slash field-icon toggle-password"></span>
                 </div>
                 <div class="form-check mb-3">
                     <div>
                         <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" name="remember" checked> Remember me
+                            <input class="form-check-input" type="checkbox" name="remember" {{  (Cookie::has('email'))  ? 'checked' : '' }}> Remember me
                         </label>
                     </div>
                     <a href="#">Forgot Password</a>

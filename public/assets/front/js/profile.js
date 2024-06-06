@@ -11,40 +11,43 @@ $(document).ready(function () {
             //     required: true,
             //     email: true,
             // },
-            // phone_number: {
-            //     required: true,
-            //     digits: true,
-            // },
+            phone_number: {
+                // required: true,
+                digits: true,
+                minlength: 10,
+                maxlength: 15,
+            },
             // address: "required",
             // city: "required",
             // state: "required",
             zip_code: {
                 required: true,
                 digits: true,
+                minlength: 5,
+                maxlength: 9,
             },
             // about_me: "required",
         },
         messages: {
             firstname: "Please enter your First name",
             lastname: "Please enter your Last name",
-            // gender: "Please select your gender",
-            // birth_date: "Please enter your birth date",
-            // email: "Please enter a valid email address",
-            // phone_number: "Please enter a valid phone number",
-            // address: "Please enter your address",
-            // city: "Please enter your city",
-            //   state: "Please enter your state",
-            zip_code: "Please enter a valid Zip Code",
-            //  about_me: "Please tell us about yourself",
+            phone_number: {
+                // required: true,
+                digits: "Please enter a valid Phone Number",
+                minlength: "Phone Number must be minimum 10 digit",
+                maxlength: "Phone Number must be maxmimum 15 digit",
+            },
+            zip_code: {
+                required: "Please enter Zip Code",
+                digit: "Please enter a valid Zip Code",
+                minlength: "Zip Code must be minimum 5 digit",
+                maxlength: "Zip Code must be maxmimum 9 digit",
+            },
         },
         submitHandler: function (form) {
-            // Form validation passed, submit the form via AJAX
             var formActionURL = $("#updateUserForm").attr("action");
             var formData = $("#updateUserForm").serialize();
             $.ajax({
-                // headers: {
-                //     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-                // },
                 method: "POST",
                 url: formActionURL,
                 dataType: "json",
@@ -53,20 +56,18 @@ $(document).ready(function () {
                 success: function (output) {
                     console.log(output.user);
 
-                    $("#firstname").val(output.user.firstname);
-                    $("#lastname").val(output.user.lastname);
-                    // $("#male").val(output.user.male);
-                    // $("#female").val(output.user.female);
-                    $("#birth_date").val(output.user.birth_date);
-                    $("#email").val(output.user.email);
-                    $("#phone_number").val(output.user.phone_number);
-                    $("#zip_code").val(output.user.zip_code);
-                    $("#about_me").val(output.user.about_me);
                     if (output.status == 1) {
+                        removeLoaderHandle("#save_changes", "Save Changes");
+                        $("#firstname").val(output.user.firstname);
+                        $("#lastname").val(output.user.lastname);
+
+                        $("#birth_date").val(output.user.birth_date);
+                        $("#email").val(output.user.email);
+                        $("#phone_number").val(output.user.phone_number);
+                        $("#zip_code").val(output.user.zip_code);
+                        $("#about_me").val(output.user.about_me);
                         toastr.success(output.message);
-                        //  location.reload();
                     } else {
-                        //  location.reload();
                         toastr.error(output.message);
                     }
                 },
@@ -76,10 +77,12 @@ $(document).ready(function () {
 
     // Trigger form submission
     $("#save_changes").click(function () {
+        loaderHandle("#save_changes", "Saving");
         $("#updateUserForm").submit();
     });
 
     $("#profile_save").on("click", function () {
+        loaderHandle("#profile_save", "Saving");
         var formData = new FormData();
         formData.append("file", $("#choose-file")[0].files[0]);
 
@@ -94,22 +97,23 @@ $(document).ready(function () {
             contentType: false,
 
             success: function (response) {
-                toastr.success("Profile updated successfully");
-                $(document).ready(function () {
-                    $(".UserImg").attr("src", response);
-                });
-                $("#Edit-modal").modal("hide");
-            },
-            error: function (response) {
-                if ((response = "")) {
-                    toastr.success("Profile updated successfully");
+                if (response.status == 1) {
+                    removeLoaderHandle("#profile_save", "Save Changes");
+                    toastr.success(response.message);
+                    $(document).ready(function () {
+                        $(".UserImg").attr("src", response.image);
+                    });
+                    $("#Edit-modal").modal("hide");
+                } else {
+                    toastr.error(response.message);
                 }
-                $("#Edit-modal").modal("hide");
             },
         });
     });
 
     $("#bg_profile_save").on("click", function () {
+        loaderHandle("#bg_profile_save", "Saving");
+
         var formData = new FormData();
         formData.append("file", $("#bg-choose-file")[0].files[0]);
 
@@ -119,16 +123,22 @@ $(document).ready(function () {
             },
             url: base_url + "upload_bg_profile",
             type: "POST",
+            dataType: "json",
             data: formData,
             processData: false,
             contentType: false,
 
             success: function (response) {
-                toastr.success("Background Profile updated successfully");
-                $(document).ready(function () {
-                    $(".bg-img").attr("src", response);
-                });
-                $("#coverImg-modal").modal("hide");
+                if (response.status == 1) {
+                    removeLoaderHandle("#bg_profile_save", "Save Changes");
+                    toastr.success(response.message);
+                    $(document).ready(function () {
+                        $(".bg-img").attr("src", response.image);
+                    });
+                    $("#coverImg-modal").modal("hide");
+                } else {
+                    toastr.error(response.message);
+                }
             },
             error: function (response) {
                 if ((response = "")) {
@@ -188,11 +198,14 @@ $(document).ready(function () {
                 equalTo: "New Password did not matched",
             },
         },
-    
     });
 
     // Trigger form submission
-    $("#save_password_changes").click(function () {
-        $("#updateUserPassword").submit();
+    $("#save_password_changes").click(function (event) {
+        event.preventDefault();
+        if ($("#updateUserPassword").valid()) {
+            loaderHandle("#save_password_changes", "Saving");
+            $("#updateUserPassword").submit();
+        }
     });
 });
