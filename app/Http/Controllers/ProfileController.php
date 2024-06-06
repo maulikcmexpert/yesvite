@@ -100,7 +100,7 @@ class ProfileController extends Controller
             $validator = Validator::make($request->all(), [
                 'firstname' => 'required|string', // max 2MB
                 'lastname' => 'required|string', // max 2MB
-                'zip_code' => 'required|numeric|regex:/^\d{9}(-\d{4})?$/', // max 2MB
+                'zip_code' => 'required|numeric|regex:/^\d{5,9}$/', // max 2MB
 
             ], [
                 'firstname.required' => 'Please enter First Name',
