@@ -100,11 +100,16 @@ class ProfileController extends Controller
             $validator = Validator::make($request->all(), [
                 'firstname' => 'required|string', // max 2MB
                 'lastname' => 'required|string', // max 2MB
+                'phone_number' => 'numeric|regex:/^\d{10,15}$/',
                 'zip_code' => 'required|numeric|regex:/^\d{5,9}$/', // max 2MB
 
             ], [
                 'firstname.required' => 'Please enter First Name',
                 'lastname.required' => 'Please enter Last Name',
+
+                'phone_number.numeric' => 'Please enter Phone Number in digit',
+                'phone_number.regex' => 'Phone Number format is invalid.',
+
                 'zip_code.required' => 'Please enter Zip Code',
                 'zip_code.numeric' => 'Please enter Zip Code in digit',
                 'zip_code.regex' => 'Zip Code format is invalid.',
