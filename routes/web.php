@@ -55,7 +55,7 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('login', 'create')->name('auth.login')->middleware('isAuthenticate');
     Route::post('login', 'checkLogin')->name('auth.checkLogin');
     Route::get('register', 'register')->name('auth.register')->middleware('isAuthenticate');
-    Route::post('store_register', 'userRegister')->name('userRegister');
+    Route::post('store_register', 'userRegister')->name('store.register');
 
     Route::get('login/{provider}', [SocialController::class, 'redirectToProvider']);
     Route::get('login/{provider}/callback', [SocialController::class, 'handleProviderCallback']);
