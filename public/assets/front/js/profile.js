@@ -97,17 +97,15 @@ $(document).ready(function () {
             contentType: false,
 
             success: function (response) {
-                toastr.success("Profile updated successfully");
-                $(document).ready(function () {
-                    $(".UserImg").attr("src", response);
-                });
-                $("#Edit-modal").modal("hide");
-            },
-            error: function (response) {
-                if ((response = "")) {
-                    toastr.success("Profile updated successfully");
+                if (response.status == 1) {
+                    toastr.success(response.message);
+                    $(document).ready(function () {
+                        $(".UserImg").attr("src", response);
+                    });
+                    $("#Edit-modal").modal("hide");
+                } else {
+                    toastr.error(response.message);
                 }
-                $("#Edit-modal").modal("hide");
             },
         });
     });
