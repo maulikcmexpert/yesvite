@@ -30,7 +30,11 @@ $(document).ready(function () {
         messages: {
             firstname: "Please enter your First name",
             lastname: "Please enter your Last name",
-
+            phone_number: {
+                // required: true,
+                digits: "Please enter a valid Phone Number",
+                min: "Phone Number must be minimum 10 digit",
+            },
             zip_code: {
                 required: "Please enter Zip Code",
                 digit: "Please enter a valid Zip Code",
