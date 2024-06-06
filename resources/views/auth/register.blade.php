@@ -83,7 +83,7 @@
                                                 <path d="M6.95825 10.0014L9.31659 12.3597L14.0416 7.64307" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                             </svg>
                                         </span>
-                                        <span class="character-con">At least 8 characters with a combination of letters and numbers</span>
+                                        <span class="character-con" id="passValidation"></span>
                                     </div>
                                 </div>
                                 <div class="col-lg-12">

@@ -65,23 +65,22 @@ $(document).ready(function () {
         },
         success: function (label, element) {
             if ($(element).attr("name") === "password") {
-                label.text("Valid password").css({
-                    color: "green",
-                    border: "1px solid green",
-                    display: "inline-block",
-                    padding: "2px 4px",
-                    borderRadius: "4px",
-                });
-            } else {
-                label.text("Valid").css("color", "green");
+                $("#passValidation")
+                    .text(
+                        "At least 8 characters with a combination of letters and numbers"
+                    )
+                    .css({
+                        color: "green",
+                        border: "1px solid green",
+                        display: "inline-block",
+                        padding: "2px 4px",
+                        borderRadius: "4px",
+                    });
             }
         },
         submitHandler: function (form) {
-            alert("you did it!");
             form.submit();
         },
-        invalidHandler: function (event, validator) {
-            alert("nope");
-        },
+        invalidHandler: function (event, validator) {},
     });
 });
