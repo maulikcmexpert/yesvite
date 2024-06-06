@@ -57,6 +57,7 @@ $(document).ready(function () {
                     console.log(output.user);
 
                     if (output.status == 1) {
+                        $("#save_changes").removeClass("loaderbtn");
                         $("#firstname").val(output.user.firstname);
                         $("#lastname").val(output.user.lastname);
 
@@ -76,6 +77,7 @@ $(document).ready(function () {
 
     // Trigger form submission
     $("#save_changes").click(function () {
+        loaderHandle("Saving");
         $("#updateUserForm").submit();
     });
 
