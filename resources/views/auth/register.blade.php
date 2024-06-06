@@ -34,6 +34,7 @@
                 <div class="tab-pane fade show active" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                     <div class="">
                         <form method="POST" action="{{route('auth.userRegister')}}" id="register">
+                            @csrf
                             <input type="hidden" name="account_type" value="0">
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-6">
