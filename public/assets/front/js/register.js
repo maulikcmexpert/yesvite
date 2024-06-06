@@ -62,6 +62,7 @@ $(document).ready(function () {
         errorPlacement: function (error, element) {
             error.insertAfter(element);
             error.css("color", "red");
+            $("#passValidation").html("");
         },
         success: function (label, element) {
             if ($(element).attr("name") == "password") {
