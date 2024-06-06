@@ -33,28 +33,5 @@
 @endforeach
 
 @endif
-
-<script type="module">
-    // Import the functions you need from the SDKs you need
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
-    // TODO: Add SDKs for Firebase products that you want to use
-    // https://firebase.google.com/docs/web/setup#available-libraries
-  
-    // Your web app's Firebase configuration
-    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-    const firebaseConfig = {
-      apiKey: "AIzaSyAVgJQewYO8h1-_z2mrjaATCqJ4NH8eeCI",
-      authDomain: "yesvite-976cd.firebaseapp.com",
-      databaseURL: "https://yesvite-976cd-default-rtdb.firebaseio.com",
-      projectId: "yesvite-976cd",
-      storageBucket: "yesvite-976cd.appspot.com",
-      messagingSenderId: "273430667581",
-      appId: "1:273430667581:web:d5cc6f6c1cc9829de9e554",
-      measurementId: "G-99SYL4VLEF"
-    };
-  
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const analytics = getAnalytics(app);
-  </script>
+ 
+@stack('scripts')

@@ -8,6 +8,7 @@
         "php": "^8.2.4",
         "guzzlehttp/guzzle": "^7.2",
         "kreait/firebase-php": "^7.12",
+        "kreait/laravel-firebase": "^5.8",
         "laravel/framework": "^10.10",
         "laravel/passport": "*",
         "laravel/sanctum": "^3.3",

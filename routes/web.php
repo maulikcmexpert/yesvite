@@ -8,7 +8,8 @@ use App\Http\Controllers\{
     HomeController,
     HomeFrontController,
     ProfileController,
-    SocialController
+    SocialController,
+    ChatController
 };
 /*
 |--------------------------------------------------------------------------
@@ -48,6 +49,9 @@ Route::middleware('checkUserExist')->group(function () {
 
     Route::post('upload',  [ProfileController::class, 'uploadProfile'])->name('profile.upload');
     Route::post('upload_bg_profile',  [ProfileController::class, 'uploadBgProfile'])->name('profile.uploadbgprofile');
+
+    Route::get('messages',  [ChatController::class, 'index'])->name('message.list');
+    Route::post('getChat',  [ChatController::class, 'getChat'])->name('message.getChat');
 });
 
 Route::controller(AuthController::class)->group(function () {
