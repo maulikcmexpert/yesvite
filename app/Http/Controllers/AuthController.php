@@ -34,6 +34,15 @@ class AuthController extends Controller
         return view('layout', compact('page', 'title', 'js'));
     }
 
+    public function register()
+    {
+        $page = 'auth/register';
+        $title = "Register";
+        // $js = ['register'];
+
+        return view('layout', compact('page', 'title'));
+    }
+
     /**
      * Store a newly created resource in storage.
      */
