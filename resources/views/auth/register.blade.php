@@ -33,7 +33,7 @@
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                     <div class="">
-                        <form action="">
+                        <form method="POST" action="{{route('auth.register')}}">
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                                     <div class="input-form">

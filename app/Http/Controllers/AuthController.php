@@ -43,6 +43,10 @@ class AuthController extends Controller
         return view('layout', compact('page', 'title'));
     }
 
+    public function userRegister(Request $request)
+    {
+    }
+
     /**
      * Store a newly created resource in storage.
      */
