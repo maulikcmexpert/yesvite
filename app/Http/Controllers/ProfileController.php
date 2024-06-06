@@ -228,7 +228,7 @@ class ProfileController extends Controller
         $file = $request->file('file');
 
         $user = Auth::guard('web')->user();
-        $imageData =   asset('storage/profile/' . $user->bg_profile);
+        $imageData =   asset('storage/bg_profile/' . $user->bg_profile);
         if (!empty($file)) {
             if ($user->bg_profile != "" || $user->bg_profile != NULL) {
 
