@@ -83,6 +83,7 @@ $(document).ready(function () {
     });
 
     $("#profile_save").on("click", function () {
+        loaderHandle("Saving");
         var formData = new FormData();
         formData.append("file", $("#choose-file")[0].files[0]);
 
@@ -98,6 +99,7 @@ $(document).ready(function () {
 
             success: function (response) {
                 if (response.status == 1) {
+                    removeLoaderHandle("Save Changes");
                     toastr.success(response.message);
                     $(document).ready(function () {
                         $(".UserImg").attr("src", response.image);
@@ -111,6 +113,7 @@ $(document).ready(function () {
     });
 
     $("#bg_profile_save").on("click", function () {
+        loaderHandle("Saving");
         var formData = new FormData();
         formData.append("file", $("#bg-choose-file")[0].files[0]);
 
@@ -127,6 +130,7 @@ $(document).ready(function () {
 
             success: function (response) {
                 if (response.status == 1) {
+                    removeLoaderHandle("Save Changes");
                     toastr.success(response.message);
                     $(document).ready(function () {
                         $(".bg-img").attr("src", response.image);

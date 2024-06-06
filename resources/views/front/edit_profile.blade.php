@@ -161,7 +161,7 @@
                     <label class="choosen-file cmn-btn edit-btn mb-0" for="choose-file">
                         Upload New Image
                     </label>
-                    <button type="button" class="cmn-btn bg-primary" id="profile_save">Save Changes</button>
+                    <button type="button" class="cmn-btn bg-primary loaderbtn" id="profile_save">Save Changes</button>
                 </div>
             </div>
         </div>
@@ -196,7 +196,7 @@
                     <label class="choosen-file cmn-btn edit-btn mb-0" for="bg-choose-file">
                         Upload New Image
                     </label>
-                    <button type="button" class="cmn-btn bg-primary" id="bg_profile_save">Save Changes</button>
+                    <button type="button" class="cmn-btn bg-primary loaderbtn" id="bg_profile_save">Save Changes</button>
                 </div>
             </div>
         </div>
