@@ -16,6 +16,20 @@ $(document).ready(function () {
                 digits: true,
                 minlength: 10,
                 maxlength: 15,
+                remote: {
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                            "content"
+                        ),
+                    },
+                    url: base_url + "profile/check-phonenumber", // Your Laravel API endpoint
+                    type: "POST",
+                    data: {
+                        phone_number: function () {
+                            return $("#phone_number").val();
+                        },
+                    },
+                },
             },
             // address: "required",
             // city: "required",
