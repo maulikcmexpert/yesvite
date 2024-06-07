@@ -72,9 +72,9 @@
                          <li><a class="dropdown-item" href="#">Link 3</a></li>
                      </ul>
                  </div>
-                 <a href="{{ route('user.profile') }}" class="user-img">
+                 <a href="{{ route('profile')}}" class="user-img">
                      <?php
-                        $user = Auth::guard('web')->user();
+                        $user =   Auth::guard('web')->user();
                         $user->profile = ($user->profile != NULL || $user->profile != "") ? asset('public/storage/profile/' . $profile) : asset('public/storage/profile/no_profile.png');
 
                         ?>
