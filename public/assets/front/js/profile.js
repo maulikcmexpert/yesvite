@@ -3,33 +3,33 @@ $(document).ready(function () {
     // Initialize jQuery validation
     $("#updateUserForm").validate({
         rules: {
-            // firstname: "required",
-            // lastname: "required",
-            // phone_number: {
-            //     digits: true,
-            //     minlength: 10,
-            //     maxlength: 15,
-            //     remote: {
-            //         headers: {
-            //             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
-            //                 "content"
-            //             ),
-            //         },
-            //         url: base_url + "profile/check-phonenumber", // Your Laravel API endpoint
-            //         type: "POST",
-            //         data: {
-            //             phone_number: function () {
-            //                 return $("#phone_number").val();
-            //             },
-            //         },
-            //     },
-            // },
-            // zip_code: {
-            //     required: true,
-            //     digits: true,
-            //     minlength: 5,
-            //     maxlength: 9,
-            // },
+            firstname: "required",
+            lastname: "required",
+            phone_number: {
+                digits: true,
+                minlength: 10,
+                maxlength: 15,
+                remote: {
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                            "content"
+                        ),
+                    },
+                    url: base_url + "profile/check-phonenumber", // Your Laravel API endpoint
+                    type: "POST",
+                    data: {
+                        phone_number: function () {
+                            return $("#phone_number").val();
+                        },
+                    },
+                },
+            },
+            zip_code: {
+                required: true,
+                digits: true,
+                minlength: 5,
+                maxlength: 9,
+            },
         },
         messages: {
             firstname: "Please enter your First name",
