@@ -74,10 +74,10 @@
                  </div>
                  <?php
                     $userprofile = Auth::guard('web')->user()->profile;
-                    $userProfile = asset('public/storage/profile/no_profile.png');
+                    $userProfile = asset('storage/profile/no_profile.png');
                     if ($userprofile != NULL || $userprofile != "") {
 
-                        $userProfile = asset('public/storage/profile/' . $userprofile);
+                        $userProfile = asset('storage/profile/' . $userprofile);
                     }
 
                     ?>
