@@ -2317,7 +2317,7 @@ class ApiControllerv2 extends Controller
                     unlink($bgimagePath);
                 }
 
-                $user->profile = NULL;
+                $user->bg_profile = NULL;
                 $user->save();
             }
         }
