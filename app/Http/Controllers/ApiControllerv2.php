@@ -2265,7 +2265,23 @@ class ApiControllerv2 extends Controller
         }
     }
 
+    public function removeProfile()
+    {
+        $user  = Auth::guard('api')->user();
 
+
+        if ($user->profile != "" || $user->profile != NULL) {
+
+            if (file_exists(public_path('storage/profile/') . $user->profile)) {
+                $imagePath = public_path('storage/profile/') . $user->profile;
+                unlink($imagePath);
+            }
+
+            $user->profile = NULL;
+            $user->save();
+        }
+        return response()->json(['status' => 1, 'message' => "Profile removed successfully"]);
+    }
 
     public function myProfile(Request $request)
 
