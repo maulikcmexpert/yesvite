@@ -50,7 +50,7 @@ $(document).ready(function () {
                 digits: "Please enter a valid Phone Number",
                 minlength: "Phone Number must be minimum 10 digit",
                 maxlength: "Phone Number must be maxmimum 15 digit",
-                remote: "Phone NUmber is already exsits",
+                remote: "Phone Number is already exsits",
             },
             zip_code: {
                 required: "Please enter Zip Code",
