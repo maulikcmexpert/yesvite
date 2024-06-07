@@ -27,7 +27,7 @@
                                 <h3>{{$user->firstname.' '.$user->lastname}}</h3>
                                 <span>PRO</span>
                             </div>
-                            <div class="user-location justify-content-start {{ ($user->city == NULL)?remove-border:''}}">
+                            <div class="user-location justify-content-start ">
                                 <div>
                                     <span>
                                         <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
