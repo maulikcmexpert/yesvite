@@ -73,10 +73,14 @@
                      </ul>
                  </div>
                  @php
-                 $profile = Auth::guard('web')->user()->profile;
+                 $userprofile = Auth::guard('web')->user()->profile;
+                 $userProfile = asset('public/storage/profile/'.$userprofile)
+                 @if($profile !=NULL || $profile !="")
+                 $userProfile = asset('public/storage/profile/no_profile.png');
+                 @endif
                  @endphp
                  <a href="{{ route('profile')}}" class="user-img">
-                     <img src="{{(asset('public/storage/profile/'.$profile))}}" class="UserImg" alt="">
+                     <img src="{{$userProfile}}" class="UserImg" alt="">
                  </a>
              </div>
              @else
