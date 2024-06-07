@@ -80,7 +80,7 @@
                         ?>
 
 
-                     <img src="{{ $profile }}" class="UserImg" alt="user-img">
+                     <img src="{{ $user->profile }}" class="UserImg" alt="user-img">
                  </a>
              </div>
              @else
