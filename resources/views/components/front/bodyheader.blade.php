@@ -74,9 +74,9 @@
                  </div>
                  @php
                  $userprofile = Auth::guard('web')->user()->profile;
-                 $userProfile = asset('public/storage/profile/'.$userprofile);
-                 @if($profile !=NULL || $profile !="")
                  $userProfile = asset('public/storage/profile/no_profile.png');
+                 @if($userprofile !=NULL || $userprofile !="")
+                 $userProfile = asset('public/storage/profile/'.$userprofile);
                  @endif
                  @endphp
                  <a href="{{ route('profile')}}" class="user-img">
