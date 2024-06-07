@@ -74,12 +74,9 @@
                  </div>
                  <a href="{{ route('profile')}}" class="user-img">
                      <?php
-                        $profile =   Auth::guard('web')->user()->profile;
-                        if ($profile != NULL || $profile != "") {
-                            $profile = asset('public/storage/profile/' . $profile);
-                        } else {
-                            $profile = asset('public/storage/profile/no_profile.png');
-                        }
+                        $user =   Auth::guard('web')->user();
+                        $user->profile = ($user->profile != NULL || $user->profile != "") ? asset('public/storage/profile/' . $profile) : asset('public/storage/profile/no_profile.png');
+
                         ?>
 
 
