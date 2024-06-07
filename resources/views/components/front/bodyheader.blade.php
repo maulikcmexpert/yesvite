@@ -75,11 +75,15 @@
                  <a href="{{ route('profile')}}" class="user-img">
                      <?php
                         $profile =   Auth::guard('web')->user()->profile;
-                        dd($profile);
+                        if ($profile != NULL || $profile != "") {
+                            $profile = asset('public/storage/profile/' . $profile);
+                        } else {
+                            $profile = asset('public/storage/profile/no_profile.png');
+                        }
                         ?>
 
 
-                     <img src="{{(Auth::guard('web')->user()->profile != '')?Session::get('user')['profile']:asset('public/storage/profile/no_profile.png') }}" class="UserImg" alt="user-img">
+                     <img src="{{ $profile }}" class="UserImg" alt="user-img">
                  </a>
              </div>
              @else
