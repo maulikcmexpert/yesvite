@@ -122,7 +122,8 @@ class ProfileController extends Controller
     public function checkPhoneNumberExistence(Request $request)
     {
         $phone_number = $request->input('phone_number');
-        $exists = User::where('phone_number', $phone_number)->exists();
+        $id = decrypt($request->input('id'));
+        $exists = User::where('phone_number', $phone_number)->where('id', '!=', $id)->exists();
 
         if ($exists) {
             return response()->json(false);

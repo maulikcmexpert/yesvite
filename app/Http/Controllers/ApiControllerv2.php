@@ -2265,7 +2265,7 @@ class ApiControllerv2 extends Controller
         }
     }
 
-    public function removeProfile(Reqeust $request)
+    public function removeProfile(Request $request)
     {
         $user  = Auth::guard('api')->user();
 
