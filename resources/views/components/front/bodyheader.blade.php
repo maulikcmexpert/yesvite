@@ -74,7 +74,8 @@
                  </div>
                  <a href="{{ route('profile')}}" class="user-img">
                      <?php
-                        Auth::guard('web')->user()->profile;
+                        $profile =   Auth::guard('web')->user()->profile;
+                        dd($profile);
                         ?>
 
 
