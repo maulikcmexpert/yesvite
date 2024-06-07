@@ -156,6 +156,10 @@ ul.nav .nav-link:hover{
     background-color: var(--lightColor);
 }
 
+.remove-border div:first-child::after{
+    display: none;
+}
+
 .switch-ac{
     border: 1px solid var(--borderColor);
     padding: 11px 0;

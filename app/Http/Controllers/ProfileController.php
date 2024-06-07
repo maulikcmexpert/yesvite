@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Exceptions\Handler as Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
-
+use App\Rules\PhoneNumberExists;
 
 class ProfileController extends Controller
 {
@@ -79,6 +79,9 @@ class ProfileController extends Controller
         $page = 'front.public_profile';
         $user['profile'] = ($user->profile != null) ? asset('storage/profile/' . $user->profile) : asset('storage/profile/no_profile.png');
         $user['bg_profile'] = ($user->bg_profile != null) ? asset('storage/bg_profile/' . $user->bg_profile) : asset('assets/front/image/Frame 1000005835.png');
+        $date = Carbon::parse($user->created_at);
+        $formatted_date = $date->format('F, Y');
+        $user['join_date'] = $formatted_date;
         return view('layout', compact(
             'title',
             'page',
@@ -116,6 +119,17 @@ class ProfileController extends Controller
     }
 
 
+    public function checkPhoneNumberExistence(Request $request)
+    {
+        $phone_number = $request->input('phone_number');
+        $exists = User::where('phone_number', $phone_number)->exists();
+
+        if ($exists) {
+            return response()->json(false);
+        } else {
+            return response()->json(true);
+        }
+    }
     public function update(Request $request, string $id)
     {
         $id = decrypt($id);
@@ -125,7 +139,7 @@ class ProfileController extends Controller
             $validator = Validator::make($request->all(), [
                 'firstname' => 'required|string', // max 2MB
                 'lastname' => 'required|string', // max 2MB
-                'phone_number' => 'present|nullable|numeric|regex:/^\d{10,15}$/',
+                'phone_number' => ['present', 'nullable', 'numeric', 'regex:/^\d{10,15}$/', new PhoneNumberExists],
                 'zip_code' => 'required|numeric|regex:/^\d{5,9}$/', // max 2MB
 
             ], [
@@ -238,17 +252,7 @@ class ProfileController extends Controller
     public function uploadBgProfile(Request $request)
     {
 
-        // $validator = Validator::make($request->all(), [
-        //     'file' => 'required|image|max:2048', // max 2MB
-        // ]);
 
-        // if ($validator->fails()) {
-        //     return response()->json([
-        //         'status' => 0,
-        //         'message' => $validator->errors()->first(),
-
-        //     ]);
-        // }
 
         $file = $request->file('file');
 

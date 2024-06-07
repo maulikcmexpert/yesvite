@@ -2265,7 +2265,64 @@ class ApiControllerv2 extends Controller
         }
     }
 
+    public function removeProfile()
+    {
+        $user  = Auth::guard('api')->user();
 
+
+        $rawData = $request->getContent();
+
+
+        $input = json_decode($rawData, true);
+
+        if ($input == null) {
+            return response()->json(['status' => 0, 'message' => "Json invalid"]);
+        }
+
+        $validator = Validator::make($input, [
+
+            'type' => ['required', 'in:profile,bg_profile'],
+        ]);
+
+
+
+        if ($validator->fails()) {
+
+            return response()->json(
+                [
+                    'status' => 0,
+                    'message' => $validator->errors()->first()
+
+                ],
+            );
+        }
+        if ($input['type'] == 'profile') {
+
+            if ($user->profile != "" || $user->profile != NULL) {
+
+                if (file_exists(public_path('storage/profile/') . $user->profile)) {
+                    $imagePath = public_path('storage/profile/') . $user->profile;
+                    unlink($imagePath);
+                }
+
+                $user->profile = NULL;
+                $user->save();
+            }
+        }
+        if ($input['type'] == 'bg_profile') {
+            if ($user->bg_profile != "" || $user->bg_profile != NULL) {
+
+                if (file_exists(public_path('storage/bg_profile/') . $user->bg_profile)) {
+                    $bgimagePath = public_path('storage/bg_profile/') . $user->bg_profile;
+                    unlink($bgimagePath);
+                }
+
+                $user->profile = NULL;
+                $user->save();
+            }
+        }
+        return response()->json(['status' => 1, 'message' => "Profile removed successfully"]);
+    }
 
     public function myProfile(Request $request)
 

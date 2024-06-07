@@ -3,30 +3,33 @@ $(document).ready(function () {
     // Initialize jQuery validation
     $("#updateUserForm").validate({
         rules: {
-            firstname: "required",
-            lastname: "required",
-            // gender: "required",
-            // birth_date: "required",
-            // email: {
-            //     required: true,
-            //     email: true,
+            // firstname: "required",
+            // lastname: "required",
+            // phone_number: {
+            //     digits: true,
+            //     minlength: 10,
+            //     maxlength: 15,
+            //     remote: {
+            //         headers: {
+            //             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+            //                 "content"
+            //             ),
+            //         },
+            //         url: base_url + "profile/check-phonenumber", // Your Laravel API endpoint
+            //         type: "POST",
+            //         data: {
+            //             phone_number: function () {
+            //                 return $("#phone_number").val();
+            //             },
+            //         },
+            //     },
             // },
-            phone_number: {
-                // required: true,
-                digits: true,
-                minlength: 10,
-                maxlength: 15,
-            },
-            // address: "required",
-            // city: "required",
-            // state: "required",
-            zip_code: {
-                required: true,
-                digits: true,
-                minlength: 5,
-                maxlength: 9,
-            },
-            // about_me: "required",
+            // zip_code: {
+            //     required: true,
+            //     digits: true,
+            //     minlength: 5,
+            //     maxlength: 9,
+            // },
         },
         messages: {
             firstname: "Please enter your First name",
@@ -36,6 +39,7 @@ $(document).ready(function () {
                 digits: "Please enter a valid Phone Number",
                 minlength: "Phone Number must be minimum 10 digit",
                 maxlength: "Phone Number must be maxmimum 15 digit",
+                remote: "Phone Number is already exsits",
             },
             zip_code: {
                 required: "Please enter Zip Code",
@@ -68,6 +72,7 @@ $(document).ready(function () {
                         $("#about_me").val(output.user.about_me);
                         toastr.success(output.message);
                     } else {
+                        removeLoaderHandle("#save_changes", "Save Changes");
                         toastr.error(output.message);
                     }
                 },
