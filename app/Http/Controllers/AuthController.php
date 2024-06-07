@@ -142,48 +142,49 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials, $remember)) {
             $user = Auth::guard('web')->user();
-            if ($user->email_verified_at != NULL) {
+            // if ($user->email_verified_at != NULL) {
 
-                $sessionArray = [
-                    'id' => encrypt($user->id),
-                    'username' => $user->firstname . ' ' . $user->lastname,
-                    'profile' => ($user->profile != NULL || $user->profile != "") ? asset('public/storage/profile/' . $user->profile) : asset('public/storage/profile/no_profile.png')
-                ];
-                Session::put(['user' => $sessionArray]);
-                if (Session::has('user')) {
+            $sessionArray = [
+                'id' => encrypt($user->id),
+                'username' => $user->firstname . ' ' . $user->lastname,
+                'profile' => ($user->profile != NULL || $user->profile != "") ? asset('public/storage/profile/' . $user->profile) : asset('public/storage/profile/no_profile.png')
+            ];
+            Session::put(['user' => $sessionArray]);
+            if (Session::has('user')) {
 
-                    if ($remember) {
-                        Cookie::queue('email', $user->email, 120);
-                        Cookie::queue('password', $request->password, 120);
-                    } else {
-
-                        Cookie::forget('email');
-                        Cookie::forget('password');
-                    }
-                    toastr()->success('Logged in successfully!');
-                    return redirect()->route('home');
+                if ($remember) {
+                    Cookie::queue('email', $user->email, 120);
+                    Cookie::queue('password', $request->password, 120);
                 } else {
-                    toastr()->error('Invalid credentials!');
-                    return  Redirect::to('login');
-                }
-            } else {
-                $randomString = Str::random(30);
-                $user->remember_token = $randomString;
-                $user->save();
 
-                $userData = [
-                    'username' => $user->firstname . ' ' . $user->lastname,
-                    'email' => $user->email,
-                    'token' => $randomString,
-                    'is_first_login' => $user->is_first_login
-                ];
-                Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($user) {
-                    $message->to($user->email);
-                    $message->subject('Email Verification Mail');
-                });
-                toastr()->success('Please check and verify your email address.');
+                    Cookie::forget('email');
+                    Cookie::forget('password');
+                }
+                toastr()->success('Logged in successfully!');
+                return redirect()->route('home');
+            } else {
+                toastr()->error('Invalid credentials!');
                 return  Redirect::to('login');
             }
+            // } 
+            // else {
+            //     $randomString = Str::random(30);
+            //     $user->remember_token = $randomString;
+            //     $user->save();
+
+            //     $userData = [
+            //         'username' => $user->firstname . ' ' . $user->lastname,
+            //         'email' => $user->email,
+            //         'token' => $randomString,
+            //         'is_first_login' => $user->is_first_login
+            //     ];
+            //     Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($user) {
+            //         $message->to($user->email);
+            //         $message->subject('Email Verification Mail');
+            //     });
+            //     toastr()->success('Please check and verify your email address.');
+            //     return  Redirect::to('login');
+            // }
         }
         toastr()->error('Email or Passqword invalid');
         return  Redirect::to('login');
