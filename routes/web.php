@@ -94,6 +94,6 @@ Route::controller(AuthController::class)->group(function () {
 
         Session::forget('user');
 
-        return redirect('/');
+        return redirect('login');
     })->name('logout');
 });
