@@ -72,8 +72,11 @@
                          <li><a class="dropdown-item" href="#">Link 3</a></li>
                      </ul>
                  </div>
+                 @php
+                 $profile = Auth::guard('web')->user()->profile;
+                 @endphp
                  <a href="{{ route('profile')}}" class="user-img">
-                     <img src="{{(asset('public/storage/profile/'.Auth::guard('web')->user()->profile))}}" class="UserImg" alt="{{asset('public/storage/profile/no_profile.png'))}}">
+                     <img src="{{(asset('public/storage/profile/'.$profile))}}" class="UserImg" alt="{{asset('public/storage/profile/no_profile.png'))}}">
                  </a>
              </div>
              @else
