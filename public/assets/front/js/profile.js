@@ -72,6 +72,7 @@ $(document).ready(function () {
                         $("#about_me").val(output.user.about_me);
                         toastr.success(output.message);
                     } else {
+                        removeLoaderHandle("#save_changes", "Save Changes");
                         toastr.error(output.message);
                     }
                 },
