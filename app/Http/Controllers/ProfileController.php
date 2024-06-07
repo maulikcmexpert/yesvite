@@ -107,14 +107,14 @@ class ProfileController extends Controller
         )->findOrFail($id);
         $title = 'Edit Profile';
         $page = 'front.edit_profile';
-        // $js = ['profile'];
+        $js = ['profile'];
         $user['profile'] = ($user->profile != null) ? asset('storage/profile/' . $user->profile) : asset('storage/profile/no_profile.png');
         $user['bg_profile'] = ($user->bg_profile != null) ? asset('storage/bg_profile/' . $user->bg_profile) : asset('assets/front/image/Frame 1000005835.png');
         return view('layout', compact(
             'title',
             'page',
             'user',
-            // 'js'
+            'js'
         ));
     }
 
