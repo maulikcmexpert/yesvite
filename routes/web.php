@@ -28,33 +28,33 @@ use App\Http\Controllers\{
 // });
 Route::get('/', [HomeFrontController::class, 'index'])->name('front.home');
 
+Route::middleware('checkUserExist')->group(function () {
 
 
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::post('/import-csv',  [HomeController::class, 'importCSV'])->name('import.csv');
+    Route::get('profile',  [ProfileController::class, 'index'])->name('profile');
+    Route::get('profile/edit',  [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::get('profile/change_password',  [ProfileController::class, 'changePassword'])->name('profile.change_password');
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::post('/import-csv',  [HomeController::class, 'importCSV'])->name('import.csv');
-Route::get('profile',  [ProfileController::class, 'index'])->name('profile');
-Route::get('profile/edit',  [ProfileController::class, 'edit'])->name('profile.edit');
-Route::get('profile/change_password',  [ProfileController::class, 'changePassword'])->name('profile.change_password');
+    Route::post('profile/verify_password', [ProfileController::class, 'verifyPassword'])->name('profile.verify_password');
 
-Route::post('profile/verify_password', [ProfileController::class, 'verifyPassword'])->name('profile.verify_password');
+    Route::post('profile/update/{id}',  [ProfileController::class, 'update'])->name('profile.update');
+    Route::post('profile/update_password',  [ProfileController::class, 'updatePassword'])->name('profile.update_password');
 
-Route::post('profile/update/{id}',  [ProfileController::class, 'update'])->name('profile.update');
-Route::post('profile/update_password',  [ProfileController::class, 'updatePassword'])->name('profile.update_password');
-
-Route::get('public_profile',  [ProfileController::class, 'publicProfileView'])->name('profile.public_profile');
-Route::get('profile_privacy',  [ProfileController::class, 'profilePrivacy'])->name('profile.privacy');
+    Route::get('public_profile',  [ProfileController::class, 'publicProfileView'])->name('profile.public_profile');
+    Route::get('profile_privacy',  [ProfileController::class, 'profilePrivacy'])->name('profile.privacy');
 
 
-Route::post('upload',  [ProfileController::class, 'uploadProfile'])->name('profile.upload');
-Route::post('upload_bg_profile',  [ProfileController::class, 'uploadBgProfile'])->name('profile.uploadbgprofile');
-
+    Route::post('upload',  [ProfileController::class, 'uploadProfile'])->name('profile.upload');
+    Route::post('upload_bg_profile',  [ProfileController::class, 'uploadBgProfile'])->name('profile.uploadbgprofile');
+});
 
 Route::controller(AuthController::class)->group(function () {
 
-    Route::get('login', 'create')->name('auth.login')->middleware('isAuthenticate');
+    Route::get('login', 'create')->name('auth.login');
     Route::post('login', 'checkLogin')->name('auth.checkLogin');
-    Route::get('register', 'register')->name('auth.register')->middleware('isAuthenticate');
+    Route::get('register', 'register')->name('auth.register');
     Route::post('store_register', 'userRegister')->name('store.register');
     Route::post('check-email', 'checkEmailExistence');
 
