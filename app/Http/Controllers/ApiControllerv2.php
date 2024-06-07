@@ -2312,9 +2312,9 @@ class ApiControllerv2 extends Controller
         if ($input['type'] == 'bg_profile') {
             if ($user->bg_profile != "" || $user->bg_profile != NULL) {
 
-                if (file_exists(public_path('storage/profile/') . $user->profile)) {
-                    $imagePath = public_path('storage/profile/') . $user->profile;
-                    unlink($imagePath);
+                if (file_exists(public_path('storage/bg_profile/') . $user->bg_profile)) {
+                    $bgimagePath = public_path('storage/bg_profile/') . $user->bg_profile;
+                    unlink($bgimagePath);
                 }
 
                 $user->profile = NULL;
