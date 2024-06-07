@@ -28,7 +28,7 @@ use App\Http\Controllers\{
 // });
 Route::get('/', [HomeFrontController::class, 'index'])->name('front.home');
 
-Route::middleware('checkUserExist')->group(function () {
+Route::group(function () {
 
 
     Route::get('/home', [HomeController::class, 'index'])->name('home');
