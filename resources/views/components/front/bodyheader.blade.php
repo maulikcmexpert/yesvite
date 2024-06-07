@@ -73,7 +73,7 @@
                      </ul>
                  </div>
                  <a href="{{ route('profile')}}" class="user-img">
-                     <img src="{{Session::get('user')['profile']}}" class="UserImg" alt="user-img">
+                     <img src="{{(Session::get('user')['profile'] != '')?Session::get('user')['profile']:asset('public/storage/profile/no_profile.png') }}" class="UserImg" alt="user-img">
                  </a>
              </div>
              @else
