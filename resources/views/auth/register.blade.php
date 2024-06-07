@@ -39,58 +39,77 @@
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                                     <div class="input-form">
-                                        <input type="Fname" class="form-control inputText" id="firstname" name="firstname" value="{{ old('firstname')}}">
-                                        <label for="Fname" class="form-label input-field floating-label">First Name <span class="required">*</span></label>
-                                        @error('firstname')
-                                        <label class="error">{{ $message }}</label>
-                                        @enderror
+                                        <input type="text" class="form-control" id="firstname" name="firstname" value="{{ old('firstname')}}">
+                                        <label for="firstname" class="floating-label">First Name <span>*</span></label>
+                                        <div class="label-error">
+                                            <label id="firstname-error" class="error" for="firstname" style="color: red;"></label>
+                                            @error('firstname')
+                                            <label class="error">{{ $message }}</label>
+                                            @enderror
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                                     <div class="input-form">
-                                        <input type="Lname" class="form-control inputText" id="lastname" name="lastname" value="{{ old('lastname')}}">
-                                        <label for="Lname" class="form-label input-field floating-label">Last Name <span class="required">*</span></label>
-                                        @error('lastname')
-                                        <label class="error">{{ $message }}</label>
-                                        @enderror
+                                        <input type="text" class="form-control" id="lastname" name="lastname" value="{{ old('lastname')}}">
+                                        <label for="lastname" class="floating-label">Last Name <span>*</span></label>
+                                        <div class="label-error">
+                                            <label id="lastname-error" class="error" for="lastname" style="color: red;"></label>
+                                            @error('lastname')
+                                            <label class="error">{{ $message }}</label>
+                                            @enderror
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div class="input-form">
-                                        <input type="email" class="form-control inputText" id="email" name="email" value="{{ old('email')}}">
-                                        <label for="email" class="form-label input-field floating-label">Email Address <span class="required">*</span></label>
-                                        @error('email')
-                                        <label class="error">{{ $message }}</label>
-                                        @enderror
+                                        <input type="email" class="form-control" id="email" name="email" value="{{ old('email')}}">
+                                        <label for="email" class="floating-label">Email Address <span>*</span></label>
+
+                                        <div class="label-error">
+                                            <label id="email-error" class="error" for="email" style="color: red;"></label>
+                                            @error('email')
+                                            <label class="error">{{ $message }}</label>
+                                            @enderror
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div class="input-form">
-                                        <input type="text" class="form-control inputText" id="zip_code" name="zip_code" value="{{ old('zip_code')}}">
-                                        <label for="Zcode" class="form-label input-field floating-label">Zip Code <span class="required">*</span></label>
-                                        @error('zip_code')
-                                        <label class="error">{{ $message }}</label>
-                                        @enderror
+                                        <input type="text" class="form-control" id="zip_code" name="zip_code" value="{{ old('zip_code')}}">
+                                        <label for="Zcode" class="floating-label">Zip Code <span>*</span></label>
+                                        <div class="label-error">
+                                            <label id="zip_code-error" class="error" for="zip_code" style="color: red;"></label>
+                                            @error('zip_code')
+                                            <label class="error">{{ $message }}</label>
+                                            @enderror
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div class="input-form">
-                                        <input type="password" class="form-control inputText" id="password" name="password" value="{{ old('password')}}">
-                                        <label for="password" class="form-label input-field floating-label">Password <span class="required">*</span></label>
+                                        <input type="password" class="form-control" id="password" name="password" value="{{ old('password')}}">
+                                        <label for="password" class="floating-label">Password <span>*</span></label>
                                         <span toggle="#password-field" class="fa-regular fa-fw fa-eye-slash field-icon toggle-password"></span>
-                                        @error('password')
-                                        <label class="error">{{ $message }}</label>
-                                        @enderror
+                                        <div class="label-error">
+                                            <label id="password-error" class="error" for="password" style="color: red;"></label>
+                                            @error('password')
+                                            <label class="error">{{ $message }}</label>
+                                            @enderror
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div class="input-form mb-0">
-                                        <input type="password" class="form-control inputText" id="cpassword" name="cpassword" value="{{ old('cpassword')}}">
-                                        <label for="password" class="form-label input-field floating-label">Confirm Password <span class="required">*</span></label>
+                                        <input type="password" class="form-control" id="cpassword" name="cpassword" value="{{ old('cpassword')}}">
+                                        <label for="password" class="floating-label">Confirm Password <span>*</span></label>
                                         <span toggle="#password-field" class="fa-regular fa-fw fa-eye-slash field-icon toggle-password"></span>
-                                        @error('cpassword')
-                                        <label class="error">{{ $message }}</label>
-                                        @enderror
+                                        <div class="label-error">
+                                            <label id="cpassword-error" class="error" for="cpassword" style="color: red;"></label>
+                                            @error('cpassword')
+                                            <label class="error">{{ $message }}</label>
+                                            @enderror
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
@@ -153,58 +172,76 @@
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                                     <div class="input-form">
-                                        <input type="Fname" class="form-control inputText" id="firstname" name="firstname" value="{{ old('firstname')}}">
-                                        <label for="Fname" class="form-label input-field floating-label">First Name <span class="required">*</span></label>
-                                        @error('firstname')
-                                        <label class="error">{{ $message }}</label>
-                                        @enderror
+                                        <input type="Fname" class="form-control" id="firstname" name="firstname" value="{{ old('firstname')}}">
+                                        <label for="Fname" class="floating-label">First Name <span>*</span></label>
+                                        <div class="label-error">
+                                            <label id="firstname-error" class="error" for="firstname" style="color: red;"></label>
+                                            @error('firstname')
+                                            <label class="error">{{ $message }}</label>
+                                            @enderror
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                                     <div class="input-form">
-                                        <input type="Lname" class="form-control inputText" id="businesslastname" name="lastname" value="{{ old('lastname')}}">
-                                        <label for="Lname" class="form-label input-field floating-label">Last Name <span class="required">*</span></label>
-                                        @error('lastname')
-                                        <label class="error">{{ $message }}</label>
-                                        @enderror
+                                        <input type="Lname" class="form-control" id="businesslastname" name="lastname" value="{{ old('lastname')}}">
+                                        <label for="Lname" class="floating-label">Last Name <span>*</span></label>
+                                        <div class="label-error">
+                                            <label id="lastname-error" class="error" for="businesslastname" style="color: red;"></label>
+                                            @error('lastname')
+                                            <label class="error">{{ $message }}</label>
+                                            @enderror
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div class="input-form">
-                                        <input type="email" class="form-control inputText" id="businessemail" name="email" value="{{ old('email')}}">
-                                        <label for="email" class="form-label input-field floating-label">Email Address <span class="required">*</span></label>
-                                        @error('email')
-                                        <label class="error">{{ $message }}</label>
-                                        @enderror
+                                        <input type="email" class="form-control" id="businessemail" name="email" value="{{ old('email')}}">
+                                        <label for="email" class="floating-label">Email Address <span>*</span></label>
+                                        <div class="label-error">
+                                            <label id="email-error" class="error" for="businessemail" style="color: red;"></label>
+                                            @error('email')
+                                            <label class="error">{{ $message }}</label>
+                                            @enderror
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div class="input-form">
-                                        <input type="text" class="form-control inputText" id="businesszip_code" name="zip_code" value="{{ old('zip_code')}}">
-                                        <label for="Zcode" class="form-label input-field floating-label">Zip Code <span class="required">*</span></label>
-                                        @error('zip_code')
-                                        <label class="error">{{ $message }}</label>
-                                        @enderror
+                                        <input type="text" class="form-control" id="businesszip_code" name="zip_code" value="{{ old('zip_code')}}">
+                                        <label for="Zcode" class="floating-label">Zip Code <span>*</span></label>
+                                        <div class="label-error">
+                                            <label id="zip_code-error" class="error" for="businesszip_code" style="color: red;"></label>
+                                            @error('zip_code')
+                                            <label class="error">{{ $message }}</label>
+                                            @enderror
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div class="input-form">
-                                        <input type="password" class="form-control inputText" id="businesspassword" name="password" value="{{ old('password')}}">
-                                        <label for="password" class="form-label input-field floating-label">Password <span class="required">*</span></label>
+                                        <input type="password" class="form-control" id="businesspassword" name="password" value="{{ old('password')}}">
+                                        <label for="password" class="floating-label">Password <span>*</span></label>
                                         <span toggle="#password-field" class="fa-regular fa-fw fa-eye-slash field-icon toggle-password"></span>
-                                        @error('password')
-                                        <label class="error">{{ $message }}</label>
-                                        @enderror
+                                        <div class="label-error">
+                                            <label id="password-error" class="error" for="businesspassword" style="color: red;"></label>
+                                            @error('password')
+                                            <label class="error">{{ $message }}</label>
+                                            @enderror
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div class="input-form mb-0">
-                                        <input type="password" class="form-control inputText" id="businesscpassword" name="cpassword" value="{{ old('cpassword')}}">
-                                        <label for="password" class="form-label input-field floating-label">Confirm Password <span class="required">*</span></label>
+                                        <input type="password" class="form-control" id="businesscpassword" name="cpassword" value="{{ old('cpassword')}}">
+                                        <label for="password" class="floating-label">Confirm Password <span>*</span></label>
                                         <span toggle="#password-field" class="fa-regular fa-fw fa-eye-slash field-icon toggle-password"></span>
-                                        @error('cpassword')
-                                        <label class="error">{{ $message }}</label>
-                                        @enderror
+                                        <div class="label-error">
+                                            <label id="cpassword-error" class="error" for="businesscpassword" style="color: red;"></label>
+                                            @error('cpassword')
+                                            <label class="error">{{ $message }}</label>
+                                            @enderror
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">

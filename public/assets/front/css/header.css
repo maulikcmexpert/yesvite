@@ -24,7 +24,9 @@ header.login-header {
     -o-transition: 0.5s;
 }
 
-.login-header ul li .nav-link:hover {
+.login-header ul li .nav-link:hover,
+.login-header ul li.active a
+{
     color: var(--primaryColor);
 }
 

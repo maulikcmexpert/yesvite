@@ -15,7 +15,6 @@
     width: 70px;
     height: 70px;
     margin: 0 auto;
-    /* margin-bottom: 15px; */
     display: block;
 }
 
@@ -44,37 +43,9 @@
     position: relative;
 }
 
-
-.floating-label {
-    position: absolute;
-    top: 50%;
-    left: 20px;
-    transition:0.2s ease all;
-    -moz-transition:0.2s ease all;
-    -webkit-transition:0.2s ease all;
-    pointer-events: none;
-    transform: translateY(-50%);
-    -webkit-transform: translateY(-50%);
-    -moz-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    -o-transform: translateY(-50%);
-}
-
-input:focus ~ .floating-label,
-input:not(:focus):valid ~ .floating-label {
-    font-size: 12px;
-    color: var(--primaryColor);
-    top: 0;
-    left:10px;
-    background: #ffffff;
-    padding: 0px 5px 0px 5px;
-}
-
-
-
 .login-form-wrap .input-form:focus label {
     color: var(--primaryColor);
-}
+} 
 
 .toggle-password {
     position: absolute;
@@ -206,6 +177,7 @@ input:not(:focus):valid ~ .floating-label {
 .create-link a:hover {
     color: var(--primaryColor);
 }
+
 
 
 /* ========= register ========== */

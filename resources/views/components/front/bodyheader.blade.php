@@ -88,15 +88,15 @@
              @else
              <div class="collapse navbar-collapse" id="mynavbar">
                  <ul class="navbar-nav align-items-center ms-auto">
-                     <li class="nav-item">
-                         <a class="nav-link" href="home.html">Home</a>
+                     <li class="nav-item {{ (Request::segment(1) == '/')? 'active':'' }}">
+                         <a class="nav-link" href="{{ route('front.home')}}">Home</a>
                      </li>
-                     <li class="nav-item">
-                         <a class="nav-link" href="about-us.html">About</a>
+                     <li class="nav-item {{ (Request::segment(1) == 'about-us')? 'active':'' }}">
+                         <a class="nav-link" href="{{ route('about')}}">About</a>
                      </li>
-                     <li class="nav-item">
-                         <a class="nav-link" href="contact.html">contact</a>
-                     </li>
+                     <!-- <li class="nav-item {{ (Request::segment(1) == 'contact')? 'active':'' }}">
+                         <a class="nav-link" href="{{ route('contact')}}">contact</a>
+                     </li> -->
                      <!-- <li class="nav-item">
                             
                         </li> -->

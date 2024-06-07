@@ -9,7 +9,7 @@ $(document).ready(function () {
                 /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(value)
             );
         },
-        "Password must be at least 8 characters long and contain both letters and numbers."
+        "At least 8 characters with a combination of letters and numbers"
     );
 
     $("#register").validate({
@@ -68,7 +68,7 @@ $(document).ready(function () {
             password: {
                 required: "Please enter your password",
                 passwordCheck:
-                    "Your password must be at least 8 characters long and contain both letters and numbers",
+                    "At least 8 characters with a combination of letters and numbers",
             },
             cpassword: {
                 required: "Please confirm your password",
@@ -155,7 +155,7 @@ $(document).ready(function () {
             password: {
                 required: "Please enter your password",
                 passwordCheck:
-                    "Your password must be at least 8 characters long and contain both letters and numbers",
+                    "At least 8 characters with a combination of letters and numbers",
             },
             cpassword: {
                 required: "Please confirm your password",

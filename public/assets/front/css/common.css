@@ -313,15 +313,10 @@ ul.nav-tabs .nav-link:focus{
 .loaderbtn {
     display: inline-block;
     outline:none;
-    
     line-height: 1.4;
     position: relative;
-    transition: padding-right .3s ease;
+    transition: 0.5S;
     font-weight:700;
-    -webkit-border-radius: 100px;
-    -moz-border-radius: 100px;
-    -ms-border-radius: 100px;
-    -o-border-radius: 100px;
     background-color: var(--primaryColor) !important;
 }
 
@@ -358,6 +353,40 @@ ul.nav-tabs .nav-link:focus{
 }
 
 
+.floating-label {
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    transition:0.2s ease all;
+    -moz-transition:0.2s ease all;
+    -webkit-transition:0.2s ease all;
+    pointer-events: none;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+}
+
+.floatingfocus
+{
+    font-size: 12px;
+    color: var(--primaryColor);
+    top: 0;
+    left:10px;
+    background: #ffffff;
+    padding: 0px 5px 0px 5px;
+}
+
+.label-error{
+    position: absolute;
+    bottom: -19px;
+    left: 8px;
+}
+
+.label-error label{
+    font-size: 11px;
+}
 
 /* ======== Responsive ========= */
 @media only screen and (max-width:1999px){
@@ -419,7 +448,14 @@ ul.nav-tabs .nav-link:focus{
     .modal-content{
         margin: 0 10px;
     }
+
+    .radio-wrapper .form-check .form-check-input{
+        width: 20px !important;
+        height: 20px !important;
+    }
 }
+
+
 
 
 @keyframes rotate360 { 

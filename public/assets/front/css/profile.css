@@ -50,6 +50,8 @@
     width: 100%;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
+    max-height: 200px;
+    object-fit: cover;
 }
 
 
@@ -592,7 +594,16 @@ input::-webkit-slider-thumb{
         padding: 12px 17px;
     }
 
-    #img-preview{
+    /* #img-preview{
         height: 145px;
+    } */
+
+  
+    .profile-img .user-img{
+        bottom: -90PX;
+    }
+
+    #coverImg-modal .cover-img{
+        height: 290px;
     }
 }

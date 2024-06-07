@@ -4,7 +4,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\{
-
+    AboutController,
+    ContactController,
     HomeController,
     HomeFrontController,
     ProfileController,
@@ -27,6 +28,8 @@ use App\Http\Controllers\{
 //     return view('welcome');
 // });
 Route::get('/', [HomeFrontController::class, 'index'])->name('front.home');
+Route::get('about-us', [AboutController::class, 'index'])->name('about');
+Route::get('contact', [ContactController::class, 'index'])->name('contact');
 
 Route::middleware('checkUserExist')->group(function () {
 
@@ -43,8 +46,8 @@ Route::middleware('checkUserExist')->group(function () {
     Route::post('profile/check-phonenumber', [ProfileController::class, 'checkPhoneNumberExistence']);
     Route::post('profile/update_password',  [ProfileController::class, 'updatePassword'])->name('profile.update_password');
 
-    Route::get('public_profile',  [ProfileController::class, 'publicProfileView'])->name('profile.public_profile');
-    Route::get('profile_privacy',  [ProfileController::class, 'profilePrivacy'])->name('profile.privacy');
+    Route::get('profile/public_profile',  [ProfileController::class, 'publicProfileView'])->name('profile.public_profile');
+    Route::get('profile/profile_privacy',  [ProfileController::class, 'profilePrivacy'])->name('profile.privacy');
 
 
     Route::post('upload',  [ProfileController::class, 'uploadProfile'])->name('profile.upload');
