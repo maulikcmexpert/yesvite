@@ -169,7 +169,7 @@ Route::prefix('user/v2/')->middleware('checkUser')->group(function () {
     Route::post('create_professional_account', [ApiControllerv2::class, 'createProfessionalAccount']);
     Route::post('update_profile', [ApiControllerv2::class, 'updateProfile']);
     Route::post('update_profile_or_bg_profile', [ApiControllerv2::class, 'updateProfileOrBgProfile']);
-    Route::post('remove_profile', [ApiControllerv2::class, 'removeProfile']);
+    Route::get('remove_profile', [ApiControllerv2::class, 'removeProfile']);
     Route::post('my_profile', [ApiControllerv2::class, 'myProfile']);
     Route::post('change_password', [ApiControllerv2::class, 'changePassword']);
     Route::post('privacy_setting', [ApiControllerv2::class, 'privacySetting']);
