@@ -52,9 +52,9 @@ Route::middleware('checkUserExist')->group(function () {
 
 Route::controller(AuthController::class)->group(function () {
 
-    Route::get('login', 'create')->name('auth.login');
+    Route::get('login', 'create')->name('auth.login')->middleware('isAuthenticate');
     Route::post('login', 'checkLogin')->name('auth.checkLogin');
-    Route::get('register', 'register')->name('auth.register');
+    Route::get('register', 'register')->name('auth.register')->middleware('isAuthenticate');
     Route::post('store_register', 'userRegister')->name('store.register');
     Route::post('check-email', 'checkEmailExistence');
 
