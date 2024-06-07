@@ -74,7 +74,7 @@
                  </div>
                  @php
                  $userprofile = Auth::guard('web')->user()->profile;
-                 $userProfile = asset('public/storage/profile/'.$userprofile)
+                 $userProfile = asset('public/storage/profile/'.$userprofile);
                  @if($profile !=NULL || $profile !="")
                  $userProfile = asset('public/storage/profile/no_profile.png');
                  @endif
