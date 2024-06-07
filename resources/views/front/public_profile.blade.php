@@ -54,15 +54,15 @@
                         </div>
                         <div class="user-gallery">
                             <div>
-                                <h4>{{formatNumber($user->events)}}</h4>
+                                <h4>{{formatNumber($user->event_count)}}</h4>
                                 <p>Events</p>
                             </div>
                             <div>
-                                <h4>{{formatNumber($user->photos)}}</h4>
+                                <h4>{{formatNumber($user->event_post_count)}}</h4>
                                 <p>Photos</p>
                             </div>
                             <div>
-                                <h4>{{formatNumber($user->comments)}}</h4>
+                                <h4>{{formatNumber($user->event_post_comment_count)}}</h4>
                                 <p>Comments</p>
                             </div>
                         </div>
