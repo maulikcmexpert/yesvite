@@ -79,6 +79,9 @@ class ProfileController extends Controller
         $page = 'front.public_profile';
         $user['profile'] = ($user->profile != null) ? asset('storage/profile/' . $user->profile) : asset('storage/profile/no_profile.png');
         $user['bg_profile'] = ($user->bg_profile != null) ? asset('storage/bg_profile/' . $user->bg_profile) : asset('assets/front/image/Frame 1000005835.png');
+        $date = Carbon::parse($user->created_at);
+        $formatted_date = $date->format('F, Y');
+        $user['join_date'] = $formatted_date;
         return view('layout', compact(
             'title',
             'page',
@@ -238,17 +241,7 @@ class ProfileController extends Controller
     public function uploadBgProfile(Request $request)
     {
 
-        // $validator = Validator::make($request->all(), [
-        //     'file' => 'required|image|max:2048', // max 2MB
-        // ]);
 
-        // if ($validator->fails()) {
-        //     return response()->json([
-        //         'status' => 0,
-        //         'message' => $validator->errors()->first(),
-
-        //     ]);
-        // }
 
         $file = $request->file('file');
 
