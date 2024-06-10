@@ -3262,7 +3262,7 @@ class ApiControllerv2 extends Controller
                     $eventDetail['event_name'] = $value->event_name;
                     $formattedDate = Carbon::createFromFormat('Y-m-d H:i:s', $value->updated_at)->format('F j, Y h:i A');
                     $eventDetail['saved_date'] = $formattedDate;
-                    $eventDetail['step'] = ($value->step != NULL) ? $value->step : '1';
+                    $eventDetail['step'] = ($value->step != NULL) ? $value->step : '';
 
                     $draftEventArray[] = $eventDetail;
                 }
@@ -4196,7 +4196,7 @@ class ApiControllerv2 extends Controller
                 $eventDetail['city'] = (!empty($getEventData->city) & $getEventData->city != NULL) ? $getEventData->city : "";
                 $eventDetail['message_to_guests'] = (!empty($getEventData->message_to_guests) & $getEventData->message_to_guests != NULL) ? $getEventData->message_to_guests : "";
                 $eventDetail['is_draft_save'] = $getEventData->is_draft_save;
-                $eventDetail['step'] = ($getEventData->step != NULL) ? $getEventData->step : '1';
+                $eventDetail['step'] = ($getEventData->step != NULL) ? $getEventData->step : '';
                 $eventDetail['event_images'] = [];
                 $getEventImages = EventImage::where('event_id', $getEventData->id)->get();
                 if (!empty($getEventImages)) {
@@ -4215,9 +4215,6 @@ class ApiControllerv2 extends Controller
 
                 if (!empty($invitedUser)) {
                     foreach ($invitedUser as $guestVal) {
-
-
-
                         if ($guestVal->is_co_host == '0') {
                             if ($guestVal->user->is_user_phone_contact == '1') {
                                 $invitedGuestDetail['first_name'] = (!empty($guestVal->user->firstname) && $guestVal->user->firstname != NULL) ? $guestVal->user->firstname : "";
