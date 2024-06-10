@@ -3262,7 +3262,7 @@ class ApiControllerv2 extends Controller
                     $eventDetail['event_name'] = $value->event_name;
                     $formattedDate = Carbon::createFromFormat('Y-m-d H:i:s', $value->updated_at)->format('F j, Y h:i A');
                     $eventDetail['saved_date'] = $formattedDate;
-                    $eventDetail['step'] = $value->step;
+                    $eventDetail['step'] = ($value->step != NULL) ? $value->step : '1';
 
                     $draftEventArray[] = $eventDetail;
                 }
