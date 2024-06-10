@@ -12181,4 +12181,40 @@ class ApiControllerv2 extends Controller
             return response()->json(['status' => 0, 'message' => 'something went wrong']);
         }
     }
+
+    public function setUserEventCreateStep(Request $request)
+    {
+
+        $rawData = $request->getContent();
+
+        $input = json_decode($rawData, true);
+
+        if ($input == null) {
+            return response()->json(['status' => 0, 'message' => "Json invalid"]);
+        }
+
+        $validator = Validator::make($input, [
+            "step" => ['required', 'in:1,2,3,4'],
+            "event_id" => ['required', 'exists:events,id']
+        ]);
+        if ($validator->fails()) {
+            return response()->json(
+                [
+                    'status' => 0,
+                    'message' => $validator->errors()->first()
+                ],
+            );
+        }
+
+        try {
+            $updateStepOfEvent = Event::where('id', $input['event_id'])->first();
+            $updateStepOfEvent->step = $input['step'];
+            $updateStepOfEvent->save();
+            return response()->json(['status' => 1, 'message' => "step updated"]);
+        } catch (QueryException $e) {
+            return response()->json(['status' => 0, 'message' => "db error"]);
+        } catch (Exception  $e) {
+            return response()->json(['status' => 0, 'message' => 'something went wrong']);
+        }
+    }
 }
