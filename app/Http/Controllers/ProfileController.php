@@ -396,37 +396,35 @@ class ProfileController extends Controller
         $user->visible = $request->visible;
         $user->save();
 
-
         $checkProfilePrivacy = UserProfilePrivacy::where('user_id', $user->id)->count();
 
         if ($checkProfilePrivacy == 0) {
-            foreach ($input['profile_privacy'] as $value) {
+            foreach ($request->profile_privacy as $key => $value) {
                 $setPrivacyData = new UserProfilePrivacy();
-                $setPrivacyData->profile_privacy = $value['profile_privacy'];
-                $setPrivacyData->status = $value["status"];
+                $setPrivacyData->profile_privacy = $key;
+                $setPrivacyData->status = $value;
                 $setPrivacyData->user_id = $user->id;
                 $setPrivacyData->save();
             }
         } else {
-            foreach ($input['profile_privacy'] as $value) {
-                $setUpdatePrivacyData = UserProfilePrivacy::where(['user_id' => $user->id, 'profile_privacy' => $value['profile_privacy']])->first();
+            foreach ($request->profile_privacy as $key => $value) {
+                $setUpdatePrivacyData = UserProfilePrivacy::where(['user_id' => $user->id, 'profile_privacy' => $key])->first();
                 if ($setUpdatePrivacyData != null) {
-                    $setUpdatePrivacyData->status = $value["status"];
+                    $setUpdatePrivacyData->status = $value;
                     $setUpdatePrivacyData->save();
                 } else {
                     $setUpdatePrivacyData = new UserProfilePrivacy();
-                    $setUpdatePrivacyData->profile_privacy = $value['profile_privacy'];
-                    $setUpdatePrivacyData->status = $value["status"];
+                    $setUpdatePrivacyData->profile_privacy = $key;
+                    $setUpdatePrivacyData->status = $value;
                     $setUpdatePrivacyData->user_id = $user->id;
                     $setUpdatePrivacyData->save();
                 }
             }
         }
+        return response()->json([
+            'status' => 1,
+            'message' => "Profile Privacy updated successfully",
 
-        // if ($checkProfilePrivacy != 0) {
-        //     $updateProfilePrivacy = UserProfilePrivacy::where('user_id',$user->id)->count();
-        //     $update = $
-        // }
-
+        ]);
     }
 }

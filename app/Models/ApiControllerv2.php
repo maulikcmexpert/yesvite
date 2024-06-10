@@ -1768,16 +1768,9 @@ class ApiControllerv2 extends Controller
                     $eventDetail['event_name'] = $value->event_name;
                     $formattedDate = Carbon::createFromFormat('Y-m-d H:i:s', $value->updated_at)->format('F j, Y h:i A');
                     $eventDetail['saved_date'] = $formattedDate;
-                    $eventDetail['step'] = 1;
 
-                    $checkStoreImage = EventImage::where('event_id', $value->id)->count();
-                    if ($checkStoreImage != 0) {
-                        $eventDetail['step'] = 2;
-                    }
-                    $checkGuests = EventInvitedUser::where('event_id', $value->id)->count();
-                    if ($checkGuests != 0) {
-                        $eventDetail['step'] = 3;
-                    }
+                    $eventDetail['step'] = ($value->step != NULL) ? $value->step : '1';
+
                     $draftEventArray[] = $eventDetail;
                 }
                 return response()->json(['status' => 1, 'message' => "Draft Events", "data" => $draftEventArray]);
