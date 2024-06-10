@@ -6,7 +6,8 @@ use App\Models\{
     User,
     Event,
     EventPost,
-    EventPostComment
+    EventPostComment,
+    UserProfilePrivacy
 };
 
 use Illuminate\Http\Request;
@@ -375,12 +376,57 @@ class ProfileController extends Controller
         )->findOrFail($id);
         $title = 'Profile Privacy';
         $page = 'front.privacy';
+        $js = ['profile'];
         $user['profile'] = ($user->profile != null) ? asset('storage/profile/' . $user->profile) : asset('storage/profile/no_profile.png');
         $user['bg_profile'] = ($user->bg_profile != null) ? asset('storage/bg_profile/' . $user->bg_profile) : asset('assets/front/image/Frame 1000005835.png');
         return view('layout', compact(
             'title',
             'page',
             'user',
+            'js'
         ));
+    }
+
+    public function updateProfilePrivacy(Request $request)
+    {
+
+
+        $user = Auth::guard('web')->user();
+
+        $user->visible = $request->visible;
+        $user->save();
+
+
+        $checkProfilePrivacy = UserProfilePrivacy::where('user_id', $user->id)->count();
+
+        if ($checkProfilePrivacy == 0) {
+            foreach ($input['profile_privacy'] as $value) {
+                $setPrivacyData = new UserProfilePrivacy();
+                $setPrivacyData->profile_privacy = $value['profile_privacy'];
+                $setPrivacyData->status = $value["status"];
+                $setPrivacyData->user_id = $user->id;
+                $setPrivacyData->save();
+            }
+        } else {
+            foreach ($input['profile_privacy'] as $value) {
+                $setUpdatePrivacyData = UserProfilePrivacy::where(['user_id' => $user->id, 'profile_privacy' => $value['profile_privacy']])->first();
+                if ($setUpdatePrivacyData != null) {
+                    $setUpdatePrivacyData->status = $value["status"];
+                    $setUpdatePrivacyData->save();
+                } else {
+                    $setUpdatePrivacyData = new UserProfilePrivacy();
+                    $setUpdatePrivacyData->profile_privacy = $value['profile_privacy'];
+                    $setUpdatePrivacyData->status = $value["status"];
+                    $setUpdatePrivacyData->user_id = $user->id;
+                    $setUpdatePrivacyData->save();
+                }
+            }
+        }
+
+        // if ($checkProfilePrivacy != 0) {
+        //     $updateProfilePrivacy = UserProfilePrivacy::where('user_id',$user->id)->count();
+        //     $update = $
+        // }
+
     }
 }

@@ -216,4 +216,36 @@ $(document).ready(function () {
             $("#updateUserPassword").submit();
         }
     });
+
+    //  profile privacy //
+
+    $("#profilePrivacySave").on("click", function () {
+        loaderHandle("#profilePrivacySave", "Saving");
+
+        // Serialize the form data
+        var formData = $("#profile_privacy").serialize();
+
+        $.ajax({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            url: base_url + "profile/update_profile_privacy",
+            type: "POST",
+            data: formData,
+            processData: true, // Automatically process data into a query string
+            contentType: "application/x-www-form-urlencoded; charset=UTF-8", // Default content type for form data
+            success: function (response) {
+                removeLoaderHandle("#profilePrivacySave", "Save Changes");
+                if (response.status == 1) {
+                    toastr.success(response.message);
+                } else {
+                    toastr.error(response.message);
+                }
+            },
+            error: function (xhr, status, error) {
+                removeLoaderHandle("#profilePrivacySave", "Save Changes");
+                toastr.error("An error occurred: " + error);
+            },
+        });
+    });
 });

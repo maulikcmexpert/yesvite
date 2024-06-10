@@ -15,13 +15,13 @@
                     <div class="contact-title">
                         <h3>
                             Profile Privacy</h3>
-                        <button type="button" class="cmn-btn save-btn" data-bs-toggle="modal" data-bs-target="#myModal3">
+                        <button type="button" class="cmn-btn save-btn" id="profilePrivacySave" data-bs-toggle="modal" data-bs-target="#myModal3">
                             Save Changes</button>
                     </div>
                     <div class="privacy-wrapper">
 
                         <p class="border-bottom pt-0">Who can see your profile?</p>
-                        <form action="">
+                        <form method="POST" action="" id="profile_privacy">
                             <div class="radio-wrapper">
                                 <div>
                                     <div class="form-check d-flex align-items-center justify-content-between border-bottom">
@@ -36,7 +36,7 @@
                                                 <h6>Guests from events</h6>
                                             </div>
                                         </label>
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
+                                        <input class="form-check-input" type="radio" name="visible" value="1" id="flexRadioDefault1" checked>
                                     </div>
                                     <div class="border-bottom d-flex align-items-center">
                                         <p>Choose what to show on your profile</p>
@@ -50,7 +50,8 @@
                                             <div class="toggle-button-cover ">
                                                 <div class="button-cover">
                                                     <div class="button r" id="button-1">
-                                                        <input type="checkbox" class="checkbox" />
+                                                        <input type="hidden" name="profile_privacy['gender']" value="0" />
+                                                        <input type="checkbox" name="profile_privacy['gender']" value="1" class="checkbox" checked />
                                                         <div class="knobs"></div>
                                                         <div class="layer"></div>
                                                     </div>
@@ -62,7 +63,8 @@
                                             <div class="toggle-button-cover ">
                                                 <div class="button-cover">
                                                     <div class="button r" id="button-1">
-                                                        <input type="checkbox" class="checkbox" />
+                                                        <input type="hidden" name="profile_privacy['photo']" value="0" />
+                                                        <input type="checkbox" name="profile_privacy['photo']" value="1" class="checkbox" checked />
                                                         <div class="knobs"></div>
                                                         <div class="layer"></div>
                                                     </div>
@@ -74,7 +76,8 @@
                                             <div class="toggle-button-cover ">
                                                 <div class="button-cover">
                                                     <div class="button r" id="button-1">
-                                                        <input type="checkbox" class="checkbox" />
+                                                        <input type="hidden" name="profile_privacy['location']" value="0" />
+                                                        <input type="checkbox" name="profile_privacy['location']" value="1" class="checkbox" checked />
                                                         <div class="knobs"></div>
                                                         <div class="layer"></div>
                                                     </div>
@@ -86,7 +89,8 @@
                                             <div class="toggle-button-cover ">
                                                 <div class="button-cover">
                                                     <div class="button r" id="button-1">
-                                                        <input type="checkbox" class="checkbox" />
+                                                        <input type="hidden" name="profile_privacy['event_stat']" value="0" />
+                                                        <input type="checkbox" name="profile_privacy['event_stat']" value="1" class="checkbox" checked />
                                                         <div class="knobs"></div>
                                                         <div class="layer"></div>
                                                     </div>
@@ -110,7 +114,7 @@
                                                 <span>Your profile will be private to everyone</span>
                                             </div>
                                         </label>
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                                        <input class="form-check-input" type="radio" value="2" name="visible" id="flexRadioDefault2">
                                     </div>
                                     <a href="{{route('profile.public_profile')}}" class="d-flex align-items-center public-view">
                                         <h6>Public Profile View</h6>

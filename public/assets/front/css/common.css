@@ -259,21 +259,22 @@ ul.nav-tabs .nav-link:focus{
 }
 
 .layer {
-  width: 100%;
-  background-color: #2DA9FC;
-  transition: 0.3s ease all;
-  z-index: 1;
+    width: 100%;
+    background-color: #ca8585;
+    transition: 0.3s ease all;
+    z-index: 1;
 }
 
-/* Button 1 */
+
+/* / Button 1 / */
 #button-1 .knobs:before {
-    content: "\f00c";
+    content: "\f00d";
     position: absolute;
     top: 50%;
-    right: 4px;
+    right: 22px;
     width: 20px;
     height: 20px;
-    color: #2DA9FC;
+    color: red;
     font-size: 10px;
     font-weight: bold;
     text-align: center;
@@ -285,29 +286,40 @@ ul.nav-tabs .nav-link:focus{
     font-family: "Font Awesome 5 Free";
     transform: translateY(-50%);
     font-size: 13px;
-  }
+    -webkit-transition: 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15) all;
+    -moz-transition: 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15) all;
+    -ms-transition: 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15) all;
+    -o-transition: 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15) all;
+}
   
-  #button-1 .checkbox:checked + .knobs:before {
-    content: "\f00d";
-    right: 22px;
-    background-color: #f44336;
+#button-1 .checkbox:checked + .knobs:before {
+    content: "\f00c";
+    right: 4px;
+    background-color: #fff;
+    transition: 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15) all;
     font-family: "Font Awesome 5 Free";
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-  }
+    transform: translateY(-50%);
+    color: #2DA9FC;
+}
   
-  #button-1 .checkbox:checked ~ .layer {
-    background-color: #e5caca;
-  }
-  
-  #button-1 .knobs,
-  #button-1 .knobs:before,
-  #button-1 .layer {
-    transition: 0.3s ease all;
-  }
 
+#button-1 .checkbox:checked ~ .layer {
+    background-color: #2DA9FC;
+}
+  
+#button-1 .knobs,
+#button-1 .knobs:before,
+#button-1 .layer {
+    transition: 0.3s ease all;
+}
+
+.privacy-policy{
+    padding: 100px 0;
+}
+
+.privacy-policy{
+    padding: 100px 0;
+}
 
   
 .loaderbtn {
