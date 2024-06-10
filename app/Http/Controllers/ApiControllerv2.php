@@ -3262,16 +3262,8 @@ class ApiControllerv2 extends Controller
                     $eventDetail['event_name'] = $value->event_name;
                     $formattedDate = Carbon::createFromFormat('Y-m-d H:i:s', $value->updated_at)->format('F j, Y h:i A');
                     $eventDetail['saved_date'] = $formattedDate;
-                    $eventDetail['step'] = 1;
+                    $eventDetail['step'] = $value->step;
 
-                    $checkStoreImage = EventImage::where('event_id', $value->id)->count();
-                    if ($checkStoreImage != 0) {
-                        $eventDetail['step'] = 2;
-                    }
-                    $checkGuests = EventInvitedUser::where('event_id', $value->id)->count();
-                    if ($checkGuests != 0) {
-                        $eventDetail['step'] = 3;
-                    }
                     $draftEventArray[] = $eventDetail;
                 }
                 return response()->json(['status' => 1, 'message' => "Draft Events", "data" => $draftEventArray]);
@@ -4204,6 +4196,7 @@ class ApiControllerv2 extends Controller
                 $eventDetail['city'] = (!empty($getEventData->city) & $getEventData->city != NULL) ? $getEventData->city : "";
                 $eventDetail['message_to_guests'] = (!empty($getEventData->message_to_guests) & $getEventData->message_to_guests != NULL) ? $getEventData->message_to_guests : "";
                 $eventDetail['is_draft_save'] = $getEventData->is_draft_save;
+                $eventDetail['step'] = $getEventData->step;
                 $eventDetail['event_images'] = [];
                 $getEventImages = EventImage::where('event_id', $getEventData->id)->get();
                 if (!empty($getEventImages)) {
