@@ -3262,7 +3262,7 @@ class ApiControllerv2 extends Controller
                     $eventDetail['event_name'] = $value->event_name;
                     $formattedDate = Carbon::createFromFormat('Y-m-d H:i:s', $value->updated_at)->format('F j, Y h:i A');
                     $eventDetail['saved_date'] = $formattedDate;
-                    $eventDetail['step'] = ($value->step != NULL) ? $value->step : '';
+                    $eventDetail['step'] = ($value->step != NULL) ? $value->step : 0;
 
                     $draftEventArray[] = $eventDetail;
                 }
@@ -4196,7 +4196,7 @@ class ApiControllerv2 extends Controller
                 $eventDetail['city'] = (!empty($getEventData->city) & $getEventData->city != NULL) ? $getEventData->city : "";
                 $eventDetail['message_to_guests'] = (!empty($getEventData->message_to_guests) & $getEventData->message_to_guests != NULL) ? $getEventData->message_to_guests : "";
                 $eventDetail['is_draft_save'] = $getEventData->is_draft_save;
-                $eventDetail['step'] = ($getEventData->step != NULL) ? $getEventData->step : '';
+                $eventDetail['step'] = ($getEventData->step != NULL) ? $getEventData->step : 0;
                 $eventDetail['event_images'] = [];
                 $getEventImages = EventImage::where('event_id', $getEventData->id)->get();
                 if (!empty($getEventImages)) {
