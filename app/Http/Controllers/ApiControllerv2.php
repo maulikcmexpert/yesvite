@@ -2135,10 +2135,10 @@ class ApiControllerv2 extends Controller
                 }
 
 
-
                 $image = $request->profile;
+                $previmage = explode('.', $user->profile);
 
-                $imageName = time() . '_' . $image->getClientOriginalName();
+                $imageName = $previmage[0] . '.' . $image->getClientOriginalExtension();
 
 
                 $image->move(public_path('storage/profile'), $imageName);

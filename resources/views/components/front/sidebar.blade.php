@@ -133,6 +133,62 @@
                 </svg>
                 Logout
             </a>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="manageModel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header align-items-start">
+                <div>
+                    <h4 class="modal-title">Manage Accounts</h4>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="manage-account">
+                    <div class="users-data">
+                        <div class="d-flex align-items-start">
+                            <div class="contact-img">
+                                <img src="./assets/image/user-img.svg" alt="contact-img">
+                            </div>
+                            <div class="text-start">
+                                <h5>Silvia Alegra</h5>
+                                <div>
+                                    <a href="mailto:silvia@gmail.com">silvia@gmail.com</a>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="account-setting.html" class="btn edit-contact">Account Settings</a>
+                    </div>
+                    <div class="users-data">
+                        <div class="d-flex align-items-start">
+                            <div class="contact-img">
+                                <img src="./assets/image/user-img.svg" alt="contact-img">
+                            </div>
+                            <div class="text-start">
+                                <h5>Silvia Alegra</h5>
+                                <div>
+                                    <a href="mailto:silvia@gmail.com">silvia@gmail.com</a>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="ms-auto">
+                            <svg class="ms-auto" width="7" height="12" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M0.940228 11.78C0.813561 11.78 0.686895 11.7333 0.586895 11.6333C0.393561 11.44 0.393561 11.12 0.586895 10.9267L4.93356 6.58001C5.25356 6.26001 5.25356 5.74001 4.93356 5.42001L0.586895 1.07335C0.393561 0.880013 0.393561 0.560013 0.586895 0.36668C0.780228 0.173346 1.10023 0.173346 1.29356 0.36668L5.64023 4.71335C5.98023 5.05335 6.17356 5.51335 6.17356 6.00001C6.17356 6.48668 5.98689 6.94668 5.64023 7.28668L1.29356 11.6333C1.19356 11.7267 1.06689 11.78 0.940228 11.78Z" fill="#94A3B8" />
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+                <div class="text-end mt-2">
+                    <button class="cmn-btn"><svg class="me-1" width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5.5026 0.833984V10.1673M0.835938 5.50065H10.1693" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        Add New Contact</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>

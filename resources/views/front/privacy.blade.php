@@ -15,7 +15,7 @@
                     <div class="contact-title">
                         <h3>
                             Profile Privacy</h3>
-                        <button type="button" class="cmn-btn save-btn" id="profilePrivacySave" data-bs-toggle="modal" data-bs-target="#myModal3">
+                        <button type="button" class="cmn-btn loaderbtn" id="profilePrivacySave" data-bs-toggle="modal" data-bs-target="#myModal3">
                             Save Changes</button>
                     </div>
                     <div class="privacy-wrapper">
@@ -51,7 +51,7 @@
                                                 <div class="button-cover">
                                                     <div class="button r" id="button-1">
                                                         <input type="hidden" name="profile_privacy[gender]" value="0" />
-                                                        <input type="checkbox" name="profile_privacy[gender]" value="1" class="checkbox" checked />
+                                                        <input type="checkbox" name="profile_privacy[gender]" value="1" class="checkbox" {{($user->gender == '1')?'checked':''}} />
                                                         <div class="knobs"></div>
                                                         <div class="layer"></div>
                                                     </div>
@@ -64,7 +64,7 @@
                                                 <div class="button-cover">
                                                     <div class="button r" id="button-1">
                                                         <input type="hidden" name="profile_privacy[photo]" value="0" />
-                                                        <input type="checkbox" name="profile_privacy[photo]" value="1" class="checkbox" checked />
+                                                        <input type="checkbox" name="profile_privacy[photo]" value="1" class="checkbox" {{($user->photo == '1')?'checked':''}} />
                                                         <div class="knobs"></div>
                                                         <div class="layer"></div>
                                                     </div>
@@ -77,7 +77,7 @@
                                                 <div class="button-cover">
                                                     <div class="button r" id="button-1">
                                                         <input type="hidden" name="profile_privacy[location]" value="0" />
-                                                        <input type="checkbox" name="profile_privacy[location]" value="1" class="checkbox" checked />
+                                                        <input type="checkbox" name="profile_privacy[location]" value="1" class="checkbox" {{($user->location == '1')?'checked':''}} />
                                                         <div class="knobs"></div>
                                                         <div class="layer"></div>
                                                     </div>
@@ -90,7 +90,7 @@
                                                 <div class="button-cover">
                                                     <div class="button r" id="button-1">
                                                         <input type="hidden" name="profile_privacy[event_stat]" value="0" />
-                                                        <input type="checkbox" name="profile_privacy[event_stat]" value="1" class="checkbox" checked />
+                                                        <input type="checkbox" name="profile_privacy[event_stat]" value="1" class="checkbox" {{($user->event_stat == '1')?'checked':''}} />
                                                         <div class="knobs"></div>
                                                         <div class="layer"></div>
                                                     </div>
