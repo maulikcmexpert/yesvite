@@ -370,8 +370,8 @@ class ProfileController extends Controller
                 }, 'event_post' => function ($query) {
                     $query->where('post_type', '1');
                 },
-                'event_post_comment'
-
+                'event_post_comment',
+                'user_profile_privacy'
             ]
         )->findOrFail($id);
         $title = 'Profile Privacy';
