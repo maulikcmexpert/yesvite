@@ -3928,7 +3928,7 @@ class ApiControllerv2 extends Controller
                 ->count();
             $total_page = ceil($groupCount / 10);
 
-
+            dd($pages);
 
             $groupList = Group::select('id', 'name')
                 ->withCount('groupMembers as members_count')
