@@ -539,7 +539,7 @@ width: 100%;
     border-radius: 4px;
     overflow: hidden;
     box-shadow: 0 0px 5px rgba(0,0,0,0.2);
-    max-width: 330px;
+    /* max-width: 330px; */
     margin: 0px auto;
 }
 .event-calender .ui-datepicker-header {
@@ -583,8 +583,8 @@ margin: -43px 0px 0px 8px;
     content: '';
     position: absolute;
     display: block;
-    width: 4px;
-    height: 4px;
+    width: 10px;
+    height: 10px;
     border-left: 2px solid #b0aead;
     border-bottom: 2px solid #b0aead;
 }
