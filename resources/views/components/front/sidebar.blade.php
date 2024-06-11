@@ -103,7 +103,7 @@
                 </a>
             </li>
             <li>
-                <a href="account-setting.html" class="d-flex align-items-center">
+                <a href="{{route('profile.account_settings')}}" class="d-flex align-items-center {{ (Request::segment(1) == 'account_settings')? 'active':'' }}">
                     <span>
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M10 13.125C8.275 13.125 6.875 11.725 6.875 10C6.875 8.275 8.275 6.875 10 6.875C11.725 6.875 13.125 8.275 13.125 10C13.125 11.725 11.725 13.125 10 13.125ZM10 8.125C8.96667 8.125 8.125 8.96667 8.125 10C8.125 11.0333 8.96667 11.875 10 11.875C11.0333 11.875 11.875 11.0333 11.875 10C11.875 8.96667 11.0333 8.125 10 8.125Z" fill="#64748B" />

@@ -9,7 +9,8 @@ use App\Http\Controllers\{
     HomeController,
     HomeFrontController,
     ProfileController,
-    SocialController
+    SocialController,
+    AccountSettingController
 };
 /*
 |--------------------------------------------------------------------------
@@ -49,6 +50,8 @@ Route::middleware('checkUserExist')->group(function () {
     Route::get('profile/public_profile',  [ProfileController::class, 'publicProfileView'])->name('profile.public_profile');
     Route::get('profile/profile_privacy',  [ProfileController::class, 'profilePrivacy'])->name('profile.privacy');
     Route::post('profile/update_profile_privacy',  [ProfileController::class, 'updateProfilePrivacy']);
+    Route::get('account_settings',  [AccountSettingController::class, 'index'])->name('profile.account_settings');
+    Route::post('update_account_setting',  [AccountSettingController::class, 'updateAccountSetting']);
 
 
     Route::post('upload',  [ProfileController::class, 'uploadProfile'])->name('profile.upload');

@@ -4,42 +4,34 @@
 <section class="contact-details">
     <div class="container">
         <div class="row">
-
+            <x-front.sidebar :profileData="$user" />
             <div class="col-xxl-9 col-xl-8 col-lg-8 col-md-7">
                 <div class="contact-list">
                     <nav class="breadcrumb-nav" aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="home.html">Home</a></li>
-                            <li class="breadcrumb-item"><a href="profile.html">Profile</a></li>
+                            <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
+                            <li class="breadcrumb-item"><a href="{{route('profile')}}">Profile</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Account Setting</li>
                         </ol>
                     </nav>
                     <div class="contact-title">
                         <h3>Account Setting</h3>
-                        <!-- <a href="#" class="btn cmn-btn delete-btn" data-bs-toggle="modal" data-bs-target="#myModal">
-                                <svg class="me-2" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M14 3.98665C11.78 3.76665 9.54667 3.65332 7.32 3.65332C6 3.65332 4.68 3.71999 3.36 3.85332L2 3.98665" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M5.6665 3.3135L5.81317 2.44016C5.91984 1.80683 5.99984 1.3335 7.1265 1.3335H8.87317C9.99984 1.3335 10.0865 1.8335 10.1865 2.44683L10.3332 3.3135" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M12.5664 6.09326L12.1331 12.8066C12.0598 13.8533 11.9998 14.6666 10.1398 14.6666H5.85977C3.99977 14.6666 3.93977 13.8533 3.86644 12.8066L3.43311 6.09326" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M6.88672 11H9.10672" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M6.3335 8.3335H9.66683" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                                Delete Account</a> -->
+
                     </div>
                 </div>
                 <div class="account-setting">
                     <div class="account-data">
                         <div class="d-flex align-items-center">
                             <div class="user-img">
-                                <img src="./assets/image/user-img.svg" alt="user-img">
+                                <img src="{{$user->profile}}" alt="user-img">
                             </div>
                             <div class="user-name">
                                 <div class="d-flex justify-content-center align-items-center">
                                     <h3>Pristia Candra</h3>
                                     <span>PRO</span>
                                 </div>
-                                <a href="mailto:ekuanox@gmail.com ">ekuanox@gmail.com</a>
-                                <p>Member Since: June, 2023</p>
+                                <a href="mailto:{{$user->email}}">{{$user->email}}</a>
+                                <p>Member Since: {{$user->join_date}}</p>
                             </div>
                         </div>
 
@@ -71,11 +63,12 @@
                     <div class="general-wrap mb-0">
                         <h5 class="border-bottom">General</h5>
                         <div class="d-flex align-items-center justify-content-between border-bottom">
-                            <h6>Upload photos only via Wi-Fj</h6>
+                            <h6>Upload photos only via Wi-Fi</h6>
                             <div class="toggle-button-cover ">
                                 <div class="button-cover">
                                     <div class="button r" id="button-1">
-                                        <input type="checkbox" class="checkbox" />
+
+                                        <input type="checkbox" name="photo_via_wifi" value="1" id="photo_via_wifi" class="checkbox" />
                                         <div class="knobs"></div>
                                         <div class="layer"></div>
                                     </div>
@@ -87,7 +80,8 @@
                             <div class="toggle-button-cover">
                                 <div class="button-cover">
                                     <div class="button r" id="button-1">
-                                        <input type="checkbox" class="checkbox" />
+
+                                        <input type="checkbox" name="show_profile_photo_only_frds" value="1" id="show_profile_photo_only_frds" class="checkbox" />
                                         <div class="knobs"></div>
                                         <div class="layer"></div>
                                     </div>
