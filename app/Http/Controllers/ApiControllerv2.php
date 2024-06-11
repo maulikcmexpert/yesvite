@@ -2130,6 +2130,7 @@ class ApiControllerv2 extends Controller
             }
 
             $user = Auth::guard('api')->user();
+            $previmage = explode('.', $user->profile);
             if (!empty($request->profile)) {
 
                 if ($user->profile != "" || $user->profile != NULL) {
@@ -2142,7 +2143,7 @@ class ApiControllerv2 extends Controller
 
 
                 $image = $request->profile;
-                $previmage = explode('.', $user->profile);
+
 
                 $imageName = $previmage[0] . '.' . $image->getClientOriginalExtension();
 
