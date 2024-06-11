@@ -53,6 +53,17 @@ class ProfileController extends Controller
         $formatted_date = $date->format('F, Y');
         $user['join_date'] = $formatted_date;
 
+        if ($user->visible == 1) {
+            $user['visible'] = 'Guests from events';
+        }
+        if ($user->visible == 2) {
+            $user['visible'] = 'No One';
+        }
+
+        if ($user->visible == 3) {
+            $user['visible'] = 'Anyone';
+        }
+
         return view('layout', compact(
             'title',
             'page',
@@ -415,10 +426,14 @@ class ProfileController extends Controller
     {
 
         try {
-            $user = Auth::guard('web')->user();
 
-            $user->visible = $request->visible;
-            $user->save();
+            $user = Auth::guard('web')->user();
+            if ($request->visible != null) {
+
+
+                $user->visible = $request->visible;
+                $user->save();
+            }
 
             $checkProfilePrivacy = UserProfilePrivacy::where('user_id', $user->id)->count();
 

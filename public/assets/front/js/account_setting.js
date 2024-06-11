@@ -41,4 +41,37 @@ $(document).ready(function () {
             show_profile_photo_only_frds
         );
     });
+
+    $(document).on("change", ".visible", function () {
+        var visible = $(this).val();
+
+        makeAjaxCall("visible", visible);
+    });
+
+    $.validator.addMethod(
+        "typeDelete",
+        function (value, element) {
+            return this.optional(element) || value === "DELETE";
+        },
+        "Please type 'DELETE' to confirm."
+    );
+
+    $("#DeleteAccount").validate({
+        rules: {
+            type_word: {
+                required: true,
+                typeDelete: true,
+            },
+        },
+        messages: {
+            type_word: {
+                required: "Please type 'DELETE'",
+                typeDelete: "Please type 'DELETE' to confirm.",
+            },
+        },
+        submitHandler: function (form) {
+            loaderHandle("#DeleteBtn", "Deleting");
+            form.submit();
+        },
+    });
 });

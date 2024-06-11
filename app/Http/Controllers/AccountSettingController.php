@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Session;
 
 class AccountSettingController extends Controller
 {
@@ -38,6 +39,7 @@ class AccountSettingController extends Controller
         $user['join_date'] = $formatted_date;
         $user['photo_via_wifi'] = $user->photo_via_wifi;
         $user['show_profile_photo_only_frds'] = $user->show_profile_photo_only_frds;
+
 
         return view('layout', compact(
             'title',
@@ -74,8 +76,65 @@ class AccountSettingController extends Controller
                 ]);
             }
         }
+
+
+        if ($request->setting == 'visible') {
+            $user->visible = $request->value;
+            if ($user->save()) {
+
+                return response()->json([
+                    'status' => 1,
+                    'message' => "privacy changed",
+
+                ]);
+            }
+        }
     }
 
+    public function deleteAccount()
+    {
+        $loginUser = Auth::guard('web')->user();
+
+        $user = User::where('id', $loginUser->id)->first();
+        $user->delete();
+        Session::forget('user');
+
+        return redirect('login');
+    }
+
+
+    public function notificationSetting()
+    {
+        $id = decrypt(session()->get('user')['id']);
+        $user = User::with(['user_profile_privacy', 'user_notification_type'])->withCount(
+
+            [
+                'event' => function ($query) {
+                    $query->where('is_draft_save', '0');
+                }, 'event_post' => function ($query) {
+                    $query->where('post_type', '1');
+                },
+                'event_post_comment'
+
+            ]
+        )->findOrFail($id);
+        $title = 'Notification Settings';
+        $page = 'front.notification_setting';
+        $js = ['account_setting'];
+        $user['profile'] = ($user->profile != null) ? asset('storage/profile/' . $user->profile) : asset('storage/profile/no_profile.png');
+        $user['bg_profile'] = ($user->bg_profile != null) ? asset('storage/bg_profile/' . $user->bg_profile) : asset('assets/front/image/Frame 1000005835.png');
+        $date = Carbon::parse($user->created_at);
+        $formatted_date = $date->format('F, Y');
+        $user['join_date'] = $formatted_date;
+
+
+        return view('layout', compact(
+            'title',
+            'page',
+            'user',
+            'js'
+        ));
+    }
     /**
      * Show the form for creating a new resource.
      */

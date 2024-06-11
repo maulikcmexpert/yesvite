@@ -88,7 +88,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="notification.html" class="d-flex align-items-center public-view border-bottom">
+                        <a href="{{route('profile.notificationSetting')}}" class="d-flex align-items-center public-view border-bottom">
                             <h6>Notifications & Reminders Settings</h6>
                             <svg class="ms-auto" width="7" height="14" viewBox="0 0 7 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M0.939941 12.2802L5.28661 7.93355C5.79994 7.42021 5.79994 6.58021 5.28661 6.06688L0.939941 1.72021" stroke="#94A3B8" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
@@ -102,19 +102,19 @@
                                 <label class="form-check-label mb-0" for="flexRadioDefault1">
                                     <h6>Anyone</h6>
                                 </label>
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
+                                <input class="form-check-input visible" type="radio" name="visible" value="3" id="flexRadioDefault1" {{ ($user->visible == '3')?'checked':'' }}>
                             </div>
                             <div class="form-check d-flex align-items-center justify-content-between border-bottom">
                                 <label class="form-check-label mb-0" for="flexRadioDefault2">
                                     <h6>Only guest from event</h6>
                                 </label>
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                                <input class="form-check-input visible" type="radio" name="visible" value="1" id="flexRadioDefault2" {{ ($user->visible == '1')?'checked':'' }}>
                             </div>
                             <div class="form-check d-flex align-items-center justify-content-between border-bottom">
                                 <label class="form-check-label mb-0" for="flexRadioDefault3">
                                     <h6>No One</h6>
                                 </label>
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3">
+                                <input class="form-check-input visible" type="radio" name="visible" value="2" id="flexRadioDefault3" {{ ($user->visible == '2')?'checked':'' }}>
                             </div>
                         </div>
                     </div>
@@ -129,7 +129,7 @@
                     </div>
                     <div class="general-wrap mb-0">
                         <h5 class="border-bottom pt-0">PROFILE & MESSAGING</h5>
-                        <a href="privacy.html" class="d-flex align-items-center public-view border-bottom">
+                        <a href="{{ route('profile.privacy')}}" class="d-flex align-items-center public-view border-bottom">
                             <h6>Profile Privacy</h6>
                             <svg class="ms-auto" width="7" height="14" viewBox="0 0 7 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M0.939941 12.2802L5.28661 7.93355C5.79994 7.42021 5.79994 6.58021 5.28661 6.06688L0.939941 1.72021" stroke="#94A3B8" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
@@ -144,13 +144,13 @@
                     </div>
                     <div class="general-wrap mb-0">
                         <h5 class="border-bottom pt-0">SECURITY</h5>
-                        <a href="change-password.html" class="d-flex align-items-center public-view border-bottom">
+                        <a href="{{route('profile.change_password')}}" class="d-flex align-items-center public-view border-bottom">
                             <h6>Change Password</h6>
                             <svg class="ms-auto" width="7" height="14" viewBox="0 0 7 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M0.939941 12.2802L5.28661 7.93355C5.79994 7.42021 5.79994 6.58021 5.28661 6.06688L0.939941 1.72021" stroke="#94A3B8" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
                         </a>
-                        <a href="#" class="d-flex align-items-center public-view border-bottom  delete-btn" data-bs-toggle="modal" data-bs-target="#myModal">
+                        <a href="javascript:;" class="d-flex align-items-center public-view border-bottom  delete-btn" data-bs-toggle="modal" data-bs-target="#myModal">
                             <h6>Delete Account</h6>
                             <svg class="ms-auto" width="7" height="14" viewBox="0 0 7 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M0.939941 12.2802L5.28661 7.93355C5.79994 7.42021 5.79994 6.58021 5.28661 6.06688L0.939941 1.72021" stroke="#94A3B8" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
@@ -162,3 +162,40 @@
         </div>
     </div>
 </section>
+
+
+<!-- ========== delete-model ========== -->
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog delete-model-wrap">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="delete-icon">
+                    <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 22.5C17.5 22.5 22 18 22 12.5C22 7 17.5 2.5 12 2.5C6.5 2.5 2 7 2 12.5C2 18 6.5 22.5 12 22.5Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M12 8.5V13.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M11.9946 16.5H12.0036" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <form method="GET" action="{{route('account.delete')}}" id="DeleteAccount">
+                    <div class="contents">
+                        <h4>Delete Account</h4>
+                        <p>Are you sure want to delete your account? You will lose all your data, photos, messages. and
+                            can’t be recovered.</p>
+                        <p>Please confirm by typing <strong>“DELETE”</strong> in the text box below then tapping
+                            Confirm.</p>
+                        <input type="text" placeholder="DELETE" name="type_word" id="type_word">
+                    </div>
+                    <div class="d-flex justify-content-between gap-3">
+                        <button class="cmn-btn cancel-btn" type="button">Cancel</button>
+                        <button class="cmn-btn confirm-btn loaderbtn" id="DeleteBtn" type="submit">Delete Account</button>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>

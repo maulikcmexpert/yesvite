@@ -160,6 +160,7 @@ class AuthController extends Controller
                     Cookie::forget('email');
                     Cookie::forget('password');
                 }
+                event(new \App\Events\UserRegistered($user));
                 toastr()->success('Logged in successfully!');
                 return redirect()->route('home');
             } else {

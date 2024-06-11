@@ -3929,20 +3929,14 @@ class ApiControllerv2 extends Controller
             $total_page = ceil($groupCount / 10);
 
             $groupList = Group::select('id', 'name')
-                ->withCount('groupMembers')
+                ->withCount('groupMembers as members_count')
                 ->where('user_id', $user->id)
                 ->where('name', 'like', "%$search%")
                 ->paginate("10", ['*'], 'page', $page);
 
-            $groupListArr = [];
 
-            foreach ($groupList as $value) {
-                $group['id'] = $value->id;
-                $group['name'] = $value->name;
-                $group['member_count'] = $value->group_members_count;
-                $groupListArr[] = $group;
-            }
-            return response()->json(['status' => 1, 'message' => 'group created successfully', 'total_page' => $total_page, 'data' => $groupListArr]);
+
+            return response()->json(['status' => 1, 'message' => 'group created successfully', 'total_page' => $total_page, 'data' => $groupList]);
         } catch (QueryException $e) {
             return response()->json(['status' => 0, 'message' => 'Db error']);
         } catch (Exception $e) {
