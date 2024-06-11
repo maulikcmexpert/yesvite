@@ -25,7 +25,7 @@ class ProfessionalUserController extends Controller
 
         if ($request->ajax()) {
 
-            $data = User::where('account_type', '1')->orderBy('id', 'desc');
+            $data = User::where(['account_type' => '1', 'app_user' => '1'])->orderBy('id', 'desc');
 
             return Datatables::of($data)
 
