@@ -219,6 +219,7 @@ class ProfileController extends Controller
 
         $file = $request->file('file');
 
+
         $user = Auth::guard('web')->user();
         $imageData =   asset('storage/profile/' . $user->profile);
         if (!empty($file)) {
@@ -362,7 +363,7 @@ class ProfileController extends Controller
     public function profilePrivacy()
     {
         $id = decrypt(session()->get('user')['id']);
-        $user = User::withCount(
+        $user = User::with('user_profile_privacy')->withCount(
 
             [
                 'event' => function ($query) {
@@ -370,8 +371,8 @@ class ProfileController extends Controller
                 }, 'event_post' => function ($query) {
                     $query->where('post_type', '1');
                 },
-                'event_post_comment',
-                'user_profile_privacy'
+                'event_post_comment'
+
             ]
         )->findOrFail($id);
         $title = 'Profile Privacy';
@@ -379,6 +380,29 @@ class ProfileController extends Controller
         $js = ['profile'];
         $user['profile'] = ($user->profile != null) ? asset('storage/profile/' . $user->profile) : asset('storage/profile/no_profile.png');
         $user['bg_profile'] = ($user->bg_profile != null) ? asset('storage/bg_profile/' . $user->bg_profile) : asset('assets/front/image/Frame 1000005835.png');
+
+        if ($user->user_profile_privacy->isNotEmpty()) {
+
+            foreach ($user->user_profile_privacy as $value) {
+                if ($value->profile_privacy == 'gender') {
+
+                    $user['gender'] = $value->status;
+                }
+
+                if ($value->profile_privacy == 'photo') {
+
+                    $user['photo'] = $value->status;
+                }
+                if ($value->profile_privacy == 'location') {
+
+                    $user['location'] = $value->status;
+                }
+                if ($value->profile_privacy == 'event_stat') {
+
+                    $user['event_stat'] = $value->status;
+                }
+            }
+        }
         return view('layout', compact(
             'title',
             'page',
@@ -390,41 +414,56 @@ class ProfileController extends Controller
     public function updateProfilePrivacy(Request $request)
     {
 
+        try {
+            $user = Auth::guard('web')->user();
 
-        $user = Auth::guard('web')->user();
+            $user->visible = $request->visible;
+            $user->save();
 
-        $user->visible = $request->visible;
-        $user->save();
+            $checkProfilePrivacy = UserProfilePrivacy::where('user_id', $user->id)->count();
 
-        $checkProfilePrivacy = UserProfilePrivacy::where('user_id', $user->id)->count();
-
-        if ($checkProfilePrivacy == 0) {
-            foreach ($request->profile_privacy as $key => $value) {
-                $setPrivacyData = new UserProfilePrivacy();
-                $setPrivacyData->profile_privacy = $key;
-                $setPrivacyData->status = $value;
-                $setPrivacyData->user_id = $user->id;
-                $setPrivacyData->save();
-            }
-        } else {
-            foreach ($request->profile_privacy as $key => $value) {
-                $setUpdatePrivacyData = UserProfilePrivacy::where(['user_id' => $user->id, 'profile_privacy' => $key])->first();
-                if ($setUpdatePrivacyData != null) {
-                    $setUpdatePrivacyData->status = $value;
-                    $setUpdatePrivacyData->save();
-                } else {
-                    $setUpdatePrivacyData = new UserProfilePrivacy();
-                    $setUpdatePrivacyData->profile_privacy = $key;
-                    $setUpdatePrivacyData->status = $value;
-                    $setUpdatePrivacyData->user_id = $user->id;
-                    $setUpdatePrivacyData->save();
+            if ($checkProfilePrivacy == 0) {
+                foreach ($request->profile_privacy as $key => $value) {
+                    $setPrivacyData = new UserProfilePrivacy();
+                    $setPrivacyData->profile_privacy = $key;
+                    $setPrivacyData->status = $value;
+                    $setPrivacyData->user_id = $user->id;
+                    $setPrivacyData->save();
+                }
+            } else {
+                foreach ($request->profile_privacy as $key => $value) {
+                    $setUpdatePrivacyData = UserProfilePrivacy::where(['user_id' => $user->id, 'profile_privacy' => $key])->first();
+                    if ($setUpdatePrivacyData != null) {
+                        $setUpdatePrivacyData->status = $value;
+                        $setUpdatePrivacyData->save();
+                    } else {
+                        $setUpdatePrivacyData = new UserProfilePrivacy();
+                        $setUpdatePrivacyData->profile_privacy = $key;
+                        $setUpdatePrivacyData->status = $value;
+                        $setUpdatePrivacyData->user_id = $user->id;
+                        $setUpdatePrivacyData->save();
+                    }
                 }
             }
-        }
-        return response()->json([
-            'status' => 1,
-            'message' => "Profile Privacy updated successfully",
+            return response()->json([
+                'status' => 1,
+                'message' => "Profile Privacy updated successfully",
 
-        ]);
+            ]);
+        } catch (QueryException $e) {
+            DB::Rollback();
+            return response()->json([
+                'status' => 0,
+                'message' => "db error",
+
+            ]);
+        } catch (Exception  $e) {
+
+            return response()->json([
+                'status' => 0,
+                'message' => "something went wrong",
+
+            ]);
+        }
     }
 }
