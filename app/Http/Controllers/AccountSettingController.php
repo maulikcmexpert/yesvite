@@ -37,6 +37,7 @@ class AccountSettingController extends Controller
         $formatted_date = $date->format('F, Y');
         $user['join_date'] = $formatted_date;
         $user['photo_via_wifi'] = $user->photo_via_wifi;
+        $user['show_profile_photo_only_frds'] = $user->show_profile_photo_only_frds;
 
         return view('layout', compact(
             'title',
@@ -57,6 +58,18 @@ class AccountSettingController extends Controller
                 return response()->json([
                     'status' => 1,
                     'message' => "Upload photos only via Wi-Fi changed",
+
+                ]);
+            }
+        }
+
+        if ($request->setting == 'show_profile_photo_only_frds') {
+            $user->show_profile_photo_only_frds = $request->value;
+            if ($user->save()) {
+
+                return response()->json([
+                    'status' => 1,
+                    'message' => "Show profile photo only to friends changed",
 
                 ]);
             }

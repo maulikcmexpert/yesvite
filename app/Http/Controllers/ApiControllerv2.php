@@ -4555,6 +4555,8 @@ class ApiControllerv2 extends Controller
                                 continue;
                             }
 
+
+
                             EventInvitedUser::create([
 
                                 'event_id' => $eventData['event_id'],
@@ -4564,6 +4566,14 @@ class ApiControllerv2 extends Controller
                                 'user_id' => $value['user_id']
 
                             ]);
+                        }
+
+                        $userSelectedGuest =  collect($eventData['invited_user_id'])->pluck('user_id')->toArray();
+                        foreach ($getalreadyInviteduser as $value) {
+
+                            if (!in_array($value, $userSelectedGuest)) {
+                                EventInvitedUser::where('user_id', $value)->delete();
+                            }
                         }
                     }
 

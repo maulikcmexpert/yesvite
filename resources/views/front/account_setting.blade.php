@@ -68,7 +68,7 @@
                                 <div class="button-cover">
                                     <div class="button r" id="button-1">
 
-                                        <input type="checkbox" name="photo_via_wifi" value="1" id="photo_via_wifi" class="checkbox" />
+                                        <input type="checkbox" name="photo_via_wifi" value="1" id="photo_via_wifi" class="checkbox" {{($user->photo_via_wifi == '1')?'checked':''}} />
                                         <div class="knobs"></div>
                                         <div class="layer"></div>
                                     </div>
@@ -81,7 +81,7 @@
                                 <div class="button-cover">
                                     <div class="button r" id="button-1">
 
-                                        <input type="checkbox" name="show_profile_photo_only_frds" value="1" id="show_profile_photo_only_frds" class="checkbox" />
+                                        <input type="checkbox" name="show_profile_photo_only_frds" value="1" id="show_profile_photo_only_frds" class="checkbox" {{($user->show_profile_photo_only_frds == '1')?'checked':''}} />
                                         <div class="knobs"></div>
                                         <div class="layer"></div>
                                     </div>
