@@ -133,6 +133,10 @@ h1.ProductTitle{
     color: #fff;
 }
 
+[class*=sidebar-dark-] .nav-sidebar>.nav-item>.nav-link.active{
+    color: #fff !important;
+}
+
 [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active,
 [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active, 
 [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active:focus, [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active:hover,
