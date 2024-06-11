@@ -157,6 +157,8 @@ function sendNotification($notificationType, $postData)
                                 'event_id' => $postData['event_id'],
                                 'event_name' => $value->event->event_name,
                                 'event_wall' => $value->event->event_settings->event_wall,
+                                'guest_list_visible_to_guests' => $value->event->event_settings->guest_list_visible_to_guests,
+                                'event_potluck' => $value->event->event_settings->podluck
                             ];
 
                             $checkNotificationSetting = checkNotificationSetting($value->user_id);
@@ -256,11 +258,12 @@ function sendNotification($notificationType, $postData)
                             $notificationData = [
                                 'message' => $notification_message,
                                 'type' => $notificationType,
-
                                 'notification_image' => $push_notification_message,
                                 'event_id' => $postData['event_id'],
                                 'event_name' => $value->event->event_name,
                                 'event_wall' => $value->event->event_settings->event_wall,
+                                'guest_list_visible_to_guests' => $value->event->event_settings->guest_list_visible_to_guests,
+                                'event_potluck' => $value->event->event_settings->podluck
                             ];
 
                             if ($value->notification_on_off == '1') {
@@ -948,7 +951,9 @@ function sendNotification($notificationType, $postData)
                         'post_id' => "",
                         'event_id' => $postData['event_id'],
                         'event_name' => $getPostOwnerId->event_name,
-                        'event_wall' => $getPostOwnerId->event_settings->event_wall
+                        'event_wall' => $getPostOwnerId->event_settings->event_wall,
+                        'guest_list_visible_to_guests' => $getPostOwnerId->event_settings->guest_list_visible_to_guests,
+                        'event_potluck' => $getPostOwnerId->event_settings->podluck
                     ];
 
                     $checkNotificationSetting = checkNotificationSetting($getPostOwnerId->user_id);
@@ -1016,7 +1021,9 @@ function sendNotification($notificationType, $postData)
                         'notification_image' => $notification_image,
                         'event_id' => $postData['event_id'],
                         'event_name' => $getPostOwnerId->event_name,
-                        'event_wall' => $getPostOwnerId->event_settings->event_wall
+                        'event_wall' => $getPostOwnerId->event_settings->event_wall,
+                        'guest_list_visible_to_guests' => $getPostOwnerId->event_settings->guest_list_visible_to_guests,
+                        'event_potluck' => $getPostOwnerId->event_settings->podluck
                     ];
                     $checkNotificationSetting = checkNotificationSetting($getPostOwnerId->user_id);
 

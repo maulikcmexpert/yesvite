@@ -455,6 +455,7 @@ class ApiControllerv2 extends Controller
                     $eventDetail['message_to_guests'] = $value->message_to_guests;
                     $eventDetail['event_wall'] = $value->event_settings->event_wall;
                     $eventDetail['guest_list_visible_to_guests'] = $value->event_settings->guest_list_visible_to_guests;
+                    $eventDetail['event_potluck'] = $value->event_settings->podluck;
                     $eventDetail['adult_only_party'] = $value->event_settings->adult_only_party;
                     $eventDetail['post_time'] =  $this->setpostTime($value->updated_at);
 
@@ -772,6 +773,7 @@ class ApiControllerv2 extends Controller
                         $eventDetail['message_to_guests'] = $value->message_to_guests;
                         $eventDetail['event_wall'] = $value->event_settings->event_wall;
                         $eventDetail["guest_list_visible_to_guests"] = $value->event_settings->guest_list_visible_to_guests;
+                        $eventDetail['event_potluck'] = $value->event_settings->podluck;
                         $eventDetail['adult_only_party'] = $value->event_settings->adult_only_party;
                         $eventDetail['host_name'] = $value->hosted_by;
                         $eventDetail['allow_limit'] = $value->event_settings->allow_limit;
@@ -1010,6 +1012,7 @@ class ApiControllerv2 extends Controller
                         $eventDetail['host_profile'] = empty($value->event->user->profile) ? "" : asset('public/storage/profile/' . $value->event->user->profile);
                         $eventDetail['event_wall'] = $value->event->event_settings->event_wall;
                         $eventDetail["guest_list_visible_to_guests"] = $value->event->event_settings->guest_list_visible_to_guests;
+                        $eventDetail['event_potluck'] = $value->event->event_settings->podluck;
                         $eventDetail['adult_only_party'] = $value->event->event_settings->adult_only_party;
                         $eventDetail['host_name'] = $value->event->hosted_by;
                         $eventDetail['is_past'] = ($value->event->end_date < date('Y-m-d')) ? true : false;
@@ -1245,6 +1248,7 @@ class ApiControllerv2 extends Controller
                         $eventDetail['host_profile'] = empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile);
                         $eventDetail['event_wall'] = $value->event_settings->event_wall;
                         $eventDetail["guest_list_visible_to_guests"] = $value->event_settings->guest_list_visible_to_guests;
+                        $eventDetail['event_potluck'] = $value->event_settings->podluck;
                         $eventDetail['adult_only_party'] = $value->event_settings->adult_only_party;
                         $eventDetail['host_name'] = $value->hosted_by;
                         $eventDetail['is_past'] = ($value->end_date < date('Y-m-d')) ? true : false;
@@ -1504,6 +1508,7 @@ class ApiControllerv2 extends Controller
                         $eventDetail['host_profile'] = empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile);
                         $eventDetail['event_wall'] = $value->event_settings->event_wall;
                         $eventDetail["guest_list_visible_to_guests"] = $value->event_settings->guest_list_visible_to_guests;
+                        $eventDetail['event_potluck'] = $value->event_settings->podluck;
                         $eventDetail['adult_only_party'] = $value->event_settings->adult_only_party;
                         $eventDetail['host_name'] = $value->hosted_by;
                         $eventDetail['is_past'] = true;
@@ -1755,6 +1760,7 @@ class ApiControllerv2 extends Controller
                         $eventDetail['host_profile'] = empty($value->event->user->profile) ? "" : asset('public/storage/profile/' . $value->event->user->profile);
                         $eventDetail['event_wall'] = $value->event->event_settings->event_wall;
                         $eventDetail["guest_list_visible_to_guests"] = $value->event->event_settings->guest_list_visible_to_guests;
+                        $eventDetail['event_potluck'] = $value->event->event_settings->podluck;
                         $eventDetail['adult_only_party'] = $value->event->event_settings->adult_only_party;
                         $eventDetail['host_name'] = $value->event->hosted_by;
                         $eventDetail['is_past'] = ($value->event->end_date < date('Y-m-d')) ? true : false;
