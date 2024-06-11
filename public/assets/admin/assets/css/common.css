@@ -129,7 +129,7 @@ h1.ProductTitle{
     background-color: var(--sidebarNavActive);
 }
 
-.pills .nav-link:hover p{
+.pills .nav-link:hover{
     color: #fff;
 }
 
