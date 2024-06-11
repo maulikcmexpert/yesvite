@@ -3920,7 +3920,7 @@ class ApiControllerv2 extends Controller
             if (isset($input['search'])) {
                 $search = $input['search'];
             }
-
+            dd($user->id);
             $groupCount = Group::select('id', 'name')
                 ->where('user_id', $user->id)
 
