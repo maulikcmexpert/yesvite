@@ -3939,7 +3939,7 @@ class ApiControllerv2 extends Controller
             foreach ($groupList as $value) {
                 $group['id'] = $value->id;
                 $group['name'] = $value->name;
-                $group['member_count'] = $value->group_members_count;
+                $group['member_count'] = $value->members_count;
                 $groupListArr[] = $group;
             }
             return response()->json(['status' => 1, 'message' => 'group created successfully', 'total_page' => $total_page, 'data' => $groupListArr]);
