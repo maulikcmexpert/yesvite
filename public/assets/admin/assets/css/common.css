@@ -2,9 +2,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
 :root{
-    --primaryColor:#E73080;
+    --primaryColor:#000;
     --ButtonColor:#ec5b99;
-    --sidebarNavActive:rgb(231, 50, 128, 0.4);
+    --sidebarNavActive:rgb(0 0 0 / 100%);
 }
 
 label.error{
@@ -98,15 +98,16 @@ h1.ProductTitle{
 
 
 [class*=sidebar-dark-]{
-    background-color: #272727 !important;
+    background-color: #ffffff !important;
 }
 
 .sidebar .nav i{
     color: var(--primaryColor);
+    /* color: #6a6a6a; */
 }
 
 [class*=sidebar-dark-] .sidebar a{
-    color: #fff !important;
+    color: #000 !important;
 }
 
 .sidebar .form-inline,
@@ -126,6 +127,10 @@ h1.ProductTitle{
 .nav-pills .nav-link:hover
 {
     background-color: var(--sidebarNavActive);
+}
+
+.pills .nav-link:hover p{
+    color: #fff;
 }
 
 [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active,
