@@ -2149,7 +2149,7 @@ class ApiControllerv2 extends Controller
 
 
                 $image->move(public_path('storage/profile'), $imageName);
-                $user->profile = $imageName;
+                //     $user->profile = $imageName;
             }
 
 
@@ -2173,7 +2173,7 @@ class ApiControllerv2 extends Controller
 
 
 
-                $user->bg_profile = $bgimageName;
+                //$user->bg_profile = $bgimageName;
             }
 
             $user->save();
