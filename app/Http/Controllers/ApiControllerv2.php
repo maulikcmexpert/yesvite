@@ -2130,7 +2130,7 @@ class ApiControllerv2 extends Controller
             }
 
             $user = Auth::guard('api')->user();
-            $previmage = explode('.', $user->profile);
+
             if (!empty($request->profile)) {
 
                 if ($user->profile != "" || $user->profile != NULL) {
@@ -2145,7 +2145,7 @@ class ApiControllerv2 extends Controller
                 $image = $request->profile;
 
 
-                $imageName = $previmage[0] . '.' . $image->getClientOriginalExtension();
+                $imageName = $user->id . '_profile.' . $image->getClientOriginalExtension();
 
 
                 $image->move(public_path('storage/profile'), $imageName);
@@ -2167,7 +2167,7 @@ class ApiControllerv2 extends Controller
 
                 $bgimage = $request->bg_profile;
 
-                $bgimageName = time() . '_' . $bgimage->getClientOriginalName();
+                $bgimageName = $user->id . '_bg_profile' . $bgimage->getClientOriginalName();
 
                 $bgimage->move(public_path('storage/bg_profile'), $bgimageName);
 
