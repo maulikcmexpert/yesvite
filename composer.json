@@ -19,6 +19,7 @@
         "propaganistas/laravel-phone": "^5.3",
         "sendgrid/sendgrid": "^8.1",
         "stevebauman/location": "^7.1",
+        "twilio/sdk": "^8.1",
         "yajra/laravel-datatables-oracle": "^10.11",
         "yoeunes/toastr": "^2.3"
     },

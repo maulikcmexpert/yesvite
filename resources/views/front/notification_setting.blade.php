@@ -54,12 +54,13 @@
                                     <h5>{{ $type}}</h5>
                                 </div>
                                 <div class="right-note">
+
+                                    <input type="hidden" class="type" name="type" value="{{ $value->type }}">
                                     <div>
-                                        <input type="hidden" value="{{ $value->type }}">
-                                        <input class="form-check-input" type="checkbox" name="notificationSetting[$value->type][push]" {{($value->push== '1')?'checked':''}}>
+                                        <input class="form-check-input push" type="checkbox" value="1" name="notificationSetting[$value->type][push]" {{($value->push== '1')?'checked':''}}>
                                     </div>
                                     <div>
-                                        <input class="form-check-input" type="checkbox" name="notificationSetting[$value->type][email]" {{($value->email== '1')?'checked':''}}>
+                                        <input class="form-check-input email" type="checkbox" value="1" name="notificationSetting[$value->type][email]" {{($value->email== '1')?'checked':''}}>
                                     </div>
                                 </div>
                             </div>

@@ -160,6 +160,7 @@ Route::prefix('user/v1/')->middleware('checkUser')->group(function () {
 Route::get('send_thanks', [ApiControllerv2::class, 'sendThanks']);
 Route::get('install_android_app', [ApiControllerv2::class, 'installAndroidApp']);
 Route::get('install_ios_app', [ApiControllerv2::class, 'installIosApp']);
+Route::get('sendSMS', [ApiControllerv2::class, 'sendSMS']);
 
 Route::prefix('user/v2/')->middleware('checkUser')->group(function () {
 

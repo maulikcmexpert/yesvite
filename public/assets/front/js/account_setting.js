@@ -74,4 +74,75 @@ $(document).ready(function () {
             form.submit();
         },
     });
+
+    //  manage notification setting //
+
+    function makeNotificationAjaxCall(setting, type, value) {
+        $.ajax({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            url: base_url + "account_settings/update_notification_setting", // Replace with your server endpoint URL
+            method: "POST",
+            data: {
+                type: type,
+                setting: setting,
+                value: value,
+            },
+            success: function (response) {
+                if (response.status == 1) {
+                    toastr.success(response.message);
+                } else {
+                    toastr.error(response.message);
+                }
+            },
+        });
+    }
+    $(document).on("change", ".push", function () {
+        var push = "0";
+
+        var isPushChecked = $(this).prop("checked");
+        if (isPushChecked) {
+            push = $(this).val();
+        }
+        var type = $(this).closest(".right-note").find(".type").val();
+
+        makeNotificationAjaxCall("push", type, push);
+    });
+
+    $(document).on("change", ".email", function () {
+        var email = "0";
+
+        var isPushChecked = $(this).prop("checked");
+        if (isPushChecked) {
+            email = $(this).val();
+        }
+        var type = $(this).closest(".right-note").find(".type").val();
+
+        makeNotificationAjaxCall("email", type, email);
+    });
+
+    //  message privacy //
+
+    $("#messagePrivacySave").on("click", function () {
+        loaderHandle("#messagePrivacySave", "Saving");
+        var formData = $("#messagePrivacy").serialize();
+        $.ajax({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            url: base_url + "account_settings/update_message_privacy",
+            type: "POST",
+            data: formData,
+
+            success: function (response) {
+                if (response.status == 1) {
+                    removeLoaderHandle("#messagePrivacySave", "Save Changes");
+                    toastr.success(response.message);
+                } else {
+                    toastr.error(response.message);
+                }
+            },
+        });
+    });
 });
