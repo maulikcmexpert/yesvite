@@ -3913,9 +3913,9 @@ class ApiControllerv2 extends Controller
 
         try {
 
-            $page = isset($input['page']);
+            $page = isset($input['page']) ? $input['page'] : "1";
 
-            $pages = ($page != "") ? $page : 1;
+            $pages = ($page != "") ? $page : "1";
             $search = "";
             if (isset($input['search'])) {
                 $search = $input['search'];
