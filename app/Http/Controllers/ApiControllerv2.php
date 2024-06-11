@@ -3932,7 +3932,7 @@ class ApiControllerv2 extends Controller
                 ->withCount('groupMembers as members_count')
                 ->where('user_id', $user->id)
                 ->where('name', 'like', "%$search%")
-                ->paginate("10", ['*'], 'page', $page);
+                ->paginate(10, ['*'], 'page', $page);
 
 
             $groupListArr = [];
