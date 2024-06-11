@@ -3928,11 +3928,13 @@ class ApiControllerv2 extends Controller
                 ->count();
             $total_page = ceil($groupCount / 10);
 
+
+
             $groupList = Group::select('id', 'name')
                 ->withCount('groupMembers as members_count')
                 ->where('user_id', $user->id)
                 ->where('name', 'like', "%$search%")
-                ->paginate(10, ['*'], 'page', $page);
+                ->paginate("10", ['*'], 'page', $pages);
 
 
             $groupListArr = [];
