@@ -3935,8 +3935,14 @@ class ApiControllerv2 extends Controller
                 ->paginate("10", ['*'], 'page', $page);
 
 
-
-            return response()->json(['status' => 1, 'message' => 'group created successfully', 'total_page' => $total_page, 'data' => $groupList]);
+            $groupListArr = [];
+            foreach ($groupList as $value) {
+                $group['id'] = $value->id;
+                $group['name'] = $value->name;
+                $group['member_count'] = $value->group_members_count;
+                $groupListArr[] = $group;
+            }
+            return response()->json(['status' => 1, 'message' => 'group created successfully', 'total_page' => $total_page, 'data' => $groupListArr]);
         } catch (QueryException $e) {
             return response()->json(['status' => 0, 'message' => 'Db error']);
         } catch (Exception $e) {
