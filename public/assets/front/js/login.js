@@ -14,6 +14,9 @@ $("#loginForm").validate({
             required: "Please enter Password",
             minlength: "Password must be at least 8 characters",
         },
+        submitHandler: function (form) {
+            loaderHandle("#loginUser", "Signing..");
+        },
     },
 });
 $("#registerPost").validate({

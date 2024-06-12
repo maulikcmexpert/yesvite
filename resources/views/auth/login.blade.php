@@ -51,7 +51,7 @@
                     </div>
                     <a href="#">Forgot Password</a>
                 </div>
-                <button type="submit" class="btn btn-primary">Sign In</button>
+                <button type="submit" class="btn btn-primary loaderbtn" id="loginUser">Sign In</button>
             </form>
             <div class="social-links">
                 <a href="{{ url('login/facebook') }}">

@@ -90,7 +90,7 @@ Route::group(['middleware' => adminAuth::Class], function () {
 
 Route::controller(Auth::class)->group(function () {
 
-    Route::get('/login', function () {
+    Route::get('/', function () {
 
         $data['page'] = 'admin/auth/login';
 

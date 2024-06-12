@@ -119,7 +119,7 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
-                                    <button type="submit" class="btn btn-primary">Create account</button>
+                                    <button type="submit" class="btn btn-primary loaderbtn" id="createUser">Create account</button>
                                 </div>
                             </div>
                         </form>
@@ -251,7 +251,7 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
-                                    <button type="submit" class="btn btn-primary">Create account</button>
+                                    <button type="submit" class="btn btn-primary loaderbtn" id="createProffesionalUser">Create account</button>
                                 </div>
                             </div>
                         </form>
