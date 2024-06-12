@@ -2,9 +2,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
 :root{
-    --primaryColor:#000;
-    --ButtonColor:#000;
-    --sidebarNavActive:rgb(0 0 0 / 100%);
+    --primaryColor:#EA555C;
+    --secondryColor: #000000;
+    --ButtonColor:#EA555C;
+    --sidebarNavActive:rgba(234, 85, 92, 100%);
+    --borderColor: #000000;
 }
 
 label.error{
@@ -71,7 +73,7 @@ h1.ProductTitle{
 }
 
 .table td{
-    padding: 8px 10px !important;
+    padding: 5px 10px !important;
     vertical-align: middle !important;
     font-size: 14px !important;
 }
@@ -143,7 +145,7 @@ h1.ProductTitle{
 [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active:focus, [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active:hover,
 [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link:hover
 {
-    background-color: #000;
+    background-color: var(--primaryColor);
 }
 
 [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active .dot,
@@ -281,12 +283,16 @@ table.table th{
 }
 
 table.table{
-    border-spacing: 0 10px !important;
+    border-spacing: 0 0px !important;
+}
+
+table.table tbody tr.odd{
+    background-color: rgb(233 84 94 / 8%) !important;
 }
 
 table.table tbody tr{
     /* box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; */
-    background-color: rgb(127 116 116 / 20%) !important;
+    background-color: transparent !important;
     margin-bottom: 10px;
     border-spacing: 0 10px;
 }
@@ -298,7 +304,7 @@ table.table tbody tr{
 }
 
 .form-control{
-    border-color: var(--ButtonColor) !important;
+    border-color: var(--inputBorder) !important;
 }
 
 /* input:focus{
