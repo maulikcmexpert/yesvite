@@ -149,7 +149,7 @@ h1.ProductTitle{
 [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active .dot,
 [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link:hover .dot
 {
-   color: #fff;
+   background-color: #fff;
 }
 
 .nav-pills .nav-link.active i,
