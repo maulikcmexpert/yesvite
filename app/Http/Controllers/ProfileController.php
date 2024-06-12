@@ -23,6 +23,8 @@ use Illuminate\Foundation\Exceptions\Handler as Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use App\Rules\PhoneNumberExists;
+use Illuminate\Validation\Rule;
+
 
 class ProfileController extends Controller
 {
@@ -155,7 +157,7 @@ class ProfileController extends Controller
             $validator = Validator::make($request->all(), [
                 'firstname' => 'required|string', // max 2MB
                 'lastname' => 'required|string', // max 2MB
-                'phone_number' => ['present', 'nullable', 'numeric', 'regex:/^\d{10,15}$/', new PhoneNumberExists],
+                'phone_number' => ['present', 'nullable', 'numeric', 'regex:/^\d{10,15}$/', Rule::unique('users')->ignore(decrypt($request->id))],
                 'zip_code' => 'required|numeric|regex:/^\d{5,9}$/', // max 2MB
 
             ], [
