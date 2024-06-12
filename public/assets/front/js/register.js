@@ -134,7 +134,7 @@ $(document).ready(function () {
             },
             cpassword: {
                 required: true,
-                equalTo: "#password",
+                equalTo: "#businesspassword",
             },
         },
         messages: {

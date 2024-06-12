@@ -23,10 +23,10 @@
         <div class="register-wrap login-form-wrap">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="#contact" aria-selected="true">Personal</button>
+                    <button class="nav-link userRegister active" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="#contact" aria-selected="true">Personal</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="phone-tab" data-bs-toggle="tab" data-bs-target="#phone" type="button" role="tab" aria-controls="phone" aria-selected="false">Business</button>
+                    <button class="nav-link businessRegister" id="phone-tab" data-bs-toggle="tab" data-bs-target="#phone" type="button" role="tab" aria-controls="phone" aria-selected="false">Business</button>
                 </li>
 
             </ul>
@@ -35,7 +35,7 @@
                     <div class="">
                         <form method="POST" action="{{route('store.register')}}" id="register">
                             @csrf
-                            <input type="hidden" name="account_type" value="0">
+                            <input type="hidden" id="account_type" name="account_type" value="0">
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                                     <div class="input-form">
@@ -168,7 +168,7 @@
                     <div class="">
                         <form method="POST" action="{{route('store.register')}}" id="business">
                             @csrf
-                            <input type="hidden" name="account_type" value="1">
+
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                                     <div class="input-form">

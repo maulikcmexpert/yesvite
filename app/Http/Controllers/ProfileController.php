@@ -30,6 +30,8 @@ class ProfileController extends Controller
     public function index()
     {
 
+
+
         $title = 'Profile';
         $page = 'front.profile';
         $id = decrypt(session()->get('user')['id']);

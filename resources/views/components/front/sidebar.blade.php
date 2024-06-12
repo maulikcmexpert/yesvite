@@ -152,7 +152,7 @@
                     <div class="users-data">
                         <div class="d-flex align-items-start">
                             <div class="contact-img">
-                                <img src="{{$profileData->profile}}" alt="contact-img">
+                                <img src="{{$profileData->profile}}" alt="contact-img" class="UserImg">
                             </div>
                             <div class="text-start">
                                 <h5>{{$profileData->firstname.' '.$profileData->lastname}}</h5>
@@ -163,15 +163,16 @@
                         </div>
                         <a href="{{route('profile.account_settings')}}" class="edit-contact">Account Settings</a>
                     </div>
+                    @if(Session::has('secondary_user'))
                     <div class="users-data">
                         <div class="d-flex align-items-start">
                             <div class="contact-img">
-                                <img src="./assets/image/user-img.svg" alt="contact-img">
+                                <img src="{{Session::get('secondary_user')['secondary_profile']}}" alt="contact-img">
                             </div>
                             <div class="text-start">
-                                <h5>Silvia Alegra</h5>
+                                <h5>{{Session::get('secondary_user')['secondary_username']}}</h5>
                                 <div>
-                                    <a href="mailto:silvia@gmail.com">silvia@gmail.com</a>
+                                    <a href="mailto:{{Session::get('secondary_user')['secondary_email']}}">{{Session::get('secondary_user')['secondary_email']}}</a>
                                 </div>
                             </div>
                         </div>
@@ -181,6 +182,7 @@
                             </svg>
                         </span>
                     </div>
+                    @endif
                 </div>
                 <div class="text-end mt-2">
                     <a href="{{route('auth.add_account')}}" class="cmn-btn"><svg class="me-1" width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
