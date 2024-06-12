@@ -30,9 +30,9 @@ class ProfileController extends Controller
     public function index()
     {
 
-        $id = decrypt(session()->get('user')['id']);
         $title = 'Profile';
         $page = 'front.profile';
+        $id = decrypt(session()->get('user')['id']);
 
         $user = User::withCount(
 

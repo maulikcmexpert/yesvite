@@ -30,7 +30,7 @@ use App\Http\Controllers\{
 // });
 Route::get('/', [HomeFrontController::class, 'index'])->name('front.home');
 Route::get('about-us', [AboutController::class, 'index'])->name('about');
-Route::get('contact', [ContactController::class, 'index'])->name('contact');
+// Route::get('contact', [ContactController::class, 'index'])->name('contact');
 
 Route::middleware('checkUserExist')->group(function () {
 
@@ -61,6 +61,8 @@ Route::middleware('checkUserExist')->group(function () {
 
     Route::post('upload',  [ProfileController::class, 'uploadProfile'])->name('profile.upload');
     Route::post('upload_bg_profile',  [ProfileController::class, 'uploadBgProfile'])->name('profile.uploadbgprofile');
+
+    Route::get('contact',  [ContactController::class, 'index'])->name('profile.contact');
 });
 
 Route::controller(AuthController::class)->group(function () {
