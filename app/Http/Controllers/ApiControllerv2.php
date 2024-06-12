@@ -104,7 +104,7 @@ use Illuminate\Database\Query\Builder;
 use App\Jobs\SendInvitationMailJob as sendInvitation;
 use stdClass;
 
-use Twilio\Rest\Client;
+
 
 class ApiControllerv2 extends Controller
 
@@ -134,28 +134,7 @@ class ApiControllerv2 extends Controller
 
 
 
-    public function sendSMS()
-    {
-        $receiverNumber = "+919875106793";
-        $message = "This is testing from ItSolutionStuff.com";
 
-        try {
-
-            $account_sid = env('ACCOUNT_SID');;
-            $auth_token = env("AUTH_TOKEN");
-            $twilio_number = env("TWILIO_NUMBER");
-
-            $client = new Client($account_sid, $auth_token);
-            $client->messages->create($receiverNumber, [
-                'from' => $twilio_number,
-                'body' => $message
-            ]);
-
-            dd('SMS Sent Successfully.');
-        } catch (Exception $e) {
-            dd("Error: " . $e->getMessage());
-        }
-    }
 
     public function sendThanks()
     {

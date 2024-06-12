@@ -20,6 +20,7 @@ use App\Models\EventPostImage;
 use App\Models\EventPostComment;
 use App\Models\UserNotificationType;
 use App\Mail\OwnInvitationEmail;
+use Twilio\Rest\Client;
 
 function getVideoDuration($filePath)
 {
@@ -1208,6 +1209,26 @@ function send_notification_FCM_and($deviceToken, $notifyData)
     return $result_noti;
 }
 
+
+function sendSMS($receiverNumber, $message)
+{
+    try {
+
+        $account_sid = env('ACCOUNT_SID');;
+        $auth_token = env("AUTH_TOKEN");
+        $twilio_number = env("TWILIO_NUMBER");
+
+        $client = new Client($account_sid, $auth_token);
+        $client->messages->create($receiverNumber, [
+            'from' => $twilio_number,
+            'body' => $message
+        ]);
+
+        dd('SMS Sent Successfully.');
+    } catch (Exception $e) {
+        dd("Error: " . $e->getMessage());
+    }
+}
 
 function dateDiffer($dateTime)
 {
