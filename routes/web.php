@@ -35,8 +35,10 @@ Route::get('about-us', [AboutController::class, 'index'])->name('about');
 Route::middleware('checkUserExist')->group(function () {
 
 
+    Route::get('add_account', [AuthController::class, 'addAccount'])->name('auth.add_account');
+    Route::post('check_add_account', [AuthController::class, 'checkAddAccount'])->name('auth.checkAddAccount');
     Route::get('/home', [HomeController::class, 'index'])->name('home');
-    Route::post('/import-csv',  [HomeController::class, 'importCSV'])->name('import.csv');
+    Route::post('/import-csv', [HomeController::class, 'importCSV'])->name('import.csv');
     Route::get('profile',  [ProfileController::class, 'index'])->name('profile');
     Route::get('profile/edit',  [ProfileController::class, 'edit'])->name('profile.edit');
     Route::get('profile/change_password',  [ProfileController::class, 'changePassword'])->name('profile.change_password');

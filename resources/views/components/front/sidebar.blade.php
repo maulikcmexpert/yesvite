@@ -183,10 +183,10 @@
                     </div>
                 </div>
                 <div class="text-end mt-2">
-                    <button class="cmn-btn"><svg class="me-1" width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <a href="{{route('auth.add_account')}}" class="cmn-btn"><svg class="me-1" width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M5.5026 0.833984V10.1673M0.835938 5.50065H10.1693" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
-                        Add Account</button>
+                        Add Account</a>
                 </div>
             </div>
         </div>
