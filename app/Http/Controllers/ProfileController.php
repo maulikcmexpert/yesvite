@@ -139,7 +139,7 @@ class ProfileController extends Controller
         $id = decrypt($request->input('id'));
 
         $exists = User::where('phone_number', $phone_number)->where('id', '!=', $id)->exists();
-        dd($exists);
+
         if ($exists) {
             return response()->json(false);
         } else {
