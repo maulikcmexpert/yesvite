@@ -94,9 +94,7 @@
                      <li class="nav-item {{ (Request::segment(1) == 'about-us')? 'active':'' }}">
                          <a class="nav-link" href="{{ route('about')}}">About</a>
                      </li>
-                     <!-- <li class="nav-item {{ (Request::segment(1) == 'contact')? 'active':'' }}">
-                         <a class="nav-link" href="{{ route('contact')}}">contact</a>
-                     </li> -->
+
                      <!-- <li class="nav-item">
                             
                         </li> -->
