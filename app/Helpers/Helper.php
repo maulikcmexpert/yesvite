@@ -20,6 +20,7 @@ use App\Models\EventPostImage;
 use App\Models\EventPostComment;
 use App\Models\UserNotificationType;
 use App\Mail\OwnInvitationEmail;
+use Twilio\Rest\Client;
 
 function getVideoDuration($filePath)
 {
@@ -157,6 +158,8 @@ function sendNotification($notificationType, $postData)
                                 'event_id' => $postData['event_id'],
                                 'event_name' => $value->event->event_name,
                                 'event_wall' => $value->event->event_settings->event_wall,
+                                'guest_list_visible_to_guests' => $value->event->event_settings->guest_list_visible_to_guests,
+                                'event_potluck' => $value->event->event_settings->podluck
                             ];
 
                             $checkNotificationSetting = checkNotificationSetting($value->user_id);
@@ -256,11 +259,12 @@ function sendNotification($notificationType, $postData)
                             $notificationData = [
                                 'message' => $notification_message,
                                 'type' => $notificationType,
-
                                 'notification_image' => $push_notification_message,
                                 'event_id' => $postData['event_id'],
                                 'event_name' => $value->event->event_name,
                                 'event_wall' => $value->event->event_settings->event_wall,
+                                'guest_list_visible_to_guests' => $value->event->event_settings->guest_list_visible_to_guests,
+                                'event_potluck' => $value->event->event_settings->podluck
                             ];
 
                             if ($value->notification_on_off == '1') {
@@ -408,58 +412,238 @@ function sendNotification($notificationType, $postData)
         foreach ($invitedusers as $key => $value) {
 
 
-            $postControl = PostControl::with('event_posts')->where(['event_id' => $postData['event_id'], 'user_id' => $value->user_id, 'post_control' => 'mute'])->get();
-            $postOwneruserId = [];
+            if ($postData['post_privacy'] == '1') {
+                $postControl = PostControl::with('event_posts')->where(['event_id' => $postData['event_id'], 'user_id' => $value->user_id, 'post_control' => 'mute'])->get();
+                $postOwneruserId = [];
 
-            if (!$postControl->isEmpty()) {
-                foreach ($postControl as $value) {
-                    $postOwneruserId[] = $value->event_posts->user_id;
+                if (!$postControl->isEmpty()) {
+                    foreach ($postControl as $value) {
+                        $postOwneruserId[] = $value->event_posts->user_id;
+                    }
+                }
+                if (in_array($postData['sender_id'], $postOwneruserId)) {
+                    continue;
+                }
+                if ($postData['sender_id'] == $value->user_id) {
+                    continue;
+                }
+                $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " upload new post";
+                $notification = new Notification;
+                $notification->event_id = $postData['event_id'];
+                $notification->post_id = $postData['post_id'];
+                $notification->user_id = $value->user_id;
+                $notification->notification_type = $notificationType;
+                $notification->sender_id = $postData['sender_id'];
+                $notification->notification_message = $notification_message;
+
+                if ($notification->save()) {
+
+                    $deviceData = Device::where('user_id', $value->id)->first();
+                    if (!empty($deviceData)) {
+                        $notificationImage = EventPostImage::where('event_post_id', $postData['post_id'])->first();
+                        $notification_image = "";
+                        if (!empty($notificationImage->post_image) && $notificationImage->post_image != NULL) {
+
+                            $notification_image = asset('pubilc/storage/post_image/' . $notificationImage->post_image);
+                        }
+                        $notificationData = [
+                            'message' => $notification_message,
+                            'type' => $notificationType,
+                            'notification_image' => $notification_image,
+                            'post_id' => $postData['post_id'],
+
+                        ];
+                        $checkNotificationSetting = checkNotificationSetting($value->user_id);
+
+                        if ((count($checkNotificationSetting) && $checkNotificationSetting['wall_post']['push'] == '1') && $value->notification_on_off == '1') {
+
+                            if ($deviceData->model == 'And') {
+
+                                send_notification_FCM_and($deviceData->device_token, $notificationData);
+                            }
+
+                            if ($deviceData->model == 'Ios') {
+
+                                send_notification_FCM($deviceData->device_token, $notificationData);
+                            }
+                        }
+                    }
                 }
             }
-            if (in_array($postData['sender_id'], $postOwneruserId)) {
-                continue;
-            }
-            if ($postData['sender_id'] == $value->user_id) {
-                continue;
-            }
-            $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " upload new post";
-            $notification = new Notification;
-            $notification->event_id = $postData['event_id'];
-            $notification->post_id = $postData['post_id'];
-            $notification->user_id = $value->user_id;
-            $notification->notification_type = $notificationType;
-            $notification->sender_id = $postData['sender_id'];
-            $notification->notification_message = $notification_message;
+            if ($postData['post_privacy'] == '2' && $value->rsvp_status == '1' &&  $value->rsvp_d == '1') {
 
-            if ($notification->save()) {
+                $postControl = PostControl::with('event_posts')->where(['event_id' => $postData['event_id'], 'user_id' => $value->user_id, 'post_control' => 'mute'])->get();
+                $postOwneruserId = [];
 
-                $deviceData = Device::where('user_id', $value->id)->first();
-                if (!empty($deviceData)) {
-                    $notificationImage = EventPostImage::where('event_post_id', $postData['post_id'])->first();
-                    $notification_image = "";
-                    if (!empty($notificationImage->post_image) && $notificationImage->post_image != NULL) {
-
-                        $notification_image = asset('pubilc/storage/post_image/' . $notificationImage->post_image);
+                if (!$postControl->isEmpty()) {
+                    foreach ($postControl as $value) {
+                        $postOwneruserId[] = $value->event_posts->user_id;
                     }
-                    $notificationData = [
-                        'message' => $notification_message,
-                        'type' => $notificationType,
-                        'notification_image' => $notification_image,
-                        'post_id' => $postData['post_id'],
+                }
+                if (in_array($postData['sender_id'], $postOwneruserId)) {
+                    continue;
+                }
+                if ($postData['sender_id'] == $value->user_id) {
+                    continue;
+                }
+                $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " upload new post";
+                $notification = new Notification;
+                $notification->event_id = $postData['event_id'];
+                $notification->post_id = $postData['post_id'];
+                $notification->user_id = $value->user_id;
+                $notification->notification_type = $notificationType;
+                $notification->sender_id = $postData['sender_id'];
+                $notification->notification_message = $notification_message;
 
-                    ];
-                    $checkNotificationSetting = checkNotificationSetting($value->user_id);
+                if ($notification->save()) {
 
-                    if ((count($checkNotificationSetting) && $checkNotificationSetting['wall_post']['push'] == '1') && $value->notification_on_off == '1') {
+                    $deviceData = Device::where('user_id', $value->id)->first();
+                    if (!empty($deviceData)) {
+                        $notificationImage = EventPostImage::where('event_post_id', $postData['post_id'])->first();
+                        $notification_image = "";
+                        if (!empty($notificationImage->post_image) && $notificationImage->post_image != NULL) {
 
-                        if ($deviceData->model == 'And') {
-
-                            send_notification_FCM_and($deviceData->device_token, $notificationData);
+                            $notification_image = asset('pubilc/storage/post_image/' . $notificationImage->post_image);
                         }
+                        $notificationData = [
+                            'message' => $notification_message,
+                            'type' => $notificationType,
+                            'notification_image' => $notification_image,
+                            'post_id' => $postData['post_id'],
 
-                        if ($deviceData->model == 'Ios') {
+                        ];
+                        $checkNotificationSetting = checkNotificationSetting($value->user_id);
 
-                            send_notification_FCM($deviceData->device_token, $notificationData);
+                        if ((count($checkNotificationSetting) && $checkNotificationSetting['wall_post']['push'] == '1') && $value->notification_on_off == '1') {
+
+                            if ($deviceData->model == 'And') {
+
+                                send_notification_FCM_and($deviceData->device_token, $notificationData);
+                            }
+
+                            if ($deviceData->model == 'Ios') {
+
+                                send_notification_FCM($deviceData->device_token, $notificationData);
+                            }
+                        }
+                    }
+                }
+            }
+
+            if ($postData['post_privacy'] == '3' && $value->rsvp_status == '0' &&  $value->rsvp_d == '1') {
+                $postControl = PostControl::with('event_posts')->where(['event_id' => $postData['event_id'], 'user_id' => $value->user_id, 'post_control' => 'mute'])->get();
+                $postOwneruserId = [];
+
+                if (!$postControl->isEmpty()) {
+                    foreach ($postControl as $value) {
+                        $postOwneruserId[] = $value->event_posts->user_id;
+                    }
+                }
+                if (in_array($postData['sender_id'], $postOwneruserId)) {
+                    continue;
+                }
+                if ($postData['sender_id'] == $value->user_id) {
+                    continue;
+                }
+                $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " upload new post";
+                $notification = new Notification;
+                $notification->event_id = $postData['event_id'];
+                $notification->post_id = $postData['post_id'];
+                $notification->user_id = $value->user_id;
+                $notification->notification_type = $notificationType;
+                $notification->sender_id = $postData['sender_id'];
+                $notification->notification_message = $notification_message;
+
+                if ($notification->save()) {
+
+                    $deviceData = Device::where('user_id', $value->id)->first();
+                    if (!empty($deviceData)) {
+                        $notificationImage = EventPostImage::where('event_post_id', $postData['post_id'])->first();
+                        $notification_image = "";
+                        if (!empty($notificationImage->post_image) && $notificationImage->post_image != NULL) {
+
+                            $notification_image = asset('pubilc/storage/post_image/' . $notificationImage->post_image);
+                        }
+                        $notificationData = [
+                            'message' => $notification_message,
+                            'type' => $notificationType,
+                            'notification_image' => $notification_image,
+                            'post_id' => $postData['post_id'],
+
+                        ];
+                        $checkNotificationSetting = checkNotificationSetting($value->user_id);
+
+                        if ((count($checkNotificationSetting) && $checkNotificationSetting['wall_post']['push'] == '1') && $value->notification_on_off == '1') {
+
+                            if ($deviceData->model == 'And') {
+
+                                send_notification_FCM_and($deviceData->device_token, $notificationData);
+                            }
+
+                            if ($deviceData->model == 'Ios') {
+
+                                send_notification_FCM($deviceData->device_token, $notificationData);
+                            }
+                        }
+                    }
+                }
+            }
+
+
+            if ($postData['post_privacy'] == '4' &&  $value->rsvp_d == '0') {
+                $postControl = PostControl::with('event_posts')->where(['event_id' => $postData['event_id'], 'user_id' => $value->user_id, 'post_control' => 'mute'])->get();
+                $postOwneruserId = [];
+
+                if (!$postControl->isEmpty()) {
+                    foreach ($postControl as $value) {
+                        $postOwneruserId[] = $value->event_posts->user_id;
+                    }
+                }
+                if (in_array($postData['sender_id'], $postOwneruserId)) {
+                    continue;
+                }
+                if ($postData['sender_id'] == $value->user_id) {
+                    continue;
+                }
+                $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " upload new post";
+                $notification = new Notification;
+                $notification->event_id = $postData['event_id'];
+                $notification->post_id = $postData['post_id'];
+                $notification->user_id = $value->user_id;
+                $notification->notification_type = $notificationType;
+                $notification->sender_id = $postData['sender_id'];
+                $notification->notification_message = $notification_message;
+
+                if ($notification->save()) {
+
+                    $deviceData = Device::where('user_id', $value->id)->first();
+                    if (!empty($deviceData)) {
+                        $notificationImage = EventPostImage::where('event_post_id', $postData['post_id'])->first();
+                        $notification_image = "";
+                        if (!empty($notificationImage->post_image) && $notificationImage->post_image != NULL) {
+
+                            $notification_image = asset('pubilc/storage/post_image/' . $notificationImage->post_image);
+                        }
+                        $notificationData = [
+                            'message' => $notification_message,
+                            'type' => $notificationType,
+                            'notification_image' => $notification_image,
+                            'post_id' => $postData['post_id'],
+
+                        ];
+                        $checkNotificationSetting = checkNotificationSetting($value->user_id);
+
+                        if ((count($checkNotificationSetting) && $checkNotificationSetting['wall_post']['push'] == '1') && $value->notification_on_off == '1') {
+
+                            if ($deviceData->model == 'And') {
+
+                                send_notification_FCM_and($deviceData->device_token, $notificationData);
+                            }
+
+                            if ($deviceData->model == 'Ios') {
+
+                                send_notification_FCM($deviceData->device_token, $notificationData);
+                            }
                         }
                     }
                 }
@@ -768,7 +952,9 @@ function sendNotification($notificationType, $postData)
                         'post_id' => "",
                         'event_id' => $postData['event_id'],
                         'event_name' => $getPostOwnerId->event_name,
-                        'event_wall' => $getPostOwnerId->event_settings->event_wall
+                        'event_wall' => $getPostOwnerId->event_settings->event_wall,
+                        'guest_list_visible_to_guests' => $getPostOwnerId->event_settings->guest_list_visible_to_guests,
+                        'event_potluck' => $getPostOwnerId->event_settings->podluck
                     ];
 
                     $checkNotificationSetting = checkNotificationSetting($getPostOwnerId->user_id);
@@ -836,7 +1022,9 @@ function sendNotification($notificationType, $postData)
                         'notification_image' => $notification_image,
                         'event_id' => $postData['event_id'],
                         'event_name' => $getPostOwnerId->event_name,
-                        'event_wall' => $getPostOwnerId->event_settings->event_wall
+                        'event_wall' => $getPostOwnerId->event_settings->event_wall,
+                        'guest_list_visible_to_guests' => $getPostOwnerId->event_settings->guest_list_visible_to_guests,
+                        'event_potluck' => $getPostOwnerId->event_settings->podluck
                     ];
                     $checkNotificationSetting = checkNotificationSetting($getPostOwnerId->user_id);
 
@@ -1021,6 +1209,26 @@ function send_notification_FCM_and($deviceToken, $notifyData)
     return $result_noti;
 }
 
+
+function sendSMS($receiverNumber, $message)
+{
+    try {
+
+        $account_sid = env('ACCOUNT_SID');;
+        $auth_token = env("AUTH_TOKEN");
+        $twilio_number = env("TWILIO_NUMBER");
+
+        $client = new Client($account_sid, $auth_token);
+        $client->messages->create($receiverNumber, [
+            'from' => $twilio_number,
+            'body' => $message
+        ]);
+
+        dd('SMS Sent Successfully.');
+    } catch (Exception $e) {
+        dd("Error: " . $e->getMessage());
+    }
+}
 
 function dateDiffer($dateTime)
 {

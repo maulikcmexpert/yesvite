@@ -57,6 +57,7 @@ return new class extends Migration
             $table->string('gmail_token_id', 255)->nullable();
             $table->string('apple_token_id', 255)->nullable();
             $table->enum('status', ['0', '1', '9'])->nullable();
+            $table->enum('show_profile_photo_only_frds', ['0', '1'])->default('0');
             $table->enum('photo_via_wifi', ['0', '1'])->default('0');
             $table->enum('enable_face_id_login', ['0', '1'])->default('0');
             $table->enum('app_user', ['0', '1'])->default('1')->comment('0 = not app user,1 = app user');

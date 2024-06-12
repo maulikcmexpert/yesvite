@@ -135,6 +135,7 @@ class ApiControllerv2 extends Controller
 
 
 
+
     public function sendThanks()
     {
         $commentDateTime = date('Y-m-d'); // Replace this with your actual timestamp
@@ -455,6 +456,7 @@ class ApiControllerv2 extends Controller
                     $eventDetail['message_to_guests'] = $value->message_to_guests;
                     $eventDetail['event_wall'] = $value->event_settings->event_wall;
                     $eventDetail['guest_list_visible_to_guests'] = $value->event_settings->guest_list_visible_to_guests;
+                    $eventDetail['event_potluck'] = $value->event_settings->podluck;
                     $eventDetail['adult_only_party'] = $value->event_settings->adult_only_party;
                     $eventDetail['post_time'] =  $this->setpostTime($value->updated_at);
 
@@ -772,6 +774,7 @@ class ApiControllerv2 extends Controller
                         $eventDetail['message_to_guests'] = $value->message_to_guests;
                         $eventDetail['event_wall'] = $value->event_settings->event_wall;
                         $eventDetail["guest_list_visible_to_guests"] = $value->event_settings->guest_list_visible_to_guests;
+                        $eventDetail['event_potluck'] = $value->event_settings->podluck;
                         $eventDetail['adult_only_party'] = $value->event_settings->adult_only_party;
                         $eventDetail['host_name'] = $value->hosted_by;
                         $eventDetail['allow_limit'] = $value->event_settings->allow_limit;
@@ -1010,6 +1013,7 @@ class ApiControllerv2 extends Controller
                         $eventDetail['host_profile'] = empty($value->event->user->profile) ? "" : asset('public/storage/profile/' . $value->event->user->profile);
                         $eventDetail['event_wall'] = $value->event->event_settings->event_wall;
                         $eventDetail["guest_list_visible_to_guests"] = $value->event->event_settings->guest_list_visible_to_guests;
+                        $eventDetail['event_potluck'] = $value->event->event_settings->podluck;
                         $eventDetail['adult_only_party'] = $value->event->event_settings->adult_only_party;
                         $eventDetail['host_name'] = $value->event->hosted_by;
                         $eventDetail['is_past'] = ($value->event->end_date < date('Y-m-d')) ? true : false;
@@ -1245,6 +1249,7 @@ class ApiControllerv2 extends Controller
                         $eventDetail['host_profile'] = empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile);
                         $eventDetail['event_wall'] = $value->event_settings->event_wall;
                         $eventDetail["guest_list_visible_to_guests"] = $value->event_settings->guest_list_visible_to_guests;
+                        $eventDetail['event_potluck'] = $value->event_settings->podluck;
                         $eventDetail['adult_only_party'] = $value->event_settings->adult_only_party;
                         $eventDetail['host_name'] = $value->hosted_by;
                         $eventDetail['is_past'] = ($value->end_date < date('Y-m-d')) ? true : false;
@@ -1504,6 +1509,7 @@ class ApiControllerv2 extends Controller
                         $eventDetail['host_profile'] = empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile);
                         $eventDetail['event_wall'] = $value->event_settings->event_wall;
                         $eventDetail["guest_list_visible_to_guests"] = $value->event_settings->guest_list_visible_to_guests;
+                        $eventDetail['event_potluck'] = $value->event_settings->podluck;
                         $eventDetail['adult_only_party'] = $value->event_settings->adult_only_party;
                         $eventDetail['host_name'] = $value->hosted_by;
                         $eventDetail['is_past'] = true;
@@ -1755,6 +1761,7 @@ class ApiControllerv2 extends Controller
                         $eventDetail['host_profile'] = empty($value->event->user->profile) ? "" : asset('public/storage/profile/' . $value->event->user->profile);
                         $eventDetail['event_wall'] = $value->event->event_settings->event_wall;
                         $eventDetail["guest_list_visible_to_guests"] = $value->event->event_settings->guest_list_visible_to_guests;
+                        $eventDetail['event_potluck'] = $value->event->event_settings->podluck;
                         $eventDetail['adult_only_party'] = $value->event->event_settings->adult_only_party;
                         $eventDetail['host_name'] = $value->event->hosted_by;
                         $eventDetail['is_past'] = ($value->event->end_date < date('Y-m-d')) ? true : false;
@@ -2124,6 +2131,7 @@ class ApiControllerv2 extends Controller
             }
 
             $user = Auth::guard('api')->user();
+
             if (!empty($request->profile)) {
 
                 if ($user->profile != "" || $user->profile != NULL) {
@@ -2135,10 +2143,10 @@ class ApiControllerv2 extends Controller
                 }
 
 
-
                 $image = $request->profile;
 
-                $imageName = time() . '_' . $image->getClientOriginalName();
+
+                $imageName = $user->id . '_profile.' . $image->getClientOriginalExtension();
 
 
                 $image->move(public_path('storage/profile'), $imageName);
@@ -2149,19 +2157,18 @@ class ApiControllerv2 extends Controller
 
             if (!empty($request->bg_profile)) {
 
+                if ($user->bg_profile != "" || $user->bg_profile != NULL) {
 
-
-                if (file_exists(public_path('storage/bg_profile/') . $user->profile)) {
-                    $imagePath = public_path('storage/bg_profile/') . $user->profile;
-                    unlink($imagePath);
+                    if (file_exists(public_path('storage/bg_profile/') . $user->bg_profile)) {
+                        $imagePath = public_path('storage/bg_profile/') . $user->bg_profile;
+                        unlink($imagePath);
+                    }
                 }
-
-
 
 
                 $bgimage = $request->bg_profile;
 
-                $bgimageName = time() . '_' . $bgimage->getClientOriginalName();
+                $bgimageName = $user->id . '_bg_profile' . $bgimage->getClientOriginalName();
 
                 $bgimage->move(public_path('storage/bg_profile'), $bgimageName);
 
@@ -2266,7 +2273,64 @@ class ApiControllerv2 extends Controller
         }
     }
 
+    public function removeProfile(Request $request)
+    {
+        $user  = Auth::guard('api')->user();
 
+
+        $rawData = $request->getContent();
+
+
+        $input = json_decode($rawData, true);
+
+        if ($input == null) {
+            return response()->json(['status' => 0, 'message' => "Json invalid"]);
+        }
+
+        $validator = Validator::make($input, [
+
+            'type' => ['required', 'in:profile,bg_profile'],
+        ]);
+
+
+
+        if ($validator->fails()) {
+
+            return response()->json(
+                [
+                    'status' => 0,
+                    'message' => $validator->errors()->first()
+
+                ],
+            );
+        }
+        if ($input['type'] == 'profile') {
+
+            if ($user->profile != "" || $user->profile != NULL) {
+
+                if (file_exists(public_path('storage/profile/') . $user->profile)) {
+                    $imagePath = public_path('storage/profile/') . $user->profile;
+                    unlink($imagePath);
+                }
+
+                $user->profile = NULL;
+                $user->save();
+            }
+        }
+        if ($input['type'] == 'bg_profile') {
+            if ($user->bg_profile != "" || $user->bg_profile != NULL) {
+
+                if (file_exists(public_path('storage/bg_profile/') . $user->bg_profile)) {
+                    $bgimagePath = public_path('storage/bg_profile/') . $user->bg_profile;
+                    unlink($bgimagePath);
+                }
+
+                $user->bg_profile = NULL;
+                $user->save();
+            }
+        }
+        return response()->json(['status' => 1, 'message' => "Profile removed successfully"]);
+    }
 
     public function myProfile(Request $request)
 
@@ -3206,16 +3270,8 @@ class ApiControllerv2 extends Controller
                     $eventDetail['event_name'] = $value->event_name;
                     $formattedDate = Carbon::createFromFormat('Y-m-d H:i:s', $value->updated_at)->format('F j, Y h:i A');
                     $eventDetail['saved_date'] = $formattedDate;
-                    $eventDetail['step'] = 1;
+                    $eventDetail['step'] = ($value->step != NULL) ? $value->step : 0;
 
-                    $checkStoreImage = EventImage::where('event_id', $value->id)->count();
-                    if ($checkStoreImage != 0) {
-                        $eventDetail['step'] = 2;
-                    }
-                    $checkGuests = EventInvitedUser::where('event_id', $value->id)->count();
-                    if ($checkGuests != 0) {
-                        $eventDetail['step'] = 3;
-                    }
                     $draftEventArray[] = $eventDetail;
                 }
                 return response()->json(['status' => 1, 'message' => "Draft Events", "data" => $draftEventArray]);
@@ -3858,9 +3914,9 @@ class ApiControllerv2 extends Controller
 
         try {
 
-            $page = isset($input['page']);
+            $page = isset($input['page']) ? $input['page'] : "1";
 
-            $pages = ($page != "") ? $page : 1;
+            $pages = ($page != "") ? $page : "1";
             $search = "";
             if (isset($input['search'])) {
                 $search = $input['search'];
@@ -3873,18 +3929,20 @@ class ApiControllerv2 extends Controller
                 ->count();
             $total_page = ceil($groupCount / 10);
 
+
+
             $groupList = Group::select('id', 'name')
-                ->withCount('groupMembers')
+                ->withCount('groupMembers as members_count')
                 ->where('user_id', $user->id)
                 ->where('name', 'like', "%$search%")
-                ->paginate("10", ['*'], 'page', $page);
+                ->paginate(10, ['*'], 'page', $pages);
+
 
             $groupListArr = [];
-
             foreach ($groupList as $value) {
                 $group['id'] = $value->id;
                 $group['name'] = $value->name;
-                $group['member_count'] = $value->group_members_count;
+                $group['member_count'] = $value->members_count;
                 $groupListArr[] = $group;
             }
             return response()->json(['status' => 1, 'message' => 'group created successfully', 'total_page' => $total_page, 'data' => $groupListArr]);
@@ -4133,10 +4191,10 @@ class ApiControllerv2 extends Controller
                 $eventDetail['end_date'] = (!empty($getEventData->end_date) && $getEventData->end_date != NULL) ? $getEventData->end_date : "";
                 $eventDetail['rsvp_by_date_set'] =  $getEventData->rsvp_by_date_set;
                 $eventDetail['rsvp_by_date'] = (!empty($getEventData->rsvp_by_date) && $getEventData->rsvp_by_date != NULL) ? $getEventData->rsvp_by_date : "";
-                $eventDetail['rsvp_start_time'] = (!empty($getEventData->rsvp_start_time) && $getEventData->rsvp_start_time != NULL) ? $getEventData->rsvp_start_time : "-";
+                $eventDetail['rsvp_start_time'] = (!empty($getEventData->rsvp_start_time) && $getEventData->rsvp_start_time != NULL) ? $getEventData->rsvp_start_time : "";
                 $eventDetail['rsvp_start_timezone'] = (!empty($getEventData->rsvp_start_timezone) && $getEventData->rsvp_start_timezone != NULL) ? $getEventData->rsvp_start_timezone : "";
                 $eventDetail['rsvp_end_time_set'] = $getEventData->rsvp_end_time_set;
-                $eventDetail['rsvp_end_time'] = (!empty($getEventData->rsvp_end_time) && $getEventData->rsvp_end_time != NULL) ? $getEventData->rsvp_end_time : "-";
+                $eventDetail['rsvp_end_time'] = (!empty($getEventData->rsvp_end_time) && $getEventData->rsvp_end_time != NULL) ? $getEventData->rsvp_end_time : "";
                 $eventDetail['rsvp_end_timezone'] = (!empty($getEventData->rsvp_end_timezone) & $getEventData->rsvp_end_timezone != NULL) ? $getEventData->rsvp_end_timezone : "";
                 $eventDetail['event_location_name'] = (!empty($getEventData->event_location_name) & $getEventData->event_location_name != NULL) ? $getEventData->event_location_name : "";
                 $eventDetail['latitude'] = (!empty($getEventData->latitude) & $getEventData->latitude != NULL) ? $getEventData->latitude : "";
@@ -4148,6 +4206,7 @@ class ApiControllerv2 extends Controller
                 $eventDetail['city'] = (!empty($getEventData->city) & $getEventData->city != NULL) ? $getEventData->city : "";
                 $eventDetail['message_to_guests'] = (!empty($getEventData->message_to_guests) & $getEventData->message_to_guests != NULL) ? $getEventData->message_to_guests : "";
                 $eventDetail['is_draft_save'] = $getEventData->is_draft_save;
+                $eventDetail['step'] = ($getEventData->step != NULL) ? $getEventData->step : 0;
                 $eventDetail['event_images'] = [];
                 $getEventImages = EventImage::where('event_id', $getEventData->id)->get();
                 if (!empty($getEventImages)) {
@@ -4166,9 +4225,6 @@ class ApiControllerv2 extends Controller
 
                 if (!empty($invitedUser)) {
                     foreach ($invitedUser as $guestVal) {
-
-
-
                         if ($guestVal->is_co_host == '0') {
                             if ($guestVal->user->is_user_phone_contact == '1') {
                                 $invitedGuestDetail['first_name'] = (!empty($guestVal->user->firstname) && $guestVal->user->firstname != NULL) ? $guestVal->user->firstname : "";
@@ -4503,6 +4559,8 @@ class ApiControllerv2 extends Controller
                                 continue;
                             }
 
+
+
                             EventInvitedUser::create([
 
                                 'event_id' => $eventData['event_id'],
@@ -4512,6 +4570,14 @@ class ApiControllerv2 extends Controller
                                 'user_id' => $value['user_id']
 
                             ]);
+                        }
+
+                        $userSelectedGuest =  collect($eventData['invited_user_id'])->pluck('user_id')->toArray();
+                        foreach ($getalreadyInviteduser as $value) {
+
+                            if (!in_array($value, $userSelectedGuest)) {
+                                EventInvitedUser::where('user_id', $value)->delete();
+                            }
                         }
                     }
 
@@ -4679,20 +4745,23 @@ class ApiControllerv2 extends Controller
                                             'user_id' => $value['user_id'],
                                             'is_co_host' => '1'
                                         ]);
-                                    } else if (!in_array($value['user_id'], $alreadyselectedasCoUser) && !in_array($value['user_id'], $getalreadyInviteduser)) {
-                                        // remove //
-                                        EventInvitedUser::where(['user_id' => $value['user_id'], 'event_id' => $eventData['event_id']])->delete();
-                                    } else {
+                                    }
+                                    // else if (!in_array($value['user_id'], $alreadyselectedasCoUser) && !in_array($value['user_id'], $getalreadyInviteduser)) {
+                                    //     // remove //
+                                    //     EventInvitedUser::where(['user_id' => $value['user_id'], 'event_id' => $eventData['event_id']])->delete();
+                                    // }
+                                    else {
                                         $updateRecord = EventInvitedUser::where(['user_id' => $value['user_id'], 'event_id' => $eventData['event_id']])->first();
                                         $updateRecord->is_co_host = '1';
                                         $updateRecord->save();
                                     }
                                 }
-                            } else {
-                                // remove //
-
-                                EventInvitedUser::where(['event_id' => $eventData['event_id'], 'is_co_host' => '1'])->delete();
                             }
+                            // else {
+                            //     // remove //
+
+                            //     EventInvitedUser::where(['event_id' => $eventData['event_id'], 'is_co_host' => '1'])->delete();
+                            // }
                         }
                         if (isset($eventData['guest_co_host_list'])) {
                             $guestcoHostList = $eventData['guest_co_host_list'];
@@ -4757,10 +4826,12 @@ class ApiControllerv2 extends Controller
                                                         $updateRecord->save();
                                                     }
                                                 }
-                                            } else if (!in_array($value['user_id'], $alreadyselectedasguestCoUser) && !in_array($value['user_id'], $getalreadyInviteduser)) {
-                                                // remove //
-                                                EventInvitedUser::where(['user_id' => $value['user_id'], 'event_id' => $eventData['event_id']])->delete();
-                                            } else {
+                                            }
+                                            //  else if (!in_array($value['user_id'], $alreadyselectedasguestCoUser) && !in_array($value['user_id'], $getalreadyInviteduser)) {
+                                            //     // remove //
+                                            //     EventInvitedUser::where(['user_id' => $value['user_id'], 'event_id' => $eventData['event_id']])->delete();
+                                            // }
+                                            else {
                                                 $updateRecord = EventInvitedUser::where(['user_id' => $checkUserExist->id, 'event_id' => $eventData['event_id']])->first();
                                                 $updateRecord->is_co_host = '1';
                                                 $updateRecord->save();
@@ -4814,10 +4885,12 @@ class ApiControllerv2 extends Controller
                                                         ]);
                                                     }
                                                 }
-                                            } else if (!in_array($value['user_id'], $alreadyselectedasguestCoUser) && !in_array($value['user_id'], $getalreadyInviteduser)) {
-                                                // remove //
-                                                EventInvitedUser::where(['user_id' => $value['user_id'], 'event_id' => $eventData['event_id']])->delete();
-                                            } else {
+                                            }
+                                            // else if (!in_array($value['user_id'], $alreadyselectedasguestCoUser) && !in_array($value['user_id'], $getalreadyInviteduser)) {
+                                            //     // remove //
+                                            //     EventInvitedUser::where(['user_id' => $value['user_id'], 'event_id' => $eventData['event_id']])->delete();
+                                            // }
+                                            else {
                                                 $updateRecord = EventInvitedUser::where(['user_id' => $checkUserExist->id, 'event_id' => $eventData['event_id']])->first();
                                                 $updateRecord->is_co_host = '1';
                                                 $updateRecord->save();
@@ -4826,13 +4899,15 @@ class ApiControllerv2 extends Controller
                                     }
                                 }
                             }
-                        } else {
-                            // remove //
-                            EventInvitedUser::where(['event_id' => $eventData['event_id'], 'is_co_host' => '1'])->delete();
                         }
-                    } else {
-                        EventInvitedUser::where(['event_id' => $eventData['event_id'], 'is_co_host' => '1'])->delete();
+                        //  else {
+                        //     // remove //
+                        //     EventInvitedUser::where(['event_id' => $eventData['event_id'], 'is_co_host' => '1'])->delete();
+                        // }
                     }
+                    //  else {
+                    //     EventInvitedUser::where(['event_id' => $eventData['event_id'], 'is_co_host' => '1'])->delete();
+                    // }
 
 
 
@@ -7487,7 +7562,9 @@ class ApiControllerv2 extends Controller
                     })
                         ->where('event_id', $input['event_id'])
                         ->where('user_id', $user->id)
+
                         ->where(function ($privacyQuery) {
+
                             $privacyQuery->where(function ($q) {
                                 $q->where('rsvp_d', '1')
                                     ->where('rsvp_status', '1')
@@ -7501,6 +7578,10 @@ class ApiControllerv2 extends Controller
                                 ->orWhere(function ($q) {
                                     $q->where('rsvp_d', '0')
                                         ->where('post_privacy', '4');
+                                })
+                                ->orWhere(function ($q) {
+                                    // This block is for post_privacy == 1
+                                    $q->where('post_privacy', '1');
                                 });
                         });
                 });
@@ -8940,7 +9021,8 @@ class ApiControllerv2 extends Controller
 
                 'post_id' => $creatEventPost->id,
                 'is_in_photo_moudle' => $request->is_in_photo_moudle,
-                'post_type' => $request->post_type
+                'post_type' => $request->post_type,
+                'post_privacy' => $request->post_privacy
             ];
         }
 
@@ -12065,9 +12147,8 @@ class ApiControllerv2 extends Controller
     {
         try {
 
-            $input = $request->all();
 
-            $user = Auth::guard('api')->user();
+
             if (!empty($request->application)) {
 
 
@@ -12084,9 +12165,62 @@ class ApiControllerv2 extends Controller
                 $imageName = 'yesvite_android.apk';
 
 
-                $image->move(public_path('appversion'), $imageName);
+                $uploaded = $image->move(public_path('appversion'), $imageName);
             }
-            return response()->json(['status' => 1, 'message' => "upload succesfully"]);
+
+            $versionSetting = VersionSetting::first();
+            if ($versionSetting != NULL) {
+                $versionSetting->android_version = $request->android_version;
+                $versionSetting->android_in_force = $request->android_in_force;
+                $versionSetting->ios_version = $request->ios_version;
+                $versionSetting->ios_in_force = $request->ios_in_force;
+                $versionSetting->save();
+            } else {
+                $newVersionSetting = new VersionSetting();
+                $newVersionSetting->android_version = $request->android_version;
+                $newVersionSetting->android_in_force = $request->android_in_force;
+                $newVersionSetting->ios_version = $request->ios_version;
+                $newVersionSetting->ios_in_force = $request->ios_in_force;
+                $newVersionSetting->save();
+            }
+
+            return response()->json(['status' => 1, 'message' => "version changed succesfully"]);
+        } catch (QueryException $e) {
+            return response()->json(['status' => 0, 'message' => "db error"]);
+        } catch (Exception  $e) {
+            return response()->json(['status' => 0, 'message' => 'something went wrong']);
+        }
+    }
+
+    public function setUserEventCreateStep(Request $request)
+    {
+
+        $rawData = $request->getContent();
+
+        $input = json_decode($rawData, true);
+
+        if ($input == null) {
+            return response()->json(['status' => 0, 'message' => "Json invalid"]);
+        }
+
+        $validator = Validator::make($input, [
+            "step" => ['required', 'in:1,2,3,4'],
+            "event_id" => ['required', 'exists:events,id']
+        ]);
+        if ($validator->fails()) {
+            return response()->json(
+                [
+                    'status' => 0,
+                    'message' => $validator->errors()->first()
+                ],
+            );
+        }
+
+        try {
+            $updateStepOfEvent = Event::where('id', $input['event_id'])->first();
+            $updateStepOfEvent->step = $input['step'];
+            $updateStepOfEvent->save();
+            return response()->json(['status' => 1, 'message' => "step updated"]);
         } catch (QueryException $e) {
             return response()->json(['status' => 0, 'message' => "db error"]);
         } catch (Exception  $e) {

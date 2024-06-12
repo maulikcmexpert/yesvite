@@ -1,4 +1,38 @@
+//  ===== focusinput =====
+$(".form-control").on("focusin", function () {
+    $(this).next().addClass("floatingfocus");
+});
+
+$(".form-control").on("focusout", function () {
+    var text_val = $(this).val();
+    if (text_val === "") {
+        $(this).next().removeClass("floatingfocus");
+    } else {
+        $(this).next().addClass("floatingfocus");
+    }
+});
+
+$(".form-control").each(function () {
+    var text = $(this).val();
+    if (text === "") {
+        $(this).next().removeClass("floatingfocus");
+    } else {
+        $(this).next().addClass("floatingfocus");
+    }
+});
+
+// ========= show-password ===========
+$(".toggle-password").click(function () {
+    $(this).toggleClass("fa-eye-slash fa-eye");
+    var input = $(this).prev().prev();
+    if (input.attr("type") == "password") {
+        input.attr("type", "text");
+    } else {
+        input.attr("type", "password");
+    }
+});
 // Set the options that I want
+
 toastr.options = {
     closeButton: true,
     newestOnTop: false,
@@ -15,6 +49,24 @@ toastr.options = {
     showMethod: "fadeIn",
     hideMethod: "fadeOut",
 };
+
+function loaderHandle(querySelectorId, btnName) {
+    var loaderbtn = document.querySelector(querySelectorId);
+
+    loaderbtn.innerHTML = btnName;
+    loaderbtn.classList.add("spinning");
+
+    setTimeout(function () {
+        loaderbtn.classList.remove("spinning");
+        loaderbtn.innerHTML = "Save Changes";
+    }, 6000);
+}
+
+function removeLoaderHandle(querySelectorId, btnName) {
+    var loaderbtn = document.querySelector(querySelectorId);
+    loaderbtn.classList.remove("spinning");
+    loaderbtn.innerHTML = btnName;
+}
 
 var buttonPlus = $(".qty-btn-plus");
 var buttonMinus = $(".qty-btn-minus");
@@ -69,18 +121,3 @@ function getbgImgData() {
         });
     }
 }
-
-// ========= show-password ===========
-document.querySelector(".toggle").addEventListener("click", function () {
-    this.classList.toggle("activate");
-});
-
-$(".toggle-password").click(function () {
-    $(this).toggleClass("fa-eye-slash fa-eye");
-    var input = $($(this).attr("toggle"));
-    if (input.attr("type") == "password") {
-        input.attr("type", "text");
-    } else {
-        input.attr("type", "password");
-    }
-});

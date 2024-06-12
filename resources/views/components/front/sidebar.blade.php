@@ -13,7 +13,7 @@
             </div>
             <p>Member Since: {{ $profileData->join_date }}</p>
         </div>
-        <div class="user-location">
+        <div class="user-location {{ ($profileData->city == NULL)?'remove-border':''}}">
             <div>
                 <span>
                     <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -50,15 +50,15 @@
 
         <div class="user-gallery">
             <div>
-                <h4>{{formatNumber($profileData->events)}}</h4>
+                <h4>{{formatNumber($profileData->event_count)}}</h4>
                 <p>Events</p>
             </div>
             <div>
-                <h4>{{formatNumber($profileData->photos)}}</h4>
+                <h4>{{formatNumber($profileData->event_post_count)}}</h4>
                 <p>Photos</p>
             </div>
             <div>
-                <h4>{{formatNumber($profileData->comments)}}</h4>
+                <h4>{{formatNumber($profileData->event_post_comment_count)}}</h4>
                 <p>Comments</p>
             </div>
         </div>
@@ -93,7 +93,7 @@
                 </a>
             </li>
             <li>
-                <a href="contact.html" class="d-flex align-items-center">
+                <a href="{{route('profile.contact')}}" class="d-flex align-items-center">
                     <span>
                         <svg width="20" height="20" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M13.5417 17.9584C12.6001 17.9584 11.6084 17.7334 10.5834 17.3C9.58341 16.875 8.57508 16.2917 7.59175 15.5834C6.61675 14.8667 5.67508 14.0667 4.78341 13.1917C3.90008 12.3 3.10008 11.3584 2.39175 10.3917C1.67508 9.39169 1.10008 8.39169 0.691748 7.42502C0.258415 6.39169 0.041748 5.39169 0.041748 4.45002C0.041748 3.80002 0.158415 3.18335 0.383415 2.60835C0.616748 2.01669 0.991748 1.46669 1.50008 0.991687C2.14175 0.358354 2.87508 0.041687 3.65842 0.041687C3.98342 0.041687 4.31675 0.116687 4.60008 0.25002C4.92508 0.40002 5.20008 0.62502 5.40008 0.92502L7.33342 3.65002C7.50842 3.89169 7.64175 4.12502 7.73341 4.35835C7.84175 4.60835 7.90008 4.85835 7.90008 5.10002C7.90008 5.41669 7.80841 5.72502 7.63341 6.01669C7.50841 6.24169 7.31675 6.48335 7.07508 6.72502L6.50842 7.31669C6.51675 7.34169 6.52508 7.35835 6.53341 7.37502C6.63341 7.55002 6.83341 7.85002 7.21675 8.30002C7.62508 8.76669 8.00842 9.19169 8.39175 9.58335C8.88342 10.0667 9.29175 10.45 9.67508 10.7667C10.1501 11.1667 10.4584 11.3667 10.6417 11.4584L10.6251 11.5L11.2334 10.9C11.4917 10.6417 11.7417 10.45 11.9834 10.325C12.4417 10.0417 13.0251 9.99169 13.6084 10.2334C13.8251 10.325 14.0584 10.45 14.3084 10.625L17.0751 12.5917C17.3834 12.8 17.6084 13.0667 17.7417 13.3834C17.8667 13.7 17.9251 13.9917 17.9251 14.2834C17.9251 14.6834 17.8334 15.0834 17.6584 15.4584C17.4834 15.8334 17.2667 16.1584 16.9917 16.4584C16.5167 16.9834 16.0001 17.3584 15.4001 17.6C14.8251 17.8334 14.2001 17.9584 13.5417 17.9584ZM3.65842 1.29169C3.20008 1.29169 2.77508 1.49169 2.36675 1.89169C1.98341 2.25002 1.71675 2.64169 1.55008 3.06669C1.37508 3.50002 1.29175 3.95835 1.29175 4.45002C1.29175 5.22502 1.47508 6.06669 1.84175 6.93335C2.21675 7.81669 2.74175 8.73335 3.40841 9.65002C4.07508 10.5667 4.83341 11.4584 5.66675 12.3C6.50008 13.125 7.40008 13.8917 8.32508 14.5667C9.22508 15.225 10.1501 15.7584 11.0667 16.1417C12.4917 16.75 13.8251 16.8917 14.9251 16.4334C15.3501 16.2584 15.7251 15.9917 16.0667 15.6084C16.2584 15.4 16.4084 15.175 16.5334 14.9084C16.6334 14.7 16.6834 14.4834 16.6834 14.2667C16.6834 14.1334 16.6584 14 16.5917 13.85C16.5667 13.8 16.5167 13.7084 16.3584 13.6L13.5917 11.6334C13.4251 11.5167 13.2751 11.4334 13.1334 11.375C12.9501 11.3 12.8751 11.225 12.5917 11.4C12.4251 11.4834 12.2751 11.6084 12.1084 11.775L11.4751 12.4C11.1501 12.7167 10.6501 12.7917 10.2667 12.65L10.0417 12.55C9.70008 12.3667 9.30008 12.0834 8.85842 11.7084C8.45842 11.3667 8.02508 10.9667 7.50008 10.45C7.09175 10.0334 6.68342 9.59169 6.25842 9.10002C5.86675 8.64169 5.58342 8.25002 5.40842 7.92502L5.30842 7.67502C5.25842 7.48335 5.24175 7.37502 5.24175 7.25835C5.24175 6.95835 5.35008 6.69169 5.55841 6.48335L6.18341 5.83335C6.35008 5.66669 6.47508 5.50835 6.55841 5.36669C6.62508 5.25835 6.65008 5.16669 6.65008 5.08335C6.65008 5.01669 6.62508 4.91669 6.58342 4.81669C6.52508 4.68335 6.43341 4.53335 6.31675 4.37502L4.38341 1.64169C4.30008 1.52502 4.20008 1.44169 4.07508 1.38335C3.94175 1.32502 3.80008 1.29169 3.65842 1.29169ZM10.6251 11.5084L10.4917 12.075L10.7167 11.4917C10.6751 11.4834 10.6417 11.4917 10.6251 11.5084Z" fill="#64748B" />
@@ -103,7 +103,7 @@
                 </a>
             </li>
             <li>
-                <a href="account-setting.html" class="d-flex align-items-center">
+                <a href="{{route('profile.account_settings')}}" class="d-flex align-items-center {{ (Request::segment(1) == 'account_settings')? 'active':'' }}">
                     <span>
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M10 13.125C8.275 13.125 6.875 11.725 6.875 10C6.875 8.275 8.275 6.875 10 6.875C11.725 6.875 13.125 8.275 13.125 10C13.125 11.725 11.725 13.125 10 13.125ZM10 8.125C8.96667 8.125 8.125 8.96667 8.125 10C8.125 11.0333 8.96667 11.875 10 11.875C11.0333 11.875 11.875 11.0333 11.875 10C11.875 8.96667 11.0333 8.125 10 8.125Z" fill="#64748B" />
@@ -133,6 +133,62 @@
                 </svg>
                 Logout
             </a>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="manageModel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header align-items-start">
+                <div>
+                    <h4 class="modal-title">Manage Accounts</h4>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="manage-account">
+                    <div class="users-data">
+                        <div class="d-flex align-items-start">
+                            <div class="contact-img">
+                                <img src="{{$profileData->profile}}" alt="contact-img">
+                            </div>
+                            <div class="text-start">
+                                <h5>{{$profileData->firstname.' '.$profileData->lastname}}</h5>
+                                <div>
+                                    <a href="mailto:{{$profileData->email}}">{{$profileData->email}}</a>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="{{route('profile.account_settings')}}" class="edit-contact">Account Settings</a>
+                    </div>
+                    <div class="users-data">
+                        <div class="d-flex align-items-start">
+                            <div class="contact-img">
+                                <img src="./assets/image/user-img.svg" alt="contact-img">
+                            </div>
+                            <div class="text-start">
+                                <h5>Silvia Alegra</h5>
+                                <div>
+                                    <a href="mailto:silvia@gmail.com">silvia@gmail.com</a>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="ms-auto">
+                            <svg class="ms-auto" width="7" height="12" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M0.940228 11.78C0.813561 11.78 0.686895 11.7333 0.586895 11.6333C0.393561 11.44 0.393561 11.12 0.586895 10.9267L4.93356 6.58001C5.25356 6.26001 5.25356 5.74001 4.93356 5.42001L0.586895 1.07335C0.393561 0.880013 0.393561 0.560013 0.586895 0.36668C0.780228 0.173346 1.10023 0.173346 1.29356 0.36668L5.64023 4.71335C5.98023 5.05335 6.17356 5.51335 6.17356 6.00001C6.17356 6.48668 5.98689 6.94668 5.64023 7.28668L1.29356 11.6333C1.19356 11.7267 1.06689 11.78 0.940228 11.78Z" fill="#94A3B8" />
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+                <div class="text-end mt-2">
+                    <a href="{{route('auth.add_account')}}" class="cmn-btn"><svg class="me-1" width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5.5026 0.833984V10.1673M0.835938 5.50065H10.1693" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        Add Account</a>
+                </div>
+            </div>
         </div>
     </div>
 </div>

@@ -2,9 +2,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
 :root{
-    --primaryColor:#E73080;
-    --ButtonColor:#ec5b99;
-    --sidebarNavActive:rgb(231, 50, 128, 0.4);
+    --primaryColor:#000;
+    --ButtonColor:#000;
+    --sidebarNavActive:rgb(0 0 0 / 100%);
 }
 
 label.error{
@@ -98,15 +98,16 @@ h1.ProductTitle{
 
 
 [class*=sidebar-dark-]{
-    background-color: #272727 !important;
+    background-color: #ffffff !important;
 }
 
 .sidebar .nav i{
     color: var(--primaryColor);
+    /* color: #6a6a6a; */
 }
 
 [class*=sidebar-dark-] .sidebar a{
-    color: #fff !important;
+    color: #000 !important;
 }
 
 .sidebar .form-inline,
@@ -126,6 +127,15 @@ h1.ProductTitle{
 .nav-pills .nav-link:hover
 {
     background-color: var(--sidebarNavActive);
+    color: #fff !important;
+}
+
+.pills .nav-link:hover{
+    color: #fff;
+}
+
+[class*=sidebar-dark-] .nav-sidebar>.nav-item>.nav-link.active{
+    color: #fff !important;
 }
 
 [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active,
@@ -133,7 +143,13 @@ h1.ProductTitle{
 [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active:focus, [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active:hover,
 [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link:hover
 {
-    background-color: rgb(231, 50, 128, 0.2);;
+    background-color: #000;
+}
+
+[class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active .dot,
+[class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link:hover .dot
+{
+   background-color: #fff;
 }
 
 .nav-pills .nav-link.active i,
@@ -250,7 +266,7 @@ label:not(.form-check-label):not(.custom-file-label){
     border-radius: 20px !important;
     outline: 0;
     padding-left: 15px !important;
-    border-color: #e95f9a !important;
+    border-color: #000 !important;
 }
 
 table.table,
@@ -278,7 +294,7 @@ table.table tbody tr{
 .dataTables_length select{
     background-color: #fff !important;
     outline: 0;
-    border-color: #e95f9a !important;
+    border-color: #000 !important;
 }
 
 .form-control{
@@ -529,7 +545,7 @@ width: 100%;
     border-radius: 4px;
     overflow: hidden;
     box-shadow: 0 0px 5px rgba(0,0,0,0.2);
-    max-width: 330px;
+    /* max-width: 330px; */
     margin: 0px auto;
 }
 .event-calender .ui-datepicker-header {
@@ -573,8 +589,8 @@ margin: -43px 0px 0px 8px;
     content: '';
     position: absolute;
     display: block;
-    width: 4px;
-    height: 4px;
+    width: 10px;
+    height: 10px;
     border-left: 2px solid #b0aead;
     border-bottom: 2px solid #b0aead;
 }

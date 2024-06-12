@@ -42,6 +42,7 @@ return new class extends Migration
             $table->enum('is_draft_save', ['0', '1'])->default('0')->comment('0 = draft,1 = live');;
             $table->string('reason')->nullable();
             $table->enum('notification_on_off', ['0', '1'])->default('1');
+            $table->datetime('deleted_at')->nullable();
             $table->timestamps();
             $table->foreign('event_type_id')->references('id')->on('event_types')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

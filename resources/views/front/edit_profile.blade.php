@@ -18,7 +18,7 @@
                         <div class="d-flex align-items-center gap-3">
                             <a href="{{route('profile.change_password')}}" class="cmn-btn edit-btn">
                                 Edit Password</a>
-                            <a href="#" class="cmn-btn" id="save_changes">Save Changes</a>
+                            <a href="#" class="cmn-btn loaderbtn" id="save_changes">Save Changes</a>
                         </div>
                     </div>
                     <div class="profile-wrapper edit-profile">
@@ -54,17 +54,25 @@
                         <div class="profile-content login-form-wrap">
                             <form method="POST" action="{{route('profile.update',encrypt($user->id))}}" id="updateUserForm">
                                 @csrf
+                                <input type="hidden" name="id" id="userId" value="{{encrypt('$user->id')}}">
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="input-form">
-                                            <input type="text" class="form-control inputText" id="firstname" name="firstname" value="{{$user->firstname}}">
-                                            <label for="text" class="form-label input-field floating-label">First Name <span class="required">*</span></label>
+                                            <input type="text" class="form-control" id="firstname" name="firstname" value="{{$user->firstname}}">
+                                            <label for="text" class="floating-label">First Name <span class="">*</span></label>
+
+                                            <div class="label-error">
+                                                <label id="firstname-error" class="error" for="firstname"></label>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="input-form ">
-                                            <input type="text" class="form-control inputText" id="lastname" name="lastname" value="{{$user->lastname}}">
-                                            <label for="text" class="form-label input-field floating-label">Last Name</label>
+                                            <input type="text" class="form-control" id="lastname" name="lastname" value="{{$user->lastname}}">
+                                            <label for="text" class="floating-label">Last Name</label>
+                                            <div class="label-error">
+                                                <label id="lastname-error" class="error" for="lastname"></label>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
@@ -77,7 +85,7 @@
                                                             <label class="form-check-label mb-0" for="flexRadioDefault1">
                                                                 <h6>Male</h6>
                                                             </label>
-                                                            <input class="form-check-input inputText" type="radio" value="male" name="gender" id="male" {{($user->gender == 'male')?'checked':''}}>
+                                                            <input class="form-check-input" type="radio" value="male" name="gender" id="male" {{($user->gender == 'male')?'checked':''}}>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-6 col-6">
@@ -94,32 +102,47 @@
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="input-form">
-                                            <input type="date" class="form-control inputText" id="birth_date" name="birth_date" value="{{$user->birth_date}}">
-                                            <label for="birthday" class="form-label input-field floating-label">Birthday</label>
+                                            <input type="date" class="form-control" id="birth_date" name="birth_date" value="{{$user->birth_date}}">
+                                            <label for="birthday" class="floating-label birthday-label">Birthday</label>
+                                            <div class="label-error">
+                                                <label id="birth_date-error" class="error" for="birth_date"></label>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="input-form">
-                                            <input type="email" class="form-control inputText" id="email" name="email" value="{{ $user->email}}">
-                                            <label for="email" class="form-label input-field floating-label">Email Address</label>
+                                            <input type="email" class="form-control" id="email" name="email" value="{{ $user->email}}">
+                                            <label for="email" class="floating-label">Email Address</label>
+                                            <div class="label-error">
+                                                <label id="email-error" class="error" for="email"></label>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="input-form">
-                                            <input type="tel" class="form-control inputText" id="phone_number" name="phone_number" value="{{ $user->phone_number}}">
-                                            <label for="phone" class="form-label input-field floating-label">Phone Number</label>
+                                            <input type="tel" class="form-control" id="phone_number" name="phone_number" value="{{ $user->phone_number}}">
+                                            <label for="phone" class="floating-label">Phone Number</label>
+                                            <div class="label-error">
+                                                <label id="phone_number-error" class="error" for="phone_number"></label>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="input-form">
-                                            <input type="text" class="form-control inputText" id="zip_code" name="zip_code" value="{{ $user->zip_code}}">
-                                            <label for="code" class="form-label input-field floating-label required">Zip Code <span>*</span></label>
+                                            <input type="text" class="form-control" id="zip_code" name="zip_code" value="{{ $user->zip_code}}">
+                                            <label for="code" class="floating-label ">Zip Code <span>*</span></label>
+                                            <div class="label-error">
+                                                <label id="zip_code-error" class="error" for="zip_code"></label>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="input-form mb-0">
-                                            <textarea name="about_me" class="inputText" id="about_me">{{ $user->about_me}}</textarea>
-                                            <label for="code" class="form-label input-field floating-label about-label">About Me</label>
+                                            <textarea name="about_me" class="" id="about_me">{{ $user->about_me}}</textarea>
+                                            <label for="code" class="floating-label about-label">About Me</label>
+                                            <div class="label-error">
+                                                <label id="about_me-error" class="error" for="about_me"></label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -158,10 +181,10 @@
                     </div>
                 </div>
                 <div class="d-flex align-items-center justify-content-end">
-                    <label class="choosen-file cmn-btn edit-btn mb-0" for="choose-file">
+                    <label class="choosen-file cmn-btn edit-btn mb-0 me-3" for="choose-file">
                         Upload New Image
                     </label>
-                    <button type="button" class="cmn-btn bg-primary" id="profile_save">Save Changes</button>
+                    <button type="button" class="cmn-btn loaderbtn" id="profile_save">Save Changes</button>
                 </div>
             </div>
         </div>
@@ -193,10 +216,10 @@
                     </div>
                 </div>
                 <div class="d-flex align-items-center justify-content-end">
-                    <label class="choosen-file cmn-btn edit-btn mb-0" for="bg-choose-file">
+                    <label class="choosen-file cmn-btn edit-btn mb-0 me-3" for="bg-choose-file">
                         Upload New Image
                     </label>
-                    <button type="button" class="cmn-btn bg-primary" id="bg_profile_save">Save Changes</button>
+                    <button type="button" class="cmn-btn loaderbtn" id="bg_profile_save">Save Changes</button>
                 </div>
             </div>
         </div>

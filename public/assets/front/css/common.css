@@ -259,21 +259,22 @@ ul.nav-tabs .nav-link:focus{
 }
 
 .layer {
-  width: 100%;
-  background-color: #2DA9FC;
-  transition: 0.3s ease all;
-  z-index: 1;
+    width: 100%;
+    background-color: #ca8585;
+    transition: 0.3s ease all;
+    z-index: 1;
 }
 
-/* Button 1 */
+
+/* / Button 1 / */
 #button-1 .knobs:before {
-    content: "\f00c";
+    content: "\f00d";
     position: absolute;
     top: 50%;
-    right: 4px;
+    right: 22px;
     width: 20px;
     height: 20px;
-    color: #2DA9FC;
+    color: red;
     font-size: 10px;
     font-weight: bold;
     text-align: center;
@@ -285,28 +286,146 @@ ul.nav-tabs .nav-link:focus{
     font-family: "Font Awesome 5 Free";
     transform: translateY(-50%);
     font-size: 13px;
-  }
+    -webkit-transition: 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15) all;
+    -moz-transition: 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15) all;
+    -ms-transition: 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15) all;
+    -o-transition: 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15) all;
+}
   
-  #button-1 .checkbox:checked + .knobs:before {
-    content: "\f00d";
-    right: 22px;
-    background-color: #f44336;
+#button-1 .checkbox:checked + .knobs:before {
+    content: "\f00c";
+    right: 4px;
+    background-color: #fff;
+    transition: 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15) all;
     font-family: "Font Awesome 5 Free";
+    transform: translateY(-50%);
+    color: #2DA9FC;
+}
+  
+
+#button-1 .checkbox:checked ~ .layer {
+    background-color: #2DA9FC;
+}
+  
+#button-1 .knobs,
+#button-1 .knobs:before,
+#button-1 .layer {
+    transition: 0.3s ease all;
+}
+
+.privacy-policy{
+    padding: 100px 0;
+}
+
+.privacy-policy{
+    padding: 100px 0;
+}
+
+  
+.loaderbtn {
+    display: inline-block;
+    outline:none;
+    line-height: 1.4;
+    position: relative;
+    transition: 0.5S;
+    font-weight:700;
+    background-color: var(--primaryColor) !important;
+}
+
+
+.loaderbtn.spinning {
+    background-color: rgb(255, 255, 255);
+    padding-right: 40px;
+}
+.loaderbtn.spinning:after {
+    content: '';
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    width: 0;
+    height: 0;
+    box-shadow: 0px 0px 0 1px darken(rgb(255, 255, 255),10%);
+    position: absolute;
+    border-radius: 50%;
+    animation: rotate360 .5s infinite linear, exist .1s forwards ease;
+}
+
+.loaderbtn.spinning:before {
+    content: "";
+    width: 0px;
+    height: 0px;
+    border-radius: 50%;
+    right: 6px;
+    top: 50%;
+    position: absolute;
+    border: 2px solid darken(rgb(255, 255, 255),40%);
+    border-right: 3px solid rgb(255, 255, 255);
+    animation: rotate360 .5s infinite linear, exist .1s forwards ease ;
+    
+}
+
+
+.floating-label {
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    transition:0.2s ease all;
+    -moz-transition:0.2s ease all;
+    -webkit-transition:0.2s ease all;
+    pointer-events: none;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+}
+
+.floatingfocus
+{
+    font-size: 12px;
+    color: var(--primaryColor);
+    top: 0;
+    left:10px;
+    background: #ffffff;
+    padding: 0px 5px 0px 5px;
+}
+
+.label-error{
+    position: absolute;
+    bottom: -19px;
+    left: 8px;
+}
+
+.label-error label{
+    font-size: 11px;
+}
+
+.users-data{
     display: flex;
     align-items: center;
-    justify-content: center;
-    color: #fff;
-  }
-  
-  #button-1 .checkbox:checked ~ .layer {
-    background-color: #e5caca;
-  }
-  
-  #button-1 .knobs,
-  #button-1 .knobs:before,
-  #button-1 .layer {
-    transition: 0.3s ease all;
-  }
+    justify-content: space-between;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--borderColor);
+}
+
+.users-data:last-child{
+    border-bottom: none;
+}
+
+.users-data h5{
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--contactTitle);
+    margin-bottom: 3px;
+    line-height: 26px;
+}
+
+.users-data a{
+    font-size: 12px;
+    color: var(--lightColor);
+    margin-bottom: 5px;
+    display: block;
+}
 
 /* ======== Responsive ========= */
 @media only screen and (max-width:1999px){
@@ -367,5 +486,26 @@ ul.nav-tabs .nav-link:focus{
 
     .modal-content{
         margin: 0 10px;
+    }
+
+    .radio-wrapper .form-check .form-check-input{
+        width: 20px !important;
+        height: 20px !important;
+    }
+}
+
+
+
+
+@keyframes rotate360 { 
+    100% {
+        transform: rotate(360deg);
+    }
+}
+@keyframes exist { 
+    100% {
+        width: 15px;
+        height: 15px;
+        margin: -8px 5px 0 0;
     }
 }

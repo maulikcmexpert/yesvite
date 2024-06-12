@@ -140,7 +140,7 @@ class User extends Authenticatable
 
     public function user_profile_privacy()
     {
-        $this->hasMany(UserProfilePrivacy::class, 'user_id', 'id');
+        return $this->hasMany(UserProfilePrivacy::class, 'user_id', 'id');
     }
 
 

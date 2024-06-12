@@ -2,10 +2,10 @@
     <p>Full web functionality will be available in Q3 {{date('Y')}} - for full functionality use our apps</p>
     <div class="app-store ms-auto d-flex gap-2">
         <a href="#" class="google-app">
-            <img src="{{asset('public/assets/front/image/google-app.png')}}" alt="google-app">
+            <img src="{{asset('assets/front/image/google-app.png')}}" alt="google-app">
         </a>
         <a href="#" class="mobile-app">
-            <img src="{{asset('public/assets/front/image/mobile-app.png')}}" alt="mobile-app">
+            <img src="{{asset('assets/front/image/mobile-app.png')}}" alt="mobile-app">
         </a>
     </div>
     <a href="#">

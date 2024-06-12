@@ -1,7 +1,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <!-- Brand Logo -->
   <a href="{{URL::to('/admin/dashboard')}}" class="brand-link">
-    <img src="{{asset('storage/yesvitelogo_white.png')}}" alt="Yesvite Logo" class="brand-image logo-full elevation-3" style="opacity: .8'">
+    <img src="{{asset('storage/yesvitelogo.png')}}" alt="Yesvite Logo" class="brand-image logo-full elevation-3" style="opacity: .8'">
     <img src="{{asset('storage/logo2.png')}}" alt="Yesvite Logo" class="brand-image logo-short elevation-3" style="opacity: .8'">
   </a>
   <!-- Sidebar -->
@@ -29,7 +29,7 @@
     </div>
 
     <!-- Sidebar Menu -->
-    <nav class="mt-2">
+    <nav class="mt-4">
 
 
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">

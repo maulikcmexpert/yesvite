@@ -21,7 +21,7 @@
             <p>Please Sign In</p>
         </div>
         <div class="login-form-wrap">
-            <form method="POST" id="loginForm" action="{{route('auth.checkLogin')}}">
+            <form method="POST" id="loginForm" action="{{route('auth.checkAddAccount')}}">
                 @csrf
 
                 <div class="input-form">

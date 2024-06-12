@@ -160,6 +160,7 @@ Route::prefix('user/v1/')->middleware('checkUser')->group(function () {
 Route::get('send_thanks', [ApiControllerv2::class, 'sendThanks']);
 Route::get('install_android_app', [ApiControllerv2::class, 'installAndroidApp']);
 Route::get('install_ios_app', [ApiControllerv2::class, 'installIosApp']);
+Route::get('sendSMS', [ApiControllerv2::class, 'sendSMS']);
 
 Route::prefix('user/v2/')->middleware('checkUser')->group(function () {
 
@@ -169,6 +170,7 @@ Route::prefix('user/v2/')->middleware('checkUser')->group(function () {
     Route::post('create_professional_account', [ApiControllerv2::class, 'createProfessionalAccount']);
     Route::post('update_profile', [ApiControllerv2::class, 'updateProfile']);
     Route::post('update_profile_or_bg_profile', [ApiControllerv2::class, 'updateProfileOrBgProfile']);
+    Route::post('remove_profile', [ApiControllerv2::class, 'removeProfile']);
     Route::post('my_profile', [ApiControllerv2::class, 'myProfile']);
     Route::post('change_password', [ApiControllerv2::class, 'changePassword']);
     Route::post('privacy_setting', [ApiControllerv2::class, 'privacySetting']);
@@ -186,6 +188,7 @@ Route::prefix('user/v2/')->middleware('checkUser')->group(function () {
     Route::post('edit_contact', [ApiControllerv2::class, 'editContact']);
     Route::post('create_event', [ApiControllerv2::class, 'createEvent']);
     Route::post('edit_event', [ApiControllerv2::class, 'editEvent']);
+    Route::post('set_user_event_create_step', [ApiControllerv2::class, 'setUserEventCreateStep']);
     Route::get('draft_event_list', [ApiControllerv2::class, 'draftEventList']);
     Route::post('get_event_data', [ApiControllerv2::class, 'getEventData']);
 

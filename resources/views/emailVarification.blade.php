@@ -100,7 +100,7 @@
                     @endif
                 </div>
                 @if($faild != 'faild')
-                <h3 class="text-center">Email Varification</h3>
+                <h3 class="text-center">Email Verification</h3>
                 @else
                 <h3 class="text-center">Invalid Token</h3>
                 @endif

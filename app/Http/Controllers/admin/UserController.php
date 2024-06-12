@@ -25,7 +25,7 @@ class UserController extends Controller
 
         if ($request->ajax()) {
 
-            $data = User::where('account_type', '0')->orderBy('id', 'desc');
+            $data = User::where(['account_type' => '0', 'app_user' => '1'])->orderBy('id', 'desc');
 
             return Datatables::of($data)
 
