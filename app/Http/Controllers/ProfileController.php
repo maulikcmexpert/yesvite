@@ -137,7 +137,7 @@ class ProfileController extends Controller
     {
         $phone_number = $request->input('phone_number');
         $id = decrypt($request->input('id'));
-        dd($id);
+
         $exists = User::where('phone_number', $phone_number)->where('id', '!=', $id)->exists();
         dd($exists);
         if ($exists) {
