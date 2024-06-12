@@ -35,6 +35,7 @@ class AuthController extends Controller
      */
     public function create()
     {
+
         $page = 'auth/login';
         $title = "Login";
         $js = ['login'];
@@ -144,6 +145,106 @@ class AuthController extends Controller
             $user = Auth::guard('web')->user();
             // if ($user->email_verified_at != NULL) {
 
+
+            $sessionArray = [
+                'id' => encrypt($user->id),
+                'username' => $user->firstname . ' ' . $user->lastname,
+                'profile' => ($user->profile != NULL || $user->profile != "") ? asset('public/storage/profile/' . $user->profile) : asset('public/storage/profile/no_profile.png')
+            ];
+            Session::put(['user' => $sessionArray]);
+
+            if (Session::has('user')) {
+
+                if ($remember) {
+                    Cookie::queue('email', $user->email, 120);
+                    Cookie::queue('password', $request->password, 120);
+                } else {
+
+                    Cookie::forget('email');
+                    Cookie::forget('password');
+                }
+                event(new \App\Events\UserRegistered($user));
+                toastr()->success('Logged in successfully!');
+                return redirect()->route('home');
+            } else {
+                toastr()->error('Invalid credentials!');
+                return  Redirect::to('login');
+            }
+            // } 
+            // else {
+            //     $randomString = Str::random(30);
+            //     $user->remember_token = $randomString;
+            //     $user->save();
+
+            //     $userData = [
+            //         'username' => $user->firstname . ' ' . $user->lastname,
+            //         'email' => $user->email,
+            //         'token' => $randomString,
+            //         'is_first_login' => $user->is_first_login
+            //     ];
+            //     Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($user) {
+            //         $message->to($user->email);
+            //         $message->subject('Email Verification Mail');
+            //     });
+            //     toastr()->success('Please check and verify your email address.');
+            //     return  Redirect::to('login');
+            // }
+        }
+        toastr()->error('Email or Passqword invalid');
+        return  Redirect::to('login');
+    }
+
+
+    function getUserAccountType($userId)
+    {
+        return User::select('account_type')->where('id', $userId)->first();
+    }
+    public function checkAddAccount(Request $request)
+    {
+
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required', 'min:8'],
+        ], [
+            'email.required' => 'Please enter Email',
+            'email.email' => 'Please enter a valid Email',
+            'password.required' => 'Please enter a Password',
+            'password.min' => 'Password must be at least 8 characters',
+        ]);
+
+
+        $remember = $request->has('remember'); // Check if "Remember Me" checkbox is checked
+
+
+
+        if (Auth::attempt($credentials, $remember)) {
+            $user = Auth::guard('web')->user();
+            // if ($user->email_verified_at != NULL) {
+
+
+            $checkType = $this->getUserAccountType(decrypt(Session::get('user')['id']));
+            if ($checkType->account_type == $user->account_type) {
+                $msg = "";
+                if ($checkType->account_type == '0') {
+                    $msg = "personal";
+                } else if ($checkType->account_type == '1') {
+                    $msg = "proffiesional";
+                }
+                toastr()->error('You have already login ' . $msg);
+                return  Redirect::to('profile');
+            }
+
+            $alreadyLog = User::select('id', 'firstname as first_name', 'lastname as last_name', 'email', 'profile')->where('id', Session::get('user')->id)->first();
+
+            $alreadyLog['profile'] = ($alreadyLog->profile != null) ? asset('storage/profile/' . $alreadyLog->profile) : "";
+
+            $sessionArray = [
+                'id' => encrypt($alreadyLog->id),
+                'username' => $alreadyLog->firstname . ' ' . $alreadyLog->lastname,
+                'profile' => $alreadyLog->profile
+            ];
+            Session::put(['secondary_user' => $sessionArray]);
+
             $sessionArray = [
                 'id' => encrypt($user->id),
                 'username' => $user->firstname . ' ' . $user->lastname,
@@ -188,7 +289,18 @@ class AuthController extends Controller
             // }
         }
         toastr()->error('Email or Passqword invalid');
-        return  Redirect::to('login');
+        return  Redirect::to('home');
+    }
+
+
+    public function addAccount()
+    {
+
+        $page = 'auth/add_account';
+        $title = "Login";
+        // $js = ['login'];
+
+        return view('layout', compact('page', 'title'));
     }
 
     /**

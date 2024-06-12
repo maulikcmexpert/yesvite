@@ -104,7 +104,7 @@ use Illuminate\Database\Query\Builder;
 use App\Jobs\SendInvitationMailJob as sendInvitation;
 use stdClass;
 
-use Twilio\Rest\Client;
+
 
 class ApiControllerv2 extends Controller
 
@@ -134,28 +134,7 @@ class ApiControllerv2 extends Controller
 
 
 
-    public function sendSMS()
-    {
-        $receiverNumber = "+919875106793";
-        $message = "This is testing from ItSolutionStuff.com";
 
-        try {
-
-            $account_sid = env('ACCOUNT_SID');;
-            $auth_token = env("AUTH_TOKEN");
-            $twilio_number = env("TWILIO_NUMBER");
-
-            $client = new Client($account_sid, $auth_token);
-            $client->messages->create($receiverNumber, [
-                'from' => $twilio_number,
-                'body' => $message
-            ]);
-
-            dd('SMS Sent Successfully.');
-        } catch (Exception $e) {
-            dd("Error: " . $e->getMessage());
-        }
-    }
 
     public function sendThanks()
     {
@@ -4212,10 +4191,10 @@ class ApiControllerv2 extends Controller
                 $eventDetail['end_date'] = (!empty($getEventData->end_date) && $getEventData->end_date != NULL) ? $getEventData->end_date : "";
                 $eventDetail['rsvp_by_date_set'] =  $getEventData->rsvp_by_date_set;
                 $eventDetail['rsvp_by_date'] = (!empty($getEventData->rsvp_by_date) && $getEventData->rsvp_by_date != NULL) ? $getEventData->rsvp_by_date : "";
-                $eventDetail['rsvp_start_time'] = (!empty($getEventData->rsvp_start_time) && $getEventData->rsvp_start_time != NULL) ? $getEventData->rsvp_start_time : "-";
+                $eventDetail['rsvp_start_time'] = (!empty($getEventData->rsvp_start_time) && $getEventData->rsvp_start_time != NULL) ? $getEventData->rsvp_start_time : "";
                 $eventDetail['rsvp_start_timezone'] = (!empty($getEventData->rsvp_start_timezone) && $getEventData->rsvp_start_timezone != NULL) ? $getEventData->rsvp_start_timezone : "";
                 $eventDetail['rsvp_end_time_set'] = $getEventData->rsvp_end_time_set;
-                $eventDetail['rsvp_end_time'] = (!empty($getEventData->rsvp_end_time) && $getEventData->rsvp_end_time != NULL) ? $getEventData->rsvp_end_time : "-";
+                $eventDetail['rsvp_end_time'] = (!empty($getEventData->rsvp_end_time) && $getEventData->rsvp_end_time != NULL) ? $getEventData->rsvp_end_time : "";
                 $eventDetail['rsvp_end_timezone'] = (!empty($getEventData->rsvp_end_timezone) & $getEventData->rsvp_end_timezone != NULL) ? $getEventData->rsvp_end_timezone : "";
                 $eventDetail['event_location_name'] = (!empty($getEventData->event_location_name) & $getEventData->event_location_name != NULL) ? $getEventData->event_location_name : "";
                 $eventDetail['latitude'] = (!empty($getEventData->latitude) & $getEventData->latitude != NULL) ? $getEventData->latitude : "";
