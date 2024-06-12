@@ -7147,6 +7147,7 @@ class ApiControllerv2 extends Controller
                     } else if ($nextval->type == '3') {
                         $endtim =  $nextval->end_time;
                     }
+                    dd($endtim);
                     $totalTime =  getDeferentBetweenTime($stattim, $endtim);
                 } elseif ($value->type == '2') {
                     $stattim = $value->start_time;

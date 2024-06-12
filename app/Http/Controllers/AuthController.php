@@ -215,15 +215,18 @@ class AuthController extends Controller
 
         $remember = $request->has('remember'); // Check if "Remember Me" checkbox is checked
 
-
-
         if (Auth::attempt($credentials, $remember)) {
             $user = Auth::guard('web')->user();
             // if ($user->email_verified_at != NULL) {
 
-
             $checkType = $this->getUserAccountType(decrypt(Session::get('user')['id']));
+
             if ($checkType->account_type == $user->account_type) {
+                $loginUser = User::where('id', Session::get('user')['id'])->first();
+                if ($loginUser != null) {
+
+                    Auth::login($loginUser);
+                }
                 $msg = "";
                 if ($checkType->account_type == '0') {
                     $msg = "personal";
@@ -234,21 +237,24 @@ class AuthController extends Controller
                 return  Redirect::to('profile');
             }
 
-            $alreadyLog = User::select('id', 'firstname as first_name', 'lastname as last_name', 'email', 'profile')->where('id', Session::get('user')->id)->first();
+            $alreadyLog = User::select('id', 'firstname as first_name', 'lastname as last_name', 'email', 'profile')->where('id', decrypt(Session::get('user')['id']))->first();
+            if ($alreadyLog != null) {
 
-            $alreadyLog['profile'] = ($alreadyLog->profile != null) ? asset('storage/profile/' . $alreadyLog->profile) : "";
+                $alreadyLog['profile'] = ($alreadyLog->profile != null) ? asset('storage/profile/' . $alreadyLog->profile) : "";
 
-            $sessionArray = [
-                'id' => encrypt($alreadyLog->id),
-                'username' => $alreadyLog->firstname . ' ' . $alreadyLog->lastname,
-                'profile' => $alreadyLog->profile
-            ];
-            Session::put(['secondary_user' => $sessionArray]);
+                $sessionAlreadyArray = [
+                    'id' => encrypt($alreadyLog->id),
+                    'username' => $alreadyLog->firstname . ' ' . $alreadyLog->lastname,
+                    'profile' => $alreadyLog->profile
+                ];
+                Session::put(['secondary_user' => $sessionAlreadyArray]);
+                Session::forget('user');
+            }
 
             $sessionArray = [
                 'id' => encrypt($user->id),
                 'username' => $user->firstname . ' ' . $user->lastname,
-                'profile' => ($user->profile != NULL || $user->profile != "") ? asset('public/storage/profile/' . $user->profile) : asset('public/storage/profile/no_profile.png')
+                'profile' => ($user->profile != NULL || $user->profile != "") ? asset('storage/profile/' . $user->profile) : asset('public/storage/profile/no_profile.png')
             ];
             Session::put(['user' => $sessionArray]);
             if (Session::has('user')) {

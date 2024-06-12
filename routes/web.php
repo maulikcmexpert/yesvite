@@ -12,6 +12,8 @@ use App\Http\Controllers\{
     SocialController,
     AccountSettingController
 };
+use Illuminate\Support\Facades\Auth;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -107,6 +109,10 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('/updatePassword/{id}', 'updatePassword');
 
     Route::get('/logout', function () {
+
+        Auth::logout();
+
+        // Invalidate the session and regenerate the CSRF token to prevent session fixation attacks
 
         Session::forget('user');
 

@@ -73,7 +73,9 @@
                      </ul>
                  </div>
                  <?php
+
                     $userprofile = Auth::guard('web')->user()->profile;
+
                     $userProfile = asset('storage/profile/no_profile.png');
                     if ($userprofile != NULL || $userprofile != "") {
 
