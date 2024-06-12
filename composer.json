@@ -13,7 +13,6 @@
         "laravel/socialite": "^5.14",
         "laravel/tinker": "^2.8",
         "owen-oj/laravel-getid3": "^2.2",
-        "php-flasher/flasher-laravel": "^1.15",
         "php-flasher/flasher-toastr-laravel": "^1.15",
         "php-flasher/flasher-toastr-symfony": "^1.15",
         "propaganistas/laravel-phone": "^5.3",
