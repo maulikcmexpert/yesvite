@@ -143,7 +143,13 @@ h1.ProductTitle{
 [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active:focus, [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active:hover,
 [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link:hover
 {
-    background-color: rgb(231, 50, 128, 0.2);;
+    background-color: #000;
+}
+
+[class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active .dot,
+[class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link:hover .dot
+{
+   color: #fff;
 }
 
 .nav-pills .nav-link.active i,
@@ -260,7 +266,7 @@ label:not(.form-check-label):not(.custom-file-label){
     border-radius: 20px !important;
     outline: 0;
     padding-left: 15px !important;
-    border-color: #e95f9a !important;
+    border-color: #000 !important;
 }
 
 table.table,
@@ -288,7 +294,7 @@ table.table tbody tr{
 .dataTables_length select{
     background-color: #fff !important;
     outline: 0;
-    border-color: #e95f9a !important;
+    border-color: #000 !important;
 }
 
 .form-control{
