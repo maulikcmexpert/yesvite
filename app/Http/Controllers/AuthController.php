@@ -101,8 +101,8 @@ class AuthController extends Controller
 
 
         if ($validator->fails()) {
-
-            return redirect()->back()->withErrors($validator)->withInput();
+            toastr()->success($validator->errors()->first());
+            return false;
         }
 
         try {
