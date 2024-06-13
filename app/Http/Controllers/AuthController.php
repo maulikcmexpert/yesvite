@@ -166,8 +166,8 @@ class AuthController extends Controller
                     Cookie::forget('password');
                 }
                 event(new \App\Events\UserRegistered($user));
-                toaster()->add('Logged in successfully!')->success();
-                // toastr()->success('Logged in successfully!');
+
+                toastr()->success('Logged in successfully!');
                 return redirect()->route('home');
             } else {
                 toastr()->error('Invalid credentials!');
