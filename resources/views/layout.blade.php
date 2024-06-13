@@ -8,7 +8,9 @@
 <body>
 
     <x-front.bodyheader title={{$title}} />
-
+    <div id="app">
+        @toastcomponent
+    </div>
     @include($page)
 
     <x-front.bodyfooter />
