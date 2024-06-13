@@ -37,7 +37,7 @@
 
                     </ul>
                     <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                        <div class="tab-pane fade show active position-relative" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                             <div class="position-relative">
                                 <input type="search" placeholder="Search name" class="form-control">
                                 <span>
