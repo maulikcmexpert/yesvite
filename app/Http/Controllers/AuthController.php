@@ -19,6 +19,7 @@ use App\Rules\EmailExists;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
+use Flasher\Prime\FlasherInterface;
 
 class AuthController extends Controller
 {
