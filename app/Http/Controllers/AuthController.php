@@ -99,7 +99,7 @@ class AuthController extends Controller
             ]);
         }
 
-        dd($request);
+
         if ($validator->fails()) {
 
             return redirect()->back()->withErrors($validator)->withInput();
