@@ -63,7 +63,9 @@ class AuthController extends Controller
             'email' => ['required', 'email', new EmailExists], // Use the custom validation rule
             'zip_code' => 'required|string|max:10',
             'password' => 'required|string|min:8|regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/',
+            'businesspassword' => 'required|string|min:8|regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/',
             'cpassword' => 'required|same:password',
+            'businesscpassword' => 'required|same:businesspassword',
         ], [
             'firstname.required' => 'Please enter your first name',
             'lastname.required' => 'Please enter your last name',
@@ -71,11 +73,16 @@ class AuthController extends Controller
             'email.email' => 'Please enter a valid email address',
             'zip_code.required' => 'Please enter your zip code',
             'password.required' => 'Please enter your password',
+            'businesspassword.required' => 'Please enter your password',
             'password.regex' => 'Your password must be at least 8 characters long and contain both letters and numbers',
+            'businesspassword.regex' => 'Your password must be at least 8 characters long and contain both letters and numbers',
             'cpassword.required' => 'Please confirm your password',
+            'businesscpassword.required' => 'Please confirm your password',
             'cpassword.same' => 'Passwords do not match',
+            'businesscpassword.same' => 'Passwords do not match',
         ]);
         if ($validator->fails()) {
+
             return redirect()->back()->withErrors($validator)->withInput();
         }
 

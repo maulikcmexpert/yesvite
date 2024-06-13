@@ -220,12 +220,12 @@
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div class="input-form">
-                                        <input type="password" class="form-control" id="businesspassword" name="password" value="{{ old('password')}}">
+                                        <input type="password" class="form-control" id="businesspassword" name="businesspassword" value="{{ old('businesspassword')}}">
                                         <label for="password" class="floating-label">Password <span>*</span></label>
                                         <span toggle="#password-field" class="fa-regular fa-fw fa-eye-slash field-icon toggle-password"></span>
                                         <div class="label-error">
-                                            <label id="password-error" class="error" for="businesspassword" style="color: red;"></label>
-                                            @error('password')
+                                            <label id="businesspassword-error" class="error" for="businesspassword" style="color: red;"></label>
+                                            @error('businesspassword')
                                             <label class="error">{{ $message }}</label>
                                             @enderror
                                         </div>
@@ -233,12 +233,12 @@
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div class="input-form mb-0">
-                                        <input type="password" class="form-control" id="businesscpassword" name="cpassword" value="{{ old('cpassword')}}">
+                                        <input type="password" class="form-control" id="businesscpassword" name="businesscpassword" value="{{ old('businesscpassword')}}">
                                         <label for="password" class="floating-label">Confirm Password <span>*</span></label>
                                         <span toggle="#password-field" class="fa-regular fa-fw fa-eye-slash field-icon toggle-password"></span>
                                         <div class="label-error">
-                                            <label id="cpassword-error" class="error" for="businesscpassword" style="color: red;"></label>
-                                            @error('cpassword')
+                                            <label id="businesscpassword-error" class="error" for="businesscpassword" style="color: red;"></label>
+                                            @error('businesscpassword')
                                             <label class="error">{{ $message }}</label>
                                             @enderror
                                         </div>
