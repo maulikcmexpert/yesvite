@@ -102,8 +102,7 @@ class AuthController extends Controller
 
 
         if ($validator->fails()) {
-            toastr()->success($validator->errors()->first());
-            return false;
+            Redirect::to('register')->with('error', $validator->errors()->first());;
         }
 
         try {
@@ -140,16 +139,16 @@ class AuthController extends Controller
                 $message->to($request->email);
                 $message->subject('Email Verification Mail');
             });
-            flash('Account successfully created, please verify your email before you can log in');
-            toastr()->success('Account successfully created, please verify your email before you can log in');
-            return  Redirect::to('login');
+
+
+            return  Redirect::to('login')->with('success', 'Account successfully created, please verify your email before you can log in');;
         } catch (QueryException $e) {
             DB::Rollback();
-            toastr()->error('Register not successfull');
-            return  Redirect::to('register');
+
+            return  Redirect::to('register')->with('error', 'Register not successfull');
         } catch (Exception  $e) {
-            toastr()->error('something went wrong');
-            return  Redirect::to('register');
+
+            return  Redirect::to('register')->with('error', 'something went wrong');
         }
     }
 
@@ -196,11 +195,11 @@ class AuthController extends Controller
                     Cookie::forget('password');
                 }
                 event(new \App\Events\UserRegistered($user));
-                flash('Logged in successfully!');
-                return redirect()->route('home');
+
+                return redirect()->route('home')->with('success', 'Logged in successfully!');;
             } else {
-                flash()->error('Invalid credentials!');
-                return  Redirect::to('login');
+
+                return  Redirect::to('login')->with('error', 'Invalid credentials!');
             }
             // } 
             // else {
@@ -222,9 +221,7 @@ class AuthController extends Controller
             //     return  Redirect::to('login');
             // }
         }
-        flash()->error('Email or Passqword invalid');
-
-        return  Redirect::to('login');
+        return  Redirect::to('login')->with('error', 'Email or Password invalid!');
     }
 
 

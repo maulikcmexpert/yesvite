@@ -141,6 +141,6 @@ Route::controller(Auth::class)->group(function () {
 
         Session::forget('admin');
 
-        return redirect('/admin/login');
+        return redirect('/admin');
     });
 });
