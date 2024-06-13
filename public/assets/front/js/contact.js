@@ -5,7 +5,7 @@ $(document).ready(function () {
     $(".product-scroll").on("scroll", function () {
         if ($(this).scrollTop() + $(this).innerHeight() >= this.scrollHeight) {
             page++;
-            loadMoreItems(page);
+            loadMoreData(page);
         }
     });
 
