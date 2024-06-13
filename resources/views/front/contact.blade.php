@@ -71,7 +71,7 @@
                             </div>
 
                         </div>
-                        <div id="loader" style="display: none;">
+                        <div id="loader" style="display: block;">
                             <img src="{{asset('assets/front/loader.gif')}}" alt="loader" style="width:48px;height:48px;">
                         </div>
                         <div class="tab-pane fade" id="phone" role="tabpanel" aria-labelledby="phone-tab">
