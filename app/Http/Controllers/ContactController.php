@@ -38,7 +38,7 @@ class ContactController extends Controller
         $formatted_date = $date->format('F, Y');
         $user['join_date'] = $formatted_date;
 
-        $yesviteUser = User::where('app_user', '=', '1')->where('id', '!=', $id)->paginate(1);
+        $yesviteUser = User::where('app_user', '=', '1')->where('id', '!=', $id)->paginate(10);
 
         return view('layout', compact(
             'title',
@@ -53,7 +53,7 @@ class ContactController extends Controller
     {
         $id = decrypt(session()->get('user')['id']);
         if ($request->ajax()) {
-            $yesviteUser = User::where('app_user', '=', '1')->where('id', '!=', $id)->paginate(1); // Adjust the number as needed
+            $yesviteUser = User::where('app_user', '=', '1')->where('id', '!=', $id)->paginate(10); // Adjust the number as needed
             return view('front.ajax_contacts', compact('yesviteUser'))->render();
         }
         return response()->json(['error' => 'Invalid request'], 400);
