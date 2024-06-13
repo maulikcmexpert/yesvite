@@ -6,7 +6,7 @@ $(document).ready(function () {
         console.log($(this).scrollTop());
         console.log($(this).innerHeight());
         console.log($(this).scrollHeight());
-        if ($(this).scrollTop() + $(this).innerHeight() > this.scrollHeight) {
+        if ($(this).scrollTop() + $(this).innerHeight() >= this.scrollHeight) {
             page++;
             loadMoreData(page);
         }
