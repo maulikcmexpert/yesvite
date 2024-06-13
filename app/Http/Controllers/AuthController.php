@@ -221,7 +221,7 @@ class AuthController extends Controller
             //     return  Redirect::to('login');
             // }
         }
-        flash()->error('Email or Passqword invalid');
+        flash('Email or Passqword invalid');
 
         return  Redirect::to('login');
     }
