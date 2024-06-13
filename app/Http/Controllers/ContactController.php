@@ -37,7 +37,7 @@ class ContactController extends Controller
         $date = Carbon::parse($user->created_at);
         $formatted_date = $date->format('F, Y');
         $user['join_date'] = $formatted_date;
-        dd(User::where('app_user', '=', '1')->where('id', '!=', $id)->count());
+
         $yesviteUser = User::where('app_user', '=', '1')->where('id', '!=', $id)->paginate(10);
 
         return view('layout', compact(
