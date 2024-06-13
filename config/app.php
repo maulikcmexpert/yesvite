@@ -163,8 +163,8 @@ return [
         /*
          * Application Service Providers...
          */
-     
-        Yoeunes\Toastr\ToastrServiceProvider::class,
+
+
         Owenoj\LaravelGetId3\GetId3ServiceProvider::class,
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
@@ -190,7 +190,7 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
 
         // 'Example' => App\Facades\Example::class,
-      
+
         'Location' => 'Stevebauman\Location\Facades\Location',
     ])->toArray(),
 
