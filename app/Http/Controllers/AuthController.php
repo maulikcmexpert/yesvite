@@ -195,7 +195,7 @@ class AuthController extends Controller
                     Cookie::forget('password');
                 }
                 event(new \App\Events\UserRegistered($user));
-
+                flash('Logged in successfully!');
                 toastr()->success('Logged in successfully!');
                 return redirect()->route('home');
             } else {
