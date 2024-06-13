@@ -6,10 +6,10 @@ $(document).ready(function () {
         console.log("scrollTop = " + $(this).scrollTop());
         console.log("innerHeight =" + $(this).innerHeight());
         console.log("scrollHeight =" + this.scrollHeight);
-        if ($(this).scrollTop() + $(this).innerHeight() >= this.scrollHeight) {
-            page++;
-            loadMoreData(page);
-        }
+        // if ($(this).scrollTop() + $(this).innerHeight() >= this.scrollHeight) {
+        page++;
+        loadMoreData(page);
+        // }
     });
 
     function loadMoreData(page) {
