@@ -14,15 +14,15 @@ $(document).ready(function () {
             url: base_url + "contacts/load?page=" + page,
             type: "GET",
             beforeSend: function () {
-                $("#loading").show();
+                $("#loader").show();
             },
         })
             .done(function (data) {
                 if (data.html == " ") {
-                    $("#loading").html("No more contacts found");
+                    $("#loader").html("No more contacts found");
                     return;
                 }
-                $("#loading").hide();
+                $("#loader").hide();
                 $("#yesviteUser").append(data);
             })
             .fail(function (jqXHR, ajaxOptions, thrownError) {
