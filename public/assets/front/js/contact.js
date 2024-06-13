@@ -1,13 +1,11 @@
 $(document).ready(function () {
     var base_url = $("#base_url").val();
     var page = 1;
-    $(".product-scroll").scroll(function () {
-        if (
-            $(".product-scroll").scrollTop() + $(window).height() >=
-            $(document).height() - 50
-        ) {
+
+    $(".product-scroll").on("scroll", function () {
+        if ($(this).scrollTop() + $(this).innerHeight() >= this.scrollHeight) {
             page++;
-            loadMoreData(page);
+            loadMoreItems(page);
         }
     });
 
