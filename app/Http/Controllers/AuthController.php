@@ -196,10 +196,9 @@ class AuthController extends Controller
                 }
                 event(new \App\Events\UserRegistered($user));
                 flash('Logged in successfully!');
-                toastr()->success('Logged in successfully!');
                 return redirect()->route('home');
             } else {
-                toastr()->error('Invalid credentials!');
+                flash()->error('Invalid credentials!');
                 return  Redirect::to('login');
             }
             // } 
@@ -222,7 +221,8 @@ class AuthController extends Controller
             //     return  Redirect::to('login');
             // }
         }
-        toastr()->error('Email or Passqword invalid');
+        flash()->error('Email or Passqword invalid');
+
         return  Redirect::to('login');
     }
 
