@@ -18,6 +18,7 @@ use App\Models\User;
 use App\Rules\EmailExists;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -102,7 +103,9 @@ class AuthController extends Controller
             $storeUser->lastname =  $request->lastname;
             $storeUser->email =  $request->email;
             $storeUser->zip_code =  $request->zip_code;
-            $storeUser->password =  $request->password;
+            $storeUser->password = ($request->account_type != '1') ?  Hash::make($request->password) : Hash::make($request->businesspassword);
+
+
             $storeUser->password_updated_date =  date('Y-m-d');
             $storeUser->remember_token =   $randomString;
             $storeUser->save();
