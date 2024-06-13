@@ -67,7 +67,10 @@ Route::middleware('checkUserExist')->group(function () {
     Route::post('upload_bg_profile',  [ProfileController::class, 'uploadBgProfile'])->name('profile.uploadbgprofile');
 
     Route::get('contact',  [ContactController::class, 'index'])->name('profile.contact');
+
+    Route::get('contacts/load', [ContactController::class, 'loadMore'])->name('contacts.loadMore');
 });
+
 
 Route::controller(AuthController::class)->group(function () {
 
