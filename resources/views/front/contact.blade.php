@@ -70,7 +70,7 @@
                                 </div>
                             </div>
                             <div id="loader" style="display: none;">
-                                <p>Loading more contacts...</p>
+                                <img src="{{asset('assets/front/loader.gif')}}" alt="loader" style="">
                             </div>
                         </div>
                         <div class="tab-pane fade" id="phone" role="tabpanel" aria-labelledby="phone-tab">
