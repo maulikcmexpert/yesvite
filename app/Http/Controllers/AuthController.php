@@ -139,6 +139,7 @@ class AuthController extends Controller
                 $message->to($request->email);
                 $message->subject('Email Verification Mail');
             });
+            flash('Account successfully created, please verify your email before you can log in');
             toastr()->success('Account successfully created, please verify your email before you can log in');
             return  Redirect::to('login');
         } catch (QueryException $e) {
