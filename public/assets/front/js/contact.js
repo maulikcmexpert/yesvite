@@ -3,6 +3,9 @@ $(document).ready(function () {
     var page = 1;
 
     $(".product-scroll").on("scroll", function () {
+        console.log($(this).scrollTop());
+        console.log($(this).innerHeight());
+        console.log($(this).scrollHeight());
         if ($(this).scrollTop() + $(this).innerHeight() > this.scrollHeight) {
             page++;
             loadMoreData(page);
