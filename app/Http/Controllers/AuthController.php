@@ -56,7 +56,7 @@ class AuthController extends Controller
     public function userRegister(Request $request)
     {
 
-        dd($request);
+
         if ($request->account_type == '1') {
             $validator = Validator::make($request->all(), [
                 'firstname' => 'required|string|max:255',
@@ -99,7 +99,7 @@ class AuthController extends Controller
             ]);
         }
 
-
+        dd($request);
         if ($validator->fails()) {
 
             return redirect()->back()->withErrors($validator)->withInput();

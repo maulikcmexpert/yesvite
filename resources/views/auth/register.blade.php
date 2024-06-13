@@ -33,9 +33,10 @@
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                     <div class="">
+                        <input type="hidden" id="account_type" name="account_type" value="0">
                         <form method="POST" action="{{route('store.register')}}" id="register">
                             @csrf
-                            <input type="hidden" id="account_type" name="account_type" value="0">
+
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                                     <div class="input-form">
