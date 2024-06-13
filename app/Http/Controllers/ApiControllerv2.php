@@ -11562,6 +11562,7 @@ class ApiControllerv2 extends Controller
 
                 if ($values->notification_type == 'invite') {
                     $checkIsCoHost =  EventInvitedUser::where(['user_id' => $values->user_id, 'event_id' => $values->event_id])->first();
+                    dd($checkIsCoHost);
                     $notificationDetail['is_co_host'] = $checkIsCoHost->is_co_host;
                     $notificationDetail['accept_as_co_host'] = $checkIsCoHost->accept_as_co_host;
                 }
