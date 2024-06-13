@@ -3006,6 +3006,11 @@ class ApiControllerv2 extends Controller
             $getGuest = EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $input['user_id']])->first();
             if ($getGuest != null) {
 
+                $checkNotificationdata = Notification::where(['event_id' => $input['event_id'], 'user_id' => $input['user_id']])->first();
+                if ($checkNotificationdata != null) {
+                    $checkNotificationdata->delete();
+                }
+
                 $getGuest->delete();
                 return response()->json(['status' => 1, 'message' => "Guest removed successfully"]);
             } else {
