@@ -69,9 +69,10 @@
                                     @include('front.ajax_contacts', ['yesviteUser' => $yesviteUser])
                                 </div>
                             </div>
-                            <div id="loader" style="display: none;">
-                                <img src="{{asset('assets/front/loader.gif')}}" alt="loader" style="width:48px;height:48px;">
-                            </div>
+
+                        </div>
+                        <div id="loader" style="display: none;">
+                            <img src="{{asset('assets/front/loader.gif')}}" alt="loader" style="width:48px;height:48px;">
                         </div>
                         <div class="tab-pane fade" id="phone" role="tabpanel" aria-labelledby="phone-tab">
                             <div class="position-relative">
