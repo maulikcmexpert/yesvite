@@ -427,7 +427,7 @@ ul.nav-tabs .nav-link:focus{
     display: block;
 }
 
-.loader{
+#loader{
     display: none;
     position: absolute;
     bottom: -20px;
