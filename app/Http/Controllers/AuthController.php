@@ -196,7 +196,7 @@ class AuthController extends Controller
                 }
                 event(new \App\Events\UserRegistered($user));
 
-                return redirect()->route('home')->with('success', 'Logged in successfully!');;
+                return redirect()->route('home')->with('success', 'Logged in successfully!');
             } else {
 
                 return  Redirect::to('login')->with('error', 'Invalid credentials!');
@@ -266,8 +266,8 @@ class AuthController extends Controller
                 } else if ($checkType->account_type == '1') {
                     $msg = "proffiesional";
                 }
-                toastr()->error('You have already login ' . $msg);
-                return  Redirect::to('profile');
+
+                return  Redirect::to('profile')->with('error', 'You have already login ' . $msg);
             }
 
             $alreadyLog = User::select('id', 'firstname', 'lastname', 'email', 'profile')->where('id', decrypt(Session::get('user')['id']))->first();
@@ -304,11 +304,10 @@ class AuthController extends Controller
                     Cookie::forget('password');
                 }
                 event(new \App\Events\UserRegistered($user));
-                toastr()->success('Logged in successfully!');
-                return redirect()->route('home');
+                return redirect()->route('home')->with('success', 'Logged in successfully!');
             } else {
-                toastr()->error('Invalid credentials!');
-                return  Redirect::to('login');
+
+                return  Redirect::to('login')->with('error', 'Invalid credentials!');
             }
             // } 
             // else {
@@ -330,8 +329,8 @@ class AuthController extends Controller
             //     return  Redirect::to('login');
             // }
         }
-        toastr()->error('Email or Passqword invalid');
-        return  Redirect::to('home');
+
+        return  Redirect::to('home')->with('error', 'Email or Passqword invalid');
     }
 
 
