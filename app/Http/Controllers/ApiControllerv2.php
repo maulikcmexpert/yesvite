@@ -3578,7 +3578,7 @@ class ApiControllerv2 extends Controller
                         'allow_for_1_more' => $eventData['event_setting']['allow_for_1_more'],
                         'allow_limit' => $eventData['event_setting']['allow_limit'],
                         'adult_only_party' => $eventData['event_setting']['adult_only_party'],
-                        'rsvp_by_date_status' => $eventData['event_setting']['rsvp_by_date_status'],
+
                         'thank_you_cards' => $eventData['event_setting']['thank_you_cards'],
                         'add_co_host' => $eventData['event_setting']['add_co_host'],
                         'gift_registry' => $eventData['event_setting']['gift_registry'],
@@ -4310,7 +4310,7 @@ class ApiControllerv2 extends Controller
                         "allow_for_1_more" => $eventSettings->allow_for_1_more,
                         "allow_limit" => strval($eventSettings->allow_limit),
                         "adult_only_party" => $eventSettings->adult_only_party,
-                        "rsvp_by_date_status" => $eventSettings->rsvp_by_date_status,
+
                         "rsvp_by_date" => $getEventData->rsvp_by_date,
                         "thank_you_cards" => $eventSettings->thank_you_cards,
                         "add_co_host" => $eventSettings->add_co_host,
