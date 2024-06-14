@@ -142,7 +142,8 @@
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="input-form">
-                                            <input type="tel" class="form-control" id="phone_number" name="phone_number" value="{{ $user->phone_number}}">
+                                            <input type="text" class="form-control phone_number" id="phone_number" name="phone_number" value="{{ $user->phone_number}}">
+                                            <input type="hidden" name="country_code" id="country_code" value="{{ $user->country_code}}">
                                             <label for="phone" class="floating-label">Phone Number</label>
                                             <div class="label-error">
                                                 <label id="phone_number-error" class="error" for="phone_number"></label>

@@ -89,8 +89,6 @@ $(document).ready(function () {
         $("#updateUserForm").submit();
     });
 
-    
-
     var profileCroppie = new Croppie(document.getElementById("profileIm"), {
         viewport: { width: 200, height: 200, type: "circle" },
         boundary: { width: 300, height: 300 },

@@ -130,10 +130,15 @@ function getbgImgData() {
     }
 }
 
-$(
-    "#phone_number,#alternative_contact_number,#home_number,#work_number,#fax_number"
-).intlTelInput({
+$(".phone_number").intlTelInput({
     initialCountry: "US",
     separateDialCode: true,
     // utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.4/js/utils.js"
+});
+
+$("[name=phone_number]").on("blur", function () {
+    var instance = $("[name=phone_number]");
+
+    var phoneNumber = instance.intlTelInput("getSelectedCountryData").dialCode;
+    $("#country_code").val(phoneNumber);
 });
