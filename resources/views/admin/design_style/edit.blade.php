@@ -25,12 +25,13 @@
                 @csrf
                 @method('PUT')
                 <input type="hidden" name="id" id="designId" value="{{ $designId }}">
-                <div class="card-body">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Design Name</label>
-                        <input type="text" class="form-control design_name" name="design_name" placeholder="Enter Design Name" value="{{ $getDesignDetail->design_name}}">
-                        <span class="text-danger">{{ $errors->first('design_name.*') }}</span>
-
+                <div class="card-body row">
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Design Name</label>
+                            <input type="text" class="form-control design_name" name="design_name" placeholder="Enter Design Name" value="{{ $getDesignDetail->design_name}}">
+                            <span class="text-danger">{{ $errors->first('design_name.*') }}</span>
+                        </div>
                     </div>
                 </div>
 

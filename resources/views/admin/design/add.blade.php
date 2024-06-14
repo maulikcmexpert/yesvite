@@ -15,8 +15,6 @@
     </div>
     <div class="col-md-12 pl-0">
 
-
-
         <div class="card card-primary mt-4 categoryCard">
 
             <div class="card-header">
@@ -29,42 +27,35 @@
 
                 @csrf
 
-                <div class="card-body">
+                <div class="card-body row">
 
-                    <div class="form-group">
+                    <div class="col-lg-4 mb-3">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Design Category</label>
 
-                        <label for="exampleInputEmail1">Design Category</label>
-
-                        <select class="form-control" name="event_design_category_id" id="event_design_category_id">
-                            <option value="">Select design Category</option>
-                            @foreach($getCatData as $value)
-                            <option value="{{ $value->id}}">{{ $value->category_name}}</option>
-                            @endforeach
-                        </select>
-
-
-                        <span class="text-danger">{{ $errors->first('event_design_category_id') }}</span>
-
-
-
+                            <select class="form-control" name="event_design_category_id" id="event_design_category_id">
+                                <option value="">Select design Category</option>
+                                @foreach($getCatData as $value)
+                                <option value="{{ $value->id}}">{{ $value->category_name}}</option>
+                                @endforeach
+                            </select>
+                            <span class="text-danger">{{ $errors->first('event_design_category_id') }}</span>
+                        </div>
                     </div>
+                     
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Design Subcategory</label>
+                            <select class="form-control" name="event_design_subcategory_id" id="event_design_subcategory_id">
+                                <option value="">Select Design Subcategory</option>
 
-                    <div class="form-group">
-
-                        <label for="exampleInputEmail1">Design Subcategory</label>
-
-                        <select class="form-control" name="event_design_subcategory_id" id="event_design_subcategory_id">
-                            <option value="">Select Design Subcategory</option>
-
-                        </select>
-
-
-                        <span class="text-danger">{{ $errors->first('event_design_subcategory_id') }}</span>
-
+                            </select>
+                            <span class="text-danger">{{ $errors->first('event_design_subcategory_id') }}</span>
+                        </div>
                     </div>
-
-
-                    <div class="form-group">
+                    
+                    <div class="col-lg-4">
+                        <div class="form-group">
 
                         <label for="exampleInputEmail1">Design Style</label>
 
@@ -75,24 +66,25 @@
                             @endforeach
                         </select>
 
-
                         <span class="text-danger">{{ $errors->first('event_design_subcategory_id') }}</span>
 
+                        </div>
                     </div>
 
-
-
-
-                    <div class="form-group">
-
-                        <label for="exampleInputEmail1">Upload Design</label>
-
-                        <input type="file" class="form-control image" name="image" id="selectImage">
-                        <img id="preview" src="#" alt="your image" class="mt-3" style="display:none;" width="100px" />
-                        <span class="text-danger">{{ $errors->first('image') }}</span>
+                    <div class="col-lg-12 mb-3">
+                        <div class="form-group row">
+                            <div class="col-lg-6">
+                                <label for="exampleInputEmail1">Upload Design</label>
+                                <input type="file" class="form-control image" name="image" id="selectImage">
+                                <span class="text-danger">{{ $errors->first('image') }}</span>
+                            </div>
+                            <div class="col-lg-6">
+                                <img id="preview" src="#" alt="your image" class="mt-3" style="display:none;" width="100px" />
+                            </div>
+                        </div>
                     </div>
 
-
+                    <div class="col-lg-12">
                     <div class="form-group colorGrp">
 
 
@@ -196,7 +188,11 @@
                             </div>
                         </div>
                         <label id="event_design_color[]-error" class="error" for="event_design_color[]" style=""></label>
+                        </div>
                     </div>
+
+
+                    
                 </div>
 
                 <div class="card-footer">

@@ -35,8 +35,8 @@
 
     <style>
         :root {
-            --primaryColor: #E73080;
-            --ButtonColor: #ec5b99;
+            --primaryColor: #EA555C;
+            --ButtonColor: #EA555C;
             --sidebarNavActive: rgb(231, 50, 128, 0.4);
         }
 
@@ -45,7 +45,7 @@
         }
 
         .login-box .brand-image {
-            width: 100% !important;
+            width:100% !important;
             max-width: 150px !important;
             box-shadow: inherit !important;
         }
@@ -57,6 +57,12 @@
 
         .login-box .input-group-text span.fas {
             color: #fff !important;
+        }
+
+        .login-box label.error{
+            color:red;
+            font-size: 14px;
+            font-weight: 400 !important;
         }
 
         .login-box .btn.btn-primary {
@@ -77,8 +83,6 @@
             border: 1px solid var(--primaryColor) !important;
         }
 
-
-
         .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
             background-color: var(--BottonColor);
             border-color: transparent !important;
@@ -95,7 +99,6 @@
         }
     </style>
 </head>
-
 
 
 <body class="hold-transition login-page">

@@ -35,52 +35,48 @@
 
                 @csrf
 
-                <div class="card-body">
+                <div class="card-body row" id="appendHtml">
+                    <div class="col-lg-3 mb-3">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Category</label>
 
-                    <div class="form-group">
+                            <select class="form-control event_design_category_id" id="event_design_category_id" name="event_design_category_id">
 
-                        <label for="exampleInputEmail1">Category</label>
+                                <option value="">Select Category</option>
 
-                        <select class="form-control event_design_category_id" id="event_design_category_id" name="event_design_category_id">
+                                @foreach($getCatData as $cat)
 
-                            <option value="">Select Category</option>
+                                <option value="{{$cat->id}}">{{$cat->category_name}}</option>
+        
+                                @endforeach
+                            </select>
 
-                            @foreach($getCatData as $cat)
+                            <span class="text-danger">{{ $errors->first('event_design_category_id.*') }}</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 mb-3">
 
-                            <option value="{{$cat->id}}">{{$cat->category_name}}</option>
-    
-                            @endforeach
-                        </select>
+                    
+                        <div class="form-group">
 
-                        <span class="text-danger">{{ $errors->first('event_design_category_id.*') }}</span>
+                            <label for="exampleInputEmail1">Subcategory Name</label>
+
+                            <input type="text" class="form-control subcategory_name" name="subcategory_name[]" placeholder="Enter Subcategory Name" value="{{ old('subcategory_name.*')}}">
+
+                            <span class="text-danger">{{ $errors->first('subcategory_name.*') }}</span>
 
 
+
+                        </div>
 
                     </div>
-
-                    <div class="form-group">
-
-                        <label for="exampleInputEmail1">Subcategory Name</label>
-
-                        <input type="text" class="form-control subcategory_name" name="subcategory_name[]" placeholder="Enter Subcategory Name" value="{{ old('subcategory_name.*')}}">
-
-                        <span class="text-danger">{{ $errors->first('subcategory_name.*') }}</span>
-
-
-
-                    </div>
-
-                    <div id="appendHtml">
-
-
-
-                    </div>
-
                 </div>
 
+                
 
 
-                <div class="text-right">
+
+                <div class="text-center">
 
                     <button type="button" class="btn btn-primary" id="addMoreSubCat">Add More </button>
 
@@ -105,21 +101,23 @@
 
 
 <div style="display: none;" id="AddHtml">
+    <div class="col-lg-3 mb-3">
+    
+        <div class="form-group">
 
-    <div class="form-group">
+            <label for="">Subcategory Name</label>
 
-        <label for="">Subcategory Name</label>
+            <input type="text" class="form-control subcategory_name" name="subcategory_name[]" placeholder="Enter Subcategory Name">
 
-        <input type="text" class="form-control subcategory_name" name="subcategory_name[]" placeholder="Enter Subcategory Name">
+            <span class="text-danger">{{ $errors->first('subcategory_name.*') }}</span>
 
-        <span class="text-danger">{{ $errors->first('subcategory_name.*') }}</span>
+            <!-- <div class="remove"> -->
 
-        <!-- <div class="remove"> -->
+            <i class="fa-solid fa-xmark text-danger remove"></i>
 
-        <i class="fa-solid fa-xmark text-danger remove"></i>
+            <!-- </div> -->
 
-        <!-- </div> -->
-
+        </div>
     </div>
 
 </div>
