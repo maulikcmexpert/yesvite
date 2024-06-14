@@ -130,3 +130,10 @@ function getbgImgData() {
     }
 }
 
+$(
+    "#phone_number,#alternative_contact_number,#home_number,#work_number,#fax_number"
+).intlTelInput({
+    initialCountry: "US",
+    separateDialCode: true,
+    // utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.4/js/utils.js"
+});

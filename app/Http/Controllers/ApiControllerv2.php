@@ -4464,7 +4464,7 @@ class ApiControllerv2 extends Controller
             ]);
         }
 
-        try {
+        // try {
             DB::beginTransaction();
 
             $updateEvent = Event::where('id', $eventData['event_id'])->first();
@@ -5061,14 +5061,16 @@ class ApiControllerv2 extends Controller
 
                 return response()->json(['status' => 0, 'message' => 'Event is not found']);
             }
-        } catch (QueryException $e) {
-            DB::rollBack();
-
-            return response()->json(['status' => 0, 'message' => 'Db error']);
-        } catch (Exception $e) {
-
-            return response()->json(['status' => 0, 'message' => 'Something went wrong']);
         }
+        
+        // catch (QueryException $e) {
+        //     DB::rollBack();
+
+        //     return response()->json(['status' => 0, 'message' => 'Db error']);
+        // } catch (Exception $e) {
+
+        //     return response()->json(['status' => 0, 'message' => 'Something went wrong']);
+        // }
     }
 
     // Gift Registry //
