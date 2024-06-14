@@ -128,13 +128,13 @@ $(document).ready(function () {
             zip_code: {
                 required: true,
             },
-            password: {
+            businesspassword: {
                 required: true,
                 passwordCheck: true, // Apply the custom password validation method
             },
-            cpassword: {
+            businesscpassword: {
                 required: true,
-                equalTo: "#password",
+                equalTo: "#businesspassword",
             },
         },
         messages: {
@@ -152,12 +152,12 @@ $(document).ready(function () {
             zip_code: {
                 required: "Please enter your zip code",
             },
-            password: {
+            businesspassword: {
                 required: "Please enter your password",
                 passwordCheck:
                     "At least 8 characters with a combination of letters and numbers",
             },
-            cpassword: {
+            businesscpassword: {
                 required: "Please confirm your password",
                 equalTo: "Passwords do not match",
             },

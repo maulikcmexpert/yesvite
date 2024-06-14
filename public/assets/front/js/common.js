@@ -1,4 +1,11 @@
 //  ===== focusinput =====
+$(document).on("click", ".businessRegister", function () {
+    $("#account_type").val("1");
+});
+
+$(document).on("click", ".userRegister", function () {
+    $("#account_type").val("0");
+});
 $(".form-control").on("focusin", function () {
     $(this).next().addClass("floatingfocus");
 });
@@ -91,11 +98,11 @@ const imgPreview = document.getElementById("cover-img");
 const bgPreview = document.getElementById("bg-cover-img");
 
 chooseFile.addEventListener("change", function () {
-    getImgData();
+    // getImgData();
 });
 
 bgChooseFile.addEventListener("change", function () {
-    getbgImgData();
+    // getbgImgData();
 });
 
 function getImgData() {
@@ -105,7 +112,8 @@ function getImgData() {
         fileReader.readAsDataURL(files);
         fileReader.addEventListener("load", function () {
             imgPreview.style.display = "block";
-            imgPreview.innerHTML = '<img src="' + this.result + '" />';
+            imgPreview.innerHTML =
+                '<img src="' + this.result + '" id="profileIm"/>';
         });
     }
 }
@@ -117,7 +125,20 @@ function getbgImgData() {
         fileReader.readAsDataURL(files);
         fileReader.addEventListener("load", function () {
             bgPreview.style.display = "block";
-            bgPreview.innerHTML = '<img src="' + this.result + '" />';
+            bgPreview.innerHTML = '<img src="' + this.result + '" id="bgIm" />';
         });
     }
 }
+
+$(".phone_number").intlTelInput({
+    initialCountry: "US",
+    separateDialCode: true,
+    // utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.4/js/utils.js"
+});
+
+$("[name=phone_number]").on("blur", function () {
+    var instance = $("[name=phone_number]");
+
+    var phoneNumber = instance.intlTelInput("getSelectedCountryData").dialCode;
+    $("#country_code").val(phoneNumber);
+});

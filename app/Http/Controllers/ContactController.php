@@ -16,6 +16,7 @@ class ContactController extends Controller
     {
         $title = 'Contact';
         $page = 'front.contact';
+        $js = ['contact'];
         $id = decrypt(session()->get('user')['id']);
 
         $user = User::withCount(
@@ -36,12 +37,26 @@ class ContactController extends Controller
         $date = Carbon::parse($user->created_at);
         $formatted_date = $date->format('F, Y');
         $user['join_date'] = $formatted_date;
+
+        $yesviteUser = User::where('app_user', '=', '1')->where('id', '!=', $id)->paginate(10);
+
         return view('layout', compact(
             'title',
             'page',
             'user',
-
+            'js',
+            'yesviteUser'
         ));
+    }
+
+    public function loadMore(Request $request)
+    {
+        $id = decrypt(session()->get('user')['id']);
+        if ($request->ajax()) {
+            $yesviteUser = User::where('app_user', '=', '1')->where('id', '!=', $id)->paginate(10); // Adjust the number as needed
+            return view('front.ajax_contacts', compact('yesviteUser'))->render();
+        }
+        return response()->json(['error' => 'Invalid request'], 400);
     }
 
     /**
