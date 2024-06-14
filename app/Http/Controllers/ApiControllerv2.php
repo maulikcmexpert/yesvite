@@ -3374,16 +3374,6 @@ class ApiControllerv2 extends Controller
 
                 $rsvp_by_date = $eventData['rsvp_by_date'];
                 $rsvp_by_date_set = '1';
-                if (!empty($eventData['event_setting']['rsvp_by_date'])) {
-                    $rsvp_by_date = $eventData['event_setting']['rsvp_by_date'];
-                    $rsvp_by_date_set = '1';
-                }
-            } else {
-                if (!empty($eventData['event_setting']['rsvp_by_date'])) {
-
-                    $rsvp_by_date = $eventData['event_setting']['rsvp_by_date'];
-                    $rsvp_by_date_set = '1';
-                }
             }
 
 
@@ -4490,16 +4480,6 @@ class ApiControllerv2 extends Controller
 
                     $rsvp_by_date = $eventData['rsvp_by_date'];
                     $rsvp_by_date_set = '1';
-                    if (!empty($eventData['event_setting']['rsvp_by_date'])) {
-                        $rsvp_by_date = $eventData['event_setting']['rsvp_by_date'];
-                        $rsvp_by_date_set = '1';
-                    }
-                } else {
-                    if (!empty($eventData['event_setting']['rsvp_by_date'])) {
-
-                        $rsvp_by_date = $eventData['event_setting']['rsvp_by_date'];
-                        $rsvp_by_date_set = '1';
-                    }
                 }
 
 

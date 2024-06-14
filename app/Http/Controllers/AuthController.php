@@ -267,7 +267,9 @@ class AuthController extends Controller
                     $msg = "proffiesional";
                 }
 
-                return  Redirect::to('profile')->with('error', 'You have already login ' . $msg);
+                toastr()->success('You have already login ' . $msg);
+                return  Redirect::to('profile');
+                // ->with('error', 'You have already login ' . $msg);
             }
 
             $alreadyLog = User::select('id', 'firstname', 'lastname', 'email', 'profile')->where('id', decrypt(Session::get('user')['id']))->first();
