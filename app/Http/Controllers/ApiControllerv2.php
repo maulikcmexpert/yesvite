@@ -3587,7 +3587,7 @@ class ApiControllerv2 extends Controller
                         'guest_list_visible_to_guests' => $eventData['event_setting']['guest_list_visible_to_guests'],
                         'podluck' => $eventData['event_setting']['podluck'],
                         'rsvp_updates' => $eventData['event_setting']['rsvp_updates'],
-                        'event_updates' => $eventData['event_setting']['event_updates'],
+                        'event_wall_post' => $eventData['event_setting']['event_wall_post'],
                         'send_event_dater_reminders' => $eventData['event_setting']['send_event_dater_reminders'],
                         'request_event_photos_from_guests' => $eventData['event_setting']['request_event_photos_from_guests'],
                     ]);
@@ -4320,7 +4320,7 @@ class ApiControllerv2 extends Controller
                         "guest_list_visible_to_guests" => $eventSettings->guest_list_visible_to_guests,
                         "podluck" => $eventSettings->podluck,
                         "rsvp_updates" => $eventSettings->rsvp_updates,
-                        "event_updates" => $eventSettings->event_updates,
+                        "event_wall_post" => $eventSettings->event_wall_post,
                         "send_event_dater_reminders" => $eventSettings->send_event_dater_reminders,
                         "request_event_photos_from_guests" => $eventSettings->request_event_photos_from_guests
                     ];
@@ -4690,7 +4690,6 @@ class ApiControllerv2 extends Controller
                         $updateEventSetting->allow_for_1_more = $eventData['event_setting']['allow_for_1_more'];
                         $updateEventSetting->allow_limit = $eventData['event_setting']['allow_limit'];
                         $updateEventSetting->adult_only_party = $eventData['event_setting']['adult_only_party'];
-                        $updateEventSetting->rsvp_by_date_status = $eventData['event_setting']['rsvp_by_date_status'];
                         $updateEventSetting->thank_you_cards = $eventData['event_setting']['thank_you_cards'];
                         $updateEventSetting->add_co_host = $eventData['event_setting']['add_co_host'];
                         $updateEventSetting->gift_registry = $eventData['event_setting']['gift_registry'];
@@ -4699,7 +4698,7 @@ class ApiControllerv2 extends Controller
                         $updateEventSetting->guest_list_visible_to_guests = $eventData['event_setting']['guest_list_visible_to_guests'];
                         $updateEventSetting->podluck = $eventData['event_setting']['podluck'];
                         $updateEventSetting->rsvp_updates = $eventData['event_setting']['rsvp_updates'];
-                        $updateEventSetting->event_updates = $eventData['event_setting']['event_updates'];
+                        $updateEventSetting->event_wall_post = $eventData['event_setting']['event_wall_post'];
                         $updateEventSetting->send_event_dater_reminders = $eventData['event_setting']['send_event_dater_reminders'];
                         $updateEventSetting->request_event_photos_from_guests = $eventData['event_setting']['request_event_photos_from_guests'];
                         $updateEventSetting->save();
@@ -11547,9 +11546,11 @@ class ApiControllerv2 extends Controller
 
                 if ($values->notification_type == 'invite') {
                     $checkIsCoHost =  EventInvitedUser::where(['user_id' => $values->user_id, 'event_id' => $values->event_id])->first();
+                    if ($checkIsCoHost != null) {
 
-                    $notificationDetail['is_co_host'] = $checkIsCoHost->is_co_host;
-                    $notificationDetail['accept_as_co_host'] = $checkIsCoHost->accept_as_co_host;
+                        $notificationDetail['is_co_host'] = $checkIsCoHost->is_co_host;
+                        $notificationDetail['accept_as_co_host'] = $checkIsCoHost->accept_as_co_host;
+                    }
                 }
                 $notificationDetail['potluck_item'] = "";
                 $notificationDetail['count'] = "";
