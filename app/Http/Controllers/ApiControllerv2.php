@@ -4465,604 +4465,604 @@ class ApiControllerv2 extends Controller
         }
 
         // try {
-            DB::beginTransaction();
+        DB::beginTransaction();
 
-            $updateEvent = Event::where('id', $eventData['event_id'])->first();
-            if ($updateEvent != null) {
+        $updateEvent = Event::where('id', $eventData['event_id'])->first();
+        if ($updateEvent != null) {
 
 
-                $rsvp_by_date = date('Y-m-d');
-                $rsvp_by_date_set = '0';
+            $rsvp_by_date = date('Y-m-d');
+            $rsvp_by_date_set = '0';
 
-                $rsvpEndTime = "";
+            $rsvpEndTime = "";
 
-                if (!empty($eventData['rsvp_by_date'])) {
+            if (!empty($eventData['rsvp_by_date'])) {
 
-                    $rsvp_by_date = $eventData['rsvp_by_date'];
-                    $rsvp_by_date_set = '1';
+                $rsvp_by_date = $eventData['rsvp_by_date'];
+                $rsvp_by_date_set = '1';
+            }
+
+
+            $greeting_card_id = "";
+            if ($eventData['event_setting']['thank_you_cards'] == '1') {
+
+                if (!empty($eventData['greeting_card_list']) && is_int($eventData['greeting_card_list'][0])) {
+
+                    $greeting_card_id =  implode(',', $eventData['greeting_card_list']);
+                }
+            }
+
+            $gift_registry_id = "";
+            if ($eventData['event_setting']['gift_registry'] == '1') {
+                if (!empty($eventData['gift_registry_list']) && is_int($eventData['gift_registry_list'][0])) {
+
+                    $gift_registry_id =  implode(',', $eventData['gift_registry_list']);
+                }
+            }
+
+
+
+            $updateEvent->event_type_id = (!empty($eventData['event_type_id'])) ? $eventData['event_type_id'] : "";
+            $updateEvent->event_name = (!empty($eventData['event_name'])) ? $eventData['event_name'] : "";
+
+            $updateEvent->hosted_by = (!empty($eventData['hosted_by'])) ? $eventData['hosted_by'] : $user->firstname . ' ' . $user->lastname;
+            $updateEvent->start_date = (!empty($eventData['start_date'])) ? $eventData['start_date'] : NULL;
+            $updateEvent->end_date = (!empty($eventData['end_date'])) ? $eventData['end_date'] : NULL;
+            $updateEvent->rsvp_by_date_set = $rsvp_by_date_set;
+            $updateEvent->rsvp_by_date = $rsvp_by_date;
+            $updateEvent->latitude = $eventData['latitude'];
+            $updateEvent->longitude = $eventData['longitude'];
+            $updateEvent->rsvp_start_time = $eventData['rsvp_start_time'];
+            $updateEvent->rsvp_start_timezone = (!empty($eventData['rsvp_start_timezone'])) ? $eventData['rsvp_start_timezone'] : "";
+            $updateEvent->greeting_card_id = $greeting_card_id;
+            $updateEvent->gift_registry_id = $gift_registry_id;
+            $updateEvent->rsvp_end_time_set = (!empty($eventData['rsvp_end_time_set'])) ? $eventData['rsvp_end_time_set'] : "0";
+            $updateEvent->rsvp_end_time = $eventData['rsvp_end_time'];;
+            $updateEvent->rsvp_end_timezone = ($eventData['rsvp_end_time_set'] == '1') ? $eventData['rsvp_end_timezone'] : "";
+            $updateEvent->event_location_name = (!empty($eventData['event_location_name'])) ? $eventData['event_location_name'] : "";
+            $updateEvent->address_1 = (!empty($eventData['address_1'])) ? $eventData['address_1'] : "";
+            $updateEvent->address_2 = (!empty($eventData['address_2'])) ? $eventData['address_2'] : "";
+            $updateEvent->state = (!empty($eventData['state'])) ? $eventData['state'] : "";
+            $updateEvent->zip_code = (!empty($eventData['zip_code'])) ? $eventData['zip_code'] : "";
+            $updateEvent->city = (!empty($eventData['city'])) ? $eventData['city'] : "";
+            $updateEvent->message_to_guests = (!empty($eventData['message_to_guests'])) ? $eventData['message_to_guests'] : "";
+            $updateEvent->is_draft_save = $eventData['is_draft_save'];
+
+
+            if ($updateEvent->save()) {
+                $getalreadyInviteduser =  EventInvitedUser::where('event_id', $eventData['event_id'])->get()->pluck('user_id')->toArray();
+
+                // EventInvitedUser::where('event_id', $eventData['event_id'])->delete();
+
+                if (isset($eventData['invited_user_id']) && !empty($eventData['invited_user_id'])) {
+                    $invitedUsers = $eventData['invited_user_id'];
+
+
+                    foreach ($invitedUsers as $value) {
+
+                        if (in_array($value['user_id'], $getalreadyInviteduser)) {
+                            continue;
+                        }
+
+
+
+                        EventInvitedUser::create([
+
+                            'event_id' => $eventData['event_id'],
+
+                            'prefer_by' => $value['prefer_by'],
+
+                            'user_id' => $value['user_id']
+
+                        ]);
+                    }
+
+                    $userSelectedGuest =  collect($eventData['invited_user_id'])->pluck('user_id')->toArray();
+                    foreach ($getalreadyInviteduser as $value) {
+
+                        if (!in_array($value, $userSelectedGuest)) {
+                            EventInvitedUser::where('user_id', $value)->delete();
+                        }
+                    }
                 }
 
 
-                $greeting_card_id = "";
-                if ($eventData['event_setting']['thank_you_cards'] == '1') {
 
-                    if (!empty($eventData['greeting_card_list']) && is_int($eventData['greeting_card_list'][0])) {
+                if (!empty($eventData['invited_guests'])) {
 
-                        $greeting_card_id =  implode(',', $eventData['greeting_card_list']);
-                    }
-                }
+                    $invitedGuestUsers = $eventData['invited_guests'];
 
-                $gift_registry_id = "";
-                if ($eventData['event_setting']['gift_registry'] == '1') {
-                    if (!empty($eventData['gift_registry_list']) && is_int($eventData['gift_registry_list'][0])) {
+                    $alreadyinvitedUser = EventInvitedUser::where('event_id', $eventData['event_id'])->pluck('user_id')->toArray();
 
-                        $gift_registry_id =  implode(',', $eventData['gift_registry_list']);
-                    }
-                }
+                    foreach ($invitedGuestUsers as $value) {
 
+                        if ($value['prefer_by'] == 'phone') {
 
+                            $checkUserExist = User::where('phone_number', $value['phone_number'])->first();
 
-                $updateEvent->event_type_id = (!empty($eventData['event_type_id'])) ? $eventData['event_type_id'] : "";
-                $updateEvent->event_name = (!empty($eventData['event_name'])) ? $eventData['event_name'] : "";
+                            if (empty($checkUserExist)) {
 
-                $updateEvent->hosted_by = (!empty($eventData['hosted_by'])) ? $eventData['hosted_by'] : $user->firstname . ' ' . $user->lastname;
-                $updateEvent->start_date = (!empty($eventData['start_date'])) ? $eventData['start_date'] : NULL;
-                $updateEvent->end_date = (!empty($eventData['end_date'])) ? $eventData['end_date'] : NULL;
-                $updateEvent->rsvp_by_date_set = $rsvp_by_date_set;
-                $updateEvent->rsvp_by_date = $rsvp_by_date;
-                $updateEvent->latitude = $eventData['latitude'];
-                $updateEvent->longitude = $eventData['longitude'];
-                $updateEvent->rsvp_start_time = $eventData['rsvp_start_time'];
-                $updateEvent->rsvp_start_timezone = (!empty($eventData['rsvp_start_timezone'])) ? $eventData['rsvp_start_timezone'] : "";
-                $updateEvent->greeting_card_id = $greeting_card_id;
-                $updateEvent->gift_registry_id = $gift_registry_id;
-                $updateEvent->rsvp_end_time_set = (!empty($eventData['rsvp_end_time_set'])) ? $eventData['rsvp_end_time_set'] : "0";
-                $updateEvent->rsvp_end_time = $eventData['rsvp_end_time'];;
-                $updateEvent->rsvp_end_timezone = ($eventData['rsvp_end_time_set'] == '1') ? $eventData['rsvp_end_timezone'] : "";
-                $updateEvent->event_location_name = (!empty($eventData['event_location_name'])) ? $eventData['event_location_name'] : "";
-                $updateEvent->address_1 = (!empty($eventData['address_1'])) ? $eventData['address_1'] : "";
-                $updateEvent->address_2 = (!empty($eventData['address_2'])) ? $eventData['address_2'] : "";
-                $updateEvent->state = (!empty($eventData['state'])) ? $eventData['state'] : "";
-                $updateEvent->zip_code = (!empty($eventData['zip_code'])) ? $eventData['zip_code'] : "";
-                $updateEvent->city = (!empty($eventData['city'])) ? $eventData['city'] : "";
-                $updateEvent->message_to_guests = (!empty($eventData['message_to_guests'])) ? $eventData['message_to_guests'] : "";
-                $updateEvent->is_draft_save = $eventData['is_draft_save'];
+                                $guestUser = User::create([
 
 
-                if ($updateEvent->save()) {
-                    $getalreadyInviteduser =  EventInvitedUser::where('event_id', $eventData['event_id'])->get()->pluck('user_id')->toArray();
 
-                    // EventInvitedUser::where('event_id', $eventData['event_id'])->delete();
+                                    'firstname' => $value['first_name'],
 
-                    if (isset($eventData['invited_user_id']) && !empty($eventData['invited_user_id'])) {
-                        $invitedUsers = $eventData['invited_user_id'];
+                                    'lastname' => $value['last_name'],
 
 
-                        foreach ($invitedUsers as $value) {
+                                    'country_code' => $value['country_code'],
 
-                            if (in_array($value['user_id'], $getalreadyInviteduser)) {
-                                continue;
-                            }
+                                    'phone_number' => $value['phone_number'],
 
+                                    'app_user' => '0',
+                                    'is_user_phone_contact' => '1',
+                                    'parent_user_phone_contact' => $user->id
 
+                                ]);
 
-                            EventInvitedUser::create([
+                                EventInvitedUser::create([
 
-                                'event_id' => $eventData['event_id'],
+                                    'event_id' =>  $eventData['event_id'],
 
-                                'prefer_by' => $value['prefer_by'],
+                                    'prefer_by' => $value['prefer_by'],
 
-                                'user_id' => $value['user_id']
+                                    'user_id' => $guestUser->id
 
-                            ]);
-                        }
+                                ]);
+                            } else {
 
-                        $userSelectedGuest =  collect($eventData['invited_user_id'])->pluck('user_id')->toArray();
-                        foreach ($getalreadyInviteduser as $value) {
+                                $alreadyselectedUser =  collect($eventData['invited_user_id'])->pluck('user_id')->toArray();
 
-                            if (!in_array($value, $userSelectedGuest)) {
-                                EventInvitedUser::where('user_id', $value)->delete();
-                            }
-                        }
-                    }
 
-
-
-                    if (!empty($eventData['invited_guests'])) {
-
-                        $invitedGuestUsers = $eventData['invited_guests'];
-
-                        $alreadyinvitedUser = EventInvitedUser::where('event_id', $eventData['event_id'])->pluck('user_id')->toArray();
-
-                        foreach ($invitedGuestUsers as $value) {
-
-                            if ($value['prefer_by'] == 'phone') {
-
-                                $checkUserExist = User::where('phone_number', $value['phone_number'])->first();
-
-                                if (empty($checkUserExist)) {
-
-                                    $guestUser = User::create([
-
-
-
-                                        'firstname' => $value['first_name'],
-
-                                        'lastname' => $value['last_name'],
-
-
-                                        'country_code' => $value['country_code'],
-
-                                        'phone_number' => $value['phone_number'],
-
-                                        'app_user' => '0',
-                                        'is_user_phone_contact' => '1',
-                                        'parent_user_phone_contact' => $user->id
-
-                                    ]);
-
-                                    EventInvitedUser::create([
-
-                                        'event_id' =>  $eventData['event_id'],
-
-                                        'prefer_by' => $value['prefer_by'],
-
-                                        'user_id' => $guestUser->id
-
-                                    ]);
-                                } else {
-
-                                    $alreadyselectedUser =  collect($eventData['invited_user_id'])->pluck('user_id')->toArray();
-
-
-                                    if (!in_array($checkUserExist->id, $alreadyselectedUser)) {
-                                        if (!in_array($checkUserExist->id, $alreadyinvitedUser)) {
-
-                                            EventInvitedUser::create([
-
-                                                'event_id' => $eventData['event_id'],
-
-                                                'prefer_by' => (isset($value['prefer_by'])) ? $value['prefer_by'] : "email",
-
-                                                'user_id' => $checkUserExist->id
-
-                                            ]);
-                                        }
-                                    }
-                                }
-                            } else if ($value['prefer_by'] == 'email') {
-
-                                $checkUserExist = User::where('email', $value['email'])->first();
-
-                                if (empty($checkUserExist)) {
-
-                                    $guestUser = User::create([
-
-
-
-                                        'firstname' => $value['first_name'],
-
-                                        'lastname' => $value['last_name'],
-
-                                        'email' => $value['email'],
-
-                                        'app_user' => '0',
-                                        'is_user_phone_contact' => '1',
-                                        'parent_user_phone_contact' => $user->id
-
-                                    ]);
-
-                                    EventInvitedUser::create([
-
-                                        'event_id' =>  $eventData['event_id'],
-
-                                        'prefer_by' => $value['prefer_by'],
-
-                                        'user_id' => $guestUser->id
-
-                                    ]);
-                                } else {
-                                    $alreadyselectedUser =  collect($eventData['invited_user_id'])->pluck('user_id')->toArray();
-
-                                    if (!in_array($checkUserExist->id, $alreadyselectedUser)) {
-                                        if (!in_array($checkUserExist->id, $alreadyinvitedUser)) {
-                                            EventInvitedUser::create([
-
-                                                'event_id' => $eventData['event_id'],
-
-                                                'prefer_by' => (isset($value['prefer_by'])) ? $value['prefer_by'] : "email",
-
-                                                'user_id' => $checkUserExist->id
-                                            ]);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-
-
-                    if ($eventData['event_setting']) {
-
-                        $updateEventSetting = EventSetting::where('event_id', $eventData['event_id'])->first();
-
-                        $updateEventSetting->allow_for_1_more = $eventData['event_setting']['allow_for_1_more'];
-                        $updateEventSetting->allow_limit = $eventData['event_setting']['allow_limit'];
-                        $updateEventSetting->adult_only_party = $eventData['event_setting']['adult_only_party'];
-                        $updateEventSetting->thank_you_cards = $eventData['event_setting']['thank_you_cards'];
-                        $updateEventSetting->add_co_host = $eventData['event_setting']['add_co_host'];
-                        $updateEventSetting->gift_registry = $eventData['event_setting']['gift_registry'];
-                        $updateEventSetting->events_schedule = $eventData['event_setting']['events_schedule'];
-                        $updateEventSetting->event_wall = $eventData['event_setting']['event_wall'];
-                        $updateEventSetting->guest_list_visible_to_guests = $eventData['event_setting']['guest_list_visible_to_guests'];
-                        $updateEventSetting->podluck = $eventData['event_setting']['podluck'];
-                        $updateEventSetting->rsvp_updates = $eventData['event_setting']['rsvp_updates'];
-                        $updateEventSetting->event_wall_post = $eventData['event_setting']['event_wall_post'];
-                        $updateEventSetting->send_event_dater_reminders = $eventData['event_setting']['send_event_dater_reminders'];
-                        $updateEventSetting->request_event_photos_from_guests = $eventData['event_setting']['request_event_photos_from_guests'];
-                        $updateEventSetting->save();
-                    }
-
-
-                    if ($eventData['event_setting']['add_co_host'] == '1') {
-
-                        if (isset($eventData['co_host_list'])) {
-
-                            $coHostList = $eventData['co_host_list'];
-
-                            if (!empty($coHostList)) {
-
-                                foreach ($coHostList as $value) {
-
-                                    $alreadyselectedUser =  collect($eventData['invited_user_id'])->pluck('user_id')->toArray();
-                                    $alreadyselectedasCoUser =  collect($eventData['co_host_list'])->pluck('user_id')->toArray();
-
-                                    if (!in_array($value['user_id'], $alreadyselectedUser) && !in_array($value['user_id'], $getalreadyInviteduser)) {
+                                if (!in_array($checkUserExist->id, $alreadyselectedUser)) {
+                                    if (!in_array($checkUserExist->id, $alreadyinvitedUser)) {
 
                                         EventInvitedUser::create([
 
                                             'event_id' => $eventData['event_id'],
 
-                                            'prefer_by' => $value['prefer_by'],
+                                            'prefer_by' => (isset($value['prefer_by'])) ? $value['prefer_by'] : "email",
 
-                                            'user_id' => $value['user_id'],
-                                            'is_co_host' => '1'
+                                            'user_id' => $checkUserExist->id
+
                                         ]);
                                     }
-                                    // else if (!in_array($value['user_id'], $alreadyselectedasCoUser) && !in_array($value['user_id'], $getalreadyInviteduser)) {
-                                    //     // remove //
-                                    //     EventInvitedUser::where(['user_id' => $value['user_id'], 'event_id' => $eventData['event_id']])->delete();
-                                    // }
-                                    else {
-                                        $updateRecord = EventInvitedUser::where(['user_id' => $value['user_id'], 'event_id' => $eventData['event_id']])->first();
-                                        $updateRecord->is_co_host = '1';
-                                        $updateRecord->save();
-                                    }
                                 }
                             }
-                            // else {
-                            //     // remove //
+                        } else if ($value['prefer_by'] == 'email') {
 
-                            //     EventInvitedUser::where(['event_id' => $eventData['event_id'], 'is_co_host' => '1'])->delete();
-                            // }
-                        }
-                        if (isset($eventData['guest_co_host_list'])) {
-                            $guestcoHostList = $eventData['guest_co_host_list'];
-                            $alreadyselectedasguestCoUser =  collect($eventData['guest_co_host_list'])->pluck('user_id')->toArray();
-                            if (!empty($guestcoHostList)) {
+                            $checkUserExist = User::where('email', $value['email'])->first();
 
-                                foreach ($guestcoHostList as $value) {
+                            if (empty($checkUserExist)) {
 
-                                    if ($value['prefer_by'] == 'phone') {
-
-                                        $checkUserExist = User::where('phone_number', $value['phone_number'])->first();
-
-                                        if (empty($checkUserExist)) {
-
-                                            $guestUser = User::create([
-
-                                                'firstname' => $value['first_name'],
-
-                                                'lastname' => $value['last_name'],
+                                $guestUser = User::create([
 
 
-                                                'country_code' => $value['country_code'],
 
-                                                'phone_number' => $value['phone_number'],
+                                    'firstname' => $value['first_name'],
 
-                                                'app_user' => '0',
-                                                'is_user_phone_contact' => '1',
-                                                'parent_user_phone_contact' => $user->id
+                                    'lastname' => $value['last_name'],
 
-                                            ]);
+                                    'email' => $value['email'],
 
-                                            EventInvitedUser::create([
+                                    'app_user' => '0',
+                                    'is_user_phone_contact' => '1',
+                                    'parent_user_phone_contact' => $user->id
 
-                                                'event_id' => $eventData['event_id'],
+                                ]);
 
-                                                'prefer_by' => (isset($value['prefer_by'])) ? $value['prefer_by'] : "phone",
+                                EventInvitedUser::create([
 
-                                                'user_id' => $guestUser->id,
-                                                'is_co_host' => '1'
-                                            ]);
-                                        } else {
-                                            $alreadyselectedUser =  collect($eventData['invited_user_id'])->pluck('user_id')->toArray();
-                                            if (!in_array($checkUserExist->id, $alreadyselectedUser)) {
+                                    'event_id' =>  $eventData['event_id'],
 
-                                                $alreadyselectedCoHostUser =  collect($eventData['co_host_list'])->pluck('user_id')->toArray();
-                                                if (!in_array($checkUserExist->id, $alreadyselectedCoHostUser)) {
-                                                    $checkIsAlreadyInvited = EventInvitedUser::where(['event_id' => $eventData['event_id'], 'user_id' => $checkUserExist->id])->first();
-                                                    if ($checkIsAlreadyInvited == null) {
+                                    'prefer_by' => $value['prefer_by'],
 
-                                                        EventInvitedUser::create([
+                                    'user_id' => $guestUser->id
 
-                                                            'event_id' => $eventData['event_id'],
+                                ]);
+                            } else {
+                                $alreadyselectedUser =  collect($eventData['invited_user_id'])->pluck('user_id')->toArray();
 
-                                                            'prefer_by' => (isset($value['prefer_by'])) ? $value['prefer_by'] : "phone",
+                                if (!in_array($checkUserExist->id, $alreadyselectedUser)) {
+                                    if (!in_array($checkUserExist->id, $alreadyinvitedUser)) {
+                                        EventInvitedUser::create([
 
-                                                            'user_id' => $checkUserExist->id,
-                                                            'is_co_host' => '1'
-                                                        ]);
-                                                    } else {
-                                                        $updateRecord = EventInvitedUser::where(['user_id' => $checkUserExist->id, 'event_id' => $eventData['event_id']])->first();
-                                                        $updateRecord->is_co_host = '1';
-                                                        $updateRecord->save();
-                                                    }
-                                                }
-                                            }
-                                            //  else if (!in_array($value['user_id'], $alreadyselectedasguestCoUser) && !in_array($value['user_id'], $getalreadyInviteduser)) {
-                                            //     // remove //
-                                            //     EventInvitedUser::where(['user_id' => $value['user_id'], 'event_id' => $eventData['event_id']])->delete();
-                                            // }
-                                            else {
-                                                $updateRecord = EventInvitedUser::where(['user_id' => $checkUserExist->id, 'event_id' => $eventData['event_id']])->first();
-                                                $updateRecord->is_co_host = '1';
-                                                $updateRecord->save();
-                                            }
-                                        }
-                                    } else if ($value['prefer_by'] == 'email') {
+                                            'event_id' => $eventData['event_id'],
 
-                                        $checkUserExist = User::where('email', $value['email'])->first();
+                                            'prefer_by' => (isset($value['prefer_by'])) ? $value['prefer_by'] : "email",
 
-                                        if (empty($checkUserExist)) {
-
-                                            $guestUser = User::create([
-
-                                                'firstname' => $value['first_name'],
-
-                                                'lastname' => $value['last_name'],
-
-                                                'email' => $value['email'],
-
-                                                'app_user' => '0',
-                                                'is_user_phone_contact' => '1',
-                                                'parent_user_phone_contact' => $user->id
-
-                                            ]);
-
-                                            EventInvitedUser::create([
-
-                                                'event_id' => $eventData['event_id'],
-
-                                                'prefer_by' => (isset($value['prefer_by'])) ? $value['prefer_by'] : "email",
-
-                                                'user_id' => $guestUser->id,
-                                                'is_co_host' => '1'
-                                            ]);
-                                        } else {
-                                            $alreadyselectedUser =  collect($eventData['invited_user_id'])->pluck('user_id')->toArray();
-                                            if (!in_array($checkUserExist->id, $alreadyselectedUser)) {
-
-                                                $alreadyselectedCoHostUser =  collect($eventData['co_host_list'])->pluck('user_id')->toArray();
-                                                if (!in_array($checkUserExist->id, $alreadyselectedCoHostUser)) {
-                                                    $checkIsAlreadyInvited = EventInvitedUser::where(['event_id' => $eventData['event_id'], 'user_id' => $checkUserExist->id])->first();
-                                                    if ($checkIsAlreadyInvited == null) {
-                                                        EventInvitedUser::create([
-
-                                                            'event_id' => $eventData['event_id'],
-
-                                                            'prefer_by' => (isset($value['prefer_by'])) ? $value['prefer_by'] : "email",
-
-                                                            'user_id' => $checkUserExist->id,
-                                                            'is_co_host' => '1'
-                                                        ]);
-                                                    }
-                                                }
-                                            }
-                                            // else if (!in_array($value['user_id'], $alreadyselectedasguestCoUser) && !in_array($value['user_id'], $getalreadyInviteduser)) {
-                                            //     // remove //
-                                            //     EventInvitedUser::where(['user_id' => $value['user_id'], 'event_id' => $eventData['event_id']])->delete();
-                                            // }
-                                            else {
-                                                $updateRecord = EventInvitedUser::where(['user_id' => $checkUserExist->id, 'event_id' => $eventData['event_id']])->first();
-                                                $updateRecord->is_co_host = '1';
-                                                $updateRecord->save();
-                                            }
-                                        }
+                                            'user_id' => $checkUserExist->id
+                                        ]);
                                     }
                                 }
                             }
                         }
-                        //  else {
+                    }
+                }
+
+
+
+                if ($eventData['event_setting']) {
+
+                    $updateEventSetting = EventSetting::where('event_id', $eventData['event_id'])->first();
+
+                    $updateEventSetting->allow_for_1_more = $eventData['event_setting']['allow_for_1_more'];
+                    $updateEventSetting->allow_limit = $eventData['event_setting']['allow_limit'];
+                    $updateEventSetting->adult_only_party = $eventData['event_setting']['adult_only_party'];
+                    $updateEventSetting->thank_you_cards = $eventData['event_setting']['thank_you_cards'];
+                    $updateEventSetting->add_co_host = $eventData['event_setting']['add_co_host'];
+                    $updateEventSetting->gift_registry = $eventData['event_setting']['gift_registry'];
+                    $updateEventSetting->events_schedule = $eventData['event_setting']['events_schedule'];
+                    $updateEventSetting->event_wall = $eventData['event_setting']['event_wall'];
+                    $updateEventSetting->guest_list_visible_to_guests = $eventData['event_setting']['guest_list_visible_to_guests'];
+                    $updateEventSetting->podluck = $eventData['event_setting']['podluck'];
+                    $updateEventSetting->rsvp_updates = $eventData['event_setting']['rsvp_updates'];
+                    $updateEventSetting->event_wall_post = $eventData['event_setting']['event_wall_post'];
+                    $updateEventSetting->send_event_dater_reminders = $eventData['event_setting']['send_event_dater_reminders'];
+                    $updateEventSetting->request_event_photos_from_guests = $eventData['event_setting']['request_event_photos_from_guests'];
+                    $updateEventSetting->save();
+                }
+
+
+                if ($eventData['event_setting']['add_co_host'] == '1') {
+
+                    if (isset($eventData['co_host_list'])) {
+
+                        $coHostList = $eventData['co_host_list'];
+
+                        if (!empty($coHostList)) {
+
+                            foreach ($coHostList as $value) {
+
+                                $alreadyselectedUser =  collect($eventData['invited_user_id'])->pluck('user_id')->toArray();
+                                $alreadyselectedasCoUser =  collect($eventData['co_host_list'])->pluck('user_id')->toArray();
+
+                                if (!in_array($value['user_id'], $alreadyselectedUser) && !in_array($value['user_id'], $getalreadyInviteduser)) {
+
+                                    EventInvitedUser::create([
+
+                                        'event_id' => $eventData['event_id'],
+
+                                        'prefer_by' => $value['prefer_by'],
+
+                                        'user_id' => $value['user_id'],
+                                        'is_co_host' => '1'
+                                    ]);
+                                }
+                                // else if (!in_array($value['user_id'], $alreadyselectedasCoUser) && !in_array($value['user_id'], $getalreadyInviteduser)) {
+                                //     // remove //
+                                //     EventInvitedUser::where(['user_id' => $value['user_id'], 'event_id' => $eventData['event_id']])->delete();
+                                // }
+                                else {
+                                    $updateRecord = EventInvitedUser::where(['user_id' => $value['user_id'], 'event_id' => $eventData['event_id']])->first();
+                                    $updateRecord->is_co_host = '1';
+                                    $updateRecord->save();
+                                }
+                            }
+                        }
+                        // else {
                         //     // remove //
+
                         //     EventInvitedUser::where(['event_id' => $eventData['event_id'], 'is_co_host' => '1'])->delete();
                         // }
                     }
-                    //  else {
-                    //     EventInvitedUser::where(['event_id' => $eventData['event_id'], 'is_co_host' => '1'])->delete();
-                    // }
+                    if (isset($eventData['guest_co_host_list'])) {
+                        $guestcoHostList = $eventData['guest_co_host_list'];
+                        $alreadyselectedasguestCoUser =  collect($eventData['guest_co_host_list'])->pluck('user_id')->toArray();
+                        if (!empty($guestcoHostList)) {
+
+                            foreach ($guestcoHostList as $value) {
+
+                                if ($value['prefer_by'] == 'phone') {
+
+                                    $checkUserExist = User::where('phone_number', $value['phone_number'])->first();
+
+                                    if (empty($checkUserExist)) {
+
+                                        $guestUser = User::create([
+
+                                            'firstname' => $value['first_name'],
+
+                                            'lastname' => $value['last_name'],
 
 
+                                            'country_code' => $value['country_code'],
 
-                    if ($eventData['event_setting']['events_schedule'] == '1') {
+                                            'phone_number' => $value['phone_number'],
 
-                        $eventsScheduleList = $eventData['events_schedule_list'];
-
-
-                        if (!empty($eventsScheduleList)) {
-                            EventSchedule::where('event_id', $eventData['event_id'])->delete();
-
-                            $addStartschedule =  new EventSchedule();
-                            $addStartschedule->event_id = $eventData['event_id'];
-                            $addStartschedule->start_time = $eventsScheduleList['start_time'];
-                            $addStartschedule->event_date = $eventsScheduleList['event_start_date'];
-                            $addStartschedule->type = '1';
-                            $addStartschedule->save();
-
-                            foreach ($eventsScheduleList['data'] as $value) {
-                                EventSchedule::create([
-
-                                    'event_id' => $eventData['event_id'],
-                                    'activity_title' => $value['activity_title'],
-                                    'start_time' => $value['start_time'],
-                                    'end_time' => $value['end_time'],
-                                    'event_date' => $value['event_date'],
-                                    'type' => '2',
-
-                                ]);
-                            }
-
-                            $addEndschedule =  new EventSchedule();
-                            $addEndschedule->event_id = $eventData['event_id'];
-                            $addEndschedule->end_time = $eventsScheduleList['end_time'];
-                            $addEndschedule->event_date = $eventsScheduleList['event_end_date'];
-                            $addEndschedule->type = '3';
-                            $addEndschedule->save();
-                        }
-                    }
-
-                    if ($eventData['is_draft_save'] == '1') {
-                        EventPotluckCategory::where('event_id', $eventData['event_id'])->delete();
-                    }
-                    if ($eventData['event_setting']['podluck'] == '1' && $eventData['is_draft_save'] == '0') {
-
-                        $podluckCategoryList = $eventData['podluck_category_list'];
-
-                        if (!empty($podluckCategoryList)) {
-
-                            EventPotluckCategory::where('event_id', $eventData['event_id'])->delete();
-
-
-                            foreach ($podluckCategoryList as $value) {
-
-
-
-                                $eventPodluck = EventPotluckCategory::create([
-
-                                    'event_id' => $eventData['event_id'],
-                                    'user_id' => $user->id,
-
-                                    'category' => $value['category'],
-
-                                    'quantity' => $value['quantity'],
-
-                                ]);
-
-
-
-                                if (!empty($value['items'])) {
-
-                                    $items = $value['items'];
-
-
-
-                                    foreach ($items as $value) {
-
-
-
-                                        $eventPodluckitem =   EventPotluckCategoryItem::create([
-
-                                            'event_id' => $eventData['event_id'],
-                                            'user_id' => $user->id,
-                                            'event_potluck_category_id' => $eventPodluck->id,
-                                            'self_bring_item' => (isset($value['self_bring_item'])) ? $value['self_bring_item'] : '0',
-                                            'description' => $value['description'],
-
-                                            'quantity' => $value['quantity'],
+                                            'app_user' => '0',
+                                            'is_user_phone_contact' => '1',
+                                            'parent_user_phone_contact' => $user->id
 
                                         ]);
 
-                                        if (isset($value['self_bring_item']) && $value['self_bring_item'] == '1') {
-                                            UserPotluckItem::Create([
-                                                'event_id' => $eventData['event_id'],
-                                                'user_id' => $user->id,
-                                                'event_potluck_category_id' => $eventPodluck->id,
-                                                'event_potluck_item_id' => $eventPodluckitem->id,
-                                                'quantity' => (isset($value['self_quantity']) && @$value['self_quantity'] != "") ? $value['self_quantity'] : $value['quantity']
-                                            ]);
+                                        EventInvitedUser::create([
+
+                                            'event_id' => $eventData['event_id'],
+
+                                            'prefer_by' => (isset($value['prefer_by'])) ? $value['prefer_by'] : "phone",
+
+                                            'user_id' => $guestUser->id,
+                                            'is_co_host' => '1'
+                                        ]);
+                                    } else {
+                                        $alreadyselectedUser =  collect($eventData['invited_user_id'])->pluck('user_id')->toArray();
+                                        if (!in_array($checkUserExist->id, $alreadyselectedUser)) {
+
+                                            $alreadyselectedCoHostUser =  collect($eventData['co_host_list'])->pluck('user_id')->toArray();
+                                            if (!in_array($checkUserExist->id, $alreadyselectedCoHostUser)) {
+                                                $checkIsAlreadyInvited = EventInvitedUser::where(['event_id' => $eventData['event_id'], 'user_id' => $checkUserExist->id])->first();
+                                                if ($checkIsAlreadyInvited == null) {
+
+                                                    EventInvitedUser::create([
+
+                                                        'event_id' => $eventData['event_id'],
+
+                                                        'prefer_by' => (isset($value['prefer_by'])) ? $value['prefer_by'] : "phone",
+
+                                                        'user_id' => $checkUserExist->id,
+                                                        'is_co_host' => '1'
+                                                    ]);
+                                                } else {
+                                                    $updateRecord = EventInvitedUser::where(['user_id' => $checkUserExist->id, 'event_id' => $eventData['event_id']])->first();
+                                                    $updateRecord->is_co_host = '1';
+                                                    $updateRecord->save();
+                                                }
+                                            }
+                                        }
+                                        //  else if (!in_array($value['user_id'], $alreadyselectedasguestCoUser) && !in_array($value['user_id'], $getalreadyInviteduser)) {
+                                        //     // remove //
+                                        //     EventInvitedUser::where(['user_id' => $value['user_id'], 'event_id' => $eventData['event_id']])->delete();
+                                        // }
+                                        else {
+                                            $updateRecord = EventInvitedUser::where(['user_id' => $checkUserExist->id, 'event_id' => $eventData['event_id']])->first();
+                                            $updateRecord->is_co_host = '1';
+                                            $updateRecord->save();
+                                        }
+                                    }
+                                } else if ($value['prefer_by'] == 'email') {
+
+                                    $checkUserExist = User::where('email', $value['email'])->first();
+
+                                    if (empty($checkUserExist)) {
+
+                                        $guestUser = User::create([
+
+                                            'firstname' => $value['first_name'],
+
+                                            'lastname' => $value['last_name'],
+
+                                            'email' => $value['email'],
+
+                                            'app_user' => '0',
+                                            'is_user_phone_contact' => '1',
+                                            'parent_user_phone_contact' => $user->id
+
+                                        ]);
+
+                                        EventInvitedUser::create([
+
+                                            'event_id' => $eventData['event_id'],
+
+                                            'prefer_by' => (isset($value['prefer_by'])) ? $value['prefer_by'] : "email",
+
+                                            'user_id' => $guestUser->id,
+                                            'is_co_host' => '1'
+                                        ]);
+                                    } else {
+                                        $alreadyselectedUser =  collect($eventData['invited_user_id'])->pluck('user_id')->toArray();
+                                        if (!in_array($checkUserExist->id, $alreadyselectedUser)) {
+
+                                            $alreadyselectedCoHostUser =  collect($eventData['co_host_list'])->pluck('user_id')->toArray();
+                                            if (!in_array($checkUserExist->id, $alreadyselectedCoHostUser)) {
+                                                $checkIsAlreadyInvited = EventInvitedUser::where(['event_id' => $eventData['event_id'], 'user_id' => $checkUserExist->id])->first();
+                                                if ($checkIsAlreadyInvited == null) {
+                                                    EventInvitedUser::create([
+
+                                                        'event_id' => $eventData['event_id'],
+
+                                                        'prefer_by' => (isset($value['prefer_by'])) ? $value['prefer_by'] : "email",
+
+                                                        'user_id' => $checkUserExist->id,
+                                                        'is_co_host' => '1'
+                                                    ]);
+                                                }
+                                            }
+                                        }
+                                        // else if (!in_array($value['user_id'], $alreadyselectedasguestCoUser) && !in_array($value['user_id'], $getalreadyInviteduser)) {
+                                        //     // remove //
+                                        //     EventInvitedUser::where(['user_id' => $value['user_id'], 'event_id' => $eventData['event_id']])->delete();
+                                        // }
+                                        else {
+                                            $updateRecord = EventInvitedUser::where(['user_id' => $checkUserExist->id, 'event_id' => $eventData['event_id']])->first();
+                                            $updateRecord->is_co_host = '1';
+                                            $updateRecord->save();
                                         }
                                     }
                                 }
                             }
                         }
                     }
+                    //  else {
+                    //     // remove //
+                    //     EventInvitedUser::where(['event_id' => $eventData['event_id'], 'is_co_host' => '1'])->delete();
+                    // }
+                }
+                //  else {
+                //     EventInvitedUser::where(['event_id' => $eventData['event_id'], 'is_co_host' => '1'])->delete();
+                // }
+
+
+
+                if ($eventData['event_setting']['events_schedule'] == '1') {
+
+                    $eventsScheduleList = $eventData['events_schedule_list'];
+
+
+                    if (!empty($eventsScheduleList)) {
+                        EventSchedule::where('event_id', $eventData['event_id'])->delete();
+
+                        $addStartschedule =  new EventSchedule();
+                        $addStartschedule->event_id = $eventData['event_id'];
+                        $addStartschedule->start_time = $eventsScheduleList['start_time'];
+                        $addStartschedule->event_date = $eventsScheduleList['event_start_date'];
+                        $addStartschedule->type = '1';
+                        $addStartschedule->save();
+
+                        foreach ($eventsScheduleList['data'] as $value) {
+                            EventSchedule::create([
+
+                                'event_id' => $eventData['event_id'],
+                                'activity_title' => $value['activity_title'],
+                                'start_time' => $value['start_time'],
+                                'end_time' => $value['end_time'],
+                                'event_date' => $value['event_date'],
+                                'type' => '2',
+
+                            ]);
+                        }
+
+                        $addEndschedule =  new EventSchedule();
+                        $addEndschedule->event_id = $eventData['event_id'];
+                        $addEndschedule->end_time = $eventsScheduleList['end_time'];
+                        $addEndschedule->event_date = $eventsScheduleList['event_end_date'];
+                        $addEndschedule->type = '3';
+                        $addEndschedule->save();
+                    }
                 }
 
-
-
-                if (isset($eventData['addr_change']) && $eventData['addr_change'] == '1') {
-
-                    $notificationParam = [
-                        'sender_id' => $user->id,
-                        'event_id' => $eventData['event_id'],
-                        'from_addr' => $eventData['from_addr'],
-                        'to_addr' => $eventData['to_addr'],
-                        'newUser' => $eventData['invited_new_guest']
-                    ];
-
-                    sendNotification('update_address', $notificationParam);
+                if ($eventData['is_draft_save'] == '1') {
+                    EventPotluckCategory::where('event_id', $eventData['event_id'])->delete();
                 }
+                if ($eventData['event_setting']['podluck'] == '1' && $eventData['is_draft_save'] == '0') {
 
-                if (isset($eventData['time_change']) && $eventData['time_change'] == '1') {
+                    $podluckCategoryList = $eventData['podluck_category_list'];
 
-                    $notificationParam = [
-                        'sender_id' => $user->id,
-                        'event_id' => $eventData['event_id'],
-                        'from_time' => $eventData['from_time'],
-                        'to_time' => $eventData['to_time'],
-                        'newUser' => $eventData['invited_new_guest']
-                    ];
+                    if (!empty($podluckCategoryList)) {
 
-                    sendNotification('update_time', $notificationParam);
+                        EventPotluckCategory::where('event_id', $eventData['event_id'])->delete();
+
+
+                        foreach ($podluckCategoryList as $value) {
+
+
+
+                            $eventPodluck = EventPotluckCategory::create([
+
+                                'event_id' => $eventData['event_id'],
+                                'user_id' => $user->id,
+
+                                'category' => $value['category'],
+
+                                'quantity' => $value['quantity'],
+
+                            ]);
+
+
+
+                            if (!empty($value['items'])) {
+
+                                $items = $value['items'];
+
+
+
+                                foreach ($items as $value) {
+
+
+
+                                    $eventPodluckitem =   EventPotluckCategoryItem::create([
+
+                                        'event_id' => $eventData['event_id'],
+                                        'user_id' => $user->id,
+                                        'event_potluck_category_id' => $eventPodluck->id,
+                                        'self_bring_item' => (isset($value['self_bring_item'])) ? $value['self_bring_item'] : '0',
+                                        'description' => $value['description'],
+
+                                        'quantity' => $value['quantity'],
+
+                                    ]);
+
+                                    if (isset($value['self_bring_item']) && $value['self_bring_item'] == '1') {
+                                        UserPotluckItem::Create([
+                                            'event_id' => $eventData['event_id'],
+                                            'user_id' => $user->id,
+                                            'event_potluck_category_id' => $eventPodluck->id,
+                                            'event_potluck_item_id' => $eventPodluckitem->id,
+                                            'quantity' => (isset($value['self_quantity']) && @$value['self_quantity'] != "") ? $value['self_quantity'] : $value['quantity']
+                                        ]);
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
-
-                if (isset($eventData['addr_change']) && $eventData['addr_change'] == '0' && isset($eventData['time_change']) && $eventData['time_change'] == '0') {
-                    $notificationParam = [
-                        'sender_id' => $user->id,
-                        'event_id' => $eventData['event_id'],
-                        'from_time' => $eventData['from_time'],
-                        'to_time' => $eventData['to_time'],
-                        'newUser' => $eventData['invited_new_guest']
-                    ];
-
-                    sendNotification('update_event', $notificationParam);
-                }
-
-                if (isset($eventData['invited_new_guest']) && count($eventData['invited_new_guest']) != 0) {
-                    $notificationParam = [
-
-                        'sender_id' => $user->id,
-
-                        'event_id' => $eventData['event_id'],
-
-                        'newUser' => $eventData['invited_new_guest']
-
-                    ];
-
-                    sendNotification('invite', $notificationParam);
-                }
-
-
-                DB::commit();
-
-                return response()->json(['status' => 1, 'event_name' => $eventData['event_name'], 'event_id' => (int)$eventData['event_id'], 'message' => "Event updated Successfully"]);
-            } else {
-
-                return response()->json(['status' => 0, 'message' => 'Event is not found']);
             }
+
+
+
+            if (isset($eventData['addr_change']) && $eventData['addr_change'] == '1') {
+
+                $notificationParam = [
+                    'sender_id' => $user->id,
+                    'event_id' => $eventData['event_id'],
+                    'from_addr' => $eventData['from_addr'],
+                    'to_addr' => $eventData['to_addr'],
+                    'newUser' => $eventData['invited_new_guest']
+                ];
+
+                sendNotification('update_address', $notificationParam);
+            }
+
+            if (isset($eventData['time_change']) && $eventData['time_change'] == '1') {
+
+                $notificationParam = [
+                    'sender_id' => $user->id,
+                    'event_id' => $eventData['event_id'],
+                    'from_time' => $eventData['from_time'],
+                    'to_time' => $eventData['to_time'],
+                    'newUser' => $eventData['invited_new_guest']
+                ];
+
+                sendNotification('update_time', $notificationParam);
+            }
+
+            if (isset($eventData['addr_change']) && $eventData['addr_change'] == '0' && isset($eventData['time_change']) && $eventData['time_change'] == '0') {
+                $notificationParam = [
+                    'sender_id' => $user->id,
+                    'event_id' => $eventData['event_id'],
+                    'from_time' => $eventData['from_time'],
+                    'to_time' => $eventData['to_time'],
+                    'newUser' => $eventData['invited_new_guest']
+                ];
+
+                sendNotification('update_event', $notificationParam);
+            }
+
+            if (isset($eventData['invited_new_guest']) && count($eventData['invited_new_guest']) != 0) {
+                $notificationParam = [
+
+                    'sender_id' => $user->id,
+
+                    'event_id' => $eventData['event_id'],
+
+                    'newUser' => $eventData['invited_new_guest']
+
+                ];
+
+                sendNotification('invite', $notificationParam);
+            }
+
+
+            DB::commit();
+
+            return response()->json(['status' => 1, 'event_name' => $eventData['event_name'], 'event_id' => (int)$eventData['event_id'], 'message' => "Event updated Successfully"]);
+        } else {
+
+            return response()->json(['status' => 0, 'message' => 'Event is not found']);
         }
-        
+        // }
+
         // catch (QueryException $e) {
         //     DB::rollBack();
 
