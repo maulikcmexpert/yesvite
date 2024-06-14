@@ -559,7 +559,7 @@ class ApiControllerv2 extends Controller
                         if ($value->event_settings->adult_only_party == '1') {
                             $eventData[] = "Adults Only";
                         }
-                        if ($value->event_settings->rsvp_by_date_status == '1') {
+                        if ($value->rsvp_by_date_set == '1') {
                             $eventData[] = date('F d, Y', strtotime($value->rsvp_by_date));
                         }
                         if ($value->event_settings->podluck == '1') {
@@ -882,7 +882,7 @@ class ApiControllerv2 extends Controller
                             if ($value->event_settings->adult_only_party == '1') {
                                 $eventData[] = "Adults Only";
                             }
-                            if ($value->event_settings->rsvp_by_date_status == '1') {
+                            if ($value->rsvp_by_date_set == '1') {
                                 $eventData[] = date('F d, Y', strtotime($value->rsvp_by_date));
                             }
                             if ($value->event_settings->podluck == '1') {
@@ -1093,7 +1093,7 @@ class ApiControllerv2 extends Controller
                             if ($value->event->event_settings->adult_only_party == '1') {
                                 $eventData[] = "Adults Only";
                             }
-                            if ($value->event->event_settings->rsvp_by_date_status == '1') {
+                            if ($value->event->rsvp_by_date_set == '1') {
                                 $eventData[] = date('F d, Y', strtotime($value->event->rsvp_by_date));
                             }
                             if ($value->event->event_settings->podluck == '1') {
@@ -1353,7 +1353,7 @@ class ApiControllerv2 extends Controller
                             if ($value->event_settings->adult_only_party == '1') {
                                 $eventData[] = "Adults Only";
                             }
-                            if ($value->event_settings->rsvp_by_date_status == '1') {
+                            if ($value->rsvp_by_date_set == '1') {
                                 $eventData[] = date('F d, Y', strtotime($value->rsvp_by_date));
                             }
                             if ($value->event_settings->podluck == '1') {
@@ -1613,7 +1613,7 @@ class ApiControllerv2 extends Controller
                             if ($value->event_settings->adult_only_party == '1') {
                                 $eventData[] = "Adults Only";
                             }
-                            if ($value->event_settings->rsvp_by_date_status == '1') {
+                            if ($value->rsvp_by_date_set == '1') {
                                 $eventData[] = date('F d, Y', strtotime($value->rsvp_by_date));
                             }
                             if ($value->event_settings->podluck == '1') {
@@ -1841,7 +1841,7 @@ class ApiControllerv2 extends Controller
                             if ($value->event->event_settings->adult_only_party == '1') {
                                 $eventData[] = "Adults Only";
                             }
-                            if ($value->event->event_settings->rsvp_by_date_status == '1') {
+                            if ($value->event->rsvp_by_date_sets == '1') {
                                 $eventData[] = date('F d, Y', strtotime($value->event->rsvp_by_date));
                             }
                             if ($value->event->event_settings->podluck == '1') {
@@ -6828,7 +6828,7 @@ class ApiControllerv2 extends Controller
                 if ($eventDetail->event_settings->adult_only_party == '1') {
                     $eventData[] = "Adults Only";
                 }
-                if ($eventDetail->event_settings->rsvp_by_date_status == '1') {
+                if ($eventDetail->rsvp_by_date_set == '1') {
                     $eventData[] = date('F d, Y', strtotime($eventDetail->rsvp_by_date));
                 }
                 if ($eventDetail->event_settings->podluck == '1') {
@@ -7199,7 +7199,7 @@ class ApiControllerv2 extends Controller
                 if ($eventDetail->event_settings->adult_only_party == '1') {
                     $eventData[] = "Adults Only";
                 }
-                if ($eventDetail->event_settings->rsvp_by_date_status == '1') {
+                if ($eventDetail->rsvp_by_date_set == '1') {
                     $eventData[] = 'RSVP By :- ' . date('F d, Y', strtotime($eventDetail->rsvp_by_date));
                 }
                 if ($eventDetail->event_settings->podluck == '1') {
@@ -11966,7 +11966,7 @@ class ApiControllerv2 extends Controller
             if ($getEventData->event_settings->adult_only_party == '1') {
                 $eventData[] = "Adults Only";
             }
-            if ($getEventData->event_settings->rsvp_by_date_status == '1') {
+            if ($getEventData->rsvp_by_date_set == '1') {
                 $eventData[] = date('F d, Y', strtotime($getEventData->rsvp_by_date));
             }
             if ($getEventData->event_settings->podluck == '1') {
