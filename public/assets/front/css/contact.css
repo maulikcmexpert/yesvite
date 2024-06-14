@@ -465,10 +465,10 @@ ul.listing li span{
     margin: 20px 0;
 }
 
-.user-contacts{
+/* .user-contacts{
     max-height: 430px;
     overflow-y: scroll;
-}
+} */
 
 .users-data .contact-img{
     width: 36px;
@@ -563,7 +563,10 @@ ul.listing li span{
 }
 
 
-
+.contact-tab .product-scroll{
+    max-height: 430px;
+    overflow-y: scroll;
+}
 
 
 

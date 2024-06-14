@@ -23,19 +23,20 @@
         <div class="register-wrap login-form-wrap">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="#contact" aria-selected="true">Personal</button>
+                    <button class="nav-link userRegister active" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="#contact" aria-selected="true">Personal</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="phone-tab" data-bs-toggle="tab" data-bs-target="#phone" type="button" role="tab" aria-controls="phone" aria-selected="false">Business</button>
+                    <button class="nav-link businessRegister" id="phone-tab" data-bs-toggle="tab" data-bs-target="#phone" type="button" role="tab" aria-controls="phone" aria-selected="false">Business</button>
                 </li>
 
             </ul>
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                     <div class="">
+
                         <form method="POST" action="{{route('store.register')}}" id="register">
                             @csrf
-                            <input type="hidden" name="account_type" value="0">
+                            <input type="hidden" id="account_type" name="account_type" value="0">
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                                     <div class="input-form">
@@ -168,7 +169,7 @@
                     <div class="">
                         <form method="POST" action="{{route('store.register')}}" id="business">
                             @csrf
-                            <input type="hidden" name="account_type" value="1">
+                            <input type="hidden" id="account_type" name="account_type" value="1">
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                                     <div class="input-form">
@@ -220,12 +221,12 @@
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div class="input-form">
-                                        <input type="password" class="form-control" id="businesspassword" name="password" value="{{ old('password')}}">
+                                        <input type="password" class="form-control" id="businesspassword" name="businesspassword" value="{{ old('businesspassword')}}">
                                         <label for="password" class="floating-label">Password <span>*</span></label>
                                         <span toggle="#password-field" class="fa-regular fa-fw fa-eye-slash field-icon toggle-password"></span>
                                         <div class="label-error">
-                                            <label id="password-error" class="error" for="businesspassword" style="color: red;"></label>
-                                            @error('password')
+                                            <label id="businesspassword-error" class="error" for="businesspassword" style="color: red;"></label>
+                                            @error('businesspassword')
                                             <label class="error">{{ $message }}</label>
                                             @enderror
                                         </div>
@@ -233,12 +234,12 @@
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div class="input-form mb-0">
-                                        <input type="password" class="form-control" id="businesscpassword" name="cpassword" value="{{ old('cpassword')}}">
+                                        <input type="password" class="form-control" id="businesscpassword" name="businesscpassword" value="{{ old('businesscpassword')}}">
                                         <label for="password" class="floating-label">Confirm Password <span>*</span></label>
                                         <span toggle="#password-field" class="fa-regular fa-fw fa-eye-slash field-icon toggle-password"></span>
                                         <div class="label-error">
-                                            <label id="cpassword-error" class="error" for="businesscpassword" style="color: red;"></label>
-                                            @error('cpassword')
+                                            <label id="businesscpassword-error" class="error" for="businesscpassword" style="color: red;"></label>
+                                            @error('businesscpassword')
                                             <label class="error">{{ $message }}</label>
                                             @enderror
                                         </div>

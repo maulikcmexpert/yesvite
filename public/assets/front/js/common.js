@@ -1,5 +1,11 @@
 //  ===== focusinput =====
+$(document).on("click", ".businessRegister", function () {
+    $("#account_type").val("1");
+});
 
+$(document).on("click", ".userRegister", function () {
+    $("#account_type").val("0");
+});
 $(".form-control").on("focusin", function () {
     $(this).next().addClass("floatingfocus");
 });

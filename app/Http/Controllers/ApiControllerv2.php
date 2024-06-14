@@ -3006,6 +3006,11 @@ class ApiControllerv2 extends Controller
             $getGuest = EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $input['user_id']])->first();
             if ($getGuest != null) {
 
+                $checkNotificationdata = Notification::where(['event_id' => $input['event_id'], 'user_id' => $input['user_id']])->first();
+                if ($checkNotificationdata != null) {
+                    $checkNotificationdata->delete();
+                }
+
                 $getGuest->delete();
                 return response()->json(['status' => 1, 'message' => "Guest removed successfully"]);
             } else {
@@ -3369,16 +3374,6 @@ class ApiControllerv2 extends Controller
 
                 $rsvp_by_date = $eventData['rsvp_by_date'];
                 $rsvp_by_date_set = '1';
-                if (!empty($eventData['event_setting']['rsvp_by_date'])) {
-                    $rsvp_by_date = $eventData['event_setting']['rsvp_by_date'];
-                    $rsvp_by_date_set = '1';
-                }
-            } else {
-                if (!empty($eventData['event_setting']['rsvp_by_date'])) {
-
-                    $rsvp_by_date = $eventData['event_setting']['rsvp_by_date'];
-                    $rsvp_by_date_set = '1';
-                }
             }
 
 
@@ -4485,16 +4480,6 @@ class ApiControllerv2 extends Controller
 
                     $rsvp_by_date = $eventData['rsvp_by_date'];
                     $rsvp_by_date_set = '1';
-                    if (!empty($eventData['event_setting']['rsvp_by_date'])) {
-                        $rsvp_by_date = $eventData['event_setting']['rsvp_by_date'];
-                        $rsvp_by_date_set = '1';
-                    }
-                } else {
-                    if (!empty($eventData['event_setting']['rsvp_by_date'])) {
-
-                        $rsvp_by_date = $eventData['event_setting']['rsvp_by_date'];
-                        $rsvp_by_date_set = '1';
-                    }
                 }
 
 
@@ -11562,6 +11547,7 @@ class ApiControllerv2 extends Controller
 
                 if ($values->notification_type == 'invite') {
                     $checkIsCoHost =  EventInvitedUser::where(['user_id' => $values->user_id, 'event_id' => $values->event_id])->first();
+
                     $notificationDetail['is_co_host'] = $checkIsCoHost->is_co_host;
                     $notificationDetail['accept_as_co_host'] = $checkIsCoHost->accept_as_co_host;
                 }

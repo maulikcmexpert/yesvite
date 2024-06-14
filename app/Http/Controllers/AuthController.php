@@ -18,6 +18,8 @@ use App\Models\User;
 use App\Rules\EmailExists;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Hash;
+use Flasher\Prime\FlasherInterface;
 
 class AuthController extends Controller
 {
@@ -56,27 +58,51 @@ class AuthController extends Controller
     {
 
 
+        if ($request->account_type == '1') {
+            $validator = Validator::make($request->all(), [
+                'firstname' => 'required|string|max:255',
+                'lastname' => 'required|string|max:255',
+                'email' => ['required', 'email', new EmailExists], // Use the custom validation rule
+                'zip_code' => 'required|string|max:10',
+                'businesspassword' => 'required|string|min:8|regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/',
+                'businesscpassword' => 'required|same:businesspassword',
+            ], [
+                'firstname.required' => 'Please enter your first name',
+                'lastname.required' => 'Please enter your last name',
+                'email.required' => 'Please enter your email',
+                'email.email' => 'Please enter a valid email address',
+                'zip_code.required' => 'Please enter your zip code',
+                'businesspassword.required' => 'Please enter your password',
+                'businesspassword.regex' => 'Your password must be at least 8 characters long and contain both letters and numbers',
+                'businesscpassword.required' => 'Please confirm your password',
+                'businesscpassword.same' => 'Passwords do not match',
+            ]);
+        } else {
+            $validator = Validator::make($request->all(), [
+                'firstname' => 'required|string|max:255',
+                'lastname' => 'required|string|max:255',
+                'email' => ['required', 'email', new EmailExists], // Use the custom validation rule
+                'zip_code' => 'required|string|max:10',
+                'password' => 'required|string|min:8|regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/',
+                'cpassword' => 'required|same:password',
 
-        $validator = Validator::make($request->all(), [
-            'firstname' => 'required|string|max:255',
-            'lastname' => 'required|string|max:255',
-            'email' => ['required', 'email', new EmailExists], // Use the custom validation rule
-            'zip_code' => 'required|string|max:10',
-            'password' => 'required|string|min:8|regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/',
-            'cpassword' => 'required|same:password',
-        ], [
-            'firstname.required' => 'Please enter your first name',
-            'lastname.required' => 'Please enter your last name',
-            'email.required' => 'Please enter your email',
-            'email.email' => 'Please enter a valid email address',
-            'zip_code.required' => 'Please enter your zip code',
-            'password.required' => 'Please enter your password',
-            'password.regex' => 'Your password must be at least 8 characters long and contain both letters and numbers',
-            'cpassword.required' => 'Please confirm your password',
-            'cpassword.same' => 'Passwords do not match',
-        ]);
+            ], [
+                'firstname.required' => 'Please enter your first name',
+                'lastname.required' => 'Please enter your last name',
+                'email.required' => 'Please enter your email',
+                'email.email' => 'Please enter a valid email address',
+                'zip_code.required' => 'Please enter your zip code',
+                'password.required' => 'Please enter your password',
+                'password.regex' => 'Your password must be at least 8 characters long and contain both letters and numbers',
+                'cpassword.required' => 'Please confirm your password',
+                'cpassword.same' => 'Passwords do not match',
+
+            ]);
+        }
+
+
         if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
+            Redirect::to('register')->with('error', $validator->errors()->first());;
         }
 
         try {
@@ -95,7 +121,9 @@ class AuthController extends Controller
             $storeUser->lastname =  $request->lastname;
             $storeUser->email =  $request->email;
             $storeUser->zip_code =  $request->zip_code;
-            $storeUser->password =  $request->password;
+            $storeUser->password = ($request->account_type != '1') ?  Hash::make($request->password) : Hash::make($request->businesspassword);
+
+
             $storeUser->password_updated_date =  date('Y-m-d');
             $storeUser->remember_token =   $randomString;
             $storeUser->save();
@@ -111,15 +139,16 @@ class AuthController extends Controller
                 $message->to($request->email);
                 $message->subject('Email Verification Mail');
             });
-            toastr()->success('Account successfully created, please verify your email before you can log in');
-            return  Redirect::to('login');
+
+
+            return  Redirect::to('login')->with('success', 'Account successfully created, please verify your email before you can log in');;
         } catch (QueryException $e) {
             DB::Rollback();
-            toastr()->error('Register not successfull');
-            return  Redirect::to('register');
+
+            return  Redirect::to('register')->with('error', 'Register not successfull');
         } catch (Exception  $e) {
-            toastr()->error('something went wrong');
-            return  Redirect::to('register');
+
+            return  Redirect::to('register')->with('error', 'something went wrong');
         }
     }
 
@@ -149,6 +178,8 @@ class AuthController extends Controller
             $sessionArray = [
                 'id' => encrypt($user->id),
                 'username' => $user->firstname . ' ' . $user->lastname,
+                'email' => $user->email,
+
                 'profile' => ($user->profile != NULL || $user->profile != "") ? asset('public/storage/profile/' . $user->profile) : asset('public/storage/profile/no_profile.png')
             ];
             Session::put(['user' => $sessionArray]);
@@ -164,11 +195,11 @@ class AuthController extends Controller
                     Cookie::forget('password');
                 }
                 event(new \App\Events\UserRegistered($user));
-                toastr()->success('Logged in successfully!');
-                return redirect()->route('home');
+
+                return redirect()->route('home')->with('success', 'Logged in successfully!');
             } else {
-                toastr()->error('Invalid credentials!');
-                return  Redirect::to('login');
+
+                return  Redirect::to('login')->with('error', 'Invalid credentials!');
             }
             // } 
             // else {
@@ -190,8 +221,7 @@ class AuthController extends Controller
             //     return  Redirect::to('login');
             // }
         }
-        toastr()->error('Email or Passqword invalid');
-        return  Redirect::to('login');
+        return  Redirect::to('login')->with('error', 'Email or Password invalid!');
     }
 
 
@@ -219,10 +249,13 @@ class AuthController extends Controller
             $user = Auth::guard('web')->user();
             // if ($user->email_verified_at != NULL) {
 
+
             $checkType = $this->getUserAccountType(decrypt(Session::get('user')['id']));
 
             if ($checkType->account_type == $user->account_type) {
-                $loginUser = User::where('id', Session::get('user')['id'])->first();
+                $loginUser = User::where('id', decrypt(Session::get('user')['id']))->first();
+
+
                 if ($loginUser != null) {
 
                     Auth::login($loginUser);
@@ -233,19 +266,23 @@ class AuthController extends Controller
                 } else if ($checkType->account_type == '1') {
                     $msg = "proffiesional";
                 }
-                toastr()->error('You have already login ' . $msg);
+
+                toastr()->success('You have already login ' . $msg);
                 return  Redirect::to('profile');
+                // ->with('error', 'You have already login ' . $msg);
             }
 
-            $alreadyLog = User::select('id', 'firstname as first_name', 'lastname as last_name', 'email', 'profile')->where('id', decrypt(Session::get('user')['id']))->first();
+            $alreadyLog = User::select('id', 'firstname', 'lastname', 'email', 'profile')->where('id', decrypt(Session::get('user')['id']))->first();
             if ($alreadyLog != null) {
 
-                $alreadyLog['profile'] = ($alreadyLog->profile != null) ? asset('storage/profile/' . $alreadyLog->profile) : "";
+                $alreadyLog['profile'] = ($alreadyLog->profile != null) ? asset('storage/profile/' . $alreadyLog->profile) : asset('public/storage/profile/no_profile.png');
 
                 $sessionAlreadyArray = [
                     'id' => encrypt($alreadyLog->id),
-                    'username' => $alreadyLog->firstname . ' ' . $alreadyLog->lastname,
-                    'profile' => $alreadyLog->profile
+                    'secondary_username' => $alreadyLog->firstname . ' ' . $alreadyLog->lastname,
+                    'secondary_email' => $alreadyLog->email,
+                    'secondary_profile' => $alreadyLog->profile,
+
                 ];
                 Session::put(['secondary_user' => $sessionAlreadyArray]);
                 Session::forget('user');
@@ -254,6 +291,7 @@ class AuthController extends Controller
             $sessionArray = [
                 'id' => encrypt($user->id),
                 'username' => $user->firstname . ' ' . $user->lastname,
+                'email' => $user->email,
                 'profile' => ($user->profile != NULL || $user->profile != "") ? asset('storage/profile/' . $user->profile) : asset('public/storage/profile/no_profile.png')
             ];
             Session::put(['user' => $sessionArray]);
@@ -268,11 +306,10 @@ class AuthController extends Controller
                     Cookie::forget('password');
                 }
                 event(new \App\Events\UserRegistered($user));
-                toastr()->success('Logged in successfully!');
-                return redirect()->route('home');
+                return redirect()->route('home')->with('success', 'Logged in successfully!');
             } else {
-                toastr()->error('Invalid credentials!');
-                return  Redirect::to('login');
+
+                return  Redirect::to('login')->with('error', 'Invalid credentials!');
             }
             // } 
             // else {
@@ -294,8 +331,8 @@ class AuthController extends Controller
             //     return  Redirect::to('login');
             // }
         }
-        toastr()->error('Email or Passqword invalid');
-        return  Redirect::to('home');
+
+        return  Redirect::to('home')->with('error', 'Email or Passqword invalid');
     }
 
 
