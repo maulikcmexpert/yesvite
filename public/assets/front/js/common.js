@@ -1,4 +1,5 @@
 //  ===== focusinput =====
+
 $(".form-control").on("focusin", function () {
     $(this).next().addClass("floatingfocus");
 });
@@ -91,11 +92,11 @@ const imgPreview = document.getElementById("cover-img");
 const bgPreview = document.getElementById("bg-cover-img");
 
 chooseFile.addEventListener("change", function () {
-    getImgData();
+    // getImgData();
 });
 
 bgChooseFile.addEventListener("change", function () {
-    getbgImgData();
+    // getbgImgData();
 });
 
 function getImgData() {
@@ -105,7 +106,8 @@ function getImgData() {
         fileReader.readAsDataURL(files);
         fileReader.addEventListener("load", function () {
             imgPreview.style.display = "block";
-            imgPreview.innerHTML = '<img src="' + this.result + '" />';
+            imgPreview.innerHTML =
+                '<img src="' + this.result + '" id="profileIm"/>';
         });
     }
 }
@@ -117,7 +119,8 @@ function getbgImgData() {
         fileReader.readAsDataURL(files);
         fileReader.addEventListener("load", function () {
             bgPreview.style.display = "block";
-            bgPreview.innerHTML = '<img src="' + this.result + '" />';
+            bgPreview.innerHTML = '<img src="' + this.result + '" id="bgIm" />';
         });
     }
 }
+

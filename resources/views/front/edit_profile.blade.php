@@ -1,5 +1,27 @@
 <x-front.advertise />
 <!-- ============ contact-details ========== -->
+<style>
+    .cover-img {
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+        /* Adjust width as necessary */
+        height: 300px;
+        /* Adjust height as necessary */
+        border: 1px solid #ccc;
+        /* Optional: For visual clarity */
+    }
+
+    #profileIm {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(1);
+        max-width: none;
+        /* Allow the image to exceed its container's bounds for zooming */
+        cursor: grab;
+    }
+</style>
 <section class="contact-details profile-details">
     <div class="container">
         <div class="row">
@@ -29,7 +51,7 @@
                                         <img src="{{$user->bg_profile}}" alt="" class="bg-img">
                                     </div>
                                     <input type="file" id="bg-choose-file" name="bg_file" accept="image/*" />
-                                    <a href="#" class="Edit-img" for="choose-file" data-bs-toggle="modal" data-bs-target="#coverImg-modal">
+                                    <a href="#" id="bgImage" class="Edit-img" for="choose-file" data-bs-toggle="modal" data-bs-target="#coverImg-modal">
                                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M8.84006 3.73332L3.36673 9.52665C3.16006 9.74665 2.96006 10.18 2.92006 10.48L2.6734 12.64C2.58673 13.42 3.14673 13.9533 3.92006 13.82L6.06673 13.4533C6.36673 13.4 6.78673 13.18 6.9934 12.9533L12.4667 7.15998C13.4134 6.15998 13.8401 5.01998 12.3667 3.62665C10.9001 2.24665 9.78673 2.73331 8.84006 3.73332Z" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
                                             <path d="M7.92676 4.7002C8.21342 6.5402 9.70676 7.94686 11.5601 8.13353" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
@@ -42,7 +64,7 @@
                                     <img src="{{$user->profile}}" alt="user-img" class="UserImg">
                                 </div>
                                 <input type="file" id="choose-file" name="file" accept="image/*" />
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#Edit-modal">
+                                <a href="#" id="userProfile" data-bs-toggle="modal" data-bs-target="#Edit-modal">
                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M11.05 4.66652L4.20829 11.9082C3.94996 12.1832 3.69996 12.7249 3.64996 13.0999L3.34162 15.7999C3.23329 16.7749 3.93329 17.4415 4.89996 17.2749L7.58329 16.8165C7.95829 16.7499 8.48329 16.4749 8.74162 16.1915L15.5833 8.94985C16.7666 7.69985 17.3 6.27485 15.4583 4.53319C13.625 2.80819 12.2333 3.41652 11.05 4.66652Z" stroke="#0F172A" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
                                         <path d="M9.9082 5.875C10.2665 8.175 12.1332 9.93333 14.4499 10.1667" stroke="#0F172A" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
@@ -172,12 +194,13 @@
             <!-- Modal body -->
             <div class="modal-body">
                 <div class="cover-img user-cover-img" id="cover-img">
+                    <div id="demo"></div>
                     <img src="{{$user->profile}}" alt="cover-img" id="profileIm">
                 </div>
                 <div>
                     <div class="slidecontainer">
                         <h5>Zoom</h5>
-                        <input type="range" min="1" max="100" value="50">
+                        <input type="range" id="zoom" min="1" max="100" value="50">
                     </div>
                 </div>
                 <div class="d-flex align-items-center justify-content-end">
@@ -186,7 +209,13 @@
                     </label>
                     <button type="button" class="cmn-btn loaderbtn" id="profile_save">Save Changes</button>
                 </div>
+
             </div>
+
+
+
+
+
         </div>
     </div>
 </div>
@@ -207,7 +236,7 @@
             <!-- Modal body -->
             <div class="modal-body">
                 <div class="cover-img" id="bg-cover-img">
-                    <img src="{{$user->bg_profile}}" alt="bg-cover-img">
+                    <img src="{{$user->bg_profile}}" alt="bg-cover-img" id="bgIm">
                 </div>
                 <div>
                     <div class="slidecontainer">

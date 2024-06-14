@@ -89,77 +89,197 @@ $(document).ready(function () {
         $("#updateUserForm").submit();
     });
 
+    
+
+    var profileCroppie = new Croppie(document.getElementById("profileIm"), {
+        viewport: { width: 200, height: 200, type: "circle" },
+        boundary: { width: 300, height: 300 },
+        enableZoom: true,
+        enableOrientation: true,
+    });
+
+    var bgCroppie = new Croppie(document.getElementById("bgIm"), {
+        viewport: { width: 400, height: 200, type: "rectangle" },
+        boundary: { width: 400, height: 400 },
+        enableZoom: true,
+        enableOrientation: true,
+    });
+
+    function bindImageToCroppie(croppieInstance, imageUrl) {
+        croppieInstance.bind({
+            url: imageUrl,
+        });
+    }
+
+    bindImageToCroppie(profileCroppie, $("#profileIm").attr("src"));
+
+    bindImageToCroppie(bgCroppie, $("#bgIm").attr("src"));
+
+    $("#choose-file").on("change", function () {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $("#profileIm").attr("src", e.target.result);
+            profileCroppie.bind({
+                url: e.target.result,
+            });
+        };
+        reader.readAsDataURL(this.files[0]);
+    });
+
+    $("#bg-choose-file").on("change", function () {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $("#bgIm").attr("src", e.target.result);
+            bgCroppie.bind({
+                url: e.target.result,
+            });
+        };
+        reader.readAsDataURL(this.files[0]);
+    });
+
+    //for profile image
     $("#profile_save").on("click", function () {
-        loaderHandle("#profile_save", "Saving");
-        var formData = new FormData();
-        formData.append("file", $("#choose-file")[0].files[0]);
+        profileCroppie
+            .result({
+                type: "base64",
+                size: { width: 200, height: 200 },
+            })
+            .then(function (base64) {
+                console.log(base64);
 
-        $.ajax({
-            headers: {
-                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-            },
-            url: base_url + "upload",
-            type: "POST",
-            data: formData,
-            processData: false,
-            contentType: false,
+                var blob = dataURItoBlob(base64);
 
-            success: function (response) {
-                if (response.status == 1) {
-                    removeLoaderHandle("#profile_save", "Save Changes");
-                    toastr.success(response.message);
-                    $(document).ready(function () {
-                        $(".UserImg").attr("src", response.image);
-                    });
-                    $("#Edit-modal").modal("hide");
-                } else {
-                    toastr.error(response.message);
-                }
-            },
-        });
+                var croppedFile = new File(
+                    [blob],
+                    "cropped_profile_image.png",
+                    { type: "image/png" }
+                );
+
+                var formData = new FormData();
+                formData.append("file", croppedFile);
+
+                $.ajax({
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                            "content"
+                        ),
+                    },
+                    url: base_url + "upload",
+                    type: "POST",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+
+                    success: function (response) {
+                        if (response.status == 1) {
+                            removeLoaderHandle("#profile_save", "Save Changes");
+                            toastr.success(response.message);
+                            $(document).ready(function () {
+                                $(".UserImg").attr("src", response.image);
+                            });
+                            $("#Edit-modal").modal("hide");
+                        } else {
+                            toastr.error(response.message);
+                        }
+                    },
+                });
+
+                $("#profileIm").attr("src", base64);
+            })
+            .catch(function (error) {
+                console.error("Croppie error:", error);
+            });
     });
 
+    //for background image
     $("#bg_profile_save").on("click", function () {
-        loaderHandle("#bg_profile_save", "Saving");
+        bgCroppie
+            .result({
+                type: "base64",
+                size: { width: 964, height: 200 },
+            })
+            .then(function (base64) {
+                console.log(base64);
 
-        var formData = new FormData();
-        formData.append("file", $("#bg-choose-file")[0].files[0]);
+                var blob = dataURItoBlob(base64);
 
-        $.ajax({
-            headers: {
-                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-            },
-            url: base_url + "upload_bg_profile",
-            type: "POST",
-            dataType: "json",
-            data: formData,
-            processData: false,
-            contentType: false,
+                var bgcroppedFile = new File(
+                    [blob],
+                    "cropped_profile_image.png",
+                    { type: "image/png" }
+                );
 
-            success: function (response) {
-                if (response.status == 1) {
-                    removeLoaderHandle("#bg_profile_save", "Save Changes");
-                    toastr.success(response.message);
-                    $(document).ready(function () {
-                        $(".bg-img").attr("src", response.image);
-                    });
-                    $("#coverImg-modal").modal("hide");
-                } else {
-                    toastr.error(response.message);
-                }
-            },
-            error: function (response) {
-                if ((response = "")) {
-                    toastr.success("Background Profile updated successfully");
-                }
-                $("#coverImg-modal").modal("hide");
-            },
-        });
+                var formData = new FormData();
+                formData.append("file", bgcroppedFile);
+
+                $.ajax({
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                            "content"
+                        ),
+                    },
+                    url: base_url + "upload_bg_profile",
+                    type: "POST",
+                    dataType: "json",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+
+                    success: function (response) {
+                        if (response.status == 1) {
+                            removeLoaderHandle(
+                                "#bg_profile_save",
+                                "Save Changes"
+                            );
+                            toastr.success(response.message);
+                            $(document).ready(function () {
+                                $(".bg-img").attr("src", response.image);
+                            });
+                            $("#coverImg-modal").modal("hide");
+                        } else {
+                            toastr.error(response.message);
+                        }
+                    },
+                    error: function (response) {
+                        if ((response = "")) {
+                            toastr.success(
+                                "Background Profile updated successfully"
+                            );
+                        }
+                        $("#coverImg-modal").modal("hide");
+                    },
+                });
+
+                $("#profileIm").attr("src", base64);
+            })
+            .catch(function (error) {
+                console.error("Croppie error:", error);
+            });
     });
 
-    // $(document).ready(function () {
-    var base_url = $("#base_url").val();
-    // Initialize jQuery validation
+    function dataURItoBlob(dataURI) {
+        var byteString = atob(dataURI.split(",")[1]);
+        var mimeString = dataURI.split(",")[0].split(":")[1].split(";")[0];
+        var ab = new ArrayBuffer(byteString.length);
+        var ia = new Uint8Array(ab);
+        for (var i = 0; i < byteString.length; i++) {
+            ia[i] = byteString.charCodeAt(i);
+        }
+        return new Blob([ab], { type: mimeString });
+    }
+
+    $("#userProfile").on("click", function () {
+        setTimeout(function () {
+            bindImageToCroppie(profileCroppie, $("#profileIm").attr("src"));
+        }, 200);
+    });
+
+    $("#bgImage").on("click", function () {
+        setTimeout(function () {
+            bindImageToCroppie(bgCroppie, $("#bgIm").attr("src"));
+        }, 200);
+    });
+
     $("#updateUserPassword").validate({
         rules: {
             current_password: {
@@ -208,7 +328,6 @@ $(document).ready(function () {
         },
     });
 
-    // Trigger form submission
     $("#save_password_changes").click(function (event) {
         event.preventDefault();
         if ($("#updateUserPassword").valid()) {
@@ -216,8 +335,6 @@ $(document).ready(function () {
             $("#updateUserPassword").submit();
         }
     });
-
-    //  profile privacy //
 
     $("#profilePrivacySave").on("click", function () {
         loaderHandle("#profilePrivacySave", "Saving");
