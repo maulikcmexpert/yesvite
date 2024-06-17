@@ -435,13 +435,12 @@ table.table tbody tr{
 .small-box{
     border-radius: 10px !important;
     background: #fff;
-    
     transition: 0.5s;
 }
 
 .small-box:hover{
     box-shadow: 0 0px 5px rgba(0,0,0,0.2) !important;
-    transform: scale(1.0);
+    transform: scale(1.1);
 }
 
 .content-wrapper {
