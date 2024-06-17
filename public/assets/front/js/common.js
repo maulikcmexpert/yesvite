@@ -136,8 +136,11 @@ $(".phone_number").intlTelInput({
     // utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.4/js/utils.js"
 });
 
-$("[name=phone_number]").on("blur", function () {
-    var instance = $("[name=phone_number]");
+
+
+// $("[name=phone_number]").on("blur", function () {
+$("[name=countryCode]").on("blur", function () {
+    var instance = $("[name=countryCode]");
 
     var phoneNumber = instance.intlTelInput("getSelectedCountryData").dialCode;
     $("#country_code").val(phoneNumber);

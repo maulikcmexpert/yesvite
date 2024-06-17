@@ -133,7 +133,6 @@ select.form-select{
     margin-left: 15px;
 }
 
-
 .nav-tabs{
     width: 100%;
     height: 52px;
@@ -433,6 +432,40 @@ ul.nav-tabs .nav-link:focus{
     bottom: -20px;
     left: 50%;
     transform: translateX(-50%);
+}
+
+.input-form .iti{
+    position: absolute;
+    width: 70px;
+}
+
+.input-form .iti .iti__selected-flag{
+    border-top-left-radius: 16px !important;
+    border-bottom-left-radius: 16px !important;
+    /* border: 1px solid var(--borderColor); */
+}
+
+.input-form .iti .phone_number{
+    /* visibility: hidden; */
+    width: 100%;
+    outline: 0 !important;
+}
+
+.input-form #phone_number{
+    padding-left: 87px !important;
+}
+
+.input-form #phone_number ~ label{
+    left: 85px;
+}
+
+.input-form #phone_number ~ label.floatingfocus{
+    left: 10px;
+    z-index: 1;
+}
+
+.iti--separate-dial-code .iti__selected-dial-code{
+    font-size: 13px;
 }
 
 /* ======== Responsive ========= */

@@ -360,7 +360,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .input-form textarea{
     width: 100%;
     min-height: 80px;
-    border: 1px solid var(--borderColor) !important;
+    border: 1px solid var(--borderColor);
     border-radius: 16px !important;
     -webkit-border-radius: 16px !important;
     -moz-border-radius: 16px !important;

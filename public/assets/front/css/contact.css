@@ -371,6 +371,12 @@ ul.nav .nav-link:hover{
 .contact-tab input[type="search"]{
     height: 48px !important;
     padding-left: 20px;
+    width: 100% !important;
+    outline: 0;
+}
+
+.contact-tab input[type="search"]:focus{
+    border: 1px solid var(--primaryColor) !important;
 }
 
 .contact-tab input[type="search"]::placeholder{
