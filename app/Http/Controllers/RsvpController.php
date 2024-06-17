@@ -6,6 +6,11 @@ use App\Models\Event;
 use App\Models\EventGiftRegistry;
 use App\Models\EventInvitedUser;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\QueryException;
+use Illuminate\Foundation\Exceptions\Handler as Exception;
 
 class RsvpController extends Controller
 {
@@ -99,7 +104,84 @@ class RsvpController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+
+        $userId = decrypt($request->user_id);
+        $eventId = decrypt($request->event_id);
+        try {
+
+            $checkEvent = Event::where(['id' => $eventId])->first();
+
+            if ($checkEvent->end_date < date('Y-m-d')) {
+                return redirect('rsvp/' . $request->user_id . '/' . $request->event_id)->with('error', "Event is past , you can't attempt RSVP");
+            }
+            DB::beginTransaction();
+
+
+
+
+            $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {
+
+                $query->where('app_user', '1');
+            })->where(['user_id' => $userId, 'event_id' => $eventId])->first();
+            $rsvpSentAttempt = $rsvpSent->rsvp_status;
+
+            if ($rsvpSent != null) {
+                $rsvp_attempt = "";
+                if ($rsvpSentAttempt == NULL) {
+                    $rsvp_attempt =  'first';
+                } else if ($rsvpSentAttempt == '0' && $request->rsvp_status == '1') {
+                    $rsvp_attempt =  'no_to_yes';
+                } else if ($rsvpSentAttempt == '1' && $request->rsvp_status == '0') {
+                    $rsvp_attempt =  'yes_to_no';
+                }
+
+                $rsvpSent->event_id = $eventId;
+
+                $rsvpSent->user_id = $userId;
+
+                $rsvpSent->rsvp_status = $request->rsvp_status;
+
+                $rsvpSent->adults = $request->adults;
+
+                $rsvpSent->kids = $request->kids;
+
+                $rsvpSent->message_to_host = $request->message_to_host;
+                $rsvpSent->rsvp_attempt = $rsvp_attempt;
+
+                $rsvpSent->read = '1';
+                $rsvpSent->rsvp_d = '1';
+
+                $rsvpSent->event_view_date = date('Y-m-d');
+
+                $rsvpSent->save();
+
+                $notificationParam = [
+
+                    'sender_id' => $userId,
+                    'event_id' => $eventId,
+                    'rsvp_status' => $request->rsvp_status,
+                    'kids' => $request->kids,
+                    'adults' => $request->adults,
+                    'rsvp_message' => $request->message_to_host,
+                    'post_id' => "",
+                    'rsvp_attempt' => $rsvp_attempt
+                ];
+
+                DB::commit();
+
+                sendNotification('sent_rsvp', $notificationParam);
+
+                return  redirect()->route('home')->with('success', 'Rsvp sent Successfully');
+            }
+            return redirect('rsvp/' . $request->user_id . '/' . $request->event_id)->with('error', 'Rsvp not sent');
+        } catch (QueryException $e) {
+
+            return redirect('rsvp/' . $request->user_id . '/' . $request->event_id)->with('error', 'DB error');
+            DB::rollBack();
+        } catch (\Exception $e) {
+
+            return redirect('rsvp/' . $request->user_id . '/' . $request->event_id)->with('error', 'Something went wrong');
+        }
     }
 
 
