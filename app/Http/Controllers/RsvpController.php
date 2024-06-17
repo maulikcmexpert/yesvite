@@ -52,7 +52,7 @@ class RsvpController extends Controller
 
                 $event['profile'] =  ($event->user->profile != null) ? asset('storage/profile/' . $event->user->profile) : asset('assets/front/image/Frame 1000005835.png');
 
-                $event->gift_registry = [];
+
                 if ($event->gift_registry_id != null || $event->gift_registry_id != "") {
 
                     if (!empty($event->gift_registry_id)) {
@@ -68,7 +68,7 @@ class RsvpController extends Controller
                         }
 
 
-                        $event->gift_registry[] = $giftRegistryDetail;
+                        $event->gift_registry = $giftRegistryDetail;
                     }
                 }
                 return view('layout', compact(
