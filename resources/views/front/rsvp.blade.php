@@ -29,7 +29,7 @@
                         </div>
                         <div class="author-title">
                             <h4>{{$event->event_name}}</h4>
-                            <p><span>Hosted by:</span>{{$event->hosted_by}}</p>
+                            <p><span>Hosted by:</span>{{ $event->hosted_by}}</p>
                         </div>
                     </div>
                     @if($event->message_to_guests != null || $event->message_to_guests != "")
