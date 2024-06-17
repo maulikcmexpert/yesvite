@@ -1,19 +1,19 @@
-@foreach($yesviteUser as $value)
+@if($yesvitePhones->isEmpty())
 <div class="users-data">
     <div class="d-flex align-items-start">
-        <div class="contact-img">
-            <img src="{{ ($value->profile != null) ? asset('storage/profile/' . $value->profile) : asset('storage/profile/no_profile.png') }}" alt="contact-img">
+        <div class="input-form">
+            <label>Import Csv</label>
+            <input type="file" class='form-control'>
         </div>
+
+    </div>
+</div>@else
+@foreach($yesvitePhones as $value)
+<div class="users-data">
+    <div class="d-flex align-items-start">
         <div class="text-start">
             <h5>{{$value->firstname.' '.$value->lastname}}</h5>
-            <div>
-                <a href="mailto:{{$value->email}}">
-                    <svg class="me-1" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M9.91602 11.9582H4.08268C2.33268 11.9582 1.16602 11.0832 1.16602 9.0415V4.95817C1.16602 2.9165 2.33268 2.0415 4.08268 2.0415H9.91602C11.666 2.0415 12.8327 2.9165 12.8327 4.95817V9.0415C12.8327 11.0832 11.666 11.9582 9.91602 11.9582Z" stroke="black" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M9.91732 5.25L8.09148 6.70833C7.49065 7.18667 6.50482 7.18667 5.90398 6.70833L4.08398 5.25" stroke="black" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                    {{$value->email}}</a>
-            </div>
+
             @if($value->phone_number != NULL || $value->phone_number != "")
             <div>
                 <a href="tel">
@@ -24,7 +24,9 @@
             </div>
             @endif
         </div>
+
     </div>
-    <a href="#" class="btn edit-contact edit_contact" id="edit_contact" data-bs-toggle="modal" data-bs-target="#myModal" data-id="{{$value->id}}">Edit Contact</a>
+    <a href="#" class="btn edit-contact" data-bs-toggle="modal" data-bs-target="#myModal" >Edit Contact</a>
 </div>
 @endforeach
+@endif

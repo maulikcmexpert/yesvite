@@ -68,10 +68,16 @@ Route::middleware('checkUserExist')->group(function () {
 
     Route::get('contact',  [ContactController::class, 'index'])->name('profile.contact');
 
-    Route::get('contacts/load', [ContactController::class, 'loadMore'])->name('.loadMore');
-   
+    Route::post('contacts/load', [ContactController::class, 'loadMore'])->name('.loadMore');
+    Route::post('contacts/loadgroups', [ContactController::class, 'loadMoreGroup'])->name('.loadMoreGroup');
+    Route::post('contacts/loadphones', [ContactController::class, 'loadMorePhones'])->name('.loadMorePhones');
+
+
     Route::post('contacts/add/{id}', [ContactController::class, 'addContact'])->name('.addcontact');
 
+    Route::post('contacts/edit/{id}', [ContactController::class, 'editContact'])->name('editcontact');
+
+    Route::post('contacts/save_edit', [ContactController::class, 'save_editContact'])->name('.saveeditcontact');
 });
 
 
