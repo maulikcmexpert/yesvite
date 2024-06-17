@@ -71,9 +71,8 @@ Route::middleware('checkUserExist')->group(function () {
     Route::get('contact',  [ContactController::class, 'index'])->name('profile.contact');
 
     Route::get('contacts/load', [ContactController::class, 'loadMore'])->name('.loadMore');
-   
-    Route::post('contacts/add/{id}', [ContactController::class, 'addContact'])->name('.addcontact');
 
+    Route::post('contacts/add/{id}', [ContactController::class, 'addContact'])->name('.addcontact');
 });
 
 

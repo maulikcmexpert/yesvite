@@ -4,31 +4,20 @@
         <div class="row">
             <div class="col-lg-5 mb-lg-0 mb-sm-4 mb-md-4 mb-0">
                 <div class="rsvp-slider owl-carousel owl-theme">
-                    <div class="item">
-                        <div class="rsvp-img">
-                            <img src="./assets/image/birth-card.png" alt="birth-card">
+
+                    <?php
+                    if ($event->event_image->isNotEmpty()) { ?>
+                        @foreach($event->event_image as $value)
+                        <div class="item">
+                            <div class="rsvp-img">
+                                <img src="{{ asset('storage/event_images/'.$value->image)}}" alt="birth-card">
+                            </div>
                         </div>
-                    </div>
-                    <div class="item">
-                        <div class="rsvp-img">
-                            <img src="./assets/image/birth-card.png" alt="birth-card">
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="rsvp-img">
-                            <img src="./assets/image/birth-card.png" alt="birth-card">
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="rsvp-img">
-                            <img src="./assets/image/birth-card.png" alt="birth-card">
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="rsvp-img">
-                            <img src="./assets/image/birth-card.png" alt="birth-card">
-                        </div>
-                    </div>
+                        @endforeach
+                    <?php
+                    }
+                    ?>
+
                 </div>
             </div>
             <div class="col-lg-7">
@@ -36,7 +25,7 @@
                     <h5 class="title">RSVP</h5>
                     <div class="author-wrp">
                         <div class="author-img">
-                            <img src="./assets/image/user-img.svg" alt="">
+                            <img src="" alt="">
                         </div>
                         <div class="author-title">
                             <h4>Aaron Loeb’s 5th Birthday</h4>

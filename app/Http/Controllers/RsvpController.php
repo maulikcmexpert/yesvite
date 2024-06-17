@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\EventInvitedUser;
 use Illuminate\Http\Request;
 
 class RsvpController extends Controller
@@ -16,11 +17,20 @@ class RsvpController extends Controller
         $page = 'front.rsvp';
 
         $event = Event::with(['event_image', 'event_settings'])->where('id', $eventId)->first();
-        return view('layout', compact(
-            'title',
-            'page',
-            'event'
-        ));
+        if ($event != null) {
+            $isInvited = EventInvitedUser::where(['event_id' => $eventId, 'user_id' => $userId])->first();
+            if ($isInvited != null) {
+
+
+                return view('layout', compact(
+                    'title',
+                    'page',
+                    'event'
+                ));
+            }
+            return redirect('home')->with('error', 'You are not connect with this event');
+        }
+        return redirect('home')->with('error', 'You are not inivted in this event');
     }
 
     /**

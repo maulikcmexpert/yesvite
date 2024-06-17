@@ -5,4 +5,9 @@
         <input type="file" name="csv_file">
         <button type="submit">Import CSV</button>
     </form>
+    <?php
+    $userId = encrypt(1);
+    $eventId = encrypt(2);
+    ?>
+    <a href="{{route('rsvp',['userId' => $userId,'eventId' =>$eventId])}}">RSVP</a>
 </div>
