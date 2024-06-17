@@ -76,6 +76,7 @@
                 <th>No</th>
                 <th>Event Name</th>
                 <th>Event By</th>
+                <th>Email</th>
                 <th>Start Date</th>
                 <th>End Date</th>
                 <th>Vanue</th>

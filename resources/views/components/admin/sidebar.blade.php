@@ -2,7 +2,7 @@
   <!-- Brand Logo -->
   <a href="{{URL::to('/admin/dashboard')}}" class="brand-link">
     <!-- <img src="{{asset('storage/yesvitelogo.png')}}" alt="Yesvite Logo" class="brand-image logo-full elevation-3" style="opacity: .8'">-->
-    <img src="{{asset('storage/logo2.png')}}" alt="Yesvite Logo" class="brand-image logo-short elevation-3" style="opacity: .8'">
+
 
     <span class="brand-image logo-full" style="opacity: .8'">
       <svg width="129" height="36" viewBox="0 0 129 36" fill="none" xmlns="http://www.w3.org/2000/svg">
