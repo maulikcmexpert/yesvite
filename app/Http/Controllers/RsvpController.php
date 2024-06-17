@@ -72,7 +72,8 @@ class RsvpController extends Controller
                     'title',
                     'page',
                     'event',
-                    'giftRegistryDetails'
+                    'giftRegistryDetails',
+                    'isInvited'
                 ));
             }
             return redirect('home')->with('error', 'You are not connect with this event');
