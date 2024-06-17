@@ -59,7 +59,6 @@ class RsvpController extends Controller
                         $giftregistry = explode(',', $event->gift_registry_id);
 
                         $giftregistryData = EventGiftRegistry::whereIn('id', $giftregistry)->get();
-                        dd($giftregistryData);
                         $giftRegistryDetails = [];
                         foreach ($giftregistryData as $value) {
                             $giftRegistryDetail['id'] = $value->id;
@@ -67,6 +66,8 @@ class RsvpController extends Controller
                             $giftRegistryDetail['registry_link'] = $value->registry_link;
                             $giftRegistryDetails[] = $giftRegistryDetail;
                         }
+                        dd($giftRegistryDetails);
+
                         $event->gift_registry = $giftRegistryDetail;
                     }
                 }
