@@ -18,18 +18,18 @@ class EventController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request, $type = "")
+    public function index(Request $request, $eventType = null)
     {
 
 
         if ($request->ajax()) {
             $eventDate = $request->input('filter');
             $status = $request->input('status');
-            $data = Event::with(['user' => function ($query) use ($type) {
-                if ($type == 'normal_event') {
+            $data = Event::with(['user' => function ($query) use ($eventType) {
+                if ($eventType == 'normal_event') {
 
                     $query->where(['app_user' => '1', 'account_type' => '0']);
-                } else if ($type == 'professional_event') {
+                } else if ($eventType == 'professional_event') {
                     $query->where(['app_user' => '1', 'account_type' => '1']);
                 }
             }])->orderBy('id', 'desc');
