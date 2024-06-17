@@ -107,7 +107,7 @@
                         <button type="button" class="cancel-btn">Cancel</button>
                         <button type="button" class="send-btn">Send</button>
                     </div>
-                    <div class="calender d-flex align-items-center justify-content-center">
+                    <!-- <div class="calender d-flex align-items-center justify-content-center">
                         <h5 class="me-2">Add to calendar</h5>
                         <span>
                             <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -116,8 +116,12 @@
                                 <path d="M8.5 10.6654V5.33203" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
                         </span>
-                    </div>
+                    </div> -->
                     <div class="rsvp-app">
+                        @if(count($event->gift_registry) != 0)
+                        <?php
+                        dd($event->gift_registry);
+                        ?>
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                                 <div class="target d-flex gap-3 align-items-center">
@@ -131,6 +135,7 @@
                                 </div>
                             </div>
                         </div>
+                        @endif
                     </div>
                     <div class="note-wrp">
                         <h5><span>Note:</span> THis is a Potluck Event</h5>

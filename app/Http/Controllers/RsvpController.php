@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\EventGiftRegistry;
 use App\Models\EventInvitedUser;
 use Illuminate\Http\Request;
 
@@ -50,6 +51,22 @@ class RsvpController extends Controller
                 }
 
                 $event['profile'] =  ($event->user->profile != null) ? asset('storage/profile/' . $event->user->profile) : asset('assets/front/image/Frame 1000005835.png');
+
+                $event['gift_registry'] = [];
+                if ($event->greeting_card_id != null || $event->greeting_card_id != "") {
+
+                    if (!empty($event->gift_registry_id)) {
+                        $giftregistry = explode(',', $event->gift_registry_id);
+
+                        $giftregistryData = EventGiftRegistry::whereIn('id', $giftregistry)->get();
+                        foreach ($giftregistryData as $value) {
+                            $giftRegistryDetail['id'] = $value->id;
+                            $giftRegistryDetail['registry_recipient_name'] = $value->registry_recipient_name;
+                            $giftRegistryDetail['registry_link'] = $value->registry_link;
+                            $event['gift_registry'][] = $giftRegistryDetail;
+                        }
+                    }
+                }
                 return view('layout', compact(
                     'title',
                     'page',
