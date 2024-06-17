@@ -200,6 +200,7 @@ $(document).ready(function () {
 
     $("#yesviteUser").on("click", ".edit-contact", function (e) {
         e.preventDefault(); // Prevent the default action
+        $(".form-control").next().addClass("floatingfocus");
 
         var contactId = $(this).data("id");
 
@@ -230,6 +231,8 @@ $(document).ready(function () {
     $("#yesvitePhones").on("click", ".edit-contact", function (e) {
         // alert();
         e.preventDefault(); // Prevent the default action
+
+        $(".form-control").next().addClass("floatingfocus");
 
         var contactId = $(this).data("id");
 
