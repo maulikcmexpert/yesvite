@@ -119,9 +119,6 @@
                     </div> -->
                     <div class="rsvp-app">
                         @if(count($event->gift_registry) != 0)
-                        <?php
-                        dd($event->gift_registry);
-                        ?>
 
                         <div class="row">
                             @foreach($event->gift_registry as $value)
