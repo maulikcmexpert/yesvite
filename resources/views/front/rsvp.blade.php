@@ -121,13 +121,14 @@
                         @if(count($event->gift_registry) != 0)
 
                         <div class="row">
-
+                            @foreach($giftRegistryDetails as $value)
                             <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                                 <div class="target d-flex gap-3 align-items-center">
                                     <img src="./assets/image/Pic.png" alt="">
-                                    <h5>{{$event->gift_registry['registry_recipient_name']}}</h5>
+                                    <h5>{{$value->registry_recipient_name}}</h5>
                                 </div>
                             </div>
+                            @endforeach
 
                         </div>
                         @endif

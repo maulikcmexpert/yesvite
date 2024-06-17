@@ -53,28 +53,26 @@ class RsvpController extends Controller
                 $event['profile'] =  ($event->user->profile != null) ? asset('storage/profile/' . $event->user->profile) : asset('assets/front/image/Frame 1000005835.png');
 
 
+                $giftRegistryDetails = [];
                 if ($event->gift_registry_id != null || $event->gift_registry_id != "") {
 
                     if (!empty($event->gift_registry_id)) {
                         $giftregistry = explode(',', $event->gift_registry_id);
 
                         $giftregistryData = EventGiftRegistry::whereIn('id', $giftregistry)->get();
-                        $giftRegistryDetails = [];
                         foreach ($giftregistryData as $value) {
                             $giftRegistryDetail['id'] = $value->id;
                             $giftRegistryDetail['registry_recipient_name'] = $value->registry_recipient_name;
                             $giftRegistryDetail['registry_link'] = $value->registry_link;
                             $giftRegistryDetails[] = $giftRegistryDetail;
                         }
-
-
-                        $event->gift_registry = $giftRegistryDetail;
                     }
                 }
                 return view('layout', compact(
                     'title',
                     'page',
-                    'event'
+                    'event',
+                    'giftRegistryDetails'
                 ));
             }
             return redirect('home')->with('error', 'You are not connect with this event');
