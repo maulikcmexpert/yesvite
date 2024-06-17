@@ -66,7 +66,7 @@ class RsvpController extends Controller
                             $giftRegistryDetail['registry_link'] = $value->registry_link;
                             $giftRegistryDetails[] = $giftRegistryDetail;
                         }
-                        dd($giftRegistryDetails);
+
 
                         $event->gift_registry = $giftRegistryDetail;
                     }
