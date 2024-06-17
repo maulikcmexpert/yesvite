@@ -133,7 +133,7 @@ class EventController extends Controller
     public function professionalEvent(Request $request)
     {
 
-
+        dd("hi");
         if ($request->ajax()) {
             $eventDate = $request->input('filter');
             $status = $request->input('status');
