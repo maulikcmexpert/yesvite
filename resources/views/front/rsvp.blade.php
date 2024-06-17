@@ -119,7 +119,9 @@
                     </div> -->
                     <div class="rsvp-app">
                         @if(count($giftRegistryDetails) != 0)
-
+                        <?php
+                        dd($giftRegistryDetails);
+                        ?>
                         <div class="row">
                             @foreach($giftRegistryDetails as $value)
                             <div class="col-lg-6 col-md-6 col-sm-6 col-6">
