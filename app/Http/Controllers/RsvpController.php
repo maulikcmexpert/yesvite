@@ -23,6 +23,32 @@ class RsvpController extends Controller
             $isInvited = EventInvitedUser::where(['event_id' => decrypt($eventId), 'user_id' => decrypt($userId)])->first();
             if ($isInvited != null) {
 
+                if ($event->event_settings) {
+                    $eventData = [];
+
+                    if ($event->event_settings->allow_for_1_more == '1') {
+                        $eventData[] = "Can Bring Guests ( limit " . $event->event_settings->allow_limit . ")";
+                    }
+                    if ($event->event_settings->adult_only_party == '1') {
+                        $eventData[] = "Adults Only";
+                    }
+                    if ($event->rsvp_by_date_set == '1') {
+                        $eventData[] = 'RSVP By :- ' . date('F d, Y', strtotime($event->rsvp_by_date));
+                    }
+                    if ($event->event_settings->podluck == '1') {
+                        $eventData[] = "Event Potluck";
+                    }
+                    if ($event->event_settings->gift_registry == '1') {
+                        $eventData[] = "Gift Registry";
+                    }
+                    if (empty($eventData)) {
+                        $eventData[] = date('F d, Y', strtotime($event->start_date));
+                        $numberOfGuest = EventInvitedUser::where('event_id', $event->id)->count();
+                        $eventData[] = "Number of guests : " . $numberOfGuest;
+                    }
+                    $event['event_detail'] = $eventData;
+                }
+
 
                 return view('layout', compact(
                     'title',

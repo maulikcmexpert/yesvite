@@ -28,20 +28,21 @@
                             <img src="" alt="">
                         </div>
                         <div class="author-title">
-                            <h4>Aaron Loeb’s 5th Birthday</h4>
-                            <p><span>Hosted by:</span>The Walton Family</p>
+                            <h4>{{$event->event_name}}</h4>
+                            <p><span>Hosted by:</span>{{$event->hosted_by}}</p>
                         </div>
                     </div>
                     <div class="thank-card">
-                        <p>Thanks everyone for RSVP'ing on time. I hope everyone can make it to this special day of ours!</p>
+                        <p>{{$event->message_to_guests}}</p>
                     </div>
                     <div class="event-detail">
                         <h5>Event Details</h5>
                         <div class="d-flex flex-wrap">
-                            <!-- <li>RSVP By Sept 20</li>
-                                <li>+1 (Limit 5)</li>
-                                <li>Adults & Kids </li>
-                                <li>Potluck Event</li> -->
+                            <?php
+
+                            dd($event);
+
+                            ?>
                             <div class="d-flex align-items-center justify-content-between w-100 mb-2">
                                 <h6>RSVP By Sept 20</h6>
                                 <h6>+1 (Limit 5)</h6>
