@@ -8,7 +8,7 @@
 
       <!-- small box -->
 
-      <div class="small-box">
+      <a href="#" class="small-box">
 
         <div class="inner">
 
@@ -28,7 +28,7 @@
 
 
 
-      </div>
+      </a>
 
     </div>
 
