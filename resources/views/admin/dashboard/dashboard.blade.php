@@ -94,7 +94,7 @@
 
       <!-- small box -->
 
-      <a href="{{ route('events.index.type', ['type' => 'professional_event']) }}" class="small-box">
+      <a href="{{ route('events.index.type', ['eventType' => 'professional_event']) }}" class="small-box">
 
         <div class="inner">
 
