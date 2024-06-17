@@ -66,7 +66,7 @@ Route::group(['middleware' => adminAuth::Class], function () {
         'design' => DesignController::class,
         'users' => UserController::class,
         'professional_users' => ProfessionalUserController::class,
-        'events/{type}' => EventController::class,
+        'events' => EventController::class,
         'event_type' => EventTypeController::class,
         'user_post_report' => UserPostReportController::class
     ]);
