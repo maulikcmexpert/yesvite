@@ -6,6 +6,8 @@
         <button type="submit">Import CSV</button>
     </form>
     <?php
+    $id = Auth::guard('web')->user()->id;
+    dd($id);
     $userId = encrypt(1);
     $eventId = encrypt(2);
     ?>
