@@ -130,15 +130,15 @@ class AuthController extends Controller
             DB::commit();
             $userDetails = User::where('id', $storeUser->id)->first();
 
-            $userData = [
-                'username' => $userDetails->firstname . ' ' . $userDetails->lastname,
-                'email' => $userDetails->email,
-                'token' => $randomString
-            ];
-            Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($request) {
-                $message->to($request->email);
-                $message->subject('Email Verification Mail');
-            });
+            // $userData = [
+            //     'username' => $userDetails->firstname . ' ' . $userDetails->lastname,
+            //     'email' => $userDetails->email,
+            //     'token' => $randomString
+            // ];
+            // Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($request) {
+            //     $message->to($request->email);
+            //     $message->subject('Email Verification Mail');
+            // });
 
 
             return  Redirect::to('login')->with('success', 'Account successfully created, please verify your email before you can log in');;

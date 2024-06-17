@@ -303,7 +303,7 @@ table.table tbody tr.odd{
     background-color: rgb(233 84 94 / 8%) !important;
 }
 
-table.table tbody tr{
+table.table tbody tr{   
     /* box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; */
     background-color: transparent !important;
     margin-bottom: 10px;
