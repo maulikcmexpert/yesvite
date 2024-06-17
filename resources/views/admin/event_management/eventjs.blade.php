@@ -20,6 +20,10 @@
                     name: "event_by"
                 },
                 {
+                    data: "email",
+                    name: "email"
+                },
+                {
                     data: "start_date",
                     name: "start_date"
                 },

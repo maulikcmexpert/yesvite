@@ -50,6 +50,11 @@ class EventController extends Controller
 
                     return $row->user->firstname . ' ' . $row->user->lastname;
                 })
+                ->addColumn('email', function ($row) {
+
+
+                    return $row->user->email;
+                })
                 ->addColumn('start_date', function ($row) {
 
 
@@ -98,6 +103,7 @@ class EventController extends Controller
                 ->rawColumns([
                     'number',
                     'event_by',
+                    'email',
                     'start_date',
                     'end_date',
                     'venue',
