@@ -428,6 +428,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     width: 100% !important;
 }
 
+#coverImg-modal .modal-header{
+    border: none !important;
+}   
+
 .user-cover-img{
     background: #14b6c21a;
     width: 375px;
