@@ -21,11 +21,18 @@ class EventController extends Controller
     public function index(Request $request, $type = "")
     {
 
-        dd($type);
+
         if ($request->ajax()) {
             $eventDate = $request->input('filter');
             $status = $request->input('status');
-            $data = Event::with('user')->orderBy('id', 'desc');
+            $data = Event::with(['user' => function ($query) use ($type) {
+                if ($type == 'normal_event') {
+
+                    $query->where(['app_user' => '1', 'account_type' => '0']);
+                } else if ($type == 'professional_event') {
+                    $query->where(['app_user' => '1', 'account_type' => '1']);
+                }
+            }])->orderBy('id', 'desc');
 
             if ($eventDate) {
                 $data->where('start_date', $eventDate);
