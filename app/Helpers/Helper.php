@@ -101,7 +101,7 @@ function sendNotification($notificationType, $postData)
     }
     $notification_message = "";
 
-    $users = EventInvitedUser::with(['event', 'event.event_settings', 'event.event_schedule', 'user'])->whereHas('user', function ($query) {
+    $invitedusers = EventInvitedUser::with(['event', 'event.event_settings', 'event.event_schedule', 'user'])->whereHas('user', function ($query) {
         //  $query->where('app_user', '1');
     })->where('event_id', $postData['event_id'])->get();
 
@@ -216,7 +216,7 @@ function sendNotification($notificationType, $postData)
     }
 
     if ($notificationType == 'update_address' || $notificationType == 'update_time' || $notificationType == 'update_event') {
-        dd($invitedusers);
+
         if (count($invitedusers) != 0) {
 
             foreach ($invitedusers as $value) {
