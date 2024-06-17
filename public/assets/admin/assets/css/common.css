@@ -441,6 +441,7 @@ table.table tbody tr{
 
 .small-box:hover{
     box-shadow: 0 0px 5px rgba(0,0,0,0.2) !important;
+    transform: scale(0.5);
 }
 
 .content-wrapper {
