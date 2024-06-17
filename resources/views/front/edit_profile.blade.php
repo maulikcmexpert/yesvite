@@ -202,10 +202,10 @@
                 <div>
                     <div class="slidecontainer">
                         <h5>Zoom</h5>
-                        <input type="range" id="zoom" min="1" max="100" value="50">
+                        <!-- <input type="range" id="zoom" min="1" max="100" value="50"> -->
                     </div>
                 </div>
-                <div class="d-flex align-items-center justify-content-end">
+                <div class="profile-save-btn d-flex align-items-center justify-content-end">
                     <label class="choosen-file cmn-btn edit-btn mb-0 me-3" for="choose-file">
                         Upload New Image
                     </label>
@@ -243,10 +243,10 @@
                 <div>
                     <div class="slidecontainer">
                         <h5>Zoom</h5>
-                        <input type="range" min="1" max="100" value="50">
+                        <!-- <input type="range" min="1" max="100" value="50"> -->
                     </div>
                 </div>
-                <div class="d-flex align-items-center justify-content-end">
+                <div class="profile-save-btn d-flex align-items-center justify-content-end">
                     <label class="choosen-file cmn-btn edit-btn mb-0 me-3" for="bg-choose-file">
                         Upload New Image
                     </label>
