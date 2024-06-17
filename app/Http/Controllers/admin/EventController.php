@@ -18,10 +18,8 @@ class EventController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index($type = "", Request $request)
+    public function index(Request $request)
     {
-
-        dd($type);
 
         if ($request->ajax()) {
             $eventDate = $request->input('filter');
