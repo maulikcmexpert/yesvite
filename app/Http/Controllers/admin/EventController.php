@@ -22,34 +22,35 @@ class EventController extends Controller
     {
         $eventType = $request->eventType;
 
+        $eventDate = $request->input('filter');
+        $status = $request->input('status');
+        $data = Event::with(['user' => function ($query) use ($eventType) {
+            if ($eventType == 'normal_event') {
+
+                $query->where(['app_user' => '1', 'account_type' => '0']);
+            } else if ($eventType == 'professional_event') {
+                $query->where(['app_user' => '1', 'account_type' => '1']);
+            }
+        }])->orderBy('id', 'desc');
+
+        if ($eventDate) {
+            $data->where('start_date', $eventDate);
+        }
+        if ($status == 'upcoming_events') {
+            $data->where('start_date', '>', date('Y-m-d'));
+        }
+
+        if ($status == 'past_events') {
+            $data->where('start_date', '<', date('Y-m-d'));
+        }
+        if ($status == 'draft_events') {
+            $data->where('is_draft_save', '1');
+        }
 
         if ($request->ajax()) {
-            dd($request->eventType);
 
-            $eventDate = $request->input('filter');
-            $status = $request->input('status');
-            $data = Event::with(['user' => function ($query) use ($eventType) {
-                if ($eventType == 'normal_event') {
 
-                    $query->where(['app_user' => '1', 'account_type' => '0']);
-                } else if ($eventType == 'professional_event') {
-                    $query->where(['app_user' => '1', 'account_type' => '1']);
-                }
-            }])->orderBy('id', 'desc');
 
-            if ($eventDate) {
-                $data->where('start_date', $eventDate);
-            }
-            if ($status == 'upcoming_events') {
-                $data->where('start_date', '>', date('Y-m-d'));
-            }
-
-            if ($status == 'past_events') {
-                $data->where('start_date', '<', date('Y-m-d'));
-            }
-            if ($status == 'draft_events') {
-                $data->where('is_draft_save', '1');
-            }
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('number', function ($row) {
