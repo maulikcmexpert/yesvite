@@ -7,9 +7,9 @@
     </form>
     <?php
     $id = Auth::guard('web')->user()->id;
-    dd($id);
-    $userId = encrypt(1);
-    $eventId = encrypt(2);
+
+    $userId = encrypt(327);
+    $eventId = encrypt(1505);
     ?>
     <a href="{{route('rsvp',['userId' => $userId,'eventId' =>$eventId])}}">RSVP</a>
 </div>
