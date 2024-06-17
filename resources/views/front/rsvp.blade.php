@@ -43,7 +43,7 @@
 
                             $i = 1;
                             ?>
-                            @if($event->event_detail->isNotEmpty())
+                            @if($event->event_detail)
                             <div class="d-flex align-items-center justify-content-between {{($i<= 3)?'w-100 mb-2':'w-100'}}">
                                 @foreach($event->event_detail as $val)
 
