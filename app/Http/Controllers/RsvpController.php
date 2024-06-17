@@ -53,7 +53,7 @@ class RsvpController extends Controller
                 $event['profile'] =  ($event->user->profile != null) ? asset('storage/profile/' . $event->user->profile) : asset('assets/front/image/Frame 1000005835.png');
 
                 $event['gift_registry'] = [];
-                if ($event->greeting_card_id != null || $event->greeting_card_id != "") {
+                if ($event->gift_registry_id != null || $event->gift_registry_id != "") {
 
                     if (!empty($event->gift_registry_id)) {
                         $giftregistry = explode(',', $event->gift_registry_id);
