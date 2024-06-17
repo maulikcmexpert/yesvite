@@ -199,7 +199,6 @@ $(document).ready(function () {
     });
 
     $("#yesviteUser").on("click", ".edit-contact", function (e) {
-        alert();
         e.preventDefault(); // Prevent the default action
 
         var contactId = $(this).data("id");
