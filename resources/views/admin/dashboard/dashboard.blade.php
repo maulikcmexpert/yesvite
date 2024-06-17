@@ -66,7 +66,7 @@
 
       <!-- small box -->
 
-      <a href="{{URL::to('/admin/events')}}" class="small-box">
+      <a href="{{URL::to('/admin/events/normal_event')}}" class="small-box">
 
         <div class="inner">
 
@@ -94,7 +94,7 @@
 
       <!-- small box -->
 
-      <div class="small-box">
+      <a href="{{URL::to('/admin/events/professional_event')}}" class="small-box">
 
         <div class="inner">
 
@@ -114,7 +114,7 @@
 
         <!-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> -->
 
-      </div>
+      </a>
 
     </div>
 
