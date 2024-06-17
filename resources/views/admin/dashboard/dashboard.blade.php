@@ -8,7 +8,7 @@
 
       <!-- small box -->
 
-      <a href="#" class="small-box">
+      <a href="{{URL::to('/admin/users')}}" class="small-box">
 
         <div class="inner">
 
@@ -36,7 +36,7 @@
 
       <!-- small box -->
 
-      <div class="small-box">
+      <a href="{{URL::to('/admin/professional_users')}}" class="small-box">
 
         <div class="inner">
 
@@ -56,7 +56,7 @@
 
 
 
-      </div>
+      </a>
 
     </div>
 
@@ -66,7 +66,7 @@
 
       <!-- small box -->
 
-      <a href="#" class="small-box">
+      <a href="{{URL::to('/admin/events')}}" class="small-box">
 
         <div class="inner">
 
