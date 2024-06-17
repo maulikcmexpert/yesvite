@@ -122,18 +122,17 @@
                         <?php
                         dd($event->gift_registry);
                         ?>
+
                         <div class="row">
+                            @foreach($event->gift_registry as $value)
                             <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                                 <div class="target d-flex gap-3 align-items-center">
                                     <img src="./assets/image/Pic.png" alt="">
-                                    <h5>Target</h5>
+                                    <h5>{{$value->registry_recipient_name}}</h5>
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-6">
-                                <div class="app-img">
-                                    <img src="./assets/image/app-img.png" alt="">
-                                </div>
-                            </div>
+                            @endforeach
+
                         </div>
                         @endif
                     </div>
