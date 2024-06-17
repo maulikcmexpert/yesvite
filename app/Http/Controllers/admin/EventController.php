@@ -20,8 +20,8 @@ class EventController extends Controller
      */
     public function index(Request $request)
     {
-        $eventType = $request->eventType;
-
+        $eventType = "";
+        dd($request->eventType);
 
         if ($request->ajax()) {
             $eventDate = $request->input('filter');
