@@ -101,7 +101,7 @@ function sendNotification($notificationType, $postData)
     }
     $notification_message = "";
 
-    $invitedusers = EventInvitedUser::with(['event', 'event.event_settings', 'event.event_schedule', 'user'])->whereHas('user', function ($query) {
+    $users = EventInvitedUser::with(['event', 'event.event_settings', 'event.event_schedule', 'user'])->whereHas('user', function ($query) {
         //  $query->where('app_user', '1');
     })->where('event_id', $postData['event_id'])->get();
 

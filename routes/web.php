@@ -10,7 +10,8 @@ use App\Http\Controllers\{
     HomeFrontController,
     ProfileController,
     SocialController,
-    AccountSettingController
+    AccountSettingController,
+    RsvpController
 };
 use Illuminate\Support\Facades\Auth;
 
@@ -33,6 +34,7 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', [HomeFrontController::class, 'index'])->name('front.home');
 Route::get('about-us', [AboutController::class, 'index'])->name('about');
 // Route::get('contact', [ContactController::class, 'index'])->name('contact');
+Route::get('rsvp/{userId}/{eventId}', [RsvpController::class, 'index'])->name('rsvp');
 
 Route::middleware('checkUserExist')->group(function () {
 
