@@ -258,7 +258,7 @@
             </div>
 
             <!-- Modal body -->
-            <div class="modal-body
+            <div class="modal-body">
                 <div class="login-form-wrap">
                     <form action="">
                         <div class="row">
@@ -340,8 +340,13 @@
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                 <div class="input-form">
-                                    <input type="text" class="form-control phone_number" id="phone_number" name="phone_number">
-                                    <input type="hidden" name="country_code" id="country_code" value="">
+
+                                               <input type="text" class="phone_number border-0" name="countryCode">
+                                            <input type="text" class="form-control" id="phone_number" name="phone_number" value="">
+                                          <input type="hidden" name="country_code" id="country_code" value="">
+
+
+                                 
                                     <label for="phone" class="form-label input-field floating-label">Phone
                                         Number<span class="required">*</span></label>
                                     <div class="label-error">
