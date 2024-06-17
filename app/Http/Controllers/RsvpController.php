@@ -20,7 +20,7 @@ class RsvpController extends Controller
         $event = Event::with(['user', 'event_image', 'event_settings'])->where('id', decrypt($eventId))->first();
 
         if ($event != null) {
-            dd($event->id);
+
             $isInvited = EventInvitedUser::where(['event_id' => decrypt($eventId), 'user_id' => decrypt($userId)])->first();
             if ($isInvited != null) {
 
