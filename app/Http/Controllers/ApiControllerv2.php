@@ -4735,9 +4735,9 @@ class ApiControllerv2 extends Controller
                                 //     EventInvitedUser::where(['user_id' => $value['user_id'], 'event_id' => $eventData['event_id']])->delete();
                                 // }
                                 else {
-                                    $updateRecord = EventInvitedUser::where(['user_id' => $value['user_id'], 'event_id' => $eventData['event_id']])->first();
-                                    $updateRecord->is_co_host = '1';
-                                    $updateRecord->save();
+                                    $updateCohostRecord = EventInvitedUser::where(['user_id' => $value['user_id'], 'event_id' => $eventData['event_id']])->first();
+                                    $updateCohostRecord->is_co_host = '1';
+                                    $updateCohostRecord->save();
                                 }
                             }
                         }

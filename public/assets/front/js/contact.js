@@ -227,6 +227,36 @@ $(document).ready(function () {
         });
     });
 
+    $("#yesvitePhones").on("click", ".edit-contact", function (e) {
+        // alert();
+        e.preventDefault(); // Prevent the default action
+
+        var contactId = $(this).data("id");
+
+        $.ajax({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+
+            method: "POST",
+            url: base_url + "contacts/edit/" + contactId,
+            // dataType: "json",
+            // data: formData,
+
+            success: function (output) {
+                // console.log(output.edit);
+
+                if (output.status == 1) {
+                    // alert();
+                    $("#edit_Fname").val(output.edit.firstname);
+                    $("#edit_Lname").val(output.edit.lastname);
+                    $("#phone_number").val(output.edit.phone_number);
+                    $("#edit_id").val(output.edit.id);
+                }
+            },
+        });
+    });
+
     $("#edit_contact_form").validate({
         rules: {
             edit_Fname: "required",
