@@ -119,15 +119,13 @@
                     </div> -->
                     <div class="rsvp-app">
                         @if(count($giftRegistryDetails) != 0)
-                        <?php
-                        dd($giftRegistryDetails);
-                        ?>
+
                         <div class="row">
                             @foreach($giftRegistryDetails as $value)
                             <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                                 <div class="target d-flex gap-3 align-items-center">
                                     <img src="./assets/image/Pic.png" alt="">
-                                    <h5>{{$value->registry_recipient_name}}</h5>
+                                    <h5>{{$value['registry_recipient_name']}}</h5>
                                 </div>
                             </div>
                             @endforeach
