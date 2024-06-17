@@ -68,7 +68,7 @@ class RsvpController extends Controller
                         }
 
 
-                        $event->gift_registry = $giftRegistryDetail;
+                        $event->gift_registry[] = $giftRegistryDetail;
                     }
                 }
                 return view('layout', compact(
