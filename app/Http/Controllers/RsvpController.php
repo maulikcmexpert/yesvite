@@ -16,9 +16,9 @@ class RsvpController extends Controller
         $title = 'RSVP';
         $page = 'front.rsvp';
 
-        $event = Event::with(['event_image', 'event_settings'])->where('id', $eventId)->first();
+        $event = Event::with(['event_image', 'event_settings'])->where('id', decrypt($eventId))->first();
         if ($event != null) {
-            $isInvited = EventInvitedUser::where(['event_id' => $eventId, 'user_id' => $userId])->first();
+            $isInvited = EventInvitedUser::where(['event_id' => $eventId, 'user_id' => decrypt($userId)])->first();
             if ($isInvited != null) {
 
 
