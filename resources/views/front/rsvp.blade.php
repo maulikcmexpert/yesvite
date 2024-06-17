@@ -118,7 +118,7 @@
                         </span>
                     </div> -->
                     <div class="rsvp-app">
-                        @if(count($event->gift_registry) != 0)
+                        @if(count($giftRegistryDetails) != 0)
 
                         <div class="row">
                             @foreach($giftRegistryDetails as $value)
