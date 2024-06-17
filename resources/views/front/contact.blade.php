@@ -267,14 +267,14 @@
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                                 <div class="input-form">
-                                    <input type="text" class="form-control inputText" id="edit_Fname" name="edit_Fname" required>
-                                    <label for="Fname" class="form-label input-field floating-label">First Name<span class="required">*</span></label>
+                                    <input type="text" class="form-control" id="edit_Fname" name="edit_Fname">
+                                    <label for="Fname" class="floating-label">First Name<span>*</span></label>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                                 <div class="input-form">
-                                    <input type="text" class="form-control inputText" id="edit_Lname" name="edit_Lname" required>
-                                    <label for="Lname" class="form-label input-field floating-label">Last Name<span class="required">*</span></label>
+                                    <input type="text" class="form-control" id="edit_Lname" name="edit_Lname">
+                                    <label for="Lname" class="floating-label">Last Name<span>*</span></label>
                                 </div>
                             </div>
                             <!-- <div class="col-lg-12 col-md-12 col-sm-12 col-12">
@@ -286,17 +286,12 @@
                             </div> -->
                             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                 <div class="input-form">
-
-
-
-
                                     <input type="text" class="phone_number border-0" name="countryCode">
                                     <input type="text" class="form-control" id="phone_number" name="phone_number" value="">
+                                    <label for="phone" class="floating-label">Phone
+                                        Number<span>*</span></label>
                                     <input type="hidden" name="country_code" id="country_code" value="">
                                     <input type="hidden" class="form-control inputText" id="edit_id" name="edit_id">
-
-                                    <label for="phone" class="form-label input-field floating-label">Phone
-                                        Number<span class="required">*</span></label>
                                 </div>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
@@ -331,35 +326,31 @@
                             <div class="col-lg-6">
                                 <div class="input-form">
                                     <input type="text" class="form-control inputText" id="Fname" name="Fname">
-                                    <label for="Fname" class="form-label input-field floating-label">First
+                                    <label for="Fname" class="floating-label">First
                                         Name</label>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="input-form">
                                     <input type="text" class="form-control inputText" id="Lname" name="Lname">
-                                    <label for="Lname" class="form-label input-field floating-label">Last
+                                    <label for="Lname" class="floating-label">Last
                                         Name</label>
                                 </div>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                 <div class="input-form">
                                     <input type="email" class="form-control inputText" id="email" name="email">
-                                    <label for="email" class="form-label input-field floating-label">Work Email
-                                        Address<span class="required">*</span></label>
+                                    <label for="email" class="floating-label">Work Email
+                                        Address<span>*</span></label>
                                 </div>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                 <div class="input-form">
-
                                     <input type="text" class="phone_number border-0" name="countryCode">
                                     <input type="text" class="form-control" id="phone_number" name="phone_number" value="">
-                                    <input type="hidden" name="country_code" id="country_code" value="">
-
-
-
-                                    <label for="phone" class="form-label input-field floating-label">Phone
-                                        Number<span class="required">*</span></label>
+                                    <label for="phone" class="floating-label">Phone
+                                        Number<span>*</span></label>
+                                    <input type="hidden" name="country_code" id="country_code" value="">    
                                     <div class="label-error">
                                         <label id="phone_number-error" class="error" for="phone_number"></label>
                                     </div>
