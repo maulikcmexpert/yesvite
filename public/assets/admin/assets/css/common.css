@@ -87,10 +87,10 @@ h1.ProductTitle{
 
 .table i
 {
-    color: #fff;
+    color: var(--primaryColor);
     width: 25px;
     height: 25px;
-    background-color: var(--primaryColor);
+    /* background-color: var(--primaryColor); */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -412,6 +412,7 @@ table.table tbody tr{
     -moz-border-radius: 50%;
     -ms-border-radius: 50%;
     -o-border-radius: 50%;
+    border: 3px solid #f5efef;
 }
 
 [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link p{

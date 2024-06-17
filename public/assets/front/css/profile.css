@@ -380,6 +380,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     padding: 10px 24px;
 }
 
+#coverImg-modal .modal-dialog{
+    max-width: 600px !important;
+}
 
 #coverImg-modal .modal-header span{
     color: var(--lightColor);
@@ -394,10 +397,35 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     -moz-border-radius: 10px;
     -ms-border-radius: 10px;
     -o-border-radius: 10px;
+    overflow: inherit !important;
 }
 
 #coverImg-modal .cover-img img{
     object-fit: contain;
+}
+
+#coverImg-modal .croppie-container .cr-slider-wrap{
+    margin: 95px auto;
+    border: none !important;
+    box-shadow: none !important;
+    width: 100%;
+}
+
+#coverImg-modal .slidecontainer {
+    margin-top: 25px;
+}
+
+#coverImg-modal .cr-slider{
+    width: 550px !important;
+    padding-bottom: 0px;
+    padding-left: 50px !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding-top: 15px !important;
+}
+
+#coverImg-modal .cr-boundary{
+    width: 100% !important;
 }
 
 .user-cover-img{
