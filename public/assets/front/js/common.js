@@ -1,3 +1,4 @@
+// alert();
 //  ===== focusinput =====
 $(document).on("click", ".businessRegister", function () {
     $("#account_type").val("1");

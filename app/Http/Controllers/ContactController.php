@@ -4,8 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Event;
 use App\Models\User;
+use App\Models\Group;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
+
 
 class ContactController extends Controller
 {
@@ -18,8 +22,9 @@ class ContactController extends Controller
         $page = 'front.contact';
         $js = ['contact'];
         $id = decrypt(session()->get('user')['id']);
-
-        $user = User::withCount(
+        $user = User::with(['groups' => function ($query) {
+            $query->withCount('groupMembers')->orderBy('id', 'DESC')->limit(2);
+        }])->withCount(
 
             [
                 'event' => function ($query) {
@@ -31,7 +36,9 @@ class ContactController extends Controller
 
             ]
         )->findOrFail($id);
+        $groups = Group::where('user_id', $user->id)->orderBy('id', 'DESC')->get();
         $user['events'] =   Event::where(['user_id' => $user->id, 'is_draft_save' => '0'])->count();
+
         $user['profile'] = ($user->profile != null) ? asset('storage/profile/' . $user->profile) : asset('storage/profile/no_profile.png');
         $user['bg_profile'] = ($user->bg_profile != null) ? asset('storage/bg_profile/' . $user->bg_profile) : asset('assets/front/image/Frame 1000005835.png');
         $date = Carbon::parse($user->created_at);
@@ -45,7 +52,9 @@ class ContactController extends Controller
             'page',
             'user',
             'js',
-            'yesviteUser'
+            'yesviteUser',
+            'groups'
+
         ));
     }
 
@@ -58,6 +67,60 @@ class ContactController extends Controller
         }
         return response()->json(['error' => 'Invalid request'], 400);
     }
+
+
+    public function addContact(Request $request, string $id)
+    {
+
+        // dd($request);
+        $id = decrypt($id);
+   
+        $validator = Validator::make($request->all(), [
+            'Fname' => 'required|string', // max 2MB
+            'Lname' => 'required|string', // max 2MB
+            'phone_number' => ['present', 'nullable', 'numeric', 'regex:/^\d{10,15}$/'],
+           'email' => 'required|email', // max 2MB
+
+        ], [
+            'Fname.required' => 'Please enter First Name',
+            'Lname.required' => 'Please enter Last Name',
+
+            'phone_number.numeric' => 'Please enter Phone Number in digit',
+            'phone_number.regex' => 'Phone Number format is invalid.',
+
+            'email.required' => 'Please enter email',
+            'email.email' => 'Please enter a valid email address', 
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 0,
+                'message' => $validator->errors()->first(),
+
+            ]);
+        }
+
+        DB::beginTransaction();
+
+        $addcontact =  User::create([
+            'firstname' => $request['Fname'],
+            'lastname' => $request['Lname'],
+            'email' => $request['email'],
+            'phone_number' => $request['phone_number'],
+            'country_code' => $request['country_code'],
+            'app_user' => '0',
+            'parent_user_phone_contact' => $id,
+            'user_parent_id' => $id,
+            'is_user_phone_contact'=>'1'
+
+        ]);
+
+        DB::commit();
+        return response()->json(['status' => 1, 'message' => "Contact Added!", 'user' => $addcontact]);
+
+    }
+
+
 
     /**
      * Show the form for creating a new resource.
