@@ -55,7 +55,7 @@
 
                         </div>
                     </div>
-                    <form method="POST" accept="{{ route('rsvp.store') }}" id="rsvpForm">
+                    <form method="POST" action="{{ route('rsvp.store') }}" id="rsvpForm">
                         @csrf
                         <div class="rsvp-radio">
                             <h5>RSVP</h5>
