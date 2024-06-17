@@ -40,7 +40,7 @@
                         <div class="d-flex flex-wrap">
                             <?php
 
-                            dd($event);
+                            dd($event->event_detail);
 
                             ?>
                             <div class="d-flex align-items-center justify-content-between w-100 mb-2">
