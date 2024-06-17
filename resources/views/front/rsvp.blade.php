@@ -56,7 +56,7 @@
                         </div>
                     </div>
                     <form method="POST" accept="{{ route('rsvp.store') }}" id="rsvpForm">
-
+                        @csrf
                         <div class="rsvp-radio">
                             <h5>RSVP</h5>
                             <div class="row">
