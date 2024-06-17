@@ -66,7 +66,7 @@
 
       <!-- small box -->
 
-      <a href="{{URL::to('/admin/events/normal_event')}}" class="small-box">
+      <a href="{{ route('events.index', ['type' => 'normal_event']) }}" class="small-box">
 
         <div class="inner">
 
@@ -94,7 +94,7 @@
 
       <!-- small box -->
 
-      <a href="{{URL::to('/admin/events/professional_event')}}" class="small-box">
+      <a href="{{ route('events.index', ['type' => 'professional_event']) }}" class="small-box">
 
         <div class="inner">
 
