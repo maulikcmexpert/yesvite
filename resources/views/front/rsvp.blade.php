@@ -32,15 +32,15 @@
                             <p><span>Hosted by:</span>{{$event->hosted_by}}</p>
                         </div>
                     </div>
+                    @if($event->message_to_guests != null || $event->message_to_guests != "")
                     <div class="thank-card">
                         <p>{{$event->message_to_guests}}</p>
                     </div>
+                    @endif
                     <div class="event-detail">
                         <h5>Event Details</h5>
                         <div class="d-flex flex-wrap">
                             <?php
-
-
                             $i = 1;
                             ?>
                             @if($event->event_detail)
