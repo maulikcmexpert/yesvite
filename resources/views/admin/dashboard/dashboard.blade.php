@@ -94,7 +94,7 @@
 
       <!-- small box -->
 
-      <a href="{{ route('events.professionalEvent') }}" class="small-box">
+      <a href="{{ route('professionalEvent') }}" class="small-box">
 
         <div class="inner">
 

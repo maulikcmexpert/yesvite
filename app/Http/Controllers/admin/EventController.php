@@ -130,7 +130,7 @@ class EventController extends Controller
     }
 
 
-    public function professionalEvent(Request $request)
+    public function professionalEvent()
     {
 
         dd("hi");
