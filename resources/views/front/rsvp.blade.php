@@ -40,7 +40,7 @@
                         <div class="d-flex flex-wrap">
                             <?php
 
-                            dd($event->event_detail);
+
                             $i = 1;
                             ?>
                             @if($event->event_detail->isNotEmpty())
