@@ -70,11 +70,39 @@
 
         <div class="inner">
 
-          <h3>{{$total_events}}</h3>
+          <h3>{{$normal_total_events}}</h3>
 
 
 
           <p>Events</p>
+
+        </div>
+
+        <div class="icon">
+
+          <img src="{{ asset('assets/admin/admin_icons/icon_events.png')}}">
+
+        </div>
+
+        <!-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> -->
+
+      </div>
+
+    </div>
+
+    <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
+
+      <!-- small box -->
+
+      <div class="small-box">
+
+        <div class="inner">
+
+          <h3>{{$professional_total_events}}</h3>
+
+
+
+          <p>Professional Event</p>
 
         </div>
 
