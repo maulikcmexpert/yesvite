@@ -17,6 +17,9 @@ class RsvpController extends Controller
         $title = 'RSVP';
         $page = 'front.rsvp';
 
+
+        $event_id =  $eventId;
+        $user_id = $userId;
         $event = Event::with(['user', 'event_image', 'event_settings'])->where('id', decrypt($eventId))->first();
 
         if ($event != null) {
@@ -73,7 +76,9 @@ class RsvpController extends Controller
                     'page',
                     'event',
                     'giftRegistryDetails',
-                    'isInvited'
+                    'isInvited',
+                    'event_id',
+                    'user_id'
                 ));
             }
             return redirect('home')->with('error', 'You are not connect with this event');
@@ -96,6 +101,8 @@ class RsvpController extends Controller
     {
         dd($request);
     }
+
+
 
     /**
      * Display the specified resource.

@@ -57,6 +57,8 @@
                     </div>
                     <form method="POST" action="{{ route('rsvp.store') }}" id="rsvpForm">
                         @csrf
+                        <input type="hidden" name="event_id" value="{{ $event->event_id }}">
+                        <input type="hidden" name="user_id" value="{{ $event->user_id }}">
                         <div class="rsvp-radio">
                             <h5>RSVP</h5>
                             <div class="row">
