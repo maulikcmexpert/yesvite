@@ -16,7 +16,7 @@ class RsvpController extends Controller
         $title = 'RSVP';
         $page = 'front.rsvp';
 
-        $event = Event::with(['event_image', 'event_settings'])->where('id', decrypt($eventId))->first();
+        $event = Event::with(['user', 'event_image', 'event_settings'])->where('id', decrypt($eventId))->first();
 
         if ($event != null) {
 
@@ -49,7 +49,7 @@ class RsvpController extends Controller
                     $event['event_detail'] = $eventData;
                 }
 
-
+                $event['profile'] =  ($event->user->profile != null) ? asset('storage/profile/' . $event->user->profile) : asset('assets/front/image/Frame 1000005835.png');
                 return view('layout', compact(
                     'title',
                     'page',
