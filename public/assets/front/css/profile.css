@@ -424,7 +424,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     padding-top: 15px !important;
 }
 
-#coverImg-modal .cr-boundary{
+#coverImg-modal .cr-boundary,
+#coverImg-modal .cr-viewport
+{
     width: 100% !important;
 }
 
