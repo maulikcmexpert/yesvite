@@ -25,7 +25,7 @@
                     <h5 class="title">RSVP</h5>
                     <div class="author-wrp">
                         <div class="author-img">
-                            <img src="{{ asset('storage/profile/'.$event->profile)}}" alt="">
+                            <img src="{{ $event->profile}}" alt="">
                         </div>
                         <div class="author-title">
                             <h4>{{$event->event_name}}</h4>
