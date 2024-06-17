@@ -4,11 +4,11 @@
 
   <div class="row">
 
-    <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
+    <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12 overflow-hidden">
 
       <!-- small box -->
 
-      <div class="small-box">
+      <a href="{{URL::to('/admin/users')}}" class="small-box">
 
         <div class="inner">
 
@@ -28,15 +28,15 @@
 
 
 
-      </div>
+      </a>
 
     </div>
 
-    <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
+    <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12 overflow-hidden">
 
       <!-- small box -->
 
-      <div class="small-box">
+      <a href="{{URL::to('/admin/professional_users')}}" class="small-box">
 
         <div class="inner">
 
@@ -56,13 +56,41 @@
 
 
 
-      </div>
+      </a>
 
     </div>
 
     <!-- ./col -->
 
-    <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
+    <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12 overflow-hidden">
+
+      <!-- small box -->
+
+      <a href="{{URL::to('/admin/events')}}" class="small-box">
+
+        <div class="inner">
+
+          <h3>{{$normal_total_events}}</h3>
+
+
+
+          <p>Events</p>
+
+        </div>
+
+        <div class="icon">
+
+          <img src="{{ asset('assets/admin/admin_icons/icon_events.png')}}">
+
+        </div>
+
+        <!-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> -->
+
+      </a>
+
+    </div>
+
+    <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12 overflow-hidden">
 
       <!-- small box -->
 
@@ -70,11 +98,11 @@
 
         <div class="inner">
 
-          <h3>{{$total_events}}</h3>
+          <h3>{{$professional_total_events}}</h3>
 
 
 
-          <p>Events</p>
+          <p>Professional Event</p>
 
         </div>
 
@@ -92,7 +120,7 @@
 
     <!-- ./col -->
 
-    <div class="col-xl-3 col-lg-4 col-md-4  col-sm-6 col-12">
+    <div class="col-xl-3 col-lg-4 col-md-4  col-sm-6 col-12 overflow-hidden">
 
       <!-- small box -->
 

@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\QueryException;
 
 
 class ContactController extends Controller
@@ -36,7 +37,10 @@ class ContactController extends Controller
 
             ]
         )->findOrFail($id);
+
         $groups = Group::where('user_id', $user->id)->orderBy('id', 'DESC')->get();
+
+        
         $user['events'] =   Event::where(['user_id' => $user->id, 'is_draft_save' => '0'])->count();
 
         $user['profile'] = ($user->profile != null) ? asset('storage/profile/' . $user->profile) : asset('storage/profile/no_profile.png');
@@ -46,13 +50,18 @@ class ContactController extends Controller
         $user['join_date'] = $formatted_date;
 
         $yesviteUser = User::where('app_user', '=', '1')->where('id', '!=', $id)->paginate(10);
+        $yesviteGroups = Group::withCount('groupMembers')->paginate(10);
+        $yesvitePhones = User::where('parent_user_phone_contact', '=', $id)->get();
 
+              
         return view('layout', compact(
             'title',
             'page',
             'user',
             'js',
             'yesviteUser',
+            'yesviteGroups',
+            'yesvitePhones',
             'groups'
 
         ));
@@ -61,12 +70,70 @@ class ContactController extends Controller
     public function loadMore(Request $request)
     {
         $id = decrypt(session()->get('user')['id']);
+        $searchName = $request->search_name;
+
         if ($request->ajax()) {
-            $yesviteUser = User::where('app_user', '=', '1')->where('id', '!=', $id)->paginate(10); // Adjust the number as needed
+            $query = User::where('app_user', '=', '1')->where('id', '!=', $id);
+
+            if ($searchName) {
+                $query->where(function ($q) use ($searchName) {
+                    $q->where('firstname', 'LIKE', '%' . $searchName . '%')
+                        ->orWhere('lastname', 'LIKE', '%' . $searchName . '%');
+                });
+            }
+
+            $yesviteUser = $query->paginate(10);
             return view('front.ajax_contacts', compact('yesviteUser'))->render();
         }
         return response()->json(['error' => 'Invalid request'], 400);
     }
+
+    public function loadMoreGroup(Request $request)
+    {
+        try {
+            $searchGroup = $request->input('search_group');
+
+            if ($request->ajax()) {
+                $query = Group::withCount('groupMembers'); 
+
+                if ($searchGroup) {
+                    $query->where('name', 'LIKE', '%' . $searchGroup . '%');
+                }
+
+                $yesviteGroups = $query->paginate(10); 
+                return view('front.ajax_groups', compact('yesviteGroups'))->render();
+            }
+            return response()->json(['error' => 'Invalid request'], 400);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Server error'], 500);
+        }
+    }
+    public function loadMorePhones(Request $request)
+    {
+        try {
+            $id = decrypt(session()->get('user')['id']);
+            $searchPhone = $request->input('search_phone');
+
+            if ($request->ajax()) {
+                $query = User::where('parent_user_phone_contact', '=', $id); 
+
+                if ($searchPhone) {
+                    $query->where(function ($q) use ($searchPhone) {
+                        $q->where('firstname', 'LIKE', '%' . $searchPhone . '%')
+                            ->orWhere('lastname', 'LIKE', '%' . $searchPhone . '%');
+                    });
+                }
+
+                $yesvitePhones = $query->paginate(10); 
+                return view('front.ajax_phones', compact('yesvitePhones'))->render();
+            }
+            return response()->json(['error' => 'Invalid request'], 400);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Server error'], 500);
+        }
+    }
+
+
 
 
     public function addContact(Request $request, string $id)
@@ -74,53 +141,114 @@ class ContactController extends Controller
 
         // dd($request);
         $id = decrypt($id);
-   
-        $validator = Validator::make($request->all(), [
-            'Fname' => 'required|string', // max 2MB
-            'Lname' => 'required|string', // max 2MB
-            'phone_number' => ['present', 'nullable', 'numeric', 'regex:/^\d{10,15}$/'],
-           'email' => 'required|email', // max 2MB
+        try {
+            $validator = Validator::make($request->all(), [
+                'Fname' => 'required|string', // max 2MB
+                'Lname' => 'required|string', // max 2MB
+                'phone_number' => ['present', 'nullable', 'numeric', 'regex:/^\d{10,15}$/'],
+                'email' => 'required|email', // max 2MB
 
-        ], [
-            'Fname.required' => 'Please enter First Name',
-            'Lname.required' => 'Please enter Last Name',
+            ], [
+                'Fname.required' => 'Please enter First Name',
+                'Lname.required' => 'Please enter Last Name',
 
-            'phone_number.numeric' => 'Please enter Phone Number in digit',
-            'phone_number.regex' => 'Phone Number format is invalid.',
+                'phone_number.numeric' => 'Please enter Phone Number in digit',
+                'phone_number.regex' => 'Phone Number format is invalid.',
 
-            'email.required' => 'Please enter email',
-            'email.email' => 'Please enter a valid email address', 
-        ]);
+                'email.required' => 'Please enter email',
+                'email.email' => 'Please enter a valid email address',
+            ]);
 
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => 0,
-                'message' => $validator->errors()->first(),
+            if ($validator->fails()) {
+                return response()->json([
+                    'status' => 0,
+                    'message' => $validator->errors()->first(),
+
+                ]);
+            }
+
+            DB::beginTransaction();
+
+            $addcontact =  User::create([
+                'firstname' => $request['Fname'],
+                'lastname' => $request['Lname'],
+                'email' => $request['email'],
+                'phone_number' => $request['phone_number'],
+                'country_code' => $request['country_code'],
+                'app_user' => '0',
+                'parent_user_phone_contact' => $id,
+                'user_parent_id' => $id,
+                'is_user_phone_contact' => '0'
 
             ]);
+
+            DB::commit();
+            return response()->json(['status' => 1, 'message' => "Contact Added!", 'user' => $addcontact]);
+        } catch (QueryException $e) {
+            DB::Rollback();
+            $userData =  getUser($id);
+            return response()->json(['status' => 0, 'message' => "db error", 'user' => $userData]);
+        } catch (Exception  $e) {
+            $userData =  getUser($id);
+            return response()->json(['status' => 0, 'message' => "something went wrong", 'user' => $userData]);
         }
+    }
+    public function editContact(Request $request, string $id)
+    {
 
-        DB::beginTransaction();
-
-        $addcontact =  User::create([
-            'firstname' => $request['Fname'],
-            'lastname' => $request['Lname'],
-            'email' => $request['email'],
-            'phone_number' => $request['phone_number'],
-            'country_code' => $request['country_code'],
-            'app_user' => '0',
-            'parent_user_phone_contact' => $id,
-            'user_parent_id' => $id,
-            'is_user_phone_contact'=>'1'
-
-        ]);
-
-        DB::commit();
-        return response()->json(['status' => 1, 'message' => "Contact Added!", 'user' => $addcontact]);
-
+        $editContact = User::where('id', '=', $id)->get()->first();
+        return response()->json(['status' => 1, 'message' => "Contact Added!", 'edit' => $editContact]);
     }
 
+    public function save_editContact(Request $request)
+    {
+        try {
 
+            $validator = Validator::make($request->all(), [
+                'edit_Fname' => 'required|string', // max 2MB
+                'edit_Lname' => 'required|string', // max 2MB
+                'phone_number' => ['present', 'nullable', 'numeric', 'regex:/^\d{10,15}$/'],
+
+            ], [
+                'edit_Fname.required' => 'Please enter First Name',
+                'edit_Lname.required' => 'Please enter Last Name',
+
+                'phone_number.numeric' => 'Please enter Phone Number in digit',
+                'phone_number.regex' => 'Phone Number format is invalid.',
+
+            ]);
+
+            if ($validator->fails()) {
+                return response()->json([
+                    'status' => 0,
+                    'message' => $validator->errors()->first(),
+
+                ]);
+            }
+
+            DB::beginTransaction();
+            $usercontactUpdate = User::where('id', $request->edit_id)->first();
+
+            $usercontactUpdate->firstname = $request->edit_Fname;
+
+            $usercontactUpdate->lastname = $request->edit_Lname;
+
+            $usercontactUpdate->phone_number = $request->phone_number;
+
+            $usercontactUpdate->save();
+            DB::commit();
+
+            $usercontactUpdate =  getUser($request->edit_id);
+            return response()->json(['status' => 1, 'message' => "Edit Saved!", 'user' => $usercontactUpdate]);
+        } catch (QueryException $e) {
+            DB::Rollback();
+            $userData =  getUser($request->edit_id);
+            return response()->json(['status' => 0, 'message' => "db error", 'user' => $userData]);
+        } catch (Exception  $e) {
+            $userData =  getUser($request->edit_id);
+            return response()->json(['status' => 0, 'message' => "something went wrong", 'user' => $userData]);
+        }
+    }
 
     /**
      * Show the form for creating a new resource.
