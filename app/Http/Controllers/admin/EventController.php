@@ -18,7 +18,7 @@ class EventController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request, $eventType = null)
+    public function index(Request $request, $eventType)
     {
 
 
