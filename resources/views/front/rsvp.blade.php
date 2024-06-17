@@ -41,16 +41,18 @@
                             <?php
 
                             dd($event->event_detail);
-
+                            $i = 1;
                             ?>
-                            <div class="d-flex align-items-center justify-content-between w-100 mb-2">
-                                <h6>RSVP By Sept 20</h6>
-                                <h6>+1 (Limit 5)</h6>
+                            @if($event->event_detail->isNotEmpty())
+                            <div class="d-flex align-items-center justify-content-between {{($i<= 3)?'w-100 mb-2':'w-100'}}">
+                                @foreach($event->event_detail as $val)
+
+                                <h6>{{$val}}</h6>
+                                <?php $i++; ?>
+                                @endforeach
                             </div>
-                            <div class="d-flex align-items-center justify-content-between w-100">
-                                <h6>Adults & Kids</h6>
-                                <h6>Potluck Event</h6>
-                            </div>
+                            @endif
+
                         </div>
                     </div>
                     <div class="rsvp-radio">
