@@ -66,7 +66,7 @@
 
       <!-- small box -->
 
-      <a href="{{route('events.index.type',['eventType' => 'normal_event'])}}" class="small-box">
+      <a href="{{route('events.index',['eventType' => 'normal_event'])}}" class="small-box">
 
         <div class="inner">
 
@@ -94,7 +94,7 @@
 
       <!-- small box -->
 
-      <a href="{{ route('events.index.type', ['eventType' => 'professional_event']) }}" class="small-box">
+      <a href="{{ route('events.index', ['eventType' => 'professional_event']) }}" class="small-box">
 
         <div class="inner">
 

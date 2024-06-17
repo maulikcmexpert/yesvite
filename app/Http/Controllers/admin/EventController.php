@@ -18,15 +18,16 @@ class EventController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request, $eventType = null)
+    public function index(Request $request)
     {
-
+        $eventType = "";
+        dd(Request::segment(4) == 'normal_event');
 
         if ($request->ajax()) {
             $eventDate = $request->input('filter');
             $status = $request->input('status');
             $data = Event::with(['user' => function ($query) use ($eventType) {
-                dd($eventType);
+
                 if ($eventType == 'normal_event') {
 
                     $query->where(['app_user' => '1', 'account_type' => '0']);

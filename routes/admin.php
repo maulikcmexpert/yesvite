@@ -70,8 +70,6 @@ Route::group(['middleware' => adminAuth::Class], function () {
         'event_type' => EventTypeController::class,
         'user_post_report' => UserPostReportController::class
     ]);
-    Route::get('events/type/{eventType}', [EventController::class, 'index'])->name('events.index.type');
-
 
     Route::post('category/check_category_is_exist', [CategoryController::class, 'checkCategoryIsExist'])->name('category_check_exist');
 
