@@ -39,7 +39,6 @@ $(".toggle-password").click(function () {
         input.attr("type", "password");
     }
 });
-// Set the options that I want
 
 toastr.options = {
     closeButton: true,

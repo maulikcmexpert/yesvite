@@ -11,6 +11,9 @@ use Yajra\DataTables\DataTables;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Hash;
+
 
 class UserController extends Controller
 {
@@ -123,6 +126,17 @@ class UserController extends Controller
      */
     public function create()
     {
+        $title = 'Users';
+
+        $page = 'admin.user.add';
+
+        $js = 'admin.user.userjs';
+
+
+
+
+
+        return view('admin.includes.layout', compact('title', 'page', 'js'));
     }
 
     /**
@@ -130,9 +144,73 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'firstname' => 'required|string',
+            'lastname' => 'required|string',
+            'email' => 'required|string|email|unique:users',
+            // 'phone_number' => 'required|string|unique:users',
+        ]);
+
+        DB::beginTransaction();
+        try {
+            $password = $request['firstname'] . '123';
+
+            $data = [
+                'firstname' => $request['firstname'],
+                'lastname' => $request['lastname'],
+                'email' => $request['email'],
+                'password' => Hash::make($password),
+                'email_verified_at' => Carbon::now()->toDateTimeString(),
+                'password_updated_date' => Carbon::now()->format('Y-m-d'),
+            ];
+
+            if (!empty($request['phone_number'])) {
+                $data['phone_number'] = $request['phone_number'];
+            }
+            $addUser = User::create($data);
+
+
+            DB::commit();
+
+            return redirect()->route('users.index')->with('success', 'User Add successfully !');
+
+        } catch (\Exception $e) {
+            // Rollback transaction on error
+            DB::rollBack();
+            return redirect()->route('users.create')->with('error', 'User creation failed!');
+        }
     }
 
+
+    public function checkNewContactEmail(Request $request)
+    {
+        $email = $request->input('email');
+        $exists = User::where('email', $email)->exists();
+
+        if ($exists) {
+            return response()->json(false);
+        } else {
+            return response()->json(true);
+        }
+    }
+
+    public function checkNewContactNumber(Request $request)
+    {
+        $phone_number = $request->input('phone_number');
+        $id = $request->input('id');
+
+        if ($id != '') {
+            $exists = User::where('phone_number', $phone_number)->where('id', '!=', $id)->exists();
+        } else {
+            $exists = User::where('phone_number', $phone_number)->exists();
+        }
+
+        if ($exists) {
+            return response()->json(false);
+        } else {
+            return response()->json(true);
+        }
+    }
     /**
      * Display the specified resource.
      */

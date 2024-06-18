@@ -253,17 +253,17 @@ class ContactController extends Controller
         }
     }
 
-    public function checkNewContactEmail(Request $request)
-    {
-        $email = $request->input('email');
-        $exists = User::where('email', $email)->exists();
+        public function checkNewContactEmail(Request $request)
+        {
+            $email = $request->input('email');
+            $exists = User::where('email', $email)->exists();
 
-        if ($exists) {
-            return response()->json(false);
-        } else {
-            return response()->json(true);
+            if ($exists) {
+                return response()->json(false);
+            } else {
+                return response()->json(true);
+            }
         }
-    }
     /**
      * Show the form for creating a new resource.
      */

@@ -156,10 +156,9 @@ class ProfileController extends Controller
 
         if ($id != '') {
             $exists = User::where('phone_number', $phone_number)->where('id', '!=', $id)->exists();
+        } else {
+            $exists = User::where('phone_number', $phone_number)->exists();
         }
-        $exists = User::where('phone_number', $phone_number)->exists();
-
-
 
         if ($exists) {
             return response()->json(false);

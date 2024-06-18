@@ -143,7 +143,6 @@ class User extends Authenticatable
         return $this->hasMany(UserProfilePrivacy::class, 'user_id', 'id');
     }
 
-
     public function event_potluck_category()
     {
         $this->hasMany(EventPotluckCategory::class, 'user_id', 'id');

@@ -70,7 +70,9 @@ Route::group(['middleware' => adminAuth::Class], function () {
         'event_type' => EventTypeController::class,
         'user_post_report' => UserPostReportController::class
     ]);
+    Route::post('user/check_new_contactemail', [UserController::class, 'checkNewContactEmail']);
 
+    Route::post('user/check_new_contactnumber', [UserController::class, 'checkNewContactNumber']);
 
 
     Route::post('category/check_category_is_exist', [CategoryController::class, 'checkCategoryIsExist'])->name('category_check_exist');
