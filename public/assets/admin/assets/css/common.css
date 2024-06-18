@@ -412,7 +412,7 @@ table.table tbody tr{
     -moz-border-radius: 50%;
     -ms-border-radius: 50%;
     -o-border-radius: 50%;
-    border: 3px solid #f5efef;
+    border: 1px solid #eceaea;
 }
 
 [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link p{
