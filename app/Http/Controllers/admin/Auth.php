@@ -51,7 +51,7 @@ class Auth extends Controller
             }
             return Redirect::to(URL::to('/admin/dashboard'))->with('success', 'Loggedin successfully!');;
         } else {
-            return  Redirect::to('admin/login')->with('error', 'Invalid credentials!');
+            return  Redirect::to('admin')->with('error', 'Invalid credentials!');
         }
     }
     public function checkEmail(Request $req)
