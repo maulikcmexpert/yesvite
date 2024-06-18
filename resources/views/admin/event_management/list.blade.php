@@ -60,25 +60,8 @@
             </div>
         </div>
 
-        <!-- <div class="col-sm-6 col-md-3">
-
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search..">
-                <div class="input-group-append">
-                    <button class="btn btn-secondary" id="eventsearch" type="button">
-                        <i class="fa fa-search"></i>
-                    </button>
-                </div>
-            </div>
-
-        </div> -->
     </div>
 
-    <!-- <div class="text-right mb-2">
-
-        <a class="btn btn-primary" href="{{URL::to('admin/category/create')}}">Add</a>
-
-     </div> -->
 
     <table id="events_table" class="table table-bordered data-table users-data-table">
 
