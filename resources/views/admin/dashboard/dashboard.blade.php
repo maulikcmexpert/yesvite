@@ -66,7 +66,7 @@
 
       <!-- small box -->
 
-      <a href="{{route('events.index',['eventType' => 'normal_event'])}}" class="small-box">
+      <div class="small-box">
 
         <div class="inner">
 
@@ -86,7 +86,7 @@
 
         <!-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> -->
 
-      </a>
+      </div>
 
     </div>
 
@@ -94,7 +94,7 @@
 
       <!-- small box -->
 
-      <a href="{{ route('professionalEvent') }}" class="small-box">
+      <div class="small-box">
 
         <div class="inner">
 
@@ -114,7 +114,7 @@
 
         <!-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> -->
 
-      </a>
+      </div>
 
     </div>
 
