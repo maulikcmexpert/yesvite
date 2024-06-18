@@ -20,10 +20,8 @@ class Auth extends Controller
 {
     //
 
-
     public function checkLogin(Request $req)
     {
-
 
         $req->validate(
             [
