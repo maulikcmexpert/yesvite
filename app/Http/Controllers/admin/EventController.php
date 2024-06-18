@@ -27,14 +27,16 @@ class EventController extends Controller
             $status = $request->input('status');
             $event_type = $request->input('event_type');
 
-            $data = Event::with(['user' => function ($query) use ($event_type) {
+            $data = Event::with(['user'])->whereHas('user', function ($query) use ($event_type) {
+
+
                 if ($event_type == 'normal_user_event') {
                     $query->where('account_type', '0');
                 }
                 if ($event_type == 'professional_event') {
                     $query->where('account_type', '1');
                 }
-            }])->orderBy('id', 'desc');
+            })->orderBy('id', 'desc');
 
             if ($eventDate) {
                 $data->where('start_date', $eventDate);

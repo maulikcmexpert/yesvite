@@ -23,6 +23,8 @@ class Auth extends Controller
 
     public function checkLogin(Request $req)
     {
+
+
         $req->validate(
             [
                 'email' => 'required|email|exists:admins,email',
@@ -35,7 +37,11 @@ class Auth extends Controller
             ]
         );
         $adminData = Admin::where("email", $req->input('email'))->first();
+
         if (Hash::check($req->input('password'), $adminData->password)) {
+
+            return Redirect::to(URL::to('admin/factor_authenticate'));
+
             $sessionArray = ['id' => $adminData->id, 'name' => $adminData->name];
             Session::put(['admin' => $sessionArray]);
         }

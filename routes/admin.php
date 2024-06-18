@@ -102,6 +102,17 @@ Route::controller(Auth::class)->group(function () {
 
 
 
+    Route::get('/factor_authenticate', function () {
+
+        $data['page'] = 'admin/auth/factor_authentication';
+
+        $data['js'] = ['login'];
+
+        return view('admin/auth/main', $data);
+    });
+
+
+
 
 
     Route::post('/login', 'checkLogin');

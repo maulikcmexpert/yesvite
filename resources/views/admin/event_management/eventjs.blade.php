@@ -327,7 +327,7 @@
                 ajax: {
                     url: '{{ URL::to("/admin/events") }}',
                     data: function(d) {
-                        d.filter = eventDate;
+                        //    d.filter = eventDate;
                         d.event_type = event_type;
                     }
                 },
