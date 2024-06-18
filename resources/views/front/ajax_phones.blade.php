@@ -2,8 +2,7 @@
 <div class="users-data">
     <div class="d-flex align-items-start">
         <div class="input-form">
-            <label>Import Csv</label>
-            <input type="file" class='form-control'>
+            <button type="button" class="btn btn-secondary">Import CSV</button>
         </div>
 
     </div>

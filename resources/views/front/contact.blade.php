@@ -269,12 +269,18 @@
                                 <div class="input-form">
                                     <input type="text" class="form-control" id="edit_Fname" name="edit_Fname">
                                     <label for="Fname" class="floating-label">First Name<span>*</span></label>
+                                    <div class="label-error">
+                                        <label id="edit_Fname-error" class="error" for="edit_Fname"></label>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                                 <div class="input-form">
                                     <input type="text" class="form-control" id="edit_Lname" name="edit_Lname">
                                     <label for="Lname" class="floating-label">Last Name<span>*</span></label>
+                                    <div class="label-error">
+                                        <label id="edit_Lname-error" class="error" for="edit_Lname"></label>
+                                    </div>
                                 </div>
                             </div>
                             <!-- <div class="col-lg-12 col-md-12 col-sm-12 col-12">
@@ -290,6 +296,9 @@
                                     <input type="text" class="form-control" id="phone_number" name="phone_number" value="">
                                     <label for="phone" class="floating-label">Phone
                                         Number<span>*</span></label>
+                                    <div class="label-error">
+                                        <label id="phone_number-error" class="error" for="phone_number"></label>
+                                    </div>
                                     <input type="hidden" name="country_code" id="country_code" value="">
                                     <input type="hidden" class="form-control inputText" id="edit_id" name="edit_id">
                                 </div>
@@ -328,6 +337,9 @@
                                     <input type="text" class="form-control inputText" id="Fname" name="Fname">
                                     <label for="Fname" class="floating-label">First
                                         Name</label>
+                                    <div class="label-error">
+                                        <label id="Fname-error" class="error" for="Fname"></label>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-lg-6">
@@ -335,6 +347,9 @@
                                     <input type="text" class="form-control inputText" id="Lname" name="Lname">
                                     <label for="Lname" class="floating-label">Last
                                         Name</label>
+                                    <div class="label-error">
+                                        <label id="Lname-error" class="error" for="Lname"></label>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
@@ -342,6 +357,9 @@
                                     <input type="email" class="form-control inputText" id="email" name="email">
                                     <label for="email" class="floating-label">Work Email
                                         Address<span>*</span></label>
+                                    <div class="label-error">
+                                        <label id="email-error" class="error" for="email"></label>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
@@ -350,7 +368,10 @@
                                     <input type="text" class="form-control" id="phone_number" name="phone_number" value="">
                                     <label for="phone" class="floating-label">Phone
                                         Number<span>*</span></label>
-                                    <input type="hidden" name="country_code" id="country_code" value="">    
+                                    <div class="label-error">
+                                        <label id="phone_number-error" class="error" for="phone_number"></label>
+                                    </div>
+                                    <input type="hidden" name="country_code" id="country_code" value="">
                                     <div class="label-error">
                                         <label id="phone_number-error" class="error" for="phone_number"></label>
                                     </div>

@@ -326,4 +326,14 @@ $(document).ready(function () {
         loaderHandle("#save_edit_contact", "Saving");
         $("#save_edit_contact").submit();
     });
+
+    $("#myModal").on("hidden.bs.modal", function (event) {
+        $(".form-control").next().removeClass("floatingfocus");
+        $("#edit_contact_form .label-error .error").text("");
+    });
+
+    $("#myModal1").on("hidden.bs.modal", function (event) {
+        $(".form-control").next().removeClass("floatingfocus");
+        $("#add_contact .label-error .error").text("");
+    });
 });
