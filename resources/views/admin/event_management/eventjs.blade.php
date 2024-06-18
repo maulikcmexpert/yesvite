@@ -295,7 +295,7 @@
         });
 
         $(document).on('change', '#event_type', function() {
-            var event_type = $(this).val();
+            alert();
             var event_type = $('#event_type option:selected').val();
 
             var table = $('#events_table').DataTable();

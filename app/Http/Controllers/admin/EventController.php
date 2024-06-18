@@ -26,7 +26,7 @@ class EventController extends Controller
             $eventDate = $request->input('filter');
             $status = $request->input('status');
             $event_type = $request->input('event_type');
-            dd($event_type);
+
             $data = Event::with(['user' => function ($query) use ($event_type) {
                 if ($event_type == 'normal_user_event') {
                     $query->where('account_type', '0');
