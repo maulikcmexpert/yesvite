@@ -97,3 +97,42 @@ function otp() {
     );
 }
 otp();
+
+$(document).ready(function () {
+    $("#twoFactorAuthForm").on("submit", function (e) {
+        let isValid = true;
+        gatherInputs();
+        $("#twoFactorAuthForm-error").html();
+        $(".inputOtp").each(function () {
+            const value = $(this).val();
+            if (value === "" || isNaN(value)) {
+                isValid = false;
+                $(this).addClass("error");
+            } else {
+                $(this).removeClass("error");
+            }
+        });
+
+        if (!isValid) {
+            e.preventDefault();
+            $("#twoFactorAuthForm-error").html(
+                "Please enter a valid 6-digit numeric code."
+            );
+        }
+    });
+
+    $(".inputOtp").on("input", function () {
+        if ($(this).val().length === 1) {
+            $(this).next(".inputOtp").focus();
+        }
+    });
+});
+
+function gatherInputs() {
+    let otp = "";
+    for (let i = 1; i <= 6; i++) {
+        otp += document.getElementById("otp" + i).value;
+    }
+    document.getElementById("verification_otp").value = otp;
+    return true;
+}

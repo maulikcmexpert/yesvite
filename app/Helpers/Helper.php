@@ -21,6 +21,7 @@ use App\Models\EventPostComment;
 use App\Models\UserNotificationType;
 use App\Mail\OwnInvitationEmail;
 use Twilio\Rest\Client;
+use Illuminate\Support\Facades\Redirect;
 
 function getVideoDuration($filePath)
 {
@@ -1223,10 +1224,10 @@ function sendSMS($receiverNumber, $message)
             'from' => $twilio_number,
             'body' => $message
         ]);
-
-        dd('SMS Sent Successfully.');
+        return  true;
     } catch (Exception $e) {
-        dd("Error: " . $e->getMessage());
+
+        return  $e->getMessage();
     }
 }
 
