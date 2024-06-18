@@ -1,9 +1,12 @@
 @if($yesvitePhones->isEmpty())
 <div class="users-data">
-    <div class="d-flex align-items-start">
-        <div class="input-form">
-            <button type="button" class="btn btn-secondary">Import CSV</button>
-        </div>
+    <div class="md-5">
+
+        <form action="{{ route('import.csv') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <input type="file" name="csv_file">
+            <button type="submit">Import CSV</button>
+        </form>
 
     </div>
 </div>@else
@@ -25,7 +28,7 @@
         </div>
 
     </div>
-    <a href="#" class="btn edit-contact edit-contact" data-bs-toggle="modal" data-id="{{$value->id}}" data-bs-target="#myModal" >Edit Contact</a>
+    <a href="#" class="btn edit-contact edit-contact" data-bs-toggle="modal" data-id="{{$value->id}}" data-bs-target="#myModal">Edit Contact</a>
 </div>
 @endforeach
 @endif

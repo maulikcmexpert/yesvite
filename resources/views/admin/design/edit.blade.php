@@ -83,8 +83,6 @@
                     </div>
                     <div class="col-lg-12">
                         <div class="form-group colorGrp mt-4">
-
-
                             <label for="exampleInputEmail1">Design Colors</label>
                             <div class="row">
                                 <div class="checkboxes-wrp">

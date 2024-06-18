@@ -168,7 +168,18 @@ input.cr-slider:focus{
     }
 
     .edit-profile .profile-content{
-        margin-top: 90px !important;
+        margin-top: 55px !important;
+    }
+
+    #Edit-modal .croppie-container .cr-boundary,
+    #Edit-modal  .croppie-container .cr-viewport{
+        width: 300px !important;
+        height: 300px !important;
+    }
+
+    .cover-img{
+        width: 100% !important;
+        height: 300px !important;
     }
 
 }

@@ -242,7 +242,8 @@
     object-fit: cover;
 }
 
-[type="file"] {
+.edit-profile [type="file"]
+{
     height: 0;  
     width: 0;
     overflow: hidden;
@@ -601,6 +602,7 @@ input::-webkit-slider-thumb{
         -moz-border-radius: 0;
         -ms-border-radius: 0;
         -o-border-radius: 0;
+        height: 135px !important;
     }
 
     .profile-wrapper .mob-edit-btn{
@@ -634,10 +636,18 @@ input::-webkit-slider-thumb{
 
   
     .profile-img .user-img{
-        bottom: -90PX;
+        bottom: -45PX;
     }
 
     #coverImg-modal .cover-img{
         height: 290px;
+    }
+
+    #coverImg-modal .cr-boundary{
+        height: 300px !important;
+    }
+
+    #coverImg-modal .croppie-container .cr-slider-wrap{
+        margin: 0px auto;
     }
 }

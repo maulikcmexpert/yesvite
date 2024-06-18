@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Event;
 use App\Models\EventInvitedUser;
+use Illuminate\Support\Carbon;
 
 class Dashboard extends Controller
 {
@@ -39,9 +40,28 @@ class Dashboard extends Controller
 
         $title = 'Dashboard';
         $page = 'admin.dashboard.dashboard';
+
+
+        $lastWeekStart = Carbon::now()->subWeek()->startOfWeek();
+        $lastWeekEnd = Carbon::now()->subWeek()->endOfWeek();
+
+        $normalUsersLastWeek = User::where('account_type', '0')
+            ->whereBetween('created_at', [$lastWeekStart, $lastWeekEnd])
+            ->count();
+
+        $professionalUsersLastWeek = User::where('account_type', '0')
+            ->whereBetween('created_at', [$lastWeekStart, $lastWeekEnd])
+            ->count();
+
+
+
         $total_users = User::where('account_type', '0')->count();
         $total_professional_users = User::where('account_type', '1')->count();
+
+
+
         $total_events = Event::count();
+
         $professional_total_events = Event::whereHas('user', function ($query) {
             $query->where(['app_user' => '1', 'account_type' => '1']);
         })->count();
@@ -63,6 +83,8 @@ class Dashboard extends Controller
             'page',
             'total_users',
             'total_professional_users',
+            'normalUsersLastWeek',
+            'professionalUsersLastWeek',
             'total_events',
             'total_held_events',
             'total_held_events_avg',

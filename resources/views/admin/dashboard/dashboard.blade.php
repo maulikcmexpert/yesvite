@@ -3,7 +3,6 @@
   <!-- Small boxes (Stat box) -->
 
   <div class="row">
-
     <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12 overflow-hidden">
 
       <!-- small box -->
@@ -60,13 +59,70 @@
 
     </div>
 
+
+    <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12 overflow-hidden">
+
+      <!-- small box -->
+
+      <a href="{{URL::to('/admin/users')}}" class="small-box">
+
+        <div class="inner">
+
+          <h3>{{$normalUsersLastWeek}}</h3>
+
+
+
+          <p>Weekly New Users</p>
+
+        </div>
+
+        <div class="icon">
+
+          <img src="{{ asset('assets/admin/admin_icons/icon_users.png')}}">
+
+        </div>
+
+
+
+      </a>
+
+    </div>
+
+    <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12 overflow-hidden">
+
+      <!-- small box -->
+
+      <a href="{{URL::to('/admin/professional_users')}}" class="small-box">
+
+        <div class="inner">
+
+          <h3>{{$professionalUsersLastWeek}}</h3>
+
+
+
+          <p>Weekly New Professional Users</p>
+
+        </div>
+
+        <div class="icon">
+
+          <img src="{{ asset('assets/admin/admin_icons/icon_prof_users.png')}}">
+
+        </div>
+
+
+
+      </a>
+
+    </div>
+
     <!-- ./col -->
 
     <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12 overflow-hidden">
 
       <!-- small box -->
 
-      <div class="small-box">
+      <a href="{{URL::to('/admin/events')}}" class="small-box">
 
         <div class="inner">
 
@@ -86,7 +142,7 @@
 
         <!-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> -->
 
-      </div>
+      </a>
 
     </div>
 
@@ -94,7 +150,7 @@
 
       <!-- small box -->
 
-      <div class="small-box">
+      <a href="{{URL::to('/admin/events')}}" class="small-box">
 
         <div class="inner">
 
@@ -114,7 +170,7 @@
 
         <!-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> -->
 
-      </div>
+      </a>
 
     </div>
 
