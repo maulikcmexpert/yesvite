@@ -47,6 +47,19 @@
             </div>
         </div>
 
+        <div class="col-sm-6 col-md-3">
+
+            <div class="form-group">
+                <div class="position-relative w-100 selectArrow">
+                    <select name="event_type" id="event_type" class="form-control event_type">
+                        <option value="">Event Type</option>
+                        <option value="normal_user_event">Normal User Events</option>
+                        <option value="professional_event">Professional Events</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
         <!-- <div class="col-sm-6 col-md-3">
 
             <div class="input-group">
