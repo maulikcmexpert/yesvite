@@ -294,62 +294,6 @@
 
         });
 
-        $(document).on('change', '#event_type', function() {
-
-            var event_type = $('#event_type option:selected').val();
-
-            var table = $('#events_table').DataTable();
-
-            if ($.fn.DataTable.isDataTable('#events_table')) {
-                table.destroy();
-
-            }
-
-            $("#events_table").DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: {
-                    url: '{{ URL::to("/admin/events") }}',
-                    data: function(d) {
-
-                        d.event_type = event_type;
-                    }
-                },
-                columns: [{
-                        data: "number",
-                        name: "number"
-                    },
-                    {
-                        data: "event_name",
-                        name: "event_name"
-                    },
-                    {
-                        data: "start_date",
-                        name: "start_date"
-                    },
-                    {
-                        data: "end_date",
-                        name: "end_date"
-                    },
-                    {
-                        data: "venue",
-                        name: "venue"
-                    },
-                    {
-                        data: "event_status",
-                        name: "event_status"
-                    },
-                    {
-                        data: "action",
-                        name: "action",
-                        orderable: false,
-                        searchable: true,
-                    }
-                ]
-            });
-
-
-        });
 
 
     });
