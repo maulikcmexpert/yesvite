@@ -25,7 +25,15 @@ class EventController extends Controller
         if ($request->ajax()) {
             $eventDate = $request->input('filter');
             $status = $request->input('status');
-            $data = Event::with(['user'])->orderBy('id', 'desc');
+            $event_type = $request->input('event_type');
+            $data = Event::with(['user' => function ($query) use ($event_type) {
+                if ($event_type == 'normal_user_event') {
+                    $query->where('account_type', '0');
+                }
+                if ($event_type == 'professional_event') {
+                    $query->where('account_type', '1');
+                }
+            }])->orderBy('id', 'desc');
 
             if ($eventDate) {
                 $data->where('start_date', $eventDate);
@@ -40,6 +48,11 @@ class EventController extends Controller
             if ($status == 'draft_events') {
                 $data->where('is_draft_save', '1');
             }
+
+
+
+
+
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('number', function ($row) {
