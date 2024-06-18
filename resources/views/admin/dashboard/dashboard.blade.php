@@ -3,7 +3,7 @@
   <!-- Small boxes (Stat box) -->
 
   <div class="row">
-    <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12 overflow-hidden">
+    <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12 overflow-hidden mb-3">
 
       <!-- small box -->
 
@@ -31,7 +31,7 @@
 
     </div>
 
-    <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12 overflow-hidden">
+    <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12 overflow-hidden mb-3">
 
       <!-- small box -->
 
@@ -60,7 +60,7 @@
     </div>
 
 
-    <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12 overflow-hidden">
+    <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12 overflow-hidden mb-3">
 
       <!-- small box -->
 
@@ -88,7 +88,7 @@
 
     </div>
 
-    <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12 overflow-hidden">
+    <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12 overflow-hidden mb-3">
 
       <!-- small box -->
 
@@ -118,7 +118,7 @@
 
     <!-- ./col -->
 
-    <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12 overflow-hidden">
+    <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12 overflow-hidden mb-3">
 
       <!-- small box -->
 
@@ -146,7 +146,7 @@
 
     </div>
 
-    <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12 overflow-hidden">
+    <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12 overflow-hidden mb-3">
 
       <!-- small box -->
 
@@ -176,7 +176,7 @@
 
     <!-- ./col -->
 
-    <div class="col-xl-3 col-lg-4 col-md-4  col-sm-6 col-12 overflow-hidden">
+    <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12 overflow-hidden mb-3">
 
       <!-- small box -->
 
