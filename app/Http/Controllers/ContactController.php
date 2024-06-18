@@ -10,6 +10,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
+use App\Rules\PhoneNumberExists;
+use Illuminate\Validation\Rule;
+use App\Rules\EmailExists;
 
 
 class ContactController extends Controller
@@ -40,7 +43,7 @@ class ContactController extends Controller
 
         $groups = Group::where('user_id', $user->id)->orderBy('id', 'DESC')->get();
 
-        
+
         $user['events'] =   Event::where(['user_id' => $user->id, 'is_draft_save' => '0'])->count();
 
         $user['profile'] = ($user->profile != null) ? asset('storage/profile/' . $user->profile) : asset('storage/profile/no_profile.png');
@@ -53,7 +56,7 @@ class ContactController extends Controller
         $yesviteGroups = Group::withCount('groupMembers')->paginate(10);
         $yesvitePhones = User::where('parent_user_phone_contact', '=', $id)->get();
 
-              
+
         return view('layout', compact(
             'title',
             'page',
@@ -94,13 +97,13 @@ class ContactController extends Controller
             $searchGroup = $request->input('search_group');
 
             if ($request->ajax()) {
-                $query = Group::withCount('groupMembers'); 
+                $query = Group::withCount('groupMembers');
 
                 if ($searchGroup) {
                     $query->where('name', 'LIKE', '%' . $searchGroup . '%');
                 }
 
-                $yesviteGroups = $query->paginate(10); 
+                $yesviteGroups = $query->paginate(10);
                 return view('front.ajax_groups', compact('yesviteGroups'))->render();
             }
             return response()->json(['error' => 'Invalid request'], 400);
@@ -115,7 +118,7 @@ class ContactController extends Controller
             $searchPhone = $request->input('search_phone');
 
             if ($request->ajax()) {
-                $query = User::where('parent_user_phone_contact', '=', $id); 
+                $query = User::where('parent_user_phone_contact', '=', $id);
 
                 if ($searchPhone) {
                     $query->where(function ($q) use ($searchPhone) {
@@ -124,7 +127,7 @@ class ContactController extends Controller
                     });
                 }
 
-                $yesvitePhones = $query->paginate(10); 
+                $yesvitePhones = $query->paginate(10);
                 return view('front.ajax_phones', compact('yesvitePhones'))->render();
             }
             return response()->json(['error' => 'Invalid request'], 400);
@@ -145,8 +148,8 @@ class ContactController extends Controller
             $validator = Validator::make($request->all(), [
                 'Fname' => 'required|string', // max 2MB
                 'Lname' => 'required|string', // max 2MB
-                'phone_number' => ['present', 'nullable', 'numeric', 'regex:/^\d{10,15}$/'],
-                'email' => 'required|email', // max 2MB
+                'phone_number' => ['present', 'nullable', 'numeric', 'regex:/^\d{10,15}$/', Rule::unique('users')->ignore(decrypt($request->id))],
+               'email' => ['required', 'email', new EmailExists], // max 2MB
 
             ], [
                 'Fname.required' => 'Please enter First Name',
@@ -250,6 +253,17 @@ class ContactController extends Controller
         }
     }
 
+    public function checkNewContactEmail(Request $request)
+    {
+        $email = $request->input('email');
+        $exists = User::where('email', $email)->exists();
+
+        if ($exists) {
+            return response()->json(false);
+        } else {
+            return response()->json(true);
+        }
+    }
     /**
      * Show the form for creating a new resource.
      */

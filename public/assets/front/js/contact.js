@@ -138,12 +138,45 @@ $(document).ready(function () {
             email: {
                 required: true,
                 email: true,
+                remote: {
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                            "content"
+                        ),
+                    },
+                    url: base_url + "contacts/check_new_contactemail", // Your Laravel API endpoint
+                    type: "POST",
+                    data: {
+                        email: function () {
+                            return $(".addnew_email").val();
+                        },
+                       
+                    },
+                },
             },
+
             phone_number: {
                 required: true,
                 digits: true,
                 minlength: 10,
                 maxlength: 15,
+                remote: {
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                            "content"
+                        ),
+                    },
+                    url: base_url + "profile/check_new_contactnumber", // Your Laravel API endpoint
+                    type: "POST",
+                    data: {
+                        phone_number: function () {
+                            return $(".addnew_contact").val();
+                        },
+                        id: function () {
+                            return $("input[name='id']").val();
+                        },
+                    },
+                },
             },
         },
         messages: {
@@ -152,12 +185,15 @@ $(document).ready(function () {
             email: {
                 required: "Please enter your email address",
                 email: "Please enter a valid email address",
+                remote: "Email is already exsits",
+
             },
             phone_number: {
                 required: "Please enter a Phone Number",
                 digits: "Please enter a valid Phone Number",
                 minlength: "Phone Number must be minimum 10 digit",
                 maxlength: "Phone Number must be maxmimum 15 digit",
+                remote: "Phone Number is already exsits",
             },
         },
         submitHandler: function (form) {
@@ -270,6 +306,23 @@ $(document).ready(function () {
                 digits: true,
                 minlength: 10,
                 maxlength: 15,
+                remote: {
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                            "content"
+                        ),
+                    },
+                    url: base_url + "profile/check_new_contactnumber",
+                    type: "POST",
+                    data: {
+                        phone_number: function () {
+                            return $(".edit_phone").val();
+                        },
+                        id: function () {
+                            return $("#edit_id").val();
+                        },
+                    },
+                },
             },
         },
         messages: {
@@ -281,6 +334,7 @@ $(document).ready(function () {
                 digits: "Please enter a valid Phone Number",
                 minlength: "Phone Number must be minimum 10 digit",
                 maxlength: "Phone Number must be maxmimum 15 digit",
+                remote: "Phone Number is already exsits",
             },
         },
         submitHandler: function (form) {
@@ -335,5 +389,6 @@ $(document).ready(function () {
     $("#myModal1").on("hidden.bs.modal", function (event) {
         $(".form-control").next().removeClass("floatingfocus");
         $("#add_contact .label-error .error").text("");
+        $("#add_contact")[0].reset();
     });
 });

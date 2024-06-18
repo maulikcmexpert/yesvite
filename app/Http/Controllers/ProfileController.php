@@ -148,6 +148,26 @@ class ProfileController extends Controller
             return response()->json(true);
         }
     }
+
+    public function checkNewContactNumber(Request $request)
+    {
+        $phone_number = $request->input('phone_number');
+        $id = $request->input('id');
+
+        if ($id != '') {
+            $exists = User::where('phone_number', $phone_number)->where('id', '!=', $id)->exists();
+        }
+        $exists = User::where('phone_number', $phone_number)->exists();
+
+
+
+        if ($exists) {
+            return response()->json(false);
+        } else {
+            return response()->json(true);
+        }
+    }
+
     public function update(Request $request, string $id)
     {
         $id = decrypt($id);

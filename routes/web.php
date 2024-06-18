@@ -52,6 +52,11 @@ Route::middleware('checkUserExist')->group(function () {
 
     Route::post('profile/update/{id}',  [ProfileController::class, 'update'])->name('profile.update');
     Route::post('profile/check-phonenumber', [ProfileController::class, 'checkPhoneNumberExistence']);
+
+    Route::post('profile/check_new_contactnumber', [ProfileController::class, 'checkNewContactNumber']);
+
+
+
     Route::post('profile/update_password',  [ProfileController::class, 'updatePassword'])->name('profile.update_password');
 
     Route::get('profile/public_profile',  [ProfileController::class, 'publicProfileView'])->name('profile.public_profile');
@@ -75,6 +80,7 @@ Route::middleware('checkUserExist')->group(function () {
     Route::post('contacts/loadgroups', [ContactController::class, 'loadMoreGroup'])->name('.loadMoreGroup');
     Route::post('contacts/loadphones', [ContactController::class, 'loadMorePhones'])->name('.loadMorePhones');
 
+    Route::post('contacts/check_new_contactemail', [ContactController::class, 'checkNewContactEmail']);
 
     Route::post('contacts/add/{id}', [ContactController::class, 'addContact'])->name('.addcontact');
 
