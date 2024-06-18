@@ -10294,9 +10294,9 @@ class ApiControllerv2 extends Controller
                     $rsvpUserStatus['profile'] = (!empty($value->user->profile) || $value->user->profile != NULL) ? asset('public/storage/profile/' . $value->user->profile) : "";
 
 
-                    $rsvpUserStatus['email'] = ($value->user->email == 'email') ? $value->user->email : "";
+                    $rsvpUserStatus['email'] = ($value->user->email != '') ? $value->user->email : "";
 
-                    $rsvpUserStatus['phone_number'] = ($value->user->phone_number == 'phone') ? $value->user->phone_number : "";
+                    $rsvpUserStatus['phone_number'] = ($value->user->phone_number != '') ? $value->user->phone_number : "";
                     $rsvpUserStatus['prefer_by'] =  $value->prefer_by;
                     $rsvpUserStatus['kids'] = $value->kids;
 
