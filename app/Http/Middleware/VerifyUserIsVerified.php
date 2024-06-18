@@ -33,6 +33,6 @@ class VerifyUserIsVerified
     
             return Redirect::to(URL::to('/'))->with('error', 'Unauthorised');
         }
-        return Redirect::to(URL::to('/'))->with('error', 'User not found');
+        return Redirect::to(URL::to('/'))->with('error', 'Unauthorised');
     }
 }
