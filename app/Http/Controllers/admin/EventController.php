@@ -88,10 +88,10 @@ class EventController extends Controller
 
                     if ($row->is_draft_save == '1') {
 
-                        return '<img src="' . asset('public/storage/event_icon/draft.png') . '" class="img-fluid" alt="" width="25px" title="Draft Event">';
+                        return '<img src="' . asset('storage/event_icon/draft.png') . '" class="img-fluid" alt="" width="25px" title="Draft Event">';
                     } else if ($row->is_draft_save == '0') {
                         if ($row->start_date > date('Y-m-d')) {
-                            return '<img src="' . asset('public/storage/event_icon/upcoming.png') . '" class="img-fluid" alt="" width="25px" title="Upcoming Event">';
+                            return '<img src="' . asset('storage/event_icon/upcoming.png') . '" class="img-fluid" alt="" width="25px" title="Upcoming Event">';
                         }
                         if ($row->start_date == date('Y-m-d')) {
                             return "<span class='text-success'>Published Event</span>";
