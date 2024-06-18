@@ -1224,10 +1224,9 @@ function sendSMS($receiverNumber, $message)
             'from' => $twilio_number,
             'body' => $message
         ]);
-        return  true;
+        return  ["status" => true, "message" => "success"];
     } catch (Exception $e) {
-
-        return  $e->getMessage();
+        return  ["status" => false, "message" => $e->getMessage()];
     }
 }
 

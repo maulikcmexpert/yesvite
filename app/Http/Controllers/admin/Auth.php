@@ -47,11 +47,12 @@ class Auth extends Controller
                 $phoneNumber = '+' . $adminData->country_code . $adminData->phone_number;
                 $message = "Your verification code for Admin is: " . $token;
                 $sendMesage =  sendSMS($phoneNumber, $message);
-                if ($sendMesage == true) {
 
+                if ($sendMesage['status']  == true) {
                     return Redirect::to(URL::to('admin/factor_authenticate', encrypt($adminData->id)))->with('success', 'Verification code is sent successfully');
+                } else if ($sendMesage['status'] == false) {
+                    return  Redirect::to('admin')->with('error', $sendMesage['message']);
                 }
-                return  Redirect::to('admin')->with('error', $sendMesage);
             }
         }
 
