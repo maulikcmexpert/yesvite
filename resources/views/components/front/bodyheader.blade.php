@@ -32,7 +32,7 @@
 
 
 
-             @if(Session::has('user'))
+             @if(Auth::guard('web')->user())
 
              <div class="header-right">
                  <div class="header-dropdown dropdown">
@@ -73,13 +73,16 @@
                      </ul>
                  </div>
                  <?php
+                         $userProfile = "";
+                    if(Auth::guard('web')->user()){
 
-                    $userprofile = Auth::guard('web')->user();
-
-                    $userProfile = asset('storage/profile/no_profile.png');
-                    if ($userprofile->profile != NULL || $userprofile->profile != "") {
-
-                        $userProfile = asset('storage/profile/' . $userprofile->profile);
+                        $userprofile = Auth::guard('web')->user();
+    
+                        $userProfile = asset('storage/profile/no_profile.png');
+                        if ($userprofile->profile != NULL || $userprofile->profile != "") {
+    
+                            $userProfile = asset('storage/profile/' . $userprofile->profile);
+                        }
                     }
 
                     ?>
