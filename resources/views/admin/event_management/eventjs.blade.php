@@ -295,7 +295,7 @@
         });
 
         $(document).on('change', '#event_type', function() {
-            alert();
+
             var event_type = $('#event_type option:selected').val();
 
             var table = $('#events_table').DataTable();
@@ -311,7 +311,7 @@
                 ajax: {
                     url: '{{ URL::to("/admin/events") }}',
                     data: function(d) {
-                        d.filter = eventDate;
+
                         d.event_type = event_type;
                     }
                 },
