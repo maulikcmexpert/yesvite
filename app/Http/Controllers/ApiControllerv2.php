@@ -4471,16 +4471,10 @@ class ApiControllerv2 extends Controller
         if ($updateEvent != null) {
 
 
-            $rsvp_by_date = date('Y-m-d');
-            $rsvp_by_date_set = '0';
+            // $rsvp_by_date = date('Y-m-d');
+            // $rsvp_by_date_set = '0';
 
-            $rsvpEndTime = "";
-
-            if (!empty($eventData['rsvp_by_date'])) {
-
-                $rsvp_by_date = $eventData['rsvp_by_date'];
-                $rsvp_by_date_set = '1';
-            }
+            // $rsvpEndTime = "";
 
 
             $greeting_card_id = "";
@@ -4508,8 +4502,12 @@ class ApiControllerv2 extends Controller
             $updateEvent->hosted_by = (!empty($eventData['hosted_by'])) ? $eventData['hosted_by'] : $user->firstname . ' ' . $user->lastname;
             $updateEvent->start_date = (!empty($eventData['start_date'])) ? $eventData['start_date'] : NULL;
             $updateEvent->end_date = (!empty($eventData['end_date'])) ? $eventData['end_date'] : NULL;
-            $updateEvent->rsvp_by_date_set = $rsvp_by_date_set;
-            $updateEvent->rsvp_by_date = $rsvp_by_date;
+
+            $updateEvent->rsvp_by_date_set = $eventData['rsvp_by_date_set'];
+            $updateEvent->rsvp_by_date = NULL;
+            if (!empty($eventData['rsvp_by_date'])) {
+                $updateEvent->rsvp_by_date = $eventData['rsvp_by_date'];
+            }
             $updateEvent->latitude = $eventData['latitude'];
             $updateEvent->longitude = $eventData['longitude'];
             $updateEvent->rsvp_start_time = $eventData['rsvp_start_time'];

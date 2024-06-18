@@ -128,7 +128,7 @@
     <script src="{{ asset('assets/admin/js/jquery-validate.js') }}"></script>
 
     <script src="{{ asset('assets/admin/js/jquery-validate-additional.js') }}"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mockjax/2.6.1/jquery.mockjax.min.js" integrity="sha512-LbhUoRYSZ3tFp6RrcQOwGL2P/SlbfF9B+2yiJAMcJhuxJQTgvzWaG6W+XxX9t8+aQ8z+zUxx/XQ0fOo1/ft4tA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     @if(isset($js))
 
     @foreach($js as $value)

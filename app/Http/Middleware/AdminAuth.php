@@ -23,6 +23,6 @@ class AdminAuth
         if (Session::has('admin')) {
             return $next($request);
         }
-        return Redirect::to(URL::to('/admin/login'));
+        return Redirect::to(URL::to('/admin'));
     }
 }
