@@ -74,28 +74,26 @@ $("#updatePassForm").validate({
 function otp() {
     let inputs = Array.from(document.getElementsByClassName("inputOtp"));
     inputs.forEach((f) =>
-      f.addEventListener("keyup", (e) => {
-        let val = e.target.value;
-        const target = e.target;
-        const key = e.key.toLowerCase();
-  
-        if (key == "backspace" || key == "delete") {
-          target.value = "";
-          const prev = target.previousElementSibling;
-          if (prev) {
-            prev.focus();
-          }
-          return;
-        }
-        if (/[0-9]/.test(val)) {
-          let next = e.target.nextElementSibling;
-          if (next) next.focus();
-        } else {
-          alert("Invalid Input");
-          e.target.value = "";
-        }
-      })
+        f.addEventListener("keyup", (e) => {
+            let val = e.target.value;
+            const target = e.target;
+            const key = e.key.toLowerCase();
+
+            if (key == "backspace" || key == "delete") {
+                target.value = "";
+                const prev = target.previousElementSibling;
+                if (prev) {
+                    prev.focus();
+                }
+                return;
+            }
+            if (/[0-9]/.test(val)) {
+                let next = e.target.nextElementSibling;
+                if (next) next.focus();
+            } else {
+                e.target.value = "";
+            }
+        })
     );
-  }
-  otp();
-  
+}
+otp();
