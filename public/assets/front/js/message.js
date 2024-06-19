@@ -91,7 +91,9 @@ async function addMessage(conversationId, messageData, contactId) {
 function handleNewConversation(snapshot) {
     const newConversation = snapshot.val();
     // console.log("New conversation added:", newConversation);
-
+    if (newConversation.conversationId == undefined) {
+        return;
+    }
     const conversationElement = $(
         `.conversation-${newConversation.conversationId}`
     );
@@ -113,6 +115,7 @@ function handleNewConversation(snapshot) {
         } else {
             badgeElement.removeClass("d-none");
         }
+        conversationElement.prependTo(".chat-list");
     } else {
         // Add new conversation element
         $.ajax({
@@ -122,6 +125,14 @@ function handleNewConversation(snapshot) {
             success: function (res) {
                 $(".chat-list").append(res);
             },
+        });
+    }
+
+    const selectedConversationId = $(".selected_conversasion").val();
+    if (selectedConversationId === newConversation.conversationId) {
+        updateOverview(senderUser, newConversation.conversationId, {
+            unRead: false,
+            unReadCount: 0,
         });
     }
 }
@@ -157,9 +168,11 @@ async function updateChat(user_id) {
     //     method: "post",
     //     success: function (res) {
     //         $(".msg-body").html(res);
-    const message = await getMessages(senderUser, user_id);
-    $(".selected_conversasion").val(message[0].key);
-    const conversationId = $(".selected_conversasion").val();
+    // const message = await getMessages(senderUser, user_id);
+    // console.log(message[0].key);
+    $(".selected_conversasion").val($(".selected_id").val());
+    const conversationId = $(".selected_id").val();
+    console.log({ conversationId });
     const userRef = ref(database, `users/${senderUser}`);
     update(userRef, { userChatId: conversationId });
 
@@ -168,9 +181,6 @@ async function updateChat(user_id) {
     off(messagesRef);
     off(selecteduserRef);
 
-    onChildAdded(selecteduserRef, async (snapshot) => {
-        console.log(1);
-    });
     onChildAdded(messagesRef, async (snapshot) => {
         console.log("yes");
         addMessageToList(snapshot.key, snapshot.val());
@@ -183,11 +193,10 @@ async function updateChat(user_id) {
             });
         }
     });
-    setTimeout(() => {
-        $(".msg-lists").append(`
-                <div id="msgbox"></div>            
-            `);
-    }, 1000);
+    onChildAdded(selecteduserRef, async (snapshot) => {
+        console.log(1);
+    });
+
     //     },
     // });
 }
@@ -195,7 +204,6 @@ async function updateChat(user_id) {
 // Initialize event listeners
 $(document).on("click", ".msg-list", async function () {
     const userId = $(this).attr("data-userid");
-    await updateChat(userId);
     $(".selected_id").val($(this).attr("data-msgKey"));
     $(".selected_message").val(userId);
     const conversationId = $(this).attr("data-msgKey");
@@ -203,14 +211,16 @@ $(document).on("click", ".msg-list", async function () {
         unRead: false,
         unReadCount: 0,
     });
-    setTimeout(() => {
-        scrollFunction();
-    }, 1500);
+    await updateChat(userId);
 });
 function scrollFunction() {
+    const container = document.getElementById("msgBody");
     const element = document.getElementById("msgbox");
-    console.log(element);
-    element.scrollIntoView();
+    const offsetTop = element.offsetTop - container.offsetTop;
+    container.scroll({
+        top: offsetTop,
+        behavior: "smooth",
+    });
 }
 $(".send-message").on("keypress", async function (e) {
     if (e.which === 13) {
@@ -237,6 +247,7 @@ $(".send-message").on("keypress", async function (e) {
                 status: {},
             };
             await addMessage(selectedMessageId, messageData, receiverId);
+
             await updateOverview(senderUser, selectedMessageId, {
                 lastMessage: `${senderUserName}: ${message}`,
                 timeStamp: Date.now(),
@@ -275,6 +286,7 @@ function addMessageToList(key, messageData) {
        
     `;
     $(".msg-lists").append(messageElement);
+    scrollFunction();
 }
 
 // Auto-complete functionality for the search user input

@@ -285,12 +285,13 @@
                             </div>
                         </div>
 
-                        <div class="msg-body">
-    <input type="hidden" class="selected_conversasion"/> 
+                        <div class="msg-body" id="msgBody">
+                            <input type="hidden" class="selected_conversasion"/> 
 
                             <ul class="msg-lists">
                                
                             </ul>
+                            <div id="msgbox"></div>  
                             <!-- <div class="empty-massage">
                                 <div class="empty-img">
                                     <img src="./assets/image/empty-img.png" alt="empty-img">

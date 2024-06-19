@@ -285,16 +285,18 @@ ul.chat-list li:last-child{
 }
 
 .msg-body{
-   padding: 20px 24px;
-}
-
-.msg-body ul{
-    padding: 0;
+    padding: 20px 24px;
     position: relative;
     max-height: 580px;
     overflow-y: scroll;
     margin-bottom: 65px;
 }
+
+.msg-body ul{
+    padding: 0;
+}
+
+
 
 .msg-body ul li{
     margin: 16px 0;
@@ -638,6 +640,7 @@ ul.chat-list li:last-child{
     cursor: pointer;
     margin-left: 5px;
   }
+  
 /* ======= responsive ======== */
 @media only screen and (max-width:1500px){
     .chat-area .msg-head .dropdown-menu.show{
