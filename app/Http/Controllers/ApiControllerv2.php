@@ -10289,6 +10289,8 @@ class ApiControllerv2 extends Controller
 
                     $rsvpUserStatus['user_id'] = $value->user->id;
 
+                    $rsvpUserStatus['first_name'] = $value->user->firstname;
+                    $rsvpUserStatus['last_name'] = $value->user->lastname;
                     $rsvpUserStatus['username'] = $value->user->firstname . ' ' . $value->user->lastname;
 
                     $rsvpUserStatus['profile'] = (!empty($value->user->profile) || $value->user->profile != NULL) ? asset('public/storage/profile/' . $value->user->profile) : "";
