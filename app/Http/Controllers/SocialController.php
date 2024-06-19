@@ -57,6 +57,7 @@ class SocialController extends Controller
     public function findOrCreateUser($socialUser, $provider)
     {
         $user = User::where('email', $socialUser->getEmail())->first();
+        Session::regenerate();
         if ($user) {
             if ($provider == 'google') {
 
@@ -68,6 +69,9 @@ class SocialController extends Controller
             } elseif ($provider == 'apple') {
                 $user->apple_token_id = $socialUser->getId();
             }
+
+
+            $user->current_session_id = Session::getId();
             $user->save();
 
             $sessionArray = [
@@ -89,6 +93,8 @@ class SocialController extends Controller
         $users->facebook_token_id = $socialUser->getId();
         $users->instagram_token_id = $socialUser->getId();
         $users->apple_token_id = $socialUser->getId();
+
+        $user->current_session_id = Session::getId();
         $users->save();
 
         $newUser = User::where('id', $users->id)->first();

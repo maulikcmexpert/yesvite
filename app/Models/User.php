@@ -34,7 +34,8 @@ class User extends Authenticatable
         'is_user_phone_contact',
         'parent_user_phone_contact',
         'email_verified_at',
-        'password_updated_date'
+        'password_updated_date',
+        'current_session_id'
     ];
 
     /**

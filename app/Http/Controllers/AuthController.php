@@ -174,6 +174,9 @@ class AuthController extends Controller
             $user = Auth::guard('web')->user();
             if ($user->email_verified_at != NULL) {
 
+                Session::regenerate();
+                $user->current_session_id = Session::getId();
+                $user->save();
 
                 $sessionArray = [
                     'id' => encrypt($user->id),
@@ -301,6 +304,10 @@ class AuthController extends Controller
                 ];
                 Session::put(['user' => $sessionArray]);
                 if (Session::has('user')) {
+
+                    Session::regenerate();
+                    $user->current_session_id = Session::getId();
+                    $user->save();
 
                     if ($remember) {
                         Cookie::queue('email', $user->email, 120);
