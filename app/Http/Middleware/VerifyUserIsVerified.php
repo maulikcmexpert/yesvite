@@ -31,8 +31,8 @@ class VerifyUserIsVerified
             }
 
 
-            return Redirect::to(URL::to('/'))->with('error', 'Unautddddhorised');
+            return Redirect::to(URL::to('/'))->with('error', 'Unauthorised');
         }
-        return Redirect::to(URL::to('/'))->with('error', 'Unausssthorised');
+        return Redirect::to(URL::to('/'))->with('error', 'Unauthorised');
     }
 }

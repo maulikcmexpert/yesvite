@@ -130,15 +130,15 @@ class AuthController extends Controller
             DB::commit();
             $userDetails = User::where('id', $storeUser->id)->first();
 
-            // $userData = [
-            //     'username' => $userDetails->firstname . ' ' . $userDetails->lastname,
-            //     'email' => $userDetails->email,
-            //     'token' => $randomString
-            // ];
-            // Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($request) {
-            //     $message->to($request->email);
-            //     $message->subject('Email Verification Mail');
-            // });
+            $userData = [
+                'username' => $userDetails->firstname . ' ' . $userDetails->lastname,
+                'email' => $userDetails->email,
+                'token' => $randomString
+            ];
+            Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($request) {
+                $message->to($request->email);
+                $message->subject('Email Verification Mail');
+            });
 
 
             return  Redirect::to('login')->with('success', 'Account successfully created, please verify your email before you can log in');;
@@ -172,54 +172,53 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials, $remember)) {
             $user = Auth::guard('web')->user();
-            // if ($user->email_verified_at != NULL) {
+            if ($user->email_verified_at != NULL) {
 
 
-            $sessionArray = [
-                'id' => encrypt($user->id),
-                'username' => $user->firstname . ' ' . $user->lastname,
-                'email' => $user->email,
+                $sessionArray = [
+                    'id' => encrypt($user->id),
+                    'username' => $user->firstname . ' ' . $user->lastname,
+                    'email' => $user->email,
 
-                'profile' => ($user->profile != NULL || $user->profile != "") ? asset('public/storage/profile/' . $user->profile) : asset('public/storage/profile/no_profile.png')
-            ];
-            Session::put(['user' => $sessionArray]);
+                    'profile' => ($user->profile != NULL || $user->profile != "") ? asset('public/storage/profile/' . $user->profile) : asset('public/storage/profile/no_profile.png')
+                ];
+                Session::put(['user' => $sessionArray]);
 
-            if (Session::has('user')) {
+                if (Session::has('user')) {
 
-                if ($remember) {
-                    Cookie::queue('email', $user->email, 120);
-                    Cookie::queue('password', $request->password, 120);
+                    if ($remember) {
+                        Cookie::queue('email', $user->email, 120);
+                        Cookie::queue('password', $request->password, 120);
+                    } else {
+
+                        Cookie::forget('email');
+                        Cookie::forget('password');
+                    }
+                    event(new \App\Events\UserRegistered($user));
+
+                    return redirect()->route('home')->with('success', 'Logged in successfully!');
                 } else {
 
-                    Cookie::forget('email');
-                    Cookie::forget('password');
+                    return  Redirect::to('login')->with('error', 'Invalid credentials!');
                 }
-                event(new \App\Events\UserRegistered($user));
-
-                return redirect()->route('home')->with('success', 'Logged in successfully!');
             } else {
+                $randomString = Str::random(30);
+                $user->remember_token = $randomString;
+                $user->save();
 
-                return  Redirect::to('login')->with('error', 'Invalid credentials!');
+                $userData = [
+                    'username' => $user->firstname . ' ' . $user->lastname,
+                    'email' => $user->email,
+                    'token' => $randomString,
+                    'is_first_login' => $user->is_first_login
+                ];
+                Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($user) {
+                    $message->to($user->email);
+                    $message->subject('Email Verification Mail');
+                });
+                toastr()->success('Please check and verify your email address.');
+                return  Redirect::to('login');
             }
-            // } 
-            // else {
-            //     $randomString = Str::random(30);
-            //     $user->remember_token = $randomString;
-            //     $user->save();
-
-            //     $userData = [
-            //         'username' => $user->firstname . ' ' . $user->lastname,
-            //         'email' => $user->email,
-            //         'token' => $randomString,
-            //         'is_first_login' => $user->is_first_login
-            //     ];
-            //     Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($user) {
-            //         $message->to($user->email);
-            //         $message->subject('Email Verification Mail');
-            //     });
-            //     toastr()->success('Please check and verify your email address.');
-            //     return  Redirect::to('login');
-            // }
         }
         return  Redirect::to('login')->with('error', 'Email or Password invalid!');
     }
@@ -247,89 +246,87 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials, $remember)) {
             $user = Auth::guard('web')->user();
-            // if ($user->email_verified_at != NULL) {
+            if ($user->email_verified_at != NULL) {
 
 
-            $checkType = $this->getUserAccountType(decrypt(Session::get('user')['id']));
+                $checkType = $this->getUserAccountType(decrypt(Session::get('user')['id']));
 
-            if ($checkType->account_type == $user->account_type) {
-                $loginUser = User::where('id', decrypt(Session::get('user')['id']))->first();
+                if ($checkType->account_type == $user->account_type) {
+                    $loginUser = User::where('id', decrypt(Session::get('user')['id']))->first();
 
 
-                if ($loginUser != null) {
+                    if ($loginUser != null) {
 
-                    Auth::login($loginUser);
+                        Auth::login($loginUser);
+                    }
+                    $msg = "";
+                    if ($checkType->account_type == '0') {
+                        $msg = "personal";
+                    } else if ($checkType->account_type == '1') {
+                        $msg = "proffiesional";
+                    }
+
+
+                    return  Redirect::to('profile')->with('error', 'You have already login ' . $msg);
                 }
-                $msg = "";
-                if ($checkType->account_type == '0') {
-                    $msg = "personal";
-                } else if ($checkType->account_type == '1') {
-                    $msg = "proffiesional";
+
+                $alreadyLog = User::select('id', 'firstname', 'lastname', 'email', 'profile')->where('id', decrypt(Session::get('user')['id']))->first();
+                if ($alreadyLog != null) {
+
+                    $alreadyLog['profile'] = ($alreadyLog->profile != null) ? asset('storage/profile/' . $alreadyLog->profile) : asset('public/storage/profile/no_profile.png');
+
+                    $sessionAlreadyArray = [
+                        'id' => encrypt($alreadyLog->id),
+                        'secondary_username' => $alreadyLog->firstname . ' ' . $alreadyLog->lastname,
+                        'secondary_email' => $alreadyLog->email,
+                        'secondary_profile' => $alreadyLog->profile,
+
+                    ];
+                    Session::put(['secondary_user' => $sessionAlreadyArray]);
+                    Session::forget('user');
                 }
 
-                toastr()->success('You have already login ' . $msg);
-                return  Redirect::to('profile');
-                // ->with('error', 'You have already login ' . $msg);
-            }
-
-            $alreadyLog = User::select('id', 'firstname', 'lastname', 'email', 'profile')->where('id', decrypt(Session::get('user')['id']))->first();
-            if ($alreadyLog != null) {
-
-                $alreadyLog['profile'] = ($alreadyLog->profile != null) ? asset('storage/profile/' . $alreadyLog->profile) : asset('public/storage/profile/no_profile.png');
-
-                $sessionAlreadyArray = [
-                    'id' => encrypt($alreadyLog->id),
-                    'secondary_username' => $alreadyLog->firstname . ' ' . $alreadyLog->lastname,
-                    'secondary_email' => $alreadyLog->email,
-                    'secondary_profile' => $alreadyLog->profile,
-
+                $sessionArray = [
+                    'id' => encrypt($user->id),
+                    'username' => $user->firstname . ' ' . $user->lastname,
+                    'email' => $user->email,
+                    'profile' => ($user->profile != NULL || $user->profile != "") ? asset('storage/profile/' . $user->profile) : asset('public/storage/profile/no_profile.png')
                 ];
-                Session::put(['secondary_user' => $sessionAlreadyArray]);
-                Session::forget('user');
-            }
+                Session::put(['user' => $sessionArray]);
+                if (Session::has('user')) {
 
-            $sessionArray = [
-                'id' => encrypt($user->id),
-                'username' => $user->firstname . ' ' . $user->lastname,
-                'email' => $user->email,
-                'profile' => ($user->profile != NULL || $user->profile != "") ? asset('storage/profile/' . $user->profile) : asset('public/storage/profile/no_profile.png')
-            ];
-            Session::put(['user' => $sessionArray]);
-            if (Session::has('user')) {
+                    if ($remember) {
+                        Cookie::queue('email', $user->email, 120);
+                        Cookie::queue('password', $request->password, 120);
+                    } else {
 
-                if ($remember) {
-                    Cookie::queue('email', $user->email, 120);
-                    Cookie::queue('password', $request->password, 120);
+                        Cookie::forget('email');
+                        Cookie::forget('password');
+                    }
+                    event(new \App\Events\UserRegistered($user));
+                    return redirect()->route('home')->with('success', 'Logged in successfully!');
                 } else {
 
-                    Cookie::forget('email');
-                    Cookie::forget('password');
+                    return  Redirect::to('login')->with('error', 'Invalid credentials!');
                 }
-                event(new \App\Events\UserRegistered($user));
-                return redirect()->route('home')->with('success', 'Logged in successfully!');
             } else {
+                $randomString = Str::random(30);
+                $user->remember_token = $randomString;
+                $user->save();
 
-                return  Redirect::to('login')->with('error', 'Invalid credentials!');
+                $userData = [
+                    'username' => $user->firstname . ' ' . $user->lastname,
+                    'email' => $user->email,
+                    'token' => $randomString,
+                    'is_first_login' => $user->is_first_login
+                ];
+                Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($user) {
+                    $message->to($user->email);
+                    $message->subject('Email Verification Mail');
+                });
+                toastr()->success('Please check and verify your email address.');
+                return  Redirect::to('login');
             }
-            // } 
-            // else {
-            //     $randomString = Str::random(30);
-            //     $user->remember_token = $randomString;
-            //     $user->save();
-
-            //     $userData = [
-            //         'username' => $user->firstname . ' ' . $user->lastname,
-            //         'email' => $user->email,
-            //         'token' => $randomString,
-            //         'is_first_login' => $user->is_first_login
-            //     ];
-            //     Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($user) {
-            //         $message->to($user->email);
-            //         $message->subject('Email Verification Mail');
-            //     });
-            //     toastr()->success('Please check and verify your email address.');
-            //     return  Redirect::to('login');
-            // }
         }
 
         return  Redirect::to('home')->with('error', 'Email or Passqword invalid');
