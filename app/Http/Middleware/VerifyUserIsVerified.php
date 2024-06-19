@@ -23,16 +23,16 @@ class VerifyUserIsVerified
     public function handle(Request $request, Closure $next): Response
     {
 
-        if(Auth::guard('web')->user()){
+        if (Auth::guard('web')->user()) {
 
             if (Session::has('user')) {
-    
+
                 return $next($request);
             }
-    
-    
-            return Redirect::to(URL::to('/'))->with('error', 'Unauthorised');
+
+
+            return Redirect::to(URL::to('/'))->with('error', 'Unautddddhorised');
         }
-        return Redirect::to(URL::to('/'))->with('error', 'Unauthorised');
+        return Redirect::to(URL::to('/'))->with('error', 'Unausssthorised');
     }
 }
