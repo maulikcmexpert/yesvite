@@ -199,24 +199,7 @@ header.login-header {
     -o-border-radius: 6px;
 }
 
-.user-img{
-    width: 40px;
-    height: 40px;
-    border-radius: 100%;
-    -webkit-border-radius: 100%;
-    -moz-border-radius: 100%;
-    -ms-border-radius: 100%;
-    -o-border-radius: 100%;
-}
 
-.user-img img{
-    /* object-fit: contain; */
-    border-radius: 100%;
-    -webkit-border-radius: 100%;
-    -moz-border-radius: 100%;
-    -ms-border-radius: 100%;
-    -o-border-radius: 100%;
-}
 
 .header-dropdown .dropdown-menu{
     transform: translate(-35px, 15px) !important;

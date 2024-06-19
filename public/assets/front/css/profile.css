@@ -46,6 +46,10 @@
 
 }
 
+.profile-img .user-img h5{
+    font-size: 30px;
+}
+
 .profile-img .bg-img{
     width: 100%;
     border-top-left-radius: 20px;
