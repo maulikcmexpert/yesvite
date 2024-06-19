@@ -423,7 +423,7 @@ $("#new_message").on("keypress", async function (e) {
         const currentUserId = senderUser;
         const contactId = $("#selected-user-id").val();
         const contactName = $(".selected-user-name").html();
-        const receiverProfile = "https://example.com/path/to/profile.jpg";
+        const receiverProfile = $(".selected-user-img").attr("src");
 
         const conversationId = await findOrCreateConversation(
             currentUserId,
