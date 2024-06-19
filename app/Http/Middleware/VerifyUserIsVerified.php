@@ -30,6 +30,8 @@ class VerifyUserIsVerified
                 return $next($request);
             }
 
+            Auth::guard('web')->logout();
+
 
             return Redirect::to(URL::to('/'))->with('error', 'Unauthorised');
         }
