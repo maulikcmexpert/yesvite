@@ -235,7 +235,7 @@ class EventController extends Controller
 
             ->addColumn('total_posts', function ($row) {
 
-                $totalPosts = EventPost::where('user_id', $row->user_id)->count();
+                $totalPosts = EventPost::where(['user_id' => $row->user_id, 'event_id' => $event_id])->count();
                 return $totalPosts;
             })
 
