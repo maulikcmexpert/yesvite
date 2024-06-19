@@ -10456,8 +10456,8 @@ class ApiControllerv2 extends Controller
 
                 $userDetail['id'] = $value->user->id;
 
-                $userDetail['first_name'] = $value->user->firstname;
-                $userDetail['last_name'] = $value->user->lastname;
+                $userDetail['first_name'] = (!empty($value->user->firstname) || $value->user->firstname != NULL) ? $value->user->firstname : "";
+                $userDetail['last_name'] = (!empty($value->user->lastname) || $value->user->lastname != NULL) ? $value->user->lastname : "";
 
                 $userDetail['profile'] = (!empty($value->user->profile) || $value->user->profile != NULL) ? asset('public/storage/profile/' . $value->user->profile) : "";
 
