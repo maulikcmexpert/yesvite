@@ -193,7 +193,7 @@
                             <div class="contact-img">
 
 
-                                @if($Session::get('secondary_user')['secondary_profile'] != "")
+                                @if(Session::get('secondary_user')['secondary_profile'] != "")
                                 <img src="{{Session::get('secondary_user')['secondary_profile'] }}" alt="user-img" class="UserImg">
                                 @else
 
