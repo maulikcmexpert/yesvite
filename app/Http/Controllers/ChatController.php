@@ -6,6 +6,8 @@ use App\Http\Controllers\admin\Auth;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Kreait\Laravel\Firebase\Facades\Firebase;
+use DB;
+use Illuminate\Support\Facades\Redis;
 
 class ChatController extends Controller
 {
@@ -24,39 +26,45 @@ class ChatController extends Controller
     }
     public function index()
     {
-        $userId = decrypt(session()->get('user')['id']);
+
+        $userId = auth()->id();
         $userData = User::findOrFail($userId);
         // dd($userData);
+        $userName =  $userData->firstname . ' ' . $userData->lastname;
         $updateData = [
             'userChatId' => '',
-            'userCountryCode' => $userData->country_code,
+            'userCountryCode' => (string)$userData->country_code,
             'userGender' => 'male',
-            'userId' => $userId,
+            'userEmail' => $userData->email,
+            'userId' => (string)$userId,
             'userLastSeen' => now()->timestamp * 1000, // Convert to milliseconds
-            'userName' => $userData->firstname . ' ' . $userData->lastname,
-            'userPhone' => $userData->phone_number,
+            'userName' => $userName,
+            'userPhone' => (string)$userData->phone_number,
             'userProfile' => request()->server('HTTP_HOST') . '/public/storage/profile/' . $userData->profile,
-            'userStatus' => 'online',
-            'userToken' => '',
+            'userStatus' => 'Online',
             'userTypingStatus' => 'Not typing...'
         ];
 
         // Create a new user node with the userId
-        $this->usersReference->getChild($userId)->set($updateData);
+        $usersRef = $this->usersReference->getChild((string)$userId)->set($updateData);
+        // $newUserId = $usersRef->getKey();
         // $messages = $this->chatRoom->getValue();
         // dd($id);
-        $reference = $this->firebase->getReference('overview/' . 56);
+        $reference = $this->firebase->getReference('overview/' . $userId);
         $messages = $reference->getValue();
-
         $title = 'Home';
         $page = 'front.chat.messages';
         $css = 'message.css';
-
+        if ($messages == null) {
+            $messages = [];
+        }
         return view('layout', compact(
             'title',
             'page',
             'css',
-            'messages'
+            'messages',
+            'userId',
+            'userName'
         ));
     }
 
@@ -72,16 +80,48 @@ class ChatController extends Controller
 
         return response()->json(['success' => true, 'message' => 'Message sent successfully']);
     }
+
+    public function getMessages($userId1, $userId2)
+    {
+        $messagesRef = $this->firebase->getReference('Messages');
+        $messages = $messagesRef->getValue();
+
+        $result = [];
+
+        foreach ($messages as $key => $message) {
+            if (isset($message['users']) && in_array($userId1, $message['users']) && in_array($userId2, $message['users'])) {
+                $result[$key] = $message;
+            }
+        }
+
+        return $result;
+    }
+
     public function getChat(Request $request)
     {
-        $message = [
-            'sender' => $request->input('sender'),
-            'message' => $request->input('message'),
-            'timestamp' => now()->timestamp,
-        ];
+        $userId = auth()->id();
+        // $chatLists = $this->getMessages($userId, $request->user_id);
+        $chatLists = $this->getMessages($userId, $request->user_id);
 
-        $this->chatRoom->push($message);
+        // dd($chatLists);
+        return view('front.chat.ajaxList', compact('chatLists', 'userId'));
+    }
+    public function getConversation(Request $request)
+    {
+        $message = $request->messages;
+        return view('front.chat.conversationList', compact('message'));
+    }
 
-        return response()->json(['success' => true, 'message' => 'Message sent successfully']);
+    public function autocomplete(Request $request)
+    {
+        $search = $request->get('term');
+        $currentUserId = auth()->id();
+
+        $users = User::select('id', DB::raw("CONCAT(firstname, ' ', lastname) as name"), 'profile', 'email')
+            ->where(DB::raw("CONCAT(firstname, ' ', lastname)"), 'LIKE', '%' . $search . '%')
+            ->where('id', '!=', $currentUserId)
+            ->get();
+
+        return response()->json($users);
     }
 }
