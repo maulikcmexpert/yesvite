@@ -20,6 +20,9 @@ return new class extends Migration
             $table->string('facebook_secret_id')->nullable();
             $table->string('apple_client_id')->nullable();
             $table->string('apple_secret_id')->nullable();
+            $table->string('twilio_account_sid')->nullable();
+            $table->string('twilio_auth_token')->nullable();
+            $table->string('twilio_number')->nullable();
             $table->timestamps();
         });
     }
