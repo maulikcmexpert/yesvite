@@ -52,7 +52,7 @@ class ContactController extends Controller
         $formatted_date = $date->format('F, Y');
         $user['join_date'] = $formatted_date;
 
-        $yesviteUser = User::where('user', '=', '1')->where('id', '!=', $id)->paginate(10);
+        $yesviteUser = User::where('app_user', '=', '1')->where('id', '!=', $id)->paginate(10);
         $yesviteGroups = Group::withCount('groupMembers')->paginate(10);
         $yesvitePhones = User::where(['is_user_phone_contact' => '1', 'parent_user_phone_contact' => $id])->get();
 
