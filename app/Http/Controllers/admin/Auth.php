@@ -83,12 +83,14 @@ class Auth extends Controller
         $checkOtp = Admin::where(['id' => $id, 'otp' => $request->verification_otp])->first();
 
         if ($checkOtp != null) {
+
             $sessionArray = ['id' => $checkOtp->id, 'name' => $checkOtp->name];
             Session::put(['admin' => $sessionArray]);
             if (Session::has('admin')) {
 
                 return Redirect::to(URL::to('/admin/dashboard'))->with('success', 'Loggedin successfully!');;
             }
+
             return Redirect::to(URL::to('/admin'))->with('error', 'Invalid credentials!');;
         }
         return Redirect::to(URL::to('admin/factor_authenticate', $request->adminId))->with('error', 'Invalid verification code');
