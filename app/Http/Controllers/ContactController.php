@@ -52,7 +52,7 @@ class ContactController extends Controller
         $formatted_date = $date->format('F, Y');
         $user['join_date'] = $formatted_date;
 
-        $yesviteUser = User::where('app_user', '=', '1')->where('id', '!=', $id)->where(['is_user_phone_contact' => '0'])->orderBy('firstname')->paginate(10);
+        $yesviteUser = User::where('id', '!=', $id)->where(['is_user_phone_contact' => '0'])->orderBy('firstname')->paginate(10);
         $yesviteGroups = Group::withCount('groupMembers')->paginate(10);
         $yesvitePhones = User::where(['is_user_phone_contact' => '1', 'parent_user_phone_contact' => $id])->paginate(10);
 
@@ -76,7 +76,7 @@ class ContactController extends Controller
         $searchName = $request->search_name;
 
         if ($request->ajax()) {
-            $query = User::where('app_user', '=', '1')->where('id', '!=', $id)->where(['is_user_phone_contact' => '0'])->orderBy('firstname');
+            $query = User::where('id', '!=', $id)->where(['is_user_phone_contact' => '0'])->orderBy('firstname');
 
             if ($searchName) {
                 $query->where(function ($q) use ($searchName) {
