@@ -194,7 +194,7 @@ $(document).ready(function () {
         bgCroppie
             .result({
                 type: "base64",
-                size: { width: 964, height: 200 },
+                size: { width: 780, height: 200 },
             })
             .then(function (base64) {
                 console.log(base64);

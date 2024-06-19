@@ -17,7 +17,7 @@ $initials = strtoupper($value->firstname[0]) . strtoupper($value->lastname[0]);
         </div>
         <div class="text-start">
             <h5>{{$value->firstname.' '.$value->lastname}}</h5>
-
+            <h5><?= $initials ?></h5>
             <div>
                 <a href="mailto:{{$value->email}}">
                     <svg class="me-1" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
