@@ -199,9 +199,9 @@
 
                                 @php
 
-                                $initials = strtoupper($profileData->firstname[0]) . strtoupper($profileData->lastname[0]);
+                                $initials = strtoupper(Session::get('secondary_user')['first_name']) . strtoupper(Session::get('secondary_user')['last_name']);
 
-                                $fontColor = "fontcolor".strtoupper($profileData->firstname[0])
+                                $fontColor = "fontcolor".strtoupper(Session::get('secondary_user')['first_name'])
                                 @endphp
 
                                 <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
