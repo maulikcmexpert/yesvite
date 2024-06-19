@@ -196,7 +196,6 @@
                                 @if(Session::get('secondary_user')['secondary_profile'] != "")
                                 <img src="{{Session::get('secondary_user')['secondary_profile'] }}" alt="user-img" class="UserImg">
                                 @else
-
                                 @php
 
                                 $initials = strtoupper(Session::get('secondary_user')['first_name'][0]) . strtoupper(Session::get('secondary_user')['last_name'][0]);
