@@ -65,16 +65,8 @@
                                     @if($user->profile!="")
                                     <img src="{{$user->profile}}" alt="user-img" class="UserImg">
                                     @else
-<<<<<<< HEAD
                                     @php $initials = strtoupper($user->firstname[0]) . strtoupper($user->lastname[0]); @endphp
                                     <h5> {{ $initials }}</h5>
-=======
-                                    @php $initials = strtoupper($user->firstname[0]) . strtoupper($user->lastname[0]);
-                                    $fontColor = "fontcolor" . strtoupper($user->firstname[0]);
-                                    @endphp
-                                    <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
-
->>>>>>> 331274191305f6f953b48d9bc72bd5b5f86e3091
                                     @endif
                                 </div>
                                 <input type="file" id="choose-file" name="file" accept="image/*" />
