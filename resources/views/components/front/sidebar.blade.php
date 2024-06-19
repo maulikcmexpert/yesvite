@@ -163,7 +163,20 @@
                     <div class="users-data">
                         <div class="d-flex align-items-start">
                             <div class="contact-img">
-                                <img src="{{$profileData->profile}}" alt="contact-img" class="UserImg">
+
+
+                                @if($profileData->profile != "")
+                                <img src="{{$profileData->profile }}" alt="user-img" class="UserImg">
+                                @else
+
+                                @php $initials = strtoupper($profileData->firstname[0]) . strtoupper($profileData->lastname[0]);
+
+                                $fontColor = "fontcolor".strtoupper($profileData->firstname[0])
+                                @endphp
+
+                                <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
+                                @endif
+
                             </div>
                             <div class="text-start">
                                 <h5>{{$profileData->firstname.' '.$profileData->lastname}}</h5>
