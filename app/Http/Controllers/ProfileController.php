@@ -51,7 +51,7 @@ class ProfileController extends Controller
             ]
         )->findOrFail($id);
         $user['events'] =   Event::where(['user_id' => $user->id, 'is_draft_save' => '0'])->count();
-        $user['profile'] = ($user->profile != null) ? asset('storage/profile/' . $user->profile) : asset('storage/profile/no_profile.png');
+        $user['profile'] = ($user->profile != null) ? asset('storage/profile/' . $user->profile) : "";
         $user['bg_profile'] = ($user->bg_profile != null) ? asset('storage/bg_profile/' . $user->bg_profile) : asset('assets/front/image/Frame 1000005835.png');
         $date = Carbon::parse($user->created_at);
         $formatted_date = $date->format('F, Y');
@@ -93,7 +93,7 @@ class ProfileController extends Controller
         )->findOrFail($id);
         $title = 'Public Profile';
         $page = 'front.public_profile';
-        $user['profile'] = ($user->profile != null) ? asset('storage/profile/' . $user->profile) : asset('storage/profile/no_profile.png');
+        $user['profile'] = ($user->profile != null) ? asset('storage/profile/' . $user->profile) : "";
         $user['bg_profile'] = ($user->bg_profile != null) ? asset('storage/bg_profile/' . $user->bg_profile) : asset('assets/front/image/Frame 1000005835.png');
         $date = Carbon::parse($user->created_at);
         $formatted_date = $date->format('F, Y');
@@ -124,7 +124,7 @@ class ProfileController extends Controller
         $title = 'Edit Profile';
         $page = 'front.edit_profile';
         $js = ['profile'];
-        $user['profile'] = ($user->profile != null) ? asset('storage/profile/' . $user->profile) : asset('storage/profile/no_profile.png');
+        $user['profile'] = ($user->profile != null) ? asset('storage/profile/' . $user->profile) : "";
         $user['bg_profile'] = ($user->bg_profile != null) ? asset('storage/bg_profile/' . $user->bg_profile) : asset('assets/front/image/Frame 1000005835.png');
         return view('layout', compact(
             'title',
@@ -342,7 +342,7 @@ class ProfileController extends Controller
         $page = 'front.change_password';
         $js = ['profile'];
 
-        $user['profile'] = ($user->profile != null) ? asset('storage/profile/' . $user->profile) : asset('storage/profile/no_profile.png');
+        $user['profile'] = ($user->profile != null) ? asset('storage/profile/' . $user->profile) : "";
         $user['bg_profile'] = ($user->bg_profile != null) ? asset('storage/bg_profile/' . $user->bg_profile) : asset('assets/front/image/Frame 1000005835.png');
         return view('layout', compact(
             'title',
@@ -413,7 +413,7 @@ class ProfileController extends Controller
         $title = 'Profile Privacy';
         $page = 'front.privacy';
         $js = ['profile'];
-        $user['profile'] = ($user->profile != null) ? asset('storage/profile/' . $user->profile) : asset('storage/profile/no_profile.png');
+        $user['profile'] = ($user->profile != null) ? asset('storage/profile/' . $user->profile) : "";
         $user['bg_profile'] = ($user->bg_profile != null) ? asset('storage/bg_profile/' . $user->bg_profile) : asset('assets/front/image/Frame 1000005835.png');
 
         if ($user->user_profile_privacy->isNotEmpty()) {

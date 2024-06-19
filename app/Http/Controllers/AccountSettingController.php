@@ -37,7 +37,7 @@ class AccountSettingController extends Controller
         $title = 'Account Settings';
         $page = 'front.account_setting';
         $js = ['account_setting'];
-        $user['profile'] = ($user->profile != null) ? asset('storage/profile/' . $user->profile) : asset('storage/profile/no_profile.png');
+        $user['profile'] = ($user->profile != null) ? asset('storage/profile/' . $user->profile) :"";
         $user['bg_profile'] = ($user->bg_profile != null) ? asset('storage/bg_profile/' . $user->bg_profile) : asset('assets/front/image/Frame 1000005835.png');
         $date = Carbon::parse($user->created_at);
         $formatted_date = $date->format('F, Y');
@@ -145,7 +145,7 @@ class AccountSettingController extends Controller
             $title = 'Notification Settings';
             $page = 'front.notification_setting';
             $js = ['account_setting'];
-            $user['profile'] = ($user->profile != null) ? asset('storage/profile/' . $user->profile) : asset('storage/profile/no_profile.png');
+            $user['profile'] = ($user->profile != null) ? asset('storage/profile/' . $user->profile) :"";
             $user['bg_profile'] = ($user->bg_profile != null) ? asset('storage/bg_profile/' . $user->bg_profile) : asset('assets/front/image/Frame 1000005835.png');
             $date = Carbon::parse($user->created_at);
             $formatted_date = $date->format('F, Y');
@@ -220,7 +220,7 @@ class AccountSettingController extends Controller
             $title = 'Message Privacy';
             $page = 'front.message_privacy';
             $js = ['account_setting'];
-            $user['profile'] = ($user->profile != null) ? asset('storage/profile/' . $user->profile) : asset('storage/profile/no_profile.png');
+            $user['profile'] = ($user->profile != null) ? asset('storage/profile/' . $user->profile) :"";
             $user['bg_profile'] = ($user->bg_profile != null) ? asset('storage/bg_profile/' . $user->bg_profile) : asset('assets/front/image/Frame 1000005835.png');
             $date = Carbon::parse($user->created_at);
             $formatted_date = $date->format('F, Y');

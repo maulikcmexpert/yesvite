@@ -46,15 +46,15 @@ class ContactController extends Controller
 
         $user['events'] =   Event::where(['user_id' => $user->id, 'is_draft_save' => '0'])->count();
 
-        $user['profile'] = ($user->profile != null) ? asset('storage/profile/' . $user->profile) : asset('storage/profile/no_profile.png');
+        $user['profile'] = ($user->profile != null) ? asset('storage/profile/' . $user->profile) : "";
         $user['bg_profile'] = ($user->bg_profile != null) ? asset('storage/bg_profile/' . $user->bg_profile) : asset('assets/front/image/Frame 1000005835.png');
         $date = Carbon::parse($user->created_at);
         $formatted_date = $date->format('F, Y');
         $user['join_date'] = $formatted_date;
 
-        $yesviteUser = User::where('app_user', '=', '1')->where('id', '!=', $id)->paginate(10);
+        $yesviteUser = User::where('id', '!=', $id)->where(['is_user_phone_contact' => '0'])->orderBy('firstname')->paginate(10);
         $yesviteGroups = Group::withCount('groupMembers')->paginate(10);
-        $yesvitePhones = User::where('parent_user_phone_contact', '=', $id)->get();
+        $yesvitePhones = User::where(['is_user_phone_contact' => '1', 'parent_user_phone_contact' => $id])->paginate(10);
 
 
         return view('layout', compact(
@@ -76,7 +76,7 @@ class ContactController extends Controller
         $searchName = $request->search_name;
 
         if ($request->ajax()) {
-            $query = User::where('app_user', '=', '1')->where('id', '!=', $id);
+            $query = User::where('id', '!=', $id)->where(['is_user_phone_contact' => '0'])->orderBy('firstname');
 
             if ($searchName) {
                 $query->where(function ($q) use ($searchName) {
@@ -118,7 +118,7 @@ class ContactController extends Controller
             $searchPhone = $request->input('search_phone');
 
             if ($request->ajax()) {
-                $query = User::where('parent_user_phone_contact', '=', $id);
+                $query = User::where(['is_user_phone_contact' => '1', 'parent_user_phone_contact' => $id]);
 
                 if ($searchPhone) {
                     $query->where(function ($q) use ($searchPhone) {
@@ -149,7 +149,7 @@ class ContactController extends Controller
                 'Fname' => 'required|string', // max 2MB
                 'Lname' => 'required|string', // max 2MB
                 'phone_number' => ['present', 'nullable', 'numeric', 'regex:/^\d{10,15}$/', Rule::unique('users')->ignore(decrypt($request->id))],
-               'email' => ['required', 'email', new EmailExists], // max 2MB
+                'email' => ['required', 'email', new EmailExists], // max 2MB
 
             ], [
                 'Fname.required' => 'Please enter First Name',
@@ -253,17 +253,17 @@ class ContactController extends Controller
         }
     }
 
-        public function checkNewContactEmail(Request $request)
-        {
-            $email = $request->input('email');
-            $exists = User::where('email', $email)->exists();
+    public function checkNewContactEmail(Request $request)
+    {
+        $email = $request->input('email');
+        $exists = User::where('email', $email)->exists();
 
-            if ($exists) {
-                return response()->json(false);
-            } else {
-                return response()->json(true);
-            }
+        if ($exists) {
+            return response()->json(false);
+        } else {
+            return response()->json(true);
         }
+    }
     /**
      * Show the form for creating a new resource.
      */

@@ -1,8 +1,27 @@
+@if($yesviteUser->isEmpty())
+<div class="users-data">
+
+    <div class="md-5">
+        <h5>No Records Found..</h5>
+    </div>
+</div>@else
+
 @foreach($yesviteUser as $value)
+<?php
+$initials = strtoupper($value->firstname[0]) . strtoupper($value->lastname[0]);
+?>
 <div class="users-data">
     <div class="d-flex align-items-start">
         <div class="contact-img">
-            <img src="{{ ($value->profile != null) ? asset('storage/profile/' . $value->profile) : asset('storage/profile/no_profile.png') }}" alt="contact-img">
+            <?php
+            if($value->profile != null){?>
+
+                <img src="{{ asset('storage/profile/' . $value->profile)}}" alt="contact-img">
+            <?php }else{ ?>
+            
+                <h5><?= $initials ?></h5>
+            <?php }?>
+            
         </div>
         <div class="text-start">
             <h5>{{$value->firstname.' '.$value->lastname}}</h5>
@@ -28,3 +47,4 @@
     <a href="#" class="btn edit-contact edit_contact" id="edit_contact" data-bs-toggle="modal" data-bs-target="#myModal" data-id="{{$value->id}}">Edit Contact</a>
 </div>
 @endforeach
+@endif

@@ -90,7 +90,15 @@
                             <div class="product-scroll" id="product-scroll-groups">
 
                                 <div class="user-contacts" id="yesvitePhones">
+                                    @if($yesvitePhones->isEmpty())
+                                    <form action="{{ route('import.csv') }}" method="POST" enctype="multipart/form-data">
+                                        @csrf
+                                        <input type="file" name="csv_file">
+                                        <button type="submit">Import CSV</button>
+                                    </form>
+                                    @else
                                     @include('front.ajax_phones', ['yesvitePhones' => $yesvitePhones])
+                                    @endif
                                 </div>
                             </div>
 

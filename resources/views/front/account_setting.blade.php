@@ -23,7 +23,12 @@
                     <div class="account-data">
                         <div class="d-flex align-items-center">
                             <div class="user-img">
+                                @if($user->profile!="")
                                 <img src="{{$user->profile}}" alt="user-img">
+                                @else
+                                @php $initials = strtoupper($user->firstname[0]) . strtoupper($user->lastname[0]); @endphp
+                                <h5> {{ $initials }}</h5>
+                                @endif
                             </div>
                             <div class="user-name">
                                 <div class="d-flex justify-content-center align-items-center">
