@@ -9,19 +9,20 @@
 @foreach($yesviteUser as $value)
 <?php
 $initials = strtoupper($value->firstname[0]) . strtoupper($value->lastname[0]);
+$fontColor = "fontcolor" . strtoupper($value->firstname[0]);
 ?>
 <div class="users-data">
     <div class="d-flex align-items-start">
         <div class="contact-img">
             <?php
-            if($value->profile != null){?>
+            if ($value->profile != null) { ?>
 
                 <img src="{{ asset('storage/profile/' . $value->profile)}}" alt="contact-img">
-            <?php }else{ ?>
-            
-                <h5><?= $initials ?></h5>
-            <?php }?>
-            
+            <?php } else { ?>
+
+                <h5 class="<?= $fontColor ?>"><?= $initials ?></h5>
+            <?php } ?>
+
         </div>
         <div class="text-start">
             <h5>{{$value->firstname.' '.$value->lastname}}</h5>

@@ -24,11 +24,13 @@
                         <div class="profile-img">
                             <img src="{{$user->bg_profile}}" alt="" class="bg-img">
                             <div class="user-img">
-                            @if($user->profile != "")     
+                                @if($user->profile != "")
                                 <img src="{{$user->profile}}" alt="user-img">
                                 @else
-                                @php $initials = strtoupper($user->firstname[0]) . strtoupper($user->lastname[0]); @endphp
-                                <h5> {{ $initials }}</h5>
+                                @php $initials = strtoupper($user->firstname[0]) . strtoupper($user->lastname[0]);
+                                $fontColor = "fontcolor" . strtoupper($user->firstname[0]);
+                                @endphp
+                                <h5 class="{{$fontColor}}"> {{ $initials }}</h5>
                                 @endif
                             </div>
                         </div>

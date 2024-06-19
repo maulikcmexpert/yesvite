@@ -73,27 +73,27 @@
                      </ul>
                  </div>
                  <?php
-                         $userProfile = "";
-                    if(Auth::guard('web')->user()){
+                    $userProfile = "";
+                    if (Auth::guard('web')->user()) {
 
                         $userprofile = Auth::guard('web')->user();
-    
-                        if ($userprofile->profile != NULL || $userprofile->profile != "") {
-                            $image = asset("storage/profile/". $userprofile->profile);
-                            $userProfile =  '<img src="'.$image.'" class="UserImg" alt="">';
-                        }else{
-                            $initials = strtoupper($userprofile->firstname[0]) . strtoupper($userprofile->lastname[0]);
-                            
-                            $userProfile = "<h5>". $initials ."</h5>";
-                            ?>
 
-                     <?php   }
+                        if ($userprofile->profile != NULL || $userprofile->profile != "") {
+                            $image = asset("storage/profile/" . $userprofile->profile);
+                            $userProfile =  '<img src="' . $image . '" class="UserImg" alt="">';
+                        } else {
+                            $initials = strtoupper($userprofile->firstname[0]) . strtoupper($userprofile->lastname[0]);
+                            $fontColor = "fontcolor" . strtoupper($userprofile->firstname[0]);
+                            $userProfile = "<h5 class='<?= $fontColor ?>' >" . $initials . "</h5>";
+                    ?>
+
+                 <?php   }
                     }
 
                     ?>
                  <a href="{{ route('profile')}}" class="user-img">
 
-                    {!! $userProfile !!}
+                     {!! $userProfile !!}
 
                  </a>
              </div>
