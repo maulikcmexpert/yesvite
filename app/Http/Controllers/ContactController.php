@@ -54,7 +54,7 @@ class ContactController extends Controller
 
         $yesviteUser = User::where('app_user', '=', '1')->where('id', '!=', $id)->where(['is_user_phone_contact' => '0'])->orderBy('firstname')->paginate(10);
         $yesviteGroups = Group::withCount('groupMembers')->paginate(10);
-        $yesvitePhones = User::where(['is_user_phone_contact' => '1', 'parent_user_phone_contact' => $id])->get();
+        $yesvitePhones = User::where(['is_user_phone_contact' => '1', 'parent_user_phone_contact' => $id])->paginate(10);
 
 
         return view('layout', compact(
