@@ -177,6 +177,9 @@ class AuthController extends Controller
 
                 $sessionArray = [
                     'id' => encrypt($user->id),
+
+                    'first_name' => $user->firstname,
+                    'last_name' => $user->lastname,
                     'username' => $user->firstname . ' ' . $user->lastname,
                     'email' => $user->email,
 
@@ -277,6 +280,8 @@ class AuthController extends Controller
 
                     $sessionAlreadyArray = [
                         'id' => encrypt($alreadyLog->id),
+                        'first_name' => $alreadyLog->firstname,
+                        'last_name' => $alreadyLog->lastname,
                         'secondary_username' => $alreadyLog->firstname . ' ' . $alreadyLog->lastname,
                         'secondary_email' => $alreadyLog->email,
                         'secondary_profile' => $alreadyLog->profile,
@@ -288,6 +293,8 @@ class AuthController extends Controller
 
                 $sessionArray = [
                     'id' => encrypt($user->id),
+                    'first_name' => $user->firstname,
+                    'last_name' => $user->lastname,
                     'username' => $user->firstname . ' ' . $user->lastname,
                     'email' => $user->email,
                     'profile' => ($user->profile != NULL || $user->profile != "") ? asset('storage/profile/' . $user->profile) : ""
@@ -316,6 +323,8 @@ class AuthController extends Controller
 
                 $userData = [
                     'username' => $user->firstname . ' ' . $user->lastname,
+                    'first_name' => $user->firstname,
+                    'last_name' => $user->lastname,
                     'email' => $user->email,
                     'token' => $randomString,
                     'is_first_login' => $user->is_first_login
