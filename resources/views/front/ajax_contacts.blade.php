@@ -1,4 +1,15 @@
+@if($yesviteUser->isEmpty())
+<div class="users-data">
+
+    <div class="md-5">
+        <h5>No Records Found..</h5>
+    </div>
+</div>@else
+
 @foreach($yesviteUser as $value)
+<?php
+$initials = strtoupper($value->firstname[0]) . strtoupper($value->lastname[0]);
+?>
 <div class="users-data">
     <div class="d-flex align-items-start">
         <div class="contact-img">
@@ -6,6 +17,7 @@
         </div>
         <div class="text-start">
             <h5>{{$value->firstname.' '.$value->lastname}}</h5>
+
             <div>
                 <a href="mailto:{{$value->email}}">
                     <svg class="me-1" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -28,3 +40,4 @@
     <a href="#" class="btn edit-contact edit_contact" id="edit_contact" data-bs-toggle="modal" data-bs-target="#myModal" data-id="{{$value->id}}">Edit Contact</a>
 </div>
 @endforeach
+@endif
