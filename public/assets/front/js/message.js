@@ -115,7 +115,6 @@ function handleNewConversation(snapshot) {
         } else {
             badgeElement.removeClass("d-none");
         }
-        conversationElement.prependTo(".chat-list");
     } else {
         // Add new conversation element
         $.ajax({
@@ -123,7 +122,7 @@ function handleNewConversation(snapshot) {
             data: { messages: newConversation },
             method: "post",
             success: function (res) {
-                $(".chat-list").append(res);
+                $(".chat-list").prepend(res);
             },
         });
     }
@@ -261,6 +260,8 @@ $(".send-message").on("keypress", async function (e) {
                 timeStamp: Date.now(),
             });
         }
+        const conversationElement = $(`.conversation-${selectedMessageId}`);
+        conversationElement.prependTo(".chat-list");
     }
 });
 
