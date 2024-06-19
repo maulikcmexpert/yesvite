@@ -447,6 +447,7 @@ ul.nav-tabs .nav-link:focus{
 
 .input-form .iti .phone_number{
     /* visibility: hidden; */
+    font-size: 0;
     width: 100%;
     outline: 0 !important;
 }
@@ -468,8 +469,42 @@ ul.nav-tabs .nav-link:focus{
     font-size: 13px;
 }
 
+.user-img{
+    max-width: 100%;
+    width: 40px;
+    height: 40px;
+    border-radius: 100px;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    -ms-border-radius: 100px;
+    -o-border-radius: 100px;
+}
 
+.user-img img{
+    /* object-fit: contain; */
+    border-radius: 100%;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    -ms-border-radius: 100%;
+    -o-border-radius: 100%;
+}
 
+.user-img h5{
+    border-radius: 100%;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    -ms-border-radius: 100%;
+    -o-border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    margin-bottom: 0;
+    border: 1px solid transparent;
+    background: linear-gradient(135deg, rgb(255, 247, 240), rgb(255, 200, 163)) rgb(14, 114, 207);
+    color: rgb(212, 56, 13);
+    font-size: 16px;
+}
 
 
 /* ======== Responsive ========= */
