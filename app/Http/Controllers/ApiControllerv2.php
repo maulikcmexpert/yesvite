@@ -10525,109 +10525,110 @@ class ApiControllerv2 extends Controller
             ]);
         }
 
-        try {
-            if (!empty($input['guest_list'])) {
+        // try {
+        if (!empty($input['guest_list'])) {
 
 
-                DB::beginTransaction();
-                $id = 0;
-                foreach ($input['guest_list'] as $value) {
+            DB::beginTransaction();
+            $id = 0;
+            foreach ($input['guest_list'] as $value) {
 
-                    if ($value['id'] == "0") {
-                        $addNewUser = new User;
-                        $addNewUser->firstname = $value['first_name'];
-                        $addNewUser->email = $value['email'];
-                        $addNewUser->country_code = '1';
-                        $addNewUser->phone_number = $value['phone_number'];
-                        $addNewUser->prefer_by = $value['prefer_by'];
+                if ($value['id'] == "0") {
+                    $addNewUser = new User;
+                    $addNewUser->firstname = $value['first_name'];
+                    $addNewUser->email = $value['email'];
+                    $addNewUser->country_code = '1';
+                    $addNewUser->phone_number = $value['phone_number'];
+                    $addNewUser->prefer_by = $value['prefer_by'];
 
-                        if ($addNewUser->save()) {
+                    if ($addNewUser->save()) {
 
-                            EventInvitedUser::create([
-                                'event_id' => $input['event_id'],
-                                'prefer_by' => $value['prefer_by'],
-                                'user_id' => $addNewUser->id
-                            ]);
-                        }
-                        $id = $addNewUser->id;
-                    } else {
-
-                        $checkUserInvitation = EventInvitedUser::with(['user'])->where(['event_id' => $input['event_id']])->get()->pluck('user_id')->toArray();
-
-                        $id = $value['id'];
-                        if (!in_array($value['id'], $checkUserInvitation)) {
-
-                            EventInvitedUser::create([
-
-                                'event_id' => $input['event_id'],
-
-                                'prefer_by' => $value['prefer_by'],
-
-                                'user_id' => $value['id']
-
-                            ]);
-                        } else {
-                            $updateUser =  EventInvitedUser::with('user')->where(['event_id' => $input['event_id'], 'user_id' => $id])->first();
-                            $updateUser->prefer_by = $value['prefer_by'];
-                            $updateUser->save();
-                        }
+                        EventInvitedUser::create([
+                            'event_id' => $input['event_id'],
+                            'prefer_by' => $value['prefer_by'],
+                            'user_id' => $addNewUser->id
+                        ]);
                     }
-                    if ($value['prefer_by'] == 'email') {
+                    $id = $addNewUser->id;
+                } else {
 
-                        $email = $value['email'];
+                    $checkUserInvitation = EventInvitedUser::with(['user'])->where(['event_id' => $input['event_id']])->get()->pluck('user_id')->toArray();
 
-                        $eventInfo = Event::with(['user', 'event_image'])->where('id', $input['event_id'])->first();
-                        $eventData = [
-                            'event_name' => $eventInfo->event_name,
-                            'hosted_by' => $eventInfo->hosted_by,
-                            'profileUser' => ($eventInfo->user->profile != NULL || $eventInfo->user->profile != "") ? $eventInfo->user->profile : "no_profile.png",
-                            'event_image' => ($eventInfo->event_image->isNotEmpty()) ? $eventInfo->event_image[0]->image : "no_image.png",
-                            'date' =>  date('l, M. jS', strtotime($eventInfo->start_date)),
-                            'time' => '1PM',
-                            'address' => $eventInfo->event_location_name . ' ' . $eventInfo->address_1 . ' ' . $eventInfo->address_2 . ' ' . $eventInfo->state . ' ' . $eventInfo->city . ' - ' . $eventInfo->zip_code,
-                        ];
+                    $id = $value['id'];
+                    if (!in_array($value['id'], $checkUserInvitation)) {
 
+                        EventInvitedUser::create([
 
+                            'event_id' => $input['event_id'],
 
-                        // $checkEmail =  emailChecker($email);
+                            'prefer_by' => $value['prefer_by'],
 
-                        // if ($checkEmail == 'ok') {
+                            'user_id' => $value['id']
 
-                        $invitation_sent_status =  EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $id])->first();
-                        $invitation_sent_status->invitation_sent = '1';
-                        $invitation_sent_status->save();
-                        if ($invitation_sent_status->user->app_user == '1') {
-                            Notification::where(['user_id' => $id, 'sender_id' => $user->id, 'event_id' => $input['event_id']])->delete();
-                            $notification_message = "You have invited in " . $eventInfo->event_name;
-                            $notification = new Notification;
-                            $notification->event_id = $input['event_id'];
-                            $notification->user_id = $id;
-                            $notification->notification_type = 'invite';
-                            $notification->sender_id = $user->id;
-                            $notification->notification_message = $notification_message;
-                            $notification->save();
-                        }
-                        // } else {
-                        //     $faildinvitation_sent_status =  EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $id])->first();
-                        //     $faildinvitation_sent_status->invitation_sent = '0';
-                        //     $faildinvitation_sent_status->save();
-                        // }
-                        dispatch(new sendInvitation(array($email, $eventData)));
+                        ]);
+                    } else {
+                        $updateUser =  EventInvitedUser::with('user')->where(['event_id' => $input['event_id'], 'user_id' => $id])->first();
+                        $updateUser->prefer_by = $value['prefer_by'];
+                        $updateUser->save();
                     }
                 }
+                if ($value['prefer_by'] == 'email') {
+
+                    $email = $value['email'];
+
+                    $eventInfo = Event::with(['user', 'event_image'])->where('id', $input['event_id'])->first();
+                    $eventData = [
+                        'event_name' => $eventInfo->event_name,
+                        'hosted_by' => $eventInfo->hosted_by,
+                        'profileUser' => ($eventInfo->user->profile != NULL || $eventInfo->user->profile != "") ? $eventInfo->user->profile : "no_profile.png",
+                        'event_image' => ($eventInfo->event_image->isNotEmpty()) ? $eventInfo->event_image[0]->image : "no_image.png",
+                        'date' =>  date('l, M. jS', strtotime($eventInfo->start_date)),
+                        'time' => '1PM',
+                        'address' => $eventInfo->event_location_name . ' ' . $eventInfo->address_1 . ' ' . $eventInfo->address_2 . ' ' . $eventInfo->state . ' ' . $eventInfo->city . ' - ' . $eventInfo->zip_code,
+                    ];
+
+
+
+                    // $checkEmail =  emailChecker($email);
+
+                    // if ($checkEmail == 'ok') {
+
+                    $invitation_sent_status =  EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $id])->first();
+                    $invitation_sent_status->invitation_sent = '1';
+                    $invitation_sent_status->save();
+                    if ($invitation_sent_status->user->app_user == '1') {
+                        Notification::where(['user_id' => $id, 'sender_id' => $user->id, 'event_id' => $input['event_id']])->delete();
+                        $notification_message = "You have invited in " . $eventInfo->event_name;
+                        $notification = new Notification;
+                        $notification->event_id = $input['event_id'];
+                        $notification->user_id = $id;
+                        $notification->notification_type = 'invite';
+                        $notification->sender_id = $user->id;
+                        $notification->notification_message = $notification_message;
+                        $notification->save();
+                    }
+                    // } else {
+                    //     $faildinvitation_sent_status =  EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $id])->first();
+                    //     $faildinvitation_sent_status->invitation_sent = '0';
+                    //     $faildinvitation_sent_status->save();
+                    // }
+                    dispatch(new sendInvitation(array($email, $eventData)));
+                }
             }
-
-
-            DB::commit();
-
-
-            return response()->json(['status' => 1, 'message' => "invites sent sucessfully"]);
-        } catch (QueryException $e) {
-
-            DB::rollBack();
-
-            return response()->json(['status' => 0, 'message' => "db error"]);
         }
+
+
+        DB::commit();
+
+
+        return response()->json(['status' => 1, 'message' => "invites sent sucessfully"]);
+        // } 
+        // catch (QueryException $e) {
+
+        //     DB::rollBack();
+
+        //     return response()->json(['status' => 0, 'message' => "db error"]);
+        // }
         //  catch (\Exception $e) {
 
         //     DB::rollBack();
