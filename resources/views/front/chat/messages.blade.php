@@ -186,7 +186,11 @@
         $i++;
     @endphp
 @endforeach
-
+@if (empty($messages))
+<input type="hidden" class="selected_id"/>
+<input type="hidden" class="selected_message" />
+<input type="hidden" class="selected_name"/>
+@endif
                         </ul>
                     </div>
                     <div class="chatbox position-relative w-100">
@@ -200,6 +204,7 @@
                                         <div class="user-detail">
                                             <h3 id="selected-user-name">Tiana Dokidis</h3>
                                             <span id="selected-user-lastseen">last seen at 14:29</span>
+                                            <span class="typing"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -405,39 +410,7 @@
                         <p>Please search and add contact to start new message</p>
                     </div> 
 
-                    <!-- =========== second-model =========== -->
-                     {{-- <ul class="chat-list">
-                        <li class="">
-                            <div class="chat-data d-flex">
-                                <div class="user-img position-relative">
-                                    <img class="img-fluid"
-                                        src="https://mehedihtml.com/chatbox/assets/img/user.png" alt="user img">
-                                </div>
-                                <div class="user-detail d-block ms-3">
-                                    <div class="">
-                                        <h3>Tiana Dokidis</h3>
-                                        <a href="phone:987-654-321"><span>tiadokis@gmail.com</span></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="">
-                            <div class="chat-data d-flex">
-                                <div class="user-img position-relative">
-                                    <img class="img-fluid"
-                                        src="https://mehedihtml.com/chatbox/assets/img/user.png" alt="user img">
-                                </div>
-                                <div class="user-detail d-block ms-3">
-                                    <div class="">
-                                        <h3>Tiana Dokidis</h3>
-                                        <a href="phone:987-654-321"><span>987-654-321</span></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>  --}}
-               
-                    <!-- =========== third-model ========= -->
+                  
                     <div class="chat-user d-none">
                         <div class="chat-user-img">
                             <img src="{{asset('assets/front')}}/image/user-img.svg" class="selected-user-img" alt="user-img">
@@ -447,22 +420,16 @@
                     </div>
 
                     <!-- ========= forth-modal ======== -->
-                    {{-- <div class="multi-chat">
+                    <div class="multi-chat d-none">
                         <div class="img-wrp">
-                            <div class="multi-img">
-                                <img src="./assets/image/user-img.svg" alt="">
-                            </div>
-                            <div class="multi-img">
-                                <img src="./assets/image/user-img.svg" alt="">
-                            </div>
-                            <div class="multi-img more-img">
-                                <span>+ 3</span>
-                            </div>
+                           
+                            
+                          
                         </div>
-                        <h5>Tiana Dokidis, Martin Garlic, +3</h5>
+                        <h5 class="selected-user-name">Tiana Dokidis, Martin Garlic, +3</h5>
                         <p>This message will automatically create a group</p>
                         <a href="#">See all user</a>
-                    </div> --}}
+                    </div>
                 </div>
             </div>
 

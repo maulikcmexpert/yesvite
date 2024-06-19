@@ -35,7 +35,7 @@ const database = getDatabase(app);
 const senderUser = $(".senderUser").val();
 const senderUserName = $(".senderUserName").val();
 const base_url = $("#base_url").val();
-
+const userRef = ref(database, `users/${senderUser}`);
 // Function to get messages between two users
 async function getMessages(userId1, userId2) {
     const messagesRef = ref(database, "Messages");
@@ -86,7 +86,6 @@ async function addMessage(conversationId, messageData, contactId) {
     });
 }
 
-// Function to handle new conversations added to the overview
 // Function to handle a new conversation
 function handleNewConversation(snapshot) {
     const newConversation = snapshot.val();
@@ -123,6 +122,12 @@ function handleNewConversation(snapshot) {
             method: "post",
             success: function (res) {
                 $(".chat-list").prepend(res);
+                var msgLists = document.getElementsByClassName("msg-list");
+                removeSelectedMsg();
+                // Add "active" class to the first element with class "msg-list"
+                if (msgLists.length > 0) {
+                    msgLists[0].classList.add("active");
+                }
             },
         });
     }
@@ -136,6 +141,12 @@ function handleNewConversation(snapshot) {
     }
 }
 
+function removeSelectedMsg() {
+    var msgLists = document.getElementsByClassName("msg-list");
+    for (var i = 0; i < msgLists.length; i++) {
+        msgLists[i].classList.remove("active");
+    }
+}
 // Function to handle changes to existing conversations in the overview
 function handleConversationChange(snapshot) {
     const updatedConversation = snapshot.val();
@@ -160,26 +171,18 @@ async function updateChat(user_id) {
     $("#selected-user-name").html(selected_user.userName);
     $("#selected-user-profile").attr("src", selected_user.userProfile);
     $(".selected_name").val(selected_user.userName);
-    // alert(senderUser);
-    // $.ajax({
-    //     url: base_url + "getChat",
-    //     data: { user_id },
-    //     method: "post",
-    //     success: function (res) {
-    //         $(".msg-body").html(res);
-    // const message = await getMessages(senderUser, user_id);
-    // console.log(message[0].key);
+
     $(".selected_conversasion").val($(".selected_id").val());
     const conversationId = $(".selected_id").val();
     console.log({ conversationId });
-    const userRef = ref(database, `users/${senderUser}`);
+
     update(userRef, { userChatId: conversationId });
 
     const messagesRef = ref(database, `Messages/${conversationId}/message`);
-    const selecteduserRef = ref(database, `users/${senderUser}`);
+    const selecteduserTypeRef = ref(database, `users/${user_id}`);
     off(messagesRef);
-    off(selecteduserRef);
-
+    off(selecteduserTypeRef);
+    console.log("hrer");
     onChildAdded(messagesRef, async (snapshot) => {
         console.log("yes");
         addMessageToList(snapshot.key, snapshot.val());
@@ -192,16 +195,29 @@ async function updateChat(user_id) {
             });
         }
     });
-    onChildAdded(selecteduserRef, async (snapshot) => {
-        console.log(1);
-    });
+    onChildChanged(selecteduserTypeRef, async (snapshot) => {
+        if (
+            snapshot.key === "userTypingStatus" &&
+            snapshot.val() == "Typing..."
+        ) {
+            const snapshot = await get(selecteduserTypeRef);
+            const selectedUserData = snapshot.val();
+            console.log({ selectedUserData });
 
-    //     },
-    // });
+            if (selectedUserData.userChatId == conversationId) {
+                $(".typing").text("Typing...");
+            }
+        } else {
+            $(".typing").text("");
+        }
+    });
 }
 
 // Initialize event listeners
 $(document).on("click", ".msg-list", async function () {
+    console.log("clicked");
+    removeSelectedMsg();
+    $(this).addClass("active");
     const userId = $(this).attr("data-userid");
     $(".selected_id").val($(this).attr("data-msgKey"));
     $(".selected_message").val(userId);
@@ -265,14 +281,6 @@ $(".send-message").on("keypress", async function (e) {
     }
 });
 
-$(document).on("click", ".close-btn", function () {
-    $(this).parent(".tag").remove();
-    $("#search-user").show().val("");
-    $(".empty-massage").show();
-    $(".chat-user").addClass("d-none");
-    $("#selected-user-id").val("");
-});
-
 // Function to add a message to the UI list
 function addMessageToList(key, messageData) {
     const messageElement = `
@@ -289,8 +297,6 @@ function addMessageToList(key, messageData) {
     $(".msg-lists").append(messageElement);
     scrollFunction();
 }
-
-// Auto-complete functionality for the search user input
 $("#search-user")
     .autocomplete({
         source: function (request, response) {
@@ -304,7 +310,7 @@ $("#search-user")
                             label: item.name,
                             value: item.name,
                             userId: item.id,
-                            imageUrl: item.userProfile,
+                            imageUrl: item.profile,
                             email: item.email,
                         }))
                     );
@@ -315,20 +321,21 @@ $("#search-user")
         select: function (event, ui) {
             const selectedUserId = ui.item.userId;
             const selectedUserName = ui.item.label;
-            const $tag = $("<div>", { class: "tag" })
+            const $tag = $("<div>", {
+                class: "tag",
+                "data-user-id": selectedUserId,
+            })
                 .text(selectedUserName)
                 .append($("<span>", { class: "close-btn" }).html("&times;"));
             $("#selected-tags-container").append($tag);
             $("#selected-user-id").val(selectedUserId);
-            $("#search-user").hide();
-            $(".empty-massage").hide();
-            $(".chat-user").removeClass("d-none");
-            $(".selected-user-img").attr("src", ui.item.imageUrl);
-            $(".selected-user-name").html(ui.item.label);
-            $(".selected-user-email")
-                .attr("href", "mailto:" + ui.item.email)
-                .find("span")
-                .text(ui.item.email);
+
+            // Handle UI updates for selected users
+            handleSelectedUsers();
+
+            setTimeout(() => {
+                $("#search-user").val("");
+            }, 100);
         },
     })
     .data("ui-autocomplete")._renderItem = function (ul, item) {
@@ -345,9 +352,84 @@ $("#search-user")
     $divName.append($("<div>")).append($span);
     $divMain.append($divImage).append($divName);
     $li.append($divMain).appendTo(ul);
+
     return $li;
 };
 
+$(document).on("click", ".close-btn", function () {
+    $(this).parent(".tag").remove();
+
+    // Handle UI updates for selected users
+    handleSelectedUsers();
+});
+
+function handleSelectedUsers() {
+    const tagCount = $("#selected-tags-container .tag").length;
+
+    if (tagCount === 1) {
+        const $singleTag = $("#selected-tags-container .tag");
+        const userName = $singleTag
+            .clone()
+            .children(".close-btn")
+            .remove()
+            .end()
+            .text()
+            .trim();
+        const userImgSrc = $singleTag.find("img").attr("src");
+        $(".selected-user-name").text(userName);
+        $(".selected-user-img").attr("src", userImgSrc);
+        $(".selected-user-email").attr("href", "mailto:").find("span").text("");
+
+        $(".empty-massage").hide();
+        $(".chat-user").removeClass("d-none");
+        $(".multi-chat").addClass("d-none");
+    } else if (tagCount >= 2) {
+        $(".empty-massage").hide();
+        $(".chat-user").addClass("d-none");
+        $(".multi-chat").removeClass("d-none");
+        const $tags = $("#selected-tags-container .tag");
+        let groupNames = "";
+        $tags.each(function (index) {
+            if (index < 2) {
+                const userName = $(this).text().trim();
+                const userImgSrc = $(this).find("img").attr("src");
+                groupNames += `<div class="multi-img grp-img">
+                                    <img src="${userImgSrc}" alt="">
+                                </div>`;
+            }
+        });
+        $(".multi-chat .img-wrp").html(groupNames);
+        const moreCount = tagCount - 2;
+
+        if (moreCount > 0) {
+            let moreimg = `<div class="multi-img more-img">
+                <span>+${moreCount}</span>
+            </div>`;
+            $(".multi-chat .img-wrp").append(moreimg);
+        } else {
+            $(".more-img").remove();
+        }
+        // Set multiple names in the selected-user-name
+        const allNames = $tags
+            .map(function () {
+                return $(this)
+                    .clone()
+                    .children(".close-btn")
+                    .remove()
+                    .end()
+                    .text()
+                    .trim();
+            })
+            .get()
+            .join(", ");
+        $(".selected-user-name").text(allNames);
+    } else {
+        $(".chat-user").addClass("d-none");
+        $(".multi-chat").addClass("d-none");
+        $(".more-img").addClass("d-none");
+        $(".empty-massage").show();
+    }
+}
 // Initialize overview listeners
 const overviewRef = ref(database, `overview/${senderUser}`);
 onChildAdded(overviewRef, handleNewConversation);
@@ -433,7 +515,11 @@ $("#new_message").on("keypress", async function (e) {
         );
         const message = $(this).val();
         const selectedMessageId = conversationId;
-
+        $(".selected_id").val(conversationId);
+        $(".selected_message").val(contactId);
+        $(".selected_name").val(contactName);
+        $("#msgBox").modal("hide");
+        updateChat(contactId);
         if (message.trim() !== "") {
             $(this).val("");
             const messageData = {

@@ -52,12 +52,15 @@ class ChatController extends Controller
         // dd($id);
         $reference = $this->firebase->getReference('overview/' . $userId);
         $messages = $reference->getValue();
-        uasort($messages, function ($a, $b) {
-            $timeStampA = isset($a['timeStamp']) ? $a['timeStamp'] : PHP_INT_MAX;
-            $timeStampB = isset($b['timeStamp']) ? $b['timeStamp'] : PHP_INT_MAX;
+        if ($messages) {
 
-            return $timeStampB <=> $timeStampA;
-        });
+            uasort($messages, function ($a, $b) {
+                $timeStampA = isset($a['timeStamp']) ? $a['timeStamp'] : PHP_INT_MAX;
+                $timeStampB = isset($b['timeStamp']) ? $b['timeStamp'] : PHP_INT_MAX;
+
+                return $timeStampB <=> $timeStampA;
+            });
+        }
         // dd($messages);
         $title = 'Home';
         $page = 'front.chat.messages';
