@@ -76,7 +76,7 @@ class ContactController extends Controller
         $searchName = $request->search_name;
 
         if ($request->ajax()) {
-            $query = User::where('app_user', '=', '1')->where('id', '!=', $id);
+            $query = User::where('app_user', '=', '1')->where('id', '!=', $id)->where(['is_user_phone_contact' => '0'])->orderBy('firstname');
 
             if ($searchName) {
                 $query->where(function ($q) use ($searchName) {
@@ -118,7 +118,7 @@ class ContactController extends Controller
             $searchPhone = $request->input('search_phone');
 
             if ($request->ajax()) {
-                $query = User::where('parent_user_phone_contact', '=', $id);
+                $query = User::where(['is_user_phone_contact' => '1', 'parent_user_phone_contact' => $id]);
 
                 if ($searchPhone) {
                     $query->where(function ($q) use ($searchPhone) {
