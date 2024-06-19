@@ -49,6 +49,7 @@
                                 <div class="position-relative">
                                     <div id="img-preview">
                                         <img src="{{$user->bg_profile}}" alt="" class="bg-img">
+
                                     </div>
                                     <input type="file" id="bg-choose-file" name="bg_file" accept="image/*" />
                                     <a href="#" id="bgImage" class="Edit-img" for="choose-file" data-bs-toggle="modal" data-bs-target="#coverImg-modal">
@@ -61,7 +62,13 @@
                             </form>
                             <div class="user-img">
                                 <div id="img-preview">
+                                    @if($user->profile!="")
+
                                     <img src="{{$user->profile}}" alt="user-img" class="UserImg">
+                                    @else
+                                    @php $initials = strtoupper($user->firstname[0]) . strtoupper($user->lastname[0]); @endphp
+                                    <h5> {{ $initials }}</h5>
+                                    @endif
                                 </div>
                                 <input type="file" id="choose-file" name="file" accept="image/*" />
                                 <a href="#" id="userProfile" data-bs-toggle="modal" data-bs-target="#Edit-modal">
