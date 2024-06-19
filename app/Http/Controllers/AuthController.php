@@ -273,7 +273,7 @@ class AuthController extends Controller
                 $alreadyLog = User::select('id', 'firstname', 'lastname', 'email', 'profile')->where('id', decrypt(Session::get('user')['id']))->first();
                 if ($alreadyLog != null) {
 
-                    $alreadyLog['profile'] = ($alreadyLog->profile != null) ? asset('storage/profile/' . $alreadyLog->profile) : asset('public/storage/profile/no_profile.png');
+                    $alreadyLog['profile'] = ($alreadyLog->profile != null) ? asset('storage/profile/' . $alreadyLog->profile) : "";
 
                     $sessionAlreadyArray = [
                         'id' => encrypt($alreadyLog->id),
@@ -290,7 +290,7 @@ class AuthController extends Controller
                     'id' => encrypt($user->id),
                     'username' => $user->firstname . ' ' . $user->lastname,
                     'email' => $user->email,
-                    'profile' => ($user->profile != NULL || $user->profile != "") ? asset('storage/profile/' . $user->profile) : asset('public/storage/profile/no_profile.png')
+                    'profile' => ($user->profile != NULL || $user->profile != "") ? asset('storage/profile/' . $user->profile) : ""
                 ];
                 Session::put(['user' => $sessionArray]);
                 if (Session::has('user')) {

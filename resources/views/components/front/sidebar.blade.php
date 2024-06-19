@@ -191,7 +191,21 @@
                     <div class="users-data">
                         <div class="d-flex align-items-start">
                             <div class="contact-img">
-                                <img src="{{Session::get('secondary_user')['secondary_profile']}}" alt="contact-img">
+
+
+                                @if($Session::get('secondary_user')['secondary_profile'] != "")
+                                <img src="{{Session::get('secondary_user')['secondary_profile'] }}" alt="user-img" class="UserImg">
+                                @else
+
+                                @php $initials = strtoupper($profileData->firstname[0]) . strtoupper($profileData->lastname[0]);
+
+                                $fontColor = "fontcolor".strtoupper($profileData->firstname[0])
+                                @endphp
+
+                                <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
+                                @endif
+
+
                             </div>
                             <div class="text-start">
                                 <h5>{{Session::get('secondary_user')['secondary_username']}}</h5>
