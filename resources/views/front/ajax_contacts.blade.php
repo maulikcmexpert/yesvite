@@ -13,11 +13,18 @@ $initials = strtoupper($value->firstname[0]) . strtoupper($value->lastname[0]);
 <div class="users-data">
     <div class="d-flex align-items-start">
         <div class="contact-img">
-            <img src="{{ ($value->profile != null) ? asset('storage/profile/' . $value->profile) : asset('storage/profile/no_profile.png') }}" alt="contact-img">
+            <?php
+            if($value->profile != null){?>
+
+                <img src="{{ asset('storage/profile/' . $value->profile)}}" alt="contact-img">
+            <?php }else{ ?>
+            
+                <h5><?= $initials ?></h5>
+            <?php }?>
+            
         </div>
         <div class="text-start">
             <h5>{{$value->firstname.' '.$value->lastname}}</h5>
-            <h5><?= $initials ?></h5>
             <div>
                 <a href="mailto:{{$value->email}}">
                     <svg class="me-1" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">

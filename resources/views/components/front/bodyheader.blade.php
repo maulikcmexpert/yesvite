@@ -78,16 +78,23 @@
 
                         $userprofile = Auth::guard('web')->user();
     
-                        $userProfile = asset('storage/profile/no_profile.png');
                         if ($userprofile->profile != NULL || $userprofile->profile != "") {
-    
-                            $userProfile = asset('storage/profile/' . $userprofile->profile);
-                        }
+                            $image = asset("storage/profile/". $userprofile->profile);
+                            $userProfile =  '<img src="'.$image.'" class="UserImg" alt="">';
+                        }else{
+                            $initials = strtoupper($userprofile->firstname[0]) . strtoupper($userprofile->lastname[0]);
+                            
+                            $userProfile = "<h5>". $initials ."</h5>";
+                            ?>
+
+                     <?php   }
                     }
 
                     ?>
                  <a href="{{ route('profile')}}" class="user-img">
-                     <img src="{{$userProfile}}" class="UserImg" alt="">
+
+                    {!! $userProfile !!}
+
                  </a>
              </div>
              @else
