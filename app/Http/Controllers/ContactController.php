@@ -52,9 +52,9 @@ class ContactController extends Controller
         $formatted_date = $date->format('F, Y');
         $user['join_date'] = $formatted_date;
 
-        $yesviteUser = User::where('app_user', '=', '1')->where('id', '!=', $id)->paginate(10);
+        $yesviteUser = User::where('user', '=', '1')->where('id', '!=', $id)->paginate(10);
         $yesviteGroups = Group::withCount('groupMembers')->paginate(10);
-        $yesvitePhones = User::where('parent_user_phone_contact', '=', $id)->get();
+        $yesvitePhones = User::where(['is_user_phone_contact' => '1', 'parent_user_phone_contact' => $id])->get();
 
 
         return view('layout', compact(
@@ -149,7 +149,7 @@ class ContactController extends Controller
                 'Fname' => 'required|string', // max 2MB
                 'Lname' => 'required|string', // max 2MB
                 'phone_number' => ['present', 'nullable', 'numeric', 'regex:/^\d{10,15}$/', Rule::unique('users')->ignore(decrypt($request->id))],
-               'email' => ['required', 'email', new EmailExists], // max 2MB
+                'email' => ['required', 'email', new EmailExists], // max 2MB
 
             ], [
                 'Fname.required' => 'Please enter First Name',
@@ -253,17 +253,17 @@ class ContactController extends Controller
         }
     }
 
-        public function checkNewContactEmail(Request $request)
-        {
-            $email = $request->input('email');
-            $exists = User::where('email', $email)->exists();
+    public function checkNewContactEmail(Request $request)
+    {
+        $email = $request->input('email');
+        $exists = User::where('email', $email)->exists();
 
-            if ($exists) {
-                return response()->json(false);
-            } else {
-                return response()->json(true);
-            }
+        if ($exists) {
+            return response()->json(false);
+        } else {
+            return response()->json(true);
         }
+    }
     /**
      * Show the form for creating a new resource.
      */
