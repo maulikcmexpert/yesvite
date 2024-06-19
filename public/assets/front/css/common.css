@@ -447,6 +447,7 @@ ul.nav-tabs .nav-link:focus{
 
 .input-form .iti .phone_number{
     /* visibility: hidden; */
+    font-size: 0;
     width: 100%;
     outline: 0 !important;
 }
