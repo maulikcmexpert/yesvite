@@ -19,7 +19,7 @@
 
             <div class="card-header">
 
-                <h3 class="card-title">{{$title}}</h3>
+                <h3 class="card-title">{{$title}}<  /h3>
 
             </div>
 
@@ -29,7 +29,7 @@
 
                 <div class="card-body row">
 
-                    <div class="col-lg-4 mb-3">
+                    <div class="col-lg-3 col-md-6 mb-3">
                         <div class="form-group">
                             <label for="firstname">First Name</label>
                             <input type="text" class="form-control firstname" name="firstname" placeholder="Enter First Name" value="">
@@ -37,7 +37,7 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-4 mb-3">
+                    <div class="col-lg-3 col-md-6 mb-3">
                         <div class="form-group">
                             <label for="lastname">Last Name</label>
                             <input type="text" class="form-control lastname" name="lastname" placeholder="Enter Last Name" value="">
@@ -45,7 +45,7 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-4 mb-3">
+                    <div class="col-lg-3 col-md-6 mb-3">
                         <div class="form-group">
                             <label for="email">Email</label>
                             <input type="text" class="form-control email" name="email" placeholder="Enter Email Address" value="">
@@ -53,7 +53,7 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-4 mb-3">
+                    <div class="col-lg-3 col-md-6 mb-3">
                         <div class="form-group">
                             <label for="phone_number">Phone Number</label>
                             <input type="text" class="form-control phone_number" name="phone_number" placeholder="Enter Email Address" value="">
