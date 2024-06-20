@@ -214,17 +214,9 @@ async function updateChat(user_id) {
     $("#selected-user-lastseen").html(lastseen);
     $("#selected-user-name").html(selected_user.userName);
 
-
     const profileImageUrl = selected_user.userProfile;
-    if (profileImageUrl.endsWith('.jpg') || profileImageUrl.endsWith('.jpeg') || profileImageUrl.endsWith('.png')) {
-        $("#selected-user-profile").attr("src", profileImageUrl);
-    } else {
-        const initials = selected_user.userName.split(' ').map(word => word[0].toUpperCase()).join('');
-        const fontColor = "fontcolor" + initials[0].toUpperCase();
-        
-        $("#selected-user-profile").replaceWith(`<h5 class="${fontColor}">${initials}</h5>`);
-    }
-    
+    updateProfileImg(profileImageUrl, selected_user.userName);
+
     $(".selected_name").val(selected_user.userName);
 
     $(".selected_conversasion").val($(".selected_id").val());
@@ -265,7 +257,32 @@ async function updateChat(user_id) {
         }
     });
 }
+function updateProfileImg(profileImageUrl, userName) {
+    console.log(
+        profileImageUrl.endsWith(".jpg") ||
+            profileImageUrl.endsWith(".jpeg") ||
+            profileImageUrl.endsWith(".png")
+    );
+    if (
+        profileImageUrl.endsWith(".jpg") ||
+        profileImageUrl.endsWith(".jpeg") ||
+        profileImageUrl.endsWith(".png")
+    ) {
+        $("#selected-user-profile").replaceWith(
+            `  <img id="selected-user-profile" src="${profileImageUrl}" alt="user-img">`
+        );
+    } else {
+        const initials = userName
+            .split(" ")
+            .map((word) => word[0].toUpperCase())
+            .join("");
+        const fontColor = "fontcolor" + initials[0].toUpperCase();
 
+        $("#selected-user-profile").replaceWith(
+            `<h5 class="${fontColor}" id="selected-user-profile">${initials}</h5>`
+        );
+    }
+}
 async function updateChatfromGroup(conversationId) {
     $(".msg-lists").html("");
     const messagesRef = ref(database, `Groups/${conversationId}/message`);
@@ -288,7 +305,8 @@ async function updateChatfromGroup(conversationId) {
 
     $("#selected-user-lastseen").html(""); // Group doesn't have a last seen
     $("#selected-user-name").html(groupInfo.groupName);
-    $("#selected-user-profile").attr("src", "path_to_group_default_image"); // Set a default group image if needed
+    updateProfileImg("path_to_group_default_image", groupInfo.groupName);
+
     $(".selected_name").val(groupInfo.groupName);
 
     $(".selected_conversasion").val(conversationId);
