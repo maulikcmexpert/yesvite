@@ -380,7 +380,7 @@ class AuthController extends Controller
         $currentLogUser = User::where('id', Auth::id())->firstOrFail();
 
 
-
+        $currentLogUser['profile'] = ($currentLogUser->profile != null) ? asset('storage/profile/' . $currentLogUser->profile) : "";
 
         $id = decrypt($id);
         $checkUser = User::where('id', $id)->first();

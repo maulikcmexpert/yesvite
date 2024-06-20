@@ -194,7 +194,7 @@
 
 
                                 @if(Session::get('secondary_user')['secondary_profile'] != "")
-                                <img src="{{ asset('storage/profile/'.Session::get('secondary_user')['secondary_profile']) }}" alt="user-img" class="UserImg">
+                                <img src="{{ Session::get('secondary_user')['secondary_profile'] }}" alt="user-img" class="UserImg">
                                 @else
                                 @php
 
