@@ -109,7 +109,9 @@ use Carbon\Carbon;
                         <input type="hidden" class="senderUser" id="senderUser" value="{{$userId}}" />
                         <input type="hidden" class="senderUserName" value="{{$userName}}" />
                         <ul class="chat-list">
-
+                        @php
+    $i = 0;
+@endphp
 @foreach ($messages as $k => $message)   
     @if(!isset($message['contactName']))
         @continue
@@ -118,9 +120,9 @@ use Carbon\Carbon;
         <input type="hidden" class="selected_id" value="{{$k}}"/>
         <input type="hidden" class="selected_message" value="{{$message['contactId']}}"/>
         <input type="hidden" class="selected_name" value="{{$message['contactName']}}"/>
-        <input type="hidden" id="isGroup" value="{{$message['group']}}"/>
+        <input type="hidden" id="isGroup" value="{{@$message['group']}}"/>
     @endif                    
-    <li class="{{$i == 0 ?'active':''}} msg-list conversation-{{$message['conversationId']}}" data-userId="{{$message['contactId']}}" data-msgKey={{$k}} data-group={{$message['group']}}>
+    <li class="{{$i == 0 ?'active':''}} msg-list conversation-{{$message['conversationId']}}" data-userId="{{$message['contactId']}}" data-msgKey={{$k}} data-group={{@$message['group']}}>
         <div class="chat-data d-flex align-items-center">
             <div class="user-img position-relative">
             @if($message['receiverProfile']!=="http://192.168.1.11:8000/assets/front/image/user-img.svg")

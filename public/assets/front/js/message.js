@@ -213,7 +213,18 @@ async function updateChat(user_id) {
             : "Online";
     $("#selected-user-lastseen").html(lastseen);
     $("#selected-user-name").html(selected_user.userName);
-    $("#selected-user-profile").attr("src", selected_user.userProfile);
+
+
+    const profileImageUrl = selected_user.userProfile;
+    if (profileImageUrl.endsWith('.jpg') || profileImageUrl.endsWith('.jpeg') || profileImageUrl.endsWith('.png')) {
+        $("#selected-user-profile").attr("src", profileImageUrl);
+    } else {
+        const initials = selected_user.userName.split(' ').map(word => word[0].toUpperCase()).join('');
+        const fontColor = "fontcolor" + initials[0].toUpperCase();
+        
+        $("#selected-user-profile").replaceWith(`<h5 class="${fontColor}">${initials}</h5>`);
+    }
+    
     $(".selected_name").val(selected_user.userName);
 
     $(".selected_conversasion").val($(".selected_id").val());
