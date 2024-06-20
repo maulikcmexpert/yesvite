@@ -85,7 +85,51 @@ async function addMessage(conversationId, messageData, contactId) {
         1: senderUser,
     });
 }
+// Function to add a new message to the database
+async function addMessageToGroup(
+    conversationId,
+    messageData,
+    newGroupMembers = [],
+    groupName = ""
+) {
+    console.log({ conversationId });
+    const messagesRef = ref(database, `Groups/${conversationId}/message`);
+    await push(messagesRef, messageData);
+    if (newGroupMembers.length > 0) {
+        const usersRef = ref(database, "Groups/" + conversationId + "/users");
+        set(usersRef, newGroupMembers);
 
+        const groupInfoRef = ref(
+            database,
+            "Groups/" + conversationId + "/groupInfo"
+        );
+
+        let groupInfo = {
+            conversationId: conversationId,
+            createdById: senderUser,
+            createdTimeStamp: Date.now(),
+            groupDescription: "",
+            groupName,
+            profiles: {},
+            usersStatus: {},
+        };
+        let i = 0;
+        for (const userId of newGroupMembers) {
+            const user = await getUser(userId);
+            groupInfo.profiles[i] = {
+                id: userId,
+                image: user?.userProfile,
+                isAdmin: userId === senderUser ? "1" : "0",
+                leave: false,
+                name: user.userName,
+            };
+            groupInfo.usersStatus[userId] = Date.now();
+            i++;
+        }
+
+        await set(groupInfoRef, groupInfo);
+    }
+}
 // Function to handle a new conversation
 function handleNewConversation(snapshot) {
     const newConversation = snapshot.val();
@@ -169,7 +213,18 @@ async function updateChat(user_id) {
             : "Online";
     $("#selected-user-lastseen").html(lastseen);
     $("#selected-user-name").html(selected_user.userName);
-    $("#selected-user-profile").attr("src", selected_user.userProfile);
+
+
+    const profileImageUrl = selected_user.userProfile;
+    if (profileImageUrl.endsWith('.jpg') || profileImageUrl.endsWith('.jpeg') || profileImageUrl.endsWith('.png')) {
+        $("#selected-user-profile").attr("src", profileImageUrl);
+    } else {
+        const initials = selected_user.userName.split(' ').map(word => word[0].toUpperCase()).join('');
+        const fontColor = "fontcolor" + initials[0].toUpperCase();
+        
+        $("#selected-user-profile").replaceWith(`<h5 class="${fontColor}">${initials}</h5>`);
+    }
+    
     $(".selected_name").val(selected_user.userName);
 
     $(".selected_conversasion").val($(".selected_id").val());
@@ -182,9 +237,7 @@ async function updateChat(user_id) {
     const selecteduserTypeRef = ref(database, `users/${user_id}`);
     off(messagesRef);
     off(selecteduserTypeRef);
-    console.log("hrer");
     onChildAdded(messagesRef, async (snapshot) => {
-        console.log("yes");
         addMessageToList(snapshot.key, snapshot.val());
 
         const selectedConversationId = $(".selected_conversasion").val();
@@ -213,21 +266,63 @@ async function updateChat(user_id) {
     });
 }
 
+async function updateChatfromGroup(conversationId) {
+    $(".msg-lists").html("");
+    const messagesRef = ref(database, `Groups/${conversationId}/message`);
+    off(messagesRef);
+    onChildAdded(messagesRef, async (snapshot) => {
+        addMessageToList(snapshot.key, snapshot.val());
+
+        const selectedConversationId = $(".selected_conversasion").val();
+        if (selectedConversationId === conversationId) {
+            await updateOverview(senderUser, conversationId, {
+                unRead: false,
+                unReadCount: 0,
+            });
+        }
+    });
+
+    const groupInfoRef = ref(database, `Groups/${conversationId}/groupInfo`);
+    const snapshot = await get(groupInfoRef);
+    const groupInfo = snapshot.val();
+
+    $("#selected-user-lastseen").html(""); // Group doesn't have a last seen
+    $("#selected-user-name").html(groupInfo.groupName);
+    $("#selected-user-profile").attr("src", "path_to_group_default_image"); // Set a default group image if needed
+    $(".selected_name").val(groupInfo.groupName);
+
+    $(".selected_conversasion").val(conversationId);
+    update(userRef, { userChatId: conversationId });
+}
+
 // Initialize event listeners
 $(document).on("click", ".msg-list", async function () {
-    console.log("clicked");
     removeSelectedMsg();
     $(this).addClass("active");
-    const userId = $(this).attr("data-userid");
-    $(".selected_id").val($(this).attr("data-msgKey"));
-    $(".selected_message").val(userId);
+    const isGroup = $(this).attr("data-group");
     const conversationId = $(this).attr("data-msgKey");
-    await updateOverview(senderUser, conversationId, {
-        unRead: false,
-        unReadCount: 0,
-    });
-    await updateChat(userId);
+    $(".selected_id").val($(this).attr("data-msgKey"));
+    $("#isGroup").val(isGroup);
+    if (isGroup == "1") {
+        await updateChatfromGroup(conversationId);
+    } else {
+        const userId = $(this).attr("data-userid");
+        $(".selected_message").val(userId);
+        await updateOverview(senderUser, conversationId, {
+            unRead: false,
+            unReadCount: 0,
+        });
+        await updateChat(userId);
+    }
 });
+
+// Initial chat update
+if ($("#isGroup").val() == "1") {
+    updateChatfromGroup($(".selected_id").val());
+} else {
+    updateChat($(".selected_message").val());
+}
+
 function scrollFunction() {
     const container = document.getElementById("msgBody");
     const element = document.getElementById("msgbox");
@@ -239,12 +334,8 @@ function scrollFunction() {
 }
 $(".send-message").on("keypress", async function (e) {
     if (e.which === 13) {
-        console.log("new");
+        var isGroup = $("#isGroup").val();
         const message = $(this).val();
-        const selectedMessageId = $(".selected_id").val();
-        const receiverId = $(".selected_message").val();
-        const receiverName = $(".selected_name").val();
-
         if (message.trim() !== "") {
             $(this).val(""); // Clear the input field
             const messageData = {
@@ -254,30 +345,62 @@ $(".send-message").on("keypress", async function (e) {
                 isReply: "0",
                 isSeen: false,
                 react: "",
-                receiverId: receiverId,
-                receiverName: receiverName,
-                replyData: {},
                 senderId: senderUser,
                 senderName: senderUserName,
                 status: {},
             };
-            await addMessage(selectedMessageId, messageData, receiverId);
 
-            await updateOverview(senderUser, selectedMessageId, {
-                lastMessage: `${senderUserName}: ${message}`,
-                timeStamp: Date.now(),
-            });
-            const receiverSnapshot = await get(
-                ref(database, `overview/${receiverId}/${selectedMessageId}`)
-            );
-            await updateOverview(receiverId, selectedMessageId, {
-                lastMessage: `${senderUserName}: ${message}`,
-                unReadCount: (receiverSnapshot.val().unReadCount || 0) + 1,
-                timeStamp: Date.now(),
-            });
+            if (isGroup == "1") {
+                const conversationId = $(".selected_id").val();
+                const groupName = $(".selected_name").val();
+
+                // Fetch group members from Firebase
+                const groupMembersRef = ref(
+                    database,
+                    `Groups/${conversationId}/users`
+                );
+                const groupMembersSnapshot = await get(groupMembersRef);
+                const newGroupMembers = groupMembersSnapshot.val();
+                console.log({ newGroupMembers });
+                await addMessageToGroup(conversationId, messageData);
+
+                // Update all group members' overview
+                for (const userId of newGroupMembers) {
+                    await updateOverview(userId, conversationId, {
+                        lastMessage: `${senderUserName}: ${message}`,
+                        unReadCount: userId === senderUser ? 0 : 1,
+                        timeStamp: Date.now(),
+                    });
+                }
+            } else {
+                const selectedMessageId = $(".selected_id").val();
+                const receiverId = $(".selected_message").val();
+                const receiverName = $(".selected_name").val();
+
+                messageData.receiverId = receiverId;
+                messageData.receiverName = receiverName;
+
+                await addMessage(selectedMessageId, messageData, receiverId);
+
+                await updateOverview(senderUser, selectedMessageId, {
+                    lastMessage: `${senderUserName}: ${message}`,
+                    timeStamp: Date.now(),
+                });
+                const receiverSnapshot = await get(
+                    ref(database, `overview/${receiverId}/${selectedMessageId}`)
+                );
+                await updateOverview(receiverId, selectedMessageId, {
+                    lastMessage: `${senderUserName}: ${message}`,
+                    unReadCount: (receiverSnapshot.val().unReadCount || 0) + 1,
+                    timeStamp: Date.now(),
+                });
+
+                const conversationElement = $(
+                    `.conversation-${selectedMessageId}`
+                );
+                conversationElement.prependTo(".chat-list");
+            }
         }
-        const conversationElement = $(`.conversation-${selectedMessageId}`);
-        conversationElement.prependTo(".chat-list");
     }
 });
 
@@ -462,9 +585,6 @@ const overviewRef = ref(database, `overview/${senderUser}`);
 onChildAdded(overviewRef, handleNewConversation);
 onChildChanged(overviewRef, handleConversationChange);
 
-// Initial chat update
-updateChat($(".selected_message").val());
-
 // Function to find or create a conversation
 async function findOrCreateConversation(
     currentUserId,
@@ -491,7 +611,7 @@ async function findOrCreateConversation(
         contactId: contactId,
         contactName: contactName,
         conversationId: newConversationId,
-        isGroup: "0",
+        group: "0",
         lastMessage: "",
         lastSenderId: currentUserId,
         receiverProfile: receiverProfile,
@@ -509,7 +629,7 @@ async function findOrCreateConversation(
         contactId: currentUserId,
         contactName: senderUserName,
         conversationId: newConversationId,
-        isGroup: "0",
+        group: "0",
         lastMessage: "",
         lastSenderId: currentUserId,
         receiverProfile: receiverProfile,
@@ -526,29 +646,88 @@ async function findOrCreateConversation(
     return newConversationId;
 }
 
+// Function to find or create a group conversation
+async function findOrCreateGroupConversation(
+    currentUserId,
+    newGroupMembers,
+    groupName
+) {
+    const overviewRef = ref(database, `overview/${currentUserId}`);
+    const snapshot = await get(overviewRef);
+
+    if (snapshot.exists()) {
+        const overviewData = snapshot.val();
+        for (const conversationId in overviewData) {
+            if (overviewData[conversationId].groupName === groupName) {
+                return conversationId;
+            }
+        }
+    }
+
+    const newConversationRef = push(child(ref(database), "overview"));
+    const newConversationId = newConversationRef.key;
+
+    const newConversationData = {
+        contactId: newConversationId,
+        contactName: groupName,
+        conversationId: newConversationId,
+        group: "1",
+        lastMessage: "",
+        lastSenderId: currentUserId,
+        receiverProfile: "",
+        timeStamp: Date.now(),
+        unRead: true,
+        unReadCount: 1,
+    };
+
+    await set(
+        ref(database, `overview/${currentUserId}/${newConversationId}`),
+        newConversationData
+    );
+
+    for (const memberId of newGroupMembers) {
+        const memberConversationData = {
+            contactId: newConversationId,
+            contactName: groupName,
+            conversationId: newConversationId,
+            group: "1",
+            lastMessage: "",
+            lastSenderId: currentUserId,
+            receiverProfile: "",
+            timeStamp: Date.now(),
+            unRead: true,
+            unReadCount: 1,
+        };
+
+        await set(
+            ref(database, `overview/${memberId}/${newConversationId}`),
+            memberConversationData
+        );
+    }
+
+    return newConversationId;
+}
 // Event listener for sending a new message
 $("#new_message").on("keypress", async function (e) {
     if (e.which === 13) {
-        const currentUserId = senderUser;
-        const contactId = $("#selected-user-id").val();
-        const contactName = $(".selected-user-name").html();
-        const receiverProfile = $(".selected-user-img").attr("src");
+        const tagCount = $("#selected-tags-container .tag").length;
+        if (tagCount > 1) {
+            const currentUserId = senderUser;
+            // const groupName = $("#group-name").val(); // Assuming you have an input for group name
+            const groupName = "Pratik test"; // Assuming you have an input for group name
+            const newGroupMembers = $("#selected-user-id")
+                .val()
+                .split(",")
+                .map((id) => id.trim());
+            newGroupMembers.push(senderUser);
+            const message = $(this).val();
 
-        const conversationId = await findOrCreateConversation(
-            currentUserId,
-            contactId,
-            contactName,
-            receiverProfile
-        );
-        const message = $(this).val();
-        const selectedMessageId = conversationId;
-        $(".selected_id").val(conversationId);
-        $(".selected_message").val(contactId);
-        $(".selected_name").val(contactName);
-        $("#msgBox").modal("hide");
-        updateChat(contactId);
-        if (message.trim() !== "") {
-            $(this).val("");
+            const conversationId = await findOrCreateGroupConversation(
+                currentUserId,
+                newGroupMembers,
+                groupName
+            );
+
             const messageData = {
                 data: message,
                 timeStamp: Date.now(),
@@ -556,30 +735,90 @@ $("#new_message").on("keypress", async function (e) {
                 isReply: "0",
                 isSeen: false,
                 react: "",
-                receiverId: contactId,
-                receiverName: contactName,
+                receiverId: newGroupMembers,
+                receiverName: groupName,
                 replyData: {},
                 senderId: senderUser,
                 senderName: senderUserName,
                 status: {},
             };
 
-            await addMessage(selectedMessageId, messageData, contactId);
-
-            await updateOverview(currentUserId, selectedMessageId, {
-                lastMessage: `${senderUserName}: ${message}`,
-                timeStamp: Date.now(),
-            });
-
-            const receiverSnapshot = await get(
-                ref(database, `overview/${contactId}/${selectedMessageId}`)
+            await addMessageToGroup(
+                conversationId,
+                messageData,
+                newGroupMembers,
+                groupName
             );
-            await updateOverview(contactId, selectedMessageId, {
-                lastMessage: `${senderUserName}: ${message}`,
-                unReadCount: (receiverSnapshot.val().unReadCount || 0) + 1,
-                timeStamp: Date.now(),
-            });
+
+            for (const memberId of newGroupMembers) {
+                await updateOverview(currentUserId, conversationId, {
+                    lastMessage: `${senderUserName}: ${message}`,
+                    timeStamp: Date.now(),
+                });
+
+                const receiverSnapshot = await get(
+                    ref(database, `overview/${memberId}/${conversationId}`)
+                );
+                await updateOverview(memberId, conversationId, {
+                    lastMessage: `${senderUserName}: ${message}`,
+                    unReadCount: (receiverSnapshot.val().unReadCount || 0) + 1,
+                    timeStamp: Date.now(),
+                });
+            }
+        } else {
+            const currentUserId = senderUser;
+            const contactId = $("#selected-user-id").val();
+            const contactName = $(".selected-user-name").html();
+            const receiverProfile = $(".selected-user-img").attr("src");
+
+            const conversationId = await findOrCreateConversation(
+                currentUserId,
+                contactId,
+                contactName,
+                receiverProfile
+            );
+            const message = $(this).val();
+            const selectedMessageId = conversationId;
+            $(".selected_id").val(conversationId);
+            $(".selected_message").val(contactId);
+            $(".selected_name").val(contactName);
+
+            updateChat(contactId);
+            if (message.trim() !== "") {
+                const messageData = {
+                    data: message,
+                    timeStamp: Date.now(),
+                    isDelete: {},
+                    isReply: "0",
+                    isSeen: false,
+                    react: "",
+                    receiverId: contactId,
+                    receiverName: contactName,
+                    replyData: {},
+                    senderId: senderUser,
+                    senderName: senderUserName,
+                    status: {},
+                };
+
+                await addMessage(selectedMessageId, messageData, contactId);
+
+                await updateOverview(currentUserId, selectedMessageId, {
+                    lastMessage: `${senderUserName}: ${message}`,
+                    timeStamp: Date.now(),
+                });
+
+                const receiverSnapshot = await get(
+                    ref(database, `overview/${contactId}/${selectedMessageId}`)
+                );
+                await updateOverview(contactId, selectedMessageId, {
+                    lastMessage: `${senderUserName}: ${message}`,
+                    unReadCount: (receiverSnapshot.val().unReadCount || 0) + 1,
+                    timeStamp: Date.now(),
+                });
+            }
         }
+        $(this).val("");
+        $("#msgBox").modal("hide");
     }
 });
 

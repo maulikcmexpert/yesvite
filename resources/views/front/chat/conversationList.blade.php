@@ -14,7 +14,7 @@ $i = 0;
    
 @endif                     --}}
 {{-- @dd($message); --}}
-<li class="{{$i == 0 ?'active':''}} msg-list conversation-{{$message['conversationId']}}" data-userId="{{$message['contactId']}}" data-msgKey={{$message['conversationId']}} >
+<li class="{{$i == 0 ?'active':''}} msg-list conversation-{{$message['conversationId']}}" data-userId="{{$message['contactId']}}" data-msgKey={{$message['conversationId']}} data-group={{$message['group']}} >
     <div class="chat-data d-flex align-items-center">
         {{-- <div class="me-2">
             <input class="form-check-input" type="checkbox" name="Guest RSVP’s" checked="">
