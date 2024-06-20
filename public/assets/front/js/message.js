@@ -297,6 +297,7 @@ function addMessageToList(key, messageData) {
     $(".msg-lists").append(messageElement);
     scrollFunction();
 }
+var selectedUserIds = [];
 $("#search-user")
     .autocomplete({
         source: function (request, response) {
@@ -321,17 +322,34 @@ $("#search-user")
         select: function (event, ui) {
             const selectedUserId = ui.item.userId;
             const selectedUserName = ui.item.label;
-            const $tag = $("<div>", {
-                class: "tag",
-                "data-user-id": selectedUserId,
-            })
-                .text(selectedUserName)
-                .append($("<span>", { class: "close-btn" }).html("&times;"));
-            $("#selected-tags-container").append($tag);
-            $("#selected-user-id").val(selectedUserId);
+            // const $tag = $("<div>", {
+            //     class: "tag",
+            //     "data-user-id": selectedUserId,
+            // })
+            //     .text(selectedUserName)
+            //     .append($("<span>", { class: "close-btn" }).html("&times;"));
+            // $("#selected-tags-container").append($tag);
+            // $("#selected-user-id").val(selectedUserId);
 
-            // Handle UI updates for selected users
-            handleSelectedUsers();
+            // // Handle UI updates for selected users
+            // handleSelectedUsers();
+
+            if (!selectedUserIds.includes(selectedUserId)) {
+                selectedUserIds.push(selectedUserId);
+                updateSelectedUserIds();
+
+                const $tag = $("<div>", {
+                    class: "tag",
+                    "data-user-id": selectedUserId,
+                })
+                    .text(selectedUserName)
+                    .append(
+                        $("<span>", { class: "close-btn" }).html("&times;")
+                    );
+                $("#selected-tags-container").append($tag);
+
+                handleSelectedUsers();
+            }
 
             setTimeout(() => {
                 $("#search-user").val("");
@@ -356,9 +374,18 @@ $("#search-user")
     return $li;
 };
 
-$(document).on("click", ".close-btn", function () {
-    $(this).parent(".tag").remove();
+function updateSelectedUserIds() {
+    $("#selected-user-id").val(selectedUserIds.join(","));
+}
 
+$(document).on("click", ".close-btn", function () {
+    const $tag = $(this).parent(".tag");
+    const userId = $tag.data("user-id");
+
+    // $(this).parent(".tag").remove();
+    selectedUserIds = selectedUserIds.filter((id) => id !== userId);
+    updateSelectedUserIds();
+    $tag.remove();
     // Handle UI updates for selected users
     handleSelectedUsers();
 });
