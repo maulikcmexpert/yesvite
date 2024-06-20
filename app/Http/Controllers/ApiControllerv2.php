@@ -4562,6 +4562,8 @@ class ApiControllerv2 extends Controller
                             EventInvitedUser::where('user_id', $value)->delete();
                         }
                     }
+                } else {
+                    EventInvitedUser::where('event_id', $eventData['event_id'])->delete();
                 }
 
 
