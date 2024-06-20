@@ -89,9 +89,6 @@ $(document).ready(function () {
         $("#updateUserForm").submit();
     });
 
-
-
-    
     var profileCroppie = new Croppie(document.getElementById("profileIm"), {
         viewport: { width: 200, height: 200, type: "circle" },
         boundary: { width: 300, height: 300 },
@@ -178,6 +175,29 @@ $(document).ready(function () {
                             $(document).ready(function () {
                                 $(".UserImg").attr("src", response.image);
                             });
+                            var $userImg = $(".UserImg");
+                            if ($userImg.length) {
+                                $userImg.attr("src", response.image);
+                            } else {
+                                var $imgPreview = $(".user-img");
+                                var $h5Element = $imgPreview.find("h5");
+                                if ($h5Element.length) {
+                                    $h5Element.replaceWith(
+                                        '<img src="' +
+                                            response.image +
+                                            '" alt="user-img" class="UserImg">'
+                                    );
+                                }
+                                var $imgPreview = $(".user");
+                                var $h5Element = $imgPreview.find("h5");
+                                if ($h5Element.length) {
+                                    $h5Element.replaceWith(
+                                        '<img src="' +
+                                            response.image +
+                                            '" alt="user-img" class="UserImg">'
+                                    );
+                                }
+                            }
                             $("#Edit-modal").modal("hide");
                         } else {
                             toastr.error(response.message);
