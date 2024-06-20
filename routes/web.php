@@ -32,7 +32,7 @@ use Illuminate\Support\Facades\Auth;
 
 //     return view('welcome');
 // });
-Route::get('/', [HomeFrontController::class, 'index'])->name('front.home');
+Route::get('/', [HomeFrontController::class, 'index'])->name('front.home')->middleware('isAuthenticate');
 Route::get('about-us', [AboutController::class, 'index'])->name('about');
 // Route::get('contact', [ContactController::class, 'index'])->name('contact');
 Route::get('rsvp/{userId}/{eventId}', [RsvpController::class, 'index'])->name('rsvp');

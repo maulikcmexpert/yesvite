@@ -13,7 +13,7 @@ use Illuminate\Database\QueryException;
 use App\Rules\PhoneNumberExists;
 use Illuminate\Validation\Rule;
 use App\Rules\EmailExists;
-
+use Illuminate\Support\Facades\Auth;
 
 class ContactController extends Controller
 {
@@ -25,7 +25,7 @@ class ContactController extends Controller
         $title = 'Contact';
         $page = 'front.contact';
         $js = ['contact'];
-        $id = decrypt(session()->get('user')['id']);
+        $id = Auth::guard('web')->user()->id;
         $user = User::with(['groups' => function ($query) {
             $query->withCount('groupMembers')->orderBy('id', 'DESC')->limit(2);
         }])->withCount(
@@ -72,7 +72,7 @@ class ContactController extends Controller
 
     public function loadMore(Request $request)
     {
-        $id = decrypt(session()->get('user')['id']);
+        $id = Auth::guard('web')->user()->id;
         $searchName = $request->search_name;
 
         if ($request->ajax()) {
@@ -114,7 +114,7 @@ class ContactController extends Controller
     public function loadMorePhones(Request $request)
     {
         try {
-            $id = decrypt(session()->get('user')['id']);
+            $id = Auth::guard('web')->user()->id;
             $searchPhone = $request->input('search_phone');
 
             if ($request->ajax()) {

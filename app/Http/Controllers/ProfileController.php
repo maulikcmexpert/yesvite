@@ -36,7 +36,8 @@ class ProfileController extends Controller
 
         $title = 'Profile';
         $page = 'front.profile';
-        $id = decrypt(session()->get('user')['id']);
+        $id = Auth::guard('web')->user()->id;
+
 
         $user = User::withCount(
 
@@ -78,7 +79,9 @@ class ProfileController extends Controller
 
     public function publicProfileView()
     {
-        $id = decrypt(session()->get('user')['id']);
+        $id = Auth::guard('web')->user()->id;
+
+
         $user = User::withCount(
 
             [
@@ -108,7 +111,9 @@ class ProfileController extends Controller
 
     public function edit()
     {
-        $id = decrypt(session()->get('user')['id']);
+        $id = Auth::guard('web')->user()->id;
+
+
         $user = User::withCount(
 
             [
@@ -325,7 +330,9 @@ class ProfileController extends Controller
 
     public function changePassword()
     {
-        $id = decrypt(session()->get('user')['id']);
+        $id = Auth::guard('web')->user()->id;
+
+
         $user = User::withCount(
 
             [
