@@ -122,11 +122,11 @@ use Carbon\Carbon;
         <input type="hidden" class="selected_name" value="{{$message['contactName']}}"/>
         <input type="hidden" id="isGroup" value="{{@$message['group']}}"/>
     @endif                    
-    <li class="{{$i == 0 ?'active':''}} msg-list conversation-{{$message['conversationId']}}" data-userId="{{$message['contactId']}}" data-msgKey={{$k}} data-group={{@$message['group']}}>
+    <li class="{{$i == 0 ?'active':''}} msg-list conversation-{{@$message['conversationId']}}" data-userId="{{@$message['contactId']}}" data-msgKey={{$k}} data-group={{@$message['group']}}>
         <div class="chat-data d-flex align-items-center">
             <div class="user-img position-relative">
             @if($message['receiverProfile']!=="http://192.168.1.11:8000/assets/front/image/user-img.svg")
-                                        <img class="img-fluid user-image user-img-{{$message['contactId']}}" data-id={{$message['contactId']}} src="{{$message['receiverProfile']}}" alt="user img">
+                                        <img class="img-fluid user-image user-img-{{$message['contactId']}}" data-id={{@$message['contactId']}} src="{{$message['receiverProfile']}}" alt="user img">
                                         @else
                                         @php
                                         $contactName = $message['contactName'];
