@@ -11,7 +11,8 @@ use App\Http\Controllers\{
     ProfileController,
     SocialController,
     AccountSettingController,
-    RsvpController
+    RsvpController,
+    ChatController
 };
 use Illuminate\Support\Facades\Auth;
 
@@ -87,6 +88,10 @@ Route::middleware('checkUserExist')->group(function () {
     Route::post('contacts/edit/{id}', [ContactController::class, 'editContact'])->name('editcontact');
 
     Route::post('contacts/save_edit', [ContactController::class, 'save_editContact'])->name('.saveeditcontact');
+    Route::get('messages',  [ChatController::class, 'index'])->name('message.list');
+    Route::post('getChat',  [ChatController::class, 'getChat'])->name('message.getChat');
+    Route::post('getConversation',  [ChatController::class, 'getConversation'])->name('message.getConversation');
+    Route::get('/autocomplete-users', [ChatController::class, 'autocomplete'])->name('autocomplete.users');
 });
 
 

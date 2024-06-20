@@ -37,3 +37,5 @@
 @endforeach
 
 @endif
+ 
+@stack('scripts')
