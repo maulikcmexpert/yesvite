@@ -10540,6 +10540,7 @@ class ApiControllerv2 extends Controller
                     $addNewUser->firstname = $value['first_name'];
                     $addNewUser->email = $value['email'];
                     $addNewUser->country_code = '1';
+                    $addNewUser->app_user = '0';
                     $addNewUser->phone_number = $value['phone_number'];
                     $addNewUser->prefer_by = $value['prefer_by'];
 
