@@ -138,9 +138,10 @@
     @if ($i == 0)
         <input type="hidden" class="selected_id" value="{{$k}}"/>
         <input type="hidden" class="selected_message" value="{{$message['contactId']}}"/>
-        <input type="hidden" class="selected_name" value=""/>
+        <input type="hidden" class="selected_name" value="{{$message['contactName']}}"/>
+        <input type="hidden" id="isGroup" value="{{$message['group']}}"/>
     @endif                    
-    <li class="{{$i == 0 ?'active':''}} msg-list conversation-{{$message['conversationId']}}" data-userId="{{$message['contactId']}}" data-msgKey={{$k}}>
+    <li class="{{$i == 0 ?'active':''}} msg-list conversation-{{$message['conversationId']}}" data-userId="{{$message['contactId']}}" data-msgKey={{$k}} data-group={{$message['group']}}>
         <div class="chat-data d-flex align-items-center">
             <div class="user-img position-relative">
                 <img class="img-fluid user-image user-img-{{$message['contactId']}}" data-id={{$message['contactId']}}
@@ -190,6 +191,8 @@
 <input type="hidden" class="selected_id"/>
 <input type="hidden" class="selected_message" />
 <input type="hidden" class="selected_name"/>
+<input type="hidden" id="isGroup"/>
+
 @endif
                         </ul>
                     </div>

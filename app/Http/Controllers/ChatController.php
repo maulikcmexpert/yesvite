@@ -126,10 +126,14 @@ class ChatController extends Controller
     {
         $search = $request->get('term');
         $currentUserId = auth()->id();
-        // $host = request()->getSchemeAndHttpHost();
         $profilePath = asset('storage/profile/');
 
-        $users = User::select('id', DB::raw("CONCAT(firstname, ' ', lastname) as name"), DB::raw("CONCAT('$profilePath', profile) as profile"), 'email')
+        $users = User::select(
+            'id',
+            DB::raw("CONCAT(firstname, ' ', lastname) as name"),
+            DB::raw("CASE WHEN profile IS NOT NULL THEN CONCAT('$profilePath/', profile) ELSE NULL END as profile"),
+            'email'
+        )
             ->where(DB::raw("CONCAT(firstname, ' ', lastname)"), 'LIKE', '%' . $search . '%')
             ->where('id', '!=', $currentUserId)
             ->get();
