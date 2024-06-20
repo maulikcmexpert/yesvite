@@ -149,8 +149,8 @@ function getYesviteContactList($id)
         }
         $yesviteUserDetail['id'] = $user->id;
         $yesviteUserDetail['profile'] = empty($user->profile) ? "" : asset('public/storage/profile/' . $user->profile);
-        $yesviteUserDetail['first_name'] = $user->firstname;
-        $yesviteUserDetail['last_name'] = $user->lastname;
+        $yesviteUserDetail['first_name'] = (!empty($user->firstname) || $user->firstname != Null) ? $user->firstname : "";;
+        $yesviteUserDetail['last_name'] = (!empty($user->lastname) || $user->lastname != Null) ? $user->lastname : "";
         $yesviteUserDetail['email'] = (!empty($user->email) || $user->email != Null) ? $user->email : "";
         $yesviteUserDetail['country_code'] = (!empty($user->country_code) || $user->country_code != Null) ? strval($user->country_code) : "";
         $yesviteUserDetail['phone_number'] = (!empty($user->phone_number) || $user->phone_number != Null) ? $user->phone_number : "";
