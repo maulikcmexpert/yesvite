@@ -20,7 +20,6 @@ class ChatController extends Controller
     {
         $this->firebase = Firebase::database();
         $this->usersReference = $this->firebase->getReference('users');
-
         // $this->database = $database;
         // $this->chatRoom = $this->database->getReference();
     }
