@@ -419,7 +419,9 @@ ul.nav-tabs .nav-link:focus{
     line-height: 26px;
 }
 
-.users-data a{
+.users-data a,
+.users-data p
+{
     font-size: 12px;
     color: var(--lightColor);
     margin-bottom: 5px;

@@ -140,6 +140,7 @@ Route::controller(AuthController::class)->group(function () {
 
     Route::post('/updatePassword/{id}', 'updatePassword');
 
+    Route::get('switch_account/{id}', 'switchAccount')->name('switchAccount');
     Route::get('/logout', function () {
 
         Auth::logout();

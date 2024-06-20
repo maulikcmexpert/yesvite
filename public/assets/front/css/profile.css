@@ -567,6 +567,10 @@ input::-webkit-slider-thumb{
     box-shadow: none !important;
 }
 
+/* .manage-account .users-data p{
+    font-size: 15px;
+} */
+
 @media only screen and (max-width:991px){
     .profile-img .user-img{
         width: 80px;

@@ -240,6 +240,9 @@ class AuthController extends Controller
         return User::select('account_type')->where('id', $userId)->first();
     }
 
+
+
+
     public function currentUserLogin($currentLogUser)
     {
         Auth::guard('web')->login($currentLogUser);
@@ -265,7 +268,7 @@ class AuthController extends Controller
 
         $currentLogUser = User::where('id', Auth::id())->firstOrFail();
 
-
+        Auth::logout();
 
 
         $remember = $request->has('remember'); // Check if "Remember Me" checkbox is checked
@@ -371,6 +374,51 @@ class AuthController extends Controller
         return  Redirect::to('profile')->with('error', 'Email or Password invalid');
     }
 
+
+    public function switchAccount($id)
+    {
+        $currentLogUser = User::where('id', Auth::id())->firstOrFail();
+
+
+
+
+        $id = decrypt($id);
+        $checkUser = User::where('id', $id)->first();
+        if ($checkUser != null) {
+            Auth::logout();
+
+            $sessionAlreadyArray = [
+                'id' => encrypt($currentLogUser->id),
+                'first_name' => $currentLogUser->firstname,
+                'last_name' => $currentLogUser->lastname,
+                'secondary_username' => $currentLogUser->firstname . ' ' . $currentLogUser->lastname,
+                'secondary_email' => $currentLogUser->email,
+                'secondary_profile' => $currentLogUser->profile,
+
+            ];
+            Session::put(['secondary_user' => $sessionAlreadyArray]);
+            Session::forget('user');
+
+            Auth::loginUsingId($id);
+            $switchAccount =  Auth::guard('web')->user();
+            $switchAccount->current_session_id = Session::getId();
+            $switchAccount->save();
+
+            $sessionArray = [
+                'id' => encrypt($switchAccount->id),
+                'first_name' => $switchAccount->firstname,
+                'last_name' => $switchAccount->lastname,
+                'username' => $switchAccount->firstname . ' ' . $switchAccount->lastname,
+                'email' => $switchAccount->email,
+                'profile' => ($switchAccount->profile != NULL || $switchAccount->profile != "") ? asset('storage/profile/' . $switchAccount->profile) : ""
+            ];
+            Session::put(['user' => $sessionArray]);
+
+            $this->logoutFromApplication();
+            return redirect()->route('home')->with('success', 'Logged in successfully!');
+        }
+        return redirect()->route('profile')->with('error', 'Logged faild!');
+    }
 
     public function addAccount()
     {
