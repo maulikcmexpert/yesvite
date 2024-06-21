@@ -1217,7 +1217,7 @@ function send_notification_FCM_and($deviceToken, $notifyData)
 }
 function logoutFromWeb()
 {
-    Auth::guard('web')->logout();
+    Auth::logout();
 
     // Invalidate the session and regenerate the CSRF token to prevent session fixation attacks
 
