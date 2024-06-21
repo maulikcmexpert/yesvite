@@ -204,7 +204,7 @@ class AuthController extends Controller
                         Cookie::forget('password');
                     }
 
-                    $this->logoutFromApplication();
+                    $this->logoutFromApplication($user->id);
                     event(new \App\Events\UserRegistered($user));
 
                     return redirect()->route('home')->with('success', 'Logged in successfully!');
@@ -341,7 +341,7 @@ class AuthController extends Controller
                         Cookie::forget('password');
                     }
                     event(new \App\Events\UserRegistered($secondUser));
-                    $this->logoutFromApplication();
+                    $this->logoutFromApplication($secondUser->id);
                     return redirect()->route('home')->with('success', 'Logged in successfully!');
                 } else {
 
@@ -415,7 +415,7 @@ class AuthController extends Controller
             ];
             Session::put(['user' => $sessionArray]);
 
-            $this->logoutFromApplication();
+            $this->logoutFromApplication($switchAccount->id);
             return redirect()->route('home')->with('success', 'Logged in successfully!');
         }
         return redirect()->route('profile')->with('error', 'Logged faild!');
@@ -475,17 +475,17 @@ class AuthController extends Controller
         }
     }
 
-    public function logoutFromApplication()
+    public function logoutFromApplication($id)
     {
 
-        $patient = Auth::guard('api')->user();
 
-        $check = Device::where('user_id', $patient->id)->first();
+
+        $check = Device::where('user_id', $id)->first();
 
 
         if ($check != null) {
             $check->delete();
-            Token::where('user_id', $patient->id)->delete();
+            Token::where('user_id', $id)->delete();
         }
     }
 }
