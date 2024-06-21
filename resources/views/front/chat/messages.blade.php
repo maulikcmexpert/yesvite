@@ -231,7 +231,7 @@ use Carbon\Carbon;
                                                     </svg>
                                                     Archive</a>
                                             </li>
-                                            <li><a class="dropdown-item" href="#">
+                                            <li><a class="dropdown-item delete-conversation" href="#">
                                                     <svg class="me-2" width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <path d="M18.003 5.60742C17.9863 5.60742 17.9613 5.60742 17.9363 5.60742C13.528 5.16575 9.12798 4.99909 4.76965 5.44075L3.06965 5.60742C2.71965 5.64075 2.41131 5.39075 2.37798 5.04075C2.34465 4.69075 2.59465 4.39075 2.93631 4.35742L4.63631 4.19075C9.06965 3.74075 13.5613 3.91575 18.0613 4.35742C18.403 4.39075 18.653 4.69909 18.6196 5.04075C18.5946 5.36575 18.3196 5.60742 18.003 5.60742Z" fill="#94A3B8" />
                                                         <path d="M7.58656 4.76602C7.55322 4.76602 7.51989 4.76602 7.47822 4.75768C7.14489 4.69935 6.91156 4.37435 6.96989 4.04102L7.15322 2.94935C7.28656 2.14935 7.46989 1.04102 9.41156 1.04102H11.5949C13.5449 1.04102 13.7282 2.19102 13.8532 2.95768L14.0366 4.04102C14.0949 4.38268 13.8616 4.70768 13.5282 4.75768C13.1866 4.81602 12.8616 4.58268 12.8116 4.24935L12.6282 3.16602C12.5116 2.44102 12.4866 2.29935 11.6032 2.29935H9.41989C8.53656 2.29935 8.51989 2.41602 8.39489 3.15768L8.20322 4.24102C8.15322 4.54935 7.88656 4.76602 7.58656 4.76602Z" fill="#94A3B8" />
@@ -278,6 +278,8 @@ use Carbon\Carbon;
                             </div> -->
 
                         </div>
+
+                        <img src="" id="preview_img" class="preview_img">
                         <div class="msg-footer">
 
                             <input type="text" placeholder="Write message here..." class="send-message">
@@ -329,6 +331,10 @@ use Carbon\Carbon;
                                         </li>
                                     </ul>
                                 </div>
+
+                                <span id="send_image">
+                                    <button type="button">send</button>
+                                </span>
                                 <span>
                                     <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M12.5 15.5C14.71 15.5 16.5 13.71 16.5 11.5V6C16.5 3.79 14.71 2 12.5 2C10.29 2 8.5 3.79 8.5 6V11.5C8.5 13.71 10.29 15.5 12.5 15.5Z" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -428,8 +434,12 @@ use Carbon\Carbon;
         <div class="modal-content position-relative">
             <!-- Modal Header -->
             <div class="modal-header">
-                <h4 class="modal-title">Add New Message</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                <h4 class="selected-title">Add New Message</h4>
+                <div  class="change-group-name d-none">
+                    <input type="text" class="update-group-name"/>
+                    <button type="button" id="updateName">Save</button>
+                </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <!-- Modal body -->
             <div class="modal-body p-0">

@@ -136,6 +136,7 @@ class ChatController extends Controller
         )
             ->where(DB::raw("CONCAT(firstname, ' ', lastname)"), 'LIKE', '%' . $search . '%')
             ->where('id', '!=', $currentUserId)
+            ->where('app_user', '=', '1')
             ->get();
 
         return response()->json($users);

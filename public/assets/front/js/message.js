@@ -10,9 +10,16 @@ import {
     onChildChanged,
     update,
     off,
+    remove,
     onDisconnect,
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
-
+import {
+    getStorage,
+    ref as storageRef,
+    uploadString,
+    getDownloadURL,
+    uploadBytes,
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
 // Firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyAVgJQewYO8h1-_z2mrjaATCqJ4NH8eeCI",
@@ -99,7 +106,7 @@ function getListUserimg(profileImageUrl, userName) {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
-
+const storage = getStorage(app);
 const senderUser = $(".senderUser").val();
 const senderUserName = $(".senderUserName").val();
 const base_url = $("#base_url").val();
@@ -185,7 +192,13 @@ async function addMessageToGroup(
         let i = 0;
         for (const userId of newGroupMembers) {
             const user = await getUser(userId);
-            console.log({ user });
+            if (!user) {
+                toastr.error(
+                    "Some user is not updated, they are not added in group.",
+                    "Error!"
+                );
+                continue;
+            }
             groupInfo.profiles[i] = {
                 id: userId,
                 image: user?.userProfile,
@@ -204,6 +217,8 @@ async function addMessageToGroup(
 // Function to handle a new conversation
 function handleNewConversation(snapshot) {
     const newConversation = snapshot.val();
+    console.log("update");
+    console.log(newConversation.conversationId);
     // console.log("New conversation added:", newConversation);
     if (newConversation.conversationId == undefined) {
         return;
@@ -212,6 +227,7 @@ function handleNewConversation(snapshot) {
     const conversationElement = document.getElementsByClassName(
         `conversation-${newConversation.conversationId}`
     );
+    console.log(conversationElement);
     if (conversationElement.length > 0) {
         // Update existing conversation element
         $(conversationElement)
@@ -223,6 +239,16 @@ function handleNewConversation(snapshot) {
         $(conversationElement)
             .find(".user-detail .time-ago")
             .text(timeago.format(newConversation.timeStamp));
+        $(conversationElement)
+            .find(".user-img")
+            .find("img")
+            .replaceWith(
+                getListUserimg(
+                    newConversation.receiverProfile,
+                    newConversation.contactName
+                )
+            );
+
         const badgeElement = $(conversationElement).find(".user-detail .badge");
         badgeElement.text(newConversation.unReadCount);
         if (newConversation.unReadCount == 0) {
@@ -274,6 +300,8 @@ function handleConversationChange(snapshot) {
 // Function to update the chat UI
 async function updateChat(user_id) {
     $(".msg-lists").html("");
+    $(".member-lists").html("");
+    $(".choosen-file").hide();
     if (user_id == "") return;
     const selected_user = await getUser(user_id);
     console.log({ user_id });
@@ -296,11 +324,12 @@ async function updateChat(user_id) {
     updateProfileImg(profileImageUrl, selected_user.userName);
 
     $(".selected_name").val(selected_user.userName);
+    $(".selected-title").html(selected_user.userName);
 
     $(".selected_conversasion").val($(".selected_id").val());
     const conversationId = $(".selected_id").val();
     console.log({ conversationId });
-
+    $(".conversationId").attr("conversationId", conversationId);
     update(userRef, { userChatId: conversationId });
 
     const messagesRef = ref(database, `Messages/${conversationId}/message`);
@@ -308,7 +337,7 @@ async function updateChat(user_id) {
     off(messagesRef);
     off(selecteduserTypeRef);
     onChildAdded(messagesRef, async (snapshot) => {
-        addMessageToList(snapshot.key, snapshot.val());
+        addMessageToList(snapshot.key, snapshot.val(), conversationId);
 
         const selectedConversationId = $(".selected_conversasion").val();
         if (selectedConversationId === conversationId) {
@@ -339,13 +368,16 @@ var SelecteGroupUser = [];
 async function updateChatfromGroup(conversationId) {
     SelecteGroupUser = [];
     $(".msg-lists").html("");
-
+    $(".member-lists").html("");
+    $(".choosen-file").show();
+    $(".conversationId").attr("conversationId", conversationId);
     const groupInfoRef = ref(database, `Groups/${conversationId}/groupInfo`);
     const snapshot = await get(groupInfoRef);
     const groupInfo = snapshot.val();
     groupInfo.profiles.map((profile) => {
         if (profile.id > 0) {
             SelecteGroupUser[profile.id] = {
+                id: profile.id,
                 name: profile.name,
                 image: profile.image,
                 isAdmin: profile.isAdmin,
@@ -356,7 +388,7 @@ async function updateChatfromGroup(conversationId) {
     const messagesRef = ref(database, `Groups/${conversationId}/message`);
     off(messagesRef);
     onChildAdded(messagesRef, async (snapshot) => {
-        addMessageToList(snapshot.key, snapshot.val());
+        addMessageToList(snapshot.key, snapshot.val(), conversationId);
 
         const selectedConversationId = $(".selected_conversasion").val();
         if (selectedConversationId === conversationId) {
@@ -375,10 +407,12 @@ async function updateChatfromGroup(conversationId) {
     $(".selected_conversasion").val(conversationId);
     update(userRef, { userChatId: conversationId });
     addListInMembers(SelecteGroupUser);
+    $(".selected-title").html(groupInfo.groupName);
 }
 
 $(".conversationId").click(function () {
     let conversationId = $(this).attr("conversationId");
+    $(".change-group-name").addClass("d-none");
 });
 // Initialize event listeners
 $(document).on("click", ".msg-list", async function () {
@@ -387,9 +421,10 @@ $(document).on("click", ".msg-list", async function () {
     const isGroup = $(this).attr("data-group");
     const conversationId = $(this).attr("data-msgKey");
     $(".selected_id").val(conversationId);
-    $(".conversationId").attr("conversationId", conversationId);
+
     $("#isGroup").val(isGroup);
     console.log(isGroup);
+    $(".member-lists").html("");
 
     if (isGroup == true || isGroup == "true") {
         console.log("from group");
@@ -531,8 +566,17 @@ $(".send-message").on("keypress", async function (e) {
 });
 
 // Function to add a message to the UI list
-function addMessageToList(key, messageData) {
+function addMessageToList(key, messageData, conversationId) {
+    if ($(".selected_conversasion").val() != conversationId) {
+        return;
+    }
     let isGroup = $("#isGroup").val();
+    if (
+        messageData?.isDelete != undefined &&
+        Object.keys(messageData?.isDelete).includes(senderUser)
+    ) {
+        return;
+    }
     const messageElement = `
         <li class="${
             senderUser === messageData.senderId ? "receiver" : "sender"
@@ -709,6 +753,29 @@ const overviewRef = ref(database, `overview/${senderUser}`);
 onChildAdded(overviewRef, handleNewConversation);
 onChildChanged(overviewRef, handleConversationChange);
 
+function generateConversationId(userIds) {
+    // Create a modifiable copy of the list and sort user IDs to ensure consistency
+    const sortedUserIds = userIds.slice().sort();
+
+    // Concatenate sorted user IDs
+    const concatenatedIds = sortedUserIds.join("");
+
+    // Generate hash value using SHA-256
+    function sha256(str) {
+        return crypto.subtle
+            .digest("SHA-256", new TextEncoder().encode(str))
+            .then((buf) => {
+                return Array.prototype.map
+                    .call(new Uint8Array(buf), (x) =>
+                        ("00" + x.toString(16)).slice(-2)
+                    )
+                    .join("");
+            });
+    }
+
+    // Generate the SHA-256 hash and return the first 20 characters
+    return sha256(concatenatedIds).then((hash) => hash.substring(0, 20));
+}
 // Function to find or create a conversation
 async function findOrCreateConversation(
     currentUserId,
@@ -716,20 +783,39 @@ async function findOrCreateConversation(
     contactName,
     receiverProfile
 ) {
-    const overviewRef = ref(database, `overview/${currentUserId}`);
-    const snapshot = await get(overviewRef);
+    // const overviewRef = ref(database, `overview/${currentUserId}`);
+    // const snapshot = await get(overviewRef);
 
-    if (snapshot.exists()) {
-        const overviewData = snapshot.val();
-        for (const conversationId in overviewData) {
-            if (overviewData[conversationId].contactId === contactId) {
-                return conversationId;
-            }
-        }
-    }
+    // if (snapshot.exists()) {
+    //     const overviewData = snapshot.val();
+    //     for (const conversationId in overviewData) {
+    //         if (overviewData[conversationId].contactId === contactId) {
+    //             return conversationId;
+    //         }
+    //     }
+    // }
+    // // Check if a conversation exists for the contact
+    // const contactOverviewRef = ref(database, `overview/${contactId}`);
+    // const contactSnapshot = await get(contactOverviewRef);
 
-    const newConversationRef = push(child(ref(database), "overview"));
-    const newConversationId = newConversationRef.key;
+    // if (contactSnapshot.exists()) {
+    //     const contactOverviewData = contactSnapshot.val();
+    //     for (const conversationId in contactOverviewData) {
+    //         if (
+    //             contactOverviewData[conversationId].contactId === currentUserId
+    //         ) {
+    //             return conversationId;
+    //         }
+    //     }
+    // }
+
+    const newConversationId = await generateConversationId([
+        currentUserId,
+        contactId,
+    ]);
+
+    // const newConversationRef = push(child(ref(database), "overview"));
+    // const newConversationId = newConversationRef.key;
 
     const newConversationData = {
         contactId: contactId,
@@ -776,20 +862,21 @@ async function findOrCreateGroupConversation(
     newGroupMembers,
     groupName
 ) {
-    const overviewRef = ref(database, `overview/${currentUserId}`);
-    const snapshot = await get(overviewRef);
+    // const overviewRef = ref(database, `overview/${currentUserId}`);
+    // const snapshot = await get(overviewRef);
 
-    if (snapshot.exists()) {
-        const overviewData = snapshot.val();
-        for (const conversationId in overviewData) {
-            if (overviewData[conversationId].groupName === groupName) {
-                return conversationId;
-            }
-        }
-    }
+    // if (snapshot.exists()) {
+    //     const overviewData = snapshot.val();
+    //     for (const conversationId in overviewData) {
+    //         if (overviewData[conversationId].groupName === groupName) {
+    //             return conversationId;
+    //         }
+    //     }
+    // }
 
-    const newConversationRef = push(child(ref(database), "overview"));
-    const newConversationId = newConversationRef.key;
+    // const newConversationRef = push(child(ref(database), "overview"));
+    // const newConversationId = newConversationRef.key;
+    const newConversationId = await generateConversationId(newGroupMembers);
 
     const newConversationData = {
         contactId: newConversationId,
@@ -971,7 +1058,7 @@ const isOfflineForDatabase = {
     userStatus: "offline",
     userLastSeen: Date.now(),
 };
-await onDisconnect(userRef).update(isOfflineForDatabase);
+// await onDisconnect(userRef).update(isOfflineForDatabase);
 // Load user images
 $(".user-image").each(async function () {
     const dataId = $(this).attr("data-id");
@@ -990,7 +1077,14 @@ function addListInMembers(SelecteGroupUser) {
                                 </div>
                                 <div class="user-detail d-block ms-3">
                                     <div class="">
-                                        <h3>${user.name}</h3>
+                                        <h3>${
+                                            user.id == senderUser
+                                                ? "You"
+                                                : user.name
+                                        }</h3>
+                                        <span>${
+                                            user.isAdmin == "1" ? "Admin" : ""
+                                        }</span>
                                     </div>
                                 </div>
                             </div>
@@ -998,3 +1092,264 @@ function addListInMembers(SelecteGroupUser) {
     });
     $(".member-lists").html(messageElement);
 }
+
+$(".preview_img").hide();
+$("#send_image").hide();
+$(".upload-box").change(function () {
+    var curElement = $(".preview_img");
+    var file = this.files[0];
+    if (file) {
+        var reader = new FileReader();
+
+        if (file.type.match("image.*")) {
+            reader.onload = function (e) {
+                $(".preview_img").show();
+                curElement.attr("src", e.target.result);
+                // $("#upload_name").text(file.name);
+                $("#send_image").show();
+                // $('.dropdown-menu').hide();
+                $(".btn-primary.dropdown-toggle").attr(
+                    "aria-expanded",
+                    "false"
+                );
+            };
+
+            reader.readAsDataURL(file);
+        } else {
+            $(".preview_img").show();
+            curElement.attr("src", base_url + "storage/file.png");
+            // $("#upload_name").text(file.name);
+            $("#send_image").show();
+        }
+    } else {
+        $(".preview_img").hide();
+        curElement.attr("src", "");
+    }
+});
+
+$("#send_image").on("click", async function () {
+    $("#send_image").hide();
+    $(".preview_img").hide();
+
+    const previewImg = $(".preview_img");
+    const imageUrl = previewImg.attr("src");
+
+    if (!imageUrl) {
+        alert("Please select an image to send.");
+        return;
+    }
+
+    var isGroup = $("#isGroup").val();
+    const message = $(this).val();
+
+    // Determine file type and set the storage path
+    let storagePath;
+    if (imageUrl.startsWith("data:image/")) {
+        storagePath = `Images/198/${Date.now()}_${senderUser}.png`;
+    } else {
+        storagePath = `Files/203/${Date.now()}_${senderUser}`;
+    }
+
+    // Upload file to Firebase Storage
+    const fileRef = storageRef(storage, storagePath);
+    try {
+        if (imageUrl.startsWith("data:image/")) {
+            await uploadString(fileRef, imageUrl, "data_url");
+        } else {
+            const response = await fetch(imageUrl);
+            const blob = await response.blob();
+            await uploadBytes(fileRef, blob);
+        }
+        const downloadURL = await getDownloadURL(fileRef);
+
+        const messageData = {
+            data: downloadURL,
+            timeStamp: Date.now(),
+            isDelete: {},
+            isReply: "0",
+            isSeen: false,
+            react: "",
+            senderId: senderUser,
+            senderName: senderUserName,
+            status: {},
+            // imageUrl: downloadURL, // Use the download URL from Firebase Storage
+        };
+
+        if (isGroup == "1") {
+            const conversationId = $(".selected_id").val();
+            const groupName = $(".selected_name").val();
+
+            // Fetch group members from Firebase
+            const groupMembersRef = ref(
+                database,
+                `Groups/${conversationId}/users`
+            );
+            const groupMembersSnapshot = await get(groupMembersRef);
+            const newGroupMembers = groupMembersSnapshot.val();
+            console.log({ newGroupMembers });
+            await addMessageToGroup(conversationId, messageData);
+
+            // Update all group members' overview
+            for (const userId of newGroupMembers) {
+                await updateOverview(userId, conversationId, {
+                    lastMessage: `${senderUserName}: ${downloadURL}`,
+                    unReadCount: userId === senderUser ? 0 : 1,
+                    timeStamp: Date.now(),
+                });
+            }
+        } else {
+            const selectedMessageId = $(".selected_id").val();
+            const receiverId = $(".selected_message").val();
+            const receiverName = $(".selected_name").val();
+
+            messageData.receiverId = receiverId;
+            messageData.receiverName = receiverName;
+
+            await addMessage(selectedMessageId, messageData, receiverId);
+
+            await updateOverview(senderUser, selectedMessageId, {
+                lastMessage: `${senderUserName}: ${downloadURL}`,
+                timeStamp: Date.now(),
+            });
+            const receiverSnapshot = await get(
+                ref(database, `overview/${receiverId}/${selectedMessageId}`)
+            );
+            await updateOverview(receiverId, selectedMessageId, {
+                lastMessage: `${senderUserName}: ${downloadURL}`,
+                unReadCount: (receiverSnapshot.val().unReadCount || 0) + 1,
+                timeStamp: Date.now(),
+            });
+
+            const conversationElement = $(`.conversation-${selectedMessageId}`);
+            conversationElement.prependTo(".chat-list");
+        }
+    } catch (error) {
+        console.error("Error uploading image: ", error);
+        alert("Failed to upload image. Please try again.");
+    }
+});
+
+$("#choose-file").on("change", async function () {
+    var file = this.files[0];
+    var reader = new FileReader();
+    reader.onload = function (e) {
+        $("#profileIm").replaceWith(
+            `<img id="profileIm" src="${e.target.result}" alt="user-img">`
+        );
+    };
+    reader.readAsDataURL(this.files[0]);
+    setTimeout(async () => {
+        if (file) {
+            const fileRef = storageRef(
+                storage,
+                `/GroupProfile/${senderUser}/${Date.now()}_${file.name}`
+            );
+            const previewImg = $("#profileIm");
+            console.log({ previewImg });
+            const imageUrl = previewImg.attr("src");
+            console.log({ imageUrl });
+
+            if (imageUrl.startsWith("data:image/")) {
+                await uploadString(fileRef, imageUrl, "data_url");
+            } else {
+                const response = await fetch(imageUrl);
+                const blob = await response.blob();
+                await uploadBytes(fileRef, blob);
+            }
+            const downloadURL = await getDownloadURL(fileRef);
+
+            var conversationId = $(".conversationId").attr("conversationid"); // Replace with actual conversation ID
+            var groupInfoRef = ref(
+                database,
+                `/Groups/${conversationId}/groupInfo/`
+            );
+            $("#selected-user-profile").attr("src", downloadURL);
+            await update(groupInfoRef, { groupProfile: downloadURL });
+            SelecteGroupUser.map((user) => {
+                var groupUserInfoRef = ref(
+                    database,
+                    `/overview/${user.id}/${conversationId}/`
+                );
+
+                update(groupUserInfoRef, { receiverProfile: downloadURL });
+            });
+        }
+    }, 500);
+});
+
+$(".delete-conversation").click(async function () {
+    var conversationId = $(".conversationId").attr("conversationid");
+    if (conversationId && senderUser) {
+        // Remove the conversation from the overview
+        $(".conversation-" + conversationId).remove();
+        var msgLists = $(".msg-list");
+        if (msgLists.length > 0) {
+            msgLists.first().click(); // Simulate a click event on the first msg-list element
+        }
+        // Update the Firebase Realtime Database
+        var overviewRef = ref(
+            database,
+            `overview/${senderUser}/${conversationId}`
+        );
+
+        await remove(overviewRef);
+        var messagesRef = ref(database, `Messages/${conversationId}/message`);
+        var messagesSnapshot = await get(messagesRef);
+
+        if (messagesSnapshot.exists()) {
+            var messages = messagesSnapshot.val();
+            var updates = {};
+
+            // Iterate through all messages and update isDelete for the senderUser
+            for (var messageId in messages) {
+                console.log(messageId);
+                updates[
+                    `Messages/${conversationId}/message/${messageId}/isDelete/${senderUser}`
+                ] = 1;
+            }
+            // Apply updates to the Firebase Realtime Database
+            await update(ref(database), updates);
+        }
+    } else {
+        console.error("Conversation ID or Sender User ID is missing");
+    }
+});
+
+$(".selected-title").dblclick(function () {
+    let title = $(this).html();
+    $(this).hide();
+    $(".change-group-name").removeClass("d-none");
+    $(".update-group-name").val(title);
+});
+
+$("#updateName").click(async function () {
+    let newTitle = $(".update-group-name").val();
+    let conversationId = $(".conversationId").attr("conversationid");
+
+    if (!conversationId || !newTitle || SelecteGroupUser <= 0) {
+        console.error("Conversation ID or new title is missing");
+        return;
+    }
+
+    // Update group name in every group user's overview
+
+    SelecteGroupUser.map((user) => {
+        var groupUserInfoRef = ref(
+            database,
+            `/overview/${user.id}/${conversationId}/contactName`
+        );
+
+        set(groupUserInfoRef, newTitle);
+    });
+
+    // Update group name in group info
+    const groupInfoRef = ref(
+        database,
+        `Groups/${conversationId}/groupInfo/groupName`
+    );
+    await set(groupInfoRef, newTitle);
+
+    // Hide the input and show the updated title
+    $(".change-group-name").addClass("d-none");
+    $(".selected-title").html(newTitle).show();
+});
