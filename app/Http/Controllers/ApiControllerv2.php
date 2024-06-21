@@ -10296,6 +10296,7 @@ class ApiControllerv2 extends Controller
                     $rsvpUserStatus['last_name'] = $value->user->lastname;
                     $rsvpUserStatus['username'] = $value->user->firstname . ' ' . $value->user->lastname;
 
+
                     $rsvpUserStatus['profile'] = (!empty($value->user->profile) || $value->user->profile != NULL) ? asset('public/storage/profile/' . $value->user->profile) : "";
 
 
@@ -10326,6 +10327,7 @@ class ApiControllerv2 extends Controller
                         'id' => $value->user->id,
                         'profile' => empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile),
                         'bg_profile' => empty($value->user->bg_profile) ? "" : asset('public/storage/bg_profile/' . $value->user->bg_profile),
+                        'app_user' =>  $value->user->app_user,
                         'gender' => ($value->user->gender != NULL) ? $value->user->gender : "",
                         'first_name' => $value->user->firstname,
                         'last_name' => $value->user->lastname,
@@ -10542,6 +10544,9 @@ class ApiControllerv2 extends Controller
                     $addNewUser->email = $value['email'];
                     $addNewUser->country_code = '1';
                     $addNewUser->app_user = '0';
+                    $addNewUser->is_user_phone_contact = '1';
+                    $addNewUser->parent_user_phone_contact = $user->id;
+
                     $addNewUser->phone_number = $value['phone_number'];
                     $addNewUser->prefer_by = $value['prefer_by'];
 
@@ -10625,7 +10630,7 @@ class ApiControllerv2 extends Controller
 
 
                     $sent = sendSMSForApplication($value['phone_number'], $notification_message);
-                    dd($sent);
+
                     if ($sent == true) {
                         $invitation_sent_status =  EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $id])->first();
                         $invitation_sent_status->invitation_sent = '1';

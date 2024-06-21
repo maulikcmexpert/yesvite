@@ -185,10 +185,36 @@ function sendNotification($notificationType, $postData)
                     }
                     $checkNotificationSetting = checkNotificationSetting($value->user_id);
 
-                    if (count($checkNotificationSetting) != 0 && $checkNotificationSetting['invitations']['email'] == '1') {
+                    if ($value->prefer_by == 'email') {
+                        if ($value->user->app_user == '1' &&  count($checkNotificationSetting) != 0 && $checkNotificationSetting['invitations']['email'] == '1') {
 
 
-                        if ($value->prefer_by == 'email') {
+                            $event_time = "";
+                            if ($value->event->event_schedule->isNotEmpty()) {
+
+                                $event_time = $value->event->event_schedule->first()->start_time;
+                            }
+
+                            $eventData = [
+                                'event_name' => $value->event->event_name,
+                                'hosted_by' => $value->event->user->firstname . ' ' . $value->event->user->lastname,
+                                'profileUser' => ($value->event->user->profile != NULL || $value->event->user->profile != "") ? $value->event->user->profile : "no_profile.png",
+                                'event_image' => ($value->event->event_image->isNotEmpty()) ? $value->event->event_image[0]->image : "no_image.png",
+                                'date' =>   date('l - M jS, Y', strtotime($value->event->start_date)),
+                                'time' => $event_time,
+                                'address' => $value->event->event_location_name . ' ' . $value->event->address_1 . ' ' . $value->event->address_2 . ' ' . $value->event->state . ' ' . $value->event->city . ' - ' . $value->event->zip_code,
+                            ];
+
+
+                            $emailCheck = dispatch(new sendInvitation(array($value->user->email, $eventData)));
+
+                            if (!empty($emailCheck)) {
+
+                                $updateinvitation = EventInvitedUser::where(['event_id' => $postData['event_id'], 'user_id' => $value->user_id, 'prefer_by' => 'email'])->first();
+                                $updateinvitation->invitation_sent = '1';
+                                $updateinvitation->save();
+                            }
+                        } else {
                             $event_time = "";
                             if ($value->event->event_schedule->isNotEmpty()) {
 
