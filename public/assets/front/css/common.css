@@ -420,7 +420,7 @@ ul.nav-tabs .nav-link:focus{
 }
 
 .users-data a,
-.users-data p
+.users-data p   
 {
     font-size: 12px;
     color: var(--lightColor);

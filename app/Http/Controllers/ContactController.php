@@ -86,6 +86,7 @@ class ContactController extends Controller
             }
 
             $yesviteUser = $query->paginate(10);
+            dd($yesviteUser);
             return view('front.ajax_contacts', compact('yesviteUser'))->render();
         }
         return response()->json(['error' => 'Invalid request'], 400);
