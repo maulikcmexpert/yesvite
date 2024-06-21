@@ -113,7 +113,7 @@ function sendNotification($notificationType, $postData)
     })->where('event_id', $postData['event_id'])->get();
 
     if ($notificationType == 'invite') {
-        dd("hi");
+
         if (count($invitedusers) != 0) {
 
             if (isset($postData['newUser']) && count($postData['newUser']) != 0) {
