@@ -215,15 +215,15 @@ function sendNotification($notificationType, $postData)
                                 $updateinvitation->save();
                             }
                         }
-                        if ($value->prefer_by == 'phone') {
-                            dd($value->user->phone_number);
+                    }
+                    if ($value->prefer_by == 'phone') {
+                        dd($value->user->phone_number);
 
-                            $sent = sendSMSForApplication($value->user->phone_number, $notification_message);
-                            if ($sent == true) {
-                                $updateinvitation = EventInvitedUser::where(['event_id' => $postData['event_id'], 'user_id' => $value->user_id, 'prefer_by' => 'phone'])->first();
-                                $updateinvitation->invitation_sent = '1';
-                                $updateinvitation->save();
-                            }
+                        $sent = sendSMSForApplication($value->user->phone_number, $notification_message);
+                        if ($sent == true) {
+                            $updateinvitation = EventInvitedUser::where(['event_id' => $postData['event_id'], 'user_id' => $value->user_id, 'prefer_by' => 'phone'])->first();
+                            $updateinvitation->invitation_sent = '1';
+                            $updateinvitation->save();
                         }
                     }
                 }
