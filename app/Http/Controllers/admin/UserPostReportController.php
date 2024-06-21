@@ -20,9 +20,10 @@ class UserPostReportController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->ajax()) {
 
+        if ($request->ajax()) {
             $data = UserReportToPost::with(['events', 'users', 'event_posts'])->orderBy('id', 'desc');
+
 
             return Datatables::of($data)
 
