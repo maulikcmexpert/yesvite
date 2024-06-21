@@ -473,15 +473,4 @@ class AuthController extends Controller
             return response()->json(true);
         }
     }
-
-    public function logoutFromApplication()
-    {
-        $user = Auth::guard('web')->user();
-        $check = Device::where('user_id', $user->id)->first();
-
-        if ($check != null) {
-            $check->delete();
-            Token::where('user_id', $user->id)->delete();
-        }
-    }
 }
