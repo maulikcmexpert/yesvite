@@ -188,7 +188,7 @@ class ApiAuthController extends Controller
 
 
                 event(new \App\Events\UserRegistered($user));
-                logoutFromWeb();
+                logoutFromWeb($user->id);
                 return response()->json(['status' => 1, 'data' => $detail, 'token' => $token]);
             } else {
 
@@ -292,7 +292,7 @@ class ApiAuthController extends Controller
                 'account_type' => $userInfo->account_type,
                 'is_first_login' => $userInfo->is_first_login
             ];
-            logoutFromWeb();
+            logoutFromWeb($userId);
             return response()->json(['status' => 1, 'data' => $detail, 'token' => $token]);
         } else {
             DB::beginTransaction();
@@ -333,7 +333,7 @@ class ApiAuthController extends Controller
                 'is_first_login' => $userInfo->is_first_login
             ];
             DB::commit();
-            logoutFromWeb();
+            logoutFromWeb($userId);
             return response()->json(['status' => 1, 'data' => $detail, 'token' => $token]);
         }
 

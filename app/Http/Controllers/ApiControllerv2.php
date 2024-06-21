@@ -12108,7 +12108,7 @@ class ApiControllerv2 extends Controller
                 ];
 
 
-                logoutFromWeb();
+                logoutFromWeb($user->id);
                 return response()->json(['status' => 1, 'data' => $detail, 'token' => $token]);
             } else {
 

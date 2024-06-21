@@ -1215,14 +1215,13 @@ function send_notification_FCM_and($deviceToken, $notifyData)
 
     return $result_noti;
 }
-function logoutFromWeb()
+function logoutFromWeb($userId)
 {
+    $user = User::where('id', $userId)->first();
+    $user->current_session_id = NULL;
+    $user->save();
+    Session::where('user_id', $userId)->delete();
     Auth::logout();
-
-    // Invalidate the session and regenerate the CSRF token to prevent session fixation attacks
-
-    Session::forget('user');
-    Session::forget('secondary_user');
 }
 function sendSMS($receiverNumber, $message)
 {
