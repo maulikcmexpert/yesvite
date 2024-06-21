@@ -127,94 +127,103 @@ function sendNotification($notificationType, $postData)
 
 
                 // user notification setting //
-                if ($value->user->app_user == '1') {
-                    Notification::where(['user_id' => $value->user_id, 'sender_id' => $postData['sender_id'], 'event_id' => $postData['event_id']])->delete();
+                // if ($value->user->app_user == '1') {
+                Notification::where(['user_id' => $value->user_id, 'sender_id' => $postData['sender_id'], 'event_id' => $postData['event_id']])->delete();
 
-                    $notification_message = " have invited you to: " . $value->event->event_name;
-                    if ($value->is_co_host == '1') {
-                        $notification_message = "invited you to co-host " . $value->event->event_name . ' Accept?';
-                    }
+                $notification_message = " have invited you to: " . $value->event->event_name;
+                if ($value->is_co_host == '1') {
+                    $notification_message = "invited you to co-host " . $value->event->event_name . ' Accept?';
+                }
 
 
-                    $notification = new Notification;
-                    $notification->event_id = $postData['event_id'];
-                    $notification->user_id = $value->user_id;
-                    $notification->notification_type = $notificationType;
-                    $notification->sender_id = $postData['sender_id'];
-                    $notification->notification_message = $notification_message;
+                $notification = new Notification;
+                $notification->event_id = $postData['event_id'];
+                $notification->user_id = $value->user_id;
+                $notification->notification_type = $notificationType;
+                $notification->sender_id = $postData['sender_id'];
+                $notification->notification_message = $notification_message;
 
-                    if ($notification->save()) {
+                if ($notification->save()) {
 
-                        $deviceData = Device::where('user_id', $value->user_id)->first();
-                        if (!empty($deviceData)) {
+                    $deviceData = Device::where('user_id', $value->user_id)->first();
+                    if (!empty($deviceData)) {
 
-                            $notificationImage = EventImage::where('event_id', $postData['event_id'])->first();
+                        $notificationImage = EventImage::where('event_id', $postData['event_id'])->first();
 
-                            $notification_image = "";
-                            if ($notificationImage != NULL) {
+                        $notification_image = "";
+                        if ($notificationImage != NULL) {
 
-                                $notification_image = asset('public/storage/event_images/' . $notificationImage->image);
+                            $notification_image = asset('public/storage/event_images/' . $notificationImage->image);
+                        }
+                        $notificationData = [
+                            'message' => $notification_message,
+                            'type' => $notificationType,
+                            'notification_image' => $notification_image,
+                            'event_id' => $postData['event_id'],
+                            'event_name' => $value->event->event_name,
+                            'event_wall' => $value->event->event_settings->event_wall,
+                            'guest_list_visible_to_guests' => $value->event->event_settings->guest_list_visible_to_guests,
+                            'event_potluck' => $value->event->event_settings->podluck
+                        ];
+
+                        $checkNotificationSetting = checkNotificationSetting($value->user_id);
+                        if ((count($checkNotificationSetting) && $checkNotificationSetting['invitations']['push'] == '1') &&  $value->notification_on_off == '1') {
+
+                            if ($deviceData->model == 'And') {
+
+                                send_notification_FCM_and($deviceData->device_token, $notificationData);
                             }
-                            $notificationData = [
-                                'message' => $notification_message,
-                                'type' => $notificationType,
-                                'notification_image' => $notification_image,
-                                'event_id' => $postData['event_id'],
-                                'event_name' => $value->event->event_name,
-                                'event_wall' => $value->event->event_settings->event_wall,
-                                'guest_list_visible_to_guests' => $value->event->event_settings->guest_list_visible_to_guests,
-                                'event_potluck' => $value->event->event_settings->podluck
-                            ];
 
-                            $checkNotificationSetting = checkNotificationSetting($value->user_id);
-                            if ((count($checkNotificationSetting) && $checkNotificationSetting['invitations']['push'] == '1') &&  $value->notification_on_off == '1') {
+                            if ($deviceData->model == 'Ios') {
 
-                                if ($deviceData->model == 'And') {
-
-                                    send_notification_FCM_and($deviceData->device_token, $notificationData);
-                                }
-
-                                if ($deviceData->model == 'Ios') {
-
-                                    send_notification_FCM($deviceData->device_token, $notificationData);
-                                }
+                                send_notification_FCM($deviceData->device_token, $notificationData);
                             }
                         }
-                        $checkNotificationSetting = checkNotificationSetting($value->user_id);
+                    }
+                    $checkNotificationSetting = checkNotificationSetting($value->user_id);
 
-                        if (count($checkNotificationSetting) != 0 && $checkNotificationSetting['invitations']['email'] == '1') {
-
-
-                            if ($value->prefer_by == 'email') {
-                                $event_time = "";
-                                if ($value->event->event_schedule->isNotEmpty()) {
-
-                                    $event_time = $value->event->event_schedule->first()->start_time;
-                                }
-
-                                $eventData = [
-                                    'event_name' => $value->event->event_name,
-                                    'hosted_by' => $value->event->user->firstname . ' ' . $value->event->user->lastname,
-                                    'profileUser' => ($value->event->user->profile != NULL || $value->event->user->profile != "") ? $value->event->user->profile : "no_profile.png",
-                                    'event_image' => ($value->event->event_image->isNotEmpty()) ? $value->event->event_image[0]->image : "no_image.png",
-                                    'date' =>   date('l - M jS, Y', strtotime($value->event->start_date)),
-                                    'time' => $event_time,
-                                    'address' => $value->event->event_location_name . ' ' . $value->event->address_1 . ' ' . $value->event->address_2 . ' ' . $value->event->state . ' ' . $value->event->city . ' - ' . $value->event->zip_code,
-                                ];
+                    if (count($checkNotificationSetting) != 0 && $checkNotificationSetting['invitations']['email'] == '1') {
 
 
-                                $emailCheck = dispatch(new sendInvitation(array($value->user->email, $eventData)));
+                        if ($value->prefer_by == 'email') {
+                            $event_time = "";
+                            if ($value->event->event_schedule->isNotEmpty()) {
 
-                                if (!empty($emailCheck)) {
+                                $event_time = $value->event->event_schedule->first()->start_time;
+                            }
 
-                                    $updateinvitation = EventInvitedUser::where(['event_id' => $postData['event_id'], 'user_id' => $value->user_id, 'prefer_by' => 'email'])->first();
-                                    $updateinvitation->invitation_sent = '1';
-                                    $updateinvitation->save();
-                                }
+                            $eventData = [
+                                'event_name' => $value->event->event_name,
+                                'hosted_by' => $value->event->user->firstname . ' ' . $value->event->user->lastname,
+                                'profileUser' => ($value->event->user->profile != NULL || $value->event->user->profile != "") ? $value->event->user->profile : "no_profile.png",
+                                'event_image' => ($value->event->event_image->isNotEmpty()) ? $value->event->event_image[0]->image : "no_image.png",
+                                'date' =>   date('l - M jS, Y', strtotime($value->event->start_date)),
+                                'time' => $event_time,
+                                'address' => $value->event->event_location_name . ' ' . $value->event->address_1 . ' ' . $value->event->address_2 . ' ' . $value->event->state . ' ' . $value->event->city . ' - ' . $value->event->zip_code,
+                            ];
+
+
+                            $emailCheck = dispatch(new sendInvitation(array($value->user->email, $eventData)));
+
+                            if (!empty($emailCheck)) {
+
+                                $updateinvitation = EventInvitedUser::where(['event_id' => $postData['event_id'], 'user_id' => $value->user_id, 'prefer_by' => 'email'])->first();
+                                $updateinvitation->invitation_sent = '1';
+                                $updateinvitation->save();
+                            }
+                        } else if ($value->prefer_by == 'phone') {
+
+
+                            $sent = sendSMSForApplication($value->user->phone_number, $notification_message);
+                            if ($sent == true) {
+                                $updateinvitation = EventInvitedUser::where(['event_id' => $postData['event_id'], 'user_id' => $value->user_id, 'prefer_by' => 'phone'])->first();
+                                $updateinvitation->invitation_sent = '1';
+                                $updateinvitation->save();
                             }
                         }
                     }
                 }
+                // }
             }
         }
     }
@@ -1240,6 +1249,24 @@ function sendSMS($receiverNumber, $message)
         return  ["status" => true, "message" => "success"];
     } catch (Exception $e) {
         return  ["status" => false, "message" => $e->getMessage()];
+    }
+}
+
+function sendSMSForApplication($receiverNumber, $message)
+{
+    try {
+
+        $serverKeys = ServerKey::first();
+
+        $client = new Client($serverKeys->twilio_account_sid, $serverKeys->twilio_auth_token);
+        $client->messages->create($receiverNumber, [
+            'from' => $serverKeys->twilio_number,
+            'body' => $message
+        ]);
+
+        return  true;
+    } catch (Exception $e) {
+        return  false;
     }
 }
 
