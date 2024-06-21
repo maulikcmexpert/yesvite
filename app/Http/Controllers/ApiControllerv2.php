@@ -10617,6 +10617,17 @@ class ApiControllerv2 extends Controller
                     //     $faildinvitation_sent_status->save();
                     // }
                     dispatch(new sendInvitation(array($email, $eventData)));
+                } else if ($value['prefer_by'] == 'phone') {
+
+                    $notification_message = " have invited you to: " . $value->event->event_name;
+
+
+                    $sent = sendSMSForApplication($value->user->phone_number, $notification_message);
+                    if ($sent == true) {
+                        $invitation_sent_status =  EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $id])->first();
+                        $invitation_sent_status->invitation_sent = '1';
+                        $invitation_sent_status->save();
+                    }
                 }
             }
         }
