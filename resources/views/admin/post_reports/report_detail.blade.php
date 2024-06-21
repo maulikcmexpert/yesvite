@@ -1068,6 +1068,9 @@
                                                     <h6>
                                                         Event Name
                                                     </h6>
+                                                    <h6>
+                                                        {{$reportDetail->events->even_name}}
+                                                    </h6>
                                                     <!-- <button>Read More</button> -->
                                                 </div>
                                             </div>
