@@ -1277,22 +1277,22 @@ function validateAndFormatPhoneNumber($receiverNumber, $defaultCountryCode = 'IN
 
 function sendSMSForApplication($receiverNumber, $message)
 {
-    // try {
+    try {
 
-    $formattedNumber = validateAndFormatPhoneNumber($receiverNumber);
+        $formattedNumber = validateAndFormatPhoneNumber($receiverNumber);
 
-    $serverKeys = ServerKey::first();
+        $serverKeys = ServerKey::first();
 
-    $client = new Client($serverKeys->twilio_account_sid, $serverKeys->twilio_auth_token);
-    $client->messages->create($formattedNumber, [
-        'from' => $serverKeys->twilio_number,
-        'body' => $message
-    ]);
+        $client = new Client($serverKeys->twilio_account_sid, $serverKeys->twilio_auth_token);
+        $client->messages->create($formattedNumber, [
+            'from' => $serverKeys->twilio_number,
+            'body' => $message
+        ]);
 
-    // return  true;
-    // } catch (Exception $e) {
-    //     return  false;
-    // }
+        return  true;
+    } catch (Exception $e) {
+        return  false;
+    }
 }
 
 function dateDiffer($dateTime)
