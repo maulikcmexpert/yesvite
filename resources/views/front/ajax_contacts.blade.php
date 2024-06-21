@@ -9,7 +9,7 @@
 
 @foreach($yesviteUser as $value)
 <?php
-dd($value);
+
 $initials = strtoupper($value->firstname[0]) . strtoupper($value->lastname[0]);
 $fontColor = "fontcolor" . strtoupper($value->firstname[0]);
 ?>

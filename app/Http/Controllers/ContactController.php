@@ -78,7 +78,12 @@ class ContactController extends Controller
         if ($request->ajax()) {
             $query = User::where('id', '!=', $id)->where(['is_user_phone_contact' => '0'])->orderBy('firstname');
 
-
+            if ($searchName) {
+                $query->where(function ($q) use ($searchName) {
+                    $q->where('firstname', 'LIKE', '%' . $searchName . '%')
+                        ->orWhere('lastname', 'LIKE', '%' . $searchName . '%');
+                });
+            }
 
             $yesviteUser = $query->paginate(10);
             return view('front.ajax_contacts', compact('yesviteUser'))->render();
