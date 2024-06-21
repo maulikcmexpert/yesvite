@@ -478,17 +478,14 @@ class AuthController extends Controller
     public function logoutFromApplication()
     {
 
-        if (Auth::guard('api')->check()) {
+        $patient = Auth::guard('api')->user();
 
-            $patient = Auth::guard('api')->user();
-
-            $check = Device::where('user_id', $patient->id)->first();
+        $check = Device::where('user_id', $patient->id)->first();
 
 
-            if ($check != null) {
-                $check->delete();
-                Token::where('user_id', $patient->id)->delete();
-            }
+        if ($check != null) {
+            $check->delete();
+            Token::where('user_id', $patient->id)->delete();
         }
     }
 }
