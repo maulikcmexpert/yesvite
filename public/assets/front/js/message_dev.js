@@ -845,6 +845,13 @@ $("#new_message").on("keypress", async function (e) {
     }
 });
 
+
+
+
+
+
+
+////**************************************************This Code is for image and video both....************************************
 $(".preview_img").hide();
 $("#send_image").hide();
 $(".upload-box").change(function () {
@@ -860,18 +867,25 @@ $(".upload-box").change(function () {
                 // $("#upload_name").text(file.name);
                 $("#send_image").show();
                 // $('.dropdown-menu').hide();
-                $(".btn-primary.dropdown-toggle").attr(
-                    "aria-expanded",
-                    "false"
-                );
             };
 
             reader.readAsDataURL(file);
-        } else {
+        } else if (file.type.match("video.*")) {
+            // Handling video files
+            var curElement = $(".preview_img");
+
+            curElement.attr("src", URL.createObjectURL(file));
+
             $(".preview_img").show();
-            curElement.attr("src", base_url + "storage/file.png");
-            // $("#upload_name").text(file.name);
             $("#send_image").show();
+        } else {
+            // reader.onload = function (e) {
+            //     var curElement = $(".preview_img");
+            //     curElement.attr("src", Uint8Array(e.target.result));
+            // };
+
+            // $(".preview_img").show();
+            // $("#send_image").show();
         }
     } else {
         $(".preview_img").hide();
@@ -886,6 +900,8 @@ $("#send_image").on("click", async function () {
     const previewImg = $(".preview_img");
     const imageUrl = previewImg.attr("src");
 
+    console.log(imageUrl);
+
     if (!imageUrl) {
         alert("Please select an image to send.");
         return;
@@ -893,14 +909,18 @@ $("#send_image").on("click", async function () {
 
     var isGroup = $("#isGroup").val();
     const message = $(this).val();
+    let storagePath;
 
     // Determine file type and set the storage path
-    let storagePath;
     if (imageUrl.startsWith("data:image/")) {
         storagePath = `Images/198/${Date.now()}_${senderUser}.png`;
+    } else if (imageUrl.startsWith("blob:http:/")) {
+        storagePath = `Video/198/${Date.now()}_${senderUser}.mp4`;
     } else {
         storagePath = `Files/203/${Date.now()}_${senderUser}`;
     }
+
+    console.log(storagePath);
 
     // Upload file to Firebase Storage
     const fileRef = storageRef(storage, storagePath);
@@ -975,13 +995,208 @@ $("#send_image").on("click", async function () {
             const conversationElement = $(`.conversation-${selectedMessageId}`);
             conversationElement.prependTo(".chat-list");
         }
+
+        // If everything is successful, log success
+        console.log("Upload successful");
+    } catch (error) {
+        console.error("Error uploading file: ", error);
+        // alert("Failed to upload file. Please try again.");
+    }
+});
+////**************************************************This Code is for image and video both....************************************ END
+
+
+
+
+
+//*******************************This Code is for audio record....**************************************
+$("#send_audio").hide();
+let mediaRecorder;
+let recordedChunks = [];
+
+const startButton = document.getElementById("startRecording");
+const stopButton = document.getElementById("stopRecording");
+const playButton = document.getElementById("playRecording");
+const stopPlaybackButton = document.getElementById("stopPlayback");
+const audioElement = document.getElementById("recordedAudio");
+
+function startRecording() {
+    navigator.mediaDevices
+        .getUserMedia({ audio: true })
+        .then((stream) => {
+            mediaRecorder = new MediaRecorder(stream);
+
+            mediaRecorder.start();
+            startButton.style.display = "none";
+            stopButton.style.display = "inline-block";
+            playButton.style.display = "none";
+            stopPlaybackButton.style.display = "none";
+
+            mediaRecorder.ondataavailable = (event) => {
+                recordedChunks.push(event.data);
+            };
+        })
+        .catch((err) => {
+            console.error("Error accessing microphone: ", err);
+            alert("Failed to access microphone. Please try again.");
+        });
+}
+
+async function stopRecording() {
+    if (mediaRecorder && mediaRecorder.state === "recording") {
+        mediaRecorder.stop();
+        $("#send_audio").show();
+
+        startButton.style.display = "inline-block";
+        stopButton.style.display = "none";
+
+        // Wait for the MediaRecorder to finish saving data
+        await new Promise((resolve) => {
+            mediaRecorder.onstop = resolve;
+        });
+
+        // Call playRecording() to initiate playback
+        playRecording();
+    } else {
+        console.error("MediaRecorder is not recording.");
+    }
+}
+
+function playRecording() {
+    const blob = new Blob(recordedChunks, { type: "audio/wav" });
+    const audioURL = URL.createObjectURL(blob);
+
+    audioElement.src = audioURL;
+    audioElement.style.display = "block";
+
+    playButton.style.display = "none";
+    stopPlaybackButton.style.display = "inline-block";
+
+    audioElement.play().catch((err) => {
+        console.error("Error playing audio: ", err);
+        alert("Failed to play recorded audio.");
+    });
+}
+
+function stopPlayback() {
+    if (!audioElement.paused) {
+        audioElement.pause();
+    }
+    playButton.style.display = "inline-block";
+    stopPlaybackButton.style.display = "none";
+}
+
+startButton.addEventListener("click", startRecording);
+stopButton.addEventListener("click", stopRecording);
+playButton.addEventListener("click", playRecording);
+stopPlaybackButton.addEventListener("click", stopPlayback);
+
+$("#send_audio").on("click", async function () {
+    $(".recordedAudio").hide();
+    $("#playRecording").hide();
+    $("#stopRecording").hide();
+    $("#stopPlayback").hide();
+
+    $("#send_audio").hide();
+    // $(".preview_img").hide();
+
+    const previewAudio = $(".recordedAudio");
+    const audioUrl = previewAudio.attr("src");
+
+    console.log(audioUrl);
+
+    if (!audioUrl) {
+        alert("Please select audio.");
+        return;
+    }
+
+    var isGroup = $("#isGroup").val();
+    // const message = $(this).val();
+
+    let storagePath;
+    // if (audioUrl.startsWith("blob:http/")) {
+    storagePath = `Audios/198/${Date.now()}_${senderUser}.audio`;
+    // } else {
+    // }
+
+    // Upload file to Firebase Storage
+    const fileRef = storageRef(storage, storagePath);
+    try {
+        if (audioUrl.startsWith("blob:http/")) {
+            await uploadString(fileRef, audioUrl, "data_url");
+        } else {
+            const response = await fetch(audioUrl);
+            const blob = await response.blob();
+            await uploadBytes(fileRef, blob);
+        }
+        const downloadaudioURL = await getDownloadURL(fileRef);
+
+        const messageData = {
+            data: downloadaudioURL,
+            timeStamp: Date.now(),
+            isDelete: {},
+            isReply: "0",
+            isSeen: false,
+            react: "",
+            senderId: senderUser,
+            senderName: senderUserName,
+            status: {},
+            // imageUrl: downloadURL, // Use the download URL from Firebase Storage
+        };
+
+        if (isGroup == "1") {
+            const conversationId = $(".selected_id").val();
+            const groupName = $(".selected_name").val();
+
+            // Fetch group members from Firebase
+            const groupMembersRef = ref(
+                database,
+                `Groups/${conversationId}/users`
+            );
+            const groupMembersSnapshot = await get(groupMembersRef);
+            const newGroupMembers = groupMembersSnapshot.val();
+            console.log({ newGroupMembers });
+            await addMessageToGroup(conversationId, messageData);
+
+            // Update all group members' overview
+            for (const userId of newGroupMembers) {
+                await updateOverview(userId, conversationId, {
+                    lastMessage: `${senderUserName}: ${downloadaudioURL}`,
+                    unReadCount: userId === senderUser ? 0 : 1,
+                    timeStamp: Date.now(),
+                });
+            }
+        } else {
+            const selectedMessageId = $(".selected_id").val();
+            const receiverId = $(".selected_message").val();
+            const receiverName = $(".selected_name").val();
+
+            messageData.receiverId = receiverId;
+            messageData.receiverName = receiverName;
+
+            await addMessage(selectedMessageId, messageData, receiverId);
+
+            await updateOverview(senderUser, selectedMessageId, {
+                lastMessage: `${senderUserName}: ${downloadaudioURL}`,
+                timeStamp: Date.now(),
+            });
+            const receiverSnapshot = await get(
+                ref(database, `overview/${receiverId}/${selectedMessageId}`)
+            );
+            await updateOverview(receiverId, selectedMessageId, {
+                lastMessage: `${senderUserName}: ${downloadaudioURL}`,
+                unReadCount: (receiverSnapshot.val().unReadCount || 0) + 1,
+                timeStamp: Date.now(),
+            });
+
+            const conversationElement = $(`.conversation-${selectedMessageId}`);
+            conversationElement.prependTo(".chat-list");
+        }
     } catch (error) {
         console.error("Error uploading image: ", error);
-        alert("Failed to upload image. Please try again.");
+        // alert("Failed to upload image. Please try again.");
     }
 });
 
-
-
-
+//*******************************This Code is for audio record....**************************************END
 

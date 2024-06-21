@@ -301,13 +301,22 @@ use Carbon\Carbon;
                                 <p>Please select a message to see the details</p>
                             </div> -->
 
+                            <!-- *********************This is for audio********************* -->
+                            <div id="audioControls">
+                                <button id="stopRecording" style="display: none;">Stop Recording</button>
+                                <button id="playRecording" style="display: none;">Play Recording</button>
+                                <button id="stopPlayback" style="display: none;">Stop Playback</button>
+                            </div>
+                            <audio id="recordedAudio" class="recordedAudio" controls style="display: none;"></audio>
+                            <!-- ****************************This is for audio *********************END-->
+
                         </div>
                         <label id="upload_name"></label>
                         <img src="" id="preview_img" class="preview_img">
 
                         <div class="msg-footer">
 
-                            
+
                             <input type="text" placeholder="Write message here..." class="send-message">
                             <div class="d-flex gap-3">
                                 <div class="dropdown">
@@ -362,9 +371,13 @@ use Carbon\Carbon;
                                     <button type="button">send</button>
                                 </span>
 
-                                
+                            <!-- ****************************This is for audio *********************-->
+                            <span id="send_audio">
+                                    <button type="button">send</button>
+                                </span>
+                            <!-- ****************************This is for audio *********************END-->
 
-                                <span class="record_voice">
+                                <span id="startRecording"> <!--  *********************This is for audio only id -->
                                     <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M12.5 15.5C14.71 15.5 16.5 13.71 16.5 11.5V6C16.5 3.79 14.71 2 12.5 2C10.29 2 8.5 3.79 8.5 6V11.5C8.5 13.71 10.29 15.5 12.5 15.5Z" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                         <path d="M4.85156 9.65039V11.3504C4.85156 15.5704 8.28156 19.0004 12.5016 19.0004C16.7216 19.0004 20.1516 15.5704 20.1516 11.3504V9.65039" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -373,6 +386,9 @@ use Carbon\Carbon;
                                         <path d="M12.5 19V22" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                     </svg>
                                 </span>
+
+
+
                             </div>
                         </div>
 
