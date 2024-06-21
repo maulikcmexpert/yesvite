@@ -1041,6 +1041,11 @@ margin: -43px 0px 0px 8px;
     margin-bottom: 0;
 }
 
+.product-images.demo-gallery a{
+    display: block;
+    height: 200px;
+}
+
 /* ========Responsive====== */
 
 @media only screen and (max-width:768px){
