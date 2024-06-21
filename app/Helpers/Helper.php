@@ -1219,8 +1219,8 @@ function logoutFromWeb($userId)
 {
 
     $user = User::where('id', $userId)->first();
-    dd($user);
-    $user->current_session_id = NULL;
+
+    $user->current_session_id = "NULL";
     $user->save();
     Auth::logout();
 }
