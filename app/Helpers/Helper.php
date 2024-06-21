@@ -1220,7 +1220,6 @@ function logoutFromWeb($userId)
     $user = User::where('id', $userId)->first();
     $user->current_session_id = NULL;
     $user->save();
-    Session::where('user_id', $userId)->delete();
     Auth::logout();
 }
 function sendSMS($receiverNumber, $message)
