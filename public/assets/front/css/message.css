@@ -58,6 +58,12 @@
     max-width: 375px;
     border-right: 1px solid var(--borderColor);
 }
+.member-lists{
+    /* padding: 24px 20px; */
+    width: 100%;
+    max-width: 375px;
+    border-right: 1px solid var(--borderColor);
+}
 
 .chat-lists input[type="search"] ~ span {
     position: absolute;
@@ -296,7 +302,40 @@ ul.chat-list li:last-child{
     padding: 0;
 }
 
+#listBox .user-cover-img{
+    display: block;
+    width: 120px;
+    height: 120px;
+    background: inherit;
+    margin: 0 auto;
 
+    
+}
+
+#listBox input[type="file"]{
+    width: 0;
+    overflow: hidden;
+    display: none;
+}
+
+#listBox .edit-btn{
+    position: absolute;
+    right: 40%;
+    border: none;
+    bottom: 0;
+    width: 35px;
+    height: 35px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--primaryColor) !important;
+    cursor: pointer;
+}
+
+#listBox .edit-btn svg path{
+    stroke: #fff;
+}
 
 .msg-body ul li{
     margin: 16px 0;

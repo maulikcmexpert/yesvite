@@ -20,8 +20,23 @@ $i = 0;
             <input class="form-check-input" type="checkbox" name="Guest RSVP’s" checked="">
         </div> --}}
         <div class="user-img position-relative">
-            <img class="img-fluid user-image user-img-{{$message['contactId']}}" data-id={{$message['contactId']}}
-                src="{{$message['receiverProfile']}}" alt="user img">
+            @if($message['receiverProfile']!=="" && $message['receiverProfile']!==null)
+            <img class="img-fluid user-image user-img-{{$message['contactId']}}" data-id={{$message['contactId']}} src="{{$message['receiverProfile']}}" alt="user img">
+           
+                        @else
+                        @php
+                        $contactName = $message['contactName'];
+                        $words = explode(' ', $contactName);
+                        $initials = '';
+                        foreach ($words as $word) {
+                        $initials .= strtoupper(substr($word, 0, 1));
+                        }
+                        $fontColor = "fontcolor" . strtoupper($initials[0]);
+                        @endphp
+                        <h5 class="{{$fontColor}}">{{$initials}}</h5>
+                        @endif
+
+           
             <span class="active"></span>
         </div>
         <a href="#" class="user-detail d-block ms-3">
@@ -35,7 +50,7 @@ $i = 0;
                 <h6 class="ms-2"> {{ $timeAgo }}</h6>
             </div>
             <div class="d-flex align-items-center justify-content-between">
-                <span>{{$message['lastMessage']}}</span>
+                <span class="last-message">{{$message['lastMessage']}}</span>
                 <span class="badge ms-2 {{@$message['unReadCount'] == 0 ? 'd-none' : ''}}">{{@$message['unReadCount']}}</span>
             </div>
         </a>

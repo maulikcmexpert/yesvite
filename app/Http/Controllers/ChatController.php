@@ -46,6 +46,7 @@ class ChatController extends Controller
 
         // Create a new user node with the userId
         $usersRef = $this->usersReference->getChild((string)$userId)->set($updateData);
+        // dd(1);
         // $newUserId = $usersRef->getKey();
         // $messages = $this->chatRoom->getValue();
         // dd($id);
