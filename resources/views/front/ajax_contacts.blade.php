@@ -37,6 +37,7 @@ $fontColor = "fontcolor" . strtoupper($value->firstname[0]);
                     </svg>
                     {{$value->email}}</a>
             </div>
+            @endif
             @if($value->phone_number != NULL || $value->phone_number != "")
             <div>
                 <a href="tel">
