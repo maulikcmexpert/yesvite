@@ -1,36 +1,31 @@
 @if($yesviteUser->isEmpty())
 <div class="users-data">
-
     <div class="md-5">
         <h5>No Records Found..</h5>
     </div>
-</div>@else
-
-
+</div>
+@else
 @foreach($yesviteUser as $value)
 <?php
-echo $value->firstname;
-exit;
-
-$initials = strtoupper($value->firstname[0]) . strtoupper($value->lastname[0]);
-$fontColor = "fontcolor" . strtoupper($value->firstname[0]);
+$initials = '';
+$fontColor = '';
+if ($value->firstname !== null && $value->lastname !== null) {
+    $initials = strtoupper($value->firstname[0]) . strtoupper($value->lastname[0]);
+    $fontColor = "fontcolor" . strtoupper($value->firstname[0]);
+}
 ?>
 <div class="users-data">
     <div class="d-flex align-items-start">
         <div class="contact-img">
-            <?php
-            if ($value->profile != null) { ?>
-
-                <img src="{{ asset('storage/profile/' . $value->profile)}}" alt="contact-img">
-            <?php } else { ?>
-
-                <h5 class="<?= $fontColor ?>"><?= $initials ?></h5>
-            <?php } ?>
-
+            @if($value->profile !== null)
+            <img src="{{ asset('storage/profile/' . $value->profile)}}" alt="contact-img">
+            @else
+            <h5 class="{{ $fontColor }}">{{ $initials }}</h5>
+            @endif
         </div>
         <div class="text-start">
-            <h5>{{$value->firstname.' '.$value->lastname}}</h5>
-            @if($value->email != NULL || $value->email != "")
+            <h5>{{ $value->firstname . ' ' . $value->lastname }}</h5>
+            @if($value->email !== null && $value->email !== "")
             <div>
                 <a href="mailto:{{$value->email}}">
                     <svg class="me-1" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -40,7 +35,7 @@ $fontColor = "fontcolor" . strtoupper($value->firstname[0]);
                     {{$value->email}}</a>
             </div>
             @endif
-            @if($value->phone_number != NULL || $value->phone_number != "")
+            @if($value->phone_number !== null && $value->phone_number !== "")
             <div>
                 <a href="tel">
                     <svg class="me-1" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
