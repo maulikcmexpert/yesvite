@@ -157,7 +157,17 @@ ul.nav .nav-link:hover{
     font-size: 12px;
     color: var(--lightColor);
     font-weight: 500;
+    transition: 0.5s;
+    -webkit-transition: 0.5s;
+    -moz-transition: 0.5s;
+    -ms-transition: 0.5s;
+    -o-transition: 0.5s;
 }
+
+/* .user-location a:hover,
+.user-location span:hover{
+    color: var(--primaryColor);
+} */
 
 .user-location div:first-child{
     position: relative;
@@ -188,6 +198,19 @@ ul.nav .nav-link:hover{
     -o-border-radius: 10px;
     display: block;
     margin-top: 16px;
+    transition: 0.5s;
+    -webkit-transition: 0.5s;
+    -moz-transition: 0.5s;
+    -ms-transition: 0.5s;
+    -o-transition: 0.5s;
+}
+
+.switch-ac:hover{
+    border: 1px solid var(--primaryColor);
+}
+
+.switch-ac:hover span{
+    color: var(--primaryColor);
 }
 
 .switch-ac span{
@@ -326,36 +349,7 @@ ul.nav .nav-link:hover{
     stroke: #fff;
 }
 
-.breadcrumb-nav .breadcrumb-item+.breadcrumb-item::before{
-    font-family: "Font Awesome 5 Free";
-   content: "\f054";
-   display: inline-block;
-   padding-right: 3px;
-   vertical-align: middle;
-   font-weight: 900;
-   color: var(--iconColor);
-   font-size: 10px;
-   margin-left: 8px;
-    margin-right: 8px;
-}
 
-.breadcrumb-nav .breadcrumb-item{
-    display: flex;
-    align-items: center;
-    padding: 0 !important;
-}
-
-.breadcrumb-nav .breadcrumb-item a{
-    font-size: 14px;
-    color: var(--breadcrumbColor);
-    font-weight: 500;
-}
-
-.breadcrumb-nav .breadcrumb-item.active{
-    font-size: 14px;
-    color: var(--secondryColor);
-    font-weight: 500;
-}
 
 .contact-title{
     margin: 16px 0;
@@ -608,7 +602,9 @@ ul.listing li span{
     overflow-y: scroll;
 }
 
-
+#manageModel .cmn-btn:hover svg path{
+    stroke: var(--primaryColor);
+}
 
 
 /* ======= Responsive ======= */
