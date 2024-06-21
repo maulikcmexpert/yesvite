@@ -28,6 +28,7 @@ $fontColor = "fontcolor" . strtoupper($value->firstname[0]);
         </div>
         <div class="text-start">
             <h5>{{$value->firstname.' '.$value->lastname}}</h5>
+            @if($value->email != NULL || $value->email != "")
             <div>
                 <a href="mailto:{{$value->email}}">
                     <svg class="me-1" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
