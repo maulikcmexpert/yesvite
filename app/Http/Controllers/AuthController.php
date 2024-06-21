@@ -274,6 +274,7 @@ class AuthController extends Controller
         $remember = $request->has('remember'); // Check if "Remember Me" checkbox is checked
 
         if (Auth::attempt($credentials, $remember)) {
+            dd("hi");
             $secondUser = Auth::guard('web')->user();
 
             if ($secondUser->email_verified_at != NULL) {
