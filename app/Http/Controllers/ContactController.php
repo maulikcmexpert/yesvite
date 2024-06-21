@@ -72,10 +72,16 @@ class ContactController extends Controller
 
     public function loadMore(Request $request)
     {
-        $id = Auth::guard('web')->user()->id;
+        $user = Auth::guard('web')->user();
+        if (!$user) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+        $id = $user->id;
         $searchName = $request->search_name;
 
         if ($request->ajax()) {
+            //    Log::info('AJAX request received', $request->all());
+
             $query = User::where('id', '!=', $id)->where(['is_user_phone_contact' => '0'])->orderBy('firstname');
 
             if ($searchName) {
@@ -89,6 +95,7 @@ class ContactController extends Controller
 
             return view('front.ajax_contacts', compact('yesviteUser'))->render();
         }
+
         return response()->json(['error' => 'Invalid request'], 400);
     }
 
