@@ -10617,7 +10617,9 @@ class ApiControllerv2 extends Controller
                     //     $faildinvitation_sent_status->save();
                     // }
                     dispatch(new sendInvitation(array($email, $eventData)));
-                } else if ($value['prefer_by'] == 'phone') {
+                }
+
+                if ($value['prefer_by'] == 'phone') {
 
                     $notification_message = " have invited you to: " . $value->event->event_name;
 
