@@ -11796,10 +11796,18 @@ class ApiControllerv2 extends Controller
 
             $check = Device::where('user_id', $patient->id)->first();
 
+
             if ($check != null) {
                 $check->delete();
                 Token::where('user_id', $patient->id)->delete();
             }
+
+            Auth::guard('web')->logout();
+
+            // Invalidate the session and regenerate the CSRF token to prevent session fixation attacks
+
+            Session::forget('user');
+            Session::forget('secondary_user');
             return response()->json(['status' => 1, 'message' => "logout succesfully"]);
         }
     }
