@@ -10625,7 +10625,7 @@ class ApiControllerv2 extends Controller
 
 
                     $sent = sendSMSForApplication($value['phone_number'], $notification_message);
-                    dd($sent);
+
                     if ($sent == true) {
                         $invitation_sent_status =  EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $id])->first();
                         $invitation_sent_status->invitation_sent = '1';
