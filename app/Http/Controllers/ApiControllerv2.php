@@ -10296,6 +10296,7 @@ class ApiControllerv2 extends Controller
                     $rsvpUserStatus['last_name'] = $value->user->lastname;
                     $rsvpUserStatus['username'] = $value->user->firstname . ' ' . $value->user->lastname;
 
+
                     $rsvpUserStatus['profile'] = (!empty($value->user->profile) || $value->user->profile != NULL) ? asset('public/storage/profile/' . $value->user->profile) : "";
 
 
@@ -10326,6 +10327,7 @@ class ApiControllerv2 extends Controller
                         'id' => $value->user->id,
                         'profile' => empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile),
                         'bg_profile' => empty($value->user->bg_profile) ? "" : asset('public/storage/bg_profile/' . $value->user->bg_profile),
+                        'app_user' =>  $value->user->app_user,
                         'gender' => ($value->user->gender != NULL) ? $value->user->gender : "",
                         'first_name' => $value->user->firstname,
                         'last_name' => $value->user->lastname,
