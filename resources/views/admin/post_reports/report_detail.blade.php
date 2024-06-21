@@ -944,9 +944,9 @@
                                 <div class="col-xl-6 col-lg-12 col-md-12">
                                     <div class="event_posts_right">
                                         <div class="event_posts_right_content">
-                                            <p>
+                                            <h6>
                                                 {{ $reportDetail->event_posts->post_message}}
-                                            </p>
+                                            </h6>
                                             <!-- <button>Read More</button> -->
                                         </div>
 

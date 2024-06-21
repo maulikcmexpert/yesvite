@@ -1025,9 +1025,19 @@ margin: -43px 0px 0px 8px;
     font-weight: 600;
 }
 
+.event_posts_right h6 span{
+    font-size: 13px;
+    color: gray;
+}
+
 .event_posts_right h5{
-    font-size: 18px;
+    font-size: 17px;
     font-weight: 500;
+}
+
+.event_posts_creator_content h6{
+    font-size: 15px;
+    margin-bottom: 0;
 }
 
 /* ========Responsive====== */
