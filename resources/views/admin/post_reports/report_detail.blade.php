@@ -1068,16 +1068,15 @@
                                                     <h6>
                                                         Event Name
                                                     </h6>
-                                                    <h6>
-                                                        {{$reportDetail->events->event_name}}
-                                                    </h6>
+                                                    <h6>{{$reportDetail->events->event_name}}</h6>
+
                                                     <!-- <button>Read More</button> -->
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="event_posts_right_content">
                                                     <h6>
-                                                        Reborted By
+                                                        Reborted By <span>({{ $reportDetail->created_at }})</span>
                                                     </h6>
                                                     <div class="event_posts_creator">
 
@@ -1095,7 +1094,7 @@
                                                         </div>
                                                         <div class="event_posts_creator_content">
                                                             <h6>{{$reportDetail->users->firstname.' '.$reportDetail->users->lastname}}</h6>
-                                                            <p>{{$reportDetail->posttime}}</p>
+                                                            <p>{{$reportDetail->report_posttime}}</p>
                                                         </div>
                                                     </div>
                                                     <!-- <button>Read More</button> -->

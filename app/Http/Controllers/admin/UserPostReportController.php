@@ -126,6 +126,9 @@ class UserPostReportController extends Controller
             $query->with('event_poll_option');
         }, 'users'])->where('id', $reportId)->first();
         $reportDetail->posttime = $this->setpostTime($reportDetail->event_posts->created_at);
+        $reportDetail->report_posttime = $this->setpostTime($reportDetail->created_at);
+        $reportDetail->created_at = Carbon::parse($reportDetail->created_at)->format('Y-m-d');
+
         return view('admin.includes.layout', compact('title', 'page', 'reportDetail', 'js'));
     }
 

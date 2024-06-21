@@ -1020,6 +1020,16 @@ margin: -43px 0px 0px 8px;
     color: #000 !important;
 }
 
+.event_posts_right h6{
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.event_posts_right h5{
+    font-size: 18px;
+    font-weight: 500;
+}
+
 /* ========Responsive====== */
 
 @media only screen and (max-width:768px){
