@@ -125,7 +125,7 @@ class UserPostReportController extends Controller
         $reportDetail = UserReportToPost::with(['events', 'event_posts', 'event_posts.user', 'event_posts.post_image',   'event_posts.event_post_poll' => function ($query) {
             $query->with('event_poll_option');
         }, 'users'])->where('id', $reportId)->first();
-        $reportDetail->posttime = $this->setpostTime($reportDetail->created_at);
+        $reportDetail->posttime = $this->setpostTime($reportDetail->event_posts->created_at);
         return view('admin.includes.layout', compact('title', 'page', 'reportDetail', 'js'));
     }
 
