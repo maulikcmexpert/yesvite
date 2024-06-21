@@ -104,10 +104,10 @@
               <p>Copyright © {{date('Y')}} Yesvite. All Rights Reserved.</p>
               <ul class="ps-0">
                   <li>
-                      <a href="#">Terms of Service</a>
+                      <a href="{{route('term_and_condition')}}">Terms of Service</a>
                   </li>
                   <li>
-                      <a href="#">Privacy Policy</a>
+                      <a href="{{route('privacy_policy')}}">Privacy Policy</a>
                   </li>
               </ul>
           </div>
