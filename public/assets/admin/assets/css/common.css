@@ -1033,6 +1033,7 @@ margin: -43px 0px 0px 8px;
 .event_posts_right h5{
     font-size: 17px;
     font-weight: 500;
+    text-transform: capitalize;
 }
 
 .event_posts_creator_content h6{
