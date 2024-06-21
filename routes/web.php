@@ -147,10 +147,6 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('switch_account/{id}', 'switchAccount')->name('switchAccount');
     Route::get('/logout', function () {
 
-        $user = Auth::guard('web')->user();
-        Session::where('user_id', $user->id)->delete();
-        Auth::logout();
-        // Invalidate the session and regenerate the CSRF token to prevent session fixation attacks
 
         Session::forget('user');
         Session::forget('secondary_user');
