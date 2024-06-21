@@ -994,7 +994,7 @@
                                                     <h6>
                                                         Event Name
                                                     </h6>
-                                                    <h6>{{$reportDetail->events->event_name}}</h6>
+                                                    <h5>{{$reportDetail->events->event_name}}</h5>
 
                                                     <!-- <button>Read More</button> -->
                                                 </div>
