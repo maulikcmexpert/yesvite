@@ -21,8 +21,10 @@ use App\Models\EventPostComment;
 use App\Models\UserNotificationType;
 use App\Mail\OwnInvitationEmail;
 use App\Models\ServerKey;
+use Illuminate\Support\Facades\Auth;
 use Twilio\Rest\Client;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 
 function getVideoDuration($filePath)
 {
@@ -1213,8 +1215,15 @@ function send_notification_FCM_and($deviceToken, $notifyData)
 
     return $result_noti;
 }
+function logoutFromWeb()
+{
+    Auth::guard('web')->logout();
 
+    // Invalidate the session and regenerate the CSRF token to prevent session fixation attacks
 
+    Session::forget('user');
+    Session::forget('secondary_user');
+}
 function sendSMS($receiverNumber, $message)
 {
     try {

@@ -102,6 +102,7 @@ use Illuminate\Support\Facades\Mail;
 use LogicException;
 use Illuminate\Database\Query\Builder;
 use App\Jobs\SendInvitationMailJob as sendInvitation;
+use Illuminate\Support\Facades\Session;
 use stdClass;
 
 
@@ -11802,12 +11803,7 @@ class ApiControllerv2 extends Controller
                 Token::where('user_id', $patient->id)->delete();
             }
 
-            Auth::guard('web')->logout();
 
-            // Invalidate the session and regenerate the CSRF token to prevent session fixation attacks
-
-            Session::forget('user');
-            Session::forget('secondary_user');
             return response()->json(['status' => 1, 'message' => "logout succesfully"]);
         }
     }
@@ -12112,7 +12108,7 @@ class ApiControllerv2 extends Controller
                 ];
 
 
-
+                logoutFromWeb();
                 return response()->json(['status' => 1, 'data' => $detail, 'token' => $token]);
             } else {
 

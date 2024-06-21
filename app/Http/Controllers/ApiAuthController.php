@@ -27,6 +27,7 @@ use App\Rules\AtLeastOnePresentRule;
 // Rules //
 
 use App\Rules\verify_otp;
+use Illuminate\Support\Facades\Session;
 
 class ApiAuthController extends Controller
 {
@@ -187,6 +188,7 @@ class ApiAuthController extends Controller
 
 
                 event(new \App\Events\UserRegistered($user));
+                logoutFromWeb();
                 return response()->json(['status' => 1, 'data' => $detail, 'token' => $token]);
             } else {
 
@@ -290,7 +292,7 @@ class ApiAuthController extends Controller
                 'account_type' => $userInfo->account_type,
                 'is_first_login' => $userInfo->is_first_login
             ];
-
+            logoutFromWeb();
             return response()->json(['status' => 1, 'data' => $detail, 'token' => $token]);
         } else {
             DB::beginTransaction();
@@ -331,6 +333,7 @@ class ApiAuthController extends Controller
                 'is_first_login' => $userInfo->is_first_login
             ];
             DB::commit();
+            logoutFromWeb();
             return response()->json(['status' => 1, 'data' => $detail, 'token' => $token]);
         }
 
