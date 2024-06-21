@@ -1284,7 +1284,7 @@ function sendSMS($receiverNumber, $message)
     }
 }
 
-function validateAndFormatPhoneNumber($receiverNumber, $defaultCountryCode = 'IN')
+function validateAndFormatPhoneNumber($receiverNumber, $defaultCountryCode = 'US')
 {
     $phoneUtil = PhoneNumberUtil::getInstance();
 
