@@ -215,7 +215,7 @@ function sendNotification($notificationType, $postData)
                                 $updateinvitation->save();
                             }
                         } else if ($value->prefer_by == 'phone') {
-
+                            dd($value->user->phone_number);
 
                             $sent = sendSMSForApplication($value->user->phone_number, $notification_message);
                             if ($sent == true) {
