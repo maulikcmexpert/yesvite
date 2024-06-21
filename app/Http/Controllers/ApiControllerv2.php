@@ -10620,8 +10620,8 @@ class ApiControllerv2 extends Controller
                 }
 
                 if ($value['prefer_by'] == 'phone') {
-
-                    $notification_message = " have invited you to: " . $value->event->event_name;
+                    $eventInfo = Event::with(['user', 'event_image'])->where('id', $input['event_id'])->first();
+                    $notification_message = " have invited you to: " . $eventInfo->event_name;
 
 
                     $sent = sendSMSForApplication($value->user->phone_number, $notification_message);
