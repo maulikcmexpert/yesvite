@@ -1,5 +1,5 @@
 <x-front.advertise />
-<section class="login-wrapper">
+<section class="login-wrapper pulse" data-wow-duration="1s" data-wow-delay="0" data-wow-offset="0">
     <div class="container">
         <div class="login-content text-center">
             <a href="#" class="logo">
