@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\{
     UserReportToPost
 };
+use Carbon\Carbon;
 use Yajra\DataTables\DataTables;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
@@ -67,27 +68,30 @@ class UserPostReportController extends Controller
                     }
                 })
 
+                ->addColumn('action', function ($row) {
 
+                    $cryptId = encrypt($row->id);
 
-                ->rawColumns(['number', 'username', 'event_name', 'post_type'])
+                    // $edit_url = route('users.edit', $cryptId);
+
+                    // $delete_url = route('users.destroy', $cryptId);
+                    $view_url = route('user_post_report.show', $cryptId);
+
+                    $actionBtn = '<div class="action-icon">
+                        <a class="" href="' . $view_url . '" title="View"><i class="fa fa-eye"></i></a>';
+
+                    return $actionBtn;
+                })
+
+                ->rawColumns(['number', 'username', 'event_name', 'post_type', 'action'])
 
 
 
                 ->make(true);
         }
-
-
-
         $title = 'Post Reports';
-
         $page = 'admin.post_reports.list';
-
         $js = 'admin.post_reports.post_reportsjs';
-
-
-
-
-
         return view('admin.includes.layout', compact('title', 'page', 'js'));
     }
 
@@ -112,7 +116,32 @@ class UserPostReportController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $title = 'Post Reports Detail';
+        $page = 'admin.post_reports.report_detail';
+        $js = 'admin.post_reports.post_reportsjs';
+
+        $reportId = decrypt($id);
+        $reportDetail = UserReportToPost::with(['events', 'event_posts', 'event_posts.user', 'event_posts.post_image',   'event_posts.event_post_poll' => function ($query) {
+            $query->with('event_poll_option');
+        }, 'users'])->where('id', $reportId)->first();
+        $reportDetail->posttime = $this->setpostTime($reportDetail->created_at);
+        return view('admin.includes.layout', compact('title', 'page', 'reportDetail', 'js'));
+    }
+
+    public function setpostTime($dateTime)
+    {
+
+        $commentDateTime = $dateTime; // Replace this with your actual timestamp
+
+        // Convert the timestamp to a Carbon instance
+        $commentTime = Carbon::parse($commentDateTime);
+
+        // Calculate the time difference
+        $timeAgo = $commentTime->diffForHumans(); // This will give the time ago format
+
+
+        // Display the time ago
+        return $timeAgo;
     }
 
     /**
