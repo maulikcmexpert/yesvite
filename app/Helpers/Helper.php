@@ -25,6 +25,9 @@ use Illuminate\Support\Facades\Auth;
 use Twilio\Rest\Client;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
+use libphonenumber\PhoneNumberUtil;
+use libphonenumber\PhoneNumberFormat;
+use libphonenumber\NumberParseException;
 
 function getVideoDuration($filePath)
 {
@@ -1252,14 +1255,33 @@ function sendSMS($receiverNumber, $message)
     }
 }
 
+function validateAndFormatPhoneNumber($receiverNumber, $defaultCountryCode = 'IN')
+{
+    $phoneUtil = PhoneNumberUtil::getInstance();
+
+    try {
+        $parsedNumber = $phoneUtil->parse($receiverNumber, $defaultCountryCode);
+
+        if (!$phoneUtil->isValidNumber($parsedNumber)) {
+            throw new \Exception("Invalid phone number.");
+        }
+
+        return $phoneUtil->format($parsedNumber, PhoneNumberFormat::E164);
+    } catch (NumberParseException $e) {
+        throw new \Exception("Error parsing phone number: " . $e->getMessage());
+    }
+}
+
 function sendSMSForApplication($receiverNumber, $message)
 {
     try {
 
+        $formattedNumber = validateAndFormatPhoneNumber($receiverNumber);
+
         $serverKeys = ServerKey::first();
 
         $client = new Client($serverKeys->twilio_account_sid, $serverKeys->twilio_auth_token);
-        $client->messages->create($receiverNumber, [
+        $client->messages->create($formattedNumber, [
             'from' => $serverKeys->twilio_number,
             'body' => $message
         ]);
