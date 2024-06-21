@@ -6,6 +6,7 @@
     </div>
 </div>@else
 
+<?php dd($yesviteUser); ?>
 @foreach($yesviteUser as $value)
 <?php
 $initials = strtoupper($value->firstname[0]) . strtoupper($value->lastname[0]);
