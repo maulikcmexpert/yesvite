@@ -214,7 +214,8 @@ function sendNotification($notificationType, $postData)
                                 $updateinvitation->invitation_sent = '1';
                                 $updateinvitation->save();
                             }
-                        } else if ($value->prefer_by == 'phone') {
+                        }
+                        if ($value->prefer_by == 'phone') {
                             dd($value->user->phone_number);
 
                             $sent = sendSMSForApplication($value->user->phone_number, $notification_message);
