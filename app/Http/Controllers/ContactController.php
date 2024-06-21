@@ -76,16 +76,16 @@ class ContactController extends Controller
         $searchName = $request->search_name;
 
         if ($request->ajax()) {
-            $yesviteUser = User::where('id', '!=', $id)->where(['is_user_phone_contact' => '0'])->orderBy('firstname')->paginate(10);
+            $query = User::where('id', '!=', $id)->where(['is_user_phone_contact' => '0'])->orderBy('firstname');
 
-            // if ($searchName) {
-            //     $query->where(function ($q) use ($searchName) {
-            //         $q->where('firstname', 'LIKE', '%' . $searchName . '%')
-            //             ->orWhere('lastname', 'LIKE', '%' . $searchName . '%');
-            //     });
-            // }
+            if ($searchName) {
+                $query->where(function ($q) use ($searchName) {
+                    $q->where('firstname', 'LIKE', '%' . $searchName . '%')
+                        ->orWhere('lastname', 'LIKE', '%' . $searchName . '%');
+                });
+            }
 
-            // $yesviteUser = $query->get();
+            $yesviteUser = $query->paginate(10);
             return view('front.ajax_contacts', compact('yesviteUser'))->render();
         }
         return response()->json(['error' => 'Invalid request'], 400);
