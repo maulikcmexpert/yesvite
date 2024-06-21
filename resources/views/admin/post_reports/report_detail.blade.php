@@ -905,8 +905,9 @@
                                                                 <div class="answer">{{$optionVal->option}}</div>
                                                             </div>
                                                             <div class="progress">
-                                                                <div class="progress-bar" style="width: <?= round(getOptionTotalVote($optionVal->id) * 100 / getTotalEventInvitedUser($reportDetail->event_id)); ?>%">
-                                                                    <?= round(getOptionTotalVote($optionVal->id) * 100 / getTotalEventInvitedUser($reportDetail->event_id)) . "%"; ?>
+
+                                                                <div class="progress-bar" style="width: <?= round(getOptionTotalVote($optionValue->id) / getOptionAllTotalVote($polls->id) * 100); ?>%">
+                                                                    <?= round(getOptionTotalVote($optionValue->id) / getOptionAllTotalVote($polls->id) * 100)  . "%"; ?>
                                                                 </div>
                                                             </div>
                                                         </label>
