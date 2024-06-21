@@ -72,16 +72,10 @@ class ContactController extends Controller
 
     public function loadMore(Request $request)
     {
-        $user = Auth::guard('web')->user();
-        if (!$user) {
-            return response()->json(['error' => 'Unauthorized'], 401);
-        }
-        $id = $user->id;
+        $id = Auth::guard('web')->user()->id;
         $searchName = $request->search_name;
 
         if ($request->ajax()) {
-            //    Log::info('AJAX request received', $request->all());
-
             $query = User::where('id', '!=', $id)->where(['is_user_phone_contact' => '0'])->orderBy('firstname');
 
             if ($searchName) {
@@ -91,11 +85,9 @@ class ContactController extends Controller
                 });
             }
 
-            $yesviteUser = $query->paginate(10);
-
+            $yesviteUser = $query->get();
             return view('front.ajax_contacts', compact('yesviteUser'))->render();
         }
-
         return response()->json(['error' => 'Invalid request'], 400);
     }
 
