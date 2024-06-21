@@ -297,7 +297,7 @@
         </div>
         <div class="term-link text-center">
             <span>By signing up you agree to Yesvite’s</span>
-            <a href="#"> Terms & Conditions and Privacy Policy</a>
+            <a href="{{route('term_and_condition')}}"> Terms & Conditions and Privacy Policy</a>
         </div>
     </div>
 </section>
