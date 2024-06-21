@@ -268,13 +268,13 @@ class AuthController extends Controller
 
         $currentLogUser = User::where('id', Auth::id())->firstOrFail();
 
-        Auth::logout();
+
 
 
         $remember = $request->has('remember'); // Check if "Remember Me" checkbox is checked
 
         if (Auth::attempt($credentials, $remember)) {
-            dd("hi");
+            Auth::logout();
             $secondUser = Auth::guard('web')->user();
 
             if ($secondUser->email_verified_at != NULL) {
