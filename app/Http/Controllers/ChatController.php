@@ -62,7 +62,7 @@ class ChatController extends Controller
         }
         // dd($messages);
         $title = 'Home';
-        $page = 'front.chat.messages';
+        $page = 'front.chat.message_dev';
         $css = 'message.css';
         if ($messages == null) {
             $messages = [];

@@ -128,7 +128,7 @@ class ContactController extends Controller
                 }
 
                 $yesvitePhones = $query->paginate(10);
-                return view('front.ajax_phones', compact('yesvitePhones'))->render();
+                return view('front.ajax_phones', compact('yesvitePhones','searchPhone'))->render();
             }
             return response()->json(['error' => 'Invalid request'], 400);
         } catch (\Exception $e) {

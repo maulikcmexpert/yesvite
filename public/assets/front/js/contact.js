@@ -58,7 +58,7 @@ $(document).ready(function () {
                 $("#yesviteUser").html(data);
             })
             .fail(function (jqXHR, ajaxOptions, thrownError) {
-                alert("server not responding...");
+                // alert("server not responding...");
             });
     }
 
@@ -84,7 +84,7 @@ $(document).ready(function () {
             error: function (jqXHR, ajaxOptions, thrownError) {
                 console.error("AJAX Error:", thrownError);
                 console.error("Response:", jqXHR.responseText);
-                alert("server not responding...");
+                // alert("server not responding...");
             },
         });
     }
@@ -111,7 +111,7 @@ $(document).ready(function () {
             error: function (jqXHR, ajaxOptions, thrownError) {
                 console.error("AJAX Error:", thrownError);
                 console.error("Response:", jqXHR.responseText);
-                alert("server not responding...");
+                // alert("server not responding...");
             },
         });
     }
