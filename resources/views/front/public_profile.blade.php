@@ -18,7 +18,15 @@
                     <div class="profile-img">
                         <img src="{{$user->bg_profile}}" alt="bgImg" class="bg-img">
                         <div class="user-img">
+                            @if($user->profile!="")
                             <img src="{{$user->profile}}" alt="user-img">
+                            @else
+                            @php $initials = strtoupper($user->firstname[0]) . strtoupper($user->lastname[0]);
+
+                            $fontColor = "fontcolor" . strtoupper($user->firstname[0]);
+                            @endphp
+                            <h5 class="{{$fontColor}}"> {{ $initials }}</h5>
+                            @endif
                         </div>
                     </div>
                     <div class="profile-content">
@@ -27,7 +35,7 @@
                                 <h3>{{$user->firstname.' '.$user->lastname}}</h3>
                                 <span>PRO</span>
                             </div>
-                            <div class="user-location justify-content-start">
+                            <div class="user-location justify-content-start {{ ($user->city == NULL)?'remove-border':''}}">
                                 <div>
                                     <span>
                                         <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -54,15 +62,15 @@
                         </div>
                         <div class="user-gallery">
                             <div>
-                                <h4>{{formatNumber($user->events)}}</h4>
+                                <h4>{{formatNumber($user->event_count)}}</h4>
                                 <p>Events</p>
                             </div>
                             <div>
-                                <h4>{{formatNumber($user->photos)}}</h4>
+                                <h4>{{formatNumber($user->event_post_count)}}</h4>
                                 <p>Photos</p>
                             </div>
                             <div>
-                                <h4>{{formatNumber($user->comments)}}</h4>
+                                <h4>{{formatNumber($user->event_post_comment_count)}}</h4>
                                 <p>Comments</p>
                             </div>
                         </div>

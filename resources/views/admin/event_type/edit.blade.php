@@ -8,7 +8,6 @@
                     <ol class="breadcrumb float-sm-right w-100">
                         <li class="breadcrumb-item"><a href="{{URL::to('/admin/dashboard')}}">Dashboard</a></li>
                         <li class="breadcrumb-item"><a href="{{URL::to('/admin/event_type')}}">Event Type List</a></li>
-
                         <li class="breadcrumb-item active">{{$title}}</li>
                     </ol>
                 </div><!-- /.col -->
@@ -18,8 +17,6 @@
 
 
     <div class="col-md-12">
-
-
 
         <div class="card card-primary categoryCard">
 
@@ -37,42 +34,24 @@
 
                 <input type="hidden" name="id" id="catId" value="{{ $eventTypeId }}">
 
-                <div class="card-body">
+                <div class="card-body row">
+                    <div class="col-lg-4">
+                        <div class="form-group">
 
-                    <div class="form-group">
+                            <label for="exampleInputEmail1">Event Type</label>
 
-                        <label for="exampleInputEmail1">Event Type</label>
+                            <input type="text" class="form-control event_type" name="event_type" placeholder="Enter Event Type" value="{{ $getEventTypeDetail->event_type}}">
 
-                        <input type="text" class="form-control event_type" name="event_type" placeholder="Enter Event Type" value="{{ $getEventTypeDetail->event_type}}">
-
-                        <span class="text-danger">{{ $errors->first('event_type') }}</span>
-
-
-
+                            <span class="text-danger">{{ $errors->first('event_type') }}</span>
+                        </div>
                     </div>
-
                 </div>
-
-
-
-
 
                 <div class="card-footer">
-
                     <input type="submit" class="btn btn-primary" value="Update">
-
-
-
                 </div>
-
             </form>
-
         </div>
-
-
-
-
-
     </div>
 
 </div>

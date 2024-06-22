@@ -19,11 +19,11 @@ class UserProfilePrivacy extends Model
     ];
     public function profile_privacy()
     {
-        $this->belongsTo(ProfilePrivacy::class, 'profile_privacy_id');
+        return $this->belongsTo(ProfilePrivacy::class, 'profile_privacy_id');
     }
 
     public function users()
     {
-        $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

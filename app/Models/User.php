@@ -34,7 +34,8 @@ class User extends Authenticatable
         'is_user_phone_contact',
         'parent_user_phone_contact',
         'email_verified_at',
-        'password_updated_date'
+        'password_updated_date',
+        'current_session_id'
     ];
 
     /**
@@ -42,6 +43,7 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+
     protected $hidden = [
         'password',
         'remember_token',
@@ -140,9 +142,8 @@ class User extends Authenticatable
 
     public function user_profile_privacy()
     {
-        $this->hasMany(UserProfilePrivacy::class, 'user_id', 'id');
+        return $this->hasMany(UserProfilePrivacy::class, 'user_id', 'id');
     }
-
 
     public function event_potluck_category()
     {

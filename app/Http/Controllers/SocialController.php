@@ -57,6 +57,7 @@ class SocialController extends Controller
     public function findOrCreateUser($socialUser, $provider)
     {
         $user = User::where('email', $socialUser->getEmail())->first();
+        Session::regenerate();
         if ($user) {
             if ($provider == 'google') {
 
@@ -68,10 +69,15 @@ class SocialController extends Controller
             } elseif ($provider == 'apple') {
                 $user->apple_token_id = $socialUser->getId();
             }
+
+
+            $user->current_session_id = Session::getId();
             $user->save();
 
             $sessionArray = [
                 'id' => encrypt($user->id),
+                'first_name' => $user->firstname,
+                'last_name' => $user->lastname,
                 'username' => $user->firstname . ' ' . $user->lastname,
                 'profile' => ($user->profile != NULL || $user->profile != "") ? asset('public/storage/profile/' . $user->profile) : asset('public/storage/profile/no_profile.png')
             ];
@@ -87,11 +93,15 @@ class SocialController extends Controller
         $users->facebook_token_id = $socialUser->getId();
         $users->instagram_token_id = $socialUser->getId();
         $users->apple_token_id = $socialUser->getId();
+
+        $user->current_session_id = Session::getId();
         $users->save();
 
         $newUser = User::where('id', $users->id)->first();
         $sessionArray = [
             'id' => encrypt($newUser->id),
+            'first_name' => $user->firstname,
+            'last_name' => $user->lastname,
             'username' => $newUser->firstname . ' ' . $newUser->lastname,
             'profile' => ($newUser->profile != NULL || $newUser->profile != "") ? asset('public/storage/profile/' . $newUser->profile) : asset('public/storage/profile/no_profile.png')
         ];

@@ -1,16 +1,15 @@
-    
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
 :root{
-    --primaryColor:#E73080;
-    --ButtonColor:#ec5b99;
-    --sidebarNavActive:rgb(231, 50, 128, 0.4);
+    --primaryColor:#EA555C;
+    --secondryColor: #000000;
+    --ButtonColor:#EA555C;
+    --sidebarNavActive:rgba(234, 85, 92, 100%);
+    --borderColor: #000000;
 }
 
 label.error{
-
     color: red;
-
 }
 
 body{
@@ -37,10 +36,14 @@ body{
     padding: 7px;
     border-radius: 7px;
     background: #fff;
-    /* box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; */
-    align-items: center;
+    /*box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    */align-items: center;
     margin-bottom: 15px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    -ms-border-radius: 7px;
+    -o-border-radius: 7px;
 }
 
 h1.ProductTitle{
@@ -71,7 +74,7 @@ h1.ProductTitle{
 }
 
 .table td{
-    padding: 8px 10px !important;
+    padding: 5px 10px !important;
     vertical-align: middle !important;
     font-size: 14px !important;
 }
@@ -85,10 +88,21 @@ h1.ProductTitle{
 .table i
 {
     color: var(--primaryColor);
+    width: 25px;
+    height: 25px;
+    /* background-color: var(--primaryColor); */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
 }
 
 .table i.fa-mobile{
-    font-size: 35px;
+    font-size: 22px;
 }
 
 .table .action-icon{
@@ -98,15 +112,16 @@ h1.ProductTitle{
 
 
 [class*=sidebar-dark-]{
-    background-color: #272727 !important;
+    background-color: #ffffff !important;
 }
 
 .sidebar .nav i{
     color: var(--primaryColor);
+    /* color: #6a6a6a; */
 }
 
 [class*=sidebar-dark-] .sidebar a{
-    color: #fff !important;
+    color: #000 !important;
 }
 
 .sidebar .form-inline,
@@ -126,6 +141,15 @@ h1.ProductTitle{
 .nav-pills .nav-link:hover
 {
     background-color: var(--sidebarNavActive);
+    color: #fff !important;
+}
+
+.pills .nav-link:hover{
+    color: #fff;
+}
+
+[class*=sidebar-dark-] .nav-sidebar>.nav-item>.nav-link.active{
+    color: #fff !important;
 }
 
 [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active,
@@ -133,7 +157,13 @@ h1.ProductTitle{
 [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active:focus, [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active:hover,
 [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link:hover
 {
-    background-color: rgb(231, 50, 128, 0.2);;
+    background-color: var(--primaryColor);
+}
+
+[class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active .dot,
+[class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link:hover .dot
+{
+   background-color: #fff;
 }
 
 .nav-pills .nav-link.active i,
@@ -250,7 +280,7 @@ label:not(.form-check-label):not(.custom-file-label){
     border-radius: 20px !important;
     outline: 0;
     padding-left: 15px !important;
-    border-color: #e95f9a !important;
+    border-color: #000 !important;
 }
 
 table.table,
@@ -265,12 +295,17 @@ table.table th{
 }
 
 table.table{
-    border-spacing: 0 10px !important;
+    border-spacing: 0 0px !important;
+    margin-bottom: 15px !important;
 }
 
-table.table tbody tr{
+table.table tbody tr.odd{
+    background-color: rgb(233 84 94 / 8%) !important;
+}
+
+table.table tbody tr{   
     /* box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; */
-    background-color: rgb(127 116 116 / 20%) !important;
+    background-color: transparent !important;
     margin-bottom: 10px;
     border-spacing: 0 10px;
 }
@@ -278,11 +313,11 @@ table.table tbody tr{
 .dataTables_length select{
     background-color: #fff !important;
     outline: 0;
-    border-color: #e95f9a !important;
+    border-color: #000 !important;
 }
 
 .form-control{
-    border-color: var(--ButtonColor) !important;
+    border-color: var(--inputBorder) !important;
 }
 
 /* input:focus{
@@ -294,7 +329,6 @@ table.table tbody tr{
     background-color: var(--primaryColor);
     border-color:  var(--primaryColor);
 }
-
 
 .main-sidebar .brand-link{
     border-bottom: none;
@@ -378,6 +412,7 @@ table.table tbody tr{
     -moz-border-radius: 50%;
     -ms-border-radius: 50%;
     -o-border-radius: 50%;
+    border: 1px solid #eceaea;
 }
 
 [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link p{
@@ -401,8 +436,17 @@ table.table tbody tr{
 .small-box{
     border-radius: 10px !important;
     background: #fff;
-    box-shadow: 0 0px 5px rgba(0,0,0,0.2) !important;
+    transition: 0.5s;
+    height: 100%;
+    margin-bottom: 0 !important;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px !important;
+    border: 1px solid #e9e6e6;
 }
+
+/* .small-box:hover{
+    box-shadow: 0 0px 5px rgba(0,0,0,0.2) !important;
+    transform: scale(1.1);
+} */
 
 .content-wrapper {
     padding-top: 10px;
@@ -411,7 +455,10 @@ table.table tbody tr{
     padding: 20px;
 }
 .small-box p{
+    color: #000 !important;
     margin-bottom: 0px;
+    font-size: 14px;
+    max-width: 165px;
 }
 .event-calender{
     padding: 20px;
@@ -529,7 +576,7 @@ width: 100%;
     border-radius: 4px;
     overflow: hidden;
     box-shadow: 0 0px 5px rgba(0,0,0,0.2);
-    max-width: 330px;
+    /* max-width: 330px; */
     margin: 0px auto;
 }
 .event-calender .ui-datepicker-header {
@@ -573,8 +620,8 @@ margin: -43px 0px 0px 8px;
     content: '';
     position: absolute;
     display: block;
-    width: 4px;
-    height: 4px;
+    width: 10px;
+    height: 10px;
     border-left: 2px solid #b0aead;
     border-bottom: 2px solid #b0aead;
 }
@@ -821,7 +868,14 @@ margin: -43px 0px 0px 8px;
     display: none;
 }
     
+.card #preview{
+    width: 150px;
+}
 
+.small-box h3
+{
+    color: #000 !important;
+}
 
 /* ========Responsive====== */
 

@@ -17,8 +17,6 @@
 
     <div class="col-md-12">
 
-
-
         <div class="card card-primary  categoryCard">
 
             <div class="card-header">
@@ -28,38 +26,27 @@
             </div>
 
 
-
-
-
             <form method="post" action="{{ route('event_type.store')}}" id="eventTypeForm">
 
                 @csrf
 
-                <div class="card-body">
+                <div class="card-body row" id="appendHtml">
 
-                    <div class="form-group">
+                    <div class="col-lg-4">
+                        <div class="form-group">
 
-                        <label for="exampleInputEmail1">Event Type</label>
+                            <label for="exampleInputEmail1">Event Type</label>
 
-                        <input type="text" class="form-control event_type" name="event_type[]" placeholder="Enter Event Type" value="{{ old('event_type.*')}}">
+                            <input type="text" class="form-control event_type" name="event_type[]" placeholder="Enter Event Type" value="{{ old('event_type.*')}}">
 
-                        <span class="text-danger">{{ $errors->first('event_type.*') }}</span>
+                            <span class="text-danger">{{ $errors->first('event_type.*') }}</span>
 
-
-
-                    </div>
-
-                    <div id="appendHtml">
-
-
-
+                        </div>
                     </div>
 
                 </div>
 
-
-
-                <div class="text-right">
+                <div class="text-center">
 
                     <button type="button" class="btn btn-primary" id="addMoreEventType">Add More </button>
 
@@ -71,17 +58,11 @@
 
                     <input type="submit" class="btn btn-primary" id="EventTypeAdd" value="Add">
 
-
-
                 </div>
 
             </form>
 
         </div>
-
-
-
-
 
     </div>
 
@@ -90,10 +71,8 @@
 
 
 <div style="display: none;" id="AddHtml">
-
-
-
-    <div class="form-group">
+    <div class="col-lg-4 mb-3">
+        <div class="form-group">
 
         <label for="exampleInputEmail1">Event Type</label>
         <input type="text" class="form-control event_type" name="event_type[]" placeholder="Enter Event Type" value="{{ old('event_type.*')}}">
@@ -106,6 +85,6 @@
 
         <!-- </div> -->
 
+        </div>
     </div>
-
 </div>

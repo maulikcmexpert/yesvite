@@ -23,7 +23,6 @@
                     data: "app_user",
                     name: "app_user"
                 },
-
                 // {
                 //     data: "action",
                 //     name: "action",
@@ -161,6 +160,98 @@
                     });
                 }
             });
+        });
+
+        var base_url = $("#base_url").val();
+
+
+        $('#addUser_form').validate({
+
+            rules: {
+
+                firstname: {
+                    required: true
+                },
+                middlename: {
+                    required: true
+                },
+                lastname: {
+                    required: true
+                },
+                email: {
+                    required: true,
+                    email: true,
+                    remote: {
+                        headers: {
+                            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                                "content"
+                            ),
+                        },
+                        url: "{{URL::to('admin/user/check_new_contactemail')}}",
+                        type: "POST",
+                        data: {
+                            email: function() {
+                                return $(".email").val();
+                            },
+
+                        },
+                    },
+
+                },
+                phone_number: {
+                    // required: true,
+                    digits: true,
+                    minlength: 10,
+                    maxlength: 15,
+                    remote: {
+                        headers: {
+                            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                                "content"
+                            ),
+                        },
+                        url: "{{URL::to('admin/user/check_new_contactnumber')}}",
+                        type: "POST",
+                        data: {
+                            phone_number: function() {
+                                return $(".phone_number").val();
+                            },
+                            id: function() {
+                                return $("#edit_id").val();
+                            },
+                        },
+                    },
+                }
+
+            },
+            messages: {
+
+
+                firstname: {
+                    required: "Please Enter First Name"
+                },
+                middlename: {
+                    required: "Please Enter Middle Name"
+
+                },
+                lastname: {
+                    required: "Please Enter Last Name"
+                },
+                email: {
+                    required: "Please Enter Email",
+                    email: "Please Enter a Valid Email",
+                    remote: "Email is already exsits",
+
+                },
+                phone_number: {
+                    // required: "Please Enter Mobile Number",
+                    required: "Please enter a Phone Number",
+                    digits: "Please enter a valid Phone Number",
+                    minlength: "Phone Number must be minimum 10 digit",
+                    maxlength: "Phone Number must be maxmimum 15 digit",
+                    remote: "Phone Number is already exsits",
+                }
+            }
+
         });
 
 

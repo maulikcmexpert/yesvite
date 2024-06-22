@@ -35,31 +35,30 @@
 
                 @csrf
 
-                <div class="card-body">
+                <div class="card-body row"  id="appendHtml">
 
-                    <div class="form-group">
+                    <div class="col-3">
 
-                        <label for="exampleInputEmail1">Category Name</label>
+                        <div class="form-group">
 
-                        <input type="text" class="form-control category_name" name="category_name[]" placeholder="Enter Category Name" value="{{ old('category_name.*')}}">
+                            <label for="exampleInputEmail1">Category Name</label>
 
-                        <span class="text-danger">{{ $errors->first('category_name.*') }}</span>
+                            <input type="text" class="form-control category_name" name="category_name[]" placeholder="Enter Category Name" value="{{ old('category_name.*')}}">
 
-
-
-                    </div>
-
-                    <div id="appendHtml">
-
+                            <span class="text-danger">{{ $errors->first('category_name.*') }}</span>
+                        
+                        </div>
 
 
                     </div>
+                    
+                   
 
                 </div>
 
 
 
-                <div class="text-right">
+                <div class="text-center">
 
                     <button type="button" class="btn btn-primary" id="addMoreCat">Add More </button>
 
@@ -90,23 +89,25 @@
 
 
 <div style="display: none;" id="AddHtml">
+  
+       <div class="col-lg-3 mb-3">
+            <div class="form-group">
 
+                <label for="">Category Name</label>
 
+                <input type="text" class="form-control category_name" name="category_name[]" placeholder="Enter Category Name">
 
-    <div class="form-group">
+                <span class="text-danger">{{ $errors->first('category_name.*') }}</span>
 
-        <label for="">Category Name</label>
+                <!-- <div class="remove"> -->
 
-        <input type="text" class="form-control category_name" name="category_name[]" placeholder="Enter Category Name">
+                <i class="fa-solid fa-xmark text-danger remove"></i>
 
-        <span class="text-danger">{{ $errors->first('category_name.*') }}</span>
+                 <!-- </div> -->
 
-        <!-- <div class="remove"> -->
-
-        <i class="fa-solid fa-xmark text-danger remove"></i>
-
-        <!-- </div> -->
-
-    </div>
+            </div>
+       </div>
+   
+    
 
 </div>

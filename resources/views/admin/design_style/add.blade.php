@@ -29,29 +29,24 @@
 
                 @csrf
 
-                <div class="card-body">
+                <div class="card-body row" id="appendHtml">
 
-                    <div class="form-group">
+                    <div class="col-lg-3">
+                        <div class="form-group">
 
-                        <label for="exampleInputEmail1">Design Name</label>
+                            <label for="exampleInputEmail1">Design Name</label>
 
-                        <input type="text" class="form-control design_name" name="design_name[]" placeholder="Enter Design Name" value="{{ old('design_name.*')}}">
+                            <input type="text" class="form-control design_name" name="design_name[]" placeholder="Enter Design Name" value="{{ old('design_name.*')}}">
 
-                        <span class="text-danger">{{ $errors->first('design_name.*') }}</span>
-                        
+                            <span class="text-danger">{{ $errors->first('design_name.*') }}</span>
+                            
+                        </div>
                     </div>
-
-                    <div id="appendHtml">
-
-
-
-                    </div>
-
                 </div>
 
 
 
-                <div class="text-right">
+                <div class="text-center">
 
                     <button type="button" class="btn btn-primary" id="addMoreCat">Add More </button>
 
@@ -82,23 +77,22 @@
 
 
 <div style="display: none;" id="AddHtml">
+    <div class="col-lg-3 mb-3">
+        <div class="form-group">
 
+            <label for="">Design Name</label>
 
+            <input type="text" class="form-control design_name" name="design_name[]" placeholder="Enter Design Name">
 
-    <div class="form-group">
+            <span class="text-danger">{{ $errors->first('design_name.*') }}</span>
 
-        <label for="">Design Name</label>
+            <!-- <div class="remove"> -->
 
-        <input type="text" class="form-control design_name" name="design_name[]" placeholder="Enter Design Name">
+            <i class="fa-solid fa-xmark text-danger remove"></i>
 
-        <span class="text-danger">{{ $errors->first('design_name.*') }}</span>
+            <!-- </div> -->
 
-        <!-- <div class="remove"> -->
-
-        <i class="fa-solid fa-xmark text-danger remove"></i>
-
-        <!-- </div> -->
-
+        </div>
     </div>
 
 </div>

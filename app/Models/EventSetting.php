@@ -13,7 +13,7 @@ class EventSetting extends Model
         'allow_for_1_more',
         'allow_limit',
         'adult_only_party',
-        'rsvp_by_date_status',
+
         'thank_you_cards',
         'add_co_host',
         'gift_registry',
@@ -22,7 +22,7 @@ class EventSetting extends Model
         'guest_list_visible_to_guests',
         'podluck',
         'rsvp_updates',
-        'event_updates',
+        'event_wall_post',
         'send_event_dater_reminders',
         'request_event_photos_from_guests'
     ];

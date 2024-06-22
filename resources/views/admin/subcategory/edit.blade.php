@@ -36,40 +36,43 @@
 
                 
 
-                <div class="card-body">
-                    <div class="form-group">
+                <div class="card-body row">
+                    <div class="col-lg-3">
+                        <div class="form-group">
 
-                        <label for="exampleInputEmail1">Category</label>
+                            <label for="exampleInputEmail1">Category</label>
 
-                        <select class="form-control event_design_category_id" id="event_design_category_id" name="event_design_category_id">
+                            <select class="form-control event_design_category_id" id="event_design_category_id" name="event_design_category_id">
 
-                            <option value="">Select Category</option>
+                                <option value="">Select Category</option>
 
-                            @foreach($getCatData as $cat)
+                                @foreach($getCatData as $cat)
 
-                            <option {{($cat->id == $getSubCatDetail->event_design_category_id)?"selected":""}} value="{{$cat->id}}">{{$cat->category_name}}</option>
+                                <option {{($cat->id == $getSubCatDetail->event_design_category_id)?"selected":""}} value="{{$cat->id}}">{{$cat->category_name}}</option>
 
-                            @endforeach
+                                @endforeach
 
 
 
-                        </select>
+                            </select>
 
-                        <span class="text-danger">{{ $errors->first('event_design_category_id') }}</span>
+                            <span class="text-danger">{{ $errors->first('event_design_category_id') }}</span>
 
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+
+                            <label for="exampleInputEmail1">Subcategory Name</label>
+
+                            <input type="text" class="form-control subcategory_name" name="subcategory_name" placeholder="Enter Subcategory Name" value="{{ $getSubCatDetail->subcategory_name}}">
+
+                            <span class="text-danger">{{ $errors->first('subcategory_name') }}</span>
+
+                        </div>
                     </div>
 
-                    <div class="form-group">
-
-                        <label for="exampleInputEmail1">Subcategory Name</label>
-
-                        <input type="text" class="form-control subcategory_name" name="subcategory_name" placeholder="Enter Subcategory Name" value="{{ $getSubCatDetail->subcategory_name}}">
-
-                        <span class="text-danger">{{ $errors->first('subcategory_name') }}</span>
-
-
-
-                    </div>
+                   
 
                 </div>
 

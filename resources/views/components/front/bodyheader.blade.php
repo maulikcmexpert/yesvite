@@ -2,7 +2,7 @@
  <header class="login-header">
      <div class="container-fluid">
          <nav class="navbar navbar-expand-md navbar-dark">
-             <a class="navbar-brand" href="{{route('home')}}">
+             <a class="navbar-brand" href="{{(Auth::guard('web')->check())?route('home'):route('front.home')}}">
                  <svg width="129" height="36" viewBox="0 0 129 36" fill="none" xmlns="http://www.w3.org/2000/svg">
                      <path fill-rule="evenodd" clip-rule="evenodd" d="M8.86965 6.81981H8.48313C8.25473 6.80224 8.35136 6.58262 8.35136 6.58262C8.5007 6.23124 8.6149 6.09947 8.43042 5.95013C8.0966 5.68659 7.8155 5.3967 7.5871 5.08924C6.42753 3.52558 6.71742 1.58418 7.79793 0.837483C8.42163 0.407037 9.33524 0.407037 9.95894 0.837483C11.0395 1.58418 11.3206 3.52558 10.1698 5.08924C9.94137 5.3967 9.66905 5.68659 9.32645 5.95013C9.13319 6.09947 9.25617 6.22245 9.40551 6.58262C9.40551 6.58262 9.50214 6.79345 9.27374 6.81981H8.88722H8.86965Z" fill="#ECB015" />
                      <path fill-rule="evenodd" clip-rule="evenodd" d="M25.9168 9.75338C25.9168 9.05061 26.1627 8.40934 26.5844 7.9174C27.1115 7.2849 27.9021 6.8896 28.7893 6.8896C30.3706 6.8896 31.6619 8.17215 31.6619 9.76217H34.6575C34.6575 6.52064 32.0309 3.89404 28.7893 3.89404C26.6986 3.89404 24.8714 4.98334 23.826 6.62606C23.7733 6.7139 23.7206 6.80175 23.6679 6.8896C23.1935 7.7417 22.9212 8.7168 22.9212 9.76217H25.9168V9.75338Z" fill="black" />
@@ -32,11 +32,11 @@
 
 
 
-             @if(Session::has('user'))
+             @if(Auth::guard('web')->user())
 
              <div class="header-right">
                  <div class="header-dropdown dropdown">
-                     <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+                     <a type="button" class="btn btn-primary" href="{{route('message.list')}}">
                          <div class="drp-conent position-relative">
                              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                  <path d="M7.08317 15.8334H6.6665C3.33317 15.8334 1.6665 15.0001 1.6665 10.8334L1.6665 6.66675C1.6665 3.33341 3.33317 1.66675 6.6665 1.66675L13.3332 1.66675C16.6665 1.66675 18.3332 3.33341 18.3332 6.66675V10.8334C18.3332 14.1667 16.6665 15.8334 13.3332 15.8334H12.9165C12.6582 15.8334 12.4082 15.9584 12.2498 16.1667L10.9998 17.8334C10.4498 18.5667 9.54984 18.5667 8.99984 17.8334L7.74984 16.1667C7.6165 15.9834 7.30817 15.8334 7.08317 15.8334Z" stroke="#0F172A" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
@@ -47,12 +47,8 @@
                                  <span>10</span>
                              </div>
                          </div>
-                     </button>
-                     <ul class="dropdown-menu">
-                         <li><a class="dropdown-item" href="#">Link 1</a></li>
-                         <li><a class="dropdown-item" href="#">Link 2</a></li>
-                         <li><a class="dropdown-item" href="#">Link 3</a></li>
-                     </ul>
+                        </a>
+                      
                  </div>
                  <div class="header-dropdown dropdown">
                      <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
@@ -72,28 +68,47 @@
                          <li><a class="dropdown-item" href="#">Link 3</a></li>
                      </ul>
                  </div>
+                 <?php
+                    $userProfile = "";
+                    if (Auth::guard('web')->user()) {
+
+                        $userprofile = Auth::guard('web')->user();
+
+                        if ($userprofile->profile != NULL || $userprofile->profile != "") {
+                            $image = asset("storage/profile/" . $userprofile->profile);
+                            $userProfile =  '<img src="' . $image . '" class="UserImg" alt="">';
+                        } else {
+                            $initials = strtoupper($userprofile->firstname[0]) . strtoupper($userprofile->lastname[0]);
+                            $fontColor = "fontcolor" . strtoupper($userprofile->firstname[0]);
+                            $userProfile = "<h5 class='<?= $fontColor ?>' >" . $initials . "</h5>";
+                    ?>
+
+                 <?php   }
+                    }
+
+                    ?>
                  <a href="{{ route('profile')}}" class="user-img">
-                     <img src="{{Session::get('user')['profile']}}" class="UserImg" alt="user-img">
+
+                     {!! $userProfile !!}
+
                  </a>
              </div>
              @else
              <div class="collapse navbar-collapse" id="mynavbar">
                  <ul class="navbar-nav align-items-center ms-auto">
-                     <li class="nav-item">
-                         <a class="nav-link" href="home.html">Home</a>
+                     <li class="nav-item {{ (Request::segment(1) == '/')? 'active':'' }}">
+                         <a class="nav-link" href="{{ route('front.home')}}">Home</a>
                      </li>
-                     <li class="nav-item">
-                         <a class="nav-link" href="about-us.html">About</a>
+                     <li class="nav-item {{ (Request::segment(1) == 'about-us')? 'active':'' }}">
+                         <a class="nav-link" href="{{ route('about')}}">About</a>
                      </li>
-                     <li class="nav-item">
-                         <a class="nav-link" href="contact.html">contact</a>
-                     </li>
+
                      <!-- <li class="nav-item">
                             
                         </li> -->
                      <li class="nav-item d-flex align-items-center gap-3">
                          <a class="nav-link signIn-btn" href="{{route('auth.login')}}">Sign In</a>
-                         <a class="nav-link signUp-btn" href="register.html">
+                         <a class="nav-link signUp-btn" href="{{route('auth.register')}}">
                              <span><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                      <path d="M4.15743 14.6397C3.69993 14.6397 3.27243 14.4822 2.96493 14.1897C2.57493 13.8222 2.38743 13.2672 2.45493 12.6672L2.73243 10.2372C2.78493 9.77967 3.06243 9.17217 3.38493 8.84217L9.54243 2.32467C11.0799 0.69717 12.6849 0.652171 14.3124 2.18967C15.9399 3.72717 15.9849 5.33217 14.4474 6.95967L8.28993 13.4772C7.97493 13.8147 7.38993 14.1297 6.93243 14.2047L4.51743 14.6172C4.38993 14.6247 4.27743 14.6397 4.15743 14.6397ZM11.9499 2.18217C11.3724 2.18217 10.8699 2.54217 10.3599 3.08217L4.20243 9.60717C4.05243 9.76467 3.87993 10.1397 3.84993 10.3572L3.57243 12.7872C3.54243 13.0347 3.60243 13.2372 3.73743 13.3647C3.87243 13.4922 4.07493 13.5372 4.32243 13.4997L6.73743 13.0872C6.95493 13.0497 7.31493 12.8547 7.46493 12.6972L13.6224 6.17967C14.5524 5.18967 14.8899 4.27467 13.5324 2.99967C12.9324 2.42217 12.4149 2.18217 11.9499 2.18217Z" fill="white" />
                                      <path d="M13.0044 8.21165C12.9894 8.21165 12.9669 8.21165 12.9519 8.21165C10.6119 7.97915 8.72935 6.20165 8.36935 3.87665C8.32435 3.56915 8.53435 3.28415 8.84185 3.23165C9.14935 3.18665 9.43435 3.39665 9.48685 3.70415C9.77185 5.51916 11.2419 6.91415 13.0719 7.09415C13.3794 7.12415 13.6044 7.40165 13.5744 7.70915C13.5369 7.99415 13.2894 8.21165 13.0044 8.21165Z" fill="white" />
@@ -108,4 +123,5 @@
              @endif
          </nav>
      </div>
+    
  </header>

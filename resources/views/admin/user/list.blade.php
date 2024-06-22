@@ -9,21 +9,15 @@
                         <li class="breadcrumb-item"><a href="{{URL::to('/admin/dashboard')}}">Dashboard</a></li>
                         <li class="breadcrumb-item active">{{$title}}</li>
                     </ol>
-                </div><!-- /.col -->
-                <!-- <div class="col-sm-6">
+                </div>
+                <div class="col-sm-6">
                     <div class="text-right">
-                        <a class="btn btn-primary" href="{{URL::to('admin/category/create')}}">Add</a>
+                        <a class="btn btn-primary" href="{{URL::to('admin/users/create')}}">Add</a>
                     </div>
-                </div> -->
+                </div>
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
     </div>
-
-    <!-- <div class="text-right mb-2">
-
-        <a class="btn btn-primary" href="{{URL::to('admin/category/create')}}">Add</a>
-
-     </div> -->
 
     <table id="users_table" class="table table-bordered data-table users-data-table">
 

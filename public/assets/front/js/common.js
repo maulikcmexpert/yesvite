@@ -1,4 +1,45 @@
-// Set the options that I want
+// alert();
+//  ===== focusinput =====
+$(document).on("click", ".businessRegister", function () {
+    $("#account_type").val("1");
+});
+
+$(document).on("click", ".userRegister", function () {
+    $("#account_type").val("0");
+});
+$(".form-control").on("focusin", function () {
+    $(this).next().addClass("floatingfocus");
+});
+
+$(".form-control").on("focusout", function () {
+    var text_val = $(this).val();
+    if (text_val === "") {
+        $(this).next().removeClass("floatingfocus");
+    } else {
+        $(this).next().addClass("floatingfocus");
+    }
+});
+
+$(".form-control").each(function () {
+    var text = $(this).val();
+    if (text === "") {
+        $(this).next().removeClass("floatingfocus");
+    } else {
+        $(this).next().addClass("floatingfocus");
+    }
+});
+
+// ========= show-password ===========
+$(".toggle-password").click(function () {
+    $(this).toggleClass("fa-eye-slash fa-eye");
+    var input = $(this).prev().prev();
+    if (input.attr("type") == "password") {
+        input.attr("type", "text");
+    } else {
+        input.attr("type", "password");
+    }
+});
+
 toastr.options = {
     closeButton: true,
     newestOnTop: false,
@@ -15,6 +56,24 @@ toastr.options = {
     showMethod: "fadeIn",
     hideMethod: "fadeOut",
 };
+
+function loaderHandle(querySelectorId, btnName) {
+    var loaderbtn = document.querySelector(querySelectorId);
+
+    loaderbtn.innerHTML = btnName;
+    loaderbtn.classList.add("spinning");
+
+    setTimeout(function () {
+        loaderbtn.classList.remove("spinning");
+        loaderbtn.innerHTML = "Save Changes";
+    }, 6000);
+}
+
+function removeLoaderHandle(querySelectorId, btnName) {
+    var loaderbtn = document.querySelector(querySelectorId);
+    loaderbtn.classList.remove("spinning");
+    loaderbtn.innerHTML = btnName;
+}
 
 var buttonPlus = $(".qty-btn-plus");
 var buttonMinus = $(".qty-btn-minus");
@@ -37,15 +96,16 @@ const bgChooseFile = document.getElementById("bg-choose-file");
 
 const imgPreview = document.getElementById("cover-img");
 const bgPreview = document.getElementById("bg-cover-img");
-
-chooseFile.addEventListener("change", function () {
-    getImgData();
-});
-
-bgChooseFile.addEventListener("change", function () {
-    getbgImgData();
-});
-
+if (chooseFile) {
+    chooseFile.addEventListener("change", function () {
+        // getImgData();
+    });
+}
+if (bgChooseFile) {
+    bgChooseFile.addEventListener("change", function () {
+        // getbgImgData();
+    });
+}
 function getImgData() {
     const files = chooseFile.files[0];
     if (files) {
@@ -53,7 +113,8 @@ function getImgData() {
         fileReader.readAsDataURL(files);
         fileReader.addEventListener("load", function () {
             imgPreview.style.display = "block";
-            imgPreview.innerHTML = '<img src="' + this.result + '" />';
+            imgPreview.innerHTML =
+                '<img src="' + this.result + '" id="profileIm"/>';
         });
     }
 }
@@ -65,22 +126,21 @@ function getbgImgData() {
         fileReader.readAsDataURL(files);
         fileReader.addEventListener("load", function () {
             bgPreview.style.display = "block";
-            bgPreview.innerHTML = '<img src="' + this.result + '" />';
+            bgPreview.innerHTML = '<img src="' + this.result + '" id="bgIm" />';
         });
     }
 }
 
-// ========= show-password ===========
-document.querySelector(".toggle").addEventListener("click", function () {
-    this.classList.toggle("activate");
+$(".phone_number").intlTelInput({
+    initialCountry: "US",
+    separateDialCode: true,
+    // utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.4/js/utils.js"
 });
 
-$(".toggle-password").click(function () {
-    $(this).toggleClass("fa-eye-slash fa-eye");
-    var input = $($(this).attr("toggle"));
-    if (input.attr("type") == "password") {
-        input.attr("type", "text");
-    } else {
-        input.attr("type", "password");
-    }
+// $("[name=phone_number]").on("blur", function () {
+$("[name=countryCode]").on("blur", function () {
+    var instance = $("[name=countryCode]");
+
+    var phoneNumber = instance.intlTelInput("getSelectedCountryData").dialCode;
+    $("#country_code").val(phoneNumber);
 });

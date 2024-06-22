@@ -15,14 +15,15 @@ use Cookie;
 use Illuminate\Support\Facades\DB;
 use App\Mail\forgotpasswordMail;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth as FacadesAuth;
 
 class Auth extends Controller
 {
     //
 
-
     public function checkLogin(Request $req)
     {
+
         $req->validate(
             [
                 'email' => 'required|email|exists:admins,email',
@@ -35,25 +36,66 @@ class Auth extends Controller
             ]
         );
         $adminData = Admin::where("email", $req->input('email'))->first();
+
         if (Hash::check($req->input('password'), $adminData->password)) {
-            $sessionArray = ['id' => $adminData->id, 'name' => $adminData->name];
-            Session::put(['admin' => $sessionArray]);
-        }
-        if (Session::has('admin')) {
 
-            if ($req->input('remember') != null) {
-                Cookie::queue('email', $req->input('email'), 120);
-                Cookie::queue('password', $req->input('password'), 120);
-            } else {
+            if ($adminData) {
+                $token = str_pad(random_int(0, 9999), 6, '0', STR_PAD_LEFT);
+                $saveOtp =   Admin::where("id", $adminData->id)->first();
+                $saveOtp->otp = "111111";
+                $saveOtp->save();
+                $phoneNumber = '+' . $adminData->country_code . $adminData->phone_number;
+                $message = "Your verification code for Admin is: " . $token;
+                // $sendMesage =  sendSMS($phoneNumber, $message);
+                $sendMesage = [
+                    "status" => true,
+                    "message" => "success"
 
-                Cookie::forget('email');
-                Cookie::forget('password');
+                ];
+
+
+                if ($sendMesage['status']  == true) {
+                    return Redirect::to(URL::to('admin/factor_authenticate', encrypt($adminData->id)))->with('success', 'Verification code is sent successfully');
+                } else if ($sendMesage['status'] == false) {
+                    return  Redirect::to('admin')->with('error', $sendMesage['message']);
+                }
             }
-            return Redirect::to(URL::to('/admin/dashboard'))->with('success', 'Loggedin successfully!');;
-        } else {
-            return  Redirect::to('admin/login')->with('error', 'Invalid credentials!');
         }
+
+        return  Redirect::to('admin')->with('error', 'Invalid credentials!');
     }
+
+    public function twoFactorAuthenticate($id)
+    {
+        $data['page'] = 'admin/auth/factor_authentication';
+
+        $data['js'] = ['login'];
+        $data['id'] = $id;
+
+        return view('admin/auth/main', $data);
+    }
+
+    public function checkFactorAuthentication(Request $request)
+    {
+
+        $id = decrypt($request->adminId);
+
+        $checkOtp = Admin::where(['id' => $id, 'otp' => $request->verification_otp])->first();
+
+        if ($checkOtp != null) {
+
+            $sessionArray = ['id' => $checkOtp->id, 'name' => $checkOtp->name];
+            Session::put(['admin' => $sessionArray]);
+            if (Session::has('admin')) {
+
+                return Redirect::to(URL::to('/admin/dashboard'))->with('success', 'Loggedin successfully!');;
+            }
+
+            return Redirect::to(URL::to('/admin'))->with('error', 'Invalid credentials!');;
+        }
+        return Redirect::to(URL::to('admin/factor_authenticate', $request->adminId))->with('error', 'Invalid verification code');
+    }
+
     public function checkEmail(Request $req)
     {
         $adminData = Admin::where("email", $req->input('email'))->get();
@@ -90,9 +132,9 @@ class Auth extends Controller
         $admin->email = $req->input('email');
         $admin->password = Hash::make($req->input('password'));
         if ($admin->save()) {
-            return  Redirect::to('admin/login')->with('success', 'Admin Registered successfully!');
+            return  Redirect::to('admin')->with('success', 'Admin Registered successfully!');
         }
-        return  Redirect::to('admin/login')->with('error', 'Error to registretion!');
+        return  Redirect::to('admin')->with('error', 'Error to registretion!');
     }
     public function forgotpassword(Request $req)
     {
@@ -111,7 +153,7 @@ class Auth extends Controller
         $adminData->remember_token = $token;
         $adminData->save();
         Mail::to($req->input('email'))->send(new forgotpasswordMail($token));
-        return  Redirect::to('admin/login')->with('success', 'Email send successfully!');
+        return  Redirect::to('admin')->with('success', 'Email send successfully!');
     }
 
     public function checkToken($token)
@@ -126,7 +168,7 @@ class Auth extends Controller
                 ->first();
             if ($userData == null) {
 
-                return  Redirect::to('admin/login')->with('error', 'Invalid token!');
+                return  Redirect::to('admin')->with('error', 'Invalid token!');
             }
         }
         $data['js'] = ['login'];
@@ -159,20 +201,20 @@ class Auth extends Controller
 
             if ($userData == null) {
 
-                return  Redirect::to('admin/login')->with('error', 'Invalid token!');
+                return  Redirect::to('admin')->with('error', 'Invalid token!');
             } else {
 
                 $user = User::where('email', $userData->email)
                     ->update(['password' => Hash::make($req->input('password'))]);
 
                 DB::table('password_resets')->where(['email' => $userData->email])->delete();
-                return  Redirect::to('admin/login')->with('success', 'Password Updated successfully!');
+                return  Redirect::to('admin')->with('success', 'Password Updated successfully!');
             }
         }
         $adminData->password = Hash::make($req->input('password'));
         $adminData->remember_token = null;
         $adminData->save();
 
-        return  Redirect::to('admin/login')->with('success', 'Password Updated successfully!');
+        return  Redirect::to('admin')->with('success', 'Password Updated successfully!');
     }
 }

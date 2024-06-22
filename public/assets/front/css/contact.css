@@ -35,6 +35,23 @@
     margin: 0 auto;
 }
 
+.contact-user .user h5{
+    border-radius: 100%;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    -ms-border-radius: 100%;
+    -o-border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    margin-bottom: 0;
+    border: 1px solid transparent;
+    background: linear-gradient(135deg, rgb(255, 247, 240), rgb(255, 200, 163)) rgb(14, 114, 207);
+    color: rgb(212, 56, 13);
+    font-size: 16px;
+}
+
 .contact-user .user img{
     border-radius: 100%;
 }
@@ -154,6 +171,10 @@ ul.nav .nav-link:hover{
     top: 6px;
     right: -10px;
     background-color: var(--lightColor);
+}
+
+.remove-border div:first-child::after{
+    display: none;
 }
 
 .switch-ac{
@@ -348,7 +369,7 @@ ul.nav .nav-link:hover{
     font-size: 24px;
     font-weight: 700;
     color: var(--titleColor);
-    margin-bottom: 0;
+    /* margin-bottom: 0; */
 }
 
 .contact-title a{
@@ -367,6 +388,12 @@ ul.nav .nav-link:hover{
 .contact-tab input[type="search"]{
     height: 48px !important;
     padding-left: 20px;
+    width: 100% !important;
+    outline: 0;
+}
+
+.contact-tab input[type="search"]:focus{
+    border: 1px solid var(--primaryColor) !important;
 }
 
 .contact-tab input[type="search"]::placeholder{
@@ -461,15 +488,32 @@ ul.listing li span{
     margin: 20px 0;
 }
 
-.user-contacts{
+/* .user-contacts{
     max-height: 430px;
     overflow-y: scroll;
-}
+} */
 
 .users-data .contact-img{
     width: 36px;
     height: 36px;
     margin-right: 10px;
+}
+
+.users-data .contact-img h5{
+    border-radius: 100%;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    -ms-border-radius: 100%;
+    -o-border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    margin-bottom: 0;
+    border: 1px solid transparent;
+    background: linear-gradient(135deg, rgb(255, 247, 240), rgb(255, 200, 163)) rgb(14, 114, 207);
+    color: rgb(212, 56, 13);
+    font-size: 16px;
 }
 
 .users-data .contact-img img{
@@ -480,32 +524,7 @@ ul.listing li span{
     -o-border-radius: 100%;
 }
 
-.users-data{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 16px 0;
-    border-bottom: 1px solid var(--borderColor);
-}
 
-.users-data:last-child{
-    border-bottom: none;
-}
-
-.users-data h5{
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--contactTitle);
-    margin-bottom: 3px;
-    line-height: 26px;
-}
-
-.users-data a{
-    font-size: 12px;
-    color: var(--lightColor);
-    margin-bottom: 5px;
-    display: block;
-}
 
 
 .edit-contact{
@@ -584,7 +603,10 @@ ul.listing li span{
 }
 
 
-
+.contact-tab .product-scroll{
+    max-height: 430px;
+    overflow-y: scroll;
+}
 
 
 

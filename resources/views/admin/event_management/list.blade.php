@@ -47,25 +47,21 @@
             </div>
         </div>
 
-        <!-- <div class="col-sm-6 col-md-3">
+        <div class="col-sm-6 col-md-3">
 
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search..">
-                <div class="input-group-append">
-                    <button class="btn btn-secondary" id="eventsearch" type="button">
-                        <i class="fa fa-search"></i>
-                    </button>
+            <div class="form-group">
+                <div class="position-relative w-100 selectArrow">
+                    <select name="event_type" id="event_type" class="form-control event_type">
+                        <option value="">Event Type</option>
+                        <option value="normal_user_event">Normal User Events</option>
+                        <option value="professional_event">Professional Events</option>
+                    </select>
                 </div>
             </div>
+        </div>
 
-        </div> -->
     </div>
 
-    <!-- <div class="text-right mb-2">
-
-        <a class="btn btn-primary" href="{{URL::to('admin/category/create')}}">Add</a>
-
-     </div> -->
 
     <table id="events_table" class="table table-bordered data-table users-data-table">
 
@@ -76,6 +72,7 @@
                 <th>No</th>
                 <th>Event Name</th>
                 <th>Event By</th>
+                <th>Email</th>
                 <th>Start Date</th>
                 <th>End Date</th>
                 <th>Vanue</th>

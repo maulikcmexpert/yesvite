@@ -37,16 +37,19 @@
 
                 <input type="hidden" name="id" id="catId" value="{{ $catId }}">
 
-                <div class="card-body">
+                <div class="card-body row">
 
-                    <div class="form-group">
+                    <div class="col-lg-4">
 
-                        <label for="exampleInputEmail1">Category Name</label>
+                        <div class="form-group">
 
-                        <input type="text" class="form-control category_name" name="category_name" placeholder="Enter Category Name" value="{{ $getCatDetail->category_name}}">
+                            <label for="exampleInputEmail1">Category Name</label>
 
-                        <span class="text-danger">{{ $errors->first('category_name.*') }}</span>
+                            <input type="text" class="form-control category_name" name="category_name" placeholder="Enter Category Name" value="{{ $getCatDetail->category_name}}">
 
+                            <span class="text-danger">{{ $errors->first('category_name.*') }}</span>
+                        
+                        </div>
 
 
                     </div>
