@@ -24,7 +24,7 @@ use Carbon\Carbon;
                 <div class="chat-area">
                     <div class="chat-lists">
                         <div class="chat-header">
-                           
+
                             <div class="chat-functions">
                                 <div class="d-flex align-items-center">
                                     <span class="me-3">
@@ -99,16 +99,16 @@ use Carbon\Carbon;
                         @php
     $i = 0;
 @endphp
-                @foreach ($messages as $k => $message)   
+                @foreach ($messages as $k => $message)
                     @if(!isset($message['contactName']))
                         @continue
-                    @endisset      
+                    @endisset
                     @if ($i == 0)
                         <input type="hidden" class="selected_id" value="{{$k}}"/>
                         <input type="hidden" class="selected_message" value="{{$message['contactId']}}"/>
                         <input type="hidden" class="selected_name" value="{{$message['contactName']}}"/>
                         <input type="hidden" id="isGroup" value="{{@$message['group']}}"/>
-                    @endif                    
+                    @endif
                     <li class="{{$i == 0 ?'active':''}} msg-list conversation-{{$message['conversationId']}}" data-userId="{{$message['contactId']}}" data-msgKey={{$k}} data-group={{@$message['group']}}>
                         <div class="chat-data d-flex align-items-center">
                             <div class="user-img position-relative">
@@ -399,9 +399,6 @@ use Carbon\Carbon;
                     <!-- ========= forth-modal ======== -->
                     <div class="multi-chat d-none">
                         <div class="img-wrp">
-
-
-
                         </div>
                         <h5 class="selected-user-name">Tiana Dokidis, Martin Garlic, +3</h5>
                         <p>This message will automatically create a group</p>

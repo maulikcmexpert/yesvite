@@ -37,70 +37,82 @@ $.ajaxSetup({
     },
 });
 
-function updateProfileImg(profileImageUrl, userName) {
+function getInitials(userName) {
+    return userName
+        .split(" ")
+        .map((word) => word[0]?.toUpperCase())
+        .join("");
+}
+
+async function isValidImageUrl(profileImageUrl) {
     if (
-        profileImageUrl?.includes(".jpg") ||
-        profileImageUrl?.includes(".jpeg") ||
-        profileImageUrl?.includes(".png")
+        profileImageUrl &&
+        (profileImageUrl.includes(".jpg") ||
+            profileImageUrl.includes(".jpeg") ||
+            profileImageUrl.includes(".png")) &&
+        (await imageExists(profileImageUrl))
     ) {
+        return true;
+    }
+    return false;
+}
+
+function imageExists(url) {
+    try {
+        return new Promise((resolve) => {
+            const img = new Image();
+            img.onload = function () {
+                resolve(true);
+            };
+            img.onerror = function () {
+                resolve(false);
+            };
+            img.src = url;
+        });
+    } catch (e) {}
+}
+
+async function updateProfileImg(profileImageUrl, userName) {
+    if (await isValidImageUrl(profileImageUrl)) {
         $("#selected-user-profile").replaceWith(
-            `  <img id="selected-user-profile" src="${profileImageUrl}" alt="user-img">`
+            `<img id="selected-user-profile" src="${profileImageUrl}" alt="user-img">`
         );
         $("#profileIm").replaceWith(
-            `  <img id="profileIm" src="${profileImageUrl}" alt="cover-img" >`
+            `<img id="profileIm" src="${profileImageUrl}" alt="cover-img" >`
         );
     } else {
-        const initials = userName
-            .split(" ")
-            .map((word) => word[0]?.toUpperCase())
-            .join("");
+        const initials = getInitials(userName);
         const fontColor = "fontcolor" + initials[0]?.toUpperCase();
 
         $("#selected-user-profile").replaceWith(
             `<h5 class="${fontColor}" id="selected-user-profile">${initials}</h5>`
         );
         $("#profileIm").replaceWith(
-            `  <h5 id="profileIm" class="${fontColor}">${initials}</h5>`
+            `<h5 id="profileIm" class="${fontColor}">${initials}</h5>`
         );
     }
 }
 
-function getSelectedUserimg(profileImageUrl, userName) {
-    if (
-        profileImageUrl != undefined &&
-        (profileImageUrl.includes(".jpg") ||
-            profileImageUrl?.includes(".jpeg") ||
-            profileImageUrl?.includes(".png"))
-    ) {
+async function getSelectedUserimg(profileImageUrl, userName) {
+    if (await isValidImageUrl(profileImageUrl)) {
         return `<img class="selected-user-img" src="${profileImageUrl}" alt="user-img">`;
     } else {
-        const initials = userName
-            .split(" ")
-            .map((word) => word[0]?.toUpperCase())
-            .join("");
+        const initials = getInitials(userName);
         const fontColor = "fontcolor" + initials[0]?.toUpperCase();
 
         return `<h5 class="${fontColor} selected-user-img user-img" id="selected-user-profile" src="">${initials}</h5>`;
     }
 }
 
-function getListUserimg(profileImageUrl, userName) {
-    if (
-        profileImageUrl != undefined &&
-        (profileImageUrl.includes(".jpg") ||
-            profileImageUrl?.includes(".jpeg") ||
-            profileImageUrl?.includes(".png"))
-    ) {
+async function getListUserimg(profileImageUrl, userName) {
+    if (await isValidImageUrl(profileImageUrl)) {
         return `<img class="user-avatar img-fluid" src="${profileImageUrl}" alt="user-img">`;
-    } else {
-        const initials = userName
-            .split(" ")
-            .map((word) => word[0]?.toUpperCase())
-            .join("");
-        const fontColor = "fontcolor" + initials[0]?.toUpperCase();
-
-        return `<h5 class="${fontColor} user-avatar img-fluid" id="selected-user-profile" src="">${initials}</h5>`;
     }
+
+    const initials = getInitials(userName);
+    const fontColor = "fontcolor" + initials[0]?.toUpperCase();
+
+    return `<h5 class="${fontColor} user-avatar img-fluid" id="selected-user-profile" src="">${initials}</h5>`;
 }
 
 // Initialize Firebase
@@ -215,10 +227,9 @@ async function addMessageToGroup(
     }
 }
 // Function to handle a new conversation
-function handleNewConversation(snapshot) {
+async function handleNewConversation(snapshot) {
     const newConversation = snapshot.val();
-    console.log("update");
-    console.log(newConversation.conversationId);
+
     // console.log("New conversation added:", newConversation);
     if (newConversation.conversationId == undefined) {
         return;
@@ -227,7 +238,21 @@ function handleNewConversation(snapshot) {
     const conversationElement = document.getElementsByClassName(
         `conversation-${newConversation.conversationId}`
     );
-    console.log(conversationElement);
+    let userStatus = "";
+    if (newConversation.group !== "true" && newConversation.group !== true) {
+        let userId = newConversation.contactId;
+        let userData = await getUser(userId);
+        console.log(newConversation.group);
+        console.log(userData);
+        if (
+            userData.userStatus == "Online" ||
+            userData.userStatus == "online"
+        ) {
+            userStatus = `<span class="active"></span>`;
+        } else {
+            userStatus = `<span class="inactive"></span>`;
+        }
+    }
     if (conversationElement.length > 0) {
         // Update existing conversation element
         $(conversationElement)
@@ -243,11 +268,15 @@ function handleNewConversation(snapshot) {
             .find(".user-img")
             .find("img")
             .replaceWith(
-                getListUserimg(
+                await getListUserimg(
                     newConversation.receiverProfile,
                     newConversation.contactName
                 )
             );
+        $(conversationElement)
+            .find(".user-img")
+            .find("span")
+            .replaceWith(userStatus);
 
         const badgeElement = $(conversationElement).find(".user-detail .badge");
         badgeElement.text(newConversation.unReadCount);
@@ -275,7 +304,8 @@ function handleNewConversation(snapshot) {
     }
 
     const selectedConversationId = $(".selected_conversasion").val();
-    $("#isGroup").val(newConversation.group);
+    // $("#isGroup").val(newConversation.group);
+    // console.log(newConversation.group);
     if (selectedConversationId === newConversation.conversationId) {
         updateOverview(senderUser, newConversation.conversationId, {
             unRead: false,
@@ -321,7 +351,7 @@ async function updateChat(user_id) {
     $("#selected-user-name").html(selected_user.userName);
 
     const profileImageUrl = selected_user.userProfile;
-    updateProfileImg(profileImageUrl, selected_user.userName);
+    await updateProfileImg(profileImageUrl, selected_user.userName);
 
     $(".selected_name").val(selected_user.userName);
     $(".selected-title").html(selected_user.userName);
@@ -400,13 +430,13 @@ async function updateChatfromGroup(conversationId) {
     });
     $("#selected-user-lastseen").html(""); // Group doesn't have a last seen
     $("#selected-user-name").html(groupInfo.groupName);
-    updateProfileImg(groupInfo.groupProfile, groupInfo.groupName);
+    await updateProfileImg(groupInfo.groupProfile, groupInfo.groupName);
 
     $(".selected_name").val(groupInfo.groupName);
 
     $(".selected_conversasion").val(conversationId);
     update(userRef, { userChatId: conversationId });
-    addListInMembers(SelecteGroupUser);
+    await addListInMembers(SelecteGroupUser);
     $(".selected-title").html(groupInfo.groupName);
 }
 
@@ -487,28 +517,53 @@ $(".send-message").on("keypress", async function (e) {
                 receiverName: senderUserName,
                 status: {},
             };
-
+            // alert(isGroup);
             if (isGroup == true || isGroup == "true") {
                 const groupName = $(".selected_name").val();
 
                 // Fetch group members from Firebase
-                const groupMembersRef = ref(
+                // const groupMembersRef = ref(
+                //     database,
+                //     `Groups/${conversationId}/users`
+                // );
+                // const groupMembersSnapshot = await get(groupMembersRef);
+                // const newGroupMembers = groupMembersSnapshot.val();
+
+                const groupProfilesRef = ref(
                     database,
-                    `Groups/${conversationId}/users`
+                    `Groups/${conversationId}/groupInfo/profiles`
                 );
-                const groupMembersSnapshot = await get(groupMembersRef);
-                const newGroupMembers = groupMembersSnapshot.val();
-                console.log({ newGroupMembers });
+                const groupProfilesSnapshot = await get(groupProfilesRef);
+                const newGroupProfiles = groupProfilesSnapshot.val();
+                var userAvailable = [];
+                newGroupProfiles.map(async (profile) => {
+                    if (profile.leave == false) {
+                        if (profile.id !== senderUser) {
+                            userAvailable[profile.id] = false;
+                        }
+                        const receiverSnapshot = await get(
+                            ref(
+                                database,
+                                `overview/${profile.id}/${conversationId}`
+                            )
+                        );
+                        await updateOverview(profile.id, conversationId, {
+                            lastMessage: `${senderUserName}: ${message}`,
+                            unReadCount:
+                                profile.id === senderUser
+                                    ? receiverSnapshot.val()
+                                    : (receiverSnapshot.val().unReadCount ||
+                                          0) + 1,
+                            timeStamp: Date.now(),
+                        });
+                    }
+                });
+
+                messageData.userAvailable = userAvailable;
+
                 await addMessageToGroup(conversationId, messageData);
 
                 // Update all group members' overview
-                for (const userId of newGroupMembers) {
-                    await updateOverview(userId, conversationId, {
-                        lastMessage: `${senderUserName}: ${message}`,
-                        unReadCount: userId === senderUser ? 0 : 1,
-                        timeStamp: Date.now(),
-                    });
-                }
             } else {
                 const receiverId = $(".selected_message").val();
                 const receiverName = $(".selected_name").val();
@@ -525,9 +580,7 @@ $(".send-message").on("keypress", async function (e) {
                 const receiverSnapshot = await get(
                     ref(database, `overview/${receiverId}/${conversationId}`)
                 );
-                console.log(receiverId);
-                console.log(conversationId);
-                console.log(receiverSnapshot.val());
+
                 if (receiverSnapshot.val() != null) {
                     await updateOverview(receiverId, conversationId, {
                         lastMessage: `${senderUserName}: ${message}`,
@@ -537,6 +590,9 @@ $(".send-message").on("keypress", async function (e) {
                     });
                 } else {
                     const reciverUser = await getUser(receiverId);
+                    if (!reciverUser) {
+                        return;
+                    }
                     const receiverConversationData = {
                         contactId: receiverId,
                         contactName: receiverName,
@@ -570,6 +626,7 @@ function addMessageToList(key, messageData, conversationId) {
     if ($(".selected_conversasion").val() != conversationId) {
         return;
     }
+
     let isGroup = $("#isGroup").val();
     if (
         messageData?.isDelete != undefined &&
@@ -577,30 +634,91 @@ function addMessageToList(key, messageData, conversationId) {
     ) {
         return;
     }
-    const messageElement = `
-        <li class="${
-            senderUser === messageData.senderId ? "receiver" : "sender"
-        }" id="message-${key}">
+
+    const messageElement = createMessageElement(key, messageData, isGroup);
+    $(".msg-lists").append(messageElement);
+
+    if (
+        (isGroup != "true" || isGroup != true) &&
+        senderUser === messageData.receiverId
+    ) {
+        markMessageAsSeen(conversationId, key);
+    } else {
+        if (senderUser !== messageData.senderId) {
+            markGroupAsSeen(conversationId, key);
+        }
+    }
+
+    scrollToBottom();
+}
+
+function createMessageElement(key, messageData, isGroup) {
+    const isReceiver = senderUser === messageData.senderId;
+    const senderName =
+        (isGroup == "true" || isGroup == true) && !isReceiver
+            ? SelecteGroupUser[messageData.senderId].name
+            : "";
+    let seenStatus = "";
+    if (isGroup == "true" || isGroup == true) {
+        if (
+            Object.values(messageData.userAvailable).some(
+                (value) => value === false
+            )
+        ) {
+            seenStatus = "grey-tick";
+        } else {
+            seenStatus = "blue-tick";
+        }
+        // Object.entries(messageData.userAvailable).forEach(([key, value]) => {
+
+        // });
+    } else {
+        seenStatus = isReceiver
+            ? messageData.isSeen
+                ? "blue-tick"
+                : "grey-tick"
+            : "";
+    }
+    return `
+        <li class="${isReceiver ? "receiver" : "sender"}" id="message-${key}">
             <p>${messageData.data}</p>
             <span class="time">${timeago.format(
-                new Date(messageData.timeStamp).toLocaleTimeString()
+                new Date(messageData.timeStamp)
             )}</span>
-            <span class="senderName">${
-                (isGroup == "true" || isGroup == true) &&
-                senderUser != messageData.senderId
-                    ? SelecteGroupUser[messageData.senderId].name
-                    : ""
-            }</span>
+            <span class="senderName">${senderName}</span>
+             ${
+                 isReceiver
+                     ? `<span class="seenStatus ${seenStatus}"></span>`
+                     : ""
+             }
         </li>
-       
     `;
-    $(".msg-lists").append(messageElement);
-    scrollFunction();
 }
+
+function markMessageAsSeen(conversationId, key) {
+    const msgRef = ref(database, `/Messages/${conversationId}/message/${key}`);
+    update(msgRef, { isSeen: true });
+}
+function markGroupAsSeen(conversationId, key) {
+    const msgRef = ref(
+        database,
+        `/Groups/${conversationId}/message/${key}/userAvailable/${senderUser}/`
+    );
+    set(msgRef, Date.now());
+}
+
+function scrollToBottom() {
+    const container = document.getElementById("msgBody");
+    container.scroll({
+        top: container.scrollHeight,
+        behavior: "smooth",
+    });
+}
+
 var selectedUserIds = [];
 $("#search-user")
     .autocomplete({
-        source: function (request, response) {
+        source: async function (request, response) {
             $.ajax({
                 url: base_url + "autocomplete-users",
                 dataType: "json",
@@ -645,12 +763,12 @@ $("#search-user")
             }, 100);
         },
     })
-    .data("ui-autocomplete")._renderItem = function (ul, item) {
+    .data("ui-autocomplete")._renderItem = async function (ul, item) {
     const $li = $("<li>");
     const $divMain = $("<div>").addClass("suggestion-item chat-data d-flex");
     const $divImage = $("<div>").addClass("user-img position-relative");
     const $divName = $("<div>").addClass("user-detail d-block ms-3");
-    const $img = getListUserimg(item.imageUrl, item.label);
+    const $img = await getListUserimg(item.imageUrl, item.label);
 
     const $span = $("<h3>").text(item.label);
 
@@ -678,7 +796,7 @@ $(document).on("click", ".close-btn", function () {
     handleSelectedUsers();
 });
 
-function handleSelectedUsers() {
+async function handleSelectedUsers() {
     const tagCount = $("#selected-tags-container .tag").length;
 
     if (tagCount === 1) {
@@ -693,7 +811,7 @@ function handleSelectedUsers() {
         const userImgSrc = $singleTag.find("img").attr("src");
         $(".selected-user-name").text(userName);
         $(".selected-user-img").replaceWith(
-            getSelectedUserimg(userImgSrc, userName)
+            await getSelectedUserimg(userImgSrc, userName)
         );
 
         $(".selected-user-email").attr("href", "mailto:").find("span").text("");
@@ -707,12 +825,15 @@ function handleSelectedUsers() {
         $(".multi-chat").removeClass("d-none");
         const $tags = $("#selected-tags-container .tag");
         let groupNames = "";
-        $tags.each(function (index) {
+        $tags.each(async function (index) {
             if (index < 2) {
                 const userName = $(this).text().trim();
                 const userImgSrc = $(this).find("img").attr("src");
                 groupNames += `<div class="multi-img grp-img">
-                                    ${getSelectedUserimg(userImgSrc, userName)}
+                                    ${await getSelectedUserimg(
+                                        userImgSrc,
+                                        userName
+                                    )}
                                 </div>`;
             }
         });
@@ -1058,22 +1179,24 @@ const isOfflineForDatabase = {
     userStatus: "offline",
     userLastSeen: Date.now(),
 };
-// await onDisconnect(userRef).update(isOfflineForDatabase);
+await onDisconnect(userRef).update(isOfflineForDatabase);
 // Load user images
 $(".user-image").each(async function () {
     const dataId = $(this).attr("data-id");
     const user = await getUser(dataId);
     $(this).attr("src", user?.userProfile);
 });
-function addListInMembers(SelecteGroupUser) {
+
+async function addListInMembers(SelecteGroupUser) {
     let isGroup = $("#isGroup").val();
 
-    var messageElement = ``;
-    SelecteGroupUser.map((user) => {
+    let messageElement = ``;
+    const promises = SelecteGroupUser.map(async (user) => {
+        const userImageElement = await getListUserimg(user.image, user.name);
         messageElement += ` <li class="">
                             <div class="chat-data d-flex">
                                 <div class="user-img position-relative">
-                                    ${getListUserimg(user.image, user.name)}
+                                    ${userImageElement}
                                 </div>
                                 <div class="user-detail d-block ms-3">
                                     <div class="">
@@ -1090,6 +1213,8 @@ function addListInMembers(SelecteGroupUser) {
                             </div>
                         </li>`;
     });
+
+    await Promise.all(promises);
     $(".member-lists").html(messageElement);
 }
 
