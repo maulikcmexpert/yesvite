@@ -12313,37 +12313,38 @@ class ApiControllerv2 extends Controller
     //     }
     // }
 
-//     public function verifyPurchase(Request $request)
-//     {
-//         $rawData = $request->getContent();
-//         $input = json_decode($rawData, true);
-//         if ($input == null) {
-//             return response()->json(['status' => 0, 'message' => "Json invalid"]);
-//         }
+    //     public function verifyPurchase(Request $request)
+    //     {
+    //         $rawData = $request->getContent();
+    //         $input = json_decode($rawData, true);
+    //         if ($input == null) {
+    //             return response()->json(['status' => 0, 'message' => "Json invalid"]);
+    //         }
 
-//         $validator = Validator::make($input, [
-//             'platform' => ['required', 'in:ios,android'],
-//         ]);
+    //         $validator = Validator::make($input, [
+    //             'platform' => ['required', 'in:ios,android'],
+    //         ]);
 
-//         if ($validator->fails()) {
-//             return response()->json([
-//                 'status' => 0,
-//                 'message' => $validator->errors()->first(),
-//             ]);
-//         }
+    //         if ($validator->fails()) {
+    //             return response()->json([
+    //                 'status' => 0,
+    //                 'message' => $validator->errors()->first(),
+    //             ]);
+    //         }
 
-//         $usersubscription = UserSubscription::where(['user_id', $this->user->id])->first();
-//         $userId = $this->user->id;
-//         $purchaseToken = $usersubscription->purchase_token;
-//         $platform = $request->platform;
+    //         $usersubscription = UserSubscription::where(['user_id', $this->user->id])->first();
+    //         $userId = $this->user->id;
+    //         $purchaseToken = $usersubscription->purchase_token;
+    //         $platform = $request->platform;
 
-//         if ($platform == 'ios') {
+    //         if ($platform == 'ios') {
 
-//             return $this->verifyApplePurchase($userId, $purchaseToken);
-//         } elseif ($platform == 'android') {
-//             return $this->verifyGooglePurchase($userId, $purchaseToken);
-//         } else {
-//             return response()->json(['error' => 'Invalid platform'], 400);
-//         }
-//     }
-// }
+    //             return $this->verifyApplePurchase($userId, $purchaseToken);
+    //         } elseif ($platform == 'android') {
+    //             return $this->verifyGooglePurchase($userId, $purchaseToken);
+    //         } else {
+    //             return response()->json(['error' => 'Invalid platform'], 400);
+    //         }
+    //     }
+    // }
+}
