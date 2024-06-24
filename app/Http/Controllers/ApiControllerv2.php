@@ -12294,9 +12294,13 @@ class ApiControllerv2 extends Controller
             $productId = $input['productId'];
             $purchaseToken = $input['purchaseToken'];
 
-            $url = "https://androidpublisher.googleapis.com/androidpublisher/v3/applications/{$packageName}/purchases/products/{$productId}/tokens/{$purchaseToken}";
+            $accessToken = "a38987761e3171bc20c7cb78645b8f0eb1725df3";
 
-            $response = Http::get($url);
+            $response = Http::withHeaders([
+                'Authorization' => 'Bearer ' . $accessToken,
+            ])->get('https://androidpublisher.googleapis.com/androidpublisher/v3/applications/' . $packageName . '/purchases/products/' . $productId . '/tokens/' . $purchaseToken);
+
+
             dd($response);
             $addSubscription = new UserSubscription();
             $addSubscription->orderId = $input['orderId'];
