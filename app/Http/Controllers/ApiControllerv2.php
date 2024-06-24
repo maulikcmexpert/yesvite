@@ -12275,7 +12275,7 @@ class ApiControllerv2 extends Controller
             'packageName' => 'required',
             'productId' => 'required',
             'purchaseTime' => 'required',
-            'purchase_token' => 'required|string',
+            'purchaseToken' => 'required|string',
             'autoRenewing' => 'required',
         ]);
 
@@ -12292,7 +12292,7 @@ class ApiControllerv2 extends Controller
         try {
             $packageName = $input['packageName'];
             $productId = $input['productId'];
-            $purchaseToken = $input['purchase_token'];
+            $purchaseToken = $input['purchaseToken'];
 
             $url = "https://androidpublisher.googleapis.com/androidpublisher/v3/applications/{$packageName}/purchases/products/{$productId}/tokens/{$purchaseToken}";
 
