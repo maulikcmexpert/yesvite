@@ -12290,11 +12290,11 @@ class ApiControllerv2 extends Controller
         }
 
         try {
-            $packageName =
-                $productId =
-                $purchaseToken =
+            $packageName = $input['packageName'];
+            $productId = $input['productId'];
+            $purchaseToken = $input['purchase_token'];
 
-                $url = "https://androidpublisher.googleapis.com/androidpublisher/v3/applications/{$packageName}/purchases/products/{$productId}/tokens/{$purchaseToken}";
+            $url = "https://androidpublisher.googleapis.com/androidpublisher/v3/applications/{$packageName}/purchases/products/{$productId}/tokens/{$purchaseToken}";
 
             $response = Http::get($url);
             dd($response);
