@@ -703,6 +703,29 @@ ul.chat-list li:last-child{
     margin-left: 5px;
   }
 
+  .reaction-icon, .reply-icon {
+    cursor: pointer;
+    margin-left: 5px;
+    border: 1px solid grey;
+    padding: 2px;
+    border-radius: 50%;
+}
+
+.reaction-dialog {
+    display: flex;
+    gap: 5px;
+    background-color: white;
+    border: 1px solid grey;
+    border-radius: 5px;
+    padding: 5px;
+    position: absolute;
+}
+
+.reaction-option {
+    cursor: pointer;
+}
+
+
 /* ======= responsive ======== */
 @media only screen and (max-width:1500px){
     .chat-area .msg-head .dropdown-menu.show{

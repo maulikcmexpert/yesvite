@@ -125,6 +125,7 @@ class ChatController extends Controller
     public function autocomplete(Request $request)
     {
         $search = $request->get('term');
+        $selectedUserIds = $request->get('selectedUserIds', []);
         $currentUserId = auth()->id();
         $profilePath = asset('storage/profile/');
 
@@ -137,6 +138,7 @@ class ChatController extends Controller
             ->where(DB::raw("CONCAT(firstname, ' ', lastname)"), 'LIKE', '%' . $search . '%')
             ->where('id', '!=', $currentUserId)
             ->where('app_user', '=', '1')
+            ->whereNotIn('id', $selectedUserIds) // Filter out selected users
             ->get();
 
         return response()->json($users);
