@@ -12253,4 +12253,53 @@ class ApiControllerv2 extends Controller
             return response()->json(['status' => 0, 'message' => 'something went wrong']);
         }
     }
+
+    public function verifyPurchase(Request $request)
+    {
+        $request->validate([
+            'user_id' => 'required|integer',
+            'orderId' => 'required|integer',
+            'packageName' => 'required',
+            'productId' => 'required',
+            'purchaseTime' => 'required',
+            'purchase_token' => 'required|string',
+            'autoRenewing' => 'required',
+            'platform' => 'required|in:ios,android',
+        ]);
+
+
+        $rawData = $request->getContent();
+
+        $input = json_decode($rawData, true);
+
+        if ($input == null) {
+            return response()->json(['status' => 0, 'message' => "Json invalid"]);
+        }
+
+        $validator = Validator::make($input, [
+            "step" => ['required', 'in:1,2,3,4'],
+            "event_id" => ['required', 'exists:events,id']
+        ]);
+        if ($validator->fails()) {
+            return response()->json(
+                [
+                    'status' => 0,
+                    'message' => $validator->errors()->first()
+                ],
+            );
+        }
+
+
+        $userId = $request->user_id;
+        $purchaseToken = $request->purchase_token;
+        $platform = $request->platform;
+
+        if ($platform == 'ios') {
+            return $this->verifyApplePurchase($userId, $purchaseToken);
+        } elseif ($platform == 'android') {
+            return $this->verifyGooglePurchase($userId, $purchaseToken);
+        } else {
+            return response()->json(['error' => 'Invalid platform'], 400);
+        }
+    }
 }

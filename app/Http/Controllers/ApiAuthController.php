@@ -71,6 +71,7 @@ class ApiAuthController extends Controller
             $randomString = Str::random(30);
 
             $checkUser = User::where("email", $input['email'])->first();
+            $usersignup =  $checkUser->id;
             if ($checkUser != null) {
                 $checkUser->firstname = $input['firstname'];
                 $checkUser->lastname = $input['lastname'];

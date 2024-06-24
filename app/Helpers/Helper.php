@@ -1351,3 +1351,40 @@ function formatNumber($num)
         return $num;
     }
 }
+
+
+function verifyApplePurchase($userId, $purchaseToken)
+{
+    $url = "https://buy.itunes.apple.com/verifyReceipt"; // Production URL
+    // $url = "https://sandbox.itunes.apple.com/verifyReceipt"; // Sandbox URL
+
+    $response = Http::post($url, [
+        'receipt-data' => $purchaseToken,
+        'password' => env('APPLE_SHARED_SECRET'),
+    ]);
+
+    if ($response->json('status') == 0) {
+        $this->updateSubscriptionStatus($userId, $response->json());
+        return response()->json(['success' => true]);
+    } else {
+        return response()->json(['error' => 'Invalid receipt'], 400);
+    }
+}
+
+function verifyGooglePurchase($userId, $purchaseToken)
+{
+    $packageName = env('GOOGLE_PACKAGE_NAME');
+    $productId = env('GOOGLE_PRODUCT_ID');
+    $accessToken = $this->getGoogleAccessToken();
+
+    $url = "https://www.googleapis.com/androidpublisher/v3/applications/{$packageName}/purchases/subscriptions/{$productId}/tokens/{$purchaseToken}?access_token={$accessToken}";
+
+    $response = Http::get($url);
+
+    if ($response->json('purchaseState') == 0) {
+        $this->updateSubscriptionStatus($userId, $response->json());
+        return response()->json(['success' => true]);
+    } else {
+        return response()->json(['error' => 'Invalid purchase token'], 400);
+    }
+}
