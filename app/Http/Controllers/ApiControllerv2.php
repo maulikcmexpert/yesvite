@@ -12257,93 +12257,93 @@ class ApiControllerv2 extends Controller
     }
 
 
-    public function addSubscription(Request $request)
-    {
-        $rawData = $request->getContent();
+    // public function addSubscription(Request $request)
+    // {
+    //     $rawData = $request->getContent();
 
-        $input = json_decode($rawData, true);
+    //     $input = json_decode($rawData, true);
 
-        if ($input == null) {
-            return response()->json(['status' => 0, 'message' => "Json invalid"]);
-        }
-
-
-
-        $validator = Validator::make($input, [
-
-            'orderId' => 'required',
-            'packageName' => 'required',
-            'productId' => 'required',
-            'purchaseTime' => 'required',
-            'purchaseToken' => 'required|string',
-            'autoRenewing' => 'required',
-        ]);
-
-
-        if ($validator->fails()) {
-            return response()->json(
-                [
-                    'status' => 0,
-                    'message' => $validator->errors()->first()
-                ],
-            );
-        }
-
-        try {
-            $packageName = $input['packageName'];
-            $productId = $input['productId'];
-            $purchaseToken = $input['purchaseToken'];
+    //     if ($input == null) {
+    //         return response()->json(['status' => 0, 'message' => "Json invalid"]);
+    //     }
 
 
 
-            $response = Http::withHeaders([
-                'Authorization' => 'Bearer ' . $accessToken,
-            ])->get('https://androidpublisher.googleapis.com/androidpublisher/v3/applications/' . $packageName . '/purchases/products/' . $productId . '/tokens/' . $purchaseToken);
+    //     $validator = Validator::make($input, [
+
+    //         'orderId' => 'required',
+    //         'packageName' => 'required',
+    //         'productId' => 'required',
+    //         'purchaseTime' => 'required',
+    //         'purchaseToken' => 'required|string',
+    //         'autoRenewing' => 'required',
+    //     ]);
 
 
-            dd($response);
-            $addSubscription = new UserSubscription();
-            $addSubscription->orderId = $input['orderId'];
-            $addSubscription->packageName = $input['packageName'];
-            $addSubscription->productId = $input['productId'];
-        } catch (QueryException $e) {
-            return response()->json(['status' => 0, 'message' => "db error"]);
-        } catch (Exception  $e) {
-            return response()->json(['status' => 0, 'message' => 'something went wrong']);
-        }
-    }
+    //     if ($validator->fails()) {
+    //         return response()->json(
+    //             [
+    //                 'status' => 0,
+    //                 'message' => $validator->errors()->first()
+    //             ],
+    //         );
+    //     }
 
-    public function verifyPurchase(Request $request)
-    {
-        $rawData = $request->getContent();
-        $input = json_decode($rawData, true);
-        if ($input == null) {
-            return response()->json(['status' => 0, 'message' => "Json invalid"]);
-        }
+    //     try {
+    //         $packageName = $input['packageName'];
+    //         $productId = $input['productId'];
+    //         $purchaseToken = $input['purchaseToken'];
 
-        $validator = Validator::make($input, [
-            'platform' => ['required', 'in:ios,android'],
-        ]);
 
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => 0,
-                'message' => $validator->errors()->first(),
-            ]);
-        }
 
-        $usersubscription = UserSubscription::where(['user_id', $this->user->id])->first();
-        $userId = $this->user->id;
-        $purchaseToken = $usersubscription->purchase_token;
-        $platform = $request->platform;
+    //         $response = Http::withHeaders([
+    //             'Authorization' => 'Bearer ' . $accessToken,
+    //         ])->get('https://androidpublisher.googleapis.com/androidpublisher/v3/applications/' . $packageName . '/purchases/products/' . $productId . '/tokens/' . $purchaseToken);
 
-        if ($platform == 'ios') {
 
-            return $this->verifyApplePurchase($userId, $purchaseToken);
-        } elseif ($platform == 'android') {
-            return $this->verifyGooglePurchase($userId, $purchaseToken);
-        } else {
-            return response()->json(['error' => 'Invalid platform'], 400);
-        }
-    }
-}
+    //         dd($response);
+    //         $addSubscription = new UserSubscription();
+    //         $addSubscription->orderId = $input['orderId'];
+    //         $addSubscription->packageName = $input['packageName'];
+    //         $addSubscription->productId = $input['productId'];
+    //     } catch (QueryException $e) {
+    //         return response()->json(['status' => 0, 'message' => "db error"]);
+    //     } catch (Exception  $e) {
+    //         return response()->json(['status' => 0, 'message' => 'something went wrong']);
+    //     }
+    // }
+
+//     public function verifyPurchase(Request $request)
+//     {
+//         $rawData = $request->getContent();
+//         $input = json_decode($rawData, true);
+//         if ($input == null) {
+//             return response()->json(['status' => 0, 'message' => "Json invalid"]);
+//         }
+
+//         $validator = Validator::make($input, [
+//             'platform' => ['required', 'in:ios,android'],
+//         ]);
+
+//         if ($validator->fails()) {
+//             return response()->json([
+//                 'status' => 0,
+//                 'message' => $validator->errors()->first(),
+//             ]);
+//         }
+
+//         $usersubscription = UserSubscription::where(['user_id', $this->user->id])->first();
+//         $userId = $this->user->id;
+//         $purchaseToken = $usersubscription->purchase_token;
+//         $platform = $request->platform;
+
+//         if ($platform == 'ios') {
+
+//             return $this->verifyApplePurchase($userId, $purchaseToken);
+//         } elseif ($platform == 'android') {
+//             return $this->verifyGooglePurchase($userId, $purchaseToken);
+//         } else {
+//             return response()->json(['error' => 'Invalid platform'], 400);
+//         }
+//     }
+// }

@@ -29,7 +29,7 @@ use Illuminate\Support\Facades\Session;
 use libphonenumber\PhoneNumberUtil;
 use libphonenumber\PhoneNumberFormat;
 use libphonenumber\NumberParseException;
-use Google\Client;
+
 
 function getVideoDuration($filePath)
 {
@@ -1374,46 +1374,46 @@ function verifyApplePurchase($userId, $purchaseToken)
 }
 
 
-function verifyGooglePurchase($userId, $purchaseToken)
-{
+// function verifyGooglePurchase($userId, $purchaseToken)
+// {
 
-    dd(getAccessToken());
-    $url = "https://androidpublisher.googleapis.com/androidpublisher/v3/applications/{$packageName}/purchases/products/{$productId}/tokens/{$purchaseToken}";
+//     dd(getAccessToken());
+//     $url = "https://androidpublisher.googleapis.com/androidpublisher/v3/applications/{$packageName}/purchases/products/{$productId}/tokens/{$purchaseToken}";
 
-    $response = Http::get($url);
+//     $response = Http::get($url);
 
-    if ($response->json('purchaseState') == 0) {
-        updateSubscriptionStatus($userId, $response->json());
-        return true;
-    } else {
-        return false;
-    }
-}
+//     if ($response->json('purchaseState') == 0) {
+//         updateSubscriptionStatus($userId, $response->json());
+//         return true;
+//     } else {
+//         return false;
+//     }
+// }
 
 
 
-function getAccessToken()
-{
-    $client = new Client();
-    $client->setAuthConfig('service-account-file.json');
-    $client->addScope('https://www.googleapis.com/auth/androidpublisher');
+// function getAccessToken()
+// {
+//     $client = new Client();
+//     $client->setAuthConfig('service-account-file.json');
+//     $client->addScope('https://www.googleapis.com/auth/androidpublisher');
 
-    $accessToken = $client->fetchAccessTokenWithAssertion();
+//     $accessToken = $client->fetchAccessTokenWithAssertion();
 
-    if (isset($accessToken['access_token'])) {
-        return $accessToken['access_token'];
-    } else {
-        throw new Exception('Could not fetch access token');
-    }
-}
-function updateSubscriptionStatus($userId, $response)
-{
-    $userSubscription = UserSubscription::where('user_id', $userId)->first();
+//     if (isset($accessToken['access_token'])) {
+//         return $accessToken['access_token'];
+//     } else {
+//         throw new Exception('Could not fetch access token');
+//     }
+// }
+// function updateSubscriptionStatus($userId, $response)
+// {
+//     $userSubscription = UserSubscription::where('user_id', $userId)->first();
 
-    if ($userSubscription) {
-        $expiryDate = isset($response['expiryTimeMillis']) ? date('Y-m-d H:i:s', $response['expiryTimeMillis'] / 1000) : null;
-        $userSubscription->subscription_status = 'active';
-        $userSubscription->endDate = $expiryDate;
-        $userSubscription->save();
-    }
-}
+//     if ($userSubscription) {
+//         $expiryDate = isset($response['expiryTimeMillis']) ? date('Y-m-d H:i:s', $response['expiryTimeMillis'] / 1000) : null;
+//         $userSubscription->subscription_status = 'active';
+//         $userSubscription->endDate = $expiryDate;
+//         $userSubscription->save();
+//     }
+// }
