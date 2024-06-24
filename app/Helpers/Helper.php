@@ -22,6 +22,7 @@ use App\Models\UserNotificationType;
 use App\Mail\OwnInvitationEmail;
 use App\Models\ServerKey;
 use App\Models\UserSubscription;
+use Google\Client as GoogleClient;
 use Illuminate\Support\Facades\Auth;
 use Twilio\Rest\Client;
 use Illuminate\Support\Facades\Redirect;
@@ -1377,7 +1378,7 @@ function verifyApplePurchase($userId, $purchaseToken)
 function verifyGooglePurchase($userId, $purchaseToken)
 {
 
-    dd(getAccessToken());
+
     $url = "https://androidpublisher.googleapis.com/androidpublisher/v3/applications/{$packageName}/purchases/products/{$productId}/tokens/{$purchaseToken}";
 
     $response = Http::get($url);
@@ -1394,7 +1395,7 @@ function verifyGooglePurchase($userId, $purchaseToken)
 
 function getAccessToken()
 {
-    $client = new Client();
+    $client = new GoogleClient();
     $client->setAuthConfig('service-account-file.json');
     $client->addScope('https://www.googleapis.com/auth/androidpublisher');
 
