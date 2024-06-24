@@ -12294,12 +12294,13 @@ class ApiControllerv2 extends Controller
             $productId = $input['productId'];
             $purchaseToken = $input['purchaseToken'];
 
-            dd(getAccessToken());
+            $accessToken = getAccessToken();
 
-            // $response = Http::withHeaders([
-            //     'Authorization' => 'Bearer ' . $accessToken,
-            // ])->get('https://androidpublisher.googleapis.com/androidpublisher/v3/applications/' . $packageName . '/purchases/products/' . $productId . '/tokens/' . $purchaseToken);
+            $url = "https://androidpublisher.googleapis.com/androidpublisher/v3/applications/{$packageName}/purchases/products/{$productId}/tokens/{$purchaseToken}";
 
+            $response = Http::withHeaders([
+                'Authorization' => 'Bearer ' . $accessToken,
+            ])->get($url);
 
             dd($response);
             $addSubscription = new UserSubscription();

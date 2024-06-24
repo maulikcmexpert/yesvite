@@ -1408,14 +1408,14 @@ function getAccessToken()
         throw new Exception('Could not fetch access token');
     }
 }
-// function updateSubscriptionStatus($userId, $response)
-// {
-//     $userSubscription = UserSubscription::where('user_id', $userId)->first();
+function updateSubscriptionStatus($userId, $response)
+{
+    $userSubscription = UserSubscription::where('user_id', $userId)->first();
 
-//     if ($userSubscription) {
-//         $expiryDate = isset($response['expiryTimeMillis']) ? date('Y-m-d H:i:s', $response['expiryTimeMillis'] / 1000) : null;
-//         $userSubscription->subscription_status = 'active';
-//         $userSubscription->endDate = $expiryDate;
-//         $userSubscription->save();
-//     }
-// }
+    if ($userSubscription) {
+        $expiryDate = isset($response['expiryTimeMillis']) ? date('Y-m-d H:i:s', $response['expiryTimeMillis'] / 1000) : null;
+        $userSubscription->subscription_status = 'active';
+        $userSubscription->endDate = $expiryDate;
+        $userSubscription->save();
+    }
+}
