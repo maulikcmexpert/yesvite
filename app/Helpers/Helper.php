@@ -1396,7 +1396,8 @@ function verifyGooglePurchase($userId, $purchaseToken)
 function getAccessToken()
 {
     $client = new GoogleClient();
-    $client->setAuthConfig('service-account-file.json');
+    $url = base_path() . 'service-account-file.json';
+    $client->setAuthConfig();
     $client->addScope('https://www.googleapis.com/auth/androidpublisher');
 
     $accessToken = $client->fetchAccessTokenWithAssertion();
