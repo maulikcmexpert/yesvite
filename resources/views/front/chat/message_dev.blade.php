@@ -1,18 +1,109 @@
 @php
 use Carbon\Carbon;
 @endphp
+
+
+
+<!-- all css new for chat upload -->
+
 <style>
+    .preview-item {
+        width: 7cm;
+    }
+
+    /* .file-name {
+        max-width: 100px;
+    } */
+
     #preview_img {
-        width: 200px;
-        /* Adjust the width as needed */
-        height: 200px;
-        /* Adjust the height to match the width */
+        width: 10px;
+        height: 10px;
+    }
+
+    #recording {
+        max-width: 200px;
+    }
+
+    #preview_file {
+        width: 150px;
+        height: 150px;
         object-fit: cover;
-        /* Ensures the image covers the entire space */
         border-radius: 8px;
-        /* Optional: Adds rounded corners */
+    }
+
+    #preview {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 8px;
+    }
+
+    .preview_file {
+        width: 70px;
+        height: 70px;
+        object-fit: cover;
+        border-radius: 8px;
+    }
+
+    .send {
+        width: 27px;
+    }
+
+    .preview-item video {
+        width: 300px;
+
+        height: 200px;
+
+        object-fit: cover;
+
+        border-radius: 8px;
+
+    }
+
+    .preview-item img {
+        width: 300px;
+
+        object-fit: cover;
+
+        border-radius: 10px;
+
+    }
+
+    .close-button {
+        position: absolute;
+        top: 200px;
+        right: 750px;
+        background: rgba(255, 255, 255, 0.7);
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 16px;
+        line-height: 16px;
+        width: 24px;
+        height: 24px;
+        text-align: center;
+        padding: 0;
+    }
+
+    .audio-container {
+        display: flex;
+        align-items: center;
+    }
+
+    .close-btn {
+        margin-left: 10px;
+        padding: 5px 10px;
+        background-color: red;
+        color: white;
+        border: none;
+        cursor: pointer;
+        display: none;
     }
 </style>
+<!-- all css new for chat upload     END-->
+
+
+
 <div class="message-area">
     <div class="container">
         <div class="row">
@@ -303,19 +394,35 @@ use Carbon\Carbon;
 
                             <!-- *********************This is for audio********************* -->
                             <div id="audioControls">
+                                <button type="button" class="close-song" style="display: none;">✖</button>
+
                                 <button id="stopRecording" style="display: none;">Stop Recording</button>
+                                <!-- <img id="recording" src="{{asset('storage/recording.gif')}}"> -->
                                 <button id="playRecording" style="display: none;">Play Recording</button>
                                 <button id="stopPlayback" style="display: none;">Stop Playback</button>
                             </div>
-                            <audio id="recordedAudio" class="recordedAudio" controls style="display: none;"></audio>
+
+
+                            <div class="audio-container" id="audioContainer">
+                                <audio id="recordedAudio" class="recordedAudio" controls style="display: none;"></audio>
+                                <button class="close-btn">Close</button>
+                            </div>
+
                             <!-- ****************************This is for audio *********************END-->
 
                         </div>
+
+                        <div id="preview"></div>
                         <label id="upload_name"></label>
                         <img src="" id="preview_img" class="preview_img">
+                        <div id="preview_file">
+                            <img src="{{asset('storage/file.png')}}" class="preview_file">
+                            <span id="file_name"></span>
+                        </div>
+
+                        <input type="hidden" class="file_info"></i>
 
                         <div class="msg-footer">
-
 
                             <input type="text" placeholder="Write message here..." class="send-message">
                             <div class="d-flex gap-3">
@@ -368,14 +475,16 @@ use Carbon\Carbon;
                                     </ul>
                                 </div>
                                 <span id="send_image">
-                                    <button type="button">send</button>
+                                    <button class="btn btn-primary" type="button">send</button>
+                                    <!-- <img src="{{asset('storage/send.png')}}" type="button" class="send"> -->
                                 </span>
 
-                            <!-- ****************************This is for audio *********************-->
-                            <span id="send_audio">
-                                    <button type="button">send</button>
+                                <!-- ****************************This is for audio *********************-->
+                                <span id="send_audio">
+                                    <button class="btn btn-primary" type="button">send</button>
+                                    <!-- <img src="{{asset('storage/send.png')}}" type="button" class="send"> -->
                                 </span>
-                            <!-- ****************************This is for audio *********************END-->
+                                <!-- ****************************This is for audio *********************END-->
 
                                 <span id="startRecording"> <!--  *********************This is for audio only id -->
                                     <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -847,26 +847,36 @@ $("#new_message").on("keypress", async function (e) {
 
 
 
-
-
-
-
-////**************************************************This Code is for image and video both....************************************
+////**************************************************This Code is for image ,video,audio ....************************************
 $(".preview_img").hide();
 $("#send_image").hide();
+$(".preview_file").hide();
+$("#preview_file").hide();
+
 $(".upload-box").change(function () {
     var curElement = $(".preview_img");
     var file = this.files[0];
+    var name = file.name;
+    var preview = document.getElementById("preview");
+    // $(".preview-item").show();
+
+    displayFiles(this.files, name);
+
+    var fileExtension = file.name.substr(file.name.lastIndexOf(".") + 1);
+
+    console.log(fileExtension);
+
     if (file) {
         var reader = new FileReader();
 
         if (file.type.match("image.*")) {
             reader.onload = function (e) {
-                $(".preview_img").show();
+                // $(".preview_img").show();
+                $(".preview_file").hide();
+                $("#preview_file").hide();
+
                 curElement.attr("src", e.target.result);
-                // $("#upload_name").text(file.name);
                 $("#send_image").show();
-                // $('.dropdown-menu').hide();
             };
 
             reader.readAsDataURL(file);
@@ -876,31 +886,118 @@ $(".upload-box").change(function () {
 
             curElement.attr("src", URL.createObjectURL(file));
 
-            $(".preview_img").show();
-            $("#send_image").show();
-        } else {
-            // reader.onload = function (e) {
-            //     var curElement = $(".preview_img");
-            //     curElement.attr("src", Uint8Array(e.target.result));
-            // };
+            // $(".preview_video").show();
+            $(".preview_img").hide();
+            $(".preview_file").hide();
+            $("#preview_file").hide();
 
-            // $(".preview_img").show();
-            // $("#send_image").show();
+            $("#send_image").show();
+            $("#file_name").text("");
+        } else if (file.type.match("audio.*")) {
+            var curElement = $(".preview_img");
+
+            curElement.attr("src", URL.createObjectURL(file));
+
+            // $(".preview_video").show();
+            $(".preview_img").hide();
+            $(".preview_file").hide();
+            $("#preview_file").hide();
+
+            $("#send_image").show();
+
+            $("#file_name").text("audio");
+        } else {
+            reader.onload = function (e) {
+                curElement.attr("src", e.target.result);
+            };
+            reader.readAsDataURL(file);
+            $(".file_info").val(fileExtension);
+            $("#file_name").text(file.name);
+            $("#send_image").show();
+            $("#preview_file").show();
+
+            $(".preview_file").show();
+            $(".preview_img").hide();
         }
+        reader.readAsArrayBuffer(file);
     } else {
         $(".preview_img").hide();
         curElement.attr("src", "");
     }
 });
 
-$("#send_image").on("click", async function () {
+function displayFiles(files, name) {
+    preview.innerHTML = "";
+
+    for (var i = 0; i < files.length; i++) {
+        var file = files[i];
+        var reader = new FileReader();
+
+        reader.onload = (function (file) {
+            return function (e) {
+                var fileType = file.type.split("/")[0];
+                var previewItem = document.createElement("div");
+                previewItem.className = "preview-item";
+                var previewElement;
+
+                if (fileType === "video") {
+                    previewElement = document.createElement("video");
+                    previewElement.controls = true;
+                } else if (fileType === "audio") {
+                    previewElement = document.createElement("audio");
+                    previewElement.controls = true;
+
+                    var fileName = document.createElement("span");
+                    fileName.className = "file-name";
+                    fileName.textContent = name;
+                } else if (fileType === "image") {
+                    previewElement = document.createElement("img");
+                    previewElement.style.maxWidth = "100%";
+                } else {
+                    return;
+                }
+
+                var closeButton = document.createElement("button");
+                closeButton.innerHTML = "&#10006;";
+                closeButton.className = "close-button";
+
+                previewElement.src = e.target.result;
+                previewItem.appendChild(previewElement);
+
+                if (fileType === "audio") {
+                    previewItem.appendChild(fileName);
+                }
+
+                previewItem.appendChild(closeButton);
+                preview.appendChild(previewItem);
+            };
+        })(file);
+
+        reader.readAsDataURL(file);
+    }
+}
+
+$(document).on("click", ".close-button", function () {
+    $(".preview-item").hide();
+    $(".preview-item").html("");
     $("#send_image").hide();
+});
+
+$("#send_image").on("click", async function () {
     $(".preview_img").hide();
+    $("#send_image").hide();
+    $(".preview_video").hide();
+    $(".preview_file").hide();
+    $("#file_name").hide();
+
+    $(".preview-item").hide();
+
+    const audio = $("#file_name").text();
 
     const previewImg = $(".preview_img");
     const imageUrl = previewImg.attr("src");
 
-    console.log(imageUrl);
+    // console.log(imageUrl);
 
     if (!imageUrl) {
         alert("Please select an image to send.");
@@ -911,16 +1008,21 @@ $("#send_image").on("click", async function () {
     const message = $(this).val();
     let storagePath;
 
-    // Determine file type and set the storage path
+    const fileType = $(".file_info").val();
+
+    // console.log(fileType);
+
     if (imageUrl.startsWith("data:image/")) {
         storagePath = `Images/198/${Date.now()}_${senderUser}.png`;
-    } else if (imageUrl.startsWith("blob:http:/")) {
+    } else if (imageUrl.startsWith("blob:http:/") && audio != "audio") {
         storagePath = `Video/198/${Date.now()}_${senderUser}.mp4`;
+    } else if (imageUrl.startsWith("blob:http:/") && audio == "audio") {
+        storagePath = `Audios/198/${Date.now()}_${senderUser}.wav`;
     } else {
-        storagePath = `Files/203/${Date.now()}_${senderUser}`;
+        storagePath = `Files/203/${Date.now()}_${senderUser}.${fileType}`;
     }
 
-    console.log(storagePath);
+    // console.log(storagePath);
 
     // Upload file to Firebase Storage
     const fileRef = storageRef(storage, storagePath);
@@ -1000,10 +1102,10 @@ $("#send_image").on("click", async function () {
         console.log("Upload successful");
     } catch (error) {
         console.error("Error uploading file: ", error);
-        // alert("Failed to upload file. Please try again.");
     }
 });
-////**************************************************This Code is for image and video both....************************************ END
+////**************************************************This Code is for image,video,audio....************************************ END
+
 
 
 
@@ -1019,6 +1121,10 @@ const stopButton = document.getElementById("stopRecording");
 const playButton = document.getElementById("playRecording");
 const stopPlaybackButton = document.getElementById("stopPlayback");
 const audioElement = document.getElementById("recordedAudio");
+const close = document.getElementsByClassName("close-btn");
+
+
+
 
 function startRecording() {
     navigator.mediaDevices
@@ -1031,6 +1137,7 @@ function startRecording() {
             stopButton.style.display = "inline-block";
             playButton.style.display = "none";
             stopPlaybackButton.style.display = "none";
+            // close.style.display = "none";
 
             mediaRecorder.ondataavailable = (event) => {
                 recordedChunks.push(event.data);
@@ -1042,6 +1149,14 @@ function startRecording() {
         });
 }
 
+function closeAudio() {
+    const audioPlayer = document.getElementById("audioPlayer");
+    audioPlayer.pause();
+    audioPlayer.currentTime = 0;
+    const audioContainer = document.getElementById("audioContainer");
+    audioContainer.style.display = "none";
+}
+
 async function stopRecording() {
     if (mediaRecorder && mediaRecorder.state === "recording") {
         mediaRecorder.stop();
@@ -1049,6 +1164,7 @@ async function stopRecording() {
 
         startButton.style.display = "inline-block";
         stopButton.style.display = "none";
+        
 
         // Wait for the MediaRecorder to finish saving data
         await new Promise((resolve) => {
@@ -1070,7 +1186,7 @@ function playRecording() {
     audioElement.style.display = "block";
 
     playButton.style.display = "none";
-    stopPlaybackButton.style.display = "inline-block";
+    // stopPlaybackButton.style.display = "inline-block";
 
     audioElement.play().catch((err) => {
         console.error("Error playing audio: ", err);
@@ -1078,13 +1194,13 @@ function playRecording() {
     });
 }
 
-function stopPlayback() {
-    if (!audioElement.paused) {
-        audioElement.pause();
-    }
-    playButton.style.display = "inline-block";
-    stopPlaybackButton.style.display = "none";
-}
+// function stopPlayback() {
+//     if (!audioElement.paused) {
+//         audioElement.pause();
+//     }
+//     playButton.style.display = "inline-block";
+//     stopPlaybackButton.style.display = "none";
+// }
 
 startButton.addEventListener("click", startRecording);
 stopButton.addEventListener("click", stopRecording);
@@ -1115,7 +1231,7 @@ $("#send_audio").on("click", async function () {
 
     let storagePath;
     // if (audioUrl.startsWith("blob:http/")) {
-    storagePath = `Audios/198/${Date.now()}_${senderUser}.audio`;
+    storagePath = `Audios/198/${Date.now()}_${senderUser}.wav`;
     // } else {
     // }
 
@@ -1141,7 +1257,6 @@ $("#send_audio").on("click", async function () {
             senderId: senderUser,
             senderName: senderUserName,
             status: {},
-            // imageUrl: downloadURL, // Use the download URL from Firebase Storage
         };
 
         if (isGroup == "1") {
@@ -1194,9 +1309,7 @@ $("#send_audio").on("click", async function () {
         }
     } catch (error) {
         console.error("Error uploading image: ", error);
-        // alert("Failed to upload image. Please try again.");
     }
 });
 
 //*******************************This Code is for audio record....**************************************END
-
