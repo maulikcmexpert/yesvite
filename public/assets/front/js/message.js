@@ -123,6 +123,7 @@ const senderUser = $(".senderUser").val();
 const senderUserName = $(".senderUserName").val();
 const base_url = $("#base_url").val();
 const userRef = ref(database, `users/${senderUser}`);
+let replyMessageId = null; // Global variable to hold the message ID to reply to
 // Function to get messages between two users
 async function getMessages(userId1, userId2) {
     const messagesRef = ref(database, "Messages");
@@ -578,6 +579,38 @@ $(".send-message").on("keypress", async function (e) {
 
                 messageData.receiverId = receiverId;
                 messageData.receiverName = receiverName;
+                if (replyMessageId) {
+                    // Fetch the reply message data
+                    const replyMessageRef = ref(
+                        database,
+                        `Messages/${conversationId}/message/${replyMessageId}`
+                    );
+                    const replyMessageSnapshot = await get(replyMessageRef);
+                    const replyMessageData = replyMessageSnapshot.val();
+
+                    messageData.replyData = {
+                        replyChatKey: replyMessageId,
+                        replyMessage: replyMessageData
+                            ? replyMessageData.data
+                            : "",
+                        replyTimeStamp: Date.now(),
+                        replyUserName: senderUserName,
+                        replyDocType: "",
+                    };
+                    messageData.isReply = "1";
+                    // Reset reply message ID after sending
+                    replyMessageId = null;
+                } else {
+                    messageData.replyData = {
+                        replyChatKey: "",
+                        replyDocType: "",
+                        replyMessage: "",
+                        replyTimeStamp: 0,
+                        replyUserName: "",
+                    };
+                }
+
+                messageData.status = { senderUser: { profile: "", read: 1 } };
 
                 await addMessage(conversationId, messageData, receiverId);
 
@@ -709,7 +742,6 @@ function createMessageElement(key, messageData, isGroup) {
         </li>
     `;
 }
-function genrateReactionsAndReplay() {}
 function markMessageAsSeen(conversationId, key) {
     const msgRef = ref(database, `/Messages/${conversationId}/message/${key}`);
     update(msgRef, { isSeen: true });
@@ -1755,21 +1787,34 @@ function generateReactionsAndReply() {
         $(this).after(reactionDialog);
     });
 
-    $(document).on("click", ".reaction-option", function () {
+    $(document).on("click", ".reaction-option", async function () {
         const reaction = $(this).data("reaction");
         const messageId = $(this)
             .closest(".reaction-dialog")
             .attr("id")
             .replace("reaction-dialog-", "");
+        const conversationId = $(".conversationId").attr("conversationid");
+
+        // Remove the dialog after selecting a reaction
+        $(`#reaction-dialog-${messageId}`).remove();
+
         // Handle sending reaction to the message here
         console.log(`Reaction: ${reaction}, Message ID: ${messageId}`);
-        $(`#reaction-dialog-${messageId}`).remove(); // Remove the dialog after selecting a reaction
+
+        try {
+            const reactionRef = ref(
+                database,
+                `Messages/${conversationId}/message/${messageId}/react`
+            );
+            await set(reactionRef, reaction);
+            console.log("Reaction updated successfully in Firebase");
+        } catch (error) {
+            console.error("Error updating reaction in Firebase:", error);
+        }
     });
 
     $(document).on("click", ".reply-icon", function () {
-        const messageId = $(this).data("message-id");
-        // Handle reply functionality here
-        console.log(`Reply to Message ID: ${messageId}`);
+        replyMessageId = $(this).data("message-id");
     });
 }
 
