@@ -12294,7 +12294,7 @@ class ApiControllerv2 extends Controller
             $productId = $input['productId'];
             $purchaseToken = $input['purchaseToken'];
 
-            $accessToken = "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";
+
 
             $response = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $accessToken,

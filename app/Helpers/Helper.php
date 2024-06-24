@@ -29,6 +29,7 @@ use Illuminate\Support\Facades\Session;
 use libphonenumber\PhoneNumberUtil;
 use libphonenumber\PhoneNumberFormat;
 use libphonenumber\NumberParseException;
+use Google\Client;
 
 function getVideoDuration($filePath)
 {
@@ -1376,10 +1377,7 @@ function verifyApplePurchase($userId, $purchaseToken)
 function verifyGooglePurchase($userId, $purchaseToken)
 {
 
-    $packageName = env('GOOGLE_PACKAGE_NAME');
-    $productId = env('GOOGLE_PRODUCT_ID');
-
-
+    dd(getAccessToken());
     $url = "https://androidpublisher.googleapis.com/androidpublisher/v3/applications/{$packageName}/purchases/products/{$productId}/tokens/{$purchaseToken}";
 
     $response = Http::get($url);
@@ -1393,6 +1391,21 @@ function verifyGooglePurchase($userId, $purchaseToken)
 }
 
 
+
+function getAccessToken()
+{
+    $client = new Client();
+    $client->setAuthConfig('service-account-file.json');
+    $client->addScope('https://www.googleapis.com/auth/androidpublisher');
+
+    $accessToken = $client->fetchAccessTokenWithAssertion();
+
+    if (isset($accessToken['access_token'])) {
+        return $accessToken['access_token'];
+    } else {
+        throw new Exception('Could not fetch access token');
+    }
+}
 function updateSubscriptionStatus($userId, $response)
 {
     $userSubscription = UserSubscription::where('user_id', $userId)->first();
