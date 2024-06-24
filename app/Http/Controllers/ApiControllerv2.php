@@ -58,8 +58,10 @@ use App\Models\{
     UserNotificationType,
     UserProfilePrivacy,
     UserSeenStory,
+    UserSubscription,
     VersionSetting
 };
+use Illuminate\Support\Facades\Http;
 // Rules //
 use Illuminate\Pagination\Paginator;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -12254,20 +12256,9 @@ class ApiControllerv2 extends Controller
         }
     }
 
-    public function verifyPurchase(Request $request)
+
+    public function addSubscription(Request $request)
     {
-        $request->validate([
-            'user_id' => 'required|integer',
-            'orderId' => 'required|integer',
-            'packageName' => 'required',
-            'productId' => 'required',
-            'purchaseTime' => 'required',
-            'purchase_token' => 'required|string',
-            'autoRenewing' => 'required',
-            'platform' => 'required|in:ios,android',
-        ]);
-
-
         $rawData = $request->getContent();
 
         $input = json_decode($rawData, true);
@@ -12276,10 +12267,19 @@ class ApiControllerv2 extends Controller
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
         }
 
+
+
         $validator = Validator::make($input, [
-            "step" => ['required', 'in:1,2,3,4'],
-            "event_id" => ['required', 'exists:events,id']
+
+            'orderId' => 'required',
+            'packageName' => 'required',
+            'productId' => 'required',
+            'purchaseTime' => 'required',
+            'purchase_token' => 'required|string',
+            'autoRenewing' => 'required',
         ]);
+
+
         if ($validator->fails()) {
             return response()->json(
                 [
@@ -12289,12 +12289,52 @@ class ApiControllerv2 extends Controller
             );
         }
 
+        try {
+            $packageName =
+                $productId =
+                $purchaseToken =
 
-        $userId = $request->user_id;
-        $purchaseToken = $request->purchase_token;
+                $url = "https://androidpublisher.googleapis.com/androidpublisher/v3/applications/{$packageName}/purchases/products/{$productId}/tokens/{$purchaseToken}";
+
+            $response = Http::get($url);
+            dd($response);
+            $addSubscription = new UserSubscription();
+            $addSubscription->orderId = $input['orderId'];
+            $addSubscription->packageName = $input['packageName'];
+            $addSubscription->productId = $input['productId'];
+        } catch (QueryException $e) {
+            return response()->json(['status' => 0, 'message' => "db error"]);
+        } catch (Exception  $e) {
+            return response()->json(['status' => 0, 'message' => 'something went wrong']);
+        }
+    }
+
+    public function verifyPurchase(Request $request)
+    {
+        $rawData = $request->getContent();
+        $input = json_decode($rawData, true);
+        if ($input == null) {
+            return response()->json(['status' => 0, 'message' => "Json invalid"]);
+        }
+
+        $validator = Validator::make($input, [
+            'platform' => ['required', 'in:ios,android'],
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 0,
+                'message' => $validator->errors()->first(),
+            ]);
+        }
+
+        $usersubscription = UserSubscription::where(['user_id', $this->user->id])->first();
+        $userId = $this->user->id;
+        $purchaseToken = $usersubscription->purchase_token;
         $platform = $request->platform;
 
         if ($platform == 'ios') {
+
             return $this->verifyApplePurchase($userId, $purchaseToken);
         } elseif ($platform == 'android') {
             return $this->verifyGooglePurchase($userId, $purchaseToken);

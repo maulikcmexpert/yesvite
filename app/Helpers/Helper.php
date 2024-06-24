@@ -21,6 +21,7 @@ use App\Models\EventPostComment;
 use App\Models\UserNotificationType;
 use App\Mail\OwnInvitationEmail;
 use App\Models\ServerKey;
+use App\Models\UserSubscription;
 use Illuminate\Support\Facades\Auth;
 use Twilio\Rest\Client;
 use Illuminate\Support\Facades\Redirect;
@@ -1364,27 +1365,42 @@ function verifyApplePurchase($userId, $purchaseToken)
     ]);
 
     if ($response->json('status') == 0) {
-        $this->updateSubscriptionStatus($userId, $response->json());
+        updateSubscriptionStatus($userId, $response->json());
         return response()->json(['success' => true]);
     } else {
         return response()->json(['error' => 'Invalid receipt'], 400);
     }
 }
 
+
 function verifyGooglePurchase($userId, $purchaseToken)
 {
+
     $packageName = env('GOOGLE_PACKAGE_NAME');
     $productId = env('GOOGLE_PRODUCT_ID');
-    $accessToken = $this->getGoogleAccessToken();
 
-    $url = "https://www.googleapis.com/androidpublisher/v3/applications/{$packageName}/purchases/subscriptions/{$productId}/tokens/{$purchaseToken}?access_token={$accessToken}";
+
+    $url = "https://androidpublisher.googleapis.com/androidpublisher/v3/applications/{$packageName}/purchases/products/{$productId}/tokens/{$purchaseToken}";
 
     $response = Http::get($url);
 
     if ($response->json('purchaseState') == 0) {
-        $this->updateSubscriptionStatus($userId, $response->json());
-        return response()->json(['success' => true]);
+        updateSubscriptionStatus($userId, $response->json());
+        return true;
     } else {
-        return response()->json(['error' => 'Invalid purchase token'], 400);
+        return false;
+    }
+}
+
+
+function updateSubscriptionStatus($userId, $response)
+{
+    $userSubscription = UserSubscription::where('user_id', $userId)->first();
+
+    if ($userSubscription) {
+        $expiryDate = isset($response['expiryTimeMillis']) ? date('Y-m-d H:i:s', $response['expiryTimeMillis'] / 1000) : null;
+        $userSubscription->subscription_status = 'active';
+        $userSubscription->endDate = $expiryDate;
+        $userSubscription->save();
     }
 }
