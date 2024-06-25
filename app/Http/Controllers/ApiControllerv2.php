@@ -9145,11 +9145,8 @@ class ApiControllerv2 extends Controller
 
 
         $validator = Validator::make($input, [
-
             'event_id' => ['required', 'exists:events,id'],
-
             'event_post_id' => ['required'],
-
             'post_media_id' => ['required', 'exists:event_post_images,id'],
 
         ]);
