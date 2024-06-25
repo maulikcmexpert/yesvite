@@ -21,11 +21,7 @@ class GooglePlayService
 
     public function verifySubscription($packageName, $subscriptionId, $token)
     {
-        dd(
-            $packageName,
-            $subscriptionId,
-            $token
-        );
+
         try {
             $subscription = $this->androidPublisher->purchases_subscriptions->get($packageName, $subscriptionId, $token);
             return $subscription;
