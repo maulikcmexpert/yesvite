@@ -1,5 +1,12 @@
 // alert();
 //  ===== focusinput =====
+ 
+
+$(document).on("click", "#ChangeToggle", function () {
+    $('#navbar-hamburger').toggleClass('hidden');
+    $('#navbar-close').toggleClass('hidden'); 
+});
+
 $(document).on("click", ".businessRegister", function () {
     $("#account_type").val("1");
 });
@@ -96,15 +103,16 @@ const bgChooseFile = document.getElementById("bg-choose-file");
 
 const imgPreview = document.getElementById("cover-img");
 const bgPreview = document.getElementById("bg-cover-img");
-
-chooseFile.addEventListener("change", function () {
-    // getImgData();
-});
-
-bgChooseFile.addEventListener("change", function () {
-    // getbgImgData();
-});
-
+if (chooseFile) {
+    chooseFile.addEventListener("change", function () {
+        // getImgData();
+    });
+}
+if (bgChooseFile) {
+    bgChooseFile.addEventListener("change", function () {
+        // getbgImgData();
+    });
+}
 function getImgData() {
     const files = chooseFile.files[0];
     if (files) {
@@ -135,8 +143,6 @@ $(".phone_number").intlTelInput({
     separateDialCode: true,
     // utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.4/js/utils.js"
 });
-
-
 
 // $("[name=phone_number]").on("blur", function () {
 $("[name=countryCode]").on("blur", function () {
