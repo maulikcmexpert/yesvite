@@ -20,9 +20,10 @@ class UserPostReportController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->ajax()) {
 
+        if ($request->ajax()) {
             $data = UserReportToPost::with(['events', 'users', 'event_posts'])->orderBy('id', 'desc');
+
 
             return Datatables::of($data)
 
@@ -121,10 +122,13 @@ class UserPostReportController extends Controller
         $js = 'admin.post_reports.post_reportsjs';
 
         $reportId = decrypt($id);
-        $reportDetail = UserReportToPost::with(['events', 'event_posts', 'event_posts.user', 'event_posts.post_image',   'event_posts.event_post_poll' => function ($query) {
+        $reportDetail = UserReportToPost::with(['events', 'events.event_image', 'event_posts', 'event_posts.user', 'event_posts.post_image',   'event_posts.event_post_poll' => function ($query) {
             $query->with('event_poll_option');
         }, 'users'])->where('id', $reportId)->first();
-        $reportDetail->posttime = $this->setpostTime($reportDetail->created_at);
+        $reportDetail->posttime = $this->setpostTime($reportDetail->event_posts->created_at);
+        $reportDetail->report_posttime = $this->setpostTime($reportDetail->created_at);
+        $reportDetail->created_at = Carbon::parse($reportDetail->created_at)->format('Y-m-d');
+
         return view('admin.includes.layout', compact('title', 'page', 'reportDetail', 'js'));
     }
 

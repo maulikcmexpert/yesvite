@@ -58,8 +58,10 @@ use App\Models\{
     UserNotificationType,
     UserProfilePrivacy,
     UserSeenStory,
+    UserSubscription,
     VersionSetting
 };
+use Illuminate\Support\Facades\Http;
 // Rules //
 use Illuminate\Pagination\Paginator;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -8281,6 +8283,7 @@ class ApiControllerv2 extends Controller
                 $postImages = getPostImages($eventDetails->id);
                 foreach ($postImages as $imgVal) {
 
+                    $postMedia['id'] =  $imgVal->id;
                     $postMedia['media_url'] = asset('public/storage/post_image/' . $imgVal->post_image);
 
                     $postMedia['type'] = $imgVal->type;
@@ -9128,6 +9131,62 @@ class ApiControllerv2 extends Controller
         // }
     }
 
+    public function postMediaReport(Request $request)
+    {
+        $user  = Auth::guard('api')->user();
+
+        $rawData = $request->getContent();
+
+        $input = json_decode($rawData, true);
+
+        if ($input == null) {
+            return response()->json(['status' => 0, 'message' => "Json invalid"]);
+        }
+
+
+        $validator = Validator::make($input, [
+
+            'event_id' => ['required', 'exists:events,id'],
+
+            'event_post_id' => ['required'],
+
+            'post_media_id' => ['required', 'exists:event_post_images,id'],
+
+        ]);
+
+        if ($validator->fails()) {
+
+            return response()->json([
+                'status' => 0,
+                'message' => $validator->errors()->first(),
+
+            ]);
+        }
+
+        try {
+
+            DB::beginTransaction();
+            $reportCreate = new UserReportToPost;
+            $reportCreate->event_id = $input['event_id'];
+            $reportCreate->user_id =  $user->id;
+            $reportCreate->event_post_id = $input['event_post_id'];
+            $reportCreate->post_media_id = $input['post_media_id'];
+            $reportCreate->specific_report = '1';
+            $reportCreate->save();
+            DB::commit();
+            $message = "Reported to admin for this media";
+
+            return response()->json(['status' => 1, 'message' => $message]);
+        } catch (QueryException $e) {
+
+            DB::rollBack();
+
+            return response()->json(['status' => 0, 'message' => "db error"]);
+        } catch (\Exception $e) {
+
+            return response()->json(['status' => 0, 'message' => "something went wrong"]);
+        }
+    }
     public function deletePost(Request $request)
     {
         $user  = Auth::guard('api')->user();
@@ -12253,4 +12312,97 @@ class ApiControllerv2 extends Controller
             return response()->json(['status' => 0, 'message' => 'something went wrong']);
         }
     }
+
+
+    public function addSubscription(Request $request)
+    {
+        $rawData = $request->getContent();
+
+        $input = json_decode($rawData, true);
+
+        if ($input == null) {
+            return response()->json(['status' => 0, 'message' => "Json invalid"]);
+        }
+
+
+
+        $validator = Validator::make($input, [
+
+            'orderId' => 'required',
+            'packageName' => 'required',
+            'productId' => 'required',
+            'purchaseTime' => 'required',
+            'purchaseToken' => 'required|string',
+            'autoRenewing' => 'required',
+        ]);
+
+
+        if ($validator->fails()) {
+            return response()->json(
+                [
+                    'status' => 0,
+                    'message' => $validator->errors()->first()
+                ],
+            );
+        }
+
+        try {
+            $packageName = $input['packageName'];
+            $productId = $input['productId'];
+            $purchaseToken = $input['purchaseToken'];
+
+            $accessToken = getAccessToken();
+
+            $url = "https://androidpublisher.googleapis.com/androidpublisher/v3/applications/{$packageName}/purchases/products/{$productId}/tokens/{$purchaseToken}";
+
+            $response = Http::withHeaders([
+                'Authorization' => 'Bearer ' . $accessToken,
+            ])->get($url);
+
+            dd($response);
+            $addSubscription = new UserSubscription();
+            $addSubscription->orderId = $input['orderId'];
+            $addSubscription->packageName = $input['packageName'];
+            $addSubscription->productId = $input['productId'];
+        } catch (QueryException $e) {
+            return response()->json(['status' => 0, 'message' => "db error"]);
+        } catch (Exception  $e) {
+            return response()->json(['status' => 0, 'message' => 'something went wrong']);
+        }
+    }
+
+    //     public function verifyPurchase(Request $request)
+    //     {
+    //         $rawData = $request->getContent();
+    //         $input = json_decode($rawData, true);
+    //         if ($input == null) {
+    //             return response()->json(['status' => 0, 'message' => "Json invalid"]);
+    //         }
+
+    //         $validator = Validator::make($input, [
+    //             'platform' => ['required', 'in:ios,android'],
+    //         ]);
+
+    //         if ($validator->fails()) {
+    //             return response()->json([
+    //                 'status' => 0,
+    //                 'message' => $validator->errors()->first(),
+    //             ]);
+    //         }
+
+    //         $usersubscription = UserSubscription::where(['user_id', $this->user->id])->first();
+    //         $userId = $this->user->id;
+    //         $purchaseToken = $usersubscription->purchase_token;
+    //         $platform = $request->platform;
+
+    //         if ($platform == 'ios') {
+
+    //             return $this->verifyApplePurchase($userId, $purchaseToken);
+    //         } elseif ($platform == 'android') {
+    //             return $this->verifyGooglePurchase($userId, $purchaseToken);
+    //         } else {
+    //             return response()->json(['error' => 'Invalid platform'], 400);
+    //         }
+    //     }
+    // }
 }

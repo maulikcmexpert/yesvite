@@ -944,16 +944,16 @@
                                 <div class="col-xl-6 col-lg-12 col-md-12">
                                     <div class="event_posts_right">
                                         <div class="event_posts_right_content">
-                                            <p>
+                                            <h6>
                                                 {{ $reportDetail->event_posts->post_message}}
-                                            </p>
+                                            </h6>
                                             <!-- <button>Read More</button> -->
                                         </div>
 
                                         <div class="event_posts_creator">
 
 
-                                            <div class="event_posts_creator_img">
+                                            <div class="event_posts_creator_img user-img">
                                                 @if($reportDetail->event_posts->user->profile != "")
                                                 <img src="{{ asset('storage/profile/'.$reportDetail->event_posts->user->profile)}}" alt="placeholder image" />
                                                 @else
@@ -984,106 +984,48 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="row">
-                                @if($reportDetail->event_posts->post_type == '1')
-                                <div class="col-xl-6 col-lg-12 col-md-12">
-                                    <div class="event_posts_left">
-                                        <div class="product-images demo-gallery">
-                                            <!-- Begin Product Images Slider -->
-                                            <div class="main-img-slider">
-                                                @foreach($reportDetail->event_posts->post_image as $key=>$postImg)
-                                                <a data-fancybox="gallery" href="{{ asset('public/storage/post_image/'.$postImg->post_image)}}"><img src="{{ asset('public/storage/post_image/'.$postImg->post_image)}}" /></a>
-                                                @endforeach
+
+                                <div class="col-lg-12 col-md-12">
+                                    <div class="event_posts_right ">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="event_posts_right_content">
+                                                    <h6>
+                                                        Event Name
+                                                    </h6>
+                                                    <h5>{{$reportDetail->events->event_name}}</h5>
+
+                                                    <!-- <button>Read More</button> -->
+                                                </div>
                                             </div>
-                                            <!-- End Product Images Slider -->
-                                        </div>
-                                    </div>
-                                </div>
-                                @endif
-                                @if($reportDetail->event_posts->post_type == '2')
-                                <div class="col-xl-6 col-lg-12 col-md-12">
-                                    <main id="app">
-                                        <div class="post">
-                                            <section class="poll">
-                                                <p class="poll-details">
-                                                    {{$reportDetail->event_posts->event_post_poll->poll_question }} • Ends in
-                                                    {{$reportDetail->event_posts->event_post_poll->poll_duration}}
-                                                </p>
-                                                <ul class="poll-choices p-0">
-                                                    @foreach($reportDetail->event_posts->event_post_poll->event_poll_option as $optionVal)
-                                                    <li class="poll-choice choice-1">
-                                                        <label for="choice-1">
-                                                            <div class="poll-result">
-                                                                <div class="star">
-                                                                    <div></div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="poll-label">
-                                                                <div class="answer">{{$optionVal->option}}</div>
-                                                            </div>
-                                                            <div class="progress">
+                                            <div class="col-lg-6">
+                                                <div class="event_posts_right_content">
+                                                    <h6>
+                                                        Reborted By <span>({{ $reportDetail->created_at }})</span>
+                                                    </h6>
+                                                    <div class="event_posts_creator">
 
-                                                                <div class="progress-bar" style="width: <?= round(getOptionTotalVote($optionVal->id) / getOptionAllTotalVote($reportDetail->event_posts->event_post_poll->id) * 100); ?>%">
-                                                                    <?= round(getOptionTotalVote($optionVal->id) / getOptionAllTotalVote($reportDetail->event_posts->event_post_poll->id) * 100) . "%"; ?>
-                                                                </div>
-                                                            </div>
-                                                        </label>
-                                                    </li>
-                                                    @endforeach
-                                                </ul>
-                                            </section>
-                                        </div>
-                                    </main>
-                                </div>
-                                @endif
-                                @if($reportDetail->event_posts->post_type == '3')
-                                <div class="col-xl-6 col-lg-12 col-md-12">
-                                    <div class="aWrap" data-src="{{ asset('public/storage/event_post_recording/'.$reportDetail->event_posts->post_recording)}}">
-                                        <button class="aPlay" disabled><span class="aPlayIco"><i class="fa fa-play"></i></span></button>
-                                        <div class="range">
-                                            <span class="under-ranger"></span>
-                                            <input class="aSeek" type="range" min="0" value="0" step="1" disabled><span class="change-range"></span>
-                                        </div>
-                                        <div class="aCron">
-                                            <span class="aNow"></span> / <span class="aTime"></span>
-                                        </div>
-                                        <div class="volume-container">
-                                            <span class="aVolIco"><i class="fa fa-volume-up"></i></span>
-                                            <div class="range-volume">
-                                                <span class="under-ranger"></span>
-                                                <input class="aVolume" type="range" min="0" max="1" value="1" step="0.1" disabled><span class="change-range"></span>
+
+                                                        <div class="event_posts_creator_img user-img">
+                                                            @if($reportDetail->users->profile != "")
+                                                            <img src="{{ asset('storage/profile/'.$reportDetail->users->profile)}}" alt="placeholder image" />
+                                                            @else
+                                                            @php $initials = strtoupper($reportDetail->users->firstname[0]) . strtoupper($reportDetail->users->lastname[0]);
+
+                                                            $fontColor = "fontcolor" . strtoupper($reportDetail->users->firstname[0]);
+                                                            @endphp
+                                                            <h5 class="{{$fontColor}}"> {{ $initials }}</h5>
+                                                            @endif
+                                                        </div>
+                                                        <div class="event_posts_creator_content">
+                                                            <h6>{{$reportDetail->users->firstname.' '.$reportDetail->users->lastname}}</h6>
+                                                            <p>{{$reportDetail->report_posttime}}</p>
+                                                        </div>
+                                                    </div>
+                                                    <!-- <button>Read More</button> -->
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                @endif
 
-                                <div class="col-xl-6 col-lg-12 col-md-12">
-                                    <div class="event_posts_right">
-                                        <div class="event_posts_right_content">
-                                            <p>
-                                                {{ $reportDetail->event_posts->post_message}}
-                                            </p>
-                                            <!-- <button>Read More</button> -->
-                                        </div>
-
-                                        <div class="event_posts_creator">
-
-
-                                            <div class="event_posts_creator_img">
-                                                @if($reportDetail->event_posts->user->profile != "")
-                                                <img src="{{ asset('storage/profile/'.$reportDetail->event_posts->user->profile)}}" alt="placeholder image" />
-                                                @else
-                                                @php $initials = strtoupper($reportDetail->event_posts->user->firstname[0]) . strtoupper($reportDetail->event_posts->user->lastname[0]);
-
-                                                $fontColor = "fontcolor" . strtoupper($reportDetail->event_posts->user->firstname[0]);
-                                                @endphp
-                                                <h5 class="{{$fontColor}}"> {{ $initials }}</h5>
-                                                @endif
-                                            </div>
-                                            <div class="event_posts_creator_content">
-                                                <h6>{{$reportDetail->event_posts->user->firstname.' '.$reportDetail->event_posts->user->lastname}}</h6>
-                                                <p>{{$reportDetail->posttime}}</p>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>

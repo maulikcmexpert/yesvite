@@ -204,7 +204,7 @@ class AuthController extends Controller
                         Cookie::forget('password');
                     }
 
-                    $this->logoutFromApplication();
+                    $this->logoutFromApplication($user->id);
                     event(new \App\Events\UserRegistered($user));
 
                     return redirect()->route('home')->with('success', 'Logged in successfully!');
@@ -267,13 +267,14 @@ class AuthController extends Controller
 
 
         $currentLogUser = User::where('id', Auth::id())->firstOrFail();
-
         Auth::logout();
+
 
 
         $remember = $request->has('remember'); // Check if "Remember Me" checkbox is checked
 
         if (Auth::attempt($credentials, $remember)) {
+
             $secondUser = Auth::guard('web')->user();
 
             if ($secondUser->email_verified_at != NULL) {
@@ -340,7 +341,7 @@ class AuthController extends Controller
                         Cookie::forget('password');
                     }
                     event(new \App\Events\UserRegistered($secondUser));
-                    $this->logoutFromApplication();
+                    $this->logoutFromApplication($secondUser->id);
                     return redirect()->route('home')->with('success', 'Logged in successfully!');
                 } else {
 
@@ -369,7 +370,7 @@ class AuthController extends Controller
             }
         }
 
-
+        $this->currentUserLogin($currentLogUser);
 
         return  Redirect::to('profile')->with('error', 'Email or Password invalid');
     }
@@ -414,7 +415,7 @@ class AuthController extends Controller
             ];
             Session::put(['user' => $sessionArray]);
 
-            $this->logoutFromApplication();
+            $this->logoutFromApplication($switchAccount->id);
             return redirect()->route('home')->with('success', 'Logged in successfully!');
         }
         return redirect()->route('profile')->with('error', 'Logged faild!');
@@ -471,6 +472,20 @@ class AuthController extends Controller
             return response()->json(false);
         } else {
             return response()->json(true);
+        }
+    }
+
+    public function logoutFromApplication($id)
+    {
+
+
+
+        $check = Device::where('user_id', $id)->first();
+
+
+        if ($check != null) {
+            $check->delete();
+            Token::where('user_id', $id)->delete();
         }
     }
 }

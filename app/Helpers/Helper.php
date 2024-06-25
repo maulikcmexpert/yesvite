@@ -21,6 +21,8 @@ use App\Models\EventPostComment;
 use App\Models\UserNotificationType;
 use App\Mail\OwnInvitationEmail;
 use App\Models\ServerKey;
+use App\Models\UserSubscription;
+use Google\Client as GoogleClient;
 use Illuminate\Support\Facades\Auth;
 use Twilio\Rest\Client;
 use Illuminate\Support\Facades\Redirect;
@@ -28,6 +30,7 @@ use Illuminate\Support\Facades\Session;
 use libphonenumber\PhoneNumberUtil;
 use libphonenumber\PhoneNumberFormat;
 use libphonenumber\NumberParseException;
+
 
 function getVideoDuration($filePath)
 {
@@ -1284,7 +1287,7 @@ function sendSMS($receiverNumber, $message)
     }
 }
 
-function validateAndFormatPhoneNumber($receiverNumber, $defaultCountryCode = 'IN')
+function validateAndFormatPhoneNumber($receiverNumber, $defaultCountryCode = 'US')
 {
     $phoneUtil = PhoneNumberUtil::getInstance();
 
@@ -1349,5 +1352,70 @@ function formatNumber($num)
         return $num . 'B';
     } else {
         return $num;
+    }
+}
+
+
+function verifyApplePurchase($userId, $purchaseToken)
+{
+    $url = "https://buy.itunes.apple.com/verifyReceipt"; // Production URL
+    // $url = "https://sandbox.itunes.apple.com/verifyReceipt"; // Sandbox URL
+
+    $response = Http::post($url, [
+        'receipt-data' => $purchaseToken,
+        'password' => env('APPLE_SHARED_SECRET'),
+    ]);
+
+    if ($response->json('status') == 0) {
+        updateSubscriptionStatus($userId, $response->json());
+        return response()->json(['success' => true]);
+    } else {
+        return response()->json(['error' => 'Invalid receipt'], 400);
+    }
+}
+
+
+function verifyGooglePurchase($userId, $purchaseToken)
+{
+
+
+    $url = "https://androidpublisher.googleapis.com/androidpublisher/v3/applications/{$packageName}/purchases/products/{$productId}/tokens/{$purchaseToken}";
+
+    $response = Http::get($url);
+
+    if ($response->json('purchaseState') == 0) {
+        //   updateSubscriptionStatus($userId, $response->json());
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
+
+function getAccessToken()
+{
+    $client = new GoogleClient();
+    $urlpath = base_path() . '/service-account-file.json';
+    $client->setAuthConfig($urlpath);
+    $client->addScope('https://www.googleapis.com/auth/androidpublisher');
+
+    $accessToken = $client->fetchAccessTokenWithAssertion();
+
+    if (isset($accessToken['access_token'])) {
+        return $accessToken['access_token'];
+    } else {
+        throw new Exception('Could not fetch access token');
+    }
+}
+function updateSubscriptionStatus($userId, $response)
+{
+    $userSubscription = UserSubscription::where('user_id', $userId)->first();
+
+    if ($userSubscription) {
+        $expiryDate = isset($response['expiryTimeMillis']) ? date('Y-m-d H:i:s', $response['expiryTimeMillis'] / 1000) : null;
+        $userSubscription->subscription_status = 'active';
+        $userSubscription->endDate = $expiryDate;
+        $userSubscription->save();
     }
 }

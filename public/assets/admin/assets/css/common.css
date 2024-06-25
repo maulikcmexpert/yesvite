@@ -104,6 +104,44 @@
  .fontcolorZ{
      background: linear-gradient(2.35619rad, rgb(224, 250, 255), rgb(167, 238, 252)) !important;
  }
+
+ .user-img{
+    max-width: 100%;
+    width: 40px;
+    height: 40px;
+    border-radius: 100px;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    -ms-border-radius: 100px;
+    -o-border-radius: 100px;
+}
+
+.user-img img{
+    /* object-fit: contain; */
+    border-radius: 100%;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    -ms-border-radius: 100%;
+    -o-border-radius: 100%;
+}
+
+.user-img h5{
+    border-radius: 100%;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    -ms-border-radius: 100%;
+    -o-border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    margin-bottom: 0;
+    border: 1px solid transparent;
+    background: linear-gradient(135deg, rgb(255, 247, 240), rgb(255, 200, 163)) rgb(14, 114, 207);
+    color: rgb(212, 56, 13);
+    font-size: 16px;
+}
+
  
 :root{
     --primaryColor:#EA555C;
@@ -980,6 +1018,32 @@ margin: -43px 0px 0px 8px;
 .small-box h3
 {
     color: #000 !important;
+}
+
+.event_posts_right h6{
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.event_posts_right h6 span{
+    font-size: 13px;
+    color: gray;
+}
+
+.event_posts_right h5{
+    font-size: 17px;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.event_posts_creator_content h6{
+    font-size: 15px;
+    margin-bottom: 0;
+}
+
+.product-images.demo-gallery a{
+    display: block;
+    height: 200px;
 }
 
 /* ========Responsive====== */

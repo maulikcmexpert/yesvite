@@ -79,7 +79,7 @@ class SocialController extends Controller
                 'first_name' => $user->firstname,
                 'last_name' => $user->lastname,
                 'username' => $user->firstname . ' ' . $user->lastname,
-                'profile' => ($user->profile != NULL || $user->profile != "") ? asset('public/storage/profile/' . $user->profile) : asset('public/storage/profile/no_profile.png')
+                'profile' => ($user->profile != NULL || $user->profile != "") ? asset('storage/profile/' . $user->profile) : ""
             ];
             Session::put(['user' => $sessionArray]);
 
@@ -93,6 +93,7 @@ class SocialController extends Controller
         $users->facebook_token_id = $socialUser->getId();
         $users->instagram_token_id = $socialUser->getId();
         $users->apple_token_id = $socialUser->getId();
+        $users->email_verified_at = strtotime(date('Y-m-d  h:i:s'));;
 
         $user->current_session_id = Session::getId();
         $users->save();
