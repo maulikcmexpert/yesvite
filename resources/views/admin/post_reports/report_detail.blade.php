@@ -866,7 +866,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="row">
-                                <?php dd($reportDetail) ?>
+
                                 @if($reportDetail->specific_report == '1')
 
                                 <!-- image -->
