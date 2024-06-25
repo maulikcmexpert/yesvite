@@ -654,12 +654,12 @@ $(".send-message").on("keypress", async function (e) {
                 );
                 const replyMessageSnapshot = await get(replyMessageRef);
                 const replyMessageData = replyMessageSnapshot.val();
-
+                console.log(replyMessageData);
                 messageData.replyData = {
                     replyChatKey: replyMessageId,
                     replyMessage: replyMessageData ? replyMessageData.data : "",
                     replyTimeStamp: Date.now(),
-                    replyUserName: replyMessageData.senderName,
+                    replyUserName: replyMessageData.receiverName,
                     replyDocType: "",
                 };
                 messageData.isReply = "1";
@@ -1982,10 +1982,15 @@ function generateReactionsAndReply() {
             const replyMessageSnapshot = await get(replyMessageRef);
             const replyMessageData = replyMessageSnapshot.val();
             replay = `<div class='set-replay-msg'>
-                        <span class='replay-user'>${replyMessageData.receiverName}</span>
-                        <span class='replay-msg'>${replyMessageData.data}</span>
-                         <span class='close-replay'>&times</span>
-                        </div>`;
+                            <div class='replay-child'>
+                                <div class='d-flex flex-column'>
+                                    <span class='replay-user'>${replyMessageData.receiverName}</span>
+                                    <span class='replay-msg'>${replyMessageData.data}</span>
+                                </div>
+                                
+                            <span class='close-replay'>&times</span>
+                            </div>
+                    </div>`;
         } else {
             const replyMessageRef = ref(
                 database,
@@ -2135,6 +2140,7 @@ startButton.addEventListener("click", startRecording);
 stopButton.addEventListener("click", stopRecording);
 playButton.addEventListener("click", playRecording);
 stopPlaybackButton.addEventListener("click", stopPlayback);
+$("#audioContainer").hide();
 
 $(".close-audio-btn").on("click", function () {
     $("#audioContainer").hide();
@@ -2146,6 +2152,7 @@ $(".close-audio-btn").on("click", function () {
 });
 
 $(".preview_img").hide();
+$("#preview_file").hide();
 $(".upload-box").change(function () {
     var curElement = $(".preview_img");
     var file = this.files[0];
