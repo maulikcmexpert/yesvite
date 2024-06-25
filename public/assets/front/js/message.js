@@ -525,18 +525,40 @@ $(".send-message").on("keypress", async function (e) {
                 senderName: senderUserName,
                 receiverName: senderUserName,
                 status: {},
+                replyData: {
+                    replyChatKey: "",
+                    replyDocType: "",
+                    replyMessage: "",
+                    replyTimeStamp: 0,
+                    replyUserName: "",
+                },
             };
+
             // alert(isGroup);
             if (isGroup == true || isGroup == "true") {
                 const groupName = $(".selected_name").val();
+                if (replyMessageId) {
+                    // Fetch the reply message data
+                    const replyMessageRef = ref(
+                        database,
+                        `Groups/${conversationId}/message/${replyMessageId}`
+                    );
+                    const replyMessageSnapshot = await get(replyMessageRef);
+                    const replyMessageData = replyMessageSnapshot.val();
 
-                // Fetch group members from Firebase
-                // const groupMembersRef = ref(
-                //     database,
-                //     `Groups/${conversationId}/users`
-                // );
-                // const groupMembersSnapshot = await get(groupMembersRef);
-                // const newGroupMembers = groupMembersSnapshot.val();
+                    messageData.replyData = {
+                        replyChatKey: replyMessageId,
+                        replyMessage: replyMessageData
+                            ? replyMessageData.data
+                            : "",
+                        replyTimeStamp: Date.now(),
+                        replyUserName: replyMessageData.senderName,
+                        replyDocType: "",
+                    };
+                    messageData.isReply = "1";
+                    // Reset reply message ID after sending
+                    replyMessageId = null;
+                }
 
                 const groupProfilesRef = ref(
                     database,
@@ -548,7 +570,7 @@ $(".send-message").on("keypress", async function (e) {
                 newGroupProfiles.map(async (profile) => {
                     if (profile.leave == false) {
                         if (profile.id !== senderUser) {
-                            userAvailable[profile.id] = false;
+                            userAvailable[profile.id] = 0;
                         }
                         const receiverSnapshot = await get(
                             ref(
@@ -600,14 +622,6 @@ $(".send-message").on("keypress", async function (e) {
                     messageData.isReply = "1";
                     // Reset reply message ID after sending
                     replyMessageId = null;
-                } else {
-                    messageData.replyData = {
-                        replyChatKey: "",
-                        replyDocType: "",
-                        replyMessage: "",
-                        replyTimeStamp: 0,
-                        replyUserName: "",
-                    };
                 }
 
                 messageData.status = { senderUser: { profile: "", read: 1 } };
@@ -701,37 +715,74 @@ function createMessageElement(key, messageData, isGroup) {
             ? SelecteGroupUser[messageData.senderId].name
             : "";
     let seenStatus = "";
+    let reaction = "";
     if (isGroup == "true" || isGroup == true) {
-        console.log(messageData);
-        console.log(messageData.userAvailable);
         if (
             messageData.userAvailable != undefined &&
             Object.values(messageData.userAvailable).some(
-                (value) => value === false
+                (value) => value === 0
             )
         ) {
             seenStatus = "grey-tick";
         } else {
             seenStatus = "blue-tick";
         }
-        // Object.entries(messageData.userAvailable).forEach(([key, value]) => {
-
-        // });
+        reaction = messageData?.messageReact
+            ? Object.values(messageData.messageReact)
+                  .map((reactData) =>
+                      String.fromCodePoint(
+                          parseInt(
+                              reactData.react.replace(/\\u\{(.+)\}/, "$1"),
+                              16
+                          )
+                      )
+                  )
+                  .join(" ")
+            : "";
     } else {
         seenStatus = isSender
             ? messageData.isSeen
                 ? "blue-tick"
                 : "grey-tick"
             : "";
+        reaction =
+            messageData?.react != "" && messageData?.react
+                ? String?.fromCodePoint(
+                      parseInt(
+                          messageData?.react?.replace(/\\u\{(.+)\}/, "$1"),
+                          16
+                      )
+                  )
+                : "";
     }
+
+    const replySection =
+        messageData.replyData && messageData.replyData.replyTimeStamp != 0
+            ? `
+        
+        <div class="reply-section">
+            <strong>${messageData.replyData.replyMessage}</strong>
+            <div class="reply-info">
+                <span class="reply-username">${
+                    messageData.replyData.replyUserName
+                }</span>
+                <span class="reply-timestamp">${timeago.format(
+                    new Date(messageData.replyData.replyTimeStamp)
+                )}</span>
+            </div>
+            <hr>
+        </div>`
+            : "";
     return `
         <li class="${isSender ? "receiver" : "sender"}" id="message-${key}">
+         ${replySection}
             <p>${messageData.data}</p>
             <span class="time">${timeago.format(
                 new Date(messageData.timeStamp)
             )}</span>
             <span class="senderName">${senderName}</span>
              ${isSender ? `<span class="seenStatus ${seenStatus}"></span>` : ""}
+               ${reaction ? `<span class="reaction">${reaction}</span>` : ""}
              ${
                  isReceiver
                      ? `
@@ -739,6 +790,7 @@ function createMessageElement(key, messageData, isGroup) {
                        <span class="reply-icon" data-message-id="${key}">↩️</span>`
                      : ""
              }
+            
         </li>
     `;
 }
@@ -1149,12 +1201,19 @@ $("#new_message").on("keypress", async function (e) {
                 senderId: senderUser,
                 senderName: senderUserName,
                 status: {},
+                replyData: {
+                    replyChatKey: "",
+                    replyDocType: "",
+                    replyMessage: "",
+                    replyTimeStamp: 0,
+                    replyUserName: "",
+                },
             };
 
             var userAvailable = [];
             newGroupMembers.map(async (memberID) => {
                 if (memberID !== senderUser) {
-                    userAvailable[memberID] = false;
+                    userAvailable[memberID] = 0;
                 }
             });
 
@@ -1778,17 +1837,20 @@ function generateReactionsAndReply() {
     $(document).on("click", ".reaction-icon", function () {
         const messageId = $(this).data("message-id");
         const reactionDialog = `
-            <div class="reaction-dialog" id="reaction-dialog-${messageId}">
-                <span class="reaction-option" data-reaction="like">👍</span>
-                <span class="reaction-option" data-reaction="clap">👏</span>
-                <span class="reaction-option" data-reaction="heart">❤️</span>
-            </div>
-        `;
+        <div class="reaction-dialog" id="reaction-dialog-${messageId}">
+            <span class="reaction-option" data-reaction="\\u{1F60D}">&#x1F60D;</span>
+            <span class="reaction-option" data-reaction="\\u{1F604}">&#x1F604;</span>
+            <span class="reaction-option" data-reaction="\\u{2764}}">&#x2764;</span>
+            <span class="reaction-option" data-reaction="\\u{1F44D}">&#x1F44D;</span>
+            <span class="reaction-option" data-reaction="\\u{1F44F}}">&#x1F44F;</span>
+        </div>
+    `;
         $(this).after(reactionDialog);
     });
 
     $(document).on("click", ".reaction-option", async function () {
         const reaction = $(this).data("reaction");
+        const isGroup = $("#isGroup").val();
         const messageId = $(this)
             .closest(".reaction-dialog")
             .attr("id")
@@ -1802,19 +1864,54 @@ function generateReactionsAndReply() {
         console.log(`Reaction: ${reaction}, Message ID: ${messageId}`);
 
         try {
-            const reactionRef = ref(
-                database,
-                `Messages/${conversationId}/message/${messageId}/react`
-            );
-            await set(reactionRef, reaction);
+            if (isGroup === "true" || isGroup == true) {
+                const reactionRef = ref(
+                    database,
+                    `Groups/${conversationId}/message/${messageId}/messageReact/${senderUser}/`
+                );
+
+                await set(reactionRef, {
+                    react: reaction,
+                    reactTimeStamp: Date.now(),
+                });
+            } else {
+                const reactionRef = ref(
+                    database,
+                    `Messages/${conversationId}/message/${messageId}/react`
+                );
+                await set(reactionRef, reaction);
+            }
+
             console.log("Reaction updated successfully in Firebase");
         } catch (error) {
             console.error("Error updating reaction in Firebase:", error);
         }
     });
 
-    $(document).on("click", ".reply-icon", function () {
+    $(document).on("click", ".reply-icon", async function () {
         replyMessageId = $(this).data("message-id");
+        let conversationId = $(".conversationId").attr("conversationid");
+        let replay = "";
+        let isGroup = $("#isGroup").val();
+        if (isGroup === "true" || isGroup == true) {
+            const replyMessageRef = ref(
+                database,
+                `Groups/${conversationId}/message/${replyMessageId}`
+            );
+            const replyMessageSnapshot = await get(replyMessageRef);
+            const replyMessageData = replyMessageSnapshot.val();
+            replay = `<div class='set-replay-msg'><span class='replay-user'>${replyMessageData.receiverName}</span><span class='replay-msg'>${replyMessageData.data}</span></div>`;
+        } else {
+            const replyMessageRef = ref(
+                database,
+                `Messages/${conversationId}/message/${replyMessageId}`
+            );
+            const replyMessageSnapshot = await get(replyMessageRef);
+            const replyMessageData = replyMessageSnapshot.val();
+
+            replay = `<div class='set-replay-msg'><span class='replay-user'>${senderUserName}</span><span class='replay-msg'>${replyMessageData.data}</span></div>`;
+        }
+        $(".msg-footer").prepend(replay);
     });
 }
 
