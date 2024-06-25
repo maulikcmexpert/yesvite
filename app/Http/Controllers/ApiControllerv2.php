@@ -12359,7 +12359,6 @@ class ApiControllerv2 extends Controller
             $accessToken = getGoogleAccessToken();
 
             $url = "https://www.googleapis.com/androidpublisher/v3/applications/{$packageName}/purchases/subscriptions/{$productId}/tokens/{$purchaseToken}?access_token={$accessToken}";
-
             $response = Http::get($url);
             dd($response);
             $addSubscription = new UserSubscription();
