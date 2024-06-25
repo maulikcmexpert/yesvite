@@ -5473,7 +5473,7 @@ class ApiControllerv2 extends Controller
 
         $validator = Validator::make($input, [
 
-            'event_id' => ['required', 'exists:events,id'],
+            'event_id' => ['required', 'exists:events,id']
             //   'image' => ['required', 'array']
 
         ]);
@@ -5492,6 +5492,7 @@ class ApiControllerv2 extends Controller
 
 
         if (isset($request->image) && !empty($request->image)) {
+
 
             $images = $request->image;
 
