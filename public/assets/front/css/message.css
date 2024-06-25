@@ -477,7 +477,7 @@ ul.chat-list li:last-child{
 
 .msg-body ul li.receiver div.media-msg{
     background-color: #FFE4E9;
-    padding: 10px;
+    padding: 10px 10px 30px;
     border-radius: 20px 0px 20px 20px;
     -webkit-border-radius: 20px 0px 20px 20px;
     -moz-border-radius: 20px 0px 20px 20px;
@@ -486,6 +486,13 @@ ul.chat-list li:last-child{
     display: inline-block;
     max-width: 317px;
     margin-left: auto;
+    position: relative;
+}
+
+.msg-body ul li.receiver div.media-msg .media-text{
+    margin-right: 30px;
+    margin-top: 10px;
+    display: inline-block;
 }
 
 .msg-body .media-msg span{
@@ -493,6 +500,12 @@ ul.chat-list li:last-child{
     line-height: 20.4px;
     text-align: right;
     color: var(--secondryColor);
+}
+
+.msg-body .media-msg span.seenStatus{
+    position: absolute;
+    right: 9px;
+    bottom: 9px;
 }
 
 .msg-body ul li.sender div.media-msg{
@@ -522,7 +535,7 @@ ul.chat-list li:last-child{
     display: flex;
     flex-direction: column;
     /* height: 64px; */
-    /* position: absolute; */
+    position: absolute;
     width: 100%;
     bottom: 0;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
@@ -685,6 +698,31 @@ ul.chat-list li:last-child{
 .msg-footer .dropdown ul li{
     margin: 15px 10px !important;
     cursor: pointer;
+}
+
+.msg-body ul li.sender .reply-section{
+    background-color: #F8F9FD;
+    display: inline-block;
+    padding: 10px 29px 10px 19px;
+    border-radius: 0px 20px 20px 20px;
+    -webkit-border-radius:;
+    -moz-border-radius:;
+    -ms-border-radius:;
+    -o-border-radius:;
+    margin-bottom: 16px;
+    text-align: left;
+}
+
+.msg-body ul li.receiver .reply-section{
+    background-color: #FFE4E9;
+    display: inline-block;
+    padding: 10px 29px 10px 19px;
+    border-radius: 0px 20px 20px 20px;
+    -webkit-border-radius: 0px 20px 20px 20px;
+    -moz-border-radius: 0px 20px 20px 20px;
+    -ms-border-radius: 0px 20px 20px 20px;
+    -o-border-radius: 0px 20px 20px 20px;
+    margin-bottom: 16px;
 }
 
 #msgBox .chat-user{
