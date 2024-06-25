@@ -493,14 +493,14 @@ use Carbon\Carbon;
                                     </ul>
                                 </div>
                                 <span id="send_image">
-                                    <!-- <button class="btn btn-primary" type="button">send</button> -->
-                                    <img src="{{asset('storage/send.png')}}" type="button" class="send">
+                                    <button class="btn btn-primary" type="button">send</button>
+                                    <!-- <img src="{{asset('storage/send.png')}}" type="button" class="send"> -->
                                 </span>
 
                                 <!-- ****************************This is for audio *********************-->
                                 <span id="send_audio">
-                                    <!-- <button class="btn btn-primary" type="button">send</button> -->
-                                    <img src="{{asset('storage/send.png')}}" type="button" class="send">
+                                    <button class="btn btn-primary" type="button">send</button>
+                                    <!-- <img src="{{asset('storage/send.png')}}" type="button" class="send"> -->
                                 </span>
                                 <!-- ****************************This is for audio *********************END-->
 
