@@ -5486,97 +5486,97 @@ class ApiControllerv2 extends Controller
             ]);
         }
 
-        // try {
+        try {
 
-        DB::beginTransaction();
-
-
-        if (isset($request->image) && !empty($request->image)) {
+            DB::beginTransaction();
 
 
-            $images = $request->image;
+            if (isset($request->image) && !empty($request->image)) {
+
+
+                $images = $request->image;
 
 
 
-            $eventOldImages = EventImage::where('event_id', $request->event_id)->get();
-            if (!empty($eventOldImages)) {
+                $eventOldImages = EventImage::where('event_id', $request->event_id)->get();
+                if (!empty($eventOldImages)) {
 
 
-                foreach ($eventOldImages as $oldImages) {
-                    if (file_exists(public_path('public/storage/event_images/') . $oldImages->image)) {
+                    foreach ($eventOldImages as $oldImages) {
+                        if (file_exists(public_path('public/storage/event_images/') . $oldImages->image)) {
 
-                        $imagePath = public_path('public/storage/event_images/') . $oldImages->image;
-                        unlink($imagePath);
+                            $imagePath = public_path('public/storage/event_images/') . $oldImages->image;
+                            unlink($imagePath);
+                        }
+                        EventImage::where('id', $oldImages->id)->delete();
                     }
-                    EventImage::where('id', $oldImages->id)->delete();
+                }
+
+
+
+                foreach ($images as $value) {
+                    $image = $value;
+                    $imageName = time() . '_' . str_replace(' ', '_', $image->getClientOriginalName());
+                    $image->move(public_path('storage/event_images'), $imageName);
+
+                    EventImage::create([
+
+                        'event_id' => $request->event_id,
+
+                        'image' => $imageName
+
+                    ]);
+                }
+            }
+
+            $user  = Auth::guard('api')->user();
+            $checkUserInvited = Event::withCount('event_invited_user')->where('id', $input['event_id'])->first();
+
+            DB::commit();
+            if ($request->is_update_event == '0') {
+                if ($checkUserInvited->event_invited_user_count != '0' && $checkUserInvited->is_draft_save == '0') {
+
+                    $notificationParam = [
+
+                        'sender_id' => $user->id,
+
+                        'event_id' => $input['event_id'],
+
+                        'post_id' => ""
+
+                    ];
+
+                    sendNotification('invite', $notificationParam);
+                }
+
+                if ($checkUserInvited->is_draft_save == '0') {
+
+                    $notificationParam = [
+
+                        'sender_id' => $user->id,
+
+                        'event_id' => $input['event_id'],
+
+                        'post_id' => ""
+
+                    ];
+
+                    sendNotification('owner_notify', $notificationParam);
                 }
             }
 
 
+            return response()->json(['status' => 1, 'message' => "Event images stored successfully"]);
+        } catch (QueryException $e) {
 
-            foreach ($images as $value) {
-                $image = $value;
-                $imageName = time() . '_' . str_replace(' ', '_', $image->getClientOriginalName());
-                $image->move(public_path('storage/event_images'), $imageName);
+            DB::rollBack();
 
-                EventImage::create([
+            return response()->json(['status' => 0, 'message' => "db error"]);
+        } catch (\Exception $e) {
 
-                    'event_id' => $request->event_id,
 
-                    'image' => $imageName
-
-                ]);
-            }
+            return response()->json(['status' => 0, 'message' => "something went wrong"]);
         }
-
-        $user  = Auth::guard('api')->user();
-        $checkUserInvited = Event::withCount('event_invited_user')->where('id', $input['event_id'])->first();
-
-        DB::commit();
-        if ($request->is_update_event == '0') {
-            if ($checkUserInvited->event_invited_user_count != '0' && $checkUserInvited->is_draft_save == '0') {
-
-                $notificationParam = [
-
-                    'sender_id' => $user->id,
-
-                    'event_id' => $input['event_id'],
-
-                    'post_id' => ""
-
-                ];
-
-                sendNotification('invite', $notificationParam);
-            }
-
-            if ($checkUserInvited->is_draft_save == '0') {
-
-                $notificationParam = [
-
-                    'sender_id' => $user->id,
-
-                    'event_id' => $input['event_id'],
-
-                    'post_id' => ""
-
-                ];
-
-                sendNotification('owner_notify', $notificationParam);
-            }
-        }
-
-
-        return response()->json(['status' => 1, 'message' => "Event images stored successfully"]);
-        // } catch (QueryException $e) {
-
-        //     DB::rollBack();
-
-        //     return response()->json(['status' => 0, 'message' => "db error"]);
-        // } catch (\Exception $e) {
-
-
-        //     return response()->json(['status' => 0, 'message' => "something went wrong"]);
-        // }
     }
 
     public function deleteEvent(Request $request)
