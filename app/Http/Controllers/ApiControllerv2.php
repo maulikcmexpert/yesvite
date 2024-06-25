@@ -12338,7 +12338,7 @@ class ApiControllerv2 extends Controller
             'productId' => 'required',
             'purchaseTime' => 'required',
             'purchaseToken' => 'required|string',
-            'autoRenewing' => 'required',
+            // 'autoRenewing' => 'required',
         ]);
 
 
