@@ -520,11 +520,28 @@ ul.chat-list li:last-child{
 .msg-footer{
     border-top: 1px solid #F1F5F9;
     display: flex;
-    align-items: center;
+    flex-direction: column;
     /* height: 64px; */
     /* position: absolute; */
     width: 100%;
     bottom: 0;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    background: #fff;
+    border-bottom-right-radius: 20px;
+}
+
+.msg-footer .message-perent{
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.msg-footer .set-replay-msg{
+    margin: 10px;
+    border-radius: 6px;
+    padding: 6px 18px;
+    background-color: lightgray;
 }
 
 .msg-footer input{
@@ -532,7 +549,7 @@ ul.chat-list li:last-child{
     border: none !important;
     outline: 0 !important;
     box-shadow: none !important;
-    padding-left: 20px !important;
+    padding-left: 0 !important;
     box-shadow: none !important;
 }
 
