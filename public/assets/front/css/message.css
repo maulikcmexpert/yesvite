@@ -423,6 +423,11 @@ ul.chat-list li:last-child{
     margin-left: auto;
 }
 
+.msg-body ul li.sender div img{
+    max-width: 297px;
+    margin-bottom: 10px;
+}
+
 .msg-body ul li.receiver div img{
     max-width: 297px;
     margin-bottom: 10px;
