@@ -867,16 +867,19 @@
                         <div class="col-md-12">
                             <div class="row">
 
-                                @if($reportDetail->specific_report == '0')
+                                @if($reportDetail->specific_report == '1')
 
+                                <!-- image -->
                                 @if($reportDetail->post_image->type == 'image')
                                 <img src="{{ asset('storage/post_image/'.$reportDetail->post_image->post_image)}}">
                                 @endif
+                                <!-- image -->
 
+                                <!-- video -->
                                 @if($reportDetail->post_image->type == 'video')
 
                                 @endif
-
+                                <!-- video -->
                                 @else
 
                                 @if($reportDetail->event_posts->post_type == '1')
