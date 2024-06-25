@@ -119,7 +119,7 @@ class ApiControllerv2 extends Controller
     protected $pendingRsvpCount;
     protected $hostingCount;
     protected $invitedToCount;
-    protected $googlePlayService;
+
 
 
     public function __construct(GooglePlayService $GooglePlayService)
@@ -135,8 +135,6 @@ class ApiControllerv2 extends Controller
             $this->hostingCount = hostingCount($this->user->id);
             $this->invitedToCount = invitedToCount($this->user->id);
         }
-
-
     }
 
 
