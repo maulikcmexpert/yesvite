@@ -5527,46 +5527,44 @@ class ApiControllerv2 extends Controller
 
                 ]);
             }
+        }
 
+        $user  = Auth::guard('api')->user();
+        $checkUserInvited = Event::withCount('event_invited_user')->where('id', $input['event_id'])->first();
 
+        DB::commit();
+        if ($request->is_update_event == '0') {
+            if ($checkUserInvited->event_invited_user_count != '0' && $checkUserInvited->is_draft_save == '0') {
 
+                $notificationParam = [
 
-            $user  = Auth::guard('api')->user();
-            $checkUserInvited = Event::withCount('event_invited_user')->where('id', $input['event_id'])->first();
+                    'sender_id' => $user->id,
 
-            DB::commit();
-            if ($request->is_update_event == '0') {
-                if ($checkUserInvited->event_invited_user_count != '0' && $checkUserInvited->is_draft_save == '0') {
+                    'event_id' => $input['event_id'],
 
-                    $notificationParam = [
+                    'post_id' => ""
 
-                        'sender_id' => $user->id,
+                ];
 
-                        'event_id' => $input['event_id'],
+                sendNotification('invite', $notificationParam);
+            }
 
-                        'post_id' => ""
+            if ($checkUserInvited->is_draft_save == '0') {
 
-                    ];
+                $notificationParam = [
 
-                    sendNotification('invite', $notificationParam);
-                }
+                    'sender_id' => $user->id,
 
-                if ($checkUserInvited->is_draft_save == '0') {
+                    'event_id' => $input['event_id'],
 
-                    $notificationParam = [
+                    'post_id' => ""
 
-                        'sender_id' => $user->id,
+                ];
 
-                        'event_id' => $input['event_id'],
-
-                        'post_id' => ""
-
-                    ];
-
-                    sendNotification('owner_notify', $notificationParam);
-                }
+                sendNotification('owner_notify', $notificationParam);
             }
         }
+
 
         return response()->json(['status' => 1, 'message' => "Event images stored successfully"]);
         // } catch (QueryException $e) {
