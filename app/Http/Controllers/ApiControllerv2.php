@@ -12416,12 +12416,12 @@ class ApiControllerv2 extends Controller
             $productId = $input['productId'];
             $purchaseToken = $input['purchaseToken'];
 
-            $accessToken = getAccessToken();
+            // $accessToken = getAccessToken();
 
             $url = "https://androidpublisher.googleapis.com/androidpublisher/v3/applications/{$packageName}/purchases/products/{$productId}/tokens/{$purchaseToken}";
 
             $response = Http::withHeaders([
-                'Authorization' => 'Bearer ' . $accessToken
+                'Authorization' => 'Bearer ya29.c.c0AY_VpZhPO4AdvwkpxwUAI_wEmGeDfhKgSm9X5EuNF4LzCmjY2ef0UaehOlhAiHGC45FFhfB4l5zNPySzONwIM-Q2EdxFaetSMV-uxMREU8R4lEkpZFRGsKA6GDa_0aGjpD7ZKOV8TOsse7TtndfQjHj5LX9MJl_YWRS4N3dK7FmOEnhnQ3RhpMZ40__7PvbTzzQRhN5mc21Xuea8mt2FvgTyck1VJPItuOUYno3nDXSylaTItMd6GRVtalOo-mA7Clz-JE-RRe4EOxYiD75jrQkj8KPWT38bzWTx8VU-03MxNF6hCTQ5keclgUVXNZZsZfUsLh1c1rAgYA2PZg0iR-gs0Aq88NfWQGAoy-8-X2MsJNnBIOiLXfioOQT387Pqte5z0Xhw9V3dFwr-t-OdgYUcXXa5Okuv6xleaqnoWcI47edpXWk8BiOc_bqYY6cUJFFY4dvtM8fiu5xMcc6oguvf_ibMhxZMWmJ5c0fpIZmi4yOquwS2U8hhlj2ZFM0-pSdfu0r0aSge3t5v3qyBy0_1Zi-X4Xxwc2gffaOmy8pzgWpIjXty5b4xJ5f_OUukaOjtjZbdpMcWxU5bkqlUosRWFtnU1OXmivl7QYO1YviSW5pRd3pZaIUFVhw6gpYIz3nIO7ddie5scezw2lhxx4M0OpOvQr0i9-1xpf_zQ5B6h3yu_VQWcqvWXcu5J4l0rvdnand4bW17R6wMb0ddQY4MwrOlsFbVhMsvnp53i4uVrfvJrlJceOBQRIMhtyrXvqdQ9IqxBwoo4yh6pvVnr27Qz3fqUnlq6-B0w73wJfq1bng89q1FFwzRZep-6n7ZObmoc_2j_df_0lgJnk4J9Uklm-l4O_Z_Facgrk5Vgr9_BfFUvSV-xcokfwytY3cy12_8neZ_owdpZinuFh2FBgVwiwgpXw3wF86npqRx8ngQZXRvVfdJQpehw-38BB6XQt16s4gu7tU7uVeJuRlIxVFgrIxQqrUk4UjeSzcJ60qmOk3_yfUzMVo',
             ])->get($url);
 
             dd($response);
