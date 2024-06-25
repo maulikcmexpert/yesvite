@@ -1,6 +1,6 @@
 .login-wrapper {
     width: 100%;
-    max-width: 565px;
+    /* max-width: 565px; */
     margin: 0 auto;
     padding: 80px 0;
     border-bottom: 1px solid var(--borderColor);

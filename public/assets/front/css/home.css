@@ -28,6 +28,8 @@
 
 .banner-content p{
     margin-bottom: 32px !important;
+    font-weight: 500;
+    line-height: 24px;
 }
 
 .banner-wrapper .left-img{
@@ -80,7 +82,7 @@
 
 .category-tab span{
     border: 1px solid var(--borderColor);
-    padding: 17px 24px;
+    padding: 16px 23px;
     border-radius: 16px;
     -webkit-border-radius: 16px;
     -moz-border-radius: 16px;
@@ -139,7 +141,7 @@
 }
 
 .event-content .content p{
-    max-width: 526px;
+    max-width: 586px;
     margin: 0 auto;
 }
 
