@@ -1391,24 +1391,6 @@ function verifyGooglePurchase($userId, $purchaseToken)
     }
 }
 
-
-
-function getAccessToken()
-{
-    $client = new GoogleClient();
-    // $urlpath = base_path() . '/service-account-file.json';
-    $urlpath = storage_path('app/google-play-service-account.json');
-    $client->setAuthConfig($urlpath);
-    $client->addScope('https://www.googleapis.com/auth/androidpublisher');
-
-    $accessToken = $client->fetchAccessTokenWithAssertion();
-
-    if (isset($accessToken['access_token'])) {
-        return $accessToken['access_token'];
-    } else {
-        throw new Exception('Could not fetch access token');
-    }
-}
 function updateSubscriptionStatus($userId, $response)
 {
     $userSubscription = UserSubscription::where('user_id', $userId)->first();
