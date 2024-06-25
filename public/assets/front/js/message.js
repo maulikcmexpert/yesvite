@@ -8,6 +8,7 @@ import {
     set,
     onChildAdded,
     onChildChanged,
+    onChildRemoved,
     update,
     off,
     remove,
@@ -381,6 +382,9 @@ async function updateChat(user_id) {
     onChildChanged(messagesRef, async (snapshot) => {
         UpdateMessageToList(snapshot.key, snapshot.val(), conversationId);
     });
+    onChildRemoved(messagesRef, async (snapshot) => {
+        RemoveMessageToList(snapshot.key, conversationId);
+    });
     onChildChanged(selecteduserTypeRef, async (snapshot) => {
         if (
             snapshot.key === "userTypingStatus" &&
@@ -423,6 +427,9 @@ async function updateChatfromGroup(conversationId) {
     off(messagesRef);
     onChildChanged(messagesRef, async (snapshot) => {
         UpdateMessageToList(snapshot.key, snapshot.val(), conversationId);
+    });
+    onChildRemoved(messagesRef, async (snapshot) => {
+        RemoveMessageToList(snapshot.key, conversationId);
     });
     onChildAdded(messagesRef, async (snapshot) => {
         addMessageToList(snapshot.key, snapshot.val(), conversationId);
@@ -518,176 +525,209 @@ $(".send-message").on("keypress", async function (e) {
         var isGroup = $("#isGroup").val();
         const message = $(this).val();
         const conversationId = $(".selected_id").val();
-        if (message.trim() !== "") {
-            $(this).val(""); // Clear the input field
-            const messageData = {
-                data: message,
-                timeStamp: Date.now(),
-                isDelete: {},
-                isReply: "0",
-                isSeen: false,
-                react: "",
-                senderId: senderUser,
-                senderName: senderUserName,
-                receiverName: senderUserName,
-                status: {},
-                replyData: {
-                    replyChatKey: "",
-                    replyDocType: "",
-                    replyMessage: "",
-                    replyTimeStamp: 0,
-                    replyUserName: "",
-                },
-            };
-
-            // alert(isGroup);
-            if (isGroup == true || isGroup == "true") {
-                const groupName = $(".selected_name").val();
-                if (replyMessageId) {
-                    // Fetch the reply message data
-                    const replyMessageRef = ref(
-                        database,
-                        `Groups/${conversationId}/message/${replyMessageId}`
-                    );
-                    const replyMessageSnapshot = await get(replyMessageRef);
-                    const replyMessageData = replyMessageSnapshot.val();
-
-                    messageData.replyData = {
-                        replyChatKey: replyMessageId,
-                        replyMessage: replyMessageData
-                            ? replyMessageData.data
-                            : "",
-                        replyTimeStamp: Date.now(),
-                        replyUserName: replyMessageData.senderName,
-                        replyDocType: "",
-                    };
-                    messageData.isReply = "1";
-                    // Reset reply message ID after sending
-                    replyMessageId = null;
-                }
-
-                const groupProfilesRef = ref(
-                    database,
-                    `Groups/${conversationId}/groupInfo/profiles`
-                );
-                const groupProfilesSnapshot = await get(groupProfilesRef);
-                const newGroupProfiles = groupProfilesSnapshot.val();
-                var userAvailable = [];
-                newGroupProfiles.map(async (profile) => {
-                    if (profile.leave == false) {
-                        if (profile.id !== senderUser) {
-                            userAvailable[profile.id] = 0;
-                        }
-                        const receiverSnapshot = await get(
-                            ref(
-                                database,
-                                `overview/${profile.id}/${conversationId}`
-                            )
-                        );
-                        await updateOverview(profile.id, conversationId, {
-                            lastMessage: `${senderUserName}: ${message}`,
-                            unReadCount:
-                                profile.id === senderUser
-                                    ? receiverSnapshot.val()
-                                    : (receiverSnapshot.val().unReadCount ||
-                                          0) + 1,
-                            timeStamp: Date.now(),
-                        });
-                    }
-                });
-
-                messageData.userAvailable = userAvailable;
-
-                await addMessageToGroup(conversationId, messageData);
-
-                // Update all group members' overview
+        let downloadURL = "";
+        let type = "";
+        $(".preview_img").hide();
+        const previewImg = $(".preview_img");
+        const imageUrl = previewImg.attr("src");
+        if (imageUrl) {
+            // Determine file type and set the storage path
+            let storagePath;
+            if (imageUrl.startsWith("data:image/")) {
+                storagePath = `Images/${senderUser}/${Date.now()}_${senderUser}.png`;
             } else {
-                const receiverId = $(".selected_message").val();
-                const receiverName = $(".selected_name").val();
-
-                messageData.receiverId = receiverId;
-                messageData.receiverName = receiverName;
-                if (replyMessageId) {
-                    // Fetch the reply message data
-                    const replyMessageRef = ref(
-                        database,
-                        `Messages/${conversationId}/message/${replyMessageId}`
-                    );
-                    const replyMessageSnapshot = await get(replyMessageRef);
-                    const replyMessageData = replyMessageSnapshot.val();
-
-                    messageData.replyData = {
-                        replyChatKey: replyMessageId,
-                        replyMessage: replyMessageData
-                            ? replyMessageData.data
-                            : "",
-                        replyTimeStamp: Date.now(),
-                        replyUserName: senderUserName,
-                        replyDocType: "",
-                    };
-                    messageData.isReply = "1";
-                    // Reset reply message ID after sending
-                    replyMessageId = null;
-                }
-
-                messageData.status = { senderUser: { profile: "", read: 1 } };
-
-                await addMessage(conversationId, messageData, receiverId);
-
-                await updateOverview(senderUser, conversationId, {
-                    lastMessage: `${senderUserName}: ${message}`,
-                    timeStamp: Date.now(),
-                });
-                const receiverSnapshot = await get(
-                    ref(database, `overview/${receiverId}/${conversationId}`)
-                );
-
-                if (receiverSnapshot.val() != null) {
-                    await updateOverview(receiverId, conversationId, {
-                        lastMessage: `${senderUserName}: ${message}`,
-                        unReadCount:
-                            (receiverSnapshot.val().unReadCount || 0) + 1,
-                        timeStamp: Date.now(),
-                    });
+                storagePath = `Files/${senderUser}/${Date.now()}_${senderUser}`;
+            }
+            // Upload file to Firebase Storage
+            const fileRef = storageRef(storage, storagePath);
+            try {
+                if (imageUrl.startsWith("data:image/")) {
+                    await uploadString(fileRef, imageUrl, "data_url");
                 } else {
-                    const reciverUser = await getUser(receiverId);
-                    if (!reciverUser) {
-                        return;
-                    }
-                    const receiverConversationData = {
-                        contactId: receiverId,
-                        contactName: receiverName,
-                        conversationId: conversationId,
-                        group: false,
-                        lastMessage: `${senderUserName}: ${message}`,
-                        lastSenderId: senderUser,
-                        receiverProfile: reciverUser.userProfile,
-                        timeStamp: Date.now(),
-                        unRead: true,
-                        unReadCount: 1,
-                    };
+                    const response = await fetch(imageUrl);
+                    const blob = await response.blob();
+                    await uploadBytes(fileRef, blob);
+                }
+                downloadURL = await getDownloadURL(fileRef);
+                type = "1";
+            } catch (e) {}
+        }
+        if (message.trim() == "" && downloadURL == "") {
+            return;
+        }
+        $(this).val(""); // Clear the input field
+        const messageData = {
+            data: message,
+            url: downloadURL,
+            type,
+            timeStamp: Date.now(),
+            isDelete: {},
+            isReply: "0",
+            isSeen: false,
+            react: "",
+            senderId: senderUser,
+            senderName: senderUserName,
+            receiverName: senderUserName,
+            status: {},
+            replyData: {
+                replyChatKey: "",
+                replyDocType: "",
+                replyMessage: "",
+                replyTimeStamp: 0,
+                replyUserName: "",
+            },
+        };
 
-                    await set(
+        // alert(isGroup);
+        if (isGroup == true || isGroup == "true") {
+            const groupName = $(".selected_name").val();
+            if (replyMessageId) {
+                // Fetch the reply message data
+                const replyMessageRef = ref(
+                    database,
+                    `Groups/${conversationId}/message/${replyMessageId}`
+                );
+                const replyMessageSnapshot = await get(replyMessageRef);
+                const replyMessageData = replyMessageSnapshot.val();
+
+                messageData.replyData = {
+                    replyChatKey: replyMessageId,
+                    replyMessage: replyMessageData ? replyMessageData.data : "",
+                    replyTimeStamp: Date.now(),
+                    replyUserName: replyMessageData.senderName,
+                    replyDocType: "",
+                };
+                messageData.isReply = "1";
+                // Reset reply message ID after sending
+                replyMessageId = null;
+            }
+
+            const groupProfilesRef = ref(
+                database,
+                `Groups/${conversationId}/groupInfo/profiles`
+            );
+            const groupProfilesSnapshot = await get(groupProfilesRef);
+            const newGroupProfiles = groupProfilesSnapshot.val();
+            var userAvailable = [];
+            newGroupProfiles.map(async (profile) => {
+                if (profile.leave == false) {
+                    if (profile.id !== senderUser) {
+                        userAvailable[profile.id] = 0;
+                    }
+                    const receiverSnapshot = await get(
                         ref(
                             database,
-                            `overview/${receiverId}/${conversationId}`
-                        ),
-                        receiverConversationData
+                            `overview/${profile.id}/${conversationId}`
+                        )
                     );
+                    await updateOverview(profile.id, conversationId, {
+                        lastMessage: `${senderUserName}: ${message}`,
+                        unReadCount:
+                            profile.id === senderUser
+                                ? receiverSnapshot.val()
+                                : (receiverSnapshot.val().unReadCount || 0) + 1,
+                        timeStamp: Date.now(),
+                    });
                 }
+            });
+
+            messageData.userAvailable = userAvailable;
+
+            await addMessageToGroup(conversationId, messageData);
+
+            // Update all group members' overview
+        } else {
+            const receiverId = $(".selected_message").val();
+            const receiverName = $(".selected_name").val();
+
+            messageData.receiverId = receiverId;
+            messageData.receiverName = receiverName;
+            if (replyMessageId) {
+                // Fetch the reply message data
+                const replyMessageRef = ref(
+                    database,
+                    `Messages/${conversationId}/message/${replyMessageId}`
+                );
+                const replyMessageSnapshot = await get(replyMessageRef);
+                const replyMessageData = replyMessageSnapshot.val();
+
+                messageData.replyData = {
+                    replyChatKey: replyMessageId,
+                    replyMessage: replyMessageData ? replyMessageData.data : "",
+                    replyTimeStamp: Date.now(),
+                    replyUserName: senderUserName,
+                    replyDocType: "",
+                };
+                messageData.isReply = "1";
+                // Reset reply message ID after sending
+                replyMessageId = null;
             }
-            const conversationElement = $(`.conversation-${conversationId}`);
-            conversationElement.prependTo(".chat-list");
+
+            messageData.status = { senderUser: { profile: "", read: 1 } };
+
+            await addMessage(conversationId, messageData, receiverId);
+
+            await updateOverview(senderUser, conversationId, {
+                lastMessage: `${senderUserName}: ${message}`,
+                timeStamp: Date.now(),
+            });
+            const receiverSnapshot = await get(
+                ref(database, `overview/${receiverId}/${conversationId}`)
+            );
+
+            if (receiverSnapshot.val() != null) {
+                await updateOverview(receiverId, conversationId, {
+                    lastMessage: `${senderUserName}: ${message}`,
+                    unReadCount: (receiverSnapshot.val().unReadCount || 0) + 1,
+                    timeStamp: Date.now(),
+                });
+            } else {
+                const reciverUser = await getUser(receiverId);
+                if (!reciverUser) {
+                    return;
+                }
+                const receiverConversationData = {
+                    contactId: receiverId,
+                    contactName: receiverName,
+                    conversationId: conversationId,
+                    group: false,
+                    lastMessage: `${senderUserName}: ${message}`,
+                    lastSenderId: senderUser,
+                    receiverProfile: reciverUser.userProfile,
+                    timeStamp: Date.now(),
+                    unRead: true,
+                    unReadCount: 1,
+                };
+
+                await set(
+                    ref(database, `overview/${receiverId}/${conversationId}`),
+                    receiverConversationData
+                );
+            }
         }
+        const conversationElement = $(`.conversation-${conversationId}`);
+        conversationElement.prependTo(".chat-list");
     }
 });
 
 // Function to add a message to the UI list
+function RemoveMessageToList(key, conversationId) {
+    if ($(".selected_conversasion").val() != conversationId) {
+        return;
+    }
+    const messageEle = document.getElementById(`message-${key}`);
+    $(messageEle).remove();
+}
 function UpdateMessageToList(key, messageData, conversationId) {
+    if ($(".selected_conversasion").val() != conversationId) {
+        return;
+    }
     console.log("update");
     const messageEle = document.getElementById(`message-${key}`);
     let isGroup = $("#isGroup").val();
-    $(messageEle).replaceWith(createMessageElement(key, messageData, isGroup));
+    const messgeElement = createMessageElement(key, messageData, isGroup);
+    console.log(messgeElement);
+    $(messageEle).replaceWith(messgeElement);
 }
 function addMessageToList(key, messageData, conversationId) {
     if ($(".selected_conversasion").val() != conversationId) {
@@ -767,11 +807,11 @@ function createMessageElement(key, messageData, isGroup) {
                       )
                   )
                 : "";
-        image =
-            messageData?.type == "1"
-                ? `<div class="media-msg"><img src="${messageData?.url}"/></div>`
-                : "";
     }
+    image =
+        messageData?.type == "1"
+            ? `<div class="media-msg"><img src="${messageData?.url}"/></div>`
+            : "";
 
     const replySection =
         messageData.replyData && messageData.replyData.replyTimeStamp != 0
@@ -1373,9 +1413,6 @@ $(".upload-box").change(function () {
             reader.onload = function (e) {
                 $(".preview_img").show();
                 curElement.attr("src", e.target.result);
-                // $("#upload_name").text(file.name);
-                $("#send_image").show();
-                // $('.dropdown-menu').hide();
                 $(".btn-primary.dropdown-toggle").attr(
                     "aria-expanded",
                     "false"
