@@ -401,6 +401,7 @@ async function updateChat(user_id) {
             $(".typing").text("");
         }
     });
+    updateMore(conversationId);
 }
 var SelecteGroupUser = [];
 async function updateChatfromGroup(conversationId) {
@@ -452,6 +453,7 @@ async function updateChatfromGroup(conversationId) {
     update(userRef, { userChatId: conversationId });
     await addListInMembers(SelecteGroupUser);
     $(".selected-title").html(groupInfo.groupName);
+    updateMore(conversationId);
 }
 
 $(".conversationId").click(function () {
@@ -485,6 +487,41 @@ $(document).on("click", ".msg-list", async function () {
             unReadCount: 0,
         });
         await updateChat(userId);
+    }
+});
+async function updateMore(conversationId) {
+    const overviewSnapshot = await get(
+        ref(database, `overview/${senderUser}/${conversationId}`)
+    );
+    const overviewData = overviewSnapshot.val();
+    if (overviewData) {
+        if (overviewData.isPin != undefined) {
+            $(".pin-conversation")
+                .find("span")
+                .text(overviewData.isPin == "1" ? "Unpin" : "Pin");
+            $(".pin-conversation").data(
+                "changeWith",
+                overviewData.isPin == "1" ? "0" : "1"
+            );
+        }
+    }
+}
+
+$(".pin-conversation").click(function () {
+    const pinChange = $(this).data("changeWith");
+    let conversationId = $(".conversationId").attr("conversationId");
+    const overviewRef = ref(
+        database,
+        `overview/${senderUser}/${conversationId}`
+    );
+    update(overviewRef, { isPin: pinChange });
+    $(this)
+        .find("span")
+        .text(pinChange == "1" ? "Unpin" : "Pin");
+    $(this).data("changeWith", pinChange == "1" ? "0" : "1");
+    if (pinChange == "1") {
+        const conversationElement = $(`.conversation-${conversationId}`);
+        conversationElement.prependTo(".chat-list");
     }
 });
 
@@ -754,7 +791,7 @@ function UpdateMessageToList(key, messageData, conversationId) {
     const messageEle = document.getElementById(`message-${key}`);
     let isGroup = $("#isGroup").val();
     const messgeElement = createMessageElement(key, messageData, isGroup);
-    console.log(messgeElement);
+
     $(messageEle).replaceWith(messgeElement);
 }
 function addMessageToList(key, messageData, conversationId) {
@@ -788,8 +825,11 @@ function addMessageToList(key, messageData, conversationId) {
 }
 
 function createMessageElement(key, messageData, isGroup) {
-    const isSender = senderUser === messageData.senderId;
-    const isReceiver = senderUser !== messageData.senderId;
+    const isSender = senderUser == messageData.senderId;
+    const isReceiver = senderUser != messageData.senderId;
+    if (SelecteGroupUser[messageData.senderId] == undefined) {
+        return;
+    }
     const senderName =
         (isGroup == "true" || isGroup == true) && !isSender
             ? SelecteGroupUser[messageData.senderId].name
