@@ -12316,70 +12316,70 @@ class ApiControllerv2 extends Controller
 
 
 
+    // public function addSubscription(Request $request)
+    // {
+
+    //     $rawData = $request->getContent();
+
+    //     $input = json_decode($rawData, true);
+
+    //     if ($input == null) {
+    //         return response()->json(['status' => 0, 'message' => "Json invalid"]);
+    //     }
+
+
+    //     $validator = Validator::make($input, [
+
+    //         'orderId' => 'required',
+    //         'packageName' => 'required',
+    //         'productId' => 'required',
+    //         'purchaseTime' => 'required',
+    //         'purchaseToken' => 'required|string',
+
+    //     ]);
+
+
+    //     if ($validator->fails()) {
+    //         return response()->json(
+    //             [
+    //                 'status' => 0,
+    //                 'message' => $validator->errors()->first()
+    //             ],
+    //         );
+    //     }
+
+    //     $packageName = $input['packageName'];
+    //     $productId = $input['productId'];
+    //     $purchaseToken = $input['purchaseToken'];
+
+
+    //     $subscription = $this->googlePlayService->verifySubscription($packageName, $productId, $purchaseToken);
+    //     dd($subscription);
+    //     if ($subscription) {
+
+    //         dd($subscription);
+    //         // Process the subscription details and save to the database
+    //         $expiryTime = $subscription->getExpiryTimeMillis();
+    //         $autoRenewing = $subscription->getAutoRenewing();
+
+    //         UserSubscription::updateOrCreate(
+    //             ['subscription_id' => $subscriptionId],
+    //             [
+    //                 'package_name' => $packageName,
+    //                 'token' => $token,
+    //                 'expiry_time' => $expiryTime,
+    //                 'auto_renewing' => $autoRenewing
+    //             ]
+    //         );
+
+    //         return response()->json(['message' => 'Subscription verified successfully']);
+    //     }
+
+    //     return response()->json(['message' => 'Invalid subscription'], 400);
+    // }
+
+
     public function addSubscription(Request $request)
-    {
-
-        $rawData = $request->getContent();
-
-        $input = json_decode($rawData, true);
-
-        if ($input == null) {
-            return response()->json(['status' => 0, 'message' => "Json invalid"]);
-        }
-
-
-        $validator = Validator::make($input, [
-
-            'orderId' => 'required',
-            'packageName' => 'required',
-            'productId' => 'required',
-            'purchaseTime' => 'required',
-            'purchaseToken' => 'required|string',
-
-        ]);
-
-
-        if ($validator->fails()) {
-            return response()->json(
-                [
-                    'status' => 0,
-                    'message' => $validator->errors()->first()
-                ],
-            );
-        }
-
-        $packageName = $input['packageName'];
-        $productId = $input['productId'];
-        $purchaseToken = $input['purchaseToken'];
-
-
-        $subscription = $this->googlePlayService->verifySubscription($packageName, $productId, $purchaseToken);
-        dd($subscription);
-        if ($subscription) {
-
-            dd($subscription);
-            // Process the subscription details and save to the database
-            $expiryTime = $subscription->getExpiryTimeMillis();
-            $autoRenewing = $subscription->getAutoRenewing();
-
-            UserSubscription::updateOrCreate(
-                ['subscription_id' => $subscriptionId],
-                [
-                    'package_name' => $packageName,
-                    'token' => $token,
-                    'expiry_time' => $expiryTime,
-                    'auto_renewing' => $autoRenewing
-                ]
-            );
-
-            return response()->json(['message' => 'Subscription verified successfully']);
-        }
-
-        return response()->json(['message' => 'Invalid subscription'], 400);
-    }
-
-
-    public function addSusbscription(Request $request)
     {
         $rawData = $request->getContent();
 
@@ -12416,12 +12416,12 @@ class ApiControllerv2 extends Controller
             $productId = $input['productId'];
             $purchaseToken = $input['purchaseToken'];
 
-            $accessToken = getAccessToken();
+            // $accessToken = getAccessToken();
 
             $url = "https://androidpublisher.googleapis.com/androidpublisher/v3/applications/{$packageName}/purchases/products/{$productId}/tokens/{$purchaseToken}";
 
             $response = Http::withHeaders([
-                'Authorization' => 'Bearer ' . $accessToken,
+                'Authorization' => 'Bearer ya29.c.c0AY_VpZgSbzOLLs1kf08iATeBy9Kv0DdbrPes2LXrfUGXeEIfpEd_0f5vkIHnIbDYyDnodg4ctdrrFzKPZbybpf9XJv_nW3f6mgGZQPV4SD5Jcu4rtdeD9xCKAnkg2OdrpeT0ysNBIp8EtWeDnm-pkbN4BPdjHdVh7DIZVnawxRAy6FMPN8kou-YyrESuXuJ4ABav5KSUTi1ZbvATzhbEs_67gHsyz8YaLdX9Q6i4ef-aRUr9szqEzm5y_XgbptRuTY-7g1t_YGjWt6X70qvDS5aBiQhhkd_QWmlQQdW3QEqMgiNa2yWEYdzWYiTz2Qlq2_3mJ3KBy31pgrcE10m5dMj7Dtcs9zURjrxdWzecOx7noouHiNIkluDoE385DlV_gsr3RtQnip1W7h7aYYwJdc2bqIioWzZuWd-6SQQqVcZXdp9qyrya5Y1ioz8Z1bnZsO_jZkfO2Spim-boUvUrf5RVz683UayfkkM32ts9h5J8p-RrpOSwzcFSrlJpMfik_rXFx8-3R6j5X5jO2dJY8gMUd7_yVO18IUm9ixJRrips3nbSf-Uwsh_dXV-_aFvMqtFqp2nIM3UXMUyt6B3VkYmmrm6Q0zU6dFknggq5nVSXFOB8vfu_gzWQBbO2bSifSXub4YWu1I8qQngh6_tBZh1pwrOa-Vd87nRZS2gnV8pruhMvy6JUn3j756evWUYSca1dirZidBeUuo_m7u2QjhOXgFWOe9lyq1VkBebzzce9I5lmlXUhrFZr5nsRgwhzXMfY0ZZer5eR_sjYZv8Sj_9ical1bpyIjmUb6MYexV9mciYcbX5-cfQ3ibO3u1QbpYhaQ_M9ayVmcWg1u9zol5eg4VgnhonccFZ3lMjwev3U8e1eF92aShu3nRS8Wp1BX66_dJpkgjOaFohypoX_VFna266_h4UVoJvItvuI-iWq5ZBFca4uryh_u4ZB0Wreny5sXddY0qkmQnv1h9YZevzxep5jUn2WacYs54I6U38RWm875tIllkv'
             ])->get($url);
 
             dd($response);
