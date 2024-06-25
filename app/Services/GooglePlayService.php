@@ -15,7 +15,7 @@ class GooglePlayService
         $this->client = new Client();
         $this->client->setAuthConfig(storage_path('app/google-play-service-account.json'));
         $this->client->addScope(AndroidPublisher::ANDROIDPUBLISHER);
-
+        dd($this->client);
         $this->androidPublisher = new AndroidPublisher($this->client);
     }
 
