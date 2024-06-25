@@ -845,21 +845,46 @@ function createMessageElement(key, messageData, isGroup) {
     dataWithMedia =
         messageData?.type == "1"
             ? `<div class="media-msg">
-            <img src="${messageData?.url}"/>
-            <span>${
-                messageData?.data != "" ? messageData.data : ""
-            }</span></div>`
+                <img src="${messageData?.url}"/>
+                <span>${messageData?.data != "" ? messageData.data : ""}</span>
+                 ${
+                     isSender
+                         ? `<span class="seenStatus ${seenStatus}"></span>`
+                         : ""
+                 } 
+                ${reaction ? `<span class="reaction">${reaction}</span>` : ""}
+            </div>`
             : messageData?.type == "3"
             ? `<div class="media-msg">
             <audio controls src="${messageData?.url}"></audio>
             <span>${
                 messageData?.data != "" ? messageData.data : ""
             }</span></div>`
-            : `<p> 
-            ${messageData?.data != "" ? messageData.data : ""}
-            ${isSender ? `<span class="seenStatus ${seenStatus}"></span>` : ""} 
-             ${reaction ? `<span class="reaction">${reaction}</span>` : ""}
-              </p>`;
+            : `
+            <div class="simple-message"> 
+                <p> 
+                    <span class="senderName">${senderName}</span>
+                    ${messageData?.data != "" ? messageData.data : ""}
+                    ${
+                        isSender
+                            ? `<span class="seenStatus ${seenStatus}"></span>`
+                            : ""
+                    } 
+                    ${
+                        reaction
+                            ? `<span class="reaction">${reaction}</span>`
+                            : ""
+                    }
+                </p>
+                ${
+                    isReceiver
+                        ? `
+                          <span class="reaction-icon" data-message-id="${key}">😊</span>
+                          <span class="reply-icon" data-message-id="${key}">↩️</span>`
+                        : ""
+                }
+              </div>
+              `;
 
     const replySection =
         messageData.replyData && messageData.replyData.replyTimeStamp != 0
@@ -887,15 +912,9 @@ function createMessageElement(key, messageData, isGroup) {
             <span class="time">${timeago.format(
                 new Date(messageData.timeStamp)
             )}</span>
-            <span class="senderName">${senderName}</span>
             
-             ${
-                 isReceiver
-                     ? `
-                       <span class="reaction-icon" data-message-id="${key}">😊</span>
-                       <span class="reply-icon" data-message-id="${key}">↩️</span>`
-                     : ""
-             }
+            
+             
             
         </li>
     `;
@@ -1420,11 +1439,27 @@ $(".user-image").each(async function () {
 
 async function addListInMembers(SelecteGroupUser) {
     let isGroup = $("#isGroup").val();
+    let senderIsAdmin = false;
+
+    // Check if the senderUser is an admin
+    SelecteGroupUser.forEach((user) => {
+        if (user.id == senderUser && user.isAdmin == "1") {
+            senderIsAdmin = true;
+        }
+    });
 
     let messageElement = ``;
     const promises = SelecteGroupUser.map(async (user) => {
         const userImageElement = await getListUserimg(user.image, user.name);
-        messageElement += ` <li class="">
+
+        const removeMember =
+            user.id != senderUser && senderIsAdmin
+                ? `<button class="remove-member" data-id="${user.id}"><i class="fa-solid fa-xmark"></i></button>`
+                : "";
+
+        messageElement +=
+            user.leave == false
+                ? `<li class="">
                             <div class="chat-data d-flex">
                                 <div class="user-img position-relative">
                                     ${userImageElement}
@@ -1441,14 +1476,62 @@ async function addListInMembers(SelecteGroupUser) {
                                         }</span>
                                     </div>
                                 </div>
+                                ${removeMember}
                             </div>
-                        </li>`;
+                        </li>`
+                : "";
     });
 
     await Promise.all(promises);
     $(".member-lists").html(messageElement);
 }
 
+$(document).on("click", ".remove-member", async function () {
+    console.log("remove");
+    const userId = $(this).attr("data-id");
+    var conversationId = $(".conversationId").attr("conversationid");
+    console.log(conversationId);
+    console.log(userId);
+    var overviewRef = ref(database, `overview/${userId}/${conversationId}`);
+    await remove(overviewRef);
+
+    var groupInfoProfileRef = ref(
+        database,
+        `/Groups/${conversationId}/groupInfo/profiles`
+    );
+    var groupInfoProfileSnap = await get(groupInfoProfileRef);
+    var groupInfoProfileData = groupInfoProfileSnap.val();
+
+    if (groupInfoProfileData) {
+        for (var key in groupInfoProfileData) {
+            if (groupInfoProfileData[key].id == userId) {
+                await update(
+                    ref(
+                        database,
+                        `/Groups/${conversationId}/groupInfo/profiles/${key}`
+                    ),
+                    { isAdmin: "0", leave: true }
+                );
+                break;
+            }
+        }
+    }
+    const groupInfoRef = ref(database, `Groups/${conversationId}/groupInfo`);
+    const snapshot = await get(groupInfoRef);
+    const groupInfo = snapshot.val();
+    groupInfo.profiles.map((profile) => {
+        if (profile.id > 0) {
+            SelecteGroupUser[profile.id] = {
+                id: profile.id,
+                name: profile.name,
+                image: profile.image,
+                isAdmin: profile.isAdmin,
+                leave: profile.leave,
+            };
+        }
+    });
+    await addListInMembers(SelecteGroupUser);
+});
 $(".delete-conversation").click(async function () {
     var conversationId = $(".conversationId").attr("conversationid");
     const isGroup = $("#isGroup").val();
@@ -1573,9 +1656,9 @@ $("#updateName").click(async function () {
 $("#new-member").click(function () {
     $(".new-member").addClass("d-none");
     $(".new-members-add").removeClass("d-none");
-    selectedgrpUserIds = SelecteGroupUser.map((user) => user.id).filter(
-        (id) => id
-    );
+    selectedgrpUserIds = SelecteGroupUser.map(
+        (user) => user.leave == false && user.id
+    ).filter((id) => id);
 });
 $(".close-group-modal").click(function () {
     $(".new-members-add").addClass("d-none");
@@ -1704,22 +1787,36 @@ $("#add-group-member").click(async function () {
                 userId = userId.toString();
                 const user = await getUser(userId);
                 console.log(user?.userProfile);
-                const newIndex = users.length; // Append new user at the end
 
-                // Update profiles
-                groupInfo.profiles[newIndex] = {
-                    id: userId,
-                    image: user?.userProfile || "",
-                    isAdmin: "0",
-                    leave: false,
-                    name: user?.userName || "",
-                };
+                // Check if the user is already in the group
+                let userInGroup = false;
+                for (let index in groupInfo.profiles) {
+                    if (groupInfo.profiles[index].id === userId) {
+                        // User found, check the leave status
+                        if (groupInfo.profiles[index].leave) {
+                            // Update leave status to false
+                            groupInfo.profiles[index].leave = false;
+                        }
+                        userInGroup = true;
+                        break;
+                    }
+                }
 
-                // Update usersStatus
-                // groupInfo.usersStatus[userId] = "lastmsgID"; // Assuming you want to set "lastmsgID" as the default
+                if (!userInGroup) {
+                    const newIndex = users.length; // Append new user at the end
 
-                // Update users array
-                users.push(userId);
+                    // Update profiles
+                    groupInfo.profiles[newIndex] = {
+                        id: userId,
+                        image: user?.userProfile || "",
+                        isAdmin: "0",
+                        leave: false,
+                        name: user?.userName || "",
+                    };
+
+                    // Update users array
+                    users.push(userId);
+                }
             })
         );
 
