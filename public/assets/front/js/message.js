@@ -126,6 +126,7 @@ const base_url = $("#base_url").val();
 const userRef = ref(database, `users/${senderUser}`);
 let replyMessageId = null; // Global variable to hold the message ID to reply to
 let fileType = null; // Global variable to hold the message ID to reply to
+let WaitNewConversation = null; // Global variable to hold the message ID to reply to
 // Function to get messages between two users
 async function getMessages(userId1, userId2) {
     const messagesRef = ref(database, "Messages");
@@ -241,6 +242,7 @@ async function handleNewConversation(snapshot) {
     const conversationElement = document.getElementsByClassName(
         `conversation-${newConversation.conversationId}`
     );
+
     let userStatus = "";
     if (newConversation.group !== "true" && newConversation.group !== true) {
         let userId = newConversation.contactId;
@@ -289,6 +291,11 @@ async function handleNewConversation(snapshot) {
             badgeElement.removeClass("d-none");
         }
     } else {
+        if (WaitNewConversation == newConversation.conversationId) {
+            return;
+        }
+        WaitNewConversation = newConversation.conversationId;
+
         // Add new conversation element
         $.ajax({
             url: base_url + "getConversation",
@@ -315,7 +322,6 @@ async function handleNewConversation(snapshot) {
             unReadCount: 0,
         });
     }
-    console.log("conver length", conversationElement.length);
 }
 
 function removeSelectedMsg() {
@@ -991,28 +997,30 @@ function createMessageElement(key, messageData, isGroup) {
     const replySection =
         messageData.replyData && messageData.replyData.replyTimeStamp != 0
             ? `
-        <div class="reply-section">
             <div>
+            <div class="reply-section">
                 <span class="senderName">${senderName}</span>            
-                <span> <strong>${
-                    messageData.replyData.replyMessage
-                }</strong></span>
-                <div class="reply-info">
-                    <span class="reply-username">${
-                        messageData.replyData.replyUserName
-                    }</span>
-                    <span class="reply-timestamp">${timeago.format(
-                        new Date(messageData.replyData.replyTimeStamp)
-                    )}</span>
+                <div>
+                    <span> <strong>${
+                        messageData.replyData.replyMessage
+                    }</strong></span>
+                    <div class="reply-info">
+                        <span class="reply-username">${
+                            messageData.replyData.replyUserName
+                        }</span>
+                        <span class="reply-timestamp">${timeago.format(
+                            new Date(messageData.replyData.replyTimeStamp)
+                        )}</span>
+                    </div>
+                </div>
+                <div class="reply-massage"> 
+                        <span> ${
+                            messageData?.data != "" ? messageData.data : ""
+                        }</span>
                 </div>
             </div>
-            <div class="reply-massage"> 
-                    <span> ${
-                        messageData?.data != "" ? messageData.data : ""
-                    }</span>
-            </div>
-             ${emojiAndReplay}
-        </div>`
+            ${emojiAndReplay}
+            </div>`
             : "";
 
     return `
