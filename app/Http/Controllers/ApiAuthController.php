@@ -287,6 +287,8 @@ class ApiAuthController extends Controller
                 $isExistUser->instagram_token_id = $input['instagram_token_id'];
                 $isExistUser->save();
             }
+
+
             $userId = $isExistUser->id;
 
             $this->userDevice($userId, $input);
@@ -306,6 +308,8 @@ class ApiAuthController extends Controller
                 'account_type' => $userInfo->account_type,
                 'is_first_login' => $userInfo->is_first_login
             ];
+            logoutFromWeb($userId);
+            return response()->json(['status' => 1, 'data' => $detail, 'token' => $token]);
         } else {
             DB::beginTransaction();
             $usersignup = new User;
@@ -323,6 +327,7 @@ class ApiAuthController extends Controller
             } else if (isset($input['social_type']) && $input['social_type'] === 'instagram') {
                 $usersignup->instagram_token_id = $input['instagram_token_id'];
             }
+            $usersignup->email_verified_at = strtotime(date('Y-m-d  h:i:s'));
             $usersignup->save();
 
             $userId = $usersignup->id;
@@ -345,29 +350,54 @@ class ApiAuthController extends Controller
                 'is_first_login' => $userInfo->is_first_login
             ];
             DB::commit();
-        }
-        $users = User::where('id', $userId)->first();
-
-        if ($users->email_verified_at == NULL) {
-
-            $randomString = Str::random(30);
-            $users->remember_token = $randomString;
-            $users->save();
-
-            $userData = [
-                'username' => $users->firstname . ' ' . $users->lastname,
-                'email' => $users->email,
-                'token' => $randomString,
-                'is_first_login' => $users->is_first_login
-            ];
-            Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($input) {
-                $message->to($input['email']);
-                $message->subject('Email Verification Mail');
-            });
+            logoutFromWeb($userId);
+            return response()->json(['status' => 1, 'data' => $detail, 'token' => $token]);
         }
 
-        logoutFromWeb($userId);
-        return response()->json(['status' => 1, 'data' => $detail, 'token' => $token]);
+        // if (isset($input['account_type'])) {
+
+        //     DB::beginTransaction();
+        //     $usersignup = new User;
+        //     $usersignup->firstname = $input['firstname'];
+        //     $usersignup->lastname = $input['lastname'];
+        //     $usersignup->email = $input['email'];
+        //     $usersignup->account_type = $input['account_type'];
+
+        //     if (isset($input['social_type']) && $input['social_type'] === 'facebook') {
+        //         $usersignup->facebook_token_id = $input['facebook_token_id'];
+        //     } else if (isset($input['social_type']) && $input['social_type'] === 'gmail') {
+        //         $usersignup->gmail_token_id = $input['gmail_token_id'];
+        //     } else if (isset($input['social_type']) && $input['social_type'] === 'apple') {
+
+        //         $usersignup->apple_token_id = $input['apple_token_id'];
+        //     } else if (isset($input['social_type']) && $input['social_type'] === 'instagram') {
+        //         $usersignup->instagram_token_id = $input['instagram_token_id'];
+        //     }
+        //     $usersignup->save();
+
+        //     $userId = $usersignup->id;
+
+
+        //     $this->userDevice($userId, $input);
+
+        //     // device  add//
+        //     $token = Token::where('user_id', $userId)->first();
+
+        //     if ($token) {
+        //         $token->delete();
+        //     }
+        //     $userInfo = User::where("id", $userId)->first();
+        //     $token = $userInfo->createToken('API Token')->accessToken;
+        //     $detail = [
+        //         'firstname' => $userInfo->firstname,
+        //         'lastname' => $userInfo->lastname,
+        //         'email' => $userInfo->email,
+        //         'account_type' => $userInfo->account_type,
+        //     ];
+        //     DB::commit();
+        //     return response()->json(['status' => 1, 'data' => $detail, 'token' => $token]);
+        // }
+        // return response()->json(['status' => 0, 'message' => "registering process"]);
     }
 
     public function userDevice($id, $requestData)
