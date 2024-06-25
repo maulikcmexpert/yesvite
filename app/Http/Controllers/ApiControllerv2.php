@@ -12319,7 +12319,7 @@ class ApiControllerv2 extends Controller
 
 
 
-    public function addSusbscription(Request $request)
+    public function addSubscription(Request $request)
     {
         $rawData = $request->getContent();
 
