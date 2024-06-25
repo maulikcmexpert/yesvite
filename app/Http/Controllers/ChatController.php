@@ -45,19 +45,34 @@ class ChatController extends Controller
         ];
 
         // Create a new user node with the userId
-        $usersRef = $this->usersReference->getChild((string)$userId)->set($updateData);
-        // $newUserId = $usersRef->getKey();
-        // $messages = $this->chatRoom->getValue();
-        // dd($id);
+        $userRef = $this->usersReference->getChild((string)$userId);
+        $userSnapshot = $userRef->getValue();
+
+        if ($userSnapshot) {
+            // User exists, update the existing data
+            $userRef->update($updateData);
+        } else {
+            // User does not exist, create a new user node
+            $userRef->set($updateData);
+        }
+
         $reference = $this->firebase->getReference('overview/' . $userId);
         $messages = $reference->getValue();
         if ($messages) {
-
             uasort($messages, function ($a, $b) {
-                $timeStampA = isset($a['timeStamp']) ? $a['timeStamp'] : PHP_INT_MAX;
-                $timeStampB = isset($b['timeStamp']) ? $b['timeStamp'] : PHP_INT_MAX;
+                // Check if either of the items has 'isPin' set to '1'
+                $isPinA = isset($a['isPin']) && $a['isPin'] == '1';
+                $isPinB = isset($b['isPin']) && $b['isPin'] == '1';
 
-                return $timeStampB <=> $timeStampA;
+                // If both have the same 'isPin' status, sort by 'timeStamp'
+                if ($isPinA == $isPinB) {
+                    $timeStampA = isset($a['timeStamp']) ? $a['timeStamp'] : PHP_INT_MAX;
+                    $timeStampB = isset($b['timeStamp']) ? $b['timeStamp'] : PHP_INT_MAX;
+                    return $timeStampB <=> $timeStampA;
+                }
+
+                // Otherwise, prioritize the item with 'isPin' set to '1'
+                return $isPinB <=> $isPinA;
             });
         }
         // dd($messages);
@@ -124,6 +139,7 @@ class ChatController extends Controller
     public function autocomplete(Request $request)
     {
         $search = $request->get('term');
+        $selectedUserIds = $request->get('selectedUserIds', []);
         $currentUserId = auth()->id();
         $profilePath = asset('storage/profile/');
 
@@ -135,6 +151,8 @@ class ChatController extends Controller
         )
             ->where(DB::raw("CONCAT(firstname, ' ', lastname)"), 'LIKE', '%' . $search . '%')
             ->where('id', '!=', $currentUserId)
+            ->where('app_user', '=', '1')
+            ->whereNotIn('id', $selectedUserIds) // Filter out selected users
             ->get();
 
         return response()->json($users);

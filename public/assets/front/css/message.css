@@ -5,7 +5,16 @@
     padding: 32px 0;
     border-top: 1px solid var(--borderColor);
 }
-   
+#preview_img {
+    width: 200px;
+    /* Adjust the width as needed */
+    height: 200px;
+    /* Adjust the height to match the width */
+    object-fit: cover;
+    /* Ensures the image covers the entire space */
+    border-radius: 8px;
+    /* Optional: Adds rounded corners */
+}
 .message-area .massage-notification{
     display: flex;
     align-items: center;
@@ -53,6 +62,12 @@
 }
 
 .chat-lists{
+    /* padding: 24px 20px; */
+    width: 100%;
+    max-width: 375px;
+    border-right: 1px solid var(--borderColor);
+}
+.member-lists{
     /* padding: 24px 20px; */
     width: 100%;
     max-width: 375px;
@@ -152,6 +167,7 @@ ul.chat-list{
     padding: 10px 20px;
     max-height: 590px;
     overflow-y: scroll;
+    height: 100%;
 }
 
 ul.chat-list li{
@@ -163,9 +179,12 @@ ul.chat-list li{
     -moz-border-radius: 16px;
     -ms-border-radius: 16px;
     -o-border-radius: 16px;
+    cursor: pointer;
 }
 
-ul.chat-list li.active{
+ul.chat-list li.active,
+ul.chat-list li:hover
+{
     background-color: #F8F9FD !important;
 }
 
@@ -208,11 +227,11 @@ ul.chat-list li:last-child{
 .user-detail span{
     font-size: 12px;
     color: var(--lightColor);
-    width: 100%; 
+    width: 100%;
     max-width: 200px;
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap; 
+    white-space: nowrap;
 }
 
 .chat-list h6{
@@ -223,7 +242,7 @@ ul.chat-list li:last-child{
 }
 
 .chat-list .badge{
-    width: 20px !important; 
+    width: 20px !important;
     height: 20px !important;
     background-color: var(--primaryColor);
     border-radius: 100%;
@@ -245,6 +264,20 @@ ul.chat-list li:last-child{
     flex-direction: column;
     justify-content: center;
     padding: 160px 0;
+}
+.seenStatus {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-size: contain;
+}
+
+.blue-tick {
+    background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M9 19L3.5 13.5L5 12L9 16L19 6L20.5 7.5L9 19Z" fill="%2300BFFF"/><path d="M16 19L10.5 13.5L12 12L16 16L26 6L27.5 7.5L16 19Z" fill="%2300BFFF"/></svg>');
+}
+
+.grey-tick {
+    background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M9 19L3.5 13.5L5 12L9 16L19 6L20.5 7.5L9 19Z" fill="%23A9A9A9"/><path d="M16 19L10.5 13.5L12 12L16 16L26 6L27.5 7.5L16 19Z" fill="%23A9A9A9"/></svg>');
 }
 
 .empty-massage .empty-img{
@@ -296,7 +329,40 @@ ul.chat-list li:last-child{
     padding: 0;
 }
 
+#listBox .user-cover-img{
+    display: block;
+    width: 120px;
+    height: 120px;
+    background: inherit;
+    margin: 0 auto;
 
+
+}
+
+#listBox input[type="file"]{
+    width: 0;
+    overflow: hidden;
+    display: none;
+}
+
+#listBox .edit-btn{
+    position: absolute;
+    right: 40%;
+    border: none;
+    bottom: 0;
+    width: 35px;
+    height: 35px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--primaryColor) !important;
+    cursor: pointer;
+}
+
+#listBox .edit-btn svg path{
+    stroke: #fff;
+}
 
 .msg-body ul li{
     margin: 16px 0;
@@ -312,9 +378,9 @@ ul.chat-list li:last-child{
 .msg-body ul li.receiver p{
     color: var(--secondryColor);
     font-size: 14px;
-    line-height: 1.5;
+    line-height: 20.5px;
     font-weight: 400;
-    padding: 10px 19px;
+    padding: 10px 29px 10px 19px;
     background: #FFF1F4;
     display: inline-block;
     border-radius: 20px 0px 20px 20px;
@@ -323,29 +389,93 @@ ul.chat-list li:last-child{
     -ms-border-radius: 20px 0px 20px 20px;
     -o-border-radius: 20px 0px 20px 20px;
     margin-bottom: 5px !important;
+    position: relative;
+}
+
+
+.msg-body ul li.receiver p .seenStatus{
+    position: absolute;
+    right: 8px;
+    bottom: 6px;
+}
+
+.msg-body ul li.receiver p  .reaction {
+    width: 22px;
+    height: 22px;
+    position: absolute;
+    left: -3px;
+    bottom: -4px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0px 5px 10px 0px #0000001A;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .msg-body ul li .time{
     display: block;
     color: var(--inputColor);
     font-size: 12px;
-    line-height: 1.5;
+    line-height: 20.4px;
     font-weight: 400;
 }
 
 .msg-body ul li.sender p{
-    display: inline-block;
+    color: var(--secondryColor);
+    display: inline-flex;
+    flex-direction: column;
     background-color: #F8F9FD;
-    padding: 10px 19px;
+    padding: 10px 29px 10px 19px;
     border-radius: 0px 20px 20px 20px;
     -webkit-border-radius: 0px 20px 20px 20px;
     -moz-border-radius: 0px 20px 20px 20px;
     -ms-border-radius: 0px 20px 20px 20px;
     -o-border-radius: 0px 20px 20px 20px;
     margin-bottom: 5px !important;
+    position: relative;
+    font-size: 12px;
 }
 
-.msg-body ul li.receiver div{
+.msg-body ul li.sender p  .reaction{
+    width: 22px;
+    height: 22px;
+    position: absolute;
+    right: -3px;
+    bottom: -4px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0px 5px 10px 0px #0000001A;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.msg-body ul li.sender p .senderName{
+    font-size: 11px;
+    color: red;
+}
+
+.msg-body ul li.receiver div img{
+    max-width: 100%;
+    width: 297px;
+    height: 254px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.msg-body ul li.receiver div.media-msg{
     background-color: #FFE4E9;
     padding: 10px;
     border-radius: 20px 0px 20px 20px;
@@ -358,17 +488,41 @@ ul.chat-list li:last-child{
     margin-left: auto;
 }
 
-.msg-body ul li.receiver div img{
-    max-width: 297px;
+.msg-body .media-msg span{
+    font-size: 12px;
+    line-height: 20.4px;
+    text-align: right;
+    color: var(--secondryColor);
+}
+
+.msg-body ul li.sender div.media-msg{
+    background-color: #F8F9FD;
+    padding: 10px;
+    border-radius: 20px 0px 20px 20px;
+    -webkit-border-radius: 20px 0px 20px 20px;
+    -moz-border-radius: 20px 0px 20px 20px;
+    -ms-border-radius: 20px 0px 20px 20px;
+    -o-border-radius: 20px 0px 20px 20px;
+    display: inline-block;
+    max-width: 317px;
+    margin-left: auto;
+}
+
+.msg-body ul li.sender div img{
+    max-width: 100%;
+    width: 297px;
+    height: 254px;
     margin-bottom: 10px;
+    object-fit: cover;
+    border-radius: 10px;
 }
 
 .msg-footer{
     border-top: 1px solid #F1F5F9;
     display: flex;
     align-items: center;
-    height: 64px;
-    position: absolute;
+    /* height: 64px; */
+    /* position: absolute; */
     width: 100%;
     bottom: 0;
 }
@@ -379,6 +533,12 @@ ul.chat-list li:last-child{
     outline: 0 !important;
     box-shadow: none !important;
     padding-left: 20px !important;
+    box-shadow: none !important;
+}
+
+.msg-footer input:focus{
+    border: none !important;
+    box-shadow: none !important;
 }
 
 .msg-footer .dropdown-menu.show{
@@ -635,12 +795,48 @@ ul.chat-list li:last-child{
     margin-right: 5px;
     border-radius: 5px;
   }
-  
+
   .close-btn {
     cursor: pointer;
     margin-left: 5px;
   }
-  
+
+  .reaction-icon, .reply-icon {
+    cursor: pointer;
+    margin-left: 7px;
+    padding: 2px;
+    border-radius: 50%;
+}
+
+.reaction-dialog {
+    position: absolute;
+    bottom: -35px;
+    left: 8px;
+    display: flex;
+    gap: 5px;
+    background-color: #fff;
+    padding: 5px;
+    position: absolute;
+    box-shadow: 0px 5px 40px 0px #0000001A;
+    border-radius: 20px 0px 20px 20px;
+    -webkit-border-radius: 20px 0px 20px 20px;
+    -moz-border-radius: 20px 0px 20px 20px;
+    -ms-border-radius: 20px 0px 20px 20px;
+    -o-border-radius: 20px 0px 20px 20px;
+    Padding : 10px 20px 10px 20px;
+}
+
+.reaction-option {
+    cursor: pointer;
+}
+
+.msg-lists .simple-message{
+    /* display: flex;
+    align-items: center; */
+    position: relative;
+}
+
+
 /* ======= responsive ======== */
 @media only screen and (max-width:1500px){
     .chat-area .msg-head .dropdown-menu.show{

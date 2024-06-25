@@ -343,10 +343,12 @@
 .features-wrapper .owl-carousel .owl-dots{
     width: 50%;
     position: absolute;
-    bottom: 115px;
-    left: 70px;
+    bottom: 160px;
+    left: 50px;
     max-width: 520px;
     min-width: 300px;
+    display: flex;
+    justify-content: center;
 }
 
 /* .features-wrapper .owl-carousel.owl-drag .owl-item{
@@ -495,6 +497,12 @@
 
 
 /* ============ responsive ============ */
+@media only screen and (max-width:1399px){
+    .features-wrapper .owl-carousel .owl-dots{
+        max-width: 470px;
+    }
+}
+
 @media only screen and (max-width:1199px){
     .banner-content h1{
         font-size: 55px;
@@ -525,12 +533,12 @@
         padding: 0 50px 0 40px;
     }
 
-    .features-wrapper .owl-carousel .owl-dots{
-        left: 40px;
-    }
-
     .feature-content h2{
         font-size: 40px !important;
+    }
+
+    .features-wrapper .owl-carousel .owl-dots{
+        max-width: 385px;
     }
 
 }
@@ -569,7 +577,7 @@
     }
 
     .feature-content{
-        padding: 30px 50px 30px 40px;
+        padding: 32px 50px 30px 40px;
         align-items: center !important;
     }
 
@@ -588,6 +596,8 @@
         max-width: 100%;
         width: 100%;
         margin: 30px 0;
+        left: 50%;
+        transform: translateX(-50%);
     }
 
     .collection-card h4{
@@ -665,10 +675,6 @@
         line-height: 32px !important;
     }
 
-    .features-wrapper .owl-carousel .owl-dots {
-        left: 5px;
-    }
-
     .collection-card h4{
         font-size: 16px;
         line-height: 24px;
@@ -676,6 +682,10 @@
 
     .collection-card .card-img{
         margin-bottom: 15px;
+    }
+
+    .features-wrapper .owl-carousel .owl-dots{
+        display: flex;
     }
 }
 
@@ -724,6 +734,10 @@
         text-align: center;
     }
 
+    .features-wrapper .owl-carousel .owl-dot{
+        width: 25px;
+    }
+
     .feature-content{
         padding: 30px 14px 50px 14px;
     }
@@ -733,4 +747,11 @@
        height: auto;   
     }
 
+}
+
+
+@media only screen and (max-width: 380px) {
+    .features-wrapper .owl-carousel .owl-dots {
+        top: 220px;
+    }
 }
