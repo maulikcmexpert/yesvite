@@ -393,7 +393,7 @@ ul.chat-list li:last-child{
 }
 
 
-.msg-body ul li.receiver p .grey-tick{
+.msg-body ul li.receiver p .seenStatus{
     position: absolute;
     right: 8px;
     bottom: 6px;
@@ -439,6 +439,7 @@ ul.chat-list li:last-child{
     -o-border-radius: 0px 20px 20px 20px;
     margin-bottom: 5px !important;
     position: relative;
+    font-size: 12px;
 }
 
 .msg-body ul li.sender p  .reaction{
@@ -460,21 +461,9 @@ ul.chat-list li:last-child{
     justify-content: center;
 }
 
-.msg-body ul li.receiver div{
-    background-color: #FFE4E9;
-    padding: 10px;
-    border-radius: 20px 0px 20px 20px;
-    -webkit-border-radius: 20px 0px 20px 20px;
-    -moz-border-radius: 20px 0px 20px 20px;
-    -ms-border-radius: 20px 0px 20px 20px;
-    -o-border-radius: 20px 0px 20px 20px;
-    display: inline-block;
-    max-width: 317px;
-    margin-left: auto;
-}
 
 .msg-body ul li.sender p .senderName{
-    font-size: 12px;
+    font-size: 11px;
     color: red;
 }
 
@@ -486,7 +475,7 @@ ul.chat-list li:last-child{
     border-radius: 10px;
 }
 
-.msg-body ul li.receiver div{
+.msg-body ul li.receiver div.media-msg{
     background-color: #FFE4E9;
     padding: 10px;
     border-radius: 20px 0px 20px 20px;
@@ -506,7 +495,7 @@ ul.chat-list li:last-child{
     color: var(--secondryColor);
 }
 
-.msg-body ul li.sender div{
+.msg-body ul li.sender div.media-msg{
     background-color: #F8F9FD;
     padding: 10px;
     border-radius: 20px 0px 20px 20px;
@@ -808,8 +797,7 @@ ul.chat-list li:last-child{
 
   .reaction-icon, .reply-icon {
     cursor: pointer;
-    margin-left: 5px;
-    border: 1px solid grey;
+    margin-left: 7px;
     padding: 2px;
     border-radius: 50%;
 }
@@ -826,6 +814,11 @@ ul.chat-list li:last-child{
 
 .reaction-option {
     cursor: pointer;
+}
+
+.msg-lists .simple-message{
+    display: flex;
+    align-items: center;
 }
 
 
