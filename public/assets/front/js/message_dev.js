@@ -845,20 +845,16 @@ $("#new_message").on("keypress", async function (e) {
     }
 });
 
-
-
 ////**************************************************This Code is for image ,video,audio ....************************************
 $(".preview_img").hide();
-$("#send_image").hide();
-$(".preview_file").hide();
-$("#preview_file").hide();
 
 $(".upload-box").change(function () {
     var curElement = $(".preview_img");
     var file = this.files[0];
     var name = file.name;
+    $(".dropdown-menu").removeClass("show");
+
     var preview = document.getElementById("preview");
-    // $(".preview-item").show();
 
     displayFiles(this.files, name);
 
@@ -871,8 +867,6 @@ $(".upload-box").change(function () {
 
         if (file.type.match("image.*")) {
             reader.onload = function (e) {
-                // $(".preview_img").show();
-                $(".preview_file").hide();
                 $("#preview_file").hide();
 
                 curElement.attr("src", e.target.result);
@@ -886,9 +880,7 @@ $(".upload-box").change(function () {
 
             curElement.attr("src", URL.createObjectURL(file));
 
-            // $(".preview_video").show();
             $(".preview_img").hide();
-            $(".preview_file").hide();
             $("#preview_file").hide();
 
             $("#send_image").show();
@@ -898,9 +890,7 @@ $(".upload-box").change(function () {
 
             curElement.attr("src", URL.createObjectURL(file));
 
-            // $(".preview_video").show();
             $(".preview_img").hide();
-            $(".preview_file").hide();
             $("#preview_file").hide();
 
             $("#send_image").show();
@@ -911,15 +901,17 @@ $(".upload-box").change(function () {
                 curElement.attr("src", e.target.result);
             };
             reader.readAsDataURL(file);
+
             $(".file_info").val(fileExtension);
             $("#file_name").text(file.name);
+
             $("#send_image").show();
+
             $("#preview_file").show();
 
-            $(".preview_file").show();
             $(".preview_img").hide();
         }
-        reader.readAsArrayBuffer(file);
+        // reader.readAsArrayBuffer(file);
     } else {
         $(".preview_img").hide();
         curElement.attr("src", "");
@@ -980,15 +972,27 @@ function displayFiles(files, name) {
 $(document).on("click", ".close-button", function () {
     $(".preview-item").hide();
     $(".preview-item").html("");
+    $(".preview_img").attr("src", "");
+    $(".upload-box").val("");
     $("#send_image").hide();
 });
 
+$(document).on("keypress", function (event) {
+    if (event.which === 13) {
+        $("#send_image").click();
+    }
+});
+
 $("#send_image").on("click", async function () {
+    $(".preview-item").html("");
+
     $(".preview_img").hide();
     $("#send_image").hide();
     $(".preview_video").hide();
-    $(".preview_file").hide();
-    $("#file_name").hide();
+    // $(".preview_file").hide();
+    $("#preview_file").hide();
+
+    // $("#file_name").hide();
 
     $(".preview-item").hide();
 
@@ -1100,16 +1104,21 @@ $("#send_image").on("click", async function () {
 
         // If everything is successful, log success
         console.log("Upload successful");
+        $(".preview_img").attr("src", "");
+        $(".upload-box").val("");
     } catch (error) {
         console.error("Error uploading file: ", error);
     }
 });
+
+$(".file_close").on("click", function () {
+    $("#preview_file").hide();
+    $("#send_image").hide();
+
+    $(".preview_img").attr("src", "");
+    $(".upload-box").val("");
+});
 ////**************************************************This Code is for image,video,audio....************************************ END
-
-
-
-
-
 
 //*******************************This Code is for audio record....**************************************
 $("#send_audio").hide();
@@ -1122,9 +1131,6 @@ const playButton = document.getElementById("playRecording");
 const stopPlaybackButton = document.getElementById("stopPlayback");
 const audioElement = document.getElementById("recordedAudio");
 const close = document.getElementsByClassName("close-btn");
-
-
-
 
 function startRecording() {
     navigator.mediaDevices
@@ -1164,7 +1170,6 @@ async function stopRecording() {
 
         startButton.style.display = "inline-block";
         stopButton.style.display = "none";
-        
 
         // Wait for the MediaRecorder to finish saving data
         await new Promise((resolve) => {
@@ -1179,6 +1184,8 @@ async function stopRecording() {
 }
 
 function playRecording() {
+    $(".close-btn").show();
+
     const blob = new Blob(recordedChunks, { type: "audio/wav" });
     const audioURL = URL.createObjectURL(blob);
 
@@ -1206,6 +1213,13 @@ startButton.addEventListener("click", startRecording);
 stopButton.addEventListener("click", stopRecording);
 playButton.addEventListener("click", playRecording);
 stopPlaybackButton.addEventListener("click", stopPlayback);
+
+$(".close-btn").on("click", function () {
+    $("#audioContainer").hide();
+    $("#send_audio").hide();
+    $(".preview_img").attr("src", "");
+    $(".upload-box").val("");
+});
 
 $("#send_audio").on("click", async function () {
     $(".recordedAudio").hide();

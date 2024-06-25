@@ -1,11 +1,7 @@
 @php
 use Carbon\Carbon;
 @endphp
-
-
-
 <!-- all css new for chat upload -->
-
 <style>
     .preview-item {
         width: 7cm;
@@ -14,7 +10,6 @@ use Carbon\Carbon;
     /* .file-name {
         max-width: 100px;
     } */
-
     #preview_img {
         width: 10px;
         height: 10px;
@@ -29,6 +24,7 @@ use Carbon\Carbon;
         height: 150px;
         object-fit: cover;
         border-radius: 8px;
+        display: none;
     }
 
     #preview {
@@ -47,26 +43,20 @@ use Carbon\Carbon;
 
     .send {
         width: 27px;
+        /* display: none; */
     }
 
     .preview-item video {
         width: 300px;
-
         height: 200px;
-
         object-fit: cover;
-
         border-radius: 8px;
-
     }
 
     .preview-item img {
         width: 300px;
-
         object-fit: cover;
-
         border-radius: 10px;
-
     }
 
     .close-button {
@@ -85,18 +75,45 @@ use Carbon\Carbon;
         padding: 0;
     }
 
+    .file_close {
+        position: absolute;
+        left: 100px;
+        background-color: grey;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 16px;
+        line-height: 16px;
+        width: 24px;
+        height: 24px;
+        text-align: center;
+        padding: 0;
+    }
+
     .audio-container {
         display: flex;
         align-items: center;
     }
 
     .close-btn {
-        margin-left: 10px;
-        padding: 5px 10px;
-        background-color: red;
-        color: white;
+        position: absolute;
+        left: 299px;
+        top: 23px;
+        background-color: grey;
         border: none;
+        border-radius: 50%;
         cursor: pointer;
+        font-size: 16px;
+        line-height: 16px;
+        width: 24px;
+        height: 24px;
+        text-align: center;
+        padding: 0;
+        display: none;
+    }
+
+    #send_image,
+    #send_audio {
         display: none;
     }
 </style>
@@ -405,7 +422,7 @@ use Carbon\Carbon;
 
                             <div class="audio-container" id="audioContainer">
                                 <audio id="recordedAudio" class="recordedAudio" controls style="display: none;"></audio>
-                                <button class="close-btn">Close</button>
+                                <button class="close-btn">X</button>
                             </div>
 
                             <!-- ****************************This is for audio *********************END-->
@@ -416,6 +433,7 @@ use Carbon\Carbon;
                         <label id="upload_name"></label>
                         <img src="" id="preview_img" class="preview_img">
                         <div id="preview_file">
+                            <button class="file_close">X</button>
                             <img src="{{asset('storage/file.png')}}" class="preview_file">
                             <span id="file_name"></span>
                         </div>
