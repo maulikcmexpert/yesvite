@@ -31,6 +31,6 @@ class EventPostImage extends Model
 
     public function user_report_to_post()
     {
-        return $this->belongsTo(UserReportToPost::class);
+        return $this->hasOne(UserReportToPost::class);
     }
 }
