@@ -9131,6 +9131,86 @@ class ApiControllerv2 extends Controller
         // }
     }
 
+    public function postMediaReport(Request $request)
+    {
+        $user  = Auth::guard('api')->user();
+
+        $rawData = $request->getContent();
+
+        $input = json_decode($rawData, true);
+
+        if ($input == null) {
+            return response()->json(['status' => 0, 'message' => "Json invalid"]);
+        }
+
+
+        $validator = Validator::make($input, [
+
+            'event_id' => ['required', 'exists:events,id'],
+
+            'event_post_id' => ['required'],
+
+            'post_control' => ['required', 'in:hide_post,unhide_post,mute,unmute,report'],
+
+        ]);
+
+
+
+        if ($validator->fails()) {
+
+            return response()->json([
+                'status' => 0,
+                'message' => $validator->errors()->first(),
+
+            ]);
+        }
+
+        try {
+
+            DB::beginTransaction();
+
+            $checkIsPostControl = PostControl::where(['event_id' => $input['event_id'], 'user_id' => $user->id, 'event_post_id' => $input['event_post_id']])->first();
+            if ($checkIsPostControl == null) {
+                $setPostControl = new PostControl;
+
+                $setPostControl->event_id = $input['event_id'];
+                $setPostControl->user_id = $user->id;
+                $setPostControl->event_post_id = $input['event_post_id'];
+                $setPostControl->post_control = $input['post_control'];
+                $setPostControl->save();
+            } else {
+                $checkIsPostControl->post_control = $input['post_control'];
+                $checkIsPostControl->save();
+            }
+            DB::commit();
+            $message = "";
+            if ($input['post_control'] == 'hide_post') {
+                $message = "Post is hide from your wall";
+            } else if ($input['post_control'] == 'unhide_post') {
+                $message = "Post is unhide";
+            } else if ($input['post_control'] == 'mute') {
+                $message = "Mute every post from this user will post";
+            } else if ($input['post_control'] == 'unmute') {
+                $message = "Unmuted every post from this user will post";
+            } else if ($input['post_control'] == 'report') {
+                $reportCreate = new UserReportToPost;
+                $reportCreate->event_id = $input['event_id'];
+                $reportCreate->user_id =  $user->id;
+                $reportCreate->event_post_id = $input['event_post_id'];
+                $reportCreate->save();
+                $message = "Reported to admin for this post";
+            }
+            return response()->json(['status' => 1, 'type' => $input['post_control'], 'message' => $message]);
+        } catch (QueryException $e) {
+
+            DB::rollBack();
+
+            return response()->json(['status' => 0, 'message' => "db error"]);
+        } catch (\Exception $e) {
+
+            return response()->json(['status' => 0, 'message' => "something went wrong"]);
+        }
+    }
     public function deletePost(Request $request)
     {
         $user  = Auth::guard('api')->user();
