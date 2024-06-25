@@ -768,7 +768,7 @@ function createMessageElement(key, messageData, isGroup) {
             : "";
     let seenStatus = "";
     let reaction = "";
-    let image = "";
+    let dataWithMedia = "";
     if (isGroup == "true" || isGroup == true) {
         if (
             messageData.userAvailable != undefined &&
@@ -808,10 +808,12 @@ function createMessageElement(key, messageData, isGroup) {
                   )
                 : "";
     }
-    image =
+    dataWithMedia =
         messageData?.type == "1"
-            ? `<div class="media-msg"><img src="${messageData?.url}"/></div>`
-            : "";
+            ? `<div class="media-msg"><img src="${messageData?.url}"/><span>${
+                  messageData?.data != "" ? messageData.data : ""
+              }</span></div>`
+            : `<p>${messageData?.data != "" ? messageData.data : ""}</p>`;
 
     const replySection =
         messageData.replyData && messageData.replyData.replyTimeStamp != 0
@@ -833,8 +835,9 @@ function createMessageElement(key, messageData, isGroup) {
     return `
         <li class="${isSender ? "receiver" : "sender"}" id="message-${key}">
          ${replySection}
-                ${image}
-            <p>${messageData?.data != "" ? messageData.data : ""}</p>
+            
+            ${dataWithMedia}
+         
             <span class="time">${timeago.format(
                 new Date(messageData.timeStamp)
             )}</span>
@@ -1402,7 +1405,6 @@ async function addListInMembers(SelecteGroupUser) {
 }
 
 $(".preview_img").hide();
-$("#send_image").hide();
 $(".upload-box").change(function () {
     var curElement = $(".preview_img");
     var file = this.files[0];
@@ -1423,164 +1425,11 @@ $(".upload-box").change(function () {
         } else {
             $(".preview_img").show();
             curElement.attr("src", base_url + "storage/file.png");
-            // $("#upload_name").text(file.name);
-            $("#send_image").show();
         }
     } else {
         $(".preview_img").hide();
         curElement.attr("src", "");
     }
-});
-
-$("#send_image").on("click", async function () {
-    $("#send_image").hide();
-    $(".preview_img").hide();
-
-    const previewImg = $(".preview_img");
-    const imageUrl = previewImg.attr("src");
-
-    if (!imageUrl) {
-        alert("Please select an image to send.");
-        return;
-    }
-
-    var isGroup = $("#isGroup").val();
-    const message = $(this).val();
-
-    // Determine file type and set the storage path
-    let storagePath;
-    if (imageUrl.startsWith("data:image/")) {
-        storagePath = `Images/${senderUser}/${Date.now()}_${senderUser}.png`;
-    } else {
-        storagePath = `Files/${senderUser}/${Date.now()}_${senderUser}`;
-    }
-
-    // Upload file to Firebase Storage
-    const fileRef = storageRef(storage, storagePath);
-    try {
-        if (imageUrl.startsWith("data:image/")) {
-            await uploadString(fileRef, imageUrl, "data_url");
-        } else {
-            const response = await fetch(imageUrl);
-            const blob = await response.blob();
-            await uploadBytes(fileRef, blob);
-        }
-        const downloadURL = await getDownloadURL(fileRef);
-
-        const messageData = {
-            data: downloadURL,
-            url: downloadURL,
-            timeStamp: Date.now(),
-            isDelete: {},
-            isReply: "0",
-            isSeen: false,
-            react: "",
-            senderId: senderUser,
-            senderName: senderUserName,
-            status: {},
-            // imageUrl: downloadURL, // Use the download URL from Firebase Storage
-        };
-
-        if (isGroup == "1") {
-            const conversationId = $(".selected_id").val();
-            const groupName = $(".selected_name").val();
-
-            // Fetch group members from Firebase
-            const groupMembersRef = ref(
-                database,
-                `Groups/${conversationId}/users`
-            );
-            const groupMembersSnapshot = await get(groupMembersRef);
-            const newGroupMembers = groupMembersSnapshot.val();
-            console.log({ newGroupMembers });
-            await addMessageToGroup(conversationId, messageData);
-
-            // Update all group members' overview
-            for (const userId of newGroupMembers) {
-                await updateOverview(userId, conversationId, {
-                    lastMessage: `${senderUserName}: ${downloadURL}`,
-                    unReadCount: userId === senderUser ? 0 : 1,
-                    timeStamp: Date.now(),
-                });
-            }
-        } else {
-            const selectedMessageId = $(".selected_id").val();
-            const receiverId = $(".selected_message").val();
-            const receiverName = $(".selected_name").val();
-
-            messageData.receiverId = receiverId;
-            messageData.receiverName = receiverName;
-
-            await addMessage(selectedMessageId, messageData, receiverId);
-
-            await updateOverview(senderUser, selectedMessageId, {
-                lastMessage: `${senderUserName}: ${downloadURL}`,
-                timeStamp: Date.now(),
-            });
-            const receiverSnapshot = await get(
-                ref(database, `overview/${receiverId}/${selectedMessageId}`)
-            );
-            await updateOverview(receiverId, selectedMessageId, {
-                lastMessage: `${senderUserName}: ${downloadURL}`,
-                unReadCount: (receiverSnapshot.val().unReadCount || 0) + 1,
-                timeStamp: Date.now(),
-            });
-
-            const conversationElement = $(`.conversation-${selectedMessageId}`);
-            conversationElement.prependTo(".chat-list");
-        }
-    } catch (error) {
-        console.error("Error uploading image: ", error);
-        alert("Failed to upload image. Please try again.");
-    }
-});
-
-$("#choose-file").on("change", async function () {
-    var file = this.files[0];
-    var reader = new FileReader();
-    reader.onload = function (e) {
-        $("#profileIm").replaceWith(
-            `<img id="profileIm" src="${e.target.result}" alt="user-img">`
-        );
-    };
-    reader.readAsDataURL(this.files[0]);
-    setTimeout(async () => {
-        if (file) {
-            const fileRef = storageRef(
-                storage,
-                `/GroupProfile/${senderUser}/${Date.now()}_${file.name}`
-            );
-            const previewImg = $("#profileIm");
-            console.log({ previewImg });
-            const imageUrl = previewImg.attr("src");
-            console.log({ imageUrl });
-
-            if (imageUrl.startsWith("data:image/")) {
-                await uploadString(fileRef, imageUrl, "data_url");
-            } else {
-                const response = await fetch(imageUrl);
-                const blob = await response.blob();
-                await uploadBytes(fileRef, blob);
-            }
-            const downloadURL = await getDownloadURL(fileRef);
-
-            var conversationId = $(".conversationId").attr("conversationid"); // Replace with actual conversation ID
-            var groupInfoRef = ref(
-                database,
-                `/Groups/${conversationId}/groupInfo/`
-            );
-            $("#selected-user-profile").attr("src", downloadURL);
-            await update(groupInfoRef, { groupProfile: downloadURL });
-            SelecteGroupUser.map((user) => {
-                var groupUserInfoRef = ref(
-                    database,
-                    `/overview/${user.id}/${conversationId}/`
-                );
-
-                update(groupUserInfoRef, { receiverProfile: downloadURL });
-            });
-        }
-    }, 500);
 });
 
 $(".delete-conversation").click(async function () {
@@ -1984,3 +1833,118 @@ function generateReactionsAndReply() {
 }
 
 generateReactionsAndReply();
+
+$("#choose-file").on("change", async function () {
+    var file = this.files[0];
+    var reader = new FileReader();
+    reader.onload = function (e) {
+        $("#profileIm").replaceWith(
+            `<img id="profileIm" src="${e.target.result}" alt="user-img">`
+        );
+    };
+    reader.readAsDataURL(this.files[0]);
+    setTimeout(async () => {
+        if (file) {
+            const fileRef = storageRef(
+                storage,
+                `/GroupProfile/${senderUser}/${Date.now()}_${file.name}`
+            );
+            const previewImg = $("#profileIm");
+            console.log({ previewImg });
+            const imageUrl = previewImg.attr("src");
+            console.log({ imageUrl });
+
+            if (imageUrl.startsWith("data:image/")) {
+                await uploadString(fileRef, imageUrl, "data_url");
+            } else {
+                const response = await fetch(imageUrl);
+                const blob = await response.blob();
+                await uploadBytes(fileRef, blob);
+            }
+            const downloadURL = await getDownloadURL(fileRef);
+
+            var conversationId = $(".conversationId").attr("conversationid"); // Replace with actual conversation ID
+            var groupInfoRef = ref(
+                database,
+                `/Groups/${conversationId}/groupInfo/`
+            );
+            $("#selected-user-profile").attr("src", downloadURL);
+            await update(groupInfoRef, { groupProfile: downloadURL });
+            SelecteGroupUser.map((user) => {
+                var groupUserInfoRef = ref(
+                    database,
+                    `/overview/${user.id}/${conversationId}/`
+                );
+
+                update(groupUserInfoRef, { receiverProfile: downloadURL });
+            });
+        }
+    }, 500);
+});
+
+let mediaRecorder;
+let recordedChunks = [];
+
+const startButton = document.getElementById("startRecording");
+const stopButton = document.getElementById("stopRecording");
+const playButton = document.getElementById("playRecording");
+const stopPlaybackButton = document.getElementById("stopPlayback");
+const audioElement = document.getElementById("recordedAudio");
+const close = document.getElementsByClassName("close-audio-btn");
+
+function startRecording() {
+    recordedChunks = [];
+
+    navigator.mediaDevices
+        .getUserMedia({ audio: true })
+        .then((stream) => {
+            mediaRecorder = new MediaRecorder(stream);
+
+            mediaRecorder.start();
+            startButton.style.display = "none";
+            stopButton.style.display = "inline-block";
+            playButton.style.display = "none";
+            stopPlaybackButton.style.display = "none";
+            // close.style.display = "none";
+
+            mediaRecorder.ondataavailable = (event) => {
+                recordedChunks.push(event.data);
+            };
+        })
+        .catch((err) => {
+            console.error("Error accessing microphone: ", err);
+            alert("Failed to access microphone. Please try again.");
+        });
+}
+
+function playRecording() {
+    $(".close-audio-btn").show();
+
+    const blob = new Blob(recordedChunks, { type: "audio/wav" });
+    const audioURL = URL.createObjectURL(blob);
+
+    audioElement.src = audioURL;
+    audioElement.style.display = "block";
+
+    playButton.style.display = "none";
+    // stopPlaybackButton.style.display = "inline-block";
+
+    audioElement.play().catch((err) => {
+        console.error("Error playing audio: ", err);
+        alert("Failed to play recorded audio.");
+    });
+}
+
+startButton.addEventListener("click", startRecording);
+stopButton.addEventListener("click", stopRecording);
+playButton.addEventListener("click", playRecording);
+stopPlaybackButton.addEventListener("click", stopPlayback);
+
+$(".close-audio-btn").on("click", function () {
+    $("#audioContainer").hide();
+    $("#send_audio").hide();
+    $(".preview_img").attr("src", "");
+    $(".recordedAudio").attr("src", "");
+
+    $(".upload-box").val("");
+});
