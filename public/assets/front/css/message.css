@@ -167,6 +167,7 @@ ul.chat-list{
     padding: 10px 20px;
     max-height: 590px;
     overflow-y: scroll;
+    height: 100%;
 }
 
 ul.chat-list li{
@@ -180,7 +181,9 @@ ul.chat-list li{
     -o-border-radius: 16px;
 }
 
-ul.chat-list li.active{
+ul.chat-list li.active,
+ul.chat-list li:hover
+{
     background-color: #F8F9FD !important;
 }
 
