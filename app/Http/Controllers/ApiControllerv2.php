@@ -106,7 +106,7 @@ use Illuminate\Database\Query\Builder;
 use App\Jobs\SendInvitationMailJob as sendInvitation;
 use Illuminate\Support\Facades\Session;
 use stdClass;
-use App\Services\GooglePlayService as googleService;
+use App\Services\GooglePlayService;
 
 class ApiControllerv2 extends Controller
 
@@ -119,9 +119,10 @@ class ApiControllerv2 extends Controller
     protected $pendingRsvpCount;
     protected $hostingCount;
     protected $invitedToCount;
+    protected $googlePlayService;
 
 
-    public function __construct()
+    public function __construct(GooglePlayService $GooglePlayService)
     {
 
         $this->user = Auth::guard('api')->user();
@@ -134,6 +135,8 @@ class ApiControllerv2 extends Controller
             $this->hostingCount = hostingCount($this->user->id);
             $this->invitedToCount = invitedToCount($this->user->id);
         }
+
+        $this->googlePlayService = $GooglePlayService;
     }
 
 
@@ -12350,7 +12353,7 @@ class ApiControllerv2 extends Controller
         $purchaseToken = $input['purchaseToken'];
 
 
-        $subscription = googleService->verifySubscription($packageName, $productId, $purchaseToken);
+        $subscription = $this->googlePlayService->verifySubscription($packageName, $productId, $purchaseToken);
 
         if ($subscription) {
 
