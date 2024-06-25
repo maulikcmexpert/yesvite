@@ -12354,7 +12354,7 @@ class ApiControllerv2 extends Controller
 
 
         $subscription = $this->googlePlayService->verifySubscription($packageName, $productId, $purchaseToken);
-
+        dd($subscription);
         if ($subscription) {
 
             dd($subscription);
