@@ -8283,6 +8283,7 @@ class ApiControllerv2 extends Controller
                 $postImages = getPostImages($eventDetails->id);
                 foreach ($postImages as $imgVal) {
 
+                    $postMedia['id'] =  $imgVal->id;
                     $postMedia['media_url'] = asset('public/storage/post_image/' . $imgVal->post_image);
 
                     $postMedia['type'] = $imgVal->type;
