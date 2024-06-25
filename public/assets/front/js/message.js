@@ -125,6 +125,7 @@ const senderUserName = $(".senderUserName").val();
 const base_url = $("#base_url").val();
 const userRef = ref(database, `users/${senderUser}`);
 let replyMessageId = null; // Global variable to hold the message ID to reply to
+let fileType = null; // Global variable to hold the message ID to reply to
 // Function to get messages between two users
 async function getMessages(userId1, userId2) {
     const messagesRef = ref(database, "Messages");
@@ -309,11 +310,12 @@ async function handleNewConversation(snapshot) {
     // $("#isGroup").val(newConversation.group);
     // console.log(newConversation.group);
     if (selectedConversationId === newConversation.conversationId) {
-        updateOverview(senderUser, newConversation.conversationId, {
+        await updateOverview(senderUser, newConversation.conversationId, {
             unRead: false,
             unReadCount: 0,
         });
     }
+    console.log("conver length", conversationElement.length);
 }
 
 function removeSelectedMsg() {
@@ -495,6 +497,10 @@ async function updateMore(conversationId) {
     );
     const overviewData = overviewSnapshot.val();
     if (overviewData) {
+        $(".pin-conversation").data("changeWith", "1");
+        $(".mute-conversation").data("changeWith", "1");
+        $(".archive-conversation").data("changeWith", "1");
+
         if (overviewData.isPin != undefined) {
             $(".pin-conversation")
                 .find("span")
@@ -502,6 +508,24 @@ async function updateMore(conversationId) {
             $(".pin-conversation").data(
                 "changeWith",
                 overviewData.isPin == "1" ? "0" : "1"
+            );
+        }
+        if (overviewData.isMute != undefined) {
+            $(".mute-conversation")
+                .find("span")
+                .text(overviewData.isMute == "1" ? "Unmute" : "Mute");
+            $(".mute-conversation").data(
+                "changeWith",
+                overviewData.isMute == "1" ? "0" : "1"
+            );
+        }
+        if (overviewData.isArchive != undefined) {
+            $(".archive-conversation")
+                .find("span")
+                .text(overviewData.isArchive == "1" ? "Unarchive" : "Archive");
+            $(".archive-conversation").data(
+                "changeWith",
+                overviewData.isArchive == "1" ? "0" : "1"
             );
         }
     }
@@ -512,14 +536,50 @@ $(".pin-conversation").click(function () {
     let conversationId = $(".conversationId").attr("conversationId");
     const overviewRef = ref(
         database,
-        `overview/${senderUser}/${conversationId}`
+        `overview/${senderUser}/${conversationId}/isPin`
     );
-    update(overviewRef, { isPin: pinChange });
+    set(overviewRef, pinChange);
     $(this)
         .find("span")
         .text(pinChange == "1" ? "Unpin" : "Pin");
     $(this).data("changeWith", pinChange == "1" ? "0" : "1");
     if (pinChange == "1") {
+        const conversationElement = $(`.conversation-${conversationId}`);
+        conversationElement.prependTo(".chat-list");
+    }
+});
+
+$(".mute-conversation").click(function () {
+    const change = $(this).data("changeWith");
+    let conversationId = $(".conversationId").attr("conversationId");
+    const overviewRef = ref(
+        database,
+        `overview/${senderUser}/${conversationId}/isMute`
+    );
+    set(overviewRef, change);
+    $(this)
+        .find("span")
+        .text(change == "1" ? "Unmute" : "Mute");
+    $(this).data("changeWith", change == "1" ? "0" : "1");
+    if (change == "1") {
+        const conversationElement = $(`.conversation-${conversationId}`);
+        conversationElement.prependTo(".chat-list");
+    }
+});
+
+$(".archive-conversation").click(function () {
+    const change = $(this).data("changeWith");
+    let conversationId = $(".conversationId").attr("conversationId");
+    const overviewRef = ref(
+        database,
+        `overview/${senderUser}/${conversationId}/isArchive`
+    );
+    set(overviewRef, change);
+    $(this)
+        .find("span")
+        .text(change == "1" ? "Unarchive" : "Archive");
+    $(this).data("changeWith", change == "1" ? "0" : "1");
+    if (change == "1") {
         const conversationElement = $(`.conversation-${conversationId}`);
         conversationElement.prependTo(".chat-list");
     }
@@ -566,18 +626,21 @@ $(".send-message").on("keypress", async function (e) {
         const audioUrl = previewAudio.attr("src");
 
         const audio = $("#file_name").text();
-
         if (imageUrl) {
             // Determine file type and set the storage path
             let storagePath;
             if (imageUrl.startsWith("data:image/")) {
                 storagePath = `Images/${senderUser}/${Date.now()}_${senderUser}-img.png`;
+                type = "1";
             } else if (imageUrl.startsWith("blob:http:/") && audio != "audio") {
                 storagePath = `Video/${senderUser}/${Date.now()}_${senderUser}-video.mp4`;
+                type = "2";
             } else if (imageUrl.startsWith("blob:http:/") && audio == "audio") {
                 storagePath = `Audios/${senderUser}/${Date.now()}_${senderUser}-audio.wav`;
+                type = "3";
             } else {
                 storagePath = `Files/${senderUser}/${Date.now()}_${senderUser}-file.${fileType}`;
+                type = "4";
             }
             // Upload file to Firebase Storage
             const fileRef = storageRef(storage, storagePath);
@@ -590,7 +653,6 @@ $(".send-message").on("keypress", async function (e) {
                     await uploadBytes(fileRef, blob);
                 }
                 downloadURL = await getDownloadURL(fileRef);
-                type = "1";
             } catch (e) {}
         } else if (audioUrl) {
             $("#playRecording").hide();
@@ -876,11 +938,23 @@ function createMessageElement(key, messageData, isGroup) {
                   )
                 : "";
     }
+
+    let emojiAndReplay = isReceiver
+        ? `
+      <span class="reaction-icon" data-message-id="${key}"><svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M7.5 8H7.51M13.5 8H13.51M8 13C8.32588 13.3326 8.71485 13.5968 9.14413 13.7772C9.57341 13.9576 10.0344 14.0505 10.5 14.0505C10.9656 14.0505 11.4266 13.9576 11.8559 13.7772C12.2852 13.5968 12.6741 13.3326 13 13M19.5 10C19.5 14.9706 15.4706 19 10.5 19C5.52944 19 1.5 14.9706 1.5 10C1.5 5.02944 5.52944 1 10.5 1C15.4706 1 19.5 5.02944 19.5 10Z" stroke="#CBD5E1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg></span>
+      <span class="reply-icon" data-message-id="${key}"><svg width="15" height="12" viewBox="0 0 15 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M5.89687 3.31028V0.238281L0.296875 5.61428L5.89687 10.9903V7.84148C9.89687 7.84148 12.6969 9.07028 14.6969 11.7583C13.8969 7.91828 11.4969 4.07828 5.89687 3.31028Z" fill="#CBD5E1"/>
+</svg></span>`
+        : "";
     dataWithMedia =
         messageData?.type == "1"
             ? `<div class="media-msg">
                 <img src="${messageData?.url}"/>
-                <span>${messageData?.data != "" ? messageData.data : ""}</span>
+                <span class="media-text">${
+                    messageData?.data != "" ? messageData.data : ""
+                }</span>
                  ${
                      isSender
                          ? `<span class="seenStatus ${seenStatus}"></span>`
@@ -910,43 +984,43 @@ function createMessageElement(key, messageData, isGroup) {
                             : ""
                     }
                 </p>
-                ${
-                    isReceiver
-                        ? `
-                          <span class="reaction-icon" data-message-id="${key}"><svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M7.5 8H7.51M13.5 8H13.51M8 13C8.32588 13.3326 8.71485 13.5968 9.14413 13.7772C9.57341 13.9576 10.0344 14.0505 10.5 14.0505C10.9656 14.0505 11.4266 13.9576 11.8559 13.7772C12.2852 13.5968 12.6741 13.3326 13 13M19.5 10C19.5 14.9706 15.4706 19 10.5 19C5.52944 19 1.5 14.9706 1.5 10C1.5 5.02944 5.52944 1 10.5 1C15.4706 1 19.5 5.02944 19.5 10Z" stroke="#CBD5E1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-</svg></span>
-                          <span class="reply-icon" data-message-id="${key}"><svg width="15" height="12" viewBox="0 0 15 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M5.89687 3.31028V0.238281L0.296875 5.61428L5.89687 10.9903V7.84148C9.89687 7.84148 12.6969 9.07028 14.6969 11.7583C13.8969 7.91828 11.4969 4.07828 5.89687 3.31028Z" fill="#CBD5E1"/>
-</svg></span>`
-                        : ""
-                }
+                ${emojiAndReplay}
               </div>
               `;
 
     const replySection =
         messageData.replyData && messageData.replyData.replyTimeStamp != 0
             ? `
-        
         <div class="reply-section">
-            <strong>${messageData.replyData.replyMessage}</strong>
-            <div class="reply-info">
-                <span class="reply-username">${
-                    messageData.replyData.replyUserName
-                }</span>
-                <span class="reply-timestamp">${timeago.format(
-                    new Date(messageData.replyData.replyTimeStamp)
-                )}</span>
+            <div>
+                <span class="senderName">${senderName}</span>            
+                <span> <strong>${
+                    messageData.replyData.replyMessage
+                }</strong></span>
+                <div class="reply-info">
+                    <span class="reply-username">${
+                        messageData.replyData.replyUserName
+                    }</span>
+                    <span class="reply-timestamp">${timeago.format(
+                        new Date(messageData.replyData.replyTimeStamp)
+                    )}</span>
+                </div>
             </div>
-            <hr>
+            <div class="reply-massage"> 
+                    <span> ${
+                        messageData?.data != "" ? messageData.data : ""
+                    }</span>
+            </div>
+             ${emojiAndReplay}
         </div>`
             : "";
+
     return `
         <li class="${isSender ? "receiver" : "sender"}" id="message-${key}">
-         ${replySection}
-            
-            ${dataWithMedia}
-         
+
+           
+            ${replySection != "" ? replySection : dataWithMedia}
+
             <span class="time">${timeago.format(
                 new Date(messageData.timeStamp)
             )}</span>
@@ -1444,7 +1518,7 @@ $("#new_message").on("keypress", async function (e) {
             await addMessage(selectedMessageId, messageData, contactId);
             $("#msgBox").modal("hide");
 
-            updateOverview(currentUserId, selectedMessageId, {
+            await updateOverview(currentUserId, selectedMessageId, {
                 lastMessage: `${senderUserName}: ${message}`,
                 timeStamp: Date.now(),
             });
