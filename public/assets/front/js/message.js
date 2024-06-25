@@ -457,12 +457,6 @@ async function updateChatfromGroup(conversationId) {
 $(".conversationId").click(function () {
     let conversationId = $(this).attr("conversationId");
     $(".change-group-name").addClass("d-none");
-    const isGroup = $("#isGroup").val();
-    if (isGroup == true || isGroup == "true") {
-        $(".new-member").removeClass("d-none");
-    } else {
-        $(".new-member").addClass("d-none");
-    }
 });
 // Initialize event listeners
 $(document).on("click", ".msg-list", async function () {
@@ -1448,6 +1442,12 @@ async function addListInMembers(SelecteGroupUser) {
         }
     });
 
+    if (senderIsAdmin) {
+        $(".new-member").removeClass("d-none");
+    } else {
+        $(".new-member").addClass("d-none");
+    }
+
     let messageElement = ``;
     const promises = SelecteGroupUser.map(async (user) => {
         const userImageElement = await getListUserimg(user.image, user.name);
@@ -1817,6 +1817,24 @@ $("#add-group-member").click(async function () {
                     // Update users array
                     users.push(userId);
                 }
+
+                // Update the user's overview data
+                const overviewRef = ref(
+                    database,
+                    `overview/${userId}/${conversationId}`
+                );
+                await set(overviewRef, {
+                    contactId: conversationId,
+                    contactName: $(".selected_name").val(),
+                    conversationId: conversationId,
+                    group: true,
+                    lastMessage: "",
+                    lastSenderId: "",
+                    receiverProfile: "",
+                    timeStamp: Date.now(),
+                    unRead: false,
+                    unReadCount: 0,
+                });
             })
         );
 
