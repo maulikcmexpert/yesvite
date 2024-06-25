@@ -952,7 +952,9 @@ function createMessageElement(key, messageData, isGroup) {
         messageData?.type == "1"
             ? `<div class="media-msg">
                 <img src="${messageData?.url}"/>
-                <span>${messageData?.data != "" ? messageData.data : ""}</span>
+                <span class="media-text">${
+                    messageData?.data != "" ? messageData.data : ""
+                }</span>
                  ${
                      isSender
                          ? `<span class="seenStatus ${seenStatus}"></span>`
