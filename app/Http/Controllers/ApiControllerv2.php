@@ -9150,11 +9150,9 @@ class ApiControllerv2 extends Controller
 
             'event_post_id' => ['required'],
 
-            'post_control' => ['required', 'in:hide_post,unhide_post,mute,unmute,report'],
+            'post_media_id' => ['required', 'exists:event_post_images,id'],
 
         ]);
-
-
 
         if ($validator->fails()) {
 
@@ -9168,39 +9166,17 @@ class ApiControllerv2 extends Controller
         try {
 
             DB::beginTransaction();
-
-            $checkIsPostControl = PostControl::where(['event_id' => $input['event_id'], 'user_id' => $user->id, 'event_post_id' => $input['event_post_id']])->first();
-            if ($checkIsPostControl == null) {
-                $setPostControl = new PostControl;
-
-                $setPostControl->event_id = $input['event_id'];
-                $setPostControl->user_id = $user->id;
-                $setPostControl->event_post_id = $input['event_post_id'];
-                $setPostControl->post_control = $input['post_control'];
-                $setPostControl->save();
-            } else {
-                $checkIsPostControl->post_control = $input['post_control'];
-                $checkIsPostControl->save();
-            }
+            $reportCreate = new UserReportToPost;
+            $reportCreate->event_id = $input['event_id'];
+            $reportCreate->user_id =  $user->id;
+            $reportCreate->event_post_id = $input['event_post_id'];
+            $reportCreate->post_media_id = $input['post_media_id'];
+            $reportCreate->specific_report = '1';
+            $reportCreate->save();
             DB::commit();
-            $message = "";
-            if ($input['post_control'] == 'hide_post') {
-                $message = "Post is hide from your wall";
-            } else if ($input['post_control'] == 'unhide_post') {
-                $message = "Post is unhide";
-            } else if ($input['post_control'] == 'mute') {
-                $message = "Mute every post from this user will post";
-            } else if ($input['post_control'] == 'unmute') {
-                $message = "Unmuted every post from this user will post";
-            } else if ($input['post_control'] == 'report') {
-                $reportCreate = new UserReportToPost;
-                $reportCreate->event_id = $input['event_id'];
-                $reportCreate->user_id =  $user->id;
-                $reportCreate->event_post_id = $input['event_post_id'];
-                $reportCreate->save();
-                $message = "Reported to admin for this post";
-            }
-            return response()->json(['status' => 1, 'type' => $input['post_control'], 'message' => $message]);
+            $message = "Reported to admin for this media";
+
+            return response()->json(['status' => 1, 'message' => $message]);
         } catch (QueryException $e) {
 
             DB::rollBack();

@@ -213,6 +213,8 @@ Route::prefix('user/v2/')->middleware('checkUser')->group(function () {
     Route::post('event_about_v2', [ApiControllerv2::class, 'eventAboutv2']);
     Route::post('create_post', [ApiControllerv2::class, 'createPost']);
     Route::post('post_control', [ApiControllerv2::class, 'postControl']);
+    Route::post('post_media_report', [ApiControllerv2::class, 'postMediaReport']);
+
     Route::post('delete_post', [ApiControllerv2::class, 'deletePost']);
     Route::post('create_event_post_photo', [ApiControllerv2::class, 'createEventPostPhoto']);
     Route::post('event_wall', [ApiControllerv2::class, 'eventWall']);
