@@ -530,13 +530,23 @@ $(".send-message").on("keypress", async function (e) {
         $(".preview_img").hide();
         const previewImg = $(".preview_img");
         const imageUrl = previewImg.attr("src");
+
+        const previewAudio = $(".recordedAudio");
+        const audioUrl = previewAudio.attr("src");
+
+        const audio = $("#file_name").text();
+
         if (imageUrl) {
             // Determine file type and set the storage path
             let storagePath;
             if (imageUrl.startsWith("data:image/")) {
-                storagePath = `Images/${senderUser}/${Date.now()}_${senderUser}.png`;
+                storagePath = `Images/${senderUser}/${Date.now()}_${senderUser}-img.png`;
+            } else if (imageUrl.startsWith("blob:http:/") && audio != "audio") {
+                storagePath = `Video/${senderUser}/${Date.now()}_${senderUser}-video.mp4`;
+            } else if (imageUrl.startsWith("blob:http:/") && audio == "audio") {
+                storagePath = `Audios/${senderUser}/${Date.now()}_${senderUser}-audio.wav`;
             } else {
-                storagePath = `Files/${senderUser}/${Date.now()}_${senderUser}`;
+                storagePath = `Files/${senderUser}/${Date.now()}_${senderUser}-file.${fileType}`;
             }
             // Upload file to Firebase Storage
             const fileRef = storageRef(storage, storagePath);
@@ -551,7 +561,31 @@ $(".send-message").on("keypress", async function (e) {
                 downloadURL = await getDownloadURL(fileRef);
                 type = "1";
             } catch (e) {}
+        } else if (audioUrl) {
+            $("#playRecording").hide();
+            $("#stopRecording").hide();
+            $("#stopPlayback").hide();
+
+            console.log(audioUrl);
+
+            let storagePath;
+            storagePath = `Audios/${senderUser}/${Date.now()}_${senderUser}-Audio.wav`;
+
+            // Upload file to Firebase Storage
+            const fileRef = storageRef(storage, storagePath);
+            try {
+                if (audioUrl.startsWith("blob:http/")) {
+                    await uploadString(fileRef, audioUrl, "data_url");
+                } else {
+                    const response = await fetch(audioUrl);
+                    const blob = await response.blob();
+                    await uploadBytes(fileRef, blob);
+                }
+                downloadURL = await getDownloadURL(fileRef);
+                type = "3";
+            } catch (e) {}
         }
+
         if (message.trim() == "" && downloadURL == "") {
             return;
         }
@@ -810,10 +844,22 @@ function createMessageElement(key, messageData, isGroup) {
     }
     dataWithMedia =
         messageData?.type == "1"
-            ? `<div class="media-msg"><img src="${messageData?.url}"/><span>${
-                  messageData?.data != "" ? messageData.data : ""
-              }</span></div>`
-            : `<p>${messageData?.data != "" ? messageData.data : ""}</p>`;
+            ? `<div class="media-msg">
+            <img src="${messageData?.url}"/>
+            <span>${
+                messageData?.data != "" ? messageData.data : ""
+            }</span></div>`
+            : messageData?.type == "3"
+            ? `<div class="media-msg">
+            <audio controls src="${messageData?.url}"></audio>
+            <span>${
+                messageData?.data != "" ? messageData.data : ""
+            }</span></div>`
+            : `<p> 
+            ${messageData?.data != "" ? messageData.data : ""}
+            ${isSender ? `<span class="seenStatus ${seenStatus}"></span>` : ""} 
+             ${reaction ? `<span class="reaction">${reaction}</span>` : ""}
+              </p>`;
 
     const replySection =
         messageData.replyData && messageData.replyData.replyTimeStamp != 0
@@ -842,8 +888,7 @@ function createMessageElement(key, messageData, isGroup) {
                 new Date(messageData.timeStamp)
             )}</span>
             <span class="senderName">${senderName}</span>
-             ${isSender ? `<span class="seenStatus ${seenStatus}"></span>` : ""}
-               ${reaction ? `<span class="reaction">${reaction}</span>` : ""}
+            
              ${
                  isReceiver
                      ? `
@@ -1404,34 +1449,6 @@ async function addListInMembers(SelecteGroupUser) {
     $(".member-lists").html(messageElement);
 }
 
-$(".preview_img").hide();
-$(".upload-box").change(function () {
-    var curElement = $(".preview_img");
-    var file = this.files[0];
-    if (file) {
-        var reader = new FileReader();
-
-        if (file.type.match("image.*")) {
-            reader.onload = function (e) {
-                $(".preview_img").show();
-                curElement.attr("src", e.target.result);
-                $(".btn-primary.dropdown-toggle").attr(
-                    "aria-expanded",
-                    "false"
-                );
-            };
-
-            reader.readAsDataURL(file);
-        } else {
-            $(".preview_img").show();
-            curElement.attr("src", base_url + "storage/file.png");
-        }
-    } else {
-        $(".preview_img").hide();
-        curElement.attr("src", "");
-    }
-});
-
 $(".delete-conversation").click(async function () {
     var conversationId = $(".conversationId").attr("conversationid");
     const isGroup = $("#isGroup").val();
@@ -1934,6 +1951,26 @@ function playRecording() {
         alert("Failed to play recorded audio.");
     });
 }
+async function stopRecording() {
+    if (mediaRecorder && mediaRecorder.state === "recording") {
+        mediaRecorder.stop();
+        $("#send_audio").show();
+        $("#audioContainer").show();
+
+        startButton.style.display = "inline-block";
+        stopButton.style.display = "none";
+
+        // Wait for the MediaRecorder to finish saving data
+        await new Promise((resolve) => {
+            mediaRecorder.onstop = resolve;
+        });
+
+        // Call playRecording() to initiate playback
+        playRecording();
+    } else {
+        console.error("MediaRecorder is not recording.");
+    }
+}
 
 startButton.addEventListener("click", startRecording);
 stopButton.addEventListener("click", stopRecording);
@@ -1948,3 +1985,116 @@ $(".close-audio-btn").on("click", function () {
 
     $(".upload-box").val("");
 });
+
+$(".preview_img").hide();
+$(".upload-box").change(function () {
+    var curElement = $(".preview_img");
+    var file = this.files[0];
+    var name = file.name;
+    $(".dropdown-menu").removeClass("show");
+
+    var preview = document.getElementById("preview");
+
+    displayFiles(this.files, name);
+
+    var fileExtension = file.name.substr(file.name.lastIndexOf(".") + 1);
+
+    console.log(fileExtension);
+
+    if (file) {
+        var reader = new FileReader();
+
+        if (file.type.match("image.*")) {
+            reader.onload = function (e) {
+                $("#preview_file").hide();
+
+                curElement.attr("src", e.target.result);
+            };
+
+            reader.readAsDataURL(file);
+        } else if (file.type.match("video.*")) {
+            // Handling video files
+            var curElement = $(".preview_img");
+
+            curElement.attr("src", URL.createObjectURL(file));
+
+            $(".preview_img").hide();
+            $("#preview_file").hide();
+            $("#file_name").text("");
+        } else if (file.type.match("audio.*")) {
+            var curElement = $(".preview_img");
+
+            curElement.attr("src", URL.createObjectURL(file));
+
+            $(".preview_img").hide();
+            $("#preview_file").hide();
+
+            $("#file_name").text("audio");
+        } else {
+            reader.onload = function (e) {
+                curElement.attr("src", e.target.result);
+            };
+            reader.readAsDataURL(file);
+            $(".file_info").val(fileExtension);
+            $("#file_name").text(file.name);
+
+            $("#preview_file").show();
+            $(".preview_img").hide();
+        }
+        // reader.readAsArrayBuffer(file);
+    } else {
+        $(".preview_img").hide();
+        curElement.attr("src", "");
+    }
+});
+
+function displayFiles(files, name) {
+    preview.innerHTML = "";
+
+    for (var i = 0; i < files.length; i++) {
+        var file = files[i];
+        var reader = new FileReader();
+
+        reader.onload = (function (file) {
+            return function (e) {
+                var fileType = file.type.split("/")[0];
+                var previewItem = document.createElement("div");
+                previewItem.className = "preview-item";
+                var previewElement;
+
+                if (fileType === "video") {
+                    previewElement = document.createElement("video");
+                    previewElement.controls = true;
+                } else if (fileType === "audio") {
+                    previewElement = document.createElement("audio");
+                    previewElement.controls = true;
+
+                    var fileName = document.createElement("span");
+                    fileName.className = "file-name";
+                    fileName.textContent = name;
+                } else if (fileType === "image") {
+                    previewElement = document.createElement("img");
+                    previewElement.style.maxWidth = "100%";
+                } else {
+                    return;
+                }
+
+                var closeButton = document.createElement("button");
+                closeButton.innerHTML = "&#10006;";
+                closeButton.className = "close-button";
+
+                previewElement.src = e.target.result;
+                previewItem.appendChild(previewElement);
+
+                if (fileType === "audio") {
+                    previewItem.appendChild(fileName);
+                }
+
+                previewItem.appendChild(closeButton);
+                preview.appendChild(previewItem);
+            };
+        })(file);
+
+        reader.readAsDataURL(file);
+    }
+}
