@@ -46,19 +46,24 @@ class ChatController extends Controller
 
         // Create a new user node with the userId
         $usersRef = $this->usersReference->getChild((string)$userId)->set($updateData);
-        // dd(1);
-        // $newUserId = $usersRef->getKey();
-        // $messages = $this->chatRoom->getValue();
-        // dd($id);
+
         $reference = $this->firebase->getReference('overview/' . $userId);
         $messages = $reference->getValue();
         if ($messages) {
-
             uasort($messages, function ($a, $b) {
-                $timeStampA = isset($a['timeStamp']) ? $a['timeStamp'] : PHP_INT_MAX;
-                $timeStampB = isset($b['timeStamp']) ? $b['timeStamp'] : PHP_INT_MAX;
+                // Check if either of the items has 'isPin' set to '1'
+                $isPinA = isset($a['isPin']) && $a['isPin'] == '1';
+                $isPinB = isset($b['isPin']) && $b['isPin'] == '1';
 
-                return $timeStampB <=> $timeStampA;
+                // If both have the same 'isPin' status, sort by 'timeStamp'
+                if ($isPinA == $isPinB) {
+                    $timeStampA = isset($a['timeStamp']) ? $a['timeStamp'] : PHP_INT_MAX;
+                    $timeStampB = isset($b['timeStamp']) ? $b['timeStamp'] : PHP_INT_MAX;
+                    return $timeStampB <=> $timeStampA;
+                }
+
+                // Otherwise, prioritize the item with 'isPin' set to '1'
+                return $isPinB <=> $isPinA;
             });
         }
         // dd($messages);

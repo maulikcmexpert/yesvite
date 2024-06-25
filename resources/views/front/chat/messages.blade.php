@@ -277,9 +277,20 @@ use Carbon\Carbon;
                                 <p>Please select a message to see the details</p>
                             </div> -->
 
+                            
                         </div>
 
+                      
+                        <div id="preview"></div>
+                        <label id="upload_name"></label>
                         <img src="" id="preview_img" class="preview_img">
+                        <div id="preview_file">
+                            <button class="file_close">X</button>
+                            <img src="{{asset('storage/file.png')}}" class="preview_file">
+                            <span id="file_name"></span>
+                        </div>
+                        <input type="hidden" class="file_info">
+
                         <div class="msg-footer">
 
                             <input type="text" placeholder="Write message here..." class="send-message">
@@ -328,14 +339,25 @@ use Carbon\Carbon;
                                                 </span>
                                                 <input type="file" name="upload" id="upload" class="upload-box" placeholder="Upload File" aria-label="Upload File">
                                             </a>
+
+                                            
                                         </li>
                                     </ul>
                                 </div>
-
-                                <span id="send_image">
-                                    <button type="button">send</button>
-                                </span>
-                                <span>
+                                <div id="audioControls">
+                                    <button type="button" class="close-song" style="display: none;">✖</button>
+    
+                                    <button id="stopRecording" style="display: none;">Stop Recording</button>
+                                    <button id="playRecording" style="display: none;">Play Recording</button>
+                                    <button id="stopPlayback" style="display: none;">Stop Playback</button>
+                                </div>
+    
+    
+                                <div class="audio-container" id="audioContainer">
+                                    <audio id="recordedAudio" class="recordedAudio" controls style="display: none;"></audio>
+                                    <button class="close-audio-btn">X</button>
+                                </div>
+                                <span id="startRecording">
                                     <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M12.5 15.5C14.71 15.5 16.5 13.71 16.5 11.5V6C16.5 3.79 14.71 2 12.5 2C10.29 2 8.5 3.79 8.5 6V11.5C8.5 13.71 10.29 15.5 12.5 15.5Z" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                         <path d="M4.85156 9.65039V11.3504C4.85156 15.5704 8.28156 19.0004 12.5016 19.0004C16.7216 19.0004 20.1516 15.5704 20.1516 11.3504V9.65039" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
