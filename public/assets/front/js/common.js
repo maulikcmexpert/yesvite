@@ -1,12 +1,11 @@
 // alert();
 //  ===== focusinput =====
-$(function() {
-    $('#ChangeToggle').click(function() {
-        $('#navbar-hamburger').toggleClass('hidden');
-        $('#navbar-close').toggleClass('hidden');  
-    });
-});
+ 
 
+$(document).on("click", "#ChangeToggle", function () {
+    $('#navbar-hamburger').toggleClass('hidden');
+    $('#navbar-close').toggleClass('hidden'); 
+});
 
 $(document).on("click", ".businessRegister", function () {
     $("#account_type").val("1");
