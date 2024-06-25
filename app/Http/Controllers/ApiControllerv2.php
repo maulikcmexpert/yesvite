@@ -12302,7 +12302,7 @@ class ApiControllerv2 extends Controller
                 'Authorization' => 'Bearer ' . $accessToken,
             ])->get($url);
 
-            dd($response);
+
             $addSubscription = new UserSubscription();
             $addSubscription->orderId = $input['orderId'];
             $addSubscription->packageName = $input['packageName'];
