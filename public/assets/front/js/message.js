@@ -845,10 +845,15 @@ function createMessageElement(key, messageData, isGroup) {
     dataWithMedia =
         messageData?.type == "1"
             ? `<div class="media-msg">
-            <img src="${messageData?.url}"/>
-            <span>${
-                messageData?.data != "" ? messageData.data : ""
-            }</span></div>`
+                <img src="${messageData?.url}"/>
+                <span>${messageData?.data != "" ? messageData.data : ""}</span>
+                 ${
+                     isSender
+                         ? `<span class="seenStatus ${seenStatus}"></span>`
+                         : ""
+                 } 
+                ${reaction ? `<span class="reaction">${reaction}</span>` : ""}
+            </div>`
             : messageData?.type == "3"
             ? `<div class="media-msg">
             <audio controls src="${messageData?.url}"></audio>
