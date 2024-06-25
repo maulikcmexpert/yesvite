@@ -136,7 +136,7 @@ class ApiControllerv2 extends Controller
             $this->invitedToCount = invitedToCount($this->user->id);
         }
 
-        $this->googlePlayService = $GooglePlayService;
+
     }
 
 
