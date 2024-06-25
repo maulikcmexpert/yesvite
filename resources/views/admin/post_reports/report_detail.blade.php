@@ -867,8 +867,21 @@
                         <div class="col-md-12">
                             <div class="row">
 
+                                @if($reportDetail->specific_report == '0')
+
+                                @if($reportDetail->post_image->type == 'image')
+                                <img src="{{ asset('storage/post_image/'.$reportDetail->post_image->post_image)}}">
+                                @endif
+
+                                @if($reportDetail->post_image->type == 'video')
+
+                                @endif
+
+                                @else
 
                                 @if($reportDetail->event_posts->post_type == '1')
+
+
                                 <div class="col-xl-6 col-lg-12 col-md-12">
                                     <div class="event_posts_left">
                                         <div class="product-images demo-gallery">
@@ -940,7 +953,7 @@
                                     </div>
                                 </div>
                                 @endif
-
+                                @endif
                                 <div class="col-xl-6 col-lg-12 col-md-12">
                                     <div class="event_posts_right">
                                         <div class="event_posts_right_content">
