@@ -389,6 +389,20 @@ ul.chat-list li:last-child{
     -ms-border-radius: 20px 0px 20px 20px;
     -o-border-radius: 20px 0px 20px 20px;
     margin-bottom: 5px !important;
+    position: relative;
+}
+
+
+.msg-body ul li.receiver p .grey-tick{
+    position: absolute;
+    right: 8px;
+    bottom: 6px;
+}
+
+.msg-body ul li.receiver p  .reaction {
+    position: absolute;
+    left: -3px;
+    bottom: -4px;
 }
 
 .msg-body ul li .time{
@@ -424,14 +438,55 @@ ul.chat-list li:last-child{
     margin-left: auto;
 }
 
-.msg-body ul li.sender div img{
-    max-width: 297px;
+.msg-body ul li.receiver div img{
+    max-width: 100%;
+    width: 297px;
+    height: 254px;
     margin-bottom: 10px;
+    object-fit: cover;
+    border-radius: 10px;
 }
 
-.msg-body ul li.receiver div img{
-    max-width: 297px;
+.msg-body ul li.receiver div{
+    background-color: #FFE4E9;
+    padding: 10px;
+    border-radius: 20px 0px 20px 20px;
+    -webkit-border-radius: 20px 0px 20px 20px;
+    -moz-border-radius: 20px 0px 20px 20px;
+    -ms-border-radius: 20px 0px 20px 20px;
+    -o-border-radius: 20px 0px 20px 20px;
+    display: inline-block;
+    max-width: 317px;
+    margin-left: auto;
+}
+
+.msg-body .media-msg span{
+    font-size: 12px;
+    line-height: 20.4px;
+    text-align: right;
+    color: var(--secondryColor);
+}
+
+.msg-body ul li.sender div{
+    background-color: #F8F9FD;
+    padding: 10px;
+    border-radius: 20px 0px 20px 20px;
+    -webkit-border-radius: 20px 0px 20px 20px;
+    -moz-border-radius: 20px 0px 20px 20px;
+    -ms-border-radius: 20px 0px 20px 20px;
+    -o-border-radius: 20px 0px 20px 20px;
+    display: inline-block;
+    max-width: 317px;
+    margin-left: auto;
+}
+
+.msg-body ul li.sender div img{
+    max-width: 100%;
+    width: 297px;
+    height: 254px;
     margin-bottom: 10px;
+    object-fit: cover;
+    border-radius: 10px;
 }
 
 .msg-footer{
