@@ -5474,7 +5474,7 @@ class ApiControllerv2 extends Controller
         $validator = Validator::make($input, [
 
             'event_id' => ['required', 'exists:events,id'],
-            'image' => [ 'array']
+            //   'image' => ['required', 'array']
 
         ]);
 
@@ -5491,7 +5491,7 @@ class ApiControllerv2 extends Controller
         DB::beginTransaction();
 
 
-        if (!empty($request->image)) {
+        if (isset($request->image) && !empty($request->image)) {
 
             $images = $request->image;
 
