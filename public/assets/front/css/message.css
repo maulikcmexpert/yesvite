@@ -59,6 +59,7 @@
     -ms-border-radius: 20px;
     -o-border-radius: 20px;
     display: flex;
+    height: 744px;
 }
 
 .chat-lists{
@@ -724,6 +725,15 @@ ul.chat-list li:last-child{
     -o-border-radius: 0px 20px 20px 20px;
     margin-bottom: 16px;
 }
+
+.msg-body ul li.receiver .reply-section .senderName{
+    font-size: 12px;
+    color: red;
+}
+
+/* .msg-body ul li.receiver .reply-section:first-child{
+    border-bottom: 1px solid #000;
+} */
 
 #msgBox .chat-user{
     padding: 24px;
