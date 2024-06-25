@@ -17,7 +17,7 @@ class GooglePlayService
         $this->client->addScope(AndroidPublisher::ANDROIDPUBLISHER);
 
         $this->androidPublisher = new AndroidPublisher($this->client);
-        dd($this->client);
+        dd($this->androidPublisher);
     }
 
     public function verifySubscription($packageName, $subscriptionId, $token)
