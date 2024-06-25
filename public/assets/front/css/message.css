@@ -223,11 +223,11 @@ ul.chat-list li:last-child{
 .user-detail span{
     font-size: 12px;
     color: var(--lightColor);
-    width: 100%; 
+    width: 100%;
     max-width: 200px;
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap; 
+    white-space: nowrap;
 }
 
 .chat-list h6{
@@ -238,7 +238,7 @@ ul.chat-list li:last-child{
 }
 
 .chat-list .badge{
-    width: 20px !important; 
+    width: 20px !important;
     height: 20px !important;
     background-color: var(--primaryColor);
     border-radius: 100%;
@@ -260,6 +260,20 @@ ul.chat-list li:last-child{
     flex-direction: column;
     justify-content: center;
     padding: 160px 0;
+}
+.seenStatus {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-size: contain;
+}
+
+.blue-tick {
+    background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M9 19L3.5 13.5L5 12L9 16L19 6L20.5 7.5L9 19Z" fill="%2300BFFF"/><path d="M16 19L10.5 13.5L12 12L16 16L26 6L27.5 7.5L16 19Z" fill="%2300BFFF"/></svg>');
+}
+
+.grey-tick {
+    background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M9 19L3.5 13.5L5 12L9 16L19 6L20.5 7.5L9 19Z" fill="%23A9A9A9"/><path d="M16 19L10.5 13.5L12 12L16 16L26 6L27.5 7.5L16 19Z" fill="%23A9A9A9"/></svg>');
 }
 
 .empty-massage .empty-img{
@@ -318,7 +332,7 @@ ul.chat-list li:last-child{
     background: inherit;
     margin: 0 auto;
 
-    
+
 }
 
 #listBox input[type="file"]{
@@ -683,12 +697,35 @@ ul.chat-list li:last-child{
     margin-right: 5px;
     border-radius: 5px;
   }
-  
+
   .close-btn {
     cursor: pointer;
     margin-left: 5px;
   }
-  
+
+  .reaction-icon, .reply-icon {
+    cursor: pointer;
+    margin-left: 5px;
+    border: 1px solid grey;
+    padding: 2px;
+    border-radius: 50%;
+}
+
+.reaction-dialog {
+    display: flex;
+    gap: 5px;
+    background-color: white;
+    border: 1px solid grey;
+    border-radius: 5px;
+    padding: 5px;
+    position: absolute;
+}
+
+.reaction-option {
+    cursor: pointer;
+}
+
+
 /* ======= responsive ======== */
 @media only screen and (max-width:1500px){
     .chat-area .msg-head .dropdown-menu.show{

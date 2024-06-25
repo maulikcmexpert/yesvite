@@ -11,7 +11,7 @@ use Carbon\Carbon;
                         <h5>Messages</h5>
                         <span class="badge">2</span>
                     </div>
-                    <a href="#" class="cmn-btn edit-btn" data-bs-toggle="modal" data-bs-target="#msgBox">
+                    <a href="#" class="cmn-btn edit-btn" id="new-message" data-bs-toggle="modal" data-bs-target="#msgBox">
                         <svg class="me-1" width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M10.4974 18.3327C15.0807 18.3327 18.8307 14.5827 18.8307 9.99935C18.8307 5.41602 15.0807 1.66602 10.4974 1.66602C5.91406 1.66602 2.16406 5.41602 2.16406 9.99935C2.16406 14.5827 5.91406 18.3327 10.4974 18.3327Z" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                             <path d="M7.16406 10H13.8307" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -24,7 +24,7 @@ use Carbon\Carbon;
                 <div class="chat-area">
                     <div class="chat-lists">
                         <div class="chat-header">
-                           
+
                             <div class="chat-functions">
                                 <div class="d-flex align-items-center">
                                     <span class="me-3">
@@ -99,16 +99,16 @@ use Carbon\Carbon;
                         @php
     $i = 0;
 @endphp
-                @foreach ($messages as $k => $message)   
+                @foreach ($messages as $k => $message)
                     @if(!isset($message['contactName']))
                         @continue
-                    @endisset      
+                    @endisset
                     @if ($i == 0)
                         <input type="hidden" class="selected_id" value="{{$k}}"/>
                         <input type="hidden" class="selected_message" value="{{$message['contactId']}}"/>
                         <input type="hidden" class="selected_name" value="{{$message['contactName']}}"/>
                         <input type="hidden" id="isGroup" value="{{@$message['group']}}"/>
-                    @endif                    
+                    @endif
                     <li class="{{$i == 0 ?'active':''}} msg-list conversation-{{$message['conversationId']}}" data-userId="{{$message['contactId']}}" data-msgKey={{$k}} data-group={{@$message['group']}}>
                         <div class="chat-data d-flex align-items-center">
                             <div class="user-img position-relative">
@@ -371,13 +371,10 @@ use Carbon\Carbon;
                     <div id="selected-tags-container">
                         <!-- Selected tags will be appended here -->
                     </div>
-                    <form class="d-flex align-items-center inbox" action="">
+                    
                         <span>To:</span>
                         <input type="text" id="search-user">
                         <input type="hidden" id="selected-user-id" name="selectedUserId" value="">
-
-                    </form>
-
                     <!-- =========== first-model =========== -->
                     <div class="empty-massage">
                         <div class="empty-img">
@@ -399,9 +396,6 @@ use Carbon\Carbon;
                     <!-- ========= forth-modal ======== -->
                     <div class="multi-chat d-none">
                         <div class="img-wrp">
-
-
-
                         </div>
                         <h5 class="selected-user-name">Tiana Dokidis, Martin Garlic, +3</h5>
                         <p>This message will automatically create a group</p>
@@ -439,7 +433,7 @@ use Carbon\Carbon;
                     <input type="text" class="update-group-name"/>
                     <button type="button" id="updateName">Save</button>
                 </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    <button type="button" class="btn-close close-group-modal" data-bs-dismiss="modal"></button>
             </div>
             <!-- Modal body -->
             <div class="modal-body p-0">
@@ -464,7 +458,9 @@ use Carbon\Carbon;
                             </label>
                         </div>
                     </div>
-
+                    <div class="new-member d-none">
+                        <button class="btn btn-primary" id="new-member">Add New Member</button>
+                    </div>
                     <ul class="member-lists">
                         <li class="">
                             <div class="chat-data d-flex">
@@ -495,6 +491,21 @@ use Carbon\Carbon;
                             </div>
                         </li>
                     </ul>
+
+                    <div class="new-members-add d-none">
+
+                        <div id="group-selected-tags-container">
+                            <!-- Selected tags will be appended here -->
+                        </div>
+                        
+                            <span>To:</span>
+                            <input type="text" id="group-search-user">
+                            <input type="hidden" id="group-selected-user-id" name="selectedUserId" value="">
+
+                         
+                            <button class="btn btn-primary d-none" id="add-group-member">Add Member</button>
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -503,6 +514,6 @@ use Carbon\Carbon;
 @push('scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/timeago.js/4.0.2/timeago.min.js"></script>
 <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
-<script type="module" src="{{asset('assets/front/js/chat.js')}}"></script>
 <script type="module" src="{{asset('assets/front/js/message.js')}}"></script>
+<script type="module" src="{{asset('assets/front/js/chat.js')}}"></script>
 @endpush
