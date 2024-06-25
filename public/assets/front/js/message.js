@@ -378,6 +378,9 @@ async function updateChat(user_id) {
             });
         }
     });
+    onChildChanged(messagesRef, async (snapshot) => {
+        UpdateMessageToList(snapshot.key, snapshot.val(), conversationId);
+    });
     onChildChanged(selecteduserTypeRef, async (snapshot) => {
         if (
             snapshot.key === "userTypingStatus" &&
@@ -418,6 +421,9 @@ async function updateChatfromGroup(conversationId) {
     });
     const messagesRef = ref(database, `Groups/${conversationId}/message`);
     off(messagesRef);
+    onChildChanged(messagesRef, async (snapshot) => {
+        UpdateMessageToList(snapshot.key, snapshot.val(), conversationId);
+    });
     onChildAdded(messagesRef, async (snapshot) => {
         addMessageToList(snapshot.key, snapshot.val(), conversationId);
 
@@ -677,6 +683,12 @@ $(".send-message").on("keypress", async function (e) {
 });
 
 // Function to add a message to the UI list
+function UpdateMessageToList(key, messageData, conversationId) {
+    console.log("update");
+    const messageEle = document.getElementById(`message-${key}`);
+    let isGroup = $("#isGroup").val();
+    $(messageEle).replaceWith(createMessageElement(key, messageData, isGroup));
+}
 function addMessageToList(key, messageData, conversationId) {
     if ($(".selected_conversasion").val() != conversationId) {
         return;
@@ -716,6 +728,7 @@ function createMessageElement(key, messageData, isGroup) {
             : "";
     let seenStatus = "";
     let reaction = "";
+    let image = "";
     if (isGroup == "true" || isGroup == true) {
         if (
             messageData.userAvailable != undefined &&
@@ -754,6 +767,10 @@ function createMessageElement(key, messageData, isGroup) {
                       )
                   )
                 : "";
+        image =
+            messageData?.type == "1"
+                ? `<div class="media-msg"><img src="${messageData?.url}"/></div>`
+                : "";
     }
 
     const replySection =
@@ -776,7 +793,8 @@ function createMessageElement(key, messageData, isGroup) {
     return `
         <li class="${isSender ? "receiver" : "sender"}" id="message-${key}">
          ${replySection}
-            <p>${messageData.data}</p>
+                ${image}
+            <p>${messageData?.data != "" ? messageData.data : ""}</p>
             <span class="time">${timeago.format(
                 new Date(messageData.timeStamp)
             )}</span>
@@ -1395,9 +1413,9 @@ $("#send_image").on("click", async function () {
     // Determine file type and set the storage path
     let storagePath;
     if (imageUrl.startsWith("data:image/")) {
-        storagePath = `Images/198/${Date.now()}_${senderUser}.png`;
+        storagePath = `Images/${senderUser}/${Date.now()}_${senderUser}.png`;
     } else {
-        storagePath = `Files/203/${Date.now()}_${senderUser}`;
+        storagePath = `Files/${senderUser}/${Date.now()}_${senderUser}`;
     }
 
     // Upload file to Firebase Storage
@@ -1414,6 +1432,7 @@ $("#send_image").on("click", async function () {
 
         const messageData = {
             data: downloadURL,
+            url: downloadURL,
             timeStamp: Date.now(),
             isDelete: {},
             isReply: "0",
@@ -1900,7 +1919,11 @@ function generateReactionsAndReply() {
             );
             const replyMessageSnapshot = await get(replyMessageRef);
             const replyMessageData = replyMessageSnapshot.val();
-            replay = `<div class='set-replay-msg'><span class='replay-user'>${replyMessageData.receiverName}</span><span class='replay-msg'>${replyMessageData.data}</span></div>`;
+            replay = `<div class='set-replay-msg'>
+                        <span class='replay-user'>${replyMessageData.receiverName}</span>
+                        <span class='replay-msg'>${replyMessageData.data}</span>
+                         <span class='close-replay'>&times</span>
+                        </div>`;
         } else {
             const replyMessageRef = ref(
                 database,
@@ -1909,9 +1932,17 @@ function generateReactionsAndReply() {
             const replyMessageSnapshot = await get(replyMessageRef);
             const replyMessageData = replyMessageSnapshot.val();
 
-            replay = `<div class='set-replay-msg'><span class='replay-user'>${senderUserName}</span><span class='replay-msg'>${replyMessageData.data}</span></div>`;
+            replay = `<div class='set-replay-msg'>
+                        <span class='replay-user'>${senderUserName}</span>
+                        <span class='replay-msg'>${replyMessageData.data}</span>
+                        <span class='close-replay'>&times</span>
+                        </div>`;
         }
         $(".msg-footer").prepend(replay);
+    });
+    $(document).on("click", ".close-replay", async function () {
+        $(".set-replay-msg").remove();
+        replyMessageId = null;
     });
 }
 
