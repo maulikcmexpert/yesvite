@@ -1374,17 +1374,32 @@ function verifyApplePurchase($userId, $purchaseToken)
     }
 }
 
+function getGoogleAccessToken()
+{
+    $response = Http::asForm()->post('https://oauth2.googleapis.com/token', [
+        'client_id' => env('InGOOGLE_CLIENT_ID'),
+        'client_secret' => env('InGOOGLE_CLIENT_SECRET'),
+        'refresh_token' => env('InGOOGLE_REFRESH_TOKEN'),
+        'grant_type' => 'refresh_token',
+    ]);
+
+    return $response->json('access_token');
+}
 
 function verifyGooglePurchase($userId, $purchaseToken)
 {
 
+    $getSubscription = UserSubscription::where('user_id', $userId)->first();
+    $packageName = $getSubscription->packageName;
+    $productId = $getSubscription->productId;
+    $accessToken = getGoogleAccessToken();
 
-    $url = "https://androidpublisher.googleapis.com/androidpublisher/v3/applications/{$packageName}/purchases/products/{$productId}/tokens/{$purchaseToken}";
+    $url = "https://www.googleapis.com/androidpublisher/v3/applications/{$packageName}/purchases/subscriptions/{$productId}/tokens/{$purchaseToken}?access_token={$accessToken}";
 
     $response = Http::get($url);
 
     if ($response->json('purchaseState') == 0) {
-        //   updateSubscriptionStatus($userId, $response->json());
+        updateSubscriptionStatus($userId, $response->json());
         return true;
     } else {
         return false;
