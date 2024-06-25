@@ -106,10 +106,10 @@ use Illuminate\Database\Query\Builder;
 use App\Jobs\SendInvitationMailJob as sendInvitation;
 use Illuminate\Support\Facades\Session;
 use stdClass;
-
-
+use App\Services\GooglePlayService as googleService;
 
 class ApiControllerv2 extends Controller
+
 
 {
     protected $perPage;
@@ -119,6 +119,7 @@ class ApiControllerv2 extends Controller
     protected $pendingRsvpCount;
     protected $hostingCount;
     protected $invitedToCount;
+
 
     public function __construct()
     {
@@ -12310,7 +12311,72 @@ class ApiControllerv2 extends Controller
     }
 
 
+
+
     public function addSubscription(Request $request)
+    {
+
+        $rawData = $request->getContent();
+
+        $input = json_decode($rawData, true);
+
+        if ($input == null) {
+            return response()->json(['status' => 0, 'message' => "Json invalid"]);
+        }
+
+
+        $validator = Validator::make($input, [
+
+            'orderId' => 'required',
+            'packageName' => 'required',
+            'productId' => 'required',
+            'purchaseTime' => 'required',
+            'purchaseToken' => 'required|string',
+            'autoRenewing' => 'required',
+        ]);
+
+
+        if ($validator->fails()) {
+            return response()->json(
+                [
+                    'status' => 0,
+                    'message' => $validator->errors()->first()
+                ],
+            );
+        }
+
+        $packageName = $input['packageName'];
+        $productId = $input['productId'];
+        $purchaseToken = $input['purchaseToken'];
+
+
+        $subscription = googleService->verifySubscription($packageName, $productId, $purchaseToken);
+
+        if ($subscription) {
+
+            dd($subscription);
+            // Process the subscription details and save to the database
+            $expiryTime = $subscription->getExpiryTimeMillis();
+            $autoRenewing = $subscription->getAutoRenewing();
+
+            UserSubscription::updateOrCreate(
+                ['subscription_id' => $subscriptionId],
+                [
+                    'package_name' => $packageName,
+                    'token' => $token,
+                    'expiry_time' => $expiryTime,
+                    'auto_renewing' => $autoRenewing
+                ]
+            );
+
+            return response()->json(['message' => 'Subscription verified successfully']);
+        }
+
+        return response()->json(['message' => 'Invalid subscription'], 400);
+    }
+
+
+    public function addSusbscription(Request $request)
     {
         $rawData = $request->getContent();
 
