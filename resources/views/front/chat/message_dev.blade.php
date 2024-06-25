@@ -494,6 +494,7 @@ use Carbon\Carbon;
                                 </div>
                                 <span id="send_image">
                                     <button class="btn btn-primary" type="button">send</button>
+                                    
                                     <!-- <img src="{{asset('storage/send.png')}}" type="button" class="send"> -->
                                 </span>
 
