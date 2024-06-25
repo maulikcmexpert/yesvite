@@ -106,8 +106,8 @@ Route::middleware('auth')->group(function () {
 
 
 Route::controller(AuthController::class)->group(function () {
-    Route::get('/google/auth', 'redirectToGoogle');
-    Route::get('/google/callback', 'handleGoogleCallback');
+    Route::get('google/auth', 'redirectToGoogle');
+    Route::get('google/callback', 'handleGoogleCallback');
 
     Route::get('login', 'create')->name('auth.login')->middleware('isAuthenticate');
     Route::post('login', 'checkLogin')->name('auth.checkLogin');
