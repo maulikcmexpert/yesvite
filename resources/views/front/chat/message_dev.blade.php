@@ -414,7 +414,6 @@ use Carbon\Carbon;
                                 <button type="button" class="close-song" style="display: none;">✖</button>
 
                                 <button id="stopRecording" style="display: none;">Stop Recording</button>
-                                <!-- <img id="recording" src="{{asset('storage/recording.gif')}}"> -->
                                 <button id="playRecording" style="display: none;">Play Recording</button>
                                 <button id="stopPlayback" style="display: none;">Stop Playback</button>
                             </div>
@@ -429,6 +428,7 @@ use Carbon\Carbon;
 
                         </div>
 
+
                         <div id="preview"></div>
                         <label id="upload_name"></label>
                         <img src="" id="preview_img" class="preview_img">
@@ -437,8 +437,8 @@ use Carbon\Carbon;
                             <img src="{{asset('storage/file.png')}}" class="preview_file">
                             <span id="file_name"></span>
                         </div>
+                        <input type="hidden" class="file_info">
 
-                        <input type="hidden" class="file_info"></i>
 
                         <div class="msg-footer">
 
@@ -493,14 +493,14 @@ use Carbon\Carbon;
                                     </ul>
                                 </div>
                                 <span id="send_image">
-                                    <button class="btn btn-primary" type="button">send</button>
-                                    <!-- <img src="{{asset('storage/send.png')}}" type="button" class="send"> -->
+                                    <!-- <button class="btn btn-primary" type="button">send</button> -->
+                                    <img src="{{asset('storage/send.png')}}" type="button" class="send">
                                 </span>
 
                                 <!-- ****************************This is for audio *********************-->
                                 <span id="send_audio">
-                                    <button class="btn btn-primary" type="button">send</button>
-                                    <!-- <img src="{{asset('storage/send.png')}}" type="button" class="send"> -->
+                                    <!-- <button class="btn btn-primary" type="button">send</button> -->
+                                    <img src="{{asset('storage/send.png')}}" type="button" class="send">
                                 </span>
                                 <!-- ****************************This is for audio *********************END-->
 

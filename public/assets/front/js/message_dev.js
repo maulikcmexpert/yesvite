@@ -845,7 +845,7 @@ $("#new_message").on("keypress", async function (e) {
     }
 });
 
-////**************************************************This Code is for image ,video,audio ....************************************
+///**************************************************This Code is for image ,video,audio ....************************************
 $(".preview_img").hide();
 
 $(".upload-box").change(function () {
@@ -1112,13 +1112,19 @@ $("#send_image").on("click", async function () {
 });
 
 $(".file_close").on("click", function () {
+
     $("#preview_file").hide();
     $("#send_image").hide();
 
     $(".preview_img").attr("src", "");
     $(".upload-box").val("");
+    
 });
 ////**************************************************This Code is for image,video,audio....************************************ END
+
+
+
+
 
 //*******************************This Code is for audio record....**************************************
 $("#send_audio").hide();
@@ -1133,6 +1139,10 @@ const audioElement = document.getElementById("recordedAudio");
 const close = document.getElementsByClassName("close-btn");
 
 function startRecording() {
+
+    recordedChunks = [];
+
+
     navigator.mediaDevices
         .getUserMedia({ audio: true })
         .then((stream) => {
@@ -1167,6 +1177,8 @@ async function stopRecording() {
     if (mediaRecorder && mediaRecorder.state === "recording") {
         mediaRecorder.stop();
         $("#send_audio").show();
+        $("#audioContainer").show();
+
 
         startButton.style.display = "inline-block";
         stopButton.style.display = "none";
@@ -1218,11 +1230,13 @@ $(".close-btn").on("click", function () {
     $("#audioContainer").hide();
     $("#send_audio").hide();
     $(".preview_img").attr("src", "");
+    $(".recordedAudio").attr("src", "");
+
     $(".upload-box").val("");
 });
 
 $("#send_audio").on("click", async function () {
-    $(".recordedAudio").hide();
+    // $(".recordedAudio").hide();
     $("#playRecording").hide();
     $("#stopRecording").hide();
     $("#stopPlayback").hide();
