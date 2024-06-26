@@ -236,6 +236,7 @@ async function handleNewConversation(snapshot) {
 
     // console.log("New conversation added:", newConversation);
     if (newConversation.conversationId == undefined) {
+        console.log("undefined");
         return;
     }
 
@@ -317,6 +318,7 @@ async function handleNewConversation(snapshot) {
     // $("#isGroup").val(newConversation.group);
     // console.log(newConversation.group);
     if (selectedConversationId === newConversation.conversationId) {
+        console.log("unreadcount udpated");
         await updateOverview(senderUser, newConversation.conversationId, {
             unRead: false,
             unReadCount: 0,
@@ -417,6 +419,7 @@ async function updateChat(user_id) {
 
         const selectedConversationId = $(".selected_conversasion").val();
         if (selectedConversationId === conversationId) {
+            console.log("unreadcount updated");
             await updateOverview(senderUser, conversationId, {
                 unRead: false,
                 unReadCount: 0,
@@ -482,6 +485,7 @@ async function updateChatfromGroup(conversationId) {
 
         const selectedConversationId = $(".selected_conversasion").val();
         if (selectedConversationId === conversationId) {
+            console.log("unreadcount updated");
             await updateOverview(senderUser, conversationId, {
                 unRead: false,
                 unReadCount: 0,
@@ -528,6 +532,7 @@ $(document).on("click", ".msg-list", async function () {
 
         const userId = $(this).attr("data-userid");
         $(".selected_message").val(userId);
+        console.log("unreadcount updated");
         await updateOverview(senderUser, conversationId, {
             unRead: false,
             unReadCount: 0,
@@ -686,6 +691,14 @@ $(".archive-conversation").click(function () {
         .find("span")
         .text(change == "1" ? "Unarchive" : "Archive");
     $(this).attr("changeWith", change == "1" ? "0" : "1");
+    if (change == "1") {
+        $(".conversation-" + conversationId).addClass("archived-list");
+        $(".conversation-" + conversationId).removeClass("unarchived-list");
+    } else {
+        $(".conversation-" + conversationId).addClass("unarchived-list");
+        $(".conversation-" + conversationId).removeClass("archived-list");
+    }
+    $("#archive-list").click();
 });
 
 // Initial chat update
@@ -694,7 +707,26 @@ if ($("#isGroup").val() == true) {
 } else {
     updateChat($(".selected_message").val());
 }
-
+$(".archived-list").hide();
+$("#archive-list").click(function () {
+    var msgLists = [];
+    if ($(this).attr("list") == "0") {
+        $(this).attr("list", "1");
+        $(".archived-list").show();
+        $(".unarchived-list").hide();
+        msgLists = $(".archived-list");
+        $(this).html("Unarchive List");
+    } else {
+        $(this).attr("list", "0");
+        $(".unarchived-list").show();
+        $(".archived-list").hide();
+        msgLists = $(".unarchived-list");
+        $(this).html("Archive List");
+    }
+    if (msgLists.length > 0) {
+        msgLists[0].click();
+    }
+});
 function scrollFunction() {
     const container = document.getElementById("msgBody");
     const element = document.getElementById("msgbox");
@@ -722,6 +754,7 @@ $(".send-message").on("keypress", async function (e) {
         const message = $(this).val();
         let downloadURL = "";
         let type = "";
+        $("#preview").hide();
         $(".preview_img").hide();
         const previewImg = $(".preview_img");
         const imageUrl = previewImg.attr("src");
@@ -938,6 +971,8 @@ $(".send-message").on("keypress", async function (e) {
         }
         const conversationElement = $(`.conversation-${conversationId}`);
         conversationElement.prependTo(".chat-list");
+        previewImg.attr("src", "");
+        previewAudio.attr("src", "");
     }
 });
 
@@ -1213,7 +1248,7 @@ $("#search-user")
                         $("<span>", { class: "close-btn" }).html("&times;")
                     );
                 $tag.append($img);
-                $("#selected-tags-container").append($tag);
+                $("#selected-tags-container").prepend($tag);
 
                 handleSelectedUsers();
             }
@@ -1560,6 +1595,8 @@ $("#new_message").on("keypress", async function (e) {
             newGroupMembers.map(async (memberID) => {
                 if (memberID !== senderUser) {
                     userAvailable[memberID] = 0;
+                } else {
+                    userAvailable[memberID] = Date.now();
                 }
             });
 
@@ -1616,7 +1653,7 @@ $("#new_message").on("keypress", async function (e) {
                 isReply: "0",
                 isSeen: false,
                 react: "",
-                receiverId: contactId,
+                // receiverId: contactId,
                 receiverName: contactName,
                 replyData: {},
                 senderId: senderUser,
@@ -1681,10 +1718,8 @@ async function addListInMembers(SelecteGroupUser) {
 
         const removeMember =
             user.id != senderUser && senderIsAdmin
-                ? `<button class="remove-member" data-id="${user.id}"><svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M10.4974 18.3346C15.0807 18.3346 18.8307 14.5846 18.8307 10.0013C18.8307 5.41797 15.0807 1.66797 10.4974 1.66797C5.91406 1.66797 2.16406 5.41797 2.16406 10.0013C2.16406 14.5846 5.91406 18.3346 10.4974 18.3346Z" stroke="#E03137" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M8.14062 12.3573L12.8573 7.64062" stroke="#E03137" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M12.8573 12.3573L8.14062 7.64062" stroke="#E03137" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                ? `<button class="remove-member" data-id="${user.id}"><svg width="17" height="18" viewBox="0 0 17 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M8.4974 0.666016C3.90573 0.666016 0.164062 4.40768 0.164062 8.99935C0.164062 13.591 3.90573 17.3327 8.4974 17.3327C13.0891 17.3327 16.8307 13.591 16.8307 8.99935C16.8307 4.40768 13.0891 0.666016 8.4974 0.666016ZM11.2974 10.916C11.5391 11.1577 11.5391 11.5577 11.2974 11.7993C11.1724 11.9243 11.0141 11.9827 10.8557 11.9827C10.6974 11.9827 10.5391 11.9243 10.4141 11.7993L8.4974 9.88268L6.58073 11.7993C6.45573 11.9243 6.2974 11.9827 6.13906 11.9827C5.98073 11.9827 5.8224 11.9243 5.6974 11.7993C5.45573 11.5577 5.45573 11.1577 5.6974 10.916L7.61406 8.99935L5.6974 7.08268C5.45573 6.84102 5.45573 6.44102 5.6974 6.19935C5.93906 5.95768 6.33906 5.95768 6.58073 6.19935L8.4974 8.11602L10.4141 6.19935C10.6557 5.95768 11.0557 5.95768 11.2974 6.19935C11.5391 6.44102 11.5391 6.84102 11.2974 7.08268L9.38073 8.99935L11.2974 10.916Z" fill="#F73C71"/>
 </svg>
 </button>`
                 : "";
@@ -1976,6 +2011,7 @@ $("#add-group-member").click(async function () {
                     database,
                     `overview/${userId}/${conversationId}`
                 );
+                console.log("unreadcount updated");
                 await set(overviewRef, {
                     contactId: conversationId,
                     contactName: $(".selected_name").val(),
@@ -2019,7 +2055,7 @@ $(document).on("click", ".close-group-btn", function () {
 });
 $("#new-message").click(function () {
     selectedUserIds = [];
-    $("#selected-tags-container").html("");
+    $("#selected-tags-container .tag").remove();
     updateSelectedUserIds();
     handleSelectedUsers();
 });
@@ -2420,6 +2456,9 @@ async function updateUnreadMessageBadge() {
 $(document).ready(function () {
     updateUnreadMessageBadge();
 });
+$(document).on("click", ".bulk-check .form-check-input", function (event) {
+    event.stopPropagation(); // Prevent the event from bubbling up to .msg-list
+});
 $(".bulk-edit").click(function () {
     var bulkcheck = document.getElementsByClassName("bulk-check");
     $(bulkcheck).removeClass("d-none");
@@ -2511,6 +2550,23 @@ $(".multi-archive").click(function () {
             `overview/${senderUser}/${conversationId}/isArchive`
         );
         set(overviewRef, change);
+        promises.push(set(overviewRef, change));
+    });
+});
+$(".multi-read").click(function () {
+    const checkedConversations = $(
+        "input[name='checked_conversation[]']:checked"
+    );
+    const promises = [];
+
+    checkedConversations.each(function () {
+        const conversationId = $(this).val();
+        const overviewRef = ref(
+            database,
+            `overview/${senderUser}/${conversationId}/`
+        );
+        console.log("unreadcount updated");
+        update(overviewRef, { unRead: false, unReadCount: 0 });
         promises.push(set(overviewRef, change));
     });
 });

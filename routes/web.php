@@ -44,65 +44,64 @@ Route::post('rsvp/store', [RsvpController::class, 'store'])->name('rsvp.store');
 
 
 
-Route::middleware('auth')->group(function () {
 
-    Route::get('add_account', [AuthController::class, 'addAccount'])->name('auth.add_account');
-    Route::post('check_add_account', [AuthController::class, 'checkAddAccount'])->name('auth.checkAddAccount');
+Route::get('add_account', [AuthController::class, 'addAccount'])->name('auth.add_account');
+Route::post('check_add_account', [AuthController::class, 'checkAddAccount'])->name('auth.checkAddAccount');
 
-    Route::middleware('checkUserExist')->group(function () {
-
-
-        Route::get('/home', [HomeController::class, 'index'])->name('home');
-        Route::post('/import-csv', [HomeController::class, 'importCSV'])->name('import.csv');
-        Route::get('profile',  [ProfileController::class, 'index'])->name('profile');
-        Route::get('profile/edit',  [ProfileController::class, 'edit'])->name('profile.edit');
-        Route::get('profile/change_password',  [ProfileController::class, 'changePassword'])->name('profile.change_password');
-
-        Route::post('profile/verify_password', [ProfileController::class, 'verifyPassword'])->name('profile.verify_password');
-
-        Route::post('profile/update/{id}',  [ProfileController::class, 'update'])->name('profile.update');
-        Route::post('profile/check-phonenumber', [ProfileController::class, 'checkPhoneNumberExistence']);
-
-        Route::post('profile/check_new_contactnumber', [ProfileController::class, 'checkNewContactNumber']);
+Route::middleware('checkUserExist')->group(function () {
 
 
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::post('/import-csv', [HomeController::class, 'importCSV'])->name('import.csv');
+    Route::get('profile',  [ProfileController::class, 'index'])->name('profile');
+    Route::get('profile/edit',  [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::get('profile/change_password',  [ProfileController::class, 'changePassword'])->name('profile.change_password');
 
-        Route::post('profile/update_password',  [ProfileController::class, 'updatePassword'])->name('profile.update_password');
+    Route::post('profile/verify_password', [ProfileController::class, 'verifyPassword'])->name('profile.verify_password');
 
-        Route::get('profile/public_profile',  [ProfileController::class, 'publicProfileView'])->name('profile.public_profile');
-        Route::get('profile/profile_privacy',  [ProfileController::class, 'profilePrivacy'])->name('profile.privacy');
-        Route::post('profile/update_profile_privacy',  [ProfileController::class, 'updateProfilePrivacy']);
-        Route::get('account_settings',  [AccountSettingController::class, 'index'])->name('profile.account_settings');
-        Route::get('account_settings/notification_setting',  [AccountSettingController::class, 'notificationSetting'])->name('account_settings.notificationSetting');
-        Route::post('update_account_setting',  [AccountSettingController::class, 'updateAccountSetting']);
-        Route::get('delete_account',  [AccountSettingController::class, 'deleteAccount'])->name('account.delete');
-        Route::post('account_settings/update_notification_setting',  [AccountSettingController::class, 'updateNotificationSetting']);
+    Route::post('profile/update/{id}',  [ProfileController::class, 'update'])->name('profile.update');
+    Route::post('profile/check-phonenumber', [ProfileController::class, 'checkPhoneNumberExistence']);
 
-        Route::get('account_settings/message_privacy',  [AccountSettingController::class, 'messagePrivacy'])->name('account_settings.messagePrivacy');
-        Route::post('account_settings/update_message_privacy',  [AccountSettingController::class, 'updateMessagePrivacy']);
+    Route::post('profile/check_new_contactnumber', [ProfileController::class, 'checkNewContactNumber']);
 
-        Route::post('upload',  [ProfileController::class, 'uploadProfile'])->name('profile.upload');
-        Route::post('upload_bg_profile',  [ProfileController::class, 'uploadBgProfile'])->name('profile.uploadbgprofile');
 
-        Route::get('contact',  [ContactController::class, 'index'])->name('profile.contact');
 
-        Route::post('contacts/load', [ContactController::class, 'loadMore'])->name('.loadMore');
-        Route::post('contacts/loadgroups', [ContactController::class, 'loadMoreGroup'])->name('.loadMoreGroup');
-        Route::post('contacts/loadphones', [ContactController::class, 'loadMorePhones'])->name('.loadMorePhones');
+    Route::post('profile/update_password',  [ProfileController::class, 'updatePassword'])->name('profile.update_password');
 
-        Route::post('contacts/check_new_contactemail', [ContactController::class, 'checkNewContactEmail']);
+    Route::get('profile/public_profile',  [ProfileController::class, 'publicProfileView'])->name('profile.public_profile');
+    Route::get('profile/profile_privacy',  [ProfileController::class, 'profilePrivacy'])->name('profile.privacy');
+    Route::post('profile/update_profile_privacy',  [ProfileController::class, 'updateProfilePrivacy']);
+    Route::get('account_settings',  [AccountSettingController::class, 'index'])->name('profile.account_settings');
+    Route::get('account_settings/notification_setting',  [AccountSettingController::class, 'notificationSetting'])->name('account_settings.notificationSetting');
+    Route::post('update_account_setting',  [AccountSettingController::class, 'updateAccountSetting']);
+    Route::get('delete_account',  [AccountSettingController::class, 'deleteAccount'])->name('account.delete');
+    Route::post('account_settings/update_notification_setting',  [AccountSettingController::class, 'updateNotificationSetting']);
 
-        Route::post('contacts/add/{id}', [ContactController::class, 'addContact'])->name('.addcontact');
+    Route::get('account_settings/message_privacy',  [AccountSettingController::class, 'messagePrivacy'])->name('account_settings.messagePrivacy');
+    Route::post('account_settings/update_message_privacy',  [AccountSettingController::class, 'updateMessagePrivacy']);
 
-        Route::post('contacts/edit/{id}', [ContactController::class, 'editContact'])->name('editcontact');
+    Route::post('upload',  [ProfileController::class, 'uploadProfile'])->name('profile.upload');
+    Route::post('upload_bg_profile',  [ProfileController::class, 'uploadBgProfile'])->name('profile.uploadbgprofile');
 
-        Route::post('contacts/save_edit', [ContactController::class, 'save_editContact'])->name('.saveeditcontact');
-        Route::get('messages',  [ChatController::class, 'index'])->name('message.list');
-        Route::post('getChat',  [ChatController::class, 'getChat'])->name('message.getChat');
-        Route::post('getConversation',  [ChatController::class, 'getConversation'])->name('message.getConversation');
-        Route::get('/autocomplete-users', [ChatController::class, 'autocomplete'])->name('autocomplete.users');
-    });
+    Route::get('contact',  [ContactController::class, 'index'])->name('profile.contact');
+
+    Route::post('contacts/load', [ContactController::class, 'loadMore'])->name('.loadMore');
+    Route::post('contacts/loadgroups', [ContactController::class, 'loadMoreGroup'])->name('.loadMoreGroup');
+    Route::post('contacts/loadphones', [ContactController::class, 'loadMorePhones'])->name('.loadMorePhones');
+
+    Route::post('contacts/check_new_contactemail', [ContactController::class, 'checkNewContactEmail']);
+
+    Route::post('contacts/add/{id}', [ContactController::class, 'addContact'])->name('.addcontact');
+
+    Route::post('contacts/edit/{id}', [ContactController::class, 'editContact'])->name('editcontact');
+
+    Route::post('contacts/save_edit', [ContactController::class, 'save_editContact'])->name('.saveeditcontact');
+    Route::get('messages',  [ChatController::class, 'index'])->name('message.list');
+    Route::post('getChat',  [ChatController::class, 'getChat'])->name('message.getChat');
+    Route::post('getConversation',  [ChatController::class, 'getConversation'])->name('message.getConversation');
+    Route::get('/autocomplete-users', [ChatController::class, 'autocomplete'])->name('autocomplete.users');
 });
+
 
 
 Route::controller(AuthController::class)->group(function () {
