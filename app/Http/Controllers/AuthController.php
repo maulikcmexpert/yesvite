@@ -29,44 +29,6 @@ class AuthController extends Controller
     /**
      * Display a listing of the resource.
      */
-
-
-    function redirectToGoogle()
-    {
-        $query = http_build_query([
-            'client_id' => env('InGOOGLE_CLIENT_ID'),
-            'redirect_uri' => env('InGOOGLE_REDIRECT_URI'),
-            'response_type' => 'code',
-            'scope' => 'https://www.googleapis.com/auth/androidpublisher',
-            'access_type' => 'offline',
-        ]);
-
-        return redirect("https://accounts.google.com/o/oauth2/auth?{$query}");
-    }
-
-    public function handleGoogleCallback(Request $request)
-    {
-        $http = new Client();
-
-        $response = $http->post('https://oauth2.googleapis.com/token', [
-            'form_params' => [
-                'code' => $request->input('code'),
-                'client_id' => env('InGOOGLE_CLIENT_ID'),
-                'client_secret' => env('InGOOGLE_CLIENT_SECRET'),
-                'redirect_uri' => env('InGOOGLE_REDIRECT_URI'),
-                'grant_type' => 'authorization_code',
-            ],
-        ]);
-
-        $data = json_decode($response->getBody()->getContents(), true);
-
-        $refreshToken = $data['refresh_token'];
-
-        // Store the refresh token securely, for example in the database
-        // Auth::user()->update(['google_refresh_token' => $refreshToken]);
-
-        return response()->json(['refresh_token' => $refreshToken]);
-    }
     public function index()
     {
     }

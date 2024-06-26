@@ -1379,7 +1379,7 @@ function getGoogleAccessToken()
     $response = Http::asForm()->post('https://oauth2.googleapis.com/token', [
         'client_id' => env('InGOOGLE_CLIENT_ID'),
         'client_secret' => env('InGOOGLE_CLIENT_SECRET'),
-        'refresh_token' => '1\/\/0gHYN_Ai3rfAnCgYIARAAGBASNwF-L9IrdP-JOsDTkXeH-yqO_Z252HkBEfW7oqRZqcbTrsTQ_u_8eeif8HSml-a-i0Foi6iVH4Q',
+        'refresh_token' => '1//0gHYN_Ai3rfAnCgYIARAAGBASNwF-L9IrdP-JOsDTkXeH-yqO_Z252HkBEfW7oqRZqcbTrsTQ_u_8eeif8HSml-a-i0Foi6iVH4Q',
         'grant_type' => 'refresh_token',
     ]);
 

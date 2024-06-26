@@ -3443,7 +3443,7 @@ class ApiControllerv2 extends Controller
             'city' => (!empty($eventData['city'])) ? $eventData['city'] : "",
             'message_to_guests' => (!empty($eventData['message_to_guests'])) ? $eventData['message_to_guests'] : "",
             'subscription_plan_name' => (!empty($eventData['subscription_plan_name'])) ? $eventData['subscription_plan_name'] : "",
-            'subscription_invite_count' => (!empty($eventData['subscription_invite_count'])) ? $eventData['subscription_invite_count'] : "",
+            'subscription_invite_count' => (!empty($eventData['subscription_invite_count'])) ? $eventData['subscription_invite_count'] : 0,
             'is_draft_save' => $eventData['is_draft_save']
         ]);
 
@@ -4214,7 +4214,6 @@ class ApiControllerv2 extends Controller
                 $eventDetail['step'] = ($getEventData->step != NULL) ? $getEventData->step : 0;
                 $eventDetail['subscription_plan_name'] = ($getEventData->subscription_plan_name != NULL) ? $getEventData->subscription_plan_name : "";
                 $eventDetail['subscription_invite_count'] = ($getEventData->subscription_invite_count != NULL) ? $getEventData->subscription_invite_count : 0;
-
                 $eventDetail['event_images'] = [];
                 $getEventImages = EventImage::where('event_id', $getEventData->id)->get();
                 if (!empty($getEventImages)) {
@@ -4539,7 +4538,8 @@ class ApiControllerv2 extends Controller
             $updateEvent->city = (!empty($eventData['city'])) ? $eventData['city'] : "";
             $updateEvent->message_to_guests = (!empty($eventData['message_to_guests'])) ? $eventData['message_to_guests'] : "";
             $updateEvent->is_draft_save = $eventData['is_draft_save'];
-
+            $updateEvent->subscription_plan_name = (!empty($eventData['subscription_plan_name'])) ? $eventData['subscription_plan_name'] : "";
+            $updateEvent->subscription_invite_count = (!empty($eventData['subscription_invite_count'])) ? $eventData['subscription_invite_count'] : 0;
 
             if ($updateEvent->save()) {
                 $getalreadyInviteduser =  EventInvitedUser::where('event_id', $eventData['event_id'])->get()->pluck('user_id')->toArray();
@@ -12322,80 +12322,104 @@ class ApiControllerv2 extends Controller
 
 
 
-    public function addSubscription()
+    public function addSubscription(Request $request)
     {
-        // $user = Auth::user();
-        $data = json_decode(file_get_contents('php://input'), true);
-        $app_id = $data['packageName'];
-        $product_id = $data['productId'];
-        $user_id = $this->user->id;
-        $purchaseToken = $data['purchaseToken'];
 
-        $responce =  $this->set_android_iap($app_id, $product_id, $purchaseToken);
-        dd($responce);
-        if (isset($responce['autoRenewing']) && ($responce['autoRenewing'] == '0' || $responce['autoRenewing'] == "")) {
+        $rawData = $request->getContent();
 
-            $exp_date =  date('Y-m-d H:i:s', ($responce['expiryTimeMillis'] /  1000));
-            $current_date = date('Y-m-d H:i:s');
-            if (strtotime($current_date) > strtotime($exp_date)) {
-                $data = ['status' => true, 'subscription' => 'failure'];
-                //   echo json_encode($data);
-                return response()->json($data);
-                die;
+        $input = json_decode($rawData, true);
+
+        if ($input == null) {
+            return response()->json(['status' => 0, 'message' => "Json invalid"]);
+        }
+
+
+
+        $validator = Validator::make($input, [
+
+            'orderId' => 'required',
+            'packageName' => 'required',
+            'productId' => 'required',
+            'purchaseTime' => 'required',
+            'purchaseToken' => 'required|string',
+            'autoRenewing' => 'required',
+        ]);
+
+
+        if ($validator->fails()) {
+            return response()->json(
+                [
+                    'status' => 0,
+                    'message' => $validator->errors()->first()
+                ],
+            );
+        }
+
+
+        try {
+            $app_id = $input['packageName'];
+            $product_id = $input['productId'];
+            $user_id = $this->user->id;
+            $purchaseToken = $input['purchaseToken'];
+
+            $responce =  $this->set_android_iap($app_id, $product_id, $purchaseToken);
+
+            if (isset($responce['autoRenewing']) && ($responce['autoRenewing'] == false || $responce['autoRenewing'] == "")) {
+
+                $exp_date =  date('Y-m-d H:i:s', ($responce['expiryTimeMillis'] /  1000));
+
+                $current_date = date('Y-m-d H:i:s');
+                if (strtotime($current_date) > strtotime($exp_date)) {
+                    $subscribed = UserSubscription::where('user_id', $user_id)
+                        ->select('id', 'user_id')
+                        ->first();
+                    if ($subscribed != null) {
+                        UserSubscription::where('id', $subscribed->id)
+                            ->update([
+                                'startDate' => now(),
+                                'endDate' => $exp_date,
+                                'purchaseToken' => $input['purchaseToken'],
+                                'packageName' => $input['packageName'],
+                                'productId' => $input['productId'],
+                            ]);
+                    }
+                    return response()->json(['status' => 0, 'message' => "subscription package expired"]);
+                }
             }
+
+            $enddate = date('Y-m-d H:i:s', ($responce['expiryTimeMillis'] / 1000));
+
+
+            $subscribed = UserSubscription::where('user_id', $user_id)
+                ->select('id', 'user_id')
+                ->first();
+            if (isset($subscribed) && !$subscribed->isEmpty()) {
+                $subscription = UserSubscription::where('id', $subscribed->id)
+                    ->update([
+                        'startDate' => now(),
+                        'endDate' => $enddate,
+                        'purchaseToken' => $input['purchaseToken'],
+                        'packageName' => $input['packageName'],
+                        'productId' => $input['productId'],
+                    ]);
+            } else {
+                $new_subscription = new UserSubscription();
+                $new_subscription->user_id = $user_id;
+                $new_subscription->orderId = $input['orderId'];
+                $new_subscription->packageName = $input['packageName'];
+                $new_subscription->startDate = now();
+                $new_subscription->endDate = $enddate;
+                $new_subscription->productId = $input['productId'];
+                $new_subscription->purchaseToken = $input['purchaseToken'];
+                $new_subscription->save();
+            }
+
+            return response()->json(['status' => 1, 'message' => "subscription sucessfully"]);
+        } catch (QueryException $e) {
+            return response()->json(['status' => 0, 'message' => "db error"]);
+        } catch (Exception  $e) {
+            return response()->json(['status' => 0, 'message' => 'something went wrong']);
         }
-
-        $enddate = date('Y-m-d H:i:s', ($responce['expiryTimeMillis'] / 1000));
-        if ($data['product_id'] == 'com.obs.oribible.yearly') {
-            $plan = '1 Year';
-        } else {
-            $plan = '1 Year';
-        }
-
-        $payment = new Payment();
-        $payment->user_id = $user->id;
-        $payment->transaction_id = $data['transaction_id'];
-        $payment->package_name = $data['product_id'];
-        $payment->amount = $data['amount'];
-        $payment->save();
-        $duration = Payment::where('user_id', $user->id)->count();
-
-        $subscribed = Subscription::where('user_id', $user->id)
-            ->select('id', 'user_id')
-            ->get();
-        if (isset($subscribed) && !$subscribed->isEmpty()) {
-            $subscription = Subscription::where('id', $subscribed[0]->id)
-                ->update([
-                    'plan' => $plan,
-                    'start_date' => now(),
-                    'end_date' => $enddate,
-                    'feedback' => null,
-                    'receipt' => null,
-                    'purchase_token' => $data['purchase_token'],
-                    'app_id' => $data['app_id'],
-                    'product_id' => $data['product_id'],
-                    'duration' => $duration,
-                    'unsubscribe_request' => 0
-                ]);
-        } else {
-            $subscription = new Subscription();
-            $subscription->user_id = $user->id;
-            $subscription->plan = $plan;
-            $subscription->start_date = now();
-            $subscription->end_date = $enddate;
-            $subscription->feedback = null;
-            $subscription->receipt = null;
-            $subscription->purchase_token = $data['purchase_token'];
-            $subscription->app_id = $data['app_id'];
-            $subscription->product_id = $data['product_id'];
-            $subscription->duration = $duration;
-            $subscription->save();
-        }
-
-        return $this->sendResponse(
-            __('Subscription Successfully'),
-            1
-        );
     }
 
 
@@ -12407,7 +12431,7 @@ class ApiControllerv2 extends Controller
         $clientSecret = env('InGOOGLE_CLIENT_SECRET');
         $redirectUri = 'https://yesvite.cmexpertiseinfotech.in/google/callback';
 
-        $refreshToken = '1\/\/0gHYN_Ai3rfAnCgYIARAAGBASNwF-L9IrdP-JOsDTkXeH-yqO_Z252HkBEfW7oqRZqcbTrsTQ_u_8eeif8HSml-a-i0Foi6iVH4Q';
+        $refreshToken = '1//0gHYN_Ai3rfAnCgYIARAAGBASNwF-L9IrdP-JOsDTkXeH-yqO_Z252HkBEfW7oqRZqcbTrsTQ_u_8eeif8HSml-a-i0Foi6iVH4Q';
 
 
         $TOKEN_URL = "https://accounts.google.com/o/oauth2/token";
@@ -12430,15 +12454,11 @@ class ApiControllerv2 extends Controller
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $result = curl_exec($ch);
         $result = json_decode($result, true);
-        dd($result);
+
         if (!$result || !$result["access_token"]) {
             //error  
             // return;
         }
-
-        // echo $VALIDATE_URL."?access_token=".$result["access_token"];exit;
-        // echo $VALIDATE_URL."?access_token=".$result["access_token"];die;
-        //request to play store with the access token from the authentication request
 
 
         $ch = curl_init();
@@ -12450,94 +12470,7 @@ class ApiControllerv2 extends Controller
             //error
             // return;
         }
-        // print_r($result1);exit;
+
         return $result1;
     }
-    // public function addSubscription(Request $request)
-    // {
-    //     $rawData = $request->getContent();
-
-    //     $input = json_decode($rawData, true);
-
-    //     if ($input == null) {
-    //         return response()->json(['status' => 0, 'message' => "Json invalid"]);
-    //     }
-
-
-
-    //     $validator = Validator::make($input, [
-
-    //         'orderId' => 'required',
-    //         'packageName' => 'required',
-    //         'productId' => 'required',
-    //         'purchaseTime' => 'required',
-    //         'purchaseToken' => 'required|string',
-    //         // 'autoRenewing' => 'required',
-    //     ]);
-
-
-    //     if ($validator->fails()) {
-    //         return response()->json(
-    //             [
-    //                 'status' => 0,
-    //                 'message' => $validator->errors()->first()
-    //             ],
-    //         );
-    //     }
-
-    //     try {
-    //         $packageName = $input['packageName'];
-    //         $productId = $input['productId'];
-    //         $purchaseToken = $input['purchaseToken'];
-
-    //         $accessToken = getGoogleAccessToken();
-    //         dd($accessToken);
-
-    //         $url = "https://www.googleapis.com/androidpublisher/v3/applications/{$packageName}/purchases/subscriptions/{$productId}/tokens/{$purchaseToken}?access_token={$accessToken}";
-    //         $response = Http::get($url);
-    //         // dd($response);
-    //         $addSubscription = new UserSubscription();
-    //         $addSubscription->orderId = $input['orderId'];
-    //         $addSubscription->packageName = $input['packageName'];
-    //         $addSubscription->productId = $input['productId'];
-    //     } catch (QueryException $e) {
-    //         return response()->json(['status' => 0, 'message' => "db error"]);
-    //     } catch (Exception  $e) {
-    //         return response()->json(['status' => 0, 'message' => 'something went wrong']);
-    //     }
-    // }
-
-    // public function verifyPurchase(Request $request)
-    // {
-    //     $rawData = $request->getContent();
-    //     $input = json_decode($rawData, true);
-    //     if ($input == null) {
-    //         return response()->json(['status' => 0, 'message' => "Json invalid"]);
-    //     }
-
-    //     $validator = Validator::make($input, [
-    //         'platform' => ['required', 'in:ios,android'],
-    //     ]);
-
-    //     if ($validator->fails()) {
-    //         return response()->json([
-    //             'status' => 0,
-    //             'message' => $validator->errors()->first(),
-    //         ]);
-    //     }
-
-    //     $usersubscription = UserSubscription::where(['user_id', $this->user->id])->first();
-    //     $userId = $this->user->id;
-    //     $purchaseToken = $usersubscription->purchase_token;
-    //     $platform = $input['platform'];
-
-    //     if ($platform == 'ios') {
-
-    //         return $this->verifyApplePurchase($userId, $purchaseToken);
-    //     } elseif ($platform == 'android') {
-    //         return $this->verifyGooglePurchase($userId, $purchaseToken);
-    //     } else {
-    //         return response()->json(['error' => 'Invalid platform'], 400);
-    //     }
-    // }
 }

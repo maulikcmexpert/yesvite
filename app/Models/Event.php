@@ -36,7 +36,9 @@ class Event extends Model
         'message_to_guests',
         'greeting_card_id',
         'gift_registry_id',
-        'is_draft_save'
+        'is_draft_save',
+        'subscription_plan_name',
+        'subscription_invite_count'
     ];
     use HasFactory;
     use SoftDeletes;
