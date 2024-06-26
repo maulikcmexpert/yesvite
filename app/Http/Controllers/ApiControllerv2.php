@@ -12436,7 +12436,7 @@ class ApiControllerv2 extends Controller
                 $userSubscription->save();
                 return response()->json(['status' => 0, 'message' => "subscription is not active", 'type' => 'Free']);
             }
-            return response()->json(['status' => 1, 'message' => "subscription is active", 'type' => $userSubscription->type]);
+            return response()->json(['status' => 1, 'message' => "subscription is active", 'type' => 'Pro-Year']);
         }
         return response()->json(['status' => 0, 'message' => "No subscribe", 'type' => 'Free']);
     }
