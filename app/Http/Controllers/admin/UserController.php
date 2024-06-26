@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
+use Kreait\Laravel\Firebase\Facades\Firebase;
 
 
 class UserController extends Controller
@@ -20,6 +21,17 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    protected $firebase;
+    protected $usersReference;
+
+    public function __construct()
+    {
+        $this->firebase = Firebase::database();
+        $this->usersReference = $this->firebase->getReference('users');
+        // $this->database = $database;
+        // $this->chatRoom = $this->database->getReference();
+    }
     public function index(Request $request)
 
     {
@@ -171,9 +183,8 @@ class UserController extends Controller
 
 
             DB::commit();
-
+            $this->addInFirebase($addUser->id);
             return redirect()->route('users.index')->with('success', 'User Add successfully !');
-
         } catch (\Exception $e) {
             // Rollback transaction on error
             DB::rollBack();
@@ -209,6 +220,39 @@ class UserController extends Controller
             return response()->json(false);
         } else {
             return response()->json(true);
+        }
+    }
+
+
+    public function addInFirebase($userId)
+    {
+        $userData = User::findOrFail($userId);
+        // dd($userData);
+        $userName =  $userData->firstname . ' ' . $userData->lastname;
+        $updateData = [
+            'userChatId' => '',
+            'userCountryCode' => (string)$userData->country_code,
+            'userGender' => 'male',
+            'userEmail' => $userData->email,
+            'userId' => (string)$userId,
+            'userLastSeen' => now()->timestamp * 1000, // Convert to milliseconds
+            'userName' => $userName,
+            'userPhone' => (string)$userData->phone_number,
+            'userProfile' => request()->server('HTTP_HOST') . '/public/storage/profile/' . $userData->profile,
+            'userStatus' => 'Online',
+            'userTypingStatus' => 'Not typing...'
+        ];
+
+        // Create a new user node with the userId
+        $userRef = $this->usersReference->getChild((string)$userId);
+        $userSnapshot = $userRef->getValue();
+
+        if ($userSnapshot) {
+            // User exists, update the existing data
+            $userRef->update($updateData);
+        } else {
+            // User does not exist, create a new user node
+            $userRef->set($updateData);
         }
     }
     /**
