@@ -12313,7 +12313,7 @@ class ApiControllerv2 extends Controller
 
 
 
-    public function add_subscription()
+    public function addSubscription()
     {
         // $user = Auth::user();
         $data = json_decode(file_get_contents('php://input'), true);
