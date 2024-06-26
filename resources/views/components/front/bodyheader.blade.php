@@ -24,7 +24,7 @@
                      <path fill-rule="evenodd" clip-rule="evenodd" d="M4.28744 9.54549C4.88479 10.0462 5.47336 10.4854 5.92138 10.8105C6.17613 11.0037 6.02679 11.1706 5.84232 11.645C5.84232 11.645 5.72812 11.9261 6.02679 11.9525H6.63293C6.94039 11.9349 6.81741 11.645 6.81741 11.645C6.62415 11.1706 6.47481 11.0037 6.73835 10.8105C7.18636 10.4854 7.77493 10.0462 8.37228 9.54549C9.26832 8.78123 10.2522 7.85884 10.7705 6.7959C12.176 3.9409 9.48793 -0.012174 6.33425 2.46509C3.18058 -0.012174 0.483699 3.9409 1.88924 6.7959C2.40753 7.85006 3.40019 8.78123 4.29622 9.54549H4.28744Z" fill="#EA555C" />
                  </svg>
              </a>
-                <button class="navbar-toggler toggle" id="ChangeToggle" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+                <!-- <button class="navbar-toggler toggle" id="ChangeToggle" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
                     <div id="navbar-hamburger">
                         <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M3.5 7H21.5" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"/>
@@ -40,7 +40,7 @@
                             </svg>
                         </span>
                     </div>
-                </button>
+                </button> -->
 
 
 
