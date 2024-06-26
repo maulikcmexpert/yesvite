@@ -174,7 +174,7 @@ use Carbon\Carbon;
                         $i++;
                     @endphp
                 @endforeach
-                    @if (empty($messages))
+                    @if ($i==0)
                     <input type="hidden" class="selected_id"/>
                     <input type="hidden" class="selected_message" />
                     <input type="hidden" class="selected_name"/>

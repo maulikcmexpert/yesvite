@@ -346,7 +346,7 @@ async function updateChat(user_id) {
     const selected_user = await getUser(user_id);
     console.log({ user_id });
     if (!selected_user) {
-        alert("user not found in firebase");
+        toastr.error("user not found in firebase");
         return;
     }
 
@@ -1766,87 +1766,6 @@ $(document).on("click", ".remove-member", async function () {
     });
     await addListInMembers(SelecteGroupUser);
 });
-$(".delete-conversation").click(async function () {
-    var conversationId = $(".conversationId").attr("conversationid");
-    const isGroup = $("#isGroup").val();
-    if (!conversationId || !senderUser) {
-        console.error("Conversation ID or Sender User ID is missing");
-        return;
-    }
-    $(".conversation-" + conversationId).remove();
-    var msgLists = $(".msg-list");
-    if (msgLists.length > 0) {
-        msgLists.first().click(); // Simulate a click event on the first msg-list element
-    }
-    var overviewRef = ref(database, `overview/${senderUser}/${conversationId}`);
-
-    await remove(overviewRef);
-    if (isGroup === "true" || isGroup == true) {
-        var groupInfoProfileRef = ref(
-            database,
-            `/Groups/${conversationId}/groupInfo/profiles`
-        );
-        var groupInfoProfileSnap = await get(groupInfoProfileRef);
-        var groupInfoProfileData = groupInfoProfileSnap.val();
-
-        if (groupInfoProfileData) {
-            // Check if senderUser is an admin using array method
-            var isAdmin = false;
-            for (var key in groupInfoProfileData) {
-                if (groupInfoProfileData[key].id == senderUser) {
-                    if (groupInfoProfileData[key].isAdmin == "1") {
-                        isAdmin = true;
-                    }
-                    await update(
-                        ref(
-                            database,
-                            `/Groups/${conversationId}/groupInfo/profiles/${key}`
-                        ),
-                        { isAdmin: "0", leave: true }
-                    );
-                    break;
-                }
-            }
-
-            // If senderUser is an admin, assign admin to another member
-            if (isAdmin) {
-                for (var key in groupInfoProfileData) {
-                    if (
-                        groupInfoProfileData[key].leave == false &&
-                        groupInfoProfileData[key].id != senderUser
-                    ) {
-                        await update(
-                            ref(
-                                database,
-                                `/Groups/${conversationId}/groupInfo/profiles/${key}`
-                            ),
-                            { isAdmin: "1" }
-                        );
-                        break;
-                    }
-                }
-            }
-        }
-    } else {
-        var messagesRef = ref(database, `Messages/${conversationId}/message`);
-        var messagesSnapshot = await get(messagesRef);
-
-        if (messagesSnapshot.exists()) {
-            var messages = messagesSnapshot.val();
-            var updates = {};
-
-            // Iterate through all messages and update isDelete for the senderUser
-            for (var messageId in messages) {
-                console.log(messageId);
-                updates[
-                    `Messages/${conversationId}/message/${messageId}/isDelete/${senderUser}`
-                ] = 1;
-            }
-            // Apply updates to the Firebase Realtime Database
-            await update(ref(database), updates);
-        }
-    }
-});
 
 $(".selected-title").dblclick(function () {
     let title = $(this).html();
@@ -2105,7 +2024,15 @@ $("#new-message").click(function () {
     handleSelectedUsers();
 });
 function generateReactionsAndReply() {
-    $(document).on("click", ".reaction-icon", function () {
+    $(document).on("click", function (event) {
+        if (
+            !$(event.target).closest(".reaction-dialog, .reaction-icon").length
+        ) {
+            $(".reaction-dialog").remove();
+        }
+    });
+    $(document).on("click", ".reaction-icon", function (event) {
+        event.stopPropagation();
         const messageId = $(this).data("message-id");
         const reactionDialog = `
         <div class="reaction-dialog" id="reaction-dialog-${messageId}">
@@ -2116,6 +2043,7 @@ function generateReactionsAndReply() {
             <span class="reaction-option" data-reaction="\\u{1F44F}}">&#x1F44F;</span>
         </div>
     `;
+        $(".reaction-dialog").remove(); // Remove any existing reaction dialogs
         $(this).after(reactionDialog);
     });
 
@@ -2284,7 +2212,7 @@ function startRecording() {
         })
         .catch((err) => {
             console.error("Error accessing microphone: ", err);
-            alert("Failed to access microphone. Please try again.");
+            toastr.error("Failed to access microphone. Please try again.");
         });
 }
 
@@ -2477,6 +2405,8 @@ async function getTotalUnreadMessageCount() {
 async function updateUnreadMessageBadge() {
     const totalUnreadCount = await getTotalUnreadMessageCount();
     $(".badge").text(totalUnreadCount);
+    $(".set-replay-msg").remove();
+    replyMessageId = null;
 }
 
 // Call the function on page load
@@ -2578,6 +2508,23 @@ $(".multi-archive").click(function () {
     });
 });
 
+$(".delete-conversation").click(async function () {
+    var conversationId = $(".conversationId").attr("conversationid");
+    const isGroup = $("#isGroup").val();
+
+    if (!conversationId || !senderUser) {
+        console.error("Conversation ID or Sender User ID is missing");
+        return;
+    }
+
+    await deleteConversation(conversationId, isGroup);
+
+    var msgLists = $(".msg-list");
+    if (msgLists.length > 0) {
+        msgLists.first().click(); // Simulate a click event on the first msg-list element
+    }
+});
+
 $(".multi-delete").click(async function () {
     const checkedConversations = $(
         "input[name='checked_conversation[]']:checked"
@@ -2592,35 +2539,7 @@ $(".multi-delete").click(async function () {
     checkedConversations.each(function () {
         const conversationId = $(this).val();
         const isGroup = $(this).attr("isGroup");
-        if (!conversationId || !senderUser) {
-            console.error("Conversation ID or Sender User ID is missing");
-            return;
-        }
-
-        // Remove conversation element from DOM
-        $(`.conversation-${conversationId}`).remove();
-
-        var overviewRef = ref(
-            database,
-            `overview/${senderUser}/${conversationId}`
-        );
-        promises.push(remove(overviewRef));
-
-        if (isGroup === "true" || isGroup == true) {
-            const groupInfoProfileRef = ref(
-                database,
-                `/Groups/${conversationId}/groupInfo/profiles`
-            );
-            promises.push(
-                handleGroupDeletion(groupInfoProfileRef, conversationId)
-            );
-        } else {
-            const messagesRef = ref(
-                database,
-                `Messages/${conversationId}/message`
-            );
-            promises.push(handleMessageDeletion(messagesRef, conversationId));
-        }
+        promises.push(deleteConversation(conversationId, isGroup));
     });
 
     try {
@@ -2630,6 +2549,80 @@ $(".multi-delete").click(async function () {
         console.error("Error deleting conversations:", error);
     }
 });
+
+async function deleteConversation(conversationId, isGroup) {
+    if (!conversationId || !senderUser) {
+        console.error("Conversation ID or Sender User ID is missing");
+        return;
+    }
+
+    // Remove conversation element from DOM
+    $(`.conversation-${conversationId}`).remove();
+
+    var overviewRef = ref(database, `overview/${senderUser}/${conversationId}`);
+    await remove(overviewRef);
+
+    if (isGroup === "true" || isGroup == true) {
+        const groupInfoProfileRef = ref(
+            database,
+            `/Groups/${conversationId}/groupInfo/profiles`
+        );
+        const groupInfoProfileSnap = await get(groupInfoProfileRef);
+        const groupInfoProfileData = groupInfoProfileSnap.val();
+
+        if (groupInfoProfileData) {
+            var isAdmin = false;
+            for (var key in groupInfoProfileData) {
+                if (groupInfoProfileData[key].id == senderUser) {
+                    if (groupInfoProfileData[key].isAdmin == "1") {
+                        isAdmin = true;
+                    }
+                    await update(
+                        ref(
+                            database,
+                            `/Groups/${conversationId}/groupInfo/profiles/${key}`
+                        ),
+                        { isAdmin: "0", leave: true }
+                    );
+                    break;
+                }
+            }
+
+            if (isAdmin) {
+                for (var key in groupInfoProfileData) {
+                    if (
+                        groupInfoProfileData[key].leave == false &&
+                        groupInfoProfileData[key].id != senderUser
+                    ) {
+                        await update(
+                            ref(
+                                database,
+                                `/Groups/${conversationId}/groupInfo/profiles/${key}`
+                            ),
+                            { isAdmin: "1" }
+                        );
+                        break;
+                    }
+                }
+            }
+        }
+    } else {
+        const messagesRef = ref(database, `Messages/${conversationId}/message`);
+        const messagesSnapshot = await get(messagesRef);
+
+        if (messagesSnapshot.exists()) {
+            const messages = messagesSnapshot.val();
+            const updates = {};
+
+            for (var messageId in messages) {
+                updates[
+                    `Messages/${conversationId}/message/${messageId}/isDelete/${senderUser}`
+                ] = 1;
+            }
+            await update(ref(database), updates);
+        }
+    }
+}
 
 async function handleGroupDeletion(groupInfoProfileRef, conversationId) {
     const groupInfoProfileSnap = await get(groupInfoProfileRef);
