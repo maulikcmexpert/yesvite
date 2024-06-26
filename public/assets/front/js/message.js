@@ -554,7 +554,7 @@ async function updateMore(conversationId) {
         $(".conversation-" + conversationId)
             .find(".chat-data")
             .find(".pin-svg")
-            .hide();
+            .addClass("d-none");
         if (overviewData.isPin != undefined) {
             $(".pin-conversation")
                 .find("span")
@@ -564,7 +564,10 @@ async function updateMore(conversationId) {
                 overviewData.isPin == "1" ? "0" : "1"
             );
             if (overviewData.isPin == "1") {
-                $(".pin-svg").show();
+                $(".conversation-" + conversationId)
+                    .find(".chat-data")
+                    .find(".pin-svg")
+                    .removeClass("d-none");
             }
         }
         if (overviewData.isMute != undefined) {
@@ -603,7 +606,15 @@ $(".pin-conversation").click(function () {
     if (pinChange == "1") {
         const conversationElement = $(`.conversation-${conversationId}`);
         conversationElement.prependTo(".chat-list");
-        $(".pin-svg").show();
+        $(".conversation-" + conversationId)
+            .find(".chat-data")
+            .find(".pin-svg")
+            .removeClass("d-none");
+    } else {
+        $(".conversation-" + conversationId)
+            .find(".chat-data")
+            .find(".pin-svg")
+            .addClass("d-none");
     }
 });
 
@@ -619,10 +630,6 @@ $(".mute-conversation").click(function () {
         .find("span")
         .text(change == "1" ? "Unmute" : "Mute");
     $(this).attr("changeWith", change == "1" ? "0" : "1");
-    if (change == "1") {
-        const conversationElement = $(`.conversation-${conversationId}`);
-        conversationElement.prependTo(".chat-list");
-    }
 });
 $(".block-conversation").click(async function () {
     const userId = $(this).attr("user");
@@ -679,10 +686,6 @@ $(".archive-conversation").click(function () {
         .find("span")
         .text(change == "1" ? "Unarchive" : "Archive");
     $(this).attr("changeWith", change == "1" ? "0" : "1");
-    if (change == "1") {
-        const conversationElement = $(`.conversation-${conversationId}`);
-        conversationElement.prependTo(".chat-list");
-    }
 });
 
 // Initial chat update
@@ -959,7 +962,7 @@ function UpdateMessageToList(key, messageData, conversationId) {
 }
 function addMessageToList(key, messageData, conversationId) {
     if ($(".selected_conversasion").val() != conversationId) {
-        console("selectedisnotvalid");
+        console.log("selectedisnotvalid");
         return;
     }
     let isGroup = $("#isGroup").val();
@@ -1700,9 +1703,11 @@ async function addListInMembers(SelecteGroupUser) {
                                                 ? "You"
                                                 : user.name
                                         }</h3>
-                                        <span class="group-admin">${
-                                            user.isAdmin == "1" ? "Admin" : ""
-                                        }</span>
+                                        ${
+                                            user.isAdmin == "1"
+                                                ? "<span class='group-admin'>Admin</span>"
+                                                : ""
+                                        }
                                     </div>
                                 </div>
                                 ${removeMember}
@@ -2478,3 +2483,207 @@ async function updateUnreadMessageBadge() {
 $(document).ready(function () {
     updateUnreadMessageBadge();
 });
+$(".bulk-edit").click(function () {
+    var bulkcheck = document.getElementsByClassName("bulk-check");
+    $(bulkcheck).removeClass("d-none");
+    $(".chat-functions").removeClass("d-none");
+});
+
+$(document).on("change", "input[name='checked_conversation[]']", function () {
+    const checkedCount = $(
+        "input[name='checked_conversation[]']:checked"
+    ).length;
+    $(".check-counter").text(checkedCount);
+});
+$(".multi-pin").click(async function () {
+    const pinChange = $(this).attr("changeWith");
+    $(this).attr("changeWith", pinChange == "1" ? "0" : "1");
+
+    const checkedConversations = $(
+        "input[name='checked_conversation[]']:checked"
+    );
+    const promises = [];
+
+    checkedConversations.each(function () {
+        const conversationId = $(this).val();
+        const overviewRef = ref(
+            database,
+            `overview/${senderUser}/${conversationId}/isPin`
+        );
+        promises.push(set(overviewRef, pinChange));
+
+        if (pinChange == "1") {
+            const conversationElement = $(`.conversation-${conversationId}`);
+            conversationElement.prependTo(".chat-list");
+            $(`.conversation-${conversationId}`)
+                .find(".chat-data")
+                .find(".pin-svg")
+                .removeClass("d-none");
+        } else {
+            $(`.conversation-${conversationId}`)
+                .find(".chat-data")
+                .find(".pin-svg")
+                .addClass("d-none");
+        }
+    });
+
+    try {
+        await Promise.all(promises);
+        $(this)
+            .find("span")
+            .text(pinChange == "1" ? "Unpin" : "Pin");
+        $(this).attr("changeWith", pinChange == "1" ? "0" : "1");
+    } catch (error) {
+        console.error("Error updating pin status:", error);
+    }
+});
+
+$(".multi-mute").click(function () {
+    const change = $(this).attr("changeWith");
+    $(this).attr("changeWith", change == "1" ? "0" : "1");
+
+    const checkedConversations = $(
+        "input[name='checked_conversation[]']:checked"
+    );
+    const promises = [];
+
+    checkedConversations.each(function () {
+        const conversationId = $(this).val();
+        const overviewRef = ref(
+            database,
+            `overview/${senderUser}/${conversationId}/isMute`
+        );
+        set(overviewRef, change);
+        promises.push(set(overviewRef, change));
+    });
+});
+
+$(".multi-archive").click(function () {
+    const change = $(this).attr("changeWith");
+    $(this).attr("changeWith", change == "1" ? "0" : "1");
+
+    const checkedConversations = $(
+        "input[name='checked_conversation[]']:checked"
+    );
+    const promises = [];
+
+    checkedConversations.each(function () {
+        const conversationId = $(this).val();
+        const overviewRef = ref(
+            database,
+            `overview/${senderUser}/${conversationId}/isArchive`
+        );
+        set(overviewRef, change);
+        promises.push(set(overviewRef, change));
+    });
+});
+
+$(".multi-delete").click(async function () {
+    const checkedConversations = $(
+        "input[name='checked_conversation[]']:checked"
+    );
+
+    if (checkedConversations.length === 0) {
+        alert("No conversations selected for deletion.");
+        return;
+    }
+
+    const promises = [];
+    checkedConversations.each(function () {
+        const conversationId = $(this).val();
+        const isGroup = $(this).attr("isGroup");
+        if (!conversationId || !senderUser) {
+            console.error("Conversation ID or Sender User ID is missing");
+            return;
+        }
+
+        // Remove conversation element from DOM
+        $(`.conversation-${conversationId}`).remove();
+
+        var overviewRef = ref(
+            database,
+            `overview/${senderUser}/${conversationId}`
+        );
+        promises.push(remove(overviewRef));
+
+        if (isGroup === "true" || isGroup == true) {
+            const groupInfoProfileRef = ref(
+                database,
+                `/Groups/${conversationId}/groupInfo/profiles`
+            );
+            promises.push(
+                handleGroupDeletion(groupInfoProfileRef, conversationId)
+            );
+        } else {
+            const messagesRef = ref(
+                database,
+                `Messages/${conversationId}/message`
+            );
+            promises.push(handleMessageDeletion(messagesRef, conversationId));
+        }
+    });
+
+    try {
+        await Promise.all(promises);
+        toastr.success("Selected conversations have been deleted.");
+    } catch (error) {
+        console.error("Error deleting conversations:", error);
+    }
+});
+
+async function handleGroupDeletion(groupInfoProfileRef, conversationId) {
+    const groupInfoProfileSnap = await get(groupInfoProfileRef);
+    const groupInfoProfileData = groupInfoProfileSnap.val();
+
+    if (groupInfoProfileData) {
+        var isAdmin = false;
+        for (var key in groupInfoProfileData) {
+            if (groupInfoProfileData[key].id == senderUser) {
+                if (groupInfoProfileData[key].isAdmin == "1") {
+                    isAdmin = true;
+                }
+                await update(
+                    ref(
+                        database,
+                        `/Groups/${conversationId}/groupInfo/profiles/${key}`
+                    ),
+                    { isAdmin: "0", leave: true }
+                );
+                break;
+            }
+        }
+
+        if (isAdmin) {
+            for (var key in groupInfoProfileData) {
+                if (
+                    groupInfoProfileData[key].leave == false &&
+                    groupInfoProfileData[key].id != senderUser
+                ) {
+                    await update(
+                        ref(
+                            database,
+                            `/Groups/${conversationId}/groupInfo/profiles/${key}`
+                        ),
+                        { isAdmin: "1" }
+                    );
+                    break;
+                }
+            }
+        }
+    }
+}
+
+async function handleMessageDeletion(messagesRef, conversationId) {
+    const messagesSnapshot = await get(messagesRef);
+    if (messagesSnapshot.exists()) {
+        const messages = messagesSnapshot.val();
+        const updates = {};
+
+        for (var messageId in messages) {
+            updates[
+                `Messages/${conversationId}/message/${messageId}/isDelete/${senderUser}`
+            ] = 1;
+        }
+        await update(ref(database), updates);
+    }
+}
