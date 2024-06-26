@@ -621,6 +621,26 @@ ul.nav-tabs .nav-link:focus{
     background: linear-gradient(2.35619rad, rgb(224, 250, 255), rgb(167, 238, 252)) !important;
 }
 
+.ui-widget-content.ui-autocomplete{
+    padding: 5px !important;
+    border-radius: 5px !important;
+    -webkit-border-radius: 5px !important;
+    -moz-border-radius: 5px !important;
+    -ms-border-radius: 5px !important;
+    -o-border-radius: 5px !important;
+}
+
+.ui-widget-content.ui-autocomplete .ui-menu-item{
+    margin-bottom: 10px;
+}
+
+.ui-widget-content.ui-autocomplete .ui-menu-item:last-child{
+    margin-bottom: 0;
+}
+
+.ui-widget-content.ui-autocomplete .ui-menu-item-wrapper{
+    align-items: center !important;
+}
 
 /* ======== Responsive ========= */
 @media only screen and (max-width:1199px){
