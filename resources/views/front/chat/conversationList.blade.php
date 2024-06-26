@@ -57,7 +57,7 @@ $i = 0;
                 <span class="badge ms-2 {{@$message['unReadCount'] == 0 ? 'd-none' : ''}}">{{@$message['unReadCount']}}</span>
             </div>
         </a>
-        <span class="ms-3 me-2 d-flex align-items-center pin-svg">
+        <span class="ms-3 me-2 d-flex align-items-center pin-svg d-none">
             <svg width="11" height="17" viewBox="0 0 11 17" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
                 <path
