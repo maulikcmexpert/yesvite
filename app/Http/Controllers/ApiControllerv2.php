@@ -12366,6 +12366,19 @@ class ApiControllerv2 extends Controller
 
                 $current_date = date('Y-m-d H:i:s');
                 if (strtotime($current_date) > strtotime($exp_date)) {
+                    $subscribed = UserSubscription::where('user_id', $user_id)
+                        ->select('id', 'user_id')
+                        ->first();
+                    if (isset($subscribed) && !$subscribed->isEmpty()) {
+                         UserSubscription::where('id', $subscribed->id)
+                            ->update([
+                                'startDate' => now(),
+                                'endDate' => $exp_date,
+                                'purchaseToken' => $input['purchaseToken'],
+                                'packageName' => $input['packageName'],
+                                'productId' => $input['productId'],
+                            ]);
+                    }
                     return response()->json(['status' => 0, 'message' => "subscription package expired"]);
                 }
             }
@@ -12381,7 +12394,7 @@ class ApiControllerv2 extends Controller
                     ->update([
                         'startDate' => now(),
                         'endDate' => $enddate,
-                        'purchaseToken' => $input['purchase_token'],
+                        'purchaseToken' => $input['purchaseToken'],
                         'packageName' => $input['packageName'],
                         'productId' => $input['productId'],
                     ]);
