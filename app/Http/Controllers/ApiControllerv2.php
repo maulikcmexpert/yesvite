@@ -12389,6 +12389,8 @@ class ApiControllerv2 extends Controller
                 $new_subscription->user_id = $user_id;
                 $new_subscription->orderId = $input['orderId'];
                 $new_subscription->packageName = $input['packageName'];
+                $new_subscription->startDate = now();
+                $new_subscription->endDate = $enddate;
                 $new_subscription->productId = $input['productId'];
                 $new_subscription->purchaseToken = $input['purchaseToken'];
                 $new_subscription->save();
