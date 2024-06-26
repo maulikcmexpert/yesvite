@@ -12363,6 +12363,7 @@ class ApiControllerv2 extends Controller
             if (isset($responce['autoRenewing']) && ($responce['autoRenewing'] == false || $responce['autoRenewing'] == "")) {
 
                 $exp_date =  date('Y-m-d H:i:s', ($responce['expiryTimeMillis'] /  1000));
+                dd($exp_date);
                 $current_date = date('Y-m-d H:i:s');
                 if (strtotime($current_date) > strtotime($exp_date)) {
                     return response()->json(['status' => 0, 'message' => "subscription package expired"]);
