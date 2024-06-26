@@ -2128,7 +2128,10 @@ function generateReactionsAndReply() {
         </div>
     `;
         $(".reaction-dialog").remove(); // Remove any existing reaction dialogs
-        $(this).after(reactionDialog);
+        console.log($(this).closest(".reply-icon"));
+        console.log($(this).next(".reply-icon"));
+        console.log($(this).find(".reply-icon"));
+        $(this).append(reactionDialog);
     });
 
     $(document).on("click", ".reaction-option", async function () {
