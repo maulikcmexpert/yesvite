@@ -25,7 +25,7 @@ use Carbon\Carbon;
                     <div class="chat-lists">
                         <div class="chat-header">
 
-                            {{-- <div class="chat-functions">
+                            <div class="chat-functions d-none">
                                 <div class="d-flex align-items-center">
                                     <span class="me-3">
                                         <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -33,23 +33,23 @@ use Carbon\Carbon;
                                             <path d="M21.0019 12H4.17188" stroke="#0F172A" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
                                         </svg>
                                     </span>
-                                    <h6>2</h6>
+                                    <h6 class="check-counter"></h6>
                                 </div>
                                 <div class="ms-auto d-flex gap-3">
-                                    <span>
+                                    <span class="multi-read">
                                         <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M12.5019 16.3299C10.1119 16.3299 8.17188 14.3899 8.17188 11.9999C8.17188 9.60992 10.1119 7.66992 12.5019 7.66992C14.8919 7.66992 16.8319 9.60992 16.8319 11.9999C16.8319 14.3899 14.8919 16.3299 12.5019 16.3299ZM12.5019 9.16992C10.9419 9.16992 9.67188 10.4399 9.67188 11.9999C9.67188 13.5599 10.9419 14.8299 12.5019 14.8299C14.0619 14.8299 15.3319 13.5599 15.3319 11.9999C15.3319 10.4399 14.0619 9.16992 12.5019 9.16992Z" fill="#64748B" />
                                             <path d="M12.4981 21.0205C8.73812 21.0205 5.18813 18.8205 2.74812 15.0005C1.68813 13.3505 1.68813 10.6605 2.74812 9.00047C5.19812 5.18047 8.74813 2.98047 12.4981 2.98047C16.2481 2.98047 19.7981 5.18047 22.2381 9.00047C23.2981 10.6505 23.2981 13.3405 22.2381 15.0005C19.7981 18.8205 16.2481 21.0205 12.4981 21.0205ZM12.4981 4.48047C9.26813 4.48047 6.17813 6.42047 4.01813 9.81047C3.26813 10.9805 3.26813 13.0205 4.01813 14.1905C6.17813 17.5805 9.26813 19.5205 12.4981 19.5205C15.7281 19.5205 18.8181 17.5805 20.9781 14.1905C21.7281 13.0205 21.7281 10.9805 20.9781 9.81047C18.8181 6.42047 15.7281 4.48047 12.4981 4.48047Z" fill="#64748B" />
                                         </svg>
                                     </span>
-                                    <span>
+                                    <span class="multi-pin" changeWith="1">
                                         <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M16.3908 4.36734L12.1481 8.60998L7.90549 10.0242L6.49128 11.4384L13.5623 18.5095L14.9766 17.0953L16.3908 12.8526L20.6334 8.60998" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                             <path d="M10.0234 14.9746L6.4879 18.5101" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                             <path d="M15.6797 3.66211L21.3365 9.31896" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                         </svg>
                                     </span>
-                                    <span>
+                                    <span class="multi-mute" changeWith="1">
                                         <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M15.5 8.36979V7.40979C15.5 4.42979 13.43 3.28979 10.91 4.86979L7.99 6.69979C7.67 6.88979 7.3 6.99979 6.93 6.99979H5.5C3.5 6.99979 2.5 7.99979 2.5 9.99979V13.9998C2.5 15.9998 3.5 16.9998 5.5 16.9998H7.5" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                             <path d="M10.9062 19.1292C13.4262 20.7092 15.4963 19.5592 15.4963 16.5892V12.9492" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -58,14 +58,14 @@ use Carbon\Carbon;
                                             <path d="M22.5 2L2.5 22" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                         </svg>
                                     </span>
-                                    <span>
+                                    <span class="multi-archive" changeWith="1">
                                         <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M20 9.2207V18.0007C20 20.0007 19.5 21.0007 17 21.0007H8C5.5 21.0007 5 20.0007 5 18.0007V9.2207" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                             <path d="M5.5 4H19.5C21.5 4 22.5 4.625 22.5 5.875V7.125C22.5 8.375 21.5 9 19.5 9H5.5C3.5 9 2.5 8.375 2.5 7.125V5.875C2.5 4.625 3.5 4 5.5 4Z" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                             <path d="M10.6797 13H14.3197" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                         </svg>
                                     </span>
-                                    <span>
+                                    <span class="multi-delete">
                                         <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M21.5036 6.73046C21.4836 6.73046 21.4536 6.73046 21.4236 6.73046C16.1336 6.20046 10.8536 6.00046 5.62358 6.53046L3.58358 6.73046C3.16358 6.77046 2.79358 6.47046 2.75358 6.05046C2.71358 5.63046 3.01358 5.27046 3.42358 5.23046L5.46358 5.03046C10.7836 4.49046 16.1736 4.70046 21.5736 5.23046C21.9836 5.27046 22.2836 5.64046 22.2436 6.05046C22.2136 6.44046 21.8836 6.73046 21.5036 6.73046Z" fill="#64748B" />
                                             <path d="M9.00074 5.72C8.96074 5.72 8.92074 5.72 8.87074 5.71C8.47074 5.64 8.19074 5.25 8.26074 4.85L8.48074 3.54C8.64074 2.58 8.86074 1.25 11.1907 1.25H13.8107C16.1507 1.25 16.3707 2.63 16.5207 3.55L16.7407 4.85C16.8107 5.26 16.5307 5.65 16.1307 5.71C15.7207 5.78 15.3307 5.5 15.2707 5.1L15.0507 3.8C14.9107 2.93 14.8807 2.76 13.8207 2.76H11.2007C10.1407 2.76 10.1207 2.9 9.97074 3.79L9.74074 5.09C9.68074 5.46 9.36074 5.72 9.00074 5.72Z" fill="#64748B" />
@@ -75,7 +75,7 @@ use Carbon\Carbon;
                                         </svg>
                                     </span>
                                 </div>
-                            </div> --}}
+                            </div>
                             <div class="dropdown ms-3">
                                 <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
                                     <svg width="5" height="18" viewBox="0 0 5 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -85,7 +85,7 @@ use Carbon\Carbon;
                                     </svg>
                                 </button>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#"><svg class="me-2" width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <li class="bulk-edit"><a class="dropdown-item" href="#"><svg class="me-2" width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M10.499 13.6092C8.50729 13.6092 6.89062 11.9926 6.89062 10.0009C6.89062 8.00924 8.50729 6.39258 10.499 6.39258C12.4906 6.39258 14.1073 8.00924 14.1073 10.0009C14.1073 11.9926 12.4906 13.6092 10.499 13.6092ZM10.499 7.64258C9.19896 7.64258 8.14062 8.70091 8.14062 10.0009C8.14062 11.3009 9.19896 12.3592 10.499 12.3592C11.799 12.3592 12.8573 11.3009 12.8573 10.0009C12.8573 8.70091 11.799 7.64258 10.499 7.64258Z" fill="#94A3B8" />
                                                 <path d="M10.4984 17.5158C7.3651 17.5158 4.40677 15.6824 2.37344 12.4991C1.4901 11.1241 1.4901 8.88242 2.37344 7.49909C4.4151 4.31576 7.37344 2.48242 10.4984 2.48242C13.6234 2.48242 16.5818 4.31576 18.6151 7.49909C19.4984 8.87409 19.4984 11.1158 18.6151 12.4991C16.5818 15.6824 13.6234 17.5158 10.4984 17.5158ZM10.4984 3.73242C7.80677 3.73242 5.23177 5.34909 3.43177 8.17409C2.80677 9.14909 2.80677 10.8491 3.43177 11.8241C5.23177 14.6491 7.80677 16.2658 10.4984 16.2658C13.1901 16.2658 15.7651 14.6491 17.5651 11.8241C18.1901 10.8491 18.1901 9.14909 17.5651 8.17409C15.7651 5.34909 13.1901 3.73242 10.4984 3.73242Z" fill="#94A3B8" />
                                             </svg>
@@ -96,9 +96,10 @@ use Carbon\Carbon;
                         <input type="hidden" class="senderUser" id="senderUser" value="{{$userId}}" />
                         <input type="hidden" class="senderUserName" value="{{$userName}}" />
                         <ul class="chat-list">
+                            
                         @php
-    $i = 0;
-@endphp
+                        $i = 0;
+                    @endphp
                 @foreach ($messages as $k => $message)
                     @if(!isset($message['contactName']))
                         @continue
@@ -109,7 +110,12 @@ use Carbon\Carbon;
                         <input type="hidden" class="selected_name" value="{{$message['contactName']}}"/>
                         <input type="hidden" id="isGroup" value="{{@$message['group']}}"/>
                     @endif
-                    <li class="{{$i == 0 ?'active':''}} msg-list conversation-{{$message['conversationId']}}" data-userId="{{$message['contactId']}}" data-msgKey={{$k}} data-group={{@$message['group']}}>
+                    <div>
+                        <li class="{{$i == 0 ?'active':''}} msg-list conversation-{{$message['conversationId']}}" data-userId="{{$message['contactId']}}" data-msgKey={{$k}} data-group={{@$message['group']}}>
+                        <div class="me-2 d-none bulk-check">
+                            <input class="form-check-input" type="checkbox" name="checked_conversation[]" value="{{$message['conversationId']}}" isGroup="{{@$message['group']}}">
+                        </div>
+                        
                         <div class="chat-data d-flex align-items-center">
                             <div class="user-img position-relative">
                             @if($message['receiverProfile']!=="")
@@ -142,7 +148,7 @@ use Carbon\Carbon;
                                     <span class="badge ms-2 {{@$message['unReadCount'] == 0 ? 'd-none' : ''}}">{{@$message['unReadCount']}}</span>
                                 </div>
                             </a>
-                            <span class="ms-3 me-2 d-flex align-items-center">
+                            <span class="ms-3 me-2 d-flex align-items-center pin-svg {{@$message['isPin']=='1'?'':'d-none'}}">
                                 <svg width="11" height="17" viewBox="0 0 11 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M8.83333 0.5C9.04573 0.500236 9.25003 0.581566 9.40447 0.727374C9.55892 0.873181 9.65186 1.07246 9.66431 1.2845C9.67676 1.49653 9.60777 1.70532 9.47145 1.86819C9.33512 2.03107 9.14175 2.13575 8.93083 2.16083L8.83333 2.16667V6.13667L10.4117 9.29417C10.4552 9.38057 10.4834 9.47391 10.495 9.57L10.5 9.66667V11.3333C10.5 11.5374 10.425 11.7344 10.2894 11.887C10.1538 12.0395 9.96688 12.137 9.76417 12.1608L9.66667 12.1667H6.33333V15.5C6.3331 15.7124 6.25177 15.9167 6.10596 16.0711C5.96015 16.2256 5.76087 16.3185 5.54884 16.331C5.3368 16.3434 5.12802 16.2744 4.96514 16.1381C4.80226 16.0018 4.69759 15.8084 4.6725 15.5975L4.66667 15.5V12.1667H1.33333C1.12922 12.1666 0.932219 12.0917 0.77969 11.9561C0.627161 11.8204 0.529714 11.6335 0.505833 11.4308L0.5 11.3333V9.66667C0.500114 9.57004 0.517032 9.47416 0.55 9.38333L0.588333 9.29417L2.16667 6.135V2.16667C1.95427 2.16643 1.74997 2.0851 1.59553 1.93929C1.44108 1.79349 1.34814 1.59421 1.33569 1.38217C1.32324 1.17014 1.39223 0.96135 1.52855 0.798473C1.66488 0.635595 1.85825 0.53092 2.06917 0.505833L2.16667 0.5H8.83333Z" fill="#94A3B8"/>
                                 </svg>
@@ -163,11 +169,12 @@ use Carbon\Carbon;
                             </div>
                         </div>
                     </li>
+                </div>
                     @php
                         $i++;
                     @endphp
                 @endforeach
-                    @if (empty($messages))
+                    @if ($i==0)
                     <input type="hidden" class="selected_id"/>
                     <input type="hidden" class="selected_message" />
                     <input type="hidden" class="selected_name"/>
@@ -205,12 +212,15 @@ use Carbon\Carbon;
                                                         <path d="M12.5019 16.3299C10.1119 16.3299 8.17188 14.3899 8.17188 11.9999C8.17188 9.60992 10.1119 7.66992 12.5019 7.66992C14.8919 7.66992 16.8319 9.60992 16.8319 11.9999C16.8319 14.3899 14.8919 16.3299 12.5019 16.3299ZM12.5019 9.16992C10.9419 9.16992 9.67188 10.4399 9.67188 11.9999C9.67188 13.5599 10.9419 14.8299 12.5019 14.8299C14.0619 14.8299 15.3319 13.5599 15.3319 11.9999C15.3319 10.4399 14.0619 9.16992 12.5019 9.16992Z" fill="#64748B" />
                                                         <path d="M12.4981 21.0205C8.73812 21.0205 5.18813 18.8205 2.74812 15.0005C1.68813 13.3505 1.68813 10.6605 2.74812 9.00047C5.19812 5.18047 8.74813 2.98047 12.4981 2.98047C16.2481 2.98047 19.7981 5.18047 22.2381 9.00047C23.2981 10.6505 23.2981 13.3405 22.2381 15.0005C19.7981 18.8205 16.2481 21.0205 12.4981 21.0205ZM12.4981 4.48047C9.26813 4.48047 6.17813 6.42047 4.01813 9.81047C3.26813 10.9805 3.26813 13.0205 4.01813 14.1905C6.17813 17.5805 9.26813 19.5205 12.4981 19.5205C15.7281 19.5205 18.8181 17.5805 20.9781 14.1905C21.7281 13.0205 21.7281 10.9805 20.9781 9.81047C18.8181 6.42047 15.7281 4.48047 12.4981 4.48047Z" fill="#64748B" />
                                                     </svg> Mark as read </a></li> --}}
-                                            <li><a class="dropdown-item pin-conversation" href="#">
+                                            <li>
+                                                <a class="dropdown-item pin-conversation" href="#">
+
                                                     <svg class="me-2" width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <path d="M16.3908 4.36734L12.1481 8.60998L7.90549 10.0242L6.49128 11.4384L13.5623 18.5095L14.9766 17.0953L16.3908 12.8526L20.6334 8.60998" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                                         <path d="M10.0234 14.9746L6.4879 18.5101" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                                         <path d="M15.6797 3.66211L21.3365 9.31896" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                                     </svg>
+
                                                     <span>Pin</span></a>
                                             </li>
                                             <li><a class="dropdown-item mute-conversation" href="#">
@@ -392,10 +402,11 @@ use Carbon\Carbon;
                     <div id="selected-tags-container">
                         <!-- Selected tags will be appended here -->
                     </div>
-                    
+                    <div class="d-flex align-items-center inbox">
                         <span>To:</span>
                         <input type="text" id="search-user">
                         <input type="hidden" id="selected-user-id" name="selectedUserId" value="">
+                    </div>
                     <!-- =========== first-model =========== -->
                     <div class="empty-massage">
                         <div class="empty-img">
@@ -480,9 +491,9 @@ use Carbon\Carbon;
                         </div>
                     </div>
                     <div class="new-member d-none">
-                        <button class="btn btn-primary" id="new-member">Add New Member</button>
+                        <button class="btn btn-primary" id="new-member"><span><i class="fa-solid fa-user-plus"></i></span> Add New Member</button>
                     </div>
-                    <ul class="member-lists">
+                    <ul class="member-lists group-list">
                         <li class="">
                             <div class="chat-data d-flex">
                                 <div class="user-img position-relative">
