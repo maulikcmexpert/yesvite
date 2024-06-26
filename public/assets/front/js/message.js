@@ -131,6 +131,8 @@ const userRef = ref(database, `users/${senderUser}`);
 let replyMessageId = null; // Global variable to hold the message ID to reply to
 let fileType = null; // Global variable to hold the message ID to reply to
 let WaitNewConversation = null; // Global variable to hold the message ID to reply to
+let myProfile;
+
 // Function to get messages between two users
 
 let closeSpan = `<svg width="17" height="18" viewBox="0 0 17 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1428,39 +1430,13 @@ async function findOrCreateConversation(
     contactName,
     receiverProfile
 ) {
-    // const overviewRef = ref(database, `overview/${currentUserId}`);
-    // const snapshot = await get(overviewRef);
-
-    // if (snapshot.exists()) {
-    //     const overviewData = snapshot.val();
-    //     for (const conversationId in overviewData) {
-    //         if (overviewData[conversationId].contactId === contactId) {
-    //             return conversationId;
-    //         }
-    //     }
-    // }
-    // // Check if a conversation exists for the contact
-    // const contactOverviewRef = ref(database, `overview/${contactId}`);
-    // const contactSnapshot = await get(contactOverviewRef);
-
-    // if (contactSnapshot.exists()) {
-    //     const contactOverviewData = contactSnapshot.val();
-    //     for (const conversationId in contactOverviewData) {
-    //         if (
-    //             contactOverviewData[conversationId].contactId === currentUserId
-    //         ) {
-    //             return conversationId;
-    //         }
-    //     }
-    // }
+    let userData = await get(userRef);
+    let userSnap = userData.val();
 
     const newConversationId = await generateConversationId([
         currentUserId,
         contactId,
     ]);
-
-    // const newConversationRef = push(child(ref(database), "overview"));
-    // const newConversationId = newConversationRef.key;
 
     const newConversationData = {
         contactId: contactId,
@@ -1487,7 +1463,7 @@ async function findOrCreateConversation(
         group: false,
         lastMessage: "",
         lastSenderId: currentUserId,
-        receiverProfile: receiverProfile,
+        receiverProfile: userSnap?.userProfile,
         timeStamp: Date.now(),
         unRead: true,
         unReadCount: 1,
