@@ -12389,6 +12389,9 @@ class ApiControllerv2 extends Controller
             $new_subscription->user_id = $user_id;
             $new_subscription->orderId = $input['orderId'];
             $new_subscription->packageName = $input['packageName'];
+            $new_subscription->priceCurrencyCode = $responce['priceCurrencyCode'];
+            $new_subscription->price = $responce['priceAmountMicros'];
+            $new_subscription->countryCode = $responce['countryCode'];
             $new_subscription->startDate = now();
             $new_subscription->endDate = $enddate;
             $new_subscription->productId = $input['productId'];

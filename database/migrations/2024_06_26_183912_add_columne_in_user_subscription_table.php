@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('user_subscriptions', function (Blueprint $table) {
             $table->string('priceCurrencyCode')->nullable()->after('purchaseToken');
-            $table->string('price')->nullable()->after('priceCurrencyCode');;
+            $table->double('price')->default(0)->after('priceCurrencyCode');;
             $table->string('countryCode')->nullable()->after('price');;
         });
     }
