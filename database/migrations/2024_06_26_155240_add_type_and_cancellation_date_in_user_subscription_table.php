@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('user_subscriptions', function (Blueprint $table) {
-            $table->string('type')->nullable()->after('purchaseToken');
+            $table->enum('type', ['Pro-Year', 'Pro'])->nullable()->after('purchaseToken');
             $table->string('cancellationdate')->nullable()->after('type');
         });
     }
