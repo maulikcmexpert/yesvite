@@ -12463,7 +12463,7 @@ class ApiControllerv2 extends Controller
             //     }
             // // }
 
-            $enddate = date('Y-m-d H:i:s', ($responce['expiryTimeMillis'] / 1000));
+            // $enddate = date('Y-m-d H:i:s', ($responce['expiryTimeMillis'] / 1000));
 
 
             $new_subscription = new UserSubscription();
@@ -12474,7 +12474,7 @@ class ApiControllerv2 extends Controller
             $new_subscription->price = $responce['priceAmountMicros'];
             $new_subscription->countryCode = $responce['countryCode'];
             $new_subscription->startDate = now();
-            $new_subscription->endDate = $enddate;
+            //  $new_subscription->endDate = $enddate;
             $new_subscription->productId = $input['productId'];
             $new_subscription->type = 'product';
             $new_subscription->purchaseToken = $input['purchaseToken'];
