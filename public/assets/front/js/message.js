@@ -746,6 +746,7 @@ $(".archived-list").hide();
 $("#archive-list").click(function () {
     var msgLists = [];
     if ($(this).attr("list") == "0") {
+        $(".multi-archive").attr("changewith", "0");
         $(this).attr("list", "1");
         $(".archived-list").show();
         $(".unarchived-list").hide();
@@ -757,6 +758,7 @@ $("#archive-list").click(function () {
         $(".archived-list").hide();
         msgLists = $(".unarchived-list");
         $(this).html("Archive List");
+        $(".multi-archive").attr("changewith", "1");
     }
     if (msgLists.length > 0) {
         msgLists[0].click();
@@ -2531,6 +2533,8 @@ $(".bulk-back").click(function () {
     $(bulkcheck).addClass("d-none");
     $(".chat-functions").addClass("d-none");
     $(".bulk-edit-option").show();
+    $(".check-counter").text("");
+    $("input[name='checked_conversation[]']").prop("checked", false);
 });
 
 $(document).on("change", "input[name='checked_conversation[]']", function () {
@@ -2573,6 +2577,8 @@ $(".multi-pin").click(async function () {
 
     try {
         await Promise.all(promises);
+        $("input[name='checked_conversation[]']").prop("checked", false);
+
         $(this)
             .find("span")
             .text(pinChange == "1" ? "Unpin" : "Pin");
@@ -2580,6 +2586,7 @@ $(".multi-pin").click(async function () {
     } catch (error) {
         console.error("Error updating pin status:", error);
     }
+    $(".bulk-back").click();
 });
 
 $(".multi-mute").click(function () {
@@ -2600,9 +2607,13 @@ $(".multi-mute").click(function () {
         set(overviewRef, change);
         promises.push(set(overviewRef, change));
     });
+
+    $("input[name='checked_conversation[]']").prop("checked", false);
+    $(".bulk-back").click();
 });
 
 $(".multi-archive").click(function () {
+    console.log("multiarchive");
     const change = $(this).attr("changeWith");
     $(this).attr("changeWith", change == "1" ? "0" : "1");
 
@@ -2617,11 +2628,20 @@ $(".multi-archive").click(function () {
             database,
             `overview/${senderUser}/${conversationId}/isArchive`
         );
+
+        if (change == "1") {
+            $(".conversation-" + conversationId).addClass("archived-list");
+            $(".conversation-" + conversationId).removeClass("unarchived-list");
+        } else {
+            $(".conversation-" + conversationId).addClass("unarchived-list");
+            $(".conversation-" + conversationId).removeClass("archived-list");
+        }
         promises.push(set(overviewRef, change));
     });
 
     Promise.all(promises)
         .then(() => {
+            $("input[name='checked_conversation[]']").prop("checked", false);
             toastr.success(
                 change == "1"
                     ? "Archived successfully"
@@ -2633,6 +2653,7 @@ $(".multi-archive").click(function () {
             toastr.error("An error occurred while archiving/unarchiving.");
             console.error(error);
         });
+    $(".bulk-back").click();
 });
 $(".multi-read").click(function () {
     const checkedConversations = $(
@@ -2650,6 +2671,8 @@ $(".multi-read").click(function () {
         update(overviewRef, { unRead: false, unReadCount: 0 });
         promises.push(set(overviewRef, change));
     });
+    $("input[name='checked_conversation[]']").prop("checked", false);
+    $(".bulk-back").click();
 });
 
 $(".delete-conversation").click(async function () {
@@ -2687,6 +2710,7 @@ $(".multi-delete").click(async function () {
     } catch (error) {
         console.error("Error deleting conversations:", error);
     }
+    $(".bulk-back").click();
 });
 
 async function deleteConversation(conversationId, isGroup) {
