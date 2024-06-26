@@ -2724,7 +2724,7 @@ async function deleteConversation(conversationId, isGroup) {
             for (var messageId in messages) {
                 updates[
                     `Messages/${conversationId}/message/${messageId}/isDelete/${senderUser}`
-                ] = 1;
+                ] = "1";
             }
             await update(ref(database), updates);
         }
