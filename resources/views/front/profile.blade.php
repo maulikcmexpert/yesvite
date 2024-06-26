@@ -182,8 +182,10 @@
                                 </a>
                             </div>
                         </div>
+                        <!-- <a href="{{route('profile.edit')}}" class="cmn-btn edit-btn mob-edit-btn" data-bs-toggle="modal" data-bs-target="#myModal3">
+                            Edit Profile</a> -->
                         <a href="{{route('profile.edit')}}" class="cmn-btn edit-btn mob-edit-btn">
-                        Edit Profile</a>
+                            Edit Profile</a>
                     </div>
                 </div>
             </div>

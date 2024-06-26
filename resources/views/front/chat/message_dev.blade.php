@@ -395,7 +395,7 @@ use Carbon\Carbon;
                         </div>
 
                         <div class="msg-body" id="msgBody">
-                            <input type="hidden" class="selected_conversasion" />
+                            <input type="hiddenaa" class="selected_conversasion" />
 
                             <ul class="msg-lists">
 
