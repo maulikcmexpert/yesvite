@@ -59,16 +59,24 @@
     -ms-border-radius: 20px;
     -o-border-radius: 20px;
     display: flex;
+    justify-content: space-between;
     height: 744px;
+    width: 100%;
 }
 
 .chat-lists{
     /* padding: 24px 20px; */
-    width: 100%;
+
     max-width: 375px;
     border-right: 1px solid var(--borderColor);
     position: relative;
+    width: 30% !important;
 }
+
+.chat-area .chatbox{
+    width: 70% !important;
+}
+
 .member-lists{
     /* padding: 24px 20px; */
     width: 100%;
@@ -511,7 +519,9 @@ ul.member-lists li:last-child{
     position: relative;
 }
 
-.msg-body ul li.receiver p{
+.msg-body ul li.receiver p,
+.msg-body ul li.receiver .simple-msg-wrap
+{
     color: var(--secondryColor);
     font-size: 14px;
     line-height: 20.5px;
@@ -526,6 +536,7 @@ ul.member-lists li:last-child{
     -o-border-radius: 20px 0px 20px 20px;
     margin-bottom: 5px !important;
     position: relative;
+    word-break: break-all;
 }
 
 
@@ -563,7 +574,9 @@ ul.member-lists li:last-child{
     font-weight: 400;
 }
 
-.msg-body ul li.sender p{
+.msg-body ul li.sender p,
+.msg-body ul li.sender .simple-msg-wrap
+{
     color: var(--secondryColor);
     display: inline-flex;
     flex-direction: column;
@@ -599,7 +612,7 @@ ul.member-lists li:last-child{
 }
 
 
-.msg-body ul li.sender p .senderName{
+.msg-body ul li.sender .simple-msg-wrap .senderName{
     font-size: 11px;
     color: red;
 }
