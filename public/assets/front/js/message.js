@@ -1595,6 +1595,8 @@ $("#new_message").on("keypress", async function (e) {
             newGroupMembers.map(async (memberID) => {
                 if (memberID !== senderUser) {
                     userAvailable[memberID] = 0;
+                } else {
+                    userAvailable[memberID] = Date.now();
                 }
             });
 
@@ -1651,7 +1653,7 @@ $("#new_message").on("keypress", async function (e) {
                 isReply: "0",
                 isSeen: false,
                 react: "",
-                receiverId: contactId,
+                // receiverId: contactId,
                 receiverName: contactName,
                 replyData: {},
                 senderId: senderUser,
