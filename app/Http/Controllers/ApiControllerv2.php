@@ -12367,7 +12367,7 @@ class ApiControllerv2 extends Controller
             $user_id = $this->user->id;
             $purchaseToken = $input['purchaseToken'];
 
-            $responce =  $this->set_android_iap($app_id, $product_id, $purchaseToken);
+            $responce =  $this->set_android_iap($app_id, $product_id, $purchaseToken, 'subscribe');
 
             if (isset($responce['autoRenewing']) && ($responce['autoRenewing'] == false || $responce['autoRenewing'] == "")) {
 
@@ -12430,7 +12430,6 @@ class ApiControllerv2 extends Controller
             'productId' => 'required',
             'purchaseTime' => 'required',
             'purchaseToken' => 'required|string',
-            'autoRenewing' => 'required',
         ]);
 
 
@@ -12450,37 +12449,38 @@ class ApiControllerv2 extends Controller
             $user_id = $this->user->id;
             $purchaseToken = $input['purchaseToken'];
 
-            $responce =  $this->set_android_iap($app_id, $product_id, $purchaseToken);
+            $responce =  $this->set_android_iap($app_id, $product_id, $purchaseToken, 'product');
 
-            if (isset($responce['autoRenewing']) && ($responce['autoRenewing'] == false || $responce['autoRenewing'] == "")) {
+            // // if (isset($responce['autoRenewing']) && ($responce['autoRenewing'] == false || $responce['autoRenewing'] == "")) {
 
-                $exp_date =  date('Y-m-d H:i:s', ($responce['expiryTimeMillis'] /  1000));
+            //     $exp_date =  date('Y-m-d H:i:s', ($responce['expiryTimeMillis'] /  1000));
 
-                $current_date = date('Y-m-d H:i:s');
-                if (strtotime($current_date) > strtotime($exp_date)) {
+            //     $current_date = date('Y-m-d H:i:s');
+            //     if (strtotime($current_date) > strtotime($exp_date)) {
 
 
-                    return response()->json(['status' => 0, 'message' => "subscription package expired"]);
-                }
-            }
+            //         return response()->json(['status' => 0, 'message' => "subscription package expired"]);
+            //     }
+            // // }
 
             $enddate = date('Y-m-d H:i:s', ($responce['expiryTimeMillis'] / 1000));
-
 
 
             $new_subscription = new UserSubscription();
             $new_subscription->user_id = $user_id;
             $new_subscription->orderId = $input['orderId'];
             $new_subscription->packageName = $input['packageName'];
+            $new_subscription->priceCurrencyCode = $responce['priceCurrencyCode'];
+            $new_subscription->price = $responce['priceAmountMicros'];
+            $new_subscription->countryCode = $responce['countryCode'];
             $new_subscription->startDate = now();
             $new_subscription->endDate = $enddate;
             $new_subscription->productId = $input['productId'];
-            $new_subscription->type = 'subscribe';
+            $new_subscription->type = 'product';
             $new_subscription->purchaseToken = $input['purchaseToken'];
             $new_subscription->save();
 
-
-            return response()->json(['status' => 1, 'message' => "subscription sucessfully"]);
+            return response()->json(['status' => 1, 'message' => "purchase sucessfully"]);
         } catch (QueryException $e) {
             return response()->json(['status' => 0, 'message' => "db error"]);
         } catch (Exception  $e) {
@@ -12496,7 +12496,7 @@ class ApiControllerv2 extends Controller
             $product_id = $userSubscription->productId;
             $purchaseToken = $userSubscription->purchaseToken;
 
-            $responce =  $this->set_android_iap($app_id, $product_id, $purchaseToken);
+            $responce =  $this->set_android_iap($app_id, $product_id, $purchaseToken, 'subscribe');
 
 
             $exp_date =  date('Y-m-d H:i:s', ($responce['expiryTimeMillis'] /  1000));
@@ -12521,7 +12521,7 @@ class ApiControllerv2 extends Controller
         }
         return response()->json(['status' => 0, 'message' => "No subscribe", 'type' => 'Free']);
     }
-    public function set_android_iap($appid, $productID, $purchaseToken)
+    public function set_android_iap($appid, $productID, $purchaseToken, $type)
     {
         $ch = curl_init();
         $clientId = env('InGOOGLE_CLIENT_ID');
@@ -12537,6 +12537,12 @@ class ApiControllerv2 extends Controller
         $VALIDATE_URL = "https://www.googleapis.com/androidpublisher/v3/applications/" .
             $appid . "/purchases/subscriptions/" .
             $productID . "/tokens/" . $purchaseToken;
+        if ($type == 'product') {
+
+            $VALIDATE_URL = "https://www.googleapis.com/androidpublisher/v3/applications/" .
+                $appid . "/purchases/products/" .
+                $productID . "/tokens/" . $purchaseToken;
+        }
 
 
         $input_fields = 'refresh_token=' . $refreshToken .
