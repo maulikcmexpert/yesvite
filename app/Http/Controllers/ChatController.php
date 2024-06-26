@@ -25,7 +25,6 @@ class ChatController extends Controller
     }
     public function index()
     {
-
         $userId = auth()->id();
         $userData = User::findOrFail($userId);
         // dd($userData);
