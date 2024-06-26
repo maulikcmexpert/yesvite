@@ -218,7 +218,7 @@ class AuthController extends Controller
                     $this->logoutFromApplication($user->id);
                     event(new \App\Events\UserRegistered($user));
 
-                    return redirect()->route('home')->with('success', 'Logged in successfully!');
+                    return redirect()->route('profile')->with('success', 'Logged in successfully!');
                 } else {
 
                     return  Redirect::to('login')->with('error', 'Invalid credentials!');
@@ -235,7 +235,7 @@ class AuthController extends Controller
                     'is_first_login' => $user->is_first_login
                 ];
 
-            
+
                 Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($user) {
                     $message->to($user->email);
                     $message->subject('Email Verification Mail');
@@ -248,7 +248,8 @@ class AuthController extends Controller
     }
 
 
-    public function addInFirebase($userId){
+    public function addInFirebase($userId)
+    {
         $userData = User::findOrFail($userId);
         // dd($userData);
         $userName =  $userData->firstname . ' ' . $userData->lastname;
@@ -387,7 +388,7 @@ class AuthController extends Controller
                     }
                     event(new \App\Events\UserRegistered($secondUser));
                     $this->logoutFromApplication($secondUser->id);
-                    return redirect()->route('home')->with('success', 'Logged in successfully!');
+                    return redirect()->route('profile')->with('success', 'Logged in successfully!');
                 } else {
 
                     return  Redirect::to('login')->with('error', 'Invalid credentials!');
@@ -461,7 +462,7 @@ class AuthController extends Controller
             Session::put(['user' => $sessionArray]);
 
             $this->logoutFromApplication($switchAccount->id);
-            return redirect()->route('home')->with('success', 'Logged in successfully!');
+            return redirect()->route('profile')->with('success', 'Logged in successfully!');
         }
         return redirect()->route('profile')->with('error', 'Logged faild!');
     }
