@@ -2122,7 +2122,7 @@ function generateReactionsAndReply() {
               <div class='d-flex flex-column'>
                         <span class='replay-user'>${senderUserName}</span>
                         <span class='replay-msg'>${replyMessageData.data}</span>
-                        <span class='close-replay'>&times</span>
+                        
                            </div>
                                 
                             <span class='close-replay'>&times</span>
