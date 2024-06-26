@@ -3438,6 +3438,8 @@ class ApiControllerv2 extends Controller
             'zip_code' => (!empty($eventData['zip_code'])) ? $eventData['zip_code'] : "",
             'city' => (!empty($eventData['city'])) ? $eventData['city'] : "",
             'message_to_guests' => (!empty($eventData['message_to_guests'])) ? $eventData['message_to_guests'] : "",
+            'subscription_plan_name' => (!empty($eventData['subscription_plan_name'])) ? $eventData['subscription_plan_name'] : "",
+            'subscription_invite_count' => (!empty($eventData['subscription_invite_count'])) ? $eventData['subscription_invite_count'] : "",
 
             'is_draft_save' => $eventData['is_draft_save']
         ]);
@@ -4207,6 +4209,8 @@ class ApiControllerv2 extends Controller
                 $eventDetail['message_to_guests'] = (!empty($getEventData->message_to_guests) & $getEventData->message_to_guests != NULL) ? $getEventData->message_to_guests : "";
                 $eventDetail['is_draft_save'] = $getEventData->is_draft_save;
                 $eventDetail['step'] = ($getEventData->step != NULL) ? $getEventData->step : 0;
+                $eventDetail['subscription_plan_name'] = ($getEventData->subscription_plan_name != NULL) ? $getEventData->subscription_plan_name : "";
+                $eventDetail['subscription_invite_count'] = ($getEventData->subscription_invite_count != NULL) ? $getEventData->subscription_invite_count : 0;
                 $eventDetail['event_images'] = [];
                 $getEventImages = EventImage::where('event_id', $getEventData->id)->get();
                 if (!empty($getEventImages)) {
@@ -4530,7 +4534,8 @@ class ApiControllerv2 extends Controller
             $updateEvent->city = (!empty($eventData['city'])) ? $eventData['city'] : "";
             $updateEvent->message_to_guests = (!empty($eventData['message_to_guests'])) ? $eventData['message_to_guests'] : "";
             $updateEvent->is_draft_save = $eventData['is_draft_save'];
-
+            $updateEvent->subscription_plan_name = (!empty($eventData['subscription_plan_name'])) ? $eventData['subscription_plan_name'] : "";
+            $updateEvent->subscription_invite_count = (!empty($eventData['subscription_invite_count'])) ? $eventData['subscription_invite_count'] : "";
 
             if ($updateEvent->save()) {
                 $getalreadyInviteduser =  EventInvitedUser::where('event_id', $eventData['event_id'])->get()->pluck('user_id')->toArray();
