@@ -76,7 +76,7 @@ function imageExists(url) {
 async function updateProfileImg(profileImageUrl, userName) {
     if (await isValidImageUrl(profileImageUrl)) {
         $("#selected-user-profile").replaceWith(
-            `<img  src="${profileImageUrl}" alt="user-img">`
+            `<img id="selected-user-profile" src="${profileImageUrl}" alt="user-img">`
         );
         $("#profileIm").replaceWith(
             `<img id="profileIm" src="${profileImageUrl}" alt="cover-img" >`
@@ -86,7 +86,7 @@ async function updateProfileImg(profileImageUrl, userName) {
         const fontColor = "fontcolor" + initials[0]?.toUpperCase();
 
         $("#selected-user-profile").replaceWith(
-            `<h5 class="${fontColor}" >${initials}</h5>`
+            `<h5 class="${fontColor}" id="selected-user-profile" >${initials}</h5>`
         );
         $("#profileIm").replaceWith(
             `<h5 id="profileIm" class="${fontColor}">${initials}</h5>`
@@ -1115,6 +1115,7 @@ function createMessageElement(key, messageData, isGroup) {
                         )}</span>
                     </div>
                 </div>
+                <hr>
                 <div class="reply-massage"> 
                         <span> ${
                             messageData?.data != "" ? messageData.data : ""
@@ -2524,11 +2525,6 @@ $(".delete-conversation").click(async function () {
     }
 
     await deleteConversation(conversationId, isGroup);
-
-    var msgLists = $(".msg-list");
-    if (msgLists.length > 0) {
-        msgLists.first().click(); // Simulate a click event on the first msg-list element
-    }
 });
 
 $(".multi-delete").click(async function () {
@@ -2627,5 +2623,19 @@ async function deleteConversation(conversationId, isGroup) {
             }
             await update(ref(database), updates);
         }
+    }
+
+    var msgLists = $(".msg-list");
+    if (msgLists.length > 0) {
+        msgLists.first().click(); // Simulate a click event on the first msg-list element
+    } else {
+        $(".msg-lists").html("");
+        $(".selected-user-name").html("Start new chat");
+        updateProfileImg("", "Start New");
+        $(".conversationId").attr("conversationid", "");
+        $(".selected_id").val("");
+        $(".selected_message").val("");
+        $(".selected_name").val("");
+        $("#isGroup").val("");
     }
 }
