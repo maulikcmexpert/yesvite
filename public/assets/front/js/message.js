@@ -40,13 +40,17 @@ $.ajaxSetup({
 });
 import { genrateAudio } from "./chat.js";
 function getInitials(userName) {
-    if (userName == undefined) {
-        userName = "Yes";
+    if (userName === undefined || userName === "") {
+        return "Y"; // Default to "Y" if userName is undefined or an empty string
     }
-    return userName
+
+    const initials = userName
         .split(" ")
         .map((word) => word[0]?.toUpperCase())
-        .join("");
+        .join("")
+        .slice(0, 2); // Get only the first and second letters
+
+    return initials;
 }
 
 async function isValidImageUrl(profileImageUrl) {
@@ -350,6 +354,8 @@ function handleConversationChange(snapshot) {
 
 // Function to update the chat UI
 async function updateChat(user_id) {
+    console.log("updatefromsingle");
+
     $(".msg-lists").html("");
     $(".member-lists").html("");
     $(".choosen-file").hide();
@@ -480,6 +486,8 @@ async function updateChat(user_id) {
 
 var SelecteGroupUser = [];
 async function updateChatfromGroup(conversationId) {
+    console.log("updatefromgroup");
+    console.log(conversationId);
     SelecteGroupUser = [];
     $(".msg-lists").html("");
     $(".member-lists").html("");
@@ -499,6 +507,7 @@ async function updateChatfromGroup(conversationId) {
             };
         }
     });
+    $(".selected_conversasion").val(conversationId);
     const messagesRef = ref(database, `Groups/${conversationId}/message`);
     off(messagesRef);
     onChildChanged(messagesRef, async (snapshot) => {
@@ -525,10 +534,10 @@ async function updateChatfromGroup(conversationId) {
 
     $(".selected_name").val(groupInfo.groupName);
 
-    $(".selected_conversasion").val(conversationId);
     update(userRef, { userChatId: conversationId });
     await addListInMembers(SelecteGroupUser);
     $(".selected-title").html(groupInfo.groupName);
+    $("#isGroup").val("true");
     updateMore(conversationId);
     updateUnreadMessageBadge();
 }
@@ -738,6 +747,7 @@ $(".archived-list").hide();
 $("#archive-list").click(function () {
     var msgLists = [];
     if ($(this).attr("list") == "0") {
+        $(".multi-archive").attr("changewith", "0");
         $(this).attr("list", "1");
         $(".archived-list").show();
         $(".unarchived-list").hide();
@@ -749,6 +759,7 @@ $("#archive-list").click(function () {
         $(".archived-list").hide();
         msgLists = $(".unarchived-list");
         $(this).html("Archive List");
+        $(".multi-archive").attr("changewith", "1");
     }
     if (msgLists.length > 0) {
         msgLists[0].click();
@@ -771,6 +782,7 @@ $(".send-message").on("keyup", async function (e) {
         update(userRef, { userTypingStatus: "Not typing..." });
     }, 1000);
 });
+$("#preview").hide();
 
 $(".send-message").on("keypress", async function (e) {
     update(userRef, { userTypingStatus: "Typing..." });
@@ -806,7 +818,7 @@ $(".send-message").on("keypress", async function (e) {
                 storagePath = `Video/${senderUser}/${Date.now()}_${senderUser}-video.mp4`;
                 type = "2";
             } else if (imageUrl.startsWith("blob:http:/") && audio == "audio") {
-                storagePath = `Audios/${senderUser}/${Date.now()}_${senderUser}-audio.mp3`;
+                storagePath = `Audios/${senderUser}/${Date.now()}_${senderUser}-audio.wav`;
                 type = "3";
             } else {
                 storagePath = `Files/${senderUser}/${Date.now()}_${senderUser}-file.${fileType}`;
@@ -832,7 +844,7 @@ $(".send-message").on("keypress", async function (e) {
             console.log(audioUrl);
 
             let storagePath;
-            storagePath = `Audios/${senderUser}/${Date.now()}_${senderUser}-Audio.mp3`;
+            storagePath = `Audios/${senderUser}/${Date.now()}_${senderUser}-Audio.wav`;
 
             // Upload file to Firebase Storage
             const fileRef = storageRef(storage, storagePath);
@@ -1034,6 +1046,8 @@ function UpdateMessageToList(key, messageData, conversationId) {
 }
 function addMessageToList(key, messageData, conversationId) {
     if ($(".selected_conversasion").val() != conversationId) {
+        console.log($(".selected_conversasion").val());
+        console.log(conversationId);
         console.log("selectedisnotvalid");
         return;
     }
@@ -1092,16 +1106,18 @@ function createMessageElement(key, messageData, isGroup) {
         }
         reaction = messageData?.messageReact
             ? Object.values(messageData.messageReact)
-                  .map((reactData) =>
-                      String.fromCodePoint(
-                          parseInt(
-                              reactData.react.replace(/\\u\{(.+)\}/, "$1"),
-                              16
-                          )
-                      )
+                  .map(
+                      (reactData) =>
+                          `<li class="reaction">${String.fromCodePoint(
+                              parseInt(
+                                  reactData.react.replace(/\\u\{(.+)\}/, "$1"),
+                                  16
+                              )
+                          )}</li>`
                   )
                   .join(" ")
             : "";
+        reaction = `<ul class="reaction-ul">${reaction}</ul>`;
     } else {
         seenStatus = isSender
             ? messageData.isSeen
@@ -1117,6 +1133,7 @@ function createMessageElement(key, messageData, isGroup) {
                       )
                   )
                 : "";
+        reaction = `<span class="reaction">${reaction}</span>`;
     }
 
     let emojiAndReplay = isReceiver
@@ -1140,7 +1157,7 @@ function createMessageElement(key, messageData, isGroup) {
                          ? `<span class="seenStatus ${seenStatus}"></span>`
                          : ""
                  } 
-                ${reaction ? `<span class="reaction">${reaction}</span>` : ""}
+                ${reaction}
             </div>`
             : messageData?.type == "2"
             ? `<div class="media-msg">
@@ -1153,17 +1170,17 @@ function createMessageElement(key, messageData, isGroup) {
                          ? `<span class="seenStatus ${seenStatus}"></span>`
                          : ""
                  } 
-                 ${reaction ? `<span class="reaction">${reaction}</span>` : ""}
+                 ${reaction}
             </div>`
             : messageData?.type == "3"
             ? `<div class="media-msg">
             ${genrateAudio(messageData?.url)}
             <span>${messageData?.data != "" ? messageData.data : ""}</span>
-            ${reaction ? `<span class="reaction">${reaction}</span>` : ""}
+            ${reaction}
             </div>`
             : `
             <div class="simple-message"> 
-                <p> 
+                <div class="simple-msg-wrap"> 
                     <span class="senderName">${senderName}</span>
                     ${messageData?.data != "" ? messageData.data : ""}
                     ${
@@ -1171,12 +1188,8 @@ function createMessageElement(key, messageData, isGroup) {
                             ? `<span class="seenStatus ${seenStatus}"></span>`
                             : ""
                     } 
-                    ${
-                        reaction
-                            ? `<span class="reaction">${reaction}</span>`
-                            : ""
-                    }
-                </p>
+                    ${reaction}
+                </div>
                 ${emojiAndReplay}
               </div>
               `;
@@ -2115,7 +2128,10 @@ function generateReactionsAndReply() {
         </div>
     `;
         $(".reaction-dialog").remove(); // Remove any existing reaction dialogs
-        $(this).after(reactionDialog);
+        console.log($(this).closest(".reply-icon"));
+        console.log($(this).next(".reply-icon"));
+        console.log($(this).find(".reply-icon"));
+        $(this).append(reactionDialog);
     });
 
     $(document).on("click", ".reaction-option", async function () {
@@ -2245,7 +2261,15 @@ $("#choose-file").on("change", async function () {
                 database,
                 `/Groups/${conversationId}/groupInfo/`
             );
-            $("#selected-user-profile").attr("src", downloadURL);
+            $("#selected-user-profile").replaceWith(
+                `<img src="${downloadURL}" id="selected-user-profile"/>`
+            );
+            $(".conversation-" + conversationId)
+                .find(".chat-data")
+                .find(".user-img")
+                .html(
+                    `<img src="${downloadURL}" class="user-avatar img-fluid"/>`
+                );
             await update(groupInfoRef, { groupProfile: downloadURL });
             SelecteGroupUser.map((user) => {
                 var groupUserInfoRef = ref(
@@ -2506,11 +2530,15 @@ $(".bulk-edit").click(function () {
     var bulkcheck = document.getElementsByClassName("bulk-check");
     $(bulkcheck).removeClass("d-none");
     $(".chat-functions").removeClass("d-none");
+    $(".bulk-edit-option").hide();
 });
 $(".bulk-back").click(function () {
     var bulkcheck = document.getElementsByClassName("bulk-check");
     $(bulkcheck).addClass("d-none");
     $(".chat-functions").addClass("d-none");
+    $(".bulk-edit-option").show();
+    $(".check-counter").text("");
+    $("input[name='checked_conversation[]']").prop("checked", false);
 });
 
 $(document).on("change", "input[name='checked_conversation[]']", function () {
@@ -2553,6 +2581,8 @@ $(".multi-pin").click(async function () {
 
     try {
         await Promise.all(promises);
+        $("input[name='checked_conversation[]']").prop("checked", false);
+
         $(this)
             .find("span")
             .text(pinChange == "1" ? "Unpin" : "Pin");
@@ -2560,6 +2590,7 @@ $(".multi-pin").click(async function () {
     } catch (error) {
         console.error("Error updating pin status:", error);
     }
+    $(".bulk-back").click();
 });
 
 $(".multi-mute").click(function () {
@@ -2580,9 +2611,13 @@ $(".multi-mute").click(function () {
         set(overviewRef, change);
         promises.push(set(overviewRef, change));
     });
+
+    $("input[name='checked_conversation[]']").prop("checked", false);
+    $(".bulk-back").click();
 });
 
 $(".multi-archive").click(function () {
+    console.log("multiarchive");
     const change = $(this).attr("changeWith");
     $(this).attr("changeWith", change == "1" ? "0" : "1");
 
@@ -2597,9 +2632,32 @@ $(".multi-archive").click(function () {
             database,
             `overview/${senderUser}/${conversationId}/isArchive`
         );
-        set(overviewRef, change);
+
+        if (change == "1") {
+            $(".conversation-" + conversationId).addClass("archived-list");
+            $(".conversation-" + conversationId).removeClass("unarchived-list");
+        } else {
+            $(".conversation-" + conversationId).addClass("unarchived-list");
+            $(".conversation-" + conversationId).removeClass("archived-list");
+        }
         promises.push(set(overviewRef, change));
     });
+
+    Promise.all(promises)
+        .then(() => {
+            $("input[name='checked_conversation[]']").prop("checked", false);
+            toastr.success(
+                change == "1"
+                    ? "Archived successfully"
+                    : "Unarchived successfully"
+            );
+            $("#archive-list").attr("list", "1").click();
+        })
+        .catch((error) => {
+            toastr.error("An error occurred while archiving/unarchiving.");
+            console.error(error);
+        });
+    $(".bulk-back").click();
 });
 $(".multi-read").click(function () {
     const checkedConversations = $(
@@ -2617,6 +2675,8 @@ $(".multi-read").click(function () {
         update(overviewRef, { unRead: false, unReadCount: 0 });
         promises.push(set(overviewRef, change));
     });
+    $("input[name='checked_conversation[]']").prop("checked", false);
+    $(".bulk-back").click();
 });
 
 $(".delete-conversation").click(async function () {
@@ -2654,6 +2714,7 @@ $(".multi-delete").click(async function () {
     } catch (error) {
         console.error("Error deleting conversations:", error);
     }
+    $(".bulk-back").click();
 });
 
 async function deleteConversation(conversationId, isGroup) {
