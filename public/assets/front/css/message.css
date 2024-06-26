@@ -831,7 +831,7 @@ ul.member-lists li:last-child{
     -moz-border-radius: 0px 20px 20px 20px;
     -ms-border-radius: 0px 20px 20px 20px;
     -o-border-radius: 0px 20px 20px 20px;
-    margin-bottom: 16px;
+    margin-bottom: 2px;
     text-align: left;
 }
 
@@ -846,6 +846,7 @@ ul.member-lists li:last-child{
     -o-border-radius: 0px 20px 20px 20px;
     margin-bottom: 16px;
     text-align: left;
+    padding-bottom: 2px;
 }
 
 .msg-body ul li .reply-section .senderName{
@@ -853,13 +854,20 @@ ul.member-lists li:last-child{
     color: red;
 }
 
-.msg-body ul li .reply-section hr{
-    margin: 10px 0;
+.msg-body ul li .reply-section .reply-info{
+    border-bottom: 1px solid #ccc ;
+    padding-bottom: 10px;
+    font-size: 12px;
 }
 
-/* .msg-body ul li.receiver .reply-section:first-child{
-    border-bottom: 1px solid #000;
-} */
+.msg-body ul li .reply-section .reply-massage{
+    padding-top: 10px;
+}
+
+.msg-body ul li.sender > div{
+    display: flex;
+    align-items: center;
+}
 
 #msgBox .chat-user{
     padding: 24px;
@@ -888,7 +896,7 @@ ul.member-lists li:last-child{
     height: 100%;
 }
 
-#msgBox .chat-user .chat-user-img img h5{
+#msgBox .chat-user .chat-user-img h5{
     border-radius: 100%;
     -webkit-border-radius: 100%;
     -moz-border-radius: 100%;
