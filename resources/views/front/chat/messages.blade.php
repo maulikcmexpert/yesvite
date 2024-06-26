@@ -161,11 +161,11 @@ use Carbon\Carbon;
                                         <path d="M1.5 2C1.5 2.26522 1.60536 2.51957 1.79289 2.70711C1.98043 2.89464 2.23478 3 2.5 3C2.76522 3 3.01957 2.89464 3.20711 2.70711C3.39464 2.51957 3.5 2.26522 3.5 2C3.5 1.73478 3.39464 1.48043 3.20711 1.29289C3.01957 1.10536 2.76522 1 2.5 1C2.23478 1 1.98043 1.10536 1.79289 1.29289C1.60536 1.48043 1.5 1.73478 1.5 2Z" stroke="#64748B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
                                 </button>
-                                <ul class="dropdown-menu">
+                                {{-- <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="#">Action</a></li>
                                     <li><a class="dropdown-item" href="#">Another action</a></li>
                                     <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                </ul>
+                                </ul> --}}
                             </div>
                         </div>
                     </li>
@@ -445,7 +445,7 @@ use Carbon\Carbon;
 
                 <div class="d-flex align-items-center">
                     <input type="text" placeholder="Write message here..." id="new_message">
-                    <span class="ms-auto">
+                    <span class="ms-auto" id="send-new-msg">
                         <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M15.5673 5.51062L7.00733 1.23062C1.25733 -1.64938 -1.10267 0.710623 1.77733 6.46062L2.64733 8.20062C2.89733 8.71062 2.89733 9.30062 2.64733 9.81062L1.77733 11.5406C-1.10267 17.2906 1.24733 19.6506 7.00733 16.7706L15.5673 12.4906C19.4073 10.5706 19.4073 7.43062 15.5673 5.51062ZM12.3373 9.75062H6.93733C6.52733 9.75062 6.18733 9.41062 6.18733 9.00062C6.18733 8.59062 6.52733 8.25062 6.93733 8.25062H12.3373C12.7473 8.25062 13.0873 8.59062 13.0873 9.00062C13.0873 9.41062 12.7473 9.75062 12.3373 9.75062Z" fill="#64748B" />
                         </svg>
@@ -530,17 +530,18 @@ use Carbon\Carbon;
 
                     <div class="new-members-add d-none">
 
-                        <div id="group-selected-tags-container">
-                            <!-- Selected tags will be appended here -->
-                        </div>
+                        <div class="d-flex align-items-center inbox">
                         
                             <span>To:</span>
-                            <input type="text" id="group-search-user">
+                            <div id="group-selected-tags-container">
+                         
+                                <input type="text" id="group-search-user">
+                            </div>
                             <input type="hidden" id="group-selected-user-id" name="selectedUserId" value="">
 
                          
-                            <button class="btn btn-primary d-none" id="add-group-member">Add Member</button>
-
+                            <button class="cmn-btn d-none" id="add-group-member">Add Member</button>
+                        </div>
                     </div>
                 </div>
             </div>

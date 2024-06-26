@@ -1529,7 +1529,12 @@ async function findOrCreateGroupConversation(
 
     return newConversationId;
 }
-
+$("#send-new-msg").click(function () {
+    var e = jQuery.Event("keypress");
+    e.which = 13; // Set the key code for Enter
+    e.keyCode = 13;
+    $("#new_message").trigger(e);
+});
 // Event listener for sending a new message
 $("#new_message").on("keypress", async function (e) {
     if (e.which === 13) {
@@ -1908,7 +1913,7 @@ $("#group-search-user")
                             "&times;"
                         )
                     );
-                $("#group-selected-tags-container").append($tag);
+                $("#group-selected-tags-container").prepend($tag);
             }
 
             setTimeout(() => {
@@ -2038,7 +2043,7 @@ $("#add-group-member").click(async function () {
         // Clear the newSelectedUserIds array after adding
         newSelectedUserIds = [];
         updateSelectedgrpUserIds();
-        $("#group-selected-tags-container").html("");
+        $("#group-selected-tags-container .tag").html("");
     } catch (error) {
         console.error("Error adding new users to the group:", error);
     }
