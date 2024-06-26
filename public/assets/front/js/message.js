@@ -537,6 +537,7 @@ async function updateChatfromGroup(conversationId) {
     update(userRef, { userChatId: conversationId });
     await addListInMembers(SelecteGroupUser);
     $(".selected-title").html(groupInfo.groupName);
+    $("#isGroup").val("true");
     updateMore(conversationId);
     updateUnreadMessageBadge();
 }
