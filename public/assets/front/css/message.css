@@ -742,19 +742,19 @@ ul.member-lists li:last-child{
     padding: 0 !important;
 }
 
-#msgBox .modal-body .inbox{
+.modal-body .inbox{
     background-color: #F8F9FD;
     padding: 10px 24px;
 }
 
-#msgBox .modal-body .inbox h6{
+.modal-body .inbox h6{
     font-size: 14px;
     color: var(--secondryColor);
     font-weight: 500;
     margin-bottom: 0;
 }
 
-#msgBox .modal-body .inbox input{
+.modal-body .inbox input{
     height: auto !important;
     width: auto;
     border: none !important;
@@ -769,7 +769,7 @@ ul.member-lists li:last-child{
     padding-left: 5px !important;
 }
 
-#msgBox .modal-body .inbox input:focus{
+.modal-body .inbox input:focus{
     border: none !important;
 }
 
@@ -1079,12 +1079,40 @@ ul.member-lists li:last-child{
     margin-bottom: 6px;
 }
 
-  .close-btn {
+.close-btn {
     cursor: pointer;
     margin-left: 5px;
-  }
+}
 
-  .reaction-icon, .reply-icon {
+.new-members-add{
+    padding: 10px 0px 20px;
+}
+
+.new-members-add .cmn-btn{
+    margin-top: 15px;
+    margin-left: 25px;
+}
+
+#group-selected-tags-container{
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 10px;
+}
+
+#group-selected-tags-container .tag {
+    display: inline-block;
+    background-color: #ffffff;
+    color: #333;
+    padding: 3px 8px;
+    margin-right: 5px;
+    font-size: 14px;
+    box-shadow: 0px 5px 10px 0px #00000008;
+    border-radius: 100px;
+    border: none;
+    margin-bottom: 6px;
+}
+
+.reaction-icon, .reply-icon {
     cursor: pointer;
     margin-left: 7px;
     padding: 2px;
@@ -1122,6 +1150,11 @@ ul.member-lists li:last-child{
 .msg-lists .sender .simple-message{
     display: flex;
     align-items: center;
+}
+
+.modal-header .selected-title{
+    margin-bottom: 0;
+    cursor: pointer;
 }
 
 
