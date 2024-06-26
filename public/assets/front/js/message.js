@@ -40,6 +40,9 @@ $.ajaxSetup({
 });
 
 function getInitials(userName) {
+    if (userName == undefined) {
+        userName = "Yes";
+    }
     return userName
         .split(" ")
         .map((word) => word[0]?.toUpperCase())
@@ -355,7 +358,7 @@ async function updateChat(user_id) {
         toastr.error("user not found in firebase");
         return;
     }
-
+    console.log({ selected_user });
     const messageTime = selected_user.userLastSeen
         ? new Date(selected_user.userLastSeen)
         : new Date();
@@ -760,9 +763,11 @@ $(".send-message").on("keypress", async function (e) {
         let type = "";
         $("#preview").hide();
         $(".preview_img").hide();
-        const previewImg = $(".preview_img");
+        let preview = document.getElementsByClassName("preview_img");
+        var previewImg = $(preview);
         const imageUrl = previewImg.attr("src");
-
+        console.log({ previewImg });
+        console.log({ imageUrl });
         const previewAudio = $(".recordedAudio");
         const audioUrl = previewAudio.attr("src");
 
@@ -773,7 +778,11 @@ $(".send-message").on("keypress", async function (e) {
             if (imageUrl.startsWith("data:image/")) {
                 storagePath = `Images/${senderUser}/${Date.now()}_${senderUser}-img.png`;
                 type = "1";
-            } else if (imageUrl.startsWith("blob:http:/") && audio != "audio") {
+            } else if (
+                imageUrl.startsWith("data:video/mp4") &&
+                audio != "audio"
+            ) {
+                console.log("video");
                 storagePath = `Video/${senderUser}/${Date.now()}_${senderUser}-video.mp4`;
                 type = "2";
             } else if (imageUrl.startsWith("blob:http:/") && audio == "audio") {
@@ -1101,6 +1110,19 @@ function createMessageElement(key, messageData, isGroup) {
         messageData?.type == "1"
             ? `<div class="media-msg">
                 <img src="${messageData?.url}"/>
+                <span class="media-text">${
+                    messageData?.data != "" ? messageData.data : ""
+                }</span>
+                 ${
+                     isSender
+                         ? `<span class="seenStatus ${seenStatus}"></span>`
+                         : ""
+                 } 
+                ${reaction ? `<span class="reaction">${reaction}</span>` : ""}
+            </div>`
+            : messageData?.type == "2"
+            ? `<div class="media-msg">
+                <video src="${messageData?.url}" controls></video>
                 <span class="media-text">${
                     messageData?.data != "" ? messageData.data : ""
                 }</span>
@@ -1683,13 +1705,13 @@ $("#new_message").on("keypress", async function (e) {
 });
 
 const isOnlineForDatabase = {
-    userStatus: "online",
+    userStatus: "Online",
     userLastSeen: Date.now(),
 };
 
 // Object representing the user's status when offline
 const isOfflineForDatabase = {
-    userStatus: "offline",
+    userStatus: "Offline",
     userLastSeen: Date.now(),
 };
 
@@ -1698,13 +1720,13 @@ const connectedRef = ref(database, ".info/connected");
 onValue(connectedRef, async (snapshot) => {
     if (snapshot.val() === true) {
         // User is connected
-        await set(userRef, isOnlineForDatabase);
+        await update(userRef, isOnlineForDatabase);
 
         // Set up the onDisconnect function to set status to offline
-        await onDisconnect(userRef).set(isOfflineForDatabase);
+        await onDisconnect(userRef).update(isOfflineForDatabase);
     } else {
         // User is disconnected (note: this could be triggered before onDisconnect)
-        await set(userRef, isOfflineForDatabase);
+        await update(userRef, isOfflineForDatabase);
     }
 });
 // Load user images
@@ -2336,8 +2358,6 @@ $(".upload-box").change(function () {
     var name = file.name;
     $(".dropdown-menu").removeClass("show");
 
-    var preview = document.getElementById("preview");
-
     displayFiles(this.files, name);
 
     var fileExtension = file.name.substr(file.name.lastIndexOf(".") + 1);
@@ -2392,6 +2412,8 @@ $(".upload-box").change(function () {
 });
 
 function displayFiles(files, name) {
+    var preview = document.getElementById("preview");
+    $(preview).show();
     preview.innerHTML = "";
 
     for (var i = 0; i < files.length; i++) {
@@ -2421,10 +2443,10 @@ function displayFiles(files, name) {
                 } else {
                     return;
                 }
-
+                previewElement.className = "preview_img";
                 var closeButton = document.createElement("button");
-                closeButton.innerHTML = "&#10006;";
-                closeButton.className = "close-button";
+                closeButton.innerHTML = closeSpan;
+                closeButton.className = "close-preview";
 
                 previewElement.src = e.target.result;
                 previewItem.appendChild(previewElement);
@@ -2441,6 +2463,11 @@ function displayFiles(files, name) {
         reader.readAsDataURL(file);
     }
 }
+
+$(document).on("click", ".close-preview", function () {
+    $("#preview").hide();
+    $(".preview_img").attr("src", "");
+});
 
 async function getTotalUnreadMessageCount() {
     const userId = senderUser; // Assuming senderUser is the ID of the current user
