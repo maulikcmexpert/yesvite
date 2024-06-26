@@ -7064,8 +7064,10 @@ class ApiControllerv2 extends Controller
             } else {
                 if ($eventDetail->rsvp_end_time != NULL || $eventDetail->rsvp_end_time != "") {
                     $eventDetails['event_time'] =  $eventDetail->rsvp_start_time . ' to ' . $eventDetail->rsvp_end_time;
+                } else {
+
+                    $eventDetails['event_time'] =  $eventDetail->rsvp_start_time;
                 }
-                $eventDetails['event_time'] =  $eventDetail->rsvp_start_time;
             }
 
 
