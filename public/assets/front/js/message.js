@@ -1131,14 +1131,14 @@ function createMessageElement(key, messageData, isGroup) {
                          ? `<span class="seenStatus ${seenStatus}"></span>`
                          : ""
                  } 
-                ${reaction ? `<span class="reaction">${reaction}</span>` : ""}
+                 ${reaction ? `<span class="reaction">${reaction}</span>` : ""}
             </div>`
             : messageData?.type == "3"
             ? `<div class="media-msg">
             <audio controls src="${messageData?.url}"></audio>
-            <span>${
-                messageData?.data != "" ? messageData.data : ""
-            }</span></div>`
+            <span>${messageData?.data != "" ? messageData.data : ""}</span>
+            ${reaction ? `<span class="reaction">${reaction}</span>` : ""}
+            </div>`
             : `
             <div class="simple-message"> 
                 <p> 
