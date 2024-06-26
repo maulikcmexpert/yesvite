@@ -2118,10 +2118,16 @@ function generateReactionsAndReply() {
             const replyMessageData = replyMessageSnapshot.val();
 
             replay = `<div class='set-replay-msg'>
+            <div class='replay-child'>
+              <div class='d-flex flex-column'>
                         <span class='replay-user'>${senderUserName}</span>
                         <span class='replay-msg'>${replyMessageData.data}</span>
                         <span class='close-replay'>&times</span>
-                        </div>`;
+                           </div>
+                                
+                            <span class='close-replay'>&times</span>
+                            </div>
+                    </div>`;
         }
         $(".msg-footer").prepend(replay);
     });
