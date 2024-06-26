@@ -65,7 +65,7 @@ $i = 0;
                     fill="#94A3B8" />
             </svg>
         </span>
-        <div class="dropdown ms-auto">
+        {{-- <div class="dropdown ms-auto">
             <button type="button" class="btn btn-primary dropdown-toggle"
                 data-bs-toggle="dropdown">
                 <svg width="5" height="18" viewBox="0 0 5 18" fill="none"
@@ -113,7 +113,7 @@ $i = 0;
                         </svg>
                         Delete Message</a></li>
             </ul>
-        </div>
+        </div> --}}
     </div>
 </li>
 @php
