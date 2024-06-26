@@ -12400,7 +12400,7 @@ class ApiControllerv2 extends Controller
     public function checkSubscription()
     {
 
-        $userSubscription = UserSubscription::where('user_id', $this->user->id)->orderBy('desc', 'id')->first();
+        $userSubscription = UserSubscription::where('user_id', $this->user->id)->orderBy('id', 'DESC')->limit(1)->first();
         dd($userSubscription);
     }
     public function set_android_iap($appid, $productID, $purchaseToken)
