@@ -76,7 +76,7 @@ use Carbon\Carbon;
                                     </span>
                                 </div>
                             </div>
-                            <div class="dropdown ms-auto">
+                            <div class="dropdown ms-auto bulk-edit-option">
                                 <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
                                     <svg width="5" height="18" viewBox="0 0 5 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M1.5 9C1.5 9.26522 1.60536 9.51957 1.79289 9.70711C1.98043 9.89464 2.23478 10 2.5 10C2.76522 10 3.01957 9.89464 3.20711 9.70711C3.39464 9.51957 3.5 9.26522 3.5 9C3.5 8.73478 3.39464 8.48043 3.20711 8.29289C3.01957 8.10536 2.76522 8 2.5 8C2.23478 8 1.98043 8.10536 1.79289 8.29289C1.60536 8.48043 1.5 8.73478 1.5 9Z" stroke="#64748B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -89,7 +89,8 @@ use Carbon\Carbon;
                                                 <path d="M10.499 13.6092C8.50729 13.6092 6.89062 11.9926 6.89062 10.0009C6.89062 8.00924 8.50729 6.39258 10.499 6.39258C12.4906 6.39258 14.1073 8.00924 14.1073 10.0009C14.1073 11.9926 12.4906 13.6092 10.499 13.6092ZM10.499 7.64258C9.19896 7.64258 8.14062 8.70091 8.14062 10.0009C8.14062 11.3009 9.19896 12.3592 10.499 12.3592C11.799 12.3592 12.8573 11.3009 12.8573 10.0009C12.8573 8.70091 11.799 7.64258 10.499 7.64258Z" fill="#94A3B8" />
                                                 <path d="M10.4984 17.5158C7.3651 17.5158 4.40677 15.6824 2.37344 12.4991C1.4901 11.1241 1.4901 8.88242 2.37344 7.49909C4.4151 4.31576 7.37344 2.48242 10.4984 2.48242C13.6234 2.48242 16.5818 4.31576 18.6151 7.49909C19.4984 8.87409 19.4984 11.1158 18.6151 12.4991C16.5818 15.6824 13.6234 17.5158 10.4984 17.5158ZM10.4984 3.73242C7.80677 3.73242 5.23177 5.34909 3.43177 8.17409C2.80677 9.14909 2.80677 10.8491 3.43177 11.8241C5.23177 14.6491 7.80677 16.2658 10.4984 16.2658C13.1901 16.2658 15.7651 14.6491 17.5651 11.8241C18.1901 10.8491 18.1901 9.14909 17.5651 8.17409C15.7651 5.34909 13.1901 3.73242 10.4984 3.73242Z" fill="#94A3B8" />
                                             </svg>
-                                            Bulk Edit</a></li>
+                                            Bulk Edit</a>
+                                        </li>
                                 </ul>
                             </div>
                         </div>
@@ -125,9 +126,11 @@ use Carbon\Carbon;
                                                         $contactName = $message['contactName'];
                                                         $words = explode(' ', $contactName);
                                                         $initials = '';
+                                                        
                                                         foreach ($words as $word) {
                                                             $initials .= strtoupper(substr($word, 0, 1));
                                                         }
+                                                        $initials = substr($initials, 0, 2);
                                                         $fontColor = "fontcolor" . strtoupper($initials[0]);
                                                         @endphp
                                                         <h5 class="{{$fontColor}}">{{$initials}}</h5>
@@ -445,7 +448,7 @@ use Carbon\Carbon;
                         </div>
                         <h5 class="selected-user-name">Tiana Dokidis, Martin Garlic, +3</h5>
                         <p>This message will automatically create a group</p>
-                        <a href="#">See all user</a><br>
+                        {{-- <a href="#">See all user</a><br> --}}
                         <input type="text" id ="group-name" placeholder="Group Name">
                     </div>
                 </div>
