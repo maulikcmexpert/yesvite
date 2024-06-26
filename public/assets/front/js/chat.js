@@ -1,4 +1,12 @@
 export function genrateAudio(url) {
+    return `<audio controls>
+        <source
+            src="${url}"
+            type="audio/mpeg">
+      
+    </audio>`;
+}
+export function genrateAudios(url) {
     return `<div class="audio green-audio-player">
       <div class="loading">
         <div class="spinner"></div>

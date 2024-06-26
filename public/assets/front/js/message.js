@@ -40,13 +40,17 @@ $.ajaxSetup({
 });
 import { genrateAudio } from "./chat.js";
 function getInitials(userName) {
-    if (userName == undefined) {
-        userName = "Yes";
+    if (userName === undefined || userName === "") {
+        return "Y"; // Default to "Y" if userName is undefined or an empty string
     }
-    return userName
+
+    const initials = userName
         .split(" ")
         .map((word) => word[0]?.toUpperCase())
-        .join("");
+        .join("")
+        .slice(0, 2); // Get only the first and second letters
+
+    return initials;
 }
 
 async function isValidImageUrl(profileImageUrl) {
@@ -2246,7 +2250,15 @@ $("#choose-file").on("change", async function () {
                 database,
                 `/Groups/${conversationId}/groupInfo/`
             );
-            $("#selected-user-profile").attr("src", downloadURL);
+            $("#selected-user-profile").replaceWith(
+                `<img src="${downloadURL}" id="selected-user-profile"/>`
+            );
+            $(".conversation-" + conversationId)
+                .find(".chat-data")
+                .find(".user-img")
+                .html(
+                    `<img src="${downloadURL}" class="user-avatar img-fluid"/>`
+                );
             await update(groupInfoRef, { groupProfile: downloadURL });
             SelecteGroupUser.map((user) => {
                 var groupUserInfoRef = ref(
@@ -2507,11 +2519,13 @@ $(".bulk-edit").click(function () {
     var bulkcheck = document.getElementsByClassName("bulk-check");
     $(bulkcheck).removeClass("d-none");
     $(".chat-functions").removeClass("d-none");
+    $(".bulk-edit-option").hide();
 });
 $(".bulk-back").click(function () {
     var bulkcheck = document.getElementsByClassName("bulk-check");
     $(bulkcheck).addClass("d-none");
     $(".chat-functions").addClass("d-none");
+    $(".bulk-edit-option").show();
 });
 
 $(document).on("change", "input[name='checked_conversation[]']", function () {
