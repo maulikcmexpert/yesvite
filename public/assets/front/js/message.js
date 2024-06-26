@@ -554,7 +554,7 @@ async function updateMore(conversationId) {
         $(".conversation-" + conversationId)
             .find(".chat-data")
             .find(".pin-svg")
-            .hide();
+            .addClass("d-none");
         if (overviewData.isPin != undefined) {
             $(".pin-conversation")
                 .find("span")
@@ -564,7 +564,10 @@ async function updateMore(conversationId) {
                 overviewData.isPin == "1" ? "0" : "1"
             );
             if (overviewData.isPin == "1") {
-                $(".pin-svg").show();
+                $(".conversation-" + conversationId)
+                    .find(".chat-data")
+                    .find(".pin-svg")
+                    .removeClass("d-none");
             }
         }
         if (overviewData.isMute != undefined) {
@@ -603,7 +606,15 @@ $(".pin-conversation").click(function () {
     if (pinChange == "1") {
         const conversationElement = $(`.conversation-${conversationId}`);
         conversationElement.prependTo(".chat-list");
-        $(".pin-svg").show();
+        $(".conversation-" + conversationId)
+            .find(".chat-data")
+            .find(".pin-svg")
+            .removeClass("d-none");
+    } else {
+        $(".conversation-" + conversationId)
+            .find(".chat-data")
+            .find(".pin-svg")
+            .addClass("d-none");
     }
 });
 
@@ -1700,9 +1711,11 @@ async function addListInMembers(SelecteGroupUser) {
                                                 ? "You"
                                                 : user.name
                                         }</h3>
-                                        <span class="group-admin">${
-                                            user.isAdmin == "1" ? "Admin" : ""
-                                        }</span>
+                                        ${
+                                            user.isAdmin == "1"
+                                                ? "<span class='group-admin'>Admin</span>"
+                                                : ""
+                                        }
                                     </div>
                                 </div>
                                 ${removeMember}
@@ -2477,4 +2490,9 @@ async function updateUnreadMessageBadge() {
 // Call the function on page load
 $(document).ready(function () {
     updateUnreadMessageBadge();
+});
+$(".bulk-edit").click(function () {
+    var bulkcheck = document.getElementsByClassName("bulk-check");
+    $(bulkcheck).removeClass("d-none");
+    $(".chat-functions").removeClass("d-none");
 });
