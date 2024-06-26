@@ -12401,7 +12401,29 @@ class ApiControllerv2 extends Controller
     {
 
         $userSubscription = UserSubscription::where('user_id', $this->user->id)->orderBy('id', 'DESC')->limit(1)->first();
-        dd($userSubscription);
+        if ($userSubscription != null) {
+            $app_id = $userSubscription->packageName;
+            $product_id = $userSubscription->productId;
+            $purchaseToken = $userSubscription->purchaseToken;
+
+            $responce =  $this->set_android_iap($app_id, $product_id, $purchaseToken);
+
+
+            $exp_date =  date('Y-m-d H:i:s', ($responce['expiryTimeMillis'] /  1000));
+            $cancellationDate =  date('Y-m-d H:i:s', ($responce['userCancellationTimeMillis'] /  1000));
+
+            $current_date = date('Y-m-d H:i:s');
+            if (strtotime($current_date) > strtotime($exp_date)) {
+
+                $userSubscription->endDate = $exp_date;
+                $userSubscription->cancecancellationdate = $cancellationDate;
+                $userSubscription->save();
+                return response()->json(['status' => 0, 'message' => "subscription is not active", 'type' => 'free']);
+            }
+
+            return response()->json(['status' => 1, 'message' => "subscription is active", 'type' => 'pro_year']);
+        }
+        return response()->json(['status' => 0, 'message' => "No subscribe", 'type' => 'free']);
     }
     public function set_android_iap($appid, $productID, $purchaseToken)
     {
