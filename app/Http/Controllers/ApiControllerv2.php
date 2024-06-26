@@ -12423,12 +12423,12 @@ class ApiControllerv2 extends Controller
 
             $current_date = date('Y-m-d H:i:s');
             if (strtotime($current_date) > strtotime($exp_date)) {
+                $userSubscription->endDate = $exp_date;
                 if (isset($responce['userCancellationTimeMillis'])) {
 
                     $cancellationdate =  date('Y-m-d H:i:s', ($responce['userCancellationTimeMillis'] /  1000));
+                    $userSubscription->cancellationdate = $cancellationdate;
                 }
-                $userSubscription->endDate = $exp_date;
-                $userSubscription->cancellationdate = $cancellationdate;
                 $userSubscription->save();
                 return response()->json(['status' => 0, 'message' => "subscription is not active", 'type' => 'free']);
             }
