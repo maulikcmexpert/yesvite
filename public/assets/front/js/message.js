@@ -2088,6 +2088,7 @@ function generateReactionsAndReply() {
     });
 
     $(document).on("click", ".reply-icon", async function () {
+        $(".set-replay-msg").remove();
         replyMessageId = $(this).data("message-id");
         let conversationId = $(".conversationId").attr("conversationid");
         let replay = "";
