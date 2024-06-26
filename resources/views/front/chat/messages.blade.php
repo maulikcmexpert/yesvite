@@ -189,8 +189,9 @@ use Carbon\Carbon;
                     <input type="hidden" id="isGroup"/>
 
                     @endif
-                    <button id="archive-list" list="0">Archive List</button>
+                    
                         </ul>
+                        <button id="archive-list" list="0">Archive List</button>
                     </div>
                     <div class="chatbox position-relative w-100">
                         <div class="msg-head">
