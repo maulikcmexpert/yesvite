@@ -187,6 +187,16 @@ ul.nav-tabs .nav-link:focus{
     margin-top: 0;
 }
 
+.modal-header .btn-close{
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+.modal-header .btn-close:focus{
+    box-shadow: none;
+}
+
 .modal-body{
     padding: 24px;
 }
