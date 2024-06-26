@@ -67,6 +67,7 @@
     width: 100%;
     max-width: 375px;
     border-right: 1px solid var(--borderColor);
+    position: relative;
 }
 .member-lists{
     /* padding: 24px 20px; */
@@ -166,10 +167,9 @@ ul.chat-list{
     padding-left: 0;
     margin-bottom: 0;
     padding: 10px 20px;
-    max-height: 620px;
+    max-height: 570px;
     overflow-y: scroll;
     height: 100%;
-    position: relative;
 }
 
 ul.chat-list li{
@@ -1236,7 +1236,8 @@ ul.member-lists li:last-child{
     -o-border-radius: 16px;
     margin-top: 10px;
     position: absolute;
-    bottom: 0;
+    bottom: 20px;
+    left: 30px;
 }
 
 #archive-list:hover,
@@ -1302,16 +1303,12 @@ ul.member-lists li:last-child{
         padding: 10px 20px;
     }
 
-    ul.chat-list{
-        padding-bottom: 70px;
-    }
-
-    #archive-list, #unarchive-list{
-        margin-bottom: 15px;
-    }
-
     .msg-footer{
         border-bottom-left-radius: 20px;
+    }
+
+    .message-area ul.chat-list{
+        margin-bottom: 70px !important;
     }
 }
 
