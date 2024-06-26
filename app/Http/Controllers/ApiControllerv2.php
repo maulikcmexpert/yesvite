@@ -12406,6 +12406,84 @@ class ApiControllerv2 extends Controller
     }
 
 
+
+    public function addProductSubscription(Request $request)
+    {
+
+        $rawData = $request->getContent();
+
+        $input = json_decode($rawData, true);
+
+        if ($input == null) {
+            return response()->json(['status' => 0, 'message' => "Json invalid"]);
+        }
+
+
+
+        $validator = Validator::make($input, [
+
+            'orderId' => 'required',
+            'packageName' => 'required',
+            'productId' => 'required',
+            'purchaseTime' => 'required',
+            'purchaseToken' => 'required|string',
+            'autoRenewing' => 'required',
+        ]);
+
+
+        if ($validator->fails()) {
+            return response()->json(
+                [
+                    'status' => 0,
+                    'message' => $validator->errors()->first()
+                ],
+            );
+        }
+
+
+        try {
+            $app_id = $input['packageName'];
+            $product_id = $input['productId'];
+            $user_id = $this->user->id;
+            $purchaseToken = $input['purchaseToken'];
+
+            $responce =  $this->set_android_iap($app_id, $product_id, $purchaseToken);
+
+            if (isset($responce['autoRenewing']) && ($responce['autoRenewing'] == false || $responce['autoRenewing'] == "")) {
+
+                $exp_date =  date('Y-m-d H:i:s', ($responce['expiryTimeMillis'] /  1000));
+
+                $current_date = date('Y-m-d H:i:s');
+                if (strtotime($current_date) > strtotime($exp_date)) {
+
+
+                    return response()->json(['status' => 0, 'message' => "subscription package expired"]);
+                }
+            }
+
+            $enddate = date('Y-m-d H:i:s', ($responce['expiryTimeMillis'] / 1000));
+
+
+
+            $new_subscription = new UserSubscription();
+            $new_subscription->user_id = $user_id;
+            $new_subscription->orderId = $input['orderId'];
+            $new_subscription->packageName = $input['packageName'];
+            $new_subscription->startDate = now();
+            $new_subscription->endDate = $enddate;
+            $new_subscription->productId = $input['productId'];
+            $new_subscription->type = 'subscribe';
+            $new_subscription->purchaseToken = $input['purchaseToken'];
+            $new_subscription->save();
+
+
+            return response()->json(['status' => 1, 'message' => "subscription sucessfully"]);
+        } catch (QueryException $e) {
+            return response()->json(['status' => 0, 'message' => "db error"]);
+        } catch (Exception  $e) {
+            return response()->json(['status' => 0, 'message' => 'something went wrong']);
+        }
+    }
     public function checkSubscription()
     {
 
