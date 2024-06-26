@@ -12318,139 +12318,9 @@ class ApiControllerv2 extends Controller
 
 
 
-    // public function addSubscription()
-    // {
-    //     // $user = Auth::user();
-    //     $data = json_decode(file_get_contents('php://input'), true);
-    //     $app_id = $data['packageName'];
-    //     $product_id = $data['productId'];
-    //     $user_id = $this->user->id;
-    //     $purchaseToken = $data['purchaseToken'];
-
-    //     $responce =  $this->set_android_iap($app_id, $product_id, $purchaseToken);
-    //     dd($responce);
-    //     if (isset($responce['autoRenewing']) && ($responce['autoRenewing'] == '0' || $responce['autoRenewing'] == "")) {
-
-    //         $exp_date =  date('Y-m-d H:i:s', ($responce['expiryTimeMillis'] /  1000));
-    //         $current_date = date('Y-m-d H:i:s');
-    //         if (strtotime($current_date) > strtotime($exp_date)) {
-    //             $data = ['status' => true, 'subscription' => 'failure'];
-    //             //   echo json_encode($data);
-    //             return response()->json($data);
-    //             die;
-    //         }
-    //     }
-
-    //     $enddate = date('Y-m-d H:i:s', ($responce['expiryTimeMillis'] / 1000));
-    //     if ($data['product_id'] == 'com.obs.oribible.yearly') {
-    //         $plan = '1 Year';
-    //     } else {
-    //         $plan = '1 Year';
-    //     }
-
-    //     $payment = new Payment();
-    //     $payment->user_id = $user->id;
-    //     $payment->transaction_id = $data['transaction_id'];
-    //     $payment->package_name = $data['product_id'];
-    //     $payment->amount = $data['amount'];
-    //     $payment->save();
-    //     $duration = Payment::where('user_id', $user->id)->count();
-
-    //     $subscribed = Subscription::where('user_id', $user->id)
-    //         ->select('id', 'user_id')
-    //         ->get();
-    //     if (isset($subscribed) && !$subscribed->isEmpty()) {
-    //         $subscription = Subscription::where('id', $subscribed[0]->id)
-    //             ->update([
-    //                 'plan' => $plan,
-    //                 'start_date' => now(),
-    //                 'end_date' => $enddate,
-    //                 'feedback' => null,
-    //                 'receipt' => null,
-    //                 'purchase_token' => $data['purchase_token'],
-    //                 'app_id' => $data['app_id'],
-    //                 'product_id' => $data['product_id'],
-    //                 'duration' => $duration,
-    //                 'unsubscribe_request' => 0
-    //             ]);
-    //     } else {
-    //         $subscription = new Subscription();
-    //         $subscription->user_id = $user->id;
-    //         $subscription->plan = $plan;
-    //         $subscription->start_date = now();
-    //         $subscription->end_date = $enddate;
-    //         $subscription->feedback = null;
-    //         $subscription->receipt = null;
-    //         $subscription->purchase_token = $data['purchase_token'];
-    //         $subscription->app_id = $data['app_id'];
-    //         $subscription->product_id = $data['product_id'];
-    //         $subscription->duration = $duration;
-    //         $subscription->save();
-    //     }
-
-    //     return $this->sendResponse(
-    //         __('Subscription Successfully'),
-    //         1
-    //     );
-    // }
-
-
-    // public function set_android_iap($appid, $productID, $purchaseToken)
-    // {
-    //     $ch = curl_init();
-    //     $clientId = env('InGOOGLE_CLIENT_ID');
-
-    //     $clientSecret = env('InGOOGLE_CLIENT_SECRET');
-    //     $redirectUri = 'https://yesvite.cmexpertiseinfotech.in/google/callback';
-
-    //     $refreshToken = '1//0gHYN_Ai3rfAnCgYIARAAGBASNwF-L9IrdP-JOsDTkXeH-yqO_Z252HkBEfW7oqRZqcbTrsTQ_u_8eeif8HSml-a-i0Foi6iVH4Q';
-
-
-    //     $TOKEN_URL = "https://accounts.google.com/o/oauth2/token";
-
-    //     $VALIDATE_URL = "https://www.googleapis.com/androidpublisher/v3/applications/" .
-    //         $appid . "/purchases/subscriptions/" .
-    //         $productID . "/tokens/" . $purchaseToken;
-
-
-    //     $input_fields = 'refresh_token=' . $refreshToken .
-    //         '&client_secret=' . $clientSecret .
-    //         '&client_id=' . $clientId .
-    //         '&redirect_uri=' . $redirectUri .
-    //         '&grant_type=refresh_token';
-
-    //     //Request to google oauth for authentication
-    //     curl_setopt($ch, CURLOPT_URL, $TOKEN_URL);
-    //     curl_setopt($ch, CURLOPT_POST, 1);
-    //     curl_setopt($ch, CURLOPT_POSTFIELDS, $input_fields);
-    //     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    //     $result = curl_exec($ch);
-    //     $result = json_decode($result, true);
-
-    //     if (!$result || !$result["access_token"]) {
-    //         //error  
-    //         // return;
-    //     }
-
-    //     // echo $VALIDATE_URL."?access_token=".$result["access_token"];exit;
-    //     // echo $VALIDATE_URL."?access_token=".$result["access_token"];die;
-    //     //request to play store with the access token from the authentication request
-
-
-    //     $ch = curl_init();
-    //     curl_setopt($ch, CURLOPT_URL, $VALIDATE_URL . "?access_token=" . $result["access_token"]);
-    //     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    //     $result1 = curl_exec($ch);
-    //     $result1 = json_decode($result1, true);
-    //     if (!$result1 || (isset($result1["error"]) && $result1["error"] != null)) {
-    //         //error
-    //         // return;
-    //     }
-    //     // print_r($result1);exit;
-    //     return $result1;
-    // }
     public function addSubscription(Request $request)
     {
+
         $rawData = $request->getContent();
 
         $input = json_decode($rawData, true);
@@ -12481,21 +12351,50 @@ class ApiControllerv2 extends Controller
             );
         }
 
+
         try {
-            $packageName = $input['packageName'];
-            $productId = $input['productId'];
+            $app_id = $input['packageName'];
+            $product_id = $input['productId'];
+            $user_id = $this->user->id;
             $purchaseToken = $input['purchaseToken'];
 
-            $accessToken = getGoogleAccessToken();
+            $responce =  $this->set_android_iap($app_id, $product_id, $purchaseToken);
+
+            if (isset($responce['autoRenewing']) && ($responce['autoRenewing'] == '0' || $responce['autoRenewing'] == "")) {
+
+                $exp_date =  date('Y-m-d H:i:s', ($responce['expiryTimeMillis'] /  1000));
+                $current_date = date('Y-m-d H:i:s');
+                if (strtotime($current_date) > strtotime($exp_date)) {
+                    return response()->json(['status' => 0, 'message' => "failure"]);
+                }
+            }
+
+            $enddate = date('Y-m-d H:i:s', ($responce['expiryTimeMillis'] / 1000));
 
 
-            $url = "https://www.googleapis.com/androidpublisher/v3/applications/{$packageName}/purchases/subscriptions/{$productId}/tokens/{$purchaseToken}?access_token={$accessToken}";
-            $response = Http::get($url);
-            dd($response);
-            $addSubscription = new UserSubscription();
-            $addSubscription->orderId = $input['orderId'];
-            $addSubscription->packageName = $input['packageName'];
-            $addSubscription->productId = $input['productId'];
+            $subscribed = UserSubscription::where('user_id', $user_id)
+                ->select('id', 'user_id')
+                ->first();
+            if (isset($subscribed) && !$subscribed->isEmpty()) {
+                $subscription = UserSubscription::where('id', $subscribed->id)
+                    ->update([
+                        'startDate' => now(),
+                        'endDate' => $enddate,
+                        'purchaseToken' => $input['purchase_token'],
+                        'packageName' => $input['packageName'],
+                        'productId' => $input['productId'],
+                    ]);
+            } else {
+                $new_subscription = new UserSubscription();
+                $new_subscription->user_id = $user_id;
+                $new_subscription->orderId = $input['orderId'];
+                $new_subscription->packageName = $input['packageName'];
+                $new_subscription->productId = $input['productId'];
+                $new_subscription->purchaseToken = $input['purchaseToken'];
+                $new_subscription->save();
+            }
+
+            return response()->json(['status' => 1, 'message' => "subscription sucessfully"]);
         } catch (QueryException $e) {
             return response()->json(['status' => 0, 'message' => "db error"]);
         } catch (Exception  $e) {
@@ -12503,37 +12402,55 @@ class ApiControllerv2 extends Controller
         }
     }
 
-    public function verifyPurchase(Request $request)
+
+    public function set_android_iap($appid, $productID, $purchaseToken)
     {
-        $rawData = $request->getContent();
-        $input = json_decode($rawData, true);
-        if ($input == null) {
-            return response()->json(['status' => 0, 'message' => "Json invalid"]);
+        $ch = curl_init();
+        $clientId = env('InGOOGLE_CLIENT_ID');
+
+        $clientSecret = env('InGOOGLE_CLIENT_SECRET');
+        $redirectUri = 'https://yesvite.cmexpertiseinfotech.in/google/callback';
+
+        $refreshToken = '1//0gHYN_Ai3rfAnCgYIARAAGBASNwF-L9IrdP-JOsDTkXeH-yqO_Z252HkBEfW7oqRZqcbTrsTQ_u_8eeif8HSml-a-i0Foi6iVH4Q';
+
+
+        $TOKEN_URL = "https://accounts.google.com/o/oauth2/token";
+
+        $VALIDATE_URL = "https://www.googleapis.com/androidpublisher/v3/applications/" .
+            $appid . "/purchases/subscriptions/" .
+            $productID . "/tokens/" . $purchaseToken;
+
+
+        $input_fields = 'refresh_token=' . $refreshToken .
+            '&client_secret=' . $clientSecret .
+            '&client_id=' . $clientId .
+            '&redirect_uri=' . $redirectUri .
+            '&grant_type=refresh_token';
+
+        //Request to google oauth for authentication
+        curl_setopt($ch, CURLOPT_URL, $TOKEN_URL);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $input_fields);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $result = curl_exec($ch);
+        $result = json_decode($result, true);
+
+        if (!$result || !$result["access_token"]) {
+            //error  
+            // return;
         }
 
-        $validator = Validator::make($input, [
-            'platform' => ['required', 'in:ios,android'],
-        ]);
 
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => 0,
-                'message' => $validator->errors()->first(),
-            ]);
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $VALIDATE_URL . "?access_token=" . $result["access_token"]);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $result1 = curl_exec($ch);
+        $result1 = json_decode($result1, true);
+        if (!$result1 || (isset($result1["error"]) && $result1["error"] != null)) {
+            //error
+            // return;
         }
 
-        $usersubscription = UserSubscription::where(['user_id', $this->user->id])->first();
-        $userId = $this->user->id;
-        $purchaseToken = $usersubscription->purchase_token;
-        $platform = $input['platform'];
-
-        if ($platform == 'ios') {
-
-            return $this->verifyApplePurchase($userId, $purchaseToken);
-        } elseif ($platform == 'android') {
-            return $this->verifyGooglePurchase($userId, $purchaseToken);
-        } else {
-            return response()->json(['error' => 'Invalid platform'], 400);
-        }
+        return $result1;
     }
 }
