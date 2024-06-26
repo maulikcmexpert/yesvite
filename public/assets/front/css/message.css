@@ -106,7 +106,7 @@
     display: flex;
     align-items: center;
     margin-bottom: 16px;
-    padding: 24px 20px;
+    padding: 23px 20px;
     border-bottom: 1px solid var(--borderColor);
 }
 
@@ -210,9 +210,9 @@ ul.chat-list li:last-child{
     bottom: 0;
 }
 
-.chat-list .user-detail{
+/* .chat-list .user-detail{
     width: 55%;
-}
+} */
 
 .user-detail h3{
     font-size: 14px;
@@ -431,6 +431,7 @@ ul.member-lists{
 
 ul.group-list{
     max-width: 100%;
+    max-height: 400px;
 }
 
 ul.group-list .user-detail h3{
@@ -611,7 +612,7 @@ ul.member-lists li:last-child{
 
 .msg-body ul li.receiver div.media-msg{
     background-color: #FFE4E9;
-    padding: 10px 10px 30px;
+    padding: 10px 10px 25px;
     border-radius: 20px 0px 20px 20px;
     -webkit-border-radius: 20px 0px 20px 20px;
     -moz-border-radius: 20px 0px 20px 20px;
@@ -625,7 +626,7 @@ ul.member-lists li:last-child{
 
 .msg-body ul li.receiver div.media-msg .media-text{
     margin-right: 30px;
-    margin-top: 10px;
+    margin-top: 0px;
     display: inline-block;
 }
 
@@ -639,7 +640,7 @@ ul.member-lists li:last-child{
 .msg-body .media-msg span.seenStatus{
     position: absolute;
     right: 9px;
-    bottom: 9px;
+    bottom: 10px;
 }
 
 .msg-body ul li.sender div.media-msg{
@@ -653,6 +654,22 @@ ul.member-lists li:last-child{
     display: inline-block;
     max-width: 317px;
     margin-left: auto;
+}
+
+.msg-body ul li.sender div.media-msg video{
+    max-width: 100%;
+    width: 297px;
+    height: 254px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.msg-body ul li.receiver div.media-msg video{
+    max-width: 100%;
+    width: 297px;
+    height: 254px;
+    object-fit: cover;
+    border-radius: 10px;
 }
 
 .msg-body ul li.sender div img{
@@ -684,6 +701,10 @@ ul.member-lists li:last-child{
     padding-right: 20px;
     padding-top: 8px;
     padding-bottom: 8px;
+}
+
+.msg-footer .message-perent .gap-3{
+
 }
 
 .msg-footer .set-replay-msg{
@@ -749,10 +770,12 @@ ul.member-lists li:last-child{
     border-radius: 5px;
 }
 
-.msg-footer #preview .close-button{
+.msg-footer #preview .close-preview{
     position: absolute;
     right: 5px;
     top: 5px;
+    background-color: transparent;
+    border: none;
 }
 
 .chat-data .form-check-input:checked{
@@ -1110,7 +1133,7 @@ ul.member-lists li:last-child{
     margin-bottom: 6px;
 }
 
-#selected-tags-containe .close-btn {
+#selected-tags-container .close-btn {
     cursor: pointer;
     margin-left: 10px;
 }
@@ -1143,7 +1166,7 @@ ul.member-lists li:last-child{
     margin-bottom: 6px;
 }
 
-.group-selected-tags-container .close-group-btn{
+#group-selected-tags-container .close-group-btn{
     margin-left: 10px;
 }
 
@@ -1234,10 +1257,21 @@ ul.member-lists li:last-child{
 }
 }
 
+@media only screen and (max-width:763px){
+    .chat-area .chat-header .dropdown-menu.show{
+        transform: translate3d(0px, 43px, 0px) !important;
+        -webkit-transform: translate3d(0px, 43px, 0px) !important;
+        -moz-transform: translate3d(0px, 43px, 0px) !important;
+        -ms-transform: translate3d(0px, 43px, 0px) !important;
+        -o-transform: translate3d(0px, 43px, 0px) !important;
+}
+}
+
 @media only screen and (max-width:768px){
     .chat-area{
         flex-direction: column;
         border: none;
+        height: auto;
     }
 
     .chat-lists{
@@ -1263,6 +1297,22 @@ ul.member-lists li:last-child{
         -o-border-radius: 20px;
         margin-top: 20px;
     }
+
+    .chat-header{
+        padding: 10px 20px;
+    }
+
+    ul.chat-list{
+        padding-bottom: 70px;
+    }
+
+    #archive-list, #unarchive-list{
+        margin-bottom: 15px;
+    }
+
+    .msg-footer{
+        border-bottom-left-radius: 20px;
+    }
 }
 
 @media only screen and (max-width:620px){
@@ -1280,19 +1330,45 @@ ul.member-lists li:last-child{
         padding: 0px 0px;
     }
 
-    .chat-list .user-detail {
+    /* .chat-list .user-detail {
         width: 45%;
+    } */
+
+    .chat-header{
+        margin-bottom: 5px;
+    }
+
+    .msg-body ul li.receiver div img{
+        width: 150px;
+        height: 150px;
+    }
+
+    .msg-body ul li.receiver div.media-msg{
+        width: 150px;
+        height: 150px;
+    }
+
+    .msg-body ul li.sender div img{
+        width: 150px;
+        height: 150px;
+    }
+
+    .msg-body ul li.sender div.media-msg{
+        width: 150px;
+        height: 150px;
     }
 }
 
 @media only screen and (max-width:420px){
     .message-area .massage-notification{
         flex-direction: column;
+        align-items: flex-start;
     }
 
     .massage-notification .cmn-btn{
         width: 100%;
         margin-top: 10px;
     }
+    
 }
 
