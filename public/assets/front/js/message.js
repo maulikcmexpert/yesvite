@@ -1097,16 +1097,18 @@ function createMessageElement(key, messageData, isGroup) {
         }
         reaction = messageData?.messageReact
             ? Object.values(messageData.messageReact)
-                  .map((reactData) =>
-                      String.fromCodePoint(
-                          parseInt(
-                              reactData.react.replace(/\\u\{(.+)\}/, "$1"),
-                              16
-                          )
-                      )
+                  .map(
+                      (reactData) =>
+                          `<li class="reaction">${String.fromCodePoint(
+                              parseInt(
+                                  reactData.react.replace(/\\u\{(.+)\}/, "$1"),
+                                  16
+                              )
+                          )}</li>`
                   )
                   .join(" ")
             : "";
+        reaction = `<ul class="reaction-ul">${reaction}</ul>`;
     } else {
         seenStatus = isSender
             ? messageData.isSeen
@@ -1122,6 +1124,7 @@ function createMessageElement(key, messageData, isGroup) {
                       )
                   )
                 : "";
+        reaction = `<span class="reaction">${reaction}</span>`;
     }
 
     let emojiAndReplay = isReceiver
@@ -1145,7 +1148,7 @@ function createMessageElement(key, messageData, isGroup) {
                          ? `<span class="seenStatus ${seenStatus}"></span>`
                          : ""
                  } 
-                ${reaction ? `<span class="reaction">${reaction}</span>` : ""}
+                ${reaction}
             </div>`
             : messageData?.type == "2"
             ? `<div class="media-msg">
@@ -1158,13 +1161,13 @@ function createMessageElement(key, messageData, isGroup) {
                          ? `<span class="seenStatus ${seenStatus}"></span>`
                          : ""
                  } 
-                 ${reaction ? `<span class="reaction">${reaction}</span>` : ""}
+                 ${reaction}
             </div>`
             : messageData?.type == "3"
             ? `<div class="media-msg">
             ${genrateAudio(messageData?.url)}
             <span>${messageData?.data != "" ? messageData.data : ""}</span>
-            ${reaction ? `<span class="reaction">${reaction}</span>` : ""}
+            ${reaction}
             </div>`
             : `
             <div class="simple-message"> 
@@ -1176,11 +1179,7 @@ function createMessageElement(key, messageData, isGroup) {
                             ? `<span class="seenStatus ${seenStatus}"></span>`
                             : ""
                     } 
-                    ${
-                        reaction
-                            ? `<span class="reaction">${reaction}</span>`
-                            : ""
-                    }
+                    ${reaction}
                 </p>
                 ${emojiAndReplay}
               </div>
