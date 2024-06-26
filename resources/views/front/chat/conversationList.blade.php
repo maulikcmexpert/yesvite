@@ -1,7 +1,7 @@
 @php
-    use Carbon\Carbon;                     
+    use Carbon\Carbon;   
 $i = 0;
-
+$message['unReadCount'] = $message['unRead']==true && @$message['unReadCount']==0 ?1 : @$message['unReadCount'];
 @endphp
 
 @if(!isset($message['contactName']))

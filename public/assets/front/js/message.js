@@ -2440,7 +2440,13 @@ async function getTotalUnreadMessageCount() {
 // Function to update badge with unread message count
 async function updateUnreadMessageBadge() {
     const totalUnreadCount = await getTotalUnreadMessageCount();
-    $(".badge").text(totalUnreadCount);
+    if (totalUnreadCount > 0) {
+        $(".badge").show();
+
+        $(".badge").text(totalUnreadCount);
+    } else {
+        $(".badge").hide();
+    }
     $(".set-replay-msg").remove();
     replyMessageId = null;
 }
