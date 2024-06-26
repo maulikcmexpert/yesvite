@@ -289,6 +289,7 @@ Route::prefix('user/v2/')->middleware('checkUser')->group(function () {
     Route::post('accept_reject_co_host', [ApiControllerv2::class, 'acceptRejectCoHost']);
     Route::post('notification_on_off', [ApiControllerv2::class, 'notificationOnOff']);
     Route::post('add_subscription', [ApiControllerv2::class, 'addSubscription']);
+    Route::get('check_subscription', [ApiControllerv2::class, 'checkSubscription']);
 
 
 

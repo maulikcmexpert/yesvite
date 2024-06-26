@@ -12366,19 +12366,8 @@ class ApiControllerv2 extends Controller
 
                 $current_date = date('Y-m-d H:i:s');
                 if (strtotime($current_date) > strtotime($exp_date)) {
-                    $subscribed = UserSubscription::where('user_id', $user_id)
-                        ->select('id', 'user_id')
-                        ->first();
-                    if ($subscribed != null) {
-                        UserSubscription::where('id', $subscribed->id)
-                            ->update([
-                                'startDate' => now(),
-                                'endDate' => $exp_date,
-                                'purchaseToken' => $input['purchaseToken'],
-                                'packageName' => $input['packageName'],
-                                'productId' => $input['productId'],
-                            ]);
-                    }
+
+
                     return response()->json(['status' => 0, 'message' => "subscription package expired"]);
                 }
             }
@@ -12386,29 +12375,18 @@ class ApiControllerv2 extends Controller
             $enddate = date('Y-m-d H:i:s', ($responce['expiryTimeMillis'] / 1000));
 
 
-            $subscribed = UserSubscription::where('user_id', $user_id)
-                ->select('id', 'user_id')
-                ->first();
-            if ($subscribed != null) {
-                $subscription = UserSubscription::where('id', $subscribed->id)
-                    ->update([
-                        'startDate' => now(),
-                        'endDate' => $enddate,
-                        'purchaseToken' => $input['purchaseToken'],
-                        'packageName' => $input['packageName'],
-                        'productId' => $input['productId'],
-                    ]);
-            } else {
-                $new_subscription = new UserSubscription();
-                $new_subscription->user_id = $user_id;
-                $new_subscription->orderId = $input['orderId'];
-                $new_subscription->packageName = $input['packageName'];
-                $new_subscription->startDate = now();
-                $new_subscription->endDate = $enddate;
-                $new_subscription->productId = $input['productId'];
-                $new_subscription->purchaseToken = $input['purchaseToken'];
-                $new_subscription->save();
-            }
+
+            $new_subscription = new UserSubscription();
+            $new_subscription->user_id = $user_id;
+            $new_subscription->orderId = $input['orderId'];
+            $new_subscription->packageName = $input['packageName'];
+            $new_subscription->startDate = now();
+            $new_subscription->endDate = $enddate;
+            $new_subscription->productId = $input['productId'];
+            $new_subscription->type = 'subscribe';
+            $new_subscription->purchaseToken = $input['purchaseToken'];
+            $new_subscription->save();
+
 
             return response()->json(['status' => 1, 'message' => "subscription sucessfully"]);
         } catch (QueryException $e) {
@@ -12419,6 +12397,12 @@ class ApiControllerv2 extends Controller
     }
 
 
+    public function checkSubscription()
+    {
+
+        $userSubscription = UserSubscription::where('user_id', $this->user->id)->orderBy('desc', 'id')->first();
+        dd($userSubscription);
+    }
     public function set_android_iap($appid, $productID, $purchaseToken)
     {
         $ch = curl_init();
