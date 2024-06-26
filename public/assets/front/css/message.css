@@ -735,7 +735,6 @@ ul.member-lists li:last-child{
 #msgBox .modal-body .inbox{
     background-color: #F8F9FD;
     padding: 10px 24px;
-    /* margin-top: 16px; */
 }
 
 #msgBox .modal-body .inbox h6{
@@ -831,7 +830,7 @@ ul.member-lists li:last-child{
     -moz-border-radius: 0px 20px 20px 20px;
     -ms-border-radius: 0px 20px 20px 20px;
     -o-border-radius: 0px 20px 20px 20px;
-    margin-bottom: 16px;
+    margin-bottom: 2px;
     text-align: left;
 }
 
@@ -846,6 +845,7 @@ ul.member-lists li:last-child{
     -o-border-radius: 0px 20px 20px 20px;
     margin-bottom: 16px;
     text-align: left;
+    padding-bottom: 2px;
 }
 
 .msg-body ul li .reply-section .senderName{
@@ -853,13 +853,18 @@ ul.member-lists li:last-child{
     color: red;
 }
 
+.msg-body ul li .reply-section .reply-info{
+    font-size: 12px;
+}
+
 .msg-body ul li .reply-section hr{
     margin: 10px 0;
 }
 
-/* .msg-body ul li.receiver .reply-section:first-child{
-    border-bottom: 1px solid #000;
-} */
+.msg-body ul li.sender > div{
+    display: flex;
+    align-items: center;
+}
 
 #msgBox .chat-user{
     padding: 24px;
@@ -888,7 +893,7 @@ ul.member-lists li:last-child{
     height: 100%;
 }
 
-#msgBox .chat-user .chat-user-img img h5{
+#msgBox .chat-user .chat-user-img h5{
     border-radius: 100%;
     -webkit-border-radius: 100%;
     -moz-border-radius: 100%;
@@ -976,6 +981,22 @@ ul.member-lists li:last-child{
     -o-border-radius: 100%;
 }
 
+#msgBox .multi-img h5{
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    -ms-border-radius: 100%;
+    -o-border-radius: 100%;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 #msgBox .multi-img.more-img{
     background-color: var(--primaryColor);
     display: flex;
@@ -1014,15 +1035,30 @@ ul.member-lists li:last-child{
 .ui-autocomplete{
     z-index: 9999!important;
 }
-.tag {
+
+#msgBox #selected-tags-container h5,
+#msgBox #selected-tags-container img
+{
+    display: none;
+}
+
+.selected-tags-container{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#selected-tags-container .tag {
     display: inline-block;
-    background-color: #f2f2f2;
+    background-color: #ffffff;
     color: #333;
-    border: 1px solid #ccc;
     padding: 3px 8px;
     margin-right: 5px;
-    border-radius: 5px;
-  }
+    font-size: 14px;
+    box-shadow: 0px 5px 10px 0px #00000008;
+    border-radius: 100px;
+    border: none;
+    margin-bottom: 6px;
+}
 
   .close-btn {
     cursor: pointer;
