@@ -12311,12 +12311,6 @@ class ApiControllerv2 extends Controller
         }
     }
 
-
-
-
-
-
-
     public function addSubscription(Request $request)
     {
         $rawData = $request->getContent();
