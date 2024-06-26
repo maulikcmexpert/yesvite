@@ -854,13 +854,11 @@ ul.member-lists li:last-child{
 }
 
 .msg-body ul li .reply-section .reply-info{
-    border-bottom: 1px solid #ccc ;
-    padding-bottom: 10px;
     font-size: 12px;
 }
 
-.msg-body ul li .reply-section .reply-massage{
-    padding-top: 10px;
+.msg-body ul li .reply-section hr{
+    margin: 10px 0;
 }
 
 .msg-body ul li.sender > div{
@@ -1049,7 +1047,7 @@ ul.member-lists li:last-child{
     flex-wrap: wrap;
 }
 
-.selected-tags-container .tag {
+#selected-tags-container .tag {
     display: inline-block;
     background-color: #ffffff;
     color: #333;
