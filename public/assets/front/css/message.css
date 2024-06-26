@@ -221,12 +221,12 @@ ul.chat-list li:last-child{
     margin-bottom: 2px;
 }
 
-.chat-list .chat-data .remove-member{
+.member-lists .chat-data .remove-member{
    position: absolute;
    right: 0;
    border: none;
    background-color: transparent;
-   
+
 }
 
 .chat-list .chat-data{
@@ -344,9 +344,7 @@ ul.chat-list li:last-child{
     width: 120px;
     height: 120px;
     background: inherit;
-    margin: 0 auto;
-
-
+    margin: 25px auto 0;
 }
 
 
@@ -396,6 +394,62 @@ ul.chat-list li:last-child{
 
 #listBox .edit-btn svg path{
     stroke: #fff;
+}
+
+ul.member-lists{
+    padding-left: 0;
+    margin-bottom: 0;
+    padding: 10px 20px;
+    max-height: 590px;
+    overflow-y: scroll;
+    height: 100%;
+}
+
+.member-lists .chat-data{
+    padding: 10px 10px;
+    position: relative;
+    align-items: center;
+}
+
+ul.group-list{
+    max-width: 100%;
+}
+
+ul.group-list .group-admin{
+    background: #d6f5d6;
+    color: green;
+    padding: 5px 5px;
+    border-radius: 5px;
+    position: absolute;
+    right: 0;
+    display: inline;
+    top: 50%;
+    transform: translateY(-50%);
+    min-width: 57px;
+    text-align: center;
+    width: auto;
+}
+
+ul.member-lists li{
+    margin: 4px 0;
+    border-bottom: 1px solid #F1F5F9;
+    padding: 0 0px;
+    border-radius: 16px;
+    -webkit-border-radius: 16px;
+    -moz-border-radius: 16px;
+    -ms-border-radius: 16px;
+    -o-border-radius: 16px;
+    cursor: pointer;
+}
+
+ul.member-lists li.active,
+ul.member-lists li:hover
+{
+    background-color: #F8F9FD !important;
+}
+
+ul.member-lists li:last-child{
+    border-bottom: 0;
 }
 
 .new-member{
