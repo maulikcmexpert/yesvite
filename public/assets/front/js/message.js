@@ -771,6 +771,7 @@ $(".send-message").on("keyup", async function (e) {
         update(userRef, { userTypingStatus: "Not typing..." });
     }, 1000);
 });
+$("#preview").hide();
 
 $(".send-message").on("keypress", async function (e) {
     update(userRef, { userTypingStatus: "Typing..." });
