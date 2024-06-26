@@ -1,7 +1,7 @@
 @php
-    use Carbon\Carbon;                     
+    use Carbon\Carbon;   
 $i = 0;
-
+$message['unReadCount'] = $message['unRead']==true && @$message['unReadCount']==0 ?1 : @$message['unReadCount'];
 @endphp
 
 @if(!isset($message['contactName']))
@@ -14,7 +14,7 @@ $i = 0;
    
 @endif                     --}}
 {{-- @dd($message); --}}
-<li class="{{$i == 0 ?'active':''}} msg-list conversation-{{$message['conversationId']}}" data-userId="{{$message['contactId']}}" data-msgKey={{$message['conversationId']}} data-group={{$message['group']}} >
+<li class="{{$i == 0 ?'active':''}} msg-list conversation-{{$message['conversationId']}}" data-userId="{{$message['contactId']}}" data-msgKey={{$message['conversationId']}} data-group={{@$message['group']}} >
     <div class="me-2 d-none bulk-check">
         <input class="form-check-input" type="checkbox" name="checked_conversation[]" value="{{$message['conversationId']}}" isGroup="{{@$message['group']}}">
     </div>
