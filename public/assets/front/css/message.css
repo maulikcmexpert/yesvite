@@ -488,6 +488,7 @@ ul.member-lists li:last-child{
     color: #558f57;
     font-size: 13px;
     padding: 0;
+    margin-bottom: 15px;
 }
 
 .new-member button:hover{
@@ -551,6 +552,7 @@ ul.member-lists li:last-child{
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: left;
 }
 
 .msg-body ul li .time{
@@ -1245,6 +1247,35 @@ ul.member-lists li:last-child{
 {
     background-color: var(--primaryColor);
     color: #fff;
+}
+
+.audio-container{
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    display: flex;
+    align-items: center;
+    transform: translateY(-50%);
+}
+
+.audio-container .close-audio-btn{
+    border: none;
+    background-color: transparent;
+    box-shadow: none;
+    margin-left: 10px;
+}
+
+#stopRecording{
+    border: none;
+    background-color: transparent;
+    box-shadow: inherit;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #000;
 }
 
 /* ======= responsive ======== */
