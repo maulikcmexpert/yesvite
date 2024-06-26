@@ -174,7 +174,7 @@ export function genrateAudio(url) {
       </div>
 
       <audio crossorigin>
-        <source src="${url}" type="audio/mpeg">
+        <source src="${url}" type="audio/wav">
       </audio>
     </div>`;
 }

@@ -806,7 +806,7 @@ $(".send-message").on("keypress", async function (e) {
                 storagePath = `Video/${senderUser}/${Date.now()}_${senderUser}-video.mp4`;
                 type = "2";
             } else if (imageUrl.startsWith("blob:http:/") && audio == "audio") {
-                storagePath = `Audios/${senderUser}/${Date.now()}_${senderUser}-audio.mp3`;
+                storagePath = `Audios/${senderUser}/${Date.now()}_${senderUser}-audio.wav`;
                 type = "3";
             } else {
                 storagePath = `Files/${senderUser}/${Date.now()}_${senderUser}-file.${fileType}`;
@@ -832,7 +832,7 @@ $(".send-message").on("keypress", async function (e) {
             console.log(audioUrl);
 
             let storagePath;
-            storagePath = `Audios/${senderUser}/${Date.now()}_${senderUser}-Audio.mp3`;
+            storagePath = `Audios/${senderUser}/${Date.now()}_${senderUser}-Audio.wav`;
 
             // Upload file to Firebase Storage
             const fileRef = storageRef(storage, storagePath);
