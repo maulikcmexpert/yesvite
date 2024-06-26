@@ -401,7 +401,17 @@ ul.chat-list li:last-child{
     stroke: #fff;
 }
 
+.change-group-name .update-group-name{
+    margin-top: 14px;
+    outline: 0;
+    font-size: 15px;
+    margin-right: 10px;
+}
 
+.change-group-name .cmn-btn{
+    padding: 10px 20px;
+    border-radius: 16px;
+}
 
 ul.member-lists{
     padding-left: 0;
@@ -732,22 +742,21 @@ ul.member-lists li:last-child{
     padding: 0 !important;
 }
 
-#msgBox .modal-body .inbox{
+.modal-body .inbox{
     background-color: #F8F9FD;
     padding: 10px 24px;
-    /* margin-top: 16px; */
 }
 
-#msgBox .modal-body .inbox h6{
+.modal-body .inbox h6{
     font-size: 14px;
     color: var(--secondryColor);
     font-weight: 500;
     margin-bottom: 0;
 }
 
-#msgBox .modal-body .inbox input{
+.modal-body .inbox input{
     height: auto !important;
-    width: 100%;
+    width: auto;
     border: none !important;
     border-radius: inherit !important;
     -webkit-border-radius: inherit !important;
@@ -760,7 +769,7 @@ ul.member-lists li:last-child{
     padding-left: 5px !important;
 }
 
-#msgBox .modal-body .inbox input:focus{
+.modal-body .inbox input:focus{
     border: none !important;
 }
 
@@ -831,7 +840,7 @@ ul.member-lists li:last-child{
     -moz-border-radius: 0px 20px 20px 20px;
     -ms-border-radius: 0px 20px 20px 20px;
     -o-border-radius: 0px 20px 20px 20px;
-    margin-bottom: 16px;
+    margin-bottom: 2px;
     text-align: left;
 }
 
@@ -846,6 +855,7 @@ ul.member-lists li:last-child{
     -o-border-radius: 0px 20px 20px 20px;
     margin-bottom: 16px;
     text-align: left;
+    padding-bottom: 2px;
 }
 
 .msg-body ul li .reply-section .senderName{
@@ -853,13 +863,18 @@ ul.member-lists li:last-child{
     color: red;
 }
 
+.msg-body ul li .reply-section .reply-info{
+    font-size: 12px;
+}
+
 .msg-body ul li .reply-section hr{
     margin: 10px 0;
 }
 
-/* .msg-body ul li.receiver .reply-section:first-child{
-    border-bottom: 1px solid #000;
-} */
+.msg-body ul li.sender > div{
+    display: flex;
+    align-items: center;
+}
 
 #msgBox .chat-user{
     padding: 24px;
@@ -888,7 +903,7 @@ ul.member-lists li:last-child{
     height: 100%;
 }
 
-#msgBox .chat-user .chat-user-img img h5{
+#msgBox .chat-user .chat-user-img h5{
     border-radius: 100%;
     -webkit-border-radius: 100%;
     -moz-border-radius: 100%;
@@ -946,6 +961,13 @@ ul.member-lists li:last-child{
     padding: 24px;
 }
 
+#msgBox .multi-chat #group-name{
+    margin-top: 14px;
+    outline: 0;
+}
+
+
+
 #msgBox .img-wrp{
     display: flex;
     align-items: center;
@@ -974,6 +996,23 @@ ul.member-lists li:last-child{
     -moz-border-radius: 100%;
     -ms-border-radius: 100%;
     -o-border-radius: 100%;
+}
+
+#msgBox .multi-img h5{
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    -ms-border-radius: 100%;
+    -o-border-radius: 100%;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0;
 }
 
 #msgBox .multi-img.more-img{
@@ -1014,22 +1053,66 @@ ul.member-lists li:last-child{
 .ui-autocomplete{
     z-index: 9999!important;
 }
-.tag {
+
+#selected-tags-container{
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 10px;
+}
+
+#msgBox #selected-tags-container h5,
+#msgBox #selected-tags-container img
+{
+    display: none;
+}
+
+#selected-tags-container .tag {
     display: inline-block;
-    background-color: #f2f2f2;
+    background-color: #ffffff;
     color: #333;
-    border: 1px solid #ccc;
     padding: 3px 8px;
     margin-right: 5px;
-    border-radius: 5px;
-  }
+    font-size: 14px;
+    box-shadow: 0px 5px 10px 0px #00000008;
+    border-radius: 100px;
+    border: none;
+    margin-bottom: 6px;
+}
 
-  .close-btn {
+.close-btn {
     cursor: pointer;
     margin-left: 5px;
-  }
+}
 
-  .reaction-icon, .reply-icon {
+.new-members-add{
+    padding: 10px 0px 20px;
+}
+
+.new-members-add .cmn-btn{
+    margin-top: 15px;
+    margin-left: 25px;
+}
+
+#group-selected-tags-container{
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 10px;
+}
+
+#group-selected-tags-container .tag {
+    display: inline-block;
+    background-color: #ffffff;
+    color: #333;
+    padding: 3px 8px;
+    margin-right: 5px;
+    font-size: 14px;
+    box-shadow: 0px 5px 10px 0px #00000008;
+    border-radius: 100px;
+    border: none;
+    margin-bottom: 6px;
+}
+
+.reaction-icon, .reply-icon {
     cursor: pointer;
     margin-left: 7px;
     padding: 2px;
@@ -1067,6 +1150,11 @@ ul.member-lists li:last-child{
 .msg-lists .sender .simple-message{
     display: flex;
     align-items: center;
+}
+
+.modal-header .selected-title{
+    margin-bottom: 0;
+    cursor: pointer;
 }
 
 

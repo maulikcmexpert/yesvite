@@ -1,7 +1,7 @@
 @php
-    use Carbon\Carbon;                     
+    use Carbon\Carbon;   
 $i = 0;
-
+$message['unReadCount'] = $message['unRead']==true && @$message['unReadCount']==0 ?1 : @$message['unReadCount'];
 @endphp
 
 @if(!isset($message['contactName']))
@@ -14,7 +14,7 @@ $i = 0;
    
 @endif                     --}}
 {{-- @dd($message); --}}
-<li class="{{$i == 0 ?'active':''}} msg-list conversation-{{$message['conversationId']}}" data-userId="{{$message['contactId']}}" data-msgKey={{$message['conversationId']}} data-group={{$message['group']}} >
+<li class="{{$i == 0 ?'active':''}} msg-list conversation-{{$message['conversationId']}}" data-userId="{{$message['contactId']}}" data-msgKey={{$message['conversationId']}} data-group={{@$message['group']}} >
     <div class="me-2 d-none bulk-check">
         <input class="form-check-input" type="checkbox" name="checked_conversation[]" value="{{$message['conversationId']}}" isGroup="{{@$message['group']}}">
     </div>
@@ -57,7 +57,7 @@ $i = 0;
                 <span class="badge ms-2 {{@$message['unReadCount'] == 0 ? 'd-none' : ''}}">{{@$message['unReadCount']}}</span>
             </div>
         </a>
-        <span class="ms-3 me-2 d-flex align-items-center pin-svg">
+        <span class="ms-3 me-2 d-flex align-items-center pin-svg d-none">
             <svg width="11" height="17" viewBox="0 0 11 17" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -65,7 +65,7 @@ $i = 0;
                     fill="#94A3B8" />
             </svg>
         </span>
-        <div class="dropdown ms-auto">
+        {{-- <div class="dropdown ms-auto">
             <button type="button" class="btn btn-primary dropdown-toggle"
                 data-bs-toggle="dropdown">
                 <svg width="5" height="18" viewBox="0 0 5 18" fill="none"
@@ -113,7 +113,7 @@ $i = 0;
                         </svg>
                         Delete Message</a></li>
             </ul>
-        </div>
+        </div> --}}
     </div>
 </li>
 @php
