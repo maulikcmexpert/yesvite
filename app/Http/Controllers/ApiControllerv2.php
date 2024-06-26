@@ -3343,6 +3343,8 @@ class ApiControllerv2 extends Controller
                 'podluck_category_list' => ['array'],
                 'events_schedule_list' => ['array'],
                 'is_draft_save' => ['required', 'in:0,1']
+                // 'subscription_plan_name'=>['required','string'],
+                // 'subscription_invite_count' =>['required','integer']
             ]);
         } else {
 
@@ -3353,6 +3355,8 @@ class ApiControllerv2 extends Controller
                 'start_date' => ['required'],
                 'end_date' => ['required'],
                 'is_draft_save' => ['required', 'in:0,1']
+                // 'subscription_plan_name'=>['required','string'],
+                // 'subscription_invite_count' =>['required','integer']
             ]);
         }
 
@@ -3438,7 +3442,8 @@ class ApiControllerv2 extends Controller
             'zip_code' => (!empty($eventData['zip_code'])) ? $eventData['zip_code'] : "",
             'city' => (!empty($eventData['city'])) ? $eventData['city'] : "",
             'message_to_guests' => (!empty($eventData['message_to_guests'])) ? $eventData['message_to_guests'] : "",
-
+            'subscription_plan_name' => (!empty($eventData['subscription_plan_name'])) ? $eventData['subscription_plan_name'] : "",
+            'subscription_invite_count'(!empty($eventData['subscription_invite_count'])) ? $eventData['subscription_invite_count'] : "",
             'is_draft_save' => $eventData['is_draft_save']
         ]);
 
@@ -4207,6 +4212,9 @@ class ApiControllerv2 extends Controller
                 $eventDetail['message_to_guests'] = (!empty($getEventData->message_to_guests) & $getEventData->message_to_guests != NULL) ? $getEventData->message_to_guests : "";
                 $eventDetail['is_draft_save'] = $getEventData->is_draft_save;
                 $eventDetail['step'] = ($getEventData->step != NULL) ? $getEventData->step : 0;
+                $eventDetail['subscription_plan_name'] = ($getEventData->subscription_plan_name != NULL) ? $getEventData->subscription_plan_name :"";
+                $eventDetail['subscription_invite_count'] = ($getEventData->subscription_invite_count != NULL) ? $getEventData->subscription_invite_count : 0;
+
                 $eventDetail['event_images'] = [];
                 $getEventImages = EventImage::where('event_id', $getEventData->id)->get();
                 if (!empty($getEventImages)) {
@@ -4500,7 +4508,8 @@ class ApiControllerv2 extends Controller
             }
 
 
-
+            $updateEvent->subscription_plan_name = (!empty($eventData['subscription_plan_name'])) ? $eventData['subscription_plan_name'] : "";
+            $updateEvent->subscription_invite_count =(!empty($eventData['subscription_invite_count'])) ? $eventData['subscription_invite_count'] : "";
             $updateEvent->event_type_id = (!empty($eventData['event_type_id'])) ? $eventData['event_type_id'] : "";
             $updateEvent->event_name = (!empty($eventData['event_name'])) ? $eventData['event_name'] : "";
 
