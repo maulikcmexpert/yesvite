@@ -12392,7 +12392,7 @@ class ApiControllerv2 extends Controller
             $new_subscription->startDate = now();
             $new_subscription->endDate = $enddate;
             $new_subscription->productId = $input['productId'];
-            $new_subscription->type = 'subscribe';
+            $new_subscription->type = 'Pro-Year';
             $new_subscription->purchaseToken = $input['purchaseToken'];
             $new_subscription->save();
 
@@ -12430,9 +12430,9 @@ class ApiControllerv2 extends Controller
                     $userSubscription->cancellationdate = $cancellationdate;
                 }
                 $userSubscription->save();
-                return response()->json(['status' => 0, 'message' => "subscription is not active", 'type' => $userSubscription->type]);
+                return response()->json(['status' => 0, 'message' => "subscription is not active", 'type' => 'Free']);
             }
-            return response()->json(['status' => 1, 'message' => "subscription is active", 'type' => 'pro_year']);
+            return response()->json(['status' => 1, 'message' => "subscription is active", 'type' => $userSubscription->type]);
         }
         return response()->json(['status' => 0, 'message' => "No subscribe", 'type' => 'Free']);
     }
