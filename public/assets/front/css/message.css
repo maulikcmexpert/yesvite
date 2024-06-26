@@ -1212,6 +1212,18 @@ ul.member-lists li:last-child{
     align-items: center;
 }
 
+.msg-lists .sender .simple-message .reaction-ul{
+    position: absolute;
+    bottom: -19px;
+    right: -4px;
+    display: flex;
+    left: 60%;
+}
+
+.msg-lists .sender .simple-message .reaction-ul .reaction{
+    position: initial;
+}
+
 .modal-header .selected-title{
     margin-bottom: 0;
     cursor: pointer;
