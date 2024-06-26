@@ -93,9 +93,9 @@
                 </a>
             </div>
         </div>
-        <div class="create-link d-flex justify-content-center align-items-center gap-2">
+        <!-- <div class="create-link d-flex justify-content-center align-items-center gap-2">
             <p>New to Yesvite?</p>
             <a href="{{route('auth.register')}}">Create an account</a>
-        </div>
+        </div> -->
     </div>
 </section>
