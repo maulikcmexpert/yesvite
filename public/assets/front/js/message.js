@@ -76,7 +76,7 @@ function imageExists(url) {
 async function updateProfileImg(profileImageUrl, userName) {
     if (await isValidImageUrl(profileImageUrl)) {
         $("#selected-user-profile").replaceWith(
-            `<img id="selected-user-profile" src="${profileImageUrl}" alt="user-img">`
+            `<img  src="${profileImageUrl}" alt="user-img">`
         );
         $("#profileIm").replaceWith(
             `<img id="profileIm" src="${profileImageUrl}" alt="cover-img" >`
@@ -86,7 +86,7 @@ async function updateProfileImg(profileImageUrl, userName) {
         const fontColor = "fontcolor" + initials[0]?.toUpperCase();
 
         $("#selected-user-profile").replaceWith(
-            `<h5 class="${fontColor}" id="selected-user-profile">${initials}</h5>`
+            `<h5 class="${fontColor}" >${initials}</h5>`
         );
         $("#profileIm").replaceWith(
             `<h5 id="profileIm" class="${fontColor}">${initials}</h5>`
@@ -101,7 +101,7 @@ async function getSelectedUserimg(profileImageUrl, userName) {
         const initials = getInitials(userName);
         const fontColor = "fontcolor" + initials[0]?.toUpperCase();
 
-        return `<h5 class="${fontColor} selected-user-img user-img" id="selected-user-profile" src="">${initials}</h5>`;
+        return `<h5 class="${fontColor} selected-user-img user-img"  src="">${initials}</h5>`;
     }
 }
 
@@ -113,7 +113,7 @@ async function getListUserimg(profileImageUrl, userName) {
     const initials = getInitials(userName);
     const fontColor = "fontcolor" + initials[0]?.toUpperCase();
 
-    return `<h5 class="${fontColor} user-avatar img-fluid" id="selected-user-profile" src="">${initials}</h5>`;
+    return `<h5 class="${fontColor} user-avatar img-fluid" src="">${initials}</h5>`;
 }
 
 // Initialize Firebase
@@ -1175,7 +1175,7 @@ $("#search-user")
                 });
 
                 const processedData = await Promise.all(
-                    result.map(async (item) => ({
+                    await result.map(async (item) => ({
                         label: item.name,
                         value: item.name,
                         userId: item.id,
@@ -1187,7 +1187,7 @@ $("#search-user")
                         ),
                     }))
                 );
-
+                console.log(processedData);
                 response(processedData);
             } catch (error) {
                 console.error("Error fetching data", error);
@@ -1202,7 +1202,7 @@ $("#search-user")
             if (!selectedUserIds.includes(selectedUserId)) {
                 selectedUserIds.push(selectedUserId);
                 updateSelectedUserIds();
-
+                const $img = ui.item.imageElement;
                 const $tag = $("<div>", {
                     class: "tag",
                     "data-user-id": selectedUserId,
@@ -1211,6 +1211,7 @@ $("#search-user")
                     .append(
                         $("<span>", { class: "close-btn" }).html("&times;")
                     );
+                $tag.append($img);
                 $("#selected-tags-container").append($tag);
 
                 handleSelectedUsers();
@@ -1286,12 +1287,10 @@ async function handleSelectedUsers() {
         $tags.each(async function (index) {
             if (index < 2) {
                 const userName = $(this).text().trim();
-                const userImgSrc = $(this).find("img").attr("src");
+                const userImgSrc = $(this).find(".img-fluid").prop("outerHTML");
+                console.log(userImgSrc);
                 groupNames += `<div class="multi-img grp-img">
-                                    ${await getSelectedUserimg(
-                                        userImgSrc,
-                                        userName
-                                    )}
+                                    ${userImgSrc}
                                 </div>`;
             }
         });
@@ -2628,62 +2627,5 @@ async function deleteConversation(conversationId, isGroup) {
             }
             await update(ref(database), updates);
         }
-    }
-}
-
-async function handleGroupDeletion(groupInfoProfileRef, conversationId) {
-    const groupInfoProfileSnap = await get(groupInfoProfileRef);
-    const groupInfoProfileData = groupInfoProfileSnap.val();
-
-    if (groupInfoProfileData) {
-        var isAdmin = false;
-        for (var key in groupInfoProfileData) {
-            if (groupInfoProfileData[key].id == senderUser) {
-                if (groupInfoProfileData[key].isAdmin == "1") {
-                    isAdmin = true;
-                }
-                await update(
-                    ref(
-                        database,
-                        `/Groups/${conversationId}/groupInfo/profiles/${key}`
-                    ),
-                    { isAdmin: "0", leave: true }
-                );
-                break;
-            }
-        }
-
-        if (isAdmin) {
-            for (var key in groupInfoProfileData) {
-                if (
-                    groupInfoProfileData[key].leave == false &&
-                    groupInfoProfileData[key].id != senderUser
-                ) {
-                    await update(
-                        ref(
-                            database,
-                            `/Groups/${conversationId}/groupInfo/profiles/${key}`
-                        ),
-                        { isAdmin: "1" }
-                    );
-                    break;
-                }
-            }
-        }
-    }
-}
-
-async function handleMessageDeletion(messagesRef, conversationId) {
-    const messagesSnapshot = await get(messagesRef);
-    if (messagesSnapshot.exists()) {
-        const messages = messagesSnapshot.val();
-        const updates = {};
-
-        for (var messageId in messages) {
-            updates[
-                `Messages/${conversationId}/message/${messageId}/isDelete/${senderUser}`
-            ] = 1;
-        }
-        await update(ref(database), updates);
     }
 }
