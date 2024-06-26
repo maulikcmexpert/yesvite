@@ -38,7 +38,7 @@ $.ajaxSetup({
         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
     },
 });
-
+import { genrateAudio } from "./chat.js";
 function getInitials(userName) {
     if (userName == undefined) {
         userName = "Yes";
@@ -806,7 +806,7 @@ $(".send-message").on("keypress", async function (e) {
                 storagePath = `Video/${senderUser}/${Date.now()}_${senderUser}-video.mp4`;
                 type = "2";
             } else if (imageUrl.startsWith("blob:http:/") && audio == "audio") {
-                storagePath = `Audios/${senderUser}/${Date.now()}_${senderUser}-audio.wav`;
+                storagePath = `Audios/${senderUser}/${Date.now()}_${senderUser}-audio.mp3`;
                 type = "3";
             } else {
                 storagePath = `Files/${senderUser}/${Date.now()}_${senderUser}-file.${fileType}`;
@@ -832,7 +832,7 @@ $(".send-message").on("keypress", async function (e) {
             console.log(audioUrl);
 
             let storagePath;
-            storagePath = `Audios/${senderUser}/${Date.now()}_${senderUser}-Audio.wav`;
+            storagePath = `Audios/${senderUser}/${Date.now()}_${senderUser}-Audio.mp3`;
 
             // Upload file to Firebase Storage
             const fileRef = storageRef(storage, storagePath);
@@ -1008,6 +1008,8 @@ $(".send-message").on("keypress", async function (e) {
         conversationElement.prependTo(".chat-list");
         previewImg.attr("src", "");
         previewAudio.attr("src", "");
+        $("#recordedAudio").attr("src", "");
+        $("#audioContainer").hide();
     }
 });
 
@@ -1155,7 +1157,7 @@ function createMessageElement(key, messageData, isGroup) {
             </div>`
             : messageData?.type == "3"
             ? `<div class="media-msg">
-            <audio controls src="${messageData?.url}"></audio>
+            ${genrateAudio(messageData?.url)}
             <span>${messageData?.data != "" ? messageData.data : ""}</span>
             ${reaction ? `<span class="reaction">${reaction}</span>` : ""}
             </div>`
@@ -1343,6 +1345,7 @@ async function handleSelectedUsers() {
     const tagCount = $("#selected-tags-container .tag").length;
 
     if (tagCount === 1) {
+        $("#group-name").val("");
         const $singleTag = $("#selected-tags-container .tag");
         const userName = $singleTag.find(".names").text().trim();
         const userImgSrc = $singleTag.find("img").attr("src");
@@ -1564,6 +1567,7 @@ $("#new_message").on("keypress", async function (e) {
         if (tagCount > 1) {
             const currentUserId = senderUser;
             const groupName = $("#group-name").val(); // Assuming you have an input for group name
+            $("#group-name").val("");
             if (groupName.trim() == "") {
                 return toastr.error(
                     "Please enter Group name for create group.",
@@ -2257,7 +2261,7 @@ $("#choose-file").on("change", async function () {
 
 let mediaRecorder;
 let recordedChunks = [];
-
+let stream;
 const startButton = document.getElementById("startRecording");
 const stopButton = document.getElementById("stopRecording");
 const playButton = document.getElementById("playRecording");
@@ -2265,29 +2269,26 @@ const stopPlaybackButton = document.getElementById("stopPlayback");
 const audioElement = document.getElementById("recordedAudio");
 const close = document.getElementsByClassName("close-audio-btn");
 
-function startRecording() {
+async function startRecording() {
     recordedChunks = [];
+    try {
+        stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        mediaRecorder = new MediaRecorder(stream);
 
-    navigator.mediaDevices
-        .getUserMedia({ audio: true })
-        .then((stream) => {
-            mediaRecorder = new MediaRecorder(stream);
+        mediaRecorder.start();
+        startButton.style.display = "none";
+        stopButton.style.display = "inline-block";
+        playButton.style.display = "none";
+        stopPlaybackButton.style.display = "none";
+        // close.style.display = "none";
 
-            mediaRecorder.start();
-            startButton.style.display = "none";
-            stopButton.style.display = "inline-block";
-            playButton.style.display = "none";
-            stopPlaybackButton.style.display = "none";
-            // close.style.display = "none";
-
-            mediaRecorder.ondataavailable = (event) => {
-                recordedChunks.push(event.data);
-            };
-        })
-        .catch((err) => {
-            console.error("Error accessing microphone: ", err);
-            toastr.error("Failed to access microphone. Please try again.");
-        });
+        mediaRecorder.ondataavailable = (event) => {
+            recordedChunks.push(event.data);
+        };
+    } catch (err) {
+        console.error("Error accessing microphone: ", err);
+        toastr.error("Failed to access microphone. Please try again.");
+    }
 }
 
 function playRecording() {
@@ -2320,7 +2321,7 @@ async function stopRecording() {
         await new Promise((resolve) => {
             mediaRecorder.onstop = resolve;
         });
-
+        stream.getTracks().forEach((track) => track.stop());
         // Call playRecording() to initiate playback
         playRecording();
     } else {
@@ -2505,6 +2506,11 @@ $(".bulk-edit").click(function () {
     var bulkcheck = document.getElementsByClassName("bulk-check");
     $(bulkcheck).removeClass("d-none");
     $(".chat-functions").removeClass("d-none");
+});
+$(".bulk-back").click(function () {
+    var bulkcheck = document.getElementsByClassName("bulk-check");
+    $(bulkcheck).addClass("d-none");
+    $(".chat-functions").addClass("d-none");
 });
 
 $(document).on("change", "input[name='checked_conversation[]']", function () {
