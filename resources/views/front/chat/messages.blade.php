@@ -27,7 +27,7 @@ use Carbon\Carbon;
 
                             <div class="chat-functions d-none">
                                 <div class="d-flex align-items-center">
-                                    <span class="me-3">
+                                    <span class="me-3 bulk-back">
                                         <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M10.07 5.92969L4 11.9997L10.07 18.0697" stroke="#0F172A" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
                                             <path d="M21.0019 12H4.17188" stroke="#0F172A" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
@@ -560,6 +560,7 @@ use Carbon\Carbon;
 @push('scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/timeago.js/4.0.2/timeago.min.js"></script>
 <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
-<script type="module" src="{{asset('assets/front/js/message.js')}}"></script>
+<script type="module" src="{{asset('assets/front/js/audio.js')}}"></script>
 <script type="module" src="{{asset('assets/front/js/chat.js')}}"></script>
+<script type="module" src="{{asset('assets/front/js/message.js')}}"></script>
 @endpush

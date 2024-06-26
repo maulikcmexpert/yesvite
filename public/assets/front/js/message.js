@@ -38,7 +38,7 @@ $.ajaxSetup({
         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
     },
 });
-
+import { genrateAudio } from "./chat.js";
 function getInitials(userName) {
     if (userName == undefined) {
         userName = "Yes";
@@ -131,6 +131,8 @@ const userRef = ref(database, `users/${senderUser}`);
 let replyMessageId = null; // Global variable to hold the message ID to reply to
 let fileType = null; // Global variable to hold the message ID to reply to
 let WaitNewConversation = null; // Global variable to hold the message ID to reply to
+let myProfile;
+
 // Function to get messages between two users
 
 let closeSpan = `<svg width="17" height="18" viewBox="0 0 17 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -352,6 +354,7 @@ async function updateChat(user_id) {
     $(".member-lists").html("");
     $(".choosen-file").hide();
     if (user_id == "") return;
+
     const selected_user = await getUser(user_id);
     console.log({ user_id });
     if (!selected_user) {
@@ -386,40 +389,52 @@ async function updateChat(user_id) {
     off(messagesRef);
     off(selecteduserTypeRef);
 
-    // Check if the user is blocked by or has blocked the current user
-    let isBlockedByMe = false;
-    let isBlockedByUser = false;
+    // Set up block/unblock observers
+    const blockByMeRef = ref(database, `users/${senderUser}/blockByUser`);
+    const blockByUserRef = ref(database, `users/${senderUser}/blockByMe`);
 
-    const blockByMeRef = ref(database, `users/${senderUser}/blockByMe`);
-    const blockByUserRef = ref(database, `users/${user_id}/blockByUser`);
+    const checkBlockStatus = async () => {
+        const blockByMeSnapshot = await get(blockByMeRef);
+        const blockByUserSnapshot = await get(blockByUserRef);
 
-    const [blockByMeSnapshot, blockByUserSnapshot] = await Promise.all([
-        get(blockByMeRef),
-        get(blockByUserRef),
-    ]);
+        let isBlockedByMe = false;
+        let isBlockedByUser = false;
 
-    if (blockByMeSnapshot.exists()) {
-        const blockByMeList = blockByMeSnapshot.val();
-        isBlockedByMe = blockByMeList.includes(user_id);
-    }
+        if (blockByMeSnapshot.exists()) {
+            const blockByMeList = blockByMeSnapshot.val();
+            isBlockedByMe = blockByMeList.includes(user_id);
+        }
 
-    if (blockByUserSnapshot.exists()) {
-        const blockByUserList = blockByUserSnapshot.val();
-        isBlockedByUser = blockByUserList.includes(senderUser);
-    }
+        if (blockByUserSnapshot.exists()) {
+            const blockByUserList = blockByUserSnapshot.val();
+            isBlockedByUser = blockByUserList.includes(user_id);
+        }
 
-    if (isBlockedByMe || isBlockedByUser) {
-        $(".msg-footer").hide();
-    } else {
-        $(".msg-footer").show();
-    }
-    console.log(isBlockedByMe);
-    if (isBlockedByMe) {
-        $(".block-conversation").find("span").text("Unblock");
-    } else {
-        $(".block-conversation").find("span").text("Block");
-    }
-    $(".block-conversation").attr("blocked", isBlockedByMe);
+        if (isBlockedByMe || isBlockedByUser) {
+            $(".msg-footer").hide();
+        } else {
+            $(".msg-footer").show();
+        }
+
+        if (isBlockedByUser) {
+            $(".block-conversation").find("span").text("Unblock");
+        } else {
+            $(".block-conversation").find("span").text("Block");
+        }
+        $(".block-conversation").attr("blocked", isBlockedByUser);
+    };
+
+    // Initial block status check
+    await checkBlockStatus();
+
+    // Set up listeners for block/unblock changes
+    onValue(blockByMeRef, async () => {
+        await checkBlockStatus();
+    });
+
+    onValue(blockByUserRef, async () => {
+        await checkBlockStatus();
+    });
 
     onChildAdded(messagesRef, async (snapshot) => {
         addMessageToList(snapshot.key, snapshot.val(), conversationId);
@@ -433,12 +448,15 @@ async function updateChat(user_id) {
             });
         }
     });
+
     onChildChanged(messagesRef, async (snapshot) => {
         UpdateMessageToList(snapshot.key, snapshot.val(), conversationId);
     });
+
     onChildRemoved(messagesRef, async (snapshot) => {
         RemoveMessageToList(snapshot.key, conversationId);
     });
+
     onChildChanged(selecteduserTypeRef, async (snapshot) => {
         if (
             snapshot.key === "userTypingStatus" &&
@@ -455,9 +473,11 @@ async function updateChat(user_id) {
             $(".typing").text("");
         }
     });
+
     updateMore(conversationId);
     updateUnreadMessageBadge();
 }
+
 var SelecteGroupUser = [];
 async function updateChatfromGroup(conversationId) {
     SelecteGroupUser = [];
@@ -786,7 +806,7 @@ $(".send-message").on("keypress", async function (e) {
                 storagePath = `Video/${senderUser}/${Date.now()}_${senderUser}-video.mp4`;
                 type = "2";
             } else if (imageUrl.startsWith("blob:http:/") && audio == "audio") {
-                storagePath = `Audios/${senderUser}/${Date.now()}_${senderUser}-audio.wav`;
+                storagePath = `Audios/${senderUser}/${Date.now()}_${senderUser}-audio.mp3`;
                 type = "3";
             } else {
                 storagePath = `Files/${senderUser}/${Date.now()}_${senderUser}-file.${fileType}`;
@@ -812,7 +832,7 @@ $(".send-message").on("keypress", async function (e) {
             console.log(audioUrl);
 
             let storagePath;
-            storagePath = `Audios/${senderUser}/${Date.now()}_${senderUser}-Audio.wav`;
+            storagePath = `Audios/${senderUser}/${Date.now()}_${senderUser}-Audio.mp3`;
 
             // Upload file to Firebase Storage
             const fileRef = storageRef(storage, storagePath);
@@ -988,6 +1008,8 @@ $(".send-message").on("keypress", async function (e) {
         conversationElement.prependTo(".chat-list");
         previewImg.attr("src", "");
         previewAudio.attr("src", "");
+        $("#recordedAudio").attr("src", "");
+        $("#audioContainer").hide();
     }
 });
 
@@ -1131,14 +1153,14 @@ function createMessageElement(key, messageData, isGroup) {
                          ? `<span class="seenStatus ${seenStatus}"></span>`
                          : ""
                  } 
-                ${reaction ? `<span class="reaction">${reaction}</span>` : ""}
+                 ${reaction ? `<span class="reaction">${reaction}</span>` : ""}
             </div>`
             : messageData?.type == "3"
             ? `<div class="media-msg">
-            <audio controls src="${messageData?.url}"></audio>
-            <span>${
-                messageData?.data != "" ? messageData.data : ""
-            }</span></div>`
+            ${genrateAudio(messageData?.url)}
+            <span>${messageData?.data != "" ? messageData.data : ""}</span>
+            ${reaction ? `<span class="reaction">${reaction}</span>` : ""}
+            </div>`
             : `
             <div class="simple-message"> 
                 <p> 
@@ -1323,6 +1345,7 @@ async function handleSelectedUsers() {
     const tagCount = $("#selected-tags-container .tag").length;
 
     if (tagCount === 1) {
+        $("#group-name").val("");
         const $singleTag = $("#selected-tags-container .tag");
         const userName = $singleTag.find(".names").text().trim();
         const userImgSrc = $singleTag.find("img").attr("src");
@@ -1410,39 +1433,13 @@ async function findOrCreateConversation(
     contactName,
     receiverProfile
 ) {
-    // const overviewRef = ref(database, `overview/${currentUserId}`);
-    // const snapshot = await get(overviewRef);
-
-    // if (snapshot.exists()) {
-    //     const overviewData = snapshot.val();
-    //     for (const conversationId in overviewData) {
-    //         if (overviewData[conversationId].contactId === contactId) {
-    //             return conversationId;
-    //         }
-    //     }
-    // }
-    // // Check if a conversation exists for the contact
-    // const contactOverviewRef = ref(database, `overview/${contactId}`);
-    // const contactSnapshot = await get(contactOverviewRef);
-
-    // if (contactSnapshot.exists()) {
-    //     const contactOverviewData = contactSnapshot.val();
-    //     for (const conversationId in contactOverviewData) {
-    //         if (
-    //             contactOverviewData[conversationId].contactId === currentUserId
-    //         ) {
-    //             return conversationId;
-    //         }
-    //     }
-    // }
+    let userData = await get(userRef);
+    let userSnap = userData.val();
 
     const newConversationId = await generateConversationId([
         currentUserId,
         contactId,
     ]);
-
-    // const newConversationRef = push(child(ref(database), "overview"));
-    // const newConversationId = newConversationRef.key;
 
     const newConversationData = {
         contactId: contactId,
@@ -1469,7 +1466,7 @@ async function findOrCreateConversation(
         group: false,
         lastMessage: "",
         lastSenderId: currentUserId,
-        receiverProfile: receiverProfile,
+        receiverProfile: userSnap?.userProfile,
         timeStamp: Date.now(),
         unRead: true,
         unReadCount: 1,
@@ -1570,6 +1567,7 @@ $("#new_message").on("keypress", async function (e) {
         if (tagCount > 1) {
             const currentUserId = senderUser;
             const groupName = $("#group-name").val(); // Assuming you have an input for group name
+            $("#group-name").val("");
             if (groupName.trim() == "") {
                 return toastr.error(
                     "Please enter Group name for create group.",
@@ -1597,7 +1595,6 @@ $("#new_message").on("keypress", async function (e) {
                 isReply: "0",
                 isSeen: false,
                 react: "",
-                receiverId: newGroupMembers,
                 receiverName: groupName,
                 replyData: {},
                 senderId: senderUser,
@@ -1674,7 +1671,7 @@ $("#new_message").on("keypress", async function (e) {
                 isReply: "0",
                 isSeen: false,
                 react: "",
-                // receiverId: contactId,
+                receiverId: contactId,
                 receiverName: contactName,
                 replyData: {},
                 senderId: senderUser,
@@ -2264,7 +2261,7 @@ $("#choose-file").on("change", async function () {
 
 let mediaRecorder;
 let recordedChunks = [];
-
+let stream;
 const startButton = document.getElementById("startRecording");
 const stopButton = document.getElementById("stopRecording");
 const playButton = document.getElementById("playRecording");
@@ -2272,29 +2269,26 @@ const stopPlaybackButton = document.getElementById("stopPlayback");
 const audioElement = document.getElementById("recordedAudio");
 const close = document.getElementsByClassName("close-audio-btn");
 
-function startRecording() {
+async function startRecording() {
     recordedChunks = [];
+    try {
+        stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        mediaRecorder = new MediaRecorder(stream);
 
-    navigator.mediaDevices
-        .getUserMedia({ audio: true })
-        .then((stream) => {
-            mediaRecorder = new MediaRecorder(stream);
+        mediaRecorder.start();
+        startButton.style.display = "none";
+        stopButton.style.display = "inline-block";
+        playButton.style.display = "none";
+        stopPlaybackButton.style.display = "none";
+        // close.style.display = "none";
 
-            mediaRecorder.start();
-            startButton.style.display = "none";
-            stopButton.style.display = "inline-block";
-            playButton.style.display = "none";
-            stopPlaybackButton.style.display = "none";
-            // close.style.display = "none";
-
-            mediaRecorder.ondataavailable = (event) => {
-                recordedChunks.push(event.data);
-            };
-        })
-        .catch((err) => {
-            console.error("Error accessing microphone: ", err);
-            toastr.error("Failed to access microphone. Please try again.");
-        });
+        mediaRecorder.ondataavailable = (event) => {
+            recordedChunks.push(event.data);
+        };
+    } catch (err) {
+        console.error("Error accessing microphone: ", err);
+        toastr.error("Failed to access microphone. Please try again.");
+    }
 }
 
 function playRecording() {
@@ -2327,7 +2321,7 @@ async function stopRecording() {
         await new Promise((resolve) => {
             mediaRecorder.onstop = resolve;
         });
-
+        stream.getTracks().forEach((track) => track.stop());
         // Call playRecording() to initiate playback
         playRecording();
     } else {
@@ -2512,6 +2506,11 @@ $(".bulk-edit").click(function () {
     var bulkcheck = document.getElementsByClassName("bulk-check");
     $(bulkcheck).removeClass("d-none");
     $(".chat-functions").removeClass("d-none");
+});
+$(".bulk-back").click(function () {
+    var bulkcheck = document.getElementsByClassName("bulk-check");
+    $(bulkcheck).addClass("d-none");
+    $(".chat-functions").addClass("d-none");
 });
 
 $(document).on("change", "input[name='checked_conversation[]']", function () {
@@ -2724,7 +2723,7 @@ async function deleteConversation(conversationId, isGroup) {
             for (var messageId in messages) {
                 updates[
                     `Messages/${conversationId}/message/${messageId}/isDelete/${senderUser}`
-                ] = 1;
+                ] = "1";
             }
             await update(ref(database), updates);
         }

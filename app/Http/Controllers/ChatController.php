@@ -79,6 +79,7 @@ class ChatController extends Controller
         $title = 'Home';
         $page = 'front.chat.messages';
         $css = 'message.css';
+        $css1 = 'audio.css';
         if ($messages == null) {
             $messages = [];
         }
@@ -86,6 +87,7 @@ class ChatController extends Controller
             'title',
             'page',
             'css',
+            'css1',
             'messages',
             'userId',
             'userName'
