@@ -38,7 +38,7 @@ class VerifyUserIsVerified
 
             $user->current_session_id = $currentSessionId;
             $user->save();
-            return $next($request);
         }
+        return $next($request);
     }
 }
