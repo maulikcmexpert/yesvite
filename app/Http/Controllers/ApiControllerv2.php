@@ -12389,7 +12389,7 @@ class ApiControllerv2 extends Controller
             $subscribed = UserSubscription::where('user_id', $user_id)
                 ->select('id', 'user_id')
                 ->first();
-            if (isset($subscribed) && !$subscribed->isEmpty()) {
+            if ($subscribed != null) {
                 $subscription = UserSubscription::where('id', $subscribed->id)
                     ->update([
                         'startDate' => now(),
