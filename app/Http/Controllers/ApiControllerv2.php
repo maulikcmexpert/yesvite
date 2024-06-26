@@ -12360,7 +12360,7 @@ class ApiControllerv2 extends Controller
 
             $responce =  $this->set_android_iap($app_id, $product_id, $purchaseToken);
 
-            if (isset($responce['autoRenewing']) && ($responce['autoRenewing'] == '0' || $responce['autoRenewing'] == "")) {
+            if (isset($responce['autoRenewing']) && ($responce['autoRenewing'] == false || $responce['autoRenewing'] == "")) {
 
                 $exp_date =  date('Y-m-d H:i:s', ($responce['expiryTimeMillis'] /  1000));
                 $current_date = date('Y-m-d H:i:s');
