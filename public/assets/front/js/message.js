@@ -86,7 +86,7 @@ async function updateProfileImg(profileImageUrl, userName) {
         const fontColor = "fontcolor" + initials[0]?.toUpperCase();
 
         $("#selected-user-profile").replaceWith(
-            `<h5 class="${fontColor}" id="selected-user-profile">${initials}</h5>`
+            `<h5 class="${fontColor}" id="selected-user-profile" >${initials}</h5>`
         );
         $("#profileIm").replaceWith(
             `<h5 id="profileIm" class="${fontColor}">${initials}</h5>`
@@ -101,7 +101,7 @@ async function getSelectedUserimg(profileImageUrl, userName) {
         const initials = getInitials(userName);
         const fontColor = "fontcolor" + initials[0]?.toUpperCase();
 
-        return `<h5 class="${fontColor} selected-user-img user-img" id="selected-user-profile" src="">${initials}</h5>`;
+        return `<h5 class="${fontColor} selected-user-img user-img"  src="">${initials}</h5>`;
     }
 }
 
@@ -113,7 +113,7 @@ async function getListUserimg(profileImageUrl, userName) {
     const initials = getInitials(userName);
     const fontColor = "fontcolor" + initials[0]?.toUpperCase();
 
-    return `<h5 class="${fontColor} user-avatar img-fluid" id="selected-user-profile" src="">${initials}</h5>`;
+    return `<h5 class="${fontColor} user-avatar img-fluid" src="">${initials}</h5>`;
 }
 
 // Initialize Firebase
@@ -346,7 +346,7 @@ async function updateChat(user_id) {
     const selected_user = await getUser(user_id);
     console.log({ user_id });
     if (!selected_user) {
-        alert("user not found in firebase");
+        toastr.error("user not found in firebase");
         return;
     }
 
@@ -551,7 +551,10 @@ async function updateMore(conversationId) {
         $(".mute-conversation").attr("changeWith", "1");
         $(".archive-conversation").attr("changeWith", "1");
         $(".block-conversation").attr("user", overviewData.contactId);
-
+        $(".conversation-" + conversationId)
+            .find(".chat-data")
+            .find(".pin-svg")
+            .addClass("d-none");
         if (overviewData.isPin != undefined) {
             $(".pin-conversation")
                 .find("span")
@@ -560,6 +563,12 @@ async function updateMore(conversationId) {
                 "changeWith",
                 overviewData.isPin == "1" ? "0" : "1"
             );
+            if (overviewData.isPin == "1") {
+                $(".conversation-" + conversationId)
+                    .find(".chat-data")
+                    .find(".pin-svg")
+                    .removeClass("d-none");
+            }
         }
         if (overviewData.isMute != undefined) {
             $(".mute-conversation")
@@ -597,6 +606,15 @@ $(".pin-conversation").click(function () {
     if (pinChange == "1") {
         const conversationElement = $(`.conversation-${conversationId}`);
         conversationElement.prependTo(".chat-list");
+        $(".conversation-" + conversationId)
+            .find(".chat-data")
+            .find(".pin-svg")
+            .removeClass("d-none");
+    } else {
+        $(".conversation-" + conversationId)
+            .find(".chat-data")
+            .find(".pin-svg")
+            .addClass("d-none");
     }
 });
 
@@ -612,10 +630,6 @@ $(".mute-conversation").click(function () {
         .find("span")
         .text(change == "1" ? "Unmute" : "Mute");
     $(this).attr("changeWith", change == "1" ? "0" : "1");
-    if (change == "1") {
-        const conversationElement = $(`.conversation-${conversationId}`);
-        conversationElement.prependTo(".chat-list");
-    }
 });
 $(".block-conversation").click(async function () {
     const userId = $(this).attr("user");
@@ -672,10 +686,6 @@ $(".archive-conversation").click(function () {
         .find("span")
         .text(change == "1" ? "Unarchive" : "Archive");
     $(this).attr("changeWith", change == "1" ? "0" : "1");
-    if (change == "1") {
-        const conversationElement = $(`.conversation-${conversationId}`);
-        conversationElement.prependTo(".chat-list");
-    }
 });
 
 // Initial chat update
@@ -952,7 +962,7 @@ function UpdateMessageToList(key, messageData, conversationId) {
 }
 function addMessageToList(key, messageData, conversationId) {
     if ($(".selected_conversasion").val() != conversationId) {
-        console("selectedisnotvalid");
+        console.log("selectedisnotvalid");
         return;
     }
     let isGroup = $("#isGroup").val();
@@ -1105,6 +1115,7 @@ function createMessageElement(key, messageData, isGroup) {
                         )}</span>
                     </div>
                 </div>
+                <hr>
                 <div class="reply-massage"> 
                         <span> ${
                             messageData?.data != "" ? messageData.data : ""
@@ -1165,7 +1176,7 @@ $("#search-user")
                 });
 
                 const processedData = await Promise.all(
-                    result.map(async (item) => ({
+                    await result.map(async (item) => ({
                         label: item.name,
                         value: item.name,
                         userId: item.id,
@@ -1177,7 +1188,7 @@ $("#search-user")
                         ),
                     }))
                 );
-
+                console.log(processedData);
                 response(processedData);
             } catch (error) {
                 console.error("Error fetching data", error);
@@ -1192,7 +1203,7 @@ $("#search-user")
             if (!selectedUserIds.includes(selectedUserId)) {
                 selectedUserIds.push(selectedUserId);
                 updateSelectedUserIds();
-
+                const $img = ui.item.imageElement;
                 const $tag = $("<div>", {
                     class: "tag",
                     "data-user-id": selectedUserId,
@@ -1201,6 +1212,7 @@ $("#search-user")
                     .append(
                         $("<span>", { class: "close-btn" }).html("&times;")
                     );
+                $tag.append($img);
                 $("#selected-tags-container").append($tag);
 
                 handleSelectedUsers();
@@ -1276,12 +1288,10 @@ async function handleSelectedUsers() {
         $tags.each(async function (index) {
             if (index < 2) {
                 const userName = $(this).text().trim();
-                const userImgSrc = $(this).find("img").attr("src");
+                const userImgSrc = $(this).find(".img-fluid").prop("outerHTML");
+                console.log(userImgSrc);
                 groupNames += `<div class="multi-img grp-img">
-                                    ${await getSelectedUserimg(
-                                        userImgSrc,
-                                        userName
-                                    )}
+                                    ${userImgSrc}
                                 </div>`;
             }
         });
@@ -1671,7 +1681,12 @@ async function addListInMembers(SelecteGroupUser) {
 
         const removeMember =
             user.id != senderUser && senderIsAdmin
-                ? `<button class="remove-member" data-id="${user.id}"><i class="fa-solid fa-xmark"></i></button>`
+                ? `<button class="remove-member" data-id="${user.id}"><svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M10.4974 18.3346C15.0807 18.3346 18.8307 14.5846 18.8307 10.0013C18.8307 5.41797 15.0807 1.66797 10.4974 1.66797C5.91406 1.66797 2.16406 5.41797 2.16406 10.0013C2.16406 14.5846 5.91406 18.3346 10.4974 18.3346Z" stroke="#E03137" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M8.14062 12.3573L12.8573 7.64062" stroke="#E03137" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M12.8573 12.3573L8.14062 7.64062" stroke="#E03137" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</button>`
                 : "";
 
         messageElement +=
@@ -1688,9 +1703,11 @@ async function addListInMembers(SelecteGroupUser) {
                                                 ? "You"
                                                 : user.name
                                         }</h3>
-                                        <span>${
-                                            user.isAdmin == "1" ? "Admin" : ""
-                                        }</span>
+                                        ${
+                                            user.isAdmin == "1"
+                                                ? "<span class='group-admin'>Admin</span>"
+                                                : ""
+                                        }
                                     </div>
                                 </div>
                                 ${removeMember}
@@ -1748,87 +1765,6 @@ $(document).on("click", ".remove-member", async function () {
         }
     });
     await addListInMembers(SelecteGroupUser);
-});
-$(".delete-conversation").click(async function () {
-    var conversationId = $(".conversationId").attr("conversationid");
-    const isGroup = $("#isGroup").val();
-    if (!conversationId || !senderUser) {
-        console.error("Conversation ID or Sender User ID is missing");
-        return;
-    }
-    $(".conversation-" + conversationId).remove();
-    var msgLists = $(".msg-list");
-    if (msgLists.length > 0) {
-        msgLists.first().click(); // Simulate a click event on the first msg-list element
-    }
-    var overviewRef = ref(database, `overview/${senderUser}/${conversationId}`);
-
-    await remove(overviewRef);
-    if (isGroup === "true" || isGroup == true) {
-        var groupInfoProfileRef = ref(
-            database,
-            `/Groups/${conversationId}/groupInfo/profiles`
-        );
-        var groupInfoProfileSnap = await get(groupInfoProfileRef);
-        var groupInfoProfileData = groupInfoProfileSnap.val();
-
-        if (groupInfoProfileData) {
-            // Check if senderUser is an admin using array method
-            var isAdmin = false;
-            for (var key in groupInfoProfileData) {
-                if (groupInfoProfileData[key].id == senderUser) {
-                    if (groupInfoProfileData[key].isAdmin == "1") {
-                        isAdmin = true;
-                    }
-                    await update(
-                        ref(
-                            database,
-                            `/Groups/${conversationId}/groupInfo/profiles/${key}`
-                        ),
-                        { isAdmin: "0", leave: true }
-                    );
-                    break;
-                }
-            }
-
-            // If senderUser is an admin, assign admin to another member
-            if (isAdmin) {
-                for (var key in groupInfoProfileData) {
-                    if (
-                        groupInfoProfileData[key].leave == false &&
-                        groupInfoProfileData[key].id != senderUser
-                    ) {
-                        await update(
-                            ref(
-                                database,
-                                `/Groups/${conversationId}/groupInfo/profiles/${key}`
-                            ),
-                            { isAdmin: "1" }
-                        );
-                        break;
-                    }
-                }
-            }
-        }
-    } else {
-        var messagesRef = ref(database, `Messages/${conversationId}/message`);
-        var messagesSnapshot = await get(messagesRef);
-
-        if (messagesSnapshot.exists()) {
-            var messages = messagesSnapshot.val();
-            var updates = {};
-
-            // Iterate through all messages and update isDelete for the senderUser
-            for (var messageId in messages) {
-                console.log(messageId);
-                updates[
-                    `Messages/${conversationId}/message/${messageId}/isDelete/${senderUser}`
-                ] = 1;
-            }
-            // Apply updates to the Firebase Realtime Database
-            await update(ref(database), updates);
-        }
-    }
 });
 
 $(".selected-title").dblclick(function () {
@@ -2088,7 +2024,15 @@ $("#new-message").click(function () {
     handleSelectedUsers();
 });
 function generateReactionsAndReply() {
-    $(document).on("click", ".reaction-icon", function () {
+    $(document).on("click", function (event) {
+        if (
+            !$(event.target).closest(".reaction-dialog, .reaction-icon").length
+        ) {
+            $(".reaction-dialog").remove();
+        }
+    });
+    $(document).on("click", ".reaction-icon", function (event) {
+        event.stopPropagation();
         const messageId = $(this).data("message-id");
         const reactionDialog = `
         <div class="reaction-dialog" id="reaction-dialog-${messageId}">
@@ -2099,6 +2043,7 @@ function generateReactionsAndReply() {
             <span class="reaction-option" data-reaction="\\u{1F44F}}">&#x1F44F;</span>
         </div>
     `;
+        $(".reaction-dialog").remove(); // Remove any existing reaction dialogs
         $(this).after(reactionDialog);
     });
 
@@ -2143,6 +2088,7 @@ function generateReactionsAndReply() {
     });
 
     $(document).on("click", ".reply-icon", async function () {
+        $(".set-replay-msg").remove();
         replyMessageId = $(this).data("message-id");
         let conversationId = $(".conversationId").attr("conversationid");
         let replay = "";
@@ -2173,10 +2119,16 @@ function generateReactionsAndReply() {
             const replyMessageData = replyMessageSnapshot.val();
 
             replay = `<div class='set-replay-msg'>
+            <div class='replay-child'>
+              <div class='d-flex flex-column'>
                         <span class='replay-user'>${senderUserName}</span>
                         <span class='replay-msg'>${replyMessageData.data}</span>
-                        <span class='close-replay'>&times</span>
-                        </div>`;
+                        
+                           </div>
+                                
+                            <span class='close-replay'>&times</span>
+                            </div>
+                    </div>`;
         }
         $(".msg-footer").prepend(replay);
     });
@@ -2267,7 +2219,7 @@ function startRecording() {
         })
         .catch((err) => {
             console.error("Error accessing microphone: ", err);
-            alert("Failed to access microphone. Please try again.");
+            toastr.error("Failed to access microphone. Please try again.");
         });
 }
 
@@ -2460,9 +2412,230 @@ async function getTotalUnreadMessageCount() {
 async function updateUnreadMessageBadge() {
     const totalUnreadCount = await getTotalUnreadMessageCount();
     $(".badge").text(totalUnreadCount);
+    $(".set-replay-msg").remove();
+    replyMessageId = null;
 }
 
 // Call the function on page load
 $(document).ready(function () {
     updateUnreadMessageBadge();
 });
+$(".bulk-edit").click(function () {
+    var bulkcheck = document.getElementsByClassName("bulk-check");
+    $(bulkcheck).removeClass("d-none");
+    $(".chat-functions").removeClass("d-none");
+});
+
+$(document).on("change", "input[name='checked_conversation[]']", function () {
+    const checkedCount = $(
+        "input[name='checked_conversation[]']:checked"
+    ).length;
+    $(".check-counter").text(checkedCount);
+});
+$(".multi-pin").click(async function () {
+    const pinChange = $(this).attr("changeWith");
+    $(this).attr("changeWith", pinChange == "1" ? "0" : "1");
+
+    const checkedConversations = $(
+        "input[name='checked_conversation[]']:checked"
+    );
+    const promises = [];
+
+    checkedConversations.each(function () {
+        const conversationId = $(this).val();
+        const overviewRef = ref(
+            database,
+            `overview/${senderUser}/${conversationId}/isPin`
+        );
+        promises.push(set(overviewRef, pinChange));
+
+        if (pinChange == "1") {
+            const conversationElement = $(`.conversation-${conversationId}`);
+            conversationElement.prependTo(".chat-list");
+            $(`.conversation-${conversationId}`)
+                .find(".chat-data")
+                .find(".pin-svg")
+                .removeClass("d-none");
+        } else {
+            $(`.conversation-${conversationId}`)
+                .find(".chat-data")
+                .find(".pin-svg")
+                .addClass("d-none");
+        }
+    });
+
+    try {
+        await Promise.all(promises);
+        $(this)
+            .find("span")
+            .text(pinChange == "1" ? "Unpin" : "Pin");
+        $(this).attr("changeWith", pinChange == "1" ? "0" : "1");
+    } catch (error) {
+        console.error("Error updating pin status:", error);
+    }
+});
+
+$(".multi-mute").click(function () {
+    const change = $(this).attr("changeWith");
+    $(this).attr("changeWith", change == "1" ? "0" : "1");
+
+    const checkedConversations = $(
+        "input[name='checked_conversation[]']:checked"
+    );
+    const promises = [];
+
+    checkedConversations.each(function () {
+        const conversationId = $(this).val();
+        const overviewRef = ref(
+            database,
+            `overview/${senderUser}/${conversationId}/isMute`
+        );
+        set(overviewRef, change);
+        promises.push(set(overviewRef, change));
+    });
+});
+
+$(".multi-archive").click(function () {
+    const change = $(this).attr("changeWith");
+    $(this).attr("changeWith", change == "1" ? "0" : "1");
+
+    const checkedConversations = $(
+        "input[name='checked_conversation[]']:checked"
+    );
+    const promises = [];
+
+    checkedConversations.each(function () {
+        const conversationId = $(this).val();
+        const overviewRef = ref(
+            database,
+            `overview/${senderUser}/${conversationId}/isArchive`
+        );
+        set(overviewRef, change);
+        promises.push(set(overviewRef, change));
+    });
+});
+
+$(".delete-conversation").click(async function () {
+    var conversationId = $(".conversationId").attr("conversationid");
+    const isGroup = $("#isGroup").val();
+
+    if (!conversationId || !senderUser) {
+        console.error("Conversation ID or Sender User ID is missing");
+        return;
+    }
+
+    await deleteConversation(conversationId, isGroup);
+});
+
+$(".multi-delete").click(async function () {
+    const checkedConversations = $(
+        "input[name='checked_conversation[]']:checked"
+    );
+
+    if (checkedConversations.length === 0) {
+        alert("No conversations selected for deletion.");
+        return;
+    }
+
+    const promises = [];
+    checkedConversations.each(function () {
+        const conversationId = $(this).val();
+        const isGroup = $(this).attr("isGroup");
+        promises.push(deleteConversation(conversationId, isGroup));
+    });
+
+    try {
+        await Promise.all(promises);
+        toastr.success("Selected conversations have been deleted.");
+    } catch (error) {
+        console.error("Error deleting conversations:", error);
+    }
+});
+
+async function deleteConversation(conversationId, isGroup) {
+    if (!conversationId || !senderUser) {
+        console.error("Conversation ID or Sender User ID is missing");
+        return;
+    }
+
+    // Remove conversation element from DOM
+    $(`.conversation-${conversationId}`).remove();
+
+    var overviewRef = ref(database, `overview/${senderUser}/${conversationId}`);
+    await remove(overviewRef);
+
+    if (isGroup === "true" || isGroup == true) {
+        const groupInfoProfileRef = ref(
+            database,
+            `/Groups/${conversationId}/groupInfo/profiles`
+        );
+        const groupInfoProfileSnap = await get(groupInfoProfileRef);
+        const groupInfoProfileData = groupInfoProfileSnap.val();
+
+        if (groupInfoProfileData) {
+            var isAdmin = false;
+            for (var key in groupInfoProfileData) {
+                if (groupInfoProfileData[key].id == senderUser) {
+                    if (groupInfoProfileData[key].isAdmin == "1") {
+                        isAdmin = true;
+                    }
+                    await update(
+                        ref(
+                            database,
+                            `/Groups/${conversationId}/groupInfo/profiles/${key}`
+                        ),
+                        { isAdmin: "0", leave: true }
+                    );
+                    break;
+                }
+            }
+
+            if (isAdmin) {
+                for (var key in groupInfoProfileData) {
+                    if (
+                        groupInfoProfileData[key].leave == false &&
+                        groupInfoProfileData[key].id != senderUser
+                    ) {
+                        await update(
+                            ref(
+                                database,
+                                `/Groups/${conversationId}/groupInfo/profiles/${key}`
+                            ),
+                            { isAdmin: "1" }
+                        );
+                        break;
+                    }
+                }
+            }
+        }
+    } else {
+        const messagesRef = ref(database, `Messages/${conversationId}/message`);
+        const messagesSnapshot = await get(messagesRef);
+
+        if (messagesSnapshot.exists()) {
+            const messages = messagesSnapshot.val();
+            const updates = {};
+
+            for (var messageId in messages) {
+                updates[
+                    `Messages/${conversationId}/message/${messageId}/isDelete/${senderUser}`
+                ] = 1;
+            }
+            await update(ref(database), updates);
+        }
+    }
+
+    var msgLists = $(".msg-list");
+    if (msgLists.length > 0) {
+        msgLists.first().click(); // Simulate a click event on the first msg-list element
+    } else {
+        $(".msg-lists").html("");
+        $(".selected-user-name").html("Start new chat");
+        updateProfileImg("", "Start New");
+        $(".conversationId").attr("conversationid", "");
+        $(".selected_id").val("");
+        $(".selected_message").val("");
+        $(".selected_name").val("");
+        $("#isGroup").val("");
+    }
+}
