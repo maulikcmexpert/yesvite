@@ -166,9 +166,10 @@ ul.chat-list{
     padding-left: 0;
     margin-bottom: 0;
     padding: 10px 20px;
-    max-height: 590px;
+    max-height: 620px;
     overflow-y: scroll;
     height: 100%;
+    position: relative;
 }
 
 ul.chat-list li{
@@ -488,6 +489,11 @@ ul.member-lists li:last-child{
     padding: 0;
 }
 
+.new-member button:hover{
+    color: var(--primaryColor) !important;
+    background-color: transparent !important;
+}
+
 .new-member button span{
     margin-right: 5px;
 }
@@ -722,6 +728,31 @@ ul.member-lists li:last-child{
     -moz-transform: translate3d(-150px, -145px, 0px) !important;
     -ms-transform: translate3d(-150px, -145px, 0px) !important;
     -o-transform: translate3d(-150px, -145px, 0px) !important;
+}
+
+.msg-footer #preview{
+    padding: 10px;
+    background-color: #F8F9FD;
+    position: relative;
+}
+
+.msg-footer .preview-item{
+    width: 250px;
+    height: 250px;
+}
+
+.msg-footer .preview-item img{
+    max-width: 100%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.msg-footer #preview .close-button{
+    position: absolute;
+    right: 5px;
+    top: 5px;
 }
 
 .chat-data .form-check-input:checked{
@@ -1079,9 +1110,9 @@ ul.member-lists li:last-child{
     margin-bottom: 6px;
 }
 
-.close-btn {
+#selected-tags-containe .close-btn {
     cursor: pointer;
-    margin-left: 5px;
+    margin-left: 10px;
 }
 
 .new-members-add{
@@ -1110,6 +1141,10 @@ ul.member-lists li:last-child{
     border-radius: 100px;
     border: none;
     margin-bottom: 6px;
+}
+
+.group-selected-tags-container .close-group-btn{
+    margin-left: 10px;
 }
 
 .reaction-icon, .reply-icon {
@@ -1157,6 +1192,36 @@ ul.member-lists li:last-child{
     cursor: pointer;
 }
 
+#archive-list,
+#unarchive-list
+{
+    background: transparent;
+    border-radius: 16px;
+    padding: 8px 20px;
+    color: var(--primaryColor);
+    border: 1px solid var(--primaryColor);
+    box-shadow: none;
+    outline: 0;
+    transition: 0.5s;
+    -webkit-transition: 0.5s;
+    -moz-transition: 0.5s;
+    -ms-transition: 0.5s;
+    -o-transition: 0.5s;
+    -webkit-border-radius: 16px;
+    -moz-border-radius: 16px;
+    -ms-border-radius: 16px;
+    -o-border-radius: 16px;
+    margin-top: 10px;
+    position: absolute;
+    bottom: 0;
+}
+
+#archive-list:hover,
+#unarchive-list:hover
+{
+    background-color: var(--primaryColor);
+    color: #fff;
+}
 
 /* ======= responsive ======== */
 @media only screen and (max-width:1500px){
