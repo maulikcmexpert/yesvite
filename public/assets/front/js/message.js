@@ -128,6 +128,9 @@ let replyMessageId = null; // Global variable to hold the message ID to reply to
 let fileType = null; // Global variable to hold the message ID to reply to
 let WaitNewConversation = null; // Global variable to hold the message ID to reply to
 // Function to get messages between two users
+
+let closeSpan = `<svg width="17" height="18" viewBox="0 0 17 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M8.4974 0.666016C3.90573 0.666016 0.164062 4.40768 0.164062 8.99935C0.164062 13.591 3.90573 17.3327 8.4974 17.3327C13.0891 17.3327 16.8307 13.591 16.8307 8.99935C16.8307 4.40768 13.0891 0.666016 8.4974 0.666016ZM11.2974 10.916C11.5391 11.1577 11.5391 11.5577 11.2974 11.7993C11.1724 11.9243 11.0141 11.9827 10.8557 11.9827C10.6974 11.9827 10.5391 11.9243 10.4141 11.7993L8.4974 9.88268L6.58073 11.7993C6.45573 11.9243 6.2974 11.9827 6.13906 11.9827C5.98073 11.9827 5.8224 11.9243 5.6974 11.7993C5.45573 11.5577 5.45573 11.1577 5.6974 10.916L7.61406 8.99935L5.6974 7.08268C5.45573 6.84102 5.45573 6.44102 5.6974 6.19935C5.93906 5.95768 6.33906 5.95768 6.58073 6.19935L8.4974 8.11602L10.4141 6.19935C10.6557 5.95768 11.0557 5.95768 11.2974 6.19935C11.5391 6.44102 11.5391 6.84102 11.2974 7.08268L9.38073 8.99935L11.2974 10.916Z" fill="#F73C71"/>`;
 async function getMessages(userId1, userId2) {
     const messagesRef = ref(database, "Messages");
     try {
@@ -1242,11 +1245,11 @@ $("#search-user")
                 const $tag = $("<div>", {
                     class: "tag",
                     "data-user-id": selectedUserId,
-                })
-                    .text(selectedUserName)
-                    .append(
-                        $("<span>", { class: "close-btn" }).html("&times;")
-                    );
+                });
+                $tag.append(`<span class="names">${selectedUserName}</span>`);
+                $tag.append(
+                    $("<span>", { class: "close-btn" }).html(closeSpan)
+                );
                 $tag.append($img);
                 $("#selected-tags-container").prepend($tag);
 
@@ -1296,13 +1299,7 @@ async function handleSelectedUsers() {
 
     if (tagCount === 1) {
         const $singleTag = $("#selected-tags-container .tag");
-        const userName = $singleTag
-            .clone()
-            .children(".close-btn")
-            .remove()
-            .end()
-            .text()
-            .trim();
+        const userName = $singleTag.find(".names").text().trim();
         const userImgSrc = $singleTag.find("img").attr("src");
         $(".selected-user-name").text(userName);
         $(".selected-user-img").replaceWith(
@@ -1322,7 +1319,7 @@ async function handleSelectedUsers() {
         let groupNames = "";
         $tags.each(async function (index) {
             if (index < 2) {
-                const userName = $(this).text().trim();
+                const userName = $(this).find(".names").text().trim();
                 const userImgSrc = $(this).find(".img-fluid").prop("outerHTML");
                 console.log(userImgSrc);
                 groupNames += `<div class="multi-img grp-img">
@@ -1344,13 +1341,7 @@ async function handleSelectedUsers() {
         // Set multiple names in the selected-user-name
         const allNames = $tags
             .map(function () {
-                return $(this)
-                    .clone()
-                    .children(".close-btn")
-                    .remove()
-                    .end()
-                    .text()
-                    .trim();
+                return $(this).clone().find(".names").text().trim();
             })
             .get()
             .join(", ");
@@ -1723,10 +1714,7 @@ async function addListInMembers(SelecteGroupUser) {
 
         const removeMember =
             user.id != senderUser && senderIsAdmin
-                ? `<button class="remove-member" data-id="${user.id}"><svg width="17" height="18" viewBox="0 0 17 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M8.4974 0.666016C3.90573 0.666016 0.164062 4.40768 0.164062 8.99935C0.164062 13.591 3.90573 17.3327 8.4974 17.3327C13.0891 17.3327 16.8307 13.591 16.8307 8.99935C16.8307 4.40768 13.0891 0.666016 8.4974 0.666016ZM11.2974 10.916C11.5391 11.1577 11.5391 11.5577 11.2974 11.7993C11.1724 11.9243 11.0141 11.9827 10.8557 11.9827C10.6974 11.9827 10.5391 11.9243 10.4141 11.7993L8.4974 9.88268L6.58073 11.7993C6.45573 11.9243 6.2974 11.9827 6.13906 11.9827C5.98073 11.9827 5.8224 11.9243 5.6974 11.7993C5.45573 11.5577 5.45573 11.1577 5.6974 10.916L7.61406 8.99935L5.6974 7.08268C5.45573 6.84102 5.45573 6.44102 5.6974 6.19935C5.93906 5.95768 6.33906 5.95768 6.58073 6.19935L8.4974 8.11602L10.4141 6.19935C10.6557 5.95768 11.0557 5.95768 11.2974 6.19935C11.5391 6.44102 11.5391 6.84102 11.2974 7.08268L9.38073 8.99935L11.2974 10.916Z" fill="#F73C71"/>
-</svg>
-</button>`
+                ? `<button class="remove-member" data-id="${user.id}">${closeSpan}</button>`
                 : "";
 
         messageElement +=
@@ -1910,7 +1898,7 @@ $("#group-search-user")
                     .text(selectedUserName)
                     .append(
                         $("<span>", { class: "close-group-btn" }).html(
-                            "&times;"
+                            closeSpan
                         )
                     );
                 $("#group-selected-tags-container").prepend($tag);
