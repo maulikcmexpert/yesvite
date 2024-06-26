@@ -754,6 +754,7 @@ $(".send-message").on("keypress", async function (e) {
         const message = $(this).val();
         let downloadURL = "";
         let type = "";
+        $("#preview").hide();
         $(".preview_img").hide();
         const previewImg = $(".preview_img");
         const imageUrl = previewImg.attr("src");
@@ -970,6 +971,8 @@ $(".send-message").on("keypress", async function (e) {
         }
         const conversationElement = $(`.conversation-${conversationId}`);
         conversationElement.prependTo(".chat-list");
+        previewImg.attr("src", "");
+        previewAudio.attr("src", "");
     }
 });
 
