@@ -12392,7 +12392,7 @@ class ApiControllerv2 extends Controller
             $new_subscription->startDate = now();
             $new_subscription->endDate = $enddate;
             $new_subscription->productId = $input['productId'];
-            $new_subscription->type = 'Pro-Year';
+            $new_subscription->type = 'subscribe';
             $new_subscription->purchaseToken = $input['purchaseToken'];
             $new_subscription->save();
 
