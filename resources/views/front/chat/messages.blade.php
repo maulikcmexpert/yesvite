@@ -104,7 +104,7 @@ use Carbon\Carbon;
                     @if(!isset($message['contactName']))
                         @continue
                     @endisset
-                    @if ($i == 0)
+                    @if ($i == 0 && @$message['isArchive']!="1")
                         <input type="hidden" class="selected_id" value="{{$k}}"/>
                         <input type="hidden" class="selected_message" value="{{$message['contactId']}}"/>
                         <input type="hidden" class="selected_name" value="{{$message['contactName']}}"/>
@@ -171,7 +171,9 @@ use Carbon\Carbon;
                     </li>
                 </div>
                     @php
+                    if(@$message['isArchive']!="1"){
                         $i++;
+                    }
                     @endphp
                 @endforeach
                     @if ($i==0)
@@ -181,6 +183,7 @@ use Carbon\Carbon;
                     <input type="hidden" id="isGroup"/>
 
                     @endif
+                    <button id="archive-list" list="0">Archive List</button>
                         </ul>
                     </div>
                     <div class="chatbox position-relative w-100">
@@ -402,14 +405,12 @@ use Carbon\Carbon;
                    
                     <div class="d-flex align-items-center inbox">
                         <span>To:</span>
-                        
+                        <div id="selected-tags-container">
+                            <input type="text" id="search-user">
+                        </div>
                         <input type="hidden" id="selected-user-id" name="selectedUserId" value="">
                     </div>
-                    <div id="selected-tags-container">
-                        <!-- Selected tags will be appended here -->
-                        <input type="text" id="search-user">
-
-                    </div>
+                   
                     <!-- =========== first-model =========== -->
                     <div class="empty-massage">
                         <div class="empty-img">

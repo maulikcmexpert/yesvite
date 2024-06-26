@@ -686,6 +686,14 @@ $(".archive-conversation").click(function () {
         .find("span")
         .text(change == "1" ? "Unarchive" : "Archive");
     $(this).attr("changeWith", change == "1" ? "0" : "1");
+    if (change == "1") {
+        $(".conversation-" + conversationId).addClass("archived-list");
+        $(".conversation-" + conversationId).removeClass("unarchived-list");
+    } else {
+        $(".conversation-" + conversationId).addClass("unarchived-list");
+        $(".conversation-" + conversationId).removeClass("archived-list");
+    }
+    $("#archive-list").click();
 });
 
 // Initial chat update
@@ -694,7 +702,26 @@ if ($("#isGroup").val() == true) {
 } else {
     updateChat($(".selected_message").val());
 }
-
+$(".archived-list").hide();
+$("#archive-list").click(function () {
+    var msgLists = [];
+    if ($(this).attr("list") == "0") {
+        $(this).attr("list", "1");
+        $(".archived-list").show();
+        $(".unarchived-list").hide();
+        msgLists = $(".archived-list");
+        $(this).html("Unarchive List");
+    } else {
+        $(this).attr("list", "0");
+        $(".unarchived-list").show();
+        $(".archived-list").hide();
+        msgLists = $(".unarchived-list");
+        $(this).html("Archive List");
+    }
+    if (msgLists.length > 0) {
+        msgLists[0].click();
+    }
+});
 function scrollFunction() {
     const container = document.getElementById("msgBody");
     const element = document.getElementById("msgbox");
@@ -1213,7 +1240,7 @@ $("#search-user")
                         $("<span>", { class: "close-btn" }).html("&times;")
                     );
                 $tag.append($img);
-                $("#selected-tags-container").append($tag);
+                $("#selected-tags-container").prepend($tag);
 
                 handleSelectedUsers();
             }
