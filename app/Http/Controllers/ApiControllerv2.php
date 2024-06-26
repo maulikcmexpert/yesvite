@@ -12416,14 +12416,17 @@ class ApiControllerv2 extends Controller
             $purchaseToken = $userSubscription->purchaseToken;
 
             $responce =  $this->set_android_iap($app_id, $product_id, $purchaseToken);
-            dd($responce);
+
 
             $exp_date =  date('Y-m-d H:i:s', ($responce['expiryTimeMillis'] /  1000));
 
 
             $current_date = date('Y-m-d H:i:s');
             if (strtotime($current_date) > strtotime($exp_date)) {
-                $cancellationdate =  date('Y-m-d H:i:s', ($responce['userCancellationTimeMillis'] /  1000));
+                if (isset($responce['userCancellationTimeMillis'])) {
+
+                    $cancellationdate =  date('Y-m-d H:i:s', ($responce['userCancellationTimeMillis'] /  1000));
+                }
                 $userSubscription->endDate = $exp_date;
                 $userSubscription->cancellationdate = $cancellationdate;
                 $userSubscription->save();
