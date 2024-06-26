@@ -467,7 +467,7 @@ use Carbon\Carbon;
                 <h4 class="selected-title">Add New Message</h4>
                 <div  class="change-group-name d-none">
                     <input type="text" class="update-group-name"/>
-                    <button type="button" id="updateName">Save</button>
+                    <button type="button" class="cmn-btn" id="updateName">Save</button>
                 </div>
                     <button type="button" class="btn-close close-group-modal" data-bs-dismiss="modal"></button>
             </div>
@@ -540,8 +540,8 @@ use Carbon\Carbon;
                             <input type="hidden" id="group-selected-user-id" name="selectedUserId" value="">
 
                          
-                            <button class="cmn-btn d-none" id="add-group-member">Add Member</button>
                         </div>
+                        <button class="cmn-btn d-none" id="add-group-member">Add Member</button>
                     </div>
                 </div>
             </div>
