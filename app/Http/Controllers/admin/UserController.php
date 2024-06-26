@@ -171,6 +171,7 @@ class UserController extends Controller
                 'firstname' => $request['firstname'],
                 'lastname' => $request['lastname'],
                 'email' => $request['email'],
+                'app_user' => '0',
                 'password' => Hash::make($password),
                 'email_verified_at' => Carbon::now()->toDateTimeString(),
                 'password_updated_date' => Carbon::now()->format('Y-m-d'),
