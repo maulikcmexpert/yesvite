@@ -352,6 +352,7 @@ async function updateChat(user_id) {
     $(".member-lists").html("");
     $(".choosen-file").hide();
     if (user_id == "") return;
+
     const selected_user = await getUser(user_id);
     console.log({ user_id });
     if (!selected_user) {
@@ -386,40 +387,52 @@ async function updateChat(user_id) {
     off(messagesRef);
     off(selecteduserTypeRef);
 
-    // Check if the user is blocked by or has blocked the current user
-    let isBlockedByMe = false;
-    let isBlockedByUser = false;
+    // Set up block/unblock observers
+    const blockByMeRef = ref(database, `users/${senderUser}/blockByUser`);
+    const blockByUserRef = ref(database, `users/${senderUser}/blockByMe`);
 
-    const blockByMeRef = ref(database, `users/${senderUser}/blockByMe`);
-    const blockByUserRef = ref(database, `users/${user_id}/blockByUser`);
+    const checkBlockStatus = async () => {
+        const blockByMeSnapshot = await get(blockByMeRef);
+        const blockByUserSnapshot = await get(blockByUserRef);
 
-    const [blockByMeSnapshot, blockByUserSnapshot] = await Promise.all([
-        get(blockByMeRef),
-        get(blockByUserRef),
-    ]);
+        let isBlockedByMe = false;
+        let isBlockedByUser = false;
 
-    if (blockByMeSnapshot.exists()) {
-        const blockByMeList = blockByMeSnapshot.val();
-        isBlockedByMe = blockByMeList.includes(user_id);
-    }
+        if (blockByMeSnapshot.exists()) {
+            const blockByMeList = blockByMeSnapshot.val();
+            isBlockedByMe = blockByMeList.includes(user_id);
+        }
 
-    if (blockByUserSnapshot.exists()) {
-        const blockByUserList = blockByUserSnapshot.val();
-        isBlockedByUser = blockByUserList.includes(senderUser);
-    }
+        if (blockByUserSnapshot.exists()) {
+            const blockByUserList = blockByUserSnapshot.val();
+            isBlockedByUser = blockByUserList.includes(user_id);
+        }
 
-    if (isBlockedByMe || isBlockedByUser) {
-        $(".msg-footer").hide();
-    } else {
-        $(".msg-footer").show();
-    }
-    console.log(isBlockedByMe);
-    if (isBlockedByMe) {
-        $(".block-conversation").find("span").text("Unblock");
-    } else {
-        $(".block-conversation").find("span").text("Block");
-    }
-    $(".block-conversation").attr("blocked", isBlockedByMe);
+        if (isBlockedByMe || isBlockedByUser) {
+            $(".msg-footer").hide();
+        } else {
+            $(".msg-footer").show();
+        }
+
+        if (isBlockedByMe) {
+            $(".block-conversation").find("span").text("Unblock");
+        } else {
+            $(".block-conversation").find("span").text("Block");
+        }
+        $(".block-conversation").attr("blocked", isBlockedByMe);
+    };
+
+    // Initial block status check
+    await checkBlockStatus();
+
+    // Set up listeners for block/unblock changes
+    onValue(blockByMeRef, async () => {
+        await checkBlockStatus();
+    });
+
+    onValue(blockByUserRef, async () => {
+        await checkBlockStatus();
+    });
 
     onChildAdded(messagesRef, async (snapshot) => {
         addMessageToList(snapshot.key, snapshot.val(), conversationId);
@@ -433,12 +446,15 @@ async function updateChat(user_id) {
             });
         }
     });
+
     onChildChanged(messagesRef, async (snapshot) => {
         UpdateMessageToList(snapshot.key, snapshot.val(), conversationId);
     });
+
     onChildRemoved(messagesRef, async (snapshot) => {
         RemoveMessageToList(snapshot.key, conversationId);
     });
+
     onChildChanged(selecteduserTypeRef, async (snapshot) => {
         if (
             snapshot.key === "userTypingStatus" &&
@@ -455,9 +471,11 @@ async function updateChat(user_id) {
             $(".typing").text("");
         }
     });
+
     updateMore(conversationId);
     updateUnreadMessageBadge();
 }
+
 var SelecteGroupUser = [];
 async function updateChatfromGroup(conversationId) {
     SelecteGroupUser = [];
