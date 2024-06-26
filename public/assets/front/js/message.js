@@ -551,7 +551,9 @@ async function updateMore(conversationId) {
         $(".mute-conversation").attr("changeWith", "1");
         $(".archive-conversation").attr("changeWith", "1");
         $(".block-conversation").attr("user", overviewData.contactId);
-
+        $(".conversation-" + conversationId)
+            .find(".pin-svg")
+            .hide();
         if (overviewData.isPin != undefined) {
             $(".pin-conversation")
                 .find("span")
@@ -560,6 +562,9 @@ async function updateMore(conversationId) {
                 "changeWith",
                 overviewData.isPin == "1" ? "0" : "1"
             );
+            if (overviewData.isPin == "1") {
+                $(".pin-svg").show();
+            }
         }
         if (overviewData.isMute != undefined) {
             $(".mute-conversation")
@@ -597,6 +602,7 @@ $(".pin-conversation").click(function () {
     if (pinChange == "1") {
         const conversationElement = $(`.conversation-${conversationId}`);
         conversationElement.prependTo(".chat-list");
+        $(".pin-svg").show();
     }
 });
 
@@ -1671,7 +1677,12 @@ async function addListInMembers(SelecteGroupUser) {
 
         const removeMember =
             user.id != senderUser && senderIsAdmin
-                ? `<button class="remove-member" data-id="${user.id}"><i class="fa-solid fa-xmark"></i></button>`
+                ? `<button class="remove-member" data-id="${user.id}"><svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M10.4974 18.3346C15.0807 18.3346 18.8307 14.5846 18.8307 10.0013C18.8307 5.41797 15.0807 1.66797 10.4974 1.66797C5.91406 1.66797 2.16406 5.41797 2.16406 10.0013C2.16406 14.5846 5.91406 18.3346 10.4974 18.3346Z" stroke="#E03137" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M8.14062 12.3573L12.8573 7.64062" stroke="#E03137" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M12.8573 12.3573L8.14062 7.64062" stroke="#E03137" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</button>`
                 : "";
 
         messageElement +=
