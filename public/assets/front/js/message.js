@@ -13,6 +13,7 @@ import {
     off,
     remove,
     onDisconnect,
+    onValue,
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 import {
     getStorage,
@@ -867,6 +868,7 @@ $(".send-message").on("keypress", async function (e) {
                 messageData.isReply = "1";
                 // Reset reply message ID after sending
                 replyMessageId = null;
+                $(".set-replay-msg").remove();
             }
 
             const groupProfilesRef = ref(
@@ -928,6 +930,7 @@ $(".send-message").on("keypress", async function (e) {
                 messageData.isReply = "1";
                 // Reset reply message ID after sending
                 replyMessageId = null;
+                $(".set-replay-msg").remove();
             }
 
             messageData.status = { senderUser: { profile: "", read: 1 } };
@@ -1679,11 +1682,31 @@ $("#new_message").on("keypress", async function (e) {
     }
 });
 
+const isOnlineForDatabase = {
+    userStatus: "online",
+    userLastSeen: Date.now(),
+};
+
+// Object representing the user's status when offline
 const isOfflineForDatabase = {
     userStatus: "offline",
     userLastSeen: Date.now(),
 };
-// await onDisconnect(userRef).update(isOfflineForDatabase);
+
+// Set up the connection status listener
+const connectedRef = ref(database, ".info/connected");
+onValue(connectedRef, async (snapshot) => {
+    if (snapshot.val() === true) {
+        // User is connected
+        await set(userRef, isOnlineForDatabase);
+
+        // Set up the onDisconnect function to set status to offline
+        await onDisconnect(userRef).set(isOfflineForDatabase);
+    } else {
+        // User is disconnected (note: this could be triggered before onDisconnect)
+        await set(userRef, isOfflineForDatabase);
+    }
+});
 // Load user images
 $(".user-image").each(async function () {
     const dataId = $(this).attr("data-id");
