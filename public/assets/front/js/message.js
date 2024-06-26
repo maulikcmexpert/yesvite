@@ -1186,7 +1186,6 @@ function createMessageElement(key, messageData, isGroup) {
                             : ""
                     } 
                     ${reaction}
-                    <span>yes</span>
                 </div>
                 ${emojiAndReplay}
               </div>
@@ -2618,9 +2617,22 @@ $(".multi-archive").click(function () {
             database,
             `overview/${senderUser}/${conversationId}/isArchive`
         );
-        set(overviewRef, change);
         promises.push(set(overviewRef, change));
     });
+
+    Promise.all(promises)
+        .then(() => {
+            toastr.success(
+                change == "1"
+                    ? "Archived successfully"
+                    : "Unarchived successfully"
+            );
+            $("#archive-list").attr("list", "1").click();
+        })
+        .catch((error) => {
+            toastr.error("An error occurred while archiving/unarchiving.");
+            console.error(error);
+        });
 });
 $(".multi-read").click(function () {
     const checkedConversations = $(
