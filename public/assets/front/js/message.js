@@ -2019,7 +2019,7 @@ $(document).on("click", ".close-group-btn", function () {
 });
 $("#new-message").click(function () {
     selectedUserIds = [];
-    $("#selected-tags-container").html("");
+    $("#selected-tags-container .tag").remove();
     updateSelectedUserIds();
     handleSelectedUsers();
 });
@@ -2419,6 +2419,9 @@ async function updateUnreadMessageBadge() {
 // Call the function on page load
 $(document).ready(function () {
     updateUnreadMessageBadge();
+});
+$(document).on("click", ".bulk-check .form-check-input", function (event) {
+    event.stopPropagation(); // Prevent the event from bubbling up to .msg-list
 });
 $(".bulk-edit").click(function () {
     var bulkcheck = document.getElementsByClassName("bulk-check");
