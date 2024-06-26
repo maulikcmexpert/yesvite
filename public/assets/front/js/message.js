@@ -376,6 +376,42 @@ async function updateChat(user_id) {
     const selecteduserTypeRef = ref(database, `users/${user_id}`);
     off(messagesRef);
     off(selecteduserTypeRef);
+
+    // Check if the user is blocked by or has blocked the current user
+    let isBlockedByMe = false;
+    let isBlockedByUser = false;
+
+    const blockByMeRef = ref(database, `users/${senderUser}/blockByMe`);
+    const blockByUserRef = ref(database, `users/${user_id}/blockByUser`);
+
+    const [blockByMeSnapshot, blockByUserSnapshot] = await Promise.all([
+        get(blockByMeRef),
+        get(blockByUserRef),
+    ]);
+
+    if (blockByMeSnapshot.exists()) {
+        const blockByMeList = blockByMeSnapshot.val();
+        isBlockedByMe = blockByMeList.includes(user_id);
+    }
+
+    if (blockByUserSnapshot.exists()) {
+        const blockByUserList = blockByUserSnapshot.val();
+        isBlockedByUser = blockByUserList.includes(senderUser);
+    }
+
+    if (isBlockedByMe || isBlockedByUser) {
+        $(".msg-footer").hide();
+    } else {
+        $(".msg-footer").show();
+    }
+    console.log(isBlockedByMe);
+    if (isBlockedByMe) {
+        $(".block-conversation").find("span").text("Unblock");
+    } else {
+        $(".block-conversation").find("span").text("Block");
+    }
+    $(".block-conversation").attr("blocked", isBlockedByMe);
+
     onChildAdded(messagesRef, async (snapshot) => {
         addMessageToList(snapshot.key, snapshot.val(), conversationId);
 
@@ -410,6 +446,7 @@ async function updateChat(user_id) {
         }
     });
     updateMore(conversationId);
+    updateUnreadMessageBadge();
 }
 var SelecteGroupUser = [];
 async function updateChatfromGroup(conversationId) {
@@ -462,6 +499,7 @@ async function updateChatfromGroup(conversationId) {
     await addListInMembers(SelecteGroupUser);
     $(".selected-title").html(groupInfo.groupName);
     updateMore(conversationId);
+    updateUnreadMessageBadge();
 }
 
 $(".conversationId").click(function () {
@@ -501,26 +539,38 @@ async function updateMore(conversationId) {
     const overviewSnapshot = await get(
         ref(database, `overview/${senderUser}/${conversationId}`)
     );
+    const isGroup = $("#isGroup").val();
+    if (isGroup == "true" || isGroup == true || isGroup == "1") {
+        $(".block-conversation").hide();
+    } else {
+        $(".block-conversation").show();
+    }
     const overviewData = overviewSnapshot.val();
     if (overviewData) {
-        $(".pin-conversation").data("changeWith", "1");
-        $(".mute-conversation").data("changeWith", "1");
-        $(".archive-conversation").data("changeWith", "1");
-
+        $(".pin-conversation").attr("changeWith", "1");
+        $(".mute-conversation").attr("changeWith", "1");
+        $(".archive-conversation").attr("changeWith", "1");
+        $(".block-conversation").attr("user", overviewData.contactId);
+        $(".conversation-" + conversationId)
+            .find(".pin-svg")
+            .hide();
         if (overviewData.isPin != undefined) {
             $(".pin-conversation")
                 .find("span")
                 .text(overviewData.isPin == "1" ? "Unpin" : "Pin");
-            $(".pin-conversation").data(
+            $(".pin-conversation").attr(
                 "changeWith",
                 overviewData.isPin == "1" ? "0" : "1"
             );
+            if (overviewData.isPin == "1") {
+                $(".pin-svg").show();
+            }
         }
         if (overviewData.isMute != undefined) {
             $(".mute-conversation")
                 .find("span")
                 .text(overviewData.isMute == "1" ? "Unmute" : "Mute");
-            $(".mute-conversation").data(
+            $(".mute-conversation").attr(
                 "changeWith",
                 overviewData.isMute == "1" ? "0" : "1"
             );
@@ -529,7 +579,7 @@ async function updateMore(conversationId) {
             $(".archive-conversation")
                 .find("span")
                 .text(overviewData.isArchive == "1" ? "Unarchive" : "Archive");
-            $(".archive-conversation").data(
+            $(".archive-conversation").attr(
                 "changeWith",
                 overviewData.isArchive == "1" ? "0" : "1"
             );
@@ -538,7 +588,7 @@ async function updateMore(conversationId) {
 }
 
 $(".pin-conversation").click(function () {
-    const pinChange = $(this).data("changeWith");
+    const pinChange = $(this).attr("changeWith");
     let conversationId = $(".conversationId").attr("conversationId");
     const overviewRef = ref(
         database,
@@ -548,15 +598,16 @@ $(".pin-conversation").click(function () {
     $(this)
         .find("span")
         .text(pinChange == "1" ? "Unpin" : "Pin");
-    $(this).data("changeWith", pinChange == "1" ? "0" : "1");
+    $(this).attr("changeWith", pinChange == "1" ? "0" : "1");
     if (pinChange == "1") {
         const conversationElement = $(`.conversation-${conversationId}`);
         conversationElement.prependTo(".chat-list");
+        $(".pin-svg").show();
     }
 });
 
 $(".mute-conversation").click(function () {
-    const change = $(this).data("changeWith");
+    const change = $(this).attr("changeWith");
     let conversationId = $(".conversationId").attr("conversationId");
     const overviewRef = ref(
         database,
@@ -566,15 +617,57 @@ $(".mute-conversation").click(function () {
     $(this)
         .find("span")
         .text(change == "1" ? "Unmute" : "Mute");
-    $(this).data("changeWith", change == "1" ? "0" : "1");
+    $(this).attr("changeWith", change == "1" ? "0" : "1");
     if (change == "1") {
         const conversationElement = $(`.conversation-${conversationId}`);
         conversationElement.prependTo(".chat-list");
     }
 });
+$(".block-conversation").click(async function () {
+    const userId = $(this).attr("user");
+    const blocked = $(this).attr("blocked") === "true"; // Convert string to boolean
+
+    // References to block lists
+    let userRef = ref(database, `users/${senderUser}/blockByMe`);
+    let blockuserRef = ref(database, `users/${userId}/blockByUser`);
+
+    // Get the current block lists
+    let usersSnapshot = await get(userRef);
+    let BlockusersSnapshot = await get(blockuserRef);
+
+    let users = usersSnapshot.exists() ? usersSnapshot.val() : [];
+    let blockUsers = BlockusersSnapshot.exists()
+        ? BlockusersSnapshot.val()
+        : [];
+
+    if (blocked) {
+        // Unblock the user
+        users = users.filter((id) => id !== userId);
+        blockUsers = blockUsers.filter((id) => id !== senderUser);
+        console.log(`User ${userId} has been unblocked by ${senderUser}`);
+    } else {
+        // Block the user
+        if (!users.includes(userId)) {
+            users.push(userId);
+        }
+        if (!blockUsers.includes(senderUser)) {
+            blockUsers.push(senderUser);
+        }
+        console.log(`User ${userId} has been blocked by ${senderUser}`);
+    }
+
+    // Update the block lists in Firebase
+    await set(userRef, users);
+    await set(blockuserRef, blockUsers);
+
+    // Update the 'blocked' attribute for future clicks
+    $(this).attr("blocked", !blocked);
+    let conversationid = $(".conversationId").attr("conversationid");
+    $(".conversation-" + conversationid).click();
+});
 
 $(".archive-conversation").click(function () {
-    const change = $(this).data("changeWith");
+    const change = $(this).attr("changeWith");
     let conversationId = $(".conversationId").attr("conversationId");
     const overviewRef = ref(
         database,
@@ -584,7 +677,7 @@ $(".archive-conversation").click(function () {
     $(this)
         .find("span")
         .text(change == "1" ? "Unarchive" : "Archive");
-    $(this).data("changeWith", change == "1" ? "0" : "1");
+    $(this).attr("changeWith", change == "1" ? "0" : "1");
     if (change == "1") {
         const conversationElement = $(`.conversation-${conversationId}`);
         conversationElement.prependTo(".chat-list");
@@ -619,9 +712,10 @@ $(".send-message").on("keyup", async function (e) {
 $(".send-message").on("keypress", async function (e) {
     update(userRef, { userTypingStatus: "Typing..." });
     if (e.which === 13) {
-        var isGroup = $("#isGroup").val();
-        const message = $(this).val();
         const conversationId = $(".selected_id").val();
+        var isGroup = $(".conversation-" + conversationId).attr("data-group");
+        $("#isGroup").val(isGroup);
+        const message = $(this).val();
         let downloadURL = "";
         let type = "";
         $(".preview_img").hide();
@@ -864,9 +958,9 @@ function UpdateMessageToList(key, messageData, conversationId) {
 }
 function addMessageToList(key, messageData, conversationId) {
     if ($(".selected_conversasion").val() != conversationId) {
+        console("selectedisnotvalid");
         return;
     }
-
     let isGroup = $("#isGroup").val();
     if (
         messageData?.isDelete != undefined &&
@@ -895,7 +989,11 @@ function addMessageToList(key, messageData, conversationId) {
 function createMessageElement(key, messageData, isGroup) {
     const isSender = senderUser == messageData.senderId;
     const isReceiver = senderUser != messageData.senderId;
-    if (SelecteGroupUser[messageData.senderId] == undefined) {
+    if (
+        (isGroup == "true" || isGroup == true) &&
+        SelecteGroupUser[messageData.senderId] == undefined
+    ) {
+        console.log(SelecteGroupUser[messageData.senderId]);
         return;
     }
     const senderName =
@@ -1022,12 +1120,11 @@ function createMessageElement(key, messageData, isGroup) {
             ${emojiAndReplay}
             </div>`
             : "";
-
     return `
         <li class="${isSender ? "receiver" : "sender"}" id="message-${key}">
 
            
-            ${replySection != "" ? replySection : dataWithMedia}
+            ${replySection == "" ? dataWithMedia : replySection}
 
             <span class="time">${timeago.format(
                 new Date(messageData.timeStamp)
@@ -1549,7 +1646,7 @@ const isOfflineForDatabase = {
     userStatus: "offline",
     userLastSeen: Date.now(),
 };
-await onDisconnect(userRef).update(isOfflineForDatabase);
+// await onDisconnect(userRef).update(isOfflineForDatabase);
 // Load user images
 $(".user-image").each(async function () {
     const dataId = $(this).attr("data-id");
@@ -1580,7 +1677,12 @@ async function addListInMembers(SelecteGroupUser) {
 
         const removeMember =
             user.id != senderUser && senderIsAdmin
-                ? `<button class="remove-member" data-id="${user.id}"><i class="fa-solid fa-xmark"></i></button>`
+                ? `<button class="remove-member" data-id="${user.id}"><svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M10.4974 18.3346C15.0807 18.3346 18.8307 14.5846 18.8307 10.0013C18.8307 5.41797 15.0807 1.66797 10.4974 1.66797C5.91406 1.66797 2.16406 5.41797 2.16406 10.0013C2.16406 14.5846 5.91406 18.3346 10.4974 18.3346Z" stroke="#E03137" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M8.14062 12.3573L12.8573 7.64062" stroke="#E03137" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M12.8573 12.3573L8.14062 7.64062" stroke="#E03137" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</button>`
                 : "";
 
         messageElement +=
@@ -2346,3 +2448,32 @@ function displayFiles(files, name) {
         reader.readAsDataURL(file);
     }
 }
+
+async function getTotalUnreadMessageCount() {
+    const userId = senderUser; // Assuming senderUser is the ID of the current user
+    const overviewRef = ref(database, `overview/${userId}`);
+    const snapshot = await get(overviewRef);
+    let totalUnreadCount = 0;
+
+    if (snapshot.exists()) {
+        const conversations = snapshot.val();
+        for (let conversationId in conversations) {
+            if (conversations[conversationId].unReadCount) {
+                totalUnreadCount += conversations[conversationId].unReadCount;
+            }
+        }
+    }
+
+    return totalUnreadCount;
+}
+
+// Function to update badge with unread message count
+async function updateUnreadMessageBadge() {
+    const totalUnreadCount = await getTotalUnreadMessageCount();
+    $(".badge").text(totalUnreadCount);
+}
+
+// Call the function on page load
+$(document).ready(function () {
+    updateUnreadMessageBadge();
+});
