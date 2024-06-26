@@ -552,6 +552,7 @@ async function updateMore(conversationId) {
         $(".archive-conversation").attr("changeWith", "1");
         $(".block-conversation").attr("user", overviewData.contactId);
         $(".conversation-" + conversationId)
+            .find(".chat-data")
             .find(".pin-svg")
             .hide();
         if (overviewData.isPin != undefined) {
@@ -1699,7 +1700,7 @@ async function addListInMembers(SelecteGroupUser) {
                                                 ? "You"
                                                 : user.name
                                         }</h3>
-                                        <span>${
+                                        <span class="group-admin">${
                                             user.isAdmin == "1" ? "Admin" : ""
                                         }</span>
                                     </div>

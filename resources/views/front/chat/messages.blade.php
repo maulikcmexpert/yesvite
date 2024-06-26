@@ -485,7 +485,7 @@ use Carbon\Carbon;
                     <div class="new-member d-none">
                         <button class="btn btn-primary" id="new-member"><span><i class="fa-solid fa-user-plus"></i></span> Add New Member</button>
                     </div>
-                    <ul class="member-lists">
+                    <ul class="member-lists group-list">
                         <li class="">
                             <div class="chat-data d-flex">
                                 <div class="user-img position-relative">
