@@ -104,14 +104,14 @@ use Carbon\Carbon;
                     @if(!isset($message['contactName']))
                         @continue
                     @endisset
-                    @if ($i == 0)
+                    @if ($i == 0 && @$message['isArchive']!="1")
                         <input type="hidden" class="selected_id" value="{{$k}}"/>
                         <input type="hidden" class="selected_message" value="{{$message['contactId']}}"/>
                         <input type="hidden" class="selected_name" value="{{$message['contactName']}}"/>
                         <input type="hidden" id="isGroup" value="{{@$message['group']}}"/>
                     @endif
                     <div>
-                        <li class="{{$i == 0 ?'active':''}} msg-list conversation-{{$message['conversationId']}}" data-userId="{{$message['contactId']}}" data-msgKey={{$k}} data-group={{@$message['group']}}>
+                        <li class="{{$i == 0 ?'active':''}} msg-list conversation-{{$message['conversationId']}} {{@$message['isArchive']=="1"?"archived-list":"unarchived-list"}}" data-userId="{{$message['contactId']}}" data-msgKey={{$k}} data-group={{@$message['group']}}>
                         <div class="me-2 d-none bulk-check">
                             <input class="form-check-input" type="checkbox" name="checked_conversation[]" value="{{$message['conversationId']}}" isGroup="{{@$message['group']}}">
                         </div>
@@ -171,7 +171,9 @@ use Carbon\Carbon;
                     </li>
                 </div>
                     @php
+                    if(@$message['isArchive']!="1"){
                         $i++;
+                    }
                     @endphp
                 @endforeach
                     @if ($i==0)
@@ -181,6 +183,7 @@ use Carbon\Carbon;
                     <input type="hidden" id="isGroup"/>
 
                     @endif
+                    <button id="archive-list" list="0">Archive List</button>
                         </ul>
                     </div>
                     <div class="chatbox position-relative w-100">
@@ -399,14 +402,15 @@ use Carbon\Carbon;
             <!-- Modal body -->
             <div class="modal-body">
                 <div>
-                    <div id="selected-tags-container">
-                        <!-- Selected tags will be appended here -->
-                    </div>
+                   
                     <div class="d-flex align-items-center inbox">
                         <span>To:</span>
-                        <input type="text" id="search-user">
+                        <div id="selected-tags-container">
+                            <input type="text" id="search-user">
+                        </div>
                         <input type="hidden" id="selected-user-id" name="selectedUserId" value="">
                     </div>
+                   
                     <!-- =========== first-model =========== -->
                     <div class="empty-massage">
                         <div class="empty-img">
