@@ -5,6 +5,9 @@
     @isset($css)
      <link rel="stylesheet" href="{{asset('assets')}}/front/css/{{$css}}" />
     @endisset
+    @isset($css1)
+    <link rel="stylesheet" href="{{asset('assets')}}/front/css/{{$css1}}" />
+   @endisset
     <x-front.header title={{$title}} />
 </head>
 
