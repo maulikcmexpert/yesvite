@@ -131,6 +131,8 @@ const userRef = ref(database, `users/${senderUser}`);
 let replyMessageId = null; // Global variable to hold the message ID to reply to
 let fileType = null; // Global variable to hold the message ID to reply to
 let WaitNewConversation = null; // Global variable to hold the message ID to reply to
+let myProfile;
+
 // Function to get messages between two users
 
 let closeSpan = `<svg width="17" height="18" viewBox="0 0 17 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -352,6 +354,7 @@ async function updateChat(user_id) {
     $(".member-lists").html("");
     $(".choosen-file").hide();
     if (user_id == "") return;
+
     const selected_user = await getUser(user_id);
     console.log({ user_id });
     if (!selected_user) {
@@ -386,40 +389,52 @@ async function updateChat(user_id) {
     off(messagesRef);
     off(selecteduserTypeRef);
 
-    // Check if the user is blocked by or has blocked the current user
-    let isBlockedByMe = false;
-    let isBlockedByUser = false;
+    // Set up block/unblock observers
+    const blockByMeRef = ref(database, `users/${senderUser}/blockByUser`);
+    const blockByUserRef = ref(database, `users/${senderUser}/blockByMe`);
 
-    const blockByMeRef = ref(database, `users/${senderUser}/blockByMe`);
-    const blockByUserRef = ref(database, `users/${user_id}/blockByUser`);
+    const checkBlockStatus = async () => {
+        const blockByMeSnapshot = await get(blockByMeRef);
+        const blockByUserSnapshot = await get(blockByUserRef);
 
-    const [blockByMeSnapshot, blockByUserSnapshot] = await Promise.all([
-        get(blockByMeRef),
-        get(blockByUserRef),
-    ]);
+        let isBlockedByMe = false;
+        let isBlockedByUser = false;
 
-    if (blockByMeSnapshot.exists()) {
-        const blockByMeList = blockByMeSnapshot.val();
-        isBlockedByMe = blockByMeList.includes(user_id);
-    }
+        if (blockByMeSnapshot.exists()) {
+            const blockByMeList = blockByMeSnapshot.val();
+            isBlockedByMe = blockByMeList.includes(user_id);
+        }
 
-    if (blockByUserSnapshot.exists()) {
-        const blockByUserList = blockByUserSnapshot.val();
-        isBlockedByUser = blockByUserList.includes(senderUser);
-    }
+        if (blockByUserSnapshot.exists()) {
+            const blockByUserList = blockByUserSnapshot.val();
+            isBlockedByUser = blockByUserList.includes(user_id);
+        }
 
-    if (isBlockedByMe || isBlockedByUser) {
-        $(".msg-footer").hide();
-    } else {
-        $(".msg-footer").show();
-    }
-    console.log(isBlockedByMe);
-    if (isBlockedByMe) {
-        $(".block-conversation").find("span").text("Unblock");
-    } else {
-        $(".block-conversation").find("span").text("Block");
-    }
-    $(".block-conversation").attr("blocked", isBlockedByMe);
+        if (isBlockedByMe || isBlockedByUser) {
+            $(".msg-footer").hide();
+        } else {
+            $(".msg-footer").show();
+        }
+
+        if (isBlockedByUser) {
+            $(".block-conversation").find("span").text("Unblock");
+        } else {
+            $(".block-conversation").find("span").text("Block");
+        }
+        $(".block-conversation").attr("blocked", isBlockedByUser);
+    };
+
+    // Initial block status check
+    await checkBlockStatus();
+
+    // Set up listeners for block/unblock changes
+    onValue(blockByMeRef, async () => {
+        await checkBlockStatus();
+    });
+
+    onValue(blockByUserRef, async () => {
+        await checkBlockStatus();
+    });
 
     onChildAdded(messagesRef, async (snapshot) => {
         addMessageToList(snapshot.key, snapshot.val(), conversationId);
@@ -433,12 +448,15 @@ async function updateChat(user_id) {
             });
         }
     });
+
     onChildChanged(messagesRef, async (snapshot) => {
         UpdateMessageToList(snapshot.key, snapshot.val(), conversationId);
     });
+
     onChildRemoved(messagesRef, async (snapshot) => {
         RemoveMessageToList(snapshot.key, conversationId);
     });
+
     onChildChanged(selecteduserTypeRef, async (snapshot) => {
         if (
             snapshot.key === "userTypingStatus" &&
@@ -455,9 +473,11 @@ async function updateChat(user_id) {
             $(".typing").text("");
         }
     });
+
     updateMore(conversationId);
     updateUnreadMessageBadge();
 }
+
 var SelecteGroupUser = [];
 async function updateChatfromGroup(conversationId) {
     SelecteGroupUser = [];
@@ -1410,39 +1430,13 @@ async function findOrCreateConversation(
     contactName,
     receiverProfile
 ) {
-    // const overviewRef = ref(database, `overview/${currentUserId}`);
-    // const snapshot = await get(overviewRef);
-
-    // if (snapshot.exists()) {
-    //     const overviewData = snapshot.val();
-    //     for (const conversationId in overviewData) {
-    //         if (overviewData[conversationId].contactId === contactId) {
-    //             return conversationId;
-    //         }
-    //     }
-    // }
-    // // Check if a conversation exists for the contact
-    // const contactOverviewRef = ref(database, `overview/${contactId}`);
-    // const contactSnapshot = await get(contactOverviewRef);
-
-    // if (contactSnapshot.exists()) {
-    //     const contactOverviewData = contactSnapshot.val();
-    //     for (const conversationId in contactOverviewData) {
-    //         if (
-    //             contactOverviewData[conversationId].contactId === currentUserId
-    //         ) {
-    //             return conversationId;
-    //         }
-    //     }
-    // }
+    let userData = await get(userRef);
+    let userSnap = userData.val();
 
     const newConversationId = await generateConversationId([
         currentUserId,
         contactId,
     ]);
-
-    // const newConversationRef = push(child(ref(database), "overview"));
-    // const newConversationId = newConversationRef.key;
 
     const newConversationData = {
         contactId: contactId,
@@ -1469,7 +1463,7 @@ async function findOrCreateConversation(
         group: false,
         lastMessage: "",
         lastSenderId: currentUserId,
-        receiverProfile: receiverProfile,
+        receiverProfile: userSnap?.userProfile,
         timeStamp: Date.now(),
         unRead: true,
         unReadCount: 1,
@@ -1597,7 +1591,6 @@ $("#new_message").on("keypress", async function (e) {
                 isReply: "0",
                 isSeen: false,
                 react: "",
-                receiverId: newGroupMembers,
                 receiverName: groupName,
                 replyData: {},
                 senderId: senderUser,
@@ -1674,7 +1667,7 @@ $("#new_message").on("keypress", async function (e) {
                 isReply: "0",
                 isSeen: false,
                 react: "",
-                // receiverId: contactId,
+                receiverId: contactId,
                 receiverName: contactName,
                 replyData: {},
                 senderId: senderUser,
