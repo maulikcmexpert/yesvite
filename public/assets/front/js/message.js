@@ -354,6 +354,8 @@ function handleConversationChange(snapshot) {
 
 // Function to update the chat UI
 async function updateChat(user_id) {
+    console.log("updatefromsingle");
+
     $(".msg-lists").html("");
     $(".member-lists").html("");
     $(".choosen-file").hide();
@@ -484,6 +486,8 @@ async function updateChat(user_id) {
 
 var SelecteGroupUser = [];
 async function updateChatfromGroup(conversationId) {
+    console.log("updatefromgroup");
+    console.log(conversationId);
     SelecteGroupUser = [];
     $(".msg-lists").html("");
     $(".member-lists").html("");
@@ -503,6 +507,7 @@ async function updateChatfromGroup(conversationId) {
             };
         }
     });
+    $(".selected_conversasion").val(conversationId);
     const messagesRef = ref(database, `Groups/${conversationId}/message`);
     off(messagesRef);
     onChildChanged(messagesRef, async (snapshot) => {
@@ -529,7 +534,6 @@ async function updateChatfromGroup(conversationId) {
 
     $(".selected_name").val(groupInfo.groupName);
 
-    $(".selected_conversasion").val(conversationId);
     update(userRef, { userChatId: conversationId });
     await addListInMembers(SelecteGroupUser);
     $(".selected-title").html(groupInfo.groupName);
@@ -1039,6 +1043,8 @@ function UpdateMessageToList(key, messageData, conversationId) {
 }
 function addMessageToList(key, messageData, conversationId) {
     if ($(".selected_conversasion").val() != conversationId) {
+        console.log($(".selected_conversasion").val());
+        console.log(conversationId);
         console.log("selectedisnotvalid");
         return;
     }
@@ -1171,7 +1177,7 @@ function createMessageElement(key, messageData, isGroup) {
             </div>`
             : `
             <div class="simple-message"> 
-                <p> 
+                <div class="simple-msg-wrap"> 
                     <span class="senderName">${senderName}</span>
                     ${messageData?.data != "" ? messageData.data : ""}
                     ${
@@ -1180,7 +1186,8 @@ function createMessageElement(key, messageData, isGroup) {
                             : ""
                     } 
                     ${reaction}
-                </p>
+                    <span>yes</span>
+                </div>
                 ${emojiAndReplay}
               </div>
               `;
