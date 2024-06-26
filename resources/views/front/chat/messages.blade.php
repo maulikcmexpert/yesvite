@@ -568,6 +568,8 @@ use Carbon\Carbon;
         </div>
     </div>
 </div>
+</div>
+</div>
 @push('scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/timeago.js/4.0.2/timeago.min.js"></script>
 <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
