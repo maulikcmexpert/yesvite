@@ -12365,7 +12365,7 @@ class ApiControllerv2 extends Controller
                 $exp_date =  date('Y-m-d H:i:s', ($responce['expiryTimeMillis'] /  1000));
                 $current_date = date('Y-m-d H:i:s');
                 if (strtotime($current_date) > strtotime($exp_date)) {
-                    return response()->json(['status' => 0, 'message' => "failure"]);
+                    return response()->json(['status' => 0, 'message' => "subscription package failure"]);
                 }
             }
 
