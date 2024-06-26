@@ -414,12 +414,12 @@ async function updateChat(user_id) {
             $(".msg-footer").show();
         }
 
-        if (isBlockedByMe) {
+        if (isBlockedByUser) {
             $(".block-conversation").find("span").text("Unblock");
         } else {
             $(".block-conversation").find("span").text("Block");
         }
-        $(".block-conversation").attr("blocked", isBlockedByMe);
+        $(".block-conversation").attr("blocked", isBlockedByUser);
     };
 
     // Initial block status check
@@ -1615,7 +1615,6 @@ $("#new_message").on("keypress", async function (e) {
                 isReply: "0",
                 isSeen: false,
                 react: "",
-                receiverId: newGroupMembers,
                 receiverName: groupName,
                 replyData: {},
                 senderId: senderUser,
@@ -1692,7 +1691,7 @@ $("#new_message").on("keypress", async function (e) {
                 isReply: "0",
                 isSeen: false,
                 react: "",
-                // receiverId: contactId,
+                receiverId: contactId,
                 receiverName: contactName,
                 replyData: {},
                 senderId: senderUser,
