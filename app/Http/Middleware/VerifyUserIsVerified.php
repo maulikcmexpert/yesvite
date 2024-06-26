@@ -24,8 +24,10 @@ class VerifyUserIsVerified
      */
     public function handle(Request $request, Closure $next): Response
     {
+
+
         if (Auth::check()) {
-            dd("hi");
+
             $user = Auth::user();
             $currentSessionId = Session::getId();
 
@@ -37,7 +39,6 @@ class VerifyUserIsVerified
             $user->current_session_id = $currentSessionId;
             $user->save();
         }
-
         return $next($request);
     }
 }
