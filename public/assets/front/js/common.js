@@ -157,3 +157,7 @@ $(function () {
         $("#navbar-close").toggleClass("hidden");
     });
 });
+
+
+$('label[for="email"]').addClass('floatingfocus');
+$('label[for="password"]').addClass('floatingfocus');
