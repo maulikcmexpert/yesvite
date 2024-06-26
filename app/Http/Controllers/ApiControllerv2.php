@@ -58,8 +58,10 @@ use App\Models\{
     UserNotificationType,
     UserProfilePrivacy,
     UserSeenStory,
+    UserSubscription,
     VersionSetting
 };
+use Illuminate\Support\Facades\Http;
 // Rules //
 use Illuminate\Pagination\Paginator;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -102,11 +104,12 @@ use Illuminate\Support\Facades\Mail;
 use LogicException;
 use Illuminate\Database\Query\Builder;
 use App\Jobs\SendInvitationMailJob as sendInvitation;
+use Illuminate\Support\Facades\Session;
 use stdClass;
-
-
+use App\Services\GooglePlayService;
 
 class ApiControllerv2 extends Controller
+
 
 {
     protected $perPage;
@@ -117,7 +120,9 @@ class ApiControllerv2 extends Controller
     protected $hostingCount;
     protected $invitedToCount;
 
-    public function __construct()
+
+
+    public function __construct(GooglePlayService $GooglePlayService)
     {
 
         $this->user = Auth::guard('api')->user();
@@ -5470,8 +5475,8 @@ class ApiControllerv2 extends Controller
 
         $validator = Validator::make($input, [
 
-            'event_id' => ['required', 'exists:events,id'],
-            'image' => ['required', 'array']
+            'event_id' => ['required', 'exists:events,id']
+            //   'image' => ['required', 'array']
 
         ]);
 
@@ -5483,49 +5488,48 @@ class ApiControllerv2 extends Controller
             ]);
         }
 
-        // try {
+        try {
 
-        DB::beginTransaction();
-
-
-        if (!empty($request->image)) {
-
-            $images = $request->image;
+            DB::beginTransaction();
 
 
-
-            $eventOldImages = EventImage::where('event_id', $request->event_id)->get();
-            if (!empty($eventOldImages)) {
+            if (isset($request->image) && !empty($request->image)) {
 
 
-                foreach ($eventOldImages as $oldImages) {
-                    if (file_exists(public_path('public/storage/event_images/') . $oldImages->image)) {
+                $images = $request->image;
 
-                        $imagePath = public_path('public/storage/event_images/') . $oldImages->image;
-                        unlink($imagePath);
+
+
+                $eventOldImages = EventImage::where('event_id', $request->event_id)->get();
+                if (!empty($eventOldImages)) {
+
+
+                    foreach ($eventOldImages as $oldImages) {
+                        if (file_exists(public_path('public/storage/event_images/') . $oldImages->image)) {
+
+                            $imagePath = public_path('public/storage/event_images/') . $oldImages->image;
+                            unlink($imagePath);
+                        }
+                        EventImage::where('id', $oldImages->id)->delete();
                     }
-                    EventImage::where('id', $oldImages->id)->delete();
+                }
+
+
+
+                foreach ($images as $value) {
+                    $image = $value;
+                    $imageName = time() . '_' . str_replace(' ', '_', $image->getClientOriginalName());
+                    $image->move(public_path('storage/event_images'), $imageName);
+
+                    EventImage::create([
+
+                        'event_id' => $request->event_id,
+
+                        'image' => $imageName
+
+                    ]);
                 }
             }
-
-
-
-            foreach ($images as $value) {
-                $image = $value;
-                $imageName = time() . '_' . str_replace(' ', '_', $image->getClientOriginalName());
-                $image->move(public_path('storage/event_images'), $imageName);
-
-                EventImage::create([
-
-                    'event_id' => $request->event_id,
-
-                    'image' => $imageName
-
-                ]);
-            }
-
-
-
 
             $user  = Auth::guard('api')->user();
             $checkUserInvited = Event::withCount('event_invited_user')->where('id', $input['event_id'])->first();
@@ -5562,19 +5566,19 @@ class ApiControllerv2 extends Controller
                     sendNotification('owner_notify', $notificationParam);
                 }
             }
+
+
+            return response()->json(['status' => 1, 'message' => "Event images stored successfully"]);
+        } catch (QueryException $e) {
+
+            DB::rollBack();
+
+            return response()->json(['status' => 0, 'message' => "db error"]);
+        } catch (\Exception $e) {
+
+
+            return response()->json(['status' => 0, 'message' => "something went wrong"]);
         }
-
-        return response()->json(['status' => 1, 'message' => "Event images stored successfully"]);
-        // } catch (QueryException $e) {
-
-        //     DB::rollBack();
-
-        //     return response()->json(['status' => 0, 'message' => "db error"]);
-        // } catch (\Exception $e) {
-
-
-        //     return response()->json(['status' => 0, 'message' => "something went wrong"]);
-        // }
     }
 
     public function deleteEvent(Request $request)
@@ -8280,6 +8284,7 @@ class ApiControllerv2 extends Controller
                 $postImages = getPostImages($eventDetails->id);
                 foreach ($postImages as $imgVal) {
 
+                    $postMedia['id'] =  $imgVal->id;
                     $postMedia['media_url'] = asset('public/storage/post_image/' . $imgVal->post_image);
 
                     $postMedia['type'] = $imgVal->type;
@@ -9127,6 +9132,59 @@ class ApiControllerv2 extends Controller
         // }
     }
 
+    public function postMediaReport(Request $request)
+    {
+        $user  = Auth::guard('api')->user();
+
+        $rawData = $request->getContent();
+
+        $input = json_decode($rawData, true);
+
+        if ($input == null) {
+            return response()->json(['status' => 0, 'message' => "Json invalid"]);
+        }
+
+
+        $validator = Validator::make($input, [
+            'event_id' => ['required', 'exists:events,id'],
+            'event_post_id' => ['required'],
+            'post_media_id' => ['required', 'exists:event_post_images,id'],
+
+        ]);
+
+        if ($validator->fails()) {
+
+            return response()->json([
+                'status' => 0,
+                'message' => $validator->errors()->first(),
+
+            ]);
+        }
+
+        try {
+
+            DB::beginTransaction();
+            $reportCreate = new UserReportToPost;
+            $reportCreate->event_id = $input['event_id'];
+            $reportCreate->user_id =  $user->id;
+            $reportCreate->event_post_id = $input['event_post_id'];
+            $reportCreate->post_media_id = $input['post_media_id'];
+            $reportCreate->specific_report = '1';
+            $reportCreate->save();
+            DB::commit();
+            $message = "Reported to admin for this media";
+
+            return response()->json(['status' => 1, 'message' => $message]);
+        } catch (QueryException $e) {
+
+            DB::rollBack();
+
+            return response()->json(['status' => 0, 'message' => "db error"]);
+        } catch (\Exception $e) {
+
+            return response()->json(['status' => 0, 'message' => "something went wrong"]);
+        }
+    }
     public function deletePost(Request $request)
     {
         $user  = Auth::guard('api')->user();
@@ -10295,6 +10353,7 @@ class ApiControllerv2 extends Controller
                     $rsvpUserStatus['last_name'] = $value->user->lastname;
                     $rsvpUserStatus['username'] = $value->user->firstname . ' ' . $value->user->lastname;
 
+
                     $rsvpUserStatus['profile'] = (!empty($value->user->profile) || $value->user->profile != NULL) ? asset('public/storage/profile/' . $value->user->profile) : "";
 
 
@@ -10325,6 +10384,7 @@ class ApiControllerv2 extends Controller
                         'id' => $value->user->id,
                         'profile' => empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile),
                         'bg_profile' => empty($value->user->bg_profile) ? "" : asset('public/storage/bg_profile/' . $value->user->bg_profile),
+                        'app_user' =>  $value->user->app_user,
                         'gender' => ($value->user->gender != NULL) ? $value->user->gender : "",
                         'first_name' => $value->user->firstname,
                         'last_name' => $value->user->lastname,
@@ -10540,6 +10600,10 @@ class ApiControllerv2 extends Controller
                     $addNewUser->firstname = $value['first_name'];
                     $addNewUser->email = $value['email'];
                     $addNewUser->country_code = '1';
+                    $addNewUser->app_user = '0';
+                    $addNewUser->is_user_phone_contact = '1';
+                    $addNewUser->parent_user_phone_contact = $user->id;
+
                     $addNewUser->phone_number = $value['phone_number'];
                     $addNewUser->prefer_by = $value['prefer_by'];
 
@@ -10615,6 +10679,20 @@ class ApiControllerv2 extends Controller
                     //     $faildinvitation_sent_status->save();
                     // }
                     dispatch(new sendInvitation(array($email, $eventData)));
+                }
+
+                if ($value['prefer_by'] == 'phone') {
+                    $eventInfo = Event::with(['user', 'event_image'])->where('id', $input['event_id'])->first();
+                    $notification_message = " have invited you to: " . $eventInfo->event_name;
+
+
+                    $sent = sendSMSForApplication($value['phone_number'], $notification_message);
+
+                    if ($sent == true) {
+                        $invitation_sent_status =  EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $id])->first();
+                        $invitation_sent_status->invitation_sent = '1';
+                        $invitation_sent_status->save();
+                    }
                 }
             }
         }
@@ -11795,10 +11873,13 @@ class ApiControllerv2 extends Controller
 
             $check = Device::where('user_id', $patient->id)->first();
 
+
             if ($check != null) {
                 $check->delete();
                 Token::where('user_id', $patient->id)->delete();
             }
+
+
             return response()->json(['status' => 1, 'message' => "logout succesfully"]);
         }
     }
@@ -12103,7 +12184,7 @@ class ApiControllerv2 extends Controller
                 ];
 
 
-
+                logoutFromWeb($user->id);
                 return response()->json(['status' => 1, 'data' => $detail, 'token' => $token]);
             } else {
 
@@ -12227,6 +12308,99 @@ class ApiControllerv2 extends Controller
             return response()->json(['status' => 0, 'message' => "db error"]);
         } catch (Exception  $e) {
             return response()->json(['status' => 0, 'message' => 'something went wrong']);
+        }
+    }
+
+
+
+
+
+
+
+    public function addSubscription(Request $request)
+    {
+        $rawData = $request->getContent();
+
+        $input = json_decode($rawData, true);
+
+        if ($input == null) {
+            return response()->json(['status' => 0, 'message' => "Json invalid"]);
+        }
+
+
+
+        $validator = Validator::make($input, [
+
+            'orderId' => 'required',
+            'packageName' => 'required',
+            'productId' => 'required',
+            'purchaseTime' => 'required',
+            'purchaseToken' => 'required|string',
+            // 'autoRenewing' => 'required',
+        ]);
+
+
+        if ($validator->fails()) {
+            return response()->json(
+                [
+                    'status' => 0,
+                    'message' => $validator->errors()->first()
+                ],
+            );
+        }
+
+        try {
+            $packageName = $input['packageName'];
+            $productId = $input['productId'];
+            $purchaseToken = $input['purchaseToken'];
+
+            $accessToken = getGoogleAccessToken();
+
+            $url = "https://www.googleapis.com/androidpublisher/v3/applications/{$packageName}/purchases/subscriptions/{$productId}/tokens/{$purchaseToken}?access_token={$accessToken}";
+            $response = Http::get($url);
+            dd($response);
+            $addSubscription = new UserSubscription();
+            $addSubscription->orderId = $input['orderId'];
+            $addSubscription->packageName = $input['packageName'];
+            $addSubscription->productId = $input['productId'];
+        } catch (QueryException $e) {
+            return response()->json(['status' => 0, 'message' => "db error"]);
+        } catch (Exception  $e) {
+            return response()->json(['status' => 0, 'message' => 'something went wrong']);
+        }
+    }
+
+    public function verifyPurchase(Request $request)
+    {
+        $rawData = $request->getContent();
+        $input = json_decode($rawData, true);
+        if ($input == null) {
+            return response()->json(['status' => 0, 'message' => "Json invalid"]);
+        }
+
+        $validator = Validator::make($input, [
+            'platform' => ['required', 'in:ios,android'],
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 0,
+                'message' => $validator->errors()->first(),
+            ]);
+        }
+
+        $usersubscription = UserSubscription::where(['user_id', $this->user->id])->first();
+        $userId = $this->user->id;
+        $purchaseToken = $usersubscription->purchase_token;
+        $platform = $input['platform'];
+
+        if ($platform == 'ios') {
+
+            return $this->verifyApplePurchase($userId, $purchaseToken);
+        } elseif ($platform == 'android') {
+            return $this->verifyGooglePurchase($userId, $purchaseToken);
+        } else {
+            return response()->json(['error' => 'Invalid platform'], 400);
         }
     }
 }

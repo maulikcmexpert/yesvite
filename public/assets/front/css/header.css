@@ -30,6 +30,8 @@ header.login-header {
     color: var(--primaryColor);
 }
 
+
+
 .nav-link.signIn-btn {
     padding: 9px 16px !important;
     border: 1px solid #FF5A5F;
@@ -39,8 +41,29 @@ header.login-header {
     -moz-border-radius: 8px;
     -ms-border-radius: 8px;
     -o-border-radius: 8px;
+    transition: 0.5s;
+    -webkit-transition: 0.5s;
+    -moz-transition: 0.5s;
+    -ms-transition: 0.5s;
+    -o-transition: 0.5s;
 }
 
+.login-header .signIn-btn svg path{
+    fill: var(--primaryColor);
+}
+
+.login-header .signIn-btn:hover svg path{
+    fill: #fff;
+}
+
+.nav-link.signIn-btn:hover{
+    background-color: var(--primaryColor);
+    color: #fff !important;
+    box-shadow: 0px 5px 12px 0px #CE24573D;
+}
+
+
+/* .nav-link.signUp-btn {
 .nav-link.signIn-btn:hover{
     background-color: var(--primaryColor);
     color: #fff !important;
@@ -65,6 +88,20 @@ header.login-header {
     -ms-border-radius: 8px;
     -o-border-radius: 8px;
     border: 1px solid #FF4F84;
+    transition: 0.5s;
+    -webkit-transition:;
+    -moz-transition:;
+    -ms-transition:;
+    -o-transition:;
+} */
+
+.nav-link.signUp-btn:hover{
+    background-color: transparent;
+    color: var(--primaryColor) !important;
+}
+
+.nav-link.signUp-btn:hover svg path{
+    stroke: var(--primaryColor) !important;
 }
 
 .navbar-toggler {
@@ -247,17 +284,18 @@ header.login-header {
     -o-border-radius: 6px;
 }
 
-
-
 .header-dropdown .dropdown-menu{
     transform: translate(-35px, 15px) !important;
     -webkit-transform: translate(-35px, 15px) !important;
     -moz-transform: translate(-35px, 15px) !important;
     -ms-transform: translate(-35px, 15px) !important;
     -o-transform: translate(-35px, 15px) !important;
+    padding: 10px 15px;
 }
 
-
+.navbar-collapse.d-none{
+    display: none !important;
+}
 
 .navbar-collapse.d-none{
     display: none !important;

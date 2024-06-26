@@ -23,6 +23,9 @@
                 {
                     data: "post_type",
                     name: "post_type"
+                }, {
+                    data: "action",
+                    name: "action"
                 }
 
             ],

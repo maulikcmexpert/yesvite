@@ -87,7 +87,6 @@
                             <div class="row">
                                 <div class="checkboxes-wrp">
                                     <div class="tile {{(in_array('#DB5B5B',$getDesignColors))?'selected':''}}">
-
                                         <input type="checkbox" id="effect_one" class="form-check-input newcheckbox event_design_color" name="event_design_color[]" value="#DB5B5B" {{(in_array('#DB5B5B',$getDesignColors))?"checked":""}}>
                                         <label for="effect_one">
                                             <div class="color-box" style="background-color: #DB5B5B;"></div>

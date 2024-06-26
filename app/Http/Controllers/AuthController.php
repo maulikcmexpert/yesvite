@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Device;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as Exception;
 use Illuminate\Support\Facades\DB;
@@ -20,6 +21,8 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
 use Flasher\Prime\FlasherInterface;
+use Laravel\Passport\Token;
+use GuzzleHttp\Client;
 
 class AuthController extends Controller
 {
@@ -28,6 +31,42 @@ class AuthController extends Controller
      */
 
 
+    function redirectToGoogle()
+    {
+        $query = http_build_query([
+            'client_id' => env('InGOOGLE_CLIENT_ID'),
+            'redirect_uri' => env('InGOOGLE_REDIRECT_URI'),
+            'response_type' => 'code',
+            'scope' => 'https://www.googleapis.com/auth/androidpublisher',
+            'access_type' => 'offline',
+        ]);
+
+        return redirect("https://accounts.google.com/o/oauth2/auth?{$query}");
+    }
+
+    public function handleGoogleCallback(Request $request)
+    {
+        $http = new Client();
+
+        $response = $http->post('https://oauth2.googleapis.com/token', [
+            'form_params' => [
+                'code' => $request->input('code'),
+                'client_id' => env('InGOOGLE_CLIENT_ID'),
+                'client_secret' => env('InGOOGLE_CLIENT_SECRET'),
+                'redirect_uri' => env('InGOOGLE_REDIRECT_URI'),
+                'grant_type' => 'authorization_code',
+            ],
+        ]);
+
+        $data = json_decode($response->getBody()->getContents(), true);
+
+        $refreshToken = $data['refresh_token'];
+
+        // Store the refresh token securely, for example in the database
+        // Auth::user()->update(['google_refresh_token' => $refreshToken]);
+
+        return response()->json(['refresh_token' => $refreshToken]);
+    }
     public function index()
     {
     }
@@ -192,6 +231,7 @@ class AuthController extends Controller
 
                 if (Session::has('user')) {
 
+
                     if ($remember) {
                         Cookie::queue('email', $user->email, 120);
                         Cookie::queue('password', $request->password, 120);
@@ -200,6 +240,8 @@ class AuthController extends Controller
                         Cookie::forget('email');
                         Cookie::forget('password');
                     }
+
+                    $this->logoutFromApplication($user->id);
                     event(new \App\Events\UserRegistered($user));
 
                     return redirect()->route('home')->with('success', 'Logged in successfully!');
@@ -222,8 +264,8 @@ class AuthController extends Controller
                     $message->to($user->email);
                     $message->subject('Email Verification Mail');
                 });
-                toastr()->success('Please check and verify your email address.');
-                return  Redirect::to('login');
+
+                return  Redirect::to('login')->with('success', 'Please check and verify your email address.');
             }
         }
         return  Redirect::to('login')->with('error', 'Email or Password invalid!');
@@ -234,6 +276,19 @@ class AuthController extends Controller
     {
         return User::select('account_type')->where('id', $userId)->first();
     }
+
+
+
+
+    public function currentUserLogin($currentLogUser)
+    {
+        Auth::guard('web')->login($currentLogUser);
+
+        $prevUserLogin =  Auth::guard('web')->user();
+        $prevUserLogin->current_session_id = Session::getId();
+        $prevUserLogin->save();
+    }
+
     public function checkAddAccount(Request $request)
     {
 
@@ -248,27 +303,36 @@ class AuthController extends Controller
         ]);
 
 
+        $currentLogUser = User::where('id', Auth::id())->firstOrFail();
+        Auth::logout();
+
+
+
         $remember = $request->has('remember'); // Check if "Remember Me" checkbox is checked
 
         if (Auth::attempt($credentials, $remember)) {
-            $user = Auth::guard('web')->user();
-            if ($user->email_verified_at != NULL) {
+
+            $secondUser = Auth::guard('web')->user();
+
+            if ($secondUser->email_verified_at != NULL) {
+
+                Session::regenerate();
+                $secondUser->current_session_id = Session::getId();
+                $secondUser->save();
 
 
-                $checkType = $this->getUserAccountType(decrypt(Session::get('user')['id']));
-
-                if ($checkType->account_type == $user->account_type) {
-                    $loginUser = User::where('id', decrypt(Session::get('user')['id']))->first();
+                if ($currentLogUser->account_type == $secondUser->account_type) {
 
 
-                    if ($loginUser != null) {
 
-                        Auth::login($loginUser);
+                    if ($currentLogUser != null) {
+                        Auth::guard('web')->logout();
+                        $this->currentUserLogin($currentLogUser);
                     }
                     $msg = "";
-                    if ($checkType->account_type == '0') {
+                    if ($currentLogUser->account_type == '0') {
                         $msg = "personal";
-                    } else if ($checkType->account_type == '1') {
+                    } else if ($currentLogUser->account_type == '1') {
                         $msg = "proffiesional";
                     }
 
@@ -276,18 +340,18 @@ class AuthController extends Controller
                     return  Redirect::to('profile')->with('error', 'You have already login ' . $msg);
                 }
 
-                $alreadyLog = User::select('id', 'firstname', 'lastname', 'email', 'profile')->where('id', decrypt(Session::get('user')['id']))->first();
-                if ($alreadyLog != null) {
 
-                    $alreadyLog['profile'] = ($alreadyLog->profile != null) ? asset('storage/profile/' . $alreadyLog->profile) : "";
+                if ($currentLogUser != null) {
+
+                    $currentLogUser['profile'] = ($currentLogUser->profile != null) ? asset('storage/profile/' . $currentLogUser->profile) : "";
 
                     $sessionAlreadyArray = [
-                        'id' => encrypt($alreadyLog->id),
-                        'first_name' => $alreadyLog->firstname,
-                        'last_name' => $alreadyLog->lastname,
-                        'secondary_username' => $alreadyLog->firstname . ' ' . $alreadyLog->lastname,
-                        'secondary_email' => $alreadyLog->email,
-                        'secondary_profile' => $alreadyLog->profile,
+                        'id' => encrypt($currentLogUser->id),
+                        'first_name' => $currentLogUser->firstname,
+                        'last_name' => $currentLogUser->lastname,
+                        'secondary_username' => $currentLogUser->firstname . ' ' . $currentLogUser->lastname,
+                        'secondary_email' => $currentLogUser->email,
+                        'secondary_profile' => $currentLogUser->profile,
 
                     ];
                     Session::put(['secondary_user' => $sessionAlreadyArray]);
@@ -295,59 +359,104 @@ class AuthController extends Controller
                 }
 
                 $sessionArray = [
-                    'id' => encrypt($user->id),
-                    'first_name' => $user->firstname,
-                    'last_name' => $user->lastname,
-                    'username' => $user->firstname . ' ' . $user->lastname,
-                    'email' => $user->email,
-                    'profile' => ($user->profile != NULL || $user->profile != "") ? asset('storage/profile/' . $user->profile) : ""
+                    'id' => encrypt($secondUser->id),
+                    'first_name' => $secondUser->firstname,
+                    'last_name' => $secondUser->lastname,
+                    'username' => $secondUser->firstname . ' ' . $secondUser->lastname,
+                    'email' => $secondUser->email,
+                    'profile' => ($secondUser->profile != NULL || $secondUser->profile != "") ? asset('storage/profile/' . $secondUser->profile) : ""
                 ];
                 Session::put(['user' => $sessionArray]);
                 if (Session::has('user')) {
 
-                    Session::regenerate();
-                    $user->current_session_id = Session::getId();
-                    $user->save();
-
                     if ($remember) {
-                        Cookie::queue('email', $user->email, 120);
+                        Cookie::queue('email', $secondUser->email, 120);
                         Cookie::queue('password', $request->password, 120);
                     } else {
 
                         Cookie::forget('email');
                         Cookie::forget('password');
                     }
-                    event(new \App\Events\UserRegistered($user));
+                    event(new \App\Events\UserRegistered($secondUser));
+                    $this->logoutFromApplication($secondUser->id);
                     return redirect()->route('home')->with('success', 'Logged in successfully!');
                 } else {
 
                     return  Redirect::to('login')->with('error', 'Invalid credentials!');
                 }
             } else {
+                $this->currentUserLogin($currentLogUser);
                 $randomString = Str::random(30);
-                $user->remember_token = $randomString;
-                $user->save();
+                $secondUser->remember_token = $randomString;
+                $secondUser->save();
 
                 $userData = [
-                    'username' => $user->firstname . ' ' . $user->lastname,
-                    'first_name' => $user->firstname,
-                    'last_name' => $user->lastname,
-                    'email' => $user->email,
+                    'username' => $secondUser->firstname . ' ' . $secondUser->lastname,
+                    'first_name' => $secondUser->firstname,
+                    'last_name' => $secondUser->lastname,
+                    'email' => $secondUser->email,
                     'token' => $randomString,
-                    'is_first_login' => $user->is_first_login
+                    'is_first_login' => $secondUser->is_first_login
                 ];
-                Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($user) {
-                    $message->to($user->email);
+                Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($secondUser) {
+                    $message->to($secondUser->email);
                     $message->subject('Email Verification Mail');
                 });
-                toastr()->success('Please check and verify your email address.');
-                return  Redirect::to('login');
+
+                return  Redirect::to('add_account')->with('success', 'Please check and verify your email address.');
             }
         }
 
-        return  Redirect::to('home')->with('error', 'Email or Passqword invalid');
+        $this->currentUserLogin($currentLogUser);
+
+        return  Redirect::to('profile')->with('error', 'Email or Password invalid');
     }
 
+
+    public function switchAccount($id)
+    {
+        $currentLogUser = User::where('id', Auth::id())->firstOrFail();
+
+
+        $currentLogUser['profile'] = ($currentLogUser->profile != null) ? asset('storage/profile/' . $currentLogUser->profile) : "";
+
+        $id = decrypt($id);
+        $checkUser = User::where('id', $id)->first();
+        if ($checkUser != null) {
+            Auth::logout();
+
+            $sessionAlreadyArray = [
+                'id' => encrypt($currentLogUser->id),
+                'first_name' => $currentLogUser->firstname,
+                'last_name' => $currentLogUser->lastname,
+                'secondary_username' => $currentLogUser->firstname . ' ' . $currentLogUser->lastname,
+                'secondary_email' => $currentLogUser->email,
+                'secondary_profile' => $currentLogUser->profile,
+
+            ];
+            Session::put(['secondary_user' => $sessionAlreadyArray]);
+            Session::forget('user');
+
+            Auth::loginUsingId($id);
+            $switchAccount =  Auth::guard('web')->user();
+            $switchAccount->current_session_id = Session::getId();
+            $switchAccount->save();
+
+            $sessionArray = [
+                'id' => encrypt($switchAccount->id),
+                'first_name' => $switchAccount->firstname,
+                'last_name' => $switchAccount->lastname,
+                'username' => $switchAccount->firstname . ' ' . $switchAccount->lastname,
+                'email' => $switchAccount->email,
+                'profile' => ($switchAccount->profile != NULL || $switchAccount->profile != "") ? asset('storage/profile/' . $switchAccount->profile) : ""
+            ];
+            Session::put(['user' => $sessionArray]);
+
+            $this->logoutFromApplication($switchAccount->id);
+            return redirect()->route('home')->with('success', 'Logged in successfully!');
+        }
+        return redirect()->route('profile')->with('error', 'Logged faild!');
+    }
 
     public function addAccount()
     {
@@ -400,6 +509,20 @@ class AuthController extends Controller
             return response()->json(false);
         } else {
             return response()->json(true);
+        }
+    }
+
+    public function logoutFromApplication($id)
+    {
+
+
+
+        $check = Device::where('user_id', $id)->first();
+
+
+        if ($check != null) {
+            $check->delete();
+            Token::where('user_id', $id)->delete();
         }
     }
 }

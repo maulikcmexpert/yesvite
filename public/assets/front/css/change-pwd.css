@@ -49,6 +49,15 @@
     text-align: right;
     color: #2DA9FC;
     font-size: 14px;
+    transition: 0.5s;
+    -webkit-transition: 0.5s;
+    -moz-transition: 0.5s;
+    -ms-transition: 0.5s;
+    -o-transition: 0.5s;
+}
+
+.change-password .login-form-wrap a:hover{
+    color: var(--primaryColor);
 }
 
 

@@ -45,7 +45,16 @@ class ChatController extends Controller
         ];
 
         // Create a new user node with the userId
-        $usersRef = $this->usersReference->getChild((string)$userId)->set($updateData);
+        $userRef = $this->usersReference->getChild((string)$userId);
+        $userSnapshot = $userRef->getValue();
+
+        if ($userSnapshot) {
+            // User exists, update the existing data
+            $userRef->update($updateData);
+        } else {
+            // User does not exist, create a new user node
+            $userRef->set($updateData);
+        }
 
         $reference = $this->firebase->getReference('overview/' . $userId);
         $messages = $reference->getValue();

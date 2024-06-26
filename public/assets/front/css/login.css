@@ -1,6 +1,6 @@
 .login-wrapper {
     width: 100%;
-    max-width: 565px;
+    /* max-width: 565px; */
     margin: 0 auto;
     padding: 80px 0;
     border-bottom: 1px solid var(--borderColor);
@@ -226,6 +226,15 @@
     font-weight: 500;
     text-decoration: underline !important;
     margin-left: 5px;
+    transition: 0.5s;
+    -webkit-transition: 0.5s;
+    -moz-transition: 0.5s;
+    -ms-transition: 0.5s;
+    -o-transition: 0.5s;
+}
+
+.term-link a:hover{
+    color: var(--primaryColor);
 }
 
 

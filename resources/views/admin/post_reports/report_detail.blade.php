@@ -842,8 +842,8 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right w-100">
                         <li class="breadcrumb-item"><a href="{{URL::to('/admin/dashboard')}}">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="{{URL::to('/admin/events')}}">Event Lists</a></li>
-                        <li class="breadcrumb-item"><a href="{{route('events.show',$event_id)}}">Event Detail</a></li>
+                        <li class="breadcrumb-item"><a href="{{URL::to('/admin/user_post_report')}}">User Post Reports</a></li>
+
 
                         <li class="breadcrumb-item active">{{$title}}</li>
                     </ol>
@@ -858,8 +858,8 @@
     </div>
     <div class="eventWrpper mb-5">
         <div class="row">
+            @if($reportDetail != NULL)
 
-            @foreach($getPosts as $postKey=>$postVal)
 
             <div class="col-md-6 mb-4">
                 <div class="event_postsmain">
@@ -867,14 +867,30 @@
                         <div class="col-md-12">
                             <div class="row">
 
+                                @if($reportDetail->specific_report == '1')
 
-                                @if($postVal->post_type == '1')
+                                <!-- image -->
+                                @if($reportDetail->post_image->type == 'image')
+                                <img src="{{ asset('storage/post_image/'.$reportDetail->post_image->post_image)}}">
+                                @endif
+                                <!-- image -->
+
+                                <!-- video -->
+                                @if($reportDetail->post_image->type == 'video')
+
+                                @endif
+                                <!-- video -->
+                                @else
+
+                                @if($reportDetail->event_posts->post_type == '1')
+
+
                                 <div class="col-xl-6 col-lg-12 col-md-12">
                                     <div class="event_posts_left">
                                         <div class="product-images demo-gallery">
                                             <!-- Begin Product Images Slider -->
                                             <div class="main-img-slider">
-                                                @foreach($postVal->post_image as $key=>$postImg)
+                                                @foreach($reportDetail->event_posts->post_image as $key=>$postImg)
                                                 <a data-fancybox="gallery" href="{{ asset('public/storage/post_image/'.$postImg->post_image)}}"><img src="{{ asset('public/storage/post_image/'.$postImg->post_image)}}" /></a>
                                                 @endforeach
                                             </div>
@@ -883,17 +899,17 @@
                                     </div>
                                 </div>
                                 @endif
-                                @if($postVal->post_type == '2')
+                                @if($reportDetail->event_posts->post_type == '2')
                                 <div class="col-xl-6 col-lg-12 col-md-12">
                                     <main id="app">
                                         <div class="post">
                                             <section class="poll">
                                                 <p class="poll-details">
-                                                    {{$postVal->event_post_poll->poll_question }} • Ends in
-                                                    {{$postVal->event_post_poll->poll_duration}}
+                                                    {{$reportDetail->event_posts->event_post_poll->poll_question }} • Ends in
+                                                    {{$reportDetail->event_posts->event_post_poll->poll_duration}}
                                                 </p>
                                                 <ul class="poll-choices p-0">
-                                                    @foreach($postVal->event_post_poll->event_poll_option as $optionVal)
+                                                    @foreach($reportDetail->event_posts->event_post_poll->event_poll_option as $optionVal)
                                                     <li class="poll-choice choice-1">
                                                         <label for="choice-1">
                                                             <div class="poll-result">
@@ -905,8 +921,9 @@
                                                                 <div class="answer">{{$optionVal->option}}</div>
                                                             </div>
                                                             <div class="progress">
-                                                                <div class="progress-bar" style="width: <?= round(getOptionTotalVote($optionVal->id) * 100 / getTotalEventInvitedUser($postVal->event_id)); ?>%">
-                                                                    <?= round(getOptionTotalVote($optionVal->id) * 100 / getTotalEventInvitedUser($postVal->event_id)) . "%"; ?>
+
+                                                                <div class="progress-bar" style="width: <?= round(getOptionTotalVote($optionVal->id) / getOptionAllTotalVote($reportDetail->event_posts->event_post_poll->id) * 100); ?>%">
+                                                                    <?= round(getOptionTotalVote($optionVal->id) / getOptionAllTotalVote($reportDetail->event_posts->event_post_poll->id) * 100) . "%"; ?>
                                                                 </div>
                                                             </div>
                                                         </label>
@@ -918,9 +935,9 @@
                                     </main>
                                 </div>
                                 @endif
-                                @if($postVal->post_type == '3')
+                                @if($reportDetail->event_posts->post_type == '3')
                                 <div class="col-xl-6 col-lg-12 col-md-12">
-                                    <div class="aWrap" data-src="{{ asset('public/storage/event_post_recording/'.$postVal->post_recording)}}">
+                                    <div class="aWrap" data-src="{{ asset('public/storage/event_post_recording/'.$reportDetail->event_posts->post_recording)}}">
                                         <button class="aPlay" disabled><span class="aPlayIco"><i class="fa fa-play"></i></span></button>
                                         <div class="range">
                                             <span class="under-ranger"></span>
@@ -939,36 +956,33 @@
                                     </div>
                                 </div>
                                 @endif
-
+                                @endif
                                 <div class="col-xl-6 col-lg-12 col-md-12">
                                     <div class="event_posts_right">
                                         <div class="event_posts_right_content">
-                                            <p>
-                                                {{ $postVal->post_message}}
-                                            </p>
+                                            <h6>
+                                                {{ $reportDetail->event_posts->post_message}}
+                                            </h6>
                                             <!-- <button>Read More</button> -->
                                         </div>
-                                        <div class="">
-                                            <ul>
-                                                <li>
-                                                    <a href="#" type="button" data-toggle="modal" data-target="#like-modal">
-                                                        <i class="fa fa-heart" aria-hidden="true"></i>{{$postVal->event_post_reaction_count}}
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="#" type="button" data-toggle="modal" data-target="#comment-modal">
-                                                        <i class="fa fa-comment" aria-hidden="true"></i>{{$postVal->event_post_comment_count}}
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
+
                                         <div class="event_posts_creator">
-                                            <div class="event_posts_creator_img">
-                                                <img src="{{ asset('public/storage/profile/'.$postVal->user->profile)}}" alt="placeholder image" />
+
+
+                                            <div class="event_posts_creator_img user-img">
+                                                @if($reportDetail->event_posts->user->profile != "")
+                                                <img src="{{ asset('storage/profile/'.$reportDetail->event_posts->user->profile)}}" alt="placeholder image" />
+                                                @else
+                                                @php $initials = strtoupper($reportDetail->event_posts->user->firstname[0]) . strtoupper($reportDetail->event_posts->user->lastname[0]);
+
+                                                $fontColor = "fontcolor" . strtoupper($reportDetail->event_posts->user->firstname[0]);
+                                                @endphp
+                                                <h5 class="{{$fontColor}}"> {{ $initials }}</h5>
+                                                @endif
                                             </div>
                                             <div class="event_posts_creator_content">
-                                                <h6>{{$postVal->user->firstname.' '.$postVal->user->lastname}}</h6>
-                                                <p>{{$postVal->posttime}}</p>
+                                                <h6>{{$reportDetail->event_posts->user->firstname.' '.$reportDetail->event_posts->user->lastname}}</h6>
+                                                <p>{{$reportDetail->posttime}}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -979,7 +993,63 @@
                 </div>
             </div>
 
-            @endforeach
+
+            @endif
+            <div class="col-md-6 mb-4">
+                <div class="event_postsmain">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row">
+
+                                <div class="col-lg-12 col-md-12">
+                                    <div class="event_posts_right ">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="event_posts_right_content">
+                                                    <h6>
+                                                        Event Name
+                                                    </h6>
+                                                    <h5>{{$reportDetail->events->event_name}}</h5>
+
+                                                    <!-- <button>Read More</button> -->
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="event_posts_right_content">
+                                                    <h6>
+                                                        Reborted By <span>({{ $reportDetail->created_at }})</span>
+                                                    </h6>
+                                                    <div class="event_posts_creator">
+
+
+                                                        <div class="event_posts_creator_img user-img">
+                                                            @if($reportDetail->users->profile != "")
+                                                            <img src="{{ asset('storage/profile/'.$reportDetail->users->profile)}}" alt="placeholder image" />
+                                                            @else
+                                                            @php $initials = strtoupper($reportDetail->users->firstname[0]) . strtoupper($reportDetail->users->lastname[0]);
+
+                                                            $fontColor = "fontcolor" . strtoupper($reportDetail->users->firstname[0]);
+                                                            @endphp
+                                                            <h5 class="{{$fontColor}}"> {{ $initials }}</h5>
+                                                            @endif
+                                                        </div>
+                                                        <div class="event_posts_creator_content">
+                                                            <h6>{{$reportDetail->users->firstname.' '.$reportDetail->users->lastname}}</h6>
+                                                            <p>{{$reportDetail->report_posttime}}</p>
+                                                        </div>
+                                                    </div>
+                                                    <!-- <button>Read More</button> -->
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>

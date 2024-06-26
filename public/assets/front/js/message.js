@@ -125,6 +125,8 @@ const senderUserName = $(".senderUserName").val();
 const base_url = $("#base_url").val();
 const userRef = ref(database, `users/${senderUser}`);
 let replyMessageId = null; // Global variable to hold the message ID to reply to
+let fileType = null; // Global variable to hold the message ID to reply to
+let WaitNewConversation = null; // Global variable to hold the message ID to reply to
 // Function to get messages between two users
 async function getMessages(userId1, userId2) {
     const messagesRef = ref(database, "Messages");
@@ -240,6 +242,7 @@ async function handleNewConversation(snapshot) {
     const conversationElement = document.getElementsByClassName(
         `conversation-${newConversation.conversationId}`
     );
+
     let userStatus = "";
     if (newConversation.group !== "true" && newConversation.group !== true) {
         let userId = newConversation.contactId;
@@ -288,6 +291,11 @@ async function handleNewConversation(snapshot) {
             badgeElement.removeClass("d-none");
         }
     } else {
+        if (WaitNewConversation == newConversation.conversationId) {
+            return;
+        }
+        WaitNewConversation = newConversation.conversationId;
+
         // Add new conversation element
         $.ajax({
             url: base_url + "getConversation",
@@ -309,7 +317,7 @@ async function handleNewConversation(snapshot) {
     // $("#isGroup").val(newConversation.group);
     // console.log(newConversation.group);
     if (selectedConversationId === newConversation.conversationId) {
-        updateOverview(senderUser, newConversation.conversationId, {
+        await updateOverview(senderUser, newConversation.conversationId, {
             unRead: false,
             unReadCount: 0,
         });
@@ -368,6 +376,42 @@ async function updateChat(user_id) {
     const selecteduserTypeRef = ref(database, `users/${user_id}`);
     off(messagesRef);
     off(selecteduserTypeRef);
+
+    // Check if the user is blocked by or has blocked the current user
+    let isBlockedByMe = false;
+    let isBlockedByUser = false;
+
+    const blockByMeRef = ref(database, `users/${senderUser}/blockByMe`);
+    const blockByUserRef = ref(database, `users/${user_id}/blockByUser`);
+
+    const [blockByMeSnapshot, blockByUserSnapshot] = await Promise.all([
+        get(blockByMeRef),
+        get(blockByUserRef),
+    ]);
+
+    if (blockByMeSnapshot.exists()) {
+        const blockByMeList = blockByMeSnapshot.val();
+        isBlockedByMe = blockByMeList.includes(user_id);
+    }
+
+    if (blockByUserSnapshot.exists()) {
+        const blockByUserList = blockByUserSnapshot.val();
+        isBlockedByUser = blockByUserList.includes(senderUser);
+    }
+
+    if (isBlockedByMe || isBlockedByUser) {
+        $(".msg-footer").hide();
+    } else {
+        $(".msg-footer").show();
+    }
+    console.log(isBlockedByMe);
+    if (isBlockedByMe) {
+        $(".block-conversation").find("span").text("Unblock");
+    } else {
+        $(".block-conversation").find("span").text("Block");
+    }
+    $(".block-conversation").attr("blocked", isBlockedByMe);
+
     onChildAdded(messagesRef, async (snapshot) => {
         addMessageToList(snapshot.key, snapshot.val(), conversationId);
 
@@ -402,6 +446,7 @@ async function updateChat(user_id) {
         }
     });
     updateMore(conversationId);
+    updateUnreadMessageBadge();
 }
 var SelecteGroupUser = [];
 async function updateChatfromGroup(conversationId) {
@@ -454,6 +499,7 @@ async function updateChatfromGroup(conversationId) {
     await addListInMembers(SelecteGroupUser);
     $(".selected-title").html(groupInfo.groupName);
     updateMore(conversationId);
+    updateUnreadMessageBadge();
 }
 
 $(".conversationId").click(function () {
@@ -493,33 +539,140 @@ async function updateMore(conversationId) {
     const overviewSnapshot = await get(
         ref(database, `overview/${senderUser}/${conversationId}`)
     );
+    const isGroup = $("#isGroup").val();
+    if (isGroup == "true" || isGroup == true || isGroup == "1") {
+        $(".block-conversation").hide();
+    } else {
+        $(".block-conversation").show();
+    }
     const overviewData = overviewSnapshot.val();
     if (overviewData) {
+        $(".pin-conversation").attr("changeWith", "1");
+        $(".mute-conversation").attr("changeWith", "1");
+        $(".archive-conversation").attr("changeWith", "1");
+        $(".block-conversation").attr("user", overviewData.contactId);
+
         if (overviewData.isPin != undefined) {
             $(".pin-conversation")
                 .find("span")
                 .text(overviewData.isPin == "1" ? "Unpin" : "Pin");
-            $(".pin-conversation").data(
+            $(".pin-conversation").attr(
                 "changeWith",
                 overviewData.isPin == "1" ? "0" : "1"
+            );
+        }
+        if (overviewData.isMute != undefined) {
+            $(".mute-conversation")
+                .find("span")
+                .text(overviewData.isMute == "1" ? "Unmute" : "Mute");
+            $(".mute-conversation").attr(
+                "changeWith",
+                overviewData.isMute == "1" ? "0" : "1"
+            );
+        }
+        if (overviewData.isArchive != undefined) {
+            $(".archive-conversation")
+                .find("span")
+                .text(overviewData.isArchive == "1" ? "Unarchive" : "Archive");
+            $(".archive-conversation").attr(
+                "changeWith",
+                overviewData.isArchive == "1" ? "0" : "1"
             );
         }
     }
 }
 
 $(".pin-conversation").click(function () {
-    const pinChange = $(this).data("changeWith");
+    const pinChange = $(this).attr("changeWith");
     let conversationId = $(".conversationId").attr("conversationId");
     const overviewRef = ref(
         database,
-        `overview/${senderUser}/${conversationId}`
+        `overview/${senderUser}/${conversationId}/isPin`
     );
-    update(overviewRef, { isPin: pinChange });
+    set(overviewRef, pinChange);
     $(this)
         .find("span")
         .text(pinChange == "1" ? "Unpin" : "Pin");
-    $(this).data("changeWith", pinChange == "1" ? "0" : "1");
+    $(this).attr("changeWith", pinChange == "1" ? "0" : "1");
     if (pinChange == "1") {
+        const conversationElement = $(`.conversation-${conversationId}`);
+        conversationElement.prependTo(".chat-list");
+    }
+});
+
+$(".mute-conversation").click(function () {
+    const change = $(this).attr("changeWith");
+    let conversationId = $(".conversationId").attr("conversationId");
+    const overviewRef = ref(
+        database,
+        `overview/${senderUser}/${conversationId}/isMute`
+    );
+    set(overviewRef, change);
+    $(this)
+        .find("span")
+        .text(change == "1" ? "Unmute" : "Mute");
+    $(this).attr("changeWith", change == "1" ? "0" : "1");
+    if (change == "1") {
+        const conversationElement = $(`.conversation-${conversationId}`);
+        conversationElement.prependTo(".chat-list");
+    }
+});
+$(".block-conversation").click(async function () {
+    const userId = $(this).attr("user");
+    const blocked = $(this).attr("blocked") === "true"; // Convert string to boolean
+
+    // References to block lists
+    let userRef = ref(database, `users/${senderUser}/blockByMe`);
+    let blockuserRef = ref(database, `users/${userId}/blockByUser`);
+
+    // Get the current block lists
+    let usersSnapshot = await get(userRef);
+    let BlockusersSnapshot = await get(blockuserRef);
+
+    let users = usersSnapshot.exists() ? usersSnapshot.val() : [];
+    let blockUsers = BlockusersSnapshot.exists()
+        ? BlockusersSnapshot.val()
+        : [];
+
+    if (blocked) {
+        // Unblock the user
+        users = users.filter((id) => id !== userId);
+        blockUsers = blockUsers.filter((id) => id !== senderUser);
+        console.log(`User ${userId} has been unblocked by ${senderUser}`);
+    } else {
+        // Block the user
+        if (!users.includes(userId)) {
+            users.push(userId);
+        }
+        if (!blockUsers.includes(senderUser)) {
+            blockUsers.push(senderUser);
+        }
+        console.log(`User ${userId} has been blocked by ${senderUser}`);
+    }
+
+    // Update the block lists in Firebase
+    await set(userRef, users);
+    await set(blockuserRef, blockUsers);
+
+    // Update the 'blocked' attribute for future clicks
+    $(this).attr("blocked", !blocked);
+    let conversationid = $(".conversationId").attr("conversationid");
+    $(".conversation-" + conversationid).click();
+});
+
+$(".archive-conversation").click(function () {
+    const change = $(this).attr("changeWith");
+    let conversationId = $(".conversationId").attr("conversationId");
+    const overviewRef = ref(
+        database,
+        `overview/${senderUser}/${conversationId}/isArchive`
+    );
+    set(overviewRef, change);
+    $(this)
+        .find("span")
+        .text(change == "1" ? "Unarchive" : "Archive");
+    $(this).attr("changeWith", change == "1" ? "0" : "1");
+    if (change == "1") {
         const conversationElement = $(`.conversation-${conversationId}`);
         conversationElement.prependTo(".chat-list");
     }
@@ -553,9 +706,10 @@ $(".send-message").on("keyup", async function (e) {
 $(".send-message").on("keypress", async function (e) {
     update(userRef, { userTypingStatus: "Typing..." });
     if (e.which === 13) {
-        var isGroup = $("#isGroup").val();
-        const message = $(this).val();
         const conversationId = $(".selected_id").val();
+        var isGroup = $(".conversation-" + conversationId).attr("data-group");
+        $("#isGroup").val(isGroup);
+        const message = $(this).val();
         let downloadURL = "";
         let type = "";
         $(".preview_img").hide();
@@ -566,18 +720,21 @@ $(".send-message").on("keypress", async function (e) {
         const audioUrl = previewAudio.attr("src");
 
         const audio = $("#file_name").text();
-
         if (imageUrl) {
             // Determine file type and set the storage path
             let storagePath;
             if (imageUrl.startsWith("data:image/")) {
                 storagePath = `Images/${senderUser}/${Date.now()}_${senderUser}-img.png`;
+                type = "1";
             } else if (imageUrl.startsWith("blob:http:/") && audio != "audio") {
                 storagePath = `Video/${senderUser}/${Date.now()}_${senderUser}-video.mp4`;
+                type = "2";
             } else if (imageUrl.startsWith("blob:http:/") && audio == "audio") {
                 storagePath = `Audios/${senderUser}/${Date.now()}_${senderUser}-audio.wav`;
+                type = "3";
             } else {
                 storagePath = `Files/${senderUser}/${Date.now()}_${senderUser}-file.${fileType}`;
+                type = "4";
             }
             // Upload file to Firebase Storage
             const fileRef = storageRef(storage, storagePath);
@@ -590,7 +747,6 @@ $(".send-message").on("keypress", async function (e) {
                     await uploadBytes(fileRef, blob);
                 }
                 downloadURL = await getDownloadURL(fileRef);
-                type = "1";
             } catch (e) {}
         } else if (audioUrl) {
             $("#playRecording").hide();
@@ -796,9 +952,9 @@ function UpdateMessageToList(key, messageData, conversationId) {
 }
 function addMessageToList(key, messageData, conversationId) {
     if ($(".selected_conversasion").val() != conversationId) {
+        console("selectedisnotvalid");
         return;
     }
-
     let isGroup = $("#isGroup").val();
     if (
         messageData?.isDelete != undefined &&
@@ -827,7 +983,11 @@ function addMessageToList(key, messageData, conversationId) {
 function createMessageElement(key, messageData, isGroup) {
     const isSender = senderUser == messageData.senderId;
     const isReceiver = senderUser != messageData.senderId;
-    if (SelecteGroupUser[messageData.senderId] == undefined) {
+    if (
+        (isGroup == "true" || isGroup == true) &&
+        SelecteGroupUser[messageData.senderId] == undefined
+    ) {
+        console.log(SelecteGroupUser[messageData.senderId]);
         return;
     }
     const senderName =
@@ -876,11 +1036,23 @@ function createMessageElement(key, messageData, isGroup) {
                   )
                 : "";
     }
+
+    let emojiAndReplay = isReceiver
+        ? `
+      <span class="reaction-icon" data-message-id="${key}"><svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M7.5 8H7.51M13.5 8H13.51M8 13C8.32588 13.3326 8.71485 13.5968 9.14413 13.7772C9.57341 13.9576 10.0344 14.0505 10.5 14.0505C10.9656 14.0505 11.4266 13.9576 11.8559 13.7772C12.2852 13.5968 12.6741 13.3326 13 13M19.5 10C19.5 14.9706 15.4706 19 10.5 19C5.52944 19 1.5 14.9706 1.5 10C1.5 5.02944 5.52944 1 10.5 1C15.4706 1 19.5 5.02944 19.5 10Z" stroke="#CBD5E1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg></span>
+      <span class="reply-icon" data-message-id="${key}"><svg width="15" height="12" viewBox="0 0 15 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M5.89687 3.31028V0.238281L0.296875 5.61428L5.89687 10.9903V7.84148C9.89687 7.84148 12.6969 9.07028 14.6969 11.7583C13.8969 7.91828 11.4969 4.07828 5.89687 3.31028Z" fill="#CBD5E1"/>
+</svg></span>`
+        : "";
     dataWithMedia =
         messageData?.type == "1"
             ? `<div class="media-msg">
                 <img src="${messageData?.url}"/>
-                <span>${messageData?.data != "" ? messageData.data : ""}</span>
+                <span class="media-text">${
+                    messageData?.data != "" ? messageData.data : ""
+                }</span>
                  ${
                      isSender
                          ? `<span class="seenStatus ${seenStatus}"></span>`
@@ -910,43 +1082,44 @@ function createMessageElement(key, messageData, isGroup) {
                             : ""
                     }
                 </p>
-                ${
-                    isReceiver
-                        ? `
-                          <span class="reaction-icon" data-message-id="${key}"><svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M7.5 8H7.51M13.5 8H13.51M8 13C8.32588 13.3326 8.71485 13.5968 9.14413 13.7772C9.57341 13.9576 10.0344 14.0505 10.5 14.0505C10.9656 14.0505 11.4266 13.9576 11.8559 13.7772C12.2852 13.5968 12.6741 13.3326 13 13M19.5 10C19.5 14.9706 15.4706 19 10.5 19C5.52944 19 1.5 14.9706 1.5 10C1.5 5.02944 5.52944 1 10.5 1C15.4706 1 19.5 5.02944 19.5 10Z" stroke="#CBD5E1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-</svg></span>
-                          <span class="reply-icon" data-message-id="${key}"><svg width="15" height="12" viewBox="0 0 15 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M5.89687 3.31028V0.238281L0.296875 5.61428L5.89687 10.9903V7.84148C9.89687 7.84148 12.6969 9.07028 14.6969 11.7583C13.8969 7.91828 11.4969 4.07828 5.89687 3.31028Z" fill="#CBD5E1"/>
-</svg></span>`
-                        : ""
-                }
+                ${emojiAndReplay}
               </div>
               `;
 
     const replySection =
         messageData.replyData && messageData.replyData.replyTimeStamp != 0
             ? `
-        
-        <div class="reply-section">
-            <strong>${messageData.replyData.replyMessage}</strong>
-            <div class="reply-info">
-                <span class="reply-username">${
-                    messageData.replyData.replyUserName
-                }</span>
-                <span class="reply-timestamp">${timeago.format(
-                    new Date(messageData.replyData.replyTimeStamp)
-                )}</span>
+            <div>
+            <div class="reply-section">
+                <span class="senderName">${senderName}</span>            
+                <div>
+                    <span> <strong>${
+                        messageData.replyData.replyMessage
+                    }</strong></span>
+                    <div class="reply-info">
+                        <span class="reply-username">${
+                            messageData.replyData.replyUserName
+                        }</span>
+                        <span class="reply-timestamp">${timeago.format(
+                            new Date(messageData.replyData.replyTimeStamp)
+                        )}</span>
+                    </div>
+                </div>
+                <div class="reply-massage"> 
+                        <span> ${
+                            messageData?.data != "" ? messageData.data : ""
+                        }</span>
+                </div>
             </div>
-            <hr>
-        </div>`
+            ${emojiAndReplay}
+            </div>`
             : "";
     return `
         <li class="${isSender ? "receiver" : "sender"}" id="message-${key}">
-         ${replySection}
-            
-            ${dataWithMedia}
-         
+
+           
+            ${replySection == "" ? dataWithMedia : replySection}
+
             <span class="time">${timeago.format(
                 new Date(messageData.timeStamp)
             )}</span>
@@ -1444,7 +1617,7 @@ $("#new_message").on("keypress", async function (e) {
             await addMessage(selectedMessageId, messageData, contactId);
             $("#msgBox").modal("hide");
 
-            updateOverview(currentUserId, selectedMessageId, {
+            await updateOverview(currentUserId, selectedMessageId, {
                 lastMessage: `${senderUserName}: ${message}`,
                 timeStamp: Date.now(),
             });
@@ -1467,7 +1640,7 @@ const isOfflineForDatabase = {
     userStatus: "offline",
     userLastSeen: Date.now(),
 };
-await onDisconnect(userRef).update(isOfflineForDatabase);
+// await onDisconnect(userRef).update(isOfflineForDatabase);
 // Load user images
 $(".user-image").each(async function () {
     const dataId = $(this).attr("data-id");
@@ -2264,3 +2437,32 @@ function displayFiles(files, name) {
         reader.readAsDataURL(file);
     }
 }
+
+async function getTotalUnreadMessageCount() {
+    const userId = senderUser; // Assuming senderUser is the ID of the current user
+    const overviewRef = ref(database, `overview/${userId}`);
+    const snapshot = await get(overviewRef);
+    let totalUnreadCount = 0;
+
+    if (snapshot.exists()) {
+        const conversations = snapshot.val();
+        for (let conversationId in conversations) {
+            if (conversations[conversationId].unReadCount) {
+                totalUnreadCount += conversations[conversationId].unReadCount;
+            }
+        }
+    }
+
+    return totalUnreadCount;
+}
+
+// Function to update badge with unread message count
+async function updateUnreadMessageBadge() {
+    const totalUnreadCount = await getTotalUnreadMessageCount();
+    $(".badge").text(totalUnreadCount);
+}
+
+// Call the function on page load
+$(document).ready(function () {
+    updateUnreadMessageBadge();
+});

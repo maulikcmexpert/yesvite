@@ -113,7 +113,7 @@
                                                 <div class="row">
                                                     <div class="col-lg-6 col-6">
                                                         <div class="form-check d-flex align-items-center justify-content-between">
-                                                            <label class="form-check-label mb-0" for="flexRadioDefault1">
+                                                            <label class="form-check-label mb-0" for="male">
                                                                 <h6>Male</h6>
                                                             </label>
                                                             <input class="form-check-input" type="radio" value="male" name="gender" id="male" {{($user->gender == 'male')?'checked':''}}>
@@ -121,7 +121,7 @@
                                                     </div>
                                                     <div class="col-lg-6 col-6">
                                                         <div class="form-check d-flex align-items-center justify-content-between">
-                                                            <label class="form-check-label  mb-0" for="flexRadioDefault2">
+                                                            <label class="form-check-label  mb-0" for="female">
                                                                 <h6>Female</h6>
                                                             </label>
                                                             <input class="form-check-input" type="radio" name="gender" value="female" id="female" {{($user->gender == 'female')?'checked':''}}>

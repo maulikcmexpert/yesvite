@@ -24,4 +24,9 @@ class UserReportToPost extends Model
     {
         return $this->belongsTo(EventPost::class, 'event_post_id');
     }
+
+    public function post_image()
+    {
+        return $this->belongsTo(EventPostImage::class, 'post_media_id');
+    }
 }

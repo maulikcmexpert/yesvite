@@ -89,52 +89,6 @@ $(document).ready(function () {
         $("#updateUserForm").submit();
     });
 
-    var profileCroppie = new Croppie(document.getElementById("profileIm"), {
-        viewport: { width: 200, height: 200, type: "circle" },
-        boundary: { width: 300, height: 300 },
-        enableZoom: true,
-        enableOrientation: true,
-    });
-
-    var bgCroppie = new Croppie(document.getElementById("bgIm"), {
-        viewport: { width: 400, height: 200, type: "rectangle" },
-        boundary: { width: 400, height: 400 },
-        enableZoom: true,
-        enableOrientation: true,
-    });
-
-    function bindImageToCroppie(croppieInstance, imageUrl) {
-        croppieInstance.bind({
-            url: imageUrl,
-        });
-    }
-
-    bindImageToCroppie(profileCroppie, $("#profileIm").attr("src"));
-
-    bindImageToCroppie(bgCroppie, $("#bgIm").attr("src"));
-
-    $("#choose-file").on("change", function () {
-        var reader = new FileReader();
-        reader.onload = function (e) {
-            $("#profileIm").attr("src", e.target.result);
-            profileCroppie.bind({
-                url: e.target.result,
-            });
-        };
-        reader.readAsDataURL(this.files[0]);
-    });
-
-    $("#bg-choose-file").on("change", function () {
-        var reader = new FileReader();
-        reader.onload = function (e) {
-            $("#bgIm").attr("src", e.target.result);
-            bgCroppie.bind({
-                url: e.target.result,
-            });
-        };
-        reader.readAsDataURL(this.files[0]);
-    });
-
     //for profile image
     $("#profile_save").on("click", function () {
         profileCroppie
@@ -386,4 +340,50 @@ $(document).ready(function () {
             },
         });
     });
+});
+
+var profileCroppie = new Croppie(document.getElementById("profileIm"), {
+    viewport: { width: 200, height: 200, type: "circle" },
+    boundary: { width: 300, height: 300 },
+    enableZoom: true,
+    enableOrientation: true,
+});
+
+var bgCroppie = new Croppie(document.getElementById("bgIm"), {
+    viewport: { width: 400, height: 200, type: "rectangle" },
+    boundary: { width: 400, height: 400 },
+    enableZoom: true,
+    enableOrientation: true,
+});
+
+function bindImageToCroppie(croppieInstance, imageUrl) {
+    croppieInstance.bind({
+        url: imageUrl,
+    });
+}
+
+bindImageToCroppie(profileCroppie, $("#profileIm").attr("src"));
+
+bindImageToCroppie(bgCroppie, $("#bgIm").attr("src"));
+
+$("#choose-file").on("change", function () {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+        $("#profileIm").attr("src", e.target.result);
+        profileCroppie.bind({
+            url: e.target.result,
+        });
+    };
+    reader.readAsDataURL(this.files[0]);
+});
+
+$("#bg-choose-file").on("change", function () {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+        $("#bgIm").attr("src", e.target.result);
+        bgCroppie.bind({
+            url: e.target.result,
+        });
+    };
+    reader.readAsDataURL(this.files[0]);
 });

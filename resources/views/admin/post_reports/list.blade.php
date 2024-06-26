@@ -35,6 +35,7 @@
                 <th>Username (Reported By)</th>
                 <th>Event Name</th>
                 <th>Post type</th>
+                <th>Action</th>
 
             </tr>
 
