@@ -111,7 +111,7 @@ use Carbon\Carbon;
                         <input type="hidden" id="isGroup" value="{{@$message['group']}}"/>
                     @endif
                     <div>
-                        <li class="{{$i == 0 ?'active':''}} msg-list conversation-{{$message['conversationId']}} {{@$message['isArchive']=="1"?"archived-list":""}}" data-userId="{{$message['contactId']}}" data-msgKey={{$k}} data-group={{@$message['group']}}>
+                        <li class="{{$i == 0 ?'active':''}} msg-list conversation-{{$message['conversationId']}} {{@$message['isArchive']=="1"?"archived-list":"unarchived-list"}}" data-userId="{{$message['contactId']}}" data-msgKey={{$k}} data-group={{@$message['group']}}>
                         <div class="me-2 d-none bulk-check">
                             <input class="form-check-input" type="checkbox" name="checked_conversation[]" value="{{$message['conversationId']}}" isGroup="{{@$message['group']}}">
                         </div>
@@ -399,15 +399,16 @@ use Carbon\Carbon;
             <!-- Modal body -->
             <div class="modal-body">
                 <div>
-                    <div id="selected-tags-container">
-                        <!-- Selected tags will be appended here -->
-                        <input type="text" id="search-user">
-
-                    </div>
+                   
                     <div class="d-flex align-items-center inbox">
                         <span>To:</span>
                         
                         <input type="hidden" id="selected-user-id" name="selectedUserId" value="">
+                    </div>
+                    <div id="selected-tags-container">
+                        <!-- Selected tags will be appended here -->
+                        <input type="text" id="search-user">
+
                     </div>
                     <!-- =========== first-model =========== -->
                     <div class="empty-massage">
