@@ -23,29 +23,29 @@ import {
     uploadBytes,
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
 // Firebase configuration
-// const firebaseConfig = {
-//     apiKey: "AIzaSyBwm_cUYyrAPWvp-t31PCWP_gmeHghVdTQ",
-//     authDomain: "yesvitelive.firebaseapp.com",
-//     databaseURL: "https://yesvitelive-default-rtdb.firebaseio.com",
-//     projectId: "yesvitelive",
-//     storageBucket: "yesvitelive.appspot.com",
-//     messagingSenderId: "438593077863",
-//     appId: "1:438593077863:web:51ab60b8d230a6c4f48ac2",
-//     measurementId: "G-6FRGMCQQ66",
-// };
-
 const firebaseConfig = {
-    apiKey: "AIzaSyAVgJQewYO8h1-_z2mrjaATCqJ4NH8eeCI",
-    authDomain: "yesvite-976cd.firebaseapp.com",
-    databaseURL: "https://yesvite-976cd-default-rtdb.firebaseio.com",
-    projectId: "yesvite-976cd",
-    storageBucket: "yesvite-976cd.appspot.com",
-    messagingSenderId: "273430667581",
-    appId: "1:273430667581:web:d5cc6f6c1cc9829de9e554",
-    measurementId: "G-99SYL4VLEF",
+    apiKey: "AIzaSyBwm_cUYyrAPWvp-t31PCWP_gmeHghVdTQ",
+    authDomain: "yesvitelive.firebaseapp.com",
+    databaseURL: "https://yesvitelive-default-rtdb.firebaseio.com",
+    projectId: "yesvitelive",
+    storageBucket: "yesvitelive.appspot.com",
+    messagingSenderId: "438593077863",
+    appId: "1:438593077863:web:51ab60b8d230a6c4f48ac2",
+    measurementId: "G-6FRGMCQQ66",
 };
 
-console.log("update message");
+// const firebaseConfig = {
+//     apiKey: "AIzaSyAVgJQewYO8h1-_z2mrjaATCqJ4NH8eeCI",
+//     authDomain: "yesvite-976cd.firebaseapp.com",
+//     databaseURL: "https://yesvite-976cd-default-rtdb.firebaseio.com",
+//     projectId: "yesvite-976cd",
+//     storageBucket: "yesvite-976cd.appspot.com",
+//     messagingSenderId: "273430667581",
+//     appId: "1:273430667581:web:d5cc6f6c1cc9829de9e554",
+//     measurementId: "G-99SYL4VLEF",
+// };
+
+console.log("update message . js");
 $.ajaxSetup({
     headers: {
         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -633,7 +633,15 @@ async function updateMore(conversationId) {
                     .find(".chat-data")
                     .find(".pin-svg")
                     .removeClass("d-none");
+                $(".unpin-self-icn").show("d-none");
+                $(".pin-self-icn").hide("d-none");
+            } else {
+                $(".pin-self-icn").show();
+                $(".unpin-self-icn").hide();
             }
+        } else {
+            $(".pin-self-icn").show();
+            $(".unpin-self-icn").hide();
         }
         if (overviewData.isMute != undefined) {
             $(".mute-conversation")
@@ -675,11 +683,16 @@ $(".pin-conversation").click(function () {
             .find(".chat-data")
             .find(".pin-svg")
             .removeClass("d-none");
+
+        $(".unpin-self-icn").show("d-none");
+        $(".pin-self-icn").hide("d-none");
     } else {
         $(".conversation-" + conversationId)
             .find(".chat-data")
             .find(".pin-svg")
             .addClass("d-none");
+        $(".pin-self-icn").show();
+        $(".unpin-self-icn").hide();
     }
 });
 
@@ -1594,9 +1607,21 @@ $("#send-new-msg").click(function () {
     e.keyCode = 13;
     $("#new_message").trigger(e);
 });
+let isSending = false;
+
+function debounce(func, delay) {
+    let timer;
+    return function () {
+        clearTimeout(timer);
+        timer = setTimeout(func, delay);
+    };
+}
+
 // Event listener for sending a new message
 $("#new_message").on("keypress", async function (e) {
     if (e.which === 13) {
+        if (isSending) return;
+        isSending = true;
         const tagCount = $("#selected-tags-container .tag").length;
         const message = $(this).val();
         if (tagCount == 0) {
@@ -1610,6 +1635,10 @@ $("#new_message").on("keypress", async function (e) {
                 "Error!"
             );
         }
+        setTimeout(() => {
+            isSending = false;
+        }, 2000);
+        console.log({ tagCount });
         if (tagCount > 1) {
             const currentUserId = senderUser;
             const groupName = $("#group-name").val(); // Assuming you have an input for group name
@@ -1737,8 +1766,6 @@ $("#new_message").on("keypress", async function (e) {
             $(".selected_message").val(contactId);
             $(".selected_name").val(contactName);
 
-            updateChat(contactId);
-
             const messageData = {
                 data: message,
                 timeStamp: Date.now(),
@@ -1770,6 +1797,7 @@ $("#new_message").on("keypress", async function (e) {
                 unReadCount: (receiverSnapshot.val().unReadCount || 0) + 1,
                 timeStamp: Date.now(),
             });
+            await updateChat(contactId);
             $("#isGroup").val("false");
         }
         $(this).val("");
@@ -2612,7 +2640,14 @@ $(document).on("change", "input[name='checked_conversation[]']", function () {
 $(".multi-pin").click(async function () {
     const pinChange = $(this).attr("changeWith");
     $(this).attr("changeWith", pinChange == "1" ? "0" : "1");
-
+    if (pinChange == "1") {
+        $(".unpin-icn").removeClass("d-none");
+        $(".pin-icn").addClass("d-none");
+    } else {
+        $(".pin-icn").removeClass("d-none");
+        $(".unpin-icn").addClass("d-none");
+    }
+    console.log($(".unpin-icn"));
     const checkedConversations = $(
         "input[name='checked_conversation[]']:checked"
     )
