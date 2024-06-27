@@ -514,11 +514,17 @@ ul.member-lists li:last-child{
     margin: 16px 0;
 }
 
+.msg-body ul li.sender{
+    max-width: 700px;
+}
+
 .msg-body ul li.receiver{
     display: block;
     width: 100%;
     text-align: right;
     position: relative;
+    max-width: 700px;
+    margin-left: auto;
 }
 
 .msg-body ul li.receiver p,
@@ -539,6 +545,7 @@ ul.member-lists li:last-child{
     margin-bottom: 5px !important;
     position: relative;
     word-break: break-all;
+    text-align: left;
 }
 
 
@@ -594,7 +601,9 @@ ul.member-lists li:last-child{
     font-size: 12px;
 }
 
-.msg-body ul li.sender p  .reaction{
+.msg-body ul li.sender p .reaction,
+.msg-body ul li.sender .simple-msg-wrap .reaction
+{
     width: 22px;
     height: 22px;
     position: absolute;
@@ -1198,7 +1207,7 @@ ul.member-lists li:last-child{
 .reaction-dialog {
     position: absolute;
     bottom: -45px;
-    right: 4%;
+    right: -35px;
     display: flex;
     gap: 5px;
     background-color: #fff;
@@ -1332,15 +1341,6 @@ ul.member-lists li:last-child{
 }
 
 @media only screen and (max-width:763px){
-    .chat-lists{
-           width: 100% !important; 
-    }
-    .chat-area .chatbox{
-        width: 100% !important; 
-    }
-}
-
-@media only screen and (max-width:763px){
     .chat-area .chat-header .dropdown-menu.show{
         transform: translate3d(0px, 43px, 0px) !important;
         -webkit-transform: translate3d(0px, 43px, 0px) !important;
@@ -1392,6 +1392,13 @@ ul.member-lists li:last-child{
     .message-area ul.chat-list{
         margin-bottom: 70px !important;
     }
+
+    .chat-lists{
+        width: 100% !important; 
+    }
+    .chat-area .chatbox{
+        width: 100% !important; 
+ }
 }
 
 @media only screen and (max-width:620px){
