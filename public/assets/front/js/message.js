@@ -44,6 +44,8 @@ const firebaseConfig = {
     appId: "1:273430667581:web:d5cc6f6c1cc9829de9e554",
     measurementId: "G-99SYL4VLEF",
 };
+
+console.log("update message . js");
 $.ajaxSetup({
     headers: {
         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
