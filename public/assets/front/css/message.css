@@ -239,6 +239,7 @@ ul.chat-list li:last-child{
     white-space: nowrap;
     width: 100%;
     max-width: 150px;
+    text-transform: capitalize;
 }
 
 .member-lists .chat-data .remove-member{
