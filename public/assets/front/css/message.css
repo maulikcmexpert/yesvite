@@ -567,6 +567,7 @@ ul.member-lists li:last-child{
 }
 
 
+
 .msg-body ul li.receiver p .seenStatus{
     position: absolute;
     right: 8px;
@@ -645,6 +646,26 @@ ul.member-lists li:last-child{
     height: 22px;
     position: absolute;
     right: -3px;
+    bottom: -4px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0px 5px 10px 0px #0000001A;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.msg-body ul li.receiver .simple-msg-wrap .reaction
+{
+    width: 22px;
+    height: 22px;
+    position: absolute;
+    left: -3px;
     bottom: -4px;
     background: #fff;
     border-radius: 50%;
@@ -996,6 +1017,34 @@ ul.member-lists li:last-child{
     display: flex;
     align-items: center;
     justify-content: center;
+    position: inherit !important;
+}
+
+.msg-body ul li.receiver .reaction-ul{
+    position: absolute;
+    left: 15px;
+    bottom: 5px;
+    justify-content: end;
+    display: flex;
+    /* right: 60%; */
+}
+
+.msg-body ul li.receiver .reaction-ul li{
+    margin: 0;
+    width: 22px;
+    height: 22px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0px 5px 10px 0px #0000001A;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: inherit !important;
 }
 
 .msg-body ul li.receiver .reply-section{
@@ -1007,9 +1056,10 @@ ul.member-lists li:last-child{
     -moz-border-radius: 0px 20px 20px 20px;
     -ms-border-radius: 0px 20px 20px 20px;
     -o-border-radius: 0px 20px 20px 20px;
-    margin-bottom: 16px;
+    /* margin-bottom: 16px; */
     text-align: left;
     padding-bottom: 2px;
+    position: relative;
 }
 
 .msg-body ul li .reply-section .senderName{
@@ -1315,14 +1365,23 @@ ul.member-lists li:last-child{
     align-items: center;
 }
 
-.msg-lists .sender .simple-message .reaction-ul,
-.msg-lists .receiver .simple-message .reaction-ul
+.msg-lists .sender .simple-message .reaction-ul
 {
     position: absolute;
     bottom: -11px;
     right: -4px;
     display: flex;
     left: 60%;
+    justify-content: end;
+}
+
+
+.msg-lists .receiver .simple-message .reaction-ul{
+    position: absolute;
+    bottom: 0px;
+    left: -5px;
+    display: flex;
+    right: 60%;
     justify-content: end;
 }
 
