@@ -49,7 +49,7 @@ use Carbon\Carbon;
                                             <path d="M15.6797 3.66211L21.3365 9.31896" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                         </svg>
 
-                                        <svg class="pin-icn d-none" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M680-840v80h-40v327l-80-80v-247H400v87l-87-87-33-33v-47h400ZM480-40l-40-40v-240H240v-80l80-80v-46L56-792l56-56 736 736-58 56-264-264h-6v240l-40 40ZM354-400h92l-44-44-2-2-46 46Zm126-193Zm-78 149Z"/></svg>
+                                        <svg class="unpin-icn d-none" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M680-840v80h-40v327l-80-80v-247H400v87l-87-87-33-33v-47h400ZM480-40l-40-40v-240H240v-80l80-80v-46L56-792l56-56 736 736-58 56-264-264h-6v240l-40 40ZM354-400h92l-44-44-2-2-46 46Zm126-193Zm-78 149Z"/></svg>
                                     </span>
                                     <span class="multi-mute" changeWith="1">
                                         <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -155,7 +155,7 @@ use Carbon\Carbon;
                             </a>
                             <div class="ms-auto">
                                 <h6 class="ms-2 time-ago"> {{ $timeAgo }}</h6>
-                                <div class="d-flex align-items-center">
+                                <div class="d-flex align-items-center justify-content-end">
                                     <span class="badge ms-2 {{@$message['unReadCount'] == 0 ? 'd-none' : ''}}">{{@$message['unReadCount']}}</span>
                                     <span class="ms-2 d-flex mt-1 align-items-start justify-content-end pin-svg {{@$message['isPin']=='1'?'':'d-none'}}">
                                         <svg width="11" height="17" viewBox="0 0 11 17" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -232,11 +232,13 @@ use Carbon\Carbon;
                                             <li>
                                                 <a class="dropdown-item pin-conversation" href="#">
 
-                                                    <svg class="me-2" width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <svg class="me-2 pin-self-icn" width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <path d="M16.3908 4.36734L12.1481 8.60998L7.90549 10.0242L6.49128 11.4384L13.5623 18.5095L14.9766 17.0953L16.3908 12.8526L20.6334 8.60998" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                                         <path d="M10.0234 14.9746L6.4879 18.5101" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                                         <path d="M15.6797 3.66211L21.3365 9.31896" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                                     </svg>
+
+                                                    <svg class="me-2 unpin-self-icn" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M680-840v80h-40v327l-80-80v-247H400v87l-87-87-33-33v-47h400ZM480-40l-40-40v-240H240v-80l80-80v-46L56-792l56-56 736 736-58 56-264-264h-6v240l-40 40ZM354-400h92l-44-44-2-2-46 46Zm126-193Zm-78 149Z"/></svg>
 
                                                     <span>Pin</span></a>
                                             </li>

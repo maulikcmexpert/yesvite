@@ -633,7 +633,15 @@ async function updateMore(conversationId) {
                     .find(".chat-data")
                     .find(".pin-svg")
                     .removeClass("d-none");
+                $(".unpin-self-icn").show("d-none");
+                $(".pin-self-icn").hide("d-none");
+            } else {
+                $(".pin-self-icn").show();
+                $(".unpin-self-icn").hide();
             }
+        } else {
+            $(".pin-self-icn").show();
+            $(".unpin-self-icn").hide();
         }
         if (overviewData.isMute != undefined) {
             $(".mute-conversation")
@@ -675,11 +683,16 @@ $(".pin-conversation").click(function () {
             .find(".chat-data")
             .find(".pin-svg")
             .removeClass("d-none");
+
+        $(".unpin-self-icn").show("d-none");
+        $(".pin-self-icn").hide("d-none");
     } else {
         $(".conversation-" + conversationId)
             .find(".chat-data")
             .find(".pin-svg")
             .addClass("d-none");
+        $(".pin-self-icn").show();
+        $(".unpin-self-icn").hide();
     }
 });
 
@@ -2627,7 +2640,14 @@ $(document).on("change", "input[name='checked_conversation[]']", function () {
 $(".multi-pin").click(async function () {
     const pinChange = $(this).attr("changeWith");
     $(this).attr("changeWith", pinChange == "1" ? "0" : "1");
-
+    if (pinChange == "1") {
+        $(".unpin-icn").removeClass("d-none");
+        $(".pin-icn").addClass("d-none");
+    } else {
+        $(".pin-icn").removeClass("d-none");
+        $(".unpin-icn").addClass("d-none");
+    }
+    console.log($(".unpin-icn"));
     const checkedConversations = $(
         "input[name='checked_conversation[]']:checked"
     )
