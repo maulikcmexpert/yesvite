@@ -33,6 +33,7 @@ import {
 //     appId: "1:438593077863:web:51ab60b8d230a6c4f48ac2",
 //     measurementId: "G-6FRGMCQQ66",
 // };
+
 const firebaseConfig = {
     apiKey: "AIzaSyAVgJQewYO8h1-_z2mrjaATCqJ4NH8eeCI",
     authDomain: "yesvite-976cd.firebaseapp.com",
@@ -43,6 +44,8 @@ const firebaseConfig = {
     appId: "1:273430667581:web:d5cc6f6c1cc9829de9e554",
     measurementId: "G-99SYL4VLEF",
 };
+
+console.log("update message . js");
 $.ajaxSetup({
     headers: {
         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -291,7 +294,7 @@ async function handleNewConversation(snapshot) {
             .find(".user-detail .last-message")
             .text(newConversation.lastMessage);
         $(conversationElement)
-            .find(".user-detail .time-ago")
+            .find(".ms-auto .time-ago")
             .text(timeago.format(newConversation.timeStamp));
         $(conversationElement)
             .find(".user-img")
@@ -307,12 +310,17 @@ async function handleNewConversation(snapshot) {
             .find("span")
             .replaceWith(userStatus);
 
-        const badgeElement = $(conversationElement).find(".user-detail .badge");
+        const badgeElement = $(conversationElement).find(
+            ".ms-auto .d-flex .badge"
+        );
+        console.log(badgeElement);
         badgeElement.text(newConversation.unReadCount);
         if (newConversation.unReadCount == 0) {
             badgeElement.addClass("d-none");
         } else {
             badgeElement.removeClass("d-none");
+            badgeElement.show();
+            $(conversationElement).prependTo(".chat-list");
         }
     } else {
         if (WaitNewConversation == newConversation.conversationId) {
@@ -354,6 +362,7 @@ function removeSelectedMsg() {
     for (var i = 0; i < msgLists.length; i++) {
         msgLists[i].classList.remove("active");
     }
+    $(".typing").text("");
 }
 // Function to handle changes to existing conversations in the overview
 function handleConversationChange(snapshot) {
@@ -478,12 +487,16 @@ async function updateChat(user_id) {
             snapshot.key === "userTypingStatus" &&
             snapshot.val() == "Typing..."
         ) {
+            const conversationId = $(".selected_id").val();
             const snapshot = await get(selecteduserTypeRef);
             const selectedUserData = snapshot.val();
             console.log({ selectedUserData });
+            console.log({ conversationId });
 
             if (selectedUserData.userChatId == conversationId) {
                 $(".typing").text("Typing...");
+            } else {
+                $(".typing").text("");
             }
         } else {
             $(".typing").text("");
@@ -555,6 +568,7 @@ async function updateChatfromGroup(conversationId) {
 $(".conversationId").click(function () {
     let conversationId = $(this).attr("conversationId");
     $(".change-group-name").addClass("d-none");
+    $(".selected-title").show();
 });
 // Initialize event listeners
 $(document).on("click", ".msg-list", async function () {
@@ -1007,14 +1021,17 @@ $(".send-message").on("keypress", async function (e) {
                 if (!reciverUser) {
                     return;
                 }
+                let userData = await get(userRef);
+                let userSnap = userData.val();
+                console.log({ userSnap });
                 const receiverConversationData = {
-                    contactId: receiverId,
-                    contactName: receiverName,
+                    contactId: senderUser,
+                    contactName: senderUserName,
                     conversationId: conversationId,
                     group: false,
                     lastMessage: `${senderUserName}: ${message}`,
                     lastSenderId: senderUser,
-                    receiverProfile: reciverUser.userProfile,
+                    receiverProfile: userSnap?.userProfile,
                     timeStamp: Date.now(),
                     unRead: true,
                     unReadCount: 1,
@@ -1135,15 +1152,14 @@ function createMessageElement(key, messageData, isGroup) {
                 : "grey-tick"
             : "";
         reaction =
-            messageData?.react != "" && messageData?.react
-                ? String?.fromCodePoint(
+            messageData?.react && messageData?.react.length > 0
+                ? `<span class="reaction">${String?.fromCodePoint(
                       parseInt(
                           messageData?.react?.replace(/\\u\{(.+)\}/, "$1"),
                           16
                       )
-                  )
+                  )}</span>`
                 : "";
-        reaction = `<span class="reaction">${reaction}</span>`;
     }
 
     let emojiAndReplay = isReceiver
@@ -1340,6 +1356,7 @@ $("#search-user")
     const $img = item.imageElement;
     console.log($img);
     const $span = $("<h3>").text(item.label);
+    $span.append($("<span>").text(item.email));
 
     $divImage.append($img);
     $divName.append($("<div>")).append($span);
@@ -1389,14 +1406,17 @@ async function handleSelectedUsers() {
         $(".multi-chat").removeClass("d-none");
         const $tags = $("#selected-tags-container .tag");
         let groupNames = "";
+        let allNames = "";
         $tags.each(async function (index) {
             if (index < 2) {
                 const userName = $(this).find(".names").text().trim();
                 const userImgSrc = $(this).find(".img-fluid").prop("outerHTML");
-                console.log(userImgSrc);
+
                 groupNames += `<div class="multi-img grp-img">
                                     ${userImgSrc}
                                 </div>`;
+                if (allNames.length > 0) allNames += ", ";
+                allNames += userName;
             }
         });
         $(".multi-chat .img-wrp").html(groupNames);
@@ -1406,17 +1426,18 @@ async function handleSelectedUsers() {
             let moreimg = `<div class="multi-img more-img">
                 <span>+${moreCount}</span>
             </div>`;
+            allNames += `, +${moreCount}`;
             $(".multi-chat .img-wrp").append(moreimg);
         } else {
             $(".more-img").remove();
         }
         // Set multiple names in the selected-user-name
-        const allNames = $tags
-            .map(function () {
-                return $(this).clone().find(".names").text().trim();
-            })
-            .get()
-            .join(", ");
+        // const allNames = $tags
+        //     .map(function () {
+        //         return $(this).clone().find(".names").text().trim();
+        //     })
+        //     .get()
+        //     .join(", ");
         $(".selected-user-name").text(allNames);
     } else {
         $(".chat-user").addClass("d-none");
@@ -1474,8 +1495,8 @@ async function findOrCreateConversation(
         lastSenderId: currentUserId,
         receiverProfile: receiverProfile,
         timeStamp: Date.now(),
-        unRead: true,
-        unReadCount: 1,
+        // unRead: true,
+        // unReadCount: 1,
     };
 
     await set(
@@ -1492,8 +1513,8 @@ async function findOrCreateConversation(
         lastSenderId: currentUserId,
         receiverProfile: userSnap?.userProfile,
         timeStamp: Date.now(),
-        unRead: true,
-        unReadCount: 1,
+        // unRead: true,
+        // unReadCount: 1,
     };
 
     await set(
@@ -1673,13 +1694,42 @@ $("#new_message").on("keypress", async function (e) {
             const contactId = $("#selected-user-id").val();
             const contactName = $(".selected-user-name").html();
             const receiverProfile = $(".selected-user-img").attr("src");
-
             const conversationId = await findOrCreateConversation(
                 currentUserId,
                 contactId,
                 contactName,
                 receiverProfile
             );
+            const blockByMeRef = ref(
+                database,
+                `users/${senderUser}/blockByUser`
+            );
+            const blockByUserRef = ref(
+                database,
+                `users/${senderUser}/blockByMe`
+            );
+
+            const blockByMeSnapshot = await get(blockByMeRef);
+            const blockByUserSnapshot = await get(blockByUserRef);
+
+            let isBlockedByMe = false;
+            let isBlockedByUser = false;
+
+            if (blockByMeSnapshot.exists()) {
+                const blockByMeList = blockByMeSnapshot.val();
+                isBlockedByMe = blockByMeList.includes(contactId);
+            }
+
+            if (blockByUserSnapshot.exists()) {
+                const blockByUserList = blockByUserSnapshot.val();
+                isBlockedByUser = blockByUserList.includes(contactId);
+            }
+
+            if (isBlockedByMe || isBlockedByUser) {
+                $("#msgBox").modal("hide");
+                return;
+            }
+
             const message = $(this).val();
             const selectedMessageId = conversationId;
             $(".selected_id").val(conversationId);
@@ -1719,9 +1769,9 @@ $("#new_message").on("keypress", async function (e) {
                 unReadCount: (receiverSnapshot.val().unReadCount || 0) + 1,
                 timeStamp: Date.now(),
             });
+            $("#isGroup").val("false");
         }
         $(this).val("");
-        $("#isGroup").val("false");
     }
 });
 
@@ -1847,7 +1897,7 @@ $(document).on("click", ".remove-member", async function () {
     const groupInfoRef = ref(database, `Groups/${conversationId}/groupInfo`);
     const snapshot = await get(groupInfoRef);
     const groupInfo = snapshot.val();
-    groupInfo.profiles.map((profile) => {
+    groupInfo?.profiles.map((profile) => {
         if (profile.id > 0) {
             SelecteGroupUser[profile.id] = {
                 id: profile.id,
