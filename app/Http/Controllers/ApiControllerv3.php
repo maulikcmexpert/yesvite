@@ -3437,6 +3437,7 @@ class ApiControllerv2 extends Controller
         }
 
 
+        if($eventData['subscription_plan_name'] == 'Pro'  )
 
 
         $eventCreation =  Event::create([
