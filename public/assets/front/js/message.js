@@ -1594,9 +1594,21 @@ $("#send-new-msg").click(function () {
     e.keyCode = 13;
     $("#new_message").trigger(e);
 });
+let isSending = false;
+
+function debounce(func, delay) {
+    let timer;
+    return function () {
+        clearTimeout(timer);
+        timer = setTimeout(func, delay);
+    };
+}
+
 // Event listener for sending a new message
 $("#new_message").on("keypress", async function (e) {
     if (e.which === 13) {
+        if (isSending) return;
+        isSending = true;
         const tagCount = $("#selected-tags-container .tag").length;
         const message = $(this).val();
         if (tagCount == 0) {
@@ -1610,6 +1622,10 @@ $("#new_message").on("keypress", async function (e) {
                 "Error!"
             );
         }
+        setTimeout(() => {
+            isSending = false;
+        }, 2000);
+        console.log({ tagCount });
         if (tagCount > 1) {
             const currentUserId = senderUser;
             const groupName = $("#group-name").val(); // Assuming you have an input for group name
@@ -1737,8 +1753,6 @@ $("#new_message").on("keypress", async function (e) {
             $(".selected_message").val(contactId);
             $(".selected_name").val(contactName);
 
-            updateChat(contactId);
-
             const messageData = {
                 data: message,
                 timeStamp: Date.now(),
@@ -1770,6 +1784,7 @@ $("#new_message").on("keypress", async function (e) {
                 unReadCount: (receiverSnapshot.val().unReadCount || 0) + 1,
                 timeStamp: Date.now(),
             });
+            await updateChat(contactId);
             $("#isGroup").val("false");
         }
         $(this).val("");
