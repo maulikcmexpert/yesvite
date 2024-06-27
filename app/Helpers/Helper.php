@@ -82,12 +82,12 @@ function checkNotificationSetting($userId)
     return $notification;
 }
 
-function getGuestPendingRsvpCount($eventId){
+function getGuestPendingRsvpCount($eventId)
+{
     return  EventInvitedUser::whereHas('user', function ($query) {
 
         $query->where('app_user', '1');
     })->where(['event_id' => $eventId, 'rsvp_d' => '0'])->count();
-
 }
 
 function sendNotification($notificationType, $postData)
@@ -272,7 +272,7 @@ function sendNotification($notificationType, $postData)
         }
     }
 
-    if ($notificationType == 'update_address' || $notificationType == 'update_time' || $notificationType == 'update_event') {
+    if ($notificationType == 'update_address' || $notificationType == 'update_time' || $notificationType == 'update_event' || $notificationType == 'update_date') {
 
         if (count($invitedusers) != 0) {
 
@@ -297,6 +297,9 @@ function sendNotification($notificationType, $postData)
                     } else if ($notificationType == 'update_time') {
                         $notification->from_time = $postData['from_time'];
                         $notification->to_time = $postData['to_time'];
+                    } else if ($notificationType == 'update_date') {
+                        $notification->old_start_end_date = $postData['old_start_end_date'];
+                        $notification->new_start_end_date = $postData['new_start_end_date'];
                     }
                     $notification->notification_message = $notification_message;
 
@@ -1004,9 +1007,9 @@ function sendNotification($notificationType, $postData)
                     if (!empty($notificationImage->post_image) && $notificationImage->post_image != NULL) {
                         $notification_image = asset('public/storage/event_images/' . $notificationImage->image);
                     }
-                 
-    
-                    
+
+
+
                     $notificationData = [
                         'message' => $notification_message,
                         'type' => $notificationType,
@@ -1079,7 +1082,7 @@ function sendNotification($notificationType, $postData)
                     if (!empty($notificationImage->post_image) && $notificationImage->post_image != NULL) {
                         $notification_image = asset('public/storage/event_images/' . $notificationImage->image);
                     }
-                    
+
                     $notificationData = [
                         'message' => $notification_message,
                         'type' => $notificationType,
