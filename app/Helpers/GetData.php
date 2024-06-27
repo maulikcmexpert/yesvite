@@ -167,6 +167,7 @@ function getYesviteContactListPage($id, $perPage, $page)
 {
     $yesviteRegisteredUser = User::select('id', 'firstname', 'profile', 'lastname', 'email', 'country_code', 'phone_number', 'app_user', 'prefer_by', 'email_verified_at', 'parent_user_phone_contact', 'visible', 'message_privacy')->where('id', '!=', $id)->where(['is_user_phone_contact' => '0'])->orderBy('firstname')
         ->paginate($perPage, ['*'], 'page', $page);
+    dd($yesviteRegisteredUser);
     $yesviteUser = [];
     foreach ($yesviteRegisteredUser as $user) {
 
