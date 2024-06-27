@@ -146,7 +146,7 @@ use Carbon\Carbon;
                                     @endphp
                                     <div class="d-flex align-items-center justify-content-between">
                                         <span class="last-message">{{$message['lastMessage']}}</span>
-                                        <span class="badge ms-2 {{@$message['unReadCount'] == 0 ? 'd-none' : ''}}">{{@$message['unReadCount']}}</span>
+                                        
                                     </div>
                                 </div>
                                 

@@ -313,6 +313,8 @@ async function handleNewConversation(snapshot) {
             badgeElement.addClass("d-none");
         } else {
             badgeElement.removeClass("d-none");
+            badgeElement.show();
+            $(conversationElement).prependTo(".chat-list");
         }
     } else {
         if (WaitNewConversation == newConversation.conversationId) {
@@ -354,6 +356,7 @@ function removeSelectedMsg() {
     for (var i = 0; i < msgLists.length; i++) {
         msgLists[i].classList.remove("active");
     }
+    $(".typing").text("");
 }
 // Function to handle changes to existing conversations in the overview
 function handleConversationChange(snapshot) {
@@ -478,12 +481,16 @@ async function updateChat(user_id) {
             snapshot.key === "userTypingStatus" &&
             snapshot.val() == "Typing..."
         ) {
+            const conversationId = $(".selected_id").val();
             const snapshot = await get(selecteduserTypeRef);
             const selectedUserData = snapshot.val();
             console.log({ selectedUserData });
+            console.log({ conversationId });
 
             if (selectedUserData.userChatId == conversationId) {
                 $(".typing").text("Typing...");
+            } else {
+                $(".typing").text("");
             }
         } else {
             $(".typing").text("");
@@ -555,6 +562,7 @@ async function updateChatfromGroup(conversationId) {
 $(".conversationId").click(function () {
     let conversationId = $(this).attr("conversationId");
     $(".change-group-name").addClass("d-none");
+    $(".selected-title").show();
 });
 // Initialize event listeners
 $(document).on("click", ".msg-list", async function () {
@@ -1474,8 +1482,8 @@ async function findOrCreateConversation(
         lastSenderId: currentUserId,
         receiverProfile: receiverProfile,
         timeStamp: Date.now(),
-        unRead: true,
-        unReadCount: 1,
+        // unRead: true,
+        // unReadCount: 1,
     };
 
     await set(
@@ -1492,8 +1500,8 @@ async function findOrCreateConversation(
         lastSenderId: currentUserId,
         receiverProfile: userSnap?.userProfile,
         timeStamp: Date.now(),
-        unRead: true,
-        unReadCount: 1,
+        // unRead: true,
+        // unReadCount: 1,
     };
 
     await set(
@@ -1673,13 +1681,42 @@ $("#new_message").on("keypress", async function (e) {
             const contactId = $("#selected-user-id").val();
             const contactName = $(".selected-user-name").html();
             const receiverProfile = $(".selected-user-img").attr("src");
-
             const conversationId = await findOrCreateConversation(
                 currentUserId,
                 contactId,
                 contactName,
                 receiverProfile
             );
+            const blockByMeRef = ref(
+                database,
+                `users/${senderUser}/blockByUser`
+            );
+            const blockByUserRef = ref(
+                database,
+                `users/${senderUser}/blockByMe`
+            );
+
+            const blockByMeSnapshot = await get(blockByMeRef);
+            const blockByUserSnapshot = await get(blockByUserRef);
+
+            let isBlockedByMe = false;
+            let isBlockedByUser = false;
+
+            if (blockByMeSnapshot.exists()) {
+                const blockByMeList = blockByMeSnapshot.val();
+                isBlockedByMe = blockByMeList.includes(contactId);
+            }
+
+            if (blockByUserSnapshot.exists()) {
+                const blockByUserList = blockByUserSnapshot.val();
+                isBlockedByUser = blockByUserList.includes(contactId);
+            }
+
+            if (isBlockedByMe || isBlockedByUser) {
+                $("#msgBox").modal("hide");
+                return;
+            }
+
             const message = $(this).val();
             const selectedMessageId = conversationId;
             $(".selected_id").val(conversationId);
@@ -1719,9 +1756,9 @@ $("#new_message").on("keypress", async function (e) {
                 unReadCount: (receiverSnapshot.val().unReadCount || 0) + 1,
                 timeStamp: Date.now(),
             });
+            $("#isGroup").val("false");
         }
         $(this).val("");
-        $("#isGroup").val("false");
     }
 });
 

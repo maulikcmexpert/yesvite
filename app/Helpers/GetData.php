@@ -21,7 +21,29 @@ use App\Models\EventPostPhotoComment;
 use App\Models\EventPhotoCommentReaction;
 use App\Models\UserPrivacyPolicy;
 use Carbon\Carbon;
+use Kreait\Laravel\Firebase\Facades\Firebase;
 
+function getTotalUnreadMessageCount()
+{
+    $userId = auth()->id();
+    if ($userId == '' && $userId <= 0) {
+        return 0;
+    }
+    $firebase = Firebase::database();
+    $overviewRef = $firebase->getReference('overview/' . $userId);
+    $snapshot = $overviewRef->getValue();
+    $totalUnreadCount = 0;
+
+    if ($snapshot) {
+        foreach ($snapshot as $conversationId => $conversation) {
+            if (isset($conversation['unReadCount'])) {
+                $totalUnreadCount += $conversation['unReadCount'];
+            }
+        }
+    }
+
+    return $totalUnreadCount;
+}
 
 function getUser($id)
 {
