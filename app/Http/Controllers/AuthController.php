@@ -472,9 +472,9 @@ class AuthController extends Controller
 
         $page = 'auth/add_account';
         $title = "Login";
-        // $js = ['login'];
+        $js = ['login'];
 
-        return view('layout', compact('page', 'title'));
+        return view('layout', compact('page', 'title', 'js'));
     }
 
     /**
