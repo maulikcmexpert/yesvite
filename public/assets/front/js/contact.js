@@ -150,7 +150,6 @@ $(document).ready(function () {
                         email: function () {
                             return $(".addnew_email").val();
                         },
-                       
                     },
                 },
             },
@@ -186,7 +185,6 @@ $(document).ready(function () {
                 required: "Please enter your email address",
                 email: "Please enter a valid email address",
                 remote: "Email is already exsits",
-
             },
             phone_number: {
                 required: "Please enter a Phone Number",
@@ -392,3 +390,4 @@ $(document).ready(function () {
         $("#add_contact")[0].reset();
     });
 });
+$('label[for="email"]').removeClass("floatingfocus");
