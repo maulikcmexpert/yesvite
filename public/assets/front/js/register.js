@@ -213,3 +213,6 @@ $("#businesspassword").on("keyup", function () {
         $("#businesspassValidation").html("");
     }
 });
+
+$('label[for="email"]').removeClass("floatingfocus");
+$('label[for="password"]').removeClass("floatingfocus");
