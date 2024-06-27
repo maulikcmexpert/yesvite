@@ -23,6 +23,17 @@ import {
     uploadBytes,
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
 // Firebase configuration
+// const firebaseConfig = {
+//     apiKey: "AIzaSyBwm_cUYyrAPWvp-t31PCWP_gmeHghVdTQ",
+//     authDomain: "yesvitelive.firebaseapp.com",
+//     databaseURL: "https://yesvitelive-default-rtdb.firebaseio.com",
+//     projectId: "yesvitelive",
+//     storageBucket: "yesvitelive.appspot.com",
+//     messagingSenderId: "438593077863",
+//     appId: "1:438593077863:web:51ab60b8d230a6c4f48ac2",
+//     measurementId: "G-6FRGMCQQ66",
+// };
+alert(0);
 const firebaseConfig = {
     apiKey: "AIzaSyBwm_cUYyrAPWvp-t31PCWP_gmeHghVdTQ",
     authDomain: "yesvitelive.firebaseapp.com",
