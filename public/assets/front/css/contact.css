@@ -416,6 +416,15 @@ ul.nav .nav-link:hover{
 .popular-list div a{
     font-size: 14px;
     color: var(--lightColor);
+    transition: 0.5s;
+    -webkit-transition: 0.5s;
+    -moz-transition: 0.5s;
+    -ms-transition: 0.5s;
+    -o-transition: 0.5s;
+}
+
+.popular-list div a:hover{
+    color: var(--primaryColor);
 }
 
 .popular-list .listing{
@@ -486,6 +495,20 @@ ul.listing li span{
     max-height: 430px;
     overflow-y: scroll;
 } */
+
+.user-contacts .edit-contact{
+    transition: 0.5s;
+    -webkit-transition: 0.5s;
+    -moz-transition: 0.5s;
+    -ms-transition: 0.5s;
+    -o-transition: 0.5s;
+}
+
+.user-contacts .edit-contact:hover{
+    background-color: transparent;
+    color: var(--primaryColor) !important;
+    border: 1px solid var(--primaryColor) !important;
+}
 
 .users-data .contact-img{
     width: 36px;
