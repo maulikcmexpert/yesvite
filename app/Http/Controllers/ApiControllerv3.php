@@ -108,7 +108,7 @@ use Illuminate\Support\Facades\Session;
 use stdClass;
 
 
-class ApiControllerv2 extends Controller
+class ApiControllerv3 extends Controller
 
 
 {
