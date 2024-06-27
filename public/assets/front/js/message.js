@@ -2601,6 +2601,7 @@ $(".multi-pin").click(async function () {
         console.error("Error updating pin status:", error);
     }
     $(".bulk-back").click();
+    toastr.success("Selected conversations have been updated.");
 });
 
 $(".multi-mute").click(function () {
@@ -2624,6 +2625,7 @@ $(".multi-mute").click(function () {
 
     $("input[name='checked_conversation[]']").prop("checked", false);
     $(".bulk-back").click();
+    toastr.success("Selected conversations have been updated.");
 });
 
 $(".multi-archive").click(function () {
@@ -2685,6 +2687,7 @@ $(".multi-read").click(function () {
     });
     $("input[name='checked_conversation[]']").prop("checked", false);
     $(".bulk-back").click();
+    toastr.success("Selected conversations have been read.");
 });
 
 $(".delete-conversation").click(async function () {
