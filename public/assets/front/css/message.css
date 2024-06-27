@@ -247,11 +247,16 @@ ul.chat-list li:last-child{
     font-size: 12px;
     color: var(--lightColor);
     width: 100%;
-    max-width: 180px;
+    max-width: 200px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+
+.msg-list .user-detail span{
+    max-width: 160px;
+}
+
 
 .chat-list h6{
     font-size: 12px;
@@ -1321,6 +1326,8 @@ ul.member-lists li:last-child{
 }
 
 /* ======= responsive ======== */
+
+
 @media only screen and (max-width:1500px){
     .chat-area .msg-head .dropdown-menu.show{
         transform: translate3d(0px, 43px, 0px) !important;
@@ -1329,6 +1336,18 @@ ul.member-lists li:last-child{
         -ms-transform: translate3d(0px, 43px, 0px) !important;
         -o-transform: translate3d(0px, 43px, 0px) !important;
 }
+}
+
+@media only screen and (max-width:1400px){
+    .msg-list .user-detail span{
+        max-width: 120px;
+    }
+}
+
+@media only screen and (max-width:1200px){
+    .msg-list .user-detail span {
+        max-width: 90px;
+    }
 }
 
 @media only screen and (max-width:992px){
@@ -1342,6 +1361,12 @@ ul.member-lists li:last-child{
 
     .chat-area .chatbox {
         width: 60% !important;
+    }
+}
+
+@media only screen and (max-width:991px){
+    .msg-list .user-detail span {
+        max-width: 320px;
     }
 }
 
@@ -1437,18 +1462,18 @@ ul.member-lists li:last-child{
     }
 
     .msg-body ul li.receiver div.media-msg{
-        width: 150px;
-        height: 150px;
+        width: 220px;
+        height: 220px;
     }
 
     .msg-body ul li.sender div img{
-        width: 150px;
-        height: 150px;
+        width: 100%;
+        height: 100%;
     }
 
     .msg-body ul li.sender div.media-msg{
-        width: 150px;
-        height: 150px;
+        width: 220px;
+        height: 220px;
     }
 
     .msg-body ul li.sender,
@@ -1460,6 +1485,15 @@ ul.member-lists li:last-child{
 
     .msg-body ul li.receiver .reply-section{
         padding: 10px 10px 10px 19px;
+    }
+
+    .msg-list .user-detail span {
+        max-width: 190px;
+    }
+
+    .msg-body ul li.sender div.media-msg video {
+        width: 100%;
+        height: 100%;
     }
 }
 
@@ -1473,11 +1507,19 @@ ul.member-lists li:last-child{
         width: 100%;
         margin-top: 10px;
     }
+
+    .msg-list .user-detail span {
+        max-width: 130px;
+    }
     
 }
 
 @media only screen and (max-width:390px){
     .user-detail span{
+        max-width: 100px;
+    }
+
+    .msg-list .user-detail span {
         max-width: 100px;
     }
 }
