@@ -190,6 +190,8 @@ ul.chat-list li{
     -ms-border-radius: 16px;
     -o-border-radius: 16px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
 }
 
 ul.chat-list li.active,
@@ -241,6 +243,7 @@ ul.chat-list li:last-child{
 .chat-list .chat-data{
     padding: 18px 10px;
     position: relative;
+    width: 100%;
 }
 
 .user-detail span{
@@ -252,6 +255,11 @@ ul.chat-list li:last-child{
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+
+.msg-list .user-detail span{
+    max-width: 160px;
+}
+
 
 .chat-list h6{
     font-size: 12px;
@@ -514,11 +522,17 @@ ul.member-lists li:last-child{
     margin: 16px 0;
 }
 
+.msg-body ul li.sender{
+    max-width: 700px;
+}
+
 .msg-body ul li.receiver{
     display: block;
     width: 100%;
     text-align: right;
     position: relative;
+    max-width: 700px;
+    margin-left: auto;
 }
 
 .msg-body ul li.receiver p,
@@ -539,6 +553,7 @@ ul.member-lists li:last-child{
     margin-bottom: 5px !important;
     position: relative;
     word-break: break-all;
+    text-align: left;
 }
 
 
@@ -594,7 +609,9 @@ ul.member-lists li:last-child{
     font-size: 12px;
 }
 
-.msg-body ul li.sender p  .reaction{
+.msg-body ul li.sender p .reaction,
+.msg-body ul li.sender .simple-msg-wrap .reaction
+{
     width: 22px;
     height: 22px;
     position: absolute;
@@ -744,6 +761,15 @@ ul.member-lists li:last-child{
 .set-replay-msg .replay-user{
     font-size: 11px;
     color: red;
+}
+
+.replay-msg .replay-msg{
+    font-size: 14px;
+}
+
+
+.msg-body ul li.receiver .reply-section .reply-massage span{
+    word-break: break-all;
 }
 
 .msg-footer input{
@@ -1198,7 +1224,7 @@ ul.member-lists li:last-child{
 .reaction-dialog {
     position: absolute;
     bottom: -45px;
-    right: 4%;
+    right: -35px;
     display: flex;
     gap: 5px;
     background-color: #fff;
@@ -1228,15 +1254,20 @@ ul.member-lists li:last-child{
     align-items: center;
 }
 
-.msg-lists .sender .simple-message .reaction-ul{
+.msg-lists .sender .simple-message .reaction-ul,
+.msg-lists .receiver .simple-message .reaction-ul
+{
     position: absolute;
     bottom: -19px;
     right: -4px;
     display: flex;
     left: 60%;
+    justify-content: end;
 }
 
-.msg-lists .sender .simple-message .reaction-ul .reaction{
+.msg-lists .sender .simple-message .reaction-ul .reaction,
+.msg-lists .receiver .simple-message .reaction-ul .reaction
+{
     position: initial;
 }
 
@@ -1307,6 +1338,8 @@ ul.member-lists li:last-child{
 }
 
 /* ======= responsive ======== */
+
+
 @media only screen and (max-width:1500px){
     .chat-area .msg-head .dropdown-menu.show{
         transform: translate3d(0px, 43px, 0px) !important;
@@ -1315,6 +1348,26 @@ ul.member-lists li:last-child{
         -ms-transform: translate3d(0px, 43px, 0px) !important;
         -o-transform: translate3d(0px, 43px, 0px) !important;
 }
+}
+
+@media only screen and (max-width:1400px){
+    .msg-list .user-detail span{
+        max-width: 115px;
+    }
+}
+
+@media only screen and (max-width:1200px){
+    .msg-list .user-detail span {
+        max-width: 110px;
+    }
+
+    .chat-lists{
+        width: 35% !important;
+    }
+
+    .chat-area .chatbox{
+        width: 65% !important;
+    }
 }
 
 @media only screen and (max-width:992px){
@@ -1331,24 +1384,13 @@ ul.member-lists li:last-child{
     }
 }
 
-@media only screen and (max-width:763px){
-    .chat-lists{
-           width: 100% !important; 
-    }
-    .chat-area .chatbox{
-        width: 100% !important; 
+@media only screen and (max-width:991px){
+    .msg-list .user-detail span {
+        max-width: 80px;
     }
 }
 
-@media only screen and (max-width:763px){
-    .chat-area .chat-header .dropdown-menu.show{
-        transform: translate3d(0px, 43px, 0px) !important;
-        -webkit-transform: translate3d(0px, 43px, 0px) !important;
-        -moz-transform: translate3d(0px, 43px, 0px) !important;
-        -ms-transform: translate3d(0px, 43px, 0px) !important;
-        -o-transform: translate3d(0px, 43px, 0px) !important;
-}
-}
+
 
 @media only screen and (max-width:768px){
     .chat-area{
@@ -1392,6 +1434,27 @@ ul.member-lists li:last-child{
     .message-area ul.chat-list{
         margin-bottom: 70px !important;
     }
+
+    .chat-lists{
+        width: 100% !important; 
+    }
+    .chat-area .chatbox{
+        width: 100% !important; 
+    }
+
+    .msg-list .user-detail span {
+        max-width: 320px;
+    }
+}
+
+@media only screen and (max-width:763px){
+    .chat-area .chat-header .dropdown-menu.show{
+        transform: translate3d(0px, 43px, 0px) !important;
+        -webkit-transform: translate3d(0px, 43px, 0px) !important;
+        -moz-transform: translate3d(0px, 43px, 0px) !important;
+        -ms-transform: translate3d(0px, 43px, 0px) !important;
+        -o-transform: translate3d(0px, 43px, 0px) !important;
+}
 }
 
 @media only screen and (max-width:620px){
@@ -1423,18 +1486,38 @@ ul.member-lists li:last-child{
     }
 
     .msg-body ul li.receiver div.media-msg{
-        width: 150px;
-        height: 150px;
+        width: 220px;
+        height: 220px;
     }
 
     .msg-body ul li.sender div img{
-        width: 150px;
-        height: 150px;
+        width: 100%;
+        height: 100%;
     }
 
     .msg-body ul li.sender div.media-msg{
-        width: 150px;
-        height: 150px;
+        width: 220px;
+        height: 220px;
+    }
+
+    .msg-body ul li.sender,
+    .msg-body ul li.receiver
+    {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .msg-body ul li.receiver .reply-section{
+        padding: 10px 10px 10px 19px;
+    }
+
+    .msg-list .user-detail span {
+        max-width: 190px;
+    }
+
+    .msg-body ul li.sender div.media-msg video {
+        width: 100%;
+        height: 100%;
     }
 }
 
@@ -1448,6 +1531,19 @@ ul.member-lists li:last-child{
         width: 100%;
         margin-top: 10px;
     }
+
+    .msg-list .user-detail span {
+        max-width: 130px;
+    }
     
 }
 
+@media only screen and (max-width:390px){
+    .user-detail span{
+        max-width: 100px;
+    }
+
+    .msg-list .user-detail span {
+        max-width: 100px;
+    }
+}
