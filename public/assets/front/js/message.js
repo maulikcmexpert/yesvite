@@ -2620,8 +2620,8 @@ $(".multi-pin").click(async function () {
         .reverse();
     const promises = [];
     console.log(checkedConversations);
-    checkedConversations.forEach(function () {
-        const conversationId = $(this).val();
+    checkedConversations.forEach(function (element) {
+        const conversationId = $(element).val();
         const overviewRef = ref(
             database,
             `overview/${senderUser}/${conversationId}/isPin`
