@@ -1237,15 +1237,20 @@ ul.member-lists li:last-child{
     align-items: center;
 }
 
-.msg-lists .sender .simple-message .reaction-ul{
+.msg-lists .sender .simple-message .reaction-ul,
+.msg-lists .receiver .simple-message .reaction-ul
+{
     position: absolute;
     bottom: -19px;
     right: -4px;
     display: flex;
     left: 60%;
+    justify-content: end;
 }
 
-.msg-lists .sender .simple-message .reaction-ul .reaction{
+.msg-lists .sender .simple-message .reaction-ul .reaction,
+.msg-lists .receiver .simple-message .reaction-ul .reaction
+{
     position: initial;
 }
 
