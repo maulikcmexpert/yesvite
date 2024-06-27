@@ -686,6 +686,24 @@ ul.nav-tabs .nav-link:focus{
     align-items: center !important;
 }
 
+.ui-widget-content.ui-autocomplete .suggestion-item:hover{
+    background-color: #f1f1f1 !important;
+    border: none !important;
+} 
+
+.ui-widget-content.ui-autocomplete .ui-menu-item:hover{
+    background-color: #f1f1f1 !important;
+}
+
+.ui-widget-content.ui-autocomplete .ui-menu-item{
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px !important;
+}
+
+.ui-widget-content.ui-autocomplete .ui-menu-item:last-child{
+    border: none !important;
+}
+
 /* ======== Responsive ========= */
 @media only screen and (max-width:1199px){
     h2{
