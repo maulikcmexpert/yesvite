@@ -34,7 +34,7 @@
                 <div class="tab-pane fade show active" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                     <div class="">
 
-                        <form method="POST" action="{{route('store.register')}}" id="register">
+                        <form method="POST" action="{{route('store.register')}}" id="register" autocomplete="off">
                             @csrf
                             <input type="hidden" id="account_type" name="account_type" value="0">
                             <div class="row">
@@ -64,7 +64,7 @@
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div class="input-form">
-                                        <input type="email" class="form-control" id="email" name="email" value="{{ old('email')}}">
+                                        <input type="email" class="form-control" id="email" name="email" value="{{ old('email')}}" autocomplete="off">
                                         <label for="email" class="floating-label">Email Address <span>*</span></label>
 
                                         <div class="label-error">
@@ -89,7 +89,7 @@
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div class="input-form">
-                                        <input type="password" class="form-control" id="password" name="password" value="{{ old('password')}}">
+                                        <input type="password" class="form-control" id="password" name="password" value="{{ old('password')}}" autocomplete="new-password">
                                         <label for="password" class="floating-label">Password <span>*</span></label>
                                         <span toggle="#password-field" class="fa-regular fa-fw fa-eye-slash field-icon toggle-password"></span>
                                         <div class="label-error">
@@ -165,7 +165,7 @@
                     <div class="">
                         <form method="POST" action="{{route('store.register')}}" id="business">
                             @csrf
-                            <input type="hidden" id="account_type" name="account_type" value="1">
+                            <input type="hidden" id="account_type" name="account_type" value="1" autocomplete="off">
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                                     <div class="input-form">
@@ -193,7 +193,7 @@
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div class="input-form">
-                                        <input type="email" class="form-control" id="businessemail" name="email" value="{{ old('email')}}">
+                                        <input type="email" class="form-control" id="businessemail" name="email" value="{{ old('email')}}" autocomplete="off">
                                         <label for="email" class="floating-label">Email Address <span>*</span></label>
                                         <div class="label-error">
                                             <label id="email-error" class="error" for="businessemail" style="color: red;"></label>
@@ -217,7 +217,7 @@
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div class="input-form">
-                                        <input type="password" class="form-control" id="businesspassword" name="businesspassword" value="{{ old('businesspassword')}}">
+                                        <input type="password" class="form-control" id="businesspassword" name="businesspassword" value="{{ old('businesspassword')}}" autocomplete="new-password">
                                         <label for="password" class="floating-label">Password <span>*</span></label>
                                         <span toggle="#password-field" class="fa-regular fa-fw fa-eye-slash field-icon toggle-password"></span>
                                         <div class="label-error">
@@ -268,20 +268,20 @@
                                 </svg>
                             </a>
                             <a href="#">
-                                    <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <g clip-path="url(#clip0_3682_69601)">
-                                    <path d="M1.99971 1.63231C0.113711 3.59131 0.499711 5.67231 0.499711 11.9943C0.499711 17.2443 -0.416289 22.5073 4.37771 23.7463C5.87471 24.1313 19.1387 24.1313 20.6337 23.7443C22.6297 23.2293 24.2537 21.6103 24.4757 18.7873C24.5067 18.3933 24.5067 5.60231 24.4747 5.20031C24.2387 2.19331 22.3877 0.460314 19.9487 0.109314C19.3897 0.028314 19.2777 0.00431398 16.4097 -0.000686023C6.23671 0.00431398 4.00671 -0.448686 1.99971 1.63231Z" fill="url(#paint0_linear_3682_69601)"/>
-                                    <path d="M12.4978 3.13746C8.86681 3.13746 5.41881 2.81446 4.10181 6.19446C3.55781 7.59046 3.63681 9.40346 3.63681 11.9995C3.63681 14.2775 3.56381 16.4185 4.10181 17.8035C5.41581 21.1855 8.89181 20.8615 12.4958 20.8615C15.9728 20.8615 19.5578 21.2235 20.8908 17.8035C21.4358 16.3935 21.3558 14.6075 21.3558 11.9995C21.3558 8.53746 21.5468 6.30246 19.8678 4.62446C18.1678 2.92446 15.8688 3.13746 12.4938 3.13746H12.4978ZM11.7038 4.73446C19.2778 4.72246 20.2418 3.88046 19.7098 15.5775C19.5208 19.7145 16.3708 19.2605 12.4988 19.2605C5.43881 19.2605 5.23581 19.0585 5.23581 11.9955C5.23581 4.85046 5.79581 4.73846 11.7038 4.73246V4.73446ZM17.2278 6.20546C16.6408 6.20546 16.1648 6.68146 16.1648 7.26846C16.1648 7.85546 16.6408 8.33146 17.2278 8.33146C17.8148 8.33146 18.2908 7.85546 18.2908 7.26846C18.2908 6.68146 17.8148 6.20546 17.2278 6.20546ZM12.4978 7.44846C9.98481 7.44846 7.94781 9.48646 7.94781 11.9995C7.94781 14.5125 9.98481 16.5495 12.4978 16.5495C15.0108 16.5495 17.0468 14.5125 17.0468 11.9995C17.0468 9.48646 15.0108 7.44846 12.4978 7.44846ZM12.4978 9.04546C16.4028 9.04546 16.4078 14.9535 12.4978 14.9535C8.59381 14.9535 8.58781 9.04546 12.4978 9.04546Z" fill="white"/>
+                                        <path d="M1.99971 1.63231C0.113711 3.59131 0.499711 5.67231 0.499711 11.9943C0.499711 17.2443 -0.416289 22.5073 4.37771 23.7463C5.87471 24.1313 19.1387 24.1313 20.6337 23.7443C22.6297 23.2293 24.2537 21.6103 24.4757 18.7873C24.5067 18.3933 24.5067 5.60231 24.4747 5.20031C24.2387 2.19331 22.3877 0.460314 19.9487 0.109314C19.3897 0.028314 19.2777 0.00431398 16.4097 -0.000686023C6.23671 0.00431398 4.00671 -0.448686 1.99971 1.63231Z" fill="url(#paint0_linear_3682_69601)" />
+                                        <path d="M12.4978 3.13746C8.86681 3.13746 5.41881 2.81446 4.10181 6.19446C3.55781 7.59046 3.63681 9.40346 3.63681 11.9995C3.63681 14.2775 3.56381 16.4185 4.10181 17.8035C5.41581 21.1855 8.89181 20.8615 12.4958 20.8615C15.9728 20.8615 19.5578 21.2235 20.8908 17.8035C21.4358 16.3935 21.3558 14.6075 21.3558 11.9995C21.3558 8.53746 21.5468 6.30246 19.8678 4.62446C18.1678 2.92446 15.8688 3.13746 12.4938 3.13746H12.4978ZM11.7038 4.73446C19.2778 4.72246 20.2418 3.88046 19.7098 15.5775C19.5208 19.7145 16.3708 19.2605 12.4988 19.2605C5.43881 19.2605 5.23581 19.0585 5.23581 11.9955C5.23581 4.85046 5.79581 4.73846 11.7038 4.73246V4.73446ZM17.2278 6.20546C16.6408 6.20546 16.1648 6.68146 16.1648 7.26846C16.1648 7.85546 16.6408 8.33146 17.2278 8.33146C17.8148 8.33146 18.2908 7.85546 18.2908 7.26846C18.2908 6.68146 17.8148 6.20546 17.2278 6.20546ZM12.4978 7.44846C9.98481 7.44846 7.94781 9.48646 7.94781 11.9995C7.94781 14.5125 9.98481 16.5495 12.4978 16.5495C15.0108 16.5495 17.0468 14.5125 17.0468 11.9995C17.0468 9.48646 15.0108 7.44846 12.4978 7.44846ZM12.4978 9.04546C16.4028 9.04546 16.4078 14.9535 12.4978 14.9535C8.59381 14.9535 8.58781 9.04546 12.4978 9.04546Z" fill="white" />
                                     </g>
                                     <defs>
-                                    <linearGradient id="paint0_linear_3682_69601" x1="2.04573" y1="22.4664" x2="24.3512" y2="3.16129" gradientUnits="userSpaceOnUse">
-                                    <stop stop-color="#FFDD55"/>
-                                    <stop offset="0.5" stop-color="#FF543E"/>
-                                    <stop offset="1" stop-color="#C837AB"/>
-                                    </linearGradient>
-                                    <clipPath id="clip0_3682_69601">
-                                    <rect x="0.5" width="24" height="24" fill="white"/>
-                                    </clipPath>
+                                        <linearGradient id="paint0_linear_3682_69601" x1="2.04573" y1="22.4664" x2="24.3512" y2="3.16129" gradientUnits="userSpaceOnUse">
+                                            <stop stop-color="#FFDD55" />
+                                            <stop offset="0.5" stop-color="#FF543E" />
+                                            <stop offset="1" stop-color="#C837AB" />
+                                        </linearGradient>
+                                        <clipPath id="clip0_3682_69601">
+                                            <rect x="0.5" width="24" height="24" fill="white" />
+                                        </clipPath>
                                     </defs>
                                 </svg>
                             </a>
