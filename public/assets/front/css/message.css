@@ -133,6 +133,10 @@
     width: 100%;
 }
 
+.chat-functions span{
+    cursor: pointer;
+}
+
 .chat-functions h6{
     font-size: 18px;
     font-weight: 700;
@@ -230,6 +234,11 @@ ul.chat-list li:last-child{
     font-weight: 600;
     line-height: 24px;
     margin-bottom: 0px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+    max-width: 150px;
 }
 
 .member-lists .chat-data .remove-member{
@@ -939,6 +948,33 @@ ul.member-lists li:last-child{
     -o-border-radius: 0px 20px 20px 20px;
     margin-bottom: 2px;
     text-align: left;
+    position: relative;
+}
+
+.msg-body ul li.sender .reaction-ul{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    justify-content: end;
+    display: flex;
+    left: 60%;
+}
+
+.msg-body ul li.sender .reaction-ul li{
+    margin: 0;
+    width: 22px;
+    height: 22px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0px 5px 10px 0px #0000001A;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .msg-body ul li.receiver .reply-section{
@@ -1337,6 +1373,8 @@ ul.member-lists li:last-child{
     border: 1px solid #000;
 }
 
+
+
 /* ======= responsive ======== */
 
 
@@ -1367,6 +1405,10 @@ ul.member-lists li:last-child{
 
     .chat-area .chatbox{
         width: 65% !important;
+    }
+
+    .user-detail h3{
+        max-width: 115px;
     }
 }
 
@@ -1544,6 +1586,6 @@ ul.member-lists li:last-child{
     }
 
     .msg-list .user-detail span {
-        max-width: 100px;
+        max-width: 80px;
     }
 }
