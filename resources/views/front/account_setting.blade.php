@@ -33,7 +33,7 @@
                                 @endif
                             </div>
                             <div class="user-name">
-                                <div class="d-flex justify-content-center align-items-center">
+                                <div class="d-flex align-items-center">
                                     <h3>{{$user->firstname.' '.$user->lastname}}</h3>
                                     <span>PRO</span>
                                 </div>
