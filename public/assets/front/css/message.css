@@ -247,7 +247,7 @@ ul.chat-list li:last-child{
     font-size: 12px;
     color: var(--lightColor);
     width: 100%;
-    max-width: 200px;
+    max-width: 180px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -1345,15 +1345,7 @@ ul.member-lists li:last-child{
     }
 }
 
-@media only screen and (max-width:763px){
-    .chat-area .chat-header .dropdown-menu.show{
-        transform: translate3d(0px, 43px, 0px) !important;
-        -webkit-transform: translate3d(0px, 43px, 0px) !important;
-        -moz-transform: translate3d(0px, 43px, 0px) !important;
-        -ms-transform: translate3d(0px, 43px, 0px) !important;
-        -o-transform: translate3d(0px, 43px, 0px) !important;
-}
-}
+
 
 @media only screen and (max-width:768px){
     .chat-area{
@@ -1406,6 +1398,16 @@ ul.member-lists li:last-child{
  }
 }
 
+@media only screen and (max-width:763px){
+    .chat-area .chat-header .dropdown-menu.show{
+        transform: translate3d(0px, 43px, 0px) !important;
+        -webkit-transform: translate3d(0px, 43px, 0px) !important;
+        -moz-transform: translate3d(0px, 43px, 0px) !important;
+        -ms-transform: translate3d(0px, 43px, 0px) !important;
+        -o-transform: translate3d(0px, 43px, 0px) !important;
+}
+}
+
 @media only screen and (max-width:620px){
     .chat-area .dropdown-menu.show{
         transform: translate3d(0px, 43px, 0px) !important;
@@ -1448,6 +1450,17 @@ ul.member-lists li:last-child{
         width: 150px;
         height: 150px;
     }
+
+    .msg-body ul li.sender,
+    .msg-body ul li.receiver
+    {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .msg-body ul li.receiver .reply-section{
+        padding: 10px 10px 10px 19px;
+    }
 }
 
 @media only screen and (max-width:420px){
@@ -1463,3 +1476,8 @@ ul.member-lists li:last-child{
     
 }
 
+@media only screen and (max-width:390px){
+    .user-detail span{
+        max-width: 100px;
+    }
+}
