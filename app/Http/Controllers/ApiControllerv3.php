@@ -3437,7 +3437,7 @@ class ApiControllerv2 extends Controller
         }
 
 
-        if($eventData['subscription_plan_name'] == 'Pro'  )
+
 
 
         $eventCreation =  Event::create([
@@ -3476,8 +3476,7 @@ class ApiControllerv2 extends Controller
             'message_to_guests' => (!empty($eventData['message_to_guests'])) ? $eventData['message_to_guests'] : "",
             'subscription_plan_name' => (!empty($eventData['subscription_plan_name'])) ? $eventData['subscription_plan_name'] : "",
             'subscription_invite_count' => (!empty($eventData['subscription_invite_count'])) ? $eventData['subscription_invite_count'] : 0,
-
-            'is_draft_save' => $eventData['is_draft_save']
+            'is_draft_save' => (!empty($eventData['subscription_plan_name']) && $eventData['subscription_plan_name'] == 'Pro') ? "1" : $eventData['is_draft_save']
         ]);
 
 
@@ -12466,6 +12465,7 @@ class ApiControllerv2 extends Controller
             'productId' => 'required',
             'purchaseTime' => 'required',
             'purchaseToken' => 'required|string',
+            'event_id' => 'required'
         ]);
 
 
@@ -12502,8 +12502,14 @@ class ApiControllerv2 extends Controller
             $new_subscription->productId = $input['productId'];
             $new_subscription->type = 'product';
             $new_subscription->purchaseToken = $input['purchaseToken'];
-            $new_subscription->save();
-
+            if ($new_subscription->save()) {
+                $updateEvent = Event::where('id', $input['event_id'])->first();
+                if ($updateEvent != null) {
+                    $updateEvent->is_draft_save = '0';
+                    $updateEvent->product_payment_id = $new_subscription->id;
+                    $updateEvent->save();
+                }
+            }
             return response()->json(['status' => 1, 'message' => "purchase sucessfully"]);
         } catch (QueryException $e) {
             return response()->json(['status' => 0, 'message' => "db error"]);
