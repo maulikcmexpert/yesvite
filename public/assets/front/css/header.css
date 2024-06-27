@@ -232,8 +232,13 @@ header.login-header {
 .header-right{
     display: flex;
     align-items: center;
-    gap: 30px;
+    gap: 25px;
     margin-left: auto;
+}
+
+.header-right .drp-conent{
+    display: flex;
+    align-items: center;
 }
 
 .header-dropdown button,

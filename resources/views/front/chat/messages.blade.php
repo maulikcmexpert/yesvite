@@ -76,7 +76,7 @@ use Carbon\Carbon;
                                     </span>
                                 </div>
                             </div>
-                            <div class="dropdown ms-3">
+                            <div class="dropdown ms-auto bulk-edit-option">
                                 <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
                                     <svg width="5" height="18" viewBox="0 0 5 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M1.5 9C1.5 9.26522 1.60536 9.51957 1.79289 9.70711C1.98043 9.89464 2.23478 10 2.5 10C2.76522 10 3.01957 9.89464 3.20711 9.70711C3.39464 9.51957 3.5 9.26522 3.5 9C3.5 8.73478 3.39464 8.48043 3.20711 8.29289C3.01957 8.10536 2.76522 8 2.5 8C2.23478 8 1.98043 8.10536 1.79289 8.29289C1.60536 8.48043 1.5 8.73478 1.5 9Z" stroke="#64748B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -89,7 +89,8 @@ use Carbon\Carbon;
                                                 <path d="M10.499 13.6092C8.50729 13.6092 6.89062 11.9926 6.89062 10.0009C6.89062 8.00924 8.50729 6.39258 10.499 6.39258C12.4906 6.39258 14.1073 8.00924 14.1073 10.0009C14.1073 11.9926 12.4906 13.6092 10.499 13.6092ZM10.499 7.64258C9.19896 7.64258 8.14062 8.70091 8.14062 10.0009C8.14062 11.3009 9.19896 12.3592 10.499 12.3592C11.799 12.3592 12.8573 11.3009 12.8573 10.0009C12.8573 8.70091 11.799 7.64258 10.499 7.64258Z" fill="#94A3B8" />
                                                 <path d="M10.4984 17.5158C7.3651 17.5158 4.40677 15.6824 2.37344 12.4991C1.4901 11.1241 1.4901 8.88242 2.37344 7.49909C4.4151 4.31576 7.37344 2.48242 10.4984 2.48242C13.6234 2.48242 16.5818 4.31576 18.6151 7.49909C19.4984 8.87409 19.4984 11.1158 18.6151 12.4991C16.5818 15.6824 13.6234 17.5158 10.4984 17.5158ZM10.4984 3.73242C7.80677 3.73242 5.23177 5.34909 3.43177 8.17409C2.80677 9.14909 2.80677 10.8491 3.43177 11.8241C5.23177 14.6491 7.80677 16.2658 10.4984 16.2658C13.1901 16.2658 15.7651 14.6491 17.5651 11.8241C18.1901 10.8491 18.1901 9.14909 17.5651 8.17409C15.7651 5.34909 13.1901 3.73242 10.4984 3.73242Z" fill="#94A3B8" />
                                             </svg>
-                                            Bulk Edit</a></li>
+                                            Bulk Edit</a>
+                                        </li>
                                 </ul>
                             </div>
                         </div>
@@ -116,7 +117,7 @@ use Carbon\Carbon;
                             <input class="form-check-input" type="checkbox" name="checked_conversation[]" value="{{$message['conversationId']}}" isGroup="{{@$message['group']}}">
                         </div>
                         
-                        <div class="chat-data d-flex align-items-center">
+                        <div class="chat-data d-flex align-items-start">
                             <div class="user-img position-relative">
                             @if($message['receiverProfile']!=="")
                                                         <img class="img-fluid user-image user-img-{{$message['contactId']}}" data-id={{$message['contactId']}} src="{{$message['receiverProfile']}}" alt="user img">
@@ -125,34 +126,39 @@ use Carbon\Carbon;
                                                         $contactName = $message['contactName'];
                                                         $words = explode(' ', $contactName);
                                                         $initials = '';
+                                                        
                                                         foreach ($words as $word) {
                                                             $initials .= strtoupper(substr($word, 0, 1));
                                                         }
+                                                        $initials = substr($initials, 0, 2);
                                                         $fontColor = "fontcolor" . strtoupper($initials[0]);
                                                         @endphp
                                                         <h5 class="{{$fontColor}}">{{$initials}}</h5>
                                                         @endif
                                 <span class="active"></span>
                             </div>
-                            <a href="#" class="user-detail d-block ms-3">
-                                <div class="d-flex align-items-center justify-content-between">
+                            <a href="#" class="user-detail d-flex ms-3">
+                                <div class="d-flex align-items-start flex-column">
                                     <h3>{{$message['contactName']}}</h3>
                                     @php
                                         $timestamp = $message['timeStamp'] ?? now()->timestamp;
                                         $timeAgo = Carbon::createFromTimestampMs($timestamp)->diffForHumans();
                                     @endphp
-                                    <h6 class="ms-2 time-ago"> {{ $timeAgo }}</h6>
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <span class="last-message">{{$message['lastMessage']}}</span>
+                                        <span class="badge ms-2 {{@$message['unReadCount'] == 0 ? 'd-none' : ''}}">{{@$message['unReadCount']}}</span>
+                                    </div>
                                 </div>
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <span class="last-message">{{$message['lastMessage']}}</span>
-                                    <span class="badge ms-2 {{@$message['unReadCount'] == 0 ? 'd-none' : ''}}">{{@$message['unReadCount']}}</span>
-                                </div>
+                                
                             </a>
-                            <span class="ms-3 me-2 d-flex align-items-center pin-svg {{@$message['isPin']=='1'?'':'d-none'}}">
-                                <svg width="11" height="17" viewBox="0 0 11 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M8.83333 0.5C9.04573 0.500236 9.25003 0.581566 9.40447 0.727374C9.55892 0.873181 9.65186 1.07246 9.66431 1.2845C9.67676 1.49653 9.60777 1.70532 9.47145 1.86819C9.33512 2.03107 9.14175 2.13575 8.93083 2.16083L8.83333 2.16667V6.13667L10.4117 9.29417C10.4552 9.38057 10.4834 9.47391 10.495 9.57L10.5 9.66667V11.3333C10.5 11.5374 10.425 11.7344 10.2894 11.887C10.1538 12.0395 9.96688 12.137 9.76417 12.1608L9.66667 12.1667H6.33333V15.5C6.3331 15.7124 6.25177 15.9167 6.10596 16.0711C5.96015 16.2256 5.76087 16.3185 5.54884 16.331C5.3368 16.3434 5.12802 16.2744 4.96514 16.1381C4.80226 16.0018 4.69759 15.8084 4.6725 15.5975L4.66667 15.5V12.1667H1.33333C1.12922 12.1666 0.932219 12.0917 0.77969 11.9561C0.627161 11.8204 0.529714 11.6335 0.505833 11.4308L0.5 11.3333V9.66667C0.500114 9.57004 0.517032 9.47416 0.55 9.38333L0.588333 9.29417L2.16667 6.135V2.16667C1.95427 2.16643 1.74997 2.0851 1.59553 1.93929C1.44108 1.79349 1.34814 1.59421 1.33569 1.38217C1.32324 1.17014 1.39223 0.96135 1.52855 0.798473C1.66488 0.635595 1.85825 0.53092 2.06917 0.505833L2.16667 0.5H8.83333Z" fill="#94A3B8"/>
-                                </svg>
-                            </span>
+                            <div class="ms-auto">
+                                <h6 class="ms-2 time-ago"> {{ $timeAgo }}</h6>
+                                <span class="ms-auto me-2 d-flex mt-1 align-items-start justify-content-end pin-svg {{@$message['isPin']=='1'?'':'d-none'}}">
+                                    <svg width="11" height="17" viewBox="0 0 11 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M8.83333 0.5C9.04573 0.500236 9.25003 0.581566 9.40447 0.727374C9.55892 0.873181 9.65186 1.07246 9.66431 1.2845C9.67676 1.49653 9.60777 1.70532 9.47145 1.86819C9.33512 2.03107 9.14175 2.13575 8.93083 2.16083L8.83333 2.16667V6.13667L10.4117 9.29417C10.4552 9.38057 10.4834 9.47391 10.495 9.57L10.5 9.66667V11.3333C10.5 11.5374 10.425 11.7344 10.2894 11.887C10.1538 12.0395 9.96688 12.137 9.76417 12.1608L9.66667 12.1667H6.33333V15.5C6.3331 15.7124 6.25177 15.9167 6.10596 16.0711C5.96015 16.2256 5.76087 16.3185 5.54884 16.331C5.3368 16.3434 5.12802 16.2744 4.96514 16.1381C4.80226 16.0018 4.69759 15.8084 4.6725 15.5975L4.66667 15.5V12.1667H1.33333C1.12922 12.1666 0.932219 12.0917 0.77969 11.9561C0.627161 11.8204 0.529714 11.6335 0.505833 11.4308L0.5 11.3333V9.66667C0.500114 9.57004 0.517032 9.47416 0.55 9.38333L0.588333 9.29417L2.16667 6.135V2.16667C1.95427 2.16643 1.74997 2.0851 1.59553 1.93929C1.44108 1.79349 1.34814 1.59421 1.33569 1.38217C1.32324 1.17014 1.39223 0.96135 1.52855 0.798473C1.66488 0.635595 1.85825 0.53092 2.06917 0.505833L2.16667 0.5H8.83333Z" fill="#94A3B8"/>
+                                    </svg>
+                                </span>
+                            </div>
                              {{-- <div class="dropdown ms-auto">
                                 <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
                                     <svg width="5" height="18" viewBox="0 0 5 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -183,8 +189,9 @@ use Carbon\Carbon;
                     <input type="hidden" id="isGroup"/>
 
                     @endif
-                    <button id="archive-list" list="0">Archive List</button>
+                    
                         </ul>
+                        <button id="archive-list" list="0">Archive List</button>
                     </div>
                     <div class="chatbox position-relative w-100">
                         <div class="msg-head">
@@ -313,10 +320,10 @@ use Carbon\Carbon;
                                 </div>
                             <div class="message-perent">
                                 <input type="text" placeholder="Write message here..." class="send-message">
-                                <div class="d-flex gap-3">
+                                <div class="d-flex ms-auto">
                                     <div class="dropdown">
                                         <button type="button" class="btn btn-primary dropdown-toggle p-0" data-bs-toggle="dropdown">
-                                            <svg class="me-2" width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <svg class="me-3" width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M12.7028 11.8002L11.2928 13.2102C10.5128 13.9902 10.5128 15.2602 11.2928 16.0402C12.0728 16.8202 13.3428 16.8202 14.1228 16.0402L16.3428 13.8202C17.9028 12.2602 17.9028 9.73023 16.3428 8.16023C14.7828 6.60023 12.2528 6.60023 10.6828 8.16023L8.26281 10.5802C6.92281 11.9202 6.92281 14.0902 8.26281 15.4302" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                                 <path d="M12.5 22C18.0228 22 22.5 17.5228 22.5 12C22.5 6.47715 18.0228 2 12.5 2C6.97715 2 2.5 6.47715 2.5 12C2.5 17.5228 6.97715 22 12.5 22Z" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                             </svg>
@@ -361,10 +368,14 @@ use Carbon\Carbon;
                                             </li>
                                         </ul>
                                     </div>
+                                    <div>
                                     <div id="audioControls">
-                                        <button type="button" class="close-song" style="display: none;">✖</button>
+                                        <button type="button" class="close-song" style="display: none;">
+                                            <svg width="17" height="18" viewBox="0 0 17 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M8.4974 0.666016C3.90573 0.666016 0.164062 4.40768 0.164062 8.99935C0.164062 13.591 3.90573 17.3327 8.4974 17.3327C13.0891 17.3327 16.8307 13.591 16.8307 8.99935C16.8307 4.40768 13.0891 0.666016 8.4974 0.666016ZM11.2974 10.916C11.5391 11.1577 11.5391 11.5577 11.2974 11.7993C11.1724 11.9243 11.0141 11.9827 10.8557 11.9827C10.6974 11.9827 10.5391 11.9243 10.4141 11.7993L8.4974 9.88268L6.58073 11.7993C6.45573 11.9243 6.2974 11.9827 6.13906 11.9827C5.98073 11.9827 5.8224 11.9243 5.6974 11.7993C5.45573 11.5577 5.45573 11.1577 5.6974 10.916L7.61406 8.99935L5.6974 7.08268C5.45573 6.84102 5.45573 6.44102 5.6974 6.19935C5.93906 5.95768 6.33906 5.95768 6.58073 6.19935L8.4974 8.11602L10.4141 6.19935C10.6557 5.95768 11.0557 5.95768 11.2974 6.19935C11.5391 6.44102 11.5391 6.84102 11.2974 7.08268L9.38073 8.99935L11.2974 10.916Z" fill="#F73C71"></svg>
+                                        </button>
         
-                                        <button id="stopRecording" style="display: none;">Stop Recording</button>
+                                        <button id="stopRecording" style="display: none;"><i class="fa-solid fa-pause"></i></button>
                                         <button id="playRecording" style="display: none;">Play Recording</button>
                                         <button id="stopPlayback" style="display: none;">Stop Playback</button>
                                     </div>
@@ -372,8 +383,11 @@ use Carbon\Carbon;
         
                                     <div class="audio-container" id="audioContainer">
                                         <audio id="recordedAudio" class="recordedAudio" controls style="display: none;"></audio>
-                                        <button class="close-audio-btn">X</button>
+                                        <button class="close-audio-btn"><svg width="17" height="18" viewBox="0 0 17 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M8.4974 0.666016C3.90573 0.666016 0.164062 4.40768 0.164062 8.99935C0.164062 13.591 3.90573 17.3327 8.4974 17.3327C13.0891 17.3327 16.8307 13.591 16.8307 8.99935C16.8307 4.40768 13.0891 0.666016 8.4974 0.666016ZM11.2974 10.916C11.5391 11.1577 11.5391 11.5577 11.2974 11.7993C11.1724 11.9243 11.0141 11.9827 10.8557 11.9827C10.6974 11.9827 10.5391 11.9243 10.4141 11.7993L8.4974 9.88268L6.58073 11.7993C6.45573 11.9243 6.2974 11.9827 6.13906 11.9827C5.98073 11.9827 5.8224 11.9243 5.6974 11.7993C5.45573 11.5577 5.45573 11.1577 5.6974 10.916L7.61406 8.99935L5.6974 7.08268C5.45573 6.84102 5.45573 6.44102 5.6974 6.19935C5.93906 5.95768 6.33906 5.95768 6.58073 6.19935L8.4974 8.11602L10.4141 6.19935C10.6557 5.95768 11.0557 5.95768 11.2974 6.19935C11.5391 6.44102 11.5391 6.84102 11.2974 7.08268L9.38073 8.99935L11.2974 10.916Z" fill="#F73C71"/>
+                                            </svg></button>
                                     </div>
+                                    <div>
                                     <span id="startRecording">
                                         <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M12.5 15.5C14.71 15.5 16.5 13.71 16.5 11.5V6C16.5 3.79 14.71 2 12.5 2C10.29 2 8.5 3.79 8.5 6V11.5C8.5 13.71 10.29 15.5 12.5 15.5Z" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -441,7 +455,7 @@ use Carbon\Carbon;
                         </div>
                         <h5 class="selected-user-name">Tiana Dokidis, Martin Garlic, +3</h5>
                         <p>This message will automatically create a group</p>
-                        <a href="#">See all user</a><br>
+                        {{-- <a href="#">See all user</a><br> --}}
                         <input type="text" id ="group-name" placeholder="Group Name">
                     </div>
                 </div>
@@ -553,6 +567,8 @@ use Carbon\Carbon;
             </div>
         </div>
     </div>
+</div>
+</div>
 </div>
 @push('scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/timeago.js/4.0.2/timeago.min.js"></script>

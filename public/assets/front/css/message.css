@@ -59,15 +59,24 @@
     -ms-border-radius: 20px;
     -o-border-radius: 20px;
     display: flex;
+    justify-content: space-evenly;
     height: 744px;
+    width: 100%;
 }
 
 .chat-lists{
     /* padding: 24px 20px; */
-    width: 100%;
+
     max-width: 375px;
     border-right: 1px solid var(--borderColor);
+    position: relative;
+    width: 30% !important;
 }
+
+.chat-area .chatbox{
+    width: 70% !important;
+}
+
 .member-lists{
     /* padding: 24px 20px; */
     width: 100%;
@@ -106,7 +115,7 @@
     display: flex;
     align-items: center;
     margin-bottom: 16px;
-    padding: 24px 20px;
+    padding: 23px 20px;
     border-bottom: 1px solid var(--borderColor);
 }
 
@@ -166,10 +175,9 @@ ul.chat-list{
     padding-left: 0;
     margin-bottom: 0;
     padding: 10px 20px;
-    max-height: 620px;
+    max-height: 570px;
     overflow-y: scroll;
     height: 100%;
-    position: relative;
 }
 
 ul.chat-list li{
@@ -210,9 +218,9 @@ ul.chat-list li:last-child{
     bottom: 0;
 }
 
-.chat-list .user-detail{
+/* .chat-list .user-detail{
     width: 55%;
-}
+} */
 
 .user-detail h3{
     font-size: 14px;
@@ -431,6 +439,7 @@ ul.member-lists{
 
 ul.group-list{
     max-width: 100%;
+    max-height: 400px;
 }
 
 ul.group-list .user-detail h3{
@@ -487,6 +496,7 @@ ul.member-lists li:last-child{
     color: #558f57;
     font-size: 13px;
     padding: 0;
+    margin-bottom: 15px;
 }
 
 .new-member button:hover{
@@ -509,7 +519,9 @@ ul.member-lists li:last-child{
     position: relative;
 }
 
-.msg-body ul li.receiver p{
+.msg-body ul li.receiver p,
+.msg-body ul li.receiver .simple-msg-wrap
+{
     color: var(--secondryColor);
     font-size: 14px;
     line-height: 20.5px;
@@ -524,6 +536,7 @@ ul.member-lists li:last-child{
     -o-border-radius: 20px 0px 20px 20px;
     margin-bottom: 5px !important;
     position: relative;
+    word-break: break-all;
 }
 
 
@@ -550,6 +563,7 @@ ul.member-lists li:last-child{
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: left;
 }
 
 .msg-body ul li .time{
@@ -560,7 +574,9 @@ ul.member-lists li:last-child{
     font-weight: 400;
 }
 
-.msg-body ul li.sender p{
+.msg-body ul li.sender p,
+.msg-body ul li.sender .simple-msg-wrap
+{
     color: var(--secondryColor);
     display: inline-flex;
     flex-direction: column;
@@ -596,7 +612,7 @@ ul.member-lists li:last-child{
 }
 
 
-.msg-body ul li.sender p .senderName{
+.msg-body ul li.sender .simple-msg-wrap .senderName{
     font-size: 11px;
     color: red;
 }
@@ -611,7 +627,7 @@ ul.member-lists li:last-child{
 
 .msg-body ul li.receiver div.media-msg{
     background-color: #FFE4E9;
-    padding: 10px 10px 30px;
+    padding: 10px 10px 25px;
     border-radius: 20px 0px 20px 20px;
     -webkit-border-radius: 20px 0px 20px 20px;
     -moz-border-radius: 20px 0px 20px 20px;
@@ -625,7 +641,7 @@ ul.member-lists li:last-child{
 
 .msg-body ul li.receiver div.media-msg .media-text{
     margin-right: 30px;
-    margin-top: 10px;
+    margin-top: 0px;
     display: inline-block;
 }
 
@@ -639,7 +655,7 @@ ul.member-lists li:last-child{
 .msg-body .media-msg span.seenStatus{
     position: absolute;
     right: 9px;
-    bottom: 9px;
+    bottom: 10px;
 }
 
 .msg-body ul li.sender div.media-msg{
@@ -653,6 +669,22 @@ ul.member-lists li:last-child{
     display: inline-block;
     max-width: 317px;
     margin-left: auto;
+}
+
+.msg-body ul li.sender div.media-msg video{
+    max-width: 100%;
+    width: 297px;
+    height: 254px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.msg-body ul li.receiver div.media-msg video{
+    max-width: 100%;
+    width: 297px;
+    height: 254px;
+    object-fit: cover;
+    border-radius: 10px;
 }
 
 .msg-body ul li.sender div img{
@@ -684,6 +716,10 @@ ul.member-lists li:last-child{
     padding-right: 20px;
     padding-top: 8px;
     padding-bottom: 8px;
+}
+
+.msg-footer .message-perent .gap-3{
+
 }
 
 .msg-footer .set-replay-msg{
@@ -722,13 +758,13 @@ ul.member-lists li:last-child{
     box-shadow: none !important;
 }
 
-.msg-footer .dropdown-menu.show{
+/* .msg-footer .dropdown-menu.show{
     transform: translate3d(-150px, -145px, 0px) !important;
     -webkit-transform: translate3d(-150px, -145px, 0px) !important;
     -moz-transform: translate3d(-150px, -145px, 0px) !important;
     -ms-transform: translate3d(-150px, -145px, 0px) !important;
     -o-transform: translate3d(-150px, -145px, 0px) !important;
-}
+} */
 
 .msg-footer #preview{
     padding: 10px;
@@ -749,10 +785,12 @@ ul.member-lists li:last-child{
     border-radius: 5px;
 }
 
-.msg-footer #preview .close-button{
+.msg-footer #preview .close-preview{
     position: absolute;
     right: 5px;
     top: 5px;
+    background-color: transparent;
+    border: none;
 }
 
 .chat-data .form-check-input:checked{
@@ -1110,7 +1148,7 @@ ul.member-lists li:last-child{
     margin-bottom: 6px;
 }
 
-#selected-tags-containe .close-btn {
+#selected-tags-container .close-btn {
     cursor: pointer;
     margin-left: 10px;
 }
@@ -1143,7 +1181,7 @@ ul.member-lists li:last-child{
     margin-bottom: 6px;
 }
 
-.group-selected-tags-container .close-group-btn{
+#group-selected-tags-container .close-group-btn{
     margin-left: 10px;
 }
 
@@ -1152,12 +1190,13 @@ ul.member-lists li:last-child{
     margin-left: 7px;
     padding: 2px;
     border-radius: 50%;
+    position: relative;
 }
 
 .reaction-dialog {
     position: absolute;
-    bottom: -35px;
-    left: 8px;
+    bottom: -45px;
+    right: 4%;
     display: flex;
     gap: 5px;
     background-color: #fff;
@@ -1187,6 +1226,18 @@ ul.member-lists li:last-child{
     align-items: center;
 }
 
+.msg-lists .sender .simple-message .reaction-ul{
+    position: absolute;
+    bottom: -19px;
+    right: -4px;
+    display: flex;
+    left: 60%;
+}
+
+.msg-lists .sender .simple-message .reaction-ul .reaction{
+    position: initial;
+}
+
 .modal-header .selected-title{
     margin-bottom: 0;
     cursor: pointer;
@@ -1213,7 +1264,8 @@ ul.member-lists li:last-child{
     -o-border-radius: 16px;
     margin-top: 10px;
     position: absolute;
-    bottom: 0;
+    bottom: 20px;
+    left: 30px;
 }
 
 #archive-list:hover,
@@ -1221,6 +1273,35 @@ ul.member-lists li:last-child{
 {
     background-color: var(--primaryColor);
     color: #fff;
+}
+
+.audio-container{
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    display: flex;
+    align-items: center;
+    transform: translateY(-50%);
+}
+
+.audio-container .close-audio-btn{
+    border: none;
+    background-color: transparent;
+    box-shadow: none;
+    margin-left: 10px;
+}
+
+#stopRecording{
+    border: none;
+    background-color: transparent;
+    box-shadow: inherit;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #000;
 }
 
 /* ======= responsive ======== */
@@ -1234,10 +1315,21 @@ ul.member-lists li:last-child{
 }
 }
 
+@media only screen and (max-width:763px){
+    .chat-area .chat-header .dropdown-menu.show{
+        transform: translate3d(0px, 43px, 0px) !important;
+        -webkit-transform: translate3d(0px, 43px, 0px) !important;
+        -moz-transform: translate3d(0px, 43px, 0px) !important;
+        -ms-transform: translate3d(0px, 43px, 0px) !important;
+        -o-transform: translate3d(0px, 43px, 0px) !important;
+}
+}
+
 @media only screen and (max-width:768px){
     .chat-area{
         flex-direction: column;
         border: none;
+        height: auto;
     }
 
     .chat-lists{
@@ -1263,6 +1355,18 @@ ul.member-lists li:last-child{
         -o-border-radius: 20px;
         margin-top: 20px;
     }
+
+    .chat-header{
+        padding: 10px 20px;
+    }
+
+    .msg-footer{
+        border-bottom-left-radius: 20px;
+    }
+
+    .message-area ul.chat-list{
+        margin-bottom: 70px !important;
+    }
 }
 
 @media only screen and (max-width:620px){
@@ -1280,19 +1384,45 @@ ul.member-lists li:last-child{
         padding: 0px 0px;
     }
 
-    .chat-list .user-detail {
+    /* .chat-list .user-detail {
         width: 45%;
+    } */
+
+    .chat-header{
+        margin-bottom: 5px;
+    }
+
+    .msg-body ul li.receiver div img{
+        width: 150px;
+        height: 150px;
+    }
+
+    .msg-body ul li.receiver div.media-msg{
+        width: 150px;
+        height: 150px;
+    }
+
+    .msg-body ul li.sender div img{
+        width: 150px;
+        height: 150px;
+    }
+
+    .msg-body ul li.sender div.media-msg{
+        width: 150px;
+        height: 150px;
     }
 }
 
 @media only screen and (max-width:420px){
     .message-area .massage-notification{
         flex-direction: column;
+        align-items: flex-start;
     }
 
     .massage-notification .cmn-btn{
         width: 100%;
         margin-top: 10px;
     }
+    
 }
 
