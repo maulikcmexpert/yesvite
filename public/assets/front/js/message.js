@@ -291,7 +291,7 @@ async function handleNewConversation(snapshot) {
             .find(".user-detail .last-message")
             .text(newConversation.lastMessage);
         $(conversationElement)
-            .find(".user-detail .time-ago")
+            .find(".ms-auto .time-ago")
             .text(timeago.format(newConversation.timeStamp));
         $(conversationElement)
             .find(".user-img")
@@ -307,7 +307,10 @@ async function handleNewConversation(snapshot) {
             .find("span")
             .replaceWith(userStatus);
 
-        const badgeElement = $(conversationElement).find(".user-detail .badge");
+        const badgeElement = $(conversationElement).find(
+            ".ms-auto .d-flex .badge"
+        );
+        console.log(badgeElement);
         badgeElement.text(newConversation.unReadCount);
         if (newConversation.unReadCount == 0) {
             badgeElement.addClass("d-none");
