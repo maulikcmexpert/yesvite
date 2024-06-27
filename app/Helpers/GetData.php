@@ -165,19 +165,19 @@ function getYesviteContactList($id)
 
 function getYesviteContactListPage($id, $perPage, $page)
 {
-    $yesviteRegisteredUser = User::select('id', 'firstname', 'profile', 'lastname', 'email', 'country_code', 'phone_number', 'app_user', 'prefer_by', 'email_verified_at', 'parent_user_phone_contact', 'visible', 'message_privacy')->where('id', '!=', $id)->where(['is_user_phone_contact' => '0'])->orderBy('firstname')
+    $yesviteRegisteredUser = User::select('id', 'firstname', 'profile', 'lastname', 'email', 'country_code', 'phone_number', 'app_user', 'prefer_by', 'email_verified_at', 'parent_user_phone_contact', 'visible', 'message_privacy')
+        ->where('id', '!=', $id)
+        ->where('is_user_phone_contact', '0')
+        ->where(function ($query) {
+            $query->whereNull('email_verified_at')
+                ->where('app_user', '!=', '1')
+                ->orWhereNotNull('email_verified_at');
+        })
+        ->orderBy('firstname')
         ->paginate($perPage, ['*'], 'page', $page);
-    dd($yesviteRegisteredUser);
     $yesviteUser = [];
     foreach ($yesviteRegisteredUser as $user) {
 
-        // if ($user->parent_user_phone_contact != $id && $user->app_user == '0') {
-        //     echo  $user->id;
-        //     continue;
-        // }
-        if ($user->email_verified_at == NULL && $user->app_user == '1') {
-            continue;
-        }
         $yesviteUserDetail['id'] = $user->id;
         $yesviteUserDetail['profile'] = empty($user->profile) ? "" : asset('public/storage/profile/' . $user->profile);
         $yesviteUserDetail['first_name'] = (!empty($user->firstname) || $user->firstname != Null) ? $user->firstname : "";;

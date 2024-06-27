@@ -3074,7 +3074,12 @@ class ApiControllerv2 extends Controller
             $user  = Auth::guard('api')->user();
             $groupList = getGroupList($user->id);
             $yesvitecontactList = getYesviteContactListPage($user->id, "10", $page);
-            $yesviteRegisteredUser = User::select('id', 'firstname', 'profile', 'lastname', 'email', 'country_code', 'phone_number', 'app_user', 'prefer_by', 'email_verified_at', 'parent_user_phone_contact', 'visible', 'message_privacy')->where('id', '!=', $user->id)->where(['is_user_phone_contact' => '0'])->orderBy('firstname')
+            $yesviteRegisteredUser = User::where('id', '!=', $user->id)->where('is_user_phone_contact', '0')->where(function ($query) {
+                $query->whereNull('email_verified_at')
+                    ->where('app_user', '!=', '1')
+                    ->orWhereNotNull('email_verified_at');
+            })
+                ->orderBy('firstname')
                 ->count();
             $total_page = ceil($yesviteRegisteredUser / 10);
             return response()->json(['status' => 1, 'message' => "Yesvite contact list", 'total_page' => $total_page, "data" => $yesvitecontactList, 'group' => $groupList]);
