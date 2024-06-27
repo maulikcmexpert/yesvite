@@ -1355,11 +1355,12 @@ $("#search-user")
     const $divName = $("<div>").addClass("user-detail d-block ms-3");
     const $img = item.imageElement;
     console.log($img);
-    const $span = $("<h3>").text(item.label);
-    $span.append($("<span>").text(item.email));
+    const $h3 = $("<h3>").text(item.label);
+    const $span = $("<span>").text(item.email);
 
     $divImage.append($img);
-    $divName.append($("<div>")).append($span);
+    $divName.append($("<div>")).append($h3);
+    $divName.append($span);
     $divMain.append($divImage).append($divName);
     $li.append($divMain).appendTo(ul);
 
