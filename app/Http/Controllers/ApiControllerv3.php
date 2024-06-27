@@ -4538,7 +4538,9 @@ class ApiControllerv2 extends Controller
                 }
             }
 
-
+            if ($updateEvent->subscription_plan_name == 'Pro' && $updateEvent->product_payment_id == NULL) {
+                $eventData['is_draft_save'] = '1';
+            }
 
             $updateEvent->event_type_id = (!empty($eventData['event_type_id'])) ? $eventData['event_type_id'] : "";
             $updateEvent->event_name = (!empty($eventData['event_name'])) ? $eventData['event_name'] : "";
@@ -5048,62 +5050,70 @@ class ApiControllerv2 extends Controller
 
 
 
-            if (isset($eventData['addr_change']) && $eventData['addr_change'] == '1') {
 
-                $notificationParam = [
-                    'sender_id' => $user->id,
-                    'event_id' => $eventData['event_id'],
-                    'from_addr' => $eventData['from_addr'],
-                    'to_addr' => $eventData['to_addr'],
-                    'newUser' => $eventData['invited_new_guest']
-                ];
+            if ($eventData['is_draft_save'] == '0') {
 
-                sendNotification('update_address', $notificationParam);
-            }
 
-            if (isset($eventData['time_change']) && $eventData['time_change'] == '1') {
+                if (isset($eventData['addr_change']) && $eventData['addr_change'] == '1') {
 
-                $notificationParam = [
-                    'sender_id' => $user->id,
-                    'event_id' => $eventData['event_id'],
-                    'from_time' => $eventData['from_time'],
-                    'to_time' => $eventData['to_time'],
-                    'newUser' => $eventData['invited_new_guest']
-                ];
+                    $notificationParam = [
+                        'sender_id' => $user->id,
+                        'event_id' => $eventData['event_id'],
+                        'from_addr' => $eventData['from_addr'],
+                        'to_addr' => $eventData['to_addr'],
+                        'newUser' => $eventData['invited_new_guest']
+                    ];
 
-                sendNotification('update_time', $notificationParam);
-            }
+                    sendNotification('update_address', $notificationParam);
+                }
 
-            if (isset($eventData['addr_change']) && $eventData['addr_change'] == '0' && isset($eventData['time_change']) && $eventData['time_change'] == '0') {
-                $notificationParam = [
-                    'sender_id' => $user->id,
-                    'event_id' => $eventData['event_id'],
-                    'from_time' => $eventData['from_time'],
-                    'to_time' => $eventData['to_time'],
-                    'newUser' => $eventData['invited_new_guest']
-                ];
+                if (isset($eventData['time_change']) && $eventData['time_change'] == '1') {
 
-                sendNotification('update_event', $notificationParam);
-            }
+                    $notificationParam = [
+                        'sender_id' => $user->id,
+                        'event_id' => $eventData['event_id'],
+                        'from_time' => $eventData['from_time'],
+                        'to_time' => $eventData['to_time'],
+                        'newUser' => $eventData['invited_new_guest']
+                    ];
 
-            if (isset($eventData['invited_new_guest']) && count($eventData['invited_new_guest']) != 0) {
-                $notificationParam = [
+                    sendNotification('update_time', $notificationParam);
+                }
 
-                    'sender_id' => $user->id,
+                if (isset($eventData['addr_change']) && $eventData['addr_change'] == '0' && isset($eventData['time_change']) && $eventData['time_change'] == '0') {
+                    $notificationParam = [
+                        'sender_id' => $user->id,
+                        'event_id' => $eventData['event_id'],
+                        'from_time' => $eventData['from_time'],
+                        'to_time' => $eventData['to_time'],
+                        'newUser' => $eventData['invited_new_guest']
+                    ];
 
-                    'event_id' => $eventData['event_id'],
+                    sendNotification('update_event', $notificationParam);
+                }
 
-                    'newUser' => $eventData['invited_new_guest']
+                if (isset($eventData['invited_new_guest']) && count($eventData['invited_new_guest']) != 0) {
+                    $notificationParam = [
 
-                ];
+                        'sender_id' => $user->id,
 
-                sendNotification('invite', $notificationParam);
+                        'event_id' => $eventData['event_id'],
+
+                        'newUser' => $eventData['invited_new_guest']
+
+                    ];
+
+                    sendNotification('invite', $notificationParam);
+                }
             }
 
 
             DB::commit();
-
-            return response()->json(['status' => 1, 'event_name' => $eventData['event_name'], 'event_id' => (int)$eventData['event_id'], 'message' => "Event updated Successfully"]);
+            $purchase_status = true;
+            if ($updateEvent->subscription_plan_name == 'Pro' && $updateEvent->product_payment_id == NULL) {
+                $purchase_status = false;
+            }
+            return response()->json(['status' => 1, 'event_name' => $eventData['event_name'], 'event_id' => (int)$eventData['event_id'], 'message' => "Event updated Successfully", 'purchase_status' => $purchase_status]);
         } else {
 
             return response()->json(['status' => 0, 'message' => 'Event is not found']);
