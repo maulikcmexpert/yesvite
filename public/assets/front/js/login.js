@@ -77,5 +77,5 @@ $("#updatePassForm").validate({
     },
 });
 
-$('label[for="email"]').addClass('floatingfocus');
-$('label[for="password"]').addClass('floatingfocus');
+// $('label[for="email"]').addClass('floatingfocus');
+// $('label[for="password"]').addClass('floatingfocus');
