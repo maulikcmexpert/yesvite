@@ -33,7 +33,7 @@ import {
 //     appId: "1:438593077863:web:51ab60b8d230a6c4f48ac2",
 //     measurementId: "G-6FRGMCQQ66",
 // };
-alert(0);
+
 const firebaseConfig = {
     apiKey: "AIzaSyAVgJQewYO8h1-_z2mrjaATCqJ4NH8eeCI",
     authDomain: "yesvite-976cd.firebaseapp.com",
