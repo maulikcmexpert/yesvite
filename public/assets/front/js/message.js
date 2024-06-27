@@ -1021,14 +1021,17 @@ $(".send-message").on("keypress", async function (e) {
                 if (!reciverUser) {
                     return;
                 }
+                let userData = await get(userRef);
+                let userSnap = userData.val();
+                console.log({ userSnap });
                 const receiverConversationData = {
-                    contactId: receiverId,
-                    contactName: receiverName,
+                    contactId: senderUser,
+                    contactName: senderUserName,
                     conversationId: conversationId,
                     group: false,
                     lastMessage: `${senderUserName}: ${message}`,
                     lastSenderId: senderUser,
-                    receiverProfile: reciverUser.userProfile,
+                    receiverProfile: userSnap?.userProfile,
                     timeStamp: Date.now(),
                     unRead: true,
                     unReadCount: 1,
@@ -1149,15 +1152,14 @@ function createMessageElement(key, messageData, isGroup) {
                 : "grey-tick"
             : "";
         reaction =
-            messageData?.react != "" && messageData?.react
-                ? String?.fromCodePoint(
+            messageData?.react && messageData?.react.length > 0
+                ? `<span class="reaction">${String?.fromCodePoint(
                       parseInt(
                           messageData?.react?.replace(/\\u\{(.+)\}/, "$1"),
                           16
                       )
-                  )
+                  )}</span>`
                 : "";
-        reaction = `<span class="reaction">${reaction}</span>`;
     }
 
     let emojiAndReplay = isReceiver
@@ -1353,10 +1355,12 @@ $("#search-user")
     const $divName = $("<div>").addClass("user-detail d-block ms-3");
     const $img = item.imageElement;
     console.log($img);
-    const $span = $("<h3>").text(item.label);
+    const $h3 = $("<h3>").text(item.label);
+    const $span = $("<span>").text(item.email);
 
     $divImage.append($img);
-    $divName.append($("<div>")).append($span);
+    $divName.append($("<div>")).append($h3);
+    $divName.append($span);
     $divMain.append($divImage).append($divName);
     $li.append($divMain).appendTo(ul);
 
@@ -1403,14 +1407,17 @@ async function handleSelectedUsers() {
         $(".multi-chat").removeClass("d-none");
         const $tags = $("#selected-tags-container .tag");
         let groupNames = "";
+        let allNames = "";
         $tags.each(async function (index) {
             if (index < 2) {
                 const userName = $(this).find(".names").text().trim();
                 const userImgSrc = $(this).find(".img-fluid").prop("outerHTML");
-                console.log(userImgSrc);
+
                 groupNames += `<div class="multi-img grp-img">
                                     ${userImgSrc}
                                 </div>`;
+                if (allNames.length > 0) allNames += ", ";
+                allNames += userName;
             }
         });
         $(".multi-chat .img-wrp").html(groupNames);
@@ -1420,17 +1427,18 @@ async function handleSelectedUsers() {
             let moreimg = `<div class="multi-img more-img">
                 <span>+${moreCount}</span>
             </div>`;
+            allNames += `, +${moreCount}`;
             $(".multi-chat .img-wrp").append(moreimg);
         } else {
             $(".more-img").remove();
         }
         // Set multiple names in the selected-user-name
-        const allNames = $tags
-            .map(function () {
-                return $(this).clone().find(".names").text().trim();
-            })
-            .get()
-            .join(", ");
+        // const allNames = $tags
+        //     .map(function () {
+        //         return $(this).clone().find(".names").text().trim();
+        //     })
+        //     .get()
+        //     .join(", ");
         $(".selected-user-name").text(allNames);
     } else {
         $(".chat-user").addClass("d-none");
@@ -1890,7 +1898,7 @@ $(document).on("click", ".remove-member", async function () {
     const groupInfoRef = ref(database, `Groups/${conversationId}/groupInfo`);
     const snapshot = await get(groupInfoRef);
     const groupInfo = snapshot.val();
-    groupInfo.profiles.map((profile) => {
+    groupInfo?.profiles.map((profile) => {
         if (profile.id > 0) {
             SelecteGroupUser[profile.id] = {
                 id: profile.id,
@@ -2607,11 +2615,13 @@ $(".multi-pin").click(async function () {
 
     const checkedConversations = $(
         "input[name='checked_conversation[]']:checked"
-    );
+    )
+        .toArray()
+        .reverse();
     const promises = [];
-
-    checkedConversations.each(function () {
-        const conversationId = $(this).val();
+    console.log(checkedConversations);
+    checkedConversations.forEach(function (element) {
+        const conversationId = $(element).val();
         const overviewRef = ref(
             database,
             `overview/${senderUser}/${conversationId}/isPin`
