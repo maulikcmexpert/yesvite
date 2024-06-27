@@ -59,7 +59,7 @@
     -ms-border-radius: 20px;
     -o-border-radius: 20px;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: stretch;
     height: 744px;
     width: 100%;
 }
@@ -74,7 +74,7 @@
 }
 
 .chat-area .chatbox{
-    width: 70% !important;
+    width: 71% !important;
 }
 
 .member-lists{
@@ -289,6 +289,8 @@ ul.chat-list li:last-child{
     width: 16px;
     height: 16px;
     background-size: contain;
+    position: absolute;
+    bottom: 3px;
 }
 
 .blue-tick {
@@ -1313,6 +1315,29 @@ ul.member-lists li:last-child{
         -ms-transform: translate3d(0px, 43px, 0px) !important;
         -o-transform: translate3d(0px, 43px, 0px) !important;
 }
+}
+
+@media only screen and (max-width:992px){
+    .chat-lists{
+        width: 40% !important;
+    }
+
+    ul.chat-list{
+        padding: 10px 10px;
+    }
+
+    .chat-area .chatbox {
+        width: 60% !important;
+    }
+}
+
+@media only screen and (max-width:763px){
+    .chat-lists{
+           width: 100% !important; 
+    }
+    .chat-area .chatbox{
+        width: 100% !important; 
+    }
 }
 
 @media only screen and (max-width:763px){
