@@ -27,6 +27,7 @@ use App\Rules\AtLeastOnePresentRule;
 // Rules //
 
 use App\Rules\verify_otp;
+use Illuminate\Support\Facades\Session;
 
 class ApiAuthController extends Controller
 {
@@ -43,7 +44,7 @@ class ApiAuthController extends Controller
         $validator = Validator::make($input, [
             'firstname' => 'required',
             'lastname' => 'required',
-            'email' => 'required|email|unique:users',
+            'email' => 'required|email',
             'password' => 'required|min:8',
             'account_type' => 'required|in:0,1',
             'company_name' => 'present'
@@ -69,18 +70,32 @@ class ApiAuthController extends Controller
 
             $randomString = Str::random(30);
 
+            $checkUser = User::where("email", $input['email'])->first();
+            $usersignup =  $checkUser;
+            if ($checkUser != null) {
+                $checkUser->firstname = $input['firstname'];
+                $checkUser->lastname = $input['lastname'];
+                $checkUser->email = $input['email'];
+                $checkUser->account_type = $input['account_type'];
+                $checkUser->company_name = ($input['account_type'] == '1') ? $input['company_name'] : "";
+                $checkUser->password = Hash::make($input['password']);
+                $checkUser->password_updated_date = date('Y-m-d');
+                $checkUser->remember_token =  $randomString;
+                $checkUser->save();
+            } else {
 
-            $usersignup =  User::create([
-                'firstname' => $input['firstname'],
-                'lastname' => $input['lastname'],
-                'email' => $input['email'],
-                'account_type' => $input['account_type'],
-                'company_name' => ($input['account_type'] == '1') ? $input['company_name'] : "",
-                'password' => Hash::make($input['password']),
-                'password_updated_date' => date('Y-m-d'),
-                'remember_token' =>  $randomString,
+                $usersignup =  User::create([
+                    'firstname' => $input['firstname'],
+                    'lastname' => $input['lastname'],
+                    'email' => $input['email'],
+                    'account_type' => $input['account_type'],
+                    'company_name' => ($input['account_type'] == '1') ? $input['company_name'] : "",
+                    'password' => Hash::make($input['password']),
+                    'password_updated_date' => date('Y-m-d'),
+                    'remember_token' =>  $randomString,
 
-            ]);
+                ]);
+            }
             // event(new \App\Events\UserRegistered($usersignup));
 
             DB::commit();
@@ -187,6 +202,7 @@ class ApiAuthController extends Controller
 
 
                 event(new \App\Events\UserRegistered($user));
+                logoutFromWeb($user->id);
                 return response()->json(['status' => 1, 'data' => $detail, 'token' => $token]);
             } else {
 
@@ -233,7 +249,7 @@ class ApiAuthController extends Controller
         $validator = Validator::make($input, [
             'firstname' => 'required',
 
-            'email' => 'required|email|unique:users',
+            'email' => 'required|email',
             'device_id' => 'required',
             'device_token' => 'required',
 
@@ -271,6 +287,8 @@ class ApiAuthController extends Controller
                 $isExistUser->instagram_token_id = $input['instagram_token_id'];
                 $isExistUser->save();
             }
+
+
             $userId = $isExistUser->id;
 
             $this->userDevice($userId, $input);
@@ -290,7 +308,7 @@ class ApiAuthController extends Controller
                 'account_type' => $userInfo->account_type,
                 'is_first_login' => $userInfo->is_first_login
             ];
-
+            logoutFromWeb($userId);
             return response()->json(['status' => 1, 'data' => $detail, 'token' => $token]);
         } else {
             DB::beginTransaction();
@@ -309,6 +327,7 @@ class ApiAuthController extends Controller
             } else if (isset($input['social_type']) && $input['social_type'] === 'instagram') {
                 $usersignup->instagram_token_id = $input['instagram_token_id'];
             }
+            $usersignup->email_verified_at = strtotime(date('Y-m-d  h:i:s'));
             $usersignup->save();
 
             $userId = $usersignup->id;
@@ -331,6 +350,7 @@ class ApiAuthController extends Controller
                 'is_first_login' => $userInfo->is_first_login
             ];
             DB::commit();
+            logoutFromWeb($userId);
             return response()->json(['status' => 1, 'data' => $detail, 'token' => $token]);
         }
 

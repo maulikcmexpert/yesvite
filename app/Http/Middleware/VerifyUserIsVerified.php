@@ -24,19 +24,22 @@ class VerifyUserIsVerified
      */
     public function handle(Request $request, Closure $next): Response
     {
+
+
         if (Auth::check()) {
+
             $user = Auth::user();
             $currentSessionId = Session::getId();
 
             if ($user->current_session_id && $user->current_session_id !== $currentSessionId) {
-                Auth::logout();
+                Auth::guard('web')->logout();
                 return redirect('/')->with('error', 'You have been logged out because your account was logged in from another device.');
             }
 
             $user->current_session_id = $currentSessionId;
             $user->save();
+            return $next($request);
         }
-
-        return $next($request);
+        return redirect('/')->with('error', 'Unauthorised');
     }
 }

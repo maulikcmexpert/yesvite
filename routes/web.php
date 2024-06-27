@@ -12,7 +12,9 @@ use App\Http\Controllers\{
     SocialController,
     AccountSettingController,
     RsvpController,
-    ChatController
+    ChatController,
+    PrivacyPolicyController,
+    TermsAndConditionController
 };
 use Illuminate\Support\Facades\Auth;
 
@@ -32,17 +34,23 @@ use Illuminate\Support\Facades\Auth;
 
 //     return view('welcome');
 // });
-Route::get('/', [HomeFrontController::class, 'index'])->name('front.home');
+Route::get('/', [HomeFrontController::class, 'index'])->name('front.home')->middleware('isAuthenticate');
 Route::get('about-us', [AboutController::class, 'index'])->name('about');
+Route::get('privacy_policy', [PrivacyPolicyController::class, 'index'])->name('privacy_policy');
+Route::get('term_and_condition', [TermsAndConditionController::class, 'index'])->name('term_and_condition');
 // Route::get('contact', [ContactController::class, 'index'])->name('contact');
 Route::get('rsvp/{userId}/{eventId}', [RsvpController::class, 'index'])->name('rsvp');
 Route::post('rsvp/store', [RsvpController::class, 'store'])->name('rsvp.store');
 
+
+
+
+Route::get('add_account', [AuthController::class, 'addAccount'])->name('auth.add_account');
+Route::post('check_add_account', [AuthController::class, 'checkAddAccount'])->name('auth.checkAddAccount');
+
 Route::middleware('checkUserExist')->group(function () {
 
 
-    Route::get('add_account', [AuthController::class, 'addAccount'])->name('auth.add_account');
-    Route::post('check_add_account', [AuthController::class, 'checkAddAccount'])->name('auth.checkAddAccount');
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::post('/import-csv', [HomeController::class, 'importCSV'])->name('import.csv');
     Route::get('profile',  [ProfileController::class, 'index'])->name('profile');
@@ -95,7 +103,10 @@ Route::middleware('checkUserExist')->group(function () {
 });
 
 
+
 Route::controller(AuthController::class)->group(function () {
+    Route::get('google/auth', 'redirectToGoogle');
+    Route::get('google/callback', 'handleGoogleCallback');
 
     Route::get('login', 'create')->name('auth.login')->middleware('isAuthenticate');
     Route::post('login', 'checkLogin')->name('auth.checkLogin');
@@ -134,10 +145,11 @@ Route::controller(AuthController::class)->group(function () {
 
     Route::post('/updatePassword/{id}', 'updatePassword');
 
+    Route::get('switch_account/{id}', 'switchAccount')->name('switchAccount');
     Route::get('/logout', function () {
 
+        $user = Auth::guard('web')->user();
         Auth::logout();
-
         // Invalidate the session and regenerate the CSRF token to prevent session fixation attacks
 
         Session::forget('user');

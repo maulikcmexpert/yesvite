@@ -28,6 +28,8 @@
 
 .banner-content p{
     margin-bottom: 32px !important;
+    font-weight: 500;
+    line-height: 24px;
 }
 
 .banner-wrapper .left-img{
@@ -80,7 +82,7 @@
 
 .category-tab span{
     border: 1px solid var(--borderColor);
-    padding: 17px 24px;
+    padding: 16px 23px;
     border-radius: 16px;
     -webkit-border-radius: 16px;
     -moz-border-radius: 16px;
@@ -92,6 +94,17 @@
     margin-bottom: 8px;
     color: var(--headingColor);
     display: inline-block;
+    transition: 0.5s;
+    -webkit-transition: 0.5s;
+    -moz-transition: 0.5s;
+    -ms-transition: 0.5s;
+    -o-transition: 0.5s;
+}
+
+.category-tab span:hover{
+    border: 1px solid #53C3F8;
+    background-color: #E9F8FF;
+    color: #53C3F8;
 }
 
 .category-tab span.active{
@@ -128,7 +141,7 @@
 }
 
 .event-content .content p{
-    max-width: 526px;
+    max-width: 586px;
     margin: 0 auto;
 }
 

@@ -1,10 +1,9 @@
 // alert();
 //  ===== focusinput =====
- 
 
 $(document).on("click", "#ChangeToggle", function () {
-    $('#navbar-hamburger').toggleClass('hidden');
-    $('#navbar-close').toggleClass('hidden'); 
+    $("#navbar-hamburger").toggleClass("hidden");
+    $("#navbar-close").toggleClass("hidden");
 });
 
 $(document).on("click", ".businessRegister", function () {
@@ -151,3 +150,15 @@ $("[name=countryCode]").on("blur", function () {
     var phoneNumber = instance.intlTelInput("getSelectedCountryData").dialCode;
     $("#country_code").val(phoneNumber);
 });
+
+$(function () {
+    $("#ChangeToggle").click(function () {
+        $("#navbar-hamburger").toggleClass("hidden");
+        $("#navbar-close").toggleClass("hidden");
+    });
+});
+
+
+
+$('label[for="email"]').addClass('floatingfocus');
+$('label[for="password"]').addClass('floatingfocus');

@@ -50,14 +50,7 @@
             <span>Manage | Switch Accounts</span>
         </a>
 
-        <!-- <ul class="nav nav-tabs" id="myTab" role="tablist">
-                             <li class="nav-item" role="presentation">
-                                 <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Personal</button>
-                             </li>
-                             <li class="nav-item" role="presentation">
-                                 <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Professional</button>
-                             </li>
-                         </ul> -->
+
 
         <div class="user-gallery">
             <div>
@@ -188,13 +181,13 @@
                         <a href="{{route('profile.account_settings')}}" class="edit-contact">Account Settings</a>
                     </div>
                     @if(Session::has('secondary_user'))
-                    <div class="users-data">
+                    <a href="{{route('switchAccount',Session::get('secondary_user')['id'])}}" class="users-data">
                         <div class="d-flex align-items-start">
                             <div class="contact-img">
 
 
                                 @if(Session::get('secondary_user')['secondary_profile'] != "")
-                                <img src="{{Session::get('secondary_user')['secondary_profile'] }}" alt="user-img" class="UserImg">
+                                <img src="{{ Session::get('secondary_user')['secondary_profile'] }}" alt="user-img" class="UserImg">
                                 @else
                                 @php
 
@@ -211,7 +204,8 @@
                             <div class="text-start">
                                 <h5>{{Session::get('secondary_user')['secondary_username']}}</h5>
                                 <div>
-                                    <a href="mailto:{{Session::get('secondary_user')['secondary_email']}}">{{Session::get('secondary_user')['secondary_email']}}</a>
+                                    <p>{{Session::get('secondary_user')['secondary_email']}}
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -220,7 +214,7 @@
                                 <path d="M0.940228 11.78C0.813561 11.78 0.686895 11.7333 0.586895 11.6333C0.393561 11.44 0.393561 11.12 0.586895 10.9267L4.93356 6.58001C5.25356 6.26001 5.25356 5.74001 4.93356 5.42001L0.586895 1.07335C0.393561 0.880013 0.393561 0.560013 0.586895 0.36668C0.780228 0.173346 1.10023 0.173346 1.29356 0.36668L5.64023 4.71335C5.98023 5.05335 6.17356 5.51335 6.17356 6.00001C6.17356 6.48668 5.98689 6.94668 5.64023 7.28668L1.29356 11.6333C1.19356 11.7267 1.06689 11.78 0.940228 11.78Z" fill="#94A3B8" />
                             </svg>
                         </span>
-                    </div>
+                    </a>
                     @endif
                 </div>
                 <div class="text-end mt-2">

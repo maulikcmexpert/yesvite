@@ -23,6 +23,16 @@ import {
     uploadBytes,
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
 // Firebase configuration
+// const firebaseConfig = {
+//     apiKey: "AIzaSyBwm_cUYyrAPWvp-t31PCWP_gmeHghVdTQ",
+//     authDomain: "yesvitelive.firebaseapp.com",
+//     databaseURL: "https://yesvitelive-default-rtdb.firebaseio.com",
+//     projectId: "yesvitelive",
+//     storageBucket: "yesvitelive.appspot.com",
+//     messagingSenderId: "438593077863",
+//     appId: "1:438593077863:web:51ab60b8d230a6c4f48ac2",
+//     measurementId: "G-6FRGMCQQ66",
+// };
 const firebaseConfig = {
     apiKey: "AIzaSyAVgJQewYO8h1-_z2mrjaATCqJ4NH8eeCI",
     authDomain: "yesvite-976cd.firebaseapp.com",
@@ -537,6 +547,7 @@ async function updateChatfromGroup(conversationId) {
     update(userRef, { userChatId: conversationId });
     await addListInMembers(SelecteGroupUser);
     $(".selected-title").html(groupInfo.groupName);
+    $("#isGroup").val("true");
     updateMore(conversationId);
     updateUnreadMessageBadge();
 }
@@ -746,6 +757,7 @@ $(".archived-list").hide();
 $("#archive-list").click(function () {
     var msgLists = [];
     if ($(this).attr("list") == "0") {
+        $(".multi-archive").attr("changewith", "0");
         $(this).attr("list", "1");
         $(".archived-list").show();
         $(".unarchived-list").hide();
@@ -757,6 +769,7 @@ $("#archive-list").click(function () {
         $(".archived-list").hide();
         msgLists = $(".unarchived-list");
         $(this).html("Archive List");
+        $(".multi-archive").attr("changewith", "1");
     }
     if (msgLists.length > 0) {
         msgLists[0].click();
@@ -1186,7 +1199,6 @@ function createMessageElement(key, messageData, isGroup) {
                             : ""
                     } 
                     ${reaction}
-                    <span>yes</span>
                 </div>
                 ${emojiAndReplay}
               </div>
@@ -2126,7 +2138,10 @@ function generateReactionsAndReply() {
         </div>
     `;
         $(".reaction-dialog").remove(); // Remove any existing reaction dialogs
-        $(this).after(reactionDialog);
+        console.log($(this).closest(".reply-icon"));
+        console.log($(this).next(".reply-icon"));
+        console.log($(this).find(".reply-icon"));
+        $(this).append(reactionDialog);
     });
 
     $(document).on("click", ".reaction-option", async function () {
@@ -2532,6 +2547,8 @@ $(".bulk-back").click(function () {
     $(bulkcheck).addClass("d-none");
     $(".chat-functions").addClass("d-none");
     $(".bulk-edit-option").show();
+    $(".check-counter").text("");
+    $("input[name='checked_conversation[]']").prop("checked", false);
 });
 
 $(document).on("change", "input[name='checked_conversation[]']", function () {
@@ -2574,6 +2591,8 @@ $(".multi-pin").click(async function () {
 
     try {
         await Promise.all(promises);
+        $("input[name='checked_conversation[]']").prop("checked", false);
+
         $(this)
             .find("span")
             .text(pinChange == "1" ? "Unpin" : "Pin");
@@ -2581,6 +2600,8 @@ $(".multi-pin").click(async function () {
     } catch (error) {
         console.error("Error updating pin status:", error);
     }
+    $(".bulk-back").click();
+    toastr.success("Selected conversations have been updated.");
 });
 
 $(".multi-mute").click(function () {
@@ -2601,9 +2622,14 @@ $(".multi-mute").click(function () {
         set(overviewRef, change);
         promises.push(set(overviewRef, change));
     });
+
+    $("input[name='checked_conversation[]']").prop("checked", false);
+    $(".bulk-back").click();
+    toastr.success("Selected conversations have been updated.");
 });
 
 $(".multi-archive").click(function () {
+    console.log("multiarchive");
     const change = $(this).attr("changeWith");
     $(this).attr("changeWith", change == "1" ? "0" : "1");
 
@@ -2618,15 +2644,37 @@ $(".multi-archive").click(function () {
             database,
             `overview/${senderUser}/${conversationId}/isArchive`
         );
-        set(overviewRef, change);
+
+        if (change == "1") {
+            $(".conversation-" + conversationId).addClass("archived-list");
+            $(".conversation-" + conversationId).removeClass("unarchived-list");
+        } else {
+            $(".conversation-" + conversationId).addClass("unarchived-list");
+            $(".conversation-" + conversationId).removeClass("archived-list");
+        }
         promises.push(set(overviewRef, change));
     });
+
+    Promise.all(promises)
+        .then(() => {
+            $("input[name='checked_conversation[]']").prop("checked", false);
+            toastr.success(
+                change == "1"
+                    ? "Archived successfully"
+                    : "Unarchived successfully"
+            );
+            $("#archive-list").attr("list", "1").click();
+        })
+        .catch((error) => {
+            toastr.error("An error occurred while archiving/unarchiving.");
+            console.error(error);
+        });
+    $(".bulk-back").click();
 });
 $(".multi-read").click(function () {
     const checkedConversations = $(
         "input[name='checked_conversation[]']:checked"
     );
-    const promises = [];
 
     checkedConversations.each(function () {
         const conversationId = $(this).val();
@@ -2636,8 +2684,10 @@ $(".multi-read").click(function () {
         );
         console.log("unreadcount updated");
         update(overviewRef, { unRead: false, unReadCount: 0 });
-        promises.push(set(overviewRef, change));
     });
+    $("input[name='checked_conversation[]']").prop("checked", false);
+    $(".bulk-back").click();
+    toastr.success("Selected conversations have been read.");
 });
 
 $(".delete-conversation").click(async function () {
@@ -2650,6 +2700,7 @@ $(".delete-conversation").click(async function () {
     }
 
     await deleteConversation(conversationId, isGroup);
+    toastr.success("conversation have been deleted.");
 });
 
 $(".multi-delete").click(async function () {
@@ -2675,6 +2726,7 @@ $(".multi-delete").click(async function () {
     } catch (error) {
         console.error("Error deleting conversations:", error);
     }
+    $(".bulk-back").click();
 });
 
 async function deleteConversation(conversationId, isGroup) {

@@ -102,6 +102,28 @@ ul.footer-social-link {
     width: 100%;
     max-width: 162px;
     height: 48px;
+    transition: 0.5s;
+    -webkit-transition: 0.5s;
+    -moz-transition: 0.5s;
+    -ms-transition: 0.5s;
+    -o-transition: 0.5s;
+}
+
+.app-store  img{
+    transition: 0.5s;
+    -webkit-transition: 0.5s;
+    -moz-transition: 0.5s;
+    -ms-transition: 0.5s;
+    -o-transition: 0.5s;
+}
+
+.app-store .google-app img:hover,
+.app-store .mobile-app img:hover{
+   transform: scale(1.1);
+   -webkit-transform: scale(1.1);
+   -moz-transform: scale(1.1);
+   -ms-transform: scale(1.1);
+   -o-transform: scale(1.1);
 }
 
 .footer-copyright {
@@ -125,6 +147,15 @@ ul.footer-social-link {
     color: var(--secondryColor);
     font-size: 14px;
     font-weight: 600;
+    transition: 0.5s;
+    -webkit-transition: 0.5s;
+    -moz-transition: 0.5s;
+    -ms-transition: 0.5s;
+    -o-transition: 0.5s;
+}
+
+.footer-copyright ul li a:hover{
+    color: var(--primaryColor);
 }
 
 /* ========= landing-footer ======= */

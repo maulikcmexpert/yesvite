@@ -88,7 +88,6 @@
                                 </span>
                             </div>
                             <div class="product-scroll" id="product-scroll-groups">
-
                                 <div class="user-contacts" id="yesvitePhones">
                                     @if($yesvitePhones->isEmpty())
                                     <form action="{{ route('import.csv') }}" method="POST" enctype="multipart/form-data">
