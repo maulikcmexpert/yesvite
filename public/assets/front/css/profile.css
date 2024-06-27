@@ -571,6 +571,19 @@ input::-webkit-slider-thumb{
     font-size: 15px;
 } */
 
+#manageModel .users-data .edit-contact{
+    transition: 0.5s;
+    -webkit-transition: 0.5s;
+    -moz-transition: 0.5s;
+    -ms-transition: 0.5s;
+    -o-transition: 0.5s;
+}
+
+#manageModel .users-data .edit-contact:hover{
+    border: 1px solid var(--primaryColor);
+    color: var(--primaryColor);
+}
+
 @media only screen and (max-width:991px){
     .profile-img .user-img{
         width: 80px;
@@ -657,5 +670,9 @@ input::-webkit-slider-thumb{
 
     #coverImg-modal .croppie-container .cr-slider-wrap{
         margin: 0px auto;
+    }
+
+    .profile-img .user-img h5{
+        font-size: 20px;
     }
 }

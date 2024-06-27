@@ -1,7 +1,7 @@
 @php
     use Carbon\Carbon;   
 $i = 0;
-$message['unReadCount'] = $message['unRead']==true && @$message['unReadCount']==0 ?1 : @$message['unReadCount'];
+$message['unReadCount'] = @$message['unRead']==true && @$message['unReadCount']==0 ?1 : @$message['unReadCount'];
 @endphp
 
 @if(!isset($message['contactName']))
@@ -14,7 +14,7 @@ $message['unReadCount'] = $message['unRead']==true && @$message['unReadCount']==
    
 @endif                     --}}
 {{-- @dd($message); --}}
-<li class="{{$i == 0 ?'active':''}} msg-list conversation-{{$message['conversationId']}}" data-userId="{{$message['contactId']}}" data-msgKey={{$message['conversationId']}} data-group={{@$message['group']}} >
+<li class="{{$i == 0 ?'active':''}} msg-list conversation-{{$message['conversationId']}}" data-userId="{{$message['contactId']}} unarchived-list" data-msgKey={{$message['conversationId']}} data-group={{@$message['group']}} >
     <div class="me-2 d-none bulk-check">
         <input class="form-check-input" type="checkbox" name="checked_conversation[]" value="{{$message['conversationId']}}" isGroup="{{@$message['group']}}">
     </div>
@@ -49,8 +49,9 @@ $message['unReadCount'] = $message['unRead']==true && @$message['unReadCount']==
                     $timestamp = $message['timeStamp'] ?? now()->timestamp;
                     $timeAgo = Carbon::createFromTimestampMs($timestamp)->diffForHumans();
                 @endphp
-
-                <h6 class="ms-2"> {{ $timeAgo }}</h6>
+            <div class="ms-auto">
+                <h6 class="ms-2 time-ago"> {{ $timeAgo }}</h6>
+            </div>
             </div>
             <div class="d-flex align-items-center justify-content-between">
                 <span class="last-message">{{$message['lastMessage']}}</span>

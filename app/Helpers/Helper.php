@@ -82,6 +82,14 @@ function checkNotificationSetting($userId)
     return $notification;
 }
 
+function getGuestPendingRsvpCount($eventId){
+    return  EventInvitedUser::whereHas('user', function ($query) {
+
+        $query->where('app_user', '1');
+    })->where(['event_id' => $eventId, 'rsvp_d' => '0'])->count();
+
+}
+
 function sendNotification($notificationType, $postData)
 {
 
@@ -169,7 +177,8 @@ function sendNotification($notificationType, $postData)
                             'event_name' => $value->event->event_name,
                             'event_wall' => $value->event->event_settings->event_wall,
                             'guest_list_visible_to_guests' => $value->event->event_settings->guest_list_visible_to_guests,
-                            'event_potluck' => $value->event->event_settings->podluck
+                            'event_potluck' => $value->event->event_settings->podluck,
+                            'guest_pending_count' => getGuestPendingRsvpCount($postData['event_id'])
                         ];
 
                         $checkNotificationSetting = checkNotificationSetting($value->user_id);
@@ -312,7 +321,9 @@ function sendNotification($notificationType, $postData)
                                 'event_name' => $value->event->event_name,
                                 'event_wall' => $value->event->event_settings->event_wall,
                                 'guest_list_visible_to_guests' => $value->event->event_settings->guest_list_visible_to_guests,
-                                'event_potluck' => $value->event->event_settings->podluck
+                                'event_potluck' => $value->event->event_settings->podluck,
+                                'guest_pending_count' => getGuestPendingRsvpCount($postData['event_id'])
+
                             ];
 
                             if ($value->notification_on_off == '1') {
@@ -993,6 +1004,9 @@ function sendNotification($notificationType, $postData)
                     if (!empty($notificationImage->post_image) && $notificationImage->post_image != NULL) {
                         $notification_image = asset('public/storage/event_images/' . $notificationImage->image);
                     }
+                 
+    
+                    
                     $notificationData = [
                         'message' => $notification_message,
                         'type' => $notificationType,
@@ -1002,7 +1016,8 @@ function sendNotification($notificationType, $postData)
                         'event_name' => $getPostOwnerId->event_name,
                         'event_wall' => $getPostOwnerId->event_settings->event_wall,
                         'guest_list_visible_to_guests' => $getPostOwnerId->event_settings->guest_list_visible_to_guests,
-                        'event_potluck' => $getPostOwnerId->event_settings->podluck
+                        'event_potluck' => $getPostOwnerId->event_settings->podluck,
+                        'guest_pending_count' => getGuestPendingRsvpCount($postData['event_id'])
                     ];
 
                     $checkNotificationSetting = checkNotificationSetting($getPostOwnerId->user_id);
@@ -1064,6 +1079,7 @@ function sendNotification($notificationType, $postData)
                     if (!empty($notificationImage->post_image) && $notificationImage->post_image != NULL) {
                         $notification_image = asset('public/storage/event_images/' . $notificationImage->image);
                     }
+                    
                     $notificationData = [
                         'message' => $notification_message,
                         'type' => $notificationType,
@@ -1072,7 +1088,8 @@ function sendNotification($notificationType, $postData)
                         'event_name' => $getPostOwnerId->event_name,
                         'event_wall' => $getPostOwnerId->event_settings->event_wall,
                         'guest_list_visible_to_guests' => $getPostOwnerId->event_settings->guest_list_visible_to_guests,
-                        'event_potluck' => $getPostOwnerId->event_settings->podluck
+                        'event_potluck' => $getPostOwnerId->event_settings->podluck,
+                        'guest_pending_count' => getGuestPendingRsvpCount($postData['event_id'])
                     ];
                     $checkNotificationSetting = checkNotificationSetting($getPostOwnerId->user_id);
 
