@@ -23,17 +23,26 @@ import {
     uploadBytes,
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
 // Firebase configuration
+// const firebaseConfig = {
+//     apiKey: "AIzaSyBwm_cUYyrAPWvp-t31PCWP_gmeHghVdTQ",
+//     authDomain: "yesvitelive.firebaseapp.com",
+//     databaseURL: "https://yesvitelive-default-rtdb.firebaseio.com",
+//     projectId: "yesvitelive",
+//     storageBucket: "yesvitelive.appspot.com",
+//     messagingSenderId: "438593077863",
+//     appId: "1:438593077863:web:51ab60b8d230a6c4f48ac2",
+//     measurementId: "G-6FRGMCQQ66",
+// };
 const firebaseConfig = {
-    apiKey: "AIzaSyBwm_cUYyrAPWvp-t31PCWP_gmeHghVdTQ",
-    authDomain: "yesvitelive.firebaseapp.com",
-    databaseURL: "https://yesvitelive-default-rtdb.firebaseio.com",
-    projectId: "yesvitelive",
-    storageBucket: "yesvitelive.appspot.com",
-    messagingSenderId: "438593077863",
-    appId: "1:438593077863:web:51ab60b8d230a6c4f48ac2",
-    measurementId: "G-6FRGMCQQ66",
+    apiKey: "AIzaSyAVgJQewYO8h1-_z2mrjaATCqJ4NH8eeCI",
+    authDomain: "yesvite-976cd.firebaseapp.com",
+    databaseURL: "https://yesvite-976cd-default-rtdb.firebaseio.com",
+    projectId: "yesvite-976cd",
+    storageBucket: "yesvite-976cd.appspot.com",
+    messagingSenderId: "273430667581",
+    appId: "1:273430667581:web:d5cc6f6c1cc9829de9e554",
+    measurementId: "G-99SYL4VLEF",
 };
-
 $.ajaxSetup({
     headers: {
         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -2664,7 +2673,6 @@ $(".multi-read").click(function () {
     const checkedConversations = $(
         "input[name='checked_conversation[]']:checked"
     );
-    const promises = [];
 
     checkedConversations.each(function () {
         const conversationId = $(this).val();
@@ -2674,7 +2682,6 @@ $(".multi-read").click(function () {
         );
         console.log("unreadcount updated");
         update(overviewRef, { unRead: false, unReadCount: 0 });
-        promises.push(set(overviewRef, change));
     });
     $("input[name='checked_conversation[]']").prop("checked", false);
     $(".bulk-back").click();
@@ -2690,6 +2697,7 @@ $(".delete-conversation").click(async function () {
     }
 
     await deleteConversation(conversationId, isGroup);
+    toastr.success("conversation have been deleted.");
 });
 
 $(".multi-delete").click(async function () {
