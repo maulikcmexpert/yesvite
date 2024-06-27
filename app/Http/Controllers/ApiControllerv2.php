@@ -3071,9 +3071,10 @@ class ApiControllerv2 extends Controller
 
         try {
             $page = (isset($input['page']) || $input['page'] != "") ? $input['page'] : "1";
+            $search_name = (isset($input['search_name']) || $input['search_name'] != "") ? $input['search_name'] : "";
             $user  = Auth::guard('api')->user();
             $groupList = getGroupList($user->id);
-            $yesvitecontactList = getYesviteContactListPage($user->id, "10", $page);
+            $yesvitecontactList = getYesviteContactListPage($user->id, "10", $page, $search_name);
             $yesviteRegisteredUser = User::where('id', '!=', $user->id)->where('is_user_phone_contact', '0')->where(function ($query) {
                 $query->whereNull('email_verified_at')
                     ->where('app_user', '!=', '1')

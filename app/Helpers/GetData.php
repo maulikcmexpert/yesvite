@@ -163,7 +163,7 @@ function getYesviteContactList($id)
     return  $yesviteUser;
 }
 
-function getYesviteContactListPage($id, $perPage, $page)
+function getYesviteContactListPage($id, $perPage, $page, $search_name)
 {
     $yesviteRegisteredUser = User::select('id', 'firstname', 'profile', 'lastname', 'email', 'country_code', 'phone_number', 'app_user', 'prefer_by', 'email_verified_at', 'parent_user_phone_contact', 'visible', 'message_privacy')
         ->where('id', '!=', $id)
@@ -173,13 +173,15 @@ function getYesviteContactListPage($id, $perPage, $page)
                 ->where('app_user', '!=', '1')
                 ->orWhereNotNull('email_verified_at');
         })
+        ->where(DB::raw("CONCAT(firstname, ' ', lastname)"), 'like', "%{$search_name}%")
         ->orderBy('firstname')
         ->paginate($perPage, ['*'], 'page', $page);
+
     $yesviteUser = [];
     foreach ($yesviteRegisteredUser as $user) {
 
         $yesviteUserDetail['id'] = $user->id;
-        $yesviteUserDetail['profile'] = empty($user->profile) ? "" : asset('public/storage/profile/' . $user->profile);
+        $yesviteUserDetail['profile'] = empty($user->profile) ? "" : asset('storage/profile/' . $user->profile);
         $yesviteUserDetail['first_name'] = (!empty($user->firstname) || $user->firstname != Null) ? $user->firstname : "";;
         $yesviteUserDetail['last_name'] = (!empty($user->lastname) || $user->lastname != Null) ? $user->lastname : "";
         $yesviteUserDetail['email'] = (!empty($user->email) || $user->email != Null) ? $user->email : "";
