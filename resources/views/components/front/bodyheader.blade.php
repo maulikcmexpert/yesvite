@@ -42,10 +42,16 @@
                                      <path d="M5.8335 6.66675L14.1668 6.66675" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                      <path d="M5.8335 10.8333H10.8335" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                  </svg>
+                                 @php
+                                     $count = getTotalUnreadMessageCount();
+                                 @endphp
+                                 @if ($count>0)
+                                     
                                  <div class="badge">
-                                     <span>10</span>
-                                 </div>
-                             </div>
+                                     <span>{{$count}}</span>
+                                    </div>
+                                    @endif
+                                </div>
                          </a>
 
                      </div>
