@@ -792,7 +792,7 @@ class ApiControllerv2 extends Controller
 
                             $query->where('app_user', '1');
                         })->where(['event_id' => $value->id, 'rsvp_d' => '0'])->count();
-    
+
                         $eventDetail['guest_pending_count'] = $pendingUser;
                         $eventDetail['adult_only_party'] = $value->event_settings->adult_only_party;
                         $eventDetail['host_name'] = $value->hosted_by;
@@ -1036,7 +1036,7 @@ class ApiControllerv2 extends Controller
 
                             $query->where('app_user', '1');
                         })->where(['event_id' => $value->event->id, 'rsvp_d' => '0'])->count();
-    
+
                         $eventDetail['guest_pending_count'] = $pendingUser;
                         $eventDetail['event_potluck'] = $value->event->event_settings->podluck;
                         $eventDetail['adult_only_party'] = $value->event->event_settings->adult_only_party;
@@ -1278,7 +1278,7 @@ class ApiControllerv2 extends Controller
 
                             $query->where('app_user', '1');
                         })->where(['event_id' => $value->id, 'rsvp_d' => '0'])->count();
-    
+
                         $eventDetail['guest_pending_count'] = $pendingUser;
                         $eventDetail['event_potluck'] = $value->event_settings->podluck;
                         $eventDetail['adult_only_party'] = $value->event_settings->adult_only_party;
@@ -1544,7 +1544,7 @@ class ApiControllerv2 extends Controller
 
                             $query->where('app_user', '1');
                         })->where(['event_id' => $value->id, 'rsvp_d' => '0'])->count();
-    
+
                         $eventDetail['guest_pending_count'] = $pendingUser;
                         $eventDetail['event_potluck'] = $value->event_settings->podluck;
                         $eventDetail['adult_only_party'] = $value->event_settings->adult_only_party;
@@ -1802,7 +1802,7 @@ class ApiControllerv2 extends Controller
 
                             $query->where('app_user', '1');
                         })->where(['event_id' => $value->event->id, 'rsvp_d' => '0'])->count();
-    
+
                         $eventDetail['guest_pending_count'] = $pendingUser;
                         $eventDetail['event_potluck'] = $value->event->event_settings->podluck;
                         $eventDetail['adult_only_party'] = $value->event->event_settings->adult_only_party;
@@ -11643,7 +11643,7 @@ class ApiControllerv2 extends Controller
 
         $notificationData = Notification::query();
 
-        $notificationData->with(['user', 'event', 'event_settings', 'sender_user', 'post' => function ($query) {
+        $notificationData->with(['user', 'event', 'event.event_settings', 'sender_user', 'post' => function ($query) {
             $query->with(['post_image', 'event_post_poll'])->withcount(['event_post_reaction', 'event_post_comment' => function ($query) {
                 $query->where('parent_comment_id', NULL);
             }]);
@@ -11718,16 +11718,16 @@ class ApiControllerv2 extends Controller
                 $notificationDetail['to_time'] = ($values->to_time != null || $values->to_time != "") ? $values->to_time : "";
 
 
-                $notificationDetail['event_wall'] = $values->event_settings->event_wall;
-                $notificationDetail['guest_list_visible_to_guests'] = $values->event_settings->guest_list_visible_to_guests;
-                $notificationDetail['event_potluck'] = $values->event_settings->podluck;
+                $notificationDetail['event_wall'] = $values->event->event_settings->event_wall;
+                $notificationDetail['guest_list_visible_to_guests'] = $values->event->event_settings->guest_list_visible_to_guests;
+                $notificationDetail['event_potluck'] = $values->event->event_settings->podluck;
                 $pendingUser = EventInvitedUser::whereHas('user', function ($query) {
 
                     $query->where('app_user', '1');
                 })->where(['event_id' => $values->event->id, 'rsvp_d' => '0'])->count();
 
                 $notificationDetail['guest_pending_count'] = $pendingUser;
-              
+
 
                 if ($values->notification_type == 'invite') {
                     $checkIsCoHost =  EventInvitedUser::where(['user_id' => $values->user_id, 'event_id' => $values->event_id])->first();
@@ -11816,7 +11816,7 @@ class ApiControllerv2 extends Controller
                     'about_me' => ($values->sender_user->about_me != NULL) ? $values->sender_user->about_me : "",
                     'created_at' => empty($values->sender_user->created_at) ? "" :   str_replace(' ', ', ', date('F Y', strtotime($values->sender_user->created_at))),
                     'total_events' => $totalEvent,
-               
+
                     'visible' => $values->sender_user->visible,
                     'comments' => $comments,
                 ];
