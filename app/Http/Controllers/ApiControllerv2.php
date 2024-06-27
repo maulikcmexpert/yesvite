@@ -3045,10 +3045,35 @@ class ApiControllerv2 extends Controller
 
     public function getYesviteContactList()
     {
+
         try {
             $user  = Auth::guard('api')->user();
             $groupList = getGroupList($user->id);
             $yesvitecontactList = getYesviteContactList($user->id);
+            return response()->json(['status' => 1, 'message' => "Yesvite contact list", "data" => $yesvitecontactList, 'group' => $groupList]);
+        } catch (Exception  $e) {
+            return response()->json(['status' => 0, 'message' => 'something went wrong']);
+        }
+    }
+
+
+    public function getYesviteContactListPage(Request $request)
+    {
+
+        $user  = Auth::guard('api')->user();
+
+        $rawData = $request->getContent();
+
+        $input = json_decode($rawData, true);
+        if ($input == null) {
+            return response()->json(['status' => 0, 'message' => "Json invalid"]);
+        }
+
+        try {
+            $page = (isset($input['page']) || $input['page'] != "") ? $input['page'] : 1;
+            $user  = Auth::guard('api')->user();
+            $groupList = getGroupList($user->id);
+            $yesvitecontactList = getYesviteContactListPage($user->id, 10, $page);
             return response()->json(['status' => 1, 'message' => "Yesvite contact list", "data" => $yesvitecontactList, 'group' => $groupList]);
         } catch (Exception  $e) {
             return response()->json(['status' => 0, 'message' => 'something went wrong']);
