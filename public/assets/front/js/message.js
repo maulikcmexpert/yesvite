@@ -1228,6 +1228,7 @@ function createMessageElement(key, messageData, isGroup) {
                         <span> ${
                             messageData?.data != "" ? messageData.data : ""
                         }</span>
+                        ${reaction}
                 </div>
             </div>
             ${emojiAndReplay}
