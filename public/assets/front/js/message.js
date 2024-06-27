@@ -2615,10 +2615,12 @@ $(".multi-pin").click(async function () {
 
     const checkedConversations = $(
         "input[name='checked_conversation[]']:checked"
-    );
+    )
+        .toArray()
+        .reverse();
     const promises = [];
-
-    checkedConversations.each(function () {
+    console.log(checkedConversations);
+    checkedConversations.forEach(function () {
         const conversationId = $(this).val();
         const overviewRef = ref(
             database,
