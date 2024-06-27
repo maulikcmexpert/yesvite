@@ -190,6 +190,8 @@ ul.chat-list li{
     -ms-border-radius: 16px;
     -o-border-radius: 16px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
 }
 
 ul.chat-list li.active,
@@ -241,6 +243,7 @@ ul.chat-list li:last-child{
 .chat-list .chat-data{
     padding: 18px 10px;
     position: relative;
+    width: 100%;
 }
 
 .user-detail span{
@@ -758,6 +761,15 @@ ul.member-lists li:last-child{
 .set-replay-msg .replay-user{
     font-size: 11px;
     color: red;
+}
+
+.replay-msg .replay-msg{
+    font-size: 14px;
+}
+
+
+.msg-body ul li.receiver .reply-section .reply-massage span{
+    word-break: break-all;
 }
 
 .msg-footer input{
@@ -1340,13 +1352,21 @@ ul.member-lists li:last-child{
 
 @media only screen and (max-width:1400px){
     .msg-list .user-detail span{
-        max-width: 120px;
+        max-width: 115px;
     }
 }
 
 @media only screen and (max-width:1200px){
     .msg-list .user-detail span {
-        max-width: 90px;
+        max-width: 110px;
+    }
+
+    .chat-lists{
+        width: 35% !important;
+    }
+
+    .chat-area .chatbox{
+        width: 65% !important;
     }
 }
 
@@ -1366,7 +1386,7 @@ ul.member-lists li:last-child{
 
 @media only screen and (max-width:991px){
     .msg-list .user-detail span {
-        max-width: 320px;
+        max-width: 80px;
     }
 }
 
@@ -1420,7 +1440,11 @@ ul.member-lists li:last-child{
     }
     .chat-area .chatbox{
         width: 100% !important; 
- }
+    }
+
+    .msg-list .user-detail span {
+        max-width: 320px;
+    }
 }
 
 @media only screen and (max-width:763px){
