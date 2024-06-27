@@ -682,6 +682,10 @@ ul.nav-tabs .nav-link:focus{
     margin-bottom: 0;
 }
 
+.ui-widget-content.ui-autocomplete{
+    width: 290px !important;
+}
+
 .ui-widget-content.ui-autocomplete .ui-menu-item-wrapper{
     align-items: center !important;
 }
@@ -691,9 +695,9 @@ ul.nav-tabs .nav-link:focus{
     border: none !important;
 } 
 
-.ui-widget-content.ui-autocomplete .ui-menu-item:hover{
+/* .ui-widget-content.ui-autocomplete .ui-menu-item:hover{
     background-color: #f1f1f1 !important;
-}
+} */
 
 .ui-widget-content.ui-autocomplete .ui-menu-item{
     border-bottom: 1px solid #ccc;
