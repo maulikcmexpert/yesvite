@@ -125,8 +125,8 @@ class ApiControllerv2 extends Controller
     public function __construct()
     {
 
-        $this->user = Auth::user();
-        dd($this->user);
+        $this->user = Auth::guard('api')->user();
+
         $this->perPage = 5;
         if ($this->user != null) {
 
@@ -392,7 +392,7 @@ class ApiControllerv2 extends Controller
 
 
 
-            $user  = Auth::guard('api')->user();
+
 
             if ($user->is_first_login == '1') {
                 $userIsLogin = User::where('id', $user->id)->first();
