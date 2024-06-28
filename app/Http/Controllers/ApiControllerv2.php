@@ -125,7 +125,8 @@ class ApiControllerv2 extends Controller
     public function __construct()
     {
 
-        $this->user = Auth::guard('api')->user();
+        $this->user = Auth::user();
+        dd($this->user);
         $this->perPage = 5;
         if ($this->user != null) {
 
@@ -139,7 +140,7 @@ class ApiControllerv2 extends Controller
 
 
 
-   
+
 
     public function sendThanks()
     {
@@ -470,7 +471,7 @@ class ApiControllerv2 extends Controller
 
                     $eventDetail['guest_pending_count'] = $pendingUser;
                     $eventDetail['adult_only_party'] = $value->event_settings->adult_only_party;
-                   $eventDetail['post_time'] =  $this->setpostTime($value->updated_at);
+                    $eventDetail['post_time'] =  $this->setpostTime($value->updated_at);
 
 
                     $rsvp_status = "";
