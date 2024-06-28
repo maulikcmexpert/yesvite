@@ -22,7 +22,7 @@ use App\Http\Controllers\ApiControllerv3 as ApiControllerv3;
 Route::post('/user/login', [ApiAuthController::class, 'login']);
 Route::post('/user/social_login', [ApiAuthController::class, 'socialLogin']);
 Route::post('/user/signup', [ApiAuthController::class, 'signup']);
-// Route::get('verify/{token}', [ApiAuthController::class, 'verifyAccount'])->name('user.verify');
+Route::get('verify/{token}', [ApiAuthController::class, 'verifyAccount'])->name('user.verify');
 Route::post('/user/forgotpassword', [ApiAuthController::class, 'passwordLink']);
 Route::post('/user/verify_otp', [ApiAuthController::class, 'verifyOtp']);
 Route::post('/user/reset_password', [ApiAuthController::class, 'resetPassword']);
