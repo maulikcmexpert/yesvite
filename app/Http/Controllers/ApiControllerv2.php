@@ -7107,7 +7107,12 @@ class ApiControllerv2 extends Controller
 
             $eventDetails['hosted_by'] = $eventDetail->hosted_by;
             $eventDetails['is_host'] = ($eventDetail->user_id == $user->id) ? 1 : 0;
-            $eventDetails['event_date'] = $eventDetail->start_date;
+
+            $event_date = $eventDetail->start_date;
+            if ($eventDetail->start_date != $eventDetail->end_date) {
+                $event_date = $eventDetail->start_date . ' To ' . $event_date = $eventDetail->end_date;
+            }
+            $eventDetails['event_date'] = $event_date;
             $eventDetails['event_time'] =  $eventDetail->rsvp_start_time;
 
             if ($eventDetail->event_schedule->isNotEmpty()) {
