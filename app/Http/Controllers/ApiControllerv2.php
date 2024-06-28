@@ -6782,7 +6782,7 @@ class ApiControllerv2 extends Controller
 
             // if ($eventDetail->event_schedule->isNotEmpty()) {
 
-            //     $eventDetails['event_time'] = $eventDetail->event_schedule->first()->start_time . ' to ' . $eventDetail->event_schedule->last()->end_time;
+            //     $eventDetails['event_time'] = $eventDetail->event_schedule->first()->start_time . ' To ' . $eventDetail->event_schedule->last()->end_time;
             // }
 
 
@@ -7118,18 +7118,18 @@ class ApiControllerv2 extends Controller
             if ($eventDetail->event_schedule->isNotEmpty()) {
                 if ($eventDetail->event_schedule->last()->end_time != NULL || $eventDetail->event_schedule->last()->end_time != "") {
 
-                    $eventDetails['event_time'] = $eventDetail->event_schedule->first()->start_time . ' to ' . $eventDetail->event_schedule->last()->end_time;
+                    $eventDetails['event_time'] = $eventDetail->event_schedule->first()->start_time . ' To ' . $eventDetail->event_schedule->last()->end_time;
                 } else {
                     $eventDetails['event_time'] = $eventDetail->event_schedule->first()->start_time;
                     if ($eventDetail->rsvp_end_time != NULL || $eventDetail->rsvp_end_time != "") {
 
-                        $eventDetails['event_time'] = $eventDetail->event_schedule->first()->start_time . ' to ' . $eventDetail->rsvp_end_time;
+                        $eventDetails['event_time'] = $eventDetail->event_schedule->first()->start_time . ' To ' . $eventDetail->rsvp_end_time;
                     }
                 }
             } else {
                 $eventDetails['event_time'] =  $eventDetail->rsvp_start_time;
                 if ($eventDetail->rsvp_end_time != NULL || $eventDetail->rsvp_end_time != "") {
-                    $eventDetails['event_time'] =  $eventDetail->rsvp_start_time . ' to ' . $eventDetail->rsvp_end_time;
+                    $eventDetails['event_time'] =  $eventDetail->rsvp_start_time . ' To ' . $eventDetail->rsvp_end_time;
                 }
             }
 
