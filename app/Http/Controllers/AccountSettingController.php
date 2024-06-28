@@ -49,11 +49,9 @@ class AccountSettingController extends Controller
         $user['photo_via_wifi'] = $user->photo_via_wifi;
         $user['show_profile_photo_only_frds'] = $user->show_profile_photo_only_frds;
 
-        $user['subscribe_status'] = false;
+        $user['subscribe_status'] = checkSubscription($user->id);
 
-        if ($user->user_subscriptions->isNotEmpty() && $user->user_subscriptions->type == 'subscribe') {
-            $user['subscribe_status'] = true;
-        }
+
 
 
         return view('layout', compact(

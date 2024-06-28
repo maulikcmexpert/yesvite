@@ -1437,3 +1437,95 @@ function updateSubscriptionStatus($userId, $response)
         $userSubscription->save();
     }
 }
+
+function checkSubscription($userId)
+{
+
+    $userSubscription = UserSubscription::where('user_id', $userId)->orderBy('id', 'DESC')->limit(1)->first();
+    if ($userSubscription != null) {
+        $app_id = $userSubscription->packageName;
+        $product_id = $userSubscription->productId;
+        $purchaseToken = $userSubscription->purchaseToken;
+
+        $responce =  set_android_iap($app_id, $product_id, $purchaseToken, 'subscribe');
+
+
+        $exp_date =  date('Y-m-d H:i:s', ($responce['expiryTimeMillis'] /  1000));
+
+
+        $current_date = date('Y-m-d H:i:s');
+
+        if (strtotime($current_date) > strtotime($exp_date)) {
+
+            $userSubscription->endDate = $exp_date;
+            $userSubscription->save();
+            return false;
+        }
+        if (isset($responce['userCancellationTimeMillis'])) {
+
+            $cancellationdate =  date('Y-m-d H:i:s', ($responce['userCancellationTimeMillis'] /  1000));
+            $userSubscription->cancellationdate = $cancellationdate;
+            $userSubscription->save();
+            return false;
+        }
+        return true;
+    }
+    return false;
+}
+
+function set_android_iap($appid, $productID, $purchaseToken, $type)
+{
+    $ch = curl_init();
+    $clientId = env('InGOOGLE_CLIENT_ID');
+
+    $clientSecret = env('InGOOGLE_CLIENT_SECRET');
+    $redirectUri = 'https://yesvite.cmexpertiseinfotech.in/google/callback';
+
+    $refreshToken = '1//0gHYN_Ai3rfAnCgYIARAAGBASNwF-L9IrdP-JOsDTkXeH-yqO_Z252HkBEfW7oqRZqcbTrsTQ_u_8eeif8HSml-a-i0Foi6iVH4Q';
+
+
+    $TOKEN_URL = "https://accounts.google.com/o/oauth2/token";
+
+    $VALIDATE_URL = "https://www.googleapis.com/androidpublisher/v3/applications/" .
+        $appid . "/purchases/subscriptions/" .
+        $productID . "/tokens/" . $purchaseToken;
+    if ($type == 'product') {
+
+        $VALIDATE_URL = "https://www.googleapis.com/androidpublisher/v3/applications/" .
+            $appid . "/purchases/products/" .
+            $productID . "/tokens/" . $purchaseToken;
+    }
+
+
+    $input_fields = 'refresh_token=' . $refreshToken .
+        '&client_secret=' . $clientSecret .
+        '&client_id=' . $clientId .
+        '&redirect_uri=' . $redirectUri .
+        '&grant_type=refresh_token';
+
+    //Request to google oauth for authentication
+    curl_setopt($ch, CURLOPT_URL, $TOKEN_URL);
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $input_fields);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    $result = curl_exec($ch);
+    $result = json_decode($result, true);
+
+    if (!$result || !$result["access_token"]) {
+        //error  
+        // return;
+    }
+
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $VALIDATE_URL . "?access_token=" . $result["access_token"]);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    $result1 = curl_exec($ch);
+    $result1 = json_decode($result1, true);
+    if (!$result1 || (isset($result1["error"]) && $result1["error"] != null)) {
+        //error
+        // return;
+    }
+
+    return $result1;
+}

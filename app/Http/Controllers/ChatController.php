@@ -188,6 +188,8 @@ class ChatController extends Controller
             ->where(DB::raw("CONCAT(firstname, ' ', lastname)"), 'LIKE', '%' . $search . '%')
             ->where('id', '!=', $currentUserId)
             ->where('app_user', '=', '1')
+            ->where('email', '!=', '')
+            ->where('message_privacy', '=', '1')
             ->whereNotIn('id', $selectedUserIds) // Filter out selected users
             ->get();
 
