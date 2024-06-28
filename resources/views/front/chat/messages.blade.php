@@ -462,10 +462,10 @@ use Carbon\Carbon;
                     <div class="multi-chat d-none">
                         <div class="img-wrp">
                         </div>
-                        <h5 class="selected-user-name">Tiana Dokidis, Martin Garlic, +3</h5>
+                        <h5 class="selected-user-name" id ="group-name">Tiana Dokidis, Martin Garlic, +3</h5>
                         <p>This message will automatically create a group</p>
                         {{-- <a href="#">See all user</a><br> --}}
-                        <input type="text" id ="group-name" placeholder="Group Name">
+                        
                     </div>
                 </div>
             </div>
