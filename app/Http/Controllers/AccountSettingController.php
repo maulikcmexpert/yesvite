@@ -30,7 +30,11 @@ class AccountSettingController extends Controller
                 }, 'event_post' => function ($query) {
                     $query->where('post_type', '1');
                 },
-                'event_post_comment'
+                'event_post_comment',
+                'user_subscriptions' => function ($query) {
+                    $query->orderBy('id', 'DESC')->limit(1);
+                }
+
 
             ]
         )->findOrFail($id);
@@ -44,6 +48,12 @@ class AccountSettingController extends Controller
         $user['join_date'] = $formatted_date;
         $user['photo_via_wifi'] = $user->photo_via_wifi;
         $user['show_profile_photo_only_frds'] = $user->show_profile_photo_only_frds;
+
+        $user['subscribe_status'] = false;
+
+        if ($user->user_subscriptions->isNotEmpty() && $user->user_subscriptions->type == 'subscribe') {
+            $user['subscribe_status'] = true;
+        }
 
 
         return view('layout', compact(

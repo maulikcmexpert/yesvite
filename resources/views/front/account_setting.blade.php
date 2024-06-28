@@ -35,7 +35,11 @@
                             <div class="user-name">
                                 <div class="d-flex align-items-center">
                                     <h3>{{$user->firstname.' '.$user->lastname}}</h3>
-                                    <span>PRO</span>
+                                    @if($user->subscribe_status == false)
+                                    <span class="free">Free</span>
+                                    @else
+                                    <span>Pro Year</span>
+                                    @endif
                                 </div>
                                 <a href="mailto:{{$user->email}}">{{$user->email}}</a>
                                 <p>Member Since: {{$user->join_date}}</p>
@@ -53,11 +57,17 @@
                                             <path d="M2 12.3385C0.895431 12.3385 0 11.4431 0 10.3385V3.27195C0 2.90315 0.38563 2.66127 0.717651 2.8218L3.99023 4.40415C4.20677 4.50885 4.46716 4.44454 4.61006 4.25107L7.59782 0.206116C7.79767 -0.0644616 8.20232 -0.0644622 8.40218 0.206115L11.3899 4.25107C11.5328 4.44454 11.7932 4.50885 12.0098 4.40415L15.2823 2.8218C15.6144 2.66127 16 2.90315 16 3.27195V10.3385C16 11.4431 15.1046 12.3385 14 12.3385H2Z" fill="#FCCD1E" />
                                         </svg>
                                     </span>
+
+
+                                    @if($user->subscribe_status == false)
+                                    <h5>Free</h5>
+                                    @else
                                     <h5>Pro Account</h5>
+                                    @endif
                                 </div>
                                 <div class="exp-wrp">
                                     <span>Exp: {{$user->join_date}}</span>
-                                    <a href="#">Click to change plan</a>
+                                    <!-- <a href="#">Click to change plan</a> -->
                                 </div>
                             </div>
                         </div>
