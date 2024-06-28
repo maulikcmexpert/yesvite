@@ -47,7 +47,10 @@ class ProfileController extends Controller
                 }, 'event_post' => function ($query) {
                     $query->where('post_type', '1');
                 },
-                'event_post_comment'
+                'event_post_comment',
+                    'user_subscriptions'=>function($query){
+                        $query->orderBy('id','DESC')->limit(1);
+                    }
 
             ]
         )->findOrFail($id);
@@ -67,6 +70,11 @@ class ProfileController extends Controller
 
         if ($user->visible == 3) {
             $user['visible'] = 'Anyone';
+        }
+        $user['subscribe_status'] = false;
+        if($user->user_subscriptions->isNotEmpty() && $user->user_subscriptions->type == 'subscribe'){
+            $user['subscribe_status'] = true;
+
         }
 
         return view('layout', compact(
@@ -90,7 +98,10 @@ class ProfileController extends Controller
                 }, 'event_post' => function ($query) {
                     $query->where('post_type', '1');
                 },
-                'event_post_comment'
+                'event_post_comment',
+                'user_subscriptions'=>function($query){
+                    $query->orderBy('id','DESC')->limit(1);
+                }
 
             ]
         )->findOrFail($id);
@@ -98,6 +109,11 @@ class ProfileController extends Controller
         $page = 'front.public_profile';
         $user['profile'] = ($user->profile != null) ? asset('storage/profile/' . $user->profile) : "";
         $user['bg_profile'] = ($user->bg_profile != null) ? asset('storage/bg_profile/' . $user->bg_profile) : asset('assets/front/image/Frame 1000005835.png');
+        $user['subscribe_status'] = false;
+        if($user->user_subscriptions->isNotEmpty() && $user->user_subscriptions->type == 'subscribe'){
+            $user['subscribe_status'] = true;
+
+        }
         $date = Carbon::parse($user->created_at);
         $formatted_date = $date->format('F, Y');
         $user['join_date'] = $formatted_date;

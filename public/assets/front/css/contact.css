@@ -119,6 +119,21 @@
     font-weight: bold;
 }
 
+.user-name .d-flex span.free{
+    padding: 5px 8px;
+    border-radius: 100px;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    -ms-border-radius: 100px;
+    -o-border-radius: 100px;
+    color: green;
+    background-color: rgb(194 219 194 / 70%);
+    font-size: 10px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+
 
 ul.nav .nav-link:hover{
     border: none !important;

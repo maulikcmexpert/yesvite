@@ -20,7 +20,12 @@
         <div class="user-name">
             <div class="d-flex justify-content-center mb-2">
                 <h3>{{$profileData->firstname.' '.$profileData->lastname }}</h3>
-                <span>PRO</span>
+              
+                @if($profileData->subscribe_status == false)
+                                    <span class="free">Free</span>
+                                    @else
+                                    <span>Pro Year</span>
+                                    @endif
             </div>
             <p>Member Since: {{ $profileData->join_date }}</p>
         </div>
