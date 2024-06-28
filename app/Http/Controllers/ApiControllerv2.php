@@ -6782,7 +6782,7 @@ class ApiControllerv2 extends Controller
 
             // if ($eventDetail->event_schedule->isNotEmpty()) {
 
-            //     $eventDetails['event_time'] = $eventDetail->event_schedule->first()->start_time . ' To ' . $eventDetail->event_schedule->last()->end_time;
+            //     $eventDetails['event_time'] = $eventDetail->event_schedule->first()->start_time . ' to ' . $eventDetail->event_schedule->last()->end_time;
             // }
 
 
