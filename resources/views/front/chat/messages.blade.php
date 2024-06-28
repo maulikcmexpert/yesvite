@@ -116,7 +116,7 @@ use Carbon\Carbon;
                             <input type="hidden" id="isGroup" value="{{@$message['group']}}" />
                             @endif
                             <div>
-                                <li class="{{$i == 0 ?'active':''}} msg-list {{@$message['isPin']=='1'?'pinned':''}} conversation-{{@$message['conversationId']}} {{@$message['isArchive']=="1"?"archived-list":"unarchived-list"}}" data-userId="{{$message['contactId']}}" data-msgKey={{$k}} data-group={{@$message['group']}}>
+                                <li class="{{$i == 0 ?'active':''}} msg-list {{@$message['isPin']=='1'?'pinned':''}} conversation-{{@$message['conversationId']}} {{@$message['isArchive']=="1"?"archived-list":"unarchived-list"}}" data-userId="{{@$message['contactId']}}" data-msgKey={{$k}} data-group={{@$message['group']}}>
                                     <div class="ms-1 d-none bulk-check">
                                         <input class="form-check-input m-0" type="checkbox" name="checked_conversation[]" value="{{$message['conversationId']}}" isGroup="{{@$message['group']}}">
                                     </div>
@@ -124,7 +124,7 @@ use Carbon\Carbon;
                                     <div class="chat-data d-flex align-items-start">
                                         <div class="user-img position-relative">
                                             @if($message['receiverProfile']!=="")
-                                            <img class="img-fluid user-image user-img-{{$message['contactId']}}" data-id={{$message['contactId']}} src="{{$message['receiverProfile']}}" alt="user img">
+                                            <img class="img-fluid user-image user-img-{{@$message['contactId']}}" data-id={{@$message['contactId']}} src="{{@$message['receiverProfile']}}" alt="user img">
                                             @else
                                             @php
                                             $contactName = $message['contactName'];
