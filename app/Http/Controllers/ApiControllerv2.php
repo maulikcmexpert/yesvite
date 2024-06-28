@@ -470,8 +470,7 @@ class ApiControllerv2 extends Controller
 
                     $eventDetail['guest_pending_count'] = $pendingUser;
                     $eventDetail['adult_only_party'] = $value->event_settings->adult_only_party;
-                    $eventDetail['guest_pending_count'] =  $this->pendingRsvpCount;
-                    $eventDetail['post_time'] =  $this->setpostTime($value->updated_at);
+                   $eventDetail['post_time'] =  $this->setpostTime($value->updated_at);
 
 
                     $rsvp_status = "";

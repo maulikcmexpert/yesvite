@@ -313,7 +313,7 @@ function sendNotification($notificationType, $postData)
                             $notification_image = "";
                             if ($notificationImage != NULL) {
 
-                                $notification_image = asset('public/storage/event_images/' . $notificationImage->image);
+                                $notification_image = asset('storage/event_images/' . $notificationImage->image);
                             }
                             $push_notification_message = $senderData->firstname . ' ' . $senderData->lastname . " has updated the event details for " . $value->event->event_name;
                             $notificationData = [
