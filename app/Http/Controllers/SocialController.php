@@ -44,7 +44,7 @@ class SocialController extends Controller
         $authUser = $this->findOrCreateUser($user, $provider);
         Auth::login($authUser, true);
 
-        return redirect()->intended('/home')->with('success', 'Logged in successfully!');
+        return redirect()->intended('/profile')->with('success', 'Logged in successfully!');
     }
 
     /**
@@ -104,7 +104,7 @@ class SocialController extends Controller
             'first_name' => $user->firstname,
             'last_name' => $user->lastname,
             'username' => $newUser->firstname . ' ' . $newUser->lastname,
-            'profile' => ($newUser->profile != NULL || $newUser->profile != "") ? asset('public/storage/profile/' . $newUser->profile) : asset('public/storage/profile/no_profile.png')
+            'profile' => ($newUser->profile != NULL || $newUser->profile != "") ? asset('storage/profile/' . $newUser->profile) : asset('public/storage/profile/no_profile.png')
         ];
         Session::put(['user' => $sessionArray]);
 

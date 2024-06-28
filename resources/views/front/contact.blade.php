@@ -361,7 +361,7 @@
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                 <div class="input-form">
-                                    <input type="email" class="form-control addnew_email" id="email" name="email">
+                                    <input type="email" class="form-control addnew_email" id="email" name="email" autocomplete="off">
                                     <label for="email" class="floating-label">Work Email
                                         Address<span>*</span></label>
                                     <div class="label-error">

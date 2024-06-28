@@ -62,6 +62,14 @@ function getEventType()
     return  EventType::all();
 }
 
+function getGuestRsvpPendingCount($eventId)
+{
+    return  EventInvitedUser::whereHas('user', function ($query) {
+
+        $query->where('app_user', '1');
+    })->where(['event_id' => $eventId, 'rsvp_d' => '0'])->count();
+}
+
 function upcomingEventsCount($userId)
 {
     $usercreatedList = Event::with(['user', 'event_settings', 'event_schedule'])->where('start_date', '>', date('Y-m-d'))
@@ -171,6 +179,39 @@ function getYesviteContactList($id)
         }
         $yesviteUserDetail['id'] = $user->id;
         $yesviteUserDetail['profile'] = empty($user->profile) ? "" : asset('public/storage/profile/' . $user->profile);
+        $yesviteUserDetail['first_name'] = (!empty($user->firstname) || $user->firstname != Null) ? $user->firstname : "";;
+        $yesviteUserDetail['last_name'] = (!empty($user->lastname) || $user->lastname != Null) ? $user->lastname : "";
+        $yesviteUserDetail['email'] = (!empty($user->email) || $user->email != Null) ? $user->email : "";
+        $yesviteUserDetail['country_code'] = (!empty($user->country_code) || $user->country_code != Null) ? strval($user->country_code) : "";
+        $yesviteUserDetail['phone_number'] = (!empty($user->phone_number) || $user->phone_number != Null) ? $user->phone_number : "";
+        $yesviteUserDetail['app_user']  = $user->app_user;
+        $yesviteUserDetail['visible'] =  $user->visible;
+        $yesviteUserDetail['message_privacy'] =  $user->message_privacy;
+        $yesviteUserDetail['prefer_by']  = $user->prefer_by;
+        $yesviteUser[] = $yesviteUserDetail;
+    }
+    return  $yesviteUser;
+}
+
+function getYesviteContactListPage($id, $perPage, $page, $search_name)
+{
+    $yesviteRegisteredUser = User::select('id', 'firstname', 'profile', 'lastname', 'email', 'country_code', 'phone_number', 'app_user', 'prefer_by', 'email_verified_at', 'parent_user_phone_contact', 'visible', 'message_privacy')
+        ->where('id', '!=', $id)
+        ->where('is_user_phone_contact', '0')
+        ->where(function ($query) {
+            $query->whereNull('email_verified_at')
+                ->where('app_user', '!=', '1')
+                ->orWhereNotNull('email_verified_at');
+        })
+        ->where(DB::raw("CONCAT(firstname, ' ', lastname)"), 'like', "%{$search_name}%")
+        ->orderBy('firstname')
+        ->paginate($perPage, ['*'], 'page', $page);
+
+    $yesviteUser = [];
+    foreach ($yesviteRegisteredUser as $user) {
+
+        $yesviteUserDetail['id'] = $user->id;
+        $yesviteUserDetail['profile'] = empty($user->profile) ? "" : asset('storage/profile/' . $user->profile);
         $yesviteUserDetail['first_name'] = (!empty($user->firstname) || $user->firstname != Null) ? $user->firstname : "";;
         $yesviteUserDetail['last_name'] = (!empty($user->lastname) || $user->lastname != Null) ? $user->lastname : "";
         $yesviteUserDetail['email'] = (!empty($user->email) || $user->email != Null) ? $user->email : "";

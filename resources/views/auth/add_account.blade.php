@@ -21,14 +21,14 @@
             <p>Please Sign In</p>
         </div>
         <div class="login-form-wrap">
-            <form method="POST" id="loginForm" action="{{route('auth.checkAddAccount')}}">
+            <form method="POST" id="loginForm" action="{{route('auth.checkAddAccount')}}" autocomplete="off">
                 @csrf
 
                 <div class="input-form">
                     <!-- <input type="email" class="form-control inputText" id="email" name="email">
                         <label for="email" class="form-label input-field floating-label">Email Address <span class="required">*</span></label> -->
 
-                    <input type="email" class="form-control" id="email" name="email" value="{{ old('email', Cookie::get('email')) }}">
+                    <input type="email" class="form-control" id="email" name="email" value="{{ old('email', Cookie::get('email')) }}" autocomplete="off">
                     <label for="email" class="floating-label">Email Address <span>*</span></label>
                     <div class="label-error">
                         <label id="email-error" class="error" for="email"></label>
@@ -36,7 +36,7 @@
                 </div>
 
                 <div class="input-form">
-                    <input type="password" class="form-control inputText" id="password" name="password" value="{{ old('password', Cookie::get('password')) }}">
+                    <input type="password" class="form-control inputText" id="password" name="password" value="{{ old('password', Cookie::get('password')) }}" autocomplete="new-password">
                     <label for="password" class="form-label input-field floating-label">Password <span class="required">*</span></label>
                     <span toggle="#password-field" class="fa-regular fa-fw fa-eye-slash field-icon toggle-password"></span>
                     <div class="label-error">
