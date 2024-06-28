@@ -125,7 +125,7 @@ class ApiControllerv2 extends Controller
     public function __construct()
     {
 
-        $this->user = Auth::guard('api')->user();
+        $this->user = Auth::user();
         dd($this->user);
         $this->perPage = 5;
         if ($this->user != null) {
