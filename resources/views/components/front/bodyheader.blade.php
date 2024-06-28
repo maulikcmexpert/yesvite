@@ -26,6 +26,29 @@
              </a>
 
 
+             @php
+             $userprofile = Auth::guard('web')->user();
+             @endphp
+
+             @if($userprofile==null)
+             <button class="navbar-toggler toggle" id="ChangeToggle" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+                 <div id="navbar-hamburger">
+                     <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                         <path d="M3.5 7H21.5" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" />
+                         <path d="M3.5 12H21.5" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" />
+                         <path d="M3.5 17H21.5" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" />
+                     </svg>
+                 </div>
+                 <div id="navbar-close" class="hidden">
+                     <span class="glyphicon glyphicon-remove">
+                         <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                             <path d="M5.5 5L19.4991 18.9991" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                             <path d="M5.50094 18.9991L19.5 5" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                         </svg>
+                     </span>
+                 </div>
+             </button>
+             @endif
 
 
              <?php if (Auth::guard('web')->check()) {
@@ -43,15 +66,15 @@
                                      <path d="M5.8335 10.8333H10.8335" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                  </svg>
                                  @php
-                                     $count = getTotalUnreadMessageCount();
+                                 $count = getTotalUnreadMessageCount();
                                  @endphp
                                  @if ($count>0)
-                                     
+
                                  <div class="badge">
                                      <span>{{$count}}</span>
-                                    </div>
-                                    @endif
-                                </div>
+                                 </div>
+                                 @endif
+                             </div>
                          </a>
 
                      </div>
