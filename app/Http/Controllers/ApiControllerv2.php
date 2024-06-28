@@ -11710,6 +11710,8 @@ class ApiControllerv2 extends Controller
                 $notificationDetail['from_time'] = ($values->from_time != null || $values->from_time != "") ? $values->from_time : "";
                 $notificationDetail['to_time'] = ($values->to_time != null || $values->to_time != "") ? $values->to_time : "";
 
+                $notificationDetail['old_start_end_date'] = ($values->old_start_end_date != null || $values->old_start_end_date != "") ? $values->old_start_end_date : "";
+                $notificationDetail['new_start_end_date'] = ($values->new_start_end_date != null || $values->new_start_end_date != "") ? $values->new_start_end_date : "";
 
                 $notificationDetail['event_wall'] = $values->event->event_settings->event_wall;
                 $notificationDetail['guest_list_visible_to_guests'] = $values->event->event_settings->guest_list_visible_to_guests;
