@@ -49,7 +49,9 @@ use Carbon\Carbon;
                                             <path d="M15.6797 3.66211L21.3365 9.31896" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                         </svg>
 
-                                        <svg class="unpin-icn d-none" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M680-840v80h-40v327l-80-80v-247H400v87l-87-87-33-33v-47h400ZM480-40l-40-40v-240H240v-80l80-80v-46L56-792l56-56 736 736-58 56-264-264h-6v240l-40 40ZM354-400h92l-44-44-2-2-46 46Zm126-193Zm-78 149Z"/></svg>
+                                        <svg class="unpin-icn d-none" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+                                            <path d="M680-840v80h-40v327l-80-80v-247H400v87l-87-87-33-33v-47h400ZM480-40l-40-40v-240H240v-80l80-80v-46L56-792l56-56 736 736-58 56-264-264h-6v240l-40 40ZM354-400h92l-44-44-2-2-46 46Zm126-193Zm-78 149Z" />
+                                        </svg>
                                     </span>
                                     <span class="multi-mute" changeWith="1">
                                         <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -92,81 +94,81 @@ use Carbon\Carbon;
                                                 <path d="M10.4984 17.5158C7.3651 17.5158 4.40677 15.6824 2.37344 12.4991C1.4901 11.1241 1.4901 8.88242 2.37344 7.49909C4.4151 4.31576 7.37344 2.48242 10.4984 2.48242C13.6234 2.48242 16.5818 4.31576 18.6151 7.49909C19.4984 8.87409 19.4984 11.1158 18.6151 12.4991C16.5818 15.6824 13.6234 17.5158 10.4984 17.5158ZM10.4984 3.73242C7.80677 3.73242 5.23177 5.34909 3.43177 8.17409C2.80677 9.14909 2.80677 10.8491 3.43177 11.8241C5.23177 14.6491 7.80677 16.2658 10.4984 16.2658C13.1901 16.2658 15.7651 14.6491 17.5651 11.8241C18.1901 10.8491 18.1901 9.14909 17.5651 8.17409C15.7651 5.34909 13.1901 3.73242 10.4984 3.73242Z" fill="#94A3B8" />
                                             </svg>
                                             Bulk Edit</a>
-                                        </li>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
                         <input type="hidden" class="senderUser" id="senderUser" value="{{$userId}}" />
                         <input type="hidden" class="senderUserName" value="{{$userName}}" />
                         <ul class="chat-list">
-                            
-                        @php
-                        $i = 0;
-                    @endphp
-                @foreach ($messages as $k => $message)
-                    @if(!isset($message['contactName']))
-                        @continue
-                    @endisset
-                    @if ($i == 0 && @$message['isArchive']!="1")
-                        <input type="hidden" class="selected_id" value="{{$k}}"/>
-                        <input type="hidden" class="selected_message" value="{{$message['contactId']}}"/>
-                        <input type="hidden" class="selected_name" value="{{$message['contactName']}}"/>
-                        <input type="hidden" id="isGroup" value="{{@$message['group']}}"/>
-                    @endif
-                    <div>
-                        <li class="{{$i == 0 ?'active':''}} msg-list {{@$message['isPin']=='1'?'pinned':''}} conversation-{{$message['conversationId']}} {{@$message['isArchive']=="1"?"archived-list":"unarchived-list"}}" data-userId="{{$message['contactId']}}" data-msgKey={{$k}} data-group={{@$message['group']}}>
-                        <div class="ms-1 d-none bulk-check">
-                            <input class="form-check-input m-0" type="checkbox" name="checked_conversation[]" value="{{$message['conversationId']}}" isGroup="{{@$message['group']}}">
-                        </div>
-                        
-                        <div class="chat-data d-flex align-items-start">
-                            <div class="user-img position-relative">
-                            @if($message['receiverProfile']!=="")
-                                                        <img class="img-fluid user-image user-img-{{$message['contactId']}}" data-id={{$message['contactId']}} src="{{$message['receiverProfile']}}" alt="user img">
-                                                        @else
-                                                        @php
-                                                        $contactName = $message['contactName'];
-                                                        $words = explode(' ', $contactName);
-                                                        $initials = '';
-                                                        
-                                                        foreach ($words as $word) {
-                                                            $initials .= strtoupper(substr($word, 0, 1));
-                                                        }
-                                                        $initials = substr($initials, 0, 2);
-                                                        $fontColor = "fontcolor" . strtoupper($initials[0]);
-                                                        @endphp
-                                                        <h5 class="{{$fontColor}}">{{$initials}}</h5>
-                                                        @endif
-                                <span class="active"></span>
-                            </div>
-                            <a href="javascript:" class="user-detail d-flex ms-3">
-                                <div class="d-flex align-items-start flex-column">
-                                    <h3>{{$message['contactName']}}</h3>
-                                    @php
-                                        $timestamp = $message['timeStamp'] ?? now()->timestamp;
-                                        $timeAgo = Carbon::createFromTimestampMs($timestamp)->diffForHumans();
-                                    @endphp
-                                    <div class="d-flex align-items-center justify-content-between">
-                                        <span class="last-message">{{$message['lastMessage']}}</span>
-                                        
-                                    </div>
-                                </div>
-                                
-                            </a>
-                            <div class="ms-auto">
-                                <h6 class="ms-2 time-ago"> {{ $timeAgo }}</h6>
-                                <div class="d-flex align-items-center justify-content-end">
-                                    <span class="badge ms-2 {{@$message['unReadCount'] == 0 ? 'd-none' : ''}}">{{@$message['unReadCount']}}</span>
-                                    <span class="ms-2 d-flex mt-1 align-items-start justify-content-end pin-svg {{@$message['isPin']=='1'?'':'d-none'}}">
-                                        <svg width="11" height="17" viewBox="0 0 11 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M8.83333 0.5C9.04573 0.500236 9.25003 0.581566 9.40447 0.727374C9.55892 0.873181 9.65186 1.07246 9.66431 1.2845C9.67676 1.49653 9.60777 1.70532 9.47145 1.86819C9.33512 2.03107 9.14175 2.13575 8.93083 2.16083L8.83333 2.16667V6.13667L10.4117 9.29417C10.4552 9.38057 10.4834 9.47391 10.495 9.57L10.5 9.66667V11.3333C10.5 11.5374 10.425 11.7344 10.2894 11.887C10.1538 12.0395 9.96688 12.137 9.76417 12.1608L9.66667 12.1667H6.33333V15.5C6.3331 15.7124 6.25177 15.9167 6.10596 16.0711C5.96015 16.2256 5.76087 16.3185 5.54884 16.331C5.3368 16.3434 5.12802 16.2744 4.96514 16.1381C4.80226 16.0018 4.69759 15.8084 4.6725 15.5975L4.66667 15.5V12.1667H1.33333C1.12922 12.1666 0.932219 12.0917 0.77969 11.9561C0.627161 11.8204 0.529714 11.6335 0.505833 11.4308L0.5 11.3333V9.66667C0.500114 9.57004 0.517032 9.47416 0.55 9.38333L0.588333 9.29417L2.16667 6.135V2.16667C1.95427 2.16643 1.74997 2.0851 1.59553 1.93929C1.44108 1.79349 1.34814 1.59421 1.33569 1.38217C1.32324 1.17014 1.39223 0.96135 1.52855 0.798473C1.66488 0.635595 1.85825 0.53092 2.06917 0.505833L2.16667 0.5H8.83333Z" fill="#94A3B8"/>
-                                        </svg>
 
-                                        
-                                    </span>
-                                </div>
-                            </div>
-                             {{-- <div class="dropdown ms-auto">
+                            @php
+                            $i = 0;
+                            @endphp
+                            @foreach ($messages as $k => $message)
+                            @if(!isset($message['contactName']))
+                            @continue
+                            @endisset
+                            @if ($i == 0 && @$message['isArchive']!="1")
+                            <input type="hidden" class="selected_id" value="{{$k}}" />
+                            <input type="hidden" class="selected_message" value="{{@$message['contactId']}}" />
+                            <input type="hidden" class="selected_name" value="{{@$message['contactName']}}" />
+                            <input type="hidden" id="isGroup" value="{{@$message['group']}}" />
+                            @endif
+                            <div>
+                                <li class="{{$i == 0 ?'active':''}} msg-list {{@$message['isPin']=='1'?'pinned':''}} conversation-{{@$message['conversationId']}} {{@$message['isArchive']=="1"?"archived-list":"unarchived-list"}}" data-userId="{{$message['contactId']}}" data-msgKey={{$k}} data-group={{@$message['group']}}>
+                                    <div class="ms-1 d-none bulk-check">
+                                        <input class="form-check-input m-0" type="checkbox" name="checked_conversation[]" value="{{$message['conversationId']}}" isGroup="{{@$message['group']}}">
+                                    </div>
+
+                                    <div class="chat-data d-flex align-items-start">
+                                        <div class="user-img position-relative">
+                                            @if($message['receiverProfile']!=="")
+                                            <img class="img-fluid user-image user-img-{{$message['contactId']}}" data-id={{$message['contactId']}} src="{{$message['receiverProfile']}}" alt="user img">
+                                            @else
+                                            @php
+                                            $contactName = $message['contactName'];
+                                            $words = explode(' ', $contactName);
+                                            $initials = '';
+
+                                            foreach ($words as $word) {
+                                            $initials .= strtoupper(substr($word, 0, 1));
+                                            }
+                                            $initials = substr($initials, 0, 2);
+                                            $fontColor = "fontcolor" . strtoupper($initials[0]);
+                                            @endphp
+                                            <h5 class="{{$fontColor}}">{{$initials}}</h5>
+                                            @endif
+                                            <span class="active"></span>
+                                        </div>
+                                        <a href="javascript:" class="user-detail d-flex ms-3">
+                                            <div class="d-flex align-items-start flex-column">
+                                                <h3>{{$message['contactName']}}</h3>
+                                                @php
+                                                $timestamp = $message['timeStamp'] ?? now()->timestamp;
+                                                $timeAgo = Carbon::createFromTimestampMs($timestamp)->diffForHumans();
+                                                @endphp
+                                                <div class="d-flex align-items-center justify-content-between">
+                                                    <span class="last-message">{{$message['lastMessage']}}</span>
+
+                                                </div>
+                                            </div>
+
+                                        </a>
+                                        <div class="ms-auto">
+                                            <h6 class="ms-2 time-ago"> {{ $timeAgo }}</h6>
+                                            <div class="d-flex align-items-center justify-content-end">
+                                                <span class="badge ms-2 {{@$message['unReadCount'] == 0 ? 'd-none' : ''}}">{{@$message['unReadCount']}}</span>
+                                                <span class="ms-2 d-flex mt-1 align-items-start justify-content-end pin-svg {{@$message['isPin']=='1'?'':'d-none'}}">
+                                                    <svg width="11" height="17" viewBox="0 0 11 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M8.83333 0.5C9.04573 0.500236 9.25003 0.581566 9.40447 0.727374C9.55892 0.873181 9.65186 1.07246 9.66431 1.2845C9.67676 1.49653 9.60777 1.70532 9.47145 1.86819C9.33512 2.03107 9.14175 2.13575 8.93083 2.16083L8.83333 2.16667V6.13667L10.4117 9.29417C10.4552 9.38057 10.4834 9.47391 10.495 9.57L10.5 9.66667V11.3333C10.5 11.5374 10.425 11.7344 10.2894 11.887C10.1538 12.0395 9.96688 12.137 9.76417 12.1608L9.66667 12.1667H6.33333V15.5C6.3331 15.7124 6.25177 15.9167 6.10596 16.0711C5.96015 16.2256 5.76087 16.3185 5.54884 16.331C5.3368 16.3434 5.12802 16.2744 4.96514 16.1381C4.80226 16.0018 4.69759 15.8084 4.6725 15.5975L4.66667 15.5V12.1667H1.33333C1.12922 12.1666 0.932219 12.0917 0.77969 11.9561C0.627161 11.8204 0.529714 11.6335 0.505833 11.4308L0.5 11.3333V9.66667C0.500114 9.57004 0.517032 9.47416 0.55 9.38333L0.588333 9.29417L2.16667 6.135V2.16667C1.95427 2.16643 1.74997 2.0851 1.59553 1.93929C1.44108 1.79349 1.34814 1.59421 1.33569 1.38217C1.32324 1.17014 1.39223 0.96135 1.52855 0.798473C1.66488 0.635595 1.85825 0.53092 2.06917 0.505833L2.16667 0.5H8.83333Z" fill="#94A3B8" />
+                                                    </svg>
+
+
+                                                </span>
+                                            </div>
+                                        </div>
+                                        {{-- <div class="dropdown ms-auto">
                                 <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
                                     <svg width="5" height="18" viewBox="0 0 5 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M1.5 9C1.5 9.26522 1.60536 9.51957 1.79289 9.70711C1.98043 9.89464 2.23478 10 2.5 10C2.76522 10 3.01957 9.89464 3.20711 9.70711C3.39464 9.51957 3.5 9.26522 3.5 9C3.5 8.73478 3.39464 8.48043 3.20711 8.29289C3.01957 8.10536 2.76522 8 2.5 8C2.23478 8 1.98043 8.10536 1.79289 8.29289C1.60536 8.48043 1.5 8.73478 1.5 9Z" stroke="#64748B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -180,23 +182,23 @@ use Carbon\Carbon;
                                     <li><a class="dropdown-item" href="#">Something else here</a></li>
                                 </ul> 
                             </div>--}}
-                        </div>
-                    </li>
-                </div>
-                    @php
-                    if(@$message['isArchive']!="1"){
-                        $i++;
-                    }
-                    @endphp
-                @endforeach
-                    @if ($i==0)
-                    <input type="hidden" class="selected_id"/>
-                    <input type="hidden" class="selected_message" />
-                    <input type="hidden" class="selected_name"/>
-                    <input type="hidden" id="isGroup"/>
+                                    </div>
+                                </li>
+                            </div>
+                            @php
+                            if(@$message['isArchive']!="1"){
+                            $i++;
+                            }
+                            @endphp
+                            @endforeach
+                            @if ($i==0)
+                            <input type="hidden" class="selected_id" />
+                            <input type="hidden" class="selected_message" />
+                            <input type="hidden" class="selected_name" />
+                            <input type="hidden" id="isGroup" />
 
-                    @endif
-                    
+                            @endif
+
                         </ul>
                         <button id="archive-list" list="0">Archive List</button>
                     </div>
@@ -238,7 +240,9 @@ use Carbon\Carbon;
                                                         <path d="M15.6797 3.66211L21.3365 9.31896" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                                     </svg>
 
-                                                    <svg class="me-2 unpin-self-icn" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M680-840v80h-40v327l-80-80v-247H400v87l-87-87-33-33v-47h400ZM480-40l-40-40v-240H240v-80l80-80v-46L56-792l56-56 736 736-58 56-264-264h-6v240l-40 40ZM354-400h92l-44-44-2-2-46 46Zm126-193Zm-78 149Z"/></svg>
+                                                    <svg class="me-2 unpin-self-icn" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+                                                        <path d="M680-840v80h-40v327l-80-80v-247H400v87l-87-87-33-33v-47h400ZM480-40l-40-40v-240H240v-80l80-80v-46L56-792l56-56 736 736-58 56-264-264h-6v240l-40 40ZM354-400h92l-44-44-2-2-46 46Zm126-193Zm-78 149Z" />
+                                                    </svg>
 
                                                     <span>Pin</span></a>
                                             </li>
@@ -306,11 +310,11 @@ use Carbon\Carbon;
                                 <p>Please select a message to see the details</p>
                             </div> -->
 
-                            
+
                         </div>
 
-                      
-                       
+
+
                         <div class="msg-footer">
                             <div id="preview">
                                 <label id="upload_name"></label>
@@ -318,15 +322,15 @@ use Carbon\Carbon;
                                 <div id="preview_file">
                                     <button class="file_close">
                                         <svg width="17" height="18" viewBox="0 0 17 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M8.4974 0.666016C3.90573 0.666016 0.164062 4.40768 0.164062 8.99935C0.164062 13.591 3.90573 17.3327 8.4974 17.3327C13.0891 17.3327 16.8307 13.591 16.8307 8.99935C16.8307 4.40768 13.0891 0.666016 8.4974 0.666016ZM11.2974 10.916C11.5391 11.1577 11.5391 11.5577 11.2974 11.7993C11.1724 11.9243 11.0141 11.9827 10.8557 11.9827C10.6974 11.9827 10.5391 11.9243 10.4141 11.7993L8.4974 9.88268L6.58073 11.7993C6.45573 11.9243 6.2974 11.9827 6.13906 11.9827C5.98073 11.9827 5.8224 11.9243 5.6974 11.7993C5.45573 11.5577 5.45573 11.1577 5.6974 10.916L7.61406 8.99935L5.6974 7.08268C5.45573 6.84102 5.45573 6.44102 5.6974 6.19935C5.93906 5.95768 6.33906 5.95768 6.58073 6.19935L8.4974 8.11602L10.4141 6.19935C10.6557 5.95768 11.0557 5.95768 11.2974 6.19935C11.5391 6.44102 11.5391 6.84102 11.2974 7.08268L9.38073 8.99935L11.2974 10.916Z" fill="#F73C71"/>
-                                            </svg>
+                                            <path d="M8.4974 0.666016C3.90573 0.666016 0.164062 4.40768 0.164062 8.99935C0.164062 13.591 3.90573 17.3327 8.4974 17.3327C13.0891 17.3327 16.8307 13.591 16.8307 8.99935C16.8307 4.40768 13.0891 0.666016 8.4974 0.666016ZM11.2974 10.916C11.5391 11.1577 11.5391 11.5577 11.2974 11.7993C11.1724 11.9243 11.0141 11.9827 10.8557 11.9827C10.6974 11.9827 10.5391 11.9243 10.4141 11.7993L8.4974 9.88268L6.58073 11.7993C6.45573 11.9243 6.2974 11.9827 6.13906 11.9827C5.98073 11.9827 5.8224 11.9243 5.6974 11.7993C5.45573 11.5577 5.45573 11.1577 5.6974 10.916L7.61406 8.99935L5.6974 7.08268C5.45573 6.84102 5.45573 6.44102 5.6974 6.19935C5.93906 5.95768 6.33906 5.95768 6.58073 6.19935L8.4974 8.11602L10.4141 6.19935C10.6557 5.95768 11.0557 5.95768 11.2974 6.19935C11.5391 6.44102 11.5391 6.84102 11.2974 7.08268L9.38073 8.99935L11.2974 10.916Z" fill="#F73C71" />
+                                        </svg>
                                     </button>
                                     <img src="{{asset('storage/file.png')}}" class="preview_file">
                                     <span id="file_name"></span>
                                 </div>
-        
+
                                 <input type="hidden" class="file_info">
-                                </div>
+                            </div>
                             <div class="message-perent">
                                 <input type="text" placeholder="Write message here..." class="send-message">
                                 <div class="d-flex ms-auto">
@@ -373,217 +377,210 @@ use Carbon\Carbon;
                                                         </svg> File
                                                     </span>
                                                     <input type="file" name="upload" id="upload" class="upload-box" placeholder="Upload File" aria-label="Upload File">
-                                                </a>                                            
+                                                </a>
                                             </li>
                                         </ul>
                                     </div>
                                     <div>
-                                    <div id="audioControls">
-                                        <button type="button" class="close-song" style="display: none;">
-                                            <svg width="17" height="18" viewBox="0 0 17 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M8.4974 0.666016C3.90573 0.666016 0.164062 4.40768 0.164062 8.99935C0.164062 13.591 3.90573 17.3327 8.4974 17.3327C13.0891 17.3327 16.8307 13.591 16.8307 8.99935C16.8307 4.40768 13.0891 0.666016 8.4974 0.666016ZM11.2974 10.916C11.5391 11.1577 11.5391 11.5577 11.2974 11.7993C11.1724 11.9243 11.0141 11.9827 10.8557 11.9827C10.6974 11.9827 10.5391 11.9243 10.4141 11.7993L8.4974 9.88268L6.58073 11.7993C6.45573 11.9243 6.2974 11.9827 6.13906 11.9827C5.98073 11.9827 5.8224 11.9243 5.6974 11.7993C5.45573 11.5577 5.45573 11.1577 5.6974 10.916L7.61406 8.99935L5.6974 7.08268C5.45573 6.84102 5.45573 6.44102 5.6974 6.19935C5.93906 5.95768 6.33906 5.95768 6.58073 6.19935L8.4974 8.11602L10.4141 6.19935C10.6557 5.95768 11.0557 5.95768 11.2974 6.19935C11.5391 6.44102 11.5391 6.84102 11.2974 7.08268L9.38073 8.99935L11.2974 10.916Z" fill="#F73C71"></svg>
-                                        </button>
-        
-                                        <button id="stopRecording" style="display: none;"><i class="fa-solid fa-pause"></i></button>
-                                        <button id="playRecording" style="display: none;">Play Recording</button>
-                                        <button id="stopPlayback" style="display: none;">Stop Playback</button>
+                                        <div id="audioControls">
+                                            <button type="button" class="close-song" style="display: none;">
+                                                <svg width="17" height="18" viewBox="0 0 17 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M8.4974 0.666016C3.90573 0.666016 0.164062 4.40768 0.164062 8.99935C0.164062 13.591 3.90573 17.3327 8.4974 17.3327C13.0891 17.3327 16.8307 13.591 16.8307 8.99935C16.8307 4.40768 13.0891 0.666016 8.4974 0.666016ZM11.2974 10.916C11.5391 11.1577 11.5391 11.5577 11.2974 11.7993C11.1724 11.9243 11.0141 11.9827 10.8557 11.9827C10.6974 11.9827 10.5391 11.9243 10.4141 11.7993L8.4974 9.88268L6.58073 11.7993C6.45573 11.9243 6.2974 11.9827 6.13906 11.9827C5.98073 11.9827 5.8224 11.9243 5.6974 11.7993C5.45573 11.5577 5.45573 11.1577 5.6974 10.916L7.61406 8.99935L5.6974 7.08268C5.45573 6.84102 5.45573 6.44102 5.6974 6.19935C5.93906 5.95768 6.33906 5.95768 6.58073 6.19935L8.4974 8.11602L10.4141 6.19935C10.6557 5.95768 11.0557 5.95768 11.2974 6.19935C11.5391 6.44102 11.5391 6.84102 11.2974 7.08268L9.38073 8.99935L11.2974 10.916Z" fill="#F73C71">
+                                                </svg>
+                                            </button>
+
+                                            <button id="stopRecording" style="display: none;"><i class="fa-solid fa-pause"></i></button>
+                                            <button id="playRecording" style="display: none;">Play Recording</button>
+                                            <button id="stopPlayback" style="display: none;">Stop Playback</button>
+                                        </div>
+
+
+                                        <div class="audio-container" id="audioContainer">
+                                            <audio id="recordedAudio" class="recordedAudio" controls style="display: none;"></audio>
+                                            <button class="close-audio-btn"><svg width="17" height="18" viewBox="0 0 17 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M8.4974 0.666016C3.90573 0.666016 0.164062 4.40768 0.164062 8.99935C0.164062 13.591 3.90573 17.3327 8.4974 17.3327C13.0891 17.3327 16.8307 13.591 16.8307 8.99935C16.8307 4.40768 13.0891 0.666016 8.4974 0.666016ZM11.2974 10.916C11.5391 11.1577 11.5391 11.5577 11.2974 11.7993C11.1724 11.9243 11.0141 11.9827 10.8557 11.9827C10.6974 11.9827 10.5391 11.9243 10.4141 11.7993L8.4974 9.88268L6.58073 11.7993C6.45573 11.9243 6.2974 11.9827 6.13906 11.9827C5.98073 11.9827 5.8224 11.9243 5.6974 11.7993C5.45573 11.5577 5.45573 11.1577 5.6974 10.916L7.61406 8.99935L5.6974 7.08268C5.45573 6.84102 5.45573 6.44102 5.6974 6.19935C5.93906 5.95768 6.33906 5.95768 6.58073 6.19935L8.4974 8.11602L10.4141 6.19935C10.6557 5.95768 11.0557 5.95768 11.2974 6.19935C11.5391 6.44102 11.5391 6.84102 11.2974 7.08268L9.38073 8.99935L11.2974 10.916Z" fill="#F73C71" />
+                                                </svg></button>
+                                        </div>
+                                        <div>
+                                            <span id="startRecording">
+                                                <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M12.5 15.5C14.71 15.5 16.5 13.71 16.5 11.5V6C16.5 3.79 14.71 2 12.5 2C10.29 2 8.5 3.79 8.5 6V11.5C8.5 13.71 10.29 15.5 12.5 15.5Z" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                                    <path d="M4.85156 9.65039V11.3504C4.85156 15.5704 8.28156 19.0004 12.5016 19.0004C16.7216 19.0004 20.1516 15.5704 20.1516 11.3504V9.65039" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                                    <path d="M11.1094 6.42914C12.0094 6.09914 12.9894 6.09914 13.8894 6.42914" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                                    <path d="M11.7031 8.55031C12.2331 8.41031 12.7831 8.41031 13.3131 8.55031" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                                    <path d="M12.5 19V22" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                                </svg>
+                                            </span>
+                                        </div>
                                     </div>
-        
-        
-                                    <div class="audio-container" id="audioContainer">
-                                        <audio id="recordedAudio" class="recordedAudio" controls style="display: none;"></audio>
-                                        <button class="close-audio-btn"><svg width="17" height="18" viewBox="0 0 17 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M8.4974 0.666016C3.90573 0.666016 0.164062 4.40768 0.164062 8.99935C0.164062 13.591 3.90573 17.3327 8.4974 17.3327C13.0891 17.3327 16.8307 13.591 16.8307 8.99935C16.8307 4.40768 13.0891 0.666016 8.4974 0.666016ZM11.2974 10.916C11.5391 11.1577 11.5391 11.5577 11.2974 11.7993C11.1724 11.9243 11.0141 11.9827 10.8557 11.9827C10.6974 11.9827 10.5391 11.9243 10.4141 11.7993L8.4974 9.88268L6.58073 11.7993C6.45573 11.9243 6.2974 11.9827 6.13906 11.9827C5.98073 11.9827 5.8224 11.9243 5.6974 11.7993C5.45573 11.5577 5.45573 11.1577 5.6974 10.916L7.61406 8.99935L5.6974 7.08268C5.45573 6.84102 5.45573 6.44102 5.6974 6.19935C5.93906 5.95768 6.33906 5.95768 6.58073 6.19935L8.4974 8.11602L10.4141 6.19935C10.6557 5.95768 11.0557 5.95768 11.2974 6.19935C11.5391 6.44102 11.5391 6.84102 11.2974 7.08268L9.38073 8.99935L11.2974 10.916Z" fill="#F73C71"/>
-                                            </svg></button>
-                                    </div>
-                                    <div>
-                                    <span id="startRecording">
-                                        <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M12.5 15.5C14.71 15.5 16.5 13.71 16.5 11.5V6C16.5 3.79 14.71 2 12.5 2C10.29 2 8.5 3.79 8.5 6V11.5C8.5 13.71 10.29 15.5 12.5 15.5Z" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                            <path d="M4.85156 9.65039V11.3504C4.85156 15.5704 8.28156 19.0004 12.5016 19.0004C16.7216 19.0004 20.1516 15.5704 20.1516 11.3504V9.65039" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                            <path d="M11.1094 6.42914C12.0094 6.09914 12.9894 6.09914 13.8894 6.42914" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                            <path d="M11.7031 8.55031C12.2331 8.41031 12.7831 8.41031 13.3131 8.55031" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                            <path d="M12.5 19V22" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                        </svg>
-                                    </span>
                                 </div>
+
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
 
-<!-- Message Modal -->
-<div class="modal" id="msgBox">
-    <div class="modal-dialog">
-        <div class="modal-content position-relative">
+        <!-- Message Modal -->
+        <div class="modal" id="msgBox">
+            <div class="modal-dialog">
+                <div class="modal-content position-relative">
 
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 class="modal-title">New Message</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-
-            <!-- Modal body -->
-            <div class="modal-body">
-                <div>
-                   
-                    <div class="d-flex align-items-center inbox">
-                        <span>To:</span>
-                        <div id="selected-tags-container">
-                            <input type="text" id="search-user">
-                        </div>
-                        <input type="hidden" id="selected-user-id" name="selectedUserId" value="">
-                    </div>
-                   
-                    <!-- =========== first-model =========== -->
-                    <div class="empty-massage">
-                        <div class="empty-img">
-                            <img src="{{asset('assets/front')}}/image/empty-img.png" alt="empty-img">
-                        </div>
-                        <h5>Add Contact</h5>
-                        <p>Please search and add contact to start new message</p>
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">New Message</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
 
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <div>
 
-                    <div class="chat-user d-none">
-                        <div class="chat-user-img">
-                            <img src="{{asset('assets/front')}}/image/user-img.svg" class="selected-user-img" alt="user-img">
-                        </div>
-                        <h4 class="selected-user-name">Tiana Dokidis</h4>
-                        <a class="selected-user-email" href="mailto:tiana@gmail.com"><span>tiana@gmail.com</span></a>
-                    </div>
-
-                    <!-- ========= forth-modal ======== -->
-                    <div class="multi-chat d-none">
-                        <div class="img-wrp">
-                        </div>
-                        <h5 class="selected-user-name" id ="group-name">Tiana Dokidis, Martin Garlic, +3</h5>
-                        <p>This message will automatically create a group</p>
-                        {{-- <a href="#">See all user</a><br> --}}
-                        
-                    </div>
-                </div>
-            </div>
-
-            <div class="modal-footer">
-
-                <div class="d-flex align-items-center">
-                    <input type="text" placeholder="Write message here..." id="new_message">
-                    <span class="ms-auto" id="send-new-msg">
-                        <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M15.5673 5.51062L7.00733 1.23062C1.25733 -1.64938 -1.10267 0.710623 1.77733 6.46062L2.64733 8.20062C2.89733 8.71062 2.89733 9.30062 2.64733 9.81062L1.77733 11.5406C-1.10267 17.2906 1.24733 19.6506 7.00733 16.7706L15.5673 12.4906C19.4073 10.5706 19.4073 7.43062 15.5673 5.51062ZM12.3373 9.75062H6.93733C6.52733 9.75062 6.18733 9.41062 6.18733 9.00062C6.18733 8.59062 6.52733 8.25062 6.93733 8.25062H12.3373C12.7473 8.25062 13.0873 8.59062 13.0873 9.00062C13.0873 9.41062 12.7473 9.75062 12.3373 9.75062Z" fill="#64748B" />
-                        </svg>
-                    </span>
-                </div>
-
-            </div>
-
-        </div>
-    </div>
-</div>
-
-
-<div class="modal" id="listBox">
-    <div class="modal-dialog">
-        <div class="modal-content position-relative">
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <div class="d-flex">
-                    <h4 class="selected-title me-2">Add New Message</h4>
-                    <span class="updateGroup"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M11.05 4.66652L4.20829 11.9082C3.94996 12.1832 3.69996 12.7249 3.64996 13.0999L3.34162 15.7999C3.23329 16.7749 3.93329 17.4415 4.89996 17.2749L7.58329 16.8165C7.95829 16.7499 8.48329 16.4749 8.74162 16.1915L15.5833 8.94985C16.7666 7.69985 17.3 6.27485 15.4583 4.53319C13.625 2.80819 12.2333 3.41652 11.05 4.66652Z" stroke="#0F172A" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
-                        <path d="M9.9082 5.875C10.2665 8.175 12.1332 9.93333 14.4499 10.1667" stroke="#0F172A" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
-                    </svg></span>
-                </div>
-                <div  class="change-group-name d-none">
-                    <input type="text" class="update-group-name"/>
-                    <button type="button" class="cmn-btn" id="updateName">Save</button>
-                </div>
-                    <button type="button" class="btn-close close-group-modal" data-bs-dismiss="modal"></button>
-            </div>
-            <!-- Modal body -->
-            <div class="modal-body p-0">
-                <div>
-                    <div class="">
-                        <input type="file" id="choose-file" name="choose-file" accept="image/*" />
-                        <div class="position-relative">
-                            <div class="cover-img user-cover-img" id="cover-img">
-                                <img src="./assets/image/user-img.svg" alt="cover-img" id="profileIm">
+                            <div class="d-flex align-items-center inbox">
+                                <span>To:</span>
+                                <div id="selected-tags-container">
+                                    <input type="text" id="search-user">
+                                </div>
+                                <input type="hidden" id="selected-user-id" name="selectedUserId" value="">
                             </div>
-                            <label class="choosen-file  edit-btn mb-0" for="choose-file">
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M11.05 4.66652L4.20829 11.9082C3.94996 12.1832 3.69996 12.7249 3.64996 13.0999L3.34162 15.7999C3.23329 16.7749 3.93329 17.4415 4.89996 17.2749L7.58329 16.8165C7.95829 16.7499 8.48329 16.4749 8.74162 16.1915L15.5833 8.94985C16.7666 7.69985 17.3 6.27485 15.4583 4.53319C13.625 2.80819 12.2333 3.41652 11.05 4.66652Z"
-                                        stroke="#0F172A" stroke-width="1.5" stroke-miterlimit="10"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M9.9082 5.875C10.2665 8.175 12.1332 9.93333 14.4499 10.1667"
-                                        stroke="#0F172A" stroke-width="1.5" stroke-miterlimit="10"
-                                        stroke-linecap="round" stroke-linejoin="round" />
+
+                            <!-- =========== first-model =========== -->
+                            <div class="empty-massage">
+                                <div class="empty-img">
+                                    <img src="{{asset('assets/front')}}/image/empty-img.png" alt="empty-img">
+                                </div>
+                                <h5>Add Contact</h5>
+                                <p>Please search and add contact to start new message</p>
+                            </div>
+
+
+                            <div class="chat-user d-none">
+                                <div class="chat-user-img">
+                                    <img src="{{asset('assets/front')}}/image/user-img.svg" class="selected-user-img" alt="user-img">
+                                </div>
+                                <h4 class="selected-user-name">Tiana Dokidis</h4>
+                                <a class="selected-user-email" href="mailto:tiana@gmail.com"><span>tiana@gmail.com</span></a>
+                            </div>
+
+                            <!-- ========= forth-modal ======== -->
+                            <div class="multi-chat d-none">
+                                <div class="img-wrp">
+                                </div>
+                                <h5 class="selected-user-name" id="group-name">Tiana Dokidis, Martin Garlic, +3</h5>
+                                <p>This message will automatically create a group</p>
+                                {{-- <a href="#">See all user</a><br> --}}
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+
+                        <div class="d-flex align-items-center">
+                            <input type="text" placeholder="Write message here..." id="new_message">
+                            <span class="ms-auto" id="send-new-msg">
+                                <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M15.5673 5.51062L7.00733 1.23062C1.25733 -1.64938 -1.10267 0.710623 1.77733 6.46062L2.64733 8.20062C2.89733 8.71062 2.89733 9.30062 2.64733 9.81062L1.77733 11.5406C-1.10267 17.2906 1.24733 19.6506 7.00733 16.7706L15.5673 12.4906C19.4073 10.5706 19.4073 7.43062 15.5673 5.51062ZM12.3373 9.75062H6.93733C6.52733 9.75062 6.18733 9.41062 6.18733 9.00062C6.18733 8.59062 6.52733 8.25062 6.93733 8.25062H12.3373C12.7473 8.25062 13.0873 8.59062 13.0873 9.00062C13.0873 9.41062 12.7473 9.75062 12.3373 9.75062Z" fill="#64748B" />
                                 </svg>
-                            </label>
+                            </span>
                         </div>
+
                     </div>
-                    <div class="new-member d-none">
-                        <button class="btn btn-primary" id="new-member"><span><i class="fa-solid fa-user-plus"></i></span> Add New Member</button>
-                    </div>
-                    <ul class="member-lists group-list">
-                        <li class="">
-                            <div class="chat-data d-flex">
-                                <div class="user-img position-relative">
-                                    <img class="img-fluid"
-                                        src="https://mehedihtml.com/chatbox/assets/img/user.png" alt="user img">
-                                </div>
-                                <div class="user-detail d-block ms-3">
-                                    <div class="">
-                                        <h3>Tiana Dokidis</h3>
-                                        <a href="mailto:tiadokis@gmail.com"><span>tiadokis@gmail.com</span></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="">
-                            <div class="chat-data d-flex">
-                                <div class="user-img position-relative">
-                                    <img class="img-fluid"
-                                        src="https://mehedihtml.com/chatbox/assets/img/user.png" alt="user img">
-                                </div>
-                                <div class="user-detail d-block ms-3">
-                                    <div class="">
-                                        <h3>Tiana Dokidis</h3>
-                                        <a href="mailto:tiadokis@gmail.com"><span>tiadokis@gmail.com</span></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
 
-                    <div class="new-members-add d-none">
+                </div>
+            </div>
+        </div>
 
-                        <div class="d-flex align-items-center inbox">
-                        
-                            <span>To:</span>
-                            <div id="group-selected-tags-container">
-                         
-                                <input type="text" id="group-search-user">
-                            </div>
-                            <input type="hidden" id="group-selected-user-id" name="selectedUserId" value="">
 
-                         
+        <div class="modal" id="listBox">
+            <div class="modal-dialog">
+                <div class="modal-content position-relative">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <div class="d-flex">
+                            <h4 class="selected-title me-2">Add New Message</h4>
+                            <span class="updateGroup"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M11.05 4.66652L4.20829 11.9082C3.94996 12.1832 3.69996 12.7249 3.64996 13.0999L3.34162 15.7999C3.23329 16.7749 3.93329 17.4415 4.89996 17.2749L7.58329 16.8165C7.95829 16.7499 8.48329 16.4749 8.74162 16.1915L15.5833 8.94985C16.7666 7.69985 17.3 6.27485 15.4583 4.53319C13.625 2.80819 12.2333 3.41652 11.05 4.66652Z" stroke="#0F172A" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path d="M9.9082 5.875C10.2665 8.175 12.1332 9.93333 14.4499 10.1667" stroke="#0F172A" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </svg></span>
                         </div>
-                        <button class="cmn-btn d-none" id="add-group-member">Add Member</button>
+                        <div class="change-group-name d-none">
+                            <input type="text" class="update-group-name" />
+                            <button type="button" class="cmn-btn" id="updateName">Save</button>
+                        </div>
+                        <button type="button" class="btn-close close-group-modal" data-bs-dismiss="modal"></button>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="modal-body p-0">
+                        <div>
+                            <div class="">
+                                <input type="file" id="choose-file" name="choose-file" accept="image/*" />
+                                <div class="position-relative">
+                                    <div class="cover-img user-cover-img" id="cover-img">
+                                        <img src="./assets/image/user-img.svg" alt="cover-img" id="profileIm">
+                                    </div>
+                                    <label class="choosen-file  edit-btn mb-0" for="choose-file">
+                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M11.05 4.66652L4.20829 11.9082C3.94996 12.1832 3.69996 12.7249 3.64996 13.0999L3.34162 15.7999C3.23329 16.7749 3.93329 17.4415 4.89996 17.2749L7.58329 16.8165C7.95829 16.7499 8.48329 16.4749 8.74162 16.1915L15.5833 8.94985C16.7666 7.69985 17.3 6.27485 15.4583 4.53319C13.625 2.80819 12.2333 3.41652 11.05 4.66652Z" stroke="#0F172A" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M9.9082 5.875C10.2665 8.175 12.1332 9.93333 14.4499 10.1667" stroke="#0F172A" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="new-member d-none">
+                                <button class="btn btn-primary" id="new-member"><span><i class="fa-solid fa-user-plus"></i></span> Add New Member</button>
+                            </div>
+                            <ul class="member-lists group-list">
+                                <li class="">
+                                    <div class="chat-data d-flex">
+                                        <div class="user-img position-relative">
+                                            <img class="img-fluid" src="https://mehedihtml.com/chatbox/assets/img/user.png" alt="user img">
+                                        </div>
+                                        <div class="user-detail d-block ms-3">
+                                            <div class="">
+                                                <h3>Tiana Dokidis</h3>
+                                                <a href="mailto:tiadokis@gmail.com"><span>tiadokis@gmail.com</span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="">
+                                    <div class="chat-data d-flex">
+                                        <div class="user-img position-relative">
+                                            <img class="img-fluid" src="https://mehedihtml.com/chatbox/assets/img/user.png" alt="user img">
+                                        </div>
+                                        <div class="user-detail d-block ms-3">
+                                            <div class="">
+                                                <h3>Tiana Dokidis</h3>
+                                                <a href="mailto:tiadokis@gmail.com"><span>tiadokis@gmail.com</span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+
+                            <div class="new-members-add d-none">
+
+                                <div class="d-flex align-items-center inbox">
+
+                                    <span>To:</span>
+                                    <div id="group-selected-tags-container">
+
+                                        <input type="text" id="group-search-user">
+                                    </div>
+                                    <input type="hidden" id="group-selected-user-id" name="selectedUserId" value="">
+
+
+                                </div>
+                                <button class="cmn-btn d-none" id="add-group-member">Add Member</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-</div>
 </div>
 @push('scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/timeago.js/4.0.2/timeago.min.js"></script>
