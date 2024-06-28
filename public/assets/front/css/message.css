@@ -242,6 +242,11 @@ ul.chat-list li:last-child{
     text-transform: capitalize;
 }
 
+.user-detail h3#selected-user-name{
+    max-width: 100%;
+
+}
+
 .member-lists .chat-data .remove-member{
    position: absolute;
    right: 10px;

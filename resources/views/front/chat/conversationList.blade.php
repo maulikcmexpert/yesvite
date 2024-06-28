@@ -23,22 +23,22 @@ $message['unReadCount'] = @$message['unRead']==true && @$message['unReadCount']=
             <input class="form-check-input" type="checkbox" name="Guest RSVP’s" checked="">
         </div> --}}
         <div class="user-img position-relative">
-            @if($message['receiverProfile']!=="" && $message['receiverProfile']!==null)
+            @if($message['receiverProfile']!=="")
             <img class="img-fluid user-image user-img-{{$message['contactId']}}" data-id={{$message['contactId']}} src="{{$message['receiverProfile']}}" alt="user img">
-           
-                        @else
-                        @php
-                        $contactName = $message['contactName'];
-                        $words = explode(' ', $contactName);
-                        $initials = '';
-                        foreach ($words as $word) {
-                        $initials .= strtoupper(substr($word, 0, 1));
-                        }
-                        $fontColor = "fontcolor" . strtoupper($initials[0]);
-                        @endphp
-                        <h5 class="{{$fontColor}}">{{$initials}}</h5>
-                        @endif
-
+            @else
+            @php
+            $contactName = $message['contactName'];
+            $words = explode(' ', $contactName);
+            $initials = '';
+            
+            foreach ($words as $word) {
+                $initials .= strtoupper(substr($word, 0, 1));
+            }
+            $initials = substr($initials, 0, 2);
+            $fontColor = "fontcolor" . strtoupper($initials[0]);
+            @endphp
+            <h5 class="{{$fontColor}}">{{$initials}}</h5>
+            @endif
            
             <span class="active"></span>
         </div>

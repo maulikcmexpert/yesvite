@@ -1673,8 +1673,8 @@ $("#new_message").on("keypress", async function (e) {
         console.log({ tagCount });
         if (tagCount > 1) {
             const currentUserId = senderUser;
-            const groupName = $("#group-name").val(); // Assuming you have an input for group name
-            $("#group-name").val("");
+            const groupName = $("#group-name").html(); // Assuming you have an input for group name
+            $("#group-name").html("");
             if (groupName.trim() == "") {
                 return toastr.error(
                     "Please enter Group name for create group.",
