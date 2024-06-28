@@ -68,13 +68,12 @@
                                  @php
                                  $count = getTotalUnreadMessageCount();
                                  @endphp
-                                 @if ($count>0)
-
-                                 <div class="badge">
-                                     <span>{{$count}}</span>
-                                 </div>
-                                 @endif
-                             </div>
+                                    @if ($count>0)                                     
+                                    <div class="badge">
+                                        <span>{{$count}}</span>
+                                    </div>
+                                     @endif
+                                </div>
                          </a>
 
                      </div>
@@ -85,9 +84,9 @@
                                      <path d="M10.0166 1.66675C6.94992 1.66675 4.46658 4.15008 4.46658 7.21675V8.96675C4.46658 9.53341 4.23325 10.3834 3.94158 10.8667L2.88325 12.6334C2.23325 13.7251 2.68325 14.9417 3.88325 15.3417C7.86658 16.6667 12.1749 16.6667 16.1582 15.3417C17.2832 14.9667 17.7666 13.6501 17.1582 12.6334L16.0999 10.8667C15.8082 10.3834 15.5749 9.52508 15.5749 8.96675V7.21675C15.5666 4.16675 13.0666 1.66675 10.0166 1.66675Z" stroke="#0F172A" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" />
                                      <path d="M12.7751 15.6833C12.7751 17.2083 11.5251 18.4583 10.0001 18.4583C9.24176 18.4583 8.54176 18.1417 8.04176 17.6417C7.54176 17.1417 7.2251 16.4417 7.2251 15.6833" stroke="#0F172A" stroke-width="1.5" stroke-miterlimit="10" />
                                  </svg>
-                                 <div class="badge">
-                                     <span>10</span>
-                                 </div>
+                                 {{-- <div class="notification-badge">
+                                     <span></span>
+                                 </div> --}}
                              </div>
                          </button>
                          <ul class="dropdown-menu">

@@ -22,28 +22,6 @@ import {
     getDownloadURL,
     uploadBytes,
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
-// Firebase configuration
-// const firebaseConfig = {
-//     apiKey: "AIzaSyBwm_cUYyrAPWvp-t31PCWP_gmeHghVdTQ",
-//     authDomain: "yesvitelive.firebaseapp.com",
-//     databaseURL: "https://yesvitelive-default-rtdb.firebaseio.com",
-//     projectId: "yesvitelive",
-//     storageBucket: "yesvitelive.appspot.com",
-//     messagingSenderId: "438593077863",
-//     appId: "1:438593077863:web:51ab60b8d230a6c4f48ac2",
-//     measurementId: "G-6FRGMCQQ66",
-// };
-
-const firebaseConfig = {
-    apiKey: "AIzaSyAVgJQewYO8h1-_z2mrjaATCqJ4NH8eeCI",
-    authDomain: "yesvite-976cd.firebaseapp.com",
-    databaseURL: "https://yesvite-976cd-default-rtdb.firebaseio.com",
-    projectId: "yesvite-976cd",
-    storageBucket: "yesvite-976cd.appspot.com",
-    messagingSenderId: "273430667581",
-    appId: "1:273430667581:web:d5cc6f6c1cc9829de9e554",
-    measurementId: "G-99SYL4VLEF",
-};
 
 console.log("update message . js");
 $.ajaxSetup({
@@ -138,6 +116,10 @@ async function getListUserimg(profileImageUrl, userName) {
 }
 
 // Initialize Firebase
+
+const response = await fetch("/firebase_js.json");
+const firebaseConfig = await response.json();
+
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 const storage = getStorage(app);
@@ -233,13 +215,24 @@ async function addMessageToGroup(
         };
         let i = 0;
         for (const userId of newGroupMembers) {
-            const user = await getUser(userId);
+            var user = await getUser(userId);
             if (!user) {
-                toastr.error(
-                    "Some user is not updated, they are not added in group.",
-                    "Error!"
-                );
-                continue;
+                try {
+                    await updateUserInFirebase(userId);
+                    user = await getUser(userId);
+                    if (!user) {
+                        throw new Error(
+                            "User not found in Firebase after update"
+                        );
+                    }
+                } catch (error) {
+                    toastr.error(
+                        "Some user is not updated, they are not added in group.",
+                        "Error!"
+                    );
+                    console.error(error);
+                    return;
+                }
             }
             groupInfo.profiles[i] = {
                 id: userId,
@@ -320,7 +313,7 @@ async function handleNewConversation(snapshot) {
         } else {
             badgeElement.removeClass("d-none");
             badgeElement.show();
-            $(conversationElement).prependTo(".chat-list");
+            moveToTopOrBelowPinned(conversationElement);
         }
     } else {
         if (WaitNewConversation == newConversation.conversationId) {
@@ -357,6 +350,19 @@ async function handleNewConversation(snapshot) {
     }
 }
 
+function moveToTopOrBelowPinned(element) {
+    const $chatList = $(".chat-list");
+    const $pinnedElements = $chatList.find(".pinned");
+
+    if ($pinnedElements.length > 0) {
+        // Insert after the last pinned element
+        $pinnedElements.last().after(element);
+    } else {
+        // Prepend to the top
+        $chatList.prepend(element);
+    }
+}
+
 function removeSelectedMsg() {
     var msgLists = document.getElementsByClassName("msg-list");
     for (var i = 0; i < msgLists.length; i++) {
@@ -371,6 +377,23 @@ function handleConversationChange(snapshot) {
     handleNewConversation(snapshot);
 }
 
+// Helper function to update user in Firebase from backend
+function updateUserInFirebase(user_id) {
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            url: base_url + "updateUserinFB",
+            data: { userId: user_id },
+            type: "post",
+            dataType: "json",
+            success: function (res) {
+                resolve(res);
+            },
+            error: function (res) {
+                reject(res);
+            },
+        });
+    });
+}
 // Function to update the chat UI
 async function updateChat(user_id) {
     console.log("updatefromsingle");
@@ -380,11 +403,20 @@ async function updateChat(user_id) {
     $(".choosen-file").hide();
     if (user_id == "") return;
 
-    const selected_user = await getUser(user_id);
+    var selected_user = await getUser(user_id);
     console.log({ user_id });
     if (!selected_user) {
-        toastr.error("user not found in firebase");
-        return;
+        try {
+            await updateUserInFirebase(user_id);
+            selected_user = await getUser(user_id);
+            if (!selected_user) {
+                throw new Error("User not found in Firebase after update");
+            }
+        } catch (error) {
+            toastr.error("User not found in Firebase");
+            console.error(error);
+            return;
+        }
     }
     console.log({ selected_user });
     const messageTime = selected_user.userLastSeen
@@ -565,11 +597,6 @@ async function updateChatfromGroup(conversationId) {
     updateUnreadMessageBadge();
 }
 
-$(".conversationId").click(function () {
-    let conversationId = $(this).attr("conversationId");
-    $(".change-group-name").addClass("d-none");
-    $(".selected-title").show();
-});
 // Initialize event listeners
 $(document).on("click", ".msg-list", async function () {
     removeSelectedMsg();
@@ -678,7 +705,9 @@ $(".pin-conversation").click(function () {
     $(this).attr("changeWith", pinChange == "1" ? "0" : "1");
     if (pinChange == "1") {
         const conversationElement = $(`.conversation-${conversationId}`);
-        conversationElement.prependTo(".chat-list");
+
+        moveToTopOrBelowPinned(conversationElement);
+        $(".conversation-" + conversationId).addClass("pinned");
         $(".conversation-" + conversationId)
             .find(".chat-data")
             .find(".pin-svg")
@@ -687,6 +716,8 @@ $(".pin-conversation").click(function () {
         $(".unpin-self-icn").show("d-none");
         $(".pin-self-icn").hide("d-none");
     } else {
+        $(".conversation-" + conversationId).removeClass("pinned");
+
         $(".conversation-" + conversationId)
             .find(".chat-data")
             .find(".pin-svg")
@@ -1057,7 +1088,8 @@ $(".send-message").on("keypress", async function (e) {
             }
         }
         const conversationElement = $(`.conversation-${conversationId}`);
-        conversationElement.prependTo(".chat-list");
+
+        moveToTopOrBelowPinned(conversationElement);
         previewImg.attr("src", "");
         previewAudio.attr("src", "");
         $("#recordedAudio").attr("src", "");
@@ -1940,11 +1972,24 @@ $(document).on("click", ".remove-member", async function () {
     await addListInMembers(SelecteGroupUser);
 });
 
-$(".selected-title").dblclick(function () {
-    let title = $(this).html();
+$(".updateGroup").click(function () {
+    let title = $(".selected-title").html();
+    $(".selected-title").hide();
     $(this).hide();
     $(".change-group-name").removeClass("d-none");
     $(".update-group-name").val(title);
+});
+
+$(".conversationId").click(function () {
+    let conversationId = $(this).attr("conversationId");
+    $(".change-group-name").addClass("d-none");
+    $(".selected-title").show();
+    let isGroup = $("#isGroup").val();
+    if (isGroup == "true" || isGroup == true) {
+        $(".updateGroup").show();
+    } else {
+        $(".updateGroup").hide();
+    }
 });
 
 $("#updateName").click(async function () {
@@ -1977,6 +2022,9 @@ $("#updateName").click(async function () {
     // Hide the input and show the updated title
     $(".change-group-name").addClass("d-none");
     $(".selected-title").html(newTitle).show();
+    $("#selected-user-name").html(newTitle);
+
+    $(".updateGroup").show();
 });
 
 $("#new-member").click(function () {
@@ -2666,11 +2714,13 @@ $(".multi-pin").click(async function () {
         if (pinChange == "1") {
             const conversationElement = $(`.conversation-${conversationId}`);
             conversationElement.prependTo(".chat-list");
+            $(".conversation-" + conversationId).addClass("pinned");
             $(`.conversation-${conversationId}`)
                 .find(".chat-data")
                 .find(".pin-svg")
                 .removeClass("d-none");
         } else {
+            $(".conversation-" + conversationId).removeClass("pinned");
             $(`.conversation-${conversationId}`)
                 .find(".chat-data")
                 .find(".pin-svg")
