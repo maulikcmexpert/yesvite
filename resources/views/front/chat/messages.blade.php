@@ -105,6 +105,7 @@ use Carbon\Carbon;
                             @php
                             $i = 0;
                             @endphp
+                            @dd(messages);
                             @foreach ($messages as $k => $message)
                             @if(!isset($message['contactName']))
                             @continue
