@@ -11716,6 +11716,8 @@ class ApiControllerv2 extends Controller
                 $notificationDetail['event_potluck'] = $values->event->event_settings->podluck;
                 $notificationDetail['guest_pending_count'] = getGuestRsvpPendingCount($values->event->id);
 
+                $notificationDetail['is_event_owner'] = ($values->event->user_id == $user->id) ? 1 : 0;
+
 
                 if ($values->notification_type == 'invite') {
                     $checkIsCoHost =  EventInvitedUser::where(['user_id' => $values->user_id, 'event_id' => $values->event_id])->first();
