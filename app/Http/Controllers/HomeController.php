@@ -33,7 +33,7 @@ class HomeController extends Controller
             // Validation failed
             $errors = $validator->errors()->first();
             // Handle the validation errors, log them, or return a response
-            return  redirect()->route('home')->with('error', $errors);
+            return  redirect()->route('profile')->with('error', $errors);
         }
 
         if ($request->hasFile('csv_file')) {
@@ -43,6 +43,6 @@ class HomeController extends Controller
         $filePath = public_path('temp/' . $file->getClientOriginalName()); // Adjust path to your CSV file
         $importService->import($filePath);
 
-        return  redirect()->route('home')->with('success', 'Contact imported successfully.');
+        return  redirect()->route('profile')->with('success', 'Contact imported successfully.');
     }
 }
