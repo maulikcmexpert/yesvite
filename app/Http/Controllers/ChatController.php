@@ -23,23 +23,57 @@ class ChatController extends Controller
         // $this->database = $database;
         // $this->chatRoom = $this->database->getReference();
     }
-    public function index()
+    public function updateUserinFB(Request $request)
     {
-
-        $userId = auth()->id();
+        $userId = $request->userId;
         $userData = User::findOrFail($userId);
         // dd($userData);
         $userName =  $userData->firstname . ' ' . $userData->lastname;
         $updateData = [
             'userChatId' => '',
             'userCountryCode' => (string)$userData->country_code,
-            'userGender' => 'male',
+            'userGender' => (string)$userData->gender,
             'userEmail' => $userData->email,
             'userId' => (string)$userId,
             'userLastSeen' => now()->timestamp * 1000, // Convert to milliseconds
             'userName' => $userName,
             'userPhone' => (string)$userData->phone_number,
-            'userProfile' => request()->server('HTTP_HOST') . '/public/storage/profile/' . $userData->profile,
+            'userProfile' => url('/public/storage/profile/' . $userData->profile),
+            'userStatus' => '',
+            'userTypingStatus' => 'Not typing...'
+        ];
+
+        // Create a new user node with the userId
+        $userRef = $this->usersReference->getChild((string)$userId);
+        $userSnapshot = $userRef->getValue();
+
+        if ($userSnapshot) {
+            // User exists, update the existing data
+            $userRef->update($updateData);
+        } else {
+            // User does not exist, create a new user node
+            $userRef->set($updateData);
+        }
+        return true;
+    }
+    public function index()
+    {
+
+        $userId = auth()->id();
+        $userData = User::findOrFail($userId);
+
+        // dd($userData);
+        $userName =  $userData->firstname . ' ' . $userData->lastname;
+        $updateData = [
+            'userChatId' => '',
+            'userCountryCode' => (string)$userData->country_code,
+            'userGender' => (string)$userData->gender,
+            'userEmail' => $userData->email,
+            'userId' => (string)$userId,
+            'userLastSeen' => now()->timestamp * 1000, // Convert to milliseconds
+            'userName' => $userName,
+            'userPhone' => (string)$userData->phone_number,
+            'userProfile' => url('/public/storage/profile/' . $userData->profile),
             'userStatus' => 'Online',
             'userTypingStatus' => 'Not typing...'
         ];
