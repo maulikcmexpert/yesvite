@@ -11641,11 +11641,7 @@ class ApiControllerv2 extends Controller
                 $query->where('parent_comment_id', NULL);
             }]);
         }])->orderBy('id', 'DESC')->where(['user_id' => $user->id]);
-
         // ->where('notification_type', '!=', 'upload_post')->where('notification_type', '!=', 'photos')->where('notification_type', '!=', 'invite')
-
-
-
         if (isset($input['filters']) && !empty($input['filters']) && !in_array('all', $input['filters'])) {
 
             $selectedEvents = $input['filters']['events'];

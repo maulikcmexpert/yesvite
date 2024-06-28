@@ -34,6 +34,8 @@ use Illuminate\Support\Facades\Auth;
 
 //     return view('welcome');
 // });
+
+
 Route::get('/', [HomeFrontController::class, 'index'])->name('front.home')->middleware('isAuthenticate');
 Route::get('about-us', [AboutController::class, 'index'])->name('about');
 Route::get('privacy_policy', [PrivacyPolicyController::class, 'index'])->name('privacy_policy');
@@ -156,4 +158,15 @@ Route::controller(AuthController::class)->group(function () {
         Session::forget('secondary_user');
         return redirect('login');
     })->name('logout');
+});
+
+Route::fallback(function () {
+    $title ="No Found";
+
+    $page = 'not_found';
+
+    return view('layout', compact(
+        'title',
+        'page',
+    ));
 });
