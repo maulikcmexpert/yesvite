@@ -373,6 +373,10 @@ header.login-header {
     .header-right {
         gap: 20px;
     }
+
+    .google-add{
+        display: none;
+    }
 }
 
 @media only screen and (max-width:575px){
