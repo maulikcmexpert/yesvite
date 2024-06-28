@@ -74,7 +74,7 @@ class ProfileController extends Controller
         $user['subscribe_status'] = false;
 
 
-        if ($user->user_subscriptions->isNotEmpty() && $user->user_subscriptions->type == 'subscribe') {
+        if ($user->user_subscriptions->isNotEmpty() && @$user->user_subscriptions->type == 'subscribe') {
             $user['subscribe_status'] = true;
         }
 
