@@ -239,6 +239,7 @@ ul.chat-list li:last-child{
     white-space: nowrap;
     width: 100%;
     max-width: 150px;
+    text-transform: capitalize;
 }
 
 .member-lists .chat-data .remove-member{
@@ -311,11 +312,11 @@ ul.chat-list li:last-child{
 }
 
 .blue-tick {
-    background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M9 19L3.5 13.5L5 12L9 16L19 6L20.5 7.5L9 19Z" fill="%2300BFFF"/><path d="M16 19L10.5 13.5L12 12L16 16L26 6L27.5 7.5L16 19Z" fill="%2300BFFF"/></svg>');
+    background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M9 19L3.5 13.5L5 12L9 16L19 6L20.5 7.5L9 19Z" fill="%23A9A9A9"/><path d="M16 19L10.5 13.5L12 12L16 16L26 6L27.5 7.5L16 19Z" fill="%23A9A9A9"/></svg>');
 }
 
 .grey-tick {
-    background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M9 19L3.5 13.5L5 12L9 16L19 6L20.5 7.5L9 19Z" fill="%23A9A9A9"/><path d="M16 19L10.5 13.5L12 12L16 16L26 6L27.5 7.5L16 19Z" fill="%23A9A9A9"/></svg>');
+    background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M9 19L3.5 13.5L5 12L9 16L19 6L20.5 7.5L9 19Z" fill="%23A9A9A9"/></svg>');
 }
 
 .empty-massage .empty-img{
@@ -566,6 +567,7 @@ ul.member-lists li:last-child{
 }
 
 
+
 .msg-body ul li.receiver p .seenStatus{
     position: absolute;
     right: 8px;
@@ -625,6 +627,45 @@ ul.member-lists li:last-child{
     height: 22px;
     position: absolute;
     right: -3px;
+    bottom: -4px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0px 5px 10px 0px #0000001A;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.msg-body ul li.sender .reply-section .reaction{
+    width: 22px;
+    height: 22px;
+    position: absolute;
+    right: -3px;
+    bottom: -4px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0px 5px 10px 0px #0000001A;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.msg-body ul li.receiver .simple-msg-wrap .reaction
+{
+    width: 22px;
+    height: 22px;
+    position: absolute;
+    left: -3px;
     bottom: -4px;
     background: #fff;
     border-radius: 50%;
@@ -732,7 +773,7 @@ ul.member-lists li:last-child{
     position: absolute;
     width: 100%;
     bottom: 0;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    /* box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; */
     background: #fff;
     border-bottom-right-radius: 20px;
 }
@@ -851,6 +892,7 @@ ul.member-lists li:last-child{
 .modal-body .inbox{
     background-color: #F8F9FD;
     padding: 10px 24px;
+    align-items: flex-start !important;
 }
 
 .modal-body .inbox h6{
@@ -975,6 +1017,34 @@ ul.member-lists li:last-child{
     display: flex;
     align-items: center;
     justify-content: center;
+    position: inherit !important;
+}
+
+.msg-body ul li.receiver .reaction-ul{
+    position: absolute;
+    left: 15px;
+    bottom: 5px;
+    justify-content: end;
+    display: flex;
+    /* right: 60%; */
+}
+
+.msg-body ul li.receiver .reaction-ul li{
+    margin: 0;
+    width: 22px;
+    height: 22px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0px 5px 10px 0px #0000001A;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: inherit !important;
 }
 
 .msg-body ul li.receiver .reply-section{
@@ -986,9 +1056,10 @@ ul.member-lists li:last-child{
     -moz-border-radius: 0px 20px 20px 20px;
     -ms-border-radius: 0px 20px 20px 20px;
     -o-border-radius: 0px 20px 20px 20px;
-    margin-bottom: 16px;
+    /* margin-bottom: 16px; */
     text-align: left;
     padding-bottom: 2px;
+    position: relative;
 }
 
 .msg-body ul li .reply-section .senderName{
@@ -1191,6 +1262,8 @@ ul.member-lists li:last-child{
     display: flex;
     flex-wrap: wrap;
     padding-left: 10px;
+    max-height: 260px;
+    overflow-y: scroll;
 }
 
 #msgBox #selected-tags-container h5,
@@ -1230,6 +1303,8 @@ ul.member-lists li:last-child{
     display: flex;
     flex-wrap: wrap;
     padding-left: 10px;
+    max-width: 428px;
+    overflow-y: scroll;
 }
 
 #group-selected-tags-container .tag {
@@ -1290,14 +1365,23 @@ ul.member-lists li:last-child{
     align-items: center;
 }
 
-.msg-lists .sender .simple-message .reaction-ul,
-.msg-lists .receiver .simple-message .reaction-ul
+.msg-lists .sender .simple-message .reaction-ul
 {
     position: absolute;
-    bottom: -19px;
+    bottom: -11px;
     right: -4px;
     display: flex;
     left: 60%;
+    justify-content: end;
+}
+
+
+.msg-lists .receiver .simple-message .reaction-ul{
+    position: absolute;
+    bottom: 0px;
+    left: -5px;
+    display: flex;
+    right: 60%;
     justify-content: end;
 }
 

@@ -33,6 +33,7 @@ const firebaseConfig = {
     appId: "1:438593077863:web:51ab60b8d230a6c4f48ac2",
     measurementId: "G-6FRGMCQQ66",
 };
+
 // const firebaseConfig = {
 //     apiKey: "AIzaSyAVgJQewYO8h1-_z2mrjaATCqJ4NH8eeCI",
 //     authDomain: "yesvite-976cd.firebaseapp.com",
@@ -43,6 +44,8 @@ const firebaseConfig = {
 //     appId: "1:273430667581:web:d5cc6f6c1cc9829de9e554",
 //     measurementId: "G-99SYL4VLEF",
 // };
+
+console.log("update message . js");
 $.ajaxSetup({
     headers: {
         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -291,7 +294,7 @@ async function handleNewConversation(snapshot) {
             .find(".user-detail .last-message")
             .text(newConversation.lastMessage);
         $(conversationElement)
-            .find(".user-detail .time-ago")
+            .find(".ms-auto .time-ago")
             .text(timeago.format(newConversation.timeStamp));
         $(conversationElement)
             .find(".user-img")
@@ -307,7 +310,10 @@ async function handleNewConversation(snapshot) {
             .find("span")
             .replaceWith(userStatus);
 
-        const badgeElement = $(conversationElement).find(".user-detail .badge");
+        const badgeElement = $(conversationElement).find(
+            ".ms-auto .d-flex .badge"
+        );
+        console.log(badgeElement);
         badgeElement.text(newConversation.unReadCount);
         if (newConversation.unReadCount == 0) {
             badgeElement.addClass("d-none");
@@ -627,7 +633,15 @@ async function updateMore(conversationId) {
                     .find(".chat-data")
                     .find(".pin-svg")
                     .removeClass("d-none");
+                $(".unpin-self-icn").show("d-none");
+                $(".pin-self-icn").hide("d-none");
+            } else {
+                $(".pin-self-icn").show();
+                $(".unpin-self-icn").hide();
             }
+        } else {
+            $(".pin-self-icn").show();
+            $(".unpin-self-icn").hide();
         }
         if (overviewData.isMute != undefined) {
             $(".mute-conversation")
@@ -669,11 +683,16 @@ $(".pin-conversation").click(function () {
             .find(".chat-data")
             .find(".pin-svg")
             .removeClass("d-none");
+
+        $(".unpin-self-icn").show("d-none");
+        $(".pin-self-icn").hide("d-none");
     } else {
         $(".conversation-" + conversationId)
             .find(".chat-data")
             .find(".pin-svg")
             .addClass("d-none");
+        $(".pin-self-icn").show();
+        $(".unpin-self-icn").hide();
     }
 });
 
@@ -1015,14 +1034,17 @@ $(".send-message").on("keypress", async function (e) {
                 if (!reciverUser) {
                     return;
                 }
+                let userData = await get(userRef);
+                let userSnap = userData.val();
+                console.log({ userSnap });
                 const receiverConversationData = {
-                    contactId: receiverId,
-                    contactName: receiverName,
+                    contactId: senderUser,
+                    contactName: senderUserName,
                     conversationId: conversationId,
                     group: false,
                     lastMessage: `${senderUserName}: ${message}`,
                     lastSenderId: senderUser,
-                    receiverProfile: reciverUser.userProfile,
+                    receiverProfile: userSnap?.userProfile,
                     timeStamp: Date.now(),
                     unRead: true,
                     unReadCount: 1,
@@ -1143,15 +1165,14 @@ function createMessageElement(key, messageData, isGroup) {
                 : "grey-tick"
             : "";
         reaction =
-            messageData?.react != "" && messageData?.react
-                ? String?.fromCodePoint(
+            messageData?.react && messageData?.react.length > 0
+                ? `<span class="reaction">${String?.fromCodePoint(
                       parseInt(
                           messageData?.react?.replace(/\\u\{(.+)\}/, "$1"),
                           16
                       )
-                  )
+                  )}</span>`
                 : "";
-        reaction = `<span class="reaction">${reaction}</span>`;
     }
 
     let emojiAndReplay = isReceiver
@@ -1347,10 +1368,12 @@ $("#search-user")
     const $divName = $("<div>").addClass("user-detail d-block ms-3");
     const $img = item.imageElement;
     console.log($img);
-    const $span = $("<h3>").text(item.label);
+    const $h3 = $("<h3>").text(item.label);
+    const $span = $("<span>").text(item.email);
 
     $divImage.append($img);
-    $divName.append($("<div>")).append($span);
+    $divName.append($("<div>")).append($h3);
+    $divName.append($span);
     $divMain.append($divImage).append($divName);
     $li.append($divMain).appendTo(ul);
 
@@ -1397,14 +1420,17 @@ async function handleSelectedUsers() {
         $(".multi-chat").removeClass("d-none");
         const $tags = $("#selected-tags-container .tag");
         let groupNames = "";
+        let allNames = "";
         $tags.each(async function (index) {
             if (index < 2) {
                 const userName = $(this).find(".names").text().trim();
                 const userImgSrc = $(this).find(".img-fluid").prop("outerHTML");
-                console.log(userImgSrc);
+
                 groupNames += `<div class="multi-img grp-img">
                                     ${userImgSrc}
                                 </div>`;
+                if (allNames.length > 0) allNames += ", ";
+                allNames += userName;
             }
         });
         $(".multi-chat .img-wrp").html(groupNames);
@@ -1414,17 +1440,18 @@ async function handleSelectedUsers() {
             let moreimg = `<div class="multi-img more-img">
                 <span>+${moreCount}</span>
             </div>`;
+            allNames += `, +${moreCount}`;
             $(".multi-chat .img-wrp").append(moreimg);
         } else {
             $(".more-img").remove();
         }
         // Set multiple names in the selected-user-name
-        const allNames = $tags
-            .map(function () {
-                return $(this).clone().find(".names").text().trim();
-            })
-            .get()
-            .join(", ");
+        // const allNames = $tags
+        //     .map(function () {
+        //         return $(this).clone().find(".names").text().trim();
+        //     })
+        //     .get()
+        //     .join(", ");
         $(".selected-user-name").text(allNames);
     } else {
         $(".chat-user").addClass("d-none");
@@ -1580,9 +1607,21 @@ $("#send-new-msg").click(function () {
     e.keyCode = 13;
     $("#new_message").trigger(e);
 });
+let isSending = false;
+
+function debounce(func, delay) {
+    let timer;
+    return function () {
+        clearTimeout(timer);
+        timer = setTimeout(func, delay);
+    };
+}
+
 // Event listener for sending a new message
 $("#new_message").on("keypress", async function (e) {
     if (e.which === 13) {
+        if (isSending) return;
+        isSending = true;
         const tagCount = $("#selected-tags-container .tag").length;
         const message = $(this).val();
         if (tagCount == 0) {
@@ -1596,6 +1635,10 @@ $("#new_message").on("keypress", async function (e) {
                 "Error!"
             );
         }
+        setTimeout(() => {
+            isSending = false;
+        }, 2000);
+        console.log({ tagCount });
         if (tagCount > 1) {
             const currentUserId = senderUser;
             const groupName = $("#group-name").val(); // Assuming you have an input for group name
@@ -1723,8 +1766,6 @@ $("#new_message").on("keypress", async function (e) {
             $(".selected_message").val(contactId);
             $(".selected_name").val(contactName);
 
-            updateChat(contactId);
-
             const messageData = {
                 data: message,
                 timeStamp: Date.now(),
@@ -1756,6 +1797,7 @@ $("#new_message").on("keypress", async function (e) {
                 unReadCount: (receiverSnapshot.val().unReadCount || 0) + 1,
                 timeStamp: Date.now(),
             });
+            await updateChat(contactId);
             $("#isGroup").val("false");
         }
         $(this).val("");
@@ -1884,7 +1926,7 @@ $(document).on("click", ".remove-member", async function () {
     const groupInfoRef = ref(database, `Groups/${conversationId}/groupInfo`);
     const snapshot = await get(groupInfoRef);
     const groupInfo = snapshot.val();
-    groupInfo.profiles.map((profile) => {
+    groupInfo?.profiles.map((profile) => {
         if (profile.id > 0) {
             SelecteGroupUser[profile.id] = {
                 id: profile.id,
@@ -2598,14 +2640,23 @@ $(document).on("change", "input[name='checked_conversation[]']", function () {
 $(".multi-pin").click(async function () {
     const pinChange = $(this).attr("changeWith");
     $(this).attr("changeWith", pinChange == "1" ? "0" : "1");
-
+    if (pinChange == "1") {
+        $(".unpin-icn").removeClass("d-none");
+        $(".pin-icn").addClass("d-none");
+    } else {
+        $(".pin-icn").removeClass("d-none");
+        $(".unpin-icn").addClass("d-none");
+    }
+    console.log($(".unpin-icn"));
     const checkedConversations = $(
         "input[name='checked_conversation[]']:checked"
-    );
+    )
+        .toArray()
+        .reverse();
     const promises = [];
-
-    checkedConversations.each(function () {
-        const conversationId = $(this).val();
+    console.log(checkedConversations);
+    checkedConversations.forEach(function (element) {
+        const conversationId = $(element).val();
         const overviewRef = ref(
             database,
             `overview/${senderUser}/${conversationId}/isPin`

@@ -108,7 +108,7 @@ use Illuminate\Support\Facades\Session;
 use stdClass;
 
 
-class ApiControllerv2 extends Controller
+class ApiControllerv3 extends Controller
 
 
 {
@@ -139,7 +139,7 @@ class ApiControllerv2 extends Controller
 
 
 
-   
+
 
     public function sendThanks()
     {
@@ -462,13 +462,6 @@ class ApiControllerv2 extends Controller
                     $eventDetail['event_wall'] = $value->event_settings->event_wall;
                     $eventDetail['guest_list_visible_to_guests'] = $value->event_settings->guest_list_visible_to_guests;
                     $eventDetail['event_potluck'] = $value->event_settings->podluck;
-
-                    $pendingUser = EventInvitedUser::whereHas('user', function ($query) {
-
-                        $query->where('app_user', '1');
-                    })->where(['event_id' => $value->id, 'rsvp_d' => '0'])->count();
-
-                    $eventDetail['guest_pending_count'] = $pendingUser;
                     $eventDetail['adult_only_party'] = $value->event_settings->adult_only_party;
                     $eventDetail['guest_pending_count'] =  $this->pendingRsvpCount;
                     $eventDetail['post_time'] =  $this->setpostTime($value->updated_at);
@@ -788,12 +781,6 @@ class ApiControllerv2 extends Controller
                         $eventDetail['event_wall'] = $value->event_settings->event_wall;
                         $eventDetail["guest_list_visible_to_guests"] = $value->event_settings->guest_list_visible_to_guests;
                         $eventDetail['event_potluck'] = $value->event_settings->podluck;
-                        $pendingUser = EventInvitedUser::whereHas('user', function ($query) {
-
-                            $query->where('app_user', '1');
-                        })->where(['event_id' => $value->id, 'rsvp_d' => '0'])->count();
-
-                        $eventDetail['guest_pending_count'] = $pendingUser;
                         $eventDetail['adult_only_party'] = $value->event_settings->adult_only_party;
                         $eventDetail['host_name'] = $value->hosted_by;
                         $eventDetail['allow_limit'] = $value->event_settings->allow_limit;
@@ -1032,12 +1019,6 @@ class ApiControllerv2 extends Controller
                         $eventDetail['host_profile'] = empty($value->event->user->profile) ? "" : asset('public/storage/profile/' . $value->event->user->profile);
                         $eventDetail['event_wall'] = $value->event->event_settings->event_wall;
                         $eventDetail["guest_list_visible_to_guests"] = $value->event->event_settings->guest_list_visible_to_guests;
-                        $pendingUser = EventInvitedUser::whereHas('user', function ($query) {
-
-                            $query->where('app_user', '1');
-                        })->where(['event_id' => $value->event->id, 'rsvp_d' => '0'])->count();
-
-                        $eventDetail['guest_pending_count'] = $pendingUser;
                         $eventDetail['event_potluck'] = $value->event->event_settings->podluck;
                         $eventDetail['adult_only_party'] = $value->event->event_settings->adult_only_party;
                         $eventDetail['host_name'] = $value->event->hosted_by;
@@ -1274,12 +1255,6 @@ class ApiControllerv2 extends Controller
                         $eventDetail['host_profile'] = empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile);
                         $eventDetail['event_wall'] = $value->event_settings->event_wall;
                         $eventDetail["guest_list_visible_to_guests"] = $value->event_settings->guest_list_visible_to_guests;
-                        $pendingUser = EventInvitedUser::whereHas('user', function ($query) {
-
-                            $query->where('app_user', '1');
-                        })->where(['event_id' => $value->id, 'rsvp_d' => '0'])->count();
-
-                        $eventDetail['guest_pending_count'] = $pendingUser;
                         $eventDetail['event_potluck'] = $value->event_settings->podluck;
                         $eventDetail['adult_only_party'] = $value->event_settings->adult_only_party;
                         $eventDetail['host_name'] = $value->hosted_by;
@@ -1540,12 +1515,6 @@ class ApiControllerv2 extends Controller
                         $eventDetail['host_profile'] = empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile);
                         $eventDetail['event_wall'] = $value->event_settings->event_wall;
                         $eventDetail["guest_list_visible_to_guests"] = $value->event_settings->guest_list_visible_to_guests;
-                        $pendingUser = EventInvitedUser::whereHas('user', function ($query) {
-
-                            $query->where('app_user', '1');
-                        })->where(['event_id' => $value->id, 'rsvp_d' => '0'])->count();
-
-                        $eventDetail['guest_pending_count'] = $pendingUser;
                         $eventDetail['event_potluck'] = $value->event_settings->podluck;
                         $eventDetail['adult_only_party'] = $value->event_settings->adult_only_party;
                         $eventDetail['host_name'] = $value->hosted_by;
@@ -1798,12 +1767,6 @@ class ApiControllerv2 extends Controller
                         $eventDetail['host_profile'] = empty($value->event->user->profile) ? "" : asset('public/storage/profile/' . $value->event->user->profile);
                         $eventDetail['event_wall'] = $value->event->event_settings->event_wall;
                         $eventDetail["guest_list_visible_to_guests"] = $value->event->event_settings->guest_list_visible_to_guests;
-                        $pendingUser = EventInvitedUser::whereHas('user', function ($query) {
-
-                            $query->where('app_user', '1');
-                        })->where(['event_id' => $value->event->id, 'rsvp_d' => '0'])->count();
-
-                        $eventDetail['guest_pending_count'] = $pendingUser;
                         $eventDetail['event_potluck'] = $value->event->event_settings->podluck;
                         $eventDetail['adult_only_party'] = $value->event->event_settings->adult_only_party;
                         $eventDetail['host_name'] = $value->event->hosted_by;
@@ -2446,8 +2409,6 @@ class ApiControllerv2 extends Controller
                     'zip_code' => empty($user->zip_code) ? "" : $user->zip_code,
                     'password_updated_date' => empty($user->password_updated_date) ? "" : $user->password_updated_date,
                     'total_notification' => Notification::where(['user_id' => $user->id, 'read' => '0'])->count()
-
-
                 ];
 
 
@@ -3478,6 +3439,7 @@ class ApiControllerv2 extends Controller
 
 
 
+
         $eventCreation =  Event::create([
 
             'event_type_id' => (!empty($eventData['event_type_id'])) ? $eventData['event_type_id'] : "",
@@ -3514,8 +3476,7 @@ class ApiControllerv2 extends Controller
             'message_to_guests' => (!empty($eventData['message_to_guests'])) ? $eventData['message_to_guests'] : "",
             'subscription_plan_name' => (!empty($eventData['subscription_plan_name'])) ? $eventData['subscription_plan_name'] : "",
             'subscription_invite_count' => (!empty($eventData['subscription_invite_count'])) ? $eventData['subscription_invite_count'] : 0,
-
-            'is_draft_save' => $eventData['is_draft_save']
+            'is_draft_save' => (!empty($eventData['subscription_plan_name']) && $eventData['subscription_plan_name'] == 'Pro') ? "1" : $eventData['is_draft_save']
         ]);
 
 
@@ -4577,7 +4538,9 @@ class ApiControllerv2 extends Controller
                 }
             }
 
-
+            if ($updateEvent->subscription_plan_name == 'Pro' && $updateEvent->product_payment_id == NULL) {
+                $eventData['is_draft_save'] = '1';
+            }
 
             $updateEvent->event_type_id = (!empty($eventData['event_type_id'])) ? $eventData['event_type_id'] : "";
             $updateEvent->event_name = (!empty($eventData['event_name'])) ? $eventData['event_name'] : "";
@@ -5087,75 +5050,70 @@ class ApiControllerv2 extends Controller
 
 
 
-            if (isset($eventData['addr_change']) && $eventData['addr_change'] == '1') {
 
-                $notificationParam = [
-                    'sender_id' => $user->id,
-                    'event_id' => $eventData['event_id'],
-                    'from_addr' => $eventData['from_addr'],
-                    'to_addr' => $eventData['to_addr'],
-                    'newUser' => $eventData['invited_new_guest']
-                ];
+            if ($eventData['is_draft_save'] == '0') {
 
-                sendNotification('update_address', $notificationParam);
-            }
 
-            if (isset($eventData['time_change']) && $eventData['time_change'] == '1') {
+                if (isset($eventData['addr_change']) && $eventData['addr_change'] == '1') {
 
-                $notificationParam = [
-                    'sender_id' => $user->id,
-                    'event_id' => $eventData['event_id'],
-                    'from_time' => $eventData['from_time'],
-                    'to_time' => $eventData['to_time'],
-                    'newUser' => $eventData['invited_new_guest']
-                ];
+                    $notificationParam = [
+                        'sender_id' => $user->id,
+                        'event_id' => $eventData['event_id'],
+                        'from_addr' => $eventData['from_addr'],
+                        'to_addr' => $eventData['to_addr'],
+                        'newUser' => $eventData['invited_new_guest']
+                    ];
 
-                sendNotification('update_time', $notificationParam);
-            }
+                    sendNotification('update_address', $notificationParam);
+                }
 
-            if (isset($eventData['date_change']) && $eventData['date_change'] == '1') {
+                if (isset($eventData['time_change']) && $eventData['time_change'] == '1') {
 
-                $notificationParam = [
-                    'sender_id' => $user->id,
-                    'event_id' => $eventData['event_id'],
-                    'old_start_end_date' => $eventData['old_start_end_date'],
-                    'new_start_end_date' => $eventData['new_start_end_date'],
-                    'newUser' => $eventData['invited_new_guest']
-                ];
+                    $notificationParam = [
+                        'sender_id' => $user->id,
+                        'event_id' => $eventData['event_id'],
+                        'from_time' => $eventData['from_time'],
+                        'to_time' => $eventData['to_time'],
+                        'newUser' => $eventData['invited_new_guest']
+                    ];
 
-                sendNotification('update_date', $notificationParam);
-            }
+                    sendNotification('update_time', $notificationParam);
+                }
 
-            if (isset($eventData['addr_change']) && $eventData['addr_change'] == '0' && isset($eventData['time_change']) && $eventData['time_change'] == '0') {
-                $notificationParam = [
-                    'sender_id' => $user->id,
-                    'event_id' => $eventData['event_id'],
-                    'from_time' => $eventData['from_time'],
-                    'to_time' => $eventData['to_time'],
-                    'newUser' => $eventData['invited_new_guest']
-                ];
+                if (isset($eventData['addr_change']) && $eventData['addr_change'] == '0' && isset($eventData['time_change']) && $eventData['time_change'] == '0') {
+                    $notificationParam = [
+                        'sender_id' => $user->id,
+                        'event_id' => $eventData['event_id'],
+                        'from_time' => $eventData['from_time'],
+                        'to_time' => $eventData['to_time'],
+                        'newUser' => $eventData['invited_new_guest']
+                    ];
 
-                sendNotification('update_event', $notificationParam);
-            }
+                    sendNotification('update_event', $notificationParam);
+                }
 
-            if (isset($eventData['invited_new_guest']) && count($eventData['invited_new_guest']) != 0) {
-                $notificationParam = [
+                if (isset($eventData['invited_new_guest']) && count($eventData['invited_new_guest']) != 0) {
+                    $notificationParam = [
 
-                    'sender_id' => $user->id,
+                        'sender_id' => $user->id,
 
-                    'event_id' => $eventData['event_id'],
+                        'event_id' => $eventData['event_id'],
 
-                    'newUser' => $eventData['invited_new_guest']
+                        'newUser' => $eventData['invited_new_guest']
 
-                ];
+                    ];
 
-                sendNotification('invite', $notificationParam);
+                    sendNotification('invite', $notificationParam);
+                }
             }
 
 
             DB::commit();
-
-            return response()->json(['status' => 1, 'event_name' => $eventData['event_name'], 'event_id' => (int)$eventData['event_id'], 'message' => "Event updated Successfully"]);
+            $purchase_status = true;
+            if ($updateEvent->subscription_plan_name == 'Pro' && $updateEvent->product_payment_id == NULL) {
+                $purchase_status = false;
+            }
+            return response()->json(['status' => 1, 'event_name' => $eventData['event_name'], 'event_id' => (int)$eventData['event_id'], 'message' => "Event updated Successfully", 'purchase_status' => $purchase_status]);
         } else {
 
             return response()->json(['status' => 0, 'message' => 'Event is not found']);
@@ -11658,7 +11616,7 @@ class ApiControllerv2 extends Controller
 
         $notificationData = Notification::query();
 
-        $notificationData->with(['user', 'event', 'event.event_settings', 'sender_user', 'post' => function ($query) {
+        $notificationData->with(['user', 'event', 'sender_user', 'post' => function ($query) {
             $query->with(['post_image', 'event_post_poll'])->withcount(['event_post_reaction', 'event_post_comment' => function ($query) {
                 $query->where('parent_comment_id', NULL);
             }]);
@@ -11731,18 +11689,6 @@ class ApiControllerv2 extends Controller
                 $notificationDetail['to_addr'] = ($values->to_addr != null || $values->to_addr != "") ? $values->to_addr : "";
                 $notificationDetail['from_time'] = ($values->from_time != null || $values->from_time != "") ? $values->from_time : "";
                 $notificationDetail['to_time'] = ($values->to_time != null || $values->to_time != "") ? $values->to_time : "";
-
-
-                $notificationDetail['event_wall'] = $values->event->event_settings->event_wall;
-                $notificationDetail['guest_list_visible_to_guests'] = $values->event->event_settings->guest_list_visible_to_guests;
-                $notificationDetail['event_potluck'] = $values->event->event_settings->podluck;
-                $pendingUser = EventInvitedUser::whereHas('user', function ($query) {
-
-                    $query->where('app_user', '1');
-                })->where(['event_id' => $values->event->id, 'rsvp_d' => '0'])->count();
-
-                $notificationDetail['guest_pending_count'] = $pendingUser;
-
 
                 if ($values->notification_type == 'invite') {
                     $checkIsCoHost =  EventInvitedUser::where(['user_id' => $values->user_id, 'event_id' => $values->event_id])->first();
@@ -11831,7 +11777,7 @@ class ApiControllerv2 extends Controller
                     'about_me' => ($values->sender_user->about_me != NULL) ? $values->sender_user->about_me : "",
                     'created_at' => empty($values->sender_user->created_at) ? "" :   str_replace(' ', ', ', date('F Y', strtotime($values->sender_user->created_at))),
                     'total_events' => $totalEvent,
-
+                    'total_events' => $totalEvent,
                     'visible' => $values->sender_user->visible,
                     'comments' => $comments,
                 ];
@@ -12529,6 +12475,7 @@ class ApiControllerv2 extends Controller
             'productId' => 'required',
             'purchaseTime' => 'required',
             'purchaseToken' => 'required|string',
+            'event_id' => 'required'
         ]);
 
 
@@ -12565,8 +12512,14 @@ class ApiControllerv2 extends Controller
             $new_subscription->productId = $input['productId'];
             $new_subscription->type = 'product';
             $new_subscription->purchaseToken = $input['purchaseToken'];
-            $new_subscription->save();
-
+            if ($new_subscription->save()) {
+                $updateEvent = Event::where('id', $input['event_id'])->first();
+                if ($updateEvent != null) {
+                    $updateEvent->is_draft_save = '0';
+                    $updateEvent->product_payment_id = $new_subscription->id;
+                    $updateEvent->save();
+                }
+            }
             return response()->json(['status' => 1, 'message' => "purchase sucessfully"]);
         } catch (QueryException $e) {
             return response()->json(['status' => 0, 'message' => "db error"]);
