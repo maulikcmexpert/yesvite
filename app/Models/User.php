@@ -171,4 +171,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(UserSeenStory::class, 'user_id', 'id');
     }
+
+    public function user_subscriptions()
+    {
+        return $this->hasMany(UserSubscription::class, 'user_id', 'id');
+    }
 }
