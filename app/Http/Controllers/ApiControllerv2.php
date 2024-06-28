@@ -5088,7 +5088,7 @@ class ApiControllerv2 extends Controller
                     sendNotification('update_time', $notificationParam);
                 }
 
-                if (isset($eventData['date_change']) && $eventData['date_change'] == '1') {
+                if (isset($eventData['update_date']) && $eventData['update_date'] == '1') {
 
                     $notificationParam = [
                         'sender_id' => $user->id,
@@ -5101,7 +5101,7 @@ class ApiControllerv2 extends Controller
                     sendNotification('update_date', $notificationParam);
                 }
 
-                if (isset($eventData['addr_change']) && $eventData['addr_change'] == '0' && isset($eventData['time_change']) && $eventData['time_change'] == '0') {
+                if (isset($eventData['addr_change']) && $eventData['addr_change'] == '0' && isset($eventData['time_change']) && $eventData['time_change'] == '0' && $eventData['update_date'] == '0') {
                     $notificationParam = [
                         'sender_id' => $user->id,
                         'event_id' => $eventData['event_id'],
@@ -11706,6 +11706,8 @@ class ApiControllerv2 extends Controller
                 $notificationDetail['from_time'] = ($values->from_time != null || $values->from_time != "") ? $values->from_time : "";
                 $notificationDetail['to_time'] = ($values->to_time != null || $values->to_time != "") ? $values->to_time : "";
 
+                $notificationDetail['old_start_end_date'] = ($values->old_start_end_date != null || $values->old_start_end_date != "") ? $values->old_start_end_date : "";
+                $notificationDetail['new_start_end_date'] = ($values->new_start_end_date != null || $values->new_start_end_date != "") ? $values->new_start_end_date : "";
 
                 $notificationDetail['event_wall'] = $values->event->event_settings->event_wall;
                 $notificationDetail['guest_list_visible_to_guests'] = $values->event->event_settings->guest_list_visible_to_guests;
