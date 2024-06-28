@@ -62,6 +62,14 @@ function getEventType()
     return  EventType::all();
 }
 
+function getGuestRsvpPendingCount($eventId)
+{
+    return  EventInvitedUser::whereHas('user', function ($query) {
+
+        $query->where('app_user', '1');
+    })->where(['event_id' => $eventId, 'rsvp_d' => '0'])->count();
+}
+
 function upcomingEventsCount($userId)
 {
     $usercreatedList = Event::with(['user', 'event_settings', 'event_schedule'])->where('start_date', '>', date('Y-m-d'))

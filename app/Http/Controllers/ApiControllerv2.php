@@ -464,12 +464,8 @@ class ApiControllerv2 extends Controller
                     $eventDetail['guest_list_visible_to_guests'] = $value->event_settings->guest_list_visible_to_guests;
                     $eventDetail['event_potluck'] = $value->event_settings->podluck;
 
-                    $pendingUser = EventInvitedUser::whereHas('user', function ($query) {
 
-                        $query->where('app_user', '1');
-                    })->where(['event_id' => $value->id, 'rsvp_d' => '0'])->count();
-
-                    $eventDetail['guest_pending_count'] = $pendingUser;
+                    $eventDetail['guest_pending_count'] = getGuestRsvpPendingCount($value->id);
                     $eventDetail['adult_only_party'] = $value->event_settings->adult_only_party;
                     $eventDetail['post_time'] =  $this->setpostTime($value->updated_at);
 
@@ -788,12 +784,7 @@ class ApiControllerv2 extends Controller
                         $eventDetail['event_wall'] = $value->event_settings->event_wall;
                         $eventDetail["guest_list_visible_to_guests"] = $value->event_settings->guest_list_visible_to_guests;
                         $eventDetail['event_potluck'] = $value->event_settings->podluck;
-                        $pendingUser = EventInvitedUser::whereHas('user', function ($query) {
-
-                            $query->where('app_user', '1');
-                        })->where(['event_id' => $value->id, 'rsvp_d' => '0'])->count();
-
-                        $eventDetail['guest_pending_count'] = $pendingUser;
+                        $eventDetail['guest_pending_count'] = getGuestRsvpPendingCount($value->id);
                         $eventDetail['adult_only_party'] = $value->event_settings->adult_only_party;
                         $eventDetail['host_name'] = $value->hosted_by;
                         $eventDetail['allow_limit'] = $value->event_settings->allow_limit;
@@ -1032,12 +1023,9 @@ class ApiControllerv2 extends Controller
                         $eventDetail['host_profile'] = empty($value->event->user->profile) ? "" : asset('public/storage/profile/' . $value->event->user->profile);
                         $eventDetail['event_wall'] = $value->event->event_settings->event_wall;
                         $eventDetail["guest_list_visible_to_guests"] = $value->event->event_settings->guest_list_visible_to_guests;
-                        $pendingUser = EventInvitedUser::whereHas('user', function ($query) {
 
-                            $query->where('app_user', '1');
-                        })->where(['event_id' => $value->event->id, 'rsvp_d' => '0'])->count();
 
-                        $eventDetail['guest_pending_count'] = $pendingUser;
+                        $eventDetail['guest_pending_count'] = getGuestRsvpPendingCount($value->event->id);
                         $eventDetail['event_potluck'] = $value->event->event_settings->podluck;
                         $eventDetail['adult_only_party'] = $value->event->event_settings->adult_only_party;
                         $eventDetail['host_name'] = $value->event->hosted_by;
@@ -1274,12 +1262,7 @@ class ApiControllerv2 extends Controller
                         $eventDetail['host_profile'] = empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile);
                         $eventDetail['event_wall'] = $value->event_settings->event_wall;
                         $eventDetail["guest_list_visible_to_guests"] = $value->event_settings->guest_list_visible_to_guests;
-                        $pendingUser = EventInvitedUser::whereHas('user', function ($query) {
-
-                            $query->where('app_user', '1');
-                        })->where(['event_id' => $value->id, 'rsvp_d' => '0'])->count();
-
-                        $eventDetail['guest_pending_count'] = $pendingUser;
+                        $eventDetail['guest_pending_count'] = getGuestRsvpPendingCount($value->id);
                         $eventDetail['event_potluck'] = $value->event_settings->podluck;
                         $eventDetail['adult_only_party'] = $value->event_settings->adult_only_party;
                         $eventDetail['host_name'] = $value->hosted_by;
@@ -1540,12 +1523,7 @@ class ApiControllerv2 extends Controller
                         $eventDetail['host_profile'] = empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile);
                         $eventDetail['event_wall'] = $value->event_settings->event_wall;
                         $eventDetail["guest_list_visible_to_guests"] = $value->event_settings->guest_list_visible_to_guests;
-                        $pendingUser = EventInvitedUser::whereHas('user', function ($query) {
-
-                            $query->where('app_user', '1');
-                        })->where(['event_id' => $value->id, 'rsvp_d' => '0'])->count();
-
-                        $eventDetail['guest_pending_count'] = $pendingUser;
+                        $eventDetail['guest_pending_count'] = getGuestRsvpPendingCount($value->id);
                         $eventDetail['event_potluck'] = $value->event_settings->podluck;
                         $eventDetail['adult_only_party'] = $value->event_settings->adult_only_party;
                         $eventDetail['host_name'] = $value->hosted_by;
@@ -1798,12 +1776,9 @@ class ApiControllerv2 extends Controller
                         $eventDetail['host_profile'] = empty($value->event->user->profile) ? "" : asset('public/storage/profile/' . $value->event->user->profile);
                         $eventDetail['event_wall'] = $value->event->event_settings->event_wall;
                         $eventDetail["guest_list_visible_to_guests"] = $value->event->event_settings->guest_list_visible_to_guests;
-                        $pendingUser = EventInvitedUser::whereHas('user', function ($query) {
 
-                            $query->where('app_user', '1');
-                        })->where(['event_id' => $value->event->id, 'rsvp_d' => '0'])->count();
 
-                        $eventDetail['guest_pending_count'] = $pendingUser;
+                        $eventDetail['guest_pending_count'] = getGuestRsvpPendingCount($value->event->id);
                         $eventDetail['event_potluck'] = $value->event->event_settings->podluck;
                         $eventDetail['adult_only_party'] = $value->event->event_settings->adult_only_party;
                         $eventDetail['host_name'] = $value->event->hosted_by;
@@ -11736,12 +11711,7 @@ class ApiControllerv2 extends Controller
                 $notificationDetail['event_wall'] = $values->event->event_settings->event_wall;
                 $notificationDetail['guest_list_visible_to_guests'] = $values->event->event_settings->guest_list_visible_to_guests;
                 $notificationDetail['event_potluck'] = $values->event->event_settings->podluck;
-                $pendingUser = EventInvitedUser::whereHas('user', function ($query) {
-
-                    $query->where('app_user', '1');
-                })->where(['event_id' => $values->event->id, 'rsvp_d' => '0'])->count();
-
-                $notificationDetail['guest_pending_count'] = $pendingUser;
+                $notificationDetail['guest_pending_count'] = getGuestRsvpPendingCount($values->event->id);
 
 
                 if ($values->notification_type == 'invite') {
