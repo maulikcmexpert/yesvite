@@ -107,7 +107,7 @@ use Carbon\Carbon;
                             @endphp
                             @dd($messages);
                             @foreach ($messages as $k => $message)
-                            @if(!isset($message['contactName']))
+                            @if(!isset($message['contactName']) ||!isset($message['conversationId']))
                             @continue
                             @endisset
                             @if ($i == 0 && @$message['isArchive']!="1")
