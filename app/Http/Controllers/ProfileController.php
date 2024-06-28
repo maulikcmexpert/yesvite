@@ -49,7 +49,7 @@ class ProfileController extends Controller
                 },
                 'event_post_comment',
                 'user_subscriptions' => function ($query) {
-                    $query->orderBy('id', 'DESC')->limit(1);
+                    $query->orderBy('id', 'DESC');
                 }
 
             ]
