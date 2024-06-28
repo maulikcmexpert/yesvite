@@ -5088,7 +5088,7 @@ class ApiControllerv2 extends Controller
                     sendNotification('update_time', $notificationParam);
                 }
 
-                if (isset($eventData['date_change']) && $eventData['date_change'] == '1') {
+                if (isset($eventData['update_date']) && $eventData['update_date'] == '1') {
 
                     $notificationParam = [
                         'sender_id' => $user->id,
