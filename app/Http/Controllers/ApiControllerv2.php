@@ -5601,13 +5601,13 @@ class ApiControllerv2 extends Controller
                     ]);
                 }
             }
-            dd('check');
+
             $user  = Auth::guard('api')->user();
             $checkUserInvited = Event::withCount('event_invited_user')->where('id', $input['event_id'])->first();
 
             DB::commit();
             if ($request->is_update_event == '0') {
-
+                dd('check');
                 if ($checkUserInvited->event_invited_user_count != '0' && $checkUserInvited->is_draft_save == '0') {
 
                     $notificationParam = [
