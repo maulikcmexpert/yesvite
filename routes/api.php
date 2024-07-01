@@ -288,6 +288,7 @@ Route::prefix('user/v3/')->middleware('checkUser')->group(function () {
     Route::post('remove_event_post_photo', [ApiControllerv3::class, 'removeEventPostPhoto']);
 
     Route::post('event_post_photo_detail', [ApiControllerv3::class, 'eventPostPhotoDetail']);
+    Route::post('get_single_event', [ApiControllerv3::class, 'getSingleEvent']);
 
 
     Route::post('event_post_photo_list_filter', [ApiControllerv3::class, 'eventPostPhotoListFilter']);

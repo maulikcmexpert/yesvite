@@ -12623,4 +12623,127 @@ class ApiControllerv3 extends Controller
 
         return $result1;
     }
+
+
+    public function getSingleEvent(Request $request)
+    {
+        $user  = Auth::guard('api')->user();
+        $event_id = $request->input('id');
+
+        $usercreatedList = Event::with(['user', 'event_settings', 'event_schedule'])->where('start_date', '>', date('Y-m-d'))
+
+            ->where('user_id', $user->id)
+            ->where('is_draft_save', '0')
+            ->orderBy('start_date', 'ASC')
+            ->where('id', $event_id)
+            ->get();
+
+
+        $eventList = [];
+
+        if ($usercreatedList->is_notEmpty()) {
+            foreach ($usercreatedList as $value) {
+                $eventDetail['id'] = $value->id;
+
+                $eventDetail['event_name'] = $value->event_name;
+                $eventDetail['is_event_owner'] = ($value->user->id == $user->id) ? 1 : 0;
+                $isCoHost =     EventInvitedUser::where(['event_id' => $value->id, 'user_id' => $user->id])->first();
+                $eventDetail['is_notification_on_off']  = "";
+                if ($value->user->id == $user->id) {
+
+                    $eventDetail['is_notification_on_off'] =  $value->notification_on_off;
+                } else {
+
+
+                    $eventDetail['is_notification_on_off'] =  $isCoHost->notification_on_off;
+                }
+                $eventDetail['is_co_host'] = "0";
+                if ($isCoHost != null) {
+                    $eventDetail['is_co_host'] = $isCoHost->is_co_host;
+                }
+                $eventDetail['message_to_guests'] = $value->message_to_guests;
+                $eventDetail['event_wall'] = $value->event_settings->event_wall;
+                $eventDetail['guest_list_visible_to_guests'] = $value->event_settings->guest_list_visible_to_guests;
+                $eventDetail['event_potluck'] = $value->event_settings->podluck;
+
+
+                $eventDetail['guest_pending_count'] = getGuestRsvpPendingCount($value->id);
+                $eventDetail['adult_only_party'] = $value->event_settings->adult_only_party;
+                $eventDetail['post_time'] =  $this->setpostTime($value->updated_at);
+
+
+                $rsvp_status = "";
+                $checkUserrsvp = EventInvitedUser::whereHas('user', function ($query) {
+
+                    $query->where('app_user', '1');
+                })->where(['user_id' => $user->id, 'event_id' => $value->id])->first();
+
+                // if ($value->rsvp_by_date >= date('Y-m-d')) {
+
+                $rsvp_status = "";
+
+                if ($checkUserrsvp != null) {
+                    if ($checkUserrsvp->rsvp_status == '1') {
+
+                        $rsvp_status = '1'; // rsvp you'r going
+
+                    } else if ($checkUserrsvp->rsvp_status == '0') {
+                        $rsvp_status = '2'; // rsvp you'r not going
+                    }
+                    if ($checkUserrsvp->rsvp_status == NULL) {
+
+                        $rsvp_status = '0'; // rsvp button//
+
+                    }
+                }
+                // }
+
+
+                $eventDetail['rsvp_status'] = $rsvp_status;
+
+                $eventDetail['user_id'] = $value->user->id;
+
+                $eventDetail['host_profile'] = empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile);
+
+                $eventDetail['host_name'] = $value->hosted_by;
+
+                $eventDetail['kids'] = 0;
+                $eventDetail['adults'] = 0;
+
+                $checkRsvpDone = EventInvitedUser::where(['event_id' => $value->id, 'user_id' => $user->id])->first();
+                if ($checkRsvpDone != null) {
+                    $eventDetail['kids'] = $checkRsvpDone->kids;
+                    $eventDetail['adults'] = $checkRsvpDone->adults;
+                }
+
+                $images = EventImage::where('event_id', $value->id)->first();
+
+
+
+                $eventDetail['event_images'] = ($images != null) ? asset('public/storage/event_images/' . $images->image) : "";
+
+
+
+                $eventDetail['event_date'] = $value->start_date;
+
+
+                $event_time = "-";
+                if ($value->event_schedule->isNotEmpty()) {
+
+                    $event_time =  $value->event_schedule->first()->start_time;
+                }
+
+                $eventDetail['start_time'] =  $value->rsvp_start_time;
+
+                $eventDetail['rsvp_start_timezone'] = $value->rsvp_start_timezone;
+
+                $eventList[] = $eventDetail;
+            }
+
+            return response()->json(['status' => 1, 'data' => $eventList, 'message' => "Event Data"]);
+        } else {
+
+            return response()->json(['status' => 0, 'data' => $eventList, 'message' => "No upcoming event found"]);
+        }
+    }
 }
