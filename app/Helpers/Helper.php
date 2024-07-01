@@ -125,31 +125,20 @@ function sendNotification($notificationType, $postData)
 
     if ($notificationType == 'invite') {
         if (count($invitedusers) != 0) {
-
-
             if (isset($postData['newUser']) && count($postData['newUser']) != 0) {
                 $invitedusers = EventInvitedUser::with(['event', 'event.event_image', 'event.user', 'event.event_settings', 'event.event_schedule', 'user'])->whereHas('user', function ($query) {
                     //  $query->where('app_user', '1');
                 })->whereIn('user_id', $postData['newUser'])->where('event_id', $postData['event_id'])->get();
             }
-
-
-
-
             foreach ($invitedusers as $value) {
+                dd($value);
                 // user notification setting //
-
-
-                // user notification setting //
-                // if ($value->user->app_user == '1') {
                 Notification::where(['user_id' => $value->user_id, 'sender_id' => $postData['sender_id'], 'event_id' => $postData['event_id']])->delete();
 
                 $notification_message = " have invited you to: " . $value->event->event_name;
                 if ($value->is_co_host == '1') {
                     $notification_message = "invited you to co-host " . $value->event->event_name . ' Accept?';
                 }
-
-
                 $notification = new Notification;
                 $notification->event_id = $postData['event_id'];
                 $notification->user_id = $value->user_id;
@@ -217,7 +206,6 @@ function sendNotification($notificationType, $postData)
                                 'address' => $value->event->event_location_name . ' ' . $value->event->address_1 . ' ' . $value->event->address_2 . ' ' . $value->event->state . ' ' . $value->event->city . ' - ' . $value->event->zip_code,
                             ];
 
-
                             $emailCheck = dispatch(new sendInvitation(array($value->user->email, $eventData)));
 
                             if (!empty($emailCheck)) {
@@ -270,7 +258,6 @@ function sendNotification($notificationType, $postData)
                 // }
             }
         }
-        dd($postData);
     }
 
     if ($notificationType == 'update_address' || $notificationType == 'update_time' || $notificationType == 'update_event' || $notificationType == 'update_date') {
