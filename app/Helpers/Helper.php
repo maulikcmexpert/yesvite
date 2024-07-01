@@ -71,7 +71,6 @@ function checkIsimageOrVideo($postImage)
 
 function checkNotificationSetting($userId)
 {
-    dd($userId);
     $checkNotificationSetting = UserNotificationType::where('user_id', $userId)->get();
     $notification  = [];
     foreach ($checkNotificationSetting as $val) {
@@ -186,7 +185,7 @@ function sendNotification($notificationType, $postData)
                         }
                     }
                     $checkNotificationSetting = checkNotificationSetting($value->user_id);
-
+                    dd($checkNotificationSetting);
                     if ($value->prefer_by == 'email') {
                         if ($value->user->app_user == '1' &&  count($checkNotificationSetting) != 0 && $checkNotificationSetting['invitations']['email'] == '1') {
 
