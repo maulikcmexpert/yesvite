@@ -147,10 +147,10 @@ function sendNotification($notificationType, $postData)
                 $notification->notification_message = $notification_message;
 
                 if ($notification->save()) {
-                    dd($value);
+
                     $deviceData = Device::where('user_id', $value->user_id)->first();
                     if (!empty($deviceData)) {
-
+                        dd($value);
                         $notificationImage = EventImage::where('event_id', $postData['event_id'])->first();
 
                         $notification_image = "";
