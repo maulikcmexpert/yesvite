@@ -5615,7 +5615,7 @@ class ApiControllerv2 extends Controller
                         'post_id' => ""
                     ];
                     sendNotification('invite', $notificationParam);
-                    dd($notificationParam);
+                    dd('done1');
                 }
 
                 if ($checkUserInvited->is_draft_save == '0') {
