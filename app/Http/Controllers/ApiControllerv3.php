@@ -12628,7 +12628,7 @@ class ApiControllerv3 extends Controller
     public function getSingleEvent(Request $request)
     {
         $user  = Auth::guard('api')->user();
-        $event_id = $request->input('id');
+        $event_id = $request->input('event_id');
 
         $usercreatedList = Event::with(['user', 'event_settings', 'event_schedule'])->where('start_date', '>', date('Y-m-d'))
 
