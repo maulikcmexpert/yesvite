@@ -5601,7 +5601,7 @@ class ApiControllerv2 extends Controller
                     ]);
                 }
             }
-
+            dd('check');
             $user  = Auth::guard('api')->user();
             $checkUserInvited = Event::withCount('event_invited_user')->where('id', $input['event_id'])->first();
 
