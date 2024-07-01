@@ -3428,18 +3428,12 @@ class ApiControllerv2 extends Controller
 
             $rsvp_by_date = $eventData['rsvp_by_date'];
             $rsvp_by_date_set = '1';
-        }else{
-            if(!empty($eventData['start_date']) && !empty($eventData['end_date'])){
+        } else {
+            if (!empty($eventData['start_date'])) {
 
                 $start = new DateTime($eventData['start_date']);
-                $end = new DateTime($eventData['end_date']);
-                $interval = $start->diff($end);
-                if ($interval->days > 1) {
-                    $start->modify('+1 day');
-                    $rsvp_by_date = $start->format('Y-m-d');
-                } else {
-                    $rsvp_by_date = $eventData['start_date'];
-                }
+                $start->modify('-1 day');
+                $rsvp_by_date = $start->format('Y-m-d');
             }
         }
 
