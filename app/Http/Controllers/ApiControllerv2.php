@@ -5615,7 +5615,6 @@ class ApiControllerv2 extends Controller
                         'post_id' => ""
                     ];
                     sendNotification('invite', $notificationParam);
-                    dd('done1');
                 }
 
                 if ($checkUserInvited->is_draft_save == '0') {
@@ -5630,14 +5629,11 @@ class ApiControllerv2 extends Controller
 
                     ];
                     sendNotification('owner_notify', $notificationParam);
-                    dd('done2');
                 }
             }
-            dd('done');
 
 
             return response()->json(['status' => 1, 'message' => "Event images stored successfully"]);
-            die;
         } catch (QueryException $e) {
 
             DB::rollBack();
