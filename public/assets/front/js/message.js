@@ -30,6 +30,7 @@ $.ajaxSetup({
     },
 });
 import { genrateAudio } from "./chat.js";
+import { musicPlayer } from "./audio.js";
 function getInitials(userName) {
     if (userName === undefined || userName === "") {
         return "Y"; // Default to "Y" if userName is undefined or an empty string
@@ -1180,7 +1181,13 @@ function createMessageElement(key, messageData, isGroup) {
             ? Object.values(messageData.messageReact)
                   .map(
                       (reactData) =>
-                          `<li class="reaction">${String.fromCodePoint(
+                          `<li class="reaction ${
+                              reactData?.react
+                                  ?.replace(/\\u\{(.+)\}/, "$1")
+                                  .includes("2764}")
+                                  ? "heart_reaction"
+                                  : ""
+                          }">${String.fromCodePoint(
                               parseInt(
                                   reactData.react.replace(/\\u\{(.+)\}/, "$1"),
                                   16
@@ -1189,7 +1196,7 @@ function createMessageElement(key, messageData, isGroup) {
                   )
                   .join(" ")
             : "";
-        reaction = `<ul class="reaction-ul">${reaction}</ul>`;
+        reaction = `<ul class="reaction-ul ${messageData?.react}">${reaction}</ul>`;
     } else {
         seenStatus = isSender
             ? messageData.isSeen
@@ -1198,7 +1205,13 @@ function createMessageElement(key, messageData, isGroup) {
             : "";
         reaction =
             messageData?.react && messageData?.react.length > 0
-                ? `<span class="reaction">${String?.fromCodePoint(
+                ? `<span class="reaction ${
+                      messageData?.react
+                          ?.replace(/\\u\{(.+)\}/, "$1")
+                          .includes("2764}")
+                          ? "heart_reaction"
+                          : ""
+                  }">${String?.fromCodePoint(
                       parseInt(
                           messageData?.react?.replace(/\\u\{(.+)\}/, "$1"),
                           16
@@ -1245,7 +1258,7 @@ function createMessageElement(key, messageData, isGroup) {
             </div>`
             : messageData?.type == "3"
             ? `<div class="media-msg">
-            ${genrateAudio(messageData?.url)}
+            ${musicPlayer(messageData?.url)}
             <span>${messageData?.data != "" ? messageData.data : ""}</span>
             ${reaction}
             </div>`
@@ -2260,7 +2273,7 @@ function generateReactionsAndReply() {
         <div class="reaction-dialog" id="reaction-dialog-${messageId}">
             <span class="reaction-option" data-reaction="\\u{1F60D}">&#x1F60D;</span>
             <span class="reaction-option" data-reaction="\\u{1F604}">&#x1F604;</span>
-            <span class="reaction-option" data-reaction="\\u{2764}}">&#x2764;</span>
+            <span class="reaction-option heart_reaction" data-reaction="\\u{2764}}">&#x2764;</span>
             <span class="reaction-option" data-reaction="\\u{1F44D}">&#x1F44D;</span>
             <span class="reaction-option" data-reaction="\\u{1F44F}}">&#x1F44F;</span>
         </div>

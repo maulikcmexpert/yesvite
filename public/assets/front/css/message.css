@@ -282,7 +282,9 @@ ul.chat-list li:last-child{
     line-height: 20px;
     margin-bottom: 0;
 }
-
+.heart_reaction{
+    color: red;
+}
 .chat-list .badge{
     width: 20px !important;
     height: 20px !important;
@@ -1357,6 +1359,7 @@ ul.member-lists li:last-child{
 
 .reaction-option {
     cursor: pointer;
+    font-size: large;
 }
 
 .msg-lists .simple-message{
