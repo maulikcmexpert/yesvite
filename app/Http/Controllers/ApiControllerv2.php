@@ -5607,7 +5607,6 @@ class ApiControllerv2 extends Controller
 
             DB::commit();
             if ($request->is_update_event == '0') {
-                dd('check');
                 if ($checkUserInvited->event_invited_user_count != '0' && $checkUserInvited->is_draft_save == '0') {
 
                     $notificationParam = [
@@ -5616,6 +5615,7 @@ class ApiControllerv2 extends Controller
                         'post_id' => ""
                     ];
                     sendNotification('invite', $notificationParam);
+                    dd('done1');
                 }
 
                 if ($checkUserInvited->is_draft_save == '0') {
@@ -5630,8 +5630,10 @@ class ApiControllerv2 extends Controller
 
                     ];
                     sendNotification('owner_notify', $notificationParam);
+                    dd('done2');
                 }
             }
+            dd('done');
 
 
             return response()->json(['status' => 1, 'message' => "Event images stored successfully"]);
