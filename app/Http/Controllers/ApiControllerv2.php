@@ -5618,7 +5618,7 @@ class ApiControllerv2 extends Controller
                     dd('done1');
                     sendNotification('invite', $notificationParam);
                 }
-                dd('done');
+
                 if ($checkUserInvited->is_draft_save == '0') {
 
                     $notificationParam = [
@@ -5630,9 +5630,10 @@ class ApiControllerv2 extends Controller
                         'post_id' => ""
 
                     ];
-
+                    dd('done2');
                     sendNotification('owner_notify', $notificationParam);
                 }
+                dd('done');
             }
 
 
