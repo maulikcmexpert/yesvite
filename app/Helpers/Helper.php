@@ -186,7 +186,7 @@ function sendNotification($notificationType, $postData)
                     }
                     $checkNotificationSetting = checkNotificationSetting($value->user_id);
                     if ($value->prefer_by == 'email') {
-                        dd($value);
+
                         if ($value->user->app_user == '1' &&  count($checkNotificationSetting) != 0 && $checkNotificationSetting['invitations']['email'] == '1') {
 
 
@@ -231,7 +231,7 @@ function sendNotification($notificationType, $postData)
                                 'address' => $value->event->event_location_name . ' ' . $value->event->address_1 . ' ' . $value->event->address_2 . ' ' . $value->event->state . ' ' . $value->event->city . ' - ' . $value->event->zip_code,
                             ];
 
-
+                            dd($eventData);
                             $emailCheck = dispatch(new sendInvitation(array($value->user->email, $eventData)));
 
                             if (!empty($emailCheck)) {
