@@ -124,8 +124,8 @@ function sendNotification($notificationType, $postData)
     })->where('event_id', $postData['event_id'])->get();
 
     if ($notificationType == 'invite') {
-        dd($postData);
         if (count($invitedusers) != 0) {
+            dd($postData);
 
             if (isset($postData['newUser']) && count($postData['newUser']) != 0) {
                 $invitedusers = EventInvitedUser::with(['event', 'event.event_image', 'event.user', 'event.event_settings', 'event.event_schedule', 'user'])->whereHas('user', function ($query) {
