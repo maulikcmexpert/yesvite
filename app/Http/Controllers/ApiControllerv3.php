@@ -12737,6 +12737,77 @@ class ApiControllerv3 extends Controller
 
                 $eventDetail['rsvp_start_timezone'] = $value->rsvp_start_timezone;
 
+
+                $total_accept_event_user = EventInvitedUser::where(['event_id' => $value->id, 'rsvp_status' => '1'])->count();
+
+                $eventDetail['total_accept_event_user'] = $total_accept_event_user;
+
+
+
+                $total_invited_user = EventInvitedUser::whereHas('user', function ($query) {
+
+                    $query->where('app_user', '1');
+                })->where(['event_id' => $value->id])->count();
+
+                $eventDetail['total_invited_user'] = $total_invited_user;
+
+
+                $total_refuse_event_user = EventInvitedUser::where(['event_id' => $value->id, 'rsvp_status' => '0'])->count();
+
+                $eventDetail['total_refuse_event_user'] = $total_refuse_event_user;
+
+
+
+                $total_notification = Notification::where(['event_id' => $value->id, 'user_id' => $user->id, 'read' => '0'])->count();
+
+                $eventDetail['total_notification'] = $total_notification;
+                $eventDetail['event_detail'] = [];
+                if ($value->event_settings) {
+                    $eventData = [];
+
+                    if ($value->event_settings->allow_for_1_more == '1') {
+                        $eventData[] = "Can Bring Guests ( limit " . $value->event_settings->allow_limit . ")";
+                    }
+                    if ($value->event_settings->adult_only_party == '1') {
+                        $eventData[] = "Adults Only";
+                    }
+                    if ($value->rsvp_by_date_set == '1') {
+                        $eventData[] = date('F d, Y', strtotime($value->rsvp_by_date));
+                    }
+                    if ($value->event_settings->podluck == '1') {
+                        $eventData[] = "Event Potluck";
+                    }
+                    if ($value->event_settings->gift_registry == '1') {
+                        $eventData[] = "Gift Registry";
+                    }
+                    if (empty($eventData)) {
+                        $eventData[] = date('F d, Y', strtotime($value->start_date));
+                        $numberOfGuest = EventInvitedUser::where('event_id', $value->id)->count();
+                        $eventData[] = "Number of guests : " . $numberOfGuest;
+                    }
+                    $eventDetail['event_detail'] = $eventData;
+                }
+                $eventDetail['allow_limit'] = $value->event_settings->allow_limit;
+                $totalEvent =  Event::where('user_id', $value->user->id)->count();
+                $totalEventPhotos =  EventPost::where(['user_id' => $value->user->id, 'post_type' => '1'])->count();
+                $comments =  EventPostComment::where('user_id', $value->user->id)->count();
+
+                $eventDetail['user_profile'] = [
+                    'id' => $value->user->id,
+                    'profile' => empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile),
+                    'bg_profile' => empty($value->user->bg_profile) ? "" : asset('public/storage/bg_profile/' . $value->user->bg_profile),
+                    'gender' => ($value->user->gender != NULL) ? $value->user->gender : "",
+                    'username' => $value->user->firstname . ' ' . $value->user->lastname,
+                    'location' => ($value->user->city != NULL) ? $value->user->city : "",
+                    'about_me' => ($value->user->about_me != NULL) ? $value->user->about_me : "",
+                    'created_at' => empty($value->user->created_at) ? "" :   str_replace(' ', ', ', date('F Y', strtotime($value->user->created_at))),
+                    'total_events' => $totalEvent,
+                    'visible' => $value->user->visible,
+                    'total_photos' => $totalEventPhotos,
+                    'comments' => $comments,
+                    'message_privacy' => $value->user->message_privacy
+                ];
+
                 $eventList[] = $eventDetail;
             }
 
