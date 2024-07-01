@@ -5615,6 +5615,7 @@ class ApiControllerv2 extends Controller
                         'event_id' => $input['event_id'],
                         'post_id' => ""
                     ];
+                    dd('done1');
                     sendNotification('invite', $notificationParam);
                 }
                 dd('done');
