@@ -24,7 +24,6 @@ class SendInvitationMailJob implements ShouldQueue
     public function __construct($data)
     {
         $this->data = $data;
-        dd($this->data);
         $this->email = $this->data[0];
         $this->templateData = $this->data[1];
         $invitation_email = new InvitationEmail($this->templateData);
