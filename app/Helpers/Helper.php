@@ -231,8 +231,8 @@ function sendNotification($notificationType, $postData)
                                 'address' => $value->event->event_location_name . ' ' . $value->event->address_1 . ' ' . $value->event->address_2 . ' ' . $value->event->state . ' ' . $value->event->city . ' - ' . $value->event->zip_code,
                             ];
 
-                            dd($value->user->email);
                             $emailCheck = dispatch(new sendInvitation(array($value->user->email, $eventData)));
+                            dd($emailCheck);
 
                             if (!empty($emailCheck)) {
 
