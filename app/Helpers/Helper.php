@@ -185,8 +185,8 @@ function sendNotification($notificationType, $postData)
                         }
                     }
                     $checkNotificationSetting = checkNotificationSetting($value->user_id);
-                    dd($checkNotificationSetting);
                     if ($value->prefer_by == 'email') {
+                        dd($value);
                         if ($value->user->app_user == '1' &&  count($checkNotificationSetting) != 0 && $checkNotificationSetting['invitations']['email'] == '1') {
 
 
