@@ -71,6 +71,7 @@ function checkIsimageOrVideo($postImage)
 
 function checkNotificationSetting($userId)
 {
+    dd($userId);
     $checkNotificationSetting = UserNotificationType::where('user_id', $userId)->get();
     $notification  = [];
     foreach ($checkNotificationSetting as $val) {
@@ -150,7 +151,7 @@ function sendNotification($notificationType, $postData)
 
                     $deviceData = Device::where('user_id', $value->user_id)->first();
                     if (!empty($deviceData)) {
-                        dd($value);
+
                         $notificationImage = EventImage::where('event_id', $postData['event_id'])->first();
 
                         $notification_image = "";
