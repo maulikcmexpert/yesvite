@@ -5607,7 +5607,7 @@ class ApiControllerv2 extends Controller
 
             DB::commit();
             if ($request->is_update_event == '0') {
-                dd('done');
+
                 if ($checkUserInvited->event_invited_user_count != '0' && $checkUserInvited->is_draft_save == '0') {
 
                     $notificationParam = [
