@@ -131,7 +131,7 @@ function sendNotification($notificationType, $postData)
                 })->whereIn('user_id', $postData['newUser'])->where('event_id', $postData['event_id'])->get();
             }
             foreach ($invitedusers as $value) {
-                dd($value);
+
                 // user notification setting //
                 Notification::where(['user_id' => $value->user_id, 'sender_id' => $postData['sender_id'], 'event_id' => $postData['event_id']])->delete();
 
@@ -147,7 +147,7 @@ function sendNotification($notificationType, $postData)
                 $notification->notification_message = $notification_message;
 
                 if ($notification->save()) {
-
+                    dd($value);
                     $deviceData = Device::where('user_id', $value->user_id)->first();
                     if (!empty($deviceData)) {
 
