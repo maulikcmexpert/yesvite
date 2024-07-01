@@ -12641,7 +12641,7 @@ class ApiControllerv3 extends Controller
 
         $eventList = [];
 
-        if ($usercreatedList->is_notEmpty()) {
+        if ($usercreatedList) {
             foreach ($usercreatedList as $value) {
                 $eventDetail['id'] = $value->id;
 
