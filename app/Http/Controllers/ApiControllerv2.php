@@ -5633,11 +5633,11 @@ class ApiControllerv2 extends Controller
                     dd('done2');
                     sendNotification('owner_notify', $notificationParam);
                 }
-                dd('done');
             }
 
 
             return response()->json(['status' => 1, 'message' => "Event images stored successfully"]);
+            dd('done');
         } catch (QueryException $e) {
 
             DB::rollBack();
