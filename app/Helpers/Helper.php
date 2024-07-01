@@ -125,7 +125,7 @@ function sendNotification($notificationType, $postData)
 
     if ($notificationType == 'invite') {
         if (count($invitedusers) != 0) {
-            dd($postData);
+
 
             if (isset($postData['newUser']) && count($postData['newUser']) != 0) {
                 $invitedusers = EventInvitedUser::with(['event', 'event.event_image', 'event.user', 'event.event_settings', 'event.event_schedule', 'user'])->whereHas('user', function ($query) {
@@ -270,6 +270,7 @@ function sendNotification($notificationType, $postData)
                 // }
             }
         }
+        dd($postData);
     }
 
     if ($notificationType == 'update_address' || $notificationType == 'update_time' || $notificationType == 'update_event' || $notificationType == 'update_date') {
