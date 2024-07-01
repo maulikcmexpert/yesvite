@@ -232,7 +232,6 @@ function sendNotification($notificationType, $postData)
                             ];
 
                             $emailCheck = dispatch(new sendInvitation(array($value->user->email, $eventData)));
-                            dd($emailCheck);
 
                             if (!empty($emailCheck)) {
 
