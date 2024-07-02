@@ -395,6 +395,9 @@ function updateUserInFirebase(user_id) {
         });
     });
 }
+setTimeout(() => {
+    loader.hide();
+}, 3000);
 // Function to update the chat UI
 async function updateChat(user_id) {
     console.log("updatefromsingle");
