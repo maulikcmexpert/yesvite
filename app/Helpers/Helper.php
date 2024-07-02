@@ -981,7 +981,7 @@ function sendNotification($notificationType, $postData)
             $notification->sender_id = $postData['sender_id'];
             $notification->notification_message = $notification_message;
             $notification->kids = $postData['kids'];
-            $notification->adults = $postData['adults'];;
+            $notification->adults = $postData['adults'];
             $notification->rsvp_status = $postData['rsvp_status'];
             $notification->rsvp_video = $postData['rsvp_video'];
             $notification->rsvp_message = $postData['rsvp_message'];
@@ -1279,7 +1279,7 @@ function sendSMS($receiverNumber, $message)
 {
     try {
 
-        $account_sid = env('ACCOUNT_SID');;
+        $account_sid = env('ACCOUNT_SID');
         $auth_token = env("AUTH_TOKEN");
         $twilio_number = env("TWILIO_NUMBER");
 
