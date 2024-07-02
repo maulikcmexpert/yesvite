@@ -10630,24 +10630,13 @@ class ApiControllerv2 extends Controller
 
 
     public function sendInvitation(Request $request)
-
     {
-
-
-
         $user  = Auth::guard('api')->user();
-
         $rawData = $request->getContent();
-
-
-
-
         $input = json_decode($rawData, true);
         if ($input == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
         }
-
-
         $validator = Validator::make($input, [
 
             'event_id' => ['required', 'exists:events,id'],
@@ -10656,20 +10645,14 @@ class ApiControllerv2 extends Controller
         ]);
 
         if ($validator->fails()) {
-
             return response()->json([
                 'status' => 0,
                 'message' => $validator->errors()->first(),
-
-
-
             ]);
         }
 
         // try {
         if (!empty($input['guest_list'])) {
-
-
             DB::beginTransaction();
             $id = 0;
             foreach ($input['guest_list'] as $value) {
