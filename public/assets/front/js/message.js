@@ -2662,8 +2662,15 @@ async function getTotalUnreadMessageCount() {
     if (snapshot.exists()) {
         const conversations = snapshot.val();
         for (let conversationId in conversations) {
-            if (conversations[conversationId].unReadCount) {
-                totalUnreadCount += conversations[conversationId].unReadCount;
+            if (
+                conversations[conversationId].unReadCount &&
+                conversations[conversationId].contactName
+            ) {
+                totalUnreadCount += parseInt(
+                    conversations[conversationId].unReadCount,
+                    10
+                );
+                console.log(conversations[conversationId]);
             }
         }
     }
