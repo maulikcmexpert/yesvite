@@ -30,7 +30,7 @@ $.ajaxSetup({
     },
 });
 import { genrateAudio } from "./chat.js";
-import { musicPlayer } from "./audio.js";
+import { musicPlayer, initializeAudioPlayer } from "./audio.js";
 function getInitials(userName) {
     if (userName === undefined || userName === "") {
         return "Y"; // Default to "Y" if userName is undefined or an empty string
@@ -132,7 +132,7 @@ let replyMessageId = null; // Global variable to hold the message ID to reply to
 let fileType = null; // Global variable to hold the message ID to reply to
 let WaitNewConversation = null; // Global variable to hold the message ID to reply to
 let myProfile;
-
+const loader = $(".loader");
 // Function to get messages between two users
 
 let closeSpan = `<svg width="17" height="18" viewBox="0 0 17 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -402,7 +402,7 @@ async function updateChat(user_id) {
     $(".msg-lists").html("");
     $(".member-lists").html("");
     $(".choosen-file").hide();
-    if (user_id == "") return;
+    if (user_id == "") return loader.hide();
 
     var selected_user = await getUser(user_id);
     console.log({ user_id });
@@ -516,28 +516,29 @@ async function updateChat(user_id) {
     });
 
     onChildChanged(selecteduserTypeRef, async (snapshot) => {
+        const Selectedsnapshot = await get(selecteduserTypeRef);
+        const selectedUserData = Selectedsnapshot.val();
         if (
             snapshot.key === "userTypingStatus" &&
             snapshot.val() == "Typing..."
         ) {
             const conversationId = $(".selected_id").val();
-            const snapshot = await get(selecteduserTypeRef);
-            const selectedUserData = snapshot.val();
             console.log({ selectedUserData });
             console.log({ conversationId });
 
             if (selectedUserData.userChatId == conversationId) {
-                $(".typing").text("Typing...");
+                $("#selected-user-lastseen").text("Typing...");
             } else {
-                $(".typing").text("");
+                $("#selected-user-lastseen").text(selectedUserData.userStatus);
             }
         } else {
-            $(".typing").text("");
+            $("#selected-user-lastseen").text(selectedUserData.userStatus);
         }
     });
 
     updateMore(conversationId);
     updateUnreadMessageBadge();
+    loader.hide();
 }
 
 var SelecteGroupUser = [];
@@ -596,10 +597,12 @@ async function updateChatfromGroup(conversationId) {
     $("#isGroup").val("true");
     updateMore(conversationId);
     updateUnreadMessageBadge();
+    loader.hide();
 }
 
 // Initialize event listeners
 $(document).on("click", ".msg-list", async function () {
+    loader.show();
     removeSelectedMsg();
     $(this).addClass("active");
     const isGroup = $(this).attr("data-group");
@@ -856,6 +859,8 @@ $("#preview").hide();
 $(".send-message").on("keypress", async function (e) {
     update(userRef, { userTypingStatus: "Typing..." });
     if (e.which === 13) {
+        loader.show();
+        startButton.style.display = "inline-block";
         const conversationId = $(".selected_id").val();
         var isGroup = $(".conversation-" + conversationId).attr("data-group");
         $("#isGroup").val(isGroup);
@@ -1095,6 +1100,7 @@ $(".send-message").on("keypress", async function (e) {
         previewAudio.attr("src", "");
         $("#recordedAudio").attr("src", "");
         $("#audioContainer").hide();
+        loader.hide();
     }
 });
 
@@ -1684,6 +1690,7 @@ $("#new_message").on("keypress", async function (e) {
             isSending = false;
         }, 2000);
         console.log({ tagCount });
+        loader.show();
         if (tagCount > 1) {
             const currentUserId = senderUser;
             const groupName = $("#group-name").html(); // Assuming you have an input for group name
@@ -2473,7 +2480,7 @@ function playRecording() {
     const audioURL = URL.createObjectURL(blob);
 
     audioElement.src = audioURL;
-    audioElement.style.display = "block";
+    // audioElement.style.display = "block";
 
     playButton.style.display = "none";
     // stopPlaybackButton.style.display = "inline-block";
@@ -2489,7 +2496,6 @@ async function stopRecording() {
         $("#send_audio").show();
         $("#audioContainer").show();
 
-        startButton.style.display = "inline-block";
         stopButton.style.display = "none";
 
         // Wait for the MediaRecorder to finish saving data
@@ -2499,6 +2505,11 @@ async function stopRecording() {
         stream.getTracks().forEach((track) => track.stop());
         // Call playRecording() to initiate playback
         playRecording();
+        setTimeout(() => {
+            const newPlayer = document.querySelector("#audioContainer");
+            newPlayer.classList.remove("initialized");
+            initializeAudioPlayer(newPlayer);
+        }, 500);
     } else {
         console.error("MediaRecorder is not recording.");
     }
@@ -2517,6 +2528,7 @@ $(".close-audio-btn").on("click", function () {
     $(".recordedAudio").attr("src", "");
 
     $(".upload-box").val("");
+    startButton.style.display = "inline-block";
 });
 
 $(".preview_img").hide();

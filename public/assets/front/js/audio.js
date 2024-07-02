@@ -1,12 +1,18 @@
 // Function to initialize audio player
 export function initializeAudioPlayer(player) {
+    if (player.classList.contains("initialized")) {
+        return; // If it does, return early and do nothing
+    }
+    player.classList.add("initialized");
+    console.log("audio updated");
+
     const audioPlayer = player.querySelector(".audio_player");
 
     const progressRange = player.querySelector(".progress-range");
     const progressBar = player.querySelector(".progress-bar");
 
     const currentTime = player.querySelector(".time-elapsed");
-    //const duration = player.querySelector(".time-duration");
+    const duration = player.querySelector(".time-duration");
 
     const audio = player.querySelector(".audio");
 
@@ -54,7 +60,10 @@ export function initializeAudioPlayer(player) {
             const progressPercent = (audio.currentTime / audio.duration) * 100;
             progressBar.style.width = `${progressPercent}%`;
             currentTime.textContent = displayTime(audio.currentTime);
-            duration.textContent = displayTime(audio.duration);
+            console.log(audio.duration);
+            console.log(audio.currentTime);
+            if (audio.duration != NaN && audio.duration != Infinity)
+                duration.textContent = " - " + displayTime(audio.duration);
         }
     }
 
@@ -111,6 +120,7 @@ export function initializeAudioPlayer(player) {
         }
     });
     function setProgress(e) {
+        console.log(audioPlayer);
         const newTime = e.offsetX / progressRange.offsetWidth;
         progressBar.style.width = `${newTime * 100}%`;
         audioPlayer.currentTime = newTime * audioPlayer.duration;
@@ -155,10 +165,11 @@ export function musicPlayer(url) {
         document
             .querySelectorAll(".music-container")
             .forEach(initializeAudioPlayer);
-    }, 2500);
+    }, 2000);
 
     // HTML structure of the music player
     return `
+    <div class="wrapper">
         <div class="music-container">
             <div class="navigation">
                 <button class="action-btn action-btn-big play">
@@ -195,17 +206,46 @@ export function musicPlayer(url) {
                                 </defs>
                             </svg>
                         </div>
-                        <div class="pink-bar"></div>
+                         <div class="pink-bar progress progress-bar" id="progress"><svg width="105" height="18" viewBox="0 0 106 18" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g clip-path="url(#clip0_507_5511)">
+                <path d="M3.5 4.5C3.5 3.67157 2.82843 3 2 3C1.17157 3 0.5 3.67157 0.5 4.5V13.5C0.5 14.3284 1.17157 15 2 15C2.82843 15 3.5 14.3284 3.5 13.5V4.5Z" fill="#F73C71"></path>
+                <path d="M9.5 7.5C9.5 6.67157 8.82843 6 8 6C7.17157 6 6.5 6.67157 6.5 7.5V10.5C6.5 11.3284 7.17157 12 8 12C8.82843 12 9.5 11.3284 9.5 10.5V7.5Z" fill="#F73C71"></path>
+                <path d="M15.5 1.5C15.5 0.671573 14.8284 0 14 0C13.1716 0 12.5 0.671573 12.5 1.5V16.5C12.5 17.3284 13.1716 18 14 18C14.8284 18 15.5 17.3284 15.5 16.5V1.5Z" fill="#F73C71"></path>
+                <path d="M21.5 3.5C21.5 2.67157 20.8284 2 20 2C19.1716 2 18.5 2.67157 18.5 3.5V14.5C18.5 15.3284 19.1716 16 20 16C20.8284 16 21.5 15.3284 21.5 14.5V3.5Z" fill="#F73C71"></path>
+                <path d="M27.5 2.5C27.5 1.67157 26.8284 1 26 1C25.1716 1 24.5 1.67157 24.5 2.5V15.5C24.5 16.3284 25.1716 17 26 17C26.8284 17 27.5 16.3284 27.5 15.5V2.5Z" fill="#F73C71"></path>
+                <path d="M33.5 4.5C33.5 3.67157 32.8284 3 32 3C31.1716 3 30.5 3.67157 30.5 4.5V13.5C30.5 14.3284 31.1716 15 32 15C32.8284 15 33.5 14.3284 33.5 13.5V4.5Z" fill="#F73C71"></path>
+                <path d="M39.5 6C39.5 5.17157 38.8284 4.5 38 4.5C37.1716 4.5 36.5 5.17157 36.5 6V12C36.5 12.8284 37.1716 13.5 38 13.5C38.8284 13.5 39.5 12.8284 39.5 12V6Z" fill="#F73C71"></path>
+                <path d="M45.5 7.5C45.5 6.67157 44.8284 6 44 6C43.1716 6 42.5 6.67157 42.5 7.5V10.5C42.5 11.3284 43.1716 12 44 12C44.8284 12 45.5 11.3284 45.5 10.5V7.5Z" fill="#F73C71"></path>
+                <path d="M51.5 6C51.5 5.17157 50.8284 4.5 50 4.5C49.1716 4.5 48.5 5.17157 48.5 6V12C48.5 12.8284 49.1716 13.5 50 13.5C50.8284 13.5 51.5 12.8284 51.5 12V6Z" fill="#F73C71"></path>
+                <path d="M57.5 6C57.5 5.17157 56.8284 4.5 56 4.5C55.1716 4.5 54.5 5.17157 54.5 6V12C54.5 12.8284 55.1716 13.5 56 13.5C56.8284 13.5 57.5 12.8284 57.5 12V6Z" fill="#F73C71"></path>
+                <path d="M63.5 4.5C63.5 3.67157 62.8284 3 62 3C61.1716 3 60.5 3.67157 60.5 4.5V13.5C60.5 14.3284 61.1716 15 62 15C62.8284 15 63.5 14.3284 63.5 13.5V4.5Z" fill="#F73C71"></path>
+                <path d="M69.5 1.5C69.5 0.671573 68.8284 0 68 0C67.1716 0 66.5 0.671573 66.5 1.5V16.5C66.5 17.3284 67.1716 18 68 18C68.8284 18 69.5 17.3284 69.5 16.5V1.5Z" fill="#F73C71"></path>
+                <path d="M75.5 4.5C75.5 3.67157 74.8284 3 74 3C73.1716 3 72.5 3.67157 72.5 4.5V13.5C72.5 14.3284 73.1716 15 74 15C74.8284 15 75.5 14.3284 75.5 13.5V4.5Z" fill="#F73C71"></path>
+                <path d="M81.5 6C81.5 5.17157 80.8284 4.5 80 4.5C79.1716 4.5 78.5 5.17157 78.5 6V12C78.5 12.8284 79.1716 13.5 80 13.5C80.8284 13.5 81.5 12.8284 81.5 12V6Z" fill="#F73C71"></path>
+                <path d="M87.5 7.5C87.5 6.67157 86.8284 6 86 6C85.1716 6 84.5 6.67157 84.5 7.5V10.5C84.5 11.3284 85.1716 12 86 12C86.8284 12 87.5 11.3284 87.5 10.5V7.5Z" fill="#F73C71"></path>
+                <path d="M93.5 1.5C93.5 0.671573 92.8284 0 92 0C91.1716 0 90.5 0.671573 90.5 1.5V16.5C90.5 17.3284 91.1716 18 92 18C92.8284 18 93.5 17.3284 93.5 16.5V1.5Z" fill="#F73C71"></path>
+                <path d="M99.5 4.5C99.5 3.67157 98.8284 3 98 3C97.1716 3 96.5 3.67157 96.5 4.5V13.5C96.5 14.3284 97.1716 15 98 15C98.8284 15 99.5 14.3284 99.5 13.5V4.5Z" fill="#F73C71"></path>
+                <path d="M105.5 6C105.5 5.17157 104.828 4.5 104 4.5C103.172 4.5 102.5 5.17157 102.5 6V12C102.5 12.8284 103.172 13.5 104 13.5C104.828 13.5 105.5 12.8284 105.5 12V6Z" fill="#F73C71"></path>
+              </g>
+              <defs>
+                <clipPath id="clip0_507_5511">
+                  <rect width="106" height="18" fill="white"></rect>
+                </clipPath>
+              </defs>
+            </svg></div>
                         <div class="progress-container" id="progress-container">
                             <div class="progress" id="progress"></div>
                         </div>
                     </div>
-                    <audio class="audio" src="${url}"></audio>
+                    <audio class="audio audio_player" src="${url}"></audio>
                 </div>
                  <div class="time">
                     <span class="time-elapsed">00:00</span>
+                   
+                    <span class="time-duration d-none"></span>
                     </div>
             </div>
+        </div>
         </div>
     `;
 }

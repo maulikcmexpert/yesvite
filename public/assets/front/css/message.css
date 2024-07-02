@@ -274,7 +274,15 @@ ul.chat-list li:last-child{
 .msg-list .user-detail span{
     max-width: 160px;
 }
-
+.loader{
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    margin-left: 50%;
+    margin-top: 20%;
+    z-index: 99999;
+    background: white;
+}
 
 .chat-list h6{
     font-size: 12px;
