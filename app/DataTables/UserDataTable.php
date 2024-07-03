@@ -42,13 +42,22 @@ class UserDataTable extends DataTable
             </div>';
             })
             ->addColumn('username', function ($row) {
-                return $row->firstname;
+                return $row->firstname . ' ' . $row->lastname;
             })
             ->addColumn('app_user', function ($row) {
                 if ($row->app_user == '1') {
                     return '<i class="fa-solid fa-mobile"></i>';
                 } else {
                     return '<span class="text-danger">Not App User</span>';
+                }
+            })
+            ->filter(function ($query) {
+                if ($this->request->has('search')) {
+                    $keyword = $this->request->get('search');
+                    $keyword = $keyword['value'];
+                    $query->orWhere(function ($q) use ($keyword) {
+                        $q->orWhere('name', 'LIKE', "%{$keyword}%");
+                    });
                 }
             })
             ->rawColumns(['profile', 'app_user']);
