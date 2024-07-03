@@ -12748,7 +12748,7 @@ class ApiControllerv2 extends Controller
                 ->paginate('10', ['*'], 'page', $page);
 
             foreach ($invitedUser as $guestVal) {
-                dd($guestVal->user);
+                // dd($guestVal->user);
                 $yesviteUserDetail['id'] = $guestVal->user->id;
                 $yesviteUserDetail['profile'] = empty($guestVal->user->profile) ? "" : asset('storage/profile/' . $guestVal->user->profile);
                 $yesviteUserDetail['first_name'] = (!empty($guestVal->user->firstname) || $guestVal->user->firstname != Null) ? $guestVal->user->firstname : "";;
@@ -12756,7 +12756,7 @@ class ApiControllerv2 extends Controller
                 $yesviteUserDetail['email'] = (!empty($guestVal->user->email) || $guestVal->user->email != Null) ? $guestVal->user->email : "";
                 $yesviteUserDetail['country_code'] = (!empty($guestVal->user->country_code) || $guestVal->user->country_code != Null) ? strval($guestVal->user->country_code) : "";
                 $yesviteUserDetail['phone_number'] = (!empty($guestVal->user->phone_number) || $guestVal->user->phone_number != Null) ? $guestVal->user->phone_number : "";
-                $yesviteUserDetail['app_user']  = $guestVal->user->app_guestVal->user;
+                $yesviteUserDetail['app_user']  = $guestVal->user->app_user;
                 $yesviteUserDetail['visible'] =  $guestVal->user->visible;
                 $yesviteUserDetail['message_privacy'] =  $guestVal->user->message_privacy;
                 $yesviteUserDetail['prefer_by']  = $guestVal->user->prefer_by;
