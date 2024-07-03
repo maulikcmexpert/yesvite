@@ -12748,8 +12748,8 @@ class ApiControllerv2 extends Controller
             $search_name = '';
             $user  = Auth::guard('api')->user();
             $groupList = getGroupList($user->id);
-            $event_id = $input['event_id'];
-            $yesviteEvents = Event::where('id', 1527)->get();
+            $event_id = int()$input['event_id'];
+            $yesviteEvents = Event::where('id', $event_id)->get();
             dd($yesviteEvents[0]);
             $yesvitecontactList = getYesviteSelectedUserPage($user->id, "10", $page, $event_id);
             $yesviteRegisteredUser = User::where('id', '!=', $user->id)
