@@ -20,9 +20,8 @@
                 type: 'post'
             },
             columns: [{
-                    "render": function() {
-                        return i++;
-                    }
+                    data: "number",
+                    name: "number"
                 },
                 {
                     data: "username",
