@@ -12747,6 +12747,23 @@ class ApiControllerv2 extends Controller
                 ->where('is_co_host', '0')
                 ->paginate('10', ['*'], 'page', $page);
             dd($invitedUser);
+
+            foreach ($invitedUser as $user) {
+
+                $yesviteUserDetail['id'] = $user->id;
+                $yesviteUserDetail['profile'] = empty($user->profile) ? "" : asset('storage/profile/' . $user->profile);
+                $yesviteUserDetail['first_name'] = (!empty($user->firstname) || $user->firstname != Null) ? $user->firstname : "";;
+                $yesviteUserDetail['last_name'] = (!empty($user->lastname) || $user->lastname != Null) ? $user->lastname : "";
+                $yesviteUserDetail['email'] = (!empty($user->email) || $user->email != Null) ? $user->email : "";
+                $yesviteUserDetail['country_code'] = (!empty($user->country_code) || $user->country_code != Null) ? strval($user->country_code) : "";
+                $yesviteUserDetail['phone_number'] = (!empty($user->phone_number) || $user->phone_number != Null) ? $user->phone_number : "";
+                $yesviteUserDetail['app_user']  = $user->app_user;
+                $yesviteUserDetail['visible'] =  $user->visible;
+                $yesviteUserDetail['message_privacy'] =  $user->message_privacy;
+                $yesviteUserDetail['prefer_by']  = $user->prefer_by;
+                $yesviteUser[] = $yesviteUserDetail;
+            }
+
             $yesvitecontactList = getYesviteSelectedUserPage($user->id, "10", $page, $event_id);
             $yesviteRegisteredUser = User::where('id', '!=', $user->id)
                 ->where('is_user_phone_contact', '0')->where(function ($query) {
