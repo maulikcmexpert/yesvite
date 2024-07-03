@@ -561,6 +561,7 @@ function getYesviteSelectedUserPage($id, $perPage, $page, $eventId)
         })
         ->orderBy('firstname')
         ->paginate($perPage, ['*'], 'page', $page);
+    dd($yesviteRegisteredUser);
     $yesviteUser = [];
     foreach ($yesviteRegisteredUser as $user) {
 
