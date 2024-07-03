@@ -11,7 +11,7 @@ use App\Models\EventImage;
 use App\Models\EventPost;
 use App\Models\EventInvitedUser;
 use Carbon\Carbon;
-
+use Illuminate\Support\Facades\DB;
 
 class EventController extends Controller
 {
