@@ -26,6 +26,17 @@ class UserDataTable extends DataTable
             ->addColumn('no', function () use (&$counter) {
                 return $counter++;
             })
+            ->filter(function ($query) {
+                if ($this->request->has('search')) {
+                    $keyword = $this->request->get('search');
+                    $keyword = $keyword['value'];
+                    dd($keyword);
+                    $query->orWhere(function ($q) use ($keyword) {
+                        $q->where('firstname', 'LIKE', "%{$keyword}%")
+                            ->where('lastname', 'LIKE', "%{$keyword}%");
+                    });
+                }
+            })
             ->addColumn('profile', function ($row) {
 
                 if (trim($row->profile) != "" || trim($row->profile) != NULL) {
@@ -51,16 +62,7 @@ class UserDataTable extends DataTable
                     return '<span class="text-danger">Not App User</span>';
                 }
             })
-            ->filter(function ($query) {
-                if ($this->request->has('search')) {
-                    $keyword = $this->request->get('search');
-                    $keyword = $keyword['value'];
-                    $query->orWhere(function ($q) use ($keyword) {
-                        $q->where('firstname', 'LIKE', "%{$keyword}%")
-                            ->where('lastname', 'LIKE', "%{$keyword}%");
-                    });
-                }
-            })
+
             ->rawColumns(['profile', 'app_user']);
     }
 
