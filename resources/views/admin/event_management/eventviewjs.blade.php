@@ -19,7 +19,10 @@
                 },
                 type: 'post'
             },
-            columns: [ {data: 'rownum', name: 'rownum'},
+            columns: [{
+                    data: "number",
+                    name: "number"
+                },
                 {
                     data: "username",
                     name: "username"
