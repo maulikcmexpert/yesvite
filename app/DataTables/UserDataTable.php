@@ -27,7 +27,7 @@ class UserDataTable extends DataTable
                 return $counter++;
             })
             ->addColumn('profile', function ($row) {
-                dd($row);
+
                 if (trim($row->profile) != "" || trim($row->profile) != NULL) {
                     if (Storage::disk('public')->exists('profile/' . $row->profile)) {
                         $imageUrl = asset('storage/profile/' . $row->profile);
