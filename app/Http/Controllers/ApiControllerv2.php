@@ -12762,15 +12762,13 @@ class ApiControllerv2 extends Controller
                 $yesviteUserDetail['prefer_by']  = $guestVal->user->prefer_by;
                 $yesviteUser[] = $yesviteUserDetail;
             }
-            dd($yesviteUser);
-            $yesvitecontactList = getYesviteSelectedUserPage($user->id, "10", $page, $event_id);
-            $yesviteRegisteredUser = User::where('id', '!=', $user->id)
-                ->where('is_user_phone_contact', '0')->where(function ($query) {
-                    $query->whereNull('email_verified_at')
-                        ->where('app_user', '!=', '1')
-                        ->orWhereNotNull('email_verified_at');
-                })
-                ->orderBy('firstname')
+            // dd($yesviteUser);
+            // $yesvitecontactList = getYesviteSelectedUserPage($user->id, "10", $page, $event_id);
+            $yesviteRegisteredUser =  EventInvitedUser::with(['user' => function ($query) {
+                $query->where('is_user_phone_contact', '0');
+            }])
+                ->where(['event_id' => $event_id])
+                ->where('is_co_host', '0')
                 ->count();
             $total_page = ceil($yesviteRegisteredUser / 10);
             return response()->json(['status' => 1, 'message' => "Yesvite contact list", 'total_page' => $total_page, "data" => $yesvitecontactList, 'group' => $groupList]);
