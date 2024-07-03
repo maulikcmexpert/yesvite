@@ -12750,7 +12750,7 @@ class ApiControllerv2 extends Controller
             $groupList = getGroupList($user->id);
             $event_id = $input['event_id'];
             $yesviteEvents = Event::get();
-            dd($yesviteEvents);
+            dd($yesviteEvents[0]);
             $yesvitecontactList = getYesviteSelectedUserPage($user->id, "10", $page, $event_id);
             $yesviteRegisteredUser = User::where('id', '!=', $user->id)
                 ->where('is_user_phone_contact', '0')->where(function ($query) {
