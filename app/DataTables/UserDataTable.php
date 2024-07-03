@@ -42,7 +42,7 @@ class UserDataTable extends DataTable
             </div>';
             })
             ->addColumn('username', function ($row) {
-                return $row->firstname . ' ' . $row->lastname;
+                return $row->firstname;
             })
             ->addColumn('app_user', function ($row) {
                 if ($row->app_user == '1') {
