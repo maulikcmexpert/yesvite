@@ -50,6 +50,8 @@ class EventController extends Controller
             }
             if ($status == 'draft_events') {
                 $data->where('is_draft_save', '1');
+            } else {
+                $data->where('is_draft_save', '0');
             }
 
 
