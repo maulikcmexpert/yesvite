@@ -24,7 +24,7 @@ class EventController extends Controller
             $eventDate = $request->input('filter');
             $status = $request->input('status');
             $event_type = $request->input('event_type');
-
+            DB::statement(DB::raw('set @rownum=0'));
             $data = Event::with(['user'])->whereHas('user', function ($query) use ($event_type) {
                 if ($event_type == 'normal_user_event') {
                     $query->where('account_type', '0');
@@ -32,7 +32,11 @@ class EventController extends Controller
                 if ($event_type == 'professional_event') {
                     $query->where('account_type', '1');
                 }
-            })->orderBy('id', 'desc');
+            })
+                ->select(DB::raw('@rownum  := @rownum  + 1 AS rownum'))
+                ->orderBy('id', 'desc');
+
+
 
             if ($eventDate) {
                 $data->where('start_date', $eventDate);
@@ -64,6 +68,7 @@ class EventController extends Controller
                 ->addColumn('start_date', function ($row) {
                     return date('F j, Y', strtotime($row->start_date));
                 })
+
 
                 ->addColumn('end_date', function ($row) {
 
@@ -134,7 +139,11 @@ class EventController extends Controller
 
                     return $actionBtn;
                 })
-
+                ->filter(function ($query) {
+                    if ($keyword = $request->get('search')['value']) {
+                        $datatables->filterColumn('rownum', 'whereRaw', '@rownum  + 1 like ?', ["%{$keyword}%"]);
+                    }
+                })
                 ->rawColumns([
                     'number',
                     'event_by',
@@ -145,9 +154,6 @@ class EventController extends Controller
                     'event_status',
                     'action'
                 ])
-
-
-
                 ->make(true);
         }
 

@@ -19,12 +19,7 @@
                 },
                 type: 'post'
             },
-            columns: [{
-                    data: 'DT_RowIndex',
-                    name: 'number',
-                    orderable: false,
-                    searchable: false
-                },
+            columns: [ {data: 'rownum', name: 'rownum'},
                 {
                     data: "username",
                     name: "username"
