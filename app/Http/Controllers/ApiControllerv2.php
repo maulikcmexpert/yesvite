@@ -12746,7 +12746,6 @@ class ApiControllerv2 extends Controller
                 ->where(['event_id' => $event_id])
                 ->where('is_co_host', '0')
                 ->paginate('10', ['*'], 'page', $page);
-            dd($invitedUser);
 
             foreach ($invitedUser as $user) {
 
@@ -12763,7 +12762,7 @@ class ApiControllerv2 extends Controller
                 $yesviteUserDetail['prefer_by']  = $user->prefer_by;
                 $yesviteUser[] = $yesviteUserDetail;
             }
-
+            dd($yesviteUser);
             $yesvitecontactList = getYesviteSelectedUserPage($user->id, "10", $page, $event_id);
             $yesviteRegisteredUser = User::where('id', '!=', $user->id)
                 ->where('is_user_phone_contact', '0')->where(function ($query) {
