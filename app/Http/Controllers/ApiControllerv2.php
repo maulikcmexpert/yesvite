@@ -12741,10 +12741,10 @@ class ApiControllerv2 extends Controller
             $groupList = getGroupList($user->id);
             $event_id = (int)$input['event_id'];
             $invitedUser = EventInvitedUser::with(['user' => function ($query) {
-                $query->where('is_user_phone_contact', 0);
+                $query->where('is_user_phone_contact', '0');
             }])
                 ->where(['event_id' => $event_id])
-                ->where('is_co_host', 0)->get();
+                ->where('is_co_host', '0')->get();
             dd($invitedUser);
             $yesvitecontactList = getYesviteSelectedUserPage($user->id, "10", $page, $event_id);
             $yesviteRegisteredUser = User::where('id', '!=', $user->id)
