@@ -23,7 +23,7 @@ class UserDataTable extends DataTable
         $counter = 1;
         return datatables()
             ->eloquent($query)
-            ->addColumn('sr_no', function () use (&$counter) {
+            ->addColumn('no', function () use (&$counter) {
                 return $counter++;
             })
             ->addColumn('profile', function ($row) {
