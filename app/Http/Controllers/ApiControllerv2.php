@@ -12751,7 +12751,7 @@ class ApiControllerv2 extends Controller
                     return  $qu->where('is_co_host', '1');
                 })
                 ->paginate('10', ['*'], 'page', $page);
-
+            $yesviteUser = [];
             foreach ($invitedUser as $guestVal) {
                 // dd($guestVal->user);
                 $yesviteUserDetail['id'] = $guestVal->user->id;
