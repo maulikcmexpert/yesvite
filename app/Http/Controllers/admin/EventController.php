@@ -133,7 +133,6 @@ class EventController extends Controller
                 })
 
                 ->rawColumns([
-                    // 'number',
                     'event_by',
                     'email',
                     'start_date',
