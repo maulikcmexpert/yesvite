@@ -12773,7 +12773,12 @@ class ApiControllerv2 extends Controller
                 $query->where('is_user_phone_contact', '0');
             }])
                 ->where(['event_id' => $event_id])
-                ->where('is_co_host', '0')
+                ->when($input['type'] == 'guest', function ($qu) {
+                    return  $qu->where('is_co_host', '0');
+                })
+                ->when($input['type'] == 'co-host', function ($qu) {
+                    return  $qu->where('is_co_host', '1');
+                })
                 ->count();
             $total_page = ceil($yesviteRegisteredUser / 10);
             return response()->json(['status' => 1, 'message' => "Yesvite contact list", 'total_page' => $total_page, "data" => $yesviteUser, 'group' => $groupList]);
