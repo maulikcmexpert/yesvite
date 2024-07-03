@@ -12744,7 +12744,12 @@ class ApiControllerv2 extends Controller
                 $query->where('is_user_phone_contact', '0');
             }])
                 ->where(['event_id' => $event_id])
-                ->where('is_co_host', '0')
+                ->when($input['type'] == 'guest', function ($qu) {
+                    return  $qu->where('is_co_host', '0');
+                })
+                ->when($input['type'] == 'co-host', function ($qu) {
+                    return  $qu->where('is_co_host', '1');
+                })
                 ->paginate('10', ['*'], 'page', $page);
 
             foreach ($invitedUser as $guestVal) {
