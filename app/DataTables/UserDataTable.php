@@ -102,7 +102,7 @@ class UserDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('no')->title('#'),
+            Column::make('no')->title('#')->render('meta.row + meta.settings._iDisplayStart + 1;'),
             Column::make('profile'),
             Column::make('username'),
             Column::make('app_user')->title('App User'),
