@@ -60,10 +60,10 @@ class EventController extends Controller
 
             return Datatables::of($data)
                 ->addIndexColumn()
-                ->addColumn('number', function ($row) {
-                    static $count = 1;
-                    return $count++;
-                })
+                // ->addColumn('number', function ($row) {
+                //     static $count = 1;
+                //     return $count++;
+                // })
                 ->addColumn('event_by', function ($row) {
 
 
@@ -151,7 +151,7 @@ class EventController extends Controller
                 })
 
                 ->rawColumns([
-                    'number',
+                    // 'number',
                     'event_by',
                     'email',
                     'start_date',

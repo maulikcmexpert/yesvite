@@ -21,7 +21,9 @@
             },
             columns: [{
                     data: 'DT_RowIndex',
-                    name: 'number'
+                    name: 'number',
+                    orderable: false,
+                    searchable: false
                 },
                 {
                     data: "username",
