@@ -146,17 +146,6 @@ class EventController extends Controller
                     'action'
                 ])
                 ->make(true);
-
-            return [
-                Column::make('number')->title('#')->render('meta.row + meta.settings._iDisplayStart + 1;'),
-                Column::make('event_by'),
-                Column::make('email'),
-                Column::make('start_date'),
-                Column::make('end_date'),
-                Column::make('venue'),
-                Column::make('event_status'),
-                Column::make('action'),
-            ];
         }
 
 
