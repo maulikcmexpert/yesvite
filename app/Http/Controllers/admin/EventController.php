@@ -51,6 +51,7 @@ class EventController extends Controller
                 $data->where('is_draft_save', '0');
             }
             return Datatables::of($data)
+                ->addIndexColumn()
                 ->addColumn('number', function ($row) {
                     static $count = 1;
                     return $count++;

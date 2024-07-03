@@ -20,9 +20,10 @@
                 type: 'post'
             },
             columns: [{
-                    "render": function() {
-                        return i++;
-                    }
+                    data: 'DT_RowIndex',
+                    name: '',
+                    orderable: false,
+                    searchable: false
                 },
                 {
                     data: "username",
