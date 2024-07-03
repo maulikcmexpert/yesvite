@@ -540,4 +540,42 @@ function getLeftPollTime($createdDate, $pollDuration)
 
     return $formattedRemainingTime;
     // Output the formatted remaining time
+
+
+    
 }
+
+function getYesviteSelectedUserPage($id, $perPage, $page,$eventId)
+    {
+        $yesviteRegisteredUser = User::select('id', 'firstname', 'profile', 'lastname', 'email', 'country_code', 'phone_number', 'app_user', 'prefer_by', 'email_verified_at', 'parent_user_phone_contact', 'visible', 'message_privacy')
+            ->where('id', '!=', $id)
+            ->where('is_user_phone_contact', '0')
+            ->leftJoin('events', function ($join) use ($eventId) {
+                $join->on('users.id', '=', 'events.user_id')
+                    ->where('events.event_id', '=', $eventId);
+            })
+            ->where(function ($query) {
+                $query->whereNull('email_verified_at')
+                    ->where('app_user', '!=', '1')
+                    ->orWhereNotNull('email_verified_at');
+            })
+            ->orderBy('firstname')
+            ->paginate($perPage, ['*'], 'page', $page);
+        $yesviteUser = [];
+        foreach ($yesviteRegisteredUser as $user) {
+
+            $yesviteUserDetail['id'] = $user->id;
+            $yesviteUserDetail['profile'] = empty($user->profile) ? "" : asset('storage/profile/' . $user->profile);
+            $yesviteUserDetail['first_name'] = (!empty($user->firstname) || $user->firstname != Null) ? $user->firstname : "";;
+            $yesviteUserDetail['last_name'] = (!empty($user->lastname) || $user->lastname != Null) ? $user->lastname : "";
+            $yesviteUserDetail['email'] = (!empty($user->email) || $user->email != Null) ? $user->email : "";
+            $yesviteUserDetail['country_code'] = (!empty($user->country_code) || $user->country_code != Null) ? strval($user->country_code) : "";
+            $yesviteUserDetail['phone_number'] = (!empty($user->phone_number) || $user->phone_number != Null) ? $user->phone_number : "";
+            $yesviteUserDetail['app_user']  = $user->app_user;
+            $yesviteUserDetail['visible'] =  $user->visible;
+            $yesviteUserDetail['message_privacy'] =  $user->message_privacy;
+            $yesviteUserDetail['prefer_by']  = $user->prefer_by;
+            $yesviteUser[] = $yesviteUserDetail;
+        }
+        return  $yesviteUser;
+    }

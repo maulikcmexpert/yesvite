@@ -12744,44 +12744,10 @@ class ApiControllerv2 extends Controller
 
         try {
             $page = (isset($input['page']) || $input['page'] != "") ? $input['page'] : "1";
-            // $search_name = (isset($input['search_name']) || $input['search_name'] != "") ? $input['search_name'] : "";
-            $user  = Auth::guard('api')->user();
             $event_id=$input['event_id'];
+            $user  = Auth::guard('api')->user();
             $groupList = getGroupList($user->id);
-            // $yesvitecontactList = getYesviteContactListPage($user->id, "10", $page, $search_name);
-
-            $invitedUser = EventInvitedUser::with('user')->where(['event_id' => $input['event_id']])->get();
-
-            $yesviteRegisteredUser = User::select('id', 'firstname', 'profile', 'lastname', 'email', 'country_code', 'phone_number', 'app_user', 'prefer_by', 'email_verified_at', 'parent_user_phone_contact', 'visible', 'message_privacy')
-            ->leftJoin('event_invited_users', function ($join) use ($event_id) {
-                $join->on('users.id', '=', 'event_invited_users.user_id')
-                    ->where('event_invited_users.event_id', '=', $event_id);
-            })
-                ->where('is_user_phone_contact', '0')
-                ->where(function ($query) {
-                    $query->whereNull('email_verified_at')
-                        ->where('app_user', '!=', '1')
-                        ->orWhereNotNull('email_verified_at');
-                })
-                ->orderBy('firstname');
-
-            $yesvitecontactList = [];
-            foreach ($yesviteRegisteredUser as $user) {
-
-                $yesviteUserDetail['id'] = $user->id;
-                $yesviteUserDetail['profile'] = empty($user->profile) ? "" : asset('storage/profile/' . $user->profile);
-                $yesviteUserDetail['first_name'] = (!empty($user->firstname) || $user->firstname != Null) ? $user->firstname : "";;
-                $yesviteUserDetail['last_name'] = (!empty($user->lastname) || $user->lastname != Null) ? $user->lastname : "";
-                $yesviteUserDetail['email'] = (!empty($user->email) || $user->email != Null) ? $user->email : "";
-                $yesviteUserDetail['country_code'] = (!empty($user->country_code) || $user->country_code != Null) ? strval($user->country_code) : "";
-                $yesviteUserDetail['phone_number'] = (!empty($user->phone_number) || $user->phone_number != Null) ? $user->phone_number : "";
-                $yesviteUserDetail['app_user']  = $user->app_user;
-                $yesviteUserDetail['visible'] =  $user->visible;
-                $yesviteUserDetail['message_privacy'] =  $user->message_privacy;
-                $yesviteUserDetail['prefer_by']  = $user->prefer_by;
-                $yesvitecontactList[] = $yesviteUserDetail;
-            }
-
+            $yesvitecontactList = getYesviteSelectedUserPage($user->id, "10", $page,$event_id);
             $yesviteRegisteredUser = User::where('id', '!=', $user->id)->where('is_user_phone_contact', '0')->where(function ($query) {
                 $query->whereNull('email_verified_at')
                     ->where('app_user', '!=', '1')
