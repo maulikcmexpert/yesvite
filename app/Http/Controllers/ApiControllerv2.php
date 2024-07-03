@@ -12740,7 +12740,10 @@ class ApiControllerv2 extends Controller
             $user  = Auth::guard('api')->user();
             $groupList = getGroupList($user->id);
             $event_id = (int)$input['event_id'];
-            $invitedUser = EventInvitedUser::with('user')->where(['event_id' => $event_id])->get();
+            $invitedUser = EventInvitedUser::with(['user' => function ($query) {
+                $query->where('is_user_phone_contact', 0)
+                    ->where('is_co_host', 0);
+            }])->where(['event_id' => $event_id])->get();
             dd($invitedUser);
             $yesvitecontactList = getYesviteSelectedUserPage($user->id, "10", $page, $event_id);
             $yesviteRegisteredUser = User::where('id', '!=', $user->id)
