@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
+use Yajra\DataTables\Html\Column;
 
 use App\Models\Event;
 use App\Models\EventImage;
@@ -144,10 +145,18 @@ class EventController extends Controller
                     'event_status',
                     'action'
                 ])
-
-
-
                 ->make(true);
+
+            return [
+                Column::make('number')->title('#')->render('meta.row + meta.settings._iDisplayStart + 1;'),
+                Column::make('event_by'),
+                Column::make('email'),
+                Column::make('start_date'),
+                Column::make('end_date'),
+                Column::make('venue'),
+                Column::make('event_status'),
+                Column::make('action'),
+            ];
         }
 
 
