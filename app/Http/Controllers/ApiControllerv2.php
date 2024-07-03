@@ -12744,7 +12744,8 @@ class ApiControllerv2 extends Controller
 
         try {
             $page = (isset($input['page']) || $input['page'] != "") ? $input['page'] : "1";
-            $search_name = (isset($input['search_name']) || $input['search_name'] != "") ? $input['search_name'] : "";
+            // $search_name = (isset($input['search_name']) || $input['search_name'] != "") ? $input['search_name'] : "";
+            $search_name = '';
             $user  = Auth::guard('api')->user();
             $groupList = getGroupList($user->id);
             $yesvitecontactList = getYesviteContactListPage($user->id, "10", $page, $search_name);
