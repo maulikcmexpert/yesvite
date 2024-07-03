@@ -12748,7 +12748,7 @@ class ApiControllerv2 extends Controller
                 ->paginate('10', ['*'], 'page', $page);
 
             foreach ($invitedUser as $guestVal) {
-                // dd($user);
+                dd($guestVal);
                 $yesviteUserDetail['id'] = $guestVal->user->id;
                 $yesviteUserDetail['profile'] = empty($guestVal->user->profile) ? "" : asset('storage/profile/' . $guestVal->user->profile);
                 $yesviteUserDetail['first_name'] = (!empty($guestVal->user->firstname) || $guestVal->user->firstname != Null) ? $guestVal->user->firstname : "";;
