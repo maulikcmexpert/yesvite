@@ -548,8 +548,8 @@ function getLeftPollTime($createdDate, $pollDuration)
 
 function getYesviteSelectedUserPage($id, $perPage, $page, $eventId)
 {
+    dd($eventId);
     $yesviteEvents = Event::where('id', $eventId)->get();
-    dd($yesviteEvents);
     $yesviteRegisteredUser = User::select('id', 'firstname', 'profile', 'lastname', 'email', 'country_code', 'phone_number', 'app_user', 'prefer_by', 'email_verified_at', 'parent_user_phone_contact', 'visible', 'message_privacy')
         ->where('id', '!=', $id)
         ->where('is_user_phone_contact', '0')
