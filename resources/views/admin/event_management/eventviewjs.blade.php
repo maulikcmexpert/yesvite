@@ -20,8 +20,8 @@
                 type: 'post'
             },
             columns: [{
-                    data: "DT_RowIndex",
-                    name: "DT_RowIndex"
+                    data: "number",
+                    name: "number"
                 },
                 {
                     data: "username",
