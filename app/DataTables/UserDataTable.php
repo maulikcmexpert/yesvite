@@ -50,7 +50,8 @@ class UserDataTable extends DataTable
                 } else {
                     return '<span class="text-danger">Not App User</span>';
                 }
-            });
+            })
+            ->rawColumns(['profile', 'app_user']);
     }
 
     /**
