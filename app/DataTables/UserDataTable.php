@@ -56,7 +56,7 @@ class UserDataTable extends DataTable
                     $keyword = $this->request->get('search');
                     $keyword = $keyword['value'];
                     $query->orWhere(function ($q) use ($keyword) {
-                        $q->orWhere('firstname', 'LIKE', "%{$keyword}%")
+                        $q->where('firstname', 'LIKE', "%{$keyword}%")
                             ->orWhere('lastname', 'LIKE', "%{$keyword}%");
                     });
                 }
