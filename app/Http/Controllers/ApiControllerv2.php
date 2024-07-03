@@ -12744,10 +12744,47 @@ class ApiControllerv2 extends Controller
 
         try {
             $page = (isset($input['page']) || $input['page'] != "") ? $input['page'] : "1";
-            $search_name = (isset($input['search_name']) || $input['search_name'] != "") ? $input['search_name'] : "";
+            // $search_name = (isset($input['search_name']) || $input['search_name'] != "") ? $input['search_name'] : "";
             $user  = Auth::guard('api')->user();
             $groupList = getGroupList($user->id);
-            $yesvitecontactList = getYesviteContactListPage($user->id, "10", $page, $search_name);
+            // $yesvitecontactList = getYesviteContactListPage($user->id, "10", $page, $search_name);
+
+            $invitedUser = EventInvitedUser::with('user')->where(['event_id' => $input['event_id']])->get();
+
+            if (!empty($invitedUser)) {
+                foreach ($invitedUser as $guestVal) {
+                    if ($guestVal->is_co_host == '0') {
+                        if ($guestVal->user->is_user_phone_contact == '1') {
+                            $invitedGuestDetail['first_name'] = (!empty($guestVal->user->firstname) && $guestVal->user->firstname != NULL) ? $guestVal->user->firstname : "";
+                            $invitedGuestDetail['last_name'] = (!empty($guestVal->user->lastname) && $guestVal->user->lastname != NULL) ? $guestVal->user->lastname : "";
+                            $invitedGuestDetail['email'] = (!empty($guestVal->user->email) && $guestVal->user->email != NULL) ? $guestVal->user->email : "";
+                            $invitedGuestDetail['country_code'] = (!empty($guestVal->user->country_code) && $guestVal->user->country_code != NULL) ? strval($guestVal->user->country_code) : "";
+                            $invitedGuestDetail['phone_number'] = (!empty($guestVal->user->phone_number) && $guestVal->user->phone_number != NULL) ? $guestVal->user->phone_number : "";
+                            $invitedGuestDetail['prefer_by'] = (!empty($guestVal->prefer_by) && $guestVal->prefer_by != NULL) ? $guestVal->prefer_by : "";
+                            $yesvitecontactList['invited_guests'][] = $invitedGuestDetail;
+                        } elseif ($guestVal->user->is_user_phone_contact == '0') {
+                            $invitedUserIdDetail['user_id'] = (!empty($guestVal->user_id) && $guestVal->user_id != NULL) ? $guestVal->user_id : "";
+                            $invitedUserIdDetail['prefer_by'] = (!empty($guestVal->prefer_by) && $guestVal->prefer_by != NULL) ? $guestVal->prefer_by : "";
+                            $yesvitecontactList['invited_user_id'][] = $invitedUserIdDetail;
+                        }
+                    } else if ($guestVal->is_co_host == '1') {
+                        if ($guestVal->user->is_user_phone_contact == '1') {
+                            $guestCoHostDetail['first_name'] = (!empty($guestVal->user->firstname) && $guestVal->user->firstname != NULL) ? $guestVal->user->firstname : "";
+                            $guestCoHostDetail['last_name'] = (!empty($guestVal->user->lastname) && $guestVal->user->lastname != NULL) ? $guestVal->user->lastname : "";
+                            $guestCoHostDetail['email'] = (!empty($guestVal->user->email) && $guestVal->user->email != NULL) ? $guestVal->user->email : "";
+                            $guestCoHostDetail['country_code'] = (!empty($guestVal->user->country_code) && $guestVal->user->country_code != NULL) ? strval($guestVal->user->country_code) : "";
+                            $guestCoHostDetail['phone_number'] = (!empty($guestVal->user->phone_number) && $guestVal->user->phone_number != NULL) ? $guestVal->user->phone_number : "";
+                            $guestCoHostDetail['prefer_by'] = (!empty($guestVal->prefer_by) && $guestVal->prefer_by != NULL) ? $guestVal->prefer_by : "";
+                            $yesvitecontactList['guest_co_host_list'][] = $guestCoHostDetail;
+                        } elseif ($guestVal->user->is_user_phone_contact == '0') {
+                            $coHostDetail['user_id'] = (!empty($guestVal->user_id) && $guestVal->user_id != NULL) ? $guestVal->user_id : "";
+                            $coHostDetail['prefer_by'] = (!empty($guestVal->prefer_by) && $guestVal->prefer_by != NULL) ? $guestVal->prefer_by : "";
+                            $yesvitecontactList['co_host_list'][] = $coHostDetail;
+                        }
+                    }
+                }
+            }
+
             $yesviteRegisteredUser = User::where('id', '!=', $user->id)->where('is_user_phone_contact', '0')->where(function ($query) {
                 $query->whereNull('email_verified_at')
                     ->where('app_user', '!=', '1')
