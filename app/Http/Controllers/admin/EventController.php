@@ -32,7 +32,7 @@ class EventController extends Controller
                 if ($event_type == 'professional_event') {
                     $query->where('account_type', '1');
                 }
-            })->orderBy('id', 'desc');
+            });
 
             if ($eventDate) {
                 $data->where('start_date', $eventDate);
@@ -120,10 +120,6 @@ class EventController extends Controller
                 ->addColumn('action', function ($row) {
 
                     $cryptId = encrypt($row->id);
-
-                    // $edit_url = route('users.edit', $cryptId);
-
-                    // $delete_url = route('users.destroy', $cryptId);
                     $view_url = route('events.show', $cryptId);
 
                     $actionBtn = '<div class="action-icon">
@@ -141,9 +137,6 @@ class EventController extends Controller
                     'event_status',
                     'action'
                 ])
-
-
-
                 ->make(true);
         }
 
