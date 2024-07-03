@@ -53,8 +53,13 @@ class EventController extends Controller
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('number', function ($row) {
-                    static $count = 1;
-                    return $count++;
+                    // Get the current page and items per page
+                    $page = request()->get('start') / request()->get('length') + 1;
+                    $itemsPerPage = request()->get('length');
+
+                    // Calculate the row number
+                    static $count = 0;
+                    return ++$count + ($page - 1) * $itemsPerPage;
                 })
                 ->addColumn('event_by', function ($row) {
                     return $row->user->firstname . ' ' . $row->user->lastname;
