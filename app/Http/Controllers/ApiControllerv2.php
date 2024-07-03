@@ -12744,7 +12744,8 @@ class ApiControllerv2 extends Controller
                 $query->where('is_user_phone_contact', '0');
             }])
                 ->where(['event_id' => $event_id])
-                ->where('is_co_host', '0')->get();
+                ->where('is_co_host', '0')
+                ->paginate('10', ['*'], 'page', $page);
             dd($invitedUser);
             $yesvitecontactList = getYesviteSelectedUserPage($user->id, "10", $page, $event_id);
             $yesviteRegisteredUser = User::where('id', '!=', $user->id)
