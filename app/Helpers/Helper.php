@@ -469,7 +469,9 @@ function sendNotification($notificationType, $postData)
 
                 if (!$postControl->isEmpty()) {
                     foreach ($postControl as $value) {
-                        $postOwneruserId[] = $value->event_posts->user_id;
+                        if (isset($value->event_posts->user_id) && $value->event_posts->user_id != null) {
+                            $postOwneruserId[] = $value->event_posts->user_id;
+                        }
                     }
                 }
                 if (in_array($postData['sender_id'], $postOwneruserId)) {
