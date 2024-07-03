@@ -552,7 +552,7 @@ function getYesviteSelectedUserPage($id, $perPage, $page,$eventId)
             ->where('is_user_phone_contact', '0')
             ->leftJoin('events', function ($join) use ($eventId) {
                 $join->on('users.id', '=', 'events.user_id')
-                    ->where('events.event_id', '=', $eventId);
+                    ->where('events.id', '=', $eventId);
             })
             ->where(function ($query) {
                 $query->whereNull('email_verified_at')
