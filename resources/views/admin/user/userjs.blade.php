@@ -1,36 +1,37 @@
+{{ $dataTable->scripts(attributes: ['type' => 'module']) }}
 <script type="text/javascript">
     $(function() {
 
 
-        var table = $("#users_table").DataTable({
-            processing: true,
-            serverSide: true,
+        // var table = $("#users_table").DataTable({
+        //     processing: true,
+        //     serverSide: true,
 
-            ajax: '{{URL::to("/admin/users")}}',
-            columns: [{
-                    data: "number",
-                    name: "number"
-                },
-                {
-                    data: "profile",
-                    name: "profile"
-                },
-                {
-                    data: "username",
-                    name: "username"
-                },
-                {
-                    data: "app_user",
-                    name: "app_user"
-                },
-                // {
-                //     data: "action",
-                //     name: "action",
-                //     orderable: false,
-                //     searchable: true,
-                // },
-            ],
-        });
+        //     ajax: '{{URL::to("/admin/users")}}',
+        //     columns: [{
+        //             data: "number",
+        //             name: "number"
+        //         },
+        //         {
+        //             data: "profile",
+        //             name: "profile"
+        //         },
+        //         {
+        //             data: "username",
+        //             name: "username"
+        //         },
+        //         {
+        //             data: "app_user",
+        //             name: "app_user"
+        //         },
+        //         // {
+        //         //     data: "action",
+        //         //     name: "action",
+        //         //     orderable: false,
+        //         //     searchable: true,
+        //         // },
+        //     ],
+        // });
 
 
         $("#addMoreCat").click(function() {

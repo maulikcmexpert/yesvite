@@ -7473,38 +7473,23 @@ class ApiControllerv2 extends Controller
 
 
     public function eventWall(Request $request)
-
     {
-
         $user  = Auth::guard('api')->user();
-
         $rawData = $request->getContent();
-
-
         $input = json_decode($rawData, true);
-
         if ($input == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
         }
-
         $validator = Validator::make($input, [
-
             'event_id' => ['required', 'exists:events,id', new checkInvitedUser]
-
         ]);
-
         if ($validator->fails()) {
-
             return response()->json([
                 'status' => 0,
                 'message' => $validator->errors()->first(),
-
-
             ]);
         }
-
         // try {
-
         $page = (isset($input['page'])) ? $input['page'] : "1";
         $this->eventViewUser($user->id, $input['event_id']);
 
@@ -7516,19 +7501,17 @@ class ApiControllerv2 extends Controller
 
         $eventLoginUserStoriesList = EventUserStory::with(['user', 'user_event_story' => function ($query) use ($currentDateTime) {
             $query->where('created_at', '>', now()->subHours(24));
-        }])->where(['event_id' => $input['event_id'], 'user_id' => $user->id])->where('created_at', '>', now()->subHours(24))->first();
-
+        }])
+            ->where(['event_id' => $input['event_id'], 'user_id' => $user->id])
+            ->where('created_at', '>', now()->subHours(24))
+            ->first();
 
         if ($eventLoginUserStoriesList != null) {
 
-
             $storiesDetaill['id'] =  $eventLoginUserStoriesList->id;
             $storiesDetaill['user_id'] =  $eventLoginUserStoriesList->user->id;
-
             $storiesDetaill['username'] =  $eventLoginUserStoriesList->user->firstname . ' ' . $eventLoginUserStoriesList->user->lastname;
-
             $storiesDetaill['profile'] =  empty($eventLoginUserStoriesList->user->profile) ? "" : asset('public/storage/profile/' . $eventLoginUserStoriesList->user->profile);
-
             $storiesDetaill['story'] = [];
             foreach ($eventLoginUserStoriesList->user_event_story as $storyVal) {
                 $storiesData['id'] = $storyVal->id;
@@ -7537,12 +7520,9 @@ class ApiControllerv2 extends Controller
                 $storiesData['post_time'] =  $this->setpostTime($storyVal->updated_at);
                 $checkISeen = UserSeenStory::where(['user_id' => $user->id, 'user_event_story_id' => $storyVal->id])->count();
                 $storiesData['is_seen'] = ($checkISeen != 0) ? "1" : "0";
-
                 if ($storyVal->type == 'video') {
-
                     $storiesData['video_duration'] = (!empty($storyVal->duration)) ? $storyVal->duration : "";
                 }
-
                 $storiesData['created_at'] = $storyVal->updated_at;
                 $storiesDetaill['story'][] = $storiesData;
             }
@@ -7551,40 +7531,37 @@ class ApiControllerv2 extends Controller
 
         $totalStories =  EventUserStory::with(['user', 'user_event_story' => function ($query) use ($currentDateTime) {
             $query->where('created_at', '>', now()->subHours(24));
-        }])->where('event_id', $input['event_id'])->where('created_at', '>', now()->subHours(24))->where('user_id', '!=', $user->id)->count();
+        }])
+            ->where('event_id', $input['event_id'])
+            ->where('created_at', '>', now()->subHours(24))
+            ->where('user_id', '!=', $user->id)->count();
 
         if (isset($input['type']) && ($input['type'] == '1' || $input['type'] == '0')) {
 
             $total_page_of_stories = ceil($totalStories / $this->perPage);
             $eventStoriesList = EventUserStory::with(['user', 'user_event_story' => function ($query) use ($currentDateTime) {
                 $query->where('created_at', '>', now()->subHours(24));
-            }])->where('created_at', '>', now()->subHours(24))->where('event_id', $input['event_id'])->where('user_id', '!=', $user->id)->paginate($this->perPage, ['*'], 'page', $page);
+            }])
+                ->where('created_at', '>', now()->subHours(24))
+                ->where('event_id', $input['event_id'])
+                ->where('user_id', '!=', $user->id)
+                ->paginate($this->perPage, ['*'], 'page', $page);
         } else {
             $total_page_of_stories = ceil($totalStories / $this->perPage);
             $eventStoriesList = EventUserStory::with(['user', 'user_event_story' => function ($query) use ($currentDateTime) {
                 $query->where('created_at', '>', now()->subHours(24));
-            }])->where('created_at', '>', now()->subHours(24))->where('event_id', $input['event_id'])->where('user_id', '!=', $user->id)->paginate($this->perPage, ['*'], 'page', "1");
+            }])
+                ->where('created_at', '>', now()->subHours(24))
+                ->where('event_id', $input['event_id'])
+                ->where('user_id', '!=', $user->id)->paginate($this->perPage, ['*'], 'page', "1");
         }
-
-
         $storiesList = [];
-
         if (count($eventStoriesList) != 0) {
-
-
-
             foreach ($eventStoriesList as $value) {
-
-
-
                 $storiesDetaill['id'] =  $value->id;
                 $storiesDetaill['user_id'] =  $value->user->id;
-
                 $storiesDetaill['username'] =  $value->user->firstname . ' ' . $value->user->lastname;
-
                 $storiesDetaill['profile'] =  empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile);
-
-
                 $storyAlldata = [];
                 foreach ($value->user_event_story as $storyVal) {
                     $storiesData['id'] = $storyVal->id;
@@ -7594,23 +7571,16 @@ class ApiControllerv2 extends Controller
                     $checkISeen = UserSeenStory::where(['user_id' => $user->id, 'user_event_story_id' => $storyVal->id])->count();
                     $storiesData['is_seen'] = ($checkISeen != 0) ? "1" : "0";
                     if ($storyVal->type == 'video') {
-
                         $storiesData['video_duration'] = (!empty($storyVal->duration)) ? $storyVal->duration : "";
                     }
                     $storiesData['created_at'] =  $storyVal->created_at;
-
                     $storyAlldata[] = $storiesData;
                 }
                 $storiesDetaill['story'] = $storyAlldata;
                 $storiesList[] = $storiesDetaill;
             }
         }
-
-
         //  Posts List //
-
-
-
         $selectedFilters = $request->input('filters');
         $eventCreator = Event::where('id', $input['event_id'])->first();
         $eventPostList = EventPost::query();
@@ -7639,9 +7609,7 @@ class ApiControllerv2 extends Controller
                     })
                         ->where('event_id', $input['event_id'])
                         ->where('user_id', $user->id)
-
                         ->where(function ($privacyQuery) {
-
                             $privacyQuery->where(function ($q) {
                                 $q->where('rsvp_d', '1')
                                     ->where('rsvp_status', '1')
@@ -7704,72 +7672,43 @@ class ApiControllerv2 extends Controller
 
         $totalPostWalls = $eventPostList->count();
         $results = $eventPostList->paginate($this->perPage, ['*'], 'page', $page);
-
         $total_page_of_eventPosts = ceil($totalPostWalls / $this->perPage);
-
-
-
         $postList = [];
-
-
-
         if (!empty($checkEventOwner)) {
-
             if (count($results) != 0) {
-
-
-
                 foreach ($results as  $value) {
-
                     $checkUserRsvp = checkUserAttendOrNot($value->event_id, $value->user->id);
                     $ischeckEventOwner = Event::where(['id' => $input['event_id'], 'user_id' => $value->user->id])->first();
                     $postControl = PostControl::where(['user_id' => $user->id, 'event_id' => $input['event_id'], 'event_post_id' => $value->id])->first();
-
                     if ($postControl != null) {
-
                         if ($postControl->post_control == 'hide_post') {
                             continue;
                         }
                     }
                     $checkUserIsReaction = EventPostReaction::where(['event_id' => $input['event_id'], 'event_post_id' => $value->id, 'user_id' => $user->id])->first();
-
                     $postsNormalDetail['id'] =  $value->id;
-
                     $postsNormalDetail['user_id'] =  $value->user->id;
                     $postsNormalDetail['is_host'] =  ($ischeckEventOwner != null) ? 1 : 0;
-
                     $postsNormalDetail['username'] =  $value->user->firstname . ' ' . $value->user->lastname;
-
                     $postsNormalDetail['profile'] =  empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile);
-
                     $postsNormalDetail['post_message'] = empty($value->post_message) ? "" :  $value->post_message;
-
                     $postsNormalDetail['rsvp_status'] = $checkUserRsvp;
                     $postsNormalDetail['location'] = ($value->user->city != NULL) ? $value->user->city : "";
-
-
-
                     $postsNormalDetail['post_type'] = $value->post_type;
-
                     $postsNormalDetail['created_at'] = $value->created_at;
                     $postsNormalDetail['posttime'] = setpostTime($value->created_at);
-
                     $postsNormalDetail['post_image'] = [];
-
                     if ($value->post_type == '1' && !empty($value->post_image)) {
-
                         foreach ($value->post_image as $imgVal) {
                             $postMedia = [
                                 'media_url' => asset('public/storage/post_image/' . $imgVal->post_image),
                                 'type' => $imgVal->type,
                             ];
-
                             if ($imgVal->type == 'video' && isset($imgVal->duration) && $imgVal->duration !== "") {
                                 $postMedia['video_duration'] = $imgVal->duration;
                             } else {
                                 unset($postMedia['video_duration']);
                             }
-
                             $postsNormalDetail['post_image'][] = $postMedia;
                         }
                     }
@@ -7779,35 +7718,21 @@ class ApiControllerv2 extends Controller
                     $postsNormalDetail['poll_id'] = 0;
                     $postsNormalDetail['poll_question'] = "";
                     $postsNormalDetail['poll_option'] = [];
-                    if ($value->post_type == '2') { // Poll
-
+                    if ($value->post_type == '2') {
+                        // Poll
                         $polls = EventPostPoll::with('event_poll_option')->withCount('user_poll_data')->where(['event_id' => $input['event_id'], 'event_post_id' => $value->id])->first();
-
                         $postsNormalDetail['total_poll_vote'] = $polls->user_poll_data_count;
-
-
                         $pollDura = getLeftPollTime($polls->updated_at, $polls->poll_duration);
-
                         $postsNormalDetail['poll_duration'] = $pollDura;
-
                         $leftDay = (int) preg_replace('/[^0-9]/', '', $polls->poll_duration);
-
                         $postsNormalDetail['is_expired'] =  ($pollDura == "") ? true : false;
                         $postsNormalDetail['poll_id'] = $polls->id;
-
                         $postsNormalDetail['poll_question'] = $polls->poll_question;
-
-
                         foreach ($polls->event_poll_option as $optionValue) {
-
                             $optionData['id'] = $optionValue->id;
-
                             $optionData['option'] = $optionValue->option;
                             $optionData['total_vote'] =  "0%";
-
-
                             if (getOptionAllTotalVote($polls->id) != 0) {
-
                                 $optionData['total_vote'] =  round(getOptionTotalVote($optionValue->id) / getOptionAllTotalVote($polls->id) * 100) . "%";
                             }
                             $optionData['is_poll_selected'] = checkUserGivePoll($user->id, $polls->id, $optionValue->id);
@@ -7816,21 +7741,14 @@ class ApiControllerv2 extends Controller
                     }
                     $postsNormalDetail['post_recording'] = empty($value->post_recording) ? "" : asset('public/storage/event_post_recording/' . $value->post_recording);
                     $reactionList = getOnlyReaction($value->id);
-
                     $postsNormalDetail['reactionList'] = $reactionList;
-
                     $postsNormalDetail['total_comment'] = $value->event_post_comment_count;
-
                     $postsNormalDetail['total_likes'] = $value->event_post_reaction_count;
-
                     $postsNormalDetail['is_reaction'] = ($checkUserIsReaction != NULL) ? '1' : '0';
-
                     $postsNormalDetail['self_reaction'] = ($checkUserIsReaction != NULL) ? $checkUserIsReaction->reaction : "";
-
                     $postsNormalDetail['is_owner_post'] = ($value->user->id == $user->id) ? 1 : 0;
                     $postsNormalDetail['is_mute'] =  0;
                     if ($postControl != null) {
-
                         if ($postControl->post_control == 'mute') {
                             $postsNormalDetail['is_mute'] =  1;
                         }
@@ -7839,9 +7757,7 @@ class ApiControllerv2 extends Controller
                 }
             }
         } else {
-
             if (count($results) != 0) {
-
                 foreach ($results as $value) {
 
 

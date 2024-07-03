@@ -19,20 +19,13 @@
         </div><!-- /.container-fluid -->
     </div>
 
-    <table id="users_table" class="table table-bordered data-table users-data-table">
-
+    <!-- <table id="users_table" class="table table-bordered data-table users-data-table">
         <thead>
-
             <tr>
-
                 <th>No</th>
                 <th>Profile</th>
                 <th>Username</th>
                 <th>App User</th>
-
-
-
-
             </tr>
 
         </thead>
@@ -41,6 +34,7 @@
 
         </tbody>
 
-    </table>
+    </table> -->
+    {{ $dataTable->table() }}
 
 </div>

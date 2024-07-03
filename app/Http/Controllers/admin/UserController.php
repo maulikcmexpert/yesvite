@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\DataTables\UserDataTable;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -32,105 +33,93 @@ class UserController extends Controller
         // $this->database = $database;
         // $this->chatRoom = $this->database->getReference();
     }
-    public function index(Request $request)
-
+    public function index(UserDataTable $DataTable)
     {
 
+        // if ($request->ajax()) {
 
+        //     $data = User::where(['account_type' => '0', 'app_user' => '1'])->orderBy('id', 'desc');
 
-        if ($request->ajax()) {
-
-            $data = User::where(['account_type' => '0', 'app_user' => '1'])->orderBy('id', 'desc');
-
-            return Datatables::of($data)
-
-
-
-                ->addIndexColumn()
-
-                ->addColumn('number', function ($row) {
-
-                    static $count = 1;
-
-                    return $count++;
-                })
-
-                ->addColumn('profile', function ($row) {
-
-                    if (trim($row->profile) != "" || trim($row->profile) != NULL) {
-
-                        if (Storage::disk('public')->exists('profile/' . $row->profile)) {
-                            $imageUrl = asset('storage/profile/' . $row->profile);
-                        } else {
-                            $imageUrl = asset('storage/no_profile.png');
-                        }
-                    } else {
-
-                        $imageUrl = asset('storage/no_profile.png');
-                    }
+        //     return Datatables::of($data)
 
 
 
-                    return '<div class="symbol-label">
-                    <img src="' . $imageUrl . '" alt="No Image" class="w-50">
-                </div>';
-                })
+        //         ->addIndexColumn()
 
-                ->addColumn('username', function ($row) {
+        //         ->addColumn('number', function ($row) {
 
+        //             static $count = 1;
 
-                    return $row->firstname . ' ' . $row->lastname;
-                })
+        //             return $count++;
+        //         })
 
-                ->addColumn('app_user', function ($row) {
+        //         ->addColumn('profile', function ($row) {
 
-                    if ($row->app_user == '1') {
+        //             if (trim($row->profile) != "" || trim($row->profile) != NULL) {
 
-                        return '<i class="fa-solid fa-mobile"></i>';
-                    } else {
-                        return '<span class="text-danger">Not App User</span>';
-                    }
-                })
+        //                 if (Storage::disk('public')->exists('profile/' . $row->profile)) {
+        //                     $imageUrl = asset('storage/profile/' . $row->profile);
+        //                 } else {
+        //                     $imageUrl = asset('storage/no_profile.png');
+        //                 }
+        //             } else {
 
-                // ->addColumn('action', function ($row) {
-
-                //     $cryptId = encrypt($row->id);
-
-                //     $edit_url = route('users.edit', $cryptId);
-
-                //     $delete_url = route('users.destroy', $cryptId);
-
-                //     $actionBtn = '<div class="action-icon">
-                //         <a class="" href="' . $edit_url . '" title="Edit"><i class="fa fa-edit"></i></a>
-                //         <form action="' . $delete_url . '" method="POST">' .
-                //         csrf_field() . // Changed from @csrf to csrf_field()
-                //         method_field("DELETE") . // Changed from @method to method_field()
-                //         '<button type="submit" class="btn bg-transparent"><i class="fas fa-trash"></i></button></form>
-                //         </div>';
-
-                //     return $actionBtn;
-                // })
-
-                ->rawColumns(['number', 'profile', 'username', 'app_user'])
+        //                 $imageUrl = asset('storage/no_profile.png');
+        //             }
 
 
 
-                ->make(true);
-        }
+        //             return '<div class="symbol-label">
+        //             <img src="' . $imageUrl . '" alt="No Image" class="w-50">
+        //         </div>';
+        //         })
+
+        //         ->addColumn('username', function ($row) {
+
+
+        //             return $row->firstname . ' ' . $row->lastname;
+        //         })
+
+        //         ->addColumn('app_user', function ($row) {
+
+        //             if ($row->app_user == '1') {
+
+        //                 return '<i class="fa-solid fa-mobile"></i>';
+        //             } else {
+        //                 return '<span class="text-danger">Not App User</span>';
+        //             }
+        //         })
+
+        //         // ->addColumn('action', function ($row) {
+
+        //         //     $cryptId = encrypt($row->id);
+
+        //         //     $edit_url = route('users.edit', $cryptId);
+
+        //         //     $delete_url = route('users.destroy', $cryptId);
+
+        //         //     $actionBtn = '<div class="action-icon">
+        //         //         <a class="" href="' . $edit_url . '" title="Edit"><i class="fa fa-edit"></i></a>
+        //         //         <form action="' . $delete_url . '" method="POST">' .
+        //         //         csrf_field() . // Changed from @csrf to csrf_field()
+        //         //         method_field("DELETE") . // Changed from @method to method_field()
+        //         //         '<button type="submit" class="btn bg-transparent"><i class="fas fa-trash"></i></button></form>
+        //         //         </div>';
+
+        //         //     return $actionBtn;
+        //         // })
+
+        //         ->rawColumns(['number', 'profile', 'username', 'app_user'])
 
 
 
+        //         ->make(true);
+        // }
         $title = 'Users';
-
         $page = 'admin.user.list';
-
         $js = 'admin.user.userjs';
-
-
-
-
-
-        return view('admin.includes.layout', compact('title', 'page', 'js'));
+        return $DataTable->render('admin.includes.layout', compact('title', 'page', 'js'));
+        // return view('admin.includes.layout', compact('title', 'page', 'js'));
     }
 
     /**
