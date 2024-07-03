@@ -12743,12 +12743,13 @@ class ApiControllerv2 extends Controller
         }
 
         try {
-            dd($input);
             $page = (isset($input['page']) || $input['page'] != "") ? $input['page'] : "1";
             // $search_name = (isset($input['search_name']) || $input['search_name'] != "") ? $input['search_name'] : "";
             $search_name = '';
             $user  = Auth::guard('api')->user();
             $groupList = getGroupList($user->id);
+            $event_id = $input['event_id'];
+            dd($event_id);
             $yesvitecontactList = getYesviteSelectedUserPage($user->id, "10", $page, $input['event_id']);
             $yesviteRegisteredUser = User::where('id', '!=', $user->id)
                 ->where('is_user_phone_contact', '0')->where(function ($query) {
