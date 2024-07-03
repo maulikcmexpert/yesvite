@@ -12748,12 +12748,13 @@ class ApiControllerv2 extends Controller
             $search_name = '';
             $user  = Auth::guard('api')->user();
             $groupList = getGroupList($user->id);
-            $yesvitecontactList = getYesviteContactListPage($user->id, "10", $page, $search_name);
-            $yesviteRegisteredUser = User::where('id', '!=', $user->id)->where('is_user_phone_contact', '0')->where(function ($query) {
-                $query->whereNull('email_verified_at')
-                    ->where('app_user', '!=', '1')
-                    ->orWhereNotNull('email_verified_at');
-            })
+            $yesvitecontactList = getYesviteSelectedUserPage($user->id, "10", $page, $input['event_id']);
+            $yesviteRegisteredUser = User::where('id', '!=', $user->id)
+                ->where('is_user_phone_contact', '0')->where(function ($query) {
+                    $query->whereNull('email_verified_at')
+                        ->where('app_user', '!=', '1')
+                        ->orWhereNotNull('email_verified_at');
+                })
                 ->orderBy('firstname')
                 ->count();
             $total_page = ceil($yesviteRegisteredUser / 10);
