@@ -223,6 +223,7 @@ function getYesviteContactListPage($id, $perPage, $page, $search_name)
         $yesviteUserDetail['prefer_by']  = $user->prefer_by;
         $yesviteUser[] = $yesviteUserDetail;
     }
+
     return  $yesviteUser;
 }
 
