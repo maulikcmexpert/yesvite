@@ -51,10 +51,10 @@ class EventController extends Controller
             }
             return Datatables::of($data)
                 ->addIndexColumn()
-                // ->addColumn('number', function ($row) {
-                //     static $count = 1;
-                //     return $count++;
-                // })
+                ->addColumn('number', function ($row) {
+                    static $count = 1;
+                    return $count++;
+                })
                 ->addColumn('event_by', function ($row) {
                     return $row->user->firstname . ' ' . $row->user->lastname;
                 })
