@@ -12817,4 +12817,38 @@ class ApiControllerv3 extends Controller
             return response()->json(['status' => 0, 'data' => $eventList, 'message' => "No upcoming event found"]);
         }
     }
+
+
+    public function getYesviteSelectedUserListPage(Request $request)
+    {
+
+        $user  = Auth::guard('api')->user();
+
+        $rawData = $request->getContent();
+
+        $input = json_decode($rawData, true);
+        if ($input == null) {
+            return response()->json(['status' => 0, 'message' => "Json invalid"]);
+        }
+
+        try {
+            $page = (isset($input['page']) || $input['page'] != "") ? $input['page'] : "1";
+            $search_name = (isset($input['search_name']) || $input['search_name'] != "") ? $input['search_name'] : "";
+            $user  = Auth::guard('api')->user();
+            $groupList = getGroupList($user->id);
+            $yesvitecontactList = getYesviteContactListPage($user->id, "10", $page, $search_name);
+            $yesviteRegisteredUser = User::where('id', '!=', $user->id)->where('is_user_phone_contact', '0')->where(function ($query) {
+                $query->whereNull('email_verified_at')
+                    ->where('app_user', '!=', '1')
+                    ->orWhereNotNull('email_verified_at');
+            })
+                ->orderBy('firstname')
+                ->count();
+            $total_page = ceil($yesviteRegisteredUser / 10);
+            return response()->json(['status' => 1, 'message' => "Yesvite contact list", 'total_page' => $total_page, "data" => $yesvitecontactList, 'group' => $groupList]);
+        } catch (Exception  $e) {
+            return response()->json(['status' => 0, 'message' => 'something went wrong']);
+        }
+    }
+
 }

@@ -90,6 +90,7 @@ Route::prefix('user/v2/')->middleware('checkUser')->group(function () {
     Route::post('get_design_option_data_list', [ApiControllerv2::class, 'getDesignOptionDataList']);
     Route::get('get_yesvite_contact_list', [ApiControllerv2::class, 'getYesviteContactList']);
     Route::post('get_yesvite_contact_list_page', [ApiControllerv2::class, 'getYesviteContactListPage']);
+    Route::post('get_yesvite_selected_user_list_page', [ApiControllerv2::class, 'getYesviteSelectedUserListPage']);
     Route::post('add_contact', [ApiControllerv2::class, 'addContact']);
     Route::post('edit_contact', [ApiControllerv2::class, 'editContact']);
     Route::post('create_event', [ApiControllerv2::class, 'createEvent']);
@@ -230,6 +231,7 @@ Route::prefix('user/v3/')->middleware('checkUser')->group(function () {
     Route::post('get_design_option_data_list', [ApiControllerv3::class, 'getDesignOptionDataList']);
     Route::get('get_yesvite_contact_list', [ApiControllerv3::class, 'getYesviteContactList']);
     Route::post('get_yesvite_contact_list_page', [ApiControllerv3::class, 'getYesviteContactListPage']);
+
     Route::post('add_contact', [ApiControllerv3::class, 'addContact']);
     Route::post('edit_contact', [ApiControllerv3::class, 'editContact']);
     Route::post('create_event', [ApiControllerv3::class, 'createEvent']);
