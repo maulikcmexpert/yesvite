@@ -4213,25 +4213,16 @@ class ApiControllerv2 extends Controller
     {
 
         $user  = Auth::guard('api')->user();
-
         $rawData = $request->getContent();
-
         $eventData = json_decode($rawData, true);
-
         if ($eventData == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
         }
-
-
-
         $validator = Validator::make($eventData, [
             'event_id' => ['required']
         ]);
 
-
-
         if ($validator->fails()) {
-
             return response()->json([
                 'status' => 0,
                 'message' => $validator->errors()->first(),
@@ -12749,8 +12740,8 @@ class ApiControllerv2 extends Controller
             $user  = Auth::guard('api')->user();
             $groupList = getGroupList($user->id);
             $event_id = (int)$input['event_id'];
-            $yesviteEvents = Event::where('id', $event_id)->get();
-            dd($yesviteEvents[0]);
+            $invitedUser = EventInvitedUser::with('user')->where(['event_id' => $event_id])->get();
+            dd($invitedUser);
             $yesvitecontactList = getYesviteSelectedUserPage($user->id, "10", $page, $event_id);
             $yesviteRegisteredUser = User::where('id', '!=', $user->id)
                 ->where('is_user_phone_contact', '0')->where(function ($query) {
