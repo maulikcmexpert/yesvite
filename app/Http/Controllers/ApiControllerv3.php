@@ -12848,7 +12848,7 @@ class ApiControllerv3 extends Controller
                 ->orderBy('firstname')
                 ->count();
             $total_page = ceil($yesviteRegisteredUser / 10);
-            return response()->json(['status' => 1, 'message' => "Yesvite contact list", 'total_page' => $total_page, "data" => $yesvitecontactList, 'group' => $groupList]);
+            return response()->json(['status' => 1, 'message' => "Yesvite contact list", 'total_page' => $total_page,"total_count"=>$yesviteRegisteredUser, "data" => $yesvitecontactList]);
         } catch (Exception  $e) {
             return response()->json(['status' => 0, 'message' => 'something went wrong']);
         }
