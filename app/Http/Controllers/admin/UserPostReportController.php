@@ -176,18 +176,18 @@ class UserPostReportController extends Controller
         //
     }
 
-    public function deletePostReport(Request $request){
-        $event_report_id = decrypt($request->event_report_id);
-        $event_report = UserReportToPost::where('id',$event_report_id)->first();
-        if(isset($event_report['post_media_id']) && $event_report['post_media_id'] != null){
-            $event_post_image = EventPostImage::where('id',$event_report['post_media_id'])->delete();
-        }elseif(isset($event_report['event_post_id']) && $event_report['event_post_id'] != null){
-            
-            $event_post = EventPost::where('id',$event_report['event_post_id'])->delete(); 
-        
+    public function deletePostReport(Request $request)
+    {
+        $event_report_id = decrypt($request->id);
+        // dd($event_report_id);
+        $event_report = UserReportToPost::where('id', $event_report_id)->first();
+        if (isset($event_report['post_media_id']) && $event_report['post_media_id'] != null) {
+            EventPostImage::where('id', $event_report['post_media_id'])->delete();
+            UserReportToPost::where('post_media_id', $event_report['post_media_id'])->delete();
+        } elseif (isset($event_report['event_post_id']) && $event_report['event_post_id'] != null) {
+            EventPost::where('id', $event_report['event_post_id'])->delete();
+            UserReportToPost::where('event_post_id', $event_report['event_post_id'])->delete();
         }
-        UserReportToPost::where('id',$event_report_id)->delete();
-
-        echo true;
+        return redirect()->route('user_post_report.index')->with('success', 'Reported Post Deleted successfully !');
     }
 }
