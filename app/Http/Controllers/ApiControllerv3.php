@@ -104,6 +104,7 @@ use Illuminate\Support\Facades\Mail;
 use LogicException;
 use Illuminate\Database\Query\Builder;
 use App\Jobs\SendInvitationMailJob as sendInvitation;
+use App\Services\GooglePlayService;
 use Illuminate\Support\Facades\Session;
 use stdClass;
 
@@ -122,7 +123,7 @@ class ApiControllerv3 extends Controller
 
 
 
-    public function __construct()
+    public function __construct(GooglePlayService $GooglePlayServies)
     {
 
         $this->user = Auth::guard('api')->user();
