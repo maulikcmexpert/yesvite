@@ -70,7 +70,7 @@ class UserDataTable extends DataTable
      */
     public function query(User $model): QueryBuilder
     {
-        return  User::where(['account_type' => '0', 'app_user' => '1'])->orderBy('id', 'desc');
+        return  User::where(['account_type' => '0'])->orderBy('id', 'desc');
     }
 
     /**
