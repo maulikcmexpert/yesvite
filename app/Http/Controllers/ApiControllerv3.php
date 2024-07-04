@@ -12571,7 +12571,7 @@ class ApiControllerv3 extends Controller
     }
     public function set_android_iap($appid, $productID, $purchaseToken, $type)
     {
-        dd($purchaseToken);
+
         $ch = curl_init();
         $clientId = env('InGOOGLE_CLIENT_ID');
 
@@ -12612,16 +12612,19 @@ class ApiControllerv3 extends Controller
         //     //error  
         //     // return;
         // }
+        if (isset($result['access_token']) && $result['access_token'] != null) {
 
-
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $VALIDATE_URL . "?access_token=" . $result["access_token"]);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $result1 = curl_exec($ch);
-        $result1 = json_decode($result1, true);
-        if (!$result1 || (isset($result1["error"]) && $result1["error"] != null)) {
-            //error
-            // return;
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $VALIDATE_URL . "?access_token=" . $result["access_token"]);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            $result1 = curl_exec($ch);
+            $result1 = json_decode($result1, true);
+            if (!$result1 || (isset($result1["error"]) && $result1["error"] != null)) {
+                //error
+                // return;
+            }
+        } else {
+            $result1 = $result;
         }
 
         return $result1;
