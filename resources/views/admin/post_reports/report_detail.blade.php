@@ -1054,7 +1054,7 @@
             </div>
 
             <div class="col-md-0 mb-4">
-                <button type="button" class="btn btn-danger deletePrayer" data-id="{{encrypt($reportDetail->id)}}" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                <button type="button" class="btn btn-danger DeleteReport_post" data-id="{{encrypt($reportDetail->id)}}" data-bs-toggle="modal" data-bs-target="#deleteModal">
                     <i class="ri-delete-bin-5-fill"></i>
                 </button>
                 <!-- <a type="button" class="btn btn-danger" href="{{route('delete_post_report',['id' => encrypt($reportDetail->id) ])}}" data-id="{{$reportDetail->id}}" class="DeleteReport_post">Delete</a> -->
