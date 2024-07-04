@@ -23,6 +23,8 @@ use Illuminate\Support\Facades\Hash;
 use Flasher\Prime\FlasherInterface;
 use Laravel\Passport\Token;
 use GuzzleHttp\Client;
+use Socialite;
+
 use Kreait\Laravel\Firebase\Facades\Firebase;
 
 class AuthController extends Controller
@@ -42,6 +44,18 @@ class AuthController extends Controller
     }
     public function index()
     {
+    }
+
+    public function handleGoogleCallback()
+    {
+        try {
+
+            $user = Socialite::driver('google')->user();
+
+            return $user;
+        } catch (Exception $e) {
+            dd($e->getMessage());
+        }
     }
 
     /**
