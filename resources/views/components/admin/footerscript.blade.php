@@ -45,6 +45,8 @@
 <!-- <script src="{{asset('assets/admin/assets/js/pages/dashboard.js')}}"></script> -->
 <!-- <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script src="{{asset('assets/admin/assets/js/jquery.dataTables.min.js')}}"></script>
 
 <script src="{{asset('assets/admin/assets/js/moment.js')}}"></script>

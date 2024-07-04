@@ -1054,8 +1054,10 @@
             </div>
          
             <div class="col-md-0 mb-4">
-            <a type="button" href="{{route('delete_post_report',['id' => encrypt($reportDetail->id) ])}}" data-id="{{$reportDetail->id}}" class="DeleteReport_post">Delete</a>
-            </div>
+            {{-- <a type="button" href="{{route('delete_post_report',['id' => encrypt($reportDetail->id) ])}}" data-id="{{$reportDetail->id}}" class="DeleteReport_post">Delete</a> --}}
+            <button type="button"data-id="{{$reportDetail->id}}" class="DeleteReport_post">Delete</button>
+
+        </div>
         </div>
 
     </div>
