@@ -12545,7 +12545,7 @@ class ApiControllerv3 extends Controller
             $purchaseToken = $userSubscription->purchaseToken;
 
             $responce =  $this->set_android_iap($app_id, $product_id, $purchaseToken, 'subscribe');
-
+            dd($responce);
             if (isset($responce) && !empty($responce)) {
                 if (isset($responce['expiryTimeMillis']) && $responce['expiryTimeMillis'] != null) {
                     $exp_date =  date('Y-m-d H:i:s', ($responce['expiryTimeMillis'] /  1000));
