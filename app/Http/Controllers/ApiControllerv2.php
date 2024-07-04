@@ -8897,7 +8897,8 @@ class ApiControllerv2 extends Controller
 
             $record->move(public_path('storage/event_post_recording'), $recordingName);
 
-
+echo "coming";
+echo public_path('storage/event_post_recording'). $recordingName;
             FFMpeg::fromDisk('public')
                 ->open(public_path('storage/event_post_recording'), $recordingName)
                 ->export()
@@ -8905,6 +8906,7 @@ class ApiControllerv2 extends Controller
                 ->inFormat(new \FFMpeg\Format\Audio\Mp3)
                 ->save(public_path('storage/event_post_recording'), $recordingName);
 
+                echo "done";
 
             $creatEventPost->post_recording = $recordingName;
         }
