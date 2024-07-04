@@ -10371,8 +10371,8 @@ class ApiControllerv3 extends Controller
             $eventAboutHost['pending'] = $pendingUser;
             $eventAboutHost['allow_limit'] = $eventDetail->event_settings->allow_limit;
             $eventAboutHost['adult_only_party'] = $eventDetail->event_settings->adult_only_party;
-            $eventAboutHost['subscription_plan_name'] = ($eventDetail->event_schedule->subscription_plan_name != NULL) ? $eventDetail->subscription_plan_name : "";
-            $eventAboutHost['subscription_invite_count'] = ($eventDetail->event_schedule->subscription_invite_count != NULL) ? $eventDetail->subscription_invite_count : 0;
+            $eventAboutHost['subscription_plan_name'] = ($eventDetail->subscription_plan_name != NULL) ? $eventDetail->subscription_plan_name : "";
+            $eventAboutHost['subscription_invite_count'] = ($eventDetail->subscription_invite_count != NULL) ? $eventDetail->subscription_invite_count : 0;
 
             $userRsvpStatusList = EventInvitedUser::query();
             $userRsvpStatusList->whereHas('user', function ($query) {
@@ -12607,7 +12607,7 @@ class ApiControllerv3 extends Controller
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $result = curl_exec($ch);
         $result = json_decode($result, true);
-        dd($result);
+
         // if (!$result || !$result["access_token"]) {
         //     //error  
         //     // return;
