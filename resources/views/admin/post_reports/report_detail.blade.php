@@ -834,6 +834,8 @@
         }
     }
 </style>
+
+
 <div class="container-fluid">
     <h1 class="m-0 ProductTitle">{{$title}}</h1>
     <div class="content-header p-0">
@@ -1050,8 +1052,9 @@
                     </div>
                 </div>
             </div>
+         
             <div class="col-md-0 mb-4">
-            <button type="button">delete</button>
+            <a type="button" href="{{route('delete_post_report',['id' => encrypt($reportDetail->id) ])}}" data-id="{{$reportDetail->id}}" class="DeleteReport_post">delete</a>
             </div>
         </div>
 
