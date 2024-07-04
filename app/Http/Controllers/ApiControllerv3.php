@@ -12624,7 +12624,7 @@ class ApiControllerv3 extends Controller
                 // return;
             }
         } else {
-            $return1 = $result;
+            $result1 = $result;
         }
 
         return $result1;
