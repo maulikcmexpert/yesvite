@@ -12538,7 +12538,7 @@ class ApiControllerv3 extends Controller
     public function checkSubscription()
     {
         $userSubscription = UserSubscription::where('user_id', $this->user->id)->orderBy('id', 'DESC')->limit(1)->first();
-        dd($userSubscription);
+
         if ($userSubscription != null) {
             $app_id = $userSubscription->packageName;
             $product_id = $userSubscription->productId;
@@ -12549,8 +12549,6 @@ class ApiControllerv3 extends Controller
             if (isset($responce) && !empty($responce)) {
                 if (isset($responce['expiryTimeMillis']) && $responce['expiryTimeMillis'] != null) {
                     $exp_date =  date('Y-m-d H:i:s', ($responce['expiryTimeMillis'] /  1000));
-                } else {
-                    $exp_date = date('Y-m-d 00:00:00');
                 }
                 $current_date = date('Y-m-d H:i:s');
                 if (strtotime($current_date) > strtotime($exp_date)) {
