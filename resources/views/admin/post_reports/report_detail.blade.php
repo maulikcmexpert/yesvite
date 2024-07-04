@@ -1017,7 +1017,7 @@
                                             <div class="col-lg-6">
                                                 <div class="event_posts_right_content">
                                                     <h6>
-                                                        Reborted By <span>({{ $reportDetail->created_at }})</span>
+                                                        Reported By <span>({{ $reportDetail->created_at }})</span>
                                                     </h6>
                                                     <div class="event_posts_creator">
 
