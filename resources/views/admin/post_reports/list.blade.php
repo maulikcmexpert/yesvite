@@ -48,8 +48,8 @@
     </table> --}}
 
     {{ $dataTable->table() }}
-    {{ $dataTable->scripts(attributes: ['type' => 'module']) }}
 
     {{ $dataTable->scripts(attributes: ['type' => 'module']) }}
+
 
 </div>
