@@ -920,10 +920,8 @@
                                 @endif
                                 @if($postVal->post_type == '3')
                                 <div class="col-xl-6 col-lg-12 col-md-12">
-                                    <audio controls>
-                                        <source src="{{ asset('public/storage/event_post_recording/'.$postVal->post_recording)}}" type="audio/ogg">
-                                        <source src="{{ asset('public/storage/event_post_recording/'.$postVal->post_recording)}}" type="audio/mpeg">
-                                        Your browser does not support the audio element.
+                                    <audio controls src="{{ asset('public/storage/event_post_recording/'.$postVal->post_recording)}}">
+
                                     </audio>
                                     <!-- <div class="aWrap" data-src="{{ asset('public/storage/event_post_recording/'.$postVal->post_recording)}}">
                                         <button class="aPlay" disabled><span class="aPlayIco"><i class="fa fa-play"></i></span></button>
