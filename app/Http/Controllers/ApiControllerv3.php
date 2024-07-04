@@ -12571,7 +12571,7 @@ class ApiControllerv3 extends Controller
     }
     public function set_android_iap($appid, $productID, $purchaseToken, $type)
     {
-        dd($purchaseToken);
+
         $ch = curl_init();
         $clientId = env('InGOOGLE_CLIENT_ID');
 
@@ -12599,7 +12599,7 @@ class ApiControllerv3 extends Controller
             '&client_id=' . $clientId .
             '&redirect_uri=' . $redirectUri .
             '&grant_type=refresh_token';
-
+        dd($input_fields);
         //Request to google oauth for authentication
         curl_setopt($ch, CURLOPT_URL, $TOKEN_URL);
         curl_setopt($ch, CURLOPT_POST, 1);
