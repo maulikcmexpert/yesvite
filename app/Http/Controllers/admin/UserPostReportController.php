@@ -178,7 +178,7 @@ class UserPostReportController extends Controller
 
     public function deletePostReport(Request $request)
     {
-        $event_report_id = decrypt($request->id);
+        $event_report_id = decrypt($request->event_report_id);
         // dd($event_report_id);
         $event_report = UserReportToPost::where('id', $event_report_id)->first();
         if (isset($event_report['post_media_id']) && $event_report['post_media_id'] != null) {
@@ -188,6 +188,6 @@ class UserPostReportController extends Controller
             EventPost::where('id', $event_report['event_post_id'])->delete();
             UserReportToPost::where('event_post_id', $event_report['event_post_id'])->delete();
         }
-        return redirect()->route('user_post_report.index')->with('success', 'Reported Post Deleted successfully !');
+        return true;
     }
 }
