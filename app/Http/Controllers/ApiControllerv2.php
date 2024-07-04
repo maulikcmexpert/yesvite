@@ -8907,7 +8907,7 @@ class ApiControllerv2 extends Controller
                 ->save(public_path('storage/event_post_recording'), $recordingName);
 
             echo "done";
-            dd(1);
+            exit;
 
             $creatEventPost->post_recording = $recordingName;
         }
