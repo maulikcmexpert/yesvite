@@ -123,7 +123,7 @@ class ApiControllerv2 extends Controller
 
 
 
-    public function __construct(GooglePlayService $googlePlayServies)
+    public function __construct(GooglePlayService $GooglePlayService)
     {
 
         $this->user = Auth::guard('api')->user();
