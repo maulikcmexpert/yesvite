@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 use Location;
-
+use FFMpeg;
 use App\Models\{
     User,
     Event,
@@ -8896,6 +8896,16 @@ class ApiControllerv2 extends Controller
             $recordingName = time() . '_' . $record->getClientOriginalName();
 
             $record->move(public_path('storage/event_post_recording'), $recordingName);
+
+
+            FFMpeg::fromDisk('public')
+                ->open(public_path('storage/event_post_recording'), $recordingName)
+                ->export()
+                ->toDisk('public')
+                ->inFormat(new \FFMpeg\Format\Audio\Mp3)
+                ->save(public_path('storage/event_post_recording'), $recordingName);
+
+
             $creatEventPost->post_recording = $recordingName;
         }
 
