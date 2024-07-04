@@ -39,11 +39,11 @@ class UserDataTable extends DataTable
             ->addColumn('profile', function ($row) {
 
                 if (trim($row->profile) != "" || trim($row->profile) != NULL) {
-                    if (Storage::disk('public')->exists('profile/' . $row->profile)) {
-                        $imageUrl = asset('storage/profile/' . $row->profile);
-                    } else {
-                        $imageUrl = asset('storage/no_profile.png');
-                    }
+                    // if (Storage::disk('public')->exists('profile/' . $row->profile)) {
+                    $imageUrl = asset('storage/profile/' . $row->profile);
+                    // } else {
+                    //     $imageUrl = asset('storage/no_profile.png');
+                    // }
                 } else {
                     $imageUrl = asset('storage/no_profile.png');
                 }
