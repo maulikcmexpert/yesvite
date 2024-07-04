@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\admin;
+
 use App\DataTables\UserPostReportDataTable;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -13,12 +14,13 @@ use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Yajra\DataTables\Services\DataTable;
+
 class UserPostReportController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request,UserPostReportDataTable $DataTable)
+    public function index(Request $request, UserPostReportDataTable $DataTable)
     {
 
         // if ($request->ajax()) {
@@ -127,7 +129,7 @@ class UserPostReportController extends Controller
         }, 'users'])->where('id', $reportId)->first();
         $reportDetail->posttime = $this->setpostTime($reportDetail->event_posts->created_at);
         $reportDetail->report_posttime = $this->setpostTime($reportDetail->created_at);
-        $reportDetail->created_at = Carbon::parse($reportDetail->created_at)->format('Y-m-d');
+        // $reportDetail->created_at = Carbon::parse($reportDetail->created_at)->format('Y-m-d');
 
         return view('admin.includes.layout', compact('title', 'page', 'reportDetail', 'js'));
     }
