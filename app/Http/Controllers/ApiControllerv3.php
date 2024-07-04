@@ -12537,8 +12537,8 @@ class ApiControllerv3 extends Controller
     }
     public function checkSubscription()
     {
-
         $userSubscription = UserSubscription::where('user_id', $this->user->id)->orderBy('id', 'DESC')->limit(1)->first();
+        dd($userSubscription);
         if ($userSubscription != null) {
             $app_id = $userSubscription->packageName;
             $product_id = $userSubscription->productId;
