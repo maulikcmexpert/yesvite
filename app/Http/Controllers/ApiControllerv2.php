@@ -12781,7 +12781,7 @@ class ApiControllerv2 extends Controller
                 })
                 ->count();
             $total_page = ceil($yesviteRegisteredUser / 10);
-            return response()->json(['status' => 1, 'message' => "Yesvite contact list", 'total_page' => $total_page, "data" => $yesviteUser, 'group' => $groupList]);
+            return response()->json(['status' => 1, 'message' => "Yesvite contact list", 'total_page' => $total_page,"total_count"=>$yesviteRegisteredUser ,"data" => $yesviteUser]);
         } catch (Exception  $e) {
             return response()->json(['status' => 0, 'message' => 'something went wrong']);
         }
