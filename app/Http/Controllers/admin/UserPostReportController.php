@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\admin;
-
+use App\DataTables\UserPostReportDataTable;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\{
@@ -18,82 +18,82 @@ class UserPostReportController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index(Request $request,UserPostReportDataTable $DataTable)
     {
 
-        if ($request->ajax()) {
-            $data = UserReportToPost::with(['events', 'users', 'event_posts'])->orderBy('id', 'desc');
+        // if ($request->ajax()) {
+        //     $data = UserReportToPost::with(['events', 'users', 'event_posts'])->orderBy('id', 'desc');
 
 
-            return Datatables::of($data)
-
-
-
-                ->addIndexColumn()
-
-                ->addColumn('number', function ($row) {
-
-                    static $count = 1;
-
-                    return $count++;
-                })
-
-                ->addColumn('username', function ($row) {
-
-                    return $row->users->firstname . ' ' . $row->users->lastname;
-                })
-
-                ->addColumn('event_name', function ($row) {
-
-                    return $row->events->event_name;
-                })
-
-
-                ->addColumn('post_type', function ($row) {
-
-                    if ($row->event_posts->post_type == '0') {
-
-                        return "<span class='text-info'>Normal</span>";
-                    }
-                    if ($row->event_posts->post_type == '1') {
-
-                        return "<span class='text-info'>Photos and videos</span>";
-                    }
-                    if ($row->event_posts->post_type == '2') {
-
-                        return "<span class='text-info'>Polls</span>";
-                    }
-                    if ($row->event_posts->post_type == '3') {
-
-                        return "<span class='text-info'>Recording</span>";
-                    }
-                })
-
-                ->addColumn('action', function ($row) {
-
-                    $cryptId = encrypt($row->id);
-
-                    // $edit_url = route('users.edit', $cryptId);
-
-                    // $delete_url = route('users.destroy', $cryptId);
-                    $view_url = route('user_post_report.show', $cryptId);
-
-                    $actionBtn = '<div class="action-icon">
-                        <a class="" href="' . $view_url . '" title="View"><i class="fa fa-eye"></i></a>';
-
-                    return $actionBtn;
-                })
-
-                ->rawColumns(['number', 'username', 'event_name', 'post_type', 'action'])
+        //     return Datatables::of($data)
 
 
 
-                ->make(true);
-        }
+        //         ->addIndexColumn()
+
+        //         ->addColumn('number', function ($row) {
+
+        //             static $count = 1;
+
+        //             return $count++;
+        //         })
+
+        //         ->addColumn('username', function ($row) {
+
+        //             return $row->users->firstname . ' ' . $row->users->lastname;
+        //         })
+
+        //         ->addColumn('event_name', function ($row) {
+
+        //             return $row->events->event_name;
+        //         })
+
+
+        //         ->addColumn('post_type', function ($row) {
+
+        //             if ($row->event_posts->post_type == '0') {
+
+        //                 return "<span class='text-info'>Normal</span>";
+        //             }
+        //             if ($row->event_posts->post_type == '1') {
+
+        //                 return "<span class='text-info'>Photos and videos</span>";
+        //             }
+        //             if ($row->event_posts->post_type == '2') {
+
+        //                 return "<span class='text-info'>Polls</span>";
+        //             }
+        //             if ($row->event_posts->post_type == '3') {
+
+        //                 return "<span class='text-info'>Recording</span>";
+        //             }
+        //         })
+
+        //         ->addColumn('action', function ($row) {
+
+        //             $cryptId = encrypt($row->id);
+
+        //             // $edit_url = route('users.edit', $cryptId);
+
+        //             // $delete_url = route('users.destroy', $cryptId);
+        //             $view_url = route('user_post_report.show', $cryptId);
+
+        //             $actionBtn = '<div class="action-icon">
+        //                 <a class="" href="' . $view_url . '" title="View"><i class="fa fa-eye"></i></a>';
+
+        //             return $actionBtn;
+        //         })
+
+        //         ->rawColumns(['number', 'username', 'event_name', 'post_type', 'action'])
+
+
+
+        //         ->make(true);
+        // }
         $title = 'Post Reports';
         $page = 'admin.post_reports.list';
         $js = 'admin.post_reports.post_reportsjs';
-        return view('admin.includes.layout', compact('title', 'page', 'js'));
+        return $DataTable->render('admin.includes.layout', compact('title', 'page', 'js'));
     }
 
     /**

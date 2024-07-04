@@ -29,8 +29,7 @@ class UserPostReportDataTable extends DataTable
             ->eloquent($query)
             ->addColumn('no', function () use (&$counter) {
                 return $counter++;
-            });
-
+            })
 
             ->addColumn('number', function ($row) {
 
@@ -124,7 +123,7 @@ class UserPostReportDataTable extends DataTable
     {
         return [
             Column::make('no')->title('No')->render('meta.row + meta.settings._iDisplayStart + 1;'),
-            Column::make('username')->title('Username(Reported By'),
+            Column::make('username')->title('Username(Reported By)'),
             Column::make('event_name')->title("Event Name"),
             Column::make('post_type')->title("Post Type"),
             Column::make('action')->title("Action"),
