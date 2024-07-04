@@ -12607,10 +12607,10 @@ class ApiControllerv3 extends Controller
         $result = curl_exec($ch);
         $result = json_decode($result, true);
 
-        if (!$result || !$result["access_token"]) {
-            //error  
-            // return;
-        }
+        // if (!$result || !$result["access_token"]) {
+        //     //error  
+        //     // return;
+        // }
 
 
         $ch = curl_init();
