@@ -49,5 +49,6 @@
 
     {{ $dataTable->table() }}
 
+    {{ $dataTable->scripts(attributes: ['type' => 'module']) }}
 
 </div>

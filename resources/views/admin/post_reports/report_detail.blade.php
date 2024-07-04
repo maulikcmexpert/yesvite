@@ -1050,6 +1050,9 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-0 mb-4">
+            <button type="button">delete</button>
+            </div>
         </div>
 
     </div>

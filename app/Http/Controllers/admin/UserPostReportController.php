@@ -12,7 +12,7 @@ use Yajra\DataTables\DataTables;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-
+use Yajra\DataTables\Services\DataTable;
 class UserPostReportController extends Controller
 {
     /**
