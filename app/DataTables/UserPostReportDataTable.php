@@ -35,15 +35,12 @@ class UserPostReportDataTable extends DataTable
                     $keyword = $this->request->get('search');
                     $keyword = $keyword['value'];
                     $query->where(function ($q) use ($keyword) {
-                        $q->orWhereHas('users', function ($q) use ($keyword) {
+                        $q->whereHas('users', function ($q) use ($keyword) {
                             $q->where('firstname', 'LIKE', "%{$keyword}%")
-                            ->orWhere('lastname', 'LIKE', "%{$keyword}%");
-
+                              ->orWhere('lastname', 'LIKE', "%{$keyword}%");
+                        })->orWhereHas('events', function ($q) use ($keyword) {
+                            $q->where('event_name', 'LIKE', "%{$keyword}%");
                         });
-                        $q->orWhereHas('events', function ($q) use ($keyword) {
-                            $q->Where('event_name', 'LIKE', "%{$keyword}%");
-                        })
-
                     });
                 }
             })
