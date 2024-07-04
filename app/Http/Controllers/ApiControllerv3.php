@@ -12547,17 +12547,22 @@ class ApiControllerv3 extends Controller
             $responce =  $this->set_android_iap($app_id, $product_id, $purchaseToken, 'subscribe');
 
             if (isset($responce) && !empty($responce)) {
-                $exp_date =  date('Y-m-d H:i:s', ($responce['expiryTimeMillis'] /  1000));
-                $current_date = date('Y-m-d H:i:s');
-                if (strtotime($current_date) > strtotime($exp_date)) {
-                    $userSubscription->endDate = $exp_date;
-                    $userSubscription->save();
-                    return response()->json(['status' => 0, 'message' => "subscription is not active", 'type' => 'Free']);
+                if (isset($responce['expiryTimeMillis']) && $responce['expiryTimeMillis'] != null) {
+                    $exp_date =  date('Y-m-d H:i:s', ($responce['expiryTimeMillis'] /  1000));
+                    $current_date = date('Y-m-d H:i:s');
+                    if (strtotime($current_date) > strtotime($exp_date)) {
+                        $userSubscription->endDate = $exp_date;
+                        $userSubscription->save();
+                        return response()->json(['status' => 0, 'message' => "subscription is not active", 'type' => 'Free']);
+                    }
                 }
                 if (isset($responce['userCancellationTimeMillis'])) {
                     $cancellationdate =  date('Y-m-d H:i:s', ($responce['userCancellationTimeMillis'] /  1000));
                     $userSubscription->cancellationdate = $cancellationdate;
                     $userSubscription->save();
+                    return response()->json(['status' => 0, 'message' => "subscription is not active", 'type' => 'Free']);
+                }
+                if (isset($responce['error'])) {
                     return response()->json(['status' => 0, 'message' => "subscription is not active", 'type' => 'Free']);
                 }
                 return response()->json(['status' => 1, 'message' => "subscription is active", 'type' => 'Pro-Year']);
@@ -12847,7 +12852,7 @@ class ApiControllerv3 extends Controller
                 ->orderBy('firstname')
                 ->count();
             $total_page = ceil($yesviteRegisteredUser / 10);
-            return response()->json(['status' => 1, 'message' => "Yesvite contact list", 'total_page' => $total_page,"total_count"=>$yesviteRegisteredUser, "data" => $yesvitecontactList]);
+            return response()->json(['status' => 1, 'message' => "Yesvite contact list", 'total_page' => $total_page, "total_count" => $yesviteRegisteredUser, "data" => $yesvitecontactList]);
         } catch (Exception  $e) {
             return response()->json(['status' => 0, 'message' => 'something went wrong']);
         }
