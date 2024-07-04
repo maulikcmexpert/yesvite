@@ -31,11 +31,11 @@
                             if (output == true) {
                                 Swal.fire({
                                     title: "Deleted!",
-                                    text: "Your Reported Post have",
+                                    text: "Your Reported Post has been deleted",
                                     icon: "success"
                                 }).then((result) => {
                                     if (result.isConfirmed) {
-                                        window.location.href ="{{URL::to('/admin/user_post_report')}}";
+                                        window.location.href = "{{URL::to('/admin/user_post_report')}}";
                                     }
                                 });
                             }
