@@ -41,8 +41,11 @@ class EventController extends Controller
             if ($status == 'upcoming_events') {
                 $data->where('start_date', '>', date('Y-m-d'));
             }
+            if ($status == 'upcoming_events') {
+                $data->where('start_date', '>', date('Y-m-d'));
+            }
 
-            if ($status == 'past_events') {
+            if ($event_type == 'past_events') {
                 $data->where('start_date', '<', date('Y-m-d'));
             }
             if ($status == 'draft_events') {
