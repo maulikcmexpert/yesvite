@@ -920,7 +920,10 @@
                                 @endif
                                 @if($postVal->post_type == '3')
                                 <div class="col-xl-6 col-lg-12 col-md-12">
-                                    <div class="aWrap" data-src="{{ asset('public/storage/event_post_recording/'.$postVal->post_recording)}}">
+                                    <audio controls src="{{ asset('public/storage/event_post_recording/'.$postVal->post_recording)}}">
+
+                                    </audio>
+                                    <!-- <div class="aWrap" data-src="{{ asset('public/storage/event_post_recording/'.$postVal->post_recording)}}">
                                         <button class="aPlay" disabled><span class="aPlayIco"><i class="fa fa-play"></i></span></button>
                                         <div class="range">
                                             <span class="under-ranger"></span>
@@ -936,7 +939,7 @@
                                                 <input class="aVolume" type="range" min="0" max="1" value="1" step="0.1" disabled><span class="change-range"></span>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 @endif
 
