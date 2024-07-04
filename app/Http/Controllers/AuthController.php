@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Hash;
 use Flasher\Prime\FlasherInterface;
 use Laravel\Passport\Token;
 use GuzzleHttp\Client;
-use Socialite;
+use Laravel\Socialite\Facades\Socialite;
 
 use Kreait\Laravel\Firebase\Facades\Firebase;
 
@@ -49,12 +49,13 @@ class AuthController extends Controller
     public function handleGoogleCallback()
     {
         try {
-
-            $user = Socialite::driver('google')->user();
-
-            return $user;
-        } catch (Exception $e) {
-            dd($e->getMessage());
+            $user = Socialite::driver('google')->stateless()->user();
+            // Find or create the user in your database
+            // Log the user in
+            // Redirect to the desired page
+        } catch (\Exception $e) {
+            // Handle the error (e.g., log the error, display an error message)
+            return redirect('/login')->withErrors(['msg' => 'Error logging in with Google: ' . $e->getMessage()]);
         }
     }
 
