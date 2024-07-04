@@ -1055,30 +1055,11 @@
 
             <div class="col-md-0 mb-4">
                 <button type="button" class="btn btn-danger DeleteReport_post" data-id="{{encrypt($reportDetail->id)}}" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                    <i class="ri-delete-bin-5-fill"></i>
+                    Delete
                 </button>
                 <!-- <a type="button" class="btn btn-danger" href="{{route('delete_post_report',['id' => encrypt($reportDetail->id) ])}}" data-id="{{$reportDetail->id}}" class="DeleteReport_post">Delete</a> -->
             </div>
         </div>
 
-    </div>
-</div>
-<div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Delete Prayer</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                    <i class="bi bi-x-circle"></i>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p class="pt-3">Are you sure you want to delete this Prayer ?</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn modal-primary-btn btn-primary save-btn" data-bs-dismiss="modal">Cancel</button>
-                <a href="#" class="btn modal-secondary-btn deleteUrl btn-danger save-btn">Delete</a>
-            </div>
-        </div>
     </div>
 </div>
