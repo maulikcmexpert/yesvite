@@ -12537,8 +12537,8 @@ class ApiControllerv3 extends Controller
     }
     public function checkSubscription()
     {
-
         $userSubscription = UserSubscription::where('user_id', $this->user->id)->orderBy('id', 'DESC')->limit(1)->first();
+
         if ($userSubscription != null) {
             $app_id = $userSubscription->packageName;
             $product_id = $userSubscription->productId;
@@ -12571,6 +12571,7 @@ class ApiControllerv3 extends Controller
     }
     public function set_android_iap($appid, $productID, $purchaseToken, $type)
     {
+        dd($purchaseToken);
         $ch = curl_init();
         $clientId = env('InGOOGLE_CLIENT_ID');
 
