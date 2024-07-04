@@ -21,22 +21,29 @@
                             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
                                 "content"),
                         },
-                        dataType: 'Json',
+                        // dataType: 'Json',
                         type: "GET",
-                        url: "{{route('delete_post_report')}}",
+                        url: "{{ route('delete_post_report') }}",
                         data: {
                             event_report_id: event_report_id
                         },
                         success: function(output) {
+                            if (output == true) {
+                                Swal.fire({
+                                    title: "Deleted!",
+                                    text: "Your Reported Post have",
+                                    icon: "success"
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        window.location.href ="{{URL::to('/admin/user_post_report')}}";
+                                    }
+                                });
+                            }
                         },
                         error: function() {}
                     });
 
-                    Swal.fire({
-                        title: "Deleted!",
-                        text: "Your file has been deleted.",
-                        icon: "success"
-                    });
+
                 }
             });
         })
