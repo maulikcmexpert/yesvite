@@ -13,6 +13,7 @@ use Illuminate\Support\Str;
 
 use Location;
 use FFMpeg;
+
 use App\Models\{
     User,
     Event,
@@ -8889,27 +8890,33 @@ class ApiControllerv2 extends Controller
 
 
 
-        if (isset($request->post_recording)) {
+        if ($request->hasFile('post_recording')) {
+            $record = $request->file('post_recording');
 
-            $record = $request->post_recording;
-
+            // Generate a unique file name
             $recordingName = time() . '_' . $record->getClientOriginalName();
 
+            // Move the uploaded file to the desired location
             $record->move(public_path('storage/event_post_recording'), $recordingName);
 
             echo "coming";
-            echo public_path('storage/event_post_recording') . $recordingName;
+
+            $inputPath = public_path('storage/event_post_recording') . '/' . $recordingName;
+            $outputPath = public_path('storage/event_post_recording') . '/' . pathinfo($recordingName, PATHINFO_FILENAME) . '.mp3';
+
+            // Convert the audio to MP3 using FFmpeg
             FFMpeg::fromDisk('public')
-                ->open(public_path('storage/event_post_recording'), $recordingName)
+                ->open($inputPath)
                 ->export()
                 ->toDisk('public')
                 ->inFormat(new \FFMpeg\Format\Audio\Mp3)
-                ->save(public_path('storage/event_post_recording'), $recordingName);
+                ->save($outputPath);
 
             echo "done";
             exit;
 
-            $creatEventPost->post_recording = $recordingName;
+            // Save the recording name to the database
+            $creatEventPost->post_recording = pathinfo($outputPath, PATHINFO_BASENAME);
         }
 
         $creatEventPost->post_privacy = $request->post_privacy;
