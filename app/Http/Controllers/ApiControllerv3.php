@@ -12607,21 +12607,24 @@ class ApiControllerv3 extends Controller
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $result = curl_exec($ch);
         $result = json_decode($result, true);
-        dd($result);
+
         // if (!$result || !$result["access_token"]) {
         //     //error  
         //     // return;
         // }
+        if (isset($result['access_token']) && $result['access_token'] != null) {
 
-
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $VALIDATE_URL . "?access_token=" . $result["access_token"]);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $result1 = curl_exec($ch);
-        $result1 = json_decode($result1, true);
-        if (!$result1 || (isset($result1["error"]) && $result1["error"] != null)) {
-            //error
-            // return;
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $VALIDATE_URL . "?access_token=" . $result["access_token"]);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            $result1 = curl_exec($ch);
+            $result1 = json_decode($result1, true);
+            if (!$result1 || (isset($result1["error"]) && $result1["error"] != null)) {
+                //error
+                // return;
+            }
+        } else {
+            $return1 = $result;
         }
 
         return $result1;
