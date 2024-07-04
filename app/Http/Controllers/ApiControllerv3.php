@@ -12606,7 +12606,7 @@ class ApiControllerv3 extends Controller
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $result = curl_exec($ch);
         $result = json_decode($result, true);
-
+        dd($result);
         // if (!$result || !$result["access_token"]) {
         //     //error  
         //     // return;
