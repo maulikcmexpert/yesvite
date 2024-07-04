@@ -12547,7 +12547,11 @@ class ApiControllerv3 extends Controller
             $responce =  $this->set_android_iap($app_id, $product_id, $purchaseToken, 'subscribe');
 
             if (isset($responce) && !empty($responce)) {
-                $exp_date =  date('Y-m-d H:i:s', ($responce['expiryTimeMillis'] /  1000));
+                if (isset($responce['expiryTimeMillis']) && $responce['expiryTimeMillis'] != null) {
+                    $exp_date =  date('Y-m-d H:i:s', ($responce['expiryTimeMillis'] /  1000));
+                } else {
+                    $exp_date = date('Y-m-d 00:00:00');
+                }
                 $current_date = date('Y-m-d H:i:s');
                 if (strtotime($current_date) > strtotime($exp_date)) {
                     $userSubscription->endDate = $exp_date;
@@ -12847,7 +12851,7 @@ class ApiControllerv3 extends Controller
                 ->orderBy('firstname')
                 ->count();
             $total_page = ceil($yesviteRegisteredUser / 10);
-            return response()->json(['status' => 1, 'message' => "Yesvite contact list", 'total_page' => $total_page,"total_count"=>$yesviteRegisteredUser, "data" => $yesvitecontactList]);
+            return response()->json(['status' => 1, 'message' => "Yesvite contact list", 'total_page' => $total_page, "total_count" => $yesviteRegisteredUser, "data" => $yesvitecontactList]);
         } catch (Exception  $e) {
             return response()->json(['status' => 0, 'message' => 'something went wrong']);
         }
