@@ -30,6 +30,21 @@ class UserPostReportDataTable extends DataTable
             ->addColumn('no', function () use (&$counter) {
                 return $counter++;
             })
+            ->filter(function ($query) {
+                if ($this->request->has('search')) {
+                    $keyword = $this->request->get('search');
+                    $keyword = $keyword['value'];
+                    $query->where(function ($q) use ($keyword) {
+                        $q->orWhereHas('users', function ($q) use ($keyword) {
+                            $q->where('firstname', 'LIKE', "%{$keyword}%")
+                            ->orWhere('lastname', 'LIKE', "%{$keyword}%");
+
+                        })
+                        ->orWhere('event_name', 'LIKE', "%{$keyword}%");
+
+                    });
+                }
+            })
 
             ->addColumn('number', function ($row) {
 
@@ -80,9 +95,7 @@ class UserPostReportDataTable extends DataTable
                 return $actionBtn;
             })
 
-            ->rawColumns(['number', 'username', 'event_name', 'post_type', 'action'])
-
-
+            ->rawColumns(['number', 'username', 'event_name', 'post_type', 'action']);
     }
 
     /**
