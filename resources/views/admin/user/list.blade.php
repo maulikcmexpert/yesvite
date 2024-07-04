@@ -38,3 +38,4 @@
     {{ $dataTable->table() }}
 
 </div>
+{{ $dataTable->scripts(attributes: ['type' => 'module']) }}

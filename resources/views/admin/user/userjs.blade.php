@@ -1,4 +1,3 @@
-{{ $dataTable->scripts(attributes: ['type' => 'module']) }}
 <script type="text/javascript">
     $(function() {
 
