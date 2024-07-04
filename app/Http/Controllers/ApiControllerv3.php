@@ -12599,7 +12599,7 @@ class ApiControllerv3 extends Controller
             '&client_id=' . $clientId .
             '&redirect_uri=' . $redirectUri .
             '&grant_type=refresh_token';
-        dd($input_fields);
+
         //Request to google oauth for authentication
         curl_setopt($ch, CURLOPT_URL, $TOKEN_URL);
         curl_setopt($ch, CURLOPT_POST, 1);
@@ -12607,7 +12607,7 @@ class ApiControllerv3 extends Controller
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $result = curl_exec($ch);
         $result = json_decode($result, true);
-
+        dd($result);
         // if (!$result || !$result["access_token"]) {
         //     //error  
         //     // return;
