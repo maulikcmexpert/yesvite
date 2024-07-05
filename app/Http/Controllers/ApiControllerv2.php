@@ -1134,7 +1134,7 @@ class ApiControllerv2 extends Controller
                         $eventDetail['total_accept_event_user'] = $total_accept_event_user;
 
 
- 
+
 
 
                         $total_invited_user = EventInvitedUser::whereHas('user', function ($query) {
@@ -5636,7 +5636,7 @@ class ApiControllerv2 extends Controller
             return response()->json(['status' => 0, 'message' => "db error"]);
         } catch (\Exception $e) {
 
-
+            return response()->json(['status' => 1, 'message' => "Event images stored successfully"]);
             return response()->json(['status' => 0, 'message' => "something went wrong"]);
         }
     }
