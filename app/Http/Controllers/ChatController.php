@@ -120,9 +120,11 @@ class ChatController extends Controller
                         }
                     }
                 } else {
-                    $reference = $this->firebase->getReference('overview/' . $message['contactId'] . '/' . $message['conversationId']);
-                    if ($reference) {
-                        $reference->update($updateData);
+                    if (isset($message['contactId'])) {
+                        $reference = $this->firebase->getReference('overview/' . $message['contactId'] . '/' . $message['conversationId']);
+                        if ($reference) {
+                            $reference->update($updateData);
+                        }
                     }
                 }
             }
