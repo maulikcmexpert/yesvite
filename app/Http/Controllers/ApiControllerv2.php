@@ -6272,10 +6272,8 @@ class ApiControllerv2 extends Controller
 
     public function eventPotluck(Request $request)
     {
-
         $user  = Auth::guard('api')->user();
         $rawData = $request->getContent();
-
         $input = json_decode($rawData, true);
         if ($input == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
@@ -6283,8 +6281,6 @@ class ApiControllerv2 extends Controller
         $validator = Validator::make($input, [
             'event_id' => ['required', 'exists:events,id'],
         ]);
-
-
         if ($validator->fails()) {
 
             return response()->json([
@@ -7593,7 +7589,6 @@ class ApiControllerv2 extends Controller
             });
         $checkEventOwner = Event::where(['id' => $input['event_id'], 'user_id' => $user->id])->first();
         if ($checkEventOwner == null) {
-
             $eventPostList->where(function ($query) use ($user, $input) {
                 $query->orWhereHas('event.event_invited_user', function ($subQuery) use ($user, $input) {
                     $subQuery->whereHas('user', function ($userQuery) {
