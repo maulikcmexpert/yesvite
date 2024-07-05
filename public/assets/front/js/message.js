@@ -1352,7 +1352,11 @@ function createMessageElement(key, messageData, isGroup) {
                 <div class="media-msg">
                 ${musicPlayer(messageData?.url)}
                 <span>${messageData?.data != "" ? messageData.data : ""}</span>
-                
+                ${
+                    isSender
+                        ? `<span class="seenStatus ${seenStatus}"></span>`
+                        : ""
+                } 
                 ${reaction}
                 </div>
                 ${emoji}

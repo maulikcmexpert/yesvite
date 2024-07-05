@@ -725,9 +725,23 @@ ul.member-lists li:last-child{
 }
 
 .msg-body ul li.receiver div.media-msg .media-text{
-    margin-right: 30px;
+    margin-right: 0px;
     margin-top: 0px;
     display: inline-block;
+    word-wrap: break-word;
+    word-break: break-all;
+    text-align: left;
+    margin-top: 11px;
+}
+
+.msg-body ul li.sender div.media-msg .media-text{
+    margin-right: 0px;
+    margin-top: 0px;
+    display: inline-block;
+    word-wrap: break-word;
+    word-break: break-all;
+    text-align: left;
+    margin-top: 11px;
 }
 
 .msg-body .media-msg span{
@@ -759,9 +773,21 @@ ul.member-lists li:last-child{
     position: relative;
 }
 
+.msg-body ul li.sender .media-msg-inline div.media-msg{
+   display: inherit;
+}
+
 .msg-body ul li.sender .media-msg-inline{
-  display: flex;
-  align-items: center;
+  position: relative;
+  max-width: 317px;
+  display: inherit;
+}
+
+.msg-body ul li.sender .media-msg-inline .reaction-icon{
+    position: absolute;
+    right: -30px;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .msg-body ul li.sender div.media-msg video{
@@ -1632,13 +1658,13 @@ ul.member-lists li:last-child{
     }
 
     .msg-body ul li.receiver div img{
-        width: 150px;
-        height: 150px;
+        width: 100%;
+        height: 155px;
     }
 
     .msg-body ul li.receiver div.media-msg{
         width: 220px;
-        height: 220px;
+        /* height: 220px; */
     }
 
     .msg-body ul li.sender div img{
@@ -1648,7 +1674,7 @@ ul.member-lists li:last-child{
 
     .msg-body ul li.sender div.media-msg{
         width: 220px;
-        height: 220px;
+        /* height: 220px; */
     }
 
     .msg-body ul li.sender,
@@ -1669,6 +1695,10 @@ ul.member-lists li:last-child{
     .msg-body ul li.sender div.media-msg video {
         width: 100%;
         height: 100%;
+    }
+
+    .msg-body ul li.sender .media-msg-inline{
+        max-width: 220px;
     }
 }
 
