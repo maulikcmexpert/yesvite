@@ -620,7 +620,7 @@ $(document).on("click", ".msg-list", async function () {
         await updateChatfromGroup(conversationId);
         //  $(".new-member").removeClass("d-none");
     } else {
-        // $(".new-member").addClass("d-none");
+        $(".new-member").addClass("d-none");
 
         const userId = $(this).attr("data-userid");
         $(".selected_message").val(userId);
