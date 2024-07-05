@@ -45,7 +45,6 @@ function formatDate(timestamp) {
         date.getMonth(),
         date.getDate()
     );
-
     const diffTime = nowMidnight - dateMidnight;
     const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
 
