@@ -25,7 +25,7 @@ class EventController extends Controller
             $eventDate = $request->input('filter');
             $status = $request->input('status');
             $event_type = $request->input('event_type');
-
+            
             $data = Event::with(['user'])->whereHas('user', function ($query) use ($event_type) {
                 if ($event_type == 'normal_user_event') {
                     $query->where('account_type', '0');
@@ -34,10 +34,12 @@ class EventController extends Controller
                     $query->where('account_type', '1');
                 }
             })->orderBy('id', 'desc');
-
-            if ($eventDate) {
+            
+            if ($eventDate && $status != 'past_events' ) {
+                
                 $data->where('start_date', $eventDate);
             }
+
             if ($status == 'upcoming_events') {
                 $data->where('start_date', '>', date('Y-m-d'));
             }
@@ -45,7 +47,8 @@ class EventController extends Controller
                 $data->where('start_date', '>', date('Y-m-d'));
             }
 
-            if ($event_type == 'past_events') {
+            if ($status == 'past_events') {
+                
                 $data->where('start_date', '<', date('Y-m-d'));
             }
             if ($status == 'draft_events') {
@@ -56,11 +59,8 @@ class EventController extends Controller
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('number', function ($row) {
-                    // Get the current page and items per page
                     $page = request()->get('start') / request()->get('length') + 1;
                     $itemsPerPage = request()->get('length');
-
-                    // Calculate the row number
                     static $count = 0;
                     return ++$count + ($page - 1) * $itemsPerPage;
                 })

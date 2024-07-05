@@ -255,7 +255,6 @@
             var status = $('#event_status option:selected').val();
             var type = $('#event_type option:selected').val();
 
-// alert(eventDate);
             var table = $('#events_table').DataTable();
 
             if ($.fn.DataTable.isDataTable('#events_table')) {
