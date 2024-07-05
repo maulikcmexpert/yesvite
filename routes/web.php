@@ -109,7 +109,7 @@ Route::middleware('checkUserExist')->group(function () {
 
 Route::controller(AuthController::class)->group(function () {
     Route::get('google/auth', 'redirectToGoogle');
-    Route::get('google/callback', 'handleGoogleCallback');
+    Route::get('google/callback', 'handleGoogleCallback')->name('google/callback');
 
     Route::get('login', 'create')->name('auth.login')->middleware('isAuthenticate');
     Route::post('login', 'checkLogin')->name('auth.checkLogin');
@@ -162,7 +162,7 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 Route::fallback(function () {
-    $title ="No Found";
+    $title = "No Found";
 
     $page = 'not_found';
 
