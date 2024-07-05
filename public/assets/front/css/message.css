@@ -450,6 +450,7 @@ ul.chat-list li:last-child{
     outline: 0;
     font-size: 15px;
     margin-right: 10px;
+    padding-right: 15px !important;
 }
 
 .change-group-name .cmn-btn{
@@ -752,7 +753,15 @@ ul.member-lists li:last-child{
     -o-border-radius: 20px 0px 20px 20px;
     display: inline-block;
     max-width: 317px;
-    margin-left: auto;
+    /* margin-left: auto; */
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.msg-body ul li.sender .media-msg-inline{
+  display: flex;
+  align-items: center;
 }
 
 .msg-body ul li.sender div.media-msg video{
@@ -905,7 +914,7 @@ ul.member-lists li:last-child{
 }
 
 .modal-body .inbox{
-    background-color: #F8F9FD;
+    background-color: #e9e9ed;
     padding: 10px 24px;
     align-items: flex-start !important;
 }

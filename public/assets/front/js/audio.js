@@ -4,7 +4,6 @@ export function initializeAudioPlayer(player) {
         return; // If it does, return early and do nothing
     }
     player.classList.add("initialized");
-    console.log("audio updated");
 
     const audioPlayer = player.querySelector(".audio_player");
 
@@ -60,8 +59,7 @@ export function initializeAudioPlayer(player) {
             const progressPercent = (audio.currentTime / audio.duration) * 100;
             progressBar.style.width = `${progressPercent}%`;
             currentTime.textContent = displayTime(audio.currentTime);
-            console.log(audio.duration);
-            console.log(audio.currentTime);
+
             if (audio.duration != NaN && audio.duration != Infinity)
                 duration.textContent = " - " + displayTime(audio.duration);
         }
@@ -78,7 +76,6 @@ export function initializeAudioPlayer(player) {
     function displayDuration() {
         //    duration.textContent = displayTime(audio.duration);
     }
-    console.log(audio);
     if (audio.readyState > 0) {
         displayDuration();
     } else {

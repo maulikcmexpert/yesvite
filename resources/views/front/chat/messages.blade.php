@@ -334,7 +334,7 @@ use Carbon\Carbon;
 
                                 <input type="hidden" class="file_info">
                             </div>
-                            <div class="position-relative audio-music-player">
+                            <div class="position-relative audio-music-player" id="musicContainer">
                                 <div class="audio-container" id="audioContainer">
                                             
                                         
