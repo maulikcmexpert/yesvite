@@ -365,7 +365,7 @@ function removeSelectedMsg() {
 // Function to handle changes to existing conversations in the overview
 function handleConversationChange(snapshot) {
     const updatedConversation = snapshot.val();
-    console.log("Conversation changed:", updatedConversation);
+
     handleNewConversation(snapshot);
 }
 
