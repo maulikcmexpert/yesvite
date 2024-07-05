@@ -92,13 +92,11 @@ function getGuestPendingRsvpCount($eventId)
 
 function sendNotification($notificationType, $postData)
 {
-    dd($postData);
+
     //'invite', 'upload_post', 'like_post', 'comment', 'reply', 'poll', 'rsvp'
     $senderData = User::where('id', $postData['sender_id'])->first();
-
     if ($notificationType == 'owner_notify') {
         $event = Event::with('event_image', 'event_schedule')->where('id', $postData['event_id'])->first();
-
         $event_time = "";
         if ($event->event_schedule->isNotEmpty()) {
 
@@ -393,6 +391,7 @@ function sendNotification($notificationType, $postData)
     if ($notificationType == 'upload_post' || $notificationType == 'photos') {
 
         // post notify to  owner//
+        dd($postData);
         $ownerEvent = Event::with('event_settings')->where('id', $postData['event_id'])->first();
         $postControl = PostControl::with('event_posts')->where(['event_id' => $ownerEvent->id, 'user_id' => $ownerEvent->user_id, 'post_control' => 'mute'])->get();
         $postOwneruserId = [];
