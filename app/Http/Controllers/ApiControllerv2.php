@@ -6304,7 +6304,7 @@ class ApiControllerv2 extends Controller
 
             $checkEventOwner = Event::FindOrFail($input['event_id']);
             $potluckDetail['total_potluck_categories'] = count($eventpotluckData);
-            $potluckDetail['is_event_owner'] = ($checkEventOwner->user_id == $eventpotluckData->event_potluck_category_item->user_id) ? 1 : 0;
+            $potluckDetail['is_event_owner'] = ($checkEventOwner->user_id == (isset($eventpotluckData[0]->event_potluck_category_item[0]->user_id) && $eventpotluckData[0]->event_potluck_category_item[0]->user_id != null) ? $eventpotluckData[0]->event_potluck_category_item[0]->user_id : 0) ? 1 : 0;
             $potluckDetail['potluck_items'] = $totalItems;
             $potluckDetail['spoken_for'] = $spoken_for;
             $potluckDetail['left'] = $totalItems - $spoken_for;
