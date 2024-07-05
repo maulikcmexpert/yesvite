@@ -6297,14 +6297,12 @@ class ApiControllerv2 extends Controller
                 }]);
             }])->withCount('event_potluck_category_item')->where('event_id', $input['event_id'])->get();
 
-            // dd($eventpotluckData[0]->event_potluck_category_item[0]->user_id);
-
             $totalItems = EventPotluckCategoryItem::where('event_id', $input['event_id'])->sum('quantity');
             $spoken_for = UserPotluckItem::where('event_id', $input['event_id'])->sum('quantity');
 
             $checkEventOwner = Event::FindOrFail($input['event_id']);
             $potluckDetail['total_potluck_categories'] = count($eventpotluckData);
-            $potluckDetail['is_event_owner'] = ($checkEventOwner->user_id == (isset($eventpotluckData[0]->event_potluck_category_item[0]->user_id) && $eventpotluckData[0]->event_potluck_category_item[0]->user_id != null) ? $eventpotluckData[0]->event_potluck_category_item[0]->user_id : 0) ? 1 : 0;
+            $potluckDetail['is_event_owner'] = ($checkEventOwner->user_id == $user->id) ? 1 : 0;
             $potluckDetail['potluck_items'] = $totalItems;
             $potluckDetail['spoken_for'] = $spoken_for;
             $potluckDetail['left'] = $totalItems - $spoken_for;
@@ -6354,7 +6352,7 @@ class ApiControllerv2 extends Controller
 
                             $potluckItem['id'] =  $itemValue->id;
                             $potluckItem['description'] =  $itemValue->description;
-                            $potluckItem['is_host'] = ($checkEventOwner->user_id == $user->id) ? 1 : 0;
+                            $potluckItem['is_host'] = ($checkEventOwner->user_id == $itemValue->user_id) ? 1 : 0;
                             $potluckItem['requested_by'] =  $itemValue->users->firstname . ' ' . $itemValue->users->lastname;
                             $potluckItem['quantity'] =  $itemValue->quantity;
                             $spoken_for = UserPotluckItem::where('event_potluck_item_id', $itemValue->id)->sum('quantity');
@@ -6364,7 +6362,7 @@ class ApiControllerv2 extends Controller
                             foreach ($itemValue->user_potluck_items as $itemcarryUser) {
                                 $userPotluckItem['id'] = $itemcarryUser->id;
                                 $userPotluckItem['user_id'] = $itemcarryUser->user_id;
-                                $userPotluckItem['is_host'] = ($checkEventOwner->user_id == $user->id) ? 1 : 0;
+                                $userPotluckItem['is_host'] = ($checkEventOwner->user_id == $itemValue->user_id) ? 1 : 0;
                                 $userPotluckItem['profile'] =  empty($itemcarryUser->users->profile) ?  "" : asset('public/storage/profile/' . $itemcarryUser->users->profile);
                                 $userPotluckItem['first_name'] = $itemcarryUser->users->firstname;
                                 $userPotluckItem['quantity'] = (!empty($itemcarryUser->quantity) || $itemcarryUser->quantity != NULL) ? $itemcarryUser->quantity : "0";
