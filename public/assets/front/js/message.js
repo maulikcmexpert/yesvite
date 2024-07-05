@@ -615,6 +615,7 @@ $(document).on("click", ".msg-list", async function () {
     $("#isGroup").val(isGroup);
     $(".member-lists").html("");
     $(".send-message").val("");
+    $("#startRecording").attr("style", "display:inline-block;");
 
     if (isGroup == true || isGroup == "true") {
         await updateChatfromGroup(conversationId);
