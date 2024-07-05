@@ -33,8 +33,8 @@
         });
 
         $(document).on("click", ".remove", function() {
-            alert($(this).parent().parent().html());
-            console.log($(this).parent().parent().html());
+
+            console.log($(this).parent().parent().parent().html());
             // $(this).parent().parent().remove();
         });
 
