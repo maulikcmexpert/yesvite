@@ -396,6 +396,7 @@ function sendNotification($notificationType, $postData)
 
         // post notify to  owner//
         $ownerEvent = Event::with('event_settings')->where('id', $postData['event_id'])->first();
+        dd($ownerEvent);
         $postControl = PostControl::with('event_posts')->where(['event_id' => $ownerEvent->id, 'user_id' => $ownerEvent->user_id, 'post_control' => 'mute'])->get();
         $postOwneruserId = [];
 
