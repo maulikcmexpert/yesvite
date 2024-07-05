@@ -34,8 +34,8 @@
 
         $(document).on("click", ".remove", function() {
 
-            console.log($(this).parent().parent().parent().html());
-            // $(this).parent().parent().remove();
+            // console.log($(this).parent().parent().parent().html());
+            $(this).parent().parent().parent().remove();
         });
 
         $(document).ready(function() {
