@@ -81,8 +81,12 @@ class ChatController extends Controller
         // Create a new user node with the userId
         $userRef = $this->usersReference->getChild((string)$userId);
         $userSnapshot = $userRef->getValue();
+        $updateFirebase = false;
 
         if ($userSnapshot) {
+            if ($userSnapshot['userName'] != $userData->firstname . ' ' . $userData->lastname || $userSnapshot['userProfile'] != url('/public/storage/profile/' . $userData->profile)) {
+                $updateFirebase = true;
+            }
             // User exists, update the existing data
             $userRef->update($updateData);
         } else {
@@ -92,6 +96,37 @@ class ChatController extends Controller
 
         $reference = $this->firebase->getReference('overview/' . $userId);
         $messages = $reference->getValue();
+        $updateData = [
+            'contactName' => $userName,
+            'receiverProfile' => url('/public/storage/profile/' . $userData->profile)
+        ];
+        $updateGroupData = [
+            'name' => $userName,
+            'image' => url('/public/storage/profile/' . $userData->profile)
+        ];
+        if ($updateFirebase == true) {
+            foreach ($messages as $message) {
+                if (isset($message['group'])  && ($message['group'] == "true" || $message['group'] == true)) {
+                    $reference = $this->firebase->getReference('Groups/' . $message['conversationId'] . '/groupInfo/profiles');
+                    $profiles = $reference->getValue();
+                    if ($profiles) {
+
+                        foreach ($profiles as $key => $profile) {
+                            if ($profile['id'] == $userId) {
+                                $reference = $this->firebase->getReference('Groups/' . $message['conversationId'] . '/groupInfo/profiles/' . $key);
+                                $reference->update($updateGroupData);
+                                break;
+                            }
+                        }
+                    }
+                } else {
+                    $reference = $this->firebase->getReference('overview/' . $message['contactId'] . '/' . $message['conversationId']);
+                    if ($reference) {
+                        $reference->update($updateData);
+                    }
+                }
+            }
+        }
         if ($messages) {
             uasort($messages, function ($a, $b) {
                 // Check if either of the items has 'isPin' set to '1'
