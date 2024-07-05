@@ -21,6 +21,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
 use Flasher\Prime\FlasherInterface;
+use Google_Client;
 use Laravel\Passport\Token;
 use GuzzleHttp\Client;
 use Laravel\Socialite\Facades\Socialite;
@@ -46,17 +47,33 @@ class AuthController extends Controller
     {
     }
 
-    public function handleGoogleCallback()
+    public function redirectToGoogle()
     {
-        try {
-            $user = Socialite::driver('google')->stateless()->user();
-            // Find or create the user in your database
-            // Log the user in
-            // Redirect to the desired page
-        } catch (\Exception $e) {
-            // Handle the error (e.g., log the error, display an error message)
-            return redirect('/login')->withErrors(['msg' => 'Error logging in with Google: ' . $e->getMessage()]);
-        }
+        $client = new Google_Client();
+        $client->setAuthConfig(storage_path('app/google-play-service-account.json'));
+        $client->addScope('https://www.googleapis.com/auth/androidpublisher');
+        $client->setRedirectUri(route('google/callback'));
+
+        $authUrl = $client->createAuthUrl();
+        return redirect($authUrl);
+    }
+
+    public function handleGoogleCallback(Request $request)
+    {
+        $client = new Google_Client();
+        $client->setAuthConfig(storage_path('app/google-play-service-account.json'));
+        $client->setRedirectUri(route('google/callback'));
+
+        $client->authenticate($request->input('code'));
+        $accessToken = $client->getAccessToken();
+
+        // Save the refresh token
+        $refreshToken = $accessToken['refresh_token'];
+        dd($refreshToken);
+        // Save this refresh token securely, e.g., in the database
+        // User::update(['google_refresh_token' => $refreshToken]);
+
+        return 'Refresh token saved!';
     }
 
     /**
