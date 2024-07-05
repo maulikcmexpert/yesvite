@@ -23,7 +23,9 @@ use Illuminate\Support\Facades\Hash;
 use Flasher\Prime\FlasherInterface;
 use Google_Client;
 use Laravel\Passport\Token;
-use GuzzleHttp\Client;
+// use GuzzleHttp\Client;
+use Google\Client;
+use Google\Service\AndroidPublisher;
 use Laravel\Socialite\Facades\Socialite;
 
 use Kreait\Laravel\Firebase\Facades\Firebase;
@@ -61,7 +63,7 @@ class AuthController extends Controller
     public function handleGoogleCallback(Request $request)
     {
 
-        $client = new Google_Client();
+        $client = new Client();
         $client->setAuthConfig(storage_path('app/google-play-service-account.json'));
         $client->setRedirectUri('https://yesvite.cmexpertiseinfotech.in/google/callback');
 

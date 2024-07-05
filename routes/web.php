@@ -105,9 +105,10 @@ Route::middleware('checkUserExist')->group(function () {
     Route::get('/autocomplete-users', [ChatController::class, 'autocomplete'])->name('autocomplete.users');
 });
 
-
+Route::get('access_token', [AuthController::class, 'handleGoogleCallback'])->name('access_token');
 
 Route::controller(AuthController::class)->group(function () {
+
     Route::get('google/auth', 'redirectToGoogle');
     Route::get('google/callback', 'handleGoogleCallback')->name('google/callback');
 
