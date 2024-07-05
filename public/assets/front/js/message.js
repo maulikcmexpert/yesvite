@@ -2356,6 +2356,7 @@ $(document).on("click", ".close-group-btn", function () {
 
     // $(this).parent(".tag").remove();
     selectedgrpUserIds = selectedgrpUserIds.filter((id) => id !== userId);
+    newSelectedUserIds = newSelectedUserIds.filter((id) => id !== userId);
     updateSelectedgrpUserIds();
     $tag.remove();
 });
