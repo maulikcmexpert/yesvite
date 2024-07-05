@@ -62,12 +62,12 @@ class AuthController extends Controller
     {
 
         $client = new Google_Client();
-        dd($client);
         $client->setAuthConfig(storage_path('app/google-play-service-account.json'));
         $client->setRedirectUri('https://yesvite.cmexpertiseinfotech.in/google/callback');
 
         $client->authenticate($request->input('code'));
         $accessToken = $client->getAccessToken();
+        dd($accessToken);
 
         // Save the refresh token
         $refreshToken = $accessToken['refresh_token'];
