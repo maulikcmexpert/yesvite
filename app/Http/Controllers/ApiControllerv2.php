@@ -5717,7 +5717,7 @@ class ApiControllerv2 extends Controller
         $validator = Validator::make($input, [
             'event_id' => ['required', 'exists:events,id', new CheckUserEvent],
             'category' => 'required|unique:event_potluck_categories,category,NULL,id,event_id,' . $input['event_id'],
-            'quantity' => ['required', 'numeric']
+            'quantity' => ['required',]
         ]);
 
         if ($validator->fails()) {
