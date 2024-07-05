@@ -6296,7 +6296,7 @@ class ApiControllerv2 extends Controller
                     $subquery->with('users')->sum('quantity');
                 }]);
             }])->withCount('event_potluck_category_item')->where('event_id', $input['event_id'])->get();
-
+            dd($eventpotluckData);
             $totalItems = EventPotluckCategoryItem::where('event_id', $input['event_id'])->sum('quantity');
             $spoken_for = UserPotluckItem::where('event_id', $input['event_id'])->sum('quantity');
 
