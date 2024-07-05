@@ -7667,6 +7667,7 @@ class ApiControllerv2 extends Controller
                     $checkUserRsvp = checkUserAttendOrNot($value->event_id, $value->user->id);
                     $ischeckEventOwner = Event::where(['id' => $input['event_id'], 'user_id' => $value->user->id])->first();
                     $postControl = PostControl::where(['user_id' => $user->id, 'event_id' => $input['event_id'], 'event_post_id' => $value->id])->first();
+
                     if ($postControl != null) {
                         if ($postControl->post_control == 'hide_post') {
                             continue;
@@ -7747,13 +7748,12 @@ class ApiControllerv2 extends Controller
             if (count($results) != 0) {
                 foreach ($results as $value) {
 
-
                     $checkUserRsvp = checkUserAttendOrNot($value->event_id, $value->user->id);
 
                     $ischeckEventOwner = Event::where(['id' => $input['event_id'], 'user_id' => $value->user->id])->first();
 
+                    // dd($value);
                     $postControl = PostControl::where(['user_id' => $user->id, 'event_id' => $input['event_id'], 'event_post_id' => $value->id])->first();
-
                     // if ($postControl != null) {
 
                     //     if ($postControl->post_control == 'hide_post') {
