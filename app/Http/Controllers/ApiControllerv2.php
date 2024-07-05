@@ -6272,10 +6272,8 @@ class ApiControllerv2 extends Controller
 
     public function eventPotluck(Request $request)
     {
-
         $user  = Auth::guard('api')->user();
         $rawData = $request->getContent();
-
         $input = json_decode($rawData, true);
         if ($input == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
@@ -6283,8 +6281,6 @@ class ApiControllerv2 extends Controller
         $validator = Validator::make($input, [
             'event_id' => ['required', 'exists:events,id'],
         ]);
-
-
         if ($validator->fails()) {
 
             return response()->json([
@@ -6301,12 +6297,14 @@ class ApiControllerv2 extends Controller
                 }]);
             }])->withCount('event_potluck_category_item')->where('event_id', $input['event_id'])->get();
 
+            dd($eventpotluckData[0]->event_potluck_category_item[0]->user_id);
+
             $totalItems = EventPotluckCategoryItem::where('event_id', $input['event_id'])->sum('quantity');
             $spoken_for = UserPotluckItem::where('event_id', $input['event_id'])->sum('quantity');
 
             $checkEventOwner = Event::FindOrFail($input['event_id']);
             $potluckDetail['total_potluck_categories'] = count($eventpotluckData);
-            $potluckDetail['is_event_owner'] = ($checkEventOwner->user_id == $user->id) ? 1 : 0;
+            $potluckDetail['is_event_owner'] = ($checkEventOwner->user_id == $eventpotluckData->event_potluck_category_item->user_id) ? 1 : 0;
             $potluckDetail['potluck_items'] = $totalItems;
             $potluckDetail['spoken_for'] = $spoken_for;
             $potluckDetail['left'] = $totalItems - $spoken_for;
@@ -7593,7 +7591,6 @@ class ApiControllerv2 extends Controller
             });
         $checkEventOwner = Event::where(['id' => $input['event_id'], 'user_id' => $user->id])->first();
         if ($checkEventOwner == null) {
-
             $eventPostList->where(function ($query) use ($user, $input) {
                 $query->orWhereHas('event.event_invited_user', function ($subQuery) use ($user, $input) {
                     $subQuery->whereHas('user', function ($userQuery) {
