@@ -1134,7 +1134,7 @@ class ApiControllerv2 extends Controller
                         $eventDetail['total_accept_event_user'] = $total_accept_event_user;
 
 
-
+ 
 
 
                         $total_invited_user = EventInvitedUser::whereHas('user', function ($query) {
