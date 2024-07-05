@@ -6297,7 +6297,7 @@ class ApiControllerv2 extends Controller
                 }]);
             }])->withCount('event_potluck_category_item')->where('event_id', $input['event_id'])->get();
 
-            dd($eventpotluckData->event_potluck_category_item);
+            dd($eventpotluckData[0]);
 
             $totalItems = EventPotluckCategoryItem::where('event_id', $input['event_id'])->sum('quantity');
             $spoken_for = UserPotluckItem::where('event_id', $input['event_id'])->sum('quantity');
