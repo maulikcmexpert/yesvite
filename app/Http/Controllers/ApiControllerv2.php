@@ -12,7 +12,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 use Location;
-use FFMpeg;
+use FFMpeg\FFMpeg;
+use FFMpeg\Format\Audio\Mp3;
+use FFMpeg\Exception\RuntimeException;
 
 use App\Models\{
     User,
@@ -8835,123 +8837,81 @@ class ApiControllerv2 extends Controller
     // Event Post Module //
 
     public function createPost(Request $request)
-
     {
-
         $user  = Auth::guard('api')->user();
-
-
-
         $input = $request->all();
-
-
-
         $validator = Validator::make($input, [
-
             'event_id' => ['required', 'exists:events,id'],
-
             'post_privacy' => ['required', 'in:1,2,3,4'],
-
             'post_type' => ['required', 'in:0,1,2,3'],
-
             'commenting_on_off' => ['required', 'in:0,1'],
-
         ]);
 
-
-
         if ($validator->fails()) {
-
             return response()->json([
                 'status' => 0,
                 'message' => $validator->errors()->first(),
-
-
             ]);
         }
-
         // try {
         DB::beginTransaction();
-
-
-
         $creatEventPost = new EventPost;
-
-
-
         $creatEventPost->event_id = $request->event_id;
-
         $creatEventPost->user_id = $user->id;
-
         $creatEventPost->post_message = $request->post_message;
 
-
-
         if ($request->hasFile('post_recording')) {
-            $record = $request->file('post_recording');
-
-            // Generate a unique file name
+            $record = $request->post_recording;
             $recordingName = time() . '_' . $record->getClientOriginalName();
-
-            // Move the uploaded file to the desired location
             $record->move(public_path('storage/event_post_recording'), $recordingName);
-
-            echo "coming";
-
-            $inputPath = public_path('storage/event_post_recording') . '/' . $recordingName;
-            $outputPath = public_path('storage/event_post_recording') . '/' . pathinfo($recordingName, PATHINFO_FILENAME) . '.mp3';
-
-            // Convert the audio to MP3 using FFmpeg
-            FFMpeg::fromDisk('public')
-                ->open($inputPath)
-                ->export()
-                ->toDisk('public')
-                ->inFormat(new \FFMpeg\Format\Audio\Mp3)
-                ->save($outputPath);
-
-            echo "done";
-            exit;
-
-            // Save the recording name to the database
-            $creatEventPost->post_recording = pathinfo($outputPath, PATHINFO_BASENAME);
+            $creatEventPost->post_recording = $recordingName;
         }
 
+        // if ($request->hasFile('post_recording')) {
+        //     try {
+        //         $record = $request->file('post_recording');
+
+        //         // Generate a unique file name
+        //         $recordingName = time() . '_' . $record->getClientOriginalName();
+
+        //         // Move the uploaded file to the desired location
+        //         $record->move(public_path('storage/event_post_recording'), $recordingName);
+
+
+        //         $inputPath = public_path('storage/event_post_recording') . '/' . $recordingName;
+        //         $outputPath = public_path('storage/event_post_recording/new/') . '/' . pathinfo($recordingName . 'new_', PATHINFO_FILENAME) . '.mp3';
+
+
+        //         // Convert the audio to MP3 using FFmpeg
+        //         $ffmpeg = FFMpeg::create();
+        //         $audio = $ffmpeg->open($inputPath);
+
+        //         $format = new Mp3();
+        //         $audio->save($format, $outputPath);
+
+        //         // Save the recording name to the database
+        //         $creatEventPost->post_recording = pathinfo($outputPath, PATHINFO_BASENAME);
+        //     } catch (RuntimeException $e) {
+        //         // Log the error message
+
+        //         Log::error('FFmpeg error: ' . $e->getMessage());
+        //         echo 'Error: ' . $e->getMessage();
+        //     }
+        // }
+
         $creatEventPost->post_privacy = $request->post_privacy;
-
         $creatEventPost->post_type = $request->post_type;
-
         $creatEventPost->commenting_on_off = $request->commenting_on_off;
         $creatEventPost->is_in_photo_moudle = $request->is_in_photo_moudle;
-
         $creatEventPost->save();
-
-
-
         if ($creatEventPost->id) {
-
             if ($request->post_type == '1') {
-
-
-
                 if (!empty($request->post_image)) {
-
-
-
                     $postimages = $request->post_image;
-
-
-
                     foreach ($postimages as $postImgValue) {
-
-
-
                         $postImage = $postImgValue;
-
                         $imageName = time() . '_' . $postImage->getClientOriginalName();
-
-
                         $checkIsimageOrVideo = checkIsimageOrVideo($postImage);
-
                         $duration = "";
                         if ($checkIsimageOrVideo == 'video') {
                             $duration = getVideoDuration($postImage);
@@ -8962,66 +8922,35 @@ class ApiControllerv2 extends Controller
                         }
                         $postImage->move(public_path('storage/post_image'), $imageName);
                         EventPostImage::create([
-
                             'event_id' => $request->event_id,
-
                             'event_post_id' => $creatEventPost->id,
-
                             'post_image' => $imageName,
                             'duration' => $duration,
-
                             'type' => $checkIsimageOrVideo
-
                         ]);
                     }
                 }
             }
 
             if ($request->post_type == '2') {
-
                 $eventPostPoll = new EventPostPoll;
-
                 $eventPostPoll->event_id = $request->event_id;
-
                 $eventPostPoll->event_post_id = $creatEventPost->id;
-
                 $eventPostPoll->poll_question = $request->poll_question;
-
                 $eventPostPoll->poll_duration = $request->poll_duration;
-
-
-
                 if ($eventPostPoll->save()) {
-
-
-
                     $option = json_decode($request->option);
-
-
-
                     foreach ($option as $value) {
-
-
-
                         $pollOption = new EventPostPollOption;
-
                         $pollOption->event_post_poll_id = $eventPostPoll->id;
-
                         $pollOption->option = $value;
-
                         $pollOption->save();
                     }
                 }
             }
-
-
-
             $notificationParam = [
-
                 'sender_id' => $user->id,
-
                 'event_id' => $request->event_id,
-
                 'post_id' => $creatEventPost->id,
                 'is_in_photo_moudle' => $request->is_in_photo_moudle,
                 'post_type' => $request->post_type,
