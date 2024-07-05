@@ -5714,19 +5714,19 @@ class ApiControllerv2 extends Controller
         if ($input == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
         }
-        // $validator = Validator::make($input, [
-        //     'event_id' => ['required', 'exists:events,id', new CheckUserEvent],
-        //     'category' => 'required|unique:event_potluck_categories,category,NULL,id,event_id,' . $input['event_id'],
-        //     'quantity' => ['required', 'numeric']
-        // ]);
+        $validator = Validator::make($input, [
+            'event_id' => ['required', 'exists:events,id', new CheckUserEvent],
+            'category' => 'required|unique:event_potluck_categories,category,NULL,id,event_id,' . $input['event_id'],
+            'quantity' => ['required', 'numeric']
+        ]);
 
-        // if ($validator->fails()) {
+        if ($validator->fails()) {
 
-        //     return response()->json([
-        //         'status' => 0,
-        //         'message' => $validator->errors()->first(),
-        //     ]);
-        // }
+            return response()->json([
+                'status' => 0,
+                'message' => $validator->errors()->first(),
+            ]);
+        }
 
         try {
             DB::beginTransaction();
