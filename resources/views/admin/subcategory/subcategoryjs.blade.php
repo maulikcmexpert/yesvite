@@ -75,7 +75,7 @@
 
         $(document).on("click", ".remove", function() {
 
-            $(this).parent().remove();
+            $(this).parent().parent().remove();
 
         });
 
