@@ -5719,21 +5719,17 @@ class ApiControllerv2 extends Controller
             'category' => 'required|unique:event_potluck_categories,category,NULL,id,event_id,' . $input['event_id'],
             'quantity' => ['required', 'numeric']
         ]);
-        return response()->json(['status' => 1, 'message' => $input]);
+
         if ($validator->fails()) {
 
             return response()->json([
                 'status' => 0,
                 'message' => $validator->errors()->first(),
-
-
             ]);
         }
 
         try {
-
             DB::beginTransaction();
-
             EventPotluckCategory::Create([
                 'event_id' => $input['event_id'],
                 'user_id' => $user->id,
