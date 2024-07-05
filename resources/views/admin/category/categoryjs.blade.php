@@ -33,7 +33,9 @@
         });
 
         $(document).on("click", ".remove", function() {
-            $(this).parent().remove();
+
+            // console.log($(this).parent().parent().parent().html());
+            $(this).parent().parent().remove();
         });
 
         $(document).ready(function() {
