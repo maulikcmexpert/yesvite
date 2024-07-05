@@ -6257,7 +6257,7 @@ class ApiControllerv2 extends Controller
             $deletePotluck = EventPotluckCategory::where(['event_id' => $input['event_id']])->first();
             if ($deletePotluck != null) {
 
-                $deletePotluck->delete();
+                EventPotluckCategory::where(['event_id' => $input['event_id']])->delete();
                 return response()->json(['status' => 1, 'message' => "Potluck deleted successfully"]);
             } else {
                 return response()->json(['status' => 0, 'message' => "Potluck is not removed"]);
