@@ -60,9 +60,10 @@ class AuthController extends Controller
 
     public function handleGoogleCallback(Request $request)
     {
+        dd($request);
         $client = new Google_Client();
         $client->setAuthConfig(storage_path('app/google-play-service-account.json'));
-        $client->setRedirectUri(route('google/callback'));
+        $client->setRedirectUri('https://yesvite.cmexpertiseinfotech.in/google/callback');
 
         $client->authenticate($request->input('code'));
         $accessToken = $client->getAccessToken();
