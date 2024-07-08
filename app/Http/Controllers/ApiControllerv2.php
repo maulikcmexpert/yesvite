@@ -7630,7 +7630,9 @@ class ApiControllerv2 extends Controller
                     $checkUserRsvp = checkUserAttendOrNot($value->event_id, $value->user->id);
                     $ischeckEventOwner = Event::where(['id' => $input['event_id'], 'user_id' => $value->user->id])->first();
                     $postControl = PostControl::where(['user_id' => $user->id, 'event_id' => $input['event_id'], 'event_post_id' => $value->id])->first();
-
+                    $count_kids_adult = EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $value->user->id])
+                        ->select('kids', 'adults', 'event_id', 'rsvp_status', 'user_id')
+                        ->first();
                     if ($postControl != null) {
                         if ($postControl->post_control == 'hide_post') {
                             continue;
@@ -7644,6 +7646,8 @@ class ApiControllerv2 extends Controller
                     $postsNormalDetail['profile'] =  empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile);
                     $postsNormalDetail['post_message'] = empty($value->post_message) ? "" :  $value->post_message;
                     $postsNormalDetail['rsvp_status'] = $checkUserRsvp;
+                    $postsNormalDetail['kids'] = $count_kids_adult['kids'];
+                    $postsNormalDetail['adults'] = $count_kids_adult['adults'];
                     $postsNormalDetail['location'] = ($value->user->city != NULL) ? $value->user->city : "";
                     $postsNormalDetail['post_type'] = $value->post_type;
                     $postsNormalDetail['created_at'] = $value->created_at;
@@ -7715,7 +7719,7 @@ class ApiControllerv2 extends Controller
                     $count_kids_adult = EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $value->user->id])
                         ->select('kids', 'adults', 'event_id', 'rsvp_status', 'user_id')
                         ->first();
-                    dd($count_kids_adult);
+                    // dd($count_kids_adult);
                     $ischeckEventOwner = Event::where(['id' => $input['event_id'], 'user_id' => $value->user->id])->first();
 
                     // dd($ischeckEventOwner);
@@ -7742,6 +7746,8 @@ class ApiControllerv2 extends Controller
                     $postsNormalDetail['post_message'] = empty($value->post_message) ? "" :  $value->post_message;
 
                     $postsNormalDetail['rsvp_status'] = $checkUserRsvp;
+                    $postsNormalDetail['kids'] = $count_kids_adult['kids'];
+                    $postsNormalDetail['adults'] = $count_kids_adult['adults'];
                     $postsNormalDetail['location'] = ($value->user->city != NULL) ? $value->user->city : "";
 
 
