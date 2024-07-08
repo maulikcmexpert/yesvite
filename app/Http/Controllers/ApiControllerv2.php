@@ -7485,28 +7485,26 @@ class ApiControllerv2 extends Controller
                         ->where(function ($privacyQuery) {
                             $privacyQuery->where(function ($q) {
                                 $q->where('rsvp_d', '1')
-                                    ->where('rsvp_status', '1');
-                                // ->where('post_privacy', '2');
+                                    ->where('rsvp_status', '1')
+                                    ->where('post_privacy', '2');
                             })
                                 ->orWhere(function ($q) {
                                     $q->where('rsvp_d', '1')
-                                        ->where('rsvp_status', '0');
-                                    // ->where('post_privacy', '3');
+                                        ->where('rsvp_status', '0')
+                                        ->where('post_privacy', '3');
                                 })
                                 ->orWhere(function ($q) {
-                                    $q->where('rsvp_d', '0');
-                                    // ->where('post_privacy', '4');
+                                    $q->where('rsvp_d', '0')
+                                        ->where('post_privacy', '4');
                                 })
                                 ->orWhere(function ($q) {
                                     $q->where('post_privacy', '1');
                                 });
-                        })->where('post_privacy', '3');
+                        });
                 });
             });
         }
         $eventPostList->orderBy('id', 'desc');
-        // $sql = $eventPostList->toSql();
-
         if (!empty($selectedFilters) && !in_array('all', $selectedFilters)) {
             $eventPostList->where(function ($query) use ($selectedFilters, $eventCreator) {
                 foreach ($selectedFilters as $filter) {
@@ -7706,7 +7704,6 @@ class ApiControllerv2 extends Controller
                     $postsNormalDetail['poll_question'] = "";
                     $postsNormalDetail['poll_option'] = [];
                     if ($value->post_type == '2') { // Poll
-
                         $polls = EventPostPoll::with('event_poll_option')->withCount('user_poll_data')->where(['event_id' => $input['event_id'], 'event_post_id' => $value->id])->first();
 
                         $postsNormalDetail['total_poll_vote'] = $polls->user_poll_data_count;
@@ -12636,15 +12633,11 @@ class ApiControllerv2 extends Controller
             ]);
         }
 
-        try {
-            Mail::send('emails.app_inivite_link', ['userdata'=>$data], function ($message) use ($input) {
-                $message->to($input['email']);
-                $message->subject('Yesvite Invite');
-            });
-        
-            return response()->json(['status' => 1, 'message' => 'Mail sent successfully']);
-        } catch (\Exception $e) {
-            return response()->json(['status' => 0, 'message' => 'Mail not sent', 'error' => $e->getMessage()]);
-        }
-            }
+        Mail::send('emails.app_inivite_link', ['userdata'], function ($message) use ($input) {
+            $message->to($input['email']);
+            $message->subject('Yesvite Invite');
+        });
+
+        return response()->json(['status' => 1, 'message' => 'Mail sent successfully']);
+    }
 }
