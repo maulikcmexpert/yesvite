@@ -6263,9 +6263,10 @@ class ApiControllerv2 extends Controller
             $spoken_for = UserPotluckItem::where('event_id', $input['event_id'])->sum('quantity');
 
             $checkEventOwner = Event::FindOrFail($input['event_id']);
-            dd($checkEventOwner);
+            dd($checkEventOwner['end_date']);
             $potluckDetail['total_potluck_categories'] = count($eventpotluckData);
             $potluckDetail['is_event_owner'] = ($checkEventOwner->user_id == $user->id) ? 1 : 0;
+            $potluckDetail['is_past'] = ($checkEventOwner['end_date'] < date('Y-m-d')) ? true : false;
             $potluckDetail['potluck_items'] = $totalItems;
             $potluckDetail['spoken_for'] = $spoken_for;
             $potluckDetail['left'] = $totalItems - $spoken_for;
