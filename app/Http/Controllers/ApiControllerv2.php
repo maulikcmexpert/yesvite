@@ -12623,9 +12623,31 @@ class ApiControllerv2 extends Controller
         $rawData = $request->getContent();
         $input = json_decode($rawData, true);
 
+        if ($input == null) {
+            return response()->json(['status' => 0, 'message' => "Json invalid"]);
+        }
+        $validator = Validator::make($input, [
+
+            'email' => ['required', 'exists:user,email'],
+
+        ]);
+
+        if ($validator->fails()) {
+
+            return response()->json([
+                'status' => 0,
+                'message' => $validator->errors()->first(),
+
+
+            ]);
+        }
+
+
         Mail::send('emails.app_inivite_link', ['userdata'], function ($message) use ($input) {
-            $message->to($input['email']);
+            $message->to($input->email);
             $message->subject('Email Verification Mail');
         });
+
+        return response()->json(['status' => 1, 'message' => 'Mail send successfully']);
     }
 }
