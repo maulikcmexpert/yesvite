@@ -7481,26 +7481,26 @@ class ApiControllerv2 extends Controller
                         $userQuery->where('app_user', '1');
                     })
                         ->where('event_id', $input['event_id'])
-                        ->where('user_id', $user->id)
-                        ->where(function ($privacyQuery) {
-                            $privacyQuery->where(function ($q) {
-                                $q->where('rsvp_d', '1')
-                                    ->where('rsvp_status', '1');
-                                // ->where('post_privacy', '2');
-                            })
-                                ->orWhere(function ($q) {
-                                    $q->where('rsvp_d', '1')
-                                        ->where('rsvp_status', '0');
-                                    // ->where('post_privacy', '3');
-                                })
-                                ->orWhere(function ($q) {
-                                    $q->where('rsvp_d', '0');
-                                    // ->where('post_privacy', '4');
-                                })
-                                ->orWhere(function ($q) {
-                                    $q->where('post_privacy', '1');
-                                });
-                        });
+                        ->where('user_id', $user->id);
+                    // ->where(function ($privacyQuery) {
+                    //     $privacyQuery->where(function ($q) {
+                    //         $q->where('rsvp_d', '1')
+                    //             ->where('rsvp_status', '1')
+                    //             ->where('post_privacy', '2');
+                    //     })
+                    //         ->orWhere(function ($q) {
+                    //             $q->where('rsvp_d', '1')
+                    //                 ->where('rsvp_status', '0')
+                    //                 ->where('post_privacy', '3');
+                    //         })
+                    //         ->orWhere(function ($q) {
+                    //             $q->where('rsvp_d', '0')
+                    //                 ->where('post_privacy', '4');
+                    //         })
+                    //         ->orWhere(function ($q) {
+                    //             $q->where('post_privacy', '1');
+                    //         });
+                    // });
                 });
             });
         }
@@ -12634,15 +12634,11 @@ class ApiControllerv2 extends Controller
             ]);
         }
 
-        try {
-            Mail::send('emails.app_inivite_link', ['userdata'], function ($message) use ($input) {
-                $message->to($input['email']);
-                $message->subject('Yesvite Invite');
-            });
+        Mail::send('emails.app_inivite_link', ['userdata'], function ($message) use ($input) {
+            $message->to($input['email']);
+            $message->subject('Yesvite Invite');
+        });
 
-            return response()->json(['status' => 1, 'message' => 'Mail sent successfully']);
-        } catch (\Exception $e) {
-            return response()->json(['status' => 0, 'message' => 'Mail not sent', 'error' => $e->getMessage()]);
-        }
+        return response()->json(['status' => 1, 'message' => 'Mail sent successfully']);
     }
 }
