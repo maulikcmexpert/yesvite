@@ -199,8 +199,7 @@ Route::prefix('user/v2/')->middleware('checkUser')->group(function () {
     Route::post('add_subscription', [ApiControllerv2::class, 'addSubscription']);
     Route::post('add_product_subscription', [ApiControllerv2::class, 'addProductSubscription']);
     Route::get('check_subscription', [ApiControllerv2::class, 'checkSubscription']);
-
-    Route::get('send_app_link', [ApiControllerv2::class, 'appInviteLink']);
+    Route::post('send_app_link', [ApiControllerv2::class, 'appInviteLink']);
 
 
 
