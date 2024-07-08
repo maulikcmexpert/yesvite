@@ -7485,14 +7485,20 @@ class ApiControllerv2 extends Controller
                         ->where(function ($privacyQuery) {
                             $privacyQuery->where(function ($q) {
                                 $q->where('rsvp_d', '1')
-                                    ->where('rsvp_status', '1');
+                                    ->where('rsvp_status', '1')
+                                    ->where('post_privacy', '2');
                             })
                                 ->orWhere(function ($q) {
                                     $q->where('rsvp_d', '1')
-                                        ->where('rsvp_status', '0');
+                                        ->where('rsvp_status', '0')
+                                        ->where('post_privacy', '3');
                                 })
                                 ->orWhere(function ($q) {
-                                    $q->where('rsvp_d', '0');
+                                    $q->where('rsvp_d', '0')
+                                        ->where('post_privacy', '4');
+                                })
+                                ->orWhere(function ($q) {
+                                    $q->where('post_privacy', '1');
                                 });
                         });
                 });
@@ -7567,6 +7573,7 @@ class ApiControllerv2 extends Controller
                     $postsNormalDetail['adults'] = isset($count_kids_adult['adults']) ? $count_kids_adult['adults'] : 0;
                     $postsNormalDetail['location'] = ($value->user->city != NULL) ? $value->user->city : "";
                     $postsNormalDetail['post_type'] = $value->post_type;
+                    $postsNormalDetail['post_privacy'] = $value->post_privacy;
                     $postsNormalDetail['created_at'] = $value->created_at;
                     $postsNormalDetail['posttime'] = setpostTime($value->created_at);
                     $postsNormalDetail['post_image'] = [];
@@ -12614,14 +12621,14 @@ class ApiControllerv2 extends Controller
 
         $rawData = $request->getContent();
         $input = json_decode($rawData, true);
-        // dd($input);   
+        dd($input);
 
         if ($input == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
         }
         $validator = Validator::make($input, [
 
-            'email' => ['required'],
+            'email' => ['required', 'exists:user,email'],
 
         ]);
 
@@ -12629,7 +12636,7 @@ class ApiControllerv2 extends Controller
 
             return response()->json([
                 'status' => 0,
-                'message' => $validator->errors()->first()
+                'message' => $validator->errors()->first(),
 
 
             ]);
