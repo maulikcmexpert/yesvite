@@ -7628,7 +7628,12 @@ class ApiControllerv2 extends Controller
             if (count($results) != 0) {
                 foreach ($results as  $value) {
                     $checkUserRsvp = checkUserAttendOrNot($value->event_id, $value->user->id);
-                    $ischeckEventOwner = Event::where(['id' => $input['event_id'], 'user_id' => $value->user->id])->first();
+                    $ischeckEventOwner = Event::with(['event_invited_user' => function ($query) use ($value) {
+                        $query->where('user_id', $value->user->id)
+                            ->select('event_id', 'kids', 'adults');
+                    }])->where(['id' => $input['event_id'], 'user_id' => $value->user->id])->first();
+
+                    dd($ischeckEventOwner);
                     $postControl = PostControl::where(['user_id' => $user->id, 'event_id' => $input['event_id'], 'event_post_id' => $value->id])->first();
 
                     if ($postControl != null) {
