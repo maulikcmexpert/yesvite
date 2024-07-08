@@ -7502,16 +7502,10 @@ class ApiControllerv2 extends Controller
                                 });
                         });
                 });
-            })
-                ->where(function ($query) {
-                    $query->where('post_privacy', '2')
-                        ->orWhere('post_privacy', '3')
-                        ->orWhere('post_privacy', '4')
-                        ->orWhere('post_privacy', '1');
-                });
+            });
         }
         $eventPostList->orderBy('id', 'desc');
-        // $sql = $eventPostList->toSql();
+        $sql = $eventPostList->toSql();
 
         if (!empty($selectedFilters) && !in_array('all', $selectedFilters)) {
             $eventPostList->where(function ($query) use ($selectedFilters, $eventCreator) {
