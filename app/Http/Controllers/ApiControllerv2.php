@@ -7485,20 +7485,14 @@ class ApiControllerv2 extends Controller
                         ->where(function ($privacyQuery) {
                             $privacyQuery->where(function ($q) {
                                 $q->where('rsvp_d', '1')
-                                    ->where('rsvp_status', '1')
-                                    ->where('post_privacy', '2');
+                                    ->where('rsvp_status', '1');
                             })
                                 ->orWhere(function ($q) {
                                     $q->where('rsvp_d', '1')
-                                        ->where('rsvp_status', '0')
-                                        ->where('post_privacy', '3');
+                                        ->where('rsvp_status', '0');
                                 })
                                 ->orWhere(function ($q) {
-                                    $q->where('rsvp_d', '0')
-                                        ->where('post_privacy', '4');
-                                })
-                                ->orWhere(function ($q) {
-                                    $q->where('post_privacy', '1');
+                                    $q->where('rsvp_d', '0');
                                 });
                         });
                 });
@@ -12618,28 +12612,27 @@ class ApiControllerv2 extends Controller
     {
         $rawData = $request->getContent();
         $input = json_decode($rawData, true);
-    
+
         if ($input == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
         }
-    
+
         $validator = Validator::make($input, [
             'email' => ['required', 'email'],
         ]);
-    
+
         if ($validator->fails()) {
             return response()->json([
                 'status' => 0,
                 'message' => $validator->errors()->first()
             ]);
         }
-    
+
         Mail::send('emails.app_inivite_link', ['userdata'], function ($message) use ($input) {
             $message->to($input['email']);
             $message->subject('Yesvite Invite');
         });
-    
+
         return response()->json(['status' => 1, 'message' => 'Mail sent successfully']);
     }
-    
 }
