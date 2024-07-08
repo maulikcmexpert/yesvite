@@ -10135,11 +10135,7 @@ class ApiControllerv2 extends Controller
     {
 
         $user  = Auth::guard('api')->user();
-
         $rawData = $request->getContent();
-
-
-
         $input = json_decode($rawData, true);
 
         if ($input == null) {
@@ -10147,13 +10143,10 @@ class ApiControllerv2 extends Controller
         }
 
         $validator = Validator::make($input, [
-
             'event_id' => ['required', 'exists:events,id']
-
         ]);
 
         if ($validator->fails()) {
-
             return response()->json([
 
                 'status' => 0,
@@ -10199,7 +10192,7 @@ class ApiControllerv2 extends Controller
             $eventAboutHost['event_wall'] = $eventDetail->event_settings->event_wall;
             $eventAboutHost['guest_list_visible_to_guests'] = $eventDetail->event_settings->guest_list_visible_to_guests;
             $eventAboutHost['attending'] = $adults + $kids;
-            $eventAboutHost['total_invitation'] =  count(getEventInvitedUser($input['event_id']));
+            $eventAboutHost['total_invitation'] =  count(getEventInvitedUser($input['event_id'], 'rsvp'));
             $eventAboutHost['adults'] = (int)$adults;
             $eventAboutHost['kids'] =  (int)$kids;
             $eventAboutHost['not_attending'] = $eventNotComing;
