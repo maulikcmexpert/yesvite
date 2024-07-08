@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 use Location;
-
 use App\Models\{
     User,
     Event,

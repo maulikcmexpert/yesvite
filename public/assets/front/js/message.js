@@ -30,6 +30,44 @@ $.ajaxSetup({
 });
 import { genrateAudio } from "./chat.js";
 import { musicPlayer, initializeAudioPlayer } from "./audio.js";
+function formatDate(timestamp) {
+    const now = new Date();
+    const date = new Date(timestamp);
+
+    // Reset the time part of both dates to midnight
+    const nowMidnight = new Date(
+        now.getFullYear(),
+        now.getMonth(),
+        now.getDate()
+    );
+    const dateMidnight = new Date(
+        date.getFullYear(),
+        date.getMonth(),
+        date.getDate()
+    );
+    const diffTime = nowMidnight - dateMidnight;
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+    if (diffDays < 1) {
+        return "Today";
+    } else if (diffDays < 2) {
+        return "Yesterday";
+    } else if (diffDays < 7) {
+        return date.toLocaleDateString("en-US", { weekday: "long" }); // Returns day of the week
+    } else if (now.getFullYear() === date.getFullYear()) {
+        return date.toLocaleDateString("en-US", {
+            day: "numeric",
+            month: "long",
+        }); // Returns day, date, month
+    } else {
+        return date.toLocaleDateString("en-US", {
+            day: "numeric",
+            month: "long",
+            year: "numeric",
+        }); // Returns day, date, month, year
+    }
+}
+
 function getInitials(userName) {
     if (userName === undefined || userName === "") {
         return "Y"; // Default to "Y" if userName is undefined or an empty string
@@ -608,6 +646,7 @@ $(document).on("click", ".msg-list", async function () {
     removeSelectedMsg();
     closeMedia();
     $(this).addClass("active");
+    formattedDate = {};
     const isGroup = $(this).attr("data-group");
     const conversationId = $(this).attr("data-msgKey");
     $(".selected_id").val(conversationId);
@@ -1221,7 +1260,7 @@ function addMessageToList(key, messageData, conversationId) {
 
     scrollToBottom();
 }
-
+var formattedDate = {};
 function createMessageElement(key, messageData, isGroup) {
     const isSender = senderUser == messageData.senderId;
     const isReceiver = senderUser != messageData.senderId;
@@ -1407,20 +1446,35 @@ function createMessageElement(key, messageData, isGroup) {
             ${emojiAndReplay}
             </div>`
             : "";
-    return `
-        <li class="${isSender ? "receiver" : "sender"}" id="message-${key}">
+    let daychange = "";
+    let msgDate = formatDate(new Date(messageData.timeStamp));
+    if (formattedDate.length == 0) {
+        daychange = "<h5 class='day-line'><span>" + msgDate + "</span></h5>";
+    } else if (formattedDate[msgDate] === undefined) {
+        console.log(formattedDate);
+        console.log(msgDate);
+        daychange = "<h5 class='day-line'><span>" + msgDate + "</span></h5>";
+    }
+    formattedDate[msgDate] = "1";
 
-           
-            ${replySection == "" ? dataWithMedia : replySection}
+    return `   
+    <div>
+    ${daychange}
+    <li class="${isSender ? "receiver" : "sender"}" id="message-${key}" >
+    
+    ${replySection == "" ? dataWithMedia : replySection}
 
-            <span class="time">${timeago.format(
-                new Date(messageData.timeStamp)
-            )}</span>
-            
-            
-             
-            
+            <span class="time">${new Date(
+                messageData.timeStamp
+            ).toLocaleTimeString([], {
+                hour: "2-digit",
+                minute: "2-digit",
+                hour12: true,
+            })}</span>            
         </li>
+        </div>
+   
+
     `;
 }
 function markMessageAsSeen(conversationId, key) {
