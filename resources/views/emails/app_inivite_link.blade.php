@@ -43,7 +43,7 @@
          <!-- -------------- -->
          <tr>
             <td>
-               <h4 style="font-size: 20px;line-height: 28px;font-weight: 700;color: #0F172A;margin: 0px 0px;">{{$userdata['send_by']}} <span style="font-size: 20px;line-height: 28px;font-weight: 500;color: #0F172A;margin: 0px 0px;">sent you a private message via Yesvite</span></h4>
+               <h4 style="font-size: 20px;line-height: 28px;font-weight: 700;color: #0F172A;margin: 0px 0px;">{{$userdata}} <span style="font-size: 20px;line-height: 28px;font-weight: 500;color: #0F172A;margin: 0px 0px;">sent you a private message via Yesvite</span></h4>
             </td>
          </tr>
          <!-- -------------- -->
