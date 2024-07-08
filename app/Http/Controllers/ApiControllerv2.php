@@ -7505,8 +7505,6 @@ class ApiControllerv2 extends Controller
             });
         }
         $eventPostList->orderBy('id', 'desc');
-        $sql = $eventPostList->toSql();
-        \Log::info($eventPostList->toSql());
         if (!empty($selectedFilters) && !in_array('all', $selectedFilters)) {
             $eventPostList->where(function ($query) use ($selectedFilters, $eventCreator) {
                 foreach ($selectedFilters as $filter) {
@@ -7706,7 +7704,6 @@ class ApiControllerv2 extends Controller
                     $postsNormalDetail['poll_question'] = "";
                     $postsNormalDetail['poll_option'] = [];
                     if ($value->post_type == '2') { // Poll
-
                         $polls = EventPostPoll::with('event_poll_option')->withCount('user_poll_data')->where(['event_id' => $input['event_id'], 'event_post_id' => $value->id])->first();
 
                         $postsNormalDetail['total_poll_vote'] = $polls->user_poll_data_count;
