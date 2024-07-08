@@ -7712,7 +7712,7 @@ class ApiControllerv2 extends Controller
                 foreach ($results as $value) {
 
                     $checkUserRsvp = checkUserAttendOrNot($value->event_id, $value->user->id);
-                    $count_kids_adult = EventInvitedUser::where(['id' => $input['event_id']])
+                    $count_kids_adult = EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $value->user->id])
                         ->select('kids', 'adults', 'event_id', 'rsvp_status', 'user_id')
                         ->get();
                     dd($count_kids_adult);
