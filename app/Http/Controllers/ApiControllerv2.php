@@ -469,7 +469,7 @@ class ApiControllerv2 extends Controller
                     $eventDetail['event_potluck'] = $value->event_settings->podluck;
 
 
-                    $eventDetail['guest_pending_count'] = getGuestRsvpPendingCount($value->id);
+                    $eventDetail['guest_pending_count'] = getGuestRsvpPendingCount($value->id, 1);
                     $eventDetail['adult_only_party'] = $value->event_settings->adult_only_party;
                     $eventDetail['post_time'] =  $this->setpostTime($value->updated_at);
 
@@ -10130,7 +10130,7 @@ class ApiControllerv2 extends Controller
             $eventAboutHost['event_wall'] = $eventDetail->event_settings->event_wall;
             $eventAboutHost['guest_list_visible_to_guests'] = $eventDetail->event_settings->guest_list_visible_to_guests;
             $eventAboutHost['attending'] = $adults + $kids;
-            $eventAboutHost['total_invitation'] =  count(getEventInvitedUser($input['event_id'], 'rsvp'));
+            $eventAboutHost['total_invitation'] =  count(getEventInvitedUser($input['event_id']));
             $eventAboutHost['adults'] = (int)$adults;
             $eventAboutHost['kids'] =  (int)$kids;
             $eventAboutHost['not_attending'] = $eventNotComing;
