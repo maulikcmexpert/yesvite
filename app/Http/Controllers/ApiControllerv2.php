@@ -6655,27 +6655,19 @@ class ApiControllerv2 extends Controller
 
 
     public function eventAbout(Request $request)
-
     {
 
         $user  = Auth::guard('api')->user();
-
         $rawData = $request->getContent();
-
-
-
         $input = json_decode($rawData, true);
         if ($input == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
         }
         $validator = Validator::make($input, [
-
             'event_id' => ['required', 'exists:events,id']
-
         ]);
 
         if ($validator->fails()) {
-
             return response()->json([
                 'status' => 0,
                 'message' => $validator->errors()->first()
@@ -6687,37 +6679,16 @@ class ApiControllerv2 extends Controller
 
                 $query->where('is_co_host', '1')->with('user');
             }])->where('id', $input['event_id'])->first();
-
-
-
-
-
             $guestView = [];
-
-
-
-
-
             $eventDetails['id'] = $eventDetail->id;
-
             $eventDetails['event_images'] = [];
-
             if (count($eventDetail->event_image) != 0) {
-
                 foreach ($eventDetail->event_image as $values) {
-
                     $eventDetails['event_images'][] = asset('public/storage/event_images/' . $values->image);
                 }
             }
-
-
-
-
-
             $eventDetails['user_profile'] = empty($eventDetail->user->profile) ? "" : asset('public/storage/profile/' . $eventDetail->user->profile);
-
             $eventDetails['event_name'] = $eventDetail->event_name;
-
             $eventDetails['hosted_by'] = $eventDetail->hosted_by;
             $eventDetails['is_host'] = ($eventDetail->user_id == $user->id) ? 1 : 0;
             $eventDetails['event_date'] = $eventDetail->start_date;
@@ -6728,7 +6699,6 @@ class ApiControllerv2 extends Controller
             //     $eventDetails['event_time'] = $eventDetail->event_schedule->first()->start_time . ' to ' . $eventDetail->event_schedule->last()->end_time;
             // }
 
-
             $eventDetails['rsvp_by'] = (!empty($eventDetail->rsvp_by_date) || $eventDetail->rsvp_by_date != NULL) ? $eventDetail->rsvp_by_date : date('Y-m-d', strtotime($eventDetail->created_at));
             $current_date = date('Y-m-d');
             $eventDate = $eventDetail->start_date;
@@ -6736,9 +6706,6 @@ class ApiControllerv2 extends Controller
             $datetime1 = Carbon::parse($eventDate);
 
             $datetime2 =  Carbon::parse($current_date);
-
-
-
             $till_days = strval($datetime1->diff($datetime2)->days);
 
             if ($eventDate >= $current_date) {
@@ -6753,10 +6720,10 @@ class ApiControllerv2 extends Controller
                 $eventEndDate = $eventDetail->end_date;
                 $till_days = "On going";
                 if ($eventEndDate < $current_date) {
-
                     $till_days = "Past";
                 }
             }
+            $eventDetail['is_past'] = ($eventDetail->end_date < date('Y-m-d')) ? true : false;
             $eventDetails['days_till_event'] = $till_days;
             $eventDetails['event_created_timestamp'] = Carbon::parse($eventDate)->timestamp;
             $eventDetails['message_to_guests'] = $eventDetail->message_to_guests;
