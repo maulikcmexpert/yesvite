@@ -12620,14 +12620,14 @@ class ApiControllerv2 extends Controller
         
         $rawData = $request->getContent();
         $input = json_decode($rawData, true);
-        dd($input);   
+        // dd($input);   
 
         if ($input == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
         }
         $validator = Validator::make($input, [
 
-            'email' => ['required', 'exists:user,email'],
+            'email' => ['required'],
 
         ]);
 
@@ -12635,7 +12635,7 @@ class ApiControllerv2 extends Controller
 
             return response()->json([
                 'status' => 0,
-                'message' => $validator->errors()->first(),
+                'message' => $validator->errors()->first()
 
 
             ]);
