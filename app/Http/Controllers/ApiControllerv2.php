@@ -7487,19 +7487,19 @@ class ApiControllerv2 extends Controller
                                 $q->where('rsvp_d', '1')
                                     ->where('rsvp_status', '1');
                                 // ->where('post_privacy', '2');
-                            })
-                                ->orWhere(function ($q) {
-                                    $q->where('rsvp_d', '1')
-                                        ->where('rsvp_status', '0');
-                                    // ->where('post_privacy', '3');
-                                })
-                                ->orWhere(function ($q) {
-                                    $q->where('rsvp_d', '0');
-                                    // ->where('post_privacy', '4');
-                                })
-                                ->orWhere(function ($q) {
-                                    $q->where('post_privacy', '1');
-                                });
+                            });
+                            // ->orWhere(function ($q) {
+                            //     $q->where('rsvp_d', '1')
+                            //         ->where('rsvp_status', '0');
+                            //     // ->where('post_privacy', '3');
+                            // })
+                            // ->orWhere(function ($q) {
+                            //     $q->where('rsvp_d', '0');
+                            //     // ->where('post_privacy', '4');
+                            // })
+                            // ->orWhere(function ($q) {
+                            //     $q->where('post_privacy', '1');
+                            // });
                         })->where('post_privacy', '3');
                 });
             });
@@ -12639,10 +12639,10 @@ class ApiControllerv2 extends Controller
                 $message->to($input['email']);
                 $message->subject('Yesvite Invite');
             });
-        
+
             return response()->json(['status' => 1, 'message' => 'Mail sent successfully']);
         } catch (\Exception $e) {
             return response()->json(['status' => 0, 'message' => 'Mail not sent', 'error' => $e->getMessage()]);
         }
-            }
+    }
 }
