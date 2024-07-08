@@ -7480,7 +7480,7 @@ class ApiControllerv2 extends Controller
                         $userQuery->where('app_user', '1');
                     })
                         ->where('event_id', $input['event_id'])
-                        ->where('user_id', $user->id)
+                        ->orWhere('user_id', $user->id)
                         ->where(function ($privacyQuery) {
                             $privacyQuery->where(function ($q) {
                                 $q->where('rsvp_d', '1')
