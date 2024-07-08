@@ -12634,11 +12634,6 @@ class ApiControllerv2 extends Controller
             ]);
         }
 
-        Mail::send('emails.app_inivite_link', ['userdata'], function ($message) use ($input) {
-            $message->to($input['email']);
-            $message->subject('Yesvite Invite');
-        });
-
         try {
             Mail::send('emails.app_inivite_link', ['userdata'], function ($message) use ($input) {
                 $message->to($input['email']);
