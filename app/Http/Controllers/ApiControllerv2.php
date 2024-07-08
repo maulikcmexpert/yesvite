@@ -12617,10 +12617,32 @@ class ApiControllerv2 extends Controller
     }
     public function appInviteLink(Request $request){
 
-        dd("hello");
+
 
         $rawData = $request->getContent();
         $input = json_decode($rawData, true);
+
+        dd("hello");
+
+        if ($input == null) {
+            return response()->json(['status' => 0, 'message' => "Json invalid"]);
+        }
+        $validator = Validator::make($input, [
+
+            'email' => ['required','exists:user,email'],
+
+        ]);
+
+        if ($validator->fails()) {
+
+            return response()->json([
+                'status' => 0,
+                'message' => $validator->errors()->first(),
+
+
+            ]);
+        }
+
 
         Mail::send('emails.app_inivite_link','hello', function ($message) use ($input) {
             $message->to($input['email']);
