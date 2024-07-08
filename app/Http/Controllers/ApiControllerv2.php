@@ -12621,7 +12621,7 @@ class ApiControllerv2 extends Controller
         $input = json_decode($rawData, true);
 
         Mail::send('emails.app_inivite_link',['userdata'], function ($message) use ($input) {
-            $message->to($input['email']);
+            $message->to($input->email);
             $message->subject('Email Verification Mail');
         });
     }
