@@ -7482,8 +7482,8 @@ class ApiControllerv2 extends Controller
                     })
                         ->where('event_id', $input['event_id'])
                         ->where('user_id', $user->id)
-                        ->where(function ($privacyQuery) {
-                            $privacyQuery->where(function ($q) {
+                        ->where(function ($privacyQuery) use ($user) {
+                            $privacyQuery->where(function ($q) use ($user) {
                                 $q->where('rsvp_d', '1')
                                     ->where('rsvp_status', '1')
                                     ->where('post_privacy', '2');
@@ -7496,6 +7496,9 @@ class ApiControllerv2 extends Controller
                                 ->orWhere(function ($q) {
                                     $q->where('rsvp_d', '0')
                                         ->where('post_privacy', '4');
+                                })
+                                ->orWhere(function ($q) use ($user) {
+                                    $q->where('user_id', $user->id);
                                 })
                                 ->orWhere(function ($q) {
                                     $q->where('post_privacy', '1');
@@ -12620,7 +12623,7 @@ class ApiControllerv2 extends Controller
         $rawData = $request->getContent();
         $input = json_decode($rawData, true);
 
-        Mail::send('emails.app_inivite_link',['userdata'], function ($message) use ($input) {
+        Mail::send('emails.app_inivite_link', ['userdata'], function ($message) use ($input) {
             $message->to($input['email']);
             $message->subject('Email Verification Mail');
         });
