@@ -7481,7 +7481,7 @@ class ApiControllerv2 extends Controller
                         $userQuery->where('app_user', '1');
                     })
                         ->where('event_id', $input['event_id'])
-                        // ->where('user_id', $user->id)
+                        ->where('user_id', $user->id)
                         ->where(function ($privacyQuery) {
                             $privacyQuery->where(function ($q) {
                                 $q->where('rsvp_d', '1')
@@ -7498,7 +7498,6 @@ class ApiControllerv2 extends Controller
                                         ->where('post_privacy', '4');
                                 })
                                 ->orWhere(function ($q) {
-                                    // This block is for post_privacy == 1
                                     $q->where('post_privacy', '1');
                                 });
                         });
