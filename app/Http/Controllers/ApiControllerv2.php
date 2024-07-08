@@ -6953,27 +6953,18 @@ class ApiControllerv2 extends Controller
 
 
     public function eventAboutv2(Request $request)
-
     {
-
         $user  = Auth::guard('api')->user();
-
         $rawData = $request->getContent();
-
-
-
         $input = json_decode($rawData, true);
         if ($input == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
         }
         $validator = Validator::make($input, [
-
             'event_id' => ['required', 'exists:events,id']
-
         ]);
 
         if ($validator->fails()) {
-
             return response()->json([
                 'status' => 0,
                 'message' => $validator->errors()->first()
@@ -6988,13 +6979,7 @@ class ApiControllerv2 extends Controller
                 $query->where('rsvp_status', '1');
             }])->where('id', $input['event_id'])->first();
 
-
             $guestView = [];
-
-
-
-
-
             $eventDetails['id'] = $eventDetail->id;
 
             $eventDetails['event_images'] = [];
@@ -7006,15 +6991,8 @@ class ApiControllerv2 extends Controller
                     $eventDetails['event_images'][] = asset('public/storage/event_images/' . $values->image);
                 }
             }
-
-
-
-
-
             $eventDetails['user_profile'] = empty($eventDetail->user->profile) ? "" : asset('public/storage/profile/' . $eventDetail->user->profile);
-
             $eventDetails['event_name'] = $eventDetail->event_name;
-
             $eventDetails['hosted_by'] = $eventDetail->hosted_by;
             $eventDetails['is_host'] = ($eventDetail->user_id == $user->id) ? 1 : 0;
 
@@ -7076,7 +7054,7 @@ class ApiControllerv2 extends Controller
 
 
             $eventDetails['days_till_event'] = $till_days;
-
+            $eventDetails['is_past'] = ($eventDetail->end_date < date('Y-m-d')) ? true : false;
             $eventDetails['guest_thus_far'] = $eventDetail->event_invited_user_count;
             $eventDetails['event_created_timestamp'] = Carbon::parse($eventDate)->timestamp;
             $eventDetails['message_to_guests'] = $eventDetail->message_to_guests;
