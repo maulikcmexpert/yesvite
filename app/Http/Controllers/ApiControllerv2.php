@@ -7481,28 +7481,24 @@ class ApiControllerv2 extends Controller
                     })
                         ->where('event_id', $input['event_id'])
                         ->where('user_id', $user->id)
-                        ->where(function ($privacyQuery) use ($user) {
-                            $privacyQuery->where(function ($q) use ($user) {
+                        ->where(function ($privacyQuery) {
+                            $privacyQuery->where(function ($q) {
                                 $q->where('rsvp_d', '1')
                                     ->where('rsvp_status', '1')
-                                    ->where('post_privacy', '2')
-                                    ->orWhere('user_id', $user->id);
+                                    ->where('post_privacy', '2');
                             })
-                                ->orWhere(function ($q) use ($user) {
+                                ->orWhere(function ($q) {
                                     $q->where('rsvp_d', '1')
                                         ->where('rsvp_status', '0')
-                                        ->where('post_privacy', '3')
-                                        ->orWhere('user_id', $user->id);
+                                        ->where('post_privacy', '3');
                                 })
-                                ->orWhere(function ($q) use ($user) {
+                                ->orWhere(function ($q) {
                                     $q->where('rsvp_d', '0')
-                                        ->where('post_privacy', '4')
-                                        ->orWhere('user_id', $user->id);
+                                        ->where('post_privacy', '4');
                                 })
-                                ->orWhere(function ($q) use ($user) {
+                                ->orWhere(function ($q) {
                                     // This block is for post_privacy == 1
-                                    $q->where('post_privacy', '1')
-                                        ->orWhere('user_id', $user->id);
+                                    $q->where('post_privacy', '1');
                                 });
                         });
                 });
