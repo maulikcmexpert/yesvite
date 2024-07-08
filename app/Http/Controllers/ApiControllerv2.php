@@ -7475,16 +7475,16 @@ class ApiControllerv2 extends Controller
             });
         $checkEventOwner = Event::where(['id' => $input['event_id'], 'user_id' => $user->id])->first();
         if ($checkEventOwner == null) {
-            dd($checkEventOwner);
+
             $eventPostList->where(function ($query) use ($user, $input) {
                 $query->orWhereHas('event.event_invited_user', function ($subQuery) use ($user, $input) {
                     $subQuery->whereHas('user', function ($userQuery) {
                         $userQuery->where('app_user', '1');
                     })
                         ->where('event_id', $input['event_id'])
-                        ->where('user_id', $user->id)
-                        ->where(function ($privacyQuery) use ($user) {
-                            $privacyQuery->where(function ($q) use ($user) {
+                        // ->where('user_id', $user->id)
+                        ->where(function ($privacyQuery) {
+                            $privacyQuery->where(function ($q) {
                                 $q->where('rsvp_d', '1')
                                     ->where('rsvp_status', '1')
                                     ->where('post_privacy', '2');
