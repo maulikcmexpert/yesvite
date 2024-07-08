@@ -7424,6 +7424,7 @@ class ApiControllerv2 extends Controller
             $eventStoriesList = EventUserStory::with(['user', 'user_event_story' => function ($query) use ($currentDateTime) {
                 $query->where('created_at', '>', now()->subHours(24));
             }])
+
                 ->where('created_at', '>', now()->subHours(24))
                 ->where('event_id', $input['event_id'])
                 ->where('user_id', '!=', $user->id)->paginate($this->perPage, ['*'], 'page', "1");
@@ -12614,4 +12615,15 @@ class ApiControllerv2 extends Controller
             return response()->json(['status' => 0, 'message' => 'something went wrong']);
         }
     }
+    public function appInviteLink(Request $request){
+
+        $rawData = $request->getContent();
+        $input = json_decode($rawData, true);
+
+        Mail::send('emails.app_inivite_link','hello', function ($message) use ($input) {
+            $message->to($input['email']);
+            $message->subject('Email Verification Mail');
+        });
+    }
 }
+
