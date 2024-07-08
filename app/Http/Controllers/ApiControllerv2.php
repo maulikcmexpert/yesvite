@@ -7646,8 +7646,8 @@ class ApiControllerv2 extends Controller
                     $postsNormalDetail['profile'] =  empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile);
                     $postsNormalDetail['post_message'] = empty($value->post_message) ? "" :  $value->post_message;
                     $postsNormalDetail['rsvp_status'] = $checkUserRsvp;
-                    $postsNormalDetail['kids'] = $count_kids_adult['kids'];
-                    $postsNormalDetail['adults'] = $count_kids_adult['adults'];
+                    $postsNormalDetail['kids'] = isset($count_kids_adult['kids']) ? $count_kids_adult['kids'] : 0;
+                    $postsNormalDetail['adults'] = isset($count_kids_adult['adults']) ? $count_kids_adult['adults'] : 0;
                     $postsNormalDetail['location'] = ($value->user->city != NULL) ? $value->user->city : "";
                     $postsNormalDetail['post_type'] = $value->post_type;
                     $postsNormalDetail['created_at'] = $value->created_at;
@@ -7719,7 +7719,7 @@ class ApiControllerv2 extends Controller
                     $count_kids_adult = EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $value->user->id])
                         ->select('kids', 'adults', 'event_id', 'rsvp_status', 'user_id')
                         ->first();
-                    dd($count_kids_adult['kids']);
+                    // dd($count_kids_adult['kids']);
                     $ischeckEventOwner = Event::where(['id' => $input['event_id'], 'user_id' => $value->user->id])->first();
 
                     // dd($ischeckEventOwner);
@@ -7746,8 +7746,8 @@ class ApiControllerv2 extends Controller
                     $postsNormalDetail['post_message'] = empty($value->post_message) ? "" :  $value->post_message;
 
                     $postsNormalDetail['rsvp_status'] = $checkUserRsvp;
-                    $postsNormalDetail['kids'] = $count_kids_adult['kids'];
-                    $postsNormalDetail['adults'] = $count_kids_adult['adults'];
+                    $postsNormalDetail['kids'] = isset($count_kids_adult['kids']) ? $count_kids_adult['kids'] : 0;
+                    $postsNormalDetail['adults'] = isset($count_kids_adult['adults']) ? $count_kids_adult['adults'] : 0;
                     $postsNormalDetail['location'] = ($value->user->city != NULL) ? $value->user->city : "";
 
 
