@@ -67,7 +67,7 @@ function getGuestRsvpPendingCount($eventId)
     return  EventInvitedUser::whereHas('user', function ($query) {
 
         $query->where('app_user', '1');
-    })->where(['event_id' => $eventId, 'rsvp_d' => '0'])->count();
+    })->where(['event_id' => $eventId, 'rsvp_status' => '1'])->count();
 }
 
 function upcomingEventsCount($userId)

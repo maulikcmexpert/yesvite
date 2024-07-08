@@ -389,13 +389,8 @@ class ApiControllerv2 extends Controller
     }
 
     public function home(Request $request)
-
     {
-
         try {
-
-
-
             $user  = Auth::guard('api')->user();
 
             if ($user->is_first_login == '1') {
@@ -404,19 +399,15 @@ class ApiControllerv2 extends Controller
                 $userIsLogin->save();
             }
             $usercreatedList = Event::with(['user', 'event_settings', 'event_schedule'])->where('start_date', '>', date('Y-m-d'))
-
                 ->where('user_id', $user->id)
                 ->where('is_draft_save', '0')
                 ->orderBy('start_date', 'ASC')
-
                 ->get();
 
             $invitedEvents = EventInvitedUser::whereHas('user', function ($query) {
 
                 $query->where('app_user', '1');
             })->where('user_id', $user->id)->get()->pluck('event_id');
-
-
 
             $invitedEventsList = Event::with(['event_image', 'user', 'event_settings', 'event_schedule'])
 
@@ -426,11 +417,7 @@ class ApiControllerv2 extends Controller
                 ->get();
 
             $allEvents = $usercreatedList->merge($invitedEventsList)->sortBy('start_date');
-
-
             $page = $request->input('page');
-
-
             $pages = ($page != "") ? $page : 1;
 
             $offset = ($pages - 1) * $this->perPage;
@@ -467,8 +454,6 @@ class ApiControllerv2 extends Controller
                     $eventDetail['event_wall'] = $value->event_settings->event_wall;
                     $eventDetail['guest_list_visible_to_guests'] = $value->event_settings->guest_list_visible_to_guests;
                     $eventDetail['event_potluck'] = $value->event_settings->podluck;
-
-
                     $eventDetail['guest_pending_count'] = getGuestRsvpPendingCount($value->id, 1);
                     $eventDetail['adult_only_party'] = $value->event_settings->adult_only_party;
                     $eventDetail['post_time'] =  $this->setpostTime($value->updated_at);
@@ -512,7 +497,7 @@ class ApiControllerv2 extends Controller
                     $eventDetail['kids'] = 0;
                     $eventDetail['adults'] = 0;
 
-                    $checkRsvpDone = EventInvitedUser::where(['event_id' => $value->id, 'user_id' => $user->id])->first();
+                    $checkRsvpDone = EventInvitedUser::where(['event_id' => $value->id, 'user_id' => $user->id, 'rsvp_status' => '1'])->first();
                     if ($checkRsvpDone != null) {
                         $eventDetail['kids'] = $checkRsvpDone->kids;
                         $eventDetail['adults'] = $checkRsvpDone->adults;
