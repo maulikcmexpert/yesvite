@@ -7623,7 +7623,7 @@ class ApiControllerv2 extends Controller
         $results = $eventPostList->paginate($this->perPage, ['*'], 'page', $page);
         $total_page_of_eventPosts = ceil($totalPostWalls / $this->perPage);
         $postList = [];
-        dd($results);
+        dd($eventPostList);
         if (!empty($checkEventOwner)) {
             if (count($results) != 0) {
                 foreach ($results as  $value) {
