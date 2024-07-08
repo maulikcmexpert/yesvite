@@ -12619,8 +12619,8 @@ class ApiControllerv2 extends Controller
 
         
         $rawData = $request->getContent();
-        dd($rawData);   
         $input = json_decode($rawData, true);
+        dd($input);   
 
         if ($input == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
