@@ -3140,5 +3140,9 @@ async function deleteConversation(conversationId, isGroup) {
         $(".selected_message").val("");
         $(".selected_name").val("");
         $("#isGroup").val("");
+        $("#selected-user-name").html("Start new chat");
+        $("#selected-user-lastseen").html("");
+        $(".member-lists").html("");
+        $(".selected-title").html("Start new chat");
     }
 }
