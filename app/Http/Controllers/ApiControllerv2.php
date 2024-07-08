@@ -12619,6 +12619,8 @@ class ApiControllerv2 extends Controller
         $rawData = $request->getContent();
         $input = json_decode($rawData, true);
 
+        $data=[$input['send_by']];
+
         if ($input == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
         }
@@ -12635,7 +12637,7 @@ class ApiControllerv2 extends Controller
         }
 
         try {
-            Mail::send('emails.app_inivite_link', ['userdata'], function ($message) use ($input) {
+            Mail::send('emails.app_inivite_link', ['userdata'=>$data], function ($message) use ($input) {
                 $message->to($input['email']);
                 $message->subject('Yesvite Invite');
             });
