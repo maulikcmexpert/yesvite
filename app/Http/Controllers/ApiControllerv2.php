@@ -6263,6 +6263,7 @@ class ApiControllerv2 extends Controller
             $spoken_for = UserPotluckItem::where('event_id', $input['event_id'])->sum('quantity');
 
             $checkEventOwner = Event::FindOrFail($input['event_id']);
+            dd($checkEventOwner);
             $potluckDetail['total_potluck_categories'] = count($eventpotluckData);
             $potluckDetail['is_event_owner'] = ($checkEventOwner->user_id == $user->id) ? 1 : 0;
             $potluckDetail['potluck_items'] = $totalItems;
@@ -6274,12 +6275,9 @@ class ApiControllerv2 extends Controller
                 $potluckCategoryData = [];
                 $potluckItemsSummury = [];
                 //   dd($eventpotluckData);
-
                 foreach ($eventpotluckData as $value) {
                     $itempotluckCategory['id'] = $value->id;
                     $itempotluckCategory['category'] = $value->category;
-
-
                     $itempotluckCategory['total_items'] =  $value->event_potluck_category_item_count;
 
                     $i = 0;
@@ -6287,21 +6285,15 @@ class ApiControllerv2 extends Controller
                     foreach ($value->event_potluck_category_item as  $checkItem) {
                         $mainQty = $checkItem->quantity;
                         $spokenFor = UserPotluckItem::where('event_potluck_item_id', $checkItem->id)->sum('quantity');
-
-
                         if ($mainQty == $spokenFor) {
-
-
                             $totalSpoken += 1;
                         }
                     }
 
                     $itempotluckCategory['spoken_items'] = $totalSpoken;
-
                     $potluckItemsSummury[] = $itempotluckCategory;
                 }
                 $potluckDetail['item_summary'] = $potluckItemsSummury;
-
                 foreach ($eventpotluckData as $value) {
                     $potluckCategory['id'] = $value->id;
                     $potluckCategory['category'] = $value->category;
