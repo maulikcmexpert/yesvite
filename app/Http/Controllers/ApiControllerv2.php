@@ -7719,7 +7719,7 @@ class ApiControllerv2 extends Controller
                     $count_kids_adult = EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $value->user->id])
                         ->select('kids', 'adults', 'event_id', 'rsvp_status', 'user_id')
                         ->first();
-                    // dd($count_kids_adult);
+                    dd($count_kids_adult);
                     $ischeckEventOwner = Event::where(['id' => $input['event_id'], 'user_id' => $value->user->id])->first();
 
                     // dd($ischeckEventOwner);
