@@ -319,7 +319,7 @@ use Carbon\Carbon;
 
 
                         <div class="msg-footer">
-                            <div id="preview">
+                            <div id="preview" style="display: none;">
                                 <label id="upload_name"></label>
                                 <img src="" id="preview_img" class="preview_img">
                                 <div id="preview_file">
@@ -334,7 +334,7 @@ use Carbon\Carbon;
 
                                 <input type="hidden" class="file_info">
                             </div>
-                            <div class="position-relative audio-music-player" id="musicContainer">
+                            <div class="position-relative audio-music-player" id="musicContainer" style="display: none;">
                                 <div class="audio-container" id="audioContainer">
                                             
                                         
