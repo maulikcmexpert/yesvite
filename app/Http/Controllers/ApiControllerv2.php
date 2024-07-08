@@ -7475,6 +7475,7 @@ class ApiControllerv2 extends Controller
             });
         $checkEventOwner = Event::where(['id' => $input['event_id'], 'user_id' => $user->id])->first();
         if ($checkEventOwner == null) {
+            dd($checkEventOwner);
             $eventPostList->where(function ($query) use ($user, $input) {
                 $query->orWhereHas('event.event_invited_user', function ($subQuery) use ($user, $input) {
                     $subQuery->whereHas('user', function ($userQuery) {
@@ -7496,9 +7497,6 @@ class ApiControllerv2 extends Controller
                                 ->orWhere(function ($q) {
                                     $q->where('rsvp_d', '0')
                                         ->where('post_privacy', '4');
-                                })
-                                ->orWhere(function ($q) use ($user) {
-                                    $q->where('user_id', $user->id);
                                 })
                                 ->orWhere(function ($q) {
                                     $q->where('post_privacy', '1');
