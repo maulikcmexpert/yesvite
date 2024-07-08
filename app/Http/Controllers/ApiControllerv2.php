@@ -7481,7 +7481,7 @@ class ApiControllerv2 extends Controller
                         $userQuery->where('app_user', '1');
                     })
                         ->where('event_id', $input['event_id'])
-                        ->where('user_id', $user->id)
+                        // ->where('user_id', $user->id)
                         ->where(function ($privacyQuery) {
                             $privacyQuery->where(function ($q) {
                                 $q->where('rsvp_d', '1')
@@ -12615,37 +12615,15 @@ class ApiControllerv2 extends Controller
             return response()->json(['status' => 0, 'message' => 'something went wrong']);
         }
     }
-    public function appInviteLink(Request $request){
-
-        dd("hello");
+    public function appInviteLink(Request $request)
+    {
 
         $rawData = $request->getContent();
         $input = json_decode($rawData, true);
 
-        if ($input == null) {
-            return response()->json(['status' => 0, 'message' => "Json invalid"]);
-        }
-        $validator = Validator::make($input, [
-
-            'email' => ['required','exists:user,email'],
-
-        ]);
-
-        if ($validator->fails()) {
-
-            return response()->json([
-                'status' => 0,
-                'message' => $validator->errors()->first(),
-
-
-            ]);
-        }
-
-
-        Mail::send('emails.app_inivite_link','hello', function ($message) use ($input) {
+        Mail::send('emails.app_inivite_link', 'hello', function ($message) use ($input) {
             $message->to($input['email']);
             $message->subject('Email Verification Mail');
         });
     }
 }
-
