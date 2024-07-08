@@ -7573,7 +7573,6 @@ class ApiControllerv2 extends Controller
                     $postsNormalDetail['adults'] = isset($count_kids_adult['adults']) ? $count_kids_adult['adults'] : 0;
                     $postsNormalDetail['location'] = ($value->user->city != NULL) ? $value->user->city : "";
                     $postsNormalDetail['post_type'] = $value->post_type;
-                    $postsNormalDetail['post_privacy'] = $value->post_privacy;
                     $postsNormalDetail['created_at'] = $value->created_at;
                     $postsNormalDetail['posttime'] = setpostTime($value->created_at);
                     $postsNormalDetail['post_image'] = [];
@@ -12617,37 +12616,30 @@ class ApiControllerv2 extends Controller
     }
     public function appInviteLink(Request $request)
     {
-
-
         $rawData = $request->getContent();
         $input = json_decode($rawData, true);
-        dd($input);
-
+    
         if ($input == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
         }
+    
         $validator = Validator::make($input, [
-
-            'email' => ['required', 'exists:user,email'],
-
+            'email' => ['required', 'email'],
         ]);
-
+    
         if ($validator->fails()) {
-
             return response()->json([
                 'status' => 0,
-                'message' => $validator->errors()->first(),
-
-
+                'message' => $validator->errors()->first()
             ]);
         }
-
-
+    
         Mail::send('emails.app_inivite_link', ['userdata'], function ($message) use ($input) {
-            $message->to($input->email);
-            $message->subject('Email Verification Mail');
+            $message->to($input['email']);
+            $message->subject('Yesvite Invite');
         });
-
-        return response()->json(['status' => 1, 'message' => 'Mail send successfully']);
+    
+        return response()->json(['status' => 1, 'message' => 'Mail sent successfully']);
     }
+    
 }
