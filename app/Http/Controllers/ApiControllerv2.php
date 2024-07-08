@@ -7677,7 +7677,7 @@ class ApiControllerv2 extends Controller
 
 
                     $postsNormalDetail['post_type'] = $value->post_type;
-
+                    $postsNormalDetail['post_privacy'] = $value->post_privacy;
                     $postsNormalDetail['created_at'] = $value->created_at;
                     $postsNormalDetail['posttime'] = setpostTime($value->created_at);
                     $postsNormalDetail['post_image'] = [];
