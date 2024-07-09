@@ -7484,25 +7484,26 @@ class ApiControllerv2 extends Controller
                         ->where('user_id', $user->id)
                         ->where(function ($privacyQuery) {
                             $privacyQuery->where(function ($q) {
-                                $q->where('rsvp_d', '1')
-                                    ->where('rsvp_status', '1')
-                                    ->where('post_privacy', '2');
+                                $q->whereHas('event.event_invited_user', function ($que) {
+                                    $que->where('rsvp_d', '1')
+                                        ->where('rsvp_status', '1');
+                                })->where('post_privacy', '2');
                             })
                                 ->orWhere(function ($q) {
                                     $q->where('rsvp_d', '1')
-                                        ->where('rsvp_status', '0')
-                                        ->where('post_privacy', '3');
+                                        ->where('rsvp_status', '0');
+                                    // ->where('post_privacy', '3');
                                 })
                                 ->orWhere(function ($q) {
-                                    $q->where('rsvp_d', '0')
-                                        ->where('post_privacy', '4');
-                                })
-                                ->orWhere(function ($q) {
-                                    $q->where('post_privacy', '1');
+                                    $q->where('rsvp_d', '0');
+                                    // ->where('post_privacy', '4');
                                 });
+                            // ->orWhere(function ($q) {
+                            //     $q->where('post_privacy', '1');
+                            // });
                         });
                 });
-            })->orWhere('post_privacy', '3');
+            });
         }
         $eventPostList->orderBy('id', 'desc');
         if (!empty($selectedFilters) && !in_array('all', $selectedFilters)) {
