@@ -7504,39 +7504,36 @@ class ApiControllerv2 extends Controller
             //     });
             // });
             $eventPostList->where('event_id', $input['event_id'])
-                ->where('is_in_photo_moudle', 0)
                 ->whereDoesntHave('post_control', function ($query) use ($user) {
-                    $query->where('user_id', $user->id)
-                        ->where('post_control', '!=', 'hide_post');
+                    $query->where('user_id', $user->id);
                 })
                 ->whereHas('event', function ($query) use ($user, $input) {
-                    $query->where('deleted_at', null)
-                        ->whereHas('event_invited_user', function ($subQuery) use ($user, $input) {
-                            $subQuery->whereHas('user', function ($userQuery) {
-                                $userQuery->where('app_user', '1');
-                            })
-                                ->where('event_id', $input['event_id'])
-                                ->where('user_id', $user->id)
-                                ->where(function ($privacyQuery) {
-                                    $privacyQuery->where(function ($q) {
+                    $query->whereHas('event_invited_user', function ($subQuery) use ($user, $input) {
+                        $subQuery->whereHas('user', function ($userQuery) {
+                            $userQuery->where('app_user', '1');
+                        })
+                            ->where('event_id', $input['event_id'])
+                            ->where('user_id', $user->id)
+                            ->where(function ($privacyQuery) {
+                                $privacyQuery->where(function ($q) {
+                                    $q->where('rsvp_d', '1')
+                                        ->where('rsvp_status', '1')
+                                        ->where('post_privacy', '2');
+                                })
+                                    ->orWhere(function ($q) {
                                         $q->where('rsvp_d', '1')
-                                            ->where('rsvp_status', '1')
-                                            ->where('post_privacy', '2');
+                                            ->where('rsvp_status', '0')
+                                            ->where('post_privacy', '3');
                                     })
-                                        ->orWhere(function ($q) {
-                                            $q->where('rsvp_d', '1')
-                                                ->where('rsvp_status', '0')
-                                                ->where('post_privacy', '3');
-                                        })
-                                        ->orWhere(function ($q) {
-                                            $q->where('rsvp_d', '0')
-                                                ->where('post_privacy', '4');
-                                        })
-                                        ->orWhere(function ($q) {
-                                            $q->where('post_privacy', '1');
-                                        });
-                                });
-                        });
+                                    ->orWhere(function ($q) {
+                                        $q->where('rsvp_d', '0')
+                                            ->where('post_privacy', '4');
+                                    })
+                                    ->orWhere(function ($q) {
+                                        $q->where('post_privacy', '1');
+                                    });
+                            });
+                    });
                 });
         }
         $eventPostList->orderBy('id', 'desc');
