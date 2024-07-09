@@ -111,8 +111,6 @@ use App\Services\GooglePlayService;
 use Illuminate\Support\Facades\Session;
 use stdClass;
 use App\Services\GooglePlayServices;
-use App\Rules\EmailExists;
-
 
 class ApiControllerv2 extends Controller
 
@@ -7488,27 +7486,19 @@ class ApiControllerv2 extends Controller
                             $privacyQuery->where(function ($q) {
                                 $q->where('rsvp_d', '1')
                                     ->where('rsvp_status', '1')
-                                    ->whereHas('event.event_post', function ($q) {
-                                        $q->where('post_privacy', '2');
-                                    });
+                                    ->where('post_privacy', '2');
                             })
-                                ->orWhere(function ($q) {
+                                ->where(function ($q) {
                                     $q->where('rsvp_d', '1')
                                         ->where('rsvp_status', '0')
-                                        ->whereHas('event.event_post', function ($q) {
-                                            $q->where('post_privacy', '3');
-                                        });
+                                        ->where('post_privacy', '3');
                                 })
-                                ->orWhere(function ($q) {
+                                ->where(function ($q) {
                                     $q->where('rsvp_d', '0')
-                                        ->whereHas('event.event_post', function ($q) {
-                                            $q->where('post_privacy', '4');
-                                        });
+                                        ->where('post_privacy', '4');
                                 })
-                                ->orWhere(function ($q) {
-                                    $q->whereHas('event.event_post', function ($qu) {
-                                        $qu->where('post_privacy', '4');
-                                    });
+                                ->where(function ($q) {
+                                    $q->where('post_privacy', '1');
                                 });
                         });
                 });
@@ -12633,7 +12623,7 @@ class ApiControllerv2 extends Controller
         }
 
         $validator = Validator::make($input, [
-            'email' => ['required', 'email', new EmailExists]
+            'email' => ['required', 'email'],
         ]);
 
         if ($validator->fails()) {
