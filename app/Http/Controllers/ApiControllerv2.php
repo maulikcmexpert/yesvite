@@ -8874,39 +8874,23 @@ class ApiControllerv2 extends Controller
     {
 
         $user  = Auth::guard('api')->user();
-
         $rawData = $request->getContent();
-
         $input = json_decode($rawData, true);
-
         if ($input == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
         }
-
-
         $validator = Validator::make($input, [
-
             'event_id' => ['required', 'exists:events,id'],
-
             'event_post_id' => ['required'],
-
             'post_control' => ['required', 'in:hide_post,unhide_post,mute,unmute,report'],
-
         ]);
 
-
-
         if ($validator->fails()) {
-
             return response()->json([
                 'status' => 0,
                 'message' => $validator->errors()->first(),
-
             ]);
         }
-
-
-
         try {
 
             DB::beginTransaction();
