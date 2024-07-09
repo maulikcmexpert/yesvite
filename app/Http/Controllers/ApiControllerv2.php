@@ -8190,6 +8190,7 @@ class ApiControllerv2 extends Controller
 
                 $postsDetail['poll_option'] = [];
 
+
                 foreach ($polls->event_poll_option as $optionValue) {
 
                     $optionData['id'] = $optionValue->id;
@@ -8385,7 +8386,15 @@ class ApiControllerv2 extends Controller
 
                 $postCommentList[] = $commentInfo;
             }
-
+            $postsDetail['is_mute'] = 0;
+            if (isset($eventDetails->post_control) && !$eventDetails->isEmpty()) {
+                foreach ($eventDetails->post_control as $postcontrol) {
+                    if ($postcontrol->post_control == 'mute') {
+                        $postsDetail['is_mute'] = 1;
+                        break;
+                    }
+                }
+            }
             $postsDetail['post_comment'] = $postCommentList;
 
 
