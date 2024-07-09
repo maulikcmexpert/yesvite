@@ -7500,8 +7500,8 @@ class ApiControllerv2 extends Controller
                                 ->orWhere(function ($q) {
                                     $q->where('post_privacy', '1');
                                 });
-                        })->where('post_privacy', '2');
-                });
+                        });
+                })->where('post_privacy', '2');
             });
         }
         $eventPostList->orderBy('id', 'desc');
