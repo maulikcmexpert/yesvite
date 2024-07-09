@@ -1863,8 +1863,8 @@ class ApiControllerv2 extends Controller
                 'lastname' => 'required',
                 'email' => ['required', Rule::unique('users')->ignore($user->id)],
                 "address" => "required",
-                "city" => "required",
-                "state" => "required",
+                // "city" => "required",
+                // "state" => "required",
                 "zip_code" => "required"
             ]);
         } else {
