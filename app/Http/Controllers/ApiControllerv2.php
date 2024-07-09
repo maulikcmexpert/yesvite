@@ -8109,24 +8109,15 @@ class ApiControllerv2 extends Controller
     public function eventPostDetail(Request $request)
     {
         $user  = Auth::guard('api')->user();
-
         $rawData = $request->getContent();
-
-
         $input = json_decode($rawData, true);
-
         if ($input == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
         }
-
         $validator = Validator::make($input, [
-
             'event_post_id' => ['required', 'exists:event_posts,id']
-
         ]);
-
         if ($validator->fails()) {
-
             return response()->json([
                 'status' => 0,
                 'message' => $validator->errors()->first(),
@@ -8134,12 +8125,11 @@ class ApiControllerv2 extends Controller
         }
         // try {
 
-        $eventDetails = EventPost::with('user')->withCount(['event_post_comment' => function ($query) {
+        $eventDetails = EventPost::with('user', 'post_control')->withCount(['event_post_comment' => function ($query) {
             $query->where('parent_comment_id', NULL);
         }, 'event_post_reaction'])->where(['id' => $input['event_post_id']])->first();
+        dd($eventDetails);
         if ($eventDetails != null) {
-
-
             $checkUserIsReaction = EventPostReaction::where(['event_id' => $eventDetails->event_id, 'event_post_id' => $input['event_post_id'], 'user_id' => $user->id])->first();
             $ischeckEventOwner = Event::where(['id' => $eventDetails->event_id, 'user_id' => $eventDetails->user->id])->first();
 
@@ -8397,6 +8387,7 @@ class ApiControllerv2 extends Controller
             }
 
             $postsDetail['post_comment'] = $postCommentList;
+
 
             return response()->json(['status' => 1, 'message' => "Post Details", 'data' => $postsDetail]);
         } else {
