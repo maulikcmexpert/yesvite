@@ -63,4 +63,9 @@ class EventPost extends Model
 
         return $this->hasMany(UserReportToPost::class, 'event_post_id', 'id');
     }
+
+    public function event_invited_user()
+    {
+        return $this->hasMany(EventPost::class, 'event_id');
+    }
 }
