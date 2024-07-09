@@ -993,7 +993,7 @@ class ApiControllerv2 extends Controller
 
                             $query->where('app_user', '1');
                         })->where(['user_id' => $user->id, 'event_id' => $value->event->id])->first();
-                        dd($checkUserrsvp['rsvp_status']);
+                        dd($checkUserrsvp);
                         if ($checkUserrsvp != null) {
                             if ($checkUserrsvp->rsvp_status == '1') {
 
