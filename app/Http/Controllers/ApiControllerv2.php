@@ -7501,8 +7501,8 @@ class ApiControllerv2 extends Controller
                                     $q->where('post_privacy', '1');
                                 });
                         });
-                })->where('post_privacy', '2');
-            });
+                });
+            })->where('post_privacy', '3');
         }
         $eventPostList->orderBy('id', 'desc');
         if (!empty($selectedFilters) && !in_array('all', $selectedFilters)) {
