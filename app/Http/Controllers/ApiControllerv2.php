@@ -7502,7 +7502,7 @@ class ApiControllerv2 extends Controller
                                 });
                         });
                 });
-            })->where('post_privacy', '3');
+            })->orWhere('post_privacy', '3');
         }
         $eventPostList->orderBy('id', 'desc');
         if (!empty($selectedFilters) && !in_array('all', $selectedFilters)) {
