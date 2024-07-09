@@ -7483,12 +7483,12 @@ class ApiControllerv2 extends Controller
                         ->where('event_id', $input['event_id'])
                         ->where('user_id', $user->id)
                         ->where(function ($privacyQuery) {
-                            $privacyQuery->where(function ($q) {
-                                $q->whereHas('event.event_invited_user', function ($que) {
-                                    $que->where('rsvp_d', '1')
-                                        ->where('rsvp_status', '1');
-                                })->where('post_privacy', '2');
-                            });
+                            // $privacyQuery->where(function ($q) {
+                            //     $q->whereHas('event.event_invited_user', function ($que) {
+                            //         $que->where('rsvp_d', '1')
+                            //             ->where('rsvp_status', '1');
+                            //     })->where('post_privacy', '2');
+                            // });
                             //     ->orWhere(function ($q) {
                             //         $q->where('rsvp_d', '1')
                             //             ->where('rsvp_status', '0');
