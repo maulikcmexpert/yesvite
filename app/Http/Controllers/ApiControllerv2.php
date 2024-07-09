@@ -8128,7 +8128,7 @@ class ApiControllerv2 extends Controller
         $eventDetails = EventPost::with('user', 'post_control')->withCount(['event_post_comment' => function ($query) {
             $query->where('parent_comment_id', NULL);
         }, 'event_post_reaction'])->where(['id' => $input['event_post_id']])->first();
-        dd($eventDetails);
+        // dd($eventDetails);
         if ($eventDetails != null) {
             $checkUserIsReaction = EventPostReaction::where(['event_id' => $eventDetails->event_id, 'event_post_id' => $input['event_post_id'], 'user_id' => $user->id])->first();
             $ischeckEventOwner = Event::where(['id' => $eventDetails->event_id, 'user_id' => $eventDetails->user->id])->first();
