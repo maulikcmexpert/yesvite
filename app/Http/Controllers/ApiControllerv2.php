@@ -7468,7 +7468,11 @@ class ApiControllerv2 extends Controller
             ->where([
                 'event_id' => $input['event_id'],
                 'is_in_photo_moudle' => '0'
-            ]);
+            ])
+            ->whereDoesntHave('post_control', function ($query) use ($user) {
+                $query->where('user_id', $user->id)
+                    ->where('post_control', 'hide_post');
+            });
         $checkEventOwner = Event::where(['id' => $input['event_id'], 'user_id' => $user->id])->first();
 
         if ($checkEventOwner == null) {
