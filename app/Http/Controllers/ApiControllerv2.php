@@ -7474,7 +7474,8 @@ class ApiControllerv2 extends Controller
                     ->where('post_control', '!=', 'hide_post');
             });
         $checkEventOwner = Event::where(['id' => $input['event_id'], 'user_id' => $user->id])->first();
-        if ($checkEventOwner == null) {
+        $checkPostUser = EventPost::where(['event_id' => $input['event_id'], 'user_id' => $user->id])->first();
+        if ($checkEventOwner == null && $checkPostUser == null) {
             $eventPostList->where(function ($query) use ($user, $input) {
                 $query->orWhereHas('event.event_invited_user', function ($subQuery) use ($user, $input) {
                     $subQuery->whereHas('user', function ($userQuery) {
