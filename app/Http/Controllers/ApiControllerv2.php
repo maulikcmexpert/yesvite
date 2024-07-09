@@ -7458,7 +7458,7 @@ class ApiControllerv2 extends Controller
         $selectedFilters = $request->input('filters');
         $eventCreator = Event::where('id', $input['event_id'])->first();
         $eventPostList = EventPost::query();
-        $eventPostList->with(['user', 'post_image', 'event_invited_user'])
+        $eventPostList->with(['user', 'post_image'])
             ->withCount([
                 'event_post_comment' => function ($query) {
                     $query->where('parent_comment_id', NULL);
