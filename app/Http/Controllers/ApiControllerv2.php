@@ -7469,7 +7469,7 @@ class ApiControllerv2 extends Controller
                 'event_id' => $input['event_id'],
                 'is_in_photo_moudle' => '0'
             ])
-            ->whereDoesntHave('post_control', function ($query) use ($user) {
+            ->whereHas('post_control', function ($query) use ($user) {
                 $query->where('user_id', $user->id)
                     ->where('post_control', '!=', 'hide_post');
             });
