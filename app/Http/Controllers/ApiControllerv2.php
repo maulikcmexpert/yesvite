@@ -126,7 +126,7 @@ class ApiControllerv2 extends Controller
 
 
 
-    public function __construct(GooglePlayService $GooglePlayService)
+    public function __construct()
     {
 
         $this->user = Auth::guard('api')->user();
