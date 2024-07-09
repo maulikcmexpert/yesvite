@@ -111,6 +111,8 @@ use App\Services\GooglePlayService;
 use Illuminate\Support\Facades\Session;
 use stdClass;
 use App\Services\GooglePlayServices;
+use App\Rules\EmailExists;
+
 
 class ApiControllerv2 extends Controller
 
@@ -12623,7 +12625,7 @@ class ApiControllerv2 extends Controller
         }
 
         $validator = Validator::make($input, [
-            'email' => ['required', 'email'],
+            'email' => ['required', 'email', new EmailExists]
         ]);
 
         if ($validator->fails()) {
