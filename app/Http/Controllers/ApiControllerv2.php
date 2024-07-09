@@ -7521,18 +7521,17 @@ class ApiControllerv2 extends Controller
                                         ->where('post_privacy', '2');
                                 })
                                     ->orWhere(function ($q) {
+                                        $q->where('rsvp_d', '1')
+                                            ->where('rsvp_status', '0')
+                                            ->where('post_privacy', '3');
+                                    })
+                                    ->orWhere(function ($q) {
                                         $q->where('rsvp_d', '0')
                                             ->where('post_privacy', '4');
                                     })
                                     ->orWhere(function ($q) {
                                         $q->where('post_privacy', '1');
                                     });
-                            })->orWhere(function ($privacyQuery) {
-                                $privacyQuery->where(function ($q) {
-                                    $q->where('rsvp_d', '1')
-                                        ->where('rsvp_status', '0')
-                                        ->where('post_privacy', '3');
-                                });
                             });
                     });
                 });
