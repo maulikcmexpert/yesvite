@@ -7500,7 +7500,7 @@ class ApiControllerv2 extends Controller
                                 ->orWhere(function ($q) {
                                     $q->where('post_privacy', '1');
                                 });
-                        })->orWhere('post_privacy', '3');
+                        })->where('post_privacy', '2');
                 });
             });
         }
