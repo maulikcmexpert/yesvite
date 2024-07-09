@@ -8387,7 +8387,7 @@ class ApiControllerv2 extends Controller
                 $postCommentList[] = $commentInfo;
             }
             $postsDetail['is_mute'] = 0;
-            if (isset($eventDetails->post_control) && !$eventDetails->isEmpty()) {
+            if (isset($eventDetails->post_control) && !$eventDetails->post_control->isEmpty()) {
                 foreach ($eventDetails->post_control as $postcontrol) {
                     if ($postcontrol->post_control == 'mute') {
                         $postsDetail['is_mute'] = 1;
