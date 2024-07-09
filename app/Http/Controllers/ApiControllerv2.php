@@ -784,10 +784,7 @@ class ApiControllerv2 extends Controller
                                 $rsvp_status = '2'; // rsvp you'r not going
                             }
                             if ($checkUserrsvp->rsvp_status == NULL) {
-
-
                                 $rsvp_status = '0'; // rsvp button//
-
                             }
                         }
 
@@ -993,20 +990,15 @@ class ApiControllerv2 extends Controller
 
                             $query->where('app_user', '1');
                         })->where(['user_id' => $user->id, 'event_id' => $value->event->id])->first();
-                        dd($checkUserrsvp);
+
                         if ($checkUserrsvp != null) {
                             if ($checkUserrsvp->rsvp_status == '1') {
-
                                 $rsvp_status = '1'; // rsvp you'r going
-
                             } else if ($checkUserrsvp->rsvp_status == '0') {
                                 $rsvp_status = '2'; // rsvp you'r not going
                             }
-                            if ($checkUserrsvp->rsvp_status == '0') {
-
-
+                            if ($checkUserrsvp->rsvp_status == NULL) {
                                 $rsvp_status = '0'; // rsvp button//
-
                             }
                         }
 
@@ -1234,7 +1226,7 @@ class ApiControllerv2 extends Controller
                             } else if ($checkUserrsvp->rsvp_status == '0') {
                                 $rsvp_status = '2'; // rsvp you'r not going
                             }
-                            if ($checkUserrsvp->rsvp_status == '0') {
+                            if ($checkUserrsvp->rsvp_status == NULL) {
 
 
                                 $rsvp_status = '0'; // rsvp button//
@@ -1494,7 +1486,7 @@ class ApiControllerv2 extends Controller
                             } else if ($checkUserrsvp->rsvp_status == '0') {
                                 $rsvp_status = '2'; // rsvp you'r not going
                             }
-                            if ($checkUserrsvp->rsvp_status == '0') {
+                            if ($checkUserrsvp->rsvp_status == NULL) {
 
 
                                 $rsvp_status = '0'; // rsvp button//
@@ -1755,7 +1747,7 @@ class ApiControllerv2 extends Controller
                             } else if ($checkUserrsvp->rsvp_status == '0') {
                                 $rsvp_status = '2'; // rsvp you'r not going
                             }
-                            if ($checkUserrsvp->rsvp_status == '0') {
+                            if ($checkUserrsvp->rsvp_status == NULL) {
 
 
                                 $rsvp_status = '0'; // rsvp button//
