@@ -1689,7 +1689,6 @@ class ApiControllerv2 extends Controller
                         $eventDetail['event_wall'] = $value->event->event_settings->event_wall;
                         $eventDetail["guest_list_visible_to_guests"] = $value->event->event_settings->guest_list_visible_to_guests;
 
-
                         $eventDetail['guest_pending_count'] = getGuestRsvpPendingCount($value->event->id);
                         $eventDetail['event_potluck'] = $value->event->event_settings->podluck;
                         $eventDetail['adult_only_party'] = $value->event->event_settings->adult_only_party;
@@ -1706,60 +1705,38 @@ class ApiControllerv2 extends Controller
 
                             $eventDetail['event_images'] = asset('public/storage/event_images/' . $images->image);
                         }
-
                         $eventDetail['kids'] = 0;
                         $eventDetail['adults'] = 0;
-
                         $checkRsvpDone = EventInvitedUser::where(['event_id' => $value->event->id, 'user_id' => $user->id])->first();
                         if ($checkRsvpDone != null) {
                             $eventDetail['kids'] = $checkRsvpDone->kids;
                             $eventDetail['adults'] = $checkRsvpDone->adults;
                         }
-
                         $eventDetail['event_date'] = $value->event->start_date;
                         $event_time = "-";
                         if ($value->event->event_schedule->isNotEmpty()) {
 
                             $event_time =  $value->event->event_schedule->first()->start_time;
                         }
-
                         $eventDetail['start_time'] =  $value->event->rsvp_start_time;
-
-
                         $eventDetail['rsvp_start_timezone'] = $value->event->rsvp_start_timezone;
-
-
-
                         $rsvp_status = "";
-
-
-
-
                         $checkUserrsvp = EventInvitedUser::whereHas('user', function ($query) {
 
                             $query->where('app_user', '1');
                         })->where(['user_id' => $user->id, 'event_id' => $value->event->id])->first();
                         if ($checkUserrsvp != null) {
                             if ($checkUserrsvp->rsvp_status == '1') {
-
                                 $rsvp_status = '1'; // rsvp you'r going
-
                             } else if ($checkUserrsvp->rsvp_status == '0') {
                                 $rsvp_status = '2'; // rsvp you'r not going
                             }
                             if ($checkUserrsvp->rsvp_status == NULL) {
-
-
                                 $rsvp_status = '0'; // rsvp button//
-
                             }
                         }
-
-
                         $eventDetail['rsvp_status'] = $rsvp_status;
-
                         $total_notification = Notification::where(['event_id' => $value->event->id, 'user_id' => $user->id, 'read' => '0'])->count();
-
                         $eventDetail['total_notification'] = $total_notification;
                         $eventDetail['event_detail'] = [];
                         if ($value->event_settings) {
@@ -1793,24 +1770,12 @@ class ApiControllerv2 extends Controller
                         })->where(['event_id' => $value->event->id, 'rsvp_status' => '1', 'rsvp_d' => '1'])->count();
 
                         $eventDetail['total_accept_event_user'] = $total_accept_event_user;
-
-
-
-
-
                         $total_invited_user = EventInvitedUser::whereHas('user', function ($query) {
-
                             $query->where('app_user', '1');
                         })->where(['event_id' => $value->event->id])->count();
-
-
-
                         $eventDetail['total_invited_user'] = $total_invited_user;
 
-
-
                         $total_refuse_event_user = EventInvitedUser::whereHas('user', function ($query) {
-
                             $query->where('app_user', '1');
                         })->where(['event_id' => $value->event->id, 'rsvp_status' => '0', 'rsvp_d' => '1'])->count();
 
