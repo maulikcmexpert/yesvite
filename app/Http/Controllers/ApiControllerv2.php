@@ -1910,8 +1910,8 @@ class ApiControllerv2 extends Controller
             }
             $userUpdate->address = ($input['address'] != "") ? $input['address'] : $userUpdate->address;
             $userUpdate->address_2 = (isset($input['address_2'])  && $input['address_2'] != "") ? $input['address_2'] : $userUpdate->address_2;
-            $userUpdate->city = ($input['city'] != "") ? $input['city'] : $userUpdate->city;
-            $userUpdate->state = ($input['state'] != "") ? $input['state'] : $userUpdate->state;
+            $userUpdate->city = ($input['city'] != "") ? $input['city'] : "";
+            $userUpdate->state = ($input['state'] != "") ? $input['state'] : "";
             $userUpdate->save();
             DB::commit();
 
