@@ -611,11 +611,9 @@ class ApiControllerv2 extends Controller
     }
 
     public function EventList(Request $request)
-
     {
 
         $user  = Auth::guard('api')->user();
-
         $rawData = $request->getContent();
         $input = json_decode($rawData, true);
         if ($input == null) {
@@ -623,25 +621,17 @@ class ApiControllerv2 extends Controller
         }
         $validator = Validator::make($input, [
             'event_date' => ['present', 'date'],
-
             'end_event_date' => ['present'],
-
         ]);
-
-
         if ($validator->fails()) {
-
             return response()->json([
                 'status' => 0,
                 'message' => $validator->errors()->first(),
             ]);
         }
-
-
         try {
             // All  //
             $event_date = "";
-
             $end_event_date = "";
             if (isset($input['event_date']) && !empty($input['event_date'])) {
                 $event_date = $input['event_date'];
@@ -650,17 +640,11 @@ class ApiControllerv2 extends Controller
                     $end_event_date = $event_date;
                 }
             }
-
-
-
-
             $page = $request->input('page');
-
             $pages = ($page != "") ? $page : 1;
             $totalCounts = 0;
             $createdEventList = [];
             $total_allEvent_page = 0;
-
             $eventList = [];
             if (($input['hosting'] == '0' && $input['invited_to'] == '0' && $input['past_event'] == '0' && $input['need_rsvp_to'] == '0')) {
                 $usercreatedAllEventList = Event::query();
@@ -692,7 +676,6 @@ class ApiControllerv2 extends Controller
                 }
 
                 $usercreatedAllEventList->orderBy('start_date', 'ASC');
-
                 $invitedEvents = EventInvitedUser::whereHas('user', function ($query) {
                     $query->where('app_user', '1');
                 })->where('user_id', $user->id)->get()->pluck('event_id');
@@ -700,8 +683,6 @@ class ApiControllerv2 extends Controller
                 $invitedEventsList = Event::query();
                 $invitedEventsList->with(['event_image', 'event_settings', 'user', 'event_schedule'])
                     ->whereIn('id', $invitedEvents);
-
-
                 if ($event_date != "" || $end_event_date != "") {
                     $invitedEventsList->when($event_date, function ($query) use ($event_date, $end_event_date) {
                         return $query->whereBetween('start_date', [$event_date, $end_event_date]);
@@ -712,7 +693,6 @@ class ApiControllerv2 extends Controller
 
                 if (isset($input['search_event']) && !empty($input['search_event'])) {
                     $search = $input['search_event'];
-
                     $invitedEventsList->when($search, function ($query) use ($search) {
                         return    $query->where('event_name', 'like', "%$search%");
                     });
@@ -738,18 +718,12 @@ class ApiControllerv2 extends Controller
                 // Calculate offset based on current page and perPage
                 $offset = ($pages - 1) * $this->perPage;
 
-
-
                 // $paginatedEvents =  collect($allEvent)->sortBy('start_date')->forPage($page, $this->perPage);
                 $paginatedEvents =  collect($allEvent)->sortBy('start_date');
 
-
                 if (count($paginatedEvents) != 0) {
 
-
                     foreach ($paginatedEvents as $value) {
-
-
                         $eventDetail['id'] = $value->id;
                         $eventDetail['event_name'] = $value->event_name;
                         $eventDetail['is_event_owner'] = ($value->user->id == $user->id) ? 1 : 0;
@@ -759,8 +733,6 @@ class ApiControllerv2 extends Controller
 
                             $eventDetail['is_notification_on_off'] =  $value->notification_on_off;
                         } else {
-
-
                             $eventDetail['is_notification_on_off'] =  $isCoHost->notification_on_off;
                         }
                         $eventDetail['is_co_host'] = "0";
@@ -788,38 +760,21 @@ class ApiControllerv2 extends Controller
                             $eventDetail['kids'] = $checkRsvpDone->kids;
                             $eventDetail['adults'] = $checkRsvpDone->adults;
                         }
-
-
                         $images = EventImage::where('event_id', $value->id)->first();
-
                         $eventDetail['event_images'] = ($images != null) ? asset('public/storage/event_images/' . $images->image) : "";
-
                         $eventDetail['event_date'] = $value->start_date;
-
 
                         $event_time = "-";
                         if ($value->event_schedule->isNotEmpty()) {
-
                             $event_time =  $value->event_schedule->first()->start_time;
                         }
-
                         $eventDetail['start_time'] =  $value->rsvp_start_time;
-
-
-
                         $eventDetail['rsvp_start_timezone'] = $value->rsvp_start_timezone;
-
-
                         $rsvp_status = "";
-
-
-
-
-
                         $checkUserrsvp = EventInvitedUser::whereHas('user', function ($query) {
-
                             $query->where('app_user', '1');
                         })->where(['user_id' => $user->id, 'event_id' => $value->id])->first();
+
                         if ($checkUserrsvp != null) {
                             if ($checkUserrsvp->rsvp_status == '1') {
 
