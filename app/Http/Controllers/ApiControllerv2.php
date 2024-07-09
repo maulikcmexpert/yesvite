@@ -7482,39 +7482,6 @@ class ApiControllerv2 extends Controller
                     ->where('event_id', $input['event_id'])
                     ->where('user_id', $user->id);
             });
-            $eventPostList->where(function ($query) use ($user, $input) {
-                $query->orWhereHas('event.event_invited_user', function ($subQuery) use ($user, $input) {
-                    $subQuery->whereHas('user', function ($userQuery) {
-                        $userQuery->where('app_user', '1');
-                    })
-                        ->where('event_id', $input['event_id'])
-                        ->where(function ($query) use ($user) {
-                            $query->where(function ($q) use ($user) {
-                                $q->where('rsvp_d', '1')
-                                    ->where('rsvp_status', '0')
-                                    ->whereHas('event.event_post', function ($postQuery) use ($user) {
-                                        $postQuery->where('post_privacy', '2')
-                                            ->where('user_id', $user->id);
-                                    });
-                            })
-                                ->orWhere(function ($q) use ($user) {
-                                    $q->where('rsvp_d', '1')
-                                        ->where('rsvp_status', '1')
-                                        ->whereHas('event.event_post', function ($postQuery) use ($user) {
-                                            $postQuery->where('post_privacy', '3')
-                                                ->where('user_id', $user->id);
-                                        });
-                                })
-                                ->orWhere(function ($q) use ($user) {
-                                    $q->where('rsvp_d', '0')
-                                        ->whereHas('event.event_post', function ($postQuery) use ($user) {
-                                            $postQuery->where('post_privacy', '4')
-                                                ->where('user_id', $user->id);
-                                        });
-                                });
-                        });
-                });
-            });
         }
         $eventPostList->orderBy('id', 'desc');
         if (!empty($selectedFilters) && !in_array('all', $selectedFilters)) {
