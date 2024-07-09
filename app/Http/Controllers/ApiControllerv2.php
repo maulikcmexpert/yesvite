@@ -7486,7 +7486,9 @@ class ApiControllerv2 extends Controller
                             $privacyQuery->where(function ($q) {
                                 $q->where('rsvp_d', '1')
                                     ->where('rsvp_status', '1')
-                                    ->where('post_privacy', '2');
+                                    ->whereHas('event.event_post', function ($q) {
+                                        $q->where('post_privacy', '2');
+                                    });
                             })
                                 ->orWhere(function ($q) {
                                     $q->where('rsvp_d', '1')
