@@ -887,7 +887,6 @@ class ApiControllerv2 extends Controller
 
             if ($input['invited_to'] == '1') {
                 $search = "";
-
                 if (isset($input['search_event']) && !empty($input['search_event'])) {
                     $search = $input['search_event'];
                 }
@@ -920,10 +919,6 @@ class ApiControllerv2 extends Controller
                 })->where('user_id', $user->id)->count();
 
                 // Make sure to handle the retrieved $userInvitedEventList accordingly
-
-
-
-
                 $userInvitedEventList = EventInvitedUser::whereHas('event', function ($query) use ($event_date, $end_event_date, $search, $month, $year) {
                     $query->where('is_draft_save', '0');
                     $query->with(['event_image', 'event_settings', 'user', 'event_schedule'])->where('start_date', '>=', date('Y-m-d'))->orderBy('id', 'DESC');
@@ -943,19 +938,9 @@ class ApiControllerv2 extends Controller
                 })->where('user_id', $user->id)->get();
                 // ->paginate($this->perPage, ['*'], 'page', $page);
 
-
                 // Make sure to handle the retrieved $userInvitedEventList accordingly
-
-
-
                 if (count($userInvitedEventList) != 0) {
-
-
-
                     foreach ($userInvitedEventList as $value) {
-
-
-
                         $eventDetail['id'] = $value->event->id;
                         $eventDetail['user_id'] = $value->event->user->id;
                         $eventDetail['event_name'] = $value->event->event_name;
@@ -967,7 +952,6 @@ class ApiControllerv2 extends Controller
                         $eventDetail['host_profile'] = empty($value->event->user->profile) ? "" : asset('public/storage/profile/' . $value->event->user->profile);
                         $eventDetail['event_wall'] = $value->event->event_settings->event_wall;
                         $eventDetail["guest_list_visible_to_guests"] = $value->event->event_settings->guest_list_visible_to_guests;
-
 
                         $eventDetail['guest_pending_count'] = getGuestRsvpPendingCount($value->event->id);
                         $eventDetail['event_potluck'] = $value->event->event_settings->podluck;
@@ -1003,21 +987,13 @@ class ApiControllerv2 extends Controller
                         }
 
                         $eventDetail['start_time'] =  $value->event->rsvp_start_time;
-
-
                         $eventDetail['rsvp_start_timezone'] = $value->event->rsvp_start_timezone;
-
-
-
                         $rsvp_status = "";
-
-
-
-
                         $checkUserrsvp = EventInvitedUser::whereHas('user', function ($query) {
 
                             $query->where('app_user', '1');
                         })->where(['user_id' => $user->id, 'event_id' => $value->event->id])->first();
+                        dd($checkUserrsvp);
                         if ($checkUserrsvp != null) {
                             if ($checkUserrsvp->rsvp_status == '1') {
 
