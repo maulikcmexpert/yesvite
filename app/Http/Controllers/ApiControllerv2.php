@@ -7486,25 +7486,25 @@ class ApiControllerv2 extends Controller
                             $query->where(function ($q) {
                                 $q->where('rsvp_d', '1')
                                     ->where('rsvp_status', '0')
-                                    ->whereHas('event_post', function ($postQuery) {
+                                    ->whereHas('event.event_post', function ($postQuery) {
                                         $postQuery->where('post_privacy', '2');
                                     });
                             })
                                 ->orWhere(function ($q) {
                                     $q->where('rsvp_d', '1')
                                         ->where('rsvp_status', '1')
-                                        ->whereHas('event_post', function ($postQuery) {
+                                        ->whereHas('event.event_post', function ($postQuery) {
                                             $postQuery->where('post_privacy', '3');
                                         });
                                 })
                                 ->orWhere(function ($q) {
                                     $q->where('rsvp_d', '0')
-                                        ->whereHas('event_post', function ($postQuery) {
+                                        ->whereHas('event.event_post', function ($postQuery) {
                                             $postQuery->where('post_privacy', '4');
                                         });
                                 })
                                 ->orWhere(function ($q) {
-                                    $q->whereHas('event_post', function ($postQuery) {
+                                    $q->whereHas('event.event_post', function ($postQuery) {
                                         $postQuery->where('post_privacy', '1');
                                     });
                                 });
