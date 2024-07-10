@@ -1158,6 +1158,14 @@ $(".send-message").on("keypress", async function (e) {
                 ref(database, `overview/${receiverId}/${conversationId}`)
             );
 
+            const userSnapshot = await get(
+                ref(database, `users/${receiverId}/userToken`)
+            );
+            if (userSnapshot.exists()) {
+                const deviceToken = userSnapshot.val();
+                console.log(deviceToken);
+            }
+
             if (receiverSnapshot.val() != null) {
                 await updateOverview(receiverId, conversationId, {
                     lastMessage: `${senderUserName}: ${message}`,
@@ -1190,13 +1198,13 @@ $(".send-message").on("keypress", async function (e) {
                     receiverConversationData
                 );
 
-                const userSnapshot = await get(
-                    ref(database, `users/${receiverId}/userToken`)
-                );
-                if (userSnapshot.exists()) {
-                    const deviceToken = userSnapshot.val();
-                    console.log(deviceToken);
-                }
+                // const userSnapshot = await get(
+                //     ref(database, `users/${receiverId}/userToken`)
+                // );
+                // if (userSnapshot.exists()) {
+                //     const deviceToken = userSnapshot.val();
+                //     console.log(deviceToken);
+                // }
                 // await send_push_notification(receiverId, message);
             }
         }
