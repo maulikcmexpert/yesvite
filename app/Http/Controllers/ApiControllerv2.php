@@ -7457,7 +7457,7 @@ class ApiControllerv2 extends Controller
                     $postsNormalDetail['kids'] = isset($count_kids_adult['kids']) ? $count_kids_adult['kids'] : 0;
                     $postsNormalDetail['adults'] = isset($count_kids_adult['adults']) ? $count_kids_adult['adults'] : 0;
                     $postsNormalDetail['location'] = ($value->user->city != NULL) ? $value->user->city : "";
-
+                    $postsNormalDetail['commenting_on_off'] = $value->commenting_on_off;
 
 
                     $postsNormalDetail['post_type'] = $value->post_type;
