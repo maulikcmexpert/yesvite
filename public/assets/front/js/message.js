@@ -1158,14 +1158,7 @@ $(".send-message").on("keypress", async function (e) {
                 ref(database, `overview/${receiverId}/${conversationId}`)
             );
 
-            const userSnapshot = await get(
-                ref(database, `users/${receiverId}/`)
-            );
-            console.log(userSnapshot.val());
-            if (userSnapshot.exists()) {
-                const deviceToken = userSnapshot.val();
-                console.log(deviceToken);
-            }
+            await send_push_notification(receiverId, message);
 
             if (receiverSnapshot.val() != null) {
                 await updateOverview(receiverId, conversationId, {
@@ -1198,15 +1191,6 @@ $(".send-message").on("keypress", async function (e) {
                     ref(database, `overview/${receiverId}/${conversationId}`),
                     receiverConversationData
                 );
-
-                // const userSnapshot = await get(
-                //     ref(database, `users/${receiverId}/userToken`)
-                // );
-                // if (userSnapshot.exists()) {
-                //     const deviceToken = userSnapshot.val();
-                //     console.log(deviceToken);
-                // }
-                // await send_push_notification(receiverId, message);
             }
         }
         const conversationElement = $(`.conversation-${conversationId}`);
@@ -3166,9 +3150,39 @@ async function deleteConversation(conversationId, isGroup) {
 }
 
 async function send_push_notification(user_id, message) {
-    const userSnapshot = await get(ref(database, `users/${user_id}/userToken`));
+    const userSnapshot = await get(
+        ref(database, `users/${receiverId}/userToken`)
+    );
+
     if (userSnapshot.exists()) {
         const deviceToken = userSnapshot.val();
         console.log(deviceToken);
+        var key =
+            "AAAAP6m84T0:APA91bHeuAm2ME_EmPEsOjMe2FatmHn2QU98ADg4Y5UxNMmXGg4MDD4OJQQhvsixNfhV1g2BWbgOCQGEf9_c3ngB8qH_N3MEMsgD7uuAQAq0_IO2GGPqCxjJPuwAME9MVX9ZvWgYbcPh";
+        var to = deviceToken;
+        var notification = {
+            title: "Test Message Notification",
+            body: message,
+            icon: "firebase-logo.png",
+            click_action: "http://localhost:8081",
+        };
+
+        fetch("https://fcm.googleapis.com/fcm/send", {
+            method: "POST",
+            headers: {
+                Authorization: "key=" + key,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                notification: notification,
+                to: to,
+            }),
+        })
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.error(error);
+            });
     }
 }
