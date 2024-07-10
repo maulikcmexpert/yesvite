@@ -10281,6 +10281,7 @@ class ApiControllerv2 extends Controller
                     }
                 }
                 if (isset($id) && $id != null) {
+                    dd($id);
                     $notificationParam = [
                         'sender_id' => $user->id,
                         'event_id' => $input['event_id'],
