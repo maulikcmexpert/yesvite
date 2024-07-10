@@ -3226,21 +3226,15 @@ class ApiControllerv2 extends Controller
     {
 
         $user  = Auth::guard('api')->user();
-
         $rawData = $request->getContent();
-
         $eventData = json_decode($rawData, true);
-
         if ($eventData == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
         }
-
         if ($eventData['is_draft_save'] == '0') {
             $validator = Validator::make($eventData, [
-
                 'event_type_id' => ['required'],
                 'event_name' => ['required'],
-
                 'start_date' => ['required'],
                 'end_date' => ['required'],
                 'rsvp_by_date_set' => ['required', 'in:0,1'],
@@ -3282,7 +3276,6 @@ class ApiControllerv2 extends Controller
             ]);
         }
 
-
         if ($validator->fails()) {
 
             return response()->json([
@@ -3291,14 +3284,9 @@ class ApiControllerv2 extends Controller
             ]);
         }
 
-        // try {
         DB::beginTransaction();
-
-
-
         $rsvp_by_date = date('Y-m-d');
         $rsvp_by_date_set = '0';
-
         $rsvpEndTime = "";
 
         if (!empty($eventData['rsvp_by_date'])) {
@@ -3313,10 +3301,6 @@ class ApiControllerv2 extends Controller
                 $rsvp_by_date = $start->format('Y-m-d');
             }
         }
-
-
-
-
         $greeting_card_id = "";
         if ($eventData['event_setting']['thank_you_cards'] == '1') {
 
@@ -3333,31 +3317,20 @@ class ApiControllerv2 extends Controller
                 $gift_registry_id =  implode(',', $eventData['gift_registry_list']);
             }
         }
-
-
-
-
         $eventCreation =  Event::create([
-
             'event_type_id' => (!empty($eventData['event_type_id'])) ? $eventData['event_type_id'] : "",
-
             'event_name' => (!empty($eventData['event_name'])) ? $eventData['event_name'] : "",
-
             'user_id' => $user->id,
-
             'hosted_by' => (!empty($eventData['hosted_by'])) ? $eventData['hosted_by'] : $user->firstname . ' ' . $user->lastname,
             'latitude' => (!empty($eventData['latitude'])) ? $eventData['latitude'] : "",
             'longitude' => (!empty($eventData['longitude'])) ? $eventData['longitude'] : "",
             'start_date' => (!empty($eventData['start_date'])) ? $eventData['start_date'] : NULL,
-
             'end_date' => (!empty($eventData['end_date'])) ? $eventData['end_date'] : NULL,
             //'rsvp_by_date_set' => $eventData['rsvp_by_date_set'],
             'rsvp_by_date_set' => $rsvp_by_date_set,
             // 'rsvp_by_date' => (!empty($eventData['rsvp_by_date'])) ? $eventData['rsvp_by_date'] : NULL,
             'rsvp_by_date' => $rsvp_by_date,
-
             'rsvp_start_time' => $eventData['rsvp_start_time'],
-
             'rsvp_start_timezone' => (!empty($eventData['rsvp_start_timezone'])) ? $eventData['rsvp_start_timezone'] : "",
             'greeting_card_id' => $greeting_card_id,
             'gift_registry_id' => $gift_registry_id,
@@ -3377,88 +3350,48 @@ class ApiControllerv2 extends Controller
             'is_draft_save' => $eventData['is_draft_save']
         ]);
 
-
-
         if ($eventCreation) {
-
             $eventId = $eventCreation->id;
-
             if (!empty($eventData['invited_user_id'])) {
-
                 $invitedUsers = $eventData['invited_user_id'];
-
-
-
-
                 foreach ($invitedUsers as $value) {
-
-
-
                     EventInvitedUser::create([
-
                         'event_id' => $eventId,
-
                         'prefer_by' => $value['prefer_by'],
-
                         'user_id' => $value['user_id']
-
                     ]);
                 }
             }
             if (!empty($eventData['invited_guests'])) {
 
                 $invitedGuestUsers = $eventData['invited_guests'];
-
-
-
                 foreach ($invitedGuestUsers as $value) {
 
                     if ($value['prefer_by'] == 'phone') {
-
                         $checkUserExist = User::where('phone_number', $value['phone_number'])->first();
-
                         if (empty($checkUserExist)) {
-
                             $guestUser = User::create([
-
-
-
                                 'firstname' => $value['first_name'],
-
                                 'lastname' => $value['last_name'],
-
-
                                 'country_code' => ($value['country_code'] != "") ? $value['country_code'] : 0,
-
                                 'phone_number' => $value['phone_number'],
-
                                 'app_user' => '0',
                                 'is_user_phone_contact' => '1',
                                 'parent_user_phone_contact' => $user->id
                             ]);
-
                             EventInvitedUser::create([
-
                                 'event_id' => $eventId,
-
                                 'prefer_by' => $value['prefer_by'],
-
                                 'user_id' => $guestUser->id
 
                             ]);
                         } else {
                             $alreadyselectedUser =  collect($eventData['invited_user_id'])->pluck('user_id')->toArray();
-
                             if (!in_array($checkUserExist->id, $alreadyselectedUser)) {
-
                                 EventInvitedUser::create([
-
                                     'event_id' => $eventId,
-
                                     'prefer_by' => (isset($value['prefer_by'])) ? $value['prefer_by'] : "email",
-
                                     'user_id' => $checkUserExist->id
-
                                 ]);
                             }
                         }
@@ -3469,29 +3402,18 @@ class ApiControllerv2 extends Controller
                         if (empty($checkUserExist)) {
 
                             $guestUser = User::create([
-
-
-
                                 'firstname' => $value['first_name'],
-
                                 'lastname' => $value['last_name'],
-
                                 'email' => $value['email'],
-
                                 'app_user' => '0',
                                 'is_user_phone_contact' => '1',
                                 'parent_user_phone_contact' => $user->id
 
                             ]);
-
                             EventInvitedUser::create([
-
                                 'event_id' => $eventId,
-
                                 'prefer_by' => $value['prefer_by'],
-
                                 'user_id' => $guestUser->id
-
                             ]);
                         } else {
 
@@ -10280,7 +10202,6 @@ class ApiControllerv2 extends Controller
                     $addNewUser->prefer_by = $value['prefer_by'];
 
                     if ($addNewUser->save()) {
-
                         EventInvitedUser::create([
                             'event_id' => $input['event_id'],
                             'prefer_by' => $value['prefer_by'],
@@ -10289,20 +10210,13 @@ class ApiControllerv2 extends Controller
                     }
                     $id = $addNewUser->id;
                 } else {
-
                     $checkUserInvitation = EventInvitedUser::with(['user'])->where(['event_id' => $input['event_id']])->get()->pluck('user_id')->toArray();
-
                     $id = $value['id'];
                     if (!in_array($value['id'], $checkUserInvitation)) {
-
                         EventInvitedUser::create([
-
                             'event_id' => $input['event_id'],
-
                             'prefer_by' => $value['prefer_by'],
-
                             'user_id' => $value['id']
-
                         ]);
                     } else {
                         $updateUser =  EventInvitedUser::with('user')->where(['event_id' => $input['event_id'], 'user_id' => $id])->first();
@@ -10365,6 +10279,14 @@ class ApiControllerv2 extends Controller
                         $invitation_sent_status->invitation_sent = '1';
                         $invitation_sent_status->save();
                     }
+                }
+                if (isset($id) && $id != null) {
+                    $notificationParam = [
+                        'sender_id' => $user->id,
+                        'event_id' => $input['event_id'],
+                        'newUser' => $id
+                    ];
+                    sendNotification('invite', $notificationParam);
                 }
             }
         }
