@@ -3155,37 +3155,37 @@ async function send_push_notification(user_id, message, conversationId) {
     if (userSnapshot.exists()) {
         const user = userSnapshot.val();
         console.log(user.userToken);
-        // var key =
-        //     "AAAAP6m84T0:APA91bHeuAm2ME_EmPEsOjMe2FatmHn2QU98ADg4Y5UxNMmXGg4MDD4OJQQhvsixNfhV1g2BWbgOCQGEf9_c3ngB8qH_N3MEMsgD7uuAQAq0_IO2GGPqCxjJPuwAME9MVX9ZvWgYbcPh";
-        // var to = user.deviceToken;
-        // var notification = {
-        //     title: user.userName,
-        //     body: message,
-        //     icon: "firebase-logo.png",
-        //     senderUid: user.userId,
-        //     conversationId: conversationId,
-        //     click_action: "testClick",
-        //     senderProfile: user.userProfile,
-        //     imageLink: "",
-        //     type: "chat",
-        // };
+        var key =
+            "AAAAP6m84T0:APA91bHeuAm2ME_EmPEsOjMe2FatmHn2QU98ADg4Y5UxNMmXGg4MDD4OJQQhvsixNfhV1g2BWbgOCQGEf9_c3ngB8qH_N3MEMsgD7uuAQAq0_IO2GGPqCxjJPuwAME9MVX9ZvWgYbcPh";
+        var to = user.userToken;
+        var notification = {
+            title: user.userName,
+            body: message,
+            icon: "firebase-logo.png",
+            senderUid: user.userId,
+            conversationId: conversationId,
+            click_action: "testClick",
+            senderProfile: user.userProfile,
+            imageLink: "",
+            type: "chat",
+        };
 
-        // fetch("https://fcm.googleapis.com/fcm/send", {
-        //     method: "POST",
-        //     headers: {
-        //         Authorization: "key=" + key,
-        //         "Content-Type": "application/json",
-        //     },
-        //     body: JSON.stringify({
-        //         notification: notification,
-        //         to: to,
-        //     }),
-        // })
-        //     .then(function (response) {
-        //         console.log(response);
-        //     })
-        //     .catch(function (error) {
-        //         console.error(error);
-        //     });
+        fetch("https://fcm.googleapis.com/fcm/send", {
+            method: "POST",
+            headers: {
+                Authorization: "key=" + key,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                notification: notification,
+                to: to,
+            }),
+        })
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.error(error);
+            });
     }
 }
