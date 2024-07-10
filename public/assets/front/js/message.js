@@ -3177,7 +3177,7 @@ async function send_push_notification(user_id, message, conversationId) {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                notification: notification,
+                data: notification,
                 to: to,
             }),
         })
