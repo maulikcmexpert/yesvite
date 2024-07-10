@@ -10187,6 +10187,7 @@ class ApiControllerv2 extends Controller
         if (!empty($input['guest_list'])) {
             DB::beginTransaction();
             $id = 0;
+            $ids = [];
             foreach ($input['guest_list'] as $value) {
 
                 if ($value['id'] == "0") {
@@ -10280,15 +10281,17 @@ class ApiControllerv2 extends Controller
                         $invitation_sent_status->save();
                     }
                 }
-                if (isset($id) && $id != null) {
+                $ids[] = $id;
+            }
 
-                    $notificationParam = [
-                        'sender_id' => $user->id,
-                        'event_id' => $input['event_id'],
-                        'newUser' => $id
-                    ];
-                    sendNotification('invite', $notificationParam);
-                }
+            if (isset($ids) && !empty($ids)) {
+
+                $notificationParam = [
+                    'sender_id' => $user->id,
+                    'event_id' => $input['event_id'],
+                    'newUser' => $ids
+                ];
+                sendNotification('invite', $notificationParam);
             }
         }
 
