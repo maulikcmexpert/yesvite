@@ -10280,8 +10280,8 @@ class ApiControllerv2 extends Controller
                         $invitation_sent_status->save();
                     }
                 }
+                dd($id);
                 if (isset($id) && $id != null) {
-                    dd($id);
                     $notificationParam = [
                         'sender_id' => $user->id,
                         'event_id' => $input['event_id'],
