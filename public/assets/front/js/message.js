@@ -3150,9 +3150,7 @@ async function deleteConversation(conversationId, isGroup) {
 }
 
 async function send_push_notification(user_id, message) {
-    const userSnapshot = await get(
-        ref(database, `users/${receiverId}/userToken`)
-    );
+    const userSnapshot = await get(ref(database, `users/${user_id}/userToken`));
     if (userSnapshot.exists()) {
         const deviceToken = userSnapshot.val();
         console.log(deviceToken);
