@@ -4769,9 +4769,9 @@ class ApiControllerv2 extends Controller
                     if ($eventData['event_setting']['podluck'] == '1' && $eventData['is_draft_save'] == '0') {
 
                         $podluckCategoryList = $eventData['podluck_category_list'];
-                        EventPotluckCategory::where('event_id', $eventData['event_id'])->delete();
 
                         if (!empty($podluckCategoryList)) {
+                            EventPotluckCategory::where('event_id', $eventData['event_id'])->delete();
 
 
 
@@ -7359,6 +7359,7 @@ class ApiControllerv2 extends Controller
                     $postsNormalDetail['post_type'] = $value->post_type;
                     $postsNormalDetail['created_at'] = $value->created_at;
                     $postsNormalDetail['posttime'] = setpostTime($value->created_at);
+                    $postsNormalDetail['commenting_on_off'] = $value->commenting_on_off;
                     $postsNormalDetail['post_image'] = [];
                     if ($value->post_type == '1' && !empty($value->post_image)) {
                         foreach ($value->post_image as $imgVal) {
