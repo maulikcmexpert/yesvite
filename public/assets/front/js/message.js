@@ -1189,6 +1189,8 @@ $(".send-message").on("keypress", async function (e) {
                     ref(database, `overview/${receiverId}/${conversationId}`),
                     receiverConversationData
                 );
+
+                await send_push_notification(receiverId, message);
             }
         }
         const conversationElement = $(`.conversation-${conversationId}`);
@@ -3144,5 +3146,15 @@ async function deleteConversation(conversationId, isGroup) {
         $("#selected-user-lastseen").html("");
         $(".member-lists").html("");
         $(".selected-title").html("Start new chat");
+    }
+}
+
+async function send_push_notification(user_id, message) {
+    const userSnapshot = await get(
+        ref(database, `users/${receiverId}/userToken`)
+    );
+    if (userSnapshot.exists()) {
+        const deviceToken = userSnapshot.val();
+        console.log(deviceToken);
     }
 }
