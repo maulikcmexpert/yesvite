@@ -157,7 +157,7 @@ async function getListUserimg(profileImageUrl, userName) {
 
 const response = await fetch("/firebase_js.json");
 const firebaseConfig = await response.json();
-
+console.log(firebaseConfig);
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 const storage = getStorage(app);
@@ -3157,7 +3157,7 @@ async function send_push_notification(user_id, message, conversationId) {
         // console.log(user.userToken);
         // console.log(message);
         var key =
-            "AAAAP6m84T0:APA91bHeuAm2ME_EmPEsOjMe2FatmHn2QU98ADg4Y5UxNMmXGg4MDD4OJQQhvsixNfhV1g2BWbgOCQGEf9_c3ngB8qH_N3MEMsgD7uuAQAq0_IO2GGPqCxjJPuwAME9MVX9ZvWgYbcPh";
+            ;
         var to = user.userToken;
         var notification = {
             title: user.userName,
