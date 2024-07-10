@@ -1190,7 +1190,14 @@ $(".send-message").on("keypress", async function (e) {
                     receiverConversationData
                 );
 
-                await send_push_notification(receiverId, message);
+                const userSnapshot = await get(
+                    ref(database, `users/${receiverId}/userToken`)
+                );
+                if (userSnapshot.exists()) {
+                    const deviceToken = userSnapshot.val();
+                    console.log(deviceToken);
+                }
+                // await send_push_notification(receiverId, message);
             }
         }
         const conversationElement = $(`.conversation-${conversationId}`);
