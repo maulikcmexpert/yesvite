@@ -3183,9 +3183,7 @@ async function send_push_notification(user_id, message, conversationId) {
                 to: to,
             }),
         })
-            .then(function (response) {
-                console.log(response);
-            })
+            .then(function (response) {})
             .catch(function (error) {
                 console.error(error);
             });
