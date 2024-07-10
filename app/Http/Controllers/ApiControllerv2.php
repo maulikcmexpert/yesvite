@@ -4538,14 +4538,14 @@ class ApiControllerv2 extends Controller
                         if (isset($eventData['co_host_list'])) {
 
                             $coHostList = $eventData['co_host_list'];
-                            
+
                             if (!empty($coHostList)) {
-                                dd($coHostList);
-                                
+
                                 foreach ($coHostList as $value) {
                                     // dd($coHostList);
                                     $alreadyselectedUser =  collect($eventData['invited_user_id'])->pluck('user_id')->toArray();
                                     $alreadyselectedasCoUser =  collect($eventData['co_host_list'])->pluck('user_id')->toArray();
+                                    dd($alreadyselectedUser);
 
                                     if (!in_array($value['user_id'], $alreadyselectedUser) && !in_array($value['user_id'], $getalreadyInviteduser)) {
 
