@@ -4538,6 +4538,7 @@ class ApiControllerv2 extends Controller
                         if (isset($eventData['co_host_list'])) {
 
                             $coHostList = $eventData['co_host_list'];
+                            dd($coHostList);
 
                             if (!empty($coHostList)) {
 
