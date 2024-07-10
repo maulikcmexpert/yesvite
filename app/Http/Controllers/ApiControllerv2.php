@@ -8104,6 +8104,7 @@ class ApiControllerv2 extends Controller
             $postsDetail['post_type'] = $eventDetails->post_type;
 
             $postsDetail['created_at'] = $eventDetails->created_at;
+            $postsDetail['commenting_on_off'] = $eventDetails->commenting_on_off;
 
             $reactionList = getOnlyReaction($eventDetails->id);
 
