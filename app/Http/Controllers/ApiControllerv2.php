@@ -9893,7 +9893,7 @@ class ApiControllerv2 extends Controller
             $eventAboutHost['adult_only_party'] = $eventDetail->event_settings->adult_only_party;
             $eventAboutHost['subscription_plan_name'] = ($eventDetail->subscription_plan_name != NULL) ? $eventDetail->subscription_plan_name : "";
             $eventAboutHost['subscription_invite_count'] = ($eventDetail->subscription_invite_count != NULL) ? $eventDetail->subscription_invite_count : 0;
-
+            $eventAboutHost['is_past'] = ($eventDetail->end_date < date('Y-m-d')) ? true : false;
             $userRsvpStatusList = EventInvitedUser::query();
             $userRsvpStatusList->whereHas('user', function ($query) {
                 $query->where('app_user', '1');
