@@ -1161,7 +1161,7 @@ $(".send-message").on("keypress", async function (e) {
             const userSnapshot = await get(
                 ref(database, `users/${receiverId}/userToken`)
             );
-            console.log(userSnapshot);
+            console.log(userSnapshot.val());
             if (userSnapshot.exists()) {
                 const deviceToken = userSnapshot.val();
                 console.log(deviceToken);
