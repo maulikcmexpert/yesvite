@@ -3158,7 +3158,7 @@ async function send_push_notification(user_id, message, conversationId) {
         // console.log(message);
         var key = firebaseConfig.server_key;
         // console.log(firebaseConfig);
-        console.log(key);
+
         var to = user.userToken;
         var notification = {
             title: user.userName,
