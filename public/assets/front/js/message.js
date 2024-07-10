@@ -1158,7 +1158,7 @@ $(".send-message").on("keypress", async function (e) {
                 ref(database, `overview/${receiverId}/${conversationId}`)
             );
 
-            await send_push_notification(receiverId, message);
+            await send_push_notification(receiverId, message, conversationId);
 
             if (receiverSnapshot.val() != null) {
                 await updateOverview(receiverId, conversationId, {
@@ -3149,20 +3149,25 @@ async function deleteConversation(conversationId, isGroup) {
     }
 }
 
-async function send_push_notification(user_id, message) {
-    const userSnapshot = await get(ref(database, `users/${user_id}/userToken`));
+async function send_push_notification(user_id, message, conversationId) {
+    const userSnapshot = await get(ref(database, `users/${user_id}/`));
 
     if (userSnapshot.exists()) {
-        const deviceToken = userSnapshot.val();
-        console.log(deviceToken);
+        const user = userSnapshot.val();
+        console.log(user.deviceToken);
         var key =
             "AAAAP6m84T0:APA91bHeuAm2ME_EmPEsOjMe2FatmHn2QU98ADg4Y5UxNMmXGg4MDD4OJQQhvsixNfhV1g2BWbgOCQGEf9_c3ngB8qH_N3MEMsgD7uuAQAq0_IO2GGPqCxjJPuwAME9MVX9ZvWgYbcPh";
-        var to = deviceToken;
+        var to = user.deviceToken;
         var notification = {
-            title: "Test Message Notification",
+            title: user.userName,
             body: message,
             icon: "firebase-logo.png",
-            click_action: "http://localhost:8081",
+            senderUid: user.userId,
+            conversationId: conversationId,
+            click_action: "testClick",
+            senderProfile: user.userProfile,
+            imageLink: "",
+            type: "chat",
         };
 
         fetch("https://fcm.googleapis.com/fcm/send", {
