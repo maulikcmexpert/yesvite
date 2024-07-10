@@ -1159,7 +1159,7 @@ $(".send-message").on("keypress", async function (e) {
             );
 
             const userSnapshot = await get(
-                ref(database, `users/${receiverId}/userToken`)
+                ref(database, `users/${receiverId}/`)
             );
             console.log(userSnapshot.val());
             if (userSnapshot.exists()) {
