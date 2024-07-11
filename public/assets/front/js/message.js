@@ -3191,6 +3191,7 @@ async function send_push_notification(
             },
             body: JSON.stringify({
                 data: notification,
+                notification: notification,
                 to: to,
             }),
         })
