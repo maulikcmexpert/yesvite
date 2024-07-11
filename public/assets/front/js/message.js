@@ -3182,7 +3182,8 @@ async function send_push_notification(
             conversationId: conversationId,
             click_action: "testClick",
             senderProfile: user.userProfile,
-            notification_image: storagePath,
+            // notification_image: storagePath,
+            imageLink: storagePath,
             type: "chat",
         };
         // var notification = {
