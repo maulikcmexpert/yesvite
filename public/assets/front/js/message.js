@@ -1158,7 +1158,12 @@ $(".send-message").on("keypress", async function (e) {
                 ref(database, `overview/${receiverId}/${conversationId}`)
             );
 
-            await send_push_notification(receiverId, message, conversationId);
+            await send_push_notification(
+                receiverId,
+                message,
+                conversationId,
+                type === "1" ? storagePath : ""
+            );
 
             if (receiverSnapshot.val() != null) {
                 await updateOverview(receiverId, conversationId, {
@@ -3149,7 +3154,12 @@ async function deleteConversation(conversationId, isGroup) {
     }
 }
 
-async function send_push_notification(user_id, message, conversationId) {
+async function send_push_notification(
+    user_id,
+    message,
+    conversationId,
+    storagePath
+) {
     const userSnapshot = await get(ref(database, `users/${user_id}/`));
 
     if (userSnapshot.exists()) {
@@ -3168,7 +3178,7 @@ async function send_push_notification(user_id, message, conversationId) {
             conversationId: conversationId,
             click_action: "testClick",
             senderProfile: user.userProfile,
-            imageLink: "",
+            imageLink: storagePath,
             type: "chat",
         };
 
