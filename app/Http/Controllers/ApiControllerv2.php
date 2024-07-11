@@ -4539,38 +4539,32 @@ class ApiControllerv2 extends Controller
                             if (!empty($coHostList)) {
                                 foreach ($coHostList as $value) {
 
-                                    $updateCohostRecord = EventInvitedUser::where(['user_id' => $value['user_id'], 'event_id' => $eventData['event_id']])->first();
-                                    if ($updateCohostRecord) {
-                                        $updateCohostRecord->is_co_host = '1';
-                                        $updateCohostRecord->save();
-                                    } else {
-                                        $eventInviteUser = new EventInvitedUser();
-                                        $eventInviteUser->event_id = $eventData['event_id'];
-                                        $eventInviteUser->prefer_by = $value['prefer_by'];
-                                        $eventInviteUser->user_id = $value['user_id'];
-                                        $eventInviteUser->is_co_host = '1';
-                                        $eventInviteUser->save();
-                                    }
                                     $alreadyselectedUser =  collect($eventData['invited_user_id'])->pluck('user_id')->toArray();
-                                    // $alreadyselectedasCoUser =  collect($eventData['co_host_list'])->pluck('user_id')->toArray();
+                                    $alreadyselectedasCoUser =  collect($eventData['co_host_list'])->pluck('user_id')->toArray();
 
-                                    // if (!in_array($value['user_id'], $alreadyselectedUser) && !in_array($value['user_id'], $getalreadyInviteduser)) {
-                                    //     $eventInviteUser = new EventInvitedUser();
-                                    //     $eventInviteUser->event_id = $eventData['event_id'];
-                                    //     $eventInviteUser->prefer_by = $value['prefer_by'];
-                                    //     $eventInviteUser->user_id = $value['user_id'];
-                                    //     $eventInviteUser->is_co_host = '1';
-                                    //     $eventInviteUser->save();
-                                    // }
+                                    if (!in_array($value['user_id'], $alreadyselectedUser) && !in_array($value['user_id'], $getalreadyInviteduser)) {
+
+                                        EventInvitedUser::create([
+
+                                            'event_id' => $eventData['event_id'],
+
+                                            'prefer_by' => $value['prefer_by'],
+
+                                            'user_id' => $value['user_id'],
+                                            'is_co_host' => '1'
+                                        ]);
+                                    }
                                     // else if (!in_array($value['user_id'], $alreadyselectedasCoUser) && !in_array($value['user_id'], $getalreadyInviteduser)) {
                                     //     // remove //
                                     //     EventInvitedUser::where(['user_id' => $value['user_id'], 'event_id' => $eventData['event_id']])->delete();
                                     // }
-                                    // else {
-                                    //     // dd($value['user_id']);
-                                    //     EventInvitedUser::where(['user_id' => $value['user_id'], 'event_id' => $eventData['event_id']])
-                                    //         ->update(['is_co_host' => '1']);
-                                    // }
+                                    else {
+                                        $updateCohostRecord = EventInvitedUser::where(['user_id' => $value['user_id'], 'event_id' => $eventData['event_id']])->first();
+                                        if ($updateCohostRecord) {
+                                            $updateCohostRecord->is_co_host = '1';
+                                            $updateCohostRecord->save();
+                                        }
+                                    }
                                 }
                             }
                             // else {
