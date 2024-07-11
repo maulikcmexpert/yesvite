@@ -4543,17 +4543,22 @@ class ApiControllerv2 extends Controller
                                     $alreadyselectedasCoUser =  collect($eventData['co_host_list'])->pluck('user_id')->toArray();
 
                                     if (!in_array($value['user_id'], $alreadyselectedUser) && !in_array($value['user_id'], $getalreadyInviteduser)) {
+                                        $eventInviteUser = new EventInvitedUser();
+                                        $eventInviteUser->event_id = $eventData['event_id'];
+                                        $eventInviteUser->prefer_by = $value['prefer_by'];
+                                        $eventInviteUser->user_id = $value['user_id'];
+                                        $eventInviteUser->is_co_host = '1';
+                                        $eventInviteUser->save();
+                                        // $check = EventInvitedUser::create([
 
-                                        $check = EventInvitedUser::create([
+                                        //     'event_id' => $eventData['event_id'],
 
-                                            'event_id' => $eventData['event_id'],
+                                        //     'prefer_by' => $value['prefer_by'],
 
-                                            'prefer_by' => $value['prefer_by'],
-
-                                            'user_id' => $value['user_id'],
-                                            'is_co_host' => '1'
-                                        ]);
-                                        dd($check);
+                                        //     'user_id' => $value['user_id'],
+                                        //     'is_co_host' => '1'
+                                        // ]);
+                                        // dd($check);
                                     }
                                     // else if (!in_array($value['user_id'], $alreadyselectedasCoUser) && !in_array($value['user_id'], $getalreadyInviteduser)) {
                                     //     // remove //
