@@ -1149,7 +1149,7 @@ $(".send-message").on("keypress", async function (e) {
 
             messageData.status = { senderUser: { profile: "", read: 1 } };
 
-            console.log(messageData);
+            console.log(messageData.url);
 
             await addMessage(conversationId, messageData, receiverId);
 
