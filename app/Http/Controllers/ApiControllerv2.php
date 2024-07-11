@@ -4387,11 +4387,11 @@ class ApiControllerv2 extends Controller
                         foreach ($getalreadyInviteduser as $value) {
 
                             if (!in_array($value, $userSelectedGuest)) {
-                                EventInvitedUser::where(['user_id' => $value])->delete();
+                                // EventInvitedUser::where(['user_id' => $value])->delete();
                             }
                         }
                     } else {
-                        // EventInvitedUser::where(['event_id' => $eventData['event_id']])->delete();
+                        EventInvitedUser::where(['event_id' => $eventData['event_id']])->delete();
                     }
                     if (!empty($eventData['invited_guests'])) {
                         $invitedGuestUsers = $eventData['invited_guests'];
