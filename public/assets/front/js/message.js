@@ -3192,6 +3192,13 @@ async function send_push_notification(
         //     image: storagePath,
         // };
 
+        var notification = {
+            title: user.userName,
+            body: message,
+            image: storagePath,
+            click_action: "testClick",
+        };
+
         fetch("https://fcm.googleapis.com/fcm/send", {
             method: "POST",
             headers: {
@@ -3199,8 +3206,9 @@ async function send_push_notification(
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                data: data,
                 to: to,
+                notification: notification,
+                data: data,
             }),
         })
             .then(function (response) {})
