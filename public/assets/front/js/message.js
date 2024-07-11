@@ -3179,15 +3179,15 @@ async function send_push_notification(
             conversationId: conversationId,
             click_action: "testClick",
             senderProfile: user.userProfile,
-            imageLink: storagePath,
+            notification_image: storagePath,
             type: "chat",
         };
-        var notification = {
-            title: user.userName,
-            body: message,
-            sound: "default",
-            image: storagePath,
-        };
+        // var notification = {
+        //     title: user.userName,
+        //     body: message,
+        //     sound: "default",
+        //     image: storagePath,
+        // };
 
         fetch("https://fcm.googleapis.com/fcm/send", {
             method: "POST",
@@ -3197,7 +3197,6 @@ async function send_push_notification(
             },
             body: JSON.stringify({
                 data: data,
-                notification: notification,
                 to: to,
             }),
         })
