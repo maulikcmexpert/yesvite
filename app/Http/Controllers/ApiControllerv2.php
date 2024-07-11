@@ -4372,7 +4372,6 @@ class ApiControllerv2 extends Controller
 
                 if ($updateEvent->save()) {
                     $getalreadyInviteduser =  EventInvitedUser::where('event_id', $eventData['event_id'])->get()->pluck('user_id')->toArray();
-                    // dd($getalreadyInviteduser);
                     // EventInvitedUser::where('event_id', $eventData['event_id'])->delete();
 
                     if (isset($eventData['invited_user_id']) && !empty($eventData['invited_user_id'])) {
@@ -4540,9 +4539,10 @@ class ApiControllerv2 extends Controller
                             if (!empty($coHostList)) {
                                 foreach ($coHostList as $value) {
                                     $alreadyselectedUser =  collect($eventData['invited_user_id'])->pluck('user_id')->toArray();
-                                    $alreadyselectedasCoUser =  collect($eventData['co_host_list'])->pluck('user_id')->toArray();
+                                    // $alreadyselectedasCoUser =  collect($eventData['co_host_list'])->pluck('user_id')->toArray();
 
-                                    if (!in_array($value['user_id'], $alreadyselectedUser) && !in_array($value['user_id'], $getalreadyInviteduser)) {
+                                    // if (!in_array($value['user_id'], $alreadyselectedUser) && !in_array($value['user_id'], $getalreadyInviteduser)) {
+                                    if (!in_array($value['user_id'], $getalreadyInviteduser)) {
                                         $eventInviteUser = new EventInvitedUser();
                                         $eventInviteUser->event_id = $eventData['event_id'];
                                         $eventInviteUser->prefer_by = $value['prefer_by'];
