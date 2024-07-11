@@ -3173,18 +3173,18 @@ async function send_push_notification(
         console.log(storagePath);
 
         var to = user.userToken;
-        var data = {
-            title: user.userName,
-            message: message,
-            icon: "firebase-logo.png",
-            senderUid: user.userId,
-            conversationId: conversationId,
-            click_action: "testClick",
-            senderProfile: user.userProfile,
-            // notification_image: storagePath,
-            imageLink: storagePath,
-            type: "chat",
-        };
+        // var data = {
+        //     title: user.userName,
+        //     message: message,
+        //     icon: "firebase-logo.png",
+        //     senderUid: user.userId,
+        //     conversationId: conversationId,
+        //     click_action: "testClick",
+        //     senderProfile: user.userProfile,
+        //     // notification_image: storagePath,
+        //     imageLink: storagePath,
+        //     type: "chat",
+        // };
         // var notification = {
         //     title: user.userName,
         //     body: message,
@@ -3208,7 +3208,7 @@ async function send_push_notification(
             body: JSON.stringify({
                 to: to,
                 notification: notification,
-                data: data,
+                // data: data,
             }),
         })
             .then(function (response) {})
