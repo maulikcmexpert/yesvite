@@ -4391,7 +4391,7 @@ class ApiControllerv2 extends Controller
                             }
                         }
                     } else {
-                        EventInvitedUser::where(['event_id' => $eventData['event_id']])->delete();
+                        // EventInvitedUser::where(['event_id' => $eventData['event_id']])->delete();
                     }
                     if (!empty($eventData['invited_guests'])) {
                         $invitedGuestUsers = $eventData['invited_guests'];
