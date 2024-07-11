@@ -3171,7 +3171,7 @@ async function send_push_notification(
         // console.log(firebaseConfig);
 
         var to = user.userToken;
-        var notification = {
+        var data = {
             title: user.userName,
             message: message,
             icon: "firebase-logo.png",
@@ -3182,6 +3182,12 @@ async function send_push_notification(
             imageLink: storagePath,
             type: "chat",
         };
+        var notification = {
+            title: user.userName,
+            body: message,
+            sound: "default",
+            image: storagePath,
+        };
 
         fetch("https://fcm.googleapis.com/fcm/send", {
             method: "POST",
@@ -3190,7 +3196,7 @@ async function send_push_notification(
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                data: notification,
+                data: data,
                 notification: notification,
                 to: to,
             }),
