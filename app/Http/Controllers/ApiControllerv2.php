@@ -4390,11 +4390,11 @@ class ApiControllerv2 extends Controller
                         foreach ($getalreadyInviteduser as $value) {
 
                             if (!in_array($value, $userSelectedGuest)) {
-                                EventInvitedUser::where('user_id', $value)->delete();
+                                // EventInvitedUser::where('user_id', $value)->delete();
                             }
                         }
                     } else {
-                        EventInvitedUser::where('event_id', $eventData['event_id'])->delete();
+                        // EventInvitedUser::where('event_id', $eventData['event_id'])->delete();
                     }
                     if (!empty($eventData['invited_guests'])) {
                         $invitedGuestUsers = $eventData['invited_guests'];
@@ -4541,7 +4541,7 @@ class ApiControllerv2 extends Controller
                                     $alreadyselectedUser =  collect($eventData['invited_user_id'])->pluck('user_id')->toArray();
                                     // $alreadyselectedasCoUser =  collect($eventData['co_host_list'])->pluck('user_id')->toArray();
 
-                                    dd($coHostList);
+                                    // dd($coHostList);
                                     if (!in_array($value['user_id'], $alreadyselectedUser) && !in_array($value['user_id'], $getalreadyInviteduser)) {
                                         // if (!in_array($value['user_id'], $getalreadyInviteduser)) {
                                         $eventInviteUser = new EventInvitedUser();
@@ -4550,16 +4550,6 @@ class ApiControllerv2 extends Controller
                                         $eventInviteUser->user_id = $value['user_id'];
                                         $eventInviteUser->is_co_host = '1';
                                         $eventInviteUser->save();
-                                        // $check = EventInvitedUser::create([
-
-                                        //     'event_id' => $eventData['event_id'],
-
-                                        //     'prefer_by' => $value['prefer_by'],
-
-                                        //     'user_id' => $value['user_id'],
-                                        //     'is_co_host' => '1'
-                                        // ]);
-                                        // dd($check);
                                     }
                                     // else if (!in_array($value['user_id'], $alreadyselectedasCoUser) && !in_array($value['user_id'], $getalreadyInviteduser)) {
                                     //     // remove //
