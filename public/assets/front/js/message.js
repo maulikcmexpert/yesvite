@@ -1149,7 +1149,8 @@ $(".send-message").on("keypress", async function (e) {
 
             messageData.status = { senderUser: { profile: "", read: 1 } };
 
-            console.log(messageData.url);
+            let image = messageData.url;
+            console.log(image);
 
             await addMessage(conversationId, messageData, receiverId);
 
