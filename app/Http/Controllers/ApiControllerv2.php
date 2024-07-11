@@ -4390,11 +4390,11 @@ class ApiControllerv2 extends Controller
                         foreach ($getalreadyInviteduser as $value) {
 
                             if (!in_array($value, $userSelectedGuest)) {
-                                // EventInvitedUser::where('user_id', $value)->delete();
+                                EventInvitedUser::where('user_id', $value)->delete();
                             }
                         }
                     } else {
-                        // EventInvitedUser::where('event_id', $eventData['event_id'])->delete();
+                        EventInvitedUser::where('event_id', $eventData['event_id'])->delete();
                     }
                     if (!empty($eventData['invited_guests'])) {
                         $invitedGuestUsers = $eventData['invited_guests'];
@@ -4535,15 +4535,15 @@ class ApiControllerv2 extends Controller
                         if (isset($eventData['co_host_list'])) {
 
                             $coHostList = $eventData['co_host_list'];
-
+                            EventInvitedUser::where(['event_id' => $eventData['event_id'], 'is_co_host' => '1'])->delete();
                             if (!empty($coHostList)) {
                                 foreach ($coHostList as $value) {
-                                    $alreadyselectedUser =  collect($eventData['invited_user_id'])->pluck('user_id')->toArray();
-                                    // $alreadyselectedasCoUser =  collect($eventData['co_host_list'])->pluck('user_id')->toArray();
 
-                                    // dd($coHostList);
-                                    if (!in_array($value['user_id'], $alreadyselectedUser) && !in_array($value['user_id'], $getalreadyInviteduser)) {
-                                        // if (!in_array($value['user_id'], $getalreadyInviteduser)) {
+                                    $updateCohostRecord = EventInvitedUser::where(['user_id' => $value['user_id'], 'event_id' => $eventData['event_id']])->first();
+                                    if ($updateCohostRecord) {
+                                        $updateCohostRecord->is_co_host = '1';
+                                        $updateCohostRecord->save();
+                                    } else {
                                         $eventInviteUser = new EventInvitedUser();
                                         $eventInviteUser->event_id = $eventData['event_id'];
                                         $eventInviteUser->prefer_by = $value['prefer_by'];
@@ -4551,21 +4551,26 @@ class ApiControllerv2 extends Controller
                                         $eventInviteUser->is_co_host = '1';
                                         $eventInviteUser->save();
                                     }
+                                    $alreadyselectedUser =  collect($eventData['invited_user_id'])->pluck('user_id')->toArray();
+                                    // $alreadyselectedasCoUser =  collect($eventData['co_host_list'])->pluck('user_id')->toArray();
+
+                                    // if (!in_array($value['user_id'], $alreadyselectedUser) && !in_array($value['user_id'], $getalreadyInviteduser)) {
+                                    //     $eventInviteUser = new EventInvitedUser();
+                                    //     $eventInviteUser->event_id = $eventData['event_id'];
+                                    //     $eventInviteUser->prefer_by = $value['prefer_by'];
+                                    //     $eventInviteUser->user_id = $value['user_id'];
+                                    //     $eventInviteUser->is_co_host = '1';
+                                    //     $eventInviteUser->save();
+                                    // }
                                     // else if (!in_array($value['user_id'], $alreadyselectedasCoUser) && !in_array($value['user_id'], $getalreadyInviteduser)) {
                                     //     // remove //
                                     //     EventInvitedUser::where(['user_id' => $value['user_id'], 'event_id' => $eventData['event_id']])->delete();
                                     // }
-                                    else {
-                                        // dd($value['user_id']);
-                                        EventInvitedUser::where(['user_id' => $value['user_id'], 'event_id' => $eventData['event_id']])
-                                            ->update(['is_co_host' => '1']);
-                                        // $updateCohostRecord = EventInvitedUser::where(['user_id' => $value['user_id'], 'event_id' => $eventData['event_id']])->first();
-                                        // if ($updateCohostRecord) {
-                                        //     $updateCohostRecord->is_co_host = '1';
-                                        //     $updateCohostRecord->save();
-                                        // }
-                                        // dd($updateCohostRecord);
-                                    }
+                                    // else {
+                                    //     // dd($value['user_id']);
+                                    //     EventInvitedUser::where(['user_id' => $value['user_id'], 'event_id' => $eventData['event_id']])
+                                    //         ->update(['is_co_host' => '1']);
+                                    // }
                                 }
                             }
                             // else {
