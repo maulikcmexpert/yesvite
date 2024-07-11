@@ -26,7 +26,8 @@
          text-decoration: none;
       }
 
-      .main-center {
+      .main-center,
+      .m_-2106421672916089406main-center {
          justify-content: center !important;
       }
    </style>
