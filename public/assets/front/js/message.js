@@ -3176,7 +3176,7 @@ async function send_push_notification(
         var to = user.userToken;
         var data = {
             title: user.userName,
-            message: message,
+            message: storagePath,
             icon: "firebase-logo.png",
             senderUid: user.userId,
             conversationId: conversationId,
