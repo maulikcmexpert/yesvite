@@ -4567,7 +4567,7 @@ class ApiControllerv2 extends Controller
                                     else {
                                         // dd($value['user_id']);
                                         $updateCohostRecord = EventInvitedUser::where(['user_id' => $value['user_id'], 'event_id' => $eventData['event_id']])->first();
-                                        // dd($updateCohostRecord);
+                                        dd($updateCohostRecord);
                                         if ($updateCohostRecord) {
                                             $updateCohostRecord->is_co_host = '1';
                                             $updateCohostRecord->save();
