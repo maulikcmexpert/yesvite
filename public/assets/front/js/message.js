@@ -970,7 +970,7 @@ $(".send-message").on("keypress", async function (e) {
         const imageUrl = previewImg.attr("src");
         const previewAudio = $(".recordedAudio");
         const audioUrl = previewAudio.attr("src");
-
+        let imagePath = "";
         const audio = $("#file_name").text();
         if (imageUrl) {
             // Determine file type and set the storage path
@@ -979,6 +979,7 @@ $(".send-message").on("keypress", async function (e) {
                 storagePath = `Images/${senderUser}/${Date.now()}_${senderUser}-img.png`;
                 fileName = `${Date.now()}_${senderUser}-img.png`;
                 type = "1";
+                imagePath = storagePath;
             } else if (
                 imageUrl.startsWith("data:video/mp4") &&
                 audio != "audio"
@@ -1162,7 +1163,7 @@ $(".send-message").on("keypress", async function (e) {
                 receiverId,
                 message,
                 conversationId,
-                fileName
+                imagePath
             );
 
             if (receiverSnapshot.val() != null) {
