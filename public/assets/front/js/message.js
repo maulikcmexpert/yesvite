@@ -3192,12 +3192,12 @@ async function send_push_notification(
         //     image: storagePath,
         // };
 
-        var notification = {
-            title: user.userName,
-            body: message,
-            image: storagePath,
-            click_action: "testClick",
-        };
+        // var notification = {
+        //     title: user.userName,
+        //     body: message,
+        //     image: storagePath,
+        //     click_action: "testClick",
+        // };
 
         fetch("https://fcm.googleapis.com/fcm/send", {
             method: "POST",
