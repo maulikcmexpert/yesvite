@@ -4541,6 +4541,7 @@ class ApiControllerv2 extends Controller
                                     $alreadyselectedUser =  collect($eventData['invited_user_id'])->pluck('user_id')->toArray();
                                     // $alreadyselectedasCoUser =  collect($eventData['co_host_list'])->pluck('user_id')->toArray();
 
+                                    dd($coHostList);
                                     if (!in_array($value['user_id'], $alreadyselectedUser) && !in_array($value['user_id'], $getalreadyInviteduser)) {
                                         // if (!in_array($value['user_id'], $getalreadyInviteduser)) {
                                         $eventInviteUser = new EventInvitedUser();
