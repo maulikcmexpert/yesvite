@@ -3170,6 +3170,7 @@ async function send_push_notification(
         // console.log(user.userToken);
         console.log(message);
         var key = firebaseConfig.server_key;
+
         console.log(storagePath);
 
         var to = user.userToken;
