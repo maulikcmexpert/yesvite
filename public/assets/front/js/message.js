@@ -1150,7 +1150,6 @@ $(".send-message").on("keypress", async function (e) {
             messageData.status = { senderUser: { profile: "", read: 1 } };
 
             let image = messageData.url;
-
             await addMessage(conversationId, messageData, receiverId);
 
             await updateOverview(senderUser, conversationId, {
@@ -3173,31 +3172,31 @@ async function send_push_notification(
         console.log(storagePath);
 
         var to = user.userToken;
-        // var data = {
-        //     title: user.userName,
-        //     message: message,
-        //     icon: "firebase-logo.png",
-        //     senderUid: user.userId,
-        //     conversationId: conversationId,
-        //     click_action: "testClick",
-        //     senderProfile: user.userProfile,
-        //     // notification_image: storagePath,
-        //     imageLink: storagePath,
-        //     type: "chat",
-        // };
-        // var notification = {
-        //     title: user.userName,
-        //     body: message,
-        //     sound: "default",
-        //     image: storagePath,
-        // };
+        var data = {
+            title: user.userName,
+            message: message,
+            icon: "firebase-logo.png",
+            senderUid: user.userId,
+            conversationId: conversationId,
+            click_action: "testClick",
+            senderProfile: user.userProfile,
+            // notification_image: storagePath,
+            imageLink: storagePath,
+            type: "chat",
+        };
+        var notification = {
+            title: user.userName,
+            body: message,
+            sound: "default",
+            image: storagePath,
+        };
 
-        // var notification = {
-        //     title: user.userName,
-        //     body: message,
-        //     image: storagePath,
-        //     click_action: "testClick",
-        // };
+        var notification = {
+            title: user.userName,
+            body: message,
+            image: storagePath,
+            click_action: "testClick",
+        };
 
         fetch("https://fcm.googleapis.com/fcm/send", {
             method: "POST",
@@ -3208,7 +3207,7 @@ async function send_push_notification(
             body: JSON.stringify({
                 to: to,
                 notification: notification,
-                // data: data,
+                data: data,
             }),
         })
             .then(function (response) {})
