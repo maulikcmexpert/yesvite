@@ -4541,8 +4541,8 @@ class ApiControllerv2 extends Controller
                                     $alreadyselectedUser =  collect($eventData['invited_user_id'])->pluck('user_id')->toArray();
                                     // $alreadyselectedasCoUser =  collect($eventData['co_host_list'])->pluck('user_id')->toArray();
 
-                                    // if (!in_array($value['user_id'], $alreadyselectedUser) && !in_array($value['user_id'], $getalreadyInviteduser)) {
-                                    if (!in_array($value['user_id'], $getalreadyInviteduser)) {
+                                    if (!in_array($value['user_id'], $alreadyselectedUser) && !in_array($value['user_id'], $getalreadyInviteduser)) {
+                                        // if (!in_array($value['user_id'], $getalreadyInviteduser)) {
                                         $eventInviteUser = new EventInvitedUser();
                                         $eventInviteUser->event_id = $eventData['event_id'];
                                         $eventInviteUser->prefer_by = $value['prefer_by'];
@@ -4568,10 +4568,10 @@ class ApiControllerv2 extends Controller
                                         // dd($value['user_id']);
                                         $updateCohostRecord = EventInvitedUser::where(['user_id' => $value['user_id'], 'event_id' => $eventData['event_id']])->first();
                                         if ($updateCohostRecord) {
-                                            // dd($updateCohostRecord);
                                             $updateCohostRecord->is_co_host = '1';
                                             $updateCohostRecord->save();
                                         }
+                                        dd($updateCohostRecord);
                                     }
                                 }
                             }
