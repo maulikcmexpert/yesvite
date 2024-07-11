@@ -1150,7 +1150,6 @@ $(".send-message").on("keypress", async function (e) {
             messageData.status = { senderUser: { profile: "", read: 1 } };
 
             let image = messageData.url;
-            console.log(image);
 
             await addMessage(conversationId, messageData, receiverId);
 
@@ -3169,14 +3168,14 @@ async function send_push_notification(
     if (userSnapshot.exists()) {
         const user = userSnapshot.val();
         // console.log(user.userToken);
-        // console.log(message);
+        console.log(message);
         var key = firebaseConfig.server_key;
         console.log(storagePath);
 
         var to = user.userToken;
         var data = {
             title: user.userName,
-            message: storagePath,
+            message: message,
             icon: "firebase-logo.png",
             senderUid: user.userId,
             conversationId: conversationId,
