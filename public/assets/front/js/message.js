@@ -1162,7 +1162,7 @@ $(".send-message").on("keypress", async function (e) {
                 receiverId,
                 message,
                 conversationId,
-                type === "1" ? storagePath : ""
+                storagePath
             );
 
             if (receiverSnapshot.val() != null) {
