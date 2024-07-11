@@ -4327,16 +4327,13 @@ class ApiControllerv2 extends Controller
                 // $rsvpEndTime = "";
                 $greeting_card_id = "";
                 if ($eventData['event_setting']['thank_you_cards'] == '1') {
-
                     if (!empty($eventData['greeting_card_list']) && is_int($eventData['greeting_card_list'][0])) {
-
                         $greeting_card_id =  implode(',', $eventData['greeting_card_list']);
                     }
                 }
                 $gift_registry_id = "";
                 if ($eventData['event_setting']['gift_registry'] == '1') {
                     if (!empty($eventData['gift_registry_list']) && is_int($eventData['gift_registry_list'][0])) {
-
                         $gift_registry_id =  implode(',', $eventData['gift_registry_list']);
                     }
                 }
