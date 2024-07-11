@@ -4390,7 +4390,7 @@ class ApiControllerv2 extends Controller
                                 EventInvitedUser::where(['user_id' => $value, 'is_co_host' => '1'])->delete();
                             } else {
                                 if (!in_array($value, $userSelectedGuest)) {
-                                    EventInvitedUser::where(['user_id' => $value])->delete();
+                                    EventInvitedUser::where(['user_id' => $value, 'is_co_host' => '0'])->delete();
                                 }
                             }
                         }
