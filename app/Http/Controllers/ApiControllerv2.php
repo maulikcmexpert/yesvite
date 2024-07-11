@@ -4372,7 +4372,7 @@ class ApiControllerv2 extends Controller
 
                 if ($updateEvent->save()) {
                     $getalreadyInviteduser =  EventInvitedUser::where('event_id', $eventData['event_id'])->get()->pluck('user_id')->toArray();
-                    dd($getalreadyInviteduser);
+                    // dd($getalreadyInviteduser);
                     // EventInvitedUser::where('event_id', $eventData['event_id'])->delete();
 
                     if (isset($eventData['invited_user_id']) && !empty($eventData['invited_user_id'])) {
@@ -4559,7 +4559,7 @@ class ApiControllerv2 extends Controller
                                     //     EventInvitedUser::where(['user_id' => $value['user_id'], 'event_id' => $eventData['event_id']])->delete();
                                     // }
                                     else {
-                                        // dd($alreadyselectedasCoUser);
+                                        dd($value['user_id']);
                                         $updateCohostRecord = EventInvitedUser::where(['user_id' => $value['user_id'], 'event_id' => $eventData['event_id']])->first();
                                         // dd($updateCohostRecord);
                                         if ($updateCohostRecord) {
