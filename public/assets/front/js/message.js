@@ -1150,6 +1150,7 @@ $(".send-message").on("keypress", async function (e) {
             messageData.status = { senderUser: { profile: "", read: 1 } };
 
             let image = messageData.url;
+
             await addMessage(conversationId, messageData, receiverId);
 
             await updateOverview(senderUser, conversationId, {
@@ -3174,7 +3175,7 @@ async function send_push_notification(
         var to = user.userToken;
         var data = {
             title: user.userName,
-            message: storagePath,
+            message: message,
             icon: "firebase-logo.png",
             senderUid: user.userId,
             conversationId: conversationId,
