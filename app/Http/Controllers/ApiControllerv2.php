@@ -4540,7 +4540,7 @@ class ApiControllerv2 extends Controller
                             $coHostList = $eventData['co_host_list'];
 
                             if (!empty($coHostList)) {
-
+                                dd($getalreadyInviteduser);
                                 foreach ($coHostList as $value) {
                                     // dd($coHostList);
                                     $alreadyselectedUser =  collect($eventData['invited_user_id'])->pluck('user_id')->toArray();
