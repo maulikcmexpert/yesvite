@@ -1149,6 +1149,8 @@ $(".send-message").on("keypress", async function (e) {
 
             messageData.status = { senderUser: { profile: "", read: 1 } };
 
+            console.log(messageData);
+
             await addMessage(conversationId, messageData, receiverId);
 
             await updateOverview(senderUser, conversationId, {
