@@ -4543,7 +4543,7 @@ class ApiControllerv2 extends Controller
                                     $alreadyselectedasCoUser =  collect($eventData['co_host_list'])->pluck('user_id')->toArray();
 
                                     if (!in_array($value['user_id'], $alreadyselectedUser) && !in_array($value['user_id'], $getalreadyInviteduser)) {
-
+                                        dd($value['user_id']);
                                         EventInvitedUser::create([
 
                                             'event_id' => $eventData['event_id'],
@@ -4559,7 +4559,7 @@ class ApiControllerv2 extends Controller
                                     //     EventInvitedUser::where(['user_id' => $value['user_id'], 'event_id' => $eventData['event_id']])->delete();
                                     // }
                                     else {
-                                        dd($value['user_id']);
+                                        // dd($value['user_id']);
                                         $updateCohostRecord = EventInvitedUser::where(['user_id' => $value['user_id'], 'event_id' => $eventData['event_id']])->first();
                                         // dd($updateCohostRecord);
                                         if ($updateCohostRecord) {
