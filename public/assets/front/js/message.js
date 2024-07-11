@@ -1166,7 +1166,7 @@ $(".send-message").on("keypress", async function (e) {
                 receiverId,
                 message,
                 conversationId,
-                imagePath
+                image
             );
 
             if (receiverSnapshot.val() != null) {
