@@ -1111,6 +1111,15 @@ $(".send-message").on("keypress", async function (e) {
                                 : (receiverSnapshot.val().unReadCount || 0) + 1,
                         timeStamp: Date.now(),
                     });
+                    let image = messageData.url;
+
+                    await send_push_notification(
+                        profile.id,
+                        message,
+                        conversationId,
+                        image,
+                        senderUserName
+                    );
                 }
             });
 
