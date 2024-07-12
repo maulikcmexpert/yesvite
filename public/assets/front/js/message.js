@@ -3173,7 +3173,7 @@ async function send_push_notification(
         // console.log(storagePath);
 
         var to = user?.userToken;
-        if (to !== undefined && to.length <= 0) {
+        if (to == undefined && to.length <= 0) {
             return;
         }
         var data = {
