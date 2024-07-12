@@ -10210,7 +10210,7 @@ class ApiControllerv2 extends Controller
                         'profileUser' => ($eventInfo->user->profile != NULL || $eventInfo->user->profile != "") ? $eventInfo->user->profile : "no_profile.png",
                         'event_image' => ($eventInfo->event_image->isNotEmpty()) ? $eventInfo->event_image[0]->image : "no_image.png",
                         'date' =>  date('l, M. jS', strtotime($eventInfo->start_date)),
-                        'time' => '1PM',
+                        'time' => $eventInfo->rsvp_start_time,
                         'address' => $eventInfo->event_location_name . ' ' . $eventInfo->address_1 . ' ' . $eventInfo->address_2 . ' ' . $eventInfo->state . ' ' . $eventInfo->city . ' - ' . $eventInfo->zip_code,
                     ];
 
