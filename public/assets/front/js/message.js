@@ -2697,8 +2697,11 @@ $(".preview_img").hide();
 $("#preview_file").hide();
 $(".upload-box").change(function () {
     var curElement = $(".preview_img");
-    var file = this.files[0];
-    var name = file.name;
+    var file = this?.files[0] != undefined ? this?.files[0] : [];
+    if (file.length <= 0) {
+        return;
+    }
+    var name = file?.name;
     $(".dropdown-menu").removeClass("show");
 
     displayFiles(this.files, name);
