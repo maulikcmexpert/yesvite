@@ -1150,6 +1150,7 @@ $(".send-message").on("keypress", async function (e) {
             messageData.status = { senderUser: { profile: "", read: 1 } };
 
             let image = messageData.url;
+
             await addMessage(conversationId, messageData, receiverId);
 
             await updateOverview(senderUser, conversationId, {
@@ -3169,7 +3170,7 @@ async function send_push_notification(
         // console.log(user.userToken);
         var key = firebaseConfig.server_key;
 
-        console.log(storagePath);
+        // console.log(storagePath);
 
         var to = user.userToken;
         var data = {
@@ -3184,19 +3185,13 @@ async function send_push_notification(
             imageLink: storagePath,
             type: "chat",
         };
-        var notification = {
-            title: user.userName,
-            body: message,
-            sound: "default",
-            image: storagePath,
-        };
 
-        var notification = {
-            title: user.userName,
-            body: message,
-            image: storagePath,
-            click_action: "testClick",
-        };
+        // var notification = {
+        //     title: user.userName,
+        //     body: message,
+        //     image: storagePath,
+        //     click_action: "testClick",
+        // };
 
         fetch("https://fcm.googleapis.com/fcm/send", {
             method: "POST",
