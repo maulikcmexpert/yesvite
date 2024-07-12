@@ -1,3 +1,6 @@
+@php
+dd($eventData);
+@endphp
 <!DOCTYPE html>
 <html lang="en">
 
