@@ -302,8 +302,8 @@ async function handleNewConversation(snapshot) {
         let userData = await getUser(userId);
 
         if (
-            userData.userStatus == "Online" ||
-            userData.userStatus == "online"
+            userData?.userStatus == "Online" ||
+            userData?.userStatus == "online"
         ) {
             userStatus = `<span class="active"></span>`;
         } else {
