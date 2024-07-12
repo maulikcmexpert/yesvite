@@ -1,6 +1,3 @@
-@php
-dd($eventData['time']);
-@endphp
 <!DOCTYPE html>
 <html lang="en">
 
