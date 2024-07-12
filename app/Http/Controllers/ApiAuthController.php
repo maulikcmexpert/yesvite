@@ -192,6 +192,7 @@ class ApiAuthController extends Controller
                 $token = Auth::user()->createToken('API Token')->accessToken;
 
                 $detail = [
+                    'user_id' => $user->id,
                     'firstname' => $user->firstname,
                     'lastname' => $user->lastname,
                     'email' => $user->email,
