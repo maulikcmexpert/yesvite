@@ -67,7 +67,7 @@
                     <td>
                         <div class="user-name" style="display: flex;align-items: center;gap: 15px;margin-bottom: 15px;">
                             <span style="display: block;width: 100%;max-width: 50px;height: 50px;border-radius: 50%;">
-                                <img src="{{ asset('public/storage/profile/'.$eventData['profileUser'])}}" style="width: 100%;height: 100%;" alt="user-img">
+                                <img src="{{ asset('public/storage/profile/'.$eventData['profileUser'])}}" style="width: 100%;height: 100%;border-radius:50%" alt="user-img">
                             </span>
                             <h3 style="text-transform: capitalize;font-size: 32px;line-height: 44px;font-weight: 700;color: #0A090B;margin: 0px 0px;text-transform: capitalize;margin-left: 15px">{{ @$eventData['hosted_by']}}</h3>
                         </div>
