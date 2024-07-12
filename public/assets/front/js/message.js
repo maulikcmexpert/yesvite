@@ -3172,7 +3172,10 @@ async function send_push_notification(
 
         // console.log(storagePath);
 
-        var to = user.userToken;
+        var to = user?.userToken;
+        if (to !== undefined && to.length <= 0) {
+            return;
+        }
         var data = {
             title: user.userName,
             message: message,
@@ -3201,7 +3204,7 @@ async function send_push_notification(
             },
             body: JSON.stringify({
                 to: to,
-                notification: notification,
+                // notification: notification,
                 data: data,
             }),
         })
