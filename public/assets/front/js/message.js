@@ -3172,8 +3172,8 @@ async function send_push_notification(
 
         // console.log(storagePath);
 
-        var to = user?.userToken;
-        if (to == undefined && to.length <= 0) {
+        var to = user?.userToken != undefined ? user?.userToken : "";
+        if (to == "") {
             return;
         }
         var data = {
