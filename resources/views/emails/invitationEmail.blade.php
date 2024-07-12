@@ -1,5 +1,5 @@
 @php
-dd($eventData);
+dd($eventData['time']);
 @endphp
 <!DOCTYPE html>
 <html lang="en">
