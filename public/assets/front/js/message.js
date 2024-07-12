@@ -575,7 +575,7 @@ async function updateChatfromGroup(conversationId) {
     const groupInfoRef = ref(database, `Groups/${conversationId}/groupInfo`);
     const snapshot = await get(groupInfoRef);
     const groupInfo = snapshot.val();
-    groupInfo.profile.map((profile) => {
+    groupInfo.profiles.map((profile) => {
         if (profile.id > 0) {
             SelecteGroupUser[profile.id] = {
                 id: profile.id,
