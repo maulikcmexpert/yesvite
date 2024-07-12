@@ -3182,7 +3182,7 @@ async function send_push_notification(
             click_action: "testClick",
             senderProfile: user.userProfile,
             // notification_image: storagePath,
-            imageLink: storagePath,
+            notification_image: storagePath,
             type: "chat",
         };
 
