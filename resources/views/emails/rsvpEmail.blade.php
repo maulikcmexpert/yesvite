@@ -1,6 +1,3 @@
-@php
-dd(asset('public/storage/yesvitelogo.png'));
-@endphp
 <!DOCTYPE html>
 <html lang="en">
 

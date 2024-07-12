@@ -157,7 +157,7 @@ async function getListUserimg(profileImageUrl, userName) {
 
 const response = await fetch("/firebase_js.json");
 const firebaseConfig = await response.json();
-console.log(firebaseConfig);
+// console.log(firebaseConfig);
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 const storage = getStorage(app);
