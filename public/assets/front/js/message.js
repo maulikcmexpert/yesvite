@@ -3172,7 +3172,7 @@ async function send_push_notification(
 
     if (userSnapshot.exists()) {
         const user = userSnapshot.val();
-        console.log(senderUser);
+        // console.log(senderUser);
         var key = firebaseConfig.server_key;
         const receiverName = $(".selected_name").val();
         // console.log(storagePath);
