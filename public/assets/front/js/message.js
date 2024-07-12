@@ -1165,7 +1165,8 @@ $(".send-message").on("keypress", async function (e) {
                 receiverId,
                 message,
                 conversationId,
-                image
+                image,
+                senderUser
             );
 
             if (receiverSnapshot.val() != null) {
@@ -3164,15 +3165,16 @@ async function send_push_notification(
     user_id,
     message,
     conversationId,
-    storagePath
+    storagePath,
+    senderUser
 ) {
     const userSnapshot = await get(ref(database, `users/${user_id}/`));
 
     if (userSnapshot.exists()) {
         const user = userSnapshot.val();
-        // console.log(user.userToken);
+        console.log(senderUser);
         var key = firebaseConfig.server_key;
-
+        const receiverName = $(".selected_name").val();
         // console.log(storagePath);
 
         var to = user?.userToken != undefined ? user?.userToken : "";
@@ -3180,7 +3182,7 @@ async function send_push_notification(
             return;
         }
         var data = {
-            title: user.userName,
+            title: senderUser,
             message: message,
             icon: "firebase-logo.png",
             senderUid: user.userId,
