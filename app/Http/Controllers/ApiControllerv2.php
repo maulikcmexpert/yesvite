@@ -10214,7 +10214,7 @@ class ApiControllerv2 extends Controller
                         'address' => $eventInfo->event_location_name . ' ' . $eventInfo->address_1 . ' ' . $eventInfo->address_2 . ' ' . $eventInfo->state . ' ' . $eventInfo->city . ' - ' . $eventInfo->zip_code,
                     ];
 
-                    dd($eventData);
+                    // dd($eventData);
 
                     // $checkEmail =  emailChecker($email);
 
