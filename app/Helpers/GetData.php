@@ -425,6 +425,9 @@ function getInvitedUsers($eventId)
         foreach ($result as $guestVal) {
 
             if ($guestVal->user->parent_user_phone_contact ==  $guestVal->event->user_id && $guestVal->user->is_user_phone_contact == '1') {
+
+                $invitedGuestDetail['user_id'] = (!empty($guestVal->user->id) && $guestVal->user->id != NULL) ? $guestVal->user->id : "";
+
                 $invitedGuestDetail['first_name'] = (!empty($guestVal->user->firstname) && $guestVal->user->firstname != NULL) ? $guestVal->user->firstname : "";
                 $invitedGuestDetail['last_name'] = (!empty($guestVal->user->lastname) && $guestVal->user->lastname != NULL) ? $guestVal->user->lastname : "";
                 $invitedGuestDetail['email'] = (!empty($guestVal->user->email) && $guestVal->user->email != NULL) ? $guestVal->user->email : "";
