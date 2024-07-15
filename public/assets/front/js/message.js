@@ -1171,13 +1171,18 @@ $(".send-message").on("keypress", async function (e) {
             );
             console.log(receiverSnapshot.val().isMute);
 
-            await send_push_notification(
-                receiverId,
-                message,
-                conversationId,
-                image,
-                senderUserName
-            );
+            if (
+                receiverSnapshot.val().isMute == undefined ||
+                receiverSnapshot.val().isMute == 0
+            ) {
+                await send_push_notification(
+                    receiverId,
+                    message,
+                    conversationId,
+                    image,
+                    senderUserName
+                );
+            }
 
             if (receiverSnapshot.val() != null) {
                 await updateOverview(receiverId, conversationId, {
