@@ -1156,6 +1156,8 @@ $(".send-message").on("keypress", async function (e) {
                 $(".set-replay-msg").remove();
             }
 
+            console.log(messageData);
+
             messageData.status = { senderUser: { profile: "", read: 1 } };
 
             let image = messageData.url;
