@@ -1158,7 +1158,7 @@ $(".send-message").on("keypress", async function (e) {
 
             const replyoverview = ref(
                 database,
-                `overview/600/${conversationId}`
+                `overview/600/${conversationId}/`
             );
             console.log(replyoverview);
 
