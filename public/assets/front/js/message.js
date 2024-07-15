@@ -1156,11 +1156,6 @@ $(".send-message").on("keypress", async function (e) {
                 $(".set-replay-msg").remove();
             }
 
-            const receiverSnapshot1 = await get(
-                ref(database, `overview/${profile.id}/${conversationId}`)
-            );
-            console.log(receiverSnapshot1);
-
             messageData.status = { senderUser: { profile: "", read: 1 } };
 
             let image = messageData.url;
@@ -1174,6 +1169,7 @@ $(".send-message").on("keypress", async function (e) {
             const receiverSnapshot = await get(
                 ref(database, `overview/${receiverId}/${conversationId}`)
             );
+            console.log(receiverSnapshot);
 
             await send_push_notification(
                 receiverId,
