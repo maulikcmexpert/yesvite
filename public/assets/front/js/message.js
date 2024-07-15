@@ -1114,8 +1114,9 @@ $(".send-message").on("keypress", async function (e) {
                     let image = messageData.url;
 
                     if (
-                        receiverSnapshot.val().isMute == undefined ||
-                        receiverSnapshot.val().isMute == 0
+                        (receiverSnapshot.val().isMute == undefined ||
+                            receiverSnapshot.val().isMute == 0) &&
+                        receiverSnapshot.val().group == true
                     ) {
                         await send_push_notification(
                             profile.id,
