@@ -1156,11 +1156,10 @@ $(".send-message").on("keypress", async function (e) {
                 $(".set-replay-msg").remove();
             }
 
-            const replyoverview = ref(
-                database,
-                `overview/600/${conversationId}/`
+            const receiverSnapshot1 = await get(
+                ref(database, `overview/${profile.id}/${conversationId}`)
             );
-            console.log(replyoverview);
+            console.log(receiverSnapshot1);
 
             messageData.status = { senderUser: { profile: "", read: 1 } };
 
