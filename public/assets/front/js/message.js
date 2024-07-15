@@ -1113,13 +1113,18 @@ $(".send-message").on("keypress", async function (e) {
                     });
                     let image = messageData.url;
 
-                    await send_push_notification(
-                        profile.id,
-                        message,
-                        conversationId,
-                        image,
-                        senderUserName
-                    );
+                    if (
+                        receiverSnapshot.val().isMute == undefined ||
+                        receiverSnapshot.val().isMute == 0
+                    ) {
+                        await send_push_notification(
+                            profile.id,
+                            message,
+                            conversationId,
+                            image,
+                            senderUserName
+                        );
+                    }
                 }
             });
 
