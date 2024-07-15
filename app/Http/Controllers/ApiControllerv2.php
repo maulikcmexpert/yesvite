@@ -8417,81 +8417,43 @@ class ApiControllerv2 extends Controller
 
     {
 
-
-
         $user  = Auth::guard('api')->user();
-
-
-
         $rawData = $request->getContent();
-
-
-
         $input = json_decode($rawData, true);
-
         if ($input == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
         }
-
         $validator = Validator::make($input, [
-
             'event_post_comment_id' => ['required'],
-
         ]);
 
-
-
         if ($validator->fails()) {
-
             return response()->json(
-
                 [
                     'status' => 0,
                     'message' => $validator->errors()->first()
-
                 ],
-
-
-
             );
         }
 
-
-
         try {
-
             DB::beginTransaction();
-
-
-
             $replyList = EventPostComment::with('user')->withcount('post_comment_reaction')->where("parent_comment_id", $input['event_post_comment_id'])->get();
-
             $commentInfo = [];
 
             if (!empty($replyList)) {
-
                 foreach ($replyList as $replyVal) {
-
                     $commentReply['id'] = $replyVal->id;
-
                     $commentReply['event_post_id'] = $replyVal->event_post_id;
-
                     $commentReply['comment'] = $replyVal->comment_text;
-
                     $commentReply['parent_comment_id'] = $replyVal->parent_comment_id;
-
                     $commentReply['user_id'] = $replyVal->user_id;
-
                     $commentReply['username'] = $replyVal->user->firstname . ' ' . $replyVal->user->lastname;
-
                     $commentReply['profile'] = (!empty($replyVal->user->profile)) ? asset('public/storage/profile/' . $replyVal->user->profile) : "";
                     $commentReply['posttime'] = setpostTime($replyVal->created_at);
                     $commentReply['reply_comment_total_likes'] = $replyVal->post_comment_reaction_count;
-
                     $commentReply['is_like'] = checkUserIsLike($replyVal->id, $user->id);
-
                     $commentReply['created_at'] = $replyVal->created_at;
-
                     $commentInfo[] = $commentReply;
                 }
             }
@@ -9032,63 +8994,34 @@ class ApiControllerv2 extends Controller
     public function userPostComment(Request $request)
 
     {
-
         $user  = Auth::guard('api')->user();
-
-
-
         $rawData = $request->getContent();
-
-
-
-
 
         $input = json_decode($rawData, true);
         if ($input == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
         }
 
-
         $validator = Validator::make($input, [
-
             'event_id' => ['required', 'exists:events,id'],
-
             'event_post_id' => ['required'],
-
             'comment_text' => ['required'],
-
         ]);
 
-
-
         if ($validator->fails()) {
-
             return response()->json(
-
                 [
                     'status' => 0,
                     'message' => $validator->errors()->first()
-
                 ],
-
-
             );
         }
-
-
-
 
         try {
 
             DB::beginTransaction();
 
-
-
             EventPostComment::where(['event_id' => $input['event_id'], 'event_post_id' => $input['event_post_id'], 'user_id' => $user->id])->count();
-
-
-
-
 
             $event_post_comment = new EventPostComment;
 
@@ -9114,14 +9047,10 @@ class ApiControllerv2 extends Controller
             $event_post_comment->save();
 
             $notificationParam = [
-
                 'sender_id' => $user->id,
-
                 'event_id' => $input['event_id'],
-
                 'post_id' => $input['event_post_id'],
                 'comment_id' => $event_post_comment->id
-
             ];
 
             sendNotification('comment_post', $notificationParam);
@@ -9232,7 +9161,6 @@ class ApiControllerv2 extends Controller
     public function userPostCommentReply(Request $request)
 
     {
-
         $user  = Auth::guard('api')->user();
         $rawData = $request->getContent();
         $input = json_decode($rawData, true);
@@ -9242,56 +9170,32 @@ class ApiControllerv2 extends Controller
         }
 
         $validator = Validator::make($input, [
-
             'event_id' => ['required', 'exists:events,id'],
-
             'event_post_id' => ['required'],
-
             'parent_comment_id' => ['required'],
-
             'comment_text' => ['required'],
-
         ]);
 
-
-
         if ($validator->fails()) {
-
             return response()->json(
-
                 [
                     'status' => 0,
                     'message' => $validator->errors()->first()
 
                 ],
-
-
-
             );
         }
 
-
-
         try {
-
             $parentCommentId =  $input['parent_comment_id'];
             $mainParentId = (new EventPostComment())->getMainParentId($parentCommentId);
-
             DB::beginTransaction();
-
-
-
             $event_post_comment = new EventPostComment;
-
             $event_post_comment->event_id = $input['event_id'];
-
             $event_post_comment->event_post_id = $input['event_post_id'];
-
             $event_post_comment->user_id = $user->id;
-
             $event_post_comment->parent_comment_id = $input['parent_comment_id'];
             $event_post_comment->main_parent_comment_id = $mainParentId;
-
             $event_post_comment->comment_text = $input['comment_text'];
             if (isset($input['media']) && !empty($input['media'])) {
                 $image = $input['media'];

@@ -943,7 +943,7 @@ function sendNotification($notificationType, $postData)
                         'comment_id' => $postData['comment_id'],
                         'event_id' => $postData['event_id'],
                         'post_type' => $getPostOwnerId->post_type,
-
+                        'reply_comment_id' => $getCommentOwnerId->id,
                     ];
 
 
