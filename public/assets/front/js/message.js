@@ -1169,7 +1169,7 @@ $(".send-message").on("keypress", async function (e) {
             const receiverSnapshot = await get(
                 ref(database, `overview/${receiverId}/${conversationId}`)
             );
-            console.log(receiverSnapshot);
+            console.log(receiverSnapshot.val());
 
             await send_push_notification(
                 receiverId,
