@@ -913,7 +913,7 @@ function sendNotification($notificationType, $postData)
         $commentId = $getCommentOwnerId->id;
         if ($getmainCommentOwnerId != null) {
             $ownerOfComment = $getmainCommentOwnerId->user_id;
-            $commentId = $getmainCommentOwnerId->id;
+            // $commentId = $getmainCommentOwnerId->id;
         }
         if ($ownerOfComment != $postData['sender_id']) {
 
