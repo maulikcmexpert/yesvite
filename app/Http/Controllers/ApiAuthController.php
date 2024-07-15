@@ -303,6 +303,7 @@ class ApiAuthController extends Controller
             $userInfo = User::where("id", $userId)->first();
             $token = $userInfo->createToken('API Token')->accessToken;
             $detail = [
+                'user_id' => $userId,
                 'firstname' => $userInfo->firstname,
                 'lastname' => $userInfo->lastname,
                 'email' => $userInfo->email,
@@ -344,6 +345,7 @@ class ApiAuthController extends Controller
             $userInfo = User::where("id", $userId)->first();
             $token = $userInfo->createToken('API Token')->accessToken;
             $detail = [
+                'user_id' => $userId,
                 'firstname' => $userInfo->firstname,
                 'lastname' => $userInfo->lastname,
                 'email' => $userInfo->email,
