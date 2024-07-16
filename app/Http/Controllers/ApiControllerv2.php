@@ -4105,7 +4105,7 @@ class ApiControllerv2 extends Controller
                             }
                         }
                     }
-                    $eventAboutHost['remaining_invite_count'] = ($getEventData->subscription_invite_count != NULL) ? ($getEventData->subscription_invite_count - count($eventDetail['invited_user_id'])) : 0;
+                    $eventDetail['remaining_invite_count'] = ($getEventData->subscription_invite_count != NULL) ? ($getEventData->subscription_invite_count - count($eventDetail['invited_user_id'])) : 0;
                 }
                 // $eventDetail['events_schedule_list'] = [];
                 $eventDetail['events_schedule_list'] = null;
