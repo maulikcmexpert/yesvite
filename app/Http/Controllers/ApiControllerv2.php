@@ -9796,6 +9796,7 @@ class ApiControllerv2 extends Controller
             $eventAboutHost['subscription_plan_name'] = ($eventDetail->subscription_plan_name != NULL) ? $eventDetail->subscription_plan_name : "";
             $eventAboutHost['subscription_invite_count'] = ($eventDetail->subscription_invite_count != NULL) ? $eventDetail->subscription_invite_count : 0;
             $eventAboutHost['is_past'] = ($eventDetail->end_date < date('Y-m-d')) ? true : false;
+
             $userRsvpStatusList = EventInvitedUser::query();
             $userRsvpStatusList->whereHas('user', function ($query) {
                 $query->where('app_user', '1');
@@ -9898,6 +9899,7 @@ class ApiControllerv2 extends Controller
 
 
             $eventAboutHost['invited_user_id'] = $getInvitedusers['invited_user_id'];
+            $eventAboutHost['remaining_invite_count'] = ($eventDetail->subscription_invite_count != NULL) ? ($eventDetail->subscription_invite_count - count($getInvitedusers['invited_user_id'])) : 0;
             $eventAboutHost['invited_guests'] = $getInvitedusers['invited_guests'];
             //  event about view //
 
