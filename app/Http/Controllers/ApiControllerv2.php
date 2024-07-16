@@ -9899,7 +9899,7 @@ class ApiControllerv2 extends Controller
 
 
             $eventAboutHost['invited_user_id'] = $getInvitedusers['invited_user_id'];
-            $eventAboutHost['remaining_invite_count'] = ($eventDetail->subscription_invite_count != NULL) ? ($eventDetail->subscription_invite_count - count($getInvitedusers['invited_user_id'])) : 0;
+
             $eventAboutHost['invited_guests'] = $getInvitedusers['invited_guests'];
             //  event about view //
 
@@ -9949,7 +9949,7 @@ class ApiControllerv2 extends Controller
             $eventAboutHost['rsvp_rate'] = $eventattending;
 
             $eventAboutHost['rsvp_rate_percent'] = ($totalEnvitedUser != 0) ? $eventattending / $totalEnvitedUser * 100 . "%" : 0 . "%";
-
+            $eventAboutHost['remaining_invite_count'] = ($eventDetail->subscription_invite_count != NULL) ? ($eventDetail->subscription_invite_count - count($getInvitedusers['invited_user_id'])) : 0;
             $eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0) ? $todayrsvprate / $totalEnvitedUser * 100 . "%" : 0 . "%";
             return response()->json(['status' => 1, 'data' => $eventAboutHost, 'message' => "Guest event"]);
         } catch (QueryException $e) {
