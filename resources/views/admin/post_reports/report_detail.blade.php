@@ -844,7 +844,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right w-100">
                         <li class="breadcrumb-item"><a href="{{URL::to('/admin/dashboard')}}">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="{{URL::to('/admin/user_post_report')}}">User Post Reports</a></li>
+                        <li class="breadcrumb-item"><a href="{{URL::to('/admin/user_post_report')}}">User Post Reportsssss</a></li>
 
 
                         <li class="breadcrumb-item active">{{$title}}</li>
