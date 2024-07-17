@@ -12244,10 +12244,10 @@ class ApiControllerv2 extends Controller
                     $yesviteUserDetail['email'] = (isset($guestVal->user->email) && $guestVal->user->email != Null) ? $guestVal->user->email : "";
                     $yesviteUserDetail['country_code'] = (isset($guestVal->user->country_code) && $guestVal->user->country_code != Null) ? strval($guestVal->user->country_code) : "";
                     $yesviteUserDetail['phone_number'] = (isset($guestVal->user->phone_number) && $guestVal->user->phone_number != Null) ? $guestVal->user->phone_number : "";
-                    $yesviteUserDetail['app_user']  = $guestVal->user->app_user;
-                    $yesviteUserDetail['visible'] =  $guestVal->user->visible;
-                    $yesviteUserDetail['message_privacy'] =  $guestVal->user->message_privacy;
-                    $yesviteUserDetail['prefer_by']  = $guestVal->user->prefer_by;
+                    $yesviteUserDetail['app_user']  = (isset($guestVal->user->app_user) && $guestVal->user->app_user != null) ? $guestVal->user->app_user : '';
+                    $yesviteUserDetail['visible'] =  (isset($guestVal->user->visible) && $guestVal->user->visible != null) ? $guestVal->user->visible : '';
+                    $yesviteUserDetail['message_privacy'] =  (isset($guestVal->user->message_privacy) && $guestVal->user->message_privacy != null) ? $guestVal->user->message_privacy : '';
+                    $yesviteUserDetail['prefer_by']  = (isset($guestVal->user->prefer_by) && $guestVal->user->prefer_by != null) ? $guestVal->user->prefer_by : '';
                     $yesviteUser[] = $yesviteUserDetail;
                 }
             }
