@@ -128,7 +128,7 @@ class ApiAuthController extends Controller
             if ($firstErrorKey == 'email') {
                 $status = 2;
             }
-            dd($status);
+            // dd($status);
             return response()->json(
                 [
                     'status' => $status,
@@ -136,7 +136,7 @@ class ApiAuthController extends Controller
                 ],
             );
         }
-        dd($validator);
+        // dd($validator);
         try {
             DB::beginTransaction();
 
