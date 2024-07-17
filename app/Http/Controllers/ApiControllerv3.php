@@ -4532,21 +4532,15 @@ class ApiControllerv3 extends Controller
 
             if ($updateEvent->save()) {
                 $getalreadyInviteduser =  EventInvitedUser::where('event_id', $eventData['event_id'])->get()->pluck('user_id')->toArray();
-
+                dd($getalreadyInviteduser);
                 // EventInvitedUser::where('event_id', $eventData['event_id'])->delete();
 
                 if (isset($eventData['invited_user_id']) && !empty($eventData['invited_user_id'])) {
                     $invitedUsers = $eventData['invited_user_id'];
-
-
                     foreach ($invitedUsers as $value) {
-
                         if (in_array($value['user_id'], $getalreadyInviteduser)) {
                             continue;
                         }
-
-
-
                         EventInvitedUser::create([
 
                             'event_id' => $eventData['event_id'],
@@ -4557,14 +4551,28 @@ class ApiControllerv3 extends Controller
 
                         ]);
                     }
-
                     $userSelectedGuest =  collect($eventData['invited_user_id'])->pluck('user_id')->toArray();
+                    $alreadyselectedasCoUser =  collect($eventData['co_host_list'])->pluck('user_id')->toArray();
                     foreach ($getalreadyInviteduser as $value) {
-
-                        if (!in_array($value, $userSelectedGuest)) {
-                            EventInvitedUser::where('user_id', $value)->delete();
+                        if (!in_array($value, $alreadyselectedasCoUser)) {
+                            if ($eventData['is_draft_save'] == '1') {
+                                EventInvitedUser::where(['user_id' => $value, 'is_co_host' => '1'])->delete();
+                            }
+                        } else {
+                            if (!in_array($value, $userSelectedGuest)) {
+                                if ($eventData['is_draft_save'] == '1') {
+                                    EventInvitedUser::where(['user_id' => $value, 'is_co_host' => '0'])->delete();
+                                }
+                            }
                         }
                     }
+                    // $userSelectedGuest =  collect($eventData['invited_user_id'])->pluck('user_id')->toArray();
+                    // foreach ($getalreadyInviteduser as $value) {
+
+                    //     if (!in_array($value, $userSelectedGuest)) {
+                    //         EventInvitedUser::where('user_id', $value)->delete();
+                    //     }
+                    // }
                 } else {
                     EventInvitedUser::where('event_id', $eventData['event_id'])->delete();
                 }
