@@ -832,6 +832,11 @@
             height: 200px;
             margin: 0px auto;
         }
+
+        .product-images .video-pane-slider {
+            width: 100%;
+            height: 200px;
+        }
     }
 </style>
 
