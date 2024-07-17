@@ -463,7 +463,7 @@ class ApiControllerv3 extends Controller
                     $eventDetail['guest_list_visible_to_guests'] = $value->event_settings->guest_list_visible_to_guests;
                     $eventDetail['event_potluck'] = $value->event_settings->podluck;
                     $eventDetail['adult_only_party'] = $value->event_settings->adult_only_party;
-                    $eventDetail['guest_pending_count'] =  $this->pendingRsvpCount;
+                    $eventDetail['guest_pending_count'] = getGuestRsvpPendingCount($value->id, 1);
                     $eventDetail['post_time'] =  $this->setpostTime($value->updated_at);
 
 
