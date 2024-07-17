@@ -967,7 +967,7 @@
                                         </div>
                                         <div class="event_posts_creator">
                                             <div class="event_posts_creator_img">
-                                                <img src="{{ asset('public/storage/profile/'.$postVal->user->profile)}}" alt="placeholder image" />
+                                                <img src="{{ asset('public/storage/profile/'.($postVal->user->profile!=null)?$postVal->user->profile:'user.jpg')}}" alt="placeholder image" />
                                             </div>
                                             <div class="event_posts_creator_content">
                                                 <h6>{{$postVal->user->firstname.' '.$postVal->user->lastname}}</h6>
