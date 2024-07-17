@@ -41,74 +41,74 @@ class ApiAuthController extends Controller
         if ($input == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
         }
-        $existUser = User::where('email', $input['email'])
-            ->where('app_user', '0')
-            ->first();
+        // $existUser = User::where('email', $input['email'])
+        //     ->where('app_user', '0')
+        //     ->first();
 
-        if ($existUser != null) {
-            $validator = Validator::make($input, [
-                'firstname' => 'required',
-                'lastname' => 'required',
-                'email' => 'required',
-                'password' => 'required|min:8',
-                'account_type' => 'required|in:0,1',
-                'company_name' => 'present'
-            ]);
+        // if ($existUser != null) {
+        //     $validator1 = Validator::make($input, [
+        //         'firstname' => 'required',
+        //         'lastname' => 'required',
+        //         'email' => 'required',
+        //         'password' => 'required|min:8',
+        //         'account_type' => 'required|in:0,1',
+        //         'company_name' => 'present'
+        //     ]);
 
-            if ($validator->fails()) {
-                $errors = $validator->errors();
-                $errorKeys = $errors->keys();
-                $firstErrorKey = $errorKeys[0];
-                $status = 0;
-                if ($firstErrorKey == 'email') {
-                    $status = 2;
-                }
-                return response()->json(
-                    [
-                        'status' => $status,
-                        'message' => $validator->errors()->first()
-                    ],
-                );
-            }
+        //     if ($validator1->fails()) {
+        //         $errors = $validator1->errors();
+        //         $errorKeys = $errors->keys();
+        //         $firstErrorKey = $errorKeys[0];
+        //         $status = 0;
+        //         if ($firstErrorKey == 'email') {
+        //             $status = 2;
+        //         }
+        //         return response()->json(
+        //             [
+        //                 'status' => $status,
+        //                 'message' => $validator1->errors()->first()
+        //             ],
+        //         );
+        //     }
 
-            try {
-                DB::beginTransaction();
+        //     try {
+        //         DB::beginTransaction();
 
-                $randomString = Str::random(30);
+        //         $randomString = Str::random(30);
 
-                $usersignup =  User::where('id', $existUser->id)->update([
-                    'firstname' => $input['firstname'],
-                    'lastname' => $input['lastname'],
-                    'email' => $input['email'],
-                    'account_type' => $input['account_type'],
-                    'company_name' => ($input['account_type'] == '1') ? $input['company_name'] : "",
-                    'password' => Hash::make($input['password']),
-                    'password_updated_date' => date('Y-m-d'),
-                    'remember_token' =>  $randomString,
-                    'app_user' => '1',
-                ]);
+        //         $usersignup =  User::where('id', $existUser->id)->update([
+        //             'firstname' => $input['firstname'],
+        //             'lastname' => $input['lastname'],
+        //             'email' => $input['email'],
+        //             'account_type' => $input['account_type'],
+        //             'company_name' => ($input['account_type'] == '1') ? $input['company_name'] : "",
+        //             'password' => Hash::make($input['password']),
+        //             'password_updated_date' => date('Y-m-d'),
+        //             'remember_token' =>  $randomString,
+        //             'app_user' => '1',
+        //         ]);
 
-                DB::commit();
+        //         DB::commit();
 
-                $userDetails = User::where('id', $existUser->id)->first();
+        //         $userDetails = User::where('id', $existUser->id)->first();
 
-                $userData = [
-                    'username' => $userDetails->firstname . ' ' . $userDetails->lastname,
-                    'email' => $userDetails->email,
-                    'token' => $randomString
-                ];
-                Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($input) {
-                    $message->to($input['email']);
-                    $message->subject('Email Verification Mail');
-                });
+        //         $userData = [
+        //             'username' => $userDetails->firstname . ' ' . $userDetails->lastname,
+        //             'email' => $userDetails->email,
+        //             'token' => $randomString
+        //         ];
+        //         Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($input) {
+        //             $message->to($input['email']);
+        //             $message->subject('Email Verification Mail');
+        //         });
 
-                return response()->json(['status' => 1, 'message' => "Account successfully created, please verify your email before you can log in"]);
-            } catch (QueryException $e) {
+        //         return response()->json(['status' => 1, 'message' => "Account successfully created, please verify your email before you can log in"]);
+        //     } catch (QueryException $e) {
 
-                DB::rollBack();
-                return response()->json(['status' => 0, 'message' => "Something went wrong"]);
-            }
-        }
+        //         DB::rollBack();
+        //         return response()->json(['status' => 0, 'message' => "Something went wrong"]);
+        //     }
+        // }
 
 
         $validator = Validator::make($input, [
