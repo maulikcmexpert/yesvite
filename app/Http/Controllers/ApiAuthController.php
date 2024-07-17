@@ -44,7 +44,7 @@ class ApiAuthController extends Controller
         $existUser = User::where('email', $input['email'])
             ->where('app_user', '0')
             ->first();
-        dd($existUser);
+
         if ($existUser != null) {
             $validator = Validator::make($input, [
                 'firstname' => 'required',
@@ -109,6 +109,8 @@ class ApiAuthController extends Controller
                 return response()->json(['status' => 0, 'message' => "Something went wrong"]);
             }
         }
+
+        dd($existUser);
         $validator = Validator::make($input, [
             'firstname' => 'required',
             'lastname' => 'required',
