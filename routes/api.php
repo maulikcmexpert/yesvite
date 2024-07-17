@@ -347,4 +347,6 @@ Route::prefix('user/v3/')->middleware('checkUser')->group(function () {
     Route::get('notificationtest', [ApiControllerv3::class, 'notificationtest']);
 
     Route::get('logout', [ApiControllerv3::class, 'logout']);
+
+    Route::post('get_yesvite_selected_user_list_page', [ApiControllerv2::class, 'getYesviteSelectedUserListPage']);
 });
