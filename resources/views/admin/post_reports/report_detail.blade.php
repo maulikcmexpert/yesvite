@@ -778,7 +778,7 @@
         border: 1px solid var(--ButtonColor);
     }
 
-    .main-img-slider video.video-pane-slider {
+    .main-img-slider .video-pane-slider {
         width: 100% !important;
         height: 200px !important;
         max-width: 247px;
