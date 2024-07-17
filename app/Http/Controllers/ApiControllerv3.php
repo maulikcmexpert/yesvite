@@ -4532,7 +4532,6 @@ class ApiControllerv3 extends Controller
 
             if ($updateEvent->save()) {
                 $getalreadyInviteduser =  EventInvitedUser::where('event_id', $eventData['event_id'])->get()->pluck('user_id')->toArray();
-                dd($getalreadyInviteduser);
                 // EventInvitedUser::where('event_id', $eventData['event_id'])->delete();
 
                 if (isset($eventData['invited_user_id']) && !empty($eventData['invited_user_id'])) {
