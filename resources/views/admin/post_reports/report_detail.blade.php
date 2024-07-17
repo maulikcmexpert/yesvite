@@ -894,7 +894,7 @@
                                             <div class="main-img-slider">
                                                 @foreach($reportDetail->event_posts->post_image as $key=>$postImg)
                                                 @if(pathinfo($postImg->post_image, PATHINFO_EXTENSION) === 'mp4')
-                                                <video controls>
+                                                <video controls class="video-pane-slider">
                                                     <source src="{{ asset('public/storage/post_image/'.$postImg->post_image) }}" type="video/mp4">
                                                 </video>
                                                 @else
