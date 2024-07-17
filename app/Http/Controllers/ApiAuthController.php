@@ -110,7 +110,7 @@ class ApiAuthController extends Controller
             }
         }
 
-        dd($existUser);
+
         $validator = Validator::make($input, [
             'firstname' => 'required',
             'lastname' => 'required',
@@ -128,6 +128,7 @@ class ApiAuthController extends Controller
             if ($firstErrorKey == 'email') {
                 $status = 2;
             }
+            dd($status);
             return response()->json(
                 [
                     'status' => $status,
@@ -135,6 +136,7 @@ class ApiAuthController extends Controller
                 ],
             );
         }
+        dd($validator);
         try {
             DB::beginTransaction();
 
