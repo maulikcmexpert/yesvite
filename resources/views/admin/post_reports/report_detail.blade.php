@@ -893,6 +893,7 @@
                                             <!-- Begin Product Images Slider -->
                                             <div class="main-img-slider">
                                                 @foreach($reportDetail->event_posts->post_image as $key=>$postImg)
+                                                dd($postImg->post_image);
                                                 <a data-fancybox="gallery" href="{{ asset('public/storage/post_image/'.$postImg->post_image)}}"><img src="{{ asset('public/storage/post_image/'.$postImg->post_image)}}" /></a>
                                                 @endforeach
                                             </div>
