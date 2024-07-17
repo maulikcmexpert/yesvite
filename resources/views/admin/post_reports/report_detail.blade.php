@@ -782,6 +782,7 @@
         width: 100% !important;
         height: 200px !important;
         max-width: 247px;
+        object-fit: cover;
     }
 
     @media only screen and (max-width: 1399px) {
