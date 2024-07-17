@@ -106,7 +106,7 @@ use App\Jobs\SendInvitationMailJob as sendInvitation;
 use App\Services\GooglePlayService;
 use Illuminate\Support\Facades\Session;
 use stdClass;
-
+use DateTime;
 
 class ApiControllerv3 extends Controller
 
@@ -3335,21 +3335,15 @@ class ApiControllerv3 extends Controller
     {
 
         $user  = Auth::guard('api')->user();
-
         $rawData = $request->getContent();
-
         $eventData = json_decode($rawData, true);
-
         if ($eventData == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
         }
-
         if ($eventData['is_draft_save'] == '0') {
             $validator = Validator::make($eventData, [
-
                 'event_type_id' => ['required'],
                 'event_name' => ['required'],
-
                 'start_date' => ['required'],
                 'end_date' => ['required'],
                 'rsvp_by_date_set' => ['required', 'in:0,1'],
@@ -3391,7 +3385,6 @@ class ApiControllerv3 extends Controller
             ]);
         }
 
-
         if ($validator->fails()) {
 
             return response()->json([
@@ -3401,17 +3394,23 @@ class ApiControllerv3 extends Controller
         }
 
         try {
-            DB::beginTransaction();
 
+            DB::beginTransaction();
             $rsvp_by_date = date('Y-m-d');
             $rsvp_by_date_set = '0';
-
             $rsvpEndTime = "";
 
             if (!empty($eventData['rsvp_by_date'])) {
 
                 $rsvp_by_date = $eventData['rsvp_by_date'];
                 $rsvp_by_date_set = '1';
+            } else {
+                if (!empty($eventData['start_date'])) {
+
+                    $start = new DateTime($eventData['start_date']);
+                    $start->modify('-1 day');
+                    $rsvp_by_date = $start->format('Y-m-d');
+                }
             }
             $greeting_card_id = "";
             if ($eventData['event_setting']['thank_you_cards'] == '1') {
@@ -3429,7 +3428,6 @@ class ApiControllerv3 extends Controller
                     $gift_registry_id =  implode(',', $eventData['gift_registry_list']);
                 }
             }
-
             $eventCreation =  Event::create([
                 'event_type_id' => (!empty($eventData['event_type_id'])) ? $eventData['event_type_id'] : "",
                 'event_name' => (!empty($eventData['event_name'])) ? $eventData['event_name'] : "",
@@ -12466,6 +12464,7 @@ class ApiControllerv3 extends Controller
             $new_subscription->type = 'product';
             $new_subscription->purchaseToken = $input['purchaseToken'];
             if ($new_subscription->save()) {
+                dd(1);
                 $updateEvent = Event::where('id', $input['event_id'])->first();
                 if ($updateEvent != null) {
                     $updateEvent->is_draft_save = '0';

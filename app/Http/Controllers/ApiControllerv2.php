@@ -3494,16 +3494,10 @@ class ApiControllerv2 extends Controller
                             if (empty($checkUserExist)) {
 
                                 $guestUser = User::create([
-
                                     'firstname' => $value['first_name'],
-
                                     'lastname' => $value['last_name'],
-
-
                                     'country_code' => ($value['country_code'] != "") ? $value['country_code'] : 0,
-
                                     'phone_number' => $value['phone_number'],
-
                                     'app_user' => '0',
                                     'is_user_phone_contact' => '1',
                                     'parent_user_phone_contact' => $user->id
@@ -3511,11 +3505,8 @@ class ApiControllerv2 extends Controller
                                 ]);
 
                                 EventInvitedUser::create([
-
                                     'event_id' => $eventId,
-
                                     'prefer_by' => (isset($value['prefer_by'])) ? $value['prefer_by'] : "phone",
-
                                     'user_id' => $guestUser->id,
                                     'is_co_host' => '1'
                                 ]);
@@ -3526,11 +3517,8 @@ class ApiControllerv2 extends Controller
                                     $alreadyselectedCoHostUser =  collect($eventData['co_host_list'])->pluck('user_id')->toArray();
                                     if (!in_array($checkUserExist->id, $alreadyselectedCoHostUser)) {
                                         EventInvitedUser::create([
-
                                             'event_id' => $eventId,
-
                                             'prefer_by' => (isset($value['prefer_by'])) ? $value['prefer_by'] : "phone",
-
                                             'user_id' => $checkUserExist->id,
                                             'is_co_host' => '1'
                                         ]);
@@ -3641,37 +3629,17 @@ class ApiControllerv2 extends Controller
                 $podluckCategoryList = $eventData['podluck_category_list'];
 
                 if (!empty($podluckCategoryList)) {
-
-
-
                     foreach ($podluckCategoryList as $value) {
-
-
-
                         $eventPodluck = EventPotluckCategory::create([
-
                             'event_id' => $eventId,
                             'user_id' => $user->id,
                             'category' => $value['category'],
-
                             'quantity' => $value['quantity'],
-
                         ]);
-
-
-
                         if (!empty($value['items'])) {
-
                             $items = $value['items'];
-
-
-
                             foreach ($items as $value) {
-
-
-
                                 $eventPodluckitem = EventPotluckCategoryItem::create([
-
                                     'event_id' => $eventId,
                                     'user_id' => $user->id,
                                     'event_potluck_category_id' => $eventPodluck->id,
@@ -3695,7 +3663,6 @@ class ApiControllerv2 extends Controller
                 }
             }
         }
-
         DB::commit();
         return response()->json(['status' => 1, 'event_id' => $eventCreation->id, 'event_name' => $eventData['event_name'], 'message' => "Event Created Successfully", 'guest_pending_count' => getGuestRsvpPendingCount($eventCreation->id)]);
         // } catch (QueryException $e) {
