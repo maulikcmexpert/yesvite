@@ -4199,7 +4199,7 @@ class ApiControllerv3 extends Controller
                 $eventDetail['is_draft_save'] = $getEventData->is_draft_save;
                 $eventDetail['step'] = ($getEventData->step != NULL) ? $getEventData->step : 0;
                 $eventDetail['subscription_plan_name'] = ($getEventData->subscription_plan_name != NULL) ? $getEventData->subscription_plan_name : "";
-                // $eventDetail['purchase_status'] = ($getEventData->subscription_plan_name != NULL) ? ($getEventData->subscription_plan_name == 'Pro-Year') ? true : false : false;
+                $eventDetail['purchase_status'] = ($getEventData->subscription_plan_name != NULL) ? ($getEventData->subscription_plan_name == 'Pro-Year') ? true : false : false;
                 $eventDetail['subscription_invite_count'] = ($getEventData->subscription_invite_count != NULL) ? $getEventData->subscription_invite_count : 0;
                 $eventDetail['event_images'] = [];
                 $getEventImages = EventImage::where('event_id', $getEventData->id)->get();
