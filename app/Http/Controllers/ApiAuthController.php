@@ -41,7 +41,10 @@ class ApiAuthController extends Controller
         if ($input == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
         }
-        $existUser = User::where(['email' =>  $input['email'], 'app_user' => '0'])->first();
+        $existUser = User::where('email', $input['email'])
+            ->where('app_user', '0')
+            ->first();
+        dd($existUser);
         if ($existUser != null) {
             $validator = Validator::make($input, [
                 'firstname' => 'required',
