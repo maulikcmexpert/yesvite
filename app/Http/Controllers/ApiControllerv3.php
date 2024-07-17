@@ -3403,8 +3403,6 @@ class ApiControllerv3 extends Controller
         try {
             DB::beginTransaction();
 
-
-
             $rsvp_by_date = date('Y-m-d');
             $rsvp_by_date_set = '0';
 
@@ -3415,10 +3413,6 @@ class ApiControllerv3 extends Controller
                 $rsvp_by_date = $eventData['rsvp_by_date'];
                 $rsvp_by_date_set = '1';
             }
-
-
-
-
             $greeting_card_id = "";
             if ($eventData['event_setting']['thank_you_cards'] == '1') {
 
@@ -3436,31 +3430,20 @@ class ApiControllerv3 extends Controller
                 }
             }
 
-
-
-
-
             $eventCreation =  Event::create([
-
                 'event_type_id' => (!empty($eventData['event_type_id'])) ? $eventData['event_type_id'] : "",
-
                 'event_name' => (!empty($eventData['event_name'])) ? $eventData['event_name'] : "",
-
                 'user_id' => $user->id,
-
                 'hosted_by' => (!empty($eventData['hosted_by'])) ? $eventData['hosted_by'] : $user->firstname . ' ' . $user->lastname,
                 'latitude' => (!empty($eventData['latitude'])) ? $eventData['latitude'] : "",
                 'longitude' => (!empty($eventData['longitude'])) ? $eventData['longitude'] : "",
                 'start_date' => (!empty($eventData['start_date'])) ? $eventData['start_date'] : NULL,
-
                 'end_date' => (!empty($eventData['end_date'])) ? $eventData['end_date'] : NULL,
                 //'rsvp_by_date_set' => $eventData['rsvp_by_date_set'],
                 'rsvp_by_date_set' => $rsvp_by_date_set,
                 // 'rsvp_by_date' => (!empty($eventData['rsvp_by_date'])) ? $eventData['rsvp_by_date'] : NULL,
                 'rsvp_by_date' => $rsvp_by_date,
-
                 'rsvp_start_time' => $eventData['rsvp_start_time'],
-
                 'rsvp_start_timezone' => (!empty($eventData['rsvp_start_timezone'])) ? $eventData['rsvp_start_timezone'] : "",
                 'greeting_card_id' => $greeting_card_id,
                 'gift_registry_id' => $gift_registry_id,
@@ -3479,8 +3462,6 @@ class ApiControllerv3 extends Controller
                 'is_draft_save' => (!empty($eventData['subscription_plan_name']) && $eventData['subscription_plan_name'] == 'Pro') ? "1" : $eventData['is_draft_save']
             ]);
 
-
-
             if ($eventCreation) {
 
                 $eventId = $eventCreation->id;
@@ -3489,13 +3470,7 @@ class ApiControllerv3 extends Controller
 
                     $invitedUsers = $eventData['invited_user_id'];
 
-
-
-
                     foreach ($invitedUsers as $value) {
-
-
-
                         EventInvitedUser::create([
 
                             'event_id' => $eventId,
@@ -3511,8 +3486,6 @@ class ApiControllerv3 extends Controller
 
                     $invitedGuestUsers = $eventData['invited_guests'];
 
-
-
                     foreach ($invitedGuestUsers as $value) {
 
                         if ($value['prefer_by'] == 'phone') {
@@ -3522,31 +3495,19 @@ class ApiControllerv3 extends Controller
                             if (empty($checkUserExist)) {
 
                                 $guestUser = User::create([
-
-
-
                                     'firstname' => $value['first_name'],
-
                                     'lastname' => $value['last_name'],
-
-
                                     'country_code' => ($value['country_code'] != "") ? $value['country_code'] : 0,
-
                                     'phone_number' => $value['phone_number'],
-
                                     'app_user' => '0',
                                     'is_user_phone_contact' => '1',
                                     'parent_user_phone_contact' => $user->id
                                 ]);
 
                                 EventInvitedUser::create([
-
                                     'event_id' => $eventId,
-
                                     'prefer_by' => $value['prefer_by'],
-
                                     'user_id' => $guestUser->id
-
                                 ]);
                             } else {
                                 $alreadyselectedUser =  collect($eventData['invited_user_id'])->pluck('user_id')->toArray();
@@ -3571,15 +3532,9 @@ class ApiControllerv3 extends Controller
                             if (empty($checkUserExist)) {
 
                                 $guestUser = User::create([
-
-
-
                                     'firstname' => $value['first_name'],
-
                                     'lastname' => $value['last_name'],
-
                                     'email' => $value['email'],
-
                                     'app_user' => '0',
                                     'is_user_phone_contact' => '1',
                                     'parent_user_phone_contact' => $user->id
@@ -3587,13 +3542,9 @@ class ApiControllerv3 extends Controller
                                 ]);
 
                                 EventInvitedUser::create([
-
                                     'event_id' => $eventId,
-
                                     'prefer_by' => $value['prefer_by'],
-
                                     'user_id' => $guestUser->id
-
                                 ]);
                             } else {
 
