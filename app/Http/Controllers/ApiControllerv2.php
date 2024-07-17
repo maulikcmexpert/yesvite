@@ -12234,6 +12234,7 @@ class ApiControllerv2 extends Controller
                 })
                 ->paginate('10', ['*'], 'page', $page);
             $yesviteUser = [];
+            dd($invitedUser);
             if ($invitedUser->isNotEmpty()) {
                 foreach ($invitedUser as $guestVal) {
                     // dd($guestVal->user);
