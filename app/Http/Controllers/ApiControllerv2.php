@@ -12237,8 +12237,7 @@ class ApiControllerv2 extends Controller
             // dd($invitedUser);
             if ($invitedUser->isNotEmpty()) {
                 foreach ($invitedUser as $guestVal) {
-                    dd($guestVal->user->id);
-                    $yesviteUserDetail['id'] = $guestVal->user->id;
+                    $yesviteUserDetail['id'] = (isset($guestVal->user->id) && $guestVal->user->id != null) ? $guestVal->user->id : '';
                     $yesviteUserDetail['profile'] = empty($guestVal->user->profile) ? "" : asset('storage/profile/' . $guestVal->user->profile);
                     $yesviteUserDetail['first_name'] = (!empty($guestVal->user->firstname) || $guestVal->user->firstname != Null) ? $guestVal->user->firstname : "";;
                     $yesviteUserDetail['last_name'] = (!empty($guestVal->user->lastname) || $guestVal->user->lastname != Null) ? $guestVal->user->lastname : "";
