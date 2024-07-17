@@ -12448,12 +12448,7 @@ class ApiControllerv3 extends Controller
             $purchaseToken = $input['purchaseToken'];
 
             $responce =  $this->set_android_iap($app_id, $product_id, $purchaseToken, 'product');
-
-
-
             $startDate = date('Y-m-d H:i:s', ($responce['purchaseTimeMillis'] / 1000));
-
-
             $new_subscription = new UserSubscription();
             $new_subscription->user_id = $user_id;
             $new_subscription->orderId = $input['orderId'];
@@ -12465,17 +12460,18 @@ class ApiControllerv3 extends Controller
             $new_subscription->type = 'product';
             $new_subscription->purchaseToken = $input['purchaseToken'];
             if ($new_subscription->save()) {
-                Event::where('id', $input['event_id'])
-                    ->update([
-                        'is_draft_save' => '0',
-                        'product_payment_id' => $new_subscription->id,
-                    ]);
-                // $updateEvent = Event::where('id', $input['event_id'])->first();
-                // if ($updateEvent != null) {
-                //     $updateEvent->is_draft_save = '0';
-                //     $updateEvent->product_payment_id = $new_subscription->id;
-                //     $updateEvent->save();
-                // }
+                // Event::where('id', $input['event_id'])
+                //     ->update([
+                //         'is_draft_save' => '0',
+                //         'product_payment_id' => $new_subscription->id,
+                //     ]);
+                $updateEvent = Event::where('id', $input['event_id'])->first();
+                if ($updateEvent != null) {
+                    $updateEvent->is_draft_save = '0';
+                    $updateEvent->product_payment_id = $new_subscription->id;
+                    $updateEvent->subscription_invite_count = $updateEvent->subscription_invite_count + $input['subscription_invite_count'];
+                    $updateEvent->save();
+                }
             }
             return response()->json(['status' => 1, 'message' => "purchase sucessfully"]);
         } catch (QueryException $e) {
