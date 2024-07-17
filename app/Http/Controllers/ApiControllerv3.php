@@ -12467,9 +12467,11 @@ class ApiControllerv3 extends Controller
                 //     ]);
                 $updateEvent = Event::where('id', $input['event_id'])->first();
                 if ($updateEvent != null) {
+                    $invite_count = (isset($input['subscription_invite_count']) && $input['subscription_invite_count'] != null) ? $input['subscription_invite_count'] : 0;
+
                     $updateEvent->is_draft_save = '0';
                     $updateEvent->product_payment_id = $new_subscription->id;
-                    $updateEvent->subscription_invite_count = $updateEvent->subscription_invite_count + $input['subscription_invite_count'];
+                    $updateEvent->subscription_invite_count = $updateEvent->subscription_invite_count + $invite_count;
                     $updateEvent->save();
                 }
             }
