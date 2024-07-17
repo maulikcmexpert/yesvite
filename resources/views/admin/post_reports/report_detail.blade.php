@@ -836,6 +836,7 @@
         .product-images .video-pane-slider {
             width: 100%;
             height: 200px;
+            max-width: 247px;
         }
     }
 </style>
