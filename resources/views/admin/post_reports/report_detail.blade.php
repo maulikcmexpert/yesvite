@@ -833,7 +833,7 @@
             margin: 0px auto;
         }
 
-        .product-images .video-pane-slider {
+        .video-pane-slider {
             width: 100%;
             height: 200px;
             max-width: 247px;
