@@ -26,6 +26,7 @@ class ProfessionalUserDataTable extends DataTable
         $counter = 1;
         return datatables()
             ->eloquent($query)
+            ->orderColumns(['id'], '-:column $1')
             ->addColumn('no', function () use (&$counter) {
                 return $counter++;
             })
