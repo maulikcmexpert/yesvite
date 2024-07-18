@@ -4173,6 +4173,7 @@ class ApiControllerv3 extends Controller
 
         try {
             $getEventData = Event::with('event_schedule')->where('id', $eventData['event_id'])->first();
+            dd($getEventData);
             if ($getEventData != null) {
                 $eventDetail['id'] = (!empty($getEventData->id) && $getEventData->id != NULL) ? $getEventData->id : "";
                 $eventDetail['event_type_id'] = (!empty($getEventData->event_type_id) && $getEventData->event_type_id != NULL) ? $getEventData->event_type_id : "";
