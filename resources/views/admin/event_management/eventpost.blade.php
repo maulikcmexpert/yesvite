@@ -878,7 +878,7 @@
                                                 <a data-fancybox="gallery" href="{{ asset('public/storage/post_image/'.$postImg->post_image)}}"><img src="{{ asset('public/storage/post_image/'.$postImg->post_image)}}" /></a>
                                                 @endforeach -->
                                                 @foreach($postVal->post_image as $key=>$postImg)
-                                                @if(pathinfo($postVal->post_image, PATHINFO_EXTENSION) === 'mp4')
+                                                @if(pathinfo($postImg->post_image, PATHINFO_EXTENSION) === 'mp4')
                                                 <video controls class="video-pane-slider">
                                                     <source src="{{ asset('public/storage/post_image/'.$postImg->post_image) }}" type="video/mp4">
                                                 </video>
