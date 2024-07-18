@@ -874,9 +874,19 @@
                                         <div class="product-images demo-gallery">
                                             <!-- Begin Product Images Slider -->
                                             <div class="main-img-slider">
-                                                @foreach($postVal->post_image as $key=>$postImg)
+                                                <!-- @foreach($postVal->post_image as $key=>$postImg)
                                                 <a data-fancybox="gallery" href="{{ asset('public/storage/post_image/'.$postImg->post_image)}}"><img src="{{ asset('public/storage/post_image/'.$postImg->post_image)}}" /></a>
-                                                @endforeach
+                                                @endforeach -->
+                                                @foreach($reportDetail->event_posts->post_image as $key=>$postImg)
+                                                @if(pathinfo($postImg->post_image, PATHINFO_EXTENSION) === 'mp4')
+                                                <video controls class="video-pane-slider">
+                                                    <source src="{{ asset('public/storage/post_image/'.$postImg->post_image) }}" type="video/mp4">
+                                                </video>
+                                                @else
+                                                <a data-fancybox="gallery" href="{{ asset('public/storage/post_image/'.$postImg->post_image) }}">
+                                                    <img src="{{ asset('public/storage/post_image/'.$postImg->post_image) }}" />
+                                                </a>
+                                                @endif @endforeach
                                             </div>
                                             <!-- End Product Images Slider -->
                                         </div>
