@@ -926,9 +926,9 @@
                                                     <source src="{{ asset('public/storage/post_image/'.$postImg->post_image) }}" type="video/mp4">
                                                 </video>
                                                 @else
-                                                <a data-fancybox="gallery" href="{{ asset('public/storage/post_image/'.$postImg->post_image) }}">
+                                                <!-- <a data-fancybox="gallery" href="{{ asset('public/storage/post_image/'.$postImg->post_image) }}">
                                                     <img src="{{ asset('public/storage/post_image/'.$postImg->post_image) }}" />
-                                                </a>
+                                                </a> -->
                                                 @endif @endforeach
                                             </div>
                                             <!-- End Product Images Slider -->
