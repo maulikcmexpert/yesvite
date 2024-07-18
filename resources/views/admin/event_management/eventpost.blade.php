@@ -778,6 +778,14 @@
         border: 1px solid var(--ButtonColor);
     }
 
+    .video-pane-slider {
+        width: 100% !important;
+        height: 200px !important;
+        max-width: 247px;
+        object-fit: cover;
+    }
+
+
     @media only screen and (max-width: 1399px) {
         .event_postsmain .aVolIco {
             margin: 0px 5px;
