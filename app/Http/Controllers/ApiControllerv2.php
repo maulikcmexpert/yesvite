@@ -8445,6 +8445,7 @@ class ApiControllerv2 extends Controller
     {
         $user  = Auth::guard('api')->user();
         $input = $request->all();
+        thumnName = "";
         $validator = Validator::make($input, [
             'event_id' => ['required', 'exists:events,id'],
             'post_privacy' => ['required', 'in:1,2,3,4'],
@@ -8513,13 +8514,19 @@ class ApiControllerv2 extends Controller
             if ($request->post_type == '1') {
                 if (!empty($request->post_image)) {
                     $postimages = $request->post_image;
-                    foreach ($postimages as $postImgValue) {
+                    foreach ($postimages as $key => $postImgValue) {
                         $postImage = $postImgValue;
                         $imageName = time() . '_' . $postImage->getClientOriginalName();
                         $checkIsimageOrVideo = checkIsimageOrVideo($postImage);
                         $duration = "";
                         if ($checkIsimageOrVideo == 'video') {
                             $duration = getVideoDuration($postImage);
+                            if (isset($request->thumbnail) && $request->thumbnail != Null) {
+                                $thumbimage = $request->thumbnail[$key];
+                                $thumbName = time() . '_' . $thumbimage->getClientOriginalName();
+                                // $checkIsimageOrVideo = checkIsimageOrVideo($thumbimage);
+                                $thumbimage->move(public_path('storage/thumbnails'), $thumbName);
+                            }
                         }
                         if (file_exists(public_path('storage/post_image/') . $imageName)) {
                             $imagePath = public_path('storage/post_image/') . $imageName;
@@ -8531,7 +8538,8 @@ class ApiControllerv2 extends Controller
                             'event_post_id' => $creatEventPost->id,
                             'post_image' => $imageName,
                             'duration' => $duration,
-                            'type' => $checkIsimageOrVideo
+                            'type' => $checkIsimageOrVideo,
+                            'thumbnail' => $thumbName,
                         ]);
                     }
                 }
