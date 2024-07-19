@@ -8445,7 +8445,7 @@ class ApiControllerv2 extends Controller
     {
         $user  = Auth::guard('api')->user();
         $input = $request->all();
-        thumnName = "";
+        $thumnName = "";
         $validator = Validator::make($input, [
             'event_id' => ['required', 'exists:events,id'],
             'post_privacy' => ['required', 'in:1,2,3,4'],
