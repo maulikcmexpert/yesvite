@@ -8544,10 +8544,10 @@ class ApiControllerv2 extends Controller
                         $eventPostImage = new EventPostImage();
                         $eventPostImage->event_id = $request->event_id;
                         $eventPostImage->event_post_id = $creatEventPost->id;
-                        $eventPostImage->post_image = (string)$imageName;
-                        $eventPostImage->duration = (string)$duration;
-                        $eventPostImage->type = (string)$checkIsimageOrVideo;
-                        $eventPostImage->thumbnail = (string)$thumbName;
+                        $eventPostImage->post_image = $imageName;
+                        $eventPostImage->duration = $duration;
+                        $eventPostImage->type = $checkIsimageOrVideo;
+                        $eventPostImage->thumbnail = $thumbName;
                         $eventPostImage->save();
                     }
                 }
