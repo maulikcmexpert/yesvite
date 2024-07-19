@@ -4331,7 +4331,7 @@ class ApiControllerv2 extends Controller
                 $updateEvent->zip_code = (!empty($eventData['zip_code'])) ? $eventData['zip_code'] : "";
                 $updateEvent->city = (!empty($eventData['city'])) ? $eventData['city'] : "";
                 $updateEvent->message_to_guests = (!empty($eventData['message_to_guests'])) ? $eventData['message_to_guests'] : "";
-                if ($updateEvent->is_draft_save != '1') {
+                if ($updateEvent->is_draft_save != '0') {
                     $updateEvent->is_draft_save = $eventData['is_draft_save'];
                 }
                 $updateEvent->subscription_plan_name = (!empty($eventData['subscription_plan_name'])) ? $eventData['subscription_plan_name'] : "";
