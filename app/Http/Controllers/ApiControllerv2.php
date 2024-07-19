@@ -7442,6 +7442,7 @@ class ApiControllerv2 extends Controller
                             $postMedia = [
                                 'media_url' => asset('public/storage/post_image/' . $imgVal->post_image),
                                 'type' => $imgVal->type,
+                                'thumbnail' => (isset($imgVal->thumbnail) && $imgVal->thumbnail != null) ?  asset('public/storage/thumbnails/' . $imgVal->thumbnail) : '',
                             ];
 
                             if ($imgVal->type == 'video' && isset($imgVal->duration) && $imgVal->duration !== "") {
