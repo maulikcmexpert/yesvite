@@ -308,7 +308,7 @@ function sendNotification($notificationType, $postData)
                                 'event_wall' => $value->event->event_settings->event_wall,
                                 'guest_list_visible_to_guests' => $value->event->event_settings->guest_list_visible_to_guests,
                                 'event_potluck' => $value->event->event_settings->podluck,
-                                'rsvp_status' => (isset($value->rsvp_status) && $value->rsvp_status != null )?$value->rsvp_status:'',
+                                'rsvp_status' => (isset($value->rsvp_status) && $value->rsvp_status != null) ? $value->rsvp_status : '',
                                 'guest_pending_count' => getGuestPendingRsvpCount($postData['event_id'])
 
                             ];
