@@ -11168,7 +11168,11 @@ class ApiControllerv2 extends Controller
                 $notificationDetail['created_at'] = $values->created_at;
 
                 $checkrsvp =  EventInvitedUser::where(['user_id' => $values->user_id, 'event_id' => $values->event_id])->first();
-                $notificationDetail['rsvp_status'] =  (isset($checkrsvp->rsvp_status) || $checkrsvp->rsvp_status != null) ? $checkrsvp->rsvp_status : "";
+                if (!empty($checkrsvp)) {
+                    $notificationDetail['rsvp_status'] =  (isset($checkrsvp->rsvp_status) || $checkrsvp->rsvp_status != null) ? $checkrsvp->rsvp_status : "";
+                } else {
+                    $notificationDetail['rsvp_status'] = '';
+                }
 
                 $rsvpData['rsvpd_status'] = (!empty($values->rsvp_status) || $values->rsvp_status != null) ? $values->rsvp_status : "";
                 $rsvpData['Adults'] = (!empty($values->adults) || $values->adults != null) ? $values->adults : 0;
