@@ -7909,7 +7909,7 @@ class ApiControllerv2 extends Controller
                     $postMedia['media_url'] = asset('public/storage/post_image/' . $imgVal->post_image);
 
                     $postMedia['type'] = $imgVal->type;
-
+                    $postMedia['thumbnail'] = (isset($imgVal->thumbnail) && $imgVal->thumbnail != null) ?  asset('public/storage/thumbnails/' . $imgVal->thumbnail) : '';
 
                     if (isset($imgVal->type) && $imgVal->type == 'video') {
                         if (isset($imgVal->duration) && $imgVal->duration !== "") {
@@ -10494,6 +10494,8 @@ class ApiControllerv2 extends Controller
                         $photoVideoDetail['event_post_id'] = $val->event_post_id;
 
                         $photoVideoDetail['post_media'] = (!empty($val->post_image) || $val->post_media != NULL) ? asset('public/storage/post_image/' . $val->post_image) : "";
+
+                        $photoVideoDetail['thumbnail'] = (!empty($val->thumbnail) || $val->thumbnail != NULL) ? asset('public/storage/thumbnails/' . $val->thumbnail) : "";
 
                         $photoVideoDetail['type'] = $val->type;
 
