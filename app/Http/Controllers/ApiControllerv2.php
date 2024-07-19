@@ -11167,7 +11167,7 @@ class ApiControllerv2 extends Controller
                 $notificationDetail['post_time'] = $this->setpostTime($values->created_at);
                 $notificationDetail['created_at'] = $values->created_at;
 
-                $notificationDetail['rsvpStatus'] = $values->rsvp_status;
+                $notificationDetail['rsvpStatus'] = (!empty($values->rsvp_status) || $values->rsvp_status != null) ? $values->rsvp_status : "";
 
                 $rsvpData['rsvpd_status'] = (!empty($values->rsvp_status) || $values->rsvp_status != null) ? $values->rsvp_status : "";
                 $rsvpData['Adults'] = (!empty($values->adults) || $values->adults != null) ? $values->adults : 0;
