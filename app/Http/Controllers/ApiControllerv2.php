@@ -8445,7 +8445,7 @@ class ApiControllerv2 extends Controller
     {
         $user  = Auth::guard('api')->user();
         $input = $request->all();
-        $thumbName = "";
+
         $validator = Validator::make($input, [
             'event_id' => ['required', 'exists:events,id'],
             'post_privacy' => ['required', 'in:1,2,3,4'],
@@ -8519,6 +8519,7 @@ class ApiControllerv2 extends Controller
                         $imageName = time() . '_' . $postImage->getClientOriginalName();
                         $checkIsimageOrVideo = checkIsimageOrVideo($postImage);
                         $duration = "";
+                        $thumbName = "";
                         if ($checkIsimageOrVideo == 'video') {
                             $duration = getVideoDuration($postImage);
                             if (isset($request->thumbnail) && $request->thumbnail != Null) {
