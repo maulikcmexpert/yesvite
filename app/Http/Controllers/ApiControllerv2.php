@@ -11207,9 +11207,7 @@ class ApiControllerv2 extends Controller
 
         $unreadCount = Notification::where(['user_id' => $user->id, 'read' => '0'])->count();
 
-        $rsvpStatus = EventInvitedUser::where('user_id', $user->id)->value('rsvp_d');
-
-        return response()->json(['status' => 1, "rsvpStatus" => $rsvpStatus, 'unread_count' => $unreadCount, 'count' => $notificationDatacount, 'total_page' => $total_page, 'data' => $notificationInfo, 'message' => "Notification list"]);
+        return response()->json(['status' => 1, 'unread_count' => $unreadCount, 'count' => $notificationDatacount, 'total_page' => $total_page, 'data' => $notificationInfo, 'message' => "Notification list"]);
     }
 
     public function deleteNotification(Request $request)
