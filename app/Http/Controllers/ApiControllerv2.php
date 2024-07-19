@@ -8533,14 +8533,22 @@ class ApiControllerv2 extends Controller
                             unlink($imagePath);
                         }
                         $postImage->move(public_path('storage/post_image'), $imageName);
-                        EventPostImage::create([
-                            'event_id' => $request->event_id,
-                            'event_post_id' => $creatEventPost->id,
-                            'post_image' => $imageName,
-                            'duration' => $duration,
-                            'type' => $checkIsimageOrVideo,
-                            'thumbnail' => $thumbName,
-                        ]);
+                        // EventPostImage::create([
+                        //     'event_id' => $request->event_id,
+                        //     'event_post_id' => $creatEventPost->id,
+                        //     'post_image' => $imageName,
+                        //     'duration' => $duration,
+                        //     'type' => $checkIsimageOrVideo,
+                        //     'thumbnail' => $thumbName,
+                        // ]);
+                        $eventPostImage = new EventPostImage();
+                        $eventPostImage->event_id = $request->event_id;
+                        $eventPostImage->event_post_id = $creatEventPost->id;
+                        $eventPostImage->post_image = $imageName;
+                        $eventPostImage->duration = $duration;
+                        $eventPostImage->type = $checkIsimageOrVideo;
+                        $eventPostImage->thumbnail = $thumbName;
+                        $eventPostImage->save();
                     }
                 }
             }
