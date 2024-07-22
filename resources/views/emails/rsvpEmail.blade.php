@@ -45,7 +45,7 @@
             text-decoration: none !important;
         }
 
-        .mobile-view-btn {
+        #mobile-view-btn {
             display: none;
         }
 
@@ -83,11 +83,11 @@
                 max-width: 120px !important;
             }
 
-            .desktop-view-btn {
+            #desktop-view-btn {
                 display: none;
             }
 
-            .mobile-view-btn {
+            #mobile-view-btn {
                 display: block;
             }
         }
