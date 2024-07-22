@@ -27,7 +27,9 @@
         }
 
         .view-btn {
-            gap: 12px;
+            flex-wrap: wrap;
+            flex-direction: column;
+            background-color: red !important;
         }
 
         button:nth-child(1) {
