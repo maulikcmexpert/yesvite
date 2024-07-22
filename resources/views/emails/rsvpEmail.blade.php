@@ -69,9 +69,9 @@
             }
 
             .view-btn-link {
-                width: 100% !important;
+                /* width: 100% !important;
                 max-width: 100% !important;
-                display: block !important;
+                display: block !important; */
                 margin-bottom: 5px;
             }
 
@@ -157,10 +157,10 @@
                 </tr>
                 <!-- -------------- -->
                 <tr>
-                    <td class="view-more fdfd" width="10%">
-                        <div class="view-btn mt-0" id="view-btn" style="display:inline-block;">
-                            <a href="#" style="font-family: 'SF Pro Display', sans-serif; margin-right:10px; font-size: 14px;line-height: 20px;font-weight: 500;color: #fff;background: #F73C71;border: 1px solid #F73C71;border-radius: 10px; padding: 10px 24px 10px 24px; display:inline-block; text-align:center;" class="view-btn-link">View Invitation</a>
-                            <a href="#" style="font-family: 'SF Pro Display', sans-serif;font-size: 14px;line-height: 20px;font-weight: 500;color: #0F172A;background: transparent;border: 1px solid #E2E8F0;border-radius: 10px; padding: 10px 24px 10px 24px; text-align:center; display:inline-block;" class="view-btn-link">Message James</a>
+                    <td class="view-more fdfd">
+                        <div class="view-btn mt-0" id="view-btn" style="display:inline;width: 100%;">
+                            <a href="#" style="font-family: 'SF Pro Display', sans-serif; margin-right:10px; font-size: 14px;line-height: 20px;font-weight: 500;color: #fff;background: #F73C71;border: 1px solid #F73C71;border-radius: 10px; padding: 10px 24px 10px 24px; display:inline; text-align:center;" class="view-btn-link">View Invitation</a>
+                            <a href="#" style="font-family: 'SF Pro Display', sans-serif;font-size: 14px;line-height: 20px;font-weight: 500;color: #0F172A;background: transparent;border: 1px solid #E2E8F0;border-radius: 10px; padding: 10px 24px 10px 24px; text-align:center; display:inline;" class="view-btn-link">Message James</a>
                         </div>
                     </td>
                 </tr>
