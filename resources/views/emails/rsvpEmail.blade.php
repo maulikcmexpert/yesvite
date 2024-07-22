@@ -45,6 +45,10 @@
             text-decoration: none !important;
         }
 
+        .mobile-view-btn {
+            display: none;
+        }
+
         @media only screen and (max-width:1100px) {
             button:nth-child(1) {
                 margin-right: 0px !important;
@@ -77,6 +81,14 @@
 
             .invited-persons {
                 max-width: 120px !important;
+            }
+
+            .desktop-view-btn {
+                display: none;
+            }
+
+            .mobile-view-btn {
+                display: block;
             }
         }
     </style>
@@ -157,7 +169,7 @@
                 </tr>
                 <!-- -------------- -->
                 <tr>
-                    <td class="view-more fdfd">
+                    <td class="view-more fdfd" id="desktop-view-btn">
                         <div class="view-btn mt-0" id="view-btn" style="display:inline;width: 100%;">
                             <a href="#" style="font-family: 'SF Pro Display', sans-serif; margin-right:10px; font-size: 14px;line-height: 20px;font-weight: 500;color: #fff;background: #F73C71;border: 1px solid #F73C71;border-radius: 10px; padding: 10px 24px 10px 24px; text-align:center;" class="view-btn-link">View Invitation</a>
                             <a href="#" style="font-family: 'SF Pro Display', sans-serif;font-size: 14px;line-height: 20px;font-weight: 500;color: #0F172A;background: transparent;border: 1px solid #E2E8F0;border-radius: 10px; padding: 10px 24px 10px 24px; text-align:center;" class="view-btn-link">Message James</a>
@@ -165,7 +177,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="view-more fdfd">
+                    <td class="view-more fdfd" id="mobile-view-btn">
                         <div class="view-btn mt-0" id="view-btn" style="display:block;width: 80%;">
                             <a href="#" style="width:80%;display:block; font-family: 'SF Pro Display', sans-serif; margin-right:10px; font-size: 14px;line-height: 20px;font-weight: 500;color: #fff;background: #F73C71;border: 1px solid #F73C71;border-radius: 10px; padding: 10px 24px 10px 24px; text-align:center;" class="view-btn-link">View Invitation</a>
                             <a href="#" style="width:80%;display:block; font-family: 'SF Pro Display', sans-serif;font-size: 14px;line-height: 20px;font-weight: 500;color: #0F172A;background: transparent;border: 1px solid #E2E8F0;border-radius: 10px; padding: 10px 24px 10px 24px; text-align:center;" class="view-btn-link">Message James</a>
