@@ -49,14 +49,6 @@
             visibility: hidden;
         }
 
-        #view-more table:nth-child(1) {
-            display: block;
-        }
-
-        #view-more table:nth-child(2) {
-            display: none;
-        }
-
         @media only screen and (max-width:1100px) {
             button:nth-child(1) {
                 margin-right: 0px !important;
@@ -91,11 +83,11 @@
                 max-width: 120px !important;
             }
 
-            #view-more table:nth-child(1) {
-                display: none;
+            #desktop-view-btn {
+                visibility: hidden;
             }
 
-            #view-more table:nth-child(2) {
+            #mobile-view-btn {
                 display: block;
             }
         }
@@ -177,23 +169,11 @@
                 </tr>
                 <!-- -------------- -->
                 <tr>
-                    <td class="view-more fdfd" id="view-more">
-                        <table>
-                            <tr>
-                                <td>
-                                    <a href="#" style="font-family: 'SF Pro Display', sans-serif; margin-right:10px; font-size: 14px;line-height: 20px;font-weight: 500;color: #fff;background: #F73C71;border: 1px solid #F73C71;border-radius: 10px; padding: 10px 24px 10px 24px; text-align:center;" class="view-btn-link">View Invitation</a>
-                                    <a href="#" style="font-family: 'SF Pro Display', sans-serif;font-size: 14px;line-height: 20px;font-weight: 500;color: #0F172A;background: transparent;border: 1px solid #E2E8F0;border-radius: 10px; padding: 10px 24px 10px 24px; text-align:center;" class="view-btn-link">Message James</a>
-                                </td>
-                            </tr>
-                        </table>
-                        <table>
-                            <tr>
-                                <td>
-                                    <a href="#" style="font-family: 'SF Pro Display', sans-serif; margin-right:10px; font-size: 14px;line-height: 20px;font-weight: 500;color: #fff;background: #F73C71;border: 1px solid #F73C71;border-radius: 10px; padding: 10px 24px 10px 24px; text-align:center;" class="view-btn-link">View Invitation</a>
-                                    <a href="#" style="font-family: 'SF Pro Display', sans-serif;font-size: 14px;line-height: 20px;font-weight: 500;color: #0F172A;background: transparent;border: 1px solid #E2E8F0;border-radius: 10px; padding: 10px 24px 10px 24px; text-align:center;" class="view-btn-link">Message James</a>
-                                </td>
-                            </tr>
-                        </table>
+                    <td class="view-more fdfd">
+                        <div class="view-btn mt-0" id="view-btn" style="display:inline;width: 100%;">
+                            <a href="#" style="font-family: 'SF Pro Display', sans-serif; margin-right:10px; font-size: 14px;line-height: 20px;font-weight: 500;color: #fff;background: #F73C71;border: 1px solid #F73C71;border-radius: 10px; padding: 10px 24px 10px 24px; text-align:center;" class="view-btn-link">View Invitation</a>
+                            <a href="#" style="font-family: 'SF Pro Display', sans-serif;font-size: 14px;line-height: 20px;font-weight: 500;color: #0F172A;background: transparent;border: 1px solid #E2E8F0;border-radius: 10px; padding: 10px 24px 10px 24px; text-align:center;" class="view-btn-link">Message James</a>
+                        </div>
                     </td>
                 </tr>
                 <!-- -------------- -->
