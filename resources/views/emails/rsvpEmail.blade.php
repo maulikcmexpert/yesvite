@@ -27,10 +27,10 @@
         }
 
         .view-btn {
-            flex-wrap: wrap;
-            flex-direction: column;
+            flex-wrap: wrap !important;
+            flex-direction: column !important;
             background-color: red !important;
-            width: 100%;
+            width: 100% !important;
         }
 
         button:nth-child(1) {
@@ -53,7 +53,7 @@
             }
         }
 
-        @media only screen and (max-width:640px) {
+        @media only screen and (max-width:600px) {
             .view-btn {
                 flex-wrap: wrap;
                 flex-direction: column;
@@ -64,16 +64,9 @@
                 margin-bottom: 12px !important;
             }
 
-            a[target="_blank"] {
-                width: 80% !important;
-                max-width: 100% !important;
-                display: block !important;
-                margin-bottom: 5px;
-            }
-
             .view-btn-link {
-                width: 80% !important;
-                max-width: 80% !important;
+                width: 100% !important;
+                max-width: 100% !important;
                 display: block !important;
                 margin-bottom: 5px;
                 background-color: green !important;
