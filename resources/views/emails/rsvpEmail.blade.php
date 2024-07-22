@@ -48,11 +48,11 @@
             button {
                 width: 100% !important;
                 display: block !important;
+                background-color: #000000 !important;
             }
 
             .invited-persons {
-                max-width: 200px !important;
-                background-color: red !important;
+                max-width: 120px !important;
             }
         }
     </style>
@@ -66,7 +66,7 @@
                 <tr>
                     <td>
                         <div style="width: 100%;max-width: 150px;height:40px">
-                            <img src="{{ asset('public/storage/yesvitelogo.png')}}" style="width: 100%;max-width: 150px;height:40px" alt="logo">
+                            <img src="{{ asset('public/storage/yesvitelogo.png')}}" style="width: 100%;max-width: 150px;height:40px; object-fit:cover" alt="logo">
                         </div>
                     </td>
                 </tr>
