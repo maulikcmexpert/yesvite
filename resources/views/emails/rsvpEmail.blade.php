@@ -74,7 +74,7 @@
                 <tr>
                     <td>
                         <div class="user-name" style="display: flex;align-items: center;gap: 15px;margin-bottom: 15px;">
-                            <span style="display: block;width: 100%;max-width: 50px;height: 50px;border-radius: 50%;">
+                            <span style="display: block;width: 100%;max-width: 50px;height: 50px;border-radius: 50%0; margin-right:10px;">
                                 <img src="{{ asset('public/storage/profile/'.$eventData['profileUser'])}}" style="width: 100%;height: 100%; border-radius:50%; margin-right:10px" alt="user-img">
                             </span>
                             <div>
