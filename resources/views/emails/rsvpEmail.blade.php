@@ -157,7 +157,7 @@
                 </tr>
                 <!-- -------------- -->
                 <tr>
-                    <td class="view-more fdfd">
+                    <td class="view-more fdfd" width="30%">
                         <div class="view-btn mt-0" style="display:inline-block; width:auto">
                             <a href="#" style="width:fit-content; max-width:300px; min-width: 300px; font-family: 'SF Pro Display', sans-serif; margin-right:10px; font-size: 14px;line-height: 20px;font-weight: 500;color: #fff;background: #F73C71;border: 1px solid #F73C71;border-radius: 10px; padding: 10px 24px 10px 24px; display:inline-block; width:100%; text-align:center;" class="view-btn-link">View Invitation</a>
                             <a href="#" style="width:fit-content; max-width:300px; min-width: 300px; font-family: 'SF Pro Display', sans-serif;font-size: 14px;line-height: 20px;font-weight: 500;color: #0F172A;background: transparent;border: 1px solid #E2E8F0;border-radius: 10px; padding: 10px 24px 10px 24px; width:100%; text-align:center; display:inline-block;" class="view-btn-link">Message James</a>
