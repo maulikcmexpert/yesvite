@@ -69,7 +69,7 @@
             }
 
             .view-btn-link {
-                width: 250px !important;
+                width: 200px !important;
                 max-width: 100% !important;
                 display: block !important;
                 margin-bottom: 5px;
