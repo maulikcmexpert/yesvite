@@ -57,7 +57,7 @@
             }
         }
 
-        @media only screen and (max-width:600px) {
+        @media screen and (max-width: 525px) {
             .view-btn {
                 flex-wrap: wrap;
                 flex-direction: column;
