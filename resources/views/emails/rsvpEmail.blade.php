@@ -124,7 +124,7 @@
                 <tr>
                     <td>
                         <div class="user-name" style="display: flex;align-items: center;gap: 15px;margin-bottom: 15px;">
-                            <span style="display: block;width: 100%;max-width: 50px;height: 50px;border-radius: 50%0; margin-right:10px;">
+                            <span style="display: block;width: 100%;max-width: 50px;height: 50px;border-radius: 50%; margin-right:10px;">
                                 <img src="{{ asset('public/storage/profile/'.$eventData['profileUser'])}}" style="width: 100%;height: 100%; border-radius:50%; margin-right:10px" alt="user-img">
                             </span>
                             <div>
@@ -138,7 +138,7 @@
 
                             <div class="invited-persons" style="display: flex;align-items: center;justify-content: space-between; width: 100%;max-width: 250px;background-color: #F0FFE8;border: 1px solid #23AA26;padding: 5px 10px 5px 10px;border-radius: 100px;margin-left: 50px;">
                                 <div class="persons-left">
-                                    <h5 style="font-size: 10px;line-height: normal;font-weight: 600;color: #0F172A;margin: 0px;">RSVP’d <span style=" color: #23AA26;">YES</span></h5>
+                                    <h5 style="font-size: 10px;line-height: normal;font-weight: 600;color: #0F172A;margin: 0px;width:100%">RSVP’d <span style=" color: #23AA26;">YES</span></h5>
                                 </div>
                                 <div class="persons-right" style="display: flex;align-items: center;gap: 15px;">
                                     <span class="person-span-1" style="font-size: 10px;line-height: normal;font-weight: 600;color: #0F172A;position: relative;"><i class="fa-solid fa-user-group" style="color: #DDE3E0;font-size: 8px;"></i> {{ $eventData['adults'] }} Adults</span>
