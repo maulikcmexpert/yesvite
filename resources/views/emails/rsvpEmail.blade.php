@@ -70,7 +70,7 @@
 
             .view-btn-link {
                 width: max-content !important;
-                /* max-width: 100% !important; */
+                max-width: 100% !important;
                 display: block !important;
                 margin-bottom: 5px;
             }
