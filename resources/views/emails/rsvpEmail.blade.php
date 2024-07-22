@@ -79,9 +79,9 @@
                 margin-bottom: 5px;
             }
 
-            /* .invited-persons {
-                max-width: 120px !important;
-            } */
+            .invited-persons {
+                max-width: 200px !important;
+            }
 
             #desktop-view-btn {
                 visibility: hidden;
