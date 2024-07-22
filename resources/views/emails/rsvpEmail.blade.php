@@ -125,7 +125,7 @@
                         ?>
 
                             <div class="invited-persons" style="display: flex;align-items: center;justify-content: space-between; width: 100%;max-width: 250px;background-color: #F0FFE8;border: 1px solid #23AA26;padding: 5px 10px 5px 10px;border-radius: 100px;margin-left: 50px;">
-                                <div class="persons-left" style="width: fit-content;max-width: fit-content;">
+                                <div class="persons-left" style="width:100px;">
                                     <h5 style="font-size: 10px;line-height: normal;font-weight: 600;color: #0F172A;margin: 0px;width:100px">RSVP’d <span style="color: #23AA26;">YES</span></h5>
                                 </div>
                                 <div class="persons-right" style="display: flex;align-items: center;gap: 15px;">
