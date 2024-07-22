@@ -73,6 +73,7 @@
                 max-width: 100% !important;
                 display: block !important;
                 margin-bottom: 5px;
+                background-color: green !important;
             }
 
             .invited-persons {
