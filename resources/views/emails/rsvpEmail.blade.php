@@ -36,6 +36,11 @@
             margin-right: 10px !important;
         }
 
+        .view-btn {
+            flex-wrap: wrap;
+            flex-direction: column;
+        }
+
         .view-btn-link {
             text-decoration: none !important;
         }
