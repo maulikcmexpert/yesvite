@@ -59,6 +59,7 @@
 
             button {
                 width: auto;
+                max-width: 100%;
                 display: block;
                 margin-bottom: 5px;
             }
