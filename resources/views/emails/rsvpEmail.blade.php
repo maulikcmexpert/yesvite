@@ -34,7 +34,7 @@
             margin-right: 10px !important;
         }
 
-        @media only screen and (max-width:768px) {
+        @media only screen and (max-width:1100px) {
             button:nth-child(1) {
                 margin-right: 0px !important;
                 margin-bottom: 12px !important;
