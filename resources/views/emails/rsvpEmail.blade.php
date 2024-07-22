@@ -84,7 +84,7 @@
             }
 
             #desktop-view-btn {
-                display: none;
+                display: none !important;
             }
 
             #mobile-view-btn {
