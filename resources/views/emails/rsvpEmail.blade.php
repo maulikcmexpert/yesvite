@@ -30,15 +30,28 @@
             gap: 12px;
         }
 
+        button:nth-child(1) {
+            margin-right: 10px;
+        }
+
         @media only screen and (max-width:640px) {
             .view-btn {
                 flex-wrap: wrap;
+                flex-direction: column;
             }
 
+            button:nth-child(1) {
+                margin-right: 0px;
+                margin-bottom: 12px;
+            }
 
-            .view-btn button {
+            button {
                 width: 100%;
                 display: block;
+            }
+
+            .invited-persons {
+                max-width: 200px !important;
             }
         }
     </style>
@@ -46,7 +59,7 @@
 
 <body style="font-family: 'SF Pro Display', sans-serif !important;margin: 0px;background: #F8F8F8;display: flex;justify-content: center;">
     <!-- partial:index.partial.html -->
-    <div style="width: 100%;max-width: 650px;height:100%; padding: 15px 15px;" class="ui-sortable">
+    <div style="width: 100%;max-width: 650px;margin:0 auto;height:100%; padding: 15px 15px;" class="ui-sortable">
         <table style="border-radius: 5px;box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);width: 100%;height:100%;background: #fff;box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);padding: 30px;border-radius: 20px;" class="full selected-table" border="0" cellpadding="0" cellspacing="0">
             <tbody>
                 <tr>
