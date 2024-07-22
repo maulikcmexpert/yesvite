@@ -151,7 +151,7 @@
                 <!-- -------------- -->
                 <tr>
                     <td class="view-more fdfd">
-                        <div class="view-btn" style="display: flex;align-items: center; gap: 15px; flex-wrap:wrap;">
+                        <div class="view-btn mt-0" style="display: flex;align-items: center; gap: 15px; flex-wrap:wrap;">
                             <a href="#" target="_blank" style="font-family: 'SF Pro Display', sans-serif; margin-right:10px; font-size: 14px;line-height: 20px;font-weight: 500;color: #fff;background: #F73C71;border: 1px solid #F73C71;border-radius: 10px; padding: 10px 24px 10px 24px; max-width:110px; display:inline-block; width:100%; text-align:center;" class="view-btn">View Invitation</a>
                             <a href="#" target="_blank" style="font-family: 'SF Pro Display', sans-serif;font-size: 14px;line-height: 20px;font-weight: 500;color: #0F172A;background: transparent;border: 1px solid #E2E8F0;border-radius: 10px; padding: 10px 24px 10px 24px; max-width:110px; width:100%; text-align:center; display:inline-block " class="view-btn">Message James</a>
                         </div>
