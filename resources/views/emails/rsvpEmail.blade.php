@@ -46,7 +46,7 @@
         }
 
         #mobile-view-btn {
-            display: none;
+            visibility: hidden;
         }
 
         @media only screen and (max-width:1100px) {
@@ -84,7 +84,7 @@
             }
 
             #desktop-view-btn {
-                display: none !important;
+                visibility: hidden;
             }
 
             #mobile-view-btn {
