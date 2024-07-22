@@ -62,15 +62,15 @@
             }
 
             a[target="_blank"] {
-                width: 100% !important;
+                width: 80% !important;
                 max-width: 100% !important;
                 display: block !important;
                 margin-bottom: 5px;
             }
 
             .view-btn-link {
-                width: 100% !important;
-                max-width: 100% !important;
+                width: 80% !important;
+                max-width: 80% !important;
                 display: block !important;
                 margin-bottom: 5px;
                 background-color: green !important;
