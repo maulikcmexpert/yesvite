@@ -31,7 +31,7 @@
         }
 
         button:nth-child(1) {
-            margin-right: 10px;
+            margin-right: 10px !important;
         }
 
         @media only screen and (max-width:640px) {
@@ -41,13 +41,13 @@
             }
 
             button:nth-child(1) {
-                margin-right: 0px;
-                margin-bottom: 12px;
+                margin-right: 0px !important;
+                margin-bottom: 12px !important;
             }
 
             button {
-                width: 100%;
-                display: block;
+                width: 100% !important;
+                display: block !important;
             }
 
             .invited-persons {
