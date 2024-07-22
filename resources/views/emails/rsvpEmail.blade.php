@@ -29,7 +29,6 @@
         .view-btn {
             flex-wrap: wrap !important;
             flex-direction: column !important;
-            background-color: red !important;
             width: 100% !important;
         }
 
@@ -69,7 +68,6 @@
                 max-width: 100% !important;
                 display: block !important;
                 margin-bottom: 5px;
-                background-color: green !important;
             }
 
             .invited-persons {
