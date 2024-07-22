@@ -47,10 +47,10 @@
         }
 
         @media only screen and (max-width:640px) {
-            .view-btn {
+            /* .view-btn {
                 flex-wrap: wrap;
                 flex-direction: column;
-            }
+            } */
 
             button:nth-child(1) {
                 margin-right: 0px !important;
@@ -145,7 +145,7 @@
                 <!-- -------------- -->
                 <tr>
                     <td>
-                        <div class="view-btn" style="display: flex;align-items: center; gap: 15px; flex-wrap:wrap;max-width: 200px;width: 200px;">
+                        <div class="view-btn" style="max-width: 200px;width: 200px;">
                             <table>
                                 <tr>
                                     <td>
