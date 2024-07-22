@@ -30,6 +30,7 @@
             flex-wrap: wrap;
             flex-direction: column;
             background-color: red !important;
+            width: 100%;
         }
 
         button:nth-child(1) {
