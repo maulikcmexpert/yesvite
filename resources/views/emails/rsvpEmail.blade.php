@@ -52,6 +52,7 @@
 
             .invited-persons {
                 max-width: 200px !important;
+                background-color: red !important;
             }
         }
     </style>
