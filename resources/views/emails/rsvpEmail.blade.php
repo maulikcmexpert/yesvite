@@ -57,9 +57,9 @@
                 margin-bottom: 12px !important;
             }
 
-            button {
-                width: 100%;
-                max-width: 100%;
+            a.view-btn {
+                width: 100% !important;
+                max-width: 100% !important;
                 display: block;
                 margin-bottom: 5px;
             }
@@ -148,8 +148,8 @@
                 <tr>
                     <td>
                         <div class="view-btn" style="display: flex;align-items: center; gap: 15px; flex-wrap:wrap;">
-                            <button style="font-family: 'SF Pro Display', sans-serif; margin-right:10px; font-size: 14px;line-height: 20px;font-weight: 500;color: #fff;background: #F73C71;border: 1px solid #F73C71;border-radius: 10px; padding: 10px 24px 10px 24px; max-width:160px" class="view-btn">View Invitation</button>
-                            <button style="font-family: 'SF Pro Display', sans-serif;font-size: 14px;line-height: 20px;font-weight: 500;color: #0F172A;background: transparent;border: 1px solid #E2E8F0;border-radius: 10px; padding: 10px 24px 10px 24px; max-width:160px">Message James</button>
+                            <a href="#" style="font-family: 'SF Pro Display', sans-serif; margin-right:10px; font-size: 14px;line-height: 20px;font-weight: 500;color: #fff;background: #F73C71;border: 1px solid #F73C71;border-radius: 10px; padding: 10px 24px 10px 24px; max-width:160px; display:inline-block" class="view-btn">View Invitation</button>
+                                <a href="#" style="font-family: 'SF Pro Display', sans-serif;font-size: 14px;line-height: 20px;font-weight: 500;color: #0F172A;background: transparent;border: 1px solid #E2E8F0;border-radius: 10px; padding: 10px 24px 10px 24px; max-width:160px; display:inline-block " class="view-btn">Message James</button>
                         </div>
                     </td>
                 </tr>
