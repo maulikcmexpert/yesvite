@@ -34,8 +34,8 @@
             margin-right: 10px !important;
         }
 
-        a[target="_blank"] {
-            background-color: #0A090B !important;
+        .view-btn-link {
+            text-decoration: none !important;
         }
 
         @media only screen and (max-width:1100px) {
