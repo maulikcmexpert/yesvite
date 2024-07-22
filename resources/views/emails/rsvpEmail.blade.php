@@ -34,6 +34,10 @@
             margin-right: 10px !important;
         }
 
+        a[target="_blank"] {
+            background-color: #0A090B !important;
+        }
+
         @media only screen and (max-width:1100px) {
             button:nth-child(1) {
                 margin-right: 0px !important;
