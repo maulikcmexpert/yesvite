@@ -58,9 +58,8 @@
             }
 
             button {
-                width: 100% !important;
-                max-width: 100% !important;
-                display: block !important;
+                width: auto !important;
+                margin-bottom: 10px !important;
             }
 
             .invited-persons {
