@@ -34,6 +34,18 @@
             margin-right: 10px !important;
         }
 
+        @media only screen and (max-width:768px) {
+            button:nth-child(1) {
+                margin-right: 0px !important;
+                margin-bottom: 12px !important;
+            }
+
+            button {
+                width: 100% !important;
+                display: block !important;
+            }
+        }
+
         @media only screen and (max-width:640px) {
             .view-btn {
                 flex-wrap: wrap;
@@ -48,7 +60,6 @@
             button {
                 width: 100% !important;
                 display: block !important;
-                background-color: #000000 !important;
             }
 
             .invited-persons {
