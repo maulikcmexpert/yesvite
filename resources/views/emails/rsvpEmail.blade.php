@@ -84,7 +84,7 @@
             }
 
             .invited-persons {
-                max-width: 180px !important;
+                max-width: 190px !important;
             }
 
             #desktop-view-btn {
