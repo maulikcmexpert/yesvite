@@ -166,7 +166,7 @@
                                 <div class="persons-left">
                                     <h5 style="font-size: 10px;line-height: normal;font-weight: 600;color: #0F172A;margin: 0px;">RSVP’d <span style="color: #e52121;">NO</span></h5>
                                 </div>
-                                <div class="persons-right" style="display: flex;align-items: center;gap: 15px;">
+                                <div class="persons-right" style="display: flex;align-items: center;gap: 15px;margin-left:auto">
                                     <span class="person-span-1" style="font-size: 10px;line-height: normal;font-weight: 600;color: #0F172A;position: relative;"><i class="fa-solid fa-user-group" style="color: #DDE3E0;font-size: 8px;"></i> {{ $eventData['adults'] }} Adults</span>
                                     <span style="font-size: 10px;line-height: normal;font-weight: 600;color: #0F172A;">{{ $eventData['kids'] }} Kids</span>
                                 </div>
