@@ -128,7 +128,7 @@
                 <tr>
                     <td>
                         <div class="user-name" style="display: flex;align-items: center;gap: 15px;margin-bottom: 15px;">
-                            <span style="display: block; width:100%; max-width: 50px;height: 50px;border-radius: 50%; margin-right:10px;">
+                            <span style="display: block; width:100%; max-width: 15%; height: 50px;border-radius: 50%; margin-right:10px;">
                                 <img src="{{ asset('public/storage/profile/'.$eventData['profileUser'])}}" style="width: 100%;height: 100%; border-radius:50%; margin-right:10px" alt="user-img">
                             </span>
                             <div style="width:85%; word-wrap:break-word; ">
@@ -186,8 +186,8 @@
                 <tr>
                     <td class="view-more fdfd">
                         <div class="view-btn mt-0" id="view-btn" style="display:inline;width: 100%;">
-                            <a href="#" style="font-family: 'SF Pro Display', sans-serif; margin-right:10px; font-size: 14px;line-height: 20px;font-weight: 500;color: #fff;background: #F73C71;border: 1px solid #F73C71;border-radius: 10px; padding: 10px 24px 10px 24px; text-align:center;" class="view-btn-link">View Invitation</a>
-                            <a href="#" style="font-family: 'SF Pro Display', sans-serif;font-size: 14px;line-height: 20px;font-weight: 500;color: #0F172A;background: transparent;border: 1px solid #E2E8F0;border-radius: 10px; padding: 10px 24px 10px 24px; text-align:center;" class="view-btn-link">Message James</a>
+                            <a href="#" style="font-family: 'SF Pro Display', sans-serif; margin-right:10px; font-size: 14px;line-height: 20px;font-weight: 500;color: #fff;background: #F73C71;border: 1px solid #F73C71;border-radius: 10px; padding: 10px 24px 10px 24px; text-align:center;text-decoration:none" class="view-btn-link">View Invitation</a>
+                            <a href="#" style="font-family: 'SF Pro Display', sans-serif;font-size: 14px;line-height: 20px;font-weight: 500;color: #0F172A;background: transparent;border: 1px solid #E2E8F0;border-radius: 10px; padding: 10px 24px 10px 24px; text-align:center;text-decoration:none" class="view-btn-link">Message James</a>
                         </div>
                     </td>
                 </tr>
