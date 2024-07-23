@@ -127,9 +127,9 @@
                 <!-- -------------- -->
                 <tr>
                     <td>
-                        <div class="user-name" style="display: flex;align-items: center;gap: 15px;margin-bottom: 15px;">
-                            <span style="display: block; width:15%; max-width: 100%; height: 50px;border-radius: 50%; margin-right:10px;">
-                                <img src="{{ asset('public/storage/profile/'.$eventData['profileUser'])}}" style="width: 100%;height: 100%; border-radius:50%; margin-right:10px" alt="user-img">
+                        <div class="user-name" style="display: flex;align-items: center;gap: 15px;margin-bottom: 15px;width:100%">
+                            <span style="display: block; width:100%; max-width: 50px; height: 50px;border-radius: 50%; margin-right:10px;">
+                                <img src="{{ asset('public/storage/profile/'.$eventData['profileUser'])}}" style="width: 100%;height: 100%; border-radius:50%; margin-right:10px; object-fit:contain" alt="user-img">
                             </span>
                             <div style="width:85%; word-wrap:break-word; ">
                                 <h3 style="font-size: 20px;line-height: 40px;font-weight: 700;color: #0A090B;margin: 0px 0px;">{{ $eventData['guest_name'] }} <span style="font-weight: 400;">RSVP'd</span> {{ ($eventData['rsvp_status'] == '1')?'YES':'NO' }} <span style="font-weight: 400;">for</span></h3>
