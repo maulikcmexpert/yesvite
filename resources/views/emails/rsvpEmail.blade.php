@@ -49,6 +49,10 @@
             visibility: hidden;
         }
 
+        .ii a[href] {
+            text-decoration: none !important;
+        }
+
         @media only screen and (max-width:1100px) {
             button:nth-child(1) {
                 margin-right: 0px !important;
@@ -127,7 +131,7 @@
                             <span style="display: block;width: 100%;max-width: 50px;height: 50px;border-radius: 50%; margin-right:10px;">
                                 <img src="{{ asset('public/storage/profile/'.$eventData['profileUser'])}}" style="width: 100%;height: 100%; border-radius:50%; margin-right:10px" alt="user-img">
                             </span>
-                            <div>
+                            <div style="width:85%; word-wrap:break-word; ">
                                 <h3 style="font-size: 20px;line-height: 40px;font-weight: 700;color: #0A090B;margin: 0px 0px;">{{ $eventData['guest_name'] }} <span style="font-weight: 400;">RSVP'd</span> {{ ($eventData['rsvp_status'] == '1')?'YES':'NO' }} <span style="font-weight: 400;">for</span></h3>
                                 <h4 style="color: #F73C71;font-size: 24px;line-height: 30px;font-weight: 700;margin: 0px 0px;">{{ $eventData['event_name'] }} </h4>
                             </div>
