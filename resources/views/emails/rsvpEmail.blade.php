@@ -128,7 +128,7 @@
                 <tr>
                     <td>
                         <div class="user-name" style="display: flex; align-items: center; gap: 15px;margin-bottom: 15px;width:100%">
-                            <span style="display: block; width:55px; height: 55px; max-width:100%; margin-right:10px; margin-top:9px">
+                            <span style="display: block; width:50px; height: 50px; max-width:100%; margin-right:10px; margin-top:9px">
                                 <img src="{{ asset('public/storage/profile/'.$eventData['profileUser'])}}" style="width: 100%;height: 100%; border-radius:50%; margin-right:10px; object-fit:cover; display:block" alt="user-img">
                             </span>
                             <div style="width:85%; word-wrap:break-word; ">
