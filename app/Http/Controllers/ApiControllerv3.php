@@ -12553,8 +12553,7 @@ class ApiControllerv3 extends Controller
         $clientSecret = env('InGOOGLE_CLIENT_SECRET');
         $redirectUri = 'https://yesvite.cmexpertiseinfotech.in/google/callback';
 
-        $refreshToken = '1//0gv4CNEEumVRBCgYIARAAGBASNwF-L9IrAeXBZgoxMXBniRDBoeqjWFL3iYjJTu1hDDwVA3l9QNiQdS8syDOFxGQhUrbBaVJUwC0';
-
+        $refreshToken = '1//0gTOldAQt4qgdCgYIARAAGBASNwF-L9IrXu9tDMbYr_D4q8mlbKLCBLzlmISzV2RbYze1CtXtLBZvNOxBjtDsmnD8nnOiRUXMBXo';
 
         $TOKEN_URL = "https://accounts.google.com/o/oauth2/token";
 
