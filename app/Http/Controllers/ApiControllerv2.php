@@ -6351,8 +6351,8 @@ class ApiControllerv2 extends Controller
 
                 $rsvpSent->message_by_video = $video;
 
-                // $rsvpSent->read = '1';
-                // $rsvpSent->rsvp_d = '1';
+                $rsvpSent->read = '1';
+                $rsvpSent->rsvp_d = '1';
 
                 $rsvpSent->event_view_date = date('Y-m-d');
 
@@ -6371,19 +6371,9 @@ class ApiControllerv2 extends Controller
                     'rsvp_attempt' => $rsvp_attempt
                 ];
 
-                sendNotification('sent_rsvp', $notificationParam);
-
-                $creatEventPost = new EventPost;
-                $creatEventPost->event_id = $request->event_id;
-                $creatEventPost->user_id = $user->id;
-                // $creatEventPost->post_message = $request->post_message;
-                // $creatEventPost->post_privacy = $request->post_privacy;
-                // $creatEventPost->post_type = $request->post_type;
-                // $creatEventPost->commenting_on_off = $request->commenting_on_off;
-                // $creatEventPost->is_in_photo_moudle = $request->is_in_photo_moudle;
-                $creatEventPost->save();
-
                 DB::commit();
+
+                sendNotification('sent_rsvp', $notificationParam);
 
 
                 return response()->json(['status' => 1, 'message' => "Rsvp sent Successfully"]);
@@ -9756,6 +9746,7 @@ class ApiControllerv2 extends Controller
             }])->where('id', $input['event_id'])->first();
 
             $eventattending = EventInvitedUser::whereHas('user', function ($query) {
+
                 $query->where('app_user', '1');
             })->where(['rsvp_status' => '1', 'event_id' => $eventDetail->id])->count();
 
