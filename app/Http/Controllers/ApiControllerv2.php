@@ -9746,7 +9746,6 @@ class ApiControllerv2 extends Controller
             }])->where('id', $input['event_id'])->first();
 
             $eventattending = EventInvitedUser::whereHas('user', function ($query) {
-
                 $query->where('app_user', '1');
             })->where(['rsvp_status' => '1', 'event_id' => $eventDetail->id])->count();
 
