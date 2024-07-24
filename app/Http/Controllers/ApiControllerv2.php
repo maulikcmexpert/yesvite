@@ -6323,8 +6323,8 @@ class ApiControllerv2 extends Controller
 
                 $query->where('app_user', '1');
             })->where(['user_id' => $user->id, 'event_id' => $request->event_id])->first();
-            dd(1);
             $rsvpSentAttempt = $rsvpSent->rsvp_status;
+            dd(rsvpSentAttempt);
 
             if ($rsvpSent != null) {
                 $rsvp_attempt = "";
