@@ -175,7 +175,7 @@
                                             <path d="M8.25 7.07687C8.22 7.44062 7.9875 7.75562 7.5975 7.96937C7.2225 8.17562 6.75 8.27312 6.28125 8.26187C6.55125 8.01812 6.70875 7.71437 6.73875 7.39187C6.77625 6.92687 6.555 6.48062 6.1125 6.12437C5.86125 5.92562 5.56875 5.76812 5.25 5.65187C6.07875 5.41187 7.12125 5.57312 7.7625 6.09062C8.1075 6.36812 8.28375 6.71687 8.25 7.07687Z" fill="black" fill-opacity="0.2" />
                                         </svg> -->
                                     </span>
-                                    <span class="person-span-1" style="font-size: 10px;line-height: normal;font-weight: 600;color: #0F172A;position: relative; border-right: 10 px solid lightgray; padding-right:10px;"><i class="fa-solid fa-user-group" style="color: #DDE3E0;font-size: 8px;"></i> {{ $eventData['adults'] }} Adults</span>
+                                    <span class="person-span-1" style="font-size: 10px;line-height: normal;font-weight: 600;color: #0F172A;position: relative; border-right: 10 px solid lightgray; padding-right:10px;"><i class="fa-solid fa-users-line" style="color: #DDE3E0;font-size: 8px;"></i> {{ $eventData['adults'] }} Adults</span>
                                     <span style="font-size: 10px;line-height: normal;font-weight: 600;color: #0F172A; padding-left: 10px">{{ $eventData['kids'] }} Kids</span>
                                 </div>
                             </div>
