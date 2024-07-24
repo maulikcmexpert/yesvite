@@ -6294,7 +6294,7 @@ class ApiControllerv2 extends Controller
 
 
         try {
-            dd(1)
+            dd(1);
 
             $checkEvent = Event::where(['id' => $request->event_id])->first();
 
