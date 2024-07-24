@@ -9786,7 +9786,10 @@ class ApiControllerv2 extends Controller
             $eventAboutHost['subscription_invite_count'] = ($eventDetail->subscription_invite_count != NULL) ? $eventDetail->subscription_invite_count : 0;
             $eventAboutHost['is_past'] = ($eventDetail->end_date < date('Y-m-d')) ? true : false;
             $eventAboutHost['remaining_invite_count'] = ($eventDetail->end_date < date('Y-m-d')) ? true : false;
-            // $eventDetail['remaining_invite_count'] = ($eventDetail->subscription_invite_count != NULL) ? ($eventDetail->subscription_invite_count - (count($eventDetail['invited_user_id']) + count($eventDetail['invited_guests']))) : 0;
+
+
+            $getEventData = Event::with('event_schedule')->where('id', $input['event_id'])->first();
+            $eventAboutHost['remaining_invite_count'] = ($getEventData->subscription_invite_count != NULL) ? ($getEventData->subscription_invite_count - (count($getEventData['invited_user_id']) + count($getEventData['invited_guests']))) : 0;
 
             $userRsvpStatusList = EventInvitedUser::query();
             $userRsvpStatusList->whereHas('user', function ($query) {
