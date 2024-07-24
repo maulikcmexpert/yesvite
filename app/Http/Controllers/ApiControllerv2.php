@@ -23,8 +23,8 @@ use App\Models\{
     EventSetting,
     EventGreeting,
     EventCoHost,
-    EventGiftRegistry,
     EventGuestCoHost,
+    EventGiftRegistry,
     EventImage,
     EventUserRsvp,
     EventSchedule,
@@ -9715,8 +9715,8 @@ class ApiControllerv2 extends Controller
 
 
 
-
     public function eventGuest(Request $request)
+
     {
 
         $user  = Auth::guard('api')->user();
@@ -9785,11 +9785,6 @@ class ApiControllerv2 extends Controller
             $eventAboutHost['subscription_plan_name'] = ($eventDetail->subscription_plan_name != NULL) ? $eventDetail->subscription_plan_name : "";
             $eventAboutHost['subscription_invite_count'] = ($eventDetail->subscription_invite_count != NULL) ? $eventDetail->subscription_invite_count : 0;
             $eventAboutHost['is_past'] = ($eventDetail->end_date < date('Y-m-d')) ? true : false;
-            $eventAboutHost['remaining_invite_count'] = ($eventDetail->end_date < date('Y-m-d')) ? true : false;
-
-
-            $getEventData = Event::with('event_schedule')->where('id', $input['event_id'])->first();
-            $eventAboutHost['remaining_invite_count'] = ($getEventData->subscription_invite_count != NULL) ? ($getEventData->subscription_invite_count - (count($getEventData['invited_user_id']) + count($getEventData['invited_guests']))) : 0;
 
             $userRsvpStatusList = EventInvitedUser::query();
             $userRsvpStatusList->whereHas('user', function ($query) {
