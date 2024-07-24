@@ -6369,16 +6369,16 @@ class ApiControllerv2 extends Controller
                     'rsvp_attempt' => $rsvp_attempt
                 ];
 
-                // $creatEventPost = new EventPost;
-                // $creatEventPost->event_id = $request->event_id;
-                // $creatEventPost->user_id = $user->id;
-                // $creatEventPost->post_message = "";
+                $creatEventPost = new EventPost;
+                $creatEventPost->event_id = $request->event_id;
+                $creatEventPost->user_id = $user->id;
+                $creatEventPost->post_message = "";
 
-                // $creatEventPost->post_privacy = "1";
-                // $creatEventPost->post_type = "4";
-                // $creatEventPost->commenting_on_off = "";
-                // $creatEventPost->is_in_photo_moudle = "";
-                // $creatEventPost->save();
+                $creatEventPost->post_privacy = "1";
+                $creatEventPost->post_type = "4";
+                $creatEventPost->commenting_on_off = "0";
+                $creatEventPost->is_in_photo_moudle = "";
+                $creatEventPost->save();
 
                 DB::commit();
 
