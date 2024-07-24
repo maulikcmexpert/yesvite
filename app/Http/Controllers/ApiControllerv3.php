@@ -12472,6 +12472,9 @@ class ApiControllerv3 extends Controller
             $purchaseToken = $input['purchaseToken'];
 
             $responce =  $this->set_android_iap($app_id, $product_id, $purchaseToken, 'product');
+            if (!isset($responce['purchaseTimeMillis'])) {
+                return response()->json(['status' => 0, 'message' => 'Refresh token expired']);
+            }
             $startDate = date('Y-m-d H:i:s', ($responce['purchaseTimeMillis'] / 1000));
             $new_subscription = new UserSubscription();
             $new_subscription->user_id = $user_id;
