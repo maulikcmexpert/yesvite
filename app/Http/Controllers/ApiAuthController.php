@@ -321,7 +321,6 @@ class ApiAuthController extends Controller
 
         $validator = Validator::make($input, [
             'firstname' => 'required',
-
             'email' => 'required|email',
             'device_id' => 'required',
             'device_token' => 'required',
@@ -387,8 +386,17 @@ class ApiAuthController extends Controller
         } else {
             DB::beginTransaction();
             $usersignup = new User;
-            $usersignup->firstname = $input['firstname'];
-            $usersignup->lastname = $input['lastname'];
+            $name = $input['firstname'];
+            $nameParts = explode(' ', $name);
+
+            $firstname = $nameParts[0];
+            $lastname = $nameParts[1];
+
+            // $usersignup->firstname = $input['firstname'];
+            // $usersignup->lastname = $input['lastname'];
+
+            $usersignup->firstname = $firstname;
+            $usersignup->lastname = $lastname;
             $usersignup->email = $input['email'];
 
             if (isset($input['social_type']) && $input['social_type'] === 'facebook') {
