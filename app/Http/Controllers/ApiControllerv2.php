@@ -6355,18 +6355,9 @@ class ApiControllerv2 extends Controller
                 $rsvpSent->event_view_date = date('Y-m-d');
 
                 $rsvpSent->save();
-                if ($rsvpSent->save()) {
-                    $creatEventPost = new EventPost;
-                    $creatEventPost->event_id = $request->event_id;
-                    $creatEventPost->user_id = $user->id;
-                    $creatEventPost->post_message = "";
+                // if ($rsvpSent->save()) {
 
-                    $creatEventPost->post_privacy = "1";
-                    $creatEventPost->post_type = "4";
-                    $creatEventPost->commenting_on_off = "0";
-                    $creatEventPost->is_in_photo_moudle = "0";
-                    $creatEventPost->save();
-                }
+                // }
 
                 $notificationParam = [
 
@@ -6384,6 +6375,20 @@ class ApiControllerv2 extends Controller
 
 
                 DB::commit();
+
+                DB::beginTransaction();
+                $creatEventPost = new EventPost;
+                $creatEventPost->event_id = $request->event_id;
+                $creatEventPost->user_id = $user->id;
+                $creatEventPost->post_message = "";
+
+                $creatEventPost->post_privacy = "1";
+                $creatEventPost->post_type = "4";
+                $creatEventPost->commenting_on_off = "0";
+                $creatEventPost->is_in_photo_moudle = "0";
+                $creatEventPost->save();
+                DB::commit();
+
 
 
                 sendNotification('sent_rsvp', $notificationParam);
