@@ -6359,7 +6359,7 @@ class ApiControllerv2 extends Controller
                     $creatEventPost = new EventPost;
                     $creatEventPost->event_id = $request->event_id;
                     $creatEventPost->user_id = $user->id;
-                    $creatEventPost->post_message = "";
+                    $creatEventPost->post_message = $request->rsvp_status;
 
                     $creatEventPost->post_privacy = "1";
                     $creatEventPost->post_type = "4";
@@ -7333,7 +7333,7 @@ class ApiControllerv2 extends Controller
                     $postsNormalDetail['username'] =  $value->user->firstname . ' ' . $value->user->lastname;
                     $postsNormalDetail['profile'] =  empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile);
                     $postsNormalDetail['post_message'] = empty($value->post_message) ? "" :  $value->post_message;
-                    $postsNormalDetail['rsvp_status'] = $checkUserRsvp;
+                    $postsNormalDetail['rsvp_status'] = (isset($value->post_type) && $value->post_type == '4') ? $value->post_message : $checkUserRsvp;
                     $postsNormalDetail['kids'] = isset($count_kids_adult['kids']) ? $count_kids_adult['kids'] : 0;
                     $postsNormalDetail['adults'] = isset($count_kids_adult['adults']) ? $count_kids_adult['adults'] : 0;
                     $postsNormalDetail['location'] = ($value->user->city != NULL) ? $value->user->city : "";
