@@ -6646,7 +6646,7 @@ class ApiControllerv3 extends Controller
 
                 $creatEventPost->post_privacy = "1";
                 $creatEventPost->post_type = "4";
-                $creatEventPost->commenting_on_off = "";
+                $creatEventPost->commenting_on_off = "0";
                 $creatEventPost->is_in_photo_moudle = "";
                 $creatEventPost->save();
                 DB::commit();
