@@ -6339,6 +6339,7 @@ class ApiControllerv2 extends Controller
 
                 $rsvpSent->user_id = $user->id;
 
+                dd(1);
                 $rsvpSent->rsvp_status = $request->rsvp_status;
 
                 $rsvpSent->adults = $request->adults;
@@ -6369,7 +6370,6 @@ class ApiControllerv2 extends Controller
                     'post_id' => "",
                     'rsvp_attempt' => $rsvp_attempt
                 ];
-                dd(1);
 
                 DB::commit();
 
