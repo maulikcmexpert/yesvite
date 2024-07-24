@@ -6317,15 +6317,14 @@ class ApiControllerv2 extends Controller
                 $video = $videoName;
             }
 
-            dd($request);
 
 
             $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {
-
                 $query->where('app_user', '1');
             })->where(['user_id' => $user->id, 'event_id' => $request->event_id])->first();
             $rsvpSentAttempt = $rsvpSent->rsvp_status;
 
+            dd($rsvpSent);
             if ($rsvpSent != null) {
                 $rsvp_attempt = "";
                 if ($rsvpSentAttempt == NULL) {
