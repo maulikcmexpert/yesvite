@@ -9786,7 +9786,7 @@ class ApiControllerv2 extends Controller
             $eventAboutHost['is_past'] = ($eventDetail->end_date < date('Y-m-d')) ? true : false;
 
             $getEventData = Event::with('event_schedule')->where('id', $input['event_id'])->first();
-            $eventDetail['remaining_invite_count'] = ($getEventData->subscription_invite_count != NULL) ? ($getEventData->subscription_invite_count - (count($getEventData['invited_user_id']) + count($getEventData['invited_guests']))) : 0;
+            $eventAboutHost['remaining_invite_count'] = ($getEventData->subscription_invite_count != NULL) ? ($getEventData->subscription_invite_count - (count($getEventData['invited_user_id']) + count($getEventData['invited_guests']))) : 0;
 
 
 
