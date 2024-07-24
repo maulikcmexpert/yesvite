@@ -33,6 +33,76 @@
         p {
             font-family: 'SF Pro Display', Arial, sans-serif;
         }
+
+        .view-btn {
+            flex-wrap: wrap !important;
+            flex-direction: column !important;
+            width: 100% !important;
+        }
+
+        button:nth-child(1) {
+            margin-right: 10px !important;
+        }
+
+        .view-btn {
+            flex-wrap: wrap;
+            flex-direction: column;
+        }
+
+        .view-btn-link {
+            text-decoration: none !important;
+        }
+
+        #mobile-view-btn {
+            visibility: hidden;
+        }
+
+        .ii a[href] {
+            text-decoration: none !important;
+        }
+
+        @media only screen and (max-width:1100px) {
+            button:nth-child(1) {
+                margin-right: 0px !important;
+                margin-bottom: 12px !important;
+            }
+
+            button {
+                width: 100% !important;
+                display: block !important;
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            #view-btn {
+                flex-wrap: wrap !important;
+                flex-direction: column !important;
+            }
+
+            button:nth-child(1) {
+                margin-right: 0px !important;
+                margin-bottom: 12px !important;
+            }
+
+            .view-btn-link {
+                width: 250px !important;
+                max-width: 100% !important;
+                display: block !important;
+                margin-bottom: 5px;
+            }
+
+            .invited-persons {
+                max-width: 190px !important;
+            }
+
+            #desktop-view-btn {
+                visibility: hidden;
+            }
+
+            #mobile-view-btn {
+                display: block;
+            }
+        }
     </style>
 </head>
 
@@ -69,7 +139,7 @@
                             <span style="display: block;width: 100%;max-width: 50px;height: 50px;border-radius: 50%;">
                                 <img src="{{ asset('public/storage/profile/'.$eventData['profileUser'])}}" style="width: 100%;height: 100%;border-radius:50%" alt="user-img">
                             </span>
-                            <h3 style="text-transform: capitalize;font-size: 32px;line-height: 44px;font-weight: 700;color: #0A090B;margin: 0px 0px;text-transform: capitalize;margin-left: 15px">{{ @$eventData['hosted_by']}}</h3>
+                            <h3 style="text-transform: capitalize;font-size: 32px;line-height: 44px;font-weight: 700;color: #0A090B;margin: 0px 0px;text-transform: capitalize;margin-left: 15px;width:85%; word-wrap:break-word;">{{ @$eventData['hosted_by']}}</h3>
                         </div>
                         <h5 style="font-size: 32px;line-height: 44px;font-weight: 400;color: #0A090B;margin: 0px 0px;">has invited you to:</h5>
                         <h2 style="font-size: 32px;line-height: 44px;font-weight: 700;color: #0A090B;margin: 0px 0px;">{{ @$eventData['event_name'] }}</h2>
@@ -91,9 +161,9 @@
                 <!-- -------------- -->
                 <tr>
                     <td>
-                        <div class="view-btn" style="display: flex;align-items: center;gap: 15px;">
-                            <button style="font-family: 'SF Pro Display', sans-serif;font-size: 14px;line-height: 20px;font-weight: 500;color: #fff;background: #F73C71;border: 1px solid #F73C71;border-radius: 10px; padding: 10px 24px 10px 24px;text-transform: capitalize;margin-right: 15px">View Invitation</button>
-                            <button style="font-family: 'SF Pro Display', sans-serif;font-size: 14px;line-height: 20px;font-weight: 500;color: #0F172A;background: transparent;border: 1px solid #E2E8F0;border-radius: 10px; padding: 10px 24px 10px 24px;text-transform: capitalize;">RSVP Now</button>
+                        <div class="view-btn mt-0" id="view-btn" style="display:inline;width: 100%;">
+                            <a href="#" style="font-family: 'SF Pro Display', sans-serif; margin-right:10px; font-size: 14px;line-height: 20px;font-weight: 500;color: #fff;background: #F73C71;border: 1px solid #F73C71;border-radius: 10px; padding: 10px 24px 10px 24px; text-align:center;text-decoration:none" class="view-btn-link">View Invitation</button>
+                                <a href="#" style="font-family: 'SF Pro Display', sans-serif;font-size: 14px;line-height: 20px;font-weight: 500;color: #0F172A;background: transparent;border: 1px solid #E2E8F0;border-radius: 10px; padding: 10px 24px 10px 24px; text-align:center;text-decoration:none" class="view-btn-link">RSVP Now</button>
                         </div>
                     </td>
                 </tr>
