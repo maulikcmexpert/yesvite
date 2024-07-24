@@ -6294,8 +6294,6 @@ class ApiControllerv2 extends Controller
 
 
         try {
-            dd(1);
-
             $checkEvent = Event::where(['id' => $request->event_id])->first();
 
             if ($checkEvent->end_date < date('Y-m-d')) {
