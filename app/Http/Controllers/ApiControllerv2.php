@@ -6324,7 +6324,7 @@ class ApiControllerv2 extends Controller
                 $query->where('app_user', '1');
             })->where(['user_id' => $user->id, 'event_id' => $request->event_id])->first();
             $rsvpSentAttempt = $rsvpSent->rsvp_status;
-            dd(rsvpSentAttempt);
+            dd($rsvpSentAttempt);
 
             if ($rsvpSent != null) {
                 $rsvp_attempt = "";
