@@ -9903,6 +9903,10 @@ class ApiControllerv2 extends Controller
             $eventAboutHost['invited_guests'] = $getInvitedusers['invited_guests'];
             //  event about view //
 
+            $getEventData = Event::with('event_schedule')->where('id', $input['event_id'])->first();
+            $eventAboutHost['remaining_invite_count'] = ($getEventData->subscription_invite_count != NULL) ? ($getEventData->subscription_invite_count - (count($eventAboutHost['invited_user_id']) + count($eventAboutHost['invited_guests']))) : 0;
+
+
             $totalEnvitedUser = EventInvitedUser::whereHas('user', function ($query) {
 
                 $query->where('app_user', '1');
