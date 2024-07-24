@@ -10344,18 +10344,18 @@ class ApiControllerv3 extends Controller
                 foreach ($invitedUser as $guestVal) {
                     if ($guestVal->is_co_host == '0') {
                         if ($guestVal->user->is_user_phone_contact == '1') {
-                            $invitedGuestDetail = count($guestVal['firstname']);
+                            $invitedGuestDetail = count($guestVal->user);
                             $eventDetail['invited_guests'][] = $invitedGuestDetail;
                         } elseif ($guestVal->user->is_user_phone_contact == '0') {
-                            $invitedUserIdDetail = count($guestVal['firstname']);
+                            $invitedUserIdDetail = count($guestVal->user);
                             $eventDetail['invited_user_id'][] = $invitedUserIdDetail;
                         }
                     } else if ($guestVal->is_co_host == '1') {
                         if ($guestVal->user->is_user_phone_contact == '1') {
-                            $guestCoHostDetail = count($guestVal['firstname']);
+                            $guestCoHostDetail = count($guestVal->user);
                             $eventDetail['guest_co_host_list'][] = $guestCoHostDetail;
                         } elseif ($guestVal->user->is_user_phone_contact == '0') {
-                            $coHostDetail = count($guestVal['firstname']);
+                            $coHostDetail = count($guestVal->user);
                             $eventDetail['co_host_list'][] = $coHostDetail;
                         }
                     }
