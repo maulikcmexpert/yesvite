@@ -10331,39 +10331,6 @@ class ApiControllerv3 extends Controller
             $eventAboutHost['subscription_plan_name'] = ($eventDetail->subscription_plan_name != NULL) ? $eventDetail->subscription_plan_name : "";
             $eventAboutHost['subscription_invite_count'] = ($eventDetail->subscription_invite_count != NULL) ? $eventDetail->subscription_invite_count : 0;
 
-
-            $getEventData = Event::with('event_schedule')->where('id', $input['event_id'])->first();
-            $eventDetail['invited_user_id'] = [];
-            $eventDetail['co_host_list'] = [];
-            $eventDetail['invited_guests'] = [];
-            $eventDetail['guest_co_host_list'] = [];
-
-            $invitedUser = EventInvitedUser::with('user')->where(['event_id' => $getEventData->id])->get();
-
-            if (!empty($invitedUser)) {
-                foreach ($invitedUser as $guestVal) {
-                    if ($guestVal->is_co_host == '0') {
-                        if ($guestVal->user->is_user_phone_contact == '1') {
-                            $invitedGuestDetail = count($guestVal->user);
-                            $eventDetail['invited_guests'][] = $invitedGuestDetail;
-                        } elseif ($guestVal->user->is_user_phone_contact == '0') {
-                            $invitedUserIdDetail = count($guestVal->user);
-                            $eventDetail['invited_user_id'][] = $invitedUserIdDetail;
-                        }
-                    } else if ($guestVal->is_co_host == '1') {
-                        if ($guestVal->user->is_user_phone_contact == '1') {
-                            $guestCoHostDetail = count($guestVal->user);
-                            $eventDetail['guest_co_host_list'][] = $guestCoHostDetail;
-                        } elseif ($guestVal->user->is_user_phone_contact == '0') {
-                            $coHostDetail = count($guestVal->user);
-                            $eventDetail['co_host_list'][] = $coHostDetail;
-                        }
-                    }
-                }
-                $eventAboutHost['remaining_invite_count'] = ($getEventData->subscription_invite_count != NULL) ? ($getEventData->subscription_invite_count - (count($eventDetail['invited_user_id']) + count($eventDetail['invited_guests']))) : 0;
-            }
-
-
             $userRsvpStatusList = EventInvitedUser::query();
             $userRsvpStatusList->whereHas('user', function ($query) {
                 $query->where('app_user', '1');
