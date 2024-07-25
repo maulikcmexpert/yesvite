@@ -4823,6 +4823,8 @@ class ApiControllerv2 extends Controller
                         } else {
                             EventPotluckCategory::where('event_id', $eventData['event_id'])->delete();
                         }
+                    } elseif ($eventData['event_setting']['podluck'] == '0' && $eventData['is_draft_save'] == '0') {
+                        EventPotluckCategory::where('event_id', $eventData['event_id'])->delete();
                     }
                 }
 
