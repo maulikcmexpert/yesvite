@@ -67,11 +67,11 @@
                 <tr>
                     <td>
                         <div class="view-btn" style="display: flex;align-items: center;gap: 15px;">
-                            <!-- <button style="font-family: 'SF Pro Display', sans-serif;font-size: 14px;line-height: 20px;font-weight: 500;color: #fff;background: #F73C71;border: 1px solid #F73C71;border-radius: 10px; padding: 10px 30px 10px 30px;width: 100%;max-width: 325px;text-transform: capitalize;">Verify
-                                Account</button> -->
-                            <a href="{{ route('user.verify',$userData['token']) }}" style="font-family: 'SF Pro Display', sans-serif;font-size: 14px;line-height: 20px;font-weight: 500;color: #fff;background: #F73C71;border: 1px solid #F73C71;border-radius: 10px; padding: 10px 30px 10px 30px;width: 100%;max-width: 325px;text-transform: capitalize;">
+                            <a href="{{ route('user.verify',$userData['token']) }}"><button style="font-family: 'SF Pro Display', sans-serif;font-size: 14px;line-height: 20px;font-weight: 500;color: #fff;background: #F73C71;border: 1px solid #F73C71;border-radius: 10px; padding: 10px 30px 10px 30px;width: 100%;max-width: 325px;text-transform: capitalize;">Verify
+                                    Account</button></a>
+                            <!-- <a href="{{ route('user.verify',$userData['token']) }}" style="font-family: 'SF Pro Display', sans-serif;font-size: 14px;line-height: 20px;font-weight: 500;color: #fff;background: #F73C71;border: 1px solid #F73C71;border-radius: 10px; padding: 10px 30px 10px 30px;width: 100%;max-width: 325px;text-transform: capitalize;">
                                 Verify Account
-                            </a>
+                            </a> -->
                         </div>
                     </td>
                 </tr>
