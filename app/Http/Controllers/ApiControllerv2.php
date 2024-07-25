@@ -12055,10 +12055,10 @@ class ApiControllerv2 extends Controller
         $user  = Auth::guard('api')->user();
         $event_id = $request->input('event_id');
 
-        $usercreatedList = Event::with(['user', 'event_settings', 'event_schedule'])->where('start_date', '>', date('Y-m-d'))
-
-            ->where('user_id', $user->id)
-            ->where('is_draft_save', '0')
+        $usercreatedList = Event::with(['user', 'event_settings', 'event_schedule'])
+            // ->where('start_date', '>', date('Y-m-d'))
+            // ->where('user_id', $user->id)
+            // ->where('is_draft_save', '0')
             ->orderBy('start_date', 'ASC')
             ->where('id', $event_id)
             ->get();
