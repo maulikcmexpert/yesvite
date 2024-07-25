@@ -4375,6 +4375,7 @@ class ApiControllerv2 extends Controller
                         $invitedGuestUsers = $eventData['invited_guests'];
 
                         if ($eventData['is_draft_save'] == '1') {
+                            dd(2);
                             EventInvitedUser::where(['event_id' => $eventData['event_id'], 'is_co_host' => '0'])->delete();
                         }
                         $alreadyinvitedUser = EventInvitedUser::where('event_id', $eventData['event_id'])->pluck('user_id')->toArray();
