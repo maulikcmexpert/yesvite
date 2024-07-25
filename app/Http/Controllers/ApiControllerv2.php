@@ -12291,7 +12291,7 @@ class ApiControllerv2 extends Controller
                     $yesviteUserDetail['app_user']  = (isset($guestVal->user->app_user) && $guestVal->user->app_user != null) ? $guestVal->user->app_user : '';
                     $yesviteUserDetail['visible'] =  (isset($guestVal->user->visible) && $guestVal->user->visible != null) ? $guestVal->user->visible : '';
                     $yesviteUserDetail['message_privacy'] =  (isset($guestVal->user->message_privacy) && $guestVal->user->message_privacy != null) ? $guestVal->user->message_privacy : '';
-                    $yesviteUserDetail['prefer_by']  = (isset($guestVal->user->prefer_by) && $guestVal->user->prefer_by != null) ? $guestVal->user->prefer_by : '';
+                    $yesviteUserDetail['prefer_by']  = (isset($guestVal->prefer_by) && $guestVal->prefer_by != null) ? $guestVal->prefer_by : '';
                     $yesviteUser[] = $yesviteUserDetail;
                 }
             }
