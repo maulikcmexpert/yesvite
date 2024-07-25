@@ -4732,34 +4732,90 @@ class ApiControllerv2 extends Controller
                         $podluckCategoryList = $eventData['podluck_category_list'];
 
                         if (!empty($podluckCategoryList)) {
-                            EventPotluckCategory::where('event_id', $eventData['event_id'])->delete();
+                            // EventPotluckCategory::where('event_id', $eventData['event_id'])->delete();
                             foreach ($podluckCategoryList as $value) {
-                                $eventPodluck = EventPotluckCategory::create([
+
+                                $updateEventPodluck = EventPotluckCategory::where([
                                     'event_id' => $eventData['event_id'],
                                     'user_id' => $user->id,
-                                    'category' => $value['category'],
-                                    'quantity' => $value['quantity'],
-                                ]);
+                                    'category' => $value['category']
+                                ])->first();
+                                if (isset($updateEventPodluck) && !empty($updateEventPodluck)) {
+                                    EventPotluckCategory::where([
+                                        'event_id' => $eventData['event_id'],
+                                        'user_id' => $user->id,
+                                        'category' => $value['category']
+                                    ])
+                                        ->update(['quantity' => $value['quantity']]);
+                                    $eventPodluckid = $updateEventPodluck->id;
+                                } else {
+                                    $eventPodluck = EventPotluckCategory::create([
+                                        'event_id' => $eventData['event_id'],
+                                        'user_id' => $user->id,
+                                        'category' => $value['category'],
+                                        'quantity' => $value['quantity'],
+                                    ]);
+                                    $eventPodluckid = $eventPodluck->id;
+                                }
                                 if (!empty($value['items'])) {
                                     $items = $value['items'];
                                     foreach ($items as $value) {
-                                        $eventPodluckitem =   EventPotluckCategoryItem::create([
+
+                                        $getEventPotluckItem = EventPotluckCategoryItem::where([
                                             'event_id' => $eventData['event_id'],
                                             'user_id' => $user->id,
-                                            'event_potluck_category_id' => $eventPodluck->id,
-                                            'self_bring_item' => (isset($value['self_bring_item'])) ? $value['self_bring_item'] : '0',
-                                            'description' => $value['description'],
-                                            'quantity' => $value['quantity'],
-                                        ]);
-
-                                        if (isset($value['self_bring_item']) && $value['self_bring_item'] == '1') {
-                                            UserPotluckItem::Create([
+                                            'event_potluck_category_id' => $eventPodluckid,
+                                            'description' => $value['description']
+                                        ])->first();
+                                        if (isset($getEventPotluckItem) && !empty($getEventPotluckItem)) {
+                                            $self_bring_item = (isset($value['self_bring_item'])) ? $value['self_bring_item'] : '0';
+                                            EventPotluckCategoryItem::where([
                                                 'event_id' => $eventData['event_id'],
                                                 'user_id' => $user->id,
-                                                'event_potluck_category_id' => $eventPodluck->id,
-                                                'event_potluck_item_id' => $eventPodluckitem->id,
-                                                'quantity' => (isset($value['self_quantity']) && @$value['self_quantity'] != "") ? $value['self_quantity'] : $value['quantity']
+                                                'event_potluck_category_id' => $eventPodluckid,
+                                                'description' => $value['description']
+                                            ])
+                                                ->update([
+                                                    'self_bring_item' => $self_bring_item,
+                                                    'quantity' => $value['quantity']
+                                                ]);
+
+                                            if (isset($value['self_bring_item']) && $value['self_bring_item'] == '1') {
+
+                                                $userQuantity = (isset($value['self_quantity']) && @$value['self_quantity'] != "") ? $value['self_quantity'] : $value['quantity'];
+                                                UserPotluckItem::where([
+                                                    'event_id' => $eventData['event_id'],
+                                                    'user_id' => $user->id,
+                                                    'event_potluck_category_id' => $eventPodluckid,
+                                                    'event_potluck_item_id' => $getEventPotluckItem->id,
+                                                ])->update(['quantity' => $userQuantity]);
+                                            } else {
+                                                UserPotluckItem::where([
+                                                    'event_id' => $eventData['event_id'],
+                                                    'user_id' => $user->id,
+                                                    'event_potluck_category_id' => $eventPodluckid,
+                                                    'event_potluck_item_id' => $getEventPotluckItem->id,
+                                                ])->delete();
+                                            }
+                                        } else {
+                                            $eventPodluckitem =   EventPotluckCategoryItem::create([
+                                                'event_id' => $eventData['event_id'],
+                                                'user_id' => $user->id,
+                                                'event_potluck_category_id' => $eventPodluckid,
+                                                'self_bring_item' => (isset($value['self_bring_item'])) ? $value['self_bring_item'] : '0',
+                                                'description' => $value['description'],
+                                                'quantity' => $value['quantity'],
                                             ]);
+
+                                            if (isset($value['self_bring_item']) && $value['self_bring_item'] == '1') {
+                                                UserPotluckItem::Create([
+                                                    'event_id' => $eventData['event_id'],
+                                                    'user_id' => $user->id,
+                                                    'event_potluck_category_id' => $eventPodluckid,
+                                                    'event_potluck_item_id' => $eventPodluckitem->id,
+                                                    'quantity' => (isset($value['self_quantity']) && @$value['self_quantity'] != "") ? $value['self_quantity'] : $value['quantity']
+                                                ]);
+                                            }
                                         }
                                     }
                                 }
