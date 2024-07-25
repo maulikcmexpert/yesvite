@@ -7403,6 +7403,7 @@ class ApiControllerv2 extends Controller
                 }
             }
         } else {
+            dd(1);
             if (count($results) != 0) {
                 foreach ($results as $value) {
 
