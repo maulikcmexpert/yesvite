@@ -12063,7 +12063,7 @@ class ApiControllerv2 extends Controller
             ->where('id', $event_id)
             ->get();
 
-        dd($usercreatedList);
+        dd($user->id);
         $eventList = [];
 
         if ($usercreatedList) {
