@@ -12262,7 +12262,7 @@ class ApiControllerv2 extends Controller
             $groupList = getGroupList($user->id);
             $event_id = (int)$input['event_id'];
             $invitedUser = EventInvitedUser::with(['user' => function ($query) {
-                // $query->where('is_user_phone_contact', '0');
+                $query->where('is_user_phone_contact', '0');
                 // $query->where('is_user_phone_contact', '1');
             }])
                 ->where(['event_id' => $event_id])
