@@ -4338,6 +4338,9 @@ class ApiControllerv2 extends Controller
                 // $updateEvent->subscription_invite_count = (!empty($eventData['subscription_invite_count'])) ? $eventData['subscription_invite_count'] : 0;
 
                 if ($updateEvent->save()) {
+                    if ($eventData['is_draft_save'] == '1') {
+                        EventInvitedUser::where(['event_id' => $eventData['event_id']])->delete();
+                    }
                     $getalreadyInviteduser =  EventInvitedUser::where('event_id', $eventData['event_id'])->get()->pluck('user_id')->toArray();
                     // EventInvitedUser::where('event_id', $eventData['event_id'])->delete();
 
@@ -4371,13 +4374,11 @@ class ApiControllerv2 extends Controller
                     } else {
                         EventInvitedUser::where(['event_id' => $eventData['event_id']])->delete();
                     }
+
                     if (!empty($eventData['invited_guests'])) {
                         $invitedGuestUsers = $eventData['invited_guests'];
 
-                        if ($eventData['is_draft_save'] == '1') {
-                            dd(2);
-                            EventInvitedUser::where(['event_id' => $eventData['event_id'], 'is_co_host' => '0'])->delete();
-                        }
+
                         $alreadyinvitedUser = EventInvitedUser::where('event_id', $eventData['event_id'])->pluck('user_id')->toArray();
                         foreach ($invitedGuestUsers as $value) {
 
