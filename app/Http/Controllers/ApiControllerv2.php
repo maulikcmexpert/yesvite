@@ -7403,7 +7403,7 @@ class ApiControllerv2 extends Controller
                 }
             }
         } else {
-            dd(1);
+            // dd(1);
             if (count($results) != 0) {
                 foreach ($results as $value) {
 
@@ -7436,8 +7436,8 @@ class ApiControllerv2 extends Controller
 
                     $postsNormalDetail['is_host'] =  ($ischeckEventOwner != null) ? 1 : 0;
                     $postsNormalDetail['post_message'] = empty($value->post_message) ? "" :  $value->post_message;
-                    // $postsNormalDetail['rsvp_status'] = (isset($value->post_type) && $value->post_type == '4') ? $value->post_message : $checkUserRsvp;
-                    $postsNormalDetail['rsvp_status'] = $checkUserRsvp;
+                    $postsNormalDetail['rsvp_status'] = (isset($value->post_type) && $value->post_type == '4') ? $value->post_message : $checkUserRsvp;
+                    // $postsNormalDetail['rsvp_status'] = $checkUserRsvp;
                     $postsNormalDetail['kids'] = isset($count_kids_adult['kids']) ? $count_kids_adult['kids'] : 0;
                     $postsNormalDetail['adults'] = isset($count_kids_adult['adults']) ? $count_kids_adult['adults'] : 0;
                     $postsNormalDetail['location'] = ($value->user->city != NULL) ? $value->user->city : "";
