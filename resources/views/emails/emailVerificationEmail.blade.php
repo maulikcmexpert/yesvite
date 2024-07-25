@@ -19,7 +19,7 @@
 
 <body style="font-family: 'SF Pro Display', sans-serif !important;margin: 0px;background: #F8F8F8;display: flex;justify-content: center;">
     <!-- partial:index.partial.html -->
-    <div style="width: 100%;max-width: 650px; margin:0 auto; height:100%;padding: 10px 10px;" class="ui-sortable">
+    <div style="width: 100%;max-width: 650px; margin:0 auto; height:100%;padding: 1 0px 10px;" class="ui-sortable">
         <table style="border-radius: 5px;box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);width: 100%;height:100%;background: #fff;box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);padding: 30px;border-radius: 20px;" class="full selected-table" border="0" cellpadding="0" cellspacing="0">
             <tbody>
                 <tr>
@@ -67,8 +67,10 @@
                 <tr>
                     <td>
                         <div class="view-btn" style="display: flex;align-items: center;gap: 15px;">
-                            <button style="font-family: 'SF Pro Display', sans-serif;font-size: 14px;line-height: 20px;font-weight: 500;color: #fff;background: #F73C71;border: 1px solid #F73C71;border-radius: 10px; padding: 10px 30px 10px 30px;width: 100%;max-width: 325px;text-transform: capitalize;">Verify
-                                Account</button>
+                            <a href="{{ route('user.verify',$userData['token']) }}" style="border-radius: 10px;background: #E73080; color:#ffffff; box-shadow: 0px 5px 20px 0px rgba(255, 78, 0, 0.20);
+                                    padding: 18px 0px; border: 1px solid transparent; display:block; text-decoration:none; text-align:center; font-size: 18px; font-family: 'Poppins-Regular'; font-weight: 600; margin: 30px 0;max-width: 402px; width: 100%;">
+                                Verify Account
+                            </a>
                         </div>
                     </td>
                 </tr>
