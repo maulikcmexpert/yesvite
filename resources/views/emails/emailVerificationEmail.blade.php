@@ -67,8 +67,9 @@
                 <tr>
                     <td>
                         <div class="view-btn" style="display: flex;align-items: center;gap: 15px;">
-                            <a href="{{ route('user.verify',$userData['token']) }}" style="border-radius: 10px;background: #E73080; color:#ffffff; box-shadow: 0px 5px 20px 0px rgba(255, 78, 0, 0.20);
-                                    padding: 18px 0px; border: 1px solid transparent; display:block; text-decoration:none; text-align:center; font-size: 18px; font-family: 'Poppins-Regular'; font-weight: 600; margin: 30px 0;max-width: 402px; width: 100%;">
+                            <!-- <button style="font-family: 'SF Pro Display', sans-serif;font-size: 14px;line-height: 20px;font-weight: 500;color: #fff;background: #F73C71;border: 1px solid #F73C71;border-radius: 10px; padding: 10px 30px 10px 30px;width: 100%;max-width: 325px;text-transform: capitalize;">Verify
+                                Account</button> -->
+                            <a href="{{ route('user.verify',$userData['token']) }}" style="font-family: 'SF Pro Display', sans-serif;font-size: 14px;line-height: 20px;font-weight: 500;color: #fff;background: #F73C71;border: 1px solid #F73C71;border-radius: 10px; padding: 10px 30px 10px 30px;width: 100%;max-width: 325px;text-transform: capitalize;">
                                 Verify Account
                             </a>
                         </div>
