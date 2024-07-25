@@ -6359,7 +6359,7 @@ class ApiControllerv2 extends Controller
                     $creatEventPost = new EventPost;
                     $creatEventPost->event_id = $request->event_id;
                     $creatEventPost->user_id = $user->id;
-                    $creatEventPost->post_message = $request->rsvp_status;
+                    $creatEventPost->post_message = ($request->rsvp_status == '0') ? '2' : '1';
 
                     $creatEventPost->post_privacy = "1";
                     $creatEventPost->post_type = "4";
