@@ -4374,8 +4374,10 @@ class ApiControllerv2 extends Controller
                     if (!empty($eventData['invited_guests'])) {
                         $invitedGuestUsers = $eventData['invited_guests'];
 
+                        if ($eventData['is_draft_save'] == '1') {
+                            EventInvitedUser::where(['event_id' => $eventData['event_id'], 'is_co_host' => '0'])->delete();
+                        }
                         $alreadyinvitedUser = EventInvitedUser::where('event_id', $eventData['event_id'])->pluck('user_id')->toArray();
-
                         foreach ($invitedGuestUsers as $value) {
 
                             if ($value['prefer_by'] == 'phone') {
@@ -4386,27 +4388,18 @@ class ApiControllerv2 extends Controller
 
                                     $guestUser = User::create([
                                         'firstname' => $value['first_name'],
-
                                         'lastname' => $value['last_name'],
-
-
                                         'country_code' => $value['country_code'],
-
                                         'phone_number' => $value['phone_number'],
-
                                         'app_user' => '0',
                                         'is_user_phone_contact' => '1',
                                         'parent_user_phone_contact' => $user->id
                                     ]);
 
                                     EventInvitedUser::create([
-
                                         'event_id' =>  $eventData['event_id'],
-
                                         'prefer_by' => $value['prefer_by'],
-
                                         'user_id' => $guestUser->id
-
                                     ]);
                                 } else {
 
@@ -4416,13 +4409,9 @@ class ApiControllerv2 extends Controller
                                         if (!in_array($checkUserExist->id, $alreadyinvitedUser)) {
 
                                             EventInvitedUser::create([
-
                                                 'event_id' => $eventData['event_id'],
-
                                                 'prefer_by' => (isset($value['prefer_by'])) ? $value['prefer_by'] : "email",
-
                                                 'user_id' => $checkUserExist->id
-
                                             ]);
                                         }
                                     }
