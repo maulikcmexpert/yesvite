@@ -7895,7 +7895,7 @@ class ApiControllerv2 extends Controller
                 }
             }
         }
-
+        dd($user->id)
         $userrsvp_status = EventInvitedUser::where(['user_id' => $user->id, 'event_id' => $input['event_id']])->pluck('rsvp_status')->first();
 
         $rsvp_status = !empty($userrsvp_status) ? $userrsvp_status : "";
