@@ -773,6 +773,7 @@ function sendNotification($notificationType, $postData)
             }
         }
     }
+
     if ($notificationType == 'reply_comment_reaction') {
 
         $getPostOwnerId = EventPost::where('id', $postData['post_id'])->first();
@@ -948,7 +949,7 @@ function sendNotification($notificationType, $postData)
                     ];
 
 
-                    $notification_on_off = isOwnerOrInvited($ownerOfComment, $postData['event_id']);
+                    $notification_on_off = isOwnerOrInvited($ownerOfComment, $postData['event_id'], $postData['post_id']);
                     $checkNotificationSetting = checkNotificationSetting($ownerOfComment);
 
                     if ((count($checkNotificationSetting) && $checkNotificationSetting['wall_post']['push'] == '1') && $notification_on_off == '1') {
@@ -1108,14 +1109,23 @@ function sendNotification($notificationType, $postData)
 }
 
 
-function isOwnerOrInvited($userId, $eventId)
+function isOwnerOrInvited($userId, $eventId, $postId = null)
 {
     $event = Event::with('event_invited_user')->find($eventId);
     $status = 'Unknown';
     if ($event && $event->user_id == $userId) {
         $status = 'Owner';
     } elseif ($event && $event->event_invited_user->contains('user_id', $userId)) {
-        $status = 'Invited';
+        if ($postId != null) {
+            $postControl = PostControl::where(['event_id' => $eventId, 'user_id' => $userId, 'event_post_id' => $postId, 'post_control' => 'mute'])->first();
+            if (isset($postControl) && !empty($postControl)) {
+                $status = 'Unknown';
+            } else {
+                $status = 'Invited';
+            }
+        } else {
+            $status = 'Invited';
+        }
     }
 
 
