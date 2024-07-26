@@ -206,7 +206,7 @@ function getYesviteContactListPage($id, $perPage, $page, $search_name)
         ->where(DB::raw("CONCAT(firstname, ' ', lastname)"), 'like', "%{$search_name}%")
         ->orderBy('firstname')
         ->paginate($perPage, ['*'], 'page', $page);
-
+    dd($yesviteRegisteredUser);
     $yesviteUser = [];
     foreach ($yesviteRegisteredUser as $user) {
 
