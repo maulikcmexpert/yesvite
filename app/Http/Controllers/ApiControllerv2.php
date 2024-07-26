@@ -7897,7 +7897,7 @@ class ApiControllerv2 extends Controller
         }
 
         $userrsvp_status = EventInvitedUser::where(['user_id' => $user->id, 'event_id' => $input['event_id']])->pluck('rsvp_status')->first();
-        $rsvp_status = ($userrsvp_status != null && $userrsvp_status != "") ? $userrsvp_status : "";
+        $rsvp_status = (isset($userrsvp_status) && $userrsvp_status != "") ? $userrsvp_status : "";
 
         $wallData['stories'] = $storiesList;
 
@@ -12110,7 +12110,7 @@ class ApiControllerv2 extends Controller
             ->get();
 
         $eventList = [];
-
+        dd($usercreatedList);
         if ($usercreatedList) {
             foreach ($usercreatedList as $value) {
                 $eventDetail['id'] = $value->id;
