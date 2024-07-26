@@ -709,9 +709,6 @@ function sendNotification($notificationType, $postData)
     if ($notificationType == 'like_post') {
 
         $getPostOwnerId = EventPost::where('id', $postData['post_id'])->first();
-
-
-
         $notification_message = $senderData->firstname . ' '  . $senderData->lastname . " liked your post";
         if ($getPostOwnerId->post_type == '2') {
             $notification_message = $senderData->firstname . ' '  . $senderData->lastname . " liked your poll";
@@ -819,7 +816,7 @@ function sendNotification($notificationType, $postData)
 
                     ];
 
-                    $notification_on_off = isOwnerOrInvited($ownerOfComment, $postData['event_id']);
+                    $notification_on_off = isOwnerOrInvited($ownerOfComment, $postData['event_id'], $postData['post_id']);
 
                     $checkNotificationSetting = checkNotificationSetting($ownerOfComment);
 
