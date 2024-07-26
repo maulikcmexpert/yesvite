@@ -7896,14 +7896,15 @@ class ApiControllerv2 extends Controller
             }
         }
 
+        $userrsvp_status = EventInvitedUser::where(['user_id' => $user->id, 'event_id' => $input['event_id']])->pluck('rsvp_status')->first();
 
-
+        $rsvp_status = !empty($userrsvp_status) ? $userrsvp_status : "";
 
         $wallData['stories'] = $storiesList;
 
         $wallData['posts'] = $postList;
 
-        return response()->json(['status' => 1, 'total_page_of_stories' => $total_page_of_stories, 'total_page_of_eventPosts' => $total_page_of_eventPosts, 'data' => $wallData, 'message' => "Event wall data"]);
+        return response()->json(['status' => 1, 'rsvp_status' => $rsvp_status, 'total_page_of_stories' => $total_page_of_stories, 'total_page_of_eventPosts' => $total_page_of_eventPosts, 'data' => $wallData, 'message' => "Event wall data"]);
         // } catch (QueryException $e) {
         //     DB::rollBack();
         //     return response()->json(['status' => 0, 'message' => "db error"]);
