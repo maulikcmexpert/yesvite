@@ -7897,7 +7897,6 @@ class ApiControllerv2 extends Controller
         }
 
         $userrsvp_status = EventInvitedUser::where(['user_id' => $user->id, 'event_id' => $input['event_id']])->pluck('rsvp_status')->first();
-
         $rsvp_status = ($userrsvp_status != null && $userrsvp_status != "") ? $userrsvp_status : "";
 
         $wallData['stories'] = $storiesList;
@@ -12122,11 +12121,10 @@ class ApiControllerv2 extends Controller
                 $eventDetail['is_notification_on_off']  = "";
                 if ($value->user->id == $user->id) {
 
-                    $eventDetail['is_notification_on_off'] =  $value->notification_on_off;
+                    // $eventDetail['is_notification_on_off'] =  $value->notification_on_off;
+                    $eventDetail['is_notification_on_off'] =  ($value->notification_on_off != "" && $value->notification_on_off != NULL) ? $value->notification_on_off : "";
                 } else {
-
-
-                    $eventDetail['is_notification_on_off'] =  $isCoHost->notification_on_off;
+                    $eventDetail['is_notification_on_off'] =  ($isCoHost->notification_on_off != "" && $isCoHost->notification_on_off != NULL) ? $isCoHost->notification_on_off : "";
                 }
                 $eventDetail['is_co_host'] = "0";
                 if ($isCoHost != null) {
