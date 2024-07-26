@@ -839,6 +839,7 @@ function sendNotification($notificationType, $postData)
             }
         }
     }
+
     if ($notificationType == 'comment_post') {
 
         $getPostOwnerId = EventPost::where('id', $postData['post_id'])->first();
@@ -901,6 +902,7 @@ function sendNotification($notificationType, $postData)
             }
         }
     }
+
     if ($notificationType == 'reply_on_comment_post') {
 
 
@@ -968,6 +970,7 @@ function sendNotification($notificationType, $postData)
             }
         }
     }
+
     if ($notificationType == 'sent_rsvp') {
 
         $getPostOwnerId = Event::with(['event_settings', 'user'])->where('id', $postData['event_id'])->first();
@@ -1047,6 +1050,7 @@ function sendNotification($notificationType, $postData)
             }
         }
     }
+
     if ($notificationType == 'potluck_bring') {
 
         $getPostOwnerId = Event::with('event_settings')->where('id', $postData['event_id'])->first();
