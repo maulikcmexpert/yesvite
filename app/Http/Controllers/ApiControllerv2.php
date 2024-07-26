@@ -7903,7 +7903,7 @@ class ApiControllerv2 extends Controller
 
         $wallData['posts'] = $postList;
 
-        return response()->json(['status' => 1, 'rsvp_status' => $rsvp_status, 'total_page_of_stories' => $total_page_of_stories, 'total_page_of_eventPosts' => $total_page_of_eventPosts, 'data' => $wallData, 'message' => "Event wall data"]);
+        return response()->json(['status' => 1, 'host' => $eventCreator->user_id, 'rsvp_status' => $rsvp_status, 'total_page_of_stories' => $total_page_of_stories, 'total_page_of_eventPosts' => $total_page_of_eventPosts, 'data' => $wallData, 'message' => "Event wall data"]);
         // } catch (QueryException $e) {
         //     DB::rollBack();
         //     return response()->json(['status' => 0, 'message' => "db error"]);
