@@ -12110,7 +12110,6 @@ class ApiControllerv2 extends Controller
             ->get();
 
         $eventList = [];
-        dd($usercreatedList);
         if ($usercreatedList) {
             foreach ($usercreatedList as $value) {
                 $eventDetail['id'] = $value->id;
