@@ -12122,9 +12122,9 @@ class ApiControllerv2 extends Controller
                 if ($value->user->id == $user->id) {
 
                     // $eventDetail['is_notification_on_off'] =  $value->notification_on_off;
-                    $eventDetail['is_notification_on_off'] =  ($value->notification_on_off != "" && $value->notification_on_off != NULL) ? $value->notification_on_off : "";
+                    $eventDetail['is_notification_on_off'] =  (isset($value->notification_on_off) && $value->notification_on_off != "") ? $value->notification_on_off : "1";
                 } else {
-                    $eventDetail['is_notification_on_off'] =  ($isCoHost->notification_on_off != "" && $isCoHost->notification_on_off != NULL) ? $isCoHost->notification_on_off : "";
+                    $eventDetail['is_notification_on_off'] =  (isset($isCoHost->notification_on_off) && $isCoHost->notification_on_off != "") ? $isCoHost->notification_on_off : "1";
                 }
                 $eventDetail['is_co_host'] = "0";
                 if ($isCoHost != null) {
