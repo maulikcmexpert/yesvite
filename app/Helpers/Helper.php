@@ -468,6 +468,7 @@ function sendNotification($notificationType, $postData)
                         }
                     }
                 }
+                dd($postOwneruserId);
                 if (in_array($postData['sender_id'], $postOwneruserId)) {
                     continue;
                 }
@@ -488,7 +489,7 @@ function sendNotification($notificationType, $postData)
                     $deviceData = Device::where('user_id', $value->id)->first();
 
                     if (!empty($deviceData)) {
-                        dd($deviceData);
+
                         $notificationImage = EventPostImage::where('event_post_id', $postData['post_id'])->first();
                         $notification_image = "";
                         if (!empty($notificationImage->post_image) && $notificationImage->post_image != NULL) {
