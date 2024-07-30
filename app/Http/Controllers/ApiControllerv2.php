@@ -6404,7 +6404,6 @@ class ApiControllerv2 extends Controller
                     $creatEventPost->event_id = $request->event_id;
                     $creatEventPost->user_id = $user->id;
                     $creatEventPost->post_message = json_encode($postMessage);
-
                     $creatEventPost->post_privacy = "1";
                     $creatEventPost->post_type = "4";
                     $creatEventPost->commenting_on_off = "0";
