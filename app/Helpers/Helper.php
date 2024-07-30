@@ -459,7 +459,7 @@ function sendNotification($notificationType, $postData)
         // post notify to  owner//
 
         foreach ($invitedusers as $key => $value) {
-            dd(2);
+            dd(4);
 
             if ($postData['post_privacy'] == '1') {
                 $postControl = PostControl::with('event_posts')->where(['event_id' => $postData['event_id'], 'user_id' => $value->user_id, 'post_control' => 'mute'])->get();
