@@ -7454,8 +7454,10 @@ class ApiControllerv2 extends Controller
             }
         } else {
             if (count($results) != 0) {
-                foreach ($results as $value) {
 
+                foreach ($results as $value) {
+                    $rsvpPostdata = json_decode($value->message);
+                    dd($rsvpPostdata);
                     $checkUserRsvp = checkUserAttendOrNot($value->event_id, $value->user->id);
                     $count_kids_adult = EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $value->user->id])
                         ->select('kids', 'adults', 'event_id', 'rsvp_status', 'user_id')
