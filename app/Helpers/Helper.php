@@ -457,7 +457,7 @@ function sendNotification($notificationType, $postData)
         // post notify to  owner//
 
         foreach ($invitedusers as $key => $value) {
-
+            dd($value);
             if ($postData['post_privacy'] == '1') {
                 $postControl = PostControl::with('event_posts')->where(['event_id' => $postData['event_id'], 'user_id' => $value->user_id, 'post_control' => 'mute'])->get();
                 $postOwneruserId = [];
@@ -487,7 +487,7 @@ function sendNotification($notificationType, $postData)
                 if ($notification->save()) {
 
                     $deviceData = Device::where('user_id', $value->id)->first();
-                    dd($deviceData);
+
                     if (!empty($deviceData)) {
                         $notificationImage = EventPostImage::where('event_post_id', $postData['post_id'])->first();
                         $notification_image = "";
