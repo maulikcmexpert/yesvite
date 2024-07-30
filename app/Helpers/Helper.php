@@ -418,7 +418,7 @@ function sendNotification($notificationType, $postData)
                 if ($notification->save()) {
 
                     $deviceData = Device::where('user_id', $ownerEvent->user_id)->first();
-
+                    dd($deviceData);
                     if (!empty($deviceData)) {
                         $notificationImage = EventPostImage::where('event_post_id', $postData['post_id'])->first();
                         $notification_image = "";
@@ -436,7 +436,7 @@ function sendNotification($notificationType, $postData)
 
                         ];
                         $checkNotificationSetting = checkNotificationSetting($ownerEvent->user_id);
-                        dd(1);
+
                         if ((count($checkNotificationSetting) && $checkNotificationSetting['wall_post']['push'] == '1') && $ownerEvent->notification_on_off == '1') {
 
 
