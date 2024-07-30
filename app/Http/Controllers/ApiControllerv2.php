@@ -7314,7 +7314,7 @@ class ApiControllerv2 extends Controller
                     });
             });
         }
-        $eventPostList->orderBy('id', 'desc');
+        $eventPostList->orderBy('id', 'DESC');
         if (!empty($selectedFilters) && !in_array('all', $selectedFilters)) {
             $eventPostList->where(function ($query) use ($selectedFilters, $eventCreator) {
                 foreach ($selectedFilters as $filter) {
@@ -7475,9 +7475,10 @@ class ApiControllerv2 extends Controller
                     // if ($value->post_privacy == '1') {
                     $EventPostMessageData = [];
 
-                    dd($results);
+
                     if (isset($value->post_type) && $value->post_type == '4' && $value->post_message != '') {
                         $EventPostMessageData = json_decode($value->post_message);
+                        dd($EventPostMessageData);
                     }
                     $postsNormalDetail['id'] =  $value->id;
 
