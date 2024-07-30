@@ -6395,7 +6395,7 @@ class ApiControllerv2 extends Controller
                 //if rsvp_status is 0 then No, and rsvp_status is 1 then Yes 
                 if ($rsvpSent->save()) {
                     $postMessage = [];
-                    $postMessage[] = [
+                    $postMessage = [
                         'status' => ($request->rsvp_status == '0') ? '2' : '1',
                         'adults' => $request->adults,
                         'kids' => $request->kids
