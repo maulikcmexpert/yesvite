@@ -392,7 +392,6 @@ function sendNotification($notificationType, $postData)
     if ($notificationType == 'upload_post' || $notificationType == 'photos') {
 
         // post notify to  owner//
-        dd(1);
         $ownerEvent = Event::with('event_settings')->where('id', $postData['event_id'])->first();
         $postControl = PostControl::with('event_posts')->where(['event_id' => $ownerEvent->id, 'user_id' => $ownerEvent->user_id, 'post_control' => 'mute'])->get();
         $postOwneruserId = [];
