@@ -7487,6 +7487,7 @@ class ApiControllerv2 extends Controller
                     $EventPostMessageData = [];
                     if (isset($value->post_type) && $value->post_type == '4' && $value->post_message != '') {
                         $EventPostMessageData = json_decode($value->post_message, true);
+                        dd($EventPostMessageData['status']);
                         $rsvpstatus = (string)$EventPostMessageData['status'];
                         $kids = $EventPostMessageData['kids'];
                         $adults = $EventPostMessageData['adults'];
