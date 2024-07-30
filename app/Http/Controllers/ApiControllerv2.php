@@ -7476,8 +7476,8 @@ class ApiControllerv2 extends Controller
                     $rsvpPostdata = [];
                     if (isset($value->post_type) && $value->post_type == '4' && $value->post_message != '') {
                         $rsvpPostdata = json_decode($value->post_message);
+                        dd($rsvpPostdata);
                     }
-                    dd($rsvpPostdata);
                     $postsNormalDetail['id'] =  $value->id;
 
                     $postsNormalDetail['user_id'] =  $value->user->id;
