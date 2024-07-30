@@ -404,7 +404,7 @@ function sendNotification($notificationType, $postData)
             }
         }
         if (!in_array($postData['sender_id'], $postOwneruserId)) {
-
+            dd(1);
             if ($postData['sender_id'] != $ownerEvent->user_id) {
                 $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " upload new post";
                 $notification = new Notification;
@@ -418,7 +418,7 @@ function sendNotification($notificationType, $postData)
                 if ($notification->save()) {
 
                     $deviceData = Device::where('user_id', $ownerEvent->user_id)->first();
-                    dd($deviceData);
+
                     if (!empty($deviceData)) {
                         $notificationImage = EventPostImage::where('event_post_id', $postData['post_id'])->first();
                         $notification_image = "";
@@ -458,7 +458,7 @@ function sendNotification($notificationType, $postData)
         // post notify to  owner//
 
         foreach ($invitedusers as $key => $value) {
-
+            dd(2);
 
             if ($postData['post_privacy'] == '1') {
                 $postControl = PostControl::with('event_posts')->where(['event_id' => $postData['event_id'], 'user_id' => $value->user_id, 'post_control' => 'mute'])->get();
