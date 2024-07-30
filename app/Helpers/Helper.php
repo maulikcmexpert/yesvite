@@ -436,12 +436,12 @@ function sendNotification($notificationType, $postData)
 
                         ];
                         $checkNotificationSetting = checkNotificationSetting($ownerEvent->user_id);
-
+                        dd(1);
                         if ((count($checkNotificationSetting) && $checkNotificationSetting['wall_post']['push'] == '1') && $ownerEvent->notification_on_off == '1') {
 
 
                             if ($deviceData->model == 'And') {
-                                dd(1);
+                                dd(2);
                                 send_notification_FCM_and($deviceData->device_token, $notificationData);
                             }
 
