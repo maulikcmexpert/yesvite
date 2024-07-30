@@ -395,7 +395,7 @@ function sendNotification($notificationType, $postData)
         $ownerEvent = Event::with('event_settings')->where('id', $postData['event_id'])->first();
         $postControl = PostControl::with('event_posts')->where(['event_id' => $ownerEvent->id, 'user_id' => $ownerEvent->user_id, 'post_control' => 'mute'])->get();
         $postOwneruserId = [];
-        dd($postControl);
+
         if (!$postControl->isEmpty()) {
             foreach ($postControl as $value) {
                 if (isset($value->event_posts->user_id) && $value->event_posts->user_id != null) {
@@ -441,7 +441,7 @@ function sendNotification($notificationType, $postData)
 
 
                             if ($deviceData->model == 'And') {
-
+                                dd(1);
                                 send_notification_FCM_and($deviceData->device_token, $notificationData);
                             }
 
