@@ -404,8 +404,9 @@ function sendNotification($notificationType, $postData)
             }
         }
         if (!in_array($postData['sender_id'], $postOwneruserId)) {
-            dd(1);
+
             if ($postData['sender_id'] != $ownerEvent->user_id) {
+                dd(3);
                 $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " upload new post";
                 $notification = new Notification;
                 $notification->event_id = $postData['event_id'];
