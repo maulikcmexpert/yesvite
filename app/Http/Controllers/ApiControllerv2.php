@@ -7371,7 +7371,7 @@ class ApiControllerv2 extends Controller
                     }
                     $checkUserIsReaction = EventPostReaction::where(['event_id' => $input['event_id'], 'event_post_id' => $value->id, 'user_id' => $user->id])->first();
                     if (isset($value->post_type) && $value->post_type == '4' && $value->post_message != '') {
-                        $rsvpPostdata = json_decode($value->message);
+                        $rsvpPostdata = json_decode($value->post_message);
                         dd($rsvpPostdata);
                     }
                     $postsNormalDetail['id'] =  $value->id;
