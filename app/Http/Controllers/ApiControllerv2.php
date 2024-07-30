@@ -7370,23 +7370,20 @@ class ApiControllerv2 extends Controller
                         }
                     }
                     $checkUserIsReaction = EventPostReaction::where(['event_id' => $input['event_id'], 'event_post_id' => $value->id, 'user_id' => $user->id])->first();
-                    $rsvpPostdata = json_decode($value->message);
-                    dd($rsvpPostdata);
+                    if (isset($value->post_type) && $value->post_type == '4' && $value->post_message != '') {
+                        $rsvpPostdata = json_decode($value->message);
+                        dd($rsvpPostdata);
+                    }
                     $postsNormalDetail['id'] =  $value->id;
                     $postsNormalDetail['user_id'] =  $value->user->id;
                     $postsNormalDetail['is_host'] =  ($ischeckEventOwner != null) ? 1 : 0;
                     $postsNormalDetail['username'] =  $value->user->firstname . ' ' . $value->user->lastname;
                     $postsNormalDetail['profile'] =  empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile);
                     $postsNormalDetail['post_message'] = (empty($value->post_message) || $value->post_type == '4') ? "" :  $value->post_message;
-                    // $postsNormalDetail['rsvp_status'] = (isset($value->post_type) && $value->post_type == '4' && $value->post_message != '') ? $value->post_message : $checkUserRsvp;
-                    $postsNormalDetail['rsvp_status'] = (isset($value->post_type) && $value->post_type == '4' && $value->post_message != '') ? $rsvpPostdata['status'] : $checkUserRsvp;
-
+                    $postsNormalDetail['rsvp_status'] = (isset($value->post_type) && $value->post_type == '4' && $value->post_message != '') ? $value->post_message : $checkUserRsvp;
                     // $postsNormalDetail['rsvp_status'] = $checkUserRsvp;
-                    $postsNormalDetail['kids'] = (isset($value->post_type) && $value->post_type == '4' && $value->post_message != '') ? $rsvpPostdata['kids'] : (isset($count_kids_adult['kids']) ? $count_kids_adult['kids'] : 0);
-                    $postsNormalDetail['adults'] = (isset($value->post_type) && $value->post_type == '4' && $value->post_message != '') ? $rsvpPostdata['adults'] : (isset($count_kids_adult['adults']) ? $count_kids_adult['adults'] : 0);
-
-                    // $postsNormalDetail['kids'] = isset($count_kids_adult['kids']) ? $count_kids_adult['kids'] : 0;
-                    // $postsNormalDetail['adults'] = isset($count_kids_adult['adults']) ? $count_kids_adult['adults'] : 0;
+                    $postsNormalDetail['kids'] = isset($count_kids_adult['kids']) ? $count_kids_adult['kids'] : 0;
+                    $postsNormalDetail['adults'] = isset($count_kids_adult['adults']) ? $count_kids_adult['adults'] : 0;
                     $postsNormalDetail['location'] = ($value->user->city != NULL) ? $value->user->city : "";
                     $postsNormalDetail['post_type'] = $value->post_type;
                     $postsNormalDetail['created_at'] = $value->created_at;
@@ -7454,10 +7451,8 @@ class ApiControllerv2 extends Controller
             }
         } else {
             if (count($results) != 0) {
-
                 foreach ($results as $value) {
-                    $rsvpPostdata = json_decode($value->message);
-                    dd($rsvpPostdata);
+
                     $checkUserRsvp = checkUserAttendOrNot($value->event_id, $value->user->id);
                     $count_kids_adult = EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $value->user->id])
                         ->select('kids', 'adults', 'event_id', 'rsvp_status', 'user_id')
@@ -7477,6 +7472,10 @@ class ApiControllerv2 extends Controller
                     $checkUserIsReaction = EventPostReaction::where(['event_id' => $input['event_id'], 'event_post_id' => $value->id, 'user_id' => $user->id])->first();
 
                     // if ($value->post_privacy == '1') {
+                    if (isset($value->post_type) && $value->post_type == '4' && $value->post_message != '') {
+                        $rsvpPostdata = json_decode($value->message);
+                        dd($rsvpPostdata);
+                    }
                     $postsNormalDetail['id'] =  $value->id;
 
                     $postsNormalDetail['user_id'] =  $value->user->id;
