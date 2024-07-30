@@ -7374,8 +7374,7 @@ class ApiControllerv2 extends Controller
 
 
                     if (isset($value->post_type) && $value->post_type == '4' && $value->post_message != '') {
-                        $EventPostMessageData = json_decode($value->post_message);
-                        // dd($EventPostMessageData);
+                        $EventPostMessageData = json_decode($value->post_message, true);
                         $rsvpstatus = $EventPostMessageData['status'];
                         $kids = $EventPostMessageData['kids'];
                         $adults = $EventPostMessageData['adults'];
@@ -7488,10 +7487,9 @@ class ApiControllerv2 extends Controller
                     $EventPostMessageData = [];
                     if (isset($value->post_type) && $value->post_type == '4' && $value->post_message != '') {
                         $EventPostMessageData = json_decode($value->post_message, true);
-                        dd($EventPostMessageData['status']);
-                        $rsvpstatus = $EventPostMessageData->status;
-                        $kids = $EventPostMessageData->kids;
-                        $adults = $EventPostMessageData->adults;
+                        $rsvpstatus = $EventPostMessageData['status'];
+                        $kids = $EventPostMessageData['kids'];
+                        $adults = $EventPostMessageData['adults'];
                     } else {
                         $kids = isset($count_kids_adult['kids']) ? $count_kids_adult['kids'] : 0;
                         $rsvpstatus = (isset($value->post_type) && $value->post_type == '4' && $value->post_message != '') ? $value->post_message : $checkUserRsvp;
