@@ -7380,10 +7380,10 @@ class ApiControllerv2 extends Controller
                             $rsvpstatus = (string)$EventPostMessageData['status'];
                         }
                         if (isset($EventPostMessageData['kids'])) {
-                            $kids = $EventPostMessageData["kids"];
+                            $kids = (string)$EventPostMessageData["kids"];
                         }
                         if (isset($EventPostMessageData['adults'])) {
-                            $adults = $EventPostMessageData["adults"];
+                            $adults = (string)$EventPostMessageData["adults"];
                         }
                     } else {
                         $kids = isset($count_kids_adult['kids']) ? $count_kids_adult['kids'] : 0;
@@ -7501,10 +7501,10 @@ class ApiControllerv2 extends Controller
                             $rsvpstatus = (string)$EventPostMessageData['status'];
                         }
                         if (isset($EventPostMessageData['kids'])) {
-                            $kids = $EventPostMessageData["kids"];
+                            $kids = (string)$EventPostMessageData["kids"];
                         }
                         if (isset($EventPostMessageData['adults'])) {
-                            $adults = $EventPostMessageData["adults"];
+                            $adults = (string)$EventPostMessageData["adults"];
                         }
                     } else {
                         $kids = isset($count_kids_adult['kids']) ? $count_kids_adult['kids'] : 0;
