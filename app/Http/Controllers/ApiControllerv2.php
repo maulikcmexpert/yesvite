@@ -11195,7 +11195,8 @@ class ApiControllerv2 extends Controller
                 $notificationDetail['comment_reply'] = ($values->notification_type == 'reply_on_comment_post' && $postreplyCommentDetail != null) ? $postreplyCommentDetail->comment_text : "";
                 $notificationDetail['post_image'] = "";
                 $notificationDetail['media_type'] = "";
-                if (isset($values->post->user_id) && $values->post->user_id != '') {
+
+                if (isset($values->post->user_id) && isset($values->event->user_id)) {
 
                     if ($values->post->user_id == $values->event->user_id) {
                         $notificationDetail['is_post_by_host'] = 1;
