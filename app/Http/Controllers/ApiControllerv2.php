@@ -7498,7 +7498,7 @@ class ApiControllerv2 extends Controller
                         $kids = '0';
                         $adults = '0';
                         if (isset($EventPostMessageData['status'])) {
-                            $rsvpstatus = (int)$EventPostMessageData['status'];
+                            $rsvpstatus = (string)$EventPostMessageData['status'];
                         }
                         if (isset($EventPostMessageData['kids'])) {
                             $kids = (int)$EventPostMessageData["kids"];
