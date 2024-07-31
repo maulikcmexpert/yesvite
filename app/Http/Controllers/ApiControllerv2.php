@@ -11114,7 +11114,7 @@ class ApiControllerv2 extends Controller
         $notificationInfo = [];
 
         foreach ($result as $values) {
-            dd($values);
+            dd($result);
             if ($values->user_id == $user->id) {
                 $notificationDetail['event_name'] = $values->event->event_name;
                 $notificationDetail['notification_id'] = $values->id;
