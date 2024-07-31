@@ -110,6 +110,12 @@ function imageExists(url) {
     } catch (e) {}
 }
 
+
+$("#selected-user-profile").replaceWith(
+    `<h5 class="fontcolorS" id="selected-user-profile" >SN</h5>`
+);
+
+
 async function updateProfileImg(profileImageUrl, userName) {
     if (await isValidImageUrl(profileImageUrl)) {
         $("#selected-user-profile").replaceWith(
@@ -3239,8 +3245,3 @@ async function send_push_notification(
             });
     }
 }
-
-
-$("#selected-user-profile").replaceWith(
-    `<h5 class="fontcolorS" id="selected-user-profile" >SN</h5>`
-);
