@@ -11112,7 +11112,7 @@ class ApiControllerv2 extends Controller
 
 
         $notificationInfo = [];
-        dd($result);
+
         foreach ($result as $values) {
 
             if ($values->user_id == $user->id) {
@@ -11154,6 +11154,7 @@ class ApiControllerv2 extends Controller
 
                 $notificationDetail['is_event_owner'] = ($values->event->user_id == $user->id) ? 1 : 0;
 
+                // $check_is_host=
 
 
                 if ($values->notification_type == 'invite') {
