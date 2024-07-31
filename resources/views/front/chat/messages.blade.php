@@ -212,7 +212,13 @@ use Carbon\Carbon;
                                     <a href="javascript:;" class="d-flex conversationId" data-bs-toggle="modal" data-bs-target="#listBox">
                                         <div class="user-img">
                                             <!-- <img id="selected-user-profile" src="{{asset('assets/front')}}/image/user-img.svg" alt="user-img"> -->
-                                            <h5 class="fontcolorS">ST</h5>
+                                            @php
+                                            $randomIndex = rand(0, 25);
+                                            $randomLetter = chr($randomIndex + ord('a'));
+                                            $fontColor = "fontcolor" . strtoupper($randomLetter);
+
+                                            @endphp
+                                            <h5 class="{{$fontColor}}">ST</h5>
                                         </div>
                                         <div class="user-detail">
                                             <h3 id="selected-user-name">Start new chat</h3>
