@@ -11154,7 +11154,7 @@ class ApiControllerv2 extends Controller
 
                 $notificationDetail['is_event_owner'] = ($values->event->user_id == $user->id) ? 1 : 0;
 
-                $check_is_host = EventPost::where('id', $value->postid)->pluck('user_id');
+                $check_is_host = EventPost::where('id', $values->postid)->pluck('user_id');
                 dd($check_is_host);
 
 
