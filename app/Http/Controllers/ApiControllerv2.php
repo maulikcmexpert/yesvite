@@ -11153,10 +11153,7 @@ class ApiControllerv2 extends Controller
                 $notificationDetail['guest_pending_count'] = getGuestRsvpPendingCount($values->event->id);
 
                 $notificationDetail['is_event_owner'] = ($values->event->user_id == $user->id) ? 1 : 0;
-
-                $check_is_host = EventPost::where('id', $values->postid)->pluck('user_id');
-                // dd($check_is_host);
-                if ($values->event->user_id == $check_is_host->user_id) {
+                if ($values->post->user_id == $values->event->user_id) {
                     $notificationDetail['is_post_by_host'] = 1;
                 } else {
                     $notificationDetail['is_post_by_host'] = 0;
