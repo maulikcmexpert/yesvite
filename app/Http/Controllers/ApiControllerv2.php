@@ -12354,6 +12354,7 @@ class ApiControllerv2 extends Controller
     {
         $rawData = $request->getContent();
         $input = json_decode($rawData, true);
+        dd($input);
 
         $userdata = ['send_by' => $input['send_by']];
 
@@ -12374,7 +12375,6 @@ class ApiControllerv2 extends Controller
         }
         $user = User::where('email', $input['email'])->first();
         $user_id = $user->id;
-        dd($user);
 
 
         try {
