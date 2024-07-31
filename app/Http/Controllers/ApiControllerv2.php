@@ -12356,7 +12356,6 @@ class ApiControllerv2 extends Controller
         $input = json_decode($rawData, true);
 
         $userdata = ['send_by' => $input['send_by']];
-        dd($userdata);
 
         if ($input == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
@@ -12374,6 +12373,7 @@ class ApiControllerv2 extends Controller
             ]);
         }
         $user = User::where('email', $input['email'])->first();
+        dd($user);
         $user_id = $user->id;
 
 
