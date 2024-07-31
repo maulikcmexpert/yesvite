@@ -11153,11 +11153,8 @@ class ApiControllerv2 extends Controller
                 $notificationDetail['guest_pending_count'] = getGuestRsvpPendingCount($values->event->id);
 
                 $notificationDetail['is_event_owner'] = ($values->event->user_id == $user->id) ? 1 : 0;
-                if ($values->post->user_id == $values->event->user_id) {
-                    $notificationDetail['is_post_by_host'] = 1;
-                } else {
-                    $notificationDetail['is_post_by_host'] = 0;
-                }
+
+
 
 
                 if ($values->notification_type == 'invite') {
@@ -11198,7 +11195,11 @@ class ApiControllerv2 extends Controller
                 $notificationDetail['comment_reply'] = ($values->notification_type == 'reply_on_comment_post' && $postreplyCommentDetail != null) ? $postreplyCommentDetail->comment_text : "";
                 $notificationDetail['post_image'] = "";
                 $notificationDetail['media_type'] = "";
-
+                if ($values->post->user_id == $values->event->user_id) {
+                    $notificationDetail['is_post_by_host'] = 1;
+                } else {
+                    $notificationDetail['is_post_by_host'] = 0;
+                }
                 if (isset($values->post->post_type) && $values->post->post_type == '1') {
                     $notificationDetail['post_image'] = asset('public/storage/post_image/' . $values->post->post_image[0]->post_image);
                     if ($values->post->post_image[0]->type == 'image') {
