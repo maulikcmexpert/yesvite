@@ -12378,15 +12378,14 @@ class ApiControllerv2 extends Controller
 
         try {
             $checkNotificationSetting = checkNotificationSetting($user_id);
-            dd($checkNotificationSetting);
             if ($user->app_user == '1' &&  count($checkNotificationSetting) != 0 && $checkNotificationSetting['private_message']['email'] == '1') {
 
                 Mail::send('emails.app_inivite_link', ['userdata' => $userdata], function ($message) use ($input) {
                     $message->to($input['email']);
                     $message->subject('Yesvite Invite');
                 });
+                return response()->json(['status' => 1, 'message' => 'Mail sent successfully']);
             }
-            return response()->json(['status' => 1, 'message' => 'Mail sent successfully']);
         } catch (\Exception $e) {
             return response()->json(['status' => 0, 'message' => 'Mail not sent', 'error' => $e->getMessage()]);
         }
