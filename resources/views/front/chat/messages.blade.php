@@ -215,6 +215,7 @@ use Carbon\Carbon;
                                             <img id="selected-user-profile" src="{{asset('assets/front')}}/image/user-img.svg" alt="user-img">
                                             @else
                                             <h5 class="fontcolorS">ST</h5>
+                                            @endif
                                         </div>
                                         <div class="user-detail">
                                             <h3 id="selected-user-name">Start new chat</h3>
