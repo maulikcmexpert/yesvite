@@ -11112,7 +11112,7 @@ class ApiControllerv2 extends Controller
 
 
         $notificationInfo = [];
-        dd($result['comment_id']);
+
         foreach ($result as $values) {
 
             if ($values->user_id == $user->id) {
@@ -11129,9 +11129,7 @@ class ApiControllerv2 extends Controller
                 $notificationDetail['comment_id'] = ($values->comment_id != null) ? $values->comment_id : 0;
                 $comment_reply_id = EventPostComment::where('parent_comment_id', $values->comment_id)->orderBy('id', 'DESC')->select('id')->first();
                 $notificationDetail['reply_comment_id'] = 0;
-
                 $postCommentDetail =  EventPostComment::where(['id' => $values->comment_id])->first();
-
                 $notificationDetail['comment'] = ($postCommentDetail != null) ? $postCommentDetail->comment_text : "";
                 $notificationDetail['video'] = ($postCommentDetail != null && $postCommentDetail->video != null) ? asset('public/storage/comment_video' . $postCommentDetail->video) : "";
                 $checkIsSefRect = EventPostCommentReaction::where(['user_id' => $values->user_id, 'event_post_comment_id' => $values->comment_id])->first();
