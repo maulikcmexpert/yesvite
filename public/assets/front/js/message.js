@@ -3239,3 +3239,8 @@ async function send_push_notification(
             });
     }
 }
+
+
+$("#selected-user-profile").replaceWith(
+    `<h5 class="fontColorS" id="selected-user-profile" >ST</h5>`
+);
