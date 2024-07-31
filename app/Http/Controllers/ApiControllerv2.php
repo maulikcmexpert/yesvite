@@ -5855,26 +5855,26 @@ class ApiControllerv2 extends Controller
 
 
 
-        if ($input['quantity'] <= $checkQty) {
-            $checkIsExist = UserPotluckItem::where([
-                'id' => $input['user_potluck_item_id']
-            ])->first();
-            if ($checkIsExist != null) {
-                $checkIsExist->quantity = $input['quantity'];
-                $checkIsExist->save();
-            }
-            $notificationParam = [
-
-                'sender_id' => $user->id,
-                'event_id' => $checkIsExist->event_id,
-                'user_potluck_item_id' => $checkIsExist->id,
-                'user_potluck_item_count' => $input['quantity']
-            ];
-
-            DB::commit();
-        } else {
-            return response()->json(['status' => 1, 'message' => "Potluck quantity select less then " . $checkQty . " !!!"]);
+        // if ($input['quantity'] <= $checkQty) {
+        $checkIsExist = UserPotluckItem::where([
+            'id' => $input['user_potluck_item_id']
+        ])->first();
+        if ($checkIsExist != null) {
+            $checkIsExist->quantity = $input['quantity'];
+            $checkIsExist->save();
         }
+        $notificationParam = [
+
+            'sender_id' => $user->id,
+            'event_id' => $checkIsExist->event_id,
+            'user_potluck_item_id' => $checkIsExist->id,
+            'user_potluck_item_count' => $input['quantity']
+        ];
+
+        DB::commit();
+        // } else {
+        //     return response()->json(['status' => 1, 'message' => "Potluck quantity select less then " . $checkQty . " !!!"]);
+        // }
 
 
 
@@ -7400,9 +7400,9 @@ class ApiControllerv2 extends Controller
                     // $postsNormalDetail['rsvp_status'] = $checkUserRsvp;
                     // $postsNormalDetail['kids'] = isset($count_kids_adult['kids']) ? $count_kids_adult['kids'] : 0;
                     // $postsNormalDetail['adults'] = isset($count_kids_adult['adults']) ? $count_kids_adult['adults'] : 0;
-                    $postsNormalDetail['rsvp_status'] = $rsvpstatus;
-                    $postsNormalDetail['kids'] = $kids;
-                    $postsNormalDetail['adults'] = $adults;
+                    $postsNormalDetail['rsvp_status'] = (string)$rsvpstatus;
+                    $postsNormalDetail['kids'] = (int)$kids;
+                    $postsNormalDetail['adults'] = (int)$adults;
                     $postsNormalDetail['location'] = ($value->user->city != NULL) ? $value->user->city : "";
                     $postsNormalDetail['post_type'] = $value->post_type;
                     $postsNormalDetail['created_at'] = $value->created_at;
