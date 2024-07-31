@@ -12373,8 +12373,8 @@ class ApiControllerv2 extends Controller
             ]);
         }
         $user = User::where('email', $input['email'])->first();
-        dd($user);
         $user_id = $user->id;
+        dd($user_id);
 
 
         try {
