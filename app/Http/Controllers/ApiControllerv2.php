@@ -7526,7 +7526,7 @@ class ApiControllerv2 extends Controller
                     // $postsNormalDetail['rsvp_status'] = $checkUserRsvp;
                     $postsNormalDetail['rsvp_status'] = $rsvpstatus;
                     $postsNormalDetail['kids'] = $kids;
-                    // $postsNormalDetail['adults'] = $adults;
+                    $postsNormalDetail['adults'] = $adults;
                     // $postsNormalDetail['kids'] = isset($count_kids_adult['kids']) ? $count_kids_adult['kids'] : 0;
                     // $postsNormalDetail['adults'] = isset($count_kids_adult['adults']) ? $count_kids_adult['adults'] : 0;
                     $postsNormalDetail['location'] = ($value->user->city != NULL) ? $value->user->city : "";
