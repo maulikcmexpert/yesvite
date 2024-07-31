@@ -12373,8 +12373,21 @@ class ApiControllerv2 extends Controller
             ]);
         }
         $user = User::where('email', $input['email'])->first();
-        // $user_id = $user->id;
-        dd($user);
+        if (isset($user) && $user != "") {
+            $user_id = $user->id;
+        } else {
+            try {
+                dd($userdata);
+
+                Mail::send('emails.app_inivite_link', ['userdata' => $userdata], function ($message) use ($input) {
+                    $message->to($input['email']);
+                    $message->subject('Yesvite Invite');
+                });
+                return response()->json(['status' => 1, 'message' => 'Mail sent successfully']);
+            } catch (\Exception $e) {
+                return response()->json(['status' => 0, 'message' => 'Mail not sent', 'error' => $e->getMessage()]);
+            }
+        }
 
 
         try {
