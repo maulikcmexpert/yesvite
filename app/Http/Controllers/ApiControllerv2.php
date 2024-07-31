@@ -7396,13 +7396,13 @@ class ApiControllerv2 extends Controller
                     $postsNormalDetail['username'] =  $value->user->firstname . ' ' . $value->user->lastname;
                     $postsNormalDetail['profile'] =  empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile);
                     $postsNormalDetail['post_message'] = (empty($value->post_message) || $value->post_type == '4') ? "" :  $value->post_message;
-                    // $postsNormalDetail['rsvp_status'] = (isset($value->post_type) && $value->post_type == '4' && $value->post_message != '') ? $value->post_message : $checkUserRsvp;
+                    $postsNormalDetail['rsvp_status'] = (isset($value->post_type) && $value->post_type == '4' && $value->post_message != '') ? $value->post_message : $checkUserRsvp;
                     // $postsNormalDetail['rsvp_status'] = $checkUserRsvp;
-                    // $postsNormalDetail['kids'] = isset($count_kids_adult['kids']) ? $count_kids_adult['kids'] : 0;
-                    // $postsNormalDetail['adults'] = isset($count_kids_adult['adults']) ? $count_kids_adult['adults'] : 0;
-                    $postsNormalDetail['rsvp_status'] = $rsvpstatus;
-                    $postsNormalDetail['kids'] = $kids;
-                    $postsNormalDetail['adults'] = $adults;
+                    $postsNormalDetail['kids'] = isset($count_kids_adult['kids']) ? $count_kids_adult['kids'] : 0;
+                    $postsNormalDetail['adults'] = isset($count_kids_adult['adults']) ? $count_kids_adult['adults'] : 0;
+                    // $postsNormalDetail['rsvp_status'] = $rsvpstatus;
+                    // $postsNormalDetail['kids'] = $kids;
+                    // $postsNormalDetail['adults'] = $adults;
                     $postsNormalDetail['location'] = ($value->user->city != NULL) ? $value->user->city : "";
                     $postsNormalDetail['post_type'] = $value->post_type;
                     $postsNormalDetail['created_at'] = $value->created_at;
@@ -7498,7 +7498,7 @@ class ApiControllerv2 extends Controller
                         $kids = '0';
                         $adults = '0';
                         if (isset($EventPostMessageData['status'])) {
-                            $rsvpstatus = (string)$EventPostMessageData['status'];
+                            $rsvpstatus = (int)$EventPostMessageData['status'];
                         }
                         if (isset($EventPostMessageData['kids'])) {
                             $kids = (int)$EventPostMessageData["kids"];
@@ -7522,13 +7522,13 @@ class ApiControllerv2 extends Controller
                     $postsNormalDetail['is_host'] =  ($ischeckEventOwner != null) ? 1 : 0;
                     $postsNormalDetail['post_message'] = (empty($value->post_message) || $value->post_type == '4') ? "" :  $value->post_message;
                     // $postsNormalDetail['post_message'] = empty($value->post_message) ? "" :  $value->post_message;
-                    // $postsNormalDetail['rsvp_status'] = (isset($value->post_type) && $value->post_type == '4' && $value->post_message != '') ? $value->post_message : $checkUserRsvp;
+                    $postsNormalDetail['rsvp_status'] = (isset($value->post_type) && $value->post_type == '4' && $value->post_message != '') ? $value->post_message : $checkUserRsvp;
                     // $postsNormalDetail['rsvp_status'] = $checkUserRsvp;
-                    $postsNormalDetail['rsvp_status'] = $rsvpstatus;
-                    $postsNormalDetail['kids'] = $kids;
-                    $postsNormalDetail['adults'] = $adults;
-                    // $postsNormalDetail['kids'] = isset($count_kids_adult['kids']) ? $count_kids_adult['kids'] : 0;
-                    // $postsNormalDetail['adults'] = isset($count_kids_adult['adults']) ? $count_kids_adult['adults'] : 0;
+                    // $postsNormalDetail['rsvp_status'] = $rsvpstatus;
+                    // $postsNormalDetail['kids'] = $kids;
+                    // $postsNormalDetail['adults'] = $adults;
+                    $postsNormalDetail['kids'] = isset($count_kids_adult['kids']) ? $count_kids_adult['kids'] : 0;
+                    $postsNormalDetail['adults'] = isset($count_kids_adult['adults']) ? $count_kids_adult['adults'] : 0;
                     $postsNormalDetail['location'] = ($value->user->city != NULL) ? $value->user->city : "";
                     $postsNormalDetail['commenting_on_off'] = $value->commenting_on_off;
 
