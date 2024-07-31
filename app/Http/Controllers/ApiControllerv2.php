@@ -11132,7 +11132,7 @@ class ApiControllerv2 extends Controller
                 $postCommentDetail =  EventPostComment::where(['id' => $values->comment_id])->first();
                 $notificationDetail['comment'] = ($postCommentDetail != null) ? $postCommentDetail->comment_text : "";
 
-                dd(postCommentDetail);
+                dd($postCommentDetail);
 
                 $notificationDetail['video'] = ($postCommentDetail != null && $postCommentDetail->video != null) ? asset('public/storage/comment_video' . $postCommentDetail->video) : "";
                 $checkIsSefRect = EventPostCommentReaction::where(['user_id' => $values->user_id, 'event_post_comment_id' => $values->comment_id])->first();
