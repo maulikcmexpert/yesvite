@@ -11199,10 +11199,10 @@ class ApiControllerv2 extends Controller
 
                     if ($values->post->user_id == $values->event->user_id) {
                         $notificationDetail['is_post_by_host'] = 1;
-                    } else {
-                        $notificationDetail['is_post_by_host'] = 0;
                     }
                 }
+
+                $notificationDetail['is_post_by_host'] = 0;
 
                 if (isset($values->post->post_type) && $values->post->post_type == '1') {
                     $notificationDetail['post_image'] = asset('public/storage/post_image/' . $values->post->post_image[0]->post_image);
