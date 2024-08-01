@@ -280,7 +280,7 @@ class AuthController extends Controller
             }
         }
         return redirect()->back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
+            'email' => 'Email or Password invalid!',
         ])->withInput();
         // return  Redirect::to('login')->with('error', 'Email or Password invalid!');
     }
