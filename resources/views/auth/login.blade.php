@@ -51,6 +51,11 @@
                     </div>
                     <a href="#">Forgot Password</a>
                 </div>
+                @if (session('error'))
+                <div class="">
+                    {{ session('error') }}
+                </div>
+                @endif
                 <button type="submit" class="btn btn-primary loaderbtn" id="loginUser">Sign In</button>
             </form>
             <div class="social-links">

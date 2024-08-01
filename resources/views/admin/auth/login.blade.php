@@ -1,6 +1,3 @@
-@php
-dd(1);
-@endphp
 <div class="login-box">
 
   <!-- /.login-logo -->
