@@ -1,6 +1,6 @@
 @if (session('error'))
-<div class="">
-    @php dd(session('error')); @endphp
+<div class="alert alert-danger">
+    {{ session('error') }}
 </div>
 @endif
 <x-front.advertise />
