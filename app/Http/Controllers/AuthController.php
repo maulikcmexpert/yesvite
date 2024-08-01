@@ -280,7 +280,8 @@ class AuthController extends Controller
                 return  Redirect::to('login')->with('success', 'Please check and verify your email address.');
             }
         }
-        return  Redirect::to('login')->with('error', 'Email or Password invalid!');
+
+        return  Redirect::to('login')->withErrors('error', 'Email or Password invalid!');
     }
 
 
