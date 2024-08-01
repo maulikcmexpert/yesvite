@@ -8929,38 +8929,21 @@ class ApiControllerv2 extends Controller
 
 
         $checkReaction = EventPostReaction::where(['event_id' => $input['event_id'], 'event_post_id' => $input['event_post_id'], 'user_id' => $user->id])->count();
-
-
-
         if ($checkReaction == 0) {
-
             $event_post_reaction = new EventPostReaction;
-
-
-
             $event_post_reaction->event_id = $input['event_id'];
-
             $event_post_reaction->event_post_id = $input['event_post_id'];
-
             $event_post_reaction->user_id = $user->id;
-
-
             $event_post_reaction->reaction = $input['reaction'];
-
             $unicode = mb_convert_encoding($input['reaction'], 'UTF-32', 'UTF-8');
             $unicode = strtoupper(bin2hex($unicode));
-
             $event_post_reaction->unicode = $unicode;
             $event_post_reaction->save();
 
-
             $eventModule = EventPost::where('id', $input['event_post_id'])->first();
             $notificationParam = [
-
                 'sender_id' => $user->id,
-
                 'event_id' => $input['event_id'],
-
                 'post_id' => $input['event_post_id'],
                 'is_in_photo_moudle' => $eventModule->is_in_photo_moudle
             ];
