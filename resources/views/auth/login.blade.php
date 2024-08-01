@@ -1,7 +1,7 @@
-@if (session('error'))
-<div class="alert alert-danger">
-    {{ session('error') }}
-</div>
+@if ($errors->any())
+@foreach ($errors->all() as $error)
+@php dd($error); @endphp
+@endforeach
 @endif
 <x-front.advertise />
 <section class="login-wrapper fadeIn" data-wow-duration="2s" data-wow-delay="1s" data-wow-offset="0">
