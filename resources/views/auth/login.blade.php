@@ -19,6 +19,15 @@
             </a>
             <h1>Welcome Back to Yesvite!</h1>
             <p>Please Sign In</p>
+            @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
         </div>
         <div class="login-form-wrap">
             <form method="POST" id="loginForm" action="{{route('auth.checkLogin')}}" autocomplete="off">
@@ -51,15 +60,7 @@
                     </div>
                     <a href="#">Forgot Password</a>
                 </div>
-                @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-                @endif
+
                 <button type="submit" class="btn btn-primary loaderbtn" id="loginUser">Sign In</button>
             </form>
             <div class="social-links">
