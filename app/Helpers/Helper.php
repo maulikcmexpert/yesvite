@@ -433,6 +433,11 @@ function sendNotification($notificationType, $postData)
                             'post_id' => $postData['post_id'],
                             'is_in_photo_moudle' => $postData['is_in_photo_moudle'],
                             'post_type' => $postData['post_type'],
+                            'event_wall' => isset($ownerEvent->event_settings->event_wall) ? $ownerEvent->event_settings->event_wall : '',
+                            'guest_list_visible_to_guests' => isset($ownerEvent->event_settings->guest_list_visible_to_guests) ? $ownerEvent->event_settings->guest_list_visible_to_guests : '',
+                            'is_event_owner' => 1,
+                            'is_post_by_host' => 1,
+                            'is_owner_post' => 0,
                         ];
                         $checkNotificationSetting = checkNotificationSetting($ownerEvent->user_id);
 
@@ -503,6 +508,11 @@ function sendNotification($notificationType, $postData)
                             'post_id' => $postData['post_id'],
                             'is_in_photo_moudle' => $postData['is_in_photo_moudle'],
                             'post_type' => $postData['post_type'],
+                            'event_wall' => isset($ownerEvent->event_settings->event_wall) ? $ownerEvent->event_settings->event_wall : '',
+                            'guest_list_visible_to_guests' => isset($ownerEvent->event_settings->guest_list_visible_to_guests) ? $ownerEvent->event_settings->guest_list_visible_to_guests : '',
+                            'is_event_owner' => 0,
+                            'is_post_by_host' => 0,
+                            'is_owner_post' => 0,
 
                         ];
                         $checkNotificationSetting = checkNotificationSetting($value->user_id);
@@ -564,6 +574,11 @@ function sendNotification($notificationType, $postData)
                             'post_id' => $postData['post_id'],
                             'is_in_photo_moudle' => $postData['is_in_photo_moudle'],
                             'post_type' => $postData['post_type'],
+                            'event_wall' => isset($ownerEvent->event_settings->event_wall) ? $ownerEvent->event_settings->event_wall : '',
+                            'guest_list_visible_to_guests' => isset($ownerEvent->event_settings->guest_list_visible_to_guests) ? $ownerEvent->event_settings->guest_list_visible_to_guests : '',
+                            'is_event_owner' => 0,
+                            'is_post_by_host' => 0,
+                            'is_owner_post' => 0,
 
                         ];
                         $checkNotificationSetting = checkNotificationSetting($value->user_id);
@@ -627,6 +642,11 @@ function sendNotification($notificationType, $postData)
                             'post_id' => $postData['post_id'],
                             'is_in_photo_moudle' => $postData['is_in_photo_moudle'],
                             'post_type' => $postData['post_type'],
+                            'event_wall' => isset($ownerEvent->event_settings->event_wall) ? $ownerEvent->event_settings->event_wall : '',
+                            'guest_list_visible_to_guests' => isset($ownerEvent->event_settings->guest_list_visible_to_guests) ? $ownerEvent->event_settings->guest_list_visible_to_guests : '',
+                            'is_event_owner' => 0,
+                            'is_post_by_host' => 0,
+                            'is_owner_post' => 0,
 
                         ];
                         $checkNotificationSetting = checkNotificationSetting($value->user_id);
@@ -690,6 +710,11 @@ function sendNotification($notificationType, $postData)
                             'post_id' => $postData['post_id'],
                             'is_in_photo_moudle' => $postData['is_in_photo_moudle'],
                             'post_type' => $postData['post_type'],
+                            'event_wall' => isset($ownerEvent->event_settings->event_wall) ? $ownerEvent->event_settings->event_wall : '',
+                            'guest_list_visible_to_guests' => isset($ownerEvent->event_settings->guest_list_visible_to_guests) ? $ownerEvent->event_settings->guest_list_visible_to_guests : '',
+                            'is_event_owner' => 0,
+                            'is_post_by_host' => 0,
+                            'is_owner_post' => 0,
 
                         ];
                         $checkNotificationSetting = checkNotificationSetting($value->user_id);
