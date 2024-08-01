@@ -19,7 +19,7 @@
 
 <body style="font-family: 'SF Pro Display', sans-serif !important;margin: 0px;background: #F8F8F8;display: flex;justify-content: center;">
     <!-- partial:index.partial.html -->
-    <div style="width: 100%;max-width: 650px;height:100%;padding: 0px 10px;" class="ui-sortable">
+    <div style="width: 100%;max-width: 650px;height:100%; padding: 0px 10px; margin: 50px auto 0px;" class="ui-sortable">
         <table style="border-radius: 5px;box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);width: 100%;height:100%;background: #fff;box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);padding: 30px;border-radius: 20px;" class="full selected-table" border="0" cellpadding="0" cellspacing="0">
             <tbody>
                 <tr>
