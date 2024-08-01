@@ -4783,14 +4783,14 @@ class ApiControllerv2 extends Controller
                                             if (isset($value['self_bring_item']) && $value['self_bring_item'] == '1') {
 
                                                 // $userQuantity = (isset($value['self_quantity'])) ? $value['self_quantity'] : 0;
-                                                if ($value['self_quantity'] == '0') {
+                                                if (isset($value['self_quantity']) && $value['self_quantity'] == '0') {
                                                     UserPotluckItem::where([
                                                         'event_id' => $eventData['event_id'],
                                                         'user_id' => $user->id,
                                                         'event_potluck_category_id' => $eventPodluckid,
                                                         'event_potluck_item_id' => $getEventPotluckItem->id,
                                                     ])->delete();
-                                                } else {
+                                                } elseif (isset($value['self_quantity'])) {
                                                     UserPotluckItem::where([
                                                         'event_id' => $eventData['event_id'],
                                                         'user_id' => $user->id,
