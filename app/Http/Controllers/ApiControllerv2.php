@@ -11116,7 +11116,8 @@ class ApiControllerv2 extends Controller
 
 
                 $postCommentDetail =  EventPostComment::where(['id' => $values->comment_id])->first();
-                if ($postCommentDetail->main_parent_comment_id != null) {
+
+                if (isset($postCommentDetail->main_parent_comment_id) && $postCommentDetail->main_parent_comment_id != null) {
                     $commentText = EventPostComment::where('id', $postCommentDetail->main_parent_comment_id)->first();
                     $notificationDetail['comment'] = ($commentText != null) ? $commentText->comment_text : "";
                 } else {
