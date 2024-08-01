@@ -395,16 +395,16 @@ function sendNotification($notificationType, $postData)
         // post notify to  owner//
         $ownerEvent = Event::with('event_settings')->where('id', $postData['event_id'])->first();
         $postControl = PostControl::with('event_posts')->where(['event_id' => $ownerEvent->id, 'user_id' => $ownerEvent->user_id, 'post_control' => 'mute'])->get();
-        $postOwneruserId = [];
+        $postControlUserId = [];
 
         if (!$postControl->isEmpty()) {
             foreach ($postControl as $val) {
                 if (isset($val->event_posts->user_id) && $val->event_posts->user_id != null) {
-                    $postOwneruserId[] = $val->event_posts->user_id;
+                    $postControlUserId[] = $val->event_posts->user_id;
                 }
             }
         }
-        if (!in_array($postData['sender_id'], $postOwneruserId)) {
+        if (!in_array($postData['sender_id'], $postControlUserId)) {
 
             if ($postData['sender_id'] != $ownerEvent->user_id) {
                 $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " upload new post";
@@ -436,9 +436,11 @@ function sendNotification($notificationType, $postData)
                             'post_type' => $postData['post_type'],
                             'event_wall' => isset($ownerEvent->event_settings->event_wall) ? $ownerEvent->event_settings->event_wall : '',
                             'guest_list_visible_to_guests' => isset($ownerEvent->event_settings->guest_list_visible_to_guests) ? $ownerEvent->event_settings->guest_list_visible_to_guests : '',
-                            'is_event_owner' => 0,
-                            'is_post_by_host' => 0,
-                            'is_owner_post' => 0,
+                            'is_event_owner' => 1,
+                            'is_post_by_host' => 1,
+                            'is_owner_post' => 1,
+                            'rsvp_staus' => '',
+
                         ];
                         $checkNotificationSetting = checkNotificationSetting($ownerEvent->user_id);
 
@@ -462,6 +464,7 @@ function sendNotification($notificationType, $postData)
         // post notify to  owner//
         $is_post_by_host = ($postData['sender_id'] == $ownerEvent->user_id) ? 1 : 0;
         foreach ($invitedusers as $key => $value) {
+            $rsvp_status =  (isset($value->rsvp_status) && $value->rsvp_status != null) ? $value->rsvp_status : '';
             $is_event_owner =  ($value->user_id == $ownerEvent->user_id) ? 1 : 0;
             if ($postData['post_privacy'] == '1') {
                 $postControl = PostControl::with('event_posts')->where(['event_id' => $postData['event_id'], 'user_id' => $value->user_id, 'post_control' => 'mute'])->get();
@@ -514,6 +517,7 @@ function sendNotification($notificationType, $postData)
                             'is_event_owner' => $is_event_owner,
                             'is_post_by_host' => $is_post_by_host,
                             'is_owner_post' => 0,
+                            'rsvp_status' => $rsvp_status,
 
                         ];
                         $checkNotificationSetting = checkNotificationSetting($value->user_id);
@@ -580,6 +584,7 @@ function sendNotification($notificationType, $postData)
                             'is_event_owner' => $is_event_owner,
                             'is_post_by_host' => $is_post_by_host,
                             'is_owner_post' => 0,
+                            'rsvp_status' => $rsvp_status,
 
                         ];
                         $checkNotificationSetting = checkNotificationSetting($value->user_id);
@@ -648,6 +653,7 @@ function sendNotification($notificationType, $postData)
                             'is_event_owner' => $is_event_owner,
                             'is_post_by_host' => $is_post_by_host,
                             'is_owner_post' => 0,
+                            'rsvp_status' => $rsvp_status,
 
                         ];
                         $checkNotificationSetting = checkNotificationSetting($value->user_id);
@@ -716,6 +722,7 @@ function sendNotification($notificationType, $postData)
                             'is_event_owner' => $is_event_owner,
                             'is_post_by_host' => $is_post_by_host,
                             'is_owner_post' => 0,
+                            'rsvp_status' => $rsvp_status,
 
                         ];
                         $checkNotificationSetting = checkNotificationSetting($value->user_id);
