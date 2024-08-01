@@ -433,7 +433,6 @@ function sendNotification($notificationType, $postData)
                             'post_id' => $postData['post_id'],
                             'is_in_photo_moudle' => $postData['is_in_photo_moudle'],
                             'post_type' => $postData['post_type'],
-
                         ];
                         $checkNotificationSetting = checkNotificationSetting($ownerEvent->user_id);
 
@@ -502,6 +501,8 @@ function sendNotification($notificationType, $postData)
                             'type' => $notificationType,
                             'notification_image' => $notification_image,
                             'post_id' => $postData['post_id'],
+                            'is_in_photo_moudle' => $postData['is_in_photo_moudle'],
+                            'post_type' => $postData['post_type'],
 
                         ];
                         $checkNotificationSetting = checkNotificationSetting($value->user_id);
@@ -561,6 +562,8 @@ function sendNotification($notificationType, $postData)
                             'type' => $notificationType,
                             'notification_image' => $notification_image,
                             'post_id' => $postData['post_id'],
+                            'is_in_photo_moudle' => $postData['is_in_photo_moudle'],
+                            'post_type' => $postData['post_type'],
 
                         ];
                         $checkNotificationSetting = checkNotificationSetting($value->user_id);
@@ -622,6 +625,8 @@ function sendNotification($notificationType, $postData)
                             'type' => $notificationType,
                             'notification_image' => $notification_image,
                             'post_id' => $postData['post_id'],
+                            'is_in_photo_moudle' => $postData['is_in_photo_moudle'],
+                            'post_type' => $postData['post_type'],
 
                         ];
                         $checkNotificationSetting = checkNotificationSetting($value->user_id);
@@ -683,6 +688,8 @@ function sendNotification($notificationType, $postData)
                             'type' => $notificationType,
                             'notification_image' => $notification_image,
                             'post_id' => $postData['post_id'],
+                            'is_in_photo_moudle' => $postData['is_in_photo_moudle'],
+                            'post_type' => $postData['post_type'],
 
                         ];
                         $checkNotificationSetting = checkNotificationSetting($value->user_id);
