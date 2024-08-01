@@ -1,8 +1,13 @@
 @if ($errors->any())
-@foreach ($errors->all() as $error)
-@php dd($error); @endphp
-@endforeach
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
 @endif
+
 <x-front.advertise />
 <section class="login-wrapper fadeIn" data-wow-duration="2s" data-wow-delay="1s" data-wow-offset="0">
     <div class="container">

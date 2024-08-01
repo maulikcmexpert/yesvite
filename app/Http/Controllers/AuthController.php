@@ -229,7 +229,6 @@ class AuthController extends Controller
 
                 $sessionArray = [
                     'id' => encrypt($user->id),
-
                     'first_name' => $user->firstname,
                     'last_name' => $user->lastname,
                     'username' => $user->firstname . ' ' . $user->lastname,
@@ -280,8 +279,10 @@ class AuthController extends Controller
                 return  Redirect::to('login')->with('success', 'Please check and verify your email address.');
             }
         }
-
-        return  Redirect::to('login')->with('error', 'Email or Password invalid!');
+        return redirect()->back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ])->withInput();
+        // return  Redirect::to('login')->with('error', 'Email or Password invalid!');
     }
 
 
