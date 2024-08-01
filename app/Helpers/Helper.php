@@ -748,7 +748,7 @@ function sendNotification($notificationType, $postData)
     if ($notificationType == 'like_post') {
 
         $getPostOwnerId = EventPost::where('id', $postData['post_id'])->first();
-        $eventSetting = EventSetting::where('event_id', $postData['event_id'])->first();
+        // $eventSetting = EventSetting::where('event_id', $postData['event_id'])->first();
         $notification_message = $senderData->firstname . ' '  . $senderData->lastname . " liked your post";
         if ($getPostOwnerId->post_type == '2') {
             $notification_message = $senderData->firstname . ' '  . $senderData->lastname . " liked your poll";
@@ -768,10 +768,10 @@ function sendNotification($notificationType, $postData)
 
             if ($notification->save()) {
                 $deviceData = Device::where('user_id', $getPostOwnerId->user_id)->first();
-                $event = Event::where('id', $postData['event_id'])->first();
-                $invitedusers = EventInvitedUser::where(['event_id' => $postData['event_id'], 'user_id' => $getPostOwnerId->user_id])->first();
-                $is_post_by_host = (isset($event) && $event->user_id == $getPostOwnerId->user_id) ? 1 : 0;
-                $rsvp_status = isset($invitedusers) ? $invitedusers->rsvp_status : '';
+                // $event = Event::where('id', $postData['event_id'])->first();
+                // $invitedusers = EventInvitedUser::where(['event_id' => $postData['event_id'], 'user_id' => $getPostOwnerId->user_id])->first();
+                // $is_post_by_host = (isset($event) && $event->user_id == $getPostOwnerId->user_id) ? 1 : 0;
+                // $rsvp_status = isset($invitedusers) ? $invitedusers->rsvp_status : '';
                 if (!empty($deviceData)) {
                     $notificationImage = EventPostImage::where('event_post_id', $postData['post_id'])->first();
                     $notification_image = "";
@@ -788,12 +788,12 @@ function sendNotification($notificationType, $postData)
                         'post_id' => $postData['post_id'],
                         'post_type' => $getPostOwnerId->post_type,
                         'is_in_photo_moudle' => $postData['is_in_photo_moudle'],
-                        'event_wall' => isset($eventSetting->event_wall) ? $eventSetting->event_wall : '',
-                        'guest_list_visible_to_guests' => isset($eventSetting->guest_list_visible_to_guests) ? $eventSetting->guest_list_visible_to_guests : '',
-                        'is_post_by_host' => $is_post_by_host,
-                        'is_event_owner' => $is_post_by_host,
-                        'is_owner_post' => 1,
-                        'rsvp_status' => $rsvp_status,
+                        // 'event_wall' => isset($eventSetting->event_wall) ? $eventSetting->event_wall : '',
+                        // 'guest_list_visible_to_guests' => isset($eventSetting->guest_list_visible_to_guests) ? $eventSetting->guest_list_visible_to_guests : '',
+                        // 'is_post_by_host' => $is_post_by_host,
+                        // 'is_event_owner' => $is_post_by_host,
+                        // 'is_owner_post' => 1,
+                        // 'rsvp_status' => $rsvp_status,
                     ];
 
                     $notification_on_off = isOwnerOrInvited($getPostOwnerId->user_id, $postData['event_id']);
