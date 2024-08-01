@@ -11187,7 +11187,8 @@ class ApiControllerv2 extends Controller
                 $notificationDetail['total_likes'] = (!empty($values->post->event_post_reaction_count)) ? $values->post->event_post_reaction_count : 0;
                 $notificationDetail['total_comments'] = (!empty($values->post->event_post_comment_count)) ? $values->post->event_post_comment_count : 0;
                 $postreplyCommentDetail =  EventPostComment::where(['user_id' => $values->sender_id, 'parent_comment_id' => $values->comment_id])->first();
-                $notificationDetail['comment_reply'] = ($values->notification_type == 'reply_on_comment_post' && $postreplyCommentDetail != null) ? $postreplyCommentDetail->comment_text : "";
+                // $notificationDetail['comment_reply'] = ($values->notification_type == 'reply_on_comment_post' && $postreplyCommentDetail != null) ? $postreplyCommentDetail->comment_text : "";
+                $notificationDetail['comment_reply'] = ($postCommentDetail != null) ? $postCommentDetail->comment_text : "";
                 $notificationDetail['post_image'] = "";
                 $notificationDetail['media_type'] = "";
                 $notificationDetail['is_post_by_host'] = 0;
