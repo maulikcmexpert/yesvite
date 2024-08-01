@@ -460,9 +460,9 @@ function sendNotification($notificationType, $postData)
         }
 
         // post notify to  owner//
-        $is_event_owner = ($postData['sender_id'] == $ownerEvent->user_id) ? 1 : 0;
+        $is_post_by_host = ($postData['sender_id'] == $ownerEvent->user_id) ? 1 : 0;
         foreach ($invitedusers as $key => $value) {
-
+            $is_event_owner =  ($value->user_id == $ownerEvent->user_id) ? 1 : 0;
             if ($postData['post_privacy'] == '1') {
                 $postControl = PostControl::with('event_posts')->where(['event_id' => $postData['event_id'], 'user_id' => $value->user_id, 'post_control' => 'mute'])->get();
                 $postOwneruserId = [];
@@ -512,7 +512,7 @@ function sendNotification($notificationType, $postData)
                             'event_wall' => isset($ownerEvent->event_settings->event_wall) ? $ownerEvent->event_settings->event_wall : '',
                             'guest_list_visible_to_guests' => isset($ownerEvent->event_settings->guest_list_visible_to_guests) ? $ownerEvent->event_settings->guest_list_visible_to_guests : '',
                             'is_event_owner' => $is_event_owner,
-                            'is_post_by_host' => $is_event_owner,
+                            'is_post_by_host' => $is_post_by_host,
                             'is_owner_post' => 0,
 
                         ];
@@ -578,7 +578,7 @@ function sendNotification($notificationType, $postData)
                             'event_wall' => isset($ownerEvent->event_settings->event_wall) ? $ownerEvent->event_settings->event_wall : '',
                             'guest_list_visible_to_guests' => isset($ownerEvent->event_settings->guest_list_visible_to_guests) ? $ownerEvent->event_settings->guest_list_visible_to_guests : '',
                             'is_event_owner' => $is_event_owner,
-                            'is_post_by_host' => $is_event_owner,
+                            'is_post_by_host' => $is_post_by_host,
                             'is_owner_post' => 0,
 
                         ];
@@ -646,7 +646,7 @@ function sendNotification($notificationType, $postData)
                             'event_wall' => isset($ownerEvent->event_settings->event_wall) ? $ownerEvent->event_settings->event_wall : '',
                             'guest_list_visible_to_guests' => isset($ownerEvent->event_settings->guest_list_visible_to_guests) ? $ownerEvent->event_settings->guest_list_visible_to_guests : '',
                             'is_event_owner' => $is_event_owner,
-                            'is_post_by_host' => $is_event_owner,
+                            'is_post_by_host' => $is_post_by_host,
                             'is_owner_post' => 0,
 
                         ];
@@ -714,7 +714,7 @@ function sendNotification($notificationType, $postData)
                             'event_wall' => isset($ownerEvent->event_settings->event_wall) ? $ownerEvent->event_settings->event_wall : '',
                             'guest_list_visible_to_guests' => isset($ownerEvent->event_settings->guest_list_visible_to_guests) ? $ownerEvent->event_settings->guest_list_visible_to_guests : '',
                             'is_event_owner' => $is_event_owner,
-                            'is_post_by_host' => $is_event_owner,
+                            'is_post_by_host' => $is_post_by_host,
                             'is_owner_post' => 0,
 
                         ];
