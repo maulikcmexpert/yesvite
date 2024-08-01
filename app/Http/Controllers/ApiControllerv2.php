@@ -11120,6 +11120,7 @@ class ApiControllerv2 extends Controller
                 if (isset($postCommentDetail->main_parent_comment_id) && $postCommentDetail->main_parent_comment_id != null) {
                     $commentText = EventPostComment::where('id', $postCommentDetail->main_parent_comment_id)->first();
                     $notificationDetail['comment'] = ($commentText != null) ? $commentText->comment_text : "";
+                    $notificationDetail['reply_comment_id'] = $values->comment_id;
                 } else {
                     $notificationDetail['comment'] = ($postCommentDetail != null) ? $postCommentDetail->comment_text : "";
                 }
@@ -11178,11 +11179,11 @@ class ApiControllerv2 extends Controller
                         $notificationDetail['media_type'] = $values->post->post_image[0]->type;
                     }
                 }
-                if ($values->notification_type == 'reply_on_comment_post') {
+                // if ($values->notification_type == 'reply_on_comment_post') {
 
-                    $comment_reply_id = EventPostComment::where('parent_comment_id', $values->comment_id)->orderBy('id', 'DESC')->select('id')->first();
-                    $notificationDetail['reply_comment_id'] = (isset($comment_reply_id->id) && $comment_reply_id->id != null) ? $comment_reply_id->id : 0;
-                }
+                //     $comment_reply_id = EventPostComment::where('parent_comment_id', $values->comment_id)->orderBy('id', 'DESC')->select('id')->first();
+                //     $notificationDetail['reply_comment_id'] = (isset($comment_reply_id->id) && $comment_reply_id->id != null) ? $comment_reply_id->id : 0;
+                // }
 
                 $notificationDetail['total_likes'] = (!empty($values->post->event_post_reaction_count)) ? $values->post->event_post_reaction_count : 0;
                 $notificationDetail['total_comments'] = (!empty($values->post->event_post_comment_count)) ? $values->post->event_post_comment_count : 0;
