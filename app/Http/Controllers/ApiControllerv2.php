@@ -11056,9 +11056,10 @@ class ApiControllerv2 extends Controller
         $notificationData = Notification::query();
 
         $notificationData->with(['user', 'event', 'event.event_settings', 'sender_user', 'post' => function ($query) {
-            $query->with(['post_image', 'event_post_poll'])->withcount(['event_post_reaction', 'event_post_comment' => function ($query) {
-                $query->where('parent_comment_id', NULL);
-            }]);
+            $query->with(['post_image', 'event_post_poll'])
+                ->withcount(['event_post_reaction', 'event_post_comment' => function ($query) {
+                    $query->where('parent_comment_id', NULL);
+                }]);
         }])->orderBy('id', 'DESC')->where(['user_id' => $user->id]);
         // ->where('notification_type', '!=', 'upload_post')->where('notification_type', '!=', 'photos')->where('notification_type', '!=', 'invite')
         if (isset($input['filters']) && !empty($input['filters']) && !in_array('all', $input['filters'])) {
@@ -11095,7 +11096,7 @@ class ApiControllerv2 extends Controller
 
 
         $notificationInfo = [];
-        // dd($result);
+        dd($result);
         foreach ($result as $values) {
 
             if ($values->user_id == $user->id) {
