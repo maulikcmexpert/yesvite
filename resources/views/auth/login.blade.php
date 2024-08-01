@@ -1,6 +1,3 @@
-@php
-dd(1);
-@endphp
 <x-front.advertise />
 <section class="login-wrapper fadeIn" data-wow-duration="2s" data-wow-delay="1s" data-wow-offset="0">
     <div class="container">
@@ -56,7 +53,7 @@ dd(1);
                 </div>
                 @if (session('error'))
                 <div class="">
-                    {{ session('error') }}
+                    @php dd(session('error')); @endphp
                 </div>
                 @endif
                 <button type="submit" class="btn btn-primary loaderbtn" id="loginUser">Sign In</button>
