@@ -11121,7 +11121,7 @@ class ApiControllerv2 extends Controller
                     $commentText = EventPostComment::where('id', $postCommentDetail->main_parent_comment_id)->first();
                     $notificationDetail['comment'] = ($commentText != null) ? $commentText->comment_text : "";
                     $notificationDetail['reply_comment_id'] = $values->comment_id;
-                    $notificationDetail['comment_id'] = $postCommentDetail->main_parent_comment_id;
+                    $notificationDetail['comment_id'] = isset($postCommentDetail->main_parent_comment_id) ? $postCommentDetail->main_parent_comment_id : 0;
                     $notificationDetail['comment_reply'] = ($postCommentDetail != null) ? $postCommentDetail->comment_text : "";
                 } else {
                     $notificationDetail['comment'] = ($postCommentDetail != null) ? $postCommentDetail->comment_text : "";
