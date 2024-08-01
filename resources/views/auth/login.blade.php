@@ -1,3 +1,8 @@
+@if (session('error'))
+<div class="">
+    @php dd(session('error')); @endphp
+</div>
+@endif
 <x-front.advertise />
 <section class="login-wrapper fadeIn" data-wow-duration="2s" data-wow-delay="1s" data-wow-offset="0">
     <div class="container">
@@ -51,11 +56,7 @@
                     </div>
                     <a href="#">Forgot Password</a>
                 </div>
-                @if (session('error'))
-                <div class="">
-                    @php dd(session('error')); @endphp
-                </div>
-                @endif
+
                 <button type="submit" class="btn btn-primary loaderbtn" id="loginUser">Sign In</button>
             </form>
             <div class="social-links">
