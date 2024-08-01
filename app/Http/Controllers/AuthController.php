@@ -255,8 +255,10 @@ class AuthController extends Controller
 
                     return redirect()->route('profile')->with('success', 'Logged in successfully!');
                 } else {
-
-                    return  Redirect::to('login')->with('error', 'Invalid credentials!');
+                    return redirect()->back()->withErrors([
+                        'email' => 'Invalid credentials!',
+                    ])->withInput();
+                    // return  Redirect::to('login')->with('error', 'Invalid credentials!');
                 }
             } else {
                 $randomString = Str::random(30);
