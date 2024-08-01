@@ -1,3 +1,6 @@
+@php
+dd(1);
+@endphp
 <x-front.advertise />
 <section class="login-wrapper fadeIn" data-wow-duration="2s" data-wow-delay="1s" data-wow-offset="0">
     <div class="container">
