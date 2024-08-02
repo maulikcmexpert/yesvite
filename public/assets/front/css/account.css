@@ -1,4 +1,4 @@
-.account-data{
+.account-data {
     background-color: #fff;
     border: 1px solid #F1F5F9;
     border-radius: 16px;
@@ -10,25 +10,25 @@
     box-shadow: 0px 10px 20px -2px #0A090B1A;
 }
 
-.account-data .user-img{
+.account-data .user-img {
     width: 56px;
     height: 56px;
 }
 
-.account-data .user-name{
+.account-data .user-name {
     padding: 0;
-    margin:0;
+    margin: 0;
     margin-left: 16px;
     text-align: left;
 }
 
-.account-data .user-name a{
+.account-data .user-name a {
     color: var(--inputColor);
     font-size: 12px;
     font-weight: 500;
 }
 
-.delete-icon{
+.delete-icon {
     width: 100%;
     max-width: 56px;
     height: 56px;
@@ -44,7 +44,7 @@
     justify-content: center;
 }
 
-.delete-model-wrap.modal-dialog{
+.delete-model-wrap.modal-dialog {
     max-width: 400px;
     width: 100%;
     height: 100%;
@@ -53,15 +53,15 @@
     justify-content: center;
 }
 
-.contents h4{
-   font-size: 18px;
-   color: var(--secondryColor);
-   font-weight: 700;
-   text-align: center;
-   margin-bottom: 10px;
+.contents h4 {
+    font-size: 18px;
+    color: var(--secondryColor);
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 10px;
 }
 
-.contents p{
+.contents p {
     font-size: 12px;
     line-height: 20px;
     text-align: center;
@@ -69,21 +69,21 @@
     color: var(--secondryColor) !important;
 }
 
-.contents p:last-child{
+.contents p:last-child {
     margin-bottom: 0 !important
 }
 
-.contents input{
+.contents input {
     width: 100%;
     margin: 10px 0 20px;
     outline: 0;
 }
 
-.contents p strong{
+.contents p strong {
     color: #000;
 }
 
-.cancel-btn{
+.cancel-btn {
     border: 1px solid var(--borderColor);
     color: var(--secondryColor);
     border-radius: 10px;
@@ -100,7 +100,7 @@
     width: 50%;
 }
 
-.confirm-btn{
+.confirm-btn {
     border: 1px solid var(--primaryColor);
     color: #fff;
     border-radius: 10px;
@@ -117,7 +117,7 @@
     width: 50%;
 }
 
-.pro-account{
+.pro-account {
     background: linear-gradient(266.99deg, #AE3BE4 -4.33%, #F73C71 124.92%);
     padding: 16px 30px;
     margin: 0 10px;
@@ -125,13 +125,13 @@
     border-bottom-right-radius: 16px;
 }
 
-.pro-account h4{
+.pro-account h4 {
     font-size: 16px;
     color: #fff;
     font-weight: 600;
 }
 
-.pro-account h5{
+.pro-account h5 {
     font-size: 14px;
     color: #fff;
     margin-bottom: 0;
@@ -139,28 +139,28 @@
     font-weight: 500;
 }
 
-.pro-account p{
+.pro-account p {
     font-size: 10px;
 }
 
-.pro-account .exp-wrp{
+.pro-account .exp-wrp {
     max-width: 254px;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.pro-account .exp-wrp span{
-  font-size: 10px;
-  color: rgba(255, 255, 255, 0.8);
-}
-
-.pro-account .exp-wrp a{
+.pro-account .exp-wrp span {
     font-size: 10px;
     color: rgba(255, 255, 255, 0.8);
 }
 
-.account-setting{
+.pro-account .exp-wrp a {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.account-setting {
     border: 1px solid var(--borderColor);
     padding: 20px;
     border-radius: 20px;
@@ -170,12 +170,12 @@
     -o-border-radius: 20px;
 }
 
-.general-wrap{
+.general-wrap {
     padding: 24px 0;
     border-bottom: 1px solid var(--borderColor);
 }
 
-.general-wrap h5{
+.general-wrap h5 {
     font-size: 16px;
     color: var(--inputColor);
     font-weight: 700;
@@ -183,47 +183,47 @@
     text-transform: uppercase;
 }
 
-.general-wrap .border-bottom{
+.general-wrap .border-bottom {
     padding: 16px 0;
     border-bottom: 1px solid var(--borderColor) !important;
 }
 
-.general-wrap .border-bottom:last-child{
+.general-wrap .border-bottom:last-child {
     border-bottom: none !important;
     padding-bottom: 0;
 }
 
-.general-wrap h6{
-    font-size: 14px;
+.general-wrap h6 {
+    font-size: 16px;
     color: var(--secondryColor);
     font-weight: 500;
     margin: 0 !important;
 }
 
-.account-setting .general-wrap:last-child{
+.account-setting .general-wrap:last-child {
     border: none;
     padding-bottom: 0;
 }
 
 
 /* =========== responsive =========== */
-@media only screen and (max-width:768px){
-    .account-setting{
+@media only screen and (max-width:768px) {
+    .account-setting {
         padding: 16px 10px;
         border: none;
     }
 }
 
-@media only screen and (max-width:575px){
-    .general-wrap{
+@media only screen and (max-width:575px) {
+    .general-wrap {
         padding: 20px 0;
     }
 
-    .delete-model-wrap.modal-dialog{
+    .delete-model-wrap.modal-dialog {
         max-width: 100%;
     }
 
-    .profile-privacy-wrp .contact-title h3{
+    .profile-privacy-wrp .contact-title h3 {
         margin-bottom: 10px;
     }
 
