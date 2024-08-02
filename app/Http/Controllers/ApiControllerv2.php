@@ -12381,6 +12381,8 @@ class ApiControllerv2 extends Controller
                 'message' => $validator->errors()->first()
             ]);
         }
+
+        dd(1);
         $user = User::where('email', $input['email'])->first();
         if (isset($user->id)) {
             $user_id = $user->id;
