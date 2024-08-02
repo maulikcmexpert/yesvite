@@ -153,6 +153,7 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('/logout', function () {
 
         $user = Auth::guard('web')->user();
+        add_user_firebase($user->id, 'offline');
         Auth::logout();
         // Invalidate the session and regenerate the CSRF token to prevent session fixation attacks
 
