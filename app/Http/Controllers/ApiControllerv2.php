@@ -12382,9 +12382,9 @@ class ApiControllerv2 extends Controller
             ]);
         }
 
-        dd(1);
         $user = User::where('email', $input['email'])->first();
         if (isset($user->id)) {
+            dd(1);
             $user_id = $user->id;
             try {
                 $checkNotificationSetting = checkNotificationSetting($user_id);
