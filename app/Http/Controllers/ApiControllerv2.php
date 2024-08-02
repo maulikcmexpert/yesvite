@@ -12403,16 +12403,6 @@ class ApiControllerv2 extends Controller
             } catch (\Exception $e) {
                 return response()->json(['status' => 0, 'message' => 'Mail not sent', 'error' => $e->getMessage()]);
             }
-        } else {
-            try {
-                Mail::send('emails.app_inivite_link', ['userdata' => $userdata], function ($message) use ($input) {
-                    $message->to($input['email']);
-                    $message->subject('Yesvite Invite');
-                });
-                return response()->json(['status' => 1, 'message' => 'Mail sent successfully']);
-            } catch (\Exception $e) {
-                return response()->json(['status' => 0, 'message' => 'Mail not sent', 'error' => $e->getMessage()]);
-            }
         }
     }
 }
