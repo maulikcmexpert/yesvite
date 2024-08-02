@@ -1,38 +1,39 @@
-
-label.error{
+label.error {
     color: #ff0033;
 }
-*{
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body{
+body {
     font-family: 'SF Pro Display', sans-serif !important;
 }
 
-ul,li{
+ul,
+li {
     list-style-type: none;
 }
 
-a{
+a {
     text-decoration: none !important;
 }
 
-img{
+img {
     width: 100%;
     height: 100%;
 }
 
-h1{
+h1 {
     font-size: 68px;
     line-height: 40px;
     color: var(--secondryColor);
     font-weight: 700;
 }
 
-h2{
+h2 {
     font-size: 48px !important;
     color: var(--headingColor) !important;
     line-height: 56px !important;
@@ -40,13 +41,13 @@ h2{
     margin-bottom: 16px !important;
 }
 
-p{
+p {
     font-size: 16px;
     color: var(--lightColor);
     margin-bottom: 0 !important;
 }
 
-label{
+label {
     font-size: 12px;
     font-weight: 500 !important;
     color: var(--lightColor);
@@ -60,8 +61,7 @@ label{
 
 
 input,
-select
-{
+select {
     height: 48px !important;
     border: 1px solid var(--borderColor) !important;
     border-radius: 16px !important;
@@ -75,7 +75,7 @@ select
 }
 
 
-input::placeholder{
+input::placeholder {
     font-size: 14px !important;
     font-weight: 400 !important;
     color: var(--inputColor) !important;
@@ -84,17 +84,16 @@ input::placeholder{
 
 input:focus,
 select:focus,
-textarea:focus
-{
+textarea:focus {
     border: 1px solid var(--primaryColor) !important;
     box-shadow: 0 0 0 0.30rem rgba(247, 60, 113, .2) !important;
 }
 
-select.form-select{
+select.form-select {
     background-image: url('../image/down-arrow.svg');
 }
 
-.cmn-btn{
+.cmn-btn {
     padding: 12px 24px;
     border-radius: 16px;
     -webkit-border-radius: 16px;
@@ -102,8 +101,8 @@ select.form-select{
     -ms-border-radius: 16px;
     -o-border-radius: 16px;
     background-color: var(--primaryColor);
-    border:1px solid var(--primaryColor);
-    display:inline-block;
+    border: 1px solid var(--primaryColor);
+    display: inline-block;
     transition: 0.5s;
     -webkit-transition: 0.5s;
     -moz-transition: 0.5s;
@@ -116,7 +115,7 @@ select.form-select{
     text-align: center;
 }
 
-.cmn-btn:hover{
+.cmn-btn:hover {
     transform: translateY(-5px);
     -webkit-transform: translateY(-5px);
     -moz-transform: translateY(-5px);
@@ -127,13 +126,13 @@ select.form-select{
     color: var(--primaryColor) !important;
 }
 
-.cmn-btn.bg-primary{
+.cmn-btn.bg-primary {
     background-color: var(--primaryColor) !important;
     color: #fff;
     margin-left: 15px;
 }
 
-.nav-tabs{
+.nav-tabs {
     width: 100%;
     height: 52px;
     max-width: 100%;
@@ -149,11 +148,11 @@ select.form-select{
     border: none !important;
 }
 
-.nav-tabs .nav-item{
+.nav-tabs .nav-item {
     width: 50%;
 }
 
-.nav-tabs .nav-link{
+.nav-tabs .nav-link {
     width: 100%;
     height: 100%;
     font-size: 14px;
@@ -164,7 +163,7 @@ select.form-select{
     border: none !important;
 }
 
-.nav-tabs .nav-link.active{
+.nav-tabs .nav-link.active {
     border-radius: 100px !important;
     -webkit-border-radius: 100px !important;
     -moz-border-radius: 100px !important;
@@ -174,7 +173,7 @@ select.form-select{
     box-shadow: 0px 4px 10px 0px #0000000D;
 }
 
-ul.nav-tabs .nav-link:focus{
+ul.nav-tabs .nav-link:focus {
     border: none !important;
     box-shadow: inherit !important;
 }
@@ -183,35 +182,35 @@ ul.nav-tabs .nav-link:focus{
     display: none;
 }
 
-.modal.show .modal-dialog{
+.modal.show .modal-dialog {
     margin-top: 0;
 }
 
-.modal-header .btn-close{
+.modal-header .btn-close {
     background-color: transparent;
     border: none;
     box-shadow: none;
 }
 
-.modal-header .btn-close:focus{
+.modal-header .btn-close:focus {
     box-shadow: none;
 }
 
-.modal-body{
+.modal-body {
     padding: 24px;
 }
 
-.radio-wrapper .form-check{
+.radio-wrapper .form-check {
     padding-left: 0;
 }
 
-.radio-wrapper .form-check-input:checked{
+.radio-wrapper .form-check-input:checked {
     background-color: var(--primaryColor) !important;
     border-color: var(--primaryColor) !important;
-  
+
 }
-  
-.radio-wrapper .form-check .form-check-input{
+
+.radio-wrapper .form-check .form-check-input {
     border-radius: 50% !important;
     -webkit-border-radius: 50% !important;
     -moz-border-radius: 50% !important;
@@ -221,55 +220,56 @@ ul.nav-tabs .nav-link:focus{
     height: 24px !important;
 }
 
-.border-bottom{
-   border-bottom: 1px solid var(--borderColor) !important;
-   padding: 16px 0;
+.border-bottom {
+    border-bottom: 1px solid var(--borderColor) !important;
+    padding: 16px 0;
 }
 
 /* ==== toggle ===== */
 .knobs,
 .layer {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
 }
 
 .button {
-  position: relative;
-  top: 50%;
-  width: 45px;
-  height: 24px;
+    position: relative;
+    top: 50%;
+    width: 45px;
+    height: 24px;
 }
 
 .button.r,
 .button.r .layer {
-  border-radius: 100px;
+    border-radius: 100px;
 }
 
 .button.b2 {
-  border-radius: 2px;
+    border-radius: 2px;
 }
 
 .checkbox {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  padding: 0;
-  margin: 0;
-  opacity: 0;
-  cursor: pointer;
-  z-index: 3;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 3;
 }
 
 .knobs {
-  z-index: 2;
+    z-index: 2;
 }
 
 .layer {
     width: 100%;
-    background-color: #ca8585;
+    /* background-color: #ca8585; */
+    background-color: #dde1e3;
     transition: 0.3s ease all;
     z-index: 1;
 }
@@ -277,13 +277,15 @@ ul.nav-tabs .nav-link:focus{
 
 /* / Button 1 / */
 #button-1 .knobs:before {
-    content: "\f00d";
+    /* content: "\f00d"; */
+    content: "\f068";
     position: absolute;
     top: 50%;
     right: 22px;
     width: 20px;
     height: 20px;
-    color: red;
+    /* color: red; */
+    color: #c1bebe;
     font-size: 10px;
     font-weight: bold;
     text-align: center;
@@ -300,8 +302,8 @@ ul.nav-tabs .nav-link:focus{
     -ms-transition: 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15) all;
     -o-transition: 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15) all;
 }
-  
-#button-1 .checkbox:checked + .knobs:before {
+
+#button-1 .checkbox:checked+.knobs:before {
     content: "\f00c";
     right: 4px;
     background-color: #fff;
@@ -310,34 +312,34 @@ ul.nav-tabs .nav-link:focus{
     transform: translateY(-50%);
     color: #2DA9FC;
 }
-  
 
-#button-1 .checkbox:checked ~ .layer {
+
+#button-1 .checkbox:checked~.layer {
     background-color: #2DA9FC;
 }
-  
+
 #button-1 .knobs,
 #button-1 .knobs:before,
 #button-1 .layer {
     transition: 0.3s ease all;
 }
 
-.privacy-policy{
+.privacy-policy {
     padding: 100px 0;
 }
 
-.privacy-policy{
+.privacy-policy {
     padding: 100px 0;
 }
 
-  
+
 .loaderbtn {
     display: inline-block;
-    outline:none;
+    outline: none;
     line-height: 1.4;
     position: relative;
     transition: 0.5S;
-    font-weight:700;
+    font-weight: 700;
     background-color: var(--primaryColor) !important;
 }
 
@@ -346,6 +348,7 @@ ul.nav-tabs .nav-link:focus{
     background-color: rgb(255, 255, 255);
     padding-right: 40px;
 }
+
 .loaderbtn.spinning:after {
     content: '';
     position: absolute;
@@ -353,7 +356,7 @@ ul.nav-tabs .nav-link:focus{
     top: 50%;
     width: 0;
     height: 0;
-    box-shadow: 0px 0px 0 1px darken(rgb(255, 255, 255),10%);
+    box-shadow: 0px 0px 0 1px darken(rgb(255, 255, 255), 10%);
     position: absolute;
     border-radius: 50%;
     animation: rotate360 .5s infinite linear, exist .1s forwards ease;
@@ -367,10 +370,10 @@ ul.nav-tabs .nav-link:focus{
     right: 6px;
     top: 50%;
     position: absolute;
-    border: 2px solid darken(rgb(255, 255, 255),40%);
+    border: 2px solid darken(rgb(255, 255, 255), 40%);
     border-right: 3px solid rgb(255, 255, 255);
-    animation: rotate360 .5s infinite linear, exist .1s forwards ease ;
-    
+    animation: rotate360 .5s infinite linear, exist .1s forwards ease;
+
 }
 
 
@@ -378,9 +381,9 @@ ul.nav-tabs .nav-link:focus{
     position: absolute;
     top: 50%;
     left: 20px;
-    transition:0.2s ease all;
-    -moz-transition:0.2s ease all;
-    -webkit-transition:0.2s ease all;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
     pointer-events: none;
     transform: translateY(-50%);
     -webkit-transform: translateY(-50%);
@@ -389,27 +392,26 @@ ul.nav-tabs .nav-link:focus{
     -o-transform: translateY(-50%);
 }
 
-.floatingfocus
-{
+.floatingfocus {
     font-size: 12px;
     color: var(--primaryColor);
     top: 0;
-    left:10px;
+    left: 10px;
     background: #ffffff;
     padding: 0px 5px 0px 5px;
 }
 
-.label-error{
+.label-error {
     position: absolute;
     bottom: -19px;
     left: 8px;
 }
 
-.label-error label{
+.label-error label {
     font-size: 11px;
 }
 
-.users-data{
+.users-data {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -417,11 +419,11 @@ ul.nav-tabs .nav-link:focus{
     border-bottom: 1px solid var(--borderColor);
 }
 
-.users-data:last-child{
+.users-data:last-child {
     border-bottom: none;
 }
 
-.users-data h5{
+.users-data h5 {
     font-size: 14px;
     font-weight: 700;
     color: var(--contactTitle);
@@ -430,34 +432,33 @@ ul.nav-tabs .nav-link:focus{
 }
 
 .users-data a,
-.users-data p   
-{
+.users-data p {
     font-size: 12px;
     color: var(--lightColor);
     margin-bottom: 5px;
     display: block;
 }
 
-.breadcrumb-nav .breadcrumb-item+.breadcrumb-item::before{
+.breadcrumb-nav .breadcrumb-item+.breadcrumb-item::before {
     font-family: "Font Awesome 5 Free";
-   content: "\f054";
-   display: inline-block;
-   padding-right: 3px;
-   vertical-align: middle;
-   font-weight: 900;
-   color: var(--iconColor);
-   font-size: 10px;
-   margin-left: 8px;
+    content: "\f054";
+    display: inline-block;
+    padding-right: 3px;
+    vertical-align: middle;
+    font-weight: 900;
+    color: var(--iconColor);
+    font-size: 10px;
+    margin-left: 8px;
     margin-right: 8px;
 }
 
-.breadcrumb-nav .breadcrumb-item{
+.breadcrumb-nav .breadcrumb-item {
     display: flex;
     align-items: center;
     padding: 0 !important;
 }
 
-.breadcrumb-nav .breadcrumb-item a{
+.breadcrumb-nav .breadcrumb-item a {
     font-size: 14px;
     color: var(--breadcrumbColor);
     font-weight: 500;
@@ -468,17 +469,17 @@ ul.nav-tabs .nav-link:focus{
     -o-transition: 0.5s;
 }
 
-.breadcrumb-nav .breadcrumb-item a:hover{
+.breadcrumb-nav .breadcrumb-item a:hover {
     color: var(--primaryColor);
 }
 
-.breadcrumb-nav .breadcrumb-item.active{
+.breadcrumb-nav .breadcrumb-item.active {
     font-size: 14px;
     color: var(--secondryColor);
     font-weight: 500;
 }
 
-#loader{
+#loader {
     display: none;
     position: absolute;
     bottom: -20px;
@@ -486,42 +487,42 @@ ul.nav-tabs .nav-link:focus{
     transform: translateX(-50%);
 }
 
-.input-form .iti{
+.input-form .iti {
     position: absolute;
     width: 70px;
 }
 
-.input-form .iti .iti__selected-flag{
+.input-form .iti .iti__selected-flag {
     border-top-left-radius: 16px !important;
     border-bottom-left-radius: 16px !important;
     /* border: 1px solid var(--borderColor); */
 }
 
-.input-form .iti .phone_number{
+.input-form .iti .phone_number {
     /* visibility: hidden; */
     font-size: 0;
     width: 100%;
     outline: 0 !important;
 }
 
-.input-form #phone_number{
+.input-form #phone_number {
     padding-left: 87px !important;
 }
 
-.input-form #phone_number ~ label{
+.input-form #phone_number~label {
     left: 85px;
 }
 
-.input-form #phone_number ~ label.floatingfocus{
+.input-form #phone_number~label.floatingfocus {
     left: 10px;
     z-index: 1;
 }
 
-.iti--separate-dial-code .iti__selected-dial-code{
+.iti--separate-dial-code .iti__selected-dial-code {
     font-size: 13px;
 }
 
-.user-img{
+.user-img {
     max-width: 100%;
     width: 40px;
     height: 40px;
@@ -532,7 +533,7 @@ ul.nav-tabs .nav-link:focus{
     -o-border-radius: 100px;
 }
 
-.user-img img{
+.user-img img {
     /* object-fit: contain; */
     border-radius: 100%;
     -webkit-border-radius: 100%;
@@ -542,7 +543,7 @@ ul.nav-tabs .nav-link:focus{
     height: 100%;
 }
 
-.user-img h5{
+.user-img h5 {
     border-radius: 100%;
     -webkit-border-radius: 100%;
     -moz-border-radius: 100%;
@@ -558,114 +559,114 @@ ul.nav-tabs .nav-link:focus{
     background: linear-gradient(135deg, rgb(255, 247, 240), rgb(255, 200, 163)) rgb(14, 114, 207);
     color: rgb(212, 56, 13);
     font-size: 16px;
-    
+
 }
 
-.fontcolorA{
-   background: linear-gradient(135deg, rgb(240, 255, 251), rgb(181, 245, 236)) rgb(14, 114, 207) !important;
-}
-
-.fontcolorB{
-    background: linear-gradient(135deg, rgb(255, 247, 240), rgb(255, 200, 163)) rgb(14, 114, 207) !important;
-}
-
-.fontcolorC{
-    background: linear-gradient(135deg, rgb(251, 240, 255), rgb(230, 209, 242)) rgb(14, 114, 207) !important;
-}
-
-.fontcolorD{
-    background: linear-gradient(135deg, rgb(240, 252, 255), rgb(199, 238, 255)) rgb(14, 114, 207) !important;
-}
-
-.fontcolorE{
-    background: linear-gradient(135deg, rgb(240, 252, 255), rgb(199, 238, 255)) rgb(14, 114, 207) !important;
-}
-
-.fontcolorF{
-    background: linear-gradient(135deg, rgb(240, 249, 255), rgb(185, 214, 240)) rgb(14, 114, 207) !important;
-}
-
-.fontcolorG{
-    background: linear-gradient(135deg, rgb(240, 243, 255), rgb(185, 214, 240)) rgb(14, 114, 207) !important;
-}
-
-.fontcolorH{
-    background: linear-gradient(135deg, rgb(251, 240, 255), rgb(230, 209, 242)) rgb(14, 114, 207) !important;
-}
-
-.fontcolorI{
-    background: linear-gradient(135deg, rgb(240, 243, 255), rgb(185, 214, 240)) rgb(14, 114, 207) !important;
-}
-
-.fontcolorJ{
-    background: linear-gradient(135deg, rgb(255, 240, 245), rgb(255, 219, 234)) rgb(14, 114, 207) !important;
-}
-
-.fontcolorK{
-    background: linear-gradient(135deg, rgb(248, 255, 240), rgb(194, 242, 157)) rgb(14, 114, 207) !important;
-}
-
-.fontcolorL{
-    background: linear-gradient(135deg, rgb(255, 240, 250), rgb(237, 206, 229)) rgb(14, 114, 207) !important;
-}
-
-.fontcolorM{
-    background: linear-gradient(135deg, rgb(251, 240, 255), rgb(230, 209, 242)) rgb(14, 114, 207) !important;
-}
-
-.fontcolorN{
-    background: linear-gradient(135deg, rgb(248, 255, 240), rgb(194, 242, 157)) rgb(14, 114, 207) !important;
-}
-
-.fontcolorO{
-    background: linear-gradient(135deg, rgb(240, 249, 255), rgb(185, 214, 240)) rgb(14, 114, 207) !important;
-}
-
-.fontcolorP{
-    background: linear-gradient(135deg, rgb(255, 247, 240), rgb(255, 200, 163)) rgb(14, 114, 207) !important;
-}
-
-.fontcolorQ{
-    background: linear-gradient(135deg, rgb(248, 255, 240), rgb(194, 242, 157)) rgb(14, 114, 207) !important;
-}
-
-.fontcolorR{
+.fontcolorA {
     background: linear-gradient(135deg, rgb(240, 255, 251), rgb(181, 245, 236)) rgb(14, 114, 207) !important;
 }
 
-.fontcolorS{
-    background: linear-gradient(135deg, rgb(248, 255, 240), rgb(194, 242, 157)) rgb(14, 114, 207) !important;
-}
-
-.fontcolorT{
-    background: linear-gradient(135deg, rgb(255, 235, 230), rgb(255, 187, 183)) rgb(14, 114, 207) !important;
-}
-
-.fontcolorU{
+.fontcolorB {
     background: linear-gradient(135deg, rgb(255, 247, 240), rgb(255, 200, 163)) rgb(14, 114, 207) !important;
 }
 
-.fontcolorV{
-    background: linear-gradient(135deg, rgb(255, 240, 250), rgb(237, 206, 229)) rgb(14, 114, 207) !important;
+.fontcolorC {
+    background: linear-gradient(135deg, rgb(251, 240, 255), rgb(230, 209, 242)) rgb(14, 114, 207) !important;
 }
 
-.fontcolorW{
+.fontcolorD {
+    background: linear-gradient(135deg, rgb(240, 252, 255), rgb(199, 238, 255)) rgb(14, 114, 207) !important;
+}
+
+.fontcolorE {
+    background: linear-gradient(135deg, rgb(240, 252, 255), rgb(199, 238, 255)) rgb(14, 114, 207) !important;
+}
+
+.fontcolorF {
+    background: linear-gradient(135deg, rgb(240, 249, 255), rgb(185, 214, 240)) rgb(14, 114, 207) !important;
+}
+
+.fontcolorG {
+    background: linear-gradient(135deg, rgb(240, 243, 255), rgb(185, 214, 240)) rgb(14, 114, 207) !important;
+}
+
+.fontcolorH {
+    background: linear-gradient(135deg, rgb(251, 240, 255), rgb(230, 209, 242)) rgb(14, 114, 207) !important;
+}
+
+.fontcolorI {
+    background: linear-gradient(135deg, rgb(240, 243, 255), rgb(185, 214, 240)) rgb(14, 114, 207) !important;
+}
+
+.fontcolorJ {
     background: linear-gradient(135deg, rgb(255, 240, 245), rgb(255, 219, 234)) rgb(14, 114, 207) !important;
 }
 
-.fontcolorX{
-    background: linear-gradient(135deg, rgb(255, 251, 240), rgb(255, 191, 115)) rgb(14, 114, 207) !important;
+.fontcolorK {
+    background: linear-gradient(135deg, rgb(248, 255, 240), rgb(194, 242, 157)) rgb(14, 114, 207) !important;
 }
 
-.fontcolorY{
+.fontcolorL {
+    background: linear-gradient(135deg, rgb(255, 240, 250), rgb(237, 206, 229)) rgb(14, 114, 207) !important;
+}
+
+.fontcolorM {
+    background: linear-gradient(135deg, rgb(251, 240, 255), rgb(230, 209, 242)) rgb(14, 114, 207) !important;
+}
+
+.fontcolorN {
+    background: linear-gradient(135deg, rgb(248, 255, 240), rgb(194, 242, 157)) rgb(14, 114, 207) !important;
+}
+
+.fontcolorO {
+    background: linear-gradient(135deg, rgb(240, 249, 255), rgb(185, 214, 240)) rgb(14, 114, 207) !important;
+}
+
+.fontcolorP {
+    background: linear-gradient(135deg, rgb(255, 247, 240), rgb(255, 200, 163)) rgb(14, 114, 207) !important;
+}
+
+.fontcolorQ {
+    background: linear-gradient(135deg, rgb(248, 255, 240), rgb(194, 242, 157)) rgb(14, 114, 207) !important;
+}
+
+.fontcolorR {
+    background: linear-gradient(135deg, rgb(240, 255, 251), rgb(181, 245, 236)) rgb(14, 114, 207) !important;
+}
+
+.fontcolorS {
+    background: linear-gradient(135deg, rgb(248, 255, 240), rgb(194, 242, 157)) rgb(14, 114, 207) !important;
+}
+
+.fontcolorT {
     background: linear-gradient(135deg, rgb(255, 235, 230), rgb(255, 187, 183)) rgb(14, 114, 207) !important;
 }
 
-.fontcolorZ{
+.fontcolorU {
+    background: linear-gradient(135deg, rgb(255, 247, 240), rgb(255, 200, 163)) rgb(14, 114, 207) !important;
+}
+
+.fontcolorV {
+    background: linear-gradient(135deg, rgb(255, 240, 250), rgb(237, 206, 229)) rgb(14, 114, 207) !important;
+}
+
+.fontcolorW {
+    background: linear-gradient(135deg, rgb(255, 240, 245), rgb(255, 219, 234)) rgb(14, 114, 207) !important;
+}
+
+.fontcolorX {
+    background: linear-gradient(135deg, rgb(255, 251, 240), rgb(255, 191, 115)) rgb(14, 114, 207) !important;
+}
+
+.fontcolorY {
+    background: linear-gradient(135deg, rgb(255, 235, 230), rgb(255, 187, 183)) rgb(14, 114, 207) !important;
+}
+
+.fontcolorZ {
     background: linear-gradient(2.35619rad, rgb(224, 250, 255), rgb(167, 238, 252)) !important;
 }
 
-.ui-widget-content.ui-autocomplete{
+.ui-widget-content.ui-autocomplete {
     padding: 5px !important;
     border-radius: 5px !important;
     -webkit-border-radius: 5px !important;
@@ -674,111 +675,112 @@ ul.nav-tabs .nav-link:focus{
     -o-border-radius: 5px !important;
 }
 
-.ui-widget-content.ui-autocomplete .ui-menu-item{
+.ui-widget-content.ui-autocomplete .ui-menu-item {
     margin-bottom: 10px;
 }
 
-.ui-widget-content.ui-autocomplete .ui-menu-item:last-child{
+.ui-widget-content.ui-autocomplete .ui-menu-item:last-child {
     margin-bottom: 0;
 }
 
-.ui-widget-content.ui-autocomplete{
+.ui-widget-content.ui-autocomplete {
     width: 290px !important;
 }
 
-.ui-widget-content.ui-autocomplete .ui-menu-item-wrapper{
+.ui-widget-content.ui-autocomplete .ui-menu-item-wrapper {
     align-items: center !important;
 }
 
-.ui-widget-content.ui-autocomplete .suggestion-item:hover{
+.ui-widget-content.ui-autocomplete .suggestion-item:hover {
     background-color: #f1f1f1 !important;
     border: none !important;
-} 
+}
 
 /* .ui-widget-content.ui-autocomplete .ui-menu-item:hover{
     background-color: #f1f1f1 !important;
 } */
 
-.ui-widget-content.ui-autocomplete .ui-menu-item{
+.ui-widget-content.ui-autocomplete .ui-menu-item {
     border-bottom: 1px solid #ccc;
     padding-bottom: 10px !important;
     margin-bottom: 5px !important;
     outline: 0;
 }
 
-.ui-widget-content.ui-autocomplete .ui-menu-item:last-child{
+.ui-widget-content.ui-autocomplete .ui-menu-item:last-child {
     border: none !important;
     padding-bottom: 0 !important;
     margin-bottom: 0 !important;
 }
 
-.ui-state-active, .ui-widget-content .ui-state-active{
+.ui-state-active,
+.ui-widget-content .ui-state-active {
     border: 1px solid #f1f1f1 !important;
     background: #f1f1f1 !important;
 }
 
 /* ======== Responsive ========= */
-@media only screen and (max-width:1199px){
-    h2{
+@media only screen and (max-width:1199px) {
+    h2 {
         font-size: 45px !important;
         color: var(--headingColor);
         line-height: 45px !important;
     }
 }
 
-@media only screen and (max-width:991px){
-    .cmn-btn{
+@media only screen and (max-width:991px) {
+    .cmn-btn {
         padding: 10px 15px;
     }
 
-    h2{
+    h2 {
         font-size: 40px !important;
         color: var(--headingColor);
         line-height: 45px !important;
     }
-    
+
 }
 
 
-@media only screen and (max-width:767px){
-    h1{
+@media only screen and (max-width:767px) {
+    h1 {
         font-size: 28px;
         line-height: 33px;
         margin-bottom: 5px !important;
     }
 
-    h2{
+    h2 {
         font-size: 32px !important;
         color: var(--headingColor);
         line-height: 45px !important;
     }
 
-    p{
+    p {
         font-size: 14px;
     }
 
-    #myModal .save-btn{
+    #myModal .save-btn {
         width: 100%;
     }
-    
+
 }
 
-@media only screen and (max-width:575px){
-    h2{
+@media only screen and (max-width:575px) {
+    h2 {
         font-size: 24px !important;
         color: var(--headingColor);
         line-height: 32px !important;
     }
 
-    .modal.show .modal-dialog{
+    .modal.show .modal-dialog {
         margin: 0;
     }
 
-    .modal-content{
+    .modal-content {
         margin: 0 10px;
     }
 
-    .radio-wrapper .form-check .form-check-input{
+    .radio-wrapper .form-check .form-check-input {
         width: 20px !important;
         height: 20px !important;
     }
@@ -787,12 +789,13 @@ ul.nav-tabs .nav-link:focus{
 
 
 
-@keyframes rotate360 { 
+@keyframes rotate360 {
     100% {
         transform: rotate(360deg);
     }
 }
-@keyframes exist { 
+
+@keyframes exist {
     100% {
         width: 15px;
         height: 15px;
