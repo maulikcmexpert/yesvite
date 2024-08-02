@@ -12385,6 +12385,7 @@ class ApiControllerv2 extends Controller
         $user = User::where('email', $input['email'])->first();
         if (isset($user->id)) {
             $user_id = $user->id;
+
             try {
                 $checkNotificationSetting = checkNotificationSetting($user_id);
                 if (count($checkNotificationSetting) != 0 && $checkNotificationSetting['private_message']['email'] == '1') {
@@ -12394,6 +12395,11 @@ class ApiControllerv2 extends Controller
                     });
                     return response()->json(['status' => 1, 'message' => 'Mail sent successfully']);
                 } elseif (count($checkNotificationSetting) == 0) {
+
+
+                    add_user_firebase($user_id);    // Add User in Firebase
+
+
                     Mail::send('emails.app_inivite_link', ['userdata' => $userdata], function ($message) use ($input) {
                         $message->to($input['email']);
                         $message->subject('Yesvite Invite');

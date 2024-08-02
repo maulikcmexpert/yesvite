@@ -31,6 +31,7 @@ use Illuminate\Support\Facades\Session;
 use libphonenumber\PhoneNumberUtil;
 use libphonenumber\PhoneNumberFormat;
 use libphonenumber\NumberParseException;
+use Kreait\Laravel\Firebase\Facades\Firebase;
 
 
 function getVideoDuration($filePath)
@@ -1579,4 +1580,41 @@ function set_android_iap($appid, $productID, $purchaseToken, $type)
     }
 
     return $result1;
+}
+
+function add_user_firebase($userId)
+{
+
+    $firebase = Firebase::database();
+    $usersReference = $firebase->getReference('users');
+
+    $userData = User::findOrFail($userId);
+    // dd($userData);
+    $userName =  $userData->firstname . ' ' . $userData->lastname;
+    $updateData = [
+        'userChatId' => '',
+        'userCountryCode' => (string)$userData->country_code,
+        'userGender' => (string)$userData->gender,
+        'userEmail' => $userData->email,
+        'userId' => (string)$userId,
+        'userLastSeen' => now()->timestamp * 1000, // Convert to milliseconds
+        'userName' => $userName,
+        'userPhone' => (string)$userData->phone_number,
+        'userProfile' => url('/public/storage/profile/' . $userData->profile),
+        'userStatus' => '',
+        'userTypingStatus' => 'Not typing...'
+    ];
+
+    // Create a new user node with the userId
+    $userRef = $usersReference->getChild((string)$userId);
+    $userSnapshot = $userRef->getValue();
+
+    if ($userSnapshot) {
+        // User exists, update the existing data
+        $userRef->update($updateData);
+    } else {
+        // User does not exist, create a new user node
+        $userRef->set($updateData);
+    }
+    return true;
 }
