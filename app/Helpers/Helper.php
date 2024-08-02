@@ -1582,7 +1582,7 @@ function set_android_iap($appid, $productID, $purchaseToken, $type)
     return $result1;
 }
 
-function add_user_firebase($userId)
+function add_user_firebase($userId, $userStatus = null)
 {
 
     $firebase = Firebase::database();
@@ -1601,8 +1601,9 @@ function add_user_firebase($userId)
         'userName' => $userName,
         'userPhone' => (string)$userData->phone_number,
         'userProfile' => url('/public/storage/profile/' . $userData->profile),
-        'userStatus' => '',
-        'userTypingStatus' => 'Not typing...'
+        'userStatus' => ($userStatus != null) ? $userStatus : '',
+        'userTypingStatus' => 'Not typing...',
+        'userToken' => ''
     ];
 
     // Create a new user node with the userId

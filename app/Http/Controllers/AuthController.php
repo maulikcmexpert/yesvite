@@ -253,6 +253,8 @@ class AuthController extends Controller
                     $this->logoutFromApplication($user->id);
                     event(new \App\Events\UserRegistered($user));
 
+                    add_user_firebase($user->id, 'Online');
+
                     return redirect()->route('profile')->with('success', 'Logged in successfully!');
                 } else {
                     return redirect()->back()->withErrors([
