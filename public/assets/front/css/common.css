@@ -278,7 +278,7 @@ ul.nav-tabs .nav-link:focus {
 /* / Button 1 / */
 #button-1 .knobs:before {
     /* content: "\f00d"; */
-    content: "-";
+    content: "\f068";
     position: absolute;
     top: 50%;
     right: 22px;
