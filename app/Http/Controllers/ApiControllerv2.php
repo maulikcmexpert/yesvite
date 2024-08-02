@@ -2045,7 +2045,7 @@ class ApiControllerv2 extends Controller
 
 
                 $image->move(public_path('storage/profile'), $imageName);
-                $user->profile = $imageName;
+                $user->profile = $imageName . '?v=' . rand(10, 99);
             }
 
 
@@ -2069,7 +2069,7 @@ class ApiControllerv2 extends Controller
 
 
 
-                $user->bg_profile = $bgimageName;
+                $user->bg_profile = $bgimageName . '?v=' . rand(10, 99);
             }
 
             $user->save();
