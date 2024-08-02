@@ -12386,7 +12386,7 @@ class ApiControllerv2 extends Controller
             $user_id = $user->id;
             try {
                 $checkNotificationSetting = checkNotificationSetting($user_id);
-                if ($user->app_user == '1' &&  count($checkNotificationSetting) != 0 && $checkNotificationSetting['private_message']['email'] == '1') {
+                if (count($checkNotificationSetting) != 0 && $checkNotificationSetting['private_message']['email'] == '1') {
 
                     Mail::send('emails.app_inivite_link', ['userdata' => $userdata], function ($message) use ($input) {
                         $message->to($input['email']);
