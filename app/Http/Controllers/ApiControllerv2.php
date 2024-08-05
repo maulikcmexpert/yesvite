@@ -7409,6 +7409,27 @@ class ApiControllerv2 extends Controller
                     $postsNormalDetail['posttime'] = setpostTime($value->created_at);
                     $postsNormalDetail['commenting_on_off'] = $value->commenting_on_off;
                     $postsNormalDetail['post_image'] = [];
+
+                    $totalEvent =  Event::where('user_id', $value->user->id)->count();
+                    $totalEventPhotos =  EventPost::where(['user_id' => $value->user->id, 'post_type' => '1'])->count();
+                    $comments =  EventPostComment::where('user_id', $value->user->id)->count();
+
+                    $eventDetail['user_profile'] = [
+                        'id' => $value->user->id,
+                        'profile' => empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile),
+                        'bg_profile' => empty($value->user->bg_profile) ? "" : asset('public/storage/bg_profile/' . $value->user->bg_profile),
+                        'gender' => ($value->user->gender != NULL) ? $value->user->gender : "",
+                        'username' => $value->user->firstname . ' ' . $value->user->lastname,
+                        'location' => ($value->user->city != NULL) ? $value->user->city : "",
+                        'about_me' => ($value->user->about_me != NULL) ? $value->user->about_me : "",
+                        'created_at' => empty($value->user->created_at) ? "" :   str_replace(' ', ', ', date('F Y', strtotime($value->user->created_at))),
+                        'total_events' => $totalEvent,
+                        'visible' => $value->user->visible,
+                        'total_photos' => $totalEventPhotos,
+                        'comments' => $comments,
+                        'message_privacy' => $value->user->message_privacy
+                    ];
+
                     if ($value->post_type == '1' && !empty($value->post_image)) {
                         foreach ($value->post_image as $imgVal) {
                             $postMedia = [
