@@ -3903,7 +3903,9 @@ class ApiControllerv2 extends Controller
             $groupMember = GroupMember::where('group_id', $input['group_id'])->pluck('user_id');
 
             $yesviteRegisteredUser = User::select('id', 'firstname', 'profile', 'lastname', 'email', 'country_code', 'phone_number', 'app_user', 'prefer_by', 'email_verified_at', 'parent_user_phone_contact')->where('id', '!=', $user->id)->whereIn('id', $groupMember)->orderBy('firstname')
-                ->paginate(10, ['*'], 'page', $page);
+                ->limit(1000)
+                ->get();
+            // ->paginate(10, ['*'], 'page', $page);
             $yesviteUser = [];
             foreach ($yesviteRegisteredUser as $user) {
 
