@@ -561,6 +561,18 @@ class AuthController extends Controller
             return response()->json(true);
         }
     }
+    
+    public function storeAdvertisementStatus(Request $request)
+    {
+        if (Auth::check()) {
+            if ($request->has('closed') && $request->closed) {
+                session(['advertisement_closed' => true]);
+            }
+            return response()->json(['success' => true]);
+        } else {
+            return response()->json(['success' => false, 'message' => 'User not logged in']);
+        }
+    }
 
     public function logoutFromApplication($id)
     {

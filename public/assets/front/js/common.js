@@ -1,5 +1,6 @@
 // alert();
 //  ===== focusinput =====
+var base_url = $("#base_url").val();
 
 $(document).on("click", "#ChangeToggle", function () {
     $("#navbar-hamburger").toggleClass("hidden");
@@ -158,7 +159,27 @@ $(function () {
     });
 });
 
+$('label[for="email"]').addClass("floatingfocus");
+$('label[for="password"]').addClass("floatingfocus");
 
-
-$('label[for="email"]').addClass('floatingfocus');
-$('label[for="password"]').addClass('floatingfocus');
+$(document).ready(function () {
+    $(".close_advertise").on("click", function (e) {
+        e.preventDefault();
+        $(".google-add").hide();
+        $.ajax({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                    "content"
+                ),
+            },
+            url: base_url+"advertisement_status",
+            method: "POST",
+            data: {
+                closed: true,
+            },
+            success: function (response) {
+                // console.log(response);
+            },
+        });
+    });
+});

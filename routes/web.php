@@ -114,9 +114,11 @@ Route::controller(AuthController::class)->group(function () {
 
     Route::get('login', 'create')->name('auth.login')->middleware('isAuthenticate');
     Route::post('login', 'checkLogin')->name('auth.checkLogin');
+
     Route::get('register', 'register')->name('auth.register')->middleware('isAuthenticate');
     Route::post('store_register', 'userRegister')->name('store.register');
     Route::post('check-email', 'checkEmailExistence');
+    Route::post('advertisement_status','storeAdvertisementStatus');
 
     Route::get('login/{provider}', [SocialController::class, 'redirectToProvider']);
     Route::get('login/{provider}/callback', [SocialController::class, 'handleProviderCallback']);
@@ -156,7 +158,7 @@ Route::controller(AuthController::class)->group(function () {
         add_user_firebase($user->id, 'offline');
         Auth::logout();
         // Invalidate the session and regenerate the CSRF token to prevent session fixation attacks
-
+        Session::forget('advertisement_closed');
         Session::forget('user');
         Session::forget('secondary_user');
         return redirect('login');
