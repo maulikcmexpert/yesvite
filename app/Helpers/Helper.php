@@ -171,15 +171,15 @@ function sendNotification($notificationType, $postData)
                         $checkNotificationSetting = checkNotificationSetting($value->user_id);
                         if ((count($checkNotificationSetting) && $checkNotificationSetting['invitations']['push'] == '1') &&  $value->notification_on_off == '1') {
 
-                            // if ($deviceData->model == 'And') {
+                            if ($deviceData->model == 'And') {
 
-                            send_notification_FCM_and($deviceData->device_token, $notificationData);
-                            // }
+                                send_notification_FCM_and($deviceData->device_token, $notificationData);
+                            }
 
-                            // if ($deviceData->model == 'Ios') {
+                            if ($deviceData->model == 'Ios') {
 
-                            //     send_notification_FCM($deviceData->device_token, $notificationData);
-                            // }
+                                send_notification_FCM($deviceData->device_token, $notificationData);
+                            }
                         }
                     }
                     $checkNotificationSetting = checkNotificationSetting($value->user_id);
@@ -448,14 +448,14 @@ function sendNotification($notificationType, $postData)
                         if ((count($checkNotificationSetting) && $checkNotificationSetting['wall_post']['push'] == '1') && $ownerEvent->notification_on_off == '1') {
 
 
-                            // if ($deviceData->model == 'And') {
-                            send_notification_FCM_and($deviceData->device_token, $notificationData);
-                            // }
+                            if ($deviceData->model == 'And') {
+                                send_notification_FCM_and($deviceData->device_token, $notificationData);
+                            }
 
-                            // if ($deviceData->model == 'Ios') {
+                            if ($deviceData->model == 'Ios') {
 
-                            //     send_notification_FCM($deviceData->device_token, $notificationData);
-                            // }
+                                send_notification_FCM($deviceData->device_token, $notificationData);
+                            }
                         }
                     }
                 }
