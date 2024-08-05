@@ -7414,7 +7414,7 @@ class ApiControllerv2 extends Controller
                     $totalEventPhotos =  EventPost::where(['user_id' => $value->user->id, 'post_type' => '1'])->count();
                     $comments =  EventPostComment::where('user_id', $value->user->id)->count();
 
-                    $eventDetail['user_profile'] = [
+                    $postsNormalDetail['user_profile'] = [
                         'id' => $value->user->id,
                         'profile' => empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile),
                         'bg_profile' => empty($value->user->bg_profile) ? "" : asset('public/storage/bg_profile/' . $value->user->bg_profile),
@@ -7564,7 +7564,7 @@ class ApiControllerv2 extends Controller
                     $totalEventPhotos =  EventPost::where(['user_id' => $value->user->id, 'post_type' => '1'])->count();
                     $comments =  EventPostComment::where('user_id', $value->user->id)->count();
 
-                    $eventDetail['user_profile'] = [
+                    $postsNormalDetail['user_profile'] = [
                         'id' => $value->user->id,
                         'profile' => empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile),
                         'bg_profile' => empty($value->user->bg_profile) ? "" : asset('public/storage/bg_profile/' . $value->user->bg_profile),
