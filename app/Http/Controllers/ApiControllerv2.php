@@ -6538,8 +6538,6 @@ class ApiControllerv2 extends Controller
 
                 $coHostDetail['visible'] = (empty($hostValues->user->visible) || $hostValues->user->visible == NULL) ? "" : $hostValues->user->visible;
 
-
-
                 $coHosts[] = $coHostDetail;
             }
 
