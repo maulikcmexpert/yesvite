@@ -241,6 +241,12 @@ header.login-header {
     align-items: center;
 }
 
+.header-right .drp-conent svg{
+    width: 100%;
+    max-width: 25px;
+    height: 25px;
+}
+
 .header-dropdown button,
 .header-dropdown a
 {
