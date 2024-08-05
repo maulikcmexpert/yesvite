@@ -6536,7 +6536,6 @@ class ApiControllerv2 extends Controller
 
                 $coHostDetail['phone_number'] = (empty($hostValues->user->phone_number) || $hostValues->user->phone_number == NULL) ? "" : $hostValues->user->phone_number;
 
-                $coHostDetail['visible'] = (empty($hostValues->user->visible) || $hostValues->user->visible == NULL) ? "" : $hostValues->user->visible;
 
                 $coHosts[] = $coHostDetail;
             }
@@ -6864,6 +6863,7 @@ class ApiControllerv2 extends Controller
 
             $coHostDetail['phone_number'] = (empty($eventDetail->user->phone_number) || $eventDetail->user->phone_number == NULL) ? "" : $eventDetail->user->phone_number;
             $coHostDetail['message_privacy'] =  $eventDetail->user->message_privacy;
+            $coHostDetail['visible'] = (empty($hostValues->user->visible) || $hostValues->user->visible == NULL) ? "" : $hostValues->user->visible;
 
             $eventDetails['co_hosts'] = $coHostDetail;
 
