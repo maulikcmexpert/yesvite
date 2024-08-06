@@ -23,6 +23,7 @@
         "php-flasher/flasher-toastr-symfony": "^1.15",
         "propaganistas/laravel-phone": "^5.3",
         "sendgrid/sendgrid": "^8.1",
+        "spatie/image": "^3.7",
         "stevebauman/location": "^7.1",
         "twilio/sdk": "^8.1",
         "yajra/laravel-datatables-buttons": "^10.0",

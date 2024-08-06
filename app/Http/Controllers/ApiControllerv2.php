@@ -110,6 +110,7 @@ use App\Jobs\SendInvitationMailJob as sendInvitation;
 use App\Services\GooglePlayService;
 use Illuminate\Support\Facades\Session;
 use stdClass;
+use Spatie\Image\Image;
 use App\Services\GooglePlayServices;
 
 class ApiControllerv2 extends Controller
@@ -8688,11 +8689,23 @@ class ApiControllerv2 extends Controller
                                 $thumbimage->move(public_path('storage/thumbnails'), $thumbName);
                             }
                         }
-                        if (file_exists(public_path('storage/post_image/') . $imageName)) {
-                            $imagePath = public_path('storage/post_image/') . $imageName;
-                            unlink($imagePath);
-                        }
-                        $postImage->move(public_path('storage/post_image'), $imageName);
+
+                        $temporaryThumbnailPath = public_path('storage/post_image/') . 'tmp_' . $imageName;
+                        Image::load($postImgValue->getRealPath())
+                            ->width(500)
+                            ->optimize()
+                            ->save($temporaryThumbnailPath);
+
+                        Storage::disk('public')->put('post_image/' . $imageName, file_get_contents($temporaryThumbnailPath));
+                        unlink($temporaryThumbnailPath);
+
+                        // $postImage->move(public_path('storage/post_image/'), $temporaryThumbnailPath);
+
+                        // if (file_exists(public_path('storage/post_image/') . $imageName)) {
+                        //     $imagePath = public_path('storage/post_image/') . $imageName;
+                        //     unlink($imagePath);
+                        // }
+                        // $postImage->move(public_path('storage/post_image'), $imageName);
                         // EventPostImage::create([
                         //     'event_id' => $request->event_id,
                         //     'event_post_id' => $creatEventPost->id,
