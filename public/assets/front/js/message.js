@@ -3247,8 +3247,6 @@ async function send_push_notification(
 }
 
 
-$('.reaction ').on('click',function (){
+$(document).on('click','.reaction ',function (){
 alert();
-
-    
 })
