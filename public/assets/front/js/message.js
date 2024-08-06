@@ -3246,4 +3246,9 @@ async function send_push_notification(
     }
 }
 
-console.log('hi');
+
+$('.reaction ').on('click',function (){
+alert();
+
+    
+})
