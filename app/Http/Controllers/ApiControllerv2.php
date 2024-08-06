@@ -8696,7 +8696,13 @@ class ApiControllerv2 extends Controller
                             ->optimize()
                             ->save($temporaryThumbnailPath);
 
-                        Storage::disk('public')->put('post_image/' . $imageName, file_get_contents($temporaryThumbnailPath));
+                        // Storage::disk('public')->put('post_image/' . $imageName, file_get_contents($temporaryThumbnailPath));
+
+                        $destinationPath = public_path('storage/post_image/');
+                        if (!file_exists($destinationPath)) {
+                            mkdir($destinationPath, 0755, true);
+                        }
+                        rename($temporaryThumbnailPath, $destinationPath . $imageName);
                         unlink($temporaryThumbnailPath);
 
                         // $postImage->move(public_path('storage/post_image/'), $temporaryThumbnailPath);
@@ -10590,8 +10596,7 @@ class ApiControllerv2 extends Controller
 
                         $photoVideoDetail['event_post_id'] = $val->event_post_id;
 
-                        // $photoVideoDetail['post_media'] = (!empty($val->post_image) || $val->post_media != NULL) ? asset('public/storage/post_image/' . $val->post_image) : "";
-                        $photoVideoDetail['post_media'] = (!empty($val->post_image) || $val->post_media != NULL) ? storage_path('app/public/post_image/' . $val->post_image) : "";
+                        $photoVideoDetail['post_media'] = (!empty($val->post_image) || $val->post_media != NULL) ? asset('public/storage/post_image/' . $val->post_image) : "";
 
                         $photoVideoDetail['thumbnail'] = (!empty($val->thumbnail) || $val->thumbnail != NULL) ? asset('public/storage/thumbnails/' . $val->thumbnail) : "";
 
