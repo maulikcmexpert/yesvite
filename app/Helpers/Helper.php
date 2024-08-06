@@ -217,7 +217,7 @@ function sendNotification($notificationType, $postData)
                             if ($value->event->event_schedule->isNotEmpty()) {
 
                                 // $event_time = $value->event->event_schedule->first()->start_time;
-                                $event_time = $value->event->event_schedule->start_time;
+                                $event_time = $value->event->rsvp_start_time;
                             }
 
                             $eventData = [
