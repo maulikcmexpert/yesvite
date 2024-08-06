@@ -3245,3 +3245,5 @@ async function send_push_notification(
             });
     }
 }
+
+console.log($('.selected_id').val());
