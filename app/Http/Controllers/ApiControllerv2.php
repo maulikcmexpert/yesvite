@@ -7162,7 +7162,7 @@ class ApiControllerv2 extends Controller
         $rawData = $request->getContent();
         $input = json_decode($rawData, true);
         $filename = 'event_wall_request.txt';
-        $commentnumber = json_encode($input);
+        $commentnumber = $rawData;
         Storage::append($filename, $commentnumber);
         if ($input == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
