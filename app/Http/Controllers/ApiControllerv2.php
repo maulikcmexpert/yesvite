@@ -8005,7 +8005,7 @@ class ApiControllerv2 extends Controller
         $wallData['posts'] = $postList;
 
         $filename = 'event_wall_response.txt';
-        $commentnumber = json_encode($wallData);
+        $commentnumber = json_encode(['status' => 1, 'rsvp_status' => $rsvp_status, 'total_page_of_stories' => $total_page_of_stories, 'total_page_of_eventPosts' => $total_page_of_eventPosts, 'data' => $wallData, 'message' => "Event wall data"]);
         Storage::append($filename, $commentnumber);
 
         return response()->json(['status' => 1, 'rsvp_status' => $rsvp_status, 'total_page_of_stories' => $total_page_of_stories, 'total_page_of_eventPosts' => $total_page_of_eventPosts, 'data' => $wallData, 'message' => "Event wall data"]);
