@@ -3276,7 +3276,7 @@ async function deletereaction(isGroup,messageId,conversationId) {
 
             for (var messageId in messages) {
                 updates[
-                    `Messages/${conversationId}/message/${messageId}/isDelete`
+                    `Messages/${conversationId}/message/${messageId}/react`
                 ] = "";
             }
             await update(ref(database), updates);
