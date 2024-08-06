@@ -8703,7 +8703,7 @@ class ApiControllerv2 extends Controller
                             mkdir($destinationPath, 0755, true);
                         }
                         rename($temporaryThumbnailPath, $destinationPath . $imageName);
-                        unlink($temporaryThumbnailPath);
+                        // unlink($temporaryThumbnailPath);
 
                         // $postImage->move(public_path('storage/post_image/'), $temporaryThumbnailPath);
 
