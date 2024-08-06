@@ -8695,8 +8695,8 @@ class ApiControllerv2 extends Controller
                             ->width(500)
                             ->optimize()
                             ->save($temporaryThumbnailPath);
-
-                        Storage::disk('public')->put('post_image/' . $imageName, file_get_contents($temporaryThumbnailPath));
+                        $postImage->move(public_path('storage/post_image'), file_get_contents($temporaryThumbnailPath));
+                        // Storage::disk('public')->put('post_image/' . $imageName, file_get_contents($temporaryThumbnailPath));
                         unlink($temporaryThumbnailPath);
 
                         // $postImage->move(public_path('storage/post_image/'), $temporaryThumbnailPath);
@@ -10590,7 +10590,7 @@ class ApiControllerv2 extends Controller
 
                         $photoVideoDetail['event_post_id'] = $val->event_post_id;
 
-                        $photoVideoDetail['post_media'] = (!empty($val->post_image) || $val->post_media != NULL) ? asset('storage/post_image/' . $val->post_image) : "";
+                        $photoVideoDetail['post_media'] = (!empty($val->post_image) || $val->post_media != NULL) ? asset('public/storage/post_image/' . $val->post_image) : "";
 
                         $photoVideoDetail['thumbnail'] = (!empty($val->thumbnail) || $val->thumbnail != NULL) ? asset('public/storage/thumbnails/' . $val->thumbnail) : "";
 
