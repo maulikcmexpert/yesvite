@@ -10590,8 +10590,7 @@ class ApiControllerv2 extends Controller
 
                         $photoVideoDetail['event_post_id'] = $val->event_post_id;
 
-                        $photoVideoDetail['post_media'] = (!empty($val->post_image) || $val->post_media != NULL) ?   asset('storage/post_image/' . $val->post_image) : "";
-                        // $photoVideoDetail['post_media'] = (!empty($val->post_image) || $val->post_media != NULL) ? asset('storage/post_image/' . $val->post_image) : "";
+                        $photoVideoDetail['post_media'] = (!empty($val->post_image) || $val->post_media != NULL) ? asset('public/storage/post_image/' . $val->post_image) : "";
 
                         $photoVideoDetail['thumbnail'] = (!empty($val->thumbnail) || $val->thumbnail != NULL) ? asset('public/storage/thumbnails/' . $val->thumbnail) : "";
 
