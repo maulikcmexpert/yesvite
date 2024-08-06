@@ -3258,12 +3258,28 @@ $(document).on('click','.reaction ',function (){
         console.log(c_id);
         console.log(m_id);
 
-        if (isGroup == true || isGroup == "true") {
-        }else{
-            
-        }
-
-
+        deletereaction(conversationId, isGroup);
+       
 
     // alert(c_id);
 })
+
+async function deletereaction(isGroup,messageId,conversationId) {
+    if (isGroup == true || isGroup == "true") {
+    }else{
+        const messagesRef = ref(database, `Messages/${conversationId}/message`);
+        const messagesSnapshot = await get(messagesRef);
+
+        if (messagesSnapshot.exists()) {
+            const messages = messagesSnapshot.val();
+            const updates = {};
+
+            for (var messageId in messages) {
+                updates[
+                    `Messages/${conversationId}/message/${messageId}/isDelete`
+                ] = "";
+            }
+            await update(ref(database), updates);
+        }
+    }
+}
