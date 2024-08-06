@@ -217,7 +217,7 @@ function sendNotification($notificationType, $postData)
                             if ($value->event->event_schedule->isNotEmpty()) {
 
                                 // $event_time = $value->event->event_schedule->first()->start_time;
-                                $event_time = $value->event->rsvp_start_time;
+                                // $event_time = $value->event->rsvp_start_time;
                             }
 
                             $eventData = [
@@ -226,7 +226,7 @@ function sendNotification($notificationType, $postData)
                                 'profileUser' => ($value->event->user->profile != NULL || $value->event->user->profile != "") ? $value->event->user->profile : "no_profile.png",
                                 'event_image' => ($value->event->event_image->isNotEmpty()) ? $value->event->event_image[0]->image : "no_image.png",
                                 'date' =>   date('l - M jS, Y', strtotime($value->event->start_date)),
-                                'time' => $event_time,
+                                'time' => $value->event->rsvp_start_time,
                                 'address' => $value->event->event_location_name . ' ' . $value->event->address_1 . ' ' . $value->event->address_2 . ' ' . $value->event->state . ' ' . $value->event->city . ' - ' . $value->event->zip_code,
                             ];
 
