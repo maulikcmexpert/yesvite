@@ -3250,7 +3250,7 @@ async function send_push_notification(
 $(document).on('click','.reaction ',function (){
     // var c_id=$(this).closest($(".reaction-icon").data("message-id"));
         // var c_id=$(this).closest($(".reaction-icon").data("message-id"));
-        console.log($(this).parent().find('.simple-msg-wrap').html());
+        console.log($(this).parent().html());
 
 
     // alert(c_id);
