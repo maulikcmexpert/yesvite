@@ -7163,7 +7163,7 @@ class ApiControllerv2 extends Controller
         $input = json_decode($rawData, true);
         $filename = 'event_wall_request.txt';
         $commentnumber = $input;
-        file_put_contents($filename, $commentnumber . PHP_EOL, FILE_APPEND);
+        Storage::append($filename, $commentnumber);
         if ($input == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
         }
@@ -8006,7 +8006,7 @@ class ApiControllerv2 extends Controller
 
         $filename = 'event_wall_response.txt';
         $commentnumber = $wallData;
-        file_put_contents($filename, $commentnumber . PHP_EOL, FILE_APPEND);
+        Storage::append($filename, $commentnumber);
 
         return response()->json(['status' => 1, 'rsvp_status' => $rsvp_status, 'total_page_of_stories' => $total_page_of_stories, 'total_page_of_eventPosts' => $total_page_of_eventPosts, 'data' => $wallData, 'message' => "Event wall data"]);
         // } catch (QueryException $e) {
