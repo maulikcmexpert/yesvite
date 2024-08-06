@@ -8760,7 +8760,7 @@ class ApiControllerv2 extends Controller
 
         DB::commit();
 
-        dd($notificationParam)
+        dd($notificationParam);
         if ($request->is_in_photo_moudle == '1') {
 
             sendNotification('photos', $notificationParam);
