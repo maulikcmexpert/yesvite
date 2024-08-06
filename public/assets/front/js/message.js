@@ -3247,6 +3247,7 @@ async function send_push_notification(
 }
 
 
-$(document).on('click','.reaction ',function (){
-alert();
+$(document).on('click','.reaction ',function (event){
+    var c_id=$(event.target).closest('.selected_id').val();
+    alert(c_id);
 })
