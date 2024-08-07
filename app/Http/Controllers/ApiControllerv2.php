@@ -4223,6 +4223,8 @@ class ApiControllerv2 extends Controller
     public function editEvent(Request $request)
     {
 
+        dd($request);
+
         $user  = Auth::guard('api')->user();
 
         $rawData = $request->getContent();
