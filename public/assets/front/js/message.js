@@ -3259,13 +3259,15 @@ $(document).on('click','.reaction ',function (){
     var messageId = $(this).parent().parent().find(".reaction-icon").data('message-id');
     }
 
-    deletereaction(isGroup,messageId, conversationId);
+    var senderid=$('.senderUser').val();
+
+
+    deletereaction(isGroup,messageId, conversationId,senderid);
        
 })
 
-async function deletereaction(isGroup,messageId,conversationId) {
+async function deletereaction(isGroup,messageId,conversationId,senderid=null) {
     if (isGroup == true || isGroup == "true") {
-        const senderid=$('.senderUser').val();
         const MessageRef = ref(
             database,
             `Groups/${conversationId}/message`
