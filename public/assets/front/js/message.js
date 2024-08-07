@@ -3260,7 +3260,7 @@ $(document).on('click','.reaction',function (){
         console.log(c_id);
         console.log(m_id);
 
-        // deletereaction(isGroup,c_id, m_id,senderId);
+        deletereaction(isGroup,c_id, m_id,senderId);
        
 
     // alert(c_id);
