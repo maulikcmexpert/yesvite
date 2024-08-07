@@ -3266,6 +3266,8 @@ $(document).on('click','.reaction',function (){
 })
 
 async function deletereaction(isGroup,messageId,conversationId,senderId = null) {
+    console.log(isGroup);
+    
     if (isGroup == true || isGroup == "true") {
         const messagesRef = ref(database, `Groups/${conversationId}/message/${messageId}/messageReact`);
         const messagesSnapshot = await get(messagesRef);
