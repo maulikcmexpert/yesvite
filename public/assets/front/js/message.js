@@ -3274,14 +3274,15 @@ async function deletereaction(isGroup,messageId,conversationId,senderid) {
             database,
             `Groups/${conversationId}/message`
         );
+        console.log(MessageRef);
         const messagesSnapshot = await get(MessageRef);
 
         if (messagesSnapshot.exists()) {
             const messages = messagesSnapshot.val();
             const updates = {};
-                // updates[
-                //     `Groups/${conversationId}/message/${messageId}/messageReact/${senderid}/react`
-                // ] = "";
+            //     updates[
+            //         `Groups/${conversationId}/message/${messageId}/messageReact/${senderid}/react`
+            //     ] = "";
             // await update(ref(database), updates);
         }
 
