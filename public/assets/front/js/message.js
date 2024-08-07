@@ -3259,15 +3259,27 @@ $(document).on('click','.reaction ',function (){
     var messageId = $(this).parent().parent().find(".reaction-icon").data('message-id');
     }
 
-    console.log(conversationId);
-    console.log(messageId);
-    // deletereaction(isGroup,messageId, conversationId);
+    deletereaction(isGroup,messageId, conversationId);
        
 })
 
 async function deletereaction(isGroup,messageId,conversationId) {
     if (isGroup == true || isGroup == "true") {
+        const senderid=$('.senderUser').val();
+        const MessageRef = ref(
+            database,
+            `Groups/${conversationId}/message`
+        );
+        const messagesSnapshot = await get(MessageRef);
 
+        if (messagesSnapshot.exists()) {
+            const messages = messagesSnapshot.val();
+            const updates = {};
+                updates[
+                    `Groups/${conversationId}/message/${messageId}/messageReact/${senderid}/react`
+                ] = "";
+            await update(ref(database), updates);
+        }
 
     }else{
         const messagesRef = ref(database, `Messages/${conversationId}/message`);
