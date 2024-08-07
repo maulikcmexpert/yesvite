@@ -1248,7 +1248,6 @@ function emailChecker($email)
 function send_notification_FCM($deviceToken, $notifyData)
 {
 
-    dd($notifyData);
     $serverKey  = ServerKey::first();
     $SERVER_API_KEY = $serverKey->firebase_key;
 
@@ -1260,9 +1259,7 @@ function send_notification_FCM($deviceToken, $notifyData)
         'sound' => "default",
         'message' => $notifyData['message'],
         'color' => "#79bc64",
-        // "data" => $notifyData
     ];
-    $event = ['event_id' => '2015'];
     $dataPayload = [
         "to" => $deviceToken,
         "data" => $notifyData,
