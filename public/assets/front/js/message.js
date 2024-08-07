@@ -3255,7 +3255,7 @@ $(document).on('click','.reaction ',function (){
 
     console.log(conversationId);
     console.log(messageId);
-    deletereaction(isGroup,messageId, conversationId);
+    // deletereaction(isGroup,messageId, conversationId);
        
 })
 
