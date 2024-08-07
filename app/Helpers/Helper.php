@@ -259,7 +259,7 @@ function sendNotification($notificationType, $postData)
     }
 
     if ($notificationType == 'update_address' || $notificationType == 'update_time' || $notificationType == 'update_event' || $notificationType == 'update_date') {
-
+        dd($postData);
         if (count($invitedusers) != 0) {
 
             foreach ($invitedusers as $value) {
