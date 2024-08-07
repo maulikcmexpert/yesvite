@@ -3261,7 +3261,7 @@ $(document).on('click','.reaction ',function (){
         console.log(c_id);
         console.log(m_id);
 
-        // deletereaction(isGroup,c_id, m_id,senderId);
+        deletereaction(isGroup,c_id, m_id,senderId);
        
 
     // alert(c_id);
@@ -3269,7 +3269,10 @@ $(document).on('click','.reaction ',function (){
 
 async function deletereaction(isGroup,messageId,conversationId,senderId = null) {
     if (isGroup == true || isGroup == "true") {
-
+        const messagesRef = ref(database, `Groups/${conversationId}/message`);
+        const messagesSnapshot = await get(messagesRef);
+        console.log(messagesSnapshot);
+        
     }else{
         const messagesRef = ref(database, `Messages/${conversationId}/message`);
         const messagesSnapshot = await get(messagesRef);
