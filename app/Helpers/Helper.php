@@ -430,19 +430,19 @@ function sendNotification($notificationType, $postData)
                             $notification_image = asset('pubilc/storage/post_image/' . $notificationImage->post_image);
                         }
                         $notificationData = [
-                            // 'event_id' => (int)$postData['event_id'],
+                            'event_id' => (int)$postData['event_id'],
                             'message' => $notification_message,
-                            // 'type' => $notificationType,
-                            // 'notification_image' => $notification_image,
-                            // 'post_id' => $postData['post_id'],
-                            // 'is_in_photo_moudle' => $postData['is_in_photo_moudle'],
-                            // 'post_type' => $postData['post_type'],
-                            // 'event_wall' => isset($ownerEvent->event_settings->event_wall) ? $ownerEvent->event_settings->event_wall : '',
-                            // 'guest_list_visible_to_guests' => isset($ownerEvent->event_settings->guest_list_visible_to_guests) ? $ownerEvent->event_settings->guest_list_visible_to_guests : '',
-                            // 'is_event_owner' => 1,
-                            // 'is_post_by_host' => 1,
-                            // 'is_owner_post' => 1,
-                            // 'rsvp_staus' => '',
+                            'type' => $notificationType,
+                            'notification_image' => $notification_image,
+                            'post_id' => $postData['post_id'],
+                            'is_in_photo_moudle' => $postData['is_in_photo_moudle'],
+                            'post_type' => $postData['post_type'],
+                            'event_wall' => isset($ownerEvent->event_settings->event_wall) ? $ownerEvent->event_settings->event_wall : '',
+                            'guest_list_visible_to_guests' => isset($ownerEvent->event_settings->guest_list_visible_to_guests) ? $ownerEvent->event_settings->guest_list_visible_to_guests : '',
+                            'is_event_owner' => 1,
+                            'is_post_by_host' => 1,
+                            'is_owner_post' => 1,
+                            'rsvp_staus' => '',
 
                         ];
                         // dd($notificationData);
@@ -1247,7 +1247,7 @@ function emailChecker($email)
 function send_notification_FCM($deviceToken, $notifyData)
 {
 
-
+    dd($notifyData);
     $serverKey  = ServerKey::first();
     $SERVER_API_KEY = $serverKey->firebase_key;
 
@@ -1264,8 +1264,7 @@ function send_notification_FCM($deviceToken, $notifyData)
     $event = ['event_id' => '2015'];
     $dataPayload = [
         "to" => $deviceToken,
-        // "data" => $notifyData,
-        "data" => $event,
+        "data" => $notifyData,
         "notification" => $notificationLoad,
         "priority" => "high",
     ];
