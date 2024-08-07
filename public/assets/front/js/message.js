@@ -3250,10 +3250,14 @@ async function send_push_notification(
 $(document).on('click','.reaction ',function (){
 
     var conversationId=$('.selected_conversasion').val();
-    // var messageId = $(this).parent().parent().find(".reaction-icon").data('message-id');
-    var messageId = $(this).parent().parent().parent().html();
 
     var isGroup=$('.msg-list').attr('data-group');
+
+    if(isGroup==true||isGroup=="true"){
+        var messageId = $(this).parent().parent().parent().find(".reaction-icon").data('message-id');
+    }else{
+    var messageId = $(this).parent().parent().find(".reaction-icon").data('message-id');
+    }
 
     console.log(conversationId);
     console.log(messageId);
