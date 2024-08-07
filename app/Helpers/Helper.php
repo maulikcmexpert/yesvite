@@ -165,7 +165,8 @@ function sendNotification($notificationType, $postData)
                             'event_wall' => $value->event->event_settings->event_wall,
                             'guest_list_visible_to_guests' => $value->event->event_settings->guest_list_visible_to_guests,
                             'event_potluck' => $value->event->event_settings->podluck,
-                            'guest_pending_count' => getGuestPendingRsvpCount($postData['event_id'])
+                            'guest_pending_count' => getGuestPendingRsvpCount($postData['event_id']),
+                            'rsvp_status' => '0'
                         ];
 
                         $checkNotificationSetting = checkNotificationSetting($value->user_id);
