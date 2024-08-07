@@ -134,7 +134,7 @@ function sendNotification($notificationType, $postData)
 
                 $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " have invited you to: " . $value->event->event_name;
                 if ($value->is_co_host == '1') {
-                    $notification_message = $senderData->firstname . ' ' . $senderData->lastname . "invited you to be co-host in " . $value->event->event_name . ' Accept?';
+                    $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " invited you to be co-host in " . $value->event->event_name . ' Accept?';
                 }
                 $notification = new Notification;
                 $notification->event_id = $postData['event_id'];
