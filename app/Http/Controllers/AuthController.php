@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
 use Flasher\Prime\FlasherInterface;
 use Google_Client;
+use App\Mail\forgotpasswordMail;
 use Laravel\Passport\Token;
 // use GuzzleHttp\Client;
 use Google\Client;
@@ -560,8 +561,18 @@ class AuthController extends Controller
         } else {
             return response()->json(true);
         }
+        
     }
-    
+
+
+    public function checkEmail(Request $request)
+    {
+        $email = $request->input('email');
+        $exists = User::where('email', $email)->exists();
+
+        return response()->json($exists);
+    }
+
     public function storeAdvertisementStatus(Request $request)
     {
         if (Auth::check()) {
@@ -586,5 +597,85 @@ class AuthController extends Controller
             $check->delete();
             Token::where('user_id', $id)->delete();
         }
+    }
+
+    public function forgetpassword()
+    {
+        $page = 'front/forgetpassword';
+        $title = "Forget Password";
+        $js = ['forget_password'];
+        return view('layout', compact('page', 'title', 'js'));
+    }
+
+    public function otpverification(Request $request)
+    {
+
+        $token = str_pad(random_int(0, 9999), 4, '0', STR_PAD_LEFT);
+
+        $userDetails = User::where('email', $request->email)->first();
+
+        $user_id=$userDetails->id;
+
+        $digit1 = substr($token, 0, 1);
+        $digit2 = substr($token, 1, 1);
+        $digit3 = substr($token, 2, 1);
+        $digit4 = substr($token, 3, 1);
+
+
+
+        $userData = [
+            'username' => $userDetails->firstname . ' ' . $userDetails->lastname,
+            'email' => $userDetails->email,
+            'digit1' => $digit1,
+            'digit2' => $digit2,
+            'digit3' => $digit3,
+            'digit4' => $digit4
+        ];
+
+        $otp = $digit1 . $digit2 . $digit3 . $digit4;
+
+        Mail::to($request->email)->send(new forgotpasswordMail(array($userData)));
+
+        $page = 'front/otpverification';
+        $title = "Verify Otp";
+        $js = ['forget_password'];
+        return view('layout', compact('page', 'title', 'js','otp','user_id'));
+    }
+
+    public function checkOtp(Request $request){
+        $user_id=$request->user_id;
+        $num1=$request->number1;
+        $num2=$request->number2;
+        $num3=$request->number3;
+        $num4=$request->number4;
+
+        $otp=$num1.$num2.$num3.$num4;
+
+        if($request->generated_otp==$otp){
+            $page = 'front/forget_changepassword';
+            $title = "Change Password";
+            $js = ['forget_password'];
+            return view('layout', compact('page', 'title', 'js','user_id'));
+        }
+    }
+
+    public function forgetChangepassword(Request $request){
+       
+        // $request->validate([
+        //     'new_password' => 'required|min:8',
+        //     'conform_password' => 'required|min:8|same:new_password',
+        //     'user_id'=>'required'
+        // ]);
+
+        $userUpdate = User::where('id', $request->user_id)->first();
+        $userUpdate->password = Hash::make($request->new_password);
+        $userUpdate->password_updated_date = date('Y-m-d');
+        $userUpdate->save();
+
+        DB::commit();
+        // toastr()->success('Password Changed');
+        return  Redirect::to('login')->with('success', 'Password has been changed.');
+
+        // return  redirect()->route('auth.login');
     }
 }

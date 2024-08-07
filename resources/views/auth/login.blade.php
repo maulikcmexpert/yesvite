@@ -49,7 +49,7 @@
                             <input class="form-check-input" type="checkbox" name="remember" {{  (Cookie::has('email'))  ? 'checked' : '' }}> Remember me
                         </label>
                     </div>
-                    <a href="#">Forgot Password</a>
+                    <a href="{{ route('auth.forgetpassword')}}">Forgot Password ?</a>
                 </div>
                 @if ($errors->any())
                 <div class="alert alert-danger">

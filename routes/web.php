@@ -118,7 +118,18 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('register', 'register')->name('auth.register')->middleware('isAuthenticate');
     Route::post('store_register', 'userRegister')->name('store.register');
     Route::post('check-email', 'checkEmailExistence');
+    Route::post('check_mail', 'checkEmail');
+
+
     Route::post('advertisement_status','storeAdvertisementStatus');
+    Route::get('forget_password','forgetpassword')->name('auth.forgetpassword');
+    Route::post('otp_verify','otpverification')->name('auth.otpverification');
+    Route::post('check_otp', 'checkOtp')->name('auth.checkOtp');
+    Route::post('forget_changepassword', 'forgetChangepassword')->name('auth.forgetChangepassword');
+
+
+
+
 
     Route::get('login/{provider}', [SocialController::class, 'redirectToProvider']);
     Route::get('login/{provider}/callback', [SocialController::class, 'handleProviderCallback']);
