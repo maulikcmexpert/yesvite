@@ -3247,7 +3247,7 @@ async function send_push_notification(
 }
 
 
-$(document).on('click','.reaction ',function (){
+$(document).on('click','.reaction',function (){
 
     var m_id=$('.selected_conversasion').val();
     var senderId = $('.senderUser').val();
