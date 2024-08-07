@@ -3263,12 +3263,13 @@ $(document).on('click','.reaction ',function (){
     console.log(senderid);
 
 
-    deletereaction(isGroup,messageId, conversationId,senderid);
+    deletereaction(isGroup,messageId,conversationId,senderid);
        
 })
 
 async function deletereaction(isGroup,messageId,conversationId,senderid) {
     if (isGroup == true || isGroup == "true") {
+        alert();
         const MessageRef = ref(
             database,
             `Groups/${conversationId}/message`
