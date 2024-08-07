@@ -302,7 +302,7 @@ function sendNotification($notificationType, $postData)
                             }
                             $push_notification_message = $senderData->firstname . ' ' . $senderData->lastname . " has updated the event details for " . $value->event->event_name;
                             $notificationData = [
-                                'message' => $notification_message,
+                                'message' => $push_notification_message,
                                 'type' => $notificationType,
                                 'notification_image' => $push_notification_message,
                                 'event_id' => $postData['event_id'],
