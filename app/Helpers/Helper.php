@@ -430,7 +430,7 @@ function sendNotification($notificationType, $postData)
                             $notification_image = asset('pubilc/storage/post_image/' . $notificationImage->post_image);
                         }
                         $notificationData = [
-                            'event_id' => $postData['event_id'],
+                            'event_id' => (int)$postData['event_id'],
                             'message' => $notification_message,
                             'type' => $notificationType,
                             'notification_image' => $notification_image,
