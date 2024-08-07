@@ -94,7 +94,7 @@ function getGuestPendingRsvpCount($eventId)
 
 function sendNotification($notificationType, $postData)
 {
-    dd($postData);
+
     //'invite', 'upload_post', 'like_post', 'comment', 'reply', 'poll', 'rsvp'
     $senderData = User::where('id', $postData['sender_id'])->first();
     if ($notificationType == 'owner_notify') {
@@ -445,7 +445,7 @@ function sendNotification($notificationType, $postData)
                             'rsvp_staus' => '',
 
                         ];
-                        dd($notificationData);
+                        dd($postData['event_id']);
                         $checkNotificationSetting = checkNotificationSetting($ownerEvent->user_id);
 
                         if ((count($checkNotificationSetting) && $checkNotificationSetting['wall_post']['push'] == '1') && $ownerEvent->notification_on_off == '1') {
