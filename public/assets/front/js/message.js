@@ -3270,13 +3270,12 @@ $(document).on('click','.reaction ',function (){
 async function deletereaction(isGroup,messageId,conversationId,senderid) {
     if (isGroup == true || isGroup == "true") {
 
-        await update(
-            ref(
-                database,
-                `/Groups/${conversationId}/message/${messageId}/messageReact/${senderid}`
-            ),
-            { react: ""}
+        const messageReactRef = ref(
+            database,
+            `/Groups/${conversationId}/message/${messageId}/messageReact/${senderid}`
         );
+        
+        await update(messageReactRef, { react: "" });
         // console.log('Groups/'+conversationId+'/message/'+messageId+'/messageReact/'+senderid+'/react');
         // const MessageRef = ref(
         //     database,
