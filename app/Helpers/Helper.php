@@ -1301,9 +1301,9 @@ function send_notification_FCM_and($deviceToken, $notifyData)
     $SERVER_API_KEY = $serverKey->firebase_key;
     $URL = 'https://fcm.googleapis.com/fcm/send';
 
-    dd($deviceToken);
+    // dd($deviceToken);
     $dataPayload = [
-        "to" => $deviceToken,
+        "to" => trim($deviceToken),
         "data" => $notifyData,
     ];
 
