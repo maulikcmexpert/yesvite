@@ -94,7 +94,7 @@ function getGuestPendingRsvpCount($eventId)
 
 function sendNotification($notificationType, $postData)
 {
-
+    dd($postData);
     //'invite', 'upload_post', 'like_post', 'comment', 'reply', 'poll', 'rsvp'
     $senderData = User::where('id', $postData['sender_id'])->first();
     if ($notificationType == 'owner_notify') {
