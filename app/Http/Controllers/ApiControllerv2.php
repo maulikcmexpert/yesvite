@@ -3229,6 +3229,9 @@ class ApiControllerv2 extends Controller
         $user  = Auth::guard('api')->user();
         $rawData = $request->getContent();
         $eventData = json_decode($rawData, true);
+
+        dd($eventData);
+
         if ($eventData == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
         }
