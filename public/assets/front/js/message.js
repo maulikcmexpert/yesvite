@@ -3267,9 +3267,8 @@ $(document).on('click','.reaction',function (){
 })
 
 async function deletereaction(isGroup,messageId,conversationId,senderId = null) {
-    console.log(isGroup);
     
-    if (isGroup == true || isGroup == "true" || isGroup == 1) {
+    if (isGroup == true || isGroup == "true") {
         const messagesRef = ref(database, `Groups/${conversationId}/message/${messageId}/messageReact`);
         const messagesSnapshot = await get(messagesRef);
         // console.log(messagesSnapshot.val());
@@ -3281,12 +3280,10 @@ async function deletereaction(isGroup,messageId,conversationId,senderId = null) 
     }else{
         const messagesRef = ref(database, `Messages/${conversationId}/message/${messageId}`);
         const messagesSnapshot = await get(messagesRef);
-        console.log(messagesSnapshot.val());
         
         if (messagesSnapshot.exists()) {
             const messages = messagesSnapshot.val();
-            // console.log(messages);
-            
+          
             const updates = {};
                 updates[
                     `Messages/${conversationId}/message/${messageId}/react`
