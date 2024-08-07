@@ -430,8 +430,8 @@ function sendNotification($notificationType, $postData)
                             $notification_image = asset('pubilc/storage/post_image/' . $notificationImage->post_image);
                         }
                         $notificationData = [
-                            'event_id' => (int)$postData['event_id'],
-                            // 'message' => $notification_message,
+                            // 'event_id' => (int)$postData['event_id'],
+                            'message' => $notification_message,
                             // 'type' => $notificationType,
                             // 'notification_image' => $notification_image,
                             // 'post_id' => $postData['post_id'],
@@ -1261,10 +1261,11 @@ function send_notification_FCM($deviceToken, $notifyData)
         'color' => "#79bc64",
         // "data" => $notifyData
     ];
-
+    $event = ['event_id' => '2015'];
     $dataPayload = [
         "to" => $deviceToken,
-        "data" => $notifyData,
+        // "data" => $notifyData,
+        "data" => $event,
         "notification" => $notificationLoad,
         "priority" => "high",
     ];
