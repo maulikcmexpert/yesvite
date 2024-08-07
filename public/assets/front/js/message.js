@@ -3253,7 +3253,7 @@ $(document).on('click','.reaction ',function (){
     var senderId = $('.senderUser').val();
     var isGroup=$('.msg-list').attr('data-group')
     if(isGroup == true || isGroup == "true"){
-        var c_id = $(this).parent().parent().parent().find(".reaction-icon").data('message-id');
+        var c_id = $(this).data('message-id');
     }else{
         var c_id = $(this).parent().parent().find(".reaction-icon").data('message-id');
     }
@@ -3261,7 +3261,7 @@ $(document).on('click','.reaction ',function (){
         console.log(c_id);
         console.log(m_id);
 
-        // deletereaction(isGroup,c_id, m_id,senderId);
+        deletereaction(isGroup,c_id, m_id,senderId);
        
 
     // alert(c_id);
