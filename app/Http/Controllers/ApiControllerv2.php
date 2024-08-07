@@ -4843,8 +4843,8 @@ class ApiControllerv2 extends Controller
                 $notificationParam = [
                     'sender_id' => $user->id,
                     'event_id' => $eventData['event_id'],
-                    'from_addr' => $eventData['from_addr'],
-                    'to_addr' => $eventData['to_addr'],
+                    'from_addr' => '',
+                    'to_addr' => '',
                     'newUser' => $eventData['invited_new_guest']
                 ];
 
