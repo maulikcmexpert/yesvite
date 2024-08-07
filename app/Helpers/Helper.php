@@ -135,7 +135,7 @@ function sendNotification($notificationType, $postData)
 
                 $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " have invited you to: " . $value->event->event_name;
                 if ($value->is_co_host == '1') {
-                    $notification_message = $senderData->firstname . ' ' . $senderData->lastname . "invited you to co-host " . $value->event->event_name . ' Accept?';
+                    $notification_message = $senderData->firstname . ' ' . $senderData->lastname . "invited you to be co-host in " . $value->event->event_name . ' Accept?';
                 }
                 $notification = new Notification;
                 $notification->event_id = $postData['event_id'];
@@ -1030,9 +1030,9 @@ function sendNotification($notificationType, $postData)
         $getPostOwnerId = Event::with(['event_settings', 'user'])->where('id', $postData['event_id'])->first();
 
         if ($postData['rsvp_status'] == '1') {
-            $notification_message = $senderData->firstname . ' '  . $senderData->lastname . " RSVP'd Yes for" . $getPostOwnerId->event_name;
+            $notification_message = $senderData->firstname . ' '  . $senderData->lastname . " RSVP'd Yes for " . $getPostOwnerId->event_name;
         } elseif ($postData['rsvp_status'] == '0') {
-            $notification_message = $senderData->firstname . ' '  . $senderData->lastname . " RSVP'd No for" . $getPostOwnerId->event_name;
+            $notification_message = $senderData->firstname . ' '  . $senderData->lastname . " RSVP'd No for " . $getPostOwnerId->event_name;
         }
         if ($getPostOwnerId->user_id != $postData['sender_id']) {
             $notification = new Notification;
