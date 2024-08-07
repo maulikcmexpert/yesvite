@@ -369,6 +369,9 @@ function sendNotification($notificationType, $postData)
                     'event_id' => $postData['event_id'],
                     'event_name' => $getEventOwner->event_name,
                     'event_wall' => $getEventOwner->event_settings->event_wall,
+                    'guest_list_visible_to_guests' => isset($getEventOwner->event_settings->guest_list_visible_to_guests) ? $getEventOwner->event_settings->guest_list_visible_to_guests : '',
+                    'event_potluck' => $getEventOwner->event_settings->podluck,
+                    'guest_pending_count' => getGuestPendingRsvpCount($postData['event_id'])
                 ];
 
 
