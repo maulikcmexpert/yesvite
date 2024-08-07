@@ -3274,11 +3274,11 @@ async function deletereaction(isGroup,messageId,conversationId) {
             const messages = messagesSnapshot.val();
             const updates = {};
 
-            for (var messageId in messages) {
+            // for (var messageId in messages) {
                 updates[
                     `Messages/${conversationId}/message/${messageId}/react`
                 ] = "";
-            }
+            // }
             await update(ref(database), updates);
         }
     }
