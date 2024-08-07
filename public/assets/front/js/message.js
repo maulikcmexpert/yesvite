@@ -3250,22 +3250,26 @@ async function send_push_notification(
 $(document).on('click','.reaction ',function (){
 
     var m_id=$('.selected_conversasion').val();
-    var c_id = $(this).parent().parent().find(".reaction-icon").data('message-id');
-
+    var senderId = $('.senderUser').val();
     var isGroup=$('.msg-list').attr('data-group')
-    alert(isGroup)
-        // var c_id=$(this).closest($(".reaction-icon").data("message-id"));
+    if(isGroup == true || isGroup == "true"){
+        var c_id = $(this).parent().parent().parent().find(".reaction-icon").data('message-id');
+    }else{
+        var c_id = $(this).parent().parent().find(".reaction-icon").data('message-id');
+    }
+    // var c_id=$(this).closest($(".reaction-icon").data("message-id"));
         console.log(c_id);
         console.log(m_id);
 
-        deletereaction(isGroup,c_id, m_id);
+        // deletereaction(isGroup,c_id, m_id,senderId);
        
 
     // alert(c_id);
 })
 
-async function deletereaction(isGroup,messageId,conversationId) {
+async function deletereaction(isGroup,messageId,conversationId,senderId = null) {
     if (isGroup == true || isGroup == "true") {
+
     }else{
         const messagesRef = ref(database, `Messages/${conversationId}/message`);
         const messagesSnapshot = await get(messagesRef);
