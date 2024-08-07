@@ -3256,9 +3256,9 @@ $(document).on('click','.reaction',function (){
     var c_id = $(this).data('message-id');
  
     // var c_id=$(this).closest($(".reaction-icon").data("message-id"));
-        console.log(isGroup);
-        console.log(c_id);
-        console.log(m_id);
+        // console.log(isGroup);
+        // console.log(c_id);
+        // console.log(m_id);
 
         deletereaction(isGroup,c_id, m_id,senderId);
        
