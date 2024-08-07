@@ -431,18 +431,18 @@ function sendNotification($notificationType, $postData)
                         }
                         $notificationData = [
                             'event_id' => (int)$postData['event_id'],
-                            'message' => $notification_message,
-                            'type' => $notificationType,
-                            'notification_image' => $notification_image,
-                            'post_id' => $postData['post_id'],
-                            'is_in_photo_moudle' => $postData['is_in_photo_moudle'],
-                            'post_type' => $postData['post_type'],
-                            'event_wall' => isset($ownerEvent->event_settings->event_wall) ? $ownerEvent->event_settings->event_wall : '',
-                            'guest_list_visible_to_guests' => isset($ownerEvent->event_settings->guest_list_visible_to_guests) ? $ownerEvent->event_settings->guest_list_visible_to_guests : '',
-                            'is_event_owner' => 1,
-                            'is_post_by_host' => 1,
-                            'is_owner_post' => 1,
-                            'rsvp_staus' => '',
+                            // 'message' => $notification_message,
+                            // 'type' => $notificationType,
+                            // 'notification_image' => $notification_image,
+                            // 'post_id' => $postData['post_id'],
+                            // 'is_in_photo_moudle' => $postData['is_in_photo_moudle'],
+                            // 'post_type' => $postData['post_type'],
+                            // 'event_wall' => isset($ownerEvent->event_settings->event_wall) ? $ownerEvent->event_settings->event_wall : '',
+                            // 'guest_list_visible_to_guests' => isset($ownerEvent->event_settings->guest_list_visible_to_guests) ? $ownerEvent->event_settings->guest_list_visible_to_guests : '',
+                            // 'is_event_owner' => 1,
+                            // 'is_post_by_host' => 1,
+                            // 'is_owner_post' => 1,
+                            // 'rsvp_staus' => '',
 
                         ];
                         // dd($notificationData);
