@@ -3249,50 +3249,23 @@ async function send_push_notification(
 
 $(document).on('click','.reaction ',function (){
 
-    var conversationId=$('.selected_conversasion').val();
+    var m_id=$('.selected_conversasion').val();
+    var c_id = $(this).parent().parent().find(".reaction-icon").data('message-id');
 
-    var isGroup=$('.msg-list').attr('data-group');
+    var isGroup=$('.msg-list').attr('data-group')
+    alert(isGroup)
+        // var c_id=$(this).closest($(".reaction-icon").data("message-id"));
+        console.log(c_id);
+        console.log(m_id);
 
-    if(isGroup==true||isGroup=="true"){
-        var messageId = $(this).parent().parent().parent().find(".reaction-icon").data('message-id');
-    }else{
-    var messageId = $(this).parent().parent().find(".reaction-icon").data('message-id');
-    }
-
-    var senderid=$('.senderUser').val();
-    console.log(senderid);
-
-
-    deletereaction(isGroup,messageId,conversationId,senderid);
+        deletereaction(isGroup,c_id, m_id);
        
+
+    // alert(c_id);
 })
 
-async function deletereaction(isGroup,messageId,conversationId,senderid) {
+async function deletereaction(isGroup,messageId,conversationId) {
     if (isGroup == true || isGroup == "true") {
-
-        const messageReactRef = ref(
-            database,
-            `/Groups/${conversationId}/message/${messageId}/messageReact/${senderid}`
-        );
-        
-        await update(messageReactRef, { react: "" });
-        // console.log('Groups/'+conversationId+'/message/'+messageId+'/messageReact/'+senderid+'/react');
-        // const MessageRef = ref(
-        //     database,
-        //     `Groups/${conversationId}/message`
-        // );
-        // const messagesSnapshot = await get(MessageRef);
-        // console.log(messagesSnapshot);
-
-        // if (messagesSnapshot.exists()) {
-        //     const messages = messagesSnapshot.val();
-        //     const updates = {};
-        //         updates[
-        //             `Groups/${conversationId}/message/${messageId}/messageReact/${senderid}/react`
-        //         ] = "";
-        //     await update(ref(database), updates);
-        // }
-
     }else{
         const messagesRef = ref(database, `Messages/${conversationId}/message`);
         const messagesSnapshot = await get(messagesRef);
@@ -3300,9 +3273,12 @@ async function deletereaction(isGroup,messageId,conversationId,senderid) {
         if (messagesSnapshot.exists()) {
             const messages = messagesSnapshot.val();
             const updates = {};
+
+            for (var messageId in messages) {
                 updates[
                     `Messages/${conversationId}/message/${messageId}/react`
                 ] = "";
+            }
             await update(ref(database), updates);
         }
     }
