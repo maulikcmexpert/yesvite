@@ -3259,29 +3259,14 @@ $(document).on('click','.reaction ',function (){
     var messageId = $(this).parent().parent().find(".reaction-icon").data('message-id');
     }
 
-    var senderid=$('.senderUser').val();
 
-
-    deletereaction(isGroup,messageId, conversationId,senderid);
+    // deletereaction(isGroup,messageId, conversationId);
        
 })
 
-async function deletereaction(isGroup,messageId,conversationId,senderid=null) {
+async function deletereaction(isGroup,messageId,conversationId) {
     if (isGroup == true || isGroup == "true") {
-        const MessageRef = ref(
-            database,
-            `Groups/${conversationId}/message`
-        );
-        const messagesSnapshot = await get(MessageRef);
 
-        if (messagesSnapshot.exists()) {
-            const messages = messagesSnapshot.val();
-            const updates = {};
-                updates[
-                    `Groups/${conversationId}/message/${messageId}/messageReact/${senderid}/react`
-                ] = "";
-            await update(ref(database), updates);
-        }
 
     }else{
         const messagesRef = ref(database, `Messages/${conversationId}/message`);
