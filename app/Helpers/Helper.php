@@ -1259,7 +1259,7 @@ function send_notification_FCM($deviceToken, $notifyData)
         'sound' => "default",
         'message' => $notifyData['message'],
         'color' => "#79bc64",
-        "data" => $notifyData
+        // "data" => $notifyData
     ];
 
     $dataPayload = [
