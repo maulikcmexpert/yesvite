@@ -3250,7 +3250,9 @@ async function send_push_notification(
 $(document).on('click','.reaction ',function (){
 
     var conversationId=$('.selected_conversasion').val();
-    var messageId = $(this).parent().parent().find(".reaction-icon").data('message-id');
+    // var messageId = $(this).parent().parent().find(".reaction-icon").data('message-id');
+    var messageId = $(this).parent().parent().html();
+
     var isGroup=$('.msg-list').attr('data-group');
 
     console.log(conversationId);
