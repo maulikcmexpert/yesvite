@@ -3230,6 +3230,7 @@ class ApiControllerv2 extends Controller
         $rawData = $request->getContent();
         $eventData = json_decode($rawData, true);
 
+
         if ($eventData == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
         }
