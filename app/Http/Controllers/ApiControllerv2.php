@@ -4840,15 +4840,7 @@ class ApiControllerv2 extends Controller
                         EventPotluckCategory::where('event_id', $eventData['event_id'])->delete();
                     }
                 }
-                $notificationParam = [
-                    'sender_id' => $user->id,
-                    'event_id' => $eventData['event_id'],
-                    'from_addr' => '',
-                    'to_addr' => '',
-                    'newUser' => $eventData['invited_new_guest']
-                ];
 
-                sendNotification('update_address', $notificationParam);
                 if (isset($eventData['addr_change']) && $eventData['addr_change'] == '1') {
 
                     $notificationParam = [
