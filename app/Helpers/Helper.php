@@ -172,6 +172,7 @@ function sendNotification($notificationType, $postData)
                         if ((count($checkNotificationSetting) && $checkNotificationSetting['invitations']['push'] == '1') &&  $value->notification_on_off == '1') {
 
                             if ($deviceData->model == 'And') {
+                                dd(1);
 
                                 send_notification_FCM_and($deviceData->device_token, $notificationData);
                             }
