@@ -3274,7 +3274,7 @@ async function deletereaction(isGroup,messageId,conversationId,senderId = null) 
         // console.log(messagesSnapshot.val());
         if (messagesSnapshot.exists()) {
 
-            var overviewRef = ref(database, `Groups/${conversationId}/message/${messageId}/messageReact`);
+            var overviewRef = ref(database, `Groups/${conversationId}/message/${messageId}/messageReact/${senderId}`);
              await remove(overviewRef);
         }
     }else{
