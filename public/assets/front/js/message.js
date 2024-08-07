@@ -3283,14 +3283,15 @@ async function deletereaction(isGroup,messageId,conversationId,senderId = null) 
         
         if (messagesSnapshot.exists()) {
             const messages = messagesSnapshot.val();
-            console.log(messages.receiverId);
-            
-            // const updates = {};
-            //     updates[
-            //         `Messages/${conversationId}/message/${messageId}/react`
-            //     ] = "";
-            
-            // await update(ref(database), updates);
+            // console.log(messages.receiverId);
+            if(messages.receiverId == senderId){
+                const updates = {};
+                    updates[
+                        `Messages/${conversationId}/message/${messageId}/react`
+                    ] = "";
+                
+                await update(ref(database), updates);
+            }
         }
     }
 }
