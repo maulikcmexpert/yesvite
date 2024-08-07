@@ -1336,7 +1336,7 @@ function createMessageElement(key, messageData, isGroup) {
                                   .includes("2764}")
                                   ? "heart_reaction"
                                   : ""
-                          }">${String.fromCodePoint(
+                          }" data-message-id ="${key}">${String.fromCodePoint(
                               parseInt(
                                   reactData.react.replace(/\\u\{(.+)\}/, "$1"),
                                   16
