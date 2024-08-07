@@ -3269,10 +3269,19 @@ $(document).on('click','.reaction ',function (){
 
 async function deletereaction(isGroup,messageId,conversationId,senderId = null) {
     if (isGroup == true || isGroup == "true") {
-        const messagesRef = ref(database, `Groups/${conversationId}/message`);
+        const messagesRef = ref(database, `Groups/${conversationId}/message/${messageId}/messageReact/${senderId}/react`);
         const messagesSnapshot = await get(messagesRef);
         console.log(messagesSnapshot.val());
-        
+        if (messagesSnapshot.exists()) {
+            const messages = messagesSnapshot.val();
+            const updates = {};
+
+                // updates[
+                //     `Groups/${conversationId}/message/${messageId}/messageReact/${senderId}/react`
+                // ] = "";
+          
+            await update(ref(database), updates);
+        }
     }else{
         const messagesRef = ref(database, `Messages/${conversationId}/message`);
         const messagesSnapshot = await get(messagesRef);
@@ -3281,11 +3290,11 @@ async function deletereaction(isGroup,messageId,conversationId,senderId = null) 
             const messages = messagesSnapshot.val();
             const updates = {};
 
-            for (var messageId in messages) {
+          
                 updates[
                     `Messages/${conversationId}/message/${messageId}/react`
                 ] = "";
-            }
+            
             await update(ref(database), updates);
         }
     }
