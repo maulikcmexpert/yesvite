@@ -3274,8 +3274,8 @@ async function deletereaction(isGroup,messageId,conversationId,senderid) {
             database,
             `Groups/${conversationId}/message`
         );
-        console.log(MessageRef);
         const messagesSnapshot = await get(MessageRef);
+        console.log(messagesSnapshot);
 
         if (messagesSnapshot.exists()) {
             const messages = messagesSnapshot.val();
