@@ -1360,7 +1360,7 @@ function createMessageElement(key, messageData, isGroup) {
                           .includes("2764}")
                           ? "heart_reaction"
                           : ""
-                  }">${String?.fromCodePoint(
+                  }" data-message-id ="${key}">${String?.fromCodePoint(
                       parseInt(
                           messageData?.react?.replace(/\\u\{(.+)\}/, "$1"),
                           16
@@ -3261,7 +3261,7 @@ $(document).on('click','.reaction ',function (){
         console.log(c_id);
         console.log(m_id);
 
-        deletereaction(isGroup,c_id, m_id,senderId);
+        // deletereaction(isGroup,c_id, m_id,senderId);
        
 
     // alert(c_id);
@@ -3273,14 +3273,9 @@ async function deletereaction(isGroup,messageId,conversationId,senderId = null) 
         const messagesSnapshot = await get(messagesRef);
         // console.log(messagesSnapshot.val());
         if (messagesSnapshot.exists()) {
-            
+
             var overviewRef = ref(database, `Groups/${conversationId}/message/${messageId}/messageReact`);
              await remove(overviewRef);
-            // const updates = {};
-            //     updates[
-            //         `Groups/${conversationId}/message/${messageId}/messageReact/`
-            //     ] = "";
-            // await update(ref(database), updates);
         }
     }else{
         const messagesRef = ref(database, `Messages/${conversationId}/message`);
@@ -3289,8 +3284,6 @@ async function deletereaction(isGroup,messageId,conversationId,senderId = null) 
         if (messagesSnapshot.exists()) {
             const messages = messagesSnapshot.val();
             const updates = {};
-
-          
                 updates[
                     `Messages/${conversationId}/message/${messageId}/react`
                 ] = "";
