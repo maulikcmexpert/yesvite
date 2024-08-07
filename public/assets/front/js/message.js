@@ -3258,7 +3258,7 @@ $(document).on('click','.reaction',function (){
     // var c_id=$(this).closest($(".reaction-icon").data("message-id"));
         // console.log(isGroup);
         // console.log(c_id);
-        console.log(senderId);
+        // console.log(senderId);
 
         deletereaction(isGroup,c_id, m_id,senderId);
        
@@ -3283,7 +3283,7 @@ async function deletereaction(isGroup,messageId,conversationId,senderId = null) 
         
         if (messagesSnapshot.exists()) {
             const messages = messagesSnapshot.val();
-            console.log(messages);
+            console.log(messages.receiverId);
             
             // const updates = {};
             //     updates[
