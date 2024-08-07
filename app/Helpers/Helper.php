@@ -445,7 +445,7 @@ function sendNotification($notificationType, $postData)
                             'rsvp_staus' => '',
 
                         ];
-                        dd($postData['event_id']);
+
                         $checkNotificationSetting = checkNotificationSetting($ownerEvent->user_id);
 
                         if ((count($checkNotificationSetting) && $checkNotificationSetting['wall_post']['push'] == '1') && $ownerEvent->notification_on_off == '1') {
@@ -510,6 +510,7 @@ function sendNotification($notificationType, $postData)
                             $notification_image = asset('pubilc/storage/post_image/' . $notificationImage->post_image);
                         }
                         $notificationData = [
+                            'event_id' => $postData['event_id'],
                             'message' => $notification_message,
                             'type' => $notificationType,
                             'notification_image' => $notification_image,
@@ -518,10 +519,10 @@ function sendNotification($notificationType, $postData)
                             'post_type' => $postData['post_type'],
                             'event_wall' => isset($ownerEvent->event_settings->event_wall) ? $ownerEvent->event_settings->event_wall : '',
                             'guest_list_visible_to_guests' => isset($ownerEvent->event_settings->guest_list_visible_to_guests) ? $ownerEvent->event_settings->guest_list_visible_to_guests : '',
-                            'is_event_owner' => $is_event_owner,
-                            'is_post_by_host' => $is_post_by_host,
-                            'is_owner_post' => 0,
-                            'rsvp_status' => $rsvp_status,
+                            'is_event_owner' => 1,
+                            'is_post_by_host' => 1,
+                            'is_owner_post' => 1,
+                            'rsvp_staus' => '',
 
                         ];
                         $checkNotificationSetting = checkNotificationSetting($value->user_id);
