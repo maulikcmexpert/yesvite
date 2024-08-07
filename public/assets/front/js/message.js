@@ -3269,7 +3269,7 @@ $(document).on('click','.reaction ',function (){
 
 async function deletereaction(isGroup,messageId,conversationId,senderid) {
     if (isGroup == true || isGroup == "true") {
-        alert();
+        console.log('Groups/'+conversationId+'/message/'+messageId+'/messageReact/'+senderid+'/react');
         const MessageRef = ref(
             database,
             `Groups/${conversationId}/message`
@@ -3279,10 +3279,10 @@ async function deletereaction(isGroup,messageId,conversationId,senderid) {
         if (messagesSnapshot.exists()) {
             const messages = messagesSnapshot.val();
             const updates = {};
-                updates[
-                    `Groups/${conversationId}/message/${messageId}/messageReact/${senderid}/react`
-                ] = "";
-            await update(ref(database), updates);
+                // updates[
+                //     `Groups/${conversationId}/message/${messageId}/messageReact/${senderid}/react`
+                // ] = "";
+            // await update(ref(database), updates);
         }
 
     }else{
