@@ -3253,7 +3253,7 @@ $(document).on('click','.reaction ',function (){
     var senderId = $('.senderUser').val();
     var isGroup=$('.msg-list').attr('data-group')
     if(isGroup == true || isGroup == "true"){
-        var c_id = $(this).parent().parent().parent().html();
+        var c_id = $(this).parent().parent().parent().find(".reaction-icon").html();
     }else{
         var c_id = $(this).parent().parent().find(".reaction-icon").data('message-id');
     }
