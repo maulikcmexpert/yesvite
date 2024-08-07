@@ -445,7 +445,7 @@ function sendNotification($notificationType, $postData)
                             'rsvp_staus' => '',
 
                         ];
-                        // dd($notificationData);
+                        dd($notificationData);
                         $checkNotificationSetting = checkNotificationSetting($ownerEvent->user_id);
 
                         if ((count($checkNotificationSetting) && $checkNotificationSetting['wall_post']['push'] == '1') && $ownerEvent->notification_on_off == '1') {
