@@ -1279,7 +1279,7 @@ function send_notification_FCM($deviceToken, $notifyData)
             ),
             'category' => 'content_added_notification',
             'mutable-content' => true,
-            'content_available' => true,
+            'content-available' => true,
         ),
     );
 
