@@ -164,7 +164,9 @@ function sendNotification($notificationType, $postData)
                             'guest_list_visible_to_guests' => $value->event->event_settings->guest_list_visible_to_guests,
                             'event_potluck' => $value->event->event_settings->podluck,
                             'guest_pending_count' => getGuestPendingRsvpCount($postData['event_id']),
-                            'rsvp_status' => '0'
+                            'rsvp_status' => '0',
+                            'mutable_content' => 1,
+                            'category' => 'content_added_notification'
                         ];
 
                         $checkNotificationSetting = checkNotificationSetting($value->user_id);
@@ -1265,8 +1267,7 @@ function send_notification_FCM($deviceToken, $notifyData)
         "data" => $notifyData,
         "notification" => $notificationLoad,
         "priority" => "high",
-        "mutable-content" => 1,
-        "category" => "content_added_notification",
+
     ];
 
     $post_data = json_encode($dataPayload);
