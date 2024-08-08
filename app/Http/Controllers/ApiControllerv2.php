@@ -6089,7 +6089,7 @@ class ApiControllerv2 extends Controller
                             $potluckItem['requested_by'] =  $itemValue->users->firstname . ' ' . $itemValue->users->lastname;
                             $potluckItem['quantity'] =  $itemValue->quantity;
                             $spoken_for = UserPotluckItem::where('event_potluck_item_id', $itemValue->id)->sum('quantity');
-                            dd($spoken_for);
+
                             $potluckItem['spoken_quantity'] =  $spoken_for;
                             $potluckItem['item_carry_users'] = [];
 
