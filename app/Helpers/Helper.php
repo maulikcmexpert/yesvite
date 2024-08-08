@@ -1258,9 +1258,22 @@ function send_notification_FCM($deviceToken, $notifyData)
         'sound' => "default",
         'message' => $notifyData['message'],
         'color' => "#79bc64",
-        'mutable-content' => 1,
-        'category' => 'content_added_notification'
     ];
+    $message = array(
+        'to' => $deviceToken,
+        'notification' => $notificationLoad,
+        'data' => $notifyData,
+        'aps' => array(
+            'alert' => array(
+                'title' => "Yesvite",
+                'body' => $notifyData['message']
+            ),
+            'category' => 'myNotificationCategory',
+            'mutable-content' => true,
+        ),
+    );
+
+
     // $apsPayload = [
     //     'alert' => [
     //         'title' => "Yesvite",
@@ -1281,7 +1294,7 @@ function send_notification_FCM($deviceToken, $notifyData)
 
     ];
 
-    $post_data = json_encode($dataPayload);
+    $post_data = json_encode($message);
 
     $crl = curl_init();
 
