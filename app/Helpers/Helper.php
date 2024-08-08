@@ -1266,6 +1266,7 @@ function send_notification_FCM($deviceToken, $notifyData)
         'message' => $notifyData['message'],
         'color' => "#79bc64",
         'image' => $notifyData['notification_image'],
+        'category' => 'content_added_notification',
     );
     $message = array(
         'to' => $deviceToken,
@@ -1276,7 +1277,7 @@ function send_notification_FCM($deviceToken, $notifyData)
                 'title' => "Yesvite",
                 'body' => $notifyData['message']
             ),
-            'category' => 'myNotificationCategory',
+            'category' => 'content_added_notification',
             'mutable-content' => true,
         ),
     );
