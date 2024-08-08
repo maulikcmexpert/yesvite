@@ -1252,16 +1252,24 @@ function send_notification_FCM($deviceToken, $notifyData)
 
     $URL = 'https://fcm.googleapis.com/fcm/send';
 
-    $notificationLoad =  [
-        'title' => "Yesvite",
-        "body" => $notifyData['message'],
-        'sound' => "default",
+    // $notificationLoad =  [
+    //     'title' => "Yesvite",
+    //     "body" => $notifyData['message'],
+    //     'sound' => "default",
+    //     'message' => $notifyData['message'],
+    //     'color' => "#79bc64",
+    // ];
+    $notification = array(
+        'title' => 'Yesvite',
+        'body' => $notifyData['message'],
+        'sound' => 'default',
         'message' => $notifyData['message'],
         'color' => "#79bc64",
-    ];
+        'image' => $notifyData['notification_image'],
+    );
     $message = array(
         'to' => $deviceToken,
-        'notification' => $notificationLoad,
+        'notification' => $notification,
         'data' => $notifyData,
         'aps' => array(
             'alert' => array(
@@ -1286,13 +1294,13 @@ function send_notification_FCM($deviceToken, $notifyData)
     //     'category' => 'content_added_notification' // This should also be inside the aps dictionary
     // ];
 
-    $dataPayload = [
-        "to" => $deviceToken,
-        "data" => $notifyData,
-        "notification" => $notificationLoad,
-        "priority" => "high",
+    // $dataPayload = [
+    //     "to" => $deviceToken,
+    //     "data" => $notifyData,
+    //     "notification" => $notificationLoad,
+    //     "priority" => "high",
 
-    ];
+    // ];
 
     $post_data = json_encode($message);
 
