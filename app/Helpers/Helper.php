@@ -87,7 +87,6 @@ function checkNotificationSetting($userId)
 function getGuestPendingRsvpCount($eventId)
 {
     return  EventInvitedUser::whereHas('user', function ($query) {
-
         $query->where('app_user', '1');
     })->where(['event_id' => $eventId, 'rsvp_d' => '0'])->count();
 }
