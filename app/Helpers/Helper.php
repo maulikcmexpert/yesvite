@@ -1144,7 +1144,7 @@ function sendNotification($notificationType, $postData)
                     ];
                     $checkNotificationSetting = checkNotificationSetting($getPostOwnerId->user_id);
 
-                    if ((count($checkNotificationSetting) && $checkNotificationSetting['wall_post']['push'] == '1') && $getPostOwnerId->notification_on_off == '1') {
+                    if ((count($checkNotificationSetting) && $checkNotificationSetting['potluck_activity']['push'] == '1') && $getPostOwnerId->notification_on_off == '1') {
 
                         if ($deviceData->model == 'And') {
 
