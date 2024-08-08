@@ -3220,12 +3220,16 @@ async function send_push_notification(
             type: "chat",
         };
 
-        // var notification = {
-        //     title: user.userName,
-        //     body: message,
-        //     image: storagePath,
-        //     click_action: "testClick",
-        // };
+        var notification = {
+            // title: user.userName,
+            // body: message,
+            // image: storagePath,
+            title : "Yesvite",
+            body : message,
+            sound : "default",
+            message : message,
+            color : "#79bc64",
+        };
 
         fetch("https://fcm.googleapis.com/fcm/send", {
             method: "POST",
@@ -3235,8 +3239,9 @@ async function send_push_notification(
             },
             body: JSON.stringify({
                 to: to,
-                // notification: notification,
+                notification: notification,
                 data: data,
+                priority : "high",
             }),
         })
             .then(function (response) {})
