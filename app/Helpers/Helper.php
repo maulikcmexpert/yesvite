@@ -1110,7 +1110,7 @@ function sendNotification($notificationType, $postData)
         $getPostOwnerId = Event::with('event_settings')->where('id', $postData['event_id'])->first();
 
 
-        $notification_message = $senderData->firstname . ' '  . $senderData->lastname . " will be bring the item below for " . $getPostOwnerId->event_name . ' Potluck';
+        $notification_message = $senderData->firstname . ' '  . $senderData->lastname . " will be bring the item for " . $getPostOwnerId->event_name . ' Potluck';
 
 
         if ($getPostOwnerId->user_id != $postData['sender_id']) {
