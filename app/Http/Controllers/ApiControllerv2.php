@@ -8688,21 +8688,29 @@ class ApiControllerv2 extends Controller
                                 // $checkIsimageOrVideo = checkIsimageOrVideo($thumbimage);
                                 $thumbimage->move(public_path('storage/thumbnails'), $thumbName);
                             }
+                            if (file_exists(public_path('storage/post_image/') . $imageName)) {
+                                $imagePath = public_path('storage/post_image/') . $imageName;
+                                unlink($imagePath);
+                            }
+                            $postImage->move(public_path('storage/post_image'), $imageName);
+                        } else {
+
+                            $temporaryThumbnailPath = public_path('storage/post_image/') . 'tmp_' . $imageName;
+                            Image::load($postImgValue->getRealPath())
+                                ->width(500)
+                                ->optimize()
+                                ->save($temporaryThumbnailPath);
+                            $destinationPath = public_path('storage/post_image/');
+                            if (!file_exists($destinationPath)) {
+                                mkdir($destinationPath, 0755, true);
+                            }
+                            rename($temporaryThumbnailPath, $destinationPath . $imageName);
                         }
 
-                        $temporaryThumbnailPath = public_path('storage/post_image/') . 'tmp_' . $imageName;
-                        Image::load($postImgValue->getRealPath())
-                            ->width(500)
-                            ->optimize()
-                            ->save($temporaryThumbnailPath);
 
                         // Storage::disk('public')->put('post_image/' . $imageName, file_get_contents($temporaryThumbnailPath));
 
-                        $destinationPath = public_path('storage/post_image/');
-                        if (!file_exists($destinationPath)) {
-                            mkdir($destinationPath, 0755, true);
-                        }
-                        rename($temporaryThumbnailPath, $destinationPath . $imageName);
+
                         // unlink($temporaryThumbnailPath);
 
                         // $postImage->move(public_path('storage/post_image/'), $temporaryThumbnailPath);
