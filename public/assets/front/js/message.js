@@ -3224,7 +3224,7 @@ async function send_push_notification(
             // title: user.userName,
             // body: message,
             // image: storagePath,
-            title : "Yesvite",
+            title : senderUser,
             body : message,
             sound : "default",
             message : message,
