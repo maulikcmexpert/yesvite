@@ -2629,6 +2629,10 @@ class ApiControllerv2 extends Controller
             DB::beginTransaction();
 
             $userDelete = User::find($user->id);
+
+            add_user_firebase($user->id, 'offline');
+            $check = Device::where('user_id', $user->id)->first();
+
             Device::where('user_id', $user->id)->delete();
             $userDelete->delete();
 
@@ -11497,7 +11501,6 @@ class ApiControllerv2 extends Controller
 
             $patient = Auth::guard('api')->user();
 
-            add_user_firebase($patient->id, 'offline');
             $check = Device::where('user_id', $patient->id)->first();
 
             if ($check != null) {
