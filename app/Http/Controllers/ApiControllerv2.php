@@ -6064,7 +6064,7 @@ class ApiControllerv2 extends Controller
                     foreach ($value->event_potluck_category_item as  $checkItem) {
                         $mainQty = $checkItem->quantity;
                         $spokenFor = UserPotluckItem::where('event_potluck_item_id', $checkItem->id)->sum('quantity');
-                        if ($mainQty == $spokenFor) {
+                        if ($mainQty >= $spokenFor) {
                             $totalSpoken += 1;
                         }
                     }
