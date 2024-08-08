@@ -2629,7 +2629,7 @@ class ApiControllerv2 extends Controller
             DB::beginTransaction();
 
             $userDelete = User::find($user->id);
-
+            Device::where('user_id', $user->id)->delete();
             $userDelete->delete();
 
             Token::where('user_id', $user->id)->delete();
