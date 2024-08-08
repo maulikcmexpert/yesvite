@@ -11497,8 +11497,8 @@ class ApiControllerv2 extends Controller
 
             $patient = Auth::guard('api')->user();
 
+            add_user_firebase($patient->id, 'offline');
             $check = Device::where('user_id', $patient->id)->first();
-
 
             if ($check != null) {
                 $check->delete();
