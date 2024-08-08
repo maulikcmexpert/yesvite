@@ -1258,7 +1258,8 @@ function send_notification_FCM($deviceToken, $notifyData)
         'sound' => "default",
         'message' => $notifyData['message'],
         'color' => "#79bc64",
-
+        'mutable-content' => 1,
+        'category' => 'content_added_notification'
     ];
     // $apsPayload = [
     //     'alert' => [
