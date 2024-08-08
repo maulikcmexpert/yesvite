@@ -1258,14 +1258,15 @@ function send_notification_FCM($deviceToken, $notifyData)
         'sound' => "default",
         'message' => $notifyData['message'],
         'color' => "#79bc64",
-        "mutable-content" => 1,
-        "category" => "content_added_notification",
+
     ];
     $dataPayload = [
         "to" => $deviceToken,
         "data" => $notifyData,
         "notification" => $notificationLoad,
         "priority" => "high",
+        "mutable-content" => 1,
+        "category" => "content_added_notification",
     ];
 
     $post_data = json_encode($dataPayload);
