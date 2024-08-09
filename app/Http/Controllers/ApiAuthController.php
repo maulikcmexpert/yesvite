@@ -388,7 +388,7 @@ class ApiAuthController extends Controller
 
             DB::beginTransaction();
             $usersignup = new User;
-            if (isset($input['social_type']) && $input['social_type'] === 'apple') {
+            if (isset($input['model']) && $input['model'] === 'Ios') {
                 $firstname = $input['firstname'];
                 $lastname = $input['lastname'];
             } else {
