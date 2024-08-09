@@ -55,7 +55,7 @@ return new class extends Migration
             $table->datetime('email_verified_at')->nullable();
             $table->string('instagram_token_id', 255)->nullable();
             $table->string('gmail_token_id', 255)->nullable();
-            $table->string('apple_token_id', 255)->nullable();
+            $table->text('apple_token_id')->nullable();
             $table->enum('status', ['0', '1', '9'])->nullable();
             $table->enum('show_profile_photo_only_frds', ['0', '1'])->default('0');
             $table->enum('photo_via_wifi', ['0', '1'])->default('0');
