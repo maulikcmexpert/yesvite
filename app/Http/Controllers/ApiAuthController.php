@@ -312,7 +312,7 @@ class ApiAuthController extends Controller
         $rawData = $request->getContent();
 
         $input = json_decode($rawData, true);
-        dd($input);
+
         if ($input == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
         }
@@ -385,7 +385,7 @@ class ApiAuthController extends Controller
             logoutFromWeb($userId);
             return response()->json(['status' => 1, 'data' => $detail, 'token' => $token]);
         } else {
-            dd($input);
+
             DB::beginTransaction();
             $usersignup = new User;
             $name = $input['firstname'];
