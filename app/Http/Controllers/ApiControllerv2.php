@@ -2977,7 +2977,7 @@ class ApiControllerv2 extends Controller
                     ->where('app_user', '!=', '1')
                     ->orWhereNotNull('email_verified_at');
             })
-                ->orderBy('firstname')
+                ->orderBy('firstname', 'ASC')
                 ->count();
             $total_page = ceil($yesviteRegisteredUser / 10);
             return response()->json(['status' => 1, 'message' => "Yesvite contact list", 'total_page' => $total_page, "data" => $yesvitecontactList, 'group' => $groupList]);
