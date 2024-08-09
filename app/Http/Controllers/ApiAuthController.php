@@ -312,6 +312,7 @@ class ApiAuthController extends Controller
         $rawData = $request->getContent();
 
         $input = json_decode($rawData, true);
+        dd($input);
         if ($input == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
         }
