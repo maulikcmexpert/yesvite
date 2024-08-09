@@ -8681,7 +8681,7 @@ class ApiControllerv2 extends Controller
                     $postimages = $request->post_image;
                     foreach ($postimages as $key => $postImgValue) {
                         $postImage = $postImgValue;
-                        $imageName = time() . '_' . $postImage->getClientOriginalName();
+                        $imageName = time() . $key . '_' . $postImage->getClientOriginalName();
                         $checkIsimageOrVideo = checkIsimageOrVideo($postImage);
                         $duration = "";
                         $thumbName = "";
@@ -8689,7 +8689,7 @@ class ApiControllerv2 extends Controller
                             $duration = getVideoDuration($postImage);
                             if (isset($request->thumbnail) && $request->thumbnail != Null) {
                                 $thumbimage = $request->thumbnail[$key];
-                                $thumbName = time() . '_' . $thumbimage->getClientOriginalName();
+                                $thumbName = time() . $key . '_' . $thumbimage->getClientOriginalName();
                                 // $checkIsimageOrVideo = checkIsimageOrVideo($thumbimage);
                                 $thumbimage->move(public_path('storage/thumbnails'), $thumbName);
                             }
