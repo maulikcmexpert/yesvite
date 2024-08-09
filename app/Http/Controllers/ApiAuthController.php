@@ -388,11 +388,17 @@ class ApiAuthController extends Controller
 
             DB::beginTransaction();
             $usersignup = new User;
-            $name = $input['firstname'];
-            $nameParts = explode(' ', $name);
+            if (isset($input['social_type']) && $input['social_type'] === 'apple') {
+                $firstname = $input['firstname'];
+                $lastname = $input['lastname'];
+            } else {
+                $name = $input['firstname'];
+                $nameParts = explode(' ', $name);
 
-            $firstname = $nameParts[0];
-            $lastname = $nameParts[1];
+                $firstname = $nameParts[0];
+                $lastname = $nameParts[1];
+            }
+
 
             // $usersignup->firstname = $input['firstname'];
             // $usersignup->lastname = $input['lastname'];
