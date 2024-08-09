@@ -68,12 +68,12 @@
                                  @php
                                  $count = getTotalUnreadMessageCount();
                                  @endphp
-                                    @if ($count>0)                                     
-                                    <div class="badge">
-                                        <span>{{$count}}</span>
-                                    </div>
-                                     @endif
-                                </div>
+                                 @if ($count>0)
+                                 <div class="badge">
+                                     <span>{{$count}}</span>
+                                 </div>
+                                 @endif
+                             </div>
                          </a>
 
                      </div>
@@ -123,7 +123,7 @@
              <?php } else { ?>
                  <div class="collapse navbar-collapse" id="mynavbar">
                      <ul class="navbar-nav align-items-center ms-auto">
-                         <li class="nav-item {{ (Request::segment(1) == '/')? 'active':'' }}">
+                         <li class="nav-item {{ (Request::segment(1) == '')? 'active':'' }}">
                              <a class="nav-link" href="{{ route('front.home')}}">Home</a>
                          </li>
                          <li class="nav-item {{ (Request::segment(1) == 'about-us')? 'active':'' }}">
