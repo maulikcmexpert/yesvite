@@ -341,7 +341,7 @@ class ApiAuthController extends Controller
             );
         }
         if (isset($input['social_type']) && $input['social_type'] === 'apple') {
-            $isExistUser = User::where("apple_token_id", $input['social_type'])->first();
+            $isExistUser = User::where("apple_token_id", $input['apple_token_id'])->first();
         } else {
             $isExistUser = User::where("email", $input['email'])->first();
         }
