@@ -384,6 +384,7 @@ class ApiAuthController extends Controller
             logoutFromWeb($userId);
             return response()->json(['status' => 1, 'data' => $detail, 'token' => $token]);
         } else {
+            dd($input);
             DB::beginTransaction();
             $usersignup = new User;
             $name = $input['firstname'];
