@@ -321,8 +321,8 @@ class ApiAuthController extends Controller
 
 
         $validator = Validator::make($input, [
-            'firstname' => 'required',
-            'email' => 'required|email',
+            // 'firstname' => 'required',
+            // 'email' => 'required|email',
             'device_id' => 'required',
             'device_token' => 'required',
 
@@ -340,7 +340,11 @@ class ApiAuthController extends Controller
                 ],
             );
         }
-        $isExistUser = User::where("email", $input['email'])->first();
+        if (isset($input['social_type']) && $input['social_type'] === 'apple') {
+            $isExistUser = User::where("apple_token_id", $input['social_type'])->first();
+        } else {
+            $isExistUser = User::where("email", $input['email'])->first();
+        }
 
         if ($isExistUser != null) {
 
