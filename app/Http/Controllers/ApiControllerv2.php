@@ -3471,7 +3471,8 @@ class ApiControllerv2 extends Controller
 
                     foreach ($coHostList as $value) {
                         $alreadyselectedUser =  collect($eventData['invited_user_id'])->pluck('user_id')->toArray();
-                        if (!in_array($value['user_id'], $alreadyselectedUser)) {
+                        $alreadyAddInInvitedUsers = EventInvitedUser::where(['user_id' => $value['user_id'], 'event_id' => $eventId])->first();
+                        if (!in_array($value['user_id'], $alreadyselectedUser) && $alreadyAddInInvitedUsers->isEmpty()) {
                             EventInvitedUser::create([
 
                                 'event_id' => $eventId,
@@ -4509,8 +4510,9 @@ class ApiControllerv2 extends Controller
 
                                     $alreadyselectedUser =  collect($eventData['invited_user_id'])->pluck('user_id')->toArray();
                                     $alreadyselectedasCoUser =  collect($eventData['co_host_list'])->pluck('user_id')->toArray();
-
-                                    if (!in_array($value['user_id'], $alreadyselectedUser) && !in_array($value['user_id'], $getalreadyInviteduser)) {
+                                    $alreadyAddInInvitedUsers = EventInvitedUser::where(['user_id' => $value['user_id'], 'event_id' => $eventData['event_id']])->first();
+                                    $alreadyAddInInvitedUsers = EventInvitedUser::where(['user_id' => $value['user_id'], 'event_id' => $eventData['event_id']])->first();
+                                    if (!in_array($value['user_id'], $alreadyselectedUser) && !in_array($value['user_id'], $getalreadyInviteduser) && $alreadyAddInInvitedUsers->isEmpty()) {
                                         $cohost = new EventInvitedUser();
                                         $cohost->event_id = $eventData['event_id'];
                                         $cohost->prefer_by = $value['prefer_by'];
@@ -9626,7 +9628,8 @@ class ApiControllerv2 extends Controller
 
             $checkPollExist = UserEventPollData::where([
 
-                'user_id' => $user->id, 'event_post_poll_id' => $input['event_post_poll_id']
+                'user_id' => $user->id,
+                'event_post_poll_id' => $input['event_post_poll_id']
 
             ])->count();
 
@@ -9634,7 +9637,8 @@ class ApiControllerv2 extends Controller
 
                 UserEventPollData::where([
 
-                    'user_id' => $user->id, 'event_post_poll_id' => $input['event_post_poll_id']
+                    'user_id' => $user->id,
+                    'event_post_poll_id' => $input['event_post_poll_id']
 
                 ])->delete();
             }
@@ -9852,8 +9856,7 @@ class ApiControllerv2 extends Controller
         }
 
         try {
-            $eventDetail = Event::with(['user', 'event_settings', 'event_image', 'event_schedule' => function ($query) {
-            }])->where('id', $input['event_id'])->first();
+            $eventDetail = Event::with(['user', 'event_settings', 'event_image', 'event_schedule' => function ($query) {}])->where('id', $input['event_id'])->first();
 
             $eventattending = EventInvitedUser::whereHas('user', function ($query) {
 
