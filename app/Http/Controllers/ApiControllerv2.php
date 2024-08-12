@@ -4511,7 +4511,6 @@ class ApiControllerv2 extends Controller
                                     $alreadyselectedUser =  collect($eventData['invited_user_id'])->pluck('user_id')->toArray();
                                     $alreadyselectedasCoUser =  collect($eventData['co_host_list'])->pluck('user_id')->toArray();
                                     $alreadyAddInInvitedUsers = EventInvitedUser::where(['user_id' => $value['user_id'], 'event_id' => $eventData['event_id']])->first();
-                                    $alreadyAddInInvitedUsers = EventInvitedUser::where(['user_id' => $value['user_id'], 'event_id' => $eventData['event_id']])->first();
                                     if (!in_array($value['user_id'], $alreadyselectedUser) && !in_array($value['user_id'], $getalreadyInviteduser) && $alreadyAddInInvitedUsers->isEmpty()) {
                                         $cohost = new EventInvitedUser();
                                         $cohost->event_id = $eventData['event_id'];
