@@ -3362,11 +3362,14 @@ class ApiControllerv2 extends Controller
             if (!empty($eventData['invited_user_id'])) {
                 $invitedUsers = $eventData['invited_user_id'];
                 foreach ($invitedUsers as $value) {
-                    EventInvitedUser::create([
-                        'event_id' => $eventId,
-                        'prefer_by' => $value['prefer_by'],
-                        'user_id' => $value['user_id']
-                    ]);
+                    $alreadyselectedCohost =  collect($eventData['co_host_list'])->pluck('user_id')->toArray();
+                    if (!in_array($value['user_id'], $alreadyselectedCohost)) {
+                        EventInvitedUser::create([
+                            'event_id' => $eventId,
+                            'prefer_by' => $value['prefer_by'],
+                            'user_id' => $value['user_id']
+                        ]);
+                    }
                 }
             }
             if (!empty($eventData['invited_guests'])) {
@@ -3471,8 +3474,7 @@ class ApiControllerv2 extends Controller
 
                     foreach ($coHostList as $value) {
                         $alreadyselectedUser =  collect($eventData['invited_user_id'])->pluck('user_id')->toArray();
-                        $alreadyAddInInvitedUsers = EventInvitedUser::where(['user_id' => $value['user_id'], 'event_id' => $eventId])->first();
-                        if (!in_array($value['user_id'], $alreadyselectedUser) && $alreadyAddInInvitedUsers->isEmpty()) {
+                        if (!in_array($value['user_id'], $alreadyselectedUser)) {
                             EventInvitedUser::create([
 
                                 'event_id' => $eventId,
@@ -4356,7 +4358,11 @@ class ApiControllerv2 extends Controller
                     if (isset($eventData['invited_user_id']) && !empty($eventData['invited_user_id'])) {
                         $invitedUsers = $eventData['invited_user_id'];
                         foreach ($invitedUsers as $value) {
+                            $alreadyselectedasCoHost =  collect($eventData['co_host_list'])->pluck('user_id')->toArray();
                             if (in_array($value['user_id'], $getalreadyInviteduser)) {
+                                continue;
+                            }
+                            if (!in_array($value['user_id'], $alreadyselectedasCoHost)) {
                                 continue;
                             }
                             EventInvitedUser::create([
@@ -4510,8 +4516,8 @@ class ApiControllerv2 extends Controller
 
                                     $alreadyselectedUser =  collect($eventData['invited_user_id'])->pluck('user_id')->toArray();
                                     $alreadyselectedasCoUser =  collect($eventData['co_host_list'])->pluck('user_id')->toArray();
-                                    $alreadyAddInInvitedUsers = EventInvitedUser::where(['user_id' => $value['user_id'], 'event_id' => $eventData['event_id']])->first();
-                                    if (!in_array($value['user_id'], $alreadyselectedUser) && !in_array($value['user_id'], $getalreadyInviteduser) && $alreadyAddInInvitedUsers->isEmpty()) {
+
+                                    if (!in_array($value['user_id'], $alreadyselectedUser) && !in_array($value['user_id'], $getalreadyInviteduser)) {
                                         $cohost = new EventInvitedUser();
                                         $cohost->event_id = $eventData['event_id'];
                                         $cohost->prefer_by = $value['prefer_by'];
