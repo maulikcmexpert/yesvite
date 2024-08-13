@@ -8707,15 +8707,45 @@ class ApiControllerv2 extends Controller
                             $postImage->move(public_path('storage/post_image'), $imageName);
                         } else {
 
+                            // $temporaryThumbnailPath = public_path('storage/post_image/') . 'tmp_' . $imageName;
+                            // Image::load($postImgValue->getRealPath())
+                            //     ->width(500)
+                            //     ->optimize()
+                            //     ->save($temporaryThumbnailPath);
+                            // $destinationPath = public_path('storage/post_image/');
+                            // if (!file_exists($destinationPath)) {
+                            //     mkdir($destinationPath, 0755, true);
+                            // }
+                            // rename($temporaryThumbnailPath, $destinationPath . $imageName);
+
                             $temporaryThumbnailPath = public_path('storage/post_image/') . 'tmp_' . $imageName;
-                            Image::load($postImgValue->getRealPath())
-                                ->width(500)
-                                ->optimize()
-                                ->save($temporaryThumbnailPath);
                             $destinationPath = public_path('storage/post_image/');
+
+                            // Initial quality setting
+                            $quality = 75;
+
+                            // Load and manipulate the image
+                            Image::load($postImgValue->getRealPath())
+                                ->width(500) // Adjust the width as needed
+                                ->quality($quality) // Set the initial quality
+                                ->optimize() // Optimize the image
+                                ->save($temporaryThumbnailPath);
+
+                            // Check the file size and reduce quality if necessary
+                            while (filesize($temporaryThumbnailPath) > 30 * 1024 && $quality > 10) { // 30KB = 30  1024 bytes
+                                $quality -= 5; // Decrease quality by 5
+
+                                Image::load($temporaryThumbnailPath)
+                                    ->quality($quality)
+                                    ->save($temporaryThumbnailPath);
+                            }
+
+                            // Create destination directory if it doesn't exist
                             if (!file_exists($destinationPath)) {
                                 mkdir($destinationPath, 0755, true);
                             }
+
+                            // Move the image to the final destination
                             rename($temporaryThumbnailPath, $destinationPath . $imageName);
                         }
 
