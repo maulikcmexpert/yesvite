@@ -4356,21 +4356,21 @@ class ApiControllerv2 extends Controller
                     // EventInvitedUser::where('event_id', $eventData['event_id'])->delete();
 
                     if (isset($eventData['invited_user_id']) && !empty($eventData['invited_user_id'])) {
-                        $invitedUsers = $eventData['invited_user_id'];
                         $alreadyselectedasCoHost =  collect($eventData['co_host_list'])->pluck('user_id')->toArray();
+
+                        $invitedUsers = $eventData['invited_user_id'];
                         foreach ($invitedUsers as $value) {
 
                             if (in_array($value['user_id'], $getalreadyInviteduser)) {
                                 continue;
                             }
-                            if (in_array($value['user_id'], $alreadyselectedasCoHost)) {
-                                continue;
+                            if (!in_array($value['user_id'], $alreadyselectedasCoHost)) {
+                                EventInvitedUser::create([
+                                    'event_id' => $eventData['event_id'],
+                                    'prefer_by' => $value['prefer_by'],
+                                    'user_id' => $value['user_id']
+                                ]);
                             }
-                            EventInvitedUser::create([
-                                'event_id' => $eventData['event_id'],
-                                'prefer_by' => $value['prefer_by'],
-                                'user_id' => $value['user_id']
-                            ]);
                         }
                         $userSelectedGuest =  collect($eventData['invited_user_id'])->pluck('user_id')->toArray();
                         $alreadyselectedasCoUser =  collect($eventData['co_host_list'])->pluck('user_id')->toArray();
