@@ -4363,9 +4363,9 @@ class ApiControllerv2 extends Controller
                             if (in_array($value['user_id'], $getalreadyInviteduser)) {
                                 continue;
                             }
-                            // if (!in_array($value['user_id'], $alreadyselectedasCoHost)) {
-                            //     continue;
-                            // }
+                            if (!in_array($value['user_id'], $alreadyselectedasCoHost)) {
+                                continue;
+                            }
                             EventInvitedUser::create([
                                 'event_id' => $eventData['event_id'],
                                 'prefer_by' => $value['prefer_by'],
