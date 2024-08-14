@@ -4374,21 +4374,19 @@ class ApiControllerv2 extends Controller
                         }
                         $userSelectedGuest =  collect($eventData['invited_user_id'])->pluck('user_id')->toArray();
                         $alreadyselectedasCoUser =  collect($eventData['co_host_list'])->pluck('user_id')->toArray();
-                        foreach ($getalreadyInviteduser as $value) {
-                            if (!in_array($value, $alreadyselectedasCoUser)) {
-                                if ($eventData['is_draft_save'] == '1') {
+                        if ($eventData['is_draft_save'] == '1') {
+                            foreach ($getalreadyInviteduser as $value) {
+                                if (!in_array($value, $alreadyselectedasCoUser)) {
                                     EventInvitedUser::where(['user_id' => $value, 'is_co_host' => '1'])->delete();
-                                }
-                            } else {
-                                if (!in_array($value, $userSelectedGuest)) {
-                                    if ($eventData['is_draft_save'] == '1') {
+                                } else {
+                                    if (!in_array($value, $userSelectedGuest)) {
                                         EventInvitedUser::where(['user_id' => $value, 'is_co_host' => '0'])->delete();
                                     }
                                 }
                             }
                         }
                     } else {
-                        EventInvitedUser::where(['event_id' => $eventData['event_id']])->delete();
+                        EventInvitedUser::where(['event_id' => $eventData['event_id'], 'is_co_host' => '0'])->delete();
                     }
 
                     if (!empty($eventData['invited_guests'])) {
