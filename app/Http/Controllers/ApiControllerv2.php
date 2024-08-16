@@ -11194,8 +11194,6 @@ class ApiControllerv2 extends Controller
                 $notificationDetail['comment_id'] = ($values->comment_id != null) ? $values->comment_id : 0;
                 $comment_reply_id = EventPostComment::where('parent_comment_id', $values->comment_id)->orderBy('id', 'DESC')->select('id')->first();
                 $notificationDetail['reply_comment_id'] = 0;
-
-
                 $postCommentDetail =  EventPostComment::where(['id' => $values->comment_id])->first();
 
                 if (isset($postCommentDetail->main_parent_comment_id) && $postCommentDetail->main_parent_comment_id != null) {
@@ -11284,7 +11282,8 @@ class ApiControllerv2 extends Controller
                     }
                 }
 
-                if (isset($values->post->post_type) && $values->post->post_type == '1') {
+                if (isset($values->post->post_type) && $values->post->post_type == '1' && isset($values->post->post_image[0]->type)) {
+
                     $notificationDetail['post_image'] = asset('public/storage/post_image/' . $values->post->post_image[0]->post_image);
                     if (isset($values->post->post_image[0]->type) &&  $values->post->post_image[0]->type == 'image') {
 
