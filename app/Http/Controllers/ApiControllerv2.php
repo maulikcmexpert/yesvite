@@ -11290,7 +11290,7 @@ class ApiControllerv2 extends Controller
 
                         $notificationDetail['media_type'] = 'photo';
                     } elseif ($values->post->post_image[0]->type == 'video') {
-                        $notificationDetail['media_type'] = $values->post->post_image[0]->type;
+                        $notificationDetail['media_type'] = (isset($values->post->post_image[0]->type) && $values->post->post_image[0]->type != '') ? $values->post->post_image[0]->type : '';
                         dd(1);
                     }
                 }
