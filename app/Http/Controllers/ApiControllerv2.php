@@ -11286,13 +11286,13 @@ class ApiControllerv2 extends Controller
 
                 if (isset($values->post->post_type) && $values->post->post_type == '1') {
                     $notificationDetail['post_image'] = asset('public/storage/post_image/' . $values->post->post_image[0]->post_image);
-                    dd($values);
                     if ($values->post->post_image[0]->type == 'image') {
 
                         $notificationDetail['media_type'] = 'photo';
-                    } elseif ($values->post->post_image[0]->type == 'video') {
+                    } elseif (isset($values->post->post_image[0]->type) && $values->post->post_image[0]->type == 'video') {
 
                         $notificationDetail['media_type'] = (isset($values->post->post_image[0]->type) && $values->post->post_image[0]->type != '') ? $values->post->post_image[0]->type : '';
+                        dd($values);
                     }
                 }
                 $notificationDetail['post_type'] = "";
