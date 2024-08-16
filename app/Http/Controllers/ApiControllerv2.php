@@ -11177,7 +11177,7 @@ class ApiControllerv2 extends Controller
 
 
         $notificationInfo = [];
-        // dd($result);
+        dd($result);
         foreach ($result as $values) {
 
             if ($values->user_id == $user->id) {
