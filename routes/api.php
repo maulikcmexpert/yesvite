@@ -149,6 +149,7 @@ Route::prefix('user/v2/')->middleware('checkUser')->group(function () {
     Route::post('event_post_photo_list', [ApiControllerv2::class, 'eventPostPhotoList']);
     Route::post('event_post_photo_list1', [ApiControllerv2::class, 'eventPostPhotoList1']);
     Route::post('remove_event_post_photo', [ApiControllerv2::class, 'removeEventPostPhoto']);
+    Route::post('remove_event_post_single_photo', [ApiControllerv2::class, 'removeEventPostSinglePhoto']);
 
     Route::post('event_post_photo_detail', [ApiControllerv2::class, 'eventPostPhotoDetail']);
 

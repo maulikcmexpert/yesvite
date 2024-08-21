@@ -10700,6 +10700,50 @@ class ApiControllerv2 extends Controller
         }
     }
 
+    public function removeEventPostSinglePhoto(Request $request)
+    {
+        $rawData = $request->getContent();
+
+
+
+        $input = json_decode($rawData, true);
+
+        if ($input == null) {
+            return response()->json(['status' => 0, 'message' => "Json invalid"]);
+        }
+
+        $validator = Validator::make($input, [
+
+            'event_post_image_id' => ['required', 'exists:event_post_images,id']
+
+        ]);
+
+        if ($validator->fails()) {
+
+            return response()->json([
+
+                'status' => 0,
+                'message' => $validator->errors()->first(),
+
+
+            ]);
+        }
+        try {
+            $image = EventPostImage::where('id', $input['event_post_image_id'])->first();
+            if (file_exists(public_path('storage/post_image/') . $image->post_image)) {
+                $imagePath = public_path('storage/post_image/') . $image->post_image;
+                unlink($imagePath);
+            }
+            EventPostImage::whereIn('id', $input['event_post_image_id'])->delete();
+
+            return response()->json(['status' => 1, 'message' => "Image removed successfully"]);
+        } catch (QueryException $e) {
+
+            return response()->json(['status' => 0, 'message' => 'db error']);
+        } catch (Exception  $e) {
+            return response()->json(['status' => 0, 'message' => 'something went wrong']);
+        }
+    }
 
     public function eventPostPhotoDetail(Request $request)
     {
