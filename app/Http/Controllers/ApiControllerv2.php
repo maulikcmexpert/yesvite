@@ -4888,6 +4888,7 @@ class ApiControllerv2 extends Controller
                         'to_time' => $eventData['to_time'],
                         'newUser' => $eventData['invited_new_guest']
                     ];
+
                     sendNotification('update_event', $notificationParam);
                 }
 
