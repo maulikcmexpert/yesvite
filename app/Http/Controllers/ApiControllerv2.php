@@ -4880,7 +4880,7 @@ class ApiControllerv2 extends Controller
                 }
 
                 if (isset($eventData['addr_change']) && $eventData['addr_change'] == '0' && isset($eventData['time_change']) && $eventData['time_change'] == '0' && $eventData['update_date'] == '0') {
-                    dd(1);
+
                     $notificationParam = [
                         'sender_id' => $user->id,
                         'event_id' => $eventData['event_id'],
@@ -4888,7 +4888,7 @@ class ApiControllerv2 extends Controller
                         'to_time' => $eventData['to_time'],
                         'newUser' => $eventData['invited_new_guest']
                     ];
-
+                    dd($notificationParam);
                     sendNotification('update_event', $notificationParam);
                 }
 
