@@ -127,7 +127,7 @@ function sendNotification($notificationType, $postData)
                 })->whereIn('user_id', $postData['newUser'])->where('event_id', $postData['event_id'])->get();
             }
             foreach ($invitedusers as $value) {
-                dd($invitedusers);
+                dd($value);
                 // user notification setting //
                 Notification::where(['user_id' => $value->user_id, 'sender_id' => $postData['sender_id'], 'event_id' => $postData['event_id']])->delete();
 
