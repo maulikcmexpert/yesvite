@@ -622,7 +622,7 @@ class ApiAuthController extends Controller
         $user->password_updated_date = date('Y-m-d');
         if ($user->save()) {
             Password_reset::where('email', $input['email'])->delete();
-            return response()->json(['status' => 1, 'message' => 'Password reset successful']);
+            return response()->json(['status' => 1, 'message' => 'Password reset successfully']);
         } else {
             return response()->json(['status' => 0, 'message' => 'Password not updated please try again']);
         }
