@@ -265,7 +265,6 @@ function sendNotification($notificationType, $postData)
                         continue;
                     }
                 }
-                dd($invitedusers);
                 if ($value->user->app_user == '1') {
                     // Notification::where(['user_id' => $value->user_id, 'sender_id' => $postData['sender_id'], 'event_id' => $postData['event_id']])->delete();
                     $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " has updated the event details for " . $value->event->event_name;
