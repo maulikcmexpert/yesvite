@@ -6365,7 +6365,7 @@ class ApiControllerv2 extends Controller
                 $query->where('app_user', '1');
             })->where(['user_id' => $request->user_id, 'event_id' => $request->event_id])->first();
             $rsvpSentAttempt = $rsvpSent->rsvp_status;
-            dd($rsvpSent);
+
             if ($rsvpSent != null) {
                 $rsvp_attempt = "";
                 if ($rsvpSentAttempt == NULL) {
@@ -6397,6 +6397,7 @@ class ApiControllerv2 extends Controller
                 $rsvpSent->event_view_date = date('Y-m-d');
 
                 $rsvpSent->save();
+                dd($rsvpSent);
                 //if rsvp_status is 0 then No, and rsvp_status is 1 then Yes 
                 if ($rsvpSent->save()) {
                     $postMessage = [];
