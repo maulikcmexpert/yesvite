@@ -262,7 +262,7 @@ function sendNotification($notificationType, $postData)
 
                 if (isset($postData['newUser']) && count($postData['newUser']) != 0) {
                     if (in_array($value->user_id, $postData['newUser'])) {
-                        dd($invitedusers);
+                        dd($value);
                         continue;
                     }
                 }
