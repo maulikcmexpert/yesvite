@@ -12435,6 +12435,7 @@ class ApiControllerv3 extends Controller
     public function addProductSubscription(Request $request)
     {
 
+        dd(1);
         $rawData = $request->getContent();
 
         $input = json_decode($rawData, true);
