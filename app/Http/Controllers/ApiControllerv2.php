@@ -6397,7 +6397,6 @@ class ApiControllerv2 extends Controller
                 $rsvpSent->event_view_date = date('Y-m-d');
 
                 $rsvpSent->save();
-                dd($rsvpSent);
                 //if rsvp_status is 0 then No, and rsvp_status is 1 then Yes 
                 if ($rsvpSent->save()) {
                     $postMessage = [];
@@ -6430,10 +6429,10 @@ class ApiControllerv2 extends Controller
                         'post_id' => "",
                         'rsvp_attempt' => $rsvp_attempt
                     ];
-                    DB::commit();
                     sendNotification('sent_rsvp', $notificationParam);
                 }
 
+                DB::commit();
 
                 return response()->json(['status' => 1, 'message' => "Rsvp sent Successfully"]);
             }
