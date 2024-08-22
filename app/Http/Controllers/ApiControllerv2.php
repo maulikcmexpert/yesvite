@@ -6320,6 +6320,7 @@ class ApiControllerv2 extends Controller
 
             'kids' => 'required',
 
+            'user_id' => 'required'
             // 'message_to_host' => "required",
         ]);
 
@@ -6377,7 +6378,7 @@ class ApiControllerv2 extends Controller
 
                 $rsvpSent->event_id = $request->event_id;
 
-                $rsvpSent->user_id = $user->id;
+                $rsvpSent->user_id = $request->user_id;
 
                 $rsvpSent->rsvp_status = $request->rsvp_status;
 
@@ -6406,7 +6407,7 @@ class ApiControllerv2 extends Controller
                     ];
                     $creatEventPost = new EventPost;
                     $creatEventPost->event_id = $request->event_id;
-                    $creatEventPost->user_id = $user->id;
+                    $creatEventPost->user_id = $request->user_id;
                     $creatEventPost->post_message = json_encode($postMessage);
                     $creatEventPost->post_privacy = "1";
                     $creatEventPost->post_type = "4";
@@ -6414,24 +6415,22 @@ class ApiControllerv2 extends Controller
                     $creatEventPost->is_in_photo_moudle = "0";
                     $creatEventPost->save();
                 }
+                if ($user->id == $request->user_id) {
+                    $notificationParam = [
 
-                $notificationParam = [
-
-                    'sender_id' => $user->id,
-                    'event_id' => $request->event_id,
-                    'rsvp_status' => $request->rsvp_status,
-                    'kids' => $request->kids,
-                    'adults' => $request->adults,
-                    'rsvp_video' => $video,
-                    'rsvp_message' => $request->message_to_host,
-                    'post_id' => "",
-                    'rsvp_attempt' => $rsvp_attempt
-                ];
-                DB::commit();
-
-
-
-                sendNotification('sent_rsvp', $notificationParam);
+                        'sender_id' => $user->id,
+                        'event_id' => $request->event_id,
+                        'rsvp_status' => $request->rsvp_status,
+                        'kids' => $request->kids,
+                        'adults' => $request->adults,
+                        'rsvp_video' => $video,
+                        'rsvp_message' => $request->message_to_host,
+                        'post_id' => "",
+                        'rsvp_attempt' => $rsvp_attempt
+                    ];
+                    DB::commit();
+                    sendNotification('sent_rsvp', $notificationParam);
+                }
 
 
                 return response()->json(['status' => 1, 'message' => "Rsvp sent Successfully"]);
