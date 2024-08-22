@@ -12499,8 +12499,12 @@ class ApiControllerv3 extends Controller
 
                     $updateEvent->is_draft_save = '0';
                     $updateEvent->product_payment_id = $new_subscription->id;
+                    if ($updateEvent->subscription_plan_name != 'Free') {
+                        $updateEvent->subscription_invite_count = $updateEvent->subscription_invite_count + $invite_count;
+                    } else {
+                        $updateEvent->subscription_invite_count = $invite_count;
+                    }
                     $updateEvent->subscription_plan_name = 'Pro';
-                    $updateEvent->subscription_invite_count = $updateEvent->subscription_invite_count + $invite_count;
                     $updateEvent->save();
                 }
             }
