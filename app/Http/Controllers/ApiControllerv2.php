@@ -6414,7 +6414,7 @@ class ApiControllerv2 extends Controller
                     $creatEventPost->commenting_on_off = "0";
                     $creatEventPost->is_in_photo_moudle = "0";
                     $creatEventPost->save();
-                    dd($creatEventPost);
+                    // dd($creatEventPost);
                 }
                 if ($user->id == $request->user_id) {
                     $notificationParam = [
