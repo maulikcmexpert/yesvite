@@ -10555,7 +10555,7 @@ class ApiControllerv2 extends Controller
 
 
             foreach ($results as $value) {
-
+                $ischeckEventOwner = Event::where(['id' => $input['event_id'], 'user_id' => $value->user->id])->first();
                 $postControl = PostControl::where(['user_id' => $user->id, 'event_id' => $input['event_id'], 'event_post_id' => $value->id])->first();
 
                 if ($postControl != null) {
@@ -10568,7 +10568,7 @@ class ApiControllerv2 extends Controller
 
                 $postPhotoDetail['user_id'] = $value->user->id;
                 $postPhotoDetail['is_own_post'] = ($value->user->id == $user->id) ? "1" : "0";
-
+                $postPhotoDetail['is_host'] =  ($ischeckEventOwner != null) ? 1 : 0;
                 $postPhotoDetail['firstname'] = $value->user->firstname;
 
                 $postPhotoDetail['lastname'] = $value->user->lastname;
