@@ -10731,7 +10731,7 @@ class ApiControllerv2 extends Controller
             ]);
         }
         try {
-            dd($input);
+            dd($input['event_post_image_id']);
             $image = EventPostImage::where('id', $input['event_post_image_id'])->first();
             if (file_exists(public_path('storage/post_image/') . $image->post_image)) {
                 $imagePath = public_path('storage/post_image/') . $image->post_image;
