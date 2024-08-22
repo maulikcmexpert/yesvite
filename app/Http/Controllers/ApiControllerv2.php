@@ -6399,7 +6399,6 @@ class ApiControllerv2 extends Controller
                 $rsvpSent->save();
                 //if rsvp_status is 0 then No, and rsvp_status is 1 then Yes 
                 if ($rsvpSent->save()) {
-                    dd($rsvpSent);
                     $postMessage = [];
                     $postMessage = [
                         'status' => ($request->rsvp_status == '0') ? '2' : '1',
@@ -6415,6 +6414,7 @@ class ApiControllerv2 extends Controller
                     $creatEventPost->commenting_on_off = "0";
                     $creatEventPost->is_in_photo_moudle = "0";
                     $creatEventPost->save();
+                    dd($creatEventPost);
                 }
                 if ($user->id == $request->user_id) {
                     $notificationParam = [
