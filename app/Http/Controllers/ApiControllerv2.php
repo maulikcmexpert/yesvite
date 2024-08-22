@@ -6397,6 +6397,7 @@ class ApiControllerv2 extends Controller
                 $rsvpSent->event_view_date = date('Y-m-d');
 
                 $rsvpSent->save();
+                dd($rsvpSent);
                 //if rsvp_status is 0 then No, and rsvp_status is 1 then Yes 
                 if ($rsvpSent->save()) {
                     $postMessage = [];
