@@ -6363,7 +6363,7 @@ class ApiControllerv2 extends Controller
 
             $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {
                 $query->where('app_user', '1');
-            })->where(['user_id' => $user->id, 'event_id' => $request->event_id])->first();
+            })->where(['user_id' => $request->user_id, 'event_id' => $request->event_id])->first();
             $rsvpSentAttempt = $rsvpSent->rsvp_status;
 
             if ($rsvpSent != null) {
