@@ -8062,6 +8062,7 @@ class ApiControllerv2 extends Controller
             if ($eventDetails->post_type == '1') { // Image
                 $postsDetail['post_image'] = [];
                 $postImages = getPostImages($eventDetails->id);
+                dd($postImages);
                 foreach ($postImages as $imgVal) {
 
                     $postMedia['id'] =  $imgVal->id;
