@@ -10066,7 +10066,8 @@ class ApiControllerv3 extends Controller
 
             $checkPollExist = UserEventPollData::where([
 
-                'user_id' => $user->id, 'event_post_poll_id' => $input['event_post_poll_id']
+                'user_id' => $user->id,
+                'event_post_poll_id' => $input['event_post_poll_id']
 
             ])->count();
 
@@ -10074,7 +10075,8 @@ class ApiControllerv3 extends Controller
 
                 UserEventPollData::where([
 
-                    'user_id' => $user->id, 'event_post_poll_id' => $input['event_post_poll_id']
+                    'user_id' => $user->id,
+                    'event_post_poll_id' => $input['event_post_poll_id']
 
                 ])->delete();
             }
@@ -10299,8 +10301,7 @@ class ApiControllerv3 extends Controller
         }
 
         try {
-            $eventDetail = Event::with(['user', 'event_settings', 'event_image', 'event_schedule' => function ($query) {
-            }])->where('id', $input['event_id'])->first();
+            $eventDetail = Event::with(['user', 'event_settings', 'event_image', 'event_schedule' => function ($query) {}])->where('id', $input['event_id'])->first();
 
             $eventattending = EventInvitedUser::whereHas('user', function ($query) {
 
@@ -12553,8 +12554,7 @@ class ApiControllerv3 extends Controller
         $clientSecret = env('InGOOGLE_CLIENT_SECRET');
         $redirectUri = 'https://yesvite.cmexpertiseinfotech.in/google/callback';
 
-        $refreshToken = '1//0gTOldAQt4qgdCgYIARAAGBASNwF-L9IrXu9tDMbYr_D4q8mlbKLCBLzlmISzV2RbYze1CtXtLBZvNOxBjtDsmnD8nnOiRUXMBXo';
-
+        $refreshToken = '1//0gO-MZytzhYM_CgYIARAAGBASNwF-L9Irzy8U6iIMulovD1SBeiroKmXs-PqBsFpMNEF0nUzMJQ3oiumrmjr6yrTYV01c6Vc_0qE';
         $TOKEN_URL = "https://accounts.google.com/o/oauth2/token";
 
         $VALIDATE_URL = "https://www.googleapis.com/androidpublisher/v3/applications/" .
