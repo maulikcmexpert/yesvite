@@ -10733,20 +10733,14 @@ class ApiControllerv2 extends Controller
         }
         try {
             $event_post = EventPostImage::where('event_post_id', $input['event_post_id'])->count();
-            if ($event_post > 1) {
-                $image = EventPostImage::where('id', $input['event_post_image_id'])->first();
-                if (file_exists(public_path('storage/post_image/') . $image->post_image)) {
-                    $imagePath = public_path('storage/post_image/') . $image->post_image;
-                    unlink($imagePath);
-                }
-                EventPostImage::where('id', $input['event_post_image_id'])->delete();
-            } else {
-                $image = EventPostImage::where('id', $input['event_post_image_id'])->first();
-                if (file_exists(public_path('storage/post_image/') . $image->post_image)) {
-                    $imagePath = public_path('storage/post_image/') . $image->post_image;
-                    unlink($imagePath);
-                }
-                EventPostImage::where('id', $input['event_post_image_id'])->delete();
+            $image = EventPostImage::where('id', $input['event_post_image_id'])->first();
+            if (file_exists(public_path('storage/post_image/') . $image->post_image)) {
+                $imagePath = public_path('storage/post_image/') . $image->post_image;
+                unlink($imagePath);
+            }
+            EventPostImage::where('id', $input['event_post_image_id'])->delete();
+
+            if ($event_post == 1) {
                 EventPost::where('id', $input['event_post_id'])->delete();
             }
 
