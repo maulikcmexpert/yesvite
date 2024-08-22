@@ -7161,6 +7161,7 @@ class ApiControllerv2 extends Controller
     public function eventWall(Request $request)
     {
         $user  = Auth::guard('api')->user();
+        dd($user);
         $rawData = $request->getContent();
         $input = json_decode($rawData, true);
         $filename = 'event_wall_request.txt';
