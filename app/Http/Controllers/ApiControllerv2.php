@@ -10713,7 +10713,7 @@ class ApiControllerv2 extends Controller
         if ($input == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
         }
-
+        dd($input);
         $validator = Validator::make($input, [
 
             'event_post_image_id' => ['required', 'exists:event_post_images,id']
@@ -10731,6 +10731,7 @@ class ApiControllerv2 extends Controller
             ]);
         }
         try {
+
             $image = EventPostImage::where('id', $input['event_post_image_id'])->first();
             if (file_exists(public_path('storage/post_image/') . $image->post_image)) {
                 $imagePath = public_path('storage/post_image/') . $image->post_image;
