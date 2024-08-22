@@ -12555,7 +12555,6 @@ class ApiControllerv3 extends Controller
         $redirectUri = 'https://yesvite.cmexpertiseinfotech.in/google/callback';
 
         $refreshToken = '1//0gO-MZytzhYM_CgYIARAAGBASNwF-L9Irzy8U6iIMulovD1SBeiroKmXs-PqBsFpMNEF0nUzMJQ3oiumrmjr6yrTYV01c6Vc_0qE';
-
         $TOKEN_URL = "https://accounts.google.com/o/oauth2/token";
 
         $VALIDATE_URL = "https://www.googleapis.com/androidpublisher/v3/applications/" .
