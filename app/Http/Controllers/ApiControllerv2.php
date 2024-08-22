@@ -10716,7 +10716,8 @@ class ApiControllerv2 extends Controller
 
         $validator = Validator::make($input, [
 
-            'event_post_image_id' => ['required', 'exists:event_post_images,id']
+            'event_post_image_id' => ['required', 'exists:event_post_images,id'],
+            'event_post_id' => ['required', 'exists:event_posts,id']
 
         ]);
 
@@ -10731,12 +10732,23 @@ class ApiControllerv2 extends Controller
             ]);
         }
         try {
-            $image = EventPostImage::where('id', $input['event_post_image_id'])->first();
-            if (file_exists(public_path('storage/post_image/') . $image->post_image)) {
-                $imagePath = public_path('storage/post_image/') . $image->post_image;
-                unlink($imagePath);
+            $event_post = EventPostImage::where('event_post_id', $input['event_post_id'])->count();
+            if ($event_post > 1) {
+                $image = EventPostImage::where('id', $input['event_post_image_id'])->first();
+                if (file_exists(public_path('storage/post_image/') . $image->post_image)) {
+                    $imagePath = public_path('storage/post_image/') . $image->post_image;
+                    unlink($imagePath);
+                }
+                EventPostImage::where('id', $input['event_post_image_id'])->delete();
+            } else {
+                $image = EventPostImage::where('id', $input['event_post_image_id'])->first();
+                if (file_exists(public_path('storage/post_image/') . $image->post_image)) {
+                    $imagePath = public_path('storage/post_image/') . $image->post_image;
+                    unlink($imagePath);
+                }
+                EventPostImage::where('id', $input['event_post_image_id'])->delete();
+                EventPost::where('id', $input['event_post_id'])->delete();
             }
-            EventPostImage::where('id', $input['event_post_image_id'])->delete();
 
             return response()->json(['status' => 1, 'message' => "Image removed successfully"]);
         } catch (QueryException $e) {
