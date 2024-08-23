@@ -25,9 +25,9 @@
                 <li class="nav-item" role="presentation">
                     <button class="nav-link userRegister active" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="#contact" aria-selected="true">Personal</button>
                 </li>
-                <li class="nav-item" role="presentation">
+                <!-- <li class="nav-item" role="presentation">
                     <button class="nav-link businessRegister" id="phone-tab" data-bs-toggle="tab" data-bs-target="#phone" type="button" role="tab" aria-controls="phone" aria-selected="false">Business</button>
-                </li>
+                </li> -->
 
             </ul>
             <div class="tab-content" id="myTabContent">
@@ -161,7 +161,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="phone" role="tabpanel" aria-labelledby="phone-tab">
+                <!-- <div class="tab-pane fade" id="phone" role="tabpanel" aria-labelledby="phone-tab">
                     <div class="">
                         <form method="POST" action="{{route('store.register')}}" id="business">
                             @csrf
@@ -288,7 +288,7 @@
 
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
         <div class="create-link d-flex justify-content-center align-items-center gap-2">
