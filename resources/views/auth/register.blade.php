@@ -21,15 +21,15 @@
             <p>Let’s create your new account!</p>
         </div>
         <div class="register-wrap login-form-wrap">
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <!-- <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
                     <button class="nav-link userRegister active" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="#contact" aria-selected="true">Personal</button>
                 </li>
-                <!-- <li class="nav-item" role="presentation">
+                <li class="nav-item" role="presentation">
                     <button class="nav-link businessRegister" id="phone-tab" data-bs-toggle="tab" data-bs-target="#phone" type="button" role="tab" aria-controls="phone" aria-selected="false">Business</button>
-                </li> -->
+                </li>
 
-            </ul>
+            </ul> -->
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                     <div class="">
