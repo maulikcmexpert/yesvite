@@ -20,12 +20,12 @@
         <div class="user-name">
             <div class="d-flex justify-content-center mb-2">
                 <h3>{{$profileData->firstname.' '.$profileData->lastname }}</h3>
-              
+
                 @if($profileData->subscribe_status == false)
-                                    <span class="free">Free</span>
-                                    @else
-                                    <span>Pro Year</span>
-                                    @endif
+                <span class="free">Free</span>
+                @else
+                <span>Pro Year</span>
+                @endif
             </div>
             <p>Member Since: {{ $profileData->join_date }}</p>
         </div>
@@ -51,9 +51,9 @@
             </div>
             @endif
         </div>
-        <a href="#" class="switch-ac" data-bs-toggle="modal" data-bs-target="#manageModel">
+        <!-- <a href="#" class="switch-ac" data-bs-toggle="modal" data-bs-target="#manageModel">
             <span>Manage | Switch Accounts</span>
-        </a>
+        </a> -->
 
 
 
