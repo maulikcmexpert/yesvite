@@ -532,6 +532,17 @@ class ApiAuthController extends Controller
 
             );
         }
+        $users = User::where('email', $input['email'])->first();
+        if ($users->password == null && $users->facebook_token_id == null && $users->instagram_token_id == null && $users->gmail_token_id == null && $users->apple_token_id == null) {
+            return response()->json(
+                [
+                    'status' => 0,
+                    'message' => "User Doesn't Exist !",
+                ],
+
+            );
+        }
+
         $token = str_pad(random_int(0, 9999), 4, '0', STR_PAD_LEFT);
 
         //if exist then delete //
