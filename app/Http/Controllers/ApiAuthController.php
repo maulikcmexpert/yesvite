@@ -229,6 +229,11 @@ class ApiAuthController extends Controller
 
             $user = Auth::user();
 
+            //for making app_user 1 
+            $users = User::where('id', $user->id)->first();
+            $users->app_user = "1";
+            $users->save();
+
             if ($user->email_verified_at != NULL) {
                 $alreadyLog = null;
                 if (isset($input['add_account']) && $input['add_account'] == '1') {
