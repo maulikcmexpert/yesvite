@@ -7404,8 +7404,7 @@ class ApiControllerv2 extends Controller
                     $postsNormalDetail['id'] =  $value->id;
                     $postsNormalDetail['user_id'] =  $value->user->id;
                     // $postsNormalDetail['is_host'] =  ($ischeckEventOwner != null) ? 1 : 0;
-                    // $postsNormalDetail['is_host'] =  ($value->user->id == $user->id) ? 1 : 0;
-                    $postsNormalDetail['is_host'] =  ($ischeckEventOwner != null) ? 1 : 0;
+                    $postsNormalDetail['is_host'] =  ($value->user->id == $user->id) ? 1 : 0;
 
                     $postsNormalDetail['username'] =  $value->user->firstname . ' ' . $value->user->lastname;
                     $postsNormalDetail['profile'] =  empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile);
