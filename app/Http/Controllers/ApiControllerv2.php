@@ -8676,10 +8676,13 @@ class ApiControllerv2 extends Controller
         $creatEventPost->commenting_on_off = $request->commenting_on_off;
         $creatEventPost->is_in_photo_moudle = $request->is_in_photo_moudle;
         $creatEventPost->save();
+        $video = 0;
+        $image = 0;
         if ($creatEventPost->id) {
             if ($request->post_type == '1') {
                 if (!empty($request->post_image)) {
                     $postimages = $request->post_image;
+
                     foreach ($postimages as $key => $postImgValue) {
                         $postImage = $postImgValue;
                         $imageName = time() . $key . '_' . $postImage->getClientOriginalName();
@@ -8699,6 +8702,7 @@ class ApiControllerv2 extends Controller
                                 unlink($imagePath);
                             }
                             $postImage->move(public_path('storage/post_image'), $imageName);
+                            $video++;
                         } else {
 
                             $temporaryThumbnailPath = public_path('storage/post_image/') . 'tmp_' . $imageName;
@@ -8711,6 +8715,7 @@ class ApiControllerv2 extends Controller
                                 mkdir($destinationPath, 0755, true);
                             }
                             rename($temporaryThumbnailPath, $destinationPath . $imageName);
+                            $image++;
                         }
 
 
@@ -8768,7 +8773,9 @@ class ApiControllerv2 extends Controller
                 'post_id' => $creatEventPost->id,
                 'is_in_photo_moudle' => $request->is_in_photo_moudle,
                 'post_type' => $request->post_type,
-                'post_privacy' => $request->post_privacy
+                'post_privacy' => $request->post_privacy,
+                'video' => $video,
+                'image' => $image
             ];
         }
 
