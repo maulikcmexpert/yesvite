@@ -418,7 +418,7 @@ function sendNotification($notificationType, $postData)
                     } elseif ($postData['image'] == 0 && $postData['video'] > 0) {
                         $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " upload " . $postData['video'] . " videos.";
                     } else {
-                        $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " upload new posts";
+                        $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " upload new post";
                     }
                 }
                 $notification = new Notification;
