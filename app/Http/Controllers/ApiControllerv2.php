@@ -8702,7 +8702,6 @@ class ApiControllerv2 extends Controller
                                 unlink($imagePath);
                             }
                             $postImage->move(public_path('storage/post_image'), $imageName);
-                            $video++;
                         } else {
 
                             $temporaryThumbnailPath = public_path('storage/post_image/') . 'tmp_' . $imageName;
@@ -8715,7 +8714,6 @@ class ApiControllerv2 extends Controller
                                 mkdir($destinationPath, 0755, true);
                             }
                             rename($temporaryThumbnailPath, $destinationPath . $imageName);
-                            $image++;
                         }
 
 
@@ -8739,6 +8737,11 @@ class ApiControllerv2 extends Controller
                         //     'type' => $checkIsimageOrVideo,
                         //     'thumbnail' => $thumbName,
                         // ]);
+                        if ($checkIsimageOrVideo == 'video') {
+                            $video++;
+                        } else {
+                            $image++;
+                        }
                         $eventPostImage = new EventPostImage();
                         $eventPostImage->event_id = $request->event_id;
                         $eventPostImage->event_post_id = $creatEventPost->id;
