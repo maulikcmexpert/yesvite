@@ -1367,47 +1367,22 @@ function send_notification_FCM_and($deviceToken, $notifyData)
     ];
 
     $post_data = json_encode($message);
-    // $crl = curl_init();
+    $crl = curl_init();
 
-    // $headr = array();
-    // $headr[] = 'Content-type: application/json';
-    // $headr[] = 'Authorization: Bearer ' . trim($accessToken);
-    // curl_setopt($crl, CURLOPT_SSL_VERIFYPEER, false);
+    $headr = array();
+    $headr[] = 'Content-type: application/json';
+    $headr[] = 'Authorization: Bearer ' . trim($accessToken);
+    curl_setopt($crl, CURLOPT_SSL_VERIFYPEER, false);
 
-    // curl_setopt($crl, CURLOPT_URL, $URL);
-    // curl_setopt($crl, CURLOPT_HTTPHEADER, $headr);
+    curl_setopt($crl, CURLOPT_URL, $URL);
+    curl_setopt($crl, CURLOPT_HTTPHEADER, $headr);
 
-    // curl_setopt($crl, CURLOPT_POST, true);
-    // curl_setopt($crl, CURLOPT_POSTFIELDS, $post_data);
-    // curl_setopt($crl, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($crl, CURLOPT_POST, true);
+    curl_setopt($crl, CURLOPT_POSTFIELDS, $post_data);
+    curl_setopt($crl, CURLOPT_RETURNTRANSFER, true);
 
-    // $rest = curl_exec($crl);
-    $ch = curl_init($URL);
-
-    // Set cURL options
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, [
-        'Authorization: Bearer ' . $accessToken,
-        'Content-Type: application/json',
-        'Content-Length: ' . strlen($post_data),
-    ]);
-
-    // Execute the cURL request and get the response
-    $response = curl_exec($ch);
-
-    // Check for cURL errors
-    if (curl_errno($ch)) {
-        echo 'cURL Error: ' . curl_error($ch);
-    }
-
-    // Close the cURL session
-    curl_close($ch);
-
-    // Decode and handle the response
-    $responseData = json_decode($response, true);
-    dd($responseData);
+    $rest = curl_exec($crl);
+    dd($rest);
     if ($rest === false) {
         $result_noti = 0;
     } else {
