@@ -1393,12 +1393,12 @@ function send_notification_FCM_and($deviceToken, $notifyData)
     ];
 
     $post_data = json_encode($message);
-    dd($post_data);
     $crl = curl_init();
 
     $headr = array();
     $headr[] = 'Content-type: application/json';
     $headr[] = 'Authorization: Bearer ' . trim($accessToken);
+    $headr[] = 'Content-Length: ' . strlen($post_data);
     curl_setopt($crl, CURLOPT_SSL_VERIFYPEER, false);
 
     curl_setopt($crl, CURLOPT_URL, $URL);
