@@ -468,7 +468,7 @@ function sendNotification($notificationType, $postData)
 
                         if ($deviceData->model == 'Ios') {
 
-                            send_notification_FCM($deviceData->device_token, $notificationData);
+                            send_notification_FCM_and($deviceData->device_token, $notificationData);
                         }
                     }
                 }
