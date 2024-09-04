@@ -1358,8 +1358,7 @@ function send_notification_FCM_and($deviceToken, $notifyData)
     // $post_data = json_encode($dataPayload);
     $notification = array(
         'title' => 'Yesvite',
-        'image' => $notifyData['notification_image'],
-
+        'body' => $notifyData['message'],
     );
     $message = [
         'message' => [
