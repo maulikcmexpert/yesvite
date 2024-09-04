@@ -363,13 +363,13 @@ function sendNotification($notificationType, $postData)
                 }
                 $notificationData = [
                     'message' => $push_notification_message,
-                    'type' => $notificationType,
+                    'type' => (string)$notificationType,
                     'notification_image' => $notification_image,
-                    'event_id' => $postData['event_id'],
+                    'event_id' => (string)$postData['event_id'],
                     'event_name' => $getEventOwner->event_name,
-                    'event_wall' => $getEventOwner->event_settings->event_wall,
-                    'guest_list_visible_to_guests' => isset($getEventOwner->event_settings->guest_list_visible_to_guests) ? $getEventOwner->event_settings->guest_list_visible_to_guests : '',
-                    'event_potluck' => $getEventOwner->event_settings->podluck,
+                    'event_wall' => (string)$getEventOwner->event_settings->event_wall,
+                    'guest_list_visible_to_guests' => isset($getEventOwner->event_settings->guest_list_visible_to_guests) ? (string)$getEventOwner->event_settings->guest_list_visible_to_guests : '',
+                    'event_potluck' => (string)$getEventOwner->event_settings->podluck,
                     'guest_pending_count' => getGuestPendingRsvpCount($postData['event_id'])
                 ];
 
@@ -441,18 +441,18 @@ function sendNotification($notificationType, $postData)
                             $notification_image = asset('pubilc/storage/post_image/' . $notificationImage->post_image);
                         }
                         $notificationData = [
-                            'event_id' => $postData['event_id'],
+                            'event_id' => (string)$postData['event_id'],
                             'message' => $notification_message,
-                            'type' => $notificationType,
+                            'type' => (string)$notificationType,
                             'notification_image' => $notification_image,
-                            'post_id' => $postData['post_id'],
-                            'is_in_photo_moudle' => $postData['is_in_photo_moudle'],
-                            'post_type' => $postData['post_type'],
-                            'event_wall' => isset($ownerEvent->event_settings->event_wall) ? $ownerEvent->event_settings->event_wall : '',
-                            'guest_list_visible_to_guests' => isset($ownerEvent->event_settings->guest_list_visible_to_guests) ? $ownerEvent->event_settings->guest_list_visible_to_guests : '',
-                            'is_event_owner' => 1,
-                            'is_post_by_host' => 1,
-                            'is_owner_post' => 1,
+                            'post_id' => (string)$postData['post_id'],
+                            'is_in_photo_moudle' => (string)$postData['is_in_photo_moudle'],
+                            'post_type' => (string)$postData['post_type'],
+                            'event_wall' => isset($ownerEvent->event_settings->event_wall) ? (string)$ownerEvent->event_settings->event_wall : '',
+                            'guest_list_visible_to_guests' => isset($ownerEvent->event_settings->guest_list_visible_to_guests) ? (string)$ownerEvent->event_settings->guest_list_visible_to_guests : '',
+                            'is_event_owner' => '1',
+                            'is_post_by_host' => '1',
+                            'is_owner_post' => '1',
                             'rsvp_staus' => '',
 
                         ];
@@ -535,18 +535,18 @@ function sendNotification($notificationType, $postData)
                             $notification_image = asset('pubilc/storage/post_image/' . $notificationImage->post_image);
                         }
                         $notificationData = [
-                            'event_id' => $postData['event_id'],
+                            'event_id' => (string)$postData['event_id'],
                             'message' => $notification_message,
-                            'type' => $notificationType,
+                            'type' => (string)$notificationType,
                             'notification_image' => $notification_image,
-                            'post_id' => $postData['post_id'],
-                            'is_in_photo_moudle' => $postData['is_in_photo_moudle'],
-                            'post_type' => $postData['post_type'],
-                            'event_wall' => isset($ownerEvent->event_settings->event_wall) ? $ownerEvent->event_settings->event_wall : '',
-                            'guest_list_visible_to_guests' => isset($ownerEvent->event_settings->guest_list_visible_to_guests) ? $ownerEvent->event_settings->guest_list_visible_to_guests : '',
-                            'is_event_owner' => 1,
-                            'is_post_by_host' => 1,
-                            'is_owner_post' => 1,
+                            'post_id' => (string)$postData['post_id'],
+                            'is_in_photo_moudle' => (string)$postData['is_in_photo_moudle'],
+                            'post_type' => (string)$postData['post_type'],
+                            'event_wall' => isset($ownerEvent->event_settings->event_wall) ? (string)$ownerEvent->event_settings->event_wall : '',
+                            'guest_list_visible_to_guests' => isset($ownerEvent->event_settings->guest_list_visible_to_guests) ? (string)$ownerEvent->event_settings->guest_list_visible_to_guests : '',
+                            'is_event_owner' => '1',
+                            'is_post_by_host' => '1',
+                            'is_owner_post' => '1',
                             'rsvp_staus' => '',
 
                         ];
