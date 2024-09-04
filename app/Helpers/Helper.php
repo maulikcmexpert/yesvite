@@ -154,37 +154,29 @@ function sendNotification($notificationType, $postData)
 
                             $notification_image = asset('public/storage/event_images/' . $notificationImage->image);
                         }
-                        $notificationData = [
+                        $$notificationData = [
                             'message' => $notification_message,
-                            'type' => $notificationType,
+                            'type' => (string)$notificationType,
                             'notification_image' => $notification_image,
-                            'event_id' => (int)$postData['event_id'],
-                            'event_name' => $value->event->event_name,
-                            'event_wall' => $value->event->event_settings->event_wall,
-                            'guest_list_visible_to_guests' => $value->event->event_settings->guest_list_visible_to_guests,
-                            'event_potluck' => $value->event->event_settings->podluck,
-                            'guest_pending_count' => getGuestPendingRsvpCount($postData['event_id']),
+                            'event_id' => (string)$postData['event_id'],
+                            'event_name' => (string)$value->event->event_name,
+                            'event_wall' => (string)$value->event->event_settings->event_wall,
+                            'guest_list_visible_to_guests' => (string)$value->event->event_settings->guest_list_visible_to_guests,
+                            'event_potluck' => (string)$value->event->event_settings->podluck,
+                            'guest_pending_count' => (string)getGuestPendingRsvpCount($postData['event_id']),
                             'rsvp_status' => '0',
                         ];
 
                         $checkNotificationSetting = checkNotificationSetting($value->user_id);
                         if ((count($checkNotificationSetting) && $checkNotificationSetting['invitations']['push'] == '1') &&  $value->notification_on_off == '1') {
 
-                            // if ($deviceData->model == 'And') {
                             send_notification_FCM_and($deviceData->device_token, $notificationData);
-                            // }
-
-                            // if ($deviceData->model == 'Ios') {
-
-                            //     send_notification_FCM($deviceData->device_token, $notificationData);
-                            // }
                         }
                     }
                     $checkNotificationSetting = checkNotificationSetting($value->user_id);
                     if ($value->prefer_by == 'email') {
 
                         if ($value->user->app_user == '1' &&  count($checkNotificationSetting) != 0 && $checkNotificationSetting['invitations']['email'] == '1') {
-
 
                             $event_time = "";
                             if ($value->event->event_schedule->isNotEmpty()) {
@@ -300,29 +292,20 @@ function sendNotification($notificationType, $postData)
                             $push_notification_message = $senderData->firstname . ' ' . $senderData->lastname . " has updated the event details for " . $value->event->event_name;
                             $notificationData = [
                                 'message' => $notification_message,
-                                'type' => $notificationType,
-                                'notification_image' => $push_notification_message,
-                                'event_id' => $postData['event_id'],
+                                'type' => (string)$notificationType,
+                                'notification_image' => (string)$push_notification_message,
+                                'event_id' => (string)$postData['event_id'],
                                 'event_name' => $value->event->event_name,
-                                'event_wall' => $value->event->event_settings->event_wall,
-                                'guest_list_visible_to_guests' => $value->event->event_settings->guest_list_visible_to_guests,
-                                'event_potluck' => $value->event->event_settings->podluck,
-                                'rsvp_status' => (isset($value->rsvp_status) && $value->rsvp_status != null) ? $value->rsvp_status : '',
-                                'guest_pending_count' => getGuestPendingRsvpCount($postData['event_id'])
+                                'event_wall' => (string)$value->event->event_settings->event_wall,
+                                'guest_list_visible_to_guests' => (string)$value->event->event_settings->guest_list_visible_to_guests,
+                                'event_potluck' => (string)$value->event->event_settings->podluck,
+                                'rsvp_status' => (isset($value->rsvp_status) && $value->rsvp_status != null) ? (string)$value->rsvp_status : '',
+                                'guest_pending_count' => (string)getGuestPendingRsvpCount($postData['event_id'])
 
                             ];
 
                             if ($value->notification_on_off == '1') {
-
-                                // if ($deviceData->model == 'And') {
-
                                 send_notification_FCM_and($deviceData->device_token, $notificationData);
-                                // }
-
-                                // if ($deviceData->model == 'Ios') {
-
-                                //     send_notification_FCM($deviceData->device_token, $notificationData);
-                                // }
                             }
                         }
                     }
@@ -370,22 +353,12 @@ function sendNotification($notificationType, $postData)
                     'event_wall' => (string)$getEventOwner->event_settings->event_wall,
                     'guest_list_visible_to_guests' => isset($getEventOwner->event_settings->guest_list_visible_to_guests) ? (string)$getEventOwner->event_settings->guest_list_visible_to_guests : '',
                     'event_potluck' => (string)$getEventOwner->event_settings->podluck,
-                    'guest_pending_count' => getGuestPendingRsvpCount($postData['event_id'])
+                    'guest_pending_count' => (string)getGuestPendingRsvpCount($postData['event_id'])
                 ];
 
 
                 if ($getEventOwner->notification_on_off == '1') {
-
-
-                    // if ($deviceData->model == 'And') {
-
                     send_notification_FCM_and($deviceData->device_token, $notificationData);
-                    // }
-
-                    // if ($deviceData->model == 'Ios') {
-
-                    //     send_notification_FCM($deviceData->device_token, $notificationData);
-                    // }
                 }
             }
         }
@@ -460,16 +433,7 @@ function sendNotification($notificationType, $postData)
                         $checkNotificationSetting = checkNotificationSetting($ownerEvent->user_id);
 
                         if ((count($checkNotificationSetting) && $checkNotificationSetting['wall_post']['push'] == '1') && $ownerEvent->notification_on_off == '1') {
-
-
-                            // if ($deviceData->model == 'And') {
                             send_notification_FCM_and($deviceData->device_token, $notificationData);
-                            // }
-
-                            // if ($deviceData->model == 'Ios') {
-
-                            //     send_notification_FCM_and($deviceData->device_token, $notificationData);
-                            // }
                         }
                     }
                 }
@@ -553,16 +517,7 @@ function sendNotification($notificationType, $postData)
                         $checkNotificationSetting = checkNotificationSetting($value->user_id);
 
                         if ((count($checkNotificationSetting) && $checkNotificationSetting['wall_post']['push'] == '1') && $value->notification_on_off == '1') {
-
-                            // if ($deviceData->model == 'And') {
-
                             send_notification_FCM_and($deviceData->device_token, $notificationData);
-                            // }
-
-                            // if ($deviceData->model == 'Ios') {
-
-                            //     send_notification_FCM_and($deviceData->device_token, $notificationData);
-                            // }
                         }
                     }
                 }
@@ -604,32 +559,23 @@ function sendNotification($notificationType, $postData)
                         }
                         $notificationData = [
                             'message' => $notification_message,
-                            'type' => $notificationType,
+                            'type' => (string)$notificationType,
                             'notification_image' => $notification_image,
-                            'post_id' => $postData['post_id'],
-                            'is_in_photo_moudle' => $postData['is_in_photo_moudle'],
-                            'post_type' => $postData['post_type'],
-                            'event_wall' => isset($ownerEvent->event_settings->event_wall) ? $ownerEvent->event_settings->event_wall : '',
-                            'guest_list_visible_to_guests' => isset($ownerEvent->event_settings->guest_list_visible_to_guests) ? $ownerEvent->event_settings->guest_list_visible_to_guests : '',
-                            'is_event_owner' => $is_event_owner,
-                            'is_post_by_host' => $is_post_by_host,
-                            'is_owner_post' => 0,
-                            'rsvp_status' => $rsvp_status,
+                            'post_id' => (string)$postData['post_id'],
+                            'is_in_photo_moudle' => (string)$postData['is_in_photo_moudle'],
+                            'post_type' => (string)$postData['post_type'],
+                            'event_wall' => isset($ownerEvent->event_settings->event_wall) ? (string)$ownerEvent->event_settings->event_wall : '',
+                            'guest_list_visible_to_guests' => isset($ownerEvent->event_settings->guest_list_visible_to_guests) ? (string)$ownerEvent->event_settings->guest_list_visible_to_guests : '',
+                            'is_event_owner' => (string)$is_event_owner,
+                            'is_post_by_host' => (string)$is_post_by_host,
+                            'is_owner_post' => '0',
+                            'rsvp_status' => (string)$rsvp_status,
 
                         ];
                         $checkNotificationSetting = checkNotificationSetting($value->user_id);
 
                         if ((count($checkNotificationSetting) && $checkNotificationSetting['wall_post']['push'] == '1') && $value->notification_on_off == '1') {
-
-                            // if ($deviceData->model == 'And') {
-
                             send_notification_FCM_and($deviceData->device_token, $notificationData);
-                            // }
-
-                            // if ($deviceData->model == 'Ios') {
-
-                            //     send_notification_FCM($deviceData->device_token, $notificationData);
-                            // }
                         }
                     }
                 }
@@ -673,32 +619,23 @@ function sendNotification($notificationType, $postData)
                         }
                         $notificationData = [
                             'message' => $notification_message,
-                            'type' => $notificationType,
+                            'type' => (string)$notificationType,
                             'notification_image' => $notification_image,
-                            'post_id' => $postData['post_id'],
-                            'is_in_photo_moudle' => $postData['is_in_photo_moudle'],
-                            'post_type' => $postData['post_type'],
-                            'event_wall' => isset($ownerEvent->event_settings->event_wall) ? $ownerEvent->event_settings->event_wall : '',
-                            'guest_list_visible_to_guests' => isset($ownerEvent->event_settings->guest_list_visible_to_guests) ? $ownerEvent->event_settings->guest_list_visible_to_guests : '',
-                            'is_event_owner' => $is_event_owner,
-                            'is_post_by_host' => $is_post_by_host,
-                            'is_owner_post' => 0,
-                            'rsvp_status' => $rsvp_status,
+                            'post_id' => (string)$postData['post_id'],
+                            'is_in_photo_moudle' => (string)$postData['is_in_photo_moudle'],
+                            'post_type' => (string)$postData['post_type'],
+                            'event_wall' => isset($ownerEvent->event_settings->event_wall) ? (string)$ownerEvent->event_settings->event_wall : '',
+                            'guest_list_visible_to_guests' => isset($ownerEvent->event_settings->guest_list_visible_to_guests) ? (string)$ownerEvent->event_settings->guest_list_visible_to_guests : '',
+                            'is_event_owner' => (string)$is_event_owner,
+                            'is_post_by_host' => (string)$is_post_by_host,
+                            'is_owner_post' => '0',
+                            'rsvp_status' => (string)$rsvp_status,
 
                         ];
                         $checkNotificationSetting = checkNotificationSetting($value->user_id);
 
                         if ((count($checkNotificationSetting) && $checkNotificationSetting['wall_post']['push'] == '1') && $value->notification_on_off == '1') {
-
-                            // if ($deviceData->model == 'And') {
-
                             send_notification_FCM_and($deviceData->device_token, $notificationData);
-                            // }
-
-                            // if ($deviceData->model == 'Ios') {
-
-                            //     send_notification_FCM($deviceData->device_token, $notificationData);
-                            // }
                         }
                     }
                 }
@@ -742,32 +679,23 @@ function sendNotification($notificationType, $postData)
                         }
                         $notificationData = [
                             'message' => $notification_message,
-                            'type' => $notificationType,
+                            'type' => (string)$notificationType,
                             'notification_image' => $notification_image,
-                            'post_id' => $postData['post_id'],
-                            'is_in_photo_moudle' => $postData['is_in_photo_moudle'],
-                            'post_type' => $postData['post_type'],
-                            'event_wall' => isset($ownerEvent->event_settings->event_wall) ? $ownerEvent->event_settings->event_wall : '',
-                            'guest_list_visible_to_guests' => isset($ownerEvent->event_settings->guest_list_visible_to_guests) ? $ownerEvent->event_settings->guest_list_visible_to_guests : '',
-                            'is_event_owner' => $is_event_owner,
-                            'is_post_by_host' => $is_post_by_host,
-                            'is_owner_post' => 0,
-                            'rsvp_status' => $rsvp_status,
+                            'post_id' => (string)$postData['post_id'],
+                            'is_in_photo_moudle' => (string)$postData['is_in_photo_moudle'],
+                            'post_type' => (string)$postData['post_type'],
+                            'event_wall' => isset($ownerEvent->event_settings->event_wall) ? (string)$ownerEvent->event_settings->event_wall : '',
+                            'guest_list_visible_to_guests' => isset($ownerEvent->event_settings->guest_list_visible_to_guests) ? (string)$ownerEvent->event_settings->guest_list_visible_to_guests : '',
+                            'is_event_owner' => (string)$is_event_owner,
+                            'is_post_by_host' => (string)$is_post_by_host,
+                            'is_owner_post' => '0',
+                            'rsvp_status' => (string)$rsvp_status,
 
                         ];
                         $checkNotificationSetting = checkNotificationSetting($value->user_id);
 
                         if ((count($checkNotificationSetting) && $checkNotificationSetting['wall_post']['push'] == '1') && $value->notification_on_off == '1') {
-
-                            // if ($deviceData->model == 'And') {
-
                             send_notification_FCM_and($deviceData->device_token, $notificationData);
-                            // }
-
-                            // if ($deviceData->model == 'Ios') {
-
-                            //     send_notification_FCM($deviceData->device_token, $notificationData);
-                            // }
                         }
                     }
                 }
@@ -812,12 +740,12 @@ function sendNotification($notificationType, $postData)
 
                     $notificationData = [
                         'message' => $notification_message,
-                        'type' => $notificationType,
+                        'type' => (string)$notificationType,
                         'notification_image' => $notification_image,
-                        'event_id' => $postData['event_id'],
-                        'post_id' => $postData['post_id'],
-                        'post_type' => $getPostOwnerId->post_type,
-                        'is_in_photo_moudle' => $postData['is_in_photo_moudle'],
+                        'event_id' => (string)$postData['event_id'],
+                        'post_id' => (string)$postData['post_id'],
+                        'post_type' => (string)$getPostOwnerId->post_type,
+                        'is_in_photo_moudle' => (string)$postData['is_in_photo_moudle'],
                         // 'event_wall' => isset($eventSetting->event_wall) ? $eventSetting->event_wall : '',
                         // 'guest_list_visible_to_guests' => isset($eventSetting->guest_list_visible_to_guests) ? $eventSetting->guest_list_visible_to_guests : '',
                         // 'is_post_by_host' => $is_post_by_host,
@@ -831,16 +759,7 @@ function sendNotification($notificationType, $postData)
                     $checkNotificationSetting = checkNotificationSetting($getPostOwnerId->user_id);
 
                     if ((count($checkNotificationSetting) && $checkNotificationSetting['wall_post']['push'] == '1') && $notification_on_off == '1') {
-
-                        // if ($deviceData->model == 'And') {
-
                         send_notification_FCM_and($deviceData->device_token, $notificationData);
-                        // }
-
-                        // if ($deviceData->model == 'Ios') {
-
-                        //     send_notification_FCM($deviceData->device_token, $notificationData);
-                        // }
                     }
 
 
@@ -886,12 +805,12 @@ function sendNotification($notificationType, $postData)
                     }
                     $notificationData = [
                         'message' => $notification_message,
-                        'type' => $notificationType,
+                        'type' => (string)$notificationType,
                         'notification_image' => $notification_image,
-                        'post_id' => $postData['post_id'],
-                        'comment_id' => $postData['comment_id'],
-                        'event_id' => $postData['event_id'],
-                        'post_type' => $getPostOwnerId->post_type,
+                        'post_id' => (string)$postData['post_id'],
+                        'comment_id' => (string)$postData['comment_id'],
+                        'event_id' => (string)$postData['event_id'],
+                        'post_type' => (string)$getPostOwnerId->post_type,
 
                     ];
 
@@ -900,16 +819,7 @@ function sendNotification($notificationType, $postData)
                     $checkNotificationSetting = checkNotificationSetting($ownerOfComment);
 
                     if ((count($checkNotificationSetting) && $checkNotificationSetting['wall_post']['push'] == '1') && $notification_on_off == '1') {
-
-                        // if ($deviceData->model == 'And') {
-
                         send_notification_FCM_and($deviceData->device_token, $notificationData);
-                        // }
-
-                        // if ($deviceData->model == 'Ios') {
-
-                        //     send_notification_FCM($deviceData->device_token, $notificationData);
-                        // }
                     }
 
 
@@ -953,11 +863,11 @@ function sendNotification($notificationType, $postData)
                     }
                     $notificationData = [
                         'message' => $notification_message,
-                        'type' => $notificationType,
+                        'type' => (string)$notificationType,
                         'notification_image' => $notification_image,
-                        'post_id' => $postData['post_id'],
-                        'event_id' => $postData['event_id'],
-                        'post_type' => $getPostOwnerId->post_type,
+                        'post_id' => (string)$postData['post_id'],
+                        'event_id' => (string)$postData['event_id'],
+                        'post_type' => (string)$getPostOwnerId->post_type,
 
                     ];
 
@@ -965,16 +875,7 @@ function sendNotification($notificationType, $postData)
                     $checkNotificationSetting = checkNotificationSetting($getPostOwnerId->user_id);
 
                     if ((count($checkNotificationSetting) && $checkNotificationSetting['wall_post']['push'] == '1') && $notification_on_off == '1') {
-
-                        // if ($deviceData->model == 'And') {
-
                         send_notification_FCM_and($deviceData->device_token, $notificationData);
-                        // }
-
-                        // if ($deviceData->model == 'Ios') {
-
-                        //     send_notification_FCM($deviceData->device_token, $notificationData);
-                        // }
                     }
                     // send_notification_FCM($deviceData->device_token, $notification_message);
                 }
@@ -1017,13 +918,13 @@ function sendNotification($notificationType, $postData)
                     }
                     $notificationData = [
                         'message' => $notification_message,
-                        'type' => $notificationType,
+                        'type' => (string)$notificationType,
                         'notification_image' => $notification_image,
-                        'post_id' => $postData['post_id'],
-                        'comment_id' => $postData['comment_id'],
-                        'event_id' => $postData['event_id'],
-                        'post_type' => $getPostOwnerId->post_type,
-                        'reply_comment_id' => $getCommentOwnerId->id,
+                        'post_id' => (string)$postData['post_id'],
+                        'comment_id' => (string)$postData['comment_id'],
+                        'event_id' => (string)$postData['event_id'],
+                        'post_type' => (string)$getPostOwnerId->post_type,
+                        'reply_comment_id' => (string)$getCommentOwnerId->id,
                     ];
 
 
@@ -1031,16 +932,7 @@ function sendNotification($notificationType, $postData)
                     $checkNotificationSetting = checkNotificationSetting($ownerOfComment);
 
                     if ((count($checkNotificationSetting) && $checkNotificationSetting['wall_post']['push'] == '1') && $notification_on_off == '1') {
-
-                        // if ($deviceData->model == 'And') {
-
                         send_notification_FCM_and($deviceData->device_token, $notificationData);
-                        // }
-
-                        // if ($deviceData->model == 'Ios') {
-
-                        //     send_notification_FCM($deviceData->device_token, $notificationData);
-                        // }
                     }
 
 
@@ -1085,30 +977,21 @@ function sendNotification($notificationType, $postData)
 
                     $notificationData = [
                         'message' => $notification_message,
-                        'type' => $notificationType,
+                        'type' => (string)$notificationType,
                         'notification_image' => $notification_image,
                         'post_id' => "",
-                        'event_id' => $postData['event_id'],
-                        'event_name' => $getPostOwnerId->event_name,
-                        'event_wall' => $getPostOwnerId->event_settings->event_wall,
-                        'guest_list_visible_to_guests' => $getPostOwnerId->event_settings->guest_list_visible_to_guests,
-                        'event_potluck' => $getPostOwnerId->event_settings->podluck,
-                        'guest_pending_count' => getGuestPendingRsvpCount($postData['event_id'])
+                        'event_id' => (string)$postData['event_id'],
+                        'event_name' => (string)$getPostOwnerId->event_name,
+                        'event_wall' => (string)$getPostOwnerId->event_settings->event_wall,
+                        'guest_list_visible_to_guests' => (string)$getPostOwnerId->event_settings->guest_list_visible_to_guests,
+                        'event_potluck' => (string)$getPostOwnerId->event_settings->podluck,
+                        'guest_pending_count' => (string)getGuestPendingRsvpCount($postData['event_id'])
                     ];
 
                     $checkNotificationSetting = checkNotificationSetting($getPostOwnerId->user_id);
 
                     if ((count($checkNotificationSetting) && $checkNotificationSetting['guest_rsvp']['push'] == '1') && $getPostOwnerId->notification_on_off == '1') {
-
-                        // if ($deviceData->model == 'And') {
-
                         send_notification_FCM_and($deviceData->device_token, $notificationData);
-                        // }
-
-                        // if ($deviceData->model == 'Ios') {
-
-                        //     send_notification_FCM($deviceData->device_token, $notificationData);
-                        // }
                     }
                     if ((count($checkNotificationSetting) && $checkNotificationSetting['guest_rsvp']['email'] == '1') && $getPostOwnerId->notification_on_off == '1') {
 
@@ -1159,28 +1042,19 @@ function sendNotification($notificationType, $postData)
 
                     $notificationData = [
                         'message' => $notification_message,
-                        'type' => $notificationType,
+                        'type' => (string)$notificationType,
                         'notification_image' => $notification_image,
-                        'event_id' => $postData['event_id'],
-                        'event_name' => $getPostOwnerId->event_name,
-                        'event_wall' => $getPostOwnerId->event_settings->event_wall,
-                        'guest_list_visible_to_guests' => $getPostOwnerId->event_settings->guest_list_visible_to_guests,
-                        'event_potluck' => $getPostOwnerId->event_settings->podluck,
-                        'guest_pending_count' => getGuestPendingRsvpCount($postData['event_id'])
+                        'event_id' => (string)$postData['event_id'],
+                        'event_name' => (string)$getPostOwnerId->event_name,
+                        'event_wall' => (string)$getPostOwnerId->event_settings->event_wall,
+                        'guest_list_visible_to_guests' => (string)$getPostOwnerId->event_settings->guest_list_visible_to_guests,
+                        'event_potluck' => (string)$getPostOwnerId->event_settings->podluck,
+                        'guest_pending_count' => (string)getGuestPendingRsvpCount($postData['event_id'])
                     ];
                     $checkNotificationSetting = checkNotificationSetting($getPostOwnerId->user_id);
 
                     if ((count($checkNotificationSetting) && $checkNotificationSetting['potluck_activity']['push'] == '1') && $getPostOwnerId->notification_on_off == '1') {
-
-                        // if ($deviceData->model == 'And') {
-
                         send_notification_FCM_and($deviceData->device_token, $notificationData);
-                        // }
-
-                        // if ($deviceData->model == 'Ios') {
-
-                        //     send_notification_FCM($deviceData->device_token, $notificationData);
-                        // }
                     }
                 }
             }
