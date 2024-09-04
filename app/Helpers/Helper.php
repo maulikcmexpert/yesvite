@@ -32,7 +32,7 @@ use libphonenumber\PhoneNumberUtil;
 use libphonenumber\PhoneNumberFormat;
 use libphonenumber\NumberParseException;
 use Kreait\Laravel\Firebase\Facades\Firebase;
-
+use Google\Auth\Credentials\ServiceAccountCredentials;
 
 function getVideoDuration($filePath)
 {
@@ -1348,8 +1348,8 @@ function send_notification_FCM_and($deviceToken, $notifyData)
     $serverKey  = ServerKey::first();
     $SERVER_API_KEY = $serverKey->firebase_key;
     $URL = 'https://fcm.googleapis.com/v1/projects/yesvite-976cd/messages:send';
-
-    // dd($notifyData);
+    $accessToken = getAccessToken();
+    dd($accessToken);
     $dataPayload = [
         "to" => trim($deviceToken),
         "data" => $notifyData,
@@ -1361,7 +1361,7 @@ function send_notification_FCM_and($deviceToken, $notifyData)
 
     $headr = array();
     $headr[] = 'Content-type: application/json';
-    $headr[] = 'Authorization: Bearer' . trim($deviceToken);
+    $headr[] = 'Authorization: Bearer' . trim($accessToken);
     curl_setopt($crl, CURLOPT_SSL_VERIFYPEER, false);
 
     curl_setopt($crl, CURLOPT_URL, $URL);
@@ -1380,6 +1380,15 @@ function send_notification_FCM_and($deviceToken, $notifyData)
     }
 
     return $result_noti;
+}
+
+function getAccessToken()
+{
+    $scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+    $serviceAccountPath = env('FIREBASE_CREDENTIALS');
+    $credentials = new ServiceAccountCredentials($scopes, $serviceAccountPath);
+    $accessToken = $credentials->fetchAuthToken()['access_token'];
+    return $accessToken;
 }
 function logoutFromWeb($userId)
 {
