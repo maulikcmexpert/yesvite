@@ -499,7 +499,20 @@ function sendNotification($notificationType, $postData)
                 if ($postData['sender_id'] == $value->user_id) {
                     continue;
                 }
-                $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " upload new post";
+
+                if ($postData['post_type'] == '2') {
+                    $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " upload new post";
+                } else {
+                    if ($postData['video'] > 0 && $postData['image'] > 0) {
+                        $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " upload " . $postData['video'] . " videos and " . $postData['image'] . " images.";
+                    } elseif ($postData['video'] == 0 && $postData['image'] > 0) {
+                        $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " upload " . $postData['image'] . " images.";
+                    } elseif ($postData['image'] == 0 && $postData['video'] > 0) {
+                        $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " upload " . $postData['video'] . " videos.";
+                    } else {
+                        $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " upload new post";
+                    }
+                }
                 $notification = new Notification;
                 $notification->event_id = $postData['event_id'];
                 $notification->post_id = $postData['post_id'];
