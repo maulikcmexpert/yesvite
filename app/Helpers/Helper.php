@@ -1366,17 +1366,21 @@ function send_notification_FCM_and($deviceToken, $notifyData)
         'category' => 'content_added_notification',
     );
     $message = array(
-        'to' => $deviceToken,
+        'token' => $deviceToken,
         'notification' => $notification,
         'data' => $notifyData,
-        'aps' => array(
-            'alert' => array(
-                'title' => "Yesvite",
-                'body' => $notifyData['message']
+        'apns' => array(
+            'payload' => array(
+                'aps' => array(
+                    'alert' => array(
+                        'title' => "Yesvite",
+                        'body' => $notifyData['message']
+                    ),
+                    'category' => 'content_added_notification',
+                    'mutable-content' => true,
+                    'content-available' => true,
+                ),
             ),
-            'category' => 'content_added_notification',
-            'mutable-content' => true,
-            'content-available' => true,
         ),
     );
 
