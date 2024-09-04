@@ -333,7 +333,7 @@ function sendNotification($notificationType, $postData)
             if (!empty($deviceData)) {
                 $notificationImage = EventImage::where('event_id', $postData['event_id'])->first();
 
-
+                $notification_image = '';
                 if ($notificationImage != NULL) {
 
                     $notification_image = asset('public/storage/event_images/' . $notificationImage->image);
