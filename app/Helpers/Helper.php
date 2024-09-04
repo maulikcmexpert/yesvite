@@ -1386,6 +1386,9 @@ function getAccessToken()
 {
     $scopes = ['https://www.googleapis.com/auth/cloud-platform'];
     $serviceAccountPath = storage_path('app/google/service-account-file.json');
+    if (!file_exists($serviceAccountPath)) {
+        throw new \InvalidArgumentException("Service account file does not exist at path: $serviceAccountPath");
+    }
     $credentials = new ServiceAccountCredentials($scopes, $serviceAccountPath);
     dd($credentials);
     $accessToken = $credentials->fetchAuthToken()['access_token'];
