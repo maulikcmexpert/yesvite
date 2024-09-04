@@ -1385,7 +1385,7 @@ function send_notification_FCM_and($deviceToken, $notifyData)
 function getAccessToken()
 {
     $scopes = ['https://www.googleapis.com/auth/cloud-platform'];
-    $serviceAccountPath = env('FIREBASE_CREDENTIALS');
+    $serviceAccountPath = storage_path('app/google/service-account-file.json');
     $credentials = new ServiceAccountCredentials($scopes, $serviceAccountPath);
     dd($credentials);
     $accessToken = $credentials->fetchAuthToken()['access_token'];
