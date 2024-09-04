@@ -365,7 +365,7 @@ function sendNotification($notificationType, $postData)
     }
 
     if ($notificationType == 'upload_post' || $notificationType == 'photos') {
-        dd($postData);
+
         // post notify to  owner//
         $ownerEvent = Event::with('event_settings')->where('id', $postData['event_id'])->first();
         $postControl = PostControl::with('event_posts')->where(['event_id' => $ownerEvent->id, 'user_id' => $ownerEvent->user_id, 'post_control' => 'mute'])->get();
@@ -394,6 +394,7 @@ function sendNotification($notificationType, $postData)
                         $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " upload new post";
                     }
                 }
+                dd($notification_message);
                 $notification = new Notification;
                 $notification->event_id = $postData['event_id'];
                 $notification->post_id = $postData['post_id'];
