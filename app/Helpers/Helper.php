@@ -1379,7 +1379,7 @@ function send_notification_FCM_and($deviceToken, $notifyData)
             'token' => trim($deviceToken),
             'notification' => $notification,
             'data' => $notifyData,
-            'aps' => array(
+            'apns' =>  ['payload' => ['aps' => array(
                 'alert' => array(
                     'title' => "Yesvite",
                     'body' => $notifyData['message']
@@ -1387,7 +1387,7 @@ function send_notification_FCM_and($deviceToken, $notifyData)
                 'category' => 'content_added_notification',
                 'mutable-content' => true,
                 'content-available' => true,
-            ),
+            )]],
         ]
     ];
 
