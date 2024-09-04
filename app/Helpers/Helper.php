@@ -1378,6 +1378,7 @@ function send_notification_FCM_and($deviceToken, $notifyData)
         'message' => [
             'token' => trim($deviceToken),
             'notification' => $notification,
+            'android' => $notifyData,
         ]
     ];
 
