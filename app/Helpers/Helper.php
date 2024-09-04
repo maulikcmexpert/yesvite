@@ -1367,7 +1367,7 @@ function send_notification_FCM_and($deviceToken, $notifyData)
     ];
 
     $post_data = json_encode($message);
-    dd($post_data);
+    // dd($post_data);
     $crl = curl_init();
 
     $headr = array();
