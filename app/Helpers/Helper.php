@@ -1386,8 +1386,8 @@ function getAccessToken()
 {
     $scopes = ['https://www.googleapis.com/auth/cloud-platform'];
     $serviceAccountPath = env('FIREBASE_CREDENTIALS');
-    dd($serviceAccountPath);
     $credentials = new ServiceAccountCredentials($scopes, $serviceAccountPath);
+    dd($credentials);
     $accessToken = $credentials->fetchAuthToken()['access_token'];
     return $accessToken;
 }
