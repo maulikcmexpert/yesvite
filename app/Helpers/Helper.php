@@ -32,7 +32,7 @@ use libphonenumber\PhoneNumberUtil;
 use libphonenumber\PhoneNumberFormat;
 use libphonenumber\NumberParseException;
 use Kreait\Laravel\Firebase\Facades\Firebase;
-use Google\Auth\Credentials\ServiceAccountCredentials;
+use Google\Auth\Src\Credentials\ServiceAccountCredentials;
 
 function getVideoDuration($filePath)
 {
