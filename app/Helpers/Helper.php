@@ -1355,6 +1355,10 @@ function send_notification_FCM_and($deviceToken, $notifyData)
         "data" => $notifyData,
     ];
 
+    // Make the HTTP POST request
+    $response = Http::withToken($accessToken)
+        ->post($URL, $notifyData);
+    dd($response);
     $post_data = json_encode($dataPayload);
 
     $crl = curl_init();
