@@ -1350,12 +1350,37 @@ function send_notification_FCM_and($deviceToken, $notifyData)
     $URL = 'https://fcm.googleapis.com/v1/projects/yesvite-976cd/messages:send';
     $accessToken = getAccessToken();
 
-    $dataPayload = [
-        "to" => trim($deviceToken),
-        "data" => $notifyData,
-    ];
+    // $dataPayload = [
+    //     "to" => trim($deviceToken),
+    //     "data" => $notifyData,
+    // ];
 
-    $post_data = json_encode($dataPayload);
+    // $post_data = json_encode($dataPayload);
+    $notification = array(
+        'title' => 'Yesvite',
+        'body' => $notifyData['message'],
+        'sound' => 'default',
+        'message' => $notifyData['message'],
+        'color' => "#79bc64",
+        'image' => $notifyData['notification_image'],
+        'category' => 'content_added_notification',
+    );
+    $message = array(
+        'to' => $deviceToken,
+        'notification' => $notification,
+        'data' => $notifyData,
+        'aps' => array(
+            'alert' => array(
+                'title' => "Yesvite",
+                'body' => $notifyData['message']
+            ),
+            'category' => 'content_added_notification',
+            'mutable-content' => true,
+            'content-available' => true,
+        ),
+    );
+
+    $post_data = json_encode($message);
 
     $crl = curl_init();
 
