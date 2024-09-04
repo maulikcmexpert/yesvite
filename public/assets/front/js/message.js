@@ -1184,7 +1184,8 @@ $(".send-message").on("keypress", async function (e) {
 
             if (
                 receiverSnapshot.val().isMute == undefined ||
-                receiverSnapshot.val().isMute == 0
+                receiverSnapshot.val().isMute == 0 ||
+                receiverSnapshot.val().isMute == null 
             ) {
                 await send_push_notification(
                     receiverId,
