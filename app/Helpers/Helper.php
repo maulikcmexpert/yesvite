@@ -394,7 +394,7 @@ function sendNotification($notificationType, $postData)
                         $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " upload new post";
                     }
                 }
-                dd($notification_message);
+
                 $notification = new Notification;
                 $notification->event_id = $postData['event_id'];
                 $notification->post_id = $postData['post_id'];
@@ -478,7 +478,6 @@ function sendNotification($notificationType, $postData)
                         $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " upload new post";
                     }
                 }
-                $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " upload new post";
                 $notification = new Notification;
                 $notification->event_id = $postData['event_id'];
                 $notification->post_id = $postData['post_id'];
