@@ -1386,8 +1386,8 @@ function getAccessToken()
 {
     $scopes = ['https://www.googleapis.com/auth/cloud-platform'];
     $serviceAccountPath = storage_path('app/google/service-account-file.json');
+    dd($serviceAccountPath);
     $credentials = new ServiceAccountCredentials($scopes, $serviceAccountPath);
-    dd($credentials);
     $accessToken = $credentials->fetchAuthToken()['access_token'];
     return $accessToken;
 }
