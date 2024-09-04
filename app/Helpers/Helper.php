@@ -1390,7 +1390,6 @@ function getAccessToken()
         throw new \InvalidArgumentException("Service account file does not exist at path: $serviceAccountPath");
     }
     $credentials = new ServiceAccountCredentials($scopes, $serviceAccountPath);
-    dd($credentials);
     $accessToken = $credentials->fetchAuthToken()['access_token'];
     return $accessToken;
 }
