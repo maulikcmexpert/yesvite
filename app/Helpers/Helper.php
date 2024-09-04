@@ -1349,7 +1349,7 @@ function send_notification_FCM_and($deviceToken, $notifyData)
     $SERVER_API_KEY = $serverKey->firebase_key;
     $URL = 'https://fcm.googleapis.com/v1/projects/yesvite-976cd/messages:send';
     $accessToken = getAccessToken();
-    dd($accessToken);
+
     $dataPayload = [
         "to" => trim($deviceToken),
         "data" => $notifyData,
