@@ -392,7 +392,7 @@ function sendNotification($notificationType, $postData)
     }
 
     if ($notificationType == 'upload_post' || $notificationType == 'photos') {
-        dd(1);
+
         // post notify to  owner//
         $ownerEvent = Event::with('event_settings')->where('id', $postData['event_id'])->first();
         $postControl = PostControl::with('event_posts')->where(['event_id' => $ownerEvent->id, 'user_id' => $ownerEvent->user_id, 'post_control' => 'mute'])->get();
@@ -1349,7 +1349,7 @@ function send_notification_FCM_and($deviceToken, $notifyData)
     $SERVER_API_KEY = $serverKey->firebase_key;
     $URL = 'https://fcm.googleapis.com/fcm/send';
 
-    // dd($notifyData);
+    dd($notifyData);
     $dataPayload = [
         "to" => trim($deviceToken),
         "data" => $notifyData,
