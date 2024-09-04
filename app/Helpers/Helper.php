@@ -170,14 +170,14 @@ function sendNotification($notificationType, $postData)
                         $checkNotificationSetting = checkNotificationSetting($value->user_id);
                         if ((count($checkNotificationSetting) && $checkNotificationSetting['invitations']['push'] == '1') &&  $value->notification_on_off == '1') {
 
-                            if ($deviceData->model == 'And') {
-                                send_notification_FCM_and($deviceData->device_token, $notificationData);
-                            }
+                            // if ($deviceData->model == 'And') {
+                            send_notification_FCM_and($deviceData->device_token, $notificationData);
+                            // }
 
-                            if ($deviceData->model == 'Ios') {
+                            // if ($deviceData->model == 'Ios') {
 
-                                send_notification_FCM($deviceData->device_token, $notificationData);
-                            }
+                            //     send_notification_FCM($deviceData->device_token, $notificationData);
+                            // }
                         }
                     }
                     $checkNotificationSetting = checkNotificationSetting($value->user_id);
@@ -314,15 +314,15 @@ function sendNotification($notificationType, $postData)
 
                             if ($value->notification_on_off == '1') {
 
-                                if ($deviceData->model == 'And') {
+                                // if ($deviceData->model == 'And') {
 
-                                    send_notification_FCM_and($deviceData->device_token, $notificationData);
-                                }
+                                send_notification_FCM_and($deviceData->device_token, $notificationData);
+                                // }
 
-                                if ($deviceData->model == 'Ios') {
+                                // if ($deviceData->model == 'Ios') {
 
-                                    send_notification_FCM($deviceData->device_token, $notificationData);
-                                }
+                                //     send_notification_FCM($deviceData->device_token, $notificationData);
+                                // }
                             }
                         }
                     }
@@ -377,15 +377,15 @@ function sendNotification($notificationType, $postData)
                 if ($getEventOwner->notification_on_off == '1') {
 
 
-                    if ($deviceData->model == 'And') {
+                    // if ($deviceData->model == 'And') {
 
-                        send_notification_FCM_and($deviceData->device_token, $notificationData);
-                    }
+                    send_notification_FCM_and($deviceData->device_token, $notificationData);
+                    // }
 
-                    if ($deviceData->model == 'Ios') {
+                    // if ($deviceData->model == 'Ios') {
 
-                        send_notification_FCM($deviceData->device_token, $notificationData);
-                    }
+                    //     send_notification_FCM($deviceData->device_token, $notificationData);
+                    // }
                 }
             }
         }
@@ -462,14 +462,14 @@ function sendNotification($notificationType, $postData)
                         if ((count($checkNotificationSetting) && $checkNotificationSetting['wall_post']['push'] == '1') && $ownerEvent->notification_on_off == '1') {
 
 
-                            if ($deviceData->model == 'And') {
-                                send_notification_FCM_and($deviceData->device_token, $notificationData);
-                            }
+                            // if ($deviceData->model == 'And') {
+                            send_notification_FCM_and($deviceData->device_token, $notificationData);
+                            // }
 
-                            if ($deviceData->model == 'Ios') {
+                            // if ($deviceData->model == 'Ios') {
 
-                                send_notification_FCM_and($deviceData->device_token, $notificationData);
-                            }
+                            //     send_notification_FCM_and($deviceData->device_token, $notificationData);
+                            // }
                         }
                     }
                 }
@@ -554,15 +554,15 @@ function sendNotification($notificationType, $postData)
 
                         if ((count($checkNotificationSetting) && $checkNotificationSetting['wall_post']['push'] == '1') && $value->notification_on_off == '1') {
 
-                            if ($deviceData->model == 'And') {
+                            // if ($deviceData->model == 'And') {
 
-                                send_notification_FCM_and($deviceData->device_token, $notificationData);
-                            }
+                            send_notification_FCM_and($deviceData->device_token, $notificationData);
+                            // }
 
-                            if ($deviceData->model == 'Ios') {
+                            // if ($deviceData->model == 'Ios') {
 
-                                send_notification_FCM_and($deviceData->device_token, $notificationData);
-                            }
+                            //     send_notification_FCM_and($deviceData->device_token, $notificationData);
+                            // }
                         }
                     }
                 }
@@ -621,15 +621,15 @@ function sendNotification($notificationType, $postData)
 
                         if ((count($checkNotificationSetting) && $checkNotificationSetting['wall_post']['push'] == '1') && $value->notification_on_off == '1') {
 
-                            if ($deviceData->model == 'And') {
+                            // if ($deviceData->model == 'And') {
 
-                                send_notification_FCM_and($deviceData->device_token, $notificationData);
-                            }
+                            send_notification_FCM_and($deviceData->device_token, $notificationData);
+                            // }
 
-                            if ($deviceData->model == 'Ios') {
+                            // if ($deviceData->model == 'Ios') {
 
-                                send_notification_FCM($deviceData->device_token, $notificationData);
-                            }
+                            //     send_notification_FCM($deviceData->device_token, $notificationData);
+                            // }
                         }
                     }
                 }
@@ -690,15 +690,15 @@ function sendNotification($notificationType, $postData)
 
                         if ((count($checkNotificationSetting) && $checkNotificationSetting['wall_post']['push'] == '1') && $value->notification_on_off == '1') {
 
-                            if ($deviceData->model == 'And') {
+                            // if ($deviceData->model == 'And') {
 
-                                send_notification_FCM_and($deviceData->device_token, $notificationData);
-                            }
+                            send_notification_FCM_and($deviceData->device_token, $notificationData);
+                            // }
 
-                            if ($deviceData->model == 'Ios') {
+                            // if ($deviceData->model == 'Ios') {
 
-                                send_notification_FCM($deviceData->device_token, $notificationData);
-                            }
+                            //     send_notification_FCM($deviceData->device_token, $notificationData);
+                            // }
                         }
                     }
                 }
@@ -759,15 +759,15 @@ function sendNotification($notificationType, $postData)
 
                         if ((count($checkNotificationSetting) && $checkNotificationSetting['wall_post']['push'] == '1') && $value->notification_on_off == '1') {
 
-                            if ($deviceData->model == 'And') {
+                            // if ($deviceData->model == 'And') {
 
-                                send_notification_FCM_and($deviceData->device_token, $notificationData);
-                            }
+                            send_notification_FCM_and($deviceData->device_token, $notificationData);
+                            // }
 
-                            if ($deviceData->model == 'Ios') {
+                            // if ($deviceData->model == 'Ios') {
 
-                                send_notification_FCM($deviceData->device_token, $notificationData);
-                            }
+                            //     send_notification_FCM($deviceData->device_token, $notificationData);
+                            // }
                         }
                     }
                 }
@@ -832,15 +832,15 @@ function sendNotification($notificationType, $postData)
 
                     if ((count($checkNotificationSetting) && $checkNotificationSetting['wall_post']['push'] == '1') && $notification_on_off == '1') {
 
-                        if ($deviceData->model == 'And') {
+                        // if ($deviceData->model == 'And') {
 
-                            send_notification_FCM_and($deviceData->device_token, $notificationData);
-                        }
+                        send_notification_FCM_and($deviceData->device_token, $notificationData);
+                        // }
 
-                        if ($deviceData->model == 'Ios') {
+                        // if ($deviceData->model == 'Ios') {
 
-                            send_notification_FCM($deviceData->device_token, $notificationData);
-                        }
+                        //     send_notification_FCM($deviceData->device_token, $notificationData);
+                        // }
                     }
 
 
@@ -901,15 +901,15 @@ function sendNotification($notificationType, $postData)
 
                     if ((count($checkNotificationSetting) && $checkNotificationSetting['wall_post']['push'] == '1') && $notification_on_off == '1') {
 
-                        if ($deviceData->model == 'And') {
+                        // if ($deviceData->model == 'And') {
 
-                            send_notification_FCM_and($deviceData->device_token, $notificationData);
-                        }
+                        send_notification_FCM_and($deviceData->device_token, $notificationData);
+                        // }
 
-                        if ($deviceData->model == 'Ios') {
+                        // if ($deviceData->model == 'Ios') {
 
-                            send_notification_FCM($deviceData->device_token, $notificationData);
-                        }
+                        //     send_notification_FCM($deviceData->device_token, $notificationData);
+                        // }
                     }
 
 
@@ -966,15 +966,15 @@ function sendNotification($notificationType, $postData)
 
                     if ((count($checkNotificationSetting) && $checkNotificationSetting['wall_post']['push'] == '1') && $notification_on_off == '1') {
 
-                        if ($deviceData->model == 'And') {
+                        // if ($deviceData->model == 'And') {
 
-                            send_notification_FCM_and($deviceData->device_token, $notificationData);
-                        }
+                        send_notification_FCM_and($deviceData->device_token, $notificationData);
+                        // }
 
-                        if ($deviceData->model == 'Ios') {
+                        // if ($deviceData->model == 'Ios') {
 
-                            send_notification_FCM($deviceData->device_token, $notificationData);
-                        }
+                        //     send_notification_FCM($deviceData->device_token, $notificationData);
+                        // }
                     }
                     // send_notification_FCM($deviceData->device_token, $notification_message);
                 }
@@ -1032,15 +1032,15 @@ function sendNotification($notificationType, $postData)
 
                     if ((count($checkNotificationSetting) && $checkNotificationSetting['wall_post']['push'] == '1') && $notification_on_off == '1') {
 
-                        if ($deviceData->model == 'And') {
+                        // if ($deviceData->model == 'And') {
 
-                            send_notification_FCM_and($deviceData->device_token, $notificationData);
-                        }
+                        send_notification_FCM_and($deviceData->device_token, $notificationData);
+                        // }
 
-                        if ($deviceData->model == 'Ios') {
+                        // if ($deviceData->model == 'Ios') {
 
-                            send_notification_FCM($deviceData->device_token, $notificationData);
-                        }
+                        //     send_notification_FCM($deviceData->device_token, $notificationData);
+                        // }
                     }
 
 
@@ -1100,15 +1100,15 @@ function sendNotification($notificationType, $postData)
 
                     if ((count($checkNotificationSetting) && $checkNotificationSetting['guest_rsvp']['push'] == '1') && $getPostOwnerId->notification_on_off == '1') {
 
-                        if ($deviceData->model == 'And') {
+                        // if ($deviceData->model == 'And') {
 
-                            send_notification_FCM_and($deviceData->device_token, $notificationData);
-                        }
+                        send_notification_FCM_and($deviceData->device_token, $notificationData);
+                        // }
 
-                        if ($deviceData->model == 'Ios') {
+                        // if ($deviceData->model == 'Ios') {
 
-                            send_notification_FCM($deviceData->device_token, $notificationData);
-                        }
+                        //     send_notification_FCM($deviceData->device_token, $notificationData);
+                        // }
                     }
                     if ((count($checkNotificationSetting) && $checkNotificationSetting['guest_rsvp']['email'] == '1') && $getPostOwnerId->notification_on_off == '1') {
 
@@ -1172,15 +1172,15 @@ function sendNotification($notificationType, $postData)
 
                     if ((count($checkNotificationSetting) && $checkNotificationSetting['potluck_activity']['push'] == '1') && $getPostOwnerId->notification_on_off == '1') {
 
-                        if ($deviceData->model == 'And') {
+                        // if ($deviceData->model == 'And') {
 
-                            send_notification_FCM_and($deviceData->device_token, $notificationData);
-                        }
+                        send_notification_FCM_and($deviceData->device_token, $notificationData);
+                        // }
 
-                        if ($deviceData->model == 'Ios') {
+                        // if ($deviceData->model == 'Ios') {
 
-                            send_notification_FCM($deviceData->device_token, $notificationData);
-                        }
+                        //     send_notification_FCM($deviceData->device_token, $notificationData);
+                        // }
                     }
                 }
             }
