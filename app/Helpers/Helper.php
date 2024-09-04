@@ -1356,36 +1356,18 @@ function send_notification_FCM_and($deviceToken, $notifyData)
     // ];
 
     // $post_data = json_encode($dataPayload);
-    $notification = array(
-        'title' => 'Yesvite',
-        'body' => $notifyData['message'],
-        'sound' => 'default',
-        'message' => $notifyData['message'],
-        'color' => "#79bc64",
-        'image' => $notifyData['notification_image'],
-        'category' => 'content_added_notification',
-    );
-    $message = array(
-        'token' => $deviceToken,
-        'notification' => $notification,
-        'data' => $notifyData,
-        'apns' => array(
-            'payload' => array(
-                'aps' => array(
-                    'alert' => array(
-                        'title' => "Yesvite",
-                        'body' => $notifyData['message']
-                    ),
-                    'category' => 'content_added_notification',
-                    'mutable-content' => true,
-                    'content-available' => true,
-                ),
-            ),
-        ),
-    );
+    $message = [
+        'message' => [
+            'token' => trim($deviceToken),
+            'notification' => [
+                "body" => "This is an FCM notification message!",
+                "title" => "FCM Message"
+            ]
+        ]
+    ];
 
     $post_data = json_encode($message);
-
+    dd($post_data);
     $crl = curl_init();
 
     $headr = array();
