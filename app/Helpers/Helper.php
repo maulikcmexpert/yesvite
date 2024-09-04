@@ -1333,7 +1333,7 @@ function send_notification_FCM($deviceToken, $notifyData)
     curl_setopt($crl, CURLOPT_RETURNTRANSFER, true);
 
     $rest = curl_exec($crl);
-
+    dd($rest);
     if ($rest === false) {
         $result_noti = 0;
     } else {
@@ -1372,7 +1372,7 @@ function send_notification_FCM_and($deviceToken, $notifyData)
     curl_setopt($crl, CURLOPT_RETURNTRANSFER, true);
 
     $rest = curl_exec($crl);
-    dd($rest);
+
     if ($rest === false) {
         $result_noti = 0;
     } else {
