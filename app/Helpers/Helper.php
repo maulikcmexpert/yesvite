@@ -1409,6 +1409,7 @@ function send_notification_FCM_and($deviceToken, $notifyData)
 
     $rest = curl_exec($crl);
     $responseData = json_decode($rest, true);
+    dd($responseData);
     if (isset($responseData['name'])) {
         $result_noti = 0;
     } else {
