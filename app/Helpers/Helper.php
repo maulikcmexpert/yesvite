@@ -1262,8 +1262,7 @@ function send_notification_FCM($deviceToken, $notifyData)
     $serverKey  = ServerKey::first();
     $SERVER_API_KEY = $serverKey->firebase_key;
 
-    // $URL = 'https://fcm.googleapis.com/fcm/send';
-    $URL = 'https://fcm.googleapis.com/v1/projects/yesvite-976cd/messages:send';
+    $URL = 'https://fcm.googleapis.com/fcm/send';
 
     // $notificationLoad =  [
     //     'title' => "Yesvite",
@@ -1362,7 +1361,7 @@ function send_notification_FCM_and($deviceToken, $notifyData)
 
     $headr = array();
     $headr[] = 'Content-type: application/json';
-    $headr[] = 'Authorization: ' . $SERVER_API_KEY;
+    $headr[] = 'Authorization: Bearer' . trim($deviceToken);
     curl_setopt($crl, CURLOPT_SSL_VERIFYPEER, false);
 
     curl_setopt($crl, CURLOPT_URL, $URL);
