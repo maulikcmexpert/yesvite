@@ -3252,10 +3252,8 @@ async function send_push_notification(
                 token: to
             }
         };
-
-        // var accessToken = fetchAccessToken();
-        // console.log(accessToken);
-
+        console.log(payload);
+        
         fetch('get_access_token')
         .then(response => response.json())
         .then(data => {
@@ -3279,20 +3277,6 @@ async function send_push_notification(
         });
     }
 }
-
-async function fetchAccessToken() {
-    return fetch('get_access_token')
-        .then(response => response.json())
-        .then(data => {
-            // console.log('Access Token:', data.access_token);
-            return data.access_token;
-        })
-        .catch(error => {
-            console.error('Error fetching access token:', error);
-        });
-}
-
-
 
 $(document).on('click','.reaction',function (){
 
