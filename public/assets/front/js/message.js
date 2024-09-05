@@ -3247,7 +3247,7 @@ async function send_push_notification(
                 },
                 notification: {
                     body: message,
-                    title: title
+                    title: senderUser
                 },
                 token: to
             }
