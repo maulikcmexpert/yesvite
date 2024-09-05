@@ -121,12 +121,12 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('check_mail', 'checkEmail');
 
 
-    Route::post('advertisement_status','storeAdvertisementStatus');
-    Route::get('forget_password','forgetpassword')->name('auth.forgetpassword');
-    Route::post('otp_verify','otpverification')->name('auth.otpverification');
+    Route::post('advertisement_status', 'storeAdvertisementStatus');
+    Route::get('forget_password', 'forgetpassword')->name('auth.forgetpassword');
+    Route::post('otp_verify', 'otpverification')->name('auth.otpverification');
     Route::post('check_otp', 'checkOtp')->name('auth.checkOtp');
     Route::post('forget_changepassword', 'forgetChangepassword')->name('auth.forgetChangepassword');
-
+    Route::get('get_access_token', 'getAccessToken');
 
 
 

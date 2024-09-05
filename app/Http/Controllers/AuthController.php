@@ -46,9 +46,7 @@ class AuthController extends Controller
         // $this->database = $database;
         // $this->chatRoom = $this->database->getReference();
     }
-    public function index()
-    {
-    }
+    public function index() {}
 
     public function redirectToGoogle()
     {
@@ -561,7 +559,6 @@ class AuthController extends Controller
         } else {
             return response()->json(true);
         }
-        
     }
 
 
@@ -614,7 +611,7 @@ class AuthController extends Controller
 
         $userDetails = User::where('email', $request->email)->first();
 
-        $user_id=$userDetails->id;
+        $user_id = $userDetails->id;
 
         $digit1 = substr($token, 0, 1);
         $digit2 = substr($token, 1, 1);
@@ -639,28 +636,30 @@ class AuthController extends Controller
         $page = 'front/otpverification';
         $title = "Verify Otp";
         $js = ['forget_password'];
-        return view('layout', compact('page', 'title', 'js','otp','user_id'));
+        return view('layout', compact('page', 'title', 'js', 'otp', 'user_id'));
     }
 
-    public function checkOtp(Request $request){
-        $user_id=$request->user_id;
-        $num1=$request->number1;
-        $num2=$request->number2;
-        $num3=$request->number3;
-        $num4=$request->number4;
+    public function checkOtp(Request $request)
+    {
+        $user_id = $request->user_id;
+        $num1 = $request->number1;
+        $num2 = $request->number2;
+        $num3 = $request->number3;
+        $num4 = $request->number4;
 
-        $otp=$num1.$num2.$num3.$num4;
+        $otp = $num1 . $num2 . $num3 . $num4;
 
-        if($request->generated_otp==$otp){
+        if ($request->generated_otp == $otp) {
             $page = 'front/forget_changepassword';
             $title = "Change Password";
             $js = ['forget_password'];
-            return view('layout', compact('page', 'title', 'js','user_id'));
+            return view('layout', compact('page', 'title', 'js', 'user_id'));
         }
     }
 
-    public function forgetChangepassword(Request $request){
-       
+    public function forgetChangepassword(Request $request)
+    {
+
         // $request->validate([
         //     'new_password' => 'required|min:8',
         //     'conform_password' => 'required|min:8|same:new_password',
@@ -677,5 +676,11 @@ class AuthController extends Controller
         return  Redirect::to('login')->with('success', 'Password has been changed.');
 
         // return  redirect()->route('auth.login');
+    }
+
+    public function getAccessToken()
+    {
+        $accessToken = getAccessToken();
+        return response()->json(['access_token' => $accessToken]);
     }
 }
