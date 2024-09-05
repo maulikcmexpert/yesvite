@@ -3269,7 +3269,6 @@ async function send_push_notification(
                 body: JSON.stringify(payload),
             })
             .then(function (response) {
-                console.log(response);
             })
             .catch(function (error) {
                 console.error(error);
