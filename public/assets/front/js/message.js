@@ -3256,7 +3256,7 @@ async function send_push_notification(
         .then(response => response.json())
         .then(data => {
             var accessToken = data.access_token;
-            fetch("https://fcm.googleapis.com/v1/projects/yesvite-976cd/messages:send", {
+            fetch("https://fcm.googleapis.com/v1/projects/yesvitelive/messages:send", {
                 method: "POST",
                 headers: {
                     'Authorization': 'Bearer ' + accessToken,
