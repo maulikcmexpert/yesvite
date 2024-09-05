@@ -3232,20 +3232,37 @@ async function send_push_notification(
             message : message,
             color : "#79bc64",
         };
-        var accessToken = fetchAccessToken();
 
+        const payload = {
+            message: {
+                data: {
+                    clickAction: "testClick",
+                    conversationId: conversationId,
+                    imageLink: "imageLink",
+                    message: message,
+                    senderProfile: user.userProfile,
+                    senderUid: user.userId,
+                    title: senderUser,
+                    type: "chat"
+                },
+                notification: {
+                    body: message,
+                    title: title
+                },
+                token: to
+            }
+        };
+
+        var accessToken = fetchAccessToken();
+        console.log(accessToken);
+        
         fetch("https://fcm.googleapis.com/v1/projects/yesvite-976cd/messages:send", {
             method: "POST",
             headers: {
                 'Authorization': 'Bearer ' + accessToken,
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({
-                token: to,
-                notification: notification,
-                data: data,
-                priority : "high",
-            }),
+            body: JSON.stringify(payload),
         })
             .then(function (response) {
                 console.log(response);
@@ -3256,7 +3273,7 @@ async function send_push_notification(
     }
 }
 
-function fetchAccessToken() {
+async function fetchAccessToken() {
     return fetch('get_access_token')
         .then(response => response.json())
         .then(data => {
