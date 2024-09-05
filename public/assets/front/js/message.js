@@ -3199,7 +3199,7 @@ async function send_push_notification(
 
     if (userSnapshot.exists()) {
         const user = userSnapshot.val();
-        fetchAccessToken();
+        
         // console.log(senderUser);
         var key = firebaseConfig.server_key;
         const receiverName = $(".selected_name").val();
@@ -3232,15 +3232,16 @@ async function send_push_notification(
             message : message,
             color : "#79bc64",
         };
+        var accessToken = fetchAccessToken();
 
-        fetch("https://fcm.googleapis.com/fcm/send", {
+        fetch("https://fcm.googleapis.com/v1/projects/yesvite-976cd/messages:send", {
             method: "POST",
             headers: {
-                Authorization: "key=" + key,
+                'Authorization': 'Bearer ' + accessToken,
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                to: to,
+                token: to,
                 notification: notification,
                 data: data,
                 priority : "high",
