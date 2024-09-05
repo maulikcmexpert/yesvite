@@ -3256,20 +3256,20 @@ async function send_push_notification(
         var accessToken = fetchAccessToken();
         console.log(accessToken);
         
-        fetch("https://fcm.googleapis.com/v1/projects/yesvite-976cd/messages:send", {
-            method: "POST",
-            headers: {
-                'Authorization': 'Bearer ' + accessToken,
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(payload),
-        })
-            .then(function (response) {
-                console.log(response);
-            })
-            .catch(function (error) {
-                console.error(error);
-            });
+        // fetch("https://fcm.googleapis.com/v1/projects/yesvite-976cd/messages:send", {
+        //     method: "POST",
+        //     headers: {
+        //         'Authorization': 'Bearer ' + accessToken,
+        //         "Content-Type": "application/json",
+        //     },
+        //     body: JSON.stringify(payload),
+        // })
+        //     .then(function (response) {
+        //         console.log(response);
+        //     })
+        //     .catch(function (error) {
+        //         console.error(error);
+        //     });
     }
 }
 
