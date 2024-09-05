@@ -3251,9 +3251,7 @@ async function send_push_notification(
                 },
                 token: to
             }
-        };
-        console.log(payload);
-        
+        };        
         fetch('get_access_token')
         .then(response => response.json())
         .then(data => {
