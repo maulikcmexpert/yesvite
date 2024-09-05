@@ -469,11 +469,15 @@ function sendNotification($notificationType, $postData)
                     $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " upload new post";
                 } else {
                     if ($postData['video'] > 0 && $postData['image'] > 0) {
-                        $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " upload " . $postData['video'] . " videos and " . $postData['image'] . " images.";
+                        $video = ($postData['video'] > 1) ? 'videos' : 'video';
+                        $image = ($postData['image'] > 1) ? 'images' : 'image';
+                        $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " upload " . $postData['video'] . " " . $video . " and " . $postData['image'] . " " . $image . ".";
                     } elseif ($postData['video'] == 0 && $postData['image'] > 0) {
-                        $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " upload " . $postData['image'] . " images.";
+                        $image = ($postData['image'] > 1) ? 'images' : 'image';
+                        $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " upload " . $postData['image'] . " " . $image . ".";
                     } elseif ($postData['image'] == 0 && $postData['video'] > 0) {
-                        $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " upload " . $postData['video'] . " videos.";
+                        $video = ($postData['video'] > 1) ? 'videos' : 'video';
+                        $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " upload " . $postData['video'] . " " . $video . ".";
                     } else {
                         $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " upload new post";
                     }
