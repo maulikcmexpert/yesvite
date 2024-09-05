@@ -381,18 +381,18 @@ function sendNotification($notificationType, $postData)
         if (!in_array($postData['sender_id'], $postControlUserId)) {
 
             if ($postData['sender_id'] != $ownerEvent->user_id) {
-                if ($postData['post_type'] == '2') {
-                    $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " upload new post";
+                if ($postData['video'] > 0 && $postData['image'] > 0) {
+                    $video = ($postData['video'] > 1) ? 'videos' : 'video';
+                    $image = ($postData['image'] > 1) ? 'images' : 'image';
+                    $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " upload " . $postData['video'] . " " . $video . " and " . $postData['image'] . " " . $image . ".";
+                } elseif ($postData['video'] == 0 && $postData['image'] > 0) {
+                    $image = ($postData['image'] > 1) ? 'images' : 'image';
+                    $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " upload " . $postData['image'] . " " . $image . ".";
+                } elseif ($postData['image'] == 0 && $postData['video'] > 0) {
+                    $video = ($postData['video'] > 1) ? 'videos' : 'video';
+                    $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " upload " . $postData['video'] . " " . $video . ".";
                 } else {
-                    if ($postData['video'] > 0 && $postData['image'] > 0) {
-                        $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " upload " . $postData['video'] . " videos and " . $postData['image'] . " images.";
-                    } elseif ($postData['video'] == 0 && $postData['image'] > 0) {
-                        $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " upload " . $postData['image'] . " images.";
-                    } elseif ($postData['image'] == 0 && $postData['video'] > 0) {
-                        $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " upload " . $postData['video'] . " videos.";
-                    } else {
-                        $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " upload new post";
-                    }
+                    $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " upload new post";
                 }
 
                 $notification = new Notification;
