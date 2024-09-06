@@ -12149,7 +12149,7 @@ class ApiControllerv2 extends Controller
                 $invite_count = (isset($input['subscription_invite_count']) && $input['subscription_invite_count'] != null) ? $input['subscription_invite_count'] : 0;
                 $updateEvent->is_draft_save = '0';
                 if ($updateEvent->subscription_plan_name != 'Free') {
-                    $updateEvent->subscription_invite_count = $updateEvent->subscription_invite_count + $invite_count;
+                    $updateEvent->subscription_invite_count = $invite_count;
                 } else {
                     $updateEvent->subscription_invite_count = $invite_count;
                 }
