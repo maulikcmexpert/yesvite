@@ -12100,50 +12100,62 @@ class ApiControllerv2 extends Controller
 
 
 
-        $validator = Validator::make($input, [
+        // $validator = Validator::make($input, [
 
-            'orderId' => 'required',
-            'packageName' => 'required',
-            'productId' => 'required',
-            'purchaseTime' => 'required',
-            'purchaseToken' => 'required|string',
-        ]);
+        //     'orderId' => 'required',
+        //     'packageName' => 'required',
+        //     'productId' => 'required',
+        //     'purchaseTime' => 'required',
+        //     'purchaseToken' => 'required|string',
+        // ]);
 
 
-        if ($validator->fails()) {
-            return response()->json(
-                [
-                    'status' => 0,
-                    'message' => $validator->errors()->first()
-                ],
-            );
-        }
+        // if ($validator->fails()) {
+        //     return response()->json(
+        //         [
+        //             'status' => 0,
+        //             'message' => $validator->errors()->first()
+        //         ],
+        //     );
+        // }
 
 
         try {
-            $app_id = $input['packageName'];
-            $product_id = $input['productId'];
-            $user_id = $this->user->id;
-            $purchaseToken = $input['purchaseToken'];
+            // $app_id = $input['packageName'];
+            // $product_id = $input['productId'];
+            // $user_id = $this->user->id;
+            // $purchaseToken = $input['purchaseToken'];
 
-            $responce =  $this->set_android_iap($app_id, $product_id, $purchaseToken, 'product');
-
-
-
-            $startDate = date('Y-m-d H:i:s', ($responce['purchaseTimeMillis'] / 1000));
+            // $responce =  $this->set_android_iap($app_id, $product_id, $purchaseToken, 'product');
 
 
-            $new_subscription = new UserSubscription();
-            $new_subscription->user_id = $user_id;
-            $new_subscription->orderId = $input['orderId'];
-            $new_subscription->packageName = $input['packageName'];
-            $new_subscription->countryCode = $responce['regionCode'];
-            $new_subscription->startDate = $startDate;
 
-            $new_subscription->productId = $input['productId'];
-            $new_subscription->type = 'product';
-            $new_subscription->purchaseToken = $input['purchaseToken'];
-            $new_subscription->save();
+            // $startDate = date('Y-m-d H:i:s', ($responce['purchaseTimeMillis'] / 1000));
+
+
+            // $new_subscription = new UserSubscription();
+            // $new_subscription->user_id = $user_id;
+            // $new_subscription->orderId = $input['orderId'];
+            // $new_subscription->packageName = $input['packageName'];
+            // $new_subscription->countryCode = $responce['regionCode'];
+            // $new_subscription->startDate = $startDate;
+
+            // $new_subscription->productId = $input['productId'];
+            // $new_subscription->type = 'product';
+            // $new_subscription->purchaseToken = $input['purchaseToken'];
+            // $new_subscription->save();
+            $updateEvent = Event::where('id', $input['event_id'])->first();
+            if ($updateEvent != null) {
+                $invite_count = (isset($input['subscription_invite_count']) && $input['subscription_invite_count'] != null) ? $input['subscription_invite_count'] : 0;
+                $updateEvent->is_draft_save = '0';
+                if ($updateEvent->subscription_plan_name != 'Free') {
+                    $updateEvent->subscription_invite_count = $updateEvent->subscription_invite_count + $invite_count;
+                } else {
+                    $updateEvent->subscription_invite_count = $invite_count;
+                }
+                $updateEvent->subscription_plan_name = 'Pro';
+                $updateEvent->save();
+            }
 
             return response()->json(['status' => 1, 'message' => "purchase sucessfully"]);
         } catch (QueryException $e) {
