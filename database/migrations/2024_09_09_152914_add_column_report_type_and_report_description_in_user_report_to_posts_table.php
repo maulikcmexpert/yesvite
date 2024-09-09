@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('user_subscriptions', function (Blueprint $table) {
-            $table->string('priceCurrencyCode')->nullable()->after('purchaseToken');
-            $table->double('price')->default(0)->after('priceCurrencyCode');
-            $table->string('countryCode')->nullable()->after('price');
+        Schema::table('user_report_to_posts', function (Blueprint $table) {
+            $table->string('report_type')->nullable()->after('event_post_id');
+            $table->string('report_description')->nullable()->after('report_type');
         });
     }
 
@@ -23,7 +22,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('user_subscriptions', function (Blueprint $table) {
+        Schema::table('user_report_to_posts', function (Blueprint $table) {
             //
         });
     }
