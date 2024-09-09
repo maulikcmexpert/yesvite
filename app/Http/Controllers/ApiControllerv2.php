@@ -8912,6 +8912,8 @@ class ApiControllerv2 extends Controller
             $reportCreate->user_id =  $user->id;
             $reportCreate->event_post_id = $input['event_post_id'];
             $reportCreate->post_media_id = $input['post_media_id'];
+            $reportCreate->report_type = $input['report_type'];
+            $reportCreate->report_description = $input['report_description'];
             $reportCreate->specific_report = '1';
             $reportCreate->save();
             DB::commit();
