@@ -151,7 +151,7 @@
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="input-form">
-                                            <input type="text" class="phone_number border-0" name="countryCode">
+                                            <input type="text" class="phone_number border-0" name="countryCode" readonly>
                                             <input type="text" class="form-control " id="phone_number" name="phone_number" value="{{ $user->phone_number}}">
                                             <label for="phone" class="floating-label">Phone Number</label>
                                             <input type="hidden" name="country_code" id="country_code" value="{{ $user->country_code}}">
