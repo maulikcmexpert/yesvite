@@ -12589,7 +12589,7 @@ class ApiControllerv2 extends Controller
 
 
         $validator = Validator::make($input, [
-            'to_be_reported_user_id' => ['required', 'exists:events,id'],
+            'to_be_reported_user_id' => ['required', 'exists:users,id'],
             'conversation_id' => ['required'],
         ]);
 
