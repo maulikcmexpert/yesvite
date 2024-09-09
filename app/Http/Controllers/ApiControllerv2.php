@@ -60,6 +60,7 @@ use App\Models\{
     GroupMember,
     UserNotificationType,
     UserProfilePrivacy,
+    UserReportChat,
     UserSeenStory,
     UserSubscription,
     VersionSetting
@@ -12571,6 +12572,58 @@ class ApiControllerv2 extends Controller
             } catch (\Exception $e) {
                 return response()->json(['status' => 0, 'message' => 'Mail not sent', 'error' => $e->getMessage()]);
             }
+        }
+    }
+
+    public function chatReport(Request $request)
+    {
+        $user  = Auth::guard('api')->user();
+
+        $rawData = $request->getContent();
+
+        $input = json_decode($rawData, true);
+
+        if ($input == null) {
+            return response()->json(['status' => 0, 'message' => "Json invalid"]);
+        }
+
+
+        $validator = Validator::make($input, [
+            'to_be_reported_user_id' => ['required', 'exists:events,id'],
+            'conversation_id' => ['required'],
+        ]);
+
+        if ($validator->fails()) {
+
+            return response()->json([
+                'status' => 0,
+                'message' => $validator->errors()->first(),
+
+            ]);
+        }
+
+        try {
+
+            DB::beginTransaction();
+            $reportCreate = new UserReportChat();
+            $reportCreate->reporter_user_id =  $user->id;
+            $reportCreate->to_be_reported_user_id = $input['to_be_reported_user_id'];
+            $reportCreate->conversation_id = $input['conversation_id'];
+            $reportCreate->report_type = $input['report_type'];
+            $reportCreate->report_description = $input['report_description'];
+            $reportCreate->save();
+            DB::commit();
+            $message = "Reported to admin for this user";
+
+            return response()->json(['status' => 1, 'message' => $message]);
+        } catch (QueryException $e) {
+
+            DB::rollBack();
+
+            return response()->json(['status' => 0, 'message' => "db error"]);
+        } catch (\Exception $e) {
+
+            return response()->json(['status' => 0, 'message' => "something went wrong"]);
         }
     }
 }
