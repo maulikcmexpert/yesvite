@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('user_report_chats', function (Blueprint $table) {
-            $table->id()->primary();
+            $table->id();
             $table->unsignedBigInteger('reporter_user_id')->nullable();
             $table->foreign('reporter_user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('to_be_reported_user_id')->nullable();
