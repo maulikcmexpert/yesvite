@@ -8856,7 +8856,6 @@ class ApiControllerv2 extends Controller
                 $reportCreate = new UserReportToPost;
                 $reportCreate->event_id = $input['event_id'];
                 $reportCreate->user_id =  $user->id;
-                $reportCreate->event_post_id = $input['event_post_id'];
                 $reportCreate->report_type = $input['report_type'];
                 $reportCreate->report_description = $input['report_description'];
                 $reportCreate->event_post_id = $input['event_post_id'];
