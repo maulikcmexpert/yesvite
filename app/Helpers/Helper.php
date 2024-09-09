@@ -373,7 +373,7 @@ function sendNotification($notificationType, $postData)
         if ($postData['is_in_photo_moudle'] == 1) {
             $photo_module_type = 'photos';
         } else {
-            $photo_module_type = 'wall';
+            $photo_module_type = 'Wall';
         }
 
         if (!$postControl->isEmpty()) {
@@ -390,13 +390,13 @@ function sendNotification($notificationType, $postData)
                 if ($postData['video'] > 0 && $postData['image'] > 0) {
                     $video = ($postData['video'] > 1) ? 'videos' : 'video';
                     $image = ($postData['image'] > 1) ? 'images' : 'image';
-                    $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " upload " . $postData['video'] . " " . $video . " and " . $postData['image'] . " " . $image . " to " . $ownerEvent->event_name . ' ' . $photo_module_type.'.';
+                    $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " upload " . $postData['video'] . " " . $video . " and " . $postData['image'] . " " . $image . " to " . $ownerEvent->event_name . ' ' . $photo_module_type . '.';
                 } elseif ($postData['video'] == 0 && $postData['image'] > 0) {
                     $image = ($postData['image'] > 1) ? 'images' : 'image';
-                    $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " upload " . $postData['image'] . " " . $image . " to " . $ownerEvent->event_name . ' ' . $photo_module_type.'.';
+                    $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " upload " . $postData['image'] . " " . $image . " to " . $ownerEvent->event_name . ' ' . $photo_module_type . '.';
                 } elseif ($postData['image'] == 0 && $postData['video'] > 0) {
                     $video = ($postData['video'] > 1) ? 'videos' : 'video';
-                    $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " upload " . $postData['video'] . " " . $video . " to " . $ownerEvent->event_name . ' ' . $photo_module_type.'.';
+                    $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " upload " . $postData['video'] . " " . $video . " to " . $ownerEvent->event_name . ' ' . $photo_module_type . '.';
                 } else {
                     $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " upload new post.";
                 }
@@ -477,13 +477,13 @@ function sendNotification($notificationType, $postData)
                     if ($postData['video'] > 0 && $postData['image'] > 0) {
                         $video = ($postData['video'] > 1) ? 'videos' : 'video';
                         $image = ($postData['image'] > 1) ? 'images' : 'image';
-                        $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " upload " . $postData['video'] . " " . $video . " and " . $postData['image'] . " " . $image . " to " . $ownerEvent->event_name . ' ' . $photo_module_type.'.';
+                        $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " upload " . $postData['video'] . " " . $video . " and " . $postData['image'] . " " . $image . " to " . $ownerEvent->event_name . ' ' . $photo_module_type . '.';
                     } elseif ($postData['video'] == 0 && $postData['image'] > 0) {
                         $image = ($postData['image'] > 1) ? 'images' : 'image';
-                        $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " upload " . $postData['image'] . " " . $image . " to " . $ownerEvent->event_name . ' ' . $photo_module_type.'.';
+                        $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " upload " . $postData['image'] . " " . $image . " to " . $ownerEvent->event_name . ' ' . $photo_module_type . '.';
                     } elseif ($postData['image'] == 0 && $postData['video'] > 0) {
                         $video = ($postData['video'] > 1) ? 'videos' : 'video';
-                        $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " upload " . $postData['video'] . " " . $video . " to " . $ownerEvent->event_name . ' ' . $photo_module_type.'.';
+                        $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " upload " . $postData['video'] . " " . $video . " to " . $ownerEvent->event_name . ' ' . $photo_module_type . '.';
                     } else {
                         $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " upload new post.";
                     }
