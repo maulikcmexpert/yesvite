@@ -254,7 +254,7 @@ class AuthController extends Controller
 
                     add_user_firebase($user->id, 'Online');
 
-                    return redirect()->route('profile')->with('success', 'Logged in successfully!');
+                    return redirect()->route('profile');
                 } else {
                     return redirect()->back()->withErrors([
                         'email' => 'Invalid credentials!',
