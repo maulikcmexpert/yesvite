@@ -18,7 +18,7 @@ use Carbon\Carbon;
                             <path d="M10.4974 18.3327C15.0807 18.3327 18.8307 14.5827 18.8307 9.99935C18.8307 5.41602 15.0807 1.66602 10.4974 1.66602C5.91406 1.66602 2.16406 5.41602 2.16406 9.99935C2.16406 14.5827 5.91406 18.3327 10.4974 18.3327Z" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                             <path d="M7.16406 10H13.8307" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                             <path d="M10.5 13.3327V6.66602" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg> Add Message
+                        </svg> New Message
                     </a>
                 </div>
             </div>
