@@ -7635,7 +7635,7 @@ class ApiControllerv2 extends Controller
                         $postsNormalDetail['poll_id'] = $polls->id;
 
                         $postsNormalDetail['poll_question'] = $polls->poll_question;
-
+                        $postsNormalDetail['total_poll_duration'] = $polls->poll_duration;
 
                         foreach ($polls->event_poll_option as $optionValue) {
 
