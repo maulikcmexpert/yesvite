@@ -7475,6 +7475,8 @@ class ApiControllerv2 extends Controller
                         $postsNormalDetail['is_expired'] =  ($pollDura == "") ? true : false;
                         $postsNormalDetail['poll_id'] = $polls->id;
                         $postsNormalDetail['poll_question'] = $polls->poll_question;
+                        $postsNormalDetail['total_poll_duration'] = $polls->poll_duration;
+
                         foreach ($polls->event_poll_option as $optionValue) {
                             $optionData['id'] = $optionValue->id;
                             $optionData['option'] = $optionValue->option;
