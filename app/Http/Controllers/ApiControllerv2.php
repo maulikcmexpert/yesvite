@@ -12675,10 +12675,10 @@ class ApiControllerv2 extends Controller
 
         if ($request->hasFile('post_recording')) {
 
-            if (file_exists(public_path('storage/event_post_recording/') . $creatEventPost->post_recording)) {
-                $imagePath = public_path('storage/event_post_recording/') . $creatEventPost->post_recording;
-                unlink($imagePath);
-            }
+            // if (file_exists(public_path('storage/event_post_recording/') . $creatEventPost->post_recording)) {
+            //     $imagePath = public_path('storage/event_post_recording/') . $creatEventPost->post_recording;
+            //     unlink($imagePath);
+            // }
             $record = $request->post_recording;
             $recordingName = time() . '_' . $record->getClientOriginalName();
             $record->move(public_path('storage/event_post_recording'), $recordingName);
