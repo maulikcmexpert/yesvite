@@ -7618,6 +7618,7 @@ class ApiControllerv2 extends Controller
 
                         foreach ($value->post_image as $imgVal) {
                             $postMedia = [
+                                'id' => $imgVal->id,
                                 'media_url' => asset('public/storage/post_image/' . $imgVal->post_image),
                                 'type' => $imgVal->type,
                                 'thumbnail' => (isset($imgVal->thumbnail) && $imgVal->thumbnail != null) ?  asset('public/storage/thumbnails/' . $imgVal->thumbnail) : '',
