@@ -12652,7 +12652,6 @@ class ApiControllerv2 extends Controller
         // try {
         DB::beginTransaction();
         $creatEventPost = EventPost::where('id', $request->post_id)->first();
-        dd($creatEventPost);
         $creatEventPost->event_id = $request->event_id;
         $creatEventPost->user_id = $user->id;
         $creatEventPost->post_message = $request->post_message;
