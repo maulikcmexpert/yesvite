@@ -120,6 +120,7 @@ Route::prefix('user/v2/')->middleware('checkUser')->group(function () {
     Route::post('event_about', [ApiControllerv2::class, 'eventAbout']);
     Route::post('event_about_v2', [ApiControllerv2::class, 'eventAboutv2']);
     Route::post('create_post', [ApiControllerv2::class, 'createPost']);
+    Route::post('update_post', [ApiControllerv2::class, 'updatePost']);
     Route::post('post_control', [ApiControllerv2::class, 'postControl']);
     Route::post('post_media_report', [ApiControllerv2::class, 'postMediaReport']);
     Route::post('chat_report', [ApiControllerv2::class, 'chatReport']);
