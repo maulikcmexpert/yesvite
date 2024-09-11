@@ -12631,6 +12631,7 @@ class ApiControllerv2 extends Controller
 
     public function updatePost(Request $request)
     {
+        dd($request);
         $user  = Auth::guard('api')->user();
         $input = $request->all();
 
@@ -12753,10 +12754,10 @@ class ApiControllerv2 extends Controller
                         $eventPostImage->save();
                     }
                 }
-                if (!empty($request->delete_image)) {
+                if (isset($request->delete_image) && !empty($request->delete_image)) {
                     $delete_images = $request->delete_image;
                     foreach ($delete_images as $key => $delete_image) {
-                        $deleteImage = EventPostImage::where('id', $delete_image['id'])->first();
+                        $deleteImage = EventPostImage::where('id', $delete_image)->first();
                         if ($deleteImage->type == 'image') {
                             if (file_exists(public_path('storage/post_image/') . $deleteImage->post_image)) {
                                 $imagePath = public_path('storage/post_image/') . $deleteImage->post_image;
