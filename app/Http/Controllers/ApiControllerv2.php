@@ -12796,6 +12796,7 @@ class ApiControllerv2 extends Controller
             }
 
             if ($request->post_type == '2') {
+                EventPostPoll::where('event_post_id', $request->post_id)->delete();
 
                 $eventPostPoll = new EventPostPoll;
                 $eventPostPoll->event_id = $request->event_id;
