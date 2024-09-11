@@ -4907,6 +4907,18 @@ class ApiControllerv2 extends Controller
                     sendNotification('invite', $notificationParam);
                 }
 
+                if (isset($eventData['update_potluck']) && $eventData['update_potluck'] == '1') {
+                    $notificationParam = [
+                        'sender_id' => $user->id,
+                        'event_id' => $eventData['event_id'],
+                        'from_time' => $eventData['from_time'],
+                        'to_time' => $eventData['to_time'],
+                        'newUser' => $eventData['invited_new_guest']
+                    ];
+
+                    sendNotification('update_potluck', $notificationParam);
+                }
+
 
                 DB::commit();
 

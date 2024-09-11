@@ -314,6 +314,72 @@ function sendNotification($notificationType, $postData)
         }
     }
 
+    if ($notificationType == 'update_potluck') {
+        if (count($invitedusers) != 0) {
+            foreach ($invitedusers as $value) {
+
+                if (isset($postData['newUser']) && count($postData['newUser']) != 0) {
+                    if (in_array($value->user_id, $postData['newUser'])) {
+                        continue;
+                    }
+                }
+                if ($value->user->app_user == '1') {
+                    // Notification::where(['user_id' => $value->user_id, 'sender_id' => $postData['sender_id'], 'event_id' => $postData['event_id']])->delete();
+                    $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " has updated the potluck for " . $value->event->event_name;
+                    $notification = new Notification;
+                    $notification->event_id = $postData['event_id'];
+                    $notification->user_id = $value->user_id;
+                    $notification->notification_type = $notificationType;
+                    $notification->sender_id = $postData['sender_id'];
+                    if ($notificationType == 'update_address') {
+                        $notification->from_addr = $postData['from_addr'];
+                        $notification->to_addr = $postData['to_addr'];
+                    } else if ($notificationType == 'update_time') {
+                        $notification->from_time = $postData['from_time'];
+                        $notification->to_time = $postData['to_time'];
+                    } else if ($notificationType == 'update_date') {
+                        $notification->old_start_end_date = $postData['old_start_end_date'];
+                        $notification->new_start_end_date = $postData['new_start_end_date'];
+                    }
+                    $notification->notification_message = $notification_message;
+
+                    if ($notification->save()) {
+
+                        $deviceData = Device::where('user_id', $value->user_id)->first();
+                        if (!empty($deviceData)) {
+
+                            $notificationImage = EventImage::where('event_id', $postData['event_id'])->first();
+
+                            $notification_image = "";
+                            if ($notificationImage != NULL) {
+
+                                $notification_image = asset('storage/event_images/' . $notificationImage->image);
+                            }
+                            $push_notification_message = $senderData->firstname . ' ' . $senderData->lastname . " has updated the event details for " . $value->event->event_name;
+                            $notificationData = [
+                                'message' => $notification_message,
+                                'type' => (string)$notificationType,
+                                'notification_image' => (string)$push_notification_message,
+                                'event_id' => (string)$postData['event_id'],
+                                'event_name' => $value->event->event_name,
+                                'event_wall' => (string)$value->event->event_settings->event_wall,
+                                'guest_list_visible_to_guests' => (string)$value->event->event_settings->guest_list_visible_to_guests,
+                                'event_potluck' => (string)$value->event->event_settings->podluck,
+                                'rsvp_status' => (isset($value->rsvp_status) && $value->rsvp_status != null) ? (string)$value->rsvp_status : '',
+                                'guest_pending_count' => (string)getGuestPendingRsvpCount($postData['event_id'])
+
+                            ];
+
+                            if ($value->notification_on_off == '1') {
+                                send_notification_FCM_and($deviceData->device_token, $notificationData);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     if ($notificationType == 'accept_reject_co_host') {
 
         $getEventOwner = Event::with('event_settings')->where('id', $postData['event_id'])->first();
