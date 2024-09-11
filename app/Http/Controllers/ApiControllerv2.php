@@ -12754,7 +12754,7 @@ class ApiControllerv2 extends Controller
                         $eventPostImage->save();
                     }
                 }
-                if (isset($request->delete_image) && $request->delete_image != '') {
+                if (isset($request->delete_image) && !empty($request->delete_image)) {
                     $delete_images = $request->delete_image;
                     foreach ($delete_images as $key => $delete_image) {
                         $deleteImage = EventPostImage::where('id', $delete_image)->first();
