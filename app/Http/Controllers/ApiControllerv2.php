@@ -12651,7 +12651,6 @@ class ApiControllerv2 extends Controller
         $user  = Auth::guard('api')->user();
         $input = $request->all();
 
-        dd(json_decode($request->delete_image));
         $validator = Validator::make($input, [
             'event_id' => ['required', 'exists:events,id'],
             'post_privacy' => ['required', 'in:1,2,3,4'],
@@ -12772,8 +12771,8 @@ class ApiControllerv2 extends Controller
                     }
                 }
 
-                if (isset($request->delete_image) && !empty($request->delete_image)) {
-                    $delete_images = $request->delete_image;
+                if (isset($request->delete_image) && !empty(json_decode($request->delete_image))) {
+                    $delete_images = json_decode($request->delete_image);
                     foreach ($delete_images as $key => $delete_image) {
                         $deleteImage = EventPostImage::where('id', $delete_image)->first();
                         if ($deleteImage->type == 'image') {
