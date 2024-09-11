@@ -12815,6 +12815,7 @@ class ApiControllerv2 extends Controller
         // } else {
         //     sendNotification('upload_post', $notificationParam);
         // }
+        dd($eventPostImage);
 
         return response()->json(['status' => 1, 'message' => "Post is Updated sucessfully"]);
     }
