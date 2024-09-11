@@ -12776,28 +12776,28 @@ class ApiControllerv2 extends Controller
                         $eventPostImage->save();
                     }
                 }
+            }
 
-                if (isset($request->delete_image) && !empty(json_decode($request->delete_image))) {
-                    $delete_images = json_decode($request->delete_image);
-                    foreach ($delete_images as $key => $delete_image) {
-                        $deleteImage = EventPostImage::where('id', $delete_image)->first();
-                        if ($deleteImage->type == 'image') {
-                            if (file_exists(public_path('storage/post_image/') . $deleteImage->post_image)) {
-                                $imagePath = public_path('storage/post_image/') . $deleteImage->post_image;
-                                unlink($imagePath);
-                            }
-                        } elseif ($deleteImage->type == 'video') {
-                            if (file_exists(public_path('storage/thumbnails/') . $deleteImage->thumbnail)) {
-                                $imagePath = public_path('storage/thumbnails/') . $deleteImage->thumbnail;
-                                unlink($imagePath);
-                            }
-                            if (file_exists(public_path('storage/post_image/') . $deleteImage->post_image)) {
-                                $imagePath = public_path('storage/post_image/') . $deleteImage->post_image;
-                                unlink($imagePath);
-                            }
+            if (isset($request->delete_image) && !empty(json_decode($request->delete_image))) {
+                $delete_images = json_decode($request->delete_image);
+                foreach ($delete_images as $key => $delete_image) {
+                    $deleteImage = EventPostImage::where('id', $delete_image)->first();
+                    if ($deleteImage->type == 'image') {
+                        if (file_exists(public_path('storage/post_image/') . $deleteImage->post_image)) {
+                            $imagePath = public_path('storage/post_image/') . $deleteImage->post_image;
+                            unlink($imagePath);
                         }
-                        $deleteImage->delete();
+                    } elseif ($deleteImage->type == 'video') {
+                        if (file_exists(public_path('storage/thumbnails/') . $deleteImage->thumbnail)) {
+                            $imagePath = public_path('storage/thumbnails/') . $deleteImage->thumbnail;
+                            unlink($imagePath);
+                        }
+                        if (file_exists(public_path('storage/post_image/') . $deleteImage->post_image)) {
+                            $imagePath = public_path('storage/post_image/') . $deleteImage->post_image;
+                            unlink($imagePath);
+                        }
                     }
+                    $deleteImage->delete();
                 }
             }
 
