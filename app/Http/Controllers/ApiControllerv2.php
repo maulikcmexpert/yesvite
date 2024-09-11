@@ -12816,6 +12816,6 @@ class ApiControllerv2 extends Controller
         //     sendNotification('upload_post', $notificationParam);
         // }
 
-        return response()->json(['status' => 1, 'message' => "Post is deleted sucessfully"]);
+        return response()->json(['status' => 1, 'message' => "Post is Updated sucessfully"]);
     }
 }
