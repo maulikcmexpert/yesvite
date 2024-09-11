@@ -4840,57 +4840,71 @@ class ApiControllerv2 extends Controller
                         EventPotluckCategory::where('event_id', $eventData['event_id'])->delete();
                     }
                 }
+                if (isset($eventData['update_potluck']) && $eventData['update_potluck'] != '1') {
 
-                if (isset($eventData['addr_change']) && $eventData['addr_change'] == '1') {
+                    if (isset($eventData['addr_change']) && $eventData['addr_change'] == '1') {
 
-                    $notificationParam = [
-                        'sender_id' => $user->id,
-                        'event_id' => $eventData['event_id'],
-                        'from_addr' => $eventData['from_addr'],
-                        'to_addr' => $eventData['to_addr'],
-                        'newUser' => $eventData['invited_new_guest']
-                    ];
+                        $notificationParam = [
+                            'sender_id' => $user->id,
+                            'event_id' => $eventData['event_id'],
+                            'from_addr' => $eventData['from_addr'],
+                            'to_addr' => $eventData['to_addr'],
+                            'newUser' => $eventData['invited_new_guest']
+                        ];
 
-                    sendNotification('update_address', $notificationParam);
-                }
+                        sendNotification('update_address', $notificationParam);
+                    }
 
-                if (isset($eventData['time_change']) && $eventData['time_change'] == '1') {
+                    if (isset($eventData['time_change']) && $eventData['time_change'] == '1') {
 
-                    $notificationParam = [
-                        'sender_id' => $user->id,
-                        'event_id' => $eventData['event_id'],
-                        'from_time' => $eventData['from_time'],
-                        'to_time' => $eventData['to_time'],
-                        'newUser' => $eventData['invited_new_guest']
-                    ];
+                        $notificationParam = [
+                            'sender_id' => $user->id,
+                            'event_id' => $eventData['event_id'],
+                            'from_time' => $eventData['from_time'],
+                            'to_time' => $eventData['to_time'],
+                            'newUser' => $eventData['invited_new_guest']
+                        ];
 
-                    sendNotification('update_time', $notificationParam);
-                }
+                        sendNotification('update_time', $notificationParam);
+                    }
 
-                if (isset($eventData['update_date']) && $eventData['update_date'] == '1') {
+                    if (isset($eventData['update_date']) && $eventData['update_date'] == '1') {
 
-                    $notificationParam = [
-                        'sender_id' => $user->id,
-                        'event_id' => $eventData['event_id'],
-                        'old_start_end_date' => $eventData['old_start_end_date'],
-                        'new_start_end_date' => $eventData['new_start_end_date'],
-                        'newUser' => $eventData['invited_new_guest']
-                    ];
+                        $notificationParam = [
+                            'sender_id' => $user->id,
+                            'event_id' => $eventData['event_id'],
+                            'old_start_end_date' => $eventData['old_start_end_date'],
+                            'new_start_end_date' => $eventData['new_start_end_date'],
+                            'newUser' => $eventData['invited_new_guest']
+                        ];
 
-                    sendNotification('update_date', $notificationParam);
-                }
+                        sendNotification('update_date', $notificationParam);
+                    }
 
-                if (isset($eventData['addr_change']) && $eventData['addr_change'] == '0' && isset($eventData['time_change']) && $eventData['time_change'] == '0' && $eventData['update_date'] == '0') {
+                    if (isset($eventData['addr_change']) && $eventData['addr_change'] == '0' && isset($eventData['time_change']) && $eventData['time_change'] == '0' && $eventData['update_date'] == '0') {
 
-                    $notificationParam = [
-                        'sender_id' => $user->id,
-                        'event_id' => $eventData['event_id'],
-                        'from_time' => $eventData['from_time'],
-                        'to_time' => $eventData['to_time'],
-                        'newUser' => $eventData['invited_new_guest']
-                    ];
+                        $notificationParam = [
+                            'sender_id' => $user->id,
+                            'event_id' => $eventData['event_id'],
+                            'from_time' => $eventData['from_time'],
+                            'to_time' => $eventData['to_time'],
+                            'newUser' => $eventData['invited_new_guest']
+                        ];
 
-                    sendNotification('update_event', $notificationParam);
+                        sendNotification('update_event', $notificationParam);
+                    }
+                } else {
+                    if (isset($eventData['update_potluck']) && $eventData['update_potluck'] == '1') {
+                        $notificationParam = [
+                            'sender_id' => $user->id,
+                            'event_id' => $eventData['event_id'],
+                            'from_time' => $eventData['from_time'],
+                            'to_time' => $eventData['to_time'],
+                            'newUser' => $eventData['invited_new_guest']
+                        ];
+
+                        sendNotification('update_potluck', $notificationParam);
+                    }
                 }
 
                 if (isset($eventData['invited_new_guest']) && count($eventData['invited_new_guest']) != 0) {
@@ -4907,17 +4921,6 @@ class ApiControllerv2 extends Controller
                     sendNotification('invite', $notificationParam);
                 }
 
-                if (isset($eventData['update_potluck']) && $eventData['update_potluck'] == '1') {
-                    $notificationParam = [
-                        'sender_id' => $user->id,
-                        'event_id' => $eventData['event_id'],
-                        'from_time' => $eventData['from_time'],
-                        'to_time' => $eventData['to_time'],
-                        'newUser' => $eventData['invited_new_guest']
-                    ];
-
-                    sendNotification('update_potluck', $notificationParam);
-                }
 
 
                 DB::commit();
@@ -7459,6 +7462,7 @@ class ApiControllerv2 extends Controller
                     if ($value->post_type == '1' && !empty($value->post_image)) {
                         foreach ($value->post_image as $imgVal) {
                             $postMedia = [
+                                'id' => $imgVal->id,
                                 'media_url' => asset('public/storage/post_image/' . $imgVal->post_image),
                                 'type' => $imgVal->type,
                                 'thumbnail' => (isset($imgVal->thumbnail) && $imgVal->thumbnail != null) ?  asset('public/storage/thumbnails/' . $imgVal->thumbnail) : '',
