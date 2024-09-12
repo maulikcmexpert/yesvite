@@ -1448,10 +1448,6 @@ function createMessageElement(key, messageData, isGroup) {
                 ${emoji}
             </div>`
             : `
-            <div class="user-img position-relative">
-                <img class="user-avatar img-fluid" src="${sender_userProfile}" alt="user-img">
-                <span class="active"></span>
-            </div>
             <div class="simple-message"> 
                 <div class="simple-msg-wrap"> 
                     <span class="senderName">${senderName}</span>
