@@ -3634,7 +3634,7 @@ class ApiControllerv2 extends Controller
             }
 
 
-            if (isset($eventData['podluck_category_list']) && is_array($eventData['podluck_category_list']) && $eventData['event_setting']['podluck'] == '1' ) {
+            if (isset($eventData['podluck_category_list']) && is_array($eventData['podluck_category_list']) && $eventData['event_setting']['podluck'] == '1') {
 
 
                 $podluckCategoryList = $eventData['podluck_category_list'];
@@ -4195,6 +4195,8 @@ class ApiControllerv2 extends Controller
                                 $potluckItem['self_bring_item'] =  $itemValue->self_bring_item;
                                 $spoken_for = UserPotluckItem::where('event_potluck_item_id', $itemValue->id)->sum('quantity');
                                 $potluckItem['spoken_quantity'] =  $spoken_for;
+                                $potluckItem['self_quantity'] =  $itemValue->self_quantity;
+
                                 $potluckItem['item_carry_users'] = [];
 
                                 foreach ($itemValue->user_potluck_items as $itemcarryUser) {
