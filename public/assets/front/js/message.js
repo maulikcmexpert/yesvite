@@ -1507,51 +1507,31 @@ function createMessageElement(key, messageData, isGroup) {
         daychange = "<h5 class='day-line'><span>" + chatSmallDay +" "+ msgDate + "</span></h5>";
     }
     formattedDate[msgDate] = "1";
-    if(oldMessageRcvTime != messageRcvTime){
-        oldMessageRcvTime = messageRcvTime;
-        return `   
-        <div>
-        ${daychange}
-        <li class="${isSender ? "receiver" : "sender"}" id="message-${key}" >
-        
-        ${replySection == "" ? dataWithMedia : replySection}
-           
-                <span class="time">${new Date(
-                    messageData.timeStamp
-                ).toLocaleTimeString([], {
-                    hour: "2-digit",
-                    minute: "2-digit",
-                    hour12: true,
-                })}</span>            
-            </li>
-            </div>
-       
-    
-        `;
-    }else{
-        if(messageRcvTime == $('.time').text()){
-            $('.time').text('');
+    console.log(messageRcvTime);
+    var timeText = $('.time').text();
+    timeText.each(async function (index) {
+        if (messageRcvTime == $(this).text()) {
+            $(this).text('');
         }
-        return `   
-        <div>
-        ${daychange}
-        <li class="${isSender ? "receiver" : "sender"}" id="message-${key}" >
+    });
+    return `   
+    <div>
+    ${daychange}
+    <li class="${isSender ? "receiver" : "sender"}" id="message-${key}" >
+    
+    ${replySection == "" ? dataWithMedia : replySection}
         
-        ${replySection == "" ? dataWithMedia : replySection} 
-
             <span class="time">${new Date(
                 messageData.timeStamp
             ).toLocaleTimeString([], {
                 hour: "2-digit",
                 minute: "2-digit",
                 hour12: true,
-            })}</span>     
-            </li>
-            </div>
-       
+            })}</span>            
+        </li>
+        </div>
+    `;
     
-        `;
-    }
 }
 function markMessageAsSeen(conversationId, key) {
     const msgRef = ref(database, `/Messages/${conversationId}/message/${key}`);
