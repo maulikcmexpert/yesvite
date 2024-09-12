@@ -1529,12 +1529,23 @@ function createMessageElement(key, messageData, isGroup) {
     
         `;
     }else{
+        if(messageRcvTime == $('.time').text()){
+            $('.time').text('');
+        }
         return `   
         <div>
         ${daychange}
         <li class="${isSender ? "receiver" : "sender"}" id="message-${key}" >
         
-        ${replySection == "" ? dataWithMedia : replySection}           
+        ${replySection == "" ? dataWithMedia : replySection} 
+
+            <span class="time">${new Date(
+                messageData.timeStamp
+            ).toLocaleTimeString([], {
+                hour: "2-digit",
+                minute: "2-digit",
+                hour12: true,
+            })}</span>     
             </li>
             </div>
        
