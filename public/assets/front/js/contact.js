@@ -287,6 +287,7 @@ $(document).ready(function () {
                     // alert();
                     $("#edit_Fname").val(output.edit.firstname);
                     $("#edit_Lname").val(output.edit.lastname);
+                    $("#email").val(output.edit.email);
                     $("#phone_number").val(output.edit.phone_number);
                     $("#edit_id").val(output.edit.id);
                 }

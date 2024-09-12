@@ -33,7 +33,8 @@ class ContactController extends Controller
             [
                 'event' => function ($query) {
                     $query->where('is_draft_save', '0');
-                }, 'event_post' => function ($query) {
+                },
+                'event_post' => function ($query) {
                     $query->where('post_type', '1');
                 },
                 'event_post_comment'
@@ -211,6 +212,7 @@ class ContactController extends Controller
                 'edit_Fname' => 'required|string', // max 2MB
                 'edit_Lname' => 'required|string', // max 2MB
                 'phone_number' => ['present', 'nullable', 'numeric', 'regex:/^\d{10,15}$/'],
+                'email' => ['required', 'email', 'unique:users,email,' . $request->edit_id],
 
             ], [
                 'edit_Fname.required' => 'Please enter First Name',
