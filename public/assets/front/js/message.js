@@ -1524,6 +1524,18 @@ function createMessageElement(key, messageData, isGroup) {
        
     
         `;
+    }else{
+        return `   
+        <div>
+        ${daychange}
+        <li class="${isSender ? "receiver" : "sender"}" id="message-${key}" >
+        
+        ${replySection == "" ? dataWithMedia : replySection}           
+            </li>
+            </div>
+       
+    
+        `;
     }
 }
 function markMessageAsSeen(conversationId, key) {
