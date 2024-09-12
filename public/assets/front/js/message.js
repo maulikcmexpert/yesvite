@@ -1487,13 +1487,11 @@ function createMessageElement(key, messageData, isGroup) {
     let daychange = "";
     let msgDate = formatDate(new Date(messageData.timeStamp));
     if (formattedDate.length == 0) {
-        // daychange = "<h5 class='day-line'><span>" + msgDate + "</span></h5>";
-        daychange = "<h5 class=''><span>" + msgDate + "</span></h5>";
+        daychange = "<h5 class='day-line'><span>" + msgDate + "</span></h5>";
     } else if (formattedDate[msgDate] === undefined) {
         console.log(formattedDate);
         console.log(msgDate);
-        // daychange = "<h5 class='day-line'><span>" + msgDate + "</span></h5>";
-        daychange = "<h5 class=''><span>" + msgDate + "</span></h5>";
+        daychange = "<h5 class='day-line'><span>" + msgDate + "</span></h5>";
     }
     formattedDate[msgDate] = "1";
 
