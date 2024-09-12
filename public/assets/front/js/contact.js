@@ -281,7 +281,7 @@ $(document).ready(function () {
             // data: formData,
 
             success: function (output) {
-                // console.log(output.edit);
+                console.log(output.edit);
 
                 if (output.status == 1) {
                     // alert();
