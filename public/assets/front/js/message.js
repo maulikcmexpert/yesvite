@@ -861,7 +861,6 @@ if ($("#isGroup").val() == true) {
     updateChat($(".selected_message").val());
 }
 $(".archived-list").hide();
-$('#archive-list').hide();
 $("#archive-list").click(function () {
     var msgLists = [];
     if ($(this).attr("list") == "0") {

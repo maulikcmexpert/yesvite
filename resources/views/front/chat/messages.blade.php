@@ -203,7 +203,7 @@ use Carbon\Carbon;
                             @endif
 
                         </ul>
-                        <button id="archive-list" list="0">Archive List</button>
+                        <button id="archive-list" list="0" style="display: none;">Archive List</button>
                     </div>
                     <div class="chatbox position-relative w-100">
                         <div class="msg-head">
