@@ -1495,7 +1495,7 @@ function createMessageElement(key, messageData, isGroup) {
     let msgDate = formatDate(new Date(messageData.timeStamp));
     let chatDate = new Date(messageData.timeStamp);
     let chatSmallDay ='';
-    if(chatDate != 'Today'){
+    if(msgDate != 'Today'){
         chatSmallDay = chatDate.toLocaleDateString('en-US', { weekday: 'short' });
     }
 
