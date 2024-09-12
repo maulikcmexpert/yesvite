@@ -1538,7 +1538,7 @@ ul.member-lists li:last-child {
     transform: translateY(-50%);
 } */
 
-.day-line::before {
+/* .day-line::before {
     content: '';
     position: absolute;
     width: 100%;
@@ -1547,7 +1547,7 @@ ul.member-lists li:last-child {
     right: 0;
     top: 50%;
     transform: translateY(-50%);
-}
+} */
 
 /* ======= responsive ======== */
 
