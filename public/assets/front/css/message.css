@@ -1527,7 +1527,7 @@ ul.member-lists li:last-child {
     color: #8d8888;
 }
 
-.day-line::after {
+/* .day-line::after {
     content: '';
     position: absolute;
     width: 100%;
@@ -1536,7 +1536,7 @@ ul.member-lists li:last-child {
     left: 0;
     top: 50%;
     transform: translateY(-50%);
-}
+} */
 
 .day-line::before {
     content: '';
