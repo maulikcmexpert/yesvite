@@ -1509,7 +1509,7 @@ function createMessageElement(key, messageData, isGroup) {
     formattedDate[msgDate] = "1";
     console.log(messageRcvTime);
     var timeText = $('.time').text();
-    timeText.each(async function (index) {
+    $('.time').each(async function (index) {
         if (messageRcvTime == $(this).text()) {
             $(this).text('');
         }
