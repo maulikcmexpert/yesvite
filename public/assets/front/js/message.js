@@ -1299,7 +1299,14 @@ function addMessageToList(key, messageData, conversationId) {
     scrollToBottom();
 }
 var formattedDate = {};
+var messageRcvTime = '';
+var oldMessageRcvTime = '';
 function createMessageElement(key, messageData, isGroup) {
+    messageRcvTime = new Date(messageData.timeStamp).toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true,
+    });
     const isSender = senderUser == messageData.senderId;
     const isReceiver = senderUser != messageData.senderId;
     if (
@@ -1496,26 +1503,28 @@ function createMessageElement(key, messageData, isGroup) {
         daychange = "<h5 class='day-line'><span>" + chatSmallDay +" "+ msgDate + "</span></h5>";
     }
     formattedDate[msgDate] = "1";
-
-    return `   
-    <div>
-    ${daychange}
-    <li class="${isSender ? "receiver" : "sender"}" id="message-${key}" >
+    if(oldMessageRcvTime != messageRcvTime){
+        oldMessageRcvTime = messageRcvTime;
+        return `   
+        <div>
+        ${daychange}
+        <li class="${isSender ? "receiver" : "sender"}" id="message-${key}" >
+        
+        ${replySection == "" ? dataWithMedia : replySection}
+           
+                <span class="time">${new Date(
+                    messageData.timeStamp
+                ).toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    hour12: true,
+                })}</span>            
+            </li>
+            </div>
+       
     
-    ${replySection == "" ? dataWithMedia : replySection}
-
-            <span class="time">${new Date(
-                messageData.timeStamp
-            ).toLocaleTimeString([], {
-                hour: "2-digit",
-                minute: "2-digit",
-                hour12: true,
-            })}</span>            
-        </li>
-        </div>
-   
-
-    `;
+        `;
+    }
 }
 function markMessageAsSeen(conversationId, key) {
     const msgRef = ref(database, `/Messages/${conversationId}/message/${key}`);
