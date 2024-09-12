@@ -4195,7 +4195,7 @@ class ApiControllerv2 extends Controller
                                 $potluckItem['self_bring_item'] =  $itemValue->self_bring_item;
                                 $spoken_for = UserPotluckItem::where('event_potluck_item_id', $itemValue->id)->sum('quantity');
                                 $potluckItem['spoken_quantity'] =  $spoken_for;
-                                $potluckItem['self_quantity'] =  (!empty($itemValue->self_quantity) || $itemValue->self_quantity != NULL) ? $itemValue->self_quantity : "";
+                                $potluckItem['self_quantity'] =  (!empty($itemValue->quantity) || $itemValue->quantity != NULL) ? $itemValue->quantity : "";
 
                                 $potluckItem['item_carry_users'] = [];
 
