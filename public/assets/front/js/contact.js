@@ -255,6 +255,7 @@ $(document).ready(function () {
                     // alert();
                     $("#edit_Fname").val(output.edit.firstname);
                     $("#edit_Lname").val(output.edit.lastname);
+                    $("#email").val(output.edit.email);
                     $("#phone_number").val(output.edit.phone_number);
                     $("#edit_id").val(output.edit.id);
                 }
@@ -281,7 +282,7 @@ $(document).ready(function () {
             // data: formData,
 
             success: function (output) {
-                console.log(output.edit);
+                // console.log(output.edit);
 
                 if (output.status == 1) {
                     // alert();
