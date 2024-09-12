@@ -1667,3 +1667,28 @@ function add_user_firebase($userId, $userStatus = null)
     }
     return true;
 }
+
+function delete_event_post_images($post_id)
+{
+    $event_post_images = EventPostImage::where('event_post_id', $post_id)->get();
+    if (isset($event_post_images) && $event_post_images->isNotEmpty()) {
+        foreach ($event_post_images as $key => $value) {
+            if ($value->type == 'image') {
+                if (file_exists(public_path('storage/post_image/') . $value->post_image)) {
+                    $imagePath = public_path('storage/post_image/') . $value->post_image;
+                    unlink($imagePath);
+                }
+            } elseif ($value->type == 'video') {
+                if (file_exists(public_path('storage/thumbnails/') . $value->thumbnail)) {
+                    $imagePath = public_path('storage/thumbnails/') . $value->thumbnail;
+                    unlink($imagePath);
+                }
+                if (file_exists(public_path('storage/post_image/') . $value->post_image)) {
+                    $imagePath = public_path('storage/post_image/') . $value->post_image;
+                    unlink($imagePath);
+                }
+            }
+            EventPostImage::where('id', $value->id)->delete();
+        }
+    }
+}

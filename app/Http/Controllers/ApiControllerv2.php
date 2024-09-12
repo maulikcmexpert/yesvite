@@ -12782,22 +12782,24 @@ class ApiControllerv2 extends Controller
                 $delete_images = json_decode($request->delete_image);
                 foreach ($delete_images as $key => $delete_image) {
                     $deleteImage = EventPostImage::where('id', $delete_image)->first();
-                    if ($deleteImage->type == 'image') {
-                        if (file_exists(public_path('storage/post_image/') . $deleteImage->post_image)) {
-                            $imagePath = public_path('storage/post_image/') . $deleteImage->post_image;
-                            unlink($imagePath);
+                    if ($deleteImage != null) {
+                        if ($deleteImage->type == 'image') {
+                            if (file_exists(public_path('storage/post_image/') . $deleteImage->post_image)) {
+                                $imagePath = public_path('storage/post_image/') . $deleteImage->post_image;
+                                unlink($imagePath);
+                            }
+                        } elseif ($deleteImage->type == 'video') {
+                            if (file_exists(public_path('storage/thumbnails/') . $deleteImage->thumbnail)) {
+                                $imagePath = public_path('storage/thumbnails/') . $deleteImage->thumbnail;
+                                unlink($imagePath);
+                            }
+                            if (file_exists(public_path('storage/post_image/') . $deleteImage->post_image)) {
+                                $imagePath = public_path('storage/post_image/') . $deleteImage->post_image;
+                                unlink($imagePath);
+                            }
                         }
-                    } elseif ($deleteImage->type == 'video') {
-                        if (file_exists(public_path('storage/thumbnails/') . $deleteImage->thumbnail)) {
-                            $imagePath = public_path('storage/thumbnails/') . $deleteImage->thumbnail;
-                            unlink($imagePath);
-                        }
-                        if (file_exists(public_path('storage/post_image/') . $deleteImage->post_image)) {
-                            $imagePath = public_path('storage/post_image/') . $deleteImage->post_image;
-                            unlink($imagePath);
-                        }
+                        $deleteImage->delete();
                     }
-                    $deleteImage->delete();
                 }
             }
 
@@ -12818,6 +12820,10 @@ class ApiControllerv2 extends Controller
                         $pollOption->save();
                     }
                 }
+            }
+
+            if ($request->hasFile('post_recording') || $request->post_type == '2') {
+                delete_event_post_images($request->post_id);
             }
             // $notificationParam = [
             //     'sender_id' => $user->id,
