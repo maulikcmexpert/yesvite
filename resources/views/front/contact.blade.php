@@ -290,13 +290,13 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                 <div class="input-form">
                                     <input type="email" class="form-control inputText" id="email" name="email" required>
                                     <label for="email" class="form-label input-field floating-label">Work Email
                                         Address<span class="required">*</span></label>
                                 </div>
-                            </div> -->
+                            </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                 <div class="input-form">
                                     <input type="text" class="phone_number border-0" name="countryCode">
