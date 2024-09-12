@@ -1319,6 +1319,9 @@ function createMessageElement(key, messageData, isGroup) {
         (isGroup == "true" || isGroup == true) && !isSender
             ? SelecteGroupUser[messageData.senderId].name
             : "";
+    const sender_userProfile = (isGroup == "true" || isGroup == true) && !isSender
+    ? SelecteGroupUser[messageData.senderId].userProfile
+    : "";
     let seenStatus = "";
     let reaction = "";
     let dataWithMedia = "";
@@ -1445,6 +1448,10 @@ function createMessageElement(key, messageData, isGroup) {
                 ${emoji}
             </div>`
             : `
+            <div class="user-img position-relative">
+                <img class="user-avatar img-fluid" src="${sender_userProfile}" alt="user-img">
+                <span class="active"></span>
+            </div>
             <div class="simple-message"> 
                 <div class="simple-msg-wrap"> 
                     <span class="senderName">${senderName}</span>
