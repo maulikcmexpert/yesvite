@@ -3634,7 +3634,7 @@ class ApiControllerv2 extends Controller
             }
 
 
-            if (isset($eventData['podluck_category_list']) && is_array($eventData['podluck_category_list']) && $eventData['event_setting']['podluck'] == '1'  && $eventData['is_draft_save'] == '0') {
+            if (isset($eventData['podluck_category_list']) && is_array($eventData['podluck_category_list']) && $eventData['event_setting']['podluck'] == '1' ) {
 
 
                 $podluckCategoryList = $eventData['podluck_category_list'];
@@ -4731,7 +4731,7 @@ class ApiControllerv2 extends Controller
                     if ($eventData['is_draft_save'] == '1') {
                         EventPotluckCategory::where('event_id', $eventData['event_id'])->delete();
                     }
-                    if ($eventData['event_setting']['podluck'] == '1' && $eventData['is_draft_save'] == '0') {
+                    if ($eventData['event_setting']['podluck'] == '1') {
 
                         $podluckCategoryList = $eventData['podluck_category_list'];
 
