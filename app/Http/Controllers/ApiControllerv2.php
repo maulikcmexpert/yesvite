@@ -9341,13 +9341,13 @@ class ApiControllerv2 extends Controller
 
             //     $postCommentList[] = $commentInfo;
             // }
-            dd($postCommentList);
+            // dd($postCommentList);
 
             return response()->json(['status' => 1, 'total_comments' => count($postComment), 'data' => $postCommentList, 'message' => "Post commented by you"]);
         } catch (QueryException $e) {
 
             DB::rollBack();
-            dd($e);
+            // dd($e);
             return response()->json(['status' => 0, 'message' => "db error"]);
         } catch (\Exception $e) {
 
