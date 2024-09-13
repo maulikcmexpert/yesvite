@@ -746,6 +746,16 @@ ul.nav-tabs .nav-link:focus {
 
 
 /* ======== Responsive ========= */
+@media (min-width:400px) and (max-width:900px) {
+    footer {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+    }
+}
+
+
 @media only screen and (max-width:1199px) {
     h2 {
         font-size: 45px !important;
