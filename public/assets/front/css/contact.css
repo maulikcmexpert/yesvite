@@ -661,6 +661,26 @@ ul.listing li span {
     }
 }
 
+@media only screen and (max-width:991px) {
+    .contact-details .col-xxl-3 {
+        width: 330px;
+    }
+
+    .contact-details .col-xxl-9 {
+        width: 54%;
+    }
+}
+
+@media only screen and (max-width:767px) {
+    .contact-details .col-xxl-3 {
+        width: 100%;
+    }
+
+    .contact-details .col-xxl-9 {
+        width: 100%;
+    }
+}
+
 @media only screen and (max-width:768px) {
     .contact-user ul.nav {
         margin: 0 auto;
