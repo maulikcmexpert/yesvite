@@ -566,8 +566,8 @@ ul.listing li span {
 
 .edit-contact {
     border: 1px solid var(--borderColor) !important;
-    padding: 10px 24px;
-    border-radius: 10px;
+    padding: 6px 20px !important;
+    border-radius: 10px !important;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     -ms-border-radius: 10px;

@@ -441,7 +441,7 @@ ul.nav-tabs .nav-link:focus {
 }
 
 .users-data a svg {
-    margin-right: 5px;
+    margin-right: 6px !important;
 }
 
 .breadcrumb-nav .breadcrumb-item+.breadcrumb-item::before {
