@@ -639,7 +639,7 @@ ul.listing li span {
 }
 
 .contact-details .col-xxl-3 {
-    max-width: 334px;
+    width: 334px;
 }
 
 .contact-details .col-xxl-9 {
@@ -649,6 +649,12 @@ ul.listing li span {
 
 
 /* ======= Responsive ======= */
+@media only screen and (max-width:1399px) {
+    .contact-details .col-xxl-9 {
+        width: 70%;
+    }
+}
+
 @media only screen and (max-width:768px) {
     .contact-user ul.nav {
         margin: 0 auto;
