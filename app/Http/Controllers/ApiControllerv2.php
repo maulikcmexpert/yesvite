@@ -492,7 +492,7 @@ class ApiControllerv2 extends Controller
 
                     $eventDetail['user_id'] = $value->user->id;
 
-                    $eventDetail['host_profile'] = empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile);
+                    $eventDetail['host_profile'] = empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
 
                     $eventDetail['host_name'] = $value->hosted_by;
 
@@ -509,7 +509,7 @@ class ApiControllerv2 extends Controller
 
 
 
-                    $eventDetail['event_images'] = ($images != null) ? asset('public/storage/event_images/' . $images->image) : "";
+                    $eventDetail['event_images'] = ($images != null) ? asset('storage/event_images/' . $images->image) : "";
 
 
 
@@ -582,8 +582,8 @@ class ApiControllerv2 extends Controller
 
                     $eventDetail['user_profile'] = [
                         'id' => $value->user->id,
-                        'profile' => empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile),
-                        'bg_profile' => empty($value->user->bg_profile) ? "" : asset('public/storage/bg_profile/' . $value->user->bg_profile),
+                        'profile' => empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile),
+                        'bg_profile' => empty($value->user->bg_profile) ? "" : asset('storage/bg_profile/' . $value->user->bg_profile),
                         'gender' => ($value->user->gender != NULL) ? $value->user->gender : "",
                         'username' => $value->user->firstname . ' ' . $value->user->lastname,
                         'location' => ($value->user->city != NULL) ? $value->user->city : "",
@@ -742,7 +742,7 @@ class ApiControllerv2 extends Controller
                             $eventDetail['is_co_host'] = $isCoHost->is_co_host;
                         }
                         $eventDetail['user_id'] = $value->user->id;
-                        $eventDetail['host_profile'] = empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile);
+                        $eventDetail['host_profile'] = empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
                         $eventDetail['message_to_guests'] = $value->message_to_guests;
                         $eventDetail['event_wall'] = $value->event_settings->event_wall;
                         $eventDetail["guest_list_visible_to_guests"] = $value->event_settings->guest_list_visible_to_guests;
@@ -763,7 +763,7 @@ class ApiControllerv2 extends Controller
                             $eventDetail['adults'] = $checkRsvpDone->adults;
                         }
                         $images = EventImage::where('event_id', $value->id)->first();
-                        $eventDetail['event_images'] = ($images != null) ? asset('public/storage/event_images/' . $images->image) : "";
+                        $eventDetail['event_images'] = ($images != null) ? asset('storage/event_images/' . $images->image) : "";
                         $eventDetail['event_date'] = $value->start_date;
 
                         $event_time = "-";
@@ -857,8 +857,8 @@ class ApiControllerv2 extends Controller
 
                         $eventDetail['user_profile'] = [
                             'id' => $value->user->id,
-                            'profile' => empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile),
-                            'bg_profile' => empty($value->user->bg_profile) ? "" : asset('public/storage/bg_profile/' . $value->user->bg_profile),
+                            'profile' => empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile),
+                            'bg_profile' => empty($value->user->bg_profile) ? "" : asset('storage/bg_profile/' . $value->user->bg_profile),
                             'gender' => ($value->user->gender != NULL) ? $value->user->gender : "",
                             'username' => $value->user->firstname . ' ' . $value->user->lastname,
                             'location' => ($value->user->city != NULL) ? $value->user->city : "",
@@ -948,7 +948,7 @@ class ApiControllerv2 extends Controller
                         $eventDetail['is_co_host'] = $value->is_co_host;
                         $eventDetail['is_notification_on_off'] =  $value->notification_on_off;
                         $eventDetail['message_to_guests'] = $value->event->message_to_guests;
-                        $eventDetail['host_profile'] = empty($value->event->user->profile) ? "" : asset('public/storage/profile/' . $value->event->user->profile);
+                        $eventDetail['host_profile'] = empty($value->event->user->profile) ? "" : asset('storage/profile/' . $value->event->user->profile);
                         $eventDetail['event_wall'] = $value->event->event_settings->event_wall;
                         $eventDetail["guest_list_visible_to_guests"] = $value->event->event_settings->guest_list_visible_to_guests;
 
@@ -966,7 +966,7 @@ class ApiControllerv2 extends Controller
 
                         if (!empty($images)) {
 
-                            $eventDetail['event_images'] = asset('public/storage/event_images/' . $images->image);
+                            $eventDetail['event_images'] = asset('storage/event_images/' . $images->image);
                         }
 
                         $eventDetail['kids'] = 0;
@@ -1071,8 +1071,8 @@ class ApiControllerv2 extends Controller
 
                         $eventDetail['user_profile'] = [
                             'id' => $value->event->user->id,
-                            'profile' => empty($value->event->user->profile) ? "" : asset('public/storage/profile/' . $value->event->user->profile),
-                            'bg_profile' => empty($value->event->user->bg_profile) ? "" : asset('public/storage/bg_profile/' . $value->event->user->bg_profile),
+                            'profile' => empty($value->event->user->profile) ? "" : asset('storage/profile/' . $value->event->user->profile),
+                            'bg_profile' => empty($value->event->user->bg_profile) ? "" : asset('storage/bg_profile/' . $value->event->user->bg_profile),
                             'gender' => ($value->event->user->gender != NULL) ? $value->event->user->gender : "",
                             'username' => $value->event->user->firstname . ' ' . $value->event->user->lastname,
                             'location' => ($value->event->user->city != NULL) ? $value->event->user->city : "",
@@ -1173,7 +1173,7 @@ class ApiControllerv2 extends Controller
                         }
                         $eventDetail['message_to_guests'] = $value->message_to_guests;
                         $eventDetail['user_id'] = $value->user->id;
-                        $eventDetail['host_profile'] = empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile);
+                        $eventDetail['host_profile'] = empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
                         $eventDetail['event_wall'] = $value->event_settings->event_wall;
                         $eventDetail["guest_list_visible_to_guests"] = $value->event_settings->guest_list_visible_to_guests;
                         $eventDetail['guest_pending_count'] = getGuestRsvpPendingCount($value->id);
@@ -1196,7 +1196,7 @@ class ApiControllerv2 extends Controller
 
                         $images = EventImage::where('event_id', $value->id)->first();
 
-                        $eventDetail['event_images'] = ($images != null) ? asset('public/storage/event_images/' . $images->image) : "";
+                        $eventDetail['event_images'] = ($images != null) ? asset('storage/event_images/' . $images->image) : "";
 
                         $eventDetail['event_date'] = $value->start_date;
                         $event_time = "-";
@@ -1303,8 +1303,8 @@ class ApiControllerv2 extends Controller
 
                         $eventDetail['user_profile'] = [
                             'id' => $value->user->id,
-                            'profile' => empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile),
-                            'bg_profile' => empty($value->user->bg_profile) ? "" : asset('public/storage/bg_profile/' . $value->user->bg_profile),
+                            'profile' => empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile),
+                            'bg_profile' => empty($value->user->bg_profile) ? "" : asset('storage/bg_profile/' . $value->user->bg_profile),
                             'gender' => ($value->user->gender != NULL) ? $value->user->gender : "",
                             'username' => $value->user->firstname . ' ' . $value->user->lastname,
                             'location' => ($value->user->city != NULL) ? $value->user->city : "",
@@ -1434,7 +1434,7 @@ class ApiControllerv2 extends Controller
                             $eventDetail['is_notification_on_off'] =  $isCoHost->notification_on_off;
                         }
                         $eventDetail['message_to_guests'] = $value->message_to_guests;
-                        $eventDetail['host_profile'] = empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile);
+                        $eventDetail['host_profile'] = empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
                         $eventDetail['event_wall'] = $value->event_settings->event_wall;
                         $eventDetail["guest_list_visible_to_guests"] = $value->event_settings->guest_list_visible_to_guests;
                         $eventDetail['guest_pending_count'] = getGuestRsvpPendingCount($value->id);
@@ -1456,7 +1456,7 @@ class ApiControllerv2 extends Controller
 
                         $images = EventImage::where('event_id', $value->id)->first();
 
-                        $eventDetail['event_images'] = ($images != null) ? asset('public/storage/event_images/' . $images->image) : "";
+                        $eventDetail['event_images'] = ($images != null) ? asset('storage/event_images/' . $images->image) : "";
 
                         $eventDetail['event_date'] = $value->start_date;
 
@@ -1564,8 +1564,8 @@ class ApiControllerv2 extends Controller
 
                         $eventDetail['user_profile'] = [
                             'id' => $value->user->id,
-                            'profile' => empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile),
-                            'bg_profile' => empty($value->user->bg_profile) ? "" : asset('public/storage/bg_profile/' . $value->user->bg_profile),
+                            'profile' => empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile),
+                            'bg_profile' => empty($value->user->bg_profile) ? "" : asset('storage/bg_profile/' . $value->user->bg_profile),
                             'gender' => ($value->user->gender != NULL) ? $value->user->gender : "",
                             'username' => $value->user->firstname . ' ' . $value->user->lastname,
                             'location' => ($value->user->city != NULL) ? $value->user->city : "",
@@ -1687,7 +1687,7 @@ class ApiControllerv2 extends Controller
                             $eventDetail['is_notification_on_off'] =  $isCoHost->notification_on_off;
                         }
                         $eventDetail['message_to_guests'] = $value->event->message_to_guests;
-                        $eventDetail['host_profile'] = empty($value->event->user->profile) ? "" : asset('public/storage/profile/' . $value->event->user->profile);
+                        $eventDetail['host_profile'] = empty($value->event->user->profile) ? "" : asset('storage/profile/' . $value->event->user->profile);
                         $eventDetail['event_wall'] = $value->event->event_settings->event_wall;
                         $eventDetail["guest_list_visible_to_guests"] = $value->event->event_settings->guest_list_visible_to_guests;
 
@@ -1705,7 +1705,7 @@ class ApiControllerv2 extends Controller
 
                         if (!empty($images)) {
 
-                            $eventDetail['event_images'] = asset('public/storage/event_images/' . $images->image);
+                            $eventDetail['event_images'] = asset('storage/event_images/' . $images->image);
                         }
                         $eventDetail['kids'] = 0;
                         $eventDetail['adults'] = 0;
@@ -1789,8 +1789,8 @@ class ApiControllerv2 extends Controller
 
                         $eventDetail['user_profile'] = [
                             'id' => $value->event->user->id,
-                            'profile' => empty($value->event->user->profile) ? "" : asset('public/storage/profile/' . $value->event->user->profile),
-                            'bg_profile' => empty($value->event->user->bg_profile) ? "" : asset('public/storage/bg_profile/' . $value->event->user->bg_profile),
+                            'profile' => empty($value->event->user->profile) ? "" : asset('storage/profile/' . $value->event->user->profile),
+                            'bg_profile' => empty($value->event->user->bg_profile) ? "" : asset('storage/bg_profile/' . $value->event->user->bg_profile),
                             'gender' => ($value->event->user->gender != NULL) ? $value->event->user->gender : "",
                             'username' => $value->event->user->firstname . ' ' . $value->event->user->lastname,
                             'location' => ($value->event->user->city != NULL) ? $value->event->user->city : "",
@@ -1927,8 +1927,8 @@ class ApiControllerv2 extends Controller
                 $getUserPrivacyPolicy = UserProfilePrivacy::select('profile_privacy', 'status')->where('user_id', $details->id)->get();
                 // $profileData = [
                 //     'id' =>  empty($details->id) ? "" : $details->id,
-                //     'profile' =>  empty($details->profile) ?  "" : asset('public/storage/profile/' . $details->profile),
-                //     'bg_profile' =>  empty($details->bg_profile) ? "" : asset('public/storage/bg_profile/' . $details->bg_profile),
+                //     'profile' =>  empty($details->profile) ?  "" : asset('storage/profile/' . $details->profile),
+                //     'bg_profile' =>  empty($details->bg_profile) ? "" : asset('storage/bg_profile/' . $details->bg_profile),
                 //     'firstname' => empty($details->firstname) ? "" : $details->firstname,
                 //     'firstname' => empty($details->firstname) ? "" : $details->firstname,
                 //     'lastname' => empty($details->lastname) ? "" : $details->lastname,
@@ -1953,8 +1953,8 @@ class ApiControllerv2 extends Controller
                 // ];
                 $profileData = [
                     'id' =>  empty($details->id) ? "" : $details->id,
-                    'profile' =>  empty($details->profile) ?  "" : asset('public/storage/profile/' . $details->profile),
-                    'bg_profile' =>  empty($details->bg_profile) ? "" : asset('public/storage/bg_profile/' . $details->bg_profile),
+                    'profile' =>  empty($details->profile) ?  "" : asset('storage/profile/' . $details->profile),
+                    'bg_profile' =>  empty($details->bg_profile) ? "" : asset('storage/bg_profile/' . $details->bg_profile),
                     'firstname' => empty($details->firstname) ? "" : $details->firstname,
                     'firstname' => empty($details->firstname) ? "" : $details->firstname,
                     'lastname' => empty($details->lastname) ? "" : $details->lastname,
@@ -2091,8 +2091,8 @@ class ApiControllerv2 extends Controller
                 $getUserPrivacyPolicy = UserProfilePrivacy::select('profile_privacy', 'status')->where('user_id', $details->id)->get();
                 // $profileData = [
                 //     'id' =>  empty($details->id) ? "" : $details->id,
-                //     'profile' =>  empty($details->profile) ?  "" : asset('public/storage/profile/' . $details->profile),
-                //     'bg_profile' =>  empty($details->bg_profile) ? "" : asset('public/storage/bg_profile/' . $details->bg_profile),
+                //     'profile' =>  empty($details->profile) ?  "" : asset('storage/profile/' . $details->profile),
+                //     'bg_profile' =>  empty($details->bg_profile) ? "" : asset('storage/bg_profile/' . $details->bg_profile),
                 //     'firstname' => empty($details->firstname) ? "" : $details->firstname,
                 //     'firstname' => empty($details->firstname) ? "" : $details->firstname,
                 //     'lastname' => empty($details->lastname) ? "" : $details->lastname,
@@ -2119,8 +2119,8 @@ class ApiControllerv2 extends Controller
                 // ];
                 $profileData = [
                     'id' =>  empty($details->id) ? "" : $details->id,
-                    'profile' =>  empty($details->profile) ?  "" : asset('public/storage/profile/' . $details->profile),
-                    'bg_profile' =>  empty($details->bg_profile) ? "" : asset('public/storage/bg_profile/' . $details->bg_profile),
+                    'profile' =>  empty($details->profile) ?  "" : asset('storage/profile/' . $details->profile),
+                    'bg_profile' =>  empty($details->bg_profile) ? "" : asset('storage/bg_profile/' . $details->bg_profile),
                     'firstname' => empty($details->firstname) ? "" : $details->firstname,
                     'firstname' => empty($details->firstname) ? "" : $details->firstname,
                     'lastname' => empty($details->lastname) ? "" : $details->lastname,
@@ -2264,8 +2264,8 @@ class ApiControllerv2 extends Controller
 
                 $profileData = [
                     'id' =>  empty($user->id) ? "" : $user->id,
-                    'profile' =>  empty($user->profile) ?  "" : asset('public/storage/profile/' . $user->profile),
-                    'bg_profile' =>  empty($user->bg_profile) ? "" : asset('public/storage/bg_profile/' . $user->bg_profile),
+                    'profile' =>  empty($user->profile) ?  "" : asset('storage/profile/' . $user->profile),
+                    'bg_profile' =>  empty($user->bg_profile) ? "" : asset('storage/bg_profile/' . $user->bg_profile),
                     'firstname' => empty($user->firstname) ? "" : $user->firstname,
                     'firstname' => empty($user->firstname) ? "" : $user->firstname,
                     'lastname' => empty($user->lastname) ? "" : $user->lastname,
@@ -2727,7 +2727,7 @@ class ApiControllerv2 extends Controller
                 'id' =>  $addedUser->id,
                 'first_name' =>  $addedUser->firstname,
                 'last_name' =>  $addedUser->lastname,
-                'profile' => (isset($addedUser->profile) && $addedUser->profile != NULL) ? asset('public/storage/profile/' . $addedUser->profile) : "",
+                'profile' => (isset($addedUser->profile) && $addedUser->profile != NULL) ? asset('storage/profile/' . $addedUser->profile) : "",
                 'country_code' =>  (string)$addedUser->country_code,
                 'phone_number' =>  $addedUser->phone_number,
                 'email' =>  $addedUser->email,
@@ -2812,7 +2812,7 @@ class ApiControllerv2 extends Controller
                     'id' =>  $updateUser->id,
                     'first_name' =>  $updateUser->firstname,
                     'last_name' =>  $updateUser->lastname,
-                    'profile' => (isset($updateUser->profile) && $updateUser->profile != NULL) ? asset('public/storage/profile/' . $updateUser->profile) : "",
+                    'profile' => (isset($updateUser->profile) && $updateUser->profile != NULL) ? asset('storage/profile/' . $updateUser->profile) : "",
                     'country_code' =>  (string)$updateUser->country_code,
                     'phone_number' =>  $updateUser->phone_number,
                     'email' =>  $updateUser->email,
@@ -3928,7 +3928,7 @@ class ApiControllerv2 extends Controller
                     continue;
                 }
                 $yesviteUserDetail['id'] = $user->id;
-                $yesviteUserDetail['profile'] = empty($user->profile) ? "" : asset('public/storage/profile/' . $user->profile);
+                $yesviteUserDetail['profile'] = empty($user->profile) ? "" : asset('storage/profile/' . $user->profile);
                 $yesviteUserDetail['first_name'] = $user->firstname;
                 $yesviteUserDetail['last_name'] = $user->lastname;
                 $yesviteUserDetail['email'] = (!empty($user->email) || $user->email != Null) ? $user->email : "";
@@ -4042,7 +4042,7 @@ class ApiControllerv2 extends Controller
                 if (!empty($getEventImages)) {
                     foreach ($getEventImages as $imgVal) {
                         $eventImageData['id'] = $imgVal->id;
-                        $eventImageData['image'] = asset('public/storage/event_images/' . $imgVal->image);
+                        $eventImageData['image'] = asset('storage/event_images/' . $imgVal->image);
                         $eventDetail['event_images'][] = $eventImageData;
                     }
                 }
@@ -4204,7 +4204,7 @@ class ApiControllerv2 extends Controller
                                     $userPotluckItem['id'] = $itemcarryUser->id;
                                     $userPotluckItem['user_id'] = $itemcarryUser->user_id;
                                     $userPotluckItem['is_host'] = ($itemcarryUser->user_id == $user->id) ? 1 : 0;
-                                    $userPotluckItem['profile'] =  empty($itemcarryUser->users->profile) ?  "" : asset('public/storage/profile/' . $itemcarryUser->users->profile);
+                                    $userPotluckItem['profile'] =  empty($itemcarryUser->users->profile) ?  "" : asset('storage/profile/' . $itemcarryUser->users->profile);
                                     $userPotluckItem['first_name'] = $itemcarryUser->users->firstname;
                                     $userPotluckItem['quantity'] = (!empty($itemcarryUser->quantity) || $itemcarryUser->quantity != NULL) ? $itemcarryUser->quantity : "0";
                                     $userPotluckItem['last_name'] = $itemcarryUser->users->lastname;
@@ -5350,8 +5350,8 @@ class ApiControllerv2 extends Controller
                 $eventOldImages = EventImage::where('event_id', $request->event_id)->get();
                 if (!empty($eventOldImages)) {
                     foreach ($eventOldImages as $oldImages) {
-                        if (file_exists(public_path('public/storage/event_images/') . $oldImages->image)) {
-                            $imagePath = public_path('public/storage/event_images/') . $oldImages->image;
+                        if (file_exists(public_path('storage/event_images/') . $oldImages->image)) {
+                            $imagePath = public_path('storage/event_images/') . $oldImages->image;
                             unlink($imagePath);
                         }
                         EventImage::where('id', $oldImages->id)->delete();
@@ -5821,7 +5821,7 @@ class ApiControllerv2 extends Controller
                 "id" => $getUserItemData->id,
                 "user_id" => $getUserItemData->user_id,
                 "is_host" => ($getUserItemData->user_id == $user->id) ? 1 : 0,
-                "profile" => empty($getUserItemData->users->profile) ?  "" : asset('public/storage/profile/' . $getUserItemData->users->profile),
+                "profile" => empty($getUserItemData->users->profile) ?  "" : asset('storage/profile/' . $getUserItemData->users->profile),
                 "first_name" => $getUserItemData->users->firstname,
                 "quantity" => (!empty($getUserItemData->quantity) || $getUserItemData->quantity != NULL) ? $getUserItemData->quantity : "0",
 
@@ -5911,7 +5911,7 @@ class ApiControllerv2 extends Controller
             "id" => $getUserItemData->id,
             "user_id" => $getUserItemData->user_id,
             "is_host" => ($getUserItemData->user_id == $user->id) ? 1 : 0,
-            "profile" => empty($getUserItemData->users->profile) ?  "" : asset('public/storage/profile/' . $getUserItemData->users->profile),
+            "profile" => empty($getUserItemData->users->profile) ?  "" : asset('storage/profile/' . $getUserItemData->users->profile),
             "first_name" => $getUserItemData->users->firstname,
             "quantity" => (!empty($getUserItemData->quantity) || $getUserItemData->quantity != NULL) ? $getUserItemData->quantity : "0",
 
@@ -6117,7 +6117,7 @@ class ApiControllerv2 extends Controller
                                 $userPotluckItem['id'] = $itemcarryUser->id;
                                 $userPotluckItem['user_id'] = $itemcarryUser->user_id;
                                 $userPotluckItem['is_host'] = ($checkEventOwner->user_id == $itemValue->user_id) ? 1 : 0;
-                                $userPotluckItem['profile'] =  empty($itemcarryUser->users->profile) ?  "" : asset('public/storage/profile/' . $itemcarryUser->users->profile);
+                                $userPotluckItem['profile'] =  empty($itemcarryUser->users->profile) ?  "" : asset('storage/profile/' . $itemcarryUser->users->profile);
                                 $userPotluckItem['first_name'] = $itemcarryUser->users->firstname;
                                 $userPotluckItem['quantity'] = (!empty($itemcarryUser->quantity) || $itemcarryUser->quantity != NULL) ? $itemcarryUser->quantity : "0";
                                 $userPotluckItem['last_name'] = $itemcarryUser->users->lastname;
@@ -6244,7 +6244,7 @@ class ApiControllerv2 extends Controller
 
                 if (!empty($images)) {
 
-                    $eventData['event_images'] = asset('public/storage/event_images/' . $images->image);
+                    $eventData['event_images'] = asset('storage/event_images/' . $images->image);
                 }
                 $needRsvpEventList[] = $eventData;
             }
@@ -6500,10 +6500,10 @@ class ApiControllerv2 extends Controller
             $eventDetails['event_images'] = [];
             if (count($eventDetail->event_image) != 0) {
                 foreach ($eventDetail->event_image as $values) {
-                    $eventDetails['event_images'][] = asset('public/storage/event_images/' . $values->image);
+                    $eventDetails['event_images'][] = asset('storage/event_images/' . $values->image);
                 }
             }
-            $eventDetails['user_profile'] = empty($eventDetail->user->profile) ? "" : asset('public/storage/profile/' . $eventDetail->user->profile);
+            $eventDetails['user_profile'] = empty($eventDetail->user->profile) ? "" : asset('storage/profile/' . $eventDetail->user->profile);
             $eventDetails['event_name'] = $eventDetail->event_name;
             $eventDetails['hosted_by'] = $eventDetail->hosted_by;
             $eventDetails['is_host'] = ($eventDetail->user_id == $user->id) ? 1 : 0;
@@ -6552,7 +6552,7 @@ class ApiControllerv2 extends Controller
 
                 $coHostDetail['id'] = $hostValues->user_id;
 
-                $coHostDetail['profile'] = (empty($hostValues->user->profile) || $hostValues->user->profile == NULL) ? "" : asset('public/storage/profile/' . $hostValues->user->profile);
+                $coHostDetail['profile'] = (empty($hostValues->user->profile) || $hostValues->user->profile == NULL) ? "" : asset('storage/profile/' . $hostValues->user->profile);
 
                 $coHostDetail['name'] = $hostValues->user->firstname . ' ' . $hostValues->user->lastname;
 
@@ -6805,10 +6805,10 @@ class ApiControllerv2 extends Controller
 
                 foreach ($eventDetail->event_image as $values) {
 
-                    $eventDetails['event_images'][] = asset('public/storage/event_images/' . $values->image);
+                    $eventDetails['event_images'][] = asset('storage/event_images/' . $values->image);
                 }
             }
-            $eventDetails['user_profile'] = empty($eventDetail->user->profile) ? "" : asset('public/storage/profile/' . $eventDetail->user->profile);
+            $eventDetails['user_profile'] = empty($eventDetail->user->profile) ? "" : asset('storage/profile/' . $eventDetail->user->profile);
             $eventDetails['event_name'] = $eventDetail->event_name;
             $eventDetails['subscription_plan_name'] = $eventDetail->subscription_plan_name;
             $eventDetails['hosted_by'] = $eventDetail->hosted_by;
@@ -6880,7 +6880,7 @@ class ApiControllerv2 extends Controller
 
             $coHostDetail['id'] = $eventDetail->user_id;
 
-            $coHostDetail['profile'] = (empty($eventDetail->user->profile) || $eventDetail->user->profile == NULL) ? "" : asset('public/storage/profile/' . $eventDetail->user->profile);
+            $coHostDetail['profile'] = (empty($eventDetail->user->profile) || $eventDetail->user->profile == NULL) ? "" : asset('storage/profile/' . $eventDetail->user->profile);
 
             $coHostDetail['name'] = $eventDetail->user->firstname . ' ' . $eventDetail->user->lastname;
 
@@ -7222,11 +7222,11 @@ class ApiControllerv2 extends Controller
             $storiesDetaill['id'] =  $eventLoginUserStoriesList->id;
             $storiesDetaill['user_id'] =  $eventLoginUserStoriesList->user->id;
             $storiesDetaill['username'] =  $eventLoginUserStoriesList->user->firstname . ' ' . $eventLoginUserStoriesList->user->lastname;
-            $storiesDetaill['profile'] =  empty($eventLoginUserStoriesList->user->profile) ? "" : asset('public/storage/profile/' . $eventLoginUserStoriesList->user->profile);
+            $storiesDetaill['profile'] =  empty($eventLoginUserStoriesList->user->profile) ? "" : asset('storage/profile/' . $eventLoginUserStoriesList->user->profile);
             $storiesDetaill['story'] = [];
             foreach ($eventLoginUserStoriesList->user_event_story as $storyVal) {
                 $storiesData['id'] = $storyVal->id;
-                $storiesData['storyurl'] = empty($storyVal->story) ? "" : asset('public/storage/event_user_stories/' . $storyVal->story);
+                $storiesData['storyurl'] = empty($storyVal->story) ? "" : asset('storage/event_user_stories/' . $storyVal->story);
                 $storiesData['type'] = $storyVal->type;
                 $storiesData['post_time'] =  $this->setpostTime($storyVal->updated_at);
                 $checkISeen = UserSeenStory::where(['user_id' => $user->id, 'user_event_story_id' => $storyVal->id])->count();
@@ -7273,11 +7273,11 @@ class ApiControllerv2 extends Controller
                 $storiesDetaill['id'] =  $value->id;
                 $storiesDetaill['user_id'] =  $value->user->id;
                 $storiesDetaill['username'] =  $value->user->firstname . ' ' . $value->user->lastname;
-                $storiesDetaill['profile'] =  empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile);
+                $storiesDetaill['profile'] =  empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
                 $storyAlldata = [];
                 foreach ($value->user_event_story as $storyVal) {
                     $storiesData['id'] = $storyVal->id;
-                    $storiesData['storyurl'] = empty($storyVal->story) ? "" : asset('public/storage/event_user_stories/' . $storyVal->story);
+                    $storiesData['storyurl'] = empty($storyVal->story) ? "" : asset('storage/event_user_stories/' . $storyVal->story);
                     $storiesData['type'] = $storyVal->type;
                     $storiesData['post_time'] =  $this->setpostTime($storyVal->created_at);
                     $checkISeen = UserSeenStory::where(['user_id' => $user->id, 'user_event_story_id' => $storyVal->id])->count();
@@ -7427,7 +7427,7 @@ class ApiControllerv2 extends Controller
                     $postsNormalDetail['is_host'] =  ($value->user->id == $user->id) ? 1 : 0;
 
                     $postsNormalDetail['username'] =  $value->user->firstname . ' ' . $value->user->lastname;
-                    $postsNormalDetail['profile'] =  empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile);
+                    $postsNormalDetail['profile'] =  empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
                     $postsNormalDetail['post_message'] = (empty($value->post_message) || $value->post_type == '4') ? "" :  $value->post_message;
                     // $postsNormalDetail['rsvp_status'] = (isset($value->post_type) && $value->post_type == '4' && $value->post_message != '') ? $value->post_message : $checkUserRsvp;
                     // $postsNormalDetail['rsvp_status'] = $checkUserRsvp;
@@ -7450,8 +7450,8 @@ class ApiControllerv2 extends Controller
 
                     $postsNormalDetail['user_profile'] = [
                         'id' => $value->user->id,
-                        'profile' => empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile),
-                        'bg_profile' => empty($value->user->bg_profile) ? "" : asset('public/storage/bg_profile/' . $value->user->bg_profile),
+                        'profile' => empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile),
+                        'bg_profile' => empty($value->user->bg_profile) ? "" : asset('storage/bg_profile/' . $value->user->bg_profile),
                         'gender' => ($value->user->gender != NULL) ? $value->user->gender : "",
                         'username' => $value->user->firstname . ' ' . $value->user->lastname,
                         'location' => ($value->user->city != NULL) ? $value->user->city : "",
@@ -7468,9 +7468,9 @@ class ApiControllerv2 extends Controller
                         foreach ($value->post_image as $imgVal) {
                             $postMedia = [
                                 'id' => $imgVal->id,
-                                'media_url' => asset('public/storage/post_image/' . $imgVal->post_image),
+                                'media_url' => asset('storage/post_image/' . $imgVal->post_image),
                                 'type' => $imgVal->type,
-                                'thumbnail' => (isset($imgVal->thumbnail) && $imgVal->thumbnail != null) ?  asset('public/storage/thumbnails/' . $imgVal->thumbnail) : '',
+                                'thumbnail' => (isset($imgVal->thumbnail) && $imgVal->thumbnail != null) ?  asset('storage/thumbnails/' . $imgVal->thumbnail) : '',
                             ];
                             if ($imgVal->type == 'video' && isset($imgVal->duration) && $imgVal->duration !== "") {
                                 $postMedia['video_duration'] = $imgVal->duration;
@@ -7509,7 +7509,7 @@ class ApiControllerv2 extends Controller
                             $postsNormalDetail['poll_option'][] = $optionData;
                         }
                     }
-                    $postsNormalDetail['post_recording'] = empty($value->post_recording) ? "" : asset('public/storage/event_post_recording/' . $value->post_recording);
+                    $postsNormalDetail['post_recording'] = empty($value->post_recording) ? "" : asset('storage/event_post_recording/' . $value->post_recording);
                     $reactionList = getOnlyReaction($value->id);
                     $postsNormalDetail['reactionList'] = $reactionList;
                     $postsNormalDetail['total_comment'] = $value->event_post_comment_count;
@@ -7575,7 +7575,7 @@ class ApiControllerv2 extends Controller
 
                     $postsNormalDetail['username'] =  $value->user->firstname . ' ' . $value->user->lastname;
 
-                    $postsNormalDetail['profile'] =  empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile);
+                    $postsNormalDetail['profile'] =  empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
 
                     $postsNormalDetail['is_host'] =  ($ischeckEventOwner != null) ? 1 : 0;
                     $postsNormalDetail['post_message'] = (empty($value->post_message) || $value->post_type == '4') ? "" :  $value->post_message;
@@ -7603,8 +7603,8 @@ class ApiControllerv2 extends Controller
 
                     $postsNormalDetail['user_profile'] = [
                         'id' => $value->user->id,
-                        'profile' => empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile),
-                        'bg_profile' => empty($value->user->bg_profile) ? "" : asset('public/storage/bg_profile/' . $value->user->bg_profile),
+                        'profile' => empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile),
+                        'bg_profile' => empty($value->user->bg_profile) ? "" : asset('storage/bg_profile/' . $value->user->bg_profile),
                         'gender' => ($value->user->gender != NULL) ? $value->user->gender : "",
                         'username' => $value->user->firstname . ' ' . $value->user->lastname,
                         'location' => ($value->user->city != NULL) ? $value->user->city : "",
@@ -7624,9 +7624,9 @@ class ApiControllerv2 extends Controller
                         foreach ($value->post_image as $imgVal) {
                             $postMedia = [
                                 'id' => $imgVal->id,
-                                'media_url' => asset('public/storage/post_image/' . $imgVal->post_image),
+                                'media_url' => asset('storage/post_image/' . $imgVal->post_image),
                                 'type' => $imgVal->type,
-                                'thumbnail' => (isset($imgVal->thumbnail) && $imgVal->thumbnail != null) ?  asset('public/storage/thumbnails/' . $imgVal->thumbnail) : '',
+                                'thumbnail' => (isset($imgVal->thumbnail) && $imgVal->thumbnail != null) ?  asset('storage/thumbnails/' . $imgVal->thumbnail) : '',
                             ];
 
                             if ($imgVal->type == 'video' && isset($imgVal->duration) && $imgVal->duration !== "") {
@@ -7675,7 +7675,7 @@ class ApiControllerv2 extends Controller
                         }
                     }
 
-                    $postsNormalDetail['post_recording'] = empty($value->post_recording) ? "" : asset('public/storage/event_post_recording/' . $value->post_recording);
+                    $postsNormalDetail['post_recording'] = empty($value->post_recording) ? "" : asset('storage/event_post_recording/' . $value->post_recording);
                     $reactionList = getOnlyReaction($value->id);
 
                     $postsNormalDetail['reactionList'] = $reactionList;
@@ -7717,7 +7717,7 @@ class ApiControllerv2 extends Controller
 
                     //     $postsNormalDetail['username'] =  $value->user->firstname . ' ' . $value->user->lastname;
                     //     $postsNormalDetail['is_host'] =  ($ischeckEventOwner != null) ? 1 : 0;
-                    //     $postsNormalDetail['profile'] =  empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile);
+                    //     $postsNormalDetail['profile'] =  empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
 
                     //     $postsNormalDetail['post_message'] = empty($value->post_message) ? "" :  $value->post_message;
 
@@ -7737,7 +7737,7 @@ class ApiControllerv2 extends Controller
                     //     if ($value->post_type == '1' && !empty($value->post_image)) {
                     //         foreach ($value->post_image as $imgVal) {
                     //             $postMedia = [
-                    //                 'media_url' => asset('public/storage/post_image/' . $imgVal->post_image),
+                    //                 'media_url' => asset('storage/post_image/' . $imgVal->post_image),
                     //                 'type' => $imgVal->type,
                     //             ];
 
@@ -7787,7 +7787,7 @@ class ApiControllerv2 extends Controller
                     //             $postsNormalDetail['poll_option'][] = $optionData;
                     //         }
                     //     }
-                    //     $postsNormalDetail['post_recording'] = empty($value->post_recording) ? "" : asset('public/storage/event_post_recording/' . $value->post_recording);
+                    //     $postsNormalDetail['post_recording'] = empty($value->post_recording) ? "" : asset('storage/event_post_recording/' . $value->post_recording);
                     //     $reactionList = getOnlyReaction($value->id);
 
                     //     $postsNormalDetail['reactionList'] = $reactionList;
@@ -7821,7 +7821,7 @@ class ApiControllerv2 extends Controller
 
                     //     $postsNormalDetail['username'] =  $value->user->firstname . ' ' . $value->user->lastname;
                     //     $postsNormalDetail['is_host'] =  ($ischeckEventOwner != null) ? 1 : 0;
-                    //     $postsNormalDetail['profile'] =  empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile);
+                    //     $postsNormalDetail['profile'] =  empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
 
                     //     $postsNormalDetail['post_message'] = empty($value->post_message) ? "" :  $value->post_message;
 
@@ -7840,7 +7840,7 @@ class ApiControllerv2 extends Controller
                     //     if ($value->post_type == '1' && !empty($value->post_image)) {
                     //         foreach ($value->post_image as $imgVal) {
                     //             $postMedia = [
-                    //                 'media_url' => asset('public/storage/post_image/' . $imgVal->post_image),
+                    //                 'media_url' => asset('storage/post_image/' . $imgVal->post_image),
                     //                 'type' => $imgVal->type,
                     //             ];
 
@@ -7891,7 +7891,7 @@ class ApiControllerv2 extends Controller
                     //         }
                     //     }
 
-                    //     $postsNormalDetail['post_recording'] = empty($value->post_recording) ? "" : asset('public/storage/event_post_recording/' . $value->post_recording);
+                    //     $postsNormalDetail['post_recording'] = empty($value->post_recording) ? "" : asset('storage/event_post_recording/' . $value->post_recording);
 
                     //     $reactionList = getOnlyReaction($value->id);
 
@@ -7928,7 +7928,7 @@ class ApiControllerv2 extends Controller
 
                     //     $postsNormalDetail['username'] =  $value->user->firstname . ' ' . $value->user->lastname;
                     //     $postsNormalDetail['is_host'] =  ($ischeckEventOwner != null) ? 1 : 0;
-                    //     $postsNormalDetail['profile'] =  empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile);
+                    //     $postsNormalDetail['profile'] =  empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
 
                     //     $postsNormalDetail['post_message'] = empty($value->post_message) ? "" :  $value->post_message;
 
@@ -7948,7 +7948,7 @@ class ApiControllerv2 extends Controller
                     //     if ($value->post_type == '1' && !empty($value->post_image)) {
                     //         foreach ($value->post_image as $imgVal) {
                     //             $postMedia = [
-                    //                 'media_url' => asset('public/storage/post_image/' . $imgVal->post_image),
+                    //                 'media_url' => asset('storage/post_image/' . $imgVal->post_image),
                     //                 'type' => $imgVal->type,
                     //             ];
 
@@ -8000,7 +8000,7 @@ class ApiControllerv2 extends Controller
                     //         }
                     //     }
 
-                    //     $postsNormalDetail['post_recording'] = empty($value->post_recording) ? "" : asset('public/storage/event_post_recording/' . $value->post_recording);
+                    //     $postsNormalDetail['post_recording'] = empty($value->post_recording) ? "" : asset('storage/event_post_recording/' . $value->post_recording);
 
                     //     $reactionList = getOnlyReaction($value->id);
 
@@ -8082,7 +8082,7 @@ class ApiControllerv2 extends Controller
 
             $postsDetail['username'] =  $eventDetails->user->firstname . ' ' . $eventDetails->user->lastname;
 
-            $postsDetail['profile'] =  empty($eventDetails->user->profile) ? "" : asset('public/storage/profile/' . $eventDetails->user->profile);
+            $postsDetail['profile'] =  empty($eventDetails->user->profile) ? "" : asset('storage/profile/' . $eventDetails->user->profile);
 
             $postsDetail['post_message'] =  empty($eventDetails->post_message) ? "" :  $eventDetails->post_message;
 
@@ -8095,10 +8095,10 @@ class ApiControllerv2 extends Controller
                 foreach ($postImages as $imgVal) {
 
                     $postMedia['id'] =  $imgVal->id;
-                    $postMedia['media_url'] = asset('public/storage/post_image/' . $imgVal->post_image);
+                    $postMedia['media_url'] = asset('storage/post_image/' . $imgVal->post_image);
 
                     $postMedia['type'] = $imgVal->type;
-                    $postMedia['thumbnail'] = (isset($imgVal->thumbnail) && $imgVal->thumbnail != null) ?  asset('public/storage/thumbnails/' . $imgVal->thumbnail) : '';
+                    $postMedia['thumbnail'] = (isset($imgVal->thumbnail) && $imgVal->thumbnail != null) ?  asset('storage/thumbnails/' . $imgVal->thumbnail) : '';
 
                     if (isset($imgVal->type) && $imgVal->type == 'video') {
                         if (isset($imgVal->duration) && $imgVal->duration !== "") {
@@ -8152,7 +8152,7 @@ class ApiControllerv2 extends Controller
             }
 
             if ($eventDetails->post_type == '3') { // record
-                $postsDetail['post_recording'] = empty($eventDetails->post_recording) ? "" : asset('public/storage/event_post_recording/' . $eventDetails->post_recording);
+                $postsDetail['post_recording'] = empty($eventDetails->post_recording) ? "" : asset('storage/event_post_recording/' . $eventDetails->post_recording);
             }
 
 
@@ -8180,7 +8180,7 @@ class ApiControllerv2 extends Controller
                 $reactionInfo['username'] = $reactionVal->user->firstname . ' ' . $reactionVal->user->lastname;
                 $reactionInfo['location'] = ($reactionVal->user->city != NULL) ? $reactionVal->user->city : "";
 
-                $reactionInfo['profile'] = (!empty($reactionVal->user->profile)) ? asset('public/storage/profile/' . $reactionVal->user->profile) : "";
+                $reactionInfo['profile'] = (!empty($reactionVal->user->profile)) ? asset('storage/profile/' . $reactionVal->user->profile) : "";
 
                 $postReaction[] = $reactionInfo;
             }
@@ -8219,7 +8219,7 @@ class ApiControllerv2 extends Controller
 
                 $commentInfo['username'] = $commentVal->user->firstname . ' ' . $commentVal->user->lastname;
 
-                $commentInfo['profile'] = (!empty($commentVal->user->profile)) ? asset('public/storage/profile/' . $commentVal->user->profile) : "";
+                $commentInfo['profile'] = (!empty($commentVal->user->profile)) ? asset('storage/profile/' . $commentVal->user->profile) : "";
                 $commentInfo['location'] = ($commentVal->user->city != NULL) ? $commentVal->user->city : "";
                 $commentInfo['comment_total_likes'] = $commentVal->post_comment_reaction_count;
 
@@ -8246,7 +8246,7 @@ class ApiControllerv2 extends Controller
 
                     $replyCommentInfo['username'] = $reply->user->firstname . ' ' . $reply->user->lastname;
 
-                    $replyCommentInfo['profile'] = (!empty($reply->user->profile)) ? asset('public/storage/profile/' . $reply->user->profile) : "";
+                    $replyCommentInfo['profile'] = (!empty($reply->user->profile)) ? asset('storage/profile/' . $reply->user->profile) : "";
 
                     $replyCommentInfo['location'] = ($reply->user->city != NULL) ? $reply->user->city : "";
                     $replyCommentInfo['comment_total_likes'] = $reply->post_comment_reaction_count;
@@ -8278,7 +8278,7 @@ class ApiControllerv2 extends Controller
 
                             $commentChildReply['username'] = $childReplyVal->user->firstname . ' ' . $childReplyVal->user->lastname;
 
-                            $commentChildReply['profile'] = (!empty($childReplyVal->user->profile)) ? asset('public/storage/profile/' . $childReplyVal->user->profile) : "";
+                            $commentChildReply['profile'] = (!empty($childReplyVal->user->profile)) ? asset('storage/profile/' . $childReplyVal->user->profile) : "";
                             $commentChildReply['location'] = (!empty($childReplyVal->user->city)) ? $childReplyVal->user->city : "";
 
                             $commentChildReply['comment_total_likes'] = $childReplyVal->post_comment_reaction_count;
@@ -8309,7 +8309,7 @@ class ApiControllerv2 extends Controller
 
                                     $commentChildInReply['username'] = $childInReplyVal->user->firstname . ' ' . $childInReplyVal->user->lastname;
 
-                                    $commentChildInReply['profile'] = (!empty($childInReplyVal->user->profile)) ? asset('public/storage/profile/' . $childInReplyVal->user->profile) : "";
+                                    $commentChildInReply['profile'] = (!empty($childInReplyVal->user->profile)) ? asset('storage/profile/' . $childInReplyVal->user->profile) : "";
                                     $commentChildInReply['location'] = (!empty($childInReplyVal->user->city)) ? $childInReplyVal->user->city : "";
 
                                     $commentChildInReply['comment_total_likes'] = $childInReplyVal->post_comment_reaction_count;
@@ -8441,12 +8441,12 @@ class ApiControllerv2 extends Controller
 
                         $storiesDetail['username'] =  $getStoryData->user->firstname . ' ' . $getStoryData->user->lastname;
 
-                        $storiesDetail['profile'] =  empty($getStoryData->user->profile) ? "" : asset('public/storage/profile/' . $getStoryData->user->profile);
+                        $storiesDetail['profile'] =  empty($getStoryData->user->profile) ? "" : asset('storage/profile/' . $getStoryData->user->profile);
 
                         $storiesDetail['story'] = [];
                         foreach ($getStoryData->user_event_story as $storyVal) {
                             $storiesData['id'] = $storyVal->id;
-                            $storiesData['storyurl'] = empty($storyVal->story) ? "" : asset('public/storage/event_user_stories/' . $storyVal->story);
+                            $storiesData['storyurl'] = empty($storyVal->story) ? "" : asset('storage/event_user_stories/' . $storyVal->story);
                             $storiesData['type'] = $storyVal->type;
 
                             if ($storyVal->type == 'video') {
@@ -8608,7 +8608,7 @@ class ApiControllerv2 extends Controller
                     $commentReply['parent_comment_id'] = $replyVal->parent_comment_id;
                     $commentReply['user_id'] = $replyVal->user_id;
                     $commentReply['username'] = $replyVal->user->firstname . ' ' . $replyVal->user->lastname;
-                    $commentReply['profile'] = (!empty($replyVal->user->profile)) ? asset('public/storage/profile/' . $replyVal->user->profile) : "";
+                    $commentReply['profile'] = (!empty($replyVal->user->profile)) ? asset('storage/profile/' . $replyVal->user->profile) : "";
                     $commentReply['posttime'] = setpostTime($replyVal->created_at);
                     $commentReply['reply_comment_total_likes'] = $replyVal->post_comment_reaction_count;
                     $commentReply['is_like'] = checkUserIsLike($replyVal->id, $user->id);
@@ -9102,7 +9102,7 @@ class ApiControllerv2 extends Controller
                 $reactionInfo['username'] = $reactionVal->user->firstname . ' ' . $reactionVal->user->lastname;
                 $reactionInfo['location'] = ($reactionVal->user->city != NULL) ? $reactionVal->user->city : "";
 
-                $reactionInfo['profile'] = (!empty($reactionVal->user->profile)) ? asset('public/storage/profile/' . $reactionVal->user->profile) : "";
+                $reactionInfo['profile'] = (!empty($reactionVal->user->profile)) ? asset('storage/profile/' . $reactionVal->user->profile) : "";
 
                 $postReaction[] = $reactionInfo;
             }
@@ -9172,7 +9172,7 @@ class ApiControllerv2 extends Controller
                 $reactionInfo['username'] = $reactionVal->user->firstname . ' ' . $reactionVal->user->lastname;
                 $reactionInfo['location'] = ($reactionVal->user->city != NULL) ? $reactionVal->user->city : "";
 
-                $reactionInfo['profile'] = (!empty($reactionVal->user->profile)) ? asset('public/storage/profile/' . $reactionVal->user->profile) : "";
+                $reactionInfo['profile'] = (!empty($reactionVal->user->profile)) ? asset('storage/profile/' . $reactionVal->user->profile) : "";
 
                 $postReaction[] = $reactionInfo;
             }
@@ -9268,13 +9268,13 @@ class ApiControllerv2 extends Controller
                 'event_post_id' => $letestComment->event_post_id,
 
                 'comment' => $letestComment->comment_text,
-                'media' => (!empty($letestComment->media) && $letestComment->media != NULL) ? asset('public/storage/comment_media/' . $letestComment->media) : "",
+                'media' => (!empty($letestComment->media) && $letestComment->media != NULL) ? asset('storage/comment_media/' . $letestComment->media) : "",
 
                 'user_id' => $letestComment->user_id,
 
                 'username' => $letestComment->user->firstname . ' ' . $letestComment->user->lastname,
 
-                'profile' => (!empty($letestComment->user->profile)) ? asset('public/storage/profile/' . $letestComment->user->profile) : "",
+                'profile' => (!empty($letestComment->user->profile)) ? asset('storage/profile/' . $letestComment->user->profile) : "",
 
                 'comment_total_likes' => $letestComment->post_comment_reaction_count,
 
@@ -9300,7 +9300,7 @@ class ApiControllerv2 extends Controller
 
             //     $commentInfo['username'] = $commentVal->user->firstname . ' ' . $commentVal->user->lastname;
 
-            //     $commentInfo['profile'] = (!empty($commentVal->user->profile)) ? asset('public/storage/profile/' . $commentVal->user->profile) : "";
+            //     $commentInfo['profile'] = (!empty($commentVal->user->profile)) ? asset('storage/profile/' . $commentVal->user->profile) : "";
 
             //     $commentInfo['comment_total_likes'] = $commentVal->post_comment_reaction_count;
 
@@ -9325,7 +9325,7 @@ class ApiControllerv2 extends Controller
 
             //         $replyCommentInfo['username'] = $reply->user->firstname . ' ' . $reply->user->lastname;
 
-            //         $replyCommentInfo['profile'] = (!empty($reply->user->profile)) ? asset('public/storage/profile/' . $reply->user->profile) : "";
+            //         $replyCommentInfo['profile'] = (!empty($reply->user->profile)) ? asset('storage/profile/' . $reply->user->profile) : "";
 
             //         $replyCommentInfo['location'] = ($reply->user->city != NULL) ? $reply->user->city : "";
             //         $replyCommentInfo['comment_total_likes'] = $reply->post_comment_reaction_count;
@@ -9422,7 +9422,7 @@ class ApiControllerv2 extends Controller
             $commentInfo['comment'] = $replyList->comment_text;
             $commentInfo['user_id'] = $replyList->user_id;
             $commentInfo['username'] = $replyList->user->firstname . ' ' . $replyList->user->lastname;
-            $commentInfo['profile'] = (!empty($replyList->user->profile)) ? asset('public/storage/profile/' . $replyList->user->profile) : "";
+            $commentInfo['profile'] = (!empty($replyList->user->profile)) ? asset('storage/profile/' . $replyList->user->profile) : "";
             $commentInfo['comment_total_likes'] = $replyList->post_comment_reaction_count;
             $commentInfo['is_like'] = checkUserIsLike($replyList->id, $user->id);
             $commentInfo['created_at'] = $replyList->created_at;
@@ -9438,7 +9438,7 @@ class ApiControllerv2 extends Controller
                     $commentReply['comment'] = $replyVal->comment_text;
                     $commentReply['user_id'] = $replyVal->user_id;
                     $commentReply['username'] = $replyVal->user->firstname . ' ' . $replyVal->user->lastname;
-                    $commentReply['profile'] = (!empty($replyVal->user->profile)) ? asset('public/storage/profile/' . $replyVal->user->profile) : "";
+                    $commentReply['profile'] = (!empty($replyVal->user->profile)) ? asset('storage/profile/' . $replyVal->user->profile) : "";
                     $commentReply['location'] = (!empty($replyVal->user->city)) ? $replyVal->user->city : "";
                     $commentReply['comment_total_likes'] = $replyVal->post_comment_reaction_count;
                     $commentReply['main_comment_id'] = $replyVal->main_parent_comment_id;
@@ -9457,7 +9457,7 @@ class ApiControllerv2 extends Controller
                             $commentChildReply['comment'] = $childReplyVal->comment_text;
                             $commentChildReply['user_id'] = $childReplyVal->user_id;
                             $commentChildReply['username'] = $childReplyVal->user->firstname . ' ' . $childReplyVal->user->lastname;
-                            $commentChildReply['profile'] = (!empty($childReplyVal->user->profile)) ? asset('public/storage/profile/' . $childReplyVal->user->profile) : "";
+                            $commentChildReply['profile'] = (!empty($childReplyVal->user->profile)) ? asset('storage/profile/' . $childReplyVal->user->profile) : "";
                             $commentChildReply['location'] = (!empty($childReplyVal->user->city)) ? $childReplyVal->user->city : "";
                             $commentChildReply['comment_total_likes'] = $childReplyVal->post_comment_reaction_count;
                             $commentReply['main_comment_id'] = $childReplyVal->main_parent_comment_id;
@@ -9476,7 +9476,7 @@ class ApiControllerv2 extends Controller
                                     $commentChildInReply['comment'] = $childInReplyVal->comment_text;
                                     $commentChildInReply['user_id'] = $childInReplyVal->user_id;
                                     $commentChildInReply['username'] = $childInReplyVal->user->firstname . ' ' . $childInReplyVal->user->lastname;
-                                    $commentChildInReply['profile'] = (!empty($childInReplyVal->user->profile)) ? asset('public/storage/profile/' . $childInReplyVal->user->profile) : "";
+                                    $commentChildInReply['profile'] = (!empty($childInReplyVal->user->profile)) ? asset('storage/profile/' . $childInReplyVal->user->profile) : "";
                                     $commentChildInReply['location'] = (!empty($childInReplyVal->user->city)) ? $childInReplyVal->user->city : "";
                                     $commentChildInReply['comment_total_likes'] = $childInReplyVal->post_comment_reaction_count;
                                     $commentReply['main_comment_id'] = $childInReplyVal->main_parent_comment_id;
@@ -9710,7 +9710,7 @@ class ApiControllerv2 extends Controller
 
             $postsPollDetail['username'] =  $polls->event_post->user->firstname . ' ' . $polls->event_post->user->lastname;
 
-            $postsPollDetail['profile'] =  empty($polls->event_post->user->profile) ? "" : asset('public/storage/profile/' . $polls->event_post->user->profile);
+            $postsPollDetail['profile'] =  empty($polls->event_post->user->profile) ? "" : asset('storage/profile/' . $polls->event_post->user->profile);
 
             $postsPollDetail['post_message'] =  empty($polls->event_post->post_message) ? "" :  $polls->event_post->post_message;
             $postsPollDetail['location'] =  empty($polls->event_post->user->city) ? "" :  $polls->event_post->user->city;
@@ -9789,7 +9789,7 @@ class ApiControllerv2 extends Controller
 
                 $reactionInfo['user_id'] = $reactionVal->user_id;
 
-                $reactionInfo['profile'] = (!empty($reactionVal->user->profile)) ? asset('public/storage/profile/' . $reactionVal->user->profile) : "";
+                $reactionInfo['profile'] = (!empty($reactionVal->user->profile)) ? asset('storage/profile/' . $reactionVal->user->profile) : "";
 
                 $postReaction[] = $reactionInfo;
             }
@@ -9826,7 +9826,7 @@ class ApiControllerv2 extends Controller
 
                 $commentInfo['username'] = $commentVal->user->firstname . ' ' . $commentVal->user->lastname;
 
-                $commentInfo['profile'] = (!empty($commentVal->user->profile)) ? asset('public/storage/profile/' . $commentVal->user->profile) : "";
+                $commentInfo['profile'] = (!empty($commentVal->user->profile)) ? asset('storage/profile/' . $commentVal->user->profile) : "";
 
                 $commentInfo['comment_total_likes'] = $commentVal->post_comment_reaction_count;
 
@@ -9984,7 +9984,7 @@ class ApiControllerv2 extends Controller
                     $rsvpUserStatus['username'] = $value->user->firstname . ' ' . $value->user->lastname;
 
 
-                    $rsvpUserStatus['profile'] = (!empty($value->user->profile) || $value->user->profile != NULL) ? asset('public/storage/profile/' . $value->user->profile) : "";
+                    $rsvpUserStatus['profile'] = (!empty($value->user->profile) || $value->user->profile != NULL) ? asset('storage/profile/' . $value->user->profile) : "";
 
 
                     $rsvpUserStatus['email'] = ($value->user->email != '') ? $value->user->email : "";
@@ -10012,8 +10012,8 @@ class ApiControllerv2 extends Controller
                     $comments =  EventPostComment::where('user_id', $value->user->id)->count();
                     $rsvpUserStatus['user_profile'] = [
                         'id' => $value->user->id,
-                        'profile' => empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile),
-                        'bg_profile' => empty($value->user->bg_profile) ? "" : asset('public/storage/bg_profile/' . $value->user->bg_profile),
+                        'profile' => empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile),
+                        'bg_profile' => empty($value->user->bg_profile) ? "" : asset('storage/bg_profile/' . $value->user->bg_profile),
                         'app_user' =>  $value->user->app_user,
                         'gender' => ($value->user->gender != NULL) ? $value->user->gender : "",
                         'first_name' => $value->user->firstname,
@@ -10156,7 +10156,7 @@ class ApiControllerv2 extends Controller
                 $userDetail['first_name'] = (!empty($value->user->firstname) || $value->user->firstname != NULL) ? $value->user->firstname : "";
                 $userDetail['last_name'] = (!empty($value->user->lastname) || $value->user->lastname != NULL) ? $value->user->lastname : "";
 
-                $userDetail['profile'] = (!empty($value->user->profile) || $value->user->profile != NULL) ? asset('public/storage/profile/' . $value->user->profile) : "";
+                $userDetail['profile'] = (!empty($value->user->profile) || $value->user->profile != NULL) ? asset('storage/profile/' . $value->user->profile) : "";
 
                 $userDetail['email'] = (!empty($value->user->email)) ? $value->user->email : "";
 
@@ -10437,7 +10437,7 @@ class ApiControllerv2 extends Controller
 
 
 
-                $postPhotoDetail['profile'] = (!empty($value->user->profile) || $value->user->profile != NULL) ? asset('public/storage/profile/' . $value->user->profile) : "";
+                $postPhotoDetail['profile'] = (!empty($value->user->profile) || $value->user->profile != NULL) ? asset('storage/profile/' . $value->user->profile) : "";
 
                 $selfReaction = EventPostPhotoReaction::where(['user_id' => $user->id, 'event_post_photo_id' => $value->id])->first();
 
@@ -10468,7 +10468,7 @@ class ApiControllerv2 extends Controller
 
                         $photoVideoDetail['event_post_photo_id'] = $val->event_post_photo_id;
 
-                        $photoVideoDetail['post_media'] = (!empty($val->post_media) || $val->post_media != NULL) ? asset('public/storage/post_photo/' . $val->post_media) : "";
+                        $photoVideoDetail['post_media'] = (!empty($val->post_media) || $val->post_media != NULL) ? asset('storage/post_photo/' . $val->post_media) : "";
 
                         $photoVideoDetail['type'] = $val->type;
 
@@ -10618,7 +10618,7 @@ class ApiControllerv2 extends Controller
 
 
 
-                $postPhotoDetail['profile'] = (!empty($value->user->profile) || $value->user->profile != NULL) ? asset('public/storage/profile/' . $value->user->profile) : "";
+                $postPhotoDetail['profile'] = (!empty($value->user->profile) || $value->user->profile != NULL) ? asset('storage/profile/' . $value->user->profile) : "";
 
                 $selfReaction = EventPostReaction::where(['user_id' => $user->id, 'event_post_id' => $value->id])->first();
 
@@ -10650,9 +10650,9 @@ class ApiControllerv2 extends Controller
 
                         $photoVideoDetail['event_post_id'] = $val->event_post_id;
 
-                        $photoVideoDetail['post_media'] = (!empty($val->post_image) || $val->post_media != NULL) ? asset('public/storage/post_image/' . $val->post_image) : "";
+                        $photoVideoDetail['post_media'] = (!empty($val->post_image) || $val->post_media != NULL) ? asset('storage/post_image/' . $val->post_image) : "";
 
-                        $photoVideoDetail['thumbnail'] = (!empty($val->thumbnail) || $val->thumbnail != NULL) ? asset('public/storage/thumbnails/' . $val->thumbnail) : "";
+                        $photoVideoDetail['thumbnail'] = (!empty($val->thumbnail) || $val->thumbnail != NULL) ? asset('storage/thumbnails/' . $val->thumbnail) : "";
 
                         $photoVideoDetail['type'] = $val->type;
 
@@ -10846,7 +10846,7 @@ class ApiControllerv2 extends Controller
 
 
 
-            $postPhotoDetail['profile'] = (!empty($getPhotoList->user->profile) || $getPhotoList->user->profile != NULL) ? asset('public/storage/profile/' . $getPhotoList->user->profile) : "";
+            $postPhotoDetail['profile'] = (!empty($getPhotoList->user->profile) || $getPhotoList->user->profile != NULL) ? asset('storage/profile/' . $getPhotoList->user->profile) : "";
 
 
             $postPhotoDetail['post_message'] = (!empty($getPhotoList->post_message) || $getPhotoList->post_message != NULL) ? $getPhotoList->post_message : "";
@@ -10875,7 +10875,7 @@ class ApiControllerv2 extends Controller
 
                 foreach ($photData as $val) {
 
-                    $photoVideoDetail['media_url'] = (!empty($val->post_media) || $val->post_media != NULL) ? asset('public/storage/post_photo/' . $val->post_media) : "";
+                    $photoVideoDetail['media_url'] = (!empty($val->post_media) || $val->post_media != NULL) ? asset('storage/post_photo/' . $val->post_media) : "";
 
                     $photoVideoDetail['type'] = $val->type;
 
@@ -10908,7 +10908,7 @@ class ApiControllerv2 extends Controller
                 $reactionInfo['username'] = $val->user->firstname . ' ' . $val->user->lastname;
                 $reactionInfo['location'] = ($val->user->city != NULL) ? $val->user->city : "";
 
-                $reactionInfo['profile'] = (!empty($val->user->profile)) ? asset('public/storage/profile/' . $val->user->profile) : "";
+                $reactionInfo['profile'] = (!empty($val->user->profile)) ? asset('storage/profile/' . $val->user->profile) : "";
 
                 $postPhotoDetail['post_reaction'][] = $reactionInfo;
             }
@@ -10939,7 +10939,7 @@ class ApiControllerv2 extends Controller
 
                 $commentInfo['username'] = $commentVal->user->firstname . ' ' . $commentVal->user->lastname;
 
-                $commentInfo['profile'] = (!empty($commentVal->user->profile)) ? asset('public/storage/profile/' . $commentVal->user->profile) : "";
+                $commentInfo['profile'] = (!empty($commentVal->user->profile)) ? asset('storage/profile/' . $commentVal->user->profile) : "";
                 $commentInfo['location'] = ($commentVal->user->city != NULL) ? $commentVal->user->city : "";
                 $commentInfo['comment_total_likes'] = $commentVal->post_comment_reaction_count;
 
@@ -10964,7 +10964,7 @@ class ApiControllerv2 extends Controller
 
                     $replyCommentInfo['username'] = $reply->user->firstname . ' ' . $reply->user->lastname;
 
-                    $replyCommentInfo['profile'] = (!empty($reply->user->profile)) ? asset('public/storage/profile/' . $reply->user->profile) : "";
+                    $replyCommentInfo['profile'] = (!empty($reply->user->profile)) ? asset('storage/profile/' . $reply->user->profile) : "";
 
                     $replyCommentInfo['location'] = ($reply->user->city != NULL) ? $reply->user->city : "";
                     $replyCommentInfo['comment_total_likes'] = $reply->post_photo_comment_reaction_count;
@@ -10995,7 +10995,7 @@ class ApiControllerv2 extends Controller
 
                             $commentChildReply['username'] = $childReplyVal->user->firstname . ' ' . $childReplyVal->user->lastname;
 
-                            $commentChildReply['profile'] = (!empty($childReplyVal->user->profile)) ? asset('public/storage/profile/' . $childReplyVal->user->profile) : "";
+                            $commentChildReply['profile'] = (!empty($childReplyVal->user->profile)) ? asset('storage/profile/' . $childReplyVal->user->profile) : "";
                             $commentChildReply['location'] = (!empty($childReplyVal->user->city)) ? $childReplyVal->user->city : "";
 
                             $commentChildReply['comment_total_likes'] = $childReplyVal->post_photo_comment_reaction_count;
@@ -11026,7 +11026,7 @@ class ApiControllerv2 extends Controller
 
                                     $commentChildInReply['username'] = $childInReplyVal->user->firstname . ' ' . $childInReplyVal->user->lastname;
 
-                                    $commentChildInReply['profile'] = (!empty($childInReplyVal->user->profile)) ? asset('public/storage/profile/' . $childInReplyVal->user->profile) : "";
+                                    $commentChildInReply['profile'] = (!empty($childInReplyVal->user->profile)) ? asset('storage/profile/' . $childInReplyVal->user->profile) : "";
                                     $commentChildInReply['location'] = (!empty($childInReplyVal->user->city)) ? $childInReplyVal->user->city : "";
 
                                     $commentChildInReply['comment_total_likes'] = $childInReplyVal->post_photo_comment_reaction_count;
@@ -11152,7 +11152,7 @@ class ApiControllerv2 extends Controller
 
                     $commentReply['username'] = $replyVal->user->firstname . ' ' . $replyVal->user->lastname;
 
-                    $commentReply['profile'] = (!empty($replyVal->user->profile)) ? asset('public/storage/profile/' . $replyVal->user->profile) : "";
+                    $commentReply['profile'] = (!empty($replyVal->user->profile)) ? asset('storage/profile/' . $replyVal->user->profile) : "";
 
                     $commentReply['reply_comment_total_likes'] = $replyVal->post_photo_comment_reaction_count;
 
@@ -11280,7 +11280,7 @@ class ApiControllerv2 extends Controller
                 $notificationDetail['notification_id'] = $values->id;
                 $notificationDetail['notification_type'] = $values->notification_type;
                 $notificationDetail['user_id'] = $values->sender_id;
-                $notificationDetail['profile'] = (!empty($values->sender_user->profile) || $values->sender_user->profile != null) ? asset('public/storage/profile/' . $values->sender_user->profile) : "";
+                $notificationDetail['profile'] = (!empty($values->sender_user->profile) || $values->sender_user->profile != null) ? asset('storage/profile/' . $values->sender_user->profile) : "";
                 $notificationDetail['email'] = $values->sender_user->email;
                 $notificationDetail['first_name'] = $values->sender_user->firstname;
                 $notificationDetail['last_name'] = ($values->sender_user->lastname != null) ? $values->sender_user->lastname : "";
@@ -11303,7 +11303,7 @@ class ApiControllerv2 extends Controller
                 }
 
 
-                $notificationDetail['video'] = ($postCommentDetail != null && $postCommentDetail->video != null) ? asset('public/storage/comment_video' . $postCommentDetail->video) : "";
+                $notificationDetail['video'] = ($postCommentDetail != null && $postCommentDetail->video != null) ? asset('storage/comment_video' . $postCommentDetail->video) : "";
                 $checkIsSefRect = EventPostCommentReaction::where(['user_id' => $values->user_id, 'event_post_comment_id' => $values->comment_id])->first();
                 $notificationDetail['is_self_reaction'] = ($checkIsSefRect != null) ? 1 : 0;
                 $notificationDetail['message_to_host'] = "";
@@ -11348,11 +11348,11 @@ class ApiControllerv2 extends Controller
 
                     $notificationDetail['message_to_host'] = ($values->rsvp_message != null && $values->rsvp_message != "") ? $values->rsvp_message : "";
                     $notificationDetail['rsvp_attempt'] = $values->rsvp_attempt;
-                    $notificationDetail['video'] = ($values->rsvp_video != null && $values->rsvp_video != null) ? asset('public/storage/rsvp_video/' . $values->rsvp_video) : "";
+                    $notificationDetail['video'] = ($values->rsvp_video != null && $values->rsvp_video != null) ? asset('storage/rsvp_video/' . $values->rsvp_video) : "";
                 }
                 if (isset($values->post->post_type) && $values->post->post_type == '1') {
                     if (isset($values->post->post_image[0]->type) && $values->post->post_image[0]->type == 'video') {
-                        $notificationDetail['video'] = asset('public/storage/post_image/' . $values->post->post_image[0]->post_image);
+                        $notificationDetail['video'] = asset('storage/post_image/' . $values->post->post_image[0]->post_image);
                         $notificationDetail['media_type'] = $values->post->post_image[0]->type;
                     }
                 }
@@ -11379,7 +11379,7 @@ class ApiControllerv2 extends Controller
 
                 if (isset($values->post->post_type) && $values->post->post_type == '1' && isset($values->post->post_image[0]->type)) {
 
-                    $notificationDetail['post_image'] = asset('public/storage/post_image/' . $values->post->post_image[0]->post_image);
+                    $notificationDetail['post_image'] = asset('storage/post_image/' . $values->post->post_image[0]->post_image);
                     if (isset($values->post->post_image[0]->type) &&  $values->post->post_image[0]->type == 'image') {
 
                         $notificationDetail['media_type'] = 'photo';
@@ -11430,8 +11430,8 @@ class ApiControllerv2 extends Controller
                 $comments =  EventPostComment::where('user_id', $values->sender_user->id)->count();
                 $notificationDetail['user_profile'] = [
                     'id' => $values->sender_user->id,
-                    'profile' => empty($values->sender_user->profile) ? "" : asset('public/storage/profile/' . $values->sender_user->profile),
-                    'bg_profile' => empty($values->sender_user->bg_profile) ? "" : asset('public/storage/bg_profile/' . $values->sender_user->bg_profile),
+                    'profile' => empty($values->sender_user->profile) ? "" : asset('storage/profile/' . $values->sender_user->profile),
+                    'bg_profile' => empty($values->sender_user->bg_profile) ? "" : asset('storage/bg_profile/' . $values->sender_user->bg_profile),
                     'gender' => ($values->sender_user->gender != NULL) ? $values->sender_user->gender : "",
                     'username' => $values->sender_user->firstname . ' ' . $values->sender_user->lastname,
                     'location' => ($values->sender_user->city != NULL) ? $values->sender_user->city : "",
@@ -11635,7 +11635,7 @@ class ApiControllerv2 extends Controller
         $eventDetail['event_name'] = $getEventData->event_name;
         $eventDetail['is_event_owner'] = ($getEventData->user->id == $user->id) ? 1 : 0;
         $eventDetail['user_id'] = $getEventData->user->id;
-        $eventDetail['host_profile'] = empty($getEventData->user->profile) ? "" : asset('public/storage/profile/' . $getEventData->user->profile);
+        $eventDetail['host_profile'] = empty($getEventData->user->profile) ? "" : asset('storage/profile/' . $getEventData->user->profile);
         $eventDetail['message_to_guests'] = $getEventData->message_to_guests;
         $eventDetail['event_wall'] = $getEventData->event_settings->event_wall;
         $eventDetail["guest_list_visible_to_guests"] = $getEventData->event_settings->guest_list_visible_to_guests;
@@ -11653,7 +11653,7 @@ class ApiControllerv2 extends Controller
 
         $images = EventImage::where('event_id', $getEventData->id)->first();
 
-        $eventDetail['event_images'] = ($images != null) ? asset('public/storage/event_images/' . $images->image) : "";
+        $eventDetail['event_images'] = ($images != null) ? asset('storage/event_images/' . $images->image) : "";
 
         $eventDetail['event_date'] = $getEventData->start_date;
 
@@ -11788,8 +11788,8 @@ class ApiControllerv2 extends Controller
 
         $eventDetail['user_profile'] = [
             'id' => $getEventData->user->id,
-            'profile' => empty($getEventData->user->profile) ? "" : asset('public/storage/profile/' . $getEventData->user->profile),
-            'bg_profile' => empty($getEventData->user->bg_profile) ? "" : asset('public/storage/bg_profile/' . $getEventData->user->bg_profile),
+            'profile' => empty($getEventData->user->profile) ? "" : asset('storage/profile/' . $getEventData->user->profile),
+            'bg_profile' => empty($getEventData->user->bg_profile) ? "" : asset('storage/bg_profile/' . $getEventData->user->bg_profile),
             'gender' => ($getEventData->user->gender != NULL) ? $getEventData->user->gender : "",
             'username' => $getEventData->user->firstname . ' ' . $getEventData->user->lastname,
             'location' => ($getEventData->user->city != NULL) ? $getEventData->user->city : "",
@@ -11827,7 +11827,7 @@ class ApiControllerv2 extends Controller
         $userAccount = [];
         $ownAccount = [
             'id' => $user->id,
-            'profile' => (isset($user->profile) && $user->profile != null) ? asset('public/storage/profile/' . $user->profile) : "",
+            'profile' => (isset($user->profile) && $user->profile != null) ? asset('storage/profile/' . $user->profile) : "",
             'first_name' => $user->firstname,
             'last_name' => $user->lastname,
             'email' => $user->email
@@ -11871,7 +11871,7 @@ class ApiControllerv2 extends Controller
                 $loggedUser  = Auth::guard('api')->user();
                 $alreadyLog = User::select('id', 'firstname as first_name', 'lastname as last_name', 'email', 'profile')->where('id', $loggedUser->id)->first();
 
-                $alreadyLog['profile'] = ($alreadyLog->profile != null) ? asset('public/storage/profile/' . $alreadyLog->profile) : "";
+                $alreadyLog['profile'] = ($alreadyLog->profile != null) ? asset('storage/profile/' . $alreadyLog->profile) : "";
 
                 // device  add//
                 if ($user->status == '9') {
@@ -11937,13 +11937,13 @@ class ApiControllerv2 extends Controller
     {
         $versionSetting =  VersionSetting::first();
 
-        return response()->json(["status" => true, 'message' => 'Application', 'url' => asset('public/appversion/yesvite_android.apk'), 'version' => $versionSetting->android_version]);
+        return response()->json(["status" => true, 'message' => 'Application', 'url' => asset('appversion/yesvite_android.apk'), 'version' => $versionSetting->android_version]);
     }
     public function installIosApp()
     {
         $versionSetting =  VersionSetting::first();
 
-        return response()->json(["status" => true, 'message' => 'Application', 'url' => asset('public/appversion/yesvite_ios.apk'), 'version' => $versionSetting->ios_version]);
+        return response()->json(["status" => true, 'message' => 'Application', 'url' => asset('appversion/yesvite_ios.apk'), 'version' => $versionSetting->ios_version]);
     }
 
     public function uploadApplication(Request $request)
@@ -12359,7 +12359,7 @@ class ApiControllerv2 extends Controller
 
                 $eventDetail['user_id'] = $value->user->id;
 
-                $eventDetail['host_profile'] = empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile);
+                $eventDetail['host_profile'] = empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
 
                 $eventDetail['host_name'] = $value->hosted_by;
 
@@ -12376,7 +12376,7 @@ class ApiControllerv2 extends Controller
 
 
 
-                $eventDetail['event_images'] = ($images != null) ? asset('public/storage/event_images/' . $images->image) : "";
+                $eventDetail['event_images'] = ($images != null) ? asset('storage/event_images/' . $images->image) : "";
 
 
 
@@ -12450,8 +12450,8 @@ class ApiControllerv2 extends Controller
 
                 $eventDetail['user_profile'] = [
                     'id' => $value->user->id,
-                    'profile' => empty($value->user->profile) ? "" : asset('public/storage/profile/' . $value->user->profile),
-                    'bg_profile' => empty($value->user->bg_profile) ? "" : asset('public/storage/bg_profile/' . $value->user->bg_profile),
+                    'profile' => empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile),
+                    'bg_profile' => empty($value->user->bg_profile) ? "" : asset('storage/bg_profile/' . $value->user->bg_profile),
                     'gender' => ($value->user->gender != NULL) ? $value->user->gender : "",
                     'username' => $value->user->firstname . ' ' . $value->user->lastname,
                     'location' => ($value->user->city != NULL) ? $value->user->city : "",
