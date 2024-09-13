@@ -424,7 +424,7 @@ ul.nav-tabs .nav-link:focus {
 }
 
 .users-data h5 {
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 700;
     color: var(--contactTitle);
     margin-bottom: 3px;
@@ -433,10 +433,15 @@ ul.nav-tabs .nav-link:focus {
 
 .users-data a,
 .users-data p {
-    font-size: 12px;
+    font-size: 13px;
     color: var(--lightColor);
-    margin-bottom: 5px;
-    display: block;
+    margin-bottom: 7px;
+    display: flex;
+    align-items: center;
+}
+
+.users-data a svg {
+    margin-right: 5px;
 }
 
 .breadcrumb-nav .breadcrumb-item+.breadcrumb-item::before {
@@ -720,7 +725,7 @@ ul.nav-tabs .nav-link:focus {
 }
 
 /* -----otp-varification-wrp--- */
-.otp-varification-wrp input{
+.otp-varification-wrp input {
     width: 100%;
     min-width: 50px;
     max-width: 50px;
@@ -731,7 +736,8 @@ ul.nav-tabs .nav-link:focus {
     border: 1px solid var(--primaryColor) !important;
     color: var(--primaryColor) !important;
 }
-.otp-varification-wrp{
+
+.otp-varification-wrp {
     display: flex;
     align-items: center;
     justify-content: center;
