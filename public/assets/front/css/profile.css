@@ -597,6 +597,10 @@ input::-webkit-slider-thumb {
     width: 73%;
 } */
 
+.profile-details .col-xxl-3 {
+    background-color: red;
+}
+
 @media only screen and (max-width:991px) {
     .profile-img .user-img {
         width: 80px;
