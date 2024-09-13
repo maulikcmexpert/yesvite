@@ -138,6 +138,9 @@ async function updateProfileImg(profileImageUrl, userName) {
 }
 
 async function getSelectedUserimg(profileImageUrl, userName) {
+    console.log(profileImageUrl);
+    console.log(userName);
+    
     if (await isValidImageUrl(profileImageUrl)) {
         return `<img class="selected-user-img" src="${profileImageUrl}" alt="user-img">`;
     } else {
