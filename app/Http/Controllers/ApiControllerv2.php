@@ -9224,8 +9224,6 @@ class ApiControllerv2 extends Controller
 
             $event_post_comment = new EventPostComment;
 
-
-
             $event_post_comment->event_id = $input['event_id'];
 
             $event_post_comment->event_post_id = $input['event_post_id'];
@@ -9258,7 +9256,7 @@ class ApiControllerv2 extends Controller
 
             $postComment = getComments($input['event_post_id']);
 
-
+            dd($postComment);
             $letestComment =  EventPostComment::with('user')->withcount('post_comment_reaction', 'replies')->where(['event_post_id' => $input['event_post_id'], 'parent_comment_id' => NULL])->orderBy('id', 'DESC')->limit(1)->first();
 
 
