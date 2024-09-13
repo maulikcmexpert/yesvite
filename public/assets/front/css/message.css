@@ -1390,7 +1390,7 @@ ul.member-lists li:last-child {
 
 .reaction-dialog {
     position: absolute;
-    bottom: -45px;
+    bottom: -60px;
     right: -35px;
     display: flex;
     gap: 5px;
@@ -1408,7 +1408,7 @@ ul.member-lists li:last-child {
 
 .reaction-option {
     cursor: pointer;
-    font-size: large;
+    font-size: 19px;
 }
 
 .msg-lists .simple-message {
