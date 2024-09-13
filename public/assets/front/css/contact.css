@@ -23,7 +23,7 @@
     -moz-border-radius: 20px;
     -ms-border-radius: 20px;
     -o-border-radius: 20px;
-    padding: 20px;
+    padding: 24px 16px;
     text-align: center;
 }
 
@@ -640,10 +640,12 @@ ul.listing li span {
 
 .contact-details .col-xxl-3 {
     width: 334px;
+    margin-right: 15px;
+    padding: 0;
 }
 
 .contact-details .col-xxl-9 {
-    width: 74%;
+    width: 73%;
 }
 
 
@@ -651,13 +653,13 @@ ul.listing li span {
 /* ======= Responsive ======= */
 @media only screen and (max-width:1399px) {
     .contact-details .col-xxl-9 {
-        width: 70%;
+        width: 71%;
     }
 }
 
 @media only screen and (max-width:1399px) {
     .contact-details .col-xxl-9 {
-        width: 65%;
+        width: 64%;
     }
 }
 
@@ -667,7 +669,7 @@ ul.listing li span {
     }
 
     .contact-details .col-xxl-9 {
-        width: 54%;
+        width: 53%;
     }
 }
 
