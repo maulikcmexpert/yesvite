@@ -334,7 +334,7 @@ ul.nav .nav-link:hover {
     -ms-border-radius: 10px;
     -o-border-radius: 10px;
     color: var(--secondryColor);
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 600;
     width: 100%;
     transition: 0.5s;
@@ -342,6 +342,11 @@ ul.nav .nav-link:hover {
     -moz-transition: 0.5s;
     -ms-transition: 0.5s;
     -o-transition: 0.5s;
+}
+
+.Logout-btn svg,
+.support-btn svg {
+    margin-right: 9px !important;
 }
 
 .support-btn {
