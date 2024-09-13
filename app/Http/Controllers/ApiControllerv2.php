@@ -8784,7 +8784,6 @@ class ApiControllerv2 extends Controller
                 $eventPostPoll->event_id = $request->event_id;
                 $eventPostPoll->event_post_id = $creatEventPost->id;
                 $eventPostPoll->poll_question = $request->poll_question;
-                $eventPostPoll->poll_duration = $request->poll_duration;
                 if ($eventPostPoll->save()) {
                     $option = json_decode($request->option);
                     foreach ($option as $value) {
