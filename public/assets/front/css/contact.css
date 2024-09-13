@@ -727,6 +727,11 @@ ul.listing li span {
         padding: 10px 20px;
     }
 
+    .header-right .drp-conent svg {
+        width: 100%;
+        max-width: 25px;
+        height: 25px;
+    }
 
 }
 
