@@ -1451,6 +1451,7 @@ function createMessageElement(key, messageData, isGroup) {
             </div>`
             : `
             <div class="simple-message"> 
+            <div class="simplemsg-img me-2"><span>${getSelectedUserimg(sender_userProfile,senderName)}</span></div>
                 <div class="simple-msg-wrap"> 
                     <span class="senderName">${senderName}</span>
                     ${messageData?.data != "" ? messageData.data : ""}
