@@ -229,7 +229,7 @@ ul.chat-list li:last-child {
 } */
 
 .user-detail h3 {
-    font-size: 14px;
+    font-size: 16px;
     color: var(--secondryColor);
     font-weight: 600;
     line-height: 24px;
@@ -262,7 +262,7 @@ ul.chat-list li:last-child {
 }
 
 .user-detail span {
-    font-size: 12px;
+    font-size: 14px;
     color: var(--lightColor);
     width: 100%;
     max-width: 200px;
