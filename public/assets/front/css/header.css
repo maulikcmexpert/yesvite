@@ -4,7 +4,7 @@ header.login-header {
     border: none;
 }
 
-.login-header .container-fluid{
+.login-header .container-fluid {
     padding: 0;
 }
 
@@ -25,8 +25,7 @@ header.login-header {
 }
 
 .login-header ul li .nav-link:hover,
-.login-header ul li.active a
-{
+.login-header ul li.active a {
     color: var(--primaryColor);
 }
 
@@ -48,15 +47,15 @@ header.login-header {
     -o-transition: 0.5s;
 }
 
-.login-header .signIn-btn svg path{
+.login-header .signIn-btn svg path {
     fill: var(--primaryColor);
 }
 
-.login-header .signIn-btn:hover svg path{
+.login-header .signIn-btn:hover svg path {
     fill: #fff;
 }
 
-.nav-link.signIn-btn:hover{
+.nav-link.signIn-btn:hover {
     background-color: var(--primaryColor);
     color: #fff !important;
     box-shadow: 0px 5px 12px 0px #CE24573D;
@@ -95,12 +94,12 @@ header.login-header {
     -o-transition:;
 } */
 
-.nav-link.signUp-btn:hover{
+.nav-link.signUp-btn:hover {
     background-color: transparent;
     color: var(--primaryColor) !important;
 }
 
-.nav-link.signUp-btn:hover svg path{
+.nav-link.signUp-btn:hover svg path {
     stroke: var(--primaryColor) !important;
 }
 
@@ -125,7 +124,7 @@ header.login-header {
     display: block;
     width: 24px;
     height: 1px;
-    border:1px solid var(--secondryColor);
+    border: 1px solid var(--secondryColor);
     border-radius: 5px;
     transition: all .6s;
     -webkit-border-radius: 5px;
@@ -170,16 +169,16 @@ header.login-header {
 }
 
 .toggle.activate .line-toggle:last-child {
-     background: var(--secondryColor);
-     transform: translateY(0) translateX(0) rotate(314deg);
-     width: 24px;
-     height: 3px;
-     transition-delay: .1s;
-     transform: rotate(-45deg);
-     -webkit-transform: rotate(-45deg);
-     -moz-transform: rotate(-45deg);
-     -ms-transform: rotate(-45deg);
-     -o-transform: rotate(-45deg);
+    background: var(--secondryColor);
+    transform: translateY(0) translateX(0) rotate(314deg);
+    width: 24px;
+    height: 3px;
+    transition-delay: .1s;
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
 }
 
 .navbar-toggle .line-toggle:first-child {
@@ -198,10 +197,11 @@ header.login-header {
     transform: rotate(-45deg);
 }
 
-.navbar-toggle.collapsed .line-toggle:first-child{
-    transform: rotate(0); transform: rotate(45deg);
+.navbar-toggle.collapsed .line-toggle:first-child {
+    transform: rotate(0);
+    transform: rotate(45deg);
 }
-    
+
 .navbar-toggle.collapsed .line-toggle:nth-child(2) {
     opacity: 1;
 }
@@ -209,8 +209,8 @@ header.login-header {
 .navbar-toggle.collapsed .line-toggle:last-child {
     transform: rotate(0);
 }
-    
-.google-add{
+
+.google-add {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
@@ -218,49 +218,48 @@ header.login-header {
     padding: 15px 50px;
 }
 
-.google-add p{
+.google-add p {
     color: #fff;
     font-weight: 500;
 }
 
-.google-add .app-store{
+.google-add .app-store {
     margin-right: 24px;
 }
 
 
 
-.header-right{
+.header-right {
     display: flex;
     align-items: center;
     gap: 25px;
     margin-left: auto;
 }
 
-.header-right .drp-conent{
+.header-right .drp-conent {
     display: flex;
     align-items: center;
 }
 
-.header-right .drp-conent svg{
+.header-right .drp-conent svg {
     width: 100%;
-    max-width: 23px;
-    height: 23px;
+    max-width: 25px;
+    height: 25px;
 }
 
 .header-dropdown button,
-.header-dropdown a
-{
+.header-dropdown a {
     background-color: transparent !important;
     border: none;
     padding: 0;
     height: 20px;
 }
 
-.header-dropdown .dropdown-toggle::after{
+.header-dropdown .dropdown-toggle::after {
     display: none;
 }
 
-.drp-conent .badge{
+.drp-conent .badge {
     border: 3px solid #F8F9FD;
     width: 20px;
     height: 17px;
@@ -279,7 +278,7 @@ header.login-header {
     background-color: var(--primaryColor);
 }
 
-.drp-conent span{
+.drp-conent span {
     width: 17px;
     height: 14px;
     background-color: var(--primaryColor);
@@ -296,7 +295,7 @@ header.login-header {
     -o-border-radius: 6px;
 }
 
-.header-dropdown .dropdown-menu{
+.header-dropdown .dropdown-menu {
     transform: translate(-35px, 15px) !important;
     -webkit-transform: translate(-35px, 15px) !important;
     -moz-transform: translate(-35px, 15px) !important;
@@ -305,23 +304,23 @@ header.login-header {
     padding: 10px 15px;
 }
 
-.navbar-collapse.d-none{
+.navbar-collapse.d-none {
     display: none !important;
 }
 
-.navbar-collapse.d-none{
+.navbar-collapse.d-none {
     display: none !important;
 }
 
-.navbar-toggler .hidden{
+.navbar-toggler .hidden {
     display: none;
 }
 
 
-@media only screen and (max-width:767px){
+@media only screen and (max-width:767px) {
+
     .navbar-collapse.collapse.show,
-    .navbar-collapse.collapsing
-    {
+    .navbar-collapse.collapsing {
         position: absolute;
         width: 100%;
         top: 58px;
@@ -334,24 +333,24 @@ header.login-header {
         border-top: 1px solid var(--borderColor);
     }
 
-    header.login-header{
+    header.login-header {
         padding: 15px 0px 0;
     }
 
-    .login-header .navbar{
+    .login-header .navbar {
         padding: 0 15px 12px;
     }
 
-    .login-header ul{
+    .login-header ul {
         align-items: flex-start !important;
     }
 
-    .login-header ul li{
+    .login-header ul li {
         width: 100%;
         position: relative;
     }
 
-    .login-header ul li::after{
+    .login-header ul li::after {
         content: '';
         position: absolute;
         right: 0;
@@ -364,11 +363,11 @@ header.login-header {
         color: #94A3B8;
     }
 
-    .login-header ul li:last-child::after{
+    .login-header ul li:last-child::after {
         display: none;
     }
-    
-    .header-dropdown .dropdown-menu{
+
+    .header-dropdown .dropdown-menu {
         transform: translate(-75px, 15px) !important;
         -webkit-transform: translate(-75px, 15px) !important;
         -moz-transform: translate(-75px, 15px) !important;
@@ -380,11 +379,9 @@ header.login-header {
         gap: 20px;
     }
 
-    .google-add{
+    .google-add {
         display: none;
     }
 }
 
-@media only screen and (max-width:575px){
-    
-}
+@media only screen and (max-width:575px) {}
