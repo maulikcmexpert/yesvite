@@ -1322,6 +1322,8 @@ function createMessageElement(key, messageData, isGroup) {
     const sender_userProfile = (isGroup == "true" || isGroup == true) && !isSender
     ? SelecteGroupUser[messageData.senderId].userProfile
     : "";
+    console.log(sender_userProfile);
+    
     let seenStatus = "";
     let reaction = "";
     let dataWithMedia = "";
