@@ -13,7 +13,7 @@ class HomeFrontController extends Controller
     {
         $serverKey  = ServerKey::first();
 
-        $title = 'Home';
+        $title = 'Yesvite-Home';
         $page = 'front.homefront';
         return view('layout', compact(
             'title',
