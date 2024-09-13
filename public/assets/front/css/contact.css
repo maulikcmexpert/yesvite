@@ -638,18 +638,18 @@ ul.listing li span {
     stroke: var(--primaryColor);
 }
 
-/* .contact-details .col-xxl-3 {
+.contact-details .col-xxl-3 {
     width: 334px;
 }
 
 .contact-details .col-xxl-9 {
     width: 74%;
-} */
+}
 
 
 
 /* ======= Responsive ======= */
-/* @media only screen and (max-width:1399px) {
+@media only screen and (max-width:1399px) {
     .contact-details .col-xxl-9 {
         width: 70%;
     }
@@ -659,7 +659,7 @@ ul.listing li span {
     .contact-details .col-xxl-9 {
         width: 65%;
     }
-} */
+}
 
 @media only screen and (max-width:768px) {
     .contact-user ul.nav {
