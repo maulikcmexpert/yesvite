@@ -746,7 +746,7 @@ ul.nav-tabs .nav-link:focus {
 
 
 /* ======== Responsive ========= */
-@media (min-width:3000px) and (max-width:10000px) {
+@media (min-width:2000px) and (max-width:10000px) {
     footer {
         position: absolute;
         bottom: 0;
