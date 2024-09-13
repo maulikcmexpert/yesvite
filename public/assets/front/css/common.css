@@ -753,6 +753,11 @@ ul.nav-tabs .nav-link:focus {
         left: 0;
         width: 100%;
     }
+
+    .contact-details {
+        max-height: 880px;
+        overflow-y: scroll;
+    }
 }
 
 
