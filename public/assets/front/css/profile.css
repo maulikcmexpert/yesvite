@@ -587,20 +587,6 @@ input::-webkit-slider-thumb {
     font-size: 14px;
 }
 
-/* .profile-details .col-xxl-3 {
-    width: 334px;
-    margin-right: 15px;
-    padding: 0;
-}
-
-.profile-details .col-xxl-9 {
-    width: 73%;
-} */
-
-.profile-details .col-xxl-3 {
-    background-color: red;
-}
-
 @media only screen and (max-width:991px) {
     .profile-img .user-img {
         width: 80px;
