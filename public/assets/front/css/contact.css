@@ -92,14 +92,14 @@
 }
 
 .user-name h3 {
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 600;
     margin-right: 6px;
     margin-bottom: 0;
 }
 
 .user-name p {
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 500;
     color: #23AA26;
 }
@@ -154,7 +154,7 @@ ul.nav .nav-link:hover {
 }
 
 .user-gallery h4 {
-    font-size: 18px;
+    font-size: 20px;
     margin-bottom: 10px;
     font-weight: 700;
 }
@@ -166,9 +166,13 @@ ul.nav .nav-link:hover {
     gap: 15px;
 }
 
+.user-location svg {
+    margin-right: 5px;
+}
+
 .user-location a,
 .user-location span {
-    font-size: 12px;
+    font-size: 13px;
     color: var(--lightColor);
     font-weight: 500;
     transition: 0.5s;
@@ -346,7 +350,7 @@ ul.nav .nav-link:hover {
 
 .Logout-btn svg,
 .support-btn svg {
-    margin-right: 9px !important;
+    margin-right: 8px !important;
 }
 
 .support-btn {
