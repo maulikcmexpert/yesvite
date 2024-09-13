@@ -9276,7 +9276,8 @@ class ApiControllerv2 extends Controller
 
                 'comment_total_likes' => $letestComment->post_comment_reaction_count,
 
-                'is_like' => checkUserPhotoIsLike($letestComment->id, $user->id),
+                // 'is_like' => checkUserPhotoIsLike($letestComment->id, $user->id),
+                'is_like' => 0,
 
                 'created_at' => $letestComment->created_at,
 
