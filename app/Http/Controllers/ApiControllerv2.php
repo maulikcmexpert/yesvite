@@ -9257,7 +9257,7 @@ class ApiControllerv2 extends Controller
             $postComment = getComments($input['event_post_id']);
 
             $letestComment =  EventPostComment::with('user')->withcount('post_comment_reaction', 'replies')->where(['event_post_id' => $input['event_post_id'], 'parent_comment_id' => NULL])->orderBy('id', 'DESC')->limit(1)->first();
-            dd($letestComment);
+
 
 
             $postCommentList = [
@@ -9340,7 +9340,7 @@ class ApiControllerv2 extends Controller
 
             //     $postCommentList[] = $commentInfo;
             // }
-
+            dd($postCommentList);
 
             return response()->json(['status' => 1, 'total_comments' => count($postComment), 'data' => $postCommentList, 'message' => "Post commented by you"]);
         } catch (QueryException $e) {
