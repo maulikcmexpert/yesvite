@@ -757,6 +757,7 @@ ul.nav-tabs .nav-link:focus {
     .contact-details {
         max-height: 880px;
         overflow-y: scroll;
+        height: 60vh;
     }
 }
 
