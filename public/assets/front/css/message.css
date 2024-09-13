@@ -1549,6 +1549,17 @@ ul.member-lists li:last-child {
     transform: translateY(-50%);
 } */
 
+
+.msg-lists .sender .simple-message .simplemsg-img span {
+    width: 32px;
+    height: 32px;
+    border-radius: 100%;
+    background: #d9d7d7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 /* ======= responsive ======== */
 
 

@@ -1355,6 +1355,8 @@ function createMessageElement(key, messageData, isGroup) {
                   )
                   .join(" ")
             : "";
+
+            
         reaction = `<ul class="reaction-ul ${messageData?.react}">${reaction}</ul>`;
     } else {
         seenStatus = isSender
@@ -1449,6 +1451,7 @@ function createMessageElement(key, messageData, isGroup) {
             </div>`
             : `
             <div class="simple-message"> 
+            <div class="simplemsg-img me-2"><span>M</span></div>
                 <div class="simple-msg-wrap"> 
                     <span class="senderName">${senderName}</span>
                     ${messageData?.data != "" ? messageData.data : ""}
@@ -3275,8 +3278,8 @@ async function send_push_notification(
         .then(response => response.json())
         .then(data => {
             var accessToken = data.access_token;
-            // fetch("https://fcm.googleapis.com/v1/projects/yesvitelive/messages:send", {
-            fetch("https://fcm.googleapis.com/v1/projects/yesvite-976cd/messages:send", {
+            fetch("https://fcm.googleapis.com/v1/projects/yesvitelive/messages:send", {
+            // fetch("https://fcm.googleapis.com/v1/projects/yesvite-976cd/messages:send", {   
                 method: "POST",
                 headers: {
                     'Authorization': 'Bearer ' + accessToken,
