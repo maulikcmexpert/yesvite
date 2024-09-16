@@ -69,14 +69,14 @@
 
 <link rel="stylesheet" href="{{ asset('assets/event/css/profile.css') }}">
 
-<!-- <link rel="stylesheet" href="{{ asset('assets/event/css/rsvp.css') }}">
+<!-- <link rel="stylesheet" href="{{ asset('assets/event/css/rsvp.css') }}"> -->
 
 <link rel="stylesheet" href="{{ asset('assets/event/css/setting.css') }}">
-
+<!-- 
 <link rel="stylesheet" href="{{ asset('assets/event/css/style.css') }}">
 
-<link rel="stylesheet" href="{{ asset('assets/event/css/variable.css') }}">
- -->
+<link rel="stylesheet" href="{{ asset('assets/event/css/variable.css') }}"> -->
+
 
 
 <!-- <link rel="stylesheet" href="{{ asset('assets/event/css/bootstrap-datetimepicker.min.css') }}"> -->
