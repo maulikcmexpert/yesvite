@@ -25,7 +25,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.theme.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.13/css/intlTelInput.css">
 
-<!-- <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 
@@ -81,7 +81,7 @@
 
 <link rel="stylesheet" href="{{ asset('assets/event/css/bootstrap-datetimepicker.min.css') }}">
 
-<link rel="stylesheet" href="{{ asset('assets/event/css/timepicker.min.css') }}"> -->
+<link rel="stylesheet" href="{{ asset('assets/event/css/timepicker.min.css') }}">
 
 
 
