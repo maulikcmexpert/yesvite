@@ -61,9 +61,9 @@
 
 <link rel="stylesheet" href="{{ asset('assets/event/css/notification.css') }}"> -->
 
-<!-- <link rel="stylesheet" href="{{ asset('assets/event/css/pick_card.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/event/css/pick_card.css') }}">
 
-<link rel="stylesheet" href="{{ asset('assets/event/css/privacy.css') }}">
+<!-- <link rel="stylesheet" href="{{ asset('assets/event/css/privacy.css') }}">
 
 <link rel="stylesheet" href="{{ asset('assets/event/css/privay-policy.css') }}"> -->
 
