@@ -1302,7 +1302,7 @@ var formattedDate = {};
 var messageRcvTime = '';
 
 
-async function createMessageElement(key, messageData, isGroup) {
+function createMessageElement(key, messageData, isGroup) {
     messageRcvTime = new Date(messageData.timeStamp).toLocaleTimeString([], {
         hour: "2-digit",
         minute: "2-digit",
