@@ -1326,7 +1326,7 @@ function createMessageElement(key, messageData, isGroup) {
     // ? SelecteGroupUser[messageData.senderId].userProfile
     ? SelecteGroupUser[messageData.senderId].image
     : "";
-    console.log(getSelectedUserimg(sender_userProfile,senderName));
+    // console.log(getSelectedUserimg(sender_userProfile,senderName));
     
     let seenStatus = "";
     let reaction = "";
@@ -1457,7 +1457,7 @@ function createMessageElement(key, messageData, isGroup) {
             </div>`
             : `
             <div class="simple-message">
-                <div class="simplemsg-img me-2"><span>M</span></div>
+                <div class="simplemsg-img me-2"><span>${sender_userProfile}</span></div>
                 <div class="simple-msg-wrap"> 
                     <span class="senderName">${senderName}</span>
                     ${messageData?.data != "" ? messageData.data : ""}
