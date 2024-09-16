@@ -39,6 +39,7 @@
 <!-- <link rel="stylesheet" href="{{ asset('assets/event/css/timepicker.min.css') }}"> -->
 
 
+<link rel="stylesheet" href="{{ asset('assets/event/css/style.css') }}">
 
 
 
