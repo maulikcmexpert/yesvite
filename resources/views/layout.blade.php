@@ -2,12 +2,15 @@
 <html lang="en">
 
 <head>
+    @if($page="front.profile")
+    <link rel="stylesheet" href="{{ asset('assets/event/css/style.css') }}">
+    @endif
     @isset($css)
-     <link rel="stylesheet" href="{{asset('assets')}}/front/css/{{$css}}" />
+    <link rel="stylesheet" href="{{asset('assets')}}/front/css/{{$css}}" />
     @endisset
     @isset($css1)
     <link rel="stylesheet" href="{{asset('assets')}}/front/css/{{$css1}}" />
-   @endisset
+    @endisset
     <x-front.header title={{$title}} />
 </head>
 
