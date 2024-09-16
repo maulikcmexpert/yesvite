@@ -69,7 +69,7 @@ function formatDate(timestamp) {
 }
 
 function getInitials(userName) {
-    if (userName === undefined || userName === "" || userName!=="string") {
+    if (userName === undefined || userName === "") {
         return "Y"; // Default to "Y" if userName is undefined or an empty string
     }
     
@@ -174,7 +174,7 @@ async function getListUserimg(profileImageUrl, userName) {
     return `<h5 class="${fontColor} user-avatar img-fluid" src="">${initials}</h5>`;
 }
 
-function getListUserimggrp(profileImageUrl, userName) {
+function getSelectedUserimggrp(profileImageUrl, userName) {
     if (isValidImageUrl(profileImageUrl)) {
         return `<img class="user-avatar img-fluid" src="${profileImageUrl}" alt="user-img">`;
     }
@@ -1390,7 +1390,7 @@ function createMessageElement(key, messageData, isGroup) {
 
             
         reaction = `<ul class="reaction-ul ${messageData?.react}">${reaction}</ul>`;
-        senderprofile=`<div class="simplemsg-img me-2"><span>${getListUserimggrp(sender_userProfile,send_push_notification)}</span></div>`;
+        senderprofile=`<div class="simplemsg-img me-2"><span>${getSelectedUserimggrp(sender_userProfile,send_push_notification)}</span></div>`;
         console.log(senderprofile);          
     } else {
         seenStatus = isSender
