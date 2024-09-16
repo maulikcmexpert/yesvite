@@ -69,8 +69,11 @@ function formatDate(timestamp) {
 }
 
 function getInitials(userName) {
-    if (userName === undefined || userName === "") {
-        return "Y"; // Default to "Y" if userName is undefined or an empty string
+    // if (userName === undefined || userName === "") {
+    //     return "Y"; // Default to "Y" if userName is undefined or an empty string
+    // }
+    if (typeof userName !== "string" || userName === "") {
+        return "Y"; // Default to "Y" if userName is not a valid string
     }
 
     const initials = userName
