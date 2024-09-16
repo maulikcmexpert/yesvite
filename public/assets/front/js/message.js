@@ -80,6 +80,8 @@ function getInitials(userName) {
         .join("")
         .slice(0, 2); // Get only the first and second letters
 
+        console.log(initials);
+        
     return initials;
 }
 
