@@ -28,7 +28,7 @@
 
     <link rel="stylesheet" href="{{ asset('assets/event/css/login.css') }}">
 
-    <!-- <link rel="stylesheet" href="{{ asset('assets/event/css/message.css') }}"> -->
+    <link rel="stylesheet" href="{{ asset('assets/event/css/message.css') }}">
 
     <link rel="stylesheet" href="{{ asset('assets/event/css/new_event_detail.css') }}">
 
@@ -36,13 +36,13 @@
 
     <link rel="stylesheet" href="{{ asset('assets/event/css/pick_card.css') }}">
 
-    <!-- <link rel="stylesheet" href="{{ asset('assets/event/css/privacy.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/event/css/privacy.css') }}">
 
-<link rel="stylesheet" href="{{ asset('assets/event/css/privay-policy.css') }}"> -->
+    <link rel="stylesheet" href="{{ asset('assets/event/css/privay-policy.css') }}">
 
     <link rel="stylesheet" href="{{ asset('assets/event/css/profile.css') }}">
 
-    <!-- <link rel="stylesheet" href="{{ asset('assets/event/css/rsvp.css') }}"> -->
+    <link rel="stylesheet" href="{{ asset('assets/event/css/rsvp.css') }}">
 
     <link rel="stylesheet" href="{{ asset('assets/event/css/setting.css') }}">
 
