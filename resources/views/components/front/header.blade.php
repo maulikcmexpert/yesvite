@@ -27,11 +27,11 @@
 
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<!-- <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css"> -->
 
 
 
-<link rel="stylesheet" href="{{ asset('assets/event/css/about-us.css') }}">
+<!-- <link rel="stylesheet" href="{{ asset('assets/event/css/about-us.css') }}">
 
 <link rel="stylesheet" href="{{ asset('assets/event/css/account.css') }}">
 
@@ -55,7 +55,7 @@
 
 <link rel="stylesheet" href="{{ asset('assets/event/css/login.css') }}">
 
-<link rel="stylesheet" href="{{ asset('assets/event/css/message.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/event/css/message.css') }}"> -->
 
 <link rel="stylesheet" href="{{ asset('assets/event/css/new_event_detail.css') }}">
 
@@ -103,7 +103,7 @@
 
 {{-- <link rel="stylesheet"   href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css"> --}} -->
 
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
 
