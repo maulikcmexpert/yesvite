@@ -27,7 +27,7 @@
 
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<!-- <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css"> -->
 
 
 
@@ -55,7 +55,7 @@
 
 <link rel="stylesheet" href="{{ asset('assets/event/css/login.css') }}">
 
-<!-- <link rel="stylesheet" href="{{ asset('assets/event/css/message.css') }}"> -->
+<link rel="stylesheet" href="{{ asset('assets/event/css/message.css') }}">
 
 <link rel="stylesheet" href="{{ asset('assets/event/css/new_event_detail.css') }}">
 
