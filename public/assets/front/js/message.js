@@ -1459,7 +1459,11 @@ function createMessageElement(key, messageData, isGroup) {
             </div>`
             : `
             <div class="simple-message">
-                ${senderprofile}
+             ${
+                        isSender
+                            ? senderprofile
+                            : ""
+                    } 
                 <div class="simple-msg-wrap"> 
                     <span class="senderName">${senderName}</span>
                     ${messageData?.data != "" ? messageData.data : ""}
