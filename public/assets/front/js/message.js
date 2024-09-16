@@ -138,6 +138,9 @@ async function updateProfileImg(profileImageUrl, userName) {
 }
 
 async function getSelectedUserimg(profileImageUrl, userName) {
+    console.log(profileImageUrl);
+    console.log(userName);
+    
     if (await isValidImageUrl(profileImageUrl)) {
         return `<img class="selected-user-img" src="${profileImageUrl}" alt="user-img">`;
     } else {
@@ -1323,16 +1326,11 @@ function createMessageElement(key, messageData, isGroup) {
     // ? SelecteGroupUser[messageData.senderId].userProfile
     ? SelecteGroupUser[messageData.senderId].image
     : "";
-    
-    const userImageOrInitials = await getSelectedUserimg(
-        sender_userProfile,
-        senderName
-    );
+    console.log(getSelectedUserimg(sender_userProfile,senderName));
     
     let seenStatus = "";
     let reaction = "";
     let dataWithMedia = "";
-    let senderProfile = "";
     if (isGroup == "true" || isGroup == true) {
         if (
             messageData.userAvailable != undefined &&
@@ -1363,8 +1361,7 @@ function createMessageElement(key, messageData, isGroup) {
                   )
                   .join(" ")
             : "";
-        
-            senderProfile = `<div class="simplemsg-img me-2"><span>${getSelectedUserimg(sender_userProfile,senderName)}</span></div>`;
+
             
         reaction = `<ul class="reaction-ul ${messageData?.react}">${reaction}</ul>`;
     } else {
@@ -1389,9 +1386,6 @@ function createMessageElement(key, messageData, isGroup) {
                   )}</span>`
                 : "";
     }
-    const user = getListUserimg(sender_userProfile, senderName);
-    
-    senderProfile = `<div class="simplemsg-img me-2"><span>${getSelectedUserimg(sender_userProfile,senderName)}</span></div>`;
 
     let emojiAndReplay = isReceiver
         ? `
@@ -1448,7 +1442,7 @@ function createMessageElement(key, messageData, isGroup) {
                 </div>`
             : messageData?.type == "3"
             ? `<div class="media-msg-inline">
-                    ${senderProfile}
+            
                 <div class="media-msg">
                 ${musicPlayer(messageData?.url)}
                 <span>${messageData?.data != "" ? messageData.data : ""}</span>
@@ -1462,8 +1456,7 @@ function createMessageElement(key, messageData, isGroup) {
                 ${emoji}
             </div>`
             : `
-            <div class="simple-message">
-                <div class="simplemsg-img me-2"><span>M</span></div>
+            <div class="simple-message"> 
                 <div class="simple-msg-wrap"> 
                     <span class="senderName">${senderName}</span>
                     ${messageData?.data != "" ? messageData.data : ""}
