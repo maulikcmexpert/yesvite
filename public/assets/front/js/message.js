@@ -1456,7 +1456,7 @@ function createMessageElement(key, messageData, isGroup) {
                 ${emoji}
             </div>`
             : `
-            <div class="simple-message"> 
+            <div class="simple-message">
                 <div class="simple-msg-wrap"> 
                     <span class="senderName">${senderName}</span>
                     ${messageData?.data != "" ? messageData.data : ""}
