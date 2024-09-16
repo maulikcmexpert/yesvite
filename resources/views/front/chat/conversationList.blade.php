@@ -1,4 +1,4 @@
-@php
+<!-- @php
 use Carbon\Carbon;
 $i = 0;
 $message['unReadCount'] = @$message['unRead']==true && @$message['unReadCount']==0 ?1 : @$message['unReadCount'];
@@ -44,7 +44,7 @@ $message['unReadCount'] = @$message['unRead']==true && @$message['unReadCount']=
         </div>
         <a href="#" class="user-detail d-flex ms-3">
             <div class="d-flex align-items-start flex-column">
-                <h3>{{$message['contactName']}}xzxsxdsddssd</h3>
+                <h3>{{$message['contactName']}}</h3>
                 @php
                 $timestamp = $message['timeStamp'] ?? now()->timestamp;
                 $timeAgo = Carbon::createFromTimestampMs($timestamp)->diffForHumans();
@@ -120,4 +120,4 @@ $message['unReadCount'] = @$message['unRead']==true && @$message['unReadCount']=
 </li>
 @php
 $i++;
-@endphp
+@endphp -->
