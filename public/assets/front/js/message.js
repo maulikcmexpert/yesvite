@@ -1387,8 +1387,6 @@ function createMessageElement(key, messageData, isGroup) {
                   )
                   .join(" ")
             : "";
-
-            
         reaction = `<ul class="reaction-ul ${messageData?.react}">${reaction}</ul>`;
         senderprofile= getSelectedUserimggrp(sender_userProfile,send_push_notification);
         console.log(senderprofile);          
@@ -1487,7 +1485,7 @@ function createMessageElement(key, messageData, isGroup) {
             <div class="simple-message">
              ${
                 isReceiver
-                            ? `<div class="simplemsg-img me-2"><span>${senderprofile}<span></div>`
+                            ? `<div class="simplemsg-img me-2 user-img"><span>${senderprofile}<span></div>`
                             : ""
                     } 
                 <div class="simple-msg-wrap"> 
