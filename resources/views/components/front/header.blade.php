@@ -35,6 +35,9 @@
 
 <link rel="stylesheet" href="{{ asset('assets/event/css/style.css') }}">
 
+<link rel="stylesheet" href="{{ asset('assets/event/css/new_event_detail.css') }}">
+
+
 <!-- <link rel="stylesheet" href="{{ asset('assets/event/css/bootstrap-datetimepicker.min.css') }}"> -->
 
 <!-- <link rel="stylesheet" href="{{ asset('assets/event/css/timepicker.min.css') }}"> -->
