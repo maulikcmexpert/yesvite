@@ -2185,7 +2185,7 @@ async function addListInMembers(SelecteGroupUser) {
                 ? `<li class="">
                             <div class="chat-data d-flex">
                                 <div class="user-img position-relative">
-                                    ${userImageElement}xzxzxzxx
+                                    ${userImageElement}
                                 </div>
                                 <div class="user-detail d-block ms-3">
                                     <div class="">
