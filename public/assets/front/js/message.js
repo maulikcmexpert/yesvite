@@ -1301,7 +1301,27 @@ function addMessageToList(key, messageData, conversationId) {
 var formattedDate = {};
 var messageRcvTime = '';
 
-async function createMessageElement(key, messageData, isGroup) {
+function getInitialsgrp(userName) {
+    const nameParts = userName.split(" ");
+    let initials = "";
+    nameParts.forEach(part => {
+        initials += part[0]?.toUpperCase();
+    });
+    return initials;
+}
+async function getSelectedUserimggrp(profileImageUrl, userName) {  
+    if (await isValidImageUrl(profileImageUrl)) {
+        return `<img class="selected-user-img" src="${profileImageUrl}" alt="user-img">`;
+    } else {
+        const initials = getInitialsgrp(userName);
+        const fontColor = "fontcolor" + initials[0]?.toUpperCase();
+
+        return `<h5 class="${fontColor} selected-user-img user-img"  src="">${initials}</h5>`;
+    }
+}
+
+
+function createMessageElement(key, messageData, isGroup) {
     messageRcvTime = new Date(messageData.timeStamp).toLocaleTimeString([], {
         hour: "2-digit",
         minute: "2-digit",
@@ -1459,7 +1479,7 @@ async function createMessageElement(key, messageData, isGroup) {
             <div class="simple-message">
              ${
                 isReceiver
-                            ? senderprofile
+                            ? getSelectedUserimggrp(sender_userProfile,senderName)
                             : ""
                     } 
                 <div class="simple-msg-wrap"> 
