@@ -29,13 +29,13 @@
 
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 
-<link rel="stylesheet" href="{{ asset('assets/event/css/common.css') }}">
-<link rel="stylesheet" href="{{ asset('assets/event/css/contact.css') }}">
+
 @php
 if($page=="front.profile"){
 @endphp
 <link rel="stylesheet" href="{{ asset('assets/event/css/style.css') }}">
-
+<link rel="stylesheet" href="{{ asset('assets/event/css/common.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/event/css/contact.css') }}">
 @php
 }
 @endphp
