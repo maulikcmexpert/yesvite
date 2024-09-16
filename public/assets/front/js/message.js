@@ -138,9 +138,6 @@ async function updateProfileImg(profileImageUrl, userName) {
 }
 
 async function getSelectedUserimg(profileImageUrl, userName) {
-    console.log(profileImageUrl);
-    console.log(userName);
-    
     if (await isValidImageUrl(profileImageUrl)) {
         return `<img class="selected-user-img" src="${profileImageUrl}" alt="user-img">`;
     } else {
@@ -1327,6 +1324,10 @@ function createMessageElement(key, messageData, isGroup) {
     ? SelecteGroupUser[messageData.senderId].image
     : "";
     
+    const userImageOrInitials = await getSelectedUserimg(
+        sender_userProfile,
+        senderName
+    );
     
     let seenStatus = "";
     let reaction = "";
@@ -1389,10 +1390,8 @@ function createMessageElement(key, messageData, isGroup) {
                 : "";
     }
     const user = getListUserimg(sender_userProfile, senderName);
-    console.log(user);
     
     senderProfile = `<div class="simplemsg-img me-2"><span>${getSelectedUserimg(sender_userProfile,senderName)}</span></div>`;
-    console.log(senderProfile);
 
     let emojiAndReplay = isReceiver
         ? `
@@ -1463,7 +1462,8 @@ function createMessageElement(key, messageData, isGroup) {
                 ${emoji}
             </div>`
             : `
-            <div class="simple-message"> 
+            <div class="simple-message">
+                <div class="simplemsg-img me-2"><span>${userImageOrInitials}</span></div>
                 <div class="simple-msg-wrap"> 
                     <span class="senderName">${senderName}</span>
                     ${messageData?.data != "" ? messageData.data : ""}
