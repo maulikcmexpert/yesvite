@@ -1567,6 +1567,11 @@ ul.member-lists li:last-child {
     height: 100% !important;
 }
 
+.msg-body ul li.sender .simplemsg-img.user-img span img {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 100% !important;
+}
 
 /* ======= responsive ======== */
 
