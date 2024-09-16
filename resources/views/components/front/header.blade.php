@@ -67,7 +67,7 @@
 
 <!-- <link rel="stylesheet" href="{{ asset('assets/event/css/privay-policy.css') }}"> -->
 
-<!-- <link rel="stylesheet" href="{{ asset('assets/event/css/profile.css') }}"> -->
+<link rel="stylesheet" href="{{ asset('assets/event/css/profile.css') }}">
 
 <!-- <link rel="stylesheet" href="{{ asset('assets/event/css/rsvp.css') }}"> -->
 
