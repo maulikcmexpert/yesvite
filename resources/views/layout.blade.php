@@ -2,9 +2,6 @@
 <html lang="en">
 
 <head>
-    @if($page="front.profile")
-    <link rel="stylesheet" href="{{ asset('assets/event/css/style.css') }}">
-    @endif
     @isset($css)
     <link rel="stylesheet" href="{{asset('assets')}}/front/css/{{$css}}" />
     @endisset
