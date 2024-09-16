@@ -31,51 +31,51 @@
 
 
 
-<!-- <link rel="stylesheet" href="{{ asset('assets/event/css/about-us.css') }}"> -->
+<link rel="stylesheet" href="{{ asset('assets/event/css/about-us.css') }}">
 
-<!-- <link rel="stylesheet" href="{{ asset('assets/event/css/account.css') }}"> -->
+<link rel="stylesheet" href="{{ asset('assets/event/css/account.css') }}">
 
-<!-- <link rel="stylesheet" href="{{ asset('assets/event/css/animate.css') }}"> -->
+<link rel="stylesheet" href="{{ asset('assets/event/css/animate.css') }}">
 
-<!-- <link rel="stylesheet" href="{{ asset('assets/event/css/change-pwd.css') }}"> -->
+<link rel="stylesheet" href="{{ asset('assets/event/css/change-pwd.css') }}">
 
-<!-- <link rel="stylesheet" href="{{ asset('assets/event/css/common.css') }}"> -->
+<link rel="stylesheet" href="{{ asset('assets/event/css/common.css') }}">
 
-<!-- <link rel="stylesheet" href="{{ asset('assets/event/css/contact.css') }}"> -->
+<link rel="stylesheet" href="{{ asset('assets/event/css/contact.css') }}">
 
-<!-- <link rel="stylesheet" href="{{ asset('assets/event/css/edit-profile.css') }}"> -->
+<link rel="stylesheet" href="{{ asset('assets/event/css/edit-profile.css') }}">
 
-<!-- <link rel="stylesheet" href="{{ asset('assets/event/css/font.css') }}"> -->
+<link rel="stylesheet" href="{{ asset('assets/event/css/font.css') }}">
 
-<!-- <link rel="stylesheet" href="{{ asset('assets/event/css/footer.css') }}"> -->
+<link rel="stylesheet" href="{{ asset('assets/event/css/footer.css') }}">
 
-<!-- <link rel="stylesheet" href="{{ asset('assets/event/css/guestheader.css') }}"> -->
+<link rel="stylesheet" href="{{ asset('assets/event/css/guestheader.css') }}">
 
-<!-- <link rel="stylesheet" href="{{ asset('assets/event/css/home.css') }}"> -->
+<link rel="stylesheet" href="{{ asset('assets/event/css/home.css') }}">
 
-<!-- <link rel="stylesheet" href="{{ asset('assets/event/css/login.css') }}"> -->
+<link rel="stylesheet" href="{{ asset('assets/event/css/login.css') }}">
 
-<!-- <link rel="stylesheet" href="{{ asset('assets/event/css/message.css') }}"> -->
+<link rel="stylesheet" href="{{ asset('assets/event/css/message.css') }}">
 
-<!-- <link rel="stylesheet" href="{{ asset('assets/event/css/new_event_detail.css') }}"> -->
+<link rel="stylesheet" href="{{ asset('assets/event/css/new_event_detail.css') }}">
 
-<!-- <link rel="stylesheet" href="{{ asset('assets/event/css/notification.css') }}"> -->
+<link rel="stylesheet" href="{{ asset('assets/event/css/notification.css') }}">
 
 <link rel="stylesheet" href="{{ asset('assets/event/css/pick_card.css') }}">
 
-<!-- <link rel="stylesheet" href="{{ asset('assets/event/css/privacy.css') }}"> -->
+<link rel="stylesheet" href="{{ asset('assets/event/css/privacy.css') }}">
 
-<!-- <link rel="stylesheet" href="{{ asset('assets/event/css/privay-policy.css') }}"> -->
+<link rel="stylesheet" href="{{ asset('assets/event/css/privay-policy.css') }}">
 
 <link rel="stylesheet" href="{{ asset('assets/event/css/profile.css') }}">
 
-<!-- <link rel="stylesheet" href="{{ asset('assets/event/css/rsvp.css') }}"> -->
+<link rel="stylesheet" href="{{ asset('assets/event/css/rsvp.css') }}">
 
 <link rel="stylesheet" href="{{ asset('assets/event/css/setting.css') }}">
 
-<!-- <link rel="stylesheet" href="{{ asset('assets/event/css/style.css') }}"> -->
+<link rel="stylesheet" href="{{ asset('assets/event/css/style.css') }}">
 
-<!-- <link rel="stylesheet" href="{{ asset('assets/event/css/variable.css') }}"> -->
+<link rel="stylesheet" href="{{ asset('assets/event/css/variable.css') }}">
 
 
 
