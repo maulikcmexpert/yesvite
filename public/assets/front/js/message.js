@@ -174,30 +174,30 @@ async function getListUserimg(profileImageUrl, userName) {
     return `<h5 class="${fontColor} user-avatar img-fluid" src="">${initials}</h5>`;
 }
 
-// function getSelectedUserimggrp(profileImageUrl, userName) {
-//     if (isValidImageUrl(profileImageUrl)) {
-//         console.log(isValidImageUrl(profileImageUrl));
-//         return `<img class="user-avatar img-fluid" src="${profileImageUrl}" alt="user-img">`;
-//     }
-
-//     const initials = getInitials(userName);
-//     const fontColor = "fontcolor" + initials[0]?.toUpperCase();
-
-//     return `<h5 class="${fontColor} user-avatar img-fluid" src="">${initials}</h5>`;
-// }
-
 function getSelectedUserimggrp(profileImageUrl, userName) {
-    return isValidImageUrlgrp(profileImageUrl).then((isValid) => {
-        if (isValid) {
-            return `<img class="user-avatar img-fluid" src="${profileImageUrl}" alt="user-img">`;
-        }
+    if (isValidImageUrlgrp(profileImageUrl)) {
+        console.log(isValidImageUrl(profileImageUrl));
+        return `<img class="user-avatar img-fluid" src="${profileImageUrl}" alt="user-img">`;
+    }
 
-        const initials = getInitials(userName);
-        const fontColor = "fontcolor" + initials[0]?.toUpperCase();
+    const initials = getInitials(userName);
+    const fontColor = "fontcolor" + initials[0]?.toUpperCase();
 
-        return `<h5 class="${fontColor} user-avatar img-fluid">${initials}</h5>`;
-    });
+    return `<h5 class="${fontColor} user-avatar img-fluid" src="">${initials}</h5>`;
 }
+
+// function getSelectedUserimggrp(profileImageUrl, userName) {
+//     return isValidImageUrlgrp(profileImageUrl).then((isValid) => {
+//         if (isValid) {
+//             return `<img class="user-avatar img-fluid" src="${profileImageUrl}" alt="user-img">`;
+//         }
+
+//         const initials = getInitials(userName);
+//         const fontColor = "fontcolor" + initials[0]?.toUpperCase();
+
+//         return `<h5 class="${fontColor} user-avatar img-fluid">${initials}</h5>`;
+//     });
+// }
 
 
 // Initialize Firebase
