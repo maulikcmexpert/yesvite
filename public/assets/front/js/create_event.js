@@ -3253,7 +3253,7 @@ $(document).on("click", ".final_checkout", function () {
     // $(".main-content-wrp").addClass("blurred");
     // var imagePath = '';
 
-    $('#eventImage').attr('src',base_url+'public/storage/event_images/'+eventData.desgin_selected+'');
+    $('#eventImage').attr('src',base_url+'storage/event_images/'+eventData.desgin_selected+'');
         $(".step_1").css("display", "none");
         $(".step_2").css("display", "none");
         $(".step_3").css("display", "none");

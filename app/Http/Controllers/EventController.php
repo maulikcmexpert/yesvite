@@ -91,10 +91,10 @@ class EventController extends Controller
 
         $event_type =   EventType::get();
         $yesvite_user = User::select('id', 'firstname', 'lastname', 'phone_number', 'email', 'profile')
-        ->where('app_user','1')
-        ->orderBy('firstname')
-        ->limit(1)
-        ->get();
+            ->where('app_user', '1')
+            ->orderBy('firstname')
+            ->limit(1)
+            ->get();
         $user['profile'] = ($user->profile != null) ? asset('storage/profile/' . $user->profile) : "";
         $user['bg_profile'] = ($user->bg_profile != null) ? asset('storage/bg_profile/' . $user->bg_profile) : asset('assets/front/image/Frame 1000005835.png');
         $date = Carbon::parse($user->created_at);
@@ -143,7 +143,7 @@ class EventController extends Controller
             $endDate = null;
         }
         $event_creation = Event::create([
-            'step' => ( isset($request->step) && $request->step != '') ? $request->step : 0,
+            'step' => (isset($request->step) && $request->step != '') ? $request->step : 0,
             'event_type_id' => (isset($request->event_type) && $request->event_type != "") ? (int)$request->event_type : "",
             'event_name' => (isset($request->event_name) && $request->event_name != "") ? $request->event_name : "",
             'user_id' => $user_id,
@@ -153,9 +153,9 @@ class EventController extends Controller
             'start_date' => (isset($startDate) && $startDate != "") ? $startDate : null,
             'end_date' => (isset($endDate) && $endDate != "") ? $endDate : null,
             'rsvp_by_date_set' => '0',
-            'rsvp_by_date' => (isset($request->rsvp_by_date) && $request->rsvp_by_date!="") ? $request->rsvp_by_date : null,
-            'rsvp_start_time' => (isset($request->start_time) && $request->start_time!="") ? $request->start_time : "",
-            'rsvp_start_timezone' => (isset($request->time_zone) && $request->time_zone!="") ? $request->time_zone : "",
+            'rsvp_by_date' => (isset($request->rsvp_by_date) && $request->rsvp_by_date != "") ? $request->rsvp_by_date : null,
+            'rsvp_start_time' => (isset($request->start_time) && $request->start_time != "") ? $request->start_time : "",
+            'rsvp_start_timezone' => (isset($request->time_zone) && $request->time_zone != "") ? $request->time_zone : "",
             // 'greeting_card_id' => "",
             // 'gift_registry_id' => "",
             // 'rsvp_end_time_set' => "",
@@ -181,12 +181,12 @@ class EventController extends Controller
                     $is_cohost = '0';
                     $invited_user = $value['id'];
                     $prefer_by =  $value['prefer_by'];
-                  
+
                     EventInvitedUser::create([
                         'event_id' => $eventId,
                         'prefer_by' => $prefer_by,
                         'user_id' => $invited_user,
-                        'is_co_host'=> $is_cohost,
+                        'is_co_host' => $is_cohost,
                     ]);
                     $invitedusers = Event::with(['user'])->whereHas('user', function ($query) {})->where('user_id', $user_id)->where('id', $eventId)->get();
                     foreach ($invitedusers as $event_detail) {
@@ -212,8 +212,8 @@ class EventController extends Controller
                 }
             }
 
-            
-            if(isset($request->co_host) && $request->co_host != '' && isset($request->co_host_prefer_by)){
+
+            if (isset($request->co_host) && $request->co_host != '' && isset($request->co_host_prefer_by)) {
                 $is_cohost = '1';
                 $invited_user = $request->co_host;
                 $prefer_by = $request->co_host_prefer_by;
@@ -222,7 +222,7 @@ class EventController extends Controller
                     'event_id' => $eventId,
                     'prefer_by' => $prefer_by,
                     'user_id' => $invited_user,
-                    'is_co_host'=> $is_cohost,
+                    'is_co_host' => $is_cohost,
                 ]);
                 $invitedusers = Event::with(['user'])->whereHas('user', function ($query) {})->where('id', $eventId)->get();
                 foreach ($invitedusers as $event_detail) {
@@ -325,11 +325,11 @@ class EventController extends Controller
                 $addEndschedule->type = '3';
                 $addEndschedule->save();
             }
-            $gift="0";
+            $gift = "0";
             if ($request->gift_registry == "1") {
                 $gift_registry = $request->gift_registry_data;
                 if (isset($gift_registry) && !empty($gift_registry)) {
-                    $gift="1";
+                    $gift = "1";
                     foreach ($gift_registry as $data) {
                         $gift_registry_data[] = [
                             'user_id' => $user_id,
@@ -394,9 +394,11 @@ class EventController extends Controller
         $registry = session('gift_registry_data');
 
         return response()->json([
-            'view' => view('front.event.gift_registry.view_gift_registry', compact('registry'))->render(),'success' => true,'is_registry'=>$gift
+            'view' => view('front.event.gift_registry.view_gift_registry', compact('registry'))->render(),
+            'success' => true,
+            'is_registry' => $gift
         ]);
-        }
+    }
 
     public function storeUserId(Request $request)
     {
@@ -426,16 +428,16 @@ class EventController extends Controller
             $prefer_by = "phone";
         }
 
-            $userEntry = [
-                'id' => $userId,
-                'firstname' => $user->firstname,
-                'lastname' => $user->lastname,
-                // 'phonenumber' => ($user->phone_number != "") ? $user->phone_number : '',
-                // 'email' => $useremail,
-                'invited_by' => $user_invited_by,
-                'prefer_by' => $prefer_by,
-                'profile' => (isset($userimage) && $userimage != '') ? $userimage : ''
-            ];
+        $userEntry = [
+            'id' => $userId,
+            'firstname' => $user->firstname,
+            'lastname' => $user->lastname,
+            // 'phonenumber' => ($user->phone_number != "") ? $user->phone_number : '',
+            // 'email' => $useremail,
+            'invited_by' => $user_invited_by,
+            'prefer_by' => $prefer_by,
+            'profile' => (isset($userimage) && $userimage != '') ? $userimage : ''
+        ];
 
         // if ($isChecked == true || $isChecked == "true") {
         //     // Remove any existing entry with the same user ID
@@ -469,7 +471,7 @@ class EventController extends Controller
             if (!empty($userExists)) {
                 // return response()->json(['success' => false, 'data' => $userEntry, 'is_duplicate' => 1]);
                 $data[] = ['userdata' => $userEntry, 'is_duplicate' => 1];
-                return response()->json(['view' => view('front.event.guest.addGuest',compact('data'))->render(), 'is_duplicate' => 1]);
+                return response()->json(['view' => view('front.event.guest.addGuest', compact('data'))->render(), 'is_duplicate' => 1]);
             }
             $data[] = ['userdata' => $userEntry, 'is_duplicate' => 0];
             return response()->json(['view' => view('front.event.guest.addGuest', compact('data'))->render(), 'success' => true, 'data' => $userEntry]);
@@ -479,7 +481,7 @@ class EventController extends Controller
     public function getAllInvitedGuest(Request $request)
     {
         $selected_user = session('user_ids');
-        
+
         $alreadyselectedUser =  collect($selected_user)->pluck('id')->toArray();
 
 
@@ -504,7 +506,6 @@ class EventController extends Controller
         $users = $userIds;
         session()->put('user_ids', $users);
         return response()->json(['success' => true]);
-        
     }
 
     public function deleteSession(Request $request)
@@ -782,7 +783,7 @@ class EventController extends Controller
             $file = $request->file('image');
 
             $fileName = time() . '-' . $file->getClientOriginalName();
-            $path = $file->move(public_path('public/storage/event_images'), $fileName);
+            $path = $file->move(public_path('storage/event_images'), $fileName);
             session(['desgin' => $fileName]);
             return response()->json(['status' => 'Image saved successfully', 'image' => $fileName]);
         }
@@ -851,29 +852,30 @@ class EventController extends Controller
         return response()->json(['view' => view('front.event.guest.list_group_member', ['groups' =>  $groups])->render(), "status" => "1"]);
     }
 
-    public function getUserAjax(Request $request){
+    public function getUserAjax(Request $request)
+    {
         $search_user = $request->search_user;
         $id = Auth::guard('web')->user()->id;
-        $type=$request->type;
-        
+        $type = $request->type;
 
-       
+
+
 
         $yesvite_user = User::select('id', 'firstname', 'lastname', 'phone_number', 'email', 'profile')
-        ->where('app_user','1')
-        ->where('id','!=',$id)
-        ->orderBy('firstname')
-        ->limit($request->limit)
-        ->skip($request->offset)
-        ->when($request->search_user != '', function ($query) use($search_user)  {
-            $query->where(function ($q) use ($search_user) {
-                $q->where('firstname', 'LIKE', '%' . $search_user . '%')
-                    ->orWhere('lastname', 'LIKE', '%' . $search_user . '%');
-            });
-        })
-        ->get();
-        
-        return response()->json(view('front.event.guest.get_user',compact('yesvite_user','type'))->render());
+            ->where('app_user', '1')
+            ->where('id', '!=', $id)
+            ->orderBy('firstname')
+            ->limit($request->limit)
+            ->skip($request->offset)
+            ->when($request->search_user != '', function ($query) use ($search_user) {
+                $query->where(function ($q) use ($search_user) {
+                    $q->where('firstname', 'LIKE', '%' . $search_user . '%')
+                        ->orWhere('lastname', 'LIKE', '%' . $search_user . '%');
+                });
+            })
+            ->get();
+
+        return response()->json(view('front.event.guest.get_user', compact('yesvite_user', 'type'))->render());
     }
 
     // public function searchUserAjax(Request $request){
@@ -896,15 +898,16 @@ class EventController extends Controller
     // }
 
 
-    public function inviteByGroup(Request $request){
+    public function inviteByGroup(Request $request)
+    {
 
-        $users=$request->users;
+        $users = $request->users;
         // dd($users);
 
         $userIds = session()->get('user_ids', []);
         foreach ($users as $value) {
-            $id= $value['id'];
-            $user_detail=User::where('id',$value['id'])->first();
+            $id = $value['id'];
+            $user_detail = User::where('id', $value['id'])->first();
             // dd($user_detail->profile);
             $userimage = ($user_detail->profile);
             // $useremail = $user_detail->input('email');
@@ -913,46 +916,46 @@ class EventController extends Controller
             if ($user_detail) {
 
 
-            $userEntry = [
-                'id' => $value['id'],
-                'firstname' => $user_detail->firstname,
-                'lastname' => $user_detail->lastname,
-                'invited_by' => $value['invited_by'],
-                'prefer_by' => $value['preferby'],
-                'profile' => (isset($userimage) && $userimage != '') ? $userimage : ''
-            ];
-        
-            $userExists = array_filter($userIds, function ($entry) use ($id) {
-                return $entry['id'] === $id;
-            });
+                $userEntry = [
+                    'id' => $value['id'],
+                    'firstname' => $user_detail->firstname,
+                    'lastname' => $user_detail->lastname,
+                    'invited_by' => $value['invited_by'],
+                    'prefer_by' => $value['preferby'],
+                    'profile' => (isset($userimage) && $userimage != '') ? $userimage : ''
+                ];
 
-            $userIds = array_filter($userIds, function ($entry) use ($id) {
-                return $entry['id'] !== $id;
-            });
+                $userExists = array_filter($userIds, function ($entry) use ($id) {
+                    return $entry['id'] === $id;
+                });
 
-            $userIds[] = $userEntry;
+                $userIds = array_filter($userIds, function ($entry) use ($id) {
+                    return $entry['id'] !== $id;
+                });
 
-            if (!empty($userExists)) {
-                $data[] = ['userdata' => $userEntry, 'is_duplicate' => 1];
-            } else {
-                $data[] = ['userdata' => $userEntry, 'is_duplicate' => 0];
-            }
+                $userIds[] = $userEntry;
+
+                if (!empty($userExists)) {
+                    $data[] = ['userdata' => $userEntry, 'is_duplicate' => 1];
+                } else {
+                    $data[] = ['userdata' => $userEntry, 'is_duplicate' => 0];
+                }
             }
         }
         session()->put('user_ids', $userIds);
 
-    // Prepare the view and send the response
-    return response()->json([
-        'view' => view('front.event.guest.addGuest', compact('data'))->render(),
-        'success' => true,
-        'data' => $data
-    ]);
-
+        // Prepare the view and send the response
+        return response()->json([
+            'view' => view('front.event.guest.addGuest', compact('data'))->render(),
+            'success' => true,
+            'data' => $data
+        ]);
     }
 
-    public function editEvent(Request $request){
+    public function editEvent(Request $request)
+    {
         $userid = Auth::guard('web')->user()->id;
-       
+
         try {
             $getEventData = Event::with('event_schedule')->where('id', $request->event_id)->first();
             if ($getEventData != null) {
@@ -1172,6 +1175,4 @@ class EventController extends Controller
             return response()->json(['status' => 0, 'message' => 'Something went wrong']);
         }
     }
-
-
 }
