@@ -69,13 +69,10 @@ function formatDate(timestamp) {
 }
 
 function getInitials(userName) {
-    // if (userName === undefined || userName === "") {
-    //     return "Y"; // Default to "Y" if userName is undefined or an empty string
-    // }
-    if (typeof userName !== "string" || userName === "") {
-        return "Y"; // Default to "Y" if userName is not a valid string
+    if (userName === undefined || userName === "" || userName!=="string") {
+        return "Y"; // Default to "Y" if userName is undefined or an empty string
     }
-
+    
     const initials = userName
         .split(" ")
         .map((word) => word[0]?.toUpperCase())
