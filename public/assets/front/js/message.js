@@ -1331,6 +1331,7 @@ function createMessageElement(key, messageData, isGroup) {
     let seenStatus = "";
     let reaction = "";
     let dataWithMedia = "";
+    let senderprofile="";
     if (isGroup == "true" || isGroup == true) {
         if (
             messageData.userAvailable != undefined &&
@@ -1364,6 +1365,7 @@ function createMessageElement(key, messageData, isGroup) {
 
             
         reaction = `<ul class="reaction-ul ${messageData?.react}">${reaction}</ul>`;
+        senderprofile=`<div class="simplemsg-img me-2"><span>${getSelectedUserimg(sender_userProfile,send_push_notification)}</span></div>`;
     } else {
         seenStatus = isSender
             ? messageData.isSeen
@@ -1457,7 +1459,7 @@ function createMessageElement(key, messageData, isGroup) {
             </div>`
             : `
             <div class="simple-message">
-                <div class="simplemsg-img me-2"><span>${sender_userProfile}</span></div>
+                ${senderprofile}
                 <div class="simple-msg-wrap"> 
                     <span class="senderName">${senderName}</span>
                     ${messageData?.data != "" ? messageData.data : ""}
