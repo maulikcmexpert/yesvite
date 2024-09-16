@@ -8,7 +8,7 @@
     @isset($css1)
     <link rel="stylesheet" href="{{asset('assets')}}/front/css/{{$css1}}" />
     @endisset
-    <x-front.header title={{$title}} />
+    <x-front.header title={{$title}} page={{$page}} />
 </head>
 
 <body>
