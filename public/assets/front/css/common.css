@@ -497,18 +497,18 @@ ul.nav-tabs .nav-link:focus {
     width: 70px;
 }
 
-.input-form .iti .iti__selected-flag {
+/* .input-form .iti .iti__selected-flag {
     border-top-left-radius: 16px !important;
-    border-bottom-left-radius: 16px !important;
-    /* border: 1px solid var(--borderColor); */
-}
+    border-bottom-left-radius: 16px !important; */
+/* border: 1px solid var(--borderColor); */
+/* } */
 
-.input-form .iti .phone_number {
-    /* visibility: hidden; */
-    font-size: 0;
+/* .input-form .iti .phone_number { */
+/* visibility: hidden; */
+/* font-size: 0;
     width: 100%;
     outline: 0 !important;
-}
+} */
 
 .input-form #phone_number {
     padding-left: 87px !important;
