@@ -1561,7 +1561,7 @@ ul.member-lists li:last-child {
     justify-content: center;
 }
 
-.simplemsg-img.user-img img {
+.simplemsg-img.user-img span img {
     width: 100% !important;
     max-width: 100% !important;
     height: 100% !important;
