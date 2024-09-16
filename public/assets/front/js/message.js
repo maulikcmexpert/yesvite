@@ -1463,7 +1463,7 @@ function createMessageElement(key, messageData, isGroup) {
             </div>`
             : `
             <div class="simple-message">
-                <div class="simplemsg-img me-2"><span>${userImageOrInitials}</span></div>
+                <div class="simplemsg-img me-2"><span>M</span></div>
                 <div class="simple-msg-wrap"> 
                     <span class="senderName">${senderName}</span>
                     ${messageData?.data != "" ? messageData.data : ""}
