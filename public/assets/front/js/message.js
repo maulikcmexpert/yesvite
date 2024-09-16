@@ -103,9 +103,9 @@ function isValidImageUrlgrp(profileImageUrl) {
             profileImageUrl.includes(".png")) &&
         (imageExists(profileImageUrl))
     ) {
-        return true;
+        return 1;
     }
-    return false;
+    return 0;
 }
 
 function imageExists(url) {
@@ -176,7 +176,7 @@ async function getListUserimg(profileImageUrl, userName) {
 
 function getSelectedUserimggrp(profileImageUrl, userName) {
     if (isValidImageUrl(profileImageUrl)) {
-        console.log(isValidImageUrl(profileImageUrl));
+        Console.log(isValidImageUrl(profileImageUrl))
         return `<img class="user-avatar img-fluid" src="${profileImageUrl}" alt="user-img">`;
     }
 
