@@ -834,7 +834,7 @@ ul.member-lists li:last-child {
     padding-right: 20px;
     padding-top: 8px;
     padding-bottom: 8px;
-    width: 100%;
+    width: 100% !important;
 }
 
 .msg-footer .message-perent .gap-3 {}
