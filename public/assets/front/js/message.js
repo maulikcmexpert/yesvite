@@ -95,6 +95,19 @@ async function isValidImageUrl(profileImageUrl) {
     return false;
 }
 
+function isValidImageUrlgrp(profileImageUrl) {
+    if (
+        profileImageUrl &&
+        (profileImageUrl.includes(".jpg") ||
+            profileImageUrl.includes(".jpeg") ||
+            profileImageUrl.includes(".png")) &&
+        (imageExists(profileImageUrl))
+    ) {
+        return true;
+    }
+    return false;
+}
+
 function imageExists(url) {
     try {
         return new Promise((resolve) => {
@@ -109,6 +122,8 @@ function imageExists(url) {
         });
     } catch (e) {}
 }
+
+
 
 
 $("#selected-user-profile").replaceWith(
@@ -150,6 +165,17 @@ async function getSelectedUserimg(profileImageUrl, userName) {
 
 async function getListUserimg(profileImageUrl, userName) {
     if (await isValidImageUrl(profileImageUrl)) {
+        return `<img class="user-avatar img-fluid" src="${profileImageUrl}" alt="user-img">`;
+    }
+
+    const initials = getInitials(userName);
+    const fontColor = "fontcolor" + initials[0]?.toUpperCase();
+
+    return `<h5 class="${fontColor} user-avatar img-fluid" src="">${initials}</h5>`;
+}
+
+function getListUserimggrp(profileImageUrl, userName) {
+    if (isValidImageUrl(profileImageUrl)) {
         return `<img class="user-avatar img-fluid" src="${profileImageUrl}" alt="user-img">`;
     }
 
@@ -1364,7 +1390,7 @@ function createMessageElement(key, messageData, isGroup) {
 
             
         reaction = `<ul class="reaction-ul ${messageData?.react}">${reaction}</ul>`;
-        senderprofile=`<div class="simplemsg-img me-2"><span>${getListUserimg(sender_userProfile,send_push_notification)}</span></div>`;
+        senderprofile=`<div class="simplemsg-img me-2"><span>${getListUserimggrp(sender_userProfile,send_push_notification)}</span></div>`;
         console.log(senderprofile);          
     } else {
         seenStatus = isSender
