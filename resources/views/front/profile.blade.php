@@ -725,15 +725,15 @@
                             <h6>$15.00 - $75.00<span>Per event</span></h6>
                             <p>Pay as you go per event - depending on number of invites sent.</p>
                         </div>
-                        <div class="d-flex align-items-center">
-                            <div class="recomend-pro-paln d-flex align-items-center" style="display: none;">
+                        <!-- <div class="d-flex align-items-center">
+                            <div class="recomend-pro-paln d-flex align-items-center">
                                 <svg width="11" height="8" viewBox="0 0 11 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M2.40283 8C1.29826 8 0.402832 7.10457 0.402832 6V2.57245C0.402832 2.20365 0.788462 1.96177 1.12048 2.12231L2.78318 2.92625C2.99971 3.03095 3.26011 2.96664 3.40301 2.77317L5.04919 0.544494C5.24905 0.273916 5.6537 0.273917 5.85356 0.544494L7.49974 2.77317C7.64264 2.96664 7.90304 3.03095 8.11958 2.92625L9.78227 2.12231C10.1143 1.96177 10.4999 2.20365 10.4999 2.57245V6C10.4999 7.10457 9.60449 8 8.49992 8H2.40283Z" fill="#FCCD1E" />
                                 </svg>
                                 <h5>Current Choice</h5>
                             </div>
                             <input class="form-check-input ms-3 plan_check" data-plan="pro" type="checkbox" name="plan_check" id="pro_plan_check" style="display: none;">
-                        </div>
+                        </div> -->
                     </div>
                     <div class="d-flex justify-content-between">
                         <div id="app" class="w-100">
