@@ -19,6 +19,9 @@
                                 Edit Profile</a> -->
                         <a href="{{route('profile.edit')}}" class="cmn-btn edit-btn">
                             Edit Profile</a>
+                        <a href="#" class="cmn-btn edit-btn sidebar-btn"
+                            onclick="toggleSidebar('sidebar_create_event')">
+                            Create Event</a>
                     </div>
                     <div class="profile-wrapper">
                         <div class="profile-img">
@@ -196,4 +199,1082 @@
             </div>
         </div>
     </div>
+    <div id="sidebar_create_event" class="sidebar">
+
+        <!-- ======= latest-draft start ========= -->
+
+        <div class="sidebar-content">
+            <div class="d-flex align-items-center justify-content-between toggle-wrp">
+                <h5>Latest Drafts</h5>
+                <button class="close-btn" onclick="toggleSidebar()">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5.00098 5L19 18.9991" stroke="#64748B" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path d="M4.99996 18.9991L18.999 5" stroke="#64748B" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </button>
+            </div>
+            <div class="alert-box d-flex align-items-center">
+                <span class="me-3">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M9.99984 18.3332C14.5832 18.3332 18.3332 14.5832 18.3332 9.99984C18.3332 5.4165 14.5832 1.6665 9.99984 1.6665C5.4165 1.6665 1.6665 5.4165 1.6665 9.99984C1.6665 14.5832 5.4165 18.3332 9.99984 18.3332Z"
+                            stroke="#23AA26" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M10 6.6665V10.8332" stroke="#23AA26" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path d="M9.99561 13.3335H10.0031" stroke="#23AA26" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </span>
+                <p>You can choose to continue one of your drafts above or hit the “Create New Event” button.</p>
+                <span class="ms-3">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5.00098 5L19 18.9991" stroke="#64748B" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path d="M4.99996 18.9991L18.999 5" stroke="#64748B" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </span>
+            </div>
+            @if (isset($draft_events) && $draft_events->isNotEmpty())
+
+            @foreach ($draft_events as $draft)
+            @php
+            if ($draft->step == '1') {
+            $progress = 'brand-progress';
+            $percent = '25';
+            $step_name = 'Details';
+            } elseif ($draft->step == '2') {
+            $progress = 'brand-progress progress-yellow';
+            $percent = '50';
+            $step_name = 'Desgin';
+            } elseif ($draft->step == '3') {
+            $percent = '75';
+            $progress = 'brand-progress progress-yellow';
+            $step_name = 'Guest';
+            } else {
+            $progress = 'brand-progress progress-yellow';
+            }
+            @endphp
+
+
+
+            <div class="{{ $progress }}" data-id="{{$draft->id}}">
+                <div class="d-flex align-items-center">
+                    <span class="me-3">
+                        <svg width="44" height="44" viewBox="0 0 44 44" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <rect x="0.5" y="0.5" width="43" height="43" rx="21.5"
+                                stroke="#E2E8F0" />
+                            <path d="M18.6665 13.6665V16.1665" stroke="#CBD5E1" stroke-width="1.5"
+                                stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M25.3335 13.6665V16.1665" stroke="#94A3B8" stroke-width="1.5"
+                                stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                            <path
+                                d="M27.1667 29.8333C28.6394 29.8333 29.8333 28.6394 29.8333 27.1667C29.8333 25.6939 28.6394 24.5 27.1667 24.5C25.6939 24.5 24.5 25.6939 24.5 27.1667C24.5 28.6394 25.6939 29.8333 27.1667 29.8333Z"
+                                stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            <path d="M30.3333 30.3333L29.5 29.5" stroke="#94A3B8" stroke-width="1.5"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M14.9165 19.5752H29.0832" stroke="#94A3B8" stroke-width="1.5"
+                                stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                            <path
+                                d="M23.1417 30.3332H18.6667C15.75 30.3332 14.5 28.6665 14.5 26.1665V19.0832C14.5 16.5832 15.75 14.9165 18.6667 14.9165H25.3333C28.25 14.9165 29.5 16.5832 29.5 19.0832V22.8332"
+                                stroke="#94A3B8" stroke-width="1.5" stroke-miterlimit="10"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M21.9961 23.4167H22.0036" stroke="#94A3B8" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M18.9121 23.4167H18.9196" stroke="#94A3B8" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M18.9121 25.9167H18.9196" stroke="#94A3B8" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </span>
+                    <div>
+                        <h4><b>{{ $draft->event_name }}</b></h4>
+                        @php
+                        $unixTimestamp = strtotime($draft->updated_at);
+                        $formattedDate = date('F d, Y.h:i A', $unixTimestamp);
+                        @endphp
+                        <p>Saved on {{ $formattedDate }}</p>
+                    </div>
+                    <a href="#" class="ms-auto">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M9.1665 1.6665H7.49984C3.33317 1.6665 1.6665 3.33317 1.6665 7.49984V12.4998C1.6665 16.6665 3.33317 18.3332 7.49984 18.3332H12.4998C16.6665 18.3332 18.3332 16.6665 18.3332 12.4998V10.8332"
+                                stroke="#CBD5E1" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            <path
+                                d="M13.3666 2.51688L6.7999 9.08354C6.5499 9.33354 6.2999 9.82521 6.2499 10.1835L5.89157 12.6919C5.75823 13.6002 6.3999 14.2335 7.30823 14.1085L9.81657 13.7502C10.1666 13.7002 10.6582 13.4502 10.9166 13.2002L17.4832 6.63354C18.6166 5.50021 19.1499 4.18354 17.4832 2.51688C15.8166 0.850211 14.4999 1.38354 13.3666 2.51688Z"
+                                stroke="#CBD5E1" stroke-width="1.5" stroke-miterlimit="10"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M12.4248 3.4585C12.9831 5.45016 14.5415 7.0085 16.5415 7.57516"
+                                stroke="#CBD5E1" stroke-width="1.5" stroke-miterlimit="10"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </a>
+                </div>
+                <div class="progress-bar__wrapper">
+                    <progress id="progress-bar" value="{{ isset($percent)?$percent:'' }}" max="100"></progress>
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h4>{{ $draft->step }}/4 Steps - {{ isset($step_name)?$step_name:'' }}</h4>
+                        <label class="progress-bar__value" htmlFor="progress-bar"> {{ isset($percent)?$percent:'' }}%
+                        </label>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+            @endif
+
+
+            {{-- <div class="brand-progress progress-yellow">
+                <div class="d-flex align-items-center">
+                    <span class="me-3">
+                        <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="0.5" y="0.5" width="43" height="43" rx="21.5" stroke="#E2E8F0"/>
+                            <path d="M18.6665 13.6665V16.1665" stroke="#CBD5E1" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M25.3335 13.6665V16.1665" stroke="#94A3B8" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M27.1667 29.8333C28.6394 29.8333 29.8333 28.6394 29.8333 27.1667C29.8333 25.6939 28.6394 24.5 27.1667 24.5C25.6939 24.5 24.5 25.6939 24.5 27.1667C24.5 28.6394 25.6939 29.8333 27.1667 29.8333Z" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M30.3333 30.3333L29.5 29.5" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M14.9165 19.5752H29.0832" stroke="#94A3B8" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M23.1417 30.3332H18.6667C15.75 30.3332 14.5 28.6665 14.5 26.1665V19.0832C14.5 16.5832 15.75 14.9165 18.6667 14.9165H25.3333C28.25 14.9165 29.5 16.5832 29.5 19.0832V22.8332" stroke="#94A3B8" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M21.9961 23.4167H22.0036" stroke="#94A3B8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M18.9121 23.4167H18.9196" stroke="#94A3B8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M18.9121 25.9167H18.9196" stroke="#94A3B8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </span>
+                    <div>
+                        <h4>Brenda’s 50th Birthday </h4>
+                        <p>Saved on December 23, 2022 . 08:31 PM</p>
+                    </div>
+                    <a href="#" class="ms-auto">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9.1665 1.6665H7.49984C3.33317 1.6665 1.6665 3.33317 1.6665 7.49984V12.4998C1.6665 16.6665 3.33317 18.3332 7.49984 18.3332H12.4998C16.6665 18.3332 18.3332 16.6665 18.3332 12.4998V10.8332" stroke="#CBD5E1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M13.3666 2.51688L6.7999 9.08354C6.5499 9.33354 6.2999 9.82521 6.2499 10.1835L5.89157 12.6919C5.75823 13.6002 6.3999 14.2335 7.30823 14.1085L9.81657 13.7502C10.1666 13.7002 10.6582 13.4502 10.9166 13.2002L17.4832 6.63354C18.6166 5.50021 19.1499 4.18354 17.4832 2.51688C15.8166 0.850211 14.4999 1.38354 13.3666 2.51688Z" stroke="#CBD5E1" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M12.4248 3.4585C12.9831 5.45016 14.5415 7.0085 16.5415 7.57516" stroke="#CBD5E1" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                </div>
+                <div class="progress-bar__wrapper">
+                    <progress id="progress-bar" value="50" max="100"></progress>
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h4>2/4 Steps - Design</h4>
+                        <label class="progress-bar__value" htmlFor="progress-bar"> 50% </label>
+                    </div>
+                </div>
+            </div> --}}
+        </div>
+
+        <!-- ======= latest-draft end ========= -->
+
+
+        <!-- ========= choose-experience-sidebar ======== -->
+
+        <!-- <div class="sidebar-content">
+            <div class="d-flex align-items-center justify-content-between toggle-wrp">
+                <h5>Choose Your Experience (plan)</h5>
+                <button class="close-btn" onclick="toggleSidebar()">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5.00098 5L19 18.9991" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M4.99996 18.9991L18.999 5" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="plans-wrap">
+               <h5 class="heading">Free</h5>
+               <h5>Free</h5>
+               <div class="d-flex justify-content-between">
+                    <div id="app" class="w-100">
+                        <button class="toggleButton w-100 d-flex justify-content-between">
+                            <span>Limited Featres (15 guests max)</span>
+                            <span class="">Show details <i class="fa-solid fa-chevron-down chevron"></i></span>
+                        </button>
+                        <div class="details">
+                            <div class="feauture-list">
+                                <h5>Features</h5>
+                                <ul>
+                                    <li><span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26"/>
+                                        </svg>
+                                        </span>
+                                        <strong>Limited to 15 invites </strong> max per event
+                                    </li>
+                                    <li>
+                                        <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26"/>
+                                            </svg>
+                                            </span>
+                                        Unlimited Events
+                                    </li>
+                                    <li>
+                                        <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26"/>
+                                            </svg>
+                                            </span>
+                                        Event Analytics
+                                    </li>
+                                    <li>
+                                        <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26"/>
+                                            </svg>
+                                            </span>
+                                        Upload your own photo to Invites
+                                    </li>
+                                    <li>
+                                        <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26"/>
+                                            </svg>
+                                            </span>
+                                        Access to <strong>all</strong> designs
+                                    </li>
+                                    <li>
+                                        <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26"/>
+                                            </svg>
+                                            </span>
+                                        Can respond to direct messages (DM)
+                                    </li>
+                                    <li>
+                                        <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26"/>
+                                            </svg>
+                                            </span>
+                                        Ads on app & emails
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+               </div>
+            </div>
+            <div class="plans-wrap pro-wrp">
+                <h5>Pro</h5>
+                <h6>$15.00 - $75.00</h6>
+                <div class="d-flex justify-content-between">
+                    <div id="app" class="w-100">
+                        <button class="toggleButtonpro w-100 d-flex justify-content-between">
+                            <span class="limited-hide" style="color:green">All the PRO features for this one event</span>
+                            <span class="">Show details <i class="fa-solid fa-chevron-down chevron"></i></span>
+                        </button>
+                        <div class="detailspro">
+                            <div class="feauture-list">
+                                <div>
+                                    <h5>Cost:</h5>
+                                    <ul class="cost-list">
+                                        <li>
+                                            15 Invites or less
+                                            <span>....................................$15</span>
+                                        </li>
+                                        <li>
+                                            35 Invites or less
+                                            <span>...................................$29</span>
+                                        </li>
+                                        <li>
+                                            100 Invites or less
+                                            <span> ................................$50</span>
+                                        </li>
+                                        <li>
+                                            500 Invites or less
+                                            <span>................................$75</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h5>Pro Features</h5>
+                                    <ul>
+                                        <li><span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26"/>
+                                            </svg>
+                                            </span>
+                                            All features in free section
+                                        </li>
+                                        <li>
+                                            <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26"/>
+                                                </svg>
+                                                </span>
+                                                500 Invites limit per event
+                                        </li>
+                                        <li>
+                                            <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26"/>
+                                                </svg>
+                                                </span>
+                                                Set schedule for activities
+                                        </li>
+                                        <li>
+                                            <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26"/>
+                                                </svg>
+                                                </span>
+                                                Potluck feature
+                                        </li>
+                                        <li>
+                                            <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26"/>
+                                                </svg>
+                                                </span>
+                                                Unlimited guest polls
+                                        </li>
+                                        <li>
+                                            <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26"/>
+                                                </svg>
+                                                </span>
+                                                Add 3 Photos slider with invite design
+                                        </li>
+                                        <li>
+                                            <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26"/>
+                                                </svg>
+                                                </span>
+                                                Co-Host option
+                                        </li>
+                                        <li>
+                                            <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26"/>
+                                                </svg>
+                                                </span>
+                                                Can create/initiate direct messages to guests
+                                        </li>
+                                        <li>
+                                            <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26"/>
+                                                </svg>
+                                                </span>
+                                                No Ads
+                                        </li>
+                                        <li>
+                                            <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26"/>
+                                                </svg>
+                                                </span>
+                                                Unlimited events
+                                        </li>
+                                        <li>
+                                            <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26"/>
+                                                </svg>
+                                                </span>
+                                                Thank you messages after event
+                                        </li>
+                                        <li>
+                                            <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26"/>
+                                                </svg>
+                                                </span>
+                                                Guests can leave you video RSVP’s
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+               </div>
+            </div>
+            <div class="plans-wrap recomendat-plan">
+                <h5>Pro</h5>
+                <h6>$12.50 <span>Per month | <strong>Billed annually</strong></span></h6>
+                <p>$150 billed annually</p>
+                <div class="d-flex justify-content-between">
+                    <div id="app" class="w-100">
+                        <button class="toggledeal w-100 d-flex justify-content-between">
+                            <span class="limited-hide" style="color:green">Best Deal!</span>
+                            <span class="">Show details <i class="fa-solid fa-chevron-down chevron"></i></span>
+                        </button>
+                        <div class="detailsdeal">
+                            <div class="feauture-list">
+                                <div>
+                                    <h5>Cost:</h5>
+                                    <ul class="cost-list">
+                                        <li>
+                                            15 Invites or less
+                                            <span>....................................$15</span>
+                                        </li>
+                                        <li>
+                                            35 Invites or less
+                                            <span>...................................$29</span>
+                                        </li>
+                                        <li>
+                                            100 Invites or less
+                                            <span> ................................$50</span>
+                                        </li>
+                                        <li>
+                                            500 Invites or less
+                                            <span>................................$75</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+               </div>
+            </div>
+        </div>  -->
+
+        <div class="new-event-btn">
+            <a href="#" class="cmn-btn create_new_event">Create New Event</a>
+        </div>
+    </div>
+
+    <div id="sidebar_create_event_overlay" class="overlay" onclick="toggleSidebar()"></div>
+    <div id="sidebar_change_plan_create" class="sidebar common-sidebar">
+        <div class="sidebar-content guest-sidebar">
+
+            <!-- ========== edit-plan-sidebar ========= -->
+            <div class="edit-checkout">
+                <div class="d-flex align-items-center justify-content-between toggle-wrp">
+                    <h5>Change your plan</h5>
+                    <button class="close-btn" onclick="toggleSidebar()">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5.00098 5L19 18.9991" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M4.99996 18.9991L18.999 5" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="invite-link">
+                    <div class="invite-left-side recomendat-plan">
+                        <h6>0</h6>
+                        <p><strong>Invites | 15</strong> Left</p>
+                    </div>
+                    <span>15 or less <strong>$15.99</strong></span>
+                </div>
+                <div class="plans-wrap change-plan free_plan active">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h5 class="heading">Free</h5>
+                            <h5>Free</h5>
+                        </div>
+                        <div>
+                            <input class="form-check-input ms-3 plan_check" data-plan="free" type="checkbox" name="plan_check" id="free_plan_check" checked>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <div id="app" class="w-100">
+                            <button class="toggleButton w-100 d-flex justify-content-between">
+                                <span>Limited Featres (15 guests max)</span>
+                                <span class="">Show details <i class="fa-solid fa-chevron-down chevron"></i></span>
+                            </button>
+                            <div class="details">
+                                <div class="feauture-list">
+                                    <h5>Features</h5>
+                                    <ul>
+                                        <li><span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26" />
+                                                </svg>
+                                            </span>
+                                            <strong>Limited to 15 invites </strong> max per event
+                                        </li>
+                                        <li>
+                                            <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26" />
+                                                </svg>
+                                            </span>
+                                            Unlimited Events
+                                        </li>
+                                        <li>
+                                            <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26" />
+                                                </svg>
+                                            </span>
+                                            Event Analytics
+                                        </li>
+                                        <li>
+                                            <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26" />
+                                                </svg>
+                                            </span>
+                                            Upload your own photo to Invites
+                                        </li>
+                                        <li>
+                                            <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26" />
+                                                </svg>
+                                            </span>
+                                            Access to <strong>all</strong> designs
+                                        </li>
+                                        <li>
+                                            <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26" />
+                                                </svg>
+                                            </span>
+                                            Can respond to direct messages (DM)
+                                        </li>
+                                        <li>
+                                            <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26" />
+                                                </svg>
+                                            </span>
+                                            Ads on app & emails
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="plans-wrap pro-wrp change-plan pro_plan">
+                    <div class="d-flex justify-content-between">
+                        <div style="width:60%">
+                            <h5>Pro</h5>
+                            <h6>$15.00 - $75.00<span>Per event</span></h6>
+                            <p>Pay as you go per event - depending on number of invites sent.</p>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <div class="recomend-pro-paln d-flex align-items-center">
+                                <svg width="11" height="8" viewBox="0 0 11 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M2.40283 8C1.29826 8 0.402832 7.10457 0.402832 6V2.57245C0.402832 2.20365 0.788462 1.96177 1.12048 2.12231L2.78318 2.92625C2.99971 3.03095 3.26011 2.96664 3.40301 2.77317L5.04919 0.544494C5.24905 0.273916 5.6537 0.273917 5.85356 0.544494L7.49974 2.77317C7.64264 2.96664 7.90304 3.03095 8.11958 2.92625L9.78227 2.12231C10.1143 1.96177 10.4999 2.20365 10.4999 2.57245V6C10.4999 7.10457 9.60449 8 8.49992 8H2.40283Z" fill="#FCCD1E" />
+                                </svg>
+                                <h5>Current Choice</h5>
+                            </div>
+                            <input class="form-check-input ms-3 plan_check" data-plan="pro" type="checkbox" name="plan_check" id="pro_plan_check">
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <div id="app" class="w-100">
+                            <button class="toggleButtonpro w-100 d-flex justify-content-between">
+                                <span class="limited-hide" style="color:green">All the PRO features for this one event</span>
+                                <span class="">Show details <i class="fa-solid fa-chevron-down chevron"></i></span>
+                            </button>
+                            <div class="detailspro">
+                                <div class="feauture-list">
+                                    <div>
+                                        <h5>Cost:</h5>
+                                        <ul class="cost-list">
+                                            <li>
+                                                15 Invites or less
+                                                <span>....................................$15</span>
+                                            </li>
+                                            <li>
+                                                35 Invites or less
+                                                <span>...................................$29</span>
+                                            </li>
+                                            <li>
+                                                100 Invites or less
+                                                <span> ................................$50</span>
+                                            </li>
+                                            <li>
+                                                500 Invites or less
+                                                <span>................................$75</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h5>Pro Features</h5>
+                                        <ul>
+                                            <li><span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26" />
+                                                    </svg>
+                                                </span>
+                                                All features in free section
+                                            </li>
+                                            <li>
+                                                <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26" />
+                                                    </svg>
+                                                </span>
+                                                500 Invites limit per event
+                                            </li>
+                                            <li>
+                                                <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26" />
+                                                    </svg>
+                                                </span>
+                                                Set schedule for activities
+                                            </li>
+                                            <li>
+                                                <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26" />
+                                                    </svg>
+                                                </span>
+                                                Potluck feature
+                                            </li>
+                                            <li>
+                                                <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26" />
+                                                    </svg>
+                                                </span>
+                                                Unlimited guest polls
+                                            </li>
+                                            <li>
+                                                <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26" />
+                                                    </svg>
+                                                </span>
+                                                Add 3 Photos slider with invite design
+                                            </li>
+                                            <li>
+                                                <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26" />
+                                                    </svg>
+                                                </span>
+                                                Co-Host option
+                                            </li>
+                                            <li>
+                                                <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26" />
+                                                    </svg>
+                                                </span>
+                                                Can create/initiate direct messages to guests
+                                            </li>
+                                            <li>
+                                                <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26" />
+                                                    </svg>
+                                                </span>
+                                                No Ads
+                                            </li>
+                                            <li>
+                                                <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26" />
+                                                    </svg>
+                                                </span>
+                                                Unlimited events
+                                            </li>
+                                            <li>
+                                                <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26" />
+                                                    </svg>
+                                                </span>
+                                                Thank you messages after event
+                                            </li>
+                                            <li>
+                                                <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26" />
+                                                    </svg>
+                                                </span>
+                                                Guests can leave you video RSVP’s
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="plans-wrap recomendat-plan change-plan pro_year_plan">
+                    <!-- <div class="membership-wrap">
+                        <h5>PRO Yearly Membership</h5>
+                        <div class="d-flex align-items-center">
+                            <span>
+                                <svg width="16" height="13" viewBox="0 0 16 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M2 12.3384C0.895431 12.3384 0 11.443 0 10.3384V3.27182C0 2.90303 0.38563 2.66114 0.717651 2.82168L3.99023 4.40403C4.20677 4.50873 4.46716 4.44442 4.61006 4.25095L7.59782 0.205994C7.79767 -0.0645837 8.20232 -0.0645843 8.40218 0.205993L11.3899 4.25095C11.5328 4.44442 11.7932 4.50873 12.0098 4.40403L15.2823 2.82168C15.6144 2.66114 16 2.90303 16 3.27182V10.3384C16 11.443 15.1046 12.3384 14 12.3384H2Z" fill="#FCCD1E"/>
+                                </svg>
+                            </span>
+                            <h6>Pro Account</h6>
+                        </div>
+                    </div> -->
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <div class="d-flex align-items-center">
+                                <h5>Pro </h5>
+
+                            </div>
+                            <h6>$12.50 <span>Per month | <strong>Billed annually</strong></span></h6>
+                            <p>$150 billed annually</p>
+                        </div>
+                        <div class="d-flex">
+                            <span class="ms-auto rcomand-text">Recommended</span>
+                            <input class="form-check-input ms-3 plan_check" data-plan="pro_year" type="checkbox" name="plan_check" id="pro_year_plan_check">
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <div id="app" class="w-100">
+                            <button class="toggledeal w-100 d-flex justify-content-between">
+                                <span class="limited-hide" style="color:green">Best Deal!</span>
+                                <span class="">Show details <i class="fa-solid fa-chevron-down chevron"></i></span>
+                            </button>
+                            <div class="detailsdeal">
+                                <div class="feauture-list">
+                                    <h5>Pro Features </h5>
+                                    <ul>
+                                        <li><span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26" />
+                                                </svg>
+                                            </span>
+                                            <strong>All features in free section</strong>
+                                        </li>
+                                        <li>
+                                            <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26" />
+                                                </svg>
+                                            </span>
+                                            Set schedule for activities
+                                        </li>
+                                        <li>
+                                            <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26" />
+                                                </svg>
+                                            </span>
+                                            500 Invites limit per event
+                                        </li>
+                                        <li>
+                                            <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26" />
+                                                </svg>
+                                            </span>
+                                            Potluck feature
+                                        </li>
+                                        <li>
+                                            <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26" />
+                                                </svg>
+                                            </span>
+                                            Unlimited guest polls
+                                        </li>
+                                        <li>
+                                            <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26" />
+                                                </svg>
+                                            </span>
+                                            3 Photos slider with invite design
+                                        </li>
+                                        <li>
+                                            <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26" />
+                                                </svg>
+                                            </span>
+                                            Co-Host option
+                                        </li>
+                                        <li>
+                                            <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26" />
+                                                </svg>
+                                            </span>
+                                            Can create/initiate direct messages to guests
+                                        </li>
+                                        <li>
+                                            <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26" />
+                                                </svg>
+                                            </span>
+                                            No Ads
+                                        </li>
+                                        <li>
+                                            <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26" />
+                                                </svg>
+                                            </span>
+                                            Skip this step when creating invites
+                                        </li>
+                                        <li>
+                                            <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26" />
+                                                </svg>
+                                            </span>
+                                            Unlimited events
+                                        </li>
+                                        <li>
+                                            <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26" />
+                                                </svg>
+                                            </span>
+                                            Thank you messages after event
+                                        </li>
+                                        <li>
+                                            <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26" />
+                                                </svg>
+                                            </span>
+                                            Guests can leave you video RSVP’s
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ======== confirm downgrade ========= -->
+
+            <!-- <div class="confirm-downgrade">
+                    <div class="d-flex align-items-center justify-content-between toggle-wrp border-0">
+                        <div class="d-flex align-items-center">
+                            <span class="me-4">
+                                <svg width="26" height="20" viewBox="0 0 26 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M2.5 19.9034C1.39543 19.9034 0.5 19.008 0.5 17.9034V5.28845C0.5 4.91965 0.88563 4.67777 1.21765 4.8383L6.94477 7.60746C7.16131 7.71216 7.42171 7.64785 7.56461 7.45439L12.5978 0.640197C12.7977 0.36962 13.2023 0.36962 13.4022 0.640197L18.4354 7.45439C18.5783 7.64785 18.8387 7.71216 19.0552 7.60746L24.7823 4.8383C25.1144 4.67777 25.5 4.91965 25.5 5.28845V17.9034C25.5 19.008 24.6046 19.9034 23.5 19.9034H2.5Z" fill="#FCCD1E"/>
+                                </svg>
+                            </span>
+                            <h5>You are now a pro user!</h5>
+                        </div>
+                        <button class="close-btn" onclick="toggleSidebar()">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5.00098 5L19 18.9991" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M4.99996 18.9991L18.999 5" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="feature-wrps">
+                        <h5 class="sub-heading">You have unlocked the following features:</h5>
+                        <div class="feauture-list">
+                            <h5>Pro Features </h5>
+                            <ul>
+                                <li><span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26"/>
+                                    </svg>
+                                    </span>
+                                    All features in free section
+                                </li>
+                                <li>
+                                    <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26"/>
+                                        </svg>
+                                        </span>
+                                        500 Invites limit per event 
+                                </li>
+                                <li>
+                                    <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26"/>
+                                        </svg>
+                                        </span>
+                                        Set schedule for activities  <strong>(Details Section)</strong>
+                                </li>
+                                <li>
+                                    <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26"/>
+                                        </svg>
+                                        </span>
+                                        Potluck feature  <strong>(Settings Section)</strong>
+                                </li>
+                                <li>
+                                    <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26"/>
+                                        </svg>
+                                        </span>
+                                        Unlimited guest polls 
+                                </li>
+                                <li>
+                                    <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26"/>
+                                        </svg>
+                                        </span>
+                                        Add 3 Photos slider to invite <strong>(Edit Design Section)</strong>
+                                </li>
+                                <li>
+                                    <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26"/>
+                                        </svg>
+                                        </span>
+                                        Co-Host option <strong>(Details Section)</strong>
+                                </li>
+                                <li>
+                                    <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26"/>
+                                        </svg>
+                                        </span>
+                                        No Ads
+                                </li>
+                                <li>
+                                    <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26"/>
+                                        </svg>
+                                        </span>
+                                        Unlimited events
+                                </li>
+                                <li>
+                                    <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26"/>
+                                        </svg>
+                                        </span>
+                                        Thank you messages after event
+                                </li>
+                                <li>
+                                    <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26"/>
+                                        </svg>
+                                        </span>
+                                        Guests can leave you Video RSVP’s
+                                </li>
+                            </ul>
+                        </div>
+                        <h6>** You may go back to these sections and add them now or later</h6>
+                    </div>
+                </div> -->
+
+            <!-- ======== confirm upgrade ========== -->
+
+            <!-- <div class="confirm-downgrade">
+                <div class="d-flex align-items-center justify-content-between toggle-wrp border-0">
+                    <div class="d-flex align-items-center">
+                        <span class="me-4">
+                            <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="0.5" y="0.5" width="25" height="25" rx="12.5" fill="#E03137"/>
+                                <g clip-path="url(#clip0_5633_75675)">
+                                <path d="M13 23C18.5 23 23 18.5 23 13C23 7.5 18.5 3 13 3C7.5 3 3 7.5 3 13C3 18.5 7.5 23 13 23Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M13 9V14" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M12.9945 17H13.0035" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </g>
+                                <defs>
+                                <clipPath id="clip0_5633_75675">
+                                <rect width="24" height="24" fill="white" transform="translate(1 1)"/>
+                                </clipPath>
+                                </defs>
+                            </svg>
+                        </span>
+                        <h5>Are you sure you want to downgrade your plan?</h5>
+                    </div>
+                    <button class="close-btn" onclick="toggleSidebar()">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5.00098 5L19 18.9991" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M4.99996 18.9991L18.999 5" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="feature-wrps">
+                    <h5 class="sub-heading">You will lose your pro features.   Please contact support.   </h5>
+                    <div class="feauture-list feature-lose-list">
+                        <h5>Features you will lose:</h5>
+                        <ul class="feature-lose">
+                            <li><span ><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M8.50004 14.6673C12.1667 14.6673 15.1667 11.6673 15.1667 8.00065C15.1667 4.33398 12.1667 1.33398 8.50004 1.33398C4.83337 1.33398 1.83337 4.33398 1.83337 8.00065C1.83337 11.6673 4.83337 14.6673 8.50004 14.6673Z" stroke="#E03137" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M6.61328 9.88661L10.3866 6.11328" stroke="#E03137" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M10.3866 9.88661L6.61328 6.11328" stroke="#E03137" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                </span>
+                                500 Invites limit per event
+                            </li>
+                            <li>
+                                <span ><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M8.50004 14.6673C12.1667 14.6673 15.1667 11.6673 15.1667 8.00065C15.1667 4.33398 12.1667 1.33398 8.50004 1.33398C4.83337 1.33398 1.83337 4.33398 1.83337 8.00065C1.83337 11.6673 4.83337 14.6673 8.50004 14.6673Z" stroke="#E03137" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M6.61328 9.88661L10.3866 6.11328" stroke="#E03137" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M10.3866 9.88661L6.61328 6.11328" stroke="#E03137" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    </span>
+                                    Set schedule for activities 
+                            </li>
+                            <li>
+                                <span ><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M8.50004 14.6673C12.1667 14.6673 15.1667 11.6673 15.1667 8.00065C15.1667 4.33398 12.1667 1.33398 8.50004 1.33398C4.83337 1.33398 1.83337 4.33398 1.83337 8.00065C1.83337 11.6673 4.83337 14.6673 8.50004 14.6673Z" stroke="#E03137" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M6.61328 9.88661L10.3866 6.11328" stroke="#E03137" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M10.3866 9.88661L6.61328 6.11328" stroke="#E03137" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    </span>
+                                    Potluck feature
+                            </li>
+                            <li>
+                                <span ><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M8.50004 14.6673C12.1667 14.6673 15.1667 11.6673 15.1667 8.00065C15.1667 4.33398 12.1667 1.33398 8.50004 1.33398C4.83337 1.33398 1.83337 4.33398 1.83337 8.00065C1.83337 11.6673 4.83337 14.6673 8.50004 14.6673Z" stroke="#E03137" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M6.61328 9.88661L10.3866 6.11328" stroke="#E03137" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M10.3866 9.88661L6.61328 6.11328" stroke="#E03137" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    </span>
+                                    Unlimited guest polls
+                            </li>
+                            <li>
+                                <span ><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M8.50004 14.6673C12.1667 14.6673 15.1667 11.6673 15.1667 8.00065C15.1667 4.33398 12.1667 1.33398 8.50004 1.33398C4.83337 1.33398 1.83337 4.33398 1.83337 8.00065C1.83337 11.6673 4.83337 14.6673 8.50004 14.6673Z" stroke="#E03137" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M6.61328 9.88661L10.3866 6.11328" stroke="#E03137" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M10.3866 9.88661L6.61328 6.11328" stroke="#E03137" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    </span>
+                                    Add 3 Photos slider with invite design
+                            </li>
+                            <li>
+                                <span ><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M8.50004 14.6673C12.1667 14.6673 15.1667 11.6673 15.1667 8.00065C15.1667 4.33398 12.1667 1.33398 8.50004 1.33398C4.83337 1.33398 1.83337 4.33398 1.83337 8.00065C1.83337 11.6673 4.83337 14.6673 8.50004 14.6673Z" stroke="#E03137" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M6.61328 9.88661L10.3866 6.11328" stroke="#E03137" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M10.3866 9.88661L6.61328 6.11328" stroke="#E03137" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    </span>
+                                    Co-Host option
+                            </li>
+                            <li>
+                                <span ><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M8.50004 14.6673C12.1667 14.6673 15.1667 11.6673 15.1667 8.00065C15.1667 4.33398 12.1667 1.33398 8.50004 1.33398C4.83337 1.33398 1.83337 4.33398 1.83337 8.00065C1.83337 11.6673 4.83337 14.6673 8.50004 14.6673Z" stroke="#E03137" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M6.61328 9.88661L10.3866 6.11328" stroke="#E03137" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M10.3866 9.88661L6.61328 6.11328" stroke="#E03137" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    </span>
+                                    No Ads
+                            </li>
+                            <li>
+                                <span ><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M8.50004 14.6673C12.1667 14.6673 15.1667 11.6673 15.1667 8.00065C15.1667 4.33398 12.1667 1.33398 8.50004 1.33398C4.83337 1.33398 1.83337 4.33398 1.83337 8.00065C1.83337 11.6673 4.83337 14.6673 8.50004 14.6673Z" stroke="#E03137" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M6.61328 9.88661L10.3866 6.11328" stroke="#E03137" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M10.3866 9.88661L6.61328 6.11328" stroke="#E03137" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    </span>
+                                    Thank you messages after event
+                            </li>
+                            <li>
+                                <span   ><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M8.50004 14.6673C12.1667 14.6673 15.1667 11.6673 15.1667 8.00065C15.1667 4.33398 12.1667 1.33398 8.50004 1.33398C4.83337 1.33398 1.83337 4.33398 1.83337 8.00065C1.83337 11.6673 4.83337 14.6673 8.50004 14.6673Z" stroke="#E03137" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M6.61328 9.88661L10.3866 6.11328" stroke="#E03137" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M10.3866 9.88661L6.61328 6.11328" stroke="#E03137" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    </span>
+                                    Guests can leave you video RSVP’ss
+                            </li>
+                        </ul>
+                        <h5>Your new plan: </h5>
+                        <ul>
+                            <li><span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26"/>
+                                </svg>
+                                </span>
+                                <strong>Limited to 15 invites</strong> max per event
+                            </li>
+                            <li>
+                                <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26"/>
+                                    </svg>
+                                    </span>
+                                    Unlimited Events 
+                            </li>
+                            <li>
+                                <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26"/>
+                                    </svg>
+                                    </span>
+                                    Event Analytics
+                            </li>
+                            <li>
+                                <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26"/>
+                                    </svg>
+                                    </span>
+                                    Upload your own photo to Invites
+                            </li>
+                            <li>
+                                <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26"/>
+                                    </svg>
+                                    </span>
+                                    Access to <strong>all</strong> designs
+                            </li>
+                            <li>
+                                <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26"/>
+                                    </svg>
+                                    </span>
+                                    Can create/respond to direct messages (DM)
+                            </li>
+                            <li>
+                                <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26"/>
+                                    </svg>
+                                    </span>
+                                    Ads on app & emails
+                            </li>
+                        </ul>
+                    </div>
+                    <h6>*Yesvite support will issue a pro-rated refund.</h6>
+                    <div class="plans-btns">
+                        <a href="#" type="button" class="cancel-btn">Cancel </a>
+                        <a href="#" type="button" class="confirm-btn">Confirm Dowgrade </a>
+                    </div>
+                </div>
+            </div>  -->
+        </div>
+        <div class="new-event-btn">
+            <a href="#" class="cmn-btn create_event_with_plan">Save</a>
+        </div>
+    </div>
+    <div id="sidebar_change_plan_create_overlay" class="overlay" onclick="toggleSidebar('')"></div>
 </section>

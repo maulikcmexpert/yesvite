@@ -37,14 +37,15 @@ class ProfileController extends Controller
         $title = 'Profile';
         $page = 'front.profile';
         $id = Auth::guard('web')->user()->id;
-
+        $js = ['create_event'];
 
         $user = User::withCount(
 
             [
                 'event' => function ($query) {
                     $query->where('is_draft_save', '0');
-                }, 'event_post' => function ($query) {
+                },
+                'event_post' => function ($query) {
                     $query->where('post_type', '1');
                 },
                 'event_post_comment',
@@ -56,7 +57,9 @@ class ProfileController extends Controller
         $date = Carbon::parse($user->created_at);
         $formatted_date = $date->format('F, Y');
         $user['join_date'] = $formatted_date;
-
+        $draft_events =   Event::where(['user_id' => $user->id, 'is_draft_save' => '1'])
+            ->select('event_name', 'step', 'updated_at', 'id')
+            ->get();
         if ($user->visible == 1) {
             $user['visible'] = 'Guests from events';
         }
@@ -74,6 +77,8 @@ class ProfileController extends Controller
             'title',
             'page',
             'user',
+            'draft_events',
+            'js'
 
         ));
     }
@@ -88,7 +93,8 @@ class ProfileController extends Controller
             [
                 'event' => function ($query) {
                     $query->where('is_draft_save', '0');
-                }, 'event_post' => function ($query) {
+                },
+                'event_post' => function ($query) {
                     $query->where('post_type', '1');
                 },
                 'event_post_comment',
@@ -125,7 +131,8 @@ class ProfileController extends Controller
             [
                 'event' => function ($query) {
                     $query->where('is_draft_save', '0');
-                }, 'event_post' => function ($query) {
+                },
+                'event_post' => function ($query) {
                     $query->where('post_type', '1');
                 },
                 'event_post_comment'
@@ -347,7 +354,8 @@ class ProfileController extends Controller
             [
                 'event' => function ($query) {
                     $query->where('is_draft_save', '0');
-                }, 'event_post' => function ($query) {
+                },
+                'event_post' => function ($query) {
                     $query->where('post_type', '1');
                 },
                 'event_post_comment'
@@ -419,7 +427,8 @@ class ProfileController extends Controller
             [
                 'event' => function ($query) {
                     $query->where('is_draft_save', '0');
-                }, 'event_post' => function ($query) {
+                },
+                'event_post' => function ($query) {
                     $query->where('post_type', '1');
                 },
                 'event_post_comment'
