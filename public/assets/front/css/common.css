@@ -744,43 +744,6 @@ ul.nav-tabs .nav-link:focus {
     gap: 20px;
 }
 
-.modal .login-form-wrap .iti__selected-flag {
-    border: 1px solid var(--borderColor);
-}
-
-.modal .login-form-wrap .iti__selected-flag {
-    background-color: transparent;
-    border-right: 1px solid var(--borderColor);
-}
-
-.modal .login-form-wrap .iti__flag-container {
-    top: -1px;
-}
-
-.modal .login-form-wrap .input-form .iti {
-    width: 80px;
-}
-
-.input-form .iti__selected-flag {
-    border: 1px solid var(--borderColor);
-}
-
-.input-form .iti__selected-flag {
-    background-color: transparent;
-    border-right: 1px solid var(--borderColor);
-}
-
-.input-form .iti__flag-container {
-    top: -1px;
-}
-
-.input-form .iti {
-    width: 80px;
-}
-
-.input-form .iti .iti__selected-flag {
-    height: 48px;
-}
 
 /* ======== Responsive ========= */
 @media (min-width:2000px) and (max-width:10000px) {
