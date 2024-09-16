@@ -61,22 +61,22 @@
 
 <link rel="stylesheet" href="{{ asset('assets/event/css/notification.css') }}"> -->
 
-<link rel="stylesheet" href="{{ asset('assets/event/css/pick_card.css') }}">
-<!-- 
+<!-- <link rel="stylesheet" href="{{ asset('assets/event/css/pick_card.css') }}">
+
 <link rel="stylesheet" href="{{ asset('assets/event/css/privacy.css') }}">
 
-<link rel="stylesheet" href="{{ asset('assets/event/css/privay-policy.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/event/css/privay-policy.css') }}"> -->
 
 <link rel="stylesheet" href="{{ asset('assets/event/css/profile.css') }}">
 
-<link rel="stylesheet" href="{{ asset('assets/event/css/rsvp.css') }}">
+<!-- <link rel="stylesheet" href="{{ asset('assets/event/css/rsvp.css') }}">
 
 <link rel="stylesheet" href="{{ asset('assets/event/css/setting.css') }}">
 
 <link rel="stylesheet" href="{{ asset('assets/event/css/style.css') }}">
 
-<link rel="stylesheet" href="{{ asset('assets/event/css/variable.css') }}"> -->
-
+<link rel="stylesheet" href="{{ asset('assets/event/css/variable.css') }}">
+ -->
 
 
 <!-- <link rel="stylesheet" href="{{ asset('assets/event/css/bootstrap-datetimepicker.min.css') }}"> -->
