@@ -1460,7 +1460,7 @@ function createMessageElement(key, messageData, isGroup) {
             : `
             <div class="simple-message">
              ${
-                        isSender
+                isReceiver
                             ? senderprofile
                             : ""
                     } 
