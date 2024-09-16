@@ -31,7 +31,7 @@
 
 
 
-<link rel="stylesheet" href="{{ asset('assets/event/css/about-us.css') }}">
+<!-- <link rel="stylesheet" href="{{ asset('assets/event/css/about-us.css') }}">
 
 <link rel="stylesheet" href="{{ asset('assets/event/css/account.css') }}">
 
@@ -75,7 +75,7 @@
 
 <link rel="stylesheet" href="{{ asset('assets/event/css/style.css') }}">
 
-<link rel="stylesheet" href="{{ asset('assets/event/css/variable.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/event/css/variable.css') }}"> -->
 
 
 
@@ -89,7 +89,7 @@
 
 <!-- {{-- <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" /> --}} -->
 
-<!-- <link href="https://cdn.jsdelivr.net/bootstrap.timepicker/0.2.6/css/bootstrap-timepicker.min.css" rel="stylesheet" /> -->
+<link href="https://cdn.jsdelivr.net/bootstrap.timepicker/0.2.6/css/bootstrap-timepicker.min.css" rel="stylesheet" />
 
 
 <!-- 
@@ -103,7 +103,7 @@
 
 {{-- <link rel="stylesheet"   href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css"> --}} -->
 
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
 
@@ -115,10 +115,10 @@
 
 <!-- {{-- <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'> --}} -->
 
-<!-- <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/all.min.css'> -->
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/all.min.css'>
 
-<!-- <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css'> -->
-<!-- <link rel="stylesheet" href="./style.css"> -->
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css'>
+<link rel="stylesheet" href="./style.css">
 
 
 
