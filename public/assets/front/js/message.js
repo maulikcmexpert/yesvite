@@ -180,16 +180,18 @@ function getSelectedUserimggrp(profileImageUrl, userName) {
     console.log(isValidImageUrlgrp(profileImageUrl))
     if (isValidImageUrlgrp(profileImageUrl)==1) {
         return `<img class="user-avatar img-fluid" src="${profileImageUrl}" alt="user-img">`;
+    }else{
+
+        console.log(userName);
+        
+        const initials = getInitials(userName);
+        console.log(initials);
+    
+        const fontColor = "fontcolor" + initials[0]?.toUpperCase();
+    
+        return `<h5 class="${fontColor} user-avatar img-fluid" src="">${initials}</h5>`;
     }
 
-    console.log(userName);
-    
-    const initials = getInitials(userName);
-    console.log(initials);
-
-    const fontColor = "fontcolor" + initials[0]?.toUpperCase();
-
-    return `<h5 class="${fontColor} user-avatar img-fluid" src="">${initials}</h5>`;
 }
 
 // function getSelectedUserimggrp(profileImageUrl, userName) {
