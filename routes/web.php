@@ -12,6 +12,7 @@ use App\Http\Controllers\{
     SocialController,
     AccountSettingController,
     RsvpController,
+    EventController as ControllersEventController,
     ChatController,
     PrivacyPolicyController,
     TermsAndConditionController
@@ -44,6 +45,29 @@ Route::get('term_and_condition', [TermsAndConditionController::class, 'index'])-
 Route::get('rsvp/{userId}/{eventId}', [RsvpController::class, 'index'])->name('rsvp');
 Route::post('rsvp/store', [RsvpController::class, 'store'])->name('rsvp.store');
 
+Route::view('/design/post_temp_1', 'front.event.design.post_temp_1')->name('post_temp_1');
+Route::view('/design/post_temp_2', 'front.event.design.post_temp_2')->name('post_temp_2');
+Route::view('/design/post_temp_3', 'front.event.design.post_temp_3')->name('post_temp_3');
+Route::view('/design/post_temp_4', 'front.event.design.post_temp_4')->name('post_temp_4');
+Route::view('/design/post_temp_5', 'front.event.design.post_temp_5')->name('post_temp_5');
+Route::view('/design/post_temp_6', 'front.event.design.post_temp_6')->name('post_temp_6');
+Route::view('/design/post_temp_7', 'front.event.design.post_temp_7')->name('post_temp_7');
+Route::view('/design/post_temp_8', 'front.event.design.post_temp_8')->name('post_temp_8');
+Route::view('/design/post_temp_9', 'front.event.design.post_temp_9')->name('post_temp_9');
+Route::view('/design/post_temp_10', 'front.event.design.post_temp_10')->name('post_temp_10');
+Route::view('/design/post_temp_11', 'front.event.design.post_temp_11')->name('post_temp_11');
+
+Route::view('/template/post_temp_1', 'front.event.template.post_temp_1')->name('template_post_temp_1');
+Route::view('/template/post_temp_2', 'front.event.template.post_temp_2')->name('template_post_temp_2');
+Route::view('/template/post_temp_3', 'front.event.template.post_temp_3')->name('template_post_temp_3');
+Route::view('/template/post_temp_4', 'front.event.template.post_temp_4')->name('template_post_temp_4');
+Route::view('/template/post_temp_5', 'front.event.template.post_temp_5')->name('template_post_temp_5');
+Route::view('/template/post_temp_6', 'front.event.template.post_temp_6')->name('template_post_temp_6');
+Route::view('/template/post_temp_7', 'front.event.template.post_temp_7')->name('template_post_temp_7');
+Route::view('/template/post_temp_8', 'front.event.template.post_temp_8')->name('template_post_temp_8');
+Route::view('/template/post_temp_9', 'front.event.template.post_temp_9')->name('template_post_temp_9');
+Route::view('/template/post_temp_10', 'front.event.template.post_temp_10')->name('template_post_temp_10');
+Route::view('/template/post_temp_11', 'front.event.template.post_temp_11')->name('template_post_temp_11');
 
 
 
@@ -103,6 +127,32 @@ Route::middleware('checkUserExist')->group(function () {
     Route::post('getConversation',  [ChatController::class, 'getConversation'])->name('message.getConversation');
     Route::post('updateUserinFB',  [ChatController::class, 'updateUserinFB'])->name('message.updateUserinFB');
     Route::get('/autocomplete-users', [ChatController::class, 'autocomplete'])->name('autocomplete.users');
+
+
+    Route::get('event',  [ControllersEventController::class, 'index'])->name('event');
+    Route::post('event/store',  [ControllersEventController::class, 'store'])->name('event.event_store');
+    Route::post('event/store_user_id',  [ControllersEventController::class, 'storeUserId'])->name('event.store_user_id');
+    Route::post('event/delete_user_id',  [ControllersEventController::class, 'removeUserId'])->name('event.delete_user_id');
+    Route::post('event/delete-session', [ControllersEventController::class, 'deleteSession'])->name('delete.session');
+    Route::post('event/category_session', [ControllersEventController::class, 'storeCategorySession'])->name('category.session');
+    Route::post('event/category_item_session', [ControllersEventController::class, 'storeCategoryitemSession'])->name('category_itme.session');
+    Route::post('event/add_activity', [ControllersEventController::class, 'addActivity'])->name('add.activity');
+    Route::post('event/delete_potluck_category', [ControllersEventController::class, 'deletePotluckCategory'])->name('delete.potluck_category');
+    Route::post('event/add_new_gift_registry', [ControllersEventController::class, 'addNewGiftRegistry'])->name('add.gift_registry');
+    Route::post('event/remove_gift_registry', [ControllersEventController::class, 'removeGiftRegistry'])->name('remove.gift_registry');
+    Route::post('event/get_all_invited_guest', [ControllersEventController::class, 'getAllInvitedGuest'])->name('get.invited_list');
+    Route::post('event/add_new_thankyou_card', [ControllersEventController::class, 'addNewThankyouCard'])->name('add.thankyou_card');
+    Route::post('event/remove_thankyou_card', [ControllersEventController::class, 'removeThankyouCard'])->name('remove.thankyou_card');
+    Route::post('event/update_self_bring', [ControllersEventController::class, 'updateSelfBring']);
+    Route::post('event/store_temp_design', [ControllersEventController::class, 'saveTempDesign']);
+    Route::post('event/add_new_group', [ControllersEventController::class, 'addNewGroup']);
+    Route::post('event/delete_group', [ControllersEventController::class, 'deleteGroup']);
+    Route::post('event/list_group_memeber', [ControllersEventController::class, 'listGroupMember']);
+    Route::get('event/get_user_ajax', [ControllersEventController::class, 'getUserAjax']);
+    Route::post('event/search_user_ajax', [ControllersEventController::class, 'searchUserAjax']);
+    Route::post('event/get_all_group_member_list', [ControllersEventController::class, 'getAllGroupMember']);
+    Route::post('event/invite_user_by_group', [ControllersEventController::class, 'inviteByGroup']);
+    Route::post('event/edit_event', [ControllersEventController::class, 'editEvent']);
 });
 
 Route::get('access_token', [AuthController::class, 'handleGoogleCallback'])->name('access_token');
