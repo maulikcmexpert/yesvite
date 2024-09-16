@@ -10,11 +10,11 @@
                             <select class="form-select" id="event-type" onchange="clearError(this)">
                                 <option value="">Select Event Type</option>
                                 @foreach ($event_type as $type)
-                                    <option value="{{ $type->id }}">{{ $type->event_type }}</option>
+                                <option value="{{ $type->id }}">{{ $type->event_type }}</option>
                                 @endforeach
                             </select>
                             <label for="select-label"
-                                class="form-label input-field floating-label select-label">Event
+                                class="form-label input-field floating-label select-label floatingfocus">Event
                                 Type</label>
                             <lable for="event-type" id="event-type-error" class="error"></lable>
                         </div>
@@ -66,14 +66,14 @@
                         <div class="form-group">
                             <label>Start Time</label>
                             <div class="input-group time ">
-                              <input class="form-control timepicker" placeholder="HH:MM AM/PM" id="start-time"
-                              name="start-time" onblur="clearError(this)" required=""/><span class="input-group-append input-group-addon"><span class="input-group-text"><svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M18.8334 9.99984C18.8334 14.5998 15.1 18.3332 10.5 18.3332C5.90002 18.3332 2.16669 14.5998 2.16669 9.99984C2.16669 5.39984 5.90002 1.6665 10.5 1.6665C15.1 1.6665 18.8334 5.39984 18.8334 9.99984Z" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M13.5917 12.65L11.0083 11.1083C10.5583 10.8416 10.1917 10.2 10.1917 9.67497V6.2583" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg></span></span>
+                                <input class="form-control timepicker" placeholder="HH:MM AM/PM" id="start-time"
+                                    name="start-time" onblur="clearError(this)" required="" /><span class="input-group-append input-group-addon"><span class="input-group-text"><svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M18.8334 9.99984C18.8334 14.5998 15.1 18.3332 10.5 18.3332C5.90002 18.3332 2.16669 14.5998 2.16669 9.99984C2.16669 5.39984 5.90002 1.6665 10.5 1.6665C15.1 1.6665 18.8334 5.39984 18.8334 9.99984Z" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M13.5917 12.65L11.0083 11.1083C10.5583 10.8416 10.1917 10.2 10.1917 9.67497V6.2583" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg></span></span>
                             </div>
                             <lable for="start-time" id="event-start_time-error" class="error"></lable>
-                          </div>
+                        </div>
                     </div>
                     <div class="col-6 mb-4">
                         <div class="input-form">
@@ -135,13 +135,13 @@
                         <div class="form-group">
                             <label>End Time</label>
                             <div class="input-group time ">
-                              <input class="form-control timepicker" placeholder="HH:MM AM/PM" id="end-time"
-                              name="end-time" onblur="clearError(this)" required=""/><span class="input-group-append input-group-addon"><span class="input-group-text"><svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M18.8334 9.99984C18.8334 14.5998 15.1 18.3332 10.5 18.3332C5.90002 18.3332 2.16669 14.5998 2.16669 9.99984C2.16669 5.39984 5.90002 1.6665 10.5 1.6665C15.1 1.6665 18.8334 5.39984 18.8334 9.99984Z" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M13.5917 12.65L11.0083 11.1083C10.5583 10.8416 10.1917 10.2 10.1917 9.67497V6.2583" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg></span></span>
+                                <input class="form-control timepicker" placeholder="HH:MM AM/PM" id="end-time"
+                                    name="end-time" onblur="clearError(this)" required="" /><span class="input-group-append input-group-addon"><span class="input-group-text"><svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M18.8334 9.99984C18.8334 14.5998 15.1 18.3332 10.5 18.3332C5.90002 18.3332 2.16669 14.5998 2.16669 9.99984C2.16669 5.39984 5.90002 1.6665 10.5 1.6665C15.1 1.6665 18.8334 5.39984 18.8334 9.99984Z" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M13.5917 12.65L11.0083 11.1083C10.5583 10.8416 10.1917 10.2 10.1917 9.67497V6.2583" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg></span></span>
                             </div>
-                          </div>
+                        </div>
                     </div>
 
 
@@ -372,7 +372,7 @@
     </div>
 </div>
 <div id="sidebar_activity_schedule_overlay" class="overlay" onclick="toggleSidebar()"></div>
- <div id="sidebar_activity_schedule" class="sidebar new-event-sidebar" style="">
+<div id="sidebar_activity_schedule" class="sidebar new-event-sidebar" style="">
     <div class="sidebar-content activity_bar">
         <!-- Sidebar content -->
         <div class="d-flex align-items-center justify-content-between toggle-wrp new-event-sidebar-head">
@@ -624,6 +624,4 @@
             </div>
         </div>
     </div>
-</div> 
-
-
+</div>
