@@ -33,13 +33,13 @@
 
 <link rel="stylesheet" href="{{ asset('assets/event/css/contact.css') }}">
 
+<link rel="stylesheet" href="{{ asset('assets/event/css/style.css') }}">
 
 <!-- <link rel="stylesheet" href="{{ asset('assets/event/css/bootstrap-datetimepicker.min.css') }}"> -->
 
 <!-- <link rel="stylesheet" href="{{ asset('assets/event/css/timepicker.min.css') }}"> -->
 
 
-<!-- <link rel="stylesheet" href="{{ asset('assets/event/css/style.css') }}"> -->
 
 
 
