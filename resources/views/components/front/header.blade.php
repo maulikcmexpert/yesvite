@@ -55,7 +55,7 @@
 
 <link rel="stylesheet" href="{{ asset('assets/event/css/login.css') }}">
 
-<link rel="stylesheet" href="{{ asset('assets/event/css/message.css') }}">
+<!-- <link rel="stylesheet" href="{{ asset('assets/event/css/message.css') }}"> -->
 
 <link rel="stylesheet" href="{{ asset('assets/event/css/new_event_detail.css') }}">
 
