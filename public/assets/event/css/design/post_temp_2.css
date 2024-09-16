@@ -1,0 +1,234 @@
+@font-face {
+    font-family: 'AbrilFatface-Regular';
+    src: url('../fonts/AbrilFatface-Regular.woff2') format('woff2'),
+        url('../fonts/AbrilFatface-Regular.woff2') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Roboto-Regular';
+    src: url('../fonts/Roboto-Regular.woff2') format('woff2'),
+        url('../fonts/Roboto-Regular.woff2') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Roboto-Medium';
+    src: url('../fonts/Roboto-Medium.woff2') format('woff2'),
+        url('../fonts/Roboto-Medium.woff2') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Roboto-Black';
+    src: url('../fonts/Roboto-Black.woff2') format('woff2'),
+        url('../fonts/Roboto-Black.woff2') format('woff');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Roboto-Bold';
+    src: url('../fonts/Roboto-Bold.woff2') format('woff2'),
+        url('../fonts/Roboto-Bold.woff2') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+:root{
+ --AbrilFatface-Regular: "AbrilFatface-Regular";
+ --Roboto-Regular: "Roboto-Regular";
+ --Roboto-Medium: "Roboto-Medium";
+ --Roboto-Bold: "Roboto-Bold";
+ --Roboto-Black: "Roboto-Black";
+}
+
+.birthday-card-main{
+    width: 460px;
+    height: 648px;
+    background-color: #1F2634;
+    border: 1px solid #E2E8F0;
+    position: relative;
+    overflow: hidden;
+    z-index: 2;
+}
+.post_temp_2_bg_img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+.birthday-card-head{
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 380px;
+    margin: 0px auto;
+    margin-top: 30px;
+}
+
+.birthday-card-head h2{
+    color: #fff;
+    font-family: var(--AbrilFatface-Regular);
+    font-size: 48px;
+    font-weight: 400;
+    line-height: 52px;
+    text-align: center;
+    max-width: 250px;
+    margin: 0px auto;
+    position: absolute;
+    left:75px;
+    top: 20px;
+    text-transform: capitalize;
+}
+.post_temp_2_head_star{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    z-index: 1;
+}
+
+.birthday-card_middle {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 360px;
+    height: 250px;
+    margin: 0px auto;
+    margin-top: 30px;
+    display:flex;
+    justify-content: end;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+}
+.post_temp_2_glass_img{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: not-allowed;
+
+}
+.birthday-card_middle h4{
+    font-family: var(--Roboto-Medium);
+    font-size: 18px;
+    line-height: normal;
+    text-align: center;
+    color: #1F2634;
+    position: relative;
+    z-index: 2;
+    margin-bottom: 0px;
+    width: 100%;
+    max-width: 140px;
+    height: 30px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: capitalize;
+}
+.birthday-card_middle h4 span{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    height: 30px;
+}
+.birthday-card_middle p{
+    font-family: var(--Roboto-Regular);
+    font-size: 18px;
+    font-weight: 400;
+    text-align: center;
+    color: #fff;
+    margin-top: 3px;
+}
+
+.birthday-card_middle h4 span svg{
+    width: 100%;
+    height: 30px;
+}
+
+.birthday-card_date_time{
+    width: 100%;
+    max-width: 250px;
+    margin: 0px auto;
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin-top: 24px;
+}
+.birthday-card_date_time::before{
+    content: "";
+    position: absolute;
+    width: 1px;
+    height:70px;
+    background: #fff;
+    top: 50%;
+    left: 50%;
+    margin-top: 30px;
+    transform: translate(-50%, -50%)    ;
+}
+
+.birthday-card_date_time h5{
+    font-family: var(--Roboto-Regular);
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 30px;
+    text-align: center;
+    color: #FCEA89;
+    margin-bottom: 0px;
+    width: 100%;
+    max-width: 120px;
+    margin: 0px auto;
+    text-transform: uppercase;
+}
+
+.birthday-card-address{
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 360px;
+    margin: 0px auto;
+    margin-top: 30px;
+}
+
+.birthday-card-address p{
+    font-family: var(--Roboto-Regular);
+    font-size: 18px;
+    line-height: 24px;
+    text-align: center;
+    color: #fff;
+    width: 100%;
+    max-width: 240px;
+    left: 60px;
+    position: relative;
+    top: 90px;
+}
+
+.post_temp_2_footer_star{
+
+    position: absolute;
+    margin-top: 30px;
+    margin-left: 56px;
+
+    z-index: 1;
+}
+
+
+
+

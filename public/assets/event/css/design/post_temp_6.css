@@ -1,0 +1,194 @@
+@font-face {
+    font-family: 'Kollektif';
+    src: url('../fonts/Kollektif.woff2') format('woff2'),
+        url('../fonts/Kollektif.woff2') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Kollektif-Bold';
+    src: url('../fonts/Kollektif-Bold.woff2') format('woff2'),
+        url('../fonts/Kollektif-Bold.woff2') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Sniglet-ExtraBold';
+    src: url('../fonts/Sniglet-ExtraBold.woff2') format('woff2'),
+        url('../fonts/Sniglet-ExtraBold.woff2') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Sniglet-Regular';
+    src: url('../fonts/Sniglet-Regular.woff2') format('woff2'),
+        url('../fonts/Sniglet-Regular.woff2') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Chewy-Regular';
+    src: url('../fonts/Chewy-Regular.woff2') format('woff2'),
+        url('../fonts/Chewy-Regular.woff2') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+
+
+:root{
+    --Kollektif: "Kollektif";
+    --Kollektif-Bold: "Kollektif-Bold";
+    --Sniglet-ExtraBold: "Sniglet-ExtraBold";
+    --Sniglet-Regular: "Sniglet-Regular";
+    --Chewy-Regular: "Chewy-Regular";
+}
+
+.birthday-card-main{
+    width: 460px;
+    height: 648px;
+    position: relative;
+    overflow: hidden;
+    z-index: 2;
+}
+
+.post_temp_6_foot_img{
+    width: 100%;
+    height: auto;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+.post_temp_6_head_img{
+    width: 100%;
+    height: auto;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.birthday-card-main-content{
+    padding-top: 50px;
+}
+
+.birthday-card-main-content .titlename{
+    font-family: var(--Chewy-Regular);
+    font-size: 35px;
+    font-weight: 400;
+    line-height: 33.8px;
+    text-align: center;
+    color: #829636;
+    letter-spacing: -2px;
+}
+
+.birthday-card-center-img{
+    width: 150px;
+    height: 180px;
+    border-radius: 50%;
+    margin: 0px auto;
+    overflow: hidden;
+    position: relative;
+    z-index: 2;
+}
+
+.post_temp_6_center_circle{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+.post_temp_6_center_img{
+    width: 150px;
+    height: 178px;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+.birthday-card-main-content-name{
+    position: relative;
+}
+
+.birthday-card-main-content-name h4{
+    font-family: var(--Kollektif-Bold);
+    font-size: 18px;
+    line-height: normal;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    display:inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0px;
+    width: 100%;
+    min-width: 200px;
+    margin-top: -20px;
+    top: -20px;
+    color: #000000;
+}
+
+.post_temp_6_name_img {
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    min-width: 200px;
+    max-width: 200px;
+    height: auto;
+    z-index: -1;
+}
+
+.birthday-card-main-content-detail h5{
+    font-family: var(--Sniglet-Regular);
+    font-size: 16px;
+    line-height: normal;
+    text-align: center;
+    color: #000000;
+    max-width: 300px;
+    margin: 0px auto;
+    margin-bottom: 0px;
+}
+
+.birthday-card-address h6{
+    font-family: var(--Sniglet-Regular);
+    font-size: 16px;
+    line-height: normal;
+    text-align: center;
+    color: #000000;
+    margin-bottom: 0px;
+}
+.birthday-card-address p{
+    font-family: var(--Sniglet-Regular);
+    font-size: 14px;
+    line-height: normal;
+    text-align: center;
+    color: #000000;
+    margin-bottom: 0px;
+}
+
+.birthday-card-address{
+    width: 100%;
+    max-width: 300px;
+    margin: 0px auto;
+    height: auto;
+    background-image: url(../images/post_temp_6/post_temp_6_address_bg.svg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    margin-top: 25px;
+    padding: 5px 10px;
+}

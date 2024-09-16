@@ -1,0 +1,85 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f0f0f0;
+}
+
+.editor-container {
+    width: 90%;
+    margin: 0 auto;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.toolbar {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+    padding: 20px;
+}
+
+.toolbar button, .toolbar select {
+
+    margin-right: 10px;
+    padding: 2px ;
+    cursor: pointer;
+}
+
+ .rich-text-editor {
+    width: 100%;
+    height:100% ;
+    border: 1px solid #ccc;
+    padding: 10px;
+    overflow-y: auto;
+    /* white-space: pre-wrap; */
+}
+
+.rich-text-editor {
+    /* Add styling for your rich text editor here */
+
+    color: black; /* Default text color */
+}
+/* Resizable Images */
+/* .rich-text-editor img {
+    max-width: 100%;
+    resize: both;
+    overflow: auto;
+    display: block;
+    margin: 10px 0;
+} */ */
+
+
+canvas {
+    border: 1px solid #ccc;
+}
+
+
+
+
+.text-box {
+    position: relative;
+    /* background-color: rgba(255, 255, 255, 0.8); */
+    border: 1px dashed red;
+    /* padding: 5px; */
+    cursor: move;
+    color: #CBA25C;
+    outline: none;
+    /* min-width: 100px;
+    min-height: 30px; */
+    resize: both;
+
+    box-sizing:content-box;
+}
+
+/* Resize handles */
+.text-box-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100px;
+}

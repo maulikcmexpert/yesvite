@@ -1,0 +1,148 @@
+@font-face {
+    font-family: 'Montserrat-Bold';
+    src: url('../fonts/Montserrat-Bold.woff2') format('woff2'),
+        url('../fonts/Montserrat-Bold.woff2') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+@font-face {
+    font-family: 'Montserrat-Regular';
+    src: url('../fonts/Montserrat-Regular.woff2') format('woff2'),
+        url('../fonts/Montserrat-Regular.woff2') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Montserrat-Medium';
+    src: url('../fonts/Montserrat-Medium.woff2') format('woff2'),
+        url('../fonts/Montserrat-Medium.woff2') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+@font-face {
+    font-family: 'Montserrat-Italic';
+    src: url('../fonts/Montserrat-Italic.woff2') format('woff2'),
+        url('../fonts/Montserrat-Italic.woff2') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Montserrat-SemiBold';
+    src: url('../fonts/Montserrat-SemiBold.woff2') format('woff2'),
+        url('../fonts/Montserrat-SemiBold.woff2') format('woff');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+
+:root{
+    --Montserrat-Bold: "Montserrat-Bold";
+    --Montserrat-Regular: "Montserrat-Regular";
+    --Montserrat-Medium: "Montserrat-Medium";
+    --Montserrat-Italic: "Montserrat-Italic";
+    --Montserrat-SemiBold: "Montserrat-SemiBold";
+}
+
+.birthday-card-main{
+    width: 460px;
+    height: 648px;
+    position: relative;
+    overflow: hidden;
+    z-index: 2;
+}
+.post_temp_7_bg-img{
+    width: 100%;
+    height: auto !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.post_temp_7_footer_bg{
+    width: 100%;
+    height: auto !important;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.birthday-card-content {
+    text-align: center;
+    padding-top: 250px;
+}
+
+.birthday-card-content h6{
+    font-family: var(--Montserrat-Medium);
+    font-size: 16px;
+    line-height: 17.07px;
+    text-align: center;
+    color: #433128;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+}
+
+.birthday-card-content h2{
+    font-family: var(--Montserrat-Bold) !important;
+    font-size: 24px !important;
+    line-height: 24.38px !important;
+    text-align: center !important;
+    color: #433128 !important;
+    margin-bottom: 0px !important;
+    text-transform: uppercase !important;
+}
+
+.birthday-card-data-time{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.birthday-card-data-time h5{
+    font-family: var(--Montserrat-Medium);
+    font-size: 16px;
+    line-height: 17.07px;
+    text-align: center;
+    color: #433128;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    margin-bottom: 0px;
+    border-top: 1.5px solid #433128;
+    border-bottom: 1.5px solid #433128;
+    padding: 5px 0px;
+}
+
+.birthday-card-data-time h3{
+    font-family: var(--Montserrat-SemiBold);
+    font-size: 20px;
+    line-height: 21.94px;
+    text-align: center;
+    color: #433128;
+    margin-bottom: 0px;
+    text-transform: uppercase;
+}
+
+.birthday-card-content p{
+    font-family: var(--Montserrat-Italic);
+    font-size: 16px;
+    line-height: 17.07px;
+    text-align: center;
+    color: #433128;
+    max-width: 250px;
+    margin: 0px auto;
+    z-index: 2;
+    position: relative;
+}

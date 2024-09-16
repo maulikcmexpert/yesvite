@@ -1,0 +1,187 @@
+@font-face {
+    font-family: 'Bebas-Regular';
+    src: url('../fonts/Bebas-Regular.woff2') format('woff2'),
+        url('../fonts/Bebas-Regular.woff2') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'CarmenSans-Regular';
+    src: url('../fonts/CarmenSans-Regular.woff2') format('woff2'),
+        url('../fonts/CarmenSans-Regular.woff2') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'CarmenSans-ExtraBold';
+    src: url('../fonts/CarmenSans-ExtraBold.woff2') format('woff2'),
+        url('../fonts/CarmenSans-ExtraBold.woff2') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'ModernLove-Regular';
+    src: url('../fonts/ModernLove-Regular.woff2') format('woff2'),
+        url('../fonts/ModernLove-Regular.woff2') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'PTSansPro-Regular';
+    src: url('../fonts/PTSansPro-Regular.woff2') format('woff2'),
+        url('../fonts/PTSansPro-Regular.woff2') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'BotanicaScript-Regular';
+    src: url('../fonts/BotanicaScript-Regular.woff2') format('woff2'),
+        url('../fonts/BotanicaScript-Regular.woff2') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'MyriadPro-Semibold';
+    src: url('../fonts/MyriadPro-Semibold.woff2') format('woff2'),
+        url('../fonts/MyriadPro-Semibold.woff2') format('woff');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+@font-face {
+    font-family: 'MyriadPro-Regular';
+    src: url('../fonts/MyriadPro-Regular.woff2') format('woff2'),
+        url('../fonts/MyriadPro-Regular.woff2') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+@font-face {
+    font-family: 'MyriadPro-Bold';
+    src: url('../fonts/MyriadPro-Bold.woff2') format('woff2'),
+        url('../fonts/MyriadPro-Bold.woff2') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+:root{
+
+    --Bebas-Regular: "Bebas-Regular";
+    --CarmenSans-Regular: "CarmenSans-Regular";
+    --CarmenSans-ExtraBold: "CarmenSans-ExtraBold";
+    --ModernLove-Regular: "ModernLove-Regular";
+    --PTSansPro-Regular: "PTSansPro-Regular";
+    --BotanicaScript-Regular: "BotanicaScript-Regular";
+    --MyriadPro-Semibold: "MyriadPro-Semibold";
+    --MyriadPro-Regular: "MyriadPro-Regular";
+    --MyriadPro-Bold: "MyriadPro-Bold";
+
+}
+
+.birthday-card-main{
+    width: 460px;
+    height: 648px;
+    position: relative;
+    overflow: hidden;
+    z-index: 2;
+}
+
+.post_temp_9_bg_img{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.birthday-card-main h5{
+    font-family: var(--PTSansPro-Regular);
+    font-size: 20px;
+    line-height: normal;
+    text-transform: uppercase;
+    text-align: center;
+    max-width: 150px;
+    margin: 0px auto;
+    padding-top: 30px;
+    color: #4D4F52;
+}
+
+.birthday-card-title{
+    position: relative;
+    z-index: 2;
+    padding-top: 50px;
+    margin-top: 10px;
+}
+
+.birthday-card-title h2{
+    font-family: var(--ModernLove-Regular) !important;
+    font-size: 70px !important;
+    line-height: 70px !important;
+    color: #4D4F52 !important;
+    text-transform: uppercase !important;
+    text-align: center !important;
+    max-width: 300px !important;
+    margin: 0px auto !important;
+}
+
+.post_temp_10_title_bg_img {
+    position: absolute !important;
+    top: 5px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: 260px !important;
+    height: 200px !important;
+    z-index: -1 !important;
+}
+
+.birthday-card-main h6{
+    font-family: var(--PTSansPro-Regular);
+    font-size: 20px;
+    line-height: normal;
+    text-transform: uppercase;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.birthday-card-main h3{
+    font-family: var(--BotanicaScript-Regular);
+    font-size: 60px;
+    line-height: 60px;
+    color: #FAD8D9;
+    text-align: center;
+    text-transform: capitalize;
+    max-width: 250px;
+    margin: 0px auto;
+    margin-top: 30px;
+}
+
+.birthday-card-main p{
+    font-family: var(--PTSansPro-Regular);
+    font-size: 20px;
+    line-height: normal;
+    text-transform: uppercase;
+    text-align: center;
+    max-width: 270px;
+    margin: 0px auto;
+    padding-top: 30px;
+    color: #4D4F52;
+}

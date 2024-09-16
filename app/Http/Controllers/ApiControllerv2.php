@@ -2517,25 +2517,25 @@ class ApiControllerv2 extends Controller
         try {
             DB::beginTransaction();
 
-            $checkNotificationSetting =  UserNotificationType::where('user_id', $user->id)->count();
-            if ($checkNotificationSetting  == 0) {
-                foreach ($input['notification_settings'] as $val) {
-                    $setNotification = new UserNotificationType();
-                    $setNotification->user_id = $user->id;
-                    $setNotification->type = $val['type'];
-                    $setNotification->push = $val['push'];
-                    $setNotification->email = $val['email'];
-                    $setNotification->save();
-                }
-            } else {
+            // $checkNotificationSetting =  UserNotificationType::where('user_id', $user->id)->count();
+            // if ($checkNotificationSetting  == 0) {
+            //     foreach ($input['notification_settings'] as $val) {
+            //         $setNotification = new UserNotificationType();
+            //         $setNotification->user_id = $user->id;
+            //         $setNotification->type = $val['type'];
+            //         $setNotification->push = $val['push'];
+            //         $setNotification->email = $val['email'];
+            //         $setNotification->save();
+            //     }
+            // } else {
 
-                foreach ($input['notification_settings'] as $value) {
-                    $updateNotification = UserNotificationType::where(['type' => $value['type'], 'user_id' => $user->id])->first();
-                    $updateNotification->push = $value['push'];
-                    $updateNotification->email = $value['email'];
-                    $updateNotification->save();
-                }
-            }
+            //     foreach ($input['notification_settings'] as $value) {
+            //         $updateNotification = UserNotificationType::where(['type' => $value['type'], 'user_id' => $user->id])->first();
+            //         $updateNotification->push = $value['push'];
+            //         $updateNotification->email = $value['email'];
+            //         $updateNotification->save();
+            //     }
+            // }
             DB::commit();
             return response()->json(['status' => 1, 'message' => "Notification set successfully"]);
         } catch (QueryException $e) {

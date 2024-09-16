@@ -1,0 +1,38 @@
+.privacy-wrapper{
+    border: 1px solid var(--borderColor);
+    padding: 24px;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+}
+
+.privacy-wrapper .radio-wrapper svg{
+    margin-right: 16px;
+}
+
+.radio-wrapper h6{
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--secondryColor);
+    margin-bottom: 0;
+    
+}
+
+.radio-wrapper .public-view{
+    padding-top: 16px;
+}
+
+/* ========== responsive ============ */
+@media only screen and (max-width:575px){
+    .privacy-wrapper{
+        border: none;
+        padding: 0;
+        border-radius: 0;
+        -webkit-border-radius: 0;
+        -moz-border-radius: 0;
+        -ms-border-radius: 0;
+        -o-border-radius: 0;
+}
+}
