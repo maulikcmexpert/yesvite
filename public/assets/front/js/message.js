@@ -1302,7 +1302,7 @@ var formattedDate = {};
 var messageRcvTime = '';
 
 
-function createMessageElement(key, messageData, isGroup) {
+async function createMessageElement(key, messageData, isGroup) {
     messageRcvTime = new Date(messageData.timeStamp).toLocaleTimeString([], {
         hour: "2-digit",
         minute: "2-digit",
@@ -1364,7 +1364,7 @@ function createMessageElement(key, messageData, isGroup) {
 
             
         reaction = `<ul class="reaction-ul ${messageData?.react}">${reaction}</ul>`;
-        senderprofile=`<div class="simplemsg-img me-2"><span>${getListUserimg(sender_userProfile,send_push_notification)}</span></div>`;
+        senderprofile=`<div class="simplemsg-img me-2"><span>${await getListUserimg(sender_userProfile,send_push_notification)}</span></div>`;
         console.log(senderprofile);          
     } else {
         seenStatus = isSender
