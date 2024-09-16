@@ -744,11 +744,11 @@ ul.nav-tabs .nav-link:focus {
     gap: 20px;
 }
 
-.simplemsg-img.user-img img {
+/* .simplemsg-img.user-img img {
     width: 100% !important;
     max-width: 100% !important;
     height: 100% !important;
-}
+} */
 
 /* ======== Responsive ========= */
 @media (min-width:2000px) and (max-width:10000px) {
