@@ -80,7 +80,6 @@ function getInitials(userName) {
         .join("")
         .slice(0, 2); // Get only the first and second letters
 
-        console.log(initials);
         
     return initials;
 }
@@ -184,6 +183,8 @@ function getSelectedUserimggrp(profileImageUrl, userName) {
     }
 
     const initials = getInitials(userName);
+    console.log(initials);
+
     const fontColor = "fontcolor" + initials[0]?.toUpperCase();
 
     return `<h5 class="${fontColor} user-avatar img-fluid" src="">${initials}</h5>`;
