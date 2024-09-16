@@ -1362,7 +1362,7 @@ function createMessageElement(key, messageData, isGroup) {
 
             
         reaction = `<ul class="reaction-ul ${messageData?.react}">${reaction}</ul>`;
-        senderprofile=`<div class="simplemsg-img me-2"><span>${await getListUserimg(sender_userProfile,send_push_notification)}</span></div>`;
+        senderprofile=`<div class="simplemsg-img me-2"><span>${getListUserimg(sender_userProfile,send_push_notification)}</span></div>`;
     } else {
         seenStatus = isSender
             ? messageData.isSeen
