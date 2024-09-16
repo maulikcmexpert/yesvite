@@ -39,7 +39,7 @@
 
 <link rel="stylesheet" href="{{ asset('assets/event/css/change-pwd.css') }}"> -->
 
-<link rel="stylesheet" href="{{ asset('assets/event/css/common.css') }}">
+<!-- <link rel="stylesheet" href="{{ asset('assets/event/css/common.css') }}"> -->
 
 <link rel="stylesheet" href="{{ asset('assets/event/css/contact.css') }}">
 
