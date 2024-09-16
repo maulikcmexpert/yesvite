@@ -1300,7 +1300,8 @@ function addMessageToList(key, messageData, conversationId) {
 }
 var formattedDate = {};
 var messageRcvTime = '';
-function createMessageElement(key, messageData, isGroup) {
+
+async function createMessageElement(key, messageData, isGroup) {
     messageRcvTime = new Date(messageData.timeStamp).toLocaleTimeString([], {
         hour: "2-digit",
         minute: "2-digit",
