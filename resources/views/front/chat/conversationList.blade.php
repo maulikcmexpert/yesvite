@@ -67,7 +67,7 @@ $message['unReadCount'] = @$message['unRead']==true && @$message['unReadCount']=
                 </span>
             </div>
         </div>
-        {{-- <div class="dropdown ms-auto">
+        <div class="dropdown ms-auto">
             <button type="button" class="btn btn-primary dropdown-toggle"
                 data-bs-toggle="dropdown">
                 <svg width="5" height="18" viewBox="0 0 5 18" fill="none"
@@ -115,7 +115,7 @@ $message['unReadCount'] = @$message['unRead']==true && @$message['unReadCount']=
                         </svg>
                         Delete Message</a></li>
             </ul>
-        </div> --}}
+        </div>
     </div>
 </li>
 @php
