@@ -176,7 +176,7 @@ async function getListUserimg(profileImageUrl, userName) {
 
 function getSelectedUserimggrp(profileImageUrl, userName) {
     console.log(isValidImageUrlgrp(profileImageUrl))
-    if (isValidImageUrl(profileImageUrl)) {
+    if (isValidImageUrlgrp(profileImageUrl)==1) {
         return `<img class="user-avatar img-fluid" src="${profileImageUrl}" alt="user-img">`;
     }
 
