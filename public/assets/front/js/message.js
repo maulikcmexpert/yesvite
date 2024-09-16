@@ -182,6 +182,8 @@ function getSelectedUserimggrp(profileImageUrl, userName) {
         return `<img class="user-avatar img-fluid" src="${profileImageUrl}" alt="user-img">`;
     }
 
+    console.log(userName);
+    
     const initials = getInitials(userName);
     console.log(initials);
 
