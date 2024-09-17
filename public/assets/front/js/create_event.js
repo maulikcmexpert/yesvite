@@ -2259,6 +2259,7 @@ function savePage4Data() {
     }
 
     if ($("#guest_list_visible_to_guest").is(":checked")) {
+        
         eventData.guest_list_visible_to_guest = "1";
     } else {
         eventData.guest_list_visible_to_guest = "0";
@@ -3808,4 +3809,13 @@ $(document).on('click','.brand-progress',function () {
 $(document).on('click','.create_new_event_close_tip',function () { 
     $('#create_new_event_tip').removeClass('d-flex');
     $('#create_new_event_tip').hide();
+});
+
+$(document).on('click','#guest_list_visible_to_guest',function () { 
+    if($(this).is(':checked')){
+        $('#eventwall').prop('checked',true);
+    }else{
+        $('#eventwall').prop('checked',false);
+    }
+    
 });
