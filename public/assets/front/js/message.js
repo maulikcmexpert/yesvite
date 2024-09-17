@@ -510,7 +510,8 @@ async function updateChat(user_id) {
         
     let lastseen =
         selected_user.userStatus == "offline"
-            ? timeago.format(messageTime)
+            // ? timeago.format(messageTime)`last seen at ${timeago.format(messageTime)}`
+            ?`last seen at ${timeago.format(messageTime)}`
             : "Online";
     $("#selected-user-lastseen").html(lastseen);
     $("#selected-user-name").html(selected_user.userName);
