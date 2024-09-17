@@ -1571,21 +1571,21 @@ function createMessageElement(key, messageData, isGroup) {
     }
 
     if (formattedDate.length == 0) {
-        daychange = "<h5 class='day-line'><span>" + chatSmallDay +" "+ msgDate + "</span></h5>";
+        daychange = "<h5 class='day-line'><span>" + chatSmallDay +", "+ msgDate + "</span></h5>";
     } else if (formattedDate[msgDate] === undefined) {
         // console.log(formattedDate);
         // console.log(msgDate);
-        // if(msgDate=="Yesterday"){
-        //     daychange = "<h5 class='day-line'><span>"  + msgDate + "</span></h5>";
-        // }
-        // else if(msgDate=="Today"){
-        //     daychange = "<h5 class='day-line'><span>"  + msgDate + "</span></h5>";
-        // }
-        //     else{
-        //     daychange = "<h5 class='day-line'><span>" + chatSmallDay +","+ msgDate + "</span></h5>";
+        if(msgDate=="Yesterday"){
+            daychange = "<h5 class='day-line'><span>"  + msgDate + "</span></h5>";
+        }
+        else if(msgDate=="Today"){
+            daychange = "<h5 class='day-line'><span>"  + msgDate + "</span></h5>";
+        }
+            else{
+            daychange = "<h5 class='day-line'><span>" + chatSmallDay +", "+ msgDate + "</span></h5>";
 
-        // }
-        daychange = "<h5 class='day-line'><span>" + chatSmallDay +" "+ msgDate + "</span></h5>";
+        }
+        // daychange = "<h5 class='day-line'><span>" + chatSmallDay +" "+ msgDate + "</span></h5>";
 
     }
     formattedDate[msgDate] = "1";
