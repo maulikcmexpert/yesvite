@@ -264,7 +264,7 @@ function datepicker() {
 $(function() {
     $('#rsvp-by-date').daterangepicker({
       singleDatePicker: true,
-    //   autoUpdateInput: false,  
+      autoUpdateInput: false,  
     //   showDropdowns: true,
       minYear: 1901,
       locale: {
