@@ -876,14 +876,15 @@
                         <div>
                             <div class="d-flex align-items-center">
                                 <h5>Enterprise Pro</h5>
+                                <div class="d-flex">
+                                    <span class="ms-auto rcomand-text create-event-recommend">Recommended</span>
+                                    <input class="form-check-input ms-3 plan_check" data-plan="pro_year" type="checkbox" name="plan_check" id="pro_year_plan_check" style="display: none;">
+                                </div>
                             </div>
                             <h6>$12.50 <span>Per month | <strong>Billed annually</strong></span></h6>
                             <p>$150 billed annually</p>
                         </div>
-                        <div class="d-flex">
-                            <span class="ms-auto rcomand-text create-event-recommend">Recommended</span>
-                            <input class="form-check-input ms-3 plan_check" data-plan="pro_year" type="checkbox" name="plan_check" id="pro_year_plan_check" style="display: none;">
-                        </div>
+
                     </div>
                     <div class="d-flex justify-content-between">
                         <div id="app" class="w-100">
