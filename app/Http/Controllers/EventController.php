@@ -528,6 +528,7 @@ class EventController extends Controller
                 $request->session()->forget($key);
             }
             // dd(session('user_ids'));
+            Session::save();
             return response()->json(['success' => true, 'message' => 'Sessions deleted successfully']);
         }
         return response()->json(['success' => true, 'message' => 'Session deleted successfully']);
