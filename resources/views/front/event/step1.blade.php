@@ -173,7 +173,7 @@
                     <div class="col-lg-12 mb-4 rsvp_by_date" style="display: none;">
                         <div class="input-form">
                             <input type="text" class="form-control inputText" id="rsvp-by-date"
-                                name="rsvp-by-date" onblur="clearError(this)" readonly autocomplete="off">
+                                name="rsvp-by-date" onblur="clearError(this)" autocomplete="off">
                             <label for="birthday" class="form-label input-field floating-label select-label">Rsvp
                                 By Date</label>
                             <lable for="event-rsvpby" id="event-rsvpby-error" class="error"></lable>

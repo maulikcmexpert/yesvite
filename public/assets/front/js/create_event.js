@@ -1971,27 +1971,15 @@ function savePage1Data(close = null) {
     var state = $("#state").val();
     var zipcode = $("#zipcode").val();
     var id = $("#id").val();
-    var rsvp_by_date = $("#rsvp-by-date").val();
+    
 
     // console.log(rsvp_by_date);
     
 
-    eventData = {
-        event_type: event_type,
-        event_name: event_name,
-        hosted_by: hostedby,
-        event_date: event_date,
-        start_time: start_time,
-        activity: activities,
-        address: address,
-        city: city,
-        state: state,
-        zipcode: zipcode,
-        rsvp_by_date:rsvp_by_date,
-    };
-    
+   
+    var rsvp_by_date = '';
     if ($('#rsvp_by_date').is(':checked')) {
-        console.log(rsvp_by_date);
+        rsvp_by_date = $('#rsvp-by-date').val();
         if (rsvp_by_date == "") {
             $("#event-rsvpby-error")
                 .css("display", "block")
@@ -2099,6 +2087,20 @@ function savePage1Data(close = null) {
         state != "" &&
         zipcode != ""
     ) {
+
+        eventData = {
+            event_type: event_type,
+            event_name: event_name,
+            hosted_by: hostedby,
+            event_date: event_date,
+            start_time: start_time,
+            activity: activities,
+            address: address,
+            city: city,
+            state: state,
+            zipcode: zipcode,
+            rsvp_by_date:rsvp_by_date,
+        };
         // alert();
         let text = $('.current_step').text();
         let firstLetter = text.split(' ')[0]; 
