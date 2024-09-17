@@ -706,8 +706,8 @@ ul.cost-list li span {
 .bootstrap-datetimepicker-widget.dropdown-menu .timepicker-picker table td a,
 .bootstrap-datetimepicker-widget.dropdown-menu .timepicker-picker table td span,
 .bootstrap-datetimepicker-widget.dropdown-menu .timepicker-picker table td button {
-    height: 30px !important;
-    line-height: 30px !important;
+    height: 25px !important;
+    line-height: 25px !important;
 }
 
 .bootstrap-datetimepicker-widget.dropdown-menu {
