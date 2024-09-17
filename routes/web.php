@@ -124,6 +124,7 @@ Route::middleware('checkUserExist')->group(function () {
     Route::post('contacts/save_edit', [ContactController::class, 'save_editContact'])->name('.saveeditcontact');
     Route::get('messages',  [ChatController::class, 'index'])->name('message.list');
     Route::post('getChat',  [ChatController::class, 'getChat'])->name('message.getChat');
+    Route::post('getUserByName',  [ChatController::class, 'get_user_by_name'])->name('message.getUserByName');
     Route::post('getConversation',  [ChatController::class, 'getConversation'])->name('message.getConversation');
     Route::post('updateUserinFB',  [ChatController::class, 'updateUserinFB'])->name('message.updateUserinFB');
     Route::get('/autocomplete-users', [ChatController::class, 'autocomplete'])->name('autocomplete.users');

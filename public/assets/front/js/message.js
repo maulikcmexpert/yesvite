@@ -3416,5 +3416,13 @@ async function deletereaction(isGroup,messageId,conversationId,senderId = null) 
 
 
 $(document).on('keyup','#serach_user_from_list',function() {
-    alert()
+    var name=$(this).val();
+    $.ajax({
+        url: base_url + "getUserByName",
+        data: { username: name },
+        method: "post",
+        success: function (res) {
+           console.log(res);
+        },
+    });
 })
