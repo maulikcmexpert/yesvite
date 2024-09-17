@@ -178,7 +178,7 @@ class ChatController extends Controller
         $overviewRef = $this->firebase->getReference('overview/' . $userId);
         $overviewData = $overviewRef->getValue();
 
-        $matchedUsers = [];
+        $message = [];
 
         // Loop through the overview contacts and search by name
         if ($overviewData) {
@@ -187,7 +187,7 @@ class ChatController extends Controller
                     isset($contactData['contactName']) &&
                     strpos(strtolower($contactData['contactName']), strtolower($name)) !== false
                 ) {
-                    $matchedUsers[] = [
+                    $message[] = [
                         'contactName' => $contactData['contactName'],
                         'receiverProfile' => $contactData['receiverProfile'],
                         'lastSeen' => $contactData['lastSeen'] ?? null,
@@ -197,8 +197,8 @@ class ChatController extends Controller
             }
         }
 
-        // Return the matched users as JSON
-        return response()->json($matchedUsers);
+        // return response()->json($message);
+        return view('front.chat.getUserByName', compact('message'));
     }
 
 
