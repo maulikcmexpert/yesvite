@@ -1,3 +1,6 @@
+@php
+use Carbon\Carbon;
+@endphp
 @foreach ($messages as $message)
 <div class="chat-data d-flex align-items-start">
     <div class="user-img position-relative">
