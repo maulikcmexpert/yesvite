@@ -714,7 +714,7 @@ ul.cost-list li span {
     min-width: 190px !important;
     z-index: 100 !important;
     background-color: #fff !important;
-    height: 150px !important;
+    height: 80px !important;
 }
 
 .modal .login-form-wrap .iti__selected-flag {
@@ -761,6 +761,28 @@ ul.cost-list li span {
 
 .end-time-wrp {
     z-index: 1;
+}
+
+
+.bootstrap-datetimepicker-widget.dropdown-menu .timepicker-picker table td button {
+    background-color: var(--primaryColor);
+    color: #fff;
+    font-weight: bold;
+    font-size: 15px !important;
+    border-radius: 5px;
+}
+
+.bootstrap-datetimepicker-widget.dropdown-menu .timepicker-picker table td span {
+    color: #333;
+    margin-top: -1px;
+    font-size: 14px !important;
+}
+
+.bootstrap-datetimepicker-widget.dropdown-menu .timepicker-picker table td {
+    padding: 0;
+    width: 20% !important;
+    height: 20px;
+    line-height: 20px;
 }
 
 /* ======== Responsive ========= */
