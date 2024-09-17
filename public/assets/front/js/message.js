@@ -506,7 +506,8 @@ async function updateChat(user_id) {
     const messageTime = selected_user.userLastSeen
         ? new Date(selected_user.userLastSeen)
         : new Date();
-        console.log(timeago.format(messageTime));
+
+        console.log(messageTime);
         
     let lastseen =
         selected_user.userStatus == "offline"
