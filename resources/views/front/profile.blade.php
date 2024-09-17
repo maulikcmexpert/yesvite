@@ -725,6 +725,9 @@
                             <h6>$15.00 - $75.00<span>Per event</span></h6>
                             <p>Pay as you go per event - depending on number of invites sent.</p>
                         </div>
+                        <div>
+                            <input class="form-check-input ms-3 plan_check" data-plan="pro" type="checkbox" name="plan_check" id="pro_plan_check" checked style="display: none;">
+                        </div>
                         <!-- <div class="d-flex align-items-center">
                             <div class="recomend-pro-paln d-flex align-items-center">
                                 <svg width="11" height="8" viewBox="0 0 11 8" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -872,8 +875,7 @@
                     <div class="d-flex justify-content-between">
                         <div>
                             <div class="d-flex align-items-center">
-                                <h5>Enterprise Pro </h5>
-
+                                <h5>Enterprise Pro</h5>
                             </div>
                             <h6>$12.50 <span>Per month | <strong>Billed annually</strong></span></h6>
                             <p>$150 billed annually</p>
