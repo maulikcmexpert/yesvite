@@ -275,6 +275,9 @@ $(function() {
     //   var years = moment().diff(start, 'years');
     //   alert("You are " + years + " years old!");
     });
+    $('#rsvp-by-date').on('apply.daterangepicker', function(ev, picker) {
+        $(this).val(picker.startDate.format('YYYY-MM-DD'));
+    });
   });
 
 $(function () {
