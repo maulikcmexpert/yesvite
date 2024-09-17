@@ -31,7 +31,7 @@
 
 
 @php
-if($page=="front.profile"){
+if(isset($page) && $page=="front.profile"){
 @endphp
 <link rel="stylesheet" href="{{ asset('assets/event/css/style.css') }}">
 <!-- <link rel="stylesheet" href="{{ asset('assets/event/css/common.css') }}"> -->
