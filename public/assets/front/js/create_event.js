@@ -3521,7 +3521,7 @@ function displayRecords(lim, off,type,search = null,) {
         type: "GET",
         async: false,
         url: base_url+'event/get_user_ajax',
-        data: "limit=" + lim + "&offset=" + off + "&search_user=" + search_name + "&type=" + type,
+        data: "limit=" + lim + "&offset=" + off + "&type=" + type + "&search_user=" + search_name,
         cache: false,
         beforeSend: function () {
 
