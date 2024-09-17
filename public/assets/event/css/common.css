@@ -796,6 +796,13 @@ ul.cost-list li span {
     width: 15em !important;
 }
 
+.bootstrap-datetimepicker-widget table td {
+    height: 10px !important;
+    line-height: 23px !important;
+    width: 54px !important;
+    font-size: 14px !important;
+}
+
 /* ======== Responsive ========= */
 
 
