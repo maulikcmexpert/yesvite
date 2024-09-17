@@ -841,6 +841,7 @@ ul.cost-list li span {
     .sidebar-content,
     .sidebar {
         max-height: 440px;
+        max-width: 100%;
     }
 
     .sidebar {
