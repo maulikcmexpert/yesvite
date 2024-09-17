@@ -874,9 +874,9 @@
                     </div> -->
                     <div class="d-flex justify-content-between">
                         <div>
-                            <div class="d-flex align-items-center">
+                            <div class="d-flex align-items-center gap-2">
                                 <h5>Enterprise Pro</h5>
-                                <div class="d-flex ml-2">
+                                <div class="d-flex">
                                     <span class="ms-auto rcomand-text create-event-recommend">Recommended</span>
                                     <input class="form-check-input ms-3 plan_check" data-plan="pro_year" type="checkbox" name="plan_check" id="pro_year_plan_check" style="display: none;">
                                 </div>
