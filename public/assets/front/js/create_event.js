@@ -2802,6 +2802,8 @@ $(document).on("click", "#delete_potluck_category_btn", function () {
         },
 
         success: function (response) {
+            category--;
+            items = items - response;
             // console.log(response);
             $(".potluckmain-" + potluck_delete_id).remove();
             $("#delete_potluck_category_id").val("");
