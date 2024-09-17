@@ -351,7 +351,7 @@
                                 </span>
                                 <h5 class="ms-2">Edit Design</h5> --}}
                             </a>
-                            <a href="#" class="d-flex" id="next_design">
+                            <button type="button" class="d-flex" id="next_design">
                                 <h5 class="me-2">Next: Design</h5>
                                 <span><svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
@@ -361,7 +361,7 @@
                                             stroke-linecap="round" stroke-linejoin="round"></path>
                                     </svg>
                                 </span>
-                            </a>
+                            </button>
                         </div>
                     </div>
                 </div>
