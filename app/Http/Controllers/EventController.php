@@ -660,6 +660,7 @@ class EventController extends Controller
         $delete_potluck_id = $request->input('potluck_delete_id');
 
         $category = session()->get('category');
+        dd($category[$delete_potluck_id]);
         $category_item = count($category[$delete_potluck_id]['item']);
         if (isset($category[$delete_potluck_id])) {
             unset($category[$delete_potluck_id]);
