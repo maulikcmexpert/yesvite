@@ -521,14 +521,13 @@ class EventController extends Controller
                 session()->forget('desgin');
             }
         }
-        
-        session()->forget('user_ids');
+        Session::forget('user_ids');
+        Session::save();
         if (is_array($sessionKeys)) {
             foreach ($sessionKeys as $key) {
                 $request->session()->forget($key);
             }
             // dd(session('user_ids'));
-            Session::save();
             return response()->json(['success' => true, 'message' => 'Sessions deleted successfully']);
         }
         return response()->json(['success' => true, 'message' => 'Session deleted successfully']);
