@@ -189,32 +189,7 @@ class ChatController extends Controller
             'image' => url('/public/storage/profile/' . $userData->profile)
         ];
 
-        if (!empty($overviewData)) {
 
-            foreach ($overviewData as $message) {
-                if (isset($message['group'])  && ($message['group'] == "true" || $message['group'] == true)) {
-                    $reference = $this->firebase->getReference('Groups/' . $message['conversationId'] . '/groupInfo/profiles');
-                    $profiles = $reference->getValue();
-                    if ($profiles) {
-
-                        foreach ($profiles as $key => $profile) {
-                            if ($profile['id'] == $userId) {
-                                $reference = $this->firebase->getReference('Groups/' . $message['conversationId'] . '/groupInfo/profiles/' . $key);
-                                $reference->update($updateGroupData);
-                                break;
-                            }
-                        }
-                    }
-                } else {
-                    if (isset($message['contactId'])) {
-                        $reference = $this->firebase->getReference('overview/' . $message['contactId'] . '/' . $message['conversationId']);
-                        if ($reference) {
-                            $reference->update($updateData);
-                        }
-                    }
-                }
-            }
-        }
 
         $messages = [];
 
@@ -240,6 +215,33 @@ class ChatController extends Controller
                         "unReadCount" => isset($contactData['unReadCount']) ? $contactData['unReadCount'] : 0,
                         "timeStamp" => isset($contactData['timeStamp']) ? $contactData['timeStamp'] : 0
                     ];
+                }
+            }
+        }
+
+        if (!empty($messages)) {
+
+            foreach ($messages as $message) {
+                if (isset($message['group'])  && ($message['group'] == "true" || $message['group'] == true)) {
+                    $reference = $this->firebase->getReference('Groups/' . $message['conversationId'] . '/groupInfo/profiles');
+                    $profiles = $reference->getValue();
+                    if ($profiles) {
+
+                        foreach ($profiles as $key => $profile) {
+                            if ($profile['id'] == $userId) {
+                                $reference = $this->firebase->getReference('Groups/' . $message['conversationId'] . '/groupInfo/profiles/' . $key);
+                                $reference->update($updateGroupData);
+                                break;
+                            }
+                        }
+                    }
+                } else {
+                    if (isset($message['contactId'])) {
+                        $reference = $this->firebase->getReference('overview/' . $message['contactId'] . '/' . $message['conversationId']);
+                        if ($reference) {
+                            $reference->update($updateData);
+                        }
+                    }
                 }
             }
         }
