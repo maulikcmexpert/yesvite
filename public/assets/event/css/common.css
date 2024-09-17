@@ -780,13 +780,13 @@ ul.cost-list li span {
 
 .bootstrap-datetimepicker-widget.dropdown-menu .timepicker-picker table td {
     padding: 0;
-    width: 5% !important;
+    width: 3% !important;
     height: 20px;
     line-height: 20px;
 }
 
 .bootstrap-datetimepicker-widget.dropdown-menu .timepicker-picker table td:nth-child(2) {
-    width: 5% !important;
+    width: 1% !important;
 }
 
 /* ======== Responsive ========= */
