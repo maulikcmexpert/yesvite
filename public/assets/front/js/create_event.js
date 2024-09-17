@@ -1971,13 +1971,25 @@ function savePage1Data(close = null) {
     var state = $("#state").val();
     var zipcode = $("#zipcode").val();
     var id = $("#id").val();
-    
+    var rsvp_by_date_set = $('#rsvp_by_date').is(':checked');
 
-    // console.log(rsvp_by_date);
-    
-
-   
+    console.log(rsvp_by_date_set);
     var rsvp_by_date = '';
+    if(rsvp_by_date_set){
+        rsvp_by_date = $('#rsvp-by-date').val();
+        console.log(rsvp_by_date);
+        
+        if (rsvp_by_date == "") {
+            $("#event-rsvpby-error")
+                .css("display", "block")
+                .css("color", "red")
+                .text("Please select an RSVPby date");
+            return;
+        } else {
+            $("#event-rsvpby-error").css("display", "none");
+        }
+    }
+    
     if ($('#rsvp_by_date').is(':checked')) {
         rsvp_by_date = $('#rsvp-by-date').val();
         console.log(rsvp_by_date);
