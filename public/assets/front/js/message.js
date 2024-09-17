@@ -2955,8 +2955,8 @@ async function updateUnreadMessageBadge() {
     const totalUnreadCount = await getTotalUnreadMessageCount();
     if (totalUnreadCount > 0) {
         $(".badge").show();
-
-        $(".badge").text(totalUnreadCount);
+        // $(".badge").text(totalUnreadCount);
+        $(".badge").text(10);
     } else {
         $(".badge").hide();
     }
