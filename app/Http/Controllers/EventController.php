@@ -658,9 +658,11 @@ class EventController extends Controller
     {
 
         $delete_potluck_id = $request->input('potluck_delete_id');
-
+        $category_item = 0;
         $category = session()->get('category');
-
+        if(isset($category[$delete_potluck_id]['item'])){
+            $category_item = count($category[$delete_potluck_id]['item']);
+        }
         if (isset($category[$delete_potluck_id])) {
             unset($category[$delete_potluck_id]);
         }
@@ -669,7 +671,7 @@ class EventController extends Controller
         // unset($event_data_display[$index]);
         // Session::set('event_data_display', $event_data_display);
 
-        return true;
+        return $category_item;
     }
 
     public function addNewGiftRegistry(Request $request)

@@ -2,6 +2,7 @@ $(document).ready(function () {
     if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
         //  alert(design);
         $('.user_choice').prop('checked',false);
+        $('#YesviteUserAll').html();
         $.ajax({
             url: base_url + "event/delete-session",
             type: "POST",
@@ -441,6 +442,8 @@ $(function () {
 
 let eventData = {};
 var total_activities = 0;
+var category = 0;
+var items = 0;
 
 $(document).on("click", ".delete_activity", function () {
     var id = $(this).data("id");
@@ -983,6 +986,8 @@ $(document).on("click", ".add_category_btn", function () {
                 $("#hidden_category_quantity").val(categoryQuantity);
                 $(".potluck-category").append(response.view);
                 toggleSidebar("sidebar_potluck");
+                category++;
+                potluck_cateogry_item_count();
             } else {
                 potluckkey--;
                 toastr.error("category already exist");
@@ -1053,6 +1058,8 @@ $(document).on("click", ".add_category_item_btn", function () {
             $("#self_bring_qty").val(0);
             $("#missing-category-" + category_index).text(response.total_item);
             $(".missing-category-h6-" + category_index).show();
+            items++;
+            potluck_cateogry_item_count();
             toggleSidebar("sidebar_potluck");
             if (response.qty == 1) {
                 $("#potluck-" + category_index).hide();
@@ -2798,7 +2805,11 @@ $(document).on("click", "#delete_potluck_category_btn", function () {
         },
 
         success: function (response) {
+            category--;
+            items = items - response;
             // console.log(response);
+            
+            potluck_cateogry_item_count();
             $(".potluckmain-" + potluck_delete_id).remove();
             $("#delete_potluck_category_id").val("");
         },
@@ -2814,6 +2825,31 @@ $(document).on("change", "#self_bring", function () {
         $("#self_bring_quantity_toggle").hide();
     }
 });
+
+function potluck_cateogry_item_count(){
+    if(category == 0 && items == 0){
+        $('.potluck_count').html(` <span class="me-3">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.1336 12.267L11.8002 2.66699C11.0836 1.37533 10.0919 0.666992 9.00023 0.666992C7.90856 0.666992 6.91689 1.37533 6.20023 2.66699L0.866892 12.267C0.191892 13.492 0.116892 14.667 0.658559 15.592C1.20023 16.517 2.26689 17.0253 3.66689 17.0253H14.3336C15.7336 17.0253 16.8002 16.517 17.3419 15.592C17.8836 14.667 17.8086 13.4837 17.1336 12.267ZM8.37523 6.50033C8.37523 6.15866 8.65856 5.87533 9.00023 5.87533C9.34189 5.87533 9.62523 6.15866 9.62523 6.50033V10.667C9.62523 11.0087 9.34189 11.292 9.00023 11.292C8.65856 11.292 8.37523 11.0087 8.37523 10.667V6.50033ZM9.59189 13.7587C9.55023 13.792 9.50856 13.8253 9.46689 13.8587C9.41689 13.892 9.36689 13.917 9.31689 13.9337C9.26689 13.9587 9.21689 13.9753 9.15856 13.9837C9.10856 13.992 9.05023 14.0003 9.00023 14.0003C8.95023 14.0003 8.89189 13.992 8.83356 13.9837C8.78356 13.9753 8.73356 13.9587 8.68356 13.9337C8.63356 13.917 8.58356 13.892 8.53356 13.8587C8.49189 13.8253 8.45023 13.792 8.40856 13.7587C8.25856 13.6003 8.16689 13.3837 8.16689 13.167C8.16689 12.9503 8.25856 12.7337 8.40856 12.5753C8.45023 12.542 8.49189 12.5087 8.53356 12.4753C8.58356 12.442 8.63356 12.417 8.68356 12.4003C8.73356 12.3753 8.78356 12.3587 8.83356 12.3503C8.94189 12.3253 9.05856 12.3253 9.15856 12.3503C9.21689 12.3587 9.26689 12.3753 9.31689 12.4003C9.36689 12.417 9.41689 12.442 9.46689 12.4753C9.50856 12.5087 9.55023 12.542 9.59189 12.5753C9.74189 12.7337 9.83356 12.9503 9.83356 13.167C9.83356 13.3837 9.74189 13.6003 9.59189 13.7587Z" fill="#E03137"/>
+            </svg>
+        </span>
+        <h5>Select potluck</h5>`);
+    }else if(category > 0 && items > 0){
+        if(items == 1){
+            $('.potluck_count').html(` <span class="me-3">
+            </span>
+            <h5>${category} Categoty . ${items} Item</h5>`);
+        }else{
+            $('.potluck_count').html(` <span class="me-3">
+            </span>
+            <h5>${category} Categoty . ${items} Items</h5>`);
+        }
+    }else if(category > 0 && items == 0){
+        $('.potluck_count').html(` <span class="me-3">
+            </span>
+            <h5>${category} Categoty . ${items} Items</h5>`);
+    }
+}
 
 $(document).on("click", ".self_bring_quantity", function () {
     var type = $(this).data("type");
