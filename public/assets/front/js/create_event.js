@@ -3042,7 +3042,8 @@ $(document).on("click", ".add_gift_item_btn", function () {
     var recipient_name = $("#recipient_name").val().trim();
     var registry_link = $("#registry_link").val();
     var registry_edit_item = $("#registry_item_id").val();
-
+    var validGiftUrl = validateURL(registry_link);
+    console.log(validGiftUrl);
     if (registry_edit_item != "") {
         var $registryDiv = $("#registry" + registry_edit_item);
         $registryDiv.find("#added_recipient_name").text(recipient_name);
