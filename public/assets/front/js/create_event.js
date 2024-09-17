@@ -428,8 +428,13 @@ $(function () {
         }
     );
 
-     $("#event-date").on('apply.daterangepicker', function(ev, picker) {
+    $("#event-date").on('apply.daterangepicker', function(ev, picker) {
         picker.show();
+    });
+    $('#rsvp-by-date').on('hide.daterangepicker', function(ev, picker) {
+        if (picker.startDate.isValid()) {
+            $(this).val(picker.startDate.format('YYYY-MM-DD'));
+        }
     });
 });
 
