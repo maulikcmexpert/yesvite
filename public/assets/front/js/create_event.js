@@ -730,7 +730,7 @@ $(document).on("click", 'input[name="email_invite[]"]', function () {
 
                 // } else {
                     $(".inivted_user_list").append(response.view);
-                    guest_counter(total_guest,max_guest);
+                    guest_counter(0,15);
                     $('input[name="email_invite[]"]').prop('disabled', false);
                     $("#loader").css('display','none');
                    
@@ -748,8 +748,8 @@ function guest_counter(total_guest,max_guest){
     total_guest = $(".users-data.invited_user").length;
     $("#event_guest_count").text(total_guest + " Guests");
     $(".invite-count").text(total_guest);
-
-
+    console.log(max_guest);
+    
     var remainingCount = max_guest - total_guest;
 
     $(".invite-left_d").text(
