@@ -189,10 +189,18 @@ class ChatController extends Controller
                     strpos(strtolower($contactData['contactName']), strtolower($name)) !== false
                 ) {
                     $message[] = [
-                        'contactName' => $contactData['contactName'],
-                        'receiverProfile' => $contactData['receiverProfile'],
-                        'lastSeen' => $contactData['lastSeen'] ?? null,
-                        'status' => $contactData['status'] ?? null,
+                        "contactId" => isset($contactData['contactId']) ? $contactData['contactId'] : '',
+                        "conversationId" => isset($contactData['conversationId']) ? $contactData['conversationId'] : '',
+                        "group" => isset($contactData['group']) ? $contactData['group'] : false,
+                        'contactName' => isset($contactData['contactName']) ? $contactData['contactName'] : 'Unknown',
+                        'receiverProfile' => isset($contactData['receiverProfile']) ? $contactData['receiverProfile'] : '',
+                        'lastSeen' => isset($contactData['lastSeen']) ? $contactData['lastSeen'] : 'Unavailable',
+                        'status' => isset($contactData['status']) ? $contactData['status'] : 'Offline',
+                        'lastMessage' => isset($contactData['lastMessage']) ? $contactData['lastMessage'] : '',
+                        "lastSenderId" => isset($contactData['lastSenderId']) ? $contactData['lastSenderId'] : '',
+                        "unRead" => isset($contactData['unRead']) ? $contactData['unRead'] : 0,
+                        "unReadCount" => isset($contactData['unReadCount']) ? $contactData['unReadCount'] : 0,
+                        "timeStamp" => isset($contactData['timeStamp']) ? $contactData['timeStamp'] : 0
                     ];
                 }
             }
