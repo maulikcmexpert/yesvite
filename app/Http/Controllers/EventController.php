@@ -785,6 +785,7 @@ class EventController extends Controller
             $fileName = time() . '-' . $file->getClientOriginalName();
             $path = $file->move(public_path('storage/event_images'), $fileName);
             session(['desgin' => $fileName]);
+            dd(session::get('user_ids'));
             return response()->json(['status' => 'Image saved successfully', 'image' => $fileName]);
         }
 
