@@ -2956,9 +2956,9 @@ async function updateUnreadMessageBadge(conversationId = null) {
     if (totalUnreadCount > 0) {
         $(".badge").show();
         $(".badge").text(totalUnreadCount);
-        console.log(".conversation-"+conversationId);
+        // console.log(".conversation-"+conversationId);
         
-        $(".conversation-"+conversationId).addClass('active');
+        // $(".conversation-"+conversationId).addClass('active');
     } else {
         $(".badge").hide();
     }
