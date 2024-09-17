@@ -693,6 +693,10 @@ ul.cost-list li span {
     z-index: 10;
 }
 
+.start-time {
+    z-index: 3;
+}
+
 .bootstrap-datetimepicker-widget.dropdown-menu .timepicker-picker table td span {
     height: 34px !important;
     line-height: 34px !important;
