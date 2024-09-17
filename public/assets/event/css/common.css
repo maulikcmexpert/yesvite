@@ -706,8 +706,8 @@ ul.cost-list li span {
 .bootstrap-datetimepicker-widget.dropdown-menu .timepicker-picker table td a,
 .bootstrap-datetimepicker-widget.dropdown-menu .timepicker-picker table td span,
 .bootstrap-datetimepicker-widget.dropdown-menu .timepicker-picker table td button {
-    height: 45px !important;
-    line-height: 45px !important;
+    height: 30px !important;
+    line-height: 30px !important;
 }
 
 .bootstrap-datetimepicker-widget.dropdown-menu {
@@ -758,6 +758,10 @@ ul.cost-list li span {
 /* .input-form .input-form .iti{
     width: 83px;
 } */
+
+.end-time-wrp {
+    z-index: 1;
+}
 
 /* ======== Responsive ========= */
 

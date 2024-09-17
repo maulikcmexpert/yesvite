@@ -130,7 +130,7 @@
                             <lable for="start-time" id="event-end_time-error" class="error"></lable>
 
                         </div> --}}
-                        <div class="form-group">
+                        <div class="form-group end-time-wrp">
                             <label>End Time</label>
                             <div class="input-group time ">
                                 <input class="form-control timepicker" placeholder="HH:MM AM/PM" id="end-time"
