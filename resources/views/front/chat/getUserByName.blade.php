@@ -1,3 +1,4 @@
+@dd(message)
 <div class="chat-data d-flex align-items-start">
     <div class="user-img position-relative">
         @if($message['receiverProfile']!=="")
