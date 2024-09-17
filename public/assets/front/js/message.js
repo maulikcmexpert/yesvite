@@ -1323,7 +1323,8 @@ function UpdateMessageToList(key, messageData, conversationId) {
 function addMessageToList(key, messageData, conversationId) {
     if ($(".selected_conversasion").val() != conversationId) {
         console.warn($(".selected_conversasion").val());
-        // console.log(conversationId);
+        console.log(conversationId);
+        $('.conversation-'+conversationId).addClass('active');
         // console.log("selectedisnotvalid");
         return;
     }
