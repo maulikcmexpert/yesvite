@@ -169,122 +169,150 @@ class ChatController extends Controller
     }
 
 
-
-
-
     public function get_user_by_name(Request $request)
     {
-
-        dd($request);
-
+        $name = $request->input('username');
         $userId = auth()->id();
-        $userData = User::findOrFail($userId);
 
-        // dd($userData);
-        $userName =  $userData->firstname . ' ' . $userData->lastname;
-        $updateData = [
-            'userChatId' => '',
-            'userCountryCode' => (string)$userData->country_code,
-            'userGender' => (string)$userData->gender,
-            'userEmail' => $userData->email,
-            'userId' => (string)$userId,
-            'userLastSeen' => now()->timestamp * 1000, // Convert to milliseconds
-            'userName' => $userName,
-            'userPhone' => (string)$userData->phone_number,
-            'userProfile' => url('/public/storage/profile/' . $userData->profile),
-            'userStatus' => 'Online',
-            'userTypingStatus' => 'Not typing...'
-        ];
+        // Get the "overview" node for the authenticated user
+        $overviewRef = $this->firebase->getReference('overview/' . $userId);
+        $overviewData = $overviewRef->getValue();
 
-        // Create a new user node with the userId
-        $userRef = $this->usersReference->getChild((string)$userId);
-        $userSnapshot = $userRef->getValue();
-        $updateFirebase = false;
+        $matchedUsers = [];
 
-        if ($userSnapshot) {
-            if ($userSnapshot['userName'] != $userData->firstname . ' ' . $userData->lastname || $userSnapshot['userProfile'] != url('/public/storage/profile/' . $userData->profile)) {
-                $updateFirebase = true;
-            }
-            // User exists, update the existing data
-            $userRef->update($updateData);
-        } else {
-            // User does not exist, create a new user node
-            $userRef->set($updateData);
-        }
-
-        $reference = $this->firebase->getReference('overview/' . $userId);
-        $messages = $reference->getValue();
-        $updateData = [
-            'contactName' => $userName,
-            'receiverProfile' => url('/public/storage/profile/' . $userData->profile)
-        ];
-        $updateGroupData = [
-            'name' => $userName,
-            'image' => url('/public/storage/profile/' . $userData->profile)
-        ];
-        if ($updateFirebase == true) {
-            if (!empty($messages)) {
-
-                foreach ($messages as $message) {
-                    if (isset($message['group'])  && ($message['group'] == "true" || $message['group'] == true)) {
-                        $reference = $this->firebase->getReference('Groups/' . $message['conversationId'] . '/groupInfo/profiles');
-                        $profiles = $reference->getValue();
-                        if ($profiles) {
-
-                            foreach ($profiles as $key => $profile) {
-                                if ($profile['id'] == $userId) {
-                                    $reference = $this->firebase->getReference('Groups/' . $message['conversationId'] . '/groupInfo/profiles/' . $key);
-                                    $reference->update($updateGroupData);
-                                    break;
-                                }
-                            }
-                        }
-                    } else {
-                        if (isset($message['contactId'])) {
-                            $reference = $this->firebase->getReference('overview/' . $message['contactId'] . '/' . $message['conversationId']);
-                            if ($reference) {
-                                $reference->update($updateData);
-                            }
-                        }
-                    }
+        // Loop through the overview contacts and search by name
+        if ($overviewData) {
+            foreach ($overviewData as $conversationId => $contactData) {
+                if (
+                    isset($contactData['contactName']) &&
+                    strpos(strtolower($contactData['contactName']), strtolower($name)) !== false
+                ) {
+                    $matchedUsers[] = [
+                        'contactName' => $contactData['contactName'],
+                        'receiverProfile' => $contactData['receiverProfile'],
+                        'lastSeen' => $contactData['lastSeen'] ?? null,
+                        'status' => $contactData['status'] ?? null,
+                    ];
                 }
             }
         }
-        if ($messages) {
-            uasort($messages, function ($a, $b) {
-                // Check if either of the items has 'isPin' set to '1'
-                $isPinA = isset($a['isPin']) && $a['isPin'] == '1';
-                $isPinB = isset($b['isPin']) && $b['isPin'] == '1';
 
-                // If both have the same 'isPin' status, sort by 'timeStamp'
-                if ($isPinA == $isPinB) {
-                    $timeStampA = isset($a['timeStamp']) ? $a['timeStamp'] : PHP_INT_MAX;
-                    $timeStampB = isset($b['timeStamp']) ? $b['timeStamp'] : PHP_INT_MAX;
-                    return $timeStampB <=> $timeStampA;
-                }
-
-                // Otherwise, prioritize the item with 'isPin' set to '1'
-                return $isPinB <=> $isPinA;
-            });
-        }
-        // dd($messages);
-        $title = 'Home';
-        $page = 'front.chat.messages';
-        $css = 'message.css';
-        $css1 = 'audio.css';
-        if ($messages == null) {
-            $messages = [];
-        }
-        return view('layout', compact(
-            'title',
-            'page',
-            'css',
-            'css1',
-            'messages',
-            'userId',
-            'userName'
-        ));
+        // Return the matched users as JSON
+        return response()->json($matchedUsers);
     }
+
+
+
+    // public function get_user_by_name(Request $request)
+    // {
+    //     $userId = auth()->id();
+    //     $userData = User::findOrFail($userId);
+
+    //     // dd($userData);
+    //     $userName =  $userData->firstname . ' ' . $userData->lastname;
+    //     $updateData = [
+    //         'userChatId' => '',
+    //         'userCountryCode' => (string)$userData->country_code,
+    //         'userGender' => (string)$userData->gender,
+    //         'userEmail' => $userData->email,
+    //         'userId' => (string)$userId,
+    //         'userLastSeen' => now()->timestamp * 1000, // Convert to milliseconds
+    //         'userName' => $userName,
+    //         'userPhone' => (string)$userData->phone_number,
+    //         'userProfile' => url('/public/storage/profile/' . $userData->profile),
+    //         'userStatus' => 'Online',
+    //         'userTypingStatus' => 'Not typing...'
+    //     ];
+
+    //     // Create a new user node with the userId
+    //     $userRef = $this->usersReference->getChild((string)$userId);
+    //     $userSnapshot = $userRef->getValue();
+    //     $updateFirebase = false;
+
+    //     // if ($userSnapshot) {
+    //     //     if ($userSnapshot['userName'] != $userData->firstname . ' ' . $userData->lastname || $userSnapshot['userProfile'] != url('/public/storage/profile/' . $userData->profile)) {
+    //     //         $updateFirebase = true;
+    //     //     }
+    //     //     // User exists, update the existing data
+    //     //     $userRef->update($updateData);
+    //     // } else {
+    //     //     // User does not exist, create a new user node
+    //     //     $userRef->set($updateData);
+    //     // }
+
+    //     $reference = $this->firebase->getReference('overview/' . $userId);
+    //     $messages = $reference->getValue();
+    //     $updateData = [
+    //         'contactName' => $userName,
+    //         'receiverProfile' => url('/public/storage/profile/' . $userData->profile)
+    //     ];
+    //     $updateGroupData = [
+    //         'name' => $userName,
+    //         'image' => url('/public/storage/profile/' . $userData->profile)
+    //     ];
+    //     if ($updateFirebase == true) {
+    //         if (!empty($messages)) {
+
+    //             foreach ($messages as $message) {
+    //                 if (isset($message['group'])  && ($message['group'] == "true" || $message['group'] == true)) {
+    //                     $reference = $this->firebase->getReference('Groups/' . $message['conversationId'] . '/groupInfo/profiles');
+    //                     $profiles = $reference->getValue();
+    //                     if ($profiles) {
+
+    //                         foreach ($profiles as $key => $profile) {
+    //                             if ($profile['id'] == $userId) {
+    //                                 $reference = $this->firebase->getReference('Groups/' . $message['conversationId'] . '/groupInfo/profiles/' . $key);
+    //                                 $reference->update($updateGroupData);
+    //                                 break;
+    //                             }
+    //                         }
+    //                     }
+    //                 } else {
+    //                     if (isset($message['contactId'])) {
+    //                         $reference = $this->firebase->getReference('overview/' . $message['contactId'] . '/' . $message['conversationId']);
+    //                         if ($reference) {
+    //                             $reference->update($updateData);
+    //                         }
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     }
+    //     if ($messages) {
+    //         uasort($messages, function ($a, $b) {
+    //             // Check if either of the items has 'isPin' set to '1'
+    //             $isPinA = isset($a['isPin']) && $a['isPin'] == '1';
+    //             $isPinB = isset($b['isPin']) && $b['isPin'] == '1';
+
+    //             // If both have the same 'isPin' status, sort by 'timeStamp'
+    //             if ($isPinA == $isPinB) {
+    //                 $timeStampA = isset($a['timeStamp']) ? $a['timeStamp'] : PHP_INT_MAX;
+    //                 $timeStampB = isset($b['timeStamp']) ? $b['timeStamp'] : PHP_INT_MAX;
+    //                 return $timeStampB <=> $timeStampA;
+    //             }
+
+    //             // Otherwise, prioritize the item with 'isPin' set to '1'
+    //             return $isPinB <=> $isPinA;
+    //         });
+    //     }
+    //     // dd($messages);
+    //     $title = 'Home';
+    //     $page = 'front.chat.messages';
+    //     $css = 'message.css';
+    //     $css1 = 'audio.css';
+    //     if ($messages == null) {
+    //         $messages = [];
+    //     }
+    //     return view('layout', compact(
+    //         'title',
+    //         'page',
+    //         'css',
+    //         'css1',
+    //         'messages',
+    //         'userId',
+    //         'userName'
+    //     ));
+    // }
 
 
     public function sendMessage(Request $request)
