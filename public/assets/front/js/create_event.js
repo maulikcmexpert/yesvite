@@ -1989,8 +1989,9 @@ function savePage1Data(close = null) {
         zipcode: zipcode,
         rsvp_by_date:rsvp_by_date,
     };
-
+    
     if ($('#rsvp_by_date').is(':checked')) {
+        console.log(rsvp_by_date);
         if (rsvp_by_date == "") {
             $("#event-rsvpby-error")
                 .css("display", "block")
