@@ -26,8 +26,8 @@ use Carbon\Carbon;
                 <div class="chat-area">
                     <div class="chat-lists">
                         <div class="chat-header">
-                            <input type="text" name="search_user_from_list">
-                            <div class="chat-functions d-none">
+                            <input type="text" name="search_user_from_list" id="serach_user_from_list">
+                            <div class=" chat-functions d-none">
                                 <div class="d-flex align-items-center">
                                     <span class="me-3 bulk-back">
                                         <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
