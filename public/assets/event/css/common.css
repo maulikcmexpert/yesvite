@@ -789,6 +789,13 @@ ul.cost-list li span {
     width: 1% !important;
 }
 
+.bootstrap-datetimepicker-widget.dropdown-menu {
+    display: block;
+    margin: 2px 0;
+    padding: 4px;
+    width: 15em !important;
+}
+
 /* ======== Responsive ========= */
 
 
