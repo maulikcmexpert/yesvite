@@ -3832,3 +3832,9 @@ $(document).on('click','#guest_list_visible_to_guest',function () {
     }
     
 });
+
+$(document).on('click','input[name="select_thankyou[]"]',function () { 
+    $("input[name='select_thankyou[]']" ).each(function (index) {
+        console.log(index);
+    });
+});
