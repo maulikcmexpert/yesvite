@@ -527,7 +527,7 @@ class EventController extends Controller
             foreach ($sessionKeys as $key) {
                 $request->session()->forget($key);
             }
-            dd(session('user_ids'));
+            // dd(session('user_ids'));
             return response()->json(['success' => true, 'message' => 'Sessions deleted successfully']);
         }
         return response()->json(['success' => true, 'message' => 'Session deleted successfully']);
