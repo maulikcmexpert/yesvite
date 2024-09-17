@@ -1,5 +1,6 @@
 @php
-$selected_user = session('user_ids');       
+$selected_user = session('user_ids');   
+dd($selected_user);    
 @endphp
 
 @foreach ($yesvite_user as $user)
@@ -15,7 +16,7 @@ $selected_user = session('user_ids');
                 if($selected_user[$key]['prefer_by'] == 'email'){
                     $email_checked = 'checked';
                 }elseif($selected_user[$key]['prefer_by'] == 'phone'){
-                        $phone_checked = 'checked';
+                    $phone_checked = 'checked';
                 }
             }
         }
