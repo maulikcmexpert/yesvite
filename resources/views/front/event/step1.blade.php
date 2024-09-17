@@ -43,10 +43,8 @@
                     <div class="col-lg-12 mb-4">
                         <div class="input-form">
                             <input type="text" class="form-control inputText" id="event-date"
-                                name="event-date" onblur="clearError(this)">
-                            <label for="birthday" class="form-label input-field floating-label select-label">Date
-                                of
-                                event</label>
+                                name="event-date" onblur="clearError(this)" readonly>
+                            <label for="birthday" class="form-label input-field floating-label select-label">Date of event</label>
                             <lable for="event-date" id="event-date-error" class="error"></lable>
 
 
