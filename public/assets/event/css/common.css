@@ -524,7 +524,7 @@ ul.nav-tabs .nav-link:focus {
 }
 
 .plans-wrap h5 {
-    margin-bottom: 8px;
+    /* margin-bottom: 8px; */
     color: var(--secondryColor);
     font-weight: 400;
     font-size: 20px;
