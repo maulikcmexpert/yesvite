@@ -1,6 +1,7 @@
 $(document).ready(function () {
     if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
         //  alert(design);
+        $('.user_choice').prop('checked',false);
         $.ajax({
             url: base_url + "event/delete-session",
             type: "POST",
