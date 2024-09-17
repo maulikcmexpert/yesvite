@@ -3422,7 +3422,7 @@ $(document).on('keyup','#serach_user_from_list',function() {
         data: { username: name },
         method: "post",
         success: function (res) {
-           console.log(res);
+           $('.chat-list').html(res);
         },
     });
 })
