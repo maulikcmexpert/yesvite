@@ -25,7 +25,7 @@ $i = 0;
         <div class="chat-data d-flex align-items-start">
             <div class="user-img position-relative">
                 @if($message['receiverProfile']!=="")
-                <img class="img-fluid user-image user-img-{{@$message['contactId']}}" data-id={{@$message['contactId']}} src="{{@$message['receiverProfile']}}" alt="user img">
+                <img class="img-fluid user-image user-img-{{@$message['contactId']}}" src="{{@$message['receiverProfile']}}" data-id={{@$message['contactId']}} alt="user img">
                 @else
                 @php
                 $contactName = $message['contactName'];
