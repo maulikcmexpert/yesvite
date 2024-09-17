@@ -441,6 +441,8 @@ $(function () {
 
 let eventData = {};
 var total_activities = 0;
+var category = 0;
+var items = 0;
 
 $(document).on("click", ".delete_activity", function () {
     var id = $(this).data("id");
@@ -983,6 +985,7 @@ $(document).on("click", ".add_category_btn", function () {
                 $("#hidden_category_quantity").val(categoryQuantity);
                 $(".potluck-category").append(response.view);
                 toggleSidebar("sidebar_potluck");
+                category++;
             } else {
                 potluckkey--;
                 toastr.error("category already exist");
@@ -1053,6 +1056,7 @@ $(document).on("click", ".add_category_item_btn", function () {
             $("#self_bring_qty").val(0);
             $("#missing-category-" + category_index).text(response.total_item);
             $(".missing-category-h6-" + category_index).show();
+            items++;
             toggleSidebar("sidebar_potluck");
             if (response.qty == 1) {
                 $("#potluck-" + category_index).hide();
