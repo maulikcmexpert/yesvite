@@ -838,6 +838,18 @@ ul.cost-list li span {
         bottom: 0;
     }
 
+    .sidebar-content {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        max-width: 500px;
+        max-height: 440px;
+        overflow-y: scroll;
+        background-color: #fff;
+        z-index: 10;
+    }
+
     .sidebar {
         right: -600px;
     }
