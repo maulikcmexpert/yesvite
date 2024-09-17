@@ -1575,7 +1575,12 @@ function createMessageElement(key, messageData, isGroup) {
     } else if (formattedDate[msgDate] === undefined) {
         // console.log(formattedDate);
         // console.log(msgDate);
-        daychange = "<h5 class='day-line'><span>" + chatSmallDay +" "+ msgDate + "</span></h5>";
+        if(msgDate=="Yesterday"){
+            daychange = "<h5 class='day-line'><span>"  + msgDate + "</span></h5>";
+        }else{
+            daychange = "<h5 class='day-line'><span>" + chatSmallDay +","+ msgDate + "</span></h5>";
+
+        }
     }
     formattedDate[msgDate] = "1";
 
