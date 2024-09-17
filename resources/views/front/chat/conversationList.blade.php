@@ -1,4 +1,5 @@
 @php
+dd(2);
 use Carbon\Carbon;
 $i = 0;
 $message['unReadCount'] = @$message['unRead']==true && @$message['unReadCount']==0 ?1 : @$message['unReadCount'];
@@ -57,7 +58,7 @@ $message['unReadCount'] = @$message['unRead']==true && @$message['unReadCount']=
 
         </a>
         <div class="ms-auto">
-            <h6 class="ms-2 time-ago"> {{ $timeAgo }}asasasas</h6>
+            <h6 class="ms-2 time-ago"> {{ $timeAgo }}</h6>
             <div class="d-flex align-items-center justify-content-end">
                 <span class="badge ms-2 {{@$message['unReadCount'] == 0 ? 'd-none' : ''}}">{{@$message['unReadCount']}}</span>
                 <span class="ms-2 d-flex mt-1 align-items-start justify-content-end pin-svg {{@$message['isPin']=='1'?'':'d-none'}}">
