@@ -21,7 +21,7 @@ $selected_user = session('user_ids');
                 }elseif($selected_user[$key]['prefer_by'] == 'phone'){
                     $phone_checked = 'checked';
                 }
-                dd($selected_user);
+                
             }
         }
     }
