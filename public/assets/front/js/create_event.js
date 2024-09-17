@@ -1829,6 +1829,13 @@ $(document).on("click", "#save_activity_schedule", function () {
         // toggleSidebar();
     });
     if (isValid == 0) {
+        if(total_activities <= 1){
+            if(total_activities == 1 ){
+                $('.step_1_activity').text(total_activities + ' Activity');
+            }else{
+                $('.step_1_activity').text(total_activities + ' Activities');
+            }
+        }
         toggleSidebar();
         console.log(activities);
         eventData.activity = activities;

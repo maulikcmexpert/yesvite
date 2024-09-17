@@ -101,7 +101,7 @@
                             </div>
                         </div>
                         <div class="add-activity-schedule" onclick="toggleSidebar('sidebar_activity_schedule')" style="display:none;">
-                            <h5><span><i class="fa-solid fa-triangle-exclamation"></i></span>Setup activity
+                            <h5 class="step_1_activity"><span><i class="fa-solid fa-triangle-exclamation"></i></span>Setup activity
                                 schedule
                             </h5>
                             <i class="fa-solid fa-angle-right"></i>
