@@ -3042,62 +3042,63 @@ $(document).on("click", ".add_gift_item_btn", function () {
     var recipient_name = $("#recipient_name").val().trim();
     var registry_link = $("#registry_link").val();
     var registry_edit_item = $("#registry_item_id").val();
-    var validGiftUrl = validateURL($("#registry_link"));
-    console.log(validGiftUrl);
-    if (registry_edit_item != "") {
-        var $registryDiv = $("#registry" + registry_edit_item);
-        $registryDiv.find("#added_recipient_name").text(recipient_name);
-        $registryDiv.find("#added_registry_link").text(registry_link);
+    var regex = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
+    if (regex.test(registry_link)) {
+        if (registry_edit_item != "") {
+            var $registryDiv = $("#registry" + registry_edit_item);
+            $registryDiv.find("#added_recipient_name").text(recipient_name);
+            $registryDiv.find("#added_registry_link").text(registry_link);
+        }
+        if (recipient_name == "") {
+            $("#recipient_name_error")
+                .css("display", "block")
+                .css("color", "red")
+                .text("Please add recipients name");
+            return;
+        } else {
+            $("#recipient_name_error").css("display", "none");
+        }
+    
+        if (registry_link == "") {
+            $("#registry_link_error")
+                .css("display", "block")
+                .css("color", "red")
+                .text("Please add registry link");
+            return;
+        } else {
+            $("#registry_link_error").css("display", "none");
+        }
+    
+        $.ajax({
+            url: base_url + "event/add_new_gift_registry",
+            type: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            data: {
+                registry_item: registry_edit_item
+                    ? registry_edit_item
+                    : registry_item,
+                recipient_name: recipient_name,
+                registry_link: registry_link,
+            },
+            success: function (response) {
+                console.log(response);
+                if (response.status == "1") {
+                    toastr.success("Registry Updated");
+                    $("#registry_item_id").val("");
+                }
+                $("#registry_list").append(response.view);
+                toggleSidebar("sidebar_gift_registry");
+                $("#recipient_name").val("");
+                $("#registry_link").val("");
+            },
+            error: function (xhr, status, error) {
+                console.log("AJAX error: " + error);
+            },
+        });
+        registry_item++;
     }
-    if (recipient_name == "") {
-        $("#recipient_name_error")
-            .css("display", "block")
-            .css("color", "red")
-            .text("Please add recipients name");
-        return;
-    } else {
-        $("#recipient_name_error").css("display", "none");
-    }
-
-    if (registry_link == "") {
-        $("#registry_link_error")
-            .css("display", "block")
-            .css("color", "red")
-            .text("Please add registry link");
-        return;
-    } else {
-        $("#registry_link_error").css("display", "none");
-    }
-
-    $.ajax({
-        url: base_url + "event/add_new_gift_registry",
-        type: "POST",
-        headers: {
-            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-        },
-        data: {
-            registry_item: registry_edit_item
-                ? registry_edit_item
-                : registry_item,
-            recipient_name: recipient_name,
-            registry_link: registry_link,
-        },
-        success: function (response) {
-            console.log(response);
-            if (response.status == "1") {
-                toastr.success("Registry Updated");
-                $("#registry_item_id").val("");
-            }
-            $("#registry_list").append(response.view);
-            toggleSidebar("sidebar_gift_registry");
-            $("#recipient_name").val("");
-            $("#registry_link").val("");
-        },
-        error: function (xhr, status, error) {
-            console.log("AJAX error: " + error);
-        },
-    });
-    registry_item++;
 });
 
 $(document).on("click", ".delete_gift_registry", function () {
