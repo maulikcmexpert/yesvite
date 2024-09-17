@@ -431,6 +431,9 @@ $(function () {
      $("#event-date").on('apply.daterangepicker', function(ev, picker) {
         picker.show();
     });
+    $("#event-date").on('blur', function(ev, picker) {
+        picker.show();
+    });
 });
 
 let eventData = {};
