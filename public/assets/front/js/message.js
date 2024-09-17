@@ -1434,6 +1434,8 @@ function createMessageElement(key, messageData, isGroup) {
                       )
                   )}</span>`
                 : "";
+            senderprofile= getSelectedUserimggrp(sender_userProfile,senderName);
+
     }
 
     let emojiAndReplay = isReceiver
@@ -1507,7 +1509,7 @@ function createMessageElement(key, messageData, isGroup) {
             : `
             <div class="simple-message">
              ${
-                isReceiver
+                    isReceiver
                             ? `<div class="simplemsg-img me-2 user-img"><span>${senderprofile}<span></div>`
                             : ""
                     } 
