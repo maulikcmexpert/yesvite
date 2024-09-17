@@ -1385,7 +1385,7 @@ function createMessageElement(key, messageData, isGroup) {
     let reaction = "";
     let dataWithMedia = "";
     let senderprofile="";
-    senderprofile= getSelectedUserimggrp(sender_userProfile,senderName);
+    
     if (isGroup == "true" || isGroup == true) {
         if (
             messageData.userAvailable != undefined &&
@@ -1417,7 +1417,7 @@ function createMessageElement(key, messageData, isGroup) {
                   .join(" ")
             : "";
         reaction = `<ul class="reaction-ul ${messageData?.react}">${reaction}</ul>`;
-        
+        senderprofile= getSelectedUserimggrp(sender_userProfile,senderName);
         // console.log(senderprofile);          
     } else {
         seenStatus = isSender
