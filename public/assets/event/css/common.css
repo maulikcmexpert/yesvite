@@ -834,6 +834,18 @@ ul.cost-list li span {
 
     .new-event-btn {
         margin-top: 20px;
+        position: fixed;
+        bottom: 0;
+    }
+
+    .sidebar-content,
+    .sidebar {
+        max-height: 440px !important;
+    }
+
+    .sidebar-content {
+        max-width: 100% !important;
+
     }
 
     .sidebar {
