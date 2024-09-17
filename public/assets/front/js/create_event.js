@@ -1058,6 +1058,7 @@ $(document).on("click", ".add_category_item_btn", function () {
             $("#missing-category-" + category_index).text(response.total_item);
             $(".missing-category-h6-" + category_index).show();
             items++;
+            potluck_cateogry_item_count();
             toggleSidebar("sidebar_potluck");
             if (response.qty == 1) {
                 $("#potluck-" + category_index).hide();
