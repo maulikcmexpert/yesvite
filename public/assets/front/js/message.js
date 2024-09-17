@@ -177,15 +177,15 @@ async function getListUserimg(profileImageUrl, userName) {
 }
 
 function getSelectedUserimggrp(profileImageUrl, userName) {
-    console.log(isValidImageUrlgrp(profileImageUrl))
+    // console.log(isValidImageUrlgrp(profileImageUrl))
     if (isValidImageUrlgrp(profileImageUrl)==1) {
         return `<img class="user-avatar img-fluid" src="${profileImageUrl}" alt="user-img">`;
     }else{
 
-        console.log(userName);
+        // console.log(userName);
         
         const initials = getInitials(userName);
-        console.log(initials);
+        // console.log(initials);
     
         const fontColor = "fontcolor" + initials[0]?.toUpperCase();
     
@@ -649,7 +649,7 @@ async function updateChatfromGroup(conversationId) {
     );
     off(messagesRef);
     onChildChanged(messagesRef, async (snapshot) => {
-        console.log("1");
+        // console.log("1");
         UpdateMessageToList(snapshot.key, snapshot.val(), conversationId);
     });
     onChildChanged(profileRef, async (snapshot) => {
@@ -663,12 +663,12 @@ async function updateChatfromGroup(conversationId) {
         }
     });
     onChildRemoved(messagesRef, async (snapshot) => {
-        console.log("2");
+        // console.log("2");
 
         RemoveMessageToList(snapshot.key, conversationId);
     });
     onChildAdded(messagesRef, async (snapshot) => {
-        console.log("3");
+        // console.log("3");
 
         addMessageToList(snapshot.key, snapshot.val(), conversationId);
 
@@ -1319,8 +1319,8 @@ function UpdateMessageToList(key, messageData, conversationId) {
 function addMessageToList(key, messageData, conversationId) {
     if ($(".selected_conversasion").val() != conversationId) {
         console.warn($(".selected_conversasion").val());
-        console.log(conversationId);
-        console.log("selectedisnotvalid");
+        // console.log(conversationId);
+        // console.log("selectedisnotvalid");
         return;
     }
     let isGroup = $("#isGroup").val();
@@ -1363,7 +1363,7 @@ function createMessageElement(key, messageData, isGroup) {
         (isGroup == "true" || isGroup == true) &&
         SelecteGroupUser[messageData.senderId] == undefined
     ) {
-        console.log(SelecteGroupUser[messageData.senderId]);
+        // console.log(SelecteGroupUser[messageData.senderId]);
         return;
     }
     const senderName =
@@ -1412,7 +1412,7 @@ function createMessageElement(key, messageData, isGroup) {
             : "";
         reaction = `<ul class="reaction-ul ${messageData?.react}">${reaction}</ul>`;
         senderprofile= getSelectedUserimggrp(sender_userProfile,senderName);
-        console.log(senderprofile);          
+        // console.log(senderprofile);          
     } else {
         seenStatus = isSender
             ? messageData.isSeen
@@ -1566,8 +1566,8 @@ function createMessageElement(key, messageData, isGroup) {
     if (formattedDate.length == 0) {
         daychange = "<h5 class='day-line'><span>" + chatSmallDay +" "+ msgDate + "</span></h5>";
     } else if (formattedDate[msgDate] === undefined) {
-        console.log(formattedDate);
-        console.log(msgDate);
+        // console.log(formattedDate);
+        // console.log(msgDate);
         daychange = "<h5 class='day-line'><span>" + chatSmallDay +" "+ msgDate + "</span></h5>";
     }
     formattedDate[msgDate] = "1";
@@ -2161,11 +2161,11 @@ async function addListInMembers(SelecteGroupUser) {
             senderIsAdmin = true;
         }
     });
-    console.log("check admin", senderIsAdmin);
+    // console.log("check admin", senderIsAdmin);
     if (senderIsAdmin) {
         $(".new-member").removeClass("d-none");
     } else {
-        console.log("else");
+        // console.log("else");
 
         $(".new-member").addClass("d-none");
     }
@@ -2393,7 +2393,7 @@ $("#group-search-user")
     const $divImage = $("<div>").addClass("user-img position-relative");
     const $divName = $("<div>").addClass("user-detail d-block ms-3");
     const $img = item.imageElement;
-    console.log($img);
+    // console.log($img);
     const $span = $("<h3>").text(item.label);
 
     $divImage.append($img);
@@ -2414,7 +2414,7 @@ function updateSelectedgrpUserIds() {
 }
 $("#add-group-member").click(async function () {
     try {
-        console.log(newSelectedUserIds);
+        // console.log(newSelectedUserIds);
 
         if (newSelectedUserIds.length === 0) {
             return; // No new users to add
