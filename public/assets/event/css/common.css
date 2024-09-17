@@ -759,6 +759,10 @@ ul.cost-list li span {
     width: 83px;
 } */
 
+.end-time-wrp {
+    z-index: 1;
+}
+
 /* ======== Responsive ========= */
 
 
