@@ -506,9 +506,11 @@ async function updateChat(user_id) {
     const messageTime = selected_user.userLastSeen
         ? new Date(selected_user.userLastSeen)
         : new Date();
+        console.log(messageTime);
+        
     let lastseen =
         selected_user.userStatus == "offline"
-            ? "last seen at ".timeago.format(messageTime)
+            ? timeago.format(messageTime)
             : "Online";
     $("#selected-user-lastseen").html(lastseen);
     $("#selected-user-name").html(selected_user.userName);
