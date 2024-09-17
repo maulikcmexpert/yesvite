@@ -764,6 +764,7 @@
 
 .deleteModal .cancel-btn-createEvent {
     border: 1px solid #f1f1f1;
+    border-radius: 10px;
 }
 
 /* ============ responsive ============ */
