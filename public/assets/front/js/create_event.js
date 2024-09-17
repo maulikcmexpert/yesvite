@@ -264,7 +264,7 @@ function datepicker() {
 $(function() {
     $('#rsvp-by-date').daterangepicker({
       singleDatePicker: true,
-      autoUpdateInput: false,  // Prevents default value from being set
+    //   autoUpdateInput: false,  
     //   showDropdowns: true,
       minYear: 1901,
       locale: {
@@ -290,7 +290,7 @@ $(function () {
             startDate: moment().startOf("month"),
             endDate: moment().endOf("month"),
             minDate: moment().add(1, 'days'),  
-            alwaysShowCalendars: true, // Keep the calendar visible
+            // alwaysShowCalendars: true, // Keep the calendar visible
             maxSpan: { days: 2 },
         },
         
@@ -410,7 +410,6 @@ $(function () {
 
                     $(".activity_bar").append(formHtml);
                     datepicker();
-                    // Increment the date by one day
                     startDate.add(1, "day");
                 }
 
@@ -2393,12 +2392,21 @@ $(document).on("click", "#close_createEvent", function () {
             var hostedby = $("#hostedby").val();
             var event_date = $("#event-date").val();
             var start_time = $("#start-time").val();
+            var end_time = $("#end_time").is(":checked");
+            var rsvp_by_date_set = $("#rsvp_by_date").is(":checked");
+            var rsvp_end_time_set = '0';
+            
+            if(end_time){
+                rsvp_end_time_set = '1';
+            }
             var address = $("#address1").val();
             var city = $("#city").val();
             var state = $("#state").val();
             var zipcode = $("#zipcode").val();
             var id = $("#id").val();
             var rsvp_by_date = $("#rsvp-by-date").val();
+            var event_id = $("#event_id").val();
+            var description = $("#description").val();
 
             eventData = {
                 event_type: event_type,
@@ -2412,6 +2420,9 @@ $(document).on("click", "#close_createEvent", function () {
                 state: state,
                 zipcode: zipcode,
                 rsvp_by_date:rsvp_by_date,
+                event_id:event_id,
+                rsvp_end_time_set:rsvp_end_time_set,
+                event_location:description,
             };
             $(".step_2").hide();
         }
@@ -3253,7 +3264,7 @@ $(document).on("click", ".final_checkout", function () {
     // $(".main-content-wrp").addClass("blurred");
     // var imagePath = '';
 
-    $('#eventImage').attr('src',base_url+'storage/event_images/'+eventData.desgin_selected+'');
+    $('#eventImage').attr('src',base_url+'public/storage/event_images/'+eventData.desgin_selected+'');
         $(".step_1").css("display", "none");
         $(".step_2").css("display", "none");
         $(".step_3").css("display", "none");
@@ -3703,27 +3714,7 @@ $(document).on('click','.free_plan',function () {
     $('#loader').css('display','none');
  });
  
- $(document).on('click','.brand-progress',function () { 
-   var event_id = $(this).data('id');
 
-   $.ajax({
-    url: base_url + "event/edit_event",
-    type: "POST",
-    headers: {
-        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-    },
-    data: {
-        event_id: event_id,
-    },
-    success: function (response) {
-        console.log(response);
-        
-    },
-    error: function (xhr, status, error) {
-        console.log("AJAX error: " + error);
-    },
-});
- });
 
 
  $(document).on('change', 'input[name="gift_registry[]"]',function() {
@@ -3764,4 +3755,15 @@ $(document).on('click','.free_plan',function () {
 
         eventData.gift_registry_data = selected_gift;
     }
+});
+
+$(document).on('click','.brand-progress',function () { 
+    var event_id = $(this).data('id');
+    window.location.href="event?id="+event_id;
+       
+});
+
+$(document).on('click','.create_new_event_close_tip',function () { 
+    $('#create_new_event_tip').removeClass('d-flex');
+    $('#create_new_event_tip').hide();
 });

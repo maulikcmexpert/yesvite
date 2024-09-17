@@ -216,7 +216,7 @@
                     </svg>
                 </button>
             </div>
-            <div class="alert-box d-flex align-items-center">
+            <div class="alert-box d-flex align-items-center" id="create_new_event_tip">
                 <span class="me-3">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
@@ -230,7 +230,7 @@
                     </svg>
                 </span>
                 <p>You can choose to continue one of your drafts above or hit the “Create New Event” button.</p>
-                <span class="ms-3">
+                <span class="ms-3 create_new_event_close_tip">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path d="M5.00098 5L19 18.9991" stroke="#64748B" stroke-width="1.5" stroke-linecap="round"
