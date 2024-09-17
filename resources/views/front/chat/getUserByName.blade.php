@@ -1,4 +1,4 @@
-@foreach ($messages as $messages)
+@foreach ($messages as $message)
 <div class="chat-data d-flex align-items-start">
     <div class="user-img position-relative">
         @if($message['receiverProfile']!=="")
