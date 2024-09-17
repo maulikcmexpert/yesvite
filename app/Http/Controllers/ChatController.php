@@ -181,7 +181,7 @@ class ChatController extends Controller
         $message = [];
 
         // Loop through the overview contacts and search by name
-        dd($overviewData);
+        // dd($overviewData);
         if ($overviewData) {
             foreach ($overviewData as $conversationId => $contactData) {
                 if (
