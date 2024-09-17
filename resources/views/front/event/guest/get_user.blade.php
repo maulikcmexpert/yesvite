@@ -1,6 +1,6 @@
 @php
 $selected_user = session('user_ids');   
-dd($selected_user);    
+// dd($selected_user);    
 @endphp
 
 @foreach ($yesvite_user as $user)
@@ -43,7 +43,7 @@ dd($selected_user);
                 {{ $user->lastname }}</h5>
             @if(isset($user->email)&&$user->email!="")
             <div>
-                <a href="mailto:silvia@gmail.com">
+                <a href="mailto: {{ $user->email }}">
                     <svg class="me-1" width="14" height="14"
                         viewBox="0 0 14 14" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
@@ -115,7 +115,7 @@ dd($selected_user);
             <div class="right-note ms-auto">
                 <input class="form-check-input user_group_member user_choice"
                     type="checkbox" name="add_by_mobile[]"
-                    data-preferby="phone"data-mobile="{{ $user->phone_number }}"
+                    data-preferby="phone" data-mobile="{{ $user->phone_number }}"
                     value="{{ $user->id }}">
             </div>
         @endif
