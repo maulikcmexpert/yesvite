@@ -872,7 +872,7 @@
                     <div class="d-flex justify-content-between">
                         <div>
                             <div class="d-flex align-items-center">
-                                <h5>Pro </h5>
+                                <h5>Enterprise Pro </h5>
 
                             </div>
                             <h6>$12.50 <span>Per month | <strong>Billed annually</strong></span></h6>
