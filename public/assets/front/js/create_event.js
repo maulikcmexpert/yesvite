@@ -298,7 +298,7 @@ $(function () {
             selectedDates.clear();
             selectedDates.add(start.format("YYYY-MM-DD"));
             selectedDates.add(end.format("YYYY-MM-DD"));
-            var eventDate = start.format("YYYY-MM-DD") + "To " + end.format("YYYY-MM-DD")
+            var eventDate = start.format("YYYY-MM-DD") + " To " + end.format("YYYY-MM-DD")
             if(start.format("YYYY-MM-DD") == end.format("YYYY-MM-DD")){
                 eventDate = end.format("YYYY-MM-DD");
             }
@@ -429,7 +429,6 @@ $(function () {
         picker.show();
     });
 });
-
 
 let eventData = {};
 

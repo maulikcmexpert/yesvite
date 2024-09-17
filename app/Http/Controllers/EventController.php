@@ -136,8 +136,8 @@ class EventController extends Controller
         $user_id =  Auth::guard('web')->user()->id;
         $dateString = (isset($request->event_date)) ? $request->event_date : "";
 
-        if (strpos($dateString, 'To ') !== false) {
-            list($startDate, $endDate) = explode('To ', $dateString);
+        if (strpos($dateString, ' To ') !== false) {
+            list($startDate, $endDate) = explode(' To ', $dateString);
         } else {
             $startDate = $dateString;
             $endDate = null;
