@@ -874,7 +874,7 @@
                     </div> -->
                     <div class="d-flex justify-content-between">
                         <div>
-                            <div class="d-flex align-items-center gap-2">
+                            <div class="d-flex align-items-center gap-2 mb-2">
                                 <h5>Enterprise Pro</h5>
                                 <div class="d-flex">
                                     <span class="ms-auto rcomand-text create-event-recommend">Recommended</span>
