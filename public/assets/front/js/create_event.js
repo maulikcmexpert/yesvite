@@ -431,7 +431,7 @@ $(function () {
 });
 
 let eventData = {};
-
+var total_activities = 0;
 
 $(document).on("click", ".delete_activity", function () {
     var id = $(this).data("id");
@@ -443,8 +443,11 @@ $(document).on("click", ".delete_activity", function () {
         $(this).text(i);
         i++;
     });
+    total_activities--;
     i--;
     $(".total_activity-" + total_activity).text("(" + i + ")");
+    console.log(total_activities);
+    
 });
 var numItems = 0;
 
@@ -465,6 +468,7 @@ $(document).on('click','.create_event_with_plan',function(){
 
 $(document).on("click", ".add_more_activity", function () {
     $(this).prop("disabled", true);
+
     var newClass = $(this).parent().next().find(".new_activity").data("id");
     var count = $("." + newClass).length;
     if (count === null || count === undefined) {
@@ -493,6 +497,9 @@ $(document).on("click", ".add_more_activity", function () {
         },
         success: function (response) {
             $("#" + id).append(response);
+            total_activities++;
+            console.log(total_activities);
+            
             datepicker();
             $(".total_activity-" + id).text("(" + count + ")");
             $(".add_more_activity").prop("disabled", false);
