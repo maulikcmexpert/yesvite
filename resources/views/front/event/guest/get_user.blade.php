@@ -6,9 +6,11 @@ $selected_user = session('user_ids');
 @foreach ($yesvite_user as $user)
 @php
 
-   
+    $email_checked = '';
+    $phone_checked = '';
     if(isset($selected_user) && !empty($selected_user)){
         $foundKey = array_search($user->id, array_column($selected_user, 'id'));
+
         if ($foundKey !== false) {
             $key = array_keys($selected_user)[$foundKey];
             $email_checked = '';
@@ -19,6 +21,7 @@ $selected_user = session('user_ids');
                 }elseif($selected_user[$key]['prefer_by'] == 'phone'){
                     $phone_checked = 'checked';
                 }
+                dd($email_checked);
             }
         }
     }
