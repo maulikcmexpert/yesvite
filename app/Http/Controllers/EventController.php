@@ -522,6 +522,7 @@ class EventController extends Controller
             }
         }
 
+        session()->forget('user_ids');
         if (is_array($sessionKeys)) {
             foreach ($sessionKeys as $key) {
                 $request->session()->forget($key);
