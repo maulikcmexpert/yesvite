@@ -206,6 +206,24 @@ class ChatController extends Controller
             }
         }
 
+        if ($messages) {
+            uasort($messages, function ($a, $b) {
+                // Check if either of the items has 'isPin' set to '1'
+                $isPinA = isset($a['isPin']) && $a['isPin'] == '1';
+                $isPinB = isset($b['isPin']) && $b['isPin'] == '1';
+
+                // If both have the same 'isPin' status, sort by 'timeStamp'
+                if ($isPinA == $isPinB) {
+                    $timeStampA = isset($a['timeStamp']) ? $a['timeStamp'] : PHP_INT_MAX;
+                    $timeStampB = isset($b['timeStamp']) ? $b['timeStamp'] : PHP_INT_MAX;
+                    return $timeStampB <=> $timeStampA;
+                }
+
+                // Otherwise, prioritize the item with 'isPin' set to '1'
+                return $isPinB <=> $isPinA;
+            });
+        }
+
         // return response()->json($message);
         return view('front.chat.getUserByName', compact('messages'));
     }
