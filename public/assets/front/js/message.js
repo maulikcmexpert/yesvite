@@ -620,7 +620,7 @@ async function updateChat(user_id) {
     });
 
     updateMore(conversationId);
-    updateUnreadMessageBadge();
+    updateUnreadMessageBadge(conversationId);
     loader.hide();
 }
 
@@ -695,7 +695,7 @@ async function updateChatfromGroup(conversationId) {
     $(".selected-title").html(groupInfo.groupName);
     $("#isGroup").val("true");
     updateMore(conversationId);
-    updateUnreadMessageBadge();
+    updateUnreadMessageBadge(conversationId);
     loader.hide();
 }
 
@@ -2951,12 +2951,12 @@ async function getTotalUnreadMessageCount() {
 }
 
 // Function to update badge with unread message count
-async function updateUnreadMessageBadge() {
+async function updateUnreadMessageBadge(conversationId = null) {
     const totalUnreadCount = await getTotalUnreadMessageCount();
     if (totalUnreadCount > 0) {
         $(".badge").show();
-        // $(".badge").text(totalUnreadCount);
-        $(".badge").text(10);
+        $(".badge").text(totalUnreadCount);
+        $(".conversation-"+conversationId).addClass('active');
     } else {
         $(".badge").hide();
     }
@@ -2966,7 +2966,7 @@ async function updateUnreadMessageBadge() {
 
 // Call the function on page load
 $(document).ready(function () {
-    updateUnreadMessageBadge();
+    updateUnreadMdyessageBadge();
 });
 $(document).on("click", ".bulk-check .form-check-input", function (event) {
     event.stopPropagation(); // Prevent the event from bubbling up to .msg-list
