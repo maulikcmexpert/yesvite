@@ -789,6 +789,10 @@
     border: none !important;
 }
 
+.no-border-css .input-form {
+    margin-bottom: 0px !important;
+}
+
 /* ============ responsive ============ */
 @media only screen and (max-width:991px) {
     .guest-checkout-respo {
