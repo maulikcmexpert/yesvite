@@ -3985,9 +3985,9 @@ $(document).on("click","#potluck_tip", function (e) {
 });
 
 
-$(document).on("click","#co_host_tip", function (e) {
+$(document).on("click","#co_host_tip_close", function (e) {
     e.preventDefault();
-    $('#co_host_tip_close').remove();
+    $('#co_host_tip').remove();
     ajax_tip_close("co_host");
 });
 
