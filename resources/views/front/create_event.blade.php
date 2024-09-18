@@ -2176,7 +2176,7 @@
             </div>
             <div class="d-flex flex-column user_choice_group" data-id="user-{{ $user->id }}">
                 @if (isset($user->email) && $user->email != '')
-                <div class="right-note d-flex">
+                <div class="right-note d-flex mb-2">
                     <span>Member</span>
                     <span class="mx-3">
                         <img src="{{ asset('assets/event/image/small-logo.svg') }}"
