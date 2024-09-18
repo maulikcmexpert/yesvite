@@ -2627,7 +2627,7 @@ $(document).on("click", ".li_design", function () {
         $('.current_step').text('2 of 4');
 
         var subclass = ".side-bar-sub-list";
-        handleActiveClass(this);
+        handleActiveClass('.li_design');
     }
 });
 
