@@ -822,7 +822,11 @@
 }
 
 .no-border-wrp .input-form {
-    margin-bottom: 15px !important;
+    margin-bottom: 10px !important;
+}
+
+.no-border-wrp .input-form label {
+    display: inline-block !important;
 }
 
 /* ============ responsive ============ */
