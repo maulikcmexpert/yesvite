@@ -252,6 +252,8 @@ $(document).on('click','.timepicker', function(){
             up: "fa fa-chevron-up",
             down: "fa fa-chevron-down",
         },
+        useCurrent: false, 
+        ignoreReadonly: true
     });
 })
 function datepicker() {
