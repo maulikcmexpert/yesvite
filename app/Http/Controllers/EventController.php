@@ -872,9 +872,6 @@ class EventController extends Controller
         $id = Auth::guard('web')->user()->id;
         $type = $request->type;
 
-
-
-
         $yesvite_user = User::select('id', 'firstname', 'lastname', 'phone_number', 'email', 'profile')
             ->where('id', '!=', $id)
             ->where(['is_user_phone_contact' => '0'])
