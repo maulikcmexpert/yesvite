@@ -2591,11 +2591,8 @@ function handleActivePlan(target) {
     $(target).addClass('active');
     $(target).find('.plan_check').prop('checked', true); 
 }
-$(document).on("click", ".li_design", function () {
-    console.log(eventData.length);
-    
+$(document).on("click", ".li_design", function () { 
     if (
-        eventData.length != undefined &&
         eventData.event_type != "" &&
         eventData.event_name != "" &&
         eventData.hosted_by != "" &&
