@@ -325,7 +325,7 @@
 .registry-form span.sub-con {
     position: absolute;
     right: 30px;
-    bottom: 35%;
+    top: 50%;
     transform: translateY(-50%);
     color: var(--lightColor);
     font-size: 14px;
@@ -795,7 +795,12 @@
 
 .add-item-head-wrp {
     border-bottom: 1px solid var(--borderColor);
-    padding-bottom: 20px;
+    padding-bottom: 10px;
+}
+
+
+.add-category-new-wrp {
+    border: none !important;
 }
 
 /* ============ responsive ============ */
