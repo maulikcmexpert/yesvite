@@ -2662,7 +2662,8 @@ $(document).on("click", ".li_guest", function () {
 
 $(document).on("click", ".li_setting", function () {
     var design = eventData.desgin_selected;
-    if( design == undefined || design == ''){
+    var step3 = eventData.step;
+    if( design == undefined || design == '' && step3 != '3'){
         return;
     }else{
         $(".step_1").css("display", "none");
@@ -3521,7 +3522,9 @@ $(document).on("click", ".store_desgin_temp", function () {
                 success: function (response) {
                     let image = response.image;
                     eventData.desgin_selected = image;
-                    eventData.step = '2';
+                    if(eventData.step == '1'){
+                        eventData.step = '2';
+                    }
                     console.log(eventData);
                     console.log("Image uploaded and saved successfully");
                     $("#exampleModal").modal("hide");
