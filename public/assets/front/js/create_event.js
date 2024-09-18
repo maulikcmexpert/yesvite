@@ -4080,7 +4080,7 @@ function checkbox_count(){
     var checkedCount_event_page = $('.event_page_checkbox:checked').length;
     var checkedCount_notification = $('.notification_checkbox:checked').length;
 
-    $('#general_setting_checkbox').text(checkedCount_general_setting+'/6');
+    $('#general_setting_checkbox').text(checkedCount_general_setting+'/7');
     $('#event_page_checkbox').text(checkedCount_event_page+'/2');
     $('#notification_checkbox').text(checkedCount_notification+'/4');
 }

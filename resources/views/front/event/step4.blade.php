@@ -12,7 +12,7 @@
                                         <span><img src="{{asset('assets/event/image/accordion1-img.svg')}}" alt=""></span>
                                         <h5>General</h6>
                                     </div>
-                                    <h6 id="general_setting_checkbox">0/6</span>
+                                    <h6 id="general_setting_checkbox">0/7</span>
                                 </div>
                             </button>
                         </h2>
