@@ -3257,7 +3257,7 @@ $(document).on("click", ".add_thankyou_card", function () {
             .text("Please add template name");
         return;
     } else {
-        $("#template_name_error").css("display", "none");
+        $("#template_name_error").text("");
     }
 
     if (when_to_send == "") {
