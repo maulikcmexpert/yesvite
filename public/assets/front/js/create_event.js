@@ -3914,6 +3914,23 @@ $(document).on('click','.brand-progress',function () {
 $(document).on('click','.create_new_event_close_tip',function () { 
     $('#create_new_event_tip').removeClass('d-flex');
     $('#create_new_event_tip').hide();
+
+    $.ajax({
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                "content"
+            ),
+        },
+        url: base_url+"event/close_tip",
+        method: "POST",
+        data: {
+            closed: true,
+            tip:"create_new_event"
+        },
+        success: function (response) {
+            // console.log(response);
+        },
+    });
 });
 
 
@@ -3987,6 +4004,7 @@ $(document).on("click","#potluck_tip", function (e) {
         method: "POST",
         data: {
             closed: true,
+            tip:"potluck"
         },
         success: function (response) {
             // console.log(response);

@@ -216,6 +216,7 @@
                     </svg>
                 </button>
             </div>
+            @if(!session('create_new_event_closed'))
             <div class="alert-box d-flex align-items-center" id="create_new_event_tip">
                 <span class="me-3">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
@@ -240,6 +241,7 @@
                     </svg>
                 </span>
             </div>
+            @endif
             @if (isset($draft_events) && $draft_events->isNotEmpty())
 
             @foreach ($draft_events as $draft)
