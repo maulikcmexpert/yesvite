@@ -501,7 +501,7 @@
                             <path d="M6.00022 12.2797L1.65355 7.93306C1.14022 7.41973 1.14022 6.57973 1.65355 6.06639L6.00022 1.71973" stroke="#0F172A" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                     </span>
-                    <h5>Guests</h5>
+                    <h5 class="li_guest">Guests</h5>
                 </div>
                 <div>
                     <a href="#" class="cmn-btn final_checkout" onclick="savePage4Data()">Final Checkout</a>
