@@ -825,6 +825,10 @@
     margin-bottom: 15px !important;
 }
 
+.no-border-wrp .input-form label {
+    display: inline-block !important;
+}
+
 /* ============ responsive ============ */
 @media only screen and (max-width:991px) {
     .guest-checkout-respo {
