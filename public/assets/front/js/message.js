@@ -2704,7 +2704,7 @@ $("#choose-file").on("change", async function () {
             );
             const previewImg = $("#profileIm");
             const imageUrl = previewImg.attr("src");
-            if (imageUrl.startsWith("data:image/")) {
+            if (imageUrl?.startsWith("data:image/")) {
                 await uploadString(fileRef, imageUrl, "data_url");
             } else {
                 const response = await fetch(imageUrl);
