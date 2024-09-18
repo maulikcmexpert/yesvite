@@ -1211,8 +1211,10 @@ $(".send-message").on("keypress", async function (e) {
                 messageData.replyData = {
                     replyChatKey: replyMessageId,
                     replyMessage: replyMessageData ? replyMessageData.data : "",
-                    replyTimeStamp: Date.now(),
-                    replyUserName: senderUserName,
+                    // replyTimeStamp: Date.now(),
+                    // replyUserName: senderUserName,
+                    replyTimeStamp: replyMessageData.timeStamp,
+                    replyUserName: receiverName,
                     replyDocType: "",
                 };
                 messageData.isReply = "1";
@@ -2660,7 +2662,7 @@ function generateReactionsAndReply() {
             <div class='replay-child'>
               <div class='d-flex flex-column'>
                         <span class='replay-user'>${senderUserName}</span>
-                        <span class='replay-msg'>${replyMessageData.data}</span>
+                        <span class='replay-msg' data-time='${replyMessageData.timeStamp}'>${replyMessageData.data}</span>
                         
                            </div>
                                 
