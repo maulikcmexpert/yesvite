@@ -664,6 +664,7 @@ ul.listing li span {
 
 .add-contact-selectbox .iti--separate-dial-code .iti__selected-flag {
     background-color: transparent !important;
+    border: 1px solid var(--borderColor) !important;
 }
 
 
