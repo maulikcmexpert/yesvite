@@ -548,7 +548,7 @@
 </div>
 
 <div id="sidebar_addcategoryitem" class="sidebar setting-side-wrp">
-    <div class="item-dishesh-sidebar add_sub_category">
+    <div class="item-dishesh-sidebar add_sub_category add-item-head-wrp">
         <div class="d-flex align-items-center justify-content-between toggle-wrp">
             <div class="d-flex align-items-center">
                 <a href="#" class="me-3" onclick="toggleSidebar('sidebar_potluck')">

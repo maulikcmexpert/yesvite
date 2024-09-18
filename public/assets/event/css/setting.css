@@ -793,6 +793,11 @@
     margin-bottom: 0px !important;
 }
 
+.add-item-head-wrp {
+    border-bottom: 1px solid var(--borderColor);
+    padding-bottom: 20px;
+}
+
 /* ============ responsive ============ */
 @media only screen and (max-width:991px) {
     .guest-checkout-respo {
