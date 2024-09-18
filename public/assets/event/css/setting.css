@@ -859,6 +859,14 @@
     max-width: 100% !important;
 }
 
+.new-guest-content-wrp {
+    overflow: hidden;
+}
+
+.new-guest-content-wrp .user-contacts {
+    max-height: 100% !important;
+}
+
 /* ============ responsive ============ */
 @media only screen and (max-width:991px) {
     .guest-checkout-respo {
