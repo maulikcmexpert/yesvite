@@ -565,6 +565,7 @@ ul.nav-tabs .nav-link:focus {
     color: #fff;
     font-size: 15px;
     font-weight: 600;
+    line-height: normal;
 
 }
 
