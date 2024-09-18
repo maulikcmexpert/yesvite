@@ -227,7 +227,7 @@ if (/Mobi/.test(navigator.userAgent)) {
     //     today: 'todayText',
     //   }
     // });
-
+   
     $(".timepicker").datetimepicker({
         // keepOpen: true,
         format: "LT",
@@ -243,7 +243,10 @@ if (/Mobi/.test(navigator.userAgent)) {
     // });
     
 }
-datepicker();
+
+$(document).on('click','.timepicker', function(){
+    datepicker();
+})
 function datepicker() {
     $(".timepicker").datetimepicker({
         format: "LT",
