@@ -255,7 +255,7 @@
                                                 stroke-linecap="round" stroke-linejoin="round" />
                                         </svg>
                                     </span>
-                                    <h5 class="ms-2">Edit Design</h5>
+                                    <h5 class="ms-2 li_design">Edit Design</h5>
                                 </a>
                                 <a href="#" class="d-flex" id="next_setting" >
                                     <h5 class="me-2">Next: Settings</h5>
