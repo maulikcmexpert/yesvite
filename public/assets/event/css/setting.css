@@ -137,6 +137,7 @@
     left: 50%;
     transform: translateX(-50%);
     padding-left: 16px;
+    z-index: 10;
 }
 
 .guest-checkout-respo {
