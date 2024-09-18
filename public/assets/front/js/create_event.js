@@ -2161,7 +2161,9 @@ function savePage1Data(close = null) {
             .css("display", "block")
             .css("color", "red")
             .text("Event Type: Please select an event type");
-        $("#event-type").focus();
+        setTimeout(function() {
+            $("#event-type").focus();
+        }, 100);
         return;
     } else {
         $("#event-type-error").css("display", "none");
