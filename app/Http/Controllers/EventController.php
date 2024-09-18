@@ -1189,7 +1189,13 @@ class EventController extends Controller
     {
         if (Auth::check()) {
             if ($request->has('closed') && $request->closed) {
-                session(['potluck_closed' => true]);
+                if($request->tip=="potluck"){
+                    session(['potluck_closed' => true]);
+                }
+
+                if($request->tip=="create_new_event"){
+                    session(['create_new_event_closed' => true]);
+                }
             }
             return response()->json(['success' => true]);
         } else {
