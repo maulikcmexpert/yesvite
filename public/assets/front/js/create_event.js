@@ -2983,17 +2983,14 @@ $(document).on("click", ".qty-btn-minus", function () {
         .find(".category-item-quantity")
         .val();
     var quantity = parseInt($(this).parent().find(".input-qty").val());
-    if(quantity > 0){
-        var current_item = parseInt($('.total-self-bring-'+categoryIndexKey).text());
-        current_item = current_item - 0;
-        $('.total-self-bring-'+categoryIndexKey).text(current_item);
-    }
+   
     if (categoryItemQuantity >= quantity) {
-        
-        var current_item = parseInt($('.total-self-bring-'+categoryIndexKey).text());
-        current_item = current_item - 1;
-        $('.total-self-bring-'+categoryIndexKey).text(current_item);
-        
+
+        if(quantity > 0){
+            var current_item = parseInt($('.total-self-bring-'+categoryIndexKey).text());
+            current_item = current_item - 1;
+            $('.total-self-bring-'+categoryIndexKey).text(current_item);
+        }
         update_self_bring(
             categoryItemKey,
             categoryIndexKey,
