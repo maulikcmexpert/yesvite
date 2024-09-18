@@ -777,7 +777,12 @@
     }
 
     .guest-checkout {
-        display: none;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        max-width: 100%;
+        left: 0;
+        border-radius: 0px;
     }
 
     .setting-main-content .main-content-sidebar {
