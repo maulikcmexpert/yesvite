@@ -1577,15 +1577,21 @@ ul.member-lists li:last-child {
 
 .chat-header-searchbar {
     position: relative;
+    width: 100%;
+    margin-right: 15px;
 }
 
 .chat-header-searchbar svg {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    right: 0;
+    right: 20px;
     width: 20px;
     height: 20px;
+}
+
+.chat-header-searchbar input {
+    width: 100% !important;
 }
 
 /* ======= responsive ======== */
