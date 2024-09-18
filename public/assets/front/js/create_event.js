@@ -228,15 +228,15 @@ if (/Mobi/.test(navigator.userAgent)) {
     //   }
     // });
    
-    $(".timepicker").datetimepicker({
-        // keepOpen: true,
-        format: "LT",
-        icons: {
-            up: "fa fa-chevron-up",
-            down: "fa fa-chevron-down",
-        },
-        // debug: true
-    });
+    // $(".timepicker").datetimepicker({
+    //     // keepOpen: true,
+    //     format: "LT",
+    //     icons: {
+    //         up: "fa fa-chevron-up",
+    //         down: "fa fa-chevron-down",
+    //     },
+    //     // debug: true
+    // });
 
     // $('.bootstrap-datetimepicker-widget').on('click', function(e) {
     //     e.stopPropagation();  // Prevents closing the picker on click inside the widget
