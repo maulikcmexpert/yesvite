@@ -1,30 +1,30 @@
 @php
-$selected_user = session('user_ids');   
-// dd($selected_user);    
+$selected_user = session('user_ids');
+// dd($selected_user);
 @endphp
 
 @foreach ($yesvite_user as $user)
 @php
 
-    $email_checked = '';
-    $phone_checked = '';
-    if(isset($selected_user) && !empty($selected_user)){
-        $foundKey = array_search($user->id, array_column($selected_user, 'id'));
+$email_checked = '';
+$phone_checked = '';
+if(isset($selected_user) && !empty($selected_user)){
+$foundKey = array_search($user->id, array_column($selected_user, 'id'));
 
-        if ($foundKey !== false) {
-            $key = array_keys($selected_user)[$foundKey];
-            $email_checked = '';
-            $phone_checked = '';
-            if ($user->id === (int)$selected_user[$key]['id']) {
-                if($selected_user[$key]['prefer_by'] == 'email'){
-                    $email_checked = 'checked';
-                }elseif($selected_user[$key]['prefer_by'] == 'phone'){
-                    $phone_checked = 'checked';
-                }
-                
-            }
-        }
-    }
+if ($foundKey !== false) {
+$key = array_keys($selected_user)[$foundKey];
+$email_checked = '';
+$phone_checked = '';
+if ($user->id === (int)$selected_user[$key]['id']) {
+if($selected_user[$key]['prefer_by'] == 'email'){
+$email_checked = 'checked';
+}elseif($selected_user[$key]['prefer_by'] == 'phone'){
+$phone_checked = 'checked';
+}
+
+}
+}
+}
 @endphp
 <div class="users-data">
     <div class="d-flex align-items-start">
@@ -32,19 +32,20 @@ $selected_user = session('user_ids');
             @if ($user->profile != '')
             <img src="{{ asset('storage/profile/' . $user->profile) }}" alt="user-img">
             @else
-                @php
-                        $firstInitial = !empty($user->firstname) ? strtoupper($user->firstname[0]) : '';
-                        $lastInitial = !empty($user->lastname) ? strtoupper($user->lastname[0]) : '';
-                        $initials = $firstInitial . $lastInitial;
-                        $fontColor = 'fontcolor' . $firstInitial;
-                 @endphp
-                <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
-            @endif 
+            @php
+            $firstInitial = !empty($user->firstname) ? strtoupper($user->firstname[0]) : '';
+            $lastInitial = !empty($user->lastname) ? strtoupper($user->lastname[0]) : '';
+            $initials = $firstInitial . $lastInitial;
+            $fontColor = 'fontcolor' . $firstInitial;
+            @endphp
+            <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
+            @endif
 
         </div>
         <div class="text-start">
             <h5>{{ $user->firstname }}
-                {{ $user->lastname }}</h5>
+                {{ $user->lastname }}
+            </h5>
             @if(isset($user->email)&&$user->email!="")
             <div>
                 <a href="mailto: {{ $user->email }}">
@@ -80,51 +81,51 @@ $selected_user = session('user_ids');
         </div>
     </div>
     @if($type=="all")
-        <div class="d-flex flex-column user_choice_group" data-id="user-{{$user->id}}">
-            @if(isset($user->email)&&$user->email!="")
-            <div class="right-note d-flex">
-                <span>Member</span>
-                <span class="mx-3">
-                    <img src="{{ asset('assets/event/image/small-logo.svg') }}"
-                        alt="logo">
-                </span>
-                <input class="form-check-input user-{{$user->id}} user_choice" type="checkbox"
-                    name="email_invite[]" data-id="user-{{$user->id}}"data-email="{{ $user->email }}"
-                    value="{{ $user->id }}" {{$email_checked}}>
-            </div>
-            @endif
-            @if(isset($user->phone_number)&&$user->phone_number!="")
-            <div class="right-note ms-auto"> 
-                <input class="form-check-input user_tel-{{$user->id}} user_choice" type="checkbox"
-                name="mobile[]" data-mobile="{{$user->phone_number}}" value="{{ $user->id }}" {{$phone_checked}}>
-            </div>
-            @endif
+    <div class="d-flex flex-column user_choice_group gap-2" data-id="user-{{$user->id}}">
+        @if(isset($user->email)&&$user->email!="")
+        <div class="right-note d-flex">
+            <span>Member</span>
+            <span class="mx-3">
+                <img src="{{ asset('assets/event/image/small-logo.svg') }}"
+                    alt="logo">
+            </span>
+            <input class="form-check-input user-{{$user->id}} user_choice" type="checkbox"
+                name="email_invite[]" data-id="user-{{$user->id}}" data-email="{{ $user->email }}"
+                value="{{ $user->id }}" {{$email_checked}}>
         </div>
+        @endif
+        @if(isset($user->phone_number)&&$user->phone_number!="")
+        <div class="right-note ms-auto">
+            <input class="form-check-input user_tel-{{$user->id}} user_choice" type="checkbox"
+                name="mobile[]" data-mobile="{{$user->phone_number}}" value="{{ $user->id }}" {{$phone_checked}}>
+        </div>
+        @endif
+    </div>
     @else
     <div class="d-flex flex-column user_choice_group" data-id="user-{{ $user->id }}">
         @if (isset($user->email) && $user->email != '')
-            <div class="right-note d-flex">
-                <span>Member</span>
-                <span class="mx-3">
-                    <img src="{{ asset('assets/event/image/small-logo.svg') }}"
-                        alt="logo">
-                </span>
-                <input class="form-check-input user_group_member user_choice"
-                    type="checkbox" name="add_by_email[]" data-preferby="email"
-                    data-id="user-{{ $user->id }}"data-email="{{ $user->email }}"
-                    value="{{ $user->id }}">
-            </div>
+        <div class="right-note d-flex">
+            <span>Member</span>
+            <span class="mx-3">
+                <img src="{{ asset('assets/event/image/small-logo.svg') }}"
+                    alt="logo">
+            </span>
+            <input class="form-check-input user_group_member user_choice"
+                type="checkbox" name="add_by_email[]" data-preferby="email"
+                data-id="user-{{ $user->id }}" data-email="{{ $user->email }}"
+                value="{{ $user->id }}">
+        </div>
         @endif
         @if (isset($user->phone_number) && $user->phone_number != '')
-            <div class="right-note ms-auto">
-                <input class="form-check-input user_group_member user_choice"
-                    type="checkbox" name="add_by_mobile[]"
-                    data-preferby="phone" data-mobile="{{ $user->phone_number }}"
-                    value="{{ $user->id }}">
-            </div>
+        <div class="right-note ms-auto">
+            <input class="form-check-input user_group_member user_choice"
+                type="checkbox" name="add_by_mobile[]"
+                data-preferby="phone" data-mobile="{{ $user->phone_number }}"
+                value="{{ $user->id }}">
+        </div>
         @endif
     </div>
     @endif
-    
+
 </div>
 @endforeach
