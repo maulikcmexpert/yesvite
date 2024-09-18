@@ -807,6 +807,10 @@
     margin-bottom: 10px !important;
 }
 
+.add-category-new-wrp .input-form label {
+    display: inline-block !important;
+}
+
 .add-category-new-wrp .qty-container {
     display: flex;
     align-items: center;
