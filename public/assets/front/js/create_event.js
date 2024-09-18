@@ -2956,7 +2956,7 @@ $(document).on("click", ".qty-btn-plus", function () {
     var quantity = parseInt($(this).parent().find(".input-qty").val());
 
     if(quantity > 0){
-        $(this).parent().find(".qty-btn-minus").attr("data-minus", 0);
+        $(this).parent().find(".qty-btn-minus").attr("data-minus", 2);
     }
 
     if (categoryItemQuantity >= quantity) {
@@ -2989,7 +2989,7 @@ $(document).on("click", ".qty-btn-minus", function () {
         var flag = $(this).data("minus");
         console.log(flag);
 
-        if(flag == undefined || flag == 0){
+        if(flag == undefined || flag == 2){
             update_self_bring(
                 categoryItemKey,
                 categoryIndexKey,
