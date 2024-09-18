@@ -844,7 +844,7 @@
     margin: 0px auto;
 }
 
-.event-created-modal .google-play>a {
+.event-created-modal .google-play span>a {
     height: 50px;
 }
 
