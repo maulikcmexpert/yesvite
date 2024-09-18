@@ -1514,7 +1514,7 @@ function createMessageElement(key, messageData, isGroup) {
             <div class="simple-message">
             ${senderprofile?
                 isReceiver
-                        ? `<div class="simplemsg-img me-2 user-img"><span>${senderprofile}<span></div>`
+                        ? `<div class="simplemsg-img me-2 user-img">${senderprofile}</div>`
                         : ""
                 :'' }
              
