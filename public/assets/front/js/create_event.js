@@ -2953,10 +2953,14 @@ $(document).on("click", ".qty-btn-plus", function () {
         .parent()
         .find(".category-item-quantity")
         .val();
+    var itemQuantityMinus = $(this)
+        .parent()
+        .find(".item-quantity-minus")
+        .val();
     var quantity = parseInt($(this).parent().find(".input-qty").val());
 
     if(quantity > 0){
-        $(this).parent().find(".qty-btn-minus").attr("data-minus", 0);
+        $(this).parent().find(".item-quantity-minus").val(1);
     }
 
     if (categoryItemQuantity >= quantity) {
@@ -2982,13 +2986,15 @@ $(document).on("click", ".qty-btn-minus", function () {
         .parent()
         .find(".category-item-quantity")
         .val();
+    var itemQuantityMinus = $(this)
+        .parent()
+        .find(".item-quantity-minus")
+        .val();
     var quantity = parseInt($(this).parent().find(".input-qty").val());
     
 
     if (categoryItemQuantity >= quantity ) {
-        var flag = $(this).data('minus');
-        console.log(flag);
-        if(flag == undefined || flag == 0){
+        if(itemQuantityMinus == 1){
             update_self_bring(
                 categoryItemKey,
                 categoryIndexKey,
@@ -2997,7 +3003,7 @@ $(document).on("click", ".qty-btn-minus", function () {
                 'minus'
             );
             if(quantity == 0){
-                $(this).attr("data-minus", 1);
+                $(this).parent().find(".item-quantity-minus").val(0);
             }
         }
         
@@ -3045,7 +3051,7 @@ function update_self_bring(
                     "-" +
                     categoryIndexKey
             ).text(quantity);
-            if(quantity > 0){
+            
                 if(type == 'plus'){
                     var current_item = parseInt($('.total-self-bring-'+categoryIndexKey).text());
                     current_item = current_item + 1;
@@ -3055,7 +3061,7 @@ function update_self_bring(
                     current_item = current_item - 1;
                     $('.total-self-bring-'+categoryIndexKey).text(current_item);
                 }
-            }
+            
             if (quantity == categoryItemQuantity) {
                 $(
                     "#lumpia-collapseOne" +
