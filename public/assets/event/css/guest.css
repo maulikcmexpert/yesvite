@@ -323,7 +323,7 @@
 }
 
 .guest-content .user-contacts {
-    max-height: 100%;
+    max-height: unset;
     position: relative;
 }
 
