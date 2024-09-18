@@ -413,6 +413,7 @@
                 <h5 class="modal-title" id="exampleModalLabel">Choose this design?</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            @if(!session('design_closed'))
             <div class="alert-box d-flex align-items-center" id="design_tip_bar">
                 <span class="me-3">
                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
@@ -433,6 +434,7 @@
                     </svg>
                 </span>
             </div>
+            @endif
             <div class="modal-body">
                 <div class="modal-choose-design-wrp" id="download_image">
                     <div class="modal-design-card">

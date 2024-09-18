@@ -3370,25 +3370,7 @@ $(document).on("change", 'input[name="select_thankyou[]"]', function () {
 
 $(document).on("click", "#close_thankyou_card_popup", function () {
     $("#thankyou_card_popup").remove();
-
-    $.ajax({
-        headers: {
-            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
-                "content"
-            ),
-        },
-        url: base_url+"event/close_tip",
-        method: "POST",
-        data: {
-            closed: true,
-            tip:"thankyou_card"
-        },
-        success: function (response) {
-            // console.log(response);
-        },
-    });
-
-
+    ajax_tip_close("thankyou_card");
 });
 
 $(document).on("click", ".save_allow_limit", function () {
@@ -3934,22 +3916,8 @@ $(document).on('click','.create_new_event_close_tip',function () {
     $('#create_new_event_tip').removeClass('d-flex');
     $('#create_new_event_tip').hide();
 
-    $.ajax({
-        headers: {
-            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
-                "content"
-            ),
-        },
-        url: base_url+"event/close_tip",
-        method: "POST",
-        data: {
-            closed: true,
-            tip:"create_new_event"
-        },
-        success: function (response) {
-            // console.log(response);
-        },
-    });
+    ajax_tip_close("create_new_event");
+
 });
 
 
@@ -4013,28 +3981,23 @@ $(document).on('click','input[name="gift_registry[]"]',function () {
 $(document).on("click","#potluck_tip", function (e) {
     e.preventDefault();
     $('#potluck_tip_bar').remove();
-    $.ajax({
-        headers: {
-            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
-                "content"
-            ),
-        },
-        url: base_url+"event/close_tip",
-        method: "POST",
-        data: {
-            closed: true,
-            tip:"potluck"
-        },
-        success: function (response) {
-            // console.log(response);
-        },
-    });
+    ajax_tip_close("potluck");
 });
 
 
 $(document).on("click","#co_host_tip", function (e) {
     e.preventDefault();
     $('#co_host_tip_close').remove();
+    ajax_tip_close("co_host");
+});
+
+$(document).on("click","#design_tip_bar_close", function (e) {
+    e.preventDefault();
+    $('#design_tip_bar').remove();
+    ajax_tip_close("desgin_tip");
+});
+
+function ajax_tip_close(type){
     $.ajax({
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
@@ -4045,10 +4008,11 @@ $(document).on("click","#co_host_tip", function (e) {
         method: "POST",
         data: {
             closed: true,
-            tip:"co_host"
+            tip:type
         },
         success: function (response) {
             // console.log(response);
         },
     });
-});
+
+}
