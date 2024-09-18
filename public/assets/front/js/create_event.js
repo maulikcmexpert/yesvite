@@ -2014,6 +2014,103 @@ $(document).on('click','#next_design',function() {
     // 
 })
 
+$(document).on("click", "#close_createEvent", function () {
+
+    // $('#loader').css('display','block');
+    var event_type = $("#event-type").val();
+    var event_name = $("#event-name").val();
+    var event_date = $("#event-date").val();
+
+    if (event_type != "" && event_name != "" && event_date != "") {
+        let text = $('.current_step').text();
+        let firstLetter = text.split(' ')[0]; 
+        if(firstLetter == '1'){
+            // savePage1Data('close');
+            var event_type = $("#event-type").val();
+            var event_name = $("#event-name").val();
+            var hostedby = $("#hostedby").val();
+            var event_date = $("#event-date").val();
+            var start_time = $("#start-time").val();
+            var end_time = $("#end_time").is(":checked");
+            var rsvp_by_date_set = $("#rsvp_by_date").is(":checked");
+            var rsvp_end_time_set = '0';
+            var end_time_zone =  $('#end-time-zone').val();
+            var start_time_zone =  $('#start-time-zone').val();
+            if(end_time){
+                rsvp_end_time_set = '1';
+            }
+            var address = $("#address1").val();
+            var city = $("#city").val();
+            var state = $("#state").val();
+            var zipcode = $("#zipcode").val();
+            var id = $("#id").val();
+            var rsvp_by_date = $("#rsvp-by-date").val();
+            var event_id = $("#event_id").val();
+            var description = $("#description").val();
+
+            eventData = {
+                event_type: event_type,
+                event_name: event_name,
+                hosted_by: hostedby,
+                event_date: event_date,
+                start_time: start_time,
+                activity: activities,
+                address: address,
+                city: city,
+                state: state,
+                zipcode: zipcode,
+                rsvp_by_date:rsvp_by_date,
+                event_id:event_id,
+                rsvp_end_time_set:rsvp_end_time_set,
+                event_location:description,
+                rsvp_start_timezone:start_time_zone,
+                rsvp_end_timezone:end_time_zone,
+            };
+            $(".step_2").hide();
+        }
+        eventData.step = firstLetter;
+        eventData.isdraft = "1";
+       
+        console.log(eventData);
+
+        $.ajax({
+            url: base_url + "event/store",
+
+            type: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            data: eventData,
+            success: function (response) {
+                if(response==1){ 
+                    window.location.href="profile";
+                    $('#loader').css('display','none');
+                    toastr.success('Event Saved as Draft');
+
+                }
+
+            },
+            error: function (xhr, status, error) {
+                console.log("AJAX error: " + error);
+            },
+        });
+    }
+
+    if (event_type == "") {
+        $("#deleteModal").modal("show");
+        // confirm('Event type is empty. Are you sure you want to proceed?')
+        return;
+    }
+    if (event_name == "") {
+        $("#deleteModal").modal("show");
+        return;
+    }
+    if (event_date == "") {
+        $("#deleteModal").modal("show");
+        return;
+    }
+});
+
 function savePage1Data(close = null) {
 
     var event_type = $("#event-type").val();
@@ -2027,13 +2124,13 @@ function savePage1Data(close = null) {
     var zipcode = $("#zipcode").val();
     var id = $("#id").val();
     var rsvp_by_date_set = $('#rsvp_by_date').is(':checked');
-
-    console.log(rsvp_by_date_set);
+    var end_time_zone =  $('#end-time-zone').val();
+    var start_time_zone =  $('#start-time-zone').val();
+    var description = $("#description").val();
+    
     var rsvp_by_date = '';
     if(rsvp_by_date_set){
         rsvp_by_date = $('#rsvp-by-date').val();
-        console.log(rsvp_by_date);
-        
         if (rsvp_by_date == "") {
             $("#event-rsvpby-error")
                 .css("display", "block")
@@ -2169,6 +2266,9 @@ function savePage1Data(close = null) {
             state: state,
             zipcode: zipcode,
             rsvp_by_date:rsvp_by_date,
+            event_location:description,
+            rsvp_start_timezone:start_time_zone,
+            rsvp_end_timezone:end_time_zone,
         };
         // alert();
         let text = $('.current_step').text();
@@ -2460,105 +2560,6 @@ function clearError(input = null) {
     //     }
     // }
 }
-
-$(document).on("click", "#close_createEvent", function () {
-
-    // $('#loader').css('display','block');
-    var event_type = $("#event-type").val();
-    var event_name = $("#event-name").val();
-    var event_date = $("#event-date").val();
-
-    
-    
-    if (event_type != "" && event_name != "" && event_date != "") {
-        let text = $('.current_step').text();
-        let firstLetter = text.split(' ')[0]; 
-        if(firstLetter == '1'){
-            // savePage1Data('close');
-            var event_type = $("#event-type").val();
-            var event_name = $("#event-name").val();
-            var hostedby = $("#hostedby").val();
-            var event_date = $("#event-date").val();
-            var start_time = $("#start-time").val();
-            var end_time = $("#end_time").is(":checked");
-            var rsvp_by_date_set = $("#rsvp_by_date").is(":checked");
-            var rsvp_end_time_set = '0';
-            var end_time_zone =  $('#end-time-zone').val();
-            var start_time_zone =  $('#start-time-zone').val();
-            if(end_time){
-                rsvp_end_time_set = '1';
-            }
-            var address = $("#address1").val();
-            var city = $("#city").val();
-            var state = $("#state").val();
-            var zipcode = $("#zipcode").val();
-            var id = $("#id").val();
-            var rsvp_by_date = $("#rsvp-by-date").val();
-            var event_id = $("#event_id").val();
-            var description = $("#description").val();
-
-            eventData = {
-                event_type: event_type,
-                event_name: event_name,
-                hosted_by: hostedby,
-                event_date: event_date,
-                start_time: start_time,
-                activity: activities,
-                address: address,
-                city: city,
-                state: state,
-                zipcode: zipcode,
-                rsvp_by_date:rsvp_by_date,
-                event_id:event_id,
-                rsvp_end_time_set:rsvp_end_time_set,
-                event_location:description,
-                rsvp_start_timezone:start_time_zone,
-                rsvp_end_timezone:end_time_zone,
-            };
-            $(".step_2").hide();
-        }
-        eventData.step = firstLetter;
-        eventData.isdraft = "1";
-       
-        console.log(eventData);
-
-        $.ajax({
-            url: base_url + "event/store",
-
-            type: "POST",
-            headers: {
-                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-            },
-            data: eventData,
-            success: function (response) {
-                if(response==1){ 
-                    window.location.href="profile";
-                    $('#loader').css('display','none');
-                    toastr.success('Event Saved as Draft');
-
-                }
-
-            },
-            error: function (xhr, status, error) {
-                console.log("AJAX error: " + error);
-            },
-        });
-    }
-
-    if (event_type == "") {
-        $("#deleteModal").modal("show");
-        // confirm('Event type is empty. Are you sure you want to proceed?')
-        return;
-    }
-    if (event_name == "") {
-        $("#deleteModal").modal("show");
-        return;
-    }
-    if (event_date == "") {
-        $("#deleteModal").modal("show");
-        return;
-    }
-});
 
 $(document).on("click", ".cancel-btn-createEvent", function () {
     $('#loader').css('display','block');
