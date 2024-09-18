@@ -2325,7 +2325,7 @@ function savePage3Data() {
     var checkedCheckbox = $('input[name="email_invite[]"]:checked');
 
     if (checkedCheckbox.length == 0) {
-        toastr.error("Please select invited user");
+        toastr.success("Please select invited user");
         return;
     }
 
