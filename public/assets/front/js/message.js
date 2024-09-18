@@ -2654,6 +2654,7 @@ function generateReactionsAndReply() {
             );
             const replyMessageSnapshot = await get(replyMessageRef);
             const replyMessageData = replyMessageSnapshot.val();
+            console.log(replyMessageData);
 
             replay = `<div class='set-replay-msg'>
             <div class='replay-child'>
