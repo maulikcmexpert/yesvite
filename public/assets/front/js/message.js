@@ -2862,6 +2862,8 @@ $(".upload-box").change(function () {
             $("#preview_file").hide();
             $("#file_name").text("");
         } else if (file.type.match("audio.*")) {
+            console.log(file.type);
+            
             var curElement = $(".preview_img");
 
             curElement.attr("src", URL.createObjectURL(file));
