@@ -1577,6 +1577,8 @@ ul.member-lists li:last-child {
 
 .chat-header-searchbar {
     position: relative;
+    width: 100%;
+    margin-right: 15px;
 }
 
 .chat-header-searchbar svg {
