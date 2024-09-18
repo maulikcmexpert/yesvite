@@ -4088,3 +4088,9 @@ function checkbox_count(){
 $(document).on('click','.checkbox',function () {
     checkbox_count();
 })
+
+$(document).on('click','.open_addcategory',function () {
+    $('#categoryName').val('');
+    $('#category_quantity').val('1');
+})
+
