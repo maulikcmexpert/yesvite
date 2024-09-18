@@ -533,6 +533,7 @@
                 </svg>
             </button>
         </div>
+        @if(!session('thankyou_card_closed'))
         <div class="alert-box d-flex align-items-center" id="thankyou_card_popup">
             <span class="me-3">
                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
@@ -553,6 +554,7 @@
                 </svg>
             </span>
         </div>
+        @endif
         <div class="list_thankyou_card">
 
         </div>
