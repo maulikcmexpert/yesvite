@@ -245,7 +245,7 @@ if (/Mobi/.test(navigator.userAgent)) {
 }
 
 $(document).on('click','.timepicker', function(){
-    alert();
+
     $(this).datetimepicker({
         format: "LT",
         icons: {
