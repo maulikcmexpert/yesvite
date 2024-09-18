@@ -264,11 +264,14 @@ function datepicker() {
 
 
 $(function() {
+    var current_event_date = $("#event-date").val();
     $('#rsvp-by-date').daterangepicker({
       singleDatePicker: true,
       autoUpdateInput: false,  
     //   showDropdowns: true,
       minYear: 1901,
+      maxDate: current_event_date, 
+      minDate: moment().add(0, 'days'), 
       locale: {
         format: 'YYYY-MM-DD'  // Set the desired format
     },
