@@ -849,6 +849,10 @@
     display: block;
 }
 
+.event-created-modal .modal-footer {
+    flex-wrap: nowrap !important;
+}
+
 .event-created-modal .modal-footer button,
 .event-created-modal .modal-footer a {
     width: 100% !important;
