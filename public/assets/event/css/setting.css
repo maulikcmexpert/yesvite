@@ -813,12 +813,16 @@
     justify-content: space-between;
 }
 
-.sidebar_add_thankyou_card {
+#sidebar_add_thankyou_card {
     padding: 30px;
 }
 
 .no-border-wrp {
     border: none !important;
+}
+
+.no-border-wrp .input-form {
+    margin-bottom: 0px !important;
 }
 
 /* ============ responsive ============ */
