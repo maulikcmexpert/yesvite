@@ -1059,7 +1059,7 @@
                 </svg>
             </button>
         </div>
-        <div class="guest-group-name login-form-wrap">
+        <div class="guest-group-name login-form-wrap add-category-new-wrp">
             <form action="" class="registry-form">
                 <div class="input-form">
                     <input class="form-control" type="text" id="recipient_name" onkeyup="clearError(this)"
