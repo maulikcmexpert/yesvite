@@ -683,6 +683,13 @@ ul.listing li span {
     background: var(--borderColor);
 }
 
+.add-contact-selectbox .iti__flag.iti__us {
+    height: 20px;
+    width: 20px;
+    background-position: -5264px 5px;
+    border-radius: 50%;
+}
+
 /* ======= Responsive ======= */
 @media only screen and (max-width:1399px) {
     .contact-details .col-xxl-9 {
