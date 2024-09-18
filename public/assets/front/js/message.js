@@ -1134,7 +1134,8 @@ $(".send-message").on("keypress", async function (e) {
                 messageData.replyData = {
                     replyChatKey: replyMessageId,
                     replyMessage: replyMessageData ? replyMessageData.data : "",
-                    replyTimeStamp: Date.now(),
+                    // replyTimeStamp: Date.now(),
+                    replyTimeStamp: replyMessageData.timeStamp,
                     replyUserName: replyMessageData.receiverName,
                     replyDocType: "",
                 };
