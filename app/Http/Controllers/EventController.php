@@ -876,8 +876,8 @@ class EventController extends Controller
 
 
         $yesvite_user = User::select('id', 'firstname', 'lastname', 'phone_number', 'email', 'profile')
-            ->where('app_user', '1')
             ->where('id', '!=', $id)
+            ->where(['is_user_phone_contact' => '0'])
             ->orderBy('firstname')
             ->limit($request->limit)
             ->skip($request->offset)
