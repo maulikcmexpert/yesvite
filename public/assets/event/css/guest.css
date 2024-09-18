@@ -345,6 +345,9 @@
     padding-top: 0;
 }
 
+.guest-group-name.login-form-wrap {
+    border: none !important;
+}
 
 /* =========== guest-sidebar ============ */
 .guest-sidebar .toggle-wrp {
