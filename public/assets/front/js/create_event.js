@@ -243,7 +243,7 @@ if (/Mobi/.test(navigator.userAgent)) {
     // });
     
 }
-
+datepicker();
 function datepicker() {
     $(".timepicker").datetimepicker({
         format: "LT",
@@ -2477,7 +2477,8 @@ $(document).on("click", "#close_createEvent", function () {
             var end_time = $("#end_time").is(":checked");
             var rsvp_by_date_set = $("#rsvp_by_date").is(":checked");
             var rsvp_end_time_set = '0';
-            
+            var end_time_zone =  $('#end-time-zone').val();
+            var start_time_zone =  $('#start-time-zone').val();
             if(end_time){
                 rsvp_end_time_set = '1';
             }
@@ -2505,6 +2506,8 @@ $(document).on("click", "#close_createEvent", function () {
                 event_id:event_id,
                 rsvp_end_time_set:rsvp_end_time_set,
                 event_location:description,
+                rsvp_start_timezone:start_time_zone,
+                rsvp_end_timezone:end_time_zone,
             };
             $(".step_2").hide();
         }

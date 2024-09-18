@@ -42,8 +42,7 @@
                     </div>
                     <div class="col-lg-12 mb-4">
                         <div class="input-form">
-                            <input type="text" class="form-control inputText" id="event-date"
-                                name="event-date" onblur="clearError(this)" readonly>
+                            <input type="text" class="form-control inputText" id="event-date" name="event-date" onblur="clearError(this)" readonly>
                             <label for="birthday" class="form-label input-field floating-label select-label">Date of event</label>
                             <lable for="event-date" id="event-date-error" class="error"></lable>
 
@@ -64,8 +63,7 @@
                         <div class="form-group">
                             <label>Start Time</label>
                             <div class="input-group time start-time">
-                                <input class="form-control timepicker" placeholder="HH:MM AM/PM" id="start-time"
-                                    name="start-time" onblur="clearError(this)" required="" /><span class="input-group-append input-group-addon"><span class="input-group-text"><svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <input type="text" class="form-control timepicker" placeholder="HH:MM AM/PM" id="start-time" name="start-time" onblur="clearError(this)" /><span class="input-group-append input-group-addon"><span class="input-group-text"><svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M18.8334 9.99984C18.8334 14.5998 15.1 18.3332 10.5 18.3332C5.90002 18.3332 2.16669 14.5998 2.16669 9.99984C2.16669 5.39984 5.90002 1.6665 10.5 1.6665C15.1 1.6665 18.8334 5.39984 18.8334 9.99984Z" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                             <path d="M13.5917 12.65L11.0083 11.1083C10.5583 10.8416 10.1917 10.2 10.1917 9.67497V6.2583" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                         </svg></span></span>
@@ -75,7 +73,7 @@
                     </div>
                     <div class="col-6 mb-4">
                         <div class="input-form">
-                            <select class="form-select" id="time-zone">
+                            <select class="form-select" id="start-time-zone" name="start_time_zone">
                                 <option value="PST">PST</option>
                                 <option value="MST">MST</option>
                                 <option value="CST">CST</option>
@@ -133,8 +131,7 @@
                         <div class="form-group end-time-wrp">
                             <label>End Time</label>
                             <div class="input-group time ">
-                                <input class="form-control timepicker" placeholder="HH:MM AM/PM" id="end-time"
-                                    name="end-time" onblur="clearError(this)" required="" /><span class="input-group-append input-group-addon"><span class="input-group-text"><svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <input type="text" class="form-control timepicker" placeholder="HH:MM AM/PM" id="end-time" name="end-time" onblur="clearError(this)" /><span class="input-group-append input-group-addon"><span class="input-group-text"><svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M18.8334 9.99984C18.8334 14.5998 15.1 18.3332 10.5 18.3332C5.90002 18.3332 2.16669 14.5998 2.16669 9.99984C2.16669 5.39984 5.90002 1.6665 10.5 1.6665C15.1 1.6665 18.8334 5.39984 18.8334 9.99984Z" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                             <path d="M13.5917 12.65L11.0083 11.1083C10.5583 10.8416 10.1917 10.2 10.1917 9.67497V6.2583" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                         </svg></span></span>
@@ -145,7 +142,7 @@
 
                     <div class="col-6 mb-4 end_time" style="display: none">
                         <div class="input-form">
-                            <select class="form-select" id="time-zone">
+                            <select class="form-select" id="end-time-zone" name="end_time_zone">
                                 <option value="PST">PST</option>
                                 <option value="MST">MST</option>
                                 <option value="CST">CST</option>
