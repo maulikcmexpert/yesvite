@@ -2008,6 +2008,7 @@ $(document).on("click", "#edit_saveThankyoucard", function () {
 $(document).on("click", "#next_setting", function () {
     $("#loader").css('display','block');
     savePage3Data();
+    checkbox_count();
     $("#loader").css('display','none');
 
 });
@@ -4072,3 +4073,18 @@ function ajax_tip_close(type){
     });
 
 }
+
+function checkbox_count(){
+
+    var checkedCount_general_setting = $('.general_setting_checkbox:checked').length;
+    var checkedCount_event_page = $('.event_page_checkbox:checked').length;
+    var checkedCount_notification = $('.notification_checkbox:checked').length;
+
+    $('#general_setting_checkbox').text(checkedCount_general_setting+'/6');
+    $('#event_page_checkbox').text(checkedCount_event_page+'/2');
+    $('#notification_checkbox').text(checkedCount_notification+'/4');
+}
+
+$(document).on('click','.checkbox',function () {
+    checkbox_count();
+})
