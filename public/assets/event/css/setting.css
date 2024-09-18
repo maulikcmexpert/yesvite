@@ -780,6 +780,10 @@
     background-color: white !important;
 }
 
+.item-dishesh-sidebar {
+    padding: 30px;
+}
+
 /* ============ responsive ============ */
 @media only screen and (max-width:991px) {
     .guest-checkout-respo {
