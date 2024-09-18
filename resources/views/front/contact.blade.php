@@ -298,7 +298,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                                <div class="input-form">
+                                <div class="input-form add-contact-selectbox">
                                     <input type="text" class="phone_number border-0" name="countryCode" readonly>
                                     <input type="text" class="form-control edit_phone" id="phone_number" name="phone_number" value="">
                                     <label for="phone" class="floating-label">Phone
