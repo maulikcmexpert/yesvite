@@ -2008,6 +2008,7 @@ $(document).on("click", "#edit_saveThankyoucard", function () {
 $(document).on("click", "#next_setting", function () {
     $("#loader").css('display','block');
     savePage3Data();
+    checkbox_count();
     $("#loader").css('display','none');
 
 });
