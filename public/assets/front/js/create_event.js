@@ -2127,7 +2127,7 @@ function savePage1Data(close = null) {
     var end_time_zone =  $('#end-time-zone').val();
     var start_time_zone =  $('#start-time-zone').val();
     var description = $("#description").val();
-    
+
     var rsvp_by_date = '';
     if(rsvp_by_date_set){
         rsvp_by_date = $('#rsvp-by-date').val();
@@ -2161,6 +2161,7 @@ function savePage1Data(close = null) {
             .css("display", "block")
             .css("color", "red")
             .text("Event Type: Please select an event type");
+        $("#event-type").focus();
         return;
     } else {
         $("#event-type-error").css("display", "none");
