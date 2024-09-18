@@ -794,7 +794,7 @@
 <div id="overlay" class="overlay" onclick="toggleSidebar()"></div>
 
 <!-- Modal -->
-<div class="modal fade eventModal deleteModal" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
+<div class="modal fade eventModal deleteModal event-created-modal" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header justify-content-center">
