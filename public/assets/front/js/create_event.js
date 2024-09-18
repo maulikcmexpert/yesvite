@@ -2592,8 +2592,8 @@ function handleActivePlan(target) {
     $(target).find('.plan_check').prop('checked', true); 
 }
 $(document).on("click", ".li_design", function () {
-    console.log(eventData.event_type);
-     
+    console.log(eventData);
+    
     if (
         eventData.event_type != "" &&
         eventData.event_name != "" &&
@@ -2603,7 +2603,16 @@ $(document).on("click", ".li_design", function () {
         eventData.address != "" &&
         eventData.city != "" &&
         eventData.state != "" &&
-        eventData.zipcode != ""
+        eventData.zipcode != "" &&
+        eventData.event_type != undefined &&
+        eventData.event_name != undefined &&
+        eventData.hosted_by != undefined &&
+        eventData.event_date != undefined &&
+        eventData.start_time != undefined &&
+        eventData.address != undefined &&
+        eventData.city != undefined &&
+        eventData.state != undefined &&
+        eventData.zipcode != undefined
     ) {
         alert()
         $(".step_1").css("display", "none");
