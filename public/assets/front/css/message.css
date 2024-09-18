@@ -1594,6 +1594,10 @@ ul.member-lists li:last-child {
     width: 100% !important;
 }
 
+.chat-header-searchbar input:focus-visible {
+    outline: none !important;
+}
+
 /* ======= responsive ======== */
 
 
