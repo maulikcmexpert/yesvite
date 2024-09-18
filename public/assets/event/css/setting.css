@@ -846,6 +846,7 @@
 
 .event-created-modal .google-play span>a {
     height: 50px;
+    display: block;
 }
 
 /* ============ responsive ============ */
