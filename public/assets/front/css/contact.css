@@ -662,6 +662,11 @@ ul.listing li span {
     background-color: transparent !important;
 }
 
+.add-contact-selectbox .iti--separate-dial-code .iti__selected-flag {
+    background-color: transparent !important;
+}
+
+
 /* ======= Responsive ======= */
 @media only screen and (max-width:1399px) {
     .contact-details .col-xxl-9 {
