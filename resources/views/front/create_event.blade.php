@@ -2125,7 +2125,7 @@
 
                 </div>
             </div>
-            <div class="d-flex flex-column user_choice_group gap-2" data-id="user-{{ $user->id }}">
+            <div class="d-flex flex-column user_choice_group" data-id="user-{{ $user->id }}">
                 @if (isset($user->email) && $user->email != '')
                 <div class="right-note d-flex">
                     <span>Member</span>
