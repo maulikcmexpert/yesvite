@@ -1588,6 +1588,10 @@ ul.member-lists li:last-child {
     height: 20px;
 }
 
+.chat-header-searchbar input {
+    width: 100% !important;
+}
+
 /* ======= responsive ======== */
 
 
