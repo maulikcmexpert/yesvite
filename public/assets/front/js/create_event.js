@@ -1018,7 +1018,7 @@ $(document).on("click", ".add_category_btn", function () {
         success: function (response) {
             if (response.status == 1) {
                 $("#categoryName").val("");
-                $("#categoryNameError").css("display", "none");
+                $("#categoryNameError").text("");
                 $("#category_quantity_error").css("display", "none");
                 $("#category_quantity").val(1);
                 $("#hidden_category_name").val(categoryName);
