@@ -1121,7 +1121,7 @@
                 </button>
             </div>
             @if(!session('potluck_closed'))
-            <div class="alert-box d-flex align-items-center" id="potluck_tip">
+            <div class="alert-box d-flex align-items-center" id="potluck_tip_bar">
                 <span class="me-3">
                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
@@ -1131,7 +1131,7 @@
                     </svg>
                 </span>
                 <p>You can choose to continue one of your drafts above or hit the “Create New Event” button.</p>
-                <span class="ms-3">
+                <span class="ms-3" id="potluck_tip">
                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path d="M1.33398 1.33301L10.6667 10.6657" stroke="#1C8B5C" stroke-width="1.5"
