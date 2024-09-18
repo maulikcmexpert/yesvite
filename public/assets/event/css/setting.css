@@ -833,6 +833,21 @@
     display: inline-block !important;
 }
 
+.event-created-modal .modal-body h5 {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 28px;
+    color: var(--secondryColor);
+    margin-bottom: 10px;
+    text-align: center;
+    max-width: 275px;
+    margin: 0px auto;
+}
+
+.event-created-modal .google-play>a {
+    height: 50px;
+}
+
 /* ============ responsive ============ */
 @media only screen and (max-width:991px) {
     .guest-checkout-respo {
