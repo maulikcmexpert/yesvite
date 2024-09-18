@@ -3046,7 +3046,7 @@ function update_self_bring(
                     "-" +
                     categoryIndexKey
             ).text(quantity);
-            if(quantity > 0){
+            
                 if(type == 'plus'){
                     var current_item = parseInt($('.total-self-bring-'+categoryIndexKey).text());
                     current_item = current_item + 1;
@@ -3056,7 +3056,7 @@ function update_self_bring(
                     current_item = current_item - 1;
                     $('.total-self-bring-'+categoryIndexKey).text(current_item);
                 }
-            }
+            
             if (quantity == categoryItemQuantity) {
                 $(
                     "#lumpia-collapseOne" +
