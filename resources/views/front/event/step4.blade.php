@@ -12,7 +12,7 @@
                                         <span><img src="{{asset('assets/event/image/accordion1-img.svg')}}" alt=""></span>
                                         <h5>General</h6>
                                     </div>
-                                    <h6>0/6</span>
+                                    <h6 id="general_setting_checkbox">0/6</span>
                                 </div>
                             </button>
                         </h2>
@@ -33,7 +33,7 @@
                                         <div class="toggle-button-cover">
                                             <div class="button-cover">
                                                 <div class="button r" id="button-1">
-                                                    <input type="checkbox" id="allow_for_1_more" name="allow_for_1_more" onchange="savePage4Data()" value="1" class="checkbox" />
+                                                    <input type="checkbox" id="allow_for_1_more" name="allow_for_1_more" onchange="savePage4Data()" value="1" class="checkbox general_setting_checkbox" />
                                                     <div class="knobs"></div>
                                                     <div class="layer"></div>
                                                 </div>
@@ -73,7 +73,7 @@
                                         <div class="toggle-button-cover">
                                             <div class="button-cover">
                                                 <div class="button r" id="button-1">
-                                                    <input type="checkbox" id="only_adults" name="only_adults" value="1" class="checkbox" />
+                                                    <input type="checkbox" id="only_adults" name="only_adults" value="1" class="checkbox general_setting_checkbox" />
                                                     <div class="knobs"></div>
                                                     <div class="layer"></div>
                                                 </div>
@@ -136,7 +136,7 @@
                                         <div class="toggle-button-cover">
                                             <div class="button-cover">
                                                 <div class="button r" id="button-1">
-                                                    <input type="checkbox" id="kid_off_event" name="kid_off_event" value="1" class="checkbox" checked />
+                                                    <input type="checkbox" id="kid_off_event" name="kid_off_event" value="1" class="checkbox general_setting_checkbox" checked />
                                                     <div class="knobs"></div>
                                                     <div class="layer"></div>
                                                 </div>
@@ -159,7 +159,7 @@
                                         <div class="toggle-button-cover">
                                             <div class="button-cover">
                                                 <div class="button r" id="button-1">
-                                                    <input type="checkbox" id="thankyou_message" name="thankyou_message" onchange="savePage4Data()" class="checkbox" />
+                                                    <input type="checkbox" id="thankyou_message" name="thankyou_message" onchange="savePage4Data()" class="checkbox general_setting_checkbox" />
                                                     <div class="knobs"></div>
                                                     <div class="layer"></div>
                                                 </div>
@@ -199,7 +199,7 @@
                                         <div class="toggle-button-cover">
                                             <div class="button-cover">
                                                 <div class="button r" id="button-1">
-                                                    <input type="checkbox" id="add_co_host" onchange="savePage4Data()" class="checkbox" />
+                                                    <input type="checkbox" id="add_co_host" onchange="savePage4Data()" class="checkbox general_setting_checkbox" />
                                                     <div class="knobs"></div>
                                                     <div class="layer"></div>
                                                 </div>
@@ -239,7 +239,7 @@
                                         <div class="toggle-button-cover">
                                             <div class="button-cover">
                                                 <div class="button r" id="button-1">
-                                                    <input type="checkbox" id="gift_registry" onchange="savePage4Data()" class="checkbox" />
+                                                    <input type="checkbox" id="gift_registry" onchange="savePage4Data()" class="checkbox general_setting_checkbox" />
                                                     <div class="knobs"></div>
                                                     <div class="layer"></div>
                                                 </div>
@@ -279,7 +279,7 @@
                                         <div class="toggle-button-cover">
                                             <div class="button-cover">
                                                 <div class="button r" id="button-1">
-                                                    <input type="checkbox" id="guest_list_visible_to_guest" class="checkbox" />
+                                                    <input type="checkbox" id="guest_list_visible_to_guest" class="checkbox general_setting_checkbox" />
                                                     <div class="knobs"></div>
                                                     <div class="layer"></div>
                                                 </div>
@@ -298,7 +298,7 @@
                                         <span><img src="{{asset('assets/event/image/file.svg')}}" alt=""></span>
                                         <h5>Event Page Extras</h6>
                                     </div>
-                                    <h6>0/2</span>
+                                    <h6 id="event_page_checkbox">0/2</span>
                                 </div>
                             </button>
                         </h2>
@@ -319,7 +319,7 @@
                                         <div class="toggle-button-cover">
                                             <div class="button-cover">
                                                 <div class="button r" id="button-1">
-                                                    <input type="checkbox" id="eventwall" name="notification_setting[]" onchange="savePage4Data()" class="checkbox" />
+                                                    <input type="checkbox" id="eventwall" name="notification_setting[]" onchange="savePage4Data()" class="checkbox event_page_checkbox" />
                                                     <div class="knobs"></div>
                                                     <div class="layer"></div>
                                                 </div>
@@ -342,7 +342,7 @@
                                         <div class="toggle-button-cover">
                                             <div class="button-cover">
                                                 <div class="button r" id="button-1">
-                                                    <input type="checkbox" id="potluck" name="potluck" class="checkbox" />
+                                                    <input type="checkbox" id="potluck" name="potluck" class="checkbox event_page_checkbox" />
                                                     <div class="knobs"></div>
                                                     <div class="layer"></div>
                                                 </div>
@@ -378,7 +378,7 @@
                                         <span><img src="{{asset('assets/event/image/notification-acc.svg')}}" alt=""></span>
                                         <h5>Notifications & Reminders</h6>
                                     </div>
-                                    <h6>0/4</span>
+                                    <h6 id="notification_checkbox">0/4</span>
                                 </div>
                             </button>
                         </h2>
@@ -404,7 +404,7 @@
                                         <div class="toggle-button-cover">
                                             <div class="button-cover">
                                                 <div class="button r" id="button-1">
-                                                    <input type="checkbox" id="event_wall_post" name="event_wall_post" class="checkbox" checked/>
+                                                    <input type="checkbox" id="event_wall_post" name="event_wall_post" class="checkbox notification_checkbox" checked/>
                                                     <div class="knobs"></div>
                                                     <div class="layer"></div>
                                                 </div>
@@ -427,7 +427,7 @@
                                         <div class="toggle-button-cover">
                                             <div class="button-cover">
                                                 <div class="button r" id="button-1">
-                                                    <input type="checkbox" id="rsvp_update" name="rsvp_update" class="checkbox" checked/>
+                                                    <input type="checkbox" id="rsvp_update" name="rsvp_update" class="checkbox notification_checkbox" checked/>
                                                     <div class="knobs"></div>
                                                     <div class="layer"></div>
                                                 </div>
@@ -455,7 +455,7 @@
                                         <div class="toggle-button-cover">
                                             <div class="button-cover">
                                                 <div class="button r" id="button-1">
-                                                    <input type="checkbox" id="request_photo" name="request_photo" class="checkbox" checked/>
+                                                    <input type="checkbox" id="request_photo" name="request_photo" class="checkbox notification_checkbox" checked/>
                                                     <div class="knobs"></div>
                                                     <div class="layer"></div>
                                                 </div>
@@ -478,7 +478,7 @@
                                         <div class="toggle-button-cover">
                                             <div class="button-cover">
                                                 <div class="button r" id="button-1">
-                                                    <input type="checkbox" id="rsvp_remainder" name="rsvp_remainder" class="checkbox notification_setting" checked />
+                                                    <input type="checkbox" id="rsvp_remainder" name="rsvp_remainder" class="checkbox notification_setting notification_checkbox" checked />
                                                     <div class="knobs"></div>
                                                     <div class="layer"></div>
                                                 </div>
