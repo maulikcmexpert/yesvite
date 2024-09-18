@@ -2955,13 +2955,11 @@ $(document).on("click", ".qty-btn-plus", function () {
         .val();
     var quantity = parseInt($(this).parent().find(".input-qty").val());
 
-    if (categoryItemQuantity >= quantity) {
+    if(quantity > 0){
+        $(this).attr("data-minus", 0);
+    }
 
-        // if(quantity > 0){
-        //     var current_item = parseInt($('.total-self-bring-'+categoryIndexKey).text());
-        //     current_item = current_item + 1;
-        //     $('.total-self-bring-'+categoryIndexKey).text(current_item);
-        // }
+    if (categoryItemQuantity >= quantity) {
 
         update_self_bring(
             categoryItemKey,
@@ -2985,20 +2983,26 @@ $(document).on("click", ".qty-btn-minus", function () {
         .find(".category-item-quantity")
         .val();
     var quantity = parseInt($(this).parent().find(".input-qty").val());
+    
 
     if (categoryItemQuantity >= quantity ) {
- 
-        update_self_bring(
-            categoryItemKey,
-            categoryIndexKey,
-            quantity,
-            categoryItemQuantity,
-            'minus'
-        );
+        var flag = $(this).data('minus');
+        if(flag == undefined || flag == 0){
+            update_self_bring(
+                categoryItemKey,
+                categoryIndexKey,
+                quantity,
+                categoryItemQuantity,
+                'minus'
+            );
+        }
         
     } else {
        
         $(this).parent().find(".input-qty").val(0);
+    }
+    if(quantity == 0){
+        $(this).attr("data-minus", 1);
     }
 });
 

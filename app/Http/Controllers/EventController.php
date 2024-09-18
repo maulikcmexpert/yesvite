@@ -68,6 +68,10 @@ class EventController extends Controller
     public function index()
     {
         Session::forget('user_ids');
+        Session::forget('category');
+        Session::forget('category_item');
+        Session::forget('gift_registry_data');
+        Session::forget('thankyou_card_data');
         Session::save();
         $title = 'Create Event';
         $page = 'front.create_event';
