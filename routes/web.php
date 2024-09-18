@@ -223,6 +223,7 @@ Route::controller(AuthController::class)->group(function () {
         // Invalidate the session and regenerate the CSRF token to prevent session fixation attacks
         Session::forget('advertisement_closed');
         Session::forget('potluck_closed');
+        Session::forget('create_new_event_closed');
         Session::forget('user');
         Session::forget('secondary_user');
         return redirect('login');
