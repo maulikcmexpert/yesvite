@@ -1575,6 +1575,19 @@ ul.member-lists li:last-child {
     border-radius: 50% !important;
 }
 
+.chat-header-searchbar {
+    position: relative;
+}
+
+.chat-header-searchbar svg {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0;
+    width: 20px;
+    height: 20px;
+}
+
 /* ======= responsive ======== */
 
 
