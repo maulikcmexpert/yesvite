@@ -2957,17 +2957,18 @@ $(document).on("click", ".qty-btn-plus", function () {
 
     if (categoryItemQuantity >= quantity) {
 
-        if(quantity > 0){
-            var current_item = parseInt($('.total-self-bring-'+categoryIndexKey).text());
-            current_item = current_item + 1;
-            $('.total-self-bring-'+categoryIndexKey).text(current_item);
-        }
+        // if(quantity > 0){
+        //     var current_item = parseInt($('.total-self-bring-'+categoryIndexKey).text());
+        //     current_item = current_item + 1;
+        //     $('.total-self-bring-'+categoryIndexKey).text(current_item);
+        // }
 
         update_self_bring(
             categoryItemKey,
             categoryIndexKey,
             quantity,
-            categoryItemQuantity
+            categoryItemQuantity,
+            'plus'
         );
     } else {
         quantity--;
@@ -2976,6 +2977,7 @@ $(document).on("click", ".qty-btn-plus", function () {
 });
 
 $(document).on("click", ".qty-btn-minus", function () {
+    
     var categoryItemKey = $(this).parent().find(".category-item-key").val();
     var categoryIndexKey = $(this).parent().find(".category-index-key").val();
     var categoryItemQuantity = $(this)
@@ -2983,19 +2985,15 @@ $(document).on("click", ".qty-btn-minus", function () {
         .find(".category-item-quantity")
         .val();
     var quantity = parseInt($(this).parent().find(".input-qty").val());
-   
-    if (categoryItemQuantity >= quantity) {
 
-        if(quantity > 0){
-            var current_item = parseInt($('.total-self-bring-'+categoryIndexKey).text());
-            current_item = current_item - 1;
-            $('.total-self-bring-'+categoryIndexKey).text(current_item);
-        }
+    if (categoryItemQuantity >= quantity ) {
+ 
         update_self_bring(
             categoryItemKey,
             categoryIndexKey,
             quantity,
-            categoryItemQuantity
+            categoryItemQuantity,
+            'minus'
         );
         
     } else {
@@ -3008,7 +3006,8 @@ function update_self_bring(
     categoryItemKey,
     categoryIndexKey,
     quantity,
-    categoryItemQuantity
+    categoryItemQuantity,
+    type
 ) {
     $.ajax({
         url: base_url + "event/update_self_bring",
@@ -3040,11 +3039,17 @@ function update_self_bring(
                     "-" +
                     categoryIndexKey
             ).text(quantity);
-
-            console.log(quantity);
-            
-            
-
+            if(quantity > 0){
+                if(type == 'plus'){
+                    var current_item = parseInt($('.total-self-bring-'+categoryIndexKey).text());
+                    current_item = current_item + 1;
+                    $('.total-self-bring-'+categoryIndexKey).text(current_item);
+                }else if(type == 'minus'){
+                    var current_item = parseInt($('.total-self-bring-'+categoryIndexKey).text());
+                    current_item = current_item - 1;
+                    $('.total-self-bring-'+categoryIndexKey).text(current_item);
+                }
+            }
             if (quantity == categoryItemQuantity) {
                 $(
                     "#lumpia-collapseOne" +
