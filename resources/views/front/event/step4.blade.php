@@ -548,9 +548,9 @@
 </div>
 
 <div id="sidebar_addcategoryitem" class="sidebar setting-side-wrp">
-    <div class="item-dishesh-sidebar add_sub_category add-item-head-wrp">
+    <div class="item-dishesh-sidebar add_sub_category ">
         <div class="d-flex align-items-center justify-content-between toggle-wrp">
-            <div class="d-flex align-items-center">
+            <div class="d-flex align-items-center add-item-head-wrp">
                 <a href="#" class="me-3" onclick="toggleSidebar('sidebar_potluck')">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M9.57 5.92969L3.5 11.9997L9.57 18.0697" stroke="#64748B" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
