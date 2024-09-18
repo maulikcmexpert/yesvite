@@ -174,6 +174,8 @@ class EventController extends Controller
             'is_draft_save' => (isset($request->isdraft) && $request->isdraft != "") ? $request->isdraft : "0",
         ]);
         $eventId = $event_creation->id;
+        $event_creation->step = (isset($request->step) && $request->step != '') ? $request->step : 0;
+        $event_creation->save();
         if ($eventId != "") {
             $invitedUsers = $request->email_invite;
             $invitedusersession = session('user_ids');
