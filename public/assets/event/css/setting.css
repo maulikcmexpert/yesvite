@@ -527,7 +527,7 @@
     font-weight: 600;
     color: var(--secondryColor);
     line-height: 20px;
-    margin-bottom: 7px;
+    margin-bottom: 5px;
 }
 
 
@@ -660,7 +660,7 @@
 
 .list-slide .accordion-button .fa-plus {
     color: #34C05C;
-    font-size: 12px;
+    font-size: 14px;
 }
 
 
