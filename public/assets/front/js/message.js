@@ -1541,18 +1541,18 @@ console.log(messageData.replyData);
             <div class="reply-section">
                 <span class="senderName">${senderName}</span>            
                 <div>
-                    <span> <strong>${
+                    <span> ${
                         messageData.replyData.replyMessage
-                    }</strong></span>
+                    }</span>
                     <div class="reply-info">
-                        <span class="reply-username">${
+                        <strong><span class="reply-username">${
                             messageData.replyData.replyUserName
                         }</span>
                         <span class="reply-timestamp">${new Date(messageData.replyData.replyTimeStamp).toLocaleTimeString([], {
                                                         hour: "2-digit",
                                                         minute: "2-digit",
                                                         hour12: true,
-                                                        })}</span>
+                                                        })}</span></strong>
                     </div>
                 </div>
                 <hr>
