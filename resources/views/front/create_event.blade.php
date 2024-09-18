@@ -2121,7 +2121,7 @@
                     </svg>
                 </button>
             </div>
-            <div class="guest-group-name login-form-wrap">
+            <div class="guest-group-name">
                 <div class="user-contacts" id="groupUsers">
                     {{-- @php
                         $i = 0;
