@@ -770,6 +770,12 @@
     font-weight: 500;
 }
 
+.cancel-btn {
+    background-color: transparent;
+    border: 1px solid var(--borderColor);
+    color: var(--primaryColor);
+}
+
 /* ============ responsive ============ */
 @media only screen and (max-width:991px) {
     .guest-checkout-respo {
