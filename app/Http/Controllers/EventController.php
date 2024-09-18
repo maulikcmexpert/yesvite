@@ -67,7 +67,7 @@ class EventController extends Controller
 {
     public function index()
     {
-
+        dd(1);
         $title = 'Create Event';
         $page = 'front.create_event';
         $id = Auth::guard('web')->user()->id;
