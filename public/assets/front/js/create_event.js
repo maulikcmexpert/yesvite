@@ -3183,7 +3183,7 @@ $(document).on("click", ".add_gift_item_btn", function () {
                 .text("Please add recipients name");
             return;
         } else {
-            $("#recipient_name_error").css("display", "none");
+            $("#recipient_name_error").text("");
         }
     
         if (registry_link == "") {
@@ -3193,7 +3193,7 @@ $(document).on("click", ".add_gift_item_btn", function () {
                 .text("Please add registry link");
             return;
         } else {
-            $("#registry_link_error").css("display", "none");
+            $("#registry_link_error").text("");
         }
     
         $.ajax({
@@ -3523,7 +3523,7 @@ $(document).on("click", "#final_create_event", function (e) {
                 $('#eventModal').modal('show');           
             }else{
                 toastr.success('Event Created Successfully');
-                window.location.href="profile";
+                // window.location.href="profile";
             }
 
 
