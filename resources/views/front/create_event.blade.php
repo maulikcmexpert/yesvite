@@ -1111,8 +1111,8 @@
                 </svg>
             </button>
         </div>
-        <div class="guest-group-name login-form-wrap">
-            <form action="" class="registry-form add-category-new-wrp">
+        <div class="guest-group-name login-form-wrap add-category-new-wrp">
+            <form action="" class="registry-form ">
                 <div class="input-form">
                     <input class="form-control" type="text" id="categoryName" onkeyup="clearError()"
                         name="text1" placeholder="Categories: e.g., Appetizers, Salads, Drinks, etc">
