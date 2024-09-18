@@ -665,12 +665,23 @@ ul.listing li span {
 .add-contact-selectbox .iti--separate-dial-code .iti__selected-flag {
     background-color: transparent !important;
     border: 1px solid var(--borderColor) !important;
+    border-right: none !important;
 }
 
 .add-contact-selectbox .iti__flag-container {
     padding: 0px !important;
 }
 
+.add-contact-selectbox .iti__selected-flag::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0;
+    width: 1px;
+    height: 10px;
+    background: var(--borderColor);
+}
 
 /* ======= Responsive ======= */
 @media only screen and (max-width:1399px) {
