@@ -345,6 +345,9 @@
     padding-top: 0;
 }
 
+.new-group-name-wrp {
+    border: none !important;
+}
 
 /* =========== guest-sidebar ============ */
 .guest-sidebar .toggle-wrp {
