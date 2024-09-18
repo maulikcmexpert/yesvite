@@ -752,7 +752,7 @@ ul.nav-tabs .nav-link:focus {
 
 
 .new-msg-class>span>span {
-    display: none;
+    display: none !important;
 }
 
 /* ======== Responsive ========= */
