@@ -1,6 +1,5 @@
-
- @foreach ($users as $user ) 
- <div class="users-data">
+@foreach ($users as $user )
+<div class="users-data">
     <div class="d-flex align-items-start">
         <div class="contact-img">
             <img src="{{ asset('assets/event/image/user-img.svg') }}"
@@ -9,7 +8,8 @@
         </div>
         <div class="text-start">
             <h5>{{ $user->firstname }}
-                {{ $user->lastname }}</h5>
+                {{ $user->lastname }}
+            </h5>
             @if(isset($user->email)&&$user->email!="")
             <div>
                 <a href="mailto:silvia@gmail.com">
@@ -46,24 +46,24 @@
     </div>
     <div class="d-flex flex-column user_choice_group" data-id="user-{{$user->id}}">
         @if(isset($user->email)&&$user->email!="")
-        <div class="right-note d-flex">
+        <div class="right-note d-flex mb-2">
             <span>Member</span>
             <span class="mx-3">
                 <img src="{{ asset('assets/event/image/small-logo.svg') }}"
                     alt="logo">
             </span>
             <input class="form-check-input user-{{$user->id}} user_choice" type="checkbox"
-                name="guest_list[]" data-id="user-{{$user->id}}"data-email="{{ $user->email }}"
-                value="{{ $user->id }}" >
+                name="guest_list[]" data-id="user-{{$user->id}}" data-email="{{ $user->email }}"
+                value="{{ $user->id }}">
         </div>
         @endif
         @if(isset($user->phone_number)&&$user->phone_number!="")
-        <div class="right-note ms-auto"> 
+        <div class="right-note ms-auto">
             <input class="form-check-input user_tel-{{$user->id}} user_choice" type="checkbox"
-            name="guest_list[]" data-mobile="{{$user->phone_number}}"
-            value="{{ $user->id }}">
+                name="guest_list[]" data-mobile="{{$user->phone_number}}"
+                value="{{ $user->id }}">
         </div>
         @endif
     </div>
 </div>
-@endforeach 
+@endforeach
