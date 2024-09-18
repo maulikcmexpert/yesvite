@@ -11,7 +11,7 @@ use Carbon\Carbon;
                 <div class="massage-notification">
                     <div class="d-flex align-items-center">
                         <h5>Messages</h5>
-                        <span class="badge"></span>
+                        <span class="badge" style="display: none"></span>
                     </div>
                     <a href="#" class="cmn-btn edit-btn" id="new-message" data-bs-toggle="modal" data-bs-target="#msgBox">
                         <svg class="me-1" width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
