@@ -2987,6 +2987,7 @@ $(document).on("click", ".qty-btn-minus", function () {
 
     if (categoryItemQuantity >= quantity ) {
         var flag = $(this).data('minus');
+        console.log(flag);
         if(flag == undefined || flag == 0){
             update_self_bring(
                 categoryItemKey,
