@@ -2983,14 +2983,12 @@ $(document).on("click", ".qty-btn-minus", function () {
         .find(".category-item-quantity")
         .val();
     var quantity = parseInt($(this).parent().find(".input-qty").val());
-   
+    console.log(quantity);
+    
     if (categoryItemQuantity >= quantity) {
-
-        if(quantity > 0){
-            var current_item = parseInt($('.total-self-bring-'+categoryIndexKey).text());
-            current_item = current_item - 1;
-            $('.total-self-bring-'+categoryIndexKey).text(current_item);
-        }
+        var current_item = parseInt($('.total-self-bring-'+categoryIndexKey).text());
+        current_item = current_item - 1;
+        $('.total-self-bring-'+categoryIndexKey).text(current_item);
         update_self_bring(
             categoryItemKey,
             categoryIndexKey,
@@ -3040,10 +3038,6 @@ function update_self_bring(
                     "-" +
                     categoryIndexKey
             ).text(quantity);
-
-            console.log(quantity);
-            
-            
 
             if (quantity == categoryItemQuantity) {
                 $(
