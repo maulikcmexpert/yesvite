@@ -9,6 +9,8 @@
     background: var(--white);
     height: 100vh;
     position: relative;
+    overflow: hidden;
+    overflow-y: scroll;
 }
 
 .checkout-data h5 {
