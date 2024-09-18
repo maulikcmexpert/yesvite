@@ -490,6 +490,7 @@ ul.nav-tabs .nav-link:focus {
     padding-bottom: 10px;
     position: absolute;
     bottom: 0;
+    left: 0;
     width: 100%;
     z-index: 20;
     background-color: var(--white);
