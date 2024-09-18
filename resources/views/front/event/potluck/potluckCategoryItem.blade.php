@@ -49,7 +49,7 @@
                         <input type="hidden" class="category-item-key" value="{{$category_item}}">
                         <input type="hidden" class="category-index-key" value="{{$category_index}}">
                         <input type="hidden" class="category-item-quantity" value="{{$itemdata['quantity']}}">
-                        <input type="hidden" class="item-quantity-minus" value="{{($itemdata['quantity'] ==0)?0:1}}">
+                        <input type="hidden" class="item-quantity-minus" value="{{($self_bring_qty == 0 )?0:1}}">
                         <button class="qty-btn-minus" type="button"><i class="fa fa-minus"></i></button>
                         <input type="number" name="qty" value="{{$self_bring_qty}}" class="input-qty" />
                         <button class="qty-btn-plus" type="button"><i class="fa fa-plus"></i></button>
