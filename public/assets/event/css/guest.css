@@ -249,7 +249,7 @@
 }
 
 .guest-user-content .user-contacts {
-    max-height: 100%;
+    max-height: unset !important;
 }
 
 .guest-contacts-wrp {
