@@ -877,6 +877,10 @@
     color: var(--lightColor) !important;
 }
 
+.footer-bottom-btn svg path {
+    stroke: var(--lightColor) !important;
+}
+
 /* ============ responsive ============ */
 @media only screen and (max-width:991px) {
     .guest-checkout-respo {
