@@ -26,7 +26,13 @@ use Carbon\Carbon;
                 <div class="chat-area">
                     <div class="chat-lists">
                         <div class="chat-header">
-                            <input type="text" name="search_user_from_list" id="serach_user_from_list">
+                            <div class="position-relative chat-header-searchbar">
+                                <input type="text" name="search_user_from_list" id="serach_user_from_list">
+                                <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M10.0807 17.4993C14.453 17.4993 17.9974 13.9549 17.9974 9.58268C17.9974 5.21043 14.453 1.66602 10.0807 1.66602C5.70847 1.66602 2.16406 5.21043 2.16406 9.58268C2.16406 13.9549 5.70847 17.4993 10.0807 17.4993Z" stroke="#050505" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M18.8307 18.3327L17.1641 16.666" stroke="#050505" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </div>
                             <div class=" chat-functions d-none">
                                 <div class="d-flex align-items-center">
                                     <span class="me-3 bulk-back">
