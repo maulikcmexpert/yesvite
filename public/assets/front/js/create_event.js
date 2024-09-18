@@ -2659,7 +2659,7 @@ $(document).on("click", ".li_guest", function () {
         $('.event_create_percent').text('75%');
         $('.current_step').text('3 of 4');
     
-        handleActiveClass(this);
+        handleActiveClass('.li_guest');
     }
 });
 
