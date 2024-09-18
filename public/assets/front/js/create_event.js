@@ -3020,6 +3020,10 @@ function update_self_bring(
                     "-" +
                     categoryIndexKey
             ).text(quantity);
+
+            var current_item = parseInt($('.total-self-bring-'+categoryIndexKey).text());
+            current_item = current_item + parseInt(quantity);
+            $('.total-self-bring-'+categoryIndexKey).text(current_item);
             if (quantity == categoryItemQuantity) {
                 $(
                     "#lumpia-collapseOne" +
