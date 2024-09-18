@@ -770,6 +770,16 @@
     font-weight: 500;
 }
 
+.cancel-btn {
+    background-color: transparent;
+    border: 1px solid var(--borderColor);
+    color: var(--primaryColor);
+}
+
+.potluck-category .potluckmain-0 .accordion-button:not(.collapsed) {
+    background-color: white !important;
+}
+
 /* ============ responsive ============ */
 @media only screen and (max-width:991px) {
     .guest-checkout-respo {
