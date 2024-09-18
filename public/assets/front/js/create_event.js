@@ -1103,6 +1103,10 @@ $(document).on("click", ".add_category_item_btn", function () {
             if (response.qty == 1) {
                 $("#potluck-" + category_index).hide();
             }
+
+            var total_self_bring = parseInt($('.total-self-bring-'+category_index).text());
+            total_self_bring = total_self_bring + parseInt(self_bringQuantity);
+            $('.total-self-bring-'+category_index).text(total_self_bring);
         },
         error: function (xhr, status, error) {
             console.error("An error occurred while storing the User ID.");
