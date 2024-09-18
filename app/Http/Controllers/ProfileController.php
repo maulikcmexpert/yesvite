@@ -59,6 +59,7 @@ class ProfileController extends Controller
         $user['join_date'] = $formatted_date;
         $draft_events =   Event::where(['user_id' => $user->id, 'is_draft_save' => '1'])
             ->select('event_name', 'step', 'updated_at', 'id')
+            ->orderBy('id','DESC')
             ->get();
         if ($user->visible == 1) {
             $user['visible'] = 'Guests from events';
