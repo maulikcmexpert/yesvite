@@ -3001,6 +3001,7 @@ function update_self_bring(
             _token: $('meta[name="csrf-token"]').attr("content"),
         },
         success: function (response) {
+            
             $("#h6-" + categoryItemKey + "-" + categoryIndexKey).text(
                 quantity + "/" + categoryItemQuantity
             );
@@ -3021,9 +3022,12 @@ function update_self_bring(
                     categoryIndexKey
             ).text(quantity);
 
+            console.log(quantity);
+            
             var current_item = parseInt($('.total-self-bring-'+categoryIndexKey).text());
             current_item = current_item + parseInt(quantity);
             $('.total-self-bring-'+categoryIndexKey).text(current_item);
+
             if (quantity == categoryItemQuantity) {
                 $(
                     "#lumpia-collapseOne" +
