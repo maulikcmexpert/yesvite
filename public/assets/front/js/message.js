@@ -1056,6 +1056,10 @@ $(".send-message").on("keypress", async function (e) {
                 fileName = `${Date.now()}_${senderUser}-file.${fileType}`;
                 type = "4";
             }
+            console.log(type);
+            console.log(fileName);
+            console.log(storagePath);
+            
             // Upload file to Firebase Storage
             const fileRef = storageRef(storage, storagePath);
             try {
