@@ -2614,7 +2614,6 @@ $(document).on("click", ".li_design", function () {
         eventData.state != undefined &&
         eventData.zipcode != undefined
     ) {
-        alert()
         $(".step_1").css("display", "none");
         $(".step_2").show();
         $(".step_3").css("display", "none");
