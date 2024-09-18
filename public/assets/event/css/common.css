@@ -803,15 +803,20 @@ ul.cost-list li span {
     font-size: 14px !important;
 }
 
-.new-msg-class {}
 
 /* ======== Responsive ========= */
+
+@media only screen and (min-width: 1500px) and (max-width: 2600px) {
+    .sidebar-content {
+        padding-bottom: 140px;
+    }
+}
 
 
 @media only screen and (max-width:1499px) {
     .sidebar-content {
         padding: 24px;
-        padding-bottom: 95px;
+        padding-bottom: 110px;
     }
 }
 
