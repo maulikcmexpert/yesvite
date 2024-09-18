@@ -2111,6 +2111,12 @@ $(document).on("click", "#close_createEvent", function () {
     }
 });
 
+function focus_timeOut(type){
+    setTimeout(function() {
+        $("#"+type).focus();
+    }, 100);
+}
+
 function savePage1Data(close = null) {
 
     var event_type = $("#event-type").val();
@@ -2161,9 +2167,7 @@ function savePage1Data(close = null) {
             .css("display", "block")
             .css("color", "red")
             .text("Event Type: Please select an event type");
-        setTimeout(function() {
-            $("#event-type").focus();
-        }, 100);
+            focus_timeOut('event-type');
         return;
     } else {
         $("#event-type-error").css("display", "none");
@@ -2173,6 +2177,7 @@ function savePage1Data(close = null) {
             .css("display", "block")
             .css("color", "red")
             .text("Please enter event name");
+            focus_timeOut('event-name');
         return;
     } else {
         $("#event-name-error").css("display", "none");
@@ -2182,6 +2187,7 @@ function savePage1Data(close = null) {
             .css("display", "block")
             .css("color", "red")
             .text("Please enter event host name");
+            focus_timeOut('hostedby');
         return;
     } else {
         $("#event-host-error").css("display", "none");
@@ -2191,46 +2197,47 @@ function savePage1Data(close = null) {
             .css("display", "block")
             .css("color", "red")
             .text("Event Date: Please select an event date");
+            focus_timeOut('event-date');
         return;
     } else {
         $("#event-date-error").css("display", "none");
     }
-
     if (start_time == "") {
         $("#event-start_time-error")
             .css("display", "block")
             .css("color", "red")
             .text("Start Time: Please select start time");
+            focus_timeOut('start-time');
         return;
     } else {
         $("#event-start_time-error").css("display", "none");
     }
-
     if (address == "") {
         $("#event-address1-error")
             .css("display", "block")
             .css("color", "red")
             .text("Please enter address");
+            focus_timeOut('address1');
         return;
     } else {
         $("#event-address1-error").css("display", "none");
     }
-
     if (city == "") {
         $("#event-city-error")
             .css("display", "block")
             .css("color", "red")
             .text("Please enter city");
+            focus_timeOut('city');
         return;
     } else {
         $("#event-city-error").css("display", "none");
     }
-
     if (state == "") {
         $("#event-state-error")
             .css("display", "block")
             .css("color", "red")
             .text("Please enter state");
+            focus_timeOut('state');
         return;
     } else {
         $("#event-state-error").css("display", "none");
@@ -2240,6 +2247,7 @@ function savePage1Data(close = null) {
             .css("display", "block")
             .css("color", "red")
             .text("Please enter zipcode");
+            focus_timeOut('zipcode');
         return;
     } else {
         $("#event-zipcode-error").css("display", "none");
