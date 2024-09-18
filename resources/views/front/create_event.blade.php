@@ -1120,7 +1120,8 @@
                     </svg>
                 </button>
             </div>
-            <div class="alert-box d-flex align-items-center">
+            @if(!session('potluck_closed'))
+            <div class="alert-box d-flex align-items-center" id="potluck_tip">
                 <span class="me-3">
                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
@@ -1140,6 +1141,7 @@
                     </svg>
                 </span>
             </div>
+            @endif
             <div class="potluck-category">
                 <h5>Potluck Categories</h5>
                 {{-- <div class="category-main-dishesh"> 

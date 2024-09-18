@@ -1183,4 +1183,17 @@ class EventController extends Controller
             return response()->json(['status' => 0, 'message' => 'Something went wrong']);
         }
     }
+
+
+    public function closeTip(Request $request)
+    {
+        if (Auth::check()) {
+            if ($request->has('closed') && $request->closed) {
+                session(['potluck_closed' => true]);
+            }
+            return response()->json(['success' => true]);
+        } else {
+            return response()->json(['success' => false, 'message' => 'User not logged in']);
+        }
+    }
 }

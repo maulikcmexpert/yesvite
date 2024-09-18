@@ -3973,3 +3973,23 @@ $(document).on('click','input[name="gift_registry[]"]',function () {
         <h5>Add gift registry</h5>`);
     } 
 });
+
+$(document).on("click","#potluck_tip", function (e) {
+    e.preventDefault();
+    $(this).hide();
+    $.ajax({
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                "content"
+            ),
+        },
+        url: base_url+"event/close_tip",
+        method: "POST",
+        data: {
+            closed: true,
+        },
+        success: function (response) {
+            // console.log(response);
+        },
+    });
+});

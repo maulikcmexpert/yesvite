@@ -154,6 +154,7 @@ Route::middleware('checkUserExist')->group(function () {
     Route::post('event/get_all_group_member_list', [ControllersEventController::class, 'getAllGroupMember']);
     Route::post('event/invite_user_by_group', [ControllersEventController::class, 'inviteByGroup']);
     Route::post('event/edit_event', [ControllersEventController::class, 'editEvent']);
+    Route::post('event/close_tip', [ControllersEventController::class, 'closeTip']);
 });
 
 Route::get('access_token', [AuthController::class, 'handleGoogleCallback'])->name('access_token');
@@ -221,6 +222,7 @@ Route::controller(AuthController::class)->group(function () {
         Auth::logout();
         // Invalidate the session and regenerate the CSRF token to prevent session fixation attacks
         Session::forget('advertisement_closed');
+        Session::forget('potluck_closed');
         Session::forget('user');
         Session::forget('secondary_user');
         return redirect('login');
