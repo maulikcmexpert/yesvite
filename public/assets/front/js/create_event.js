@@ -2322,9 +2322,12 @@ function savePage1Data(close = null) {
 
 function savePage3Data() {
     // let invited_user_ids = [];
-    // $(".invited_user").each(function () {
-    //     invited_user_ids.push($(this).data("id"));
-    // });
+    var checkedCheckbox = $('input[name="email_invite[]"]:checked');
+
+    if (checkedCheckbox.length == 0) {
+        toastr.error("Please select invited user");
+        return;
+    }
 
     // eventData.invited_user_ids = invited_user_ids;
 
