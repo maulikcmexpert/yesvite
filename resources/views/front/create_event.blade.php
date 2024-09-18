@@ -591,7 +591,7 @@
             </svg>
         </button>
     </div>
-    <div class="guest-group-name login-form-wrap">
+    <div class="guest-group-name login-form-wrap no-border-wrp">
         <form action="">
             <div class="input-form">
                 <input class="form-control" oninput="clearError(this)" type="text" id="thankyou_templatename"
