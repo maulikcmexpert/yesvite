@@ -1202,7 +1202,7 @@ class EventController extends Controller
                 }
 
                 if($request->tip=="thankyou_card"){
-                    session(['co_host_closed' => true]);
+                    session(['thankyou_card_closed' => true]);
                 }
 
                 if($request->tip=="desgin_tip"){

@@ -225,6 +225,7 @@ Route::controller(AuthController::class)->group(function () {
         Session::forget('potluck_closed');
         Session::forget('create_new_event_closed');
         Session::forget('co_host_closed');
+        Session::forget('thankyou_card_closed');
         Session::forget('design_closed');
         Session::forget('user');
         Session::forget('secondary_user');
