@@ -36,7 +36,7 @@
 
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 
-<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 
 
 
