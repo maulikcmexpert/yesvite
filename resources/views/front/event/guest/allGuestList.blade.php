@@ -53,7 +53,7 @@
                     alt="logo">
             </span>
             <input class="form-check-input user-{{$user->id}} user_choice" type="checkbox"
-                name="guest_list[]" data-id="user-{{$user->id}}" data-email="{{ $user->email }}"
+                name="guest_list[]" data-id="user-{{$user->id}}" data-username="{{ $user->firstname }} {{ $user->lastname }}" data-profile="{{ asset('assets/event/image/user-img.svg') }}" data-email="{{ $user->email }}"
                 value="{{ $user->id }}">
         </div>
         @endif
