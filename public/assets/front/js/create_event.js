@@ -3370,6 +3370,25 @@ $(document).on("change", 'input[name="select_thankyou[]"]', function () {
 
 $(document).on("click", "#close_thankyou_card_popup", function () {
     $("#thankyou_card_popup").remove();
+
+    $.ajax({
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                "content"
+            ),
+        },
+        url: base_url+"event/close_tip",
+        method: "POST",
+        data: {
+            closed: true,
+            tip:"thankyou_card"
+        },
+        success: function (response) {
+            // console.log(response);
+        },
+    });
+
+
 });
 
 $(document).on("click", ".save_allow_limit", function () {
@@ -4005,6 +4024,28 @@ $(document).on("click","#potluck_tip", function (e) {
         data: {
             closed: true,
             tip:"potluck"
+        },
+        success: function (response) {
+            // console.log(response);
+        },
+    });
+});
+
+
+$(document).on("click","#co_host_tip", function (e) {
+    e.preventDefault();
+    $('#co_host_tip_close').remove();
+    $.ajax({
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                "content"
+            ),
+        },
+        url: base_url+"event/close_tip",
+        method: "POST",
+        data: {
+            closed: true,
+            tip:"co_host"
         },
         success: function (response) {
             // console.log(response);

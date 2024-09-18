@@ -224,6 +224,7 @@ Route::controller(AuthController::class)->group(function () {
         Session::forget('advertisement_closed');
         Session::forget('potluck_closed');
         Session::forget('create_new_event_closed');
+        Session::forget('co_host_closed');
         Session::forget('user');
         Session::forget('secondary_user');
         return redirect('login');

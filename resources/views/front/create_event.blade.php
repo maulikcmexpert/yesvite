@@ -628,6 +628,29 @@
                 </svg>
             </button>
         </div>
+
+        @if(!session('co_host_closed'))
+            <div class="alert-box d-flex align-items-center" id="co_host_tip">
+                <span class="me-3">
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M8.99984 0.666992C4.40817 0.666992 0.666504 4.40866 0.666504 9.00033C0.666504 13.592 4.40817 17.3337 8.99984 17.3337C13.5915 17.3337 17.3332 13.592 17.3332 9.00033C17.3332 4.40866 13.5915 0.666992 8.99984 0.666992ZM8.37484 5.66699C8.37484 5.32533 8.65817 5.04199 8.99984 5.04199C9.3415 5.04199 9.62484 5.32533 9.62484 5.66699V9.83366C9.62484 10.1753 9.3415 10.4587 8.99984 10.4587C8.65817 10.4587 8.37484 10.1753 8.37484 9.83366V5.66699ZM9.7665 12.6503C9.72484 12.7587 9.6665 12.842 9.5915 12.9253C9.50817 13.0003 9.4165 13.0587 9.3165 13.1003C9.2165 13.142 9.10817 13.167 8.99984 13.167C8.8915 13.167 8.78317 13.142 8.68317 13.1003C8.58317 13.0587 8.4915 13.0003 8.40817 12.9253C8.33317 12.842 8.27484 12.7587 8.23317 12.6503C8.1915 12.5503 8.1665 12.442 8.1665 12.3337C8.1665 12.2253 8.1915 12.117 8.23317 12.017C8.27484 11.917 8.33317 11.8253 8.40817 11.742C8.4915 11.667 8.58317 11.6087 8.68317 11.567C8.88317 11.4837 9.1165 11.4837 9.3165 11.567C9.4165 11.6087 9.50817 11.667 9.5915 11.742C9.6665 11.8253 9.72484 11.917 9.7665 12.017C9.80817 12.117 9.83317 12.2253 9.83317 12.3337C9.83317 12.442 9.80817 12.5503 9.7665 12.6503Z"
+                            fill="#1C8B5C" />
+                    </svg>
+                </span>
+                <p>Co-Host will get an invite and if they agree they will get access to the event as a host.</p>
+                <span class="ms-3" id="co_host_tip_close">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1.33398 1.33301L10.6667 10.6657" stroke="#1C8B5C" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M1.33331 10.6657L10.666 1.33301" stroke="#1C8B5C" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </span>
+            </div>
+        @endif
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
                 <button class="nav-link active" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact"
@@ -1130,7 +1153,7 @@
                             fill="#1C8B5C" />
                     </svg>
                 </span>
-                <p>You can choose to continue one of your drafts above or hit the “Create New Event” button.</p>
+                <p>First add categories then you can add individual items under those categories.</p>
                 <span class="ms-3" id="potluck_tip">
                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
