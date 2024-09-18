@@ -1531,7 +1531,7 @@ function createMessageElement(key, messageData, isGroup) {
                 ${emojiAndReplay}
               </div>
               `;
-
+console.log(messageData.replyData);
     const replySection =
         messageData.replyData && messageData.replyData.replyTimeStamp != 0
             ? `
