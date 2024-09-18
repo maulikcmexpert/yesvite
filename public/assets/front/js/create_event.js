@@ -245,7 +245,14 @@ if (/Mobi/.test(navigator.userAgent)) {
 }
 
 $(document).on('click','.timepicker', function(){
-    datepicker();
+    alert();
+    $(this).datetimepicker({
+        format: "LT",
+        icons: {
+            up: "fa fa-chevron-up",
+            down: "fa fa-chevron-down",
+        },
+    });
 })
 function datepicker() {
     $(".timepicker").datetimepicker({
