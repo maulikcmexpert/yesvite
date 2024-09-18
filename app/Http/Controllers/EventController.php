@@ -141,8 +141,9 @@ class EventController extends Controller
             list($startDate, $endDate) = explode(' To ', $dateString);
         } else {
             $startDate = $dateString;
-            $endDate = null;
+            $endDate = $dateString;
         }
+
         $event_creation = Event::create([
             'step' => (isset($request->step) && $request->step != '') ? $request->step : 0,
             'event_type_id' => (isset($request->event_type) && $request->event_type != "") ? (int)$request->event_type : "",
