@@ -567,7 +567,7 @@
                 </svg>
             </button>
         </div>
-        <div class="guest-group-name login-form-wrap">
+        <div class="guest-group-name login-form-wrap no-border-css">
             <form action="" class="registry-form">
                 <div class="input-form">
                     <input class="form-control" type="text" id="item_name" name="text1" onkeyup="clearError()" placeholder="Description">
