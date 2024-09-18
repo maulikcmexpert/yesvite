@@ -2663,6 +2663,7 @@ $(document).on("click", ".li_guest", function () {
 $(document).on("click", ".li_setting", function () {
     var design = eventData.desgin_selected;
     var step3 = eventData.step;
+    alert(step3);
     if( design == undefined || design == '' && step3 != '3'){
         return;
     }else{
