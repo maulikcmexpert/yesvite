@@ -263,12 +263,14 @@ function datepicker() {
 // });
 
 function rsvp_by_date(start_time) {
+    var adjustedStartTime = moment(start_time).subtract(1, 'days');
+
     $('#rsvp-by-date').daterangepicker({
         singleDatePicker: true,
         autoUpdateInput: false,  
         //   showDropdowns: true,
         minYear: 1901,
-        maxDate: start_time, 
+        maxDate: adjustedStartTime, 
         minDate: moment().add(0, 'days'), 
         locale: {
             format: 'YYYY-MM-DD'  // Set the desired format
