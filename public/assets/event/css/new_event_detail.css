@@ -770,6 +770,13 @@
 
 /* ======Responsiveness===== */
 
+@media only screen and (min-width: 1500px) and (max-width: 2600px) {
+    .sidebar-content {
+        padding-bottom: 120px;
+    }
+}
+
+
 @media only screen and (max-width: 991px) {
     .main-content-sidebar {
         /* width: 100%;
