@@ -53,8 +53,8 @@
 
 .setting-accordion-wrp .accordion-body {
     padding: 0;
-    max-height: 400px;
-    overflow-y: scroll;
+    /* max-height: 400px;
+    overflow-y: scroll; */
 }
 
 .setting-accordion-wrp .accordion-button h5,
