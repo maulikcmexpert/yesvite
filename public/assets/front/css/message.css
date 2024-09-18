@@ -1585,7 +1585,7 @@ ul.member-lists li:last-child {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    right: 0;
+    right: 20px;
     width: 20px;
     height: 20px;
 }
