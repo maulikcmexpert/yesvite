@@ -658,7 +658,9 @@ ul.listing li span {
     width: 73%;
 }
 
-
+.add-contact-selectbox .iti--allow-dropdown .iti__flag-container:hover .iti__selected-flag {
+    background-color: transparent !important;
+}
 
 /* ======= Responsive ======= */
 @media only screen and (max-width:1399px) {
