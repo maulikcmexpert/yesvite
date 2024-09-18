@@ -245,17 +245,9 @@ if (/Mobi/.test(navigator.userAgent)) {
 }
 
 $(document).on('click','.timepicker', function(){
-
-    $(this).datetimepicker({
-        format: "LT",
-        icons: {
-            up: "fa fa-chevron-up",
-            down: "fa fa-chevron-down",
-        },
-        useCurrent: false, 
-        ignoreReadonly: true
-    });
+   datepicker();
 })
+datepicker();
 function datepicker() {
     $(".timepicker").datetimepicker({
         format: "LT",
@@ -263,6 +255,8 @@ function datepicker() {
             up: "fa fa-chevron-up",
             down: "fa fa-chevron-down",
         },
+        useCurrent: false, 
+        ignoreReadonly: true
     });
 }
 
