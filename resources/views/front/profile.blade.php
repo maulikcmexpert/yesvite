@@ -258,8 +258,14 @@
             $percent = '75';
             $progress = 'brand-progress progress-yellow';
             $step_name = 'Guest';
-            } else {
+            } elseif ($draft->step == '4') {
+            $percent = '99';
             $progress = 'brand-progress progress-yellow';
+            $step_name = 'Setting';
+            }else{
+                $percent = '0';
+                $progress = 'brand-progress progress-yellow';
+                $step_name = 'Details';
             }
             @endphp
 
