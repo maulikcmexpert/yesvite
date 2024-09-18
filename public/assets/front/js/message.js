@@ -1548,9 +1548,11 @@ console.log(messageData.replyData);
                         <span class="reply-username">${
                             messageData.replyData.replyUserName
                         }</span>
-                        <span class="reply-timestamp">${timeago.format(
-                            new Date(messageData.replyData.replyTimeStamp)
-                        )}</span>
+                        <span class="reply-timestamp">${new Date(messageData.replyData.replyTimeStamp).toLocaleTimeString([], {
+                                                        hour: "2-digit",
+                                                        minute: "2-digit",
+                                                        hour12: true,
+                                                        })}</span>
                     </div>
                 </div>
                 <hr>
