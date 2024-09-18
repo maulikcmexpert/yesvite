@@ -262,10 +262,35 @@ function datepicker() {
 //     minuteIncrement: 15, // Set 15-minute intervals
 // });
 
+function rsvp_by_date(start_time) {
+    $('#rsvp-by-date').daterangepicker({
+        singleDatePicker: true,
+        autoUpdateInput: false,  
+        //   showDropdowns: true,
+        minYear: 1901,
+        maxDate: start_time, 
+        minDate: moment().add(0, 'days'), 
+        locale: {
+            format: 'YYYY-MM-DD'  // Set the desired format
+        },
+        maxYear: parseInt(moment().format('YYYY'),10)
+        }, function(start, end, label) {
+        //   var years = moment().diff(start, 'years');
+        //   alert("You are " + years + " years old!");
+    });
+    $('#rsvp-by-date').on('apply.daterangepicker', function(ev, picker) {
+        $(this).val(picker.startDate.format('YYYY-MM-DD'));
+    });
+    $('#rsvp-by-date').on('hide.daterangepicker', function(ev, picker) {
+        if (picker.startDate.isValid()) {
+            $(this).val(picker.startDate.format('YYYY-MM-DD'));
+        }
+    });
+}
 
 $(function() {
     var current_event_date = $("#event-date").val();
-    alert(current_event_date);
+
     $('#rsvp-by-date').daterangepicker({
       singleDatePicker: true,
       autoUpdateInput: false,  
@@ -283,6 +308,11 @@ $(function() {
     });
     $('#rsvp-by-date').on('apply.daterangepicker', function(ev, picker) {
         $(this).val(picker.startDate.format('YYYY-MM-DD'));
+    });
+    $('#rsvp-by-date').on('hide.daterangepicker', function(ev, picker) {
+        if (picker.startDate.isValid()) {
+            $(this).val(picker.startDate.format('YYYY-MM-DD'));
+        }
     });
   });
 
@@ -308,6 +338,7 @@ $(function () {
             selectedDates.add(start.format("YYYY-MM-DD"));
             selectedDates.add(end.format("YYYY-MM-DD"));
             var eventDate = start.format("YYYY-MM-DD") + " To " + end.format("YYYY-MM-DD")
+            rsvp_by_date(start.format("YYYY-MM-DD"));
             if(start.format("YYYY-MM-DD") == end.format("YYYY-MM-DD")){
                 eventDate = end.format("YYYY-MM-DD");
             }
@@ -437,11 +468,7 @@ $(function () {
     $("#event-date").on('apply.daterangepicker', function(ev, picker) {
         picker.show();
     });
-    $('#rsvp-by-date').on('hide.daterangepicker', function(ev, picker) {
-        if (picker.startDate.isValid()) {
-            $(this).val(picker.startDate.format('YYYY-MM-DD'));
-        }
-    });
+   
 });
 
 let eventData = {};
