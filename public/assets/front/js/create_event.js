@@ -2956,7 +2956,7 @@ $(document).on("click", ".qty-btn-plus", function () {
     var quantity = parseInt($(this).parent().find(".input-qty").val());
 
     if(quantity > 0){
-        $(this).attr("data-minus", 0);
+        $(this).parent().find(".qty-btn-minus").attr("data-minus", 0);
     }
 
     if (categoryItemQuantity >= quantity) {
