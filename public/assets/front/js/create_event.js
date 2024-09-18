@@ -2977,6 +2977,7 @@ $(document).on("click", ".qty-btn-plus", function () {
 });
 
 $(document).on("click", ".qty-btn-minus", function () {
+    
     var categoryItemKey = $(this).parent().find(".category-item-key").val();
     var categoryIndexKey = $(this).parent().find(".category-index-key").val();
     var categoryItemQuantity = $(this)
@@ -2985,7 +2986,7 @@ $(document).on("click", ".qty-btn-minus", function () {
         .val();
     var quantity = parseInt($(this).parent().find(".input-qty").val());
 
-    if (categoryItemQuantity >= quantity && quantity > 0) {
+    if (categoryItemQuantity >= quantity ) {
  
         update_self_bring(
             categoryItemKey,
