@@ -870,11 +870,11 @@
 .footer-bottom-btn {
     border: none !important;
     background: transparent !important;
-    color: var(--primaryColor) !important;
+    color: var(--lightColor) !important;
 }
 
 .footer-bottom-btn h5 {
-    color: var(--primaryColor) !important;
+    color: var(--lightColor) !important;
 }
 
 /* ============ responsive ============ */
