@@ -128,14 +128,14 @@
     border-radius: 16px;
     background-color: #fff;
     padding: 5px;
-    position: absolute;
-    bottom: 50px;
+    position: sticky;
+    bottom: 30px;
     width: 100%;
     max-width: 930px;
     margin: 0 auto;
     text-align: center;
-    left: 50%;
-    transform: translateX(-50%);
+    /* left: 50%;
+    transform: translateX(-50%); */
     padding-left: 16px;
     z-index: 10;
 }
