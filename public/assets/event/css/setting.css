@@ -324,9 +324,9 @@
 
 .registry-form span.sub-con {
     position: absolute;
-    right: 20px;
-    bottom: 50%;
-    transform: translateY(50%);
+    right: 30px;
+    bottom: 35%;
+    transform: translateY(-50%);
     color: var(--lightColor);
     font-size: 14px;
     line-height: 23px;
@@ -782,6 +782,11 @@
 
 .item-dishesh-sidebar {
     padding: 30px;
+}
+
+
+.no-border-css {
+    border: none !important;
 }
 
 /* ============ responsive ============ */
