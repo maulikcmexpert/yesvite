@@ -265,6 +265,7 @@ function datepicker() {
 
 $(function() {
     var current_event_date = $("#event-date").val();
+    alert(current_event_date);
     $('#rsvp-by-date').daterangepicker({
       singleDatePicker: true,
       autoUpdateInput: false,  
