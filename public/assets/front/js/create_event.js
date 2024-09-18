@@ -3893,7 +3893,7 @@ $(document).on('click','.free_plan',function () {
 
 $(document).on('click','.brand-progress',function () { 
     var event_id = $(this).data('id');
-    window.location.href="event?id="+event_id;
+    // window.location.href="event?id="+event_id;
        
 });
 
