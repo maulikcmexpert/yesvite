@@ -2995,15 +2995,16 @@ $(document).on("click", ".qty-btn-minus", function () {
                 categoryItemQuantity,
                 'minus'
             );
+            if(quantity == 0){
+                $(this).attr("data-minus", 1);
+            }
         }
         
     } else {
        
         $(this).parent().find(".input-qty").val(0);
     }
-    if(quantity == 0){
-        $(this).attr("data-minus", 1);
-    }
+    
 });
 
 function update_self_bring(
