@@ -934,8 +934,8 @@
             </div>
             <div class="plans-wrap pro-wrp change-plan pro_plan">
                 <div class="d-flex justify-content-between">
-                    <div style="width:60%">
-                        <div>
+                    <div style="width:100%">
+                        <div class="d-flex align-items-start justify-content-between">
                             <h5>Pro</h5>
                             <div class="d-flex align-items-start">
                                 <div class="recomend-pro-paln d-flex align-items-center">
