@@ -2592,7 +2592,7 @@ function handleActivePlan(target) {
     $(target).find('.plan_check').prop('checked', true); 
 }
 $(document).on("click", ".li_design", function () {
-    console.log(eventData);
+    console.log(eventData.event_type);
      
     if (
         eventData.event_type != "" &&
