@@ -243,7 +243,7 @@ if (/Mobi/.test(navigator.userAgent)) {
     // });
     
 }
-
+datepicker();
 function datepicker() {
     $(".timepicker").datetimepicker({
         format: "LT",
