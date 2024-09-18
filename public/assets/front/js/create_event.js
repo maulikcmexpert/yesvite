@@ -3976,7 +3976,7 @@ $(document).on('click','input[name="gift_registry[]"]',function () {
 
 $(document).on("click","#potluck_tip", function (e) {
     e.preventDefault();
-    $('#potluck_tip_bar').hide();
+    $('#potluck_tip_bar').css('display','none !important');
     $.ajax({
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
