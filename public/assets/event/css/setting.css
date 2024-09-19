@@ -903,6 +903,10 @@
     overflow: hidden;
 }
 
+.potluck-category .list-slide.open-potluck-list {
+    max-height: 100%;
+}
+
 /* ============ responsive ============ */
 @media only screen and (max-width:991px) {
     .guest-checkout-respo {
