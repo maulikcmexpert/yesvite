@@ -4143,7 +4143,7 @@ $(document).on('keyup','#group_toggle_search',function () {
                 return;
             }
             $("#loader").hide();
-            $(".group_search_list_toggle").append(data.html);
+            $(".group_search_list_toggle").html(data.html);
         })
         .fail(function (jqXHR, ajaxOptions, thrownError) {
             alert("server not responding...");
