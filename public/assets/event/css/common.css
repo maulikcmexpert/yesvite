@@ -805,6 +805,9 @@ ul.cost-list li span {
     font-size: 14px !important;
 }
 
+.group-owl .owl-dots {
+    display: none !important;
+}
 
 /* ======== Responsive ========= */
 
