@@ -387,6 +387,7 @@ $("#schedule").on("change", function () {
         if ($(this).is(":checked")) {
             $(".add-activity-schedule").show();
             // $(".ac-end-time").show();
+            let selectedDates = [];
             if (event_date.includes(" To ")) {
                 let [start, end] = event_date.split(" To ");
                 selectedDates.clear();
