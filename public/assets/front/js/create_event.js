@@ -3434,7 +3434,7 @@ $(document).on("click", ".add_gift_item_btn", function () {
         $("#registry_link_error")
             .css("display", "block")
             .css("color", "red")
-            .text("Please add registry link");
+            .text("Please enter a valid Link format (e.g., https://example.com)");
         return;
     }
 });
