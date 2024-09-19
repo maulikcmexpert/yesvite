@@ -787,12 +787,12 @@
     font-size: 14px;
 }
 
-.activity-schedule-wrp {
+/* .activity-schedule-wrp {
     overflow: hidden;
     overflow-y: scroll;
     padding-bottom: 20px;
     height: calc(100vh - 200px);
-}
+} */
 
 
 /* ======Responsiveness===== */
