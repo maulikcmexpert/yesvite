@@ -1244,7 +1244,7 @@ class EventController extends Controller
         $groups = Group::withCount('groupMembers')
         ->orderByDesc('group_members_count')
         ->where('user_id', $id)
-        ->when($request->search_user != '', function ($query) use ($search_user) {
+        ->when($search_user != '', function ($query) use ($search_user) {
             $query->where(function ($q) use ($search_user) {
                 $q->where('name', 'LIKE', '%' . $search_user . '%');
             });
