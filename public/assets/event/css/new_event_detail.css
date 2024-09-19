@@ -803,6 +803,9 @@
     height: calc(100vh - 180px);
 }
 
+.accordion-button.accordian_open {
+    border-radius: 16px 16px 0px 0px;
+}
 
 /* ======Responsiveness===== */
 
