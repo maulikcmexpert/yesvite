@@ -1882,7 +1882,7 @@
 </div>
 
 
-<div id="sidebar_groups" class="sidebar setting-side-wrp">
+<div id="sidebar_groups" class="sidebar setting-side-wrp new-sidebar-group-wrp">
 
     <div class="sidebar-content guest-sidebar">
         <div class="d-flex align-items-center justify-content-between toggle-wrp">
