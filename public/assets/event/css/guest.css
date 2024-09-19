@@ -404,6 +404,12 @@
     max-height: calc(100vh - 200px);
 }
 
+.new-invite-group-member-wrp {
+    overflow: hidden;
+    overflow-y: scroll;
+    max-height: calc(100vh - 210px);
+}
+
 /* ============ responsive ============ */
 @media only screen and (max-width:1800px) {
     .guest-wrapper {
@@ -556,7 +562,8 @@
         position: fixed;
     }
 
-    .new-sidebar-group-wrp {
+    .new-sidebar-group-wrp,
+    #sidebar_list_group_member {
         height: 90vh;
     }
 }
