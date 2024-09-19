@@ -911,7 +911,7 @@ class EventController extends Controller
             $yesvite_user[] = (object)$yesviteUserDetail;
         }
         $selected_user = Session::get('user_ids');
-        dd(count($selected_user));
+        // dd(count($selected_user));
         return response()->json(view('front.event.guest.get_user', compact('yesvite_user', 'type','selected_user'))->render());
     }
 
