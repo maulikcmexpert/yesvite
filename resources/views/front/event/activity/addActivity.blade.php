@@ -54,7 +54,7 @@
                 <label>Start Time</label>
                 <div class="input-group time ">
                     <input class="form-control timepicker activity_start_time" id="activity-start-time"
-                        name="activity-start-time[]" placeholder="HH:MM AM/PM" required="" /><span
+                        name="activity-start-time[]" placeholder="HH:MM AM/PM" required="" readonly/><span
                         class="input-group-append input-group-addon"><span class="input-group-text"><svg width="21"
                                 height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -79,7 +79,7 @@
                 <label>End Time</label>
                 <div class="input-group time ">
                     <input class="form-control timepicker activity_end_time" id="activity-end-time"
-                        name="activity-end-time[]" placeholder="HH:MM AM/PM" required="" /><span
+                        name="activity-end-time[]" placeholder="HH:MM AM/PM" required="" readonly/><span
                         class="input-group-append input-group-addon"><span class="input-group-text"><svg width="21"
                                 height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path
