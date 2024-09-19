@@ -436,7 +436,8 @@
 .activity-schedule-inner .accordion-item {}
 
 
-.activity-schedule-inner .accordion-button:not(.collapsed) .fa-angle-down {
+.activity-schedule-inner .accordion-button:not(.collapsed) .fa-angle-down,
+.accordian_open .fa-angle-down {
     transform: rotateZ(-180deg);
 }
 
