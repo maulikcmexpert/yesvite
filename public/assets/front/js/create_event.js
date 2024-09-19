@@ -3108,10 +3108,10 @@ $(document).on("click", "#delete_potluck_category_btn", function () {
                 category = 0;
                 items = 0;
                 potluck_cateogry_item_count();
-                
                 return;
             }
             category--;
+
             $('#category_count').val(category);
             items = items - response;
             // console.log(response);
