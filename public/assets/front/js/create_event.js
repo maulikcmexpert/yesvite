@@ -3383,6 +3383,17 @@ $(document).on("click", ".add_gift_item_btn", function () {
     } else {
         $("#recipient_name_error").text("");
     }
+
+    if (registry_link == "") {
+        $("#registry_link_error")
+            .css("display", "block")
+            .css("color", "red")
+            .text("Please add registry link");
+        return;
+    } else {
+        $("#registry_link_error").text("");
+    }
+
     if (registry_link != '' && regex.test(registry_link)) {
         if (registry_edit_item != "") {
             var $registryDiv = $("#registry" + registry_edit_item);
@@ -3390,17 +3401,6 @@ $(document).on("click", ".add_gift_item_btn", function () {
             $registryDiv.find("#added_registry_link").text(registry_link);
         }
         
-    
-        if (registry_link == "") {
-            $("#registry_link_error")
-                .css("display", "block")
-                .css("color", "red")
-                .text("Please add registry link");
-            return;
-        } else {
-            $("#registry_link_error").text("");
-        }
-    
         $.ajax({
             url: base_url + "event/add_new_gift_registry",
             type: "POST",
