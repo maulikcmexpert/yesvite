@@ -81,9 +81,9 @@ $('.rsvp-slide').owlCarousel({
       },
       1000:{
           items:1
-      }
-  }
-})
+      },
+  },
+});
 
 
 // $(".form-control").on('focusin', 
@@ -123,6 +123,6 @@ $('.group-owl').owlCarousel({
         items:5.3,
         dots: false,
       }
-  }
-})
+  },
+});
 });

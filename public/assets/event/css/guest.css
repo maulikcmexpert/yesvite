@@ -384,6 +384,14 @@
     cursor: pointer;
 }
 
+.step_3 .design-seting {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    border-radius: 0px !important;
+}
+
+
 /* ============ responsive ============ */
 @media only screen and (max-width:1800px) {
     .guest-wrapper {
