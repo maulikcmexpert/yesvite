@@ -4094,3 +4094,29 @@ $(document).on('click','.open_addcategory',function () {
     $('#category_quantity').val('1');
 })
 
+$(document).on('keyup','#group_search_ajax',function () {
+    var search_name = $(this).val();
+    $.ajax({
+        url: base_url + "event/group_search_ajax",
+        type: "POST",
+        data: {
+            search_name: search_name,
+            _token: $('meta[name="csrf-token"]').attr("content"), // Adding CSRF token
+        },
+        beforeSend: function () {
+            $("#loader").show();
+        },
+    })
+        .done(function (data) {
+            if (data.html == " ") {
+                $("#loader").html("No more contacts found");
+                return;
+            }
+            $("#loader").hide();
+            $(".group_search_list").html(data.html);
+        })
+        .fail(function (jqXHR, ajaxOptions, thrownError) {
+            alert("server not responding...");
+        });
+})
+

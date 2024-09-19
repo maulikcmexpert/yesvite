@@ -581,7 +581,7 @@
 
 
                 <div class="position-relative">
-                    <input type="search" placeholder="Search name" class="form-control">
+                    <input type="search" placeholder="Search name" class="form-control" id="group_search_ajax" name="group_search_ajax">
                     <span>
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -594,7 +594,7 @@
                         </svg>
                     </span>
                 </div>
-                <div class="user-contacts group_list">
+                <div class="user-contacts group_list group_search_list">
                     @foreach ($groups as $group)
                     <div class="group-card added_group{{ $group->id }} listgroups view_members" data-id="{{ $group->id }}">
                         <div class="view_members" data-id="{{ $group->id }}">

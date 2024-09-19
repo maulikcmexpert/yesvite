@@ -1237,4 +1237,19 @@ class EventController extends Controller
             return response()->json(['success' => false, 'message' => 'User not logged in']);
         }
     }
+
+    public function groupSearchAjax(Request $request){
+        $search_user = $request->search_name;
+        $id = Auth::guard('web')->user()->id;
+        $groups = Group::withCount('groupMembers')
+        ->orderByDesc('group_members_count')
+        ->where('user_id', $id)
+        ->when($request->search_user != '', function ($query) use ($search_user) {
+            $query->where(function ($q) use ($search_user) {
+                $q->where('name', 'LIKE', '%' . $search_user . '%');
+            });
+        })
+        ->get();
+        return response()->json(['html' => view('front.event.guest.group_list', compact('groups'))->render(), "status" => "1"]);
+    }
 }
