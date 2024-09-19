@@ -696,7 +696,7 @@ $("#potluck").on("change", function () {
         if(category == 0){
             $(".potluck").hide();
         }else{
-            $("$delete_potluck_title").text('Potluck data will be deleted');
+            $(".delete_potluck_title").text('Potluck data will be deleted');
             $(".delete_potluck_text").text('All category and item data that you have entered will be lost if you turn this off');
             $(".delete_category_text").text('');
             $("#delete_potluck_category_id").val('all_potluck');
