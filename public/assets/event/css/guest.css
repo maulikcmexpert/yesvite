@@ -382,10 +382,23 @@
 .group_search_list .group-card {
     margin-bottom: 10px;
     cursor: pointer;
+    cursor: pointer;
+    margin-left: 0px;
+    margin-right: 0px;
 }
 
+.group_search_list_toggle .group-card {
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-bottom: 10px;
+}
 
-
+.group_search_list_toggle {
+    overflow: hidden;
+    overflow-y: scroll;
+    max-height: calc(100% - 200px);
+    padding-bottom: 10px;
+}
 
 /* ============ responsive ============ */
 @media only screen and (max-width:1800px) {
