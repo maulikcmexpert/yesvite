@@ -381,7 +381,6 @@ $(function () {
 
 
 function set_activity_html(selectedDates) {
-    set_activity_html(selectedDates);
     var sortedDates = [...selectedDates].sort();
     var startDate = moment(sortedDates[0]);
     var endDate = moment(
