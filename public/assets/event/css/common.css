@@ -354,7 +354,7 @@ ul.nav-tabs .nav-link:focus {
     background-color: #fff;
     color: #fff;
     transition: right 0.3s ease;
-    overflow-y: auto;
+    /* overflow-y: auto; */
     z-index: 1000;
 }
 
