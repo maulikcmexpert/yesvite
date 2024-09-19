@@ -812,10 +812,15 @@ function guest_counter(total_guest,max_guest){
     console.log(max_guest);
     
     var remainingCount = max_guest - total_guest;
+    if(remainingCount < 0){
+        $(".invite-left_d").text("Invites | 0 Left");
+    }else{
+        $(".invite-left_d").text("Invites | " + remainingCount + " Left");
 
-    $(".invite-left_d").text(
-        "Invites | " + remainingCount + " Left"
-    );
+    }
+    // $(".invite-left_d").text(
+    //     "Invites | " + remainingCount + " Left"
+    // );
     $("#event_guest_left_count").val(remainingCount);
 }
 
@@ -882,8 +887,12 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
                 // if(currentInviteCount >= 15){
                 //     $('.user_choice').prop('disabled',true);
                 // }
-                
-                $(".invite-left_d").text("Invites | " + remainingCount + " Left");
+                if(remainingCount < 0){
+                    $(".invite-left_d").text("Invites | 0 Left");
+                }else{
+                    $(".invite-left_d").text("Invites | " + remainingCount + " Left");
+
+                }
                 $("#event_guest_left_count").val(remainingCount);
             },
             error: function (xhr, status, error) {},
@@ -913,7 +922,12 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
                 var max_guest = 15;
                 var remainingCount = max_guest - total_guest;
 
-                $(".invite-left_d").text("Invites | " + remainingCount + " Left");
+                if(remainingCount < 0){
+                    $(".invite-left_d").text("Invites | 0 Left");
+                }else{
+                    $(".invite-left_d").text("Invites | " + remainingCount + " Left");
+
+                }
                 $("#event_guest_left_count").val(remainingCount);
                 console.log("User ID deleted successfully.");
             },
@@ -2777,7 +2791,14 @@ $(document).on("click", "#delete_invited_user", function () {
 
     $("#event_guest_count").text(re_total_guest + " Guests");
     $(".invite-count").text(re_total_guest);
-    $(".invite-left_d").text("Invites | " + re_total_remaining_count + " Left");
+    // $(".invite-left_d").text("Invites | " + re_total_remaining_count + " Left");
+    if(remainingCount < 0){
+        $(".invite-left_d").text("Invites | 0 Left");
+    }else{
+        $(".invite-left_d").text("Invites | " + re_total_remaining_count + " Left");
+
+    }
+
     $("#event_guest_left_count").val(re_total_remaining_count);
     delete_invited_user(userId);
 });
@@ -2799,7 +2820,13 @@ $(document).on("click", "#delete_invited_user_tel", function () {
 
     $("#event_guest_count").text(re_total_guest + " Guests");
     $(".invite-count").text(re_total_guest);
-    $(".invite-left_d").text("Invites | " + re_total_remaining_count + " Left");
+    if(remainingCount < 0){
+        $(".invite-left_d").text("Invites | 0 Left");
+    }else{
+        $(".invite-left_d").text("Invites | " + re_total_remaining_count + " Left");
+
+    }
+    // $(".invite-left_d").text("Invites | " + re_total_remaining_count + " Left");
     $("#event_guest_left_count").val(re_total_remaining_count);
 
 
