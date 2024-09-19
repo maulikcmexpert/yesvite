@@ -349,7 +349,7 @@ ul.nav-tabs .nav-link:focus {
     position: fixed;
     top: 0;
     right: -200%;
-    width: 100% !important;
+    width: 500px !important;
     height: 100%;
     background-color: #fff;
     color: #fff;
