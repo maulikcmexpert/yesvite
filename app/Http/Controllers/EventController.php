@@ -876,7 +876,7 @@ class EventController extends Controller
             ->where('id', '!=', $id)
             ->where(['is_user_phone_contact' => '0'])
             ->where('email_verified_at','!=',null)
-            ->where('app_user',1)
+            ->where('app_user','1')
             ->orderBy('firstname')
             ->limit($request->limit)
             ->skip($request->offset)
