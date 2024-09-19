@@ -3888,7 +3888,7 @@ function displayRecords(lim, off,type,search = null,) {
                     $("#YesviteUserAll").append(html);
                 }
         }else{
-            $("#groupUsers").append(html);
+            $("#groupUsers").html(html);
         }
         busy = false;
         setTimeout(function () {
