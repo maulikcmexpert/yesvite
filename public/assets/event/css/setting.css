@@ -922,6 +922,19 @@
     .add-limit h5 {
         font-size: 14px;
     }
+
+    .setting-content {
+        padding: 16px 16px 24px 16px;
+    }
+
+    .setting-content {
+        margin-bottom: 20px;
+    }
+
+    .cmn-btn {
+        font-size: 13px;
+        border-radius: 12px;
+    }
 }
 
 @media only screen and (max-width: 452px) {
