@@ -559,7 +559,12 @@ $(document).on('click','.create_event_with_plan',function(){
 
 });
 
-$(document).on("click", ".add_more_activity", function () {
+$(document).on("click", ".add_more_activity", function (e) {
+    var start_time = $('#ac-start-time').val();
+    if(start_time == null){
+        e.preventDefault();
+        return;
+    }
     $(this).parent().find('.accordion-button').addClass('accordian_open');
     $(this).prop("disabled", true);
 
