@@ -560,7 +560,7 @@
         </div>
     </div>
     <div class="new-event-btn">
-        <a href="#" class="cmn-btn thankyou_card" >Add Thankyou card</a>
+        <a href="#" class="cmn-btn thankyou_card thankyou_card_add_form">Add Thankyou card</a>
     </div>
 </div>
 </div>

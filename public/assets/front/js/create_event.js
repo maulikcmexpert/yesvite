@@ -4290,7 +4290,7 @@ $(document).on('click','.new_group',function () {
     toggleSidebar('sidebar_add_groups')
 })
 
-$(document).on('click','.thankyou_card',function () {
+$(document).on('click','.thankyou_card_add_form',function () {
     $('#thankyou_templatename').val('');
     $('#thankyou_when_to_send').val('');
     $('#message_for_thankyou').val('');
