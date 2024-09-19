@@ -10,7 +10,7 @@
 .guest-content {
     border: 1px solid var(--borderColor);
     border-radius: 16px;
-    padding: 16px 24px 70px 24px;
+    padding: 16px 24px 24px 24px;
     background: var(--white);
     height: 100%;
     position: relative;
@@ -435,6 +435,10 @@
 
     .guest-wrapper .invite-pro {
         display: flex;
+        bottom: 80px;
+        left: 50%;
+        transform: translateX(-50%);
+
     }
 
     /* .guest-users{
