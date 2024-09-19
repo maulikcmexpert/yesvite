@@ -239,7 +239,7 @@
                                         <div class="toggle-button-cover">
                                             <div class="button-cover">
                                                 <div class="button r" id="button-1">
-                                                    <input type="checkbox" id="gift_registry" onchange="savePage4Data()" class="checkbox general_setting_checkbox" />
+                                                    <input type="checkbox" id="gift_registry" class="checkbox general_setting_checkbox" />
                                                     <div class="knobs"></div>
                                                     <div class="layer"></div>
                                                 </div>

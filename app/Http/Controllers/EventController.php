@@ -1290,4 +1290,12 @@ class EventController extends Controller
         ->get();
         return response()->json(['html' => view('front.event.guest.group_search_list_toggle', compact('groups'))->render(), "status" => "1"]);
     }
+
+    public function delete_sessions(Request $request){
+        if(isset($request->delete_session) && $request->delete_session != ''){
+            Session::forget($request->delete_session);
+            Session::save();
+        }
+        return;
+    }
 }

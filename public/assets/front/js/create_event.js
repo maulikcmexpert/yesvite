@@ -697,11 +697,34 @@ $("#gift_registry").on("change", function () {
     // alert()
     if ($(this).is(":checked")) {
         // $(".hidersvp").hide();
+       
         $("#giftDiv").show();
     } else {
+        delete_session('gift_registry_data');
         $("#giftDiv").hide();
     }
+    savePage4Data();
 });
+
+function delete_session(session){
+    $.ajax({
+        url: base_url + "event/delete_sessions",
+        type: "POST",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        data: {delete_session:session},
+        success: function (response) {
+            console.log(response);
+            if(session == 'gift_registry_data'){
+                $('#registry_list').html('');
+            }
+        },
+        error: function (xhr, status, error) {
+            console.log("AJAX error: " + error);
+        },
+    });
+}
 
 $("#add_cohost").on("change", function () {
     // alert()
@@ -2586,6 +2609,7 @@ function savePage4Data() {
         eventData.gift_registry = "1";
         $(".add_gift_registry").show();
     } else {
+
         $(".add_gift_registry").hide();
         eventData.gift_registry = "0";
     }

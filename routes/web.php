@@ -157,6 +157,7 @@ Route::middleware('checkUserExist')->group(function () {
     Route::post('event/close_tip', [ControllersEventController::class, 'closeTip']);
     Route::post('event/group_search_ajax', [ControllersEventController::class, 'groupSearchAjax']);
     Route::post('event/group_toggle_search', [ControllersEventController::class, 'group_toggle_search']);
+    Route::post('event/delete_sessions', [ControllersEventController::class, 'delete_sessions']);
 });
 
 Route::get('access_token', [AuthController::class, 'handleGoogleCallback'])->name('access_token');
