@@ -1252,4 +1252,19 @@ class EventController extends Controller
         ->get();
         return response()->json(['html' => view('front.event.guest.group_list', compact('groups'))->render(), "status" => "1"]);
     }
+
+    public function group_toggle_search(Request $request){
+        $search_user = $request->search_name;
+        $id = Auth::guard('web')->user()->id;
+        $groups = Group::withCount('groupMembers')
+        ->orderByDesc('group_members_count')
+        ->where('user_id', $id)
+        ->when($search_user != '', function ($query) use ($search_user) {
+            $query->where(function ($q) use ($search_user) {
+                $q->where('name', 'LIKE', '%' . $search_user . '%');
+            });
+        })
+        ->get();
+        return response()->json(['html' => view('front.event.guest.list_group_member', ['groups' =>  $groups])->render(), "status" => "1"]);
+    }
 }
