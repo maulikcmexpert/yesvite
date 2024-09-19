@@ -264,6 +264,7 @@
 
 .guest-contact .guest-img img {
     width: 36px;
+    max-width: 36px;
     height: 36px;
     border-radius: 100%;
 }
@@ -477,6 +478,10 @@
 
     .guest-wrapper {
         height: 1000px;
+    }
+
+    .guest-content .user-contacts {
+        max-height: calc(100vh - 250px);
     }
 }
 
