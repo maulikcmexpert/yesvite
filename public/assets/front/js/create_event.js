@@ -4108,6 +4108,8 @@ $(document).on('keyup','#group_search_ajax',function () {
         },
     })
         .done(function (data) {
+            console.log(data.html);
+            
             if (data.html == " ") {
                 $("#loader").html("No more contacts found");
                 return;
