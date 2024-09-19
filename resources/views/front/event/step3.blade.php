@@ -405,9 +405,9 @@
                 </div>
 
                 <div class="user-contacts">
-                    <div class="users-data">
+                    {{-- <div class="users-data">
                         <div class="d-flex align-items-start">
-                            {{-- <div class="contact-img"> 
+                             <div class="contact-img"> 
                                 <img src="{{ asset('assets/event/image/user-img.svg') }}"
                                     alt="contact-img">
                             </div>
@@ -450,8 +450,8 @@
                                 <input class="form-check-input" type="checkbox"
                                     name="Guest RSVP’s">
                             </div>
-                        </div> --}}
-                    </div>
+                        </div> 
+                    </div> --}}
 
                 </div>
             </div>
