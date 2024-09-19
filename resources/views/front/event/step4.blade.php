@@ -589,7 +589,18 @@
             </div>
         </div>
         <div class="item-on" id="self_bring_quantity_toggle" style="display: none;">
-            <img src="{{asset('assets/event/image/user-img.svg')}}" alt="">
+            {{-- <img src="{{asset('assets/event/image/user-img.svg')}}" alt=""> --}}
+            @if ($user->profile != '')
+            <img src="{{ asset('storage/profile/' . $user->profile) }}" alt="user-img">
+            @else
+            @php
+            $firstInitial = !empty($user->firstname) ? strtoupper($user->firstname[0]) : '';
+            $lastInitial = !empty($user->lastname) ? strtoupper($user->lastname[0]) : '';
+            $initials = $firstInitial . $lastInitial;
+            $fontColor = 'fontcolor' . $firstInitial;
+            @endphp
+            <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
+            @endif
             <h5>{{$user->firstname.' '.$user->lastname}}</h5>
             <div class="qty-container ms-auto">
                 <button class=" self_bring_quantity" data-type="minus" type="button"><i class="fa fa-minus"></i></button>
