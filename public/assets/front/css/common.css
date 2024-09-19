@@ -864,7 +864,13 @@ ul.nav-tabs .nav-link:focus {
     display: none !important;
 }
 
-.new-latest-draf-wrp {}
+.new-latest-draf-wrp {
+    overflow: hidden;
+    overflow-y: scroll;
+    max-height: calc(100vh - 210px);
+}
+
+
 
 
 
@@ -948,6 +954,15 @@ ul.nav-tabs .nav-link:focus {
     .radio-wrapper .form-check .form-check-input {
         width: 20px !important;
         height: 20px !important;
+    }
+
+    #sidebar_create_event,
+    #sidebar_change_plan_create {
+        height: 70vh;
+    }
+
+    .new-latest-draf-wrp {
+        max-height: calc(100vh - 400px);
     }
 }
 
