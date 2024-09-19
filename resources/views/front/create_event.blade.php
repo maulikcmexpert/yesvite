@@ -1981,7 +1981,7 @@
     </div>
 
     <div class="new-event-btn">
-        <a href="#" class="cmn-btn new_group" onclick="toggleSidebar('sidebar_add_groups')">Add new
+        <a href="#" class="cmn-btn new_group" >Add new
             Group</a>
     </div>
 </div>
