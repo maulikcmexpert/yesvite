@@ -44,12 +44,12 @@
                 </div>
                 <div class="accordion-body-content limits-count" id="user-list-{{$category_item}}-{{$category_index}}">
                     {{-- <img src="./assets/image/user-img.svg" alt=""> --}}
-                    @if ($user->profile != '')
-                    <img src="{{ $user->profile }}" alt="user-img">
+                    @if ($profile != '')
+                    <img src="{{ $profile }}" alt="user-img">
                     @else
                     @php
-                    $firstInitial = !empty($user->firstname) ? strtoupper($user->firstname[0]) : '';
-                    $lastInitial = !empty($user->lastname) ? strtoupper($user->lastname[0]) : '';
+                    $firstInitial = !empty($firstname) ? strtoupper($firstname[0]) : '';
+                    $lastInitial = !empty($lastname) ? strtoupper($lastname[0]) : '';
                     $initials = $firstInitial . $lastInitial;
                     $fontColor = 'fontcolor' . $firstInitial;
                     @endphp
