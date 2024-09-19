@@ -691,7 +691,9 @@ $("#potluck").on("change", function () {
     } else {
        
         var category_count = $('#category_count').val();
-        if(category == '0'){
+        console.log(category);
+        
+        if(category == 0){
             $(".potluck").hide();
         }else{
             $("$delete_potluck_title").text('Potluck data will be deleted');
