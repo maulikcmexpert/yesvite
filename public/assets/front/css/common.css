@@ -954,7 +954,8 @@ ul.nav-tabs .nav-link:focus {
         height: 20px !important;
     }
 
-    #sidebar_create_event {
+    #sidebar_create_event,
+    #sidebar_change_plan_create {
         height: 70vh;
     }
 }
