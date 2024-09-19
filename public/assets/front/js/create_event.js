@@ -383,6 +383,7 @@ $("#schedule").on("change", function () {
     var eventDate = $("#event-date").val();
     var activities = {};
     eventData.activity = {};
+    var total_activities = 0;
     if (eventDate != "") {
         if ($(this).is(":checked")) {
             $(".add-activity-schedule").show();
