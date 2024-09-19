@@ -325,6 +325,7 @@
 .guest-content .user-contacts {
     position: relative;
     /* max-height: 280px; */
+    max-height: calc(100vh - 450px);
 }
 
 .guest-content .design-seting {
