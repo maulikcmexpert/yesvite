@@ -813,6 +813,12 @@ ul.cost-list li span {
     box-shadow: none !important;
 }
 
+.list_thankyou_card {
+    overflow: hidden;
+    overflow-y: scroll;
+    max-height: calc(100vh - 260px);
+}
+
 /* ======== Responsive ========= */
 
 @media only screen and (min-width: 1500px) and (max-width: 2600px) {

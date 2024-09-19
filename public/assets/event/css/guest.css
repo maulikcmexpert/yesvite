@@ -414,6 +414,10 @@
     max-width: calc(100vh - 100px);
 }
 
+#sidebar_add_co_host .alert-box {
+    margin-bottom: 10px;
+}
+
 /* ============ responsive ============ */
 @media only screen and (max-width:1800px) {
     .guest-wrapper {
@@ -567,7 +571,12 @@
     }
 
     .new-sidebar-group-wrp,
-    #sidebar_list_group_member {
+    #sidebar_list_group_member,
+    #sidebar_thankyou_card {
         height: 90vh;
+    }
+
+    .list_thankyou_card {
+        max-height: calc(100vh - 270px);
     }
 }
