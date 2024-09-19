@@ -4304,6 +4304,12 @@ $(document).on('click','.thankyou_card_add_form',function () {
     toggleSidebar('sidebar_add_thankyou_card');
 })
 
+$(document).on('click','.add_new_gift_registry',function () {
+    $('#recipient_name').val('');
+    $('#registry_link').val('');
+    toggleSidebar('sidebar_gift_registry_item')
+})
+
 
 $(document).on('keyup','#group_search_ajax',function () {
     var search_name = $(this).val();

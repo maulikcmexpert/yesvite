@@ -1025,8 +1025,7 @@
         </div>
     </div>
     <div class="new-event-btn">
-        <a href="#" class="cmn-btn add_new_gift_registry"
-            onclick="toggleSidebar('sidebar_gift_registry_item')">Add new gift registry</a>
+        <a href="#" class="cmn-btn add_new_gift_registry" >Add new gift registry</a>
     </div>
 </div>
 
