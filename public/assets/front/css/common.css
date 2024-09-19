@@ -959,7 +959,7 @@ ul.nav-tabs .nav-link:focus {
     }
 
     .new-latest-draf-wrp {
-        max-height: calc(100vh - 400px);
+        max-height: calc(100vh - 450px);
     }
 }
 
