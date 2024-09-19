@@ -639,7 +639,7 @@ class EventController extends Controller
             "itemdata" => $itemData,
             'user' => $name,
             'profile' => $user->profile,
-            'firstname  ' => $user->firstname,
+            'firstname' => $user->firstname,
             'lastname' => $user->lastname,
             'category' => $categoryName,
             'self_bring' => $selfBring,
@@ -647,7 +647,7 @@ class EventController extends Controller
             'category_index' => $category_index,
             'category_item' => --$category_item,
         ];
-        // dd($data);
+        
         // return view('front.event.potluck.potluckCategoryItem', $data);
 
         return response()->json(['view' => view('front.event.potluck.potluckCategoryItem', $data)->render(), 'qty' => $qty, 'total_item' => $total_item]);
