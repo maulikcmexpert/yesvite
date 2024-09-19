@@ -1,6 +1,6 @@
 @php
 $selected_user = session('user_ids');
-dd($selected_user);
+
 @endphp
 
 @foreach ($yesvite_user as $user)

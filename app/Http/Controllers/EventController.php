@@ -475,7 +475,6 @@ class EventController extends Controller
             });
             $userIds[] = $userEntry;
             session()->put('user_ids', $userIds);
-            dd(session('user_ids'));
             if (!empty($userExists)) {
                 // return response()->json(['success' => false, 'data' => $userEntry, 'is_duplicate' => 1]);
                 $data[] = ['userdata' => $userEntry, 'is_duplicate' => 1];
@@ -911,7 +910,8 @@ class EventController extends Controller
             // $yesviteUserDetail['prefer_by']  = $user->prefer_by;
             $yesvite_user[] = (object)$yesviteUserDetail;
         }
-
+        $selected_user = Session::get('user_ids');
+        dd($selected_user);
         return response()->json(view('front.event.guest.get_user', compact('yesvite_user', 'type'))->render());
     }
 
