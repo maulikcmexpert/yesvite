@@ -3571,6 +3571,8 @@ $(document).on("click", ".delete_thankyou_card", function () {
     });
 });
 
+
+
 $(document).on("click", ".edit_thankyou_card", function () {
     var id = $(this).data("id");
 
@@ -4286,6 +4288,13 @@ $(document).on('click','.open_addcategory',function () {
 $(document).on('click','.new_group',function () {
     $('#new_group_name').val('');
     toggleSidebar('sidebar_add_groups')
+})
+
+$(document).on('click','.thankyou_card',function () {
+    $('#thankyou_templatename').val('');
+    $('#thankyou_when_to_send').val('');
+    $('#message_for_thankyou').text('');
+    onclick="toggleSidebar('sidebar_add_thankyou_card')"
 })
 
 

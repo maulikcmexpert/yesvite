@@ -560,10 +560,7 @@
         </div>
     </div>
     <div class="new-event-btn">
-        <a href="#" class="cmn-btn thankyou_card" onclick="toggleSidebar('sidebar_add_thankyou_card')
-">Add
-            Thankyou
-            card</a>
+        <a href="#" class="cmn-btn thankyou_card" >Add Thankyou card</a>
     </div>
 </div>
 </div>
