@@ -1042,7 +1042,7 @@
                             stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                 </a>
-                <h5>Create Gift Registryt</h5>
+                <h5>Create Gift Registry</h5>
             </div>
 
             <button class="close-btn" onclick="toggleSidebar()">
