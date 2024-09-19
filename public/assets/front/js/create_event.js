@@ -4096,6 +4096,7 @@ $(document).on('click','.open_addcategory',function () {
 
 $(document).on('keyup','#group_search_ajax',function () {
     var search_name = $(this).val();
+    console.log(search_name);
     $.ajax({
         url: base_url + "event/group_search_ajax",
         type: "POST",
@@ -4108,14 +4109,12 @@ $(document).on('keyup','#group_search_ajax',function () {
         },
     })
         .done(function (data) {
-            console.log(data.html);
-            
             if (data.html == " ") {
                 $("#loader").html("No more contacts found");
                 return;
             }
             $("#loader").hide();
-            $(".group_search_list").html(data.html);
+            $(".group_search_list").html('');
         })
         .fail(function (jqXHR, ajaxOptions, thrownError) {
             alert("server not responding...");
