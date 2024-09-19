@@ -4447,7 +4447,7 @@ $(document).on('keyup','#group_toggle_search',function () {
 
 $(document).on('click','.listing-arrow',function(){
 
-console.log($(this).next().html());
+console.log($(this).parent().html());
 
 
 });
