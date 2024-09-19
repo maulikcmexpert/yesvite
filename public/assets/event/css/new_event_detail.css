@@ -791,6 +791,17 @@
     height: calc(100vh - 200px);
 } */
 
+.activity-schedule-wrp {
+    margin-bottom: 20px;
+}
+
+.supportive-div {
+    overflow: hidden;
+    overflow-y: scroll;
+    padding-bottom: 20px;
+    height: calc(100vh - 200px);
+}
+
 
 /* ======Responsiveness===== */
 
