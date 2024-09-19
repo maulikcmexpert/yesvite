@@ -790,9 +790,9 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
                     $(".inivted_user_list").append(response.view);
                     guest_counter(0,15);
                     $('input[name="email_invite[]"]').prop('disabled', false);
-                    if(currentInviteCount >= 15){
-                        $('.user_choice').prop('disabled',true);
-                    }
+                    // if(currentInviteCount >= 15){
+                    //     $('.user_choice').prop('disabled',true);
+                    // }
                     $("#loader").css('display','none');
                    
                 // }
