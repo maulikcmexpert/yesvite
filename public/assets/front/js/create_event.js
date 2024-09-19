@@ -380,23 +380,26 @@ $(function () {
 });
 
 $("#schedule").on("change", function () {
-    var event_date = $("#event-date").val();
+    var eventDate = $("#event-date").val();
     activities = '';
     eventData.activity = '';
-    if (event_date != "") {
+    if (eventDate != "") {
         if ($(this).is(":checked")) {
             $(".add-activity-schedule").show();
             // $(".ac-end-time").show();
-            if (event_date.includes(" To ")) {
-                let [start, end] = event_date.split(" To ");
-                selectedDates.clear();
-                selectedDates.add(moment(start).format("YYYY-MM-DD"));
-                selectedDates.add(moment(end).format("YYYY-MM-DD"));
+            let selectedDates = [];
+            if (eventDate.includes(" To ")) {
+                // Split and set start and end for a date range
+                let [start, end] = eventDate.split(" To ");
+                selectedDates = []; // Clear the selectedDates array
+                selectedDates.push(moment(start).format("YYYY-MM-DD"));
+                selectedDates.push(moment(end).format("YYYY-MM-DD"));
             } else {
-                let singleDate = event_date;
-                selectedDates.clear();
-                selectedDates.add(moment(singleDate).format("YYYY-MM-DD"));
-                selectedDates.add(moment(singleDate).format("YYYY-MM-DD"));
+                // For a single date, set both start and end to the same date
+                let singleDate = eventDate;
+                selectedDates = []; // Clear the selectedDates array
+                selectedDates.push(moment(singleDate).format("YYYY-MM-DD"));
+                selectedDates.push(moment(singleDate).format("YYYY-MM-DD"));
             }
 
             set_activity_html(selectedDates);
