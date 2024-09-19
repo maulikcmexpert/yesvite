@@ -563,7 +563,7 @@ $(document).on("click", ".add_more_activity", function (e) {
     var start_time = $('#ac-start-time').val();
     console.log(start_time);
     
-    if(start_time == null){
+    if(start_time == null || start_time == ""){
         e.preventDefault();
         return;
     }
