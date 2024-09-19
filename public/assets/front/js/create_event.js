@@ -361,6 +361,8 @@ $(function () {
                 eventDate = end.format("YYYY-MM-DD");
             }
             $("#event-date").val(eventDate);
+            
+            $("#event-date").val(eventDate).trigger('change');
 
             $(".activity_bar").children().not(".toggle-wrp").remove();
 
