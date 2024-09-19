@@ -274,7 +274,7 @@
             <div class="tab-pane fade" id="phone" role="tabpanel" aria-labelledby="phone-tab">
 
                 <!-- ======= guest-users mobile ======== -->
-                <div class="guest-contacts-wrp">
+                {{-- <div class="guest-contacts-wrp">
                     <div class="guest-contact">
                         <div class="guest-img">
                             <img src="./assets/image/user-img.svg" alt="guest-img">
@@ -357,7 +357,7 @@
                         </div>
                         <span class="all-contact">See all</h6>
                     </div>
-                </div>
+                </div> --}}
 
                 <div class="popular-list">
                     <div class="d-flex justify-content-between align-items-center w-100">
