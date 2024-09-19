@@ -18,7 +18,15 @@ $(".form-control").on("focusin", function () {
     $(this).next().addClass("floatingfocus");
 });
 
-$(".form-control").on("focusout", function () {
+// $(".form-control").on("focusout", function () {
+//     var text_val = $(this).val();
+//     if (text_val === "") {
+//         $(this).next().removeClass("floatingfocus");
+//     } else {
+//         $(this).next().addClass("floatingfocus");
+//     }
+// });
+$(".form-control").on("focusout change", function () {
     var text_val = $(this).val();
     if (text_val === "") {
         $(this).next().removeClass("floatingfocus");
