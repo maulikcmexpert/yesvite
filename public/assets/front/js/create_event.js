@@ -691,7 +691,7 @@ $("#potluck").on("change", function () {
     } else {
         $("#delete_potluck_category_id").val('all_potluck');
         $('#deleteModal_potluck').modal('show');
-        $(".potluck").hide();
+        
     }
 });
 
@@ -3094,6 +3094,7 @@ $(document).on("click", "#delete_potluck_category_btn", function () {
 
         success: function (response) {
             if(potluck_delete_id == 'all_potluck'){
+                $(".potluck").hide();
                 $('.category-main-dishesh').html('');
                 return;
             }
