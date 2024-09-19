@@ -3430,6 +3430,12 @@ $(document).on("click", ".add_gift_item_btn", function () {
             },
         });
         registry_item++;
+    }else{
+        $("#registry_link_error")
+            .css("display", "block")
+            .css("color", "red")
+            .text("Please add registry link");
+        return;
     }
 });
 
