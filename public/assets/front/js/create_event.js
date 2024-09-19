@@ -689,6 +689,8 @@ $("#potluck").on("change", function () {
     if ($(this).is(":checked")) {
         $(".potluck").show();
     } else {
+        $("#delete_potluck_category_id").val('all_potluck');
+        $('#deleteModal_potluck').modal('show');
         $(".potluck").hide();
     }
 });
@@ -3091,6 +3093,10 @@ $(document).on("click", "#delete_potluck_category_btn", function () {
         },
 
         success: function (response) {
+            if(potluck_delete_id == 'all_potluck'){
+                $('.category-main-dishesh').html('');
+                return;
+            }
             category--;
             items = items - response;
             // console.log(response);
@@ -3104,6 +3110,7 @@ $(document).on("click", "#delete_potluck_category_btn", function () {
         },
     });
 });
+
 $(document).on("change", "#self_bring", function () {
     if ($(this).is(":checked")) {
         $("#self_bring_quantity_toggle").show();
