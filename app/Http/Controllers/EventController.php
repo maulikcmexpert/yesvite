@@ -1265,6 +1265,6 @@ class EventController extends Controller
             });
         })
         ->get();
-        return response()->json(['html' => view('front.event.guest.list_group_member', ['groups' =>  $groups])->render(), "status" => "1"]);
+        return response()->json(['html' => view('front.event.guest.group_search_list_toggle', compact('groups'))->render(), "status" => "1"]);
     }
 }
