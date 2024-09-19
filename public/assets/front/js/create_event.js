@@ -1564,6 +1564,7 @@ function convertTimeToMinutes(timeStr) {
 let blurExecutedEndTime = false;
 
 $(document).on("blur", 'input[name="activity-end-time[]"]', function () {
+
     if (!blurExecutedEndTime) {
         blurExecutedEndTime = true;
 
@@ -1690,6 +1691,12 @@ $(document).on("blur", 'input[name="activity-start-time[]"]', function () {
 
         var newstartTime = convertTo24Hour($(this).val());
         var acStartTime = convertTo24Hour($("#ac-start-time").val());
+        var newEndTime = convertTo24Hour(
+            $(this)
+                .closest(".activity-main-wrp")
+                .find('input[name="activity-end-time[]"]')
+                .val()
+        );
 
         var firstActivityTime = $("#firstActivityTime").val();
         var firstStartTime = convertTo24Hour(
@@ -1733,6 +1740,35 @@ $(document).on("blur", 'input[name="activity-start-time[]"]', function () {
                 $("#start-time").val(newstartTime);
             }
         }
+
+        if (
+            newEndTime != "" &&
+            newStartTime != "" &&
+            convertTimeToMinutes(newEndTime) <=
+                convertTimeToMinutes(newStartTime)
+        ) {
+            var timeParts = newStartTime.split(":");
+            var startDate = new Date();
+            startDate.setHours(parseInt(timeParts[0]));
+            startDate.setMinutes(parseInt(timeParts[1]));
+            startDate.setMinutes(startDate.getMinutes() + 30);
+            var hours = startDate.getHours();
+            var minutes = startDate.getMinutes().toString().padStart(2, "0");
+
+            // Convert to 12-hour format
+            var period = hours >= 12 ? "PM" : "AM";
+            hours = hours % 12 || 12; // Convert hour '0' to '12' in 12-hour format
+            hours = hours.toString().padStart(2, "0");
+            var newEndTimeWith30Min = `${hours}:${minutes} ${period}`;
+            // $(this).val(newEndTimeWith30Min);
+            $(this)
+                .closest(".activity-main-wrp")
+                .find('input[name="activity-end-time[]"]')
+                .val(newEndTimeWith30Min);
+            // newEndTime = convertTo24Hour(newEndTimeWith30Min);
+        }
+        
+
 
         var lastActivityTime = $("#LastEndTime").val();
         var eventEndTime = convertTo24Hour($("#ac-end-time").val());
