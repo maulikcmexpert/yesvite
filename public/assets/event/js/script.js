@@ -102,7 +102,7 @@ $('.group-owl').owlCarousel({
   loop:true,
   margin:10,
   nav:true,
-  autoplay:true,
+  autoplay:true,  
   dots: false,
   center: true,
   items: 5,

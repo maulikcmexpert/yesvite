@@ -122,7 +122,6 @@
                             <div>
                                 <div class="owl-carousel owl-theme group-owl">
                                     @foreach ($groups as $group )
-
                                     <div class="item">
                                         <div class="group-card">
                                             <div>
