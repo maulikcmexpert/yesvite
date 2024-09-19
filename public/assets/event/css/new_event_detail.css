@@ -877,7 +877,7 @@
     .sidebar.new-event-sidebar {
         width: 100% !important;
         max-width: 100% !important;
-        top: 20px;
+        top: auto;
         border-top-left-radius: 20px;
         border-top-right-radius: 20px;
         bottom: 0;
