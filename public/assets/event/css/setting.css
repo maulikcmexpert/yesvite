@@ -893,6 +893,11 @@
     margin-right: 7px;
 }
 
+.accordion-button:not(.collapsed) {
+    background-color: transparent !important;
+    background: transparent !important;
+}
+
 
 /* ============ responsive ============ */
 @media only screen and (max-width:991px) {
