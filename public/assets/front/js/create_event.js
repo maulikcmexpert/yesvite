@@ -750,7 +750,7 @@ $(document).on("click", 'input[name="email_invite[]"]', function () {
     var userId = $(this).val();
     var isChecked = $(this).is(":checked");
     var email = $(this).data("email");
-    
+
     if (isChecked == true || isChecked == "true") {
         $('input[name="email_invite[]"]').attr('disabled', true);
         // $(this).prop("disabled", true);
@@ -764,6 +764,14 @@ $(document).on("click", 'input[name="email_invite[]"]', function () {
                 _token: $('meta[name="csrf-token"]').attr("content"),
             },
             success: function (response) {
+
+                var currentInviteCount = $('#currentInviteCount').val();
+                currentInviteCount++;
+                $('#currentInviteCount').val(currentInviteCount);
+
+                if(currentInviteCount >= 15){
+                    $('.user_choice').prop('disabled',true);
+                }
                 if (response.is_duplicate == 1) {
                     $("#user_tel-" + userId).remove();
                 }
@@ -811,6 +819,13 @@ function delete_invited_user(userId) {
             _token: $('meta[name="csrf-token"]').attr("content"), // Adding CSRF token
         },
         success: function (response) {
+            var currentInviteCount = $('#currentInviteCount').val();
+            currentInviteCount--;
+            $('#currentInviteCount').val(currentInviteCount);
+
+            if(currentInviteCount < 15){
+                $('.user_choice').prop('disabled',false);
+            }
             console.log("User ID deleted successfully.");
         },
         error: function (xhr, status, error) {
@@ -835,6 +850,14 @@ $(document).on("click", 'input[name="mobile[]"]', function () {
                 _token: $('meta[name="csrf-token"]').attr("content"), // Adding CSRF token
             },
             success: function (response) {
+
+                var currentInviteCount = $('#currentInviteCount').val();
+                currentInviteCount++;
+                $('#currentInviteCount').val(currentInviteCount);
+
+                if(currentInviteCount >= 15){
+                    $('.user_choice').prop('disabled',true);
+                }
                 if (response.is_duplicate == 1) {
                     $("#user-" + userId).remove();
                 }
@@ -861,6 +884,14 @@ $(document).on("click", 'input[name="mobile[]"]', function () {
                 _token: $('meta[name="csrf-token"]').attr("content"), // Adding CSRF token
             },
             success: function (response) {
+                var currentInviteCount = $('#currentInviteCount').val();
+                currentInviteCount--;
+                $('#currentInviteCount').val(currentInviteCount);
+
+                if(currentInviteCount < 15){
+                    $('.user_choice').prop('disabled',false);
+                }
+
                 $('#user_tel-'+userId).remove();
                 total_guest = $(".users-data.invited_user").length;
                 $("#event_guest_count").text(total_guest + " Guests");
