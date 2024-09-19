@@ -1,3 +1,9 @@
+let eventData = {};
+var total_activities = 0;
+var category = 0;
+var items = 0;
+var activities = {};
+
 $(document).ready(function () {
     if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
         //  alert(design);
@@ -342,6 +348,9 @@ $(function () {
         },
         
         function (start, end, label) {
+            console.log(start);
+            console.log(end);
+            
             selectedDates.clear();
             selectedDates.add(start.format("YYYY-MM-DD"));
             selectedDates.add(end.format("YYYY-MM-DD"));
@@ -368,7 +377,7 @@ $(function () {
                 );
                 var i = 0;
                 // Loop through the date range, including startDate and endDate
-
+                // activity_html_set(startDate,endDate,dateID,sortedDates);
                 while (startDate <= endDate) {
                     var dateID = startDate.format("YYYYMMDD");
                     if (i == 0) {
@@ -479,10 +488,7 @@ $(function () {
    
 });
 
-let eventData = {};
-var total_activities = 0;
-var category = 0;
-var items = 0;
+
 
 $(document).on("click", ".delete_activity", function () {
     var id = $(this).data("id");
@@ -617,6 +623,8 @@ $("#rsvp_by_date").on("change", function () {
 
 $("#schedule").on("change", function () {
     var event_date = $("#event-date").val();
+    activities = '';
+    eventData.activity = '';
     if (event_date != "") {
         if ($(this).is(":checked")) {
             $(".add-activity-schedule").show();
@@ -626,6 +634,7 @@ $("#schedule").on("change", function () {
             // $(".ac-end-time").hide();
         }
     } else {
+        
         $("#schedule").prop("checked", false);
         toastr.error("please select event date.");
     }
@@ -1913,7 +1922,7 @@ function convertTo12Hour(time) {
     return `${hours}:${minutes} ${modifier}`;
 }
 
-var activities = {};
+
 $(document).on("click", "#save_activity_schedule", function () {
     var start_time = $("#ac-start-time").val();
     var end_time = $("#ac-end-time").val();
