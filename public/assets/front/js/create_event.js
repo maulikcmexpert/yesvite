@@ -379,9 +379,40 @@ $(function () {
    
 });
 
+$("#schedule").on("change", function () {
+    var event_date = $("#event-date").val();
+    activities = '';
+    eventData.activity = '';
+    if (event_date != "") {
+        if ($(this).is(":checked")) {
+            $(".add-activity-schedule").show();
+            // $(".ac-end-time").show();
+            if (event_date.includes(" To ")) {
+                let [start, end] = event_date.split(" To ");
+                selectedDates.clear();
+                selectedDates.add(moment(start).format("YYYY-MM-DD"));
+                selectedDates.add(moment(end).format("YYYY-MM-DD"));
+            } else {
+                let singleDate = event_date;
+                selectedDates.clear();
+                selectedDates.add(moment(singleDate).format("YYYY-MM-DD"));
+                selectedDates.add(moment(singleDate).format("YYYY-MM-DD"));
+            }
+
+            set_activity_html(selectedDates);
+        } else {
+            $(".add-activity-schedule").hide();
+            // $(".ac-end-time").hide();
+        }
+    } else {
+        
+        $("#schedule").prop("checked", false);
+        toastr.error("please select event date.");
+    }
+});
+
 
 function set_activity_html(selectedDates) {
-    set_activity_html(selectedDates);
     var sortedDates = [...selectedDates].sort();
     var startDate = moment(sortedDates[0]);
     var endDate = moment(
@@ -625,24 +656,7 @@ $("#rsvp_by_date").on("change", function () {
     }
 });
 
-$("#schedule").on("change", function () {
-    var event_date = $("#event-date").val();
-    activities = '';
-    eventData.activity = '';
-    if (event_date != "") {
-        if ($(this).is(":checked")) {
-            $(".add-activity-schedule").show();
-            // $(".ac-end-time").show();
-        } else {
-            $(".add-activity-schedule").hide();
-            // $(".ac-end-time").hide();
-        }
-    } else {
-        
-        $("#schedule").prop("checked", false);
-        toastr.error("please select event date.");
-    }
-});
+
 
 $("#allow_for_1_more").on("change", function () {
     // alert()
