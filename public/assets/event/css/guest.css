@@ -415,7 +415,7 @@
 
 @media only screen and (max-width:1024px) {
     .guest-wrapper {
-        max-width: 350px;
+        max-width: 35 0px;
     }
 }
 
@@ -473,6 +473,10 @@
 
     .guest-wrapper {
         margin-bottom: 100px;
+    }
+
+    .guest-users {
+        display: none;
     }
 }
 
