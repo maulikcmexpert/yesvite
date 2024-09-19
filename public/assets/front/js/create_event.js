@@ -470,7 +470,7 @@ function set_activity_html(selectedDates) {
                                 <div>Activities <span class="total_activity-${dateID}">(0)</span></div>
                                 <i class="fa-solid fa-angle-down"></i>
                             </button>
-                            <div class="accordion-button-icons add_more_activity" data-id="${dateID}">
+                            <div class="accordion-button-icons add_more_activity" data-activity="add_activity_${i}" data-id="${dateID}">
                                 <i class="fa-solid fa-circle-plus"></i>
                             </div>
                         </div>
@@ -564,9 +564,9 @@ $(document).on('click','.create_event_with_plan',function(){
 
 $(document).on("click", ".add_more_activity", function (e) {
     var start_time = $('#ac-start-time').val();
-    console.log(start_time);
-    
-    if(start_time == null || start_time == ""){
+    var firstActivity = $(this).data('activity');
+
+    if((start_time == null || start_time == "") && firstActivity == 'add_activity_1' ){
         e.preventDefault();
         return;
     }
