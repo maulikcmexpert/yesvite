@@ -274,7 +274,7 @@
             <div class="tab-pane fade" id="phone" role="tabpanel" aria-labelledby="phone-tab">
 
                 <!-- ======= guest-users mobile ======== -->
-                {{-- <div class="guest-contacts-wrp">
+                <div class="guest-contacts-wrp">
                     <div class="guest-contact">
                         <div class="guest-img">
                             <img src="./assets/image/user-img.svg" alt="guest-img">
@@ -357,7 +357,7 @@
                         </div>
                         <span class="all-contact">See all</h6>
                     </div>
-                </div> --}}
+                </div>
 
                 <div class="popular-list">
                     <div class="d-flex justify-content-between align-items-center w-100">
@@ -370,22 +370,20 @@
                 <div>
                     <div class="owl-carousel owl-theme group-owl">
                         <div class="item">
+                        @foreach ($groups as $group )
+
                             <div class="group-card">
                                 <div>
-                                    <h4>Summer BBQ’s</h4>
-                                    <p>10 Guests</p>
+                                    <h4>{{$group->name}}</h4>
+                                    <p>{{$group->group_members_count}} Guests</p>
                                 </div>
                                 <span class="ms-auto">
-                                    <svg width="16" height="17" viewBox="0 0 16 17"
-                                        fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M5.93994 13.7797L10.2866 9.43306C10.7999 8.91973 10.7999 8.07973 10.2866 7.56639L5.93994 3.21973"
-                                            stroke="#E2E8F0" stroke-width="1.5"
-                                            stroke-miterlimit="10" stroke-linecap="round"
-                                            stroke-linejoin="round" />
+                                    <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M5.93994 13.7797L10.2866 9.43306C10.7999 8.91973 10.7999 8.07973 10.2866 7.56639L5.93994 3.21973" stroke="#E2E8F0" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
                                     </svg>
                                 </span>
                             </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -413,7 +411,7 @@
                                 <img src="{{ asset('assets/event/image/user-img.svg') }}"
                                     alt="contact-img">
                             </div>
-                            <div class="text-start">
+                            {{-- <div class="text-start">
                                 <h5>Silvia Alegra</h5>
                                 <div>
                                     <a href="mailto:silvia@gmail.com"><svg class="me-1"
@@ -441,7 +439,7 @@
                                         </svg>
                                         1-800-5587</a>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="d-flex flex-column">
                             <div class="right-note">
