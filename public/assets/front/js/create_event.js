@@ -561,6 +561,8 @@ $(document).on('click','.create_event_with_plan',function(){
 
 $(document).on("click", ".add_more_activity", function (e) {
     var start_time = $('#ac-start-time').val();
+    console.log(start_time);
+    
     if(start_time == null){
         e.preventDefault();
         return;
