@@ -4095,6 +4095,12 @@ $(document).on('click','.open_addcategory',function () {
     $('#category_quantity').val('1');
 })
 
+$(document).on('click','.new_group',function () {
+    $('#new_group_name').val('');
+    toggleSidebar('sidebar_add_groups')
+})
+
+
 $(document).on('keyup','#group_search_ajax',function () {
     var search_name = $(this).val();
     console.log(search_name);
