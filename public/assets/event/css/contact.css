@@ -1,4 +1,3 @@
-
 /* .header-wrap{
     display: flex;
     justify-content: space-between;
@@ -12,12 +11,12 @@
 } */
 
 
-.contact-details{
+.contact-details {
     padding: 32px 0;
     border-top: 1px solid var(--borderColor);
 }
 
-.contact-user{
+.contact-user {
     border: 1px solid var(--borderColor);
     border-radius: 20px;
     -webkit-border-radius: 20px;
@@ -28,7 +27,7 @@
     text-align: center;
 }
 
-.contact-user .user{
+.contact-user .user {
     width: 100%;
     height: 60px;
     max-width: 60px;
@@ -37,7 +36,7 @@
 
 
 
-.contact-user .badge{
+.contact-user .badge {
     border: 3px solid #ffffff;
     width: 16px;
     height: 16px;
@@ -55,7 +54,7 @@
     -o-border-radius: 100px;
 }
 
-.contact-user span.active{
+.contact-user span.active {
     width: 10px;
     height: 10px;
     background-color: #34C05C;
@@ -69,24 +68,24 @@
     -o-border-radius: 100px;
 }
 
-.user-name{
-   margin: 16px 0;
+.user-name {
+    margin: 16px 0;
 }
 
-.user-name h3{
+.user-name h3 {
     font-size: 18px;
     font-weight: 600;
     margin-right: 6px;
     margin-bottom: 0;
 }
 
-.user-name p{
+.user-name p {
     font-size: 12px;
     font-weight: 500;
     color: #23AA26;
 }
 
-.user-name .d-flex span{
+.user-name .d-flex span {
     padding: 5px 8px;
     border-radius: 100px;
     -webkit-border-radius: 100px;
@@ -101,12 +100,12 @@
 }
 
 
-ul.nav .nav-link:hover{
+ul.nav .nav-link:hover {
     border: none !important;
 }
 
-.user-gallery{
-   display: flex;
+.user-gallery {
+    display: flex;
     align-items: center;
     justify-content: space-between;
     margin: 20px 0;
@@ -115,18 +114,18 @@ ul.nav .nav-link:hover{
     border-bottom: 1px solid var(--tabBorder);
 }
 
-.user-gallery div{
+.user-gallery div {
     width: 33.33%;
     text-align: center;
 }
 
-.user-gallery h4{
-  font-size: 18px;
-  margin-bottom: 10px;
-  font-weight: 700;
+.user-gallery h4 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    font-weight: 700;
 }
 
-.user-location{
+.user-location {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -134,17 +133,17 @@ ul.nav .nav-link:hover{
 }
 
 .user-location a,
-.user-location span{
+.user-location span {
     font-size: 12px;
     color: var(--lightColor);
     font-weight: 500;
 }
 
-.user-location div:first-child{
+.user-location div:first-child {
     position: relative;
 }
 
-.user-location div:first-child::after{
+.user-location div:first-child::after {
     content: '';
     position: absolute;
     width: 2px;
@@ -154,7 +153,7 @@ ul.nav .nav-link:hover{
     background-color: var(--lightColor);
 }
 
-.switch-ac{
+.switch-ac {
     border: 1px solid var(--borderColor);
     padding: 11px 0;
     text-align: center;
@@ -167,26 +166,26 @@ ul.nav .nav-link:hover{
     margin-top: 16px;
 }
 
-.switch-ac span{
+.switch-ac span {
     color: var(--secondryColor);
     font-size: 12px;
     font-weight: 600;
 }
 
-.user-account{
+.user-account {
     margin-bottom: 20px;
     padding-left: 0;
 }
 
-.user-account li{
+.user-account li {
     margin-bottom: 13px;
 }
 
-.user-account li:last-child{
+.user-account li:last-child {
     margin-bottom: 0;
 }
 
-.user-account a{
+.user-account a {
     padding: 12px;
     transition: 0.5s;
     -webkit-transition: 0.5s;
@@ -196,7 +195,7 @@ ul.nav .nav-link:hover{
     position: relative;
 }
 
-.user-account a::after{
+.user-account a::after {
     font-family: "Font Awesome 5 Free";
     content: "\f054";
     display: inline-block;
@@ -219,7 +218,7 @@ ul.nav .nav-link:hover{
 }
 
 
-.user-account a:hover{
+.user-account a:hover {
     background-color: var(--primaryColor);
     border-radius: 16px;
     -webkit-border-radius: 16px;
@@ -228,7 +227,7 @@ ul.nav .nav-link:hover{
     -o-border-radius: 16px;
 }
 
-.user-account a.active{
+.user-account a.active {
     background-color: var(--primaryColor);
     border-radius: 16px;
     -webkit-border-radius: 16px;
@@ -237,11 +236,11 @@ ul.nav .nav-link:hover{
     -o-border-radius: 16px;
 }
 
-.user-account span{
-  margin-right: 12px;
+.user-account span {
+    margin-right: 12px;
 }
 
-.user-account h5{
+.user-account h5 {
     font-size: 16px;
     color: var(--secondryColor);
     font-weight: 500;
@@ -249,27 +248,23 @@ ul.nav .nav-link:hover{
 }
 
 .user-account a.active svg path,
-.user-account a:hover svg path
-{
+.user-account a:hover svg path {
     fill: #fff;
 }
 
 .user-account a.active h5,
-.user-account a:hover h5
-{
+.user-account a:hover h5 {
     color: #fff;
 }
 
 .user-account a.active::after,
-.user-account a:hover::after
-{
+.user-account a:hover::after {
     color: #fff;
 }
 
 
 .Logout-btn,
-.support-btn
-{
+.support-btn {
     padding: 16px 10px;
     border: 1px solid var(--borderColor);
     border-radius: 10px;
@@ -288,53 +283,53 @@ ul.nav .nav-link:hover{
     -o-transition: 0.5s;
 }
 
-.support-btn{
+.support-btn {
     margin-right: 15px;
 }
 
 .Logout-btn:hover,
-.support-btn:hover{
-   background-color: var(--primaryColor);
-   color: #fff;
+.support-btn:hover {
+    background-color: var(--primaryColor);
+    color: #fff;
 }
 
-.Logout-btn:hover path, 
-.support-btn:hover path{
+.Logout-btn:hover path,
+.support-btn:hover path {
     stroke: #fff;
 }
 
-.breadcrumb-nav .breadcrumb-item+.breadcrumb-item::before{
+.breadcrumb-nav .breadcrumb-item+.breadcrumb-item::before {
     font-family: "Font Awesome 5 Free";
-   content: "\f054";
-   display: inline-block;
-   padding-right: 3px;
-   vertical-align: middle;
-   font-weight: 900;
-   color: var(--iconColor);
-   font-size: 10px;
-   margin-left: 8px;
+    content: "\f054";
+    display: inline-block;
+    padding-right: 3px;
+    vertical-align: middle;
+    font-weight: 900;
+    color: var(--iconColor);
+    font-size: 10px;
+    margin-left: 8px;
     margin-right: 8px;
 }
 
-.breadcrumb-nav .breadcrumb-item{
+.breadcrumb-nav .breadcrumb-item {
     display: flex;
     align-items: center;
     padding: 0 !important;
 }
 
-.breadcrumb-nav .breadcrumb-item a{
+.breadcrumb-nav .breadcrumb-item a {
     font-size: 14px;
     color: var(--breadcrumbColor);
     font-weight: 500;
 }
 
-.breadcrumb-nav .breadcrumb-item.active{
+.breadcrumb-nav .breadcrumb-item.active {
     font-size: 14px;
     color: var(--secondryColor);
     font-weight: 500;
 }
 
-.contact-title{
+.contact-title {
     margin: 16px 0;
     display: flex;
     align-items: center;
@@ -342,14 +337,14 @@ ul.nav .nav-link:hover{
     justify-content: space-between;
 }
 
-.contact-title h3{
+.contact-title h3 {
     font-size: 24px;
     font-weight: 700;
     color: var(--titleColor);
     margin-bottom: 0;
 }
 
-.contact-title a{
+.contact-title a {
     font-weight: 600;
     border-radius: 16px;
     -webkit-border-radius: 16px;
@@ -358,23 +353,23 @@ ul.nav .nav-link:hover{
     -o-border-radius: 16px;
 }
 
-.contact-tab .nav-tabs .nav-item{
+.contact-tab .nav-tabs .nav-item {
     width: 33.33%;
 }
 
-input[type="search"]{
+input[type="search"] {
     height: 48px !important;
     padding-left: 20px;
     width: 100% !important;
     outline: 0;
 }
 
-input[type="search"]::placeholder{
+input[type="search"]::placeholder {
     color: var(--searchColor) !important;
     font-size: 14px;
 }
 
-input[type="search"] ~ span{
+input[type="search"]~span {
     position: absolute;
     right: 35px;
     top: 50%;
@@ -392,28 +387,28 @@ input[type="search"]::-webkit-search-cancel-button {
     display: none;
 }
 
-input[type="search"]:focus{
+input[type="search"]:focus {
     border: 1px solid var(--primaryColor) !important;
 }
 
-.popular-list h5{
+.popular-list h5 {
     color: var(--secondryColor);
     font-size: 16px;
     font-weight: 500;
     margin-bottom: 0;
 }
 
-.popular-list div a{
+.popular-list div a {
     font-size: 14px;
     color: var(--lightColor);
 }
 
-.popular-list .listing{
+.popular-list .listing {
     padding: 0;
     margin-top: 16px;
 }
 
-ul.listing li{
+ul.listing li {
     border: 1px solid var(--borderColor);
     border-radius: 16px;
     -webkit-border-radius: 16px;
@@ -428,7 +423,7 @@ ul.listing li{
     position: relative;
 }
 
-ul.listing li:after{
+ul.listing li:after {
     font-family: "Font Awesome 5 Free";
     content: "\f054";
     display: inline-block;
@@ -451,11 +446,11 @@ ul.listing li:after{
 }
 
 
-ul.listing li:last-child{
+ul.listing li:last-child {
     margin-bottom: 0;
 }
 
-ul.listing li h6{
+ul.listing li h6 {
     font-size: 14px;
     font-weight: 600;
     line-height: 21px;
@@ -463,27 +458,27 @@ ul.listing li h6{
     margin-bottom: 0;
 }
 
-ul.listing li span{
+ul.listing li span {
     font-size: 12px;
     color: var(--lightColor);
 }
 
-#myTabContent .position-relative{
+#myTabContent .position-relative {
     margin: 20px 0;
 }
 
-.user-contacts{
-    max-height: 430px;
+.user-contacts {
+    /* max-height: 430px; */
     overflow-y: scroll;
 }
 
-.users-data .contact-img{
+.users-data .contact-img {
     width: 36px;
     height: 36px;
     margin-right: 10px;
 }
 
-.users-data .contact-img img{
+.users-data .contact-img img {
     border-radius: 100%;
     -webkit-border-radius: 100%;
     -moz-border-radius: 100%;
@@ -491,7 +486,7 @@ ul.listing li span{
     -o-border-radius: 100%;
 }
 
-.users-data{
+.users-data {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -499,11 +494,11 @@ ul.listing li span{
     border-bottom: 1px solid var(--borderColor);
 }
 
-.users-data:last-child{
+.users-data:last-child {
     border-bottom: none;
 }
 
-.users-data h5{
+.users-data h5 {
     font-size: 14px;
     font-weight: 700;
     color: var(--contactTitle);
@@ -511,7 +506,7 @@ ul.listing li span{
     line-height: 26px;
 }
 
-.users-data a{
+.users-data a {
     font-size: 12px;
     color: var(--lightColor);
     margin-bottom: 5px;
@@ -519,7 +514,7 @@ ul.listing li span{
 }
 
 
-.edit-contact{
+.edit-contact {
     border: 1px solid var(--borderColor) !important;
     padding: 10px 24px;
     border-radius: 10px;
@@ -533,14 +528,13 @@ ul.listing li span{
 }
 
 #myModal .login-form-wrap,
-#myModal1 .login-form-wrap
-{
+#myModal1 .login-form-wrap {
     border: none;
     padding: 0;
     max-width: 100%;
 }
 
-.save-btn{
+.save-btn {
     border-radius: 10px;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
@@ -553,11 +547,11 @@ ul.listing li span{
 
 
 /* ====== model ======== */
-#myModal{
+#myModal {
     overflow: hidden;
 }
 
-.modal-dialog{
+.modal-dialog {
     max-width: 600px;
     width: 100%;
     height: 100%;
@@ -566,7 +560,7 @@ ul.listing li span{
     justify-content: center;
 }
 
-.modal-content{
+.modal-content {
     border-radius: 20px;
     -webkit-border-radius: 20px;
     -moz-border-radius: 20px;
@@ -574,19 +568,19 @@ ul.listing li span{
     -o-border-radius: 20px;
 }
 
-.modal-header{
+.modal-header {
     border-bottom: none;
     padding: 24px 24px 0;
 }
 
-.modal-header h4{
+.modal-header h4 {
     color: var(--titleColor);
     font-size: 20px;
     font-weight: 700;
 }
 
 
-.contact-title .delete-btn{
+.contact-title .delete-btn {
     padding: 16px 34px;
     border: 1px solid var(--borderColor);
     color: var(--secondryColor);
@@ -601,36 +595,36 @@ ul.listing li span{
 
 
 /* ======= Responsive ======= */
-@media only screen and (max-width:768px){
-    .contact-user ul.nav{
+@media only screen and (max-width:768px) {
+    .contact-user ul.nav {
         margin: 0 auto;
     }
 
-    .user-name h3{
+    .user-name h3 {
         font-size: 16px;
     }
 
-    .contact-title h3{
+    .contact-title h3 {
         font-size: 20px;
     }
 
-    .contact-title .delete-btn{
+    .contact-title .delete-btn {
         padding: 10px 8px;
     }
 
- 
 
-    .contact-details{
+
+    .contact-details {
         padding: 24px 0;
     }
 
-    .popular-list{
+    .popular-list {
         display: none;
     }
 }
 
-@media only screen and (max-width:575px){
-    .contact-user{
+@media only screen and (max-width:575px) {
+    .contact-user {
         padding: 10px 0;
         border: none;
     }
@@ -639,23 +633,23 @@ ul.listing li span{
         padding: 8px 17px;
     }
 
-    .contact-tab ul.nav .nav-link{
+    .contact-tab ul.nav .nav-link {
         font-size: 12px;
     }
 
-    .edit-contact{
+    .edit-contact {
         padding: 10px 20px;
     }
 
-    
+
 }
 
-@media only screen and (max-width:360px){
+@media only screen and (max-width:360px) {
     .contact-tab ul.nav .nav-link.active {
         padding: 8px 9px;
     }
 
-    .contact-title .cmn-btn{
+    .contact-title .cmn-btn {
         width: 100%;
         display: block;
         max-width: 100%;
