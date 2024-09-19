@@ -705,8 +705,9 @@
                 <div class="invite-left">
                     <h6 class="invite-count">0</h6>
                     {{-- <p id="invite-left"><strong>0</strong>Left</p> --}}
-                    <input type="hidden" id="event_guest_left_count" value="1" />
+                    <input type="hidden" id="event_guest_left_count" />
                     <p class="invite-left_d"><strong>Invites | 15</strong> Left</p>
+                    <input type="hidden" id="currentInviteCount" value="0"> 
                 </div>
                 <div class="invite-right">
                     <span><strong>15</strong>Guests or less</span>
