@@ -691,8 +691,11 @@ $("#potluck").on("change", function () {
     } else {
         $("#delete_potluck_category_id").val('all_potluck');
         $('#deleteModal_potluck').modal('show');
-        
     }
+});
+
+$(document).on("click", ".potluck_cancel", function () {
+    $('#potluck').prop('checked',true);
 });
 
 $("#gift_registry").on("change", function () {

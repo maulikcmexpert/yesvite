@@ -538,7 +538,7 @@
             </div>
             <div class="modal-footer">
                 <input type="hidden" id="delete_potluck_category_id" name="delete_potluck_category_id">
-                <button type="button" class="cmn-btn cancel-btn"
+                <button type="button" class="cmn-btn cancel-btn potluck_cancel"
                     data-bs-dismiss="modal" data-bs-dismiss="modal">Cancel</button>
                 <button type="button" class="cmn-btn " id="delete_potluck_category_btn"
                     data-bs-dismiss="modal">Continue</button>
