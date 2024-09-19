@@ -2820,7 +2820,7 @@ $(document).on("click", "#delete_invited_user_tel", function () {
 
     $("#event_guest_count").text(re_total_guest + " Guests");
     $(".invite-count").text(re_total_guest);
-    if(remainingCount < 0){
+    if(re_total_remaining_count < 0){
         $(".invite-left_d").text("Invites | 0 Left");
     }else{
         $(".invite-left_d").text("Invites | " + re_total_remaining_count + " Left");
