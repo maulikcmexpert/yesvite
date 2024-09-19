@@ -689,16 +689,15 @@ class EventController extends Controller
         $category_item = 0;
         if($delete_potluck_id == 'all_potluck'){
             Session::forget('category');
-
         }else{
-            $category = session()->get('category');
+            $category = Session::get('category');
             if(isset($category[$delete_potluck_id]['item'])){
                 $category_item = count($category[$delete_potluck_id]['item']);
             }
             if (isset($category[$delete_potluck_id])) {
                 unset($category[$delete_potluck_id]);
             }
-            session()->put('category', $category);
+            Session::put('category', $category);
         }
         Session::save();
         // $event_data_display = Session::get('event_date_display');
