@@ -368,7 +368,7 @@
 </div>
 <div id="sidebar_activity_schedule_overlay" class="overlay" onclick="toggleSidebar()"></div>
 <div id="sidebar_activity_schedule" class="sidebar new-event-sidebar" style="">
-    <div class="sidebar-content activity_bar">
+    <div class="sidebar-content">
         <!-- Sidebar content -->
         <div class="d-flex align-items-center justify-content-between toggle-wrp new-event-sidebar-head">
             <h5>Activity Schedule</h5>
@@ -384,7 +384,7 @@
             <input type="hidden" id="firstActivityTime" value="">
         </div>
         <!-- Add your sidebar content here -->
-        <div class="supportive-div">
+        <div class="supportive-div activity_bar">
             <div class="activity-schedule-wrp">
                 <div class="activity-schedule-head">
                     <h3>Friday - March 4, 2024</h3>

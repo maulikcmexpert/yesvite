@@ -2820,7 +2820,7 @@ function toggleSidebar(id = null) {
 }
 
 $(document).on("change", "input[name='email_invite[]']", function () {
-    // enforceCheckboxLimit();
+    enforceCheckboxLimit();
     if (!$(this).is(":checked")) {
         var check = $(this).data("id");
         $("#" + check).remove();
@@ -2838,7 +2838,7 @@ $(document).on("change", "input[name='email_invite[]']", function () {
 });
 
 $(document).on("change", "input[name='mobile[]']", function () {
-    // enforceCheckboxLimit();
+    enforceCheckboxLimit();
     if (!$(this).is(":checked")) {
         var check = $(this).data("id");
         $("#" + check).remove();

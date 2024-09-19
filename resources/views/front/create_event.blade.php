@@ -1981,7 +1981,7 @@
     </div>
 
     <div class="new-event-btn">
-        <a href="#" class="cmn-btn new_group" >Add new
+        <a href="#" class="cmn-btn new_group">Add new
             Group</a>
     </div>
 </div>
@@ -2004,7 +2004,7 @@
             </button>
         </div>
         <div class="position-relative">
-            <input type="search" placeholder="Search name" class="form-control" >
+            <input type="search" placeholder="Search name" class="form-control">
             <span>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
