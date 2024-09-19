@@ -432,6 +432,14 @@
     padding: 0px !important;
 }
 
+
+.activity-schedule-inner .accordion-item {}
+
+
+.activity-schedule-inner .accordion-button:not(.collapsed) .fa-angle-down {
+    transform: rotateZ(-180deg);
+}
+
 .activity-schedule-inner .accordion-header {
     position: relative;
     z-index: 2;
