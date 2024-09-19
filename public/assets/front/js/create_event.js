@@ -3354,6 +3354,17 @@ $(document).on("click", ".delete-self-bring", function () {
     var categoryIndexKey = $(this).data("categoryindex");
     var itemquantity = $(this).data("itemquantity");
     $(this).parent().parent().hide();
+    var self_bring_quantity =  $(this)
+        .parent()
+        .parent()
+        .find(".qty-container")
+        .children(".input-qty")
+        .val();
+
+    var total_category_count = parseInt($('.total-self-bring-'+categoryIndexKey).text());
+
+    total_category_count = total_category_count - parseInt(self_bring_quantity);
+    $('.total-self-bring-'+categoryIndexKey).text(total_category_count);
     $(this)
         .parent()
         .parent()
