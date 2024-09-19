@@ -424,6 +424,12 @@
     max-height: calc(100vh - 340px);
 }
 
+#sidebar_gift_registry #registry_list {
+    overflow: hidden;
+    overflow-y: scroll;
+    max-height: calc(100vh - 210px);
+}
+
 /* ============ responsive ============ */
 @media only screen and (max-width:1800px) {
     .guest-wrapper {
@@ -578,11 +584,16 @@
 
     .new-sidebar-group-wrp,
     #sidebar_list_group_member,
-    #sidebar_thankyou_card {
+    #sidebar_thankyou_card,
+    #sidebar_gift_registry {
         height: 90vh;
     }
 
     .list_thankyou_card {
+        max-height: calc(100vh - 270px);
+    }
+
+    #sidebar_gift_registry #registry_list {
         max-height: calc(100vh - 270px);
     }
 }
