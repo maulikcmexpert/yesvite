@@ -870,6 +870,17 @@ ul.nav-tabs .nav-link:focus {
     max-height: calc(100vh - 210px);
 }
 
+.add-item-under-text {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: #fff;
+    margin-right: 7px;
+}
 
 
 

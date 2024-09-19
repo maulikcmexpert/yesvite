@@ -881,6 +881,19 @@
     stroke: var(--lightColor) !important;
 }
 
+.add-item-under-text {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: #fff;
+    margin-right: 7px;
+}
+
+
 /* ============ responsive ============ */
 @media only screen and (max-width:991px) {
     .guest-checkout-respo {
