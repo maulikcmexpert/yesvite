@@ -639,7 +639,7 @@ class EventController extends Controller
             "itemdata" => $itemData,
             'user' => $name,
             'profile' => $user->profile,
-            'firstname  ' => $user->firstname ,
+            'firstname  ' => $user->firstname,
             'lastname' => $user->lastname,
             'category' => $categoryName,
             'self_bring' => $selfBring,
