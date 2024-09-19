@@ -560,9 +560,6 @@
     background-color: #fff;
 }
 
-.sidebar-content.activity_bar {
-    height: 100%;
-}
 
 .activity-schedule-inner-btn .cmn-btn {
     width: 100%;
@@ -787,7 +784,18 @@
     font-size: 14px;
 }
 
+/* .activity-schedule-wrp {
+    overflow: hidden;
+    overflow-y: scroll;
+    padding-bottom: 20px;
+    height: calc(100vh - 200px);
+} */
+
 .activity-schedule-wrp {
+    margin-bottom: 20px;
+}
+
+.supportive-div {
     overflow: hidden;
     overflow-y: scroll;
     padding-bottom: 20px;
@@ -877,7 +885,7 @@
     .sidebar.new-event-sidebar {
         width: 100% !important;
         max-width: 100% !important;
-        top: 20px;
+        top: auto;
         border-top-left-radius: 20px;
         border-top-right-radius: 20px;
         bottom: 0;
@@ -892,8 +900,7 @@
         margin-bottom: 20px;
     }
 
-    .sidebar-content.activity_bar {
-        height: 100%;
+    .sidebar-content {
         border-radius: 20px 20px 0px 0px;
     }
 
