@@ -901,9 +901,9 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
                 currentInviteCount--;
                 $('#currentInviteCount').val(currentInviteCount);
 
-                if(currentInviteCount < 15){
-                    $('.user_choice').prop('disabled',false);
-                }
+                // if(currentInviteCount < 15){
+                //     $('.user_choice').prop('disabled',false);
+                // }
 
                 $('#user_tel-'+userId).remove();
                 total_guest = $(".users-data.invited_user").length;
