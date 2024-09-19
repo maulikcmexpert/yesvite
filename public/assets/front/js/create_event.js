@@ -367,116 +367,8 @@ $(function () {
             $("#end-time").val("");
             $("#start-time").val("");
             $(".end_time").css("display", "none");
-            console.log(selectedDates);
             if (selectedDates.size > 0) {
-                var sortedDates = [...selectedDates].sort();
-                var startDate = moment(sortedDates[0]);
-                var endDate = moment(
-                    sortedDates.length === 2 ? sortedDates[1] : sortedDates[0]
-                );
-                var i = 0;
-                // Loop through the date range, including startDate and endDate
-                // activity_html_set(startDate,endDate,dateID,sortedDates);
-                while (startDate <= endDate) {
-                    var dateID = startDate.format("YYYYMMDD");
-                    if (i == 0) {
-                        $("#firstActivityTime").val(dateID);
-                    }
-                    i++;
-                    var formHtml = `
-                 <div class="activity-schedule-wrp">
-                    <div class="activity-schedule-head">
-                        <h3>${startDate.format("dddd, MMMM D, YYYY")}</h3>
-                    </div>
-                    <div class="activity-schedule-inner new_event_detail_form">
-                        <form>
-                            ${
-                                startDate.isSame(moment(sortedDates[0]), "day")
-                                    ? `
-                                        <h4>Event Start</h4>
-                                        <div class="row">
-                                            <div class="col-12 mb-4">
-                                               <div class="form-group">
-                                                  <label>Start Time</label>
-                                                <div class="input-group time ">
-                                                <input class="form-control timepicker" placeholder="HH:MM AM/PM" id="ac-start-time" name="ac-start-time" oninput="clearError()" required=""/><span class="input-group-append input-group-addon"><span class="input-group-text"><svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                 <path d="M18.8334 9.99984C18.8334 14.5998 15.1 18.3332 10.5 18.3332C5.90002 18.3332 2.16669 14.5998 2.16669 9.99984C2.16669 5.39984 5.90002 1.6665 10.5 1.6665C15.1 1.6665 18.8334 5.39984 18.8334 9.99984Z" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <path d="M13.5917 12.65L11.0083 11.1083C10.5583 10.8416 10.1917 10.2 10.1917 9.67497V6.2583" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                 </svg></span></span>
-                                            </div>
-                          </div>
-                                            </div>
-                                        </div>
-                                        `
-                                    : ""
-                            }
-                            <div class="accordion" id="accordionExample">
-                                <div class="accordion-item">
-                                    <div class="accordion-header">
-                                        <button
-                                            class="accordion-button collapsed"
-                                            type="button"
-                                            data-bs-toggle="collapse"
-                                            data-bs-target="#collapseOne${dateID}"
-                                        >
-                                            <div>Activities <span class="total_activity-${dateID}">(0)</span></div>
-                                            <i class="fa-solid fa-angle-down"></i>
-                                        </button>
-                                        <div class="accordion-button-icons add_more_activity" data-id="${dateID}">
-                                            <i class="fa-solid fa-circle-plus"></i>
-                                        </div>
-                                    </div>
-                                    <div
-                                        id="collapseOne${dateID}"
-                                        class="accordion-collapse collapse"
-                                        data-bs-parent="#accordionExample"
-                                    >
-                                        <div class="accordion-body new_activity" id="${dateID}" data-id="${startDate.format(
-                        "YYYY-MM-DD"
-                    )}">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            ${
-                                startDate.isSame(
-                                    moment(sortedDates[sortedDates.length - 1]),
-                                    "day"
-                                )
-                                    ? `
-                                        <div class="ac-end-time" > 
-                                        <input type="hidden" id="LastEndTime" value="${dateID}" />
-                                        <h4 class="mt-3 ">Event Ends</h4>
-                                        <div class="col-12 ac-end-time">
-                                           <div class="form-group">
-                                                  <label>End Time</label>
-                                                <div class="input-group time ">
-                                                <input class="form-control timepicker" placeholder="HH:MM AM/PM" id="ac-end-time" name="ac-end-time" oninput="clearError()" required=""/><span class="input-group-append input-group-addon"><span class="input-group-text"><svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                 <path d="M18.8334 9.99984C18.8334 14.5998 15.1 18.3332 10.5 18.3332C5.90002 18.3332 2.16669 14.5998 2.16669 9.99984C2.16669 5.39984 5.90002 1.6665 10.5 1.6665C15.1 1.6665 18.8334 5.39984 18.8334 9.99984Z" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <path d="M13.5917 12.65L11.0083 11.1083C10.5583 10.8416 10.1917 10.2 10.1917 9.67497V6.2583" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                 </svg></span></span>
-                                        </div>
-                                        </div>
-                                        `
-                                    : ""
-                            }
-                        </form>
-                    </div>
-                </div>
-                `;
-
-                    $(".activity_bar").append(formHtml);
-                    datepicker();
-                    startDate.add(1, "day");
-                }
-
-                var save_btn = `<div class="activity-schedule-inner-btn">
-                        <button class="cmn-btn" id="save_activity_schedule">
-                           Save
-                        </button>
-                    </div>`;
-
-                $(".activity_bar").append(save_btn);
+                set_activity_html(selectedDates);
             }
         }
     );
@@ -486,6 +378,119 @@ $(function () {
     });
    
 });
+
+
+function set_activity_html(selectedDates) {
+    set_activity_html(selectedDates);
+    var sortedDates = [...selectedDates].sort();
+    var startDate = moment(sortedDates[0]);
+    var endDate = moment(
+        sortedDates.length === 2 ? sortedDates[1] : sortedDates[0]
+    );
+    var i = 0;
+    // Loop through the date range, including startDate and endDate
+    // activity_html_set(startDate,endDate,dateID,sortedDates);
+    while (startDate <= endDate) {
+        var dateID = startDate.format("YYYYMMDD");
+        if (i == 0) {
+            $("#firstActivityTime").val(dateID);
+        }
+        i++;
+        var formHtml = `
+     <div class="activity-schedule-wrp">
+        <div class="activity-schedule-head">
+            <h3>${startDate.format("dddd, MMMM D, YYYY")}</h3>
+        </div>
+        <div class="activity-schedule-inner new_event_detail_form">
+            <form>
+                ${
+                    startDate.isSame(moment(sortedDates[0]), "day")
+                        ? `
+                            <h4>Event Start</h4>
+                            <div class="row">
+                                <div class="col-12 mb-4">
+                                   <div class="form-group">
+                                      <label>Start Time</label>
+                                    <div class="input-group time ">
+                                    <input class="form-control timepicker" placeholder="HH:MM AM/PM" id="ac-start-time" name="ac-start-time" oninput="clearError()" required=""/><span class="input-group-append input-group-addon"><span class="input-group-text"><svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                     <path d="M18.8334 9.99984C18.8334 14.5998 15.1 18.3332 10.5 18.3332C5.90002 18.3332 2.16669 14.5998 2.16669 9.99984C2.16669 5.39984 5.90002 1.6665 10.5 1.6665C15.1 1.6665 18.8334 5.39984 18.8334 9.99984Z" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M13.5917 12.65L11.0083 11.1083C10.5583 10.8416 10.1917 10.2 10.1917 9.67497V6.2583" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                     </svg></span></span>
+                                </div>
+              </div>
+                                </div>
+                            </div>
+                            `
+                        : ""
+                }
+                <div class="accordion" id="accordionExample">
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <button
+                                class="accordion-button collapsed"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#collapseOne${dateID}"
+                            >
+                                <div>Activities <span class="total_activity-${dateID}">(0)</span></div>
+                                <i class="fa-solid fa-angle-down"></i>
+                            </button>
+                            <div class="accordion-button-icons add_more_activity" data-id="${dateID}">
+                                <i class="fa-solid fa-circle-plus"></i>
+                            </div>
+                        </div>
+                        <div
+                            id="collapseOne${dateID}"
+                            class="accordion-collapse collapse"
+                            data-bs-parent="#accordionExample"
+                        >
+                            <div class="accordion-body new_activity" id="${dateID}" data-id="${startDate.format(
+            "YYYY-MM-DD"
+        )}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                ${
+                    startDate.isSame(
+                        moment(sortedDates[sortedDates.length - 1]),
+                        "day"
+                    )
+                        ? `
+                            <div class="ac-end-time" > 
+                            <input type="hidden" id="LastEndTime" value="${dateID}" />
+                            <h4 class="mt-3 ">Event Ends</h4>
+                            <div class="col-12 ac-end-time">
+                               <div class="form-group">
+                                      <label>End Time</label>
+                                    <div class="input-group time ">
+                                    <input class="form-control timepicker" placeholder="HH:MM AM/PM" id="ac-end-time" name="ac-end-time" oninput="clearError()" required=""/><span class="input-group-append input-group-addon"><span class="input-group-text"><svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                     <path d="M18.8334 9.99984C18.8334 14.5998 15.1 18.3332 10.5 18.3332C5.90002 18.3332 2.16669 14.5998 2.16669 9.99984C2.16669 5.39984 5.90002 1.6665 10.5 1.6665C15.1 1.6665 18.8334 5.39984 18.8334 9.99984Z" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M13.5917 12.65L11.0083 11.1083C10.5583 10.8416 10.1917 10.2 10.1917 9.67497V6.2583" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                     </svg></span></span>
+                            </div>
+                            </div>
+                            `
+                        : ""
+                }
+            </form>
+        </div>
+    </div>
+    `;
+
+        $(".activity_bar").append(formHtml);
+        datepicker();
+        startDate.add(1, "day");
+    }
+
+    var save_btn = `<div class="activity-schedule-inner-btn">
+            <button class="cmn-btn" id="save_activity_schedule">
+               Save
+            </button>
+        </div>`;
+
+    $(".activity_bar").append(save_btn);
+}
 
 
 
