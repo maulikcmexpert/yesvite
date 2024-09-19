@@ -872,10 +872,9 @@ class EventController extends Controller
         $id = Auth::guard('web')->user()->id;
         $type = $request->type;
 
-        $yesvite_user = User::select('id', 'firstname', 'lastname', 'phone_number', 'email', 'profile')
+        $yesvite_users = User::select('id', 'firstname', 'lastname', 'phone_number', 'email', 'profile')
             ->where('id', '!=', $id)
             ->where(['is_user_phone_contact' => '0'])
-            ->where('email_verified_at','!=',null)
             ->orderBy('firstname')
             ->limit($request->limit)
             ->skip($request->offset)
@@ -886,6 +885,29 @@ class EventController extends Controller
                 });
             })
             ->get();
+        $yesvite_user = [];
+        foreach ($yesvite_users as $user) {
+
+            // if ($user->parent_user_phone_contact != $id && $user->app_user == '0') {
+            //     echo  $user->id;
+            //     continue;
+            // }
+            if ($user->email_verified_at == NULL && $user->app_user == '1') {
+                continue;
+            }
+            $yesviteUserDetail['id'] = $user->id;
+            $yesviteUserDetail['profile'] = empty($user->profile) ? "" : asset('public/storage/profile/' . $user->profile);
+            $yesviteUserDetail['firstname'] = (!empty($user->firstname) || $user->firstname != Null) ? $user->firstname : "";;
+            $yesviteUserDetail['lastname'] = (!empty($user->lastname) || $user->lastname != Null) ? $user->lastname : "";
+            $yesviteUserDetail['email'] = (!empty($user->email) || $user->email != Null) ? $user->email : "";
+            $yesviteUserDetail['country_code'] = (!empty($user->country_code) || $user->country_code != Null) ? strval($user->country_code) : "";
+            $yesviteUserDetail['phone_number'] = (!empty($user->phone_number) || $user->phone_number != Null) ? $user->phone_number : "";
+            // $yesviteUserDetail['app_user']  = $user->app_user;
+            // $yesviteUserDetail['visible'] =  $user->visible;
+            // $yesviteUserDetail['message_privacy'] =  $user->message_privacy;
+            // $yesviteUserDetail['prefer_by']  = $user->prefer_by;
+            $yesvite_user[] = $yesviteUserDetail;
+        }
 
         return response()->json(view('front.event.guest.get_user', compact('yesvite_user', 'type'))->render());
     }
