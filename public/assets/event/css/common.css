@@ -348,7 +348,7 @@ ul.nav-tabs .nav-link:focus {
 .sidebar {
     position: fixed;
     top: 0;
-    right: -500px;
+    right: -200%;
     width: 500px !important;
     height: 100%;
     background-color: #fff;
@@ -911,7 +911,7 @@ ul.cost-list li span {
     } */
 
     .sidebar {
-        right: -600px;
+        right: -200%;
     }
 
     .sidebar-btn {
