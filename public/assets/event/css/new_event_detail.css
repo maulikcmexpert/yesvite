@@ -916,7 +916,8 @@
     }
 
     .sidebar-content {
-        max-height: 580px;
+        width: 100%;
+        max-width: 100%;
     }
 }
 
