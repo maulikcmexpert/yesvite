@@ -1779,11 +1779,11 @@ $(document).on("blur", 'input[name="activity-start-time[]"]', function () {
 
         if (
             newEndTime != "" &&
-            newStartTime != "" &&
+            newstartTime != "" &&
             convertTimeToMinutes(newEndTime) <=
-                convertTimeToMinutes(newStartTime)
+                convertTimeToMinutes(newstartTime)
         ) {
-            var timeParts = newStartTime.split(":");
+            var timeParts = newstartTime.split(":");
             var startDate = new Date();
             startDate.setHours(parseInt(timeParts[0]));
             startDate.setMinutes(parseInt(timeParts[1]));
