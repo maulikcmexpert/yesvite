@@ -516,8 +516,12 @@ $(document).on('click','.create_event_with_plan',function(){
     });
 
 });
+$(document).on("click", ".accordion-button", function () {
+    if ($(this).hasClass('collapsed')) {
+        $(this).removeClass('accordian_open');
+    }});
 
-$(document).on("click", ".add_more_activity", function () {
+    $(document).on("click", ".add_more_activity", function () {
     $(this).parent().find('.accordion-button').addClass('accordian_open');
     $(this).prop("disabled", true);
 
