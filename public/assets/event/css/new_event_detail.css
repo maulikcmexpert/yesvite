@@ -441,7 +441,7 @@
     transform: rotateZ(-180deg);
 }
 
-.activity-schedule-inner .accordion-button .fa-angle-down {
+.activity-schedule-inner .accordion-button.collapsed .fa-angle-down {
     transform: rotateZ(0deg);
 }
 
