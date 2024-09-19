@@ -403,7 +403,7 @@
     width: 100%;
     max-width: 500px;
     max-height: 100%;
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
     background-color: #fff;
     z-index: 10;
 }
@@ -787,7 +787,12 @@
     font-size: 14px;
 }
 
-.activity-schedule-wrp {}
+.activity-schedule-wrp {
+    max-height: 100%;
+    overflow: hidden;
+    overflow-y: scroll;
+    padding-bottom: 100px;
+}
 
 /* ======Responsiveness===== */
 
