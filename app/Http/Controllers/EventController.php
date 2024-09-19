@@ -895,18 +895,21 @@ class EventController extends Controller
             if ($user->email_verified_at == NULL && $user->app_user == '1') {
                 continue;
             }
-            $yesviteUserDetail['id'] = $user->id;
-            $yesviteUserDetail['profile'] = empty($user->profile) ? "" : asset('public/storage/profile/' . $user->profile);
-            $yesviteUserDetail['firstname'] = (!empty($user->firstname) || $user->firstname != Null) ? $user->firstname : "";;
-            $yesviteUserDetail['lastname'] = (!empty($user->lastname) || $user->lastname != Null) ? $user->lastname : "";
-            $yesviteUserDetail['email'] = (!empty($user->email) || $user->email != Null) ? $user->email : "";
-            $yesviteUserDetail['country_code'] = (!empty($user->country_code) || $user->country_code != Null) ? strval($user->country_code) : "";
-            $yesviteUserDetail['phone_number'] = (!empty($user->phone_number) || $user->phone_number != Null) ? $user->phone_number : "";
+            
+            $yesviteUserDetail = [
+                'id' => $user->id,
+                'profile' => empty($user->profile) ? "" : asset('public/storage/profile/' . $user->profile),
+                'firstname' => (!empty($user->firstname) || $user->firstname != null) ? $user->firstname : "",
+                'lastname' => (!empty($user->lastname) || $user->lastname != null) ? $user->lastname : "",
+                'email' => (!empty($user->email) || $user->email != null) ? $user->email : "",
+                'country_code' => (!empty($user->country_code) || $user->country_code != null) ? strval($user->country_code) : "",
+                'phone_number' => (!empty($user->phone_number) || $user->phone_number != null) ? $user->phone_number : ""
+            ];
             // $yesviteUserDetail['app_user']  = $user->app_user;
             // $yesviteUserDetail['visible'] =  $user->visible;
             // $yesviteUserDetail['message_privacy'] =  $user->message_privacy;
             // $yesviteUserDetail['prefer_by']  = $user->prefer_by;
-            $yesvite_user[] = $yesviteUserDetail;
+            $yesvite_user[] = (object)$yesviteUserDetail;
         }
 
         return response()->json(view('front.event.guest.get_user', compact('yesvite_user', 'type'))->render());
