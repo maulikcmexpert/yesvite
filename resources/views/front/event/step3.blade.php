@@ -407,11 +407,11 @@
                 <div class="user-contacts">
                     <div class="users-data">
                         <div class="d-flex align-items-start">
-                            <div class="contact-img">
+                            {{-- <div class="contact-img"> 
                                 <img src="{{ asset('assets/event/image/user-img.svg') }}"
                                     alt="contact-img">
                             </div>
-                            {{-- <div class="text-start">
+                             <div class="text-start">
                                 <h5>Silvia Alegra</h5>
                                 <div>
                                     <a href="mailto:silvia@gmail.com"><svg class="me-1"
@@ -439,7 +439,7 @@
                                         </svg>
                                         1-800-5587</a>
                                 </div>
-                            </div> --}}
+                            </div>
                         </div>
                         <div class="d-flex flex-column">
                             <div class="right-note">
@@ -450,7 +450,7 @@
                                 <input class="form-check-input" type="checkbox"
                                     name="Guest RSVP’s">
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
 
                 </div>
