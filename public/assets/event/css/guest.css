@@ -430,6 +430,13 @@
     max-height: calc(100vh - 210px);
 }
 
+#sidebar_potluck .potluck-category {
+    overflow: hidden;
+    overflow-y: scroll;
+    max-height: calc(100vh - 300px);
+}
+
+
 /* ============ responsive ============ */
 @media only screen and (max-width:1800px) {
     .guest-wrapper {
@@ -585,7 +592,8 @@
     .new-sidebar-group-wrp,
     #sidebar_list_group_member,
     #sidebar_thankyou_card,
-    #sidebar_gift_registry {
+    #sidebar_gift_registry,
+    #sidebar_potluck {
         height: 90vh;
     }
 
@@ -595,5 +603,13 @@
 
     #sidebar_gift_registry #registry_list {
         max-height: calc(100vh - 270px);
+    }
+
+    #sidebar_potluck .potluck-category {
+        max-height: calc(100vh - 350px);
+    }
+
+    .setting-content .accordion-item {
+        padding: 0px !important;
     }
 }

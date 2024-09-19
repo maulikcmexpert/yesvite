@@ -906,6 +906,22 @@
         top: auto;
         bottom: 0;
     }
+
+    .setting-accordion-wrp .accordion-button h5 {
+        font-size: 14px;
+    }
+
+    .setting-accordion-wrp .accordion-button span {
+        margin-right: 5px;
+    }
+
+    .setting-accordion-wrp .accordion-body p {
+        font-size: 14px;
+    }
+
+    .add-limit h5 {
+        font-size: 14px;
+    }
 }
 
 @media only screen and (max-width: 452px) {
