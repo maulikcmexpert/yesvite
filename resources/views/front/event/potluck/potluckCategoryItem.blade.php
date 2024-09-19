@@ -53,7 +53,7 @@
                     $initials = $firstInitial . $lastInitial;
                     $fontColor = 'fontcolor' . $firstInitial;
                     @endphp
-                    <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
+                    <h5 class="{{ $fontColor }} add-item-under-text"> {{ $initials }}</h5>
                     @endif
                     <h5>{{$user}}</h5>
                     <div class="qty-container ms-auto">
