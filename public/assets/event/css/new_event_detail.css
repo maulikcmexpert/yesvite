@@ -874,15 +874,13 @@
         padding-bottom: 10px;
     }
 
-    /* .sidebar.new-event-sidebar {
+    .sidebar.new-event-sidebar {
         width: 100%;
         top: auto;
-        max-height: 700px;
-        overflow-y: scroll;
         border-top-left-radius: 20px;
         border-top-right-radius: 20px;
         bottom: 0;
-    } */
+    }
 
     .dropdown-sub-menu {
         padding: 10px;
