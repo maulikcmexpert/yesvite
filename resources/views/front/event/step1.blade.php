@@ -74,7 +74,7 @@
                     <div class="col-6 mb-4">
                         <div class="input-form">
                             <select class="form-select" id="start-time-zone" name="start_time_zone">
-                                <option value="PST">PST</option>
+                                <option value="PST" selected>PST</option>
                                 <option value="MST">MST</option>
                                 <option value="CST">CST</option>
                                 <option value="EST">EST</option>
@@ -143,7 +143,7 @@
                     <div class="col-6 mb-4 end_time" style="display: none">
                         <div class="input-form">
                             <select class="form-select" id="end-time-zone" name="end_time_zone">
-                                <option value="PST">PST</option>
+                                <option value="PST" selected>PST</option>
                                 <option value="MST">MST</option>
                                 <option value="CST">CST</option>
                                 <option value="EST">EST</option>
