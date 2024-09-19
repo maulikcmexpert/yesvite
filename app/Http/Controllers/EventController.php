@@ -637,7 +637,8 @@ class EventController extends Controller
         }
         $data = [
             "itemdata" => $itemData,
-            'user' => $name,
+            'user_name' => $name,
+            'user' => $user,
             'category' => $categoryName,
             'self_bring' => $selfBring,
             'self_bring_qty' => $selfBringQuantity,

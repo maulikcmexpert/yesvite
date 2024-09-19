@@ -55,7 +55,7 @@
                     @endphp
                     <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
                     @endif
-                    <h5>{{$user}}</h5>
+                    <h5>{{$user_name}}</h5>
                     <div class="qty-container ms-auto">
                         <input type="hidden" class="category-item-key" value="{{$category_item}}">
                         <input type="hidden" class="category-index-key" value="{{$category_index}}">
