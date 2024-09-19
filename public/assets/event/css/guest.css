@@ -410,6 +410,10 @@
     max-height: calc(100vh - 210px);
 }
 
+.step_3 .design-seting {
+    max-width: calc(100vh - 100px);
+}
+
 /* ============ responsive ============ */
 @media only screen and (max-width:1800px) {
     .guest-wrapper {
