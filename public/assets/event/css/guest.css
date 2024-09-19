@@ -418,6 +418,12 @@
     margin-bottom: 10px;
 }
 
+#sidebar_add_co_host .list_all_invited_user {
+    overflow: hidden;
+    overflow-y: scroll;
+    max-height: calc(100vh - 340px);
+}
+
 /* ============ responsive ============ */
 @media only screen and (max-width:1800px) {
     .guest-wrapper {
