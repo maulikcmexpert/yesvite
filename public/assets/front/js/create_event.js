@@ -3482,6 +3482,7 @@ $(document).on("click", ".delete_gift_registry", function () {
         },
         success: function (response) {
             console.log(response);
+            countGiftRegestry();
         },
         error: function (xhr, status, error) {
             console.log("AJAX error: " + error);
@@ -4171,6 +4172,7 @@ $(document).on('click','.free_plan',function () {
     });
     eventData.gift_registry_data=selected_gift;
     console.log(eventData);
+
     var selected = $('input[name="gift_registry[]"]:checked');
         if (selected.length > 2) {
         $(this).prop('checked', false);
@@ -4239,6 +4241,10 @@ $(document).on('click','input[name="select_thankyou[]"]',function () {
 });
 
 $(document).on('click','input[name="gift_registry[]"]',function () { 
+    countGiftRegestry();
+});
+
+function countGiftRegestry(){
     var i = 0;
     $("input[name='gift_registry[]']" ).each(function (index) {
         i++;
@@ -4260,7 +4266,7 @@ $(document).on('click','input[name="gift_registry[]"]',function () {
         </span>
         <h5>Add gift registry</h5>`);
     } 
-});
+}
 
 $(document).on("click","#potluck_tip", function (e) {
     e.preventDefault();
