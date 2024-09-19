@@ -324,7 +324,7 @@
                                 <div class="modal-body">
                                     <h5>Draft Not Saved</h5>
                                     <p>Please fill in data all the way to " Date of Event " for draft to be
-                                        saved. Exit will delete event</p>
+                                        saved. exit will delete event</p>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn cancel-btn-createEvent"
