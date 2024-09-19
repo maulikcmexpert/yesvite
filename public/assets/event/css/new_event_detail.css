@@ -103,7 +103,6 @@
 .main-content-sidebar {
     width: 100%;
     max-width: 350px;
-    min-width: 350px;
     height: 100vh;
     position: sticky;
     top: 20px;
