@@ -594,15 +594,15 @@
                         </svg>
                     </span>
                 </div>
-                <div class="group_list">
+                <div class="user-contacts group_list">
                     @foreach ($groups as $group)
-                    <div class="group-card added_group{{ $group->id }} listgroups" data-id="{{ $group->id }}">
+                    <div class="group-card added_group{{ $group->id }} listgroups view_members" data-id="{{ $group->id }}">
                         <div class="view_members" data-id="{{ $group->id }}">
                             <h4>{{ $group->name }}</h4>
                             <p>{{ $group->group_members_count }} Guests</p>
                         </div>
                         <span class="ms-auto me-3">
-                            <svg width="16" id="delete_group" data-id="{{ $group->id }}" height="17"
+                            {{-- <svg width="16" id="delete_group" data-id="{{ $group->id }}" height="17"
                                 viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path
                                     d="M14 4.48665C11.78 4.26665 9.54667 4.15332 7.32 4.15332C6 4.15332 4.68 4.21999 3.36 4.35332L2 4.48665"
@@ -623,7 +623,7 @@
                                     stroke-linecap="round" stroke-linejoin="round"></path>
                                 <path d="M6.33301 8.83301H9.66634" stroke="#94A3B8" stroke-width="1.5"
                                     stroke-linecap="round" stroke-linejoin="round"></path>
-                            </svg>
+                            </svg> --}}
                         </span>
                         <span>
                             <svg width="16" height="17" viewBox="0 0 16 17" fill="none"
