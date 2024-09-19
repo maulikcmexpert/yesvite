@@ -2007,6 +2007,7 @@ $(document).on("click", "#edit_saveThankyoucard", function () {
 });
 
 $(document).on("click", "#next_setting", function () {
+
     $("#loader").css('display','block');
     savePage3Data();
     checkbox_count();
@@ -3711,7 +3712,7 @@ function displayRecords(lim, off,type,search = null,) {
 }
 
 
-$(document).on('keyup','.search_user',function(){
+$(document).on('keyup','.search_user_ajax',function(){
     search_name = $(this).val();
     offset = 0;
     $('#loader').css('display','block');
