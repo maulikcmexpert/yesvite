@@ -4446,5 +4446,9 @@ $(document).on('keyup','#group_toggle_search',function () {
 })
 
 $(document).on('click','.listing-arrow',function(){
-$(this).parent().find('.list-slide').addClass('open-potluck-list');
+    if($(this).find('.list-slide').hasClass('open-potluck-list')){
+        $(this).find('.list-slide').removeClass('open-potluck-list');
+    }else{
+    $(this).parent().find('.list-slide').addClass('open-potluck-list');
+}
 });
