@@ -899,11 +899,6 @@
 }
 
 
-.birthday-card-main {
-    display: none !important;
-}
-
-
 /* ============ responsive ============ */
 @media only screen and (max-width:991px) {
     .guest-checkout-respo {
