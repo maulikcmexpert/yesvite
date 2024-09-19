@@ -4446,8 +4446,5 @@ $(document).on('keyup','#group_toggle_search',function () {
 })
 
 $(document).on('click','.listing-arrow',function(){
-
-console.log($(this).parent().html());
-
-
+$(this).parent().find('.list-slide').addClass('open-potluck-list');
 });
