@@ -872,7 +872,7 @@ class EventController extends Controller
         $id = Auth::guard('web')->user()->id;
         $type = $request->type;
 
-        $yesvite_users = User::select('id', 'firstname', 'lastname', 'phone_number', 'email', 'profile')
+        $yesvite_users = User::select('id', 'firstname', 'profile', 'lastname', 'email', 'country_code', 'phone_number', 'app_user', 'prefer_by', 'email_verified_at', 'parent_user_phone_contact', 'visible', 'message_privacy')
             ->where('id', '!=', $id)
             ->where(['is_user_phone_contact' => '0'])
             ->orderBy('firstname')
