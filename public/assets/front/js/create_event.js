@@ -689,10 +689,14 @@ $("#potluck").on("change", function () {
     if ($(this).is(":checked")) {
         $(".potluck").show();
     } else {
+       
         var category_count = $('#category_count').val();
         if(category_count == '0'){
             $(".potluck").hide();
         }else{
+            $("$delete_potluck_title").text('Potluck data will be deleted');
+            $(".delete_potluck_text").text('All category and item data that you have entered will be lost if you turn this off');
+            $(".delete_category_text").text('');
             $("#delete_potluck_category_id").val('all_potluck');
             $('#deleteModal_potluck').modal('show');
         }
@@ -3084,6 +3088,9 @@ $(document).on("change", ".user_choice", function () {
 $(document).on("click", ".delete_potluck_category", function () {
     var delete_id = $(this).data("id");
     $("#delete_potluck_category_id").val(delete_id);
+    $('.delete_potluck_title').text('Delete Category');
+    $('.delete_potluck_text').text('Deleting this category will delete all items under this category.');
+    $('.delete_category_text').text('Category deletion is not reversible');
     $("#deleteModal_potluck").modal("show");
 });
 

@@ -533,8 +533,9 @@
                 <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
             </div>
             <div class="modal-body">
-                <h5>Potluck data will be deleted</h5>
-                <p>If you turn off the potluck option.</p>
+                <h5 class="delete_potluck_title">Potluck data will be deleted</h5>
+                <p class="delete_potluck_text">If you turn off the potluck option.</p>
+                <p class="text-danger delete_category_text"></p>
             </div>
             <div class="modal-footer">
                 <input type="hidden" id="delete_potluck_category_id" name="delete_potluck_category_id">
