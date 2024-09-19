@@ -401,6 +401,7 @@ $("#schedule").on("change", function () {
 
             set_activity_html(selectedDates);
         } else {
+            $(".activity_bar").html('');
             $(".add-activity-schedule").hide();
             // $(".ac-end-time").hide();
         }
