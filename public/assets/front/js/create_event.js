@@ -4114,7 +4114,7 @@ $(document).on('keyup','#group_search_ajax',function () {
                 return;
             }
             $("#loader").hide();
-            $(".group_search_list").html('');
+            $(".group_search_list").html(data.html);
         })
         .fail(function (jqXHR, ajaxOptions, thrownError) {
             alert("server not responding...");
