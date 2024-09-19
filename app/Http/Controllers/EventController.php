@@ -149,34 +149,34 @@ class EventController extends Controller
         }
 
         $event_creation = Event::create([
-            'step' => (isset($request->step) && $request->step != '') ? $request->step : 0,
             'event_type_id' => (isset($request->event_type) && $request->event_type != "") ? (int)$request->event_type : "",
-            'event_name' => (isset($request->event_name) && $request->event_name != "") ? $request->event_name : "",
             'user_id' => $user_id,
+            'event_name' => (isset($request->event_name) && $request->event_name != "") ? $request->event_name : "",
             'hosted_by' => (isset($request->hosted_by) && $request->hosted_by) ? $request->hosted_by : "",
-            // 'latitude' => "",
-            // 'longitude' => "",
             'start_date' => (isset($startDate) && $startDate != "") ? $startDate : null,
             'end_date' => (isset($endDate) && $endDate != "") ? $endDate : null,
-            'rsvp_by_date_set' => '0',
+            'rsvp_by_date_set' => (isset($request->rsvp_by_date_set) && $request->rsvp_by_date_set != "") ? $request->rsvp_by_date_set : "0",
             'rsvp_by_date' => (isset($request->rsvp_by_date) && $request->rsvp_by_date != "") ? $request->rsvp_by_date : null,
             'rsvp_start_time' => (isset($request->start_time) && $request->start_time != "") ? $request->start_time : "",
-            'rsvp_start_timezone' => (isset($request->time_zone) && $request->time_zone != "") ? $request->time_zone : "",
-            // 'greeting_card_id' => "",
-            // 'gift_registry_id' => "",
-            // 'rsvp_end_time_set' => "",
+            'rsvp_start_timezone' => (isset($request->rsvp_start_timezone) && $request->rsvp_start_timezone != "") ? $request->rsvp_start_timezone : "",
             'rsvp_end_time' => (isset($request->event_end_time) && $request->event_end_time != "") ? $request->event_end_time : "",
             'rsvp_end_timezone' => (isset($request->end_time_zone) && $request->end_time_zone != "") ? $request->end_time_zone : "",
             'event_location_name' => (isset($request->event_location) && $request->event_location) ? $request->event_location : "",
-            'address_1' => (isset($request->address) && $request->address) ? $request->address : "",
-            // 'address_2' => "",
+            'address_1' => (isset($request->address1) && $request->address1) ? $request->address1 : "",
+            'address_2' => (isset($request->address_2) && $request->address_2) ? $request->address_2 : "",
             'state' => (isset($request->state) && $request->state != "") ? $request->state : "",
-            'zip_code' => (isset($request->zipcode) && $request->zipcode) ? $request->zipcod : "",
+            'zip_code' => (isset($request->zipcode) && $request->zipcode) ? $request->zipcode : "",
             'city' => (isset($request->city) && $request->city != "") ? $request->city : "",
-            'message_to_guests' => (isset($request->message) && $request->message != "") ? $request->message : "",
+            'message_to_guests' => (isset($request->message_to_guests) && $request->message_to_guests != "") ? $request->message_to_guests : "",
+            'is_draft_save' => (isset($request->isdraft) && $request->isdraft != "") ? $request->isdraft : "0",
+            // 'latitude' => "",
+            // 'longitude' => "",
+            // 'greeting_card_id' => "",
+            // 'gift_registry_id' => "",
+            // 'rsvp_end_time_set' => "",
+            // 'address_2' => "",
             // 'subscription_plan_name' => "",
             // 'subscription_invite_count' => "",
-            'is_draft_save' => (isset($request->isdraft) && $request->isdraft != "") ? $request->isdraft : "0",
         ]);
         $eventId = $event_creation->id;
         $event_creation->step = (isset($request->step) && $request->step != '') ? $request->step : 0;
@@ -220,7 +220,6 @@ class EventController extends Controller
                 }
             }
 
-
             if (isset($request->co_host) && $request->co_host != '' && isset($request->co_host_prefer_by)) {
                 $is_cohost = '1';
                 $invited_user = $request->co_host;
@@ -247,23 +246,42 @@ class EventController extends Controller
             }
 
             if (isset($request->eventSetting)) {
-                EventSetting::create([
-                    'event_id' => $eventId,
-                    'allow_for_1_more' => (isset($request->allow_for_1_more)) ? $request->allow_for_1_more : "0",
-                    'allow_limit' => (isset($request->allow_limit)) ? $request->allow_limit : 0,
-                    'adult_only_party' => (isset($request->only_adults)) ? $request->only_adults : "0",
-                    'thank_you_cards' => (isset($request->thankyou_message)) ? $request->thankyou_message : "0",
-                    'add_co_host' => (isset($request->add_co_host)) ? $request->add_co_host : "0",
-                    'gift_registry' => (isset($request->gift_registry)) ? $request->gift_registry : "0",
-                    'events_schedule' => (isset($request->events_schedule)) ? $request->events_schedule : "0",
-                    'event_wall' => (isset($request->event_wall)) ? $request->event_wall : "0",
-                    'guest_list_visible_to_guests' => (isset($request->guest_list_visible_to_guest)) ? $request->guest_list_visible_to_guest : "0",
-                    'podluck' => (isset($request->potluck)) ? $request->potluck : "0",
-                    'rsvp_updates' => (isset($request->rsvp_update)) ? $request->rsvp_update : "0",
-                    'event_wall_post' => (isset($request->event_wall_post)) ? $request->event_wall_post : "0",
-                    'send_event_dater_reminders' => (isset($request->rsvp_remainder)) ? $request->rsvp_remainder : "0",
-                    'request_event_photos_from_guests' => (isset($request->request_photo)) ? $request->request_photo : "0",
-                ]);
+                $eventSetting = EventSetting::where('event_id',$eventId)->first();
+                if ($eventSetting != null) {
+                    $eventSetting->allow_for_1_more = (isset($request->allow_for_1_more)) ? $request->allow_for_1_more : "0";
+                    $eventSetting->allow_limit = (isset($request->allow_limit)) ? (int)$request->allow_limit : 0;
+                    $eventSetting->adult_only_party = (isset($request->only_adults)) ? $request->only_adults : "0";
+                    $eventSetting->thank_you_cards = (isset($request->thankyou_message)) ? $request->thankyou_message : "0";
+                    $eventSetting->add_co_host = (isset($request->add_co_host)) ? $request->add_co_host : "0";
+                    $eventSetting->gift_registry = (isset($request->gift_registry)) ? $request->gift_registry : "0";
+                    $eventSetting->events_schedule = (isset($request->events_schedule)) ? $request->events_schedule : "0";
+                    $eventSetting->event_wall = (isset($request->event_wall)) ? $request->event_wall : "0";
+                    $eventSetting->guest_list_visible_to_guests = (isset($request->guest_list_visible_to_guest)) ? $request->guest_list_visible_to_guest : "0";
+                    $eventSetting->podluck = (isset($request->potluck)) ? $request->potluck : "0";
+                    $eventSetting->rsvp_updates = (isset($request->rsvp_update)) ? $request->rsvp_update : "0";
+                    $eventSetting->event_wall_post = (isset($request->event_wall_post)) ? $request->event_wall_post : "0";
+                    $eventSetting->send_event_dater_reminders = (isset($request->rsvp_remainder)) ? $request->rsvp_remainder : "0";
+                    $eventSetting->request_event_photos_from_guests = (isset($request->request_photo)) ? $request->request_photo : "0";
+                    $eventSetting->save();
+                }else{
+                    EventSetting::create([
+                        'event_id' => $eventId,
+                        'allow_for_1_more' => (isset($request->allow_for_1_more)) ? $request->allow_for_1_more : "0",
+                        'allow_limit' => (isset($request->allow_limit)) ? $request->allow_limit : 0,
+                        'adult_only_party' => (isset($request->only_adults)) ? $request->only_adults : "0",
+                        'thank_you_cards' => (isset($request->thankyou_message)) ? $request->thankyou_message : "0",
+                        'add_co_host' => (isset($request->add_co_host)) ? $request->add_co_host : "0",
+                        'gift_registry' => (isset($request->gift_registry)) ? $request->gift_registry : "0",
+                        'events_schedule' => (isset($request->events_schedule)) ? $request->events_schedule : "0",
+                        'event_wall' => (isset($request->event_wall)) ? $request->event_wall : "0",
+                        'guest_list_visible_to_guests' => (isset($request->guest_list_visible_to_guest)) ? $request->guest_list_visible_to_guest : "0",
+                        'podluck' => (isset($request->potluck)) ? $request->potluck : "0",
+                        'rsvp_updates' => (isset($request->rsvp_update)) ? $request->rsvp_update : "0",
+                        'event_wall_post' => (isset($request->event_wall_post)) ? $request->event_wall_post : "0",
+                        'send_event_dater_reminders' => (isset($request->rsvp_remainder)) ? $request->rsvp_remainder : "0",
+                        'request_event_photos_from_guests' => (isset($request->request_photo)) ? $request->request_photo : "0",
+                    ]);
+                }
             }
             if ($request->potluck == "1") {
                 $potluck = session('category');
@@ -300,9 +318,8 @@ class EventController extends Controller
                 }
             }
 
-            if (isset($request->activity) && !empty($request->activity)) {
+            if (isset($request->events_schedule) && $request->events_schedule =='1' && isset($request->activity) && !empty($request->activity)) {
                 $activities = $request->activity;
-                // dd($request);
                 $addStartschedule =  new EventSchedule();
 
                 $addStartschedule->event_id = $eventId;
@@ -392,7 +409,7 @@ class EventController extends Controller
             //     }
             // }     
             // return  Redirect::to('event')->with('success', 'Event Created successfully');
-            session()->forget('desgin');
+            Session::forget('desgin');
         }
         if ($event_creation && $request->isdraft == "1") {
             return 1;
@@ -400,7 +417,7 @@ class EventController extends Controller
 
 
         $registry = session('gift_registry_data');
-
+        Session::save();
         return response()->json([
             'view' => view('front.event.gift_registry.view_gift_registry', compact('registry'))->render(),
             'success' => true,

@@ -2101,7 +2101,9 @@ $(document).on("click", "#close_createEvent", function () {
             var end_time = $("#end_time").is(":checked");
             var rsvp_by_date_set = $("#rsvp_by_date").is(":checked");
             var end_time_zone =  $('#end-time-zone').val();
-            var address = $("#address1").val();
+            var address1 = $("#address1").val();
+            var address_2 = $("#address2").val();
+            var address1 = $("#address1").val();
             var city = $("#city").val();
             var state = $("#state").val();
             var zipcode = $("#zipcode").val();
@@ -2109,15 +2111,24 @@ $(document).on("click", "#close_createEvent", function () {
             var rsvp_by_date = $("#rsvp-by-date").val();
             var event_id = $("#event_id").val();
             var description = $("#description").val();
+            var message_to_guests = $("#message_to_guests").val();
+            
             
 
             var events_schedule = '0';
             var rsvp_end_time_set = '0';
 
+            if(rsvp_by_date_set){
+                rsvp_by_date_set = '1';
+            }else{
+                rsvp_by_date_set = '0';
+            }
             if(schedule){
                 events_schedule = '1';
             }
+            var rsvp_end_time = '';
             if(end_time){
+                rsvp_end_time = $('#end-time').val();
                 rsvp_end_time_set = '1';
             }
 
@@ -2127,18 +2138,22 @@ $(document).on("click", "#close_createEvent", function () {
                 hosted_by: hostedby,
                 event_date: event_date,
                 start_time: start_time,
+                rsvp_start_timezone:start_time_zone,
+                events_schedule:events_schedule,
                 activity: activities,
-                address: address,
+                rsvp_end_time_set:rsvp_end_time_set,
+                rsvp_end_time:rsvp_end_time,
+                rsvp_end_timezone:end_time_zone,
+                rsvp_by_date_set:rsvp_by_date_set,
+                rsvp_by_date:rsvp_by_date,
+                event_location:description,
+                address1: address1,
+                address_2: address_2,
                 city: city,
                 state: state,
                 zipcode: zipcode,
-                rsvp_by_date:rsvp_by_date,
+                message_to_guests:message_to_guests,
                 event_id:event_id,
-                rsvp_end_time_set:rsvp_end_time_set,
-                event_location:description,
-                rsvp_start_timezone:start_time_zone,
-                rsvp_end_timezone:end_time_zone,
-                events_schedule:events_schedule
             };
             $(".step_2").hide();
         }
