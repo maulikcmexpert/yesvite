@@ -828,6 +828,12 @@
     background-color: rgba(35, 170, 38, 0.1);
 }
 
+
+.user-contacts.inivted_user_list {
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
 /* ======Responsiveness===== */
 
 
