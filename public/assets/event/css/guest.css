@@ -32,6 +32,8 @@
     padding: 16px 24px 24px 24px;
     background: var(--white);
     height: 100vh;
+    overflow: hidden;
+    overflow-y: scroll;
 }
 
 .guest-content h4 {
