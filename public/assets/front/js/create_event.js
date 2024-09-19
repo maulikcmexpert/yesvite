@@ -744,7 +744,11 @@ function loadMoreData(page, search_name) {
 // }
 
 // $(document).ready(function () {
-$(document).on("click", 'input[name="email_invite[]"]', function () {
+$(document).on("click", 'input[name="email_invite[]"]', function (e) {
+    if ($(this).is(':disabled')) {
+        e.preventDefault(); 
+        return; 
+    }
     $("#loader").css('display','block');
     
     var userId = $(this).val();
@@ -833,7 +837,11 @@ function delete_invited_user(userId) {
     });
 }
 
-$(document).on("click", 'input[name="mobile[]"]', function () {
+$(document).on("click", 'input[name="mobile[]"]', function (e) {
+    if ($(this).is(':disabled')) {
+        e.preventDefault(); 
+        return; 
+    }
     var userId = $(this).val();
     var isChecked = $(this).is(":checked");
     var mobile = $(this).data("mobile");
