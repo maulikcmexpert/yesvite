@@ -2777,7 +2777,7 @@ function toggleSidebar(id = null) {
 
     allSidebars.forEach((sidebar) => {
         if (sidebar.style.right === "0px") {
-            sidebar.style.right = "-500px";
+            sidebar.style.right = "-200%";
             sidebar.style.width = "0px";
         }
     });
@@ -2794,7 +2794,7 @@ function toggleSidebar(id = null) {
     const overlay = document.getElementById(id + "_overlay");
 
     if (sidebar.style.right === "0px") {
-        sidebar.style.right = "-500px";
+        sidebar.style.right = "-200%";
         sidebar.style.width = "0px";
         if (overlay) {
             overlay.classList.remove("visible");
