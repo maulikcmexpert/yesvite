@@ -552,10 +552,10 @@
 .activity-schedule-inner-btn {
     padding: 16px;
     border-top: 1px solid var(--borderColor);
-    /* margin-top: 16px; */
-    /* position: absolute; */
-    /* bottom: 0;
-    left: 0; */
+    margin-top: 16px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
     width: 100%;
     background-color: #fff;
 }
@@ -787,12 +787,7 @@
     font-size: 14px;
 }
 
-.activity-schedule-wrp {
-    max-height: 100%;
-    overflow: hidden;
-    overflow-y: scroll;
-    padding-bottom: 10px;
-}
+.activity-schedule-wrp {}
 
 /* ======Responsiveness===== */
 
