@@ -384,6 +384,7 @@ $("#schedule").on("change", function () {
     var activities = {};
     eventData.activity = {};
     var total_activities = 0;
+    $('.step_1_activity').html('<span><i class="fa-solid fa-triangle-exclamation"></i></span>Setup activity schedule');
     if (eventDate != "") {
         if ($(this).is(":checked")) {
             $(".add-activity-schedule").show();
