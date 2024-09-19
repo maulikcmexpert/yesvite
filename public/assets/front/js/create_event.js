@@ -3804,12 +3804,12 @@ $(document).on("click", "#final_create_event", function (e) {
 
             if(response.is_registry=="1"){
                 $('#gift_registry_logo').html(response.view);
-                // $('#eventModal').modal('show');
-                $('#eventModal').modal('show');           
+                // $('#eventModal').modal('show');         
             }else{
                 toastr.success('Event Created Successfully');
                 // window.location.href="profile";
             }
+            $('#eventModal').modal('show');           
 
 
         },
