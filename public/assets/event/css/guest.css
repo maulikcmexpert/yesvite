@@ -379,6 +379,11 @@
     border-radius: 0;
 }
 
+.group_search_list .group-card {
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
 /* ============ responsive ============ */
 @media only screen and (max-width:1800px) {
     .guest-wrapper {
