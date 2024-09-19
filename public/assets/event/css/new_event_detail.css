@@ -543,6 +543,9 @@
     padding: 16px;
     border-top: 1px solid var(--borderColor);
     margin-top: 16px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
 }
 
 .activity-schedule-inner-btn .cmn-btn {
