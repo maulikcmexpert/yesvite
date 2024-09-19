@@ -376,6 +376,7 @@ $(function () {
                     }
                     i++;
                     var formHtml = `
+                <div class="supportive-div">
                  <div class="activity-schedule-wrp">
                     <div class="activity-schedule-head">
                         <h3>${startDate.format("dddd, MMMM D, YYYY")}</h3>
@@ -453,6 +454,7 @@ $(function () {
                                     : ""
                             }
                         </form>
+                    </div>
                     </div>
                 </div>
                 `;
