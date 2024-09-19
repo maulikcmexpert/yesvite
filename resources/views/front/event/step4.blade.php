@@ -591,7 +591,7 @@
         <div class="item-on" id="self_bring_quantity_toggle" style="display: none;">
             {{-- <img src="{{asset('assets/event/image/user-img.svg')}}" alt=""> --}}
             @if ($user->profile != '')
-            <img src="{{ asset('storage/profile/' . $user->profile) }}" alt="user-img">
+            <img src="{{ $user->profile }}" alt="user-img">
             @else
             @php
             $firstInitial = !empty($user->firstname) ? strtoupper($user->firstname[0]) : '';
