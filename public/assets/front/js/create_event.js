@@ -4122,3 +4122,30 @@ $(document).on('keyup','#group_search_ajax',function () {
         });
 })
 
+$(document).on('keyup','#group_toggle_search',function () {
+    var search_name = $(this).val();
+    $.ajax({
+        url: base_url + "event/group_toggle_search",
+        type: "POST",
+        data: {
+            search_name: search_name,
+            _token: $('meta[name="csrf-token"]').attr("content"), // Adding CSRF token
+        },
+        beforeSend: function () {
+            $("#loader").show();
+        },
+    })
+        .done(function (data) {
+            console.log(data.html);
+            if (data.html == " ") {
+                $("#loader").html("No more contacts found");
+                return;
+            }
+            $("#loader").hide();
+            $(".user-contacts-sidebar").append(data.html);
+        })
+        .fail(function (jqXHR, ajaxOptions, thrownError) {
+            alert("server not responding...");
+        });
+})
+
