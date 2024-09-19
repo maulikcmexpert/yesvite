@@ -81,9 +81,9 @@ $('.rsvp-slide').owlCarousel({
       },
       1000:{
           items:1
-      }
-  }
-})
+      },
+  },
+});
 
 
 // $(".form-control").on('focusin', 
@@ -105,7 +105,7 @@ $('.group-owl').owlCarousel({
   autoplay:true,
   dots: false,
   center: true,
-  item: 5,
+  items: 5,
   responsive:{
       0:{ 
           items:1.5,
@@ -123,6 +123,6 @@ $('.group-owl').owlCarousel({
         items:5.3,
         dots: false,
       }
-  }
-})
+  },
+});
 });

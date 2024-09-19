@@ -379,6 +379,14 @@
     border-radius: 0;
 }
 
+.group_search_list .group-card {
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+
+
+
 /* ============ responsive ============ */
 @media only screen and (max-width:1800px) {
     .guest-wrapper {
@@ -510,5 +518,24 @@
         max-height: 400px;
         top: auto;
         bottom: 0;
+    }
+
+    .step_3 .design-seting {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        border-radius: 0px !important;
+        max-width: 100% !important;
+        transform: translateX(0%);
+    }
+
+    .step_3 .guest-main-content {
+        padding: 0px !important;
+    }
+
+    .guest-wrapper .invite-pro {
+        max-width: 300px;
+        min-width: 300px;
+        position: fixed;
     }
 }
