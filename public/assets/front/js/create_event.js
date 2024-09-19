@@ -518,7 +518,7 @@ $(document).on('click','.create_event_with_plan',function(){
 });
 
 $(document).on("click", ".add_more_activity", function () {
-    $(this).prev().html();
+    console.log($(this).prev().html());
     $(this).prop("disabled", true);
 
     var newClass = $(this).parent().next().find(".new_activity").data("id");
