@@ -390,6 +390,14 @@
     }
 }
 
+@media only screen and (max-width:1500px) {
+    .guest-wrapper {
+        max-width: 750px;
+    }
+}
+
+
+
 @media only screen and (max-width:1400px) {
     .guest-wrapper {
         max-width: 600px;
