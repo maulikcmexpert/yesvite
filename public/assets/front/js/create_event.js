@@ -361,7 +361,7 @@ $(function () {
                 eventDate = end.format("YYYY-MM-DD");
             }
             $("#event-date").val(eventDate);
-            
+
             $("#event-date").val(eventDate).trigger('change');
 
             $(".activity_bar").children().not(".toggle-wrp").remove();
@@ -4447,3 +4447,9 @@ $(document).on('keyup','#group_toggle_search',function () {
         });
 })
 
+$(document).on('click','.listing-arrow',function(){
+
+console.log($(this).next().html());
+
+
+});
