@@ -209,7 +209,7 @@ $(function(){
 
 $( window ).on( "load", function() {
     console.log( "window loaded" );
-    $("#sidebar").css({"right": "-500px", "width": "0px"});
+    $("#sidebar").css({"right": "-200%", "width": "0px"});
 });
 
 // function toggleSidebar(id) {
