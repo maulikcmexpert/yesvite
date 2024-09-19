@@ -766,6 +766,9 @@ $(document).on("click", 'input[name="email_invite[]"]', function () {
                 _token: $('meta[name="csrf-token"]').attr("content"),
             },
             success: function (response) {
+                var getInvitedCount = parseInt($('#event_guest_left_count').val());
+                getInvitedCount++;
+                $('#event_guest_left_count').val(getInvitedCount);
                 if (response.is_duplicate == 1) {
                     $("#user_tel-" + userId).remove();
                 }
@@ -814,6 +817,9 @@ function delete_invited_user(userId) {
         },
         success: function (response) {
             console.log("User ID deleted successfully.");
+            var getInvitedCount = parseInt($('#event_guest_left_count').val());
+            getInvitedCount--;
+            $('#event_guest_left_count').val(getInvitedCount);
         },
         error: function (xhr, status, error) {
             console.error("An error occurred while storing the User ID.");
@@ -825,7 +831,10 @@ $(document).on("click", 'input[name="mobile[]"]', function () {
     var userId = $(this).val();
     var isChecked = $(this).is(":checked");
     var mobile = $(this).data("mobile");
-
+    var yesviteInviteCount = parseInt($('#event_guest_left_count').val());
+    if(yesviteInviteCount == 15){
+        $('.user_choice').prop('disabled',true);
+    }
     if (isChecked == true || isChecked == "true") {
         $.ajax({
             url: base_url + "event/store_user_id",
@@ -2053,7 +2062,7 @@ $(document).on("click", "#close_createEvent", function () {
             var rsvp_by_date = $("#rsvp-by-date").val();
             var event_id = $("#event_id").val();
             var description = $("#description").val();
-            
+
 
             var events_schedule = '0';
             var rsvp_end_time_set = '0';
@@ -2822,7 +2831,7 @@ function toggleSidebar(id = null) {
 }
 
 $(document).on("change", "input[name='email_invite[]']", function () {
-    enforceCheckboxLimit();
+    // enforceCheckboxLimit();
     if (!$(this).is(":checked")) {
         var check = $(this).data("id");
         $("#" + check).remove();
@@ -2840,7 +2849,7 @@ $(document).on("change", "input[name='email_invite[]']", function () {
 });
 
 $(document).on("change", "input[name='mobile[]']", function () {
-    enforceCheckboxLimit();
+    // enforceCheckboxLimit();
     if (!$(this).is(":checked")) {
         var check = $(this).data("id");
         $("#" + check).remove();
