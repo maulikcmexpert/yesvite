@@ -855,15 +855,21 @@ class EventController extends Controller
     public function listGroupMember(Request $request)
     {
         $group_id = $request->input('group_id');
+        $id = Auth::guard('web')->user()->id;
+        $groupMember = GroupMember::where('group_id', $group_id)->pluck('user_id');
 
-        $groups = GroupMember::with(['user' => function ($query) {
-            $query->select('id', 'lastname', 'firstname', 'email', 'phone_number')
-            ->orderBy('firstname','ASC');
-        }])
-            ->where('group_id', $group_id)
+        $groups = User::select('id', 'firstname', 'profile', 'lastname', 'email', 'country_code', 'phone_number', 'app_user', 'prefer_by', 'email_verified_at', 'parent_user_phone_contact')
+            ->where('id', '!=', $id)->whereIn('id', $groupMember)->orderBy('firstname')
             ->get();
 
-        return response()->json(['view' => view('front.event.guest.list_group_member', ['groups' =>  $groups])->render(), "status" => "1"]);
+        // $groups = GroupMember::with(['user' => function ($query) {
+        //     $query->select('id', 'lastname', 'firstname', 'email', 'phone_number')
+        //     ->orderBy('firstname','ASC');
+        // }])
+        //     ->where('group_id', $group_id)
+        //     ->get();
+
+        return response()->json(['view' => view('front.event.guest.list_group_member', compact('groups'))->render(), "status" => "1"]);
     }
 
     public function getUserAjax(Request $request)
