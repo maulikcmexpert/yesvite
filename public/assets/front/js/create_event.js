@@ -3732,7 +3732,10 @@ function displayRecords(lim, off,type,search = null,) {
 
         },
         success: function (html) {
-
+            var currentInviteCount = parseInt($('#currentInviteCount').val())
+            if(currentInviteCount >= 15){
+                $('.user_choice').prop('disabled',true);
+            }
             if(type=="all"){
                 if(search != null){
                     $("#YesviteUserAll").html(html);
