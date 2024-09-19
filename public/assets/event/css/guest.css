@@ -536,5 +536,6 @@
     .guest-wrapper .invite-pro {
         max-width: 300px;
         min-width: 300px;
+        position: fixed;
     }
 }
