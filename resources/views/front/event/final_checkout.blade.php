@@ -830,7 +830,8 @@
         <div class="modal-footer">
             <a href="{{route('profile')}}" class="btn cancel-btn">Done</a>
             {{-- <button type="button" class="btn cancel-btn" data-bs-dismiss="modal">Done</button> --}}
-            <button type="button" class="btn continue-btn">See Invite</button>
+            {{-- <button type="button" class="btn continue-btn">See Invite</button> --}}
+            <a href="{{route('profile')}}" class="btn continue-btn">See Invite</a>
         </div>
     </div>
 </div>
