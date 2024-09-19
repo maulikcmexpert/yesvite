@@ -525,5 +525,16 @@
         bottom: 0;
         left: 0;
         border-radius: 0px !important;
+        max-width: 100% !important;
+        transform: translateX(0%);
+    }
+
+    .step_3 .guest-main-content {
+        padding: 0px !important;
+    }
+
+    .guest-wrapper .invite-pro {
+        max-width: 300px;
+        min-width: 300px;
     }
 }
