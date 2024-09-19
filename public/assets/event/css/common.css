@@ -886,7 +886,7 @@ ul.cost-list li span {
         margin: 0 10px;
     }
 
-    .sidebar {
+    /* .sidebar {
         width: 100% !important;
         top: auto;
         max-height: 700px;
@@ -894,23 +894,23 @@ ul.cost-list li span {
         border-top-left-radius: 20px;
         border-top-right-radius: 20px;
         bottom: 0;
-    }
+    } */
 
     .new-event-btn {
         margin-top: 20px;
         bottom: 0;
     }
 
-    .sidebar-content,
+    /* .sidebar-content,
     .sidebar {
         max-height: 500px !important;
-    }
+    } */
 
-    .sidebar-content {
+    /* .sidebar-content {
         max-width: 100% !important;
         padding-bottom: 110px;
 
-    }
+    } */
 
     .sidebar {
         right: -600px;
