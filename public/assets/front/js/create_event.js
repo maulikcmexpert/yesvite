@@ -348,8 +348,7 @@ $(function () {
         },
         
         function (start, end, label) {
-            console.log(start);
-            console.log(end);
+            
             
             selectedDates.clear();
             selectedDates.add(start.format("YYYY-MM-DD"));
@@ -368,7 +367,7 @@ $(function () {
             $("#end-time").val("");
             $("#start-time").val("");
             $(".end_time").css("display", "none");
-
+            console.log(selectedDates);
             if (selectedDates.size > 0) {
                 var sortedDates = [...selectedDates].sort();
                 var startDate = moment(sortedDates[0]);
