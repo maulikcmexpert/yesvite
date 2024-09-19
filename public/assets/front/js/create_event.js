@@ -3104,7 +3104,11 @@ $(document).on("click", "#delete_potluck_category_btn", function () {
         success: function (response) {
             if(potluck_delete_id == 'all_potluck'){
                 $(".potluck").hide();
-                $('.category-main-dishesh').html('');
+                $('.category-main-dishesh').remove();
+                category = 0;
+                items = 0;
+                potluck_cateogry_item_count();
+                
                 return;
             }
             category--;
