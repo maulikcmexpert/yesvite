@@ -890,7 +890,11 @@
         border-top-left-radius: 20px;
         border-top-right-radius: 20px;
         bottom: 0;
-        max-height: 700px;
+        max-height: 600px;
+    }
+
+    .supportive-div {
+        height: calc(100vh - 212px);
     }
 
     .dropdown-sub-menu {
