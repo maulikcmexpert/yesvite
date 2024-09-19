@@ -2494,9 +2494,9 @@ function savePage1Data(close = null) {
 
 function savePage3Data() {
     // let invited_user_ids = [];
-    var checkedCheckbox = $('input[name="email_invite[]"]:checked');
+    var checkedCheckbox = parseInt($('.invite-count').text());
 
-    if (checkedCheckbox.length == 0) {
+    if (checkedCheckbox == 0) {
         toastr.success("Please select invited user");
         return;
     }
