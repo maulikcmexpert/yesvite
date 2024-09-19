@@ -277,7 +277,7 @@ $(document).ready(function(){
         
         $details.stop(true, true).slideToggle(300, function() {
             const isVisible = $details.is(':visible');
-            $button.html(isVisible ? '<div class="w-100 d-flex justify-content-between" style="cursor:pointer"><span class="limited-hide">Pay as you go<strong>per event</strong></span><span class="">Hide details <i class="fa-solid fa-chevron-up chevron"></i></span> </div>' : '<div class="w-100 d-flex justify-content-between" style="cursor:pointer"> <span class="limited-show" style="color:green">All the PRO features for this one event</span><span class="">Show details <i class="fa-solid fa-chevron-down chevron"></i></span></div>');
+            $button.html(isVisible ? '<div class="w-100 d-flex justify-content-between" style="cursor:pointer"><span class="limited-hide">Pay as you go <strong>per event</strong></span><span class="">Hide details <i class="fa-solid fa-chevron-up chevron"></i></span> </div>' : '<div class="w-100 d-flex justify-content-between" style="cursor:pointer"> <span class="limited-show" style="color:green">All the PRO features for this one event</span><span class="">Show details <i class="fa-solid fa-chevron-down chevron"></i></span></div>');
             // ▲ for up, ▼ for down
         });
     });
