@@ -887,15 +887,9 @@ class EventController extends Controller
             ->get();
         $yesvite_user = [];
         foreach ($yesvite_users as $user) {
-
-            // if ($user->parent_user_phone_contact != $id && $user->app_user == '0') {
-            //     echo  $user->id;
-            //     continue;
-            // }
             if ($user->email_verified_at == NULL && $user->app_user == '1') {
                 continue;
             }
-            
             $yesviteUserDetail = [
                 'id' => $user->id,
                 'profile' => empty($user->profile) ? "" : asset('public/storage/profile/' . $user->profile),
