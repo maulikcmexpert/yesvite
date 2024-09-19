@@ -857,10 +857,10 @@ class EventController extends Controller
         $group_id = $request->input('group_id');
 
         $groups = GroupMember::with(['user' => function ($query) {
-            $query->select('id', 'lastname', 'firstname', 'email', 'phone_number');
+            $query->select('id', 'lastname', 'firstname', 'email', 'phone_number')
+            ->orderBy('firstname','ASC');
         }])
             ->where('group_id', $group_id)
-            ->orderBy('id', 'DESC')
             ->get();
 
         return response()->json(['view' => view('front.event.guest.list_group_member', ['groups' =>  $groups])->render(), "status" => "1"]);
