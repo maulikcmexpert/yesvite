@@ -441,6 +441,10 @@
     transform: rotateZ(-180deg);
 }
 
+.activity-schedule-inner .accordion-button .fa-angle-down {
+    transform: rotateZ(0deg);
+}
+
 .activity-schedule-inner .accordion-header {
     position: relative;
     z-index: 2;
