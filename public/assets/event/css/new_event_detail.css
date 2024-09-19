@@ -429,6 +429,7 @@
 
 .activity-schedule-inner .accordion-item {
     border: transparent !important;
+    padding: 0px !important;
 }
 
 .activity-schedule-inner .accordion-header {
