@@ -898,6 +898,10 @@
     background: transparent !important;
 }
 
+.potluck-category .list-slide {
+    max-height: 290px;
+    overflow: hidden;
+}
 
 /* ============ responsive ============ */
 @media only screen and (max-width:991px) {
