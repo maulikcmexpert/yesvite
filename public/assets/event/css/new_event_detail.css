@@ -560,9 +560,6 @@
     background-color: #fff;
 }
 
-.sidebar-content.activity_bar {
-    height: 100%;
-}
 
 .activity-schedule-inner-btn .cmn-btn {
     width: 100%;
@@ -892,8 +889,7 @@
         margin-bottom: 20px;
     }
 
-    .sidebar-content.activity_bar {
-        height: 100%;
+    .sidebar-content {
         border-radius: 20px 20px 0px 0px;
     }
 
