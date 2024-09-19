@@ -404,7 +404,7 @@
                                         <div class="toggle-button-cover">
                                             <div class="button-cover">
                                                 <div class="button r" id="button-1">
-                                                    <input type="checkbox" id="event_wall_post" name="event_wall_post" class="checkbox notification_checkbox" checked/>
+                                                    <input type="checkbox" id="event_wall_post" name="event_wall_post" class="checkbox notification_checkbox" checked />
                                                     <div class="knobs"></div>
                                                     <div class="layer"></div>
                                                 </div>
@@ -427,7 +427,7 @@
                                         <div class="toggle-button-cover">
                                             <div class="button-cover">
                                                 <div class="button r" id="button-1">
-                                                    <input type="checkbox" id="rsvp_update" name="rsvp_update" class="checkbox notification_checkbox" checked/>
+                                                    <input type="checkbox" id="rsvp_update" name="rsvp_update" class="checkbox notification_checkbox" checked />
                                                     <div class="knobs"></div>
                                                     <div class="layer"></div>
                                                 </div>
@@ -455,7 +455,7 @@
                                         <div class="toggle-button-cover">
                                             <div class="button-cover">
                                                 <div class="button r" id="button-1">
-                                                    <input type="checkbox" id="request_photo" name="request_photo" class="checkbox notification_checkbox" checked/>
+                                                    <input type="checkbox" id="request_photo" name="request_photo" class="checkbox notification_checkbox" checked />
                                                     <div class="knobs"></div>
                                                     <div class="layer"></div>
                                                 </div>
