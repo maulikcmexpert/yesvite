@@ -216,131 +216,132 @@
                     </svg>
                 </button>
             </div>
-            @if(!session('create_new_event_closed'))
-            <div class="alert-box d-flex align-items-center" id="create_new_event_tip">
-                <span class="me-3">
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M9.99984 18.3332C14.5832 18.3332 18.3332 14.5832 18.3332 9.99984C18.3332 5.4165 14.5832 1.6665 9.99984 1.6665C5.4165 1.6665 1.6665 5.4165 1.6665 9.99984C1.6665 14.5832 5.4165 18.3332 9.99984 18.3332Z"
-                            stroke="#23AA26" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M10 6.6665V10.8332" stroke="#23AA26" stroke-width="1.5" stroke-linecap="round"
-                            stroke-linejoin="round" />
-                        <path d="M9.99561 13.3335H10.0031" stroke="#23AA26" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" />
-                    </svg>
-                </span>
-                <p>You can choose to continue one of your drafts above or hit the “Create New Event” button.</p>
-                <span class="ms-3 create_new_event_close_tip">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path d="M5.00098 5L19 18.9991" stroke="#64748B" stroke-width="1.5" stroke-linecap="round"
-                            stroke-linejoin="round" />
-                        <path d="M4.99996 18.9991L18.999 5" stroke="#64748B" stroke-width="1.5"
-                            stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                </span>
-            </div>
-            @endif
-            @if (isset($draft_events) && $draft_events->isNotEmpty())
-
-            @foreach ($draft_events as $draft)
-            @php
-            if ($draft->step == '1') {
-            $progress = 'brand-progress';
-            $percent = '25';
-            $step_name = 'Details';
-            } elseif ($draft->step == '2') {
-            $progress = 'brand-progress progress-yellow';
-            $percent = '50';
-            $step_name = 'Desgin';
-            } elseif ($draft->step == '3') {
-            $percent = '75';
-            $progress = 'brand-progress progress-yellow';
-            $step_name = 'Guest';
-            } elseif ($draft->step == '4') {
-            $percent = '99';
-            $progress = 'brand-progress progress-yellow';
-            $step_name = 'Setting';
-            }else{
-                $percent = '0';
-                $progress = 'brand-progress progress-yellow';
-                $step_name = 'Details';
-            }
-            @endphp
-
-
-
-            <div class="{{ $progress }}" data-id="{{$draft->id}}">
-                <div class="d-flex align-items-center">
+            <div class="new-latest-draf-wrp">
+                @if(!session('create_new_event_closed'))
+                <div class="alert-box d-flex align-items-center" id="create_new_event_tip">
                     <span class="me-3">
-                        <svg width="44" height="44" viewBox="0 0 44 44" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <rect x="0.5" y="0.5" width="43" height="43" rx="21.5"
-                                stroke="#E2E8F0" />
-                            <path d="M18.6665 13.6665V16.1665" stroke="#CBD5E1" stroke-width="1.5"
-                                stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M25.3335 13.6665V16.1665" stroke="#94A3B8" stroke-width="1.5"
-                                stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                            <path
-                                d="M27.1667 29.8333C28.6394 29.8333 29.8333 28.6394 29.8333 27.1667C29.8333 25.6939 28.6394 24.5 27.1667 24.5C25.6939 24.5 24.5 25.6939 24.5 27.1667C24.5 28.6394 25.6939 29.8333 27.1667 29.8333Z"
-                                stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                            <path d="M30.3333 30.3333L29.5 29.5" stroke="#94A3B8" stroke-width="1.5"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M14.9165 19.5752H29.0832" stroke="#94A3B8" stroke-width="1.5"
-                                stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                            <path
-                                d="M23.1417 30.3332H18.6667C15.75 30.3332 14.5 28.6665 14.5 26.1665V19.0832C14.5 16.5832 15.75 14.9165 18.6667 14.9165H25.3333C28.25 14.9165 29.5 16.5832 29.5 19.0832V22.8332"
-                                stroke="#94A3B8" stroke-width="1.5" stroke-miterlimit="10"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M21.9961 23.4167H22.0036" stroke="#94A3B8" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M18.9121 23.4167H18.9196" stroke="#94A3B8" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M18.9121 25.9167H18.9196" stroke="#94A3B8" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                    </span>
-                    <div>
-                        <h4><b>{{ $draft->event_name }}</b></h4>
-                        @php
-                        $unixTimestamp = strtotime($draft->updated_at);
-                        $formattedDate = date('F d, Y.h:i A', $unixTimestamp);
-                        @endphp
-                        <p>Saved on {{ $formattedDate }}</p>
-                    </div>
-                    <a href="#" class="ms-auto">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <path
-                                d="M9.1665 1.6665H7.49984C3.33317 1.6665 1.6665 3.33317 1.6665 7.49984V12.4998C1.6665 16.6665 3.33317 18.3332 7.49984 18.3332H12.4998C16.6665 18.3332 18.3332 16.6665 18.3332 12.4998V10.8332"
-                                stroke="#CBD5E1" stroke-width="1.5" stroke-linecap="round"
+                                d="M9.99984 18.3332C14.5832 18.3332 18.3332 14.5832 18.3332 9.99984C18.3332 5.4165 14.5832 1.6665 9.99984 1.6665C5.4165 1.6665 1.6665 5.4165 1.6665 9.99984C1.6665 14.5832 5.4165 18.3332 9.99984 18.3332Z"
+                                stroke="#23AA26" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M10 6.6665V10.8332" stroke="#23AA26" stroke-width="1.5" stroke-linecap="round"
                                 stroke-linejoin="round" />
-                            <path
-                                d="M13.3666 2.51688L6.7999 9.08354C6.5499 9.33354 6.2999 9.82521 6.2499 10.1835L5.89157 12.6919C5.75823 13.6002 6.3999 14.2335 7.30823 14.1085L9.81657 13.7502C10.1666 13.7002 10.6582 13.4502 10.9166 13.2002L17.4832 6.63354C18.6166 5.50021 19.1499 4.18354 17.4832 2.51688C15.8166 0.850211 14.4999 1.38354 13.3666 2.51688Z"
-                                stroke="#CBD5E1" stroke-width="1.5" stroke-miterlimit="10"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M12.4248 3.4585C12.9831 5.45016 14.5415 7.0085 16.5415 7.57516"
-                                stroke="#CBD5E1" stroke-width="1.5" stroke-miterlimit="10"
+                            <path d="M9.99561 13.3335H10.0031" stroke="#23AA26" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </span>
+                    <p>You can choose to continue one of your drafts above or hit the “Create New Event” button.</p>
+                    <span class="ms-3 create_new_event_close_tip">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5.00098 5L19 18.9991" stroke="#64748B" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            <path d="M4.99996 18.9991L18.999 5" stroke="#64748B" stroke-width="1.5"
                                 stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
-                    </a>
+                    </span>
                 </div>
-                <div class="progress-bar__wrapper">
-                    <progress id="progress-bar" value="{{ isset($percent)?$percent:'' }}" max="100"></progress>
-                    <div class="d-flex align-items-center justify-content-between">
-                        <h4>{{ $draft->step }}/4 Steps - {{ isset($step_name)?$step_name:'' }}</h4>
-                        <label class="progress-bar__value" htmlFor="progress-bar"> {{ isset($percent)?$percent:'' }}%
-                        </label>
+                @endif
+                @if (isset($draft_events) && $draft_events->isNotEmpty())
+
+                @foreach ($draft_events as $draft)
+                @php
+                if ($draft->step == '1') {
+                $progress = 'brand-progress';
+                $percent = '25';
+                $step_name = 'Details';
+                } elseif ($draft->step == '2') {
+                $progress = 'brand-progress progress-yellow';
+                $percent = '50';
+                $step_name = 'Desgin';
+                } elseif ($draft->step == '3') {
+                $percent = '75';
+                $progress = 'brand-progress progress-yellow';
+                $step_name = 'Guest';
+                } elseif ($draft->step == '4') {
+                $percent = '99';
+                $progress = 'brand-progress progress-yellow';
+                $step_name = 'Setting';
+                }else{
+                $percent = '0';
+                $progress = 'brand-progress progress-yellow';
+                $step_name = 'Details';
+                }
+                @endphp
+
+
+
+                <div class="{{ $progress }}" data-id="{{$draft->id}}">
+                    <div class="d-flex align-items-center">
+                        <span class="me-3">
+                            <svg width="44" height="44" viewBox="0 0 44 44" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <rect x="0.5" y="0.5" width="43" height="43" rx="21.5"
+                                    stroke="#E2E8F0" />
+                                <path d="M18.6665 13.6665V16.1665" stroke="#CBD5E1" stroke-width="1.5"
+                                    stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M25.3335 13.6665V16.1665" stroke="#94A3B8" stroke-width="1.5"
+                                    stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                <path
+                                    d="M27.1667 29.8333C28.6394 29.8333 29.8333 28.6394 29.8333 27.1667C29.8333 25.6939 28.6394 24.5 27.1667 24.5C25.6939 24.5 24.5 25.6939 24.5 27.1667C24.5 28.6394 25.6939 29.8333 27.1667 29.8333Z"
+                                    stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path d="M30.3333 30.3333L29.5 29.5" stroke="#94A3B8" stroke-width="1.5"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M14.9165 19.5752H29.0832" stroke="#94A3B8" stroke-width="1.5"
+                                    stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                <path
+                                    d="M23.1417 30.3332H18.6667C15.75 30.3332 14.5 28.6665 14.5 26.1665V19.0832C14.5 16.5832 15.75 14.9165 18.6667 14.9165H25.3333C28.25 14.9165 29.5 16.5832 29.5 19.0832V22.8332"
+                                    stroke="#94A3B8" stroke-width="1.5" stroke-miterlimit="10"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M21.9961 23.4167H22.0036" stroke="#94A3B8" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M18.9121 23.4167H18.9196" stroke="#94A3B8" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M18.9121 25.9167H18.9196" stroke="#94A3B8" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </span>
+                        <div>
+                            <h4><b>{{ $draft->event_name }}</b></h4>
+                            @php
+                            $unixTimestamp = strtotime($draft->updated_at);
+                            $formattedDate = date('F d, Y.h:i A', $unixTimestamp);
+                            @endphp
+                            <p>Saved on {{ $formattedDate }}</p>
+                        </div>
+                        <a href="#" class="ms-auto">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M9.1665 1.6665H7.49984C3.33317 1.6665 1.6665 3.33317 1.6665 7.49984V12.4998C1.6665 16.6665 3.33317 18.3332 7.49984 18.3332H12.4998C16.6665 18.3332 18.3332 16.6665 18.3332 12.4998V10.8332"
+                                    stroke="#CBD5E1" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path
+                                    d="M13.3666 2.51688L6.7999 9.08354C6.5499 9.33354 6.2999 9.82521 6.2499 10.1835L5.89157 12.6919C5.75823 13.6002 6.3999 14.2335 7.30823 14.1085L9.81657 13.7502C10.1666 13.7002 10.6582 13.4502 10.9166 13.2002L17.4832 6.63354C18.6166 5.50021 19.1499 4.18354 17.4832 2.51688C15.8166 0.850211 14.4999 1.38354 13.3666 2.51688Z"
+                                    stroke="#CBD5E1" stroke-width="1.5" stroke-miterlimit="10"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M12.4248 3.4585C12.9831 5.45016 14.5415 7.0085 16.5415 7.57516"
+                                    stroke="#CBD5E1" stroke-width="1.5" stroke-miterlimit="10"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="progress-bar__wrapper">
+                        <progress id="progress-bar" value="{{ isset($percent)?$percent:'' }}" max="100"></progress>
+                        <div class="d-flex align-items-center justify-content-between">
+                            <h4>{{ $draft->step }}/4 Steps - {{ isset($step_name)?$step_name:'' }}</h4>
+                            <label class="progress-bar__value" htmlFor="progress-bar"> {{ isset($percent)?$percent:'' }}%
+                            </label>
+                        </div>
                     </div>
                 </div>
-            </div>
-            @endforeach
-            @endif
+                @endforeach
+                @endif
 
 
-            {{-- <div class="brand-progress progress-yellow">
+                {{-- <div class="brand-progress progress-yellow">
                 <div class="d-flex align-items-center">
                     <span class="me-3">
                         <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -376,6 +377,7 @@
                     </div>
                 </div>
             </div> --}}
+            </div>
         </div>
 
         <!-- ======= latest-draft end ========= -->
