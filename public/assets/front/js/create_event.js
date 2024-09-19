@@ -765,13 +765,9 @@ $(document).on("click", 'input[name="email_invite[]"]', function () {
             },
             success: function (response) {
 
-                var currentInviteCount = $('#currentInviteCount').val();
+                var currentInviteCount = parseInt($('#currentInviteCount').val());
                 currentInviteCount++;
                 $('#currentInviteCount').val(currentInviteCount);
-
-                if(currentInviteCount >= 15){
-                    $('.user_choice').prop('disabled',true);
-                }
                 if (response.is_duplicate == 1) {
                     $("#user_tel-" + userId).remove();
                 }
@@ -784,6 +780,9 @@ $(document).on("click", 'input[name="email_invite[]"]', function () {
                     $(".inivted_user_list").append(response.view);
                     guest_counter(0,15);
                     $('input[name="email_invite[]"]').prop('disabled', false);
+                    if(currentInviteCount >= 15){
+                        $('.user_choice').prop('disabled',true);
+                    }
                     $("#loader").css('display','none');
                    
                 // }
@@ -819,7 +818,7 @@ function delete_invited_user(userId) {
             _token: $('meta[name="csrf-token"]').attr("content"), // Adding CSRF token
         },
         success: function (response) {
-            var currentInviteCount = $('#currentInviteCount').val();
+            var currentInviteCount = parseInt($('#currentInviteCount').val());
             currentInviteCount--;
             $('#currentInviteCount').val(currentInviteCount);
 
@@ -855,21 +854,21 @@ $(document).on("click", 'input[name="mobile[]"]', function () {
                 currentInviteCount++;
                 $('#currentInviteCount').val(currentInviteCount);
 
-                if(currentInviteCount >= 15){
-                    $('.user_choice').prop('disabled',true);
-                }
                 if (response.is_duplicate == 1) {
                     $("#user-" + userId).remove();
                 }
                 $(".inivted_user_list").append(response.view);
-
+                
                 total_guest = $(".users-data.invited_user").length;
                 $("#event_guest_count").text(total_guest + " Guests");
                 $(".invite-count").text(total_guest);
-
+                
                 var max_guest = 15;
                 var remainingCount = max_guest - total_guest;
-
+                if(currentInviteCount >= 15){
+                    $('.user_choice').prop('disabled',true);
+                }
+                
                 $(".invite-left_d").text("Invites | " + remainingCount + " Left");
                 $("#event_guest_left_count").val(remainingCount);
             },
