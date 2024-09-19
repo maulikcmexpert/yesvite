@@ -40,6 +40,8 @@ $(document).ready(function () {
             },
         });
     }
+
+    $('.search_user').val('');
 });
 // $(function() {
 //     $('#event-date').daterangepicker({
