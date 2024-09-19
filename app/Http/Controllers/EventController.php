@@ -113,7 +113,7 @@ class EventController extends Controller
         // ->get();
 
         $groups = Group::withCount('groupMembers')
-            ->orderByDesc('group_members_count')
+            ->orderBy('name','ASC')
             ->where('user_id', $id)
             ->get();
 
@@ -857,10 +857,10 @@ class EventController extends Controller
         $group_id = $request->input('group_id');
 
         $groups = GroupMember::with(['user' => function ($query) {
-            $query->select('id', 'lastname', 'firstname', 'email', 'phone_number');
+            $query->select('id', 'lastname', 'firstname', 'email', 'phone_number')
+            ->orderBy('firstname','ASC');
         }])
             ->where('group_id', $group_id)
-            ->orderBy('id', 'DESC')
             ->get();
 
         return response()->json(['view' => view('front.event.guest.list_group_member', ['groups' =>  $groups])->render(), "status" => "1"]);
@@ -1242,7 +1242,7 @@ class EventController extends Controller
         $search_user = $request->search_name;
         $id = Auth::guard('web')->user()->id;
         $groups = Group::withCount('groupMembers')
-        ->orderByDesc('group_members_count')
+        ->orderBy('name','ASC')
         ->where('user_id', $id)
         ->when($search_user != '', function ($query) use ($search_user) {
             $query->where(function ($q) use ($search_user) {
@@ -1257,7 +1257,7 @@ class EventController extends Controller
         $search_user = $request->search_name;
         $id = Auth::guard('web')->user()->id;
         $groups = Group::withCount('groupMembers')
-        ->orderByDesc('group_members_count')
+        ->orderBy('name','ASC')
         ->where('user_id', $id)
         ->when($search_user != '', function ($query) use ($search_user) {
             $query->where(function ($q) use ($search_user) {

@@ -2042,11 +2042,17 @@ $(document).on("click", "#close_createEvent", function () {
             var hostedby = $("#hostedby").val();
             var event_date = $("#event-date").val();
             var start_time = $("#start-time").val();
+            var start_time_zone =  $('#start-time-zone').val();
+            var schedule = $('#schedule').is(":checked");
             var end_time = $("#end_time").is(":checked");
             var rsvp_by_date_set = $("#rsvp_by_date").is(":checked");
-            var rsvp_end_time_set = '0';
             var end_time_zone =  $('#end-time-zone').val();
-            var start_time_zone =  $('#start-time-zone').val();
+
+            var events_schedule = '0';
+            if(schedule){
+                events_schedule = '1';
+            }
+            var rsvp_end_time_set = '0';
             if(end_time){
                 rsvp_end_time_set = '1';
             }
@@ -2076,6 +2082,7 @@ $(document).on("click", "#close_createEvent", function () {
                 event_location:description,
                 rsvp_start_timezone:start_time_zone,
                 rsvp_end_timezone:end_time_zone,
+                events_schedule:events_schedule
             };
             $(".step_2").hide();
         }
