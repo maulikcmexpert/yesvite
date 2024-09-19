@@ -3374,21 +3374,22 @@ $(document).on("click", ".add_gift_item_btn", function () {
     var registry_link = $("#registry_link").val();
     var registry_edit_item = $("#registry_item_id").val();
     var regex = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
-    if (regex.test(registry_link)) {
+    if (recipient_name == "") {
+        $("#recipient_name_error")
+            .css("display", "block")
+            .css("color", "red")
+            .text("Please add recipients name");
+        return;
+    } else {
+        $("#recipient_name_error").text("");
+    }
+    if (registry_link != '' && regex.test(registry_link)) {
         if (registry_edit_item != "") {
             var $registryDiv = $("#registry" + registry_edit_item);
             $registryDiv.find("#added_recipient_name").text(recipient_name);
             $registryDiv.find("#added_registry_link").text(registry_link);
         }
-        if (recipient_name == "") {
-            $("#recipient_name_error")
-                .css("display", "block")
-                .css("color", "red")
-                .text("Please add recipients name");
-            return;
-        } else {
-            $("#recipient_name_error").text("");
-        }
+        
     
         if (registry_link == "") {
             $("#registry_link_error")
