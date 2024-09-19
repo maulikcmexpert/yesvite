@@ -568,6 +568,7 @@ $(document).on("click", ".add_more_activity", function (e) {
 
     if((start_time == null || start_time == "") && firstActivity == 'add_activity_1' ){
         e.preventDefault();
+        toastr.error('Plaese select start time');
         return;
     }
     $(this).parent().find('.accordion-button').addClass('accordian_open');
