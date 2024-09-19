@@ -3,10 +3,11 @@
 
 $email_checked = '';
 $phone_checked = '';
+$disabled = '';
 if(isset($selected_user) && !empty($selected_user)){
     $foundKey = array_search($user->id, array_column($selected_user, 'id'));
 
-        if ($foundKey !== false) {
+    if ($foundKey !== false) {
         $key = array_keys($selected_user)[$foundKey];
         $email_checked = '';
         $phone_checked = '';
@@ -18,6 +19,7 @@ if(isset($selected_user) && !empty($selected_user)){
             }
         }
     }
+    
 }
 @endphp
 <div class="users-data">
