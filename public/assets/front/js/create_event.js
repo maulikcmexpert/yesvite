@@ -745,6 +745,8 @@ function loadMoreData(page, search_name) {
 
 // $(document).ready(function () {
 $(document).on("click", 'input[name="email_invite[]"]', function (e) {
+    var inviteCount = parseInt($('#currentInviteCount').val());
+
     if ($(this).is(':disabled')) {
         e.preventDefault(); 
         return; 
@@ -754,6 +756,10 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
     var userId = $(this).val();
     var isChecked = $(this).is(":checked");
     var email = $(this).data("email");
+    // if(inviteCount > 15){
+    //     e.preventDefault(); 
+    //     return;
+    // }
 
     if (isChecked == true || isChecked == "true") {
         $('input[name="email_invite[]"]').attr('disabled', true);
@@ -826,9 +832,9 @@ function delete_invited_user(userId) {
             currentInviteCount--;
             $('#currentInviteCount').val(currentInviteCount);
 
-            if(currentInviteCount < 15){
-                $('.user_choice').prop('disabled',false);
-            }
+            // if(currentInviteCount < 15){
+            //     $('.user_choice').prop('disabled',false);
+            // }
             console.log("User ID deleted successfully.");
         },
         error: function (xhr, status, error) {
@@ -838,10 +844,10 @@ function delete_invited_user(userId) {
 }
 
 $(document).on("click", 'input[name="mobile[]"]', function (e) {
-    if ($(this).is(':disabled')) {
-        e.preventDefault(); 
-        return; 
-    }
+    // if ($(this).is(':disabled')) {
+    //     e.preventDefault(); 
+    //     return; 
+    // }
     var userId = $(this).val();
     var isChecked = $(this).is(":checked");
     var mobile = $(this).data("mobile");
@@ -873,9 +879,9 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
                 
                 var max_guest = 15;
                 var remainingCount = max_guest - total_guest;
-                if(currentInviteCount >= 15){
-                    $('.user_choice').prop('disabled',true);
-                }
+                // if(currentInviteCount >= 15){
+                //     $('.user_choice').prop('disabled',true);
+                // }
                 
                 $(".invite-left_d").text("Invites | " + remainingCount + " Left");
                 $("#event_guest_left_count").val(remainingCount);
@@ -2869,8 +2875,11 @@ $(document).on("change", "input[name='email_invite[]']", function () {
         var max_guest = 15;
 
         var remainingCount = max_guest - total_guest;
-
-        $(".invite-left_d").text("Invites | " + remainingCount + " Left");
+        if(remainingCount < 0){
+            $(".invite-left_d").text("Invites | 0 Left");
+        }else{
+            $(".invite-left_d").text("Invites | " + remainingCount + " Left");
+        }
         $("#event_guest_left_count").val(remainingCount);
     }
 });
@@ -2887,8 +2896,11 @@ $(document).on("change", "input[name='mobile[]']", function () {
         var max_guest = 15;
 
         var remainingCount = max_guest - total_guest;
-
-        $(".invite-left_d").text("Invites | " + remainingCount + " Left");
+        if(remainingCount < 0){
+            $(".invite-left_d").text("Invites | 0 Left");
+        }else{
+            $(".invite-left_d").text("Invites | " + remainingCount + " Left");
+        }
         $("#event_guest_left_count").val(remainingCount);
     }
 });

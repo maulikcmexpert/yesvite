@@ -19,9 +19,9 @@ if(isset($selected_user) && !empty($selected_user)){
             }
         }
     }
-    if(count($selected_user) >= 15){
-        $disabled = 'disabled';
-    }
+    // if(count($selected_user) >= 15){
+    //     $disabled = 'disabled';
+    // }
 }
 @endphp
 <div class="users-data">
