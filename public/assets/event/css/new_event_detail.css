@@ -807,6 +807,27 @@
     border-radius: 16px 16px 0px 0px !important;
 }
 
+
+.modal-content .alert-box {
+    border: 1px solid #23AA26;
+    border-radius: 16px;
+    padding: 10px 16px 10px 16px;
+}
+
+.modal-content .alert-box p {
+    color: #23AA26;
+    line-height: 21px;
+    font-size: 12px;
+}
+
+.modal-content .alert-box span.ms-3 svg {
+    cursor: pointer;
+}
+
+.modal-content .alert-box {
+    background-color: rgba(35, 170, 38, 0.1);
+}
+
 /* ======Responsiveness===== */
 
 
