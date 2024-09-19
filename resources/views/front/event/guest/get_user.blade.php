@@ -1,6 +1,6 @@
 @php
 $selected_user = session('user_ids');
-// dd($selected_user);
+dd($selected_user);
 @endphp
 
 @foreach ($yesvite_user as $user)
@@ -9,21 +9,20 @@ $selected_user = session('user_ids');
 $email_checked = '';
 $phone_checked = '';
 if(isset($selected_user) && !empty($selected_user)){
-$foundKey = array_search($user->id, array_column($selected_user, 'id'));
+    $foundKey = array_search($user->id, array_column($selected_user, 'id'));
 
-if ($foundKey !== false) {
-$key = array_keys($selected_user)[$foundKey];
-$email_checked = '';
-$phone_checked = '';
-if ($user->id === (int)$selected_user[$key]['id']) {
-if($selected_user[$key]['prefer_by'] == 'email'){
-$email_checked = 'checked';
-}elseif($selected_user[$key]['prefer_by'] == 'phone'){
-$phone_checked = 'checked';
-}
-
-}
-}
+        if ($foundKey !== false) {
+        $key = array_keys($selected_user)[$foundKey];
+        $email_checked = '';
+        $phone_checked = '';
+        if ($user->id === (int)$selected_user[$key]['id']) {
+            if($selected_user[$key]['prefer_by'] == 'email'){
+            $email_checked = 'checked';
+            }elseif($selected_user[$key]['prefer_by'] == 'phone'){
+            $phone_checked = 'checked';
+            }
+        }
+    }
 }
 @endphp
 <div class="users-data">
