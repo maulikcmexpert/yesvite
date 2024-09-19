@@ -45,7 +45,7 @@
                 <div class="accordion-body-content limits-count" id="user-list-{{$category_item}}-{{$category_index}}">
                     {{-- <img src="./assets/image/user-img.svg" alt=""> --}}
                     @if ($profile != '')
-                    <img src="{{ $profile }}" alt="user-img">
+                    <img src="{{ asset('storage/profile/' . $profile) }} " alt="user-img">
                     @else
                     @php
                     $firstInitial = !empty($firstname) ? strtoupper($firstname[0]) : '';
