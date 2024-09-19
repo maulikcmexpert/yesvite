@@ -407,8 +407,6 @@ $("#schedule").on("change", function () {
                 selectedDates.push(moment(singleDate).format("YYYY-MM-DD"));
                 selectedDates.push(moment(singleDate).format("YYYY-MM-DD"));
             }
-
-            set_activity_html(selectedDates);
         } else {
             $(".activity_bar").html('');
             $(".add-activity-schedule").hide();
