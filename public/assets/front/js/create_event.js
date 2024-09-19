@@ -4142,7 +4142,7 @@ $(document).on('keyup','#group_toggle_search',function () {
                 return;
             }
             $("#loader").hide();
-            $(".user-contacts-sidebar").append(data.html);
+            $(".group_search_list_toggle").append(data.html);
         })
         .fail(function (jqXHR, ajaxOptions, thrownError) {
             alert("server not responding...");

@@ -1911,7 +1911,7 @@
                 </svg>
             </span>
         </div>
-        <div class="group_list">
+        <div class="group_list group_search_list_toggle">
             @foreach ($groups as $group)
             <div class="group-card added_group{{ $group->id }} listgroups" data-id="{{ $group->id }}">
                 <div class="view_members" data-id="{{ $group->id }}">
