@@ -369,9 +369,9 @@
 
                 <div>
                     <div class="owl-carousel owl-theme group-owl">
-                        <div class="item">
                         @foreach ($groups as $group )
-
+                        
+                        <div class="item">
                             <div class="group-card">
                                 <div>
                                     <h4>{{$group->name}}</h4>
@@ -383,8 +383,8 @@
                                     </svg>
                                 </span>
                             </div>
-                            @endforeach
                         </div>
+                            @endforeach
                     </div>
                 </div>
 
