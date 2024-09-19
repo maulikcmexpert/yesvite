@@ -514,6 +514,10 @@
 }
 
 .activity-schedule-inner .accordion-body {
+    padding: 0px;
+}
+
+.activity-schedule-inner .accordion-collapse.show .accordion-body {
     padding: 10px;
 }
 
