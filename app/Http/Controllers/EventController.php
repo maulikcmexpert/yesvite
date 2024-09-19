@@ -911,8 +911,8 @@ class EventController extends Controller
             $yesvite_user[] = (object)$yesviteUserDetail;
         }
         $selected_user = Session::get('user_ids');
-        dd($selected_user);
-        return response()->json(view('front.event.guest.get_user', compact('yesvite_user', 'type'))->render());
+        // dd($selected_user);
+        return response()->json(view('front.event.guest.get_user', compact('yesvite_user', 'type','selected_user'))->render());
     }
 
     // public function searchUserAjax(Request $request){

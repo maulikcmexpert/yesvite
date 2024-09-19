@@ -1,8 +1,3 @@
-@php
-$selected_user = session('user_ids');
-
-@endphp
-
 @foreach ($yesvite_user as $user)
 @php
 
