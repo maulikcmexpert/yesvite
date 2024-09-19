@@ -689,8 +689,13 @@ $("#potluck").on("change", function () {
     if ($(this).is(":checked")) {
         $(".potluck").show();
     } else {
-        $("#delete_potluck_category_id").val('all_potluck');
-        $('#deleteModal_potluck').modal('show');
+        var category_count = $('#category_count').val();
+        if(category_count == '0'){
+            $(".potluck").hide();
+        }else{
+            $("#delete_potluck_category_id").val('all_potluck');
+            $('#deleteModal_potluck').modal('show');
+        }
     }
 });
 
@@ -1160,6 +1165,7 @@ $(document).on("click", ".add_category_btn", function () {
                 $(".potluck-category").append(response.view);
                 toggleSidebar("sidebar_potluck");
                 category++;
+                $('#category_count').val(category);
                 potluck_cateogry_item_count();
             } else {
                 potluckkey--;
@@ -3102,6 +3108,7 @@ $(document).on("click", "#delete_potluck_category_btn", function () {
                 return;
             }
             category--;
+            $('#category_count').val(category);
             items = items - response;
             // console.log(response);
             
