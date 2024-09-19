@@ -516,12 +516,8 @@ $(document).on('click','.create_event_with_plan',function(){
     });
 
 });
-$(document).on("click", ".accordion-button", function () {
-    if ($(this).hasClass('collapsed')) {
-        $(this).removeClass('accordian_open');
-    }});
 
-    $(document).on("click", ".add_more_activity", function () {
+$(document).on("click", ".add_more_activity", function () {
     $(this).parent().find('.accordion-button').addClass('accordian_open');
     $(this).prop("disabled", true);
 
@@ -2047,15 +2043,6 @@ $(document).on("click", "#close_createEvent", function () {
             var end_time = $("#end_time").is(":checked");
             var rsvp_by_date_set = $("#rsvp_by_date").is(":checked");
             var end_time_zone =  $('#end-time-zone').val();
-
-            var events_schedule = '0';
-            if(schedule){
-                events_schedule = '1';
-            }
-            var rsvp_end_time_set = '0';
-            if(end_time){
-                rsvp_end_time_set = '1';
-            }
             var address = $("#address1").val();
             var city = $("#city").val();
             var state = $("#state").val();
@@ -2064,6 +2051,17 @@ $(document).on("click", "#close_createEvent", function () {
             var rsvp_by_date = $("#rsvp-by-date").val();
             var event_id = $("#event_id").val();
             var description = $("#description").val();
+            
+
+            var events_schedule = '0';
+            var rsvp_end_time_set = '0';
+
+            if(schedule){
+                events_schedule = '1';
+            }
+            if(end_time){
+                rsvp_end_time_set = '1';
+            }
 
             eventData = {
                 event_type: event_type,
