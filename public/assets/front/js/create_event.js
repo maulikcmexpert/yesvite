@@ -724,6 +724,10 @@ $("#potluck").on("change", function () {
 $(document).on("click", ".potluck_cancel", function () {
     $('#potluck').prop('checked',true);
 });
+$(document).on("click", ".group_toggle_close_btn", function () {
+    $('#group_toggle_search').val('');
+    groupToggleSearch();
+});
 
 $("#gift_registry").on("change", function () {
     // alert()
