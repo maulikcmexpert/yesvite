@@ -437,6 +437,11 @@
     max-height: calc(100vh - 300px);
 }
 
+.change-your-plan-wrp {
+    overflow: hidden;
+    overflow-y: scroll;
+    max-height: calc(100vh - 290px);
+}
 
 
 /* ============ responsive ============ */
@@ -595,7 +600,8 @@
     #sidebar_list_group_member,
     #sidebar_thankyou_card,
     #sidebar_gift_registry,
-    #sidebar_potluck {
+    #sidebar_potluck,
+    #sidebar_change_plan {
         height: 90vh;
     }
 
