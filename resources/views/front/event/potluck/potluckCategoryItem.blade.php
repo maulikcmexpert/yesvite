@@ -29,8 +29,8 @@
                         </svg>
                     </span> -->
                 </div>
-                <div class="ms-auto d-flex gap-2">
-                    <span class="me-3" id="me-3">
+                <div class="ms-auto d-flex align-items-center gap-2">
+                    <span class="me-2" id="me-3">
                         @php
                         $danger = '';
                         $success = '';
