@@ -3850,9 +3850,9 @@ $(document).on("change", 'input[name="guest_list[]"]', function () {
                 selected_co_host_prefer_by = 'phone';
             }
         }else{
-            if(selected_co_host == undefined || selected_co_host == ""){
+            if(!$('.user-'+selected_co_host).is(':checked')){
                 $('.guest-contacts-wrp').css('display','none');
-            }
+            }   
         }
 
     }
