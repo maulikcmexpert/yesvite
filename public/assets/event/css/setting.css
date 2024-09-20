@@ -961,6 +961,12 @@
         font-size: 13px;
         border-radius: 12px;
     }
+
+    #sidebar_allow_limit,
+    #sidebar_add_thankyou_card {
+        height: 90vh;
+    }
+
 }
 
 @media only screen and (max-width: 452px) {
