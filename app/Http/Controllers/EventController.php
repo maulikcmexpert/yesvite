@@ -247,7 +247,7 @@ class EventController extends Controller
                 }
             }
 
-            if (isset($request->eventSetting)) {
+            if (isset($request->eventSetting) && $request->eventSetting=="1") {
                 $eventSetting = EventSetting::where('event_id', $eventId)->first();
                 if ($eventSetting != null) {
                     $eventSetting->allow_for_1_more = (isset($request->allow_for_1_more)) ? $request->allow_for_1_more : "0";
