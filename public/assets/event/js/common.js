@@ -42,6 +42,23 @@ $(document).on('click','.qty-btn-minus',function(){
     }
 });
 
+
+
+$(document).on('click', '.allow_limit_btn_plus', function() {
+    var $input = $(this).siblings(".input-qty");
+    var value = parseInt($input.val()) || 0; // Default to 0 if NaN
+    $input.val(value + 1);
+});
+
+$(document).on('click', '.allow_limit_btn_minus', function() {
+    var $input = $(this).siblings(".input-qty");
+    var value = parseInt($input.val()) || 0; // Default to 0 if NaN
+    if (value > 0) {
+        $input.val(value - 1);
+    }
+});
+
+
 // var buttonPlus  = $(".qty-btn-plus-qty");
 // var buttonMinus = $(".qty-btn-minus-qty");
 
@@ -81,61 +98,29 @@ $(document).on('click','.qty-btn-minus',function(){
 // });
 
 //  ===== focusinput =====
-// $(".form-control").on('focusin', 
-//     function(){
-//     $(this).next().addClass('floatingfocus');
-// })
+$(".form-control").on('focusin', 
+    function(){
+    $(this).next().addClass('floatingfocus');
+})
 
-// $(".form-control").on('focusout', function(){
-//     var text_val = $(this).val();
-//         if (text_val === "") {
-//         $(this).next().removeClass('floatingfocus');
-//     } else {
-//         $(this).next().addClass('floatingfocus');
-//     }
-// });
-
-// $(".form-control").each(function() {
-//     console.log("text",text);
-//     var text = $(this).val();
-//     if (text === "") {
-//         $(this).next().removeClass('floatingfocus');
-//     } else {
-//         $(this).next().addClass('floatingfocus');
-//     }
-// });
-
-
-
-
-$(document).ready(function() {
-    // Function to handle floating label behavior based on input value
-    function toggleFloatingLabel(input) {
-        var text_val = $(input).val();
+$(".form-control").on('focusout', function(){
+    var text_val = $(this).val();
         if (text_val === "") {
-            $(input).next().removeClass('floatingfocus');
-        } else {
-            $(input).next().addClass('floatingfocus');
-        }
-    }
-
-    // Handle focus in
-    $(".form-control").on('focusin', function() {
+        $(this).next().removeClass('floatingfocus');
+    } else {
         $(this).next().addClass('floatingfocus');
-    });
-
-    // Handle focus out and check the value
-    $(".form-control").on('focusout', function() {
-        toggleFloatingLabel(this);
-    });
-
-    // On page load, check each input and apply the floating label if necessary
-    $(".form-control").each(function() {
-        toggleFloatingLabel(this);
-    });
+    }
 });
 
-
+$(".form-control").each(function() {
+    console.log("text",text);
+    var text = $(this).val();
+    if (text === "") {
+        $(this).next().removeClass('floatingfocus');
+    } else {
+        $(this).next().addClass('floatingfocus');
+    }
+});
 
 // ========= show-password ===========
 $(".toggle-password").click(function () {
