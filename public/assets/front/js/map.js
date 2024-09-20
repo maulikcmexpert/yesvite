@@ -93,9 +93,7 @@ function initMap() {
                      
                     
                 } else {
-                    if(addr_inputs[index] != 'address1'){
-                        $("#" + addr_inputs[index]).val("");
-                    }
+                    $("#" + addr_inputs[index]).val("");
                 }
             });
         }
