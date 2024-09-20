@@ -2706,7 +2706,7 @@ function savePage4Data() {
 
     if ($("#kid_off_event").is(":checked")) {
         eventData.kid_off_event = "1";
-    } else {    
+    } else {
         eventData.kid_off_event = "0";
     }   
 }
@@ -3983,8 +3983,13 @@ $('#groupUsers').scroll(function () {
 // $("#loader").css('display','block');
 
 function displayRecords(lim, off,type,search = null,) {
-    
-    var search_name = $('.search_user').val();
+    var search_name = '';
+    if(type!='group'){
+        search_name = $('.search_user').val();
+        if(search_name !=''){
+            offset = 0;
+        }
+    }
     $.ajax({
         type: "GET",
         async: false,
