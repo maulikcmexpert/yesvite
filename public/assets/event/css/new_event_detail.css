@@ -1002,6 +1002,11 @@
     .input-group.time input::placeholder {
         font-size: 12px;
     }
+
+    .new_event_detail_form .input-group.time .input-group-text {
+
+        right: -5px;
+    }
 }
 
 @media only screen and (max-width: 360px) {
