@@ -2853,8 +2853,11 @@ function clearError(input = null) {
                 $("#recipient_name_error")
                     .text("Please add recipients name")
                     .css("color", "red");
+                $('.recipient-name-con').text('0/30');
             } else {
                 $("#recipient_name_error").text("");
+                var inputLength = recipient_name.length;
+                $('.recipient-name-con').text(inputLength+'/30');
             }
             break;
 
@@ -2866,6 +2869,20 @@ function clearError(input = null) {
                     .css("color", "red");
             } else {
                 $("#group_name_error").text("");
+            }
+            break;
+        
+        case "categoryName":
+            var groupname = input.value;
+            if (groupname === "") {
+                $("#categoryNameError")
+                    .text("Please enter category name")
+                    .css("color", "red");
+                    $('.pot-cate-name').text('0/30');
+            } else {
+                $("#categoryNameError").text("");
+                var inputLength = groupname.length;
+                $('.pot-cate-name').text(inputLength+'/30');
             }
             break;
 
