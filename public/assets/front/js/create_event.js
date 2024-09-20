@@ -4354,7 +4354,7 @@ $.ajax({
             guest_counter(0,15);
 
             toggleSidebar();
-            $("#YesviteUserAll").html('');
+            // $("#YesviteUserAll").html('');
             var type="all";
             get_user(type);
         // }
