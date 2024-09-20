@@ -591,6 +591,7 @@
 .new_event_detail_form .input-group.time {
     position: relative;
     z-index: 2;
+    width: 100%;
 }
 
 .new_event_detail_form .input-group.time .input-group-text {
