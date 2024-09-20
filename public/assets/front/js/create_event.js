@@ -2308,6 +2308,7 @@ $(document).on("click", "#close_createEvent", function () {
         }
         eventData.step = firstLetter;
         eventData.isdraft = "1";
+        savePage4Data();
        
         console.log(eventData);
 
@@ -2324,7 +2325,6 @@ $(document).on("click", "#close_createEvent", function () {
                     window.location.href="profile";
                     $('#loader').css('display','none');
                     toastr.success('Event Saved as Draft');
-
                 }
 
             },
@@ -2632,7 +2632,7 @@ function savePage3Data() {
 }
 
 function savePage4Data() {
-    eventData.eventSetting = "1";
+    eventData.events_schedule = "1";
 
     if ($("#allow_for_1_more").is(":checked")) {
         eventData.allow_for_1_more = "1";
