@@ -1331,6 +1331,6 @@ class EventController extends Controller
 
 
 
-        return  view('front.event.guest.allGuestList', compact('users'));
+        return view('front.event.guest.allGuestList', compact('users'));
     }
 }

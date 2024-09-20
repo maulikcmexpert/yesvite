@@ -5,8 +5,17 @@
 <div class="users-data">
     <div class="d-flex align-items-start">
         <div class="contact-img">
-            <img src="{{ asset('assets/event/image/user-img.svg') }}"
-                alt="contact-img">
+            @if ($user->profile != '')
+            <img src="{{$user->profile}}" alt="user-img">
+            @else
+            @php
+            $firstInitial = !empty($user->firstname) ? strtoupper($user->firstname[0]) : '';
+            $lastInitial = !empty($user->lastname) ? strtoupper($user->lastname[0]) : '';
+            $initials = $firstInitial . $lastInitial;
+            $fontColor = 'fontcolor' . $firstInitial;
+            @endphp
+            <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
+            @endif
 
         </div>
         <div class="text-start">
@@ -52,17 +61,8 @@
         <div class="right-note d-flex mb-2">
             <span>Member</span>
             <span class="mx-3">
-                @if ($user->profile != '')
-                <img src="{{$user->profile}}" alt="user-img">
-                @else
-                @php
-                $firstInitial = !empty($user->firstname) ? strtoupper($user->firstname[0]) : '';
-                $lastInitial = !empty($user->lastname) ? strtoupper($user->lastname[0]) : '';
-                $initials = $firstInitial . $lastInitial;
-                $fontColor = 'fontcolor' . $firstInitial;
-                @endphp
-                <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
-                @endif
+                <img src="{{ asset('assets/event/image/small-logo.svg') }}"
+                    alt="logo">
             </span>
             <input class="form-check-input user-{{$user->id}} user_choice" type="checkbox"
                 name="guest_list[]" data-id="user-{{$user->id}}" data-username="{{ $user->firstname }} {{ $user->lastname }}" data-profile="{{ asset('assets/event/image/user-img.svg') }}" data-email="{{ $user->email }}"
