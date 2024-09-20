@@ -6,7 +6,7 @@
     <div class="d-flex align-items-start">
         <div class="contact-img">
             @if ($user->profile != '')
-            <img src="{{$user->profile}}" alt="user-img">
+            <img src="{{asset('storage/profile/' .$user->profile)}}" alt="user-img">
             @else
             @php
             $firstInitial = !empty($user->firstname) ? strtoupper($user->firstname[0]) : '';
