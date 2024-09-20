@@ -206,7 +206,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <a href="#" class="add-limit add_co_host" onclick="" style="display:none;">
+                                    <a href="#" class="add-limit add_co_host" style="display:none;">
                                         <div class="d-flex align-items-center justify-content-between w-100">
                                             <div class="d-flex align-items-center add_new_co_host">
                                                 <span class="me-3">
