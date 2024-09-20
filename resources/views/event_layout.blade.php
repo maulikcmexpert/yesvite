@@ -65,7 +65,7 @@
     </div>
     @include($page)
     @include('components.front.footer')
-    @endif
+    
     <script src="{{ asset('assets/front/js/map.js') }}"></script>
 </body>
 
