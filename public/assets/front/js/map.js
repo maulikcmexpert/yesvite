@@ -57,8 +57,9 @@ function initMap() {
             var typeValShort = [];
             var typeValLong = [];
             var typeField = [];
-            var addr_fields = ["premise", "route", "administrative_area_level_2", "locality", "administrative_area_level_1", "country", "postal_code"];
-            var addr_inputs = ["txtStreet1", "txtStreet2", "txtCity", "txtCity", "txtState", "txtCountry", "txtPostalCode"];
+            // var addr_fields = ["premise", "route", "administrative_area_level_2", "locality", "administrative_area_level_1", "country", "postal_code"];
+            var addr_fields = ["premise", "route", "administrative_area_level_2", "locality", "administrative_area_level_1", "postal_code"];
+            var addr_inputs = ["address1", "address2", "city", "city", "state", "zipcode"];
 
             for (var i = 0; i < place.address_components.length; i++) {
                 for (var j = 0; j < place.address_components[i].types.length; j++) {
