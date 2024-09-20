@@ -4065,6 +4065,7 @@ $(document).on("click", ".add_new_group", function () {
         $("#group_name_error").css("display", "none");
         toggleSidebar("sidebar_add_group_member");
         var type="group";
+        var offset = 0;
         get_user(type);
     }
 });
