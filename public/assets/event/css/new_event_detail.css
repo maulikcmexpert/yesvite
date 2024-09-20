@@ -588,7 +588,7 @@
     background: var(--tabBg);
 }
 
-.new_event_detail_form .input-group.time-to-wrp {
+.new_event_detail_form .input-group.time {
     position: relative;
     z-index: 2;
 }

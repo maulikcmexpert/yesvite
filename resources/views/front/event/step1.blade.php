@@ -352,7 +352,7 @@
                                 <h5 class="ms-2">Edit Design</h5> --}}
                             </a>
                             <button type="button" class="d-flex footer-bottom-btn" id="next_design">
-                                <h5 class="me-2">Next: Choose Design</h5>
+                                <h5 class="me-2">Next: Design</h5>
                                 <span><svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path
