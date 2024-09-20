@@ -835,9 +835,9 @@
     height: calc(100% - 250px);
 }
 
-.toast-message {
+/* .toast-message {
     color: #000 !important;
-}
+} */
 
 .toast-top-right {
     background-color: #fff !important;
@@ -850,7 +850,7 @@
 
 #toast-container>div {
     padding-left: 20px !important;
-    width: 250px !important;
+    /* width: 250px !important; */
 }
 
 .toast-close-button {
