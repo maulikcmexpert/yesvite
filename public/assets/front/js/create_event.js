@@ -2859,7 +2859,10 @@ function clearError(input = null) {
                 $("#recipient_name_error")
                     .text("Please add recipients name")
                     .css("color", "red");
+                $('.recipient-name-con').text('0/30');
             } else {
+                let category_length = recipient_name.length;
+                $('.recipient-name-con').text(category_length+'/30');
                 $("#recipient_name_error").text("");
             }
             break;

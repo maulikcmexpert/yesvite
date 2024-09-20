@@ -1058,10 +1058,10 @@
         <div class="guest-group-name login-form-wrap add-category-new-wrp">
             <form action="" class="registry-form">
                 <div class="input-form">
-                    <input class="form-control" type="text" id="recipient_name" onkeyup="clearError(this)"
+                    <input class="form-control" type="text" id="recipient_name" maxlength="30" onkeyup="clearError(this)"
                         name="recipient_name">
                     <label for="email" class="floating-label">Recipients name <span>*</span></label>
-                    <span class="sub-con">9/30</span>
+                    <span class="sub-con recipient-name-con">0/30</span>
                     <label for="email" id="recipient_name_error" class="common_error"></label>
                     <input type="hidden" id="registry_item_id" />
 
