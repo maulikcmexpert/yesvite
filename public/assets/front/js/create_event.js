@@ -224,7 +224,7 @@ $(document).ready(function () {
 if (/Mobi/.test(navigator.userAgent)) {
     // if mobile device, use native pickers
     $(".date input").attr("type", "date");
-    $(".time input").attr("type", "time");
+    // $(".time input").attr("type", "time");
 } else {
     // if desktop device, use DateTimePicker
     // $("#datepicker").datetimepicker({
@@ -255,40 +255,21 @@ if (/Mobi/.test(navigator.userAgent)) {
 }
 
 $(document).on('click','.timepicker', function(){
-    initializeTimepicker();
+   datepicker();
 })
-// datepicker();
-// function datepicker() {
-//     $(".timepicker").datetimepicker({
-//         format: "LT",
-//         icons: {
-//             up: "fa fa-chevron-up",
-//             down: "fa fa-chevron-down",
-//         },
-//         useCurrent: false, 
-//         ignoreReadonly: true
-//     });
-// }
+datepicker();
+function datepicker() {
+    $(".timepicker").datetimepicker({
+        format: "LT",
+        icons: {
+            up: "fa fa-chevron-up",
+            down: "fa fa-chevron-down",
+        },
+        useCurrent: false, 
+        ignoreReadonly: true
+    });
+}
 
- function initializeTimepicker() {
-     // Check if it's a mobile device
-     if (/Mobi|Android/i.test(navigator.userAgent)) {
-         // On mobile, remove readonly so native picker can open
-         $('.timepicker').attr('readonly', false);
-     } else {
-         // On desktop, use the custom time picker
-         $(".timepicker").datetimepicker({
-             format: "LT", // Time format (AM/PM)
-             icons: {
-                 up: "fa fa-chevron-up",
-                 down: "fa fa-chevron-down",
-             },
-             useCurrent: false, 
-             ignoreReadonly: true // Ignore readonly to allow input click
-         });
-     }
- }
- 
 // flatpickr(".event_time", {
 //     enableTime: true,
 //     noCalendar: true,
@@ -2875,21 +2856,6 @@ function clearError(input = null) {
                     .css("color", "red");
             } else {
                 $("#group_name_error").text("");
-            }
-            break;
-        
-        case "categoryName":
-            var groupname = input.value;
-            console.log(groupname);
-            if (groupname === "") {
-                $("#categoryName_error")
-                    .text("Please enter category name")
-                    .css("color", "red");
-                $('.pot-cate-name').text('0/30');
-            } else {
-                let category_length = groupname.length;
-                $('.pot-cate-name').text(category_length+'/30');
-                $("#categoryName_error").text("");
             }
             break;
 
