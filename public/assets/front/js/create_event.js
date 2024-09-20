@@ -3610,6 +3610,14 @@ $(document).on("change", 'input[name="guest_list[]"]', function () {
     if ($("input[name='guest_list[]']:checked").length > 1) {
         $(this).prop("checked", false);
         toastr.error("There can be only one co host");
+    }else{
+        selected_co_host = $(this).val();
+        var prefer_by_email = $(this).data('email');
+        if(prefer_by_email){
+            selected_co_host_prefer_by = 'email';
+        }else{
+            selected_co_host_prefer_by = 'phone';
+        }
     }
 });
 var thankyou_template_id = 1;
