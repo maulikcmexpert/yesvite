@@ -839,6 +839,10 @@
     color: #000 !important;
 }
 
+.toast-top-right {
+    background-color: #fff !important;
+    background: #fff !important;
+}
 
 /* ======Responsiveness===== */
 
