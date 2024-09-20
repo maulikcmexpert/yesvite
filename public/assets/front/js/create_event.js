@@ -224,7 +224,7 @@ $(document).ready(function () {
 if (/Mobi/.test(navigator.userAgent)) {
     // if mobile device, use native pickers
     $(".date input").attr("type", "date");
-    $(".time input").attr("type", "time");
+    // $(".time input").attr("type", "time");
 } else {
     // if desktop device, use DateTimePicker
     // $("#datepicker").datetimepicker({
