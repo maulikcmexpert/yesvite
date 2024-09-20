@@ -49,6 +49,7 @@
 <script src="{{ asset('assets/event/js/script.js') }}"></script>
 
 <script src="{{ asset('assets/event/js/wow.min.js') }}"></script>
+<script src="{{ asset('assets/front/js/map.js') }}"></script>
 
 <!-- {{-- <script src="{{ asset('assets/event/js/bootstrap-datetimepicker.min.js') }}"></script> --}} -->
 
