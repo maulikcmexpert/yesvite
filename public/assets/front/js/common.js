@@ -45,16 +45,29 @@ $(".form-control").each(function () {
 });
 
 // ========= show-password ===========
-$(document).on('click','.toggle-password',function () {
-    // alert();
+// $(document).on('click','.toggle-password',function () {
+//     // alert();
+//     $(this).toggleClass("fa-eye-slash fa-eye");
+//     var input = $(this).prev().prev();
+//     if (input.attr("type") == "password") {
+//         input.attr("type", "text");
+//     } else {
+//         input.attr("type", "password");
+//     }
+// });
+
+
+$(document).on('click', '.toggle-password', function () {
+    alert(); // Alert to check if it's firing
     $(this).toggleClass("fa-eye-slash fa-eye");
-    var input = $(this).prev().prev();
+    var input = $(this).siblings('input'); // This finds the input sibling
     if (input.attr("type") == "password") {
         input.attr("type", "text");
     } else {
         input.attr("type", "password");
     }
 });
+
 
 toastr.options = {
     closeButton: true,
