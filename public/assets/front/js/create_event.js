@@ -3981,8 +3981,11 @@ $('#groupUsers').scroll(function () {
 // $("#loader").css('display','block');
 
 function displayRecords(lim, off,type,search = null,) {
-
-    var search_name = $('.search_user').val();
+    if(type!="group"){
+        var search_name = $('.search_user').val();
+    }else{
+        var search_name = '';
+    }
     $.ajax({
         type: "GET",
         async: false,
