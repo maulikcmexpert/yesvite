@@ -3838,21 +3838,21 @@ $(document).on("click", ".save_event_co_host", function () {
     }
 });
 
-$(document).on("change", 'input[name="guest_list[]"]', function () {
-    if ($("input[name='guest_list[]']:checked").length > 2) {
-        $(this).prop("checked", false);
-        selected_co_host = $(this).val();
-        var prefer_by_email = $(this).data('email');
-        if(prefer_by_email){
-            selected_co_host_prefer_by = 'email';
-        }else{
-            selected_co_host_prefer_by = 'phone';
-        }
-        console.log(selected_co_host);
-        console.log(selected_co_host_prefer_by);
-        // toastr.error("There can be only one co host");
-    }
-});
+// $(document).on("change", 'input[name="guest_list[]"]', function () {
+//     if ($("input[name='guest_list[]']:checked").length > 2) {
+//         $(this).prop("checked", false);
+//         selected_co_host = $(this).val();
+//         var prefer_by_email = $(this).data('email');
+//         if(prefer_by_email){
+//             selected_co_host_prefer_by = 'email';
+//         }else{
+//             selected_co_host_prefer_by = 'phone';
+//         }
+//         console.log(selected_co_host);
+//         console.log(selected_co_host_prefer_by);
+//         // toastr.error("There can be only one co host");
+//     }
+// });
 
 $(document).on("click", ".final_checkout", function () {
     var data = eventData;
