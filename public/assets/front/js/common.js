@@ -59,7 +59,7 @@ $(".form-control").each(function () {
 
 $(document).on('click', '.toggle-password', function () {
     // alert(); // Alert to check if it's firing
-    $(this).toggleClass("fa-eye-slash fa-eye");
+    $(this).toggleClass("fa-eye");
     var input = $(this).siblings('input'); // This finds the input sibling
     if (input.attr("type") == "password") {
         input.attr("type", "text");
