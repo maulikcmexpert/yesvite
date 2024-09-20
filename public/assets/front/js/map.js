@@ -81,14 +81,6 @@ function initMap() {
                         
                         $("#" + addr_inputs[index]).val(selectVal);
                     }
-
-                    if(addr_inputs[index] == 'address1'){
-
-                        var address1 = $("#" + addr_inputs[index]).val();
-                        address1 = address1 + typeValLong[fieldIndex];
-                        $("#" + addr_inputs[index]).val(address1);
-                        
-                     }
                 } else {
                     $("#" + addr_inputs[index]).val("");
                 }
