@@ -2053,7 +2053,7 @@
         <div class="groupsidebar">
             <div class="d-flex align-items-center justify-content-between toggle-wrp">
                 <div class="d-flex align-items-center">
-                    <a href="#" class="me-3" onclick="toggleSidebar('sidebar_groups')">
+                    <a href="#" class="me-3 group_toggle_close_btn" onclick="toggleSidebar('sidebar_groups')">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <path d="M9.57 5.92969L3.5 11.9997L9.57 18.0697" stroke="#64748B" stroke-width="1.5"
@@ -2064,7 +2064,7 @@
                     </a>
                     <h5>Create New Group</h5>
                 </div>
-                <button class="close-btn" onclick="toggleSidebar()">
+                <button class="close-btn group_toggle_close_btn" onclick="toggleSidebar()">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path d="M5.00098 5L19 18.9991" stroke="#64748B" stroke-width="1.5" stroke-linecap="round"
@@ -2097,7 +2097,7 @@
         <div class="groupsidebar">
             <div class="d-flex align-items-center justify-content-between toggle-wrp">
                 <div class="d-flex align-items-center">
-                    <a href="#" class="me-3" onclick="toggleSidebar('sidebar_groups')">
+                    <a href="#" class="me-3 group_toggle_close_btn" onclick="toggleSidebar('sidebar_groups')">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <path d="M9.57 5.92969L3.5 11.9997L9.57 18.0697" stroke="#64748B" stroke-width="1.5"
@@ -2108,7 +2108,7 @@
                     </a>
                     <h5>Add group member</h5>
                 </div>
-                <button class="close-btn" onclick="toggleSidebar()">
+                <button class="close-btn group_toggle_close_btn" onclick="toggleSidebar()">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path d="M5.00098 5L19 18.9991" stroke="#64748B" stroke-width="1.5" stroke-linecap="round"
@@ -2211,7 +2211,7 @@
         <div class="groupsidebar">
             <div class="d-flex align-items-center justify-content-between toggle-wrp">
                 <div class="d-flex align-items-center">
-                    <a href="#" class="me-3" onclick="toggleSidebar('sidebar_groups')">
+                    <a href="#" class="me-3 group_toggle_close_btn" onclick="toggleSidebar('sidebar_groups')">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <path d="M9.57 5.92969L3.5 11.9997L9.57 18.0697" stroke="#64748B" stroke-width="1.5"
@@ -2222,7 +2222,7 @@
                     </a>
                     <h5>Invite group member</h5>
                 </div>
-                <button class="close-btn" onclick="toggleSidebar()">
+                <button class="close-btn group_toggle_close_btn" onclick="toggleSidebar()">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path d="M5.00098 5L19 18.9991" stroke="#64748B" stroke-width="1.5" stroke-linecap="round"

@@ -726,6 +726,7 @@ $(document).on("click", ".potluck_cancel", function () {
 });
 $(document).on("click", ".group_toggle_close_btn", function () {
     $('#group_toggle_search').val('');
+    $('#group_name_error').text('');
     groupToggleSearch();
 });
 

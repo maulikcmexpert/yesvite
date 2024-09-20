@@ -100,7 +100,7 @@
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     font-size: 22px !important;
     position: absolute;
-    top: 50%;
+    top: 60%;
     left: 0;
     transform: translate(-50%, -85%);
     z-index: 5;
@@ -115,7 +115,7 @@
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     font-size: 22px !important;
     position: absolute;
-    top: 50%;
+    top: 60%;
     right: 0;
     transform: translate(40%, -85%);
     z-index: 5;
@@ -428,6 +428,7 @@
     overflow: hidden;
     overflow-y: scroll;
     max-height: calc(100vh - 210px);
+    padding: 0px 5px;
 }
 
 #sidebar_potluck .potluck-category {
@@ -435,6 +436,13 @@
     overflow-y: scroll;
     max-height: calc(100vh - 300px);
 }
+
+.change-your-plan-wrp {
+    overflow: hidden;
+    overflow-y: scroll;
+    max-height: calc(100vh - 290px);
+}
+
 
 /* ============ responsive ============ */
 @media only screen and (max-width:1800px) {
@@ -592,7 +600,8 @@
     #sidebar_list_group_member,
     #sidebar_thankyou_card,
     #sidebar_gift_registry,
-    #sidebar_potluck {
+    #sidebar_potluck,
+    #sidebar_change_plan {
         height: 90vh;
     }
 
