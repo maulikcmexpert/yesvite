@@ -2205,7 +2205,7 @@ $(document).on("click", "#next_setting", function () {
 
 
 $(document).on('click','#next_design',function() {
-    alert();
+    // alert();
     savePage1Data('next');
     // 
 })
@@ -2360,11 +2360,11 @@ function savePage1Data(close = null) {
     var events_schedule = '0';
     var rsvp_end_time_set = '0';
 
-    if(rsvp_by_date_set){
-        rsvp_by_date_set = '1';
-    }else{
-        rsvp_by_date_set = '0';
-    }
+    // if(rsvp_by_date_set){
+    //     rsvp_by_date_set = '1';
+    // }else{
+    //     rsvp_by_date_set = '0';
+    // }
     if(schedule){
         events_schedule = '1';
     }
@@ -2387,6 +2387,9 @@ function savePage1Data(close = null) {
         } else {
             $("#event-rsvpby-error").css("display", "none");
         }
+        rsvp_by_date_set = '1';
+    }else{
+        rsvp_by_date_set = '0';
     }
     
     if ($('#rsvp_by_date').is(':checked')) {
@@ -2453,7 +2456,7 @@ function savePage1Data(close = null) {
     } else {
         $("#event-start_time-error").css("display", "none");
     }
-    if (address == "") {
+    if (address1 == "") {
         $("#event-address1-error")
             .css("display", "block")
             .css("color", "red")
