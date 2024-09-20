@@ -3825,7 +3825,11 @@ $(document).on("click", ".save_allow_limit", function () {
     toggleSidebar();
 });
 
-$(document).on("change", 'input[name="guest_list[]"]', function () {
+$(document).on("change", 'input[name="guest_list[]"]', function (e) {
+    if (!$(this).is(':checked')) {
+        $('.guest-contacts-wrp').css('display', 'none');
+    }
+    e.preventDefault();
     if ($("input[name='guest_list[]']:checked").length > 1) {
         $(this).prop("checked", false);
         toastr.error("There can be only one co host");
