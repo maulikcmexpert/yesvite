@@ -4600,7 +4600,10 @@ $(document).on('click','.add_co_host',function(){
     
     $('co_host_search').val('');
     get_co_host_list();
-    toggleSidebar('sidebar_add_co_host');
+
+    setTimeout(() => {
+        toggleSidebar('sidebar_add_co_host');
+    }, 500);
 });
 
 $(document).on('click','.add_co_host_off',function(){
