@@ -4598,11 +4598,11 @@ $(document).on('click','.see_all_group',function(){
 
 $(document).on('click','.add_co_host',function(){
     
-    $('co_host_search').val('');
     get_co_host_list();
-
+    
     setTimeout(() => {
         toggleSidebar('sidebar_add_co_host');
+        $('co_host_search').val('');
     }, 500);
 });
 
