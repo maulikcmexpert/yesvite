@@ -259,6 +259,17 @@ $(document).on('click','.timepicker', function(){
 })
 datepicker();
 function datepicker() {
+
+    var now = moment(); 
+    var minutes = now.minutes();
+    var nextInterval = Math.ceil(minutes / 15) * 15; 
+    if (nextInterval === 60) {
+        now.add(1, 'hours').minutes(0);
+    } else {
+        now.minutes(nextInterval);
+    }
+
+    
     $(".timepicker").datetimepicker({
         format: "LT",
         icons: {
@@ -267,8 +278,8 @@ function datepicker() {
         },
         useCurrent: false, 
         ignoreReadonly: true,
-        stepping: 15 // Set stepping to 15 minutes
-
+        stepping: 15, // Set stepping to 15 minutes
+        defaultDate: now
     });
 }
 
