@@ -859,6 +859,11 @@
     color: #000 !important;
 } */
 
+
+.input-group.time input::placeholder {
+    font-size: 12px;
+}
+
 /* ======Responsiveness===== */
 
 
@@ -992,6 +997,15 @@
     .sidebar-content {
         width: 100%;
         max-width: 100%;
+    }
+
+    .input-group.time input::placeholder {
+        font-size: 12px;
+    }
+
+    .new_event_detail_form .input-group.time .input-group-text {
+
+        right: -5px;
     }
 }
 
