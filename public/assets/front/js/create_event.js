@@ -2675,7 +2675,6 @@ function savePage4Data() {
         eventData.add_co_host = "1";
         $(".add_co_host").show();
     } else {
-        eventData.
         $(".add_co_host").hide();
         eventData.add_co_host = "0";
     }
