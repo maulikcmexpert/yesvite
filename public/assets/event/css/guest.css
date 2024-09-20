@@ -100,7 +100,7 @@
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     font-size: 22px !important;
     position: absolute;
-    top: 50%;
+    top: 60%;
     left: 0;
     transform: translate(-50%, -85%);
     z-index: 5;
@@ -115,7 +115,7 @@
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     font-size: 22px !important;
     position: absolute;
-    top: 50%;
+    top: 60%;
     right: 0;
     transform: translate(40%, -85%);
     z-index: 5;
