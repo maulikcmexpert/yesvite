@@ -726,7 +726,6 @@ $(document).on("click", ".potluck_cancel", function () {
 });
 $(document).on("click", ".group_toggle_close_btn", function () {
     $('#group_toggle_search').val('');
-    $('#group_name_error').text('');
     groupToggleSearch();
 });
 
@@ -2633,7 +2632,7 @@ function savePage3Data() {
 }
 
 function savePage4Data() {
-    eventData.events_schedule = "1";
+    eventData.eventSetting = "1";
 
     if ($("#allow_for_1_more").is(":checked")) {
         eventData.allow_for_1_more = "1";
