@@ -253,13 +253,12 @@
 
 }
 
-
-#sidebar_add_co_host .guest-contacts-wrp {
-    display: flex;
+.guest-contacts-wrp {
+    display: none;
 }
 
-#sidebar_add_co_host .guest-contacts-wrp .guest-contacts-wrp {
-    display: flex;
+#sidebar_add_co_host .guest-contacts-wrp {
+    display: flex !important;
     align-items: center;
     justify-content: center;
     gap: 10px;
