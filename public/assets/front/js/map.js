@@ -76,7 +76,7 @@ function initMap() {
                         console.log(address1);
                         address1 = address1 + typeValLong[fieldIndex];
                         $("#" + addr_inputs[index]).val(address1);
-                     }else{
+                    }
 
                          $("#" + addr_inputs[index]).val(typeValLong[fieldIndex]);
      
@@ -88,7 +88,7 @@ function initMap() {
                              
                              $("#" + addr_inputs[index]).val(selectVal);
                          }
-                     }
+                     
                     
                 } else {
                     if(addr_inputs[index] != 'address1'){
