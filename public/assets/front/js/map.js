@@ -69,7 +69,8 @@ function initMap() {
             addr_fields.forEach(function(field, index) {
                 var fieldIndex = typeField.indexOf(field);
                 if (fieldIndex !== -1) {
-                    console.log(addr_inputs[index]);
+                    
+                    
                     $("#" + addr_inputs[index]).val(typeValLong[fieldIndex]);
 
                     // If it's a select input, find matching option and set its value
@@ -80,8 +81,18 @@ function initMap() {
                         
                         $("#" + addr_inputs[index]).val(selectVal);
                     }
+
+                    if(addr_inputs[index] == 'address1'){
+
+                        var address1 = $("#" + addr_inputs[index]).val();
+                        address1 = address1 + typeValLong[fieldIndex];
+                        $("#" + addr_inputs[index]).val(address1);
+                        console.log(address1);
+                     }
                 } else {
-                    $("#" + addr_inputs[index]).val("");
+                    if(addr_inputs[index] != 'address1'){
+                        $("#" + addr_inputs[index]).val("");
+                    }
                 }
             });
         }
