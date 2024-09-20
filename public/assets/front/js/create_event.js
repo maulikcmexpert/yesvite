@@ -3788,7 +3788,7 @@ $(document).on("click", ".save_event_co_host", function () {
         var prefer_by_mobile = checkedCheckbox.data("mobile");
         var profile_or_text = checkedCheckbox.data("profile_or_text");
         var prefer_by = "email";
-        if (prefer_by_mobile != "") {
+        if (prefer_by_mobile == undefined && prefer_by_mobile != "") {
             prefer_by = "phone";
         }
         console.log(prefer_by_mobile);
