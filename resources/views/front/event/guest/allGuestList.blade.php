@@ -15,7 +15,7 @@
             </h5>
             @if(isset($user->email)&&$user->email!="")
             <div>
-                <a href="mailto:silvia@gmail.com">
+                <a href="mailto:{{$user->email}}">
                     <svg class="me-1" width="14" height="14"
                         viewBox="0 0 14 14" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
@@ -52,8 +52,17 @@
         <div class="right-note d-flex mb-2">
             <span>Member</span>
             <span class="mx-3">
-                <img src="{{ asset('assets/event/image/small-logo.svg') }}"
-                    alt="logo">
+                @if ($user->profile != '')
+                <img src="{{$user->profile}}" alt="user-img">
+                @else
+                @php
+                $firstInitial = !empty($user->firstname) ? strtoupper($user->firstname[0]) : '';
+                $lastInitial = !empty($user->lastname) ? strtoupper($user->lastname[0]) : '';
+                $initials = $firstInitial . $lastInitial;
+                $fontColor = 'fontcolor' . $firstInitial;
+                @endphp
+                <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
+                @endif
             </span>
             <input class="form-check-input user-{{$user->id}} user_choice" type="checkbox"
                 name="guest_list[]" data-id="user-{{$user->id}}" data-username="{{ $user->firstname }} {{ $user->lastname }}" data-profile="{{ asset('assets/event/image/user-img.svg') }}" data-email="{{ $user->email }}"
