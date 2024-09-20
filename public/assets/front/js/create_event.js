@@ -2917,7 +2917,7 @@ $(document).on("click", ".li_design", function () {
         eventData.hosted_by != "" &&
         eventData.event_date != "" &&
         eventData.start_time != "" &&
-        eventData.address != "" &&
+        eventData.address1 != "" &&
         eventData.city != "" &&
         eventData.state != "" &&
         eventData.zipcode != "" &&
@@ -2926,7 +2926,7 @@ $(document).on("click", ".li_design", function () {
         eventData.hosted_by != undefined &&
         eventData.event_date != undefined &&
         eventData.start_time != undefined &&
-        eventData.address != undefined &&
+        eventData.address1 != undefined &&
         eventData.city != undefined &&
         eventData.state != undefined &&
         eventData.zipcode != undefined
@@ -3641,20 +3641,6 @@ $(document).on("click", ".edit_gift_registry", function () {
     toggleSidebar("sidebar_gift_registry_item");
 });
 
-$(document).on("change", 'input[name="guest_list[]"]', function () {
-    if ($("input[name='guest_list[]']:checked").length > 1) {
-        $(this).prop("checked", false);
-        toastr.error("There can be only one co host");
-    }else{
-        selected_co_host = $(this).val();
-        var prefer_by_email = $(this).data('email');
-        if(prefer_by_email){
-            selected_co_host_prefer_by = 'email';
-        }else{
-            selected_co_host_prefer_by = 'phone';
-        }
-    }
-});
 var thankyou_template_id = 1;
 $(document).on("click", ".add_thankyou_card", function () {
     var template_name = $("#thankyou_templatename").val();
@@ -3825,9 +3811,6 @@ $(document).on("change", 'input[name="guest_list[]"]', function () {
     if ($("input[name='guest_list[]']:checked").length > 1) {
         $(this).prop("checked", false);
         toastr.error("There can be only one co host");
-        if (!$('.user-' + selected_co_host).is(':checked')) {
-            $('.guest-contacts-wrp').css('display', 'none');
-        }
         return;
     }else{
         if ($(this).is(':checked')) {
@@ -3853,12 +3836,12 @@ $(document).on("change", 'input[name="guest_list[]"]', function () {
             if(prefer_by_email){
                 selected_co_host_prefer_by = 'email';
             }else{
-                selected_co_host_prefer_by = 'phone';
+                if ($("input[name='guest_list[]']:checked").length === 0) {
+                    $('.guest-contacts-wrp').css('display', 'none');
+                }
             }
-        }else{
-            $('.guest-contacts-wrp').css('display','none');
         }
-    }
+    } 
 });
 
 $(document).on("click",".remove_co_host",function(){
