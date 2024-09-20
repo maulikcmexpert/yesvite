@@ -205,6 +205,7 @@
                         <div class="input-form location-icon">
                             <input type="text" class="form-control inputText" id="address1" name="address1"
                                 oninput="clearError(this)" required="">
+                                <div id="map"></div>
                             <label for="address1" class="form-label input-field floating-label">Address 1
                                 *</label>
                             <lable for="address1" id="event-address1-error" class="error"></lable>
