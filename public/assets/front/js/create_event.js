@@ -572,7 +572,7 @@ $(document).on('click','.create_event_with_plan',function(){
     if (checkedPlan.length) { // Ensure there is a checked checkbox
         var plan = checkedPlan.data('plan');
         eventData.plan_selected = plan;
-        alert(plan);
+        // alert(plan);
         window.location.href = "event";
     }
     
@@ -2675,7 +2675,6 @@ function savePage4Data() {
         eventData.add_co_host = "1";
         $(".add_co_host").show();
     } else {
-        eventData.
         $(".add_co_host").hide();
         eventData.add_co_host = "0";
     }
@@ -3895,7 +3894,7 @@ $(document).on("click", ".final_checkout", function () {
 
 $(document).on("click", "#final_create_event", function (e) {
     var data = eventData;
-    // console.log(data);
+    console.log(data);
     $("#loader").show();
     $(".main-content-wrp").addClass("blurred");
     e.stopPropagation(); 
