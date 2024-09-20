@@ -45,7 +45,8 @@ $(".form-control").each(function () {
 });
 
 // ========= show-password ===========
-$(".toggle-password").click(function () {
+$(document).on('click','.toggle-password',function () {
+    alert();
     $(this).toggleClass("fa-eye-slash fa-eye");
     var input = $(this).prev().prev();
     if (input.attr("type") == "password") {
