@@ -351,7 +351,7 @@ $(function () {
         
         function (start, end, label) {
             
-            $('#event-date').focus();
+            
             selectedDates.clear();
             selectedDates.add(start.format("YYYY-MM-DD"));
             selectedDates.add(end.format("YYYY-MM-DD"));
@@ -2205,6 +2205,7 @@ $(document).on("click", "#next_setting", function () {
 
 
 $(document).on('click','#next_design',function() {
+    alert();
     savePage1Data('next');
     // 
 })
@@ -2539,7 +2540,6 @@ function savePage1Data(close = null) {
         
         var formattedTime = convertTo12HourFormat(start_time);
         if(close == 'next'){
-            console.log(eventData);
             $(".step_1").hide();
             handleActiveClass('.li_design');
         }
@@ -2552,6 +2552,8 @@ function savePage1Data(close = null) {
         $(".step_2").show();
         $('.event_create_percent').text('50%');
         $('.current_step').text('2 of 4');
+        console.log(eventData);
+
     }
 
     // eventData.page1 = {
