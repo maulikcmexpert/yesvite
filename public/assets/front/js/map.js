@@ -69,7 +69,7 @@ function initMap() {
             addr_fields.forEach(function(field, index) {
                 var fieldIndex = typeField.indexOf(field);
                 if (fieldIndex !== -1) {
-                    $("#" + addr_inputs[index]).val(typeValLong[fieldIndex]);
+                    $("#" + addr_inputs[index]).append(typeValLong[fieldIndex]);
 
                     // If it's a select input, find matching option and set its value
                     var selectVal = $("#" + addr_inputs[index] + " option").filter(function () {
