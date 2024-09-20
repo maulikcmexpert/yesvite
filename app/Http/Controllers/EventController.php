@@ -137,7 +137,7 @@ class EventController extends Controller
 
         // $potluck = session('category');
         // dd(session()->get('gift_registry_data'));
-        dd($request); 
+        // dd($request); 
         $user_id =  Auth::guard('web')->user()->id;
         $dateString = (isset($request->event_date)) ? $request->event_date : "";
 
@@ -319,6 +319,7 @@ class EventController extends Controller
             }
 
             if (isset($request->events_schedule) && $request->events_schedule == '1' && isset($request->activity) && !empty($request->activity)) {
+                dd(1);
                 $activities = $request->activity;
                 $addStartschedule =  new EventSchedule();
 
