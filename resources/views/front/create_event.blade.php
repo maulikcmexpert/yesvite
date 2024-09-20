@@ -687,7 +687,7 @@
             <div class="tab-pane fade show active" id="contact" role="tabpanel" aria-labelledby="contact-tab">
 
 
-                <div class="guest-contacts-wrp">
+                <div class="guest-contacts-wrp" style="display: none">
                     <div class="guest-contact">
                         <div class="guest-img">
                             <img class="selected-co-host-image" src="./assets/image/user-img.svg" alt="guest-img">
