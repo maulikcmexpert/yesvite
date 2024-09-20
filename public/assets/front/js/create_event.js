@@ -2675,6 +2675,10 @@ function savePage4Data() {
         eventData.add_co_host = "1";
         $(".add_co_host").show();
     } else {
+        eventData.co_host = '';
+        eventData.co_host_prefer_by = '';
+        selected_co_host = '';
+        selected_co_host_prefer_by = '';
         $(".add_co_host").hide();
         eventData.add_co_host = "0";
     }
