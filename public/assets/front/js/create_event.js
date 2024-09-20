@@ -3850,12 +3850,12 @@ $(document).on("change", 'input[name="guest_list[]"]', function () {
             if(prefer_by_email){
                 selected_co_host_prefer_by = 'email';
             }else{
-                selected_co_host_prefer_by = 'phone';
+                if ($("input[name='guest_list[]']:checked").length === 0) {
+                    $('.guest-contacts-wrp').css('display', 'none');
+                }
             }
-        }else{
-            $('.guest-contacts-wrp').css('display','none');
         }
-    }
+    } 
 });
 
 $(document).on("click",".remove_co_host",function(){
