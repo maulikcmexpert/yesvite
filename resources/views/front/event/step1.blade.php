@@ -83,6 +83,7 @@
                                 class="form-label input-field floating-label select-label floatingfocus">Time
                                 Zone *</label>
                         </div>
+
                     </div>
                     <div class="col-12 mb-4">
                         <div class="d-flex align-items-center justify-content-between">
@@ -140,6 +141,7 @@
 
 
                     <div class="col-6 mb-4 end_time" style="display: none">
+                       
                         <div class="input-form">
                             <select class="form-select" name="end-time-zone" id="end-time-zone">
                                 <option value="PST" selected>PST</option>
