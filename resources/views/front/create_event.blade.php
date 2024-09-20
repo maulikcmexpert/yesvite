@@ -1110,7 +1110,7 @@
         <div class="guest-group-name login-form-wrap add-category-new-wrp">
             <form action="" class="registry-form ">
                 <div class="input-form">
-                    <input class="form-control" type="text" id="categoryName" onkeyup="clearError(this)"
+                    <input class="form-control" type="text" id="categoryName" maxlength="30" onkeyup="clearError(this)"
                         name="text1" placeholder="Categories: e.g., Appetizers, Salads, Drinks, etc">
                     <span class="sub-con pot-cate-name">0/30</span>
                     <label for="categoryName" id="categoryNameError"></label>
