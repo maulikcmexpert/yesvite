@@ -53,8 +53,8 @@ function initMap() {
 
         // Handle address components and update respective form fields
         if (place.address_components) {
-            var addr_fields = ["street_number", "subpremise", "route","sublocality","administrative_area_level_2", "locality", "administrative_area_level_1", "postal_code"];
-            var addr_inputs = ["address1","address1", "address1","address1","city", "city", "state", "zipcode"];
+            var addr_fields = ["street_number", "subpremise", "route","administrative_area_level_2", "locality", "administrative_area_level_1", "postal_code"];
+            var addr_inputs = ["address1","address1", "address1","city", "city", "state", "zipcode"];
             var typeField = [], typeValLong = [];
 
             // Loop through address components and match with input fields
