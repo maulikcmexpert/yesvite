@@ -436,8 +436,8 @@
     max-height: calc(100vh - 300px);
 }
 
-.owl-item .group-card {
-    width: 300px;
+.group-owl .owl-item {
+    width: 300px !important;
 }
 
 /* ============ responsive ============ */
