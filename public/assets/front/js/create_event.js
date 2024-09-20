@@ -2665,6 +2665,7 @@ function savePage4Data() {
         eventData.add_co_host = "1";
         $(".add_co_host").show();
     } else {
+        eventData.
         $(".add_co_host").hide();
         eventData.add_co_host = "0";
     }
@@ -3795,7 +3796,7 @@ $(document).on("click", ".save_event_co_host", function () {
         selected_co_host_prefer_by = prefer_by;
         eventData.co_host_prefer_by = prefer_by;
         if(profile_or_text == '1'){
-            $('.add_new_co_host').html(`<span class="mx-3"><div class="contact-img">
+            $('.add_new_co_host').html(`<span class="mx-3"><div class="contact-img co-host-profile-photo">
                     <img src="${profilePhoto}"
                         alt="logo">
                 </div></span>
