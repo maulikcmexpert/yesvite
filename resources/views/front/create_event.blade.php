@@ -690,8 +690,9 @@
                 <div class="guest-contacts-wrp">
                     <div class="guest-contact">
                         <div class="guest-img">
-                            <img src="./assets/image/user-img.svg" alt="guest-img">
-                            <a href="#" class="close">
+                            <img class="selected-co-host-image" src="./assets/image/user-img.svg" alt="guest-img">
+                            <h5>AB</h5>
+                            <a href="#" class="close remove_co_host" >
                                 <svg width="19" height="18" viewBox="0 0 19 18" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <rect x="1.8999" y="1" width="16" height="16" rx="8"
@@ -1058,10 +1059,10 @@
         <div class="guest-group-name login-form-wrap add-category-new-wrp">
             <form action="" class="registry-form">
                 <div class="input-form">
-                    <input class="form-control" type="text" id="recipient_name" onkeyup="clearError(this)"
+                    <input class="form-control" type="text" id="recipient_name" maxlength="30" onkeyup="clearError(this)"
                         name="recipient_name">
                     <label for="email" class="floating-label">Recipients name <span>*</span></label>
-                    <span class="sub-con">9/30</span>
+                    <span class="sub-con recipient-name-con">0/30</span>
                     <label for="email" id="recipient_name_error" class="common_error"></label>
                     <input type="hidden" id="registry_item_id" />
 

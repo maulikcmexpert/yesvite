@@ -2853,7 +2853,10 @@ function clearError(input = null) {
                 $("#recipient_name_error")
                     .text("Please add recipients name")
                     .css("color", "red");
+                $('.recipient-name-con').text('0/30');
             } else {
+                let category_length = recipient_name.length;
+                $('.recipient-name-con').text(category_length+'/30');
                 $("#recipient_name_error").text("");
             }
             break;
@@ -3649,20 +3652,7 @@ $(document).on("click", ".edit_gift_registry", function () {
     toggleSidebar("sidebar_gift_registry_item");
 });
 
-$(document).on("change", 'input[name="guest_list[]"]', function () {
-    if ($("input[name='guest_list[]']:checked").length > 1) {
-        $(this).prop("checked", false);
-        toastr.error("There can be only one co host");
-    }else{
-        selected_co_host = $(this).val();
-        var prefer_by_email = $(this).data('email');
-        if(prefer_by_email){
-            selected_co_host_prefer_by = 'email';
-        }else{
-            selected_co_host_prefer_by = 'phone';
-        }
-    }
-});
+
 var thankyou_template_id = 1;
 $(document).on("click", ".add_thankyou_card", function () {
     var template_name = $("#thankyou_templatename").val();
@@ -3827,6 +3817,25 @@ $(document).on("click", ".save_allow_limit", function () {
     }
 
     toggleSidebar();
+});
+
+$(document).on("change", 'input[name="guest_list[]"]', function () {
+    if ($("input[name='guest_list[]']:checked").length > 1) {
+        $(this).prop("checked", false);
+        toastr.error("There can be only one co host");
+    }else{
+        var profilePhoto = $(this).data('profile');
+        var user_name = $(this).data('username');
+        // $('.selected-co-host-image').attr('src',)
+        $('.guest-contacts-wrp').css('display','flex');
+        selected_co_host = $(this).val();
+        var prefer_by_email = $(this).data('email');
+        if(prefer_by_email){
+            selected_co_host_prefer_by = 'email';
+        }else{
+            selected_co_host_prefer_by = 'phone';
+        }
+    }
 });
 
 $(document).on("click", ".save_event_co_host", function () {
