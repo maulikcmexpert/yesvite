@@ -2616,37 +2616,21 @@ function savePage3Data() {
 function savePage4Data() {
     eventData.eventSetting = "1";
 
-    if ($("#eventwall").is(":checked")) {
-        eventData.event_wall = "1";
-    } else {
-        eventData.event_wall = "0";
-    }
-
     if ($("#allow_for_1_more").is(":checked")) {
         eventData.allow_for_1_more = "1";
+        $('#')
         $(".allow_limit_toggle").show();
     } else {
         $(".allow_limit_toggle").hide();
         eventData.allow_for_1_more = "0";
     }
-
+    
     if ($("#only_adults").is(":checked")) {
         eventData.only_adults = "1";
     } else {
         eventData.only_adults = "0";
     }
 
-    // if ($("#rsvp_by_date").is(":checked")) {
-    //     eventData.rsvp_by_date = "1";
-    // } else {
-    //     eventData.rsvp_by_date = "0";
-    // }
-
-    if ($("#kid_off_event").is(":checked")) {
-        eventData.kid_off_event = "1";
-    } else {
-        eventData.kid_off_event = "0";
-    }
     if ($("#thankyou_message").is(":checked")) {
         eventData.thankyou_message = "1";
         $(".thankyou_card").show();
@@ -2671,12 +2655,20 @@ function savePage4Data() {
         $(".add_gift_registry").hide();
         eventData.gift_registry = "0";
     }
+   
+    if ($("#eventwall").is(":checked")) {
+        eventData.event_wall = "1";
+    } else {
+        eventData.event_wall = "0";
+    }
 
+    
     if ($("#guest_list_visible_to_guest").is(":checked")) {
         eventData.guest_list_visible_to_guest = "1";
     } else {
         eventData.guest_list_visible_to_guest = "0";
     }
+   
 
     if ($("#potluck").is(":checked")) {
         eventData.potluck = "1";
@@ -2686,16 +2678,24 @@ function savePage4Data() {
         eventData.potluck = "0";
     }
 
+
+    
+    if ($("#rsvp_update").is(":checked")) {
+        eventData.rsvp_update = "1";
+    } else {
+        eventData.rsvp_update = "0";
+    }
+
     if ($("#event_wall_post").is(":checked")) {
         eventData.event_wall_post = "1";
     } else {
         eventData.event_wall_post = "0";
     }
 
-    if ($("#rsvp_update").is(":checked")) {
-        eventData.rsvp_update = "1";
+    if ($("#rsvp_remainder").is(":checked")) {
+        eventData.rsvp_remainder = "1";
     } else {
-        eventData.rsvp_update = "0";
+        eventData.rsvp_remainder = "0";
     }
 
     if ($("#request_photo").is(":checked")) {
@@ -2704,11 +2704,11 @@ function savePage4Data() {
         eventData.request_photo = "0";
     }
 
-    if ($("#rsvp_remainder").is(":checked")) {
-        eventData.rsvp_remainder = "1";
+    if ($("#kid_off_event").is(":checked")) {
+        eventData.kid_off_event = "1";
     } else {
-        eventData.rsvp_remainder = "0";
-    }
+        eventData.kid_off_event = "0";
+    }   
 }
 
 function convertTo12HourFormat(time) {
