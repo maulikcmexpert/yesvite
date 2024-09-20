@@ -64,11 +64,12 @@ function initMap() {
                     typeValLong.push(component.long_name);
                 });
             });
-            console.log(typeField);
+            // console.log(typeField);
             // console.log(typeValLong);
             addr_fields.forEach(function(field, index) {
                 var fieldIndex = typeField.indexOf(field);
                 if (fieldIndex !== -1) {
+                    console.log(addr_inputs[index]);
                     $("#" + addr_inputs[index]).val(typeValLong[fieldIndex]);
 
                     // If it's a select input, find matching option and set its value
@@ -76,7 +77,7 @@ function initMap() {
                         return $(this).html() == typeValLong[fieldIndex];
                     }).val();
                     if (selectVal) {
-                        console.log(selectVal);
+                        
                         $("#" + addr_inputs[index]).val(selectVal);
                     }
                 } else {
