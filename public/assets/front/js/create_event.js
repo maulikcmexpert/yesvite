@@ -2205,6 +2205,7 @@ $(document).on("click", "#next_setting", function () {
 
 
 $(document).on('click','#next_design',function() {
+    // alert();
     savePage1Data('next');
     // 
 })
@@ -2231,7 +2232,6 @@ $(document).on("click", "#close_createEvent", function () {
             var end_time = $("#end_time").is(":checked");
             var rsvp_by_date_set = $("#rsvp_by_date").is(":checked");
             var end_time_zone =  $('#end-time-zone').val();
-            var address1 = $("#address1").val();
             var address_2 = $("#address2").val();
             var address1 = $("#address1").val();
             var city = $("#city").val();
@@ -2344,15 +2344,37 @@ function savePage1Data(close = null) {
     var hostedby = $("#hostedby").val();
     var event_date = $("#event-date").val();
     var start_time = $("#start-time").val();
-    var address = $("#address1").val();
+    var start_time_zone =  $('#start-time-zone').val();
+    var schedule = $('#schedule').is(":checked");
+    var end_time = $("#end_time").is(":checked");
+    var rsvp_by_date_set = $('#rsvp_by_date').is(':checked');
+    var end_time_zone =  $('#end-time-zone').val();
+    var address_2 = $("#address2").val();
+    var address1 = $("#address1").val();   
     var city = $("#city").val();
     var state = $("#state").val();
     var zipcode = $("#zipcode").val();
     var id = $("#id").val();
-    var rsvp_by_date_set = $('#rsvp_by_date').is(':checked');
-    var end_time_zone =  $('#end-time-zone').val();
-    var start_time_zone =  $('#start-time-zone').val();
     var description = $("#description").val();
+    var message_to_guests = $("#message_to_guests").val();
+
+    var events_schedule = '0';
+    var rsvp_end_time_set = '0';
+
+    // if(rsvp_by_date_set){
+    //     rsvp_by_date_set = '1';
+    // }else{
+    //     rsvp_by_date_set = '0';
+    // }
+    if(schedule){
+        events_schedule = '1';
+    }
+    var rsvp_end_time = '';
+    if(end_time){
+        rsvp_end_time = $('#end-time').val();
+        rsvp_end_time_set = '1';
+    }
+
 
     var rsvp_by_date = '';
     if(rsvp_by_date_set){
@@ -2366,6 +2388,9 @@ function savePage1Data(close = null) {
         } else {
             $("#event-rsvpby-error").css("display", "none");
         }
+        rsvp_by_date_set = '1';
+    }else{
+        rsvp_by_date_set = '0';
     }
     
     if ($('#rsvp_by_date').is(':checked')) {
@@ -2432,7 +2457,7 @@ function savePage1Data(close = null) {
     } else {
         $("#event-start_time-error").css("display", "none");
     }
-    if (address == "") {
+    if (address1 == "") {
         $("#event-address1-error")
             .css("display", "block")
             .css("color", "red")
@@ -2479,7 +2504,7 @@ function savePage1Data(close = null) {
         hostedby != "" &&
         event_date != "" &&
         start_time != "" &&
-        address != "" &&
+        address1 != "" &&
         city != "" &&
         state != "" &&
         zipcode != ""
@@ -2490,16 +2515,22 @@ function savePage1Data(close = null) {
             event_name: event_name,
             hosted_by: hostedby,
             event_date: event_date,
+            rsvp_by_date_set:rsvp_by_date_set,
+            rsvp_by_date:rsvp_by_date,
             start_time: start_time,
-            activity: activities,
-            address: address,
-            city: city,
+            start_time_zone:start_time_zone,
+            rsvp_end_time_set:rsvp_end_time_set,
+            rsvp_end_time:rsvp_end_time,
+            rsvp_end_timezone:end_time_zone,
+            event_location:description,
+            address1: address1,
+            address_2: address_2,
             state: state,
             zipcode: zipcode,
-            rsvp_by_date:rsvp_by_date,
-            event_location:description,
-            rsvp_start_timezone:start_time_zone,
-            rsvp_end_timezone:end_time_zone,
+            city: city,
+            message_to_guests:message_to_guests,
+            events_schedule:events_schedule,
+            // activity: activities,
         };
         // alert();
         let text = $('.current_step').text();
@@ -2520,11 +2551,13 @@ function savePage1Data(close = null) {
         $(".titlename").text(hostedby);
         $(".event_name").text(event_name);
         $(".event_date").text(formattedDate);
-        $(".event_address").text(address);
+        $(".event_address").text(address1);
         $(".event_time").text(formattedTime);
         $(".step_2").show();
         $('.event_create_percent').text('50%');
         $('.current_step').text('2 of 4');
+        console.log(eventData);
+
     }
 
     // eventData.page1 = {
@@ -3950,7 +3983,7 @@ $('#groupUsers').scroll(function () {
 // $("#loader").css('display','block');
 
 function displayRecords(lim, off,type,search = null,) {
-
+    
     var search_name = $('.search_user').val();
     $.ajax({
         type: "GET",
@@ -4448,8 +4481,15 @@ $(document).on('keyup','#group_toggle_search',function () {
 })
 
 $(document).on('click','.listing-arrow',function(){
-
-console.log($(this).parent().html());
-
-
+    if($(this).parent().find('.list-slide').hasClass('open-potluck-list')){
+        $(this).parent().find('.list-slide').removeClass('open-potluck-list');
+    }else{
+    $(this).parent().find('.list-slide').addClass('open-potluck-list');
+}
 });
+$(document).on('click','.see_all_group',function(){
+    $('search_user').val('');
+    toggleSidebar('sidebar_groups');
+});
+
+

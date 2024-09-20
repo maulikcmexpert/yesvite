@@ -113,7 +113,7 @@ class EventController extends Controller
         // ->get();
 
         $groups = Group::withCount('groupMembers')
-            ->orderBy('name','ASC')
+            ->orderBy('name', 'ASC')
             ->where('user_id', $id)
             ->get();
 
@@ -246,7 +246,7 @@ class EventController extends Controller
             }
 
             if (isset($request->eventSetting)) {
-                $eventSetting = EventSetting::where('event_id',$eventId)->first();
+                $eventSetting = EventSetting::where('event_id', $eventId)->first();
                 if ($eventSetting != null) {
                     $eventSetting->allow_for_1_more = (isset($request->allow_for_1_more)) ? $request->allow_for_1_more : "0";
                     $eventSetting->allow_limit = (isset($request->allow_limit)) ? (int)$request->allow_limit : 0;
@@ -263,7 +263,7 @@ class EventController extends Controller
                     $eventSetting->send_event_dater_reminders = (isset($request->rsvp_remainder)) ? $request->rsvp_remainder : "0";
                     $eventSetting->request_event_photos_from_guests = (isset($request->request_photo)) ? $request->request_photo : "0";
                     $eventSetting->save();
-                }else{
+                } else {
                     EventSetting::create([
                         'event_id' => $eventId,
                         'allow_for_1_more' => (isset($request->allow_for_1_more)) ? $request->allow_for_1_more : "0",
@@ -318,7 +318,7 @@ class EventController extends Controller
                 }
             }
 
-            if (isset($request->events_schedule) && $request->events_schedule =='1' && isset($request->activity) && !empty($request->activity)) {
+            if (isset($request->events_schedule) && $request->events_schedule == '1' && isset($request->activity) && !empty($request->activity)) {
                 $activities = $request->activity;
                 $addStartschedule =  new EventSchedule();
 
@@ -647,7 +647,7 @@ class EventController extends Controller
             'category_index' => $category_index,
             'category_item' => --$category_item,
         ];
-        
+
         // return view('front.event.potluck.potluckCategoryItem', $data);
 
         return response()->json(['view' => view('front.event.potluck.potluckCategoryItem', $data)->render(), 'qty' => $qty, 'total_item' => $total_item]);
@@ -687,11 +687,11 @@ class EventController extends Controller
 
         $delete_potluck_id = $request->input('potluck_delete_id');
         $category_item = 0;
-        if($delete_potluck_id == 'all_potluck'){
+        if ($delete_potluck_id == 'all_potluck') {
             Session::forget('category');
-        }else{
+        } else {
             $category = Session::get('category');
-            if(isset($category[$delete_potluck_id]['item'])){
+            if (isset($category[$delete_potluck_id]['item'])) {
                 $category_item = count($category[$delete_potluck_id]['item']);
             }
             if (isset($category[$delete_potluck_id])) {
@@ -937,7 +937,7 @@ class EventController extends Controller
         }
         $selected_user = Session::get('user_ids');
         // dd(count($selected_user));
-        return response()->json(view('front.event.guest.get_user', compact('yesvite_user', 'type','selected_user'))->render());
+        return response()->json(view('front.event.guest.get_user', compact('yesvite_user', 'type', 'selected_user'))->render());
     }
 
     // public function searchUserAjax(Request $request){
@@ -1243,23 +1243,23 @@ class EventController extends Controller
     {
         if (Auth::check()) {
             if ($request->has('closed') && $request->closed) {
-                if($request->tip=="potluck"){
+                if ($request->tip == "potluck") {
                     session(['potluck_closed' => true]);
                 }
 
-                if($request->tip=="create_new_event"){
+                if ($request->tip == "create_new_event") {
                     session(['create_new_event_closed' => true]);
                 }
 
-                if($request->tip=="co_host"){
+                if ($request->tip == "co_host") {
                     session(['co_host_closed' => true]);
                 }
 
-                if($request->tip=="thankyou_card"){
+                if ($request->tip == "thankyou_card") {
                     session(['thankyou_card_closed' => true]);
                 }
 
-                if($request->tip=="desgin_tip"){
+                if ($request->tip == "desgin_tip") {
                     session(['design_closed' => true]);
                 }
             }
@@ -1269,38 +1269,41 @@ class EventController extends Controller
         }
     }
 
-    public function groupSearchAjax(Request $request){
+    public function groupSearchAjax(Request $request)
+    {
         $search_user = $request->search_name;
         $id = Auth::guard('web')->user()->id;
         $groups = Group::withCount('groupMembers')
-        ->orderBy('name','ASC')
-        ->where('user_id', $id)
-        ->when($search_user != '', function ($query) use ($search_user) {
-            $query->where(function ($q) use ($search_user) {
-                $q->where('name', 'LIKE', '%' . $search_user . '%');
-            });
-        })
-        ->get();
+            ->orderBy('name', 'ASC')
+            ->where('user_id', $id)
+            ->when($search_user != '', function ($query) use ($search_user) {
+                $query->where(function ($q) use ($search_user) {
+                    $q->where('name', 'LIKE', '%' . $search_user . '%');
+                });
+            })
+            ->get();
         return response()->json(['html' => view('front.event.guest.group_list', compact('groups'))->render(), "status" => "1"]);
     }
 
-    public function group_toggle_search(Request $request){
+    public function group_toggle_search(Request $request)
+    {
         $search_user = $request->search_name;
         $id = Auth::guard('web')->user()->id;
         $groups = Group::withCount('groupMembers')
-        ->orderBy('name','ASC')
-        ->where('user_id', $id)
-        ->when($search_user != '', function ($query) use ($search_user) {
-            $query->where(function ($q) use ($search_user) {
-                $q->where('name', 'LIKE', '%' . $search_user . '%');
-            });
-        })
-        ->get();
+            ->orderBy('name', 'ASC')
+            ->where('user_id', $id)
+            ->when($search_user != '', function ($query) use ($search_user) {
+                $query->where(function ($q) use ($search_user) {
+                    $q->where('name', 'LIKE', '%' . $search_user . '%');
+                });
+            })
+            ->get();
         return response()->json(['html' => view('front.event.guest.group_search_list_toggle', compact('groups'))->render(), "status" => "1"]);
     }
 
-    public function delete_sessions(Request $request){
-        if(isset($request->delete_session) && $request->delete_session != ''){
+    public function delete_sessions(Request $request)
+    {
+        if (isset($request->delete_session) && $request->delete_session != '') {
             Session::forget($request->delete_session);
             Session::save();
         }
