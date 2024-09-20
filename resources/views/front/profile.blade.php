@@ -662,7 +662,7 @@
                                 <h5>Free</h5>
                             </div>
                             <div>
-                                <input class="form-check-input ms-3 plan_check" data-plan="free" type="checkbox" name="plan_check" id="free_plan_check" checked style="display: none;">
+                                <input class="form-check-input ms-3 plan_check" data-plan="Free" type="checkbox" name="plan_check" id="free_plan_check" checked style="display: none;">
                             </div>
                         </div>
                         <div class="d-flex justify-content-between">
@@ -737,7 +737,7 @@
                                 <p>Pay as you go per event - depending on number of invites sent.</p>
                             </div>
                             <div>
-                                <input class="form-check-input ms-3 plan_check" data-plan="pro" type="checkbox" name="plan_check" id="pro_plan_check" checked style="display: none;">
+                                <input class="form-check-input ms-3 plan_check" data-plan="Pro" type="checkbox" name="plan_check" id="pro_plan_check" checked style="display: none;">
                             </div>
                             <!-- <div class="d-flex align-items-center">
                             <div class="recomend-pro-paln d-flex align-items-center">
@@ -889,7 +889,7 @@
                                     <h5>Enterprise Pro</h5>
                                     <div class="d-flex">
                                         <span class="ms-auto rcomand-text create-event-recommend">Recommended</span>
-                                        <input class="form-check-input ms-3 plan_check" data-plan="pro_year" type="checkbox" name="plan_check" id="pro_year_plan_check" style="display: none;">
+                                        <input class="form-check-input ms-3 plan_check" data-plan="Pro-Year" type="checkbox" name="plan_check" id="pro_year_plan_check" style="display: none;">
                                     </div>
                                 </div>
                                 <h6>$12.50 <span>Per month | <strong>Billed annually</strong></span></h6>
