@@ -266,7 +266,9 @@ function datepicker() {
             down: "fa fa-chevron-down",
         },
         useCurrent: false, 
-        ignoreReadonly: true
+        ignoreReadonly: true,
+        stepping: 15 // Set stepping to 15 minutes
+
     });
 }
 
