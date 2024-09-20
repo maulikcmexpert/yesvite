@@ -3813,9 +3813,19 @@ $(document).on("change", 'input[name="guest_list[]"]', function () {
     }else{
         var profilePhoto = $(this).data('profile');
         var user_name = $(this).data('username');
-        // $('.selected-co-host-image').attr('src',)
-        $('.guest-contacts-wrp').css('display','flex');
+        var profile_or_text = $(this).data("profile_or_text");
+        var initial = $(this).data("initial");
         selected_co_host = $(this).val();
+        if(profile_or_text == '1'){
+            $('.selected-co-host-image').attr('src',profilePhoto);
+            $('.selected-host-h5').css('display','none');
+        }else{
+            $('.selected-co-host-image').css('display','none');
+            $('.selected-host-h5').text(initial);
+        }
+        $('.remove_co_host').attr('data-id',selected_co_host);
+        $('.selected-host-name').text(user_name);
+        $('.guest-contacts-wrp').css('display','flex');
         var prefer_by_email = $(this).data('email');
         if(prefer_by_email){
             selected_co_host_prefer_by = 'email';
