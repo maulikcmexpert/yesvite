@@ -5,8 +5,17 @@
 <div class="users-data">
     <div class="d-flex align-items-start">
         <div class="contact-img">
-            <img src="{{ asset('assets/event/image/user-img.svg') }}"
-                alt="contact-img">
+            @if ($user->profile != '')
+            <img src="{{asset('storage/profile/' .$user->profile)}}" alt="user-img">
+            @else
+            @php
+            $firstInitial = !empty($user->firstname) ? strtoupper($user->firstname[0]) : '';
+            $lastInitial = !empty($user->lastname) ? strtoupper($user->lastname[0]) : '';
+            $initials = $firstInitial . $lastInitial;
+            $fontColor = 'fontcolor' . $firstInitial;
+            @endphp
+            <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
+            @endif
 
         </div>
         <div class="text-start">
@@ -15,7 +24,7 @@
             </h5>
             @if(isset($user->email)&&$user->email!="")
             <div>
-                <a href="mailto:silvia@gmail.com">
+                <a href="mailto:{{$user->email}}">
                     <svg class="me-1" width="14" height="14"
                         viewBox="0 0 14 14" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
