@@ -907,7 +907,7 @@
     max-height: 100%;
 }
 
-.co-host-profile-photo{
+.co-host-profile-photo {
     width: 100% !important;
     max-width: 24px !important;
     height: 24px !important;
@@ -917,7 +917,7 @@
     justify-content: center;
 }
 
-.co-host-profile-photo img{
+.co-host-profile-photo img {
     width: 100% !important;
     height: 100% !important;
     border-radius: 50% !important;
@@ -978,13 +978,21 @@
         border-radius: 12px;
     }
 
-    #sidebar_allow_limit,
+
     #sidebar_add_thankyou_card {
         height: 90vh;
     }
 
+    #sidebar_allow_limit {
+        height: 35vh;
+    }
+
     .list-slide .accordion-button {
         margin-bottom: 10px;
+    }
+
+    .sidebar_add_co_host {
+        height: 90vh;
     }
 
 }
@@ -1037,5 +1045,7 @@
     .deleteModal .modal-footer button {
         max-width: 46%;
     }
+
+
 
 }
