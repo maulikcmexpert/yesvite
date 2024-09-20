@@ -187,7 +187,7 @@
 .modal-design-card {
     width: 100%;
     max-width: 460px;
-    height: 560px;
+    /* height: 560px; */
     border: 1px solid var(--borderColor);
     box-shadow: 0px 23.97px 23.97px -11.98px #00000005;
     border-radius: 10px;
@@ -220,15 +220,6 @@
 
 .modal-btn button {
     width: 100%;
-}
-
-.modal-design-card .main-seciton {
-    height: 100%;
-}
-
-.step_2 .birthday-card-main {
-    width: 100% !important;
-    height: 100% !important;
 }
 
 

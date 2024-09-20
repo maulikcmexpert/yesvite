@@ -436,10 +436,6 @@
     max-height: calc(100vh - 300px);
 }
 
-.group-owl .owl-item {
-    width: 300px !important;
-}
-
 /* ============ responsive ============ */
 @media only screen and (max-width:1800px) {
     .guest-wrapper {
