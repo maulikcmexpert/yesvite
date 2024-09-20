@@ -53,7 +53,7 @@ function initMap() {
 
         // Handle address components and update respective form fields
         if (place.address_components) {
-            var addr_fields = ["subpremise","street_number", "route","administrative_area_level_2", "locality", "administrative_area_level_1", "postal_code"];
+            var addr_fields = ["street_number", "subpremise", "route","administrative_area_level_2", "locality", "administrative_area_level_1", "postal_code"];
             var addr_inputs = ["address1","address1", "address1","city", "city", "state", "zipcode"];
             var typeField = [], typeValLong = [];
 
@@ -65,7 +65,7 @@ function initMap() {
                 });
             });
             console.log(typeField);
-            console.log(typeValLong);
+            // console.log(typeValLong);
             addr_fields.forEach(function(field, index) {
                 var fieldIndex = typeField.indexOf(field);
                 if (fieldIndex !== -1) {
@@ -75,7 +75,7 @@ function initMap() {
                     var selectVal = $("#" + addr_inputs[index] + " option").filter(function () {
                         return $(this).html() == typeValLong[fieldIndex];
                     }).val();
-
+                    console.log(selectVal);
                     if (selectVal) {
                         $("#" + addr_inputs[index]).val(selectVal);
                     }
