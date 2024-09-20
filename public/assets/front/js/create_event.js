@@ -2608,15 +2608,15 @@ function savePage3Data() {
 
     // console.log(eventData);
 
-    $.ajax({
-        url: base_url + "event/get_all_invited_guest",
+    // $.ajax({
+    //     url: base_url + "event/get_all_invited_guest",
 
-        type: "POST",
-        headers: {
-            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-        },
+    //     type: "POST",
+    //     headers: {
+    //         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+    //     },
 
-        success: function (response) {
+    //     success: function (response) {
             
             $(".list_all_invited_user").empty();
             // $(".list_all_invited_user").append(response);
@@ -2628,11 +2628,11 @@ function savePage3Data() {
             $('.current_step').text('4 of 4');
             $(".step_4").show();
             eventData.step = '3';
-        },
-        error: function (xhr, status, error) {
-            console.log("AJAX error: " + error);
-        },
-    });
+    //     },
+    //     error: function (xhr, status, error) {
+    //         console.log("AJAX error: " + error);
+    //     },
+    // });
 }
 
 function savePage4Data() {
