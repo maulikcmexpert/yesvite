@@ -3833,6 +3833,9 @@ $(document).on("change", 'input[name="guest_list[]"]', function () {
     if ($("input[name='guest_list[]']:checked").length > 1) {
         $(this).prop("checked", false);
         toastr.error("There can be only one co host");
+        if (!$('.user-' + selected_co_host).is(':checked')) {
+            $('.guest-contacts-wrp').css('display', 'none');
+        }
         return;
     }else{
         if ($(this).is(':checked')) {
@@ -3863,11 +3866,6 @@ $(document).on("change", 'input[name="guest_list[]"]', function () {
         }else{
             $('.guest-contacts-wrp').css('display','none');
         }
-
-        if (!$('.user-' + selected_co_host).is(':checked')) {
-            $('.guest-contacts-wrp').css('display', 'none');
-        }
-
     }
 });
 
