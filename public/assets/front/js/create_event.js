@@ -2706,7 +2706,7 @@ function savePage4Data() {
 
     if ($("#kid_off_event").is(":checked")) {
         eventData.kid_off_event = "1";
-    } else {
+    } else {    
         eventData.kid_off_event = "0";
     }   
 }
