@@ -1326,7 +1326,7 @@ class EventController extends Controller
         $users = User::select('id', 'firstname', 'lastname', 'phone_number', 'email', 'profile')
             ->whereNotIn('id', $alreadyselectedUser)
             ->where('id', '!=', $user_id)->where(['is_user_phone_contact' => '0'])->orderBy('firstname')
-            ->when($request->search_user != '', function ($query) use ($search_user) {
+            ->when($search_user != '', function ($query) use ($search_user) {
                 $query->where(function ($q) use ($search_user) {
                     $q->where('firstname', 'LIKE', '%' . $search_user . '%')
                         ->orWhere('lastname', 'LIKE', '%' . $search_user . '%');
