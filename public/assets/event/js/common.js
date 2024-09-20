@@ -96,6 +96,7 @@ $(".form-control").on('focusout', function(){
 });
 
 $(".form-control").each(function() {
+    console.log("text",text);
     var text = $(this).val();
     if (text === "") {
         $(this).next().removeClass('floatingfocus');
