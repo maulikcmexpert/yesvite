@@ -2858,14 +2858,14 @@ function clearError(input = null) {
         
         case "categoryName":
             var groupname = input.value;
+            console.log(groupname);
             if (groupname === "") {
                 $("#categoryName_error")
                     .text("Please enter category name")
                     .css("color", "red");
                 $('.pot-cate-name').text('0/30');
             } else {
-                let cat_length = $('#categoryName').val();
-                let category_length = cat_length.length;
+                let category_length = groupname.length;
                 $('.pot-cate-name').text(category_length+'/30');
                 $("#categoryName_error").text("");
             }
