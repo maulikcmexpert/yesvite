@@ -3,6 +3,8 @@ var total_activities = 0;
 var category = 0;
 var items = 0;
 var activities = {};
+var selected_co_host = '';
+var selected_co_host_prefer_by = '';
 
 $(document).ready(function () {
     if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
@@ -3791,6 +3793,8 @@ $(document).on("click", ".save_event_co_host", function () {
         }
         console.log(prefer_by);
         eventData.co_host = dataId;
+        selected_co_host = dataId;
+        selected_co_host_prefer_by = prefer_by;
         eventData.co_host_prefer_by = prefer_by;
         if(profile_or_text == '1'){
             $('.add_new_co_host').html(`<span class="mx-3"><div class="contact-img">
@@ -3818,6 +3822,14 @@ $(document).on("click", ".save_event_co_host", function () {
 $(document).on("change", 'input[name="guest_list[]"]', function () {
     if ($("input[name='guest_list[]']:checked").length > 2) {
         $(this).prop("checked", false);
+        selected_co_host = $(this).val();
+        var prefer_by_email = $(this).data('email');
+        if(prefer_by_email){
+            selected_co_host_prefer_by = 'email';
+        }else{
+            selected_co_host_prefer_by = 'phone';
+        }
+        
         // toastr.error("There can be only one co host");
     }
 });
@@ -4574,11 +4586,14 @@ function get_co_host_list(search_name=null){
     if(search_name ==null){
         search_name = '';
     }
+    
     $.ajax({
         url: base_url + "event/get_co_host_list",
         type: "POST",
         data: {
             search_name: search_name,
+            selected_co_host:selected_co_host,
+            selected_co_host_prefer_by:selected_co_host_prefer_by,
             _token: $('meta[name="csrf-token"]').attr("content"), // Adding CSRF token
         },
         beforeSend: function () {

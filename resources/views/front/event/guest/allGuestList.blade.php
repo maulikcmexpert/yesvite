@@ -3,6 +3,13 @@
 if ($user->email_verified_at == NULL && $user->app_user == '1'){
     continue;
 }
+$email_checked = '';
+$phone_checked = '';
+if($selected_co_host_prefer_by == 'email'){
+    $email_checked = 'checked'; 
+}elseif ($selected_co_host_prefer_by == 'phone') {
+    $phone_checked = 'checked'; 
+}
 @endphp
 
 <div class="users-data">
@@ -81,7 +88,7 @@ if ($user->email_verified_at == NULL && $user->app_user == '1'){
             </span>
             <input class="form-check-input user-{{$user->id}} user_choice" type="checkbox"
                 name="guest_list[]" data-id="user-{{$user->id}}" data-username="{{ $user->firstname }} {{ $user->lastname }}" data-profile_or_text ="{{$photo_text}}" data-profile="{{ $profile_photo }}" data-email="{{ $user->email }}"
-                value="{{ $user->id }}">
+                value="{{ $user->id }}" {{$email_checked}}>
         </div>
         @endif
         @if(isset($user->phone_number)&&$user->phone_number!="")
@@ -90,7 +97,7 @@ if ($user->email_verified_at == NULL && $user->app_user == '1'){
                 name="guest_list[]" data-mobile="{{$user->phone_number}}"
                 data-username="{{ $user->firstname }} {{ $user->lastname }}" 
                 data-profile_or_text ="{{$photo_text}}" data-profile="{{ $profile_photo }}"
-                value="{{ $user->id }}">
+                value="{{ $user->id }}" {{$phone_checked}}>
         </div>
         @endif
     </div>
