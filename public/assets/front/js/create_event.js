@@ -571,9 +571,15 @@ $(document).on('click','.create_event_with_plan',function(){
     var checkedPlan = $('input[name="plan_check"]:checked'); // Select the checked one
     if (checkedPlan.length) { // Ensure there is a checked checkbox
         var plan = checkedPlan.data('plan');
-        eventData.plan_selected = plan;
+        // eventData.plan_selected = plan;
+        alert(plan);
+        $('#selected_plan').val(plan);
+        // console.log(eventData);
         // alert(plan);
-        window.location.href = "event";
+        // window.location.href = "event";
+        setTimeout(function() {
+            window.location.href = "event";
+        }, 100); 
     }
     
 
@@ -2268,6 +2274,9 @@ $(document).on("click", "#close_createEvent", function () {
         let firstLetter = text.split(' ')[0]; 
         if(firstLetter == '1'){
             // savePage1Data('close');
+
+            var subscription_plan_name = $("#selected_plan").val();
+            
             var event_type = $("#event-type").val();
             var event_name = $("#event-name").val();
             var hostedby = $("#hostedby").val();
@@ -2309,6 +2318,8 @@ $(document).on("click", "#close_createEvent", function () {
             }
 
             // eventData = {
+                eventData.subscription_plan_name= subscription_plan_name;
+
                 eventData.event_type= event_type;
                 eventData.event_name= event_name;
                 eventData.hosted_by= hostedby;
@@ -2371,6 +2382,8 @@ function focus_timeOut(type){
 }
 
 function savePage1Data(close = null) {
+
+    var subscription_plan_name=$('#selected_plan').val();
 
     var event_type = $("#event-type").val();
     var event_name = $("#event-name").val();
@@ -2544,6 +2557,9 @@ function savePage1Data(close = null) {
     ) {
 
         // eventData = {
+
+            eventData.subscription_plan_name= subscription_plan_name;
+
             eventData.event_type= event_type;
             eventData.event_name= event_name;
             eventData.hosted_by= hostedby;
