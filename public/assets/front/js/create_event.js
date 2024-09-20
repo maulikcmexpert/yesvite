@@ -576,7 +576,10 @@ $(document).on('click','.create_event_with_plan',function(){
         $('#selected_plan').val(plan);
         // console.log(eventData);
         // alert(plan);
-        window.location.href = "event";
+        // window.location.href = "event";
+        setTimeout(function() {
+            window.location.href = "event";
+        }, 100); 
     }
     
 
