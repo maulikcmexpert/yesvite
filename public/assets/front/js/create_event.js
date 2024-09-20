@@ -3846,6 +3846,8 @@ $(document).on("change", 'input[name="guest_list[]"]', function () {
             }else{
                 selected_co_host_prefer_by = 'phone';
             }
+        }else{
+            $('.guest-contacts-wrp').css('display','none');
         }
     }
 });
