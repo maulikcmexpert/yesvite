@@ -1321,12 +1321,17 @@ class EventController extends Controller
         $selected_user = session('user_ids');
         $user_id =  Auth::guard('web')->user()->id;
         $alreadyselectedUser =  collect($selected_user)->pluck('id')->toArray();
-
+        $search_user = (isset($request->search_name) && $request->search_name != '')?$request->search_name:'';
 
         $users = User::select('id', 'firstname', 'lastname', 'phone_number', 'email', 'profile')
             ->whereNotIn('id', $alreadyselectedUser)
             ->where('id', '!=', $user_id)->where(['is_user_phone_contact' => '0'])->orderBy('firstname')
-            
+            ->when($request->search_user != '', function ($query) use ($search_user) {
+                $query->where(function ($q) use ($search_user) {
+                    $q->where('firstname', 'LIKE', '%' . $search_user . '%')
+                        ->orWhere('lastname', 'LIKE', '%' . $search_user . '%');
+                });
+            })
             ->get();
 
 

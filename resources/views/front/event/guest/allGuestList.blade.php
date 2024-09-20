@@ -5,8 +5,16 @@
 <div class="users-data">
     <div class="d-flex align-items-start">
         <div class="contact-img">
+            @php
+                $profile_photo = '';
+                $photo_text = '';
+            @endphp
             @if ($user->profile != '')
             <img src="{{asset('storage/profile/' .$user->profile)}}" alt="user-img">
+            @php 
+                $profile_photo = asset('storage/profile/' .$user->profile);
+                $photo_text = 1;
+            @endphp
             @else
             @php
             $firstInitial = !empty($user->firstname) ? strtoupper($user->firstname[0]) : '';
@@ -15,6 +23,10 @@
             $fontColor = 'fontcolor' . $firstInitial;
             @endphp
             <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
+            @php
+                $profile_photo = '<h5 class="'.$fontColor.'">'.$initials.'</h5>';
+                $photo_text = 0;
+            @endphp
             @endif
 
         </div>
@@ -65,7 +77,7 @@
                     alt="logo">
             </span>
             <input class="form-check-input user-{{$user->id}} user_choice" type="checkbox"
-                name="guest_list[]" data-id="user-{{$user->id}}" data-username="{{ $user->firstname }} {{ $user->lastname }}" data-profile="{{ asset('assets/event/image/user-img.svg') }}" data-email="{{ $user->email }}"
+                name="guest_list[]" data-id="user-{{$user->id}}" data-username="{{ $user->firstname }} {{ $user->lastname }}" data-profile_or_text ="{{$photo_text}}" data-profile="{{ $profile_photo }}" data-email="{{ $user->email }}"
                 value="{{ $user->id }}">
         </div>
         @endif
@@ -73,6 +85,8 @@
         <div class="right-note ms-auto">
             <input class="form-check-input user_tel-{{$user->id}} user_choice" type="checkbox"
                 name="guest_list[]" data-mobile="{{$user->phone_number}}"
+                data-username="{{ $user->firstname }} {{ $user->lastname }}" 
+                data-profile_or_text ="{{$photo_text}}" data-profile="{{ $profile_photo }}"
                 value="{{ $user->id }}">
         </div>
         @endif
