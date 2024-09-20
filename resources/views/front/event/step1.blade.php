@@ -398,7 +398,7 @@
                         <div class="row">
                             <div class="col-12 mb-4">
                                 <div class="input-form">
-                                    <input type="time" class="form-control inputText"
+                                    <input type="text" class="form-control inputText"
                                         name="start-time" required="">
                                     <label for="start-time"
                                         class="form-label input-field floating-label select-label">Start *</label>
