@@ -4349,12 +4349,12 @@ $.ajax({
             if (response.is_duplicate == 1) {
                 $("#user_tel-" + userId).remove();
             }
-            $(".inivted_user_list").html('');
+            // $(".inivted_user_list").html('');
             $(".inivted_user_list").append(response.view);
             guest_counter(0,15);
 
             toggleSidebar();
-            // $("#YesviteUserAll").html('');
+            $("#YesviteUserAll").html('');
             var type="all";
             get_user(type);
         // }
