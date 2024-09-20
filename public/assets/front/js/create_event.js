@@ -2925,7 +2925,7 @@ $(document).on("click", ".li_design", function () {
         eventData.hosted_by != "" &&
         eventData.event_date != "" &&
         eventData.start_time != "" &&
-        eventData.address != "" &&
+        eventData.address1 != "" &&
         eventData.city != "" &&
         eventData.state != "" &&
         eventData.zipcode != "" &&
@@ -2934,7 +2934,7 @@ $(document).on("click", ".li_design", function () {
         eventData.hosted_by != undefined &&
         eventData.event_date != undefined &&
         eventData.start_time != undefined &&
-        eventData.address != undefined &&
+        eventData.address1 != undefined &&
         eventData.city != undefined &&
         eventData.state != undefined &&
         eventData.zipcode != undefined
