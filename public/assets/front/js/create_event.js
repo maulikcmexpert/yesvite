@@ -4599,9 +4599,9 @@ function get_co_host_list(search_name=null){
 $(document).on('keyup','.co_host_search',function(){
     search_name = $(this).val();
     $('#loader').css('display','block');
+    $('.list_all_invited_user').html('');
     setTimeout(function () {
         get_co_host_list(search_name);
-        // $('#loader').css('display','none');
     }, 500);
 })
 
