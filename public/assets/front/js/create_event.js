@@ -3826,6 +3826,8 @@ $(document).on("click", ".save_event_co_host", function () {
         }
         toggleSidebar();
     }else{
+        eventData.co_host = '';
+        eventData.co_host_prefer_by = '';
         selected_co_host = '';
         selected_co_host_prefer_by = '';
         $('.add_new_co_host').html(`<span class="me-3">
@@ -4599,6 +4601,23 @@ $(document).on('click','.add_co_host',function(){
     $('co_host_search').val('');
     get_co_host_list();
     toggleSidebar('sidebar_add_co_host');
+});
+
+$(document).on('click','.add_co_host_off',function(){
+    if(eventData.co_host !== undefined){
+        selected_co_host = eventData.co_host;
+    }else{
+        selected_co_host = '';
+    }
+
+    if(eventData.co_host_prefer_by != undefined){
+        selected_co_host_prefer_by = eventData.co_host_prefer_by;
+    }else{
+        selected_co_host_prefer_by = '';
+    }
+    console.log(selected_co_host);
+    console.log(selected_co_host_prefer_by);
+    toggleSidebar();
 });
 
 function get_co_host_list(search_name=null){
