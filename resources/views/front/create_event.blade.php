@@ -509,9 +509,11 @@
         <div class="limits-count">
             <h5>+1 Limit</h5>
             <div class="qty-container">
-                <button class="qty-btn-minus allow_limit_btn" type="button"><i class="fa fa-minus"></i></button>
+                {{-- <button class="qty-btn-minus allow_limit_btn_minus" type="button"><i class="fa fa-minus"></i></button> --}}
+                <button class="allow_limit_btn_minus" type="button"><i class="fa fa-minus"></i></button>
                 <input type="number" name="qty" id="allow_limit_count" value="0" class="input-qty" />
-                <button class="qty-btn-plus allow_limit_btn" type="button"><i class="fa fa-plus"></i></button>
+                <button class="allow_limit_btn_plus" type="button"><i class="fa fa-plus"></i></button>
+                {{-- <button class="qty-btn-plus allow_limit_btn_plus" type="button"><i class="fa fa-plus"></i></button> --}}
             </div>
         </div>
     </div>

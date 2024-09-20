@@ -42,6 +42,23 @@ $(document).on('click','.qty-btn-minus',function(){
     }
 });
 
+
+
+$(document).on('click', '.allow_limit_btn_plus', function() {
+    var $input = $(this).siblings(".input-qty");
+    var value = parseInt($input.val()) || 0; // Default to 0 if NaN
+    $input.val(value + 1);
+});
+
+$(document).on('click', '.allow_limit_btn_minus', function() {
+    var $input = $(this).siblings(".input-qty");
+    var value = parseInt($input.val()) || 0; // Default to 0 if NaN
+    if (value > 0) {
+        $input.val(value - 1);
+    }
+});
+
+
 // var buttonPlus  = $(".qty-btn-plus-qty");
 // var buttonMinus = $(".qty-btn-minus-qty");
 
