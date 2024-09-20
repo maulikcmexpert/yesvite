@@ -4586,7 +4586,8 @@ function get_co_host_list(search_name=null){
     if(search_name ==null){
         search_name = '';
     }
-    
+    console.log(selected_co_host);
+    console.log(selected_co_host_prefer_by);
     $.ajax({
         url: base_url + "event/get_co_host_list",
         type: "POST",
