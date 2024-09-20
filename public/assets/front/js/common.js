@@ -57,10 +57,9 @@ $(".form-control").each(function () {
 // });
 
 
-$(document).on('click', '.toggle-password', function () {
-    // alert(); // Alert to check if it's firing
-    $(this).toggleClass("fa-eye-slash");
-    var input = $(this).siblings('input'); // This finds the input sibling
+$(".toggle-password").click(function () {
+    $(this).toggleClass("fa-eye-slash fa-eye");
+    var input = $(this).prev().prev();
     if (input.attr("type") == "password") {
         input.attr("type", "text");
     } else {

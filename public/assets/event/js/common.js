@@ -123,15 +123,7 @@ $(".form-control").each(function() {
 });
 
 // ========= show-password ===========
-$(".toggle-password").click(function () {
-    $(this).toggleClass("fa-eye-slash fa-eye");
-    var input = $(this).prev().prev();
-    if (input.attr("type") == "password") {
-        input.attr("type", "text");
-    } else {
-        input.attr("type", "password");
-    }
-});
+
 
 
 // const chooseFile = document.getElementById("choose-file");
