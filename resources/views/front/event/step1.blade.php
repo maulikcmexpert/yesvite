@@ -72,20 +72,8 @@
                         </div>
                     </div>
                     <div class="col-6 mb-4">
-                        {{-- <div class="input-form">
-                            <select class="form-select" id="start-time-zone" name="start_time_zone">
-                                <option value="PST" selected>PST</option>
-                                <option value="MST">MST</option>
-                                <option value="CST">CST</option>
-                                <option value="EST">EST</option>
-
-                            </select>
-                            <label for="time-zone"
-                                class="form-label input-field floating-label select-label">Time
-                                Zone *</label>
-                        </div> --}}
                         <div class="input-form">
-                            <select class="form-select" id="start-time-zone" onchange="clearError(this)">
+                            <select class="form-select" name="start_time_zone" id="start-time-zone" onchange="clearError(this)">
                                 <option value="PST" selected>PST</option>
                                 <option value="MST">MST</option>
                                 <option value="CST">CST</option>
