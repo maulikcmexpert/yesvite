@@ -2211,7 +2211,7 @@ $(document).on('click','#next_design',function() {
 
 $(document).on("click", "#close_createEvent", function () {
 
-    // $('#loader').css('display','block');
+    $('#loader').css('display','block');
     var event_type = $("#event-type").val();
     var event_name = $("#event-name").val();
     var event_date = $("#event-date").val();
@@ -2243,7 +2243,7 @@ $(document).on("click", "#close_createEvent", function () {
             var description = $("#description").val();
             var message_to_guests = $("#message_to_guests").val();
             
-            
+            var desgin_selected= eventData.desgin_selected;
 
             var events_schedule = '0';
             var rsvp_end_time_set = '0';
@@ -2284,6 +2284,7 @@ $(document).on("click", "#close_createEvent", function () {
                 zipcode: zipcode,
                 message_to_guests:message_to_guests,
                 event_id:event_id,
+                desgin_selected:desgin_selected
             };
             $(".step_2").hide();
         }
@@ -3870,6 +3871,7 @@ $(document).on("click", ".store_desgin_temp", function () {
                     $('.current_step').text('3 of 4');
                     
                     $(".step_3").show();
+                    console.log(eventData);
                     var type="all"
                     get_user(type);
                     
