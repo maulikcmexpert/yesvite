@@ -69,25 +69,27 @@ function initMap() {
             addr_fields.forEach(function(field, index) {
                 var fieldIndex = typeField.indexOf(field);
                 if (fieldIndex !== -1) {
-                    
-                    if(addr_inputs[index] == 'address1'){
+                    if(addr_inputs[index] == 'address1' && ){
+                        console.log(addr_fields.field);
 
                         var address1 = $("#" + addr_inputs[index]).val();
                         console.log(address1);
                         address1 = address1 + typeValLong[fieldIndex];
                         $("#" + addr_inputs[index]).val(address1);
+                    }else{
+
+                        $("#" + addr_inputs[index]).val(typeValLong[fieldIndex]);
+    
+                        // If it's a select input, find matching option and set its value
+                        var selectVal = $("#" + addr_inputs[index] + " option").filter(function () {
+                            return $(this).html() == typeValLong[fieldIndex];
+                        }).val();
+                        if (selectVal) {
+                            
+                            $("#" + addr_inputs[index]).val(selectVal);
+                        }
                     }
 
-                         $("#" + addr_inputs[index]).val(typeValLong[fieldIndex]);
-     
-                         // If it's a select input, find matching option and set its value
-                         var selectVal = $("#" + addr_inputs[index] + " option").filter(function () {
-                             return $(this).html() == typeValLong[fieldIndex];
-                         }).val();
-                         if (selectVal) {
-                             
-                             $("#" + addr_inputs[index]).val(selectVal);
-                         }
                      
                     
                 } else {
