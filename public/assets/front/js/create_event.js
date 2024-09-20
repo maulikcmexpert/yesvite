@@ -4584,13 +4584,13 @@ function get_co_host_list(search_name=null){
         },
     })
     .done(function (data) {
-        console.log(data.html);
-        if (data.html == " ") {
+        console.log(data);
+        if (data == " ") {
             $("#loader").html("No more contacts found");
             return;
         }
         $("#loader").hide();
-        $(".group_search_list_toggle").html(data.html);
+        $(".group_search_list_toggle").html(data);
     })
     .fail(function (jqXHR, ajaxOptions, thrownError) {
         alert("server not responding...");
