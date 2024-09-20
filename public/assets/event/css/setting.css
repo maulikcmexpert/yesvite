@@ -893,10 +893,10 @@
     margin-right: 7px;
 }
 
-.accordion-button:not(.collapsed) {
+/* .accordion-button:not(.collapsed) {
     background-color: transparent !important;
     background: transparent !important;
-}
+} */
 
 .potluck-category .list-slide {
     max-height: 290px;
