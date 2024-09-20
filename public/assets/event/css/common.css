@@ -930,4 +930,19 @@ ul.cost-list li span {
     .sidebar-btn {
         display: block !important;
     }
+
+    .step_1 .design-seting {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        max-width: 100%;
+        background: #fff;
+        border-radius: 0px;
+        z-index: 10;
+    }
+
+    .step_1 {
+        padding-bottom: 50px;
+    }
 }
