@@ -3724,7 +3724,7 @@ $(document).on("click", "#close_thankyou_card_popup", function () {
 $(document).on("click", ".save_allow_limit", function () {
     var allow_limit = $("#allow_limit_count").val();
     eventData.allow_limit_count = allow_limit;
-
+    console.log(allow_limit);
     if(allow_limit > 0){
         $('.allow_for_limit_count').html(`<div class="d-flex align-items-center add_new_limit">
                 <span class="me-3">
