@@ -854,8 +854,8 @@
             </div>
             <div class="invite-link">
                 <div class="invite-left-side recomendat-plan">
-                    <h6 class="invite-count">14</h6>
-                    <p class="invite-left_d"><strong>Invites | 1</strong> Left</p>
+                    <h6 class="invite-count">0</h6>
+                    <p class="invite-left_d"><strong>Invites | 15</strong> Left</p>
                 </div>
                 <span>15 or less <strong>$15.99</strong></span>
             </div>
