@@ -70,25 +70,26 @@ function initMap() {
                 var fieldIndex = typeField.indexOf(field);
                 if (fieldIndex !== -1) {
                     
-                    
-                    $("#" + addr_inputs[index]).val(typeValLong[fieldIndex]);
-
-                    // If it's a select input, find matching option and set its value
-                    var selectVal = $("#" + addr_inputs[index] + " option").filter(function () {
-                        return $(this).html() == typeValLong[fieldIndex];
-                    }).val();
-                    if (selectVal) {
-                        
-                        $("#" + addr_inputs[index]).val(selectVal);
-                    }
-
                     if(addr_inputs[index] == 'address1'){
 
                         var address1 = $("#" + addr_inputs[index]).val();
+                        console.log(address1);
                         address1 = address1 + typeValLong[fieldIndex];
                         $("#" + addr_inputs[index]).val(address1);
-                        console.log(address1);
+                     }else{
+
+                         $("#" + addr_inputs[index]).val(typeValLong[fieldIndex]);
+     
+                         // If it's a select input, find matching option and set its value
+                         var selectVal = $("#" + addr_inputs[index] + " option").filter(function () {
+                             return $(this).html() == typeValLong[fieldIndex];
+                         }).val();
+                         if (selectVal) {
+                             
+                             $("#" + addr_inputs[index]).val(selectVal);
+                         }
                      }
+                    
                 } else {
                     if(addr_inputs[index] != 'address1'){
                         $("#" + addr_inputs[index]).val("");
