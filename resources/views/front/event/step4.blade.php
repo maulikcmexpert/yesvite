@@ -41,7 +41,7 @@
                                         </div>
                                     </div>
                                     <a href="#" class="add-limit allow_limit_toggle" onclick="toggleSidebar('sidebar_allow_limit')" style="display: none;">
-                                        <div class="d-flex align-items-center justify-content-between w-100">
+                                        <div class="d-flex align-items-center justify-content-between w-100 allow_for_limit_count" >
                                             <div class="d-flex align-items-center add_new_limit">
                                                 <span class="me-3">
                                                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
