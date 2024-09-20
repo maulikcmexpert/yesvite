@@ -1322,10 +1322,13 @@ class EventController extends Controller
         $user_id =  Auth::guard('web')->user()->id;
         $alreadyselectedUser =  collect($selected_user)->pluck('id')->toArray();
         $search_user = (isset($request->search_name) && $request->search_name != '')?$request->search_name:'';
+        $selected_co_host = (isset($request->selected_co_host) && $request->selected_co_host != '')?$request->selected_co_host:'';
+        $selected_co_host_prefer_by = (isset($request->selected_co_host_prefer_by) && $request->selected_co_host_prefer_by != '')?$request->selected_co_host_prefer_by:'';
 
         $users = User::select('id', 'firstname', 'profile', 'lastname', 'email', 'country_code', 'phone_number', 'app_user', 'prefer_by', 'email_verified_at', 'parent_user_phone_contact', 'visible', 'message_privacy')
             ->whereNotIn('id', $alreadyselectedUser)
-            ->where('id', '!=', $user_id)->where(['is_user_phone_contact' => '0'])->orderBy('firstname')
+            ->where('id', '!=', $user_id)
+            ->where(['is_user_phone_contact' => '0'])->orderBy('firstname')
             ->when($search_user != '', function ($query) use ($search_user) {
                 $query->where(function ($q) use ($search_user) {
                     $q->where('firstname', 'LIKE', '%' . $search_user . '%')
@@ -1336,6 +1339,6 @@ class EventController extends Controller
 
 
 
-        return view('front.event.guest.allGuestList', compact('users'));
+        return view('front.event.guest.allGuestList', compact('users','selected_co_host','selected_co_host_prefer_by'));
     }
 }
