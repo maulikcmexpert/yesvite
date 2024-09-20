@@ -2550,7 +2550,7 @@ function savePage1Data(close = null) {
         $(".titlename").text(hostedby);
         $(".event_name").text(event_name);
         $(".event_date").text(formattedDate);
-        $(".event_address").text(address);
+        $(".event_address").text(address1);
         $(".event_time").text(formattedTime);
         $(".step_2").show();
         $('.event_create_percent').text('50%');
