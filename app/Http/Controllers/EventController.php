@@ -1323,7 +1323,7 @@ class EventController extends Controller
         $alreadyselectedUser =  collect($selected_user)->pluck('id')->toArray();
         $search_user = (isset($request->search_name) && $request->search_name != '')?$request->search_name:'';
 
-        $users = User::select('id', 'firstname', 'lastname', 'phone_number', 'email', 'profile')
+        $users = User::select('id', 'firstname', 'profile', 'lastname', 'email', 'country_code', 'phone_number', 'app_user', 'prefer_by', 'email_verified_at', 'parent_user_phone_contact', 'visible', 'message_privacy')
             ->whereNotIn('id', $alreadyselectedUser)
             ->where('id', '!=', $user_id)->where(['is_user_phone_contact' => '0'])->orderBy('firstname')
             ->when($search_user != '', function ($query) use ($search_user) {
