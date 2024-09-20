@@ -177,7 +177,7 @@ class EventController extends Controller
             'gift_registry_id' => (isset($request->gift_registry_id) && $request->gift_registry_id != "") ? $request->gift_registry_id : "0",
             // 'rsvp_end_time_set' => "",
             // 'address_2' => "",
-            'subscription_plan_name' => (isset($request->subscription_plan_name) && $request->subscription_plan_name != "") ? $request->subscription_plan_name : "",
+            'subscription_plan_name' => (isset($request->plan_selected) && $request->plan_selected != "") ? $request->plan_selected : "",
             'subscription_invite_count' => (isset($request->subscription_invite_count) && $request->subscription_invite_count != "") ? $request->subscription_invite_count : "0",
         ]);
         $eventId = $event_creation->id;
@@ -247,7 +247,7 @@ class EventController extends Controller
                 }
             }
 
-            if (isset($request->eventSetting)) {
+            if (isset($request->events_schedule)) {
                 $eventSetting = EventSetting::where('event_id', $eventId)->first();
                 if ($eventSetting != null) {
                     $eventSetting->allow_for_1_more = (isset($request->allow_for_1_more)) ? $request->allow_for_1_more : "0";
@@ -1315,5 +1315,22 @@ class EventController extends Controller
             Session::save();
         }
         return;
+    }
+
+    public function get_co_host_list(Request $request){
+        $selected_user = session('user_ids');
+        $user_id =  Auth::guard('web')->user()->id;
+        $alreadyselectedUser =  collect($selected_user)->pluck('id')->toArray();
+
+
+        $users = User::select('id', 'firstname', 'lastname', 'phone_number', 'email', 'profile')
+            ->whereNotIn('id', $alreadyselectedUser)
+            ->where('id', '!=', $user_id)->where(['is_user_phone_contact' => '0'])->orderBy('firstname')
+            
+            ->get();
+
+
+
+        return  view('front.event.guest.allGuestList', compact('users'));
     }
 }

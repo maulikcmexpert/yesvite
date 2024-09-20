@@ -2309,6 +2309,7 @@ $(document).on("click", "#close_createEvent", function () {
         }
         eventData.step = firstLetter;
         eventData.isdraft = "1";
+        savePage4Data();
        
         console.log(eventData);
 
@@ -2325,7 +2326,6 @@ $(document).on("click", "#close_createEvent", function () {
                     window.location.href="profile";
                     $('#loader').css('display','none');
                     toastr.success('Event Saved as Draft');
-
                 }
 
             },
@@ -2633,7 +2633,7 @@ function savePage3Data() {
 }
 
 function savePage4Data() {
-    eventData.eventSetting = "1";
+    eventData.events_schedule = "1";
 
     if ($("#allow_for_1_more").is(":checked")) {
         eventData.allow_for_1_more = "1";
@@ -4553,5 +4553,41 @@ $(document).on('click','.see_all_group',function(){
     $('search_user').val('');
     toggleSidebar('sidebar_groups');
 });
+
+$(document).on('click','.add_co_host',function(){
+    alert();
+    $('co_host_search').val('');
+    get_co_host_list();
+    toggleSidebar('sidebar_add_co_host');
+});
+
+function get_co_host_list(){
+    if(search_name ==null){
+        search_name = '';
+    }
+    $.ajax({
+        url: base_url + "event/get_co_host_list",
+        type: "POST",
+        data: {
+            search_name: search_name,
+            _token: $('meta[name="csrf-token"]').attr("content"), // Adding CSRF token
+        },
+        beforeSend: function () {
+            $("#loader").show();
+        },
+    })
+    .done(function (data) {
+        console.log(data.html);
+        if (data.html == " ") {
+            $("#loader").html("No more contacts found");
+            return;
+        }
+        $("#loader").hide();
+        $(".group_search_list_toggle").html(data.html);
+    })
+    .fail(function (jqXHR, ajaxOptions, thrownError) {
+        alert("server not responding...");
+    });
+}
 
 
