@@ -906,8 +906,12 @@ class EventController extends Controller
             ->where('id', '!=', $id)
             ->where(['is_user_phone_contact' => '0'])
             ->orderBy('firstname')
-            ->limit($request->limit)
-            ->skip($request->offset)
+            ->when($type != 'group', function ($query) use ($request) {
+                $query->where(function ($q) use ($request) {
+                    $q->limit($request->limit)
+                        ->skip($request->offset);
+                });
+            })
             ->when($request->search_user != '', function ($query) use ($search_user) {
                 $query->where(function ($q) use ($search_user) {
                     $q->where('firstname', 'LIKE', '%' . $search_user . '%')
