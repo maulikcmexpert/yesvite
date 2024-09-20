@@ -1,4 +1,7 @@
 @foreach ($users as $user )
+@if ($user->email_verified_at == NULL && $user->app_user == '1')
+    continue;
+@endif
 <div class="users-data">
     <div class="d-flex align-items-start">
         <div class="contact-img">
