@@ -137,7 +137,7 @@ class EventController extends Controller
 
         // $potluck = session('category');
         // dd(session()->get('gift_registry_data'));
-        dd($request); 
+        // dd($request); 
         $user_id =  Auth::guard('web')->user()->id;
         $dateString = (isset($request->event_date)) ? $request->event_date : "";
 
@@ -161,9 +161,9 @@ class EventController extends Controller
             'rsvp_start_timezone' => (isset($request->rsvp_start_timezone) && $request->rsvp_start_timezone != "") ? $request->rsvp_start_timezone : "",
             'rsvp_end_time' => (isset($request->event_end_time) && $request->event_end_time != "") ? $request->event_end_time : "",
             'rsvp_end_timezone' => (isset($request->end_time_zone) && $request->end_time_zone != "") ? $request->end_time_zone : "",
-            'event_location_name' => (isset($request->event_location) && $request->event_location) ? $request->event_location : "",
-            'address_1' => (isset($request->address1) && $request->address1) ? $request->address1 : "",
-            'address_2' => (isset($request->address_2) && $request->address_2) ? $request->address_2 : "",
+            'event_location_name' => (isset($request->event_location) && $request->event_location!="") ? $request->event_location : "",
+            'address_1' => (isset($request->address1) && $request->address1!="") ? $request->address1 : "",
+            'address_2' => (isset($request->address_2) && $request->address_2!="") ? $request->address_2 : "",
             'state' => (isset($request->state) && $request->state != "") ? $request->state : "",
             'zip_code' => (isset($request->zipcode) && $request->zipcode) ? $request->zipcode : "",
             'city' => (isset($request->city) && $request->city != "") ? $request->city : "",
