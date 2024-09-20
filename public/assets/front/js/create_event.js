@@ -255,21 +255,40 @@ if (/Mobi/.test(navigator.userAgent)) {
 }
 
 $(document).on('click','.timepicker', function(){
-   datepicker();
+    initializeTimepicker();
 })
-datepicker();
-function datepicker() {
-    $(".timepicker").datetimepicker({
-        format: "LT",
-        icons: {
-            up: "fa fa-chevron-up",
-            down: "fa fa-chevron-down",
-        },
-        useCurrent: false, 
-        ignoreReadonly: true
-    });
-}
+// datepicker();
+// function datepicker() {
+//     $(".timepicker").datetimepicker({
+//         format: "LT",
+//         icons: {
+//             up: "fa fa-chevron-up",
+//             down: "fa fa-chevron-down",
+//         },
+//         useCurrent: false, 
+//         ignoreReadonly: true
+//     });
+// }
 
+ function initializeTimepicker() {
+     // Check if it's a mobile device
+     if (/Mobi|Android/i.test(navigator.userAgent)) {
+         // On mobile, remove readonly so native picker can open
+         $('.timepicker').attr('readonly', false);
+     } else {
+         // On desktop, use the custom time picker
+         $(".timepicker").datetimepicker({
+             format: "LT", // Time format (AM/PM)
+             icons: {
+                 up: "fa fa-chevron-up",
+                 down: "fa fa-chevron-down",
+             },
+             useCurrent: false, 
+             ignoreReadonly: true // Ignore readonly to allow input click
+         });
+     }
+ }
+ 
 // flatpickr(".event_time", {
 //     enableTime: true,
 //     noCalendar: true,
