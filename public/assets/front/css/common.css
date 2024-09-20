@@ -968,9 +968,12 @@ ul.nav-tabs .nav-link:focus {
         height: 20px !important;
     }
 
-    #sidebar_create_event,
-    #sidebar_change_plan_create {
+    #sidebar_create_event {
         height: 70vh;
+    }
+
+    #sidebar_change_plan_create {
+        height: 90vh;
     }
 
     .new-latest-draf-wrp {
