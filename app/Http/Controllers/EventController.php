@@ -322,7 +322,7 @@ class EventController extends Controller
                 // dd(1);
                 $activities = $request->activity;
                 $addStartschedule =  new EventSchedule();
-
+                dd($activities);
                 $addStartschedule->event_id = $eventId;
                 $addStartschedule->start_time = isset($request->start_time) ? $request->start_time : '';
                 $addStartschedule->event_date = isset($startDate) ? $startDate : '';
