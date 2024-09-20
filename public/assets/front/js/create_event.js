@@ -4613,6 +4613,8 @@ $(document).on('click','.add_co_host_off',function(){
     }else{
         selected_co_host_prefer_by = '';
     }
+    console.log(selected_co_host);
+    console.log(selected_co_host_prefer_by);
     toggleSidebar();
 });
 
