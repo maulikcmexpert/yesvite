@@ -3860,6 +3860,7 @@ $(document).on("click", ".final_checkout", function () {
 
 
 $(document).on("click", "#final_create_event", function (e) {
+    console.log(eventData);
     var data = eventData;
     // console.log(data);
     $("#loader").show();
