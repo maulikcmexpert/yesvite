@@ -259,10 +259,6 @@
 
 #sidebar_add_co_host .guest-contacts-wrp {
     display: flex !important;
-}
-
-#sidebar_add_co_host .guest-contacts-wrp .guest-contacts-wrp {
-    display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
