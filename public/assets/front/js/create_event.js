@@ -2856,7 +2856,7 @@ function clearError(input = null) {
             }
             break;
         
-        case "categoryName":
+        case "text1":
             var groupname = input.value;
             console.log(groupname);
             if (groupname === "") {
