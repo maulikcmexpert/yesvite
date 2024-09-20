@@ -3820,26 +3820,27 @@ $(document).on("change", 'input[name="guest_list[]"]', function () {
     if ($("input[name='guest_list[]']:checked").length > 1) {
         $(this).prop("checked", false);
         toastr.error("There can be only one co host");
+        return;
     }else{
         if ($(this).is(':checked')) {
-            // var profilePhoto = $(this).data('profile');
-            // var user_name = $(this).data('username');
-            // var profile_or_text = $(this).data("profile_or_text");
-            // var initial = $(this).data("initial");
+            var profilePhoto = $(this).data('profile');
+            var user_name = $(this).data('username');
+            var profile_or_text = $(this).data("profile_or_text");
+            var initial = $(this).data("initial");
             selected_co_host = $(this).val();
             // console.log(profile_or_text);
-            // if(profile_or_text == '1'){
-            //     $('.selected-co-host-image').show();
-            //     $('.selected-co-host-image').attr('src',profilePhoto);
-            //     $('.selected-host-h5').css('display','none');
-            // }else{
-            //     $('.selected-host-h5').show();
-            //     $('.selected-co-host-image').css('display','none');
-            //     $('.selected-host-h5').text(initial);
-            // }
-            // $('.remove_co_host').attr('data-id',selected_co_host);
-            // $('.selected-host-name').text(user_name);
-            // $('.guest-contacts-wrp').css('display','flex');
+            if(profile_or_text == '1'){
+                $('.selected-co-host-image').show();
+                $('.selected-co-host-image').attr('src',profilePhoto);
+                $('.selected-host-h5').css('display','none');
+            }else{
+                $('.selected-host-h5').show();
+                $('.selected-co-host-image').css('display','none');
+                $('.selected-host-h5').text(initial);
+            }
+            $('.remove_co_host').attr('data-id',selected_co_host);
+            $('.selected-host-name').text(user_name);
+            $('.guest-contacts-wrp').css('display','flex');
             var prefer_by_email = $(this).data('email');
             if(prefer_by_email){
                 selected_co_host_prefer_by = 'email';
@@ -3847,8 +3848,9 @@ $(document).on("change", 'input[name="guest_list[]"]', function () {
                 selected_co_host_prefer_by = 'phone';
             }
         }else{
-
+            $('.guest-contacts-wrp').css('display','none');
         }
+
     }
 });
 
