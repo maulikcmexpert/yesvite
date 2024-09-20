@@ -3826,6 +3826,8 @@ $(document).on("click", ".save_event_co_host", function () {
         }
         toggleSidebar();
     }else{
+        eventData.co_host = '';
+        eventData.co_host_prefer_by = '';
         selected_co_host = '';
         selected_co_host_prefer_by = '';
         $('.add_new_co_host').html(`<span class="me-3">
