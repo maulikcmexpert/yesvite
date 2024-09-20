@@ -4602,6 +4602,21 @@ $(document).on('click','.add_co_host',function(){
     toggleSidebar('sidebar_add_co_host');
 });
 
+$(document).on('click','.add_co_host_off',function(){
+    if(eventData.co_host !== undefined){
+        selected_co_host = eventData.co_host;
+    }else{
+        selected_co_host = '';
+    }
+
+    if(eventData.co_host_prefer_by != undefined){
+        selected_co_host_prefer_by = eventData.co_host_prefer_by;
+    }else{
+        selected_co_host_prefer_by = '';
+    }
+    toggleSidebar();
+});
+
 function get_co_host_list(search_name=null){
     if(search_name ==null){
         search_name = '';
