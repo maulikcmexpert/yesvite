@@ -24,7 +24,7 @@
             @endphp
             <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
             @php
-                $profile_photo = '<h5 class="'.$fontColor.'">'.$initials.'</h5>';
+                $profile_photo = '<h5 class="'.$fontColor.' add-item-under-text">'.$initials.'</h5>';
                 $photo_text = 0;
             @endphp
             @endif

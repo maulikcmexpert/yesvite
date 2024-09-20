@@ -3791,15 +3791,15 @@ $(document).on("click", ".save_event_co_host", function () {
         eventData.co_host = dataId;
         eventData.co_host_prefer_by = prefer_by;
         if(profile_or_text == '1'){
-            $('.add_new_co_host').html(`<span class="mx-3">
+            $('.add_new_co_host').html(`<span class="mx-3"><div class="contact-img">
                     <img src="${profilePhoto}"
                         alt="logo">
-                </span>
+                </div></span>
                 <h5>${user_name}</h5>`);
         }else{
-            $('.add_new_co_host').html(`<span class="mx-3">
+            $('.add_new_co_host').html(`<span class="mx-3"><div class="contact-img">
                     ${profilePhoto}
-                </span>
+                </div></span>
                 <h5>${user_name}</h5>`);
         }
         toggleSidebar();
