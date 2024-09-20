@@ -920,6 +920,7 @@
 .co-host-profile-photo img{
     width: 100% !important;
     height: 100% !important;
+    border-radius: 50% !important;
 }
 
 /* ============ responsive ============ */
