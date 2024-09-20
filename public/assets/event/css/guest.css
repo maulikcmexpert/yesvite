@@ -428,6 +428,7 @@
     overflow: hidden;
     overflow-y: scroll;
     max-height: calc(100vh - 210px);
+    padding: 0px 5px;
 }
 
 #sidebar_potluck .potluck-category {
