@@ -64,7 +64,7 @@ function initMap() {
                     typeValLong.push(component.long_name);
                 });
             });
-
+            console.log(typeField);
             addr_fields.forEach(function(field, index) {
                 var fieldIndex = typeField.indexOf(field);
                 if (fieldIndex !== -1) {
