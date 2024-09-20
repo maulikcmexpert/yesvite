@@ -2858,6 +2858,7 @@ function clearError(input = null) {
                 $("#recipient_name_error").text("");
                 var inputLength = recipient_name.length;
                 $('.recipient-name-con').text(inputLength+'/30');
+            
             }
             break;
 
