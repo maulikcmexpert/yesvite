@@ -75,8 +75,8 @@ function initMap() {
                     var selectVal = $("#" + addr_inputs[index] + " option").filter(function () {
                         return $(this).html() == typeValLong[fieldIndex];
                     }).val();
-                    console.log(selectVal);
                     if (selectVal) {
+                        console.log(selectVal);
                         $("#" + addr_inputs[index]).val(selectVal);
                     }
                 } else {
