@@ -170,14 +170,15 @@ class EventController extends Controller
             'city' => (isset($request->city) && $request->city != "") ? $request->city : "",
             'message_to_guests' => (isset($request->message_to_guests) && $request->message_to_guests != "") ? $request->message_to_guests : "",
             'is_draft_save' => (isset($request->isdraft) && $request->isdraft != "") ? $request->isdraft : "0",
-            // 'latitude' => "",
-            // 'longitude' => "",
-            // 'greeting_card_id' => "",
-            // 'gift_registry_id' => "",
+           
+            'latitude' => (isset($request->latitude) && $request->latitude != "") ? $request->latitude : "",
+            'longitude' => (isset($request->longitude) && $request->longitude != "") ? $request->longitude : "",
+            'greeting_card_id' => (isset($request->greeting_card_id) && $request->greeting_card_id != "") ? $request->greeting_card_id : "0",
+            'gift_registry_id' => (isset($request->gift_registry_id) && $request->gift_registry_id != "") ? $request->gift_registry_id : "0",
             // 'rsvp_end_time_set' => "",
             // 'address_2' => "",
-            // 'subscription_plan_name' => "",
-            // 'subscription_invite_count' => "",
+            'subscription_plan_name' => (isset($request->subscription_plan_name) && $request->subscription_plan_name != "") ? $request->subscription_plan_name : "",
+            'subscription_invite_count' => (isset($request->subscription_invite_count) && $request->subscription_invite_count != "") ? $request->subscription_invite_count : "0",
         ]);
         $eventId = $event_creation->id;
         $event_creation->step = (isset($request->step) && $request->step != '') ? $request->step : 0;
