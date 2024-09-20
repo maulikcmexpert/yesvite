@@ -418,7 +418,7 @@
 }
 
 .step_3 .design-seting {
-    max-width: calc(100vh - 100px);
+    max-width: calc(100vh - 150px);
 }
 
 #sidebar_add_co_host .alert-box {
