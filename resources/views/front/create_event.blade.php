@@ -1112,7 +1112,7 @@
                 <div class="input-form">
                     <input class="form-control" type="text" id="categoryName" onkeyup="clearError()"
                         name="text1" placeholder="Categories: e.g., Appetizers, Salads, Drinks, etc">
-                    <span class="sub-con">9/30</span>
+                    <span class="sub-con pot-cate-name">0/30</span>
                     <label for="categoryName" id="categoryNameError"></label>
                     <input type="hidden" id="hidden_category_name" />
                     <input type="hidden" id="hidden_category_quantity" />

@@ -2854,6 +2854,21 @@ function clearError(input = null) {
                 $("#group_name_error").text("");
             }
             break;
+        
+        case "categoryName":
+            var groupname = input.value;
+            if (groupname === "") {
+                $("#categoryName_error")
+                    .text("Please enter category name")
+                    .css("color", "red");
+                $('.pot-cate-name').text('0/30');
+            } else {
+                let cat_length = $('#categoryName').val();
+                let category_length = cat_length.length;
+                $('.pot-cate-name').text(category_length+'/30');
+                $("#categoryName_error").text("");
+            }
+            break;
 
         // Add cases for other fields as needed
     }
