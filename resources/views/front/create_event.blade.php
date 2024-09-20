@@ -2265,7 +2265,7 @@
 
 
 
-
+<script src="{{ asset('assets/front/js/map.js') }}"></script>
 
 {{-- <!-- Latest compiled JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -2278,3 +2278,4 @@
 </body>
 
 </html> --}}
+<script type="text/javascript" async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBW43KgTNs_Kusuvbian6KYGi_QzXOLS4w&libraries=places&callback=initMap" ></script>
