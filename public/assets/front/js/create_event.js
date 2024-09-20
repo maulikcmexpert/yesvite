@@ -572,7 +572,7 @@ $(document).on('click','.create_event_with_plan',function(){
     if (checkedPlan.length) { // Ensure there is a checked checkbox
         var plan = checkedPlan.data('plan');
         eventData.plan_selected = plan;
-        alert(plan);
+        // alert(plan);
         window.location.href = "event";
     }
     
