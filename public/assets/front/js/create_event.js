@@ -3791,7 +3791,7 @@ $(document).on("click", ".save_event_co_host", function () {
         if (prefer_by_mobile != "") {
             prefer_by = "phone";
         }
-        console.log(prefer_by);
+        console.log(prefer_by_mobile);
         eventData.co_host = dataId;
         selected_co_host = dataId;
         selected_co_host_prefer_by = prefer_by;
