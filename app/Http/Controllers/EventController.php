@@ -177,7 +177,7 @@ class EventController extends Controller
             'gift_registry_id' => (isset($request->gift_registry_id) && $request->gift_registry_id != "") ? $request->gift_registry_id : "0",
             // 'rsvp_end_time_set' => "",
             // 'address_2' => "",
-            'subscription_plan_name' => (isset($request->subscription_plan_name) && $request->subscription_plan_name != "") ? $request->subscription_plan_name : "",
+            'subscription_plan_name' => (isset($request->plan_selected) && $request->plan_selected != "") ? $request->plan_selected : "",
             'subscription_invite_count' => (isset($request->subscription_invite_count) && $request->subscription_invite_count != "") ? $request->subscription_invite_count : "0",
         ]);
         $eventId = $event_creation->id;
