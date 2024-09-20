@@ -2456,7 +2456,7 @@ function savePage1Data(close = null) {
     } else {
         $("#event-start_time-error").css("display", "none");
     }
-    if (address == "") {
+    if (address1 == "") {
         $("#event-address1-error")
             .css("display", "block")
             .css("color", "red")
