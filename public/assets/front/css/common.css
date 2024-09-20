@@ -491,6 +491,8 @@ ul.nav-tabs .nav-link:focus {
     left: 50%;
     transform: translateX(-50%);
     z-index: 10000;
+    background-color: rgba(0, 0, 0, 0.5);
+    cursor: not-allowed;
 }
 
 .input-form .iti {
