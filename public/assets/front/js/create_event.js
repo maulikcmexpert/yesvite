@@ -3787,11 +3787,9 @@ $(document).on("click", ".save_event_co_host", function () {
         var prefer_by_email = checkedCheckbox.data("email");
         var prefer_by_mobile = checkedCheckbox.data("mobile");
         var profile_or_text = checkedCheckbox.data("profile_or_text");
-        var prefer_by = "email";
-        if (prefer_by_mobile == undefined && prefer_by_mobile != "") {
-            prefer_by = "phone";
-        }
-        console.log(prefer_by_mobile);
+        var prefer_by = checkedCheckbox.data("prefer_by");
+       
+        console.log(prefer_by);
         eventData.co_host = dataId;
         selected_co_host = dataId;
         selected_co_host_prefer_by = prefer_by;
@@ -4603,7 +4601,7 @@ function get_co_host_list(search_name=null){
         },
     })
     .done(function (data) {
-        console.log(data);
+        // console.log(data);
         if (data == " ") {
             $("#loader").html("No more contacts found");
             return;

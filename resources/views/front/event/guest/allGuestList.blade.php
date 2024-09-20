@@ -90,13 +90,13 @@ if($selected_co_host == $user->id){
             </span>
             <input class="form-check-input user-{{$user->id}} user_choice" type="checkbox"
                 name="guest_list[]" data-id="user-{{$user->id}}" data-username="{{ $user->firstname }} {{ $user->lastname }}" data-profile_or_text ="{{$photo_text}}" data-profile="{{ $profile_photo }}" data-email="{{ $user->email }}"
-                value="{{ $user->id }}" {{$email_checked}}>
+                value="{{ $user->id }}" data-prefer_by="email" {{$email_checked}}>
         </div>
         @endif
         @if(isset($user->phone_number)&&$user->phone_number!="")
         <div class="right-note ms-auto">
             <input class="form-check-input user_tel-{{$user->id}} user_choice" type="checkbox"
-                name="guest_list[]" data-mobile="{{$user->phone_number}}"
+                name="guest_list[]" data-mobile="{{$user->phone_number}}" data-prefer_by="phone"
                 data-username="{{ $user->firstname }} {{ $user->lastname }}" 
                 data-profile_or_text ="{{$photo_text}}" data-profile="{{ $profile_photo }}"
                 value="{{ $user->id }}" {{$phone_checked}}>
