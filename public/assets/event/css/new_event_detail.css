@@ -844,6 +844,19 @@
     background: #fff !important;
 }
 
+#toast-container>div:hover {
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2) !important;
+}
+
+#toast-container>div {
+    padding-left: 20px !important;
+    width: 250px !important;
+}
+
+.toast-close-button {
+    color: #000 !important;
+}
+
 /* ======Responsiveness===== */
 
 
