@@ -3,6 +3,7 @@
 
 <head>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
     <link rel="stylesheet" href="{{ asset('assets/event/css/about-us.css') }}">
 
@@ -65,6 +66,8 @@
     </div>
     @include($page)
     <x-front.footer :js="$js ?? []" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
 </body>
 
 </html>
