@@ -97,9 +97,9 @@ if($selected_co_host == $user->id){
         <div class="right-note ms-auto">
             <input class="form-check-input user_tel-{{$user->id}} user_choice" type="checkbox"
                 name="guest_list[]" data-mobile="{{$user->phone_number}}" data-prefer_by="phone"
-                data-username="{{ $user->firstname }} {{ $user->lastname }}" 
+                data-username="{{ $user->firstname }} {{ $user->lastname }}" data-initial="{{$initials}}"
                 data-profile_or_text ="{{$photo_text}}" data-profile="{{ $profile_photo }}"
-                value="{{ $user->id }}" {{$phone_checked}}>
+                value="{{ $user->id }}" {{$phone_checked}} >
         </div>
         @endif
     </div>

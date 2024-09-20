@@ -691,7 +691,7 @@
                     <div class="guest-contact">
                         <div class="guest-img">
                             <img class="selected-co-host-image" src="./assets/image/user-img.svg" alt="guest-img">
-                            <h5>AB</h5>
+                            <h5 class="add-item-under-text selected-host-h5"></h5>
                             <a href="#" class="close remove_co_host" >
                                 <svg width="19" height="18" viewBox="0 0 19 18" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -706,7 +706,7 @@
                                 </svg>
                             </a>
                         </div>
-                        <h6 class="guest-name">Silvia Alegra</h6>
+                        <h6 class="guest-name selected-host-name">Silvia Alegra</h6>
                     </div>
                 </div>
 
