@@ -2280,30 +2280,30 @@ $(document).on("click", "#close_createEvent", function () {
                 rsvp_end_time_set = '1';
             }
 
-            eventData = {
-                event_type: event_type,
-                event_name: event_name,
-                hosted_by: hostedby,
-                event_date: event_date,
-                start_time: start_time,
-                rsvp_start_timezone:start_time_zone,
-                events_schedule:events_schedule,
-                activity: activities,
-                rsvp_end_time_set:rsvp_end_time_set,
-                rsvp_end_time:rsvp_end_time,
-                rsvp_end_timezone:end_time_zone,
-                rsvp_by_date_set:rsvp_by_date_set,
-                rsvp_by_date:rsvp_by_date,
-                event_location:description,
-                address1: address1,
-                address_2: address_2,
-                city: city,
-                state: state,
-                zipcode: zipcode,
-                message_to_guests:message_to_guests,
-                event_id:event_id,
-                desgin_selected:desgin_selected
-            };
+            // eventData = {
+                eventData.event_type= event_type;
+                eventData.event_name= event_name;
+                eventData.hosted_by= hostedby;
+                eventData.event_date= event_date;
+                eventData.start_time= start_time;
+                eventData.rsvp_start_timezone=start_time_zone;
+                eventData.events_schedule=events_schedule;
+                eventData.activity= activities;
+                eventData.rsvp_end_time_set=rsvp_end_time_set;
+                eventData.rsvp_end_time=rsvp_end_time;
+                eventData.rsvp_end_timezone=end_time_zone;
+                eventData.rsvp_by_date_set=rsvp_by_date_set;
+                eventData.rsvp_by_date=rsvp_by_date;
+                eventData.event_location=description;
+                eventData.address1= address1;
+                eventData.address_2= address_2;
+                eventData.city= city;
+                eventData.state= state;
+                eventData.zipcode= zipcode;
+                eventData.message_to_guests=message_to_guests;
+                eventData.event_id=event_id;
+                eventData.desgin_selected=desgin_selected
+            // };
             $(".step_2").hide();
         }
         eventData.step = firstLetter;
@@ -2314,7 +2314,6 @@ $(document).on("click", "#close_createEvent", function () {
 
         $.ajax({
             url: base_url + "event/store",
-
             type: "POST",
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -2528,28 +2527,28 @@ function savePage1Data(close = null) {
         zipcode != ""
     ) {
 
-        eventData = {
-            event_type: event_type,
-            event_name: event_name,
-            hosted_by: hostedby,
-            event_date: event_date,
-            rsvp_by_date_set:rsvp_by_date_set,
-            rsvp_by_date:rsvp_by_date,
-            start_time: start_time,
-            start_time_zone:start_time_zone,
-            rsvp_end_time_set:rsvp_end_time_set,
-            rsvp_end_time:rsvp_end_time,
-            rsvp_end_timezone:end_time_zone,
-            event_location:description,
-            address1: address1,
-            address_2: address_2,
-            state: state,
-            zipcode: zipcode,
-            city: city,
-            message_to_guests:message_to_guests,
-            events_schedule:events_schedule,
+        // eventData = {
+            eventData.event_type= event_type;
+            eventData.event_name= event_name;
+            eventData.hosted_by= hostedby;
+            eventData.event_date= event_date;
+            eventData.rsvp_by_date_set=rsvp_by_date_set;
+            eventData.rsvp_by_date=rsvp_by_date;
+            eventData.start_time= start_time;
+            eventData.start_time_zone=start_time_zone;
+            eventData.rsvp_end_time_set=rsvp_end_time_set;
+            eventData.rsvp_end_time=rsvp_end_time;
+            eventData.rsvp_end_timezone=end_time_zone;
+            eventData.event_location=description;
+            eventData.address1= address1;
+            eventData.address_2= address_2;
+            eventData.state= state;
+            eventData.zipcode= zipcode;
+            eventData.city= city;
+            eventData.message_to_guests=message_to_guests;
+            eventData.events_schedule=events_schedule;
             // activity: activities,
-        };
+        // };
         // alert();
         let text = $('.current_step').text();
         let firstLetter = text.split(' ')[0]; 
@@ -3791,13 +3790,13 @@ $(document).on("click", ".save_event_co_host", function () {
         eventData.co_host = dataId;
         eventData.co_host_prefer_by = prefer_by;
         if(profile_or_text == '1'){
-            $('.add_new_co_host').html(`<span class="mx-3"><div class="contact-img co-host-profile-photo">
+            $('.add_new_co_host').html(`<span class="mx-3"><div class="contact-img">
                     <img src="${profilePhoto}"
                         alt="logo">
                 </div></span>
                 <h5>${user_name}</h5>`);
         }else{
-            $('.add_new_co_host').html(`<span class="mx-3"><div class="contact-img ">
+            $('.add_new_co_host').html(`<span class="mx-3"><div class="contact-img">
                     ${profilePhoto}
                 </div></span>
                 <h5>${user_name}</h5>`);
