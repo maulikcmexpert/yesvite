@@ -254,8 +254,16 @@
 }
 
 
-.guest-contacts-wrp {
-    display: none;
+#sidebar_add_co_host .guest-contacts-wrp {
+    display: flex;
+}
+
+#sidebar_add_co_host .guest-contacts-wrp .guest-contacts-wrp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
 }
 
 .guest-contact .guest-img {
