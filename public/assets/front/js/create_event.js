@@ -3832,6 +3832,7 @@ $(document).on("change", 'input[name="guest_list[]"]', function () {
         var profile_or_text = $(this).data("profile_or_text");
         var initial = $(this).data("initial");
         selected_co_host = $(this).val();
+        console.log(profile_or_text);
         if(profile_or_text == '1'){
             $('.selected-co-host-image').attr('src',profilePhoto);
             $('.selected-host-h5').css('display','none');
