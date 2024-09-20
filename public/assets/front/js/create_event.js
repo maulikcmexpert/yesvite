@@ -3981,11 +3981,8 @@ $('#groupUsers').scroll(function () {
 // $("#loader").css('display','block');
 
 function displayRecords(lim, off,type,search = null,) {
-    if(type!="group"){
-        var search_name = $('.search_user').val();
-    }else{
-        var search_name = '';
-    }
+    
+    var search_name = $('.search_user').val();
     $.ajax({
         type: "GET",
         async: false,
@@ -4488,3 +4485,9 @@ $(document).on('click','.listing-arrow',function(){
     $(this).parent().find('.list-slide').addClass('open-potluck-list');
 }
 });
+$(document).on('click','.see_all_group',function(){
+    $('search_user').val('');
+    toggleSidebar('sidebar_groups');
+});
+
+

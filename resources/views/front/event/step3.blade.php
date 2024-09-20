@@ -113,8 +113,8 @@
 
                             <div class="popular-list">
                                 <div class="d-flex justify-content-between align-items-center w-100">
-                                    <h5 onclick="toggleSidebar('sidebar_groups')">Groups</h5>
-                                    <a href="#" onclick="toggleSidebar('sidebar_groups')">See All</a>
+                                    <h5 >Groups</h5>
+                                    <a href="#" class="see_all_group">See All</a>
                                 </div>
                             </div>
 
@@ -361,7 +361,7 @@
                 <div class="popular-list">
                     <div class="d-flex justify-content-between align-items-center w-100">
                         <h5>Groups</h5>
-                        <a href="#" onclick="toggleSidebar('sidebar_groups')">See All</a>
+                        <a href="#" class="see_all_group">See All</a>
                     </div>
                 </div>
 
@@ -571,7 +571,7 @@
     <div class="popular-list">
         <div class="d-flex justify-content-between align-items-center w-100">
             <h5>Groups</h5>
-            <a href="#" onclick="toggleSidebar('sidebar_groups')">See All</a>
+            <a href="#" class="see_all_group">See All</a>
         </div>
     </div>
 
