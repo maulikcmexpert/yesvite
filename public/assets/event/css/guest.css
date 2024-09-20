@@ -436,7 +436,7 @@
     max-height: calc(100vh - 300px);
 }
 
-.owl-item .group-card {
+.group-owl .owl-item {
     width: 300px;
 }
 
