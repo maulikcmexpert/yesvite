@@ -561,12 +561,21 @@ $(document).on('click','.create_new_event',function(){
 
 $(document).on('click','.create_event_with_plan',function(){
     // toggleSidebar('sidebar_change_plan_create');
-    $('input[name="plan_check"]:checked').each(function () {
-        var plan = $(this).data('plan');
-        eventData.plan_selected=plan;
+    // $('input[name="plan_check"]:checked').each(function () {
+    //     var plan = $(this).data('plan');
+    //     eventData.plan_selected=plan;
+    //     alert(plan);
+    //     window.location.href="event";
+    // });
+
+    var checkedPlan = $('input[name="plan_check"]:checked'); // Select the checked one
+    if (checkedPlan.length) { // Ensure there is a checked checkbox
+        var plan = checkedPlan.data('plan');
+        eventData.plan_selected = plan;
         alert(plan);
-        window.location.href="event";
-    });
+        window.location.href = "event";
+    }
+    
 
 });
 
