@@ -1316,4 +1316,21 @@ class EventController extends Controller
         }
         return;
     }
+
+    public function get_co_host_list(Request $request){
+        $selected_user = session('user_ids');
+        $user_id =  Auth::guard('web')->user()->id;
+        $alreadyselectedUser =  collect($selected_user)->pluck('id')->toArray();
+
+
+        $users = User::select('id', 'firstname', 'lastname', 'phone_number', 'email', 'profile')
+            ->whereNotIn('id', $alreadyselectedUser)
+            ->where('id', '!=', $user_id)->where(['is_user_phone_contact' => '0'])->orderBy('firstname')
+            
+            ->get();
+
+
+
+        return  view('front.event.guest.allGuestList', compact('users'));
+    }
 }
