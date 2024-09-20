@@ -69,7 +69,7 @@ function initMap() {
             addr_fields.forEach(function(field, index) {
                 var fieldIndex = typeField.indexOf(field);
                 if (fieldIndex !== -1) {
-                    if(addr_inputs[index] == 'address1' && ){
+                    if(addr_inputs[index] == 'address1'){
                         console.log(addr_fields.field);
 
                         var address1 = $("#" + addr_inputs[index]).val();
