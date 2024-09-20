@@ -114,6 +114,7 @@ defer
 <script>
     new WOW().init()
 </script>
+
 @if(isset($js))
 
 @foreach($js as $value)
