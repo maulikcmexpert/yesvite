@@ -4555,13 +4555,13 @@ $(document).on('click','.see_all_group',function(){
 });
 
 $(document).on('click','.add_co_host',function(){
-    alert();
+    
     $('co_host_search').val('');
     get_co_host_list();
     toggleSidebar('sidebar_add_co_host');
 });
 
-function get_co_host_list(){
+function get_co_host_list(search_name=null){
     if(search_name ==null){
         search_name = '';
     }
