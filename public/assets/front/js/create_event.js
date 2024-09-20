@@ -2878,6 +2878,20 @@ function clearError(input = null) {
                 $('.pot-cate-name').text(inputLength+'/30');
             }
             break;
+        
+        case "item_name":
+            var groupname = input.value;
+            if (groupname === "") {
+                $("#item_name_error")
+                    .text("Please enter description.")
+                    .css("color", "red");
+                    $('.sub-cat-pot').text('0/30');
+            } else {
+                $("#item_name_error").text("");
+                var inputLength = groupname.length;
+                $('.sub-cat-pot').text(inputLength+'/30');
+            }
+            break;
 
         // Add cases for other fields as needed
     }
