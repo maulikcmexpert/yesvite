@@ -437,6 +437,8 @@
     max-height: calc(100vh - 300px);
 }
 
+
+
 /* ============ responsive ============ */
 @media only screen and (max-width:1800px) {
     .guest-wrapper {
