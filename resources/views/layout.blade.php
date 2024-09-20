@@ -17,7 +17,7 @@
 
     @include($page)
 
-    <x-front.bodyfooter />
+    <x-front.bodyfooter page={{$page}} />
 
     <x-front.footer :js="$js ?? []" />
 </body>
