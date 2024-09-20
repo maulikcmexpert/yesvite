@@ -2614,7 +2614,7 @@ function savePage3Data() {
         success: function (response) {
             
             $(".list_all_invited_user").empty();
-            $(".list_all_invited_user").append(response);
+            // $(".list_all_invited_user").append(response);
             $("step_1").hide();
             $(".step_2").hide();
             $(".step_3").hide();
@@ -4589,7 +4589,7 @@ function get_co_host_list(search_name=null){
             return;
         }
         $("#loader").hide();
-        $(".group_search_list_toggle").html(data);
+        $(".list_all_invited_user").html(data);
     })
     .fail(function (jqXHR, ajaxOptions, thrownError) {
         alert("server not responding...");
@@ -4599,7 +4599,7 @@ function get_co_host_list(search_name=null){
 $(document).on('keyup','.co_host_search',function(){
     search_name = $(this).val();
     $('#loader').css('display','block');
-    $('.group_search_list_toggle').html('');
+    $(".list_all_invited_user").empty();
     setTimeout(function () {
         get_co_host_list(search_name);
     }, 500);
