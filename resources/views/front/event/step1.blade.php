@@ -92,7 +92,7 @@
                                 <option value="EST">EST</option>
                             </select>
                             <label for="select-label"
-                                class="form-label input-field floating-label select-label floatingfocus">>Time
+                                class="form-label input-field floating-label select-label floatingfocus">Time
                                 Zone *</label>
                         </div>
                     </div>
