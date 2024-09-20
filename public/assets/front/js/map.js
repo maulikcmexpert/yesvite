@@ -8,7 +8,7 @@ function initMap() {
      types: ['(cities)']
      }*/
     var card = document.getElementById('pac-card');
-    var input = document.getElementById('txtAddress');
+    var input = document.getElementById('address1');
     var types = document.getElementById('type-selector');
     var strictBounds = document.getElementById('strict-bounds-selector');
 
