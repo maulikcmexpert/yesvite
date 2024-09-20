@@ -94,6 +94,7 @@
 .invite-guest {
     display: flex;
     justify-content: space-around;
+    align-items: center;
 }
 
 .invite-guest span {
