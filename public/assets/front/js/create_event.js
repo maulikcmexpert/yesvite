@@ -4413,6 +4413,7 @@ $(document).on('click','.open_addcategory',function () {
 
 $(document).on('click','.new_group',function () {
     $('#new_group_name').val('');
+    $('#group_toggle_search').val('');
     toggleSidebar('sidebar_add_groups')
 })
 
