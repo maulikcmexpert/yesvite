@@ -518,7 +518,7 @@
     padding: 0;
     box-shadow: none !important;
     outline: 0 !important;
-    background-color: #fff;
+    background-color: #fff !important;
 }
 
 .list-slide .accordion-button h5,
