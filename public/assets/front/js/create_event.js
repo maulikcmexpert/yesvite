@@ -564,6 +564,7 @@ $(document).on('click','.create_event_with_plan',function(){
     $('input[name="plan_check"]:checked').each(function () {
         var plan = $(this).data('plan');
         eventData.plan_selected=plan;
+        alert(plan);
         window.location.href="event";
     });
 
