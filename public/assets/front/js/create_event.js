@@ -351,7 +351,7 @@ $(function () {
         
         function (start, end, label) {
             
-            
+            $('#event-date').focus();
             selectedDates.clear();
             selectedDates.add(start.format("YYYY-MM-DD"));
             selectedDates.add(end.format("YYYY-MM-DD"));
