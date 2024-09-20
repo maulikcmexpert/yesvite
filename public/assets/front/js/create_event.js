@@ -2618,7 +2618,7 @@ function savePage4Data() {
 
     if ($("#allow_for_1_more").is(":checked")) {
         eventData.allow_for_1_more = "1";
-        $('#')
+
         $(".allow_limit_toggle").show();
     } else {
         $(".allow_limit_toggle").hide();
@@ -4461,6 +4461,13 @@ $(document).on('keyup','#group_search_ajax',function () {
 
 $(document).on('keyup','#group_toggle_search',function () {
     var search_name = $(this).val();
+    groupToggleSearch(search_name);
+})
+
+function groupToggleSearch(search_name = null){
+    if(search_name ==null){
+        search_name = '';
+    }
     $.ajax({
         url: base_url + "event/group_toggle_search",
         type: "POST",
@@ -4484,7 +4491,7 @@ $(document).on('keyup','#group_toggle_search',function () {
         .fail(function (jqXHR, ajaxOptions, thrownError) {
             alert("server not responding...");
         });
-})
+}
 
 $(document).on('click','.listing-arrow',function(){
     if($(this).parent().find('.list-slide').hasClass('open-potluck-list')){
