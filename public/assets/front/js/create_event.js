@@ -257,7 +257,7 @@ if (/Mobi/.test(navigator.userAgent)) {
 $(document).on('click','.timepicker', function(){
    datepicker();
 })
-// datepicker();
+datepicker();
 function datepicker() {
     $(".timepicker").datetimepicker({
         format: "LT",
@@ -269,9 +269,6 @@ function datepicker() {
         ignoreReadonly: true
     });
 }
-
-
-
 
 // flatpickr(".event_time", {
 //     enableTime: true,
@@ -2856,21 +2853,6 @@ function clearError(input = null) {
                     .css("color", "red");
             } else {
                 $("#group_name_error").text("");
-            }
-            break;
-        
-        case "categoryName":
-            var groupname = input.value;
-            console.log(groupname);
-            if (groupname === "") {
-                $("#categoryName_error")
-                    .text("Please enter category name")
-                    .css("color", "red");
-                $('.pot-cate-name').text('0/30');
-            } else {
-                let category_length = groupname.length;
-                $('.pot-cate-name').text(category_length+'/30');
-                $("#categoryName_error").text("");
             }
             break;
 
