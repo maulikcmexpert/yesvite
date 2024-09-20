@@ -3829,7 +3829,8 @@ $(document).on("change", 'input[name="guest_list[]"]', function () {
         }else{
             selected_co_host_prefer_by = 'phone';
         }
-        
+        console.log(selected_co_host);
+        console.log(selected_co_host_prefer_by);
         // toastr.error("There can be only one co host");
     }
 });
