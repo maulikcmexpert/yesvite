@@ -2237,7 +2237,7 @@ $(document).on("click", "#next_setting", function () {
 $(document).on('click','#next_design',function() {
     // alert();
     savePage1Data('next');
-    console.log(eventData);
+    // console.log(eventData);
     // 
 })
 

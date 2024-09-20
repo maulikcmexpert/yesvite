@@ -588,12 +588,12 @@
     background: var(--tabBg);
 }
 
-.new_event_detail_form .input-group.time {
+.new_event_detail_form .input-group.time-to-wrp {
     position: relative;
     z-index: 2;
 }
 
-.new_event_detail_form .input-group.time .input-group-text {
+.new_event_detail_form .input-group.time-to-wrp .input-group-text {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
