@@ -687,11 +687,12 @@
             <div class="tab-pane fade show active" id="contact" role="tabpanel" aria-labelledby="contact-tab">
 
 
-                <div class="guest-contacts-wrp" style="display: none">
+                <div class="guest-contacts-wrp">
                     <div class="guest-contact">
                         <div class="guest-img">
-                            <img src="./assets/image/user-img.svg" alt="guest-img">
-                            <a href="#" class="close">
+                            <img class="selected-co-host-image" src="./assets/image/user-img.svg" alt="guest-img">
+                            <h5>AB</h5>
+                            <a href="#" class="close remove_co_host" >
                                 <svg width="19" height="18" viewBox="0 0 19 18" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <rect x="1.8999" y="1" width="16" height="16" rx="8"
