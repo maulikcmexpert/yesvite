@@ -319,7 +319,7 @@ class EventController extends Controller
             }
 
             if (isset($request->events_schedule) && $request->events_schedule == '1' && isset($request->activity) && !empty($request->activity)) {
-                dd(1);
+                // dd(1);
                 $activities = $request->activity;
                 $addStartschedule =  new EventSchedule();
 
