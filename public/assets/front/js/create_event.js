@@ -3725,7 +3725,7 @@ $(document).on("click", ".save_allow_limit", function () {
     var allow_limit = $("#allow_limit_count").val();
     eventData.allow_limit_count = allow_limit;
     console.log(allow_limit);
-    if(allow_limit > 0){
+    if(allow_limit == 0){
         $('.allow_for_limit_count').html(`<div class="d-flex align-items-center add_new_limit">
                 <span class="me-3">
                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -3740,7 +3740,6 @@ $(document).on("click", ".save_allow_limit", function () {
                 </svg>
             </span>`);
     }else{
-        alert();
         $('.allow_for_limit_count').html(`<div class="d-flex align-items-center add_new_limit">
         <span class="me-3">
         </span>
