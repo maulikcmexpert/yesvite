@@ -65,6 +65,7 @@ function initMap() {
                 });
             });
             console.log(typeField);
+            console.log(typeValLong);
             addr_fields.forEach(function(field, index) {
                 var fieldIndex = typeField.indexOf(field);
                 if (fieldIndex !== -1) {
