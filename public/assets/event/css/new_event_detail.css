@@ -803,6 +803,7 @@
     overflow-y: scroll;
     padding-bottom: 20px;
     height: calc(100vh - 180px);
+    padding: 10px;
 }
 
 .accordion-button.accordian_open {
