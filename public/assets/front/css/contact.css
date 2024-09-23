@@ -47,8 +47,8 @@
     margin-bottom: 0;
     border: 1px solid transparent;
     background: linear-gradient(135deg, rgb(255, 247, 240), rgb(255, 200, 163)) rgb(14, 114, 207);
-    color: rgb(212, 56, 13);
     font-size: 16px;
+    color: #fff;
 }
 
 .contact-user .user img {
