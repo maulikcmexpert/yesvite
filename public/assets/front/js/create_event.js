@@ -4870,26 +4870,14 @@ $(document).on('click','.thank_you_card_toggle',function(){
         },
     })
     .done(function (data) {
+        console.log(data);
         $("#loader").hide();
         $("#list_thankyou_card").html(data);
-        
         if (data.status == "1") {
             toastr.success("Greeting card updated");
             $("#registry_item_id").val("");
         }
         $("#list_thankyou_card").append(data.view);
-        console.log(eventData);
-        if(eventData.gift_registry_data != undefined){
-            eventData.gift_registry_data.forEach((element, index) => {
-                console.log(element.gr_id);
-                $('input[name="gift_registry[]"]').each(function() {
-                    if ($(this).val() == element.gr_id) {
-                        $(this).prop('checked', true); // Check the checkbox
-                    }
-                });
-            });
-        }
-        
     })
     .fail(function (jqXHR, ajaxOptions, thrownError) {
         alert("server not responding...");
