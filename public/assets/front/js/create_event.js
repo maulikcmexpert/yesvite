@@ -4316,7 +4316,7 @@ $(document).on("click", ".add_new_group", function () {
 $(document).on("click", ".add_new_group_member", function () {
     var group_name = $("#new_group_name").val();
     console.log(group_name);
-    selectedValues = [];
+    var selectedValues = [];
     $(".user_group_member:checked").each(function () {
         selectedValues.push({
             id: $(this).val(),
@@ -4351,7 +4351,7 @@ $(document).on("click", ".add_new_group_member", function () {
 $(document).on("click", ".invite_group_member", function () {
     $('#loader').css('display','block');
     var userId=$(this).val();
-var selectedValues = []; 
+    var selectedValues = []; 
 $(".user_group_member").each(function () {
     if ($(this).is(":checked")) {
         var perferby=$(this).data('preferby');
@@ -4656,6 +4656,7 @@ $(document).on('click','.open_addcategory',function () {
 })
 
 $(document).on('click','.new_group',function () {
+    var selectedValues = [];
     $('#new_group_name').val('');
     $('#group_toggle_search').val('');
     toggleSidebar('sidebar_add_groups')
