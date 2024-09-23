@@ -3406,7 +3406,7 @@ function update_self_bring(
             _token: $('meta[name="csrf-token"]').attr("content"),
         },
         success: function (response) {
-            
+            console.log(quantity+"/"+categoryItemQuantity);
             $("#h6-" + categoryItemKey + "-" + categoryIndexKey).text(
                 quantity + "/" + categoryItemQuantity
             );
