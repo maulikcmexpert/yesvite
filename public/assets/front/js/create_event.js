@@ -4352,9 +4352,10 @@ $.ajax({
     },
     success: function (response) {
         // console.log(response);
-        response.data.each(function (index) {
+        response.data.forEach(function(item, index) {
             console.log(index);
-        });
+            console.log(item); // If you want to log the actual data
+        });        
             if (response.is_duplicate == 1) {
                 $("#user_tel-" + userId).remove();
             }
