@@ -386,11 +386,11 @@ $(function () {
 
     $("#event-date").on('apply.daterangepicker', function(ev, picker) {
         picker.show();
-        $('#floatingfocus').addClass('floatingfocus');
+        $('#event-date').addClass('floatingfocus');
     });
     $('#event-date').on('hide.daterangepicker', function(ev, picker) {
         picker.show();
-        $('#floatingfocus').addClass('floatingfocus');
+        $('#event-date').addClass('floatingfocus');
     });
    
 });
