@@ -3078,7 +3078,7 @@ $(document).on("click", ".li_setting", function () {
     var design = eventData.desgin_selected;
     var step3 = eventData.step;
     console.log(step3);
-    if( step3 == undefined || (step3 != '3' && step3 != 4) ){
+    if( step3 == undefined || (step3 != '3' && step3 != '4') ){
         return;
     }else{
 
