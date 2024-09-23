@@ -419,7 +419,7 @@ class EventController extends Controller
         }
 
 
-        $registry = session('gift_registry_data');
+        $registry = $request->gift_registry_data;
         Session::save();
         return response()->json([
             'view' => view('front.event.gift_registry.view_gift_registry', compact('registry'))->render(),
