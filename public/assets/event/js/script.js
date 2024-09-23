@@ -98,8 +98,11 @@ $('.rsvp-slide').owlCarousel({
 
 
 // ===== group-slider ======
+
+});
+
 $('.group-owl').owlCarousel({
-  loop:true,
+  loop:false,
   margin:10,
   nav:true,
   autoplay:true,  
@@ -124,5 +127,4 @@ $('.group-owl').owlCarousel({
         dots: false,
       }
   },
-});
 });
