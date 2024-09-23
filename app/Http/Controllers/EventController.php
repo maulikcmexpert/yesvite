@@ -836,7 +836,7 @@ class EventController extends Controller
         $member = $request->input('groupmember');
         $id = Auth::guard('web')->user()->id;
 
-        // dd($member);
+        dd($member);
         if ($groupname != "" && !empty($member) && $groupname != null) {
             $createGroup = new Group();
             $createGroup->user_id = $id;
