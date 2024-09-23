@@ -3333,7 +3333,7 @@ $(document).on("click", ".qty-btn-plus", function () {
         .find(".item-quantity-minus")
         .val();
     var quantity = parseInt($(this).parent().find(".input-qty").val());
-
+    console.log(quantity);
     if(quantity > 0){
         $(this).parent().find(".item-quantity-minus").val(1);
     }
