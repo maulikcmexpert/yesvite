@@ -4875,7 +4875,7 @@ $(document).on('click','.add_gift_registry',function(){
             $("#registry_item_id").val("");
         }
         $("#registry_list").append(data.view);
-        selected_gift.forEach(element => {
+        eventData.gift_registry_data.forEach(element => {
             console.log(element);
         });
     })
