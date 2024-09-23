@@ -2,7 +2,9 @@
 
 @foreach ( $data as $guest_user)
 @php
-    dd($guest_user['is_duplicate']);
+    if($guest_user['is_duplicate'] == 1){
+        continue;
+    }
 @endphp
 @if($guest_user['userdata']['prefer_by']=="email")
 <div class="users-data invited_user" data-id={{$guest_user['userdata']['id']}} id="user-{{$guest_user['userdata']['id']}}">
