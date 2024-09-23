@@ -59,7 +59,7 @@
                     </div>
                 </div>
             </div>
-            <p class="footer-text">r.s.v.p. to: +123-456-7890</p>
+            {{-- <p class="footer-text">r.s.v.p. to: +123-456-7890</p> --}}
         </div>
     </section>
 
