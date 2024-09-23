@@ -1162,6 +1162,7 @@ var activePotluck = 0;
 
 function setPotluckActivekey(key, name) {
     $("#category_index").val(key);
+    $('.sub-cat-pot').text('0/30');
     $(".category_heading").text("Add Item Under: " + name);
     activePotluck = key;
 }
@@ -2875,6 +2876,20 @@ function clearError(input = null) {
                 cateLength = groupname.length;
                 $("#categoryNameError").text("");
                 $('.pot-cate-name').text(cateLength+'/30');
+            }
+            break;
+        
+        case "item_name":
+            var groupname = input.value;
+            if (groupname === "") {
+                $("#item_name_error")
+                    .text("Please enter description.")
+                    .css("color", "red");
+                $('.sub-cat-pot').text('0/30');
+            } else {
+                cateLength = groupname.length;
+                $("#item_name_error").text("");
+                $('.sub-cat-pot').text(cateLength+'/30');
             }
             break;
 
