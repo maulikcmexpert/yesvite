@@ -45,6 +45,10 @@ $(document).ready(function () {
 
     $('.search_user').val('');
 });
+
+$(document).on('focus','.inputText',function(){
+    $(this).next().addClass('floatingfocus');
+})
 // $(function() {
 //     $('#event-date').daterangepicker({
 //         autoUpdateInput: false,
