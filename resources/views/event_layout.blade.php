@@ -64,7 +64,9 @@
         <img src="{{asset('assets/front/loader.gif')}}" alt="loader" style="width:146px;height:146px;z-index:1000">
     </div>
     @include($page)
-    <x-front.footer :js="$js ?? []" />
+    @include('components.front.footer')
+    
+    <script src="{{ asset('assets/front/js/map.js') }}"></script>
 </body>
 
 </html>

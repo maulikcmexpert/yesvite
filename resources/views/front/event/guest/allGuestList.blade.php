@@ -20,6 +20,9 @@ if($selected_co_host == $user->id){
             @php
                 $profile_photo = '';
                 $photo_text = '';
+                $firstInitial = !empty($user->firstname) ? strtoupper($user->firstname[0]) : '';
+                $lastInitial = !empty($user->lastname) ? strtoupper($user->lastname[0]) : '';
+                $initials = $firstInitial . $lastInitial;
             @endphp
             @if ($user->profile != '')
             <img src="{{asset('storage/profile/' .$user->profile)}}" alt="user-img">

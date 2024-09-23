@@ -1,3 +1,4 @@
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 
@@ -44,12 +45,14 @@
 
 <!-- {{-- <script src="{{ asset('assets/event/js/animation.js') }}"></script> --}} -->
 
-<script src="{{ asset('assets/event/js/common.js') }}"></script>
+    @if (isset($page) && $page == 'front.create_event')  
+    <script src="{{ asset('assets/event/js/script.js') }}"></script>
+    <script src="{{ asset('assets/event/js/common.js') }}"></script>
+    <script src="{{ asset('assets/event/js/wow.min.js') }}"></script>
+    @endif
+    <script src="{{ asset('assets/front/js/map.js') }}"></script>
 
-<script src="{{ asset('assets/event/js/script.js') }}"></script>
 
-<script src="{{ asset('assets/event/js/wow.min.js') }}"></script>
-<script src="{{ asset('assets/front/js/map.js') }}"></script>
 
 <!-- {{-- <script src="{{ asset('assets/event/js/bootstrap-datetimepicker.min.js') }}"></script> --}} -->
 
