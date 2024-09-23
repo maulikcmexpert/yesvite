@@ -65,12 +65,11 @@
     </div>
     @include($page)
 
-    @if (isset($page) && $page == 'front.create_event')  
+    
+    <x-front.footer :js="$js ?? []" />
     <script src="{{ asset('assets/event/js/script.js') }}"></script>
     <script src="{{ asset('assets/event/js/common.js') }}"></script>
     <script src="{{ asset('assets/event/js/wow.min.js') }}"></script>
-    @endif
-    <x-front.footer :js="$js ?? []" />
 </body>
 
 </html>
