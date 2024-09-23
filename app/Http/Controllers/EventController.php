@@ -803,11 +803,12 @@ class EventController extends Controller
     {
         $thank_you_card_id = $request->input('thank_you_card_id');
         $thankyouCard = session()->get('thankyou_card_data', []);
+        EventGreeting::where('id',$thank_you_card_id)->delete();
         if (array_key_exists($thank_you_card_id, $thankyouCard)) {
             unset($thankyouCard[$thank_you_card_id]);
         }
         session(['thankyou_card_data' => $thankyouCard]);
-        return response()->json(['message' => 'Thankyou Card removed successfully.']);
+        return response()->json(['message' => 'Greeting card deleted']);
     }
 
     public function updateSelfBring(Request $request)
