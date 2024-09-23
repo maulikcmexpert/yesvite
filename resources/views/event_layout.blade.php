@@ -64,9 +64,13 @@
         <img src="{{asset('assets/front/loader.gif')}}" alt="loader" style="width:146px;height:146px;z-index:1000">
     </div>
     @include($page)
-    @include('components.front.footer')
-    
-    <script src="{{ asset('assets/front/js/map.js') }}"></script>
+
+    @if (isset($page) && $page == 'front.create_event')  
+    <script src="{{ asset('assets/event/js/script.js') }}"></script>
+    <script src="{{ asset('assets/event/js/common.js') }}"></script>
+    <script src="{{ asset('assets/event/js/wow.min.js') }}"></script>
+    @endif
+    <x-front.footer :js="$js ?? []" />
 </body>
 
 </html>
