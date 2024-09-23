@@ -802,12 +802,7 @@ class EventController extends Controller
     public function removeThankyouCard(Request $request)
     {
         $thank_you_card_id = $request->input('thank_you_card_id');
-        $thankyouCard = session()->get('thankyou_card_data', []);
         EventGreeting::where('id',$thank_you_card_id)->delete();
-        if (array_key_exists($thank_you_card_id, $thankyouCard)) {
-            unset($thankyouCard[$thank_you_card_id]);
-        }
-        session(['thankyou_card_data' => $thankyouCard]);
         return response()->json(['message' => 'Greeting card deleted']);
     }
 
