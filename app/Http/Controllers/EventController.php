@@ -775,12 +775,7 @@ class EventController extends Controller
         $thankyouCard = session()->get('thankyou_card_data', []);
 
 
-        if (array_key_exists($thankyou_template_id, $thankyouCard) != null || array_key_exists($thankyou_template_id, $thankyouCard) != "") {
-            $thankyouCard[$thankyou_template_id]['name'] = $template_name;
-            $thankyouCard[$thankyou_template_id]['when_to_send'] = $when_to_send;
-            $thankyouCard[$thankyou_template_id]['message'] = $thankyou_message;
-            session(['thankyou_card_data' => $thankyouCard]);
-
+        if ($thankyou_template_id != null) {
             $gr = EventGreeting::where('id',$thankyou_template_id)->first();
             if($gr != null){
                 $gr->template_name = $template_name;
@@ -788,30 +783,20 @@ class EventController extends Controller
                 $gr->message = $thankyou_message;
                 $gr->save();
             }
-
-            return response()->json(['message' => "thankyou card updated", 'status' => '1']);
         } else {
 
-
-            
             $gr = new EventGreeting();
             $gr->user_id = $user_id;
             $gr->template_name = $template_name;
             $gr->custom_hours_after_event = $when_to_send;
             $gr->message = $thankyou_message;
             $gr->save();
-            
-            $thankyouCard[$gr->id] = [
-                'name' => $template_name,
-                'when_to_send' => $when_to_send,
-                'message' => $thankyou_message,
-            ];
+           
         }
+        
         $thankyou_card = EventGiftRegistry::where('id',$gr->id)->get();
-        session(['thankyou_card_data' => $thankyouCard]);
 
-
-        $data = ['name' => $template_name, 'when_to_send' => $when_to_send, 'message' => $thankyou_message, 'thankyou_template_id' => $thankyou_template_id];
+        // $data = ['name' => $template_name, 'when_to_send' => $when_to_send, 'message' => $thankyou_message, 'thankyou_template_id' => $thankyou_template_id];
         return response()->json(['view' => view('front.event.thankyou_template.add_thankyou_template', compact('thankyou_card'))->render()]);
     }
 
