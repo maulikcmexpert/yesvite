@@ -2723,12 +2723,13 @@ function savePage4Data() {
     if ($("#thankyou_message").is(":checked")) {
         eventData.thankyou_message = "1";
         $(".thankyou_card").show();
-        eventData.thank_you_card_id = '';
+        eventData.thank_you_card_id = null;
     } else {
-        eventData.thank_you_card_id = '';
+        eventData.thank_you_card_id = null;
         $(".thankyou_card").hide();
         eventData.thankyou_message = "0";
     }
+    console.log(eventData.thank_you_card_id);
 
     if ($("#add_co_host").is(":checked")) {
         eventData.add_co_host = "1";
