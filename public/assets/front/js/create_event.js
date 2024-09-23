@@ -3789,7 +3789,7 @@ $(document).on("click", ".add_thankyou_card", function () {
                 toastr.success("Greeting card updated");
                 $("#edit_template_id").val("");
             }else{
-                toastr.success("Greeting card added");
+                toastr.success("Greeting card created");
                 $("#edit_template_id").val("");
             }
             $(".list_thankyou_card").html(response.view);
