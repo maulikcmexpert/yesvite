@@ -3511,11 +3511,9 @@ $(document).on("click", ".add-user-list", function () {
 });
 
 function validateURL($input) {
-    // const errorMessage = $("#registry_link_error");
-    // const urlPattern =
-    //     /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
-        const urlPattern = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(\.[a-zA-Z]{2,})(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
-
+    const errorMessage = $("#registry_link_error");
+    const urlPattern =
+        /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
 
     const urlValue = $input.val();
     errorMessage.text("");
