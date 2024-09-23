@@ -104,7 +104,7 @@ $('.group-owl').owlCarousel({
   nav:true,
   autoplay:true,  
   dots: false,
-  center: true,
+  center: false,
   items: 5,
   responsive:{
       0:{ 
@@ -116,7 +116,7 @@ $('.group-owl').owlCarousel({
           dots: false,
       },
       1000:{
-          items:2.3,
+          items:5.5,
           dots: false,
       },
       1800: {
@@ -124,5 +124,5 @@ $('.group-owl').owlCarousel({
         dots: false,
       }
   },
-});
+}); 
 });
