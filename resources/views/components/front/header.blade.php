@@ -29,94 +29,19 @@
 
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 
-
 @php
 if(isset($page) && $page=="front.profile"){
 @endphp
 <link rel="stylesheet" href="{{ asset('assets/event/css/style.css') }}">
-<!-- <link rel="stylesheet" href="{{ asset('assets/event/css/common.css') }}"> -->
 <link rel="stylesheet" href="{{ asset('assets/event/css/contact.css') }}">
 @php
 }
 @endphp
-<!-- <link rel="stylesheet" href="{{ asset('assets/event/css/style.css') }}"> -->
-
-
-
-<!-- <link rel="stylesheet" href="{{ asset('assets/event/css/bootstrap-datetimepicker.min.css') }}"> -->
-
-<!-- <link rel="stylesheet" href="{{ asset('assets/event/css/timepicker.min.css') }}"> -->
-
-
-
-
-
-<!-- {{-- <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" /> --}} -->
 
 <link href="https://cdn.jsdelivr.net/bootstrap.timepicker/0.2.6/css/bootstrap-timepicker.min.css" rel="stylesheet" />
 
-
-<!-- 
-{{-- <link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet"> --}}
-
-
-
-{{-- <link rel="stylesheet" href="https://localhost/erp_dev/public/assets/css/bootstrap-datetimepicker.min.css"> --}}
-
-
-
-{{-- <link rel="stylesheet"   href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css"> --}} -->
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-
-
-
-
-
-
-
-
-<!-- {{-- <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'> --}} -->
 
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/all.min.css'>
 
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css'>
-
-
-
-
-
-<!-- <link rel="stylesheet" href="{{asset('assets/event/css/design/my.css')}}">
-
-<link rel="stylesheet" href="{{asset('assets/event/css/design/post_temp_1.css')}}">
-
-<link rel="stylesheet" href="{{asset('assets/event/css/design/post_temp_3.css')}}">
-
-<link rel="stylesheet" href="{{asset('assets/event/css/design/post_temp_2.css')}}">
-
-<link rel="stylesheet" href="{{asset('assets/event/css/design/post_temp_4.css')}}">
-
-<link rel="stylesheet" href="{{asset('assets/event/css/design/post_temp_5.css')}}">
-
-<link rel="stylesheet" href="{{asset('assets/event/css/design/post_temp_6.css')}}">
-
-<link rel="stylesheet" href="{{asset('assets/event/css/design/post_temp_7.css')}}">
-
-<link rel="stylesheet" href="{{asset('assets/event/css/design/post_temp_8.css')}}">
-
-<link rel="stylesheet" href="{{asset('assets/event/css/design/post_temp_9.css')}}">
-
-<link rel="stylesheet" href="{{asset('assets/event/css/design/post_temp_10.css')}}">
-
-<link rel="stylesheet" href="{{asset('assets/event/css/design/post_temp_11.css')}}">
-
-<link rel="stylesheet" href="{{asset('assets/event/css/design/new.css')}}">
-
-<link rel="stylesheet" href="{{asset('assets/event/css/design/textbox.css')}}">  -->
-
-
-
-
-
-<!-- {{-- <link href="{{asset('assets/template/css/post_temp_1.css')}}" rel="stylesheet"> --}} -->
