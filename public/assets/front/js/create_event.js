@@ -389,7 +389,7 @@ $(function () {
     );
 
     $("#event-date").on('apply.daterangepicker', function(ev, picker) {
-        // picker.show();
+        picker.show();
         $('#event-date').next().addClass('floatingfocus');
     });
     $('#event-date').on('hide.daterangepicker', function(ev, picker) {
@@ -442,6 +442,7 @@ $("#schedule").on("change", function () {
 
 
 function set_activity_html(selectedDates) {
+    $(".activity_bar").html('');
     var sortedDates = [...selectedDates].sort();
     var startDate = moment(sortedDates[0]);
     var endDate = moment(
