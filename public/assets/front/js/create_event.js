@@ -3793,6 +3793,15 @@ $(document).on("click", ".add_thankyou_card", function () {
                 $("#edit_template_id").val("");
             }
             $(".list_thankyou_card").html(response.view);
+            console.log(eventData.thank_you_card_id);
+            if(eventData.thank_you_card_id != undefined){
+                $('input[name="select_thankyou[]"]').each(function() {
+                    if ($(this).val() == eventData.thank_you_card_id) {
+                        $(this).prop('checked', true); // Check the checkbox
+                    }
+                });
+                
+            }
             $("#message_for_thankyou").val("");
             $("#thankyou_when_to_send").val("");
             $("#thankyou_templatename").val("");
@@ -4568,10 +4577,15 @@ $(document).on('click','#guest_list_visible_to_guest',function () {
 
 $(document).on('click','input[name="select_thankyou[]"]',function () { 
     var i = 0;
+    var checkedCount = 0;
     $("input[name='select_thankyou[]']" ).each(function (index) {
+        if ($(this).is(':checked')) {
+            checkedCount++;
+            eventData.thank_you_card_id = $(this).data('id');
+        }
         i++;
     });
-    if(i>=1){
+    if(i>=1 && checkedCount > 0){
         if(i==1){
             $('.add_new_thankyou_card').html(`<span class="me-3"></span>
                 <h5>${i} Template available</h5>`);
@@ -4864,13 +4878,21 @@ $(document).on('click','.thank_you_card_toggle',function(){
         },
     })
     .done(function (data) {
-        console.log(data);
         $("#loader").hide();
         if (data.status == "1") {
             toastr.success("Greeting card updated");
             $("#registry_item_id").val("");
         }
         $(".list_thankyou_card").html(data.view);
+        console.log(eventData.thank_you_card_id);
+        if(eventData.thank_you_card_id != undefined){
+            $('input[name="select_thankyou[]"]').each(function() {
+                if ($(this).val() == eventData.thank_you_card_id) {
+                    $(this).prop('checked', true); // Check the checkbox
+                }
+            });
+            
+        }
     })
     .fail(function (jqXHR, ajaxOptions, thrownError) {
         alert("server not responding...");
