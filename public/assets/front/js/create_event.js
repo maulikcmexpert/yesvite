@@ -4875,9 +4875,10 @@ $(document).on('click','.add_gift_registry',function(){
             $("#registry_item_id").val("");
         }
         $("#registry_list").append(data.view);
-        eventData.gift_registry_data.forEach(element => {
-            console.log(element);
+        eventData.gift_registry_data.forEach((element, index) => {
+            console.log("Index: " + index, "Element:", element);
         });
+        
     })
     .fail(function (jqXHR, ajaxOptions, thrownError) {
         alert("server not responding...");
