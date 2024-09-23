@@ -408,7 +408,6 @@ $("#schedule").on("change", function () {
     console.log(eventDate);
     if (eventDate != "") {
         if ($(this).is(":checked")) {
-            $(".add-activity-schedule").show();
             // $(".ac-end-time").show();
             let selectedDates = [];
             if (eventDate.includes(" To ")) {
@@ -423,6 +422,10 @@ $("#schedule").on("change", function () {
                 selectedDates = []; // Clear the selectedDates array
                 selectedDates.push(moment(singleDate).format("YYYY-MM-DD"));
                 selectedDates.push(moment(singleDate).format("YYYY-MM-DD"));
+            }
+            if (selectedDates.size > 0) {
+                set_activity_html(selectedDates);
+                $(".add-activity-schedule").show();
             }
         } else {
             $(".activity_bar").html('');
