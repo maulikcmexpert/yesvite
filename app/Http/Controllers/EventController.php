@@ -724,18 +724,24 @@ class EventController extends Controller
 
             session(['gift_registry_data' => $giftRegistryData]);
             return response()->json(['message' => "registry updated", 'status' => '1']);
+            $gr = EventGiftRegistry::where('id',$registry_item)->first();
+            if($gr != null){
+                $gr->recipient_name = $recipient_name;
+                $gr->registry_link = $registry_link;
+                $gr->save();
+            }
         } else {
             $giftRegistryData[$registry_item] = [
                 'recipient_name' => $recipient_name,
                 'registry_link' => $registry_link,
             ];
+            $gr = new EventGiftRegistry();
+            $gr->user_id = $user_id;
+            $gr->registry_recipient_name = $recipient_name;
+            $gr->registry_link = $registry_link;
+            $gr->save();
         }
 
-        $gr = new EventGiftRegistry();
-        $gr->user_id = $user_id;
-        $gr->registry_recipient_name = $recipient_name;
-        $gr->registry_link = $registry_link;
-        $gr->save();
         $gift_registry = EventGiftRegistry::where('id',$gr->id)->get();
         session(['gift_registry_data' => $giftRegistryData]);
 
