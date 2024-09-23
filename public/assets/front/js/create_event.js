@@ -4354,12 +4354,12 @@ $.ajax({
         // console.log(response);
         response.data.forEach(function(item, index) {
             // console.log(index);
-            console.log(item.is_duplicate); // If you want to log the actual data
-            console.log(item.userdata); // If you want to log the actual data
-        });        
-            if (response.is_duplicate == 1) {
-                $("#user_tel-" + userId).remove();
+
+            if (item.is_duplicate=='1' && item.userdata && item.userdata.id) {
+                $("#user_tel-" + item.userdata.id).remove();
             }
+           
+        });        
             // $(".inivted_user_list").html('');
             $(".inivted_user_list").append(response.view);
             guest_counter(0,15);
