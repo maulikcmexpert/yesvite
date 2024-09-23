@@ -5,6 +5,7 @@ var items = 0;
 var activities = {};
 var selected_co_host = '';
 var selected_co_host_prefer_by = '';
+var steps = 0;
 
 $(document).ready(function () {
     if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
@@ -2580,7 +2581,7 @@ function savePage1Data(close = null) {
             month: "long",
             day: "numeric",
         });
-        
+        steps = 1;
         var formattedTime = convertTo12HourFormat(start_time);
         if(close == 'next'){
             $(".step_1").hide();
@@ -2645,6 +2646,7 @@ function savePage3Data() {
             $('.current_step').text('4 of 4');
             $(".step_4").show();
             eventData.step = '3';
+            steps = 3;
     //     },
     //     error: function (xhr, status, error) {
     //         console.log("AJAX error: " + error);
@@ -4101,8 +4103,9 @@ $(document).on("click", ".store_desgin_temp", function () {
                     if(eventData.step == '1'){
                         eventData.step = '2';
                     }
-                    console.log(eventData);
-                    console.log("Image uploaded and saved successfully");
+                    steps = 2;
+                    // console.log(eventData);
+                    // console.log("Image uploaded and saved successfully");
                     $("#exampleModal").modal("hide");
                     $("#loader").css("display", "none");
                     $('.store_desgin_temp').prop("disabled", false);
