@@ -2860,6 +2860,20 @@ function clearError(input = null) {
                 $("#group_name_error").text("");
             }
             break;
+        
+        case "categoryName":
+            var groupname = input.value;
+            if (groupname === "") {
+                $("#categoryNameError")
+                    .text("Please enter group name")
+                    .css("color", "red");
+                $('.pot-cate-name').text('0/30');
+            } else {
+                cateLength = groupname.length;
+                $("#categoryNameError").text("");
+                $('.pot-cate-name').text(cateLength+'/30');
+            }
+            break;
 
         // Add cases for other fields as needed
     }
@@ -3511,11 +3525,9 @@ $(document).on("click", ".add-user-list", function () {
 });
 
 function validateURL($input) {
-    // const errorMessage = $("#registry_link_error");
-    // const urlPattern =
-    //     /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
-        const urlPattern = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(\.[a-zA-Z]{2,})(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
-
+    const errorMessage = $("#registry_link_error");
+    const urlPattern =
+        /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
 
     const urlValue = $input.val();
     errorMessage.text("");
