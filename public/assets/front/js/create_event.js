@@ -3081,6 +3081,7 @@ $(document).on("click", ".li_setting", function () {
     if( step3 == undefined || step3 != '3' ){
         return;
     }else{
+        alert();
         $(".step_1").css("display", "none");
         $(".step_2").css("display", "none");
         $(".step_3").css("display", "none");
