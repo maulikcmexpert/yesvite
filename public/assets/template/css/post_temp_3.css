@@ -125,7 +125,7 @@
     font-size: 32px;
     line-height: 40px;
     text-align: center;
-    color: #fff;
+    color: #fff !important;
     width: 100%;
     max-width: 180px;
     margin: 0px auto;
