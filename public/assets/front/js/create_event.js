@@ -3781,9 +3781,10 @@ $(document).on("click", ".add_thankyou_card", function () {
             thankyou_message: thankyou_message,
             thankyou_template_id: edit_template_id
                 ? edit_template_id
-                : thankyou_template_id,
+                : '',
         },
         success: function (response) {
+            console.log(response);
             if (response.status == "1") {
                 var id = "#thankyou" + edit_template_id;
 
