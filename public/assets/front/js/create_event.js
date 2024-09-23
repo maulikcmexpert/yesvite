@@ -408,21 +408,19 @@ $("#schedule").on("change", function () {
     if (eventDate != "") {
         if ($(this).is(":checked")) {
             console.log(eventDate);
+            var selectedDates = new Set();
             $(".add-activity-schedule").show();
-            // $(".ac-end-time").show();
-            let selectedDates = [];
             if (eventDate.includes(" To ")) {
                 // Split and set start and end for a date range
                 let [start, end] = eventDate.split(" To ");
-                selectedDates = []; // Clear the selectedDates array
-                selectedDates.push(moment(start).format("YYYY-MM-DD"));
-                selectedDates.push(moment(end).format("YYYY-MM-DD"));
+                selectedDates.clear();
+                selectedDates.add(start.format("YYYY-MM-DD"));
+                selectedDates.add(end.format("YYYY-MM-DD"));
             } else {
                 // For a single date, set both start and end to the same date
-                let singleDate = eventDate;
-                selectedDates = []; // Clear the selectedDates array
-                selectedDates.push(moment(singleDate).format("YYYY-MM-DD"));
-                selectedDates.push(moment(singleDate).format("YYYY-MM-DD"));
+                selectedDates.clear();
+                selectedDates.add(eventDate.format("YYYY-MM-DD"));
+                selectedDates.add(eventDate.format("YYYY-MM-DD"));
             }
             console.log(selectedDates.size);
             if (selectedDates.size > 0) {
