@@ -2723,7 +2723,9 @@ function savePage4Data() {
     if ($("#thankyou_message").is(":checked")) {
         eventData.thankyou_message = "1";
         $(".thankyou_card").show();
+        eventData.thank_you_card_id = '';
     } else {
+        eventData.thank_you_card_id = '';
         $(".thankyou_card").hide();
         eventData.thankyou_message = "0";
     }
