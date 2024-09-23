@@ -28,7 +28,7 @@
                 stroke-linecap="round" stroke-linejoin="round"></path>
         </svg>
     </span>
-    <span>
+    <span class="view_members" data-id="{{ $group->id }}">
         <svg width="16" height="17" viewBox="0 0 16 17" fill="none"
             xmlns="http://www.w3.org/2000/svg">
             <path
