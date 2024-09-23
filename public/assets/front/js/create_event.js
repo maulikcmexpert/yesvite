@@ -4351,6 +4351,7 @@ $.ajax({
         users: selectedValues,
     },
     success: function (response) {
+        console.log(response);
             if (response.is_duplicate == 1) {
                 $("#user_tel-" + userId).remove();
             }

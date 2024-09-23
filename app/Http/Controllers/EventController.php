@@ -1009,6 +1009,7 @@ class EventController extends Controller
                 }
             }
         }
+        dd($data);
         session()->put('user_ids', $userIds);
 
         // Prepare the view and send the response
