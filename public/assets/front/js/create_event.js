@@ -2845,8 +2845,11 @@ function clearError(input = null) {
                 $("#recipient_name_error")
                     .text("Please add recipients name")
                     .css("color", "red");
+                $('.recipient-name-con').text('0/30');
             } else {
+                var recipient_length = recipient_name.length;
                 $("#recipient_name_error").text("");
+                $('.recipient-name-con').text(recipient_length+'/30');
             }
             break;
 
@@ -4612,6 +4615,7 @@ $(document).on('click','.thankyou_card_add_form',function () {
 $(document).on('click','.add_new_gift_registry',function () {
     $('#recipient_name').val('');
     $('#registry_link').val('');
+    $('.recipient-name-con').text('0/30');
     toggleSidebar('sidebar_gift_registry_item')
 })
 
