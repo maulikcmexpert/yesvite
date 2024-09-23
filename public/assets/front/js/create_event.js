@@ -4872,7 +4872,6 @@ $(document).on('click','.thank_you_card_toggle',function(){
     .done(function (data) {
         console.log(data);
         $("#loader").hide();
-        $("#list_thankyou_card").html(data.view);
         if (data.status == "1") {
             toastr.success("Greeting card updated");
             $("#registry_item_id").val("");
