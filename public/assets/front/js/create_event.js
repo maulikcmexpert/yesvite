@@ -407,23 +407,23 @@ $("#schedule").on("change", function () {
     $('.step_1_activity').html('<span><i class="fa-solid fa-triangle-exclamation"></i></span>Setup activity schedule');
     if (eventDate != "") {
         if ($(this).is(":checked")) {
-            console.log(eventDate);
+            // console.log(eventDate);
             var selectedDates = new Set();
             $(".add-activity-schedule").show();
             if (eventDate.includes(" To ")) {
                 // Split and set start and end for a date range
                 let [start, end] = eventDate.split(" To ");
-                console.log(start);
+                // console.log(start);
                 selectedDates.clear();
-                // selectedDates.add(start);
-                // selectedDates.add(end);
+                selectedDates.add(start);
+                selectedDates.add(end);
             } else {
                 // For a single date, set both start and end to the same date
                 selectedDates.clear();
                 selectedDates.add(eventDate);
                 selectedDates.add(eventDate);
             }
-            console.log(selectedDates.size);
+            // console.log(selectedDates.size);
             if (selectedDates.size > 0) {
                 set_activity_html(selectedDates);
                 
