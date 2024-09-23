@@ -774,8 +774,8 @@ class EventController extends Controller
 
         $thankyouCard = session()->get('thankyou_card_data', []);
 
-        dd($thankyou_template_id);
         if ($thankyou_template_id != null) {
+            dd($thankyou_template_id);
             $gr = EventGreeting::where('id',$thankyou_template_id)->first();
             if($gr != null){
                 $gr->template_name = $template_name;
