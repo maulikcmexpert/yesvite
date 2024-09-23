@@ -722,6 +722,8 @@ $("#rsvp_by_date").on("change", function () {
 $(document).on('click','.allow_for_limit_count',function(){
     if(eventData.allow_limit_count == undefined || eventData.allow_limit_count == ''){
         $('#allow_limit_count').val(0);
+    }else{
+        $('#allow_limit_count').val(eventData.allow_limit_count);
     }   
 })
 
