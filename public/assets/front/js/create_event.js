@@ -4504,7 +4504,7 @@ $(document).on('click','.free_plan',function () {
 
 
  $(document).on('change', 'input[name="gift_registry[]"]',function() {
-     var selected_gift = [];
+    // var selected_gift = [];
     // if($(this).is(':checked')){
     //     var registry_name=$(this).data('item');
     //     var registry_link=$(this).data('registry');
@@ -4513,17 +4513,17 @@ $(document).on('click','.free_plan',function () {
     //         registry_link: registry_link,
     //     });
     // }
-    $('input[name="gift_registry[]"]:checked').each(function() {
-        var registry_name = $(this).data('item');
-        var registry_link = $(this).data('registry');
+    // $('input[name="gift_registry[]"]:checked').each(function() {
+    //     var registry_name = $(this).data('item');
+    //     var registry_link = $(this).data('registry');
 
-        selected_gift.push({
-            registry_name: registry_name,
-            registry_link: registry_link,
-        });
-    });
-    eventData.gift_registry_data=selected_gift;
-    console.log(eventData);
+    //     selected_gift.push({
+    //         registry_name: registry_name,
+    //         registry_link: registry_link,
+    //     });
+    // });
+    // eventData.gift_registry_data=selected_gift;
+    // console.log(eventData);
 
     var selected = $('input[name="gift_registry[]"]:checked');
         if (selected.length > 2) {
