@@ -4351,7 +4351,10 @@ $.ajax({
         users: selectedValues,
     },
     success: function (response) {
-        console.log(response);
+        // console.log(response);
+        response.data.each(function (index) {
+            console.log(index);
+        });
             if (response.is_duplicate == 1) {
                 $("#user_tel-" + userId).remove();
             }
