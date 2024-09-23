@@ -40,7 +40,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <a href="#" class="add-limit allow_limit_toggle" onclick="toggleSidebar('sidebar_allow_limit')" style="display: none;">
+                                    <a href="#" class="add-limit allow_limit_toggle"  style="display: none;">
                                         <div class="d-flex align-items-center justify-content-between w-100 allow_for_limit_count" >
                                             <div class="d-flex align-items-center add_new_limit">
                                                 <span class="me-3">

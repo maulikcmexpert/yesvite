@@ -719,13 +719,7 @@ $("#rsvp_by_date").on("change", function () {
 });
 
 
-$(document).on('click','.allow_for_limit_count',function(){
-    if(eventData.allow_limit_count == undefined || eventData.allow_limit_count == ''){
-        $('#allow_limit_count').val(0);
-    }else{
-        $('#allow_limit_count').val(eventData.allow_limit_count);
-    }   
-})
+
 
 $("#allow_for_1_more").on("change", function () {
     // alert()
@@ -752,6 +746,15 @@ $("#allow_for_1_more").on("change", function () {
         eventData.allow_limit_count = 0;
     }
 });
+
+$('.allow_limit_toggle').on('click',function(){
+    if(eventData.allow_limit_count == undefined || eventData.allow_limit_count == ''){
+        $('#allow_limit_count').val(0);
+    }else{
+        $('#allow_limit_count').val(eventData.allow_limit_count);
+    }  
+    toggleSidebar('sidebar_allow_limit');
+})
 
 $("#potluck").on("change", function () {
     // alert()
