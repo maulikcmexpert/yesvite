@@ -4858,6 +4858,45 @@ $(document).on('click','.add-activity-schedule',function(){
     toggleSidebar('sidebar_activity_schedule');
 })
 
+$(document).on('click','.thankyou_card',function(){
+    $.ajax({
+        url: base_url + "event/get_thank_you_card",
+        type: "POST",
+        data: {
+            _token: $('meta[name="csrf-token"]').attr("content"),
+        },
+        beforeSend: function () {
+            $("#loader").show();
+        },
+    })
+    .done(function (data) {
+        $("#loader").hide();
+        $("#list_thankyou_card").html(data);
+        
+        if (data.status == "1") {
+            toastr.success("Registry Updated");
+            $("#registry_item_id").val("");
+        }
+        $("#list_thankyou_card").append(data.view);
+        console.log(eventData);
+        if(eventData.gift_registry_data != undefined){
+            eventData.gift_registry_data.forEach((element, index) => {
+                console.log(element.gr_id);
+                $('input[name="gift_registry[]"]').each(function() {
+                    if ($(this).val() == element.gr_id) {
+                        $(this).prop('checked', true); // Check the checkbox
+                    }
+                });
+            });
+        }
+        
+    })
+    .fail(function (jqXHR, ajaxOptions, thrownError) {
+        alert("server not responding...");
+    });
+    toggleSidebar('sidebar_thankyou_card')
+})
+
 $(document).on('click','.add_gift_registry',function(){
     $.ajax({
         url: base_url + "event/get_gift_registry",
@@ -4894,9 +4933,6 @@ $(document).on('click','.add_gift_registry',function(){
     .fail(function (jqXHR, ajaxOptions, thrownError) {
         alert("server not responding...");
     });
-
-
-
     toggleSidebar('sidebar_gift_registry');
 })
 

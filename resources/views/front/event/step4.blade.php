@@ -166,7 +166,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <a href="#" class="add-limit thankyou_card" onclick="toggleSidebar('sidebar_thankyou_card')" style="display: none;">
+                                    <a href="#" class="add-limit thankyou_card"  style="display: none;">
                                         <div class="d-flex align-items-center justify-content-between w-100">
                                             <div class="d-flex align-items-center add_new_thankyou_card">
                                                 <span class="me-3">

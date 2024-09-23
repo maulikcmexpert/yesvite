@@ -765,6 +765,7 @@ class EventController extends Controller
 
     public function addNewThankyouCard(Request $request)
     {
+        $user_id =  Auth::guard('web')->user()->id;
         $template_name = $request->input('template_name');
         $when_to_send = $request->input('when_to_send');
         $thankyou_message = $request->input('thankyou_message');
@@ -778,20 +779,38 @@ class EventController extends Controller
             $thankyouCard[$thankyou_template_id]['when_to_send'] = $when_to_send;
             $thankyouCard[$thankyou_template_id]['message'] = $thankyou_message;
             session(['thankyou_card_data' => $thankyouCard]);
+
+            $gr = EventGreeting::where('id',$thankyou_template_id)->first();
+            if($gr != null){
+                $gr->template_name = $template_name;
+                $gr->custom_hours_after_event = $when_to_send;
+                $gr->message = $thankyou_message;
+                $gr->save();
+            }
+
             return response()->json(['message' => "thankyou card updated", 'status' => '1']);
         } else {
+
+
             $thankyouCard[$thankyou_template_id] = [
                 'name' => $template_name,
                 'when_to_send' => $when_to_send,
                 'message' => $thankyou_message,
             ];
-        }
 
+            $gr = new EventGreeting();
+            $gr->user_id = $user_id;
+            $gr->template_name = $template_name;
+            $gr->custom_hours_after_event = $when_to_send;
+            $gr->message = $thankyou_message;
+            $gr->save();
+        }
+        $thankyou_card = EventGiftRegistry::where('id',$gr->id)->get();
         session(['thankyou_card_data' => $thankyouCard]);
 
 
         $data = ['name' => $template_name, 'when_to_send' => $when_to_send, 'message' => $thankyou_message, 'thankyou_template_id' => $thankyou_template_id];
-        return response()->json(['view' => view('front.event.thankyou_template.add_thankyou_template', $data)->render()]);
+        return response()->json(['view' => view('front.event.thankyou_template.add_thankyou_template', compact('thankyou_card'))->render()]);
     }
 
     public function removeThankyouCard(Request $request)
@@ -1361,6 +1380,15 @@ class EventController extends Controller
         $gift_registry = EventGiftRegistry::where('user_id',$user_id)->get();
 
         return response()->json(['view' => view('front.event.gift_registry.add_gift_registry', compact('gift_registry'))->render()]);
+
+    }
+    
+    public function get_thank_you_card(Request $request){
+        $user_id =  Auth::guard('web')->user()->id;
+
+        $thankyou_card = EventGreeting::where('user_id',$user_id)->get();
+
+        return response()->json(['view' => view('front.event.thankyou_template.add_thankyou_template', compact('thankyou_card'))->render()]);
 
     }
 }
