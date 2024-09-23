@@ -4357,7 +4357,6 @@ $.ajax({
             if (item.is_duplicate == '1' && item.userdata && item.userdata.id) {
                 $("#user-" + item.userdata.id).remove();
             }
-            
         });        
         $(".inivted_user_list").append(response.view);
         // $(".inivted_user_list").html('');
