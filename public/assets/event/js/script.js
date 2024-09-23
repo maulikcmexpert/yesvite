@@ -108,11 +108,11 @@ $('.group-owl').owlCarousel({
   items: 5,
   responsive:{
       0:{ 
-          items:1.5,
+          items:5.5,
           dots: false,
       },
       600:{
-          items:1.5,
+          items:5.5,
           dots: false,
       },
       1000:{
