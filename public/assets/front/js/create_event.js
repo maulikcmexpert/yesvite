@@ -445,6 +445,7 @@ function set_activity_html(selectedDates) {
     $(".activity_bar").html('');
     var activities = {};
     eventData.activity = {};
+    total_activities = 0;
     var sortedDates = [...selectedDates].sort();
     var startDate = moment(sortedDates[0]);
     var endDate = moment(
