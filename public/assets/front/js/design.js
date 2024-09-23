@@ -49,7 +49,12 @@ $(document).on("click", ".design-card", function () {
         $(".event_name").text(eventData.event_name);
         $(".event_date").text(formattedDate);
         $(".event_address").text(eventData.event_location);
-        $(".event_time").text(eventData.start_time);
+        if(eventData.rsvp_end_time != undefined && eventData.rsvp_end_time != ""){
+            $(".event_time").text(eventData.start_time +" to "+eventData.rsvp_end_time);
+        }else{
+            $(".event_time").text(eventData.start_time);
+
+        }
 
         if (template == "template_5") {
             var e_year =

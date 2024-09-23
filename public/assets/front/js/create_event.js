@@ -2595,7 +2595,7 @@ function savePage1Data(close = null) {
         $(".step_2").show();
         $('.event_create_percent').text('50%');
         $('.current_step').text('2 of 4');
-        // console.log(eventData);
+        console.log(eventData);
 
     }
 
