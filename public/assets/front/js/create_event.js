@@ -377,6 +377,7 @@ $(function () {
 
             $(".activity_bar").children().not(".toggle-wrp").remove();
             $('#schedule').prop("checked",false);
+            $('.add-activity-schedule').hide();
             // alert();
             $("#end_time").prop("checked", false);
             $("#end-time").val("");
