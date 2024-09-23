@@ -4593,6 +4593,7 @@ $(document).on('click','.checkbox',function () {
 $(document).on('click','.open_addcategory',function () {
     $('#categoryName').val('');
     $('#category_quantity').val('1');
+    $('.pot-cate-name').text('0/30');
 })
 
 $(document).on('click','.new_group',function () {
