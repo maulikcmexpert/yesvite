@@ -793,9 +793,7 @@ class EventController extends Controller
             
         }
         
-        $thankyou_card = EventGiftRegistry::where('id',$gr->id)->get();
-        dd($thankyou_card);
-
+        $thankyou_card = EventGreeting::where('id',$gr->id)->get();
         // $data = ['name' => $template_name, 'when_to_send' => $when_to_send, 'message' => $thankyou_message, 'thankyou_template_id' => $thankyou_template_id];
         return response()->json(['view' => view('front.event.thankyou_template.add_thankyou_template', compact('thankyou_card'))->render()]);
     }
