@@ -356,19 +356,19 @@ class EventController extends Controller
             $gift = "0";
             if ($request->gift_registry == "1") {
                 $gift_registry = $request->gift_registry_data;
-                if (isset($gift_registry) && !empty($gift_registry)) {
-                    $gift = "1";
-                    foreach ($gift_registry as $data) {
-                        $gift_registry_data[] = [
-                            'user_id' => $user_id,
-                            'registry_recipient_name' => $data['registry_name'],
-                            'registry_link' => $data['registry_link'],
-                            'created_at' => now(),
-                            'updated_at' => now(),
-                        ];
-                    }
-                    EventGiftRegistry::insert($gift_registry_data);
-                }
+            //     if (isset($gift_registry) && !empty($gift_registry)) {
+            //         $gift = "1";
+            //         foreach ($gift_registry as $data) {
+            //             $gift_registry_data[] = [
+            //                 'user_id' => $user_id,
+            //                 'registry_recipient_name' => $data['registry_name'],
+            //                 'registry_link' => $data['registry_link'],
+            //                 'created_at' => now(),
+            //                 'updated_at' => now(),
+            //             ];
+            //         }
+            //         EventGiftRegistry::insert($gift_registry_data);
+            //     }
             }
 
             if (isset($request->desgin_selected) && $request->desgin_selected != "") {
@@ -710,7 +710,7 @@ class EventController extends Controller
 
     public function addNewGiftRegistry(Request $request)
     {
-
+        $user_id =  Auth::guard('web')->user()->id;
         $recipient_name = $request->input('recipient_name');
         $registry_link = $request->input('registry_link');
         $registry_item = $request->input('registry_item');
@@ -730,6 +730,17 @@ class EventController extends Controller
                 'registry_link' => $registry_link,
             ];
         }
+
+        $gift_registry_data = [];
+        $gift_registry_data[] = [
+            'user_id' => $user_id,
+            'registry_recipient_name' => $recipient_name,
+            'registry_link' => $registry_link,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ];
+        EventGiftRegistry::insert($gift_registry_data);
+
         session(['gift_registry_data' => $giftRegistryData]);
 
         $data = ['recipient_name' => $recipient_name, 'registry_link' => $registry_link, 'registry_item' => $registry_item];
