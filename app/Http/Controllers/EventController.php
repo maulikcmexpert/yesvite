@@ -356,8 +356,8 @@ class EventController extends Controller
             $gift = "0";
             if ($request->gift_registry == "1") {
                 $gift_registry = $request->gift_registry_data;
+                // $gift = "1";
             //     if (isset($gift_registry) && !empty($gift_registry)) {
-            //         $gift = "1";
             //         foreach ($gift_registry as $data) {
             //             $gift_registry_data[] = [
             //                 'user_id' => $user_id,
@@ -420,6 +420,9 @@ class EventController extends Controller
 
 
         $registry = $request->gift_registry_data;
+        if(!empty($registry)){
+            $gift = '1';
+        }
         Session::save();
         return response()->json([
             'view' => view('front.event.gift_registry.view_gift_registry', compact('registry'))->render(),
