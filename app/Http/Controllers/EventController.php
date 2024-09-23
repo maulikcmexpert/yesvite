@@ -793,18 +793,19 @@ class EventController extends Controller
         } else {
 
 
-            $thankyouCard[$thankyou_template_id] = [
-                'name' => $template_name,
-                'when_to_send' => $when_to_send,
-                'message' => $thankyou_message,
-            ];
-
+            
             $gr = new EventGreeting();
             $gr->user_id = $user_id;
             $gr->template_name = $template_name;
             $gr->custom_hours_after_event = $when_to_send;
             $gr->message = $thankyou_message;
             $gr->save();
+            
+            $thankyouCard[$gr->id] = [
+                'name' => $template_name,
+                'when_to_send' => $when_to_send,
+                'message' => $thankyou_message,
+            ];
         }
         $thankyou_card = EventGiftRegistry::where('id',$gr->id)->get();
         session(['thankyou_card_data' => $thankyouCard]);
