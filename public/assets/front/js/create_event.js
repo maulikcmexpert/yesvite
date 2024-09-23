@@ -2586,12 +2586,12 @@ function savePage1Data(close = null) {
             $(".step_1").hide();
             handleActiveClass('.li_design');
         }
-        alert(description);
-        $(".titlename").text(hostedby);
-        $(".event_name").text(event_name);
-        $(".event_date").text(formattedDate);
-        $(".event_address").text(description);
-        $(".event_time").text(formattedTime);
+        // alert(description);
+        // $(".titlename").text(hostedby);
+        // $(".event_name").text(event_name);
+        // $(".event_date").text(formattedDate);
+        // $(".event_address").text(description);
+        // $(".event_time").text(formattedTime);
         $(".step_2").show();
         $('.event_create_percent').text('50%');
         $('.current_step').text('2 of 4');

@@ -43,18 +43,12 @@ $(document).on("click", ".design-card", function () {
             "Saturday",
         ];
         var dayOfWeek = dayNames[date.getDay()];
-
-        console.log("Year:", year);
-        console.log("Month:", month);
-        console.log("Day of month:", dayOfMonth);
-        console.log("Day of week:", dayOfWeek);
-
         var formattedTime = convertTo12HourFormat(eventData.start_time);
 
         $(".titlename").text(eventData.hostedby);
         $(".event_name").text(eventData.event_name);
         $(".event_date").text(formattedDate);
-        $(".event_address").text(eventData.address);
+        $(".event_address").text(eventData.event_location);
         $(".event_time").text(eventData.start_time);
 
         if (template == "template_5") {
@@ -97,25 +91,19 @@ $(document).on("click", ".design-card", function () {
             $('.year').text(year); 
         }
 
-        
         if (template == "template_9") {
             $('.titlename').text(eventData.event_name);
             $('.e_date').text(dayOfMonth+'/'+(date.getMonth()+1)+'/'+year);
             $('.year').text(year); 
         }
 
-
-         
         if (template == "template_10") {
             $('.e_details').text(dayOfWeek+' '+month+' '+dayOfMonth+', '+year+' '+ eventData.start_time+' AT '+ eventData.address);
         }
 
         if (template == "template_11") {
             $('.e_details').text(dayOfWeek+' '+month+' '+dayOfMonth+', '+year+' '+ eventData.start_time+' AT '+ eventData.address);
-           
         }
-
-
         $("#exampleModal").modal("show");
     });
 });
