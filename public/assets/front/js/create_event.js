@@ -413,14 +413,15 @@ $("#schedule").on("change", function () {
             if (eventDate.includes(" To ")) {
                 // Split and set start and end for a date range
                 let [start, end] = eventDate.split(" To ");
+                console.log(start);
                 selectedDates.clear();
-                selectedDates.add(start.format("YYYY-MM-DD"));
-                selectedDates.add(end.format("YYYY-MM-DD"));
+                // selectedDates.add(start);
+                // selectedDates.add(end);
             } else {
                 // For a single date, set both start and end to the same date
                 selectedDates.clear();
-                selectedDates.add(eventDate.format("YYYY-MM-DD"));
-                selectedDates.add(eventDate.format("YYYY-MM-DD"));
+                selectedDates.add(eventDate);
+                selectedDates.add(eventDate);
             }
             console.log(selectedDates.size);
             if (selectedDates.size > 0) {
