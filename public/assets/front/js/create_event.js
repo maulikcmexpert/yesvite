@@ -4858,7 +4858,7 @@ $(document).on('click','.add-activity-schedule',function(){
     toggleSidebar('sidebar_activity_schedule');
 })
 
-$(document).on('click','.thankyou_card',function(){
+$(document).on('click','.thank_you_card_toggle',function(){
     $.ajax({
         url: base_url + "event/get_thank_you_card",
         type: "POST",
@@ -4874,7 +4874,7 @@ $(document).on('click','.thankyou_card',function(){
         $("#list_thankyou_card").html(data);
         
         if (data.status == "1") {
-            toastr.success("Registry Updated");
+            toastr.success("Greeting card updated");
             $("#registry_item_id").val("");
         }
         $("#list_thankyou_card").append(data.view);
@@ -4913,7 +4913,7 @@ $(document).on('click','.add_gift_registry',function(){
         $("#registry_list").html(data);
         
         if (data.status == "1") {
-            toastr.success("Registry Updated");
+            toastr.success("Gift registry updated");
             $("#registry_item_id").val("");
         }
         $("#registry_list").append(data.view);
