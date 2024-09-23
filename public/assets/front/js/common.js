@@ -84,7 +84,7 @@ toastr.options = {
     showMethod: "fadeIn",
     hideMethod: "fadeOut",
 };
-
+alert();
 function loaderHandle(querySelectorId, btnName) {
     var loaderbtn = document.querySelector(querySelectorId);
 
