@@ -4326,26 +4326,26 @@ $(document).on("click", ".add_new_group_member", function () {
 
     // console.log(group_name);
     console.log(selectedValues);
-    $.ajax({
-        url: base_url + "event/add_new_group",
-        type: "POST",
-        headers: {
-            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-        },
-        data: {
-            groupmember: selectedValues,
-            groupname: group_name,
-        },
-        success: function (response) {
-            if (response.status == "1") {
-                $(".group_list").append(response.view);
-                toggleSidebar("sidebar_groups");
-            }
-        },
-        error: function (xhr, status, error) {
-            console.log("AJAX error: " + error);
-        },
-    });
+    // $.ajax({
+    //     url: base_url + "event/add_new_group",
+    //     type: "POST",
+    //     headers: {
+    //         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+    //     },
+    //     data: {
+    //         groupmember: selectedValues,
+    //         groupname: group_name,
+    //     },
+    //     success: function (response) {
+    //         if (response.status == "1") {
+    //             $(".group_list").append(response.view);
+    //             toggleSidebar("sidebar_groups");
+    //         }
+    //     },
+    //     error: function (xhr, status, error) {
+    //         console.log("AJAX error: " + error);
+    //     },
+    // });
 });
 
 $(document).on("click", ".invite_group_member", function () {
