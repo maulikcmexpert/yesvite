@@ -4356,7 +4356,7 @@ $.ajax({
         response.data.forEach(function(item, index) {
             console.log(item.is_duplicate);
             if (item.is_duplicate == '1' && item.userdata && item.userdata.id) {
-                $("#user_tel-" + item.userdata.id).remove();
+                $("#user-" + item.userdata.id).remove();
             }
            
         });        
