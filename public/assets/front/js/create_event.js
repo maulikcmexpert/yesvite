@@ -4540,7 +4540,7 @@ $(document).on('click','.free_plan',function () {
             selected_gift.push({
                 registry_name: registry_name,
                 registry_link: registry_link,
-                id: gr_id
+                gr_id: gr_id
             });
         });
         eventData.gift_registry_data = selected_gift;
