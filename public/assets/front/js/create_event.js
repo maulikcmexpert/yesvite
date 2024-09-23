@@ -2645,7 +2645,7 @@ function savePage3Data() {
     var checkedCheckbox = parseInt($('.invite-count').text());
 
     if (checkedCheckbox == 0) {
-        toastr.success("Please select invited user");
+        toastr.error("Please select invited user");
         return;
     }
 
