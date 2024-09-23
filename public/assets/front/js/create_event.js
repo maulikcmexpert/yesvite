@@ -4505,21 +4505,24 @@ $(document).on('click','.free_plan',function () {
 
  $(document).on('change', 'input[name="gift_registry[]"]',function() {
     var selected_gift = [];
-    if($(this).is(':checked')){
-        var registry_name=$(this).data('item');
-        var registry_link=$(this).data('registry');
-        selected_gift.push({
-            registry_name: registry_name,
-            registry_link: registry_link,
-        });
-    }
+    // if($(this).is(':checked')){
+    //     var registry_name=$(this).data('item');
+    //     var registry_link=$(this).data('registry');
+    //     var gr_id = $(this).val();
+    //     selected_gift.push({
+    //         registry_name: registry_name,
+    //         registry_link: registry_link,
+    //         gr_id: gr_id,
+    //     });
+    // }
     $('input[name="gift_registry[]"]:checked').each(function() {
         var registry_name = $(this).data('item');
         var registry_link = $(this).data('registry');
-
+        var gr_id = $(this).val();
         selected_gift.push({
             registry_name: registry_name,
             registry_link: registry_link,
+            gr_id: gr_id,
         });
     });
     eventData.gift_registry_data=selected_gift;
@@ -4540,7 +4543,6 @@ $(document).on('click','.free_plan',function () {
                 id: gr_id
             });
         });
-
         eventData.gift_registry_data = selected_gift;
     }
 });
