@@ -4593,15 +4593,20 @@ $(document).on('click','input[name="select_thankyou[]"]',function () {
 });
 
 $(document).on('click','input[name="gift_registry[]"]',function () { 
+
     countGiftRegestry();
 });
 
 function countGiftRegestry(){
     var i = 0;
+    var checkedCount = 0;
     $("input[name='gift_registry[]']" ).each(function (index) {
+        if ($(this).is(':checked')) {
+            checkedCount++;
+        }
         i++;
     });
-    if(i>=1){
+    if(i>=1 && checkedCount > 0){
         if(i==1){
             $('.add_gift_registry_count').html(`<span class="me-3"></span>
                 <h5>${i} Registry</h5>`);

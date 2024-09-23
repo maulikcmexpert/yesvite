@@ -752,6 +752,8 @@ class EventController extends Controller
     public function removeGiftRegistry(Request $request)
     {
         $registry_item = $request->input('registry_item');
+        EventGiftRegistry::where('id',$registry_item)->delete();
+        
         $giftRegistryData = session()->get('gift_registry_data', []);
         if (array_key_exists($registry_item, $giftRegistryData)) {
             unset($giftRegistryData[$registry_item]);
