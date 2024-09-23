@@ -3889,7 +3889,7 @@ $(document).on("click", ".save_allow_limit", function () {
 $(document).on("change", 'input[name="guest_list[]"]', function () {
     if ($("input[name='guest_list[]']:checked").length > 1) {
         $(this).prop("checked", false);
-        toastr.error("There can be only one co host");
+        toastr.error("You can select only one co-host");
         return;
     }else{
         if ($(this).is(':checked')) {
@@ -4517,7 +4517,7 @@ $(document).on('click','.free_plan',function () {
     var selected = $('input[name="gift_registry[]"]:checked');
         if (selected.length > 2) {
         $(this).prop('checked', false);
-       toastr.error('You can select maximum two gift registry only');
+       toastr.error('Maximum two gift registry can select');
        selected_gift = [];
         $('input[name="gift_registry[]"]:checked').each(function() {
             var registry_name = $(this).data('item');
