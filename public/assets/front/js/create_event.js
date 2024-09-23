@@ -4788,7 +4788,6 @@ $(document).on('keyup','.co_host_search',function(){
 })
 
 $(document).on('click','.add-activity-schedule',function(){
-    alert();
     toggleSidebar('sidebar_activity_schedule');
 })
 
