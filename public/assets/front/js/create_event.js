@@ -3332,8 +3332,11 @@ $(document).on("click", ".qty-btn-plus", function () {
         .parent()
         .find(".item-quantity-minus")
         .val();
+    var $input = $(this).siblings(".input-qty");
+    var value = parseInt($input.val());
+        $input.val(value + 1);
     var quantity = parseInt($(this).parent().find(".input-qty").val());
-
+    console.log(quantity);
     if(quantity > 0){
         $(this).parent().find(".item-quantity-minus").val(1);
     }
@@ -3365,9 +3368,13 @@ $(document).on("click", ".qty-btn-minus", function () {
         .parent()
         .find(".item-quantity-minus")
         .val();
+    var $input = $(this).siblings(".input-qty");
+    var value = parseInt($input.val());
+    if (value > 0) {
+        $input.val(value - 1);
+    }
     var quantity = parseInt($(this).parent().find(".input-qty").val());
-    
-
+    console.log(quantity);
     if (categoryItemQuantity >= quantity ) {
         if(itemQuantityMinus == 1){
             update_self_bring(

@@ -28,21 +28,19 @@ $(document).on('click','.qty-btn-minus-qty',function(){
     }
 });
 
-$(document).on('click','.qty-btn-plus',function(){
-    var $input = $(this).siblings(".input-qty");
-    var value = parseInt($input.val());
-    alert(value);
-    $input.val(value + 1);
-});
+// $(document).on('click','.qty-btn-plus',function(){
+//     var $input = $(this).siblings(".input-qty");
+//     var value = parseInt($input.val());
+//     $input.val(value + 1);
+// });
 
-$(document).on('click','.qty-btn-minus',function(){
-    var $input = $(this).siblings(".input-qty");
-    var value = parseInt($input.val());
-    alert(value);
-    if (value > 0) {
-        $input.val(value - 1);
-    }
-});
+// $(document).on('click','.qty-btn-minus',function(){
+//     var $input = $(this).siblings(".input-qty");
+//     var value = parseInt($input.val());
+//     if (value > 0) {
+//         $input.val(value - 1);
+//     }
+// });
 
 
 
