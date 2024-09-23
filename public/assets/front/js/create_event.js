@@ -4352,14 +4352,14 @@ $.ajax({
     },
     success: function (response) {
         // console.log(response);
-        $(".inivted_user_list").append(response.view);
         response.data.forEach(function(item, index) {
             console.log(item.is_duplicate);
             if (item.is_duplicate == '1' && item.userdata && item.userdata.id) {
                 $("#user-" + item.userdata.id).remove();
             }
-           
+            
         });        
+        $(".inivted_user_list").append(response.view);
         // $(".inivted_user_list").html('');
             guest_counter(0,15);
 
