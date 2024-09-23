@@ -49,6 +49,12 @@ $(document).ready(function () {
 $(document).on('focus','.inputText',function(){
     $(this).next().addClass('floatingfocus');
 })
+
+$(document).on('blur','.inputText',function(){
+    if($(this).val() ==''){
+        $(this).next().removeClass('floatingfocus');
+    }
+})
 // $(function() {
 //     $('#event-date').daterangepicker({
 //         autoUpdateInput: false,
