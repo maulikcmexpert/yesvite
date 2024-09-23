@@ -882,13 +882,13 @@
 }
 
 .add-item-under-text {
-    width: 24px;
-    height: 24px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 10px;
+    font-size: 12px;
     color: #fff !important;
     margin-right: 7px;
 }
