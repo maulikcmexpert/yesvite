@@ -4880,7 +4880,12 @@ $(document).on('click','.add_gift_registry',function(){
         console.log(eventData);
         if(eventData.gift_registry_data != undefined){
             eventData.gift_registry_data.forEach((element, index) => {
-                console.log("Index: " + index, "Element:", element);
+                console.log(element.gr_id);
+                $('input[name="gift_registry[]"]').each(function() {
+                    if ($(this).val() == element.gr_id) {
+                        $(this).prop('checked', true); // Check the checkbox
+                    }
+                });
             });
         }
         
