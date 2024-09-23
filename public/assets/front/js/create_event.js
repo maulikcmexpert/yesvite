@@ -749,6 +749,7 @@ $("#allow_for_1_more").on("change", function () {
     } else {
         $("#allow_limit").hide();
         $("#allow_limit_count").val(0);
+        eventData.allow_limit_count = 0;
     }
 });
 
