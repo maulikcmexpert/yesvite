@@ -2586,7 +2586,7 @@ function savePage1Data(close = null) {
             $(".step_1").hide();
             handleActiveClass('.li_design');
         }
-
+        alert(description);
         $(".titlename").text(hostedby);
         $(".event_name").text(event_name);
         $(".event_date").text(formattedDate);
@@ -2595,7 +2595,7 @@ function savePage1Data(close = null) {
         $(".step_2").show();
         $('.event_create_percent').text('50%');
         $('.current_step').text('2 of 4');
-        console.log(eventData);
+        // console.log(eventData);
 
     }
 
