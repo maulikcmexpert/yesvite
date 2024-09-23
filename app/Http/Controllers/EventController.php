@@ -766,7 +766,7 @@ class EventController extends Controller
     public function addNewThankyouCard(Request $request)
     {
         $user_id =  Auth::guard('web')->user()->id;
-        dd($request);
+        // dd($request);
         $template_name = $request->input('template_name');
         $when_to_send = $request->input('when_to_send');
         $thankyou_message = $request->input('thankyou_message');
