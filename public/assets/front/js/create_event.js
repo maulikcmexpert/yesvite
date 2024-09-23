@@ -376,13 +376,16 @@ $(function () {
             $("#event-date").val(eventDate).trigger('change');
 
             $(".activity_bar").children().not(".toggle-wrp").remove();
-
+            $('#schedule').prop("checked",false);
             // alert();
             $("#end_time").prop("checked", false);
             $("#end-time").val("");
             $("#start-time").val("");
             $(".end_time").css("display", "none");
             if (selectedDates.size > 0) {
+                var activities = {};
+                eventData.activity = {};
+                var total_activities = 0;
                 set_activity_html(selectedDates);
             }
         }
