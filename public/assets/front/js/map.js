@@ -73,6 +73,7 @@ function initMap() {
                     
                     $("#" + addr_inputs[index]).val(typeValLong[fieldIndex]);
                     $('#' + addr_inputs[index]).addClass('floatingfocus');
+                    console.log(addr_inputs[index]);
                     // If it's a select input, find matching option and set its value
                     var selectVal = $("#" + addr_inputs[index] + " option").filter(function () {
                         return $(this).html() == typeValLong[fieldIndex];
