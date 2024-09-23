@@ -4533,10 +4533,11 @@ $(document).on('click','.free_plan',function () {
         $('input[name="gift_registry[]"]:checked').each(function() {
             var registry_name = $(this).data('item');
             var registry_link = $(this).data('registry');
-
+            var gr_id = $(this).val();
             selected_gift.push({
                 registry_name: registry_name,
                 registry_link: registry_link,
+                id: gr_id
             });
         });
 
@@ -4868,12 +4869,15 @@ $(document).on('click','.add_gift_registry',function(){
     .done(function (data) {
         $("#loader").hide();
         $("#registry_list").html(data);
-        console.log(data);
+        
         if (data.status == "1") {
             toastr.success("Registry Updated");
             $("#registry_item_id").val("");
         }
         $("#registry_list").append(data.view);
+        selected_gift.forEach(element => {
+            console.log(element);
+        });
     })
     .fail(function (jqXHR, ajaxOptions, thrownError) {
         alert("server not responding...");
