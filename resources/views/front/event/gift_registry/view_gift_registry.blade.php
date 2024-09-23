@@ -1,5 +1,5 @@
 @php
-    dd($registry[0]['registry_name']);
+    // dd($registry[0]['registry_name']);
 @endphp
 @if(isset($registry)&&!empty($registry))
 
