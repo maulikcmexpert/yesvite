@@ -3795,10 +3795,10 @@ $(document).on("click", ".add_thankyou_card", function () {
                     .find("#edit_thankyou_message")
                     .text(thankyou_message);
                 $thankYouCard.find("#edit_when_to_send").val(when_to_send);
-                toastr.success("This thankyou card update");
+                toastr.success("Greeting card updated");
                 $("#edit_template_id").val("");
             }
-            $(".list_thankyou_card").append(response.view);
+            $(".list_thankyou_card").html(response.view);
             $("#message_for_thankyou").val("");
             $("#thankyou_when_to_send").val("");
             $("#thankyou_templatename").val("");
