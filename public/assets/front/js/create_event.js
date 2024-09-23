@@ -2845,12 +2845,8 @@ function clearError(input = null) {
                 $("#recipient_name_error")
                     .text("Please add recipients name")
                     .css("color", "red");
-                $('.recipient-name-con').text('0/30');
             } else {
                 $("#recipient_name_error").text("");
-                var inputLength = recipient_name.length;
-                $('.recipient-name-con').text(inputLength+'/30');
-            
             }
             break;
 
@@ -2862,34 +2858,6 @@ function clearError(input = null) {
                     .css("color", "red");
             } else {
                 $("#group_name_error").text("");
-            }
-            break;
-        
-        case "categoryName":
-            var groupname = input.value;
-            if (groupname === "") {
-                $("#categoryNameError")
-                    .text("Please enter category name")
-                    .css("color", "red");
-                    $('.pot-cate-name').text('0/30');
-            } else {
-                $("#categoryNameError").text("");
-                var inputLength = groupname.length;
-                $('.pot-cate-name').text(inputLength+'/30');
-            }
-            break;
-        
-        case "item_name":
-            var groupname = input.value;
-            if (groupname === "") {
-                $("#item_name_error")
-                    .text("Please enter description.")
-                    .css("color", "red");
-                    $('.sub-cat-pot').text('0/30');
-            } else {
-                $("#item_name_error").text("");
-                var inputLength = groupname.length;
-                $('.sub-cat-pot').text(inputLength+'/30');
             }
             break;
 
@@ -3839,11 +3807,7 @@ $(document).on("click", ".save_allow_limit", function () {
     toggleSidebar();
 });
 
-$(document).on("change", 'input[name="guest_list[]"]', function (e) {
-    if (!$(this).is(':checked')) {
-        $('.guest-contacts-wrp').css('display', 'none');
-    }
-    e.preventDefault();
+$(document).on("change", 'input[name="guest_list[]"]', function () {
     if ($("input[name='guest_list[]']:checked").length > 1) {
         $(this).prop("checked", false);
         toastr.error("There can be only one co host");
