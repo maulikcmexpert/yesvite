@@ -4876,7 +4876,7 @@ $(document).on('click','.thank_you_card_toggle',function(){
             toastr.success("Greeting card updated");
             $("#registry_item_id").val("");
         }
-        $(".list_thankyou_card").append(data.view);
+        $(".list_thankyou_card").html(data.view);
     })
     .fail(function (jqXHR, ajaxOptions, thrownError) {
         alert("server not responding...");
