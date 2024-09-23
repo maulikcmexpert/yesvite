@@ -774,7 +774,7 @@ class EventController extends Controller
 
         $thankyouCard = session()->get('thankyou_card_data', []);
 
-
+        dd($thankyou_template_id);
         if ($thankyou_template_id != null) {
             $gr = EventGreeting::where('id',$thankyou_template_id)->first();
             if($gr != null){
@@ -793,7 +793,7 @@ class EventController extends Controller
             $gr->save();
            
         }
-        
+
         $thankyou_card = EventGiftRegistry::where('id',$gr->id)->get();
 
         // $data = ['name' => $template_name, 'when_to_send' => $when_to_send, 'message' => $thankyou_message, 'thankyou_template_id' => $thankyou_template_id];
