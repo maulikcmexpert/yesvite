@@ -1,4 +1,8 @@
+@php
+    dd($registry);
+@endphp
 @if(isset($registry)&&!empty($registry))
+
 @foreach ($registry as $data )
 <div class="d-flex align-items-center justify-content-center">
     <span class="me-2">
