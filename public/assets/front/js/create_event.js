@@ -405,9 +405,9 @@ $("#schedule").on("change", function () {
     eventData.activity = {};
     var total_activities = 0;
     $('.step_1_activity').html('<span><i class="fa-solid fa-triangle-exclamation"></i></span>Setup activity schedule');
-    console.log(eventDate);
     if (eventDate != "") {
         if ($(this).is(":checked")) {
+            console.log(eventDate);
             $(".add-activity-schedule").show();
             // $(".ac-end-time").show();
             let selectedDates = [];
@@ -424,6 +424,7 @@ $("#schedule").on("change", function () {
                 selectedDates.push(moment(singleDate).format("YYYY-MM-DD"));
                 selectedDates.push(moment(singleDate).format("YYYY-MM-DD"));
             }
+            console.log(selectedDates.size);
             if (selectedDates.size > 0) {
                 set_activity_html(selectedDates);
                 
