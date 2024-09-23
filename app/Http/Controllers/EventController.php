@@ -776,7 +776,6 @@ class EventController extends Controller
 
         if ($thankyou_template_id != null) {
             $gr = EventGreeting::where('id',$thankyou_template_id)->first();
-            dd($gr);
             if($gr != null){
                 $gr->template_name = $template_name;
                 $gr->custom_hours_after_event = $when_to_send;
@@ -784,17 +783,18 @@ class EventController extends Controller
                 $gr->save();
             }
         } else {
-
+            
             $gr = new EventGreeting();
             $gr->user_id = $user_id;
             $gr->template_name = $template_name;
             $gr->custom_hours_after_event = $when_to_send;
             $gr->message = $thankyou_message;
             $gr->save();
-           
+            
         }
-
+        
         $thankyou_card = EventGiftRegistry::where('id',$gr->id)->get();
+        dd($thankyou_card);
 
         // $data = ['name' => $template_name, 'when_to_send' => $when_to_send, 'message' => $thankyou_message, 'thankyou_template_id' => $thankyou_template_id];
         return response()->json(['view' => view('front.event.thankyou_template.add_thankyou_template', compact('thankyou_card'))->render()]);
