@@ -36,7 +36,7 @@
                 <div class="birthday-card-date-time-inner">
                     <img src="{{asset('assets/template/')}}/images/post_temp_3/post_temp_3_squar_img.svg" alt="" class="post_temp_3_squar_img">
                     {{-- <h5>9:00 PM to 1:00 AM</h5> --}}
-                    <h3 class="event_time"></h3>
+                    <h5 class="event_time"></h5>
 
                     
                 </div>
