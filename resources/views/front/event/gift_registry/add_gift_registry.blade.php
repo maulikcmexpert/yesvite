@@ -3,7 +3,7 @@
     <div class="trgistry-content d-flex justify-content-between" id="registry{{$gift->id}}">
         <div class="d-flex align-items-start">
             {{-- <input type="checkbox" id="test" name="gift_registry_check"> --}}
-            <input class="form-check-input" type="checkbox" name="gift_registry[]" data-item="{{$gift->registry_recipient_name}}" data-registry="{{$gift->registry_link}}">
+            <input class="form-check-input" type="checkbox" name="gift_registry[]" value="{{$gift->id}}" data-item="{{$gift->registry_recipient_name}}" data-registry="{{$gift->registry_link}}">
             <div class="ms-1">
                 <h5 id="added_recipient_name">{{$gift->registry_recipient_name}}</h4>
                 <a href="#" id="added_registry_link">{{$gift->registry_link}}</a>
