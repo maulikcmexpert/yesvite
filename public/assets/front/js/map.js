@@ -72,7 +72,7 @@ function initMap() {
                     
                     
                     $("#" + addr_inputs[index]).val(typeValLong[fieldIndex]);
-
+                    $('#' + addr_inputs[index]).addClass('floatingfocus');
                     // If it's a select input, find matching option and set its value
                     var selectVal = $("#" + addr_inputs[index] + " option").filter(function () {
                         return $(this).html() == typeValLong[fieldIndex];
@@ -83,8 +83,12 @@ function initMap() {
                     }
                 } else {
                     $("#" + addr_inputs[index]).val("");
+                    $('#' + addr_inputs[index]).removeClass('floatingfocus');
                 }
             });
+
+            
+
         }
     });
 }
