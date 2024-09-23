@@ -3125,7 +3125,7 @@ enforceCheckboxLimit();
 function toggleSidebar(id = null) {
     const allSidebars = document.querySelectorAll(".sidebar");
     const allOverlays = document.querySelectorAll(".overlay");
-    $(".floatingfocus").removeClass("floatingfocus");
+    // $(".floatingfocus").removeClass("floatingfocus");
     $("#registry_link_error").text("");
     $(".common_error").text("");
 
