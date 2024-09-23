@@ -3367,7 +3367,7 @@ $(document).on("click", ".qty-btn-minus", function () {
         .val();
     var quantity = parseInt($(this).parent().find(".input-qty").val());
     
-
+    quantity--;
     if (categoryItemQuantity >= quantity ) {
         if(itemQuantityMinus == 1){
             update_self_bring(
