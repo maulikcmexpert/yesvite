@@ -787,6 +787,7 @@ $(document).on("click", ".group_toggle_close_btn", function () {
 
 $("#gift_registry").on("change", function () {
     // alert()
+    eventData.gift_registry_data = {};
     if ($(this).is(":checked")) {
         // $(".hidersvp").hide();
         $('.add_gift_registry_count').html(`<span class="me-3">
@@ -797,31 +798,31 @@ $("#gift_registry").on("change", function () {
                                                 <h5>Add gift registry</h5>`);
         $("#giftDiv").show();
     } else {
-        delete_session('gift_registry_data');
+        // delete_session('gift_registry_data');
         $("#giftDiv").hide();
     }
     savePage4Data();
 });
 
-function delete_session(session){
-    $.ajax({
-        url: base_url + "event/delete_sessions",
-        type: "POST",
-        headers: {
-            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-        },
-        data: {delete_session:session},
-        success: function (response) {
-            console.log(response);
-            if(session == 'gift_registry_data'){
-                $('#registry_list').html('');
-            }
-        },
-        error: function (xhr, status, error) {
-            console.log("AJAX error: " + error);
-        },
-    });
-}
+// function delete_session(session){
+//     $.ajax({
+//         url: base_url + "event/delete_sessions",
+//         type: "POST",
+//         headers: {
+//             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+//         },
+//         data: {delete_session:session},
+//         success: function (response) {
+//             console.log(response);
+//             if(session == 'gift_registry_data'){
+//                 $('#registry_list').html('');
+//             }
+//         },
+//         error: function (xhr, status, error) {
+//             console.log("AJAX error: " + error);
+//         },
+//     });
+// }
 
 $("#add_cohost").on("change", function () {
     // alert()
