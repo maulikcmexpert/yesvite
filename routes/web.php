@@ -159,6 +159,7 @@ Route::middleware('checkUserExist')->group(function () {
     Route::post('event/group_toggle_search', [ControllersEventController::class, 'group_toggle_search']);
     Route::post('event/delete_sessions', [ControllersEventController::class, 'delete_sessions']);
     Route::post('event/get_co_host_list', [ControllersEventController::class, 'get_co_host_list']);
+    Route::post('event/get_gift_registry', [ControllersEventController::class, 'get_gift_registry']);
 });
 
 Route::get('access_token', [AuthController::class, 'handleGoogleCallback'])->name('access_token');

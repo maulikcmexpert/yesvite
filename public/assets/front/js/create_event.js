@@ -4849,3 +4849,33 @@ $(document).on('click','.add-activity-schedule',function(){
     toggleSidebar('sidebar_activity_schedule');
 })
 
+$(document).on('click','.add_gift_registry',function(){
+    $.ajax({
+        url: base_url + "event/get_gift_registry",
+        type: "POST",
+        data: {
+            _token: $('meta[name="csrf-token"]').attr("content"),
+        },
+        beforeSend: function () {
+            $("#loader").show();
+        },
+    })
+    .done(function (data) {
+        $("#loader").hide();
+        $("#registry_list").html(data);
+        console.log(data);
+        if (data.status == "1") {
+            toastr.success("Registry Updated");
+            $("#registry_item_id").val("");
+        }
+        $("#registry_list").append(data.view);
+    })
+    .fail(function (jqXHR, ajaxOptions, thrownError) {
+        alert("server not responding...");
+    });
+
+
+
+    toggleSidebar('sidebar_gift_registry');
+})
+

@@ -731,20 +731,16 @@ class EventController extends Controller
             ];
         }
 
-        $gift_registry_data = [];
-        $gift_registry_data[] = [
-            'user_id' => $user_id,
-            'registry_recipient_name' => $recipient_name,
-            'registry_link' => $registry_link,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ];
-        EventGiftRegistry::insert($gift_registry_data);
-
+        $gr = new EventGiftRegistry();
+        $gr->user_id = $user_id;
+        $gr->registry_recipient_name = $recipient_name;
+        $gr->registry_link = $registry_link;
+        $gr->save();
+        $gift_registry = EventGiftRegistry::where('id',$gr->id)->get();
         session(['gift_registry_data' => $giftRegistryData]);
 
-        $data = ['recipient_name' => $recipient_name, 'registry_link' => $registry_link, 'registry_item' => $registry_item];
-        return response()->json(['view' => view('front.event.gift_registry.add_gift_registry', $data)->render()]);
+        // $data = ['recipient_name' => $recipient_name, 'registry_link' => $registry_link, 'registry_item' => $registry_item];
+        return response()->json(['view' => view('front.event.gift_registry.add_gift_registry', compact('gift_registry'))->render()]);
     }
 
     public function removeGiftRegistry(Request $request)
@@ -1349,5 +1345,14 @@ class EventController extends Controller
 
 
         return view('front.event.guest.allGuestList', compact('users','selected_co_host','selected_co_host_prefer_by'));
+    }
+
+    public function get_gift_registry(Request $request){
+        $user_id =  Auth::guard('web')->user()->id;
+
+        $gift_registry = EventGiftRegistry::where('user_id',$user_id)->get();
+
+        return response()->json(['view' => view('front.event.gift_registry.add_gift_registry', compact('gift_registry'))->render()]);
+
     }
 }

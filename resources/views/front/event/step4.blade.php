@@ -246,7 +246,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <a href="#" class="add-limit add_gift_registry" onclick="toggleSidebar('sidebar_gift_registry')" style="display: none;">
+                                    <a href="#" class="add-limit add_gift_registry" style="display: none;">
                                         <div class="d-flex align-items-center justify-content-between w-100">
                                             <div class="d-flex align-items-center add_gift_registry_count">
                                                 <span class="me-3">
