@@ -3786,17 +3786,10 @@ $(document).on("click", ".add_thankyou_card", function () {
         success: function (response) {
             console.log(response);
             if (response.status == "1") {
-                var id = "#thankyou" + edit_template_id;
-
-                var $thankYouCard = $(id).closest(".thank-you-card");
-                $thankYouCard
-                    .find("#edit_thankyou_template_name")
-                    .text(template_name);
-                $thankYouCard
-                    .find("#edit_thankyou_message")
-                    .text(thankyou_message);
-                $thankYouCard.find("#edit_when_to_send").val(when_to_send);
                 toastr.success("Greeting card updated");
+                $("#edit_template_id").val("");
+            }else{
+                toastr.success("Greeting card added");
                 $("#edit_template_id").val("");
             }
             $(".list_thankyou_card").html(response.view);

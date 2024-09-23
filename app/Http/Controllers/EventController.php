@@ -782,6 +782,7 @@ class EventController extends Controller
                 $gr->message = $thankyou_message;
                 $gr->save();
             }
+            $status = 1;
         } else {
             
             $gr = new EventGreeting();
@@ -790,12 +791,12 @@ class EventController extends Controller
             $gr->custom_hours_after_event = $when_to_send;
             $gr->message = $thankyou_message;
             $gr->save();
-            
+            $status = 0;
         }
         
         $thankyou_card = EventGreeting::where('user_id',$user_id)->get();
         // $data = ['name' => $template_name, 'when_to_send' => $when_to_send, 'message' => $thankyou_message, 'thankyou_template_id' => $thankyou_template_id];
-        return response()->json(['view' => view('front.event.thankyou_template.add_thankyou_template', compact('thankyou_card'))->render()]);
+        return response()->json(['view' => view('front.event.thankyou_template.add_thankyou_template', compact('thankyou_card'))->render(),'status'=>$status]);
     }
 
     public function removeThankyouCard(Request $request)
