@@ -2388,9 +2388,13 @@ $(document).on("click", "#close_createEvent", function () {
                 eventData.event_id=event_id;
                 eventData.desgin_selected=desgin_selected
             // };
+            eventData.step = firstLetter;
             $(".step_2").hide();
         }
-        eventData.step = firstLetter;
+
+        if(parseInt(eventData.step) < parseInt(firstLetter)){
+            eventData.step = firstLetter;
+        }
         eventData.isdraft = "1";
         savePage4Data();
        
