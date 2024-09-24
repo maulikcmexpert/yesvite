@@ -151,17 +151,29 @@ class EventController extends Controller
 
         $startDateFormat = DateTime::createFromFormat('m-d-Y', $startDate)->format('Y-m-d');
         $endDateFormat = DateTime::createFromFormat('m-d-Y', $endDate)->format('Y-m-d');
+        
+        if (isset($request->rsvp_by_date) && $request->rsvp_by_date != '') {
+            
+            $rsvp_by_date = DateTime::createFromFormat('m-d-Y', $request->rsvp_by_date)->format('Y-m-d');
+            $rsvp_by_date_set = '1';
+        } else {
+            if ($startDateFormat) {
 
+                $start = new DateTime($startDateFormat);
+                $start->modify('-1 day');
+                $rsvp_by_date = $start->format('Y-m-d');
+            }
+        }
         
         $event_creation = Event::create([
             'event_type_id' => (isset($request->event_type) && $request->event_type != "") ? (int)$request->event_type : "",
             'user_id' => $user_id,
             'event_name' => (isset($request->event_name) && $request->event_name != "") ? $request->event_name : "",
             'hosted_by' => (isset($request->hosted_by) && $request->hosted_by) ? $request->hosted_by : "",
-            'start_date' => (isset($startDate) && $startDate != "") ? $startDate : null,
-            'end_date' => (isset($endDate) && $endDate != "") ? $endDate : null,
+            'start_date' => (isset($startDate) && $startDate != "") ? $startDateFormat : null,
+            'end_date' => (isset($endDate) && $endDate != "") ? $endDateFormat : null,
             'rsvp_by_date_set' => (isset($request->rsvp_by_date_set) && $request->rsvp_by_date_set != "") ? $request->rsvp_by_date_set : "0",
-            'rsvp_by_date' => (isset($request->rsvp_by_date) && $request->rsvp_by_date != "") ? $request->rsvp_by_date : null,
+            'rsvp_by_date' => (isset($rsvp_by_date) && $rsvp_by_date != "") ? $rsvp_by_date : null,
             'rsvp_start_time' => (isset($request->start_time) && $request->start_time != "") ? $request->start_time : "",
             'rsvp_start_timezone' => (isset($request->rsvp_start_timezone) && $request->rsvp_start_timezone != "") ? $request->rsvp_start_timezone : "",
             'rsvp_end_time' => (isset($request->rsvp_end_time) && $request->rsvp_end_time != "") ? $request->rsvp_end_time : "",
