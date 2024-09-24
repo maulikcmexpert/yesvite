@@ -26,7 +26,7 @@
                             aria-labelledby="contact-tab">
 
                             <!-- ======= guest-users mobile ======== -->
-                            <div class="guest-contacts-wrp">
+                            <div class="guest-contacts-wrp" style="display: none">
                                 <div class="guest-contact">
                                     <div class="guest-img">
                                         <img src="./assets/image/user-img.svg" alt="guest-img">
@@ -273,7 +273,7 @@
             <div class="tab-pane fade" id="phone" role="tabpanel" aria-labelledby="phone-tab">
 
                 <!-- ======= guest-users mobile ======== -->
-                <div class="guest-contacts-wrp">
+                <div class="guest-contacts-wrp" style="display: none">
                     <div class="guest-contact">
                         <div class="guest-img">
                             <img src="./assets/image/user-img.svg" alt="guest-img">
@@ -483,7 +483,7 @@
     aria-labelledby="group-tab">
 
     <!-- ======= guest-users mobile ======== -->
-    <div class="guest-contacts-wrp">
+    <div class="guest-contacts-wrp" style="display: none">
         <div class="guest-contact">
             <div class="guest-img">
                 <img src="./assets/image/user-img.svg" alt="guest-img">
