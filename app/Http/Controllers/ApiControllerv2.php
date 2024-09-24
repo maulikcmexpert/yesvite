@@ -63,7 +63,8 @@ use App\Models\{
     UserReportChat,
     UserSeenStory,
     UserSubscription,
-    VersionSetting
+    VersionSetting,
+    TextData
 };
 use Illuminate\Support\Facades\Http;
 // Rules //
@@ -12860,5 +12861,142 @@ class ApiControllerv2 extends Controller
         // dd($eventPostImage);
 
         return response()->json(['status' => 1, 'message' => "Post is Updated sucessfully"]);
+    }
+
+
+
+    public function getAllTemplateData(Request $request)
+    {
+
+        // dd(1);
+
+        try {
+            $get_data = TextData::get();
+            $templates = [];
+
+            if ($get_data->isNotEmpty()) {
+
+                foreach ($get_data as $data) {
+                    $template_data['id'] = (isset($data->id) && $data->id != null) ? $data->id : '';
+                    $template_data['event_type_id'] = (isset($data->event_type_id) && $data->event_type_id != null) ? $data->event_type_id : '';
+                    $template_data['image'] = (isset($data->image) && $data->image != null) ? $data->image : '';
+                    $template_data['height'] = (isset($data->id) && $data->id != null) ? $data->id : '';
+                    $template_data['width'] = (isset($data->id) && $data->id != null) ? $data->id : '';
+                    $url = asset('assets/canvas/' . $data->image);
+                    $template_data['template_url'] = (isset($url) && $url != null) ? $url : '';
+                    $template_data['textData'] = (isset($data->static_information) && $data->static_information != null) ? $data->static_information : '';
+                    $templates[] = $template_data;
+                }
+
+
+                return response()->json(data: ['status' => 1, 'message' => "Template List", 'data' => $templates]);
+            } else {
+                return response()->json(data: ['status' => 1, 'message' => "No Data Found"]);
+            }
+        } catch (Exception  $e) {
+            return response()->json(['status' => 0, 'message' => 'something went wrong']);
+        }
+    }
+
+    public function getSingleTemplateData(Request $request)
+    {
+        try {
+            // Static dimensions
+            $staticHeight = 490;
+            $staticWidth = 345;
+            // Validate the incoming request
+            $validatedData = $request->validate([
+                'template_id' => 'required|integer'
+            ]);
+            // Retrieve the text data by template ID
+            $textData = TextData::find($validatedData['template_id']);
+            if (!$textData) {
+                return response()->json(['message' => 'Data not found'], 404);
+            }
+            // Get the existing text elements from the static information
+            $resp = $textData->static_information['textElements'];
+            // Replace placeholders with the provided request data
+            foreach ($resp as $k => $value) {
+                foreach ($value as $key => $val) {
+                    switch ($val) {
+                        case 'event_name':
+                            if (!empty($request->event_name)) {
+
+                                $resp[$k][$key] = $request->event_name;
+                            } else {
+
+                                unset($resp[$k]); // Remove entry if event_name is empty
+                            }
+                            break;
+                        case 'host_name':
+                            if (!empty($request->host_name)) {
+                                $resp[$k][$key] = $request->host_name;
+                            } else {
+                                unset($resp[$k]); // Remove entry if host_name is empty
+                            }
+                            break;
+                        case 'Location':
+                            if (!empty($request->event_location_name)) {
+                                $resp[$k][$key] = $request->event_location_name;
+                            } else {
+                                unset($resp[$k]); // Remove entry if event_location_name is empty
+                            }
+                            break;
+                        case 'start_time':
+                            if (!empty($request->start_time)) {
+                                $resp[$k][$key] = $request->start_time;
+                            } else {
+                                unset($resp[$k]); // Remove entry if start_time is empty
+                            }
+                            break;
+                        case 'rsvp_end_time':
+                            if (!empty($request->rsvp_end_time)) {
+                                $resp[$k][$key] = $request->rsvp_end_time;
+                            } else {
+                                unset($resp[$k]); // Remove entry if rsvp_end_time is empty
+                            }
+                            break;
+                        case 'start_date':
+                            if (!empty($request->start_date)) {
+                                $resp[$k][$key] = $request->start_date;
+                            } else {
+                                unset($resp[$k]); // Remove entry if start_date is empty
+                            }
+                            break;
+                        case 'end_date':
+                            if (!empty($request->end_date)) {
+                                $resp[$k][$key] = $request->end_date;
+                            } else {
+                                unset($resp[$k]); // Remove entry if end_date is empty
+                            }
+                            break;
+                    }
+                }
+            }
+            $resp = array_values($resp);
+
+            // Set static width and height
+            $textData->width = $staticWidth;
+            $textData->height = $staticHeight;
+            // Save the updated data to the database
+            $textData->save();
+            // Retrieve image, height, and width from the updated model
+            $image = $textData->image;
+            $height = $textData->height;
+            $width = $textData->width;
+            // $template_url  = url("assets/images/{$image}");
+            $template_url = asset('assets/canvas/' . $image);
+            // Return the final response
+            return response()->json([
+                'textData' => $resp, // Updated text data
+                'image' => $image,
+                'height' => $height,
+                'width' => $width,
+                'template_url' => $template_url,
+                'is_contain_image' => true // Static flag indicating that the image exists
+            ]);
+        } catch (Exception  $e) {
+            return response()->json(['status' => 0, 'message' => 'something went wrong']);
+        }
     }
 }
