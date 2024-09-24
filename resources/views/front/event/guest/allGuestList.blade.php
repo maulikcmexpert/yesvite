@@ -86,11 +86,13 @@ if($selected_co_host == $user->id){
     <div class="d-flex flex-column user_choice_group" data-id="user-{{$user->id}}">
         @if(isset($user->email)&&$user->email!="")
         <div class="right-note d-flex mb-2">
+            @if (isset($user->app_user) && $user->app_user == '1')
             <span>Member</span>
             <span class="mx-3">
                 <img src="{{ asset('assets/event/image/small-logo.svg') }}"
-                    alt="logo">
+                alt="logo">
             </span>
+            @endif
             <input class="form-check-input user-{{$user->id}} user_choice" type="checkbox"
                 name="guest_list[]" data-id="user-{{$user->id}}" data-username="{{ $user->firstname }} {{ $user->lastname }}" data-profile_or_text ="{{$photo_text}}" data-profile="{{ $profile_photo }}" data-email="{{ $user->email }}"
                 value="{{ $user->id }}" data-prefer_by="email" data-initial="{{$initials}}" {{$email_checked}}>
