@@ -165,6 +165,20 @@ class EventController extends Controller
             }
         }
         
+        $greeting_card_id = "";
+        if(isset($request->thankyou_message) && $request->thankyou_message == '1'){
+            if (isset($request->thank_you_card_id) && $request->thank_you_card_id !='' ) {
+                $greeting_card_id =  implode(',', $request->thank_you_card_id);
+            }
+        }
+
+        $gift_registry_id = "";
+        if ($eventData['event_setting']['gift_registry'] == '1') {
+            if (!empty($request->gift_registry_data) ) {
+                $gift_registry_data = collect($request->gift_registry_data)->pluck('gr_id')->toArray();
+                $gift_registry_id =  implode(',', $gift_registry_data);
+        }
+        
         $event_creation = Event::create([
             'event_type_id' => (isset($request->event_type) && $request->event_type != "") ? (int)$request->event_type : "",
             'user_id' => $user_id,
@@ -189,8 +203,8 @@ class EventController extends Controller
             'is_draft_save' => (isset($request->isdraft) && $request->isdraft != "") ? $request->isdraft : "0",
             'latitude' => (isset($request->latitude) && $request->latitude != "") ? $request->latitude : "",
             'longitude' => (isset($request->longitude) && $request->longitude != "") ? $request->longitude : "",
-            'greeting_card_id' => (isset($request->greeting_card_id) && $request->greeting_card_id != "") ? $request->greeting_card_id : "0",
-            'gift_registry_id' => (isset($request->gift_registry_id) && $request->gift_registry_id != "") ? $request->gift_registry_id : "0",
+            'greeting_card_id' => (isset($greeting_card_id) && $greeting_card_id != "") ? $greeting_card_id : "0",
+            'gift_registry_id' => (isset($gift_registry_id) && $gift_registry_id != "") ? $gift_registry_id : "0",
             // 'rsvp_end_time_set' => "",
             // 'address_2' => "",
             'subscription_plan_name' => (isset($request->plan_selected) && $request->plan_selected != "") ? $request->plan_selected : "",
