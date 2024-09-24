@@ -239,7 +239,7 @@
                 <ul>
                     <!-- ---for active menu add active class--- -->
                     <li class="li_event_detail">
-                        <div class="menu-circle-wrp side-bar-list active">
+                        <div class="menu-circle-wrp side-bar-list active menu-success">
                             <span></span>
                             <h3>Event Details</h3>
                         </div>
