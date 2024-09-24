@@ -2662,7 +2662,7 @@ function savePage1Data(close = null) {
         // alert();
         let text = $('.current_step').text();
         let firstLetter = text.split(' ')[0]; 
-        eventData.step = firstLetter;
+        
         var date = new Date(event_date);
         var formattedDate = date.toLocaleDateString("en-US", {
             month: "long",
@@ -2686,6 +2686,7 @@ function savePage1Data(close = null) {
         if(final_step == 1){
             final_step = 2;
         }
+        eventData.step = final_step;
         console.log(eventData);
 
     }
@@ -2738,7 +2739,7 @@ function savePage3Data() {
             if(final_step == 3){
                 final_step = 4;
             }
-            eventData.step = '4';
+            eventData.step = final_step;
     //     },
     //     error: function (xhr, status, error) {
     //         console.log("AJAX error: " + error);
@@ -4220,9 +4221,9 @@ $(document).on("click", ".store_desgin_temp", function () {
                 success: function (response) {
                     let image = response.image;
                     eventData.desgin_selected = image;
-                    if(eventData.step == '1'){
-                        eventData.step = '2';
-                    }
+                    // if(eventData.step == '1'){
+                    //     eventData.step = '2';
+                    // }
                     console.log(eventData);
                     console.log("Image uploaded and saved successfully");
                     $("#exampleModal").modal("hide");
@@ -4241,6 +4242,7 @@ $(document).on("click", ".store_desgin_temp", function () {
                     if(final_step == 2){
                         final_step == 3;
                     }
+                    eventData.step = final_step;
                     var type="all"
                     get_user(type);
                     

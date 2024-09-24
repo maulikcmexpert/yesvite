@@ -187,7 +187,6 @@ class EventController extends Controller
             'city' => (isset($request->city) && $request->city != "") ? $request->city : "",
             'message_to_guests' => (isset($request->message_to_guests) && $request->message_to_guests != "") ? $request->message_to_guests : "",
             'is_draft_save' => (isset($request->isdraft) && $request->isdraft != "") ? $request->isdraft : "0",
-           
             'latitude' => (isset($request->latitude) && $request->latitude != "") ? $request->latitude : "",
             'longitude' => (isset($request->longitude) && $request->longitude != "") ? $request->longitude : "",
             'greeting_card_id' => (isset($request->greeting_card_id) && $request->greeting_card_id != "") ? $request->greeting_card_id : "0",
