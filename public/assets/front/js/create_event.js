@@ -4456,7 +4456,8 @@ $(document).on("click", ".add_new_group_member", function () {
                         </div>
                     </div>
                 </div>`);
-                    toggleSidebar("sidebar_groups");
+                $('.owl-carousel').trigger('refresh.owl.carousel');
+                toggleSidebar("sidebar_groups");
 
                 }
             },
