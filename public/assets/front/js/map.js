@@ -53,10 +53,9 @@ function initMap() {
 
         // Handle address components and update respective form fields
         if (place.address_components) {
-            // var addr_fields = ["street_number", "route","administrative_area_level_2", "locality", "administrative_area_level_1", "postal_code"];
-            // var addr_inputs = ["address1", "address1","city", "city", "state", "zipcode"];
-            var addr_fields = ["premise", "route", "administrative_area_level_2", "locality", "administrative_area_level_1", "postal_code"];
-            var addr_inputs = ["address1", "address1", "city", "city", "state", "zipcode"];
+            var addr_fields = ["street_number", "route","administrative_area_level_2", "locality", "administrative_area_level_1", "postal_code"];
+            var addr_inputs = ["address1", "address1","city", "city", "state", "zipcode"];
+           
             var typeField = [], typeValLong = [];
 
             // Loop through address components and match with input fields
@@ -64,24 +63,37 @@ function initMap() {
                 component.types.forEach(function(type) {
                     typeField.push(type);
                     typeValLong.push(component.long_name);
+        
+                    // Capture street_number and route separately
+                    if (type === 'street_number') {
+                        streetNumber = component.long_name;
+                    }
+                    if (type === 'route') {
+                        route = component.long_name;
+                    }
                 });
             });
+
+            var fullAddress = (streetNumber ? streetNumber + ' ' : '') + route;
+
             // console.log(typeField);
             // console.log(typeValLong);
             addr_fields.forEach(function(field, index) {
                 var fieldIndex = typeField.indexOf(field);
-                if (fieldIndex !== -1) {
-                    
-                    
+                if (field === 'street_number' || field === 'route') {
+                    if (index === 0 && fullAddress) { // First 'address1' field
+                        $("#" + addr_inputs[index]).val(fullAddress);
+                        $('#' + addr_inputs[index]).next().addClass('floatingfocus');
+                    }
+                } else if (fieldIndex !== -1) {
                     $("#" + addr_inputs[index]).val(typeValLong[fieldIndex]);
                     $('#' + addr_inputs[index]).next().addClass('floatingfocus');
-                    console.log(addr_inputs[index]);
+        
                     // If it's a select input, find matching option and set its value
                     var selectVal = $("#" + addr_inputs[index] + " option").filter(function () {
                         return $(this).html() == typeValLong[fieldIndex];
                     }).val();
                     if (selectVal) {
-                        
                         $("#" + addr_inputs[index]).val(selectVal);
                     }
                 } else {
