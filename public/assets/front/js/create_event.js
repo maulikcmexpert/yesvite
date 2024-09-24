@@ -2450,6 +2450,8 @@ function savePage1Data(close = null) {
     var id = $("#id").val();
     var description = $("#description").val();
     var message_to_guests = $("#message_to_guests").val();
+    var latitude = $("#latitude").val();
+    var longitude = $("#longitude").val();
 
     var events_schedule = '0';
     var rsvp_end_time_set = '0';
@@ -2639,6 +2641,8 @@ function savePage1Data(close = null) {
             eventData.city= city;
             eventData.message_to_guests=message_to_guests;
             eventData.events_schedule=events_schedule;
+            eventData.longitude=longitude;
+            eventData.latitude=latitude;
             // activity: activities,
         // };
         // alert();
