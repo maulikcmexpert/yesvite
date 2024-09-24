@@ -316,7 +316,7 @@ class EventController extends Controller
                     ]);
                 }
             }
-            if ($request->potluck == "1") {
+            if (isset($request->potluck) && $request->potluck == "1") {
                 $potluck = session('category');
                 if (isset($potluck) && !empty($potluck)) {
                     foreach ($potluck as $category) {
