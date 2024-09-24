@@ -204,8 +204,8 @@ Route::prefix('user/v2/')->middleware('checkUser')->group(function () {
     Route::get('check_subscription', [ApiControllerv2::class, 'checkSubscription']);
     Route::post('send_app_link', [ApiControllerv2::class, 'appInviteLink']);
 
-    Route::get('get_all_template_data', [ApiControllerv2::class, 'getAllTemplateData']);
-    Route::get('get_single_template_data', [ApiControllerv2::class, 'getSingleTemplateData']);
+    Route::post('get_all_template_data', [ApiControllerv2::class, 'getAllTemplateData']);
+    Route::post('get_single_template_data', [ApiControllerv2::class, 'getSingleTemplateData']);
 
     Route::get('notificationtest', [ApiControllerv2::class, 'notificationtest']);
 
