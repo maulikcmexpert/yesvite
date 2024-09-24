@@ -4923,8 +4923,19 @@ $(document).on('click','.add_co_host_off',function(){
     }else{
         selected_co_host_prefer_by = '';
     }
-    console.log(selected_co_host);
-    console.log(selected_co_host_prefer_by);
+    toggleSidebar();
+});
+$(document).on('click','.overlay',function(){
+    if(eventData.co_host !== undefined){
+        selected_co_host = eventData.co_host;
+    }else{
+        selected_co_host = '';
+    }
+    if(eventData.co_host_prefer_by != undefined){
+        selected_co_host_prefer_by = eventData.co_host_prefer_by;
+    }else{
+        selected_co_host_prefer_by = '';
+    }
     toggleSidebar();
 });
 
