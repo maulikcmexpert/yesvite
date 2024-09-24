@@ -28,9 +28,9 @@
                 <input type="text" class="form-control inputText" id="description" name="description[]"
                     required="" />
                 <label for="description" class="form-label input-field floating-label select-label">Description</label>
-                <label class="error-message" id="desc-error-{{ $dataid }}"></label>
-
+                {{-- <label class="error-message" id="desc-error-{{ $dataid }}"></label> --}}
             </div>
+            <label class="error-message" id="desc-error-{{ $dataid }}"></label>
         </div>
         <div class="col-6 mb-4">
             {{-- <div class="input-form">
