@@ -12900,7 +12900,7 @@ class ApiControllerv2 extends Controller
 
     public function getSingleTemplateData(Request $request)
     {
-        dd(1);
+        // dd(1);
         try {
             // Static dimensions
             $staticHeight = 490;
