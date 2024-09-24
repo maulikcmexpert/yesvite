@@ -741,7 +741,7 @@
             <div class="tab-pane fade" id="phone" role="tabpanel" aria-labelledby="phone-tab">
 
 
-                <div class="guest-contacts-wrp">
+                <div class="guest-contacts-wrp" style="display: none">
                     <div class="guest-contact">
                         <div class="guest-img">
                             <img src="./assets/image/user-img.svg" alt="guest-img">
