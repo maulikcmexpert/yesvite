@@ -257,11 +257,11 @@
                 $step_name = 'Desgin';
                 } elseif ($draft->step == '3') {
                 $percent = '75';
-                $progress = 'brand-progress progress-yellow';
+                $progress = 'brand-progress progress-green';
                 $step_name = 'Guest';
                 } elseif ($draft->step == '4') {
                 $percent = '99';
-                $progress = 'brand-progress progress-yellow';
+                $progress = 'brand-progress progress-blue';
                 $step_name = 'Setting';
                 }else{
                 $percent = '0';

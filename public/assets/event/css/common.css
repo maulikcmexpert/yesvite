@@ -472,6 +472,17 @@ ul.nav-tabs .nav-link:focus {
     background-color: #FCCD1E !important;
 }
 
+
+.brand-progress.progress-green progress[value]::-webkit-progress-value {
+    background-color: #23AA26 !important;
+}
+
+.brand-progress.progress-blue progress[value]::-webkit-progress-value {
+    background-color: #3BBEE8 !important;
+}
+
+
+
 .progress-bar__wrapper h4 {
     font-size: 16px;
     font-weight: 600;
