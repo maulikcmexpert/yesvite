@@ -279,7 +279,7 @@
                                         <div class="toggle-button-cover">
                                             <div class="button-cover">
                                                 <div class="button r" id="button-1">
-                                                    <input type="checkbox" id="guest_list_visible_to_guest" class="checkbox general_setting_checkbox" />
+                                                    <input type="checkbox" id="guest_list_visible_to_guest" class="checkbox general_setting_checkbox" checked/>
                                                     <div class="knobs"></div>
                                                     <div class="layer"></div>
                                                 </div>
@@ -319,7 +319,7 @@
                                         <div class="toggle-button-cover">
                                             <div class="button-cover">
                                                 <div class="button r" id="button-1">
-                                                    <input type="checkbox" id="eventwall" name="notification_setting[]" onchange="savePage4Data()" class="checkbox event_page_checkbox" />
+                                                    <input type="checkbox" id="eventwall" name="notification_setting[]" onchange="savePage4Data()" class="checkbox event_page_checkbox" checked/>
                                                     <div class="knobs"></div>
                                                     <div class="layer"></div>
                                                 </div>
