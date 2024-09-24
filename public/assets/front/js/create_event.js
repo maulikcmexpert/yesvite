@@ -3987,6 +3987,10 @@ $(document).on("change", 'input[name="guest_list[]"]', function () {
                     $('.guest-contacts-wrp').css('display', 'none');
                 }
             }
+        }else{
+            if ($("input[name='guest_list[]']:checked").length === 0) {
+                $('.guest-contacts-wrp').css('display', 'none');
+            }
         }
     } 
 });
