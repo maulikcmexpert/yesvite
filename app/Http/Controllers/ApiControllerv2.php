@@ -871,6 +871,8 @@ class ApiControllerv2 extends Controller
                             'visible' =>  $value->user->visible,
                             'comments' => $comments,
                         ];
+                        $eventDetail['event_plan_name'] = $value->event->subscription_plan_name;
+
                         $eventList[] = $eventDetail;
                     }
                 }
@@ -1084,6 +1086,8 @@ class ApiControllerv2 extends Controller
                             'visible' =>  $value->event->user->visible,
                             'comments' => $comments
                         ];
+                        $eventDetail['event_plan_name'] = $value->event->subscription_plan_name;
+
                         $eventList[] = $eventDetail;
                     }
                 }
@@ -1316,6 +1320,8 @@ class ApiControllerv2 extends Controller
                             'visible' =>  $value->user->visible,
                             'comments' => $comments,
                         ];
+                        $eventDetail['event_plan_name'] = $value->event->subscription_plan_name;
+
 
                         $eventList[] = $eventDetail;
                     }
@@ -1577,6 +1583,7 @@ class ApiControllerv2 extends Controller
                             'visible' =>  $value->user->visible,
                             'comments' => $comments,
                         ];
+                        $eventDetail['event_plan_name'] = $value->event->subscription_plan_name;
 
                         $eventList[] = $eventDetail;
                     }
@@ -1802,8 +1809,8 @@ class ApiControllerv2 extends Controller
                             'visible' =>  $value->event->user->visible,
                             'comments' => $comments
                         ];
-
                         $eventDetail['event_plan_name'] = $value->event->subscription_plan_name;
+
                         $eventList[] = $eventDetail;
                     }
                 }
