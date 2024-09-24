@@ -3994,6 +3994,7 @@ $(document).on("change", 'input[name="guest_list[]"]', function () {
                 $('.selected-host-h5').addClass('fontcolor'+firstinitial);
             }
             $('.remove_co_host').attr('data-id',selected_co_host);
+            $('#remove_co_host_id').val('user-'+selected_co_host);
             $('.selected-host-name').text(user_name);
             $('.guest-contacts-wrp').css('display','flex');
             var prefer_by_email = $(this).data('email');
@@ -4025,8 +4026,9 @@ $(document).on("click",".remove_co_host",function(){
             </svg>
             </span>
             <h5>Select your co-host</h5>`);
-    console.log(hostId);
-    $('.user-'+hostId).prop("checked", false);
+    var delete_co_host = $('#remove_co_host_id').val();
+    console.log(delete_co_host);
+    $('.'+delete_co_host).prop("checked", false);
 })
 
 $(document).on("click", ".save_event_co_host", function () {
