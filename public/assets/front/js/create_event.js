@@ -333,7 +333,8 @@ $(function() {
       maxDate: current_event_date, 
       minDate: moment().add(0, 'days'), 
       locale: {
-        format: 'YYYY-MM-DD'  // Set the desired format
+        // format: 'YYYY-MM-DD'  // Set the desired format
+        format: 'MM-DD-YYYY'  // Set the desired format
     },
       maxYear: parseInt(moment().format('YYYY'),10)
     }, function(start, end, label) {
@@ -341,11 +342,13 @@ $(function() {
     //   alert("You are " + years + " years old!");
     });
     $('#rsvp-by-date').on('apply.daterangepicker', function(ev, picker) {
-        $(this).val(picker.startDate.format('YYYY-MM-DD'));
+        // $(this).val(picker.startDate.format('YYYY-MM-DD'));
+        $(this).val(picker.startDate.format('MM-DD-YYYY'));
     });
     $('#rsvp-by-date').on('hide.daterangepicker', function(ev, picker) {
         if (picker.startDate.isValid()) {
-            $(this).val(picker.startDate.format('YYYY-MM-DD'));
+            // $(this).val(picker.startDate.format('YYYY-MM-DD'));
+            $(this).val(picker.startDate.format('MM-DD-YYYY'));
         }
     });
   });
