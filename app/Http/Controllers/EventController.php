@@ -168,7 +168,7 @@ class EventController extends Controller
         $greeting_card_id = "";
         if(isset($request->thankyou_message) && $request->thankyou_message == '1'){
             if (isset($request->thank_you_card_id) && $request->thank_you_card_id !='' ) {
-                $greeting_card_id =  implode(',', $request->thank_you_card_id);
+                $greeting_card_id =  $request->thank_you_card_id;
             }
         }
 
