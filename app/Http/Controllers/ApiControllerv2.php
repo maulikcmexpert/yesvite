@@ -596,6 +596,8 @@ class ApiControllerv2 extends Controller
                         'message_privacy' => $value->user->message_privacy
                     ];
 
+                    $eventDetail['event_plan_name'] = $value->subscription_plan_name;
+
                     $eventList[] = $eventDetail;
                 }
 
@@ -870,6 +872,7 @@ class ApiControllerv2 extends Controller
                             'comments' => $comments,
                         ];
 
+                        $eventDetail['event_plan_name'] = $value->subscription_plan_name;
                         $eventList[] = $eventDetail;
                     }
                 }
