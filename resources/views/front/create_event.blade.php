@@ -1065,17 +1065,16 @@
                         name="recipient_name">
                     <label for="email" class="floating-label">Recipients name <span>*</span></label>
                     <span class="sub-con recipient-name-con">0/30</span>
-                    <label for="email" id="recipient_name_error" class="common_error"></label>
-                    <input type="hidden" id="registry_item_id" />
-
                 </div>
+                <input type="hidden" id="registry_item_id" />
+                <label for="email" id="recipient_name_error" class="common_error"></label>
                 <div class="input-form">
                     <input class="form-control" type="text" id="registry_link" name="registry_link"
                         onkeyup="clearError(this)">
                     <label for="email" class="floating-label">Registry Link <span>*</span></label>
-                    <label for="email" id="registry_link_error"></label>
-
+                    
                 </div>
+                <label for="email" id="registry_link_error"></label>
             </form>
         </div>
     </div>
