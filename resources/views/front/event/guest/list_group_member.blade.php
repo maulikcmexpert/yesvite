@@ -57,11 +57,13 @@
     <div class="d-flex flex-column user_choice_group" data-id="user-{{ $data->id }}">
         @if(isset($data->email) && $data->email!="")
         <div class="right-note d-flex mb-2">
+            @if(isset($data->app_user) && $data->app_user == '1')
             <span>Member</span>
             <span class="mx-3">
                 <img src="{{ asset('assets/event/image/small-logo.svg') }}"
                     alt="logo">
             </span>
+            @endif
             <input class="form-check-input user_group_member user_choice" type="checkbox"
                 name="add_by_email[]" data-preferby="email" data-id="user-{{$data->id}}" data-email="{{ $data->email }}"
                 value="{{ $data->id }}" checked>
