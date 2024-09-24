@@ -56,6 +56,7 @@ use App\Models\{
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Jobs\SendInvitationMailJob as sendInvitation;
+use DateTime;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -148,6 +149,10 @@ class EventController extends Controller
             $endDate = $dateString;
         }
 
+        $startDateFormat = DateTime::createFromFormat('m-d-Y', $startDate)->format('Y-m-d');
+        $endDateFormat = DateTime::createFromFormat('m-d-Y', $endDate)->format('Y-m-d');
+
+        
         $event_creation = Event::create([
             'event_type_id' => (isset($request->event_type) && $request->event_type != "") ? (int)$request->event_type : "",
             'user_id' => $user_id,
