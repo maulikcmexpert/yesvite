@@ -374,12 +374,15 @@ $(function () {
             
             
             selectedDates.clear();
-            selectedDates.add(start.format("YYYY-MM-DD"));
-            selectedDates.add(end.format("YYYY-MM-DD"));
-            var eventDate = start.format("YYYY-MM-DD") + " To " + end.format("YYYY-MM-DD")
-            rsvp_by_date(start.format("YYYY-MM-DD"));
-            if(start.format("YYYY-MM-DD") == end.format("YYYY-MM-DD")){
-                eventDate = end.format("YYYY-MM-DD");
+            // selectedDates.add(start.format("YYYY-MM-DD"));
+            // selectedDates.add(end.format("YYYY-MM-DD"));
+            // var eventDate = start.format("YYYY-MM-DD") + " To " + end.format("YYYY-MM-DD")
+            selectedDates.add(start.format("MM-DD-YYYY"));
+            selectedDates.add(end.format("MM-DD-YYYY"));
+            var eventDate = start.format("MM-DD-YYYY") + " To " + end.format("MM-DD-YYYY")
+            rsvp_by_date(start.format("MM-DD-YYYY"));
+            if(start.format("MM-DD-YYYY") == end.format("MM-DD-YYYY")){
+                eventDate = end.format("MM-DD-YYYY");
             }
             $("#event-date").val(eventDate);
 
