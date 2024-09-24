@@ -4443,7 +4443,7 @@ $(document).on("click", ".add_new_group_member", function () {
                     $(".group_list").append(response.view);
                     toggleSidebar("sidebar_groups");
 
-                    $(".group_slider").append(`<div class="item ">
+                    $(".owl-stage").append(`<div class="item ">
                     <div class="group-card view_members" data-id="${response.data.group_id}">
                         <div>
                             <h4>${response.data.groupname}</h4>

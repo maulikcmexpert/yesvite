@@ -120,9 +120,9 @@
 
 
                             <div>
-                                <div class="owl-carousel owl-theme group-owl group_slider">
+                                <div class="owl-carousel owl-theme group-owl">
                                     @foreach ($groups as $group )
-                                    <div class="item ">
+                                    <div class="item">
                                         <div class="group-card view_members" data-id="{{$group->id}}">
                                             <div>
                                                 <h4>{{$group->name}}</h4>
@@ -367,10 +367,10 @@
 
 
                 <div>
-                    <div class="owl-carousel owl-theme group-owl group_slider">
+                    <div class="owl-carousel owl-theme group-owl">
                         @foreach ($groups as $group )
 
-                        <div class="item ">
+                        <div class="item group_slider">
                             <div class="group-card view_members" data-id="{{$group->id}}">
                                 <div>
                                     <h4>{{$group->name}}</h4>
@@ -577,7 +577,7 @@
 
 
     <div>
-        <div class="owl-carousel owl-theme group-owl group_slider">
+        <div class="owl-carousel owl-theme group-owl">
             @foreach ($groups as $group )
 
             <div class="item ">
