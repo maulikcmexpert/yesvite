@@ -707,6 +707,7 @@
                                         stroke-linejoin="round" />
                                 </svg>
                             </a>
+                            <input type="hidden" id="remove_co_host_id">
                         </div>
                         <h6 class="guest-name selected-host-name">Silvia Alegra</h6>
                     </div>
