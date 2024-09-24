@@ -2469,7 +2469,7 @@ function savePage1Data(close = null) {
                 focus_timeOut('end-time');
                 return;
         }else{
-            $("#end-time-error").css("display", "none");
+            $("#end-time-error").css("display", "none").text("End Time: Please select end time");
         }
     }
 
@@ -2870,6 +2870,7 @@ function clearError(input = null) {
     $("#event-date-error").text("");
     $("#event-rsvpby-error").text("");
     $("#event-start_time-error").text("");
+    $("#end-time-error").text("");
     $("#event-address1-error").text("");
     $("#event-city-error").text("");
     $("#event-state-error").text("");
