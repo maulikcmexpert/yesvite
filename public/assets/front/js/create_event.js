@@ -4447,7 +4447,7 @@ $(document).on("click", ".add_new_group_member", function () {
                     <div class="group-card view_members" data-id="${response.data.group_id}">
                         <div>
                             <h4>${response.data.groupname}</h4>
-                            <p>${response.data.count} Guests</p>
+                            <p>${response.data.member_count} Guests</p>
                         </div>
                         <span class="ms-auto">
                             <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
