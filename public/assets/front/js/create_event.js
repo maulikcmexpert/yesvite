@@ -5,6 +5,7 @@ var items = 0;
 var activities = {};
 var selected_co_host = '';
 var selected_co_host_prefer_by = '';
+var final_step = 1;
 
 $(document).ready(function () {
     if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
@@ -2396,9 +2397,8 @@ $(document).on("click", "#close_createEvent", function () {
             $(".step_2").hide();
         }
 
-        if(parseInt(eventData.step) < parseInt(firstLetter)){
-            eventData.step = firstLetter;
-        }
+      
+        eventData.step = final_step;
         eventData.isdraft = "1";
         savePage4Data();
        
@@ -2673,6 +2673,9 @@ function savePage1Data(close = null) {
         $(".step_2").show();
         $('.event_create_percent').text('50%');
         $('.current_step').text('2 of 4');
+        if(final_step == 1){
+            final_step = 2;
+        }
         console.log(eventData);
 
     }
@@ -2722,7 +2725,10 @@ function savePage3Data() {
             $('.event_create_percent').text('99%');
             $('.current_step').text('4 of 4');
             $(".step_4").show();
-            eventData.step = '3';
+            if(final_step == 3){
+                final_step = 4;
+            }
+            eventData.step = '4';
     //     },
     //     error: function (xhr, status, error) {
     //         console.log("AJAX error: " + error);
@@ -4088,7 +4094,7 @@ $(document).on("click", ".final_checkout", function () {
         $(".step_3").css("display", "none");
         $(".step_4").css("display", "none");
         $(".step_final_checkout").show();
-  
+        final_step = 4;
         eventData.step = '4';
 
   
@@ -4216,6 +4222,9 @@ $(document).on("click", ".store_desgin_temp", function () {
                     
                     $(".step_3").show();
                     console.log(eventData);
+                    if(final_step == 2){
+                        final_step == 3;
+                    }
                     var type="all"
                     get_user(type);
                     
