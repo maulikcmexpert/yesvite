@@ -2462,6 +2462,15 @@ function savePage1Data(close = null) {
     if(end_time){
         rsvp_end_time = $('#end-time').val();
         rsvp_end_time_set = '1';
+        if(rsvp_end_time ==''){
+            $('#end-time-error').css("display", "block")
+                .css("color", "red")
+                .text("End Time: Please select end time");
+                focus_timeOut('event-time');
+                return;
+        }else{
+            $("#end-time-error").css("display", "none");
+        }
     }
 
 
