@@ -2466,7 +2466,7 @@ function savePage1Data(close = null) {
             $('#end-time-error').css("display", "block")
                 .css("color", "red")
                 .text("End Time: Please select end time");
-                focus_timeOut('event-time');
+                focus_timeOut('end-time');
                 return;
         }else{
             $("#end-time-error").css("display", "none");
