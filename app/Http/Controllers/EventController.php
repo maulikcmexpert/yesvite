@@ -173,7 +173,7 @@ class EventController extends Controller
         }
 
         $gift_registry_id = "";
-        if ($eventData['event_setting']['gift_registry'] == '1') {
+        if (isset($request->thankyou_message) && $request->thankyou_message == '1') {
             if (!empty($request->gift_registry_data) ) {
                 $gift_registry_data = collect($request->gift_registry_data)->pluck('gr_id')->toArray();
                 $gift_registry_id =  implode(',', $gift_registry_data);
