@@ -48,41 +48,41 @@
                                     <li class="breadcrumb-item"><a href="#">Birthday</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">Kids Birthday</li>
                                 </ol>
-                                <h6>58 Designs</h6>
+                                <h6>11 Designs</h6>
                             </nav>
                             <div class="choose-design-cards">
                                 <div class="design-card" data-bs-toggle="modal"
                                     type="button" data-url ="{{route('template_post_temp_1')}}" data-template="template_1">
                                     <img src="{{ asset('assets/event/image/Templates/post_temp_1.png') }}" alt="">
                                 </div>
-                                <div class="design-card"  data-url ="{{route('template_post_temp_2')}}" data-template="template_2"> 
+                                <div class="design-card" type="button"  data-url ="{{route('template_post_temp_2')}}" data-template="template_2"> 
                                     <img src="{{ asset('assets/event/image/Templates/post_temp_2.png') }}" alt="">
                                 </div>
-                                <div class="design-card"  data-url ="{{route('template_post_temp_3')}}" data-template="template_3"> 
+                                <div class="design-card" type="button" data-url ="{{route('template_post_temp_3')}}" data-template="template_3"> 
                                     <img src="{{ asset('assets/event/image/Templates/post_temp_3.png') }}" alt="">
                                 </div>
-                                <div class="design-card"  data-url ="{{route('template_post_temp_4')}}" data-template="template_4"> 
+                                <div class="design-card" type="button" data-url ="{{route('template_post_temp_4')}}" data-template="template_4"> 
                                     <img src="{{ asset('assets/event/image/Templates/post_temp_4.png') }}" alt="">
                                 </div>
-                                <div class="design-card"  data-url ="{{route('template_post_temp_5')}}" data-template="template_5"> 
+                                <div class="design-card" type="button" data-url ="{{route('template_post_temp_5')}}" data-template="template_5"> 
                                     <img src="{{ asset('assets/event/image/Templates/post_temp_5.png') }}" alt="">
                                 </div>
-                                <div class="design-card"  data-url ="{{route('template_post_temp_6')}}" data-template="template_6"> 
+                                <div class="design-card" type="button" data-url ="{{route('template_post_temp_6')}}" data-template="template_6"> 
                                     <img src="{{ asset('assets/event/image/Templates/post_temp_6.png') }}" alt="">
                                 </div>
-                                <div class="design-card"  data-url ="{{route('template_post_temp_7')}}" data-template="template_7"> 
+                                <div class="design-card" type="button" data-url ="{{route('template_post_temp_7')}}" data-template="template_7"> 
                                     <img src="{{ asset('assets/event/image/Templates/post_temp_7.png') }}" alt="">
                                 </div>
-                                <div class="design-card"  data-url ="{{route('template_post_temp_8')}}" data-template="template_8"> 
+                                <div class="design-card" type="button" data-url ="{{route('template_post_temp_8')}}" data-template="template_8"> 
                                     <img src="{{ asset('assets/event/image/Templates/post_temp_8.png') }}" alt="">
                                 </div>
-                                <div class="design-card"  data-url ="{{route('template_post_temp_9')}}" data-template="template_9"> 
+                                <div class="design-card" type="button" data-url ="{{route('template_post_temp_9')}}" data-template="template_9"> 
                                     <img src="{{ asset('assets/event/image/Templates/post_temp_9.png') }}" alt="">
                                 </div>
-                                <div class="design-card"  data-url ="{{route('template_post_temp_10')}}" data-template="template_10">
+                                <div class="design-card" type="button" data-url ="{{route('template_post_temp_10')}}" data-template="template_10">
                                     <img src="{{ asset('assets/event/image/Templates/post_temp_10.png') }}" alt="">
                                 </div>
-                                <div class="design-card"  data-url ="{{route('template_post_temp_11')}}" data-template="template_11">
+                                <div class="design-card" type="button" data-url ="{{route('template_post_temp_11')}}" data-template="template_11">
                                     <img src="{{ asset('assets/event/image/Templates/post_temp_11.png') }}" alt="">
                                 </div>
                               
