@@ -4931,6 +4931,11 @@ function get_co_host_list(search_name=null){
     }
     console.log(selected_co_host);
     console.log(selected_co_host_prefer_by);
+    if(selected_co_host == ''){
+       $('.guest-contacts-wrp').css('display','none');
+    }else{
+        $('.guest-contacts-wrp').css('display','flex');
+    }
     $.ajax({
         url: base_url + "event/get_co_host_list",
         type: "POST",
