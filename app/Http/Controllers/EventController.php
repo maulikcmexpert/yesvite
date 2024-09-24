@@ -316,6 +316,7 @@ class EventController extends Controller
                     ]);
                 }
             }
+
             if (isset($request->potluck) && $request->potluck == "1") {
                 $potluck = session('category');
                 if (isset($potluck) && !empty($potluck)) {
@@ -358,18 +359,19 @@ class EventController extends Controller
                 // dd($activities);
                 $addStartschedule->event_id = $eventId;
                 $addStartschedule->start_time = isset($request->start_time) ? $request->start_time : '';
-                $addStartschedule->event_date = isset($startDate) ? $startDate : '';
+                $addStartschedule->event_date = isset($startDate) ? $startDateFormat : '';
                 $addStartschedule->type = '1';
                 $addStartschedule->save();
 
                 foreach ($activities as $date => $activityList) {
                     foreach ($activityList as $activity) {
+                        $schedule_date = DateTime::createFromFormat('m-d-Y', $date)->format('Y-m-d');
                         $activity_data[] = [
                             'event_id' => $eventId,
                             'activity_title' => $activity['activity'],
                             'start_time' => $activity['start-time'],
                             'end_time' => $activity['end-time'],
-                            'event_date' => $date,
+                            'event_date' => $schedule_date,
                             'type' => '2'
                         ];
                     }
@@ -380,7 +382,7 @@ class EventController extends Controller
                 $addEndschedule =  new EventSchedule();
                 $addEndschedule->event_id = $eventId;
                 $addEndschedule->end_time = isset($request->end_time)  ? $request->end_time : '';
-                $addEndschedule->event_date = isset($endDate) ? $endDate : '';
+                $addEndschedule->event_date = isset($endDate) ? $endDateFormat : '';
                 $addEndschedule->type = '3';
                 $addEndschedule->save();
             }
