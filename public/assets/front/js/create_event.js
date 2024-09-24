@@ -2434,10 +2434,10 @@ function savePage1Data(close = null) {
     var event_date = $("#event-date").val();
     var start_time = $("#start-time").val();
     var start_time_zone =  $('#start-time-zone').val();
+    var end_time_zone =  $('#end-time-zone').val();
     var schedule = $('#schedule').is(":checked");
     var end_time = $("#end_time").is(":checked");
     var rsvp_by_date_set = $('#rsvp_by_date').is(':checked');
-    var end_time_zone =  $('#end-time-zone').val();
     var address_2 = $("#address2").val();
     var address1 = $("#address1").val();   
     var city = $("#city").val();
@@ -2600,8 +2600,10 @@ function savePage1Data(close = null) {
         zipcode != ""
     ) {
         if(rsvp_end_time_set == '1' && start_time_zone != end_time_zone){
-            $('#start-time-zone').focus();
-            toastr.error('start time zone & end time zone are different');
+            $('#end-time-zone').focus();
+            $('#end-time-zone-error').text('End Time zone : Please select same start time zone and end time zone')
+                .css("display", "block")
+                .css("color", "red");
             return;
         }
         // eventData = {
@@ -4962,4 +4964,27 @@ $(document).on('click','.add_gift_registry',function(){
     });
     toggleSidebar('sidebar_gift_registry');
 })
+
+function getStartEndTimeZone(){
+    var end_time = $("#end_time").is(":checked");
+    if(end_time){
+        var rsvp_end_time = $('#end-time').val();
+        var rsvp_end_time_set = '1';
+        var start_time_zone =  $('#start-time-zone').val();
+        var end_time_zone =  $('#end-time-zone').val();
+
+        if(rsvp_end_time_set == '1' && start_time_zone != end_time_zone){
+            $('#end-time-zone').focus();
+            $('#end-time-zone-error').text('End Time zone : Please select same start time zone and end time zone')
+                .css("display", "block")
+                .css("color", "red");
+            return;
+        }else{
+            $('#end-time-zone-error').text('')
+                .css("display", "none")
+                .css("color", "red");
+        }
+    }
+
+}
 

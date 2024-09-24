@@ -73,7 +73,7 @@
                     </div>
                     <div class="col-6 mb-4">
                         <div class="input-form">
-                            <select class="form-select" name="start_time_zone" id="start-time-zone" >
+                            <select class="form-select" name="start_time_zone" id="start-time-zone" onchange="getStartEndTimeZone()">
                                 <option value="PST" selected>PST</option>
                                 <option value="MST">MST</option>
                                 <option value="CST">CST</option>
@@ -143,7 +143,7 @@
                     <div class="col-6 mb-4 end_time" style="display: none">
                        
                         <div class="input-form">
-                            <select class="form-select" name="end-time-zone" id="end-time-zone">
+                            <select class="form-select" name="end-time-zone" onchange="getStartEndTimeZone()" id="end-time-zone">
                                 <option value="PST" selected>PST</option>
                                 <option value="MST">MST</option>
                                 <option value="CST">CST</option>
@@ -152,6 +152,7 @@
                             <label for="select-label"
                                 class="form-label input-field floating-label select-label floatingfocus">Time
                                 Zone *</label>
+                            <label for="end-time-zone" id="end-time-zone-error" class="error"></label>
                         </div>
                     </div>
                     <div class="col-12 mb-4">
