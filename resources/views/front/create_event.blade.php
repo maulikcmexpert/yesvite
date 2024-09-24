@@ -131,7 +131,7 @@
                     <span id="close_createEvent"><i class="fa-solid fa-xmark"></i></span>
                 </div>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li>
+                    <li class="li_event_detail">
                         <a class="dropdown-item" href="#">
                             <span>
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
@@ -148,8 +148,8 @@
                             Event Details
                         </a>
                     </li>
-                    <li>
-                        <div class="dropdown-item active">
+                    <li class="li_design">
+                        <div class="dropdown-item">
                             <span>
                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -181,7 +181,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li>
+                    <li class="li_guest">
                         <a class="dropdown-item" href="#">
                             <span>
                                 <svg width="18" height="20" viewBox="0 0 18 20" fill="none"
@@ -207,7 +207,7 @@
                             Guests
                         </a>
                     </li>
-                    <li>
+                    <li class="li_setting">
                         <a class="dropdown-item" href="#">
                             <span>
                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
