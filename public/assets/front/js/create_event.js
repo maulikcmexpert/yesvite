@@ -2481,7 +2481,7 @@ function savePage1Data(close = null) {
             $("#event-rsvpby-error")
                 .css("display", "block")
                 .css("color", "red")
-                .text("Please select an RSVPby date");
+                .text("RSVP by Date : Please select RSVP date");
             return;
         } else {
             $("#event-rsvpby-error").css("display", "none");
