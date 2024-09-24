@@ -177,6 +177,7 @@ class EventController extends Controller
             if (!empty($request->gift_registry_data) ) {
                 $gift_registry_data = collect($request->gift_registry_data)->pluck('gr_id')->toArray();
                 $gift_registry_id =  implode(',', $gift_registry_data);
+            }
         }
         
         $event_creation = Event::create([
