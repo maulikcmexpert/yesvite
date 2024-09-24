@@ -2586,6 +2586,7 @@ function savePage1Data(close = null) {
     } else {
         $("#event-zipcode-error").css("display", "none");
     }
+    
 
     if (
         event_type != "" &&
@@ -2598,7 +2599,10 @@ function savePage1Data(close = null) {
         state != "" &&
         zipcode != ""
     ) {
-
+        if(start_time_zone != end_time_zone){
+            toastr.error('start time zone & end time zone are different');
+            return;
+        }
         // eventData = {
             eventData.event_type= event_type;
             eventData.event_name= event_name;
