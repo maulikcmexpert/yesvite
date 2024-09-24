@@ -2083,8 +2083,8 @@
                         <input class="form-control" type="text" id="new_group_name"
                             oninput="clearError(this)" name="new_group_name">
                         <label for="email" class="floating-label">Group Name <span>*</span></label>
-                        <label for="new_group_name" id="group_name_error"></label>
                     </div>
+                    <label for="new_group_name" id="group_name_error"></label>
                 </form>
             </div>
         </div>

@@ -4441,8 +4441,9 @@ $(document).on("click", ".add_new_group_member", function () {
             success: function (response) {
                 if (response.status == "1") {
                     $(".group_list").append(response.view);
+                    console.log('slider');
                     $(".owl-stage").append(`<div class="owl-item cloned">
-                    <div class="item ">
+                    <div class="item" style="width: 1100px; margin-right: 10px;">
                         <div class="group-card view_members" data-id="${response.data.group_id}">
                             <div>
                                 <h4>${response.data.groupname}</h4>
