@@ -2344,6 +2344,8 @@ $(document).on("click", "#close_createEvent", function () {
             var event_id = $("#event_id").val();
             var description = $("#description").val();
             var message_to_guests = $("#message_to_guests").val();
+            var latitude = $("#latitude").val();
+            var longitude = $("#longitude").val();
             
             var desgin_selected= eventData.desgin_selected;
 
@@ -2386,7 +2388,9 @@ $(document).on("click", "#close_createEvent", function () {
                 eventData.zipcode= zipcode;
                 eventData.message_to_guests=message_to_guests;
                 eventData.event_id=event_id;
-                eventData.desgin_selected=desgin_selected
+                eventData.desgin_selected=desgin_selected;
+                eventData.latitude=latitude;
+                eventData.longitude=longitude;
             // };
             eventData.step = firstLetter;
             $(".step_2").hide();
