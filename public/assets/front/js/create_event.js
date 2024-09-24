@@ -4025,6 +4025,7 @@ $(document).on("click",".remove_co_host",function(){
             </svg>
             </span>
             <h5>Select your co-host</h5>`);
+    console.log(hostId);
     $('.user-'+hostId).prop("checked", false);
 })
 
