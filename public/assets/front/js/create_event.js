@@ -4136,6 +4136,7 @@ $(document).on("click", ".final_checkout", function () {
 
 
 $(document).on("click", "#final_create_event", function (e) {
+    eventData.is_update_event = '0';
     var data = eventData;
     console.log(data);
     $("#loader").show();
