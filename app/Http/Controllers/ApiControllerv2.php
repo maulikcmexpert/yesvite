@@ -759,9 +759,6 @@ class ApiControllerv2 extends Controller
                         $eventDetail['kids'] = 0;
                         $eventDetail['adults'] = 0;
 
-                        $eventDetail['event_plan_name'] = $value->subscription_plan_name;
-
-
                         $checkRsvpDone = EventInvitedUser::where(['event_id' => $value->id, 'user_id' => $user->id])->first();
                         if ($checkRsvpDone != null) {
                             $eventDetail['kids'] = $checkRsvpDone->kids;
@@ -1805,6 +1802,7 @@ class ApiControllerv2 extends Controller
                             'visible' =>  $value->event->user->visible,
                             'comments' => $comments
                         ];
+                        $eventDetail['event_plan_name'] = $value->subscription_plan_name;
                         $eventList[] = $eventDetail;
                     }
                 }
