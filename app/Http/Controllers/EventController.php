@@ -364,8 +364,8 @@ class EventController extends Controller
                 $addStartschedule->save();
 
                 foreach ($activities as $date => $activityList) {
+                    $schedule_date = DateTime::createFromFormat('m-d-Y', $date)->format('Y-m-d');
                     foreach ($activityList as $activity) {
-                        $schedule_date = DateTime::createFromFormat('m-d-Y', $date)->format('Y-m-d');
                         $activity_data[] = [
                             'event_id' => $eventId,
                             'activity_title' => $activity['activity'],
