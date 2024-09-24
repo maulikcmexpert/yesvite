@@ -600,7 +600,7 @@
 
 
     <div class="position-relative">
-        <input type="search" placeholder="Search name" class="form-control" id="group_search_ajax" name="group_search_ajax">
+        <input type="search" placeholder="Search group names" class="form-control" id="group_search_ajax" name="group_search_ajax">
         <span>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                 xmlns="http://www.w3.org/2000/svg">

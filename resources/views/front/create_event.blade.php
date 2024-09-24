@@ -1897,7 +1897,7 @@
             </button>
         </div>
         <div class="position-relative">
-            <input type="search" placeholder="Search name" class="form-control" id="group_toggle_search">
+            <input type="search" placeholder="Search group names" class="form-control" id="group_toggle_search">
             <span>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
