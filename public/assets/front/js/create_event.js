@@ -3667,7 +3667,9 @@ function validateURL($input) {
     // const urlPattern =
     //     /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
     // const urlPattern = /^(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+\.\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?$/;
-    const urlPattern = /^(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+\.\S{2,})(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?$/;
+    // const urlPattern = /^(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+\.\S{2,})(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?$/;
+    const urlPattern = /^(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+\.(com|in|net|org))(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?$/;
+
 
     const urlValue = $input.val();
     errorMessage.text("");
@@ -3696,7 +3698,7 @@ $(document).on("click", ".add_gift_item_btn", function () {
     var registry_edit_item = $("#registry_item_id").val();
     // var regex = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
     // var regex = /^(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+\.\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?$/;
-    var regex = /^(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+\.\S{2,})(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?$/;
+    var regex = /^(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+\.(com|in|net|org))(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?$/;
 
     if (recipient_name == "") {
         $("#recipient_name_error")
