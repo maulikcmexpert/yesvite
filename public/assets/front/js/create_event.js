@@ -4222,11 +4222,12 @@ $(document).on("click", ".store_desgin_temp", function () {
                     // if(eventData.step == '1'){
                     //     eventData.step = '2';
                     // }
+                    console.log(final_step);
                     if(final_step == 2){
                         final_step == 3;
                     }
-                    eventData.step = final_step;
                     console.log(eventData);
+                    eventData.step = final_step;
                     console.log("Image uploaded and saved successfully");
                     $("#exampleModal").modal("hide");
                     $("#loader").css("display", "none");
