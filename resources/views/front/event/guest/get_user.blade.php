@@ -84,11 +84,13 @@ $phone_checked = 'checked';
     <div class="d-flex flex-column user_choice_group gap-2" data-id="user-{{$user->id}}">
         @if(isset($user->email)&&$user->email!="")
         <div class="right-note d-flex">
+            @if(isset($user->app_user) && $user->app_user == '1')
             <span>Member</span>
             <span class="mx-3">
                 <img src="{{ asset('assets/event/image/small-logo.svg') }}"
                     alt="logo">
             </span>
+            @endif
             <input class="form-check-input user-{{$user->id}} user_choice" type="checkbox"
                 name="email_invite[]" data-id="user-{{$user->id}}" data-email="{{ $user->email }}"
                 value="{{ $user->id }}" {{$email_checked}} {{$disabled}}>
@@ -105,11 +107,13 @@ $phone_checked = 'checked';
     <div class="d-flex flex-column user_choice_group" data-id="user-{{ $user->id }}">
         @if (isset($user->email) && $user->email != '')
         <div class="right-note d-flex mb-2">
+            @if(isset($user->app_user) && $user->app_user == '1')
             <span>Member</span>
             <span class="mx-3">
                 <img src="{{ asset('assets/event/image/small-logo.svg') }}"
                     alt="logo">
             </span>
+            @endif
             <input class="form-check-input user_group_member user_choice"
                 type="checkbox" name="add_by_email[]" data-preferby="email"
                 data-id="user-{{ $user->id }}" data-email="{{ $user->email }}"

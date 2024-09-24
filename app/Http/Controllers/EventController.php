@@ -984,7 +984,8 @@ class EventController extends Controller
                 'lastname' => (!empty($user->lastname) || $user->lastname != null) ? $user->lastname : "",
                 'email' => (!empty($user->email) || $user->email != null) ? $user->email : "",
                 'country_code' => (!empty($user->country_code) || $user->country_code != null) ? strval($user->country_code) : "",
-                'phone_number' => (!empty($user->phone_number) || $user->phone_number != null) ? $user->phone_number : ""
+                'phone_number' => (!empty($user->phone_number) || $user->phone_number != null) ? $user->phone_number : "",
+                'app_user' => (!empty($user->app_user) || $user->app_user != null) ? $user->app_user : "",
             ];
             // $yesviteUserDetail['app_user']  = $user->app_user;
             // $yesviteUserDetail['visible'] =  $user->visible;
