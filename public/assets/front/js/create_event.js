@@ -2778,10 +2778,12 @@ function savePage4Data() {
     console.log(eventData.thank_you_card_id);
 
     if ($("#add_co_host").is(":checked")) {
+        $('.guest-contacts-wrp').css('display', 'none');
         eventData.add_co_host = "1";
         $(".add_co_host").show();
 
     } else {
+        $('.guest-contacts-wrp').css('display', 'none');
         eventData.co_host = '';
         eventData.co_host_prefer_by = '';
         selected_co_host = '';
