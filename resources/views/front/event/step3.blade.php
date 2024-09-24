@@ -120,9 +120,9 @@
 
 
                             <div>
-                                <div class="owl-carousel owl-theme group-owl">
+                                <div class="owl-carousel owl-theme group-owl group_slider">
                                     @foreach ($groups as $group )
-                                    <div class="item">
+                                    <div class="item ">
                                         <div class="group-card view_members" data-id="{{$group->id}}">
                                             <div>
                                                 <h4>{{$group->name}}</h4>
@@ -367,11 +367,11 @@
 
 
                 <div>
-                    <div class="owl-carousel owl-theme group-owl">
+                    <div class="owl-carousel owl-theme group-owl group_slider">
                         @foreach ($groups as $group )
 
-                        <div class="item">
-                            <div class="group-card">
+                        <div class="item ">
+                            <div class="group-card view_members" data-id="{{$group->id}}">
                                 <div>
                                     <h4>{{$group->name}}</h4>
                                     <p>{{$group->group_members_count}} Guests</p>
@@ -577,23 +577,18 @@
 
 
     <div>
-        <div class="owl-carousel owl-theme group-owl">
+        <div class="owl-carousel owl-theme group-owl group_slider">
             @foreach ($groups as $group )
 
-            <div class="item">
-                <div class="group-card">
+            <div class="item ">
+                <div class="group-card view_members" data-id="{{$group->id}}">
                     <div>
                         <h4>{{$group->name}}</h4>
                         <p>{{$group->group_members_count}} Guests</p>
                     </div>
                     <span class="ms-auto">
-                        <svg width="16" height="17" viewBox="0 0 16 17"
-                            fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M5.93994 13.7797L10.2866 9.43306C10.7999 8.91973 10.7999 8.07973 10.2866 7.56639L5.93994 3.21973"
-                                stroke="#E2E8F0" stroke-width="1.5"
-                                stroke-miterlimit="10" stroke-linecap="round"
-                                stroke-linejoin="round" />
+                        <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5.93994 13.7797L10.2866 9.43306C10.7999 8.91973 10.7999 8.07973 10.2866 7.56639L5.93994 3.21973" stroke="#E2E8F0" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                     </span>
                 </div>

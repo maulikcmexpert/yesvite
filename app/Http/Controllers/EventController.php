@@ -912,7 +912,7 @@ class EventController extends Controller
 
             $data = ['groupname' => $groupname, 'group_id' => $createGroup->id, "member_count" => $count];
 
-            return response()->json(['view' => view('front.event.guest.add_group', compact('data'))->render(), "status" => "1"]);
+            return response()->json(['view' => view('front.event.guest.add_group', compact('data'))->render(), "status" => "1","data" => $data]);
         }
     }
 
