@@ -2559,7 +2559,7 @@ function savePage1Data(close = null) {
         $("#event-address1-error")
             .css("display", "block")
             .css("color", "red")
-            .text("Please enter address");
+            .text("Please enter address1");
             focus_timeOut('address1');
         return;
     } else {
