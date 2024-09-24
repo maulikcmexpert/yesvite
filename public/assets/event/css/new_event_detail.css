@@ -865,6 +865,22 @@
     font-size: 12px;
 }
 
+.menu-success
+
+.new-event-sidebar-menu ul li .menu-success span{
+    background-color: #23AA26;
+}
+
+.new-event-sidebar-menu ul li .menu-success span::after{
+    content: "\f00c";
+    font-family: "FONTAWESOME";
+    position: absolute;
+    font-size: 15px;
+    color: #23AA26;
+    top: 0;
+    left: 0;
+}
+
 /* ======Responsiveness===== */
 
 
