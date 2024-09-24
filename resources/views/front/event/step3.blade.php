@@ -123,7 +123,7 @@
                                 <div class="owl-carousel owl-theme group-owl">
                                     @foreach ($groups as $group )
                                     <div class="item">
-                                        <div class="group-card">
+                                        <div class="group-card view_members" data-id="{{$group->id}}">
                                             <div>
                                                 <h4>{{$group->name}}</h4>
                                                 <p>{{$group->group_members_count}} Guests</p>
