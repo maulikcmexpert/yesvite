@@ -4224,7 +4224,7 @@ $(document).on("click", ".store_desgin_temp", function () {
                     // }
                     console.log(final_step);
                     if(final_step == 2){
-                        final_step == 3;
+                        final_step = 3;
                     }
                     console.log(eventData);
                     eventData.step = final_step;
