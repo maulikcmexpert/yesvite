@@ -4539,7 +4539,12 @@ $(document).on("click", "#delete_group", function () {
         success: function (response) {
             if (response.status == "1") {
                 $(".added_group" + group_id).remove();
+                $('.group-card.view_members[data-id="'+group_id+'"]').remove();
+                $('.owl-carousel').trigger('refresh.owl.carousel');
+
             }
+
+
         },
         error: function (xhr, status, error) {
             console.log("AJAX error: " + error);
