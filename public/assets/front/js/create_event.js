@@ -2774,7 +2774,6 @@ function savePage4Data() {
             </span>
             <h5>Select thank you card</h5>`);
         $(".thankyou_card").show();
-        eventData.thank_you_card_id = null;
     } else {
         $('.add_new_thankyou_card').html(`<span class="me-3">
                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">

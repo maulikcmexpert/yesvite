@@ -285,7 +285,7 @@ class EventController extends Controller
                     EventSetting::create([
                         'event_id' => $eventId,
                         'allow_for_1_more' => (isset($request->allow_for_1_more)) ? $request->allow_for_1_more : "0",
-                        'allow_limit' => (isset($request->allow_limit)) ? $request->allow_limit : 0,
+                        'allow_limit' => (isset($request->allow_limit)) ? (int)$request->allow_limit : 0,
                         'adult_only_party' => (isset($request->only_adults)) ? $request->only_adults : "0",
                         'thank_you_cards' => (isset($request->thankyou_message)) ? $request->thankyou_message : "0",
                         'add_co_host' => (isset($request->add_co_host)) ? $request->add_co_host : "0",
