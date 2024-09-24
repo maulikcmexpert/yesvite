@@ -4222,6 +4222,10 @@ $(document).on("click", ".store_desgin_temp", function () {
                     // if(eventData.step == '1'){
                     //     eventData.step = '2';
                     // }
+                    if(final_step == 2){
+                        final_step == 3;
+                    }
+                    eventData.step = final_step;
                     console.log(eventData);
                     console.log("Image uploaded and saved successfully");
                     $("#exampleModal").modal("hide");
@@ -4237,10 +4241,7 @@ $(document).on("click", ".store_desgin_temp", function () {
                     
                     $(".step_3").show();
                     console.log(eventData);
-                    if(final_step == 2){
-                        final_step == 3;
-                    }
-                    eventData.step = final_step;
+                    
                     var type="all"
                     get_user(type);
                     
