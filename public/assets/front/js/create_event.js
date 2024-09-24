@@ -4486,8 +4486,8 @@ $.ajax({
     success: function (response) {
         // console.log(response);
         response.data.forEach(function(item, index) {
-            console.log(item.is_duplicate);
             if (item.is_duplicate == '1' && item.userdata && item.userdata.id) {
+                console.log(item.is_duplicate);
                 $("#user-" + item.userdata.id).remove();
             }
         });        
