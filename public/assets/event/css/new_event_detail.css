@@ -865,6 +865,10 @@
     font-size: 12px;
 }
 
+.all_activity .floating-label{
+    top: 35%;
+}
+
 /* ======Responsiveness===== */
 
 
