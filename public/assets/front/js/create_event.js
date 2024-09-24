@@ -4424,7 +4424,7 @@ $(document).on("click", ".add_new_group_member", function () {
             prefer_by: $(this).data("preferby"),
         });
     });
-
+    $('.user_group_member').prop('checked',false);
     // console.log(group_name);
     console.log(selectedValues);
     if(selectedValues.length > 0){
