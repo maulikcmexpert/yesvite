@@ -2599,7 +2599,7 @@ function savePage1Data(close = null) {
         state != "" &&
         zipcode != ""
     ) {
-        if(start_time_zone != end_time_zone){
+        if(rsvp_end_time_set == '1' && start_time_zone != end_time_zone){
             toastr.error('start time zone & end time zone are different');
             return;
         }
