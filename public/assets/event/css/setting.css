@@ -901,6 +901,7 @@
 .potluck-category .list-slide {
     max-height: 290px;
     overflow: hidden;
+    overflow-y: scroll;
 }
 
 .potluck-category .list-slide.open-potluck-list {
