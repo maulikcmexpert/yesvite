@@ -5113,8 +5113,8 @@ $(document).ready(function () {
         prevEl: ".swiper-button-prev",
       },
       breakpoints: {
-        640: {
-          slidesPerView: 2,
+        1200: {
+          slidesPerView: 3.5,
           spaceBetween: 20,
         },
       },
