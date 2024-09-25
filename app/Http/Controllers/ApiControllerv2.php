@@ -2999,6 +2999,60 @@ class ApiControllerv2 extends Controller
 
     //  event create // 
 
+    // public function  getDesignList(Request $request)
+    // {
+    //     $user  = Auth::guard('api')->user();
+
+    //     $rawData = $request->getContent();
+
+    //     $input = json_decode($rawData, true);
+    //     if ($input == null) {
+    //         return response()->json(['status' => 0, 'message' => "Json invalid"]);
+    //     }
+    //     $validator = Validator::make($input, [
+
+    //         'category_id' => ['required'],
+
+
+    //     ]);
+
+    //     if ($validator->fails()) {
+
+    //         return response()->json([
+
+    //             'message' => $validator->errors()->first(),
+
+    //             'status' => 0,
+
+    //         ]);
+    //     }
+    //     try {
+
+    //         $event_design = EventDesign::get();
+    //         if ($input['category_id'] != 0) {
+
+    //             $event_design = EventDesign::where('event_design_category_id', $input['category_id'])->get();
+    //         }
+
+    //         $designList = [];
+    //         if (count($event_design) != 0) {
+    //             foreach ($event_design as $val) {
+    //                 $designInfo['id'] = $val->id;
+    //                 $designInfo['image'] = asset('storage/event_design_template/' . $val->image);
+    //                 $designList[] = $designInfo;
+    //             }
+    //             return response()->json(['status' => 1, 'message' => "Event design Data", "data" => $designList]);
+    //         } else {
+    //             return response()->json(['status' => 1, 'message' => "No Data", "data" => $designList]);
+    //         }
+    //     } catch (QueryException $e) {
+    //         return response()->json(['status' => 0, 'message' => 'db error']);
+    //     } catch (\Throwable  $e) {
+    //         return response()->json(['status' => 0, 'message' => 'something went wrong']);
+    //     }
+    // }
+
+
     public function  getDesignList(Request $request)
     {
         $user  = Auth::guard('api')->user();
@@ -3028,18 +3082,25 @@ class ApiControllerv2 extends Controller
         }
         try {
 
-            $event_design = EventDesign::get();
+            $event_design = TextData::get();
             if ($input['category_id'] != 0) {
 
-                $event_design = EventDesign::where('event_design_category_id', $input['category_id'])->get();
+                $event_design = TextData::where('design_subcategory_id', $input['category_id'])->get();
             }
 
             $designList = [];
             if (count($event_design) != 0) {
-                foreach ($event_design as $val) {
-                    $designInfo['id'] = $val->id;
-                    $designInfo['image'] = asset('storage/event_design_template/' . $val->image);
-                    $designList[] = $designInfo;
+                foreach ($event_design as $data) {
+                    $template_data['id'] = (isset($data->id) && $data->id != null) ? $data->id : '';
+                    $template_data['subcategory_id'] = (isset($data->design_subcategory_id) && $data->design_subcategory_id  != null) ? $data->design_subcategory_id : '';
+                    $template_data['category_id'] = (isset($data->desgin_category_id) && $data->desgin_category_id != null) ? $data->desgin_category_id : '';
+                    $template_data['image'] = (isset($data->image) && $data->image != null) ? $data->image : '';
+                    $template_data['height'] = (isset($data->id) && $data->id != null) ? $data->id : '';
+                    $template_data['width'] = (isset($data->id) && $data->id != null) ? $data->id : '';
+                    $url = public_path('storage/canvas' . $data->image);
+                    $template_data['template_url'] = (isset($url) && $url != null) ? $url : '';
+                    $template_data['textData'] = (isset($data->static_information) && $data->static_information != null) ? $data->static_information : '';
+                    $designList[] = $template_data;
                 }
                 return response()->json(['status' => 1, 'message' => "Event design Data", "data" => $designList]);
             } else {
@@ -4051,7 +4112,7 @@ class ApiControllerv2 extends Controller
                 $eventDetail['subscription_invite_count'] = ($getEventData->subscription_invite_count != NULL) ? $getEventData->subscription_invite_count : 0;
 
                 $eventDetail['static_information'] = ($getEventData->static_information != NULL) ? $getEventData->static_information : "";
-                $eventDetail['design_image'] = ($getEventData->design_image != NULL) ? $getEventData->design_image : "";
+                $eventDetail['design_image'] = ($getEventData->design_image != NULL) ? public_path('storage/canvas' . $getEventData->design_image) : "";
                 $eventDetail['event_images'] = [];
                 $getEventImages = EventImage::where('event_id', $getEventData->id)->get();
                 if (!empty($getEventImages)) {
@@ -5388,7 +5449,7 @@ class ApiControllerv2 extends Controller
             if (isset($request->design_image) && !empty($request->design_image)) {
                 $designImage = $request->design_image;
                 $DesignImageName = time() . '_' . str_replace(' ', '_', $designImage->getClientOriginalName());
-                $image->move(asset('assets/canvas'), $DesignImageName);
+                $designImage->move(public_path('storage/canvas'), $DesignImageName);
                 $eventDesingImage = Event::where('id',  $request->event_id)->first();
                 $eventDesingImage->design_image = $imageName;
                 $eventDesingImage->save();
@@ -13003,7 +13064,7 @@ class ApiControllerv2 extends Controller
 
             $design_id = $textData->event_design_id;
             // $template_url  = url("assets/images/{$image}");
-            $template_url = asset('assets/canvas/' . $image);
+            $template_url = public_path('storage/canvas' . $image);
             // Return the final response
             return response()->json([
                 'textData' => $resp, // Updated text data
