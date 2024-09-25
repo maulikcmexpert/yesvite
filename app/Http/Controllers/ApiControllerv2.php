@@ -5388,6 +5388,7 @@ class ApiControllerv2 extends Controller
             if (isset($request->design_image) && $request->design_image != "") {
                 $designImage = $request->design_image;
                 $DesignImageName = time() . '_' . str_replace(' ', '_', $designImage->getClientOriginalName());
+                dd($DesignImageName);
                 $image->move(public_path('storage/canvas'), $DesignImageName);
                 $eventDesingImage = Event::where('id',  $request->event_id)->first();
                 $eventDesingImage->design_image = $imageName;
