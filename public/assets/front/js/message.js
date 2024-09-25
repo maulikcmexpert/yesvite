@@ -2589,6 +2589,7 @@ $(document).on("click", ".close-group-btn", function () {
 });
 $("#new-message").click(function () {
     selectedUserIds = [];
+    $('#new_message').val('');
     $("#selected-tags-container .tag").remove();
     updateSelectedUserIds();
     handleSelectedUsers();
