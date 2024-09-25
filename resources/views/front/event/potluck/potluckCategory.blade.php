@@ -27,6 +27,8 @@
                         <path d="M7.9165 10.416H12.0832" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                 </a>
+                ABC
+                <i class="fa-solid fa-ellipsis-vertical"></i>
             </div>
         </div>
         <div class="list-body d-flex align-items-center no_item">
