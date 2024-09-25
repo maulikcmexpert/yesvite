@@ -1145,7 +1145,7 @@ $(".send-message").on("keypress", async function (e) {
                     // replyTimeStamp: Date.now(),
                     replyTimeStamp: replyMessageData.timeStamp,
                     replyUserName: replyMessageData.receiverName,
-                    replyDocType: type,
+                    replyDocType: "",
                 };
                 messageData.isReply = "1";
                 // Reset reply message ID after sending
