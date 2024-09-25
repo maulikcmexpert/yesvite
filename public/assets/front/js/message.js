@@ -2879,6 +2879,8 @@ $(".upload-box").change(function () {
 
             $("#file_name").text("audio");
         } else {
+        console.log("else")
+
             reader.onload = function (e) {
                 curElement.attr("src", e.target.result);
             };
@@ -2891,6 +2893,7 @@ $(".upload-box").change(function () {
         }
         // reader.readAsArrayBuffer(file);
     } else {
+        alert("else")
         $(".preview_img").hide();
         curElement.attr("src", "");
     }
