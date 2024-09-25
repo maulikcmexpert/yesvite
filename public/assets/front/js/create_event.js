@@ -5108,9 +5108,9 @@ $(document).ready(function () {
     var swiper = new Swiper(".mySwiper", {
       slidesPerView: 3,
       spaceBetween: 30,
-      pagination: {
-        el: ".swiper-pagination",
-        clickable: true,
+      navigation: {
+        nextEl: "<i class='fa-solid fa-angle-left'></i>",
+        prevEl: "<i class='fa-solid fa-chevron-right'></i>",
       },
     });
   });
