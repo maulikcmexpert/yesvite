@@ -139,43 +139,19 @@
 
                                 </div> -->
 
-                                <div class="owl-carousel owl_random owl-theme">
-                                    <div class="item">
-                                        <h4>1</h4>
+                                <div class="swiper mySwiper">
+                                    <div class="swiper-wrapper">
+                                        <div class="swiper-slide">Slide 1</div>
+                                        <div class="swiper-slide">Slide 2</div>
+                                        <div class="swiper-slide">Slide 3</div>
+                                        <div class="swiper-slide">Slide 4</div>
+                                        <div class="swiper-slide">Slide 5</div>
+                                        <div class="swiper-slide">Slide 6</div>
+                                        <div class="swiper-slide">Slide 7</div>
+                                        <div class="swiper-slide">Slide 8</div>
+                                        <div class="swiper-slide">Slide 9</div>
                                     </div>
-                                    <div class="item">
-                                        <h4>2</h4>
-                                    </div>
-                                    <div class="item">
-                                        <h4>3</h4>
-                                    </div>
-                                    <div class="item">
-                                        <h4>4</h4>
-                                    </div>
-                                    <div class="item">
-                                        <h4>5</h4>
-                                    </div>
-                                    <div class="item">
-                                        <h4>6</h4>
-                                    </div>
-                                    <div class="item">
-                                        <h4>7</h4>
-                                    </div>
-                                    <div class="item">
-                                        <h4>8</h4>
-                                    </div>
-                                    <div class="item">
-                                        <h4>9</h4>
-                                    </div>
-                                    <div class="item">
-                                        <h4>10</h4>
-                                    </div>
-                                    <div class="item">
-                                        <h4>11</h4>
-                                    </div>
-                                    <div class="item">
-                                        <h4>12</h4>
-                                    </div>
+                                    <div class="swiper-pagination"></div>
                                 </div>
 
 

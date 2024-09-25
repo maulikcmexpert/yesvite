@@ -5104,21 +5104,12 @@ function getStartEndTimeZone(){
 }
 
 
-$('.owl_random').owlCarousel({
-    loop:true,
-    margin:10,
-    nav:true,
-    items:5,
-    // responsive:{
-    //     0:{
-    //         items:1
-    //     },
-    //     600:{
-    //         items:3
-    //     },
-    //     1000:{
-    //         items:5
-    //     }
-    // }
-})
+var swiper = new Swiper(".mySwiper", {
+    slidesPerView: 3,
+    spaceBetween: 30,
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+  });
 

@@ -50,6 +50,8 @@
 
     <link rel="stylesheet" href="{{ asset('assets/event/css/variable.css') }}">
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
     @isset($css)
     <link rel="stylesheet" href="{{asset('assets')}}/front/css/{{$css}}" />
     @endisset
@@ -65,11 +67,12 @@
     </div>
     @include($page)
 
-    
+
     <x-front.footer :js="$js ?? []" />
     <script src="{{ asset('assets/event/js/script.js') }}"></script>
     <script src="{{ asset('assets/event/js/common.js') }}"></script>
     <script src="{{ asset('assets/event/js/wow.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 </body>
 
 </html>
