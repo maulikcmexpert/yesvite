@@ -4952,10 +4952,10 @@ class ApiControllerv2 extends Controller
             }
         } catch (QueryException $e) {
             DB::rollBack();
-            dd($e);
+            // dd($e);
             return response()->json(['status' => 0, 'message' => 'Db error']);
         } catch (Exception $e) {
-            dd($e);
+            // dd($e);
             return response()->json(['status' => 0, 'message' => 'Something went wrong']);
         }
     }
