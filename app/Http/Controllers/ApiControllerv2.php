@@ -4366,8 +4366,8 @@ class ApiControllerv2 extends Controller
                 }
                 $updateEvent->subscription_plan_name = (!empty($eventData['subscription_plan_name'])) ? $eventData['subscription_plan_name'] : "";
                 // $updateEvent->subscription_invite_count = (!empty($eventData['subscription_invite_count'])) ? $eventData['subscription_invite_count'] : 0;
-                dd($eventData['static_information']);
-                $updateEvent->static_information = (isset($eventData['static_information']) && $eventData['static_information'] != '') ? $eventData['static_information'] : "";
+                // dd($eventData['static_information']);
+                $updateEvent->static_information = (isset($eventData['static_information']) && $eventData['static_information'] != '') ? $eventData['static_information'] : null;
                 $updateEvent->design_image = (!empty($eventData['design_image'])) ? $eventData['design_image'] : "";
                 if ($updateEvent->save()) {
                     if ($eventData['is_draft_save'] == '1') {
