@@ -3097,7 +3097,7 @@ class ApiControllerv2 extends Controller
                     $template_data['image'] = (isset($data->image) && $data->image != null) ? $data->image : '';
                     $template_data['height'] = (isset($data->id) && $data->id != null) ? $data->id : '';
                     $template_data['width'] = (isset($data->id) && $data->id != null) ? $data->id : '';
-                    $url = public_path('storage/canvas' . $data->image);
+                    $url = asset('storage/canvas/' . $data->image);
                     $template_data['template_url'] = (isset($url) && $url != null) ? $url : '';
                     $template_data['textData'] = (isset($data->static_information) && $data->static_information != null) ? $data->static_information : '';
                     $designList[] = $template_data;
@@ -4112,7 +4112,7 @@ class ApiControllerv2 extends Controller
                 $eventDetail['subscription_invite_count'] = ($getEventData->subscription_invite_count != NULL) ? $getEventData->subscription_invite_count : 0;
 
                 $eventDetail['static_information'] = ($getEventData->static_information != NULL) ? $getEventData->static_information : "";
-                $eventDetail['design_image'] = ($getEventData->design_image != NULL) ? public_path('storage/canvas' . $getEventData->design_image) : "";
+                $eventDetail['design_image'] = ($getEventData->design_image != NULL) ? asset('storage/canvas/' . $getEventData->design_image) : "";
                 $eventDetail['event_images'] = [];
                 $getEventImages = EventImage::where('event_id', $getEventData->id)->get();
                 if (!empty($getEventImages)) {
@@ -13064,7 +13064,7 @@ class ApiControllerv2 extends Controller
 
             $design_id = $textData->event_design_id;
             // $template_url  = url("assets/images/{$image}");
-            $template_url = public_path('storage/canvas' . $image);
+            $template_url = asset('storage/canvas/' . $image);
             // Return the final response
             return response()->json([
                 'textData' => $resp, // Updated text data
