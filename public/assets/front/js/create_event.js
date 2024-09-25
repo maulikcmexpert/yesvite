@@ -3043,6 +3043,7 @@ function handleActiveClass(target) {
     $(".side-bar-list").removeClass("active");
     $(target).find(".side-bar-list").addClass("active");
     $(target).find(".side-bar-list").addClass("menu-success");
+    console.log(target);
 }
 
 function handleActivePlan(target) {
