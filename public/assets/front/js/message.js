@@ -2905,8 +2905,8 @@ $(".upload-box").change(function () {
 function displayFiles(files, name) {
     var preview = document.getElementById("preview");
     $(preview).show();
-    // preview.innerHTML = "";
-
+    preview.innerHTML = "";
+    console.log("preview clear")
     for (var i = 0; i < files.length; i++) {
         var file = files[i];
         var reader = new FileReader();
@@ -2932,7 +2932,9 @@ function displayFiles(files, name) {
                     previewElement = document.createElement("img");
                     previewElement.style.maxWidth = "100%";
                 } else {
-                    return;
+                    previewElement = document.createElement("img");
+                    previewElement.style.maxWidth = "100%";
+                    // return;
                 }
                 previewElement.className = "preview_img";
                 var closeButton = document.createElement("button");
