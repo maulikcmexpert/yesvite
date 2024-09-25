@@ -634,7 +634,7 @@ ul.member-lists li:last-child {
     -o-border-radius: 0px 20px 20px 20px;
     margin-bottom: 0px !important;
     position: relative;
-    font-size: 12px;
+    font-size: 13px;
 }
 
 .msg-body ul li.sender p .reaction,
