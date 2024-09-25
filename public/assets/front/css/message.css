@@ -424,6 +424,7 @@ ul.chat-list li:last-child {
     justify-content: center;
     font-size: 35px;
     margin-bottom: 0;
+    color: #fff;
 }
 
 
@@ -1527,7 +1528,7 @@ ul.member-lists li:last-child {
     display: inline-block;
     background-color: #fff;
     padding: 0 12px;
-    z-index: 1;
+    z-index: 0;
     font-size: 15px;
     color: #8d8888;
 }
