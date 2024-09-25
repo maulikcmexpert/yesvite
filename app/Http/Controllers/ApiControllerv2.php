@@ -5384,6 +5384,8 @@ class ApiControllerv2 extends Controller
                 $designImage = $request->design_image;
                 $DesignImageName = time() . '_' . str_replace(' ', '_', $designImage->getClientOriginalName());
                 $image->move(asset('assets/canvas'), $DesignImageName);
+                // $template_url = asset('assets/canvas/' . $image);
+
                 $eventDesingImage = Event::where('id',  $request->event_id)->first();
                 $eventDesingImage->design_image = $imageName;
                 $eventDesingImage->save();
@@ -12890,10 +12892,7 @@ class ApiControllerv2 extends Controller
                     $template_data['image'] = (isset($data->image) && $data->image != null) ? $data->image : '';
                     $template_data['height'] = (isset($data->id) && $data->id != null) ? $data->id : '';
                     $template_data['width'] = (isset($data->id) && $data->id != null) ? $data->id : '';
-                    $url = public_path('storage/canvas/' . $data->image);
-                    // asset('assets/canvas/' . $data->image);
-                    // $template_url =
-
+                    $url = asset('assets/canvas/' . $data->image);
                     $template_data['template_url'] = (isset($url) && $url != null) ? $url : '';
                     $template_data['textData'] = (isset($data->static_information) && $data->static_information != null) ? $data->static_information : '';
                     $templates[] = $template_data;
@@ -13001,8 +13000,7 @@ class ApiControllerv2 extends Controller
 
             $design_id = $textData->event_design_id;
             // $template_url  = url("assets/images/{$image}");
-            $template_url = public_path('storage/canvas/' . $image);
-
+            $template_url = asset('assets/canvas/' . $image);
             // Return the final response
             return response()->json([
                 'textData' => $resp, // Updated text data
