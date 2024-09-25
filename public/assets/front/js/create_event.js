@@ -5112,6 +5112,12 @@ $(document).ready(function () {
         nextEl: ".swiper-button-next",
         prevEl: ".swiper-button-prev",
       },
+      breakpoints: {
+        640: {
+          slidesPerView: 2,
+          spaceBetween: 20,
+        },
+      },
     });
   });
 
