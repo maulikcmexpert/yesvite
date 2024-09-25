@@ -1031,6 +1031,7 @@ $(".send-message").on("keypress", async function (e) {
         const audioUrl = previewAudio.attr("src");
         let imagePath = "";
         const audio = $("#file_name").text();
+        const file_info = $(".file_info").val();
         if (imageUrl) {
             // Determine file type and set the storage path
             let storagePath;
@@ -1052,8 +1053,8 @@ $(".send-message").on("keypress", async function (e) {
                 fileName = `${Date.now()}_${senderUser}-audio.wav`;
                 type = "3";
             } else {
-                storagePath = `Files/${senderUser}/${Date.now()}_${senderUser}-file.${fileType}`;
-                fileName = `${Date.now()}_${senderUser}-file.${fileType}`;
+                storagePath = `Files/${senderUser}/${Date.now()}_${senderUser}-file.${file_info}`;
+                fileName = `${Date.now()}_${senderUser}-file.${file_info}`;
                 type = "4";
             }
             console.log(type);
@@ -2905,15 +2906,16 @@ $(".upload-box").change(function () {
 function displayFiles(files, name) {
     var preview = document.getElementById("preview");
     $(preview).show();
-    // preview.innerHTML = "";
-
+    preview.innerHTML = "";
+    console.log("preview clear")
     for (var i = 0; i < files.length; i++) {
         var file = files[i];
         var reader = new FileReader();
 
         reader.onload = (function (file) {
             return function (e) {
-                var fileType = file.type.split("/")[0];
+                fileType = file.type.split("/")[0];
+                console.log({fileType})
                 var previewItem = document.createElement("div");
                 previewItem.className = "preview-item";
                 var previewElement;
@@ -2932,7 +2934,9 @@ function displayFiles(files, name) {
                     previewElement = document.createElement("img");
                     previewElement.style.maxWidth = "100%";
                 } else {
-                    return;
+                    previewElement = document.createElement("img");
+                    previewElement.style.maxWidth = "100%";
+                    // return;
                 }
                 previewElement.className = "preview_img";
                 var closeButton = document.createElement("button");
