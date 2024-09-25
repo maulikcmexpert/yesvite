@@ -865,15 +865,16 @@
     font-size: 12px;
 }
 
-.new-event-sidebar-menu ul li .menu-success span{
+.new-event-sidebar-menu ul li .menu-success span {
     background: #23AA26;
 }
 
-.new-event-sidebar-menu ul li .menu-success span::after{
+.new-event-sidebar-menu ul li .menu-success span::after {
     content: "\f00c";
     font-family: "FONTAWESOME";
     position: absolute;
     font-size: 12px;
+    line-height: normal;
     color: #23AA26;
     top: 50%;
     left: 50%;
