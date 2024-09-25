@@ -99,23 +99,30 @@ $('.rsvp-slide').owlCarousel({
 
 // ===== group-slider ======
 $('.group-owl').owlCarousel({
-  loop:true,
-    margin:10,
-    nav:true,
+  loop:false,
+  margin:10,
+  nav:true,
+  autoplay:true,  
+  dots: false,
+  center: false,
+  items: 5,
   responsive:{
-    0:{
-        items:1,
-        nav:true
-    },
-    600:{
-        items:3,
-        nav:false
-    },
-    1000:{
-        items:5,
-        nav:true,
-        loop:false
-    }
+      0:{ 
+          items:5.5,
+          dots: false,
+      },
+      600:{
+          items:5.5,
+          dots: false,
+      },
+      1000:{
+          items:5.5,
+          dots: false,
+      },
+      1800: {
+        items:5.3,
+        dots: false,
+      }
   },
 }); 
 });
