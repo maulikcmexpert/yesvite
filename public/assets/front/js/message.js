@@ -2833,7 +2833,7 @@ $(".close-audio-btn").on("click", function () {
 $(".preview_img").hide();
 $("#preview_file").hide();
 $(".upload-box").change(function () {
-    alert(1)
+    // alert(1)
     var curElement = $(".preview_img");
     var file = this?.files[0] != undefined ? this?.files[0] : [];
     if (file.length <= 0) {
@@ -2882,7 +2882,7 @@ $(".upload-box").change(function () {
         console.log("else")
 
             reader.onload = function (e) {
-        console.log("loaded")
+        console.log("loaded",e.target.result)
 
                 curElement.attr("src", e.target.result);
             };
