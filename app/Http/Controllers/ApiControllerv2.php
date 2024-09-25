@@ -4048,6 +4048,7 @@ class ApiControllerv2 extends Controller
                 $eventDetail['step'] = ($getEventData->step != NULL) ? $getEventData->step : 0;
                 $eventDetail['subscription_plan_name'] = ($getEventData->subscription_plan_name != NULL) ? $getEventData->subscription_plan_name : "";
                 $eventDetail['subscription_invite_count'] = ($getEventData->subscription_invite_count != NULL) ? $getEventData->subscription_invite_count : 0;
+
                 $eventDetail['event_images'] = [];
                 $getEventImages = EventImage::where('event_id', $getEventData->id)->get();
                 if (!empty($getEventImages)) {
@@ -12916,6 +12917,9 @@ class ApiControllerv2 extends Controller
             // Replace placeholders with the provided request data
             foreach ($resp as $k => $value) {
                 foreach ($value as $key => $val) {
+                    if (isset($resp[$k]['backgroundColor'])) {
+                        $resp[$k]['backgroundColor'] = substr($resp[$k]['backgroundColor'], 0, 7);
+                    }
                     switch ($val) {
                         case 'event_name':
                             if (!empty($request->event_name)) {
