@@ -1507,11 +1507,11 @@ function createMessageElement(key, messageData, isGroup) {
                     ${emoji}
                 </div>`
 
-                : messageData?.type == "4"
+            : messageData?.type == "4"
             ? `
             <div class="media-msg-inline">
                 <div class="media-msg">
-                    <iframe src="${messageData?.url}" style="width:100%;height:600px;"></iframe>
+                    <iframe src="${messageData?.url}" style="width:100%;height:400px;"></iframe>
                     <span class="media-text">${
                         messageData?.data != "" ? messageData.data : ""
                     }</span>
