@@ -3042,6 +3042,7 @@ $(document).on("click", ".cancel-btn-createEvent", function () {
 function handleActiveClass(target) {
     $(".side-bar-list").removeClass("active");
     $(target).find(".side-bar-list").addClass("active");
+    $(target).find(".side-bar-list").addClass("menu-success");
 }
 
 function handleActivePlan(target) {
