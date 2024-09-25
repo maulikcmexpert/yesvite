@@ -4050,6 +4050,8 @@ class ApiControllerv2 extends Controller
                 $eventDetail['subscription_plan_name'] = ($getEventData->subscription_plan_name != NULL) ? $getEventData->subscription_plan_name : "";
                 $eventDetail['subscription_invite_count'] = ($getEventData->subscription_invite_count != NULL) ? $getEventData->subscription_invite_count : 0;
 
+                $eventDetail['static_information'] = ($getEventData->static_information != NULL) ? $getEventData->static_information : "";
+                $eventDetail['design_image'] = ($getEventData->design_image != NULL) ? $getEventData->design_image : "";
                 $eventDetail['event_images'] = [];
                 $getEventImages = EventImage::where('event_id', $getEventData->id)->get();
                 if (!empty($getEventImages)) {
