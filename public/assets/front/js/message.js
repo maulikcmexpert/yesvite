@@ -1145,7 +1145,7 @@ $(".send-message").on("keypress", async function (e) {
                     // replyTimeStamp: Date.now(),
                     replyTimeStamp: replyMessageData.timeStamp,
                     replyUserName: replyMessageData.receiverName,
-                    replyDocType: "",
+                    replyDocType: type,
                 };
                 messageData.isReply = "1";
                 // Reset reply message ID after sending
@@ -1494,6 +1494,24 @@ function createMessageElement(key, messageData, isGroup) {
             <div class="media-msg-inline">
                 <div class="media-msg">
                     <video src="${messageData?.url}" controls></video>
+                    <span class="media-text">${
+                        messageData?.data != "" ? messageData.data : ""
+                    }</span>
+                    ${
+                        isSender
+                            ? `<span class="seenStatus ${seenStatus}"></span>`
+                            : ""
+                    } 
+                    ${reaction}
+                    </div>
+                    ${emoji}
+                </div>`
+
+            : messageData?.type == "4"
+            ? `
+            <div class="media-msg-inline">
+                <div class="media-msg">
+                    <iframe src="${messageData?.url}" style="width:100%;height:400px;"></iframe>
                     <span class="media-text">${
                         messageData?.data != "" ? messageData.data : ""
                     }</span>
@@ -2937,7 +2955,7 @@ function displayFiles(files, name) {
                     previewElement = document.createElement("img");
                     previewElement.style.maxWidth = "100%";
                 } else {
-                    previewElement = document.createElement("img");
+                    previewElement = document.createElement("iframe");
                     previewElement.style.maxWidth = "100%";
                     // return;
                 }
