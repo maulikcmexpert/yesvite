@@ -1145,7 +1145,7 @@ $(".send-message").on("keypress", async function (e) {
                     // replyTimeStamp: Date.now(),
                     replyTimeStamp: replyMessageData.timeStamp,
                     replyUserName: replyMessageData.receiverName,
-                    replyDocType: type,
+                    replyDocType: replyMessageData.type,
                 };
                 messageData.isReply = "1";
                 // Reset reply message ID after sending
@@ -1224,7 +1224,7 @@ $(".send-message").on("keypress", async function (e) {
                     // replyUserName: senderUserName,
                     replyTimeStamp: replyMessageData.timeStamp,
                     replyUserName: receiverName,
-                    replyDocType: "",
+                    replyDocType: replyMessageData.type,
                 };
                 messageData.isReply = "1";
                 // Reset reply message ID after sending
@@ -1583,10 +1583,96 @@ console.log(messageData.replyData);
                     </div>
                 </div>
                 <hr>
-                <div class="reply-massage"> 
-                        <span> ${
+                <div class="reply-massage"> `+
+                messageData?.type == "1"
+                ? 
+                `<div class="media-msg-inline">
+                    <div class="media-msg">
+                        <img src="${messageData?.url}"/>
+                        <span class="media-text">${
                             messageData?.data != "" ? messageData.data : ""
                         }</span>
+                        ${
+                            isSender
+                                ? `<span class="seenStatus ${seenStatus}"></span>`
+                                : ""
+                        } 
+                        ${reaction}
+                        </div>
+                        ${emoji}
+                </div>
+                `
+                : messageData?.type == "2"
+                ? `
+                <div class="media-msg-inline">
+                    <div class="media-msg">
+                        <video src="${messageData?.url}" controls></video>
+                        <span class="media-text">${
+                            messageData?.data != "" ? messageData.data : ""
+                        }</span>
+                        ${
+                            isSender
+                                ? `<span class="seenStatus ${seenStatus}"></span>`
+                                : ""
+                        } 
+                        ${reaction}
+                        </div>
+                        ${emoji}
+                    </div>`
+    
+                : messageData?.type == "4"
+                ? `
+                <div class="media-msg-inline">
+                    <div class="media-msg">
+                        <iframe src="${messageData?.url}" style="width:100%;height:400px;"></iframe>
+                        <span class="media-text">${
+                            messageData?.data != "" ? messageData.data : ""
+                        }</span>
+                        ${
+                            isSender
+                                ? `<span class="seenStatus ${seenStatus}"></span>`
+                                : ""
+                        } 
+                        ${reaction}
+                        </div>
+                        ${emoji}
+                    </div>`
+                : messageData?.type == "3"
+                ? `<div class="media-msg-inline">
+                
+                    <div class="media-msg">
+                    ${musicPlayer(messageData?.url)}
+                    <span>${messageData?.data != "" ? messageData.data : ""}</span>
+                    ${
+                        isSender
+                            ? `<span class="seenStatus ${seenStatus}"></span>`
+                            : ""
+                    } 
+                    ${reaction}
+                    </div>
+                    ${emoji}
+                </div>`
+                : `
+                <div class="simple-message">
+                ${senderprofile?
+                    isReceiver
+                            ? `<div class="simplemsg-img me-2 user-img new-msg-class"><span>${senderprofile}<span></div>`
+                            : ""
+                    :'' }
+                 
+                    <div class="simple-msg-wrap"> 
+                        <span class="senderName">${senderName}</span>
+                        ${messageData?.data != "" ? messageData.data : ""}
+                        ${
+                            isSender
+                                ? `<span class="seenStatus ${seenStatus}"></span>`
+                                : ""
+                        } 
+                        ${reaction}
+                    </div>
+                    ${emojiAndReplay}
+                  </div>
+                  
                         ${reaction}
                 </div>
             </div>
