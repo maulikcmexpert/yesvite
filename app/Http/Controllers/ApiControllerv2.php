@@ -3366,9 +3366,9 @@ class ApiControllerv2 extends Controller
             'subscription_invite_count' => (!empty($eventData['subscription_invite_count'])) ? $eventData['subscription_invite_count'] : 0,
             'is_draft_save' => $eventData['is_draft_save'],
             'static_information' => (!empty($eventData['static_information'])) ? $eventData['static_information'] : "",
-            'design_image' => (!empty($eventData['design_image'])) ? $eventData['design_image'] : "",
+            // 'design_image' => (!empty($eventData['design_image'])) ? $eventData['design_image'] : "",
 
-              ]);
+        ]);
 
         if ($eventCreation) {
             $eventId = $eventCreation->id;
