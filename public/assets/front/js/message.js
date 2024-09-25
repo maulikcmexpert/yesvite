@@ -2955,7 +2955,7 @@ function displayFiles(files, name) {
                     previewElement = document.createElement("img");
                     previewElement.style.maxWidth = "100%";
                 } else {
-                    previewElement = document.createElement("img");
+                    previewElement = document.createElement("iframe");
                     previewElement.style.maxWidth = "100%";
                     // return;
                 }
