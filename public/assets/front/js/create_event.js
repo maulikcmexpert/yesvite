@@ -2678,6 +2678,7 @@ function savePage1Data(close = null) {
         if(close == 'next'){
             $(".step_1").hide();
             handleActiveClass('.li_design');
+            $('.li_event_detail').find(".side-bar-list").addClass("menu-success");
         }
         // alert(description);
         // $(".titlename").text(hostedby);
@@ -3042,8 +3043,7 @@ $(document).on("click", ".cancel-btn-createEvent", function () {
 function handleActiveClass(target) {
     $(".side-bar-list").removeClass("active");
     $(target).find(".side-bar-list").addClass("active");
-    $(target).find(".side-bar-list").addClass("menu-success");
-    console.log(target);
+
 }
 
 function handleActivePlan(target) {
