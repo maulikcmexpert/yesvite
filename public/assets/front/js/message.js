@@ -3146,7 +3146,9 @@ $(".multi-mute").click(function () {
 $(".multi-archive").click(function () {
     const change = $(this).attr("changeWith");
     $(this).attr("changeWith", change == "1" ? "0" : "1");
-
+    if(checkedConversations.length <= 0){
+        return
+    }
     const checkedConversations = $(
         "input[name='checked_conversation[]']:checked"
     );
