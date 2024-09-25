@@ -1602,6 +1602,12 @@ ul.member-lists li:last-child {
     outline: none !important;
 }
 
+
+.chat-data .dropdown.text-end.ms-auto {
+    margin-left: 10px !important;
+
+}
+
 /* ======= responsive ======== */
 
 
