@@ -2833,6 +2833,7 @@ $(".close-audio-btn").on("click", function () {
 $(".preview_img").hide();
 $("#preview_file").hide();
 $(".upload-box").change(function () {
+    alert(1)
     var curElement = $(".preview_img");
     var file = this?.files[0] != undefined ? this?.files[0] : [];
     if (file.length <= 0) {
