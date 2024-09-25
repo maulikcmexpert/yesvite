@@ -240,7 +240,7 @@ ul.chat-list li:last-child {
     text-overflow: ellipsis;
     white-space: nowrap;
     width: 100%;
-    max-width: 150px;
+    max-width: 130px;
     text-transform: capitalize;
 }
 
@@ -274,7 +274,7 @@ ul.chat-list li:last-child {
 }
 
 .msg-list .user-detail span {
-    max-width: 160px;
+    max-width: 130px;
 }
 
 .loader {
