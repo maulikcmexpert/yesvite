@@ -2302,6 +2302,7 @@ $(document).on("click", "#next_setting", function () {
     savePage3Data();
     checkbox_count();
     $("#loader").css('display','none');
+    $('.li_guest').find(".side-bar-list").addClass("menu-success");
 
 });
 
@@ -4122,7 +4123,7 @@ $(document).on("click", ".final_checkout", function () {
         $(".step_final_checkout").show();
         final_step = 4;
         eventData.step = '4';
-
+        $('.li_setting').find(".side-bar-list").addClass("menu-success");
   
 
     // handleActiveClass(this);
@@ -4247,7 +4248,7 @@ $(document).on("click", ".store_desgin_temp", function () {
                     $(".main-content-wrp").removeClass("blurred");
                     $(".step_2").hide();
                     handleActiveClass('.li_guest');
-
+                    $('.li_design').find(".side-bar-list").addClass("menu-success");
 
                     $('.event_create_percent').text('75%');
                     $('.current_step').text('3 of 4');
