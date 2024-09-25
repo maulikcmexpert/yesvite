@@ -451,7 +451,7 @@
     max-height: calc(100vh - 290px);
 }
 
-.owl-carousel .owl-item .group-owl {
+.group-owl .owl-carousel .owl-item {
     width: 300px;
 }
 
