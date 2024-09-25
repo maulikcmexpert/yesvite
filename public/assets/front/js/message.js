@@ -2882,6 +2882,8 @@ $(".upload-box").change(function () {
         console.log("else")
 
             reader.onload = function (e) {
+        console.log("loaded")
+
                 curElement.attr("src", e.target.result);
             };
             reader.readAsDataURL(file);
