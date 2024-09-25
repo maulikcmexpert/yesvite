@@ -2913,7 +2913,8 @@ function displayFiles(files, name) {
 
         reader.onload = (function (file) {
             return function (e) {
-                var fileType = file.type.split("/")[0];
+                fileType = file.type.split("/")[0];
+                console.log({fileType})
                 var previewItem = document.createElement("div");
                 previewItem.className = "preview-item";
                 var previewElement;
