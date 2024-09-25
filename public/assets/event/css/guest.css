@@ -65,8 +65,8 @@
     padding: 10px 16px 10px 16px;
     display: flex;
     align-items: center;
-    margin: 0 32px;
-    margin-left: 30px;
+    /* margin: 0 32px;
+    margin-left: 30px; */
 }
 
 .group-card h4 {
@@ -488,6 +488,14 @@
     font-size: 22px !important;
     color: #64748B !important;
     z-index: 5;
+}
+
+.swiper-button-next {
+    right: 0;
+}
+
+.swiper-button-prev {
+    left: 0;
 }
 
 .swiper-button-next.swiper-button-disabled,
