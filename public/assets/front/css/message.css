@@ -140,9 +140,11 @@
 
 .chat-functions h6 {
     font-size: 18px;
+    line-height: normal;
     font-weight: 700;
     color: var(--secondryColor);
     margin-bottom: 0;
+    margin-right: 5px;
 }
 
 .chat-area .dropdown .dropdown-toggle::after {
@@ -328,6 +330,7 @@ ul.chat-list li:last-child {
     background-size: contain;
     position: absolute;
     bottom: 3px;
+    right: 15px;
 }
 
 .blue-tick {
