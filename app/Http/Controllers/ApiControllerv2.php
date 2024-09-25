@@ -3365,9 +3365,10 @@ class ApiControllerv2 extends Controller
             'subscription_plan_name' => (!empty($eventData['subscription_plan_name'])) ? $eventData['subscription_plan_name'] : "",
             'subscription_invite_count' => (!empty($eventData['subscription_invite_count'])) ? $eventData['subscription_invite_count'] : 0,
             'is_draft_save' => $eventData['is_draft_save'],
-            // 'static_information' => (!empty($eventData['static_information']) && isset($eventData['static_information'])) ? $eventData['static_information'] : "",
-            // 'desgin_id' => (!empty($eventData['desgin_id']) && isset($eventData['static_information'])) ? $eventData['desgin_id'] : "",
-        ]);
+            'static_information' => (!empty($eventData['static_information'])) ? $eventData['static_information'] : "",
+            'design_image' => (!empty($eventData['design_image'])) ? $eventData['design_image'] : "",
+
+              ]);
 
         if ($eventCreation) {
             $eventId = $eventCreation->id;
@@ -4364,6 +4365,8 @@ class ApiControllerv2 extends Controller
                 $updateEvent->subscription_plan_name = (!empty($eventData['subscription_plan_name'])) ? $eventData['subscription_plan_name'] : "";
                 // $updateEvent->subscription_invite_count = (!empty($eventData['subscription_invite_count'])) ? $eventData['subscription_invite_count'] : 0;
 
+                $updateEvent->static_information = (!empty($eventData['static_information'])) ? $eventData['static_information'] : "";
+                $updateEvent->design_image = (!empty($eventData['design_image'])) ? $eventData['design_image'] : "";
                 if ($updateEvent->save()) {
                     if ($eventData['is_draft_save'] == '1') {
                         EventInvitedUser::where(['event_id' => $eventData['event_id']])->delete();
@@ -5384,8 +5387,6 @@ class ApiControllerv2 extends Controller
                 $designImage = $request->design_image;
                 $DesignImageName = time() . '_' . str_replace(' ', '_', $designImage->getClientOriginalName());
                 $image->move(asset('assets/canvas'), $DesignImageName);
-                // $template_url = asset('assets/canvas/' . $image);
-
                 $eventDesingImage = Event::where('id',  $request->event_id)->first();
                 $eventDesingImage->design_image = $imageName;
                 $eventDesingImage->save();
