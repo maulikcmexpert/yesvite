@@ -5114,6 +5114,10 @@ $(document).ready(function () {
       },
       breakpoints: {
         1200: {
+          slidesPerView: 2.5,
+          spaceBetween: 20,
+        },
+        1400: {
           slidesPerView: 3.5,
           spaceBetween: 20,
         },
