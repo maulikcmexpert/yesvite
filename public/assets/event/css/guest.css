@@ -451,6 +451,9 @@
     max-height: calc(100vh - 290px);
 }
 
+.owl-carousel .owl-item .group-owl {
+    width: 300px;
+}
 
 /* ============ responsive ============ */
 @media only screen and (max-width:1800px) {
