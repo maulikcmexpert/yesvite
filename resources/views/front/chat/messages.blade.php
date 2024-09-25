@@ -412,8 +412,9 @@ use Carbon\Carbon;
                                     <span id="file_name"></span>
                                 </div>
 
-                                <input type="hidden" class="file_info">
                             </div>
+                            <input type="hidden" class="file_info">
+
                             <div class="position-relative audio-music-player" id="musicContainer" style="display: none;">
                                 <div class="audio-container" id="audioContainer">
 
