@@ -1506,6 +1506,24 @@ function createMessageElement(key, messageData, isGroup) {
                     </div>
                     ${emoji}
                 </div>`
+
+                : messageData?.type == "4"
+            ? `
+            <div class="media-msg-inline">
+                <div class="media-msg">
+                    <iframe src="${messageData?.url}" style="width:100%;height:600px;"></iframe>
+                    <span class="media-text">${
+                        messageData?.data != "" ? messageData.data : ""
+                    }</span>
+                    ${
+                        isSender
+                            ? `<span class="seenStatus ${seenStatus}"></span>`
+                            : ""
+                    } 
+                    ${reaction}
+                    </div>
+                    ${emoji}
+                </div>`
             : messageData?.type == "3"
             ? `<div class="media-msg-inline">
             
