@@ -2905,7 +2905,7 @@ $(".upload-box").change(function () {
 function displayFiles(files, name) {
     var preview = document.getElementById("preview");
     $(preview).show();
-    preview.innerHTML = "";
+    // preview.innerHTML = "";
 
     for (var i = 0; i < files.length; i++) {
         var file = files[i];
