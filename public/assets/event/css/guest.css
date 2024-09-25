@@ -478,13 +478,15 @@
     display: none;
 }
 
-.swiper-button-next {
-    width: 36px;
-    height: 36px;
+.swiper-button-next,
+.swiper-button-prev {
+    width: 36px !important;
+    height: 36px !important;
     background-color: #fff !important;
-    border-radius: 100%;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border-radius: 100% !important;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px !important;
     font-size: 22px !important;
+    color: #64748B !important;
 }
 
 /* ============ responsive ============ */
