@@ -3364,8 +3364,9 @@ class ApiControllerv2 extends Controller
             'message_to_guests' => (!empty($eventData['message_to_guests'])) ? $eventData['message_to_guests'] : "",
             'subscription_plan_name' => (!empty($eventData['subscription_plan_name'])) ? $eventData['subscription_plan_name'] : "",
             'subscription_invite_count' => (!empty($eventData['subscription_invite_count'])) ? $eventData['subscription_invite_count'] : 0,
-
-            'is_draft_save' => $eventData['is_draft_save']
+            'is_draft_save' => $eventData['is_draft_save'],
+            // 'static_information' => (!empty($eventData['static_information']) && isset($eventData['static_information'])) ? $eventData['static_information'] : "",
+            // 'desgin_id' => (!empty($eventData['desgin_id']) && isset($eventData['static_information'])) ? $eventData['desgin_id'] : "",
         ]);
 
         if ($eventCreation) {
@@ -12981,12 +12982,15 @@ class ApiControllerv2 extends Controller
             $image = $textData->image;
             $height = $textData->height;
             $width = $textData->width;
+
+            $design_id = $textData->event_design_id;
             // $template_url  = url("assets/images/{$image}");
             $template_url = asset('assets/canvas/' . $image);
             // Return the final response
             return response()->json([
                 'textData' => $resp, // Updated text data
                 'image' => $image,
+                'event_design_id' => $design_id,
                 'height' => $height,
                 'width' => $width,
                 'template_url' => $template_url,
