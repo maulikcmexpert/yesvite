@@ -5385,7 +5385,7 @@ class ApiControllerv2 extends Controller
                 }
             }
 
-            if (isset($request->design_image) && !empty($request->design_image)) {
+            if (isset($request->design_image) && $request->design_image != "") {
                 $designImage = $request->design_image;
                 $DesignImageName = time() . '_' . str_replace(' ', '_', $designImage->getClientOriginalName());
                 $image->move(asset('assets/canvas'), $DesignImageName);

@@ -478,7 +478,8 @@
     display: none;
 }
 
-.swiper-button-prev,
+.swiper-button-next:after {}
+
 .swiper-button-next {
     width: 36px;
     height: 36px;
