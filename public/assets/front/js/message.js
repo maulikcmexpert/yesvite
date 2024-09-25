@@ -1031,6 +1031,7 @@ $(".send-message").on("keypress", async function (e) {
         const audioUrl = previewAudio.attr("src");
         let imagePath = "";
         const audio = $("#file_name").text();
+        const file_info = $(".file_info").val();
         if (imageUrl) {
             // Determine file type and set the storage path
             let storagePath;
@@ -1052,8 +1053,8 @@ $(".send-message").on("keypress", async function (e) {
                 fileName = `${Date.now()}_${senderUser}-audio.wav`;
                 type = "3";
             } else {
-                storagePath = `Files/${senderUser}/${Date.now()}_${senderUser}-file.${fileType}`;
-                fileName = `${Date.now()}_${senderUser}-file.${fileType}`;
+                storagePath = `Files/${senderUser}/${Date.now()}_${senderUser}-file.${file_info}`;
+                fileName = `${Date.now()}_${senderUser}-file.${file_info}`;
                 type = "4";
             }
             console.log(type);
