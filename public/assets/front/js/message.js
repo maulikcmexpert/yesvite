@@ -1072,7 +1072,10 @@ $(".send-message").on("keypress", async function (e) {
                     await uploadBytes(fileRef, blob);
                 }
                 downloadURL = await getDownloadURL(fileRef);
-            } catch (e) {}
+                console.log({downloadURL})
+            } catch (e) {
+                console.log(e)
+            }
         } else if (audioUrl) {
             $("#playRecording").hide();
             $("#stopRecording").hide();
