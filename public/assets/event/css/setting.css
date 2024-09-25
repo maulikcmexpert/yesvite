@@ -926,6 +926,10 @@
 
 .potlak-edit-wrp .fa-ellipsis-vertical{
     color: var(--secondryColor);
+    margin-left: 16px;
+    line-height: normal;
+    position: relative;
+    top: 2px;
 }
 
 .potlak-edit-dropdown ul{
@@ -946,16 +950,15 @@
     gap: 10px;
 }
 
-.potlak-edit-dropdown{
+.potlak-edit-dropdown {
     padding: 20px;
     border-radius: 16px;
     box-shadow: 0px 5px 40px 0px #0000001A;
     background-color: #fff;
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 20px;
+    right: 0px;
 }
-
 .potlak-edit-wrp{
     position: relative;
     z-index: 2;
