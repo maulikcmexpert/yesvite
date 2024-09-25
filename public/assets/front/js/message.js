@@ -2839,6 +2839,7 @@ $(".upload-box").change(function () {
         return;
     }
     var name = file?.name;
+    console.log({name})
     $(".dropdown-menu").removeClass("show");
 
     displayFiles(this.files, name);
@@ -2892,6 +2893,7 @@ $(".upload-box").change(function () {
         $(".preview_img").hide();
         curElement.attr("src", "");
     }
+    console.log({curElement})
 });
 
 function displayFiles(files, name) {
