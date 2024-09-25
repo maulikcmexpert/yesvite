@@ -630,7 +630,7 @@
     <div class="sidebar-content setting-sidebar">
         <div class="d-flex align-items-center justify-content-between toggle-wrp">
             <div class="d-flex align-items-center">
-                <a href="#" class="me-3 add_co_host_off" >
+                <a href="#" class="me-3 add_co_host_off">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path d="M9.57 5.92969L3.5 11.9997L9.57 18.0697" stroke="#64748B" stroke-width="1.5"
@@ -641,7 +641,7 @@
                 </a>
                 <h5>Add a Co-Host</h5>
             </div>
-            <button class="close-btn add_co_host_off" >
+            <button class="close-btn add_co_host_off">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
                     <path d="M5.00098 5L19 18.9991" stroke="#64748B" stroke-width="1.5" stroke-linecap="round"
@@ -694,7 +694,7 @@
                         <div class="guest-img">
                             <img class="selected-co-host-image" src="./assets/image/user-img.svg" alt="guest-img">
                             <h5 class="add-item-under-text selected-host-h5"></h5>
-                            <a href="#" class="close remove_co_host" >
+                            <a href="#" class="close remove_co_host">
                                 <svg width="19" height="18" viewBox="0 0 19 18" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <rect x="1.8999" y="1" width="16" height="16" rx="8"
@@ -1073,7 +1073,7 @@
                     <input class="form-control" type="text" id="registry_link" name="registry_link"
                         onkeyup="clearError(this)">
                     <label for="email" class="floating-label">Registry Link <span>*</span></label>
-                    
+
                 </div>
                 <label for="email" id="registry_link_error"></label>
             </form>
@@ -1085,6 +1085,62 @@
 </div>
 
 <div id="sidebar_addcategory" class="sidebar setting-side-wrp">
+    <div class="sidebar-content setting-sidebar add_category">
+        <div class="d-flex align-items-center justify-content-between toggle-wrp">
+            <div class="d-flex align-items-center">
+                <a href="#" class="me-3" onclick="toggleSidebar('sidebar_potluck')">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9.57 5.92969L3.5 11.9997L9.57 18.0697" stroke="#64748B" stroke-width="1.5"
+                            stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M20.4999 12H3.66992" stroke="#64748B" stroke-width="1.5" stroke-miterlimit="10"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </a>
+                <h5>Add New Category</h5>
+            </div>
+
+            <button class="close-btn" onclick="toggleSidebar()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5.00098 5L19 18.9991" stroke="#64748B" stroke-width="1.5" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <path d="M4.99996 18.9991L18.999 5" stroke="#64748B" stroke-width="1.5" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+            </button>
+        </div>
+        <div class="guest-group-name login-form-wrap add-category-new-wrp">
+            <form action="" class="registry-form ">
+                <div class="input-form">
+                    <input class="form-control" type="text" id="categoryName" maxlength="30" onkeyup="clearError(this)"
+                        name="text1" placeholder="Categories: e.g., Appetizers, Salads, Drinks, etc">
+                    <span class="sub-con pot-cate-name">0/30</span>
+                    <label for="categoryName" id="categoryNameError"></label>
+                    <input type="hidden" id="hidden_category_name" />
+                    <input type="hidden" id="hidden_category_quantity" />
+                </div>
+                <div class="qty-container">
+                    <button class="qty-btn-minus-qty" type="button" onclick="clearError()"><i
+                            class="fa fa-minus"></i></button>
+                    <input type="number" name="qty" id="category_quantity" value="1" class="input-qty">
+                    <button class="qty-btn-plus-qty" type="button" onclick="clearError()"><i
+                            class="fa fa-plus"></i></button>
+                </div>
+                <label for="category_quantity" id="category_quantity_error"></label>
+            </form>
+        </div>
+    </div>
+    <div class="new-event-btn">
+        <a href="#" class="cmn-btn add_category_btn">Save</a>
+    </div>
+    <div class="new-event-btn">
+        {{-- <a href="#" class="cmn-btn add_category_item_btn" style="display: none;">Save</a> --}}
+    </div>
+</div>
+
+
+<div id="sidebar_editcategory" class="sidebar setting-side-wrp">
     <div class="sidebar-content setting-sidebar add_category">
         <div class="d-flex align-items-center justify-content-between toggle-wrp">
             <div class="d-flex align-items-center">
@@ -2261,6 +2317,7 @@
 <div id="sidebar_add_groups_overlay" class="overlay" onclick="toggleSidebar()"></div>
 <div id="sidebar_add_group_member_overlay" class="overlay" onclick="toggleSidebar()"></div>
 <div id="sidebar_invite_group_member_overlay" class="overlay" onclick="toggleSidebar()"></div>
+<div id="sidebar_editcategory_overlay" class="overlay" onclick="toggleSidebar()"></div>
 
 
 

@@ -158,8 +158,9 @@
                                         @endforeach
 
                                     </div>
-                                    <div class="swiper-button-next"></div>
-                                    <div class="swiper-button-prev"></div>
+                                    <div class="swiper-button-next"><i class="fa-solid fa-chevron-right"></i></div>
+                                    <div class="swiper-button-prev"><i class="fa-solid fa-angle-left"></i></div>
+
                                 </div>
 
 

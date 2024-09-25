@@ -5109,8 +5109,8 @@ $(document).ready(function () {
       slidesPerView: 3,
       spaceBetween: 30,
       navigation: {
-        nextEl: "<i class='fa-solid fa-angle-left'></i>",
-        prevEl: "<i class='fa-solid fa-chevron-right'></i>",
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
       },
     });
   });
