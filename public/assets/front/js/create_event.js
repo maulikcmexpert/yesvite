@@ -5106,7 +5106,7 @@ function getStartEndTimeZone(){
 
 $(document).ready(function () {
     var swiper = new Swiper(".mySwiper", {
-      slidesPerView: 4.5,
+      slidesPerView: 3.5,
       spaceBetween: 30,
       navigation: {
         nextEl: ".swiper-button-next",
