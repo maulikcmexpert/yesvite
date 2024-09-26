@@ -795,7 +795,12 @@ async function updateMore(conversationId) {
     );
     const isGroup = $("#isGroup").val();
     if (isGroup == "true" || isGroup == true || isGroup == "1") {
-        $(".block-conversation").hide();
+        $(".block-conversation").each(function () {
+            // Check if the element has more than one class
+            if (!$(this).hasClass("single")) {
+                $(this).hide();
+            }
+        });
     } else {
         $(".block-conversation").show();
     }
