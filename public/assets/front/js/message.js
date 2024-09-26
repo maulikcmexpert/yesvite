@@ -844,6 +844,42 @@ $(document).on("click", ".pin-conversation", function () {
         $(".unpin-self-icn").hide();
     }
 });
+$(document).on("click", ".pin-single-conversation", function () {
+    const pinChange = $(this).attr("changeWith");
+    let conversationId = $(this).data("conversation");
+    const overviewRef = ref(
+        database,
+        `overview/${senderUser}/${conversationId}/isPin`
+    );
+    set(overviewRef, pinChange);
+    $(this)
+        .find("span")
+        .text(pinChange == "1" ? "Unpin" : "Pin");
+    $(this).attr("changeWith", pinChange == "1" ? "0" : "1");
+    if (pinChange == "1") {
+        const conversationElement = $(`.conversation-${conversationId}`);
+        console.log("here");
+
+        moveToTopOrBelowPinned(conversationElement);
+        $(".conversation-" + conversationId).addClass("pinned");
+        $(".conversation-" + conversationId)
+            .find(".chat-data")
+            .find(".pin-svg")
+            .removeClass("d-none");
+
+        $(".unpin-self-icn").show("d-none");
+        $(".pin-self-icn").hide("d-none");
+    } else {
+        $(".conversation-" + conversationId).removeClass("pinned");
+
+        $(".conversation-" + conversationId)
+            .find(".chat-data")
+            .find(".pin-svg")
+            .addClass("d-none");
+        $(".pin-self-icn").show();
+        $(".unpin-self-icn").hide();
+    }
+});
 
 $(document).on("click", ".mute-conversation", function () {
     const change = $(this).attr("changeWith");
@@ -1015,8 +1051,10 @@ $(".send-message").on("keypress", async function (e) {
 
     if (e.which === 13 && e.shiftKey) {
         return;
+    } else if (e.which === 13 && !e.shiftKey) {
+        e.preventDefault();
     }
-    e.preventDefault();
+
     if (isGroup == "true" || isGroup == true) {
         // Fetch the group profiles
         var profileIndex = await setProfileIndexCache(conversationId);
