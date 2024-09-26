@@ -46,6 +46,12 @@ $(document).ready(function () {
     $('#address1').attr('placeholder', '');
 
     $('.search_user').val('');
+
+    $(".design-sidebar-action").click(function(){
+        let designId = $(this).attr('design-id')
+        $(".design-sidebar").addClass('d-none')
+        $(".design-sidebar_"+ designId).removeClass('d-none')
+    })
 });
 
 $(document).on('focus','.inputText',function(){

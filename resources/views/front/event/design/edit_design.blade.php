@@ -47,7 +47,7 @@
                 </button>
             </div>
             <div class="edit-images-button-inner fonts-edit-wrp">
-                <button class="design-sidebar-action" design-id="2" onclick="toggleSidebar('sidebar_font')">
+                <button class="design-sidebar-action" design-id="2" onclick="toggleSidebar()">
                     <span>
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -65,7 +65,7 @@
                 </button>
             </div>
             <div class="edit-images-button-inner text-edit-wrp">
-                <button class="design-sidebar-action" design-id="3" onclick="toggleSidebar('sidebar_edit_text')">
+                <button class="design-sidebar-action" design-id="3" onclick="toggleSidebar()">
                     <span>
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -245,9 +245,209 @@
     <div id="sidebar" class="sidebar choose-design-sidebar">
 
 
-       
+        <!-- =====fonts-family-options==== -->
+        <div class="design-sidebar design-sidebar_2 setting-category-wrp choose-design-form activity-schedule-inner ">
+            <div class="d-flex align-items-center justify-content-between toggle-wrp new-event-sidebar-head">
+                <h5>Change Font</h5>
+                <button class="close-btn" onclick="toggleSidebar()">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5.00098 5L19 18.9991" stroke="#64748B" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round"></path>
+                        <path d="M4.99996 18.9991L18.999 5" stroke="#64748B" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                </button>
+            </div>
 
-        
+            <div class="position-relative mb-3">
+                <input type="search" placeholder="Search name" class="form-control">
+                <span>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M11.5 21C16.7467 21 21 16.7467 21 11.5C21 6.25329 16.7467 2 11.5 2C6.25329 2 2 6.25329 2 11.5C2 16.7467 6.25329 21 11.5 21Z"
+                            stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M22 22L20 20" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </span>
+            </div>
+
+            <div class="used-fonts-wrp common-font-wrp">
+                <h3>Font Used</h3>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                        Default Fonts
+                    </label>
+                </div>
+            </div>
+
+            <div class="recommendation-fonts-wrp common-font-wrp">
+                <h3>Recommendation Fonts</h3>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        Default Fonts
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3">
+                    <label class="form-check-label" for="flexRadioDefault3">
+                        Default Fonts
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault4">
+                    <label class="form-check-label" for="flexRadioDefault4">
+                        Default Fonts
+                    </label>
+                </div>
+            </div>
+
+            <div class="recommendation-fonts-wrp common-font-wrp">
+                <h3>Recommendation Fonts</h3>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault5">
+                    <label class="form-check-label" for="flexRadioDefault5">
+                        Default Fonts
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault6">
+                    <label class="form-check-label" for="flexRadioDefault6">
+                        Default Fonts
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault7">
+                    <label class="form-check-label" for="flexRadioDefault7">
+                        Default Fonts
+                    </label>
+                </div>
+            </div>
+
+            <div class="all-fonts-wrp common-font-wrp">
+                <h3>All Fonts</h3>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault8">
+                    <label class="form-check-label" for="flexRadioDefault8">
+                        Fonts
+                    </label>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault9">
+                    <label class="form-check-label" for="flexRadioDefault9">
+                        Fonts
+                    </label>
+                </div>
+
+                <div class="accordion" id="accordionExample">
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseOne">
+                                <div>
+                                    Fonts
+                                </div>
+                                <i class="fa-solid fa-angle-down"></i>
+                            </button>
+                        </div>
+                        <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                        id="flexRadioDefault10">
+                                    <label class="form-check-label" for="flexRadioDefault10">
+                                        Fonts
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                        id="flexRadioDefault11">
+                                    <label class="form-check-label" for="flexRadioDefault11">
+                                        Fonts
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault12">
+                    <label class="form-check-label" for="flexRadioDefault12">
+                        Fonts
+                    </label>
+                </div>
+
+            </div>
+            <div class="footer-buttons">
+                <button class="cmn-btn reset-btn">Reset</button>
+                <button class="cmn-btn">Save</button>
+            </div>
+        </div>
+
+        <!-- ======Font-size== -->
+        <div class="design-sidebar design-sidebar_3 setting-category-wrp choose-design-form activity-schedule-inner ">
+            <div class="d-flex align-items-center justify-content-between toggle-wrp new-event-sidebar-head">
+                <h5>Size & Spacing</h5>
+                <button class="close-btn" onclick="toggleSidebar()">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5.00098 5L19 18.9991" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M4.99996 18.9991L18.999 5" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="size-spacing-main-wrp">
+                <!-- Font Size Section -->
+                <div class="size-spacing-inner font-size-wrp">
+                    <div class="size-spacing-inner-top">
+                        <h3>Font Size</h3>
+                        <input type="text" id="fontSizeInput" value="20">
+                    </div>
+                    <div class="range-slider">
+                        <div id="fontSizeTooltip" class="tooltip"></div>
+                        <input id="fontSizeRange" type="range" step="1" value="20" min="1" max="100">
+                    </div>
+                </div>
+
+                <!-- Letter Spacing Section -->
+                <div class="size-spacing-inner font-size-wrp">
+                    <div class="size-spacing-inner-top">
+                        <h3>Letter Spacing</h3>
+                        <input type="text" id="letterSpacingInput" value="0">
+                    </div>
+                    <div class="range-slider">
+                        <div id="letterSpacingTooltip" class="tooltip"></div>
+                        <input id="letterSpacingRange" type="range" step="1" value="0" min="0" max="500">
+                    </div>
+                </div>
+
+                <!-- Line Height Section -->
+                <div class="size-spacing-inner font-size-wrp">
+                    <div class="size-spacing-inner-top">
+                        <h3>Line Height</h3>
+                        <input type="text" id="lineHeightInput" value="1.2">
+                    </div>
+                    <div class="range-slider">
+                        <div id="lineHeightTooltip" class="tooltip"></div>
+                        <input id="lineHeightRange" type="range" step="0.1" value="1.2" min="0.5" max="3">
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-buttons">
+                <button class="cmn-btn reset-btn">Reset</button>
+                <button class="cmn-btn save-btn">Save</button>
+            </div>
+        </div>
 
 
         <!-- ===color-picker== -->
@@ -740,215 +940,4 @@
             </div>
         </div>
     </div>
-    
-    <div id="sidebar_font" class="sidebar choose-design-sidebar">
-         <!-- =====fonts-family-options==== -->
-         <div class="design-sidebar design-sidebar_2 setting-category-wrp choose-design-form activity-schedule-inner ">
-            <div class="d-flex align-items-center justify-content-between toggle-wrp new-event-sidebar-head">
-                <h5>Change Font</h5>
-                <button class="close-btn" onclick="toggleSidebar()">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path d="M5.00098 5L19 18.9991" stroke="#64748B" stroke-width="1.5" stroke-linecap="round"
-                            stroke-linejoin="round"></path>
-                        <path d="M4.99996 18.9991L18.999 5" stroke="#64748B" stroke-width="1.5"
-                            stroke-linecap="round" stroke-linejoin="round"></path>
-                    </svg>
-                </button>
-            </div>
-
-            <div class="position-relative mb-3">
-                <input type="search" placeholder="Search name" class="form-control">
-                <span>
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M11.5 21C16.7467 21 21 16.7467 21 11.5C21 6.25329 16.7467 2 11.5 2C6.25329 2 2 6.25329 2 11.5C2 16.7467 6.25329 21 11.5 21Z"
-                            stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M22 22L20 20" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round"
-                            stroke-linejoin="round" />
-                    </svg>
-                </span>
-            </div>
-
-            <div class="used-fonts-wrp common-font-wrp">
-                <h3>Font Used</h3>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                    <label class="form-check-label" for="flexRadioDefault1">
-                        Default Fonts
-                    </label>
-                </div>
-            </div>
-
-            <div class="recommendation-fonts-wrp common-font-wrp">
-                <h3>Recommendation Fonts</h3>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
-                    <label class="form-check-label" for="flexRadioDefault2">
-                        Default Fonts
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3">
-                    <label class="form-check-label" for="flexRadioDefault3">
-                        Default Fonts
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault4">
-                    <label class="form-check-label" for="flexRadioDefault4">
-                        Default Fonts
-                    </label>
-                </div>
-            </div>
-
-            <div class="recommendation-fonts-wrp common-font-wrp">
-                <h3>Recommendation Fonts</h3>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault5">
-                    <label class="form-check-label" for="flexRadioDefault5">
-                        Default Fonts
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault6">
-                    <label class="form-check-label" for="flexRadioDefault6">
-                        Default Fonts
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault7">
-                    <label class="form-check-label" for="flexRadioDefault7">
-                        Default Fonts
-                    </label>
-                </div>
-            </div>
-
-            <div class="all-fonts-wrp common-font-wrp">
-                <h3>All Fonts</h3>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault8">
-                    <label class="form-check-label" for="flexRadioDefault8">
-                        Fonts
-                    </label>
-                </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault9">
-                    <label class="form-check-label" for="flexRadioDefault9">
-                        Fonts
-                    </label>
-                </div>
-
-                <div class="accordion" id="accordionExample">
-                    <div class="accordion-item">
-                        <div class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseOne">
-                                <div>
-                                    Fonts
-                                </div>
-                                <i class="fa-solid fa-angle-down"></i>
-                            </button>
-                        </div>
-                        <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                        id="flexRadioDefault10">
-                                    <label class="form-check-label" for="flexRadioDefault10">
-                                        Fonts
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                        id="flexRadioDefault11">
-                                    <label class="form-check-label" for="flexRadioDefault11">
-                                        Fonts
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault12">
-                    <label class="form-check-label" for="flexRadioDefault12">
-                        Fonts
-                    </label>
-                </div>
-
-            </div>
-            <div class="footer-buttons">
-                <button class="cmn-btn reset-btn">Reset</button>
-                <button class="cmn-btn">Save</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="sidebar_edit_text" class="sidebar choose-design-sidebar">
-        <!-- ======Font-size== -->
-        <div class="design-sidebar design-sidebar_3 setting-category-wrp choose-design-form activity-schedule-inner ">
-            <div class="d-flex align-items-center justify-content-between toggle-wrp new-event-sidebar-head">
-                <h5>Size & Spacing</h5>
-                <button class="close-btn" onclick="toggleSidebar()">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M5.00098 5L19 18.9991" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                        <path d="M4.99996 18.9991L18.999 5" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                    </svg>
-                </button>
-            </div>
-
-            <div class="size-spacing-main-wrp">
-                <!-- Font Size Section -->
-                <div class="size-spacing-inner font-size-wrp">
-                    <div class="size-spacing-inner-top">
-                        <h3>Font Size</h3>
-                        <input type="text" id="fontSizeInput" value="20">
-                    </div>
-                    <div class="range-slider">
-                        <div id="fontSizeTooltip" class="tooltip"></div>
-                        <input id="fontSizeRange" type="range" step="1" value="20" min="1" max="100">
-                    </div>
-                </div>
-
-                <!-- Letter Spacing Section -->
-                <div class="size-spacing-inner font-size-wrp">
-                    <div class="size-spacing-inner-top">
-                        <h3>Letter Spacing</h3>
-                        <input type="text" id="letterSpacingInput" value="0">
-                    </div>
-                    <div class="range-slider">
-                        <div id="letterSpacingTooltip" class="tooltip"></div>
-                        <input id="letterSpacingRange" type="range" step="1" value="0" min="0" max="500">
-                    </div>
-                </div>
-
-                <!-- Line Height Section -->
-                <div class="size-spacing-inner font-size-wrp">
-                    <div class="size-spacing-inner-top">
-                        <h3>Line Height</h3>
-                        <input type="text" id="lineHeightInput" value="1.2">
-                    </div>
-                    <div class="range-slider">
-                        <div id="lineHeightTooltip" class="tooltip"></div>
-                        <input id="lineHeightRange" type="range" step="0.1" value="1.2" min="0.5" max="3">
-                    </div>
-                </div>
-            </div>
-
-            <div class="footer-buttons">
-                <button class="cmn-btn reset-btn">Reset</button>
-                <button class="cmn-btn save-btn">Save</button>
-            </div>
-        </div>
-    </div>
-    
-    <div id="sidebar_font_overlay" class="overlay" onclick="toggleSidebar('')"></div>
-    <div id="sidebar_edit_text_overlay" class="overlay" onclick="toggleSidebar('')"></div>
 </main>
