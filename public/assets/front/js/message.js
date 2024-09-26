@@ -858,11 +858,11 @@ $(document).on("click", ".pin-single-conversation", function (e) {
         .find("span")
         .text(pinChange == "1" ? "Unpin" : "Pin");
     $(this).attr("changeWith", pinChange == "1" ? "0" : "1");
+    const conversationElement = $(`.conversation-${conversationId}`);
+
     if (pinChange == "1") {
-        const conversationElement = $(`.conversation-${conversationId}`);
         console.log("here");
 
-        moveToTopOrBelowPinned(conversationElement);
         $(".conversation-" + conversationId).addClass("pinned");
         $(".conversation-" + conversationId)
             .find(".chat-data")
@@ -883,6 +883,7 @@ $(document).on("click", ".pin-single-conversation", function (e) {
         $(this).children(".pin1-self-icn").removeClass("d-none");
         $(this).children(".unpin1-self-icn").addClass("d-none");
     }
+    moveToTopOrBelowPinned($(`.conversation-${conversationId}`));
 });
 
 $(document).on("click", ".mute-conversation", function () {
@@ -3048,23 +3049,24 @@ $(".close-audio-btn").on("click", function () {
     $(".recordedAudio").attr("src", "");
 
     $(".upload-box").val("");
+    $(".file_info").val("");
+
     startButton.style.display = "inline-block";
 });
 
 $(".preview_img").hide();
 $("#preview_file").hide();
+
 $(".upload-box").change(function () {
-    // alert(1)
+    $(".file_info").val("");
     var curElement = $(".preview_img");
     var file = this?.files[0] != undefined ? this?.files[0] : [];
     if (file.length <= 0) {
         return;
     }
     var name = file?.name;
-    // console.log({ name });
-    $(".dropdown-menu").removeClass("show");
-
     displayFiles(this.files, name);
+    $(".dropdown-menu").removeClass("show");
 
     var fileExtension = file.name.substr(file.name.lastIndexOf(".") + 1);
 
@@ -3074,68 +3076,69 @@ $(".upload-box").change(function () {
         if (file.type.match("image.*")) {
             reader.onload = function (e) {
                 $("#preview_file").hide();
-
-                curElement.attr("src", e.target.result);
+                curElement.attr("src", e.target.result).show();
             };
 
             reader.readAsDataURL(file);
         } else if (file.type.match("video.*")) {
-            // Handling video files
-            var curElement = $(".preview_img");
-
-            curElement.attr("src", URL.createObjectURL(file));
-
-            $(".preview_img").hide();
+            curElement.attr("src", URL.createObjectURL(file)).show();
             $("#preview_file").hide();
             $("#file_name").text("");
         } else if (file.type.match("audio.*")) {
-            // console.log(file.type);
-
-            var curElement = $(".preview_img");
-
-            curElement.attr("src", URL.createObjectURL(file));
-
-            $(".preview_img").hide();
+            curElement.attr("src", URL.createObjectURL(file)).show();
             $("#preview_file").hide();
-
             $("#file_name").text("audio");
-        } else {
-            // console.log("else");
-
+        } else if (file.type === "application/pdf") {
+            // Handling PDF files
             reader.onload = function (e) {
-                // console.log("loaded", e.target.result);
-
-                curElement.attr("src", e.target.result);
+                $("#preview_file")
+                    .html(
+                        `<iframe src="${e.target.result}" style="width:100%; height:400px;"></iframe>`
+                    )
+                    .show();
+                $(".preview_img").hide();
             };
             reader.readAsDataURL(file);
-            $(".file_info").val(fileExtension);
-            $("#file_name").text(file.name);
-
-            $("#preview_file").show();
+        } else if (
+            file.type === "application/vnd.ms-excel" ||
+            file.type ===
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        ) {
+            // Handle Excel file display
+            $("#preview_file")
+                .html(`<p>Excel file selected: ${file.name}</p>`)
+                .show();
             $(".preview_img").hide();
+        } else {
+            // Handle other file types (text, docs)
+            reader.onload = function (e) {
+                $("#preview_file")
+                    .html(`<p>File selected: ${file.name}</p>`)
+                    .show();
+                $(".preview_img").hide();
+            };
+            reader.readAsText(file);
         }
-        // reader.readAsArrayBuffer(file);
+        $(".file_info").val(fileExtension);
+        $("#file_name").text(file.name);
     } else {
-        alert("else");
+        alert("Please select a file.");
         $(".preview_img").hide();
         curElement.attr("src", "");
     }
-    // console.log({ curElement });
 });
 
 function displayFiles(files, name) {
     var preview = document.getElementById("preview");
     $(preview).show();
     preview.innerHTML = "";
-    console.log("preview clear");
     for (var i = 0; i < files.length; i++) {
         var file = files[i];
         var reader = new FileReader();
 
         reader.onload = (function (file) {
             return function (e) {
-                fileType = file.type.split("/")[0];
-                // console.log({ fileType });
+                var fileType = file.type.split("/")[0];
                 var previewItem = document.createElement("div");
                 previewItem.className = "preview-item";
                 var previewElement;
@@ -3146,31 +3149,21 @@ function displayFiles(files, name) {
                 } else if (fileType === "audio") {
                     previewElement = document.createElement("audio");
                     previewElement.controls = true;
-
-                    var fileName = document.createElement("span");
-                    fileName.className = "file-name";
-                    fileName.textContent = name;
                 } else if (fileType === "image") {
                     previewElement = document.createElement("img");
                     previewElement.style.maxWidth = "100%";
-                } else {
+                } else if (file.type === "application/pdf") {
                     previewElement = document.createElement("iframe");
                     previewElement.style.maxWidth = "100%";
-                    // return;
+                    previewElement.style.height = "400px";
+                } else {
+                    previewElement = document.createElement("p");
+                    previewElement.textContent = `File selected: ${file.name}`;
                 }
-                previewElement.className = "preview_img";
-                var closeButton = document.createElement("button");
-                closeButton.innerHTML = closeSpan;
-                closeButton.className = "close-preview";
 
+                previewElement.className = "preview_img";
                 previewElement.src = e.target.result;
                 previewItem.appendChild(previewElement);
-
-                if (fileType === "audio") {
-                    previewItem.appendChild(fileName);
-                }
-
-                previewItem.appendChild(closeButton);
                 preview.appendChild(previewItem);
             };
         })(file);
