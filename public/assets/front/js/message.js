@@ -2946,7 +2946,7 @@ $("#add-group-member").click(async function () {
                     group: true,
                     lastMessage: "",
                     lastSenderId: "",
-                    receiverProfile: "",
+                    receiverProfile: groupInfo?.groupProfile,
                     timeStamp: Date.now(),
                     unRead: false,
                     unReadCount: 0,
