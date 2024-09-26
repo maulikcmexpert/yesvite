@@ -1349,7 +1349,7 @@ function UpdateMessageToList(key, messageData, conversationId) {
 function addMessageToList(key, messageData, conversationId) {
     if ($(".selected_conversasion").val() != conversationId) {
         console.warn($(".selected_conversasion").val());
-        console.log(conversationId);
+        // console.log(conversationId);
         $(".conversation-" + conversationId).addClass("active");
         // console.log("selectedisnotvalid");
         return;
@@ -1592,7 +1592,7 @@ function createMessageElement(key, messageData, isGroup) {
                 ${emojiAndReplay}
               </div>
               `;
-    console.log(messageData);
+    // console.log(messageData);
     const replySection =
         messageData.replyData && messageData.replyData.replyTimeStamp != 0
             ? `
@@ -2810,7 +2810,7 @@ function generateReactionsAndReply() {
             );
             const replyMessageSnapshot = await get(replyMessageRef);
             const replyMessageData = replyMessageSnapshot.val();
-            console.log(replyMessageData);
+            // console.log(replyMessageData);
 
             replay = `<div class='set-replay-msg'>
             <div class='replay-child'>
@@ -2987,7 +2987,7 @@ $(".upload-box").change(function () {
         return;
     }
     var name = file?.name;
-    console.log({ name });
+    // console.log({ name });
     $(".dropdown-menu").removeClass("show");
 
     displayFiles(this.files, name);
@@ -3015,7 +3015,7 @@ $(".upload-box").change(function () {
             $("#preview_file").hide();
             $("#file_name").text("");
         } else if (file.type.match("audio.*")) {
-            console.log(file.type);
+            // console.log(file.type);
 
             var curElement = $(".preview_img");
 
@@ -3026,10 +3026,10 @@ $(".upload-box").change(function () {
 
             $("#file_name").text("audio");
         } else {
-            console.log("else");
+            // console.log("else");
 
             reader.onload = function (e) {
-                console.log("loaded", e.target.result);
+                // console.log("loaded", e.target.result);
 
                 curElement.attr("src", e.target.result);
             };
@@ -3046,7 +3046,7 @@ $(".upload-box").change(function () {
         $(".preview_img").hide();
         curElement.attr("src", "");
     }
-    console.log({ curElement });
+    // console.log({ curElement });
 });
 
 function displayFiles(files, name) {
@@ -3061,7 +3061,7 @@ function displayFiles(files, name) {
         reader.onload = (function (file) {
             return function (e) {
                 fileType = file.type.split("/")[0];
-                console.log({ fileType });
+                // console.log({ fileType });
                 var previewItem = document.createElement("div");
                 previewItem.className = "preview-item";
                 var previewElement;
@@ -3128,7 +3128,7 @@ async function getTotalUnreadMessageCount() {
                     10
                 );
 
-                console.log(totalUnreadCount);
+                // console.log(totalUnreadCount);
             }
         }
     }
