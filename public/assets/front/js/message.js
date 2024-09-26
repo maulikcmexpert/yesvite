@@ -999,7 +999,7 @@ $(document).on("click", ".mute-conversation", function () {
         .attr("changeWith", change == "1" ? "0" : "1");
 });
 
-$(document).on("click", ".mute-single-conversation", function () {
+$(document).on("click", ".mute-single-conversation", function (e) {
     e.stopPropagation();
 
     const change = $(this).attr("changeWith");
