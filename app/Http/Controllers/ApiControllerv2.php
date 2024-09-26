@@ -5461,7 +5461,7 @@ class ApiControllerv2 extends Controller
             if (isset($request->design_inner_image) && !empty($request->design_inner_image)) {
                 $designInnerImage = $request->design_inner_image;
                 $DesignInnerImageName = time() . '_' . str_replace(' ', '_', $designInnerImage->getClientOriginalName());
-                $designImage->move(public_path('storage/canvas'), $DesignInnerImageName);
+                $designInnerImage->move(public_path('storage/canvas'), $DesignInnerImageName);
                 $eventDesingInnerImage = Event::where('id',  $request->event_id)->first();
                 $eventDesingInnerImage->design_inner_image = $DesignInnerImageName;
                 $eventDesingInnerImage->save();
@@ -5494,7 +5494,7 @@ class ApiControllerv2 extends Controller
             DB::rollBack();
             return response()->json(['status' => 0, 'message' => "db error"]);
         } catch (\Exception $e) {
-            // dd($e);
+            dd($e);
             // return response()->json(['status' => 1, 'message' => "Event images stored successfully"]);
             return response()->json(['status' => 0, 'message' => "something went wrong"]);
         }
