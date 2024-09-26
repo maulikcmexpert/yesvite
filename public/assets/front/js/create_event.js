@@ -972,7 +972,23 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
 
                 // } else {
                     $(".inivted_user_list").append(response.view);
-                    $(".user-list-responsive").append(response.responsive_view);
+                    var length = responsive_invite_user();
+                    if(length < 5){
+                        $(".user-list-responsive").append(response.responsive_view);
+                    }else{
+                        var counter = length - 5;
+                        var all_user_list_length = $('.all_user_list').length;
+                        if(all_user_list_length < 1){
+                            $('.user-list-responsive').append(`<div class="guest-contact all_user_list">
+                                        <div class="guest-img">
+                                            <span class="update_user_count">+${counter}</span>
+                                        </div>
+                                        <span class="all-contact">See all</h6>
+                                    </div>`);
+                        }else{
+                            $('.update_user_count').text("+"+counter);                                                                              
+                        }
+                    }
 
                     guest_counter(0,15);
                     $('input[name="email_invite[]"]').prop('disabled', false);
@@ -980,7 +996,6 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
                     //     $('.user_choice').prop('disabled',true);
                     // }
                     $("#loader").css('display','none');
-                    responsive_invite_user();
                 // }
             },
             error: function (xhr, status, error) {},
@@ -993,7 +1008,8 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
 
 function responsive_invite_user(){
     var length = $('.responsive_invite_user').length;
-    console.log(length/3);
+    length = length/3;
+    return length;
 }
 
 function guest_counter(total_guest,max_guest){
