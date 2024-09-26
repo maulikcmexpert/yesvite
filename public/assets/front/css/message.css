@@ -791,6 +791,7 @@ ul.member-lists li:last-child {
     right: -30px;
     top: 50%;
     transform: translateY(-50%);
+    z-index: 1;
 }
 
 .msg-body ul li.sender div.media-msg video {
@@ -1203,8 +1204,9 @@ ul.member-lists li:last-child {
     margin-bottom: 0;
     border: 1px solid transparent;
     background: linear-gradient(135deg, rgb(255, 247, 240), rgb(255, 200, 163)) rgb(14, 114, 207);
-    color: rgb(212, 56, 13);
     font-size: 16px;
+    color: rgb(212, 56, 13);
+    color: #fff;
 }
 
 #msgBox .chat-user h4 {
@@ -1319,7 +1321,8 @@ ul.member-lists li:last-child {
     font-size: 16px;
     font-weight: 600;
     line-height: 26px;
-    color: var(--secondryColor);
+    /* color: var(--secondryColor); */
+    color: #fff;
 }
 
 #msgBox .multi-chat p {

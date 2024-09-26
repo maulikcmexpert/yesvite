@@ -26,8 +26,8 @@
                             aria-labelledby="contact-tab">
 
                             <!-- ======= guest-users mobile ======== -->
-                            <div class="guest-contacts-wrp" style="display: none">
-                                <div class="guest-contact">
+                            <div class="guest-contacts-wrp" style="">
+                                <!-- <div class="guest-contact">
                                     <div class="guest-img">
                                         <img src="./assets/image/user-img.svg" alt="guest-img">
                                         <a href="#" class="close">
@@ -45,8 +45,8 @@
                                         </a>
                                     </div>
                                     <h6 class="guest-name">Silvia Alegra</h6>
-                                </div>
-                                <div class="guest-contact">
+                                </div> -->
+                                <!-- <div class="guest-contact">
                                     <div class="guest-img">
                                         <img src="./assets/image/user-img.svg" alt="guest-img">
                                         <a href="#" class="close">
@@ -64,8 +64,8 @@
                                         </a>
                                     </div>
                                     <h6 class="guest-name">Silvia Alegra</h6>
-                                </div>
-                                <div class="guest-contact">
+                                </div> -->
+                                <!-- <div class="guest-contact">
                                     <div class="guest-img">
                                         <img src="./assets/image/user-img.svg" alt="guest-img">
                                         <a href="#" class="close">
@@ -83,8 +83,8 @@
                                         </a>
                                     </div>
                                     <h6 class="guest-name">Silvia Alegra</h6>
-                                </div>
-                                <div class="guest-contact">
+                                </div> -->
+                                <!-- <div class="guest-contact">
                                     <div class="guest-img">
                                         <img src="./assets/image/user-img.svg" alt="guest-img">
                                         <a href="#" class="close">
@@ -102,13 +102,13 @@
                                         </a>
                                     </div>
                                     <h6 class="guest-name">Silvia Alegra</h6>
-                                </div>
-                                <div class="guest-contact">
+                                </div> -->
+                                <!-- <div class="guest-contact">
                                     <div class="guest-img">
                                         <span>+5</span>
                                     </div>
                                     <span class="all-contact">See all</h6>
-                                </div>
+                                </div> -->
                             </div>
 
                             <div class="popular-list">
