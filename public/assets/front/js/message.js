@@ -1972,6 +1972,12 @@ function handleRemoveConversation(snapshot) {
         handleDelete();
     }
 }
+
+$(document).on("click", ".usr-list-more", function (e) {
+    e.stopPropagation();
+    console.log("clicked");
+    return;
+});
 // Initialize overview listeners
 const overviewRef = ref(database, `overview/${senderUser}`);
 onChildAdded(overviewRef, handleNewConversation);
@@ -3198,6 +3204,7 @@ $(".bulk-edit").click(function () {
     $(bulkcheck).removeClass("d-none");
     $(".chat-functions").removeClass("d-none");
     $(".bulk-edit-option").hide();
+    $(".chat-header-searchbar").hide();
 });
 $(".bulk-back").click(function () {
     var bulkcheck = document.getElementsByClassName("bulk-check");
@@ -3205,6 +3212,8 @@ $(".bulk-back").click(function () {
     $(".chat-functions").addClass("d-none");
     $(".bulk-edit-option").show();
     $(".check-counter").text("");
+    $(".chat-header-searchbar").show();
+
     $("input[name='checked_conversation[]']").prop("checked", false);
 });
 
