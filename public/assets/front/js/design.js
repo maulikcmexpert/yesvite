@@ -6,7 +6,6 @@ $(document).on("click", ".design-card", function () {
     var imageUrl = $(this).data("image");
     var json = $(this).data("json");
     $('.edit_design_tem').attr('data-image',imageUrl);
-    $('.edit_design_tem').attr('data-json',json);
     dbJson = json;
     // Set the image URL in the modal's image tag
     $("#modalImage").attr("src", imageUrl);
