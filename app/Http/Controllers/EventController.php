@@ -698,12 +698,16 @@ class EventController extends Controller
         $edit_category_id = $request->input('edit_category_id');
         $categories = session()->get('category', []);
         // dd($categories);
+        $categoryNames =  collect($categories)->pluck('category_name')->toArray();
 
         if(isset($edit_category_id) && $edit_category_id != ''){
             $status = '2';
-            dd($categories);
+            $categoryNameCount = collect($categories)->reduce(function ($count, $category) use ($categoryName) {
+                return $count + ($category['category_name'] === $categoryName ? 1 : 0);
+            }, 0);
+            dd($categoryNameCount);
+            $categories[$edit_category_id] = ['category_name' => $categoryName, 'category_quantity' => $categoryQuantity];
         }else{
-            $categoryNames =  collect($categories)->pluck('category_name')->toArray();
             if (in_array($categoryName, $categoryNames)) {
                 return response()->json(['view' => '', 'status' => '0']);
             } else {
