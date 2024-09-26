@@ -1278,9 +1278,9 @@ $(document).on("click", ".add_category_btn", function () {
                 console.log(response);
                 $('.category_name-'+edit_category_id).text(categoryName);
                 $('#missing-category-'+edit_category_id).text(categoryQuantity);
-                $('.edit_potluck_category').attr('data-id',edit_category_id);
-                $('.edit_potluck_category').attr('data-category_name',categoryName);
-                $('.edit_potluck_category').attr('data-category_quantity',categoryQuantity);
+                $('.edit_potluck_category-'+edit_category_id).attr('data-id',edit_category_id);
+                $('.edit_potluck_category-'+edit_category_id).attr('data-category_name',categoryName);
+                $('.edit_potluck_category-'+edit_category_id).attr('data-category_quantity',categoryQuantity);
                 toggleSidebar("sidebar_potluck");
                 potluck_cateogry_item_count();
             } else {
@@ -5156,7 +5156,7 @@ $(document).ready(function () {
     });
 });
 
-$(document).on("click", ".edit_potluck_category", function () {
+$(document).on("click", ".edit_category", function () {
     var id = $(this).data("id");
     var category_name = $(this).data("category_name");
     var category_quantity = $(this).data("category_quantity");
