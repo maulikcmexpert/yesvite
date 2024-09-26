@@ -26,7 +26,7 @@
                             aria-labelledby="contact-tab">
 
                             <!-- ======= guest-users mobile ======== -->
-                            <div class="guest-contacts-wrp" style="">
+                            <div class="guest-contacts-wrp user-list-responsive" style="">
                                 <!-- <div class="guest-contact">
                                     <div class="guest-img">
                                         <img src="./assets/image/user-img.svg" alt="guest-img">
