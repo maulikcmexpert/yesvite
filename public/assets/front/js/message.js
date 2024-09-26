@@ -3490,6 +3490,16 @@ $(".multi-pin").click(async function () {
             `overview/${senderUser}/${conversationId}/isPin`
         );
         promises.push(set(overviewRef, pinChange));
+        $(".conversation-" + conversationId)
+            .children()
+            .find(".pin-single-conversation")
+            .find("span")
+            .text(pinChange == "1" ? "Unpin" : "Pin");
+
+        $(".conversation-" + conversationId)
+            .children()
+            .find(".pin-single-conversation")
+            .attr("changeWith", pinChange == "1" ? "0" : "1");
 
         if (pinChange == "1") {
             const conversationElement = $(`.conversation-${conversationId}`);
@@ -3499,11 +3509,29 @@ $(".multi-pin").click(async function () {
                 .find(".chat-data")
                 .find(".pin-svg")
                 .removeClass("d-none");
+
+            $(".conversation-" + conversationId)
+                .children()
+                .find(".pin1-self-icn")
+                .addClass("d-none");
+            $(".conversation-" + conversationId)
+                .children()
+                .find(".unpin1-self-icn")
+                .removeClass("d-none");
         } else {
             $(".conversation-" + conversationId).removeClass("pinned");
             $(`.conversation-${conversationId}`)
                 .find(".chat-data")
                 .find(".pin-svg")
+                .addClass("d-none");
+
+            (".conversation-" + conversationId)
+                .children()
+                .find(".pin1-self-icn")
+                .removeClass("d-none");
+            $(".conversation-" + conversationId)
+                .children()
+                .find(".unpin1-self-icn")
                 .addClass("d-none");
         }
     });
