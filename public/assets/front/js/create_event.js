@@ -963,7 +963,7 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
                 $('#currentInviteCount').val(currentInviteCount);
                 if (response.is_duplicate == 1) {
                     $("#user_tel-" + userId).remove();
-                    $("#user_id_tel-" + userId).remove();
+                    $(".user_id_tel-" + userId).remove();
                 }
                 
                 var total_guest = 0;
@@ -1061,7 +1061,7 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
 
                 if (response.is_duplicate == 1) {
                     $("#user-" + userId).remove();
-                    $("#user_id-" + userId).remove();
+                    $(".user_id-" + userId).remove();
                 }
                 $(".inivted_user_list").append(response.view);
                 $(".user-list-responsive").append(response.responsive_view);
@@ -1102,7 +1102,7 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
                 // }
 
                 $('#user_tel-'+userId).remove();
-                $('#user_id_tel-'+userId).remove();
+                $('.user_id_tel-'+userId).remove();
                 total_guest = $(".users-data.invited_user").length;
                 $("#event_guest_count").text(total_guest + " Guests");
                 $(".invite-count").text(total_guest);
@@ -3174,7 +3174,7 @@ $(document).on("click", "#delete_invited_user", function () {
 
     // $("#" + id).remove();
      $('#user-'+userId).remove();
-     $('#user_id-'+userId).remove();
+     $('.user_id-'+userId).remove();
 
     var checkbox = $("." + id);
     checkbox.prop("checked", false);
@@ -3286,7 +3286,7 @@ $(document).on("change", "input[name='email_invite[]']", function () {
         var check = $(this).data("id");
         var userid = $(this).val();
         $("#" + check).remove();
-        $("#user_id-" + userid).remove();
+        $(".user_id-" + userid).remove();
         var total_guest = $(".users-data.invited_user").length;
         $("#event_guest_count").text(total_guest + " Guests");
         $(".invite-count").text(total_guest);
@@ -3309,7 +3309,7 @@ $(document).on("change", "input[name='mobile[]']", function () {
         var check = $(this).data("id");
         var userid = $(this).val();
         $("#" + check).remove();
-        $("#user_id_tel-" + userid).remove();
+        $(".user_id_tel-" + userid).remove();
         var total_guest = $(".users-data.invited_user").length;
         $("#event_guest_count").text(total_guest + " Guests");
         $(".invite-count").text(total_guest);
