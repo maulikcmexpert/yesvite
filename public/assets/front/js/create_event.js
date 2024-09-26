@@ -46,7 +46,11 @@ $(document).ready(function () {
     $('#address1').attr('placeholder', '');
 
     $('.search_user').val('');
+        
 });
+
+
+
 
 $(document).on('focus','.inputText',function(){
     $(this).next().addClass('floatingfocus');
