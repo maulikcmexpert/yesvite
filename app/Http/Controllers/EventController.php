@@ -108,11 +108,16 @@ class EventController extends Controller
                 $query->select('*');
             }])->orderBy('id','DESC')->get();
         // dd($design_category);
-        $textData = TextData::where('desgin_category_id','!=',null)
+        $textData = TextData::with(['subcategory' => function ($query){
+                $query->select('*');
+            },'category' => function ($query){
+                $query->select('*');
+            }])
+            ->where('desgin_category_id','!=',null)
             ->where('design_subcategory_id','!=',null)
             ->orderBy('id', 'desc')
             ->get();
-        
+        dd($textData);
         $user['profile'] = ($user->profile != null) ? asset('storage/profile/' . $user->profile) : "";
         $user['bg_profile'] = ($user->bg_profile != null) ? asset('storage/bg_profile/' . $user->bg_profile) : asset('assets/front/image/Frame 1000005835.png');
         $date = Carbon::parse($user->created_at);
