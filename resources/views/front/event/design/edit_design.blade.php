@@ -947,9 +947,9 @@
         </div>
     </div>
 
-    <div id="sidebar_font_overlay" class="overlay" onclick="toggleSidebar('')"></div>
-    <div id="sidebar_edit_text_overlay" class="overlay" onclick="toggleSidebar('')"></div>
-    <div id="sidebar_color_overlay" class="overlay" onclick="toggleSidebar('')"></div>
-    <div id="sidebar_format_overlay" class="overlay" onclick="toggleSidebar('')"></div>
-    <div id="sidebar_photo_slider_overlay" class="overlay" onclick="toggleSidebar('')"></div>
 </main>
+<div id="sidebar_font_overlay" class="overlay" onclick="toggleSidebar('')"></div>
+<div id="sidebar_edit_text_overlay" class="overlay" onclick="toggleSidebar('')"></div>
+<div id="sidebar_color_overlay" class="overlay" onclick="toggleSidebar('')"></div>
+<div id="sidebar_format_overlay" class="overlay" onclick="toggleSidebar('')"></div>
+<div id="sidebar_photo_slider_overlay" class="overlay" onclick="toggleSidebar('')"></div>
