@@ -688,10 +688,6 @@
     .edit-image-main-wrp .design-seting{
         display: flex;
     }
-
-    .edit-image-main-wrp{
-        height: 100% !important;
-    }
 }
 
 @media only screen and (max-width: 575px){
