@@ -860,10 +860,8 @@ $(document).on("click", ".pin-conversation", function () {
         .text(pinChange == "1" ? "Unpin" : "Pin");
     $(this).attr("changeWith", pinChange == "1" ? "0" : "1");
     if (pinChange == "1") {
-        const conversationElement = $(`.conversation-${conversationId}`);
         console.log("here");
 
-        moveToTopOrBelowPinned(conversationElement);
         $(".conversation-" + conversationId).addClass("pinned");
         $(".conversation-" + conversationId)
             .find(".chat-data")
@@ -882,6 +880,7 @@ $(document).on("click", ".pin-conversation", function () {
         $(".pin-self-icn").show();
         $(".unpin-self-icn").hide();
     }
+    moveToTopOrBelowPinned($(`.conversation-${conversationId}`));
 });
 $(document).on("click", ".pin-single-conversation", function (e) {
     e.stopPropagation();
@@ -897,8 +896,6 @@ $(document).on("click", ".pin-single-conversation", function (e) {
         .find("span")
         .text(pinChange == "1" ? "Unpin" : "Pin");
     $(this).attr("changeWith", pinChange == "1" ? "0" : "1");
-    const conversationElement = $(`.conversation-${conversationId}`);
-
     if (pinChange == "1") {
         console.log("here");
 
