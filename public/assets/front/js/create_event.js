@@ -980,7 +980,7 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
                     //     $('.user_choice').prop('disabled',true);
                     // }
                     $("#loader").css('display','none');
-                   
+                    responsive_invite_user();
                 // }
             },
             error: function (xhr, status, error) {},
@@ -990,6 +990,11 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
         $("#loader").css('display','none');
     }
 });
+
+function responsive_invite_user(){
+    var length = $('.responsive_invite_user').length;
+    console.log(length);
+}
 
 function guest_counter(total_guest,max_guest){
     total_guest = $(".users-data.invited_user").length;
