@@ -984,6 +984,7 @@ $(document).on("click", ".mute-conversation", function () {
     $(".conversation-" + conversationId)
         .find(".chat-data")
         .find(".mute-single-conversation")
+        .find("span")
         .text(change == "1" ? "Unmute" : "Mute");
 
     $(".conversation-" + conversationId)
