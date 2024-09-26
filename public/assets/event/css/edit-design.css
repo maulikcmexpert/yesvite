@@ -615,7 +615,7 @@
     margin-top: 20px;
 } */
 .edit-image-main-wrp .design-seting{
-    position: absolute !important;
+    position: sticky !important;
     bottom: 0 !important;
     width: 100% !important;
     max-width: 100% !important;
@@ -688,6 +688,7 @@
     .edit-image-main-wrp .design-seting{
         display: flex;
     }
+
 }
 
 @media only screen and (max-width: 575px){
