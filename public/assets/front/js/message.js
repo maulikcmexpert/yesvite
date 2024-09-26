@@ -862,6 +862,7 @@ $(document).on("click", ".pin-conversation", function () {
     $(".conversation-" + conversationId)
         .children()
         .find(".pin-single-conversation")
+        .find("span")
         .text(pinChange == "1" ? "Unpin" : "Pin");
 
     $(this).attr("changeWith", pinChange == "1" ? "0" : "1");
@@ -910,7 +911,15 @@ $(document).on("click", ".pin-single-conversation", function (e) {
     e.stopPropagation();
     const pinChange = $(this).attr("changeWith");
     let conversationId = $(this).data("conversation");
-    console.log(conversationId);
+
+    const selectedConversationId = $(".selected_conversasion").val();
+
+    if (selectedConversationId === conversationId) {
+        $(".pin-conversation")
+            .find("span")
+            .text(pinChange == "1" ? "Unpin" : "Pin");
+    }
+
     const overviewRef = ref(
         database,
         `overview/${senderUser}/${conversationId}/isPin`
@@ -928,9 +937,10 @@ $(document).on("click", ".pin-single-conversation", function (e) {
             .find(".chat-data")
             .find(".pin-svg")
             .removeClass("d-none");
-
-        // $(".unpin-self-icn").show("d-none");
-        // $(".pin-self-icn").hide("d-none");
+        if (selectedConversationId === conversationId) {
+            $(".unpin-self-icn").show("d-none");
+            $(".pin-self-icn").hide("d-none");
+        }
         $(this).children(".pin1-self-icn").addClass("d-none");
         $(this).children(".unpin1-self-icn").removeClass("d-none");
     } else {
@@ -942,6 +952,10 @@ $(document).on("click", ".pin-single-conversation", function (e) {
             .addClass("d-none");
         $(this).children(".pin1-self-icn").removeClass("d-none");
         $(this).children(".unpin1-self-icn").addClass("d-none");
+        if (selectedConversationId === conversationId) {
+            $(".pin-self-icn").show();
+            $(".unpin-self-icn").hide();
+        }
     }
     moveToTopOrBelowPinned($(`.conversation-${conversationId}`));
 });
