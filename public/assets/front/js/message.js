@@ -767,21 +767,26 @@ $(document).on("click", ".msg-list", async function () {
     $(".member-lists").html("");
     $(".send-message").val("");
     $("#startRecording").attr("style", "display:inline-block;");
+    console.log({ conversationId });
 
     if (isGroup == true || isGroup == "true") {
         await updateChatfromGroup(conversationId);
+        console.log({ conversationId });
+
         //  $(".new-member").removeClass("d-none");
     } else {
         $(".new-member").addClass("d-none");
 
         const userId = $(this).attr("data-userid");
         $(".selected_message").val(userId);
+        console.log({ conversationId });
 
         await updateOverview(senderUser, conversationId, {
             unRead: false,
             unReadCount: 0,
         });
         await updateChat(userId);
+        console.log({ conversationId });
     }
 });
 async function updateMore(conversationId) {
