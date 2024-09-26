@@ -104,11 +104,11 @@ class EventController extends Controller
             ->get();
             $textData = [];
             $design_category = [];
-        // $design_category = EventDesignCategory::with(['subcategory' => function ($query){
-        //         $query->select('*');
-        //     },'textdatas' => function ($query){
-        //         $query->select('*');
-        //     }])->orderBy('id','DESC')->get();
+        $design_category = EventDesignCategory::with(['subcategory' => function ($query){
+                $query->select('*');
+            },'textdatas' => function ($query){
+                $query->select('*');
+            }])->orderBy('id','DESC')->get();
         // dd($design_category);
         $textData = TextData::select('*')
             ->orderBy('id', 'desc')
