@@ -5137,9 +5137,11 @@ $(document).on("click", ".new-temp", function () {
     // Set the image URL in the modal's image tag
     $("#modalImage").attr("src", imageUrl);
     
-    // Show the modal
-    $("#exampleModal").modal("show");
+    // Show the modal using Bootstrap's modal method
+    var modal = new bootstrap.Modal(document.getElementById("myCustomModal"));
+    modal.show();
 });
+
 
 
 
