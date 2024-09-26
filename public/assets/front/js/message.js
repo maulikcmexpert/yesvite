@@ -476,7 +476,27 @@ function moveToTopOrBelowPinned(element) {
         if (!inserted) {
             $chatList.append(parentDiv);
         }
+
+        // After unpinning, reorder pinned elements
+        reorderPinnedElements($chatList);
     }
+}
+
+function reorderPinnedElements($chatList) {
+    // Find all pinned elements
+    let $pinnedItems = $chatList.find(".pinned").closest("div");
+
+    // Sort pinned elements by their data-position in ascending order
+    $pinnedItems.sort(function (a, b) {
+        let positionA = parseInt($(a).find("li").attr("data-position"));
+        let positionB = parseInt($(b).find("li").attr("data-position"));
+        return positionA - positionB;
+    });
+
+    // Move all sorted pinned items to the top of the chat list
+    $pinnedItems.each(function () {
+        $chatList.prepend($(this));
+    });
 }
 
 function removeSelectedMsg() {
@@ -840,10 +860,8 @@ $(document).on("click", ".pin-conversation", function () {
         .text(pinChange == "1" ? "Unpin" : "Pin");
     $(this).attr("changeWith", pinChange == "1" ? "0" : "1");
     if (pinChange == "1") {
-        const conversationElement = $(`.conversation-${conversationId}`);
         console.log("here");
 
-        moveToTopOrBelowPinned(conversationElement);
         $(".conversation-" + conversationId).addClass("pinned");
         $(".conversation-" + conversationId)
             .find(".chat-data")
@@ -862,6 +880,7 @@ $(document).on("click", ".pin-conversation", function () {
         $(".pin-self-icn").show();
         $(".unpin-self-icn").hide();
     }
+    moveToTopOrBelowPinned($(`.conversation-${conversationId}`));
 });
 $(document).on("click", ".pin-single-conversation", function (e) {
     e.stopPropagation();
@@ -877,8 +896,6 @@ $(document).on("click", ".pin-single-conversation", function (e) {
         .find("span")
         .text(pinChange == "1" ? "Unpin" : "Pin");
     $(this).attr("changeWith", pinChange == "1" ? "0" : "1");
-    const conversationElement = $(`.conversation-${conversationId}`);
-
     if (pinChange == "1") {
         console.log("here");
 
