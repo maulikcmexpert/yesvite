@@ -992,8 +992,7 @@ $(".send-message").on("keypress", async function (e) {
     var isGroup = $(".conversation-" + conversationId).attr("data-group");
 
     if (e.which === 13 && e.shiftKey) {
-        e.preventDefault(); // Stop the Enter action when Shift is pressed
-        return; // Do nothing further if Shift + Enter is pressed
+        return;
     }
     if (isGroup == "true" || isGroup == true) {
         // Fetch the group profiles
