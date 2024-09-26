@@ -79,7 +79,7 @@
     </div>
     @include($page)
 
-    <script src="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.js"></script>
+   
     <x-front.footer :js="$js ?? []" />
     <script src="{{ asset('assets/event/js/script.js') }}"></script>
     <script src="{{ asset('assets/event/js/common.js') }}"></script>
