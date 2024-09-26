@@ -102,11 +102,11 @@ class EventController extends Controller
             ->orderBy('firstname')
             ->limit(1)
             ->get();
-        $design_category = EventDesignCategory::with(['subcategory' => function ($query){
-                $query->select('*');
-            },'textdatas' => function ($query){
-                $query->select('*');
-            }])->orderBy('id','DESC')->get();
+        // $design_category = EventDesignCategory::with(['subcategory' => function ($query){
+        //         $query->select('*');
+        //     },'textdatas' => function ($query){
+        //         $query->select('*');
+        //     }])->orderBy('id','DESC')->get();
         // dd($design_category);
         $textData = TextData::with(['subcategory' => function ($query){
                 $query->select('*');
