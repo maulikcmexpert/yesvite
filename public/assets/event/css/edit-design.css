@@ -635,6 +635,9 @@
         height: 460px !important;
         margin: 0px auto !important;
     }
+    .edit-image-main-wrp{
+        padding: 0px !important;
+    }
 }
 
 @media only screen and (max-width: 991px) {
