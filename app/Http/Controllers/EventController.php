@@ -722,11 +722,22 @@ class EventController extends Controller
                 }else{
                     $categories[$edit_category_id] = [
                         'category_name' => $categoryName,
-                        'category_quantity' => $categoryQuantity];
+                        'category_quantity' => $categoryQuantity,
+                        'item' => []
+                    ];
                 }
                 session()->put('category', $categories);
                 Session::save();
-                return response()->json(['status' => $status]);
+                $categories = Session::get('category', []);
+                $category_quantity = $categories[$edit_category_id]['category_quantity'];
+                $category_item = count($categories[$edit_category_id]['item']);
+                $qty = 0;
+                if ($category_quantity <= $category_item) {
+                    $qty = 1;
+                } else {
+                    $qty = 0;
+                }
+                return response()->json(['status' => $status, 'qty' => $qty]);
             }else{
                 return response()->json(['view' => '', 'status' => '0']);
             }
