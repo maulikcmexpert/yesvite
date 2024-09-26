@@ -6920,7 +6920,7 @@ class ApiControllerv2 extends Controller
             // $date1 = $dateRange[0];
             // $date2 = $dateRange[1];
 
-            dd($dateRange[1 ]);
+            // dd($dateRange[0]);
             // $timestamp1 = strtotime($date1);
             // $timestamp2 = strtotime($date2);
 
