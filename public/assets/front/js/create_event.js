@@ -1311,6 +1311,7 @@ $(document).on("click", ".add_category_item_btn", function () {
             _token: $('meta[name="csrf-token"]').attr("content"),
         },
         success: function (response) {
+            console.log(response);
             $("#item_name").val("");
             $("#item_quantity").val("1");
             let slide = document.getElementsByClassName(
