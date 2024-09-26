@@ -128,19 +128,22 @@ $message['unReadCount'] = @$message['unRead']==true && @$message['unReadCount']=
             <ul class="dropdown-menu" style="">
                 
                 <li>
-                    <a class="dropdown-item pin-conversation" href="#" changewith="1">
 
-                        <svg class="me-2 pin-self-icn" width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <a class="dropdown-item pin-conversation" href="#" changewith="{{@$message['isPin']=='1'?'0':'1'}}">
+
+                        <svg class="me-2 pin-self-icn {{@$message['isPin']=='1'?'':'d-none'}}" width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M16.3908 4.36734L12.1481 8.60998L7.90549 10.0242L6.49128 11.4384L13.5623 18.5095L14.9766 17.0953L16.3908 12.8526L20.6334 8.60998" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                             <path d="M10.0234 14.9746L6.4879 18.5101" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                             <path d="M15.6797 3.66211L21.3365 9.31896" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                         </svg>
 
-                        <svg class="me-2 unpin-self-icn" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368" style="display: none;">
+                        <svg class="me-2 unpin-self-icn {{@$message['isPin']=='1'?'d-none':''}}" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368" style="display: none;">
                             <path d="M680-840v80h-40v327l-80-80v-247H400v87l-87-87-33-33v-47h400ZM480-40l-40-40v-240H240v-80l80-80v-46L56-792l56-56 736 736-58 56-264-264h-6v240l-40 40ZM354-400h92l-44-44-2-2-46 46Zm126-193Zm-78 149Z"></path>
                         </svg>
 
-                        <span>Pin</span></a>
+                        <span>{{@$message['isPin']=='1'?'pin':'unpin'}}</span>
+                    </a>
+
                 </li>
                 <li><a class="dropdown-item mute-conversation" href="#" changewith="1">
                         <svg class="me-2" width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
