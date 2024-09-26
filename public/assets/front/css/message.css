@@ -16,6 +16,8 @@
     /* Optional: Adds rounded corners */
 }
 
+
+
 .message-area .massage-notification {
     display: flex;
     align-items: center;
@@ -923,6 +925,10 @@ ul.member-lists li:last-child {
     padding: 10px;
     background-color: #F8F9FD;
     position: relative;
+}
+
+.preview-item .preview_img {
+    height: 100% !important;
 }
 
 .msg-footer .preview-item {
