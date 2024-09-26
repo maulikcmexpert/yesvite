@@ -5494,7 +5494,6 @@ class ApiControllerv2 extends Controller
             DB::rollBack();
             return response()->json(['status' => 0, 'message' => "db error"]);
         } catch (\Exception $e) {
-            dd($e);
             // return response()->json(['status' => 1, 'message' => "Event images stored successfully"]);
             return response()->json(['status' => 0, 'message' => "something went wrong"]);
         }
@@ -6594,20 +6593,6 @@ class ApiControllerv2 extends Controller
                 $query->where('is_co_host', '1')->with('user');
             }])->where('id', $input['event_id'])->first();
 
-            $event_dates = $eventDetail->start_date;
-            $dateRange = explode(' to ', $event_dates);
-
-            $date1 = trim($dateRange[0]);
-            $date2 = trim($dateRange[1]);
-            $timestamp1 = strtotime($date1);
-            $timestamp2 = strtotime($date2);
-
-            $multidate = "";
-            if ($timestamp1 == $timestamp2) {
-                $multidate = 0;
-            } else {
-                $multidate = 1;
-            }
 
             $guestView = [];
             $eventDetails['id'] = $eventDetail->id;
@@ -6918,6 +6903,23 @@ class ApiControllerv2 extends Controller
                 $query->where('rsvp_status', '1');
             }])->where('id', $input['event_id'])->first();
 
+
+            $event_dates = $eventDetail->start_date;
+            $dateRange = explode(' to ', $event_dates);
+
+            $date1 = trim($dateRange[0]);
+            $date2 = trim($dateRange[1]);
+            $timestamp1 = strtotime($date1);
+            $timestamp2 = strtotime($date2);
+
+            $multidate = "";
+            if ($timestamp1 == $timestamp2) {
+                $multidate = 0;
+            } else {
+                $multidate = 1;
+            }
+
+
             $guestView = [];
             $eventDetails['id'] = $eventDetail->id;
 
@@ -7121,6 +7123,12 @@ class ApiControllerv2 extends Controller
                 }
                 if ($eventDetail->event_settings->gift_registry == '1') {
                     $eventData[] = "Gift Registry";
+                }
+                if ($eventDetail->event_settings->events_schedule == '1') {
+                    $eventData[] = "Event has Schedule";
+                }
+                if ($multidate == 1) {
+                    $eventData[] = "Multiple Day Event";
                 }
                 if (empty($eventData)) {
                     $eventData[] = date('F d, Y', strtotime($eventDetail->start_date));
