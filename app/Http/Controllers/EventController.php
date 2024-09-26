@@ -704,7 +704,7 @@ class EventController extends Controller
             $status = '2';
             $i = 0;
             foreach ($categories as $key => $value) {
-                dd($value);
+                dd($value['category_name']);
             }
             dd($i);
             if($i < 2){
