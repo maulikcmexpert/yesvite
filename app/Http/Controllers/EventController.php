@@ -1130,6 +1130,7 @@ class EventController extends Controller
         // Prepare the view and send the response
         return response()->json([
             'view' => view('front.event.guest.addGuest', compact('data'))->render(),
+            'responsive_view' => view('front.event.guest.addguest_responsive', compact('data'))->render(),
             'success' => true,
             'data' => $data
         ]);
