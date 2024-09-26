@@ -1047,6 +1047,30 @@ $(document).on("click", ".archive-conversation", function () {
     $(".archived-list").hide();
 });
 
+$(document).on("click", ".archive-single-conversation", function () {
+    const change = $(this).attr("changeWith");
+    let conversationId = $(this).data("conversation");
+    const overviewRef = ref(
+        database,
+        `overview/${senderUser}/${conversationId}/isArchive`
+    );
+    set(overviewRef, change);
+    $(this)
+        .find("span")
+        .text(change == "1" ? "Unarchive" : "Archive");
+    $(this).attr("changeWith", change == "1" ? "0" : "1");
+    if (change == "1") {
+        $(".conversation-" + conversationId).addClass("archived-list");
+        $(".conversation-" + conversationId).removeClass("unarchived-list");
+    } else {
+        $(".conversation-" + conversationId).addClass("unarchived-list");
+        $(".conversation-" + conversationId).removeClass("archived-list");
+    }
+    let msgLists = $(".unarchived-list");
+    msgLists[0].click();
+    $(".archived-list").hide();
+});
+
 // Initial chat update
 if ($("#isGroup").val() == true) {
     updateChatfromGroup($(".selected_id").val());
