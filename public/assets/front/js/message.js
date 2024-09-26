@@ -1579,21 +1579,78 @@ function createMessageElement(key, messageData, isGroup) {
                 </div>
                 <hr>
                 <div class="reply-massage"> 
-                 <div class="media-msg-inline">
-                                <div class="media-msg">
+
+
                     ${
                         messageData?.type == "1"
                             ? `
-                           
-                            <img src="${messageData?.url}"/>`
-                            : ""
+                            <div class="media-msg-inline">
+                                <div class="media-msg">
+                                    <img src="${messageData?.url}"/>
+                                    <span> ${
+                                        messageData?.data != ""
+                                            ? messageData.data
+                                            : ""
+                                    }</span>
+                                    ${reaction}
+                                </div>
+                            </div>`
+                            : messageData?.type == "2"
+                            ? `
+                            <div class="media-msg-inline">
+                                <div class="media-msg">
+                                    <video src="${
+                                        messageData?.url
+                                    }" controls></video>
+                                    <span> ${
+                                        messageData?.data != ""
+                                            ? messageData.data
+                                            : ""
+                                    }</span>
+                                    ${reaction}
+                                </div>
+                            </div>`
+                            : messageData?.type == "3"
+                            ? `
+                            <div class="media-msg-inline">
+                                <div class="media-msg">
+                                    ${musicPlayer(messageData?.url)}
+                                    <span> ${
+                                        messageData?.data != ""
+                                            ? messageData.data
+                                            : ""
+                                    }</span>
+                                    ${reaction}
+                                </div>
+                            </div>`
+                            : messageData?.type == "4"
+                            ? `
+                            <div class="media-msg-inline">
+                                <div class="media-msg">
+                                    <iframe src="${
+                                        messageData?.url
+                                    }" style="width:100%;height:400px;"></iframe>
+                                    <span> ${
+                                        messageData?.data != ""
+                                            ? messageData.data
+                                            : ""
+                                    }</span>
+                                    ${reaction}
+                                </div>
+                            </div>`
+                            : `
+                            <span> ${
+                                messageData?.data != "" ? messageData.data : ""
+                            }</span>
+                                    ${reaction}
+                             `
                     }
-                        <span> ${
-                            messageData?.data != "" ? messageData.data : ""
-                        }</span>
-                        ${reaction}
-                </div>
-                </div>
+
+
+              
+                   
+                       
+                
                 </div>
             </div>
             ${emojiAndReplay}
