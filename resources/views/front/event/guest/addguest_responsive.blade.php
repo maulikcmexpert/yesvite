@@ -1,6 +1,6 @@
 @foreach ( $data as $guest_user)
-<div class="guest-contact guest_list_responsive" data-id={{$guest_user['userdata']['id']}} id="user-{{$guest_user['userdata']['id']}}">
-    <div class="guest-img">
+<div class="guest-contact invited_user" data-id={{$guest_user['userdata']['id']}} id="user-{{$guest_user['userdata']['id']}}">
+    <div class="contact-img">
         <!-- <img src="./assets/image/user-img.svg" alt="guest-img"> -->
         @if ($guest_user['userdata']['profile'] != '')
         <img src="{{ asset('storage/profile/' . $guest_user['userdata']['profile']) }}" alt="user-img">
