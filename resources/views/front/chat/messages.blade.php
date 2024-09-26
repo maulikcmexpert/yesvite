@@ -112,6 +112,7 @@ use Carbon\Carbon;
 
                             @php
                             $i = 0;
+                        
                             @endphp
 
                             @foreach ($messages as $k => $message)
