@@ -3092,8 +3092,8 @@ class ApiControllerv2 extends Controller
             if (count($event_design) != 0) {
                 foreach ($event_design as $data) {
                     $template_data['id'] = (isset($data->id) && $data->id != null) ? $data->id : '';
-                    $template_data['subcategory_id'] = (isset($data->event_design_sub_category_id) && $data->event_design_sub_category_id  != null) ? $data->event_design_sub_category_id : '';
-                    $template_data['category_id'] = (isset($data->event_design_category_id) && $data->event_design_category_id != null) ? $data->event_design_category_id : '';
+                    $template_data['event_design_sub_category_id'] = (isset($data->event_design_sub_category_id) && $data->event_design_sub_category_id  != null) ? $data->event_design_sub_category_id : '';
+                    $template_data['event_design_category_id'] = (isset($data->event_design_category_id) && $data->event_design_category_id != null) ? $data->event_design_category_id : '';
                     $template_data['image'] = (isset($data->image) && $data->image != null) ? $data->image : '';
                     $template_data['height'] = (isset($data->id) && $data->id != null) ? $data->id : '';
                     $template_data['width'] = (isset($data->id) && $data->id != null) ? $data->id : '';
@@ -13127,7 +13127,7 @@ class ApiControllerv2 extends Controller
             return response()->json([
                 'textData' => $resp, // Updated text data
                 'image' => $image,
-                'event_design_id' => $design_id,
+                'event_design_sub_category_id' => $design_id,
                 'height' => $height,
                 'width' => $width,
                 'template_url' => $template_url,
