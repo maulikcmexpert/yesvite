@@ -1097,7 +1097,7 @@
                             stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                 </a>
-                <h5>Add New Category</h5>
+                <h5 id="add_update_category_head">Add New Category</h5>
             </div>
 
             <button class="close-btn" onclick="toggleSidebar()">
