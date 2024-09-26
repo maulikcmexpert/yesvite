@@ -844,7 +844,8 @@ $(document).on("click", ".pin-conversation", function () {
         $(".unpin-self-icn").hide();
     }
 });
-$(document).on("click", ".pin-single-conversation", function () {
+$(document).on("click", ".pin-single-conversation", function (e) {
+    e.stopPropagation();
     const pinChange = $(this).attr("changeWith");
     let conversationId = $(this).data("conversation");
     const overviewRef = ref(
@@ -867,8 +868,10 @@ $(document).on("click", ".pin-single-conversation", function () {
             .find(".pin-svg")
             .removeClass("d-none");
 
-        $(".unpin-self-icn").show("d-none");
-        $(".pin-self-icn").hide("d-none");
+        // $(".unpin-self-icn").show("d-none");
+        // $(".pin-self-icn").hide("d-none");
+        $(this).children(".pin1-self-icn").removeClass("d-none");
+        $(this).children(".unpin1-self-icn").addClass("d-none");
     } else {
         $(".conversation-" + conversationId).removeClass("pinned");
 
@@ -876,9 +879,12 @@ $(document).on("click", ".pin-single-conversation", function () {
             .find(".chat-data")
             .find(".pin-svg")
             .addClass("d-none");
-        $(".pin-self-icn").show();
-        $(".unpin-self-icn").hide();
+        $(this).children(".pin1-self-icn").addClass("d-none");
+        $(this).children(".unpin1-self-icn").removeClass("d-none");
     }
+    console.log($(this).children());
+    console.log($(this).children().find(".pin1-self-icn"));
+    console.log($(this).children(".pin1-self-icn"));
 });
 
 $(document).on("click", ".mute-conversation", function () {

@@ -1,5 +1,5 @@
 @foreach ( $data as $guest_user)
-<div class="guest-contact">
+<div class="guest-contact guest_list_responsive" data-id={{$guest_user['userdata']['id']}} id="user-{{$guest_user['userdata']['id']}}">
     <div class="guest-img">
         <!-- <img src="./assets/image/user-img.svg" alt="guest-img"> -->
         @if ($guest_user['userdata']['profile'] != '')
@@ -13,7 +13,7 @@
         @endphp
         <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
         @endif
-        <a href="#" class="close">
+        <a href="#" class="close" id="delete_invited_user" data-id="user-{{$guest_user['userdata']['id']}}" data-userid="{{$guest_user['userdata']['id']}}">
             <svg width="19" height="18" viewBox="0 0 19 18"
                 fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="1.8999" y="1" width="16" height="16"
