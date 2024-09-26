@@ -1,4 +1,4 @@
-<main class="main-content-wrp edit-imag-main-content-wrp" style="display: none">
+<main class="main-content-wrp edit-imag-main-content-wrp edit_design_template" style="display: none">
     <div class="main-content-sidebar">
         <div class="new-event-sidebar-wrp">
             <div class="new-event-sidebar-menu">

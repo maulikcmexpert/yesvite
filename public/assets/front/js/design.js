@@ -3,6 +3,7 @@ $(document).on("click", ".design-card", function () {
     var template = $(this).data("template");
     // $(".modal-design-card").empty();
     var imageUrl = $(this).data("image");
+    $('.edit_design_tem').attr('data-image',imageUrl);
     console.log(imageUrl);
     // Set the image URL in the modal's image tag
     $("#modalImage").attr("src", imageUrl);
@@ -119,3 +120,18 @@ $(document).on("click", ".design-card", function () {
     // });
     
 });
+
+
+$(document).on('click','.edit_design_tem',function(e){
+    e.preventDefault();
+    var image = $(this).data('image');
+
+    $("step_1").hide();
+    $(".step_2").hide();
+    $(".step_3").hide();
+    handleActiveClass('.li_design');
+    $('.event_create_percent').text('50%');
+    $('.current_step').text('2 of 4');
+    $(".step_4").hide();
+    $('.edit_design_template').show();
+})
