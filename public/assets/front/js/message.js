@@ -1536,7 +1536,7 @@ function createMessageElement(key, messageData, isGroup) {
                     messageData?.data != ""
                         ? messageData.data.replace(/\n/g, "<br>")
                         : ""
-                }}</span>
+                }</span>
                 ${
                     isSender
                         ? `<span class="seenStatus ${seenStatus}"></span>`
@@ -1562,7 +1562,7 @@ function createMessageElement(key, messageData, isGroup) {
                          messageData?.data != ""
                              ? messageData.data.replace(/\n/g, "<br>")
                              : ""
-                     }}
+                     }
                     ${
                         isSender
                             ? `<span class="seenStatus ${seenStatus}"></span>`
