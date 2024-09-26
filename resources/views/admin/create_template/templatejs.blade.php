@@ -12,7 +12,7 @@
 
 
 
-            ajax: '{{ URL::to('/admin/create_template') }}',
+            ajax: '{{ URL::to(' / admin / create_template ') }}',
 
             columns: [{
 
@@ -24,18 +24,18 @@
 
                 {
 
-                    data: "design_name",
+                    data: "category_name",
 
-                    name: "design_name"
+                    name: "category_name"
 
                 },
-                {
+                //                 {
 
-data: "subcategory_name",
+                // data: "subcategory_name",
 
-name: "subcategory_name"
+                // name: "subcategory_name"
 
-},
+                // },
 
                 {
 
@@ -75,7 +75,7 @@ name: "subcategory_name"
 
         $(document).on("click", ".remove", function() {
             $(this).closest('.col-lg-3')
-        .remove(); // Remove the entire col-lg-3 div containing the input
+                .remove(); // Remove the entire col-lg-3 div containing the input
         });
 
 
@@ -133,7 +133,7 @@ name: "subcategory_name"
                                         that.next('.text-danger')
                                             .text(
                                                 'Subcategory is duplicate'
-                                                );
+                                            );
                                         resolve(false);
                                     } else {
                                         that.next('.text-danger')

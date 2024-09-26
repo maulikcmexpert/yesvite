@@ -30,7 +30,7 @@ class TemplateController extends Controller
 
 
         if ($request->ajax()) {
-            $data = TextData::with('design')->orderBy('id', 'desc')->get();
+            $data = TextData::with('categories')->orderBy('id', 'desc')->get();
 
             return Datatables::of($data)
                 ->addIndexColumn()
@@ -38,12 +38,12 @@ class TemplateController extends Controller
                     static $count = 1;
                     return $count++;
                 })
-                ->addColumn('design_name', function ($row) {
-                    return $row->design->design_name;
+                ->addColumn('category_name', function ($row) {
+                    return $row->categories->category_name;
                 })
-                ->addColumn('subcategory_name', function ($row) {
-                    return $row->subcategory->subcategory_name;
-                })
+                // ->addColumn('subcategory_name', function ($row) {
+                //     return $row->subcategory->subcategory_name;
+                // })
                 ->addColumn('image', function ($template) {
                     return '<img src="' . asset('assets/images/' . $template->image) . '" width="50" height="50" />';
                 })
@@ -63,7 +63,7 @@ class TemplateController extends Controller
                     return $actionBtn;
                 })
 
-                ->rawColumns(['number', 'design_name','subcategory_name','image', 'action'])
+                ->rawColumns(['number', 'design_name', 'subcategory_name', 'image', 'action'])
                 ->make(true);
         }
 
@@ -73,7 +73,7 @@ class TemplateController extends Controller
         $page = 'admin.create_template.list';
 
         $js = 'admin.create_template.templatejs';
-        return view('admin.includes.layout', compact('title', 'page','js'));
+        return view('admin.includes.layout', compact('title', 'page', 'js'));
     }
 
     /**
@@ -86,7 +86,7 @@ class TemplateController extends Controller
         $js = 'admin.subcategory.subcategoryjs';
         $getDesignData = EventDesignStyle::all();
         $getsubcatData = EventDesignSubCategory::all();
-        return view('admin.includes.layout', compact('title', 'page', 'js', 'getDesignData','getsubcatData'));
+        return view('admin.includes.layout', compact('title', 'page', 'js', 'getDesignData', 'getsubcatData'));
     }
 
     /**
@@ -114,14 +114,13 @@ class TemplateController extends Controller
             // Store the template with design ID and the uploaded image's filename
             TextData::create([
                 'design_id' => $request->design_id,
-                'event_design_subcategory_id' =>$request->event_design_subcategory_id,
+                'event_design_subcategory_id' => $request->event_design_subcategory_id,
                 'image' => $imageName, // Save the uploaded image filename
             ]);
 
             DB::commit();
 
             return redirect()->route('create_template.index')->with('success', 'Template added successfully!');
-
         } catch (QueryException $e) {
             DB::rollBack();
             Log::error('Database query error: ' . $e->getMessage());
@@ -143,26 +142,32 @@ class TemplateController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
-{
-    $template_id = decrypt($id);
+    {
+        $template_id = decrypt($id);
 
-    // Get the template data by ID
-    $getTemData = TextData::findOrFail($template_id);
+        // Get the template data by ID
+        $getTemData = TextData::findOrFail($template_id);
 
-    $title = 'Edit template';
-    $page = 'admin.create_template.edit';
-    $js = 'admin.create_template.templatejs';
-    $subcatId = $id;
+        $title = 'Edit template';
+        $page = 'admin.create_template.edit';
+        $js = 'admin.create_template.templatejs';
+        $subcatId = $id;
 
-    // Get all design and subcategory data
-    $getDesignData = EventDesignStyle::all();
-    $getSubCatDetail = EventDesignSubCategory::all();
+        // Get all design and subcategory data
+        $getDesignData = EventDesignStyle::all();
+        $getSubCatDetail = EventDesignSubCategory::all();
 
-    // Pass the data to the view
-    return view('admin.includes.layout', compact(
-        'title', 'page', 'js', 'getTemData', 'getSubCatDetail', 'subcatId', 'getDesignData'
-    ));
-}
+        // Pass the data to the view
+        return view('admin.includes.layout', compact(
+            'title',
+            'page',
+            'js',
+            'getTemData',
+            'getSubCatDetail',
+            'subcatId',
+            'getDesignData'
+        ));
+    }
 
 
     /**
@@ -258,5 +263,4 @@ class TemplateController extends Controller
         // Return the view to display the template
         return view('template.view', compact('template'));
     }
-
 }
