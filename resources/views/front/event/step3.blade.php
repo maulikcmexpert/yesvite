@@ -26,7 +26,7 @@
                             aria-labelledby="contact-tab">
 
                             <!-- ======= guest-users mobile ======== -->
-                            <div class="guest-contacts-wrp user-list-responsive" style="">
+                            <div class="guest-contacts-wrp user-list-responsive">
                                 <!-- <div class="guest-contact">
                                     <div class="guest-img">
                                         <img src="./assets/image/user-img.svg" alt="guest-img">
@@ -299,89 +299,8 @@
             <div class="tab-pane fade" id="phone" role="tabpanel" aria-labelledby="phone-tab">
 
                 <!-- ======= guest-users mobile ======== -->
-                <div class="guest-contacts-wrp" style="display: none">
-                    <div class="guest-contact">
-                        <div class="guest-img">
-                            <img src="./assets/image/user-img.svg" alt="guest-img">
-                            <a href="#" class="close">
-                                <svg width="19" height="18" viewBox="0 0 19 18"
-                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <rect x="1.8999" y="1" width="16" height="16"
-                                        rx="8" fill="#F73C71" />
-                                    <rect x="1.8999" y="1" width="16" height="16"
-                                        rx="8" stroke="white" stroke-width="2" />
-                                    <path d="M7.56689 6.66699L12.2332 11.3333" stroke="white"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M7.56656 11.3333L12.2329 6.66699" stroke="white"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                            </a>
-                        </div>
-                        <h6 class="guest-name">Silvia Alegra</h6>
-                    </div>
-                    <div class="guest-contact">
-                        <div class="guest-img">
-                            <img src="./assets/image/user-img.svg" alt="guest-img">
-                            <a href="#" class="close">
-                                <svg width="19" height="18" viewBox="0 0 19 18"
-                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <rect x="1.8999" y="1" width="16" height="16"
-                                        rx="8" fill="#F73C71" />
-                                    <rect x="1.8999" y="1" width="16" height="16"
-                                        rx="8" stroke="white" stroke-width="2" />
-                                    <path d="M7.56689 6.66699L12.2332 11.3333" stroke="white"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M7.56656 11.3333L12.2329 6.66699" stroke="white"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                            </a>
-                        </div>
-                        <h6 class="guest-name">Silvia Alegra</h6>
-                    </div>
-                    <div class="guest-contact">
-                        <div class="guest-img">
-                            <img src="./assets/image/user-img.svg" alt="guest-img">
-                            <a href="#" class="close">
-                                <svg width="19" height="18" viewBox="0 0 19 18"
-                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <rect x="1.8999" y="1" width="16" height="16"
-                                        rx="8" fill="#F73C71" />
-                                    <rect x="1.8999" y="1" width="16" height="16"
-                                        rx="8" stroke="white" stroke-width="2" />
-                                    <path d="M7.56689 6.66699L12.2332 11.3333" stroke="white"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M7.56656 11.3333L12.2329 6.66699" stroke="white"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                            </a>
-                        </div>
-                        <h6 class="guest-name">Silvia Alegra</h6>
-                    </div>
-                    <div class="guest-contact">
-                        <div class="guest-img">
-                            <img src="./assets/image/user-img.svg" alt="guest-img">
-                            <a href="#" class="close">
-                                <svg width="19" height="18" viewBox="0 0 19 18"
-                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <rect x="1.8999" y="1" width="16" height="16"
-                                        rx="8" fill="#F73C71" />
-                                    <rect x="1.8999" y="1" width="16" height="16"
-                                        rx="8" stroke="white" stroke-width="2" />
-                                    <path d="M7.56689 6.66699L12.2332 11.3333" stroke="white"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M7.56656 11.3333L12.2329 6.66699" stroke="white"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                            </a>
-                        </div>
-                        <h6 class="guest-name">Silvia Alegra</h6>
-                    </div>
-                    <div class="guest-contact">
-                        <div class="guest-img">
-                            <span>+5</span>
-                        </div>
-                        <span class="all-contact">See all</h6>
-                    </div>
+                <div class="guest-contacts-wrp user-list-responsive">
+
                 </div>
 
                 <div class="popular-list">
@@ -533,89 +452,14 @@
     aria-labelledby="group-tab">
 
     <!-- ======= guest-users mobile ======== -->
-    <div class="guest-contacts-wrp" style="display: none">
-        <div class="guest-contact">
-            <div class="guest-img">
-                <img src="./assets/image/user-img.svg" alt="guest-img">
-                <a href="#" class="close">
-                    <svg width="19" height="18" viewBox="0 0 19 18"
-                        fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="1.8999" y="1" width="16" height="16"
-                            rx="8" fill="#F73C71" />
-                        <rect x="1.8999" y="1" width="16" height="16"
-                            rx="8" stroke="white" stroke-width="2" />
-                        <path d="M7.56689 6.66699L12.2332 11.3333" stroke="white"
-                            stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M7.56656 11.3333L12.2329 6.66699" stroke="white"
-                            stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                </a>
-            </div>
-            <h6 class="guest-name">Silvia Alegra</h6>
-        </div>
-        <div class="guest-contact">
-            <div class="guest-img">
-                <img src="./assets/image/user-img.svg" alt="guest-img">
-                <a href="#" class="close">
-                    <svg width="19" height="18" viewBox="0 0 19 18"
-                        fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="1.8999" y="1" width="16" height="16"
-                            rx="8" fill="#F73C71" />
-                        <rect x="1.8999" y="1" width="16" height="16"
-                            rx="8" stroke="white" stroke-width="2" />
-                        <path d="M7.56689 6.66699L12.2332 11.3333" stroke="white"
-                            stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M7.56656 11.3333L12.2329 6.66699" stroke="white"
-                            stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                </a>
-            </div>
-            <h6 class="guest-name">Silvia Alegra</h6>
-        </div>
-        <div class="guest-contact">
-            <div class="guest-img">
-                <img src="./assets/image/user-img.svg" alt="guest-img">
-                <a href="#" class="close">
-                    <svg width="19" height="18" viewBox="0 0 19 18"
-                        fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="1.8999" y="1" width="16" height="16"
-                            rx="8" fill="#F73C71" />
-                        <rect x="1.8999" y="1" width="16" height="16"
-                            rx="8" stroke="white" stroke-width="2" />
-                        <path d="M7.56689 6.66699L12.2332 11.3333" stroke="white"
-                            stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M7.56656 11.3333L12.2329 6.66699" stroke="white"
-                            stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                </a>
-            </div>
-            <h6 class="guest-name">Silvia Alegra</h6>
-        </div>
-        <div class="guest-contact">
-            <div class="guest-img">
-                <img src="./assets/image/user-img.svg" alt="guest-img">
-                <a href="#" class="close">
-                    <svg width="19" height="18" viewBox="0 0 19 18"
-                        fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="1.8999" y="1" width="16" height="16"
-                            rx="8" fill="#F73C71" />
-                        <rect x="1.8999" y="1" width="16" height="16"
-                            rx="8" stroke="white" stroke-width="2" />
-                        <path d="M7.56689 6.66699L12.2332 11.3333" stroke="white"
-                            stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M7.56656 11.3333L12.2329 6.66699" stroke="white"
-                            stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                </a>
-            </div>
-            <h6 class="guest-name">Silvia Alegra</h6>
-        </div>
-        <div class="guest-contact">
+    <div class="guest-contacts-wrp  user-list-responsive">
+
+        <!-- <div class="guest-contact">
             <div class="guest-img">
                 <span>+5</span>
             </div>
             <span class="all-contact">See all</h6>
-        </div>
+        </div> -->
     </div>
 
     <div class="popular-list">
