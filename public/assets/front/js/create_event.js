@@ -4237,6 +4237,7 @@ $(document).on("click", ".store_desgin_temp", function () {
                     console.log(eventData);
                     eventData.step = final_step;
                     console.log("Image uploaded and saved successfully");
+                    $("#myCustomModal").modal("hide");
                     $("#exampleModal").modal("hide");
                     $("#loader").css("display", "none");
                     $('.store_desgin_temp').prop("disabled", false);
@@ -5138,8 +5139,7 @@ $(document).on("click", ".new-temp", function () {
     $("#modalImage").attr("src", imageUrl);
     
     // Show the modal using Bootstrap's modal method
-    var modal = new bootstrap.Modal(document.getElementById("myCustomModal"));
-    modal.show();
+    $("#myCustomModal").modal("show");
 });
 
 
