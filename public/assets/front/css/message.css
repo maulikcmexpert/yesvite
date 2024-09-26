@@ -845,6 +845,13 @@ ul.member-lists li:last-child {
     width: 100%;
     padding-right: 10px;
     border: none;
+    font-size: 14px;
+    color: var(--lightColor) !important;
+}
+
+.msg-footer .message-perent textarea::placeholder {
+    font-size: 14px;
+    color: var(--lightColor) !important;
 }
 
 .msg-footer .message-perent textarea:focus {
