@@ -12,7 +12,8 @@
 
 
 
-            ajax: '{{ URL::to(' / admin / create_template ') }}',
+            // ajax: '{{ URL::to(' / admin / create_template ') }}',
+            ajax: '{{ URL::to("/admin/create_template")}}',
 
             columns: [{
 
