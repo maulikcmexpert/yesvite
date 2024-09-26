@@ -1956,7 +1956,7 @@ async function handleSelectedUsers() {
 const overviewRef = ref(database, `overview/${senderUser}`);
 onChildAdded(overviewRef, handleNewConversation);
 onChildChanged(overviewRef, handleConversationChange);
-
+onChildRemoved(overviewRef, console.log(1234));
 async function generateConversationId(userIds) {
     const sortedUserIds = userIds.slice().sort();
     const concatenatedIds = sortedUserIds.join("");
