@@ -393,7 +393,7 @@
 
 
                 <div>
-                    <div class="owl-carousel owl-theme group-owl">
+                    <!-- <div class="owl-carousel owl-theme group-owl">
                         @foreach ($groups as $group )
 
                         <div class="item group_slider">
@@ -410,6 +410,30 @@
                             </div>
                         </div>
                         @endforeach
+                    </div> -->
+
+                    <div class="swiper mySwiper">
+                        <div class="swiper-wrapper">
+                            @foreach ($groups as $group )
+                            <div class="swiper-slide">
+                                <div class="group-card view_members" data-id="{{$group->id}}">
+                                    <div>
+                                        <h4>{{$group->name}}</h4>
+                                        <p>{{$group->group_members_count}} Guests</p>
+                                    </div>
+                                    <span class="ms-auto">
+                                        <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M5.93994 13.7797L10.2866 9.43306C10.7999 8.91973 10.7999 8.07973 10.2866 7.56639L5.93994 3.21973" stroke="#E2E8F0" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                    </span>
+                                </div>
+                            </div>
+                            @endforeach
+
+                        </div>
+                        <div class="swiper-button-next"><i class="fa-solid fa-chevron-right"></i></div>
+                        <div class="swiper-button-prev"><i class="fa-solid fa-angle-left"></i></div>
+
                     </div>
                 </div>
 
@@ -603,7 +627,7 @@
 
 
     <div>
-        <div class="owl-carousel owl-theme group-owl">
+        <!-- <div class="owl-carousel owl-theme group-owl">
             @foreach ($groups as $group )
 
             <div class="item ">
@@ -620,6 +644,30 @@
                 </div>
             </div>
             @endforeach
+
+        </div> -->
+
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                @foreach ($groups as $group )
+                <div class="swiper-slide">
+                    <div class="group-card view_members" data-id="{{$group->id}}">
+                        <div>
+                            <h4>{{$group->name}}</h4>
+                            <p>{{$group->group_members_count}} Guests</p>
+                        </div>
+                        <span class="ms-auto">
+                            <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5.93994 13.7797L10.2866 9.43306C10.7999 8.91973 10.7999 8.07973 10.2866 7.56639L5.93994 3.21973" stroke="#E2E8F0" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+                @endforeach
+
+            </div>
+            <div class="swiper-button-next"><i class="fa-solid fa-chevron-right"></i></div>
+            <div class="swiper-button-prev"><i class="fa-solid fa-angle-left"></i></div>
 
         </div>
     </div>
