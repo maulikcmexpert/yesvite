@@ -602,7 +602,7 @@ class EventController extends Controller
         $user = Auth::guard('web')->user();
         $name = $user->firstname . ' ' . $user->lastname;
         $categoryName = $request->input('category_name');
-        $category_quantity = $request->input('category_quantity');
+        // $category_quantity = $request->input('category_quantity');
         $itemName = $request->input('itemName');
         $selfBring = $request->input('selfbring');
         $selfBringQuantity = $request->input('self_bringQuantity');
@@ -637,8 +637,8 @@ class EventController extends Controller
             ];
         } else {
             $categories[$category_index] = [
-                'category_name' => $categoryName,
-                'category_quantity' => $category_quantity,
+                'category_name' => $categories[$category_index]['category_name'],
+                'category_quantity' => $categories[$category_index]['category_quantity'],
                 'item' => [
                     [
                         'name' => $itemName,
@@ -651,6 +651,7 @@ class EventController extends Controller
         Session::put('category', $categories);
 
         Session::put('category_item', $categories_item);
+        Session::save();
         $categories = Session::get('category', []);
 
         $category_quantity = $categories[$category_index]['category_quantity'];
