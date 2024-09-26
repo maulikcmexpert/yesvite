@@ -1953,8 +1953,19 @@ async function handleSelectedUsers() {
         $(".empty-massage").show();
     }
 }
-function handleRemoveConversation() {
-    console.log(1);
+function handleRemoveConversation(snapshot) {
+    const newConversation = snapshot.val();
+
+    // console.log("New conversation added:", newConversation);
+    if (newConversation.conversationId == undefined) {
+        console.warn("undefined");
+        return;
+    }
+
+    const conversationElement = document.getElementsByClassName(
+        `conversation-${newConversation.conversationId}`
+    );
+    $(conversationElement).remove();
 }
 // Initialize overview listeners
 const overviewRef = ref(database, `overview/${senderUser}`);
