@@ -105,7 +105,7 @@
                                     @foreach ($textData as $temp)
                                         <div class="design-card" data-bs-toggle="modal"
                                             type="button" data-template="template_1" data-image="{{ asset('storage/canvas/'.$temp->image) }}" 
-                                            data-json="{{json_encode($temp->static_information)}}">
+                                            data-json="{{json_encode($temp->static_information)}}" data-id="{{$temp->id}}">
                                             <img src="{{ asset('storage/canvas/'.$temp->image) }}" alt="">
                                         </div>
                                     @endforeach

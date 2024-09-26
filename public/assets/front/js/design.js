@@ -1,12 +1,15 @@
 var dbJson = null;
+var temp_id = null;
 $(document).on("click", ".design-card", function () {
     var url = $(this).data("url");
     var template = $(this).data("template");
     // $(".modal-design-card").empty();
     var imageUrl = $(this).data("image");
     var json = $(this).data("json");
+    var id = $(this).data("id");
     $('.edit_design_tem').attr('data-image',imageUrl);
     dbJson = json;
+    temp_id = id;
     // Set the image URL in the modal's image tag
     $("#modalImage").attr("src", imageUrl);
     $("#exampleModal").modal("show");
@@ -93,7 +96,7 @@ $(document).on('click','.edit_design_tem',function(e){
 
             // Set custom attribute with the fetched ID
             var canvasElement = document.getElementById('imageEditor1');
-            canvasElement.setAttribute('data-canvas-id', data.id);
+            canvasElement.setAttribute('data-canvas-id', temp_id);
 
             canvas.renderAll();  // Ensure all elements are rendered
         }
