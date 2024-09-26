@@ -102,20 +102,22 @@ class EventController extends Controller
             ->orderBy('firstname')
             ->limit(1)
             ->get();
-        $design_category = EventDesignCategory::with(['subcategory' => function ($query){
-                $query->select('*');
-            },'textdatas' => function ($query){
-                $query->select('*');
-            }])->orderBy('id','DESC')->get();
+            $textData = [];
+            $design_category = [];
+        // $design_category = EventDesignCategory::with(['subcategory' => function ($query){
+        //         $query->select('*');
+        //     },'textdatas' => function ($query){
+        //         $query->select('*');
+        //     }])->orderBy('id','DESC')->get();
         // dd($design_category);
-        $textData = TextData::with(['subcategory' => function ($query){
-                $query->select('*');
-            },'category' => function ($query){
-                $query->select('*');
-            }])
-            ->orderBy('id', 'desc')
-            ->get();
-        dd($textData);
+        // $textData = TextData::with(['subcategory' => function ($query){
+        //         $query->select('*');
+        //     },'category' => function ($query){
+        //         $query->select('*');
+        //     }])
+        //     ->orderBy('id', 'desc')
+        //     ->get();
+        // dd($textData);
         $user['profile'] = ($user->profile != null) ? asset('storage/profile/' . $user->profile) : "";
         $user['bg_profile'] = ($user->bg_profile != null) ? asset('storage/bg_profile/' . $user->bg_profile) : asset('assets/front/image/Frame 1000005835.png');
         $date = Carbon::parse($user->created_at);
