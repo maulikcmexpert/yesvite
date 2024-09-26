@@ -461,25 +461,25 @@
             </div>
 
             <!-- Radio buttons for selecting color type -->
-            <div>
+            {{-- <div>
                 <label>
                     <input type="radio" name="colorType" value="font" checked /> Font Color
                 </label>
                 <label>
                     <input type="radio" name="colorType" value="background" /> Background Color
                 </label>
-            </div>
+            </div> --}}
 
             <div class="used-fonts-wrp common-font-wrp">
                 <div class="form-check">
-                    <input type="radio" name="colorType" value="font" checked class="form-check-input" id="flexRadioDefault1"/> 
-                    <label class="form-check-label" for="flexRadioDefault1">
+                    <input type="radio" name="colorType" value="font" checked class="form-check-input" id="flexRadioDefaults"/> 
+                    <label class="form-check-label" for="flexRadioDefaults">
                         Font Color
                     </label>
                 </div>
                 <div class="form-check">
-                    <input type="radio" name="colorType" value="background" class="form-check-input" id="flexRadioDefault1"/>
-                    <label class="form-check-label" for="flexRadioDefault1">
+                    <input type="radio" name="colorType" value="background" class="form-check-input" id="flexRadioDefaultss"/>
+                    <label class="form-check-label" for="flexRadioDefaultss">
                         Background Color
                     </label>
                 </div>
