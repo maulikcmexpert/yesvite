@@ -980,6 +980,38 @@ $(document).on("click", ".mute-conversation", function () {
         .find("span")
         .text(change == "1" ? "Unmute" : "Mute");
     $(this).attr("changeWith", change == "1" ? "0" : "1");
+
+    $(".conversation-" + conversationId)
+        .find(".chat-data")
+        .find(".mute-single-conversation")
+        .text(change == "1" ? "Unmute" : "Mute");
+
+    $(".conversation-" + conversationId)
+        .find(".chat-data")
+        .find(".mute-single-conversation")
+        .attr("changeWith", change == "1" ? "0" : "1");
+});
+
+$(document).on("click", ".mute-single-conversation", function () {
+    const change = $(this).attr("changeWith");
+    let conversationId = $(".conversationId").attr("conversationId");
+    const overviewRef = ref(
+        database,
+        `overview/${senderUser}/${conversationId}/isMute`
+    );
+    set(overviewRef, change);
+
+    const selectedConversationId = $(".selected_conversasion").val();
+    if (selectedConversationId === conversationId) {
+        $(".mute-conversation")
+            .find("span")
+            .text(change == "1" ? "Unmute" : "Mute");
+        $(".mute-conversation").attr("changeWith", change == "1" ? "0" : "1");
+    }
+    $(this)
+        .find("span")
+        .text(change == "1" ? "Unmute" : "Mute");
+    $(this).attr("changeWith", change == "1" ? "0" : "1");
 });
 
 $(document).on("click", ".block-conversation", async function () {
