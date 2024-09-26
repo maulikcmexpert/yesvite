@@ -27,10 +27,10 @@ class TemplateController extends Controller
      */
     public function index(Request $request)
     {
-        // dd($request->ajax());
+        dd($request->ajax());
         if ($request->ajax()) {
             $data = TextData::with('categories')->orderBy('id', 'desc')->get();
-            dd($data);
+            // dd($data);
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('number', function ($row) {
@@ -62,7 +62,7 @@ class TemplateController extends Controller
                     return $actionBtn;
                 })
 
-                ->rawColumns(['number', 'design_name', 'subcategory_name', 'image', 'action'])
+                ->rawColumns(['number', 'category_name', 'image', 'action'])
                 ->make(true);
         }
 
