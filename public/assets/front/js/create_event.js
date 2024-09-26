@@ -1223,10 +1223,10 @@ $(document).on("click", ".add_category_btn", function () {
                 potluck_cateogry_item_count();
             }else if(response.status == 2){
                 console.log(response);
-                $("#hidden_category_name").val(categoryName);
-                $("#hidden_category_quantity").val(categoryQuantity);
+                // $("#hidden_category_name").val(categoryName);
+                // $("#hidden_category_quantity").val(categoryQuantity);
                 $('.category_name-'+edit_category_id).text(categoryName);
-                $('#missing-category-'+edit_category_id).text(categoryQuantity);
+                // $('#missing-category-'+edit_category_id).text(categoryQuantity);
                 $('.edit_potluck_category-'+edit_category_id).attr('data-id',edit_category_id);
                 $('.edit_potluck_category-'+edit_category_id).attr('data-category_name',categoryName);
                 $('.edit_potluck_category-'+edit_category_id).attr('data-category_quantity',categoryQuantity);
