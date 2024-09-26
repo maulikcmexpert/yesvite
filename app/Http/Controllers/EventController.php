@@ -704,10 +704,15 @@ class EventController extends Controller
             $status = '2';
             $i = 0;
             foreach ($categories as $key => $value) {
-                dd($value['category_name']);
+                if($key == $edit_category_id){
+                    continue;
+                }
+                if($value['category_name'] == $categoryName){
+                    $i++;
+                }
             }
             dd($i);
-            if($i < 2){
+            if($i == 0){
                 $categories[$edit_category_id] = ['category_name' => $categoryName, 'category_quantity' => $categoryQuantity];
             }else{
                 return response()->json(['view' => '', 'status' => '0']);
