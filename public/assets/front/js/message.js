@@ -844,7 +844,8 @@ $(document).on("click", ".pin-conversation", function () {
         $(".unpin-self-icn").hide();
     }
 });
-$(document).on("click", ".pin-single-conversation", function () {
+$(document).on("click", ".pin-single-conversation", function (e) {
+    e.stopPropagation();
     const pinChange = $(this).attr("changeWith");
     let conversationId = $(this).data("conversation");
     const overviewRef = ref(
