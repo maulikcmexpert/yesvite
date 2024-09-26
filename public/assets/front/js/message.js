@@ -1076,6 +1076,8 @@ $(document).on("click", ".archive-conversation", function () {
         $(".conversation-" + conversationId).removeClass("archived-list");
     }
     var unarchivelist = document.getElementsByClassName("unarchived-list");
+    console.log(unarchivelist);
+
     let msgLists = $(unarchivelist);
     msgLists[0].click();
     $(".archived-list").hide();
@@ -1101,6 +1103,7 @@ $(document).on("click", ".archive-single-conversation", function () {
         $(".conversation-" + conversationId).removeClass("archived-list");
     }
     var unarchivelist = document.getElementsByClassName("unarchived-list");
+    console.log(unarchivelist);
     let msgLists = $(unarchivelist);
     msgLists[0].click();
     $(".archived-list").hide();
