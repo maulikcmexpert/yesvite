@@ -1090,8 +1090,7 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
                     $("#user-" + userId).remove();
                     $(".user_id-" + userId).remove();
                 }
-                // $(".inivted_user_list").append(response.view);
-                // $(".user-list-responsive").append(response.responsive_view);
+                
                 total_guest = $(".users-data.invited_user").length;
                 $("#event_guest_count").text(total_guest + " Guests");
                 $(".invite-count").text(total_guest);
@@ -4599,9 +4598,14 @@ $(document).on("click", ".invite_group_member", function () {
                 }
             });
             console.log(response);
-                    
             $(".inivted_user_list").append(response.view);
-            $(".user-list-responsive").append(response.responsive_view);
+            var length = responsive_invite_user();
+            if(length < 4){
+                $('.all_user_list').remove();
+                $(".user-list-responsive").append(response.responsive_view);
+            }else{
+                add_user_counter();
+            }
             // $(".inivted_user_list").html('');
                 guest_counter(0,15);
 
