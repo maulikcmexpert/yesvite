@@ -3,127 +3,19 @@ $(document).on("click", ".design-card", function () {
     var template = $(this).data("template");
     // $(".modal-design-card").empty();
     var imageUrl = $(this).data("image");
+    var json = $(this).data("json");
     $('.edit_design_tem').attr('data-image',imageUrl);
-    console.log(imageUrl);
+    $('.edit_design_tem').attr('data-json',json);
+    console.log(json);
     // Set the image URL in the modal's image tag
     $("#modalImage").attr("src", imageUrl);
     $("#exampleModal").modal("show");
-    
-    // Show the modal using Bootstrap's modal method
-    // $("#myCustomModal").modal("show");
-    // $(".modal-design-card").load(url, function (response, status, xhr) {
-    //     if (status == "error") {
-    //         $(".modal-design-card").html("<p>Error loading view.</p>");
-    //     }
-    //     var beforeTo = eventData.event_date.split('To')[0];
-    //     console.log(beforeTo);
-    //     var date = new Date(beforeTo);
-    //     var formattedDate = date.toLocaleDateString("en-US", {
-    //         month: "long",
-    //         day: "numeric",
-    //         // year: "numeric",
-    //     });
-
-    //     var year = date.getFullYear();
-
-    //     var monthNames = [
-    //         "January",
-    //         "February",
-    //         "March",
-    //         "April",
-    //         "May",
-    //         "June",
-    //         "July",
-    //         "August",
-    //         "September",
-    //         "October",
-    //         "November",
-    //         "December",
-    //     ];
-    //     var month = monthNames[date.getMonth()];
-    //     var dayOfMonth = date.getDate();
-    //     var dayNames = [
-    //         "Sunday",
-    //         "Monday",
-    //         "Tuesday",
-    //         "Wednesday",
-    //         "Thursday",
-    //         "Friday",
-    //         "Saturday",
-    //     ];
-    //     var dayOfWeek = dayNames[date.getDay()];
-    //     var formattedTime = convertTo12HourFormat(eventData.start_time);
-
-    //     $(".titlename").text(eventData.hostedby);
-    //     $(".event_name").text(eventData.event_name);
-    //     $(".event_date").text(formattedDate);
-    //     $(".event_address").text(eventData.event_location);
-    //     // if(eventData.rsvp_end_time != undefined && eventData.rsvp_end_time != ""){
-    //     //     $(".event_time").text(eventData.start_time +" to "+eventData.rsvp_end_time);
-    //     // }else{
-    //         $(".event_time").text(eventData.start_time);
-    //     // }
-
-    //     if (template == "template_5") {
-    //         var e_year =
-    //             '<span class="e_month">' +
-    //             month +
-    //             "</span>" +
-    //             dayOfMonth +
-    //             '<span class="e_year">' +
-    //             year +
-    //             "</span>";
-    //         $(".e_date").html(e_year);
-    //         $(".day").text(dayOfWeek);
-    //     }
-    //     if (template == "template_2") {
-    //         var e_date= (month.substring(0,3)).toUpperCase()+', '+year+" "+"<span>"+dayOfWeek+"</span>";
-    //         $('.e_date').html(e_date);
-    //         // $('.titlename').text(eventData.event_name);
-    //     }
-    //     if (template == "template_3") {
-    //         var e_date= (month.substring(0,3)).toUpperCase()+', '+year+" "+"<span>"+dayOfWeek+"</span>";
-    //         $('.e_date').html(e_date);
-    //         // $('.titlename').text(eventData.event_name);
-    //     }
-    //     if (template == "template_6") {
-    //         var e_date_time= dayOfWeek+', '+dayOfMonth+' '+month+' '+year+' at '+ eventData.start_time
-    //         $('.e_date_time').text(e_date_time);
-    //         $('.titlename').text(eventData.event_name);
-    //     }
-
-    //     if (template == "template_7") {
-    //         $('.month').text(month);
-    //         $('.e_date').text(year);
-    //         $('.e_time').text(eventData.start_time);
-    //     }
-
-    //     if (template == "template_8") {
-    //         $('.month').text((month.substring(0,3)).toUpperCase());
-    //         $('.e_date').text(dayOfMonth);
-    //         $('.year').text(year); 
-    //     }
-
-    //     if (template == "template_9") {
-    //         $('.titlename').text(eventData.event_name);
-    //         $('.e_date').text(dayOfMonth+'/'+(date.getMonth()+1)+'/'+year);
-    //         $('.year').text(year); 
-    //     }
-
-    //     if (template == "template_10") {
-    //         $('.e_details').text(dayOfWeek+' '+month+' '+dayOfMonth+', '+year+' '+ eventData.start_time+' AT '+ eventData.address);
-    //     }
-
-    //     if (template == "template_11") {
-    //         $('.e_details').text(dayOfWeek+' '+month+' '+dayOfMonth+', '+year+' '+ eventData.start_time+' AT '+ eventData.address);
-    //     }
-    // });
-    
 });
 
 $(document).on('click','.edit_design_tem',function(e){
     e.preventDefault();
     var image = $(this).data('image');
+    var json = $(this).data('json');
 
     $("step_1").hide();
     $(".step_2").hide();
@@ -134,6 +26,48 @@ $(document).on('click','.edit_design_tem',function(e){
     $(".step_4").hide();
     $("#exampleModal").modal("hide");
     $('.edit_design_template').show();
+
+    // hideStaticTextElements();  // Hide static text elements if static information is present
+    const staticInfo = JSON.parse(json);
+    console.log(staticInfo);
+
+    staticInfo.textElements.forEach(element => {
+        let textElement = new fabric.Textbox(element.text, {  // Use Textbox for editable text
+            left: element.left,
+            top: element.top,
+            width: element.width || 200,  // Default width if not provided
+            fontSize: element.fontSize,
+            fill: element.fill,
+            fontFamily: element.fontFamily,
+            fontWeight: element.fontWeight,
+            fontStyle: element.fontStyle,
+            underline: element.underline,
+            linethrough: element.linethrough,
+            backgroundColor: element.backgroundColor,
+            textAlign: element.textAlign,
+            editable: true,
+            hasControls: true,
+            borderColor: 'blue',
+            cornerColor: 'red',
+            cornerSize: 6,
+            transparentCorners: false,
+            isStatic: true
+        });
+        const textWidth = textElement.calcTextWidth();
+        textElement.set({ width: textWidth });
+
+        textElement.on('scaling', function () {
+            // Calculate the updated font size based on scaling factors
+            var updatedFontSize = textElement.fontSize * (textElement.scaleX + textElement.scaleY) / 2;
+            textElement.set('fontSize', updatedFontSize); // Update the font size
+            canvas.renderAll(); // Re-render the canvas to reflect changes
+        });
+
+        addIconsToTextbox(textElement);
+        canvas.add(textElement);
+
+    });
+
 
     var canvas = new fabric.Canvas('imageEditor1', {
         width: 500, // Canvas width
@@ -866,5 +800,7 @@ $(document).on('click','.edit_design_tem',function(e){
         if (textbox.copyIcon) canvas.remove(textbox.copyIcon); // Remove the copy icon
         canvas.renderAll();
     }
+
+   
 
 })
