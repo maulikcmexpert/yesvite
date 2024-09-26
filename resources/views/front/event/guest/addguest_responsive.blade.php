@@ -11,6 +11,8 @@
         $initials = $firstInitial . $lastInitial;
         $fontColor = 'fontcolor' . $firstInitial;
         @endphp
+        <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
+        @endif
         <a href="#" class="close">
             <svg width="19" height="18" viewBox="0 0 19 18"
                 fill="none" xmlns="http://www.w3.org/2000/svg">
