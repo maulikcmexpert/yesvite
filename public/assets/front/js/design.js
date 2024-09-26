@@ -27,7 +27,7 @@ $(document).on('click','.edit_design_tem',function(e){
     $("#exampleModal").modal("hide");
     $('.edit_design_template').show();
 
-    hideStaticTextElements();  // Hide static text elements if static information is present
+    // hideStaticTextElements();  // Hide static text elements if static information is present
     const staticInfo = JSON.parse(json);
     console.log(staticInfo);
 
