@@ -103,8 +103,8 @@ class EventController extends Controller
             ->limit(1)
             ->get();
 
-        $textData = TextData::where('desgin_category_id','!=',null)
-            ->where('design_subcategory_id','!=',null)
+        $textData = TextData::where('desgin_category_id', '!=', null)
+            ->where('design_subcategory_id', '!=', null)
             ->orderBy('id', 'desc')
             ->get();
         $user['profile'] = ($user->profile != null) ? asset('storage/profile/' . $user->profile) : "";
@@ -158,9 +158,9 @@ class EventController extends Controller
 
         $startDateFormat = DateTime::createFromFormat('m-d-Y', $startDate)->format('Y-m-d');
         $endDateFormat = DateTime::createFromFormat('m-d-Y', $endDate)->format('Y-m-d');
-        
+
         if (isset($request->rsvp_by_date) && $request->rsvp_by_date != '') {
-            
+
             $rsvp_by_date = DateTime::createFromFormat('m-d-Y', $request->rsvp_by_date)->format('Y-m-d');
             $rsvp_by_date_set = '1';
         } else {
@@ -171,22 +171,22 @@ class EventController extends Controller
                 $rsvp_by_date = $start->format('Y-m-d');
             }
         }
-        
+
         $greeting_card_id = "";
-        if(isset($request->thankyou_message) && $request->thankyou_message == '1'){
-            if (isset($request->thank_you_card_id) && $request->thank_you_card_id !='' ) {
+        if (isset($request->thankyou_message) && $request->thankyou_message == '1') {
+            if (isset($request->thank_you_card_id) && $request->thank_you_card_id != '') {
                 $greeting_card_id =  $request->thank_you_card_id;
             }
         }
 
         $gift_registry_id = "";
         if (isset($request->thankyou_message) && $request->thankyou_message == '1') {
-            if (!empty($request->gift_registry_data) ) {
+            if (!empty($request->gift_registry_data)) {
                 $gift_registry_data = collect($request->gift_registry_data)->pluck('gr_id')->toArray();
                 $gift_registry_id =  implode(',', $gift_registry_data);
             }
         }
-        
+
         $event_creation = Event::create([
             'event_type_id' => (isset($request->event_type) && $request->event_type != "") ? (int)$request->event_type : "",
             'user_id' => $user_id,
@@ -201,9 +201,9 @@ class EventController extends Controller
             'rsvp_end_time' => (isset($request->rsvp_end_time) && $request->rsvp_end_time != "") ? $request->rsvp_end_time : "",
             'rsvp_end_timezone' => (isset($request->rsvp_end_timezone) && $request->rsvp_end_timezone != "") ? $request->rsvp_end_timezone : "",
             'rsvp_end_time_set' => (isset($request->rsvp_end_time_set) && $request->rsvp_end_time_set != "") ? $request->rsvp_end_time_set : "",
-            'event_location_name' => (isset($request->event_location) && $request->event_location!="") ? $request->event_location : "",
-            'address_1' => (isset($request->address1) && $request->address1!="") ? $request->address1 : "",
-            'address_2' => (isset($request->address_2) && $request->address_2!="") ? $request->address_2 : "",
+            'event_location_name' => (isset($request->event_location) && $request->event_location != "") ? $request->event_location : "",
+            'address_1' => (isset($request->address1) && $request->address1 != "") ? $request->address1 : "",
+            'address_2' => (isset($request->address_2) && $request->address_2 != "") ? $request->address_2 : "",
             'state' => (isset($request->state) && $request->state != "") ? $request->state : "",
             'zip_code' => (isset($request->zipcode) && $request->zipcode) ? $request->zipcode : "",
             'city' => (isset($request->city) && $request->city != "") ? $request->city : "",
@@ -285,7 +285,7 @@ class EventController extends Controller
                 }
             }
 
-            if (isset($request->eventSetting) && $request->eventSetting=="1") {
+            if (isset($request->eventSetting) && $request->eventSetting == "1") {
                 $eventSetting = EventSetting::where('event_id', $eventId)->first();
                 if ($eventSetting != null) {
                     $eventSetting->allow_for_1_more = (isset($request->allow_for_1_more)) ? $request->allow_for_1_more : "0";
@@ -397,18 +397,18 @@ class EventController extends Controller
             if ($request->gift_registry == "1") {
                 $gift_registry = $request->gift_registry_data;
                 // $gift = "1";
-            //     if (isset($gift_registry) && !empty($gift_registry)) {
-            //         foreach ($gift_registry as $data) {
-            //             $gift_registry_data[] = [
-            //                 'user_id' => $user_id,
-            //                 'registry_recipient_name' => $data['registry_name'],
-            //                 'registry_link' => $data['registry_link'],
-            //                 'created_at' => now(),
-            //                 'updated_at' => now(),
-            //             ];
-            //         }
-            //         EventGiftRegistry::insert($gift_registry_data);
-            //     }
+                //     if (isset($gift_registry) && !empty($gift_registry)) {
+                //         foreach ($gift_registry as $data) {
+                //             $gift_registry_data[] = [
+                //                 'user_id' => $user_id,
+                //                 'registry_recipient_name' => $data['registry_name'],
+                //                 'registry_link' => $data['registry_link'],
+                //                 'created_at' => now(),
+                //                 'updated_at' => now(),
+                //             ];
+                //         }
+                //         EventGiftRegistry::insert($gift_registry_data);
+                //     }
             }
 
             if (isset($request->desgin_selected) && $request->desgin_selected != "") {
@@ -460,7 +460,7 @@ class EventController extends Controller
 
 
         $registry = $request->gift_registry_data;
-        if(!empty($registry)){
+        if (!empty($registry)) {
             $gift = '1';
         }
         Session::save();
@@ -541,10 +541,10 @@ class EventController extends Controller
             if (!empty($userExists)) {
                 // return response()->json(['success' => false, 'data' => $userEntry, 'is_duplicate' => 1]);
                 $data[] = ['userdata' => $userEntry, 'is_duplicate' => 1];
-                return response()->json(['view' => view('front.event.guest.addGuest', compact('data'))->render(), 'is_duplicate' => 1]);
+                return response()->json(['view' => view('front.event.guest.addGuest', compact('data'))->render(), 'responsive_view' => view('front.event.guest.addguest_responsive', compact('data'))->render(), 'is_duplicate' => 1]);
             }
             $data[] = ['userdata' => $userEntry, 'is_duplicate' => 0];
-            return response()->json(['view' => view('front.event.guest.addGuest', compact('data'))->render(), 'success' => true, 'data' => $userEntry]);
+            return response()->json(['view' => view('front.event.guest.addGuest', compact('data'))->render(), 'responsive_view' => view('front.event.guest.addguest_responsive', compact('data'))->render(), 'success' => true, 'data' => $userEntry]);
         }
     }
 
@@ -553,14 +553,14 @@ class EventController extends Controller
         $selected_user = session('user_ids');
         $user_id =  Auth::guard('web')->user()->id;
         $alreadyselectedUser =  collect($selected_user)->pluck('id')->toArray();
-        $selected_co_host = (isset($request->selected_co_host) && $request->selected_co_host != '')?$request->selected_co_host:'';
-        $selected_co_host_prefer_by = (isset($request->selected_co_host_prefer_by) && $request->selected_co_host_prefer_by != '')?$request->selected_co_host_prefer_by:'';
+        $selected_co_host = (isset($request->selected_co_host) && $request->selected_co_host != '') ? $request->selected_co_host : '';
+        $selected_co_host_prefer_by = (isset($request->selected_co_host_prefer_by) && $request->selected_co_host_prefer_by != '') ? $request->selected_co_host_prefer_by : '';
 
         $users = User::select('id', 'firstname', 'lastname', 'phone_number', 'email', 'profile')
             ->whereNotIn('id', $alreadyselectedUser)
             ->where('id', '!=', $user_id)->where(['is_user_phone_contact' => '0'])->orderBy('firstname')
             ->get();
-        return  view('front.event.guest.allGuestList', compact('users','selected_co_host','selected_co_host_prefer_by'));
+        return  view('front.event.guest.allGuestList', compact('users', 'selected_co_host', 'selected_co_host_prefer_by'));
     }
 
     public function removeUserId(Request $request)
@@ -708,25 +708,26 @@ class EventController extends Controller
         // dd($categories);
         $categoryNames =  collect($categories)->pluck('category_name')->toArray();
 
-        if(isset($edit_category_id) && $edit_category_id != ''){
+        if (isset($edit_category_id) && $edit_category_id != '') {
             $status = '2';
             $i = 0;
             foreach ($categories as $key => $value) {
-                if($key == $edit_category_id){
+                if ($key == $edit_category_id) {
                     continue;
                 }
-                if($value['category_name'] == $categoryName){
+                if ($value['category_name'] == $categoryName) {
                     $i++;
                 }
             }
-            if($i == 0){
+            if ($i == 0) {
                 if (isset($categories[$edit_category_id]['item']) && !empty($categories[$edit_category_id]['item'])) {
                     $item = $categories[$edit_category_id]['item'];
                     $categories[$edit_category_id] = [
                         'category_name' => $categoryName,
                         'category_quantity' => $categoryQuantity,
-                        'item' => $item];
-                }else{
+                        'item' => $item
+                    ];
+                } else {
                     $categories[$edit_category_id] = [
                         'category_name' => $categoryName,
                         'category_quantity' => $categoryQuantity,
@@ -745,10 +746,10 @@ class EventController extends Controller
                     $qty = 0;
                 }
                 return response()->json(['status' => $status, 'qty' => $qty]);
-            }else{
+            } else {
                 return response()->json(['view' => '', 'status' => '0']);
             }
-        }else{
+        } else {
             if (in_array($categoryName, $categoryNames)) {
                 return response()->json(['view' => '', 'status' => '0']);
             } else {
@@ -759,7 +760,7 @@ class EventController extends Controller
             Session::save();
             return response()->json(['view' => view('front.event.potluck.potluckCategory', ['categoryName' => $categoryName, 'categoryQuantity' => $categoryQuantity, 'potluckkey' => $potluckkey])->render(), 'status' => $status]);
         }
-        
+
         // return $categoryName;
     }
 
@@ -814,8 +815,8 @@ class EventController extends Controller
 
             session(['gift_registry_data' => $giftRegistryData]);
             return response()->json(['message' => "registry updated", 'status' => '1']);
-            $gr = EventGiftRegistry::where('id',$registry_item)->first();
-            if($gr != null){
+            $gr = EventGiftRegistry::where('id', $registry_item)->first();
+            if ($gr != null) {
                 $gr->recipient_name = $recipient_name;
                 $gr->registry_link = $registry_link;
                 $gr->save();
@@ -832,7 +833,7 @@ class EventController extends Controller
             $gr->save();
         }
 
-        $gift_registry = EventGiftRegistry::where('id',$gr->id)->get();
+        $gift_registry = EventGiftRegistry::where('id', $gr->id)->get();
         session(['gift_registry_data' => $giftRegistryData]);
 
         // $data = ['recipient_name' => $recipient_name, 'registry_link' => $registry_link, 'registry_item' => $registry_item];
@@ -842,8 +843,8 @@ class EventController extends Controller
     public function removeGiftRegistry(Request $request)
     {
         $registry_item = $request->input('registry_item');
-        EventGiftRegistry::where('id',$registry_item)->delete();
-        
+        EventGiftRegistry::where('id', $registry_item)->delete();
+
         $giftRegistryData = session()->get('gift_registry_data', []);
         if (array_key_exists($registry_item, $giftRegistryData)) {
             unset($giftRegistryData[$registry_item]);
@@ -865,8 +866,8 @@ class EventController extends Controller
         $thankyouCard = session()->get('thankyou_card_data', []);
 
         if ($thankyou_template_id != null) {
-            $gr = EventGreeting::where('id',$thankyou_template_id)->first();
-            if($gr != null){
+            $gr = EventGreeting::where('id', $thankyou_template_id)->first();
+            if ($gr != null) {
                 $gr->template_name = $template_name;
                 $gr->custom_hours_after_event = $when_to_send;
                 $gr->message = $thankyou_message;
@@ -874,7 +875,7 @@ class EventController extends Controller
             }
             $status = 1;
         } else {
-            
+
             $gr = new EventGreeting();
             $gr->user_id = $user_id;
             $gr->template_name = $template_name;
@@ -883,16 +884,16 @@ class EventController extends Controller
             $gr->save();
             $status = 0;
         }
-        
-        $thankyou_card = EventGreeting::where('user_id',$user_id)->get();
+
+        $thankyou_card = EventGreeting::where('user_id', $user_id)->get();
         // $data = ['name' => $template_name, 'when_to_send' => $when_to_send, 'message' => $thankyou_message, 'thankyou_template_id' => $thankyou_template_id];
-        return response()->json(['view' => view('front.event.thankyou_template.add_thankyou_template', compact('thankyou_card'))->render(),'status'=>$status]);
+        return response()->json(['view' => view('front.event.thankyou_template.add_thankyou_template', compact('thankyou_card'))->render(), 'status' => $status]);
     }
 
     public function removeThankyouCard(Request $request)
     {
         $thank_you_card_id = $request->input('thank_you_card_id');
-        EventGreeting::where('id',$thank_you_card_id)->delete();
+        EventGreeting::where('id', $thank_you_card_id)->delete();
         return response()->json(['message' => 'Greeting card deleted']);
     }
 
@@ -966,7 +967,7 @@ class EventController extends Controller
 
             $data = ['groupname' => $groupname, 'group_id' => $createGroup->id, "member_count" => $count];
 
-            return response()->json(['view' => view('front.event.guest.add_group', compact('data'))->render(), "status" => "1","data" => $data]);
+            return response()->json(['view' => view('front.event.guest.add_group', compact('data'))->render(), "status" => "1", "data" => $data]);
         }
     }
 
@@ -1422,13 +1423,14 @@ class EventController extends Controller
         return;
     }
 
-    public function get_co_host_list(Request $request){
+    public function get_co_host_list(Request $request)
+    {
         $selected_user = session('user_ids');
         $user_id =  Auth::guard('web')->user()->id;
         $alreadyselectedUser =  collect($selected_user)->pluck('id')->toArray();
-        $search_user = (isset($request->search_name) && $request->search_name != '')?$request->search_name:'';
-        $selected_co_host = (isset($request->selected_co_host) && $request->selected_co_host != '')?$request->selected_co_host:'';
-        $selected_co_host_prefer_by = (isset($request->selected_co_host_prefer_by) && $request->selected_co_host_prefer_by != '')?$request->selected_co_host_prefer_by:'';
+        $search_user = (isset($request->search_name) && $request->search_name != '') ? $request->search_name : '';
+        $selected_co_host = (isset($request->selected_co_host) && $request->selected_co_host != '') ? $request->selected_co_host : '';
+        $selected_co_host_prefer_by = (isset($request->selected_co_host_prefer_by) && $request->selected_co_host_prefer_by != '') ? $request->selected_co_host_prefer_by : '';
 
         $users = User::select('id', 'firstname', 'profile', 'lastname', 'email', 'country_code', 'phone_number', 'app_user', 'prefer_by', 'email_verified_at', 'parent_user_phone_contact', 'visible', 'message_privacy')
             ->whereNotIn('id', $alreadyselectedUser)
@@ -1444,24 +1446,24 @@ class EventController extends Controller
 
 
 
-        return view('front.event.guest.allGuestList', compact('users','selected_co_host','selected_co_host_prefer_by'));
+        return view('front.event.guest.allGuestList', compact('users', 'selected_co_host', 'selected_co_host_prefer_by'));
     }
 
-    public function get_gift_registry(Request $request){
+    public function get_gift_registry(Request $request)
+    {
         $user_id =  Auth::guard('web')->user()->id;
 
-        $gift_registry = EventGiftRegistry::where('user_id',$user_id)->get();
+        $gift_registry = EventGiftRegistry::where('user_id', $user_id)->get();
 
         return response()->json(['view' => view('front.event.gift_registry.add_gift_registry', compact('gift_registry'))->render()]);
-
     }
-    
-    public function get_thank_you_card(Request $request){
+
+    public function get_thank_you_card(Request $request)
+    {
         $user_id =  Auth::guard('web')->user()->id;
 
-        $thankyou_card = EventGreeting::where('user_id',$user_id)->get();
+        $thankyou_card = EventGreeting::where('user_id', $user_id)->get();
 
         return response()->json(['view' => view('front.event.thankyou_template.add_thankyou_template', compact('thankyou_card'))->render()]);
-
     }
 }
