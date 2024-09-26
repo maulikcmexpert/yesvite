@@ -3085,15 +3085,15 @@ class ApiControllerv2 extends Controller
             $event_design = TextData::get();
             if ($input['category_id'] != 0) {
 
-                $event_design = TextData::where('design_subcategory_id', $input['category_id'])->get();
+                $event_design = TextData::where('event_design_sub_category_id', $input['category_id'])->get();
             }
 
             $designList = [];
             if (count($event_design) != 0) {
                 foreach ($event_design as $data) {
                     $template_data['id'] = (isset($data->id) && $data->id != null) ? $data->id : '';
-                    $template_data['subcategory_id'] = (isset($data->design_subcategory_id) && $data->design_subcategory_id  != null) ? $data->design_subcategory_id : '';
-                    $template_data['category_id'] = (isset($data->desgin_category_id) && $data->desgin_category_id != null) ? $data->desgin_category_id : '';
+                    $template_data['event_design_sub_category_id'] = (isset($data->event_design_sub_category_id) && $data->event_design_sub_category_id  != null) ? $data->event_design_sub_category_id : '';
+                    $template_data['event_design_category_id'] = (isset($data->event_design_category_id) && $data->event_design_category_id != null) ? $data->event_design_category_id : '';
                     $template_data['image'] = (isset($data->image) && $data->image != null) ? $data->image : '';
                     $template_data['height'] = (isset($data->id) && $data->id != null) ? $data->id : '';
                     $template_data['width'] = (isset($data->id) && $data->id != null) ? $data->id : '';
@@ -13120,14 +13120,14 @@ class ApiControllerv2 extends Controller
             $height = $textData->height;
             $width = $textData->width;
 
-            $design_id = $textData->event_design_id;
+            $design_id = $textData->event_design_sub_category_id;
             // $template_url  = url("assets/images/{$image}");
             $template_url = asset('storage/canvas/' . $image);
             // Return the final response
             return response()->json([
                 'textData' => $resp, // Updated text data
                 'image' => $image,
-                'event_design_id' => $design_id,
+                'event_design_sub_category_id' => $design_id,
                 'height' => $height,
                 'width' => $width,
                 'template_url' => $template_url,

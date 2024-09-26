@@ -967,6 +967,8 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
 
                 // } else {
                     $(".inivted_user_list").append(response.view);
+                    $(".guest-contacts-wrp").append(response.responsive_view);
+
                     guest_counter(0,15);
                     $('input[name="email_invite[]"]').prop('disabled', false);
                     // if(currentInviteCount >= 15){
