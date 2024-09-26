@@ -963,6 +963,7 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
                 $('#currentInviteCount').val(currentInviteCount);
                 if (response.is_duplicate == 1) {
                     $("#user_tel-" + userId).remove();
+                    $("#user_id_tel-" + userId).remove();
                 }
                 
                 var total_guest = 0;
