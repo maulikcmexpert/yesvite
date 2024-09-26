@@ -628,20 +628,25 @@ $(document).on('click','.edit_design_tem',function(e){
     // Add event listener for keyboard events
     document.addEventListener('keydown', handleKeyboardEvents);
 
-
-
-    // Example textbox
-
-
-
+    var start_date = '';
+    var end_date = '';
+    if (eventData.event_date.includes(" To ")) {
+        let [start, end] = eventData.event_date.split(" To ");
+         start_date = start;
+         end_date = end;
+    } else {
+        start_date = eventData.event_date;
+        end_date = eventData.event_date;
+    }
+    
     // Add two draggable static textboxes outside the image area
-    addDraggableText(350, 50, 'event_name', 'xyz'); // Position this outside the image area
-    addDraggableText(350, 100, 'host_name', 'abc');
-    addDraggableText(350, 150, 'start_time', '5:00PM');
-    addDraggableText(350, 200, 'rsvp_end_time', '6:00PM');
-    addDraggableText(350, 250, 'start_date', '2024-07-27');
-    addDraggableText(350, 300, 'end_date', '2024-07-27');
-    addDraggableText(350, 350, 'Location', 'fdf');
+    addDraggableText(350, 50, 'event_name', eventData.event_name); // Position this outside the image area
+    addDraggableText(350, 100, 'host_name', eventData.hosted_by);
+    addDraggableText(350, 150, 'start_time', eventData.start_time);
+    addDraggableText(350, 200, 'rsvp_end_time', eventData.rsvp_end_time);
+    addDraggableText(350, 250, 'start_date', start_date);
+    addDraggableText(350, 300, 'end_date', end_date);
+    addDraggableText(350, 350, 'Location', eventData.event_location);
 
 
 
