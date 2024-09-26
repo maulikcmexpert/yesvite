@@ -456,14 +456,23 @@ function moveToTopOrBelowPinned(element) {
         $chatList.prepend(element);
     } else {
         // Otherwise, find the last pinned element and place this element after it
-        let $lastPinned = $chatList.find(".pinned").last();
+        let $listItems = $chatList.children("li").not(".pinned");
+        let elementPosition = parseInt(element.attr("data-position"));
 
-        if ($lastPinned.length > 0) {
-            // If there are pinned elements, place this element after the last pinned one
-            $lastPinned.after(element);
-        } else {
-            // If there are no pinned elements, prepend this element to the top
-            $chatList.prepend(element);
+        // Find the correct spot based on `data-position`
+        let inserted = false;
+        $listItems.each(function () {
+            let listItemPosition = parseInt($(this).attr("data-position"));
+            if (listItemPosition > elementPosition) {
+                $(this).before(element); // Insert the element in the correct position
+                inserted = true;
+                return false; // Exit the loop after inserting
+            }
+        });
+
+        // If no appropriate position is found, append the element to the bottom
+        if (!inserted) {
+            $chatList.append(element);
         }
     }
 }
