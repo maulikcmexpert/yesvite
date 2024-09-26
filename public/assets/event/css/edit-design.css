@@ -246,7 +246,7 @@
     position: relative;
 }
 
-.range { -webkit-appearance: none; width: 100%;height: auto !important;padding: 0px !important;border: none !important; }
+.range { -webkit-appearance: none; width: 100%;height: auto !important;padding: 0px !important;border: none !important;background-color: #F8F9FD; }
 
 .range:focus { outline: none;box-shadow: none !important; }
 
