@@ -43,7 +43,7 @@
                     </div>
                     <div class="col-12">
                        
-                        <div class="choose-design-cards-wrp">
+                        {{-- <div class="choose-design-cards-wrp">
                             <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="#">Birthday</a></li>
@@ -88,7 +88,7 @@
                                 </div>
                               
                             </div>
-                        </div>
+                        </div> --}}
                         
                             
                             <div class="choose-design-cards-wrp">
