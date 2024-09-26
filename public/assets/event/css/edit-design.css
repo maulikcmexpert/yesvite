@@ -293,7 +293,7 @@
 
 .edit-imag-main-content-wrp .choose-design-sidebar{
     height: 100vh;
-    width: auto !important;
+    width: 100% !important;  
 }
 
 
