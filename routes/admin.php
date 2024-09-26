@@ -17,7 +17,9 @@ use App\Http\Controllers\admin\{
     UserController,
     EventController,
     EventTypeController,
-    UserPostReportController
+    UserPostReportController,
+    TemplateController,
+    EditTempalteController
 };
 
 use Illuminate\Support\Facades\Session;
@@ -68,7 +70,9 @@ Route::group(['middleware' => adminAuth::Class], function () {
         'professional_users' => ProfessionalUserController::class,
         'events' => EventController::class,
         'event_type' => EventTypeController::class,
-        'user_post_report' => UserPostReportController::class
+        'user_post_report' => UserPostReportController::class,
+        'create_template' => TemplateController::class,
+
     ]);
     Route::post('user/check_new_contactemail', [UserController::class, 'checkNewContactEmail']);
 
