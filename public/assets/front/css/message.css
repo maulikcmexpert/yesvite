@@ -134,6 +134,10 @@
     width: 100%;
 }
 
+.chat-functions:not(.d-none)+.chat-header {
+    flex-direction: column;
+}
+
 .chat-functions span {
     cursor: pointer;
 }
