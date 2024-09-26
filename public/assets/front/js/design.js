@@ -1,3 +1,4 @@
+var dbJson = null;
 $(document).on("click", ".design-card", function () {
     var url = $(this).data("url");
     var template = $(this).data("template");
@@ -5,8 +6,7 @@ $(document).on("click", ".design-card", function () {
     var imageUrl = $(this).data("image");
     var json = $(this).data("json");
     $('.edit_design_tem').attr('data-image',imageUrl);
-    $('.edit_design_tem').attr('data-json',json);
-    console.log(json);
+    dbJson = json;
     // Set the image URL in the modal's image tag
     $("#modalImage").attr("src", imageUrl);
     $("#exampleModal").modal("show");
@@ -15,7 +15,7 @@ $(document).on("click", ".design-card", function () {
 $(document).on('click','.edit_design_tem',function(e){
     e.preventDefault();
     var image = $(this).data('image');
-    var json = $(this).data('json');
+    console.log(dbJson);
 
     $("step_1").hide();
     $(".step_2").hide();
@@ -28,7 +28,7 @@ $(document).on('click','.edit_design_tem',function(e){
     $('.edit_design_template').show();
 
     // hideStaticTextElements();  // Hide static text elements if static information is present
-    const staticInfo = JSON.parse(json);
+    const staticInfo = dbJson;
     console.log(staticInfo);
 
     staticInfo.textElements.forEach(element => {
