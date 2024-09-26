@@ -858,6 +858,7 @@ $(document).on("click", ".pin-conversation", function () {
     $(this)
         .find("span")
         .text(pinChange == "1" ? "Unpin" : "Pin");
+
     $(this).attr("changeWith", pinChange == "1" ? "0" : "1");
     if (pinChange == "1") {
         console.log("here");
@@ -872,10 +873,12 @@ $(document).on("click", ".pin-conversation", function () {
         $(".pin-self-icn").hide("d-none");
 
         $(".conversation-" + conversationId)
-            .children(".pin1-self-icn")
+            .children()
+            .find(".pin1-self-icn")
             .addClass("d-none");
         $(".conversation-" + conversationId)
-            .children(".unpin1-self-icn")
+            .children()
+            .find(".unpin1-self-icn")
             .removeClass("d-none");
     } else {
         $(".conversation-" + conversationId).removeClass("pinned");
@@ -887,10 +890,12 @@ $(document).on("click", ".pin-conversation", function () {
         $(".pin-self-icn").show();
         $(".unpin-self-icn").hide();
         $(".conversation-" + conversationId)
-            .children(".pin1-self-icn")
+            .children()
+            .find(".pin1-self-icn")
             .removeClass("d-none");
         $(".conversation-" + conversationId)
-            .children(".unpin1-self-icn")
+            .children()
+            .find(".unpin1-self-icn")
             .addClass("d-none");
     }
     moveToTopOrBelowPinned($(`.conversation-${conversationId}`));
