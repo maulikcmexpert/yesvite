@@ -3379,6 +3379,7 @@ function displayFiles(files, name) {
 $(document).on("click", ".close-preview", function () {
     $("#preview").hide();
     $(".preview_img").attr("src", "");
+    $(".upload").val("");
 });
 
 async function getTotalUnreadMessageCount() {
