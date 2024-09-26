@@ -1,8 +1,4 @@
 @foreach ( $data as $guest_user)
-
-if($guest_user['is_duplicate'] == 1){
-continue;
-}
 <div class="guest-contact">
     <div class="guest-img">
         <!-- <img src="./assets/image/user-img.svg" alt="guest-img"> -->
