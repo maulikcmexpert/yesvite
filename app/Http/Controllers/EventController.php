@@ -602,7 +602,7 @@ class EventController extends Controller
         $user = Auth::guard('web')->user();
         $name = $user->firstname . ' ' . $user->lastname;
         $categoryName = $request->input('category_name');
-        $category_quantity = $request->input('category_quantity');
+        // $category_quantity = $request->input('category_quantity');
         $itemName = $request->input('itemName');
         $selfBring = $request->input('selfbring');
         $selfBringQuantity = $request->input('self_bringQuantity');
@@ -637,8 +637,8 @@ class EventController extends Controller
             ];
         } else {
             $categories[$category_index] = [
-                'category_name' => $categoryName,
-                'category_quantity' => $category_quantity,
+                'category_name' => $categories[$category_index]['category_name'],
+                'category_quantity' => $categories[$category_index]['category_quantity'],
                 'item' => [
                     [
                         'name' => $itemName,
@@ -651,6 +651,7 @@ class EventController extends Controller
         Session::put('category', $categories);
 
         Session::put('category_item', $categories_item);
+        Session::save();
         $categories = Session::get('category', []);
 
         $category_quantity = $categories[$category_index]['category_quantity'];
@@ -712,10 +713,31 @@ class EventController extends Controller
                 }
             }
             if($i == 0){
-                $categories[$edit_category_id] = ['category_name' => $categoryName, 'category_quantity' => $categoryQuantity];
+                if (isset($categories[$edit_category_id]['item']) && !empty($categories[$edit_category_id]['item'])) {
+                    $item = $categories[$edit_category_id]['item'];
+                    $categories[$edit_category_id] = [
+                        'category_name' => $categoryName,
+                        'category_quantity' => $categoryQuantity,
+                        'item' => $item];
+                }else{
+                    $categories[$edit_category_id] = [
+                        'category_name' => $categoryName,
+                        'category_quantity' => $categoryQuantity,
+                        'item' => []
+                    ];
+                }
                 session()->put('category', $categories);
                 Session::save();
-                return response()->json(['status' => $status]);
+                $categories = Session::get('category', []);
+                $category_quantity = $categories[$edit_category_id]['category_quantity'];
+                $category_item = count($categories[$edit_category_id]['item']);
+                $qty = 0;
+                if ($category_quantity <= $category_item) {
+                    $qty = 1;
+                } else {
+                    $qty = 0;
+                }
+                return response()->json(['status' => $status, 'qty' => $qty]);
             }else{
                 return response()->json(['view' => '', 'status' => '0']);
             }

@@ -1206,6 +1206,7 @@ $(document).on("click", ".add_category_btn", function () {
             _token: $('meta[name="csrf-token"]').attr("content"),
         },
         success: function (response) {
+            $('#hidden_potluck_key').val('');
             $('#add_update_category_head').text('Add New Category');
             $("#categoryName").val("");
             $("#categoryNameError").text("");
@@ -1223,13 +1224,19 @@ $(document).on("click", ".add_category_btn", function () {
                 potluck_cateogry_item_count();
             }else if(response.status == 2){
                 console.log(response);
-                $("#hidden_category_name").val(categoryName);
-                $("#hidden_category_quantity").val(categoryQuantity);
+                // $("#hidden_category_name").val(categoryName);
+                // $("#hidden_category_quantity").val(categoryQuantity);
                 $('.category_name-'+edit_category_id).text(categoryName);
-                $('#missing-category-'+edit_category_id).text(categoryQuantity);
+                // $('#missing-category-'+edit_category_id).text(categoryQuantity);
+                $('.total-potluck-category-'+edit_category_id).val(categoryQuantity);
                 $('.edit_potluck_category-'+edit_category_id).attr('data-id',edit_category_id);
                 $('.edit_potluck_category-'+edit_category_id).attr('data-category_name',categoryName);
                 $('.edit_potluck_category-'+edit_category_id).attr('data-category_quantity',categoryQuantity);
+                if (response.qty == 1) {
+                    $("#potluck-" + edit_category_id).hide();
+                }else{
+                    $("#potluck-" + edit_category_id).show();
+                }
                 toggleSidebar("sidebar_potluck");
                 potluck_cateogry_item_count();
             } else {
@@ -1250,7 +1257,7 @@ $(document).on("click", ".add_category_btn", function () {
 $(document).on("click", ".edit_category", function () {
     var id = $(this).data("id");
     var category_name = $('.category_name-'+id).text();
-    var category_quantity = $('#missing-category-'+id).text();
+    var category_quantity = $('.total-potluck-category-'+id).val();
     console.log(id);
     console.log(category_name);
     console.log(category_quantity);
@@ -1311,6 +1318,7 @@ $(document).on("click", ".add_category_item_btn", function () {
             _token: $('meta[name="csrf-token"]').attr("content"),
         },
         success: function (response) {
+            console.log(response);
             $("#item_name").val("");
             $("#item_quantity").val("1");
             let slide = document.getElementsByClassName(
