@@ -858,11 +858,11 @@ $(document).on("click", ".pin-single-conversation", function (e) {
         .find("span")
         .text(pinChange == "1" ? "Unpin" : "Pin");
     $(this).attr("changeWith", pinChange == "1" ? "0" : "1");
+    const conversationElement = $(`.conversation-${conversationId}`);
+
     if (pinChange == "1") {
-        const conversationElement = $(`.conversation-${conversationId}`);
         console.log("here");
 
-        moveToTopOrBelowPinned(conversationElement);
         $(".conversation-" + conversationId).addClass("pinned");
         $(".conversation-" + conversationId)
             .find(".chat-data")
@@ -883,6 +883,7 @@ $(document).on("click", ".pin-single-conversation", function (e) {
         $(this).children(".pin1-self-icn").removeClass("d-none");
         $(this).children(".unpin1-self-icn").addClass("d-none");
     }
+    moveToTopOrBelowPinned(conversationElement);
 });
 
 $(document).on("click", ".mute-conversation", function () {
