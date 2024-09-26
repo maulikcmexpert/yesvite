@@ -847,126 +847,81 @@ async function updateMore(conversationId) {
     }
 }
 
-$(document).on("click", ".pin-conversation", function () {
-    const pinChange = $(this).attr("changeWith");
-    let conversationId = $(".conversationId").attr("conversationId");
-    const overviewRef = ref(
-        database,
-        `overview/${senderUser}/${conversationId}/isPin`
-    );
-    set(overviewRef, pinChange);
-    $(this)
-        .find("span")
-        .text(pinChange == "1" ? "Unpin" : "Pin");
+$(document).on(
+    "click",
+    ".pin-conversation, .pin-single-conversation",
+    function (e) {
+        if ($(this).hasClass("pin-single-conversation")) {
+            e.stopPropagation();
+        }
 
-    $(".conversation-" + conversationId)
-        .children()
-        .find(".pin-single-conversation")
-        .find("span")
-        .text(pinChange == "1" ? "Unpin" : "Pin");
+        const isMainPin = $(this).hasClass("pin-conversation");
+        const pinChange = $(this).attr("changeWith");
+        const conversationId = isMainPin
+            ? $(".conversationId").attr("conversationId")
+            : $(this).data("conversation");
 
-    $(".conversation-" + conversationId)
-        .children()
-        .find(".pin-single-conversation")
-        .attr("changeWith", pinChange == "1" ? "0" : "1");
+        const selectedConversationId = $(".selected_conversasion").val();
+        const overviewRef = ref(
+            database,
+            `overview/${senderUser}/${conversationId}/isPin`
+        );
+        set(overviewRef, pinChange);
 
-    $(this).attr("changeWith", pinChange == "1" ? "0" : "1");
-
-    if (pinChange == "1") {
-        console.log("here");
-
-        $(".conversation-" + conversationId).addClass("pinned");
-        $(".conversation-" + conversationId)
-            .find(".chat-data")
-            .find(".pin-svg")
-            .removeClass("d-none");
-
-        $(".unpin-self-icn").show("d-none");
-        $(".pin-self-icn").hide("d-none");
-
-        $(".conversation-" + conversationId)
-            .children()
-            .find(".pin1-self-icn")
-            .addClass("d-none");
-        $(".conversation-" + conversationId)
-            .children()
-            .find(".unpin1-self-icn")
-            .removeClass("d-none");
-    } else {
-        $(".conversation-" + conversationId).removeClass("pinned");
-
-        $(".conversation-" + conversationId)
-            .find(".chat-data")
-            .find(".pin-svg")
-            .addClass("d-none");
-        $(".pin-self-icn").show();
-        $(".unpin-self-icn").hide();
-        $(".conversation-" + conversationId)
-            .children()
-            .find(".pin1-self-icn")
-            .removeClass("d-none");
-        $(".conversation-" + conversationId)
-            .children()
-            .find(".unpin1-self-icn")
-            .addClass("d-none");
-    }
-    moveToTopOrBelowPinned($(`.conversation-${conversationId}`));
-});
-$(document).on("click", ".pin-single-conversation", function (e) {
-    e.stopPropagation();
-    const pinChange = $(this).attr("changeWith");
-    let conversationId = $(this).data("conversation");
-
-    const selectedConversationId = $(".selected_conversasion").val();
-
-    if (selectedConversationId === conversationId) {
-        $(".pin-conversation")
+        // Toggle pin/unpin text and changeWith attribute
+        $(this)
             .find("span")
             .text(pinChange == "1" ? "Unpin" : "Pin");
+        $(this).attr("changeWith", pinChange == "1" ? "0" : "1");
 
-        $(".pin-conversation").attr("changeWith", pinChange == "1" ? "0" : "1");
-    }
-
-    const overviewRef = ref(
-        database,
-        `overview/${senderUser}/${conversationId}/isPin`
-    );
-    set(overviewRef, pinChange);
-    $(this)
-        .find("span")
-        .text(pinChange == "1" ? "Unpin" : "Pin");
-    $(this).attr("changeWith", pinChange == "1" ? "0" : "1");
-
-    if (pinChange == "1") {
-        console.log("here");
-
-        $(".conversation-" + conversationId).addClass("pinned");
-        $(".conversation-" + conversationId)
-            .find(".chat-data")
-            .find(".pin-svg")
-            .removeClass("d-none");
-        if (selectedConversationId === conversationId) {
-            $(".unpin-self-icn").show("d-none");
-            $(".pin-self-icn").hide("d-none");
+        if (isMainPin && selectedConversationId === conversationId) {
+            $(".pin-conversation")
+                .find("span")
+                .text(pinChange == "1" ? "Unpin" : "Pin");
+            $(".pin-conversation").attr(
+                "changeWith",
+                pinChange == "1" ? "0" : "1"
+            );
         }
-        $(this).children(".pin1-self-icn").addClass("d-none");
-        $(this).children(".unpin1-self-icn").removeClass("d-none");
-    } else {
-        $(".conversation-" + conversationId).removeClass("pinned");
 
-        $(".conversation-" + conversationId)
-            .find(".chat-data")
-            .find(".pin-svg")
-            .addClass("d-none");
-        $(this).children(".pin1-self-icn").removeClass("d-none");
-        $(this).children(".unpin1-self-icn").addClass("d-none");
-        if (selectedConversationId === conversationId) {
-            $(".pin-self-icn").show();
-            $(".unpin-self-icn").hide();
+        const $conversation = $(`.conversation-${conversationId}`);
+        const $pinIcon = $conversation.find(".pin-svg");
+        const $selfIcons = {
+            pin: $(".pin-self-icn"),
+            unpin: $(".unpin-self-icn"),
+        };
+        const $singleSelfIcons = {
+            pin: $conversation.find(".pin1-self-icn"),
+            unpin: $conversation.find(".unpin1-self-icn"),
+        };
+
+        if (pinChange == "1") {
+            // Pin conversation
+            $conversation.addClass("pinned");
+            $pinIcon.removeClass("d-none");
+            $singleSelfIcons.pin.addClass("d-none");
+            $singleSelfIcons.unpin.removeClass("d-none");
+
+            if (isMainPin && selectedConversationId === conversationId) {
+                $selfIcons.unpin.show();
+                $selfIcons.pin.hide();
+            }
+        } else {
+            // Unpin conversation
+            $conversation.removeClass("pinned");
+            $pinIcon.addClass("d-none");
+            $singleSelfIcons.pin.removeClass("d-none");
+            $singleSelfIcons.unpin.addClass("d-none");
+
+            if (isMainPin && selectedConversationId === conversationId) {
+                $selfIcons.pin.show();
+                $selfIcons.unpin.hide();
+            }
         }
+
+        moveToTopOrBelowPinned($conversation);
     }
-    moveToTopOrBelowPinned($(`.conversation-${conversationId}`));
-});
+);
 
 $(document).on("click", ".mute-conversation", function () {
     const change = $(this).attr("changeWith");
@@ -1041,7 +996,7 @@ $(document).on("click", ".archive-conversation", function () {
         $(".conversation-" + conversationId).addClass("unarchived-list");
         $(".conversation-" + conversationId).removeClass("archived-list");
     }
-    $("#archive-list").click();
+    // $("#archive-list").click();
 });
 
 // Initial chat update
