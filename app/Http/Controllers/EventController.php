@@ -712,7 +712,17 @@ class EventController extends Controller
                 }
             }
             if($i == 0){
-                $categories[$edit_category_id] = ['category_name' => $categoryName, 'category_quantity' => $categoryQuantity];
+                if (isset($categories[$edit_category_id]['item']) && !empty($categories[$edit_category_id]['item'])) {
+                    $item = $categories[$edit_category_id]['item'];
+                    $categories[$edit_category_id] = [
+                        'category_name' => $categoryName,
+                        'category_quantity' => $categoryQuantity,
+                        'item' => $item];
+                }else{
+                    $categories[$edit_category_id] = [
+                        'category_name' => $categoryName,
+                        'category_quantity' => $categoryQuantity];
+                }
                 session()->put('category', $categories);
                 Session::save();
                 return response()->json(['status' => $status]);
