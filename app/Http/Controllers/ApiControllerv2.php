@@ -5461,7 +5461,7 @@ class ApiControllerv2 extends Controller
             if (isset($request->design_inner_image) && !empty($request->design_inner_image)) {
                 $designInnerImage = $request->design_inner_image;
                 $DesignInnerImageName = time() . '_' . str_replace(' ', '_', $designInnerImage->getClientOriginalName());
-                $designImage->move(public_path('storage/canvas'), $DesignInnerImageName);
+                $designInnerImage->move(public_path('storage/canvas'), $DesignInnerImageName);
                 $eventDesingInnerImage = Event::where('id',  $request->event_id)->first();
                 $eventDesingInnerImage->design_inner_image = $DesignInnerImageName;
                 $eventDesingInnerImage->save();
