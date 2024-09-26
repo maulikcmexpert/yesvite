@@ -20,7 +20,7 @@
                                     </svg>
                                 </span>
                             </div>
-                            <svg class="cursor-pointer" onclick="toggleSidebar()" width="20" height="20"
+                            <svg class="cursor-pointer" onclick="toggleSidebar('sidebar_select_design_category')" width="20" height="20"
                                 viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M18.3335 5.4165H13.3335" stroke="#F73C71" stroke-width="1.5"
                                     stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
