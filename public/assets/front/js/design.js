@@ -120,8 +120,21 @@ $(document).on("click", ".design-card", function () {
     // });
     
 });
-document.addEventListener('DOMContentLoaded', function () {
-    // Initialize fabric canvas
+
+$(document).on('click','.edit_design_tem',function(e){
+    e.preventDefault();
+    var image = $(this).data('image');
+
+    $("step_1").hide();
+    $(".step_2").hide();
+    $(".step_3").hide();
+    handleActiveClass('.li_design');
+    $('.event_create_percent').text('50%');
+    $('.current_step').text('2 of 4');
+    $(".step_4").hide();
+    $("#exampleModal").modal("hide");
+    $('.edit_design_template').show();
+
     var canvas = new fabric.Canvas('imageEditor1', {
         width: 500, // Canvas width
         height: 500, // Canvas height
@@ -138,22 +151,6 @@ document.addEventListener('DOMContentLoaded', function () {
         letterSpacing: defaultSettings.letterSpacing,
         lineHeight: defaultSettings.lineHeight
     };
-})
-
-
-$(document).on('click','.edit_design_tem',function(e){
-    e.preventDefault();
-    var image = $(this).data('image');
-
-    $("step_1").hide();
-    $(".step_2").hide();
-    $(".step_3").hide();
-    handleActiveClass('.li_design');
-    $('.event_create_percent').text('50%');
-    $('.current_step').text('2 of 4');
-    $(".step_4").hide();
-    $("#exampleModal").modal("hide");
-    $('.edit_design_template').show();
 
     fabric.Image.fromURL(image, function (img) {
         img.set({
