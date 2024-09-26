@@ -450,8 +450,14 @@ async function handleNewConversation(snapshot) {
 function moveToTopOrBelowPinned(element) {
     let chats = document.getElementsByClassName("chat-list");
     const $chatList = $(chats);
-    const $pinnedElements = $chatList.find(".pinned");
+    const ele = element.find(".pinned");
+    if (ele.length > 0) {
+        // Prepend to the top
+        $chatList.prepend(element);
+    }
     console.log(element);
+    const $pinnedElements = $chatList.find(".pinned");
+
     if ($pinnedElements.length > 0) {
         // Insert after the last pinned element
         $pinnedElements.last().after(element);
