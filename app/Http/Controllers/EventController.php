@@ -112,7 +112,7 @@ class EventController extends Controller
         $date = Carbon::parse($user->created_at);
         $formatted_date = $date->format('F, Y');
         $user['join_date'] = $formatted_date;
-        dd($textData);
+        // dd($textData);
         // $groups = Group::whereHas('groupMembers',function($query) use ($id){
         //     $query->where('user_id',$id);
         // })
