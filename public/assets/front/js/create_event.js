@@ -1206,6 +1206,7 @@ $(document).on("click", ".add_category_btn", function () {
             _token: $('meta[name="csrf-token"]').attr("content"),
         },
         success: function (response) {
+            $('#hidden_potluck_key').val('');
             $('#add_update_category_head').text('Add New Category');
             $("#categoryName").val("");
             $("#categoryNameError").text("");
