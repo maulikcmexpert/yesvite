@@ -17,27 +17,9 @@ $(document).on("click", ".design-card", function () {
 $(document).on("click", ".design-sidebar-action", function () {
 
     let designId = $(this).attr('design-id')
-    alert(designId);
     $(".design-sidebar").addClass('d-none')
     $(".design-sidebar_"+ designId).removeClass('d-none')
 })
-
-function toggleSidebars(id) {
-    const sidebar = document.getElementById(id);
-    const overlay = document.getElementById(id+'_overlay');
-
-    if (sidebar.style.right === '0px') {
-        // Hide sidebar
-        sidebar.style.right = '-500px';
-        sidebar.style.width = "0px";
-        overlay.classList.remove('visible');
-    } else {
-        // Show sidebar
-        sidebar.style.right = '0px';
-        sidebar.style.width = "100%"
-        overlay.classList.add('visible');
-    }
-}
 
 $(document).on('click','.edit_design_tem',function(e){
     e.preventDefault();
