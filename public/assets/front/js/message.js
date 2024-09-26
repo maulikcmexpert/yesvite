@@ -870,8 +870,8 @@ $(document).on("click", ".pin-single-conversation", function (e) {
 
         // $(".unpin-self-icn").show("d-none");
         // $(".pin-self-icn").hide("d-none");
-        $(this).children(".pin1-self-icn").removeClass("d-none");
-        $(this).children(".unpin1-self-icn").addClass("d-none");
+        $(this).children(".pin1-self-icn").addClass("d-none");
+        $(this).children(".unpin1-self-icn").removeClass("d-none");
     } else {
         $(".conversation-" + conversationId).removeClass("pinned");
 
@@ -879,12 +879,9 @@ $(document).on("click", ".pin-single-conversation", function (e) {
             .find(".chat-data")
             .find(".pin-svg")
             .addClass("d-none");
-        $(this).children(".pin1-self-icn").addClass("d-none");
-        $(this).children(".unpin1-self-icn").removeClass("d-none");
+        $(this).children(".pin1-self-icn").removeClass("d-none");
+        $(this).children(".unpin1-self-icn").addClass("d-none");
     }
-    console.log($(this).children());
-    console.log($(this).children().find(".pin1-self-icn"));
-    console.log($(this).children(".pin1-self-icn"));
 });
 
 $(document).on("click", ".mute-conversation", function () {
