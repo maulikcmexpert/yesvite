@@ -847,6 +847,7 @@ ul.member-lists li:last-child {
     border: none;
     font-size: 14px;
     color: var(--lightColor) !important;
+    resize: none;
 }
 
 .msg-footer .message-perent textarea::placeholder {
