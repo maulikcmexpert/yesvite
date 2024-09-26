@@ -3659,13 +3659,19 @@ async function deletereaction(
 }
 
 $(document).on("keyup", "#serach_user_from_list", function () {
-    var name = $(this).val();
-    $.ajax({
-        url: base_url + "getUserByName",
-        data: { username: name },
-        method: "post",
-        success: function (res) {
-            $(".chat-list").html(res);
-        },
+    var searchTerm = $(this).val().toLowerCase().trim();
+
+    // Iterate through each `li` in the chat list
+    $(".chat-list li").each(function () {
+        var searchData = $(this).data("search").toLowerCase().trim();
+
+        // Check if the search term is contained in the data-search attribute
+        if (searchData.includes(searchTerm)) {
+            // If match found, remove the 'd-none' class to display the item
+            $(this).removeClass("d-none");
+        } else {
+            // If no match, add 'd-none' class to hide the item
+            $(this).addClass("d-none");
+        }
     });
 });
