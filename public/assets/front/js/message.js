@@ -469,6 +469,7 @@ function removeSelectedMsg() {
 // Function to handle changes to existing conversations in the overview
 function handleConversationChange(snapshot) {
     const updatedConversation = snapshot.val();
+    console.log(1234);
 
     handleNewConversation(snapshot);
 }
@@ -3158,7 +3159,7 @@ async function updateUnreadMessageBadge(conversationId = null) {
 
 // Call the function on page load
 $(document).ready(function () {
-    // updateUnreadMdyessageBadge();
+    updateUnreadMessageBadge();
 });
 $(document).on("click", ".bulk-check .form-check-input", function (event) {
     event.stopPropagation(); // Prevent the event from bubbling up to .msg-list
