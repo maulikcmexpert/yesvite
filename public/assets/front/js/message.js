@@ -3158,7 +3158,7 @@ async function updateUnreadMessageBadge(conversationId = null) {
 
 // Call the function on page load
 $(document).ready(function () {
-    updateUnreadMdyessageBadge();
+    // updateUnreadMdyessageBadge();
 });
 $(document).on("click", ".bulk-check .form-check-input", function (event) {
     event.stopPropagation(); // Prevent the event from bubbling up to .msg-list
