@@ -16,7 +16,7 @@ $(document).on("click", ".design-card", function () {
 });
 $(document).on("click", ".design-sidebar-action", function () {
 
-    let designId = $(this).design('id')
+    let designId = $(this).attr('design-id')
     alert(designId);
     $(".design-sidebar").addClass('d-none')
     $(".design-sidebar_"+ designId).removeClass('d-none')
