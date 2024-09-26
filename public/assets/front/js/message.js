@@ -760,6 +760,7 @@ $(document).on("click", ".msg-list", async function () {
     formattedDate = {};
     const isGroup = $(this).attr("data-group");
     const conversationId = $(this).attr("data-msgKey");
+    console.log({ conversationId });
     $(".selected_id").val(conversationId);
 
     $("#isGroup").val(isGroup);
