@@ -14,6 +14,13 @@ $(document).on("click", ".design-card", function () {
     $("#modalImage").attr("src", imageUrl);
     $("#exampleModal").modal("show");
 });
+$(document).on("click", ".design-sidebar-action", function () {
+
+    let designId = $(this).design('id')
+    alert(designId);
+    $(".design-sidebar").addClass('d-none')
+    $(".design-sidebar_"+ designId).removeClass('d-none')
+})
 
 function toggleSidebars(id) {
     const sidebar = document.getElementById(id);
