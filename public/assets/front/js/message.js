@@ -3064,6 +3064,7 @@ $(".upload-box").change(function () {
     if (file.length <= 0) {
         return;
     }
+    console.log("new file");
     var name = file?.name;
     displayFiles(this.files, name);
     $(".dropdown-menu").removeClass("show");
@@ -3165,6 +3166,7 @@ function displayFiles(files, name) {
                 previewElement.src = e.target.result;
                 previewItem.appendChild(previewElement);
                 preview.appendChild(previewItem);
+                $(previewElement).show();
             };
         })(file);
 
