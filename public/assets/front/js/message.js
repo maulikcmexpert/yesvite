@@ -1472,8 +1472,10 @@ function createMessageElement(key, messageData, isGroup) {
             <div class="media-msg-inline">
                 <div class="media-msg">
                     <img src="${messageData?.url}"/>
-                    <span class="media-text">${
-                        messageData?.data != "" ? messageData.data : ""
+                    <span class="media-text"> ${
+                        messageData?.data != ""
+                            ? messageData.data.replace(/\n/g, "<br>")
+                            : ""
                     }</span>
                     ${
                         isSender
@@ -1490,8 +1492,10 @@ function createMessageElement(key, messageData, isGroup) {
             <div class="media-msg-inline">
                 <div class="media-msg">
                     <video src="${messageData?.url}" controls></video>
-                    <span class="media-text">${
-                        messageData?.data != "" ? messageData.data : ""
+                    <span class="media-text"> ${
+                        messageData?.data != ""
+                            ? messageData.data.replace(/\n/g, "<br>")
+                            : ""
                     }</span>
                     ${
                         isSender
@@ -1509,8 +1513,10 @@ function createMessageElement(key, messageData, isGroup) {
                     <iframe src="${
                         messageData?.url
                     }" style="width:100%;height:400px;"></iframe>
-                    <span class="media-text">${
-                        messageData?.data != "" ? messageData.data : ""
+                    <span class="media-text"> ${
+                        messageData?.data != ""
+                            ? messageData.data.replace(/\n/g, "<br>")
+                            : ""
                     }</span>
                     ${
                         isSender
@@ -1526,7 +1532,11 @@ function createMessageElement(key, messageData, isGroup) {
             
                 <div class="media-msg">
                 ${musicPlayer(messageData?.url)}
-                <span>${messageData?.data != "" ? messageData.data : ""}</span>
+                <span> ${
+                    messageData?.data != ""
+                        ? messageData.data.replace(/\n/g, "<br>")
+                        : ""
+                }</span>
                 ${
                     isSender
                         ? `<span class="seenStatus ${seenStatus}"></span>`
@@ -1548,7 +1558,11 @@ function createMessageElement(key, messageData, isGroup) {
              
                 <div class="simple-msg-wrap"> 
                     <span class="senderName">${senderName}</span>                   
-                    ${messageData?.data != "" ? messageData.data : ""}
+                     ${
+                         messageData?.data != ""
+                             ? messageData.data.replace(/\n/g, "<br>")
+                             : ""
+                     }
                     ${
                         isSender
                             ? `<span class="seenStatus ${seenStatus}"></span>`
@@ -1591,9 +1605,12 @@ function createMessageElement(key, messageData, isGroup) {
                             <div class="media-msg-inline">
                                 <div class="media-msg">
                                     <img src="${messageData?.url}"/>
-                                    <span> ${
+                                    <span>  ${
                                         messageData?.data != ""
-                                            ? messageData.data
+                                            ? messageData.data.replace(
+                                                  /\n/g,
+                                                  "<br>"
+                                              )
                                             : ""
                                     }</span>
                                     ${reaction}
@@ -1608,8 +1625,12 @@ function createMessageElement(key, messageData, isGroup) {
                                     }" controls></video>
                                     <span> ${
                                         messageData?.data != ""
-                                            ? messageData.data
+                                            ? messageData.data.replace(
+                                                  /\n/g,
+                                                  "<br>"
+                                              )
                                             : ""
+                                    }
                                     }</span>
                                     ${reaction}
                                 </div>
@@ -1621,8 +1642,12 @@ function createMessageElement(key, messageData, isGroup) {
                                     ${musicPlayer(messageData?.url)}
                                     <span> ${
                                         messageData?.data != ""
-                                            ? messageData.data
+                                            ? messageData.data.replace(
+                                                  /\n/g,
+                                                  "<br>"
+                                              )
                                             : ""
+                                    }
                                     }</span>
                                     ${reaction}
                                 </div>
@@ -1636,8 +1661,12 @@ function createMessageElement(key, messageData, isGroup) {
                                     }" style="width:100%;height:400px;"></iframe>
                                     <span> ${
                                         messageData?.data != ""
-                                            ? messageData.data
+                                            ? messageData.data.replace(
+                                                  /\n/g,
+                                                  "<br>"
+                                              )
                                             : ""
+                                    }
                                     }</span>
                                     ${reaction}
                                 </div>
