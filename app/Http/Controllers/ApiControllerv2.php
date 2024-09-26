@@ -4113,6 +4113,7 @@ class ApiControllerv2 extends Controller
 
                 $eventDetail['static_information'] = ($getEventData->static_information != NULL) ? $getEventData->static_information : "";
                 $eventDetail['design_image'] = ($getEventData->design_image != NULL) ? asset('storage/canvas/' . $getEventData->design_image) : "";
+                $eventDetail['design_inner_image'] = ($getEventData->design_inner_image != NULL) ? asset('storage/canvas/' . $getEventData->design_inner_image) : "";
                 $eventDetail['event_images'] = [];
                 $getEventImages = EventImage::where('event_id', $getEventData->id)->get();
                 if (!empty($getEventImages)) {
@@ -4430,6 +4431,8 @@ class ApiControllerv2 extends Controller
                 // dd($eventData['static_information']);
                 $updateEvent->static_information = (isset($eventData['static_information']) && $eventData['static_information'] != '') ? $eventData['static_information'] : null;
                 $updateEvent->design_image = (!empty($eventData['design_image'])) ? $eventData['design_image'] : "";
+                $updateEvent->design_inner_image = (!empty($eventData['design_inner_image'])) ? $eventData['design_inner_image'] : "";
+
                 if ($updateEvent->save()) {
                     if ($eventData['is_draft_save'] == '1') {
                         EventInvitedUser::where(['event_id' => $eventData['event_id']])->delete();
@@ -5453,6 +5456,15 @@ class ApiControllerv2 extends Controller
                 $eventDesingImage = Event::where('id',  $request->event_id)->first();
                 $eventDesingImage->design_image = $DesignImageName;
                 $eventDesingImage->save();
+            }
+
+            if (isset($request->design_inner_image) && !empty($request->design_inner_image)) {
+                $designInnerImage = $request->design_image;
+                $DesignInnerImageName = time() . '_' . str_replace(' ', '_', $designInnerImage->getClientOriginalName());
+                $designImage->move(public_path('storage/canvas'), $DesignInnerImageName);
+                $eventDesingInnerImage = Event::where('id',  $request->event_id)->first();
+                $eventDesingInnerImage->design_inner_image = $DesignInnerImageName;
+                $eventDesingInnerImage->save();
             }
 
             $user  = Auth::guard('api')->user();
