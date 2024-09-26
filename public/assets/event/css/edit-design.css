@@ -53,15 +53,15 @@
     background: none !important;
 }
 
-.image-edit-inner-img{
-    width: 460px !important;
-    height: 648px !important;
+.image-edit-inner-img canvas {
+    width: 550px !important;
+    height: 600px !important;
     margin: 0px auto !important;
 }
 
-.image-edit-inner-img canvas{
-    width: 460px !important;
-    height: 648px !important;
+.image-edit-inner-img canvas {
+    width: 550px !important;
+    height: 600px !important;
     margin: 0px auto !important;
 }
 
