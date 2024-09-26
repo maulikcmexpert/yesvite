@@ -3283,9 +3283,6 @@ $(".multi-pin").click(async function () {
 });
 
 $(".multi-mute").click(function () {
-    const change = $(this).attr("changeWith");
-    $(this).attr("changeWith", change == "1" ? "0" : "1");
-
     const checkedConversations = $(
         "input[name='checked_conversation[]']:checked"
     );
@@ -3293,6 +3290,9 @@ $(".multi-mute").click(function () {
     if (checkedConversations.length <= 0) {
         return;
     }
+    const change = $(this).attr("changeWith");
+    $(this).attr("changeWith", change == "1" ? "0" : "1");
+
     checkedConversations.each(function () {
         const conversationId = $(this).val();
         const overviewRef = ref(
