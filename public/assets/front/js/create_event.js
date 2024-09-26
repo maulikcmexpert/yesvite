@@ -4238,6 +4238,7 @@ $(document).on("click", ".store_desgin_temp", function () {
                     eventData.step = final_step;
                     console.log("Image uploaded and saved successfully");
                     $("#exampleModal").modal("hide");
+                    $("#myCustomModal").modal("hide");
                     $("#loader").css("display", "none");
                     $('.store_desgin_temp').prop("disabled", false);
                     $(".main-content-wrp").removeClass("blurred");
