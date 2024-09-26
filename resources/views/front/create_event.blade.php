@@ -294,7 +294,7 @@
 
 
 
-<div id="sidebar_select_design_category" class="sidebar choose-design-sidebar" style="right: 0px; width: 100%;">
+<div id="sidebar_select_design_category" class="sidebar choose-design-sidebar">
     <div class="setting-category-wrp choose-design-form activity-schedule-inner ">
         <div class="d-flex align-items-center justify-content-between toggle-wrp new-event-sidebar-head">
             <h5>Category</h5>
