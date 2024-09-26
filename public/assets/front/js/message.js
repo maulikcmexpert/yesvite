@@ -883,7 +883,7 @@ $(document).on("click", ".pin-single-conversation", function (e) {
         $(this).children(".pin1-self-icn").removeClass("d-none");
         $(this).children(".unpin1-self-icn").addClass("d-none");
     }
-    moveToTopOrBelowPinned(conversationElement);
+    moveToTopOrBelowPinned($(`.conversation-${conversationId}`));
 });
 
 $(document).on("click", ".mute-conversation", function () {
