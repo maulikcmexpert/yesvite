@@ -444,6 +444,7 @@ async function handleNewConversation(snapshot) {
             unReadCount: 0,
         });
     }
+    updateUnreadMessageBadge();
 }
 
 function moveToTopOrBelowPinned(element) {
@@ -3662,7 +3663,8 @@ $(document).on("keyup", "#serach_user_from_list", function () {
     var searchTerm = $(this).val().toLowerCase().trim();
 
     // Iterate through each `li` in the chat list
-    $(".chat-list li").each(function () {
+    var msglist = document.getElementsByClassName("msg-list");
+    $(msglist).each(function () {
         var searchData = $(this).data("search").toLowerCase().trim();
 
         // Check if the search term is contained in the data-search attribute
