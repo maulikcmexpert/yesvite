@@ -1068,6 +1068,18 @@ $(document).on("click", ".archive-conversation", function () {
         .find("span")
         .text(change == "1" ? "Unarchive" : "Archive");
     $(this).attr("changeWith", change == "1" ? "0" : "1");
+
+    $(".conversation-" + conversationId)
+        .find(".chat-data")
+        .find(".archive-single-conversation")
+        .find("span")
+        .text(change == "1" ? "Unarchive" : "Archive");
+
+    $(".conversation-" + conversationId)
+        .find(".chat-data")
+        .find(".archive-single-conversation")
+        .attr("changeWith", change == "1" ? "0" : "1");
+
     if (change == "1") {
         $(".conversation-" + conversationId).addClass("archived-list");
         $(".conversation-" + conversationId).removeClass("unarchived-list");
@@ -1096,6 +1108,18 @@ $(document).on("click", ".archive-single-conversation", function () {
         .find("span")
         .text(change == "1" ? "Unarchive" : "Archive");
     $(this).attr("changeWith", change == "1" ? "0" : "1");
+
+    const selectedConversationId = $(".selected_conversasion").val();
+    if (selectedConversationId === conversationId) {
+        $(".archive-conversation")
+            .find("span")
+            .text(change == "1" ? "Unarchive" : "Archive");
+
+        $(".archive-conversation").attr(
+            "changeWith",
+            change == "1" ? "0" : "1"
+        );
+    }
     if (change == "1") {
         $(".conversation-" + conversationId).addClass("archived-list");
         $(".conversation-" + conversationId).removeClass("unarchived-list");
