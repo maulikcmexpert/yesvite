@@ -5459,7 +5459,7 @@ class ApiControllerv2 extends Controller
             }
 
             if (isset($request->design_inner_image) && !empty($request->design_inner_image)) {
-                $designInnerImage = $request->design_image;
+                $designInnerImage = $request->design_inner_image;
                 $DesignInnerImageName = time() . '_' . str_replace(' ', '_', $designInnerImage->getClientOriginalName());
                 $designImage->move(public_path('storage/canvas'), $DesignInnerImageName);
                 $eventDesingInnerImage = Event::where('id',  $request->event_id)->first();
@@ -6591,9 +6591,12 @@ class ApiControllerv2 extends Controller
 
         try {
             $eventDetail = Event::with(['user', 'event_image', 'event_schedule', 'event_settings', 'event_invited_user' => function ($query) {
-
                 $query->where('is_co_host', '1')->with('user');
             }])->where('id', $input['event_id'])->first();
+
+            // $event_dates = $eventDetail->start_date;
+            // $dateRange = explode(' to ', $event Dates);
+
             $guestView = [];
             $eventDetails['id'] = $eventDetail->id;
             $eventDetails['event_images'] = [];
@@ -6733,6 +6736,9 @@ class ApiControllerv2 extends Controller
                 }
                 if ($eventDetail->event_settings->gift_registry == '1') {
                     $eventData[] = "Gift Registry";
+                }
+                if ($eventDetail->event_settings->events_schedule == '1') {
+                    $eventData[] = "Event has Schedule";
                 }
                 if (empty($eventData)) {
                     $eventData[] = date('F d, Y', strtotime($eventDetail->start_date));
