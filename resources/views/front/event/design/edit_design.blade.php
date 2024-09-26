@@ -65,7 +65,7 @@
                 </button>
             </div>
             <div class="edit-images-button-inner text-edit-wrp">
-                <button class="design-sidebar-action" design-id="3" onclick="toggleSidebar()">
+                <button class="design-sidebar-action" design-id="3" onclick="toggleSidebar('sidebar_edit_text')">
                     <span>
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -247,61 +247,7 @@
 
        
 
-        <!-- ======Font-size== -->
-        <div class="design-sidebar design-sidebar_3 setting-category-wrp choose-design-form activity-schedule-inner ">
-            <div class="d-flex align-items-center justify-content-between toggle-wrp new-event-sidebar-head">
-                <h5>Size & Spacing</h5>
-                <button class="close-btn" onclick="toggleSidebar()">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M5.00098 5L19 18.9991" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                        <path d="M4.99996 18.9991L18.999 5" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                    </svg>
-                </button>
-            </div>
-
-            <div class="size-spacing-main-wrp">
-                <!-- Font Size Section -->
-                <div class="size-spacing-inner font-size-wrp">
-                    <div class="size-spacing-inner-top">
-                        <h3>Font Size</h3>
-                        <input type="text" id="fontSizeInput" value="20">
-                    </div>
-                    <div class="range-slider">
-                        <div id="fontSizeTooltip" class="tooltip"></div>
-                        <input id="fontSizeRange" type="range" step="1" value="20" min="1" max="100">
-                    </div>
-                </div>
-
-                <!-- Letter Spacing Section -->
-                <div class="size-spacing-inner font-size-wrp">
-                    <div class="size-spacing-inner-top">
-                        <h3>Letter Spacing</h3>
-                        <input type="text" id="letterSpacingInput" value="0">
-                    </div>
-                    <div class="range-slider">
-                        <div id="letterSpacingTooltip" class="tooltip"></div>
-                        <input id="letterSpacingRange" type="range" step="1" value="0" min="0" max="500">
-                    </div>
-                </div>
-
-                <!-- Line Height Section -->
-                <div class="size-spacing-inner font-size-wrp">
-                    <div class="size-spacing-inner-top">
-                        <h3>Line Height</h3>
-                        <input type="text" id="lineHeightInput" value="1.2">
-                    </div>
-                    <div class="range-slider">
-                        <div id="lineHeightTooltip" class="tooltip"></div>
-                        <input id="lineHeightRange" type="range" step="0.1" value="1.2" min="0.5" max="3">
-                    </div>
-                </div>
-            </div>
-
-            <div class="footer-buttons">
-                <button class="cmn-btn reset-btn">Reset</button>
-                <button class="cmn-btn save-btn">Save</button>
-            </div>
-        </div>
+        
 
 
         <!-- ===color-picker== -->
@@ -794,7 +740,7 @@
             </div>
         </div>
     </div>
-
+    
     <div id="sidebar_font" class="sidebar choose-design-sidebar">
          <!-- =====fonts-family-options==== -->
          <div class="design-sidebar design-sidebar_2 setting-category-wrp choose-design-form activity-schedule-inner ">
@@ -944,5 +890,65 @@
             </div>
         </div>
     </div>
+
+    <div id="sidebar_edit_text" class="sidebar choose-design-sidebar">
+        <!-- ======Font-size== -->
+        <div class="design-sidebar design-sidebar_3 setting-category-wrp choose-design-form activity-schedule-inner ">
+            <div class="d-flex align-items-center justify-content-between toggle-wrp new-event-sidebar-head">
+                <h5>Size & Spacing</h5>
+                <button class="close-btn" onclick="toggleSidebar()">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5.00098 5L19 18.9991" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M4.99996 18.9991L18.999 5" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="size-spacing-main-wrp">
+                <!-- Font Size Section -->
+                <div class="size-spacing-inner font-size-wrp">
+                    <div class="size-spacing-inner-top">
+                        <h3>Font Size</h3>
+                        <input type="text" id="fontSizeInput" value="20">
+                    </div>
+                    <div class="range-slider">
+                        <div id="fontSizeTooltip" class="tooltip"></div>
+                        <input id="fontSizeRange" type="range" step="1" value="20" min="1" max="100">
+                    </div>
+                </div>
+
+                <!-- Letter Spacing Section -->
+                <div class="size-spacing-inner font-size-wrp">
+                    <div class="size-spacing-inner-top">
+                        <h3>Letter Spacing</h3>
+                        <input type="text" id="letterSpacingInput" value="0">
+                    </div>
+                    <div class="range-slider">
+                        <div id="letterSpacingTooltip" class="tooltip"></div>
+                        <input id="letterSpacingRange" type="range" step="1" value="0" min="0" max="500">
+                    </div>
+                </div>
+
+                <!-- Line Height Section -->
+                <div class="size-spacing-inner font-size-wrp">
+                    <div class="size-spacing-inner-top">
+                        <h3>Line Height</h3>
+                        <input type="text" id="lineHeightInput" value="1.2">
+                    </div>
+                    <div class="range-slider">
+                        <div id="lineHeightTooltip" class="tooltip"></div>
+                        <input id="lineHeightRange" type="range" step="0.1" value="1.2" min="0.5" max="3">
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-buttons">
+                <button class="cmn-btn reset-btn">Reset</button>
+                <button class="cmn-btn save-btn">Save</button>
+            </div>
+        </div>
+    </div>
+    
     <div id="sidebar_font_overlay" class="overlay" onclick="toggleSidebar('')"></div>
+    <div id="sidebar_edit_text_overlay" class="overlay" onclick="toggleSidebar('')"></div>
 </main>
