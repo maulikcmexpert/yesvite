@@ -5157,7 +5157,7 @@ $(document).on("click", ".edit_potluck_category", function () {
     $("#categoryName").val(category_name);
     $("#category_quantity").val(category_quantity);
     $("#hidden_potluck_key").val(id);
-    $('#add_update_category_head').text('Update Category');
+    $('#add_update_category_head').text('Edit Category');
     toggleSidebar('sidebar_addcategory')
 });
 
