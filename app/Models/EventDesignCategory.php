@@ -28,6 +28,6 @@ class EventDesignCategory extends Model
     
     public function textdatas()
     {
-        return $this->hasMany(TextData::class,'desgin_category_id'); //, 'event_design_category_id', 'id'
+        return $this->hasMany(TextData::class,'event_design_category_id'); //, 'event_design_category_id', 'id'
     }
 }
