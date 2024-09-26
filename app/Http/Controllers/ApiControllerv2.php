@@ -5459,6 +5459,8 @@ class ApiControllerv2 extends Controller
                 }
             }
 
+            dd($request);
+
             if (isset($request->design_image) && !empty($request->design_image)) {
                 $designImage = $request->design_image;
                 $DesignImageName = time() . '_' . str_replace(' ', '_', $designImage->getClientOriginalName());
