@@ -642,7 +642,7 @@ use Carbon\Carbon;
                                 </div>
                             </div>
                             <div class="message-perent">
-                                <textarea type="text" placeholder="Write message here..." id="message-box" class="send-message"></textarea>
+                                <textarea type="text" placeholder="Write message here..." id="message-box"  rows="1" style="overflow:hidden; resize:none;" class="send-message"></textarea>
                                 <div class="d-flex ms-auto">
                                     <div class="dropdown">
                                         <button type="button" class="btn btn-primary dropdown-toggle p-0" data-bs-toggle="dropdown">
