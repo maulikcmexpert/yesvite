@@ -1974,7 +1974,8 @@ function handleRemoveConversation(snapshot) {
 }
 
 $(document).on(".usr-list-more", "click", function (e) {
-    e.preventDefault();
+    e.stopPropagation();
+    console.log("clicked");
     return;
 });
 // Initialize overview listeners
