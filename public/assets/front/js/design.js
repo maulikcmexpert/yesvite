@@ -27,6 +27,14 @@ $(document).on('click','.edit_design_tem',function(e){
     $("#exampleModal").modal("hide");
     $('.edit_design_template').show();
 
+    addDraggableText(350, 50, 'event_name', 'xyz'); // Position this outside the image area
+    addDraggableText(350, 100, 'host_name', 'abc');
+    addDraggableText(350, 150, 'start_time', '5:00PM');
+    addDraggableText(350, 200, 'rsvp_end_time', '6:00PM');
+    addDraggableText(350, 250, 'start_date', '2024-07-27');
+    addDraggableText(350, 300, 'end_date', '2024-07-27');
+    addDraggableText(350, 350, 'Location', 'fdf');
+
     // hideStaticTextElements();  // Hide static text elements if static information is present
     const staticInfo = dbJson;
     console.log(staticInfo);
@@ -588,13 +596,7 @@ $(document).on('click','.edit_design_tem',function(e){
         }
     }
 
-    addDraggableText(350, 50, 'event_name', 'xyz'); // Position this outside the image area
-    addDraggableText(350, 100, 'host_name', 'abc');
-    addDraggableText(350, 150, 'start_time', '5:00PM');
-    addDraggableText(350, 200, 'rsvp_end_time', '6:00PM');
-    addDraggableText(350, 250, 'start_date', '2024-07-27');
-    addDraggableText(350, 300, 'end_date', '2024-07-27');
-    addDraggableText(350, 350, 'Location', 'fdf');
+  
 
     // Handle keyboard events for delete and copy
     function handleKeyboardEvents(e) {
