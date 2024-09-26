@@ -4262,6 +4262,7 @@ function save_image_design(downloadImage){
                     $('.store_desgin_temp').prop("disabled", false);
                     $(".main-content-wrp").removeClass("blurred");
                     $(".step_2").hide();
+                    $('.edit_design_template').hide();
                     handleActiveClass('.li_guest');
                     $('.li_design').find(".side-bar-list").addClass("menu-success");
 
