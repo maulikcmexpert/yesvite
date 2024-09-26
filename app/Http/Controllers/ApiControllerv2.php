@@ -5459,18 +5459,21 @@ class ApiControllerv2 extends Controller
                 }
             }
 
+            // dd($request);
+            $i = 0;
             if (isset($request->design_image) && !empty($request->design_image)) {
                 $designImage = $request->design_image;
-                $DesignImageName = time() . '_' . str_replace(' ', '_', $designImage->getClientOriginalName());
+                $DesignImageName = time() . $i . '_' . str_replace(' ', '_', $designImage->getClientOriginalName());
                 $designImage->move(public_path('storage/canvas'), $DesignImageName);
                 $eventDesingImage = Event::where('id',  $request->event_id)->first();
                 $eventDesingImage->design_image = $DesignImageName;
                 $eventDesingImage->save();
+                $i++;
             }
 
             if (isset($request->design_inner_image) && !empty($request->design_inner_image)) {
                 $designInnerImage = $request->design_inner_image;
-                $DesignInnerImageName = time() . '_' . str_replace(' ', '_design_inner', $designInnerImage->getClientOriginalName());
+                $DesignInnerImageName = time() . $i . '_' . str_replace(' ', '_design_inner', $designInnerImage->getClientOriginalName());
                 $designInnerImage->move(public_path('storage/canvas'), $DesignInnerImageName);
                 $eventDesingInnerImage = Event::where('id',  $request->event_id)->first();
                 $eventDesingInnerImage->design_inner_image = $DesignInnerImageName;

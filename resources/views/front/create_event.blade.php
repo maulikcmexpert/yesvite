@@ -294,7 +294,7 @@
 
 
 
-<div id="sidebar" class="sidebar choose-design-sidebar" style="right: 0px; width: 100%;display:none;">
+<div id="sidebar_select_design_category" class="sidebar setting-side-wrp">
     <div class="setting-category-wrp choose-design-form activity-schedule-inner ">
         <div class="d-flex align-items-center justify-content-between toggle-wrp new-event-sidebar-head">
             <h5>Category</h5>
@@ -2319,6 +2319,7 @@
 <div id="sidebar_add_group_member_overlay" class="overlay" onclick="toggleSidebar()"></div>
 <div id="sidebar_invite_group_member_overlay" class="overlay" onclick="toggleSidebar()"></div>
 <div id="sidebar_editcategory_overlay" class="overlay" onclick="toggleSidebar()"></div>
+<div id="sidebar_select_design_category_overlay" class="overlay" onclick="toggleSidebar()"></div>
 
 
 
