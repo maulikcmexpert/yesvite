@@ -5130,5 +5130,17 @@ $(document).ready(function () {
     });
 });
 
+$(document).on("click", ".new-temp", function () {
+    // Get the image URL from the data-image attribute
+    var imageUrl = $(this).data("image");
+    
+    // Set the image URL in the modal's image tag
+    $("#modalImage").attr("src", imageUrl);
+    
+    // Show the modal
+    $("#exampleModal").modal("show");
+});
+
+
 
 
