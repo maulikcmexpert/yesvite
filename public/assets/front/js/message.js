@@ -3072,7 +3072,7 @@ $(".upload-box").change(function () {
     $(".dropdown-menu").removeClass("show");
 
     var fileExtension = file.name.substr(file.name.lastIndexOf(".") + 1);
-
+    console.log(fileExtension);
     if (file) {
         var reader = new FileReader();
 
@@ -3104,15 +3104,19 @@ $(".upload-box").change(function () {
                 "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         ) {
             // Handle Excel file display
-            curElement.attr("src", URL.createObjectURL(e.target.result));
-            $(".preview_img").hide();
+            reader.onload = function (e) {
+                curElement
+                    .attr("src", URL.createObjectURL(e.target.result))
+                    .hide();
+            };
         } else {
             // Handle other file types (text, docs)
             reader.onload = function (e) {
-                curElement.attr("src", URL.createObjectURL(e.target.result));
+                curElement
+                    .attr("src", URL.createObjectURL(e.target.result))
+                    .hide();
             };
             reader.readAsText(file);
-            $(".preview_img").hide();
         }
         $(".file_info").val(fileExtension);
         $("#file_name").text(file.name);
