@@ -73,14 +73,13 @@ function getInitials(userName) {
     if (userName === undefined || userName === "") {
         return "Y"; // Default to "Y" if userName is undefined or an empty string
     }
-    
+
     const initials = userName
         .split(" ")
         .map((word) => word[0]?.toUpperCase())
         .join("")
         .slice(0, 2); // Get only the first and second letters
 
-        
     return initials;
 }
 
@@ -103,7 +102,7 @@ function isValidImageUrlgrp(profileImageUrl) {
         (profileImageUrl.includes(".jpg") ||
             profileImageUrl.includes(".jpeg") ||
             profileImageUrl.includes(".png")) &&
-        (imageExists(profileImageUrl))
+        imageExists(profileImageUrl)
     ) {
         return 1;
     }
@@ -125,13 +124,9 @@ function imageExists(url) {
     } catch (e) {}
 }
 
-
-
-
 $("#selected-user-profile").replaceWith(
     `<h5 class="fontcolorS" id="selected-user-profile" >SN</h5>`
 );
-
 
 async function updateProfileImg(profileImageUrl, userName) {
     if (await isValidImageUrl(profileImageUrl)) {
@@ -154,7 +149,7 @@ async function updateProfileImg(profileImageUrl, userName) {
     }
 }
 
-async function getSelectedUserimg(profileImageUrl, userName) {  
+async function getSelectedUserimg(profileImageUrl, userName) {
     if (await isValidImageUrl(profileImageUrl)) {
         return `<img class="selected-user-img" src="${profileImageUrl}" alt="user-img">`;
     } else {
@@ -178,20 +173,18 @@ async function getListUserimg(profileImageUrl, userName) {
 
 function getSelectedUserimggrp(profileImageUrl, userName) {
     // console.log(isValidImageUrlgrp(profileImageUrl))
-    if (isValidImageUrlgrp(profileImageUrl)==1) {
+    if (isValidImageUrlgrp(profileImageUrl) == 1) {
         return `<img class="user-avatar img-fluid" src="${profileImageUrl}" alt="user-img">`;
-    }else{
-
+    } else {
         // console.log(userName);
-        
+
         const initials = getInitials(userName);
         // console.log(initials);
-    
+
         const fontColor = "fontcolor" + initials[0]?.toUpperCase();
-    
+
         return `<h5 class="${fontColor} user-avatar img-fluid" src="">${initials}</h5>`;
     }
-
 }
 
 // function getSelectedUserimggrp(profileImageUrl, userName) {
@@ -206,7 +199,6 @@ function getSelectedUserimggrp(profileImageUrl, userName) {
 //         return `<h5 class="${fontColor} user-avatar img-fluid">${initials}</h5>`;
 //     });
 // }
-
 
 // Initialize Firebase
 
@@ -458,7 +450,7 @@ function removeSelectedMsg() {
 // Function to handle changes to existing conversations in the overview
 function handleConversationChange(snapshot) {
     const updatedConversation = snapshot.val();
-    
+
     handleNewConversation(snapshot);
 }
 
@@ -507,12 +499,12 @@ async function updateChat(user_id) {
         ? new Date(selected_user.userLastSeen)
         : new Date();
 
-        console.log(messageTime);
-        
+    console.log(messageTime);
+
     let lastseen =
         selected_user.userStatus == "offline"
-            // ? timeago.format(messageTime)`last seen at ${timeago.format(messageTime)}`
-            ?`last seen at ${timeago.format(messageTime)}`
+            ? // ? timeago.format(messageTime)`last seen at ${timeago.format(messageTime)}`
+              `last seen at ${timeago.format(messageTime)}`
             : "Online";
     $("#selected-user-lastseen").html(lastseen);
     $("#selected-user-name").html(selected_user.userName);
@@ -1060,7 +1052,7 @@ $(".send-message").on("keypress", async function (e) {
             console.log(type);
             console.log(fileName);
             console.log(storagePath);
-            
+
             // Upload file to Firebase Storage
             const fileRef = storageRef(storage, storagePath);
             try {
@@ -1072,9 +1064,9 @@ $(".send-message").on("keypress", async function (e) {
                     await uploadBytes(fileRef, blob);
                 }
                 downloadURL = await getDownloadURL(fileRef);
-                console.log({downloadURL})
+                console.log({ downloadURL });
             } catch (e) {
-                console.log(e)
+                console.log(e);
             }
         } else if (audioUrl) {
             $("#playRecording").hide();
@@ -1249,7 +1241,7 @@ $(".send-message").on("keypress", async function (e) {
             if (
                 receiverSnapshot.val().isMute == undefined ||
                 receiverSnapshot.val().isMute == 0 ||
-                receiverSnapshot.val().isMute == null 
+                receiverSnapshot.val().isMute == null
             ) {
                 await send_push_notification(
                     receiverId,
@@ -1335,7 +1327,7 @@ function addMessageToList(key, messageData, conversationId) {
     if ($(".selected_conversasion").val() != conversationId) {
         console.warn($(".selected_conversasion").val());
         console.log(conversationId);
-        $('.conversation-'+conversationId).addClass('active');
+        $(".conversation-" + conversationId).addClass("active");
         // console.log("selectedisnotvalid");
         return;
     }
@@ -1364,8 +1356,7 @@ function addMessageToList(key, messageData, conversationId) {
     scrollToBottom();
 }
 var formattedDate = {};
-var messageRcvTime = '';
-
+var messageRcvTime = "";
 
 function createMessageElement(key, messageData, isGroup) {
     messageRcvTime = new Date(messageData.timeStamp).toLocaleTimeString([], {
@@ -1386,17 +1377,18 @@ function createMessageElement(key, messageData, isGroup) {
         (isGroup == "true" || isGroup == true) && !isSender
             ? SelecteGroupUser[messageData.senderId].name
             : "";
-    const sender_userProfile = (isGroup == "true" || isGroup == true) && !isSender
-    // ? SelecteGroupUser[messageData.senderId].userProfile
-    ? SelecteGroupUser[messageData.senderId].image
-    : "";
+    const sender_userProfile =
+        (isGroup == "true" || isGroup == true) && !isSender
+            ? // ? SelecteGroupUser[messageData.senderId].userProfile
+              SelecteGroupUser[messageData.senderId].image
+            : "";
     // console.log(getSelectedUserimg(sender_userProfile,senderName));
-    
+
     let seenStatus = "";
     let reaction = "";
     let dataWithMedia = "";
-    let senderprofile="";
-    
+    let senderprofile = "";
+
     if (isGroup == "true" || isGroup == true) {
         if (
             messageData.userAvailable != undefined &&
@@ -1428,8 +1420,8 @@ function createMessageElement(key, messageData, isGroup) {
                   .join(" ")
             : "";
         reaction = `<ul class="reaction-ul ${messageData?.react}">${reaction}</ul>`;
-        senderprofile= getSelectedUserimggrp(sender_userProfile,senderName);
-        // console.log(senderprofile);          
+        senderprofile = getSelectedUserimggrp(sender_userProfile, senderName);
+        // console.log(senderprofile);
     } else {
         seenStatus = isSender
             ? messageData.isSeen
@@ -1506,12 +1498,13 @@ function createMessageElement(key, messageData, isGroup) {
                     </div>
                     ${emoji}
                 </div>`
-
             : messageData?.type == "4"
             ? `
             <div class="media-msg-inline">
                 <div class="media-msg">
-                    <iframe src="${messageData?.url}" style="width:100%;height:400px;"></iframe>
+                    <iframe src="${
+                        messageData?.url
+                    }" style="width:100%;height:400px;"></iframe>
                     <span class="media-text">${
                         messageData?.data != "" ? messageData.data : ""
                     }</span>
@@ -1541,11 +1534,13 @@ function createMessageElement(key, messageData, isGroup) {
             </div>`
             : `
             <div class="simple-message">
-            ${senderprofile?
-                isReceiver
+            ${
+                senderprofile
+                    ? isReceiver
                         ? `<div class="simplemsg-img me-2 user-img new-msg-class"><span>${senderprofile}<span></div>`
                         : ""
-                :'' }
+                    : ""
+            }
              
                 <div class="simple-msg-wrap"> 
                     <span class="senderName">${senderName}</span>
@@ -1560,7 +1555,7 @@ function createMessageElement(key, messageData, isGroup) {
                 ${emojiAndReplay}
               </div>
               `;
-console.log(messageData.replyData);
+    console.log(messageData);
     const replySection =
         messageData.replyData && messageData.replyData.replyTimeStamp != 0
             ? `
@@ -1568,18 +1563,18 @@ console.log(messageData.replyData);
             <div class="reply-section">
                 <span class="senderName">${senderName}</span>            
                 <div>
-                    <span> ${
-                        messageData.replyData.replyMessage
-                    }</span>
+                    <span> ${messageData.replyData.replyMessage}</span>
                     <div class="reply-info">
                         <strong><span class="reply-username">${
                             messageData.replyData.replyUserName
                         }</span>
-                        <span class="reply-timestamp">${new Date(messageData.replyData.replyTimeStamp).toLocaleTimeString([], {
-                                                        hour: "2-digit",
-                                                        minute: "2-digit",
-                                                        hour12: true,
-                                                        })}</span></strong>
+                        <span class="reply-timestamp">${new Date(
+                            messageData.replyData.replyTimeStamp
+                        ).toLocaleTimeString([], {
+                            hour: "2-digit",
+                            minute: "2-digit",
+                            hour12: true,
+                        })}</span></strong>
                     </div>
                 </div>
                 <hr>
@@ -1596,34 +1591,44 @@ console.log(messageData.replyData);
     let daychange = "";
     let msgDate = formatDate(new Date(messageData.timeStamp));
     let chatDate = new Date(messageData.timeStamp);
-    let chatSmallDay ='';
-    if(msgDate != 'Today'){
-        chatSmallDay = chatDate.toLocaleDateString('en-US', { weekday: 'short' });
+    let chatSmallDay = "";
+    if (msgDate != "Today") {
+        chatSmallDay = chatDate.toLocaleDateString("en-US", {
+            weekday: "short",
+        });
     }
 
     if (formattedDate.length == 0) {
-        daychange = "<h5 class='day-line'><span>" + chatSmallDay +", "+ msgDate + "</span></h5>";
+        daychange =
+            "<h5 class='day-line'><span>" +
+            chatSmallDay +
+            ", " +
+            msgDate +
+            "</span></h5>";
     } else if (formattedDate[msgDate] === undefined) {
         // console.log(formattedDate);
         // console.log(msgDate);
-        if(msgDate=="Yesterday"){
-            daychange = "<h5 class='day-line'><span>"  + msgDate + "</span></h5>";
-        }
-        else if(msgDate=="Today"){
-            daychange = "<h5 class='day-line'><span>"  + msgDate + "</span></h5>";
-        }
-            else{
-            daychange = "<h5 class='day-line'><span>" + chatSmallDay +", "+ msgDate + "</span></h5>";
-
+        if (msgDate == "Yesterday") {
+            daychange =
+                "<h5 class='day-line'><span>" + msgDate + "</span></h5>";
+        } else if (msgDate == "Today") {
+            daychange =
+                "<h5 class='day-line'><span>" + msgDate + "</span></h5>";
+        } else {
+            daychange =
+                "<h5 class='day-line'><span>" +
+                chatSmallDay +
+                ", " +
+                msgDate +
+                "</span></h5>";
         }
         // daychange = "<h5 class='day-line'><span>" + chatSmallDay +" "+ msgDate + "</span></h5>";
-
     }
     formattedDate[msgDate] = "1";
 
-    $('.time').each(async function (index) {
+    $(".time").each(async function (index) {
         if (messageRcvTime == $(this).text()) {
-            $(this).text('');
+            $(this).text("");
         }
     });
     return `   
@@ -1643,7 +1648,6 @@ console.log(messageData.replyData);
         </li>
         </div>
     `;
-    
 }
 function markMessageAsSeen(conversationId, key) {
     const msgRef = ref(database, `/Messages/${conversationId}/message/${key}`);
@@ -2589,7 +2593,7 @@ $(document).on("click", ".close-group-btn", function () {
 });
 $("#new-message").click(function () {
     selectedUserIds = [];
-    $('#new_message').val('');
+    $("#new_message").val("");
     $("#selected-tags-container .tag").remove();
     updateSelectedUserIds();
     handleSelectedUsers();
@@ -2863,7 +2867,7 @@ $(".upload-box").change(function () {
         return;
     }
     var name = file?.name;
-    console.log({name})
+    console.log({ name });
     $(".dropdown-menu").removeClass("show");
 
     displayFiles(this.files, name);
@@ -2892,7 +2896,7 @@ $(".upload-box").change(function () {
             $("#file_name").text("");
         } else if (file.type.match("audio.*")) {
             console.log(file.type);
-            
+
             var curElement = $(".preview_img");
 
             curElement.attr("src", URL.createObjectURL(file));
@@ -2902,10 +2906,10 @@ $(".upload-box").change(function () {
 
             $("#file_name").text("audio");
         } else {
-        console.log("else")
+            console.log("else");
 
             reader.onload = function (e) {
-        console.log("loaded",e.target.result)
+                console.log("loaded", e.target.result);
 
                 curElement.attr("src", e.target.result);
             };
@@ -2918,18 +2922,18 @@ $(".upload-box").change(function () {
         }
         // reader.readAsArrayBuffer(file);
     } else {
-        alert("else")
+        alert("else");
         $(".preview_img").hide();
         curElement.attr("src", "");
     }
-    console.log({curElement})
+    console.log({ curElement });
 });
 
 function displayFiles(files, name) {
     var preview = document.getElementById("preview");
     $(preview).show();
     preview.innerHTML = "";
-    console.log("preview clear")
+    console.log("preview clear");
     for (var i = 0; i < files.length; i++) {
         var file = files[i];
         var reader = new FileReader();
@@ -2937,7 +2941,7 @@ function displayFiles(files, name) {
         reader.onload = (function (file) {
             return function (e) {
                 fileType = file.type.split("/")[0];
-                console.log({fileType})
+                console.log({ fileType });
                 var previewItem = document.createElement("div");
                 previewItem.className = "preview-item";
                 var previewElement;
@@ -3019,7 +3023,7 @@ async function updateUnreadMessageBadge(conversationId = null) {
         $(".badge").show();
         $(".badge").text(totalUnreadCount);
         // console.log(".conversation-"+conversationId);
-        
+
         // $(".conversation-"+conversationId).addClass('active');
     } else {
         $(".badge").hide();
@@ -3149,8 +3153,8 @@ $(".multi-mute").click(function () {
 $(".multi-archive").click(function () {
     const change = $(this).attr("changeWith");
     $(this).attr("changeWith", change == "1" ? "0" : "1");
-    if(checkedConversations.length <= 0){
-        return
+    if (checkedConversations.length <= 0) {
+        return;
     }
     const checkedConversations = $(
         "input[name='checked_conversation[]']:checked"
@@ -3350,7 +3354,7 @@ async function send_push_notification(
 
     if (userSnapshot.exists()) {
         const user = userSnapshot.val();
-        
+
         // console.log(senderUser);
         var key = firebaseConfig.server_key;
         const receiverName = $(".selected_name").val();
@@ -3377,11 +3381,11 @@ async function send_push_notification(
             // title: user.userName,
             // body: message,
             // image: storagePath,
-            title : senderUser,
-            body : message,
-            sound : "default",
-            message : message,
-            color : "#79bc64",
+            title: senderUser,
+            body: message,
+            sound: "default",
+            message: message,
+            color: "#79bc64",
         };
 
         const payload = {
@@ -3394,98 +3398,109 @@ async function send_push_notification(
                     senderProfile: user.userProfile,
                     senderUid: user.userId,
                     title: senderUser,
-                    type: "chat"
+                    type: "chat",
                 },
                 notification: {
                     body: message,
-                    title: senderUser
+                    title: senderUser,
                 },
-                token: to
-            }
-        };        
-        fetch('get_access_token')
-        .then(response => response.json())
-        .then(data => {
-            var accessToken = data.access_token;
-            fetch("https://fcm.googleapis.com/v1/projects/yesvitelive/messages:send", {
-            // fetch("https://fcm.googleapis.com/v1/projects/yesvite-976cd/messages:send", {   
-                method: "POST",
-                headers: {
-                    'Authorization': 'Bearer ' + accessToken,
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(payload),
+                token: to,
+            },
+        };
+        fetch("get_access_token")
+            .then((response) => response.json())
+            .then((data) => {
+                var accessToken = data.access_token;
+                fetch(
+                    "https://fcm.googleapis.com/v1/projects/yesvitelive/messages:send",
+                    {
+                        // fetch("https://fcm.googleapis.com/v1/projects/yesvite-976cd/messages:send", {
+                        method: "POST",
+                        headers: {
+                            Authorization: "Bearer " + accessToken,
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(payload),
+                    }
+                )
+                    .then(function (response) {})
+                    .catch(function (error) {
+                        console.error(error);
+                    });
             })
-            .then(function (response) {
-            })
-            .catch(function (error) {
-                console.error(error);
+            .catch((error) => {
+                console.error("Error fetching access token:", error);
             });
-        })
-        .catch(error => {
-            console.error('Error fetching access token:', error);
-        });
     }
 }
 
-$(document).on('click','.reaction',function (){
-
-    var m_id=$('.selected_conversasion').val();
-    var senderId = $('.senderUser').val();
+$(document).on("click", ".reaction", function () {
+    var m_id = $(".selected_conversasion").val();
+    var senderId = $(".senderUser").val();
     var isGroup = $("#isGroup").val();
 
-    var c_id = $(this).data('message-id');
- 
-    // var c_id=$(this).closest($(".reaction-icon").data("message-id"));
-        // console.log(isGroup);
-        // console.log(c_id);
-        // console.log(senderId);
+    var c_id = $(this).data("message-id");
 
-        deletereaction(isGroup,c_id, m_id,senderId);
-       
+    // var c_id=$(this).closest($(".reaction-icon").data("message-id"));
+    // console.log(isGroup);
+    // console.log(c_id);
+    // console.log(senderId);
+
+    deletereaction(isGroup, c_id, m_id, senderId);
 
     // alert(c_id);
-})
+});
 
-async function deletereaction(isGroup,messageId,conversationId,senderId = null) {
-    
+async function deletereaction(
+    isGroup,
+    messageId,
+    conversationId,
+    senderId = null
+) {
     if (isGroup == true || isGroup == "true") {
-        const messagesRef = ref(database, `Groups/${conversationId}/message/${messageId}/messageReact`);
+        const messagesRef = ref(
+            database,
+            `Groups/${conversationId}/message/${messageId}/messageReact`
+        );
         const messagesSnapshot = await get(messagesRef);
         // console.log(messagesSnapshot.val());
         if (messagesSnapshot.exists()) {
-
-            var overviewRef = ref(database, `Groups/${conversationId}/message/${messageId}/messageReact/${senderId}`);
-             await remove(overviewRef);
+            var overviewRef = ref(
+                database,
+                `Groups/${conversationId}/message/${messageId}/messageReact/${senderId}`
+            );
+            await remove(overviewRef);
         }
-    }else{
-        const messagesRef = ref(database, `Messages/${conversationId}/message/${messageId}`);
+    } else {
+        const messagesRef = ref(
+            database,
+            `Messages/${conversationId}/message/${messageId}`
+        );
         const messagesSnapshot = await get(messagesRef);
-        
+
         if (messagesSnapshot.exists()) {
             const messages = messagesSnapshot.val();
             // console.log(messages.receiverId);
-            if(messages.receiverId == senderId){
+            if (messages.receiverId == senderId) {
                 const updates = {};
-                    updates[
-                        `Messages/${conversationId}/message/${messageId}/react`
-                    ] = "";
-                
+                updates[
+                    `Messages/${conversationId}/message/${messageId}/react`
+                ] = "";
+
                 await update(ref(database), updates);
             }
         }
     }
 }
 
-
-$(document).on('keyup','#serach_user_from_list',function() {
-    var name=$(this).val();
+$(document).on("keyup", "#serach_user_from_list", function () {
+    var name = $(this).val();
     $.ajax({
         url: base_url + "getUserByName",
         data: { username: name },
         method: "post",
         success: function (res) {
-           $('.chat-list').html(res);
+            $(".chat-list").html(res);
         },
     });
-})
+});
