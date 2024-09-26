@@ -110,13 +110,14 @@ class EventController extends Controller
         //         $query->select('*');
         //     }])->orderBy('id','DESC')->get();
         // dd($design_category);
-        // $textData = TextData::with(['subcategory' => function ($query){
-        //         $query->select('*');
-        //     },'category' => function ($query){
-        //         $query->select('*');
-        //     }])
-        //     ->orderBy('id', 'desc')
-        //     ->get();
+        $textData = TextData::with(['subcategories' => function ($query){
+                $query->select('*');
+            },'categories' => function ($query){
+                $query->select('*');
+            }])
+            ->select('*')
+            ->orderBy('id', 'desc')
+            ->get();
         // dd($textData);
         $user['profile'] = ($user->profile != null) ? asset('storage/profile/' . $user->profile) : "";
         $user['bg_profile'] = ($user->bg_profile != null) ? asset('storage/bg_profile/' . $user->bg_profile) : asset('assets/front/image/Frame 1000005835.png');

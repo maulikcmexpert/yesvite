@@ -18,12 +18,12 @@ class TextData extends Model
         'static_information' => 'array',
     ];
 
-    public function subcategory()
+    public function subcategories()
     {
         return $this->belongsToMany(EventDesignSubCategory::class,'event_design_sub_category_id', 'id');
     }
     
-    public function category()
+    public function categories()
     {
         return $this->belongsToMany(EventDesignCategory::class,'event_design_category_id', 'id');
     }
