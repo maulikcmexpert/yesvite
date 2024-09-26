@@ -101,11 +101,11 @@
                                 </nav>
 
                                 <div class="choose-design-cards">
-                                    @if(isset($textData) && $textData->notEmpty())
+                                    @if(isset($textData) && $textData->isNotEmpty())
                                     @foreach ($textData as $temp)
                                         <div class="design-card" data-bs-toggle="modal"
                                             type="button" data-template="template_1">
-                                            <img src="{{ asset('storage/canvas'.$temp->image) }}" alt="">
+                                            <img src="{{ asset('storage/canvas/'.$temp->image) }}" alt="">
                                         </div>
                                     @endforeach
                                     @endif
