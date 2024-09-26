@@ -3799,6 +3799,8 @@ $(document).on("click", ".edit_gift_registry", function () {
     toggleSidebar("sidebar_gift_registry_item");
 });
 
+
+
 var thankyou_template_id = 1;
 $(document).on("click", ".add_thankyou_card", function () {
     var template_name = $("#thankyou_templatename").val();
@@ -5136,5 +5138,18 @@ $(document).ready(function () {
         },
       },
     });
-  });
+});
+
+$(document).on("click", ".edit_potluck_category", function () {
+    var id = $(this).data("id");
+    var category_name = $(this).data("category_name");
+    var category_quantity = $(this).data("category_quantity");
+    console.log(id);
+    console.log(category_name);
+    console.log(category_quantity);
+    // $("#recipient_name").val(recipientName);
+    // $("#registry_link").val(registryLink);
+    // $("#registry_item_id").val(id);
+    // toggleSidebar('sidebar_addcategoryitem')
+});
 
