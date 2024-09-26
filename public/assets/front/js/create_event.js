@@ -4213,10 +4213,20 @@ $(document).on("click", ".store_desgin_temp", function () {
     $("#loader").show();
     $(this).prop("disabled", true);
     $('.btn-close').prop("disabled", true);
-   
-
+    save_image_design(downloadImage);
     $(".main-content-wrp").addClass("blurred");
+});
 
+$(document).on("click", ".next_guest_step", function () {
+    var downloadImage = document.getElementById("imageEditor1");
+    $("#loader").show();
+    $(this).prop("disabled", true);
+    $('.btn-close').prop("disabled", true);
+    save_image_design(downloadImage);
+    $(".main-content-wrp").addClass("blurred");
+});
+
+function save_image_design(downloadImage){
     domtoimage
         .toBlob(downloadImage)
         .then(function (blob) {
@@ -4252,6 +4262,7 @@ $(document).on("click", ".store_desgin_temp", function () {
                     $('.store_desgin_temp').prop("disabled", false);
                     $(".main-content-wrp").removeClass("blurred");
                     $(".step_2").hide();
+                    $('.edit_design_template').hide();
                     handleActiveClass('.li_guest');
                     $('.li_design').find(".side-bar-list").addClass("menu-success");
 
@@ -4277,7 +4288,7 @@ $(document).on("click", ".store_desgin_temp", function () {
         .catch(function (error) {
             console.error("Error capturing image:", error);
         });
-});
+}
 
 function get_user(type){
     if (busy == false) {
