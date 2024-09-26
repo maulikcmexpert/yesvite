@@ -3586,7 +3586,14 @@ $(".multi-archive").click(function () {
             );
             console.log("from click");
 
-            $("#archive-list").attr("list", "1").click();
+            // $("#archive-list").attr("list", "1").click();
+            var unarchivelist =
+                document.getElementsByClassName("unarchived-list");
+            console.log(unarchivelist);
+            let msgLists = $(unarchivelist);
+            if (msgLists.length > 0) {
+                msgLists[0].click(); // Ensure the list exists before clicking
+            }
         })
         .catch((error) => {
             toastr.error("An error occurred while archiving/unarchiving.");
