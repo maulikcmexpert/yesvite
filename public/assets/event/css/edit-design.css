@@ -615,12 +615,13 @@
     margin-top: 20px;
 } */
 .edit-image-main-wrp .design-seting{
-    position: sticky !important;
+    position: absolute !important;
     bottom: 0 !important;
     width: 100% !important;
     max-width: 100% !important;
     transform: unset !important;
     background-color: #fff;
+    left: 0;
 }
 
 
