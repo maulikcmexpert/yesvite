@@ -859,7 +859,13 @@ $(document).on("click", ".pin-conversation", function () {
         .find("span")
         .text(pinChange == "1" ? "Unpin" : "Pin");
 
+    $(".conversation-" + conversationId)
+        .children()
+        .find(".pin-single-conversation")
+        .text(pinChange == "1" ? "Unpin" : "Pin");
+
     $(this).attr("changeWith", pinChange == "1" ? "0" : "1");
+
     if (pinChange == "1") {
         console.log("here");
 
