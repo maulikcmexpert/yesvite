@@ -719,7 +719,33 @@
         left: 0 !important;
         border-radius: 0px !important;
     }
+
+    .image-edit-inner-img canvas {
+        width: 450px !important;
+        height: 500px !important;
+        margin: 0px auto !important;
+    }
+    .image-edit-inner-img{
+        width: 450px !important;
+        height: 500px !important;
+        margin: 0px auto !important;
+    }
 }
+
+
+@media only screen and (max-width: 424px){
+    .image-edit-inner-img canvas {
+        width: 350px !important;
+        height: 400px !important;
+        margin: 0px auto !important;
+    }
+    .image-edit-inner-img{
+        width: 350px !important;
+        height: 400px !important;
+        margin: 0px auto !important;
+    }
+}
+
 
 @media only screen and (max-width: 370px) {
     .image-edit-inner-img {
