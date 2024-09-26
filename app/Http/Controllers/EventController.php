@@ -107,7 +107,7 @@ class EventController extends Controller
             },'textdatas' => function ($query){
                 $query->select('*');
             }])->orderBy('id','DESC')->get();
-        dd($design_category);
+        // dd($design_category);
         $textData = TextData::where('desgin_category_id','!=',null)
             ->where('design_subcategory_id','!=',null)
             ->orderBy('id', 'desc')
