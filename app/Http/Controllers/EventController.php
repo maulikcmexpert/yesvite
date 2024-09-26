@@ -47,6 +47,7 @@ use App\Models\{
     UserReportToPost,
     Group,
     GroupMember,
+    TextData,
     UserNotificationType,
     UserProfilePrivacy,
     UserSeenStory,
@@ -101,12 +102,17 @@ class EventController extends Controller
             ->orderBy('firstname')
             ->limit(1)
             ->get();
+
+        $textData = TextData::where('desgin_category_id','!=',null)
+            ->where('design_subcategory_id','!=',null)
+            ->orderBy('id', 'desc')
+            ->get();
         $user['profile'] = ($user->profile != null) ? asset('storage/profile/' . $user->profile) : "";
         $user['bg_profile'] = ($user->bg_profile != null) ? asset('storage/bg_profile/' . $user->bg_profile) : asset('assets/front/image/Frame 1000005835.png');
         $date = Carbon::parse($user->created_at);
         $formatted_date = $date->format('F, Y');
         $user['join_date'] = $formatted_date;
-
+        dd($textData);
         // $groups = Group::whereHas('groupMembers',function($query) use ($id){
         //     $query->where('user_id',$id);
         // })
@@ -130,6 +136,7 @@ class EventController extends Controller
             'event_type',
             'yesvite_user',
             'groups',
+            'textData'
         ));
     }
 
