@@ -53,10 +53,16 @@
     background: none !important;
 }
 
+.image-edit-inner-img{
+    width: 460px !important;
+    height: 648px !important;
+    margin: 0px auto !important;
+}
+
 .image-edit-inner-img canvas{
-    width: 460px;
-    height: 648px;
-    margin: 0px auto;
+    width: 460px !important;
+    height: 648px !important;
+    margin: 0px auto !important;
 }
 
 .edit-images-button-wrp{
