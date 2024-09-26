@@ -3168,7 +3168,7 @@ function displayFiles(files, name) {
                     previewElementnew.textContent = `File selected: ${file.name}`;
                     previewItem.appendChild(previewElementnew);
                     previewElement.style.display = "none";
-                    previewElement.style.height = auto;
+                    previewElement.style.height = "auto";
                 }
                 var closeButton = document.createElement("button");
                 closeButton.innerHTML = closeSpan;
@@ -3179,7 +3179,7 @@ function displayFiles(files, name) {
                 previewElement.src = e.target.result;
                 previewItem.appendChild(previewElement);
                 preview.appendChild(previewItem);
-                $(previewElement).show();
+                // $(previewElement).show();
             };
         })(file);
 
