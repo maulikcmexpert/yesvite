@@ -1,6 +1,6 @@
 @foreach ( $data as $guest_user)
 @if($guest_user['userdata']['prefer_by']=="email")
-<div class="guest-contact invited_user user_id-{{$guest_user['userdata']['id']}}" data-id={{$guest_user['userdata']['id']}} id="">
+<div class="guest-contact-responsive invited_user user_id-{{$guest_user['userdata']['id']}}" data-id={{$guest_user['userdata']['id']}} id="">
     <div class="guest-img mobile-guest-icon">
         <!-- <img src="./assets/image/user-img.svg" alt="guest-img"> -->
         @if ($guest_user['userdata']['profile'] != '')

@@ -884,6 +884,19 @@
 /* ======Responsiveness===== */
 
 
+@media only screen and (max-width: 1199px) {
+    .image-edit-inner-img canvas {
+        width: 400px !important;
+        height: 460px !important;
+        margin: 0px auto !important;
+    }
+    .image-edit-inner-img{
+        width: 400px !important;
+        height: 460px !important;
+        margin: 0px auto !important;
+    }
+}
+
 
 @media only screen and (max-width: 991px) {
     .main-content-sidebar {
