@@ -53,7 +53,7 @@
     background: none !important;
 }
 
-.image-edit-inner-img{
+.image-edit-inner-img canvas{
     width: 460px;
     height: 648px;
     margin: 0px auto;
@@ -287,6 +287,7 @@
 
 .edit-imag-main-content-wrp .choose-design-sidebar{
     height: 100vh;
+    width: auto !important;
 }
 
 
