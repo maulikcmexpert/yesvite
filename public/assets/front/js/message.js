@@ -1544,6 +1544,11 @@ function createMessageElement(key, messageData, isGroup) {
              
                 <div class="simple-msg-wrap"> 
                     <span class="senderName">${senderName}</span>
+                    ${
+                        messageData?.type == "1"
+                            ? `<img src="${messageData?.url}"/>`
+                            : ""
+                    }
                     ${messageData?.data != "" ? messageData.data : ""}
                     ${
                         isSender
