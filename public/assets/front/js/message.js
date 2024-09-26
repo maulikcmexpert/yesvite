@@ -1094,6 +1094,7 @@ $(".send-message").on("keypress", async function (e) {
         let imagePath = "";
         const audio = $("#file_name").text();
         const file_info = $(".file_info").val();
+        console.log(imageUrl);
         if (imageUrl) {
             // Determine file type and set the storage path
             let storagePath;
@@ -3092,11 +3093,14 @@ $(".upload-box").change(function () {
         } else if (file.type === "application/pdf") {
             // Handling PDF files
             reader.onload = function (e) {
-                $("#preview_file")
-                    .html(
-                        `<iframe src="${e.target.result}" style="width:100%; height:400px;"></iframe>`
-                    )
+                curElement
+                    .attr("src", URL.createObjectURL(e.target.result))
                     .show();
+                // $("#preview_file")
+                //     .html(
+                //         `<iframe src="${e.target.result}" style="width:100%; height:400px;"></iframe>`
+                //     )
+                //     .show();
                 $(".preview_img").hide();
             };
             reader.readAsDataURL(file);
