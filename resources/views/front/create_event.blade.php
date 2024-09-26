@@ -2312,9 +2312,16 @@
                 <h5 class="modal-title" id="myCustomModalLabel">Modal title</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body modal-design-card">
-                <!-- Dynamically loaded image -->
-                <img id="modalImage" src="" alt="Design Image" class="img-fluid" />
+            <div class="modal-body">
+                <div class="modal-choose-design-wrp" id="download_image">
+                    <div class="modal-design-card">
+                        <img id="modalImage" src="" alt="Design Image" class="img-fluid" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-btn">
+                <button class="edit-btn">Edit Design</button>
+                <button class="cmn-btn store_desgin_temp">Next: Guests</button>
             </div>
         </div>
     </div>

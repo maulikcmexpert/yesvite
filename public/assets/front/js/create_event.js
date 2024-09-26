@@ -1058,7 +1058,7 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
                     $("#user-" + userId).remove();
                 }
                 $(".inivted_user_list").append(response.view);
-                
+                $(".user-list-responsive").append(response.responsive_view);
                 total_guest = $(".users-data.invited_user").length;
                 $("#event_guest_count").text(total_guest + " Guests");
                 $(".invite-count").text(total_guest);
