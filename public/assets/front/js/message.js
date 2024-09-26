@@ -1077,13 +1077,13 @@ $(document).on("click", ".archive-conversation", function () {
 
     $(".conversation-" + conversationId)
         .find(".chat-data")
-        .find(".archive-single-conversation")
+        .find(".archive-single1-conversation")
         .find("span")
         .text(change == "1" ? "Unarchive" : "Archive");
 
     $(".conversation-" + conversationId)
         .find(".chat-data")
-        .find(".archive-single-conversation")
+        .find(".archive-single1-conversation")
         .attr("changeWith", change == "1" ? "0" : "1");
 
     if (change == "1") {
@@ -1102,7 +1102,7 @@ $(document).on("click", ".archive-conversation", function () {
     msgLists[0].click();
 });
 
-$(document).on("click", ".archive-single-conversation", function () {
+$(document).on("click", ".archive-single1-conversation", function () {
     const change = $(this).attr("changeWith");
     let conversationId = $(this).data("conversation");
     const overviewRef = ref(

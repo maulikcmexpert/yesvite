@@ -155,7 +155,7 @@ $message['unReadCount'] = @$message['unRead']==true && @$message['unReadCount']=
                         </svg>
                         <span>Mute</span></a>
                 </li>
-                <li><a class="dropdown-item archive-single-conversation" href="#" changeWith="1" data-conversation="{{$message['conversationId']}}">
+                <li><a class="dropdown-item archive-single1-conversation" href="#" changeWith="1" data-conversation="{{$message['conversationId']}}">
                         <svg class="me-2" width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M16.75 7.68359V15.0003C16.75 16.6669 16.3333 17.5003 14.25 17.5003H6.75C4.66667 17.5003 4.25 16.6669 4.25 15.0003V7.68359" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                             <path d="M4.66406 3.33398H16.3307C17.9974 3.33398 18.8307 3.85482 18.8307 4.89648V5.93815C18.8307 6.97982 17.9974 7.50065 16.3307 7.50065H4.66406C2.9974 7.50065 2.16406 6.97982 2.16406 5.93815V4.89648C2.16406 3.85482 2.9974 3.33398 4.66406 3.33398Z" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
