@@ -7127,9 +7127,9 @@ class ApiControllerv2 extends Controller
                 if ($eventDetail->event_settings->events_schedule == '1') {
                     $eventData[] = "Event has Schedule";
                 }
-                if ($multidate == 1) {
-                    $eventData[] = "Multiple Day Event";
-                }
+                // if ($multidate == 1) {
+                //     $eventData[] = "Multiple Day Event";
+                // }
                 if (empty($eventData)) {
                     $eventData[] = date('F d, Y', strtotime($eventDetail->start_date));
                     $numberOfGuest = EventInvitedUser::where('event_id', $eventDetail->id)->count();
