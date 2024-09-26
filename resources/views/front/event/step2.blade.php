@@ -103,8 +103,8 @@
                                 <div class="choose-design-cards">
                                     @if(isset($textData) && $textData->isNotEmpty())
                                     @foreach ($textData as $temp)
-                                        <div class="design-card" data-bs-toggle="modal"
-                                            type="button" data-template="template_1">
+                                        <div class="design-card new-temp" data-bs-toggle="modal"
+                                            type="button" data-template="template_1" data-image="{{ asset('storage/canvas/'.$temp->image) }}">
                                             <img src="{{ asset('storage/canvas/'.$temp->image) }}" alt="">
                                         </div>
                                     @endforeach

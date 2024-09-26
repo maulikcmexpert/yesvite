@@ -2304,6 +2304,19 @@
     </div>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="exampleModals" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body modal-design-card">
+                <!-- Image will be dynamically loaded here -->
+                <img id="modalImage" src="" alt="Design Image" class="img-fluid" />
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <div id="sidebar_potluck_overlay" class="overlay" onclick="toggleSidebar('')"></div>
 <div id="sidebar_addcategory_overlay" class="overlay" onclick="toggleSidebar()"></div>
 <div id="sidebar_addcategoryitem_overlay" class="overlay" onclick="toggleSidebar()"></div>
