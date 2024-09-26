@@ -993,7 +993,7 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
 
 function responsive_invite_user(){
     var length = $('.responsive_invite_user').length;
-    console.log(length);
+    console.log(length/3);
 }
 
 function guest_counter(total_guest,max_guest){
