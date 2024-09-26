@@ -1,8 +1,8 @@
 <div class="container-fluid">
 
-    <h1 class="m-0 ProductTitle">{{$title}}</h1>
-    <!-- <h1>Category List</h1> -->
-    <div class="content-header">
+  <h1 class="m-0 ProductTitle">{{$title}}</h1>
+  <!-- <h1>Category List</h1> -->
+  <div class="content-header">
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
@@ -24,30 +24,30 @@
 
 
 
-       <table id="template_table" class="table table-bordered data-table template-data-table">
+  <table id="template_table" class="table table-bordered data-table template-data-table">
 
-           <thead>
+    <thead>
 
-               <tr>
+      <tr>
 
-                   <th>No</th>
+        <th>No</th>
 
-                   <th>Design Name</th>
-                   <th>SubCategory Name</th>
-                   <th>image</th>
+        <th>Design Name</th>
+        <!-- <th>SubCategory Name</th> -->
+        <th>image</th>
 
 
 
-                   <th width="100px">Action</th>
+        <th width="100px">Action</th>
 
-               </tr>
+      </tr>
 
-           </thead>
+    </thead>
 
-           <tbody>
+    <tbody>
 
-           </tbody>
+    </tbody>
 
-       </table>
+  </table>
 
-   </div>
+</div>
