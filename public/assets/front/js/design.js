@@ -120,6 +120,25 @@ $(document).on("click", ".design-card", function () {
     // });
     
 });
+document.addEventListener('DOMContentLoaded', function () {
+    // Initialize fabric canvas
+    var canvas = new fabric.Canvas('imageEditor1', {
+        width: 500, // Canvas width
+        height: 500, // Canvas height
+    });
+    const defaultSettings = {
+        fontSize: 20,
+        letterSpacing: 0,
+        lineHeight: 1.2
+    };
+
+    // Save settings object (for the save functionality)
+    let savedSettings = {
+        fontSize: defaultSettings.fontSize,
+        letterSpacing: defaultSettings.letterSpacing,
+        lineHeight: defaultSettings.lineHeight
+    };
+})
 
 
 $(document).on('click','.edit_design_tem',function(e){
@@ -133,5 +152,17 @@ $(document).on('click','.edit_design_tem',function(e){
     $('.event_create_percent').text('50%');
     $('.current_step').text('2 of 4');
     $(".step_4").hide();
+    $("#exampleModal").modal("hide");
     $('.edit_design_template').show();
+
+    fabric.Image.fromURL(image, function (img) {
+        img.set({
+            left: 0,
+            top: 0,
+            selectable: false,  // Non-draggable background image
+            hasControls: false  // Disable resizing controls
+        });
+        canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
+
+    });
 })
