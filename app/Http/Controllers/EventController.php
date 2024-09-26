@@ -702,11 +702,18 @@ class EventController extends Controller
 
         if(isset($edit_category_id) && $edit_category_id != ''){
             $status = '2';
-            $categoryNameCount = collect($categories)->reduce(function ($count, $category) use ($categoryName) {
-                return $count + ($category['category_name'] === $categoryName ? 1 : 0);
-            }, 0);
-            dd($categoryNameCount);
-            $categories[$edit_category_id] = ['category_name' => $categoryName, 'category_quantity' => $categoryQuantity];
+            $i = 0;
+            foreach ($categories as $key => $value) {
+                if($value['category_name'] == $categoryName){
+                    $i++;
+                }
+            }
+            dd($i);
+            if($i < 2){
+                $categories[$edit_category_id] = ['category_name' => $categoryName, 'category_quantity' => $categoryQuantity];
+            }else{
+                return response()->json(['view' => '', 'status' => '0']);
+            }
         }else{
             if (in_array($categoryName, $categoryNames)) {
                 return response()->json(['view' => '', 'status' => '0']);
