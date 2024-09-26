@@ -1,84 +1,45 @@
 <script type="text/javascript">
     $(function() {
 
-
-
-
         var table = $("#template_table").DataTable({
-
             processing: true,
-
             serverSide: true,
-
-
 
             ajax: '{{URL::to("/admin/create_template")}}',
             columns: [{
-
                     data: "number",
-
                     name: "number"
-
                 },
-
                 {
-
                     data: "category_name",
-
                     name: "category_name"
-
                 },
-                //                 {
-
-                // data: "subcategory_name",
-
-                // name: "subcategory_name"
-
-                // },
 
                 {
 
                     data: "image",
-
                     name: "image"
 
                 },
-
                 {
-
                     data: "action",
-
                     name: "action",
-
                     orderable: false,
-
                     searchable: true,
 
                 },
-
             ],
-
         });
-
-
-
-
 
         $("#addMoreTemplate").click(function() {
             var html = $("#AddHtml").html(); // Get the hidden HTML
             $("#appendHtml").append(html); // Append the HTML to the form
         });
 
-
-
-
         $(document).on("click", ".remove", function() {
             $(this).closest('.col-lg-3')
                 .remove(); // Remove the entire col-lg-3 div containing the input
         });
-
-
-
 
         $(document).ready(function() {
 

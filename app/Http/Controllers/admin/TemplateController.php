@@ -62,7 +62,7 @@ class TemplateController extends Controller
                     return $actionBtn;
                 })
 
-                ->rawColumns(['number', 'design_name', 'image', 'action'])
+                ->rawColumns(['number', 'category_name', 'image', 'action'])
                 ->make(true);
         }
 
