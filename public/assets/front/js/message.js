@@ -3631,6 +3631,19 @@ $(document).on("click", ".delete-conversation", async function () {
     toastr.success("conversation have been deleted.");
 });
 
+$(document).on("click", ".delete-single-conversation", async function (e) {
+    e.stopPropagation();
+    var conversationId = $(this).data("conversation");
+    const isGroup = $(this).data("isGroup");
+
+    if (!conversationId || !senderUser) {
+        console.error("Conversation ID or Sender User ID is missing");
+        return;
+    }
+
+    await deleteConversation(conversationId, isGroup);
+    toastr.success("conversation have been deleted.");
+});
 $(document).on("click", ".multi-delete", async function () {
     const checkedConversations = $(
         "input[name='checked_conversation[]']:checked"
