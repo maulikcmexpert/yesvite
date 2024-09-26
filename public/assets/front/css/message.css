@@ -791,6 +791,7 @@ ul.member-lists li:last-child {
     right: -30px;
     top: 50%;
     transform: translateY(-50%);
+    z-index: 1;
 }
 
 .msg-body ul li.sender div.media-msg video {
