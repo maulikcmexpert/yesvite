@@ -444,6 +444,7 @@ async function handleNewConversation(snapshot) {
             unReadCount: 0,
         });
     }
+    updateUnreadMessageBadge();
 }
 
 function moveToTopOrBelowPinned(element) {
