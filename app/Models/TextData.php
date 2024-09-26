@@ -20,11 +20,11 @@ class TextData extends Model
 
     public function subcategories()
     {
-        return $this->belongsToMany(EventDesignSubCategory::class,'event_design_sub_category_id', 'id');
+        return $this->belongsToMany(EventDesignSubCategory::class);
     }
     
     public function categories()
     {
-        return $this->belongsToMany(EventDesignCategory::class,'event_design_category_id', 'id');
+        return $this->belongsToMany(EventDesignCategory::class);
     }
 }
