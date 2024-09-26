@@ -977,7 +977,7 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
                         $(".user-list-responsive").append(response.responsive_view);
                     }else{
                         var counter = length - 4;
-                        console.log(counter);
+                        console.log(length);
                         
                         var all_user_list_length = $('.all_user_list').length;
                         if(all_user_list_length < 1){
