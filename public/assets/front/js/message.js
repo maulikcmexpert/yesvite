@@ -1041,7 +1041,7 @@ $(document).on("click", ".archive-conversation", function () {
         $(".conversation-" + conversationId).addClass("unarchived-list");
         $(".conversation-" + conversationId).removeClass("archived-list");
     }
-    $("#archive-list").click();
+    // $("#archive-list").click();
 });
 
 // Initial chat update

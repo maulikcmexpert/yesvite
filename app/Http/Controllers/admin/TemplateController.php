@@ -27,9 +27,10 @@ class TemplateController extends Controller
      */
     public function index(Request $request)
     {
+        // dd($request->ajax());
         if ($request->ajax()) {
             $data = TextData::with('categories')->orderBy('id', 'desc')->get();
-
+            dd($data);
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('number', function ($row) {
