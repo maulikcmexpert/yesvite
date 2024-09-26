@@ -47,7 +47,7 @@
                 </button>
             </div>
             <div class="edit-images-button-inner fonts-edit-wrp">
-                <button class="design-sidebar-action" design-id="2" onclick="toggleSidebar()">
+                <button class="design-sidebar-action" design-id="2" onclick="toggleSidebar('sidebar')">
                     <span>
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -65,7 +65,7 @@
                 </button>
             </div>
             <div class="edit-images-button-inner text-edit-wrp">
-                <button class="design-sidebar-action" design-id="3" onclick="toggleSidebar()">
+                <button class="design-sidebar-action" design-id="3" onclick="toggleSidebar('sidebar')">
                     <span>
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -90,7 +90,7 @@
                 </button>
             </div>
             <div class="edit-images-button-inner color-edit-wrp">
-                <button class="design-sidebar-action" design-id="4" onclick="toggleSidebar()">
+                <button class="design-sidebar-action" design-id="4" onclick="toggleSidebar('sidebar')">
                     <span>
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -120,7 +120,7 @@
                 </button>
             </div>
             <div class="edit-images-button-inner format-edit-wrp">
-                <button class="design-sidebar-action" design-id="5" onclick="toggleSidebar()">
+                <button class="design-sidebar-action" design-id="5" onclick="toggleSidebar('sidebar')">
                     <span>
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -138,7 +138,7 @@
                 </button>
             </div>
             <div class="edit-images-button-inner photo-slider-wrp">
-                <button class="design-sidebar-action" design-id="6" onclick="toggleSidebar()">
+                <button class="design-sidebar-action" design-id="6" onclick="toggleSidebar('sidebar')">
                     <span>
                         <svg width="21" height="20" viewBox="0 0 21 20" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -243,8 +243,6 @@
     </div>
 
     <div id="sidebar" class="sidebar choose-design-sidebar">
-
-
         <!-- =====fonts-family-options==== -->
         <div class="design-sidebar design-sidebar_2 setting-category-wrp choose-design-form activity-schedule-inner ">
             <div class="d-flex align-items-center justify-content-between toggle-wrp new-event-sidebar-head">
