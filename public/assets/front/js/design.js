@@ -292,7 +292,7 @@ $(document).on('click','.edit_design_tem',function(e){
         const activeObject = canvas.getActiveObject();
 
         if (!activeObject) {
-            alert('No object selected');
+            // alert('No object selected');
             return;
         }
 
@@ -794,7 +794,7 @@ $(document).on('click','.edit_design_tem',function(e){
         function executeCommand(command) {
             var activeObject = canvas.getActiveObject();
             if (!activeObject) {
-                alert('No object selected');
+                // alert('No object selected');
                 return;
             }
             if (activeObject && activeObject.type === 'textbox') {
