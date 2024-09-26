@@ -3238,6 +3238,9 @@ $(".multi-pin").click(async function () {
     )
         .toArray()
         .reverse();
+    if (checkedConversations.length <= 0) {
+        return;
+    }
     const promises = [];
     checkedConversations.forEach(function (element) {
         const conversationId = $(element).val();
@@ -3287,7 +3290,9 @@ $(".multi-mute").click(function () {
         "input[name='checked_conversation[]']:checked"
     );
     const promises = [];
-
+    if (checkedConversations.length <= 0) {
+        return;
+    }
     checkedConversations.each(function () {
         const conversationId = $(this).val();
         const overviewRef = ref(
@@ -3351,7 +3356,9 @@ $(".multi-read").click(function () {
     const checkedConversations = $(
         "input[name='checked_conversation[]']:checked"
     );
-
+    if (checkedConversations.length <= 0) {
+        return;
+    }
     checkedConversations.each(function () {
         const conversationId = $(this).val();
         const overviewRef = ref(
@@ -3382,7 +3389,9 @@ $(".multi-delete").click(async function () {
     const checkedConversations = $(
         "input[name='checked_conversation[]']:checked"
     );
-
+    if (checkedConversations.length <= 0) {
+        return;
+    }
     if (checkedConversations.length === 0) {
         alert("No conversations selected for deletion.");
         return;
