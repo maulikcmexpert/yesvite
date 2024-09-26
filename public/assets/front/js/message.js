@@ -1953,11 +1953,14 @@ async function handleSelectedUsers() {
         $(".empty-massage").show();
     }
 }
+function handleRemoveConversation() {
+    console.log(1);
+}
 // Initialize overview listeners
 const overviewRef = ref(database, `overview/${senderUser}`);
 onChildAdded(overviewRef, handleNewConversation);
 onChildChanged(overviewRef, handleConversationChange);
-onChildRemoved(overviewRef, console.log(1234));
+onChildRemoved(overviewRef, handleRemoveConversation);
 async function generateConversationId(userIds) {
     const sortedUserIds = userIds.slice().sort();
     const concatenatedIds = sortedUserIds.join("");
