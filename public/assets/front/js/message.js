@@ -476,7 +476,27 @@ function moveToTopOrBelowPinned(element) {
         if (!inserted) {
             $chatList.append(parentDiv);
         }
+
+        // After unpinning, reorder pinned elements
+        reorderPinnedElements($chatList);
     }
+}
+
+function reorderPinnedElements($chatList) {
+    // Find all pinned elements
+    let $pinnedItems = $chatList.find(".pinned").closest("div");
+
+    // Sort pinned elements by their data-position in ascending order
+    $pinnedItems.sort(function (a, b) {
+        let positionA = parseInt($(a).find("li").attr("data-position"));
+        let positionB = parseInt($(b).find("li").attr("data-position"));
+        return positionA - positionB;
+    });
+
+    // Move all sorted pinned items to the top of the chat list
+    $pinnedItems.each(function () {
+        $chatList.prepend($(this));
+    });
 }
 
 function removeSelectedMsg() {
