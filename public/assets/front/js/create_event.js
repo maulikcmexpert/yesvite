@@ -1155,62 +1155,6 @@ $(document).on("click", ".edit_card", function () {
     $("#old_name").val(temp_name);
     console.log(temp_name);
 });
-// $("#add_category_btn").click(function () {
-//     // e.preventDefault();
-//     var categoryName = $("#categoryName").val().trim();
-//     var categoryQuantity = parseInt($("#categoryquantity").val().trim());
-
-//     // console.log(categoryQuantity);
-//     // $('#errorLabel').text('');
-//     if (categoryName == "") {
-//         $("#categoryname")
-//             .text("Category Name cannot be empty.")
-//             .css("color", "red");
-//     } else if (categoryQuantity == "" || categoryQuantity <= 0) {
-//         $("#quantityLabel")
-//             .text("Please enter the quantity")
-//             .css("color", "red");
-//     } else {
-//         var categoryName = $("#categoryName").val();
-
-//         var quantity = $("#categoryquantity").val();
-//         sessionStorage.setItem("categoryName", categoryName);
-//         sessionStorage.setItem("quantity", quantity);
-
-//         // if (sessionStorage.getItem("quantity") !== null) {
-//         //     quantity = parseInt(sessionStorage.getItem("quantity"));
-//         //     $('.quantity-input').val(quantity);
-//         // } else {
-//         //     sessionStorage.setItem(".quantity-input", quantity);
-//         // }
-
-//         // if (sessionStorage.getItem("categoryName") !== null) {
-//         //     quantity = parseInt(sessionStorage.getItem("categoryName"));
-//         //     $('#categoryName').val(quantity);
-//         // } else {
-//         //     sessionStorage.setItem("#categoryName", quantity);
-//         // }
-
-//         if (categoryName.trim() !== "") {
-//             var potluck_category = [];
-//             potluck_category.push(categoryName);
-
-//             $("#potluck_category").val(potluck_category.join(","));
-
-//             var categoryItem = `<li class="list-group-item categorylist">
-//             ${categoryName}
-//             <button type="button" class="btn btn-sm btn-secondary float-end addSubItemButton" id="addSubItemButton">Add Sub-Item</button>
-//             <input type="hidden" id="quantity" value=${quantity}>
-//             <ul class="list-group mt-2 subItemList"></ul>
-//         </li>`;
-//             $("#categoryList").append(categoryItem);
-//             $("#categoryName").val("");
-//             $("#categoryModal").modal("hide");
-//         } else {
-//             alert("Category name cannot be empty.");
-//         }
-//     }
-// });
 
 var potluck = [];
 var potluckkey = -1;
@@ -1218,6 +1162,9 @@ var activePotluck = 0;
 
 function setPotluckActivekey(key, name) {
     $("#category_index").val(key);
+    var categoryQuantity = $("#missing-category-"+key).text();
+    $('#hidden_category_name').val(name);
+    $('#hidden_category_quantity').val(categoryQuantity);
     $('.sub-cat-pot').text('0/30');
     $(".category_heading").text("Add Item Under: " + name);
     activePotluck = key;
@@ -1276,6 +1223,8 @@ $(document).on("click", ".add_category_btn", function () {
                 potluck_cateogry_item_count();
             }else if(response.status == 2){
                 console.log(response);
+                $("#hidden_category_name").val(categoryName);
+                $("#hidden_category_quantity").val(categoryQuantity);
                 $('.category_name-'+edit_category_id).text(categoryName);
                 $('#missing-category-'+edit_category_id).text(categoryQuantity);
                 $('.edit_potluck_category-'+edit_category_id).attr('data-id',edit_category_id);
@@ -1297,6 +1246,27 @@ $(document).on("click", ".add_category_btn", function () {
     // $(this).css("display", "none");
     // $(".add_category_item_btn").show();
 });
+
+$(document).on("click", ".edit_category", function () {
+    var id = $(this).data("id");
+    var category_name = $('.category_name-'+id).text();
+    var category_quantity = $('#missing-category-'+id).text();
+    console.log(id);
+    console.log(category_name);
+    console.log(category_quantity);
+    $("#categoryName").val(category_name);
+    $("#category_quantity").val(category_quantity);
+    $("#hidden_potluck_key").val(id);
+    $('#add_update_category_head').text('Edit Category');
+    toggleSidebar('sidebar_addcategory')
+});
+
+$(document).on("click", ".add_potluck_item", function () {
+    var potluckkey = $(this).data('id');
+    var categoryName = $('.category_name-'+potluckkey);
+    toggleSidebar('sidebar_addcategoryitem'); 
+    setPotluckActivekey(potluckkey,categoryName);
+})
 
 $(document).on("click", ".add_category_item_btn", function () {
     var category_index = $("#category_index").val();
@@ -3343,6 +3313,7 @@ $(document).on("change", ".user_choice", function () {
         $("#" + id).remove();
     }
 });
+
 $(document).on("click", ".delete_potluck_category", function () {
     var delete_id = $(this).data("id");
     $("#delete_potluck_category_id").val(delete_id);
@@ -4386,7 +4357,6 @@ function displayRecords(lim, off,type,search = null,) {
     });
 }
 
-
 $(document).on('keyup','.search_user_ajax',function(){
     search_name = $(this).val();
     offset = 0;
@@ -4518,56 +4488,55 @@ $(document).on("click", ".invite_group_member", function () {
     $('#loader').css('display','block');
     var userId=$(this).val();
     var selectedValues = []; 
-$(".user_group_member").each(function () {
-    if ($(this).is(":checked")) {
-        var perferby=$(this).data('preferby');
-        var invited_by="";
-        if(perferby=="email"){
-            invited_by= $(this).data('email');
-        }else{
-            invited_by=$(this).data('mobile');
-        }
-
-        selectedValues.push({
-            id: $(this).val(),
-            preferby: perferby,
-            invited_by:invited_by
-        });
-    }
-});
-$.ajax({
-    url: base_url + "event/invite_user_by_group",
-    type: "POST",
-    headers: {
-        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-    },
-    data: {
-        users: selectedValues,
-    },
-    success: function (response) {
-        // console.log(response);
-        response.data.forEach(function(item, index) {
-            if (item.is_duplicate == '1' && item.userdata && item.userdata.id) {
-                console.log(item.is_duplicate);
-                $("#user-" + item.userdata.id).remove();
+    $(".user_group_member").each(function () {
+        if ($(this).is(":checked")) {
+            var perferby=$(this).data('preferby');
+            var invited_by="";
+            if(perferby=="email"){
+                invited_by= $(this).data('email');
+            }else{
+                invited_by=$(this).data('mobile');
             }
-        });        
-        $(".inivted_user_list").append(response.view);
-        // $(".inivted_user_list").html('');
-            guest_counter(0,15);
 
-            toggleSidebar();
-            $("#YesviteUserAll").html('');
-            var type="all";
-            get_user(type);
-        // }
-    },
-    error: function (xhr, status, error) {
-        console.log("AJAX error: " + error);
-    },
-});
-});
+            selectedValues.push({
+                id: $(this).val(),
+                preferby: perferby,
+                invited_by:invited_by
+            });
+        }
+    });
+    $.ajax({
+        url: base_url + "event/invite_user_by_group",
+        type: "POST",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        data: {
+            users: selectedValues,
+        },
+        success: function (response) {
+            // console.log(response);
+            response.data.forEach(function(item, index) {
+                if (item.is_duplicate == '1' && item.userdata && item.userdata.id) {
+                    console.log(item.is_duplicate);
+                    $("#user-" + item.userdata.id).remove();
+                }
+            });        
+            $(".inivted_user_list").append(response.view);
+            // $(".inivted_user_list").html('');
+                guest_counter(0,15);
 
+                toggleSidebar();
+                $("#YesviteUserAll").html('');
+                var type="all";
+                get_user(type);
+            // }
+        },
+        error: function (xhr, status, error) {
+            console.log("AJAX error: " + error);
+        },
+    });
+});
 
 $(document).on("click", "#delete_group", function () {
     var group_id = $(this).data("id");
@@ -4624,11 +4593,9 @@ $(document).on("click", ".view_members", function () {
     });
 });
 
-
 $(document).on('click','.edit-icon',function () {
     toggleSidebar('sidebar_change_plan');
   });   
-
 
 $(document).on('click','.free_plan',function () { 
     handleActivePlan(this);
@@ -4646,9 +4613,6 @@ $(document).on('click','.free_plan',function () {
     $('#loader').css('display','none');
  });
  
-
-
-
  $(document).on('change', 'input[name="gift_registry[]"]',function() {
     var selected_gift = [];
     // if($(this).is(':checked')){
@@ -4706,7 +4670,6 @@ $(document).on('click','.create_new_event_close_tip',function () {
     ajax_tip_close("create_new_event");
 
 });
-
 
 $(document).on('click','#guest_list_visible_to_guest',function () { 
     if($(this).is(':checked')){
@@ -4861,7 +4824,6 @@ $(document).on('click','.add_new_gift_registry',function () {
     toggleSidebar('sidebar_gift_registry_item')
 })
 
-
 $(document).on('keyup','#group_search_ajax',function () {
     var search_name = $(this).val();
     console.log(search_name);
@@ -4931,6 +4893,7 @@ $(document).on('click','.listing-arrow',function(){
     $(this).parent().find('.list-slide').addClass('open-potluck-list');
 }
 });
+
 $(document).on('click','.see_all_group',function(){
     $('search_user').val('');
     toggleSidebar('sidebar_groups');
@@ -4960,6 +4923,7 @@ $(document).on('click','.add_co_host_off',function(){
     }
     toggleSidebar();
 });
+
 $(document).on('click','.overlay',function(){
     if(eventData.co_host !== undefined){
         selected_co_host = eventData.co_host;
@@ -5156,17 +5120,5 @@ $(document).ready(function () {
     });
 });
 
-$(document).on("click", ".edit_category", function () {
-    var id = $(this).data("id");
-    var category_name = $('.category_name-'+id).text();
-    var category_quantity = $('#missing-category-'+id).text();
-    console.log(id);
-    console.log(category_name);
-    console.log(category_quantity);
-    $("#categoryName").val(category_name);
-    $("#category_quantity").val(category_quantity);
-    $("#hidden_potluck_key").val(id);
-    $('#add_update_category_head').text('Edit Category');
-    toggleSidebar('sidebar_addcategory')
-});
+
 
