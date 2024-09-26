@@ -848,6 +848,7 @@ $(document).on("click", ".pin-single-conversation", function (e) {
     e.stopPropagation();
     const pinChange = $(this).attr("changeWith");
     let conversationId = $(this).data("conversation");
+    console.log(conversationId);
     const overviewRef = ref(
         database,
         `overview/${senderUser}/${conversationId}/isPin`
