@@ -89,7 +89,29 @@
                               
                             </div>
                         </div>
-                       
+                        
+                            
+                            <div class="choose-design-cards-wrp">
+                                <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="#">Birthday</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">Kids Birthday</li>
+                                    </ol>
+                                    <h6>11 Designs</h6>
+                                </nav>
+
+                                <div class="choose-design-cards">
+                                    @if(isset($textData) && $textData->notEmpty())
+                                    @foreach ($textData as $temp)
+                                        <div class="design-card" data-bs-toggle="modal"
+                                            type="button" data-template="template_1">
+                                            <img src="{{ asset('storage/canvas'.$temp->image) }}" alt="">
+                                        </div>
+                                    @endforeach
+                                    @endif
+                                </div>
+                            </div>
+                        
                     </div>
                 </div>
             </form>
