@@ -5,29 +5,69 @@
             processing: true,
             serverSide: true,
 
-            ajax: '{{URL::to("/admin/create_template")}}',
+            // ajax: '{{URL::to("/admin/create_template")}}',
+            // columns: [{
+            //         data: "number",
+            //         name: "number"
+            //     },
+            //     {
+            //         data: "category_name",
+            //         name: "category_name"
+            //     },
+
+            //     {
+
+            //         data: "image",
+            //         name: "image"
+
+            //     },
+            //     {
+            //         data: "action",
+            //         name: "action",
+            //         orderable: false,
+            //         searchable: true,
+
+            //     },
+            // ],
+
+            ajax: '{{ URL::to(' / admin / create_template ') }}',
+
             columns: [{
+
                     data: "number",
+
                     name: "number"
+
                 },
+
                 {
+
                     data: "category_name",
+
                     name: "category_name"
+
                 },
 
                 {
 
                     data: "image",
+
                     name: "image"
 
                 },
+
                 {
+
                     data: "action",
+
                     name: "action",
+
                     orderable: false,
+
                     searchable: true,
 
                 },
+
             ],
         });
 
