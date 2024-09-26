@@ -1972,6 +1972,11 @@ function handleRemoveConversation(snapshot) {
         handleDelete();
     }
 }
+
+$(document).on(".usr-list-more", "click", function (e) {
+    e.preventDefault();
+    return;
+});
 // Initialize overview listeners
 const overviewRef = ref(database, `overview/${senderUser}`);
 onChildAdded(overviewRef, handleNewConversation);
