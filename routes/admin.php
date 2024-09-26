@@ -74,6 +74,22 @@ Route::group(['middleware' => adminAuth::Class], function () {
         'create_template' => TemplateController::class,
 
     ]);
+    Route::get('template/view/{id}', [TemplateController::class, 'View_template'])->name('template.view');
+    Route::get('template/edit_template/{id}', [EditTempalteController::class, 'index'])->name('create_template.edit_template');
+    Route::post('/saveTextData', [EditTempalteController::class, 'saveTextData'])->name('saveTextData');
+    // Route::post('/saveCanvasImage', [EditTempalteController::class, 'saveCanvasImage'])->name('saveCanvasImage');
+    Route::post('/uploadImage', [EditTempalteController::class, 'uploadImage'])->name('uploadImage');
+    Route::get('/loadTextData/{id}', [EditTempalteController::class, 'loadTextData']);
+    Route::post('/saveData', [EditTempalteController::class, 'saveData'])->name('saveData');
+    Route::get('/templates/view', [EditTempalteController::class, 'AllImage'])->name('displayAllImage');
+    Route::get('/templates/view', [EditTempalteController::class, 'viewAllImages'])->name('viewAllImages');
+    Route::get('/loadAllData', [EditTempalteController::class, 'loadAllData']);
+    Route::post('/user_image/{id}', [EditTempalteController::class, 'user_image']);
+    // routes/web.php
+    Route::post('/saveImagePath', action: [EditTempalteController::class, 'storeImagePath']);
+
+
+
     Route::post('user/check_new_contactemail', [UserController::class, 'checkNewContactEmail']);
 
     Route::post('user/check_new_contactnumber', [UserController::class, 'checkNewContactNumber']);
