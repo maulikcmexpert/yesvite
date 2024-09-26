@@ -51,7 +51,7 @@ $(document).on('click','.edit_design_tem',function(e){
             if (dbJson) {
                 hideStaticTextElements();  // Hide static text elements if static information is present
                 const staticInfo = dbJson;
-                console.log(staticInfo);
+                // console.log(staticInfo);
 
                 // Render text elements on canvas
                 staticInfo.textElements.forEach(element => {
@@ -76,6 +76,7 @@ $(document).on('click','.edit_design_tem',function(e){
                         transparentCorners: false,
                         isStatic: true
                     });
+                    console.log(textElement);
                     const textWidth = textElement.calcTextWidth();
                     textElement.set({ width: textWidth });
 
@@ -350,7 +351,6 @@ $(document).on('click','.edit_design_tem',function(e){
     loadTextDataFromDatabase();
 
     function hideStaticTextElements() {
-        alert();
         canvas.getObjects('textbox').forEach(function (textbox) {
             if (textbox.isStatic) {
                 textbox.set('visible', false);
