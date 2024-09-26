@@ -715,7 +715,7 @@
     }
 
     .edit-image-main-wrp .design-seting{
-        position: fixed !important;
+        position: sticky !important;
         width: 100% !important;
         left: 0 !important;
         border-radius: 0px !important;
