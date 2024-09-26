@@ -638,15 +638,17 @@ $(document).on('click','.edit_design_tem',function(e){
         start_date = eventData.event_date;
         end_date = eventData.event_date;
     }
-    
+
     // Add two draggable static textboxes outside the image area
-    addDraggableText(350, 50, 'event_name', eventData.event_name); // Position this outside the image area
-    addDraggableText(350, 100, 'host_name', eventData.hosted_by);
-    addDraggableText(350, 150, 'start_time', eventData.start_time);
-    addDraggableText(350, 200, 'rsvp_end_time', eventData.rsvp_end_time);
-    addDraggableText(350, 250, 'start_date', start_date);
-    addDraggableText(350, 300, 'end_date', end_date);
-    addDraggableText(350, 350, 'Location', eventData.event_location);
+    addDraggableText(350, 50, eventData.event_name, eventData.event_name); // Position this outside the image area
+    addDraggableText(350, 100, eventData.hosted_by, eventData.hosted_by);
+    addDraggableText(350, 150, eventData.start_time, eventData.start_time);
+    if(eventData.rsvp_end_time){
+        addDraggableText(350, 200, eventData.rsvp_end_time, eventData.rsvp_end_time);
+    }
+    addDraggableText(350, 250, start_date, start_date);
+    addDraggableText(350, 300, end_date, end_date);
+    addDraggableText(350, 350, eventData.event_location, eventData.event_location);
 
 
 
