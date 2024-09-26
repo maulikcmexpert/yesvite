@@ -13,6 +13,7 @@
                     </svg>
                 </span>
                 <h6 class="me-2 missing-category-h6-{{$potluckkey}}" style="display: none;"><span id="missing-category-{{$potluckkey}}">{{$categoryQuantity}}</span> Missing</h6>
+                <input type="hidden" class="total-potluck-category-{{$potluckkey}}" value="{{$categoryQuantity}}" />
                 <a href="#" class="me-3 add_potluck_item" id="potluck-{{$potluckkey}}" data-id="{{$potluckkey}}">
                     <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M10.9998 0.166016C5.03067 0.166016 0.166504 5.03018 0.166504 10.9993C0.166504 16.9685 5.03067 21.8327 10.9998 21.8327C16.969 21.8327 21.8332 16.9685 21.8332 10.9993C21.8332 5.03018 16.969 0.166016 10.9998 0.166016ZM15.3332 11.8118H11.8123V15.3327C11.8123 15.7768 11.444 16.1452 10.9998 16.1452C10.5557 16.1452 10.1873 15.7768 10.1873 15.3327V11.8118H6.6665C6.22234 11.8118 5.854 11.4435 5.854 10.9993C5.854 10.5552 6.22234 10.1868 6.6665 10.1868H10.1873V6.66602C10.1873 6.22185 10.5557 5.85352 10.9998 5.85352C11.444 5.85352 11.8123 6.22185 11.8123 6.66602V10.1868H15.3332C15.7773 10.1868 16.1457 10.5552 16.1457 10.9993C16.1457 11.4435 15.7773 11.8118 15.3332 11.8118Z" fill="#F73C71" />

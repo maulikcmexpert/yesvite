@@ -1227,6 +1227,7 @@ $(document).on("click", ".add_category_btn", function () {
                 // $("#hidden_category_quantity").val(categoryQuantity);
                 $('.category_name-'+edit_category_id).text(categoryName);
                 // $('#missing-category-'+edit_category_id).text(categoryQuantity);
+                $('.total-potluck-category-'+edit_category_id).val(categoryQuantity);
                 $('.edit_potluck_category-'+edit_category_id).attr('data-id',edit_category_id);
                 $('.edit_potluck_category-'+edit_category_id).attr('data-category_name',categoryName);
                 $('.edit_potluck_category-'+edit_category_id).attr('data-category_quantity',categoryQuantity);
@@ -1250,7 +1251,7 @@ $(document).on("click", ".add_category_btn", function () {
 $(document).on("click", ".edit_category", function () {
     var id = $(this).data("id");
     var category_name = $('.category_name-'+id).text();
-    var category_quantity = $('#missing-category-'+id).text();
+    var category_quantity = $('.total-potluck-category-'+id).val();
     console.log(id);
     console.log(category_name);
     console.log(category_quantity);
