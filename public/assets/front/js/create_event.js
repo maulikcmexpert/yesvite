@@ -3198,6 +3198,7 @@ $(document).on("click", "#delete_invited_user_tel", function () {
     $("#" + id).remove();
     var checkbox = $("." + id);
     var userId = $(this).data("userid");
+    $('.user_id_tel-'+userId).remove();
     checkbox.prop("checked", false);
 
 
