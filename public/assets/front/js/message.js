@@ -1543,7 +1543,7 @@ function createMessageElement(key, messageData, isGroup) {
             }
              
                 <div class="simple-msg-wrap"> 
-                    <span class="senderName">${senderName}</span>
+                    <span class="senderName">${senderName}</span>                   
                     ${messageData?.data != "" ? messageData.data : ""}
                     ${
                         isSender
@@ -1579,10 +1579,21 @@ function createMessageElement(key, messageData, isGroup) {
                 </div>
                 <hr>
                 <div class="reply-massage"> 
+                 <div class="media-msg-inline">
+                                <div class="media-msg">
+                    ${
+                        messageData?.type == "1"
+                            ? `
+                           
+                            <img src="${messageData?.url}"/>`
+                            : ""
+                    }
                         <span> ${
                             messageData?.data != "" ? messageData.data : ""
                         }</span>
                         ${reaction}
+                </div>
+                </div>
                 </div>
             </div>
             ${emojiAndReplay}
