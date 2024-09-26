@@ -444,8 +444,7 @@
         </div>
     </div>
 
-
-    <div id="sidebar_font" class="sidebar choose-design-sidebar">
+    {{-- <div id="sidebar_font" class="sidebar choose-design-sidebar">
           <!-- =====fonts-family-options==== -->
           <div class="design-sidebar design-sidebar_2 setting-category-wrp choose-design-form activity-schedule-inner ">
             <div class="d-flex align-items-center justify-content-between toggle-wrp new-event-sidebar-head">
@@ -945,7 +944,8 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
+
 
 </main>
 <div id="sidebar_font_overlay" class="overlay" onclick="toggleSidebar('')"></div>
