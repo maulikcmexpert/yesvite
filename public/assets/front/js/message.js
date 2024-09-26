@@ -1966,6 +1966,11 @@ function handleRemoveConversation(snapshot) {
         `conversation-${newConversation.conversationId}`
     );
     $(conversationElement).remove();
+    const selectedConversationId = $(".selected_conversasion").val();
+
+    if (selectedConversationId === newConversation.conversationId) {
+        handleDelete();
+    }
 }
 // Initialize overview listeners
 const overviewRef = ref(database, `overview/${senderUser}`);
@@ -3463,6 +3468,9 @@ async function deleteConversation(conversationId, isGroup) {
         }
     }
 
+    handleDelete();
+}
+function handleDelete() {
     var msgLists = $(".msg-list");
     if (msgLists.length > 0) {
         msgLists.first().click(); // Simulate a click event on the first msg-list element
