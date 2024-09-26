@@ -1,4 +1,4 @@
-var dbJson = '';
+var dbJson = null;
 $(document).on("click", ".design-card", function () {
     var url = $(this).data("url");
     var template = $(this).data("template");
@@ -28,7 +28,7 @@ $(document).on('click','.edit_design_tem',function(e){
     $('.edit_design_template').show();
 
     // hideStaticTextElements();  // Hide static text elements if static information is present
-    const staticInfo = JSON.parse(dbJson);
+    const staticInfo = dbJson;
     console.log(staticInfo);
 
     staticInfo.textElements.forEach(element => {
