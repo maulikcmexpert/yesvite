@@ -5139,7 +5139,15 @@ $(document).on("click", ".new-temp", function () {
     $("#modalImage").attr("src", imageUrl);
     
     // Show the modal using Bootstrap's modal method
-    $("#myCustomModal").modal("show");
+    // $("#myCustomModal").modal("show");
+
+    const modalElement = document.getElementById('myCustomModal');
+    const modal = new Modal(modalElement, {
+      backdrop: false,
+      keyboard: true,
+      focus: true
+    });
+    modal.show();
 });
 
 
