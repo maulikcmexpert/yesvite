@@ -53,7 +53,7 @@
     background: none !important;
 }
 
-.image-edit-inner-img canvas {
+.image-edit-inner-img {
     width: 550px !important;
     height: 600px !important;
     margin: 0px auto !important;
