@@ -1161,6 +1161,7 @@ $("#archive-list").click(function () {
         $(".multi-archive").attr("changewith", "1");
     }
     if (msgLists.length > 0) {
+        console.log("from click");
         msgLists[0].click();
     }
 });
@@ -2946,6 +2947,8 @@ $("#add-group-member").click(async function () {
 
         $(".new-members-add").addClass("d-none");
         $(".new-member").addClass("d-none");
+        console.log("from click");
+
         $(".conversation-" + conversationId).click();
         // Clear the newSelectedUserIds array after adding
         newSelectedUserIds = [];
@@ -3503,6 +3506,8 @@ $(".multi-pin").click(async function () {
     } catch (error) {
         console.error("Error updating pin status:", error);
     }
+    console.log("from click");
+
     $(".bulk-back").click();
     toastr.success("Selected conversations have been updated.");
 });
@@ -3529,6 +3534,8 @@ $(".multi-mute").click(function () {
     });
 
     $("input[name='checked_conversation[]']").prop("checked", false);
+    console.log("from click");
+
     $(".bulk-back").click();
     toastr.success("Selected conversations have been updated.");
 });
@@ -3569,12 +3576,16 @@ $(".multi-archive").click(function () {
                     ? "Archived successfully"
                     : "Unarchived successfully"
             );
+            console.log("from click");
+
             $("#archive-list").attr("list", "1").click();
         })
         .catch((error) => {
             toastr.error("An error occurred while archiving/unarchiving.");
             console.error(error);
         });
+    console.log("from click");
+
     $(".bulk-back").click();
 });
 $(".multi-read").click(function () {
@@ -3593,6 +3604,8 @@ $(".multi-read").click(function () {
         update(overviewRef, { unRead: false, unReadCount: 0 });
     });
     $("input[name='checked_conversation[]']").prop("checked", false);
+    console.log("from click");
+
     $(".bulk-back").click();
     toastr.success("Selected conversations have been read.");
 });
@@ -3635,6 +3648,8 @@ $(document).on("click", ".multi-delete", async function () {
     } catch (error) {
         console.error("Error deleting conversations:", error);
     }
+    console.log("from click");
+
     $(".bulk-back").click();
 });
 
@@ -3716,6 +3731,8 @@ async function deleteConversation(conversationId, isGroup) {
 function handleDelete() {
     var msgLists = $(".msg-list");
     if (msgLists.length > 0) {
+        console.log("from click");
+
         msgLists.first().click(); // Simulate a click event on the first msg-list element
     } else {
         $(".msg-lists").html("");
