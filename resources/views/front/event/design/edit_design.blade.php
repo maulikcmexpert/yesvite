@@ -444,7 +444,7 @@
         </div>
     </div>
 
-    {{-- <div id="sidebar_font" class="sidebar choose-design-sidebar">
+    <div id="sidebar sidebar_font" class="sidebar choose-design-sidebar">
           <!-- =====fonts-family-options==== -->
           <div class="design-sidebar design-sidebar_2 setting-category-wrp choose-design-form activity-schedule-inner ">
             <div class="d-flex align-items-center justify-content-between toggle-wrp new-event-sidebar-head">
@@ -594,7 +594,7 @@
         </div>
     </div>
     
-    <div id="sidebar_edit_text" class="sidebar choose-design-sidebar">
+    <div id="sidebar sidebar_edit_text" class="sidebar choose-design-sidebar">
         <!-- ======Font-size== -->
         <div class="design-sidebar design-sidebar_3 setting-category-wrp choose-design-form activity-schedule-inner ">
             <div class="d-flex align-items-center justify-content-between toggle-wrp new-event-sidebar-head">
@@ -652,7 +652,7 @@
         </div>
     </div>
     
-    <div id="sidebar_color" class="sidebar choose-design-sidebar">
+    <div id="sidebar sidebar_color" class="sidebar choose-design-sidebar">
          <!-- ===color-picker== -->
          <div class="design-sidebar design-sidebar_4 setting-category-wrp choose-design-form activity-schedule-inner">
             <div class="d-flex align-items-center justify-content-between toggle-wrp new-event-sidebar-head">
@@ -685,7 +685,7 @@
         </div>
     </div>
 
-    <div id="sidebar_format" class="sidebar choose-design-sidebar">
+    <div id="sidebar sidebar_format" class="sidebar choose-design-sidebar">
      <!-- ===format text=== -->
         <div class="design-sidebar design-sidebar_5 setting-category-wrp choose-design-form activity-schedule-inner ">
             <div class="d-flex align-items-center justify-content-between toggle-wrp new-event-sidebar-head">
@@ -861,7 +861,7 @@
         </div>
     </div>
 
-    <div id="sidebar_photo_slider" class="sidebar choose-design-sidebar">
+    <div id="sidebar sidebar_photo_slider" class="sidebar choose-design-sidebar">
         <!-- ====upload=img=== -->
         <div class="design-sidebar design-sidebar_6 setting-category-wrp choose-design-form activity-schedule-inner ">
             <div class="d-flex align-items-center justify-content-between toggle-wrp new-event-sidebar-head">
@@ -944,7 +944,7 @@
                 </div>
             </div>
         </div>
-    </div> --}}
+    </div>
 
 
 </main>
