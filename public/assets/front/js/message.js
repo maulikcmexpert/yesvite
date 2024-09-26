@@ -444,6 +444,7 @@ async function handleNewConversation(snapshot) {
             unReadCount: 0,
         });
     }
+    updateUnreadMessageBadge();
 }
 
 function moveToTopOrBelowPinned(element) {
@@ -1015,6 +1016,7 @@ $(".send-message").on("keypress", async function (e) {
     if (e.which === 13 && e.shiftKey) {
         return;
     }
+    e.preventDefault();
     if (isGroup == "true" || isGroup == true) {
         // Fetch the group profiles
         var profileIndex = await setProfileIndexCache(conversationId);

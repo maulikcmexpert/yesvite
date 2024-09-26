@@ -953,7 +953,7 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
                 _token: $('meta[name="csrf-token"]').attr("content"),
             },
             success: function (response) {
-
+                console.log(response);
                 var currentInviteCount = parseInt($('#currentInviteCount').val());
                 currentInviteCount++;
                 $('#currentInviteCount').val(currentInviteCount);
