@@ -1529,6 +1529,7 @@ function createMessageElement(key, messageData, isGroup) {
 </svg></span>`
         : "";
 
+    console.log(messageData);
     let emoji = isReceiver
         ? `
      <span class="reaction-icon" data-message-id="${key}"><svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -3161,7 +3162,12 @@ function displayFiles(files, name) {
                     previewElementnew.className = "preview_file";
                     previewElementnew.textContent = `File selected: ${file.name}`;
                     previewItem.appendChild(previewElementnew);
+                    previewElement.style.display = "none";
                 }
+                var closeButton = document.createElement("button");
+                closeButton.innerHTML = closeSpan;
+                closeButton.className = "close-preview";
+                previewItem.appendChild(closeButton);
 
                 previewElement.className = "preview_img";
                 previewElement.src = e.target.result;
