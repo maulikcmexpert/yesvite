@@ -17,4 +17,14 @@ class TextData extends Model
     protected $casts = [
         'static_information' => 'array',
     ];
+
+    public function subcategory()
+    {
+        return $this->hasMany(EventDesignSubCategory::class, 'design_subcategory_id');
+    }
+    
+    public function category()
+    {
+        return $this->hasMany(EventDesignCategory::class, 'desgin_category_id');
+    }
 }
