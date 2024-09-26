@@ -450,34 +450,35 @@ async function handleNewConversation(snapshot) {
 function moveToTopOrBelowPinned(element) {
     let $chatList = $(".chat-list"); // Get the chat list container
     let isPinned = element.hasClass("pinned"); // Check if the element is pinned
+    let parentDiv = element.closest("div"); // Get the parent div containing the li
 
     if (isPinned) {
-        // If the element is pinned, move it to the top of the chat list
-        $chatList.prepend(element);
+        // If the element is pinned, move its parent div to the top of the chat list
+        $chatList.prepend(parentDiv);
     } else {
-        // Otherwise, find the last pinned element and place this element after it
-        let $listItems = $chatList.children("li").not(".pinned");
+        // Find all parent divs in the chat list and get the positions of their li children
+        let $listItems = $chatList.children("div").not(".pinned").find("li");
         let elementPosition = parseInt(element.attr("data-position"));
-        console.log({ elementPosition });
 
         // Find the correct spot based on `data-position`
         let inserted = false;
         $listItems.each(function () {
             let listItemPosition = parseInt($(this).attr("data-position"));
-            console.log(listItemPosition);
+            let listItemDiv = $(this).closest("div"); // Get the parent div of the current li
             if (listItemPosition > elementPosition) {
-                $(this).before(element); // Insert the element in the correct position
+                listItemDiv.before(parentDiv); // Insert the parent div in the correct position
                 inserted = true;
                 return false; // Exit the loop after inserting
             }
         });
 
-        // If no appropriate position is found, append the element to the bottom
+        // If no appropriate position is found, append the parent div to the bottom
         if (!inserted) {
-            $chatList.append(element);
+            $chatList.append(parentDiv);
         }
     }
 }
+
 function removeSelectedMsg() {
     var msgLists = document.getElementsByClassName("msg-list");
     for (var i = 0; i < msgLists.length; i++) {
