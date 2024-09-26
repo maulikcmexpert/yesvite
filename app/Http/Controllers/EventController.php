@@ -695,17 +695,25 @@ class EventController extends Controller
         $categoryName = $request->input('category_name');
         $categoryQuantity = $request->input('categoryQuantity');
         $potluckkey = $request->input('potluckkey');
+        $edit_category_id = $request->input('edit_category_id');
         $categories = session()->get('category', []);
         // dd($categories);
-        $categoryNames =  collect($categories)->pluck('category_name')->toArray();
-        if (in_array($categoryName, $categoryNames)) {
-            return response()->json(['view' => '', 'status' => '0']);
-        } else {
-            $categories[] = ['category_name' => $categoryName, 'category_quantity' => $categoryQuantity];
-        }
-        session()->put('category', $categories);
 
-        return response()->json(['view' => view('front.event.potluck.potluckCategory', ['categoryName' => $categoryName, 'categoryQuantity' => $categoryQuantity, 'potluckkey' => $potluckkey])->render(), 'status' => '1']);
+        if(isset($edit_category_id) && $edit_category_id != ''){
+            $status = '2';
+            dd($categories);
+        }else{
+            $categoryNames =  collect($categories)->pluck('category_name')->toArray();
+            if (in_array($categoryName, $categoryNames)) {
+                return response()->json(['view' => '', 'status' => '0']);
+            } else {
+                $categories[] = ['category_name' => $categoryName, 'category_quantity' => $categoryQuantity];
+            }
+            session()->put('category', $categories);
+            $status = '1';
+            return response()->json(['view' => view('front.event.potluck.potluckCategory', ['categoryName' => $categoryName, 'categoryQuantity' => $categoryQuantity, 'potluckkey' => $potluckkey])->render(), 'status' => $status]);
+        }
+        
         // return $categoryName;
     }
 
