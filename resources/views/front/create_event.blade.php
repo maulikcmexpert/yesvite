@@ -1119,6 +1119,7 @@
                     <label for="categoryName" id="categoryNameError"></label>
                     <input type="hidden" id="hidden_category_name" />
                     <input type="hidden" id="hidden_category_quantity" />
+                    <input type="hidden" id="hidden_potluck_key"/>
                 </div>
                 <div class="qty-container">
                     <button class="qty-btn-minus-qty" type="button" onclick="clearError()"><i

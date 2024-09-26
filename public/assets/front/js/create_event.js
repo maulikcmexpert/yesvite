@@ -1242,7 +1242,7 @@ $(document).on("click", ".add_category_btn", function () {
         return;
     }
     // console.log(categoryQuantity);
-
+    
     potluckkey++;
     potluck[potluckkey] = categoryName;
     $.ajax({
@@ -5147,9 +5147,9 @@ $(document).on("click", ".edit_potluck_category", function () {
     console.log(id);
     console.log(category_name);
     console.log(category_quantity);
-    // $("#recipient_name").val(recipientName);
-    // $("#registry_link").val(registryLink);
-    // $("#registry_item_id").val(id);
-    // toggleSidebar('sidebar_addcategoryitem')
+    $("#categoryName").val(category_name);
+    $("#category_quantity").val(category_quantity);
+    $("#hidden_potluck_key").val(id);
+    toggleSidebar('sidebar_addcategory')
 });
 

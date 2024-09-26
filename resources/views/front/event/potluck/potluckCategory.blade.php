@@ -3,7 +3,7 @@
         <div class="list-header">
             <span class="me-1 list-sub-head total-self-bring-{{$potluckkey}}">0</span>
             <div>
-                <h5 class="category_name">{{$categoryName}}</h5>
+                <h5 class="category_name-{{$potluckkey}}">{{$categoryName}}</h5>
                 <p>Total Commited</p>
             </div>
             <div class="ms-auto d-flex align-items-center ">
