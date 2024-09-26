@@ -4557,7 +4557,9 @@ $(document).on("click", ".invite_group_member", function () {
                     console.log(item.is_duplicate);
                     $("#user-" + item.userdata.id).remove();
                 }
-            });        
+            });
+            console.log(response);
+                    
             $(".inivted_user_list").append(response.view);
             $(".user-list-responsive").append(response.responsive_view);
             // $(".inivted_user_list").html('');
