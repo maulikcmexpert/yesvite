@@ -1138,7 +1138,7 @@ $(document).on("click", ".archive-single1-conversation", function () {
     var unarchivelist = document.getElementsByClassName("unarchived-list");
     console.log(unarchivelist);
     let msgLists = $(unarchivelist);
-    msgLists[0].click();
+    // msgLists[0].click();
 });
 
 // Initial chat update
