@@ -3003,6 +3003,8 @@ async function getTotalUnreadMessageCount() {
                     conversations[conversationId].unReadCount,
                     10
                 );
+
+                console.log(totalUnreadCount);
             }
         }
     }
