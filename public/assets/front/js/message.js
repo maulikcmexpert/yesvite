@@ -867,8 +867,10 @@ $(document).on("click", ".pin-single-conversation", function () {
             .find(".pin-svg")
             .removeClass("d-none");
 
-        $(".unpin-self-icn").show("d-none");
-        $(".pin-self-icn").hide("d-none");
+        // $(".unpin-self-icn").show("d-none");
+        // $(".pin-self-icn").hide("d-none");
+        $(this).child(".pin1-self-icn").removeClass("d-none");
+        $(this).child(".unpin1-self-icn").addClass("d-none");
     } else {
         $(".conversation-" + conversationId).removeClass("pinned");
 
@@ -876,9 +878,12 @@ $(document).on("click", ".pin-single-conversation", function () {
             .find(".chat-data")
             .find(".pin-svg")
             .addClass("d-none");
-        $(".pin-self-icn").show();
-        $(".unpin-self-icn").hide();
+        $(this).child(".pin1-self-icn").addClass("d-none");
+        $(this).child(".unpin1-self-icn").removeClass("d-none");
     }
+    console.log($(this).child());
+    console.log($(this).child().find(".pin1-self-icn"));
+    console.log($(this).child(".pin1-self-icn"));
 });
 
 $(document).on("click", ".mute-conversation", function () {
