@@ -1973,7 +1973,7 @@ function handleRemoveConversation(snapshot) {
     }
 }
 
-$(document).on(".usr-list-more", "click", function (e) {
+$(document).on("click", ".usr-list-more", function (e) {
     e.stopPropagation();
     console.log("clicked");
     return;
