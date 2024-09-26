@@ -28,7 +28,7 @@ class TemplateController extends Controller
     public function index(Request $request)
     {
 
-
+        dd(1);
         if ($request->ajax()) {
             $data = TextData::with('categories')->orderBy('id', 'desc')->get();
 
