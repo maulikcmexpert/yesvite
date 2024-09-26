@@ -3057,6 +3057,7 @@ $(".close-audio-btn").on("click", function () {
 
 $(".preview_img").hide();
 $("#preview_file").hide();
+$(".preview_file").hide();
 
 $(".upload-box").change(function () {
     $(".file_info").val("");
@@ -3071,24 +3072,23 @@ $(".upload-box").change(function () {
     $(".dropdown-menu").removeClass("show");
 
     var fileExtension = file.name.substr(file.name.lastIndexOf(".") + 1);
-
+    console.log(fileExtension);
     if (file) {
         var reader = new FileReader();
 
         if (file.type.match("image.*")) {
             reader.onload = function (e) {
-                $("#preview_file").hide();
                 curElement.attr("src", e.target.result).show();
             };
 
             reader.readAsDataURL(file);
         } else if (file.type.match("video.*")) {
             curElement.attr("src", URL.createObjectURL(file)).show();
-            $("#preview_file").hide();
+
             $("#file_name").text("");
         } else if (file.type.match("audio.*")) {
             curElement.attr("src", URL.createObjectURL(file)).show();
-            $("#preview_file").hide();
+
             $("#file_name").text("audio");
         } else if (file.type === "application/pdf") {
             // Handling PDF files
@@ -3096,12 +3096,6 @@ $(".upload-box").change(function () {
                 curElement
                     .attr("src", URL.createObjectURL(e.target.result))
                     .show();
-                // $("#preview_file")
-                //     .html(
-                //         `<iframe src="${e.target.result}" style="width:100%; height:400px;"></iframe>`
-                //     )
-                //     .show();
-                $(".preview_img").hide();
             };
             reader.readAsDataURL(file);
         } else if (
@@ -3110,16 +3104,17 @@ $(".upload-box").change(function () {
                 "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         ) {
             // Handle Excel file display
-            $("#preview_file")
-                .html(`<p>Excel file selected: ${file.name}</p>`)
-                .show();
-            $(".preview_img").hide();
+            reader.onload = function (e) {
+                curElement
+                    .attr("src", URL.createObjectURL(e.target.result))
+                    .hide();
+            };
         } else {
             // Handle other file types (text, docs)
             reader.onload = function (e) {
-                $("#preview_file")
-                    .html(`<p>File selected: ${file.name}</p>`)
-                    .show();
+                curElement
+                    .attr("src", URL.createObjectURL(e.target.result))
+                    .hide();
             };
             reader.readAsText(file);
         }
@@ -3161,8 +3156,11 @@ function displayFiles(files, name) {
                     previewElement.style.maxWidth = "100%";
                     previewElement.style.height = "400px";
                 } else {
-                    previewElement = document.createElement("p");
-                    previewElement.textContent = `File selected: ${file.name}`;
+                    previewElement = document.createElement("img");
+                    var previewElementnew = document.createElement("p");
+                    previewElementnew.className = "preview_file";
+                    previewElementnew.textContent = `File selected: ${file.name}`;
+                    previewItem.appendChild(previewElementnew);
                 }
 
                 previewElement.className = "preview_img";
