@@ -552,7 +552,7 @@ class EventController extends Controller
                 return response()->json(['view' => view('front.event.guest.addGuest', compact('data'))->render(),  'responsive_view' => view('front.event.guest.addguest_responsive', compact('data'))->render(), 'is_duplicate' => 1]);
             }
             $data[] = ['userdata' => $userEntry, 'is_duplicate' => 0];
-            return response()->json(['view' => view('front.event.guest.addGuest', compact('data'))->render(), 'responsive_view' => view('front.event.guest.addguest_responsive', compact('data'))->render(), 'success' => true, 'data' => $userEntry]);
+            return response()->json(['view' => view('front.event.guest.addGuest', compact('data'))->render(), 'responsive_view' => view('front.event.guest.addguest_responsive', compact('data'))->render(), 'success' => true, 'data' => $userEntry, 'is_duplicate' => 0]);
         }
     }
 

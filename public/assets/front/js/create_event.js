@@ -1056,6 +1056,7 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
 
                 if (response.is_duplicate == 1) {
                     $("#user-" + userId).remove();
+                    $("#user_id-" + userId).remove();
                 }
                 $(".inivted_user_list").append(response.view);
                 $(".user-list-responsive").append(response.responsive_view);
@@ -1096,6 +1097,7 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
                 // }
 
                 $('#user_tel-'+userId).remove();
+                $('#user_id_tel-'+userId).remove();
                 total_guest = $(".users-data.invited_user").length;
                 $("#event_guest_count").text(total_guest + " Guests");
                 $(".invite-count").text(total_guest);
@@ -3165,7 +3167,10 @@ $(document).on("click", "#delete_invited_user", function () {
 
     var re_total_remaining_count = remaining_count + 1;
 
-    $("#" + id).remove();
+    // $("#" + id).remove();
+     $('#user-'+userId).remove();
+     $('#user_id-'+userId).remove();
+
     var checkbox = $("." + id);
     checkbox.prop("checked", false);
 

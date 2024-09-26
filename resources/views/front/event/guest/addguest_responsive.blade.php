@@ -1,6 +1,6 @@
 @foreach ( $data as $guest_user)
 @if($guest_user['userdata']['prefer_by']=="email")
-<div class="guest-contact invited_user" data-id={{$guest_user['userdata']['id']}} id="user-{{$guest_user['userdata']['id']}}">
+<div class="guest-contact invited_user" data-id={{$guest_user['userdata']['id']}} id="user_id-{{$guest_user['userdata']['id']}}">
     <div class="guest-img mobile-guest-icon">
         <!-- <img src="./assets/image/user-img.svg" alt="guest-img"> -->
         @if ($guest_user['userdata']['profile'] != '')
@@ -31,7 +31,7 @@
     <h6 class="guest-name">{{$guest_user['userdata']['firstname']}} {{$guest_user['userdata']['lastname']}}</h6>
 </div>
 @elseif ($guest_user['userdata']['prefer_by']=="phone")
-<div class="guest-contact invited_user" data-id={{$guest_user['userdata']['id']}} id="user_tel-{{$guest_user['userdata']['id']}}">
+<div class="guest-contact invited_user" data-id={{$guest_user['userdata']['id']}} id="user_id_tel-{{$guest_user['userdata']['id']}}">
     <div class="guest-img mobile-guest-icon">
         <!-- <img src="./assets/image/user-img.svg" alt="guest-img"> -->
         @if ($guest_user['userdata']['profile'] != '')
