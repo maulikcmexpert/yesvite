@@ -3099,7 +3099,7 @@ class ApiControllerv2 extends Controller
                     $template_data['width'] = (isset($data->id) && $data->id != null) ? $data->id : '';
                     $url = asset('storage/canvas/' . $data->image);
                     $template_data['template_url'] = (isset($url) && $url != null) ? $url : '';
-                    $template_data['textData'] = (isset($data->static_information) && $data->static_information != null) ? $data->static_information : '';
+                    // $template_data['textData'] = (isset($data->static_information) && $data->static_information != null) ? $data->static_information : '';
                     $designList[] = $template_data;
                 }
                 return response()->json(['status' => 1, 'message' => "Event design Data", "data" => $designList]);
