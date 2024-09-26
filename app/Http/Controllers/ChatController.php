@@ -265,7 +265,7 @@ class ChatController extends Controller
         }
 
         // return response()->json($message);
-        return view('front.chat.conversationList', compact('messages'));
+        return view('front.chat.getUserByName', compact('messages'));
     }
 
 
