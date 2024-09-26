@@ -711,9 +711,9 @@ class EventController extends Controller
                     $i++;
                 }
             }
-            dd($i);
             if($i == 0){
                 $categories[$edit_category_id] = ['category_name' => $categoryName, 'category_quantity' => $categoryQuantity];
+                return response()->json(['status' => $status]);
             }else{
                 return response()->json(['view' => '', 'status' => '0']);
             }

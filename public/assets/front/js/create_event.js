@@ -1259,12 +1259,12 @@ $(document).on("click", ".add_category_btn", function () {
             _token: $('meta[name="csrf-token"]').attr("content"),
         },
         success: function (response) {
+            $('#add_update_category_head').text('Add New Category');
+            $("#categoryName").val("");
+            $("#categoryNameError").text("");
+            $("#category_quantity_error").css("display", "none");
+            $("#category_quantity").val(1);
             if (response.status == 1) {
-                $('#add_update_category_head').text('Add New Category');
-                $("#categoryName").val("");
-                $("#categoryNameError").text("");
-                $("#category_quantity_error").css("display", "none");
-                $("#category_quantity").val(1);
                 $("#hidden_category_name").val(categoryName);
                 $("#hidden_category_quantity").val(categoryQuantity);
                 if(edit_category_id == ''){
@@ -1272,6 +1272,15 @@ $(document).on("click", ".add_category_btn", function () {
                     category++;
                     $('#category_count').val(category);
                 }
+                toggleSidebar("sidebar_potluck");
+                potluck_cateogry_item_count();
+            }else if(response.status == 2){
+                console.log(response);
+                $('.category_name-'+edit_category_id).text(categoryName);
+                $('#missing-category-'+edit_category_id).text(categoryQuantity);
+                $('.edit_potluck_category').attr('data-id',edit_category_id);
+                $('.edit_potluck_category').attr('data-category_name',categoryName);
+                $('.edit_potluck_category').attr('data-category_quantity',categoryQuantity);
                 toggleSidebar("sidebar_potluck");
                 potluck_cateogry_item_count();
             } else {
