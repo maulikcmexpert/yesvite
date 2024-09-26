@@ -61,4 +61,5 @@
     </div>
     <h6 class="guest-name">{{$guest_user['userdata']['firstname']}} {{$guest_user['userdata']['lastname']}}</h6>
 </div>
+@endif
 @endforeach
