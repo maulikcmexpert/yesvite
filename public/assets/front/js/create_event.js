@@ -4556,7 +4556,9 @@ $(document).on("click", ".invite_group_member", function () {
                 if (item.is_duplicate == '1' && item.userdata && item.userdata.id) {
                     console.log(item.is_duplicate);
                     $("#user-" + item.userdata.id).remove();
+                    $("#user_tel-" + item.userdata.id).remove();
                     $(".user_id-" + item.userdata.id).remove();
+                    $(".user_id_tel-" + item.userdata.id).remove();
                 }
             });
             console.log(response);
