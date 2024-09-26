@@ -2370,7 +2370,7 @@ $("#new-member").click(function () {
 });
 $(".close-group-modal").click(function () {
     $(".new-members-add").addClass("d-none");
-    $(".new-member").addClass("d-none");
+    // $(".new-member").addClass("d-none");
 });
 
 var selectedgrpUserIds = [];
