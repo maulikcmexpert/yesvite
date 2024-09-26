@@ -992,8 +992,6 @@ $(".send-message").on("keypress", async function (e) {
     var isGroup = $(".conversation-" + conversationId).attr("data-group");
 
     if (e.which === 13 && e.shiftKey) {
-        var currentValue = $(this).val(); // Get current value of the textbox
-        $(this).val(currentValue + "\n");
         return;
     }
     if (isGroup == "true" || isGroup == true) {
