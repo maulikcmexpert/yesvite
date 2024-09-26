@@ -105,7 +105,7 @@
                                     @foreach ($textData as $temp)
                                         <div class="design-card" data-bs-toggle="modal"
                                             type="button" data-template="template_1">
-                                            <img src="{{ asset('storage/canvas'.$temp->image) }}" alt="">
+                                            <img src="{{ asset('storage/canvas/'.$temp->image) }}" alt="">
                                         </div>
                                     @endforeach
                                     @endif
