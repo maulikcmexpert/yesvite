@@ -807,7 +807,7 @@ async function updateMore(conversationId) {
     }
 }
 
-$(".pin-conversation").click(function () {
+$(document).on("click", ".pin-conversation", function () {
     const pinChange = $(this).attr("changeWith");
     let conversationId = $(".conversationId").attr("conversationId");
     const overviewRef = ref(
@@ -844,7 +844,7 @@ $(".pin-conversation").click(function () {
     }
 });
 
-$(".mute-conversation").click(function () {
+$(document).on("click", ".mute-conversation", function () {
     const change = $(this).attr("changeWith");
     let conversationId = $(".conversationId").attr("conversationId");
     const overviewRef = ref(
@@ -857,7 +857,7 @@ $(".mute-conversation").click(function () {
         .text(change == "1" ? "Unmute" : "Mute");
     $(this).attr("changeWith", change == "1" ? "0" : "1");
 });
-$(".block-conversation").click(async function () {
+$(document).on("click", ".block-conversation", async function () {
     const userId = $(this).attr("user");
     const blocked = $(this).attr("blocked") === "true"; // Convert string to boolean
 
@@ -898,7 +898,7 @@ $(".block-conversation").click(async function () {
     $(".conversation-" + conversationid).click();
 });
 
-$(".archive-conversation").click(function () {
+$(document).on("click", ".archive-conversation", function () {
     const change = $(this).attr("changeWith");
     let conversationId = $(".conversationId").attr("conversationId");
     const overviewRef = ref(
@@ -3372,7 +3372,7 @@ $(".multi-read").click(function () {
     toastr.success("Selected conversations have been read.");
 });
 
-$(".delete-conversation").click(async function () {
+$(document).on("click", ".delete-conversation", async function () {
     var conversationId = $(".conversationId").attr("conversationid");
     const isGroup = $("#isGroup").val();
 
@@ -3385,7 +3385,7 @@ $(".delete-conversation").click(async function () {
     toastr.success("conversation have been deleted.");
 });
 
-$(".multi-delete").click(async function () {
+$(document).on("click", ".multi-delete", async function () {
     const checkedConversations = $(
         "input[name='checked_conversation[]']:checked"
     );
