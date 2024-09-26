@@ -1528,8 +1528,10 @@ function createMessageElement(key, messageData, isGroup) {
 <path d="M5.89687 3.31028V0.238281L0.296875 5.61428L5.89687 10.9903V7.84148C9.89687 7.84148 12.6969 9.07028 14.6969 11.7583C13.8969 7.91828 11.4969 4.07828 5.89687 3.31028Z" fill="#CBD5E1"/>
 </svg></span>`
         : "";
+    var fileExtension = messageData?.fileName?.substr(
+        messageData?.fileName?.lastIndexOf(".") + 1
+    );
 
-    console.log(messageData);
     let emoji = isReceiver
         ? `
      <span class="reaction-icon" data-message-id="${key}"><svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1581,9 +1583,12 @@ function createMessageElement(key, messageData, isGroup) {
             ? `
             <div class="media-msg-inline">
                 <div class="media-msg">
-                    <iframe src="${
-                        messageData?.url
-                    }" style="width:100%;height:400px;"></iframe>
+                ${
+                    fileExtension === "pdf" || fileExtension == "PDF"
+                        ? ` <iframe src="${messageData?.url}" style="width:100%;height:400px;"></iframe>`
+                        : ` <a href="${messageData?.url}" class="file_link">${messageData?.fileName}</a>`
+                }
+                   
                     <span class="media-text"> ${
                         messageData?.data != ""
                             ? messageData.data.replace(/\n/g, "<br>")
