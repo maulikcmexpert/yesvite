@@ -27,6 +27,78 @@ $(document).on('click','.edit_design_tem',function(e){
     $("#exampleModal").modal("hide");
     $('.edit_design_template').show();
 
+    function loadTextDataFromDatabase() {
+      
+        if (image) {
+            console.log(data);
+
+            // Load background image
+            fabric.Image.fromURL(image, function (img) {
+                img.set({
+                    left: 0,
+                    top: 0,
+                    selectable: false,  // Non-draggable background image
+                    hasControls: false  // Disable resizing controls
+                });
+                canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
+
+            });
+
+            // Load static information (text elements)
+            if (dbJson) {
+                hideStaticTextElements();  // Hide static text elements if static information is present
+                const staticInfo = dbJson;
+                console.log(staticInfo);
+
+                // Render text elements on canvas
+                staticInfo.textElements.forEach(element => {
+                    let textElement = new fabric.Textbox(element.text, {  // Use Textbox for editable text
+                        left: element.left,
+                        top: element.top,
+                        width: element.width || 200,  // Default width if not provided
+                        fontSize: element.fontSize,
+                        fill: element.fill,
+                        fontFamily: element.fontFamily,
+                        fontWeight: element.fontWeight,
+                        fontStyle: element.fontStyle,
+                        underline: element.underline,
+                        linethrough: element.linethrough,
+                        backgroundColor: element.backgroundColor,
+                        textAlign: element.textAlign,
+                        editable: true,
+                        hasControls: true,
+                        borderColor: 'blue',
+                        cornerColor: 'red',
+                        cornerSize: 6,
+                        transparentCorners: false,
+                        isStatic: true
+                    });
+                    const textWidth = textElement.calcTextWidth();
+                    textElement.set({ width: textWidth });
+
+                    textElement.on('scaling', function () {
+                        // Calculate the updated font size based on scaling factors
+                        var updatedFontSize = textElement.fontSize * (textElement.scaleX + textElement.scaleY) / 2;
+                        textElement.set('fontSize', updatedFontSize); // Update the font size
+                        canvas.renderAll(); // Re-render the canvas to reflect changes
+                    });
+
+                    addIconsToTextbox(textElement);
+                    canvas.add(textElement);
+
+                });
+            } else {
+                showStaticTextElements();
+            }
+
+            // Set custom attribute with the fetched ID
+            var canvasElement = document.getElementById('imageEditor1');
+            canvasElement.setAttribute('data-canvas-id', data.id);
+
+            canvas.renderAll();  // Ensure all elements are rendered
+        }
+}
+
     var canvas = new fabric.Canvas('imageEditor1', {
         width: 500, // Canvas width
         height: 500, // Canvas height
@@ -261,17 +333,7 @@ $(document).on('click','.edit_design_tem',function(e){
         if (file) {
             var reader = new FileReader();
             reader.onload = function (e) {
-                fabric.Image.fromURL(e.target.result, function (img) {
-                    img.set({
-                        left: 0,
-                        top: 0,
-                        selectable: false, // Make the image non-draggable
-                        hasControls: false // Disable resizing controls for the image
-                    });
-                    canvas.setBackgroundImage(img);
-                    canvas.renderAll();
-                    console.log(`Image width: ${img.width}, Image height: ${img.height}`);
-                });
+                
             };
             reader.readAsDataURL(file);
         }
@@ -279,84 +341,7 @@ $(document).on('click','.edit_design_tem',function(e){
 
 
 
-    function loadTextDataFromDatabase() {
-        let urlParams = new URLSearchParams(window.location.search);
-        let id = urlParams.get('id');
-
-        fetch(`/loadTextData/${id}`)  // API endpoint to load data from your database
-            .then(response => response.json())
-            .then(data => {
-                if (data) {
-                    console.log(data);
-
-                    // Load background image
-                    fabric.Image.fromURL(data.imagePath, function (img) {
-                        img.set({
-                            left: 0,
-                            top: 0,
-                            selectable: false,  // Non-draggable background image
-                            hasControls: false  // Disable resizing controls
-                        });
-                        canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
-
-                    });
-
-                    // Load static information (text elements)
-                    if (data.static_information) {
-                        hideStaticTextElements();  // Hide static text elements if static information is present
-                        const staticInfo = JSON.parse(data.static_information);
-                        console.log(staticInfo);
-
-                        // Render text elements on canvas
-                        staticInfo.textElements.forEach(element => {
-                            let textElement = new fabric.Textbox(element.text, {  // Use Textbox for editable text
-                                left: element.left,
-                                top: element.top,
-                                width: element.width || 200,  // Default width if not provided
-                                fontSize: element.fontSize,
-                                fill: element.fill,
-                                fontFamily: element.fontFamily,
-                                fontWeight: element.fontWeight,
-                                fontStyle: element.fontStyle,
-                                underline: element.underline,
-                                linethrough: element.linethrough,
-                                backgroundColor: element.backgroundColor,
-                                textAlign: element.textAlign,
-                                editable: true,
-                                hasControls: true,
-                                borderColor: 'blue',
-                                cornerColor: 'red',
-                                cornerSize: 6,
-                                transparentCorners: false,
-                                isStatic: true
-                            });
-                            const textWidth = textElement.calcTextWidth();
-                            textElement.set({ width: textWidth });
-
-                            textElement.on('scaling', function () {
-                                // Calculate the updated font size based on scaling factors
-                                var updatedFontSize = textElement.fontSize * (textElement.scaleX + textElement.scaleY) / 2;
-                                textElement.set('fontSize', updatedFontSize); // Update the font size
-                                canvas.renderAll(); // Re-render the canvas to reflect changes
-                            });
-
-                            addIconsToTextbox(textElement);
-                            canvas.add(textElement);
-
-                        });
-                    } else {
-                        showStaticTextElements();
-                    }
-
-                    // Set custom attribute with the fetched ID
-                    var canvasElement = document.getElementById('imageEditor1');
-                    canvasElement.setAttribute('data-canvas-id', data.id);
-
-                    canvas.renderAll();  // Ensure all elements are rendered
-                }
-            })
-            .catch(error => console.error('Error loading text data:', error));
-    }
+    
 
     // Call function to load data when the page loads
     loadTextDataFromDatabase();
