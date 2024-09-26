@@ -436,7 +436,7 @@
             </div>
             @endif
             <div class="modal-body">
-                <div class="modal-choose-design-wrp" id="download_image">
+                <div class="modal-choose-design-wrp" id="download_images">
                     <div class="modal-design-card">
                         {{-- <div class="birthday-card-main" id="photo">
                             <svg class="blue-bg" preserveAspectRatio="none" viewBox="0 0 460 409" fill="none"
