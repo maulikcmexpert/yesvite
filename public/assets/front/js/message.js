@@ -981,6 +981,7 @@ $(document).on("click", ".mute-conversation", function () {
         .text(change == "1" ? "Unmute" : "Mute");
     $(this).attr("changeWith", change == "1" ? "0" : "1");
 });
+
 $(document).on("click", ".block-conversation", async function () {
     const userId = $(this).attr("user");
     const blocked = $(this).attr("blocked") === "true"; // Convert string to boolean
@@ -1041,7 +1042,8 @@ $(document).on("click", ".archive-conversation", function () {
         $(".conversation-" + conversationId).addClass("unarchived-list");
         $(".conversation-" + conversationId).removeClass("archived-list");
     }
-    // $("#archive-list").click();
+    let msgLists = $(".unarchived-list");
+    msgLists[0].click();
 });
 
 // Initial chat update
