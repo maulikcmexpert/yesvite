@@ -410,6 +410,7 @@ async function handleNewConversation(snapshot) {
             badgeElement.removeClass("d-none");
             badgeElement.show();
             moveToTopOrBelowPinned(conversationElement);
+            console.log("here");
         }
     } else {
         if (WaitNewConversation == newConversation.conversationId) {
@@ -819,6 +820,7 @@ $(".pin-conversation").click(function () {
     $(this).attr("changeWith", pinChange == "1" ? "0" : "1");
     if (pinChange == "1") {
         const conversationElement = $(`.conversation-${conversationId}`);
+        console.log("here");
 
         moveToTopOrBelowPinned(conversationElement);
         $(".conversation-" + conversationId).addClass("pinned");
@@ -1311,6 +1313,8 @@ $(".send-message").on("keypress", async function (e) {
         const conversationElement = $(`.conversation-${conversationId}`);
 
         moveToTopOrBelowPinned(conversationElement);
+        console.log("here");
+
         closeMedia();
         loader.hide();
     }
