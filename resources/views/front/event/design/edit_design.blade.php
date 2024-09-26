@@ -228,7 +228,7 @@
                 </span>
                 <h5 class="ms-2">Choose Design</h5>
             </a>
-            <a href="#" class="d-flex">
+            <a href="#" class="d-flex next_guest_step">
                 <h5 class="me-2">Next: Guests</h5>
                 <span><svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
