@@ -4429,10 +4429,20 @@ class ApiControllerv2 extends Controller
                 $updateEvent->subscription_plan_name = (!empty($eventData['subscription_plan_name'])) ? $eventData['subscription_plan_name'] : "";
                 // $updateEvent->subscription_invite_count = (!empty($eventData['subscription_invite_count'])) ? $eventData['subscription_invite_count'] : 0;
                 // dd($eventData['static_information']);
-                $updateEvent->static_information = (isset($eventData['static_information']) && $eventData['static_information'] != '') ? $eventData['static_information'] : null;
-                $updateEvent->design_image = (!empty($eventData['design_image'])) ? $eventData['design_image'] : "";
-                $updateEvent->design_inner_image = (!empty($eventData['design_inner_image'])) ? $eventData['design_inner_image'] : "";
+                // $updateEvent->static_information = (isset($eventData['static_information']) && $eventData['static_information'] != '') ? $eventData['static_information'] : null;
+                // $updateEvent->design_image = (!empty($eventData['design_image'])) ? $eventData['design_image'] : "";
+                // $updateEvent->design_inner_image = (!empty($eventData['design_inner_image'])) ? $eventData['design_inner_image'] : "";
 
+                if (isset($eventData['static_information']) && $eventData['static_information'] != '') {
+                    $updateEvent->static_information = $eventData['static_information'];
+                }
+
+                if (!empty($eventData['design_image'])) {
+                    $updateEvent->design_image = $eventData['design_image'];
+                }
+                if (!empty($eventData['design_inner_image'])) {
+                    $updateEvent->design_inner_image = $eventData['design_inner_image'];
+                }
                 if ($updateEvent->save()) {
                     if ($eventData['is_draft_save'] == '1') {
                         EventInvitedUser::where(['event_id' => $eventData['event_id']])->delete();
@@ -5449,19 +5459,22 @@ class ApiControllerv2 extends Controller
                 }
             }
 
+            // dd($request);
+            $i = 0;
             if (isset($request->design_image) && !empty($request->design_image)) {
                 $designImage = $request->design_image;
-                $DesignImageName = time() . '_' . str_replace(' ', '_', $designImage->getClientOriginalName());
+                $DesignImageName = time() . $i . '_' . str_replace(' ', '_', $designImage->getClientOriginalName());
                 $designImage->move(public_path('storage/canvas'), $DesignImageName);
                 $eventDesingImage = Event::where('id',  $request->event_id)->first();
                 $eventDesingImage->design_image = $DesignImageName;
                 $eventDesingImage->save();
+                $i++;
             }
 
             if (isset($request->design_inner_image) && !empty($request->design_inner_image)) {
-                $designInnerImage = $request->design_image;
-                $DesignInnerImageName = time() . '_' . str_replace(' ', '_', $designInnerImage->getClientOriginalName());
-                $designImage->move(public_path('storage/canvas'), $DesignInnerImageName);
+                $designInnerImage = $request->design_inner_image;
+                $DesignInnerImageName = time() . $i . '_' . str_replace(' ', '_design_inner', $designInnerImage->getClientOriginalName());
+                $designInnerImage->move(public_path('storage/canvas'), $DesignInnerImageName);
                 $eventDesingInnerImage = Event::where('id',  $request->event_id)->first();
                 $eventDesingInnerImage->design_inner_image = $DesignInnerImageName;
                 $eventDesingInnerImage->save();
@@ -5494,7 +5507,6 @@ class ApiControllerv2 extends Controller
             DB::rollBack();
             return response()->json(['status' => 0, 'message' => "db error"]);
         } catch (\Exception $e) {
-            // dd($e);
             // return response()->json(['status' => 1, 'message' => "Event images stored successfully"]);
             return response()->json(['status' => 0, 'message' => "something went wrong"]);
         }
@@ -6591,9 +6603,10 @@ class ApiControllerv2 extends Controller
 
         try {
             $eventDetail = Event::with(['user', 'event_image', 'event_schedule', 'event_settings', 'event_invited_user' => function ($query) {
-
                 $query->where('is_co_host', '1')->with('user');
             }])->where('id', $input['event_id'])->first();
+
+
             $guestView = [];
             $eventDetails['id'] = $eventDetail->id;
             $eventDetails['event_images'] = [];
@@ -6734,6 +6747,14 @@ class ApiControllerv2 extends Controller
                 if ($eventDetail->event_settings->gift_registry == '1') {
                     $eventData[] = "Gift Registry";
                 }
+                if ($eventDetail->event_settings->events_schedule == '1') {
+                    $eventData[] = "Event has Schedule";
+                }
+
+                if ($multidate == 1) {
+                    $eventData[] = "Multiple Day Event";
+                }
+
                 if (empty($eventData)) {
                     $eventData[] = date('F d, Y', strtotime($eventDetail->start_date));
                     $numberOfGuest = EventInvitedUser::where('event_id', $eventDetail->id)->count();
@@ -6894,6 +6915,25 @@ class ApiControllerv2 extends Controller
             }])->withCount(['event_invited_user' => function ($query) {
                 $query->where('rsvp_status', '1');
             }])->where('id', $input['event_id'])->first();
+
+
+            $event_dates = $eventDetail->start_date;
+            $dateRange = explode(' to ', $event_dates);
+
+            // $date1 = $dateRange[0];
+            // $date2 = $dateRange[1];
+
+            // dd($dateRange[0]);
+            // $timestamp1 = strtotime($date1);
+            // $timestamp2 = strtotime($date2);
+
+            // $multidate = "";
+            // if ($timestamp1 == $timestamp2) {
+            //     $multidate = 0;
+            // } else {
+            //     $multidate = 1;
+            // }
+
 
             $guestView = [];
             $eventDetails['id'] = $eventDetail->id;
@@ -7099,6 +7139,12 @@ class ApiControllerv2 extends Controller
                 if ($eventDetail->event_settings->gift_registry == '1') {
                     $eventData[] = "Gift Registry";
                 }
+                if ($eventDetail->event_settings->events_schedule == '1') {
+                    $eventData[] = "Event has Schedule";
+                }
+                // if ($multidate == 1) {
+                //     $eventData[] = "Multiple Day Event";
+                // }
                 if (empty($eventData)) {
                     $eventData[] = date('F d, Y', strtotime($eventDetail->start_date));
                     $numberOfGuest = EventInvitedUser::where('event_id', $eventDetail->id)->count();

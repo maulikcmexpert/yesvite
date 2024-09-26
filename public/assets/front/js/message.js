@@ -410,6 +410,7 @@ async function handleNewConversation(snapshot) {
             badgeElement.removeClass("d-none");
             badgeElement.show();
             moveToTopOrBelowPinned(conversationElement);
+            console.log("here");
         }
     } else {
         if (WaitNewConversation == newConversation.conversationId) {
@@ -448,7 +449,7 @@ async function handleNewConversation(snapshot) {
 function moveToTopOrBelowPinned(element) {
     const $chatList = $(".chat-list");
     const $pinnedElements = $chatList.find(".pinned");
-
+    console.log("dassd");
     if ($pinnedElements.length > 0) {
         // Insert after the last pinned element
         $pinnedElements.last().after(element);
@@ -468,6 +469,7 @@ function removeSelectedMsg() {
 // Function to handle changes to existing conversations in the overview
 function handleConversationChange(snapshot) {
     const updatedConversation = snapshot.val();
+    console.log(1234);
 
     handleNewConversation(snapshot);
 }
@@ -644,7 +646,7 @@ async function updateChatfromGroup(conversationId) {
     const groupInfoRef = ref(database, `Groups/${conversationId}/groupInfo`);
     const snapshot = await get(groupInfoRef);
     const groupInfo = snapshot.val();
-    groupInfo.profiles.map((profile) => {
+    groupInfo?.profiles?.map((profile) => {
         if (profile.id > 0) {
             SelecteGroupUser[profile.id] = {
                 id: profile.id,
@@ -819,6 +821,7 @@ $(".pin-conversation").click(function () {
     $(this).attr("changeWith", pinChange == "1" ? "0" : "1");
     if (pinChange == "1") {
         const conversationElement = $(`.conversation-${conversationId}`);
+        console.log("here");
 
         moveToTopOrBelowPinned(conversationElement);
         $(".conversation-" + conversationId).addClass("pinned");
@@ -1311,6 +1314,8 @@ $(".send-message").on("keypress", async function (e) {
         const conversationElement = $(`.conversation-${conversationId}`);
 
         moveToTopOrBelowPinned(conversationElement);
+        console.log("here");
+
         closeMedia();
         loader.hide();
     }
@@ -1948,11 +1953,36 @@ async function handleSelectedUsers() {
         $(".empty-massage").show();
     }
 }
+function handleRemoveConversation(snapshot) {
+    const newConversation = snapshot.val();
+
+    // console.log("New conversation added:", newConversation);
+    if (newConversation.conversationId == undefined) {
+        console.warn("undefined");
+        return;
+    }
+
+    const conversationElement = document.getElementsByClassName(
+        `conversation-${newConversation.conversationId}`
+    );
+    $(conversationElement).remove();
+    const selectedConversationId = $(".selected_conversasion").val();
+
+    if (selectedConversationId === newConversation.conversationId) {
+        handleDelete();
+    }
+}
+
+$(document).on("click", ".usr-list-more", function (e) {
+    e.stopPropagation();
+    console.log("clicked");
+    return;
+});
 // Initialize overview listeners
 const overviewRef = ref(database, `overview/${senderUser}`);
 onChildAdded(overviewRef, handleNewConversation);
 onChildChanged(overviewRef, handleConversationChange);
-
+onChildRemoved(overviewRef, handleRemoveConversation);
 async function generateConversationId(userIds) {
     const sortedUserIds = userIds.slice().sort();
     const concatenatedIds = sortedUserIds.join("");
@@ -3154,7 +3184,7 @@ async function updateUnreadMessageBadge(conversationId = null) {
 
 // Call the function on page load
 $(document).ready(function () {
-    updateUnreadMdyessageBadge();
+    updateUnreadMessageBadge();
 });
 $(document).on("click", ".bulk-check .form-check-input", function (event) {
     event.stopPropagation(); // Prevent the event from bubbling up to .msg-list
@@ -3174,6 +3204,7 @@ $(".bulk-edit").click(function () {
     $(bulkcheck).removeClass("d-none");
     $(".chat-functions").removeClass("d-none");
     $(".bulk-edit-option").hide();
+    $(".chat-header-searchbar").hide();
 });
 $(".bulk-back").click(function () {
     var bulkcheck = document.getElementsByClassName("bulk-check");
@@ -3181,6 +3212,8 @@ $(".bulk-back").click(function () {
     $(".chat-functions").addClass("d-none");
     $(".bulk-edit-option").show();
     $(".check-counter").text("");
+    $(".chat-header-searchbar").show();
+
     $("input[name='checked_conversation[]']").prop("checked", false);
 });
 
@@ -3205,6 +3238,9 @@ $(".multi-pin").click(async function () {
     )
         .toArray()
         .reverse();
+    if (checkedConversations.length <= 0) {
+        return;
+    }
     const promises = [];
     checkedConversations.forEach(function (element) {
         const conversationId = $(element).val();
@@ -3247,13 +3283,15 @@ $(".multi-pin").click(async function () {
 });
 
 $(".multi-mute").click(function () {
-    const change = $(this).attr("changeWith");
-    $(this).attr("changeWith", change == "1" ? "0" : "1");
-
     const checkedConversations = $(
         "input[name='checked_conversation[]']:checked"
     );
     const promises = [];
+    if (checkedConversations.length <= 0) {
+        return;
+    }
+    const change = $(this).attr("changeWith");
+    $(this).attr("changeWith", change == "1" ? "0" : "1");
 
     checkedConversations.each(function () {
         const conversationId = $(this).val();
@@ -3318,7 +3356,9 @@ $(".multi-read").click(function () {
     const checkedConversations = $(
         "input[name='checked_conversation[]']:checked"
     );
-
+    if (checkedConversations.length <= 0) {
+        return;
+    }
     checkedConversations.each(function () {
         const conversationId = $(this).val();
         const overviewRef = ref(
@@ -3349,7 +3389,9 @@ $(".multi-delete").click(async function () {
     const checkedConversations = $(
         "input[name='checked_conversation[]']:checked"
     );
-
+    if (checkedConversations.length <= 0) {
+        return;
+    }
     if (checkedConversations.length === 0) {
         alert("No conversations selected for deletion.");
         return;
@@ -3444,6 +3486,9 @@ async function deleteConversation(conversationId, isGroup) {
         }
     }
 
+    handleDelete();
+}
+function handleDelete() {
     var msgLists = $(".msg-list");
     if (msgLists.length > 0) {
         msgLists.first().click(); // Simulate a click event on the first msg-list element
