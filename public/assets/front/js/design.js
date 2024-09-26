@@ -3,7 +3,7 @@ $(document).on("click", ".design-card", function () {
     var template = $(this).data("template");
     $(".modal-design-card").empty();
     var imageUrl = $(this).data("image");
-    
+    console.log(imageUrl);
     // Set the image URL in the modal's image tag
     $("#modalImage").attr("src", imageUrl);
     $("#exampleModal").modal("show");
