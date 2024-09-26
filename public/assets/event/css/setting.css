@@ -874,11 +874,11 @@
 }
 
 .footer-bottom-btn h5 {
-    color: var(--lightColor) !important;
+    color: #CBD5E1 !important;
 }
 
 .footer-bottom-btn svg path {
-    stroke: var(--lightColor) !important;
+    stroke: #CBD5E1 !important;
 }
 
 .add-item-under-text {
@@ -924,7 +924,7 @@
     border-radius: 50% !important;
 }
 
-.potlak-edit-wrp .fa-ellipsis-vertical{
+.potlak-edit-wrp .fa-ellipsis-vertical {
     color: var(--secondryColor);
     margin-left: 16px;
     line-height: normal;
@@ -933,7 +933,7 @@
     cursor: pointer;
 }
 
-.potlak-edit-dropdown ul{
+.potlak-edit-dropdown ul {
     padding: 0;
     margin: 0;
     display: flex;
@@ -941,7 +941,7 @@
     gap: 20px;
 }
 
-.potlak-edit-dropdown ul li{
+.potlak-edit-dropdown ul li {
     font-size: 14px;
     line-height: normal;
     text-transform: capitalize;
@@ -956,12 +956,13 @@
     padding: 20px !important;
     border-radius: 16px !important;
     box-shadow: 0px 5px 40px 0px #0000001A !important;
-    background-color: #fff !important; 
+    background-color: #fff !important;
     /* position: absolute; */
     top: 0px !important;
     right: 0px !important;
 }
-.potlak-edit-wrp{
+
+.potlak-edit-wrp {
     position: relative;
     z-index: 2;
 }
