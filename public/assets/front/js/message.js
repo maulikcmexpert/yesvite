@@ -3566,6 +3566,17 @@ $(".multi-mute").click(function () {
     $(this).attr("changeWith", change == "1" ? "0" : "1");
 
     checkedConversations.each(function () {
+        $(".conversation-" + conversationId)
+            .find(".chat-data")
+            .find(".mute-single-conversation")
+            .find("span")
+            .text(change == "1" ? "Unmute" : "Mute");
+
+        $(".conversation-" + conversationId)
+            .find(".chat-data")
+            .find(".mute-single-conversation")
+            .attr("changeWith", change == "1" ? "0" : "1");
+
         const conversationId = $(this).val();
         const overviewRef = ref(
             database,
