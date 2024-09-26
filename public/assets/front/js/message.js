@@ -1118,6 +1118,7 @@ $(".send-message").on("keypress", async function (e) {
             return;
         }
         $(this).val(""); // Clear the input field
+        $(this).style("height", "auto");
         const messageData = {
             data: message,
             url: downloadURL,
