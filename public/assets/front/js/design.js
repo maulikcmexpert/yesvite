@@ -56,7 +56,8 @@ $(document).on('click','.edit_design_tem',function(e){
                 // Render text elements on canvas
                 staticInfo.textElements.forEach(element => {
                     console.log(element);
-                    let textElement = new fabric.Textbox(element.text, {  // Use Textbox for editable text
+                    let textElement = new fabric.Textbox(
+                        element.text, {  // Use Textbox for editable text
                         left: element.left,
                         top: element.top,
                         width: element.width || 200,  // Default width if not provided
@@ -77,7 +78,74 @@ $(document).on('click','.edit_design_tem',function(e){
                         transparentCorners: false,
                         isStatic: true
                     });
-                    console.log(textElement);
+                    switch (element.text) {
+                        case 'event_name':
+                            if (eventData.event_name) {
+                                textElement.set({ text: eventData.event_name });
+                            } else {
+                                return;  // Skip adding the element if event_name is empty
+                            }
+                            break;
+                        case 'host_name':
+                            if (eventData.hosted_by) {
+                                textElement.set({ text: eventData.hosted_by });
+                            } else {
+                                return;  // Skip adding the element if host_name is empty
+                            }
+                            break;
+                        case 'Location':
+                            if (eventData.event_location) {
+                                textElement.set({ text: eventData.event_location });
+                            } else {
+                                return;  // Skip adding the element if event_location_name is empty
+                            }
+                            break;
+                        case 'start_time':
+                            if (eventData.start_time) {
+                                textElement.set({ text: eventData.start_time });
+                            } else {
+                                return;  // Skip adding the element if start_time is empty
+                            }
+                            break;
+                        case 'rsvp_end_time':
+                            if (eventData.rsvp_end_time) {
+                                textElement.set({ text: eventData.rsvp_end_time });
+                            } else {
+                                return;  // Skip adding the element if rsvp_end_time is empty
+                            }
+                            break;
+                        case 'start_date':
+                            if (eventData.event_date) {
+                                var start_date = '';
+                                if (eventData.event_date.includes(" To ")) {
+                                    let [start, end] = eventData.event_date.split(" To ");
+                                    start_date = start;
+                                } else {
+                                    start_date = eventData.event_date;
+                                }
+
+                                textElement.set({ text: start_date });
+                            } else {
+                                return;  // Skip adding the element if start_date is empty
+                            }
+                            break;
+                        case 'end_date':
+                            if (eventData.event_date) {
+
+                                var end_date = '';
+                                if (eventData.event_date.includes(" To ")) {
+                                    let [start, end] = eventData.event_date.split(" To ");
+                                    end_date = end;
+                                } else {
+                                    end_date = eventData.event_date;
+                                }
+
+                                textElement.set({ text: end_date });
+                            } else {
+                                return;  // Skip adding the element if end_date is empty
+                            }
+                            break;
+                    }
                     const textWidth = textElement.calcTextWidth();
                     textElement.set({ width: textWidth });
 
