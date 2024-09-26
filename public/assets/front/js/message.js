@@ -3168,7 +3168,7 @@ function displayFiles(files, name) {
                     previewElementnew.textContent = `File selected: ${file.name}`;
                     previewItem.appendChild(previewElementnew);
                     previewElement.style.display = "none";
-                    previewElement.style.height = "auto";
+                    previewItem.style.height = "auto";
                 }
                 var closeButton = document.createElement("button");
                 closeButton.innerHTML = closeSpan;
