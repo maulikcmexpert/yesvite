@@ -458,11 +458,13 @@ function moveToTopOrBelowPinned(element) {
         // Otherwise, find the last pinned element and place this element after it
         let $listItems = $chatList.children("li").not(".pinned");
         let elementPosition = parseInt(element.attr("data-position"));
+        console.log({ elementPosition });
 
         // Find the correct spot based on `data-position`
         let inserted = false;
         $listItems.each(function () {
             let listItemPosition = parseInt($(this).attr("data-position"));
+            console.log(listItemPosition);
             if (listItemPosition > elementPosition) {
                 $(this).before(element); // Insert the element in the correct position
                 inserted = true;
