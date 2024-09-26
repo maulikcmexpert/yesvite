@@ -1075,9 +1075,13 @@ $(document).on("click", ".archive-conversation", function () {
         $(".conversation-" + conversationId).addClass("unarchived-list");
         $(".conversation-" + conversationId).removeClass("archived-list");
     }
-    let msgLists = $(".unarchived-list");
-    msgLists[0].click();
     $(".archived-list").hide();
+
+    var unarchivelist = document.getElementsByClassName("unarchived-list");
+    console.log(unarchivelist);
+
+    let msgLists = $(unarchivelist);
+    msgLists[0].click();
 });
 
 $(document).on("click", ".archive-single-conversation", function () {
@@ -1099,9 +1103,12 @@ $(document).on("click", ".archive-single-conversation", function () {
         $(".conversation-" + conversationId).addClass("unarchived-list");
         $(".conversation-" + conversationId).removeClass("archived-list");
     }
-    let msgLists = $(".unarchived-list");
-    msgLists[0].click();
     $(".archived-list").hide();
+
+    var unarchivelist = document.getElementsByClassName("unarchived-list");
+    console.log(unarchivelist);
+    let msgLists = $(unarchivelist);
+    msgLists[0].click();
 });
 
 // Initial chat update
