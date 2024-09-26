@@ -50,7 +50,13 @@
 
     <link rel="stylesheet" href="{{ asset('assets/event/css/variable.css') }}">
 
+    <link rel="stylesheet" href="{{ asset('assets/event/css/edit-design.css') }}">
+
+    {{-- <link rel="stylesheet" href="{{ asset('assets/css/event/style1.css') }}"> --}}
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+
 
     @isset($css)
     <link rel="stylesheet" href="{{asset('assets')}}/front/css/{{$css}}" />
@@ -58,6 +64,11 @@
     @isset($css1)
     <link rel="stylesheet" href="{{asset('assets')}}/front/css/{{$css1}}" />
     @endisset
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.5.0/fabric.min.js"></script>
+    <script src="https://cdn.rawgit.com/naptha/tesseract.js/1.0.10/dist/tesseract.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html-to-image/1.11.11/html-to-image.min.js"></script>
+
     <x-front.header title={{$title}} page="" />
 </head>
 
