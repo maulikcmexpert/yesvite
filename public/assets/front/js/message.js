@@ -3593,7 +3593,8 @@ $(".multi-mute").click(function () {
     toastr.success("Selected conversations have been updated.");
 });
 
-$(".multi-archive").click(function () {
+$(".multi-archive").click(function (e) {
+    e.stopPropagation();
     const change = $(this).attr("changeWith");
     $(this).attr("changeWith", change == "1" ? "0" : "1");
 
@@ -3611,6 +3612,17 @@ $(".multi-archive").click(function () {
             database,
             `overview/${senderUser}/${conversationId}/isArchive`
         );
+
+        $(".conversation-" + conversationId)
+            .find(".chat-data")
+            .find(".archive-single1-conversation")
+            .find("span")
+            .text(change == "1" ? "Unarchive" : "Archive");
+
+        $(".conversation-" + conversationId)
+            .find(".chat-data")
+            .find(".archive-single1-conversation")
+            .attr("changeWith", change == "1" ? "0" : "1");
 
         if (change == "1") {
             $(".conversation-" + conversationId).addClass("archived-list");
@@ -3631,6 +3643,8 @@ $(".multi-archive").click(function () {
                     : "Unarchived successfully"
             );
             console.log("from click");
+
+            $(".archived-list").hide();
 
             // $("#archive-list").attr("list", "1").click();
             var unarchivelist =
