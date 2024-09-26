@@ -974,10 +974,11 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
                     $(".inivted_user_list").append(response.view);
                     var length = responsive_invite_user();
                     if(length < 4){
+                        $('.all_user_list').hide();
                         $(".user-list-responsive").append(response.responsive_view);
                     }else{
-                        var counter = length - 4;
-                        console.log(length);
+                        var counter = $(".users-data.invited_user").length - 4;
+                        console.log(counter);
                         
                         var all_user_list_length = $('.all_user_list').length;
                         if(all_user_list_length < 1){
