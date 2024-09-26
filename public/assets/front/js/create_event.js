@@ -4559,6 +4559,7 @@ $(document).on("click", ".invite_group_member", function () {
                 }
             });        
             $(".inivted_user_list").append(response.view);
+            $(".user-list-responsive").append(response.responsive_view);
             // $(".inivted_user_list").html('');
                 guest_counter(0,15);
 
