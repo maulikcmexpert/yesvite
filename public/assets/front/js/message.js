@@ -1099,8 +1099,8 @@ $(".send-message").on("keypress", async function (e) {
             // Determine file type and set the storage path
             let storagePath;
             if (imageUrl.startsWith("data:image/")) {
-                storagePath = `Images/${senderUser}/${Date.now()}_${senderUser}-img.png`;
-                fileName = `${Date.now()}_${senderUser}-img.png`;
+                storagePath = `Images/${senderUser}/${Date.now()}_${senderUser}-img.${file_info}`;
+                fileName = `${Date.now()}_${senderUser}-img.${file_info}`;
                 type = "1";
                 imagePath = storagePath;
             } else if (
