@@ -448,21 +448,25 @@ async function handleNewConversation(snapshot) {
 }
 
 function moveToTopOrBelowPinned(element) {
-    let chats = document.getElementsByClassName("chat-list");
-    const $chatList = $(chats);
-    const ele = element.hasClass("pinned");
-    if (ele.length > 0) {
-        $chatList.prepend(element);
-    }
+    let $chatList = $(".chat-list"); // Get the chat list container
+    let isPinned = element.hasClass("pinned"); // Check if the element is pinned
 
-    const $pinnedElements = $chatList.find(".pinned");
-    if ($pinnedElements.length > 0) {
-        $pinnedElements.last().after(element);
-    } else {
+    if (isPinned) {
+        // If the element is pinned, move it to the top of the chat list
         $chatList.prepend(element);
+    } else {
+        // Otherwise, find the last pinned element and place this element after it
+        let $lastPinned = $chatList.find(".pinned").last();
+
+        if ($lastPinned.length > 0) {
+            // If there are pinned elements, place this element after the last pinned one
+            $lastPinned.after(element);
+        } else {
+            // If there are no pinned elements, prepend this element to the top
+            $chatList.prepend(element);
+        }
     }
 }
-
 function removeSelectedMsg() {
     var msgLists = document.getElementsByClassName("msg-list");
     for (var i = 0; i < msgLists.length; i++) {
