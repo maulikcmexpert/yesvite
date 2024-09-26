@@ -1104,7 +1104,8 @@ $(document).on("click", ".archive-conversation", function () {
     msgLists[0].click();
 });
 
-$(document).on("click", ".archive-single1-conversation", function () {
+$(document).on("click", ".archive-single1-conversation", function (e) {
+    e.stopPropagation();
     const change = $(this).attr("changeWith");
     let conversationId = $(this).data("conversation");
     const overviewRef = ref(
