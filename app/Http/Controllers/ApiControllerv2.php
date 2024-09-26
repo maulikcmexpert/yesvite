@@ -6917,8 +6917,10 @@ class ApiControllerv2 extends Controller
             $event_dates = $eventDetail->start_date;
             $dateRange = explode(' to ', $event_dates);
 
-            // $date1 = trim($dateRange[0]);
-            // $date2 = trim($dateRange[1]);
+            $date1 = $dateRange[0];
+            $date2 = $dateRange[1];
+
+            dd($date1);
             // $timestamp1 = strtotime($date1);
             // $timestamp2 = strtotime($date2);
 
