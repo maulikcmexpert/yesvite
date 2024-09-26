@@ -1109,7 +1109,6 @@ $(".send-message").on("keypress", async function (e) {
             ) {
                 storagePath = `Video/${senderUser}/${Date.now()}_${senderUser}-video.mp4`;
                 fileName = `${Date.now()}_${senderUser}-video.mp4`;
-
                 type = "2";
             } else if (imageUrl.startsWith("blob:http:/") && audio == "audio") {
                 storagePath = `Audios/${senderUser}/${Date.now()}_${senderUser}-audio.wav`;
