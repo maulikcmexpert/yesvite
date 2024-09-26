@@ -1226,59 +1226,63 @@ function setPotluckActivekey(key, name) {
 $(document).on("click", ".add_category_btn", function () {
     var categoryName = $("#categoryName").val();
     var categoryQuantity = $("#category_quantity").val();
-    console.log(categoryName);
-    console.log(categoryQuantity);
-    console.log($('#hidden_potluck_key').val());
+    var edit_category_id = $('#hidden_potluck_key').val();
+    
 
-    // if (categoryName == "") {
-    //     $("#categoryNameError")
-    //         .css("display", "block")
-    //         .css("color", "red")
-    //         .text("Please enter category name");
-    //     return;
-    // }
-    // if (categoryQuantity == "" || categoryQuantity < 1) {
-    //     $("#category_quantity_error")
-    //         .css("display", "block")
-    //         .css("color", "red")
-    //         .text("Please select quantity");
-    //     return;
-    // }
-    // // console.log(categoryQuantity);
-
-    // potluckkey++;
-    // potluck[potluckkey] = categoryName;
-    // $.ajax({
-    //     url: base_url + "event/category_session",
-    //     method: "POST",
-    //     data: {
-    //         category_name: categoryName,
-    //         potluckkey: potluckkey,
-    //         categoryQuantity: categoryQuantity,
-    //         _token: $('meta[name="csrf-token"]').attr("content"),
-    //     },
-    //     success: function (response) {
-    //         if (response.status == 1) {
-    //             $("#categoryName").val("");
-    //             $("#categoryNameError").text("");
-    //             $("#category_quantity_error").css("display", "none");
-    //             $("#category_quantity").val(1);
-    //             $("#hidden_category_name").val(categoryName);
-    //             $("#hidden_category_quantity").val(categoryQuantity);
-    //             $(".potluck-category").append(response.view);
-    //             toggleSidebar("sidebar_potluck");
-    //             category++;
-    //             $('#category_count').val(category);
-    //             potluck_cateogry_item_count();
-    //         } else {
-    //             potluckkey--;
-    //             toastr.error("category already exist");
-    //         }
-    //     },
-    //     error: function (xhr, status, error) {
-    //         console.error("An error occurred while storing the User ID.");
-    //     },
-    // });
+    if (categoryName == "") {
+        $("#categoryNameError")
+            .css("display", "block")
+            .css("color", "red")
+            .text("Please enter category name");
+        return;
+    }
+    if (categoryQuantity == "" || categoryQuantity < 1) {
+        $("#category_quantity_error")
+            .css("display", "block")
+            .css("color", "red")
+            .text("Please select quantity");
+        return;
+    }
+    // console.log(categoryQuantity);
+    if(edit_category_id == ''){
+        potluckkey++;
+        potluck[potluckkey] = categoryName;
+    }
+    $.ajax({
+        url: base_url + "event/category_session",
+        method: "POST",
+        data: {
+            category_name: categoryName,
+            potluckkey: potluckkey,
+            categoryQuantity: categoryQuantity,
+            edit_category_id : edit_category_id,
+            _token: $('meta[name="csrf-token"]').attr("content"),
+        },
+        success: function (response) {
+            if (response.status == 1) {
+                $('#add_update_category_head').text('Add New Category');
+                $("#categoryName").val("");
+                $("#categoryNameError").text("");
+                $("#category_quantity_error").css("display", "none");
+                $("#category_quantity").val(1);
+                $("#hidden_category_name").val(categoryName);
+                $("#hidden_category_quantity").val(categoryQuantity);
+                if(edit_category_id == ''){
+                    $(".potluck-category").append(response.view);
+                    category++;
+                    $('#category_count').val(category);
+                }
+                toggleSidebar("sidebar_potluck");
+                potluck_cateogry_item_count();
+            } else {
+                potluckkey--;
+                toastr.error("category already exist");
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error("An error occurred while storing the User ID.");
+        },
+    });
     // $(".add_sub_category").show();
     // $(".add_category").css("display", "none");
     // $(this).css("display", "none");
