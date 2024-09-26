@@ -49,11 +49,7 @@ $(document).ready(function () {
         
 });
 
-$(document).on('click','.design-sidebar-action',function(){
-    let designId = $(this).attr('design-id')
-    $(".design-sidebar").addClass('d-none')
-    $(".design-sidebar_"+ designId).removeClass('d-none')
-})
+
 
 
 $(document).on('focus','.inputText',function(){
