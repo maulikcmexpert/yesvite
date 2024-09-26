@@ -30,6 +30,24 @@ $.ajaxSetup({
 });
 import { genrateAudio } from "./chat.js";
 import { musicPlayer, initializeAudioPlayer } from "./audio.js";
+
+document.getElementById("message-box").addEventListener("input", function () {
+    const textarea = this;
+
+    // Reset the height of the textarea
+    textarea.style.height = "auto";
+
+    // Calculate and set the new height based on scrollHeight, but limit to a max height
+    const maxHeight = 100; // Set your max height here (e.g., 4-5 lines)
+    textarea.style.height = Math.min(textarea.scrollHeight, maxHeight) + "px";
+
+    // If the scroll height is greater than the max height, add scrollbar
+    if (textarea.scrollHeight > maxHeight) {
+        textarea.style.overflowY = "scroll"; // Enable vertical scrolling
+    } else {
+        textarea.style.overflowY = "hidden"; // Hide scroll if less than max height
+    }
+});
 function formatDate(timestamp) {
     const now = new Date();
     const date = new Date(timestamp);
