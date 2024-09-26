@@ -870,6 +870,13 @@ $(document).on("click", ".pin-conversation", function () {
 
         $(".unpin-self-icn").show("d-none");
         $(".pin-self-icn").hide("d-none");
+
+        $(".conversation-" + conversationId)
+            .children(".pin1-self-icn")
+            .addClass("d-none");
+        $(".conversation-" + conversationId)
+            .children(".unpin1-self-icn")
+            .removeClass("d-none");
     } else {
         $(".conversation-" + conversationId).removeClass("pinned");
 
@@ -879,6 +886,12 @@ $(document).on("click", ".pin-conversation", function () {
             .addClass("d-none");
         $(".pin-self-icn").show();
         $(".unpin-self-icn").hide();
+        $(".conversation-" + conversationId)
+            .children(".pin1-self-icn")
+            .removeClass("d-none");
+        $(".conversation-" + conversationId)
+            .children(".unpin1-self-icn")
+            .addClass("d-none");
     }
     moveToTopOrBelowPinned($(`.conversation-${conversationId}`));
 });
