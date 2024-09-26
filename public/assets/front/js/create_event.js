@@ -5158,8 +5158,8 @@ $(document).ready(function () {
 
 $(document).on("click", ".edit_category", function () {
     var id = $(this).data("id");
-    var category_name = $(this).data("category_name");
-    var category_quantity = $(this).data("category_quantity");
+    var category_name = $('.category_name-'+id).text();
+    var category_quantity = $('#missing-category-'+id).text();
     console.log(id);
     console.log(category_name);
     console.log(category_quantity);
