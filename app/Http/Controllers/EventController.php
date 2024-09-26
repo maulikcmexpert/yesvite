@@ -702,9 +702,9 @@ class EventController extends Controller
 
         if(isset($edit_category_id) && $edit_category_id != ''){
             $status = '2';
-            $categoryNameCount = collect($categories)->filter(function ($category) use ($categoryName) {
-                return $category['category_name'] === $categoryName;
-            })->count();
+            $categoryNameCount = collect($categories)->reduce(function ($count, $category) use ($categoryName) {
+                return $count + ($category['category_name'] === $categoryName ? 1 : 0);
+            }, 0);
             dd($categoryNameCount);
             $categories[$edit_category_id] = ['category_name' => $categoryName, 'category_quantity' => $categoryQuantity];
         }else{
