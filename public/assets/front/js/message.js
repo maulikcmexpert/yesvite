@@ -3116,7 +3116,6 @@ $(".upload-box").change(function () {
                 $("#preview_file")
                     .html(`<p>File selected: ${file.name}</p>`)
                     .show();
-                $(".preview_img").hide();
             };
             reader.readAsText(file);
         }
