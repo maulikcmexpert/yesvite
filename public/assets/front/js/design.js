@@ -29,7 +29,7 @@ $(document).on('click','.edit_design_tem',function(e){
     $('.edit_design_template').show();
 
     // hideStaticTextElements();  // Hide static text elements if static information is present
-    const staticInfo = JSON.parse(json);
+    const staticInfo = JSON.parse(dbJson);
     console.log(staticInfo);
 
     staticInfo.textElements.forEach(element => {
