@@ -103,6 +103,7 @@ class EventController extends Controller
             ->limit(1)
             ->get();
             $textData = [];
+            $design_category = [];
         // $design_category = EventDesignCategory::with(['subcategory' => function ($query){
         //         $query->select('*');
         //     },'textdatas' => function ($query){
