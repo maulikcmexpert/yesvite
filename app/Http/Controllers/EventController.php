@@ -113,8 +113,6 @@ class EventController extends Controller
             },'category' => function ($query){
                 $query->select('*');
             }])
-            ->where('desgin_category_id','!=',null)
-            ->where('design_subcategory_id','!=',null)
             ->orderBy('id', 'desc')
             ->get();
         dd($textData);
