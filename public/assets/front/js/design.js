@@ -350,8 +350,8 @@ $(document).on('click','.edit_design_tem',function(e){
     loadTextDataFromDatabase();
 
     function hideStaticTextElements() {
+        alert();
         canvas.getObjects('textbox').forEach(function (textbox) {
-            alert();
             if (textbox.isStatic) {
                 textbox.set('visible', false);
                 if (textbox.copyIcon) {
@@ -860,68 +860,6 @@ $(document).on('click','.edit_design_tem',function(e){
             executeCommand(this.getAttribute('data-command'));
         });
     });
-    // document.getElementById('fontFamilySelect').addEventListener('change', function () {
-    //     executeCommand('fontName');
-    // });
-
-
-    // document.getElementById('dateFormatSelect').addEventListener('change', function () {
-    //     // Get the selected date format
-    //     var selectedFormat = this.value;
-
-    //     // Get the active object from the canvas (assuming it's a textbox)
-    //     var activeObject = canvas.getActiveObject();
-    //     if (activeObject && activeObject.type === 'textbox') {
-    //         // Extract the date text from the active object
-    //         var dateText = activeObject.text;
-
-    //         // Optional: You can use regex to identify a date within the text if it's not the whole text
-    //         // Assuming the whole text is the date for simplicity
-    //         var formattedDate = formatDate(dateText, selectedFormat);
-
-    //         // Update the active object's text with the formatted date
-    //         activeObject.set('text', formattedDate);
-    //         activeObject.set('date_formate', selectedFormat);
-    //         canvas.renderAll(); // Re-render the canvas
-    //     }
-    // });
-
-    // function formatDate(dateStr, format) {
-    //     // Parse the existing date (e.g., in YYYY-MM-DD format)
-    //     var dateParts = dateStr.split(/[-\/]/); // Adjust the regex if date separators are different
-
-    //     var year, month, day;
-    //     if (dateParts.length === 3) {
-    //         if (dateParts[0].length === 4) {
-    //             // Assume YYYY-MM-DD format
-    //             year = dateParts[0];
-    //             month = dateParts[1];
-    //             day = dateParts[2];
-    //         } else {
-    //             // Assume DD-MM-YYYY or MM-DD-YYYY
-    //             day = dateParts[0];
-    //             month = dateParts[1];
-    //             year = dateParts[2];
-    //         }
-    //     } else {
-    //         return dateStr; // Return original text if not a valid date
-    //     }
-
-    //     // Reformat date based on the selected format
-    //     switch (format) {
-    //         case 'd-m-Y':
-    //             return `${day}-${month}-${year}`;
-    //         case 'Y-m-d':
-    //             return `${year}-${month}-${day}`;
-    //         case 'm/d/Y':
-    //             return `${month}/${day}/${year}`;
-    //         case 'd/m/Y':
-    //             return `${day}/${month}/${year}`;
-    //         default:
-    //             return dateStr; // Return original if no valid format is found
-    //     }
-    // }
-
 
     // Undo and Redo actions (basic implementation)
     let undoStack = [];
