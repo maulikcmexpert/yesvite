@@ -660,7 +660,7 @@ use Carbon\Carbon;
                                                             <path d="M10.4974 15.6257C8.65573 15.6257 7.16406 14.134 7.16406 12.2923C7.16406 10.4507 8.65573 8.95898 10.4974 8.95898C12.3391 8.95898 13.8307 10.4507 13.8307 12.2923C13.8307 14.134 12.3391 15.6257 10.4974 15.6257ZM10.4974 10.209C9.3474 10.209 8.41406 11.1423 8.41406 12.2923C8.41406 13.4423 9.3474 14.3757 10.4974 14.3757C11.6474 14.3757 12.5807 13.4423 12.5807 12.2923C12.5807 11.1423 11.6474 10.209 10.4974 10.209Z" fill="#64748B" />
                                                         </svg> Camera
                                                     </span>
-                                                    <input type="file" name="upload" id="upload" class="upload-box" placeholder="Upload File" aria-label="Upload File">
+                                                    <input type="file" name="upload-camera" class="upload-box" accept="image/*" capture="camera" aria-label="Upload Camera File">
                                                 </a>
                                             </li>
                                             <li>
@@ -672,7 +672,7 @@ use Carbon\Carbon;
                                                             <path d="M2.724 16.4168C2.524 16.4168 2.324 16.3168 2.20733 16.1418C2.01566 15.8585 2.09066 15.4668 2.38233 15.2751L6.49066 12.5168C7.39066 11.9085 8.63233 11.9835 9.449 12.6751L9.724 12.9168C10.1407 13.2751 10.849 13.2751 11.2573 12.9168L14.724 9.9418C15.6073 9.18346 16.999 9.18346 17.8907 9.9418L19.249 11.1085C19.5073 11.3335 19.5407 11.7251 19.3157 11.9918C19.0907 12.2501 18.699 12.2835 18.4323 12.0585L17.074 10.8918C16.6573 10.5335 15.949 10.5335 15.5323 10.8918L12.0657 13.8668C11.1823 14.6251 9.79066 14.6251 8.899 13.8668L8.624 13.6251C8.24066 13.3001 7.60733 13.2668 7.18233 13.5585L3.074 16.3168C2.96566 16.3835 2.84066 16.4168 2.724 16.4168Z" fill="#64748B" />
                                                         </svg> Gallery
                                                     </span>
-                                                    <input type="file" name="upload" id="upload" class="upload-box" placeholder="Upload File" aria-label="Upload File">
+                                                    <input type="file" name="upload-gallery" class="upload-box" accept="image/*,video/*" aria-label="Upload Gallery File">
                                                 </a>
                                             </li>
                                             <li>
@@ -685,7 +685,7 @@ use Carbon\Carbon;
                                                             <path d="M18.8307 8.95841H15.4974C12.6474 8.95841 11.5391 7.85007 11.5391 5.00007V1.66674C11.5391 1.41674 11.6891 1.18341 11.9224 1.09174C12.1557 0.991739 12.4224 1.05007 12.6057 1.22507L19.2724 7.89174C19.4474 8.06674 19.5057 8.34174 19.4057 8.57507C19.3057 8.8084 19.0807 8.95841 18.8307 8.95841ZM12.7891 3.17507V5.00007C12.7891 7.15007 13.3474 7.70841 15.4974 7.70841H17.3224L12.7891 3.17507Z" fill="#64748B" />
                                                         </svg> File
                                                     </span>
-                                                    <input type="file" name="upload" id="upload" class="upload-box" placeholder="Upload File" aria-label="Upload File">
+                                                    <input type="file" name="upload-file" class="upload-box" accept=".doc,.docx,.pdf,.txt" aria-label="Upload File">
                                                 </a>
                                             </li>
                                         </ul>
