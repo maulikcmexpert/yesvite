@@ -1094,7 +1094,7 @@ $(".send-message").on("keypress", async function (e) {
         let imagePath = "";
         const audio = $("#file_name").text();
         const file_info = $(".file_info").val();
-        console.log(imageUrl);
+
         if (imageUrl) {
             // Determine file type and set the storage path
             let storagePath;
