@@ -448,7 +448,8 @@ async function handleNewConversation(snapshot) {
 }
 
 function moveToTopOrBelowPinned(element) {
-    const $chatList = $(".chat-list");
+    let chats = document.getElementsByClassName("chat-list");
+    const $chatList = $(chats);
     const $pinnedElements = $chatList.find(".pinned");
     console.log(element);
     if ($pinnedElements.length > 0) {
