@@ -795,7 +795,12 @@ async function updateMore(conversationId) {
     );
     const isGroup = $("#isGroup").val();
     if (isGroup == "true" || isGroup == true || isGroup == "1") {
-        $(".block-conversation").hide();
+        $(".block-conversation").each(function () {
+            // Check if the element has more than one class
+            if (!$(this).hasClass("single")) {
+                $(this).hide();
+            }
+        });
     } else {
         $(".block-conversation").show();
     }
@@ -3586,7 +3591,14 @@ $(".multi-archive").click(function () {
             );
             console.log("from click");
 
-            $("#archive-list").attr("list", "1").click();
+            // $("#archive-list").attr("list", "1").click();
+            var unarchivelist =
+                document.getElementsByClassName("unarchived-list");
+            console.log(unarchivelist);
+            let msgLists = $(unarchivelist);
+            if (msgLists.length > 0) {
+                msgLists[0].click(); // Ensure the list exists before clicking
+            }
         })
         .catch((error) => {
             toastr.error("An error occurred while archiving/unarchiving.");
