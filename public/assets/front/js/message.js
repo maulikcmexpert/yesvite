@@ -1044,6 +1044,7 @@ $(document).on("click", ".archive-conversation", function () {
     }
     let msgLists = $(".unarchived-list");
     msgLists[0].click();
+    $(".archived-list").hide();
 });
 
 // Initial chat update
