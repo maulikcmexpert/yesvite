@@ -713,6 +713,8 @@ class EventController extends Controller
             }
             if($i == 0){
                 $categories[$edit_category_id] = ['category_name' => $categoryName, 'category_quantity' => $categoryQuantity];
+                session()->put('category', $categories);
+                Session::save();
                 return response()->json(['status' => $status]);
             }else{
                 return response()->json(['view' => '', 'status' => '0']);
@@ -725,6 +727,7 @@ class EventController extends Controller
             }
             session()->put('category', $categories);
             $status = '1';
+            Session::save();
             return response()->json(['view' => view('front.event.potluck.potluckCategory', ['categoryName' => $categoryName, 'categoryQuantity' => $categoryQuantity, 'potluckkey' => $potluckkey])->render(), 'status' => $status]);
         }
         
