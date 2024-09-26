@@ -351,6 +351,7 @@ $(document).on('click','.edit_design_tem',function(e){
 
     function hideStaticTextElements() {
         canvas.getObjects('textbox').forEach(function (textbox) {
+            alert();
             if (textbox.isStatic) {
                 textbox.set('visible', false);
                 if (textbox.copyIcon) {
