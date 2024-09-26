@@ -3662,7 +3662,7 @@ $(document).on("keyup", "#serach_user_from_list", function () {
     var searchTerm = $(this).val().toLowerCase().trim();
 
     // Iterate through each `li` in the chat list
-    $(".chat-list li").each(function () {
+    $(".msg-list li").each(function () {
         var searchData = $(this).data("search").toLowerCase().trim();
 
         // Check if the search term is contained in the data-search attribute
