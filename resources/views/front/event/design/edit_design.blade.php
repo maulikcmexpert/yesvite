@@ -470,6 +470,21 @@
                 </label>
             </div>
 
+            <div class="used-fonts-wrp common-font-wrp">
+                <div class="form-check">
+                    <input type="radio" name="colorType" value="font" checked class="form-check-input" id="flexRadioDefault1"/> 
+                    <label class="form-check-label" for="flexRadioDefault1">
+                        Font Color
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" name="colorType" value="background" class="form-check-input" id="flexRadioDefault1"/>
+                    <label class="form-check-label" for="flexRadioDefault1">
+                        Background Color
+                    </label>
+                </div>
+            </div>
+
             <!-- Color Picker -->
             <input id="color-picker" type="color" value="#276cb8" />
 
