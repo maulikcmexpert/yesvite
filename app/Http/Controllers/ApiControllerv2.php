@@ -6907,17 +6907,17 @@ class ApiControllerv2 extends Controller
             $event_dates = $eventDetail->start_date;
             $dateRange = explode(' to ', $event_dates);
 
-            $date1 = trim($dateRange[0]);
-            $date2 = trim($dateRange[1]);
-            $timestamp1 = strtotime($date1);
-            $timestamp2 = strtotime($date2);
+            // $date1 = trim($dateRange[0]);
+            // $date2 = trim($dateRange[1]);
+            // $timestamp1 = strtotime($date1);
+            // $timestamp2 = strtotime($date2);
 
-            $multidate = "";
-            if ($timestamp1 == $timestamp2) {
-                $multidate = 0;
-            } else {
-                $multidate = 1;
-            }
+            // $multidate = "";
+            // if ($timestamp1 == $timestamp2) {
+            //     $multidate = 0;
+            // } else {
+            //     $multidate = 1;
+            // }
 
 
             $guestView = [];
