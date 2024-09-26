@@ -5459,7 +5459,7 @@ class ApiControllerv2 extends Controller
                 }
             }
 
-            dd($request);
+            // dd($request);
 
             if (isset($request->design_image) && !empty($request->design_image)) {
                 $designImage = $request->design_image;
