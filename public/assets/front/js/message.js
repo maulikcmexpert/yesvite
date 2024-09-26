@@ -1075,7 +1075,8 @@ $(document).on("click", ".archive-conversation", function () {
         $(".conversation-" + conversationId).addClass("unarchived-list");
         $(".conversation-" + conversationId).removeClass("archived-list");
     }
-    let msgLists = $(".unarchived-list");
+    var unarchivelist = document.getElementsByClassName("unarchived-list");
+    let msgLists = $(unarchivelist);
     msgLists[0].click();
     $(".archived-list").hide();
 });
@@ -1099,7 +1100,8 @@ $(document).on("click", ".archive-single-conversation", function () {
         $(".conversation-" + conversationId).addClass("unarchived-list");
         $(".conversation-" + conversationId).removeClass("archived-list");
     }
-    let msgLists = $(".unarchived-list");
+    var unarchivelist = document.getElementsByClassName("unarchived-list");
+    let msgLists = $(unarchivelist);
     msgLists[0].click();
     $(".archived-list").hide();
 });
