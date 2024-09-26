@@ -47,7 +47,7 @@
                 </button>
             </div>
             <div class="edit-images-button-inner fonts-edit-wrp">
-                <button class="design-sidebar-action" design-id="2" onclick="toggleSidebar('sidebar_font')">
+                <button class="design-sidebar-action" design-id="2" onclick="toggleSidebar('sidebar')">
                     <span>
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -65,7 +65,7 @@
                 </button>
             </div>
             <div class="edit-images-button-inner text-edit-wrp">
-                <button class="design-sidebar-action" design-id="3" onclick="toggleSidebar('sidebar_edit_text')">
+                <button class="design-sidebar-action" design-id="3" onclick="toggleSidebar('sidebar')">
                     <span>
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -90,7 +90,7 @@
                 </button>
             </div>
             <div class="edit-images-button-inner color-edit-wrp">
-                <button class="design-sidebar-action" design-id="4" onclick="toggleSidebar('sidebar_color')">
+                <button class="design-sidebar-action" design-id="4" onclick="toggleSidebar('sidebar')">
                     <span>
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -120,7 +120,7 @@
                 </button>
             </div>
             <div class="edit-images-button-inner format-edit-wrp">
-                <button class="design-sidebar-action" design-id="5" onclick="toggleSidebar('sidebar_format')">
+                <button class="design-sidebar-action" design-id="5" onclick="toggleSidebar('sidebar')">
                     <span>
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -138,7 +138,7 @@
                 </button>
             </div>
             <div class="edit-images-button-inner photo-slider-wrp">
-                <button class="design-sidebar-action" design-id="6" onclick="toggleSidebar('sidebar_photo_slider')">
+                <button class="design-sidebar-action" design-id="6" onclick="toggleSidebar('sidebar')">
                     <span>
                         <svg width="21" height="20" viewBox="0 0 21 20" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -243,6 +243,501 @@
     </div>
 
     <div id="sidebar" class="sidebar choose-design-sidebar">
+        <!-- =====fonts-family-options==== -->
+        <div class="design-sidebar design-sidebar_2 setting-category-wrp choose-design-form activity-schedule-inner ">
+            <div class="d-flex align-items-center justify-content-between toggle-wrp new-event-sidebar-head">
+                <h5>Change Font</h5>
+                <button class="close-btn" onclick="toggleSidebar()">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5.00098 5L19 18.9991" stroke="#64748B" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round"></path>
+                        <path d="M4.99996 18.9991L18.999 5" stroke="#64748B" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="position-relative mb-3">
+                <input type="search" placeholder="Search name" class="form-control">
+                <span>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M11.5 21C16.7467 21 21 16.7467 21 11.5C21 6.25329 16.7467 2 11.5 2C6.25329 2 2 6.25329 2 11.5C2 16.7467 6.25329 21 11.5 21Z"
+                            stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M22 22L20 20" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </span>
+            </div>
+
+            <div class="used-fonts-wrp common-font-wrp">
+                <h3>Font Used</h3>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                        Default Fonts
+                    </label>
+                </div>
+            </div>
+
+            <div class="recommendation-fonts-wrp common-font-wrp">
+                <h3>Recommendation Fonts</h3>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        Default Fonts
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3">
+                    <label class="form-check-label" for="flexRadioDefault3">
+                        Default Fonts
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault4">
+                    <label class="form-check-label" for="flexRadioDefault4">
+                        Default Fonts
+                    </label>
+                </div>
+            </div>
+
+            <div class="recommendation-fonts-wrp common-font-wrp">
+                <h3>Recommendation Fonts</h3>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault5">
+                    <label class="form-check-label" for="flexRadioDefault5">
+                        Default Fonts
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault6">
+                    <label class="form-check-label" for="flexRadioDefault6">
+                        Default Fonts
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault7">
+                    <label class="form-check-label" for="flexRadioDefault7">
+                        Default Fonts
+                    </label>
+                </div>
+            </div>
+
+            <div class="all-fonts-wrp common-font-wrp">
+                <h3>All Fonts</h3>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault8">
+                    <label class="form-check-label" for="flexRadioDefault8">
+                        Fonts
+                    </label>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault9">
+                    <label class="form-check-label" for="flexRadioDefault9">
+                        Fonts
+                    </label>
+                </div>
+
+                <div class="accordion" id="accordionExample">
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseOne">
+                                <div>
+                                    Fonts
+                                </div>
+                                <i class="fa-solid fa-angle-down"></i>
+                            </button>
+                        </div>
+                        <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                        id="flexRadioDefault10">
+                                    <label class="form-check-label" for="flexRadioDefault10">
+                                        Fonts
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                        id="flexRadioDefault11">
+                                    <label class="form-check-label" for="flexRadioDefault11">
+                                        Fonts
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault12">
+                    <label class="form-check-label" for="flexRadioDefault12">
+                        Fonts
+                    </label>
+                </div>
+
+            </div>
+            <div class="footer-buttons">
+                <button class="cmn-btn reset-btn">Reset</button>
+                <button class="cmn-btn">Save</button>
+            </div>
+        </div>
+
+        <!-- ======Font-size== -->
+        <div class="design-sidebar design-sidebar_3 setting-category-wrp choose-design-form activity-schedule-inner ">
+            <div class="d-flex align-items-center justify-content-between toggle-wrp new-event-sidebar-head">
+                <h5>Size & Spacing</h5>
+                <button class="close-btn" onclick="toggleSidebar()">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5.00098 5L19 18.9991" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M4.99996 18.9991L18.999 5" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="size-spacing-main-wrp">
+                <!-- Font Size Section -->
+                <div class="size-spacing-inner font-size-wrp">
+                    <div class="size-spacing-inner-top">
+                        <h3>Font Size</h3>
+                        <input type="text" id="fontSizeInput" value="20">
+                    </div>
+                    <div class="range-slider">
+                        <div id="fontSizeTooltip" class="tooltip"></div>
+                        <input id="fontSizeRange" type="range" step="1" value="20" min="1" max="100">
+                    </div>
+                </div>
+
+                <!-- Letter Spacing Section -->
+                <div class="size-spacing-inner font-size-wrp">
+                    <div class="size-spacing-inner-top">
+                        <h3>Letter Spacing</h3>
+                        <input type="text" id="letterSpacingInput" value="0">
+                    </div>
+                    <div class="range-slider">
+                        <div id="letterSpacingTooltip" class="tooltip"></div>
+                        <input id="letterSpacingRange" type="range" step="1" value="0" min="0" max="500">
+                    </div>
+                </div>
+
+                <!-- Line Height Section -->
+                <div class="size-spacing-inner font-size-wrp">
+                    <div class="size-spacing-inner-top">
+                        <h3>Line Height</h3>
+                        <input type="text" id="lineHeightInput" value="1.2">
+                    </div>
+                    <div class="range-slider">
+                        <div id="lineHeightTooltip" class="tooltip"></div>
+                        <input id="lineHeightRange" type="range" step="0.1" value="1.2" min="0.5" max="3">
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-buttons">
+                <button class="cmn-btn reset-btn">Reset</button>
+                <button class="cmn-btn save-btn">Save</button>
+            </div>
+        </div>
+
+
+        <!-- ===color-picker== -->
+        <div class="design-sidebar design-sidebar_4 setting-category-wrp choose-design-form activity-schedule-inner">
+            <div class="d-flex align-items-center justify-content-between toggle-wrp new-event-sidebar-head">
+                <h5>Change Color</h5>
+                <button class="close-btn" onclick="toggleSidebar()">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5.00098 5L19 18.9991" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M4.99996 18.9991L18.999 5" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Radio buttons for selecting color type -->
+            <div>
+                <label>
+                    <input type="radio" name="colorType" value="font" checked /> Font Color
+                </label>
+                <label>
+                    <input type="radio" name="colorType" value="background" /> Background Color
+                </label>
+            </div>
+
+            <!-- Color Picker -->
+            <input id="color-picker" type="color" value="#276cb8" />
+
+            <div class="footer-buttons">
+                <button class="cmn-btn reset-btn">Reset</button>
+                <button class="cmn-btn">Save</button>
+            </div>
+        </div>
+
+
+
+        <!-- ===format text=== -->
+        <div class="design-sidebar design-sidebar_5 setting-category-wrp choose-design-form activity-schedule-inner ">
+            <div class="d-flex align-items-center justify-content-between toggle-wrp new-event-sidebar-head">
+                <h5>Format Text</h5>
+                <button class="close-btn" onclick="toggleSidebar()">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5.00098 5L19 18.9991" stroke="#64748B" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round"></path>
+                        <path d="M4.99996 18.9991L18.999 5" stroke="#64748B" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="format-text-main=wrp">
+                <div class="format-text-inner format-type-wrp">
+                    <h3>Type</h3>
+                    <div class="format-text-inner-options">
+                        <button data-command="bold"  >
+                            <svg width="25" height="24" viewBox="0 0 25 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg" >
+                                <path
+                                    d="M5.21338 4.5C5.21338 3.4 6.11338 2.5 7.21338 2.5H12.3334C14.9534 2.5 17.0834 4.63 17.0834 7.25C17.0834 9.87 14.9534 12 12.3334 12H5.21338V4.5Z"
+                                    stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path
+                                    d="M5.21338 12H14.7134C17.3334 12 19.4634 14.13 19.4634 16.75C19.4634 19.37 17.3334 21.5 14.7134 21.5H7.21338C6.11338 21.5 5.21338 20.6 5.21338 19.5V12V12Z"
+                                    stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                        <button data-command="italic">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M9.62 3H18.87" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path d="M5.12 21H14.37" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path d="M14.25 3L9.75 21" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                        <button data-command="underline" >
+                            <svg width="25" height="30" viewBox="0 0 25 30" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <g filter="url(#filter0_d_5633_68294)">
+                                    <path d="M5.66675 21H19.6667" stroke="#0F172A" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                    <path
+                                        d="M5.66675 3V10C5.66675 13.87 8.79675 17 12.6667 17C16.5367 17 19.6667 13.87 19.6667 10V3"
+                                        stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </g>
+                                <defs>
+                                    <filter id="filter0_d_5633_68294" x="-3.33325" y="0" width="32"
+                                        height="32" filterUnits="userSpaceOnUse"
+                                        color-interpolation-filters="sRGB">
+                                        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                        <feColorMatrix in="SourceAlpha" type="matrix"
+                                            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                        <feOffset dy="4" />
+                                        <feGaussianBlur stdDeviation="2" />
+                                        <feComposite in2="hardAlpha" operator="out" />
+                                        <feColorMatrix type="matrix"
+                                            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+                                        <feBlend mode="normal" in2="BackgroundImageFix"
+                                            result="effect1_dropShadow_5633_68294" />
+                                        <feBlend mode="normal" in="SourceGraphic"
+                                            in2="effect1_dropShadow_5633_68294" result="shape" />
+                                    </filter>
+                                </defs>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="format-text-inner font-tranform-wrp">
+                    <h3>Font Size</h3>
+                    <div class="format-text-inner-options">
+                        <button data-command="uppercase"  >
+                            AA
+                        </button>
+                        <button  data-command="lowercase" >
+                            aa
+                        </button>
+                        <button data-command="capitalize"  >
+                            Aa
+                        </button>
+                    </div>
+                </div>
+                <div class="format-text-inner font-alignment-wrp">
+                    <h3>Alignment</h3>
+                    <div class="format-text-inner-options">
+                        <button  data-command="justifyLeft"  >
+                            <svg width="25" height="24" viewBox="0 0 25 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12.5 4.5H3.5" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path d="M12.5 9.5H3.5" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path d="M21.5 14.5H3.5" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path d="M21.5 19.5H3.5" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                        <button data-command="justifyCenter" >
+                            <svg width="25" height="24" viewBox="0 0 25 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3.5 4.5H21.5" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path d="M7.76001 9.5H17.24" stroke="#0F172A" stroke-width="1.5"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M3.5 14.5H21.5" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path d="M7.76001 19.5H17.24" stroke="#0F172A" stroke-width="1.5"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                        <button data-command="justifyRight">
+                            <svg width="25" height="24" viewBox="0 0 25 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12.5 4.5H21.5" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path d="M12.5 9.5H21.5" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path d="M3.5 14.5H21.5" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path d="M3.5 19.5H21.5" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                        <button data-command="justifyFull" >
+                            <svg width="29" height="29" viewBox="0 0 29 29" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <g filter="url(#filter0_d_5633_68315)">
+                                    <path d="M5.5 4.5H23.5" stroke="#0F172A" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M5.5 9.5H23.5" stroke="#0F172A" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M5.5 14.5H23.5" stroke="#0F172A" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M5.5 19.5H23.5" stroke="#0F172A" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </g>
+                                <defs>
+                                    <filter id="filter0_d_5633_68315" x="-1.5" y="0" width="32" height="32"
+                                        filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                        <feColorMatrix in="SourceAlpha" type="matrix"
+                                            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                        <feOffset dy="4" />
+                                        <feGaussianBlur stdDeviation="2" />
+                                        <feComposite in2="hardAlpha" operator="out" />
+                                        <feColorMatrix type="matrix"
+                                            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+                                        <feBlend mode="normal" in2="BackgroundImageFix"
+                                            result="effect1_dropShadow_5633_68315" />
+                                        <feBlend mode="normal" in="SourceGraphic"
+                                            in2="effect1_dropShadow_5633_68315" result="shape" />
+                                    </filter>
+                                </defs>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-buttons">
+                <button class="cmn-btn reset-btn">Reset</button>
+                <button class="cmn-btn">Save</button>
+            </div>
+        </div>
+
+        <!-- ====upload=img=== -->
+        <div class="design-sidebar design-sidebar_6 setting-category-wrp choose-design-form activity-schedule-inner ">
+            <div class="d-flex align-items-center justify-content-between toggle-wrp new-event-sidebar-head">
+                <h5>Photo Slider</h5>
+                <button class="close-btn" onclick="toggleSidebar()">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5.00098 5L19 18.9991" stroke="#64748B" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round"></path>
+                        <path d="M4.99996 18.9991L18.999 5" stroke="#64748B" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="upload-image-main-wrp">
+                <div class="upload-wrp-img">
+                    <svg width="128" height="131" viewBox="0 0 128 131" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M63.9364 106.84C87.4863 106.84 106.579 87.748 106.579 64.114C106.579 40.48 87.4022 21.3877 63.9364 21.3877C40.3864 21.3877 21.2942 40.48 21.2942 64.114C21.2942 87.748 40.3864 106.84 63.9364 106.84Z"
+                            fill="#F8F9FD" />
+                        <path
+                            d="M103.803 36.1067C105.707 36.1067 107.251 34.5628 107.251 32.6583C107.251 30.7539 105.707 29.21 103.803 29.21C101.898 29.21 100.354 30.7539 100.354 32.6583C100.354 34.5628 101.898 36.1067 103.803 36.1067Z"
+                            fill="#F8F9FD" />
+                        <path
+                            d="M108.847 22.6494C110.147 22.6494 111.202 21.5951 111.202 20.2944C111.202 18.9938 110.147 17.9395 108.847 17.9395C107.546 17.9395 106.492 18.9938 106.492 20.2944C106.492 21.5951 107.546 22.6494 108.847 22.6494Z"
+                            fill="#F8F9FD" />
+                        <path
+                            d="M23.5637 36.0225C24.8644 36.0225 25.9187 34.9681 25.9187 33.6675C25.9187 32.3669 24.8644 31.3125 23.5637 31.3125C22.2631 31.3125 21.2087 32.3669 21.2087 33.6675C21.2087 34.9681 22.2631 36.0225 23.5637 36.0225Z"
+                            fill="#F8F9FD" />
+                        <path
+                            d="M9.18142 81.4405C11.5969 81.4405 13.555 79.4824 13.555 77.0669C13.555 74.6515 11.5969 72.6934 9.18142 72.6934C6.76597 72.6934 4.80786 74.6515 4.80786 77.0669C4.80786 79.4824 6.76597 81.4405 9.18142 81.4405Z"
+                            fill="#F8F9FD" />
+                        <g filter="url(#filter0_d_5633_68430)">
+                            <path
+                                d="M92.7229 97.4562L35.8363 97.8643C32.5528 97.879 29.8752 95.232 29.8313 91.9698L29.3904 37.5435C29.3721 34.2594 32.0156 31.5844 35.2772 31.5441L92.1637 31.1359C95.4473 31.1213 98.1248 33.7683 98.1688 37.0304L98.6096 91.4568C98.628 94.7409 95.9844 97.4159 92.7229 97.4562Z"
+                                fill="white" />
+                        </g>
+                        <path
+                            d="M89.5206 89.3293L39.5127 89.7078C38.0981 89.7203 36.9596 88.6037 36.9454 87.1889L36.566 42.2081C36.5518 40.7933 37.667 39.6558 39.0816 39.6432L89.0895 39.2647C90.5041 39.2521 91.6427 40.3688 91.6568 41.7836L92.0362 86.7644C92.0504 88.1792 90.9352 89.3167 89.5206 89.3293Z"
+                            fill="#F1F5F9" />
+                        <path d="M65.3349 72.4481L47.0922 72.5748L56.1354 62.1661L65.3349 72.4481Z" fill="#94A3B8" />
+                        <path d="M80.4593 72.3255L54.1617 72.5125L67.1856 57.5653L80.4593 72.3255Z" fill="#CBD5E1" />
+                        <path
+                            d="M56.1136 57.5884C57.5559 56.3479 57.7184 54.1718 56.4765 52.7278C55.2346 51.2838 53.0586 51.1189 51.6162 52.3594C50.1739 53.5998 50.0114 55.776 51.2533 57.22C52.4952 58.664 54.6712 58.8289 56.1136 57.5884Z"
+                            fill="#94A3B8" />
+                        <path
+                            d="M76.6661 95.4833C76.4053 96.5917 76.0141 97.7653 75.5577 98.7433C74.3189 101.156 72.3629 103.046 69.9505 104.285C67.4729 105.524 64.5389 106.046 61.6049 105.394C54.6937 103.959 50.2602 97.1785 51.6946 90.2673C53.129 83.3561 59.8445 78.8574 66.7557 80.357C69.2333 80.8786 71.3849 82.1174 73.2105 83.8125C76.2749 86.8769 77.5788 91.3105 76.6661 95.4833Z"
+                            fill="#2DA9FC" />
+                        <path
+                            d="M68.2535 91.767H65.3195V88.833C65.3195 88.2462 64.8631 87.7246 64.2111 87.7246C63.6243 87.7246 63.1027 88.181 63.1027 88.833V91.767H60.1687C59.5819 91.767 59.0603 92.2234 59.0603 92.8754C59.0603 93.5274 59.5167 93.9838 60.1687 93.9838H63.1027V96.9178C63.1027 97.5046 63.5591 98.0262 64.2111 98.0262C64.7979 98.0262 65.3195 97.5698 65.3195 96.9178V93.9838H68.2535C68.8403 93.9838 69.3619 93.5274 69.3619 92.8754C69.3619 92.2234 68.8403 91.767 68.2535 91.767Z"
+                            fill="white" />
+                        <defs>
+                            <filter id="filter0_d_5633_68430" x="7.39038" y="20.1357" width="113.219"
+                                height="110.729" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                <feColorMatrix in="SourceAlpha" type="matrix"
+                                    values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                <feOffset dy="11" />
+                                <feGaussianBlur stdDeviation="11" />
+                                <feColorMatrix type="matrix"
+                                    values="0 0 0 0 0.397708 0 0 0 0 0.47749 0 0 0 0 0.575 0 0 0 0.27 0" />
+                                <feBlend mode="normal" in2="BackgroundImageFix"
+                                    result="effect1_dropShadow_5633_68430" />
+                                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_5633_68430"
+                                    result="shape" />
+                            </filter>
+                        </defs>
+                    </svg>
+                </div>
+                <div class="uploda-wrp-content">
+                    <h3>Upload Images for slider</h3>
+                    <p>You may choose up to three photos for a slideshow that your guests can view along with their
+                        online invitation.</p>
+                    <button class="cmn-btn">
+                        <input type="file" accept="image/png, image/jpeg">
+                        Upload Image
+                    </button>
+                </div>
+            </div>
+        </div>
+
         <!-- ====uploaded-images== -->
         <div class="design-sidebar design-sidebar_7 setting-category-wrp choose-design-form activity-schedule-inner ">
             <div class="d-flex align-items-center justify-content-between toggle-wrp new-event-sidebar-head">
@@ -443,513 +938,4 @@
             </div>
         </div>
     </div>
-
-
-    <div id="sidebar_font" class="sidebar choose-design-sidebar">
-          <!-- =====fonts-family-options==== -->
-          <div class="design-sidebar design-sidebar_2 setting-category-wrp choose-design-form activity-schedule-inner ">
-            <div class="d-flex align-items-center justify-content-between toggle-wrp new-event-sidebar-head">
-                <h5>Change Font</h5>
-                <button class="close-btn" onclick="toggleSidebar()">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path d="M5.00098 5L19 18.9991" stroke="#64748B" stroke-width="1.5" stroke-linecap="round"
-                            stroke-linejoin="round"></path>
-                        <path d="M4.99996 18.9991L18.999 5" stroke="#64748B" stroke-width="1.5"
-                            stroke-linecap="round" stroke-linejoin="round"></path>
-                    </svg>
-                </button>
-            </div>
-
-            <div class="position-relative mb-3">
-                <input type="search" placeholder="Search name" class="form-control">
-                <span>
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M11.5 21C16.7467 21 21 16.7467 21 11.5C21 6.25329 16.7467 2 11.5 2C6.25329 2 2 6.25329 2 11.5C2 16.7467 6.25329 21 11.5 21Z"
-                            stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M22 22L20 20" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round"
-                            stroke-linejoin="round" />
-                    </svg>
-                </span>
-            </div>
-
-            <div class="used-fonts-wrp common-font-wrp">
-                <h3>Font Used</h3>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                    <label class="form-check-label" for="flexRadioDefault1">
-                        Default Fonts
-                    </label>
-                </div>
-            </div>
-
-            <div class="recommendation-fonts-wrp common-font-wrp">
-                <h3>Recommendation Fonts</h3>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
-                    <label class="form-check-label" for="flexRadioDefault2">
-                        Default Fonts
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3">
-                    <label class="form-check-label" for="flexRadioDefault3">
-                        Default Fonts
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault4">
-                    <label class="form-check-label" for="flexRadioDefault4">
-                        Default Fonts
-                    </label>
-                </div>
-            </div>
-
-            <div class="recommendation-fonts-wrp common-font-wrp">
-                <h3>Recommendation Fonts</h3>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault5">
-                    <label class="form-check-label" for="flexRadioDefault5">
-                        Default Fonts
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault6">
-                    <label class="form-check-label" for="flexRadioDefault6">
-                        Default Fonts
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault7">
-                    <label class="form-check-label" for="flexRadioDefault7">
-                        Default Fonts
-                    </label>
-                </div>
-            </div>
-
-            <div class="all-fonts-wrp common-font-wrp">
-                <h3>All Fonts</h3>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault8">
-                    <label class="form-check-label" for="flexRadioDefault8">
-                        Fonts
-                    </label>
-                </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault9">
-                    <label class="form-check-label" for="flexRadioDefault9">
-                        Fonts
-                    </label>
-                </div>
-
-                <div class="accordion" id="accordionExample">
-                    <div class="accordion-item">
-                        <div class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseOne">
-                                <div>
-                                    Fonts
-                                </div>
-                                <i class="fa-solid fa-angle-down"></i>
-                            </button>
-                        </div>
-                        <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                        id="flexRadioDefault10">
-                                    <label class="form-check-label" for="flexRadioDefault10">
-                                        Fonts
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                        id="flexRadioDefault11">
-                                    <label class="form-check-label" for="flexRadioDefault11">
-                                        Fonts
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault12">
-                    <label class="form-check-label" for="flexRadioDefault12">
-                        Fonts
-                    </label>
-                </div>
-
-            </div>
-            <div class="footer-buttons">
-                <button class="cmn-btn reset-btn">Reset</button>
-                <button class="cmn-btn">Save</button>
-            </div>
-        </div>
-    </div>
-    
-    <div id="sidebar_edit_text" class="sidebar choose-design-sidebar">
-        <!-- ======Font-size== -->
-        <div class="design-sidebar design-sidebar_3 setting-category-wrp choose-design-form activity-schedule-inner ">
-            <div class="d-flex align-items-center justify-content-between toggle-wrp new-event-sidebar-head">
-                <h5>Size & Spacing</h5>
-                <button class="close-btn" onclick="toggleSidebar()">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M5.00098 5L19 18.9991" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                        <path d="M4.99996 18.9991L18.999 5" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                    </svg>
-                </button>
-            </div>
-
-            <div class="size-spacing-main-wrp">
-                <!-- Font Size Section -->
-                <div class="size-spacing-inner font-size-wrp">
-                    <div class="size-spacing-inner-top">
-                        <h3>Font Size</h3>
-                        <input type="text" id="fontSizeInput" value="20">
-                    </div>
-                    <div class="range-slider">
-                        <div id="fontSizeTooltip" class="tooltip"></div>
-                        <input id="fontSizeRange" type="range" step="1" value="20" min="1" max="100">
-                    </div>
-                </div>
-
-                <!-- Letter Spacing Section -->
-                <div class="size-spacing-inner font-size-wrp">
-                    <div class="size-spacing-inner-top">
-                        <h3>Letter Spacing</h3>
-                        <input type="text" id="letterSpacingInput" value="0">
-                    </div>
-                    <div class="range-slider">
-                        <div id="letterSpacingTooltip" class="tooltip"></div>
-                        <input id="letterSpacingRange" type="range" step="1" value="0" min="0" max="500">
-                    </div>
-                </div>
-
-                <!-- Line Height Section -->
-                <div class="size-spacing-inner font-size-wrp">
-                    <div class="size-spacing-inner-top">
-                        <h3>Line Height</h3>
-                        <input type="text" id="lineHeightInput" value="1.2">
-                    </div>
-                    <div class="range-slider">
-                        <div id="lineHeightTooltip" class="tooltip"></div>
-                        <input id="lineHeightRange" type="range" step="0.1" value="1.2" min="0.5" max="3">
-                    </div>
-                </div>
-            </div>
-
-            <div class="footer-buttons">
-                <button class="cmn-btn reset-btn">Reset</button>
-                <button class="cmn-btn save-btn">Save</button>
-            </div>
-        </div>
-    </div>
-    
-    <div id="sidebar_color" class="sidebar choose-design-sidebar">
-         <!-- ===color-picker== -->
-         <div class="design-sidebar design-sidebar_4 setting-category-wrp choose-design-form activity-schedule-inner">
-            <div class="d-flex align-items-center justify-content-between toggle-wrp new-event-sidebar-head">
-                <h5>Change Color</h5>
-                <button class="close-btn" onclick="toggleSidebar()">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M5.00098 5L19 18.9991" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                        <path d="M4.99996 18.9991L18.999 5" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                    </svg>
-                </button>
-            </div>
-
-            <!-- Radio buttons for selecting color type -->
-            <div>
-                <label>
-                    <input type="radio" name="colorType" value="font" checked /> Font Color
-                </label>
-                <label>
-                    <input type="radio" name="colorType" value="background" /> Background Color
-                </label>
-            </div>
-
-            <!-- Color Picker -->
-            <input id="color-picker" type="color" value="#276cb8" />
-
-            <div class="footer-buttons">
-                <button class="cmn-btn reset-btn">Reset</button>
-                <button class="cmn-btn">Save</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="sidebar_format" class="sidebar choose-design-sidebar">
-     <!-- ===format text=== -->
-        <div class="design-sidebar design-sidebar_5 setting-category-wrp choose-design-form activity-schedule-inner ">
-            <div class="d-flex align-items-center justify-content-between toggle-wrp new-event-sidebar-head">
-                <h5>Format Text</h5>
-                <button class="close-btn" onclick="toggleSidebar()">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path d="M5.00098 5L19 18.9991" stroke="#64748B" stroke-width="1.5" stroke-linecap="round"
-                            stroke-linejoin="round"></path>
-                        <path d="M4.99996 18.9991L18.999 5" stroke="#64748B" stroke-width="1.5"
-                            stroke-linecap="round" stroke-linejoin="round"></path>
-                    </svg>
-                </button>
-            </div>
-
-            <div class="format-text-main=wrp">
-                <div class="format-text-inner format-type-wrp">
-                    <h3>Type</h3>
-                    <div class="format-text-inner-options">
-                        <button data-command="bold"  >
-                            <svg width="25" height="24" viewBox="0 0 25 24" fill="none"
-                                xmlns="http://www.w3.org/2000/svg" >
-                                <path
-                                    d="M5.21338 4.5C5.21338 3.4 6.11338 2.5 7.21338 2.5H12.3334C14.9534 2.5 17.0834 4.63 17.0834 7.25C17.0834 9.87 14.9534 12 12.3334 12H5.21338V4.5Z"
-                                    stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                                <path
-                                    d="M5.21338 12H14.7134C17.3334 12 19.4634 14.13 19.4634 16.75C19.4634 19.37 17.3334 21.5 14.7134 21.5H7.21338C6.11338 21.5 5.21338 20.6 5.21338 19.5V12V12Z"
-                                    stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                            </svg>
-                        </button>
-                        <button data-command="italic">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path d="M9.62 3H18.87" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                                <path d="M5.12 21H14.37" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                                <path d="M14.25 3L9.75 21" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                            </svg>
-                        </button>
-                        <button data-command="underline" >
-                            <svg width="25" height="30" viewBox="0 0 25 30" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <g filter="url(#filter0_d_5633_68294)">
-                                    <path d="M5.66675 21H19.6667" stroke="#0F172A" stroke-width="1.5"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path
-                                        d="M5.66675 3V10C5.66675 13.87 8.79675 17 12.6667 17C16.5367 17 19.6667 13.87 19.6667 10V3"
-                                        stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                </g>
-                                <defs>
-                                    <filter id="filter0_d_5633_68294" x="-3.33325" y="0" width="32"
-                                        height="32" filterUnits="userSpaceOnUse"
-                                        color-interpolation-filters="sRGB">
-                                        <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                                        <feColorMatrix in="SourceAlpha" type="matrix"
-                                            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
-                                        <feOffset dy="4" />
-                                        <feGaussianBlur stdDeviation="2" />
-                                        <feComposite in2="hardAlpha" operator="out" />
-                                        <feColorMatrix type="matrix"
-                                            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
-                                        <feBlend mode="normal" in2="BackgroundImageFix"
-                                            result="effect1_dropShadow_5633_68294" />
-                                        <feBlend mode="normal" in="SourceGraphic"
-                                            in2="effect1_dropShadow_5633_68294" result="shape" />
-                                    </filter>
-                                </defs>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-                <div class="format-text-inner font-tranform-wrp">
-                    <h3>Font Size</h3>
-                    <div class="format-text-inner-options">
-                        <button data-command="uppercase"  >
-                            AA
-                        </button>
-                        <button  data-command="lowercase" >
-                            aa
-                        </button>
-                        <button data-command="capitalize"  >
-                            Aa
-                        </button>
-                    </div>
-                </div>
-                <div class="format-text-inner font-alignment-wrp">
-                    <h3>Alignment</h3>
-                    <div class="format-text-inner-options">
-                        <button  data-command="justifyLeft"  >
-                            <svg width="25" height="24" viewBox="0 0 25 24" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12.5 4.5H3.5" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                                <path d="M12.5 9.5H3.5" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                                <path d="M21.5 14.5H3.5" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                                <path d="M21.5 19.5H3.5" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                            </svg>
-                        </button>
-                        <button data-command="justifyCenter" >
-                            <svg width="25" height="24" viewBox="0 0 25 24" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path d="M3.5 4.5H21.5" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                                <path d="M7.76001 9.5H17.24" stroke="#0F172A" stroke-width="1.5"
-                                    stroke-linecap="round" stroke-linejoin="round" />
-                                <path d="M3.5 14.5H21.5" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                                <path d="M7.76001 19.5H17.24" stroke="#0F172A" stroke-width="1.5"
-                                    stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                        </button>
-                        <button data-command="justifyRight">
-                            <svg width="25" height="24" viewBox="0 0 25 24" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12.5 4.5H21.5" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                                <path d="M12.5 9.5H21.5" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                                <path d="M3.5 14.5H21.5" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                                <path d="M3.5 19.5H21.5" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                            </svg>
-                        </button>
-                        <button data-command="justifyFull" >
-                            <svg width="29" height="29" viewBox="0 0 29 29" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <g filter="url(#filter0_d_5633_68315)">
-                                    <path d="M5.5 4.5H23.5" stroke="#0F172A" stroke-width="1.5"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M5.5 9.5H23.5" stroke="#0F172A" stroke-width="1.5"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M5.5 14.5H23.5" stroke="#0F172A" stroke-width="1.5"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M5.5 19.5H23.5" stroke="#0F172A" stroke-width="1.5"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                </g>
-                                <defs>
-                                    <filter id="filter0_d_5633_68315" x="-1.5" y="0" width="32" height="32"
-                                        filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                                        <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                                        <feColorMatrix in="SourceAlpha" type="matrix"
-                                            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
-                                        <feOffset dy="4" />
-                                        <feGaussianBlur stdDeviation="2" />
-                                        <feComposite in2="hardAlpha" operator="out" />
-                                        <feColorMatrix type="matrix"
-                                            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
-                                        <feBlend mode="normal" in2="BackgroundImageFix"
-                                            result="effect1_dropShadow_5633_68315" />
-                                        <feBlend mode="normal" in="SourceGraphic"
-                                            in2="effect1_dropShadow_5633_68315" result="shape" />
-                                    </filter>
-                                </defs>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="footer-buttons">
-                <button class="cmn-btn reset-btn">Reset</button>
-                <button class="cmn-btn">Save</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="sidebar_photo_slider" class="sidebar choose-design-sidebar">
-        <!-- ====upload=img=== -->
-        <div class="design-sidebar design-sidebar_6 setting-category-wrp choose-design-form activity-schedule-inner ">
-            <div class="d-flex align-items-center justify-content-between toggle-wrp new-event-sidebar-head">
-                <h5>Photo Slider</h5>
-                <button class="close-btn" onclick="toggleSidebar()">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path d="M5.00098 5L19 18.9991" stroke="#64748B" stroke-width="1.5" stroke-linecap="round"
-                            stroke-linejoin="round"></path>
-                        <path d="M4.99996 18.9991L18.999 5" stroke="#64748B" stroke-width="1.5"
-                            stroke-linecap="round" stroke-linejoin="round"></path>
-                    </svg>
-                </button>
-            </div>
-
-            <div class="upload-image-main-wrp">
-                <div class="upload-wrp-img">
-                    <svg width="128" height="131" viewBox="0 0 128 131" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M63.9364 106.84C87.4863 106.84 106.579 87.748 106.579 64.114C106.579 40.48 87.4022 21.3877 63.9364 21.3877C40.3864 21.3877 21.2942 40.48 21.2942 64.114C21.2942 87.748 40.3864 106.84 63.9364 106.84Z"
-                            fill="#F8F9FD" />
-                        <path
-                            d="M103.803 36.1067C105.707 36.1067 107.251 34.5628 107.251 32.6583C107.251 30.7539 105.707 29.21 103.803 29.21C101.898 29.21 100.354 30.7539 100.354 32.6583C100.354 34.5628 101.898 36.1067 103.803 36.1067Z"
-                            fill="#F8F9FD" />
-                        <path
-                            d="M108.847 22.6494C110.147 22.6494 111.202 21.5951 111.202 20.2944C111.202 18.9938 110.147 17.9395 108.847 17.9395C107.546 17.9395 106.492 18.9938 106.492 20.2944C106.492 21.5951 107.546 22.6494 108.847 22.6494Z"
-                            fill="#F8F9FD" />
-                        <path
-                            d="M23.5637 36.0225C24.8644 36.0225 25.9187 34.9681 25.9187 33.6675C25.9187 32.3669 24.8644 31.3125 23.5637 31.3125C22.2631 31.3125 21.2087 32.3669 21.2087 33.6675C21.2087 34.9681 22.2631 36.0225 23.5637 36.0225Z"
-                            fill="#F8F9FD" />
-                        <path
-                            d="M9.18142 81.4405C11.5969 81.4405 13.555 79.4824 13.555 77.0669C13.555 74.6515 11.5969 72.6934 9.18142 72.6934C6.76597 72.6934 4.80786 74.6515 4.80786 77.0669C4.80786 79.4824 6.76597 81.4405 9.18142 81.4405Z"
-                            fill="#F8F9FD" />
-                        <g filter="url(#filter0_d_5633_68430)">
-                            <path
-                                d="M92.7229 97.4562L35.8363 97.8643C32.5528 97.879 29.8752 95.232 29.8313 91.9698L29.3904 37.5435C29.3721 34.2594 32.0156 31.5844 35.2772 31.5441L92.1637 31.1359C95.4473 31.1213 98.1248 33.7683 98.1688 37.0304L98.6096 91.4568C98.628 94.7409 95.9844 97.4159 92.7229 97.4562Z"
-                                fill="white" />
-                        </g>
-                        <path
-                            d="M89.5206 89.3293L39.5127 89.7078C38.0981 89.7203 36.9596 88.6037 36.9454 87.1889L36.566 42.2081C36.5518 40.7933 37.667 39.6558 39.0816 39.6432L89.0895 39.2647C90.5041 39.2521 91.6427 40.3688 91.6568 41.7836L92.0362 86.7644C92.0504 88.1792 90.9352 89.3167 89.5206 89.3293Z"
-                            fill="#F1F5F9" />
-                        <path d="M65.3349 72.4481L47.0922 72.5748L56.1354 62.1661L65.3349 72.4481Z" fill="#94A3B8" />
-                        <path d="M80.4593 72.3255L54.1617 72.5125L67.1856 57.5653L80.4593 72.3255Z" fill="#CBD5E1" />
-                        <path
-                            d="M56.1136 57.5884C57.5559 56.3479 57.7184 54.1718 56.4765 52.7278C55.2346 51.2838 53.0586 51.1189 51.6162 52.3594C50.1739 53.5998 50.0114 55.776 51.2533 57.22C52.4952 58.664 54.6712 58.8289 56.1136 57.5884Z"
-                            fill="#94A3B8" />
-                        <path
-                            d="M76.6661 95.4833C76.4053 96.5917 76.0141 97.7653 75.5577 98.7433C74.3189 101.156 72.3629 103.046 69.9505 104.285C67.4729 105.524 64.5389 106.046 61.6049 105.394C54.6937 103.959 50.2602 97.1785 51.6946 90.2673C53.129 83.3561 59.8445 78.8574 66.7557 80.357C69.2333 80.8786 71.3849 82.1174 73.2105 83.8125C76.2749 86.8769 77.5788 91.3105 76.6661 95.4833Z"
-                            fill="#2DA9FC" />
-                        <path
-                            d="M68.2535 91.767H65.3195V88.833C65.3195 88.2462 64.8631 87.7246 64.2111 87.7246C63.6243 87.7246 63.1027 88.181 63.1027 88.833V91.767H60.1687C59.5819 91.767 59.0603 92.2234 59.0603 92.8754C59.0603 93.5274 59.5167 93.9838 60.1687 93.9838H63.1027V96.9178C63.1027 97.5046 63.5591 98.0262 64.2111 98.0262C64.7979 98.0262 65.3195 97.5698 65.3195 96.9178V93.9838H68.2535C68.8403 93.9838 69.3619 93.5274 69.3619 92.8754C69.3619 92.2234 68.8403 91.767 68.2535 91.767Z"
-                            fill="white" />
-                        <defs>
-                            <filter id="filter0_d_5633_68430" x="7.39038" y="20.1357" width="113.219"
-                                height="110.729" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                                <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                                <feColorMatrix in="SourceAlpha" type="matrix"
-                                    values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
-                                <feOffset dy="11" />
-                                <feGaussianBlur stdDeviation="11" />
-                                <feColorMatrix type="matrix"
-                                    values="0 0 0 0 0.397708 0 0 0 0 0.47749 0 0 0 0 0.575 0 0 0 0.27 0" />
-                                <feBlend mode="normal" in2="BackgroundImageFix"
-                                    result="effect1_dropShadow_5633_68430" />
-                                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_5633_68430"
-                                    result="shape" />
-                            </filter>
-                        </defs>
-                    </svg>
-                </div>
-                <div class="uploda-wrp-content">
-                    <h3>Upload Images for slider</h3>
-                    <p>You may choose up to three photos for a slideshow that your guests can view along with their
-                        online invitation.</p>
-                    <button class="cmn-btn">
-                        <input type="file" accept="image/png, image/jpeg">
-                        Upload Image
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
 </main>
-<div id="sidebar_font_overlay" class="overlay" onclick="toggleSidebar('')"></div>
-<div id="sidebar_edit_text_overlay" class="overlay" onclick="toggleSidebar('')"></div>
-<div id="sidebar_color_overlay" class="overlay" onclick="toggleSidebar('')"></div>
-<div id="sidebar_format_overlay" class="overlay" onclick="toggleSidebar('')"></div>
-<div id="sidebar_photo_slider_overlay" class="overlay" onclick="toggleSidebar('')"></div>

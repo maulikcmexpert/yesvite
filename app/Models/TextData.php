@@ -26,6 +26,6 @@ class TextData extends Model
 
     public function categories()
     {
-        return $this->belongsToMany(EventDesignCategory::class, 'id');
+        return $this->belongsToMany(EventDesignCategory::class, 'event_design_category_id', 'id');
     }
 }

@@ -14,6 +14,12 @@ $(document).on("click", ".design-card", function () {
     $("#modalImage").attr("src", imageUrl);
     $("#exampleModal").modal("show");
 });
+$(document).on("click", ".design-sidebar-action", function () {
+
+    let designId = $(this).attr('design-id')
+    $(".design-sidebar").addClass('d-none')
+    $(".design-sidebar_"+ designId).removeClass('d-none')
+})
 
 $(document).on('click','.edit_design_tem',function(e){
     e.preventDefault();
