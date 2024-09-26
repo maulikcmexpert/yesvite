@@ -436,8 +436,9 @@
             </div>
             @endif
             <div class="modal-body">
-                <div class="modal-choose-design-wrp" id="download_images">
+                <div class="modal-choose-design-wrp" id="download_image">
                     <div class="modal-design-card">
+                        <img id="modalImage" src="" alt="Design Image" class="img-fluid" />
                         {{-- <div class="birthday-card-main" id="photo">
                             <svg class="blue-bg" preserveAspectRatio="none" viewBox="0 0 460 409" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -2313,7 +2314,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div class="modal-choose-design-wrp" id="download_image">
+                <div class="modal-choose-design-wrp" id="download_images">
                     <div class="modal-design-card">
                         <img id="modalImage" src="" alt="Design Image" class="img-fluid" />
                     </div>
