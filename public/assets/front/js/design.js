@@ -27,59 +27,84 @@ $(document).on('click','.edit_design_tem',function(e){
     $("#exampleModal").modal("hide");
     $('.edit_design_template').show();
 
-    addDraggableText(350, 50, 'event_name', 'xyz'); // Position this outside the image area
-    addDraggableText(350, 100, 'host_name', 'abc');
-    addDraggableText(350, 150, 'start_time', '5:00PM');
-    addDraggableText(350, 200, 'rsvp_end_time', '6:00PM');
-    addDraggableText(350, 250, 'start_date', '2024-07-27');
-    addDraggableText(350, 300, 'end_date', '2024-07-27');
-    addDraggableText(350, 350, 'Location', 'fdf');
+    function loadTextDataFromDatabase() {
+      
+        if (image) {
+            console.log(image);
 
-    // hideStaticTextElements();  // Hide static text elements if static information is present
-    const staticInfo = dbJson;
-    console.log(staticInfo);
+            // Load background image
+            fabric.Image.fromURL(image, function (img) {
+                img.set({
+                    left: 0,
+                    top: 0,
+                    selectable: false,  // Non-draggable background image
+                    hasControls: false  // Disable resizing controls
+                });
+                canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
 
-    staticInfo.textElements.forEach(element => {
-        let textElement = new fabric.Textbox(element.text, {  // Use Textbox for editable text
-            left: element.left,
-            top: element.top,
-            width: element.width || 200,  // Default width if not provided
-            fontSize: element.fontSize,
-            fill: element.fill,
-            fontFamily: element.fontFamily,
-            fontWeight: element.fontWeight,
-            fontStyle: element.fontStyle,
-            underline: element.underline,
-            linethrough: element.linethrough,
-            backgroundColor: element.backgroundColor,
-            textAlign: element.textAlign,
-            editable: true,
-            hasControls: true,
-            borderColor: 'blue',
-            cornerColor: 'red',
-            cornerSize: 6,
-            transparentCorners: false,
-            isStatic: true
-        });
-        const textWidth = textElement.calcTextWidth();
-        textElement.set({ width: textWidth });
+            });
 
-        textElement.on('scaling', function () {
-            // Calculate the updated font size based on scaling factors
-            var updatedFontSize = textElement.fontSize * (textElement.scaleX + textElement.scaleY) / 2;
-            textElement.set('fontSize', updatedFontSize); // Update the font size
-            canvas.renderAll(); // Re-render the canvas to reflect changes
-        });
+            // Load static information (text elements)
+            if (dbJson) {
+                hideStaticTextElements();  // Hide static text elements if static information is present
+                const staticInfo = dbJson;
+                console.log(staticInfo);
 
-        addIconsToTextbox(textElement);
-        canvas.add(textElement);
+                // Render text elements on canvas
+                staticInfo.textElements.forEach(element => {
+                    let textElement = new fabric.Textbox(element.text, {  // Use Textbox for editable text
+                        left: element.left,
+                        top: element.top,
+                        width: element.width || 200,  // Default width if not provided
+                        fontSize: element.fontSize,
+                        fill: element.fill,
+                        fontFamily: element.fontFamily,
+                        fontWeight: element.fontWeight,
+                        fontStyle: element.fontStyle,
+                        underline: element.underline,
+                        linethrough: element.linethrough,
+                        backgroundColor: element.backgroundColor,
+                        textAlign: element.textAlign,
+                        editable: true,
+                        hasControls: true,
+                        borderColor: 'blue',
+                        cornerColor: 'red',
+                        cornerSize: 6,
+                        transparentCorners: false,
+                        isStatic: true
+                    });
+                    const textWidth = textElement.calcTextWidth();
+                    textElement.set({ width: textWidth });
 
-    });
+                    textElement.on('scaling', function () {
+                        // Calculate the updated font size based on scaling factors
+                        var updatedFontSize = textElement.fontSize * (textElement.scaleX + textElement.scaleY) / 2;
+                        textElement.set('fontSize', updatedFontSize); // Update the font size
+                        canvas.renderAll(); // Re-render the canvas to reflect changes
+                    });
 
+                    addIconsToTextbox(textElement);
+                    canvas.add(textElement);
+
+                });
+            } else {
+                showStaticTextElements();
+            }
+
+            // Set custom attribute with the fetched ID
+            var canvasElement = document.getElementById('imageEditor1');
+            canvasElement.setAttribute('data-canvas-id', data.id);
+
+            canvas.renderAll();  // Ensure all elements are rendered
+        }
+}
 
     var canvas = new fabric.Canvas('imageEditor1', {
         width: 500, // Canvas width
         height: 500, // Canvas height
+
+
+
     });
     const defaultSettings = {
         fontSize: 20,
@@ -302,16 +327,24 @@ $(document).on('click','.edit_design_tem',function(e){
     });
 
 
-    fabric.Image.fromURL(image, function (img) {
-        img.set({
-            left: 0,
-            top: 0,
-            selectable: false,  // Non-draggable background image
-            hasControls: false  // Disable resizing controls
-        });
-        canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
-
+    // Load background image and make it non-draggable
+    document.getElementById('image').addEventListener('change', function (event) {
+        var file = event.target.files[0];
+        if (file) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                
+            };
+            reader.readAsDataURL(file);
+        }
     });
+
+
+
+    
+
+    // Call function to load data when the page loads
+    loadTextDataFromDatabase();
 
     function hideStaticTextElements() {
         canvas.getObjects('textbox').forEach(function (textbox) {
@@ -327,6 +360,7 @@ $(document).on('click','.edit_design_tem',function(e){
         });
         canvas.renderAll();
     }
+
 
     function showStaticTextElements() {
         canvas.getObjects('textbox').forEach(function (textbox) {
@@ -381,263 +415,6 @@ $(document).on('click','.edit_design_tem',function(e){
 
         // Initial center calculation
         findTextboxCenter(text);
-    }
-
-    let undoStack = [];
-    let redoStack = [];
-
-    function addToUndoStack() {
-        undoStack.push(canvas.toJSON());
-        redoStack = []; // Clear redo stack on new action
-    }
-
-    function undo() {
-        if (undoStack.length > 0) {
-            redoStack.push(canvas.toJSON());
-            canvas.loadFromJSON(undoStack.pop(), canvas.renderAll.bind(canvas));
-        }
-    }
-
-    function redo() {
-        if (redoStack.length > 0) {
-            undoStack.push(canvas.toJSON());
-            canvas.loadFromJSON(redoStack.pop(), canvas.renderAll.bind(canvas));
-        }
-    }
-
-    function executeCommand(command) {
-        var activeObject = canvas.getActiveObject();
-        if (!activeObject) {
-            alert('No object selected');
-            return;
-        }
-        if (activeObject && activeObject.type === 'textbox') {
-
-            const commands = {
-                bold: () => activeObject.set('fontWeight', activeObject.fontWeight === 'bold' ? '' : 'bold'),
-                italic: () => activeObject.set('fontStyle', activeObject.fontStyle === 'italic' ? '' : 'italic'),
-                underline: () => {
-                    activeObject.set('underline', !activeObject.underline);
-                    // Update line height after toggling underline
-                    const currentLineHeight = activeObject.lineHeight || 1.2; // Default line height
-                    activeObject.set('lineHeight', currentLineHeight); // Reapply the line height
-                },
-                setLineHeight: (value) => {
-                    activeObject.set('lineHeight', value);
-                },
-                strikeThrough: () => activeObject.set('linethrough', !activeObject.linethrough),
-                removeFormat: () => {
-                    activeObject.set({
-                        fontWeight: '',
-                        fontStyle: '',
-                        underline: false,
-                        linethrough: false,
-                        fontFamily: 'Arial'
-                    });
-                },
-                fontName: () => {
-                    var selectedFont = document.querySelector('[data-command="fontName"]').value;
-                    activeObject.set('fontFamily', selectedFont);
-                },
-
-                justifyLeft: () => activeObject.set('textAlign', 'left'),
-                justifyCenter: () => activeObject.set('textAlign', 'center'),
-                justifyRight: () => activeObject.set('textAlign', 'right'),
-                justifyFull: () => activeObject.set('textAlign', 'justify'),
-
-                uppercase: () => activeObject.set('text', activeObject.text.toUpperCase()),
-                lowercase: () => activeObject.set('text', activeObject.text.toLowerCase()),
-                capitalize: () => {
-                    const capitalizedText = activeObject.text.replace(/\b\w/g, char => char.toUpperCase());
-                    activeObject.set('text', capitalizedText);
-                }
-
-            };
-            if (commands[command]) {
-                commands[command]();
-                canvas.renderAll();
-                addToUndoStack(); // Save state after executing the command
-            }
-        }
-    }
-
-    document.querySelectorAll('[data-command]').forEach(function (button) {
-        button.addEventListener('click', function () {
-            executeCommand(this.getAttribute('data-command'));
-        });
-    });
-
-    function saveTextDataToDatabase() {
-        hideStaticTextElements(); // Hide the text elements
-        var textData = getTextDataFromCanvas();
-        var imageURL = canvas.toDataURL('image/png');
-        var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content'); // Get CSRF token
-        // Get the canvas ID to associate the saved data with a specific record
-        var canvasElement = document.getElementById('imageEditor1');
-        var canvasId = canvasElement.getAttribute('data-canvas-id');
-        var imageName = 'image_' + Date.now() + '.png';
-        console.log(canvasId);
-        fetch('/saveTextData', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json', // Set content type to JSON
-                'X-CSRF-TOKEN': csrfToken // Include CSRF token
-            },
-            body: JSON.stringify({
-                id: canvasId,
-                textElements: textData,
-
-            })
-        })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Text data saved successfully', data);
-
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
-        showStaticTextElements();
-    }
-
-    function addEditableTextbox(left, top, textContent) {
-        var textbox = new fabric.Textbox(textContent, {
-            left: left,
-            top: top,
-            width: 200,
-            fontSize: 20,
-         backgroundColor: 'rgba(0, 0, 0, 0)', // Set background to transparent
-
-            fill: '#000000',
-            editable: true,
-            selectable: true,
-            hasControls: true,
-            borderColor: 'blue',
-            cornerColor: 'red',
-            cornerSize: 6,
-            transparentCorners: false
-        });
-
-        textbox.on('scaling', function () {
-            // Update the font size based on scaling
-            var updatedFontSize = textbox.fontSize * (textbox.scaleX + textbox.scaleY) / 2;
-            textbox.set('fontSize', updatedFontSize);
-            canvas.renderAll();
-        });
-
-        canvas.add(textbox);
-        canvas.setActiveObject(textbox);
-        addIconsToTextbox(textbox); // Make it the active object for editing
-        canvas.renderAll();
-    }
-
-    canvas.on('mouse:down', function (options) {
-        if (options.target && options.target.type === 'textbox') {
-            canvas.setActiveObject(options.target);
-        }
-    });
-
-    function getTextDataFromCanvas() {
-        var objects = canvas.getObjects();
-
-        var textData = [];
-
-        objects.forEach(function (obj) {
-            if (obj.type === 'textbox') {
-                var centerX = obj.left + (obj.width / 2);
-                var centerY = obj.top + (obj.height / 2);
-                textData.push({
-                    text: obj.text,
-                    left: obj.left,
-                    top: obj.top,
-                    fontSize: obj.fontSize,
-                    fill: obj.fill,
-                    centerX: centerX, // Include centerX in the data
-                    centerY: centerY, // Include centerY in the data
-                    dx: obj.left, // Calculate dx
-                    dy: obj.top,   // Calculate dy
-                    backgroundColor: obj.backgroundColor,
-                    fontFamily: obj.fontFamily,
-                    textAlign: obj.textAlign,
-                    fontWeight: obj.fontWeight,
-                    fontStyle: obj.fontStyle,
-                    underline: obj.underline,
-                    linethrough: obj.linethrough,
-                    date_formate: obj.date_formate // Include date_formate if set
-                });
-            }
-        });
-
-        return textData;
-    }
-    document.getElementById('addTextButton').addEventListener('click', function () {
-        addEditableTextbox(100, 100, 'EditableText');  // You can set the initial position and default text
-    });
-
-    function updateSelectedTextProperties() {
-        var fontSize = parseInt(document.getElementById('fontSize').value, 10);
-        var fontColor = document.getElementById('fontColor').value;
-        var activeObject = canvas.getActiveObject();
-
-        if (activeObject && activeObject.type === 'textbox') {
-            // Update text properties
-            activeObject.set({
-                fontSize: fontSize,
-                fill: fontColor
-            });
-            activeObject.setCoords(); // Update coordinates
-
-            // Log the updated properties
-            console.log('Updated Font Size: ' + activeObject.fontSize);
-            console.log('Updated Font Color: ' + activeObject.fill);
-
-            canvas.renderAll();
-            addToUndoStack(); // Save state after updating properties
-        }
-    }
-
-  
-
-    // Handle keyboard events for delete and copy
-    function handleKeyboardEvents(e) {
-        if (e.key === 'Delete') {
-            const activeObject = canvas.getActiveObject();
-            if (activeObject && activeObject.type === 'textbox') {
-                deleteTextbox(activeObject);
-            }
-        } else if (e.ctrlKey && e.key === 'c') {
-            const activeObject = canvas.getActiveObject();
-            if (activeObject && activeObject.type === 'textbox') {
-                cloneTextbox(activeObject);
-            }
-        }
-    }
-
-    // Add event listener for keyboard events
-    document.addEventListener('keydown', handleKeyboardEvents);
-
-    function cloneTextbox(originalTextbox) {
-        const clonedTextbox = new fabric.Textbox(originalTextbox.text, {
-            left: originalTextbox.left + 30, // Offset position
-            top: originalTextbox.top + 30,   // Offset position
-            fontSize: originalTextbox.fontSize,
-            fill: originalTextbox.fill,
-            width: originalTextbox.width,
-            height: originalTextbox.height,
-            fontFamily: originalTextbox.fontFamily,
-            originX: originalTextbox.originX,
-            originY: originalTextbox.originY,
-            hasControls: true,
-            hasBorders: true,
-            lockScalingFlip: true
-        });
-
-        canvas.add(clonedTextbox);
-
-        // Add icons to the cloned textbox
-        addIconsToTextbox(clonedTextbox);
-
-        canvas.renderAll();
     }
 
     function findTextboxCenter(textbox) {
@@ -803,6 +580,359 @@ $(document).on('click','.edit_design_tem',function(e){
         canvas.renderAll();
     }
 
-   
+
+    // Function to clone a textbox
+    function cloneTextbox(originalTextbox) {
+        const clonedTextbox = new fabric.Textbox(originalTextbox.text, {
+            left: originalTextbox.left + 30, // Offset position
+            top: originalTextbox.top + 30,   // Offset position
+            fontSize: originalTextbox.fontSize,
+            fill: originalTextbox.fill,
+            width: originalTextbox.width,
+            height: originalTextbox.height,
+            fontFamily: originalTextbox.fontFamily,
+            originX: originalTextbox.originX,
+            originY: originalTextbox.originY,
+            hasControls: true,
+            hasBorders: true,
+            lockScalingFlip: true
+        });
+
+        canvas.add(clonedTextbox);
+
+        // Add icons to the cloned textbox
+        addIconsToTextbox(clonedTextbox);
+
+        canvas.renderAll();
+    }
+
+    // Handle keyboard events for delete and copy
+    function handleKeyboardEvents(e) {
+        if (e.key === 'Delete') {
+            const activeObject = canvas.getActiveObject();
+            if (activeObject && activeObject.type === 'textbox') {
+                deleteTextbox(activeObject);
+            }
+        } else if (e.ctrlKey && e.key === 'c') {
+            const activeObject = canvas.getActiveObject();
+            if (activeObject && activeObject.type === 'textbox') {
+                cloneTextbox(activeObject);
+            }
+        }
+    }
+
+    // Add event listener for keyboard events
+    document.addEventListener('keydown', handleKeyboardEvents);
+
+
+
+    // Example textbox
+
+
+
+    // Add two draggable static textboxes outside the image area
+    addDraggableText(350, 50, 'event_name', 'xyz'); // Position this outside the image area
+    addDraggableText(350, 100, 'host_name', 'abc');
+    addDraggableText(350, 150, 'start_time', '5:00PM');
+    addDraggableText(350, 200, 'rsvp_end_time', '6:00PM');
+    addDraggableText(350, 250, 'start_date', '2024-07-27');
+    addDraggableText(350, 300, 'end_date', '2024-07-27');
+    addDraggableText(350, 350, 'Location', 'fdf');
+
+
+
+    function updateSelectedTextProperties() {
+        var fontSize = parseInt(document.getElementById('fontSize').value, 10);
+        var fontColor = document.getElementById('fontColor').value;
+        var activeObject = canvas.getActiveObject();
+
+        if (activeObject && activeObject.type === 'textbox') {
+            // Update text properties
+            activeObject.set({
+                fontSize: fontSize,
+                fill: fontColor
+            });
+            activeObject.setCoords(); // Update coordinates
+
+            // Log the updated properties
+            console.log('Updated Font Size: ' + activeObject.fontSize);
+            console.log('Updated Font Color: ' + activeObject.fill);
+
+            canvas.renderAll();
+            addToUndoStack(); // Save state after updating properties
+        }
+    }
+
+
+
+    // document.getElementById('fontSize').addEventListener('change', updateSelectedTextProperties);
+    // document.getElementById('fontColor').addEventListener('input', updateSelectedTextProperties);
+
+
+
+
+
+
+
+    canvas.on('mouse:down', function (options) {
+        if (options.target && options.target.type === 'textbox') {
+            canvas.setActiveObject(options.target);
+        }
+    });
+    function getTextDataFromCanvas() {
+        var objects = canvas.getObjects();
+
+        var textData = [];
+
+        objects.forEach(function (obj) {
+            if (obj.type === 'textbox') {
+                var centerX = obj.left + (obj.width / 2);
+                var centerY = obj.top + (obj.height / 2);
+                textData.push({
+                    text: obj.text,
+                    left: obj.left,
+                    top: obj.top,
+                    fontSize: obj.fontSize,
+                    fill: obj.fill,
+                    centerX: centerX, // Include centerX in the data
+                    centerY: centerY, // Include centerY in the data
+                    dx: obj.left, // Calculate dx
+                    dy: obj.top,   // Calculate dy
+                    backgroundColor: obj.backgroundColor,
+                    fontFamily: obj.fontFamily,
+                    textAlign: obj.textAlign,
+                    fontWeight: obj.fontWeight,
+                    fontStyle: obj.fontStyle,
+                    underline: obj.underline,
+                    linethrough: obj.linethrough,
+                    date_formate: obj.date_formate // Include date_formate if set
+                });
+            }
+        });
+
+        return textData;
+    }
+    document.getElementById('addTextButton').addEventListener('click', function () {
+        addEditableTextbox(100, 100, 'EditableText');  // You can set the initial position and default text
+    });
+
+    function addEditableTextbox(left, top, textContent) {
+        var textbox = new fabric.Textbox(textContent, {
+            left: left,
+            top: top,
+            width: 200,
+            fontSize: 20,
+         backgroundColor: 'rgba(0, 0, 0, 0)', // Set background to transparent
+
+            fill: '#000000',
+            editable: true,
+            selectable: true,
+            hasControls: true,
+            borderColor: 'blue',
+            cornerColor: 'red',
+            cornerSize: 6,
+            transparentCorners: false
+        });
+
+        textbox.on('scaling', function () {
+            // Update the font size based on scaling
+            var updatedFontSize = textbox.fontSize * (textbox.scaleX + textbox.scaleY) / 2;
+            textbox.set('fontSize', updatedFontSize);
+            canvas.renderAll();
+        });
+
+        canvas.add(textbox);
+        canvas.setActiveObject(textbox);
+        addIconsToTextbox(textbox); // Make it the active object for editing
+        canvas.renderAll();
+    }
+
+
+    function saveTextDataToDatabase() {
+        hideStaticTextElements(); // Hide the text elements
+        var textData = getTextDataFromCanvas();
+        var imageURL = canvas.toDataURL('image/png');
+        var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content'); // Get CSRF token
+        // Get the canvas ID to associate the saved data with a specific record
+        var canvasElement = document.getElementById('imageEditor1');
+        var canvasId = canvasElement.getAttribute('data-canvas-id');
+        var imageName = 'image_' + Date.now() + '.png';
+        console.log(canvasId);
+        fetch('/saveTextData', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json', // Set content type to JSON
+                'X-CSRF-TOKEN': csrfToken // Include CSRF token
+            },
+            body: JSON.stringify({
+                id: canvasId,
+                textElements: textData,
+
+            })
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Text data saved successfully', data);
+
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        showStaticTextElements();
+    }
+
+
+
+
+
+
+
+
+        function executeCommand(command) {
+            var activeObject = canvas.getActiveObject();
+            if (!activeObject) {
+                alert('No object selected');
+                return;
+            }
+            if (activeObject && activeObject.type === 'textbox') {
+
+                const commands = {
+                    bold: () => activeObject.set('fontWeight', activeObject.fontWeight === 'bold' ? '' : 'bold'),
+                    italic: () => activeObject.set('fontStyle', activeObject.fontStyle === 'italic' ? '' : 'italic'),
+                    underline: () => {
+                        activeObject.set('underline', !activeObject.underline);
+                        // Update line height after toggling underline
+                        const currentLineHeight = activeObject.lineHeight || 1.2; // Default line height
+                        activeObject.set('lineHeight', currentLineHeight); // Reapply the line height
+                    },
+                    setLineHeight: (value) => {
+                        activeObject.set('lineHeight', value);
+                    },
+                    strikeThrough: () => activeObject.set('linethrough', !activeObject.linethrough),
+                    removeFormat: () => {
+                        activeObject.set({
+                            fontWeight: '',
+                            fontStyle: '',
+                            underline: false,
+                            linethrough: false,
+                            fontFamily: 'Arial'
+                        });
+                    },
+                    fontName: () => {
+                        var selectedFont = document.querySelector('[data-command="fontName"]').value;
+                        activeObject.set('fontFamily', selectedFont);
+                    },
+
+                    justifyLeft: () => activeObject.set('textAlign', 'left'),
+                    justifyCenter: () => activeObject.set('textAlign', 'center'),
+                    justifyRight: () => activeObject.set('textAlign', 'right'),
+                    justifyFull: () => activeObject.set('textAlign', 'justify'),
+
+                    uppercase: () => activeObject.set('text', activeObject.text.toUpperCase()),
+                    lowercase: () => activeObject.set('text', activeObject.text.toLowerCase()),
+                    capitalize: () => {
+                        const capitalizedText = activeObject.text.replace(/\b\w/g, char => char.toUpperCase());
+                        activeObject.set('text', capitalizedText);
+                    }
+
+                };
+                if (commands[command]) {
+                    commands[command]();
+                    canvas.renderAll();
+                    addToUndoStack(); // Save state after executing the command
+                }
+            }
+        }
+
+    document.querySelectorAll('[data-command]').forEach(function (button) {
+        button.addEventListener('click', function () {
+            executeCommand(this.getAttribute('data-command'));
+        });
+    });
+    // document.getElementById('fontFamilySelect').addEventListener('change', function () {
+    //     executeCommand('fontName');
+    // });
+
+
+    // document.getElementById('dateFormatSelect').addEventListener('change', function () {
+    //     // Get the selected date format
+    //     var selectedFormat = this.value;
+
+    //     // Get the active object from the canvas (assuming it's a textbox)
+    //     var activeObject = canvas.getActiveObject();
+    //     if (activeObject && activeObject.type === 'textbox') {
+    //         // Extract the date text from the active object
+    //         var dateText = activeObject.text;
+
+    //         // Optional: You can use regex to identify a date within the text if it's not the whole text
+    //         // Assuming the whole text is the date for simplicity
+    //         var formattedDate = formatDate(dateText, selectedFormat);
+
+    //         // Update the active object's text with the formatted date
+    //         activeObject.set('text', formattedDate);
+    //         activeObject.set('date_formate', selectedFormat);
+    //         canvas.renderAll(); // Re-render the canvas
+    //     }
+    // });
+
+    // function formatDate(dateStr, format) {
+    //     // Parse the existing date (e.g., in YYYY-MM-DD format)
+    //     var dateParts = dateStr.split(/[-\/]/); // Adjust the regex if date separators are different
+
+    //     var year, month, day;
+    //     if (dateParts.length === 3) {
+    //         if (dateParts[0].length === 4) {
+    //             // Assume YYYY-MM-DD format
+    //             year = dateParts[0];
+    //             month = dateParts[1];
+    //             day = dateParts[2];
+    //         } else {
+    //             // Assume DD-MM-YYYY or MM-DD-YYYY
+    //             day = dateParts[0];
+    //             month = dateParts[1];
+    //             year = dateParts[2];
+    //         }
+    //     } else {
+    //         return dateStr; // Return original text if not a valid date
+    //     }
+
+    //     // Reformat date based on the selected format
+    //     switch (format) {
+    //         case 'd-m-Y':
+    //             return `${day}-${month}-${year}`;
+    //         case 'Y-m-d':
+    //             return `${year}-${month}-${day}`;
+    //         case 'm/d/Y':
+    //             return `${month}/${day}/${year}`;
+    //         case 'd/m/Y':
+    //             return `${day}/${month}/${year}`;
+    //         default:
+    //             return dateStr; // Return original if no valid format is found
+    //     }
+    // }
+
+
+    // Undo and Redo actions (basic implementation)
+    let undoStack = [];
+    let redoStack = [];
+
+    function addToUndoStack() {
+        undoStack.push(canvas.toJSON());
+        redoStack = []; // Clear redo stack on new action
+    }
+
+    function undo() {
+        if (undoStack.length > 0) {
+            redoStack.push(canvas.toJSON());
+            canvas.loadFromJSON(undoStack.pop(), canvas.renderAll.bind(canvas));
+        }
+    }
+
+    function redo() {
+        if (redoStack.length > 0) {
+            undoStack.push(canvas.toJSON());
+            canvas.loadFromJSON(redoStack.pop(), canvas.renderAll.bind(canvas));
+        }
+    }
 
 })
