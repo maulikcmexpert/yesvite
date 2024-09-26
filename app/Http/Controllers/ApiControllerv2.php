@@ -5451,7 +5451,7 @@ class ApiControllerv2 extends Controller
                 $DesignImageName = time() . '_' . str_replace(' ', '_', $designImage->getClientOriginalName());
                 $designImage->move(public_path('storage/canvas'), $DesignImageName);
                 $eventDesingImage = Event::where('id',  $request->event_id)->first();
-                $eventDesingImage->design_image = $imageName;
+                $eventDesingImage->design_image = $DesignImageName;
                 $eventDesingImage->save();
             }
 
