@@ -841,6 +841,19 @@ ul.member-lists li:last-child {
     width: 100% !important;
 }
 
+.msg-footer .message-perent textarea {
+    width: 100%;
+    padding-right: 10px;
+    border: none;
+}
+
+.msg-footer .message-perent textarea:focus {
+    outline: none !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+
 .msg-footer .message-perent .gap-3 {}
 
 .msg-footer .set-replay-msg {
