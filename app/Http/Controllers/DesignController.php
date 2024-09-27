@@ -172,7 +172,7 @@ class DesignController extends Controller
 
             if (isset($imageName)) {
 
-                $imagePath = asset('assets/images/' . $imageName);
+                $imagePath = asset('storage/canvas/' . $imageName);
 
 
                 return response()->json([
