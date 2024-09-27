@@ -107,14 +107,14 @@ class TemplateController extends Controller
                 if ($image) {
                     $imageName = time() . '.' . $image->getClientOriginalExtension();
                     // Save the image in the public/assets/images folder
-                    $image->move(public_path('assets/images'), $imageName);
+                    $image->move(public_path('storage/canvas'), $imageName);
                 }
             }
 
             // Store the template with design ID and the uploaded image's filename
             TextData::create([
-                'design_id' => $request->design_id,
-                'event_design_subcategory_id' => $request->event_design_subcategory_id,
+                'event_category_id' => $request->event_design_category_id,
+                'event_sub_category_id' => $request->event_design_sub_category_id,
                 'image' => $imageName, // Save the uploaded image filename
             ]);
 

@@ -40,7 +40,7 @@
                         <div class="form-group">
                             <label for="exampleInputEmail1">Design</label>
 
-                            <select class="form-control design_id" id="design_id" name="design_id">
+                            <select class="form-control design_id" id="event_design_category_id" name="event_design_category_id">
 
                                 <option value="">Select Design</option>
 
@@ -50,7 +50,7 @@
 
                                 @endforeach
                             </select>
-                            <select class="form-control event_design_subcategory_id" id="event_design_subcategory_id" name="event_design_subcategory_id">
+                            <select class="form-control event_design_subcategory_id" id="event_design_sub_category_id" name="event_design_sub_category_id">
 
                                 <option value="">Select subcategory</option>
 
