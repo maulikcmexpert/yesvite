@@ -440,7 +440,7 @@
                     </div>
                     <div class="range-slider">
                         <div id="fontSizeTooltip" class="tooltip"></div>
-                        <input id="fontSizeRange" type="range" step="1" value="20" min="1" max="100">
+                        <input id="fontSizeRange" type="range" class="range" step="1" value="20" min="1" max="100">
                     </div>
                 </div>
 
@@ -452,7 +452,7 @@
                     </div>
                     <div class="range-slider">
                         <div id="letterSpacingTooltip" class="tooltip"></div>
-                        <input id="letterSpacingRange" type="range" step="1" value="0" min="0" max="500">
+                        <input id="letterSpacingRange" type="range" class="range" step="1" value="0" min="0" max="500">
                     </div>
                 </div>
 
@@ -464,7 +464,7 @@
                     </div>
                     <div class="range-slider">
                         <div id="lineHeightTooltip" class="tooltip"></div>
-                        <input id="lineHeightRange" type="range" step="0.1" value="1.2" min="0.5" max="3">
+                        <input id="lineHeightRange" type="range" class="range" step="0.1" value="1.2" min="0.5" max="3">
                     </div>
                 </div>
             </div>
