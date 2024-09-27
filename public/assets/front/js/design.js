@@ -14,11 +14,24 @@ $(document).on("click", ".design-card", function () {
     // Set the image URL in the modal's image tag
     $("#modalImage").attr("src", imageUrl);
     image = imageUrl;
-
-    var canvas = new fabric.Canvas('imageEditor1', {
+    $("#exampleModal").modal("show");
+    var canvas = new fabric.Canvas('imageEditor2', {
         width: 350, // Canvas width
         height: 490, // Canvas height
     });
+
+    const defaultSettings = {
+        fontSize: 20,
+        letterSpacing: 0,
+        lineHeight: 1.2
+    };
+
+    // Save settings object (for the save functionality)
+    let savedSettings = {
+        fontSize: defaultSettings.fontSize,
+        letterSpacing: defaultSettings.letterSpacing,
+        lineHeight: defaultSettings.lineHeight
+    };
     fabric.Image.fromURL(image, function (img) {
         img.set({
             left: 0,
@@ -29,7 +42,10 @@ $(document).on("click", ".design-card", function () {
         canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
     });
     jsonText(json);
-    $("#exampleModal").modal("show");
+    
+});
+document.addEventListener('DOMContentLoaded', function() {
+    var canvas = new fabric.Canvas('imageEditor2');
 });
 $(document).on("click", ".design-sidebar-action", function () {
     let designId = $(this).attr('design-id')
@@ -149,6 +165,83 @@ function jsonText(editable = null){
         canvas.add(textElement);
 
     });
+
+    function addIconsToTextbox(textbox) {
+        // Trash icon SVG
+        const trashIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 50 50"><path d="M20,30 L30,30 L30,40 L20,40 Z M25,10 L20,10 L20,7 L30,7 L30,10 Z M17,10 L33,10 L33,40 L17,40 Z" fill="#FF0000"/></svg>`;
+        fabric.loadSVGFromString(trashIconSVG, function (objects, options) {
+            const trashIcon = fabric.util.groupSVGElements(objects, options);
+            trashIcon.set({
+                left: textbox.left + textbox.width * textbox.scaleX - 20,
+                top: textbox.top - 20,
+                selectable: false,
+                evented: true,
+                hasControls: false,
+                visible: false, // Initially hidden
+                className: 'trash-icon',
+            });
+            textbox.trashIcon = trashIcon;
+    
+            // Handle trash icon click
+            trashIcon.on('mousedown', function () {
+                console.log('Trash icon clicked');
+                deleteTextbox(textbox);
+            });
+    
+            canvas.add(trashIcon);
+        });
+    
+        // Copy icon SVG
+        const copyIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 50 50"><path d="M5,5 L30,5 L30,30 L5,30 Z M35,5 L45,5 L45,35 L35,35 L35,5 Z" fill="#0000FF"/></svg>`;
+        fabric.loadSVGFromString(copyIconSVG, function (objects, options) {
+            const copyIcon = fabric.util.groupSVGElements(objects, options);
+            copyIcon.set({
+                left: textbox.left - 25,
+                top: textbox.top - 20,
+                selectable: false,
+                evented: true,
+                hasControls: false,
+                visible: false, // Initially hidden
+                className: 'copy-icon',
+            });
+            textbox.copyIcon = copyIcon;
+    
+            // Handle copy icon click
+            copyIcon.on('mousedown', function () {
+                console.log('Copy icon clicked');
+                cloneTextbox(textbox);
+            });
+    
+            canvas.add(copyIcon);
+        });
+    
+        // Bind the updateIconPositions function to the moving and scaling events
+        textbox.on('moving', function () {
+            updateIconPositions(textbox);
+        });
+        textbox.on('scaling', function () {
+            updateIconPositions(textbox);
+        });
+    
+        // Event listener to manage icon visibility when a textbox is clicked
+        textbox.on('mousedown', function () {
+            canvas.getObjects('textbox').forEach(function (tb) {
+                if (tb.trashIcon) tb.trashIcon.set('visible', false); // Hide other icons
+                if (tb.copyIcon) tb.copyIcon.set('visible', false);
+            });
+            if (textbox.trashIcon) textbox.trashIcon.set('visible', true); // Show current icons
+            if (textbox.copyIcon) textbox.copyIcon.set('visible', true);
+            canvas.renderAll(); // Re-render the canvas
+        });
+    
+        // Initially hide all icons
+        canvas.getObjects('textbox').forEach(function (tb) {
+            if (tb.trashIcon) tb.trashIcon.set('visible', false);
+            if (tb.copyIcon) tb.copyIcon.set('visible', false);
+        });
+    
+        canvas.renderAll(); // Final render
+    }
 }
 
 $(document).on('click','.edit_design_tem',function(e){
@@ -912,79 +1005,4 @@ $(document).on('click','.edit_design_tem',function(e){
 
 })
 
-function addIconsToTextbox(textbox) {
-    // Trash icon SVG
-    const trashIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 50 50"><path d="M20,30 L30,30 L30,40 L20,40 Z M25,10 L20,10 L20,7 L30,7 L30,10 Z M17,10 L33,10 L33,40 L17,40 Z" fill="#FF0000"/></svg>`;
-    fabric.loadSVGFromString(trashIconSVG, function (objects, options) {
-        const trashIcon = fabric.util.groupSVGElements(objects, options);
-        trashIcon.set({
-            left: textbox.left + textbox.width * textbox.scaleX - 20,
-            top: textbox.top - 20,
-            selectable: false,
-            evented: true,
-            hasControls: false,
-            visible: false, // Initially hidden
-            className: 'trash-icon',
-        });
-        textbox.trashIcon = trashIcon;
 
-        // Handle trash icon click
-        trashIcon.on('mousedown', function () {
-            console.log('Trash icon clicked');
-            deleteTextbox(textbox);
-        });
-
-        canvas.add(trashIcon);
-    });
-
-    // Copy icon SVG
-    const copyIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 50 50"><path d="M5,5 L30,5 L30,30 L5,30 Z M35,5 L45,5 L45,35 L35,35 L35,5 Z" fill="#0000FF"/></svg>`;
-    fabric.loadSVGFromString(copyIconSVG, function (objects, options) {
-        const copyIcon = fabric.util.groupSVGElements(objects, options);
-        copyIcon.set({
-            left: textbox.left - 25,
-            top: textbox.top - 20,
-            selectable: false,
-            evented: true,
-            hasControls: false,
-            visible: false, // Initially hidden
-            className: 'copy-icon',
-        });
-        textbox.copyIcon = copyIcon;
-
-        // Handle copy icon click
-        copyIcon.on('mousedown', function () {
-            console.log('Copy icon clicked');
-            cloneTextbox(textbox);
-        });
-
-        canvas.add(copyIcon);
-    });
-
-    // Bind the updateIconPositions function to the moving and scaling events
-    textbox.on('moving', function () {
-        updateIconPositions(textbox);
-    });
-    textbox.on('scaling', function () {
-        updateIconPositions(textbox);
-    });
-
-    // Event listener to manage icon visibility when a textbox is clicked
-    textbox.on('mousedown', function () {
-        canvas.getObjects('textbox').forEach(function (tb) {
-            if (tb.trashIcon) tb.trashIcon.set('visible', false); // Hide other icons
-            if (tb.copyIcon) tb.copyIcon.set('visible', false);
-        });
-        if (textbox.trashIcon) textbox.trashIcon.set('visible', true); // Show current icons
-        if (textbox.copyIcon) textbox.copyIcon.set('visible', true);
-        canvas.renderAll(); // Re-render the canvas
-    });
-
-    // Initially hide all icons
-    canvas.getObjects('textbox').forEach(function (tb) {
-        if (tb.trashIcon) tb.trashIcon.set('visible', false);
-        if (tb.copyIcon) tb.copyIcon.set('visible', false);
-    });
-
-    canvas.renderAll(); // Final render
-}
