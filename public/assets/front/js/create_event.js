@@ -1105,15 +1105,17 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
                 // }
 
                 $(".inivted_user_list").append(response.view);
-                var length = responsive_invite_user();
-                if(length < 4){
-                    $('.all_user_list').remove();
-                    $(".user-list-responsive").empty();
-                    $(".user-list-responsive").html(response.responsive_view);
-                    // $(".user-list-responsive").append(response.responsive_view);
-                }else{
-                    add_user_counter();
-                }
+                $(".user-list-responsive").empty();
+                $(".user-list-responsive").html(response.responsive_view);
+                // var length = responsive_invite_user();
+                // if(length < 4){
+                //     $('.all_user_list').remove();
+                //     $(".user-list-responsive").empty();
+                //     $(".user-list-responsive").html(response.responsive_view);
+                //     // $(".user-list-responsive").append(response.responsive_view);
+                // }else{
+                //     // add_user_counter();
+                // }
                 if(remainingCount < 0){
                     $(".invite-left_d").text("Invites | 0 Left");
                 }else{
@@ -4611,14 +4613,16 @@ $(document).on("click", ".invite_group_member", function () {
             console.log(response);
             $(".inivted_user_list").append(response.view);
             var length = responsive_invite_user();
-            if(length < 4){
-                $('.all_user_list').remove();
-                $(".user-list-responsive").empty();
-                $(".user-list-responsive").html(response.responsive_view);
-                // $(".user-list-responsive").append(response.responsive_view);
-            }else{
-                add_user_counter();
-            }
+            $(".user-list-responsive").empty();
+            $(".user-list-responsive").html(response.responsive_view);
+            // if(length < 4){
+            //     $('.all_user_list').remove();
+            //     $(".user-list-responsive").empty();
+            //     $(".user-list-responsive").html(response.responsive_view);
+            //     // $(".user-list-responsive").append(response.responsive_view);
+            // }else{
+            //     // add_user_counter();
+            // }
             // $(".inivted_user_list").html('');
                 guest_counter(0,15);
 
