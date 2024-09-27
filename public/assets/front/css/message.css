@@ -1666,6 +1666,10 @@ ul.chat-list li.setpink{
     overflow-y: scroll;
 }
 
+#ui-id-1 .user-detail span {
+    white-space: break-spaces;
+}
+
 /* ======= responsive ======== */
 
 
