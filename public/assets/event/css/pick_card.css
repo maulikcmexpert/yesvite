@@ -286,6 +286,11 @@
         border-bottom: none;
         padding-bottom: 0px;
     }
+
+    .choose-design-cards{
+        justify-content: space-evenly;
+    }
+
 }
 
 @media only screen and (max-width: 575px) {

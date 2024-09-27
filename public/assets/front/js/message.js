@@ -451,9 +451,7 @@ async function handleNewConversation(snapshot) {
             `conversation-${newConversation.conversationId}`
         )
     );
-    setTimeout(function () {
-        moveToTopOrBelowPinned(ele);
-    }, 2000);
+    moveToTopOrBelowPinned(ele);
 }
 
 function moveToTopOrBelowPinned(element) {
@@ -472,13 +470,18 @@ function moveToTopOrBelowPinned(element) {
 
         // Find the correct spot based on `data-position`
         let inserted = false;
+
         $listItems.each(function () {
             let listItemPosition = parseInt($(this).attr("data-position"));
             let listItemDiv = $(this).closest("div"); // Get the parent div of the current li
-            if (listItemPosition > elementPosition) {
-                listItemDiv.before(parentDiv); // Insert the parent div in the correct position
-                inserted = true;
-                return false; // Exit the loop after inserting
+
+            // Ensure we're not moving the element before itself
+            if (listItemDiv[0] !== parentDiv[0]) {
+                if (listItemPosition > elementPosition) {
+                    listItemDiv.before(parentDiv); // Insert the parent div in the correct position
+                    inserted = true;
+                    return false; // Exit the loop after inserting
+                }
             }
         });
 
