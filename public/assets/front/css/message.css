@@ -227,6 +227,21 @@ ul.chat-list li:last-child {
     right: 0;
     bottom: 0;
 }
+.chat-list .user-img .inactive {
+    width: 14px;
+    height: 14px;
+    display: block;
+    border: 3px solid #fff;
+    border-radius: 100%;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    -ms-border-radius: 100%;
+    -o-border-radius: 100%;
+    background-color: #af2d0c;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
 
 /* .chat-list .user-detail{
     width: 55%;
