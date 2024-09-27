@@ -155,7 +155,9 @@ $(document).on("click", ".design-card", function () {
 
     });
 });
-
+$(document).on('click','.modal-design-card',function(e){
+    e.stopPropagation();
+})
 
 $(document).on("click", ".design-sidebar-action", function () {
     let designId = $(this).attr('design-id')
