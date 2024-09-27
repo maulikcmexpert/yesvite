@@ -468,7 +468,7 @@ function moveToTopOrBelowPinned(element) {
     } else {
         // If not pinned, move it after the last pinned element
         let lastPinnedDiv = $chatList.children("div.pinned").last();
-
+        console.log(lastPinnedDiv);
         if (lastPinnedDiv.length > 0) {
             lastPinnedDiv.after(parentDiv); // Place after the last pinned parent div
         } else {
