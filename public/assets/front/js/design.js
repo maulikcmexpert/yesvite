@@ -179,7 +179,7 @@ $(document).on('click','.edit_design_tem',function(e){
 }
 
     var canvas = new fabric.Canvas('imageEditor1', {
-        width: 400, // Canvas width
+        width: 350, // Canvas width
         height: 500, // Canvas height
 
 
