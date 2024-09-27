@@ -1113,17 +1113,30 @@ $(document).on('click','.edit_design_tem',function(e){
 
 })
 
-range = document.getElementById('letterSpacingRange'),
-tooltip = document.getElementById('letterSpacingTooltip'),
-setValue = ()=>{
-    const
-        newValue = Number( (range.value - range.min) * 100 / (range.max - range.min) ),
-        newPosition = 16 - (newValue * 0.32);
+// Function to set the tooltip value and position for a specific range
+const setValue = (range, tooltip) => {
+    const newValue = Number((range.value - range.min) * 100 / (range.max - range.min));
+    const newPosition = 16 - (newValue * 0.32);
     tooltip.innerHTML = `<span>${range.value}</span>`;
     tooltip.style.left = `calc(${newValue}% + (${newPosition}px))`;
     document.documentElement.style.setProperty("--range-progress", `calc(${newValue}% + (${newPosition}px))`);
 };
-document.addEventListener("DOMContentLoaded", setValue);
-range.addEventListener('input', setValue);
+
+// Function to set up a specific range and its tooltip
+const setupRange = (rangeId, tooltipId) => {
+    const range = document.getElementById(rangeId);
+    const tooltip = document.getElementById(tooltipId);
+
+    // Set initial value when the page loads
+    document.addEventListener("DOMContentLoaded", () => setValue(range, tooltip));
+
+    // Add an event listener for input changes
+    range.addEventListener('input', () => setValue(range, tooltip));
+};
+
+// Call setupRange for each range input and its corresponding tooltip
+setupRange('letterSpacingRange', 'letterSpacingTooltip');
+setupRange('fontSizeRange', 'fontSizeTooltip'); // Replace with your actual IDs
+setupRange('lineHeightRange', 'lineHeightTooltip'); // Replace with your actual IDs
 
 
