@@ -12,7 +12,6 @@ $(document).on("click", ".design-card", function () {
     dbJson = json;
     temp_id = id;
     // Set the image URL in the modal's image tag
-    $('#imageEditor2').empty();   
     $("#modalImage").attr("src", imageUrl);
     image = imageUrl;
     $("#exampleModal").modal("show");
@@ -21,6 +20,8 @@ $(document).on("click", ".design-card", function () {
         height: 490, // Canvas height
         position:'relative',
     });
+    const context = canvas.getContext('2d');
+    context.clearRect(0, 0, canvas.width, canvas.height);
 
     const defaultSettings = {
         fontSize: 20,
