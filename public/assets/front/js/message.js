@@ -454,7 +454,9 @@ async function handleNewConversation(snapshot) {
     moveToTopOrBelowPinned(ele);
 }
 function moveToTopOrBelowPinned(element, setOnTop = false) {
-    console.log({ element });
+    if (element.length <= 0) {
+        return;
+    }
     let $chatList = $(".chat-list"); // Get the chat list container
     let isPinned = element.hasClass("pinned"); // Check if the element is pinned
     let parentDiv = element.closest("div"); // Get the parent div containing the li
@@ -488,7 +490,9 @@ function moveToTopOrBelowPinned(element, setOnTop = false) {
     } else {
         // Normal case: if not setOnTop, place the element based on its data-position
         let $listItems = $chatList.children("div").not(".pinned").find("li");
-        let elementPosition = parseInt(element.attr("data-position"));
+        let elementPosition = parseInt(
+            element.children().attr("data-position")
+        );
         let inserted = false;
         console.log({ elementPosition });
 
