@@ -12,15 +12,10 @@ $(document).on("click", ".design-card", function () {
     dbJson = json;
     temp_id = id;
     // Set the image URL in the modal's image tag
+    $('#imageEditor2').empty();   
     $("#modalImage").attr("src", imageUrl);
     image = imageUrl;
     $("#exampleModal").modal("show");
-    if (typeof canvas !== 'undefined' && canvas) {
-        alert();
-        canvas.clear();
-        canvas.renderAll();
-        $('.upper-canvas').remove();
-    }    
     var canvas = new fabric.Canvas('imageEditor2', {
         width: 350, // Canvas width
         height: 490, // Canvas height
