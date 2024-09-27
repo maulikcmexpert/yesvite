@@ -1,5 +1,7 @@
 <script type="text/javascript">
     document.addEventListener('DOMContentLoaded', function() {
+
+
         // Initialize fabric canvas
         var canvas = new fabric.Canvas('imageEditor1', {
             width: 500, // Canvas width
@@ -630,13 +632,13 @@
 
 
         // Add two draggable static textboxes outside the image area
-        addDraggableText(350, 50, 'event_name', 'xyz'); // Position this outside the image area
-        addDraggableText(350, 100, 'host_name', 'abc');
-        addDraggableText(350, 150, 'start_time', '5:00PM');
-        addDraggableText(350, 200, 'rsvp_end_time', '6:00PM');
-        addDraggableText(350, 250, 'start_date', '2024-07-27');
-        addDraggableText(350, 300, 'end_date', '2024-07-27');
-        addDraggableText(350, 350, 'Location', 'fdf');
+        // addDraggableText(350, 50, 'event_name', 'xyz'); // Position this outside the image area
+        // addDraggableText(350, 100, 'host_name', 'abc');
+        // addDraggableText(350, 150, 'start_time', '5:00PM');
+        // addDraggableText(350, 200, 'rsvp_end_time', '6:00PM');
+        // addDraggableText(350, 250, 'start_date', '2024-07-27');
+        // addDraggableText(350, 300, 'end_date', '2024-07-27');
+        // addDraggableText(350, 350, 'Location', 'fdf');
 
 
 
@@ -966,5 +968,16 @@
 
     });
 
+
+
+    $(document).on("click", ".design-sidebar-action", function() {
+        let designId = $(this).attr('design-id')
+        if (designId) {
+            $(".design-sidebar").addClass('d-none')
+            $(".design-sidebar_" + designId).removeClass('d-none')
+            $('#sidebar').addClass("design-sidebar_" + designId);
+            $('.close-btn').attr('data-id', "design-sidebar_" + designId);
+        }
+    })
     //  =========================
 </script>
