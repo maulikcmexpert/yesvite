@@ -285,7 +285,17 @@
 
         // })
 
-
+        $('#upload_filled_image').on('change', function(e) {
+            var file = e.target.files[0]; // Get the selected file
+            if (file) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#preview_filled_image').css('display', 'block');
+                    $('#preview_filled_image').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(file);
+            }
+        });
 
 
 
