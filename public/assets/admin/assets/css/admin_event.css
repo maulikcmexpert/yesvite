@@ -947,13 +947,7 @@
 }
 
 
-@media only screen and (max-width: 1399px) {
-    .image-edit-inner-img {
-        width: 480px;
-        height: 580px;
-        margin: 0px auto;
-    }
-}
+
 
 
 @media only screen and (max-width: 1199px) {
@@ -987,8 +981,8 @@
     }
 
     .image-edit-inner-img {
-        width: 500px;
-        height: 560px;
+        width: 400px;
+        height: 648px;
         margin: 0px auto;
     }
 
@@ -1064,11 +1058,7 @@
         border-radius: 0px !important;
     }
 
-    .image-edit-inner-img {
-        width: 400px;
-        height: 460px;
-        margin: 0px auto;
-    }
+
 }
 
 @media only screen and (max-width: 424px) {
