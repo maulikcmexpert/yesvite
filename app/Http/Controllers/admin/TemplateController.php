@@ -95,6 +95,7 @@ class TemplateController extends Controller
     public function store(Request $request)
     {
         try {
+            dd($request);
             DB::beginTransaction();
 
             // Initialize $imageName to avoid undefined variable errors
