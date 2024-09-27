@@ -104,15 +104,22 @@
                 }
             });
 
-            $(document).on('submit', '#templateAdd', function() {
+            $(document).on('click', '#templateAdd', function() {
                 var selectedValue = $("#event_design_category_id").val();
                 var selectedSubCategory = $("#event_design_sub_category_id").val();
+                var hasError = false;
                 if (selectedValue === '') {
                     $("#event_design_category_id").next('.text-danger').text('Please select design category');
-                    e.preventDefault();
+                    hasError = true;
                 }
                 if (selectedSubCategory === '') {
                     $("#event_design_sub_category_id").next('.text-danger').text('Please select design subcategory');
+                    hasError = true;
+                }
+
+                if (!hasError) {
+                    $("#templateForm").submit();
+                } else {
                     e.preventDefault();
                 }
 
