@@ -450,7 +450,7 @@ async function handleNewConversation(snapshot) {
         document.getElementsByClassName(
             `conversation-${newConversation.conversationId}`
         )
-    ).parent();
+    ).closest("div");
     moveToTopOrBelowPinned(ele);
 }
 function moveToTopOrBelowPinned(element, setOnTop = false) {
