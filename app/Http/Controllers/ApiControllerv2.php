@@ -6918,7 +6918,7 @@ class ApiControllerv2 extends Controller
 
             $event_dates = $eventDetail->event_date;
             $dateArray  = explode(' to ', $event_dates);
-            dd($dateArray);
+            dd($event_dates);
             $multidate = "";
             if (count($dateArray) === 2) {
                 $startDate = trim($dateArray[0]);
