@@ -628,7 +628,9 @@
 
 
 
-
+.timepicker::placeholder{
+    font-size: 12px !important;
+}
 
 .bootstrap-datetimepicker-widget.dropdown-menu {
     border: 1px solid var(--borderColor);
