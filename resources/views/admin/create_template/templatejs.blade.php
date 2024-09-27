@@ -282,8 +282,14 @@
         //     },
 
 
+        $('#image').on('change', function() {
+            previewImage(this, '#add_preview_image');
+        });
 
-        // })
+        $('#filled_image').on('change', function() {
+            previewImage(this, '#add_preview_filled_image');
+        });
+
         $('#upload_image').on('change', function() {
             previewImage(this, '#preview_image');
         });
@@ -291,6 +297,8 @@
         $('#upload_filled_image').on('change', function() {
             previewImage(this, '#preview_filled_image');
         });
+
+
 
 
         function previewImage(inputElement, previewElement) {

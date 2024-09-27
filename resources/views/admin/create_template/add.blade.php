@@ -75,9 +75,8 @@
                         <div class="form-group">
 
                             <label for="exampleInputEmail1">Image</label>
-
                             <input type="file" class="form-control image" name="image" placeholder="choose image" id="image" value="">
-
+                            <img id="add_preview_image" src="" alt="Template Image" width="100" class="mt-2" style="display: none;">
                             <span class="text-danger">{{ $errors->first('image.*') }}</span>
 
 
@@ -91,9 +90,8 @@
                         <div class="form-group">
 
                             <label for="exampleInputEmail1">Filled Image</label>
-
                             <input type="file" class="form-control image" name="filled_image" placeholder="choose image" id="filled_image" value="">
-
+                            <img id="add_preview_filled_image" src="" alt="Template Image" width="100" class="mt-2" style="display: none;">
                             <span class="text-danger">{{ $errors->first('filled_image.*') }}</span>
 
 
