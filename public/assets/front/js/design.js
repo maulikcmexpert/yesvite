@@ -14,6 +14,21 @@ $(document).on("click", ".design-card", function () {
     // Set the image URL in the modal's image tag
     $("#modalImage").attr("src", imageUrl);
     image = imageUrl;
+
+    var canvas = new fabric.Canvas('imageEditor1', {
+        width: 350, // Canvas width
+        height: 490, // Canvas height
+    });
+    fabric.Image.fromURL(image, function (img) {
+        img.set({
+            left: 0,
+            top: 0,
+            selectable: false,  // Non-draggable background image
+            hasControls: false  // Disable resizing controls
+        });
+        canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
+    });
+    jsonText(json);
     $("#exampleModal").modal("show");
 });
 $(document).on("click", ".design-sidebar-action", function () {
@@ -21,6 +36,120 @@ $(document).on("click", ".design-sidebar-action", function () {
     $(".design-sidebar").addClass('d-none')
     $(".design-sidebar_"+ designId).removeClass('d-none')
 })
+
+function jsonText(editable = null){
+    const staticInfo = dbJson;
+    var flag = true;
+    if(editable){
+        flag = false;
+    }
+    staticInfo.textElements.forEach(element => {
+        console.log(element);
+        let textElement = new fabric.Textbox(
+            element.text, {  // Use Textbox for editable text
+            left: element.left,
+            top: element.top,
+            width: element.width || 200,  // Default width if not provided
+            fontSize: element.fontSize,
+            fill: element.fill,
+            fontFamily: element.fontFamily,
+            fontWeight: element.fontWeight,
+            fontStyle: element.fontStyle,
+            underline: element.underline,
+            linethrough: element.linethrough,
+            backgroundColor: element.backgroundColor,
+            textAlign: element.textAlign,
+            editable: flag,
+            hasControls: flag,
+            borderColor: 'blue',
+            cornerColor: 'red',
+            cornerSize: 6,
+            transparentCorners: false,
+            isStatic: true
+        });
+        switch (element.text) {
+            case 'event_name':
+                if (eventData.event_name) {
+                    textElement.set({ text: eventData.event_name });
+                } else {
+                    return;  // Skip adding the element if event_name is empty
+                }
+                break;
+            case 'host_name':
+                if (eventData.hosted_by) {
+                    textElement.set({ text: eventData.hosted_by });
+                } else {
+                    return;  // Skip adding the element if host_name is empty
+                }
+                break;
+            case 'Location':
+                if (eventData.event_location) {
+                    textElement.set({ text: eventData.event_location });
+                } else {
+                    return;  // Skip adding the element if event_location_name is empty
+                }
+                break;
+            case 'start_time':
+                if (eventData.start_time) {
+                    textElement.set({ text: eventData.start_time });
+                } else {
+                    return;  // Skip adding the element if start_time is empty
+                }
+                break;
+            case 'rsvp_end_time':
+                if (eventData.rsvp_end_time) {
+                    textElement.set({ text: eventData.rsvp_end_time });
+                } else {
+                    return;  // Skip adding the element if rsvp_end_time is empty
+                }
+                break;
+            case 'start_date':
+                if (eventData.event_date) {
+                    var start_date = '';
+                    if (eventData.event_date.includes(" To ")) {
+                        let [start, end] = eventData.event_date.split(" To ");
+                        start_date = start;
+                    } else {
+                        start_date = eventData.event_date;
+                    }
+
+                    textElement.set({ text: start_date });
+                } else {
+                    return;  // Skip adding the element if start_date is empty
+                }
+                break;
+            case 'end_date':
+                if (eventData.event_date) {
+
+                    var end_date = '';
+                    if (eventData.event_date.includes(" To ")) {
+                        let [start, end] = eventData.event_date.split(" To ");
+                        end_date = end;
+                    } else {
+                        end_date = eventData.event_date;
+                    }
+
+                    textElement.set({ text: end_date });
+                } else {
+                    return;  // Skip adding the element if end_date is empty
+                }
+                break;
+        }
+        const textWidth = textElement.calcTextWidth();
+        textElement.set({ width: textWidth });
+
+        textElement.on('scaling', function () {
+            // Calculate the updated font size based on scaling factors
+            var updatedFontSize = textElement.fontSize * (textElement.scaleX + textElement.scaleY) / 2;
+            textElement.set('fontSize', updatedFontSize); // Update the font size
+            canvas.renderAll(); // Re-render the canvas to reflect changes
+        });
+
+        addIconsToTextbox(textElement);
+        canvas.add(textElement);
+
+    });
+}
 
 $(document).on('click','.edit_design_tem',function(e){
     e.preventDefault();
@@ -57,116 +186,7 @@ $(document).on('click','.edit_design_tem',function(e){
             // Load static information (text elements)
             if (dbJson) {
                 hideStaticTextElements();  // Hide static text elements if static information is present
-                const staticInfo = dbJson;
-                // console.log(staticInfo);
-
-                // Render text elements on canvas
-                staticInfo.textElements.forEach(element => {
-                    console.log(element);
-                    let textElement = new fabric.Textbox(
-                        element.text, {  // Use Textbox for editable text
-                        left: element.left,
-                        top: element.top,
-                        width: element.width || 200,  // Default width if not provided
-                        fontSize: element.fontSize,
-                        fill: element.fill,
-                        fontFamily: element.fontFamily,
-                        fontWeight: element.fontWeight,
-                        fontStyle: element.fontStyle,
-                        underline: element.underline,
-                        linethrough: element.linethrough,
-                        backgroundColor: element.backgroundColor,
-                        textAlign: element.textAlign,
-                        editable: true,
-                        hasControls: true,
-                        borderColor: 'blue',
-                        cornerColor: 'red',
-                        cornerSize: 6,
-                        transparentCorners: false,
-                        isStatic: true
-                    });
-                    switch (element.text) {
-                        case 'event_name':
-                            if (eventData.event_name) {
-                                textElement.set({ text: eventData.event_name });
-                            } else {
-                                return;  // Skip adding the element if event_name is empty
-                            }
-                            break;
-                        case 'host_name':
-                            if (eventData.hosted_by) {
-                                textElement.set({ text: eventData.hosted_by });
-                            } else {
-                                return;  // Skip adding the element if host_name is empty
-                            }
-                            break;
-                        case 'Location':
-                            if (eventData.event_location) {
-                                textElement.set({ text: eventData.event_location });
-                            } else {
-                                return;  // Skip adding the element if event_location_name is empty
-                            }
-                            break;
-                        case 'start_time':
-                            if (eventData.start_time) {
-                                textElement.set({ text: eventData.start_time });
-                            } else {
-                                return;  // Skip adding the element if start_time is empty
-                            }
-                            break;
-                        case 'rsvp_end_time':
-                            if (eventData.rsvp_end_time) {
-                                textElement.set({ text: eventData.rsvp_end_time });
-                            } else {
-                                return;  // Skip adding the element if rsvp_end_time is empty
-                            }
-                            break;
-                        case 'start_date':
-                            if (eventData.event_date) {
-                                var start_date = '';
-                                if (eventData.event_date.includes(" To ")) {
-                                    let [start, end] = eventData.event_date.split(" To ");
-                                    start_date = start;
-                                } else {
-                                    start_date = eventData.event_date;
-                                }
-
-                                textElement.set({ text: start_date });
-                            } else {
-                                return;  // Skip adding the element if start_date is empty
-                            }
-                            break;
-                        case 'end_date':
-                            if (eventData.event_date) {
-
-                                var end_date = '';
-                                if (eventData.event_date.includes(" To ")) {
-                                    let [start, end] = eventData.event_date.split(" To ");
-                                    end_date = end;
-                                } else {
-                                    end_date = eventData.event_date;
-                                }
-
-                                textElement.set({ text: end_date });
-                            } else {
-                                return;  // Skip adding the element if end_date is empty
-                            }
-                            break;
-                    }
-                    const textWidth = textElement.calcTextWidth();
-                    textElement.set({ width: textWidth });
-
-                    textElement.on('scaling', function () {
-                        // Calculate the updated font size based on scaling factors
-                        var updatedFontSize = textElement.fontSize * (textElement.scaleX + textElement.scaleY) / 2;
-                        textElement.set('fontSize', updatedFontSize); // Update the font size
-                        canvas.renderAll(); // Re-render the canvas to reflect changes
-                    });
-
-                    addIconsToTextbox(textElement);
-                    canvas.add(textElement);
-
-                });
+                jsonText();
             } else {
                 showStaticTextElements();
             }
@@ -182,9 +202,6 @@ $(document).on('click','.edit_design_tem',function(e){
     var canvas = new fabric.Canvas('imageEditor1', {
         width: 350, // Canvas width
         height: 490, // Canvas height
-
-
-
     });
     const defaultSettings = {
         fontSize: 20,

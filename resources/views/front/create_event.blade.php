@@ -440,16 +440,17 @@
             <div class="modal-body">
                 <div class="modal-choose-design-wrp" id="download_image">
                     <div class="modal-design-card">
-                        <img id="modalImage" src="" alt="Design Image" class="img-fluid" />
+                        <canvas id="imageEditor2"></canvas>
+                        {{-- <img id="modalImage" src="" alt="Design Image" class="img-fluid" /> --}}
+                    </div>
                 </div>
-            </div>
-            <div class="modal-btn">
-                <button class="edit-btn edit_design_tem" >Edit Design</button>
-                <button class="cmn-btn store_desgin_temp">Next: Guests</button>
+                <div class="modal-btn">
+                    <button class="edit-btn edit_design_tem" >Edit Design</button>
+                    <button class="cmn-btn store_desgin_temp">Next: Guests</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 
 
