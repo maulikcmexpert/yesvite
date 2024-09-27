@@ -1,11 +1,19 @@
 @php
+$counter = 0;
+if(isset($user_list) && !empty($user_list)){
 $userCount = count($user_list);
 $maxVisibleUsers = 4;
 $counter = $userCount > $maxVisibleUsers ? $userCount - $maxVisibleUsers : 0;
+}
 @endphp
 
 
 @foreach ( $user_list as $guest_user)
+@php
+if($counter > 0){
+break;
+}
+@endphp
 @if($guest_user['prefer_by']=="email")
 <div class="guest-contact invited_user user_id-{{$guest_user['id']}} responsive_invite_user" data-id={{$guest_user['id']}} id="">
     <div class="guest-img mobile-guest-icon">
@@ -70,7 +78,6 @@ $counter = $userCount > $maxVisibleUsers ? $userCount - $maxVisibleUsers : 0;
 </div>
 @endif
 @endforeach
-
 
 @if($counter > 0)
 <div class="guest-contact all_user_list">
