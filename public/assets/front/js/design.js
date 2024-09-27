@@ -15,7 +15,7 @@ $(document).on("click", ".design-card", function () {
     $("#modalImage").attr("src", imageUrl);
     image = imageUrl;
 
-    var canvas = new fabric.Canvas('imageEditor1', {
+    var canvas = new fabric.Canvas('imageEditor2', {
         width: 350, // Canvas width
         height: 490, // Canvas height
     });
