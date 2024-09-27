@@ -409,8 +409,7 @@ async function handleNewConversation(snapshot) {
         } else {
             badgeElement.removeClass("d-none");
             badgeElement.show();
-            var ele = $(conversationElement);
-            moveToTopOrBelowPinned(ele);
+
             console.log("here");
         }
     } else {
@@ -446,6 +445,13 @@ async function handleNewConversation(snapshot) {
         });
     }
     updateUnreadMessageBadge();
+
+    var ele = $(
+        document.getElementsByClassName(
+            `conversation-${newConversation.conversationId}`
+        )
+    );
+    moveToTopOrBelowPinned(ele);
 }
 
 function moveToTopOrBelowPinned(element) {
