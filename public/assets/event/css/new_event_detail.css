@@ -97,7 +97,7 @@
     padding: 16px;
     display: flex;
     align-items: start;
-    justify-content: center;
+    /* justify-content: center; */
 }
 
 .main-content-sidebar {
@@ -907,6 +907,11 @@
 
 .timepicker::placeholder{
     font-size: 11px !important;
+}
+
+.step_2{
+    width: 100%;
+    height: 100vh;
 }
 
 /* ======Responsiveness===== */

@@ -3306,8 +3306,6 @@ class ApiControllerv2 extends Controller
         $rawData = $request->getContent();
         $eventData = json_decode($rawData, true);
 
-        dd($request);
-
         if ($eventData == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
         }
@@ -3397,6 +3395,8 @@ class ApiControllerv2 extends Controller
                 $gift_registry_id =  implode(',', $eventData['gift_registry_list']);
             }
         }
+        $staticInformation = (!empty($eventData['static_information'])) ? json_encode($eventData['static_information']) : "";
+
         $eventCreation =  Event::create([
             'event_type_id' => (!empty($eventData['event_type_id'])) ? $eventData['event_type_id'] : "",
             'event_name' => (!empty($eventData['event_name'])) ? $eventData['event_name'] : "",
@@ -3427,13 +3427,15 @@ class ApiControllerv2 extends Controller
             'subscription_plan_name' => (!empty($eventData['subscription_plan_name'])) ? $eventData['subscription_plan_name'] : "",
             'subscription_invite_count' => (!empty($eventData['subscription_invite_count'])) ? $eventData['subscription_invite_count'] : 0,
             'is_draft_save' => $eventData['is_draft_save'],
-            'static_information' => (!empty($eventData['static_information'])) ? $eventData['static_information'] : "",
+            // 'static_information' => $staticInformation,
             // 'design_image' => (!empty($eventData['design_image'])) ? $eventData['design_image'] : "",
 
         ]);
 
         if ($eventCreation) {
+
             $eventId = $eventCreation->id;
+            $eventCreation->static_information = $staticInformation;
             if (!empty($eventData['invited_user_id'])) {
                 $invitedUsers = $eventData['invited_user_id'];
                 foreach ($invitedUsers as $value) {
@@ -3747,6 +3749,7 @@ class ApiControllerv2 extends Controller
                     }
                 }
             }
+            $eventCreation->save();
         }
         DB::commit();
         return response()->json(['status' => 1, 'event_id' => $eventCreation->id, 'event_name' => $eventData['event_name'], 'message' => "Event Created Successfully", 'guest_pending_count' => getGuestRsvpPendingCount($eventCreation->id)]);
@@ -4113,8 +4116,8 @@ class ApiControllerv2 extends Controller
                 $eventDetail['subscription_invite_count'] = ($getEventData->subscription_invite_count != NULL) ? $getEventData->subscription_invite_count : 0;
 
                 $eventDetail['static_information'] = ($getEventData->static_information != NULL) ? $getEventData->static_information : "";
-                $eventDetail['design_image'] = ($getEventData->design_image != NULL) ? asset('storage/canvas/' . $getEventData->design_image) : "";
-                $eventDetail['design_inner_image'] = ($getEventData->design_inner_image != NULL) ? asset('storage/canvas/' . $getEventData->design_inner_image) : "";
+                $eventDetail['design_image'] = ($getEventData->design_image != NULL) ? $getEventData->design_image : "";
+                $eventDetail['design_inner_image'] = ($getEventData->design_inner_image != NULL) ? $getEventData->design_inner_image) : "";
                 $eventDetail['event_images'] = [];
                 $getEventImages = EventImage::where('event_id', $getEventData->id)->get();
                 if (!empty($getEventImages)) {
@@ -4438,12 +4441,12 @@ class ApiControllerv2 extends Controller
                     $updateEvent->static_information = $eventData['static_information'];
                 }
 
-                if (!empty($eventData['design_image'])) {
-                    $updateEvent->design_image = $eventData['design_image'];
-                }
-                if (!empty($eventData['design_inner_image'])) {
-                    $updateEvent->design_inner_image = $eventData['design_inner_image'];
-                }
+                // if (!empty($eventData['design_image'])) {
+                //     $updateEvent->design_image = $eventData['design_image'];
+                // }
+                // if (!empty($eventData['design_inner_image'])) {
+                //     $updateEvent->design_inner_image = $eventData['design_inner_image'];
+                // }
                 if ($updateEvent->save()) {
                     if ($eventData['is_draft_save'] == '1') {
                         EventInvitedUser::where(['event_id' => $eventData['event_id']])->delete();

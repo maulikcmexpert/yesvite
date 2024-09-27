@@ -273,7 +273,7 @@
 
 
         <!-- =====fonts-family-options==== -->
-        <div class="design-sidebar design-sidebar_2 setting-category-wrp choose-design-form activity-schedule-inner ">
+        <div class="design-sidebar design-sidebar_2 setting-category-wrp choose-design-form activity-schedule-inner">
             <div class="d-flex align-items-center justify-content-between toggle-wrp new-event-sidebar-head">
                 <h5>Change Font</h5>
                 <button class="close-btn" onclick="toggleSidebar()">
