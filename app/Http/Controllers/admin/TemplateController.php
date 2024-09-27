@@ -112,9 +112,10 @@ class TemplateController extends Controller
             }
             // Store the template with design ID and the uploaded image's filename
 
-            TextData::create([
+            $textData = TextData::create([
                 'image' => $imageName, // Save the uploaded image filename
             ]);
+
             $template_id = $textData->id;
 
             $textdata = TextData::where('id', $template_id);
