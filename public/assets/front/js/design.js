@@ -1112,36 +1112,3 @@ $(document).on('click','.edit_design_tem',function(e){
     document.querySelector('[data-command="redo"]').addEventListener('click', redo);
 
 })
-
-const setValue = (rangeId, tooltipId) => {
-    const range = document.getElementById(rangeId);
-    const tooltip = document.getElementById(tooltipId);
-
-    if (range && tooltip) {
-        const newValue = Number((range.value - range.min) * 100 / (range.max - range.min));
-        const newPosition = 16 - (newValue * 0.32);
-        tooltip.innerHTML = `<span>${range.value}</span>`;
-        tooltip.style.left = `calc(${newValue}% + (${newPosition}px))`;
-        document.documentElement.style.setProperty("--range-progress", `calc(${newValue}% + (${newPosition}px))`);
-    }
-};
-
-document.addEventListener("DOMContentLoaded", () => {
-    setValue('letterSpacingRange', 'letterSpacingTooltip'); // Call for letter spacing
-    setValue('lineHeightRange', 'lineHeightTooltip'); // Call for line height
-    setValue('fontSizeRange', 'fontSizeTooltip'); // Call for font size
-    updateRangeValue();
-});
-
-// Add event listeners for each range input
-document.getElementById('letterSpacingRange').addEventListener('input', updateRangeValue);
-document.getElementById('lineHeightRange').addEventListener('input', updateRangeValue);
-document.getElementById('fontSizeRange').addEventListener('input', updateRangeValue);
-
-
-function updateRangeValue() {
-    setValue('letterSpacingRange', 'letterSpacingTooltip');
-    setValue('lineHeightRange', 'lineHeightTooltip');
-    setValue('fontSizeRange', 'fontSizeTooltip');
-}
-
