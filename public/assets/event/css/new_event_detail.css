@@ -891,6 +891,10 @@
     height: 100% !important;
 }
 
+.choose-design-modal .modal-content .alert-box{
+    margin: 0px 20px;
+}
+
 /* ======Responsiveness===== */
 
 @media only screen and (max-width: 991px) {
