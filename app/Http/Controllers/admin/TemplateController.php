@@ -44,7 +44,7 @@ class TemplateController extends Controller
                     return $row->subcategories->subcategory_name;
                 })
                 ->addColumn('image', function ($template) {
-                    return '<img src="' . asset('assets/images/' . $template->image) . '" width="50" height="50" />';
+                    return '<img src="' . asset('storage/canvas/' . $template->image) . '" width="50" height="50" />';
                 })
                 ->addColumn('action', function ($row) {
                     $cryptId = encrypt($row->id);
