@@ -1447,7 +1447,7 @@ ul.chat-list li.setpink{
 .reaction-dialog {
     position: absolute;
     bottom: -60px;
-    right: -35px;
+    right: -80px;
     display: flex;
     gap: 5px;
     background-color: #fff;
