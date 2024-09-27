@@ -478,7 +478,7 @@ function moveToTopOrBelowPinned(element, setOnTop = false) {
                 .children("div")
                 .children(".pinned")
                 .last(); // Find the last pinned element
-            console.log(la);
+
             if (lastPinned.length > 0) {
                 lastPinned.after(parentDiv); // Place after the last pinned element
             } else {
