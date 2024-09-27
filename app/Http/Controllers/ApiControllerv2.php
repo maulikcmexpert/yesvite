@@ -3097,7 +3097,7 @@ class ApiControllerv2 extends Controller
                     $template_data['image'] = (isset($data->image) && $data->image != null) ? $data->image : '';
                     $template_data['height'] = (isset($data->id) && $data->id != null) ? $data->id : '';
                     $template_data['width'] = (isset($data->id) && $data->id != null) ? $data->id : '';
-                    $url = asset('storage/canvas/' . $data->image);
+                    $url = asset('storage/canvas/' . $data->filled_image);
                     $template_data['template_url'] = (isset($url) && $url != null) ? $url : '';
                     // $template_data['textData'] = (isset($data->static_information) && $data->static_information != null) ? $data->static_information : '';
                     $designList[] = $template_data;
