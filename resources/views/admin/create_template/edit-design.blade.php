@@ -29,7 +29,7 @@
             <div class="image-edit-inner-img">
                 <div class="canvas-container" id="border">
                     <!-- The canvas where the image will be drawn -->
-                    <input type="file" id="image" accept="image/*" style="display:none;"/>
+                    <input type="file" id="image" accept="image/*" style="display:none;" />
 
                     <canvas id="imageEditor1" class="canvas new"></canvas>
                 </div>
@@ -55,8 +55,8 @@
         </div>
 
         <div class="edit-images-button-wrp">
-            <div class="edit-images-button-inner text-box-wrp" >
-                <button class="design-sidebar-action"  id="addTextButton">
+            <div class="edit-images-button-inner text-box-wrp">
+                <button class="design-sidebar-action" id="addTextButton">
                     <span>
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -70,11 +70,11 @@
                                 stroke-linejoin="round" />
                         </svg>
                     </span>
-                    <h6 >+ Text Box</h6>
+                    <h6>+ Text Box</h6>
                 </button>
             </div>
             <div class="edit-images-button-inner fonts-edit-wrp">
-                <button class="design-sidebar-action" design-id="2" onclick="toggleSidebar()">
+                <button class="design-sidebar-action" design-id="2" onclick="toggleSidebar('sidebar')">
                     <span>
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -92,7 +92,7 @@
                 </button>
             </div>
             <div class="edit-images-button-inner text-edit-wrp">
-                <button class="design-sidebar-action" design-id="3" onclick="toggleSidebar()">
+                <button class="design-sidebar-action" design-id="3" onclick="toggleSidebar('sidebar')">
                     <span>
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -117,7 +117,7 @@
                 </button>
             </div>
             <div class="edit-images-button-inner color-edit-wrp">
-                <button class="design-sidebar-action" design-id="4" onclick="toggleSidebar()">
+                <button class="design-sidebar-action" design-id="4" onclick="toggleSidebar('sidebar')">
                     <span>
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -147,7 +147,7 @@
                 </button>
             </div>
             <div class="edit-images-button-inner format-edit-wrp">
-                <button class="design-sidebar-action" design-id="5" onclick="toggleSidebar()">
+                <button class="design-sidebar-action" design-id="5" onclick="toggleSidebar('sidebar')">
                     <span>
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -165,7 +165,7 @@
                 </button>
             </div>
             <div class="edit-images-button-inner photo-slider-wrp">
-                <button class="design-sidebar-action" design-id="6" onclick="toggleSidebar()">
+                <button class="design-sidebar-action" design-id="6" onclick="toggleSidebar('sidebar')">
                     <span>
                         <svg width="21" height="20" viewBox="0 0 21 20" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -200,7 +200,7 @@
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                     <div class="edit-images-button-dropdown">
                         <div class="edit-images-button-inner">
-                            <button >
+                            <button>
                                 <span>
                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
@@ -415,7 +415,7 @@
             </div>
             <div class="footer-buttons">
                 <button class="cmn-btn reset-btn">Reset</button>
-                <button class="cmn-btn saveButton"  >Save</button>
+                <button class="cmn-btn saveButton">Save</button>
             </div>
         </div>
 
@@ -499,13 +499,13 @@
 
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="colorType" value="font" checked>
-                    <label class="form-check-label" >
+                    <label class="form-check-label">
                         Font Color
                     </label>
                 </div>
 
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="colorType" value="background" >
+                    <input class="form-check-input" type="radio" name="colorType" value="background">
                     <label class="form-check-label">
                         Background Color
                     </label>
@@ -543,9 +543,9 @@
                 <div class="format-text-inner format-type-wrp">
                     <h3>Type</h3>
                     <div class="format-text-inner-options">
-                        <button data-command="bold"  >
+                        <button data-command="bold">
                             <svg width="25" height="24" viewBox="0 0 25 24" fill="none"
-                                xmlns="http://www.w3.org/2000/svg" >
+                                xmlns="http://www.w3.org/2000/svg">
                                 <path
                                     d="M5.21338 4.5C5.21338 3.4 6.11338 2.5 7.21338 2.5H12.3334C14.9534 2.5 17.0834 4.63 17.0834 7.25C17.0834 9.87 14.9534 12 12.3334 12H5.21338V4.5Z"
                                     stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"
@@ -567,7 +567,7 @@
                                     stroke-linejoin="round" />
                             </svg>
                         </button>
-                        <button data-command="underline" >
+                        <button data-command="underline">
                             <svg width="25" height="30" viewBox="0 0 25 30" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <g filter="url(#filter0_d_5633_68294)">
@@ -603,13 +603,13 @@
                 <div class="format-text-inner font-tranform-wrp">
                     <h3>Font Size</h3>
                     <div class="format-text-inner-options">
-                        <button data-command="uppercase"  >
+                        <button data-command="uppercase">
                             AA
                         </button>
-                        <button  data-command="lowercase" >
+                        <button data-command="lowercase">
                             aa
                         </button>
-                        <button data-command="capitalize"  >
+                        <button data-command="capitalize">
                             Aa
                         </button>
                     </div>
@@ -617,7 +617,7 @@
                 <div class="format-text-inner font-alignment-wrp">
                     <h3>Alignment</h3>
                     <div class="format-text-inner-options">
-                        <button  data-command="justifyLeft"  >
+                        <button data-command="justifyLeft">
                             <svg width="25" height="24" viewBox="0 0 25 24" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path d="M12.5 4.5H3.5" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"
@@ -630,7 +630,7 @@
                                     stroke-linejoin="round" />
                             </svg>
                         </button>
-                        <button data-command="justifyCenter" >
+                        <button data-command="justifyCenter">
                             <svg width="25" height="24" viewBox="0 0 25 24" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path d="M3.5 4.5H21.5" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"
@@ -656,7 +656,7 @@
                                     stroke-linejoin="round" />
                             </svg>
                         </button>
-                        <button data-command="justifyFull" >
+                        <button data-command="justifyFull">
                             <svg width="29" height="29" viewBox="0 0 29 29" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <g filter="url(#filter0_d_5633_68315)">
