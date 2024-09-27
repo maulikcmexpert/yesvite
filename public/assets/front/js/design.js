@@ -168,10 +168,12 @@ $(document).on("click", ".close-btn", function () {
 
 $(document).on("click", ".design-sidebar-action", function () {
     let designId = $(this).attr('design-id')
-    $(".design-sidebar").addClass('d-none')
-    $(".design-sidebar_"+ designId).removeClass('d-none')
-    $('#sidebar').addClass("design-sidebar_"+ designId);
-    $('.close-btn').attr('data-id',"design-sidebar_"+ designId);
+    if(designId){
+        $(".design-sidebar").addClass('d-none')
+        $(".design-sidebar_"+ designId).removeClass('d-none')
+        $('#sidebar').addClass("design-sidebar_"+ designId);
+        $('.close-btn').attr('data-id',"design-sidebar_"+ designId);
+    }
 })
 
 
