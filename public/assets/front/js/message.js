@@ -467,12 +467,12 @@ function moveToTopOrBelowPinned(element) {
         $chatList.prepend(parentDiv); // Move pinned element to the top
     } else {
         // If not pinned, move it after the last pinned element
-        let lastPinned = $chatList.children("div").children(".pinned").last();
+        let lastPinnedDiv = $chatList.children("div.pinned").last();
 
-        if (lastPinned.length > 0) {
-            lastPinned.after(parentDiv); // Insert after the last pinned element
+        if (lastPinnedDiv.length > 0) {
+            lastPinnedDiv.after(parentDiv); // Place after the last pinned parent div
         } else {
-            $chatList.prepend(parentDiv); // If no pinned elements exist, prepend to the very top
+            $chatList.prepend(parentDiv); // If no pinned elements exist, prepend the parent div to the very top
         }
     }
 }
