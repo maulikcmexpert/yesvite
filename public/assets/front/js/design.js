@@ -1056,6 +1056,7 @@ $(document).on('click','.edit_design_tem',function(e){
                     fontName: () => {
                         var selectedFont = document.querySelector('[data-command="fontName"]').value;
                         activeObject.set('fontFamily', selectedFont);
+                        
                     },
 
                     justifyLeft: () => activeObject.set('textAlign', 'left'),
@@ -1082,6 +1083,7 @@ $(document).on('click','.edit_design_tem',function(e){
     document.querySelectorAll('[data-command]').forEach(function (button) {
         button.addEventListener('click', function () {
             executeCommand(this.getAttribute('data-command'));
+            this.classList.add('active');
         });
     });
 
