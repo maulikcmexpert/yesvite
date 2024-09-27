@@ -146,7 +146,11 @@ $("#selected-user-profile").replaceWith(
     `<h5 class="fontcolorS" id="selected-user-profile" >SN</h5>`
 );
 
-async function updateProfileImg(profileImageUrl, userName) {
+async function updateProfileImg(
+    profileImageUrl,
+    userName,
+    conversationId = ""
+) {
     if (await isValidImageUrl(profileImageUrl)) {
         $("#selected-user-profile").replaceWith(
             `<img id="selected-user-profile" src="${profileImageUrl}" alt="user-img">`
@@ -154,6 +158,13 @@ async function updateProfileImg(profileImageUrl, userName) {
         $("#profileIm").replaceWith(
             `<img id="profileIm" src="${profileImageUrl}" alt="cover-img" >`
         );
+        if (conversationId != "") {
+            $(".conversation-" + conversationId)
+                .find(".chat-data")
+                .find(".user-img")
+                .html(profileImageUrl);
+        }
+
         return `<img id="selected-user-profile" src="${profileImageUrl}" alt="user-img">`;
     } else {
         const initials = getInitials(userName);
@@ -165,7 +176,15 @@ async function updateProfileImg(profileImageUrl, userName) {
         $("#profileIm").replaceWith(
             `<h5 id="profileIm" class="${fontColor}">${initials}</h5>`
         );
-        return `<h5 class="${fontColor}" id="selected-user-profile" >${initials}</h5>`;
+
+        if (conversationId != "") {
+            $(".conversation-" + conversationId)
+                .find(".chat-data")
+                .find(".user-img")
+                .html(
+                    `<h5 class="${fontColor}" id="selected-user-profile" >${initials}</h5>`
+                );
+        }
     }
 }
 
@@ -726,15 +745,12 @@ async function updateChatfromGroup(conversationId) {
     });
     $("#selected-user-lastseen").html(""); // Group doesn't have a last seen
     $("#selected-user-name").html(groupInfo.groupName);
-    let profile = await updateProfileImg(
+    await updateProfileImg(
         groupInfo.groupProfile,
-        groupInfo.groupName
+        groupInfo.groupName,
+        conversationId
     );
 
-    $(".conversation-" + conversationId)
-        .find(".chat-data")
-        .find(".user-img")
-        .html(profile);
     $(".selected_name").val(groupInfo.groupName);
 
     update(userRef, { userChatId: conversationId });
