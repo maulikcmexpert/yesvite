@@ -30,7 +30,7 @@
                     <div class="col-lg-3 mb-3">
                         <div class="form-group">
                             <label for="design_id">Design</label>
-                            <select class="form-control design_id" id="design_id" name="design_id">
+                            <select class="form-control design_id" id="event_design_category_id" name="event_design_category_id">
                                 <!-- <option value="">Select Design</option> -->
                                 @foreach($getDesignData as $design)
                                 <option value="{{ $design->id }}" {{ $design->id == $getTemData->event_design_category_id ? 'selected' : '' }}>
@@ -46,7 +46,7 @@
                     <div class="col-lg-3 mb-3">
                         <div class="form-group">
                             <label for="event_design_subcategory_id">Subcategory</label>
-                            <select class="form-control event_design_subcategory_id" id="event_design_subcategory_id" name="event_design_subcategory_id">
+                            <select class="form-control event_design_subcategory_id" id="event_design_sub_category_id" name="event_design_sub_category_id">
                                 <!-- <option value="">Select Subcategory</option> -->
                                 @foreach($getSubCatDetail as $subcategory)
                                 <option value="{{ $subcategory->id }}" {{ $subcategory->id == $getTemData->event_design_sub_category_id ? 'selected' : '' }}>
