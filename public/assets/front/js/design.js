@@ -17,7 +17,7 @@ $(document).on("click", ".design-card", function () {
     $("#exampleModal").modal("show");
     if (typeof canvas !== 'undefined' && canvas) {
         canvas.clear();
-        $('#imageEditor2').children().remove();
+        canvas.renderAll();
     }    
     var canvas = new fabric.Canvas('imageEditor2', {
         width: 350, // Canvas width
