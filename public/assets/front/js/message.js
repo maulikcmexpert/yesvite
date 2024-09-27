@@ -3507,9 +3507,8 @@ $(".multi-pin").click(async function () {
             .attr("changeWith", pinChange == "1" ? "0" : "1");
 
         if (pinChange == "1") {
-            const conversationElement = $(`.conversation-${conversationId}`);
             // conversationElement.prependTo(".chat-list");
-            moveToTopOrBelowPinned(conversationElement);
+
             $(".conversation-" + conversationId).addClass("pinned");
             $(`.conversation-${conversationId}`)
                 .find(".chat-data")
@@ -3540,6 +3539,9 @@ $(".multi-pin").click(async function () {
                 .find(".unpin1-self-icn")
                 .addClass("d-none");
         }
+        const conversationElement = $(`.conversation-${conversationId}`);
+
+        moveToTopOrBelowPinned(conversationElement);
     });
 
     try {
