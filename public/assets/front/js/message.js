@@ -423,7 +423,7 @@ async function handleNewConversation(snapshot) {
         } else {
             badgeElement.removeClass("d-none");
             badgeElement.show();
-            conversationElement.addClass("setpink");
+            $(conversationElement).addClass("setpink");
             console.log("here");
         }
     } else {
