@@ -54,15 +54,14 @@
 }
 
 .image-edit-inner-img {
-    width: 550px !important;
-    height: 600px !important;
-    margin: 0px auto !important;
+    width: 460px;
+    height: 648px;
+    margin: 0px auto;
 }
 
 .image-edit-inner-img canvas {
-    width: 550px !important;
-    height: 600px !important;
-    margin: 0px auto !important;
+    width: 100% !important;
+    height: 100% !important;
 }
 
 .edit-images-button-wrp{
