@@ -98,64 +98,71 @@
 
                 var isValid = true;
 
-                var selectedValue = $("#design_id").val();
+                var selectedValue = $("#event_design_category_id").val();
+                var selectedSubCategory = $("#event_design_sub_category_id").val();
 
 
 
                 if (selectedValue === '') {
-
-                    $("#design_id").next('.text-danger').text('Please select design name');
+                    $("#event_design_category_id").next('.text-danger').text('Please select design category');
                     return false;
-                    // Show error message for empty category name
                 } else {
-                    $("#design_id").next('.text-danger').text("");
-
+                    $("#event_design_category_id").next('.text-danger').text("");
                 }
 
-                var promises = [];
 
-                $('.image').each(function() {
-                    var that = $(this);
-                    var thatVal = that.val().trim();
+                if (selectedSubCategory === '') {
+                    $("#event_design_sub_category_id").next('.text-danger').text('Please select design subcategory');
+                    return false;
+                } else {
+                    $("#event_design_sub_category_id").next('.text-danger').text("");
+                }
 
-                    if (thatVal == '') {
-                        that.next('.text-danger').text('Please enter subcategory');
-                    } else {
-                        var promise = new Promise(function(resolve, reject) {
-                            $.ajax({
-                                headers: {
-                                    "X-CSRF-TOKEN": $(
-                                            'meta[name="csrf-token"]')
-                                        .attr("content"),
-                                },
-                                dataType: 'Json',
-                                type: "POST",
-                                url: "{{ URL::to('admin/subcategory/check_subcategory_is_exist') }}",
+                $("#templateForm").submit();
+                // var promises = [];
 
-                                data: {
-                                    subcategory_name: thatVal
-                                },
-                                success: function(output) {
-                                    if (output == false) {
-                                        that.next('.text-danger')
-                                            .text(
-                                                'Subcategory is duplicate'
-                                            );
-                                        resolve(false);
-                                    } else {
-                                        that.next('.text-danger')
-                                            .text('');
-                                        resolve(true);
-                                    }
-                                },
-                                error: function() {
-                                    reject("Error occurred");
-                                }
-                            });
-                        });
-                        promises.push(promise);
-                    }
-                });
+                // $('.image').each(function() {
+                //     var that = $(this);
+                //     var thatVal = that.val().trim();
+
+                //     if (thatVal == '') {
+                //         that.next('.text-danger').text('Please enter subcategory');
+                //     } else {
+                //         var promise = new Promise(function(resolve, reject) {
+                //             $.ajax({
+                //                 headers: {
+                //                     "X-CSRF-TOKEN": $(
+                //                             'meta[name="csrf-token"]')
+                //                         .attr("content"),
+                //                 },
+                //                 dataType: 'Json',
+                //                 type: "POST",
+                //                 url: "{{ URL::to('admin/subcategory/check_subcategory_is_exist') }}",
+
+                //                 data: {
+                //                     subcategory_name: thatVal
+                //                 },
+                //                 success: function(output) {
+                //                     if (output == false) {
+                //                         that.next('.text-danger')
+                //                             .text(
+                //                                 'Subcategory is duplicate'
+                //                             );
+                //                         resolve(false);
+                //                     } else {
+                //                         that.next('.text-danger')
+                //                             .text('');
+                //                         resolve(true);
+                //                     }
+                //                 },
+                //                 error: function() {
+                //                     reject("Error occurred");
+                //                 }
+                //             });
+                //         });
+                //         promises.push(promise);
+                //     }
+                // });
 
 
 
