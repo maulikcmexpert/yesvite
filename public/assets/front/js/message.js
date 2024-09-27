@@ -494,17 +494,21 @@ function moveToTopOrBelowPinned(element, setOnTop = false) {
         // Special case: If `data-position` is 0 or undefined, insert the new conversation at the top
         if (elementPosition === 0 || isNaN(elementPosition)) {
             // Check for existing items with data-position of 0 and place above them
-            let $zeroPositionItems = $listItems.filter('[data-position="0"]');
-            if ($zeroPositionItems.length > 0) {
-                $zeroPositionItems.first().closest("div").before(parentDiv); // Insert before the first item with data-position 0
+
+            let lastPinned = $chatList.children(".pinned").last();
+            if (lastPinned.length > 0) {
+                lastPinned.after(parentDiv); // Insert after last pinned element
             } else {
-                let lastPinned = $chatList.children(".pinned").last();
-                if (lastPinned.length > 0) {
-                    lastPinned.after(parentDiv); // Insert after last pinned element
+                let $zeroPositionItems = $listItems.filter(
+                    '[data-position="0"]'
+                );
+                if ($zeroPositionItems.length > 0) {
+                    $zeroPositionItems.first().closest("div").before(parentDiv); // Insert before the first item with data-position 0
                 } else {
                     $chatList.prepend(parentDiv); // If no pinned elements exist, prepend
                 }
             }
+
             inserted = true;
         }
 
