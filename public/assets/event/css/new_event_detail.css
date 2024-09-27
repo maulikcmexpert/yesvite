@@ -628,9 +628,7 @@
 
 
 
-.timepicker::placeholder{
-    font-size: 12px !important;
-}
+
 
 .bootstrap-datetimepicker-widget.dropdown-menu {
     border: 1px solid var(--borderColor);
@@ -1044,5 +1042,9 @@
 
     .new_event_detail_header-right {
         gap: 15px;
+    }
+
+    .timepicker::placeholder{
+        font-size: 10px !important;
     }
 }
