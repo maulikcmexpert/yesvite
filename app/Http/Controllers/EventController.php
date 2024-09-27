@@ -548,9 +548,9 @@ class EventController extends Controller
             });
             $userIds[] = $userEntry;
             session()->put('user_ids', $userIds);
-
-            dd(session()->get('user_ids'));
-
+            Session::save();
+            $user_list = Session::get('user_ids');
+            dd($user_list);
             if (!empty($userExists)) {
                 // return response()->json(['success' => false, 'data' => $userEntry, 'is_duplicate' => 1]);
                 $data[] = ['userdata' => $userEntry, 'is_duplicate' => 1];
