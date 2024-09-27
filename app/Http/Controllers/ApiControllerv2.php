@@ -6917,9 +6917,6 @@ class ApiControllerv2 extends Controller
             }])->where('id', $input['event_id'])->first();
 
 
-            $event_dates = $eventDetail->start_date;
-            $dateRange = explode(' to ', $event_dates);
-
             // $date1 = $dateRange[0];
             // $date2 = $dateRange[1];
 
@@ -7142,9 +7139,9 @@ class ApiControllerv2 extends Controller
                 if ($eventDetail->event_settings->events_schedule == '1') {
                     $eventData[] = "Event has Schedule";
                 }
-                // if ($multidate == 1) {
-                //     $eventData[] = "Multiple Day Event";
-                // }
+                if ($eventDetail->start_date != $eventDetail->end_date) {
+                    $eventData[] = "Multiple Day Event";
+                }
                 if (empty($eventData)) {
                     $eventData[] = date('F d, Y', strtotime($eventDetail->start_date));
                     $numberOfGuest = EventInvitedUser::where('event_id', $eventDetail->id)->count();
