@@ -1,5 +1,6 @@
 var dbJson = null;
 var temp_id = null;
+var image = null;
 $(document).on("click", ".design-card", function () {
     var url = $(this).data("url");
     var template = $(this).data("template");
@@ -12,10 +13,10 @@ $(document).on("click", ".design-card", function () {
     temp_id = id;
     // Set the image URL in the modal's image tag
     $("#modalImage").attr("src", imageUrl);
+    image = imageUrl;
     $("#exampleModal").modal("show");
 });
 $(document).on("click", ".design-sidebar-action", function () {
-
     let designId = $(this).attr('design-id')
     $(".design-sidebar").addClass('d-none')
     $(".design-sidebar_"+ designId).removeClass('d-none')
@@ -23,8 +24,8 @@ $(document).on("click", ".design-sidebar-action", function () {
 
 $(document).on('click','.edit_design_tem',function(e){
     e.preventDefault();
-    var image = $(this).data('image');
     console.log(dbJson);
+    console.log(image);
 
     $("step_1").hide();
     $(".step_2").hide();
