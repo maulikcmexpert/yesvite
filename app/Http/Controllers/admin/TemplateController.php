@@ -49,7 +49,7 @@ class TemplateController extends Controller
                 })
 
                 ->addColumn('filled_image', function ($template) {
-                    return '<img src="' . asset('storage/canvas/' . $template->image) . '" width="50" height="50" />';
+                    return '<img src="' . asset('storage/canvas/' . $template->filled_image) . '" width="50" height="50" />';
                 })
                 ->addColumn('action', function ($row) {
                     $cryptId = encrypt($row->id);
