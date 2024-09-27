@@ -19,6 +19,19 @@ $(document).on("click", ".design-card", function () {
         width: 350, // Canvas width
         height: 490, // Canvas height
     });
+
+    const defaultSettings = {
+        fontSize: 20,
+        letterSpacing: 0,
+        lineHeight: 1.2
+    };
+
+    // Save settings object (for the save functionality)
+    let savedSettings = {
+        fontSize: defaultSettings.fontSize,
+        letterSpacing: defaultSettings.letterSpacing,
+        lineHeight: defaultSettings.lineHeight
+    };
     fabric.Image.fromURL(image, function (img) {
         img.set({
             left: 0,
