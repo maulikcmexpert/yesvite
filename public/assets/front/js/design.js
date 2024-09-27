@@ -18,6 +18,7 @@ $(document).on("click", ".design-card", function () {
     var canvas = new fabric.Canvas('imageEditor2', {
         width: 350, // Canvas width
         height: 490, // Canvas height
+        position:'relative',
     });
 
     const defaultSettings = {
