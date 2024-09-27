@@ -1083,7 +1083,7 @@ $(document).on('click','.edit_design_tem',function(e){
     document.querySelectorAll('[data-command]').forEach(function (button) {
         button.addEventListener('click', function () {
             executeCommand(this.getAttribute('data-command'));
-            this.classList.add('active');
+            
         });
     });
 
