@@ -451,7 +451,7 @@ async function handleNewConversation(snapshot) {
             `conversation-${newConversation.conversationId}`
         )
     );
-    moveToTopOrBelowPinned(ele, 1);
+    moveToTopOrBelowPinned(ele);
 }
 function moveToTopOrBelowPinned(element, setOnTop = false) {
     console.log({ element });
