@@ -2749,7 +2749,7 @@ $("#updateName").click(async function () {
     $(".change-group-name").addClass("d-none");
     $(".selected-title").html(newTitle).show();
     $("#selected-user-name").html(newTitle);
-
+    $(".selected_name").val(newTitle);
     $(".updateGroup").show();
 });
 
