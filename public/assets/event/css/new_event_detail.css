@@ -1045,6 +1045,9 @@
     }
 
     .timepicker::placeholder{
-        font-size: 10px !important;
+        font-size: 12px !important;
+    }
+    .timepicker{
+        padding-left: 10px !important;
     }
 }
