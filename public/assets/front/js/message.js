@@ -420,6 +420,7 @@ async function handleNewConversation(snapshot) {
         badgeElement.text(newConversation.unReadCount);
         if (newConversation.unReadCount == 0) {
             badgeElement.addClass("d-none");
+            $(conversationElement).removeClass("setpink");
         } else {
             badgeElement.removeClass("d-none");
             badgeElement.show();
