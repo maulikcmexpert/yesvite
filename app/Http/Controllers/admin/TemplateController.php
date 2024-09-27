@@ -47,6 +47,10 @@ class TemplateController extends Controller
                 ->addColumn('image', function ($template) {
                     return '<img src="' . asset('storage/canvas/' . $template->image) . '" width="50" height="50" />';
                 })
+
+                ->addColumn('filled_image', function ($template) {
+                    return '<img src="' . asset('storage/canvas/' . $template->image) . '" width="50" height="50" />';
+                })
                 ->addColumn('action', function ($row) {
                     $cryptId = encrypt($row->id);
                     $edit_url = route('create_template.edit', $cryptId);
@@ -63,7 +67,7 @@ class TemplateController extends Controller
                     return $actionBtn;
                 })
 
-                ->rawColumns(['number', 'category_name', 'subcategory_name', 'image', 'action'])
+                ->rawColumns(['number', 'category_name', 'subcategory_name', 'image', 'filledimage', 'action'])
                 ->make(true);
         }
 
