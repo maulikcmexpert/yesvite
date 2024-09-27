@@ -491,6 +491,8 @@ class EventController extends Controller
         // dd($userProfile);
         $isChecked = $request->input('is_checked');
         $userIds = session()->get('user_ids', []);
+
+
         // if ($isChecked == true || $isChecked == "true") {
         //     if (!in_array($userId, $userIds)) {
         //         $userIds[] = ['id' => $userId, 'firstname' => $user->firstname, 'lastname' => $user->lastname, 'phonenumber' => ($user->phone_number != "") ? $user->phone_number : '', 'email' => $useremail, 'profile' => (isset($userimage) && $userimage != '') ? $userimage : ''];
@@ -546,6 +548,9 @@ class EventController extends Controller
             });
             $userIds[] = $userEntry;
             session()->put('user_ids', $userIds);
+
+            dd(session()->get('user_ids'));
+
             if (!empty($userExists)) {
                 // return response()->json(['success' => false, 'data' => $userEntry, 'is_duplicate' => 1]);
                 $data[] = ['userdata' => $userEntry, 'is_duplicate' => 1];
