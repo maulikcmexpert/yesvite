@@ -553,11 +553,11 @@ class EventController extends Controller
             // dd($user_list);
             if (!empty($userExists)) {
                 // return response()->json(['success' => false, 'data' => $userEntry, 'is_duplicate' => 1]);
-                $data[] = ['userdata' => $userEntry, 'is_duplicate' => 1]; 
-                return response()->json(['view' => view('front.event.guest.addGuest', compact('data'))->render(),  'responsive_view' => view('front.event.guest.addguest_responsive', compact('data','user_list'))->render(), 'is_duplicate' => 1]);
+                $data[] = ['userdata' => $userEntry, 'is_duplicate' => 1];
+                return response()->json(['view' => view('front.event.guest.addGuest', compact('data'))->render(),  'responsive_view' => view('front.event.guest.addguest_responsive', compact('data', 'user_list'))->render(), 'is_duplicate' => 1]);
             }
             $data[] = ['userdata' => $userEntry, 'is_duplicate' => 0];
-            return response()->json(['view' => view('front.event.guest.addGuest', compact('data'))->render(), 'responsive_view' => view('front.event.guest.addguest_responsive', compact('data','user_list'))->render(), 'success' => true, 'data' => $userEntry, 'is_duplicate' => 0]);
+            return response()->json(['view' => view('front.event.guest.addGuest', compact('data'))->render(), 'responsive_view' => view('front.event.guest.addguest_responsive', compact('data', 'user_list'))->render(), 'success' => true, 'data' => $userEntry, 'is_duplicate' => 0]);
         }
     }
 
