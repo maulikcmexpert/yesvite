@@ -976,7 +976,7 @@
         overflow-y: scroll;
     }
     .footer-buttons{
-        bottom: 15px;
+        /* bottom: 15px; */
         justify-content: center;
     }
     .footer-buttons .cmn-btn{
