@@ -1122,21 +1122,25 @@ const setValue = (range, tooltip) => {
     document.documentElement.style.setProperty("--range-progress", `calc(${newValue}% + (${newPosition}px))`);
 };
 
-// Function to set up a specific range and its tooltip
+// Function to setup a specific range and its tooltip
 const setupRange = (rangeId, tooltipId) => {
     const range = document.getElementById(rangeId);
     const tooltip = document.getElementById(tooltipId);
 
     // Set initial value when the page loads
-    document.addEventListener("DOMContentLoaded", () => setValue(range, tooltip));
+    document.addEventListener("DOMContentLoaded", () => {
+        setValue(range, tooltip);
+    });
 
     // Add an event listener for input changes
-    range.addEventListener('input', () => setValue(range, tooltip));
+    range.addEventListener('input', () => {
+        setValue(range, tooltip);
+    });
 };
 
-// Call setupRange for each range input and its corresponding tooltip
+// Set up specific ranges and tooltips
 setupRange('letterSpacingRange', 'letterSpacingTooltip');
-setupRange('fontSizeRange', 'fontSizeTooltip'); // Replace with your actual IDs
-setupRange('lineHeightRange', 'lineHeightTooltip'); // Replace with your actual IDs
+setupRange('lineHeightRange', 'lineHeightTooltip');  // Add this line for another range
+setupRange('fontSizeRange', 'fontSizeTooltip');      // Add this line for another range
 
 
