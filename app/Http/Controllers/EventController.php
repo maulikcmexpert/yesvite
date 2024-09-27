@@ -587,7 +587,9 @@ class EventController extends Controller
         }
         $users = $userIds;
         session()->put('user_ids', $users);
-        return response()->json(['success' => true]);
+        Session::save();
+        $user_list = Session::get('user_ids');
+        return response()->json(['success' => true, 'responsive_view' => view('front.event.guest.addguest_responsive', compact('data', 'user_list'))->render(),]);
     }
 
     public function deleteSession(Request $request)
