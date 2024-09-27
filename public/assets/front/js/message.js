@@ -348,6 +348,111 @@ async function addMessageToGroup(
     }
 }
 // Function to handle a new conversation
+async function handleNewConversation(snapshot) {
+    const newConversation = snapshot.val();
+
+    // console.log("New conversation added:", newConversation);
+    if (newConversation.conversationId == undefined) {
+        console.warn("undefined");
+        return;
+    }
+
+    const conversationElement = document.getElementsByClassName(
+        `conversation-${newConversation.conversationId}`
+    );
+
+    let userStatus = "";
+    if (newConversation.group !== "true" && newConversation.group !== true) {
+        let userId = newConversation.contactId;
+        let userData = await getUser(userId);
+
+        if (
+            userData?.userStatus == "Online" ||
+            userData?.userStatus == "online"
+        ) {
+            userStatus = `<span class="active"></span>`;
+        } else {
+            userStatus = `<span class="inactive"></span>`;
+        }
+    }
+    if (conversationElement.length > 0) {
+        // Update existing conversation element
+        $(conversationElement)
+            .find(".user-detail h3")
+            .text(newConversation.contactName);
+        $(conversationElement)
+            .find(".user-detail .last-message")
+            .text(newConversation.lastMessage);
+        $(conversationElement)
+            .find(".ms-auto .time-ago")
+            .text(timeago.format(newConversation.timeStamp));
+        $(conversationElement)
+            .find(".user-img")
+            .find("img")
+            .replaceWith(
+                await getListUserimg(
+                    newConversation.receiverProfile,
+                    newConversation.contactName
+                )
+            );
+        $(conversationElement)
+            .find(".user-img")
+            .find("span")
+            .replaceWith(userStatus);
+
+        const badgeElement = $(conversationElement).find(
+            ".ms-auto .d-flex .badge"
+        );
+        badgeElement.text(newConversation.unReadCount);
+        if (newConversation.unReadCount == 0) {
+            badgeElement.addClass("d-none");
+        } else {
+            badgeElement.removeClass("d-none");
+            badgeElement.show();
+
+            console.log("here");
+        }
+    } else {
+        if (WaitNewConversation == newConversation.conversationId) {
+            return;
+        }
+        WaitNewConversation = newConversation.conversationId;
+
+        // Add new conversation element
+        $.ajax({
+            url: base_url + "getConversation",
+            data: { messages: newConversation },
+            method: "post",
+            success: function (res) {
+                $(".chat-list").prepend(res);
+                var msgLists = document.getElementsByClassName("msg-list");
+                removeSelectedMsg();
+                // Add "active" class to the first element with class "msg-list"
+                if (msgLists.length > 0) {
+                    msgLists[0].classList.add("active");
+                }
+            },
+        });
+    }
+
+    const selectedConversationId = $(".selected_conversasion").val();
+    // $("#isGroup").val(newConversation.group);
+    // console.log(newConversation.group);
+    if (selectedConversationId === newConversation.conversationId) {
+        await updateOverview(senderUser, newConversation.conversationId, {
+            unRead: false,
+            unReadCount: 0,
+        });
+    }
+    updateUnreadMessageBadge();
+
+    var ele = $(
+        document.getElementsByClassName(
+            `conversation-${newConversation.conversationId}`
+        )
+    );
+    moveToTopOrBelowPinned(ele);
+}
 function moveToTopOrBelowPinned(element) {
     console.log({ element });
     let $chatList = $(".chat-list"); // Get the chat list container
@@ -397,47 +502,6 @@ function moveToTopOrBelowPinned(element) {
             if (!inserted) {
                 $chatList.append(parentDiv);
             }
-        }
-
-        // After unpinning, reorder pinned elements
-        reorderPinnedElements($chatList);
-    }
-}
-
-function moveToTopOrBelowPinned(element) {
-    console.log({ element });
-    let $chatList = $(".chat-list"); // Get the chat list container
-    let isPinned = element.hasClass("pinned"); // Check if the element is pinned
-    let parentDiv = element.closest("div"); // Get the parent div containing the li
-
-    if (isPinned) {
-        // If the element is pinned, move its parent div to the top of the chat list
-        $chatList.prepend(parentDiv);
-    } else {
-        // Find all parent divs in the chat list and get the positions of their li children
-        let $listItems = $chatList.children("div").not(".pinned").find("li");
-        let elementPosition = parseInt(element.attr("data-position"));
-
-        // Find the correct spot based on `data-position`
-        let inserted = false;
-
-        $listItems.each(function () {
-            let listItemPosition = parseInt($(this).attr("data-position"));
-            let listItemDiv = $(this).closest("div"); // Get the parent div of the current li
-
-            // Ensure we're not moving the element before itself
-            if (listItemDiv[0] !== parentDiv[0]) {
-                if (listItemPosition > elementPosition) {
-                    listItemDiv.before(parentDiv); // Insert the parent div in the correct position
-                    inserted = true;
-                    return false; // Exit the loop after inserting
-                }
-            }
-        });
-
-        // If no appropriate position is found, append the parent div to the bottom
-        if (!inserted) {
-            $chatList.append(parentDiv);
         }
 
         // After unpinning, reorder pinned elements
