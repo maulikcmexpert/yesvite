@@ -6918,13 +6918,12 @@ class ApiControllerv2 extends Controller
 
             $event_dates = $eventDetail->event_date;
             $dateArray  = explode(' to ', $event_dates);
-
+            dd($dateArray);
             $multidate = "";
             if (count($dateArray) === 2) {
-                $startDate = trim($dateArray[0]); // First date
-                $endDate = trim($dateArray[1]);   // Second date
+                $startDate = trim($dateArray[0]);
+                $endDate = trim($dateArray[1]);
 
-                // Compare the two dates
                 if ($startDate === $endDate) {
                     $multidate = 1; // Dates are the same
                 } else {
