@@ -258,7 +258,7 @@ $(document).on("click", ".design-card", function () {
     });
 
     // Append the new canvas to the modal-design-card
-    $('.modal-design-card').append(newCanvas);
+    $('.modal-design-card').html(newCanvas);
 
     // Show the modal
     $("#exampleModal").modal("show");
