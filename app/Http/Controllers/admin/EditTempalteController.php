@@ -20,9 +20,13 @@ class EditTempalteController extends Controller
             // 'admin.create_template.imageEditorjs',
             'admin.create_template.shapejs'
         ];
-        $textData =  $textData = DB::table('text_data')
-            ->where('id', $id)
-            ->first();
+        // $textData =  $textData = DB::table('text_data')
+        //     ->where('id', $id)
+        //     ->first();
+
+        $textData = TextData::where('id', $id)->get()->first();
+        // ->where('id', $id)
+        // ->first();
 
         return view('admin.includes.layout', compact(
             'title',
@@ -30,9 +34,6 @@ class EditTempalteController extends Controller
             'textData',
             'js',
             'id'
-
-
-
         ));
     }
     public function AllImage()
