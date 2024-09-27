@@ -165,7 +165,7 @@ $(document).on("click", ".design-card", function () {
             canvas.renderAll(); // Re-render the canvas to reflect changes
         });
 
-        addIconsToTextbox(textElement);
+        // addIconsToTextbox(textElement);
         canvas.add(textElement);
 
     });
