@@ -15,6 +15,7 @@ $message['unReadCount'] = @$message['unRead']==true && @$message['unReadCount']=
 
 @endif --}}
 {{-- @dd($message); --}}
+<div>
 <li data-position="{{$i}}" class="{{$i == 0 ?'active':''}} msg-list conversation-{{$message['conversationId']}} {{@$message['isPin']=='1'?'pinned':''}}  unarchived-list" data-search="{{$message['contactName']}}" data-userId="{{@$message['contactId']}}" data-msgKey={{$message['conversationId']}} data-group={{@$message['group']}}>
     <div class="me-2 d-none bulk-check">
         <input class="form-check-input" type="checkbox" name="checked_conversation[]" value="{{$message['conversationId']}}" isGroup="{{@$message['group']}}">
@@ -193,6 +194,8 @@ $message['unReadCount'] = @$message['unRead']==true && @$message['unReadCount']=
         </div>
     </div>
 </li>
+</div>
+
 @php
 $i++;
 @endphp
