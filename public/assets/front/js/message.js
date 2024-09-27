@@ -827,8 +827,8 @@ async function updateMore(conversationId) {
                     .find(".chat-data")
                     .find(".pin-svg")
                     .removeClass("d-none");
-                $(".unpin-self-icn").show("d-none");
-                $(".pin-self-icn").hide("d-none");
+                $(".unpin-self-icn").show();
+                $(".pin-self-icn").hide();
             } else {
                 $(".pin-self-icn").show();
                 $(".unpin-self-icn").hide();
@@ -892,8 +892,8 @@ $(document).on("click", ".pin-conversation", function () {
             .find(".pin-svg")
             .removeClass("d-none");
 
-        $(".unpin-self-icn").show("d-none");
-        $(".pin-self-icn").hide("d-none");
+        $(".unpin-self-icn").show();
+        $(".pin-self-icn").hide();
 
         $(".conversation-" + conversationId)
             .children()
@@ -957,8 +957,8 @@ $(document).on("click", ".pin-single-conversation", function (e) {
             .find(".pin-svg")
             .removeClass("d-none");
         if (selectedConversationId === conversationId) {
-            $(".unpin-self-icn").show("d-none");
-            $(".pin-self-icn").hide("d-none");
+            $(".unpin-self-icn").show();
+            $(".pin-self-icn").hide();
         }
         $(this).children(".pin1-self-icn").addClass("d-none");
         $(this).children(".unpin1-self-icn").removeClass("d-none");
