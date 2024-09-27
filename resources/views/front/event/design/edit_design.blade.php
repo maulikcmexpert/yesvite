@@ -226,7 +226,7 @@
                             stroke-linejoin="round" />
                     </svg>
                 </span>
-                <h5 class="ms-2">Choose Design</h5>
+                <h5 class="ms-2 li_design">Choose Design</h5>
             </a>
             <a href="#" class="d-flex next_guest_step">
                 <h5 class="me-2">Next: Guests</h5>

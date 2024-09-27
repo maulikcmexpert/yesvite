@@ -3119,6 +3119,7 @@ $(document).on("click", ".li_design", function () {
         $(".step_2").show();
         $(".step_3").css("display", "none");
         $(".step_4").css("display", "none");
+        $(".edit_design_template").css("display", "none");
         $(".step_final_checkout").css("display", "none");
 
         $('.event_create_percent').text('50%');
