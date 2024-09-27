@@ -886,6 +886,11 @@
     position: relative !important;
 }
 
+.modal-design-card canvas{
+    width: 100% !important;
+    height: 100% !important;
+}
+
 /* ======Responsiveness===== */
 
 @media only screen and (max-width: 991px) {
