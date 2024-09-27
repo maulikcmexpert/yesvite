@@ -881,6 +881,16 @@
     transform: translate(-50%, -50%);
 }
 
+.trash-icon svg path{
+    fill: green;
+    stroke: green;
+}
+
+
+.trash-icon path{
+    fill: green;
+    stroke: green;
+}
  
 .modal-design-card .upper-canvas{
     position: relative !important;
