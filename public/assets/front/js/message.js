@@ -409,7 +409,8 @@ async function handleNewConversation(snapshot) {
         } else {
             badgeElement.removeClass("d-none");
             badgeElement.show();
-            moveToTopOrBelowPinned(conversationElement);
+            var ele = $(conversationElement);
+            moveToTopOrBelowPinned(ele);
             console.log("here");
         }
     } else {
