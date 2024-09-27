@@ -112,11 +112,11 @@ class TemplateController extends Controller
             }
             // Store the template with design ID and the uploaded image's filename
             TextData::create([
-                'event_category_id' => (int)$request->event_design_category_id,
-                'event_sub_category_id' => (int)$request->event_design_sub_category_id,
+                'event_category_id' => $request->event_design_category_id,
+                'event_sub_category_id' => $request->event_design_sub_category_id,
                 'image' => $imageName, // Save the uploaded image filename
             ]);
-            Log::info(DB::getQueryLog());
+            // Log::info(DB::getQueryLog());
 
             DB::commit();
 
