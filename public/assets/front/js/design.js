@@ -14,7 +14,7 @@ $(document).on("click", ".design-card", function () {
     // Set the image URL in the modal's image tag
     $("#modalImage").attr("src", imageUrl);
     image = imageUrl;
-
+    $("#exampleModal").modal("show");
     var canvas = new fabric.Canvas('imageEditor2', {
         width: 350, // Canvas width
         height: 490, // Canvas height
@@ -42,7 +42,7 @@ $(document).on("click", ".design-card", function () {
         canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
     });
     jsonText(json);
-    $("#exampleModal").modal("show");
+    
 });
 document.addEventListener('DOMContentLoaded', function() {
     var canvas = new fabric.Canvas('imageEditor2');
