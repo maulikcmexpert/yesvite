@@ -1113,4 +1113,17 @@ $(document).on('click','.edit_design_tem',function(e){
 
 })
 
+range = document.getElementById('letterSpacingRange'),
+tooltip = document.getElementById('letterSpacingTooltip'),
+setValue = ()=>{
+    const
+        newValue = Number( (range.value - range.min) * 100 / (range.max - range.min) ),
+        newPosition = 16 - (newValue * 0.32);
+    tooltip.innerHTML = `<span>${range.value}</span>`;
+    tooltip.style.left = `calc(${newValue}% + (${newPosition}px))`;
+    document.documentElement.style.setProperty("--range-progress", `calc(${newValue}% + (${newPosition}px))`);
+};
+document.addEventListener("DOMContentLoaded", setValue);
+range.addEventListener('input', setValue);
+
 
