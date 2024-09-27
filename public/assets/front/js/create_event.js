@@ -3220,7 +3220,10 @@ $(document).on("click", "#delete_invited_user", function () {
 
     // $("#" + id).remove();
      $('#user-'+userId).remove();
-     $('.user_id-'+userId).remove();
+    //  $('.user_id-'+userId).remove();
+     $(".user-list-responsive").empty();
+     $(".user-list-responsive").html(response.responsive_view);
+
 
     var checkbox = $("." + id);
     checkbox.prop("checked", false);
