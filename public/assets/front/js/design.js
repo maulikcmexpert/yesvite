@@ -437,10 +437,7 @@ $(document).on('click','.edit_design_tem',function(e){
         fontSizeInput.value = newValue; // Update the input field with the new value
         fontSizeTooltip.innerHTML = `<span>${newValue}px</span>`; // Update the tooltip with the new value
     
-        // Remove any existing event listener before adding a new one
-        fontSizeInput.removeEventListener('input', handleFontSizeChange); 
-    
-        // Define the event handler function
+        // Define the event handler function first
         const handleFontSizeChange = () => {
             const updatedValue = fontSizeInput.value; // Get the value from the input field
             const activeObject = canvas.getActiveObject();
@@ -449,6 +446,9 @@ $(document).on('click','.edit_design_tem',function(e){
                 updateTextboxWidth(activeObject); // Update the textbox width
             }
         };
+    
+        // Remove any existing event listener before adding a new one
+        fontSizeInput.removeEventListener('input', handleFontSizeChange);
     
         // Add the event listener for the input field
         fontSizeInput.addEventListener('input', handleFontSizeChange); 
