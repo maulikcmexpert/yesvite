@@ -1661,7 +1661,7 @@ ul.chat-list li.setpink{
 }
 
 #ui-id-1{
-    max-height: 200px;
+    max-height: 300px;
     overflow: hidden;
     overflow-y: scroll;
 }
