@@ -3520,7 +3520,7 @@ $(".multi-pin").click(async function () {
                 .find(".pin-svg")
                 .addClass("d-none");
 
-            (".conversation-" + conversationId)
+            $(".conversation-" + conversationId)
                 .children()
                 .find(".pin1-self-icn")
                 .removeClass("d-none");
