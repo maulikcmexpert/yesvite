@@ -92,10 +92,10 @@
 
             // Function to validate category names
 
-            $('#templateAdd').click(function(event) {
+            $(document).click('click', '#templateAdd', function() {
                 alert();
 
-                event.preventDefault();
+                // event.preventDefault();
 
                 // var isValid = true;
 
