@@ -50,6 +50,12 @@
 
                                 @endforeach
                             </select>
+                            <span class="text-danger">{{ $errors->first('event_design_subcategory_id.*') }}</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 mb-3">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Design</label>
                             <select class="form-control event_design_subcategory_id" id="event_design_sub_category_id" name="event_design_sub_category_id">
 
                                 <option value="">Select subcategory</option>
