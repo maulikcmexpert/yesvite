@@ -146,7 +146,7 @@ $("#selected-user-profile").replaceWith(
     `<h5 class="fontcolorS" id="selected-user-profile" >SN</h5>`
 );
 
-async function updateProfileImg(profileImageUrl, userName) {
+async function updateProfileImg(profileImageUrl, userName, conversationId) {
     if (await isValidImageUrl(profileImageUrl)) {
         $("#selected-user-profile").replaceWith(
             `<img id="selected-user-profile" src="${profileImageUrl}" alt="user-img">`
@@ -154,6 +154,12 @@ async function updateProfileImg(profileImageUrl, userName) {
         $("#profileIm").replaceWith(
             `<img id="profileIm" src="${profileImageUrl}" alt="cover-img" >`
         );
+        if (conversationId != "") {
+            $(".conversation-" + conversationId)
+                .find(".chat-data")
+                .find(".user-img")
+                .html(profileImageUrl);
+        }
     } else {
         const initials = getInitials(userName);
         const fontColor = "fontcolor" + initials[0]?.toUpperCase();
@@ -164,6 +170,14 @@ async function updateProfileImg(profileImageUrl, userName) {
         $("#profileIm").replaceWith(
             `<h5 id="profileIm" class="${fontColor}">${initials}</h5>`
         );
+        if (conversationId != "") {
+            $(".conversation-" + conversationId)
+                .find(".chat-data")
+                .find(".user-img")
+                .html(
+                    `<h5 id="profileIm" class="${fontColor}">${initials}</h5>`
+                );
+        }
     }
 }
 
@@ -724,7 +738,11 @@ async function updateChatfromGroup(conversationId) {
     });
     $("#selected-user-lastseen").html(""); // Group doesn't have a last seen
     $("#selected-user-name").html(groupInfo.groupName);
-    await updateProfileImg(groupInfo.groupProfile, groupInfo.groupName);
+    await updateProfileImg(
+        groupInfo.groupProfile,
+        groupInfo.groupName,
+        conversationId
+    );
 
     $(".selected_name").val(groupInfo.groupName);
 
