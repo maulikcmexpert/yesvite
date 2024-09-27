@@ -116,12 +116,12 @@ class TemplateController extends Controller
                 'image' => $imageName, // Save the uploaded image filename
             ]);
 
-            $template_id = $textData->id;
+            // $template_id = $textData->id;
 
-            $textdata = TextData::where('id', $template_id);
-            $textdata->event_design_category_id = $request->event_design_category_id;
-            $textdata->event_design_sub_category_id = $request->event_design_sub_category_id;
-            $textdata->save();
+            // $textdata = TextData::where('id', $template_id);
+            // $textdata->event_design_category_id = $request->event_design_category_id;
+            // $textdata->event_design_sub_category_id = $request->event_design_sub_category_id;
+            // $textdata->save();
 
             // Log::info(DB::getQueryLog());
 
