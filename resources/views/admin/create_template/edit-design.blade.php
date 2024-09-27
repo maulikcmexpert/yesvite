@@ -185,7 +185,7 @@
                 </button>
             </div>
             <div class="edit-images-button-inner edit-images-button-more dropdown">
-                <button class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown">
+                <button class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-toggle="dropdown">
                     <span>
                         <svg width="15" height="8" viewBox="0 0 15 8" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
