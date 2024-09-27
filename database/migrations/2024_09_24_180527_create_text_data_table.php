@@ -13,10 +13,13 @@ return new class extends Migration
     {
         Schema::create('text_data', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('event_design_id')->nullable();
-            $table->foreign('event_design_id')->references('id')->on('event_design_categories')->onDelete('cascade');
-            $table->json('static_information');
-            $table->string('image');
+            $table->unsignedBigInteger('event_design_category_id')->nullable();
+            $table->foreign('event_design_category_id')->references('id')->on('event_design_categories')->onDelete('cascade');
+            $table->unsignedBigInteger('event_design_sub_category_id')->nullable();
+            $table->foreign('event_design_sub_category_id')->references('id')->on('event_design_sub_categories')->onDelete('cascade');
+            $table->json('static_information')->nullable();
+            $table->string('image')->nullable();
+            $table->string('filled_image')->nullable();
             $table->integer('width')->nullable();
             $table->integer('height')->nullable();
             $table->timestamps();
