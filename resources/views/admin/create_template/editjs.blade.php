@@ -4,8 +4,8 @@
 
         // Initialize fabric canvas
         var canvas = new fabric.Canvas('imageEditor1', {
-            width: 500, // Canvas width
-            height: 500, // Canvas height
+            width: 345, // Canvas width
+            height: 490, // Canvas height
 
 
 
