@@ -680,7 +680,10 @@
     }
 
     .choose-design-sidebar.design-sidebar_3{
-        height: 50vh;
+        height: 70vh;
+    }
+    .choose-design-sidebar.design-sidebar_5{
+        height: 70vh;
     }
 
 }
