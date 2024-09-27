@@ -18,6 +18,7 @@ $(document).on("click", ".design-card", function () {
     if (typeof canvas !== 'undefined' && canvas) {
         canvas.clear();
         canvas.renderAll();
+        $('.upper-canvas').remove();
     }    
     var canvas = new fabric.Canvas('imageEditor2', {
         width: 350, // Canvas width
