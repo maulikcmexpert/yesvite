@@ -1569,7 +1569,9 @@ function closeMedia() {
     $("#musicContainer").hide();
     $("#preview").hide();
     $(".preview_img").hide();
-    $("#upload-files").reset();
+    $("#file1").val("");
+    $("#file2").val("");
+    $("#file3").val("");
 }
 // Function to add a message to the UI list
 function RemoveMessageToList(key, conversationId) {

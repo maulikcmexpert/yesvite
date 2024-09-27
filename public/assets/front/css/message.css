@@ -1050,7 +1050,7 @@ ul.member-lists li:last-child {
     color: var(--secondryColor);
 }
 
-.chatbox .button-wrapper #upload {
+.chatbox .button-wrapper .upload {
     display: inline-block;
     position: absolute;
     z-index: 1;
