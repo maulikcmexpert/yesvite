@@ -89,37 +89,49 @@
         });
 
         $(document).ready(function() {
+            $(document).on('change', 'event_design_category_id', function() {
+                if ($(this).val() !== '') {
+                    $(this).next('.text-danger').text("");
+                }
+            });
 
-            // Function to validate category names
+            $(document).on('change', 'event_design_sub_category_id', function() {
+                if ($(this).val() !== '') {
+                    $(this).next('.text-danger').text("");
+                }
+            });
+            $(document).on('change', '#fileInput', function() {
+                if ($(this).val() !== '') {
+                    $(this).next('.text-danger').text("");
+                }
+            });
 
-            $(document).click('click', '#templateAdd', function() {
-                alert();
-
-                // event.preventDefault();
-
-                // var isValid = true;
-
+            $(document).on('click', '#templateAdd', function(e) {
                 var selectedValue = $("#event_design_category_id").val();
                 var selectedSubCategory = $("#event_design_sub_category_id").val();
-
-
-
+                var fileInput = $("#image").val();
+                var hasError = false;
                 if (selectedValue === '') {
                     $("#event_design_category_id").next('.text-danger').text('Please select design category');
-                    return false;
-                } else {
-                    $("#event_design_category_id").next('.text-danger').text("");
+                    hasError = true;
                 }
-
-
                 if (selectedSubCategory === '') {
                     $("#event_design_sub_category_id").next('.text-danger').text('Please select design subcategory');
-                    return false;
+                    hasError = true;
+                }
+                if (fileInput === '') {
+                    $("#image").next('.text-danger').text('Please upload Template');
+                    hasError = true;
                 } else {
-                    $("#event_design_sub_category_id").next('.text-danger').text("");
+                    $("#image").next('.text-danger').text("");
                 }
 
-                $("#templateForm").submit();
+                if (!hasError) {
+                    $("#templateForm").submit();
+                } else {
+                    e.preventDefault();
+                }
+
                 // var promises = [];
 
                 // $('.image').each(function() {
