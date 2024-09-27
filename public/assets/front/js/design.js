@@ -60,10 +60,10 @@ $(document).on("click", ".design-card", function () {
     staticInfo.textElements.forEach(element => {
         console.log(element);
         let textElement = new fabric.Textbox(
-            element.text, {  // Use Textbox for editable text
+            element.text, {  
             left: element.left,
             top: element.top,
-            width: element.width || 200,  // Default width if not provided
+            width: element.width || 200,  
             fontSize: element.fontSize,
             fill: element.fill,
             fontFamily: element.fontFamily,
@@ -73,9 +73,9 @@ $(document).on("click", ".design-card", function () {
             linethrough: element.linethrough,
             backgroundColor: element.backgroundColor,
             textAlign: element.textAlign,
-            editable: false, // Disable editing
-            selectable: false, // Prevent selecting/moving the text
-            hasControls: false, // Prevent resizing
+            editable: false, 
+            selectable: false, 
+            hasControls: false, 
             borderColor: 'blue',
             cornerColor: 'red',
             cornerSize: 6,
