@@ -190,25 +190,25 @@ class TemplateController extends Controller
 
             // Validate the request data
             $request->validate([
-                'design_id' => 'required',
-                'event_design_subcategory_id' => 'required',
+                'event_design_category_id' => 'required',
+                'event_design_sub_category_id' => 'required',
                 'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // optional image validation
             ]);
 
             // Update the template fields
-            $template->design_id = $request->design_id;
-            $template->event_design_subcategory_id = $request->event_design_subcategory_id;
+            $template->event_design_category_id = $request->event_design_category_id;
+            $template->event_design_sub_category_id = $request->event_design_sub_category_id;
 
             // Handle image upload (if a new image is uploaded)
             if ($request->hasFile('image')) {
                 // Delete the old image if it exists
-                if ($template->image && file_exists(public_path('assets/images/' . $template->image))) {
-                    unlink(public_path('assets/images/' . $template->image));
+                if ($template->image && file_exists(public_path('storage/canvas/' . $template->image))) {
+                    unlink(public_path('storage/canvas/' . $template->image));
                 }
 
                 // Store the new image
                 $imageName = time() . '.' . $request->image->extension();
-                $request->image->move(public_path('assets/images'), $imageName);
+                $request->image->move(public_path('storage/canvas'), $imageName);
                 $template->image = $imageName;
             }
 

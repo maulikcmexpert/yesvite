@@ -1112,35 +1112,3 @@ $(document).on('click','.edit_design_tem',function(e){
     document.querySelector('[data-command="redo"]').addEventListener('click', redo);
 
 })
-
-// Function to set the tooltip value and position for a specific range
-const setValue = (range, tooltip) => {
-    const newValue = Number((range.value - range.min) * 100 / (range.max - range.min));
-    const newPosition = 16 - (newValue * 0.32);
-    tooltip.innerHTML = `<span>${range.value}</span>`;
-    tooltip.style.left = `calc(${newValue}% + (${newPosition}px))`;
-    document.documentElement.style.setProperty("--range-progress", `calc(${newValue}% + (${newPosition}px))`);
-};
-
-// Function to setup a specific range and its tooltip
-const setupRange = (rangeId, tooltipId) => {
-    const range = document.getElementById(rangeId);
-    const tooltip = document.getElementById(tooltipId);
-
-    // Set initial value when the page loads
-    document.addEventListener("DOMContentLoaded", () => {
-        setValue(range, tooltip);
-    });
-
-    // Add an event listener for input changes
-    range.addEventListener('input', () => {
-        setValue(range, tooltip);
-    });
-};
-
-// Set up specific ranges and tooltips
-setupRange('letterSpacingRange', 'letterSpacingTooltip');
-setupRange('lineHeightRange', 'lineHeightTooltip');  // Add this line for another range
-setupRange('fontSizeRange', 'fontSizeTooltip');      // Add this line for another range
-
-
