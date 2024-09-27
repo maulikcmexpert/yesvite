@@ -881,6 +881,10 @@
     transform: translate(-50%, -50%);
 }
 
+.modal-design-card {
+    cursor: no-drop;
+    
+}
  
 .modal-design-card .upper-canvas{
     position: relative !important;
