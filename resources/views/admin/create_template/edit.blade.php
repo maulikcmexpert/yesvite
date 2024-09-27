@@ -73,9 +73,11 @@
                     <div class="col-lg-3 mb-3">
                         <div class="form-group">
                             <label for="image">Filled Image</label>
-                            <input type="file" class="form-control image" id="upload_filled_image" name=" filled_image">
+                            <input type="file" class="form-control image" id="upload_filled_image" name="filled_image">
                             @if($getTemData->filled_image)
-                            <img id="preview_filled_image" src=" {{ asset('storage/canvas/'. $getTemData->filled_image) }}" alt="Template Image" width="100" class="mt-2">
+                            <img src="{{ asset('storage/canvas/'. $getTemData->filled_image) }}" alt="Template Image" width="100" class="mt-2">
+                            @else
+                            <img id="preview_filled_image" src="" alt="Template Image" width="100" class="mt-2">
                             @endif
                             <span class="text-danger">{{ $errors->first('image') }}</span>
                         </div>
