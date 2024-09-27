@@ -73,13 +73,14 @@ $(document).on("click", ".design-card", function () {
             linethrough: element.linethrough,
             backgroundColor: element.backgroundColor,
             textAlign: element.textAlign,
-            editable: false,
-            hasControls: false,
+            editable: false, // Disable editing
+            selectable: false, // Prevent selecting/moving the text
+            hasControls: false, // Prevent resizing
             borderColor: 'blue',
             cornerColor: 'red',
             cornerSize: 6,
             transparentCorners: false,
-            isStatic: false
+            isStatic: true
         });
         switch (element.text) {
             case 'event_name':
