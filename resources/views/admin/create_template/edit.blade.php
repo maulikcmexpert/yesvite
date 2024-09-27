@@ -77,7 +77,7 @@
                             @if($getTemData->filled_image)
                             <img src="{{ asset('storage/canvas/'. $getTemData->filled_image) }}" alt="Template Image" width="100" class="mt-2">
                             @else
-                            <img id="preview_filled_image" src="" alt="Template Image" width="100" class="mt-2">
+                            <img id="preview_filled_image" src="" alt="Template Image" width="100" class="mt-2" style="display: none;">
                             @endif
                             <span class="text-danger">{{ $errors->first('image') }}</span>
                         </div>
