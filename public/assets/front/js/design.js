@@ -16,6 +16,7 @@ $(document).on("click", ".design-card", function () {
     image = imageUrl;
     $("#exampleModal").modal("show");
     if (typeof canvas !== 'undefined' && canvas) {
+        alert();
         canvas.clear();
         canvas.renderAll();
         $('.upper-canvas').remove();
