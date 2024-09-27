@@ -44,10 +44,7 @@ $(document).on("click", ".design-card", function () {
     });
 
     const staticInfo = dbJson;
-    var flag = true;
-    if(editable == '1'){
-        flag = false;
-    }
+    
     staticInfo.textElements.forEach(element => {
         console.log(element);
         let textElement = new fabric.Textbox(
@@ -281,10 +278,6 @@ $(document).on('click','.edit_design_tem',function(e){
             if (dbJson) {
                 hideStaticTextElements();  // Hide static text elements if static information is present
                 const staticInfo = dbJson;
-                var flag = true;
-                if(editable == '1'){
-                    flag = false;
-                }
                 staticInfo.textElements.forEach(element => {
                     console.log(element);
                     let textElement = new fabric.Textbox(
