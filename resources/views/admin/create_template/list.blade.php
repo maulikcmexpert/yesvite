@@ -29,14 +29,11 @@
     <thead>
 
       <tr>
-
         <th>No</th>
         <th>Design Name</th>
         <th>SubCategory Name</th>
-        <th>image</th>
-
-
-
+        <th>Image</th>
+        <th>Filled Image</th>
         <th width="100px">Action</th>
 
       </tr>
