@@ -100,7 +100,7 @@
                     $(this).next('.text-danger').text("");
                 }
             });
-            $(document).on('change', '#fileInput', function() {
+            $(document).on('change', '#image', function() {
                 if ($(this).val() !== '') {
                     $(this).next('.text-danger').text("");
                 }
