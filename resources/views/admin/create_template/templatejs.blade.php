@@ -284,6 +284,9 @@
 
 
         // })
+        $('#upload_image').on('change', function() {
+            previewImage(this, '#preview_image');
+        });
 
         $('#upload_filled_image').on('change', function() {
             previewImage(this, '#preview_filled_image');
@@ -293,6 +296,7 @@
         function previewImage(inputElement, previewElement) {
             var file = inputElement.files[0];
             if (file) {
+                alert();
                 var reader = new FileReader();
                 reader.onload = function(e) {
                     $(previewElement).css('display', 'block');
