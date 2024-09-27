@@ -23,7 +23,7 @@ $(document).on("click", ".design-card", function () {
     // Create a new canvas element
     var newCanvas = $('<canvas>', {
         id: 'imageEditor2',
-        width: 350,
+        width: 345,
         height: 490
     });
 
@@ -34,7 +34,7 @@ $(document).on("click", ".design-card", function () {
     $("#exampleModal").modal("show");
 
     var canvas = new fabric.Canvas('imageEditor2', {
-        width: 350,
+        width: 345,
         height: 490,
         position: 'relative',
     });
@@ -409,7 +409,7 @@ $(document).on('click','.edit_design_tem',function(e){
     }
 
     var canvas = new fabric.Canvas('imageEditor1', {
-        width: 350, // Canvas width
+        width: 345, // Canvas width
         height: 490, // Canvas height
     });
     const defaultSettings = {

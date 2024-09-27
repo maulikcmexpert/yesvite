@@ -89,18 +89,18 @@
         });
 
         $(document).ready(function() {
-            $(document).on('change', 'event_design_category_id', function() {
+            $(document).on('change', '#event_design_category_id', function() {
                 if ($(this).val() !== '') {
                     $(this).next('.text-danger').text("");
                 }
             });
 
-            $(document).on('change', 'event_design_sub_category_id', function() {
+            $(document).on('change', '#event_design_sub_category_id', function() {
                 if ($(this).val() !== '') {
                     $(this).next('.text-danger').text("");
                 }
             });
-            $(document).on('change', '#fileInput', function() {
+            $(document).on('change', '#image', function() {
                 if ($(this).val() !== '') {
                     $(this).next('.text-danger').text("");
                 }
