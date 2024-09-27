@@ -292,34 +292,112 @@ $(document).on("click", ".design-card", function () {
     });
 
     const staticInfo = dbJson;
-
+    
     staticInfo.textElements.forEach(element => {
+        console.log(element);
         let textElement = new fabric.Textbox(
-            element.text, {
-                left: element.left,
-                top: element.top,
-                width: element.width || 200,
-                fontSize: element.fontSize,
-                fill: element.fill,
-                fontFamily: element.fontFamily,
-                fontWeight: element.fontWeight,
-                fontStyle: element.fontStyle,
-                underline: element.underline,
-                linethrough: element.linethrough,
-                backgroundColor: element.backgroundColor,
-                textAlign: element.textAlign,
-                editable: false,
-                hasControls: false,
-                borderColor: 'blue',
-                cornerColor: 'red',
-                cornerSize: 6,
-                transparentCorners: false,
-                isStatic: true
-            });
+            element.text, {  // Use Textbox for editable text
+            left: element.left,
+            top: element.top,
+            width: element.width || 200,  // Default width if not provided
+            fontSize: element.fontSize,
+            fill: element.fill,
+            fontFamily: element.fontFamily,
+            fontWeight: element.fontWeight,
+            fontStyle: element.fontStyle,
+            underline: element.underline,
+            linethrough: element.linethrough,
+            backgroundColor: element.backgroundColor,
+            textAlign: element.textAlign,
+            editable: false,
+            hasControls: false,
+            borderColor: 'blue',
+            cornerColor: 'red',
+            cornerSize: 6,
+            transparentCorners: false,
+            isStatic: true
+        });
+        switch (element.text) {
+            case 'event_name':
+                if (eventData.event_name) {
+                    textElement.set({ text: eventData.event_name });
+                } else {
+                    return;  // Skip adding the element if event_name is empty
+                }
+                break;
+            case 'host_name':
+                if (eventData.hosted_by) {
+                    textElement.set({ text: eventData.hosted_by });
+                } else {
+                    return;  // Skip adding the element if host_name is empty
+                }
+                break;
+            case 'Location':
+                if (eventData.event_location) {
+                    textElement.set({ text: eventData.event_location });
+                } else {
+                    return;  // Skip adding the element if event_location_name is empty
+                }
+                break;
+            case 'start_time':
+                if (eventData.start_time) {
+                    textElement.set({ text: eventData.start_time });
+                } else {
+                    return;  // Skip adding the element if start_time is empty
+                }
+                break;
+            case 'rsvp_end_time':
+                if (eventData.rsvp_end_time) {
+                    textElement.set({ text: eventData.rsvp_end_time });
+                } else {
+                    return;  // Skip adding the element if rsvp_end_time is empty
+                }
+                break;
+            case 'start_date':
+                if (eventData.event_date) {
+                    var start_date = '';
+                    if (eventData.event_date.includes(" To ")) {
+                        let [start, end] = eventData.event_date.split(" To ");
+                        start_date = start;
+                    } else {
+                        start_date = eventData.event_date;
+                    }
 
-        // Your existing code for setting textElement text based on eventData...
-        
+                    textElement.set({ text: start_date });
+                } else {
+                    return;  // Skip adding the element if start_date is empty
+                }
+                break;
+            case 'end_date':
+                if (eventData.event_date) {
+
+                    var end_date = '';
+                    if (eventData.event_date.includes(" To ")) {
+                        let [start, end] = eventData.event_date.split(" To ");
+                        end_date = end;
+                    } else {
+                        end_date = eventData.event_date;
+                    }
+
+                    textElement.set({ text: end_date });
+                } else {
+                    return;  // Skip adding the element if end_date is empty
+                }
+                break;
+        }
+        const textWidth = textElement.calcTextWidth();
+        textElement.set({ width: textWidth });
+
+        textElement.on('scaling', function () {
+            // Calculate the updated font size based on scaling factors
+            var updatedFontSize = textElement.fontSize * (textElement.scaleX + textElement.scaleY) / 2;
+            textElement.set('fontSize', updatedFontSize); // Update the font size
+            canvas.renderAll(); // Re-render the canvas to reflect changes
+        });
+
+        addIconsToTextbox(textElement);
         canvas.add(textElement);
+
     });
 
     // Your existing code for adding icons and managing their visibility...
