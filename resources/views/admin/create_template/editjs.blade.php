@@ -972,6 +972,7 @@
 
     $(document).on("click", ".design-sidebar-action", function() {
         let designId = $(this).attr('design-id')
+        alert(designId);
         if (designId) {
             $(".design-sidebar").addClass('d-none')
             $(".design-sidebar_" + designId).removeClass('d-none')

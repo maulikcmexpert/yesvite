@@ -296,7 +296,7 @@
         function previewImage(inputElement, previewElement) {
             var file = inputElement.files[0];
             if (file) {
-                alert();
+                // alert();
                 var reader = new FileReader();
                 reader.onload = function(e) {
                     $(previewElement).css('display', 'block');
