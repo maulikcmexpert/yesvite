@@ -151,11 +151,12 @@ async function updateProfileImg(
     userName,
     conversationId = ""
 ) {
+    let profile = document.getElementById("profileIm");
     if (await isValidImageUrl(profileImageUrl)) {
         $("#selected-user-profile").replaceWith(
             `<img id="selected-user-profile" src="${profileImageUrl}" alt="user-img">`
         );
-        $("#profileIm").replaceWith(
+        $(profile).replaceWith(
             `<img id="profileIm" src="${profileImageUrl}" alt="cover-img" >`
         );
         if (conversationId != "") {
@@ -173,7 +174,8 @@ async function updateProfileImg(
         $("#selected-user-profile").replaceWith(
             `<h5 class="${fontColor}" id="selected-user-profile" >${initials}</h5>`
         );
-        $("#profileIm").replaceWith(
+
+        $(profile).replaceWith(
             `<h5 id="profileIm" class="${fontColor}">${initials}</h5>`
         );
 
