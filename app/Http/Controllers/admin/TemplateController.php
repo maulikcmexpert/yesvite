@@ -40,9 +40,9 @@ class TemplateController extends Controller
                 ->addColumn('category_name', function ($row) {
                     return $row->categories->category_name;
                 })
-                // ->addColumn('subcategory_name', function ($row) {
-                //     return $row->subcategory->subcategory_name;
-                // })
+                ->addColumn('subcategory_name', function ($row) {
+                    return $row->subcategory->subcategory_name;
+                })
                 ->addColumn('image', function ($template) {
                     return '<img src="' . asset('assets/images/' . $template->image) . '" width="50" height="50" />';
                 })
@@ -62,7 +62,7 @@ class TemplateController extends Controller
                     return $actionBtn;
                 })
 
-                ->rawColumns(['number', 'category_name', 'image', 'action'])
+                ->rawColumns(['number', 'category_name', 'subcategory_name', 'image', 'action'])
                 ->make(true);
         }
 

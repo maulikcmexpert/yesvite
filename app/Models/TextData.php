@@ -21,10 +21,10 @@ class TextData extends Model
         'static_information' => 'array',
     ];
 
-    // public function subcategories()
-    // {
-    //     return $this->belongsToMany(EventDesignSubCategory::class);
-    // }
+    public function subcategories()
+    {
+        return $this->belongsTo(EventDesignSubCategory::class, 'event_design_sub_category_id', 'id');
+    }
 
     public function categories()
     {
