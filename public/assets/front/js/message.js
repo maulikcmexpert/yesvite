@@ -459,20 +459,20 @@ function moveToTopOrBelowPinned(element) {
     }
 
     let $chatList = $(".chat-list"); // Get the chat list container
+    let parentDiv = element.closest("div"); // Get the parent div of the li element
     let isPinned = element.hasClass("pinned"); // Check if the element is pinned
-    let parentDiv = element.closest("div"); // Get the parent div containing the li
 
     // If the element is pinned, move it to the very top
     if (isPinned) {
-        $chatList.prepend(parentDiv); // Move to the very top of the list
+        $chatList.prepend(parentDiv); // Move pinned element to the top
     } else {
-        // Move the element after the last pinned element, if any
-        let lastPinned = $chatList.children("div").children(".pinned").last();
+        // If not pinned, move it after the last pinned element
+        let lastPinnedDiv = $chatList.children("div.pinned").last();
 
-        if (lastPinned.length > 0) {
-            lastPinned.after(parentDiv); // Move after the last pinned element
+        if (lastPinnedDiv.length > 0) {
+            lastPinnedDiv.after(parentDiv); // Place after the last pinned parent div
         } else {
-            $chatList.prepend(parentDiv); // If no pinned elements, move to the very top
+            $chatList.prepend(parentDiv); // If no pinned elements exist, prepend the parent div to the very top
         }
     }
 }
