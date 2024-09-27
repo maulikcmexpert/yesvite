@@ -433,34 +433,16 @@ $(document).on('click','.edit_design_tem',function(e){
 
     // Set font size function
     const setFontSize = () => {
-        const newValue = fontSizeRange.value; // Get the value from the range input
-        fontSizeInput.value = newValue; // Update the input field with the new value
-        fontSizeTooltip.innerHTML = `<span>${newValue}px</span>`; // Update the tooltip with the new value
-    
-        // Define the event handler function first
-        const handleFontSizeChange = () => {
-            const updatedValue = fontSizeInput.value; // Get the value from the input field
-            const activeObject = canvas.getActiveObject();
-            if (activeObject && activeObject.type === 'textbox') {
-                activeObject.set('fontSize', updatedValue); // Set the font size of the active object
-                updateTextboxWidth(activeObject); // Update the textbox width
-            }
-        };
-    
-        // Remove any existing event listener before adding a new one
-        fontSizeInput.removeEventListener('input', handleFontSizeChange);
-    
-        // Add the event listener for the input field
-        fontSizeInput.addEventListener('input', handleFontSizeChange); 
-    
-        // Update the font size of the active object if it exists
+        const newValue = fontSizeRange.value;
+        fontSizeInput.value = newValue;
+        fontSizeTooltip.innerHTML = `<span>${newValue}px</span>`;
+
         const activeObject = canvas.getActiveObject();
         if (activeObject && activeObject.type === 'textbox') {
-            activeObject.set('fontSize', newValue); // Set the font size directly from the range
-            updateTextboxWidth(activeObject); // Update the textbox width
+            activeObject.set('fontSize', newValue);
+            updateTextboxWidth(activeObject);
         }
     };
-    
 
     // Set letter spacing function
     const setLetterSpacing = () => {
@@ -1130,3 +1112,4 @@ $(document).on('click','.edit_design_tem',function(e){
     document.querySelector('[data-command="redo"]').addEventListener('click', redo);
 
 })
+
