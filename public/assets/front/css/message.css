@@ -227,6 +227,21 @@ ul.chat-list li:last-child {
     right: 0;
     bottom: 0;
 }
+.chat-list .user-img .inactive {
+    width: 14px;
+    height: 14px;
+    display: block;
+    border: 3px solid #fff;
+    border-radius: 100%;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    -ms-border-radius: 100%;
+    -o-border-radius: 100%;
+    background-color: #ff2100;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
 
 /* .chat-list .user-detail{
     width: 55%;
@@ -1049,8 +1064,13 @@ ul.member-lists li:last-child {
     line-height: 22px;
     color: var(--secondryColor);
 }
-
-.chatbox .button-wrapper #upload {
+ul.chat-list li.setpink.active{
+    background-color: pink!important;
+}
+ul.chat-list li.setpink{
+    background-color: pink!important;
+}
+.chatbox .button-wrapper .upload {
     display: inline-block;
     position: absolute;
     z-index: 1;
@@ -1638,6 +1658,16 @@ ul.member-lists li:last-child {
 .chat-data .dropdown.text-end.ms-auto {
     margin-left: 10px !important;
 
+}
+
+#ui-id-1{
+    max-height: 300px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+#ui-id-1 .user-detail span {
+    display: block;
 }
 
 /* ======= responsive ======== */

@@ -47,6 +47,10 @@ class TemplateController extends Controller
                 ->addColumn('image', function ($template) {
                     return '<img src="' . asset('storage/canvas/' . $template->image) . '" width="50" height="50" />';
                 })
+
+                ->addColumn('filled_image', function ($template) {
+                    return '<img src="' . asset('storage/canvas/' . $template->filled_image) . '" width="50" height="50" />';
+                })
                 ->addColumn('action', function ($row) {
                     $cryptId = encrypt($row->id);
                     $edit_url = route('create_template.edit', $cryptId);
@@ -63,7 +67,7 @@ class TemplateController extends Controller
                     return $actionBtn;
                 })
 
-                ->rawColumns(['number', 'category_name', 'subcategory_name', 'image', 'action'])
+                ->rawColumns(['number', 'category_name', 'subcategory_name', 'image', 'filled_image', 'action'])
                 ->make(true);
         }
 
@@ -210,6 +214,17 @@ class TemplateController extends Controller
                 $imageName = time() . '.' . $request->image->extension();
                 $request->image->move(public_path('storage/canvas'), $imageName);
                 $template->image = $imageName;
+            }
+            if ($request->hasFile('filled_image')) {
+                // Delete the old image if it exists
+                if ($template->filled_image && file_exists(public_path('storage/canvas/' . $template->filled_image))) {
+                    unlink(public_path('storage/canvas/' . $template->filled_image));
+                }
+
+                // Store the new image
+                $imageName = time() . '.' . $request->filled_image->extension();
+                $request->filled_image->move(public_path('storage/canvas'), $imageName);
+                $template->filled_image = $imageName;
             }
 
             // Save the updated template data

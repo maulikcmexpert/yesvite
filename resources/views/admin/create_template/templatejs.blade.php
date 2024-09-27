@@ -62,6 +62,12 @@
                     name: "image"
 
                 },
+                {
+
+                    data: "filled_image",
+                    name: "filled_image"
+
+                },
 
                 {
 
@@ -105,11 +111,18 @@
                     $(this).next('.text-danger').text("");
                 }
             });
+            $(document).on('change', '#filled_image', function() {
+                if ($(this).val() !== '') {
+                    $(this).next('.text-danger').text("");
+                }
+            });
 
             $(document).on('click', '#templateAdd', function(e) {
                 var selectedValue = $("#event_design_category_id").val();
                 var selectedSubCategory = $("#event_design_sub_category_id").val();
-                var fileInput = $("#image").val();
+                var image = $("#image").val();
+                var filledimage = $("#filled_image").val();
+
                 var hasError = false;
                 if (selectedValue === '') {
                     $("#event_design_category_id").next('.text-danger').text('Please select design category');
@@ -119,12 +132,21 @@
                     $("#event_design_sub_category_id").next('.text-danger').text('Please select design subcategory');
                     hasError = true;
                 }
-                if (fileInput === '') {
+                if (image === '') {
                     $("#image").next('.text-danger').text('Please upload Template');
                     hasError = true;
                 } else {
                     $("#image").next('.text-danger').text("");
                 }
+
+
+                if (filledimage === '') {
+                    $("#filled_image").next('.text-danger').text('Please upload Filled Template');
+                    hasError = true;
+                } else {
+                    $("#filled_image").next('.text-danger').text("");
+                }
+
 
                 if (!hasError) {
                     $("#templateForm").submit();
@@ -260,11 +282,37 @@
         //     },
 
 
+        $('#image').on('change', function() {
+            previewImage(this, '#add_preview_image');
+        });
 
-        // })
+        $('#filled_image').on('change', function() {
+            previewImage(this, '#add_preview_filled_image');
+        });
+
+        $('#upload_image').on('change', function() {
+            previewImage(this, '#preview_image');
+        });
+
+        $('#upload_filled_image').on('change', function() {
+            previewImage(this, '#preview_filled_image');
+        });
 
 
 
+
+        function previewImage(inputElement, previewElement) {
+            var file = inputElement.files[0];
+            if (file) {
+                // alert();
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $(previewElement).css('display', 'block');
+                    $(previewElement).attr('src', e.target.result);
+                }
+                reader.readAsDataURL(file);
+            }
+        }
 
 
         $(document).on("click", ".delete_template", function(event) {

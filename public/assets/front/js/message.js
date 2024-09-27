@@ -158,7 +158,9 @@ async function updateProfileImg(profileImageUrl, userName, conversationId) {
             $(".conversation-" + conversationId)
                 .find(".chat-data")
                 .find(".user-img")
-                .html(profileImageUrl);
+                .html(
+                    `<img id="profileIm" src="${profileImageUrl}" alt="cover-img" >`
+                );
         }
     } else {
         const initials = getInitials(userName);
@@ -420,10 +422,11 @@ async function handleNewConversation(snapshot) {
         badgeElement.text(newConversation.unReadCount);
         if (newConversation.unReadCount == 0) {
             badgeElement.addClass("d-none");
+            $(conversationElement).removeClass("setpink");
         } else {
             badgeElement.removeClass("d-none");
             badgeElement.show();
-
+            $(conversationElement).addClass("setpink");
             console.log("here");
         }
     } else {
@@ -445,12 +448,6 @@ async function handleNewConversation(snapshot) {
                 if (msgLists.length > 0) {
                     msgLists[0].classList.add("active");
                 }
-                var ele = $(
-                    document.getElementsByClassName(
-                        `conversation-${newConversation.conversationId}`
-                    )
-                );
-                moveToTopOrBelowPinned(ele);
             },
         });
     }
@@ -465,6 +462,12 @@ async function handleNewConversation(snapshot) {
         });
     }
     updateUnreadMessageBadge();
+    var ele = $(
+        document.getElementsByClassName(
+            `conversation-${newConversation.conversationId}`
+        )
+    );
+    moveToTopOrBelowPinned(ele);
 }
 function moveToTopOrBelowPinned(element) {
     if (element.length <= 0) {
@@ -477,6 +480,7 @@ function moveToTopOrBelowPinned(element) {
 
     // If the element is pinned, move it to the very top
     if (isPinned) {
+        console.log("pinned on top");
         $chatList.prepend(parentDiv); // Move pinned element to the top
     } else {
         // If not pinned, move it after the last pinned element
@@ -1554,7 +1558,9 @@ $(".send-message").on("keypress", async function (e) {
 
         moveToTopOrBelowPinned(conversationElement);
         console.log("here");
-
+        $("#file1").val("");
+        $("#file2").val("");
+        $("#file3").val("");
         closeMedia();
         loader.hide();
     }
@@ -1569,6 +1575,9 @@ function closeMedia() {
     $("#musicContainer").hide();
     $("#preview").hide();
     $(".preview_img").hide();
+    $("#file1").val("");
+    $("#file2").val("");
+    $("#file3").val("");
 }
 // Function to add a message to the UI list
 function RemoveMessageToList(key, conversationId) {
