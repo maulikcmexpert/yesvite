@@ -451,7 +451,6 @@ async function handleNewConversation(snapshot) {
                         `conversation-${newConversation.conversationId}`
                     )
                 );
-                moveToTopOrBelowPinned(ele);
             },
         });
     }
@@ -466,6 +465,7 @@ async function handleNewConversation(snapshot) {
         });
     }
     updateUnreadMessageBadge();
+    moveToTopOrBelowPinned(ele);
 }
 function moveToTopOrBelowPinned(element) {
     if (element.length <= 0) {
@@ -478,6 +478,7 @@ function moveToTopOrBelowPinned(element) {
 
     // If the element is pinned, move it to the very top
     if (isPinned) {
+        console.log("pinned on top");
         $chatList.prepend(parentDiv); // Move pinned element to the top
     } else {
         // If not pinned, move it after the last pinned element
