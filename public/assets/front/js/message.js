@@ -451,9 +451,7 @@ async function handleNewConversation(snapshot) {
             `conversation-${newConversation.conversationId}`
         )
     );
-    setTimeout(function () {
-        moveToTopOrBelowPinned(ele);
-    }, 2000);
+    moveToTopOrBelowPinned(ele);
 }
 
 function moveToTopOrBelowPinned(element) {
@@ -472,6 +470,7 @@ function moveToTopOrBelowPinned(element) {
 
         // Find the correct spot based on `data-position`
         let inserted = false;
+        console.log($chatList);
         $listItems.each(function () {
             let listItemPosition = parseInt($(this).attr("data-position"));
             let listItemDiv = $(this).closest("div"); // Get the parent div of the current li
