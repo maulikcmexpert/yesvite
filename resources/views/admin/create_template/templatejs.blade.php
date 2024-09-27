@@ -64,8 +64,8 @@
                 },
                 {
 
-                    data: "filledimage",
-                    name: "filledimage"
+                    data: "filled_image",
+                    name: "filled_image"
 
                 },
 
