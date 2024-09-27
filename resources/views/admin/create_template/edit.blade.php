@@ -1,3 +1,4 @@
+{{dd($getTemData);}}
 <div class="container-fluid">
     <h1 class="m-0 ProductTitle">{{$title}}</h1>
     <div class="content-header p-0">
@@ -31,7 +32,7 @@
                         <div class="form-group">
                             <label for="design_id">Design</label>
                             <select class="form-control design_id" id="design_id" name="design_id">
-                                <option value="">Select Design</option>
+                                <!-- <option value="">Select Design</option> -->
                                 @foreach($getDesignData as $design)
                                 <option value="{{ $design->id }}" {{ $design->id == $getTemData->event_desgin_category_id ? 'selected' : '' }}>
                                     {{ $design->category_name }}
@@ -47,7 +48,7 @@
                         <div class="form-group">
                             <label for="event_design_subcategory_id">Subcategory</label>
                             <select class="form-control event_design_subcategory_id" id="event_design_subcategory_id" name="event_design_subcategory_id">
-                                <option value="">Select Subcategory</option>
+                                <!-- <option value="">Select Subcategory</option> -->
                                 @foreach($getSubCatDetail as $subcategory)
                                 <option value="{{ $subcategory->id }}" {{ $subcategory->id == $getTemData->event_desgin_sub_category_id ? 'selected' : '' }}>
                                     {{ $subcategory->subcategory_name }}

@@ -450,7 +450,7 @@ async function handleNewConversation(snapshot) {
         document.getElementsByClassName(
             `conversation-${newConversation.conversationId}`
         )
-    ).parent();
+    ).closest("div");
     moveToTopOrBelowPinned(ele);
 }
 function moveToTopOrBelowPinned(element, setOnTop = false) {
@@ -964,7 +964,10 @@ $(document).on("click", ".pin-conversation", function () {
             .children()
             .find(".unpin1-self-icn")
             .removeClass("d-none");
-        moveToTopOrBelowPinned($(`.conversation-${conversationId}`), 1);
+        moveToTopOrBelowPinned(
+            $(`.conversation-${conversationId}`).closest("div"),
+            1
+        );
     } else {
         $(".conversation-" + conversationId).removeClass("pinned");
 
@@ -982,7 +985,9 @@ $(document).on("click", ".pin-conversation", function () {
             .children()
             .find(".unpin1-self-icn")
             .addClass("d-none");
-        moveToTopOrBelowPinned($(`.conversation-${conversationId}`));
+        moveToTopOrBelowPinned(
+            $(`.conversation-${conversationId}`).closest("div")
+        );
     }
 });
 $(document).on("click", ".pin-single-conversation", function (e) {
@@ -1024,7 +1029,10 @@ $(document).on("click", ".pin-single-conversation", function (e) {
         }
         $(this).children(".pin1-self-icn").addClass("d-none");
         $(this).children(".unpin1-self-icn").removeClass("d-none");
-        moveToTopOrBelowPinned($(`.conversation-${conversationId}`), 1);
+        moveToTopOrBelowPinned(
+            $(`.conversation-${conversationId}`).closest("div"),
+            1
+        );
     } else {
         $(".conversation-" + conversationId).removeClass("pinned");
 
@@ -1038,7 +1046,9 @@ $(document).on("click", ".pin-single-conversation", function (e) {
             $(".pin-self-icn").show();
             $(".unpin-self-icn").hide();
         }
-        moveToTopOrBelowPinned($(`.conversation-${conversationId}`));
+        moveToTopOrBelowPinned(
+            $(`.conversation-${conversationId}`).closest("div")
+        );
     }
 });
 
@@ -1607,7 +1617,9 @@ $(".send-message").on("keypress", async function (e) {
                 );
             }
         }
-        const conversationElement = $(`.conversation-${conversationId}`);
+        const conversationElement = $(
+            `.conversation-${conversationId}`
+        ).closest("div");
 
         moveToTopOrBelowPinned(conversationElement, 1);
         console.log("here");
@@ -3586,7 +3598,9 @@ $(".multi-pin").click(async function () {
                 .children()
                 .find(".unpin1-self-icn")
                 .removeClass("d-none");
-            const conversationElement = $(`.conversation-${conversationId}`);
+            const conversationElement = $(
+                `.conversation-${conversationId}`
+            ).closest("div");
             moveToTopOrBelowPinned(conversationElement, 1);
         } else {
             $(".conversation-" + conversationId).removeClass("pinned");
@@ -3603,7 +3617,9 @@ $(".multi-pin").click(async function () {
                 .children()
                 .find(".unpin1-self-icn")
                 .addClass("d-none");
-            const conversationElement = $(`.conversation-${conversationId}`);
+            const conversationElement = $(
+                `.conversation-${conversationId}`
+            ).closest("div");
             moveToTopOrBelowPinned(conversationElement);
         }
     });
