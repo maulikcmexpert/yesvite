@@ -1554,7 +1554,9 @@ $(".send-message").on("keypress", async function (e) {
 
         moveToTopOrBelowPinned(conversationElement);
         console.log("here");
-
+        $("#file1").val("");
+        $("#file2").val("");
+        $("#file3").val("");
         closeMedia();
         loader.hide();
     }
