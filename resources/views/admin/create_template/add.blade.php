@@ -46,7 +46,7 @@
 
                                 @foreach($getDesignData as $cat)
 
-                                <option value="{{$cat->id}}">{{$cat->design_name}}</option>
+                                <option value="{{$cat->id}}">{{$cat->category_name}}</option>
 
                                 @endforeach
                             </select>
@@ -119,4 +119,3 @@
         </div>
     </div>
 </div>
-
