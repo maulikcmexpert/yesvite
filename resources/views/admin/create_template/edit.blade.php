@@ -33,12 +33,12 @@
                             <select class="form-control design_id" id="design_id" name="design_id">
                                 <option value="">Select Design</option>
                                 @foreach($getDesignData as $design)
-                                    <option value="{{ $design->id }}" {{ $design->id == $getTemData->design_id ? 'selected' : '' }}>
-                                        {{ $design->design_name }}
-                                    </option>
+                                <option value="{{ $design->id }}" {{ $design->id == $getTemData->event_desgin_category_id ? 'selected' : '' }}>
+                                    {{ $design->category_name }}
+                                </option>
                                 @endforeach
                             </select>
-                            <span class="text-danger">{{ $errors->first('design_id') }}</span>
+                            <span class="text-danger">{{ $errors->first('event_desgin_category_id') }}</span>
                         </div>
                     </div>
 
@@ -49,12 +49,12 @@
                             <select class="form-control event_design_subcategory_id" id="event_design_subcategory_id" name="event_design_subcategory_id">
                                 <option value="">Select Subcategory</option>
                                 @foreach($getSubCatDetail as $subcategory)
-                                    <option value="{{ $subcategory->id }}" {{ $subcategory->id == $getTemData->event_design_subcategory_id ? 'selected' : '' }}>
-                                        {{ $subcategory->subcategory_name }}
-                                    </option>
+                                <option value="{{ $subcategory->id }}" {{ $subcategory->id == $getTemData->event_desgin_sub_category_id ? 'selected' : '' }}>
+                                    {{ $subcategory->subcategory_name }}
+                                </option>
                                 @endforeach
                             </select>
-                            <span class="text-danger">{{ $errors->first('event_design_subcategory_id') }}</span>
+                            <span class="text-danger">{{ $errors->first('event_design_sub_category_id') }}</span>
                         </div>
                     </div>
 
@@ -64,7 +64,7 @@
                             <label for="image">Image</label>
                             <input type="file" class="form-control image" name="image">
                             @if($getTemData->image)
-                                <img src="{{ asset('assets/images/'. $getTemData->image) }}" alt="Template Image" width="100" class="mt-2">
+                            <img src="{{ asset('storage/canvas/'. $getTemData->image) }}" alt="Template Image" width="100" class="mt-2">
                             @endif
                             <span class="text-danger">{{ $errors->first('image') }}</span>
                         </div>

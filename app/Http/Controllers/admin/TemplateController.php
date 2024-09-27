@@ -160,7 +160,7 @@ class TemplateController extends Controller
         $subcatId = $id;
 
         // Get all design and subcategory data
-        $getDesignData = EventDesignStyle::all();
+        $getDesignData = EventDesignCategory::all();
         $getSubCatDetail = EventDesignSubCategory::all();
 
         // Pass the data to the view
