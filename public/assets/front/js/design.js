@@ -156,6 +156,7 @@ $(document).on("click", ".design-card", function () {
     });
 });
 $(document).on('click','.modal-design-card',function(e){
+    alert();
     e.stopPropagation();
 })
 
