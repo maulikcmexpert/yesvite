@@ -15,6 +15,9 @@ $(document).on("click", ".design-card", function () {
     $("#modalImage").attr("src", imageUrl);
     image = imageUrl;
     $("#exampleModal").modal("show");
+    if (typeof canvas !== 'undefined' && canvas) {
+        canvas.clear();  // Clear the canvas if it exists
+    }    
     var canvas = new fabric.Canvas('imageEditor2', {
         width: 350, // Canvas width
         height: 490, // Canvas height
