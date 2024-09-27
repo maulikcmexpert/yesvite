@@ -2939,6 +2939,18 @@ $("#add-group-member").click(async function () {
                     database,
                     `overview/${userId}/${conversationId}`
                 );
+                console.log({
+                    contactId: conversationId,
+                    contactName: $(".selected_name").val(),
+                    conversationId: conversationId,
+                    group: true,
+                    lastMessage: "",
+                    lastSenderId: "",
+                    receiverProfile: groupInfo?.groupProfile,
+                    timeStamp: Date.now(),
+                    unRead: false,
+                    unReadCount: 0,
+                });
                 await set(overviewRef, {
                     contactId: conversationId,
                     contactName: $(".selected_name").val(),
