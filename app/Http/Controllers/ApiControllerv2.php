@@ -6916,20 +6916,6 @@ class ApiControllerv2 extends Controller
                 $query->where('rsvp_status', '1');
             }])->where('id', $input['event_id'])->first();
 
-            $event_dates = $eventDetail->start_date;
-            $dateArray  = explode(' to ', $event_dates);
-            $multidate = "";
-            if (count($dateArray) === 2) {
-                $startDate = trim($dateArray[0]);
-                $endDate = trim($dateArray[1]);
-
-                if ($startDate === $endDate) {
-                    $multidate = 1; // Dates are the same
-                } else {
-                    $multidate = 0; // Dates are different
-                }
-            }
-
 
             // $date1 = $dateRange[0];
             // $date2 = $dateRange[1];
@@ -7153,7 +7139,7 @@ class ApiControllerv2 extends Controller
                 if ($eventDetail->event_settings->events_schedule == '1') {
                     $eventData[] = "Event has Schedule";
                 }
-                if ($multidate == 1) {
+                if ($eventDetail->start_date != $eventDetail->end_date) {
                     $eventData[] = "Multiple Day Event";
                 }
                 if (empty($eventData)) {
