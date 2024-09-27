@@ -400,7 +400,7 @@
     border-top: 1px solid rgba(0, 0, 0, 0.1);
     padding: 16px 24px;
     background-color: var(--white);
-    z-index: 5;
+    z-index: 10000005;
     border-radius: 0px 0px 20px 20px;
 }
 
@@ -823,6 +823,7 @@
 .uploaded-img-card img{
     width: 100%;
     height: 100%;
+    border-radius: 10px;
 }
 
 .upload-image-main-wrp{
@@ -976,7 +977,7 @@
         overflow-y: scroll;
     }
     .footer-buttons{
-        bottom: 15px;
+        /* bottom: 15px; */
         justify-content: center;
     }
     .footer-buttons .cmn-btn{

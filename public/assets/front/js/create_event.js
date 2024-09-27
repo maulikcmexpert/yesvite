@@ -1050,7 +1050,9 @@ function delete_invited_user(userId) {
             var currentInviteCount = parseInt($('#currentInviteCount').val());
             currentInviteCount--;
             $('#currentInviteCount').val(currentInviteCount);
-
+            
+            $(".user-list-responsive").empty();
+            $(".user-list-responsive").html(response.responsive_view);
             // if(currentInviteCount < 15){
             //     $('.user_choice').prop('disabled',false);
             // }
@@ -3220,9 +3222,9 @@ $(document).on("click", "#delete_invited_user", function () {
 
     // $("#" + id).remove();
      $('#user-'+userId).remove();
-    //  $('.user_id-'+userId).remove();
-     $(".user-list-responsive").empty();
-     $(".user-list-responsive").html(response.responsive_view);
+     $('.user_id-'+userId).remove();
+    //  $(".user-list-responsive").empty();
+    //  $(".user-list-responsive").html(response.responsive_view);
 
 
     var checkbox = $("." + id);
@@ -4609,15 +4611,15 @@ $(document).on("click", ".invite_group_member", function () {
                     $("#user_tel-" + item.userdata.id).remove();
                     // $(".user_id-" + item.userdata.id).remove();
                     // $(".user_id_tel-" + item.userdata.id).remove();
-                    $(".user-list-responsive").empty();
-                    $(".user-list-responsive").html(response.responsive_view);
+                    // $(".user-list-responsive").empty();
                 }
             });
-            console.log(response);
-            $(".inivted_user_list").append(response.view);
-            var length = responsive_invite_user();
             $(".user-list-responsive").empty();
             $(".user-list-responsive").html(response.responsive_view);
+            console.log(response);
+            $(".inivted_user_list").append(response.view);
+            // var length = responsive_invite_user();
+            // $(".user-list-responsive").html(response.responsive_view);
             // if(length < 4){
             //     $('.all_user_list').remove();
             //     $(".user-list-responsive").empty();

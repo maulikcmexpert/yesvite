@@ -409,7 +409,7 @@ async function handleNewConversation(snapshot) {
         } else {
             badgeElement.removeClass("d-none");
             badgeElement.show();
-            moveToTopOrBelowPinned(conversationElement);
+
             console.log("here");
         }
     } else {
@@ -445,9 +445,19 @@ async function handleNewConversation(snapshot) {
         });
     }
     updateUnreadMessageBadge();
+
+    var ele = $(
+        document.getElementsByClassName(
+            `conversation-${newConversation.conversationId}`
+        )
+    );
+    setTimeout(function () {
+        moveToTopOrBelowPinned(ele);
+    }, 2000);
 }
 
 function moveToTopOrBelowPinned(element) {
+    console.log({ element });
     let $chatList = $(".chat-list"); // Get the chat list container
     let isPinned = element.hasClass("pinned"); // Check if the element is pinned
     let parentDiv = element.closest("div"); // Get the parent div containing the li
@@ -3507,9 +3517,8 @@ $(".multi-pin").click(async function () {
             .attr("changeWith", pinChange == "1" ? "0" : "1");
 
         if (pinChange == "1") {
-            const conversationElement = $(`.conversation-${conversationId}`);
             // conversationElement.prependTo(".chat-list");
-            moveToTopOrBelowPinned(conversationElement);
+
             $(".conversation-" + conversationId).addClass("pinned");
             $(`.conversation-${conversationId}`)
                 .find(".chat-data")
@@ -3540,6 +3549,10 @@ $(".multi-pin").click(async function () {
                 .find(".unpin1-self-icn")
                 .addClass("d-none");
         }
+
+        const conversationElement = $(`.conversation-${conversationId}`);
+        console.log({ conversationElement });
+        moveToTopOrBelowPinned(conversationElement);
     });
 
     try {

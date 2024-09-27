@@ -587,7 +587,9 @@ class EventController extends Controller
         }
         $users = $userIds;
         session()->put('user_ids', $users);
-        return response()->json(['success' => true]);
+        Session::save();
+        $user_list = Session::get('user_ids');
+        return response()->json(['success' => true, 'responsive_view' => view('front.event.guest.addguest_responsive', compact('user_list'))->render(),]);
     }
 
     public function deleteSession(Request $request)
@@ -1131,11 +1133,12 @@ class EventController extends Controller
             }
         }
         session()->put('user_ids', $userIds);
-
+        Session::save();
+        $user_list = Session::get('user_ids');
         // Prepare the view and send the response
         return response()->json([
             'view' => view('front.event.guest.addGuest', compact('data'))->render(),
-            'responsive_view' => view('front.event.guest.addguest_responsive', compact('data'))->render(),
+            'responsive_view' => view('front.event.guest.addguest_responsive', compact('data', 'user_list'))->render(),
             'success' => true,
             'data' => $data
         ]);
