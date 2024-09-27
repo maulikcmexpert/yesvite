@@ -6916,7 +6916,7 @@ class ApiControllerv2 extends Controller
                 $query->where('rsvp_status', '1');
             }])->where('id', $input['event_id'])->first();
 
-            $event_dates = $eventDetail->event_date;
+            $event_dates = $eventDetail->start_date;
             $dateArray  = explode(' to ', $event_dates);
             dd($event_dates);
             $multidate = "";
