@@ -431,6 +431,12 @@ async function handleNewConversation(snapshot) {
                 if (msgLists.length > 0) {
                     msgLists[0].classList.add("active");
                 }
+                var ele = $(
+                    document.getElementsByClassName(
+                        `conversation-${newConversation.conversationId}`
+                    )
+                );
+                moveToTopOrBelowPinned(ele);
             },
         });
     }
@@ -445,13 +451,6 @@ async function handleNewConversation(snapshot) {
         });
     }
     updateUnreadMessageBadge();
-
-    var ele = $(
-        document.getElementsByClassName(
-            `conversation-${newConversation.conversationId}`
-        )
-    );
-    moveToTopOrBelowPinned(ele);
 }
 function moveToTopOrBelowPinned(element) {
     if (element.length <= 0) {
