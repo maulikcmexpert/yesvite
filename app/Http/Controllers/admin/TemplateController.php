@@ -215,6 +215,17 @@ class TemplateController extends Controller
                 $request->image->move(public_path('storage/canvas'), $imageName);
                 $template->image = $imageName;
             }
+            if ($request->hasFile('filled_image')) {
+                // Delete the old image if it exists
+                if ($template->image && file_exists(public_path('storage/canvas/' . $template->filled_image))) {
+                    unlink(public_path('storage/canvas/' . $template->filled_image));
+                }
+
+                // Store the new image
+                $imageName = time() . '.' . $request->image->extension();
+                $request->filled_image->move(public_path('storage/canvas'), $imageName);
+                $template->filled_image = $imageName;
+            }
 
             // Save the updated template data
             $template->save();
