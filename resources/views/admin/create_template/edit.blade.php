@@ -34,12 +34,12 @@
                             <select class="form-control design_id" id="design_id" name="design_id">
                                 <!-- <option value="">Select Design</option> -->
                                 @foreach($getDesignData as $design)
-                                <option value="{{ $design->id }}" {{ $design->id == $getTemData->event_desgin_category_id ? 'selected' : '' }}>
+                                <option value="{{ $design->id }}" {{ $design->id == $getTemData->event_design_category_id ? 'selected' : '' }}>
                                     {{ $design->category_name }}
                                 </option>
                                 @endforeach
                             </select>
-                            <span class="text-danger">{{ $errors->first('event_desgin_category_id') }}</span>
+                            <span class="text-danger">{{ $errors->first('event_design_category_id') }}</span>
                         </div>
                     </div>
 
@@ -50,7 +50,7 @@
                             <select class="form-control event_design_subcategory_id" id="event_design_subcategory_id" name="event_design_subcategory_id">
                                 <!-- <option value="">Select Subcategory</option> -->
                                 @foreach($getSubCatDetail as $subcategory)
-                                <option value="{{ $subcategory->id }}" {{ $subcategory->id == $getTemData->event_desgin_sub_category_id ? 'selected' : '' }}>
+                                <option value="{{ $subcategory->id }}" {{ $subcategory->id == $getTemData->event_design_sub_category_id ? 'selected' : '' }}>
                                     {{ $subcategory->subcategory_name }}
                                 </option>
                                 @endforeach
