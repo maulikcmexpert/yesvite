@@ -448,6 +448,7 @@ async function handleNewConversation(snapshot) {
 }
 
 function moveToTopOrBelowPinned(element) {
+    console.log({ element });
     let $chatList = $(".chat-list"); // Get the chat list container
     let isPinned = element.hasClass("pinned"); // Check if the element is pinned
     let parentDiv = element.closest("div"); // Get the parent div containing the li
@@ -3539,8 +3540,9 @@ $(".multi-pin").click(async function () {
                 .find(".unpin1-self-icn")
                 .addClass("d-none");
         }
-        const conversationElement = $(`.conversation-${conversationId}`);
 
+        const conversationElement = $(`.conversation-${conversationId}`);
+        console.log({ conversationElement });
         moveToTopOrBelowPinned(conversationElement);
     });
 
