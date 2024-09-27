@@ -63,3 +63,5 @@
     $(".alert-danger").delay(1000).fadeOut("slow");
   });
 </script>
+<script src="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.js"></script>
+<script src="{{ asset('assets/front/js/design.js') }}"></script>

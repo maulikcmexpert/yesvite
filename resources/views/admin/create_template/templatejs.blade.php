@@ -49,6 +49,14 @@
 
                 {
 
+                    data: "subcategory_name",
+
+                    name: "subcategory_name"
+
+                },
+
+                {
+
                     data: "image",
 
                     name: "image"

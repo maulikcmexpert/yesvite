@@ -1,41 +1,33 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 use App\Models\TextData;
 
-class EditTempalteController extends Controller
+class DesignController extends Controller
 {
-    public function index(string $id)
+    public function index()
     {
-        $id = decrypt($id);
 
         $title = 'Create Event';
-        $page = 'admin.create_template.edit-design';
-        $js = [
-            'admin.create_template.editjs',
-            // 'admin.create_template.imageEditorjs',
-            'admin.create_template.shapejs'
-        ];
-        // $textData =  $textData = DB::table('text_data')
-        //     ->where('id', $id)
-        //     ->first();
+        $page = 'front.edit-design';
+        $textData = DB::table('text_data')
+            ->orderBy('id', 'desc')
+            ->first();
 
-        $textData = TextData::where('id', $id)->get()->first();
-        // ->where('id', $id)
-        // ->first();
-
-        return view('admin.includes.layout', compact(
+        return view('event_layout', compact(
             'title',
             'page',
-            'textData',
-            'js',
-            'id'
+            'textData'
+
+
         ));
     }
+
+
     public function AllImage()
     {
 
@@ -95,64 +87,40 @@ class EditTempalteController extends Controller
     public function user_image(Request $request)
     {
 
-
-
-
+        // Validate the image file (optional, uncomment if needed)
         // $request->validate([
         //     'image' => 'required|image|mimes:png,jpg,jpeg|max:2048',
         // ]);
 
-        //     $file = $request->file('image');
-
-        //     // Create a unique image name
-        //     $imageName = 'user_image_' . time() . '.' . $file->getClientOriginalExtension(); // Assuming PNG format
-
-
-        //     $file->move(public_path('assets/user/images'), $imageName);
-        //     $imagePath = public_path('assets/user/images/'.$imageName);
-
-        //     // Save the image
-
-        //         // Save image path in database
-        //         TextData::create([
-        //             'image' => $imageName // Store relative path as JSON
-        //         ]);
-
-
-
-        //         return response()->json(['message' => 'Image saved successfully', 'imagePath' => 'assets/user/images/'.$imageName]);
+        // Get the file and id from the request
         $file = $request->file('image');
         $id = $request->id;
+        $shape = $request->shape;
 
         // Create a unique image name
         $imageName = 'user_image_' . time() . '.' . $file->getClientOriginalExtension(); // Assuming PNG format
-        $imageData = [
+
+        // Move the image to the correct directory
+        $file->move(public_path('assets/user/images'), $imageName);
+
+        // Get the image path (optional, in case you need to use it elsewhere)
+        $imagePath = asset('assets/user/images/' . $imageName);
+        $textElements = [
             [
-                'image' => $imageName
 
+                'shape' => $shape // Add shape information
             ],
-
         ];
 
 
-
-
-
-
-        $file->move(public_path('assets/user/images'), $imageName);
-        $imagePath = public_path('assets/user/images/' . $imageName);
-
-        // Save the image
+        // Save the image name directly in the `filed_image` column
         TextData::where('id', $id)->update([
-            'filed_image' => json_encode($imageData),
-
+            'filed_image' => $imageName,
+            'static_information' => json_encode($textElements), // Store the image name directly
         ]);
 
-        // Define your textElements array
-
-
-        // Return JSON response
-        return response()->json(['message' => 'Image saved successfully', 'imagePath' => 'assets/user/images/' . $imageName]);
+        // Return a JSON response
+        return response()->json(['message' => 'Image saved successfully', 'imagePath' => $imagePath]);
     }
 
     public function saveTextData(Request $request)
@@ -189,7 +157,6 @@ class EditTempalteController extends Controller
     {
 
 
-        // Fetch data from the text_data table, filter by ID if provided
         $data = DB::table('text_data')
             ->orderBy('id', 'desc')
             ->when($id != '', function ($query) use ($id) {
@@ -197,23 +164,22 @@ class EditTempalteController extends Controller
             })
             ->first();
 
-        // Check if data is found
+
         if ($data) {
             $id = $data->id;
             $imageName = $data->image;
             $static_information = $data->static_information;
 
-            // Check if the image name exists
             if (isset($imageName)) {
-                // Construct the full image path using the asset() helper
 
-                $imagePath = asset('assets/images/' . $imageName);
+                $imagePath = asset('storage/canvas/' . $imageName);
 
-                // Return a JSON response with the image path, ID, and static information
+
                 return response()->json([
                     'imagePath' => $imagePath,
                     'id' => $id,
                     'static_information' => $static_information,
+
                 ]);
             }
         }
@@ -221,7 +187,6 @@ class EditTempalteController extends Controller
         // Return an empty response if no data or image path is found
         return response()->json(null);
     }
-
 
     public function loadAllData()
     {

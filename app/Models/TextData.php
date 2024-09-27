@@ -11,6 +11,8 @@ class TextData extends Model
     use HasFactory;
     protected $table = 'text_data';
     protected $fillable = [
+        'event_design_category_id',
+        'event_design_sub_category_id',
         'static_information',
         'image'
     ];
@@ -21,11 +23,11 @@ class TextData extends Model
 
     public function subcategories()
     {
-        return $this->belongsToMany(EventDesignSubCategory::class);
+        return $this->belongsTo(EventDesignSubCategory::class, 'event_design_sub_category_id', 'id');
     }
 
     public function categories()
     {
-        return $this->belongsToMany(EventDesignCategory::class, 'event_design_category_id', 'id');
+        return $this->belongsTo(EventDesignCategory::class, 'event_design_category_id', 'id');
     }
 }

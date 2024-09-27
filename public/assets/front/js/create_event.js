@@ -3119,6 +3119,7 @@ $(document).on("click", ".li_design", function () {
         $(".step_2").show();
         $(".step_3").css("display", "none");
         $(".step_4").css("display", "none");
+        $(".edit_design_template").css("display", "none");
         $(".step_final_checkout").css("display", "none");
 
         $('.event_create_percent').text('50%');
@@ -3132,6 +3133,7 @@ $(document).on("click", ".li_design", function () {
 $(document).on("click", ".li_event_detail", function () {
     $(".step_1").show();
     $(".step_2").css("display", "none");
+    $(".edit_design_template").css("display", "none");
     $(".step_3").css("display", "none");
     $(".step_4").css("display", "none");
     $(".step_final_checkout").css("display", "none");
@@ -3150,6 +3152,7 @@ $(document).on("click", ".li_guest", function () {
     }else{
         $(".step_1").css("display", "none");
         $(".step_2").css("display", "none");
+        $(".edit_design_template").css("display", "none");
         $(".step_4").css("display", "none");
         $(".step_final_checkout").css("display", "none");
         $(".step_3").show();
@@ -3168,6 +3171,7 @@ $(document).on("click", ".li_setting", function () {
     if( step3 == undefined || step3 > 3 ){
         $(".step_1").css("display", "none");
         $(".step_2").css("display", "none");
+        $(".edit_design_template").css("display", "none");
         $(".step_3").css("display", "none");
         $(".step_final_checkout").css("display", "none");
         $(".step_4").show();

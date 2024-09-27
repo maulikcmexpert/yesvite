@@ -15,7 +15,8 @@ use App\Http\Controllers\{
     EventController as ControllersEventController,
     ChatController,
     PrivacyPolicyController,
-    TermsAndConditionController
+    TermsAndConditionController,
+    DesignController
 };
 use Illuminate\Support\Facades\Auth;
 
@@ -162,6 +163,21 @@ Route::middleware('checkUserExist')->group(function () {
     Route::post('event/get_gift_registry', [ControllersEventController::class, 'get_gift_registry']);
     Route::post('event/get_thank_you_card', [ControllersEventController::class, 'get_thank_you_card']);
 });
+
+
+
+Route::get('event/editd', [DesignController::class, 'index']);
+Route::post('/saveTextData', [DesignController::class, 'saveTextData'])->name('saveTextData');
+// Route::post('/saveCanvasImage', [DesignController::class, 'saveCanvasImage'])->name('saveCanvasImage');
+Route::post('/uploadImage', [DesignController::class, 'uploadImage'])->name('uploadImage');
+Route::get('/loadTextData/{id}', [DesignController::class, 'loadTextData']);
+Route::post('/saveData', [DesignController::class, 'saveData'])->name('saveData');
+Route::get('/templates/view', [DesignController::class, 'AllImage'])->name('displayAllImage');
+Route::get('/templates/view', [DesignController::class, 'viewAllImages'])->name('viewAllImages');
+Route::get('/loadAllData', [DesignController::class, 'loadAllData']);
+// routes/web.php
+Route::post('/saveImagePath', action: [DesignController::class, 'storeImagePath']);
+Route::post('/user_image/{id}', [DesignController::class, 'user_image']);
 
 Route::get('access_token', [AuthController::class, 'handleGoogleCallback'])->name('access_token');
 

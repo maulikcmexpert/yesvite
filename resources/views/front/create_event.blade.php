@@ -282,7 +282,7 @@
 
     @include('front.event.step2')
 
-    @include('front.event.design.edit_design');
+    @include('front.event.design.edit_design')
 
     @include('front.event.step3')
 
