@@ -884,12 +884,18 @@
 .trash-icon svg path{
     fill: green;
     stroke: green;
+    color: green;
 }
-
+.trash-icon{
+    fill: green;
+    stroke: green;
+    color: green;
+}
 
 .trash-icon path{
     fill: green;
     stroke: green;
+    color: green;
 }
  
 .modal-design-card .upper-canvas{
