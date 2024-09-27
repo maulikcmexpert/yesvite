@@ -1090,6 +1090,8 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
                 if (response.is_duplicate == 1) {
                     $("#user-" + userId).remove();
                     $(".user_id-" + userId).remove();
+                    // $(".user-list-responsive").empty();
+                    // $(".user-list-responsive").html(response.responsive_view);
                 }
                 
                 total_guest = $(".users-data.invited_user").length;
@@ -1106,7 +1108,9 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
                 var length = responsive_invite_user();
                 if(length < 4){
                     $('.all_user_list').remove();
-                    $(".user-list-responsive").append(response.responsive_view);
+                    $(".user-list-responsive").empty();
+                    $(".user-list-responsive").html(response.responsive_view);
+                    // $(".user-list-responsive").append(response.responsive_view);
                 }else{
                     add_user_counter();
                 }
@@ -4598,8 +4602,10 @@ $(document).on("click", ".invite_group_member", function () {
                     console.log(item.is_duplicate);
                     $("#user-" + item.userdata.id).remove();
                     $("#user_tel-" + item.userdata.id).remove();
-                    $(".user_id-" + item.userdata.id).remove();
-                    $(".user_id_tel-" + item.userdata.id).remove();
+                    // $(".user_id-" + item.userdata.id).remove();
+                    // $(".user_id_tel-" + item.userdata.id).remove();
+                    $(".user-list-responsive").empty();
+                    $(".user-list-responsive").html(response.responsive_view);
                 }
             });
             console.log(response);
@@ -4607,7 +4613,9 @@ $(document).on("click", ".invite_group_member", function () {
             var length = responsive_invite_user();
             if(length < 4){
                 $('.all_user_list').remove();
-                $(".user-list-responsive").append(response.responsive_view);
+                $(".user-list-responsive").empty();
+                $(".user-list-responsive").html(response.responsive_view);
+                // $(".user-list-responsive").append(response.responsive_view);
             }else{
                 add_user_counter();
             }
