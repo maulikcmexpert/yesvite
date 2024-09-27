@@ -106,7 +106,7 @@
                 }
             });
 
-            $(document).on('click', '#templateAdd', function() {
+            $(document).on('click', '#templateAdd', function(e) {
                 var selectedValue = $("#event_design_category_id").val();
                 var selectedSubCategory = $("#event_design_sub_category_id").val();
                 var fileInput = $("#image").val();
