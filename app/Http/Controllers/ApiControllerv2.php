@@ -3306,7 +3306,7 @@ class ApiControllerv2 extends Controller
         $rawData = $request->getContent();
         $eventData = json_decode($rawData, true);
 
-        dd($request);
+        // dd($request);
 
         if ($eventData == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
@@ -3427,7 +3427,7 @@ class ApiControllerv2 extends Controller
             'subscription_plan_name' => (!empty($eventData['subscription_plan_name'])) ? $eventData['subscription_plan_name'] : "",
             'subscription_invite_count' => (!empty($eventData['subscription_invite_count'])) ? $eventData['subscription_invite_count'] : 0,
             'is_draft_save' => $eventData['is_draft_save'],
-            'static_information' => (!empty($eventData['static_information'])) ? $eventData['static_information'] : "",
+            'static_information' => (!empty($eventData['static_information'])) ? json_encode($eventData['static_information']) : "",
             // 'design_image' => (!empty($eventData['design_image'])) ? $eventData['design_image'] : "",
 
         ]);
