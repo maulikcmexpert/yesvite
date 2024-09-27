@@ -158,7 +158,9 @@ async function updateProfileImg(profileImageUrl, userName, conversationId) {
             $(".conversation-" + conversationId)
                 .find(".chat-data")
                 .find(".user-img")
-                .html(profileImageUrl);
+                .html(
+                    `<img id="profileIm" src="${profileImageUrl}" alt="cover-img" >`
+                );
         }
     } else {
         const initials = getInitials(userName);
