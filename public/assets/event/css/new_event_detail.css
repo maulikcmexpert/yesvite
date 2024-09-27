@@ -97,7 +97,7 @@
     padding: 16px;
     display: flex;
     align-items: start;
-    justify-content: center;
+    /* justify-content: center; */
 }
 
 .main-content-sidebar {
