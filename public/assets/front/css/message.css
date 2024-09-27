@@ -1049,7 +1049,9 @@ ul.member-lists li:last-child {
     line-height: 22px;
     color: var(--secondryColor);
 }
-
+.setpink{
+    background-color: pink;
+}
 .chatbox .button-wrapper .upload {
     display: inline-block;
     position: absolute;
