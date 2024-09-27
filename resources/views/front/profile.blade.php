@@ -311,7 +311,7 @@
                             @endphp
                             <p>Saved on {{ $formattedDate }}</p>
                         </div>
-                        <a href="#" class="ms-auto">
+                        {{-- <a href="#" class="ms-auto">
                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -326,7 +326,7 @@
                                     stroke="#CBD5E1" stroke-width="1.5" stroke-miterlimit="10"
                                     stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
-                        </a>
+                        </a> --}}
                     </div>
                     <div class="progress-bar__wrapper">
                         <progress id="progress-bar" value="{{ isset($percent)?$percent:'' }}" max="100"></progress>
