@@ -76,7 +76,7 @@
 
                             <label for="exampleInputEmail1">Image</label>
 
-                            <input type="file" class="form-control image" name="image" placeholder="choose image" value="">
+                            <input type="file" class="form-control image" id="image" name="image" placeholder="choose image" value="">
 
                             <span class="text-danger">{{ $errors->first('image.*') }}</span>
 

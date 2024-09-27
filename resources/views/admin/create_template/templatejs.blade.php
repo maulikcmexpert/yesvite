@@ -89,16 +89,18 @@
         });
 
         $(document).ready(function() {
-
-            // Function to validate category names
-
-            $("#event_design_category_id").change(function() {
+            $(document).on('change', 'event_design_category_id', function() {
                 if ($(this).val() !== '') {
                     $(this).next('.text-danger').text("");
                 }
             });
 
-            $("#event_design_sub_category_id").change(function() {
+            $(document).on('change', 'event_design_sub_category_id', function() {
+                if ($(this).val() !== '') {
+                    $(this).next('.text-danger').text("");
+                }
+            });
+            $(document).on('change', '#fileInput', function() {
                 if ($(this).val() !== '') {
                     $(this).next('.text-danger').text("");
                 }
@@ -107,6 +109,7 @@
             $(document).on('click', '#templateAdd', function() {
                 var selectedValue = $("#event_design_category_id").val();
                 var selectedSubCategory = $("#event_design_sub_category_id").val();
+                var fileInput = $("#image").val();
                 var hasError = false;
                 if (selectedValue === '') {
                     $("#event_design_category_id").next('.text-danger').text('Please select design category');
@@ -115,6 +118,12 @@
                 if (selectedSubCategory === '') {
                     $("#event_design_sub_category_id").next('.text-danger').text('Please select design subcategory');
                     hasError = true;
+                }
+                if (fileInput === '') {
+                    $("#image").next('.text-danger').text('Please upload Template');
+                    hasError = true;
+                } else {
+                    $("#image").next('.text-danger').text("");
                 }
 
                 if (!hasError) {
