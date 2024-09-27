@@ -668,7 +668,7 @@
         overflow-y: scroll;
     }
     .footer-buttons{
-        bottom: 15px;
+        bottom: 0px;
         justify-content: center;
     }
     .footer-buttons .cmn-btn{
@@ -680,7 +680,14 @@
     }
 
     .choose-design-sidebar.design-sidebar_3{
-        height: 50vh;
+        height: 70vh;
+    }
+    .choose-design-sidebar.design-sidebar_5{
+        height: 70vh;
+    }
+
+    .edit-imag-main-content-wrp .choose-design-sidebar{
+        right: -200%;
     }
 
 }

@@ -891,6 +891,14 @@
     height: 100% !important;
 }
 
+.timepicker{
+    padding-left: 10px !important;
+}
+
+.timepicker::placeholder{
+    font-size: 11px !important;
+}
+
 /* ======Responsiveness===== */
 
 @media only screen and (max-width: 991px) {
