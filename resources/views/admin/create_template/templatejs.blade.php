@@ -106,7 +106,6 @@
                 if (selectedValue === '') {
                     $("#event_design_category_id").next('.text-danger').text('Please select design category');
                     return false;
-                    // Show error message for empty category name
                 } else {
                     $("#event_design_category_id").next('.text-danger').text("");
                 }
@@ -115,10 +114,11 @@
                 if (selectedSubCategory === '') {
                     $("#event_design_sub_category_id").next('.text-danger').text('Please select design subcategory');
                     return false;
-                    // Show error message for empty category name
                 } else {
                     $("#event_design_sub_category_id").next('.text-danger').text("");
                 }
+
+                $("#templateForm").submit();
                 // var promises = [];
 
                 // $('.image').each(function() {
