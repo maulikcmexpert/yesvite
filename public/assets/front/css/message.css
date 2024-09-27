@@ -1050,7 +1050,7 @@ ul.member-lists li:last-child {
     color: var(--secondryColor);
 }
 .setpink{
-    background-color: pink;
+    background-color: pink!important;
 }
 .chatbox .button-wrapper .upload {
     display: inline-block;
