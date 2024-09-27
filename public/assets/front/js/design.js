@@ -1108,6 +1108,9 @@ $(document).on('click','.edit_design_tem',function(e){
         }
     }
 
+    document.querySelector('[data-command="undo"]').addEventListener('click', undo);
+    document.querySelector('[data-command="redo"]').addEventListener('click', redo);
+
 })
 
 
