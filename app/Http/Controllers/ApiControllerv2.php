@@ -3396,7 +3396,7 @@ class ApiControllerv2 extends Controller
             }
         }
         $staticInformation = (!empty($eventData['static_information'])) ? $eventData['static_information'] : "";
-        // dd($staticInformation);
+        dd($staticInformation);
         $eventCreation =  Event::create([
             'event_type_id' => (!empty($eventData['event_type_id'])) ? $eventData['event_type_id'] : "",
             'event_name' => (!empty($eventData['event_name'])) ? $eventData['event_name'] : "",
@@ -3427,7 +3427,7 @@ class ApiControllerv2 extends Controller
             'subscription_plan_name' => (!empty($eventData['subscription_plan_name'])) ? $eventData['subscription_plan_name'] : "",
             'subscription_invite_count' => (!empty($eventData['subscription_invite_count'])) ? $eventData['subscription_invite_count'] : 0,
             'is_draft_save' => $eventData['is_draft_save'],
-            'static_information' => json_encode($staticInformation),
+            'static_information' => $staticInformation,
             // 'design_image' => (!empty($eventData['design_image'])) ? $eventData['design_image'] : "",
 
         ]);
