@@ -92,10 +92,7 @@
 
   <x-admin.footerscript />
 
-  <!-- 
-  @if(isset($js))
-  @include($js)
-  @endif -->
+
 
   @if(isset($js))
   @if(is_array($js))
