@@ -110,7 +110,7 @@ class TemplateController extends Controller
                     $image->move(public_path('storage/canvas'), $imageName);
                 }
             }
-            dd($request);
+            dd($imageName);
 
             // Store the template with design ID and the uploaded image's filename
             TextData::create([
