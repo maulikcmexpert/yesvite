@@ -2732,13 +2732,13 @@ $("#updateName").click(async function () {
         `Groups/${conversationId}/groupInfo/groupName`
     );
     await set(groupInfoRef, newTitle);
-
     // Hide the input and show the updated title
     $(".change-group-name").addClass("d-none");
     $(".selected-title").html(newTitle).show();
     $("#selected-user-name").html(newTitle);
     $(".selected_name").val(newTitle);
     $(".updateGroup").show();
+    updateChatfromGroup(conversationId);
 });
 
 $("#new-member").click(function () {
