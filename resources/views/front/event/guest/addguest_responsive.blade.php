@@ -5,10 +5,10 @@ $counter = 0;
 
 @foreach ( $user_list as $guest_user)
 @php
+$counter++;
 if($counter > 4){
 break;
 }
-$counter++;
 @endphp
 @if($guest_user['prefer_by']=="email")
 <div class="guest-contact invited_user user_id-{{$guest_user['id']}} responsive_invite_user" data-id={{$guest_user['id']}} id="">
@@ -78,7 +78,7 @@ $counter++;
 @if($counter > 4)
 <div class="guest-contact all_user_list">
     <div class="guest-img">
-        <span class="update_user_count">+{{$counter}}</span>
+        <span class="update_user_count">+{{$counter-4}}</span>
     </div>
     <span class="all-contact">See all</span>
 </div>
