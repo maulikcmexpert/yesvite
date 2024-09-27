@@ -50,7 +50,7 @@
 
                                 @endforeach
                             </select>
-                            <span class="text-danger">{{ $errors->first('event_design_subcategory_id.*') }}</span>
+                            <span class="text-danger">{{ $errors->first('event_design_category_id.*') }}</span>
                         </div>
                     </div>
                     <div class="col-lg-3 mb-3">
@@ -66,7 +66,7 @@
 
                                 @endforeach
                             </select>
-                            <span class="text-danger">{{ $errors->first('event_design_subcategory_id.*') }}</span>
+                            <span class="text-danger">{{ $errors->first('event_design_sub_category_id.*') }}</span>
                         </div>
                     </div>
                     <div class="col-lg-3 mb-3">

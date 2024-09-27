@@ -436,7 +436,7 @@ $(document).on('click','.edit_design_tem',function(e){
         const newValue = fontSizeRange.value;
         fontSizeInput.value = newValue;
         fontSizeTooltip.innerHTML = `<span>${newValue}px</span>`;
-        fontSizeInput.addEventListener('input', newValue);
+
         const activeObject = canvas.getActiveObject();
         if (activeObject && activeObject.type === 'textbox') {
             activeObject.set('fontSize', newValue);
@@ -1112,3 +1112,4 @@ $(document).on('click','.edit_design_tem',function(e){
     document.querySelector('[data-command="redo"]').addEventListener('click', redo);
 
 })
+
