@@ -776,7 +776,7 @@
                 .then(response => response.json())
                 .then(data => {
                     console.log('Text data saved successfully', data);
-                    window.href.location = "admin.create_template"
+                    window.location.href = "admin.create_template"
 
                 })
                 .catch((error) => {
