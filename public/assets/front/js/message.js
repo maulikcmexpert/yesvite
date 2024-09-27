@@ -154,6 +154,7 @@ async function updateProfileImg(profileImageUrl, userName) {
         $("#profileIm").replaceWith(
             `<img id="profileIm" src="${profileImageUrl}" alt="cover-img" >`
         );
+        return `<img id="selected-user-profile" src="${profileImageUrl}" alt="user-img">`;
     } else {
         const initials = getInitials(userName);
         const fontColor = "fontcolor" + initials[0]?.toUpperCase();
@@ -164,6 +165,7 @@ async function updateProfileImg(profileImageUrl, userName) {
         $("#profileIm").replaceWith(
             `<h5 id="profileIm" class="${fontColor}">${initials}</h5>`
         );
+        return `<h5 class="${fontColor}" id="selected-user-profile" >${initials}</h5>`;
     }
 }
 
@@ -724,8 +726,15 @@ async function updateChatfromGroup(conversationId) {
     });
     $("#selected-user-lastseen").html(""); // Group doesn't have a last seen
     $("#selected-user-name").html(groupInfo.groupName);
-    await updateProfileImg(groupInfo.groupProfile, groupInfo.groupName);
+    let profile = await updateProfileImg(
+        groupInfo.groupProfile,
+        groupInfo.groupName
+    );
 
+    $(".conversation-" + conversationId)
+        .find(".chat-data")
+        .find(".user-img")
+        .html(profile);
     $(".selected_name").val(groupInfo.groupName);
 
     update(userRef, { userChatId: conversationId });
