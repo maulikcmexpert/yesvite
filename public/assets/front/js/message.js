@@ -3511,9 +3511,7 @@ $(".multi-pin").click(async function () {
                 .children()
                 .find(".unpin1-self-icn")
                 .removeClass("d-none");
-            const conversationElement = $(
-                `.conversation-${conversationId}`
-            ).closest("div");
+            const conversationElement = $(`.conversation-${conversationId}`);
             moveToTopOrBelowPinned(conversationElement);
         } else {
             $(".conversation-" + conversationId).removeClass("pinned");
@@ -3530,9 +3528,7 @@ $(".multi-pin").click(async function () {
                 .children()
                 .find(".unpin1-self-icn")
                 .addClass("d-none");
-            const conversationElement = $(
-                `.conversation-${conversationId}`
-            ).closest("div");
+            const conversationElement = $(`.conversation-${conversationId}`);
             moveToTopOrBelowPinned(conversationElement);
         }
     });
