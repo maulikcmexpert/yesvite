@@ -44,6 +44,9 @@ $(document).on("click", ".design-card", function () {
     jsonText(json);
     $("#exampleModal").modal("show");
 });
+document.addEventListener('DOMContentLoaded', function() {
+    var canvas = new fabric.Canvas('imageEditor2');
+});
 $(document).on("click", ".design-sidebar-action", function () {
     let designId = $(this).attr('design-id')
     $(".design-sidebar").addClass('d-none')
