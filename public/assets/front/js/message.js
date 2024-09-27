@@ -450,91 +450,39 @@ async function handleNewConversation(snapshot) {
         document.getElementsByClassName(
             `conversation-${newConversation.conversationId}`
         )
-    ).closest("div");
+    );
     moveToTopOrBelowPinned(ele);
 }
-function moveToTopOrBelowPinned(element, setOnTop = false) {
-    if (element.length <= 0) {
-        return;
-    }
-
+function moveToTopOrBelowPinned(element) {
     let $chatList = $(".chat-list"); // Get the chat list container
-    let isPinned = element.children().hasClass("pinned"); // Check if the element is pinned
-    console.log("pinned", isPinned);
+    let isPinned = element.hasClass("pinned"); // Check if the element is pinned
     let parentDiv = element.closest("div"); // Get the parent div containing the li
 
-    // If the setOnTop flag is true, the element should be moved to the top, regardless of its position
-    // if (setOnTop) {
     if (isPinned) {
-        let firstPinned = $chatList.children("div").children(".pinned").first(); // Find the first pinned element
-        if (firstPinned.length > 0) {
-            firstPinned.before(parentDiv); // Place the new pinned element on top of all pinned elements
-        } else {
-            $chatList.prepend(parentDiv); // If no pinned elements exist, simply prepend
-        }
+        // If the element is pinned, move its parent div to the top of the chat list
+        $chatList.prepend(parentDiv);
     } else {
-        let lastPinned = $chatList.children("div").children(".pinned").last(); // Find the last pinned element
+        // Find all parent divs in the chat list and get the positions of their li children
+        let $listItems = $chatList.children("div").not(".pinned").find("li");
+        let elementPosition = parseInt(element.attr("data-position"));
 
-        if (lastPinned.length > 0) {
-            lastPinned.after(parentDiv); // Place after the last pinned element
-        } else {
-            $chatList.prepend(parentDiv); // If no pinned elements exist, prepend to the very top
+        // Find the correct spot based on `data-position`
+        let inserted = false;
+        $listItems.each(function () {
+            let listItemPosition = parseInt($(this).attr("data-position"));
+            let listItemDiv = $(this).closest("div"); // Get the parent div of the current li
+            if (listItemPosition > elementPosition) {
+                listItemDiv.before(parentDiv); // Insert the parent div in the correct position
+                inserted = true;
+                return false; // Exit the loop after inserting
+            }
+        });
+
+        // If no appropriate position is found, append the parent div to the bottom
+        if (!inserted) {
+            $chatList.append(parentDiv);
         }
     }
-    // } else {
-    //     // Normal case: if not setOnTop, place the element based on its data-position
-    //     let $listItems = $chatList.children("div").not(".pinned").find("li");
-    //     let elementPosition = parseInt(
-    //         element.children().attr("data-position")
-    //     );
-    //     let inserted = false;
-    //     console.log({ elementPosition });
-
-    //     // Special case: If `data-position` is 0 or undefined, insert the new conversation at the top
-    //     if (elementPosition === 0 || isNaN(elementPosition)) {
-    //         let lastPinned = $chatList.find(".pinned").last();
-    //         console.log({ lastPinned });
-    //         if (lastPinned.length > 0) {
-    //             lastPinned.after(parentDiv); // Insert after last pinned element
-    //         } else {
-    //             let $zeroPositionItems = $listItems.filter(
-    //                 '[data-position="0"]'
-    //             );
-    //             if ($zeroPositionItems.length > 0) {
-    //                 $zeroPositionItems.first().closest("div").before(parentDiv); // Insert before the first item with data-position 0
-    //             } else {
-    //                 $chatList.prepend(parentDiv); // If no pinned elements exist, prepend
-    //             }
-    //         }
-
-    //         inserted = true;
-    //     }
-
-    //     // For elements with valid positions, insert them in position order
-    //     if (!inserted) {
-    //         $listItems.each(function () {
-    //             let listItemPosition = parseInt($(this).attr("data-position"));
-    //             let listItemDiv = $(this).closest("div"); // Get the parent div of the current li
-
-    //             // Ensure we're not moving the element before itself
-    //             if (listItemDiv[0] !== parentDiv[0]) {
-    //                 if (listItemPosition > elementPosition) {
-    //                     listItemDiv.before(parentDiv); // Insert the parent div in the correct position
-    //                     inserted = true;
-    //                     return false; // Exit the loop after inserting
-    //                 }
-    //             }
-    //         });
-
-    //         // If no appropriate position is found, append the parent div to the bottom
-    //         if (!inserted) {
-    //             $chatList.append(parentDiv);
-    //         }
-    //     }
-    // }
-
-    // // After handling the new element, reorder pinned elements to ensure they stay at the top
-    // reorderPinnedElements($chatList);
 }
 
 function reorderPinnedElements($chatList) {
@@ -950,10 +898,7 @@ $(document).on("click", ".pin-conversation", function () {
             .children()
             .find(".unpin1-self-icn")
             .removeClass("d-none");
-        moveToTopOrBelowPinned(
-            $(`.conversation-${conversationId}`).closest("div"),
-            1
-        );
+        moveToTopOrBelowPinned($(`.conversation-${conversationId}`));
     } else {
         $(".conversation-" + conversationId).removeClass("pinned");
 
@@ -971,9 +916,7 @@ $(document).on("click", ".pin-conversation", function () {
             .children()
             .find(".unpin1-self-icn")
             .addClass("d-none");
-        moveToTopOrBelowPinned(
-            $(`.conversation-${conversationId}`).closest("div")
-        );
+        moveToTopOrBelowPinned($(`.conversation-${conversationId}`));
     }
 });
 $(document).on("click", ".pin-single-conversation", function (e) {
@@ -1015,10 +958,7 @@ $(document).on("click", ".pin-single-conversation", function (e) {
         }
         $(this).children(".pin1-self-icn").addClass("d-none");
         $(this).children(".unpin1-self-icn").removeClass("d-none");
-        moveToTopOrBelowPinned(
-            $(`.conversation-${conversationId}`).closest("div"),
-            1
-        );
+        moveToTopOrBelowPinned($(`.conversation-${conversationId}`));
     } else {
         $(".conversation-" + conversationId).removeClass("pinned");
 
@@ -1032,9 +972,7 @@ $(document).on("click", ".pin-single-conversation", function (e) {
             $(".pin-self-icn").show();
             $(".unpin-self-icn").hide();
         }
-        moveToTopOrBelowPinned(
-            $(`.conversation-${conversationId}`).closest("div")
-        );
+        moveToTopOrBelowPinned($(`.conversation-${conversationId}`));
     }
 });
 
@@ -1603,11 +1541,9 @@ $(".send-message").on("keypress", async function (e) {
                 );
             }
         }
-        const conversationElement = $(
-            `.conversation-${conversationId}`
-        ).closest("div");
+        const conversationElement = $(`.conversation-${conversationId}`);
 
-        moveToTopOrBelowPinned(conversationElement, 1);
+        moveToTopOrBelowPinned(conversationElement);
         console.log("here");
 
         closeMedia();
@@ -3587,7 +3523,7 @@ $(".multi-pin").click(async function () {
             const conversationElement = $(
                 `.conversation-${conversationId}`
             ).closest("div");
-            moveToTopOrBelowPinned(conversationElement, 1);
+            moveToTopOrBelowPinned(conversationElement);
         } else {
             $(".conversation-" + conversationId).removeClass("pinned");
             $(`.conversation-${conversationId}`)
