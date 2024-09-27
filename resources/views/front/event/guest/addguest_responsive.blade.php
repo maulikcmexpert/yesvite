@@ -1,16 +1,12 @@
 @php
 $counter = 0;
-if(isset($user_list) && !empty($user_list)){
-$userCount = count($user_list);
-$maxVisibleUsers = 4;
-$counter = $userCount > $maxVisibleUsers ? $userCount - $maxVisibleUsers : 0;
-}
 @endphp
 
 
 @foreach ( $user_list as $guest_user)
 @php
-if($counter > 0){
+$counter++;
+if($counter > 4){
 break;
 }
 @endphp
@@ -79,10 +75,10 @@ break;
 @endif
 @endforeach
 
-@if($counter > 0)
+@if($counter > 4)
 <div class="guest-contact all_user_list">
     <div class="guest-img">
-        <span class="update_user_count">+{{$counter}}</span>
+        <span class="update_user_count">+{{$counter-4}}</span>
     </div>
     <span class="all-contact">See all</span>
 </div>
