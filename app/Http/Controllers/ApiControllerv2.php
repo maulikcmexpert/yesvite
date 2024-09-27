@@ -4117,7 +4117,7 @@ class ApiControllerv2 extends Controller
 
                 $eventDetail['static_information'] = ($getEventData->static_information != NULL) ? $getEventData->static_information : "";
                 $eventDetail['design_image'] = ($getEventData->design_image != NULL) ? $getEventData->design_image : "";
-                $eventDetail['design_inner_image'] = ($getEventData->design_inner_image != NULL) ? $getEventData->design_inner_image : "";
+                $eventDetail['design_inner_image'] = ($getEventData->design_inner_image != NULL) ? $getEventData->design_inner_image) : "";
                 $eventDetail['event_images'] = [];
                 $getEventImages = EventImage::where('event_id', $getEventData->id)->get();
                 if (!empty($getEventImages)) {
@@ -4441,12 +4441,12 @@ class ApiControllerv2 extends Controller
                     $updateEvent->static_information = $eventData['static_information'];
                 }
 
-                if (!empty($eventData['design_image'])) {
-                    $updateEvent->design_image = $eventData['design_image'];
-                }
-                if (!empty($eventData['design_inner_image'])) {
-                    $updateEvent->design_inner_image = $eventData['design_inner_image'];
-                }
+                // if (!empty($eventData['design_image'])) {
+                //     $updateEvent->design_image = $eventData['design_image'];
+                // }
+                // if (!empty($eventData['design_inner_image'])) {
+                //     $updateEvent->design_inner_image = $eventData['design_inner_image'];
+                // }
                 if ($updateEvent->save()) {
                     if ($eventData['is_draft_save'] == '1') {
                         EventInvitedUser::where(['event_id' => $eventData['event_id']])->delete();
