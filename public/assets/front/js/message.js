@@ -468,20 +468,16 @@ function moveToTopOrBelowPinned(element) {
         let $listItems = $chatList.children("div").not(".pinned").find("li");
         let elementPosition = parseInt(element.attr("data-position"));
 
-        // Find the correct spot based on `data-position`
+        // Find the correct spot based on data-position
         let inserted = false;
-
+        console.log($chatList);
         $listItems.each(function () {
             let listItemPosition = parseInt($(this).attr("data-position"));
             let listItemDiv = $(this).closest("div"); // Get the parent div of the current li
-
-            // Ensure we're not moving the element before itself
-            if (listItemDiv[0] !== parentDiv[0]) {
-                if (listItemPosition > elementPosition) {
-                    listItemDiv.before(parentDiv); // Insert the parent div in the correct position
-                    inserted = true;
-                    return false; // Exit the loop after inserting
-                }
+            if (listItemPosition > elementPosition) {
+                listItemDiv.before(parentDiv); // Insert the parent div in the correct position
+                inserted = true;
+                return false; // Exit the loop after inserting
             }
         });
 
