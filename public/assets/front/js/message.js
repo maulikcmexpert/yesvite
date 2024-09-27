@@ -464,83 +464,77 @@ function moveToTopOrBelowPinned(element, setOnTop = false) {
     let parentDiv = element.closest("div"); // Get the parent div containing the li
 
     // If the setOnTop flag is true, the element should be moved to the top, regardless of its position
-    if (setOnTop) {
-        if (isPinned) {
-            let firstPinned = $chatList
-                .children("div")
-                .children(".pinned")
-                .first(); // Find the first pinned element
-            if (firstPinned.length > 0) {
-                firstPinned.before(parentDiv); // Place the new pinned element on top of all pinned elements
-            } else {
-                $chatList.prepend(parentDiv); // If no pinned elements exist, simply prepend
-            }
+    // if (setOnTop) {
+    if (isPinned) {
+        let firstPinned = $chatList.children("div").children(".pinned").first(); // Find the first pinned element
+        if (firstPinned.length > 0) {
+            firstPinned.before(parentDiv); // Place the new pinned element on top of all pinned elements
         } else {
-            let lastPinned = $chatList
-                .children("div")
-                .children(".pinned")
-                .last(); // Find the last pinned element
-
-            if (lastPinned.length > 0) {
-                lastPinned.after(parentDiv); // Place after the last pinned element
-            } else {
-                $chatList.prepend(parentDiv); // If no pinned elements exist, prepend to the very top
-            }
+            $chatList.prepend(parentDiv); // If no pinned elements exist, simply prepend
         }
     } else {
-        // Normal case: if not setOnTop, place the element based on its data-position
-        let $listItems = $chatList.children("div").not(".pinned").find("li");
-        let elementPosition = parseInt(
-            element.children().attr("data-position")
-        );
-        let inserted = false;
-        console.log({ elementPosition });
+        let lastPinned = $chatList.children("div").children(".pinned").last(); // Find the last pinned element
 
-        // Special case: If `data-position` is 0 or undefined, insert the new conversation at the top
-        if (elementPosition === 0 || isNaN(elementPosition)) {
-            let lastPinned = $chatList.children(".pinned").last();
-            console.log({ lastPinned });
-            if (lastPinned.length > 0) {
-                lastPinned.after(parentDiv); // Insert after last pinned element
-            } else {
-                let $zeroPositionItems = $listItems.filter(
-                    '[data-position="0"]'
-                );
-                if ($zeroPositionItems.length > 0) {
-                    $zeroPositionItems.first().closest("div").before(parentDiv); // Insert before the first item with data-position 0
-                } else {
-                    $chatList.prepend(parentDiv); // If no pinned elements exist, prepend
-                }
-            }
-
-            inserted = true;
-        }
-
-        // For elements with valid positions, insert them in position order
-        if (!inserted) {
-            $listItems.each(function () {
-                let listItemPosition = parseInt($(this).attr("data-position"));
-                let listItemDiv = $(this).closest("div"); // Get the parent div of the current li
-
-                // Ensure we're not moving the element before itself
-                if (listItemDiv[0] !== parentDiv[0]) {
-                    if (listItemPosition > elementPosition) {
-                        listItemDiv.before(parentDiv); // Insert the parent div in the correct position
-                        inserted = true;
-                        return false; // Exit the loop after inserting
-                    }
-                }
-            });
-
-            // If no appropriate position is found, append the parent div to the bottom
-            if (!inserted) {
-                $chatList.append(parentDiv);
-            }
+        if (lastPinned.length > 0) {
+            lastPinned.after(parentDiv); // Place after the last pinned element
+        } else {
+            $chatList.prepend(parentDiv); // If no pinned elements exist, prepend to the very top
         }
     }
+    // } else {
+    //     // Normal case: if not setOnTop, place the element based on its data-position
+    //     let $listItems = $chatList.children("div").not(".pinned").find("li");
+    //     let elementPosition = parseInt(
+    //         element.children().attr("data-position")
+    //     );
+    //     let inserted = false;
+    //     console.log({ elementPosition });
 
-    // After handling the new element, reorder pinned elements to ensure they stay at the top
-    reorderPinnedElements($chatList);
+    //     // Special case: If `data-position` is 0 or undefined, insert the new conversation at the top
+    //     if (elementPosition === 0 || isNaN(elementPosition)) {
+    //         let lastPinned = $chatList.find(".pinned").last();
+    //         console.log({ lastPinned });
+    //         if (lastPinned.length > 0) {
+    //             lastPinned.after(parentDiv); // Insert after last pinned element
+    //         } else {
+    //             let $zeroPositionItems = $listItems.filter(
+    //                 '[data-position="0"]'
+    //             );
+    //             if ($zeroPositionItems.length > 0) {
+    //                 $zeroPositionItems.first().closest("div").before(parentDiv); // Insert before the first item with data-position 0
+    //             } else {
+    //                 $chatList.prepend(parentDiv); // If no pinned elements exist, prepend
+    //             }
+    //         }
+
+    //         inserted = true;
+    //     }
+
+    //     // For elements with valid positions, insert them in position order
+    //     if (!inserted) {
+    //         $listItems.each(function () {
+    //             let listItemPosition = parseInt($(this).attr("data-position"));
+    //             let listItemDiv = $(this).closest("div"); // Get the parent div of the current li
+
+    //             // Ensure we're not moving the element before itself
+    //             if (listItemDiv[0] !== parentDiv[0]) {
+    //                 if (listItemPosition > elementPosition) {
+    //                     listItemDiv.before(parentDiv); // Insert the parent div in the correct position
+    //                     inserted = true;
+    //                     return false; // Exit the loop after inserting
+    //                 }
+    //             }
+    //         });
+
+    //         // If no appropriate position is found, append the parent div to the bottom
+    //         if (!inserted) {
+    //             $chatList.append(parentDiv);
+    //         }
+    //     }
+    // }
+
+    // // After handling the new element, reorder pinned elements to ensure they stay at the top
+    // reorderPinnedElements($chatList);
 }
 
 function reorderPinnedElements($chatList) {
