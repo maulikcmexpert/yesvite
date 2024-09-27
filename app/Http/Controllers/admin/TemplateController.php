@@ -7,6 +7,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\EventDesignCategory;
 use App\Models\EventDesignStyle;
 use App\Models\EventDesignSubCategory;
 use Illuminate\Http\Request;
@@ -83,7 +84,7 @@ class TemplateController extends Controller
         $title = 'Add Template';
         $page = 'admin.create_template.add';
         $js = 'admin.subcategory.subcategoryjs';
-        $getDesignData = EventDesignStyle::all();
+        $getDesignData = EventDesignCategory::all();
         $getsubcatData = EventDesignSubCategory::all();
         return view('admin.includes.layout', compact('title', 'page', 'js', 'getDesignData', 'getsubcatData'));
     }
