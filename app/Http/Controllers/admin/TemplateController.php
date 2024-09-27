@@ -110,14 +110,19 @@ class TemplateController extends Controller
                     $image->move(public_path('storage/canvas'), $imageName);
                 }
             }
-            dd($request);
-
             // Store the template with design ID and the uploaded image's filename
-            TextData::create([
-                'event_category_id' => $request->event_design_category_id,
-                'event_sub_category_id' => $request->event_design_sub_category_id,
+
+            // Create a new TextData entry and save the uploaded image filename
+            $textData = TextData::create([
                 'image' => $imageName, // Save the uploaded image filename
             ]);
+            // $template_id = $textData->id;
+            $textData->event_design_category_id = $request->event_design_category_id;
+            $textData->event_design_sub_category_id = $request->event_design_sub_category_id;
+            $textData->save();
+
+
+            // Log::info(DB::getQueryLog());
 
             DB::commit();
 

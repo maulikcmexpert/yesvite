@@ -1,25 +1,42 @@
 var dbJson = null;
 var temp_id = null;
 var image = null;
+
 $(document).on("click", ".design-card", function () {
     var url = $(this).data("url");
     var template = $(this).data("template");
-    // $(".modal-design-card").empty();
     var imageUrl = $(this).data("image");
     var json = $(this).data("json");
     var id = $(this).data("id");
-    $('.edit_design_tem').attr('data-image',imageUrl);
+    
+    $('.edit_design_tem').attr('data-image', imageUrl);
     dbJson = json;
     temp_id = id;
+
     // Set the image URL in the modal's image tag
-    $('#imageEditor2').empty();   
     $("#modalImage").attr("src", imageUrl);
     image = imageUrl;
+
+    // Remove the old canvas if it exists
+    $('#imageEditor2').remove(); 
+
+    // Create a new canvas element
+    var newCanvas = $('<canvas>', {
+        id: 'imageEditor2',
+        width: 350,
+        height: 490
+    });
+
+    // Append the new canvas to the modal-design-card
+    $('.modal-design-card').html(newCanvas);
+
+    // Show the modal
     $("#exampleModal").modal("show");
+
     var canvas = new fabric.Canvas('imageEditor2', {
-        width: 350, // Canvas width
-        height: 490, // Canvas height
-        position:'relative',
+        width: 350,
+        height: 490,
+        position: 'relative',
     });
 
     const defaultSettings = {
@@ -28,18 +45,12 @@ $(document).on("click", ".design-card", function () {
         lineHeight: 1.2
     };
 
-    // Save settings object (for the save functionality)
-    let savedSettings = {
-        fontSize: defaultSettings.fontSize,
-        letterSpacing: defaultSettings.letterSpacing,
-        lineHeight: defaultSettings.lineHeight
-    };
     fabric.Image.fromURL(image, function (img) {
         img.set({
             left: 0,
             top: 0,
-            selectable: false,  // Non-draggable background image
-            hasControls: false  // Disable resizing controls
+            selectable: false,
+            hasControls: false
         });
         canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
     });
@@ -49,10 +60,10 @@ $(document).on("click", ".design-card", function () {
     staticInfo.textElements.forEach(element => {
         console.log(element);
         let textElement = new fabric.Textbox(
-            element.text, {  // Use Textbox for editable text
+            element.text, {  
             left: element.left,
             top: element.top,
-            width: element.width || 200,  // Default width if not provided
+            width: element.width || 200,  
             fontSize: element.fontSize,
             fill: element.fill,
             fontFamily: element.fontFamily,
@@ -62,8 +73,9 @@ $(document).on("click", ".design-card", function () {
             linethrough: element.linethrough,
             backgroundColor: element.backgroundColor,
             textAlign: element.textAlign,
-            editable: false,
-            hasControls: false,
+            editable: false, 
+            selectable: false, 
+            hasControls: false, 
             borderColor: 'blue',
             cornerColor: 'red',
             cornerSize: 6,
@@ -140,98 +152,13 @@ $(document).on("click", ".design-card", function () {
         }
         const textWidth = textElement.calcTextWidth();
         textElement.set({ width: textWidth });
-
-        textElement.on('scaling', function () {
-            // Calculate the updated font size based on scaling factors
-            var updatedFontSize = textElement.fontSize * (textElement.scaleX + textElement.scaleY) / 2;
-            textElement.set('fontSize', updatedFontSize); // Update the font size
-            canvas.renderAll(); // Re-render the canvas to reflect changes
-        });
-
-        addIconsToTextbox(textElement);
         canvas.add(textElement);
 
     });
-
-    function addIconsToTextbox(textbox) {
-        // Trash icon SVG
-        const trashIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 50 50"><path d="M20,30 L30,30 L30,40 L20,40 Z M25,10 L20,10 L20,7 L30,7 L30,10 Z M17,10 L33,10 L33,40 L17,40 Z" fill="#FF0000"/></svg>`;
-        fabric.loadSVGFromString(trashIconSVG, function (objects, options) {
-            const trashIcon = fabric.util.groupSVGElements(objects, options);
-            trashIcon.set({
-                left: textbox.left + textbox.width * textbox.scaleX - 20,
-                top: textbox.top - 20,
-                selectable: false,
-                evented: true,
-                hasControls: false,
-                visible: false, // Initially hidden
-                className: 'trash-icon',
-            });
-            textbox.trashIcon = trashIcon;
-    
-            // Handle trash icon click
-            trashIcon.on('mousedown', function () {
-                console.log('Trash icon clicked');
-                deleteTextbox(textbox);
-            });
-    
-            canvas.add(trashIcon);
-        });
-    
-        // Copy icon SVG
-        const copyIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 50 50"><path d="M5,5 L30,5 L30,30 L5,30 Z M35,5 L45,5 L45,35 L35,35 L35,5 Z" fill="#0000FF"/></svg>`;
-        fabric.loadSVGFromString(copyIconSVG, function (objects, options) {
-            const copyIcon = fabric.util.groupSVGElements(objects, options);
-            copyIcon.set({
-                left: textbox.left - 25,
-                top: textbox.top - 20,
-                selectable: false,
-                evented: true,
-                hasControls: false,
-                visible: false, // Initially hidden
-                className: 'copy-icon',
-            });
-            textbox.copyIcon = copyIcon;
-    
-            // Handle copy icon click
-            copyIcon.on('mousedown', function () {
-                console.log('Copy icon clicked');
-                cloneTextbox(textbox);
-            });
-    
-            canvas.add(copyIcon);
-        });
-    
-        // Bind the updateIconPositions function to the moving and scaling events
-        textbox.on('moving', function () {
-            updateIconPositions(textbox);
-        });
-        textbox.on('scaling', function () {
-            updateIconPositions(textbox);
-        });
-    
-        // Event listener to manage icon visibility when a textbox is clicked
-        textbox.on('mousedown', function () {
-            canvas.getObjects('textbox').forEach(function (tb) {
-                if (tb.trashIcon) tb.trashIcon.set('visible', false); // Hide other icons
-                if (tb.copyIcon) tb.copyIcon.set('visible', false);
-            });
-            if (textbox.trashIcon) textbox.trashIcon.set('visible', true); // Show current icons
-            if (textbox.copyIcon) textbox.copyIcon.set('visible', true);
-            canvas.renderAll(); // Re-render the canvas
-        });
-    
-        // Initially hide all icons
-        canvas.getObjects('textbox').forEach(function (tb) {
-            if (tb.trashIcon) tb.trashIcon.set('visible', false);
-            if (tb.copyIcon) tb.copyIcon.set('visible', false);
-        });
-    
-        canvas.renderAll(); // Final render
-    }
-    
-    
 });
+$(document).on('click','.modal-design-card',function(e){
+    e.stopPropagation();
+})
 
 $(document).on("click", ".design-sidebar-action", function () {
     let designId = $(this).attr('design-id')
@@ -239,14 +166,10 @@ $(document).on("click", ".design-sidebar-action", function () {
     $(".design-sidebar_"+ designId).removeClass('d-none')
 })
 
-function jsonText(editable = null){
-   
-}
-
 $(document).on('click','.edit_design_tem',function(e){
     e.preventDefault();
-    console.log(dbJson);
-    console.log(image);
+    // console.log(dbJson);
+    // console.log(image);
 
     $("step_1").hide();
     $(".step_2").hide();

@@ -886,6 +886,11 @@
     position: relative !important;
 }
 
+.modal-design-card canvas{
+    width: 100% !important;
+    height: 100% !important;
+}
+
 /* ======Responsiveness===== */
 
 @media only screen and (max-width: 991px) {
@@ -1042,5 +1047,12 @@
 
     .new_event_detail_header-right {
         gap: 15px;
+    }
+
+    .timepicker::placeholder{
+        font-size: 11px !important;
+    }
+    .timepicker{
+        padding-left: 10px !important;
     }
 }
