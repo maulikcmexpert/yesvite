@@ -463,7 +463,10 @@ function moveToTopOrBelowPinned(element, setOnTop = false) {
     if (setOnTop) {
         // If the element is pinned, it goes to the top of pinned elements
         if (isPinned) {
-            let firstPinned = $chatList.children(".pinned").first(); // Find the first pinned element
+            let firstPinned = $chatList
+                .children("div")
+                .children(".pinned")
+                .first(); // Find the first pinned element
             if (firstPinned.length > 0) {
                 firstPinned.before(parentDiv); // Place the new pinned element on top of all pinned elements
             } else {
@@ -471,7 +474,11 @@ function moveToTopOrBelowPinned(element, setOnTop = false) {
             }
         } else {
             // If the element is not pinned, it goes above all non-pinned elements but below any pinned ones
-            let lastPinned = $chatList.children(".pinned").last(); // Find the last pinned element
+            let lastPinned = $chatList
+                .children("div")
+                .children(".pinned")
+                .last(); // Find the last pinned element
+            console.log(la);
             if (lastPinned.length > 0) {
                 lastPinned.after(parentDiv); // Place after the last pinned element
             } else {
