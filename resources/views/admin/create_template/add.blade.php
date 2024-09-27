@@ -1,3 +1,4 @@
+{{dd($js);}}
 <div class="container-fluid">
     <h1 class="m-0 ProductTitle">{{$title}}</h1>
     <div class="content-header p-0">

@@ -454,33 +454,25 @@ async function handleNewConversation(snapshot) {
     moveToTopOrBelowPinned(ele);
 }
 function moveToTopOrBelowPinned(element) {
+    if (element.length <= 0) {
+        return;
+    }
+
     let $chatList = $(".chat-list"); // Get the chat list container
     let isPinned = element.hasClass("pinned"); // Check if the element is pinned
     let parentDiv = element.closest("div"); // Get the parent div containing the li
 
+    // If the element is pinned, move it to the very top
     if (isPinned) {
-        // If the element is pinned, move its parent div to the top of the chat list
-        $chatList.prepend(parentDiv);
+        $chatList.prepend(parentDiv); // Move to the very top of the list
     } else {
-        // Find all parent divs in the chat list and get the positions of their li children
-        let $listItems = $chatList.children("div").not(".pinned").find("li");
-        let elementPosition = parseInt(element.attr("data-position"));
+        // Move the element after the last pinned element, if any
+        let lastPinned = $chatList.children("div").children(".pinned").last();
 
-        // Find the correct spot based on `data-position`
-        let inserted = false;
-        $listItems.each(function () {
-            let listItemPosition = parseInt($(this).attr("data-position"));
-            let listItemDiv = $(this).closest("div"); // Get the parent div of the current li
-            if (listItemPosition > elementPosition) {
-                listItemDiv.before(parentDiv); // Insert the parent div in the correct position
-                inserted = true;
-                return false; // Exit the loop after inserting
-            }
-        });
-
-        // If no appropriate position is found, append the parent div to the bottom
-        if (!inserted) {
-            $chatList.append(parentDiv);
+        if (lastPinned.length > 0) {
+            lastPinned.after(parentDiv); // Move after the last pinned element
+        } else {
+            $chatList.prepend(parentDiv); // If no pinned elements, move to the very top
         }
     }
 }

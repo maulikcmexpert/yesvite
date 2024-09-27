@@ -92,11 +92,12 @@
 
             // Function to validate category names
 
-            $('#templateAdd').click(function(event) {
+            $(document).click('click', '#templateAdd', function() {
+                alert();
 
-                event.preventDefault();
+                // event.preventDefault();
 
-                var isValid = true;
+                // var isValid = true;
 
                 var selectedValue = $("#event_design_category_id").val();
                 var selectedSubCategory = $("#event_design_sub_category_id").val();

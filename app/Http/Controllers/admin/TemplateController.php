@@ -83,7 +83,7 @@ class TemplateController extends Controller
     {
         $title = 'Add Template';
         $page = 'admin.create_template.add';
-        $js = 'admin.subcategory.subcategoryjs';
+        $js = 'admin.create_template.templatejs';
         $getDesignData = EventDesignCategory::all();
         $getsubcatData = EventDesignSubCategory::all();
         return view('admin.includes.layout', compact('title', 'page', 'js', 'getDesignData', 'getsubcatData'));
