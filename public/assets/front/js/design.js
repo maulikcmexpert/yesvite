@@ -2,6 +2,7 @@ var dbJson = null;
 var temp_id = null;
 var image = null;
 $(document).on("click", ".design-card", function () {
+    $('#imageEditor2').html('');
     var url = $(this).data("url");
     var template = $(this).data("template");
     // $(".modal-design-card").empty();
