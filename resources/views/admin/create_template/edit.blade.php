@@ -64,7 +64,7 @@
                             <label for="image">Image</label>
                             <input type="file" class="form-control image" name="image">
                             @if($getTemData->image)
-                            <img src="{{ asset('storage/canvas/'. $getTemData->image) }}" alt="Template Image" width="100" class="mt-2">
+                            <img src="{{ asset('storage/images/'. $getTemData->image) }}" alt="Template Image" width="100" class="mt-2">
                             @endif
                             <span class="text-danger">{{ $errors->first('image') }}</span>
                         </div>
