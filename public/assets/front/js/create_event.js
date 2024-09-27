@@ -972,13 +972,14 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
 
                 // } else {
                     $(".inivted_user_list").append(response.view);
-                    var length = responsive_invite_user();
-                    if(length < 4){
+                    // var length = responsive_invite_user();
+                    // if(length < 4){
                         $('.all_user_list').remove();
-                        $(".user-list-responsive").append(response.responsive_view);
-                    }else{
-                        add_user_counter();
-                    }
+                        $(".user-list-responsive").empty();
+                        $(".user-list-responsive").html(response.responsive_view);
+                    // }else{
+                    //     add_user_counter();
+                    // }
 
                     guest_counter(0,15);
                     $('input[name="email_invite[]"]').prop('disabled', false);
