@@ -76,8 +76,8 @@ $(document).on("click", ".design-card", function () {
             editable: false, 
             selectable: false, 
             hasControls: false, 
-            borderColor: 'blue',
-            cornerColor: 'red',
+            borderColor: '#2DA9FC',
+            cornerColor: '#fff',
             cornerSize: 6,
             transparentCorners: false,
             isStatic: true
@@ -231,8 +231,8 @@ $(document).on('click','.edit_design_tem',function(e){
                         textAlign: element.textAlign,
                         editable: true,
                         hasControls: true,
-                        borderColor: 'blue',
-                        cornerColor: 'red',
+                        borderColor: '#2DA9FC',
+                        cornerColor: '#fff',
                         cornerSize: 6,
                         transparentCorners: false,
                         isStatic: true
@@ -968,14 +968,13 @@ $(document).on('click','.edit_design_tem',function(e){
             top: top,
             width: 200,
             fontSize: 20,
-         backgroundColor: 'rgba(0, 0, 0, 0)', // Set background to transparent
-
+            backgroundColor: 'rgba(0, 0, 0, 0)', // Set background to transparent
             fill: '#000000',
             editable: true,
             selectable: true,
             hasControls: true,
-            borderColor: 'blue',
-            cornerColor: 'red',
+            borderColor: '#2DA9FC',
+            cornerColor: '#fff',
             cornerSize: 6,
             transparentCorners: false
         });
