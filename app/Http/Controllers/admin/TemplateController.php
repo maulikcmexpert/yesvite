@@ -41,7 +41,7 @@ class TemplateController extends Controller
                     return $row->categories->category_name;
                 })
                 ->addColumn('subcategory_name', function ($row) {
-                    return $row->subcategory->subcategory_name;
+                    return $row->subcategories->subcategory_name;
                 })
                 ->addColumn('image', function ($template) {
                     return '<img src="' . asset('assets/images/' . $template->image) . '" width="50" height="50" />';

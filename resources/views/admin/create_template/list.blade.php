@@ -31,7 +31,6 @@
       <tr>
 
         <th>No</th>
-
         <th>Design Name</th>
         <th>SubCategory Name</th>
         <th>image</th>
