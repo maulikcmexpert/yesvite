@@ -158,12 +158,12 @@ $(document).on("click", ".design-card", function () {
         const textWidth = textElement.calcTextWidth();
         textElement.set({ width: textWidth });
 
-        textElement.on('scaling', function () {
-            // Calculate the updated font size based on scaling factors
-            var updatedFontSize = textElement.fontSize * (textElement.scaleX + textElement.scaleY) / 2;
-            textElement.set('fontSize', updatedFontSize); // Update the font size
-            canvas.renderAll(); // Re-render the canvas to reflect changes
-        });
+        // textElement.on('scaling', function () {
+        //     // Calculate the updated font size based on scaling factors
+        //     var updatedFontSize = textElement.fontSize * (textElement.scaleX + textElement.scaleY) / 2;
+        //     textElement.set('fontSize', updatedFontSize); // Update the font size
+        //     canvas.renderAll(); // Re-render the canvas to reflect changes
+        // });
 
         // addIconsToTextbox(textElement);
         canvas.add(textElement);
