@@ -42,7 +42,7 @@ $(document).on("click", ".design-card", function () {
         });
         canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
     });
-    jsonText(json);
+    jsonText('1');
     
 });
 document.addEventListener('DOMContentLoaded', function() {
@@ -57,7 +57,7 @@ $(document).on("click", ".design-sidebar-action", function () {
 function jsonText(editable = null){
     const staticInfo = dbJson;
     var flag = true;
-    if(editable){
+    if(editable == '1'){
         flag = false;
     }
     staticInfo.textElements.forEach(element => {
