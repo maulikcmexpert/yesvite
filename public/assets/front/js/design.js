@@ -1032,9 +1032,12 @@ $(document).on('click','.edit_design_tem',function(e){
 
 
     canvas.on('mouse:down', function (options) {
+        console.log(options);
         if (options.target && options.target.type === 'textbox') {
             canvas.setActiveObject(options.target);
         }
+
+
     });
     function getTextDataFromCanvas() {
         var objects = canvas.getObjects();
