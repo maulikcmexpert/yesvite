@@ -1215,8 +1215,8 @@ console.log(123)
         $("#loader").show();
         $(this).prop("disabled", true);
         $('.btn-close').prop("disabled", true);
-        var textData = getTextDataFromCanvas();
-        save_image_design(downloadImage,textData);
+        eventData.textData = dbJson;
+        save_image_design(downloadImage);
         $(".main-content-wrp").addClass("blurred");
     });
     
@@ -1226,8 +1226,8 @@ console.log(123)
         $(this).prop("disabled", true);
         $('.btn-close').prop("disabled", true);
         var textData = getTextDataFromCanvas();
-        // console.log(textData);
-        save_image_design(downloadImage,textData);
+        eventData.textData = textData;
+        save_image_design(downloadImage);
         $(".main-content-wrp").addClass("blurred");
     });
     
@@ -1237,9 +1237,6 @@ console.log(123)
             .then(function (blob) {
                 var formData = new FormData();
                 formData.append("image", blob, "design.png");
-                formData.append("textData", textData);
-                formData.append("temp_id", temp_id);
-                console.log(formData);
                 $.ajax({
                     headers: {
                         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(

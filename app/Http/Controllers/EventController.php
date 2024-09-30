@@ -960,8 +960,6 @@ class EventController extends Controller
     {
         if ($request->hasFile('image')) {
             $file = $request->file('image');
-            dd($file);
-
             $fileName = time() . '-' . $file->getClientOriginalName();
             $path = $file->move(public_path('storage/event_images'), $fileName);
             session(['desgin' => $fileName]);
