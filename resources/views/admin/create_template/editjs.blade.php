@@ -462,6 +462,9 @@
                         hasControls: false,
                         visible: true, // Initially hidden
                         className: 'trash-icon',
+                        fill: '#FF0000', // Example: Set fill color
+                        stroke: '#000000', // Example: Set stroke color
+                        strokeWidth: 1
                     });
                     textbox.trashIcon = trashIcon;
 
@@ -516,9 +519,7 @@
                     hasControls: false,
                     visible: true, // Initially hidden
                     className: 'copy-icon',
-                    fill: '#FF0000', // Example: Set fill color
-                    stroke: '#000000', // Example: Set stroke color
-                    strokeWidth: 1
+
                 });
                 // Add the copyIcon to the canvas
                 textbox.copyIcon = copyIcon
