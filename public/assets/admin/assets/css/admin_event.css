@@ -961,6 +961,17 @@
 } */
 
 
+/* ====fonts=== */
+.Botanica {
+    font-family: 'Botanica Script';
+}
+
+.JosefinSans {
+    font-family: 'JosefinSans-Regular';
+}
+
+
+
 @media only screen and (max-width: 1199px) {
     .image-edit-inner-img {
         width: 400px;
