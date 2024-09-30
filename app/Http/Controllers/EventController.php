@@ -173,7 +173,7 @@ class EventController extends Controller
 
         // $potluck = session('category');
         // dd(session()->get('gift_registry_data'));
-        dd(json_decode($request->textData)); 
+        dd(json_encode($request->textData)); 
         $user_id =  Auth::guard('web')->user()->id;
         $dateString = (isset($request->event_date)) ? $request->event_date : "";
 
