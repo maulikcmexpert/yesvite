@@ -921,7 +921,6 @@
                     });
                 }
             });
-            console.log(textData);
 
             return textData;
         }
@@ -994,7 +993,6 @@
                 .catch((error) => {
                     console.error('Error:', error);
                 });
-            showStaticTextElements();
         }
 
 
