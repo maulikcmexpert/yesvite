@@ -1722,6 +1722,7 @@ function createMessageElement(key, messageData, isGroup) {
             : "";
 
         const reactionCode = messageData.react.replace(/\\u\{(.+)\}/, "$1"); // Extract the reaction code
+        console.log(reactionCode);
         const imageUrl = reactionImageMap[reactionCode];
         reaction =
             messageData?.react && messageData?.react.length > 0
