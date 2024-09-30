@@ -993,7 +993,7 @@
                 .catch((error) => {
                     console.error('Error:', error);
                 });
-            showStaticTextElements();
+            // showStaticTextElements();
         }
 
 
