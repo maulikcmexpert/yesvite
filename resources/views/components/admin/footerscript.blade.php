@@ -52,7 +52,7 @@
 <script src="{{asset('assets/admin/assets/js/moment.js')}}"></script>
 <script src="{{asset('assets/admin/assets/js/common.js')}}"></script>
 <script src="{{asset('assets/admin/assets/js/bootstrap-datetimepicker.min.js')}}"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fontfaceobserver/2.1.0/fontfaceobserver.standalone.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mockjax/2.6.1/jquery.mockjax.min.js" integrity="sha512-LbhUoRYSZ3tFp6RrcQOwGL2P/SlbfF9B+2yiJAMcJhuxJQTgvzWaG6W+XxX9t8+aQ8z+zUxx/XQ0fOo1/ft4tA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
