@@ -1233,5 +1233,9 @@ $(document).ready(function() {
             reader.readAsDataURL(file);
         }
     });
+    $(document).on('click','.uploaded-img-card-delete',function(){
+        console.log($(this).parent().html());
+    })
+
 });
 
