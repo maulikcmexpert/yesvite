@@ -465,13 +465,33 @@
                 // `;
                 fabric.loadSVGFromString(trashIconSVG, function(objects, options) {
                     const trashIcon = fabric.util.groupSVGElements(objects, options);
-                    trashIcon.set({
+
+                    const background = new fabric.Rect({
+                        width: trashIcon.width + 20, // Adding padding (10px each side)
+                        height: trashIcon.height + 20,
+                        fill: '#fff', // Background color
+                        rx: 50, // Border-radius (50% to make it round)
+                        ry: 50,
+                        originX: 'center',
+                        originY: 'center',
+                    });
+
+                    // trashIcon.set({
+                    //     left: textbox.left + textbox.width * textbox.scaleX - 20,
+                    //     top: textbox.top - 20,
+                    //     selectable: false,
+                    //     evented: true,
+                    //     hasControls: false,
+                    //     visible: false, // Initially hidden
+                    //     className: 'trash-icon',
+                    // });
+
+                    const trashIconGroup = new fabric.Group([background, trashIcon], {
                         left: textbox.left + textbox.width * textbox.scaleX - 20,
                         top: textbox.top - 20,
                         selectable: false,
                         evented: true,
                         hasControls: false,
-                        visible: false, // Initially hidden
                         className: 'trash-icon',
                     });
                     textbox.trashIcon = trashIcon;
