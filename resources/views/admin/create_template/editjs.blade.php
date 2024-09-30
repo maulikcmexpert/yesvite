@@ -45,7 +45,7 @@
 
                             // Render text elements on canvas
                             staticInfo.textElements.forEach(element => {
-                                alert();
+                                // alert();
                                 let textElement = new fabric.Textbox(element.text, { // Use Textbox for editable text
                                     left: element.left,
                                     top: element.top,
@@ -961,6 +961,7 @@
 
         document.querySelectorAll('[data-command]').forEach(function(button) {
             button.addEventListener('click', function() {
+                alert();
                 executeCommand(this.getAttribute('data-command'));
             });
         });
