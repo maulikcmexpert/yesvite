@@ -804,18 +804,6 @@ $(document).on('click','.edit_design_tem',function(e){
             <path d="M13.853 16.6035H15.5158" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
             <path d="M13.4385 14.6055H15.9351" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
             </g>
-            <defs>
-            <filter id="filter0_d_5633_67674" x="0.705839" y="0.374784" width="27.9619" height="27.9623" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-            <feOffset/>
-            <feGaussianBlur stdDeviation="0.998643"/>
-            <feComposite in2="hardAlpha" operator="out"/>
-            <feColorMatrix type="matrix" values="0 0 0 0 0.309804 0 0 0 0 0.368627 0 0 0 0 0.443137 0 0 0 0.12 0"/>
-            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_5633_67674"/>
-            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_5633_67674" result="shape"/>
-            </filter>
-            </defs>
             </svg>
             `;
             
@@ -855,18 +843,6 @@ $(document).on('click','.edit_design_tem',function(e){
             <rect x="2.64893" y="2.37207" width="23.9674" height="23.9674" rx="11.9837" fill="white" shape-rendering="crispEdges"/>
             <path fill-rule="evenodd" clip-rule="evenodd" d="M17.6283 16.3538V10.3619C17.6283 9.81039 17.1812 9.36328 16.6297 9.36328H10.6378C10.0863 9.36328 9.63916 9.81039 9.63916 10.3619V16.3538C9.63916 16.9053 10.0863 17.3524 10.6378 17.3524H16.6297C17.1812 17.3524 17.6283 16.9053 17.6283 16.3538ZM10.6379 10.362H16.6298V16.3539H10.6379V10.362ZM18.6271 17.3525V11.3607C19.1786 11.3607 19.6257 11.8078 19.6257 12.3593V17.3525C19.6257 18.4556 18.7315 19.3498 17.6284 19.3498H12.6352C12.0837 19.3498 11.6366 18.9027 11.6366 18.3512H17.6284C18.1799 18.3512 18.6271 17.9041 18.6271 17.3525Z" fill="#0F172A"/>
             </g>
-            <defs>
-            <filter id="filter0_d_5633_67676" x="0.651639" y="0.374784" width="27.9619" height="27.9623" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-            <feOffset/>
-            <feGaussianBlur stdDeviation="0.998643"/>
-            <feComposite in2="hardAlpha" operator="out"/>
-            <feColorMatrix type="matrix" values="0 0 0 0 0.309804 0 0 0 0 0.368627 0 0 0 0 0.443137 0 0 0 0.12 0"/>
-            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_5633_67676"/>
-            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_5633_67676" result="shape"/>
-            </filter>
-            </defs>
             </svg>
             `;
         
