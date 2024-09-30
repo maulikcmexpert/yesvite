@@ -823,6 +823,18 @@ $(document).on('click','.edit_design_tem',function(e){
             fontFamily: originalTextbox.fontFamily,
             originX: originalTextbox.originX,
             originY: originalTextbox.originY,
+            fontWeight: originalTextbox.fontWeight,
+            fontStyle: originalTextbox.fontStyle,
+            underline: originalTextbox.underline,
+            linethrough: originalTextbox.linethrough,
+            backgroundColor: originalTextbox.backgroundColor,
+            textAlign: originalTextbox.textAlign,
+            editable: true,
+            borderColor: '#2DA9FC',
+            cornerColor: '#fff',
+            cornerSize: 6,
+            transparentCorners: false,
+            isStatic: true,
             hasControls: true,
             hasBorders: true,
             lockScalingFlip: true
@@ -910,13 +922,8 @@ $(document).on('click','.edit_design_tem',function(e){
 
 
 
-    // document.getElementById('fontSize').addEventListener('change', updateSelectedTextProperties);
-    // document.getElementById('fontColor').addEventListener('input', updateSelectedTextProperties);
-
-
-
-
-
+    document.getElementById('fontSize').addEventListener('change', updateSelectedTextProperties);
+    document.getElementById('fontColor').addEventListener('input', updateSelectedTextProperties);
 
 
     canvas.on('mouse:down', function (options) {
@@ -924,6 +931,7 @@ $(document).on('click','.edit_design_tem',function(e){
             canvas.setActiveObject(options.target);
         }
     });
+
     function getTextDataFromCanvas() {
         var objects = canvas.getObjects();
 
@@ -957,6 +965,7 @@ $(document).on('click','.edit_design_tem',function(e){
 
         return textData;
     }
+
     document.getElementById('addTextButton').addEventListener('click', function () {
         addEditableTextbox(100, 100, 'EditableText');  // You can set the initial position and default text
     });
@@ -1025,13 +1034,6 @@ $(document).on('click','.edit_design_tem',function(e){
             });
         showStaticTextElements();
     }
-
-
-
-
-
-
-
 
         function executeCommand(command) {
             var activeObject = canvas.getActiveObject();
