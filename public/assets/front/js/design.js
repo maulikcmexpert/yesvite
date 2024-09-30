@@ -892,7 +892,27 @@ $(document).on('click','.edit_design_tem',function(e){
     document.getElementById('fontSize').addEventListener('change', updateSelectedTextProperties);
     document.getElementById('fontColor').addEventListener('input', updateSelectedTextProperties);
 
+    function updateSelectedTextProperties() {
+        var fontSize = parseInt(document.getElementById('fontSize').value, 10);
+        var fontColor = document.getElementById('fontColor').value;
+        var activeObject = canvas.getActiveObject();
 
+        if (activeObject && activeObject.type === 'textbox') {
+            // Update text properties
+            activeObject.set({
+                fontSize: fontSize,
+                fill: fontColor
+            });
+            activeObject.setCoords(); // Update coordinates
+
+            // Log the updated properties
+            console.log('Updated Font Size: ' + activeObject.fontSize);
+            console.log('Updated Font Color: ' + activeObject.fill);
+
+            canvas.renderAll();
+            addToUndoStack(); // Save state after updating properties
+        }
+    }
 
 
 
