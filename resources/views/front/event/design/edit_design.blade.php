@@ -472,13 +472,13 @@
 
             <div class="used-fonts-wrp common-font-wrp">
                 <div class="form-check">
-                    <input type="radio" name="colorType" value="font" checked class="form-check-input" id="flexRadioDefaults"/> 
+                    <input type="radio" name="colorType" value="font" checked class="form-check-input colorTypeInp" id="flexRadioDefaults"/> 
                     <label class="form-check-label" for="flexRadioDefaults">
                         Font Color
                     </label>
                 </div>
                 <div class="form-check">
-                    <input type="radio" name="colorType" value="background" class="form-check-input" id="flexRadioDefaultss"/>
+                    <input type="radio" name="colorType" value="background" class="form-check-input colorTypeInp" id="flexRadioDefaultss"/>
                     <label class="form-check-label" for="flexRadioDefaultss">
                         Background Color
                     </label>
@@ -859,7 +859,7 @@
                                     stroke-linejoin="round" />
                             </svg>
                             
-                            <img class="photo-slider-2" src="" alt="" class="d-none">
+                            <img class="photo-slider-2" src="" alt="" style="display: none">
                             <button class="uploaded-img-card-edit">
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -915,7 +915,7 @@
                                     stroke="#64748B" stroke-width="1.5" stroke-linecap="round"
                                     stroke-linejoin="round" />
                             </svg>
-                            <img class="photo-slider-3" src="" alt="" class="d-none">
+                            <img class="photo-slider-3" src="" alt="" style="display: none">
                             <button class="uploaded-img-card-edit">
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -956,7 +956,7 @@
             </div>
 
             <div class="footer-buttons">
-                <button class="cmn-btn">Save</button>
+                <button class="cmn-btn save-slider-image">Save</button>
             </div>
         </div>
     </div>

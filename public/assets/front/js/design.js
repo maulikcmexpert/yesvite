@@ -634,79 +634,179 @@ $(document).on('click','.edit_design_tem',function(e){
     setLetterSpacing();
     setLineHeight();
 
-    // Initialize the color picker
-    $('#color-picker').spectrum({
-        type: "flat",
-        color: "#000000", // Default font color
-        showInput: true,
-        allowEmpty: true, // Allows setting background to transparent
-        showAlpha: true, // Allows transparency adjustment
-        preferredFormat: "rgba", // Ensure it handles RGBA
-        change: function (color) {
-            if (color) {
-                changeColor(color.toRgbString()); // Use RGB string for color changes
-            } else {
-                changeColor('rgba(0, 0, 0, 0)'); // Handle transparency by default
-            }
-        }
-    });
+    // // Initialize the color picker
+    // $('#color-picker').spectrum({
+    //     type: "flat",
+    //     color: "#000000", // Default font color
+    //     showInput: true,
+    //     allowEmpty: true, // Allows setting background to transparent
+    //     showAlpha: true, // Allows transparency adjustment
+    //     preferredFormat: "rgba", // Ensure it handles RGBA
+    //     change: function (color) {
+    //         if (color) {
+    //             changeColor(color.toRgbString()); // Use RGB string for color changes
+    //         } else {
+    //             changeColor('rgba(0, 0, 0, 0)'); // Handle transparency by default
+    //         }
+    //     }
+    // });
 
-    // Change event for radio buttons to update the color picker
-    $('input[name="colorType"]').on('change', function () {
-        updateColorPicker(); // Update color picker when radio button changes
-    });
+    // // Change event for radio buttons to update the color picker
+    // $('input[name="colorType"]').on('change', function () {
+    //     updateColorPicker(); // Update color picker when radio button changes
+    // });
 
-    // Update color picker when object is selected
-    canvas.on('selection:created', function () {
-        updateColorPicker(); // Update color picker when a new object is selected
-    });
+    // // Update color picker when object is selected
+    // canvas.on('selection:created', function () {
+    //     updateColorPicker(); // Update color picker when a new object is selected
+    // });
 
-    canvas.on('selection:updated', function () {
-        updateColorPicker(); // Update color picker when selection is updated
-    });
+    // canvas.on('selection:updated', function () {
+    //     updateColorPicker(); // Update color picker when selection is updated
+    // });
 
-    // Function to change font or background color
-    function changeColor(selectedColor) {
-        const selectedColorType = document.querySelector('input[name="colorType"]:checked').value;
-        const activeObject = canvas.getActiveObject();
+    // // Function to change font or background color
+    // function changeColor(selectedColor) {
+    //     const selectedColorType = document.querySelector('input[name="colorType"]:checked').value;
+    //     const activeObject = canvas.getActiveObject();
 
-        if (!activeObject) {
-            // alert('No object selected');
-            return;
-        }
+    //     if (!activeObject) {
+    //         // alert('No object selected');
+    //         return;
+    //     }
 
-        if (activeObject.type === 'textbox') {
-            if (selectedColorType === 'font') {
-                activeObject.set('fill', selectedColor); // Change font color
-            } else if (selectedColorType === 'background') {
-                activeObject.set('backgroundColor', selectedColor); // Change background color
-            }
-            canvas.renderAll(); // Re-render the canvas after color change
+    //     if (activeObject.type === 'textbox') {
+    //         if (selectedColorType === 'font') {
+    //             activeObject.set('fill', selectedColor); // Change font color
+    //         } else if (selectedColorType === 'background') {
+    //             activeObject.set('backgroundColor', selectedColor); // Change background color
+    //         }
+    //         canvas.renderAll(); // Re-render the canvas after color change
+    //     }
+    // }
+
+    // // Function to update the color picker based on the selected object's current font or background color
+    // function updateColorPicker() {
+    //     const activeObject = canvas.getActiveObject();
+    //     const selectedColorType = document.querySelector('input[name="colorType"]:checked').value;
+
+    //     if (activeObject && activeObject.type === 'textbox') {
+    //         if (selectedColorType === 'font') {
+    //             $('#color-picker').spectrum('set', activeObject.fill || '#000000'); // Set font color in picker
+    //         } else if (selectedColorType === 'background') {
+    //             const bgColor = activeObject.backgroundColor || 'rgba(0, 0, 0, 0)'; // Default to transparent background
+    //             $('#color-picker').spectrum('set', bgColor); // Set current background color in picker
+    //         }
+    //     }
+    // }
+
+    // // Update the color picker when the color type changes (font or background)
+    // $('input[name="colorType"]').change(function () {
+    //     const activeObject = canvas.getActiveObject();
+    //     if (activeObject && activeObject.type === 'textbox') {
+    //         updateColorPicker(); // Update picker when the selected color type changes
+    //     }
+    // });
+      // Initialize the color picker
+$('#color-picker').spectrum({
+    type: "flat",
+    color: "#000000", // Default font color
+    showInput: true,
+    allowEmpty: true, // Allows setting background to transparent
+    showAlpha: true, // Allows transparency adjustment
+    preferredFormat: "rgba", // Ensure it handles RGBA
+    change: function (color) {
+        if (color) {
+            console.log("color")
+            changeColor(color.toRgbString()); // Use RGB string for color changes
+        } else {
+            console.log("rgba")
+
+            changeColor('rgba(0, 0, 0, 0)'); // Handle transparency by default
         }
     }
+});
 
-    // Function to update the color picker based on the selected object's current font or background color
-    function updateColorPicker() {
-        const activeObject = canvas.getActiveObject();
-        const selectedColorType = document.querySelector('input[name="colorType"]:checked').value;
+// Function to change font or background color
+function changeColor(selectedColor) {
+    const selectedColorType = document.querySelector('input[name="colorType"]:checked').value;
+    const activeObject = canvas.getActiveObject();
+    console.log("before update")
 
-        if (activeObject && activeObject.type === 'textbox') {
-            if (selectedColorType === 'font') {
-                $('#color-picker').spectrum('set', activeObject.fill || '#000000'); // Set font color in picker
-            } else if (selectedColorType === 'background') {
-                const bgColor = activeObject.backgroundColor || 'rgba(0, 0, 0, 0)'; // Default to transparent background
-                $('#color-picker').spectrum('set', bgColor); // Set current background color in picker
-            }
-        }
+    console.log(activeObject)
+    if (!activeObject) {
+        console.log('No object selected');
+        return;
     }
 
-    // Update the color picker when the color type changes (font or background)
-    $('input[name="colorType"]').change(function () {
-        const activeObject = canvas.getActiveObject();
-        if (activeObject && activeObject.type === 'textbox') {
-            updateColorPicker(); // Update picker when the selected color type changes
+    if (activeObject.type == 'textbox') {
+        console.log(activeObject.type);
+        console.log(activeObject.fill);
+        if (selectedColorType == 'font') {
+            console.log("update fill")
+            console.log(activeObject.fill);
+            console.log(activeObject.backgroundColor);
+            activeObject.set('fill', selectedColor); // Change font color
+            console.log(activeObject.fill);
+            console.log(activeObject.backgroundColor);
+        } else if (selectedColorType == 'background') {
+            console.log("update background")
+            activeObject.set('backgroundColor', selectedColor); // Change background color
         }
-    });
+        canvas.renderAll(); // Re-render the canvas after color change
+    }
+
+    const activeObjec = canvas.getActiveObject();
+    console.log("ater update")
+
+    console.log(activeObjec)
+}
+
+// Update color picker based on the selected object's current font or background color
+function updateColorPicker() {
+    const activeObject = canvas.getActiveObject();
+    const selectedColorType = document.querySelector('input[name="colorType"]:checked').value;
+
+    if (activeObject && activeObject.type === 'textbox') {
+        if (selectedColorType === 'font') {
+
+            $('#color-picker').spectrum('set', activeObject.fill || '#000000'); // Set font color in picker
+        } else if (selectedColorType === 'background') {
+            const bgColor = activeObject.backgroundColor || 'rgba(0, 0, 0, 0)'; // Default to transparent background
+            $('#color-picker').spectrum('set', bgColor); // Set current background color in picker
+        }
+
+
+        console.log(selectedColorType);
+        console.log(activeObject.type);
+        console.log(activeObject.fill);
+        console.log(activeObject.backgroundColor);
+
+    const activeObjec = canvas.getActiveObject();
+
+    console.log(activeObjec.fill);
+        console.log(activeObjec.backgroundColor);
+
+    }
+
+
+}
+
+// Update color picker when object selection changes
+canvas.on('selection:created', updateColorPicker);
+canvas.on('selection:updated', updateColorPicker);
+
+// Update the color picker when the color type (font/background) changes
+$('.colorTypeInp').click(function (e) {
+e.stopPropagation()
+console.log(123)
+    const activeObject = canvas.getActiveObject();
+    if (activeObject && activeObject.type === 'textbox') {
+        console.log(activeObject.type);
+        updateColorPicker(); // Update picker when the selected color type changes
+    }
+});
+
 
 
     // Load background image and make it non-draggable
@@ -1216,6 +1316,7 @@ $(document).ready(function() {
     $('.slider_photo_2').on('change', function(event) {
         var file = event.target.files[0]; 
         if (file) {
+            $('.photo-slider-2').show();
             var reader = new FileReader();
             reader.onload = function(e) {
                 $('.photo-slider-2').attr('src', e.target.result).show();
@@ -1226,6 +1327,7 @@ $(document).ready(function() {
     $('.slider_photo_3').on('change', function(event) {
         var file = event.target.files[0]; 
         if (file) {
+            $('.photo-slider-3').show();
             var reader = new FileReader();
             reader.onload = function(e) {
                 $('.photo-slider-3').attr('src', e.target.result).show();
@@ -1234,14 +1336,19 @@ $(document).ready(function() {
         }
     });
     $(document).on('click','.delete-slider-1',function(){
-        $('.photo-slider-1').remove();
+        $('.photo-slider-1').hide();
     })
     $(document).on('click','.delete-slider-2',function(){
-        $('.photo-slider-2').remove();
+        $('.photo-slider-2').hide();
     })
     $(document).on('click','.delete-slider-3',function(){
-        $('.photo-slider-3').remove();
+        $('.photo-slider-3').hide();
     })
+    $(document).on('click','.save-slider-image',function(){
+        
+    })
+
+    
 
 });
 
