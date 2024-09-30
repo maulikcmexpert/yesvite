@@ -173,9 +173,12 @@ class EventController extends Controller
     public function store(Request $request)
     {
 
+        if(isset($request->slider_images) && !empty($request->slider_images)){
+            dd($request->slider_images);
+        }
         // $potluck = session('category');
         // dd(session()->get('gift_registry_data'));
-        // dd($request);
+        dd($request);
         $user_id =  Auth::guard('web')->user()->id;
         $dateString = (isset($request->event_date)) ? $request->event_date : "";
 
@@ -462,6 +465,8 @@ class EventController extends Controller
                     'image' => $request->desgin_selected
                 ]);
             }
+
+            
 
             $checkUserInvited = Event::withCount('event_invited_user')->where('id', $eventId)->first();
             if ($request->is_update_event == '0') {
@@ -1527,14 +1532,15 @@ class EventController extends Controller
     {
         // dd($request->imageSources);
         $savedFiles = [];
-
+        $i = 0;
         foreach ($request->imageSources as $imageSource) {
             if (!empty($imageSource)) {
                 list($type, $data) = explode(';', $imageSource);
                 list(, $data) = explode(',', $data);
                 $imageData = base64_decode($data);
-                $fileName = time() . '-' . uniqid() . '.jpg'; // Adjust extension based on the image type
-                $path = public_path('storage/event_design_template/') . $fileName;;
+                $fileName = time() .$i. '-' . uniqid() . '.jpg';
+                $i++;
+                $path = public_path('storage/event_images/') . $fileName;;
                 file_put_contents($path, $imageData);
                 $savedFiles[] = $fileName;
                 
