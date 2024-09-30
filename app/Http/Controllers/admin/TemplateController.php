@@ -103,9 +103,12 @@ class TemplateController extends Controller
 
             // Initialize $imageName to avoid undefined variable errors
             $imageName = null;
+            $filledImage = null;
 
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
+                $filled_image = $request->file('filled_image');
+
 
                 // Ensure file is not null before accessing methods
                 if ($image) {
@@ -113,12 +116,21 @@ class TemplateController extends Controller
                     // Save the image in the public/assets/images folder
                     $image->move(public_path('storage/canvas'), $imageName);
                 }
+                if ($filled_image) {
+                    $filledImage = time() . '.' . $image->getClientOriginalExtension();
+                    // Save the image in the public/assets/images folder
+                    $filled_image->move(public_path('storage/canvas'), $filledImage);
+                }
             }
+
+
+
             // Store the template with design ID and the uploaded image's filename
 
             // Create a new TextData entry and save the uploaded image filename
             $textData = TextData::create([
-                'image' => $imageName, // Save the uploaded image filename
+                'image' => $imageName,
+                'filled_image' => $filledImage // Save the uploaded image filename
             ]);
             // $template_id = $textData->id;
             $textData->event_design_category_id = $request->event_design_category_id;

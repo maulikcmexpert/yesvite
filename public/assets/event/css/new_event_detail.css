@@ -914,6 +914,20 @@
     height: 100vh;
 }
 
+
+.menu-success .side-bar-sub-list h3{
+    position: relative;
+}
+
+.menu-success .side-bar-sub-list h3::before{
+    content: "\f058";
+    font-family: "FONTAWESOME";
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+
 /* ======Responsiveness===== */
 
 @media only screen and (max-width: 991px) {
