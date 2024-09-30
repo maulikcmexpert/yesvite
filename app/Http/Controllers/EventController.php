@@ -176,6 +176,24 @@ class EventController extends Controller
         // $potluck = session('category');
         // dd(session()->get('gift_registry_data'));
         // dd($request);
+        if(isset($request->temp_id) && $request->temp_id != ''){
+            $tempData = TextData::where('id',$request->temp_id)->first();
+            if($tempData){
+
+                $sourceImagePath = asset('storage/canvas/' . $tempData->image);
+
+                $destinationDirectory = public_path('storage/event_images/'); 
+                $destinationImagePath = $destinationDirectory . $tempData->image;
+
+                if (File::exists($sourceImagePath)) {
+                    dd(1);
+                    File::copy($sourceImagePath, $destinationImagePath);
+                    // $event_creation->design_image = $tempData->image; 
+                }
+                dd(2);
+            }
+        }
+
         $user_id =  Auth::guard('web')->user()->id;
         $dateString = (isset($request->event_date)) ? $request->event_date : "";
 
