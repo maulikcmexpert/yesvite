@@ -827,7 +827,17 @@ $(document).on('click','.edit_design_tem',function(e){
             originY: originalTextbox.originY,
             hasControls: true,
             hasBorders: true,
-            lockScalingFlip: true
+            lockScalingFlip: true,
+            fontWeight: originalTextbox.fontWeight,
+            fontStyle: originalTextbox.fontStyle,
+            underline: originalTextbox.underline,
+            linethrough: originalTextbox.linethrough,
+            backgroundColor: originalTextbox.backgroundColor,
+            textAlign: originalTextbox.textAlign,
+            borderColor: '#2DA9FC',
+            cornerColor: '#fff',
+            cornerSize: 6,
+            transparentCorners: false,
         });
 
         canvas.add(clonedTextbox);
