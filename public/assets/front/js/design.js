@@ -1334,13 +1334,13 @@ $(document).ready(function() {
         }
     });
     $(document).on('click','.delete-slider-1',function(){
-        $('.photo-slider-1').remove();
+        $('.photo-slider-1').hide();
     })
     $(document).on('click','.delete-slider-2',function(){
-        $('.photo-slider-2').remove();
+        $('.photo-slider-2').hide();
     })
     $(document).on('click','.delete-slider-3',function(){
-        $('.photo-slider-3').remove();
+        $('.photo-slider-3').hide();
     })
     $(document).on('click','.save-slider-image',function(){
         
