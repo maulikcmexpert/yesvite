@@ -237,6 +237,43 @@ $(document).on('click','.edit_design_tem',function(e){
                         transparentCorners: false,
                         isStatic: true
                     });
+
+                    let background = new fabric.Rect({
+                        width: textElement.width,
+                        height: textElement.height,
+                        rx: 10, // Adjust the corner radius as needed
+                        ry: 10,
+                        fill: 'transparent', // Invisible background
+                        stroke: 'transparent', // Optional: Add a border if desired
+                        strokeWidth: 1
+                    });
+
+                    // Group the text element and background rectangle
+                    let group = new fabric.Group([textElement, background], {
+                        hasControls: false // Hide controls for the group
+                    });
+
+                    // Set the group's dimensions to match the text element
+                    group.width = textElement.width;
+                    group.height = textElement.height;
+
+                    // Add the group to the canvas
+                    canvas.add(group);
+
+                    // Handle scaling to maintain rounded corners and font size
+                    group.on('scaling', function () {
+                        // Update the background size to match the scaling
+                        background.set({
+                            width: group.width,
+                            height: group.height
+                        });
+
+                        // Calculate the updated font size based on scaling factors
+                        var updatedFontSize = textElement.fontSize * (group.scaleX + group.scaleY) / 2;
+                        textElement.set('fontSize', updatedFontSize); // Update the font size
+                        canvas.renderAll(); // Re-render the canvas to reflect changes
+                    });
+
                     switch (element.text) {
                         case 'event_name':
                             if (eventData.event_name) {
@@ -305,15 +342,15 @@ $(document).on('click','.edit_design_tem',function(e){
                             }
                             break;
                     }
-                    const textWidth = textElement.calcTextWidth();
-                    textElement.set({ width: textWidth });
+                    // const textWidth = textElement.calcTextWidth();
+                    // textElement.set({ width: textWidth });
             
-                    textElement.on('scaling', function () {
-                        // Calculate the updated font size based on scaling factors
-                        var updatedFontSize = textElement.fontSize * (textElement.scaleX + textElement.scaleY) / 2;
-                        textElement.set('fontSize', updatedFontSize); // Update the font size
-                        canvas.renderAll(); // Re-render the canvas to reflect changes
-                    });
+                    // textElement.on('scaling', function () {
+                    //     // Calculate the updated font size based on scaling factors
+                    //     var updatedFontSize = textElement.fontSize * (textElement.scaleX + textElement.scaleY) / 2;
+                    //     textElement.set('fontSize', updatedFontSize); // Update the font size
+                    //     canvas.renderAll(); // Re-render the canvas to reflect changes
+                    // });
                     
                     addIconsToTextbox(textElement);
                     canvas.add(textElement);
@@ -413,6 +450,7 @@ $(document).on('click','.edit_design_tem',function(e){
         width: 345, // Canvas width
         height: 490, // Canvas height
     });
+    const ctx = canvas.getContext('2d');
     const defaultSettings = {
         fontSize: 20,
         letterSpacing: 0,
@@ -725,13 +763,9 @@ $(document).on('click','.edit_design_tem',function(e){
     }
 
     function findTextboxCenter(textbox) {
-        // Calculate the center coordinates of the textbox
         var centerX = textbox.left + (textbox.width / 2);
         var centerY = textbox.top + (textbox.height / 2);
-
         console.log(`Center of textbox '${textbox.text}' is at (${centerX}, ${centerY})`);
-
-        // Optional: You can return or store this center value for further use
         return { x: centerX, y: centerY };
     }
 
