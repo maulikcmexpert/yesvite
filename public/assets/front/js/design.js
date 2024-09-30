@@ -1101,6 +1101,11 @@ console.log(123)
     canvas.on('mouse:down', function (options) {
         if (options.target && options.target.type === 'textbox') {
             canvas.setActiveObject(options.target);
+        }else{
+            canvas.getObjects('textbox').forEach(function (tb) {
+                if (tb.trashIcon) tb.trashIcon.set('visible', false); 
+                if (tb.copyIcon) tb.copyIcon.set('visible', false);
+            });
         }
 
 
