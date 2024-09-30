@@ -825,7 +825,6 @@
             return textData;
         }
         document.getElementById('addTextButton').addEventListener('click', function() {
-            alert();
             addEditableTextbox(100, 100, 'EditableText'); // You can set the initial position and default text
         });
 
