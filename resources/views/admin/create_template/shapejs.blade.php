@@ -642,7 +642,7 @@
         const fileInput = document.getElementById('fileInput');
         const userImageElement = document.getElementById('user_image');
         const imageWrapper = document.getElementById('imageWrapper');
-        const canvasElement = new fabric.Canvas('imageEditor', {
+        const canvasElement = new fabric.Canvas('imageEditor1', {
             width: 500, // Canvas width
             height: 500, // Canvas height
         });
