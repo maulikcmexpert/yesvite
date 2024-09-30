@@ -882,53 +882,8 @@ $(document).on('click','.edit_design_tem',function(e){
         end_date = eventData.event_date;
     }
 
-    // // Add two draggable static textboxes outside the image area
-    // addDraggableText(350, 50, eventData.event_name, eventData.event_name); // Position this outside the image area
-    // addDraggableText(350, 100, eventData.hosted_by, eventData.hosted_by);
-    // addDraggableText(350, 150, eventData.start_time, eventData.start_time);
-    // if(eventData.rsvp_end_time){
-    //     addDraggableText(350, 200, eventData.rsvp_end_time, eventData.rsvp_end_time);
-    // }
-    // addDraggableText(350, 250, start_date, start_date);
-    // addDraggableText(350, 300, end_date, end_date);
-    // addDraggableText(350, 350, eventData.event_location, eventData.event_location);
-
-    // addDraggableText(350, 50, 'event_name', 'xyz'); // Position this outside the image area
-    // addDraggableText(350, 100, 'host_name', 'abc');
-    // addDraggableText(350, 150, 'start_time', '5:00PM');
-    // addDraggableText(350, 200, 'rsvp_end_time', '6:00PM');
-    // addDraggableText(350, 250, 'start_date', '2024-07-27');
-    // addDraggableText(350, 300, 'end_date', '2024-07-27');
-    // addDraggableText(350, 350, 'Location', 'fdf');
-
-
-
-    function updateSelectedTextProperties() {
-        var fontSize = parseInt(document.getElementById('fontSize').value, 10);
-        var fontColor = document.getElementById('fontColor').value;
-        var activeObject = canvas.getActiveObject();
-
-        if (activeObject && activeObject.type === 'textbox') {
-            // Update text properties
-            activeObject.set({
-                fontSize: fontSize,
-                fill: fontColor
-            });
-            activeObject.setCoords(); // Update coordinates
-
-            // Log the updated properties
-            console.log('Updated Font Size: ' + activeObject.fontSize);
-            console.log('Updated Font Color: ' + activeObject.fill);
-
-            canvas.renderAll();
-            addToUndoStack(); // Save state after updating properties
-        }
-    }
-
-
-
-    document.getElementById('fontSize').addEventListener('change', updateSelectedTextProperties);
-    document.getElementById('fontColor').addEventListener('input', updateSelectedTextProperties);
+    // document.getElementById('fontSize').addEventListener('change', updateSelectedTextProperties);
+    // document.getElementById('fontColor').addEventListener('input', updateSelectedTextProperties);
 
 
     canvas.on('mouse:down', function (options) {
@@ -1040,62 +995,62 @@ $(document).on('click','.edit_design_tem',function(e){
         showStaticTextElements();
     }
 
-        function executeCommand(command) {
-            var activeObject = canvas.getActiveObject();
-            if (!activeObject) {
-                // alert('No object selected');
-                return;
-            }
-            if (activeObject && activeObject.type === 'textbox') {
+    function executeCommand(command) {
+        var activeObject = canvas.getActiveObject();
+        if (!activeObject) {
+            // alert('No object selected');
+            return;
+        }
+        if (activeObject && activeObject.type === 'textbox') {
 
-                const commands = {
-                    bold: () => activeObject.set('fontWeight', activeObject.fontWeight === 'bold' ? '' : 'bold'),
-                    italic: () => activeObject.set('fontStyle', activeObject.fontStyle === 'italic' ? '' : 'italic'),
-                    underline: () => {
-                        activeObject.set('underline', !activeObject.underline);
-                        // Update line height after toggling underline
-                        const currentLineHeight = activeObject.lineHeight || 1.2; // Default line height
-                        activeObject.set('lineHeight', currentLineHeight); // Reapply the line height
-                    },
-                    setLineHeight: (value) => {
-                        activeObject.set('lineHeight', value);
-                    },
-                    strikeThrough: () => activeObject.set('linethrough', !activeObject.linethrough),
-                    removeFormat: () => {
-                        activeObject.set({
-                            fontWeight: '',
-                            fontStyle: '',
-                            underline: false,
-                            linethrough: false,
-                            fontFamily: 'Arial'
-                        });
-                    },
-                    fontName: () => {
-                        var selectedFont = document.querySelector('[data-command="fontName"]').value;
-                        activeObject.set('fontFamily', selectedFont);
-                        
-                    },
+            const commands = {
+                bold: () => activeObject.set('fontWeight', activeObject.fontWeight === 'bold' ? '' : 'bold'),
+                italic: () => activeObject.set('fontStyle', activeObject.fontStyle === 'italic' ? '' : 'italic'),
+                underline: () => {
+                    activeObject.set('underline', !activeObject.underline);
+                    // Update line height after toggling underline
+                    const currentLineHeight = activeObject.lineHeight || 1.2; // Default line height
+                    activeObject.set('lineHeight', currentLineHeight); // Reapply the line height
+                },
+                setLineHeight: (value) => {
+                    activeObject.set('lineHeight', value);
+                },
+                strikeThrough: () => activeObject.set('linethrough', !activeObject.linethrough),
+                removeFormat: () => {
+                    activeObject.set({
+                        fontWeight: '',
+                        fontStyle: '',
+                        underline: false,
+                        linethrough: false,
+                        fontFamily: 'Arial'
+                    });
+                },
+                fontName: () => {
+                    var selectedFont = document.querySelector('[data-command="fontName"]').value;
+                    activeObject.set('fontFamily', selectedFont);
+                    
+                },
 
-                    justifyLeft: () => activeObject.set('textAlign', 'left'),
-                    justifyCenter: () => activeObject.set('textAlign', 'center'),
-                    justifyRight: () => activeObject.set('textAlign', 'right'),
-                    justifyFull: () => activeObject.set('textAlign', 'justify'),
+                justifyLeft: () => activeObject.set('textAlign', 'left'),
+                justifyCenter: () => activeObject.set('textAlign', 'center'),
+                justifyRight: () => activeObject.set('textAlign', 'right'),
+                justifyFull: () => activeObject.set('textAlign', 'justify'),
 
-                    uppercase: () => activeObject.set('text', activeObject.text.toUpperCase()),
-                    lowercase: () => activeObject.set('text', activeObject.text.toLowerCase()),
-                    capitalize: () => {
-                        const capitalizedText = activeObject.text.replace(/\b\w/g, char => char.toUpperCase());
-                        activeObject.set('text', capitalizedText);
-                    }
-
-                };
-                if (commands[command]) {
-                    commands[command]();
-                    canvas.renderAll();
-                    addToUndoStack(); // Save state after executing the command
+                uppercase: () => activeObject.set('text', activeObject.text.toUpperCase()),
+                lowercase: () => activeObject.set('text', activeObject.text.toLowerCase()),
+                capitalize: () => {
+                    const capitalizedText = activeObject.text.replace(/\b\w/g, char => char.toUpperCase());
+                    activeObject.set('text', capitalizedText);
                 }
+
+            };
+            if (commands[command]) {
+                commands[command]();
+                canvas.renderAll();
+                addToUndoStack(); // Save state after executing the command
             }
         }
+    }
 
     document.querySelectorAll('[data-command]').forEach(function (button) {
         button.addEventListener('click', function () {
