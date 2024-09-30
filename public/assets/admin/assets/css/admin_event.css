@@ -933,7 +933,7 @@
     border-radius: 50%;
 }
 
-.trash-icon-svg {
+.trash-icon-path {
     width: 20px !important;
     height: 20px !important;
     background-color: green !important;
@@ -942,7 +942,7 @@
     stroke: green !important;
 }
 
-.trash-icon-svg path {
+.trash-icon-path {
     width: 20px !important;
     height: 20px !important;
     background-color: green !important;
@@ -951,8 +951,7 @@
     stroke: green !important;
 }
 
-
-.trash-icon-svg {
+.trash-icon-path {
     width: 20px !important;
     height: 20px !important;
     background-color: green !important;
