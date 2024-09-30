@@ -1367,6 +1367,7 @@ $(document).ready(function() {
             },
             success: function (response) {
                
+               console.log(response.images);
             },
             error: function (xhr, status, error) {},
         });

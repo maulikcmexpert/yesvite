@@ -1497,27 +1497,17 @@ class EventController extends Controller
             if (!empty($imageSource)) {
                 list($type, $data) = explode(';', $imageSource);
                 list(, $data) = explode(',', $data);
-    
                 $imageData = base64_decode($data);
-    
                 $fileName = time() . '-' . uniqid() . '.jpg'; // Adjust extension based on the image type
-    
                 $path = public_path('storage/event_design_template/') . $fileName;;
                 file_put_contents($path, $imageData);
                 $savedFiles[] = $fileName;
             }
         }
+        if (empty($savedFiles)) {
+            return response()->json(['status' => 'No valid images to save'], 400);
+        }
+        return response()->json(['success' => false, 'images' => $savedFiles]);
 
-        dd($savedFiles);
-        // if ($request->hasFile('image')) {
-
-        //     $fileName = time() . '-' . $file->getClientOriginalName();
-        //     $path = $file->move(public_path('storage/event_images'), $fileName);
-        //     session(['desgin' => $fileName]);
-        //     // dd(session::get('user_ids'));
-        //     return response()->json(['status' => 'Image saved successfully', 'image' => $fileName]);
-        // }
-
-        return response()->json(['status' => 'No image uploaded'], 400);
     }
 }
