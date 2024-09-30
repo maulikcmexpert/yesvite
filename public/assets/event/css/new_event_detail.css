@@ -919,12 +919,14 @@
     position: relative;
 }
 
-.menu-success .side-bar-sub-list h3::before{
+.menu-success .side-bar-sub-list h3::before {
     content: "\f058";
     font-family: "FONTAWESOME";
     position: absolute;
-    top: 0;
+    top: 50%;
+    transform: translateY(-50%);
     left: 0;
+    color: #2DA9FC;
 }
 
 
