@@ -1085,6 +1085,7 @@
 
 
 
+
     $(document).on("click", ".design-sidebar-action", function() {
         let designId = $(this).attr('design-id')
         if (designId) {
@@ -1092,6 +1093,12 @@
             $(".design-sidebar_" + designId).removeClass('d-none')
             $('.close-btn').attr('data-id', "design-sidebar_" + designId);
         }
+    })
+
+    $(document).on("click", ".close-btn", function() {
+        toggleSidebar();
+        var id = $(this).data('id');
+        $('#sidebar').removeClass(id);
     })
 
 
