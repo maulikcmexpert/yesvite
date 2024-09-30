@@ -877,27 +877,6 @@ $(document).on('click','.edit_design_tem',function(e){
         end_date = eventData.event_date;
     }
 
-    // // Add two draggable static textboxes outside the image area
-    // addDraggableText(350, 50, eventData.event_name, eventData.event_name); // Position this outside the image area
-    // addDraggableText(350, 100, eventData.hosted_by, eventData.hosted_by);
-    // addDraggableText(350, 150, eventData.start_time, eventData.start_time);
-    // if(eventData.rsvp_end_time){
-    //     addDraggableText(350, 200, eventData.rsvp_end_time, eventData.rsvp_end_time);
-    // }
-    // addDraggableText(350, 250, start_date, start_date);
-    // addDraggableText(350, 300, end_date, end_date);
-    // addDraggableText(350, 350, eventData.event_location, eventData.event_location);
-
-    // addDraggableText(350, 50, 'event_name', 'xyz'); // Position this outside the image area
-    // addDraggableText(350, 100, 'host_name', 'abc');
-    // addDraggableText(350, 150, 'start_time', '5:00PM');
-    // addDraggableText(350, 200, 'rsvp_end_time', '6:00PM');
-    // addDraggableText(350, 250, 'start_date', '2024-07-27');
-    // addDraggableText(350, 300, 'end_date', '2024-07-27');
-    // addDraggableText(350, 350, 'Location', 'fdf');
-
-
-
     function updateSelectedTextProperties() {
         var fontSize = parseInt(document.getElementById('fontSize').value, 10);
         var fontColor = document.getElementById('fontColor').value;
@@ -922,8 +901,8 @@ $(document).on('click','.edit_design_tem',function(e){
 
 
 
-    // document.getElementById('fontSize').addEventListener('change', updateSelectedTextProperties);
-    // document.getElementById('fontColor').addEventListener('input', updateSelectedTextProperties);
+    document.getElementById('fontSize').addEventListener('change', updateSelectedTextProperties);
+    document.getElementById('fontColor').addEventListener('input', updateSelectedTextProperties);
 
 
 
