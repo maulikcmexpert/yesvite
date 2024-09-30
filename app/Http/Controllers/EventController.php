@@ -1490,7 +1490,7 @@ class EventController extends Controller
 
     public function saveSliderImg(Request $request)
     {
-        dd($request);
+        dd($request->imageSources);
 
         // if ($request->hasFile('image')) {
         //     $file = $request->file('image');
