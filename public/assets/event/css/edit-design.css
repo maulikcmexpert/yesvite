@@ -721,6 +721,12 @@
     .design-sidebar_7 .footer-buttons .cmn-btn{
         max-width: 100% !important;
     }
+    .choose-design-sidebar.design-sidebar_2{
+        height: 90vh;
+    }
+    .design-sidebar_2{
+        height: 90vh;
+    }
 
 }
 
@@ -755,8 +761,9 @@
         border-radius: 0px !important;
     }
 
-    .choose-design-sidebar.design-sidebar_2{
-        height: 90vh;
+   
+    .edit-image-main-wrp{
+        height: 80vh;
     }
 }
 
