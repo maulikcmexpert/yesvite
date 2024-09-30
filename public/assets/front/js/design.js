@@ -150,7 +150,10 @@ $(document).on("click", ".design-card", function () {
                 }
                 break;
         }
+        const textWidth = textElement.calcTextWidth();
+        textElement.set({ width: textWidth });
         canvas.add(textElement);
+
     });
 });
 $(document).on('click','.modal-design-card',function(e){
@@ -215,7 +218,7 @@ $(document).on('click','.edit_design_tem',function(e){
                         element.text, {  // Use Textbox for editable text
                         left: element.left,
                         top: element.top,
-                        width: element.width,  // Default width if not provided
+                        width: element.width || 200,  // Default width if not provided
                         fontSize: element.fontSize,
                         fill: element.fill,
                         fontFamily: element.fontFamily,
@@ -303,6 +306,15 @@ $(document).on('click','.edit_design_tem',function(e){
                             }
                             break;
                     }
+                    // const textWidth = textElement.calcTextWidth();
+                    // textElement.set({ width: textWidth });
+            
+                    // textElement.on('scaling', function () {
+                    //     // Calculate the updated font size based on scaling factors
+                    //     var updatedFontSize = textElement.fontSize * (textElement.scaleX + textElement.scaleY) / 2;
+                    //     textElement.set('fontSize', updatedFontSize); // Update the font size
+                    //     canvas.renderAll(); // Re-render the canvas to reflect changes
+                    // });
                     
                     addIconsToTextbox(textElement);
                     canvas.add(textElement);
@@ -889,30 +901,10 @@ $(document).on('click','.edit_design_tem',function(e){
 
 
 
-    // document.getElementById('fontSize').addEventListener('change', updateSelectedTextProperties);
-    // document.getElementById('fontColor').addEventListener('input', updateSelectedTextProperties);
+    document.getElementById('fontSize').addEventListener('change', updateSelectedTextProperties);
+    document.getElementById('fontColor').addEventListener('input', updateSelectedTextProperties);
 
-    function updateSelectedTextProperties() {
-        var fontSize = parseInt(document.getElementById('fontSize').value, 10);
-        var fontColor = document.getElementById('fontColor').value;
-        var activeObject = canvas.getActiveObject();
 
-        if (activeObject && activeObject.type === 'textbox') {
-            // Update text properties
-            activeObject.set({
-                fontSize: fontSize,
-                fill: fontColor
-            });
-            activeObject.setCoords(); // Update coordinates
-
-            // Log the updated properties
-            console.log('Updated Font Size: ' + activeObject.fontSize);
-            console.log('Updated Font Color: ' + activeObject.fill);
-
-            canvas.renderAll();
-            addToUndoStack(); // Save state after updating properties
-        }
-    }
 
 
 
