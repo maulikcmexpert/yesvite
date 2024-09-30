@@ -768,9 +768,9 @@
                 </button>
             </div>
 
-            @if(!session('edit_design_closed'))
-            <div class="uploaded-images-wrp" id="edit_design_tip_bar">
-                <div class="uploaded-images-warning">
+            <div class="uploaded-images-wrp">
+                @if(!session('edit_design_closed'))
+                <div class="uploaded-images-warning" id="edit_design_tip_bar">
                     <span>
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -796,6 +796,8 @@
                         </svg>
                     </button>
                 </div>
+                @endif
+
 
                 <div class="uploaded-images-inner">
                     <div class="total-upload-img">
@@ -955,7 +957,6 @@
                     </div>
                 </div>
             </div>
-            @endif
 
             <div class="footer-buttons">
                 <button class="cmn-btn save-slider-image">Save</button>
