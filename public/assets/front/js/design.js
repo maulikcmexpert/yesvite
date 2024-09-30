@@ -1215,7 +1215,8 @@ console.log(123)
         $("#loader").show();
         $(this).prop("disabled", true);
         $('.btn-close').prop("disabled", true);
-        save_image_design(downloadImage);
+        var textData = getTextDataFromCanvas();
+        save_image_design(downloadImage,textData);
         $(".main-content-wrp").addClass("blurred");
     });
     
@@ -1225,12 +1226,12 @@ console.log(123)
         $(this).prop("disabled", true);
         $('.btn-close').prop("disabled", true);
         var textData = getTextDataFromCanvas();
-        console.log(textData);
-        save_image_design(downloadImage);
+        // console.log(textData);
+        save_image_design(downloadImage,textData);
         $(".main-content-wrp").addClass("blurred");
     });
     
-    function save_image_design(downloadImage){
+    function save_image_design(downloadImage,textData){
         domtoimage
             .toBlob(downloadImage)
             .then(function (blob) {
