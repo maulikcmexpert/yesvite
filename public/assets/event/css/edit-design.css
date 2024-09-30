@@ -597,6 +597,7 @@
 .uploaded-img-card img{
     width: 100%;
     height: 100%;
+    border-radius: 10px;
 }
 
 .upload-image-main-wrp{
