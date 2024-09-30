@@ -323,17 +323,29 @@ $(document).on('click','.edit_design_tem',function(e){
                     const textWidth = textElement.calcTextWidth();
                     textElement.set({ width: textWidth });
                     
+                    let originalFontSize = textElement.fontSize; // Save the original font size
+                    let originalWidth = textElement.width;      // Save the original width
+                    
                     textElement.on('scaling', function () {
-                        var avgScale = (textElement.scaleX + textElement.scaleY) / 2;
-                        var newFontSize = textElement.fontSize * avgScale;
+                        // Calculate the scale factors for X and Y
+                        var scaleX = textElement.scaleX;
+                        var scaleY = textElement.scaleY;
+                    
+                        // Calculate the new font size based on the scale factor (use scaleX to maintain aspect ratio)
+                        var newFontSize = originalFontSize * scaleX;
+                    
+                        // Set the new font size
                         textElement.set({
                             fontSize: newFontSize,
-                            scaleX: 1,  // Reset scaleX to 1 after updating font size
-                            scaleY: 1   // Reset scaleY to 1 after updating font size
+                            width: originalWidth * scaleX,  // Scale width based on original width and scaleX
+                            scaleX: 1,  // Reset scaleX to 1 after applying changes
+                            scaleY: 1   // Reset scaleY to 1 after applying changes
                         });
+                    
+                        // Re-render the canvas to reflect changes
                         canvas.renderAll();
                     });
-                    
+                                        
                     addIconsToTextbox(textElement);
                     canvas.add(textElement);
             
