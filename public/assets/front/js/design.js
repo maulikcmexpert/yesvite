@@ -1196,5 +1196,26 @@ $(document).ready(function() {
 
         }
     });
+
+    $('.slider_photo_2').on('change', function(event) {
+        var file = event.target.files[0]; 
+        if (file) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('.photo-slider-2').attr('src', e.target.result).show();
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+    $('.slider_photo_3').on('change', function(event) {
+        var file = event.target.files[0]; 
+        if (file) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('.photo-slider-3').attr('src', e.target.result).show();
+            };
+            reader.readAsDataURL(file);
+        }
+    });
 });
 
