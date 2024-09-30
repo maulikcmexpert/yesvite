@@ -746,7 +746,7 @@
                     <p>You may choose up to three photos for a slideshow that your guests can view along with their
                         online invitation.</p>
                     <button class="cmn-btn">
-                        <input type="file" id="slider_photo" accept="image/png, image/jpeg">
+                        <input type="file" class="slider_photo" accept="image/png, image/jpeg">
                         Upload Image
                     </button>
                 </div>
@@ -803,6 +803,7 @@
 
                     <div class="uploaded-images-detail">
                         <div class="uploaded-img-card ">
+                            <input type="file" class="slider_photo" accept="image/png, image/jpeg">
                             <img class="photo-slider-1" src="" alt="">
                             <button class="uploaded-img-card-edit">
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
@@ -857,6 +858,7 @@
                                     stroke="#64748B" stroke-width="1.5" stroke-linecap="round"
                                     stroke-linejoin="round" />
                             </svg>
+                            <input type="file" class="slider_photo_2" accept="image/png, image/jpeg">
                             <img class="photo-slider-2" src="" alt="">
                             <button class="uploaded-img-card-edit">
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
@@ -911,6 +913,7 @@
                                     stroke="#64748B" stroke-width="1.5" stroke-linecap="round"
                                     stroke-linejoin="round" />
                             </svg>
+                            <input type="file" class="slider_photo_3" accept="image/png, image/jpeg">
                             <img class="photo-slider-3" src="" alt="">
                             <button class="uploaded-img-card-edit">
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
