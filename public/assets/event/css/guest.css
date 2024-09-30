@@ -670,7 +670,8 @@
     #sidebar_list_group_member,
     #sidebar_gift_registry,
     #sidebar_potluck,
-    #sidebar_change_plan {
+    #sidebar_change_plan,
+    #sidebar_add_co_host {
         height: 90vh;
     }
 
