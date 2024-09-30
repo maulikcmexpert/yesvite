@@ -195,7 +195,7 @@ $(document).on('click','.edit_design_tem',function(e){
     function loadTextDataFromDatabase() {
       
         if (image) {
-            console.log(image);
+            // console.log(image);
 
             // Load background image
             fabric.Image.fromURL(image, function (img) {
@@ -213,7 +213,20 @@ $(document).on('click','.edit_design_tem',function(e){
             if (dbJson) {
                 const staticInfo = dbJson;
                 staticInfo.textElements.forEach(element => {
-                    console.log(element);
+
+                    const textMeasurement = new fabric.Text(element.text, {
+                        fontSize: element.fontSize,
+                        fontFamily: element.fontFamily,
+                        fontWeight: element.fontWeight,
+                        fontStyle: element.fontStyle,
+                        underline: element.underline,
+                        linethrough: element.linethrough,
+                    });
+                
+                    // Calculate the width of the text
+                    const textWidth = textMeasurement.width;
+                    console.log(`Width of '${element.text}':`, textWidth);
+                    // console.log(element);
                     let textElement = new fabric.Textbox(
                         element.text, {  // Use Textbox for editable text
                         left: element.left,
