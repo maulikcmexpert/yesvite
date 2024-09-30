@@ -173,7 +173,7 @@ class EventController extends Controller
 
         // $potluck = session('category');
         // dd(session()->get('gift_registry_data'));
-        dd($request);
+        // dd($request);
         $user_id =  Auth::guard('web')->user()->id;
         $dateString = (isset($request->event_date)) ? $request->event_date : "";
 
@@ -252,7 +252,7 @@ class EventController extends Controller
         if(isset($request->temp_id) && $request->temp_id != ''){
             $tempData = TextData::where('id',$request->temp_id)->first();
             if($tempData){
-                $event_creation->design_image = $tempData->design_image;
+                $event_creation->design_image = $tempData->image;
             }
         }
         $event_creation->save();
