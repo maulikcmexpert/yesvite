@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'JosefinSans';
-    src: url('../assets/fonts/JosefinSans-Regular.woff2') format('woff2');
+    src: url('{{ asset("assets/fonts/JosefinSans-Regular.woff2") }}') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -8,7 +8,7 @@
 
 @font-face {
     font-family: 'AbrilFatface';
-    src: url('../assets/fonts/AbrilFatface-Regular.woff2') format('woff2');
+    src: url('{{ asset("assets/fonts/AbrilFatface-Regular.woff2") }}') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -16,7 +16,7 @@
 
 @font-face {
     font-family: 'AgencyFB';
-    src: url('../assets/fonts/AgencyFB-Bold.woff2') format('woff2');
+    src: url('{{ asset("assets/fonts/AgencyFB-Bold.woff2") }}') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -24,7 +24,7 @@
 
 @font-face {
     font-family: 'AdleryPro';
-    src: url('../assets/fonts/AdleryPro-Regular.woff2') format('woff2');
+    src: url('{{ asset("assets/fonts/AdleryPro-Regular.woff2") }}') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -32,7 +32,7 @@
 
 @font-face {
     font-family: 'BotanicaScript-Regular';
-    src: url('../assets/fonts/BotanicaScript-Regular.woff2') format('woff2');
+    src: url('{{ asset("assets/fonts/BotanicaScript-Regular.woff2") }}') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -40,7 +40,7 @@
 
 @font-face {
     font-family: 'Allura';
-    src: url('../assets/fonts/Allura-Regular.woff2') format('woff2');
+    src: url('{{ asset("assets/fonts/Allura-Regular.woff2") }}') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -48,7 +48,7 @@
 
 @font-face {
     font-family: 'Antaresia';
-    src: url('../assets/fonts/Antaresia.woff2') format('woff2');
+    src: url('{{ asset("assets/fonts/Antaresia.woff2") }}') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -56,7 +56,7 @@
 
 @font-face {
     font-family: 'Archer';
-    src: url('../assets/fonts/Archer-Bold.woff2') format('woff2');
+    src: url('{{ asset("assets/fonts/Archer-Bold.woff2") }}') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -65,7 +65,7 @@
 
 @font-face {
     font-family: 'Archer-Book';
-    src: url('http://127.0.0.1:8000/assets/fonts/Archer-Book.woff2') format('woff2');
+    src: url('{{ asset("assets/fonts/Archer-Book.woff2") }}') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -73,7 +73,7 @@
 
 @font-face {
     font-family: 'Archer-BookItalic';
-    src: url('http://127.0.0.1:8000/assets/fonts/Archer-BookItalic.woff2') format('woff2');
+    src: url('{{ asset("assets/fonts/Archer-BookItalic.woff2") }}') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -81,7 +81,7 @@
 
 @font-face {
     font-family: 'Archer-ExtraLight';
-    src: url('http://127.0.0.1:8000/assets/fonts/Archer-ExtraLight.woff2') format('woff2');
+    src: url('{{ asset("assets/fonts/Archer-ExtraLight.woff2") }}') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -89,7 +89,7 @@
 
 @font-face {
     font-family: 'Archer-Hairline';
-    src: url('http://127.0.0.1:8000/assets/fonts/Archer-Hairline.woff2') format('woff2');
+    src: url('{{ asset("assets/fonts/Archer-Hairline.woff2") }}') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -97,7 +97,7 @@
 
 @font-face {
     font-family: 'Bebas-Regular';
-    src: url('http://127.0.0.1:8000/assets/fonts/Bebas-Regular.woff2') format('woff2');
+    src: url('{{ asset("assets/fonts/Bebas-Regular.woff2") }}') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -105,7 +105,7 @@
 
 @font-face {
     font-family: 'BookAntiqua';
-    src: url('http://127.0.0.1:8000/assets/fonts/BookAntiqua.woff2') format('woff2');
+    src: url('{{ asset("assets/fonts/BookAntiqua.woff2") }}') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -113,7 +113,7 @@
 
 @font-face {
     font-family: 'Bungee-Regular';
-    src: url('http://127.0.0.1:8000/assets/fonts/Bungee-Regular.woff2') format('woff2');
+    src: url('{{ asset("assets/fonts/Bungee-Regular.woff2") }}') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -121,7 +121,7 @@
 
 @font-face {
     font-family: 'CandyCaneUnregistered';
-    src: url('http://127.0.0.1:8000/assets/fonts/CandyCaneUnregistered.woff2') format('woff2');
+    src: url('{{ asset("assets/fonts/CandyCaneUnregistered.woff2") }}') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -129,7 +129,7 @@
 
 @font-face {
     font-family: 'CarbonBl-Regular';
-    src: url('http://127.0.0.1:8000/assets/fonts/CarbonBl-Regular.woff2') format('woff2');
+    src: url('{{ asset("assets/fonts/CarbonBl-Regular.woff2") }}') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -137,7 +137,7 @@
 
 @font-face {
     font-family: 'CarmenSans-ExtraBold';
-    src: url('http://127.0.0.1:8000/assets/fonts/CarmenSans-ExtraBold.woff2') format('woff2');
+    src: url('{{ asset("assets/fonts/CarmenSans-ExtraBold.woff2") }}') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -145,7 +145,7 @@
 
 @font-face {
     font-family: 'CarmenSans-Regular';
-    src: url('http://127.0.0.1:8000/assets/fonts/CarmenSans-Regular.woff2') format('woff2');
+    src: url('{{ asset("assets/fonts/CarmenSans-Regular.woff2") }}') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -153,7 +153,7 @@
 
 @font-face {
     font-family: 'ChristmasCookies';
-    src: url('http://127.0.0.1:8000/assets/fonts/ChristmasCookies.woff2') format('woff2');
+    src: url('{{ asset("assets/fonts/ChristmasCookies.woff2") }}') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -161,228 +161,21 @@
 
 @font-face {
     font-family: 'AlexBrush';
-    src: url('http://127.0.0.1:8000/assets/fonts/AlexBrush-Regular.woff2') format('woff2');
+    src: url('{{ asset("assets/fonts/AlexBrush-Regular.woff2") }}') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
 }
 
-@font-face {
-    font-family: 'Archer';
-    src: url('Archer-Light.woff2') format('woff2'),
-        url('Archer-Light.woff') format('woff');
-    font-weight: 300;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Archer';
-    src: url('Archer-LightItalic.woff2') format('woff2'),
-        url('Archer-LightItalic.woff') format('woff');
-    font-weight: 300;
-    font-style: italic;
-    font-display: swap;
-}
-
-
-
-@font-face {
-    font-family: 'Archivo Narrow';
-    src: url('ArchivoNarrow-Regular.woff2') format('woff2'),
-        url('ArchivoNarrow-Regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Carmen Sans';
-    src: url('CarmenSans-ExtraBold.woff2') format('woff2'),
-        url('CarmenSans-ExtraBold.woff') format('woff');
-    font-weight: bold;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Bebas';
-    src: url('Bebas-Regular.woff2') format('woff2'),
-        url('Bebas-Regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Christmas Cookies';
-    src: url('ChristmasCookies.woff2') format('woff2'),
-        url('ChristmasCookies.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
 
 @font-face {
     font-family: 'Botanica Script';
-    src: url('http://127.0.0.1:8000/assets/fonts/BotanicaScript-Regular.woff2') format('woff2');
+    src: url('{{ asset("assets/fonts/BotanicaScript-Regular.woff2") }}') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
 }
 
-@font-face {
-    font-family: 'Book Antiqua';
-    src: url('BookAntiqua.woff2') format('woff2'),
-        url('BookAntiqua.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Candy Cane (Unregistered)';
-    src: url('CandyCaneUnregistered.woff2') format('woff2'),
-        url('CandyCaneUnregistered.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Carmen Sans';
-    src: url('CarmenSans-Regular.woff2') format('woff2'),
-        url('CarmenSans-Regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Carbon Bl';
-    src: url('CarbonBl-Regular.woff2') format('woff2'),
-        url('CarbonBl-Regular.woff') format('woff');
-    font-weight: 900;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'DM Sans';
-    src: url('DMSans-Regular.woff2') format('woff2'),
-        url('DMSans-Regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'DM Sans';
-    src: url('DMSans-Bold.woff2') format('woff2'),
-        url('DMSans-Bold.woff') format('woff');
-    font-weight: bold;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'DM Sans';
-    src: url('DMSans-Italic.woff2') format('woff2'),
-        url('DMSans-Italic.woff') format('woff');
-    font-weight: normal;
-    font-style: italic;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'DM Sans';
-    src: url('DMSans-Medium.woff2') format('woff2'),
-        url('DMSans-Medium.woff') format('woff');
-    font-weight: 500;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'AbrilFatface-Regular';
-    src: url('../fonts/AbrilFatface-Regular.woff2') format('woff2'),
-        url('../fonts/AbrilFatface-Regular.woff2') format('woff');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Roboto-Regular';
-    src: url('../fonts/Roboto-Regular.woff2') format('woff2'),
-        url('../fonts/Roboto-Regular.woff2') format('woff');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Roboto-Medium';
-    src: url('../fonts/Roboto-Medium.woff2') format('woff2'),
-        url('../fonts/Roboto-Medium.woff2') format('woff');
-    font-weight: 500;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Roboto-Black';
-    src: url('../fonts/Roboto-Black.woff2') format('woff2'),
-        url('../fonts/Roboto-Black.woff2') format('woff');
-    font-weight: 900;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Roboto-Bold';
-    src: url('../fonts/Roboto-Bold.woff2') format('woff2'),
-        url('../fonts/Roboto-Bold.woff2') format('woff');
-    font-weight: bold;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Rockwell-Bold';
-    src: url('../fonts/Rockwell-Bold.woff2') format('woff2'),
-        url('../fonts/Rockwell-Bold.woff2') format('woff');
-    font-weight: bold;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Rockwell-regulat';
-    src: url('../fonts/Rockwell.woff2') format('woff2'),
-        url('Rockwell.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'AgencyFB-Bold';
-    src: url('../fonts/AgencyFB-Bold.woff2') format('woff2'),
-        url('AgencyFB-Bold.woff') format('woff');
-    font-weight: bold;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'AgencyFB-Reg';
-    src: url('../fonts/AgencyFB-Reg.woff2') format('woff2'),
-        url('../fonts/AgencyFB-Reg.woff2') format('woff');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
 
 :root {
     --AbrilFatface-Regular: "AbrilFatface-Regular";
