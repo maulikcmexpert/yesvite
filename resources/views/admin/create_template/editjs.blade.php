@@ -732,8 +732,8 @@
                 editable: true,
                 selectable: true,
                 hasControls: true,
-                borderColor: 'blue',
-                cornerColor: 'red',
+                borderColor: '#2DA9FC',
+                cornerColor: '#fff',
                 cornerSize: 6,
                 transparentCorners: false
             });

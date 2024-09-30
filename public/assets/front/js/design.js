@@ -1062,6 +1062,7 @@ $(document).on('click','.edit_design_tem',function(e){
             width: 200,
             fontSize: 20,
             backgroundColor: 'rgba(0, 0, 0, 0)', // Set background to transparent
+            
             fill: '#000000',
             editable: true,
             selectable: true,
