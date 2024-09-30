@@ -636,79 +636,6 @@ $(document).on('click','.edit_design_tem',function(e){
     setLetterSpacing();
     setLineHeight();
 
-    // // Initialize the color picker
-    // $('#color-picker').spectrum({
-    //     type: "flat",
-    //     color: "#000000", // Default font color
-    //     showInput: true,
-    //     allowEmpty: true, // Allows setting background to transparent
-    //     showAlpha: true, // Allows transparency adjustment
-    //     preferredFormat: "rgba", // Ensure it handles RGBA
-    //     change: function (color) {
-    //         if (color) {
-    //             changeColor(color.toRgbString()); // Use RGB string for color changes
-    //         } else {
-    //             changeColor('rgba(0, 0, 0, 0)'); // Handle transparency by default
-    //         }
-    //     }
-    // });
-
-    // // Change event for radio buttons to update the color picker
-    // $('input[name="colorType"]').on('change', function () {
-    //     updateColorPicker(); // Update color picker when radio button changes
-    // });
-
-    // // Update color picker when object is selected
-    // canvas.on('selection:created', function () {
-    //     updateColorPicker(); // Update color picker when a new object is selected
-    // });
-
-    // canvas.on('selection:updated', function () {
-    //     updateColorPicker(); // Update color picker when selection is updated
-    // });
-
-    // // Function to change font or background color
-    // function changeColor(selectedColor) {
-    //     const selectedColorType = document.querySelector('input[name="colorType"]:checked').value;
-    //     const activeObject = canvas.getActiveObject();
-
-    //     if (!activeObject) {
-    //         // alert('No object selected');
-    //         return;
-    //     }
-
-    //     if (activeObject.type === 'textbox') {
-    //         if (selectedColorType === 'font') {
-    //             activeObject.set('fill', selectedColor); // Change font color
-    //         } else if (selectedColorType === 'background') {
-    //             activeObject.set('backgroundColor', selectedColor); // Change background color
-    //         }
-    //         canvas.renderAll(); // Re-render the canvas after color change
-    //     }
-    // }
-
-    // // Function to update the color picker based on the selected object's current font or background color
-    // function updateColorPicker() {
-    //     const activeObject = canvas.getActiveObject();
-    //     const selectedColorType = document.querySelector('input[name="colorType"]:checked').value;
-
-    //     if (activeObject && activeObject.type === 'textbox') {
-    //         if (selectedColorType === 'font') {
-    //             $('#color-picker').spectrum('set', activeObject.fill || '#000000'); // Set font color in picker
-    //         } else if (selectedColorType === 'background') {
-    //             const bgColor = activeObject.backgroundColor || 'rgba(0, 0, 0, 0)'; // Default to transparent background
-    //             $('#color-picker').spectrum('set', bgColor); // Set current background color in picker
-    //         }
-    //     }
-    // }
-
-    // // Update the color picker when the color type changes (font or background)
-    // $('input[name="colorType"]').change(function () {
-    //     const activeObject = canvas.getActiveObject();
-    //     if (activeObject && activeObject.type === 'textbox') {
-    //         updateColorPicker(); // Update picker when the selected color type changes
-    //     }
-    // });
       // Initialize the color picker
 $('#color-picker').spectrum({
     type: "flat",
@@ -1095,11 +1022,6 @@ console.log(123)
     // document.getElementById('fontColor').addEventListener('input', updateSelectedTextProperties);
 
 
-
-
-
-
-
     canvas.on('mouse:down', function (options) {
         if (options.target && options.target.type === 'textbox') {
             canvas.setActiveObject(options.target);
@@ -1210,64 +1132,64 @@ console.log(123)
     //     showStaticTextElements();
     // }
 
-    
+  
 
-        function executeCommand(command) {
-            var activeObject = canvas.getActiveObject();
-            if (!activeObject) {
-                // alert('No object selected');
-                return;
-            }
-            if (activeObject && activeObject.type === 'textbox') {
+    function executeCommand(command) {
+        var activeObject = canvas.getActiveObject();
+        if (!activeObject) {
+            // alert('No object selected');
+            return;
+        }
+        if (activeObject && activeObject.type === 'textbox') {
 
-                const commands = {
-                    bold: () => activeObject.set('fontWeight', activeObject.fontWeight === 'bold' ? '' : 'bold'),
-                    italic: () => activeObject.set('fontStyle', activeObject.fontStyle === 'italic' ? '' : 'italic'),
-                    underline: () => {
-                        activeObject.set('underline', !activeObject.underline);
-                        // Update line height after toggling underline
-                        const currentLineHeight = activeObject.lineHeight || 1.2; // Default line height
-                        activeObject.set('lineHeight', currentLineHeight); // Reapply the line height
-                    },
-                    setLineHeight: (value) => {
-                        activeObject.set('lineHeight', value);
-                    },
-                    strikeThrough: () => activeObject.set('linethrough', !activeObject.linethrough),
-                    removeFormat: () => {
-                        activeObject.set({
-                            fontWeight: '',
-                            fontStyle: '',
-                            underline: false,
-                            linethrough: false,
-                            fontFamily: 'Arial'
-                        });
-                    },
-                    fontName: () => {
-                        var selectedFont = document.querySelector('[data-command="fontName"]').value;
-                        activeObject.set('fontFamily', selectedFont);
-                        
-                    },
+            const commands = {
+                bold: () => activeObject.set('fontWeight', activeObject.fontWeight === 'bold' ? '' : 'bold'),
+                italic: () => activeObject.set('fontStyle', activeObject.fontStyle === 'italic' ? '' : 'italic'),
+                underline: () => {
+                    activeObject.set('underline', !activeObject.underline);
+                    // Update line height after toggling underline
+                    const currentLineHeight = activeObject.lineHeight || 1.2; // Default line height
+                    activeObject.set('lineHeight', currentLineHeight); // Reapply the line height
+                },
+                setLineHeight: (value) => {
+                    activeObject.set('lineHeight', value);
+                },
+                strikeThrough: () => activeObject.set('linethrough', !activeObject.linethrough),
+                removeFormat: () => {
+                    activeObject.set({
+                        fontWeight: '',
+                        fontStyle: '',
+                        underline: false,
+                        linethrough: false,
+                        fontFamily: 'Arial'
+                    });
+                },
+                fontName: () => {
+                    var selectedFont = document.querySelector('[data-command="fontName"]').value;
+                    activeObject.set('fontFamily', selectedFont);
+                    
+                },
 
-                    justifyLeft: () => activeObject.set('textAlign', 'left'),
-                    justifyCenter: () => activeObject.set('textAlign', 'center'),
-                    justifyRight: () => activeObject.set('textAlign', 'right'),
-                    justifyFull: () => activeObject.set('textAlign', 'justify'),
+                justifyLeft: () => activeObject.set('textAlign', 'left'),
+                justifyCenter: () => activeObject.set('textAlign', 'center'),
+                justifyRight: () => activeObject.set('textAlign', 'right'),
+                justifyFull: () => activeObject.set('textAlign', 'justify'),
 
-                    uppercase: () => activeObject.set('text', activeObject.text.toUpperCase()),
-                    lowercase: () => activeObject.set('text', activeObject.text.toLowerCase()),
-                    capitalize: () => {
-                        const capitalizedText = activeObject.text.replace(/\b\w/g, char => char.toUpperCase());
-                        activeObject.set('text', capitalizedText);
-                    }
-
-                };
-                if (commands[command]) {
-                    commands[command]();
-                    canvas.renderAll();
-                    addToUndoStack(); // Save state after executing the command
+                uppercase: () => activeObject.set('text', activeObject.text.toUpperCase()),
+                lowercase: () => activeObject.set('text', activeObject.text.toLowerCase()),
+                capitalize: () => {
+                    const capitalizedText = activeObject.text.replace(/\b\w/g, char => char.toUpperCase());
+                    activeObject.set('text', capitalizedText);
                 }
+
+            };
+            if (commands[command]) {
+                commands[command]();
+                canvas.renderAll();
+                addToUndoStack(); // Save state after executing the command
             }
         }
+    }
 
     document.querySelectorAll('[data-command]').forEach(function (button) {
         button.addEventListener('click', function () {
@@ -1301,87 +1223,8 @@ console.log(123)
 
     document.querySelector('[data-command="undo"]').addEventListener('click', undo);
     document.querySelector('[data-command="redo"]').addEventListener('click', redo);
-    document.getElementsByClassName('next_guest_step').addEventListener('click', function () {
-    // $(document).on("click", ".next_guest_step", function () {
-        var downloadImage = document.getElementById("imageEditor1");
-        $("#loader").show();
-        $(this).prop("disabled", true);
-        $('.btn-close').prop("disabled", true);
-        var textData = getTextDataFromCanvas();
-        eventData.textData = textData;
-        eventData.temp_id = temp_id;
-        save_image_design(downloadImage);
-        $(".main-content-wrp").addClass("blurred");
-    });
-    function save_image_design(downloadImage,textData){
-        domtoimage
-            .toBlob(downloadImage)
-            .then(function (blob) {
-                var formData = new FormData();
-                formData.append("image", blob, "design.png");
-                $.ajax({
-                    headers: {
-                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
-                            "content"
-                        ),
-                    },
-                    url: base_url + "event/store_temp_design",
-                    type: "POST",
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success: function (response) {
-                        let image = response.image;
-                        eventData.desgin_selected = image;
-                        // if(eventData.step == '1'){
-                        //     eventData.step = '2';
-                        // }
-                        console.log(final_step);
-                        if(final_step == 2){
-                            final_step = 3;
-                        }
-                        console.log(eventData);
-                        eventData.step = final_step;
-                        console.log("Image uploaded and saved successfully");
-                        $("#myCustomModal").modal("hide");
-                        $("#exampleModal").modal("hide");
-                        $("#loader").css("display", "none");
-                        $('.store_desgin_temp').prop("disabled", false);
-                        $(".main-content-wrp").removeClass("blurred");
-                        $(".step_2").hide();
-                        $('.edit_design_template').hide();
-                        handleActiveClass('.li_guest');
-                        $('.li_design').find(".side-bar-list").addClass("menu-success");
-    
-                        $('.event_create_percent').text('75%');
-                        $('.current_step').text('3 of 4');
-                        
-                        $(".step_3").show();
-                        console.log(eventData);
-                        
-                        var type="all"
-                        get_user(type);
-                        
-    
-                    },
-                    error: function (xhr, status, error) {
-                        console.error(
-                            "Failed to upload and save the image:",
-                            error
-                        );
-                    },
-                });
-            })
-            .catch(function (error) {
-                console.error("Error capturing image:", error);
-            });
-    }
 
 })
-
-
-
-
 
 $(document).ready(function() {
     $('.slider_photo').on('change', function(event) {
