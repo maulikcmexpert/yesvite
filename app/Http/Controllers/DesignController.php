@@ -86,7 +86,7 @@ class DesignController extends Controller
     }
     public function user_image(Request $request)
     {
-        dd($request);
+        // dd($request);
         // Validate the image file (optional, uncomment if needed)
         // $request->validate([
         //     'image' => 'required|image|mimes:png,jpg,jpeg|max:2048',
@@ -94,6 +94,7 @@ class DesignController extends Controller
 
         // Get the file and id from the request
         $file = $request->file('image');
+        dd($file);
         $id = $request->id;
         $shape = $request->shape;
         $imageName = 'user_image_' . time() . '.' . $file->getClientOriginalExtension(); // Assuming PNG format
