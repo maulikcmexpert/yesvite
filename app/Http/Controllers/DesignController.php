@@ -119,7 +119,7 @@ class DesignController extends Controller
 
     public function save_shape(Request $request)
     {
-        dd($request);
+
         $id = $request->id;
         $shape = $request->shape;
         $left = $request->left; // Capture the left position
