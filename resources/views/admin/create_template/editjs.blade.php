@@ -476,7 +476,7 @@
 
                     // Ensure the copyIcon is on top
                     canvas.bringToFront(trashIcon);
-                    textbox.trashIcon.on('mousedown', function() {
+                    trashIcon.on('mousedown', function() {
                         console.log('deleted icon');
                         deleteTextbox(textbox);
                     });
