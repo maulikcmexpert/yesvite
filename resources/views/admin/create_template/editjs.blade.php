@@ -467,30 +467,69 @@
             }
 
 
-            const copyIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 50 50"><path d="M5,5 L30,5 L30,30 L5,30 Z M35,5 L45,5 L45,35 L35,35 L35,5 Z" fill="#0000FF"/></svg>`;
+            // const copyIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 50 50"><path d="M5,5 L30,5 L30,30 L5,30 Z M35,5 L45,5 L45,35 L35,35 L35,5 Z" fill="#0000FF"/></svg>`;
+            // fabric.loadSVGFromString(copyIconSVG, function(objects, options) {
+            //     let copyIcon = fabric.util.groupSVGElements(objects, options);
+            //     copyIcon.set({
+            //         left: textbox.left - 25,
+            //         top: textbox.top - 20,
+            //         selectable: false,
+            //         evented: true,
+            //         hasControls: false,
+            //         visible: true, // Initially hidden
+            //         className: 'copy-icon',
+            //     });
+            //     // Add the copyIcon to the canvas
+            //     textbox.copyIcon = copyIcon
+
+            //     // Ensure the copyIcon is on top
+            //     canvas.bringToFront(copyIcon);
+
+            //     // Handle copy icon click
+            //     textbox.copyIcon.on('mousedown', function() {
+            //         console.log('Copy icon clicked1');
+            //         cloneTextbox(textbox);
+            //     });
+            // })
+
+            const copyIconSVG = `
+<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 50 50">
+    <path d="M5,5 L30,5 L30,30 L5,30 Z M35,5 L45,5 L45,35 L35,35 L35,5 Z" fill="#0000FF"/>
+</svg>`;
+
             fabric.loadSVGFromString(copyIconSVG, function(objects, options) {
                 let copyIcon = fabric.util.groupSVGElements(objects, options);
+
+                // Set initial properties
                 copyIcon.set({
                     left: textbox.left - 25,
                     top: textbox.top - 20,
                     selectable: false,
                     evented: true,
                     hasControls: false,
-                    visible: true, // Initially hidden
+                    visible: true, // Initially visible
                     className: 'copy-icon',
                 });
-                // Add the copyIcon to the canvas
-                textbox.copyIcon = copyIcon
 
-                // Ensure the copyIcon is on top
+                // Add the copyIcon to the canvas
+                canvas.add(copyIcon);
+
+                // Ensure the copyIcon is on top of other objects
                 canvas.bringToFront(copyIcon);
 
                 // Handle copy icon click
-                textbox.copyIcon.on('mousedown', function() {
-                    console.log('Copy icon clicked1');
-                    cloneTextbox(textbox);
+                copyIcon.on('mousedown', function() {
+                    console.log('Copy icon clicked');
+                    cloneTextbox(textbox); // Assuming cloneTextbox is a function defined elsewhere
                 });
-            })
+
+                // Assign the copy icon to the textbox for further reference
+                textbox.copyIcon = copyIcon;
+
+                // Render the canvas
+                canvas.renderAll();
+            });
+
             // console.log('Updated Copy Icon Position:', textbox.copyIcon.left, textbox.copyIcon.top);
 
 
