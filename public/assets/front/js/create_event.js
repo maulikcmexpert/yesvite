@@ -4266,6 +4266,16 @@ var limit = 50;
 var offset = 0;
 var page = '';
 
+$(document).on("click", ".store_desgin_temp", function () {
+    var downloadImage = document.getElementById("download_image");
+    $("#loader").show();
+    $(this).prop("disabled", true);
+    $('.btn-close').prop("disabled", true);
+    eventData.textData = dbJson;
+    eventData.temp_id = temp_id;
+    save_image_design(downloadImage);
+    $(".main-content-wrp").addClass("blurred");
+});
 
 function get_user(type){
     if (busy == false) {
