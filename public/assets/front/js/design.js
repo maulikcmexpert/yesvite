@@ -1259,7 +1259,6 @@ console.log(123)
     }
 
     function undo() {
-        alert()
         if (undoStack.length > 0) {
             redoStack.push(canvas.toJSON());
             canvas.loadFromJSON(undoStack.pop(), canvas.renderAll.bind(canvas));
