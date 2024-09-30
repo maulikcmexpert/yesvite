@@ -3012,6 +3012,7 @@ $("#new-message").click(function () {
     handleSelectedUsers();
 });
 function generateReactionsAndReply() {
+    const asset_path = $("#asset_path").val();
     $(document).on("click", function (event) {
         if (
             !$(event.target).closest(".reaction-dialog, .reaction-icon").length
@@ -3024,11 +3025,11 @@ function generateReactionsAndReply() {
         const messageId = $(this).data("message-id");
         const reactionDialog = `
         <div class="reaction-dialog" id="reaction-dialog-${messageId}">
-            <span class="reaction-option" data-reaction="\\u{1F60D}">&#x1F60D;</span>
-            <span class="reaction-option" data-reaction="\\u{1F604}">&#x1F604;</span>
-            <span class="reaction-option heart_reaction" data-reaction="\\u{2764}}">&#x2764;</span>
-            <span class="reaction-option" data-reaction="\\u{1F44D}">&#x1F44D;</span>
-            <span class="reaction-option" data-reaction="\\u{1F44F}}">&#x1F44F;</span>
+            <span class="reaction-option" data-reaction="\\u{1F60D}"><img src="${asset_path}+ic_heart_eyes.png"/></span>
+            <span class="reaction-option" data-reaction="\\u{1F604}"><img src="${asset_path}+ic_smile.png"/></span>
+            <span class="reaction-option heart_reaction" data-reaction="\\u{2764}}"<img src="${asset_path}+ic_like_reaction.png"/></span>
+            <span class="reaction-option" data-reaction="\\u{1F44D}"><img src="${asset_path}+ic_thumsup.png"/></span>
+            <span class="reaction-option" data-reaction="\\u{1F44F}}"><img src="${asset_path}+ic_clapping_hand.png"/></span>
         </div>
     `;
         $(".reaction-dialog").remove(); // Remove any existing reaction dialogs

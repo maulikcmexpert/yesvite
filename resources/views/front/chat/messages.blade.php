@@ -4,6 +4,7 @@ use Carbon\Carbon;
 <div class="loader">
     <img src="{{asset('assets/front/loader.gif')}}" />
 </div>
+<input id="asset_path" value="{{asset('assets/emojis/')}}" />
 <div class="message-area">
     <div class="container">
         <div class="row">
