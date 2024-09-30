@@ -4282,10 +4282,11 @@ $(document).on("click", ".next_guest_step", function () {
     $("#loader").show();
     $(this).prop("disabled", true);
     $('.btn-close').prop("disabled", true);
-    // var textData = getTextDataFromCanvas();
+    var textData = getTextDataFromCanvas();
+    console.log(textData);
     eventData.textData = dbJson;
     eventData.temp_id = temp_id;
-    save_image_design(downloadImage);
+    // save_image_design(downloadImage);
     $(".main-content-wrp").addClass("blurred");
 });
 

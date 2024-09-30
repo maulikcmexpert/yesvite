@@ -2,7 +2,7 @@ var dbJson = null;
 var temp_id = null;
 var image = null;
 var base_url = $("#base_url").text();
-
+var canvas;
 
 $(document).on("click", ".design-card", function () {
     var url = $(this).data("url");
@@ -35,7 +35,7 @@ $(document).on("click", ".design-card", function () {
     // Show the modal
     $("#exampleModal").modal("show");
 
-    var canvas = new fabric.Canvas('imageEditor2', {
+    canvas = new fabric.Canvas('imageEditor2', {
         width: 345,
         height: 490,
         position: 'relative',
@@ -485,7 +485,7 @@ $(document).on('click','.edit_design_tem',function(e){
         canvas.renderAll(); // Final render
     }
 
-    var canvas = new fabric.Canvas('imageEditor1', {
+    canvas = new fabric.Canvas('imageEditor1', {
         width: 345, // Canvas width
         height: 490, // Canvas height
     });
@@ -1036,39 +1036,7 @@ console.log(123)
     });
 
 
-    function getTextDataFromCanvas() {
-        var objects = canvas.getObjects();
-
-        var textData = [];
-
-        objects.forEach(function (obj) {
-            if (obj.type === 'textbox') {
-                var centerX = obj.left + (obj.width / 2);
-                var centerY = obj.top + (obj.height / 2);
-                textData.push({
-                    text: obj.text,
-                    left: obj.left,
-                    top: obj.top,
-                    fontSize: obj.fontSize,
-                    fill: obj.fill,
-                    centerX: centerX, // Include centerX in the data
-                    centerY: centerY, // Include centerY in the data
-                    dx: obj.left, // Calculate dx
-                    dy: obj.top,   // Calculate dy
-                    backgroundColor: obj.backgroundColor,
-                    fontFamily: obj.fontFamily,
-                    textAlign: obj.textAlign,
-                    fontWeight: obj.fontWeight,
-                    fontStyle: obj.fontStyle,
-                    underline: obj.underline,
-                    linethrough: obj.linethrough,
-                    date_formate: obj.date_formate // Include date_formate if set
-                });
-            }
-        });
-
-        return textData;
-    }
+    
 
     document.getElementById('addTextButton').addEventListener('click', function () {
         addEditableTextbox(100, 100, 'EditableText');  // You can set the initial position and default text
@@ -1225,6 +1193,40 @@ console.log(123)
     document.querySelector('[data-command="redo"]').addEventListener('click', redo);
 
 })
+
+function getTextDataFromCanvas() {
+    var objects = canvas.getObjects();
+
+    var textData = [];
+
+    objects.forEach(function (obj) {
+        if (obj.type === 'textbox') {
+            var centerX = obj.left + (obj.width / 2);
+            var centerY = obj.top + (obj.height / 2);
+            textData.push({
+                text: obj.text,
+                left: obj.left,
+                top: obj.top,
+                fontSize: obj.fontSize,
+                fill: obj.fill,
+                centerX: centerX, // Include centerX in the data
+                centerY: centerY, // Include centerY in the data
+                dx: obj.left, // Calculate dx
+                dy: obj.top,   // Calculate dy
+                backgroundColor: obj.backgroundColor,
+                fontFamily: obj.fontFamily,
+                textAlign: obj.textAlign,
+                fontWeight: obj.fontWeight,
+                fontStyle: obj.fontStyle,
+                underline: obj.underline,
+                linethrough: obj.linethrough,
+                date_formate: obj.date_formate // Include date_formate if set
+            });
+        }
+    });
+
+    return textData;
+}
 
 $(document).ready(function() {
     $('.slider_photo').on('change', function(event) {
