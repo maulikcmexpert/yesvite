@@ -1,4 +1,5 @@
 <script type="text/javascript">
+    alert()
     // document.addEventListener("DOMContentLoaded", function() {
     //     const fileInput = document.getElementById('fileInput');
     //     const userImageElement = document.getElementById('user_image');
