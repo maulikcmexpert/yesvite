@@ -242,7 +242,7 @@ const reactionImageMap = {
     "1F604": `${asset_path}/ic_smile.png`, // Smile
     "2764}": `${asset_path}/ic_like_reaction.png`, // Heart
     "1F44D": `${asset_path}/ic_thumsup.png`, // Thumbs Up
-    "1F44F": `${asset_path}/ic_clapping_hand.png`, // Clapping Hands
+    "1F44F}": `${asset_path}/ic_clapping_hand.png`, // Clapping Hands
 };
 
 const response = await fetch("/firebase_js.json");
