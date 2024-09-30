@@ -50,20 +50,23 @@
                 </svg>
             </div>
         </div> -->
-
-
-        <input type="file" id="image" accept="image/*" style="display:none;" />
-        <div id="tooltip"></div>
         <div class="image-edit-section-wrp">
             <div class="image-edit-inner-img">
                 <div class="canvas-container" id="border">
                     <!-- The canvas where the image will be drawn -->
+                    <input type="file" id="image" accept="image/*" style="display:none;" />
 
                     <canvas id="imageEditor1" class="canvas new"></canvas>
                 </div>
 
                 <!-- Resizeable image inside a wrapper (hidden by default) -->
-
+                <div id="imageWrapper" style=" position: fixed; display: none;">
+                    <img id="user_image" src="" style="height: 100px; width: 100px; background-color: black;" />
+                    <div class="resize-handle top-left"></div>
+                    <div class="resize-handle top-right"></div>
+                    <div class="resize-handle bottom-left"></div>
+                    <div class="resize-handle bottom-right"></div>
+                </div>
 
                 <!-- SVG heart clip path for potential clipping -->
                 <svg width="0" height="0">
@@ -73,14 +76,6 @@
                         </clipPath>
                     </defs>
                 </svg>
-            </div>
-
-            <div id="imageWrapper" style="position: fixed; display: none;">
-                <img id="user_image" src="" style="height: 100px; width: 100px; background-color: black;" />
-                <div class="resize-handle top-left"></div>
-                <div class="resize-handle top-right"></div>
-                <div class="resize-handle bottom-left"></div>
-                <div class="resize-handle bottom-right"></div>
             </div>
         </div>
 
