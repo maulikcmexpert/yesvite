@@ -879,7 +879,7 @@
         </div>
 
         <!-- ====upload=img=== -->
-        <div class="design-sidebar design-sidebar_6 setting-category-wrp choose-design-form activity-schedule-inner d-none">
+        <!-- <div class="design-sidebar design-sidebar_6 setting-category-wrp choose-design-form activity-schedule-inner d-none">
             <div class="d-flex align-items-center justify-content-between toggle-wrp new-event-sidebar-head">
                 <h5>Photo Slider</h5>
                 <button class="close-btn" onclick="toggleSidebar()">
@@ -960,8 +960,8 @@
                     </button>
                 </div>
             </div>
-        </div>
-        <!-- <div class="design-sidebar design-sidebar_6 setting-category-wrp choose-design-form activity-schedule-inner ">
+        </div> -->
+        <div class="design-sidebar design-sidebar_6 setting-category-wrp choose-design-form activity-schedule-inner ">
             <div class="d-flex align-items-center justify-content-between toggle-wrp new-event-sidebar-head">
                 <h5>Upload Image</h5>
                 <button class="close-btn" onclick="toggleSidebar()">
@@ -1014,7 +1014,7 @@
                     </button>
                 </div>
             </div>
-        </div> -->
+        </div>
 
         <!-- ====uploaded-images== -->
         <div class="design-sidebar design-sidebar_7 setting-category-wrp choose-design-form activity-schedule-inner d-none">
@@ -1211,11 +1211,9 @@
                 </div>
             </div>
 
-
-        </div>
-
-        <div class="footer-buttons">
-            <button class="cmn-btn saveButton" id="saveButton">Save</button>
+            <div class="footer-buttons">
+                <button class="cmn-btn saveButton" id="saveButton">Save</button>
+            </div>
         </div>
     </div>
 </main>
