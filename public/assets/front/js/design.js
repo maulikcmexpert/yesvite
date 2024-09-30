@@ -1351,7 +1351,7 @@ $(document).ready(function() {
     })
     $(document).on('click','.save-slider-image',function(){
         var imageSources = [];
-        $('img').each(function() {
+        $('.slider_img').each(function() {
             imageSources.push($(this).attr('src'));
         });
         console.log(imageSources);
