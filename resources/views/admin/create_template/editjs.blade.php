@@ -1378,6 +1378,7 @@
 
         // Add event listener for the button (assuming your button has id="saveButton")
         document.getElementById('saveButton').addEventListener('click', function() {
+            alert();
 
             saveTextDataToDatabase();
             // window.location.href = '/templates/view';

@@ -101,7 +101,6 @@ class DesignController extends Controller
         $imagePath = asset('storage/canvas' . $imageName);
         $textElements = [
             [
-
                 'shape' => $shape // Add shape information
             ],
         ];
