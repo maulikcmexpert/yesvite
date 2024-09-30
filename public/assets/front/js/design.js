@@ -256,18 +256,8 @@ $(document).on('click','.edit_design_tem',function(e){
                     switch (element.text) {
                         case 'event_name':
                             if (eventData.event_name) {
-                                const textMeasurement = new fabric.Text(eventData.event_name, {
-                                    fontSize: element.fontSize,
-                                    fontFamily: element.fontFamily,
-                                    fontWeight: element.fontWeight,
-                                    fontStyle: element.fontStyle,
-                                    underline: element.underline,
-                                    linethrough: element.linethrough,
-                                });
-
-                                const textWidth = textMeasurement.width;
-                                console.log(`Width of '${eventData.event_name}':`, textWidth);
-                                textElement.set({ text: eventData.event_name });
+                                getWidth(eventData.event_name);
+                                textElement.set({ text: eventData.event_name,width:textWidth });
                             } else {
                                 return;  // Skip adding the element if event_name is empty
                             }
@@ -359,6 +349,19 @@ $(document).on('click','.edit_design_tem',function(e){
 
             canvas.renderAll();  // Ensure all elements are rendered
         }
+    }
+
+    function getWidth(text){
+        const textMeasurement = new fabric.Text(text, {
+            fontSize: element.fontSize,
+            fontFamily: element.fontFamily,
+            fontWeight: element.fontWeight,
+            fontStyle: element.fontStyle,
+            underline: element.underline,
+            linethrough: element.linethrough,
+        });
+        const textWidth = textMeasurement.width;
+        console.log(`Width of '${text}':`, textWidth);
     }
 
     function addIconsToTextbox(textbox) {
