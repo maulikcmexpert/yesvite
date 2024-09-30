@@ -216,39 +216,26 @@ $(document).on('click','.edit_design_tem',function(e){
                 staticInfo.textElements.forEach(element => {
                     console.log(element);
                     let textElement = new fabric.Textbox(
-                        element.text, {  
-                            
-                        // left: element.left,
-                        // top: element.top,
-                        // width: element.width || 200,  // Default width if not provided
-                        // fontSize: element.fontSize,
-                        // fill: element.fill,
-                        // fontFamily: element.fontFamily,
-                        // fontWeight: element.fontWeight,
-                        // fontStyle: element.fontStyle,
-                        // underline: element.underline,
-                        // linethrough: element.linethrough,
-                        // backgroundColor: element.backgroundColor,
-                        // textAlign: element.textAlign,
-                        // hasControls: true,
-                        // borderColor: '#2DA9FC',
-                        // cornerColor: '#fff',
-                        // cornerSize: 6,
-                        // transparentCorners: false,
-                        // lockScalingFlip: true,
-                        // hasBorders: true,
-                        left: element.left, // Offset position
-                        top: element.top,   // Offset position
+                        element.text, {  // Use Textbox for editable text
+                        left: element.left,
+                        top: element.top,
+                        width: element.width || 200,  // Default width if not provided
                         fontSize: element.fontSize,
                         fill: element.fill,
-                        width: element.width,
-                        height: element.height,
                         fontFamily: element.fontFamily,
-                        originX: element.originX,
-                        originY: element.originY,
+                        fontWeight: element.fontWeight,
+                        fontStyle: element.fontStyle,
+                        underline: element.underline,
+                        linethrough: element.linethrough,
+                        backgroundColor: element.backgroundColor,
+                        textAlign: element.textAlign,
                         hasControls: true,
+                        borderColor: '#2DA9FC',
+                        cornerColor: '#fff',
+                        cornerSize: 6,
+                        transparentCorners: false,
+                        lockScalingFlip: true,
                         hasBorders: true,
-                        lockScalingFlip: true
                     });
 
 
@@ -322,30 +309,14 @@ $(document).on('click','.edit_design_tem',function(e){
                     }
                     const textWidth = textElement.calcTextWidth();
                     textElement.set({ width: textWidth });
-                    
-                    let originalFontSize = textElement.fontSize; // Save the original font size
-                    let originalWidth = textElement.width;      // Save the original width
-                    
+            
                     textElement.on('scaling', function () {
-                        // Calculate the scale factors for X and Y
-                        var scaleX = textElement.scaleX;
-                        var scaleY = textElement.scaleY;
-                    
-                        // Calculate the new font size based on the scale factor (use scaleX to maintain aspect ratio)
-                        var newFontSize = originalFontSize * scaleX;
-                    
-                        // Set the new font size
-                        textElement.set({
-                            fontSize: newFontSize,
-                            width: originalWidth * scaleX,  // Scale width based on original width and scaleX
-                            scaleX: 1,  // Reset scaleX to 1 after applying changes
-                            scaleY: 1   // Reset scaleY to 1 after applying changes
-                        });
-                    
-                        // Re-render the canvas to reflect changes
-                        canvas.renderAll();
+                        // Calculate the updated font size based on scaling factors
+                        var updatedFontSize = textElement.fontSize * (textElement.scaleX + textElement.scaleY) / 2;
+                        textElement.set('fontSize', updatedFontSize); // Update the font size
+                        canvas.renderAll(); // Re-render the canvas to reflect changes
                     });
-                                        
+                    
                     addIconsToTextbox(textElement);
                     canvas.add(textElement);
             
