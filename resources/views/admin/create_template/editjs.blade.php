@@ -82,8 +82,6 @@
 
                                 addIconsToTextbox(textElement);
                                 canvas.add(textElement);
-                                addCustomRotationIcon();
-
 
                             });
                         } else {
@@ -813,47 +811,6 @@
             addEditableTextbox(100, 100, 'EditableText'); // You can set the initial position and default text
         });
 
-        function addCustomRotationIcon() {
-            fabric.Object.prototype.controls.mtr = new fabric.Control({
-                x: 0, // X position of the rotation point (top center)
-                y: -0.5, // Y position of the rotation point
-                offsetY: -30, // Adjust the icon's position
-                cursorStyle: 'pointer',
-                actionHandler: fabric.controlsUtils.rotationWithSnapping,
-                actionName: 'rotate',
-                render: function(ctx, left, top, styleOverride, fabricObject) {
-                    var size = this.cornerSize || styleOverride.cornerSize;
-                    ctx.save();
-                    var img = document.createElement('img');
-                    img.src = `<svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g filter="url(#filter0_d_5633_67668)">
-<rect x="2.67969" y="2.22852" width="23.9674" height="23.9674" rx="11.9837" fill="white" shape-rendering="crispEdges"/>
-<path d="M13.2201 10.7577C13.6545 10.6279 14.1338 10.543 14.6631 10.543C17.0549 10.543 18.9922 12.4803 18.9922 14.8721C18.9922 17.2638 17.0549 19.2012 14.6631 19.2012C12.2714 19.2012 10.334 17.2638 10.334 14.8721C10.334 13.9833 10.6036 13.1544 11.063 12.4654" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M12.6011 10.8775L14.0441 9.21973" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M12.6011 10.877L14.2838 12.1053" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-</g>
-<defs>
-<filter id="filter0_d_5633_67668" x="0.682401" y="0.231229" width="27.9619" height="27.9623" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-<feFlood flood-opacity="0" result="BackgroundImageFix"/>
-<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-<feOffset/>
-<feGaussianBlur stdDeviation="0.998643"/>
-<feComposite in2="hardAlpha" operator="out"/>
-<feColorMatrix type="matrix" values="0 0 0 0 0.309804 0 0 0 0 0.368627 0 0 0 0 0.443137 0 0 0 0.12 0"/>
-<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_5633_67668"/>
-<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_5633_67668" result="shape"/>
-</filter>
-</defs>
-</svg>
-`; // Path to your icon image
-                    img.onload = function() {
-                        ctx.drawImage(img, left - size / 2, top - size / 2, size, size); // Draw the icon
-                    };
-                    ctx.restore();
-                }
-            });
-        }
-
         function addEditableTextbox(left, top, textContent) {
             var textbox = new fabric.Textbox(textContent, {
                 left: left,
@@ -880,7 +837,6 @@
             });
 
             canvas.add(textbox);
-            addCustomRotationIcon();
             canvas.setActiveObject(textbox);
             addIconsToTextbox(textbox); // Make it the active object for editing
             canvas.renderAll();
