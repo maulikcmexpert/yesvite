@@ -2023,6 +2023,7 @@ function createMessageElement(key, messageData, isGroup) {
         `time_${messageRcvTime.replace(/\s/g, "")}`
     );
     $(time).text("");
+    $(time).removeClass(`time_${messageRcvTime.replace(/\s/g, "")}`);
     // $(".time").each(async function (index) {
     //     if (messageRcvTime == $(this).text()) {
     //         $(this).text("");
