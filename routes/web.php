@@ -162,6 +162,8 @@ Route::middleware('checkUserExist')->group(function () {
     Route::post('event/get_co_host_list', [ControllersEventController::class, 'get_co_host_list']);
     Route::post('event/get_gift_registry', [ControllersEventController::class, 'get_gift_registry']);
     Route::post('event/get_thank_you_card', [ControllersEventController::class, 'get_thank_you_card']);
+    Route::post('event/save_slider_img', [ControllersEventController::class, 'saveSliderImg']);
+
 });
 
 

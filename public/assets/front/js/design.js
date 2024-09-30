@@ -1,6 +1,8 @@
 var dbJson = null;
 var temp_id = null;
 var image = null;
+var base_url = $("#base_url").text();
+
 
 $(document).on("click", ".design-card", function () {
     var url = $(this).data("url");
@@ -1349,12 +1351,25 @@ $(document).ready(function() {
     $(document).on('click','.delete-slider-3',function(){
         $('.photo-slider-3').hide();
     })
+
     $(document).on('click','.save-slider-image',function(){
         var imageSources = [];
         $('.slider_img').each(function() {
             imageSources.push($(this).attr('src'));
         });
-        console.log(imageSources);
+        // console.log(imageSources);
+        $.ajax({
+            url: base_url + "event/save_slider_img",
+            method: "POST",
+            data: {
+                imageSources: imageSources,
+                _token: $('meta[name="csrf-token"]').attr("content"),
+            },
+            success: function (response) {
+               
+            },
+            error: function (xhr, status, error) {},
+        });
     })
 
     

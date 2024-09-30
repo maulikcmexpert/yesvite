@@ -1487,4 +1487,21 @@ class EventController extends Controller
 
         return response()->json(['view' => view('front.event.thankyou_template.add_thankyou_template', compact('thankyou_card'))->render()]);
     }
+
+    public function saveSliderImg(Request $request)
+    {
+        dd($request);
+
+        // if ($request->hasFile('image')) {
+        //     $file = $request->file('image');
+
+        //     $fileName = time() . '-' . $file->getClientOriginalName();
+        //     $path = $file->move(public_path('storage/event_images'), $fileName);
+        //     session(['desgin' => $fileName]);
+        //     // dd(session::get('user_ids'));
+        //     return response()->json(['status' => 'Image saved successfully', 'image' => $fileName]);
+        // }
+
+        return response()->json(['status' => 'No image uploaded'], 400);
+    }
 }
