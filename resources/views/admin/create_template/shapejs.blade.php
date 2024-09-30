@@ -826,7 +826,7 @@
                             });
 
                             canvasElement.add(imgInstance);
-                            canvas.bringToFront(canvasElement);
+                            canvasElement.bringToFront(imgInstance);
                             drawCanvas();
                             console.log('Image loaded and added to canvas.');
                             imageUploaded = true; // Set flag to true after image is uploaded
