@@ -235,6 +235,15 @@ function getSelectedUserimggrp(profileImageUrl, userName) {
 // }
 
 // Initialize Firebase
+const asset_path = $("#asset_path").val();
+
+const reactionImageMap = {
+    "1F60D": `${asset_path}/ic_heart_eyes.png`, // Heart Eyes
+    "1F604": `${asset_path}/ic_smile.png`, // Smile
+    "2764}": `${asset_path}/ic_like_reaction.png`, // Heart
+    "1F44D": `${asset_path}/ic_thumsup.png`, // Thumbs Up
+    "1F44F}": `${asset_path}/ic_clapping_hand.png`, // Clapping Hands
+};
 
 const response = await fetch("/firebase_js.json");
 const firebaseConfig = await response.json();
@@ -1681,21 +1690,25 @@ function createMessageElement(key, messageData, isGroup) {
         }
         reaction = messageData?.messageReact
             ? Object.values(messageData.messageReact)
-                  .map(
-                      (reactData) =>
-                          `<li class="reaction ${
-                              reactData?.react
-                                  ?.replace(/\\u\{(.+)\}/, "$1")
-                                  .includes("2764}")
-                                  ? "heart_reaction"
-                                  : ""
-                          }" data-message-id ="${key}">${String.fromCodePoint(
-                              parseInt(
-                                  reactData.react.replace(/\\u\{(.+)\}/, "$1"),
-                                  16
-                              )
-                          )}</li>`
-                  )
+                  .map((reactData) => {
+                      const reactionCode = reactData.react.replace(
+                          /\\u\{(.+)\}/,
+                          "$1"
+                      ); // Extract the reaction code
+                      const imageUrl = reactionImageMap[reactionCode]; // Get the image URL from the map
+
+                      return `
+                  <li class="reaction ${
+                      reactData?.react
+                          ?.replace(/\\u\{(.+)\}/, "$1")
+                          .includes("2764}")
+                          ? "heart_reaction"
+                          : ""
+                  }" data-message-id="${key}">
+                      <img src="${imageUrl}" alt="reaction" />
+                  </li>
+              `;
+                  })
                   .join(" ")
             : "";
         reaction = `<ul class="reaction-ul ${messageData?.react}">${reaction}</ul>`;
@@ -1707,6 +1720,10 @@ function createMessageElement(key, messageData, isGroup) {
                 ? "blue-tick"
                 : "grey-tick"
             : "";
+
+        const reactionCode = messageData.react.replace(/\\u\{(.+)\}/, "$1"); // Extract the reaction code
+        console.log(reactionCode);
+        const imageUrl = reactionImageMap[reactionCode];
         reaction =
             messageData?.react && messageData?.react.length > 0
                 ? `<span class="reaction ${
@@ -1715,12 +1732,7 @@ function createMessageElement(key, messageData, isGroup) {
                           .includes("2764}")
                           ? "heart_reaction"
                           : ""
-                  }" data-message-id ="${key}">${String?.fromCodePoint(
-                      parseInt(
-                          messageData?.react?.replace(/\\u\{(.+)\}/, "$1"),
-                          16
-                      )
-                  )}</span>`
+                  }" data-message-id ="${key}"> <img src="${imageUrl}" alt="reaction" /> </span>`
                 : "";
     }
 
@@ -2007,28 +2019,28 @@ function createMessageElement(key, messageData, isGroup) {
         // daychange = "<h5 class='day-line'><span>" + chatSmallDay +" "+ msgDate + "</span></h5>";
     }
     formattedDate[msgDate] = "1";
-
+    const time = document.getElementsByClassName("time");
     $(".time").each(async function (index) {
         if (messageRcvTime == $(this).text()) {
             $(this).text("");
         }
     });
-    return `   
-    <div>
+    return `<div>
     ${daychange}
-    <li class="${isSender ? "receiver" : "sender"}" id="message-${key}" >
-    
-    ${replySection == "" ? dataWithMedia : replySection}
-        
+        <li class="${
+            isSender ? "receiver" : "sender"
+        }" id="message-${key}" >        
+            ${replySection == "" ? dataWithMedia : replySection}        
             <span class="time">${new Date(
                 messageData.timeStamp
             ).toLocaleTimeString([], {
                 hour: "2-digit",
                 minute: "2-digit",
                 hour12: true,
-            })}</span>            
+            })}
+            </span>            
         </li>
-        </div>
+    </div>
     `;
 }
 function markMessageAsSeen(conversationId, key) {
@@ -3012,7 +3024,6 @@ $("#new-message").click(function () {
     handleSelectedUsers();
 });
 function generateReactionsAndReply() {
-    const asset_path = $("#asset_path").val();
     $(document).on("click", function (event) {
         if (
             !$(event.target).closest(".reaction-dialog, .reaction-icon").length
