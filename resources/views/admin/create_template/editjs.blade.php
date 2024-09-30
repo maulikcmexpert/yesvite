@@ -665,12 +665,10 @@
             });
 
             // Initially hide all icons
-            if (textbox.trashIcon) textbox.trashIcon.set('visible', false);
-            if (textbox.copyIcon) textbox.copyIcon.set('visible', false);
-            // canvas.getObjects('textbox').forEach(function(tb) {
-            //     if (tb.trashIcon) tb.trashIcon.set('visible', false);
-            //     if (tb.copyIcon) tb.copyIcon.set('visible', false);
-            // });
+            canvas.getObjects('textbox').forEach(function(tb) {
+                if (tb.trashIcon) tb.trashIcon.set('visible', false);
+                if (tb.copyIcon) tb.copyIcon.set('visible', false);
+            });
 
             canvas.renderAll(); // Final render
         }
@@ -827,6 +825,7 @@
             return textData;
         }
         document.getElementById('addTextButton').addEventListener('click', function() {
+            alert();
             addEditableTextbox(100, 100, 'EditableText'); // You can set the initial position and default text
         });
 
