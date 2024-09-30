@@ -437,14 +437,8 @@
                 canvas.remove(textbox.trashIcon);
                 textbox.trashIcon = null; // Clear reference
                 // const trashIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 50 50"><path d="M20,30 L30,30 L30,40 L20,40 Z M25,10 L20,10 L20,7 L30,7 L30,10 Z M17,10 L33,10 L33,40 L17,40 Z" fill="#FF0000"/></svg>`;
-                const trashIconSVG = `<svg x="0px" y="0px" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M11.1807 3.35025C9.51792 3.18547 7.84519 3.10059 6.17746 3.10059C5.1888 3.10059 4.20014 3.15052 3.21149 3.25038L2.19287 3.35025" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M4.93896 2.84627L5.04882 2.19216C5.12871 1.7178 5.18863 1.36328 6.03248 1.36328H7.3407C8.18456 1.36328 8.24947 1.73777 8.32437 2.19715L8.43422 2.84627" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M10.1073 4.92773L9.78275 9.9559C9.72782 10.7398 9.68288 11.349 8.28978 11.349H5.08413C3.69102 11.349 3.64609 10.7398 3.59116 9.9559L3.2666 4.92773" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M5.85303 8.60352H7.51577" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M5.43848 6.60547H7.93508" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-`;
+                const trashIconSVG = `<svg x="0px" y="0px" width="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M135.2 17.7L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-7.2-14.3C307.4 6.8 296.3 0 284.2 0L163.8 0c-12.1 0-23.2 6.8-28.6 17.7zM416 128L32 128 53.2 467c1.6 25.3 22.6 45 47.9 45l245.8 0c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>
+                `;
                 //                 const trashIconSVG = `<svg width="29" x="0px" y="0px" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
                 // <g filter="url(#filter0_d_5633_67674)">
                 // <rect x="2.70312" y="2.37207" width="23.9674" height="23.9674" rx="11.9837" fill="white" shape-rendering="crispEdges"/>
@@ -555,13 +549,7 @@
         function addIconsToTextbox(textbox) {
             // Trash icon SVG
             // const trashIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 50 50"><path d="M20,30 L30,30 L30,40 L20,40 Z M25,10 L20,10 L20,7 L30,7 L30,10 Z M17,10 L33,10 L33,40 L17,40 Z" fill="#FF0000"/></svg>`;
-            const trashIconSVG = `<svg x="0px" y="0px" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M11.1807 3.35025C9.51792 3.18547 7.84519 3.10059 6.17746 3.10059C5.1888 3.10059 4.20014 3.15052 3.21149 3.25038L2.19287 3.35025" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M4.93896 2.84627L5.04882 2.19216C5.12871 1.7178 5.18863 1.36328 6.03248 1.36328H7.3407C8.18456 1.36328 8.24947 1.73777 8.32437 2.19715L8.43422 2.84627" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M10.1073 4.92773L9.78275 9.9559C9.72782 10.7398 9.68288 11.349 8.28978 11.349H5.08413C3.69102 11.349 3.64609 10.7398 3.59116 9.9559L3.2666 4.92773" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M5.85303 8.60352H7.51577" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M5.43848 6.60547H7.93508" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
+            const trashIconSVG = `<svg x="0px" y="0px" width="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M135.2 17.7L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-7.2-14.3C307.4 6.8 296.3 0 284.2 0L163.8 0c-12.1 0-23.2 6.8-28.6 17.7zM416 128L32 128 53.2 467c1.6 25.3 22.6 45 47.9 45l245.8 0c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>
 `;
             //             const trashIconSVG = `<svg width="29" x="0px" y="0px" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
             // <g filter="url(#filter0_d_5633_67674)">
