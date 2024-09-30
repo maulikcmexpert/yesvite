@@ -835,13 +835,102 @@ console.log(123)
         return { x: centerX, y: centerY };
     }
 
+    // function updateIconPositions(textbox) {
+    //     // console.log(textbox);
+    //     if (textbox.trashIcon) {
+    //         canvas.remove(textbox.trashIcon);
+    //         textbox.trashIcon = null; // Clear reference
+    //         // const trashIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 50 50"><path d="M20,30 L30,30 L30,40 L20,40 Z M25,10 L20,10 L20,7 L30,7 L30,10 Z M17,10 L33,10 L33,40 L17,40 Z" fill="#FF0000"/></svg>`;
+    //         const trashIconSVG = `<svg width="29" x="0px" y="0px" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+    //         <g filter="url(#filter0_d_5633_67674)">
+    //         <rect x="2.70312" y="2.37207" width="23.9674" height="23.9674" rx="11.9837" fill="white" shape-rendering="crispEdges"/>
+    //         <path d="M19.1807 11.3502C17.5179 11.1855 15.8452 11.1006 14.1775 11.1006C13.1888 11.1006 12.2001 11.1505 11.2115 11.2504L10.1929 11.3502" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
+    //         <path d="M12.939 10.8463L13.0488 10.1922C13.1287 9.7178 13.1886 9.36328 14.0325 9.36328H15.3407C16.1846 9.36328 16.2495 9.73777 16.3244 10.1971L16.4342 10.8463" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
+    //         <path d="M18.1073 12.9277L17.7827 17.9559C17.7278 18.7398 17.6829 19.349 16.2898 19.349H13.0841C11.691 19.349 11.6461 18.7398 11.5912 17.9559L11.2666 12.9277" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
+    //         <path d="M13.853 16.6035H15.5158" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
+    //         <path d="M13.4385 14.6055H15.9351" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
+    //         </g>
+    //         </svg>
+    //         `;
+            
+    //         fabric.loadSVGFromString(trashIconSVG, function (objects, options) {
+    //             const trashIcon = fabric.util.groupSVGElements(objects, options);
+    //             trashIcon.set({
+    //                 left: textbox.left + textbox.width * textbox.scaleX - 20,
+    //                 top: textbox.top - 20,
+    //                 selectable: false,
+    //                 evented: true,
+    //                 hasControls: false,
+    //                 visible: true, // Initially hidden
+    //                 className: 'trash-icon',
+    //             });
+    //             textbox.trashIcon = trashIcon;
+
+
+    //             // Ensure the copyIcon is on top
+    //             canvas.bringToFront(trashIcon);
+    //             textbox.trashIcon.on('mousedown', function () {
+    //                 console.log('deleted icon');
+    //                 deleteTextbox(textbox);
+    //             });
+    //         })
+    //         // console.log('Updated Trash Icon Position:', textbox.trashIcon.left, textbox.trashIcon.top);
+    //     }
+
+    //     if (textbox.copyIcon) {
+    //         canvas.remove(textbox.copyIcon);
+    //         textbox.copyIcon = null; // Clear reference
+    //     }
+
+
+    //     // const copyIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 50 50"><path d="M5,5 L30,5 L30,30 L5,30 Z M35,5 L45,5 L45,35 L35,35 L35,5 Z" fill="#0000FF"/></svg>`;
+    //     const copyIconSVG = `<svg width="29" x="0px" y="0px" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+    //         <g filter="url(#filter0_d_5633_67676)">
+    //         <rect x="2.64893" y="2.37207" width="23.9674" height="23.9674" rx="11.9837" fill="white" shape-rendering="crispEdges"/>
+    //         <path fill-rule="evenodd" clip-rule="evenodd" d="M17.6283 16.3538V10.3619C17.6283 9.81039 17.1812 9.36328 16.6297 9.36328H10.6378C10.0863 9.36328 9.63916 9.81039 9.63916 10.3619V16.3538C9.63916 16.9053 10.0863 17.3524 10.6378 17.3524H16.6297C17.1812 17.3524 17.6283 16.9053 17.6283 16.3538ZM10.6379 10.362H16.6298V16.3539H10.6379V10.362ZM18.6271 17.3525V11.3607C19.1786 11.3607 19.6257 11.8078 19.6257 12.3593V17.3525C19.6257 18.4556 18.7315 19.3498 17.6284 19.3498H12.6352C12.0837 19.3498 11.6366 18.9027 11.6366 18.3512H17.6284C18.1799 18.3512 18.6271 17.9041 18.6271 17.3525Z" fill="#0F172A"/>
+    //         </g>
+    //         </svg>`;
+        
+    //     fabric.loadSVGFromString(copyIconSVG, function (objects, options) {
+    //         let copyIcon = fabric.util.groupSVGElements(objects, options);
+    //         copyIcon.set({
+    //             left: textbox.left - 25,
+    //             top: textbox.top - 20,
+    //             selectable: false,
+    //             evented: true,
+    //             hasControls: false,
+    //             visible: true, // Initially hidden
+    //             className: 'copy-icon',
+    //         });
+    //         // Add the copyIcon to the canvas
+    //         textbox.copyIcon = copyIcon
+
+    //         // Ensure the copyIcon is on top
+    //         canvas.bringToFront(copyIcon);
+
+    //         // Handle copy icon click
+    //         textbox.copyIcon.on('mousedown', function () {
+    //             console.log('Copy icon clicked1');
+    //             cloneTextbox(textbox);
+    //         });
+    //     })
+
+    //     canvas.renderAll(); // Re-render the canvas to apply the new positions
+    // }
+
     function updateIconPositions(textbox) {
-        // console.log(textbox);
+        // Remove old trash and copy icons if they exist
         if (textbox.trashIcon) {
             canvas.remove(textbox.trashIcon);
             textbox.trashIcon = null; // Clear reference
-            // const trashIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 50 50"><path d="M20,30 L30,30 L30,40 L20,40 Z M25,10 L20,10 L20,7 L30,7 L30,10 Z M17,10 L33,10 L33,40 L17,40 Z" fill="#FF0000"/></svg>`;
-            const trashIconSVG = `<svg width="29" x="0px" y="0px" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+        }
+        if (textbox.copyIcon) {
+            canvas.remove(textbox.copyIcon);
+            textbox.copyIcon = null; // Clear reference
+        }
+    
+        // Define SVG strings for trash and copy icons
+        const trashIconSVG = `<svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g filter="url(#filter0_d_5633_67674)">
             <rect x="2.70312" y="2.37207" width="23.9674" height="23.9674" rx="11.9837" fill="white" shape-rendering="crispEdges"/>
             <path d="M19.1807 11.3502C17.5179 11.1855 15.8452 11.1006 14.1775 11.1006C13.1888 11.1006 12.2001 11.1505 11.2115 11.2504L10.1929 11.3502" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
@@ -850,73 +939,67 @@ console.log(123)
             <path d="M13.853 16.6035H15.5158" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
             <path d="M13.4385 14.6055H15.9351" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
             </g>
-            </svg>
-            `;
-            
-            fabric.loadSVGFromString(trashIconSVG, function (objects, options) {
-                const trashIcon = fabric.util.groupSVGElements(objects, options);
-                trashIcon.set({
-                    left: textbox.left + textbox.width * textbox.scaleX - 20,
-                    top: textbox.top - 20,
-                    selectable: false,
-                    evented: true,
-                    hasControls: false,
-                    visible: true, // Initially hidden
-                    className: 'trash-icon',
-                });
-                textbox.trashIcon = trashIcon;
-
-
-                // Ensure the copyIcon is on top
-                canvas.bringToFront(trashIcon);
-                textbox.trashIcon.on('mousedown', function () {
-                    console.log('deleted icon');
-                    deleteTextbox(textbox);
-                });
-            })
-            // console.log('Updated Trash Icon Position:', textbox.trashIcon.left, textbox.trashIcon.top);
-        }
-
-        if (textbox.copyIcon) {
-            canvas.remove(textbox.copyIcon);
-            textbox.copyIcon = null; // Clear reference
-        }
-
-
-        // const copyIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 50 50"><path d="M5,5 L30,5 L30,30 L5,30 Z M35,5 L45,5 L45,35 L35,35 L35,5 Z" fill="#0000FF"/></svg>`;
-        const copyIconSVG = `<svg width="29" x="0px" y="0px" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+            </svg>`;
+    
+        const copyIconSVG = `<svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g filter="url(#filter0_d_5633_67676)">
             <rect x="2.64893" y="2.37207" width="23.9674" height="23.9674" rx="11.9837" fill="white" shape-rendering="crispEdges"/>
             <path fill-rule="evenodd" clip-rule="evenodd" d="M17.6283 16.3538V10.3619C17.6283 9.81039 17.1812 9.36328 16.6297 9.36328H10.6378C10.0863 9.36328 9.63916 9.81039 9.63916 10.3619V16.3538C9.63916 16.9053 10.0863 17.3524 10.6378 17.3524H16.6297C17.1812 17.3524 17.6283 16.9053 17.6283 16.3538ZM10.6379 10.362H16.6298V16.3539H10.6379V10.362ZM18.6271 17.3525V11.3607C19.1786 11.3607 19.6257 11.8078 19.6257 12.3593V17.3525C19.6257 18.4556 18.7315 19.3498 17.6284 19.3498H12.6352C12.0837 19.3498 11.6366 18.9027 11.6366 18.3512H17.6284C18.1799 18.3512 18.6271 17.9041 18.6271 17.3525Z" fill="#0F172A"/>
             </g>
             </svg>`;
-        
+    
+        // Load trash icon from SVG string and position
+        fabric.loadSVGFromString(trashIconSVG, function (objects, options) {
+            const trashIcon = fabric.util.groupSVGElements(objects, options);
+            trashIcon.set({
+                left: textbox.left + textbox.width * textbox.scaleX - 20,
+                top: textbox.top - 20,
+                selectable: false,
+                evented: true,
+                hasControls: false,
+            });
+            textbox.trashIcon = trashIcon;
+    
+            // Attach delete functionality to trash icon
+            trashIcon.on('mousedown', function () {
+                console.log('Trash icon clicked! Deleting textbox.');
+                deleteTextbox(textbox);
+            });
+    
+            // Add trash icon to canvas
+            canvas.add(trashIcon);
+            canvas.bringToFront(trashIcon);
+        });
+    
+        // Load copy icon from SVG string and position
         fabric.loadSVGFromString(copyIconSVG, function (objects, options) {
-            let copyIcon = fabric.util.groupSVGElements(objects, options);
+            const copyIcon = fabric.util.groupSVGElements(objects, options);
             copyIcon.set({
                 left: textbox.left - 25,
                 top: textbox.top - 20,
                 selectable: false,
                 evented: true,
                 hasControls: false,
-                visible: true, // Initially hidden
-                className: 'copy-icon',
             });
-            // Add the copyIcon to the canvas
-            textbox.copyIcon = copyIcon
-
-            // Ensure the copyIcon is on top
-            canvas.bringToFront(copyIcon);
-
-            // Handle copy icon click
-            textbox.copyIcon.on('mousedown', function () {
-                console.log('Copy icon clicked1');
+            textbox.copyIcon = copyIcon;
+    
+            // Attach clone functionality to copy icon
+            copyIcon.on('mousedown', function () {
+                console.log('Copy icon clicked!');
                 cloneTextbox(textbox);
             });
-        })
-
-        canvas.renderAll(); // Re-render the canvas to apply the new positions
+    
+            // Add copy icon to canvas
+            canvas.add(copyIcon);
+            canvas.bringToFront(copyIcon);
+        });
+    
+        // Ensure textbox and icons stay visible
+        canvas.bringToFront(textbox);
+        canvas.renderAll();
     }
+    
+
 
     // Function to add icons to a textbox
     
