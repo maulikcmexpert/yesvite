@@ -216,10 +216,10 @@ $(document).on('click','.edit_design_tem',function(e){
                 staticInfo.textElements.forEach(element => {
                     console.log(element);
                     let textElement = new fabric.Textbox(
-                        element.text, {  // Use Textbox for editable text
+                        element.text, {
                         left: element.left,
                         top: element.top,
-                        width: element.width || 200,  // Default width if not provided
+                        width: element.width || 200,
                         fontSize: element.fontSize,
                         fill: element.fill,
                         fontFamily: element.fontFamily,
@@ -231,13 +231,14 @@ $(document).on('click','.edit_design_tem',function(e){
                         textAlign: element.textAlign,
                         editable: true,
                         hasControls: true,
-                        borderColor: '#2DA9FC',
-                        cornerColor: '#fff',
+                        borderColor: 'blue',
+                        cornerColor: 'red',
                         cornerSize: 6,
                         transparentCorners: false,
                         isStatic: true
                     });
-
+            
+                    // Create a background rectangle with rounded corners
                     let background = new fabric.Rect({
                         width: textElement.width,
                         height: textElement.height,
@@ -247,19 +248,19 @@ $(document).on('click','.edit_design_tem',function(e){
                         stroke: 'transparent', // Optional: Add a border if desired
                         strokeWidth: 1
                     });
-
+            
                     // Group the text element and background rectangle
                     let group = new fabric.Group([textElement, background], {
                         hasControls: false // Hide controls for the group
                     });
-
+            
                     // Set the group's dimensions to match the text element
                     group.width = textElement.width;
                     group.height = textElement.height;
-
+            
                     // Add the group to the canvas
                     canvas.add(group);
-
+            
                     // Handle scaling to maintain rounded corners and font size
                     group.on('scaling', function () {
                         // Update the background size to match the scaling
@@ -267,12 +268,15 @@ $(document).on('click','.edit_design_tem',function(e){
                             width: group.width,
                             height: group.height
                         });
-
+            
                         // Calculate the updated font size based on scaling factors
                         var updatedFontSize = textElement.fontSize * (group.scaleX + group.scaleY) / 2;
                         textElement.set('fontSize', updatedFontSize); // Update the font size
                         canvas.renderAll(); // Re-render the canvas to reflect changes
                     });
+            
+                    // Add icons to the text element (if applicable)
+                    addIconsToTextbox(textElement);
                     
                     switch (element.text) {
                         case 'event_name':
@@ -342,18 +346,18 @@ $(document).on('click','.edit_design_tem',function(e){
                             }
                             break;
                     }
-                    const textWidth = textElement.calcTextWidth();
-                    textElement.set({ width: textWidth });
+                    // const textWidth = textElement.calcTextWidth();
+                    // textElement.set({ width: textWidth });
             
-                    textElement.on('scaling', function () {
-                        // Calculate the updated font size based on scaling factors
-                        var updatedFontSize = textElement.fontSize * (textElement.scaleX + textElement.scaleY) / 2;
-                        textElement.set('fontSize', updatedFontSize); // Update the font size
-                        canvas.renderAll(); // Re-render the canvas to reflect changes
-                    });
+                    // textElement.on('scaling', function () {
+                    //     // Calculate the updated font size based on scaling factors
+                    //     var updatedFontSize = textElement.fontSize * (textElement.scaleX + textElement.scaleY) / 2;
+                    //     textElement.set('fontSize', updatedFontSize); // Update the font size
+                    //     canvas.renderAll(); // Re-render the canvas to reflect changes
+                    // });
                     
-                    addIconsToTextbox(textElement);
-                    canvas.add(textElement);
+                    // addIconsToTextbox(textElement);
+                    // canvas.add(textElement);
             
                 });
             
