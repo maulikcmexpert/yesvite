@@ -972,8 +972,8 @@ $(document).on('click','.edit_design_tem',function(e){
 
 
 
-    document.getElementById('fontSize').addEventListener('change', updateSelectedTextProperties);
-    document.getElementById('fontColor').addEventListener('input', updateSelectedTextProperties);
+    // document.getElementById('fontSize').addEventListener('change', updateSelectedTextProperties);
+    // document.getElementById('fontColor').addEventListener('input', updateSelectedTextProperties);
 
 
 
@@ -988,6 +988,8 @@ $(document).on('click','.edit_design_tem',function(e){
 
 
     });
+
+
     function getTextDataFromCanvas() {
         var objects = canvas.getObjects();
 
@@ -1021,10 +1023,13 @@ $(document).on('click','.edit_design_tem',function(e){
 
         return textData;
     }
-    $(document).on('click','#addTextButton',function(){
+
+    document.getElementById('addTextButton').addEventListener('click', function () {
         alert();
         addEditableTextbox(100, 100, 'EditableText');  // You can set the initial position and default text
-    })
+    });
+
+    
 
     function addEditableTextbox(left, top, textContent) {
         var textbox = new fabric.Textbox(textContent, {
