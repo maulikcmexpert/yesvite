@@ -240,7 +240,7 @@ const asset_path = $("#asset_path").val();
 const reactionImageMap = {
     "1F60D": `${asset_path}/ic_heart_eyes.png`, // Heart Eyes
     "1F604": `${asset_path}/ic_smile.png`, // Smile
-    2764: `${asset_path}/ic_like_reaction.png`, // Heart
+    "2764}": `${asset_path}/ic_like_reaction.png`, // Heart
     "1F44D": `${asset_path}/ic_thumsup.png`, // Thumbs Up
     "1F44F": `${asset_path}/ic_clapping_hand.png`, // Clapping Hands
 };
