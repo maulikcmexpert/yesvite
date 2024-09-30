@@ -921,7 +921,6 @@
                     });
                 }
             });
-            console.log(textData);
 
             return textData;
         }
