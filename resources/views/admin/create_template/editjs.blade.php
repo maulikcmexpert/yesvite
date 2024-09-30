@@ -431,6 +431,10 @@
             };
         }
 
+        textbox.on('moving', function() {
+            updateIconPositions(textbox);
+        });
+
         function updateIconPositions(textbox) {
 
             if (textbox.trashIcon) {
@@ -476,7 +480,7 @@
 
                     // Ensure the copyIcon is on top
                     canvas.bringToFront(trashIcon);
-                    trashIcon.on('mousedown', function() {
+                    textbox.trashIcon.on('mousedown', function() {
                         console.log('deleted icon');
                         deleteTextbox(textbox);
                     });
