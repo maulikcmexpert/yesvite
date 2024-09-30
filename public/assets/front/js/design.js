@@ -1370,6 +1370,8 @@ $(document).ready(function() {
                var savedImages = response.images;
                eventData.slider_images=savedImages;
 
+               console.log(eventData);
+
             },
             error: function (xhr, status, error) {},
         });
