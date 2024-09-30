@@ -218,7 +218,7 @@ $(document).on('click','.edit_design_tem',function(e){
                         element.text, {  // Use Textbox for editable text
                         left: element.left,
                         top: element.top,
-                        width: element.width || 200,  // Default width if not provided
+                        width: element.width,  // Default width if not provided
                         fontSize: element.fontSize,
                         fill: element.fill,
                         fontFamily: element.fontFamily,
