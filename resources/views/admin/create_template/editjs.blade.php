@@ -785,9 +785,10 @@
 
 
         canvas.on('mouse:down', function(options) {
-            alert();
             if (options.target && options.target.type === 'textbox') {
                 canvas.setActiveObject(options.target);
+            } else {
+                alert();
             }
         });
 
