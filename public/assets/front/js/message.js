@@ -569,7 +569,10 @@ async function updateChat(user_id) {
         selected_user.userStatus == "offline"
             ? // ? timeago.format(messageTime)`last seen at ${timeago.format(messageTime)}`
               `last seen at ${timeago.format(messageTime)}`
-            : "Online";
+            : selected_user.userStatus == "Online" ||
+              selected_user.userStatus == "online"
+            ? "Online"
+            : "";
     $("#selected-user-lastseen").html(lastseen);
     $("#selected-user-name").html(selected_user.userName);
 
