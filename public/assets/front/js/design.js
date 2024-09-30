@@ -1184,10 +1184,16 @@ $(document).ready(function() {
         var file = event.target.files[0]; // Get the first file (the selected image)
         
         if (file) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('.photo-slider-1').attr('src', e.target.result).show();
+            };
+            reader.readAsDataURL(file);
             $(".design-sidebar").addClass('d-none')
             $(".design-sidebar_7").removeClass('d-none')
             $('#sidebar').addClass("design-sidebar_7");
             $('.close-btn').attr('data-id',"design-sidebar_7");
+
         }
     });
 });
