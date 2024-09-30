@@ -151,6 +151,8 @@ class DesignController extends Controller
 
         ]);
 
+
+
         // Find the template record by ID
         $template = TextData::find($validated['id']);
 
