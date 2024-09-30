@@ -823,7 +823,8 @@
                                 transparentCorners: false,
                                 lockUniScaling: true,
                                 scaleX: 600 / imgElement.width,
-                                scaleY: 600 / imgElement.height
+                                scaleY: 600 / imgElement.height,
+                                zindex: 1000,
                             });
 
                             canvasElement.add(imgInstance);
