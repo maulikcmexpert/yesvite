@@ -803,6 +803,7 @@
 
                         const imgElement = new Image();
                         imgElement.src = data.imagePath;
+                        imgElement.addClass = 'image-element-prakash';
 
                         userImageElement.src = data.imagePath;
                         imageWrapper.style.display = 'block';
