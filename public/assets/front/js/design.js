@@ -795,7 +795,7 @@ $(document).on('click','.edit_design_tem',function(e){
             canvas.remove(textbox.trashIcon);
             textbox.trashIcon = null; // Clear reference
             // const trashIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 50 50"><path d="M20,30 L30,30 L30,40 L20,40 Z M25,10 L20,10 L20,7 L30,7 L30,10 Z M17,10 L33,10 L33,40 L17,40 Z" fill="#FF0000"/></svg>`;
-            const trashIconSVG = `<svg width="29" x="0px" y="0px" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+            const trashIconSVG = `<svg width="20" x="0px" y="0px" height="20" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g filter="url(#filter0_d_5633_67674)">
             <rect x="2.70312" y="2.37207" width="23.9674" height="23.9674" rx="11.9837" fill="white" shape-rendering="crispEdges"/>
             <path d="M19.1807 11.3502C17.5179 11.1855 15.8452 11.1006 14.1775 11.1006C13.1888 11.1006 12.2001 11.1505 11.2115 11.2504L10.1929 11.3502" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
@@ -843,8 +843,7 @@ $(document).on('click','.edit_design_tem',function(e){
             <rect x="2.64893" y="2.37207" width="23.9674" height="23.9674" rx="11.9837" fill="white" shape-rendering="crispEdges"/>
             <path fill-rule="evenodd" clip-rule="evenodd" d="M17.6283 16.3538V10.3619C17.6283 9.81039 17.1812 9.36328 16.6297 9.36328H10.6378C10.0863 9.36328 9.63916 9.81039 9.63916 10.3619V16.3538C9.63916 16.9053 10.0863 17.3524 10.6378 17.3524H16.6297C17.1812 17.3524 17.6283 16.9053 17.6283 16.3538ZM10.6379 10.362H16.6298V16.3539H10.6379V10.362ZM18.6271 17.3525V11.3607C19.1786 11.3607 19.6257 11.8078 19.6257 12.3593V17.3525C19.6257 18.4556 18.7315 19.3498 17.6284 19.3498H12.6352C12.0837 19.3498 11.6366 18.9027 11.6366 18.3512H17.6284C18.1799 18.3512 18.6271 17.9041 18.6271 17.3525Z" fill="#0F172A"/>
             </g>
-            </svg>
-            `;
+            </svg>`;
         
         fabric.loadSVGFromString(copyIconSVG, function (objects, options) {
             let copyIcon = fabric.util.groupSVGElements(objects, options);
@@ -869,9 +868,7 @@ $(document).on('click','.edit_design_tem',function(e){
                 cloneTextbox(textbox);
             });
         })
-        // console.log('Updated Copy Icon Position:', textbox.copyIcon.left, textbox.copyIcon.top);
-
-
+        
         canvas.renderAll(); // Re-render the canvas to apply the new positions
     }
 
