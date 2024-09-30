@@ -4279,12 +4279,13 @@ $(document).on("click", ".next_guest_step", function () {
     $("#loader").show();
     $(this).prop("disabled", true);
     $('.btn-close').prop("disabled", true);
+    var textData = getTextDataFromCanvas();
+    console.log(textData);
     save_image_design(downloadImage);
     $(".main-content-wrp").addClass("blurred");
 });
 
 function save_image_design(downloadImage){
-    var textData = getTextDataFromCanvas();
     domtoimage
         .toBlob(downloadImage)
         .then(function (blob) {
