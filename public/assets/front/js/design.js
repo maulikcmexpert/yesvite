@@ -837,7 +837,6 @@ $(document).on('click','.edit_design_tem',function(e){
             isStatic: true,
             hasControls: true,
             hasBorders: true,
-            lockScalingFlip: true
         });
 
         canvas.add(clonedTextbox);
