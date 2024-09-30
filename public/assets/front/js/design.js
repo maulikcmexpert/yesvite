@@ -308,39 +308,13 @@ $(document).on('click','.edit_design_tem',function(e){
                     const textWidth = textElement.calcTextWidth();
                     textElement.set({ width: textWidth });
             
-                    // textElement.on('scaling', function () {
-                    //     // Calculate the updated font size based on scaling factors
-                    //     var updatedFontSize = textElement.fontSize * (textElement.scaleX + textElement.scaleY) / 2;
-                    //     textElement.set('fontSize', updatedFontSize); // Update the font size
-                    //     canvas.renderAll(); // Re-render the canvas to reflect changes
-                    // });
-                    let rect = new fabric.Rect({
-                        left: element.left,
-                        top: element.top,
-                        rx: 10,  // Border radius X
-                        ry: 10,  // Border radius Y
-                        width: textWidth + 20, // Add padding to the rectangle width
-                        height: textElement.height + 20, // Add padding to the rectangle height
-                        fill: 'transparent', // Can set background color here
-                        stroke: 'blue', // Border color
-                        strokeWidth: 2
-                    });
-            
-                    // Create a group with the rectangle and the text element
-                    let group = new fabric.Group([rect, textElement], {
-                        left: element.left,
-                        top: element.top,
-                        hasControls: true,
-                        lockUniScaling: true
-                    });
-            
-                    // Attach scaling event to text for font size adjustment
                     textElement.on('scaling', function () {
+                        // Calculate the updated font size based on scaling factors
                         var updatedFontSize = textElement.fontSize * (textElement.scaleX + textElement.scaleY) / 2;
-                        textElement.set('fontSize', updatedFontSize); 
-                        canvas.renderAll(); 
+                        textElement.set('fontSize', updatedFontSize); // Update the font size
+                        canvas.renderAll(); // Re-render the canvas to reflect changes
                     });
-            
+                    
                     addIconsToTextbox(textElement);
                     canvas.add(textElement);
             
