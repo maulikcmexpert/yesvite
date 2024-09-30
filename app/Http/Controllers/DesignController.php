@@ -101,7 +101,6 @@ class DesignController extends Controller
         $imagePath = asset('storage/canvas' . $imageName);
         $textElements = [
             [
-
                 'shape' => $shape // Add shape information
             ],
         ];
@@ -151,6 +150,8 @@ class DesignController extends Controller
             'textElements' => 'required|array',
 
         ]);
+
+
 
         // Find the template record by ID
         $template = TextData::find($validated['id']);

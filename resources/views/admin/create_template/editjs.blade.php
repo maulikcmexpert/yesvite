@@ -921,6 +921,7 @@
                     });
                 }
             });
+            console.log(textData);
 
             return textData;
         }
@@ -971,6 +972,8 @@
             var canvasId = canvasElement.getAttribute('data-canvas-id');
             var imageName = 'image_' + Date.now() + '.png';
             console.log(canvasId);
+            console.log(textData);
+
             fetch('/saveTextData', {
                     method: 'POST',
                     headers: {
@@ -980,7 +983,6 @@
                     body: JSON.stringify({
                         id: canvasId,
                         textElements: textData,
-
                     })
                 })
                 .then(response => response.json())
@@ -1378,6 +1380,7 @@
 
         // Add event listener for the button (assuming your button has id="saveButton")
         document.getElementById('saveButton').addEventListener('click', function() {
+            // alert()
 
             saveTextDataToDatabase();
             // window.location.href = '/templates/view';
