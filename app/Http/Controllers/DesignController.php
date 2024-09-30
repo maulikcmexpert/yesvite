@@ -109,7 +109,7 @@ class DesignController extends Controller
 
         // Save the image name directly in the `filed_image` column
         TextData::where('id', $id)->update([
-            'filled_image' => $imageName,
+            'shape_image' => $imageName,
             'static_information' => json_encode($textElements), // Store the image name directly
         ]);
 
