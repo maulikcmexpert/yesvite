@@ -87,6 +87,7 @@ class DesignController extends Controller
     public function user_image(Request $request)
     {
 
+        dd($request);
         // Validate the image file (optional, uncomment if needed)
         // $request->validate([
         //     'image' => 'required|image|mimes:png,jpg,jpeg|max:2048',
