@@ -222,10 +222,12 @@ $(document).on('click','.edit_design_tem',function(e){
                         underline: element.underline,
                         linethrough: element.linethrough,
                     });
-                
-                    // Calculate the width of the text
+
                     const textWidth = textMeasurement.width;
                     console.log(`Width of '${element.text}':`, textWidth);
+                
+                    // Calculate the width of the text
+                   
                     // console.log(element);
                     let textElement = new fabric.Textbox(
                         element.text, {  // Use Textbox for editable text
@@ -254,7 +256,18 @@ $(document).on('click','.edit_design_tem',function(e){
                     switch (element.text) {
                         case 'event_name':
                             if (eventData.event_name) {
-                                textElement.set({ text: eventData.event_name });
+                                const textMeasurement = new fabric.Text(eventData.event_name, {
+                                    fontSize: element.fontSize,
+                                    fontFamily: element.fontFamily,
+                                    fontWeight: element.fontWeight,
+                                    fontStyle: element.fontStyle,
+                                    underline: element.underline,
+                                    linethrough: element.linethrough,
+                                });
+
+                                const textWidth = textMeasurement.width;
+                                console.log(`Width of '${eventData.event_name}':`, textWidth);
+                                textElement.set({ text: eventData.event_name,width });
                             } else {
                                 return;  // Skip adding the element if event_name is empty
                             }
