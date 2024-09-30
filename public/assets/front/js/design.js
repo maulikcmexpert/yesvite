@@ -1301,8 +1301,8 @@ console.log(123)
 
     document.querySelector('[data-command="undo"]').addEventListener('click', undo);
     document.querySelector('[data-command="redo"]').addEventListener('click', redo);
-    
-    $(document).on("click", ".next_guest_step", function () {
+    document.getElementsByClassName('next_guest_step').addEventListener('click', function () {
+    // $(document).on("click", ".next_guest_step", function () {
         var downloadImage = document.getElementById("imageEditor1");
         $("#loader").show();
         $(this).prop("disabled", true);
