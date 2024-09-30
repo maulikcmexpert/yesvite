@@ -130,9 +130,10 @@ class TemplateController extends Controller
             // Create a new TextData entry and save the uploaded image filename
             $textData = TextData::create([
                 'image' => $imageName,
-                'filled_image' => $filledImage // Save the uploaded image filename
+                // Save the uploaded image filename
             ]);
             // $template_id = $textData->id;
+            $textData->filled_image = $filledImage;
             $textData->event_design_category_id = $request->event_design_category_id;
             $textData->event_design_sub_category_id = $request->event_design_sub_category_id;
             $textData->save();
