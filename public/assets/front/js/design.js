@@ -889,8 +889,8 @@ $(document).on('click','.edit_design_tem',function(e){
 
 
 
-    document.getElementById('fontSize').addEventListener('change', updateSelectedTextProperties);
-    document.getElementById('fontColor').addEventListener('input', updateSelectedTextProperties);
+    // document.getElementById('fontSize').addEventListener('change', updateSelectedTextProperties);
+    // document.getElementById('fontColor').addEventListener('input', updateSelectedTextProperties);
 
     function updateSelectedTextProperties() {
         var fontSize = parseInt(document.getElementById('fontSize').value, 10);
