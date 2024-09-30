@@ -4869,7 +4869,7 @@ $(document).on("click","#design_tip_bar_close", function (e) {
 
 $(document).on("click","#edit_design_tip_bar_close", function (e) {
     e.preventDefault();
-    $('#design_tip_bar').remove();
+    $('#edit_design_tip_bar').remove();
     ajax_tip_close("edit_desgin_tip");
 });
 

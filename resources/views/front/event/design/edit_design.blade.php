@@ -769,7 +769,7 @@
             </div>
 
             @if(!session('edit_design_closed'))
-            <div class="uploaded-images-wrp">
+            <div class="uploaded-images-wrp" id="edit_design_tip_bar">
                 <div class="uploaded-images-warning">
                     <span>
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
