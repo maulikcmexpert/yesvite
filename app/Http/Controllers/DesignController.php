@@ -94,7 +94,8 @@ class DesignController extends Controller
 
         // Get the file and id from the request
         $file = $request->file('image');
-        dd($file);
+        print_r($file);
+        exit;
         $id = $request->id;
         $shape = $request->shape;
         $imageName = 'user_image_' . time() . '.' . $file->getClientOriginalExtension(); // Assuming PNG format
