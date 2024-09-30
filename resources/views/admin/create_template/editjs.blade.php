@@ -378,6 +378,7 @@
         }
 
         function addDraggableText(left, top, textContent) {
+            alert()
             var text = new fabric.Textbox(textContent, {
                 left: left,
                 top: top,
