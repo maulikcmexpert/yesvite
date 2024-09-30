@@ -1093,5 +1093,11 @@
             $('.close-btn').attr('data-id', "design-sidebar_" + designId);
         }
     })
+
+    $(document).on("click", ".close-btn", function() {
+        toggleSidebar();
+        var id = $(this).data('id');
+        $('#sidebar').removeClass(id);
+    })
     //  =========================
 </script>
