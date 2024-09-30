@@ -35,7 +35,7 @@ WebFontConfig = {
         'Archer-Book','Archer-BookItalic','Archer-ExtraLight','Archer-Hairline','Bebas-Regular','BookAntiqua','Bungee-Regular',
         'CandyCaneUnregistered','CarbonBl-Regular','CarmenSans-ExtraBold','CarmenSans-Regular','ChristmasCookies'
       ],
-      urls: ['{{ asset("assets/event/css/stylesheet.css") }}']
+      urls: ['./../../event/css/stylesheet.css']
     },loading: function() {
         console.log('loading');
       },
