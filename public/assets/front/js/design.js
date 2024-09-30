@@ -322,12 +322,16 @@ $(document).on('click','.edit_design_tem',function(e){
                     }
                     const textWidth = textElement.calcTextWidth();
                     textElement.set({ width: textWidth });
-            
+                    
                     textElement.on('scaling', function () {
-                        // Calculate the updated font size based on scaling factors
-                        var updatedFontSize = textElement.fontSize * (textElement.scaleX + textElement.scaleY) / 2;
-                        textElement.set('fontSize', updatedFontSize); // Update the font size
-                        canvas.renderAll(); // Re-render the canvas to reflect changes
+                        var avgScale = (textElement.scaleX + textElement.scaleY) / 2;
+                        var newFontSize = textElement.fontSize * avgScale;
+                        textElement.set({
+                            fontSize: newFontSize,
+                            scaleX: 1,  // Reset scaleX to 1 after updating font size
+                            scaleY: 1   // Reset scaleY to 1 after updating font size
+                        });
+                        canvas.renderAll();
                     });
                     
                     addIconsToTextbox(textElement);
