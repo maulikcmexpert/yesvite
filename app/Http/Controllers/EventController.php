@@ -958,7 +958,7 @@ class EventController extends Controller
 
     public function saveTempDesign(Request $request)
     {
-
+        dd($request);
         if ($request->hasFile('image')) {
             $file = $request->file('image');
 

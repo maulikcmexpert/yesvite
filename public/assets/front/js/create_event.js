@@ -4284,6 +4284,7 @@ $(document).on("click", ".next_guest_step", function () {
 });
 
 function save_image_design(downloadImage){
+    var textData = getTextDataFromCanvas();
     domtoimage
         .toBlob(downloadImage)
         .then(function (blob) {
@@ -4297,7 +4298,11 @@ function save_image_design(downloadImage){
                 },
                 url: base_url + "event/store_temp_design",
                 type: "POST",
-                data: formData,
+                data: {
+                    formData:formData,
+                    temp_id:temp_id,
+                    textData:textData,
+                },
                 processData: false,
                 contentType: false,
                 success: function (response) {
