@@ -2019,26 +2019,21 @@ function createMessageElement(key, messageData, isGroup) {
         // daychange = "<h5 class='day-line'><span>" + chatSmallDay +" "+ msgDate + "</span></h5>";
     }
     formattedDate[msgDate] = "1";
-    const time = document.getElementsByClassName("time");
-    $(".time").each(async function (index) {
-        if (messageRcvTime == $(this).text()) {
-            $(this).text("");
-        }
-    });
+    const time = document.getElementsByClassName(`time_${messageRcvTime}`);
+    $(time).val("");
+    // $(".time").each(async function (index) {
+    //     if (messageRcvTime == $(this).text()) {
+    //         $(this).text("");
+    //     }
+    // });
+
     return `<div>
     ${daychange}
         <li class="${
             isSender ? "receiver" : "sender"
         }" id="message-${key}" >        
             ${replySection == "" ? dataWithMedia : replySection}        
-            <span class="time">${new Date(
-                messageData.timeStamp
-            ).toLocaleTimeString([], {
-                hour: "2-digit",
-                minute: "2-digit",
-                hour12: true,
-            })}
-            </span>            
+            <span class="time time_${messageRcvTime}">${messageRcvTime}</span>            
         </li>
     </div>
     `;
