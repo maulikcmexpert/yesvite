@@ -1491,11 +1491,24 @@ class EventController extends Controller
     public function saveSliderImg(Request $request)
     {
         // dd($request->imageSources);
+        $savedFiles = [];
+
         foreach ($request->imageSources as $imageSource) {
-                $file = $imageSource->file('image');
-                dd($file);
+            if (!empty($imageSource)) {
+                list($type, $data) = explode(';', $imageSource);
+                list(, $data) = explode(',', $data);
+    
+                $imageData = base64_decode($data);
+    
+                $fileName = time() . '-' . uniqid() . '.jpg'; // Adjust extension based on the image type
+    
+                $path = public_path('storage/event_design_template/') . $fileName;;
+                file_put_contents($path, $imageData);
+                $savedFiles[] = $fileName;
+            }
         }
 
+        dd($fileName);
         // if ($request->hasFile('image')) {
 
         //     $fileName = time() . '-' . $file->getClientOriginalName();
