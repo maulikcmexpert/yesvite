@@ -440,28 +440,36 @@
             } // Clear reference
             // const trashIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 50 50"><path d="M20,30 L30,30 L30,40 L20,40 Z M25,10 L20,10 L20,7 L30,7 L30,10 Z M17,10 L33,10 L33,40 L17,40 Z" fill="#FF0000"/></svg>`;
             const trashIconSVG = `<svg width="29" x="0px" y="0px" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <g filter="url(#filter0_d_5633_67674)">
-                <rect x="2.70312" y="2.37207" width="23.9674" height="23.9674" rx="11.9837" fill="white" shape-rendering="crispEdges"/>
-                <path d="M19.1807 11.3502C17.5179 11.1855 15.8452 11.1006 14.1775 11.1006C13.1888 11.1006 12.2001 11.1505 11.2115 11.2504L10.1929 11.3502" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M12.939 10.8463L13.0488 10.1922C13.1287 9.7178 13.1886 9.36328 14.0325 9.36328H15.3407C16.1846 9.36328 16.2495 9.73777 16.3244 10.1971L16.4342 10.8463" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M18.1073 12.9277L17.7827 17.9559C17.7278 18.7398 17.6829 19.349 16.2898 19.349H13.0841C11.691 19.349 11.6461 18.7398 11.5912 17.9559L11.2666 12.9277" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M13.853 16.6035H15.5158" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M13.4385 14.6055H15.9351" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-                </g>
-                <defs>
-                <filter id="filter0_d_5633_67674" x="0.705839" y="0.374784" width="27.9619" height="27.9623" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-                <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-                <feOffset/>
-                <feGaussianBlur stdDeviation="0.998643"/>
-                <feComposite in2="hardAlpha" operator="out"/>
-                <feColorMatrix type="matrix" values="0 0 0 0 0.309804 0 0 0 0 0.368627 0 0 0 0 0.443137 0 0 0 0.12 0"/>
-                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_5633_67674"/>
-                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_5633_67674" result="shape"/>
-                </filter>
-                </defs>
-                </svg>
-                `;
+<path d="M11.1807 3.35025C9.51792 3.18547 7.84519 3.10059 6.17746 3.10059C5.1888 3.10059 4.20014 3.15052 3.21149 3.25038L2.19287 3.35025" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M4.93896 2.84627L5.04882 2.19216C5.12871 1.7178 5.18863 1.36328 6.03248 1.36328H7.3407C8.18456 1.36328 8.24947 1.73777 8.32437 2.19715L8.43422 2.84627" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M10.1073 4.92773L9.78275 9.9559C9.72782 10.7398 9.68288 11.349 8.28978 11.349H5.08413C3.69102 11.349 3.64609 10.7398 3.59116 9.9559L3.2666 4.92773" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M5.85303 8.60352H7.51577" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M5.43848 6.60547H7.93508" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+`;
+            // const trashIconSVG = `<svg width="29" x="0px" y="0px" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+            //     <g filter="url(#filter0_d_5633_67674)">
+            //     <rect x="2.70312" y="2.37207" width="23.9674" height="23.9674" rx="11.9837" fill="white" shape-rendering="crispEdges"/>
+            //     <path d="M19.1807 11.3502C17.5179 11.1855 15.8452 11.1006 14.1775 11.1006C13.1888 11.1006 12.2001 11.1505 11.2115 11.2504L10.1929 11.3502" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
+            //     <path d="M12.939 10.8463L13.0488 10.1922C13.1287 9.7178 13.1886 9.36328 14.0325 9.36328H15.3407C16.1846 9.36328 16.2495 9.73777 16.3244 10.1971L16.4342 10.8463" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
+            //     <path d="M18.1073 12.9277L17.7827 17.9559C17.7278 18.7398 17.6829 19.349 16.2898 19.349H13.0841C11.691 19.349 11.6461 18.7398 11.5912 17.9559L11.2666 12.9277" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
+            //     <path d="M13.853 16.6035H15.5158" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
+            //     <path d="M13.4385 14.6055H15.9351" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
+            //     </g>
+            //     <defs>
+            //     <filter id="filter0_d_5633_67674" x="0.705839" y="0.374784" width="27.9619" height="27.9623" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+            //     <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+            //     <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+            //     <feOffset/>
+            //     <feGaussianBlur stdDeviation="0.998643"/>
+            //     <feComposite in2="hardAlpha" operator="out"/>
+            //     <feColorMatrix type="matrix" values="0 0 0 0 0.309804 0 0 0 0 0.368627 0 0 0 0 0.443137 0 0 0 0.12 0"/>
+            //     <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_5633_67674"/>
+            //     <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_5633_67674" result="shape"/>
+            //     </filter>
+            //     </defs>
+            //     </svg>
+            //     `;
             fabric.loadSVGFromString(trashIconSVG, function(objects, options) {
                 const trashIcon = fabric.util.groupSVGElements(objects, options);
                 trashIcon.set({
@@ -547,28 +555,37 @@
             // Trash icon SVG
             // const trashIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 50 50"><path d="M20,30 L30,30 L30,40 L20,40 Z M25,10 L20,10 L20,7 L30,7 L30,10 Z M17,10 L33,10 L33,40 L17,40 Z" fill="#FF0000"/></svg>`;
             const trashIconSVG = `<svg width="29" x="0px" y="0px" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g filter="url(#filter0_d_5633_67674)">
-            <rect x="2.70312" y="2.37207" width="23.9674" height="23.9674" rx="11.9837" fill="white" shape-rendering="crispEdges"/>
-            <path d="M19.1807 11.3502C17.5179 11.1855 15.8452 11.1006 14.1775 11.1006C13.1888 11.1006 12.2001 11.1505 11.2115 11.2504L10.1929 11.3502" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M12.939 10.8463L13.0488 10.1922C13.1287 9.7178 13.1886 9.36328 14.0325 9.36328H15.3407C16.1846 9.36328 16.2495 9.73777 16.3244 10.1971L16.4342 10.8463" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M18.1073 12.9277L17.7827 17.9559C17.7278 18.7398 17.6829 19.349 16.2898 19.349H13.0841C11.691 19.349 11.6461 18.7398 11.5912 17.9559L11.2666 12.9277" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M13.853 16.6035H15.5158" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M13.4385 14.6055H15.9351" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-            </g>
-            <defs>
-            <filter id="filter0_d_5633_67674" x="0.705839" y="0.374784" width="27.9619" height="27.9623" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-            <feOffset/>
-            <feGaussianBlur stdDeviation="0.998643"/>
-            <feComposite in2="hardAlpha" operator="out"/>
-            <feColorMatrix type="matrix" values="0 0 0 0 0.309804 0 0 0 0 0.368627 0 0 0 0 0.443137 0 0 0 0.12 0"/>
-            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_5633_67674"/>
-            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_5633_67674" result="shape"/>
-            </filter>
-            </defs>
-            </svg>
-            `;
+<path d="M11.1807 3.35025C9.51792 3.18547 7.84519 3.10059 6.17746 3.10059C5.1888 3.10059 4.20014 3.15052 3.21149 3.25038L2.19287 3.35025" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M4.93896 2.84627L5.04882 2.19216C5.12871 1.7178 5.18863 1.36328 6.03248 1.36328H7.3407C8.18456 1.36328 8.24947 1.73777 8.32437 2.19715L8.43422 2.84627" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M10.1073 4.92773L9.78275 9.9559C9.72782 10.7398 9.68288 11.349 8.28978 11.349H5.08413C3.69102 11.349 3.64609 10.7398 3.59116 9.9559L3.2666 4.92773" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M5.85303 8.60352H7.51577" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M5.43848 6.60547H7.93508" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+`;
+
+            // const trashIconSVG = `<svg width="29" x="0px" y="0px" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+            // <g filter="url(#filter0_d_5633_67674)">
+            // <rect x="2.70312" y="2.37207" width="23.9674" height="23.9674" rx="11.9837" fill="white" shape-rendering="crispEdges"/>
+            // <path d="M19.1807 11.3502C17.5179 11.1855 15.8452 11.1006 14.1775 11.1006C13.1888 11.1006 12.2001 11.1505 11.2115 11.2504L10.1929 11.3502" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
+            // <path d="M12.939 10.8463L13.0488 10.1922C13.1287 9.7178 13.1886 9.36328 14.0325 9.36328H15.3407C16.1846 9.36328 16.2495 9.73777 16.3244 10.1971L16.4342 10.8463" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
+            // <path d="M18.1073 12.9277L17.7827 17.9559C17.7278 18.7398 17.6829 19.349 16.2898 19.349H13.0841C11.691 19.349 11.6461 18.7398 11.5912 17.9559L11.2666 12.9277" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
+            // <path d="M13.853 16.6035H15.5158" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
+            // <path d="M13.4385 14.6055H15.9351" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
+            // </g>
+            // <defs>
+            // <filter id="filter0_d_5633_67674" x="0.705839" y="0.374784" width="27.9619" height="27.9623" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+            // <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+            // <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+            // <feOffset/>
+            // <feGaussianBlur stdDeviation="0.998643"/>
+            // <feComposite in2="hardAlpha" operator="out"/>
+            // <feColorMatrix type="matrix" values="0 0 0 0 0.309804 0 0 0 0 0.368627 0 0 0 0 0.443137 0 0 0 0.12 0"/>
+            // <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_5633_67674"/>
+            // <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_5633_67674" result="shape"/>
+            // </filter>
+            // </defs>
+            // </svg>
+            // `;
 
 
 
