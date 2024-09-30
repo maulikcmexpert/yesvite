@@ -1216,6 +1216,7 @@ console.log(123)
         $(this).prop("disabled", true);
         $('.btn-close').prop("disabled", true);
         eventData.textData = dbJson;
+        eventData.temp_id = temp_id;
         save_image_design(downloadImage);
         $(".main-content-wrp").addClass("blurred");
     });
@@ -1227,6 +1228,7 @@ console.log(123)
         $('.btn-close').prop("disabled", true);
         var textData = getTextDataFromCanvas();
         eventData.textData = textData;
+        eventData.temp_id = temp_id;
         save_image_design(downloadImage);
         $(".main-content-wrp").addClass("blurred");
     });
