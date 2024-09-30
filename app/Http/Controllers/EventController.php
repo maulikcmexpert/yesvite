@@ -248,7 +248,7 @@ class EventController extends Controller
         ]);
         $eventId = $event_creation->id;
         $event_creation->step = (isset($request->step) && $request->step != '') ? $request->step : 0;
-        $event_creation->static_information = (isset($request->textData))
+        // $event_creation->static_information = (isset($request->textData))
         $event_creation->save();
         if ($eventId != "") {
             $invitedUsers = $request->email_invite;
