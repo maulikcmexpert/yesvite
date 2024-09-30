@@ -74,6 +74,26 @@ class EventController extends Controller
         Session::forget('category_item');
         Session::forget('gift_registry_data');
         Session::forget('thankyou_card_data');
+        $image = Session::get('desgin');
+        $slider_image = Session::get('desgin_slider');
+
+        if (isset($image) && $image != "" || $image != NULL) {
+            if (file_exists(public_path('storage/event_design_template/') . $image)) {
+                $imagePath = public_path('storage/event_design_template/') . $image;
+                unlink($imagePath);
+            }
+        }
+        if(isset($slider_image) && !empty($slider_image)){
+            foreach ($slider_image as $key => $value) {
+                if (file_exists(public_path('storage/event_design_template/') . $value)) {
+                    $imagePath = public_path('storage/event_design_template/') . $value;
+                    unlink($imagePath);
+                }
+            }
+
+        }
+        Session::forget('desgin');
+        Session::forget('desgin_slider');
         Session::save();
         $title = 'Create Event';
         $page = 'front.create_event';
@@ -1502,11 +1522,13 @@ class EventController extends Controller
                 $path = public_path('storage/event_design_template/') . $fileName;;
                 file_put_contents($path, $imageData);
                 $savedFiles[] = $fileName;
+                
             }
         }
         if (empty($savedFiles)) {
             return response()->json(['status' => 'No valid images to save'], 400);
         }
+        session(['desgin_slider' => $savedFiles]);
         return response()->json(['success' => false, 'images' => $savedFiles]);
 
     }
