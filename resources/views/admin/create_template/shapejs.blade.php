@@ -780,7 +780,7 @@
                 const formData = new FormData();
                 formData.append('image', file);
                 var id = $('#template_id').val();
-                console.log(formData);
+                // console.log(formData);
                 // Include shape information in the form data
                 formData.append('shape', shape); // Send the current shape value
 
