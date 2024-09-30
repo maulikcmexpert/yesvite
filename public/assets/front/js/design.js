@@ -813,7 +813,7 @@ $(document).on('click','.edit_design_tem',function(e){
     }
 
     function updateIconPositions(textbox) {
-
+        console.log(textbox);
         if (textbox.trashIcon) {
             canvas.remove(textbox.trashIcon);
             textbox.trashIcon = null; // Clear reference
@@ -916,7 +916,7 @@ $(document).on('click','.edit_design_tem',function(e){
                 cloneTextbox(textbox);
             });
         })
-        console.log('Updated Copy Icon Position:', textbox.copyIcon.left, textbox.copyIcon.top);
+        // console.log('Updated Copy Icon Position:', textbox.copyIcon.left, textbox.copyIcon.top);
 
 
         canvas.renderAll(); // Re-render the canvas to apply the new positions
