@@ -2020,7 +2020,7 @@ function createMessageElement(key, messageData, isGroup) {
     }
     formattedDate[msgDate] = "1";
     const time = document.getElementsByClassName("time");
-    $(time).each(async function (index) {
+    $(".time").each(async function (index) {
         if (messageRcvTime == $(this).text()) {
             $(this).text("");
         }
