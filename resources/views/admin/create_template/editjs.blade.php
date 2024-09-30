@@ -457,14 +457,13 @@
                     trashIcon.set({
                         left: textbox.left + textbox.width * textbox.scaleX - 20,
                         top: textbox.top - 20,
-                        selectable: false,
-                        evented: true,
-                        hasControls: false,
-                        visible: true, // Initially hidden
-                        className: 'trash-icon',
-                        fill: '#FF0000', // Example: Set fill color
-                        stroke: '#000000', // Example: Set stroke color
-                        strokeWidth: 1
+                        width: 50, // Width of the background
+                        height: 50, // Height of the background
+                        fill: '#fff', // Background color
+                        rx: 25, // Half of the width/height for rounded corners
+                        ry: 25, // Half of the width/height for rounded corners
+                        selectable: false, // Prevent selection
+                        evented: false // Prevent events
                     });
                     textbox.trashIcon = trashIcon;
 
