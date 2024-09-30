@@ -465,9 +465,8 @@
                 // `;
                 fabric.loadSVGFromString(trashIconSVG, function(objects, options) {
                     const trashIcon = fabric.util.groupSVGElements(objects, options);
-
                     const background = new fabric.Rect({
-                        width: trashIcon.width + 20, // Padding (10px on each side)
+                        width: trashIcon.width + 20, // Add padding to the icon (10px each side)
                         height: trashIcon.height + 20,
                         fill: '#fff', // Background color
                         rx: 50, // Border-radius (50% for circular effect)
@@ -476,6 +475,20 @@
                         originY: 'center',
                     });
 
+                    // Center the trashIcon inside the background
+                    trashIcon.set({
+                        originX: 'center',
+                        originY: 'center',
+                    });
+
+                    const trashIconGroup = new fabric.Group([background, trashIcon], {
+                        left: textbox.left + textbox.width * textbox.scaleX - 20, // Adjust position relative to textbox
+                        top: textbox.top - 20,
+                        selectable: false,
+                        evented: true,
+                        hasControls: false,
+                        className: 'trash-icon',
+                    });
                     // trashIcon.set({
                     //     left: textbox.left + textbox.width * textbox.scaleX - 20,
                     //     top: textbox.top - 20,
@@ -485,15 +498,6 @@
                     //     visible: false, // Initially hidden
                     //     className: 'trash-icon',
                     // });
-
-                    const trashIconGroup = new fabric.Group([background, trashIcon], {
-                        left: textbox.left + textbox.width * textbox.scaleX - 20,
-                        top: textbox.top - 20,
-                        selectable: false,
-                        evented: true,
-                        hasControls: false,
-                        className: 'trash-icon',
-                    });
                     textbox.trashIcon = trashIcon;
 
 
