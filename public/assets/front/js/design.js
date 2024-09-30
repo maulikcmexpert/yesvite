@@ -353,7 +353,7 @@ $(document).on('click','.edit_design_tem',function(e){
                     // });
                     
                     addIconsToTextbox(textElement);
-                    canvas.add(textElement);
+                    // canvas.add(textElement);
             
                 });
             
