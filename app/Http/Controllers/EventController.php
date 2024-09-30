@@ -1492,7 +1492,7 @@ class EventController extends Controller
     {
         dd($request->imageSources);
         foreach ($request->imageSources as $imageSource) {
-                $file = $request->file('image');
+                $file = $imageSource->file('image');
                 dd($file);
         }
 
