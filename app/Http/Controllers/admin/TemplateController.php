@@ -107,6 +107,8 @@ class TemplateController extends Controller
 
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
+                $filled_image = $request->file('filled_image');
+
 
                 // Ensure file is not null before accessing methods
                 if ($image) {
@@ -114,19 +116,14 @@ class TemplateController extends Controller
                     // Save the image in the public/assets/images folder
                     $image->move(public_path('storage/canvas'), $imageName);
                 }
-            }
-
-
-            if ($request->hasFile('filled_image')) {
-                $filled_image = $request->file('filled_image');
-
-                // Delete the old image if it exists
                 if ($filled_image) {
                     $filledImage = time() . '.' . $image->getClientOriginalExtension();
                     // Save the image in the public/assets/images folder
                     $image->move(public_path('storage/canvas'), $filledImage);
                 }
             }
+
+
 
             // Store the template with design ID and the uploaded image's filename
 
