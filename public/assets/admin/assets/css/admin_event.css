@@ -960,17 +960,6 @@
     stroke: green !important;
 } */
 
-@media only screen and (max-width: 1599px) {
-    .image-edit-inner-img {
-        width: 620px;
-        height: 660px;
-        margin: 0px auto;
-    }
-}
-
-
-
-
 
 @media only screen and (max-width: 1199px) {
     .image-edit-inner-img {
