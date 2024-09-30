@@ -859,7 +859,7 @@
                                     stroke-linejoin="round" />
                             </svg>
                             <input type="file" class="slider_photo_2" accept="image/png, image/jpeg">
-                            <img class="photo-slider-2" src="" alt="">
+                            <img class="photo-slider-2" src="" alt="" class="d-none">
                             <button class="uploaded-img-card-edit">
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -914,7 +914,7 @@
                                     stroke-linejoin="round" />
                             </svg>
                             <input type="file" class="slider_photo_3" accept="image/png, image/jpeg">
-                            <img class="photo-slider-3" src="" alt="">
+                            <img class="photo-slider-3" src="" alt="" class="d-none">
                             <button class="uploaded-img-card-edit">
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
