@@ -7,7 +7,7 @@
 }
 
 @font-face {
-    font-family: 'AbrilFatface';
+    font-family: 'AbrilFatface-Regular';
     src: url('./../../fonts/AbrilFatface-Regular.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
@@ -15,7 +15,7 @@
 }
 
 @font-face {
-    font-family: 'AgencyFB';
+    font-family: 'AgencyFB-Bold';
     src: url('./../../fonts/AgencyFB-Bold.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
@@ -23,7 +23,7 @@
 }
 
 @font-face {
-    font-family: 'AdleryPro';
+    font-family: 'AdleryPro-Regular';
     src: url('./../../fonts/AdleryPro-Regular.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
@@ -39,7 +39,7 @@
 }
 
 @font-face {
-    font-family: 'Allura';
+    font-family: 'Allura-Regular';
     src: url('./../../fonts/Allura-Regular.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
@@ -55,7 +55,7 @@
 }
 
 @font-face {
-    font-family: 'Archer';
+    font-family: 'Archer-Bold';
     src: url('./../../fonts/Archer-Bold.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
@@ -160,7 +160,7 @@
 }
 
 @font-face {
-    font-family: 'AlexBrush';
+    font-family: 'AlexBrush-Regular';
     src: url('./../../fonts/AlexBrush-Regular.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
@@ -169,7 +169,7 @@
 
 
 @font-face {
-    font-family: 'Botanica Script';
+    font-family: 'BotanicaScript-Regular';
     src: url('./../../fonts/BotanicaScript-Regular.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
