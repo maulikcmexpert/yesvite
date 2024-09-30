@@ -746,7 +746,7 @@
                     <p>You may choose up to three photos for a slideshow that your guests can view along with their
                         online invitation.</p>
                     <button class="cmn-btn">
-                        <input type="file" accept="image/png, image/jpeg">
+                        <input type="file" id="slider_photo" accept="image/png, image/jpeg">
                         Upload Image
                     </button>
                 </div>
