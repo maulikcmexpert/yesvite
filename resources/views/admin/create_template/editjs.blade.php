@@ -60,8 +60,10 @@
                                     textAlign: element.textAlign,
                                     editable: true,
                                     hasControls: true,
-                                    borderColor: 'blue',
-                                    cornerColor: 'red',
+                                    // borderColor: 'blue',
+                                    borderColor: '#2DA9FC',
+                                    // cornerColor: 'red',
+                                    cornerColor: '#fff',
                                     cornerSize: 6,
                                     transparentCorners: false,
                                     isStatic: true
