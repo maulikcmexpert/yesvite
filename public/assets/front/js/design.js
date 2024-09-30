@@ -76,8 +76,8 @@ $(document).on("click", ".design-card", function () {
             editable: false, 
             selectable: false, 
             hasControls: false, 
-            borderColor: 'blue',
-            cornerColor: 'red',
+            borderColor: '#2DA9FC',
+            cornerColor: '#fff',
             cornerSize: 6,
             transparentCorners: false,
             isStatic: true
@@ -231,12 +231,13 @@ $(document).on('click','.edit_design_tem',function(e){
                         textAlign: element.textAlign,
                         editable: true,
                         hasControls: true,
-                        borderColor: 'blue',
-                        cornerColor: 'red',
+                        borderColor: '#2DA9FC',
+                        cornerColor: '#fff',
                         cornerSize: 6,
                         transparentCorners: false,
                         isStatic: true
                     });
+
                     switch (element.text) {
                         case 'event_name':
                             if (eventData.event_name) {
@@ -314,7 +315,7 @@ $(document).on('click','.edit_design_tem',function(e){
                         textElement.set('fontSize', updatedFontSize); // Update the font size
                         canvas.renderAll(); // Re-render the canvas to reflect changes
                     });
-            
+                    
                     addIconsToTextbox(textElement);
                     canvas.add(textElement);
             
@@ -335,16 +336,16 @@ $(document).on('click','.edit_design_tem',function(e){
                             className: 'trash-icon',
                         });
                         textbox.trashIcon = trashIcon;
-                
+            
                         // Handle trash icon click
                         trashIcon.on('mousedown', function () {
                             console.log('Trash icon clicked');
                             deleteTextbox(textbox);
                         });
-                
+            
                         canvas.add(trashIcon);
                     });
-                
+            
                     // Copy icon SVG
                     const copyIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 50 50"><path d="M5,5 L30,5 L30,30 L5,30 Z M35,5 L45,5 L45,35 L35,35 L35,5 Z" fill="#0000FF"/></svg>`;
                     fabric.loadSVGFromString(copyIconSVG, function (objects, options) {
@@ -359,16 +360,16 @@ $(document).on('click','.edit_design_tem',function(e){
                             className: 'copy-icon',
                         });
                         textbox.copyIcon = copyIcon;
-                
+            
                         // Handle copy icon click
                         copyIcon.on('mousedown', function () {
                             console.log('Copy icon clicked');
                             cloneTextbox(textbox);
                         });
-                
+            
                         canvas.add(copyIcon);
                     });
-                
+            
                     // Bind the updateIconPositions function to the moving and scaling events
                     textbox.on('moving', function () {
                         updateIconPositions(textbox);
@@ -376,7 +377,7 @@ $(document).on('click','.edit_design_tem',function(e){
                     textbox.on('scaling', function () {
                         updateIconPositions(textbox);
                     });
-                
+            
                     // Event listener to manage icon visibility when a textbox is clicked
                     textbox.on('mousedown', function () {
                         canvas.getObjects('textbox').forEach(function (tb) {
@@ -387,15 +388,16 @@ $(document).on('click','.edit_design_tem',function(e){
                         if (textbox.copyIcon) textbox.copyIcon.set('visible', true);
                         canvas.renderAll(); // Re-render the canvas
                     });
-                
+            
                     // Initially hide all icons
                     canvas.getObjects('textbox').forEach(function (tb) {
                         if (tb.trashIcon) tb.trashIcon.set('visible', false);
                         if (tb.copyIcon) tb.copyIcon.set('visible', false);
                     });
-                
+            
                     canvas.renderAll(); // Final render
                 }
+                
             } else {
                 showStaticTextElements();
             }
@@ -412,6 +414,7 @@ $(document).on('click','.edit_design_tem',function(e){
         width: 345, // Canvas width
         height: 490, // Canvas height
     });
+    const ctx = canvas.getContext('2d');
     const defaultSettings = {
         fontSize: 20,
         letterSpacing: 0,
@@ -724,13 +727,9 @@ $(document).on('click','.edit_design_tem',function(e){
     }
 
     function findTextboxCenter(textbox) {
-        // Calculate the center coordinates of the textbox
         var centerX = textbox.left + (textbox.width / 2);
         var centerY = textbox.top + (textbox.height / 2);
-
         console.log(`Center of textbox '${textbox.text}' is at (${centerX}, ${centerY})`);
-
-        // Optional: You can return or store this center value for further use
         return { x: centerX, y: centerY };
     }
 
@@ -968,14 +967,14 @@ $(document).on('click','.edit_design_tem',function(e){
             top: top,
             width: 200,
             fontSize: 20,
-         backgroundColor: 'rgba(0, 0, 0, 0)', // Set background to transparent
-
+            backgroundColor: 'rgba(0, 0, 0, 0)', // Set background to transparent
+            
             fill: '#000000',
             editable: true,
             selectable: true,
             hasControls: true,
-            borderColor: 'blue',
-            cornerColor: 'red',
+            borderColor: '#2DA9FC',
+            cornerColor: '#fff',
             cornerSize: 6,
             transparentCorners: false
         });
