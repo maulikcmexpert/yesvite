@@ -2,7 +2,7 @@
     <div class="main-content-right edit-image-main-wrp">
         <div class="edit-image-main-top">
             <div class="edit-image-main-top-icons">
-                <button id="redoButton" data-command="redo">
+                <button id="undoButton" data-command="undo">
                     <svg width="14" height="7" viewBox="0 0 14 7" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -10,7 +10,7 @@
                             fill="#0F172A" />
                     </svg>
                 </button>
-                <button id="undoButton" data-command="undo">
+                <button  id="redoButton" data-command="redo">
                     <svg width="14" height="7" viewBox="0 0 14 7" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
