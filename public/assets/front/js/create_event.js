@@ -4267,8 +4267,6 @@ var offset = 0;
 var page = '';
 
 
-
-
 function get_user(type){
     if (busy == false) {
         busy = true;
