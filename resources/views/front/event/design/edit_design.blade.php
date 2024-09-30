@@ -769,7 +769,8 @@
             </div>
 
             <div class="uploaded-images-wrp">
-                <div class="uploaded-images-warning">
+                @if(!session('edit_design_closed'))
+                <div class="uploaded-images-warning" id="edit_design_tip_bar">
                     <span>
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -785,7 +786,7 @@
                     </span>
                     <p>You may choose up to three photos for a slideshow that your guests can view along with their
                         online invitation.</p>
-                    <button>
+                    <button id="edit_design_tip_bar_close">
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <path d="M3.33398 3.33301L12.6667 12.6657" stroke="#94A3B8" stroke-width="1.5"
@@ -795,6 +796,8 @@
                         </svg>
                     </button>
                 </div>
+                @endif
+
 
                 <div class="uploaded-images-inner">
                     <div class="total-upload-img">
