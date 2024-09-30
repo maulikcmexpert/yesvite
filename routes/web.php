@@ -162,6 +162,8 @@ Route::middleware('checkUserExist')->group(function () {
     Route::post('event/get_co_host_list', [ControllersEventController::class, 'get_co_host_list']);
     Route::post('event/get_gift_registry', [ControllersEventController::class, 'get_gift_registry']);
     Route::post('event/get_thank_you_card', [ControllersEventController::class, 'get_thank_you_card']);
+    Route::post('event/save_slider_img', [ControllersEventController::class, 'saveSliderImg']);
+
 });
 
 
@@ -249,6 +251,7 @@ Route::controller(AuthController::class)->group(function () {
         Session::forget('co_host_closed');
         Session::forget('thankyou_card_closed');
         Session::forget('design_closed');
+        Session::forget('edit_design_closed');
         Session::forget('user');
         Session::forget('secondary_user');
         return redirect('login');

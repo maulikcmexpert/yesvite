@@ -907,13 +907,7 @@
     height: 100% !important;
 }
 
-.timepicker{
-    padding-left: 10px !important;
-}
 
-.timepicker::placeholder{
-    font-size: 11px !important;
-}
 
 .step_2{
     width: 100%;
@@ -1060,6 +1054,13 @@
     .new_event_detail_form .input-group.time .input-group-text {
 
         right: -5px;
+    }
+    .timepicker{
+        padding-left: 10px !important;
+    }
+    
+    .timepicker::placeholder{
+        font-size: 11px !important;
     }
 }
 

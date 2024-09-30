@@ -558,6 +558,7 @@
     height: 100% !important;
     opacity: 0;
     padding: 0px !important;
+    cursor: pointer;
 }
 
 .upload-img-cart-extra-img{
@@ -700,6 +701,25 @@
 
     .edit-imag-main-content-wrp .choose-design-sidebar{
         right: -200%;
+    }
+
+    .design-sidebar_6.design-sidebar_7{
+        height: 70vh !important;
+    }
+
+    .design-sidebar_6{
+        height: 70vh !important;
+    }
+    .design-sidebar_7{
+        height: 70vh !important;
+    }
+
+    .design-sidebar_6 .footer-buttons .cmn-btn{
+        max-width: 100% !important;
+    }
+
+    .design-sidebar_7 .footer-buttons .cmn-btn{
+        max-width: 100% !important;
     }
 
 }

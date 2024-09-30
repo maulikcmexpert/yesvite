@@ -45,6 +45,7 @@
 
                             // Render text elements on canvas
                             staticInfo.textElements.forEach(element => {
+                                // alert();
                                 let textElement = new fabric.Textbox(element.text, { // Use Textbox for editable text
                                     left: element.left,
                                     top: element.top,
@@ -246,6 +247,73 @@
         setLetterSpacing();
         setLineHeight();
 
+        // // Initialize the color picker
+        // $('#color-picker').spectrum({
+        //     type: "flat",
+        //     color: "#000000", // Default font color
+        //     showInput: true,
+        //     allowEmpty: true, // Allows setting background to transparent
+        //     showAlpha: true, // Allows transparency adjustment
+        //     preferredFormat: "rgba", // Ensure it handles RGBA
+        //     change: function(color) {
+        //         if (color) {
+        //             changeColor(color.toRgbString()); // Use RGB string for color changes
+        //         } else {
+        //             changeColor('rgba(0, 0, 0, 0)'); // Handle transparency by default
+        //         }
+        //     }
+        // });
+        // // Change event for radio buttons to update the color picker
+        // $('input[name="colorType"]').on('change', function() {
+        //     updateColorPicker(); // Update color picker when radio button changes
+        // });
+        // // Update color picker when object is selected
+        // canvas.on('selection:created', function() {
+        //     updateColorPicker(); // Update color picker when a new object is selected
+        // });
+        // canvas.on('selection:updated', function() {
+        //     updateColorPicker(); // Update color picker when selection is updated
+        // });
+        // // Function to change font or background color
+        // function changeColor(selectedColor) {
+        //     const selectedColorType = document.querySelector('input[name="colorType"]:checked').value;
+        //     const activeObject = canvas.getActiveObject();
+
+        //     if (!activeObject) {
+        //         // alert('No object selected');
+        //         return;
+        //     }
+
+        //     if (activeObject.type === 'textbox') {
+        //         if (selectedColorType === 'font') {
+        //             activeObject.set('fill', selectedColor); // Change font color
+        //         } else if (selectedColorType === 'background') {
+        //             activeObject.set('backgroundColor', selectedColor); // Change background color
+        //         }
+        //         canvas.renderAll(); // Re-render the canvas after color change
+        //     }
+        // }
+        // // Function to update the color picker based on the selected object's current font or background color
+        // function updateColorPicker() {
+        //     const activeObject = canvas.getActiveObject();
+        //     const selectedColorType = document.querySelector('input[name="colorType"]:checked').value;
+
+        //     if (activeObject && activeObject.type === 'textbox') {
+        //         if (selectedColorType === 'font') {
+        //             $('#color-picker').spectrum('set', activeObject.fill || '#000000'); // Set font color in picker
+        //         } else if (selectedColorType === 'background') {
+        //             const bgColor = activeObject.backgroundColor || 'rgba(0, 0, 0, 0)'; // Default to transparent background
+        //             $('#color-picker').spectrum('set', bgColor); // Set current background color in picker
+        //         }
+        //     }
+        // }
+        // // Update the color picker when the color type changes (font or background)
+        // $('input[name="colorType"]').change(function() {
+        //     const activeObject = canvas.getActiveObject();
+        //     if (activeObject && activeObject.type === 'textbox') {
+        //         updateColorPicker(); // Update picker when the selected color type changes
+        //     }
+        // });
         // Initialize the color picker
         $('#color-picker').spectrum({
             type: "flat",
@@ -256,66 +324,92 @@
             preferredFormat: "rgba", // Ensure it handles RGBA
             change: function(color) {
                 if (color) {
+                    console.log("color")
                     changeColor(color.toRgbString()); // Use RGB string for color changes
                 } else {
+                    console.log("rgba")
+
                     changeColor('rgba(0, 0, 0, 0)'); // Handle transparency by default
                 }
             }
-        });
-
-        // Change event for radio buttons to update the color picker
-        $('input[name="colorType"]').on('change', function() {
-            updateColorPicker(); // Update color picker when radio button changes
-        });
-
-        // Update color picker when object is selected
-        canvas.on('selection:created', function() {
-            updateColorPicker(); // Update color picker when a new object is selected
-        });
-
-        canvas.on('selection:updated', function() {
-            updateColorPicker(); // Update color picker when selection is updated
         });
 
         // Function to change font or background color
         function changeColor(selectedColor) {
             const selectedColorType = document.querySelector('input[name="colorType"]:checked').value;
             const activeObject = canvas.getActiveObject();
+            console.log("before update")
 
+            console.log(activeObject)
             if (!activeObject) {
-                // alert('No object selected');
+                console.log('No object selected');
                 return;
             }
 
-            if (activeObject.type === 'textbox') {
-                if (selectedColorType === 'font') {
+            if (activeObject.type == 'textbox') {
+                console.log(activeObject.type);
+                console.log(activeObject.fill);
+                if (selectedColorType == 'font') {
+                    console.log("update fill")
+                    console.log(activeObject.fill);
+                    console.log(activeObject.backgroundColor);
                     activeObject.set('fill', selectedColor); // Change font color
-                } else if (selectedColorType === 'background') {
+                    console.log(activeObject.fill);
+                    console.log(activeObject.backgroundColor);
+                } else if (selectedColorType == 'background') {
+                    console.log("update background")
                     activeObject.set('backgroundColor', selectedColor); // Change background color
                 }
                 canvas.renderAll(); // Re-render the canvas after color change
             }
+
+            const activeObjec = canvas.getActiveObject();
+            console.log("ater update")
+
+            console.log(activeObjec)
         }
 
-        // Function to update the color picker based on the selected object's current font or background color
+        // Update color picker based on the selected object's current font or background color
         function updateColorPicker() {
             const activeObject = canvas.getActiveObject();
             const selectedColorType = document.querySelector('input[name="colorType"]:checked').value;
 
             if (activeObject && activeObject.type === 'textbox') {
                 if (selectedColorType === 'font') {
+
                     $('#color-picker').spectrum('set', activeObject.fill || '#000000'); // Set font color in picker
                 } else if (selectedColorType === 'background') {
                     const bgColor = activeObject.backgroundColor || 'rgba(0, 0, 0, 0)'; // Default to transparent background
                     $('#color-picker').spectrum('set', bgColor); // Set current background color in picker
                 }
+
+
+                console.log(selectedColorType);
+                console.log(activeObject.type);
+                console.log(activeObject.fill);
+                console.log(activeObject.backgroundColor);
+
+                const activeObjec = canvas.getActiveObject();
+
+                console.log(activeObjec.fill);
+                console.log(activeObjec.backgroundColor);
+
             }
+
+
         }
 
-        // Update the color picker when the color type changes (font or background)
-        $('input[name="colorType"]').change(function() {
+        // Update color picker when object selection changes
+        canvas.on('selection:created', updateColorPicker);
+        canvas.on('selection:updated', updateColorPicker);
+
+        // Update the color picker when the color type (font/background) changes
+        $('.colorTypeInp').click(function(e) {
+            e.stopPropagation()
+            console.log(123)
             const activeObject = canvas.getActiveObject();
             if (activeObject && activeObject.type === 'textbox') {
+                console.log(activeObject.type);
                 updateColorPicker(); // Update picker when the selected color type changes
             }
         });
@@ -549,7 +643,6 @@
 
         // Function to add icons to a textbox
         function addIconsToTextbox(textbox) {
-            alert();
             // Trash icon SVG
             // const trashIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M135.2 17.7L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-7.2-14.3C307.4 6.8 296.3 0 284.2 0L163.8 0c-12.1 0-23.2 6.8-28.6 17.7zM416 128L32 128 53.2 467c1.6 25.3 22.6 45 47.9 45l245.8 0c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>`;
 
@@ -787,6 +880,12 @@
         canvas.on('mouse:down', function(options) {
             if (options.target && options.target.type === 'textbox') {
                 canvas.setActiveObject(options.target);
+            } else {
+                // alert();
+                canvas.getObjects('textbox').forEach(function(tb) {
+                    if (tb.trashIcon) tb.trashIcon.set('visible', false);
+                    if (tb.copyIcon) tb.copyIcon.set('visible', false);
+                });
             }
         });
 
@@ -900,64 +999,273 @@
 
 
 
+        document.getElementById('antaresiaButton').addEventListener('click', function() {
+            console.log("fontname")
+
+            loadAndUse("Botanica Script");
+        });
+        document.getElementById('JosefinSansButton').addEventListener('click', function() {
+            console.log("fontname");
+            loadAndUse("JosefinSans");
 
 
+        });
+        document.getElementById('AbrilFatfaceButton').addEventListener('click', function() {
+            console.log("fontname")
 
-        function executeCommand(command) {
-            var activeObject = canvas.getActiveObject();
-            if (!activeObject) {
-                alert('No object selected');
-                return;
-            }
-            if (activeObject && activeObject.type === 'textbox') {
+            loadAndUse("AbrilFatface");
 
-                const commands = {
-                    bold: () => activeObject.set('fontWeight', activeObject.fontWeight === 'bold' ? '' : 'bold'),
-                    italic: () => activeObject.set('fontStyle', activeObject.fontStyle === 'italic' ? '' : 'italic'),
-                    underline: () => {
-                        activeObject.set('underline', !activeObject.underline);
-                        // Update line height after toggling underline
-                        const currentLineHeight = activeObject.lineHeight || 1.2; // Default line height
-                        activeObject.set('lineHeight', currentLineHeight); // Reapply the line height
-                    },
-                    setLineHeight: (value) => {
-                        activeObject.set('lineHeight', value);
-                    },
-                    strikeThrough: () => activeObject.set('linethrough', !activeObject.linethrough),
-                    removeFormat: () => {
-                        activeObject.set({
-                            fontWeight: '',
-                            fontStyle: '',
-                            underline: false,
-                            linethrough: false,
-                            fontFamily: 'Arial'
-                        });
-                    },
-                    fontName: () => {
-                        var selectedFont = document.querySelector('[data-command="fontName"]').value;
-                        activeObject.set('fontFamily', selectedFont);
-                    },
 
-                    justifyLeft: () => activeObject.set('textAlign', 'left'),
-                    justifyCenter: () => activeObject.set('textAlign', 'center'),
-                    justifyRight: () => activeObject.set('textAlign', 'right'),
-                    justifyFull: () => activeObject.set('textAlign', 'justify'),
+        });
+        document.getElementById('AgencyFBButton').addEventListener('click', function() {
+            console.log("fontname")
 
-                    uppercase: () => activeObject.set('text', activeObject.text.toUpperCase()),
-                    lowercase: () => activeObject.set('text', activeObject.text.toLowerCase()),
-                    capitalize: () => {
-                        const capitalizedText = activeObject.text.replace(/\b\w/g, char => char.toUpperCase());
-                        activeObject.set('text', capitalizedText);
-                    }
+            loadAndUse("AgencyFB");
 
-                };
-                if (commands[command]) {
-                    commands[command]();
-                    canvas.renderAll();
-                    addToUndoStack(); // Save state after executing the command
+
+        });
+        document.getElementById('AdleryProButton').addEventListener('click', function() {
+            console.log("fontname")
+
+            loadAndUse("AdleryPro");
+
+
+        });
+        document.getElementById('AlexBrushButton').addEventListener('click', function() {
+            console.log("fontname")
+
+            loadAndUse("AlexBrush");
+
+
+        });
+        document.getElementById('AlluraButton').addEventListener('click', function() {
+            console.log("fontname")
+
+            loadAndUse("Allura");
+
+
+        });
+        document.getElementById('BotanicaScript-RegularButton').addEventListener('click', function() {
+            console.log("fontname")
+
+            loadAndUse("BotanicaScript-Regular");
+
+
+        });
+        document.getElementById('ArcherButton').addEventListener('click', function() {
+            console.log("fontname")
+
+            loadAndUse("Archer");
+
+
+        });
+        document.getElementById('Archer-BookButton').addEventListener('click', function() {
+            console.log("fontname")
+
+            loadAndUse("Archer-Book");
+
+
+        });
+        document.getElementById('Archer-BookButton').addEventListener('click', function() {
+            console.log("fontname")
+
+            loadAndUse("Archer-Book");
+
+
+        });
+        document.getElementById('Archer-BookItalicButton').addEventListener('click', function() {
+            console.log("fontname")
+
+            loadAndUse("Archer-BookItalic");
+
+
+        });
+        document.getElementById('Archer-ExtraLightButton').addEventListener('click', function() {
+            console.log("fontname")
+
+            loadAndUse("Archer-ExtraLight");
+
+
+        });
+        document.getElementById('Archer-HairlineButton').addEventListener('click', function() {
+            console.log("fontname")
+
+            loadAndUse("Archer-Hairline");
+
+
+        });
+        document.getElementById('Bebas-RegularButton').addEventListener('click', function() {
+            console.log("fontname")
+
+            loadAndUse("Bebas-Regular");
+
+
+        });
+        document.getElementById('BookAntiquaButton').addEventListener('click', function() {
+            console.log("fontname")
+
+            loadAndUse("BookAntiqua");
+
+
+        });
+        document.getElementById('CandyCaneUnregisteredButton').addEventListener('click', function() {
+            console.log("fontname")
+
+            loadAndUse("CandyCaneUnregistered");
+
+
+        });
+        document.getElementById('CarbonBl-RegularButton').addEventListener('click', function() {
+            console.log("fontname")
+
+            loadAndUse("CarbonBl-Regular");
+
+
+        });
+        document.getElementById('CarmenSans-ExtraBoldButton').addEventListener('click', function() {
+            console.log("fontname")
+
+            loadAndUse("CarmenSans-ExtraBold");
+
+
+        });
+        document.getElementById('CarmenSans-RegularButton').addEventListener('click', function() {
+            console.log("fontname")
+
+            loadAndUse("CarmenSans-Regular");
+
+
+        });
+        document.getElementById('ChristmasCookiesButton').addEventListener('click', function() {
+            console.log("fontname")
+
+            loadAndUse("ChristmasCookies");
+
+
+        });
+        //     textElement.style.fontFamily = 'Allura'; // Change to Allura font
+        // });
+        function loadAndUse(font) {
+            var myfont = new FontFaceObserver(font);
+            myfont.load().then(function() {
+                // When font is loaded, use it.
+                var activeObject = canvas.getActiveObject();
+                if (activeObject) {
+                    activeObject.set("fontFamily", font);
+                    canvas.requestRenderAll();
+                } else {
+                    alert('No object selected');
                 }
+            }).catch(function(e) {
+                console.log(e);
+                alert('Font loading failed: ' + font);
+            });
+        }
+
+        function executeCommand(command, font = null) {
+            var activeObject = canvas.getActiveObject();
+
+            if (!activeObject || activeObject.type !== 'textbox') {
+                return; // No object or not a textbox, so do nothing
+            }
+
+            // Commands object to handle various styles and operations
+            const commands = {
+                bold: () => activeObject.set('fontWeight', activeObject.fontWeight === 'bold' ? '' : 'bold'),
+                italic: () => activeObject.set('fontStyle', activeObject.fontStyle === 'italic' ? '' : 'italic'),
+                underline: () => activeObject.set('underline', !activeObject.underline),
+                setLineHeight: (value) => activeObject.set('lineHeight', value),
+                strikeThrough: () => activeObject.set('linethrough', !activeObject.linethrough),
+                removeFormat: () => {
+                    activeObject.set({
+                        fontWeight: '',
+                        fontStyle: '',
+                        underline: false,
+                        linethrough: false,
+                        fontFamily: 'Arial'
+                    });
+                },
+                fontName: (font) => {
+                    if (font) {
+                        loadAndUse(font);
+                    }
+                },
+                justifyLeft: () => activeObject.set('textAlign', 'left'),
+                justifyCenter: () => activeObject.set('textAlign', 'center'),
+                justifyRight: () => activeObject.set('textAlign', 'right'),
+                justifyFull: () => activeObject.set('textAlign', 'justify'),
+                uppercase: () => activeObject.set('text', activeObject.text.toUpperCase()),
+                lowercase: () => activeObject.set('text', activeObject.text.toLowerCase()),
+                capitalize: () => {
+                    const capitalizedText = activeObject.text.replace(/\b\w/g, char => char.toUpperCase());
+                    activeObject.set('text', capitalizedText);
+                }
+            };
+
+            // Execute the corresponding command
+            if (commands[command]) {
+                commands[command](font); // Pass font to fontName if needed
+                canvas.renderAll(); // Re-render canvas after change
+                addToUndoStack(); // Save state for undo/redo functionality
             }
         }
+
+
+        // function executeCommand(command) {
+        //     var activeObject = canvas.getActiveObject();
+        //     if (!activeObject) {
+        //         alert('No object selected');
+        //         return;
+        //     }
+        //     if (activeObject && activeObject.type === 'textbox') {
+
+        //         const commands = {
+        //             bold: () => activeObject.set('fontWeight', activeObject.fontWeight === 'bold' ? '' : 'bold'),
+        //             italic: () => activeObject.set('fontStyle', activeObject.fontStyle === 'italic' ? '' : 'italic'),
+        //             underline: () => {
+        //                 activeObject.set('underline', !activeObject.underline);
+        //                 // Update line height after toggling underline
+        //                 const currentLineHeight = activeObject.lineHeight || 1.2; // Default line height
+        //                 activeObject.set('lineHeight', currentLineHeight); // Reapply the line height
+        //             },
+        //             setLineHeight: (value) => {
+        //                 activeObject.set('lineHeight', value);
+        //             },
+        //             strikeThrough: () => activeObject.set('linethrough', !activeObject.linethrough),
+        //             removeFormat: () => {
+        //                 activeObject.set({
+        //                     fontWeight: '',
+        //                     fontStyle: '',
+        //                     underline: false,
+        //                     linethrough: false,
+        //                     fontFamily: 'Arial'
+        //                 });
+        //             },
+        //             fontName: () => {
+        //                 var selectedFont = document.querySelector('[data-command="fontName"]').value;
+        //                 activeObject.set('fontFamily', selectedFont);
+        //             },
+
+        //             justifyLeft: () => activeObject.set('textAlign', 'left'),
+        //             justifyCenter: () => activeObject.set('textAlign', 'center'),
+        //             justifyRight: () => activeObject.set('textAlign', 'right'),
+        //             justifyFull: () => activeObject.set('textAlign', 'justify'),
+
+        //             uppercase: () => activeObject.set('text', activeObject.text.toUpperCase()),
+        //             lowercase: () => activeObject.set('text', activeObject.text.toLowerCase()),
+        //             capitalize: () => {
+        //                 const capitalizedText = activeObject.text.replace(/\b\w/g, char => char.toUpperCase());
+        //                 activeObject.set('text', capitalizedText);
+        //             }
+
+        //         };
+        //         if (commands[command]) {
+        //             commands[command]();
+        //             canvas.renderAll();
+        //             addToUndoStack(); // Save state after executing the command
+        //         }
+        //     }
+        // }
 
         document.querySelectorAll('[data-command]').forEach(function(button) {
             button.addEventListener('click', function() {
@@ -1077,6 +1385,45 @@
 
     });
 
+    function toggleSidebar(id = null) {
+        const allSidebars = document.querySelectorAll(".sidebar");
+        const allOverlays = document.querySelectorAll(".overlay");
+        // $(".floatingfocus").removeClass("floatingfocus");
+        $("#registry_link_error").text("");
+        $(".common_error").text("");
+
+        allSidebars.forEach((sidebar) => {
+            if (sidebar.style.right === "0px") {
+                sidebar.style.right = "-200%";
+                sidebar.style.width = "0px";
+            }
+        });
+
+        allOverlays.forEach((overlay) => {
+            if (overlay.classList.contains("visible")) {
+                overlay.classList.remove("visible");
+            }
+        });
+        if (id == null) {
+            return;
+        }
+        const sidebar = document.getElementById(id);
+        const overlay = document.getElementById(id + "_overlay");
+
+        if (sidebar.style.right === "0px") {
+            sidebar.style.right = "-200%";
+            sidebar.style.width = "0px";
+            if (overlay) {
+                overlay.classList.remove("visible");
+            }
+        } else {
+            sidebar.style.right = "0px";
+            sidebar.style.width = "100%";
+            if (overlay) {
+                overlay.classList.add("visible");
+            }
+        }
+    }
 
 
     $(document).on("click", ".design-sidebar-action", function() {
@@ -1087,5 +1434,13 @@
             $('.close-btn').attr('data-id', "design-sidebar_" + designId);
         }
     })
+
+    $(document).on("click", ".close-btn", function() {
+        toggleSidebar();
+        var id = $(this).data('id');
+        $('#sidebar').removeClass(id);
+    })
+
+
     //  =========================
 </script>

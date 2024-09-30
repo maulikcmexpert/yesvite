@@ -472,13 +472,13 @@
 
             <div class="used-fonts-wrp common-font-wrp">
                 <div class="form-check">
-                    <input type="radio" name="colorType" value="font" checked class="form-check-input" id="flexRadioDefaults"/> 
+                    <input type="radio" name="colorType" value="font" checked class="form-check-input colorTypeInp" id="flexRadioDefaults"/> 
                     <label class="form-check-label" for="flexRadioDefaults">
                         Font Color
                     </label>
                 </div>
                 <div class="form-check">
-                    <input type="radio" name="colorType" value="background" class="form-check-input" id="flexRadioDefaultss"/>
+                    <input type="radio" name="colorType" value="background" class="form-check-input colorTypeInp" id="flexRadioDefaultss"/>
                     <label class="form-check-label" for="flexRadioDefaultss">
                         Background Color
                     </label>
@@ -769,7 +769,8 @@
             </div>
 
             <div class="uploaded-images-wrp">
-                <div class="uploaded-images-warning">
+                @if(!session('edit_design_closed'))
+                <div class="uploaded-images-warning" id="edit_design_tip_bar">
                     <span>
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -785,7 +786,7 @@
                     </span>
                     <p>You may choose up to three photos for a slideshow that your guests can view along with their
                         online invitation.</p>
-                    <button>
+                    <button id="edit_design_tip_bar_close">
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <path d="M3.33398 3.33301L12.6667 12.6657" stroke="#94A3B8" stroke-width="1.5"
@@ -795,6 +796,8 @@
                         </svg>
                     </button>
                 </div>
+                @endif
+
 
                 <div class="uploaded-images-inner">
                     <div class="total-upload-img">
@@ -803,8 +806,7 @@
 
                     <div class="uploaded-images-detail">
                         <div class="uploaded-img-card ">
-                            <input type="file" class="slider_photo" accept="image/png, image/jpeg">
-                            <img class="photo-slider-1" src="" alt="">
+                            <img class="photo-slider-1 slider_img" src="" alt="">
                             <button class="uploaded-img-card-edit">
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -816,8 +818,9 @@
                                         stroke="#64748B" stroke-width="1.5" stroke-miterlimit="10"
                                         stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
+                                <input type="file" class="slider_photo" accept="image/png, image/jpeg">
                             </button>
-                            <button class="uploaded-img-card-delete">
+                            <button class="uploaded-img-card-delete delete-slider-1">
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path
@@ -858,8 +861,8 @@
                                     stroke="#64748B" stroke-width="1.5" stroke-linecap="round"
                                     stroke-linejoin="round" />
                             </svg>
-                            <input type="file" class="slider_photo_2" accept="image/png, image/jpeg">
-                            <img class="photo-slider-2" src="" alt="" class="d-none">
+                            
+                            <img class="photo-slider-2 slider_img" src="" alt="" style="display: none">
                             <button class="uploaded-img-card-edit">
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -871,8 +874,10 @@
                                         stroke="#64748B" stroke-width="1.5" stroke-miterlimit="10"
                                         stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
+                            <input type="file" class="slider_photo_2 " accept="image/png, image/jpeg">
+
                             </button>
-                            <button class="uploaded-img-card-delete">
+                            <button class="uploaded-img-card-delete delete-slider-2">
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path
@@ -913,8 +918,7 @@
                                     stroke="#64748B" stroke-width="1.5" stroke-linecap="round"
                                     stroke-linejoin="round" />
                             </svg>
-                            <input type="file" class="slider_photo_3" accept="image/png, image/jpeg">
-                            <img class="photo-slider-3" src="" alt="" class="d-none">
+                            <img class="photo-slider-3 slider_img" src="" alt="" style="display: none">
                             <button class="uploaded-img-card-edit">
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -926,8 +930,9 @@
                                         stroke="#64748B" stroke-width="1.5" stroke-miterlimit="10"
                                         stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
+                                <input type="file" class="slider_photo_3" accept="image/png, image/jpeg">
                             </button>
-                            <button class="uploaded-img-card-delete">
+                            <button class="uploaded-img-card-delete delete-slider-3">
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path
@@ -954,7 +959,7 @@
             </div>
 
             <div class="footer-buttons">
-                <button class="cmn-btn">Save</button>
+                <button class="cmn-btn save-slider-image">Save</button>
             </div>
         </div>
     </div>

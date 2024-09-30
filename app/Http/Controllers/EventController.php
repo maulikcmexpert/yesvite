@@ -1392,6 +1392,10 @@ class EventController extends Controller
                 if ($request->tip == "desgin_tip") {
                     session(['design_closed' => true]);
                 }
+
+                if ($request->tip == "edit_desgin_tip") {
+                    session(['edit_design_closed' => true]);
+                }
             }
             return response()->json(['success' => true]);
         } else {
@@ -1482,5 +1486,25 @@ class EventController extends Controller
         $thankyou_card = EventGreeting::where('user_id', $user_id)->get();
 
         return response()->json(['view' => view('front.event.thankyou_template.add_thankyou_template', compact('thankyou_card'))->render()]);
+    }
+
+    public function saveSliderImg(Request $request)
+    {
+        dd($request->imageSources);
+        foreach ($request->imageSources as $imageSource) {
+                $file = $request->file('image');
+                dd($file);
+        }
+
+        // if ($request->hasFile('image')) {
+
+        //     $fileName = time() . '-' . $file->getClientOriginalName();
+        //     $path = $file->move(public_path('storage/event_images'), $fileName);
+        //     session(['desgin' => $fileName]);
+        //     // dd(session::get('user_ids'));
+        //     return response()->json(['status' => 'Image saved successfully', 'image' => $fileName]);
+        // }
+
+        return response()->json(['status' => 'No image uploaded'], 400);
     }
 }
