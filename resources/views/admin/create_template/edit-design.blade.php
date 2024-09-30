@@ -287,7 +287,7 @@
                 </button>
             </div>
 
-            <div class="position-relative mb-3">
+            <!-- <div class="position-relative mb-3">
                 <input type="search" placeholder="Search name" class="form-control">
                 <span>
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -299,7 +299,7 @@
                             stroke-linejoin="round" />
                     </svg>
                 </span>
-            </div>
+            </div> -->
             <div class="used-fonts-wrp common-font-wrp">
                 <h3>Select a Font</h3>
                 <div class="font-selector form-check">
