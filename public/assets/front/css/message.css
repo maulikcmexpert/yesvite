@@ -318,9 +318,9 @@ ul.chat-list li:last-child {
 
 .reaction img{
     margin-bottom: 0px !important;
-    width: 20px !important;
-    max-width: 20px !important;
-    height: 20px !important;
+    width: 19px !important;
+    max-width: 19px !important;
+    height: 19px !important;
 }
 
 .chat-list .badge {
