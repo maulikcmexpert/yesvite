@@ -173,10 +173,18 @@ class EventController extends Controller
     public function store(Request $request)
     {
 
-        
+        if(isset($request->slider_images) && !empty($request->slider_images)){
+            foreach ($request->slider_images as $key => $value) {
+                //  EventImage::create([
+                //      'event_id' => $eventId,
+                //      'image' => $value
+                //  ]);
+                dd($value);
+            }
+         }
         // $potluck = session('category');
         // dd(session()->get('gift_registry_data'));
-        // dd($request);
+        dd($request);
         $user_id =  Auth::guard('web')->user()->id;
         $dateString = (isset($request->event_date)) ? $request->event_date : "";
 
@@ -466,14 +474,7 @@ class EventController extends Controller
                     'image' => $request->desgin_selected
                 ]);
             }
-            if(isset($request->slider_images) && !empty($request->slider_images)){
-               foreach ($request->slider_images as $key => $value) {
-                    EventImage::create([
-                        'event_id' => $eventId,
-                        'image' => $value
-                    ]);
-               }
-            }
+            
 
             
 
