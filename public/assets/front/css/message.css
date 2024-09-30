@@ -315,6 +315,11 @@ ul.chat-list li:last-child {
     color: red;
 }
 
+
+.reaction img{
+    margin-bottom: 0px !important;
+}
+
 .chat-list .badge {
     width: 20px !important;
     height: 20px !important;
