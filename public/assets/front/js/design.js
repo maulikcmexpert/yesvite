@@ -229,14 +229,15 @@ $(document).on('click','.edit_design_tem',function(e){
                         linethrough: element.linethrough,
                         backgroundColor: element.backgroundColor,
                         textAlign: element.textAlign,
-                        editable: true,
                         hasControls: true,
                         borderColor: '#2DA9FC',
                         cornerColor: '#fff',
                         cornerSize: 6,
                         transparentCorners: false,
-                        isStatic: true
+                        lockScalingFlip: true,
+                        hasBorders: true,
                     });
+
 
                     switch (element.text) {
                         case 'event_name':
