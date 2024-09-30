@@ -94,8 +94,8 @@ class DesignController extends Controller
 
         // Get the file and id from the request
         $file = $request->file('image');
-        print_r($file);
-        exit;
+        // print_r($file);
+        // exit;
         $id = $request->id;
         $shape = $request->shape;
         $imageName = 'user_image_' . time() . '.' . $file->getClientOriginalExtension(); // Assuming PNG format
@@ -109,10 +109,24 @@ class DesignController extends Controller
 
 
         // Save the image name directly in the `filed_image` column
+
+
+        $textData = TextData::where('id', $id)->first();
+        $existingData = $textData->static_information;
+
+        if (!isset($existingData['textElements'])) {
+            $existingData['textElements'] = [];
+        }
+
+        $existingData['textElements'][] = [
+            'shape' => $shape,   // Add shape information
+        ];
         TextData::where('id', $id)->update([
             'shape_image' => $imageName,
-            'static_information' => json_encode($textElements), // Store the image name directly
+            'static_information' => $existingData,
         ]);
+
+
 
         // Return a JSON response
         return response()->json(['message' => 'Image saved successfully', 'imagePath' => $imagePath]);
