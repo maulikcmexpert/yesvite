@@ -119,7 +119,7 @@ class TemplateController extends Controller
                 if ($filled_image) {
                     $filledImage = time() . '.' . $image->getClientOriginalExtension();
                     // Save the image in the public/assets/images folder
-                    $image->move(public_path('storage/canvas'), $filledImage);
+                    $filled_image->move(public_path('storage/canvas'), $filledImage);
                 }
             }
 
