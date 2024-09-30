@@ -1607,7 +1607,13 @@ function UpdateMessageToList(key, messageData, conversationId) {
 
     const messageEle = document.getElementById(`message-${key}`);
     let isGroup = $("#isGroup").val();
-    const messgeElement = createMessageElement(key, messageData, isGroup);
+    let msgloop = $(messageEle).data("loop");
+    const messgeElement = createMessageElement(
+        key,
+        messageData,
+        isGroup,
+        msgloop
+    );
 
     $(messageEle).replaceWith(messgeElement);
 }
@@ -1645,13 +1651,14 @@ function addMessageToList(key, messageData, conversationId) {
 }
 var formattedDate = {};
 var messageRcvTime = "";
-
-function createMessageElement(key, messageData, isGroup) {
+let chatloop = 0;
+function createMessageElement(key, messageData, isGroup, msgLoop = 0) {
     messageRcvTime = new Date(messageData.timeStamp).toLocaleTimeString([], {
         hour: "2-digit",
         minute: "2-digit",
         hour12: true,
     });
+    chatloop = chatloop + 1;
     const isSender = senderUser == messageData.senderId;
     const isReceiver = senderUser != messageData.senderId;
     if (
@@ -2022,24 +2029,36 @@ function createMessageElement(key, messageData, isGroup) {
     const time = document.getElementsByClassName(
         `time_${messageRcvTime.replace(/\s/g, "")}`
     );
-    $(time).text("");
-    $(time).removeClass(`time_${messageRcvTime.replace(/\s/g, "")}`);
-    // $(".time").each(async function (index) {
-    //     if (messageRcvTime == $(this).text()) {
-    //         $(this).text("");
-    //     }
-    // });
+    let setTime = 1;
+    if (msgLoop != 0) {
+        Array.from(timeElements).forEach((timeElement) => {
+            if ($(timeElement).attr("loop") > msgLoop) {
+                setTime = 0;
+            } else {
+                $(timeElement).text("");
+                $(timeElement).removeClass(
+                    `time_${messageRcvTime.replace(/\s/g, "")}`
+                );
+            }
+        });
+    } else {
+        $(time).text("");
+        $(time).removeClass(`time_${messageRcvTime.replace(/\s/g, "")}`);
+    }
 
     return `<div>
     ${daychange}
         <li class="${
             isSender ? "receiver" : "sender"
-        }" id="message-${key}" >        
+        }" id="message-${key}" data-loop="${
+        msgLoop == 0 ? chatloop : msgLoop
+    }" >        
             ${replySection == "" ? dataWithMedia : replySection}        
-            <span class="time time_${messageRcvTime.replace(
-                /\s/g,
-                ""
-            )}">${messageRcvTime}</span>            
+            <span data-loop="${
+                msgLoop == 0 ? chatloop : msgLoop
+            }" class="time time_${messageRcvTime.replace(/\s/g, "")}">${
+        setTime == 1 ? messageRcvTime : 0
+    }</span>            
         </li>
     </div>
     `;
