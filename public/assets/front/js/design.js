@@ -471,6 +471,7 @@ $(document).on('click','.edit_design_tem',function(e){
 
         // Event listener to manage icon visibility when a textbox is clicked
         textbox.on('mousedown', function () {
+            console.log(textbox);
             canvas.getObjects('textbox').forEach(function (tb) {
                 if (tb.trashIcon) tb.trashIcon.set('visible', false); // Hide other icons
                 if (tb.copyIcon) tb.copyIcon.set('visible', false);
@@ -1032,7 +1033,6 @@ $(document).on('click','.edit_design_tem',function(e){
 
 
     canvas.on('mouse:down', function (options) {
-        console.log(options);
         if (options.target && options.target.type === 'textbox') {
             canvas.setActiveObject(options.target);
         }
