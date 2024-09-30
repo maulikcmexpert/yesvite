@@ -1233,8 +1233,14 @@ $(document).ready(function() {
             reader.readAsDataURL(file);
         }
     });
-    $(document).on('click','.uploaded-img-card-delete',function(){
-        $(this).parent().attr('src','');
+    $(document).on('click','.delete-slider-1',function(){
+        $('.photo-slider-1').remove();
+    })
+    $(document).on('click','.delete-slider-2',function(){
+        $('.photo-slider-2').remove();
+    })
+    $(document).on('click','.delete-slider-3',function(){
+        $('.photo-slider-3').remove();
     })
 
 });

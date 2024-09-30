@@ -817,7 +817,7 @@
                                 </svg>
                                 <input type="file" class="slider_photo" accept="image/png, image/jpeg">
                             </button>
-                            <button class="uploaded-img-card-delete">
+                            <button class="uploaded-img-card-delete delete-slider-1">
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path
@@ -874,7 +874,7 @@
                             <input type="file" class="slider_photo_2" accept="image/png, image/jpeg">
 
                             </button>
-                            <button class="uploaded-img-card-delete">
+                            <button class="uploaded-img-card-delete delete-slider-2">
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path
@@ -929,7 +929,7 @@
                                 </svg>
                                 <input type="file" class="slider_photo_3" accept="image/png, image/jpeg">
                             </button>
-                            <button class="uploaded-img-card-delete">
+                            <button class="uploaded-img-card-delete delete-slider-3">
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path
