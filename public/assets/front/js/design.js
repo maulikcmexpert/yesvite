@@ -150,9 +150,15 @@ $(document).on("click", ".design-card", function () {
                 }
                 break;
         }
-        const textWidth = textElement.calcTextWidth();
-        textElement.set({ width: textWidth });
         canvas.add(textElement);
+        var textboxWidth = textElement.getWidth();
+        var textboxHeight = textElement.getHeight();
+
+        textbox.set({
+            width: textboxWidth,
+            height: textboxHeight
+        });
+        canvas.renderAll();
 
     });
 });
