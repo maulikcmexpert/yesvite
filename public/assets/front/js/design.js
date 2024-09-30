@@ -195,7 +195,7 @@ $(document).on('click','.edit_design_tem',function(e){
     function loadTextDataFromDatabase() {
       
         if (image) {
-            console.log(image);
+            // console.log(image);
 
             // Load background image
             fabric.Image.fromURL(image, function (img) {
@@ -211,15 +211,29 @@ $(document).on('click','.edit_design_tem',function(e){
 
             // Load static information (text elements)
             if (dbJson) {
-                hideStaticTextElements();  // Hide static text elements if static information is present
                 const staticInfo = dbJson;
                 staticInfo.textElements.forEach(element => {
-                    console.log(element);
+
+                    const textMeasurement = new fabric.Text(element.text, {
+                        fontSize: element.fontSize,
+                        fontFamily: element.fontFamily,
+                        fontWeight: element.fontWeight,
+                        fontStyle: element.fontStyle,
+                        underline: element.underline,
+                        linethrough: element.linethrough,
+                    });
+
+                    const textWidth = textMeasurement.width;
+                    console.log(`Width of '${element.text}':`, textWidth);
+                
+                    // Calculate the width of the text
+                   
+                    // console.log(element);
                     let textElement = new fabric.Textbox(
                         element.text, {  // Use Textbox for editable text
                         left: element.left,
                         top: element.top,
-                        width: element.width || 200,  // Default width if not provided
+                        width: element.width || textWidth,  // Default width if not provided
                         fontSize: element.fontSize,
                         fill: element.fill,
                         fontFamily: element.fontFamily,
@@ -242,7 +256,8 @@ $(document).on('click','.edit_design_tem',function(e){
                     switch (element.text) {
                         case 'event_name':
                             if (eventData.event_name) {
-                                textElement.set({ text: eventData.event_name });
+                                getWidth(eventData.event_name);
+                                textElement.set({ text: eventData.event_name,width:textWidth });
                             } else {
                                 return;  // Skip adding the element if event_name is empty
                             }
@@ -307,97 +322,22 @@ $(document).on('click','.edit_design_tem',function(e){
                             }
                             break;
                     }
-                    const textWidth = textElement.calcTextWidth();
-                    textElement.set({ width: textWidth });
+                    // const textWidth = textElement.calcTextWidth();
+                    // textElement.set({ width: textWidth });
             
-                    textElement.on('scaling', function () {
-                        // Calculate the updated font size based on scaling factors
-                        var updatedFontSize = textElement.fontSize * (textElement.scaleX + textElement.scaleY) / 2;
-                        textElement.set('fontSize', updatedFontSize); // Update the font size
-                        canvas.renderAll(); // Re-render the canvas to reflect changes
-                    });
+                    // textElement.on('scaling', function () {
+                    //     // Calculate the updated font size based on scaling factors
+                    //     var updatedFontSize = textElement.fontSize * (textElement.scaleX + textElement.scaleY) / 2;
+                    //     textElement.set('fontSize', updatedFontSize); // Update the font size
+                    //     canvas.renderAll(); // Re-render the canvas to reflect changes
+                    // });
                     
                     addIconsToTextbox(textElement);
                     canvas.add(textElement);
             
                 });
             
-                function addIconsToTextbox(textbox) {
-                    // Trash icon SVG
-                    const trashIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 50 50"><path d="M20,30 L30,30 L30,40 L20,40 Z M25,10 L20,10 L20,7 L30,7 L30,10 Z M17,10 L33,10 L33,40 L17,40 Z" fill="#FF0000"/></svg>`;
-                    fabric.loadSVGFromString(trashIconSVG, function (objects, options) {
-                        const trashIcon = fabric.util.groupSVGElements(objects, options);
-                        trashIcon.set({
-                            left: textbox.left + textbox.width * textbox.scaleX - 20,
-                            top: textbox.top - 20,
-                            selectable: false,
-                            evented: true,
-                            hasControls: false,
-                            visible: false, // Initially hidden
-                            className: 'trash-icon',
-                        });
-                        textbox.trashIcon = trashIcon;
-            
-                        // Handle trash icon click
-                        trashIcon.on('mousedown', function () {
-                            console.log('Trash icon clicked');
-                            deleteTextbox(textbox);
-                        });
-            
-                        canvas.add(trashIcon);
-                    });
-            
-                    // Copy icon SVG
-                    const copyIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 50 50"><path d="M5,5 L30,5 L30,30 L5,30 Z M35,5 L45,5 L45,35 L35,35 L35,5 Z" fill="#0000FF"/></svg>`;
-                    fabric.loadSVGFromString(copyIconSVG, function (objects, options) {
-                        const copyIcon = fabric.util.groupSVGElements(objects, options);
-                        copyIcon.set({
-                            left: textbox.left - 25,
-                            top: textbox.top - 20,
-                            selectable: false,
-                            evented: true,
-                            hasControls: false,
-                            visible: false, // Initially hidden
-                            className: 'copy-icon',
-                        });
-                        textbox.copyIcon = copyIcon;
-            
-                        // Handle copy icon click
-                        copyIcon.on('mousedown', function () {
-                            console.log('Copy icon clicked');
-                            cloneTextbox(textbox);
-                        });
-            
-                        canvas.add(copyIcon);
-                    });
-            
-                    // Bind the updateIconPositions function to the moving and scaling events
-                    textbox.on('moving', function () {
-                        updateIconPositions(textbox);
-                    });
-                    textbox.on('scaling', function () {
-                        updateIconPositions(textbox);
-                    });
-            
-                    // Event listener to manage icon visibility when a textbox is clicked
-                    textbox.on('mousedown', function () {
-                        canvas.getObjects('textbox').forEach(function (tb) {
-                            if (tb.trashIcon) tb.trashIcon.set('visible', false); // Hide other icons
-                            if (tb.copyIcon) tb.copyIcon.set('visible', false);
-                        });
-                        if (textbox.trashIcon) textbox.trashIcon.set('visible', true); // Show current icons
-                        if (textbox.copyIcon) textbox.copyIcon.set('visible', true);
-                        canvas.renderAll(); // Re-render the canvas
-                    });
-            
-                    // Initially hide all icons
-                    canvas.getObjects('textbox').forEach(function (tb) {
-                        if (tb.trashIcon) tb.trashIcon.set('visible', false);
-                        if (tb.copyIcon) tb.copyIcon.set('visible', false);
-                    });
-            
-                    canvas.renderAll(); // Final render
-                }
+                
                 
             } else {
                 showStaticTextElements();
@@ -409,6 +349,96 @@ $(document).on('click','.edit_design_tem',function(e){
 
             canvas.renderAll();  // Ensure all elements are rendered
         }
+    }
+
+    function getWidth(text){
+        const textMeasurement = new fabric.Text(text, {
+            fontSize: element.fontSize,
+            fontFamily: element.fontFamily,
+            fontWeight: element.fontWeight,
+            fontStyle: element.fontStyle,
+            underline: element.underline,
+            linethrough: element.linethrough,
+        });
+        const textWidth = textMeasurement.width;
+        console.log(`Width of '${text}':`, textWidth);
+    }
+
+    function addIconsToTextbox(textbox) {
+        // Trash icon SVG
+        const trashIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 50 50"><path d="M20,30 L30,30 L30,40 L20,40 Z M25,10 L20,10 L20,7 L30,7 L30,10 Z M17,10 L33,10 L33,40 L17,40 Z" fill="#FF0000"/></svg>`;
+        fabric.loadSVGFromString(trashIconSVG, function (objects, options) {
+            const trashIcon = fabric.util.groupSVGElements(objects, options);
+            trashIcon.set({
+                left: textbox.left + textbox.width * textbox.scaleX - 20,
+                top: textbox.top - 20,
+                selectable: false,
+                evented: true,
+                hasControls: false,
+                visible: false, // Initially hidden
+                className: 'trash-icon',
+            });
+            textbox.trashIcon = trashIcon;
+
+            // Handle trash icon click
+            trashIcon.on('mousedown', function () {
+                console.log('Trash icon clicked');
+                deleteTextbox(textbox);
+            });
+
+            canvas.add(trashIcon);
+        });
+
+        // Copy icon SVG
+        const copyIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 50 50"><path d="M5,5 L30,5 L30,30 L5,30 Z M35,5 L45,5 L45,35 L35,35 L35,5 Z" fill="#0000FF"/></svg>`;
+        fabric.loadSVGFromString(copyIconSVG, function (objects, options) {
+            const copyIcon = fabric.util.groupSVGElements(objects, options);
+            copyIcon.set({
+                left: textbox.left - 25,
+                top: textbox.top - 20,
+                selectable: false,
+                evented: true,
+                hasControls: false,
+                visible: false, // Initially hidden
+                className: 'copy-icon',
+            });
+            textbox.copyIcon = copyIcon;
+
+            // Handle copy icon click
+            copyIcon.on('mousedown', function () {
+                console.log('Copy icon clicked');
+                cloneTextbox(textbox);
+            });
+
+            canvas.add(copyIcon);
+        });
+
+        // Bind the updateIconPositions function to the moving and scaling events
+        textbox.on('moving', function () {
+            updateIconPositions(textbox);
+        });
+        textbox.on('scaling', function () {
+            updateIconPositions(textbox);
+        });
+
+        // Event listener to manage icon visibility when a textbox is clicked
+        textbox.on('mousedown', function () {
+            canvas.getObjects('textbox').forEach(function (tb) {
+                if (tb.trashIcon) tb.trashIcon.set('visible', false); // Hide other icons
+                if (tb.copyIcon) tb.copyIcon.set('visible', false);
+            });
+            if (textbox.trashIcon) textbox.trashIcon.set('visible', true); // Show current icons
+            if (textbox.copyIcon) textbox.copyIcon.set('visible', true);
+            canvas.renderAll(); // Re-render the canvas
+        });
+
+        // Initially hide all icons
+        canvas.getObjects('textbox').forEach(function (tb) {
+            if (tb.trashIcon) tb.trashIcon.set('visible', false);
+            if (tb.copyIcon) tb.copyIcon.set('visible', false);
+        });
+
+        canvas.renderAll(); // Final render
     }
 
     var canvas = new fabric.Canvas('imageEditor1', {
@@ -826,7 +856,17 @@ $(document).on('click','.edit_design_tem',function(e){
             originY: originalTextbox.originY,
             hasControls: true,
             hasBorders: true,
-            lockScalingFlip: true
+            lockScalingFlip: true,
+            fontWeight: originalTextbox.fontWeight,
+            fontStyle: originalTextbox.fontStyle,
+            underline: originalTextbox.underline,
+            linethrough: originalTextbox.linethrough,
+            backgroundColor: originalTextbox.backgroundColor,
+            textAlign: originalTextbox.textAlign,
+            borderColor: '#2DA9FC',
+            cornerColor: '#fff',
+            cornerSize: 6,
+            transparentCorners: false,
         });
 
         canvas.add(clonedTextbox);
@@ -866,27 +906,6 @@ $(document).on('click','.edit_design_tem',function(e){
         end_date = eventData.event_date;
     }
 
-    // // Add two draggable static textboxes outside the image area
-    // addDraggableText(350, 50, eventData.event_name, eventData.event_name); // Position this outside the image area
-    // addDraggableText(350, 100, eventData.hosted_by, eventData.hosted_by);
-    // addDraggableText(350, 150, eventData.start_time, eventData.start_time);
-    // if(eventData.rsvp_end_time){
-    //     addDraggableText(350, 200, eventData.rsvp_end_time, eventData.rsvp_end_time);
-    // }
-    // addDraggableText(350, 250, start_date, start_date);
-    // addDraggableText(350, 300, end_date, end_date);
-    // addDraggableText(350, 350, eventData.event_location, eventData.event_location);
-
-    // addDraggableText(350, 50, 'event_name', 'xyz'); // Position this outside the image area
-    // addDraggableText(350, 100, 'host_name', 'abc');
-    // addDraggableText(350, 150, 'start_time', '5:00PM');
-    // addDraggableText(350, 200, 'rsvp_end_time', '6:00PM');
-    // addDraggableText(350, 250, 'start_date', '2024-07-27');
-    // addDraggableText(350, 300, 'end_date', '2024-07-27');
-    // addDraggableText(350, 350, 'Location', 'fdf');
-
-
-
     function updateSelectedTextProperties() {
         var fontSize = parseInt(document.getElementById('fontSize').value, 10);
         var fontColor = document.getElementById('fontColor').value;
@@ -911,8 +930,8 @@ $(document).on('click','.edit_design_tem',function(e){
 
 
 
-    // document.getElementById('fontSize').addEventListener('change', updateSelectedTextProperties);
-    // document.getElementById('fontColor').addEventListener('input', updateSelectedTextProperties);
+    document.getElementById('fontSize').addEventListener('change', updateSelectedTextProperties);
+    document.getElementById('fontColor').addEventListener('input', updateSelectedTextProperties);
 
 
 
