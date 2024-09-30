@@ -124,31 +124,21 @@ class DesignController extends Controller
         $shape = $request->shape;
         $left = $request->left; // Capture the left position
         $top = $request->top; // Capture the top position
-
-        // Fetch the current 'static_information' from the database
         $textData = TextData::where('id', $id)->first();
+        $existingData = $textData->static_information;
 
-        // Decode the existing 'static_information' JSON
-        $existingData = json_decode($textData->static_information, true);
-
-        // If 'textElements' doesn't exist, initialize it as an empty array
         if (!isset($existingData['textElements'])) {
             $existingData['textElements'] = [];
         }
 
-        // Append the new shape data along with position to the 'textElements' array
         $existingData['textElements'][] = [
             'shape' => $shape,   // Add shape information
             'left' => $left,     // Add left position
             'top' => $top        // Add top position
         ];
-
-        // Save the updated array back to the database
         TextData::where('id', $id)->update([
-            'static_information' => json_encode($existingData),
+            'static_information' => $existingData,
         ]);
-
-        // Return JSON response
         return response()->json(['message' => 'Shape and position saved successfully']);
     }
 

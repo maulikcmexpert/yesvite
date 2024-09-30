@@ -855,7 +855,7 @@
                                 .getAttribute('content')
                         },
                         body: JSON.stringify({
-                            shape: shape // Send the current shape value
+                            shape: shape
                         })
                     })
                     .then(response => {

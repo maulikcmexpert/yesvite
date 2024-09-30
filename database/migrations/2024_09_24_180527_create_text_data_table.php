@@ -20,6 +20,7 @@ return new class extends Migration
             $table->json('static_information')->nullable();
             $table->string('image')->nullable();
             $table->string('filled_image')->nullable();
+            $table->string('shape_image')->nullable();
             $table->integer('width')->nullable();
             $table->integer('height')->nullable();
             $table->timestamps();
