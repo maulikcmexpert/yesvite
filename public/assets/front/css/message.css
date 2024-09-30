@@ -1467,6 +1467,10 @@ ul.chat-list li.setpink{
     font-size: 20px;
 }
 
+.reaction-option img{
+    margin-bottom: 0px !important;
+}
+
 .msg-lists .simple-message {
     /* display: flex;
     align-items: center; */
