@@ -4116,8 +4116,8 @@ class ApiControllerv2 extends Controller
                 $eventDetail['subscription_invite_count'] = ($getEventData->subscription_invite_count != NULL) ? $getEventData->subscription_invite_count : 0;
 
                 $eventDetail['static_information'] = ($getEventData->static_information != NULL) ? $getEventData->static_information : "";
-                $eventDetail['design_image'] = ($getEventData->design_image != NULL) ? $getEventData->design_image : "";
-                $eventDetail['design_inner_image'] = ($getEventData->design_inner_image != NULL) ? $getEventData->design_inner_image) : "";
+                $eventDetail['design_image'] = ($getEventData->design_image != NULL) ? asset('storage/canvas/' . $getEventData->design_image) : "";
+                $eventDetail['design_inner_image'] = ($getEventData->design_inner_image != NULL) ? asset('storage/canvas/' . $getEventData->design_inner_image) : "";
                 $eventDetail['event_images'] = [];
                 $getEventImages = EventImage::where('event_id', $getEventData->id)->get();
                 if (!empty($getEventImages)) {
@@ -4431,22 +4431,9 @@ class ApiControllerv2 extends Controller
                     $updateEvent->is_draft_save = $eventData['is_draft_save'];
                 }
                 $updateEvent->subscription_plan_name = (!empty($eventData['subscription_plan_name'])) ? $eventData['subscription_plan_name'] : "";
-                // $updateEvent->subscription_invite_count = (!empty($eventData['subscription_invite_count'])) ? $eventData['subscription_invite_count'] : 0;
-                // dd($eventData['static_information']);
-                // $updateEvent->static_information = (isset($eventData['static_information']) && $eventData['static_information'] != '') ? $eventData['static_information'] : null;
-                // $updateEvent->design_image = (!empty($eventData['design_image'])) ? $eventData['design_image'] : "";
-                // $updateEvent->design_inner_image = (!empty($eventData['design_inner_image'])) ? $eventData['design_inner_image'] : "";
-
                 if (isset($eventData['static_information']) && $eventData['static_information'] != '') {
                     $updateEvent->static_information = $eventData['static_information'];
                 }
-
-                // if (!empty($eventData['design_image'])) {
-                //     $updateEvent->design_image = $eventData['design_image'];
-                // }
-                // if (!empty($eventData['design_inner_image'])) {
-                //     $updateEvent->design_inner_image = $eventData['design_inner_image'];
-                // }
                 if ($updateEvent->save()) {
                     if ($eventData['is_draft_save'] == '1') {
                         EventInvitedUser::where(['event_id' => $eventData['event_id']])->delete();
