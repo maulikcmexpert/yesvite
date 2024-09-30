@@ -1199,7 +1199,6 @@ $(document).on('click','.edit_design_tem',function(e){
 $(document).ready(function() {
     $('.slider_photo').on('change', function(event) {
         var file = event.target.files[0]; // Get the first file (the selected image)
-        
         if (file) {
             var reader = new FileReader();
             reader.onload = function(e) {
