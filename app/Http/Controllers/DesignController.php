@@ -101,10 +101,10 @@ class DesignController extends Controller
         $imageName = 'user_image_' . time() . '.' . $file->getClientOriginalExtension(); // Assuming PNG format
 
         // Move the image to the correct directory
-        $file->move(public_path('assets/user/images'), $imageName);
+        $file->move(public_path('storage/canvas'), $imageName);
 
         // Get the image path (optional, in case you need to use it elsewhere)
-        $imagePath = asset('assets/user/images/' . $imageName);
+        $imagePath = asset('storage/canvas' . $imageName);
         $textElements = [
             [
 
