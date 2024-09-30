@@ -980,7 +980,6 @@
                     body: JSON.stringify({
                         id: canvasId,
                         textElements: textData,
-
                     })
                 })
                 .then(response => response.json())
