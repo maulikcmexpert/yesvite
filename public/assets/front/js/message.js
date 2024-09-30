@@ -2031,7 +2031,7 @@ function createMessageElement(key, messageData, isGroup, msgLoop = 0) {
     );
     let setTime = 1;
     if (msgLoop != 0) {
-        Array.from(timeElements).forEach((timeElement) => {
+        Array.from(time).forEach((timeElement) => {
             if ($(timeElement).attr("loop") > msgLoop) {
                 setTime = 0;
             } else {
