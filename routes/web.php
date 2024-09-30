@@ -163,7 +163,6 @@ Route::middleware('checkUserExist')->group(function () {
     Route::post('event/get_gift_registry', [ControllersEventController::class, 'get_gift_registry']);
     Route::post('event/get_thank_you_card', [ControllersEventController::class, 'get_thank_you_card']);
     Route::post('event/save_slider_img', [ControllersEventController::class, 'saveSliderImg']);
-
 });
 
 
@@ -180,6 +179,7 @@ Route::get('/loadAllData', [DesignController::class, 'loadAllData']);
 // routes/web.php
 Route::post('/saveImagePath', action: [DesignController::class, 'storeImagePath']);
 Route::post('/user_image/{id}', [DesignController::class, 'user_image']);
+Route::post('/save_shape/{id}', [DesignController::class, 'save_shape']);
 
 Route::get('access_token', [AuthController::class, 'handleGoogleCallback'])->name('access_token');
 

@@ -84,7 +84,7 @@ Route::group(['middleware' => adminAuth::Class], function () {
     Route::get('/templates/view', [EditTempalteController::class, 'AllImage'])->name('displayAllImage');
     Route::get('/templates/view', [EditTempalteController::class, 'viewAllImages'])->name('viewAllImages');
     Route::get('/loadAllData', [EditTempalteController::class, 'loadAllData']);
-    Route::post('/user_image/{id}', [EditTempalteController::class, 'user_image']);
+    // Route::post('/user_image/{id}', [EditTempalteController::class, 'user_image']);
     // routes/web.php
     Route::post('/saveImagePath', action: [EditTempalteController::class, 'storeImagePath']);
 
