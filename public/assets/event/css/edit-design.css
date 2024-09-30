@@ -548,6 +548,7 @@
     border-radius: 10px;
     border: 1px dashed var(--borderColor);
     flex-basis: 30%;
+    z-index: 2;
 }
 
 .uploaded-img-card input{
@@ -556,6 +557,7 @@
     width: 100% !important;
     height: 100% !important;
     opacity: 0;
+    padding: 0px !important;
 }
 
 .upload-img-cart-extra-img{
@@ -565,6 +567,7 @@
     transform: translate(-50%, -50%);
     width: 24px;
     height: 24px;
+    z-index: -1;
 }
 .uploaded-img-card-edit, .uploaded-img-card-delete{
     width:30px;
