@@ -468,7 +468,7 @@
                         selectable: false,
                         evented: true,
                         hasControls: false,
-                        visible: false, // Initially hidden
+                        visible: true, // Initially hidden
                         className: 'trash-icon',
                     });
                     textbox.trashIcon = trashIcon;
