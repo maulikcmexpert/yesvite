@@ -457,8 +457,8 @@
                     trashIcon.set({
                         left: textbox.left + textbox.width * textbox.scaleX - 20,
                         top: textbox.top - 20,
-                        width: 50, // Width of the background
-                        height: 50, // Height of the background
+                        width: 20, // Width of the background
+                        height: 20, // Height of the background
                         fill: '#fff', // Background color
                         rx: 25, // Half of the width/height for rounded corners
                         ry: 25, // Half of the width/height for rounded corners
