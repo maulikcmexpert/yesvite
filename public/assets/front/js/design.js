@@ -154,7 +154,7 @@ $(document).on("click", ".design-card", function () {
         var textboxWidth = textElement.getWidth();
         var textboxHeight = textElement.getHeight();
 
-        textbox.set({
+        textElement.set({
             width: textboxWidth,
             height: textboxHeight
         });
