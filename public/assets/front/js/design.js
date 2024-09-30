@@ -1367,7 +1367,9 @@ $(document).ready(function() {
             },
             success: function (response) {
                
-               console.log(response.images);
+               var savedImages = response.images;
+               eventData.slider_images=savedImages;
+
             },
             error: function (xhr, status, error) {},
         });
