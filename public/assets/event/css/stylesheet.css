@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'JosefinSans';
-    src: url('./../../assets/fonts/JosefinSans-Regular.woff2') format('woff2');
+    src: url('./../../fonts/JosefinSans-Regular.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -8,7 +8,7 @@
 
 @font-face {
     font-family: 'AbrilFatface';
-    src: url('./../../assets/fonts/AbrilFatface-Regular.woff2') format('woff2');
+    src: url('./../../fonts/AbrilFatface-Regular.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -16,7 +16,7 @@
 
 @font-face {
     font-family: 'AgencyFB';
-    src: url('./../../assets/fonts/AgencyFB-Bold.woff2') format('woff2');
+    src: url('./../../fonts/AgencyFB-Bold.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -24,7 +24,7 @@
 
 @font-face {
     font-family: 'AdleryPro';
-    src: url('./../../assets/fonts/AdleryPro-Regular.woff2') format('woff2');
+    src: url('./../../fonts/AdleryPro-Regular.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -32,7 +32,7 @@
 
 @font-face {
     font-family: 'BotanicaScript-Regular';
-    src: url('./../../assets/fonts/BotanicaScript-Regular.woff2') format('woff2');
+    src: url('./../../fonts/BotanicaScript-Regular.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -40,7 +40,7 @@
 
 @font-face {
     font-family: 'Allura';
-    src: url('./../../assets/fonts/Allura-Regular.woff2') format('woff2');
+    src: url('./../../fonts/Allura-Regular.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -48,7 +48,7 @@
 
 @font-face {
     font-family: 'Antaresia';
-    src: url('./../../assets/fonts/Antaresia.woff2') format('woff2');
+    src: url('./../../fonts/Antaresia.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -56,7 +56,7 @@
 
 @font-face {
     font-family: 'Archer';
-    src: url('./../../assets/fonts/Archer-Bold.woff2') format('woff2');
+    src: url('./../../fonts/Archer-Bold.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -65,7 +65,7 @@
 
 @font-face {
     font-family: 'Archer-Book';
-    src: url('./../../assets/fonts/Archer-Book.woff2') format('woff2');
+    src: url('./../../fonts/Archer-Book.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -73,7 +73,7 @@
 
 @font-face {
     font-family: 'Archer-BookItalic';
-    src: url('./../../assets/fonts/Archer-BookItalic.woff2') format('woff2');
+    src: url('./../../fonts/Archer-BookItalic.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -81,7 +81,7 @@
 
 @font-face {
     font-family: 'Archer-ExtraLight';
-    src: url('./../../assets/fonts/Archer-ExtraLight.woff2') format('woff2');
+    src: url('./../../fonts/Archer-ExtraLight.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -89,7 +89,7 @@
 
 @font-face {
     font-family: 'Archer-Hairline';
-    src: url('./../../assets/fonts/Archer-Hairline.woff2') format('woff2');
+    src: url('./../../fonts/Archer-Hairline.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -97,7 +97,7 @@
 
 @font-face {
     font-family: 'Bebas-Regular';
-    src: url('./../../assets/fonts/Bebas-Regular.woff2') format('woff2');
+    src: url('./../../fonts/Bebas-Regular.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -105,7 +105,7 @@
 
 @font-face {
     font-family: 'BookAntiqua';
-    src: url('./../../assets/fonts/BookAntiqua.woff2') format('woff2');
+    src: url('./../../fonts/BookAntiqua.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -113,7 +113,7 @@
 
 @font-face {
     font-family: 'Bungee-Regular';
-    src: url('./../../assets/fonts/Bungee-Regular.woff2') format('woff2');
+    src: url('./../../fonts/Bungee-Regular.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -121,7 +121,7 @@
 
 @font-face {
     font-family: 'CandyCaneUnregistered';
-    src: url('./../../assets/fonts/CandyCaneUnregistered.woff2') format('woff2');
+    src: url('./../../fonts/CandyCaneUnregistered.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -129,7 +129,7 @@
 
 @font-face {
     font-family: 'CarbonBl-Regular';
-    src: url('./../../assets/fonts/CarbonBl-Regular.woff2') format('woff2');
+    src: url('./../../fonts/CarbonBl-Regular.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -137,7 +137,7 @@
 
 @font-face {
     font-family: 'CarmenSans-ExtraBold';
-    src: url('./../../assets/fonts/CarmenSans-ExtraBold.woff2') format('woff2');
+    src: url('./../../fonts/CarmenSans-ExtraBold.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -145,7 +145,7 @@
 
 @font-face {
     font-family: 'CarmenSans-Regular';
-    src: url('./../../assets/fonts/CarmenSans-Regular.woff2') format('woff2');
+    src: url('./../../fonts/CarmenSans-Regular.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -153,7 +153,7 @@
 
 @font-face {
     font-family: 'ChristmasCookies';
-    src: url('./../../assets/fonts/ChristmasCookies.woff2') format('woff2');
+    src: url('./../../fonts/ChristmasCookies.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -161,7 +161,7 @@
 
 @font-face {
     font-family: 'AlexBrush';
-    src: url('./../../assets/fonts/AlexBrush-Regular.woff2') format('woff2');
+    src: url('./../../fonts/AlexBrush-Regular.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -170,7 +170,7 @@
 
 @font-face {
     font-family: 'Botanica Script';
-    src: url('./../../assets/fonts/BotanicaScript-Regular.woff2') format('woff2');
+    src: url('./../../fonts/BotanicaScript-Regular.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
