@@ -785,6 +785,7 @@
 
 
         canvas.on('mouse:down', function(options) {
+            alert();
             if (options.target && options.target.type === 'textbox') {
                 canvas.setActiveObject(options.target);
             }
@@ -961,7 +962,6 @@
 
         document.querySelectorAll('[data-command]').forEach(function(button) {
             button.addEventListener('click', function() {
-                alert();
                 executeCommand(this.getAttribute('data-command'));
             });
         });
