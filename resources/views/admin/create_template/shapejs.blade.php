@@ -642,7 +642,7 @@
         const fileInput = document.getElementById('fileInput');
         const userImageElement = document.getElementById('user_image');
         const imageWrapper = document.getElementById('imageWrapper');
-        const canvasElement = new fabric.Canvas('imageEditor1', {
+        const canvasElement = new fabric.Canvas('imageEditor', {
             width: 500, // Canvas width
             height: 500, // Canvas height
         });
@@ -823,8 +823,7 @@
                                 transparentCorners: false,
                                 lockUniScaling: true,
                                 scaleX: 600 / imgElement.width,
-                                scaleY: 600 / imgElement.height,
-                                zindex: 1000,
+                                scaleY: 600 / imgElement.height
                             });
 
                             canvasElement.add(imgInstance);
