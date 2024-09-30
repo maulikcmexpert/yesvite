@@ -1046,6 +1046,11 @@
     font-family: 'ChristmasCookies';
 }
 
+.new-event-sidebar-head {
+    border-bottom: 1px solid #F1F5F9;
+    padding-bottom: 15px;
+}
+
 @media only screen and (max-width: 1199px) {
     .image-edit-inner-img {
         width: 400px;
