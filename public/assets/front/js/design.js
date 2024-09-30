@@ -1025,7 +1025,6 @@ $(document).on('click','.edit_design_tem',function(e){
     }
 
     document.getElementById('addTextButton').addEventListener('click', function () {
-        alert();
         addEditableTextbox(100, 100, 'EditableText');  // You can set the initial position and default text
     });
 
@@ -1048,17 +1047,9 @@ $(document).on('click','.edit_design_tem',function(e){
             cornerSize: 6,
             transparentCorners: false
         });
-
-        textbox.on('scaling', function () {
-            // Update the font size based on scaling
-            var updatedFontSize = textbox.fontSize * (textbox.scaleX + textbox.scaleY) / 2;
-            textbox.set('fontSize', updatedFontSize);
-            canvas.renderAll();
-        });
-
         canvas.add(textbox);
         canvas.setActiveObject(textbox);
-        addIconsToTextbox(textbox); // Make it the active object for editing
+        addIconsToTextbox(textbox);
         canvas.renderAll();
     }
 
@@ -1095,13 +1086,6 @@ $(document).on('click','.edit_design_tem',function(e){
             });
         showStaticTextElements();
     }
-
-
-
-
-
-
-
 
         function executeCommand(command) {
             var activeObject = canvas.getActiveObject();
