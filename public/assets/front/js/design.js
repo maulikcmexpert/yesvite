@@ -267,7 +267,7 @@ $(document).on('click','.edit_design_tem',function(e){
 
                                 const textWidth = textMeasurement.width;
                                 console.log(`Width of '${eventData.event_name}':`, textWidth);
-                                textElement.set({ text: eventData.event_name,width });
+                                textElement.set({ text: eventData.event_name });
                             } else {
                                 return;  // Skip adding the element if event_name is empty
                             }
