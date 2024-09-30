@@ -754,6 +754,10 @@
         left: 0 !important;
         border-radius: 0px !important;
     }
+
+    .choose-design-sidebar.design-sidebar_2{
+        height: 90vh;
+    }
 }
 
 
