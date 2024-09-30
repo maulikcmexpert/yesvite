@@ -1316,6 +1316,7 @@ $(document).ready(function() {
     $('.slider_photo_2').on('change', function(event) {
         var file = event.target.files[0]; 
         if (file) {
+            $('.photo-slider-2').show();
             var reader = new FileReader();
             reader.onload = function(e) {
                 $('.photo-slider-2').attr('src', e.target.result).show();
@@ -1326,6 +1327,7 @@ $(document).ready(function() {
     $('.slider_photo_3').on('change', function(event) {
         var file = event.target.files[0]; 
         if (file) {
+            $('.photo-slider-3').show();
             var reader = new FileReader();
             reader.onload = function(e) {
                 $('.photo-slider-3').attr('src', e.target.result).show();
