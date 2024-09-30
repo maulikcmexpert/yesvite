@@ -315,6 +315,14 @@ ul.chat-list li:last-child {
     color: red;
 }
 
+
+.reaction img{
+    margin-bottom: 0px !important;
+    width: 20px !important;
+    max-width: 20px !important;
+    height: 20px !important;
+}
+
 .chat-list .badge {
     width: 20px !important;
     height: 20px !important;
@@ -1465,6 +1473,10 @@ ul.chat-list li.setpink{
 .reaction-option {
     cursor: pointer;
     font-size: 20px;
+}
+
+.reaction-option img{
+    margin-bottom: 0px !important;
 }
 
 .msg-lists .simple-message {
