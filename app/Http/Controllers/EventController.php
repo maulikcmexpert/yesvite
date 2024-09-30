@@ -1508,7 +1508,7 @@ class EventController extends Controller
             }
         }
 
-        dd($fileName);
+        dd($savedFiles);
         // if ($request->hasFile('image')) {
 
         //     $fileName = time() . '-' . $file->getClientOriginalName();
