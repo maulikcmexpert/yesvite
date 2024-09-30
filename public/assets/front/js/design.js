@@ -1237,62 +1237,65 @@ console.log(123)
             .then(function (blob) {
                 var formData = new FormData();
                 formData.append("image", blob, "design.png");
-                $.ajax({
-                    headers: {
-                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
-                            "content"
-                        ),
-                    },
-                    url: base_url + "event/store_temp_design",
-                    type: "POST",
-                    data: {
-                        formData:formData,
-                        temp_id:temp_id,
-                        textData:textData,
-                    },
-                    processData: false,
-                    contentType: false,
-                    success: function (response) {
-                        let image = response.image;
-                        eventData.desgin_selected = image;
-                        // if(eventData.step == '1'){
-                        //     eventData.step = '2';
-                        // }
-                        console.log(final_step);
-                        if(final_step == 2){
-                            final_step = 3;
-                        }
-                        console.log(eventData);
-                        eventData.step = final_step;
-                        console.log("Image uploaded and saved successfully");
-                        $("#myCustomModal").modal("hide");
-                        $("#exampleModal").modal("hide");
-                        $("#loader").css("display", "none");
-                        $('.store_desgin_temp').prop("disabled", false);
-                        $(".main-content-wrp").removeClass("blurred");
-                        $(".step_2").hide();
-                        $('.edit_design_template').hide();
-                        handleActiveClass('.li_guest');
-                        $('.li_design').find(".side-bar-list").addClass("menu-success");
+                formData.append("textData", textData);
+                formData.append("temp_id", temp_id);
+                console.log(formData);
+                // $.ajax({
+                //     headers: {
+                //         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                //             "content"
+                //         ),
+                //     },
+                //     url: base_url + "event/store_temp_design",
+                //     type: "POST",
+                //     data: {
+                //         formData:formData,
+                //         temp_id:temp_id,
+                //         textData:textData,
+                //     },
+                //     processData: false,
+                //     contentType: false,
+                //     success: function (response) {
+                //         let image = response.image;
+                //         eventData.desgin_selected = image;
+                //         // if(eventData.step == '1'){
+                //         //     eventData.step = '2';
+                //         // }
+                //         console.log(final_step);
+                //         if(final_step == 2){
+                //             final_step = 3;
+                //         }
+                //         console.log(eventData);
+                //         eventData.step = final_step;
+                //         console.log("Image uploaded and saved successfully");
+                //         $("#myCustomModal").modal("hide");
+                //         $("#exampleModal").modal("hide");
+                //         $("#loader").css("display", "none");
+                //         $('.store_desgin_temp').prop("disabled", false);
+                //         $(".main-content-wrp").removeClass("blurred");
+                //         $(".step_2").hide();
+                //         $('.edit_design_template').hide();
+                //         handleActiveClass('.li_guest');
+                //         $('.li_design').find(".side-bar-list").addClass("menu-success");
     
-                        $('.event_create_percent').text('75%');
-                        $('.current_step').text('3 of 4');
+                //         $('.event_create_percent').text('75%');
+                //         $('.current_step').text('3 of 4');
                         
-                        $(".step_3").show();
-                        console.log(eventData);
+                //         $(".step_3").show();
+                //         console.log(eventData);
                         
-                        var type="all"
-                        get_user(type);
+                //         var type="all"
+                //         get_user(type);
                         
     
-                    },
-                    error: function (xhr, status, error) {
-                        console.error(
-                            "Failed to upload and save the image:",
-                            error
-                        );
-                    },
-                });
+                //     },
+                //     error: function (xhr, status, error) {
+                //         console.error(
+                //             "Failed to upload and save the image:",
+                //             error
+                //         );
+                //     },
+                // });
             })
             .catch(function (error) {
                 console.error("Error capturing image:", error);
