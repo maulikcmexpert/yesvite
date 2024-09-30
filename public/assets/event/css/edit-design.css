@@ -713,6 +713,14 @@
         height: 70vh !important;
     }
 
+    .design-sidebar_6 .footer-buttons .cmn-btn{
+        max-width: 100% !important;
+    }
+
+    .design-sidebar_7 .footer-buttons .cmn-btn{
+        max-width: 100% !important;
+    }
+
 }
 
 @media only screen and (max-width: 575px){
