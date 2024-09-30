@@ -438,12 +438,12 @@
                 textbox.trashIcon = null; // Clear reference
                 // const trashIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 50 50"><path d="M20,30 L30,30 L30,40 L20,40 Z M25,10 L20,10 L20,7 L30,7 L30,10 Z M17,10 L33,10 L33,40 L17,40 Z" fill="#FF0000"/></svg>`;
                 const trashIconSVG = `<svg width="20" x="0px" y="0px" height="20" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M11.1807 3.35025C9.51792 3.18547 7.84519 3.10059 6.17746 3.10059C5.1888 3.10059 4.20014 3.15052 3.21149 3.25038L2.19287 3.35025" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M4.93896 2.84627L5.04882 2.19216C5.12871 1.7178 5.18863 1.36328 6.03248 1.36328H7.3407C8.18456 1.36328 8.24947 1.73777 8.32437 2.19715L8.43422 2.84627" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M10.1073 4.92871L9.78275 9.95688C9.72782 10.7408 9.68288 11.35 8.28978 11.35H5.08413C3.69102 11.35 3.64609 10.7408 3.59116 9.95688L3.2666 4.92871" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M5.85303 8.60352H7.51577" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M5.43848 6.60547H7.93508" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>`;
+                                        <path d="M11.1807 3.35025C9.51792 3.18547 7.84519 3.10059 6.17746 3.10059C5.1888 3.10059 4.20014 3.15052 3.21149 3.25038L2.19287 3.35025" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M4.93896 2.84627L5.04882 2.19216C5.12871 1.7178 5.18863 1.36328 6.03248 1.36328H7.3407C8.18456 1.36328 8.24947 1.73777 8.32437 2.19715L8.43422 2.84627" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M10.1073 4.92871L9.78275 9.95688C9.72782 10.7408 9.68288 11.35 8.28978 11.35H5.08413C3.69102 11.35 3.64609 10.7408 3.59116 9.95688L3.2666 4.92871" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M5.85303 8.60352H7.51577" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M5.43848 6.60547H7.93508" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>`;
                 fabric.loadSVGFromString(trashIconSVG, function(objects, options) {
                     const trashIcon = fabric.util.groupSVGElements(objects, options);
                     trashIcon.set({
@@ -474,7 +474,11 @@
             }
 
 
-            const copyIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"  x="0px" y="0px" width="20" height="20"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M384 336l-192 0c-8.8 0-16-7.2-16-16l0-256c0-8.8 7.2-16 16-16l140.1 0L400 115.9 400 320c0 8.8-7.2 16-16 16zM192 384l192 0c35.3 0 64-28.7 64-64l0-204.1c0-12.7-5.1-24.9-14.1-33.9L366.1 14.1c-9-9-21.2-14.1-33.9-14.1L192 0c-35.3 0-64 28.7-64 64l0 256c0 35.3 28.7 64 64 64zM64 128c-35.3 0-64 28.7-64 64L0 448c0 35.3 28.7 64 64 64l192 0c35.3 0 64-28.7 64-64l0-32-48 0 0 32c0 8.8-7.2 16-16 16L64 464c-8.8 0-16-7.2-16-16l0-256c0-8.8 7.2-16 16-16l32 0 0-48-32 0z"/></svg>`;
+            // const copyIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"  x="0px" y="0px" width="20" height="20"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M384 336l-192 0c-8.8 0-16-7.2-16-16l0-256c0-8.8 7.2-16 16-16l140.1 0L400 115.9 400 320c0 8.8-7.2 16-16 16zM192 384l192 0c35.3 0 64-28.7 64-64l0-204.1c0-12.7-5.1-24.9-14.1-33.9L366.1 14.1c-9-9-21.2-14.1-33.9-14.1L192 0c-35.3 0-64 28.7-64 64l0 256c0 35.3 28.7 64 64 64zM64 128c-35.3 0-64 28.7-64 64L0 448c0 35.3 28.7 64 64 64l192 0c35.3 0 64-28.7 64-64l0-32-48 0 0 32c0 8.8-7.2 16-16 16L64 464c-8.8 0-16-7.2-16-16l0-256c0-8.8 7.2-16 16-16l32 0 0-48-32 0z"/></svg>`;
+            const copyIconSVG = `<svg width="20"  x="0px" y="0px" height="20" viewBox="0 0 50 50"  fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M9.6283 8.35281V2.36095C9.6283 1.80941 9.1812 1.3623 8.62966 1.3623H2.6378C2.08627 1.3623 1.63916 1.80941 1.63916 2.36095V8.35281C1.63916 8.90434 2.08627 9.35145 2.6378 9.35145H8.62966C9.1812 9.35145 9.6283 8.90434 9.6283 8.35281ZM2.6378 2.36095H8.62966V8.35281H2.6378V2.36095ZM10.6269 9.35145V3.35959C11.1785 3.35959 11.6256 3.8067 11.6256 4.35823V9.35145C11.6256 10.4545 10.7314 11.3487 9.6283 11.3487H4.63509C4.08355 11.3487 3.63645 10.9016 3.63645 10.3501H9.6283C10.1798 10.3501 10.6269 9.90298 10.6269 9.35145Z" fill="#0F172A"/>
+</svg>
+`;
             fabric.loadSVGFromString(copyIconSVG, function(objects, options) {
                 let copyIcon = fabric.util.groupSVGElements(objects, options);
                 copyIcon.set({
@@ -508,7 +512,7 @@
         function addIconsToTextbox(textbox) {
             // Trash icon SVG
             // const trashIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 50 50"><path d="M20,30 L30,30 L30,40 L20,40 Z M25,10 L20,10 L20,7 L30,7 L30,10 Z M17,10 L33,10 L33,40 L17,40 Z" fill="#FF0000"/></svg>`;
-            const trashIconSVG = `<svg width="20" x="0px" y="0px" height="20" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+            const trashIconSVG = `<svg width="20" x="0px" y="0px" height="20" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M11.1807 3.35025C9.51792 3.18547 7.84519 3.10059 6.17746 3.10059C5.1888 3.10059 4.20014 3.15052 3.21149 3.25038L2.19287 3.35025" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M4.93896 2.84627L5.04882 2.19216C5.12871 1.7178 5.18863 1.36328 6.03248 1.36328H7.3407C8.18456 1.36328 8.24947 1.73777 8.32437 2.19715L8.43422 2.84627" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M10.1073 4.92871L9.78275 9.95688C9.72782 10.7408 9.68288 11.35 8.28978 11.35H5.08413C3.69102 11.35 3.64609 10.7408 3.59116 9.95688L3.2666 4.92871" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
@@ -538,7 +542,11 @@
             });
 
             // Copy icon SVG
-            const copyIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"  x="0px" y="0px" width="20" height="20"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M384 336l-192 0c-8.8 0-16-7.2-16-16l0-256c0-8.8 7.2-16 16-16l140.1 0L400 115.9 400 320c0 8.8-7.2 16-16 16zM192 384l192 0c35.3 0 64-28.7 64-64l0-204.1c0-12.7-5.1-24.9-14.1-33.9L366.1 14.1c-9-9-21.2-14.1-33.9-14.1L192 0c-35.3 0-64 28.7-64 64l0 256c0 35.3 28.7 64 64 64zM64 128c-35.3 0-64 28.7-64 64L0 448c0 35.3 28.7 64 64 64l192 0c35.3 0 64-28.7 64-64l0-32-48 0 0 32c0 8.8-7.2 16-16 16L64 464c-8.8 0-16-7.2-16-16l0-256c0-8.8 7.2-16 16-16l32 0 0-48-32 0z"/></svg>`;
+            // const copyIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"  x="0px" y="0px" width="20" height="20"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M384 336l-192 0c-8.8 0-16-7.2-16-16l0-256c0-8.8 7.2-16 16-16l140.1 0L400 115.9 400 320c0 8.8-7.2 16-16 16zM192 384l192 0c35.3 0 64-28.7 64-64l0-204.1c0-12.7-5.1-24.9-14.1-33.9L366.1 14.1c-9-9-21.2-14.1-33.9-14.1L192 0c-35.3 0-64 28.7-64 64l0 256c0 35.3 28.7 64 64 64zM64 128c-35.3 0-64 28.7-64 64L0 448c0 35.3 28.7 64 64 64l192 0c35.3 0 64-28.7 64-64l0-32-48 0 0 32c0 8.8-7.2 16-16 16L64 464c-8.8 0-16-7.2-16-16l0-256c0-8.8 7.2-16 16-16l32 0 0-48-32 0z"/></svg>`;
+            const copyIconSVG = `<svg width="20"  x="0px" y="0px" height="20" viewBox="0 0 50 50"  fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M9.6283 8.35281V2.36095C9.6283 1.80941 9.1812 1.3623 8.62966 1.3623H2.6378C2.08627 1.3623 1.63916 1.80941 1.63916 2.36095V8.35281C1.63916 8.90434 2.08627 9.35145 2.6378 9.35145H8.62966C9.1812 9.35145 9.6283 8.90434 9.6283 8.35281ZM2.6378 2.36095H8.62966V8.35281H2.6378V2.36095ZM10.6269 9.35145V3.35959C11.1785 3.35959 11.6256 3.8067 11.6256 4.35823V9.35145C11.6256 10.4545 10.7314 11.3487 9.6283 11.3487H4.63509C4.08355 11.3487 3.63645 10.9016 3.63645 10.3501H9.6283C10.1798 10.3501 10.6269 9.90298 10.6269 9.35145Z" fill="#0F172A"/>
+</svg>
+`;
             fabric.loadSVGFromString(copyIconSVG, function(objects, options) {
                 const copyIcon = fabric.util.groupSVGElements(objects, options);
                 copyIcon.set({
