@@ -76,8 +76,8 @@ $(document).on("click", ".design-card", function () {
             editable: false, 
             selectable: false, 
             hasControls: false, 
-            borderColor: '#2DA9FC',
-            cornerColor: '#fff',
+            borderColor: 'blue',
+            cornerColor: 'red',
             cornerSize: 6,
             transparentCorners: false,
             isStatic: true
@@ -231,14 +231,12 @@ $(document).on('click','.edit_design_tem',function(e){
                         textAlign: element.textAlign,
                         editable: true,
                         hasControls: true,
-                        borderColor: '#2DA9FC',
-                        cornerColor: '#fff',
+                        borderColor: 'blue',
+                        cornerColor: 'red',
                         cornerSize: 6,
                         transparentCorners: false,
-                        isStatic: true,
-                        lockScalingFlip: true
+                        isStatic: true
                     });
-
                     switch (element.text) {
                         case 'event_name':
                             if (eventData.event_name) {
@@ -316,101 +314,88 @@ $(document).on('click','.edit_design_tem',function(e){
                         textElement.set('fontSize', updatedFontSize); // Update the font size
                         canvas.renderAll(); // Re-render the canvas to reflect changes
                     });
-                    
+            
                     addIconsToTextbox(textElement);
                     canvas.add(textElement);
             
                 });
             
-                // Function to add icons to a textbox
-        function addIconsToTextbox(textbox) {
-            // Trash icon SVG
-            // const trashIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 50 50"><path d="M20,30 L30,30 L30,40 L20,40 Z M25,10 L20,10 L20,7 L30,7 L30,10 Z M17,10 L33,10 L33,40 L17,40 Z" fill="#FF0000"/></svg>`;
-            const trashIconSVG = `<svg width="20" height="20" viewBox="0 0 448 512" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M11.1807 3.35025C9.51792 3.18547 7.84519 3.10059 6.17746 3.10059C5.1888 3.10059 4.20014 3.15052 3.21149 3.25038L2.19287 3.35025" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M4.93896 2.84627L5.04882 2.19216C5.12871 1.7178 5.18863 1.36328 6.03248 1.36328H7.3407C8.18456 1.36328 8.24947 1.73777 8.32437 2.19715L8.43422 2.84627" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M10.1073 4.92871L9.78275 9.95688C9.72782 10.7408 9.68288 11.35 8.28978 11.35H5.08413C3.69102 11.35 3.64609 10.7408 3.59116 9.95688L3.2666 4.92871" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M5.85303 8.60352H7.51577" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M5.43848 6.60547H7.93508" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>`;
-
-
-
-
-            fabric.loadSVGFromString(trashIconSVG, function(objects, options) {
-                const trashIcon = fabric.util.groupSVGElements(objects, options);
-                trashIcon.set({
-                    left: textbox.left + textbox.width * textbox.scaleX - 20,
-                    top: textbox.top - 20,
-                    selectable: false,
-                    evented: true,
-                    hasControls: false,
-                    visible: false, // Initially hidden
-                    className: 'trash-icon',
-                });
-                textbox.trashIcon = trashIcon;
-
-                // Handle trash icon click
-                trashIcon.on('mousedown', function() {
-                    console.log('Trash icon clicked');
-                    deleteTextbox(textbox);
-                });
-
-                canvas.add(trashIcon);
-            });
-
-            // Copy icon SVG
-            const copyIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"  x="0px" y="0px" width="20" height="20"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M384 336l-192 0c-8.8 0-16-7.2-16-16l0-256c0-8.8 7.2-16 16-16l140.1 0L400 115.9 400 320c0 8.8-7.2 16-16 16zM192 384l192 0c35.3 0 64-28.7 64-64l0-204.1c0-12.7-5.1-24.9-14.1-33.9L366.1 14.1c-9-9-21.2-14.1-33.9-14.1L192 0c-35.3 0-64 28.7-64 64l0 256c0 35.3 28.7 64 64 64zM64 128c-35.3 0-64 28.7-64 64L0 448c0 35.3 28.7 64 64 64l192 0c35.3 0 64-28.7 64-64l0-32-48 0 0 32c0 8.8-7.2 16-16 16L64 464c-8.8 0-16-7.2-16-16l0-256c0-8.8 7.2-16 16-16l32 0 0-48-32 0z"/></svg>`;
-            fabric.loadSVGFromString(copyIconSVG, function(objects, options) {
-                const copyIcon = fabric.util.groupSVGElements(objects, options);
-                copyIcon.set({
-                    left: textbox.left - 25,
-                    top: textbox.top - 20,
-                    selectable: false,
-                    evented: true,
-                    hasControls: false,
-                    visible: false, // Initially hidden
-                    className: 'copy-icon',
-                });
-                textbox.copyIcon = copyIcon;
-
-                // Handle copy icon click
-                copyIcon.on('mousedown', function() {
-                    console.log('Copy icon clicked');
-                    cloneTextbox(textbox);
-                });
-
-                canvas.add(copyIcon);
-            });
-
-            // Bind the updateIconPositions function to the moving and scaling events
-            textbox.on('moving', function() {
-                updateIconPositions(textbox);
-            });
-            textbox.on('scaling', function() {
-                updateIconPositions(textbox);
-            });
-
-            // Event listener to manage icon visibility when a textbox is clicked
-            textbox.on('mousedown', function() {
-                canvas.getObjects('textbox').forEach(function(tb) {
-                    if (tb.trashIcon) tb.trashIcon.set('visible', false); // Hide other icons
-                    if (tb.copyIcon) tb.copyIcon.set('visible', false);
-                });
-                if (textbox.trashIcon) textbox.trashIcon.set('visible', true); // Show current icons
-                if (textbox.copyIcon) textbox.copyIcon.set('visible', true);
-                canvas.renderAll(); // Re-render the canvas
-            });
-
-            // Initially hide all icons
-            canvas.getObjects('textbox').forEach(function(tb) {
-                if (tb.trashIcon) tb.trashIcon.set('visible', false);
-                if (tb.copyIcon) tb.copyIcon.set('visible', false);
-            });
-
-            canvas.renderAll(); // Final render
-        }
+                function addIconsToTextbox(textbox) {
+                    // Trash icon SVG
+                    const trashIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 50 50"><path d="M20,30 L30,30 L30,40 L20,40 Z M25,10 L20,10 L20,7 L30,7 L30,10 Z M17,10 L33,10 L33,40 L17,40 Z" fill="#FF0000"/></svg>`;
+                    fabric.loadSVGFromString(trashIconSVG, function (objects, options) {
+                        const trashIcon = fabric.util.groupSVGElements(objects, options);
+                        trashIcon.set({
+                            left: textbox.left + textbox.width * textbox.scaleX - 20,
+                            top: textbox.top - 20,
+                            selectable: false,
+                            evented: true,
+                            hasControls: false,
+                            visible: false, // Initially hidden
+                            className: 'trash-icon',
+                        });
+                        textbox.trashIcon = trashIcon;
                 
+                        // Handle trash icon click
+                        trashIcon.on('mousedown', function () {
+                            console.log('Trash icon clicked');
+                            deleteTextbox(textbox);
+                        });
+                
+                        canvas.add(trashIcon);
+                    });
+                
+                    // Copy icon SVG
+                    const copyIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 50 50"><path d="M5,5 L30,5 L30,30 L5,30 Z M35,5 L45,5 L45,35 L35,35 L35,5 Z" fill="#0000FF"/></svg>`;
+                    fabric.loadSVGFromString(copyIconSVG, function (objects, options) {
+                        const copyIcon = fabric.util.groupSVGElements(objects, options);
+                        copyIcon.set({
+                            left: textbox.left - 25,
+                            top: textbox.top - 20,
+                            selectable: false,
+                            evented: true,
+                            hasControls: false,
+                            visible: false, // Initially hidden
+                            className: 'copy-icon',
+                        });
+                        textbox.copyIcon = copyIcon;
+                
+                        // Handle copy icon click
+                        copyIcon.on('mousedown', function () {
+                            console.log('Copy icon clicked');
+                            cloneTextbox(textbox);
+                        });
+                
+                        canvas.add(copyIcon);
+                    });
+                
+                    // Bind the updateIconPositions function to the moving and scaling events
+                    textbox.on('moving', function () {
+                        updateIconPositions(textbox);
+                    });
+                    textbox.on('scaling', function () {
+                        updateIconPositions(textbox);
+                    });
+                
+                    // Event listener to manage icon visibility when a textbox is clicked
+                    textbox.on('mousedown', function () {
+                        canvas.getObjects('textbox').forEach(function (tb) {
+                            if (tb.trashIcon) tb.trashIcon.set('visible', false); // Hide other icons
+                            if (tb.copyIcon) tb.copyIcon.set('visible', false);
+                        });
+                        if (textbox.trashIcon) textbox.trashIcon.set('visible', true); // Show current icons
+                        if (textbox.copyIcon) textbox.copyIcon.set('visible', true);
+                        canvas.renderAll(); // Re-render the canvas
+                    });
+                
+                    // Initially hide all icons
+                    canvas.getObjects('textbox').forEach(function (tb) {
+                        if (tb.trashIcon) tb.trashIcon.set('visible', false);
+                        if (tb.copyIcon) tb.copyIcon.set('visible', false);
+                    });
+                
+                    canvas.renderAll(); // Final render
+                }
             } else {
                 showStaticTextElements();
             }
@@ -427,7 +412,6 @@ $(document).on('click','.edit_design_tem',function(e){
         width: 345, // Canvas width
         height: 490, // Canvas height
     });
-    const ctx = canvas.getContext('2d');
     const defaultSettings = {
         fontSize: 20,
         letterSpacing: 0,
@@ -740,9 +724,13 @@ $(document).on('click','.edit_design_tem',function(e){
     }
 
     function findTextboxCenter(textbox) {
+        // Calculate the center coordinates of the textbox
         var centerX = textbox.left + (textbox.width / 2);
         var centerY = textbox.top + (textbox.height / 2);
+
         console.log(`Center of textbox '${textbox.text}' is at (${centerX}, ${centerY})`);
+
+        // Optional: You can return or store this center value for further use
         return { x: centerX, y: centerY };
     }
 
@@ -836,14 +824,10 @@ $(document).on('click','.edit_design_tem',function(e){
             fontFamily: originalTextbox.fontFamily,
             originX: originalTextbox.originX,
             originY: originalTextbox.originY,
-            borderColor: '#2DA9FC',
-            cornerColor: '#fff',
-            cornerSize: 6,
             hasControls: true,
             hasBorders: true,
-            lockScalingFlip: true,
+            lockScalingFlip: true
         });
-
 
         canvas.add(clonedTextbox);
 
@@ -882,8 +866,58 @@ $(document).on('click','.edit_design_tem',function(e){
         end_date = eventData.event_date;
     }
 
+    // // Add two draggable static textboxes outside the image area
+    // addDraggableText(350, 50, eventData.event_name, eventData.event_name); // Position this outside the image area
+    // addDraggableText(350, 100, eventData.hosted_by, eventData.hosted_by);
+    // addDraggableText(350, 150, eventData.start_time, eventData.start_time);
+    // if(eventData.rsvp_end_time){
+    //     addDraggableText(350, 200, eventData.rsvp_end_time, eventData.rsvp_end_time);
+    // }
+    // addDraggableText(350, 250, start_date, start_date);
+    // addDraggableText(350, 300, end_date, end_date);
+    // addDraggableText(350, 350, eventData.event_location, eventData.event_location);
+
+    // addDraggableText(350, 50, 'event_name', 'xyz'); // Position this outside the image area
+    // addDraggableText(350, 100, 'host_name', 'abc');
+    // addDraggableText(350, 150, 'start_time', '5:00PM');
+    // addDraggableText(350, 200, 'rsvp_end_time', '6:00PM');
+    // addDraggableText(350, 250, 'start_date', '2024-07-27');
+    // addDraggableText(350, 300, 'end_date', '2024-07-27');
+    // addDraggableText(350, 350, 'Location', 'fdf');
+
+
+
+    function updateSelectedTextProperties() {
+        var fontSize = parseInt(document.getElementById('fontSize').value, 10);
+        var fontColor = document.getElementById('fontColor').value;
+        var activeObject = canvas.getActiveObject();
+
+        if (activeObject && activeObject.type === 'textbox') {
+            // Update text properties
+            activeObject.set({
+                fontSize: fontSize,
+                fill: fontColor
+            });
+            activeObject.setCoords(); // Update coordinates
+
+            // Log the updated properties
+            console.log('Updated Font Size: ' + activeObject.fontSize);
+            console.log('Updated Font Color: ' + activeObject.fill);
+
+            canvas.renderAll();
+            addToUndoStack(); // Save state after updating properties
+        }
+    }
+
+
+
     // document.getElementById('fontSize').addEventListener('change', updateSelectedTextProperties);
     // document.getElementById('fontColor').addEventListener('input', updateSelectedTextProperties);
+
+
+
+
+
 
 
     canvas.on('mouse:down', function (options) {
@@ -891,7 +925,6 @@ $(document).on('click','.edit_design_tem',function(e){
             canvas.setActiveObject(options.target);
         }
     });
-
     function getTextDataFromCanvas() {
         var objects = canvas.getObjects();
 
@@ -925,7 +958,6 @@ $(document).on('click','.edit_design_tem',function(e){
 
         return textData;
     }
-
     document.getElementById('addTextButton').addEventListener('click', function () {
         addEditableTextbox(100, 100, 'EditableText');  // You can set the initial position and default text
     });
@@ -936,14 +968,14 @@ $(document).on('click','.edit_design_tem',function(e){
             top: top,
             width: 200,
             fontSize: 20,
-            backgroundColor: 'rgba(0, 0, 0, 0)', // Set background to transparent
-            
+         backgroundColor: 'rgba(0, 0, 0, 0)', // Set background to transparent
+
             fill: '#000000',
             editable: true,
             selectable: true,
             hasControls: true,
-            borderColor: '#2DA9FC',
-            cornerColor: '#fff',
+            borderColor: 'blue',
+            cornerColor: 'red',
             cornerSize: 6,
             transparentCorners: false
         });
@@ -995,62 +1027,69 @@ $(document).on('click','.edit_design_tem',function(e){
         showStaticTextElements();
     }
 
-    function executeCommand(command) {
-        var activeObject = canvas.getActiveObject();
-        if (!activeObject) {
-            // alert('No object selected');
-            return;
-        }
-        if (activeObject && activeObject.type === 'textbox') {
 
-            const commands = {
-                bold: () => activeObject.set('fontWeight', activeObject.fontWeight === 'bold' ? '' : 'bold'),
-                italic: () => activeObject.set('fontStyle', activeObject.fontStyle === 'italic' ? '' : 'italic'),
-                underline: () => {
-                    activeObject.set('underline', !activeObject.underline);
-                    // Update line height after toggling underline
-                    const currentLineHeight = activeObject.lineHeight || 1.2; // Default line height
-                    activeObject.set('lineHeight', currentLineHeight); // Reapply the line height
-                },
-                setLineHeight: (value) => {
-                    activeObject.set('lineHeight', value);
-                },
-                strikeThrough: () => activeObject.set('linethrough', !activeObject.linethrough),
-                removeFormat: () => {
-                    activeObject.set({
-                        fontWeight: '',
-                        fontStyle: '',
-                        underline: false,
-                        linethrough: false,
-                        fontFamily: 'Arial'
-                    });
-                },
-                fontName: () => {
-                    var selectedFont = document.querySelector('[data-command="fontName"]').value;
-                    activeObject.set('fontFamily', selectedFont);
-                    
-                },
 
-                justifyLeft: () => activeObject.set('textAlign', 'left'),
-                justifyCenter: () => activeObject.set('textAlign', 'center'),
-                justifyRight: () => activeObject.set('textAlign', 'right'),
-                justifyFull: () => activeObject.set('textAlign', 'justify'),
 
-                uppercase: () => activeObject.set('text', activeObject.text.toUpperCase()),
-                lowercase: () => activeObject.set('text', activeObject.text.toLowerCase()),
-                capitalize: () => {
-                    const capitalizedText = activeObject.text.replace(/\b\w/g, char => char.toUpperCase());
-                    activeObject.set('text', capitalizedText);
+
+
+
+
+        function executeCommand(command) {
+            var activeObject = canvas.getActiveObject();
+            if (!activeObject) {
+                // alert('No object selected');
+                return;
+            }
+            if (activeObject && activeObject.type === 'textbox') {
+
+                const commands = {
+                    bold: () => activeObject.set('fontWeight', activeObject.fontWeight === 'bold' ? '' : 'bold'),
+                    italic: () => activeObject.set('fontStyle', activeObject.fontStyle === 'italic' ? '' : 'italic'),
+                    underline: () => {
+                        activeObject.set('underline', !activeObject.underline);
+                        // Update line height after toggling underline
+                        const currentLineHeight = activeObject.lineHeight || 1.2; // Default line height
+                        activeObject.set('lineHeight', currentLineHeight); // Reapply the line height
+                    },
+                    setLineHeight: (value) => {
+                        activeObject.set('lineHeight', value);
+                    },
+                    strikeThrough: () => activeObject.set('linethrough', !activeObject.linethrough),
+                    removeFormat: () => {
+                        activeObject.set({
+                            fontWeight: '',
+                            fontStyle: '',
+                            underline: false,
+                            linethrough: false,
+                            fontFamily: 'Arial'
+                        });
+                    },
+                    fontName: () => {
+                        var selectedFont = document.querySelector('[data-command="fontName"]').value;
+                        activeObject.set('fontFamily', selectedFont);
+                        
+                    },
+
+                    justifyLeft: () => activeObject.set('textAlign', 'left'),
+                    justifyCenter: () => activeObject.set('textAlign', 'center'),
+                    justifyRight: () => activeObject.set('textAlign', 'right'),
+                    justifyFull: () => activeObject.set('textAlign', 'justify'),
+
+                    uppercase: () => activeObject.set('text', activeObject.text.toUpperCase()),
+                    lowercase: () => activeObject.set('text', activeObject.text.toLowerCase()),
+                    capitalize: () => {
+                        const capitalizedText = activeObject.text.replace(/\b\w/g, char => char.toUpperCase());
+                        activeObject.set('text', capitalizedText);
+                    }
+
+                };
+                if (commands[command]) {
+                    commands[command]();
+                    canvas.renderAll();
+                    addToUndoStack(); // Save state after executing the command
                 }
-
-            };
-            if (commands[command]) {
-                commands[command]();
-                canvas.renderAll();
-                addToUndoStack(); // Save state after executing the command
             }
         }
-    }
 
     document.querySelectorAll('[data-command]').forEach(function (button) {
         button.addEventListener('click', function () {
