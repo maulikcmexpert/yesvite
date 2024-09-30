@@ -45,6 +45,7 @@
 
                             // Render text elements on canvas
                             staticInfo.textElements.forEach(element => {
+                                alert();
                                 let textElement = new fabric.Textbox(element.text, { // Use Textbox for editable text
                                     left: element.left,
                                     top: element.top,
