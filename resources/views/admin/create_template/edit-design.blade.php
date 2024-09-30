@@ -489,22 +489,15 @@
 
             <!-- Radio buttons for selecting color type -->
             <div class="common-font-wrp">
-                {{-- <label>
-                    <input type="radio" name="colorType" value="font" checked /> Font Color
-                </label>
-                <label>
-                    <input type="radio" name="colorType" value="background" /> Background Color
-                </label> --}}
-
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="colorType" value="font" checked>
+                    <input class="form-check-input colorTypeInp" type="radio" name="colorType" value="font" checked>
                     <label class="form-check-label">
                         Font Color
                     </label>
                 </div>
 
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="colorType" value="background">
+                    <input class="form-check-input colorTypeInp" type="radio" name="colorType" value="background">
                     <label class="form-check-label">
                         Background Color
                     </label>
