@@ -64,6 +64,8 @@ use Illuminate\Support\Facades\Validator;
 use stdClass;
 use Illuminate\Foundation\Exceptions\Handler as Exception;
 use function PHPUnit\Framework\isFalse;
+use Illuminate\Support\Facades\File;
+
 
 class EventController extends Controller
 {
@@ -252,7 +254,16 @@ class EventController extends Controller
         if(isset($request->temp_id) && $request->temp_id != ''){
             $tempData = TextData::where('id',$request->temp_id)->first();
             if($tempData){
-                $event_creation->design_image = $tempData->image;
+
+                $sourceImagePath = asset('storage/canvas/' . $tempData->image);
+
+                $destinationDirectory = public_path('storage/event_images/'); 
+                $destinationImagePath = $destinationDirectory . $tempData->image;
+
+                if (File::exists($sourceImagePath)) {
+                    File::copy($sourceImagePath, $destinationImagePath);
+                    $event_creation->design_image = $tempData->image; 
+                }
             }
         }
         $event_creation->save();
