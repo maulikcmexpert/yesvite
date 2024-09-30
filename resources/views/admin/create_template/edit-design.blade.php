@@ -301,9 +301,8 @@
                 </span>
             </div>
             <div class="used-fonts-wrp common-font-wrp">
-                <h3>Font Used</h3>
+                <h3>Select a Font</h3>
                 <div class="font-selector form-check">
-                    <h3>Select a Font</h3>
                     <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="Antaresia" id="antaresiaButton">
                     <label class="form-check-label" for="flexRadioDefault1">
                         Botanica
