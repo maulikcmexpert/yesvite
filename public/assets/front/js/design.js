@@ -834,9 +834,9 @@ $(document).on('click','.edit_design_tem',function(e){
             cornerColor: '#fff',
             cornerSize: 6,
             transparentCorners: false,
-            isStatic: true,
             hasControls: true,
             hasBorders: true,
+            lockScalingFlip: true
         });
 
         canvas.add(clonedTextbox);
