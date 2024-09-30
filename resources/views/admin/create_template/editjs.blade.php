@@ -437,7 +437,7 @@
                 canvas.remove(textbox.trashIcon);
                 textbox.trashIcon = null; // Clear reference
                 // const trashIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 50 50"><path d="M20,30 L30,30 L30,40 L20,40 Z M25,10 L20,10 L20,7 L30,7 L30,10 Z M17,10 L33,10 L33,40 L17,40 Z" fill="#FF0000"/></svg>`;
-                const trashIconSVG = `<svg width="23px" height="23px" style="background-color: #fff; color:#000; padding: 10px; border-radius: 50%;" strock=""  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path class="trash-icon-path" d="M135.2 17.7L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-7.2-14.3C307.4 6.8 296.3 0 284.2 0L163.8 0c-12.1 0-23.2 6.8-28.6 17.7zM416 128L32 128 53.2 467c1.6 25.3 22.6 45 47.9 45l245.8 0c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>`;
+                const trashIconSVG = `<svg width="23px" height="23px" style="background-color: #fff; color:#000; padding: 10px; border-radius: 50%;" strock=""  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M135.2 17.7L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-7.2-14.3C307.4 6.8 296.3 0 284.2 0L163.8 0c-12.1 0-23.2 6.8-28.6 17.7zM416 128L32 128 53.2 467c1.6 25.3 22.6 45 47.9 45l245.8 0c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>`;
 
 
                 // const trashIconSVG = `<svg width="29" x="0px" y="0px" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -461,7 +461,7 @@
                         evented: true,
                         hasControls: false,
                         visible: true, // Initially hidden
-                        className: 'trash-icon-svg',
+                        className: 'trash-icon',
                     });
                     textbox.trashIcon = trashIcon;
 
@@ -516,6 +516,9 @@
                     hasControls: false,
                     visible: true, // Initially hidden
                     className: 'copy-icon',
+                    fill: '#FF0000', // Example: Set fill color
+                    stroke: '#000000', // Example: Set stroke color
+                    strokeWidth: 1
                 });
                 // Add the copyIcon to the canvas
                 textbox.copyIcon = copyIcon

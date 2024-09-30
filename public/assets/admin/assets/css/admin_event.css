@@ -933,7 +933,7 @@
     border-radius: 50%;
 }
 
-.trash-icon-path {
+/* .trash-icon-svg {
     width: 20px !important;
     height: 20px !important;
     background-color: green !important;
@@ -942,23 +942,23 @@
     stroke: green !important;
 }
 
-.trash-icon-path {
+.trash-icon-svg path {
     width: 20px !important;
     height: 20px !important;
     background-color: green !important;
     color: green !important;
     fill: green !important;
     stroke: green !important;
-}
+} */
 
-.trash-icon-path {
+/* .trash-icon-svg {
     width: 20px !important;
     height: 20px !important;
     background-color: green !important;
     color: green !important;
     fill: green !important;
     stroke: green !important;
-}
+} */
 
 @media only screen and (max-width: 1599px) {
     .image-edit-inner-img {
