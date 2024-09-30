@@ -214,16 +214,16 @@ $(document).on('click','.edit_design_tem',function(e){
                 const staticInfo = dbJson;
                 staticInfo.textElements.forEach(element => {
 
-                    // const textMeasurement = new fabric.Text(element.text, {
-                    //     fontSize: element.fontSize,
-                    //     fontFamily: element.fontFamily,
-                    //     fontWeight: element.fontWeight,
-                    //     fontStyle: element.fontStyle,
-                    //     underline: element.underline,
-                    //     linethrough: element.linethrough,
-                    // });
+                    const textMeasurement = new fabric.Text(element.text, {
+                        fontSize: element.fontSize,
+                        fontFamily: element.fontFamily,
+                        fontWeight: element.fontWeight,
+                        fontStyle: element.fontStyle,
+                        underline: element.underline,
+                        linethrough: element.linethrough,
+                    });
 
-                    // const textWidth = textMeasurement.width;
+                    const textWidth = textMeasurement.width;
                     // console.log(`Width of '${element.text}':`, textWidth);
                 
                     // Calculate the width of the text
