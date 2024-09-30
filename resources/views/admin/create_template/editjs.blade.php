@@ -501,6 +501,8 @@
                 copyIcon.set({
                     left: textbox.left - 25,
                     top: textbox.top - 20,
+                    height: 10,
+                    width: 10,
                     selectable: false,
                     evented: true,
                     hasControls: false,
