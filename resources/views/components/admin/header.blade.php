@@ -44,7 +44,7 @@
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.css" />
 
-  <link rel="stylesheet" href="http://fabricjs.com/css/googlefonts.css">
+  <link rel="stylesheet" href="https://fabricjs.com/css/googlefonts.css">
 
   <link rel="stylesheet" href="{{ asset('assets/admin/assets/css/admin_event.css') }}">
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css">
