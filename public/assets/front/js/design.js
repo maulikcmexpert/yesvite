@@ -211,7 +211,6 @@ $(document).on('click','.edit_design_tem',function(e){
 
             // Load static information (text elements)
             if (dbJson) {
-                hideStaticTextElements();  // Hide static text elements if static information is present
                 const staticInfo = dbJson;
                 staticInfo.textElements.forEach(element => {
                     console.log(element);
@@ -307,17 +306,17 @@ $(document).on('click','.edit_design_tem',function(e){
                             }
                             break;
                     }
-                    const textWidth = textElement.calcTextWidth();
-                    textElement.set({ width: textWidth });
+                    // const textWidth = textElement.calcTextWidth();
+                    // textElement.set({ width: textWidth });
             
-                    textElement.on('scaling', function () {
-                        // Calculate the updated font size based on scaling factors
-                        var updatedFontSize = textElement.fontSize * (textElement.scaleX + textElement.scaleY) / 2;
-                        textElement.set('fontSize', updatedFontSize); // Update the font size
-                        canvas.renderAll(); // Re-render the canvas to reflect changes
-                    });
+                    // textElement.on('scaling', function () {
+                    //     // Calculate the updated font size based on scaling factors
+                    //     var updatedFontSize = textElement.fontSize * (textElement.scaleX + textElement.scaleY) / 2;
+                    //     textElement.set('fontSize', updatedFontSize); // Update the font size
+                    //     canvas.renderAll(); // Re-render the canvas to reflect changes
+                    // });
                     
-                    // addIconsToTextbox(textElement);
+                    addIconsToTextbox(textElement);
                     canvas.add(textElement);
             
                 });
