@@ -1234,7 +1234,7 @@ $(document).ready(function() {
         }
     });
     $(document).on('click','.uploaded-img-card-delete',function(){
-        console.log($(this).parent().html());
+        $(this).parent().attr('src','');
     })
 
 });
