@@ -1350,7 +1350,11 @@ $(document).ready(function() {
         $('.photo-slider-3').hide();
     })
     $(document).on('click','.save-slider-image',function(){
-        
+        var imageSources = [];
+        $('img').each(function() {
+            imageSources.push($(this).attr('src'));
+        });
+        console.log(imageSources);
     })
 
     
