@@ -2019,28 +2019,28 @@ function createMessageElement(key, messageData, isGroup) {
         // daychange = "<h5 class='day-line'><span>" + chatSmallDay +" "+ msgDate + "</span></h5>";
     }
     formattedDate[msgDate] = "1";
-
-    $(".time").each(async function (index) {
+    const time = document.getElementsByClassName("time");
+    $(time).each(async function (index) {
         if (messageRcvTime == $(this).text()) {
             $(this).text("");
         }
     });
-    return `   
-    <div>
+    return `<div>
     ${daychange}
-    <li class="${isSender ? "receiver" : "sender"}" id="message-${key}" >
-    
-    ${replySection == "" ? dataWithMedia : replySection}
-        
+        <li class="${
+            isSender ? "receiver" : "sender"
+        }" id="message-${key}" >        
+            ${replySection == "" ? dataWithMedia : replySection}        
             <span class="time">${new Date(
                 messageData.timeStamp
             ).toLocaleTimeString([], {
                 hour: "2-digit",
                 minute: "2-digit",
                 hour12: true,
-            })}</span>            
+            })}
+            </span>            
         </li>
-        </div>
+    </div>
     `;
 }
 function markMessageAsSeen(conversationId, key) {
