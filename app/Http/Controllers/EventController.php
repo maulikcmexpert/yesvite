@@ -184,12 +184,12 @@ class EventController extends Controller
 
                 $destinationDirectory = public_path('storage/event_images/'); 
                 $destinationImagePath = $destinationDirectory . $tempData->image;
-                dd($sourceImagePath);
                 if (file_exists($sourceImagePath)) {
                     dd(1);
                     File::copy($sourceImagePath, $destinationImagePath);
                     // $event_creation->design_image = $tempData->image; 
                 }
+                dd($sourceImagePath);
                 dd(2);
             }
         }
