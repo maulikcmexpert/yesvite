@@ -317,7 +317,7 @@ $(document).on('click','.edit_design_tem',function(e){
                         canvas.renderAll(); // Re-render the canvas to reflect changes
                     });
                     
-                    addIconsToTextbox(textElement);
+                    // addIconsToTextbox(textElement);
                     canvas.add(textElement);
             
                 });
