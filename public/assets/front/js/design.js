@@ -224,7 +224,7 @@ $(document).on('click','.edit_design_tem',function(e){
                     });
 
                     const textWidth = textMeasurement.width;
-                    console.log(`Width of '${element.text}':`, textWidth);
+                    // console.log(`Width of '${element.text}':`, textWidth);
                 
                     // Calculate the width of the text
                    
@@ -256,7 +256,7 @@ $(document).on('click','.edit_design_tem',function(e){
                     switch (element.text) {
                         case 'event_name':
                             if (eventData.event_name) {
-                                getWidth(eventData.event_name);
+                                getWidth(element,eventData.event_name);
                                 textElement.set({ text: eventData.event_name,width:textWidth });
                             } else {
                                 return;  // Skip adding the element if event_name is empty
@@ -351,7 +351,7 @@ $(document).on('click','.edit_design_tem',function(e){
         }
     }
 
-    function getWidth(text){
+    function getWidth(element,text){
         const textMeasurement = new fabric.Text(text, {
             fontSize: element.fontSize,
             fontFamily: element.fontFamily,
