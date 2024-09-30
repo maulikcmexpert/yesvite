@@ -702,6 +702,10 @@
         right: -200%;
     }
 
+    .design-sidebar_6.design-sidebar_7{
+        height: 50vh;
+    }
+
 }
 
 @media only screen and (max-width: 575px){
