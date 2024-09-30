@@ -5434,7 +5434,7 @@ class ApiControllerv2 extends Controller
                     foreach ($eventOldImages as $oldImages) {
                         if (file_exists(public_path('storage/event_images/') . $oldImages->image)) {
                             $imagePath = public_path('storage/event_images/') . $oldImages->image;
-                            // unlink($imagePath);
+                            unlink($imagePath);
                         }
                         EventImage::where('id', $oldImages->id)->delete();
                     }
