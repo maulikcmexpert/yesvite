@@ -962,7 +962,7 @@
 
         function saveTextDataToDatabase() {
 
-            // hideStaticTextElements(); // Hide the text elements
+            hideStaticTextElements(); // Hide the text elements
             var textData = getTextDataFromCanvas();
             var imageURL = canvas.toDataURL('image/png');
             var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content'); // Get CSRF token
