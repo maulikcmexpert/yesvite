@@ -70,10 +70,7 @@
     height: 375px;
 }
 
-/* ====fonts=== */
-.Botanica {
-    font-family: 'Botanica Script';
-}
+
 
 /* =========== responsive =========== */
 @media only screen and (max-width:575px) {
