@@ -472,13 +472,13 @@
 
             <div class="used-fonts-wrp common-font-wrp">
                 <div class="form-check">
-                    <input type="radio" name="colorType" value="font" checked class="form-check-input" id="flexRadioDefaults"/> 
+                    <input type="radio" name="colorType" value="font" checked class="form-check-input colorTypeInp" id="flexRadioDefaults"/> 
                     <label class="form-check-label" for="flexRadioDefaults">
                         Font Color
                     </label>
                 </div>
                 <div class="form-check">
-                    <input type="radio" name="colorType" value="background" class="form-check-input" id="flexRadioDefaultss"/>
+                    <input type="radio" name="colorType" value="background" class="form-check-input colorTypeInp" id="flexRadioDefaultss"/>
                     <label class="form-check-label" for="flexRadioDefaultss">
                         Background Color
                     </label>
@@ -956,7 +956,7 @@
             </div>
 
             <div class="footer-buttons">
-                <button class="cmn-btn">Save</button>
+                <button class="cmn-btn save-slider-image">Save</button>
             </div>
         </div>
     </div>
