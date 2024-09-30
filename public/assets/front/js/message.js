@@ -2032,18 +2032,14 @@ function createMessageElement(key, messageData, isGroup, msgLoop = 0) {
     let setTime = 1;
     if (msgLoop != 0) {
         Array.from(time).forEach((timeElement) => {
-            if ($(timeElement).attr("loop") > msgLoop) {
+            if ($(timeElement).data("loop") > msgLoop) {
                 setTime = 0;
             } else {
                 $(timeElement).text("");
-                $(timeElement).removeClass(
-                    `time_${messageRcvTime.replace(/\s/g, "")}`
-                );
             }
         });
     } else {
         $(time).text("");
-        $(time).removeClass(`time_${messageRcvTime.replace(/\s/g, "")}`);
     }
 
     return `<div>
@@ -2057,7 +2053,7 @@ function createMessageElement(key, messageData, isGroup, msgLoop = 0) {
             <span data-loop="${
                 msgLoop == 0 ? chatloop : msgLoop
             }" class="time time_${messageRcvTime.replace(/\s/g, "")}">${
-        setTime == 1 ? messageRcvTime : 0
+        setTime == 1 ? messageRcvTime : ""
     }</span>            
         </li>
     </div>
