@@ -3025,11 +3025,11 @@ function generateReactionsAndReply() {
         const messageId = $(this).data("message-id");
         const reactionDialog = `
         <div class="reaction-dialog" id="reaction-dialog-${messageId}">
-            <span class="reaction-option" data-reaction="\\u{1F60D}"><img src="${asset_path}+ic_heart_eyes.png"/></span>
-            <span class="reaction-option" data-reaction="\\u{1F604}"><img src="${asset_path}+ic_smile.png"/></span>
-            <span class="reaction-option heart_reaction" data-reaction="\\u{2764}}"<img src="${asset_path}+ic_like_reaction.png"/></span>
-            <span class="reaction-option" data-reaction="\\u{1F44D}"><img src="${asset_path}+ic_thumsup.png"/></span>
-            <span class="reaction-option" data-reaction="\\u{1F44F}}"><img src="${asset_path}+ic_clapping_hand.png"/></span>
+            <span class="reaction-option" data-reaction="\\u{1F60D}"><img src="${asset_path}/ic_heart_eyes.png"/></span>
+            <span class="reaction-option" data-reaction="\\u{1F604}"><img src="${asset_path}/ic_smile.png"/></span>
+            <span class="reaction-option heart_reaction" data-reaction="\\u{2764}}"<img src="${asset_path}/ic_like_reaction.png"/></span>
+            <span class="reaction-option" data-reaction="\\u{1F44D}"><img src="${asset_path}/ic_thumsup.png"/></span>
+            <span class="reaction-option" data-reaction="\\u{1F44F}}"><img src="${asset_path}/ic_clapping_hand.png"/></span>
         </div>
     `;
         $(".reaction-dialog").remove(); // Remove any existing reaction dialogs
