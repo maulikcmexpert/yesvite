@@ -828,12 +828,11 @@ ul.member-lists li:last-child {
 }
 
 .msg-body ul li.sender div img {
-    max-width: 100%;
-    width: 297px;
-    height: 254px;
+    max-width: 25px;
+    width: 22px;
+    height: 22px;
     margin-bottom: 10px;
     object-fit: cover;
-    border-radius: 10px;
 }
 
 .msg-footer {
