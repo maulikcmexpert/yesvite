@@ -1114,39 +1114,7 @@ console.log(123)
     });
 
 
-    function getTextDataFromCanvas() {
-        var objects = canvas.getObjects();
-
-        var textData = [];
-
-        objects.forEach(function (obj) {
-            if (obj.type === 'textbox') {
-                var centerX = obj.left + (obj.width / 2);
-                var centerY = obj.top + (obj.height / 2);
-                textData.push({
-                    text: obj.text,
-                    left: obj.left,
-                    top: obj.top,
-                    fontSize: obj.fontSize,
-                    fill: obj.fill,
-                    centerX: centerX, // Include centerX in the data
-                    centerY: centerY, // Include centerY in the data
-                    dx: obj.left, // Calculate dx
-                    dy: obj.top,   // Calculate dy
-                    backgroundColor: obj.backgroundColor,
-                    fontFamily: obj.fontFamily,
-                    textAlign: obj.textAlign,
-                    fontWeight: obj.fontWeight,
-                    fontStyle: obj.fontStyle,
-                    underline: obj.underline,
-                    linethrough: obj.linethrough,
-                    date_formate: obj.date_formate // Include date_formate if set
-                });
-            }
-        });
-
-        return textData;
-    }
+  
 
     document.getElementById('addTextButton').addEventListener('click', function () {
         addEditableTextbox(100, 100, 'EditableText');  // You can set the initial position and default text
@@ -1303,6 +1271,127 @@ console.log(123)
     document.querySelector('[data-command="redo"]').addEventListener('click', redo);
 
 })
+
+function getTextDataFromCanvas() {
+    var objects = canvas.getObjects();
+
+    var textData = [];
+
+    objects.forEach(function (obj) {
+        if (obj.type === 'textbox') {
+            var centerX = obj.left + (obj.width / 2);
+            var centerY = obj.top + (obj.height / 2);
+            textData.push({
+                text: obj.text,
+                left: obj.left,
+                top: obj.top,
+                fontSize: obj.fontSize,
+                fill: obj.fill,
+                centerX: centerX, // Include centerX in the data
+                centerY: centerY, // Include centerY in the data
+                dx: obj.left, // Calculate dx
+                dy: obj.top,   // Calculate dy
+                backgroundColor: obj.backgroundColor,
+                fontFamily: obj.fontFamily,
+                textAlign: obj.textAlign,
+                fontWeight: obj.fontWeight,
+                fontStyle: obj.fontStyle,
+                underline: obj.underline,
+                linethrough: obj.linethrough,
+                date_formate: obj.date_formate // Include date_formate if set
+            });
+        }
+    });
+
+    return textData;
+}
+
+$(document).on("click", ".store_desgin_temp", function () {
+    var downloadImage = document.getElementById("download_image");
+    $("#loader").show();
+    $(this).prop("disabled", true);
+    $('.btn-close').prop("disabled", true);
+    eventData.textData = dbJson;
+    eventData.temp_id = temp_id;
+    save_image_design(downloadImage);
+    $(".main-content-wrp").addClass("blurred");
+});
+
+$(document).on("click", ".next_guest_step", function () {
+    var downloadImage = document.getElementById("imageEditor1");
+    $("#loader").show();
+    $(this).prop("disabled", true);
+    $('.btn-close').prop("disabled", true);
+    var textData = getTextDataFromCanvas();
+    eventData.textData = textData;
+    eventData.temp_id = temp_id;
+    save_image_design(downloadImage);
+    $(".main-content-wrp").addClass("blurred");
+});
+
+function save_image_design(downloadImage,textData){
+    domtoimage
+        .toBlob(downloadImage)
+        .then(function (blob) {
+            var formData = new FormData();
+            formData.append("image", blob, "design.png");
+            $.ajax({
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                        "content"
+                    ),
+                },
+                url: base_url + "event/store_temp_design",
+                type: "POST",
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    let image = response.image;
+                    eventData.desgin_selected = image;
+                    // if(eventData.step == '1'){
+                    //     eventData.step = '2';
+                    // }
+                    console.log(final_step);
+                    if(final_step == 2){
+                        final_step = 3;
+                    }
+                    console.log(eventData);
+                    eventData.step = final_step;
+                    console.log("Image uploaded and saved successfully");
+                    $("#myCustomModal").modal("hide");
+                    $("#exampleModal").modal("hide");
+                    $("#loader").css("display", "none");
+                    $('.store_desgin_temp').prop("disabled", false);
+                    $(".main-content-wrp").removeClass("blurred");
+                    $(".step_2").hide();
+                    $('.edit_design_template').hide();
+                    handleActiveClass('.li_guest');
+                    $('.li_design').find(".side-bar-list").addClass("menu-success");
+
+                    $('.event_create_percent').text('75%');
+                    $('.current_step').text('3 of 4');
+                    
+                    $(".step_3").show();
+                    console.log(eventData);
+                    
+                    var type="all"
+                    get_user(type);
+                    
+
+                },
+                error: function (xhr, status, error) {
+                    console.error(
+                        "Failed to upload and save the image:",
+                        error
+                    );
+                },
+            });
+        })
+        .catch(function (error) {
+            console.error("Error capturing image:", error);
+        });
+}
 
 $(document).ready(function() {
     $('.slider_photo').on('change', function(event) {
