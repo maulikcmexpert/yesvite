@@ -891,8 +891,6 @@
 
         function getTextDataFromCanvas() {
             var objects = canvas.getObjects();
-            console.log(objects);
-
 
             var textData = [];
 
@@ -923,6 +921,7 @@
                     });
                 }
             });
+            console.log(textData);
 
             return textData;
         }
