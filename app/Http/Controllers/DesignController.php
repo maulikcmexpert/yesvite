@@ -100,7 +100,7 @@ class DesignController extends Controller
         $shape = $request->shape;
         $imageName = 'user_image_' . time() . '.' . $file->getClientOriginalExtension(); // Assuming PNG format
         $file->move(public_path('storage/canvas'), $imageName);
-        $imagePath = asset('storage/canvas' . $imageName);
+        $imagePath = asset('storage/canvas/' . $imageName);
         $textElements = [
             [
                 'shape' => $shape // Add shape information
