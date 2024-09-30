@@ -216,26 +216,39 @@ $(document).on('click','.edit_design_tem',function(e){
                 staticInfo.textElements.forEach(element => {
                     console.log(element);
                     let textElement = new fabric.Textbox(
-                        element.text, {  // Use Textbox for editable text
-                        left: element.left,
-                        top: element.top,
-                        width: element.width || 200,  // Default width if not provided
+                        element.text, {  
+                            
+                        // left: element.left,
+                        // top: element.top,
+                        // width: element.width || 200,  // Default width if not provided
+                        // fontSize: element.fontSize,
+                        // fill: element.fill,
+                        // fontFamily: element.fontFamily,
+                        // fontWeight: element.fontWeight,
+                        // fontStyle: element.fontStyle,
+                        // underline: element.underline,
+                        // linethrough: element.linethrough,
+                        // backgroundColor: element.backgroundColor,
+                        // textAlign: element.textAlign,
+                        // hasControls: true,
+                        // borderColor: '#2DA9FC',
+                        // cornerColor: '#fff',
+                        // cornerSize: 6,
+                        // transparentCorners: false,
+                        // lockScalingFlip: true,
+                        // hasBorders: true,
+                        left: element.left, // Offset position
+                        top: element.top,   // Offset position
                         fontSize: element.fontSize,
                         fill: element.fill,
+                        width: element.width,
+                        height: element.height,
                         fontFamily: element.fontFamily,
-                        fontWeight: element.fontWeight,
-                        fontStyle: element.fontStyle,
-                        underline: element.underline,
-                        linethrough: element.linethrough,
-                        backgroundColor: element.backgroundColor,
-                        textAlign: element.textAlign,
+                        originX: element.originX,
+                        originY: element.originY,
                         hasControls: true,
-                        borderColor: '#2DA9FC',
-                        cornerColor: '#fff',
-                        cornerSize: 6,
-                        transparentCorners: false,
-                        lockScalingFlip: true,
                         hasBorders: true,
+                        lockScalingFlip: true
                     });
 
 
