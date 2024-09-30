@@ -1095,6 +1095,7 @@
     })
 
     $(document).on("click", ".close-btn", function() {
+        alert();
         toggleSidebar();
         var id = $(this).data('id');
         $('#sidebar').removeClass(id);
