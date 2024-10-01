@@ -485,16 +485,6 @@ $(document).on('click','.edit_design_tem',function(e){
         canvas.renderAll(); // Final render
     }
 
-    // Create a new canvas element
-    var newCanvas = $('<canvas>', {
-        id: 'imageEditor1',
-        width: 345,
-        height: 490
-    });
-
-    // Append the new canvas to the modal-design-card
-    $('.image-edit-inner-img').html(newCanvas);
-
     canvas = new fabric.Canvas('imageEditor1', {
         width: 345, // Canvas width
         height: 490, // Canvas height
