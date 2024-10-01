@@ -13134,11 +13134,9 @@ class ApiControllerv2 extends Controller
         $user  = Auth::guard('api')->user();
         $rawData = $request->getContent();
         $users_ids = json_decode($rawData, true);
-        // $users_ids = json_decode($users_data['users_id'], true);
         try {
             $getnotification_data = [];
             foreach ($users_ids as $users_id) {
-                // dd($users_id);
                 $notifications  = UserNotificationType::where(['user_id' => $users_id, 'type' => 'private_message'])->get();
                 foreach ($notifications as $notification) {
                     $getnotification_data[] = [
@@ -13149,9 +13147,14 @@ class ApiControllerv2 extends Controller
                     ];
                 }
             }
-            return response()->json(data: ['status' => 1, 'message' => "Template List", 'data' => $getnotification_data]);
+
+            return response()->json([
+                'status' => 1,
+                'message' => "Notification List",
+                'data' => $getnotification_data
+            ]);
         } catch (Exception  $e) {
-            return response()->json(['status' => 0, 'message' => 'something went wrong']);
+            return response()->json(['status' => 0, 'message' => 'Something went wrong', 'error' => $e->getMessage()]);
         }
     }
 }
