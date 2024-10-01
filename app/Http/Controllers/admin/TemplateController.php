@@ -102,15 +102,17 @@ class TemplateController extends Controller
             DB::beginTransaction();
             $imageName = null;
             $filledImage = null;
-
+            $i = 0;
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
-                $imageName = time() . '.' . $image->getClientOriginalExtension();
+                $imageName = time() .$i. '.' . $image->getClientOriginalExtension();
                 $image->move(public_path('storage/canvas'), $imageName);
+                $i++;
             }
             if ($request->hasFile('filled_image')) {
+                $i++;
                 $filled_image = $request->file('filled_image');
-                $filledImage = time() . '.' . $filled_image->getClientOriginalExtension();
+                $filledImage = time() .$i. '.' . $filled_image->getClientOriginalExtension();
                 $filled_image->move(public_path('storage/canvas'), $filledImage);
             }
             $textData = TextData::create([
@@ -193,21 +195,23 @@ class TemplateController extends Controller
             // Update the template fields
             $template->event_design_category_id = $request->event_design_category_id;
             $template->event_design_sub_category_id = $request->event_design_sub_category_id;
-
+            $i = 0;
             // Handle image upload (if a new image is uploaded)
             if ($request->hasFile('image')) {
                 if ($template->image && file_exists(public_path('storage/canvas/' . $template->image))) {
                     unlink(public_path('storage/canvas/' . $template->image));
                 }
-                $imageName = time() . '.' . $request->image->extension();
+                $imageName = time() .$i.'.' . $request->image->extension();
+                $i++;
                 $request->image->move(public_path('storage/canvas'), $imageName);
                 $template->image = $imageName;
             }
             if ($request->hasFile('filled_image')) {
+                $i++;
                 if ($template->filled_image && file_exists(public_path('storage/canvas/' . $template->filled_image))) {
                     unlink(public_path('storage/canvas/' . $template->filled_image));
                 }
-                $FilledimageName = time() . '.' . $request->filled_image->extension();
+                $FilledimageName = time() .$i. '.' . $request->filled_image->extension();
                 $request->filled_image->move(public_path('storage/canvas'), $FilledimageName);
                 $template->filled_image = $FilledimageName;
             }

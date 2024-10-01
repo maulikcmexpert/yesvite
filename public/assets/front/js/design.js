@@ -1599,7 +1599,7 @@ function getTextDataFromCanvas() {
                 text: obj.text,
                 left: obj.left,
                 top: obj.top,
-                fontSize: obj.fontSize,
+                fontSize: parseInt(obj.fontSize),
                 fill: obj.fill,
                 centerX: centerX, // Include centerX in the data
                 centerY: centerY, // Include centerY in the data
