@@ -6,16 +6,15 @@ var base_url = $("#base_url").text();
 
 $(document).on("click", ".design-card", function () {
 
-    var imageUrl = $(this).data("image");
-    var json = $(this).data("json");
-    var id = $(this).data("id");
+    var image = $(this).data("image");
+    dbJson = $(this).data("json");
+    temp_id = $(this).data("id");
     
-    $('.edit_design_tem').attr('data-image', imageUrl);
+    $('.edit_design_tem').attr('data-image', image);
     let dbJson = json;
     let temp_id = id;
     // Set the image URL in the modal's image tag
-    $("#modalImage").attr("src", imageUrl);
-    let image = imageUrl;
+    $("#modalImage").attr("src", image);
 
     // Remove the old canvas if it exists
     $('#imageEditor2').remove(); 
@@ -206,139 +205,154 @@ $(document).on('click','.edit_design_tem',function(e){
     $("#exampleModal").modal("hide");
     $('.edit_design_template').show();
 
-    function loadTextDataFromDatabase() {
-      
-        if (image) {
-            console.log(image);
-            fabric.Image.fromURL(image, function (img) {
-                img.set({
-                    left: 0,
-                    top: 0,
-                    selectable: false,  // Non-draggable background image
-                    hasControls: false  // Disable resizing controls
-                });
-                canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
+    var canvas = new fabric.Canvas('imageEditor1', {
+        width: 345, // Canvas width
+        height: 490, // Canvas height
+    });
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, 345, 490);
+    const defaultSettings = {
+        fontSize: 20,
+        letterSpacing: 0,
+        lineHeight: 1.2
+    };
 
+    let savedSettings = {
+        fontSize: defaultSettings.fontSize,
+        letterSpacing: defaultSettings.letterSpacing,
+        lineHeight: defaultSettings.lineHeight
+    };
+
+    if (image) {
+        // console.log(image);
+        fabric.Image.fromURL(image, function (img) {
+            img.set({
+                left: 0,
+                top: 0,
+                selectable: false,  // Non-draggable background image
+                hasControls: false  // Disable resizing controls
             });
+            canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
 
-            if (dbJson) {
-                const staticInfo = dbJson;
-                staticInfo.textElements.forEach(element => {
+        });
 
-                    const textMeasurement = new fabric.Text(element.text, {
-                        fontSize: element.fontSize,
-                        fontFamily: element.fontFamily,
-                        fontWeight: element.fontWeight,
-                        fontStyle: element.fontStyle,
-                        underline: element.underline,
-                        linethrough: element.linethrough,
-                    });
+        if (dbJson) {
+            const staticInfo = dbJson;
+            staticInfo.textElements.forEach(element => {
 
-                    const textWidth = textMeasurement.width;
-                    let textElement = new fabric.Textbox(
-                        element.text, {  
-                        left: element.left,
-                        top: element.top,
-                        width: element.width || textWidth,  
-                        fontSize: element.fontSize,
-                        fill: element.fill,
-                        fontFamily: element.fontFamily,
-                        fontWeight: element.fontWeight,
-                        fontStyle: element.fontStyle,
-                        underline: element.underline,
-                        linethrough: element.linethrough,
-                        backgroundColor: element.backgroundColor,
-                        textAlign: element.textAlign,
-                        hasControls: true,
-                        borderColor: '#2DA9FC',
-                        cornerColor: '#fff',
-                        cornerSize: 6,
-                        transparentCorners: false,
-                        lockScalingFlip: true,
-                        hasBorders: true,
-                    });
-
-                    switch (element.text) {
-                        case 'event_name':
-                            if (eventData.event_name) {
-                                let textWidth = getWidth(element,eventData.event_name);
-                                textElement.set({ text: eventData.event_name,width:textWidth });
-                            } else {
-                                return;  
-                            }
-                            break;
-                        case 'host_name':
-                            if (eventData.hosted_by) {
-                                let textWidth = getWidth(element,eventData.hosted_by);
-                                textElement.set({ text: eventData.hosted_by,width:textWidth });
-                            } else {
-                                return;  
-                            }
-                            break;
-                        case 'Location':
-                            if (eventData.event_location) {
-                                let textWidth = getWidth(element,eventData.event_location);
-                                textElement.set({ text: eventData.event_location,width:textWidth });
-                            } else {
-                                return; 
-                            }
-                            break;
-                        case 'start_time':
-                            if (eventData.start_time) {
-                                let textWidth = getWidth(element,eventData.start_time);
-                                textElement.set({ text: eventData.start_time,width:textWidth });
-                            } else {
-                                return; 
-                            }
-                            break;
-                        case 'rsvp_end_time':
-                            if (eventData.rsvp_end_time) {
-                                let textWidth = getWidth(element,eventData.rsvp_end_time);
-                                textElement.set({ text: eventData.rsvp_end_time,width:textWidth });
-                            } else {
-                                return; 
-                            }
-                            break;
-                        case 'start_date':
-                            if (eventData.event_date) {
-                                var start_date = '';
-                                if (eventData.event_date.includes(" To ")) {
-                                    let [start, end] = eventData.event_date.split(" To ");
-                                    start_date = start;
-                                } else {
-                                    start_date = eventData.event_date;
-                                }
-                                let textWidth = getWidth(element,start_date);
-                                textElement.set({ text: start_date,width:textWidth });
-                            } else {
-                                return; 
-                            }
-                            break;
-                        case 'end_date':
-                            if (eventData.event_date) {
-            
-                                var end_date = '';
-                                if (eventData.event_date.includes(" To ")) {
-                                    let [start, end] = eventData.event_date.split(" To ");
-                                    end_date = end;
-                                } else {
-                                    end_date = eventData.event_date;
-                                }
-                                let textWidth = getWidth(element,end_date);
-                                textElement.set({ text: end_date,width:textWidth });
-                            } else {
-                                return;  
-                            }
-                            break;
-                    }
-                    addIconsToTextbox(textElement);
-                    canvas.add(textElement);
+                const textMeasurement = new fabric.Text(element.text, {
+                    fontSize: element.fontSize,
+                    fontFamily: element.fontFamily,
+                    fontWeight: element.fontWeight,
+                    fontStyle: element.fontStyle,
+                    underline: element.underline,
+                    linethrough: element.linethrough,
                 });
-            } else {
-                showStaticTextElements();
-            }
-            canvas.renderAll();
+
+                const textWidth = textMeasurement.width;
+                let textElement = new fabric.Textbox(
+                    element.text, {  
+                    left: element.left,
+                    top: element.top,
+                    width: element.width || textWidth,  
+                    fontSize: element.fontSize,
+                    fill: element.fill,
+                    fontFamily: element.fontFamily,
+                    fontWeight: element.fontWeight,
+                    fontStyle: element.fontStyle,
+                    underline: element.underline,
+                    linethrough: element.linethrough,
+                    backgroundColor: element.backgroundColor,
+                    textAlign: element.textAlign,
+                    hasControls: true,
+                    borderColor: '#2DA9FC',
+                    cornerColor: '#fff',
+                    cornerSize: 6,
+                    transparentCorners: false,
+                    lockScalingFlip: true,
+                    hasBorders: true,
+                });
+
+                switch (element.text) {
+                    case 'event_name':
+                        if (eventData.event_name) {
+                            let textWidth = getWidth(element,eventData.event_name);
+                            textElement.set({ text: eventData.event_name,width:textWidth });
+                        } else {
+                            return;  
+                        }
+                        break;
+                    case 'host_name':
+                        if (eventData.hosted_by) {
+                            let textWidth = getWidth(element,eventData.hosted_by);
+                            textElement.set({ text: eventData.hosted_by,width:textWidth });
+                        } else {
+                            return;  
+                        }
+                        break;
+                    case 'Location':
+                        if (eventData.event_location) {
+                            let textWidth = getWidth(element,eventData.event_location);
+                            textElement.set({ text: eventData.event_location,width:textWidth });
+                        } else {
+                            return; 
+                        }
+                        break;
+                    case 'start_time':
+                        if (eventData.start_time) {
+                            let textWidth = getWidth(element,eventData.start_time);
+                            textElement.set({ text: eventData.start_time,width:textWidth });
+                        } else {
+                            return; 
+                        }
+                        break;
+                    case 'rsvp_end_time':
+                        if (eventData.rsvp_end_time) {
+                            let textWidth = getWidth(element,eventData.rsvp_end_time);
+                            textElement.set({ text: eventData.rsvp_end_time,width:textWidth });
+                        } else {
+                            return; 
+                        }
+                        break;
+                    case 'start_date':
+                        if (eventData.event_date) {
+                            var start_date = '';
+                            if (eventData.event_date.includes(" To ")) {
+                                let [start, end] = eventData.event_date.split(" To ");
+                                start_date = start;
+                            } else {
+                                start_date = eventData.event_date;
+                            }
+                            let textWidth = getWidth(element,start_date);
+                            textElement.set({ text: start_date,width:textWidth });
+                        } else {
+                            return; 
+                        }
+                        break;
+                    case 'end_date':
+                        if (eventData.event_date) {
+        
+                            var end_date = '';
+                            if (eventData.event_date.includes(" To ")) {
+                                let [start, end] = eventData.event_date.split(" To ");
+                                end_date = end;
+                            } else {
+                                end_date = eventData.event_date;
+                            }
+                            let textWidth = getWidth(element,end_date);
+                            textElement.set({ text: end_date,width:textWidth });
+                        } else {
+                            return;  
+                        }
+                        break;
+                }
+                addIconsToTextbox(textElement);
+                canvas.add(textElement);
+            });
+        } else {
+            showStaticTextElements();
         }
+        canvas.renderAll();
     }
 
     function getWidth(element,text){
@@ -451,24 +465,6 @@ $(document).on('click','.edit_design_tem',function(e){
         canvas.renderAll(); // Final render
     }
 
-    var canvas = new fabric.Canvas('imageEditor1', {
-        width: 345, // Canvas width
-        height: 490, // Canvas height
-    });
-    const ctx = canvas.getContext('2d');
-    ctx.clearRect(0, 0, 345, 490);
-    const defaultSettings = {
-        fontSize: 20,
-        letterSpacing: 0,
-        lineHeight: 1.2
-    };
-
-    let savedSettings = {
-        fontSize: defaultSettings.fontSize,
-        letterSpacing: defaultSettings.letterSpacing,
-        lineHeight: defaultSettings.lineHeight
-    };
-
     const updateTextboxWidth = (textbox) => {
         const text = textbox.text;
         const fontSize = textbox.fontSize;
@@ -552,6 +548,7 @@ $(document).on('click','.edit_design_tem',function(e){
             alert('Settings have been saved!');
         }
     });
+    
     const resetTextboxProperties = (object) => {
         object.set({
             fontSize: defaultSettings.fontSize,
@@ -711,9 +708,6 @@ $(document).on('click','.edit_design_tem',function(e){
             reader.readAsDataURL(file);
         }
     });
-
-    // Call function to load data when the page loads
-    loadTextDataFromDatabase();
 
     function hideStaticTextElements() {
         canvas.getObjects('textbox').forEach(function (textbox) {
@@ -959,6 +953,7 @@ $(document).on('click','.edit_design_tem',function(e){
     }
 
     canvas.on('mouse:down', function (options) {
+        console.log(options);
         if (options.target && options.target.type === 'textbox') {
             canvas.setActiveObject(options.target);
         }else{
@@ -967,8 +962,6 @@ $(document).on('click','.edit_design_tem',function(e){
                 if (tb.copyIcon) tb.copyIcon.set('visible', false);
             });
         }
-
-
     });
 
     document.getElementById('addTextButton').addEventListener('click', function () {
