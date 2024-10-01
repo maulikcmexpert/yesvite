@@ -35,7 +35,7 @@ $(document).on("click", ".design-card", function () {
     // Show the modal
     $("#exampleModal").modal("show");
 
-    canvas = new fabric.Canvas('imageEditor2', {
+    var canvas2 = new fabric.Canvas('imageEditor2', {
         width: 345,
         height: 490,
         position: 'relative',
@@ -54,7 +54,7 @@ $(document).on("click", ".design-card", function () {
             selectable: false,
             hasControls: false
         });
-        canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
+        canvas2.setBackgroundImage(img, canvas2.renderAll.bind(canvas2));
     });
 
     const staticInfo = dbJson;
@@ -154,7 +154,7 @@ $(document).on("click", ".design-card", function () {
         }
         const textWidth = textElement.calcTextWidth();
         textElement.set({ width: textWidth });
-        canvas.add(textElement);
+        canvas2.add(textElement);
 
     });
 });
