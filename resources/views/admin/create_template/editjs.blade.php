@@ -38,7 +38,8 @@
                         });
 
                         // Load static information (text elements)
-                        if (data.static_information != "") {
+                        if (data.static_information) {
+                            alert();
                             hideStaticTextElements(); // Hide static text elements if static information is present
                             const staticInfo = JSON.parse(data.static_information);
                             console.log(staticInfo);
