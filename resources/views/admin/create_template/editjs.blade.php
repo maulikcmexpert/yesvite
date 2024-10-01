@@ -24,31 +24,30 @@
                 .then(data => {
                     if (data) {
                         // // Load background image
-                        var canvasElement = document.getElementById('imageEditor1');
-                        canvasElement.setAttribute('data-canvas-id', data.id);
-                        fabric.Image.fromURL(data.image, function(img) {
-                            img.set({
-                                left: 0,
-                                top: 0,
-                                selectable: false, // Non-draggable background image
-                                hasControls: false // Disable resizing controls
-                            });
-                            canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
 
-                        });
+                        // fabric.Image.fromURL(data.imagePath, function(img) {
+                        //     img.set({
+                        //         left: 0,
+                        //         top: 0,
+                        //         selectable: false, // Non-draggable background image
+                        //         hasControls: false // Disable resizing controls
+                        //     });
+                        //     canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
+
+                        // });
 
                         // Load static information (text elements)
-                        // if (data.image) {
-                        //     fabric.Image.fromURL(data.image, function(img) {
-                        //         img.set({
-                        //             left: 0,
-                        //             top: 0,
-                        //             selectable: false, // Non-draggable background image
-                        //             hasControls: false // Disable resizing controls
-                        //         });
-                        //         canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
-                        //     });
-                        // }
+                        if (data.image) {
+                            fabric.Image.fromURL(data.image, function(img) {
+                                img.set({
+                                    left: 0,
+                                    top: 0,
+                                    selectable: false, // Non-draggable background image
+                                    hasControls: false // Disable resizing controls
+                                });
+                                canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
+                            });
+                        }
                         if (data.filled_image) {
                             fabric.Image.fromURL(data.filled_image, function(filedImg) {
                                 filedImg.set({
@@ -117,7 +116,8 @@
                         }
 
                         // Set custom attribute with the fetched ID
-
+                        var canvasElement = document.getElementById('imageEditor1');
+                        canvasElement.setAttribute('data-canvas-id', data.id);
                         canvas.renderAll(); // Ensure all elements are rendered
                     }
                 })
