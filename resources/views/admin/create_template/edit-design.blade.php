@@ -181,7 +181,7 @@
                                 stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                     </span>
-                    <h6>Photo Slider</h6>
+                    <h6>Upload shape</h6>
                 </button>
             </div>
             <div class="edit-images-button-inner edit-images-button-more dropdown">
