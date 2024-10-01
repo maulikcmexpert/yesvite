@@ -13133,13 +13133,12 @@ class ApiControllerv2 extends Controller
     {
         $user  = Auth::guard('api')->user();
         $rawData = $request->getContent();
-        $users_data = json_decode($rawData, true);
-        dd($users_data);
-        $users_ids = $users_data['users_id'];
-        // $users_ids = ['219', '198', '329'];
+        $users_ids = json_decode($rawData, true);
+        // $users_ids = json_decode($users_data['users_id'], true);
         try {
             $getnotification_data = [];
             foreach ($users_ids as $users_id) {
+                dd($users_id);
                 $notifications  = UserNotificationType::where(['user_id' => $users_id, 'type' => 'private_message'])->get();
                 foreach ($notifications as $notification) {
                     $getnotification_data[] = [
