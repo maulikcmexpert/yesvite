@@ -23,7 +23,7 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data) {
-                        console.log(data);
+                        // console.log(data);
 
                         // Load background image
                         fabric.Image.fromURL(data.imagePath, function(img) {
@@ -92,7 +92,6 @@
                         // Set custom attribute with the fetched ID
                         var canvasElement = document.getElementById('imageEditor1');
                         canvasElement.setAttribute('data-canvas-id', data.id);
-                        alert(data.id);
                         canvas.renderAll(); // Ensure all elements are rendered
                     }
                 })
