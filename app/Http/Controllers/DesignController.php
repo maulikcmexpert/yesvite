@@ -236,7 +236,11 @@ class DesignController extends Controller
         //     // })
         //     ->first();
 
-        $data = TextData::where('id', $id)->first();
+        $data = TextData::orderBy('id', 'desc')
+            ->when($id != '', function ($query) use ($id) {
+                $query->where('id', $id);
+            })
+            ->first();
 
 
         if ($data) {
