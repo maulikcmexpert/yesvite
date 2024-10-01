@@ -205,20 +205,18 @@ $(document).on("click", ".edit_design_tem", function (e) {
     $(".current_step").text("2 of 4");
     $(".step_4").hide();
     $("#exampleModal").modal("hide");
-    $(".edit_design_template").show();
-
-    // const oldCanvas = document.getElementById('imageEditor1');
-    // if (oldCanvas) {
-    //     oldCanvas.parentNode.removeChild(oldCanvas); // Remove the old canvas
-    // }
-
-    // // // Create a new canvas element
-    // const newCanvas = document.createElement('canvas');
-    // newCanvas.id = 'imageEditor1'; // Same ID to be reused
-    // newCanvas.width = 345; // Canvas width
-    // newCanvas.height = 490; // Canvas height
-    // // Append to body or specific container
-    // $(".image-edit-inner-img").html(newCanvas);
+    $(".edit_design_template").remove();
+    $.ajax({
+        url: base_url + "event/get_design_edit_page",
+        method: "POST",
+        data: {
+            _token: $('meta[name="csrf-token"]').attr("content"),
+        },
+        success: function (response) {
+            console.log(response);
+        },
+        error: function (xhr, status, error) {},
+    });
     
     function loadTextDataFromDatabase() {
         if (image) {

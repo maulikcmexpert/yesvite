@@ -281,8 +281,9 @@
     @include('front.event.step1')
 
     @include('front.event.step2')
-
-    @include('front.event.design.edit_design')
+    <div id="edit-design-temp">
+        @include('front.event.design.edit_design')
+    </div>
 
     @include('front.event.step3')
 

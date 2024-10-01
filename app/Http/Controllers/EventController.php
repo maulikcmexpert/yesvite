@@ -1565,4 +1565,9 @@ class EventController extends Controller
         return response()->json(['success' => false, 'images' => $savedFiles]);
 
     }
+
+    public function get_design_edit_page(Request $request){
+        return response()->json(['success' => true,  view('front.event.design.edit_design')->render()]);
+       
+    }
 }
