@@ -1057,8 +1057,7 @@
 
         document.getElementById('antaresiaButton').addEventListener('click', function() {
             console.log("fontname")
-
-            loadAndUse("Botanica Script");
+            loadAndUse("Antaresia");
         });
         document.getElementById('JosefinSansButton').addEventListener('click', function() {
             console.log("fontname");
