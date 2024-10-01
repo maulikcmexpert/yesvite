@@ -1491,6 +1491,7 @@ $(document).ready(function() {
     })
 
     $(document).on('click','.save-slider-image',function(){
+        $("#loader").show();
         var imageSources = [];
         $('.slider_img').each(function() {
             imageSources.push($(this).attr('src'));
@@ -1509,7 +1510,7 @@ $(document).ready(function() {
                eventData.slider_images=savedImages;
 
                console.log(eventData);
-
+               $("#loader").css("display", "none");
             },
             error: function (xhr, status, error) {},
         });
