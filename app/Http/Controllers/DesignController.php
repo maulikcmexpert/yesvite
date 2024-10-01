@@ -229,12 +229,14 @@ class DesignController extends Controller
     {
 
 
-        $data = DB::table('text_data')
-            ->orderBy('id', 'desc')
-            // ->when($id != '', function ($query) use ($id) {
-            //     $query->where('id', $id);
-            // })
-            ->first();
+        // $data = DB::table('text_data')
+        //     ->orderBy('id', 'desc')
+        //     // ->when($id != '', function ($query) use ($id) {
+        //     //     $query->where('id', $id);
+        //     // })
+        //     ->first();
+
+        $data = TextData::where('id', $id)->first();
 
 
         if ($data) {
@@ -250,7 +252,7 @@ class DesignController extends Controller
             }
 
             // Check if the filed_image exists
-            if (isset($filled_image)) {
+            if (isset($filled_image) && $filled_image != "") {
                 $filedImagePath = asset('storage/canvas/' . $filled_image);
             } else {
                 $filedImagePath = null;
