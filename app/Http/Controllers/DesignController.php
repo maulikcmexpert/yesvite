@@ -252,7 +252,7 @@ class DesignController extends Controller
             }
 
             // Check if the filed_image exists
-            if (isset($filled_image)) {
+            if (isset($filled_image) && $filled_image != "") {
                 $filedImagePath = asset('storage/canvas/' . $filled_image);
             } else {
                 $filedImagePath = null;
