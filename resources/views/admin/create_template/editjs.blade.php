@@ -92,7 +92,7 @@
                         // Set custom attribute with the fetched ID
                         var canvasElement = document.getElementById('imageEditor1');
                         canvasElement.setAttribute('data-canvas-id', data.id);
-
+                        alert(data.id);
                         canvas.renderAll(); // Ensure all elements are rendered
                     }
                 })
