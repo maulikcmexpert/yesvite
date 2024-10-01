@@ -1127,9 +1127,10 @@
                 </div>
             </div>
 
-            <div class="footer-buttons">
-                <button class="cmn-btn saveButton" id="saveButton">Save</button>
-            </div>
+        </div>
+
+        <div class="footer-buttons">
+            <button class="cmn-btn saveButton" id="saveButton">Save</button>
         </div>
     </div>
 </main>
