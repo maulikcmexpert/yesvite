@@ -254,6 +254,7 @@ class EventController extends Controller
         if(isset($request->temp_id) && $request->temp_id != ''){
            
         }
+       
         if(isset($request->textData) && json_encode($request->textData) != ''){
             $tempData = TextData::where('id',$request->temp_id)->first();
             if($tempData){
@@ -277,11 +278,9 @@ class EventController extends Controller
             $static_data['width'] = (int)$tempData->width;
             $static_data['template_url'] = $sourceImagePath;
             $static_data['is_contain_image'] = true;
+            
             $event_creation->static_information = json_encode($static_data);    
         }
-
-        // $event_creation->static_information = (isset($request->textData) && json_encode($request->textData) != '')?json_encode($request->textData):"";
-        
         $event_creation->save();
         if ($eventId != "") {
             $invitedUsers = $request->email_invite;
