@@ -210,6 +210,7 @@ $(document).on('click','.edit_design_tem',function(e){
     function loadTextDataFromDatabase() {
       
         if (image) {
+            console.log(image);
             fabric.Image.fromURL(image, function (img) {
                 img.set({
                     left: 0,
