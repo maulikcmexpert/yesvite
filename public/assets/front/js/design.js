@@ -1330,6 +1330,7 @@ console.log(123)
     //     textElement.style.fontFamily = 'Allura'; // Change to Allura font
     // });
     function loadAndUse(font) {
+        console.log(font);
         var myfont = new FontFaceObserver(font);
         myfont.load().then(function() {
             
