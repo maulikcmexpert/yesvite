@@ -100,47 +100,26 @@ class TemplateController extends Controller
     {
         try {
             DB::beginTransaction();
-
-            // Initialize $imageName to avoid undefined variable errors
             $imageName = null;
             $filledImage = null;
 
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
-                $filled_image = $request->file('filled_image');
-
-
-                // Ensure file is not null before accessing methods
-                if ($image) {
-                    $imageName = time() . '.' . $image->getClientOriginalExtension();
-                    // Save the image in the public/assets/images folder
-                    $image->move(public_path('storage/canvas'), $imageName);
-                }
-                if ($filled_image) {
-                    $filledImage = time() . '.' . $filled_image->getClientOriginalExtension();
-                    // Save the image in the public/assets/images folder
-                    $filled_image->move(public_path('storage/canvas'), $filledImage);
-                }
+                $imageName = time() . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('storage/canvas'), $imageName);
             }
-
-
-
-            // Store the template with design ID and the uploaded image's filename
-
-            // Create a new TextData entry and save the uploaded image filename
+            if ($request->hasFile('filled_image')) {
+                $filled_image = $request->file('filled_image');
+                $filledImage = time() . '.' . $filled_image->getClientOriginalExtension();
+                $filled_image->move(public_path('storage/canvas'), $filledImage);
+            }
             $textData = TextData::create([
                 'image' => $imageName,
-                // Save the uploaded image filename
             ]);
-            // $template_id = $textData->id;
             $textData->filled_image = $filledImage;
             $textData->event_design_category_id = $request->event_design_category_id;
             $textData->event_design_sub_category_id = $request->event_design_sub_category_id;
             $textData->save();
-
-
-            // Log::info(DB::getQueryLog());
-
             DB::commit();
 
             return redirect()->route('create_template.index')->with('success', 'Template added successfully!');
@@ -150,7 +129,6 @@ class TemplateController extends Controller
             return redirect()->route('create_template.index')->with('danger', 'Something went wrong!');
         }
     }
-
 
 
     /**
