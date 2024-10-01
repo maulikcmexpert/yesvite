@@ -13136,8 +13136,6 @@ class ApiControllerv2 extends Controller
         $users_ids = json_decode($rawData, true);
         try {
             if (!empty($users_ids)) {
-
-
                 $getnotification_data = [];
                 foreach ($users_ids as $users_id) {
                     $notifications  = UserNotificationType::where(['user_id' => $users_id, 'type' => 'private_message'])->get();
@@ -13149,7 +13147,7 @@ class ApiControllerv2 extends Controller
                     }
                 }
 
-                dd($getnotification_data);
+                dd($notifications);
                 return response()->json([
                     'status' => 1,
                     'message' => "Notification List",
