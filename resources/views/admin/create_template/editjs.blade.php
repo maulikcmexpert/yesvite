@@ -484,6 +484,9 @@
                 borderColor: '#2DA9FC',
                 // cornerColor: 'red',
                 cornerColor: '#fff',
+                cornerSize: 6,
+                transparentCorners: false,
+                isStatic: true
             })
 
             text.set('width', text.get('text').length * 10);
