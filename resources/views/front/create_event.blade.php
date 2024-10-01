@@ -282,7 +282,7 @@
 
     @include('front.event.step2')
     <div id="edit-design-temp">
-        @include('front.event.design.edit_design')
+        {{-- @include('front.event.design.edit_design') --}}
     </div>
 
     @include('front.event.step3')
