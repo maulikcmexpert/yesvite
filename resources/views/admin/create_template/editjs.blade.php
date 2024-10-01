@@ -24,7 +24,6 @@
                 .then(data => {
                     if (data) {
                         console.log(data.id);
-
                         // Load background image
                         fabric.Image.fromURL(data.imagePath, function(img) {
                             img.set({
