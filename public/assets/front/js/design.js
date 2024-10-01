@@ -1359,6 +1359,7 @@ $(document).on("click", ".edit_design_tem", function (e) {
             .then(function () {
                 // When font is loaded, use it.
                 var activeObject = canvas.getActiveObject();
+                console.log(activeObject.type);
                 if (activeObject && activeObject.type === "textbox") {
                     // Ensure it's a text object
 
@@ -1375,6 +1376,8 @@ $(document).on("click", ".edit_design_tem", function (e) {
 
                     // Trigger a re-render to ensure the font is applied
                     canvas.requestRenderAll();
+                    console.log("applied font" + font);
+                    console.log(canvas.getActiveObject());
                 } else {
                     alert("No object selected");
                 }
