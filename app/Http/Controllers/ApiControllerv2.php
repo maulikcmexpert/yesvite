@@ -13129,21 +13129,20 @@ class ApiControllerv2 extends Controller
         }
     }
 
-    // public function checkUserNotification(Request $request)
-    // {
-    //     $users_ids = ['219', '198', '329'];
-    //     $getnotification_data = [];
+    public function checkUserNotification(Request $request)
+    {
+        $users_ids = ['219', '198', '329'];
+        $getnotification_data = [];
 
-    //     foreach ($users_ids as $users_id) {
-    //         $notifications  = UserNotificationType::where(['user_id' => $users_id, 'type' => 'private_message'])->get();
-    //         foreach ($notifications as $notification) {
-    //             $getnotification_data[] = [
-    //                 'user_id' => $notification->user_id,
-    //                 'isnotification' => [
-    //                     'push' => (int)$notification->push // Convert to integer if necessary
-    //                 ]
-    //             ];
-    //         }        }
-    //     dd($getnotification_data);
-    // }
+        foreach ($users_ids as $users_id) {
+            $notifications  = UserNotificationType::where(['user_id' => $users_id, 'type' => 'private_message'])->get();
+            foreach ($notifications as $notification) {
+                $getnotification_data[] = [
+                    'user_id' => $notification->user_id,
+                    'isnotification' => $notification->push
+                ];
+            }
+        }
+        dd($getnotification_data);
+    }
 }
