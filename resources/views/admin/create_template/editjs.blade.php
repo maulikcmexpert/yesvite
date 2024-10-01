@@ -39,7 +39,6 @@
 
                         // Load static information (text elements)
                         if (data.static_information) {
-                            alert();
                             hideStaticTextElements(); // Hide static text elements if static information is present
                             const staticInfo = JSON.parse(data.static_information);
                             console.log(staticInfo);
@@ -87,8 +86,7 @@
 
                             });
                         } else {
-                            // showStaticTextElements();
-                            alert();
+                            showStaticTextElements();
                             addDraggableText(150, 50, 'event_name', 'xyz'); // Position this outside the image area
                             addDraggableText(150, 100, 'host_name', 'abc');
                             addDraggableText(150, 150, 'start_time', '5:00PM');
