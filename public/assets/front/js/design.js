@@ -2,7 +2,7 @@ var dbJson = null;
 var temp_id = null;
 var image = null;
 var base_url = $("#base_url").text();
-var canvas;
+
 
 $(document).on("click", ".design-card", function () {
     var url = $(this).data("url");
@@ -14,7 +14,6 @@ $(document).on("click", ".design-card", function () {
     $('.edit_design_tem').attr('data-image', imageUrl);
     dbJson = json;
     temp_id = id;
-    console.log(temp_id);
     // Set the image URL in the modal's image tag
     $("#modalImage").attr("src", imageUrl);
     image = imageUrl;
@@ -60,7 +59,6 @@ $(document).on("click", ".design-card", function () {
     const staticInfo = dbJson;
     
     staticInfo.textElements.forEach(element => {
-        console.log(element);
         let textElement = new fabric.Textbox(
             element.text, {  
             left: element.left,
@@ -158,6 +156,7 @@ $(document).on("click", ".design-card", function () {
 
     });
 });
+
 $(document).on('click','.modal-design-card',function(e){
     e.stopPropagation();
 })
@@ -198,9 +197,6 @@ $(document).on("click", ".design-sidebar-action", function () {
 
 $(document).on('click','.edit_design_tem',function(e){
     e.preventDefault();
-    // console.log(dbJson);
-    // console.log(image);
-
     $("step_1").hide();
     $(".step_2").hide();
     $(".step_3").hide();
@@ -214,9 +210,6 @@ $(document).on('click','.edit_design_tem',function(e){
     function loadTextDataFromDatabase() {
       
         if (image) {
-            // console.log(image);
-
-            // Load background image
             fabric.Image.fromURL(image, function (img) {
                 img.set({
                     left: 0,
@@ -228,7 +221,6 @@ $(document).on('click','.edit_design_tem',function(e){
 
             });
 
-            // Load static information (text elements)
             if (dbJson) {
                 const staticInfo = dbJson;
                 staticInfo.textElements.forEach(element => {
@@ -243,16 +235,11 @@ $(document).on('click','.edit_design_tem',function(e){
                     });
 
                     const textWidth = textMeasurement.width;
-                    // console.log(`Width of '${element.text}':`, textWidth);
-                
-                    // Calculate the width of the text
-                   
-                    // console.log(element);
                     let textElement = new fabric.Textbox(
-                        element.text, {  // Use Textbox for editable text
+                        element.text, {  
                         left: element.left,
                         top: element.top,
-                        width: element.width || textWidth,  // Default width if not provided
+                        width: element.width || textWidth,  
                         fontSize: element.fontSize,
                         fill: element.fill,
                         fontFamily: element.fontFamily,
@@ -271,14 +258,13 @@ $(document).on('click','.edit_design_tem',function(e){
                         hasBorders: true,
                     });
 
-
                     switch (element.text) {
                         case 'event_name':
                             if (eventData.event_name) {
                                 let textWidth = getWidth(element,eventData.event_name);
                                 textElement.set({ text: eventData.event_name,width:textWidth });
                             } else {
-                                return;  // Skip adding the element if event_name is empty
+                                return;  
                             }
                             break;
                         case 'host_name':
@@ -286,7 +272,7 @@ $(document).on('click','.edit_design_tem',function(e){
                                 let textWidth = getWidth(element,eventData.hosted_by);
                                 textElement.set({ text: eventData.hosted_by,width:textWidth });
                             } else {
-                                return;  // Skip adding the element if host_name is empty
+                                return;  
                             }
                             break;
                         case 'Location':
@@ -294,7 +280,7 @@ $(document).on('click','.edit_design_tem',function(e){
                                 let textWidth = getWidth(element,eventData.event_location);
                                 textElement.set({ text: eventData.event_location,width:textWidth });
                             } else {
-                                return;  // Skip adding the element if event_location_name is empty
+                                return; 
                             }
                             break;
                         case 'start_time':
@@ -302,7 +288,7 @@ $(document).on('click','.edit_design_tem',function(e){
                                 let textWidth = getWidth(element,eventData.start_time);
                                 textElement.set({ text: eventData.start_time,width:textWidth });
                             } else {
-                                return;  // Skip adding the element if start_time is empty
+                                return; 
                             }
                             break;
                         case 'rsvp_end_time':
@@ -310,7 +296,7 @@ $(document).on('click','.edit_design_tem',function(e){
                                 let textWidth = getWidth(element,eventData.rsvp_end_time);
                                 textElement.set({ text: eventData.rsvp_end_time,width:textWidth });
                             } else {
-                                return;  // Skip adding the element if rsvp_end_time is empty
+                                return; 
                             }
                             break;
                         case 'start_date':
@@ -325,7 +311,7 @@ $(document).on('click','.edit_design_tem',function(e){
                                 let textWidth = getWidth(element,start_date);
                                 textElement.set({ text: start_date,width:textWidth });
                             } else {
-                                return;  // Skip adding the element if start_date is empty
+                                return; 
                             }
                             break;
                         case 'end_date':
@@ -341,36 +327,17 @@ $(document).on('click','.edit_design_tem',function(e){
                                 let textWidth = getWidth(element,end_date);
                                 textElement.set({ text: end_date,width:textWidth });
                             } else {
-                                return;  // Skip adding the element if end_date is empty
+                                return;  
                             }
                             break;
                     }
-                    // const textWidth = textElement.calcTextWidth();
-                    // textElement.set({ width: textWidth });
-            
-                    // textElement.on('scaling', function () {
-                    //     // Calculate the updated font size based on scaling factors
-                    //     var updatedFontSize = textElement.fontSize * (textElement.scaleX + textElement.scaleY) / 2;
-                    //     textElement.set('fontSize', updatedFontSize); // Update the font size
-                    //     canvas.renderAll(); // Re-render the canvas to reflect changes
-                    // });
-                    
                     addIconsToTextbox(textElement);
                     canvas.add(textElement);
-            
                 });
-            
-                
-                
             } else {
                 showStaticTextElements();
             }
-
-            // Set custom attribute with the fetched ID
-            var canvasElement = document.getElementById('imageEditor1');
-            canvasElement.setAttribute('data-canvas-id', temp_id);
-
-            canvas.renderAll();  // Ensure all elements are rendered
+            canvas.renderAll();
         }
     }
 
@@ -421,7 +388,6 @@ $(document).on('click','.edit_design_tem',function(e){
                 console.log('Trash icon clicked');
                 deleteTextbox(textbox);
             });
-
             canvas.add(trashIcon);
         });
 
@@ -484,8 +450,8 @@ $(document).on('click','.edit_design_tem',function(e){
 
         canvas.renderAll(); // Final render
     }
-
-    canvas = new fabric.Canvas('imageEditor1', {
+    
+    var canvas = new fabric.Canvas('imageEditor1', {
         width: 345, // Canvas width
         height: 490, // Canvas height
     });
@@ -496,14 +462,12 @@ $(document).on('click','.edit_design_tem',function(e){
         lineHeight: 1.2
     };
 
-    // Save settings object (for the save functionality)
     let savedSettings = {
         fontSize: defaultSettings.fontSize,
         letterSpacing: defaultSettings.letterSpacing,
         lineHeight: defaultSettings.lineHeight
     };
 
-    // Function to update textbox width dynamically
     const updateTextboxWidth = (textbox) => {
         const text = textbox.text;
         const fontSize = textbox.fontSize;
@@ -520,7 +484,6 @@ $(document).on('click','.edit_design_tem',function(e){
         canvas.renderAll();
     };
 
-    // Set font size function
     const setFontSize = () => {
         const newValue = fontSizeRange.value;
         fontSizeInput.value = newValue;
@@ -541,7 +504,7 @@ $(document).on('click','.edit_design_tem',function(e){
 
         const activeObject = canvas.getActiveObject();
         if (activeObject && activeObject.type === 'textbox') {
-            activeObject.set('charSpacing', newValue * 10); // Convert spacing to match Fabric.js scale
+            activeObject.set('charSpacing', newValue * 10); 
             updateTextboxWidth(activeObject);
         }
     };
@@ -637,106 +600,104 @@ $(document).on('click','.edit_design_tem',function(e){
     setLineHeight();
 
       // Initialize the color picker
-$('#color-picker').spectrum({
-    type: "flat",
-    color: "#000000", // Default font color
-    showInput: true,
-    allowEmpty: true, // Allows setting background to transparent
-    showAlpha: true, // Allows transparency adjustment
-    preferredFormat: "rgba", // Ensure it handles RGBA
-    change: function (color) {
-        if (color) {
-            console.log("color")
-            changeColor(color.toRgbString()); // Use RGB string for color changes
-        } else {
-            console.log("rgba")
+    $('#color-picker').spectrum({
+        type: "flat",
+        color: "#000000", // Default font color
+        showInput: true,
+        allowEmpty: true, // Allows setting background to transparent
+        showAlpha: true, // Allows transparency adjustment
+        preferredFormat: "rgba", // Ensure it handles RGBA
+        change: function (color) {
+            if (color) {
+                console.log("color")
+                changeColor(color.toRgbString()); // Use RGB string for color changes
+            } else {
+                console.log("rgba")
 
-            changeColor('rgba(0, 0, 0, 0)'); // Handle transparency by default
+                changeColor('rgba(0, 0, 0, 0)'); // Handle transparency by default
+            }
         }
+    });
+
+    // Function to change font or background color
+    function changeColor(selectedColor) {
+        const selectedColorType = document.querySelector('input[name="colorType"]:checked').value;
+        const activeObject = canvas.getActiveObject();
+        console.log("before update")
+
+        console.log(activeObject)
+        if (!activeObject) {
+            console.log('No object selected');
+            return;
+        }
+
+        if (activeObject.type == 'textbox') {
+            console.log(activeObject.type);
+            console.log(activeObject.fill);
+            if (selectedColorType == 'font') {
+                console.log("update fill")
+                console.log(activeObject.fill);
+                console.log(activeObject.backgroundColor);
+                activeObject.set('fill', selectedColor); // Change font color
+                console.log(activeObject.fill);
+                console.log(activeObject.backgroundColor);
+            } else if (selectedColorType == 'background') {
+                console.log("update background")
+                activeObject.set('backgroundColor', selectedColor); // Change background color
+            }
+            canvas.renderAll(); // Re-render the canvas after color change
+        }
+
+        const activeObjec = canvas.getActiveObject();
+        console.log("ater update")
+
+        console.log(activeObjec)
     }
-});
 
-// Function to change font or background color
-function changeColor(selectedColor) {
-    const selectedColorType = document.querySelector('input[name="colorType"]:checked').value;
-    const activeObject = canvas.getActiveObject();
-    console.log("before update")
+    // Update color picker based on the selected object's current font or background color
+    function updateColorPicker() {
+        const activeObject = canvas.getActiveObject();
+        const selectedColorType = document.querySelector('input[name="colorType"]:checked').value;
 
-    console.log(activeObject)
-    if (!activeObject) {
-        console.log('No object selected');
-        return;
-    }
+        if (activeObject && activeObject.type === 'textbox') {
+            if (selectedColorType === 'font') {
 
-    if (activeObject.type == 'textbox') {
-        console.log(activeObject.type);
-        console.log(activeObject.fill);
-        if (selectedColorType == 'font') {
-            console.log("update fill")
+                $('#color-picker').spectrum('set', activeObject.fill || '#000000'); // Set font color in picker
+            } else if (selectedColorType === 'background') {
+                const bgColor = activeObject.backgroundColor || 'rgba(0, 0, 0, 0)'; // Default to transparent background
+                $('#color-picker').spectrum('set', bgColor); // Set current background color in picker
+            }
+
+
+            console.log(selectedColorType);
+            console.log(activeObject.type);
             console.log(activeObject.fill);
             console.log(activeObject.backgroundColor);
-            activeObject.set('fill', selectedColor); // Change font color
-            console.log(activeObject.fill);
-            console.log(activeObject.backgroundColor);
-        } else if (selectedColorType == 'background') {
-            console.log("update background")
-            activeObject.set('backgroundColor', selectedColor); // Change background color
-        }
-        canvas.renderAll(); // Re-render the canvas after color change
-    }
 
-    const activeObjec = canvas.getActiveObject();
-    console.log("ater update")
+        const activeObjec = canvas.getActiveObject();
 
-    console.log(activeObjec)
-}
+        console.log(activeObjec.fill);
+            console.log(activeObjec.backgroundColor);
 
-// Update color picker based on the selected object's current font or background color
-function updateColorPicker() {
-    const activeObject = canvas.getActiveObject();
-    const selectedColorType = document.querySelector('input[name="colorType"]:checked').value;
-
-    if (activeObject && activeObject.type === 'textbox') {
-        if (selectedColorType === 'font') {
-
-            $('#color-picker').spectrum('set', activeObject.fill || '#000000'); // Set font color in picker
-        } else if (selectedColorType === 'background') {
-            const bgColor = activeObject.backgroundColor || 'rgba(0, 0, 0, 0)'; // Default to transparent background
-            $('#color-picker').spectrum('set', bgColor); // Set current background color in picker
         }
 
 
-        console.log(selectedColorType);
-        console.log(activeObject.type);
-        console.log(activeObject.fill);
-        console.log(activeObject.backgroundColor);
-
-    const activeObjec = canvas.getActiveObject();
-
-    console.log(activeObjec.fill);
-        console.log(activeObjec.backgroundColor);
-
     }
 
+    // Update color picker when object selection changes
+    canvas.on('selection:created', updateColorPicker);
+    canvas.on('selection:updated', updateColorPicker);
 
-}
-
-// Update color picker when object selection changes
-canvas.on('selection:created', updateColorPicker);
-canvas.on('selection:updated', updateColorPicker);
-
-// Update the color picker when the color type (font/background) changes
-$('.colorTypeInp').click(function (e) {
-e.stopPropagation()
-console.log(123)
-    const activeObject = canvas.getActiveObject();
-    if (activeObject && activeObject.type === 'textbox') {
-        console.log(activeObject.type);
-        updateColorPicker(); // Update picker when the selected color type changes
-    }
-});
-
-
+    // Update the color picker when the color type (font/background) changes
+    $('.colorTypeInp').click(function (e) {
+        e.stopPropagation()
+        console.log(123)
+        const activeObject = canvas.getActiveObject();
+        if (activeObject && activeObject.type === 'textbox') {
+            console.log(activeObject.type);
+            updateColorPicker(); // Update picker when the selected color type changes
+        }
+    });
 
     // Load background image and make it non-draggable
     document.getElementById('image').addEventListener('change', function (event) {
@@ -749,10 +710,6 @@ console.log(123)
             reader.readAsDataURL(file);
         }
     });
-
-
-
-    
 
     // Call function to load data when the page loads
     loadTextDataFromDatabase();
@@ -835,89 +792,6 @@ console.log(123)
         return { x: centerX, y: centerY };
     }
 
-    // function updateIconPositions(textbox) {
-    //     // console.log(textbox);
-    //     if (textbox.trashIcon) {
-    //         canvas.remove(textbox.trashIcon);
-    //         textbox.trashIcon = null; // Clear reference
-    //         // const trashIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 50 50"><path d="M20,30 L30,30 L30,40 L20,40 Z M25,10 L20,10 L20,7 L30,7 L30,10 Z M17,10 L33,10 L33,40 L17,40 Z" fill="#FF0000"/></svg>`;
-    //         const trashIconSVG = `<svg width="29" x="0px" y="0px" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
-    //         <g filter="url(#filter0_d_5633_67674)">
-    //         <rect x="2.70312" y="2.37207" width="23.9674" height="23.9674" rx="11.9837" fill="white" shape-rendering="crispEdges"/>
-    //         <path d="M19.1807 11.3502C17.5179 11.1855 15.8452 11.1006 14.1775 11.1006C13.1888 11.1006 12.2001 11.1505 11.2115 11.2504L10.1929 11.3502" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-    //         <path d="M12.939 10.8463L13.0488 10.1922C13.1287 9.7178 13.1886 9.36328 14.0325 9.36328H15.3407C16.1846 9.36328 16.2495 9.73777 16.3244 10.1971L16.4342 10.8463" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-    //         <path d="M18.1073 12.9277L17.7827 17.9559C17.7278 18.7398 17.6829 19.349 16.2898 19.349H13.0841C11.691 19.349 11.6461 18.7398 11.5912 17.9559L11.2666 12.9277" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-    //         <path d="M13.853 16.6035H15.5158" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-    //         <path d="M13.4385 14.6055H15.9351" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-    //         </g>
-    //         </svg>
-    //         `;
-            
-    //         fabric.loadSVGFromString(trashIconSVG, function (objects, options) {
-    //             const trashIcon = fabric.util.groupSVGElements(objects, options);
-    //             trashIcon.set({
-    //                 left: textbox.left + textbox.width * textbox.scaleX - 20,
-    //                 top: textbox.top - 20,
-    //                 selectable: false,
-    //                 evented: true,
-    //                 hasControls: false,
-    //                 visible: true, // Initially hidden
-    //                 className: 'trash-icon',
-    //             });
-    //             textbox.trashIcon = trashIcon;
-
-
-    //             // Ensure the copyIcon is on top
-    //             canvas.bringToFront(trashIcon);
-    //             textbox.trashIcon.on('mousedown', function () {
-    //                 console.log('deleted icon');
-    //                 deleteTextbox(textbox);
-    //             });
-    //         })
-    //         // console.log('Updated Trash Icon Position:', textbox.trashIcon.left, textbox.trashIcon.top);
-    //     }
-
-    //     if (textbox.copyIcon) {
-    //         canvas.remove(textbox.copyIcon);
-    //         textbox.copyIcon = null; // Clear reference
-    //     }
-
-
-    //     // const copyIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 50 50"><path d="M5,5 L30,5 L30,30 L5,30 Z M35,5 L45,5 L45,35 L35,35 L35,5 Z" fill="#0000FF"/></svg>`;
-    //     const copyIconSVG = `<svg width="29" x="0px" y="0px" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
-    //         <g filter="url(#filter0_d_5633_67676)">
-    //         <rect x="2.64893" y="2.37207" width="23.9674" height="23.9674" rx="11.9837" fill="white" shape-rendering="crispEdges"/>
-    //         <path fill-rule="evenodd" clip-rule="evenodd" d="M17.6283 16.3538V10.3619C17.6283 9.81039 17.1812 9.36328 16.6297 9.36328H10.6378C10.0863 9.36328 9.63916 9.81039 9.63916 10.3619V16.3538C9.63916 16.9053 10.0863 17.3524 10.6378 17.3524H16.6297C17.1812 17.3524 17.6283 16.9053 17.6283 16.3538ZM10.6379 10.362H16.6298V16.3539H10.6379V10.362ZM18.6271 17.3525V11.3607C19.1786 11.3607 19.6257 11.8078 19.6257 12.3593V17.3525C19.6257 18.4556 18.7315 19.3498 17.6284 19.3498H12.6352C12.0837 19.3498 11.6366 18.9027 11.6366 18.3512H17.6284C18.1799 18.3512 18.6271 17.9041 18.6271 17.3525Z" fill="#0F172A"/>
-    //         </g>
-    //         </svg>`;
-        
-    //     fabric.loadSVGFromString(copyIconSVG, function (objects, options) {
-    //         let copyIcon = fabric.util.groupSVGElements(objects, options);
-    //         copyIcon.set({
-    //             left: textbox.left - 25,
-    //             top: textbox.top - 20,
-    //             selectable: false,
-    //             evented: true,
-    //             hasControls: false,
-    //             visible: true, // Initially hidden
-    //             className: 'copy-icon',
-    //         });
-    //         // Add the copyIcon to the canvas
-    //         textbox.copyIcon = copyIcon
-
-    //         // Ensure the copyIcon is on top
-    //         canvas.bringToFront(copyIcon);
-
-    //         // Handle copy icon click
-    //         textbox.copyIcon.on('mousedown', function () {
-    //             console.log('Copy icon clicked1');
-    //             cloneTextbox(textbox);
-    //         });
-    //     })
-
-    //     canvas.renderAll(); // Re-render the canvas to apply the new positions
-    // }
-
     function updateIconPositions(textbox) {
         // Remove old trash and copy icons if they exist
         if (textbox.trashIcon) {
@@ -999,12 +873,6 @@ console.log(123)
         canvas.renderAll();
     }
     
-
-
-    // Function to add icons to a textbox
-    
-
-    // Function to delete a textbox
     function deleteTextbox(textbox) {
         canvas.remove(textbox);
         if (textbox.trashIcon) canvas.remove(textbox.trashIcon); // Remove the trash icon
@@ -1066,16 +934,6 @@ console.log(123)
     // Add event listener for keyboard events
     document.addEventListener('keydown', handleKeyboardEvents);
 
-    var start_date = '';
-    var end_date = '';
-    if (eventData.event_date.includes(" To ")) {
-        let [start, end] = eventData.event_date.split(" To ");
-         start_date = start;
-         end_date = end;
-    } else {
-        start_date = eventData.event_date;
-        end_date = eventData.event_date;
-    }
 
     function updateSelectedTextProperties() {
         var fontSize = parseInt(document.getElementById('fontSize').value, 10);
@@ -1099,12 +957,6 @@ console.log(123)
         }
     }
 
-
-
-    // document.getElementById('fontSize').addEventListener('change', updateSelectedTextProperties);
-    // document.getElementById('fontColor').addEventListener('input', updateSelectedTextProperties);
-
-
     canvas.on('mouse:down', function (options) {
         if (options.target && options.target.type === 'textbox') {
             canvas.setActiveObject(options.target);
@@ -1118,13 +970,9 @@ console.log(123)
 
     });
 
-
-    
-
     document.getElementById('addTextButton').addEventListener('click', function () {
         addEditableTextbox(100, 100, 'EditableText');  // You can set the initial position and default text
     });
-
 
     function addEditableTextbox(left, top, textContent) {
         var textbox = new fabric.Textbox(textContent, {
