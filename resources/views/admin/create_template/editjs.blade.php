@@ -319,15 +319,14 @@
             showInput: true,
             allowEmpty: true, // Allows setting background to transparent
             showAlpha: true, // Allows transparency adjustment
-            preferredFormat: "rgba", // Ensure it handles RGBA
+            preferredFormat: "hex",
             change: function(color) {
                 if (color) {
                     console.log("color")
-                    changeColor(color.toRgbString()); // Use RGB string for color changes
+                    changeColor(color.toHexString()); // Use RGB string for color changes
                 } else {
                     console.log("rgba")
-
-                    changeColor('rgba(0, 0, 0, 0)'); // Handle transparency by default
+                    changeColor('#000000'); // Handle transparency by default
                 }
             }
         });
