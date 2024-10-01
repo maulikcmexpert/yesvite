@@ -78,12 +78,12 @@
                                     textElement.set('fontSize', updatedFontSize); // Update the font size
                                     canvas.renderAll(); // Re-render the canvas to reflect changes
                                 });
-                                console.log(data.id);
 
                                 addIconsToTextbox(textElement);
                                 canvas.add(textElement);
 
                             });
+                            console.log(data.id);
                         } else {
                             showStaticTextElements();
                         }
