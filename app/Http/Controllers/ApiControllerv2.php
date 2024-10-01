@@ -13129,34 +13129,21 @@ class ApiControllerv2 extends Controller
         }
     }
 
-    public function checkUserNotification(Request $request)
-    {
-        $user  = Auth::guard('api')->user();
-        $rawData = $request->getContent();
-        $users_ids = json_decode($rawData, true);
-        try {
-            if (!empty($users_ids)) {
-                $getnotification_data = [];
-                foreach ($users_ids as $users_id) {
-                    $notifications  = UserNotificationType::where(['user_id' => $users_id, 'type' => 'private_message'])->get();
-                    getnotification_data[] = $notifications;
-                    // foreach ($notifications as $notification) {
-                    //     $getnotification_data[] = [
-                    //         'user_id' => $notification->user_id,
-                    //         'isnotification' => $notification->push
-                    //     ];
-                    // }
-                }
+    // public function checkUserNotification(Request $request)
+    // {
+    //     $users_ids = ['219', '198', '329'];
+    //     $getnotification_data = [];
 
-                dd($getnotification_data);
-                return response()->json([
-                    'status' => 1,
-                    'message' => "Notification List",
-                    'data' => $getnotification_data
-                ]);
-            }
-        } catch (Exception  $e) {
-            return response()->json(['status' => 0, 'message' => 'Something went wrong']);
-        }
-    }
+    //     foreach ($users_ids as $users_id) {
+    //         $notifications  = UserNotificationType::where(['user_id' => $users_id, 'type' => 'private_message'])->get();
+    //         foreach ($notifications as $notification) {
+    //             $getnotification_data[] = [
+    //                 'user_id' => $notification->user_id,
+    //                 'isnotification' => [
+    //                     'push' => (int)$notification->push // Convert to integer if necessary
+    //                 ]
+    //             ];
+    //         }        }
+    //     dd($getnotification_data);
+    // }
 }
