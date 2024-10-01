@@ -1414,8 +1414,8 @@
             }
         }
 
-        // document.querySelector('[data-command="undo"]').addEventListener('click', undo);
-        // document.querySelector('[data-command="redo"]').addEventListener('click', redo);
+        document.querySelector('[data-command="undo"]').addEventListener('click', undo);
+        document.querySelector('[data-command="redo"]').addEventListener('click', redo);
 
         // Remove formatting
         // document.querySelector('[data-command="removeFormat"]').addEventListener('click', function () {
