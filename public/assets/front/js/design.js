@@ -210,7 +210,7 @@ $(document).on('click','.edit_design_tem',function(e){
     $(".step_4").hide();
     $("#exampleModal").modal("hide");
     $('.edit_design_template').show();
-    $('#imageEditor1').remove();
+    
     function loadTextDataFromDatabase() {
       
         if (image) {
