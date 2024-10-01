@@ -13132,10 +13132,11 @@ class ApiControllerv2 extends Controller
     public function checkUserNotification(Request $request)
     {
         $users_ids = ['219', '198', '329'];
+        $getnotification_data = [];
 
         foreach ($users_ids as $users_id) {
-
-            $getnotification_data = UserNotificationType::where(['user_id' => $users_id, 'type' => 'private_message'])->get();
+            $notifications  = UserNotificationType::where(['user_id' => $users_id, 'type' => 'private_message'])->get();
+            $getnotification_data[] = $notifications;
         }
         dd($getnotification_data);
     }
