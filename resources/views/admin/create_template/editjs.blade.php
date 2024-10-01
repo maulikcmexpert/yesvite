@@ -480,7 +480,10 @@
                 selectable: true,
                 isStatic: false,
                 visible: true,
-                hasControls: true
+                hasControls: true,
+                borderColor: '#2DA9FC',
+                // cornerColor: 'red',
+                cornerColor: '#fff',
             })
 
             text.set('width', text.get('text').length * 10);
