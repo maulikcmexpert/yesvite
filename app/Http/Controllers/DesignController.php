@@ -287,7 +287,7 @@ class DesignController extends Controller
         if ($data) {
             $id = $data->id;
             $imageName = $data->image;
-            $filed_image  = $data->filled_image;
+            $filed_image  = $data->shape_image;
             $static_information = $data->static_information;
 
             if (isset($imageName)) {
