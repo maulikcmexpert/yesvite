@@ -9,6 +9,7 @@ $(document).on("click", ".design-card", function () {
     var template = $(this).data("template");
     var imageUrl = $(this).data("image");
     var json = $(this).data("json");
+    console.log(json);
     var id = $(this).data("id");
     $(".edit_design_tem").attr("data-image", imageUrl);
     if(eventData.textData != null && eventData.temp_id != null && eventData.temp_id == id){
