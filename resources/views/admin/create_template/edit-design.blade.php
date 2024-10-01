@@ -35,7 +35,7 @@
                 </div>
 
                 <!-- Resizeable image inside a wrapper (hidden by default) -->
-                <div id="imageWrapper" style="position: absolute; display: none;">
+                <div id="imageWrapper" style="position:fixed; display:none;">
                     <img id="user_image" src="" style="height: 100px; width: 100px; background-color: black;" />
                     <div class="resize-handle top-left"></div>
                     <div class="resize-handle top-right"></div>
