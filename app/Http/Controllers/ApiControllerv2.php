@@ -13138,25 +13138,24 @@ class ApiControllerv2 extends Controller
 
         $input = json_decode($rawData, true);
         // $users_ids = ['219', '198', '329'];
-        $users_ids=$input['users_id'];
+        $users_ids = $input['users_id'];
 
         $getnotification_data = [];
-        try{
-         foreach ($users_ids as $users_id) {
-            $notifications  = UserNotificationType::where(['user_id' => $users_id, 'type' => 'private_message'])->get();
-            foreach ($notifications as $notification) {
-                $getnotification_data[] = [
-                    'user_id' => $notification->user_id,
-                    'isnotification' => $notification->push
-                ];
+        try {
+            foreach ($users_ids as $users_id) {
+                $notifications  = UserNotificationType::where(['user_id' => $users_id, 'type' => 'private_message'])->get();
+                foreach ($notifications as $notification) {
+                    $getnotification_data[] = [
+                        'user_id' => $notification->user_id,
+                        'isnotification' => $notification->push
+                    ];
+                }
             }
-        }
-        dd($getnotification_data);
-    
-        return response()->json(['status' => 0, 'message' => 'notification list','data'=>$getnotification_data]);
+            // dd($getnotification_data);
 
-    } catch (Exception  $e) {
-        return response()->json(['status' => 0, 'message' => 'something went wrong']);
-    }
+            return response()->json(['status' => 0, 'message' => 'notification list', 'data' => $getnotification_data]);
+        } catch (Exception  $e) {
+            return response()->json(['status' => 0, 'message' => 'something went wrong']);
+        }
     }
 }
