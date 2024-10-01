@@ -1397,10 +1397,12 @@
 
         function addToUndoStack() {
             undoStack.push(canvas.toJSON());
+            console.log(undoStack);
             redoStack = []; // Clear redo stack on new action
         }
 
         function undo() {
+
             if (undoStack.length > 0) {
                 redoStack.push(canvas.toJSON());
                 canvas.loadFromJSON(undoStack.pop(), canvas.renderAll.bind(canvas));
