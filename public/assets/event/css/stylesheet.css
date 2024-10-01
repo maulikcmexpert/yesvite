@@ -1,5 +1,5 @@
 @font-face {
-    font-family: 'JosefinSans-Regular';
+    font-family: 'JosefinSans';
     src: url('./../../fonts/JosefinSans-Regular.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
@@ -15,7 +15,15 @@
 }
 
 @font-face {
-    font-family: 'AgencyFB-Bold';
+    font-family: 'Roboto-Regular';
+    src: url('./../../fonts/Roboto-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'AgencyFB';
     src: url('./../../fonts/AgencyFB-Bold.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
@@ -23,7 +31,7 @@
 }
 
 @font-face {
-    font-family: 'AdleryPro-Regular';
+    font-family: 'AdleryPro';
     src: url('./../../fonts/AdleryPro-Regular.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
@@ -32,7 +40,7 @@
 
 
 @font-face {
-    font-family: 'Allura-Regular';
+    font-family: 'Allura';
     src: url('./../../fonts/Allura-Regular.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
@@ -48,7 +56,7 @@
 }
 
 @font-face {
-    font-family: 'Archer-Bold';
+    font-family: 'Archer';
     src: url('./../../fonts/Archer-Bold.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
@@ -153,7 +161,7 @@
 }
 
 @font-face {
-    font-family: 'AlexBrush-Regular';
+    font-family: 'AlexBrush';
     src: url('./../../fonts/AlexBrush-Regular.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;

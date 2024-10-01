@@ -1149,186 +1149,151 @@ console.log(123)
         canvas.renderAll();
     }
 
-
-    // function saveTextDataToDatabase() {
-    //     hideStaticTextElements(); // Hide the text elements
-    //     var textData = getTextDataFromCanvas();
-    //     var imageURL = canvas.toDataURL('image/png');
-    //     var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content'); // Get CSRF token
-    //     // Get the canvas ID to associate the saved data with a specific record
-    //     var canvasElement = document.getElementById('imageEditor1');
-    //     var canvasId = canvasElement.getAttribute('data-canvas-id');
-    //     var imageName = 'image_' + Date.now() + '.png';
-    //     console.log(canvasId);
-    //     fetch('/saveTextData', {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json', // Set content type to JSON
-    //             'X-CSRF-TOKEN': csrfToken // Include CSRF token
-    //         },
-    //         body: JSON.stringify({
-    //             id: canvasId,
-    //             textElements: textData,
-
-    //         })
-    //     })
-    //         .then(response => response.json())
-    //         .then(data => {
-    //             console.log('Text data saved successfully', data);
-
-    //         })
-    //         .catch((error) => {
-    //             console.error('Error:', error);
-    //         });
-    //     showStaticTextElements();
-    // }
-
     document.getElementById('antaresiaButton').addEventListener('click', function() {
         console.log("fontname")
 
-        loadAndUse("BotanicaScript-Regular");
+    loadAndUse("Botanica Script");
     });
     document.getElementById('JosefinSansButton').addEventListener('click', function() {
-        console.log("fontname");
-        loadAndUse("JosefinSans-Regular");
+        console.log("fontname") ;
+    loadAndUse("JosefinSans");
 
 
     });
     document.getElementById('AbrilFatfaceButton').addEventListener('click', function() {
         console.log("fontname")
 
-        loadAndUse("AbrilFatface");
+    loadAndUse("AbrilFatface");
 
 
     });
     document.getElementById('AgencyFBButton').addEventListener('click', function() {
         console.log("fontname")
 
-        loadAndUse("AgencyFB");
+    loadAndUse("AgencyFB");
 
 
     });
     document.getElementById('AdleryProButton').addEventListener('click', function() {
         console.log("fontname")
 
-        loadAndUse("AdleryPro");
+    loadAndUse("AdleryPro");
 
 
     });
     document.getElementById('AlexBrushButton').addEventListener('click', function() {
         console.log("fontname")
 
-        loadAndUse("AlexBrush");
+    loadAndUse("AlexBrush");
 
 
     });
     document.getElementById('AlluraButton').addEventListener('click', function() {
         console.log("fontname")
 
-        loadAndUse("Allura");
+    loadAndUse("Allura");
 
 
     });
     document.getElementById('BotanicaScript-RegularButton').addEventListener('click', function() {
         console.log("fontname")
 
-        loadAndUse("BotanicaScript-Regular");
+    loadAndUse("BotanicaScript-Regular");
 
 
     });
     document.getElementById('ArcherButton').addEventListener('click', function() {
         console.log("fontname")
 
-        loadAndUse("Archer-Bold");
+    loadAndUse("Archer");
 
 
     });
     document.getElementById('Archer-BookButton').addEventListener('click', function() {
         console.log("fontname")
 
-        loadAndUse("Archer-Book");
+    loadAndUse("Archer-Book");
 
 
     });
     document.getElementById('Archer-BookButton').addEventListener('click', function() {
         console.log("fontname")
 
-        loadAndUse("Archer-Book");
+    loadAndUse("Archer-Book");
 
 
     });
     document.getElementById('Archer-BookItalicButton').addEventListener('click', function() {
         console.log("fontname")
 
-        loadAndUse("Archer-BookItalic");
+    loadAndUse("Archer-BookItalic");
 
 
     });
     document.getElementById('Archer-ExtraLightButton').addEventListener('click', function() {
         console.log("fontname")
 
-        loadAndUse("Archer-ExtraLight");
+    loadAndUse("Archer-ExtraLight");
 
 
     });
     document.getElementById('Archer-HairlineButton').addEventListener('click', function() {
         console.log("fontname")
 
-        loadAndUse("Archer-Hairline");
+    loadAndUse("Archer-Hairline");
 
 
     });
     document.getElementById('Bebas-RegularButton').addEventListener('click', function() {
         console.log("fontname")
 
-        loadAndUse("Bebas-Regular");
+    loadAndUse("Bebas-Regular");
 
 
     });
     document.getElementById('BookAntiquaButton').addEventListener('click', function() {
         console.log("fontname")
 
-        loadAndUse("BookAntiqua");
+    loadAndUse("BookAntiqua");
 
 
     });
     document.getElementById('CandyCaneUnregisteredButton').addEventListener('click', function() {
         console.log("fontname")
 
-        loadAndUse("CandyCaneUnregistered");
+    loadAndUse("CandyCaneUnregistered");
 
 
     });
     document.getElementById('CarbonBl-RegularButton').addEventListener('click', function() {
         console.log("fontname")
 
-        loadAndUse("CarbonBl-Regular");
+    loadAndUse("CarbonBl-Regular");
 
 
     });
     document.getElementById('CarmenSans-ExtraBoldButton').addEventListener('click', function() {
         console.log("fontname")
 
-        loadAndUse("CarmenSans-ExtraBold");
+    loadAndUse("CarmenSans-ExtraBold");
 
 
     });
     document.getElementById('CarmenSans-RegularButton').addEventListener('click', function() {
         console.log("fontname")
 
-        loadAndUse("CarmenSans-Regular");
+    loadAndUse("CarmenSans-Regular");
 
 
     });
     document.getElementById('ChristmasCookiesButton').addEventListener('click', function() {
         console.log("fontname")
 
-        loadAndUse("ChristmasCookies");
+    loadAndUse("ChristmasCookies");
 
 
     });
-    //     textElement.style.fontFamily = 'Allura'; // Change to Allura font
-    // });
+
     function loadAndUse(font) {
         console.log(font);
         var myfont = new FontFaceObserver(font);
