@@ -850,6 +850,8 @@
             // Check if the image was uploaded before saving the shape
             if (imageUploaded) {
                 // Send AJAX request to save the shape
+                const left = imageWrapper.offsetLeft; // Get the new left position
+                const top = imageWrapper.offsetTop; // Get the new top position
                 fetch(`/save_shape/${id}`, {
                         method: 'POST',
                         headers: {
@@ -858,7 +860,9 @@
                                 .getAttribute('content')
                         },
                         body: JSON.stringify({
-                            shape: shape // Send the current shape value
+                            shape: shape,
+                            left: left,
+                            top: top // Send the current shape value
                         })
                     })
                     .then(response => {
