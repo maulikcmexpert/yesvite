@@ -281,7 +281,7 @@
     @include('front.event.step1')
 
     @include('front.event.step2')
-    <div id="edit-design-temp">
+    <div id="edit-design-temp" style="display: none">
         {{-- @include('front.event.design.edit_design') --}}
     </div>
 

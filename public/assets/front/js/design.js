@@ -216,7 +216,7 @@ $(document).on("click", ".edit_design_tem", function (e) {
         },
         success: function (response) {
             console.log(response);
-            $("#edit-design-temp").html(response)
+            $("#edit-design-temp").html(response).show();
             bindData();
         },
         error: function (xhr, status, error) {},
