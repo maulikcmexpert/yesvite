@@ -24,6 +24,9 @@
                 .then(data => {
                     if (data) {
                         // Load background image
+                        var canvasElement = document.getElementById('imageEditor1');
+                        canvasElement.setAttribute('data-canvas-id', data.id);
+                        alert(data.id);
                         fabric.Image.fromURL(data.imagePath, function(img) {
                             img.set({
                                 left: 0,
@@ -84,13 +87,11 @@
 
                             });
                         } else {
-                            console.log(data.id);
                             showStaticTextElements();
                         }
 
                         // Set custom attribute with the fetched ID
-                        var canvasElement = document.getElementById('imageEditor1');
-                        canvasElement.setAttribute('data-canvas-id', data.id);
+
                         canvas.renderAll(); // Ensure all elements are rendered
                     }
                 })
