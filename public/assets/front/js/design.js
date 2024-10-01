@@ -67,7 +67,7 @@ $(document).on("click", ".design-card", function () {
             width: element.width || 200,
             fontSize: element.fontSize,
             fill: element.fill,
-            fontFamily: element.fontFamily,
+            // fontFamily: element.fontFamily,
             fontWeight: element.fontWeight,
             fontStyle: element.fontStyle,
             underline: element.underline,
@@ -240,7 +240,7 @@ $(document).on("click", ".edit_design_tem", function (e) {
                 staticInfo.textElements.forEach((element) => {
                     const textMeasurement = new fabric.Text(element.text, {
                         fontSize: element.fontSize,
-                        fontFamily: element.fontFamily,
+                        // fontFamily: element.fontFamily,
                         fontWeight: element.fontWeight,
                         fontStyle: element.fontStyle,
                         underline: element.underline,
@@ -260,7 +260,7 @@ $(document).on("click", ".edit_design_tem", function (e) {
                         width: element.width || textWidth, // Default width if not provided
                         fontSize: element.fontSize,
                         fill: element.fill,
-                        fontFamily: element.fontFamily,
+                        //fontFamily: element.fontFamily,
                         fontWeight: element.fontWeight,
                         fontStyle: element.fontStyle,
                         underline: element.underline,
@@ -414,7 +414,7 @@ $(document).on("click", ".edit_design_tem", function (e) {
     function getWidth(element, text) {
         const textMeasurement = new fabric.Text(text, {
             fontSize: element.fontSize,
-            fontFamily: element.fontFamily,
+            //fontFamily: element.fontFamily,
             fontWeight: element.fontWeight,
             fontStyle: element.fontStyle,
             underline: element.underline,
@@ -544,7 +544,7 @@ $(document).on("click", ".edit_design_tem", function (e) {
     const updateTextboxWidth = (textbox) => {
         const text = textbox.text;
         const fontSize = textbox.fontSize;
-        const fontFamily = textbox.fontFamily;
+        //  const fontFamily = textbox.fontFamily;
         const charSpacing = textbox.charSpacing || 0;
 
         const ctx = canvas.getContext("2d");
@@ -630,7 +630,7 @@ $(document).on("click", ".edit_design_tem", function (e) {
             fontSize: defaultSettings.fontSize,
             charSpacing: defaultSettings.letterSpacing * 10, // Adjusted for Fabric.js
             lineHeight: defaultSettings.lineHeight,
-            fontFamily: "Arial",
+            // fontFamily: "Arial",
             textAlign: "left",
             fill: "#000", // Optional: Reset text color
         });
@@ -1051,7 +1051,7 @@ $(document).on("click", ".edit_design_tem", function (e) {
             fill: originalTextbox.fill,
             width: originalTextbox.width,
             height: originalTextbox.height,
-            fontFamily: originalTextbox.fontFamily,
+            // fontFamily: originalTextbox.fontFamily,
             originX: originalTextbox.originX,
             originY: originalTextbox.originY,
             hasControls: true,
@@ -1430,7 +1430,7 @@ $(document).on("click", ".edit_design_tem", function (e) {
                     var selectedFont = document.querySelector(
                         '[data-command="fontName"]'
                     ).value;
-                    activeObject.set("fontFamily", selectedFont);
+                    //  activeObject.set("fontFamily", selectedFont);
                 },
 
                 justifyLeft: () => activeObject.set("textAlign", "left"),
@@ -1515,7 +1515,7 @@ function getTextDataFromCanvas() {
                 dx: obj.left, // Calculate dx
                 dy: obj.top, // Calculate dy
                 backgroundColor: obj.backgroundColor,
-                fontFamily: obj.fontFamily,
+                // fontFamily: obj.fontFamily,
                 textAlign: obj.textAlign,
                 fontWeight: obj.fontWeight,
                 fontStyle: obj.fontStyle,
