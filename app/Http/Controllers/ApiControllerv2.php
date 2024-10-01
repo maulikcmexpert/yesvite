@@ -13131,12 +13131,18 @@ class ApiControllerv2 extends Controller
 
     public function checkUserNotification(Request $request)
     {
-        $users_ids = ['219', '198', '329'];
+
+        $user  = Auth::guard('api')->user();
+
+        $rawData = $request->getContent();
+
+        $input = json_decode($rawData, true);
+        // $users_ids = ['219', '198', '329'];
+        $users_ids=$input['users_id'];
+
         $getnotification_data = [];
-
-
-
-        foreach ($users_ids as $users_id) {
+        try{
+         foreach ($users_ids as $users_id) {
             $notifications  = UserNotificationType::where(['user_id' => $users_id, 'type' => 'private_message'])->get();
             foreach ($notifications as $notification) {
                 $getnotification_data[] = [
@@ -13146,5 +13152,10 @@ class ApiControllerv2 extends Controller
             }
         }
         dd($getnotification_data);
+    
+        return response()->json(['status' => 0, 'message' => 'notification list','data'=>$getnotification_data]);
+
+    } catch (Exception  $e) {
+        return response()->json(['status' => 0, 'message' => 'something went wrong']);
     }
 }
