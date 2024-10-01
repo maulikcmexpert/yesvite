@@ -5,18 +5,17 @@ var base_url = $("#base_url").text();
 
 
 $(document).on("click", ".design-card", function () {
-    var url = $(this).data("url");
-    var template = $(this).data("template");
+
     var imageUrl = $(this).data("image");
     var json = $(this).data("json");
     var id = $(this).data("id");
     
     $('.edit_design_tem').attr('data-image', imageUrl);
-    dbJson = json;
-    temp_id = id;
+    const dbJson = json;
+    const temp_id = id;
     // Set the image URL in the modal's image tag
     $("#modalImage").attr("src", imageUrl);
-    image = imageUrl;
+    const image = imageUrl;
 
     // Remove the old canvas if it exists
     $('#imageEditor2').remove(); 
