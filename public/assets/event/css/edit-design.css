@@ -254,7 +254,7 @@
     height: 6px;
     cursor: pointer;
     animate: 0.2s;
-    background: linear-gradient(90deg, var(--primaryColor) var(--range-progress), var(--tabBg) var(--range-progress));
+    background: var(--primaryColor);
     border-radius: 1rem;
 }
 
