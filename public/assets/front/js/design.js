@@ -206,6 +206,7 @@ $(document).on("click", ".edit_design_tem", function (e) {
     $(".step_4").hide();
     $("#exampleModal").modal("hide");
     $(".edit_design_template").remove();
+
     $.ajax({
         url: base_url + "event/get_design_edit_page",
         method: "POST",
@@ -214,9 +215,13 @@ $(document).on("click", ".edit_design_tem", function (e) {
         },
         success: function (response) {
             console.log(response);
+            bindData();
         },
         error: function (xhr, status, error) {},
     });
+    function bindData(){
+
+    
     
     function loadTextDataFromDatabase() {
         if (image) {
@@ -1491,7 +1496,8 @@ $(document).on("click", ".edit_design_tem", function (e) {
     document
         .querySelector('[data-command="redo"]')
         .addEventListener("click", redo);
-});
+    }
+    });
 
 function getTextDataFromCanvas() {
     var objects = canvas.getObjects();
