@@ -373,14 +373,14 @@
                     </label>
 
                 </div>
-                <!-- <div class="font-selector form-check">
+                <div class="font-selector form-check">
 
                     <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="BotanicaScript-Regular" id="BotanicaScript-RegularButton">
                     <label class="form-check-label BotanicaScript-Regular" for="BotanicaScript">
                         BotanicaScript-Regular
                     </label>
 
-                </div> -->
+                </div>
                 <div class="font-selector form-check">
 
                     <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="Archer" id="ArcherButton">
