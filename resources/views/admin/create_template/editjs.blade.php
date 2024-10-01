@@ -23,7 +23,6 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data) {
-                        console.log(data.id);
                         // Load background image
                         fabric.Image.fromURL(data.imagePath, function(img) {
                             img.set({
@@ -42,6 +41,7 @@
                             const staticInfo = JSON.parse(data.static_information);
                             console.log(staticInfo);
 
+                            console.log(data.id);
                             // Render text elements on canvas
                             staticInfo.textElements.forEach(element => {
                                 // alert();
