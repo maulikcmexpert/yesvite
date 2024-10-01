@@ -10,7 +10,7 @@ $(document).on("click", ".design-card", function () {
     var imageUrl = $(this).data("image");
     var json = $(this).data("json");
     var id = $(this).data("id");
-    
+    console.log(eventData.textData);
     $(".edit_design_tem").attr("data-image", imageUrl);
     if(eventData.textData != null && eventData.temp_id != null && eventData.temp_id == id){
         dbJson = eventData.textData;
