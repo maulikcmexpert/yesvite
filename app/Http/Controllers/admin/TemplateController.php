@@ -200,6 +200,7 @@ class TemplateController extends Controller
     {
         try {
             // Begin the transaction
+            dd($request);
             DB::beginTransaction();
 
             // Find the template by its ID
@@ -218,26 +219,20 @@ class TemplateController extends Controller
 
             // Handle image upload (if a new image is uploaded)
             if ($request->hasFile('image')) {
-                // Delete the old image if it exists
                 if ($template->image && file_exists(public_path('storage/canvas/' . $template->image))) {
                     unlink(public_path('storage/canvas/' . $template->image));
                 }
-
-                // Store the new image
                 $imageName = time() . '.' . $request->image->extension();
                 $request->image->move(public_path('storage/canvas'), $imageName);
                 $template->image = $imageName;
             }
             if ($request->hasFile('filled_image')) {
-                // Delete the old image if it exists
                 if ($template->filled_image && file_exists(public_path('storage/canvas/' . $template->filled_image))) {
                     unlink(public_path('storage/canvas/' . $template->filled_image));
                 }
-
-                // Store the new image
-                $imageName = time() . '.' . $request->filled_image->extension();
-                $request->filled_image->move(public_path('storage/canvas'), $imageName);
-                $template->filled_image = $imageName;
+                $FilledimageName = time() . '.' . $request->filled_image->extension();
+                $request->filled_image->move(public_path('storage/canvas'), $FilledimageName);
+                $template->filled_image = $FilledimageName;
             }
 
             // Save the updated template data
