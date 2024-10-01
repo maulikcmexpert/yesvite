@@ -6,13 +6,12 @@ var base_url = $("#base_url").text();
 
 $(document).on("click", ".design-card", function () {
 
-    var image = $(this).data("image");
+    image = $(this).data("image");
     dbJson = $(this).data("json");
     temp_id = $(this).data("id");
     
     $('.edit_design_tem').attr('data-image', image);
-    let dbJson = json;
-    let temp_id = id;
+
     // Set the image URL in the modal's image tag
     $("#modalImage").attr("src", image);
 
