@@ -83,8 +83,8 @@
                                 canvas.add(textElement);
 
                             });
-                            console.log(data.id);
                         } else {
+                            console.log(data.id);
                             showStaticTextElements();
                         }
 
