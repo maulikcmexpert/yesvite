@@ -13153,7 +13153,7 @@ class ApiControllerv2 extends Controller
             }
             // dd($getnotification_data);
 
-            return response()->json(['status' => 0, 'message' => 'notification list', 'data' => $getnotification_data]);
+            return response()->json(['status' => 1, 'message' => 'notification list', 'data' => $getnotification_data]);
         } catch (Exception  $e) {
             return response()->json(['status' => 0, 'message' => 'something went wrong']);
         }
