@@ -6,60 +6,39 @@
         var canvas = new fabric.Canvas('imageEditor1', {
             width: 345, // Canvas width
             height: 490, // Canvas height
+
+
+
         });
 
         function loadTextDataFromDatabase() {
             var id = $('#template_id').val();
             // let urlParams = new URLSearchParams(window.location.search);
+
+
             // let id = urlParams.get('id');
+
+
             fetch(`/loadTextData/${id}`) // API endpoint to load data from your database
                 .then(response => response.json())
                 .then(data => {
                     if (data) {
-                        // // Load background image
-                        console.log(data);
+                        // Load background image
                         var canvasElement = document.getElementById('imageEditor1');
                         canvasElement.setAttribute('data-canvas-id', data.id);
-                        // fabric.Image.fromURL(data.imagePath, function(img) {
-                        //     img.set({
-                        //         left: 0,
-                        //         top: 0,
-                        //         selectable: false, // Non-draggable background image
-                        //         hasControls: false // Disable resizing controls
-                        //     });
-                        //     canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
+                        fabric.Image.fromURL(data.imagePath, function(img) {
+                            img.set({
+                                left: 0,
+                                top: 0,
+                                selectable: false, // Non-draggable background image
+                                hasControls: false // Disable resizing controls
+                            });
+                            canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
 
-                        // });
+                        });
 
                         // Load static information (text elements)
-                        if (data.image != "") {
-                            fabric.Image.fromURL(data.image, function(img) {
-                                img.set({
-                                    left: 0,
-                                    top: 0,
-                                    selectable: false, // Non-draggable background image
-                                    hasControls: false // Disable resizing controls
-                                });
-                                canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
-                            });
-                        }
-                        if (data.filled_image != "") {
-                            fabric.Image.fromURL(data.filled_image, function(filedImg) {
-                                filedImg.set({
-                                    left: 50, // Set your preferred position
-                                    top: 50, // Set your preferred position
-                                    scaleX: 0.5, // Scale down the image (50% of the original size)
-                                    scaleY: 0.5,
-                                    width: 200, // Set the width to 100px
-                                    height: 150, // Scale down the image (50% of the original size)
-                                    selectable: true, // Make filed image draggable
-                                    hasControls: true // Allow resizing controls for the filed image
-                                });
-                                canvas.add(filedImg); // Add the filed image to the canvas
-                                canvas.renderAll(); // Ensure the canvas is updated
-                            });
-                        }
-                        if (data.static_information != "") {
+                        if (data.static_information) {
                             hideStaticTextElements(); // Hide static text elements if static information is present
                             const staticInfo = JSON.parse(data.static_information);
                             console.log(staticInfo);
