@@ -1055,10 +1055,10 @@
 
 
 
-        document.getElementById('antaresiaButton').addEventListener('click', function() {
-            console.log("fontname")
-            loadAndUse("Antaresia");
-        });
+        // document.getElementById('antaresiaButton').addEventListener('click', function() {
+        //     console.log("fontname")
+        //     loadAndUse("Antaresia");
+        // });
         document.getElementById('JosefinSansButton').addEventListener('click', function() {
             console.log("fontname");
             loadAndUse("JosefinSans");
