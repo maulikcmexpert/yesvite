@@ -888,12 +888,12 @@
 
         // Add two draggable static textboxes outside the image area
         addDraggableText(150, 50, 'event_name', 'xyz'); // Position this outside the image area
-        addDraggableText(350, 100, 'host_name', 'abc');
-        addDraggableText(350, 150, 'start_time', '5:00PM');
-        addDraggableText(350, 200, 'rsvp_end_time', '6:00PM');
-        addDraggableText(350, 250, 'start_date', '2024-07-27');
-        addDraggableText(350, 300, 'end_date', '2024-07-27');
-        addDraggableText(350, 350, 'Location', 'fdf');
+        addDraggableText(150, 100, 'host_name', 'abc');
+        addDraggableText(150, 150, 'start_time', '5:00PM');
+        addDraggableText(150, 200, 'rsvp_end_time', '6:00PM');
+        addDraggableText(150, 250, 'start_date', '2024-07-27');
+        addDraggableText(150, 300, 'end_date', '2024-07-27');
+        addDraggableText(150, 350, 'Location', 'fdf');
 
 
 
