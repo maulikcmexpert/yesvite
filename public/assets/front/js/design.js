@@ -1348,16 +1348,15 @@ $(document).on("click", ".edit_design_tem", function (e) {
             .then(function () {
                 // When font is loaded, use it.
                 var activeObject = canvas.getActiveObject();
-                if (activeObject && activeObject.isType("text")) {
+                if (activeObject && activeObject.type === "textbox") {
                     // Ensure it's a text object
 
                     // Clear the font cache for the specific font family
-                    fabric.Text.clearFabricFontCache(font);
+                    // fabric.Text.clearFabricFontCache(font);
 
                     // Apply the font family
                     activeObject.set({
                         fontFamily: font,
-                        fontSize: 35,
                     });
 
                     // Recalculate the text dimensions
