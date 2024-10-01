@@ -1344,8 +1344,21 @@ console.log(123)
             myfont.load().then(function() {
                 // When font is loaded, use it.
                 var activeObject = canvas.getActiveObject();
-                if (activeObject) {
-                    activeObject.set("fontFamily", font);
+                if (activeObject && activeObject.type === "textbox") {
+                    // Ensure it's a text object
+
+                    // Clear the font cache for the specific font family
+                    // fabric.Text.clearFabricFontCache(font);
+
+                    // Apply the font family
+                    activeObject.set({
+                        fontFamily: font,
+                    });
+
+                    // Recalculate the text dimensions
+                    activeObject.initDimensions();
+
+                    // Trigger a re-render to ensure the font is applied
                     canvas.requestRenderAll();
                 } else {
                     alert('No object selected');
