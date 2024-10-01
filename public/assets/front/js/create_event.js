@@ -4283,8 +4283,10 @@ $(document).on("click", ".next_guest_step", function () {
     $(this).prop("disabled", true);
     $('.btn-close').prop("disabled", true);
     var textData = getTextDataFromCanvas();
-    // console.log(textData);
-    eventData.textData = textData;
+    dbJson = {
+        textElements: textData
+    };
+    eventData.textData = dbJson;
     eventData.temp_id = temp_id;
     save_image_design(downloadImage);
     $(".main-content-wrp").addClass("blurred");
