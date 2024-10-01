@@ -2314,7 +2314,7 @@ class ApiControllerv2 extends Controller
                     'zip_code' => empty($user->zip_code) ? "" : $user->zip_code,
                     'password_updated_date' => empty($user->password_updated_date) ? "" : $user->password_updated_date,
                     'total_notification' => Notification::where(['user_id' => $user->id, 'read' => '0'])->count(),
-                    'private_message' => ($checkNotificationSetting->push != "" && isset($checkNotificationSetting->push)) ? $checkNotificationSetting->push : ""
+                    'is_message_notification' => ($checkNotificationSetting->push != "" && isset($checkNotificationSetting->push)) ? $checkNotificationSetting->push : ""
                 ];
 
 
