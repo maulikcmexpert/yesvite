@@ -13134,9 +13134,7 @@ class ApiControllerv2 extends Controller
         $user  = Auth::guard('api')->user();
         $rawData = $request->getContent();
         $users_data = json_decode($rawData, true);
-        dd($users_data);
-        $users_ids = $users_data['users_id'];
-        // $users_ids = ['219', '198', '329'];
+        $users_ids = json_decode($users_data['users_id'], true);
         try {
             $getnotification_data = [];
             foreach ($users_ids as $users_id) {
