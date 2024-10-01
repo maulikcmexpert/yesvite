@@ -190,35 +190,79 @@ class DesignController extends Controller
 
         return response()->json(['message' => 'Data saved successfully'], 200);
     }
+    // public function loadTextData($id)
+    // {
+
+
+    //     $data = DB::table('text_data')
+    //         ->orderBy('id', 'desc')
+    //         ->when($id != '', function ($query) use ($id) {
+    //             $query->where('id', $id);
+    //         })
+    //         ->first();
+
+
+    //     if ($data) {
+    //         $id = $data->id;
+    //         $imageName = $data->image;
+    //         $static_information = $data->static_information;
+
+    //         if (isset($imageName)) {
+
+    //             $imagePath = asset('storage/canvas/' . $imageName);
+
+
+    //             return response()->json([
+    //                 'imagePath' => $imagePath,
+    //                 'id' => $id,
+    //                 'static_information' => $static_information,
+
+    //             ]);
+    //         }
+    //     }
+
+    //     // Return an empty response if no data or image path is found
+    //     return response()->json(null);
+    // }
+
     public function loadTextData($id)
     {
 
 
         $data = DB::table('text_data')
             ->orderBy('id', 'desc')
-            ->when($id != '', function ($query) use ($id) {
-                $query->where('id', $id);
-            })
+            // ->when($id != '', function($query) use($id){
+            //     $query->where('id',$id);
+            // })
             ->first();
 
 
         if ($data) {
             $id = $data->id;
             $imageName = $data->image;
+            $filled_image  = $data->filled_image;
             $static_information = $data->static_information;
 
             if (isset($imageName)) {
-
                 $imagePath = asset('storage/canvas/' . $imageName);
-
-
-                return response()->json([
-                    'imagePath' => $imagePath,
-                    'id' => $id,
-                    'static_information' => $static_information,
-
-                ]);
+            } else {
+                $imagePath = null;
             }
+
+            // Check if the filed_image exists
+            if (isset($filled_image)) {
+                $filedImagePath = asset('storage/canvas/' . $filled_image);
+            } else {
+                $filedImagePath = null;
+            }
+
+            // Return all data in the response
+            return response()->json([
+                'id' => $id,
+                'image' => $imagePath,
+                'filled_image' => $filedImagePath,
+                'static_information' => $static_information
+            ]);
         }
 
         // Return an empty response if no data or image path is found
