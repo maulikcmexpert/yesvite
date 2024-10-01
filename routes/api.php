@@ -207,6 +207,8 @@ Route::prefix('user/v2/')->middleware('checkUser')->group(function () {
     Route::post('get_all_template_data', [ApiControllerv2::class, 'getAllTemplateData']);
     Route::post('get_single_template_data', [ApiControllerv2::class, 'getSingleTemplateData']);
 
+    Route::post('check_user_notification', [ApiControllerv2::class, 'checkUserNotification']);
+
     Route::get('notificationtest', [ApiControllerv2::class, 'notificationtest']);
 
     Route::get('logout', [ApiControllerv2::class, 'logout']);
