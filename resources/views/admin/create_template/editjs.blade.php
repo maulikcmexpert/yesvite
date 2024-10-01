@@ -38,7 +38,7 @@
                         });
 
                         // Load static information (text elements)
-                        if (data.static_information) {
+                        if (data.static_information != "") {
                             hideStaticTextElements(); // Hide static text elements if static information is present
                             const staticInfo = JSON.parse(data.static_information);
                             console.log(staticInfo);
@@ -87,6 +87,14 @@
                             });
                         } else {
                             showStaticTextElements();
+                            addDraggableText(150, 50, 'event_name', 'xyz'); // Position this outside the image area
+                            addDraggableText(150, 100, 'host_name', 'abc');
+                            addDraggableText(150, 150, 'start_time', '5:00PM');
+                            addDraggableText(150, 200, 'rsvp_end_time', '6:00PM');
+                            addDraggableText(150, 250, 'start_date', '2024-07-27');
+                            addDraggableText(150, 300, 'end_date', '2024-07-27');
+                            addDraggableText(150, 350, 'Location', 'fdf');
+
                         }
 
                         // Set custom attribute with the fetched ID
@@ -892,13 +900,13 @@
 
 
         // Add two draggable static textboxes outside the image area
-        addDraggableText(150, 50, 'event_name', 'xyz'); // Position this outside the image area
-        addDraggableText(150, 100, 'host_name', 'abc');
-        addDraggableText(150, 150, 'start_time', '5:00PM');
-        addDraggableText(150, 200, 'rsvp_end_time', '6:00PM');
-        addDraggableText(150, 250, 'start_date', '2024-07-27');
-        addDraggableText(150, 300, 'end_date', '2024-07-27');
-        addDraggableText(150, 350, 'Location', 'fdf');
+        // addDraggableText(150, 50, 'event_name', 'xyz'); // Position this outside the image area
+        // addDraggableText(150, 100, 'host_name', 'abc');
+        // addDraggableText(150, 150, 'start_time', '5:00PM');
+        // addDraggableText(150, 200, 'rsvp_end_time', '6:00PM');
+        // addDraggableText(150, 250, 'start_date', '2024-07-27');
+        // addDraggableText(150, 300, 'end_date', '2024-07-27');
+        // addDraggableText(150, 350, 'Location', 'fdf');
 
 
 
