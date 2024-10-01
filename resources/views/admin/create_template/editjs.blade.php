@@ -52,7 +52,7 @@
                                     width: element.width || 200, // Default width if not provided
                                     fontSize: element.fontSize,
                                     fill: element.fill,
-                                    // fontFamily: element.fontFamily,
+                                    fontFamily: element.fontFamily,
                                     fontWeight: element.fontWeight,
                                     fontStyle: element.fontStyle,
                                     underline: element.underline,
@@ -116,11 +116,11 @@
         const updateTextboxWidth = (textbox) => {
             const text = textbox.text;
             const fontSize = textbox.fontSize;
-            // const fontFamily = textbox.fontFamily;
+            const fontFamily = textbox.fontFamily;
             const charSpacing = textbox.charSpacing || 0;
 
             const ctx = canvas.getContext('2d');
-            // ctx.font = `${fontSize}px ${fontFamily}`;
+            ctx.font = `${fontSize}px ${fontFamily}`;
             const measuredTextWidth = ctx.measureText(text).width;
             const width = measuredTextWidth + (charSpacing * (text.length - 1));
 
@@ -202,7 +202,7 @@
                 fontSize: defaultSettings.fontSize,
                 charSpacing: defaultSettings.letterSpacing * 10, // Adjusted for Fabric.js
                 lineHeight: defaultSettings.lineHeight,
-                // fontFamily: 'Arial',
+                fontFamily: 'Arial',
                 textAlign: 'left',
                 fill: '#000000', // Optional: Reset text color
             });
@@ -838,7 +838,7 @@
                 fill: originalTextbox.fill,
                 width: originalTextbox.width,
                 height: originalTextbox.height,
-                // fontFamily: originalTextbox.fontFamily,
+                fontFamily: originalTextbox.fontFamily,
                 originX: originalTextbox.originX,
                 originY: originalTextbox.originY,
                 hasControls: true,
@@ -962,7 +962,7 @@
                         dx: obj.left, // Calculate dx
                         dy: obj.top, // Calculate dy
                         backgroundColor: obj.backgroundColor,
-                        // fontFamily: obj.fontFamily,
+                        fontFamily: obj.fontFamily,
                         textAlign: obj.textAlign,
                         fontWeight: obj.fontWeight,
                         fontStyle: obj.fontStyle,
@@ -1238,7 +1238,7 @@
                         fontStyle: '',
                         underline: false,
                         linethrough: false,
-                        // fontFamily: 'Arial'
+                        fontFamily: 'Arial'
                     });
                 },
                 fontName: (font) => {
