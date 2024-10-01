@@ -1567,6 +1567,6 @@ class EventController extends Controller
     }
 
     public function get_design_edit_page(Request $request){
-        return view('front.event.design.edit_design');
+        return view('front.event.design.edit_design')->render();
     }
 }
