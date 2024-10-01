@@ -104,7 +104,7 @@
         // }
 
 
-        var shape = "";
+        var newshape = "";
 
         function loadTextDataFromDatabase() {
             var id = $('#template_id').val();
@@ -154,20 +154,20 @@
                                 // Define clipping paths based on the shape
                                 let clipPath;
 
-                                if (shape === 'circle') {
+                                if (newshape === 'circle') {
                                     clipPath = new fabric.Circle({
                                         radius: 75, // Define radius of the circle
                                         originX: 'center', // Set origin to center of the circle
                                         originY: 'center' // Set origin to center of the circle
                                     });
-                                } else if (shape === 'rectangle') {
+                                } else if (newshape === 'rectangle') {
                                     clipPath = new fabric.Rect({
                                         width: 150, // Set width of the rectangle
                                         height: 100, // Set height of the rectangle
                                         originX: 'center', // Set origin to center of the rectangle
                                         originY: 'center' // Set origin to center of the rectangle
                                     });
-                                } else if (shape === 'star') {
+                                } else if (newshape === 'star') {
                                     // Star shape path generation
                                     const starPoints = [];
                                     const spikes = 5;
@@ -188,7 +188,7 @@
                                         originX: 'center',
                                         originY: 'center'
                                     });
-                                } else if (shape === 'heart') {
+                                } else if (newshape === 'heart') {
                                     // Heart shape path
                                     const heartPath = [
                                         'M', 0, 0,
