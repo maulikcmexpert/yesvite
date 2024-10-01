@@ -99,7 +99,6 @@ class TemplateController extends Controller
     public function store(Request $request)
     {
         try {
-            dd($request);
             DB::beginTransaction();
             $imageName = null;
             $filledImage = null;
