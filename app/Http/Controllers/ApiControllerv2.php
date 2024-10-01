@@ -2272,7 +2272,7 @@ class ApiControllerv2 extends Controller
 
             $checkNotificationSetting =  UserNotificationType::where(['user_id' => $user->id, 'type' => 'private_message'])->first();
 
-            // dd($checkNotificationSetting);
+            dd($checkNotificationSetting);
 
             if (!empty($user)) {
 
