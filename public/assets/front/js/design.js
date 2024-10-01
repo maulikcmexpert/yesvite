@@ -485,6 +485,18 @@ $(document).on('click','.edit_design_tem',function(e){
         canvas.renderAll(); // Final render
     }
 
+    const oldCanvas = document.getElementById('imageEditor1');
+    if (oldCanvas) {
+        oldCanvas.parentNode.removeChild(oldCanvas); // Remove the old canvas
+    }
+
+    // Create a new canvas element
+    const newCanvas = document.createElement('canvas');
+    newCanvas.id = 'imageEditor1'; // Same ID to be reused
+    newCanvas.width = 345; // Canvas width
+    newCanvas.height = 490; // Canvas height
+    document.body.appendChild(newCanvas); // Append to body or specific container
+
     canvas = new fabric.Canvas('imageEditor1', {
         width: 345, // Canvas width
         height: 490, // Canvas height
