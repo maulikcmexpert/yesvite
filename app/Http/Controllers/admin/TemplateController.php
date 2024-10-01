@@ -106,17 +106,13 @@ class TemplateController extends Controller
 
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
-                if ($image) {
-                    $imageName = time() . '.' . $image->getClientOriginalExtension();
-                    $image->move(public_path('storage/canvas'), $imageName);
-                }
+                $imageName = time() . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('storage/canvas'), $imageName);
             }
             if ($request->hasFile('filled_image')) {
                 $filled_image = $request->file('filled_image');
-                if ($filled_image) {
-                    $filledImage = time() . '.' . $filled_image->getClientOriginalExtension();
-                    $filled_image->move(public_path('storage/canvas'), $filledImage);
-                }
+                $filledImage = time() . '.' . $filled_image->getClientOriginalExtension();
+                $filled_image->move(public_path('storage/canvas'), $filledImage);
             }
             $textData = TextData::create([
                 'image' => $imageName,
