@@ -13138,7 +13138,7 @@ class ApiControllerv2 extends Controller
         try {
             $getnotification_data = [];
             foreach ($users_ids as $users_id) {
-                dd($users_id);
+                // dd($users_id);
                 $notifications  = UserNotificationType::where(['user_id' => $users_id, 'type' => 'private_message'])->get();
                 foreach ($notifications as $notification) {
                     $getnotification_data[] = [
