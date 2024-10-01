@@ -1407,14 +1407,14 @@
 
         function undo() {
 
-            if (undoStack.length > 0) {
+            if (undoStack.length >= 0) {
                 redoStack.push(canvas.toJSON());
                 canvas.loadFromJSON(undoStack.pop(), canvas.renderAll.bind(canvas));
             }
         }
 
         function redo() {
-            if (redoStack.length > 0) {
+            if (redoStack.length >= 0) {
                 undoStack.push(canvas.toJSON());
                 canvas.loadFromJSON(redoStack.pop(), canvas.renderAll.bind(canvas));
             }
