@@ -41,7 +41,6 @@
                             const staticInfo = JSON.parse(data.static_information);
                             console.log(staticInfo);
 
-                            console.log(data.id);
                             // Render text elements on canvas
                             staticInfo.textElements.forEach(element => {
                                 // alert();
@@ -88,6 +87,7 @@
                             showStaticTextElements();
                         }
 
+                        console.log(data.id);
                         // Set custom attribute with the fetched ID
                         var canvasElement = document.getElementById('imageEditor1');
                         canvasElement.setAttribute('data-canvas-id', data.id);
