@@ -13128,4 +13128,23 @@ class ApiControllerv2 extends Controller
             return response()->json(['status' => 0, 'message' => 'something went wrong']);
         }
     }
+
+    public function checkUserNotification(Request $request)
+    {
+        $users_ids = ['219', '198', '329'];
+        $getnotification_data = [];
+
+        foreach ($users_ids as $users_id) {
+            $notifications  = UserNotificationType::where(['user_id' => $users_id, 'type' => 'private_message'])->get();
+            foreach ($notifications as $notification) {
+                $getnotification_data[] = [
+                    'user_id' => $notification->user_id,
+                    'isnotification' => [
+                        'push' => $notification->push
+                    ]
+                ];
+            }
+        }
+        dd($getnotification_data);
+    }
 }

@@ -31,28 +31,54 @@
 // alert();
 WebFontConfig = {
     custom: {
-      families: ['JosefinSans','Botanica Script','AbrilFatface','AdleryPro','AgencyFB','AlexBrush','Allura','BotanicaScript-Regular','Archer',
-        'Archer-Book','Archer-BookItalic','Archer-ExtraLight','Archer-Hairline','Bebas-Regular','BookAntiqua','Bungee-Regular',
-        'CandyCaneUnregistered','CarbonBl-Regular','CarmenSans-ExtraBold','CarmenSans-Regular','ChristmasCookies'
-      ],
-      urls: ['./../../event/css/stylesheet.css']
-    },loading: function() {
-        console.log('loading');
-      },
-      active: function() {
-        console.log('active');
-      },
-      inactive: function() {
-        console.log('inactive');
-      },
-      fontloading: function(fontFamily, fontDescription) {
-        console.log('fontloading: ' + fontFamily + ' (' + fontDescription + ')');
-      },
-      fontactive: function(fontFamily, fontDescription) {
-        console.log('fontactive: ' + fontFamily + ' (' + fontDescription + ')');
-      },
-      fontinactive: function(fontFamily, fontDescription) {
-        console.log('fontinactive: ' + fontFamily + ' (' + fontDescription + ')');
-      }
-  };
-  WebFont.load(WebFontConfig);
+        families: [
+            "JosefinSans",
+            "Botanica Script",
+            "AbrilFatface",
+            "AdleryPro",
+            "AgencyFB",
+            "AlexBrush",
+            "Allura",
+            "BotanicaScript-Regular",
+            "Archer",
+            "Archer-Book",
+            "Archer-BookItalic",
+            "Archer-ExtraLight",
+            "Archer-Hairline",
+            "Bebas-Regular",
+            "BookAntiqua",
+            "Bungee-Regular",
+            "CandyCaneUnregistered",
+            "CarbonBl-Regular",
+            "CarmenSans-ExtraBold",
+            "CarmenSans-Regular",
+            "ChristmasCookies",
+        ],
+        urls: [
+            "https://yesvite.cmexpertiseinfotech.in/assets/event/css/stylesheet.css",
+        ],
+    },
+    loading: function () {
+        console.log("loading");
+    },
+    active: function () {
+        console.log("active");
+    },
+    inactive: function () {
+        console.log("inactive");
+    },
+    fontloading: function (fontFamily, fontDescription) {
+        console.log(
+            "fontloading: " + fontFamily + " (" + fontDescription + ")"
+        );
+    },
+    fontactive: function (fontFamily, fontDescription) {
+        console.log("fontactive: " + fontFamily + " (" + fontDescription + ")");
+    },
+    fontinactive: function (fontFamily, fontDescription) {
+        console.log(
+            "fontinactive: " + fontFamily + " (" + fontDescription + ")"
+        );
+    },
+};
+WebFont.load(WebFontConfig);
