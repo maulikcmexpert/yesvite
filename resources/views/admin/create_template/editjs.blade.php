@@ -1101,13 +1101,13 @@
 
 
         });
-        document.getElementById('BotanicaScript-RegularButton').addEventListener('click', function() {
-            console.log("fontname")
+        // document.getElementById('BotanicaScript-RegularButton').addEventListener('click', function() {
+        //     console.log("fontname")
 
-            loadAndUse("BotanicaScript-Regular");
+        //     loadAndUse("BotanicaScript-Regular");
 
 
-        });
+        // });
         document.getElementById('ArcherButton').addEventListener('click', function() {
             console.log("fontname")
 
