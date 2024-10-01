@@ -486,7 +486,6 @@
                 cornerColor: '#fff',
                 cornerSize: 6,
                 transparentCorners: false,
-                isStatic: true
             })
 
             text.set('width', text.get('text').length * 10);
