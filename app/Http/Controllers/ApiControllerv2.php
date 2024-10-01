@@ -13131,20 +13131,28 @@ class ApiControllerv2 extends Controller
 
     public function checkUserNotification(Request $request)
     {
-        $users_ids = ['219', '198', '329'];
-        $getnotification_data = [];
+        $user  = Auth::guard('api')->user();
+        $rawData = $request->getContent();
+        $users_data = json_decode($rawData, true);
 
-        foreach ($users_ids as $users_id) {
-            $notifications  = UserNotificationType::where(['user_id' => $users_id, 'type' => 'private_message'])->get();
-            foreach ($notifications as $notification) {
-                $getnotification_data[] = [
-                    'user_id' => $notification->user_id,
-                    'isnotification' => [
-                        'push' => $notification->push
-                    ]
-                ];
+        $users_ids = $users_data['users_id'];
+        // $users_ids = ['219', '198', '329'];
+        try {
+            $getnotification_data = [];
+            foreach ($users_ids as $users_id) {
+                $notifications  = UserNotificationType::where(['user_id' => $users_id, 'type' => 'private_message'])->get();
+                foreach ($notifications as $notification) {
+                    $getnotification_data[] = [
+                        'user_id' => $notification->user_id,
+                        'isnotification' => [
+                            'push' => $notification->push
+                        ]
+                    ];
+                }
             }
+            return response()->json(data: ['status' => 1, 'message' => "Template List", 'data' => $getnotification_data]);
+        } catch (Exception  $e) {
+            return response()->json(['status' => 0, 'message' => 'something went wrong']);
         }
-        dd($getnotification_data);
     }
 }
