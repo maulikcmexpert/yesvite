@@ -970,6 +970,7 @@
             var canvasElement = document.getElementById('imageEditor1');
             var canvasId = canvasElement.getAttribute('data-canvas-id');
             var imageName = 'image_' + Date.now() + '.png';
+
             console.log(canvasId);
             console.log(textData);
 
