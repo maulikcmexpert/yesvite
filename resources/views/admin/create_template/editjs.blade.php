@@ -204,7 +204,7 @@
                 lineHeight: defaultSettings.lineHeight,
                 fontFamily: 'Arial',
                 textAlign: 'left',
-                fill: '#000', // Optional: Reset text color
+                fill: '#000000', // Optional: Reset text color
             });
 
             updateTextboxWidth(object);
