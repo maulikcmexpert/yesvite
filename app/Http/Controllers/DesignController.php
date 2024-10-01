@@ -190,39 +190,39 @@ class DesignController extends Controller
 
         return response()->json(['message' => 'Data saved successfully'], 200);
     }
-    public function loadTextData($id)
-    {
+    // public function loadTextData($id)
+    // {
 
-        $data = DB::table('text_data')
-            ->orderBy('id', 'desc')
-            ->when($id != '', function ($query) use ($id) {
-                $query->where('id', $id);
-            })
-            ->first();
-
-
-        if ($data) {
-            $id = $data->id;
-            $imageName = $data->image;
-            $static_information = $data->static_information;
-
-            if (isset($imageName)) {
-
-                $imagePath = asset('storage/canvas/' . $imageName);
+    //     $data = DB::table('text_data')
+    //         ->orderBy('id', 'desc')
+    //         ->when($id != '', function ($query) use ($id) {
+    //             $query->where('id', $id);
+    //         })
+    //         ->first();
 
 
-                return response()->json([
-                    'imagePath' => $imagePath,
-                    'id' => $id,
-                    'static_information' => $static_information,
+    //     if ($data) {
+    //         $id = $data->id;
+    //         $imageName = $data->image;
+    //         $static_information = $data->static_information;
 
-                ]);
-            }
-        }
+    //         if (isset($imageName)) {
 
-        // Return an empty response if no data or image path is found
-        return response()->json(null);
-    }
+    //             $imagePath = asset('storage/canvas/' . $imageName);
+
+
+    //             return response()->json([
+    //                 'imagePath' => $imagePath,
+    //                 'id' => $id,
+    //                 'static_information' => $static_information,
+
+    //             ]);
+    //         }
+    //     }
+
+    //     // Return an empty response if no data or image path is found
+    //     return response()->json(null);
+    // }
 
     // public function loadTextData($id)
     // {
@@ -273,6 +273,43 @@ class DesignController extends Controller
     //     // Return an empty response if no data or image path is found
     //     return response()->json(null);
     // }
+
+    public function loadTextData($id)
+    {
+        $data = DB::table('text_data')
+            ->orderBy('id', 'desc')
+            ->when($id != '', function ($query) use ($id) {
+                $query->where('id', $id);
+            })
+            ->first();
+
+
+        if ($data) {
+            $id = $data->id;
+            $imageName = $data->image;
+            $filed_image  = $data->filled_image;
+            $static_information = $data->static_information;
+
+            if (isset($imageName)) {
+                $imagePath = asset('storage/canvas/' . $imageName);
+            } else {
+                $imagePath = null;
+            }
+
+            if (isset($filed_image)) {
+                $filedImagePath = asset('storage/canvas/' . $filed_image);
+            } else {
+                $filedImagePath = null;
+            }
+            return response()->json([
+                'id' => $id,
+                'imagePath' => $imagePath,
+                'filedImagePath' => $filedImagePath,
+                'static_information' => $static_information
+            ]);
+        }
+        return response()->json(null);
+    }
 
     public function loadAllData()
     {

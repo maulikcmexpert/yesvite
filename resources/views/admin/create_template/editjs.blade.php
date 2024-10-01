@@ -6,83 +6,260 @@
         var canvas = new fabric.Canvas('imageEditor1', {
             width: 345, // Canvas width
             height: 490, // Canvas height
-
-
-
         });
+
+
+        // function loadTextDataFromDatabase() {
+        //     var id = $('#template_id').val();
+        //     // let urlParams = new URLSearchParams(window.location.search);
+
+
+        //     // let id = urlParams.get('id');
+
+
+        //     fetch(`/loadTextData/${id}`) // API endpoint to load data from your database
+        //         .then(response => response.json())
+        //         .then(data => {
+        //             if (data) {
+        //                 // Load background image
+        //                 var canvasElement = document.getElementById('imageEditor1');
+        //                 canvasElement.setAttribute('data-canvas-id', data.id);
+        //                 fabric.Image.fromURL(data.imagePath, function(img) {
+        //                     img.set({
+        //                         left: 0,
+        //                         top: 0,
+        //                         selectable: false, // Non-draggable background image
+        //                         hasControls: false // Disable resizing controls
+        //                     });
+        //                     canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
+
+        //                 });
+
+        //                 // Load static information (text elements)
+        //                 if (data.static_information) {
+        //                     hideStaticTextElements(); // Hide static text elements if static information is present
+        //                     const staticInfo = JSON.parse(data.static_information);
+        //                     console.log(staticInfo);
+
+        //                     // Render text elements on canvas
+        //                     staticInfo.textElements.forEach(element => {
+        //                         // alert();
+        //                         let textElement = new fabric.Textbox(element.text, { // Use Textbox for editable text
+        //                             left: element.left,
+        //                             top: element.top,
+        //                             width: element.width || 200, // Default width if not provided
+        //                             fontSize: element.fontSize,
+        //                             fill: element.fill,
+        //                             fontFamily: element.fontFamily,
+        //                             fontWeight: element.fontWeight,
+        //                             fontStyle: element.fontStyle,
+        //                             underline: element.underline,
+        //                             linethrough: element.linethrough,
+        //                             backgroundColor: element.backgroundColor,
+        //                             textAlign: element.textAlign,
+        //                             editable: true,
+        //                             hasControls: true,
+        //                             // borderColor: 'blue',
+        //                             borderColor: '#2DA9FC',
+        //                             // cornerColor: 'red',
+        //                             cornerColor: '#fff',
+        //                             cornerSize: 6,
+        //                             transparentCorners: false,
+        //                             isStatic: true
+        //                         });
+        //                         const textWidth = textElement.calcTextWidth();
+        //                         textElement.set({
+        //                             width: textWidth
+        //                         });
+
+        //                         textElement.on('scaling', function() {
+        //                             // Calculate the updated font size based on scaling factors
+        //                             var updatedFontSize = textElement.fontSize * (textElement.scaleX + textElement.scaleY) / 2;
+        //                             textElement.set('fontSize', updatedFontSize); // Update the font size
+        //                             canvas.renderAll(); // Re-render the canvas to reflect changes
+        //                         });
+
+        //                         addIconsToTextbox(textElement);
+        //                         canvas.add(textElement);
+
+        //                     });
+        //                 } else {
+        //                     showStaticTextElements();
+        //                     addDraggableText(150, 50, 'event_name', 'xyz'); // Position this outside the image area
+        //                     addDraggableText(150, 100, 'host_name', 'abc');
+        //                     addDraggableText(150, 150, 'start_time', '5:00PM');
+        //                     addDraggableText(150, 200, 'rsvp_end_time', '6:00PM');
+        //                     addDraggableText(150, 250, 'start_date', '2024-07-27');
+        //                     addDraggableText(150, 300, 'end_date', '2024-07-27');
+        //                     addDraggableText(150, 350, 'Location', 'fdf');
+
+        //                 }
+
+        //                 // Set custom attribute with the fetched ID
+
+        //                 canvas.renderAll(); // Ensure all elements are rendered
+        //             }
+        //         })
+        //         .catch(error => console.error('Error loading text data:', error));
+        // }
+
+
+        var shape = "";
 
         function loadTextDataFromDatabase() {
             var id = $('#template_id').val();
-            // let urlParams = new URLSearchParams(window.location.search);
-
-
-            // let id = urlParams.get('id');
-
 
             fetch(`/loadTextData/${id}`) // API endpoint to load data from your database
                 .then(response => response.json())
                 .then(data => {
                     if (data) {
-                        // Load background image
+                        console.log(data);
                         var canvasElement = document.getElementById('imageEditor1');
                         canvasElement.setAttribute('data-canvas-id', data.id);
-                        fabric.Image.fromURL(data.imagePath, function(img) {
-                            img.set({
-                                left: 0,
-                                top: 0,
-                                selectable: false, // Non-draggable background image
-                                hasControls: false // Disable resizing controls
+                        // Load background image (imagePath)
+                        if (data.imagePath) {
+                            fabric.Image.fromURL(data.imagePath, function(img) {
+                                img.set({
+                                    left: 0,
+                                    top: 0,
+                                    selectable: false, // Non-draggable background image
+                                    hasControls: false // Disable resizing controls
+                                });
+                                canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
                             });
-                            canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
+                        }
+                        if (data.static_information) {
+                            const staticInfo = JSON.parse(data.static_information);
+                            staticInfo?.textElements?.forEach(element => {
+                                if (element.shape != undefined) {
+                                    shape = element.shape
+                                }
+                            })
+                        }
+                        // Load filed image (filedImagePath) as another image layer
+                        if (data.filedImagePath) {
+                            fabric.Image.fromURL(data.filedImagePath, function(filedImg) {
+                                // Set your preferred image properties
+                                filedImg.set({
+                                    left: 50,
+                                    top: 50,
+                                    scaleX: 0.5, // Scale down the image
+                                    scaleY: 0.5,
+                                    width: 200, // Set the calculated width
+                                    height: 150,
+                                    selectable: true, // Make filed image draggable
+                                    hasControls: true // Allow resizing controls
+                                });
 
-                        });
+                                // Define clipping paths based on the shape
+                                let clipPath;
 
-                        // Load static information (text elements)
+                                if (shape === 'circle') {
+                                    clipPath = new fabric.Circle({
+                                        radius: 75, // Define radius of the circle
+                                        originX: 'center', // Set origin to center of the circle
+                                        originY: 'center' // Set origin to center of the circle
+                                    });
+                                } else if (shape === 'rectangle') {
+                                    clipPath = new fabric.Rect({
+                                        width: 150, // Set width of the rectangle
+                                        height: 100, // Set height of the rectangle
+                                        originX: 'center', // Set origin to center of the rectangle
+                                        originY: 'center' // Set origin to center of the rectangle
+                                    });
+                                } else if (shape === 'star') {
+                                    // Star shape path generation
+                                    const starPoints = [];
+                                    const spikes = 5;
+                                    const outerRadius = 75; // Outer radius of the star
+                                    const innerRadius = outerRadius / 2;
+
+                                    for (let i = 0; i < spikes * 2; i++) {
+                                        const angle = (i * Math.PI) / spikes;
+                                        const radius = i % 2 === 0 ? outerRadius : innerRadius;
+                                        starPoints.push(
+                                            Math.cos(angle) * radius,
+                                            Math.sin(angle) * radius
+                                        );
+                                    }
+                                    clipPath = new fabric.Polygon(starPoints, {
+                                        left: 0,
+                                        top: 0,
+                                        originX: 'center',
+                                        originY: 'center'
+                                    });
+                                } else if (shape === 'heart') {
+                                    // Heart shape path
+                                    const heartPath = [
+                                        'M', 0, 0,
+                                        'C', -50, -60, -50, 10, 0, 30,
+                                        'C', 50, 10, 50, -60, 0, 0
+                                    ].join(' ');
+
+                                    clipPath = new fabric.Path(heartPath, {
+                                        left: 0,
+                                        top: 0,
+                                        originX: 'center',
+                                        originY: 'center'
+                                    });
+                                }
+
+                                // Set the clipPath to the image
+                                filedImg.set({
+                                    clipPath: clipPath
+                                }); // Apply the appropriate clipping path
+                                canvas.add(filedImg); // Add the clipped image to the canvas
+                                canvas.renderAll(); // Ensure the canvas is updated
+                            });
+                        }
+
+                        // Load static information (text and shapes)
                         if (data.static_information) {
                             hideStaticTextElements(); // Hide static text elements if static information is present
                             const staticInfo = JSON.parse(data.static_information);
                             console.log(staticInfo);
 
-                            // Render text elements on canvas
+                            // Render text elements or shapes on canvas
                             staticInfo.textElements.forEach(element => {
-                                // alert();
-                                let textElement = new fabric.Textbox(element.text, { // Use Textbox for editable text
-                                    left: element.left,
-                                    top: element.top,
-                                    width: element.width || 200, // Default width if not provided
-                                    fontSize: element.fontSize,
-                                    fill: element.fill,
-                                    fontFamily: element.fontFamily,
-                                    fontWeight: element.fontWeight,
-                                    fontStyle: element.fontStyle,
-                                    underline: element.underline,
-                                    linethrough: element.linethrough,
-                                    backgroundColor: element.backgroundColor,
-                                    textAlign: element.textAlign,
-                                    editable: true,
-                                    hasControls: true,
-                                    // borderColor: 'blue',
-                                    borderColor: '#2DA9FC',
-                                    // cornerColor: 'red',
-                                    cornerColor: '#fff',
-                                    cornerSize: 6,
-                                    transparentCorners: false,
-                                    isStatic: true
-                                });
-                                const textWidth = textElement.calcTextWidth();
-                                textElement.set({
-                                    width: textWidth
-                                });
+                                if (element.text) {
+                                    let textElement = new fabric.Textbox(element.text, {
+                                        left: element.left,
+                                        top: element.top,
+                                        width: element.width || 200,
+                                        fontSize: element.fontSize,
+                                        fill: element.fill,
+                                        fontFamily: element.fontFamily,
+                                        fontWeight: element.fontWeight,
+                                        fontStyle: element.fontStyle,
+                                        underline: element.underline,
+                                        linethrough: element.linethrough,
+                                        backgroundColor: element.backgroundColor,
+                                        textAlign: element.textAlign,
+                                        editable: true,
+                                        hasControls: true,
+                                        borderColor: 'blue',
+                                        cornerColor: 'red',
+                                        cornerSize: 6,
+                                        transparentCorners: false,
+                                        isStatic: true
+                                    });
 
-                                textElement.on('scaling', function() {
-                                    // Calculate the updated font size based on scaling factors
-                                    var updatedFontSize = textElement.fontSize * (textElement.scaleX + textElement.scaleY) / 2;
-                                    textElement.set('fontSize', updatedFontSize); // Update the font size
-                                    canvas.renderAll(); // Re-render the canvas to reflect changes
-                                });
+                                    const textWidth = textElement.calcTextWidth();
+                                    textElement.set({
+                                        width: textWidth
+                                    });
 
-                                addIconsToTextbox(textElement);
-                                canvas.add(textElement);
+                                    textElement.on('scaling', function() {
+                                        var updatedFontSize = textElement.fontSize * (textElement.scaleX + textElement.scaleY) / 2;
+                                        textElement.set('fontSize', updatedFontSize);
+                                        canvas.renderAll();
+                                    });
+
+                                    addIconsToTextbox(textElement);
+                                    canvas.add(textElement);
+                                }
+
+
 
                             });
                         } else {
@@ -98,12 +275,15 @@
                         }
 
                         // Set custom attribute with the fetched ID
+                        // var canvasElement = document.getElementById('imageEditor1');
+                        // canvasElement.setAttribute('data-canvas-id', data.id);
 
                         canvas.renderAll(); // Ensure all elements are rendered
                     }
                 })
                 .catch(error => console.error('Error loading text data:', error));
         }
+
 
         // Call function to load data when the page loads
         loadTextDataFromDatabase();
