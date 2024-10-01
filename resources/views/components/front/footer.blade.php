@@ -12,7 +12,11 @@
 <script src="{{ asset('assets/admin/js/jquery-validate.js') }}"></script>
 
 <script src="{{ asset('assets/admin/js/jquery-validate-additional.js') }}"></script>
+
 <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fontfaceobserver/2.1.0/fontfaceobserver.standalone.js"></script>
+
 <script src="{{ asset('assets/event/js/fontLoder.js') }}"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.js" integrity="sha512-Gs+PsXsGkmr+15rqObPJbenQ2wB3qYvTHuJO6YJzPe/dTLvhy0fmae2BcnaozxDo5iaF8emzmCZWbQ1XXiX2Ig==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

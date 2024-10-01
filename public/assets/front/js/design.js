@@ -1186,11 +1186,11 @@ console.log(123)
     document.getElementById('antaresiaButton').addEventListener('click', function() {
         console.log("fontname")
 
-        loadAndUse("Botanica Script");
+        loadAndUse("BotanicaScript-Regular");
     });
     document.getElementById('JosefinSansButton').addEventListener('click', function() {
         console.log("fontname");
-        loadAndUse("JosefinSans");
+        loadAndUse("JosefinSans-Regular");
 
 
     });
@@ -1239,7 +1239,7 @@ console.log(123)
     document.getElementById('ArcherButton').addEventListener('click', function() {
         console.log("fontname")
 
-        loadAndUse("Archer");
+        loadAndUse("Archer-Bold");
 
 
     });
@@ -1330,6 +1330,7 @@ console.log(123)
     //     textElement.style.fontFamily = 'Allura'; // Change to Allura font
     // });
     function loadAndUse(font) {
+        console.log(font);
         var myfont = new FontFaceObserver(font);
         myfont.load().then(function() {
             
