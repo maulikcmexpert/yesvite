@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'JosefinSans';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/event/fonts/JosefinSans-Regular.woff2') format('woff2');
+    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/JosefinSans-Regular.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -8,7 +8,7 @@
 
 @font-face {
     font-family: 'AbrilFatface-Regular';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/event/fonts/AbrilFatface-Regular.woff2') format('woff2');
+    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/AbrilFatface-Regular.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -16,7 +16,7 @@
 
 @font-face {
     font-family: 'Roboto-Regular';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/event/fonts/Roboto-Regular.woff2') format('woff2');
+    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/Roboto-Regular.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -24,7 +24,7 @@
 
 @font-face {
     font-family: 'AgencyFB';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/event/fonts/AgencyFB-Bold.woff2') format('woff2');
+    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/AgencyFB-Bold.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -32,7 +32,7 @@
 
 @font-face {
     font-family: 'AdleryPro';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/event/fonts/AdleryPro-Regular.woff2') format('woff2');
+    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/AdleryPro-Regular.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -41,7 +41,7 @@
 
 @font-face {
     font-family: 'Allura';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/event/fonts/Allura-Regular.woff2') format('woff2');
+    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/Allura-Regular.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -49,7 +49,7 @@
 
 @font-face {
     font-family: 'Antaresia';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/event/fonts/Antaresia.woff2') format('woff2');
+    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/Antaresia.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -57,7 +57,7 @@
 
 @font-face {
     font-family: 'Archer';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/event/fonts/Archer-Bold.woff2') format('woff2');
+    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/Archer-Bold.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -66,7 +66,7 @@
 
 @font-face {
     font-family: 'Archer-Book';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/event/fonts/Archer-Book.woff2') format('woff2');
+    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/Archer-Book.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -74,7 +74,7 @@
 
 @font-face {
     font-family: 'Archer-BookItalic';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/event/fonts/Archer-BookItalic.woff2') format('woff2');
+    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/Archer-BookItalic.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -82,7 +82,7 @@
 
 @font-face {
     font-family: 'Archer-ExtraLight';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/event/fonts/Archer-ExtraLight.woff2') format('woff2');
+    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/Archer-ExtraLight.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -90,7 +90,7 @@
 
 @font-face {
     font-family: 'Archer-Hairline';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/event/fonts/Archer-Hairline.woff2') format('woff2');
+    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/Archer-Hairline.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -98,7 +98,7 @@
 
 @font-face {
     font-family: 'Bebas-Regular';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/event/fonts/Bebas-Regular.woff2') format('woff2');
+    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/Bebas-Regular.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -106,7 +106,7 @@
 
 @font-face {
     font-family: 'BookAntiqua';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/event/fonts/BookAntiqua.woff2') format('woff2');
+    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/BookAntiqua.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -114,7 +114,7 @@
 
 @font-face {
     font-family: 'Bungee-Regular';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/event/fonts/Bungee-Regular.woff2') format('woff2');
+    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/Bungee-Regular.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -122,7 +122,7 @@
 
 @font-face {
     font-family: 'CandyCaneUnregistered';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/event/fonts/CandyCaneUnregistered.woff2') format('woff2');
+    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/CandyCaneUnregistered.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -130,7 +130,7 @@
 
 @font-face {
     font-family: 'CarbonBl-Regular';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/event/fonts/CarbonBl-Regular.woff2') format('woff2');
+    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/CarbonBl-Regular.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -138,7 +138,7 @@
 
 @font-face {
     font-family: 'CarmenSans-ExtraBold';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/event/fonts/CarmenSans-ExtraBold.woff2') format('woff2');
+    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/CarmenSans-ExtraBold.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -146,7 +146,7 @@
 
 @font-face {
     font-family: 'CarmenSans-Regular';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/event/fonts/CarmenSans-Regular.woff2') format('woff2');
+    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/CarmenSans-Regular.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -154,7 +154,7 @@
 
 @font-face {
     font-family: 'ChristmasCookies';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/event/fonts/ChristmasCookies.woff2') format('woff2');
+    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/ChristmasCookies.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -162,7 +162,7 @@
 
 @font-face {
     font-family: 'AlexBrush';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/event/fonts/AlexBrush-Regular.woff2') format('woff2');
+    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/AlexBrush-Regular.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -171,7 +171,7 @@
 
 @font-face {
     font-family: 'BotanicaScript-Regular';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/event/fonts/BotanicaScript-Regular.woff2') format('woff2');
+    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/BotanicaScript-Regular.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
