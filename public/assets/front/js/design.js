@@ -219,6 +219,9 @@ $(document).on("click", ".edit_design_tem", function (e) {
         },
         error: function (xhr, status, error) {},
     });
+
+});
+
     function bindData(){
 
     
@@ -1571,7 +1574,7 @@ $(document).ready(function () {
 });   
    
     }
-    });
+    
 
 function getTextDataFromCanvas() {
     var objects = canvas.getObjects();
