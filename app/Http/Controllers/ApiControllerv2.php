@@ -13148,7 +13148,7 @@ class ApiControllerv2 extends Controller
                         ];
                     }
                 }
-
+                dd($getnotification_data)
                 return response()->json([
                     'status' => 1,
                     'message' => "Notification List",
