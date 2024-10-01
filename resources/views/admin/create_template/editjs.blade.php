@@ -24,8 +24,8 @@
                 .then(data => {
                     if (data) {
                         // // Load background image
-                        // var canvasElement = document.getElementById('imageEditor1');
-                        // canvasElement.setAttribute('data-canvas-id', data.id);
+                        var canvasElement = document.getElementById('imageEditor1');
+                        canvasElement.setAttribute('data-canvas-id', data.id);
                         // fabric.Image.fromURL(data.imagePath, function(img) {
                         //     img.set({
                         //         left: 0,
