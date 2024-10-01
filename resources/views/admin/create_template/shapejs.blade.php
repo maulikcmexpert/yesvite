@@ -638,6 +638,9 @@
     //         document.addEventListener('mouseup', handleMouseUp);
     //     });
 
+    // document.addEventListener("DOMContentLoaded", function() {
+
+    // });
     document.addEventListener("DOMContentLoaded", function() {
         const fileInput = document.getElementById('fileInput');
         const userImageElement = document.getElementById('user_image');
@@ -780,7 +783,7 @@
                 const formData = new FormData();
                 formData.append('image', file);
                 var id = $('#template_id').val();
-                // console.log(formData);
+
                 // Include shape information in the form data
                 formData.append('shape', shape); // Send the current shape value
 
@@ -855,7 +858,7 @@
                                 .getAttribute('content')
                         },
                         body: JSON.stringify({
-                            shape: shape
+                            shape: shape // Send the current shape value
                         })
                     })
                     .then(response => {

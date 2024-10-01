@@ -3395,7 +3395,7 @@ class ApiControllerv2 extends Controller
                 $gift_registry_id =  implode(',', $eventData['gift_registry_list']);
             }
         }
-        $staticInformation = (!empty($eventData['static_information'])) ? $eventData['static_information'] : "";
+        $staticInformation = (isset($eventData['static_information']) && $eventData['static_information'] != '') ? $eventData['static_information'] : null;
 
         $eventCreation =  Event::create([
             'event_type_id' => (!empty($eventData['event_type_id'])) ? $eventData['event_type_id'] : "",
