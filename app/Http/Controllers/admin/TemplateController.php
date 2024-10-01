@@ -200,7 +200,6 @@ class TemplateController extends Controller
     {
         try {
             // Begin the transaction
-            dd($request);
             DB::beginTransaction();
 
             // Find the template by its ID
