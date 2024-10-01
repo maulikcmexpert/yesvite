@@ -483,40 +483,28 @@
                 hasControls: true
             })
 
-            // Approximate width based on text length
             text.set('width', text.get('text').length * 10);
 
-            // Event listener for scaling
             text.on('scaling', function() {
                 var updatedFontSize = text.fontSize * (text.scaleX + text.scaleY) / 2;
                 text.set('fontSize', updatedFontSize);
                 canvas.renderAll();
-                findTextboxCenter(text); // Find center when scaling
+                findTextboxCenter(text);
             });
 
-            // Event listener for moving
             text.on('moving', function() {
-                findTextboxCenter(text); // Find center when moving
+                findTextboxCenter(text);
             });
-
-            // Add the textbox to the canvas
             canvas.add(text);
-
             addIconsToTextbox(text);
             canvas.renderAll();
-
-            // Initial center calculation
             findTextboxCenter(text);
         }
 
         function findTextboxCenter(textbox) {
-            // Calculate the center coordinates of the textbox
             var centerX = textbox.left + (textbox.width / 2);
             var centerY = textbox.top + (textbox.height / 2);
-
             console.log(`Center of textbox '${textbox.text}' is at (${centerX}, ${centerY})`);
-
-            // Optional: You can return or store this center value for further use
             return {
                 x: centerX,
                 y: centerY
@@ -639,17 +627,15 @@
         // }
 
         function updateIconPositions(textbox) {
-            // Remove old trash and copy icons if they exist
             if (textbox.trashIcon) {
                 canvas.remove(textbox.trashIcon);
-                textbox.trashIcon = null; // Clear reference
+                textbox.trashIcon = null;
             }
             if (textbox.copyIcon) {
                 canvas.remove(textbox.copyIcon);
-                textbox.copyIcon = null; // Clear reference
+                textbox.copyIcon = null;
             }
 
-            // Define SVG strings for trash and copy icons
             const trashIconSVG = `<svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g filter="url(#filter0_d_5633_67674)">
         <rect x="2.70312" y="2.37207" width="23.9674" height="23.9674" rx="11.9837" fill="white" shape-rendering="crispEdges"/>
@@ -668,7 +654,6 @@
         </g>
         </svg>`;
 
-            // Load trash icon from SVG string and position
             fabric.loadSVGFromString(trashIconSVG, function(objects, options) {
                 const trashIcon = fabric.util.groupSVGElements(objects, options);
                 trashIcon.set({
@@ -680,18 +665,13 @@
                 });
                 textbox.trashIcon = trashIcon;
 
-                // Attach delete functionality to trash icon
                 trashIcon.on('mousedown', function() {
                     console.log('Trash icon clicked! Deleting textbox.');
                     deleteTextbox(textbox);
                 });
-
-                // Add trash icon to canvas
                 canvas.add(trashIcon);
                 canvas.bringToFront(trashIcon);
             });
-
-            // Load copy icon from SVG string and position
             fabric.loadSVGFromString(copyIconSVG, function(objects, options) {
                 const copyIcon = fabric.util.groupSVGElements(objects, options);
                 copyIcon.set({
@@ -702,24 +682,19 @@
                     hasControls: false,
                 });
                 textbox.copyIcon = copyIcon;
-
-                // Attach clone functionality to copy icon
                 copyIcon.on('mousedown', function() {
                     console.log('Copy icon clicked!');
                     cloneTextbox(textbox);
                 });
 
-                // Add copy icon to canvas
                 canvas.add(copyIcon);
                 canvas.bringToFront(copyIcon);
             });
 
-            // Ensure textbox and icons stay visible
             canvas.bringToFront(textbox);
             canvas.renderAll();
         }
 
-        // Function to add icons to a textbox
         function addIconsToTextbox(textbox) {
             // Trash icon SVG
             // const trashIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M135.2 17.7L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-7.2-14.3C307.4 6.8 296.3 0 284.2 0L163.8 0c-12.1 0-23.2 6.8-28.6 17.7zM416 128L32 128 53.2 467c1.6 25.3 22.6 45 47.9 45l245.8 0c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>`;
