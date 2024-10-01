@@ -2270,9 +2270,9 @@ class ApiControllerv2 extends Controller
 
             $getUserPrivacyPolicy = UserProfilePrivacy::select('profile_privacy', 'status')->where('user_id', $user->id)->get();
 
-            $checkNotificationSetting =  UserNotificationType::where('user_id', $user->id)->get();
+            $checkNotificationSetting =  UserNotificationType::where('user_id', $user->id)->get()->first();
 
-            dd($checkNotificationSetting);
+            // dd($checkNotificationSetting);
 
             if (!empty($user)) {
 
@@ -2313,8 +2313,8 @@ class ApiControllerv2 extends Controller
                     'state' => empty($user->state) ? "" : $user->state,
                     'zip_code' => empty($user->zip_code) ? "" : $user->zip_code,
                     'password_updated_date' => empty($user->password_updated_date) ? "" : $user->password_updated_date,
-                    'total_notification' => Notification::where(['user_id' => $user->id, 'read' => '0'])->count()
-
+                    'total_notification' => Notification::where(['user_id' => $user->id, 'read' => '0'])->count(),
+                    'private_message' => empty($checkNotificationSetting->push) ? "" : $checkNotificationSetting->push
 
                 ];
 
