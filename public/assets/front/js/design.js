@@ -11,11 +11,11 @@ $(document).on("click", ".design-card", function () {
     var id = $(this).data("id");
     
     $('.edit_design_tem').attr('data-image', imageUrl);
-    const dbJson = json;
-    const temp_id = id;
+    let dbJson = json;
+    let temp_id = id;
     // Set the image URL in the modal's image tag
     $("#modalImage").attr("src", imageUrl);
-    const image = imageUrl;
+    let image = imageUrl;
 
     // Remove the old canvas if it exists
     $('#imageEditor2').remove(); 
