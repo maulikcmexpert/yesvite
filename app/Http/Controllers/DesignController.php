@@ -245,7 +245,7 @@ class DesignController extends Controller
             $filled_image  = $data->filled_image;
             $static_information = $data->static_information;
 
-            if (isset($imageName)) {
+            if (isset($imageName) && $filled_image != "") {
                 $imagePath = asset('storage/canvas/' . $imageName);
             } else {
                 $imagePath = null;

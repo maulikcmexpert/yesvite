@@ -6,25 +6,20 @@
         var canvas = new fabric.Canvas('imageEditor1', {
             width: 345, // Canvas width
             height: 490, // Canvas height
-
-
-
         });
 
         function loadTextDataFromDatabase() {
             var id = $('#template_id').val();
             // let urlParams = new URLSearchParams(window.location.search);
-
-
             // let id = urlParams.get('id');
-
-
             fetch(`/loadTextData/${id}`) // API endpoint to load data from your database
                 .then(response => response.json())
                 .then(data => {
                     if (data) {
                         // // Load background image
-
+                        console.log(data);
+                        var canvasElement = document.getElementById('imageEditor1');
+                        canvasElement.setAttribute('data-canvas-id', data.id);
                         // fabric.Image.fromURL(data.imagePath, function(img) {
                         //     img.set({
                         //         left: 0,
@@ -37,7 +32,7 @@
                         // });
 
                         // Load static information (text elements)
-                        if (data.image) {
+                        if (data.image != "") {
                             fabric.Image.fromURL(data.image, function(img) {
                                 img.set({
                                     left: 0,
@@ -48,7 +43,7 @@
                                 canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
                             });
                         }
-                        if (data.filled_image) {
+                        if (data.filled_image != "") {
                             fabric.Image.fromURL(data.filled_image, function(filedImg) {
                                 filedImg.set({
                                     left: 50, // Set your preferred position
@@ -64,7 +59,7 @@
                                 canvas.renderAll(); // Ensure the canvas is updated
                             });
                         }
-                        if (data.static_information) {
+                        if (data.static_information != "") {
                             hideStaticTextElements(); // Hide static text elements if static information is present
                             const staticInfo = JSON.parse(data.static_information);
                             console.log(staticInfo);
@@ -116,8 +111,7 @@
                         }
 
                         // Set custom attribute with the fetched ID
-                        var canvasElement = document.getElementById('imageEditor1');
-                        canvasElement.setAttribute('data-canvas-id', data.id);
+
                         canvas.renderAll(); // Ensure all elements are rendered
                     }
                 })
