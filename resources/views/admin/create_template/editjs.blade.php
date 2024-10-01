@@ -523,119 +523,200 @@
             };
         }
 
-        function updateIconPositions(textbox) {
+        // function updateIconPositions(textbox) {
 
+        //     if (textbox.trashIcon) {
+        //         canvas.remove(textbox.trashIcon);
+        //         textbox.trashIcon = null; // Clear reference
+        //         // const trashIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 50 50"><path d="M20,30 L30,30 L30,40 L20,40 Z M25,10 L20,10 L20,7 L30,7 L30,10 Z M17,10 L33,10 L33,40 L17,40 Z" fill="#FF0000"/></svg>`;
+        //         // const trashIconSVG = `<svg width="23px" height="23px" style="background-color: #fff; color:#000; padding: 10px; border-radius: 50%;" strock=""  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M135.2 17.7L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-7.2-14.3C307.4 6.8 296.3 0 284.2 0L163.8 0c-12.1 0-23.2 6.8-28.6 17.7zM416 128L32 128 53.2 467c1.6 25.3 22.6 45 47.9 45l245.8 0c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>`;
+
+
+        //         const trashIconSVG = `<svg width="29" x="0px" y="0px" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+        //         <g filter="url(#filter0_d_5633_67674)">
+        //         <rect x="2.70312" y="2.37207" width="23.9674" height="23.9674" rx="11.9837" fill="white" shape-rendering="crispEdges"/>
+        //         <path d="M19.1807 11.3502C17.5179 11.1855 15.8452 11.1006 14.1775 11.1006C13.1888 11.1006 12.2001 11.1505 11.2115 11.2504L10.1929 11.3502" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
+        //         <path d="M12.939 10.8463L13.0488 10.1922C13.1287 9.7178 13.1886 9.36328 14.0325 9.36328H15.3407C16.1846 9.36328 16.2495 9.73777 16.3244 10.1971L16.4342 10.8463" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
+        //         <path d="M18.1073 12.9277L17.7827 17.9559C17.7278 18.7398 17.6829 19.349 16.2898 19.349H13.0841C11.691 19.349 11.6461 18.7398 11.5912 17.9559L11.2666 12.9277" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
+        //         <path d="M13.853 16.6035H15.5158" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
+        //         <path d="M13.4385 14.6055H15.9351" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
+        //         </g>
+        //         <defs>
+        //         <filter id="filter0_d_5633_67674" x="0.705839" y="0.374784" width="27.9619" height="27.9623" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+        //         <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+        //         <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+        //         <feOffset/>
+        //         <feGaussianBlur stdDeviation="0.998643"/>
+        //         <feComposite in2="hardAlpha" operator="out"/>
+        //         <feColorMatrix type="matrix" values="0 0 0 0 0.309804 0 0 0 0 0.368627 0 0 0 0 0.443137 0 0 0 0.12 0"/>
+        //         <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_5633_67674"/>
+        //         <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_5633_67674" result="shape"/>
+        //         </filter>
+        //         </defs>
+        //         </svg>
+        //         `;
+        //         fabric.loadSVGFromString(trashIconSVG, function(objects, options) {
+        //             const trashIcon = fabric.util.groupSVGElements(objects, options);
+        //             trashIcon.set({
+        //                 left: textbox.left + textbox.width * textbox.scaleX - 20,
+        //                 top: textbox.top - 20,
+        //                 selectable: false,
+        //                 evented: true,
+        //                 hasControls: false,
+        //                 visible: false, // Initially hidden
+        //                 className: 'trash-icon',
+        //             });
+        //             textbox.trashIcon = trashIcon;
+
+
+        //             // Ensure the copyIcon is on top
+        //             canvas.bringToFront(trashIcon);
+        //             textbox.trashIcon.on('mousedown', function() {
+        //                 console.log('deleted icon');
+        //                 deleteTextbox(textbox);
+        //             });
+        //         })
+        //         // console.log('Updated Trash Icon Position:', textbox.trashIcon.left, textbox.trashIcon.top);
+        //     }
+
+        //     if (textbox.copyIcon) {
+        //         canvas.remove(textbox.copyIcon);
+        //         textbox.copyIcon = null; // Clear reference
+        //     }
+
+
+        //     // const copyIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"  x="0px" y="0px" width="20" height="20"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M384 336l-192 0c-8.8 0-16-7.2-16-16l0-256c0-8.8 7.2-16 16-16l140.1 0L400 115.9 400 320c0 8.8-7.2 16-16 16zM192 384l192 0c35.3 0 64-28.7 64-64l0-204.1c0-12.7-5.1-24.9-14.1-33.9L366.1 14.1c-9-9-21.2-14.1-33.9-14.1L192 0c-35.3 0-64 28.7-64 64l0 256c0 35.3 28.7 64 64 64zM64 128c-35.3 0-64 28.7-64 64L0 448c0 35.3 28.7 64 64 64l192 0c35.3 0 64-28.7 64-64l0-32-48 0 0 32c0 8.8-7.2 16-16 16L64 464c-8.8 0-16-7.2-16-16l0-256c0-8.8 7.2-16 16-16l32 0 0-48-32 0z"/></svg>`;
+        //     //             const copyIconSVG = `<svg x="0px" y="0px" width="29" height="19" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+        //     // <path fill-rule="evenodd" clip-rule="evenodd" d="M9.6283 8.35281V2.36095C9.6283 1.80941 9.1812 1.3623 8.62966 1.3623H2.6378C2.08627 1.3623 1.63916 1.80941 1.63916 2.36095V8.35281C1.63916 8.90434 2.08627 9.35145 2.6378 9.35145H8.62966C9.1812 9.35145 9.6283 8.90434 9.6283 8.35281ZM2.6378 2.36095H8.62966V8.35281H2.6378V2.36095ZM10.6269 9.35145V3.35959C11.1785 3.35959 11.6256 3.8067 11.6256 4.35823V9.35145C11.6256 10.4545 10.7314 11.3487 9.6283 11.3487H4.63509C4.08355 11.3487 3.63645 10.9016 3.63645 10.3501H9.6283C10.1798 10.3501 10.6269 9.90298 10.6269 9.35145Z" fill="#0F172A"/>
+        //     // </svg>`;
+        //     const copyIconSVG = `<svg width="29" x="0px" y="0px" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+        //     <g filter="url(#filter0_d_5633_67676)">
+        //     <rect x="2.64893" y="2.37207" width="23.9674" height="23.9674" rx="11.9837" fill="white" shape-rendering="crispEdges"/>
+        //     <path fill-rule="evenodd" clip-rule="evenodd" d="M17.6283 16.3538V10.3619C17.6283 9.81039 17.1812 9.36328 16.6297 9.36328H10.6378C10.0863 9.36328 9.63916 9.81039 9.63916 10.3619V16.3538C9.63916 16.9053 10.0863 17.3524 10.6378 17.3524H16.6297C17.1812 17.3524 17.6283 16.9053 17.6283 16.3538ZM10.6379 10.362H16.6298V16.3539H10.6379V10.362ZM18.6271 17.3525V11.3607C19.1786 11.3607 19.6257 11.8078 19.6257 12.3593V17.3525C19.6257 18.4556 18.7315 19.3498 17.6284 19.3498H12.6352C12.0837 19.3498 11.6366 18.9027 11.6366 18.3512H17.6284C18.1799 18.3512 18.6271 17.9041 18.6271 17.3525Z" fill="#0F172A"/>
+        //     </g>
+        //     <defs>
+        //     <filter id="filter0_d_5633_67676" x="0.651639" y="0.374784" width="27.9619" height="27.9623" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+        //     <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+        //     <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+        //     <feOffset/>
+        //     <feGaussianBlur stdDeviation="0.998643"/>
+        //     <feComposite in2="hardAlpha" operator="out"/>
+        //     <feColorMatrix type="matrix" values="0 0 0 0 0.309804 0 0 0 0 0.368627 0 0 0 0 0.443137 0 0 0 0.12 0"/>
+        //     <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_5633_67676"/>
+        //     <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_5633_67676" result="shape"/>
+        //     </filter>
+        //     </defs>
+        //     </svg>
+        //     `;
+
+        //     fabric.loadSVGFromString(copyIconSVG, function(objects, options) {
+        //         let copyIcon = fabric.util.groupSVGElements(objects, options);
+        //         copyIcon.set({
+        //             left: textbox.left - 25,
+        //             top: textbox.top - 20,
+        //             selectable: false,
+        //             evented: true,
+        //             hasControls: false,
+        //             visible: true, // Initially hidden
+        //             className: 'copy-icon',
+        //         });
+        //         // Add the copyIcon to the canvas
+        //         textbox.copyIcon = copyIcon
+
+        //         // Ensure the copyIcon is on top
+        //         canvas.bringToFront(copyIcon);
+
+        //         // Handle copy icon click
+        //         textbox.copyIcon.on('mousedown', function() {
+        //             console.log('Copy icon clicked1');
+        //             cloneTextbox(textbox);
+        //         });
+        //     })
+        //     // console.log('Updated Copy Icon Position:', textbox.copyIcon.left, textbox.copyIcon.top);
+
+
+        //     canvas.renderAll(); // Re-render the canvas to apply the new positions
+        // }
+
+        function updateIconPositions(textbox) {
+            // Remove old trash and copy icons if they exist
             if (textbox.trashIcon) {
                 canvas.remove(textbox.trashIcon);
                 textbox.trashIcon = null; // Clear reference
-                // const trashIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 50 50"><path d="M20,30 L30,30 L30,40 L20,40 Z M25,10 L20,10 L20,7 L30,7 L30,10 Z M17,10 L33,10 L33,40 L17,40 Z" fill="#FF0000"/></svg>`;
-                // const trashIconSVG = `<svg width="23px" height="23px" style="background-color: #fff; color:#000; padding: 10px; border-radius: 50%;" strock=""  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M135.2 17.7L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-7.2-14.3C307.4 6.8 296.3 0 284.2 0L163.8 0c-12.1 0-23.2 6.8-28.6 17.7zM416 128L32 128 53.2 467c1.6 25.3 22.6 45 47.9 45l245.8 0c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>`;
-
-
-                const trashIconSVG = `<svg width="29" x="0px" y="0px" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <g filter="url(#filter0_d_5633_67674)">
-                <rect x="2.70312" y="2.37207" width="23.9674" height="23.9674" rx="11.9837" fill="white" shape-rendering="crispEdges"/>
-                <path d="M19.1807 11.3502C17.5179 11.1855 15.8452 11.1006 14.1775 11.1006C13.1888 11.1006 12.2001 11.1505 11.2115 11.2504L10.1929 11.3502" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M12.939 10.8463L13.0488 10.1922C13.1287 9.7178 13.1886 9.36328 14.0325 9.36328H15.3407C16.1846 9.36328 16.2495 9.73777 16.3244 10.1971L16.4342 10.8463" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M18.1073 12.9277L17.7827 17.9559C17.7278 18.7398 17.6829 19.349 16.2898 19.349H13.0841C11.691 19.349 11.6461 18.7398 11.5912 17.9559L11.2666 12.9277" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M13.853 16.6035H15.5158" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M13.4385 14.6055H15.9351" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-                </g>
-                <defs>
-                <filter id="filter0_d_5633_67674" x="0.705839" y="0.374784" width="27.9619" height="27.9623" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-                <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-                <feOffset/>
-                <feGaussianBlur stdDeviation="0.998643"/>
-                <feComposite in2="hardAlpha" operator="out"/>
-                <feColorMatrix type="matrix" values="0 0 0 0 0.309804 0 0 0 0 0.368627 0 0 0 0 0.443137 0 0 0 0.12 0"/>
-                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_5633_67674"/>
-                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_5633_67674" result="shape"/>
-                </filter>
-                </defs>
-                </svg>
-                `;
-                fabric.loadSVGFromString(trashIconSVG, function(objects, options) {
-                    const trashIcon = fabric.util.groupSVGElements(objects, options);
-                    trashIcon.set({
-                        left: textbox.left + textbox.width * textbox.scaleX - 20,
-                        top: textbox.top - 20,
-                        selectable: false,
-                        evented: true,
-                        hasControls: false,
-                        visible: false, // Initially hidden
-                        className: 'trash-icon',
-                    });
-                    textbox.trashIcon = trashIcon;
-
-
-                    // Ensure the copyIcon is on top
-                    canvas.bringToFront(trashIcon);
-                    textbox.trashIcon.on('mousedown', function() {
-                        console.log('deleted icon');
-                        deleteTextbox(textbox);
-                    });
-                })
-                // console.log('Updated Trash Icon Position:', textbox.trashIcon.left, textbox.trashIcon.top);
             }
-
             if (textbox.copyIcon) {
                 canvas.remove(textbox.copyIcon);
                 textbox.copyIcon = null; // Clear reference
             }
 
+            // Define SVG strings for trash and copy icons
+            const trashIconSVG = `<svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g filter="url(#filter0_d_5633_67674)">
+        <rect x="2.70312" y="2.37207" width="23.9674" height="23.9674" rx="11.9837" fill="white" shape-rendering="crispEdges"/>
+        <path d="M19.1807 11.3502C17.5179 11.1855 15.8452 11.1006 14.1775 11.1006C13.1888 11.1006 12.2001 11.1505 11.2115 11.2504L10.1929 11.3502" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M12.939 10.8463L13.0488 10.1922C13.1287 9.7178 13.1886 9.36328 14.0325 9.36328H15.3407C16.1846 9.36328 16.2495 9.73777 16.3244 10.1971L16.4342 10.8463" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M18.1073 12.9277L17.7827 17.9559C17.7278 18.7398 17.6829 19.349 16.2898 19.349H13.0841C11.691 19.349 11.6461 18.7398 11.5912 17.9559L11.2666 12.9277" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M13.853 16.6035H15.5158" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M13.4385 14.6055H15.9351" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
+        </g>
+        </svg>`;
 
-            // const copyIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"  x="0px" y="0px" width="20" height="20"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M384 336l-192 0c-8.8 0-16-7.2-16-16l0-256c0-8.8 7.2-16 16-16l140.1 0L400 115.9 400 320c0 8.8-7.2 16-16 16zM192 384l192 0c35.3 0 64-28.7 64-64l0-204.1c0-12.7-5.1-24.9-14.1-33.9L366.1 14.1c-9-9-21.2-14.1-33.9-14.1L192 0c-35.3 0-64 28.7-64 64l0 256c0 35.3 28.7 64 64 64zM64 128c-35.3 0-64 28.7-64 64L0 448c0 35.3 28.7 64 64 64l192 0c35.3 0 64-28.7 64-64l0-32-48 0 0 32c0 8.8-7.2 16-16 16L64 464c-8.8 0-16-7.2-16-16l0-256c0-8.8 7.2-16 16-16l32 0 0-48-32 0z"/></svg>`;
-            //             const copyIconSVG = `<svg x="0px" y="0px" width="29" height="19" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
-            // <path fill-rule="evenodd" clip-rule="evenodd" d="M9.6283 8.35281V2.36095C9.6283 1.80941 9.1812 1.3623 8.62966 1.3623H2.6378C2.08627 1.3623 1.63916 1.80941 1.63916 2.36095V8.35281C1.63916 8.90434 2.08627 9.35145 2.6378 9.35145H8.62966C9.1812 9.35145 9.6283 8.90434 9.6283 8.35281ZM2.6378 2.36095H8.62966V8.35281H2.6378V2.36095ZM10.6269 9.35145V3.35959C11.1785 3.35959 11.6256 3.8067 11.6256 4.35823V9.35145C11.6256 10.4545 10.7314 11.3487 9.6283 11.3487H4.63509C4.08355 11.3487 3.63645 10.9016 3.63645 10.3501H9.6283C10.1798 10.3501 10.6269 9.90298 10.6269 9.35145Z" fill="#0F172A"/>
-            // </svg>`;
-            const copyIconSVG = `<svg width="29" x="0px" y="0px" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g filter="url(#filter0_d_5633_67676)">
-            <rect x="2.64893" y="2.37207" width="23.9674" height="23.9674" rx="11.9837" fill="white" shape-rendering="crispEdges"/>
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M17.6283 16.3538V10.3619C17.6283 9.81039 17.1812 9.36328 16.6297 9.36328H10.6378C10.0863 9.36328 9.63916 9.81039 9.63916 10.3619V16.3538C9.63916 16.9053 10.0863 17.3524 10.6378 17.3524H16.6297C17.1812 17.3524 17.6283 16.9053 17.6283 16.3538ZM10.6379 10.362H16.6298V16.3539H10.6379V10.362ZM18.6271 17.3525V11.3607C19.1786 11.3607 19.6257 11.8078 19.6257 12.3593V17.3525C19.6257 18.4556 18.7315 19.3498 17.6284 19.3498H12.6352C12.0837 19.3498 11.6366 18.9027 11.6366 18.3512H17.6284C18.1799 18.3512 18.6271 17.9041 18.6271 17.3525Z" fill="#0F172A"/>
-            </g>
-            <defs>
-            <filter id="filter0_d_5633_67676" x="0.651639" y="0.374784" width="27.9619" height="27.9623" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-            <feOffset/>
-            <feGaussianBlur stdDeviation="0.998643"/>
-            <feComposite in2="hardAlpha" operator="out"/>
-            <feColorMatrix type="matrix" values="0 0 0 0 0.309804 0 0 0 0 0.368627 0 0 0 0 0.443137 0 0 0 0.12 0"/>
-            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_5633_67676"/>
-            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_5633_67676" result="shape"/>
-            </filter>
-            </defs>
-            </svg>
-            `;
+            const copyIconSVG = `<svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g filter="url(#filter0_d_5633_67676)">
+        <rect x="2.64893" y="2.37207" width="23.9674" height="23.9674" rx="11.9837" fill="white" shape-rendering="crispEdges"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M17.6283 16.3538V10.3619C17.6283 9.81039 17.1812 9.36328 16.6297 9.36328H10.6378C10.0863 9.36328 9.63916 9.81039 9.63916 10.3619V16.3538C9.63916 16.9053 10.0863 17.3524 10.6378 17.3524H16.6297C17.1812 17.3524 17.6283 16.9053 17.6283 16.3538ZM10.6379 10.362H16.6298V16.3539H10.6379V10.362ZM18.6271 17.3525V11.3607C19.1786 11.3607 19.6257 11.8078 19.6257 12.3593V17.3525C19.6257 18.4556 18.7315 19.3498 17.6284 19.3498H12.6352C12.0837 19.3498 11.6366 18.9027 11.6366 18.3512H17.6284C18.1799 18.3512 18.6271 17.9041 18.6271 17.3525Z" fill="#0F172A"/>
+        </g>
+        </svg>`;
 
+            // Load trash icon from SVG string and position
+            fabric.loadSVGFromString(trashIconSVG, function(objects, options) {
+                const trashIcon = fabric.util.groupSVGElements(objects, options);
+                trashIcon.set({
+                    left: textbox.left + textbox.width * textbox.scaleX - 20,
+                    top: textbox.top - 20,
+                    selectable: false,
+                    evented: true,
+                    hasControls: false,
+                });
+                textbox.trashIcon = trashIcon;
+
+                // Attach delete functionality to trash icon
+                trashIcon.on('mousedown', function() {
+                    console.log('Trash icon clicked! Deleting textbox.');
+                    deleteTextbox(textbox);
+                });
+
+                // Add trash icon to canvas
+                canvas.add(trashIcon);
+                canvas.bringToFront(trashIcon);
+            });
+
+            // Load copy icon from SVG string and position
             fabric.loadSVGFromString(copyIconSVG, function(objects, options) {
-                let copyIcon = fabric.util.groupSVGElements(objects, options);
+                const copyIcon = fabric.util.groupSVGElements(objects, options);
                 copyIcon.set({
                     left: textbox.left - 25,
                     top: textbox.top - 20,
                     selectable: false,
                     evented: true,
                     hasControls: false,
-                    visible: true, // Initially hidden
-                    className: 'copy-icon',
                 });
-                // Add the copyIcon to the canvas
-                textbox.copyIcon = copyIcon
+                textbox.copyIcon = copyIcon;
 
-                // Ensure the copyIcon is on top
-                canvas.bringToFront(copyIcon);
-
-                // Handle copy icon click
-                textbox.copyIcon.on('mousedown', function() {
-                    console.log('Copy icon clicked1');
+                // Attach clone functionality to copy icon
+                copyIcon.on('mousedown', function() {
+                    console.log('Copy icon clicked!');
                     cloneTextbox(textbox);
                 });
-            })
-            // console.log('Updated Copy Icon Position:', textbox.copyIcon.left, textbox.copyIcon.top);
 
+                // Add copy icon to canvas
+                canvas.add(copyIcon);
+                canvas.bringToFront(copyIcon);
+            });
 
-            canvas.renderAll(); // Re-render the canvas to apply the new positions
+            // Ensure textbox and icons stay visible
+            canvas.bringToFront(textbox);
+            canvas.renderAll();
         }
 
         // Function to add icons to a textbox
