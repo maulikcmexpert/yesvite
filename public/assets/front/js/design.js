@@ -450,12 +450,13 @@ $(document).on('click','.edit_design_tem',function(e){
 
         canvas.renderAll(); // Final render
     }
-    
+
     var canvas = new fabric.Canvas('imageEditor1', {
         width: 345, // Canvas width
         height: 490, // Canvas height
     });
     const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, 345, 490);
     const defaultSettings = {
         fontSize: 20,
         letterSpacing: 0,
