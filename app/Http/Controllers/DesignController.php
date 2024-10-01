@@ -231,9 +231,9 @@ class DesignController extends Controller
 
         $data = DB::table('text_data')
             ->orderBy('id', 'desc')
-            ->when($id != '', function ($query) use ($id) {
-                $query->where('id', $id);
-            })
+            // ->when($id != '', function ($query) use ($id) {
+            //     $query->where('id', $id);
+            // })
             ->first();
 
 
