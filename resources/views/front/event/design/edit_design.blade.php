@@ -268,7 +268,7 @@
                 </div>
                 <div class="font-selector form-check">
 
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="JosefinSans" id="JosefinSansButton">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="JosefinSans-Regular" id="JosefinSansButton">
                     <label class="form-check-label JosefinSans" for="JosefinSansButton">
                         JosefinSans
                     </label>

@@ -1,5 +1,5 @@
 @font-face {
-    font-family: 'JosefinSans';
+    font-family: 'JosefinSans-Regular';
     src: url('./../../fonts/JosefinSans-Regular.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
@@ -30,13 +30,6 @@
     font-display: swap;
 }
 
-@font-face {
-    font-family: 'BotanicaScript-Regular';
-    src: url('./../../fonts/BotanicaScript-Regular.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
 
 @font-face {
     font-family: 'Allura-Regular';

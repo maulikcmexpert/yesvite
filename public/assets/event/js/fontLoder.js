@@ -31,7 +31,7 @@
 // alert();
 WebFontConfig = {
     custom: {
-      families: ['JosefinSans','Botanica Script','AbrilFatface','AdleryPro','AgencyFB','AlexBrush','Allura','BotanicaScript-Regular','Archer',
+      families: ['JosefinSans-Regular','AbrilFatface','AdleryPro','AgencyFB','AlexBrush','Allura','BotanicaScript-Regular','Archer',
         'Archer-Book','Archer-BookItalic','Archer-ExtraLight','Archer-Hairline','Bebas-Regular','BookAntiqua','Bungee-Regular',
         'CandyCaneUnregistered','CarbonBl-Regular','CarmenSans-ExtraBold','CarmenSans-Regular','ChristmasCookies'
       ],
