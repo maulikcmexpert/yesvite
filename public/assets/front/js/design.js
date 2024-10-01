@@ -213,12 +213,12 @@ $(document).on("click", ".edit_design_tem", function (e) {
     }
 
     // // Create a new canvas element
-    // const newCanvas = document.createElement('canvas');
-    // newCanvas.id = 'imageEditor1'; // Same ID to be reused
-    // newCanvas.width = 345; // Canvas width
-    // newCanvas.height = 490; // Canvas height
-    // document.body.appendChild(newCanvas); // Append to body or specific container
-
+    const newCanvas = document.createElement('canvas');
+    newCanvas.id = 'imageEditor1'; // Same ID to be reused
+    newCanvas.width = 345; // Canvas width
+    newCanvas.height = 490; // Canvas height
+    // Append to body or specific container
+    $(".image-edit-inner-img").html(newCanvas);
     function loadTextDataFromDatabase() {
         if (image) {
             // console.log(image);
