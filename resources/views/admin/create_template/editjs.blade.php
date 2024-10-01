@@ -86,7 +86,8 @@
 
                             });
                         } else {
-                            showStaticTextElements();
+                            // showStaticTextElements();
+                            alert();
                             addDraggableText(150, 50, 'event_name', 'xyz'); // Position this outside the image area
                             addDraggableText(150, 100, 'host_name', 'abc');
                             addDraggableText(150, 150, 'start_time', '5:00PM');
