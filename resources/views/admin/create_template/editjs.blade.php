@@ -132,7 +132,7 @@
                             const staticInfo = JSON.parse(data.static_information);
                             staticInfo?.textElements?.forEach(element => {
                                 if (element.shape != undefined) {
-                                    shape = element.shape
+                                    newshape = element.shape
                                 }
                             })
                         }
