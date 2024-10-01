@@ -670,12 +670,12 @@
                     </label>
                 </div>
 
-                <div class="form-check">
+                <!-- <div class="form-check">
                     <input class="form-check-input colorTypeInp" type="radio" name="colorType" value="background">
                     <label class="form-check-label">
                         Background Color
                     </label>
-                </div>
+                </div> -->
 
             </div>
 
