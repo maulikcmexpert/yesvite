@@ -210,11 +210,13 @@ $(document).on("click", ".edit_design_tem", function (e) {
     $.ajax({
         url: base_url + "event/get_design_edit_page",
         method: "POST",
+        dataType:'html',
         data: {
             _token: $('meta[name="csrf-token"]').attr("content"),
         },
         success: function (response) {
             console.log(response);
+            $("#edit-design-temp").html(response)
             // bindData();
         },
         error: function (xhr, status, error) {},
