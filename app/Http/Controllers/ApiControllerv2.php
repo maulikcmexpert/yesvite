@@ -2270,9 +2270,9 @@ class ApiControllerv2 extends Controller
 
             $getUserPrivacyPolicy = UserProfilePrivacy::select('profile_privacy', 'status')->where('user_id', $user->id)->get();
 
-            $checkNotificationSetting =  UserNotificationType::where('user_id', $user->id)->get()->first();
+            $checkNotificationSetting =  UserNotificationType::where(['user_id' => $user->id, 'type' => 'private_message'])->get();
 
-            // dd($checkNotificationSetting);
+            dd($checkNotificationSetting);
 
             if (!empty($user)) {
 
