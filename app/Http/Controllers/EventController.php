@@ -1586,7 +1586,6 @@ class EventController extends Controller
 
     public function saveSliderImg(Request $request)
     {
-    dd($request);
     $imageSources = $request->imageSources;
     $savedFiles = [];
     $i = 0;
@@ -1607,7 +1606,7 @@ class EventController extends Controller
             ];
         }
     }
-
+    dd($savedFiles);
     if (empty($savedFiles)) {
         return response()->json(['status' => 'No valid images to save'], 400);
     }
