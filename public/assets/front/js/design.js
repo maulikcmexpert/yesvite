@@ -1567,7 +1567,6 @@ $(document).ready(function () {
 
     $(document).on("click", ".save-slider-image", function () {
         var imageSources = [];
-        var deleteCounter = 1; 
         // $(".slider_img").each(function () {
         //     imageSources.push($(this).attr("src"));
         // });
@@ -1576,9 +1575,8 @@ $(document).ready(function () {
             $(this).attr("data-delete", deleteCounter); 
             imageSources.push({
                 src: $(this).attr("src"),
-                deleteId: deleteCounter 
+                deleteId: $(this).data("delete")
             });
-            deleteCounter++;
         });
         $.ajax({
             url: base_url + "event/save_slider_img",

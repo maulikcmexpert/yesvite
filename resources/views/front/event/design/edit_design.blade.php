@@ -976,7 +976,7 @@
 
                     <div class="uploaded-images-detail">
                         <div class="uploaded-img-card ">
-                            <img class="photo-slider-1 slider_img" src="" alt="">
+                            <img class="photo-slider-1 slider_img" data-delete="1" src="" alt="">
                             <button class="uploaded-img-card-edit">
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -1032,7 +1032,7 @@
                                     stroke-linejoin="round" />
                             </svg>
                             
-                            <img class="photo-slider-2 slider_img" src="" alt="" style="display: none">
+                            <img class="photo-slider-2 slider_img" data-delete="2" src="" alt="" style="display: none">
                             <button class="uploaded-img-card-edit">
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -1088,7 +1088,7 @@
                                     stroke="#64748B" stroke-width="1.5" stroke-linecap="round"
                                     stroke-linejoin="round" />
                             </svg>
-                            <img class="photo-slider-3 slider_img" src="" alt="" style="display: none">
+                            <img class="photo-slider-3 slider_img" data-delete="3" src="" alt="" style="display: none">
                             <button class="uploaded-img-card-edit">
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
