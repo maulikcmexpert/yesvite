@@ -1598,7 +1598,7 @@ $(document).ready(function () {
     });
 
     $(document).on("click", ".delete_silder", function () {
-        console.log($(this).parent().parent().html());
+        console.log($(this).parent().parent().find('slider_img').data('delete'));
     });
 });   
    
