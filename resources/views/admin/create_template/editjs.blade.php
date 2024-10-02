@@ -151,8 +151,8 @@
                                     top: 50,
                                     scaleX: 0.5, // Scale down the image
                                     scaleY: 0.5,
-                                    width: 200, // Set the calculated width
-                                    height: 150,
+                                    width: 50, // Set the calculated width
+                                    height: 50,
                                     selectable: true, // Make filed image draggable
                                     hasControls: true // Allow resizing controls
                                 });
