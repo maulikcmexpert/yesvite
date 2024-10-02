@@ -47,7 +47,8 @@
                 </button>
             </div>
             <div class="edit-images-button-inner text-box-wrp" >
-                <button class="design-sidebar-action"  id="addShapeButton">
+                <button class="design-sidebar-action" >
+                    <input type="file" id="addShapeButton" > 
                     <span>
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
