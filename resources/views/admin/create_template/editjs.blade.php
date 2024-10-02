@@ -364,9 +364,9 @@
         fontSizeRange.addEventListener('input', setFontSize);
         fontSizeInput.addEventListener('input', () => {
             fontSizeRange.value = fontSizeInput.value;
-            setTimeout(() => {
-                setFontSize();
-            }, 500);
+            // setTimeout(() => {
+            setFontSize();
+            // }, 500);
         });
 
         letterSpacingRange.addEventListener('input', setLetterSpacing);
