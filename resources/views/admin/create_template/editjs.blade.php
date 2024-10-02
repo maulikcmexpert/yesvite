@@ -131,8 +131,8 @@
                         if (data.static_information) {
                             const staticInfo = JSON.parse(data.static_information);
                             staticInfo?.shapeImageData?.forEach(element => {
-                                console.log(staticInfo.shapeImageData);
                                 if (element.shape != undefined && element.centerX != undefined && element.centerY != undefined && element.height != undefined && element.width != undefined) {
+                                    console.log(staticInfo.shapeImageData);
                                     shape = element.shape,
                                         centerX = element.centerX,
                                         centerY = element.centerY,
