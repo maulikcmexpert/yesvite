@@ -1577,6 +1577,7 @@ $(document).ready(function () {
                 deleteId: $(this).data("delete")
             });
         });
+        console.log(imageSources);
         $.ajax({
             url: base_url + "event/save_slider_img",
             method: "POST",
