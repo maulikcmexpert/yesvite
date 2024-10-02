@@ -1609,7 +1609,6 @@ class EventController extends Controller
         if (empty($savedFiles)) {
             return response()->json(['status' => 'No valid images to save'], 400);
         }
-        dd($savedFiles);
     session(['desgin_slider' => $savedFiles]);
     return response()->json(['success' => true, 'images' => $savedFiles]);
 }
