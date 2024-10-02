@@ -188,7 +188,7 @@ class EventController extends Controller
                 //     $event_creation->design_image = $tempData->image;
                 // }
             }
-            dd($request->textData);
+            // dd($request->textData);
             foreach ($request->textData as $key => $textData) {
                 dd($textData['fontSize']);
             }
