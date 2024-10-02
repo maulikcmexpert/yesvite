@@ -394,7 +394,7 @@
                 charSpacing: defaultSettings.letterSpacing * 10, // Adjusted for Fabric.js
                 lineHeight: defaultSettings.lineHeight,
                 fontFamily: 'Arial',
-                textAlign: 'left',
+                textAlign: 'center',
                 fill: '#000000', // Optional: Reset text color
             });
 
