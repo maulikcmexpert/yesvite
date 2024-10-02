@@ -1617,7 +1617,7 @@ public function deleteSliderImg(Request $request)
 {
     $delete_id = $request->delete_id;
     $get_slider_data = Session::get('desgin_slider');
-    dd($get_slider_data);
+    // dd($get_slider_data);
     $filtered_slider_data = array_filter($get_slider_data, function ($slider) use ($delete_id) {
         if ($slider['deleteId'] === $delete_id) {
             $image = $slider['fileName'];
