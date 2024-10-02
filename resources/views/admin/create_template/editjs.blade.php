@@ -1403,6 +1403,7 @@
         //     textElement.style.fontFamily = 'Allura'; // Change to Allura font
         // });
         function loadAndUse(font) {
+            alert();
             var myfont = new FontFaceObserver(font);
             console.log(font);
             myfont.load().then(function() {
