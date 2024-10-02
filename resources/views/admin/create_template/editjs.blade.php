@@ -161,8 +161,8 @@
                                     height: 50,
                                     selectable: true,
                                     hasControls: true,
-                                    scaleX: 600,
-                                    scaleY: 600
+                                    scaleX: 10,
+                                    scaleY: 10
                                 });
 
 
