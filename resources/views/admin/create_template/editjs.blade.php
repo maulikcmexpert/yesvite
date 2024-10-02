@@ -1264,16 +1264,16 @@
 
 
 
-        document.getElementById('antaresiaButton').addEventListener('click', function() {
-            console.log("fontname")
-            loadAndUse("Antaresia");
-        });
-        document.getElementById('JosefinSansButton').addEventListener('click', function() {
-            console.log("fontname");
-            loadAndUse("JosefinSans-Regular");
+        // document.getElementById('antaresiaButton').addEventListener('click', function() {
+        //     console.log("fontname")
+        //     loadAndUse("Antaresia");
+        // });
+        // document.getElementById('JosefinSansButton').addEventListener('click', function() {
+        //     console.log("fontname");
+        //     loadAndUse("JosefinSans-Regular");
 
 
-        });
+        // });
         document.getElementById('AbrilFatfaceButton').addEventListener('click', function() {
             console.log("fontname")
             loadAndUse("AbrilFatface-Regular");
@@ -1400,7 +1400,6 @@
         //     textElement.style.fontFamily = 'Allura'; // Change to Allura font
         // });
         function loadAndUse(font) {
-            alert();
             var myfont = new FontFaceObserver(font);
             console.log(font);
             myfont.load().then(function() {
