@@ -85,15 +85,15 @@ class EventController extends Controller
                 unlink($imagePath);
             }
         }
-        if(isset($slider_image) && !empty($slider_image)){
-            foreach ($slider_image as $key => $value) {
-                if (file_exists(public_path('storage/event_design_template/') . $value)) {
-                    $imagePath = public_path('storage/event_design_template/') . $value;
-                    unlink($imagePath);
-                }
-            }
+        // if(isset($slider_image) && !empty($slider_image)){
+        //     foreach ($slider_image as $key => $value) {
+        //         if (file_exists(public_path('storage/event_design_template/') . $value)) {
+        //             $imagePath = public_path('storage/event_design_template/') . $value;
+        //             unlink($imagePath);
+        //         }
+        //     }
 
-        }
+        // }
         Session::forget('desgin');
         Session::forget('desgin_slider');
         Session::save();
@@ -1612,6 +1612,16 @@ class EventController extends Controller
         dd($savedFiles);
     session(['desgin_slider' => $savedFiles]);
     return response()->json(['success' => true, 'images' => $savedFiles]);
+}
+
+public function deleteSliderImg(Request $request)
+{
+    $delete_id = $request->delete_id;
+    
+    $get_slider_data=Session::get('desgin_slider');
+
+    dd($get_slider_data);
+    
 }
 
 
