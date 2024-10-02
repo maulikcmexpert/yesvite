@@ -325,14 +325,14 @@
                     </label>
 
                 </div> -->
-                <div class="font-selector form-check">
+                <!-- <div class="font-selector form-check">
 
                     <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="JosefinSans" id="JosefinSansButton">
                     <label class="form-check-label JosefinSans" for="JosefinSansButton">
                         JosefinSans
                     </label>
 
-                </div>
+                </div> -->
                 <div class="font-selector form-check">
 
                     <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="AbrilFatface" id="AbrilFatfaceButton">
