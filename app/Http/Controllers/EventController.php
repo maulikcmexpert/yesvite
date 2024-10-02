@@ -1641,6 +1641,14 @@ class EventController extends Controller
 
     public function shape_image(Request $request)
     {
-            dd($request);
+            // dd($request);
+            $file = $request->file('image');
+            $shape = $request->shape;
+            $imageName = 'shape_image' . time() . '.' . $file->getClientOriginalExtension(); 
+            $file->move(public_path('storage/canvas'), $imageName);
+            $imagePath = asset('storage/canvas/' . $imageName);
+
+            return response()->json(['success' => true, 'shape_path' => $imagePath,'shape_image' => $imageName,'shape_name'=>$shape]);
+
     }
 }
