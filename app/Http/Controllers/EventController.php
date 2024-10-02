@@ -189,15 +189,16 @@ class EventController extends Controller
                 // }
             }
             $designJson = []; 
-            foreach ($request->textData['textElements'] as $key => $textJson) {
+            $textElemtents = $request->textData['textElements']; 
+            foreach ($textElemtents as $key => $textJson) {
                 if($textJson['fontSize']!=''){
                    
-                    $request->textData['textElements'][$key]['fontSize'] = (int)$textJson['fontSize'];
+                    $textElemtents[$key]['fontSize'] = (int)$textJson['fontSize'];
                     // $request->textData['textElements'][$key]['centerX'] = (double)$textJson['centerX'];
                     // $request->textData['textElements'][$key]['centerY'] = (double)$textJson['centerY'];
                 }
             }
-            dd($request->textData);
+            dd($textElemtents);
             $static_data = [];
             $static_data['textData'] = $request->textData;
             $static_data['event_design_sub_category_id'] = (int)$request->temp_id;
