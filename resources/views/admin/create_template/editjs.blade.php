@@ -394,7 +394,7 @@
                 charSpacing: defaultSettings.letterSpacing * 10, // Adjusted for Fabric.js
                 lineHeight: defaultSettings.lineHeight,
                 fontFamily: 'Arial',
-                textAlign: 'center',
+                textAlign: 'left',
                 fill: '#000000', // Optional: Reset text color
             });
 
@@ -1140,7 +1140,6 @@
 
         function getTextDataFromCanvas() {
             var objects = canvas.getObjects();
-
             var textData = [];
             console.log(objects);
             objects.forEach(function(obj) {
@@ -1237,7 +1236,7 @@
                 .then(response => response.json())
                 .then(data => {
                     console.log('Text data saved successfully', data);
-                    window.location.href = "{{URL::to('/admin/create_template')}}";
+                    // window.location.href = "{{URL::to('/admin/create_template')}}";
 
                 })
                 .catch((error) => {
