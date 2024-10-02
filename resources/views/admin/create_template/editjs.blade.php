@@ -373,9 +373,9 @@
         letterSpacingInput.addEventListener('input', () => {
             letterSpacingRange.value = letterSpacingInput.value;
             if (letterSpacingInput.value != '') {
-                setTimeout(() => {
-                    setLetterSpacing();
-                }, 500);
+                // setTimeout(() => {
+                setLetterSpacing();
+                // }, 500);
             }
         });
 
