@@ -595,7 +595,7 @@
                 <div class="size-spacing-inner font-size-wrp">
                     <div class="size-spacing-inner-top">
                         <h3>Font Size</h3>
-                        {{-- <input type="text" id="fontSizeInput" value="20"> --}}
+                        <input type="hidden" id="fontSizeInput" value="20" >
                     </div>
                     <div class="range-slider">
                         <div id="fontSizeTooltip" class="tooltip"></div>
@@ -607,7 +607,7 @@
                 <div class="size-spacing-inner font-size-wrp">
                     <div class="size-spacing-inner-top">
                         <h3>Letter Spacing</h3>
-                        {{-- <input type="text" id="letterSpacingInput" value="0"> --}}
+                        <input type="hidden" id="letterSpacingInput" value="0">
                     </div>
                     <div class="range-slider">
                         <div id="letterSpacingTooltip" class="tooltip"></div>
@@ -619,7 +619,7 @@
                 <div class="size-spacing-inner font-size-wrp">
                     <div class="size-spacing-inner-top">
                         <h3>Line Height</h3>
-                        {{-- <input type="text" id="lineHeightInput" value="1.2"> --}}
+                        <input type="hidden" id="lineHeightInput" value="1.2">
                     </div>
                     <div class="range-slider">
                         <div id="lineHeightTooltip" class="tooltip"></div>
