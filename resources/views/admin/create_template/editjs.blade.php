@@ -146,14 +146,28 @@
                         if (data.filedImagePath) {
                             fabric.Image.fromURL(data.filedImagePath, function(filedImg) {
                                 // Set your preferred image properties
+                                // filedImg.set({
+                                //     left: 50,
+                                //     top: 50,
+                                //     scaleX: 0.5, // Scale down the image
+                                //     scaleY: 0.5,
+                                //     width: 200, // Set the calculated width
+                                //     height: 150,
+                                //     selectable: true, // Make filed image draggable
+                                //     hasControls: true // Allow resizing controls
+                                // });
+
+                                const containerWidth = 200; // Desired container width
+                                const containerHeight = 150; // Desired container height
+
                                 filedImg.set({
                                     left: 50,
                                     top: 50,
-                                    scaleX: 0.5, // Scale down the image
-                                    scaleY: 0.5,
-                                    // width: 200, // Set the calculated width
-                                    // height: 150,
-                                    selectable: true, // Make filed image draggable
+                                    scaleX: containerWidth / filedImg.width, // Stretch the image to fill the width
+                                    scaleY: containerHeight / filedImg.height, // Stretch the image to fill the height
+                                    width: containerWidth, // Set the container width
+                                    height: containerHeight, // Set the container height
+                                    selectable: true, // Make the image draggable
                                     hasControls: true // Allow resizing controls
                                 });
 
