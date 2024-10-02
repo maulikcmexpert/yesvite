@@ -589,7 +589,6 @@ $(document).on("click", ".edit_design_tem", function (e) {
 
     // Set letter spacing function
     const setLetterSpacing = () => {
-        alert();
         const newValue = letterSpacingRange.value;
         letterSpacingInput.value = newValue;
         letterSpacingTooltip.innerHTML = `<span>${newValue}</span>`;
