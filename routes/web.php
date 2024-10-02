@@ -255,6 +255,7 @@ Route::controller(AuthController::class)->group(function () {
         Session::forget('edit_design_closed');
         Session::forget('user');
         Session::forget('secondary_user');
+        Session::forget('desgin_slider');
         return redirect('login');
     })->name('logout');
 });
