@@ -365,7 +365,9 @@
         fontSizeInput.addEventListener('input', () => {
             fontSizeRange.value = fontSizeInput.value;
             if (fontSizeInput.value != '' && fontSizeInput.value != '0.') {
-                setFontSize();
+                setTimeout(() => {
+                    setFontSize();
+                }, 500);
             }
         });
 
@@ -373,7 +375,9 @@
         letterSpacingInput.addEventListener('input', () => {
             letterSpacingRange.value = letterSpacingInput.value;
             if (letterSpacingInput.value != '' && letterSpacingInput.value != '0.') {
-                setLetterSpacing();
+                setTimeout(() => {
+                    setLetterSpacing();
+                }, 500);
             }
         });
 
@@ -381,7 +385,9 @@
         lineHeightInput.addEventListener('input', () => {
             lineHeightRange.value = lineHeightInput.value;
             if (lineHeightInput.value != '' && lineHeightInput.value != '0.') {
-                setLineHeight();
+                setTimeout(() => {
+                    setLineHeight();
+                }, 500);
             }
         });
 
