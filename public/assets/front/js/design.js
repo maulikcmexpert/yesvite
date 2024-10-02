@@ -1581,6 +1581,7 @@ $(document).ready(function () {
         }
         });
         console.log(imageSources);
+        $('#loader').css('display','block');
         $.ajax({
             url: base_url + "event/save_slider_img",
             method: "POST",
@@ -1591,8 +1592,9 @@ $(document).ready(function () {
             success: function (response) {
                 var savedImages = response.images;
                 eventData.slider_images = savedImages;
-
                 console.log(eventData);
+                $('#loader').css('display','none');
+                toastr.success('Slider Image saved Successfully');
             },
             error: function (xhr, status, error) {},
         });
@@ -1602,6 +1604,7 @@ $(document).ready(function () {
         var delete_id=$(this).parent().find('.slider_img').data("delete");
         var src=$(this).parent().find('.slider_img').attr("src");
         if(src!=""){
+            $('#loader').css('display','block');
             var $this = $(this);
             var check_slider_img=eventData.slider_images;
             var matchFound = false; 
@@ -1622,12 +1625,18 @@ $(document).ready(function () {
                     success: function (response) {
                         $this.parent().find('.slider_img').attr('src', '');
                         $(".photo-slider-"+delete_id).hide();
+                        toastr.success('Slider Deleted saved Successfully')
+                        $('#loader').css('display','none');
+
                     },
                     error: function (xhr, status, error) {},
                 });
             }else{
                 $(this).parent().find('.slider_img').attr('src', '');
                 $(".photo-slider-"+delete_id).hide();
+                toastr.success('Slider Deleted saved Successfully')
+                $('#loader').css('display','none');
+
             }
          
         }
