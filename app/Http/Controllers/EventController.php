@@ -1586,7 +1586,8 @@ class EventController extends Controller
 
     public function saveSliderImg(Request $request)
     {
-    $imageSources = $request->imageSources;
+        $imageSources = $request->imageSources;
+        dd($imageSources);
     $savedFiles = [];
     $i = 0;
     foreach ($imageSources as $imageSource) {
@@ -1609,7 +1610,6 @@ class EventController extends Controller
     if (empty($savedFiles)) {
         return response()->json(['status' => 'No valid images to save'], 400);
     }
-    dd($savedFiles);
     session(['desgin_slider' => $savedFiles]);
     return response()->json(['success' => true, 'images' => $savedFiles]);
 }
