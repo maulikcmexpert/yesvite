@@ -173,43 +173,7 @@ class EventController extends Controller
     public function store(Request $request)
     {
         // dd($request->textData);
-        if(isset($request->textData) && json_encode($request->textData) != ''){
-            $tempData = TextData::where('id',$request->temp_id)->first();
-            if($tempData){
-                $sourceImagePath = asset('storage/canvas/' . $tempData->image);
-                $destinationDirectory = public_path('storage/event_images/'); 
-                // $destinationImagePath = $destinationDirectory . $tempData->image;
-                // if (file_exists(public_path('storage/canvas/') . $tempData->image)) {
-                //     // dd(1);
-                //     $newImageName = time() . '_' .uniqid() . '.' . pathinfo($tempData->image, PATHINFO_EXTENSION);
-                //     $destinationImagePath = $destinationDirectory . $newImageName;
-
-                //     File::copy($sourceImagePath, $destinationImagePath);
-                //     $event_creation->design_image = $tempData->image;
-                // }
-            }
-            $designJson = []; 
-            $textElemtents = $request->textData['textElements']; 
-            foreach ($textElemtents as $key => $textJson) {
-                if($textJson['fontSize']!=''){
-                   
-                    $textElemtents[$key]['fontSize'] = (int)$textJson['fontSize'];
-                    // $request->textData['textElements'][$key]['centerX'] = (double)$textJson['centerX'];
-                    // $request->textData['textElements'][$key]['centerY'] = (double)$textJson['centerY'];
-                }
-            }
-            dd($textElemtents);
-            $static_data = [];
-            $static_data['textData'] = $request->textData;
-            $static_data['event_design_sub_category_id'] = (int)$request->temp_id;
-            $static_data['height'] = (int)$tempData->height;
-            $static_data['width'] = (int)$tempData->width;
-            $static_data['image'] = $tempData->image;
-            $static_data['template_url'] = $sourceImagePath;
-            $static_data['is_contain_image'] = true;
-            
-            // $event_creation->static_information = json_encode($static_data);    
-        }
+        
 
 
         // $potluck = session('category');
@@ -292,8 +256,39 @@ class EventController extends Controller
         if(isset($request->temp_id) && $request->temp_id != ''){
            
         }
-       
-       
+        if(isset($request->textData) && json_encode($request->textData) != ''){
+            $tempData = TextData::where('id',$request->temp_id)->first();
+            if($tempData){
+                $sourceImagePath = asset('storage/canvas/' . $tempData->image);
+                $destinationDirectory = public_path('storage/event_images/'); 
+                $destinationImagePath = $destinationDirectory . $tempData->image;
+                if (file_exists(public_path('storage/canvas/') . $tempData->image)) {
+                    $newImageName = time() . '_' .uniqid() . '.' . pathinfo($tempData->image, PATHINFO_EXTENSION);
+                    $destinationImagePath = $destinationDirectory . $newImageName;
+
+                    File::copy($sourceImagePath, $destinationImagePath);
+                    $event_creation->design_image = $tempData->image;
+                }
+            }
+            $textElemtents = $request->textData['textElements']; 
+            foreach ($textElemtents as $key => $textJson) {
+                if($textJson['fontSize']!=''){
+                    $textElemtents[$key]['fontSize'] = (int)$textJson['fontSize'];
+                    $textElemtents[$key]['centerX'] = (double)$textJson['centerX'];
+                    $textElemtents[$key]['centerY'] = (double)$textJson['centerY'];
+                }
+            }
+            $static_data = [];
+            $static_data['textData'] = $textElemtents;
+            $static_data['event_design_sub_category_id'] = (int)$request->temp_id;
+            $static_data['height'] = (int)$tempData->height;
+            $static_data['width'] = (int)$tempData->width;
+            $static_data['image'] = $tempData->image;
+            $static_data['template_url'] = $sourceImagePath;
+            $static_data['is_contain_image'] = true;
+            
+            $event_creation->static_information = json_encode($static_data);    
+        }
         $event_creation->save();
         if ($eventId != "") {
             $invitedUsers = $request->email_invite;
