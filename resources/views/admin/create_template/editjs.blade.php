@@ -672,6 +672,7 @@
                 isStatic: false,
                 visible: true,
                 hasControls: true,
+                textAlign: 'center',
                 borderColor: '#2DA9FC',
                 // cornerColor: 'red',
                 cornerColor: '#fff',
