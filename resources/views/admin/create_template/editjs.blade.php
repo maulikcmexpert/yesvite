@@ -1264,10 +1264,10 @@
 
 
 
-        // document.getElementById('antaresiaButton').addEventListener('click', function() {
-        //     console.log("fontname")
-        //     loadAndUse("Antaresia");
-        // });
+        document.getElementById('antaresiaButton').addEventListener('click', function() {
+            console.log("fontname")
+            loadAndUse("Antaresia");
+        });
         document.getElementById('JosefinSansButton').addEventListener('click', function() {
             console.log("fontname");
             loadAndUse("JosefinSans-Regular");
@@ -1298,14 +1298,14 @@
         document.getElementById('AlexBrushButton').addEventListener('click', function() {
             console.log("fontname")
 
-            loadAndUse("AlexBrush");
+            loadAndUse("AlexBrush-Regular");
 
 
         });
         document.getElementById('AlluraButton').addEventListener('click', function() {
             console.log("fontname")
 
-            loadAndUse("Allura");
+            loadAndUse("Allura-Regular");
 
 
         });

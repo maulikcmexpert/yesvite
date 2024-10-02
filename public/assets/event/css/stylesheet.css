@@ -40,7 +40,7 @@
 }
 
 @font-face {
-    font-family: 'Allura';
+    font-family: 'Allura-Regular';
     src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/Allura-Regular.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
@@ -161,7 +161,7 @@
 }
 
 @font-face {
-    font-family: 'AlexBrush';
+    font-family: 'AlexBrush-Regular';
     src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/AlexBrush-Regular.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;

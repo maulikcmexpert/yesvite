@@ -318,13 +318,7 @@
             </div> -->
             <div class="used-fonts-wrp common-font-wrp">
                 <h3>Select a Font</h3>
-                <!-- <div class="font-selector form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="Antaresia" id="antaresiaButton">
-                    <label class="form-check-label Antaresia" for="antaresiaButton">
-                        Antaresia
-                    </label>
 
-                </div> -->
                 <!-- <div class="font-selector form-check">
 
                     <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="JosefinSans" id="JosefinSansButton">
@@ -373,6 +367,13 @@
                     </label>
 
                 </div>
+                <!-- <div class="font-selector form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="Antaresia" id="antaresiaButton">
+                    <label class="form-check-label Antaresia" for="antaresiaButton">
+                        Antaresia
+                    </label>
+
+                </div> -->
                 <!-- <div class="font-selector form-check">
                     <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="BotanicaScript-Regular" id="BotanicaScript-RegularButton">
                     <label class="form-check-label BotanicaScript-Regular" for="BotanicaScript">
