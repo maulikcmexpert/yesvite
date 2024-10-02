@@ -1572,12 +1572,14 @@ $(document).ready(function () {
         //     imageSources.push($(this).attr("src"));
         // });
 
-        $(this).attr("data-delete", deleteCounter); 
-        imageSources.push({
-            src: $(this).attr("src"),
-            deleteId: deleteCounter
+        $(".slider_img").each(function () {
+            $(this).attr("data-delete", deleteCounter); 
+            imageSources.push({
+                src: $(this).attr("src"),
+                deleteId: deleteCounter 
+            });
+            deleteCounter++;
         });
-        deleteCounter++;
         console.log(imageSources);
         $.ajax({
             url: base_url + "event/save_slider_img",
