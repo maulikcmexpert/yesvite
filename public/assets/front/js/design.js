@@ -1507,8 +1507,8 @@ function bindData() {
     const userImageElement = document.getElementById('user_image');
     const imageWrapper = document.getElementById('imageWrapper');
     const canvasElement = new fabric.Canvas('imageEditor', {
-        width: 500, // Canvas width
-        height: 500, // Canvas height
+        width: 100, // Canvas width
+        height: 100, // Canvas height
     });
 
     const resizeHandles = {
