@@ -147,22 +147,12 @@
                             fabric.Image.fromURL(data.filedImagePath, function(filedImg) {
                                 // Set your preferred image properties
                                 filedImg.set({
-                                    //     left: 50,
-                                    //     top: 50,
-                                    //     scaleX: 0.5, // Scale down the image
-                                    //     scaleY: 0.5,
-                                    //     width: 200, // Set the calculated width
-                                    //     height: 150,
-                                    //     selectable: true, // Make filed image draggable
-                                    //     hasControls: true // Allow resizing controls
                                     left: 50,
                                     top: 50,
-                                    width: 50,
-                                    height: 50,
-                                    selectable: true,
-                                    hasControls: true,
-                                    scaleX: 10,
-                                    scaleY: 10
+                                    selectable: true, // Make image draggable
+                                    hasControls: true, // Allow resizing controls
+                                    originX: 'center',
+                                    originY: 'center', // Allow resizing controls
                                 });
 
 
@@ -253,6 +243,8 @@
                                 filedImg.set({
                                     clipPath: clipPath
                                 }); // Apply the appropriate clipping path
+                                filedImg.scaleToWidth(150); // Adjust to match your shape size
+                                filedImg.scaleToHeight(150);
                                 canvas.add(filedImg); // Add the clipped image to the canvas
                                 canvas.renderAll(); // Ensure the canvas is updated
                             });
