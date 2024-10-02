@@ -250,6 +250,33 @@ function bindData() {
                 });
                 canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
             });
+            var rotateIcon = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0Ij48cGF0aCBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTEyIDZ2M2w0LTQtNC00djNjLTQuNDIgMC04IDMuNTgtOCA4IDAgMS41Ny40NiAzLjAzIDEuMjQgNC4yNkw2LjcgMTQuOGMtLjQ1LS44My0uNy0xLjc5LS43LTIuOCAwLTMuMzEgMi42OS02IDYtNnptNi43NiAxLjc0TDE3LjMgOS4yYy40NC44NC43IDEuNzkuNyAyLjggMCAzLjMxLTIuNjkgNi02IDZ2LTNsLTQgNCA0IDR2LTNjNC40MiAwIDgtMy41OCA4LTggMC0xLjU3LS40Ni0zLjAzLTEuMjQtNC4yNnoiLz48L3N2Zz4=";
+            var img = document.createElement('img');
+            img.src = rotateIcon;
+        
+            // here's where your custom rotation control is defined
+            // by changing the values you can customize the location, size, look, and behavior of the control
+            fabric.Textbox.prototype.controls.mtr = new fabric.Control({
+              x: 0,
+              y: -0.5,
+              offsetY: -40,
+              cursorStyle: 'pointer',
+              actionHandler: fabric.controlsUtils.rotationWithSnapping,
+              actionName: 'rotate',
+              render: renderIcon,
+              cornerSize: 28,
+              withConnection: true
+            });
+        
+            // here's where the render action for the control is defined
+            function renderIcon(ctx, left, top, styleOverride, fabricObject) {
+              var size = this.cornerSize;
+              ctx.save();
+              ctx.translate(left, top);
+              ctx.rotate(fabric.util.degreesToRadians(fabricObject.angle));
+              ctx.drawImage(img, -size / 2, -size / 2, size, size);
+              ctx.restore();
+            }
 
             // Load static information (text elements)
             if (dbJson) {
