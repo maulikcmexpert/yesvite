@@ -41,7 +41,7 @@ WebFontConfig = {
             "Allura-Regular",
             "Antaresia",
             "BotanicaScript-Regular",
-            "Archer",
+            "ArcherBold",
             "Archer-Book",
             "Archer-BookItalic",
             "Archer-ExtraLight",
