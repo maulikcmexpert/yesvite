@@ -130,9 +130,15 @@
                         }
                         if (data.static_information) {
                             const staticInfo = JSON.parse(data.static_information);
-                            staticInfo?.textElements?.forEach(element => {
-                                if (element.shape != undefined) {
-                                    newshape = element.shape
+                            staticInfo?.shapeImageData?.forEach(element => {
+                                console.log(staticInfo.shapeImageData);
+                                if (element.shape != undefined && element.centerX != undefined && element.centerY != undefined && element.height != undefined && element.width != undefined) {
+                                    shape = element.shape,
+                                        centerX = element.centerX,
+                                        centerY = element.centerY,
+                                        height = element.height,
+                                        width = element.width
+
                                 }
                             })
                         }
