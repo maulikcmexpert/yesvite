@@ -36,7 +36,7 @@ WebFontConfig = {
             "Botanica Script",
             "AbrilFatface-Regular",
             "AdleryPro-Regular",
-            "AgencyFB",
+            "AgencyFB-Bold",
             "AlexBrush",
             "Allura",
             "BotanicaScript-Regular",
