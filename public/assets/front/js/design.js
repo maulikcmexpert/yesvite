@@ -1625,7 +1625,7 @@ $(document).ready(function () {
                     success: function (response) {
                         $this.parent().find('.slider_img').attr('src', '');
                         $(".photo-slider-"+delete_id).hide();
-                        toastr.success('Slider Deleted Successfully')
+                        toastr.success('Slider Deleted Image Successfully')
                         $('#loader').css('display','none');
 
                     },
@@ -1634,7 +1634,7 @@ $(document).ready(function () {
             }else{
                 $(this).parent().find('.slider_img').attr('src', '');
                 $(".photo-slider-"+delete_id).hide();
-                toastr.success('Slider Deleted Successfully')
+                toastr.success('Slider Deleted Image Successfully')
                 $('#loader').css('display','none');
 
             }
