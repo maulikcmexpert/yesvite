@@ -866,7 +866,7 @@
         <!-- ====upload=img=== -->
         <div class="design-sidebar design-sidebar_6 setting-category-wrp choose-design-form activity-schedule-inner d-none">
             <div class="d-flex align-items-center justify-content-between toggle-wrp new-event-sidebar-head">
-                <h5>Photo Slider</h5>
+                <h5>Shape Image</h5>
                 <button class="close-btn" onclick="toggleSidebar()">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
@@ -935,9 +935,8 @@
                     </svg>
                 </div>
                 <div class="uploda-wrp-content">
-                    <h3>Upload Images for slider</h3>
-                    <p>You may choose up to three photos for a slideshow that your guests can view along with their
-                        online invitation.</p>
+                    <h3>Upload Images for Shape</h3>
+                    <p>You may choose only one photo for a Shape.</p>
                     <button class="cmn-btn">
 
                         <input type="file" id="fileInput" name="Choose image" text="Choose image">
