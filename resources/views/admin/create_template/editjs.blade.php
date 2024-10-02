@@ -146,20 +146,47 @@
                         if (data.filedImagePath) {
                             fabric.Image.fromURL(data.filedImagePath, function(filedImg) {
                                 // Set your preferred image properties
-                                filedImg.set({
-                                    left: 50,
-                                    top: 50,
-                                    selectable: true, // Make the image draggable
-                                    hasControls: true, // Allow resizing controls
-                                    originX: 'center',
-                                    originY: 'center',
-                                    clipTo: function(ctx) {
-                                        ctx.arc(0, 0, 100, 0, Math.PI * 2, true); // Example for a circular clip, adjust radius as needed
-                                    }
-                                });
+                                // filedImg.set({
+                                //     left: 50,
+                                //     top: 50,
+                                //     scaleX: 0.5, // Scale down the image
+                                //     scaleY: 0.5,
+                                //     width: 200, // Set the calculated width
+                                //     height: 150,
+                                //     selectable: true, // Make filed image draggable
+                                //     hasControls: true // Allow resizing controls
+                                // });
 
-                                filedImg.scaleToWidth(200); // Adjust to desired width
-                                filedImg.scaleToHeight(150);
+
+
+                                const imgElement = new Image();
+                                imgElement.src = filedImg;
+
+                                imageWrapper.style.display = 'block';
+
+                                imgElement.onload = function() {
+                                    console.log("Image loaded successfully.");
+                                    const imgInstance = new fabric.Image(imgElement, {
+                                        left: 0,
+                                        top: 0,
+                                        selectable: true,
+                                        hasControls: true,
+                                        hasBorders: true,
+                                        cornerColor: 'red',
+                                        cornerStrokeColor: 'blue',
+                                        borderColor: 'blue',
+                                        cornerSize: 10,
+                                        transparentCorners: false,
+                                        lockUniScaling: true,
+                                        scaleX: 600 / imgElement.width,
+                                        scaleY: 600 / imgElement.height
+                                    });
+                                }
+
+                                canvasElement.add(imgInstance);
+                                drawCanvas();
+                                console.log('Image loaded and added to canvas.');
+                                imageUploaded = true;
 
                                 // Define clipping paths based on the shape
                                 let clipPath;
