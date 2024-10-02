@@ -23,7 +23,7 @@
         <div class="image-edit-section-wrp">
             <div class="image-edit-inner-img">
                 <input type="file" id="image" accept="image/*" style="display: none" />
-                <canvas id="imageEditor1"></canvas>
+                <canvas id="imageEditor1" class="canvas new"></canvas>
 
                 {{-- <img src="{{ $textData->image}}" alt=""> --}}
             </div>
