@@ -191,9 +191,8 @@ class EventController extends Controller
             $designJson = []; 
             foreach ($request->textData['textElements'] as $key => $textJson) {
                 if($textJson['fontSize']!=''){
-                    $request->textData['textElements'][$key]['fontSize'] = (int)$textJson['fontSize'];
-                    $request->textData['textElements'][$key]['centerX'] = (double)$textJson['centerX'];
-                    $request->textData['textElements'][$key]['centerY'] = (double)$textJson['centerY'];
+                    dd((int)$textJson['fontSize']);
+                   
                 }
             }
             dd($request->textData);
