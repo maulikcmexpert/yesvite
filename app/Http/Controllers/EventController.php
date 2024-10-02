@@ -189,6 +189,9 @@ class EventController extends Controller
                 // }
             }
             dd($request->textData);
+            foreach ($request->textData as $key => $textData) {
+                dd($textData['fontSize']);
+            }
             $static_data = [];
             $static_data['textData'] = $request->textData;
             $static_data['event_design_sub_category_id'] = (int)$request->temp_id;
