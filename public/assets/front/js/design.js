@@ -1555,15 +1555,15 @@ $(document).ready(function () {
             reader.readAsDataURL(file);
         }
     });
-    $(document).on("click", ".delete-slider-1", function () {
-        $(".photo-slider-1").hide();
-    });
-    $(document).on("click", ".delete-slider-2", function () {
-        $(".photo-slider-2").hide();
-    });
-    $(document).on("click", ".delete-slider-3", function () {
-        $(".photo-slider-3").hide();
-    });
+    // $(document).on("click", ".delete-slider-1", function () {
+    //     $(".photo-slider-1").hide();
+    // });
+    // $(document).on("click", ".delete-slider-2", function () {
+    //     $(".photo-slider-2").hide();
+    // });
+    // $(document).on("click", ".delete-slider-3", function () {
+    //     $(".photo-slider-3").hide();
+    // });
 
     $(document).on("click", ".save-slider-image", function () {
         var imageSources = [];
@@ -1598,7 +1598,7 @@ $(document).ready(function () {
     });
 
     $(document).on("click", ".delete_silder", function () {
-        console.log($(this).parent().html());
+        console.log($(this).parent().parent().html());
     });
 });   
    
