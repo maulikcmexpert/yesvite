@@ -1277,7 +1277,7 @@
         document.getElementById('AbrilFatfaceButton').addEventListener('click', function() {
             console.log("fontname")
 
-            loadAndUse("AbrilFatface");
+            loadAndUse("AbrilFatface-Regular");
 
 
         });
