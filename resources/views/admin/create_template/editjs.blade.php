@@ -166,22 +166,20 @@
 
                             imgElement.onload = function() {
                                 console.log("Image loaded successfully.");
-                                const imgInstance = new fabric.Image(imgElement, function(shapeImage) {
-                                    shapeImage.set({
-                                        left: 0,
-                                        top: 0,
-                                        selectable: true,
-                                        hasControls: true,
-                                        hasBorders: true,
-                                        cornerColor: 'red',
-                                        cornerStrokeColor: 'blue',
-                                        borderColor: 'blue',
-                                        cornerSize: 10,
-                                        transparentCorners: false,
-                                        lockUniScaling: true,
-                                        scaleX: 600 / imgElement.width,
-                                        scaleY: 600 / imgElement.height
-                                    });
+                                const imgInstance = new fabric.Image(imgElement, {
+                                    left: 0,
+                                    top: 0,
+                                    selectable: true,
+                                    hasControls: true,
+                                    hasBorders: true,
+                                    cornerColor: 'red',
+                                    cornerStrokeColor: 'blue',
+                                    borderColor: 'blue',
+                                    cornerSize: 10,
+                                    transparentCorners: false,
+                                    lockUniScaling: true,
+                                    scaleX: 600 / imgElement.width,
+                                    scaleY: 600 / imgElement.height
                                 });
 
                                 canvasElement.add(imgInstance);
@@ -245,14 +243,6 @@
                                     originY: 'center'
                                 });
                             }
-
-                            // Set the clipPath to the image
-                            shapeImage.set({
-                                clipPath: clipPath
-                            }); // Apply the appropriate clipping path
-                            canvas.add(shapeImage); // Add the clipped image to the canvas
-                            canvas.renderAll(); // Ensure the canvas is updated
-
                         }
 
                         // Load static information (text and shapes)
