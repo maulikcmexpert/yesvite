@@ -143,147 +143,73 @@
                             })
                         }
                         // Load filed image (filedImagePath) as another image layer
-                        // if (data.filedImagePath) {
-                        //     fabric.Image.fromURL(data.filedImagePath, function(filedImg) {
-                        //         // Set your preferred image properties
-                        //         filedImg.set({
-                        //             left: 50,
-                        //             top: 50,
-                        //             scaleX: 0.5, // Scale down the image
-                        //             scaleY: 0.5,
-                        //             width: 200, // Set the calculated width
-                        //             height: 150,
-                        //             selectable: true, // Make filed image draggable
-                        //             hasControls: true // Allow resizing controls
-
-                        //         });
-
-
-
-                        //         // const imgElement = new Image();
-                        //         // imgElement.src = filedImg;
-
-                        //         // imageWrapper.style.display = 'block';
-
-                        //         // imgElement.onload = function() {
-                        //         //     console.log("Image loaded successfully.");
-                        //         //     const imgInstance = new fabric.Image(imgElement, {
-                        //         //         left: 0,
-                        //         //         top: 0,
-                        //         //         selectable: true,
-                        //         //         hasControls: true,
-                        //         //         hasBorders: true,
-                        //         //         cornerColor: 'red',
-                        //         //         cornerStrokeColor: 'blue',
-                        //         //         borderColor: 'blue',
-                        //         //         cornerSize: 10,
-                        //         //         transparentCorners: false,
-                        //         //         lockUniScaling: true,
-                        //         //         scaleX: 600 / imgElement.width,
-                        //         //         scaleY: 600 / imgElement.height
-                        //         //     });
-                        //         // }
-
-                        //         // canvasElement.add(imgInstance);
-                        //         // drawCanvas();
-                        //         // console.log('Image loaded and added to canvas.');
-                        //         // imageUploaded = true;
-
-                        //         // Define clipping paths based on the shape
-                        //         let clipPath;
-
-                        //         if (shape === 'circle') {
-                        //             clipPath = new fabric.Circle({
-                        //                 radius: 75, // Define radius of the circle
-                        //                 originX: 'center', // Set origin to center of the circle
-                        //                 originY: 'center' // Set origin to center of the circle
-                        //             });
-                        //         } else if (shape === 'rectangle') {
-                        //             clipPath = new fabric.Rect({
-                        //                 width: 150, // Set width of the rectangle
-                        //                 height: 100, // Set height of the rectangle
-                        //                 originX: 'center', // Set origin to center of the rectangle
-                        //                 originY: 'center' // Set origin to center of the rectangle
-                        //             });
-                        //         } else if (shape === 'star') {
-                        //             // Star shape path generation
-                        //             const starPoints = [];
-                        //             const spikes = 5;
-                        //             const outerRadius = 75; // Outer radius of the star
-                        //             const innerRadius = outerRadius / 2;
-
-                        //             for (let i = 0; i < spikes * 2; i++) {
-                        //                 const angle = (i * Math.PI) / spikes;
-                        //                 const radius = i % 2 === 0 ? outerRadius : innerRadius;
-                        //                 starPoints.push(
-                        //                     Math.cos(angle) * radius,
-                        //                     Math.sin(angle) * radius
-                        //                 );
-                        //             }
-                        //             clipPath = new fabric.Polygon(starPoints, {
-                        //                 left: 0,
-                        //                 top: 0,
-                        //                 originX: 'center',
-                        //                 originY: 'center'
-                        //             });
-                        //         } else if (shape === 'heart') {
-                        //             // Heart shape path
-                        //             const heartPath = [
-                        //                 'M', 0, 0,
-                        //                 'C', -50, -60, -50, 10, 0, 30,
-                        //                 'C', 50, 10, 50, -60, 0, 0
-                        //             ].join(' ');
-
-                        //             clipPath = new fabric.Path(heartPath, {
-                        //                 left: 0,
-                        //                 top: 0,
-                        //                 originX: 'center',
-                        //                 originY: 'center'
-                        //             });
-                        //         }
-
-                        //         // Set the clipPath to the image
-                        //         filedImg.set({
-                        //             clipPath: clipPath
-                        //         }); // Apply the appropriate clipping path
-                        //         canvas.add(filedImg); // Add the clipped image to the canvas
-                        //         canvas.renderAll(); // Ensure the canvas is updated
-                        //     });
-                        // }
-
                         if (data.filedImagePath) {
                             fabric.Image.fromURL(data.filedImagePath, function(filedImg) {
-                                // Set the image's initial properties
+                                // Set your preferred image properties
                                 filedImg.set({
                                     left: 50,
                                     top: 50,
+                                    scaleX: 0.5, // Scale down the image
+                                    scaleY: 0.5,
+                                    width: 200, // Set the calculated width
+                                    height: 150,
                                     selectable: true, // Make filed image draggable
                                     hasControls: true // Allow resizing controls
+
                                 });
+
+
+
+                                // const imgElement = new Image();
+                                // imgElement.src = filedImg;
+
+                                // imageWrapper.style.display = 'block';
+
+                                // imgElement.onload = function() {
+                                //     console.log("Image loaded successfully.");
+                                //     const imgInstance = new fabric.Image(imgElement, {
+                                //         left: 0,
+                                //         top: 0,
+                                //         selectable: true,
+                                //         hasControls: true,
+                                //         hasBorders: true,
+                                //         cornerColor: 'red',
+                                //         cornerStrokeColor: 'blue',
+                                //         borderColor: 'blue',
+                                //         cornerSize: 10,
+                                //         transparentCorners: false,
+                                //         lockUniScaling: true,
+                                //         scaleX: 600 / imgElement.width,
+                                //         scaleY: 600 / imgElement.height
+                                //     });
+                                // }
+
+                                // canvasElement.add(imgInstance);
+                                // drawCanvas();
+                                // console.log('Image loaded and added to canvas.');
+                                // imageUploaded = true;
 
                                 // Define clipping paths based on the shape
                                 let clipPath;
-                                const shapeWidth = 150; // Set desired width for the shape
-                                const shapeHeight = 150; // Set desired height for the shape
 
                                 if (shape === 'circle') {
                                     clipPath = new fabric.Circle({
-                                        radius: shapeWidth / 2, // Use half the width for radius
-                                        originX: 'center',
-                                        originY: 'center'
+                                        radius: 75, // Define radius of the circle
+                                        originX: 'center', // Set origin to center of the circle
+                                        originY: 'center' // Set origin to center of the circle
                                     });
                                 } else if (shape === 'rectangle') {
                                     clipPath = new fabric.Rect({
-                                        width: shapeWidth,
-                                        height: shapeHeight,
-                                        originX: 'center',
-                                        originY: 'center'
+                                        width: 150, // Set width of the rectangle
+                                        height: 100, // Set height of the rectangle
+                                        originX: 'center', // Set origin to center of the rectangle
+                                        originY: 'center' // Set origin to center of the rectangle
                                     });
                                 } else if (shape === 'star') {
                                     // Star shape path generation
                                     const starPoints = [];
                                     const spikes = 5;
-                                    const outerRadius = shapeWidth / 2; // Outer radius of the star
+                                    const outerRadius = 75; // Outer radius of the star
                                     const innerRadius = outerRadius / 2;
 
                                     for (let i = 0; i < spikes * 2; i++) {
@@ -316,30 +242,11 @@
                                     });
                                 }
 
-                                // Calculate the scaling factor
-                                const imgWidth = filedImg.width * filedImg.scaleX; // Get original width
-                                const imgHeight = filedImg.height * filedImg.scaleY; // Get original height
-
-                                const scaleX = shapeWidth / imgWidth; // Scale to fit width
-                                const scaleY = shapeHeight / imgHeight; // Scale to fit height
-                                const scale = Math.max(scaleX, scaleY); // Use the larger scale to fill the shape
-
-                                // Scale the image
-                                filedImg.scale(scale);
-
-                                // Center the image within the shape
-                                filedImg.set({
-                                    left: clipPath.left,
-                                    top: clipPath.top,
-                                });
-
                                 // Set the clipPath to the image
                                 filedImg.set({
                                     clipPath: clipPath
-                                });
-
-                                // Add the clipped image to the canvas
-                                canvas.add(filedImg);
+                                }); // Apply the appropriate clipping path
+                                canvas.add(filedImg); // Add the clipped image to the canvas
                                 canvas.renderAll(); // Ensure the canvas is updated
                             });
                         }
