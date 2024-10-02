@@ -166,7 +166,7 @@ Route::middleware('checkUserExist')->group(function () {
     Route::post('event/delete_slider_img', [ControllersEventController::class, 'deleteSliderImg']);
 
     Route::post('event/get_design_edit_page', [ControllersEventController::class, 'get_design_edit_page']);
-    Route::post('/shape_image', [ControllersEventController::class, 'shape_image']);
+    Route::post('event/shape_image', [ControllersEventController::class, 'shape_image']);
 
 });
 
