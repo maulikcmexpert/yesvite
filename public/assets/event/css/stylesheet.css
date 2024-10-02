@@ -15,6 +15,14 @@
 }
 
 @font-face {
+    font-family: 'AdleryPro-Regular';
+    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/AdleryPro-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
     font-family: 'AgencyFB';
     src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/AgencyFB-Bold.woff2') format('woff2');
     font-weight: normal;
@@ -22,13 +30,6 @@
     font-display: swap;
 }
 
-@font-face {
-    font-family: 'AdleryPro';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/AdleryPro-Regular.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
 
 @font-face {
     font-family: 'BotanicaScript-Regular';

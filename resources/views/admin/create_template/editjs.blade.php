@@ -1281,17 +1281,17 @@
 
 
         });
+        document.getElementById('AdleryProButton').addEventListener('click', function() {
+            console.log("fontname")
+
+            loadAndUse("AdleryPro-Regular");
+
+
+        });
         document.getElementById('AgencyFBButton').addEventListener('click', function() {
             console.log("fontname")
 
             loadAndUse("AgencyFB");
-
-
-        });
-        document.getElementById('AdleryProButton').addEventListener('click', function() {
-            console.log("fontname")
-
-            loadAndUse("AdleryPro");
 
 
         });

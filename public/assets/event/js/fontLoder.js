@@ -34,8 +34,8 @@ WebFontConfig = {
         families: [
             "JosefinSans-Regular",
             "Botanica Script",
-            "AbrilFatface",
-            "AdleryPro",
+            "AbrilFatface-Regular",
+            "AdleryPro-Regular",
             "AgencyFB",
             "AlexBrush",
             "Allura",
