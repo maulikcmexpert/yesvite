@@ -1616,12 +1616,17 @@ class EventController extends Controller
 public function deleteSliderImg(Request $request)
 {
     $delete_id = $request->delete_id;
-    
-    $get_slider_data=Session::get('desgin_slider');
+    $get_slider_data = Session::get('desgin_slider');
+    $filtered_slider_data = array_filter($get_slider_data, function ($slider) use ($delete_id) {
+        return $slider['deleteId'] !== $delete_id;
+    });
+    Session::put('desgin_slider', array_values($filtered_slider_data));
+    Session::save();
 
-    dd($get_slider_data);
-    
+    dd(Session::get('desgin_slider'));
+    return response()->json(['success' => true, 'message' => 'Slider image deleted successfully.']);
 }
+
 
 
     public function get_design_edit_page(Request $request){
