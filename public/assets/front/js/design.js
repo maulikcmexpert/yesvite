@@ -1518,7 +1518,7 @@ function bindData() {
         bottomRight: document.querySelector('.resize-handle.bottom-right')
     };
 
-    let isDragging = false;
+    let isDragging = true;
     let isResizing = false;
     let startWidth, startHeight, startX, startY, activeHandle;
     let offsetX, offsetY;
