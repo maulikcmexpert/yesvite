@@ -192,6 +192,64 @@
                                 console.error("Failed to load image.");
                             };
 
+                            let clipPath;
+
+                            if (shape === 'circle') {
+                                clipPath = new fabric.Circle({
+                                    radius: 75, // Define radius of the circle
+                                    originX: 'center', // Set origin to center of the circle
+                                    originY: 'center' // Set origin to center of the circle
+                                });
+                            } else if (shape === 'rectangle') {
+                                clipPath = new fabric.Rect({
+                                    width: 150, // Set width of the rectangle
+                                    height: 100, // Set height of the rectangle
+                                    originX: 'center', // Set origin to center of the rectangle
+                                    originY: 'center' // Set origin to center of the rectangle
+                                });
+                            } else if (shape === 'star') {
+                                // Star shape path generation
+                                const starPoints = [];
+                                const spikes = 5;
+                                const outerRadius = 75; // Outer radius of the star
+                                const innerRadius = outerRadius / 2;
+
+                                for (let i = 0; i < spikes * 2; i++) {
+                                    const angle = (i * Math.PI) / spikes;
+                                    const radius = i % 2 === 0 ? outerRadius : innerRadius;
+                                    starPoints.push(
+                                        Math.cos(angle) * radius,
+                                        Math.sin(angle) * radius
+                                    );
+                                }
+                                clipPath = new fabric.Polygon(starPoints, {
+                                    left: 0,
+                                    top: 0,
+                                    originX: 'center',
+                                    originY: 'center'
+                                });
+                            } else if (shape === 'heart') {
+                                // Heart shape path
+                                const heartPath = [
+                                    'M', 0, 0,
+                                    'C', -50, -60, -50, 10, 0, 30,
+                                    'C', 50, 10, 50, -60, 0, 0
+                                ].join(' ');
+
+                                clipPath = new fabric.Path(heartPath, {
+                                    left: 0,
+                                    top: 0,
+                                    originX: 'center',
+                                    originY: 'center'
+                                });
+                            }
+
+                            // Set the clipPath to the image
+                            filedImg.set({
+                                clipPath: clipPath
+                            }); // Apply the appropriate clipping path
+                            canvas.add(filedImg); // Add the clipped image to the canvas
+                            canvas.renderAll(); // Ensure the canvas is updated
 
                         }
 
