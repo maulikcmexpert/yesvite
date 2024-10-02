@@ -1651,10 +1651,12 @@ function bindData() {
             $.ajax({
                 url: base_url + "event/shape_image",
                 type: "POST",
-                data:{
-                    formData:formData,
-                    _token: $('meta[name="csrf-token"]').attr("content"),
-                }, 
+                data: formData, // Pass the FormData object directly
+                processData: false, // Prevent jQuery from processing the data
+                contentType: false, // Prevent jQuery from setting the content type
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr("content") // CSRF token header
+                },
                 success: function (data) {
                     console.log('Server response:', data);
 
