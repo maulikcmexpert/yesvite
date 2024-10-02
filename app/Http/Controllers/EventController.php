@@ -190,7 +190,7 @@ class EventController extends Controller
             }
             // dd($request->textData);
             foreach ($request->textData as $key => $textData) {
-                dd($textData['fontSize']);
+                dd($textData);
             }
             $static_data = [];
             $static_data['textData'] = $request->textData;
