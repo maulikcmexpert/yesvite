@@ -1276,10 +1276,7 @@
         });
         document.getElementById('AbrilFatfaceButton').addEventListener('click', function() {
             console.log("fontname")
-            alert();
             loadAndUse("AbrilFatface-Regular");
-
-
         });
         document.getElementById('AdleryProButton').addEventListener('click', function() {
             console.log("fontname")
