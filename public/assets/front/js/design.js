@@ -1599,7 +1599,23 @@ $(document).ready(function () {
     });
 
     $(document).on("click", ".delete_silder", function () {
-        console.log($(this).parent().find('.slider_img').data("delete"));
+        var delete_id=$(this).parent().find('.slider_img').data("delete");
+
+        $.ajax({
+            url: base_url + "event/delete_slider_img",
+            method: "POST",
+            data: {
+                delete_id: delete_id,
+                _token: $('meta[name="csrf-token"]').attr("content"),
+            },
+            success: function (response) {
+                var savedImages = response.images;
+                eventData.slider_images = savedImages;
+                $(this).parent().find('.slider_img').attr('src').text("")
+                console.log(eventData);
+            },
+            error: function (xhr, status, error) {},
+        });
     });
 });   
    
