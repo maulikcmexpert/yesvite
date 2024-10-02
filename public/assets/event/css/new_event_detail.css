@@ -1019,6 +1019,17 @@
     width: 100%;
 }
 
+.edit-images-button-inner{
+    position: relative;
+    z-index: 2;
+}
+
+.edit-images-button-inner [type="file"]{
+    display: block;
+    width: 100% !important;
+    height: 100% !important;
+    position: absolute;
+}
 
 
 
