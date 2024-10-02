@@ -1604,20 +1604,29 @@ $(document).ready(function () {
         if(src!=""){
             var $this = $(this);
             var check_slider_img=eventData.slider_images;
-            console.log(check_slider_img);
-            $.ajax({
-                url: base_url + "event/delete_slider_img",
-                method: "POST",
-                data: {
-                    delete_id: delete_id,
-                    _token: $('meta[name="csrf-token"]').attr("content"),
-                },
-                success: function (response) {
-                    $this.parent().find('.slider_img').attr('src', '');
-                    $(".photo-slider-"+delete_id).hide();
-                },
-                error: function (xhr, status, error) {},
-            });
+            var matchFound = check_slider_img.some(function (slider) {
+                return slider.deleteId === delete_id;
+            }); 
+            if(matchFound){
+                $.ajax({
+                    url: base_url + "event/delete_slider_img",
+                    method: "POST",
+                    data: {
+                        delete_id: delete_id,
+                        _token: $('meta[name="csrf-token"]').attr("content"),
+                    },
+                    success: function (response) {
+                        $this.parent().find('.slider_img').attr('src', '');
+                        $(".photo-slider-"+delete_id).hide();
+                    },
+                    error: function (xhr, status, error) {},
+                });
+            }else{
+                alert();
+                $(this).parent().find('.slider_img').attr('src', '');
+                $(".photo-slider-"+delete_id).hide();
+            }
+         
         }
     
     });
