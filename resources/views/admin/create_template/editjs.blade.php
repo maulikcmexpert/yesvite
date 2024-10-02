@@ -191,7 +191,7 @@
 
                                 if (shape === 'circle') {
                                     clipPath = new fabric.Circle({
-                                        radius: 75, // Define radius of the circle
+                                        radius: 50, // Define radius of the circle
                                         originX: 'center', // Set origin to center of the circle
                                         originY: 'center' // Set origin to center of the circle
                                     });
