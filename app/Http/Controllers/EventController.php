@@ -172,7 +172,7 @@ class EventController extends Controller
 
     public function store(Request $request)
     {
-
+        dd($request->textData);
         if(isset($request->textData) && json_encode($request->textData) != ''){
             $tempData = TextData::where('id',$request->temp_id)->first();
             if($tempData){
