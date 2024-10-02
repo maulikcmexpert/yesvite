@@ -243,8 +243,8 @@
                                 filedImg.set({
                                     clipPath: clipPath
                                 }); // Apply the appropriate clipping path
-                                filedImg.scaleToWidth(150); // Adjust to match your shape size
-                                filedImg.scaleToHeight(150);
+                                filedImg.scaleToWidth(500); // Adjust to match your shape size
+                                filedImg.scaleToHeight(500);
                                 canvas.add(filedImg); // Add the clipped image to the canvas
                                 canvas.renderAll(); // Ensure the canvas is updated
                             });
