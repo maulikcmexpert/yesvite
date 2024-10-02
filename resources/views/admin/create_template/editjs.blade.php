@@ -1847,6 +1847,13 @@
         document.getElementById('saveButton').addEventListener('click', function() {
             var id = $('#template_id').val();
 
+            const width = userImageElement.clientWidth;
+            const height = userImageElement.clientHeight;
+            const left = imageWrapper.offsetLeft;
+            const top = imageWrapper.offsetTop;
+            const centerX = left + width / 2;
+            const centerY = top + height / 2;
+
             // Check if the image was uploaded before saving the shape
             if (imageUploaded) {
                 // Send AJAX request to save the shape
@@ -1858,7 +1865,11 @@
                                 .getAttribute('content')
                         },
                         body: JSON.stringify({
-                            shape: shape
+                            shape: shape,
+                            centerX: centerX,
+                            centerY: centerY,
+                            width: width,
+                            height: height
                         })
                     })
                     .then(response => {
