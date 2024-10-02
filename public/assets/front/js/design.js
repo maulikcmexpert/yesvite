@@ -1572,10 +1572,13 @@ $(document).ready(function () {
         // });
 
         $(".slider_img").each(function () {
+            var src = $(this).attr("src");
+            if (src !== "") {
             imageSources.push({
                 src: $(this).attr("src"),
                 deleteId: $(this).data("delete")
             });
+        }
         });
         console.log(imageSources);
         $.ajax({
