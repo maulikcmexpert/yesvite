@@ -624,7 +624,9 @@ $(document).on("click", ".edit_design_tem", function (e) {
     letterSpacingRange.addEventListener("input", setLetterSpacing);
     letterSpacingInput.addEventListener("input", () => {
         letterSpacingRange.value = letterSpacingInput.value;
-        setLetterSpacing();
+        setTimeout(() => {
+            setLetterSpacing();
+        }, 500);
     });
 
     lineHeightRange.addEventListener("input", setLineHeight);
