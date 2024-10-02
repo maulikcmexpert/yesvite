@@ -155,19 +155,14 @@
                                     //     height: 150,
                                     //     selectable: true, // Make filed image draggable
                                     //     hasControls: true // Allow resizing controls
-                                    left: 0,
-                                    top: 0,
+                                    left: 50,
+                                    top: 50,
+                                    width: 50,
+                                    height: 50,
                                     selectable: true,
                                     hasControls: true,
-                                    hasBorders: true,
-                                    cornerColor: 'red',
-                                    cornerStrokeColor: 'blue',
-                                    borderColor: 'blue',
-                                    cornerSize: 10,
-                                    transparentCorners: false,
-                                    lockUniScaling: true,
-                                    scaleX: 600 / imgElement.width,
-                                    scaleY: 600 / imgElement.height
+                                    scaleX: 600,
+                                    scaleY: 600
                                 });
 
 
