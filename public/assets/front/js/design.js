@@ -1580,7 +1580,6 @@ $(document).ready(function () {
             });
             deleteCounter++;
         });
-        console.log(imageSources);
         $.ajax({
             url: base_url + "event/save_slider_img",
             method: "POST",
@@ -1598,7 +1597,9 @@ $(document).ready(function () {
         });
     });
 
-   
+    $(document).on("click", ".delete_silder", function () {
+        console.log($(this).parent().html());
+    });
 });   
    
     }
