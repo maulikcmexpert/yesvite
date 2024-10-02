@@ -1291,7 +1291,7 @@
         document.getElementById('AdleryProButton').addEventListener('click', function() {
             console.log("fontname")
 
-            loadAndUse("AdleryPro");
+            loadAndUse("AdleryPro-Regular");
 
 
         });
