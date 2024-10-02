@@ -172,7 +172,7 @@ class EventController extends Controller
 
     public function store(Request $request)
     {
-
+        dd($request->textData);
         if(isset($request->textData) && json_encode($request->textData) != ''){
             $tempData = TextData::where('id',$request->temp_id)->first();
             if($tempData){
@@ -189,8 +189,8 @@ class EventController extends Controller
                 // }
             }
             // dd($request->textData);
-            foreach ($request->textData as $key => $textData) {
-                dd($textData['fontSize']);
+            foreach ($request->textData as $key => $textJson) {
+                dd($textJson);
             }
             $static_data = [];
             $static_data['textData'] = $request->textData;
