@@ -1599,7 +1599,7 @@ $(document).ready(function () {
     });
 
     $(document).on("click", ".delete_silder", function () {
-        console.log($(this).parent().html());
+        console.log($(this).parent().find('.slider_img').data("delete"));
     });
 });   
    
