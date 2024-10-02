@@ -364,27 +364,25 @@
         fontSizeRange.addEventListener('input', setFontSize);
         fontSizeInput.addEventListener('input', () => {
             fontSizeRange.value = fontSizeInput.value;
-            // setTimeout(() => {
-            setFontSize();
-            // }, 500);
+            if (fontSizeInput.value != '') {
+                setFontSize();
+            }
         });
 
         letterSpacingRange.addEventListener('input', setLetterSpacing);
         letterSpacingInput.addEventListener('input', () => {
             letterSpacingRange.value = letterSpacingInput.value;
             if (letterSpacingInput.value != '') {
-                // setTimeout(() => {
                 setLetterSpacing();
-                // }, 500);
             }
         });
 
         lineHeightRange.addEventListener('input', setLineHeight);
         lineHeightInput.addEventListener('input', () => {
             lineHeightRange.value = lineHeightInput.value;
-            setTimeout(() => {
+            if (lineHeightInput.value != '') {
                 setLineHeight();
-            }, 500);
+            }
         });
 
         // Save button functionality
