@@ -353,7 +353,7 @@
                 </div>
                 <div class="font-selector form-check">
 
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="AlexBrush" id="AlexBrushButton">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="AlexBrush-Regular" id="AlexBrushButton">
                     <label class="form-check-label AlexBrush" for="AlexBrushButton">
                         AlexBrush
                     </label>
@@ -361,7 +361,7 @@
                 </div>
                 <div class="font-selector form-check">
 
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="Allura" id="AlluraButton">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="Allura-Regular" id="AlluraButton">
                     <label class="form-check-label Allura" for="AlluraButton">
                         Allura
                     </label>
@@ -382,7 +382,7 @@
                 </div> -->
                 <div class="font-selector form-check">
 
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="Archer" id="ArcherButton">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="ArcherBold" id="ArcherButton">
                     <label class="form-check-label Archer" for="ArcherButton">
                         Archer
                     </label>

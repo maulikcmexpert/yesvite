@@ -1397,6 +1397,13 @@
 
 
         });
+        document.getElementById('Bungee-RegularButton').addEventListener('click', function() {
+            console.log("fontname")
+
+            loadAndUse("Bungee-Regular");
+
+
+        });
         //     textElement.style.fontFamily = 'Allura'; // Change to Allura font
         // });
         function loadAndUse(font) {
