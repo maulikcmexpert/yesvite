@@ -617,7 +617,9 @@ $(document).on("click", ".edit_design_tem", function (e) {
     fontSizeRange.addEventListener("input", setFontSize);
     fontSizeInput.addEventListener("input", () => {
         fontSizeRange.value = fontSizeInput.value;
-        setFontSize();
+        setTimeout(() => {
+            setFontSize();
+        }, 500);
     });
 
     letterSpacingRange.addEventListener("input", setLetterSpacing);
@@ -631,7 +633,9 @@ $(document).on("click", ".edit_design_tem", function (e) {
     lineHeightRange.addEventListener("input", setLineHeight);
     lineHeightInput.addEventListener("input", () => {
         lineHeightRange.value = lineHeightInput.value;
-        setLineHeight();
+        setTimeout(() => {
+            setLineHeight();
+        }, 500);
     });
 
     // Save button functionality
