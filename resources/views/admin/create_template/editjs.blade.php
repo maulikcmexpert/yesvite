@@ -1845,7 +1845,7 @@
         });
 
         document.getElementById('saveButton').addEventListener('click', function() {
-            alert();
+            // alert();
             var id = $('#template_id').val();
             const width = userImageElement.clientWidth;
             const height = userImageElement.clientHeight;
