@@ -1604,9 +1604,13 @@ $(document).ready(function () {
         if(src!=""){
             var $this = $(this);
             var check_slider_img=eventData.slider_images;
-            var matchFound = check_slider_img.some(function (slider) {
-                return slider.deleteId === delete_id;
-            }); 
+            var matchFound = false; 
+            $.each(check_slider_img, function (index, slider) {
+                if (slider.deleteId == delete_id) {
+                    matchFound = true;
+                    return false; 
+                }
+            });
             if(matchFound){
                 $.ajax({
                     url: base_url + "event/delete_slider_img",
