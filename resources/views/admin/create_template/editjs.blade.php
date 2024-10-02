@@ -1411,7 +1411,7 @@
         // });
         function loadAndUse(font) {
             var myfont = new FontFaceObserver(font);
-            console.log(myfont);
+            console.log(font);
             myfont.load().then(function() {
                 // When font is loaded, use it.
                 var activeObject = canvas.getActiveObject();
