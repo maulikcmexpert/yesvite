@@ -250,7 +250,12 @@ function bindData() {
                 });
                 canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
             });
-            var rotateIcon = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0Ij48cGF0aCBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTEyIDZ2M2w0LTQtNC00djNjLTQuNDIgMC04IDMuNTgtOCA4IDAgMS41Ny40NiAzLjAzIDEuMjQgNC4yNkw2LjcgMTQuOGMtLjQ1LS44My0uNy0xLjc5LS43LTIuOCAwLTMuMzEgMi42OS02IDYtNnptNi43NiAxLjc0TDE3LjMgOS4yYy40NC44NC43IDEuNzkuNyAyLjggMCAzLjMxLTIuNjkgNi02IDZ2LTNsLTQgNCA0IDR2LTNjNC40MiAwIDgtMy41OCA4LTggMC0xLjU3LS40Ni0zLjAzLTEuMjQtNC4yNnoiLz48L3N2Zz4=";
+            var rotateIcon = `<svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="0.679688" y="0.228516" width="23.9674" height="23.9674" rx="11.9837" fill="white"/>
+            <path d="M11.2206 8.75768C11.655 8.62785 12.1343 8.54297 12.6636 8.54297C15.0553 8.54297 16.9927 10.4803 16.9927 12.8721C16.9927 15.2638 15.0553 17.2012 12.6636 17.2012C10.2718 17.2012 8.33447 15.2638 8.33447 12.8721C8.33447 11.9833 8.60411 11.1544 9.06348 10.4654" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M10.6013 8.87747L12.0444 7.21973" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M10.6013 8.87695L12.284 10.1053" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>`;
             var img = document.createElement('img');
             img.src = rotateIcon;
         
