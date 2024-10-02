@@ -144,11 +144,12 @@ class DesignController extends Controller
         $textData = TextData::where('id', $id)->first();
         $existingData = $textData->static_information;
 
-        $existingData['shapeImageData'] = [];
+        // $existingData['shapeImageData'] = [];
 
         if (!isset($existingData['shapeImageData'])) {
             $existingData['shapeImageData'] = [];
         }
+        dd($existingData['shapeImageData']);
 
         $existingData['shapeImageData'][] = [
             'shape' => $shape,
