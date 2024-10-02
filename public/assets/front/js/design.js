@@ -1603,7 +1603,8 @@ $(document).ready(function () {
         var src=$(this).parent().find('.slider_img').attr("src");
         if(src!=""){
             var $this = $(this);
-
+            var check_slider_img=eventData.slider_images;
+            console.log(check_slider_img);
             $.ajax({
                 url: base_url + "event/delete_slider_img",
                 method: "POST",
@@ -1612,8 +1613,6 @@ $(document).ready(function () {
                     _token: $('meta[name="csrf-token"]').attr("content"),
                 },
                 success: function (response) {
-                    var savedImages = response.images;
-                    eventData.slider_images = savedImages;
                     $this.parent().find('.slider_img').attr('src', '');
                     $(".photo-slider-"+delete_id).hide();
                 },
