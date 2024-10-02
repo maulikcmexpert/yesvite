@@ -1319,14 +1319,7 @@
         document.getElementById('ArcherButton').addEventListener('click', function() {
             console.log("fontname")
 
-            loadAndUse("Archer");
-
-
-        });
-        document.getElementById('Archer-BookButton').addEventListener('click', function() {
-            console.log("fontname")
-
-            loadAndUse("Archer-Book");
+            loadAndUse("ArcherBold");
 
 
         });
