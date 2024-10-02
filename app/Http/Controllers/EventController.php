@@ -1617,15 +1617,25 @@ public function deleteSliderImg(Request $request)
 {
     $delete_id = $request->delete_id;
     $get_slider_data = Session::get('desgin_slider');
+
     $filtered_slider_data = array_filter($get_slider_data, function ($slider) use ($delete_id) {
-        return $slider['deleteId'] !== $delete_id;
+        if ($slider['deleteId'] === $delete_id) {
+            $image = $slider['fileName'];
+            $imagePath = public_path('storage/event_images/') . $image;
+
+            if (file_exists($imagePath)) {
+                unlink($imagePath);
+            }
+            return false;
+        }
+        return true; 
     });
     Session::put('desgin_slider', array_values($filtered_slider_data));
     Session::save();
 
-    dd(Session::get('desgin_slider'));
     return response()->json(['success' => true, 'message' => 'Slider image deleted successfully.']);
 }
+
 
 
 
