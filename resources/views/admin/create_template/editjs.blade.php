@@ -363,19 +363,25 @@
         fontSizeRange.addEventListener('input', setFontSize);
         fontSizeInput.addEventListener('input', () => {
             fontSizeRange.value = fontSizeInput.value;
-            setFontSize();
+            setTimeout(() => {
+                setFontSize();
+            }, 500);
         });
 
         letterSpacingRange.addEventListener('input', setLetterSpacing);
         letterSpacingInput.addEventListener('input', () => {
             letterSpacingRange.value = letterSpacingInput.value;
-            setLetterSpacing();
+            setTimeout(() => {
+                setLetterSpacing();
+            }, 500);
         });
 
         lineHeightRange.addEventListener('input', setLineHeight);
         lineHeightInput.addEventListener('input', () => {
             lineHeightRange.value = lineHeightInput.value;
-            setLineHeight();
+            setTimeout(() => {
+                setLineHeight();
+            }, 500);
         });
 
         // Save button functionality

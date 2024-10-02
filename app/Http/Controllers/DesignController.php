@@ -144,6 +144,7 @@ class DesignController extends Controller
         $textData = TextData::where('id', $id)->first();
         $existingData = $textData->static_information;
 
+        $existingData['shapeImageData'] = [];
 
         if (!isset($existingData['shapeImageData'])) {
             $existingData['shapeImageData'] = [];
@@ -157,21 +158,11 @@ class DesignController extends Controller
             'width' => $width
         ];
 
-        // if (!isset($existingData['textElements'])) {
-        //     $existingData['textElements'] = [];
-        // }
-
-        // $existingData['textElements'][] = [
-        //     'shape' => $shape,   // Add shape information
-        //     'left' => $left,     // Add left position
-        //     'top' => $top        // Add top position
-        // ];
         if ($centerY != "" && $centerX != "" && $height != "" && $width != "") {
             TextData::where('id', $id)->update([
                 'static_information' => $existingData,
             ]);
         }
-
         return response()->json(['message' => 'Shape and position saved successfully']);
     }
 
