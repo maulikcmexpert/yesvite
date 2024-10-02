@@ -32,7 +32,7 @@
 WebFontConfig = {
     custom: {
         families: [
-            "JosefinSans",
+            "JosefinSans-Regular",
             "Botanica Script",
             "AbrilFatface",
             "AdleryPro",

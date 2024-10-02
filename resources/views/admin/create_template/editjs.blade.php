@@ -1270,7 +1270,7 @@
         // });
         document.getElementById('JosefinSansButton').addEventListener('click', function() {
             console.log("fontname");
-            loadAndUse("JosefinSans");
+            loadAndUse("JosefinSans-Regular");
 
 
         });
