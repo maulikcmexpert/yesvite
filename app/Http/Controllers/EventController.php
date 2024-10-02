@@ -85,13 +85,13 @@ class EventController extends Controller
                 unlink($imagePath);
             }
         }
-    if(isset($slider_image) && !empty($slider_image)){
-        foreach ($slider_image as $key => $value) {
+        if(isset($slider_image) && !empty($slider_image)){
+            foreach ($slider_image as $key => $value) {
                     if (file_exists(public_path('storage/event_images/') . $value['fileName'])) {
                         $imagePath = public_path('storage/event_images/') . $value['fileName'];
                         unlink($imagePath);
                     }
-                        }
+            }
 }
 
         Session::forget('desgin');
@@ -1617,7 +1617,7 @@ public function deleteSliderImg(Request $request)
 {
     $delete_id = $request->delete_id;
     $get_slider_data = Session::get('desgin_slider');
-
+    dd($get_slider_data);
     $filtered_slider_data = array_filter($get_slider_data, function ($slider) use ($delete_id) {
         if ($slider['deleteId'] === $delete_id) {
             $image = $slider['fileName'];
