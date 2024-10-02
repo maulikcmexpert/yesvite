@@ -132,18 +132,33 @@
                             const staticInfo = JSON.parse(data.static_information);
                             staticInfo?.shapeImageData?.forEach(element => {
                                 if (element.shape != undefined && element.centerX != undefined && element.centerY != undefined && element.height != undefined && element.width != undefined) {
-                                    console.log(staticInfo.shapeImageData);
-                                    shape = element.shape,
-                                        centerX = element.centerX,
-                                        centerY = element.centerY,
-                                        height = element.height,
-                                        width = element.width
+                                    console.log(element.shape);
+                                    shape = element.shape;
+                                    centerX = element.centerX;
+                                    centerY = element.centerY;
+                                    height = element.height;
+                                    width = element.width;
 
                                 }
                             })
                         }
+
                         // Load filed image (filedImagePath) as another image layer
                         if (data.filedImagePath) {
+                            const userImageElement = document.getElementById('user_image');
+                            const imageWrapper = document.getElementById('imageWrapper');
+                            const canvasElement = new fabric.Canvas('imageEditor', {
+                                width: 500, // Canvas width
+                                height: 500, // Canvas height
+                            });
+                            let isDragging = false;
+                            let isResizing = false;
+                            let startWidth, startHeight, startX, startY, activeHandle;
+                            let offsetX, offsetY;
+                            let shape = shape; // Default shape
+                            let shapeChangedDuringDrag = false; // Flag to track shape change
+                            let imageUploaded = false; // Flag to track if image has been uploaded
+
                             fabric.Image.fromURL(data.filedImagePath, function(filedImg) {
                                 // Set your preferred image properties
                                 filedImg.set({
