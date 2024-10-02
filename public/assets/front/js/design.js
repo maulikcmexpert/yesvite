@@ -1753,44 +1753,44 @@ function bindData() {
         }
     });
 
-    document.getElementById('saveButton').addEventListener('click', function() {
-        var id = $('#template_id').val();
+    // document.getElementById('saveButton').addEventListener('click', function() {
+    //     var id = $('#template_id').val();
 
-        // Check if the image was uploaded before saving the shape
-        if (imageUploaded) {
-            // Send AJAX request to save the shape
-            const left = imageWrapper.offsetLeft; // Get the new left position
-            const top = imageWrapper.offsetTop; // Get the new top position
-            fetch(`/save_shape/${id}`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
-                            .getAttribute('content')
-                    },
-                    body: JSON.stringify({
-                        shape: shape,
-                        left: left,
-                        top: top // Send the current shape value
-                    })
-                })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    console.log('Shape saved successfully:', data);
-                    // alert('Shape saved successfully!');
-                })
-                .catch(error => {
-                    console.error('There was a problem with saving the shape:', error);
-                });
-        } else {
-            // alert("Please upload an image before saving the shape.");
-        }
-    });
+    //     // Check if the image was uploaded before saving the shape
+    //     if (imageUploaded) {
+    //         // Send AJAX request to save the shape
+    //         const left = imageWrapper.offsetLeft; // Get the new left position
+    //         const top = imageWrapper.offsetTop; // Get the new top position
+    //         fetch(`/save_shape/${id}`, {
+    //                 method: 'POST',
+    //                 headers: {
+    //                     'Content-Type': 'application/json',
+    //                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
+    //                         .getAttribute('content')
+    //                 },
+    //                 body: JSON.stringify({
+    //                     shape: shape,
+    //                     left: left,
+    //                     top: top // Send the current shape value
+    //                 })
+    //             })
+    //             .then(response => {
+    //                 if (!response.ok) {
+    //                     throw new Error('Network response was not ok');
+    //                 }
+    //                 return response.json();
+    //             })
+    //             .then(data => {
+    //                 console.log('Shape saved successfully:', data);
+    //                 // alert('Shape saved successfully!');
+    //             })
+    //             .catch(error => {
+    //                 console.error('There was a problem with saving the shape:', error);
+    //             });
+    //     } else {
+    //         // alert("Please upload an image before saving the shape.");
+    //     }
+    // });
 
     Object.values(resizeHandles).forEach(handle => {
         handle.addEventListener('mousedown', function(event) {
