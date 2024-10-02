@@ -1651,10 +1651,10 @@ function bindData() {
             $.ajax({
                 url: base_url + "event/shape_image",
                 type: "POST",
-                headers: {
-                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-                },
-                data: formData,
+                data:{
+                    formData:formData,
+                    _token: $('meta[name="csrf-token"]').attr("content"),
+                }, 
                 success: function (data) {
                     console.log('Server response:', data);
 
@@ -1696,101 +1696,10 @@ function bindData() {
                     console.log("AJAX error: " + error);
                 },
             });
-        //     fetch(`/shape_image`, {
-        //             method: 'POST',
-        //             body: formData,
-        //             headers: {
-        //                 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
-        //                     .getAttribute('content')
-        //             }
-        //         })
-        //         .then(response => {
-        //             if (!response.ok) {
-        //                 throw new Error('Network response was not ok');
-        //             }
-        //             return response.json();
-        //         })
-        //         .then(data => {
-        //             console.log('Server response:', data);
-
-        //             const imgElement = new Image();
-        //             imgElement.src = data.imagePath;
-
-        //             userImageElement.src = data.imagePath;
-        //             imageWrapper.style.display = 'block';
-
-        //             imgElement.onload = function() {
-        //                 console.log("Image loaded successfully.");
-        //                 const imgInstance = new fabric.Image(imgElement, {
-        //                     left: 0,
-        //                     top: 0,
-        //                     selectable: true,
-        //                     hasControls: true,
-        //                     hasBorders: true,
-        //                     cornerColor: 'red',
-        //                     cornerStrokeColor: 'blue',
-        //                     borderColor: 'blue',
-        //                     cornerSize: 10,
-        //                     transparentCorners: false,
-        //                     lockUniScaling: true,
-        //                     scaleX: 600 / imgElement.width,
-        //                     scaleY: 600 / imgElement.height
-        //                 });
-
-        //                 canvasElement.add(imgInstance);
-        //                 drawCanvas();
-        //                 console.log('Image loaded and added to canvas.');
-        //                 imageUploaded = true; // Set flag to true after image is uploaded
-        //             };
-
-        //             imgElement.onerror = function() {
-        //                 console.error("Failed to load image.");
-        //             };
-        //         })
-        //         .catch(error => {
-        //             console.error('There was a problem with the fetch operation:', error);
-        //         });
         }
     });
 
-    // document.getElementById('saveButton').addEventListener('click', function() {
-    //     var id = $('#template_id').val();
-
-    //     // Check if the image was uploaded before saving the shape
-    //     if (imageUploaded) {
-    //         // Send AJAX request to save the shape
-    //         const left = imageWrapper.offsetLeft; // Get the new left position
-    //         const top = imageWrapper.offsetTop; // Get the new top position
-    //         fetch(`/save_shape/${id}`, {
-    //                 method: 'POST',
-    //                 headers: {
-    //                     'Content-Type': 'application/json',
-    //                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
-    //                         .getAttribute('content')
-    //                 },
-    //                 body: JSON.stringify({
-    //                     shape: shape,
-    //                     left: left,
-    //                     top: top // Send the current shape value
-    //                 })
-    //             })
-    //             .then(response => {
-    //                 if (!response.ok) {
-    //                     throw new Error('Network response was not ok');
-    //                 }
-    //                 return response.json();
-    //             })
-    //             .then(data => {
-    //                 console.log('Shape saved successfully:', data);
-    //                 // alert('Shape saved successfully!');
-    //             })
-    //             .catch(error => {
-    //                 console.error('There was a problem with saving the shape:', error);
-    //             });
-    //     } else {
-    //         // alert("Please upload an image before saving the shape.");
-    //     }
-    // });
+  
 
     Object.values(resizeHandles).forEach(handle => {
         handle.addEventListener('mousedown', function(event) {
