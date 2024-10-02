@@ -1250,7 +1250,7 @@
                 .then(response => response.json())
                 .then(data => {
                     console.log('Text data saved successfully', data);
-                    // window.location.href = "{{URL::to('/admin/create_template')}}";
+                    window.location.href = "{{URL::to('/admin/create_template')}}";
 
                 })
                 .catch((error) => {
@@ -1394,6 +1394,13 @@
             console.log("fontname")
 
             loadAndUse("ChristmasCookies");
+
+
+        });
+        document.getElementById('Bungee-RegularButton').addEventListener('click', function() {
+            console.log("fontname")
+
+            loadAndUse("Bungee-Regular");
 
 
         });
