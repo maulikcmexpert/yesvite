@@ -1648,7 +1648,7 @@ class EventController extends Controller
             $file->move(public_path('storage/canvas'), $imageName);
             $imagePath = asset('storage/canvas/' . $imageName);
 
-            return response()->json(['success' => true, 'shape_path' => $imagePath,'shape_image' => $imageName,'shape_name'=>$shape]);
+            return response()->json(['success' => true, 'imagePath' => $imagePath,'shape_image' => $imageName,'shape_name'=>$shape]);
 
     }
 }
