@@ -1606,7 +1606,6 @@ class EventController extends Controller
             ];
         }
     }
-    dd($savedFiles);
     if (empty($savedFiles)) {
         return response()->json(['status' => 'No valid images to save'], 400);
     }
