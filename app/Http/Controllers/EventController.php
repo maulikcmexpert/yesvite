@@ -190,7 +190,7 @@ class EventController extends Controller
             }
             // dd($request->textData);
             $designJson = []; 
-            foreach ($request->textData['textData'] as $key => $textJson) {
+            foreach ($request->textData['textElements'] as $key => $textJson) {
                 dd($textJson);
             }
             $static_data = [];
