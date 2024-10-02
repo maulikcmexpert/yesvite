@@ -1612,7 +1612,7 @@ $(document).ready(function () {
                 success: function (response) {
                     var savedImages = response.images;
                     eventData.slider_images = savedImages;
-                    console.log($(this).parent().find('.slider_img'));
+                    console.log($(this).parent().html());
                     // $(this).parent().find('.slider_img').attr('src', '');
                     $(".photo-slider-"+delete_id).hide();
                     console.log(eventData);
