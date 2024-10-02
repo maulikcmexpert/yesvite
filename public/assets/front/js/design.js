@@ -1518,7 +1518,7 @@ function bindData() {
         bottomRight: document.querySelector('.resize-handle.bottom-right')
     };
 
-    let isDragging = true;
+    let isDragging = false;
     let isResizing = false;
     let startWidth, startHeight, startX, startY, activeHandle;
     let offsetX, offsetY;
@@ -1562,7 +1562,7 @@ function bindData() {
     }
 
     function handleMouseDown(event) {
-        const canvas = document.querySelector('.new');
+        canvas = document.querySelector('.new');
         const canvasRect = canvas.getBoundingClientRect();
 
         if (event.target.classList.contains('resize-handle')) {
@@ -1578,7 +1578,7 @@ function bindData() {
 
     function handleMouseMove(event) {
         if (isDragging) {
-            const canvas = document.querySelector('.new');
+            canvas = document.querySelector('.new');
             const canvasRect = canvas.getBoundingClientRect();
             let newX = event.clientX - offsetX;
             let newY = event.clientY - offsetY;
