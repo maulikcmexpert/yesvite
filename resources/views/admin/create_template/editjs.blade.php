@@ -372,9 +372,11 @@
         letterSpacingRange.addEventListener('input', setLetterSpacing);
         letterSpacingInput.addEventListener('input', () => {
             letterSpacingRange.value = letterSpacingInput.value;
-            setTimeout(() => {
-                setLetterSpacing();
-            }, 500);
+            if (letterSpacingInput.value != '') {
+                setTimeout(() => {
+                    setLetterSpacing();
+                }, 500);
+            }
         });
 
         lineHeightRange.addEventListener('input', setLineHeight);
