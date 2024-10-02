@@ -133,80 +133,22 @@ class DesignController extends Controller
     }
 
 
-    // public function save_shape(Request $request)
-    // {
-    //     $id = $request->id;
-    //     $shape = $request->shape;
-    //     $centerX = $request->centerX;
-    //     $centerY = $request->centerY;
-    //     $height = $request->height;
-    //     $width = $request->width;
-    //     $textData = TextData::where('id', $id)->first();
-    //     $existingData = $textData->static_information;
-
-
-    //     if (!isset($existingData['shapeImageData'])) {
-    //         $existingData['shapeImageData'] = [];
-    //     }
-
-    //     $existingData['shapeImageData'][] = [
-    //         'shape' => $shape,
-    //         'centerX' => $centerX,
-    //         'centerY' => $centerY,
-    //         'height' => $height,
-    //         'width' => $width
-    //     ];
-
-    //     // if (!isset($existingData['textElements'])) {
-    //     //     $existingData['textElements'] = [];
-    //     // }
-
-    //     // $existingData['textElements'][] = [
-    //     //     'shape' => $shape,   // Add shape information
-    //     //     'left' => $left,     // Add left position
-    //     //     'top' => $top        // Add top position
-    //     // ];
-    //     TextData::where('id', $id)->update([
-    //         'static_information' => $existingData,
-    //     ]);
-    //     return response()->json(['message' => 'Shape and position saved successfully']);
-    // }
-
     public function save_shape(Request $request)
     {
         $id = $request->id;
         $shape = $request->shape;
-        $centerX = $request->centerX; // Capture the centerX position
-        $centerY = $request->centerY; // Capture the centerY position
+        $centerX = $request->centerX;
+        $centerY = $request->centerY;
         $height = $request->height;
         $width = $request->width;
-
-        // Fetch the current 'static_information' from the database
         $textData = TextData::where('id', $id)->first();
+        $existingData = $textData->static_information;
 
-        // Decode the existing 'static_information' JSON
-        $existingData = json_decode($textData->static_information, true);
 
-        // If 'textElements' doesn't exist, initialize it as an empty array
-        if (!isset($existingData['textElements'])) {
-            $existingData['textElements'] = [];
-        }
-
-        // Append the new shape data along with position to the 'textElements' array
-        $existingData['textElements'][] = [
-            'shape' => $shape,      // Add shape information
-            'centerX' => $centerX,  // Add centerX position
-            'centerY' => $centerY,  // Add centerY position
-            'height' => $height,    // Add height
-            'width' => $width       // Add width
-        ];
-
-        // If 'shapeImageData' doesn't exist, initialize it
         if (!isset($existingData['shapeImageData'])) {
             $existingData['shapeImageData'] = [];
         }
 
-        // Append the new shapeImageData (for shapes like stars) to 'shapeImageData' array
         $existingData['shapeImageData'][] = [
             'shape' => $shape,
             'centerX' => $centerX,
@@ -215,14 +157,72 @@ class DesignController extends Controller
             'width' => $width
         ];
 
-        // Save the updated array back to the database
-        TextData::where('id', $id)->update([
-            'static_information' => json_encode($existingData),
-        ]);
+        // if (!isset($existingData['textElements'])) {
+        //     $existingData['textElements'] = [];
+        // }
 
-        // Return JSON response
+        // $existingData['textElements'][] = [
+        //     'shape' => $shape,   // Add shape information
+        //     'left' => $left,     // Add left position
+        //     'top' => $top        // Add top position
+        // ];
+        TextData::where('id', $id)->update([
+            'static_information' => $existingData,
+        ]);
         return response()->json(['message' => 'Shape and position saved successfully']);
     }
+
+    // public function save_shape(Request $request)
+    // {
+    //     $id = $request->id;
+    //     $shape = $request->shape;
+    //     $centerX = $request->centerX; // Capture the centerX position
+    //     $centerY = $request->centerY; // Capture the centerY position
+    //     $height = $request->height;
+    //     $width = $request->width;
+
+    //     // Fetch the current 'static_information' from the database
+    //     $textData = TextData::where('id', $id)->first();
+
+    //     // Decode the existing 'static_information' JSON
+    //     $existingData = json_decode($textData->static_information, true);
+
+    //     // If 'textElements' doesn't exist, initialize it as an empty array
+    //     if (!isset($existingData['textElements'])) {
+    //         $existingData['textElements'] = [];
+    //     }
+
+    //     // Append the new shape data along with position to the 'textElements' array
+    //     $existingData['textElements'][] = [
+    //         'shape' => $shape,      // Add shape information
+    //         'centerX' => $centerX,  // Add centerX position
+    //         'centerY' => $centerY,  // Add centerY position
+    //         'height' => $height,    // Add height
+    //         'width' => $width       // Add width
+    //     ];
+
+    //     // If 'shapeImageData' doesn't exist, initialize it
+    //     if (!isset($existingData['shapeImageData'])) {
+    //         $existingData['shapeImageData'] = [];
+    //     }
+
+    //     // Append the new shapeImageData (for shapes like stars) to 'shapeImageData' array
+    //     $existingData['shapeImageData'][] = [
+    //         'shape' => $shape,
+    //         'centerX' => $centerX,
+    //         'centerY' => $centerY,
+    //         'height' => $height,
+    //         'width' => $width
+    //     ];
+
+    //     // Save the updated array back to the database
+    //     TextData::where('id', $id)->update([
+    //         'static_information' => json_encode($existingData),
+    //     ]);
+
+    //     // Return JSON response
+    //     return response()->json(['message' => 'Shape and position saved successfully']);
+    // }
 
 
     public function saveTextData(Request $request)
