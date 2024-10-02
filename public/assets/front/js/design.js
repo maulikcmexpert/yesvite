@@ -1626,7 +1626,6 @@ $(document).ready(function () {
                     error: function (xhr, status, error) {},
                 });
             }else{
-                alert();
                 $(this).parent().find('.slider_img').attr('src', '');
                 $(".photo-slider-"+delete_id).hide();
             }

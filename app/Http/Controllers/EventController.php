@@ -85,15 +85,15 @@ class EventController extends Controller
                 unlink($imagePath);
             }
         }
-        // if(isset($slider_image) && !empty($slider_image)){
-        //     foreach ($slider_image as $key => $value) {
-        //         if (file_exists(public_path('storage/event_design_template/') . $value)) {
-        //             $imagePath = public_path('storage/event_design_template/') . $value;
-        //             unlink($imagePath);
-        //         }
-        //     }
+    if(isset($slider_image) && !empty($slider_image)){
+        foreach ($slider_image as $key => $value) {
+                    if (file_exists(public_path('storage/event_images/') . $value['fileName'])) {
+                        $imagePath = public_path('storage/event_images/') . $value['fileName'];
+                        unlink($imagePath);
+                    }
+                        }
+}
 
-        // }
         Session::forget('desgin');
         Session::forget('desgin_slider');
         Session::save();
@@ -1622,7 +1622,6 @@ public function deleteSliderImg(Request $request)
         if ($slider['deleteId'] === $delete_id) {
             $image = $slider['fileName'];
             $imagePath = public_path('storage/event_images/') . $image;
-
             if (file_exists($imagePath)) {
                 unlink($imagePath);
             }
@@ -1632,7 +1631,6 @@ public function deleteSliderImg(Request $request)
     });
     Session::put('desgin_slider', array_values($filtered_slider_data));
     Session::save();
-
     return response()->json(['success' => true, 'message' => 'Slider image deleted successfully.']);
 }
 
