@@ -14,7 +14,7 @@ $(document).on("click", ".design-card", function () {
     $(".edit_design_tem").attr("data-image", imageUrl);
     if(eventData.textData != null && eventData.temp_id != null && eventData.temp_id == id){
         dbJson = {
-            textElements: eventData.textData
+            textData: eventData.textData
         };
         console.log(dbJson);
         temp_id = eventData.temp_id; 
