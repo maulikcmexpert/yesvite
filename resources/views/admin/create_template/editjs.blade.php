@@ -147,22 +147,14 @@
                             fabric.Image.fromURL(data.filedImagePath, function(filedImg) {
                                 // Set your preferred image properties
                                 filedImg.set({
-                                    //     left: 50,
-                                    //     top: 50,
-                                    //     scaleX: 0.5, // Scale down the image
-                                    //     scaleY: 0.5,
-                                    //     width: 200, // Set the calculated width
-                                    //     height: 150,
-                                    //     selectable: true, // Make filed image draggable
-                                    //     hasControls: true // Allow resizing controls
                                     left: 50,
                                     top: 50,
-                                    width: 50,
-                                    height: 50,
-                                    selectable: true,
-                                    hasControls: true,
-                                    scaleX: 10,
-                                    scaleY: 10
+                                    scaleX: 0.5, // Scale down the image
+                                    scaleY: 0.5,
+                                    width: 200, // Set the calculated width
+                                    height: 150,
+                                    selectable: true, // Make filed image draggable
+                                    hasControls: true // Allow resizing controls
                                 });
 
 
