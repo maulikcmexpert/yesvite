@@ -1846,17 +1846,13 @@
 
         document.getElementById('saveButton').addEventListener('click', function() {
             var id = $('#template_id').val();
-
             const width = userImageElement.clientWidth;
             const height = userImageElement.clientHeight;
             const left = imageWrapper.offsetLeft;
             const top = imageWrapper.offsetTop;
             const centerX = left + width / 2;
             const centerY = top + height / 2;
-
-            // Check if the image was uploaded before saving the shape
             if (imageUploaded) {
-                // Send AJAX request to save the shape
                 fetch(`/save_shape/${id}`, {
                         method: 'POST',
                         headers: {
@@ -1880,7 +1876,6 @@
                     })
                     .then(data => {
                         console.log('Shape saved successfully:', data);
-                        // alert('Shape saved successfully!');
                     })
                     .catch(error => {
                         console.error('There was a problem with saving the shape:', error);
@@ -1889,7 +1884,6 @@
                 // alert("Please upload an image before saving the shape.");
             }
             saveTextDataToDatabase();
-
         });
 
         Object.values(resizeHandles).forEach(handle => {
