@@ -149,10 +149,12 @@
                                 filedImg.set({
                                     left: 50,
                                     top: 50,
-                                    selectable: true, // Make image draggable
-                                    hasControls: true, // Allow resizing controls
-                                    originX: 'center',
-                                    originY: 'center', // Allow resizing controls
+                                    scaleX: 0.5, // Scale down the image
+                                    scaleY: 0.5,
+                                    width: 200, // Set the calculated width
+                                    height: 150,
+                                    selectable: true, // Make filed image draggable
+                                    hasControls: true // Allow resizing controls
                                 });
 
 
@@ -191,7 +193,7 @@
 
                                 if (shape === 'circle') {
                                     clipPath = new fabric.Circle({
-                                        radius: 50, // Define radius of the circle
+                                        radius: 75, // Define radius of the circle
                                         originX: 'center', // Set origin to center of the circle
                                         originY: 'center' // Set origin to center of the circle
                                     });
@@ -243,8 +245,6 @@
                                 filedImg.set({
                                     clipPath: clipPath
                                 }); // Apply the appropriate clipping path
-                                filedImg.scaleToWidth(500); // Adjust to match your shape size
-                                filedImg.scaleToHeight(500);
                                 canvas.add(filedImg); // Add the clipped image to the canvas
                                 canvas.renderAll(); // Ensure the canvas is updated
                             });
