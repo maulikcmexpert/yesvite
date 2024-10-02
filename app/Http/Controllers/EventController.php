@@ -173,9 +173,6 @@ class EventController extends Controller
     public function store(Request $request)
     {
         // dd($request->textData);
-        
-
-
         // $potluck = session('category');
         // dd(session()->get('gift_registry_data'));
         // dd($request);
