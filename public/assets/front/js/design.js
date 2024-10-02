@@ -1602,6 +1602,8 @@ $(document).ready(function () {
         var delete_id=$(this).parent().find('.slider_img').data("delete");
         var src=$(this).parent().find('.slider_img').attr("src");
         if(src!=""){
+            var $this = $(this);
+
             $.ajax({
                 url: base_url + "event/delete_slider_img",
                 method: "POST",
@@ -1612,7 +1614,7 @@ $(document).ready(function () {
                 success: function (response) {
                     var savedImages = response.images;
                     eventData.slider_images = savedImages;
-                    console.log($(this).parent().html());
+                    console.log($this.parent().html());
                     // $(this).parent().find('.slider_img').attr('src', '');
                     $(".photo-slider-"+delete_id).hide();
                     console.log(eventData);
