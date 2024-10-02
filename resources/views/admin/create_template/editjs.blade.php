@@ -155,6 +155,7 @@
                         //             height: 150,
                         //             selectable: true, // Make filed image draggable
                         //             hasControls: true // Allow resizing controls
+
                         //         });
 
 
@@ -249,15 +250,14 @@
                         //         canvas.renderAll(); // Ensure the canvas is updated
                         //     });
                         // }
-
                         if (data.filedImagePath) {
                             fabric.Image.fromURL(data.filedImagePath, function(filedImg) {
-                                // Set the image's initial properties
+                                // Set initial image properties
                                 filedImg.set({
                                     left: 50,
                                     top: 50,
-                                    selectable: true, // Make filed image draggable
-                                    hasControls: true // Allow resizing controls
+                                    selectable: true, // Make image draggable
+                                    hasControls: true // Allow resizing
                                 });
 
                                 // Define clipping paths based on the shape
@@ -269,22 +269,17 @@
                                         originX: 'center',
                                         originY: 'center'
                                     });
-                                    filedImg.scaleToWidth(150); // Scale to fit inside the circle
-                                    filedImg.scaleToHeight(150); // Scale to fit inside the circle
                                 } else if (shape === 'rectangle') {
                                     clipPath = new fabric.Rect({
-                                        width: 150,
-                                        height: 100,
+                                        width: 150, // Set width of the rectangle
+                                        height: 100, // Set height of the rectangle
                                         originX: 'center',
                                         originY: 'center'
                                     });
-                                    filedImg.scaleToWidth(150); // Scale to fit inside the rectangle
-                                    filedImg.scaleToHeight(100); // Scale to fit inside the rectangle
                                 } else if (shape === 'star') {
-                                    // Star shape path generation
                                     const starPoints = [];
                                     const spikes = 5;
-                                    const outerRadius = 75; // Outer radius of the star
+                                    const outerRadius = 75;
                                     const innerRadius = outerRadius / 2;
 
                                     for (let i = 0; i < spikes * 2; i++) {
@@ -301,10 +296,7 @@
                                         originX: 'center',
                                         originY: 'center'
                                     });
-                                    filedImg.scaleToWidth(150); // Scale to fit inside the star
-                                    filedImg.scaleToHeight(150); // Scale to fit inside the star
                                 } else if (shape === 'heart') {
-                                    // Heart shape path
                                     const heartPath = [
                                         'M', 0, 0,
                                         'C', -50, -60, -50, 10, 0, 30,
@@ -317,8 +309,6 @@
                                         originX: 'center',
                                         originY: 'center'
                                     });
-                                    filedImg.scaleToWidth(150); // Scale to fit inside the heart
-                                    filedImg.scaleToHeight(150); // Scale to fit inside the heart
                                 }
 
                                 // Set the clipPath to the image
@@ -326,11 +316,21 @@
                                     clipPath: clipPath
                                 });
 
-                                // Center the image within the shape
-                                filedImg.set({
-                                    left: clipPath.left,
-                                    top: clipPath.top,
-                                });
+                                // Apply scaling based on mode (fill or contain)
+                                if (mode === 'fill') {
+                                    // Scale to cover the shape (may crop)
+                                    filedImg.scaleToWidth(clipPath.width || clipPath.radius * 2);
+                                    filedImg.scaleToHeight(clipPath.height || clipPath.radius * 2);
+                                } else if (mode === 'contain') {
+                                    // Scale to fit inside the shape without cropping
+                                    const scaleX = (clipPath.width || clipPath.radius * 2) / filedImg.width;
+                                    const scaleY = (clipPath.height || clipPath.radius * 2) / filedImg.height;
+                                    const scale = Math.min(scaleX, scaleY);
+                                    filedImg.set({
+                                        scaleX: scale,
+                                        scaleY: scale
+                                    });
+                                }
 
                                 // Add the clipped image to the canvas
                                 canvas.add(filedImg);
