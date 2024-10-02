@@ -188,11 +188,15 @@ class EventController extends Controller
                 //     $event_creation->design_image = $tempData->image;
                 // }
             }
-            // dd($request->textData);
             $designJson = []; 
             foreach ($request->textData['textElements'] as $key => $textJson) {
-                dd($textJson);
+                if($textJson['fontSize']!=''){
+                    $request->textData['textElements'][$key]['fontSize'] = (int)$textJson['fontSize'];
+                    $request->textData['textElements'][$key]['centerX'] = (double)$textJson['centerX'];
+                    $request->textData['textElements'][$key]['centerY'] = (double)$textJson['centerY'];
+                }
             }
+            dd($request->textData);
             $static_data = [];
             $static_data['textData'] = $request->textData;
             $static_data['event_design_sub_category_id'] = (int)$request->temp_id;
