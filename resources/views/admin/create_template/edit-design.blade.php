@@ -329,7 +329,7 @@
                 </div> -->
                 <div class="font-selector form-check">
 
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="AbrilFatface" id="AbrilFatfaceButton">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="AbrilFatface-Regular" id="AbrilFatfaceButton">
                     <label class="form-check-label AbrilFatface" for="AbrilFatfaceButton">
                         AbrilFatface
                     </label>
@@ -337,7 +337,7 @@
                 </div>
                 <div class="font-selector form-check">
 
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="AdleryPro" id="AdleryProButton">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="AdleryPro-Regular" id="AdleryProButton">
                     <label class="form-check-label AdleryPro" for="AdleryProButton">
                         AdleryPro
                     </label>
@@ -345,7 +345,7 @@
                 </div>
                 <div class="font-selector form-check">
 
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="AgencyFB" id="AgencyFBButton">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="AgencyFB-Bold" id="AgencyFBButton">
                     <label class="form-check-label AgencyFB" for="AgencyFBButton">
                         AgencyFB
                     </label>
