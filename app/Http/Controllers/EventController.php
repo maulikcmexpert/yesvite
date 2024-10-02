@@ -1557,31 +1557,63 @@ class EventController extends Controller
         return response()->json(['view' => view('front.event.thankyou_template.add_thankyou_template', compact('thankyou_card'))->render()]);
     }
 
+    // public function saveSliderImg(Request $request)
+    // {
+    //     // dd($request->imageSources);
+    //     $savedFiles = [];
+    //     $i = 0;
+    //     foreach ($request->imageSources as $imageSource) {
+    //         if (!empty($imageSource)) {
+    //             list($type, $data) = explode(';', $imageSource);
+    //             list(, $data) = explode(',', $data);
+    //             $imageData = base64_decode($data);
+    //             $fileName = time() .$i. '-' . uniqid() . '.jpg';
+    //             $i++;
+    //             $path = public_path('storage/event_images/') . $fileName;;
+    //             file_put_contents($path, $imageData);
+    //             $savedFiles[] = $fileName;
+                
+    //         }
+    //     }
+    //     if (empty($savedFiles)) {
+    //         return response()->json(['status' => 'No valid images to save'], 400);
+    //     }
+    //     session(['desgin_slider' => $savedFiles]);
+    //     return response()->json(['success' => false, 'images' => $savedFiles]);
+
+    // }
+
+
     public function saveSliderImg(Request $request)
     {
-        // dd($request->imageSources);
-        $savedFiles = [];
-        $i = 0;
-        foreach ($request->imageSources as $imageSource) {
-            if (!empty($imageSource)) {
-                list($type, $data) = explode(';', $imageSource);
-                list(, $data) = explode(',', $data);
-                $imageData = base64_decode($data);
-                $fileName = time() .$i. '-' . uniqid() . '.jpg';
-                $i++;
-                $path = public_path('storage/event_images/') . $fileName;;
-                file_put_contents($path, $imageData);
-                $savedFiles[] = $fileName;
-                
-            }
-        }
-        if (empty($savedFiles)) {
-            return response()->json(['status' => 'No valid images to save'], 400);
-        }
-        session(['desgin_slider' => $savedFiles]);
-        return response()->json(['success' => false, 'images' => $savedFiles]);
+    $imageSources = $request->imageSources;
+    $savedFiles = [];
+    $i = 0;
+    foreach ($imageSources as $imageSource) {
+        if (!empty($imageSource['src'])) {
+            list($type, $data) = explode(';', $imageSource['src']);
+            list(, $data) = explode(',', $data);
+            $imageData = base64_decode($data);
+            $fileName = time() . $i . '-' . uniqid() . '.jpg';
+            $i++;
 
+            $path = public_path('storage/event_images/') . $fileName;
+
+            file_put_contents($path, $imageData);
+            $savedFiles[] = [
+                'fileName' => $fileName,
+                'deleteId' => $imageSource['deleteId']
+            ];
+        }
     }
+
+    if (empty($savedFiles)) {
+        return response()->json(['status' => 'No valid images to save'], 400);
+    }
+    session(['desgin_slider' => $savedFiles]);
+    return response()->json(['success' => true, 'images' => $savedFiles]);
+}
+
 
     public function get_design_edit_page(Request $request){
         return view('front.event.design.edit_design')->render();

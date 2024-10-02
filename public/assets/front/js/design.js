@@ -1567,10 +1567,18 @@ $(document).ready(function () {
 
     $(document).on("click", ".save-slider-image", function () {
         var imageSources = [];
-        $(".slider_img").each(function () {
-            imageSources.push($(this).attr("src"));
+        var deleteCounter = 1; 
+        // $(".slider_img").each(function () {
+        //     imageSources.push($(this).attr("src"));
+        // });
+
+        $(this).attr("data-delete", deleteCounter); 
+        imageSources.push({
+            src: $(this).attr("src"),
+            deleteId: deleteCounter
         });
-        // console.log(imageSources);
+        deleteCounter++;
+
         $.ajax({
             url: base_url + "event/save_slider_img",
             method: "POST",
@@ -1587,6 +1595,8 @@ $(document).ready(function () {
             error: function (xhr, status, error) {},
         });
     });
+
+   
 });   
    
     }
