@@ -101,18 +101,18 @@ class DesignController extends Controller
         $imageName = 'user_image_' . time() . '.' . $file->getClientOriginalExtension(); // Assuming PNG format
         $file->move(public_path('storage/canvas'), $imageName);
         $imagePath = asset('storage/canvas/' . $imageName);
-        $textElements = [
-            [
-                'shape' => $shape // Add shape information
-            ],
-        ];
+        // $textElements = [
+        //     [
+        //         'shape' => $shape // Add shape information
+        //     ],
+        // ];
 
 
         // Save the image name directly in the `filed_image` column
 
 
-        $textData = TextData::where('id', $id)->first();
-        $existingData = $textData->static_information;
+        // $textData = TextData::where('id', $id)->first();
+        // $existingData = $textData->static_information;
 
         // if (!isset($existingData['textElements'])) {
         //     $existingData['textElements'] = [];
@@ -123,7 +123,7 @@ class DesignController extends Controller
         // ];
         TextData::where('id', $id)->update([
             'shape_image' => $imageName,
-            'static_information' => $existingData,
+            // 'static_information' => $existingData,
         ]);
 
 
@@ -135,7 +135,6 @@ class DesignController extends Controller
 
     public function save_shape(Request $request)
     {
-        dd($request);
         $id = $request->id;
         $shape = $request->shape;
         $centerX = $request->centerX;
