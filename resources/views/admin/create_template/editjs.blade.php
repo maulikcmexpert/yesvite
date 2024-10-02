@@ -146,16 +146,20 @@
                         if (data.filedImagePath) {
                             fabric.Image.fromURL(data.filedImagePath, function(filedImg) {
                                 // Set your preferred image properties
-                                // filedImg.set({
-                                //     left: 50,
-                                //     top: 50,
-                                //     scaleX: 0.5, // Scale down the image
-                                //     scaleY: 0.5,
-                                //     width: 200, // Set the calculated width
-                                //     height: 150,
-                                //     selectable: true, // Make filed image draggable
-                                //     hasControls: true // Allow resizing controls
-                                // });
+                                filedImg.set({
+                                    left: 50,
+                                    top: 50,
+                                    selectable: true, // Make the image draggable
+                                    hasControls: true, // Allow resizing controls
+                                    originX: 'center',
+                                    originY: 'center',
+                                    clipTo: function(ctx) {
+                                        ctx.arc(0, 0, 100, 0, Math.PI * 2, true); // Example for a circular clip, adjust radius as needed
+                                    }
+                                });
+
+                                filedImg.scaleToWidth(200); // Adjust to desired width
+                                filedImg.scaleToHeight(150);
 
                                 // Define clipping paths based on the shape
                                 let clipPath;
