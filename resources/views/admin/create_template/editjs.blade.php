@@ -336,6 +336,7 @@
         // Set letter spacing function
         const setLetterSpacing = () => {
             const newValue = letterSpacingRange.value;
+            console.log(newValue);
             letterSpacingInput.value = newValue;
             letterSpacingTooltip.innerHTML = `<span>${newValue}</span>`;
 
