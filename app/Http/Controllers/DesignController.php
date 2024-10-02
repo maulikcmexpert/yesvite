@@ -166,9 +166,12 @@ class DesignController extends Controller
         //     'left' => $left,     // Add left position
         //     'top' => $top        // Add top position
         // ];
-        TextData::where('id', $id)->update([
-            'static_information' => $existingData,
-        ]);
+        if ($centerY != "" && $centerX != "" && $height != "" && $width != "") {
+            TextData::where('id', $id)->update([
+                'static_information' => $existingData,
+            ]);
+        }
+
         return response()->json(['message' => 'Shape and position saved successfully']);
     }
 
