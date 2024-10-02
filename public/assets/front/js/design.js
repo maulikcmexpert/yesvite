@@ -232,16 +232,16 @@ $(document).on("click", ".edit_design_tem", function (e) {
 
 });
 
-    function bindData(){
+function bindData() {
 
-    
-    
+
+
     function loadTextDataFromDatabase() {
         if (image) {
             // console.log(image);
 
             // Load background image
-            fabric.Image.fromURL(image, function (img) {
+            fabric.Image.fromURL(image, function(img) {
                 img.set({
                     left: 0,
                     top: 0,
@@ -369,7 +369,7 @@ $(document).on("click", ".edit_design_tem", function (e) {
                                 var start_date = "";
                                 if (eventData.event_date.includes(" To ")) {
                                     let [start, end] =
-                                        eventData.event_date.split(" To ");
+                                    eventData.event_date.split(" To ");
                                     start_date = start;
                                 } else {
                                     start_date = eventData.event_date;
@@ -388,7 +388,7 @@ $(document).on("click", ".edit_design_tem", function (e) {
                                 var end_date = "";
                                 if (eventData.event_date.includes(" To ")) {
                                     let [start, end] =
-                                        eventData.event_date.split(" To ");
+                                    eventData.event_date.split(" To ");
                                     end_date = end;
                                 } else {
                                     end_date = eventData.event_date;
@@ -403,16 +403,7 @@ $(document).on("click", ".edit_design_tem", function (e) {
                             }
                             break;
                     }
-                    // const textWidth = textElement.calcTextWidth();
-                    // textElement.set({ width: textWidth });
-
-                    // textElement.on('scaling', function () {
-                    //     // Calculate the updated font size based on scaling factors
-                    //     var updatedFontSize = textElement.fontSize * (textElement.scaleX + textElement.scaleY) / 2;
-                    //     textElement.set('fontSize', updatedFontSize); // Update the font size
-                    //     canvas.renderAll(); // Re-render the canvas to reflect changes
-                    // });
-
+                   
                     addIconsToTextbox(textElement);
                     canvas.add(textElement);
                 });
@@ -457,7 +448,7 @@ $(document).on("click", ".edit_design_tem", function (e) {
             </svg>
             `;
 
-        fabric.loadSVGFromString(trashIconSVG, function (objects, options) {
+        fabric.loadSVGFromString(trashIconSVG, function(objects, options) {
             const trashIcon = fabric.util.groupSVGElements(objects, options);
             trashIcon.set({
                 left: textbox.left + textbox.width * textbox.scaleX - 20,
@@ -471,7 +462,7 @@ $(document).on("click", ".edit_design_tem", function (e) {
             textbox.trashIcon = trashIcon;
 
             // Handle trash icon click
-            trashIcon.on("mousedown", function () {
+            trashIcon.on("mousedown", function() {
                 console.log("Trash icon clicked");
                 deleteTextbox(textbox);
             });
@@ -488,7 +479,7 @@ $(document).on("click", ".edit_design_tem", function (e) {
             </g>
             </svg>
             `;
-        fabric.loadSVGFromString(copyIconSVG, function (objects, options) {
+        fabric.loadSVGFromString(copyIconSVG, function(objects, options) {
             const copyIcon = fabric.util.groupSVGElements(objects, options);
             copyIcon.set({
                 left: textbox.left - 25,
@@ -502,7 +493,7 @@ $(document).on("click", ".edit_design_tem", function (e) {
             textbox.copyIcon = copyIcon;
 
             // Handle copy icon click
-            copyIcon.on("mousedown", function () {
+            copyIcon.on("mousedown", function() {
                 console.log("Copy icon clicked");
                 cloneTextbox(textbox);
             });
@@ -511,17 +502,17 @@ $(document).on("click", ".edit_design_tem", function (e) {
         });
 
         // Bind the updateIconPositions function to the moving and scaling events
-        textbox.on("moving", function () {
+        textbox.on("moving", function() {
             updateIconPositions(textbox);
         });
-        textbox.on("scaling", function () {
+        textbox.on("scaling", function() {
             updateIconPositions(textbox);
         });
 
         // Event listener to manage icon visibility when a textbox is clicked
-        textbox.on("mousedown", function () {
+        textbox.on("mousedown", function() {
             console.log(textbox);
-            canvas.getObjects("textbox").forEach(function (tb) {
+            canvas.getObjects("textbox").forEach(function(tb) {
                 if (tb.trashIcon) tb.trashIcon.set("visible", false); // Hide other icons
                 if (tb.copyIcon) tb.copyIcon.set("visible", false);
             });
@@ -531,7 +522,7 @@ $(document).on("click", ".edit_design_tem", function (e) {
         });
 
         // Initially hide all icons
-        canvas.getObjects("textbox").forEach(function (tb) {
+        canvas.getObjects("textbox").forEach(function(tb) {
             if (tb.trashIcon) tb.trashIcon.set("visible", false);
             if (tb.copyIcon) tb.copyIcon.set("visible", false);
         });
@@ -639,7 +630,7 @@ $(document).on("click", ".edit_design_tem", function (e) {
     });
 
     // Save button functionality
-    document.querySelector(".save-btn").addEventListener("click", function () {
+    document.querySelector(".save-btn").addEventListener("click", function() {
         const activeObject = canvas.getActiveObject();
         if (activeObject && activeObject.type === "textbox") {
             savedSettings.fontSize = activeObject.fontSize;
@@ -661,7 +652,7 @@ $(document).on("click", ".edit_design_tem", function (e) {
         updateTextboxWidth(object);
     };
     // Reset button functionality
-    document.querySelector(".reset-btn").addEventListener("click", function () {
+    document.querySelector(".reset-btn").addEventListener("click", function() {
         console.log("Reset button clicked!");
         const activeObject = canvas.getActiveObject();
         if (activeObject && activeObject.type === "textbox") {
@@ -703,7 +694,7 @@ $(document).on("click", ".edit_design_tem", function (e) {
         allowEmpty: true, // Allows setting background to transparent
         showAlpha: true, // Allows transparency adjustment
         preferredFormat: "rgba", // Ensure it handles RGBA
-        change: function (color) {
+        change: function(color) {
             if (color) {
                 console.log("color");
                 changeColor(color.toRgbString()); // Use RGB string for color changes
@@ -788,7 +779,7 @@ $(document).on("click", ".edit_design_tem", function (e) {
     canvas.on("selection:updated", updateColorPicker);
 
     // Update the color picker when the color type (font/background) changes
-    $(".colorTypeInp").click(function (e) {
+    $(".colorTypeInp").click(function(e) {
         e.stopPropagation();
         console.log(123);
         const activeObject = canvas.getActiveObject();
@@ -801,11 +792,11 @@ $(document).on("click", ".edit_design_tem", function (e) {
     // Load background image and make it non-draggable
     document
         .getElementById("image")
-        .addEventListener("change", function (event) {
+        .addEventListener("change", function(event) {
             var file = event.target.files[0];
             if (file) {
                 var reader = new FileReader();
-                reader.onload = function (e) {};
+                reader.onload = function(e) {};
                 reader.readAsDataURL(file);
             }
         });
@@ -814,7 +805,7 @@ $(document).on("click", ".edit_design_tem", function (e) {
     loadTextDataFromDatabase();
 
     function hideStaticTextElements() {
-        canvas.getObjects("textbox").forEach(function (textbox) {
+        canvas.getObjects("textbox").forEach(function(textbox) {
             if (textbox.isStatic) {
                 textbox.set("visible", false);
                 if (textbox.copyIcon) {
@@ -829,7 +820,7 @@ $(document).on("click", ".edit_design_tem", function (e) {
     }
 
     function showStaticTextElements() {
-        canvas.getObjects("textbox").forEach(function (textbox) {
+        canvas.getObjects("textbox").forEach(function(textbox) {
             if (textbox.isStatic) {
                 textbox.set("visible", true);
                 if (textbox.copyIcon) {
@@ -861,7 +852,7 @@ $(document).on("click", ".edit_design_tem", function (e) {
         text.set("width", text.get("text").length * 10);
 
         // Event listener for scaling
-        text.on("scaling", function () {
+        text.on("scaling", function() {
             var updatedFontSize =
                 (text.fontSize * (text.scaleX + text.scaleY)) / 2;
             text.set("fontSize", updatedFontSize);
@@ -870,7 +861,7 @@ $(document).on("click", ".edit_design_tem", function (e) {
         });
 
         // Event listener for moving
-        text.on("moving", function () {
+        text.on("moving", function() {
             findTextboxCenter(text); // Find center when moving
         });
 
@@ -890,89 +881,11 @@ $(document).on("click", ".edit_design_tem", function (e) {
         console.log(
             `Center of textbox '${textbox.text}' is at (${centerX}, ${centerY})`
         );
-        return { x: centerX, y: centerY };
+        return {
+            x: centerX,
+            y: centerY
+        };
     }
-
-    // function updateIconPositions(textbox) {
-    //     // console.log(textbox);
-    //     if (textbox.trashIcon) {
-    //         canvas.remove(textbox.trashIcon);
-    //         textbox.trashIcon = null; // Clear reference
-    //         // const trashIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 50 50"><path d="M20,30 L30,30 L30,40 L20,40 Z M25,10 L20,10 L20,7 L30,7 L30,10 Z M17,10 L33,10 L33,40 L17,40 Z" fill="#FF0000"/></svg>`;
-    //         const trashIconSVG = `<svg width="29" x="0px" y="0px" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
-    //         <g filter="url(#filter0_d_5633_67674)">
-    //         <rect x="2.70312" y="2.37207" width="23.9674" height="23.9674" rx="11.9837" fill="white" shape-rendering="crispEdges"/>
-    //         <path d="M19.1807 11.3502C17.5179 11.1855 15.8452 11.1006 14.1775 11.1006C13.1888 11.1006 12.2001 11.1505 11.2115 11.2504L10.1929 11.3502" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-    //         <path d="M12.939 10.8463L13.0488 10.1922C13.1287 9.7178 13.1886 9.36328 14.0325 9.36328H15.3407C16.1846 9.36328 16.2495 9.73777 16.3244 10.1971L16.4342 10.8463" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-    //         <path d="M18.1073 12.9277L17.7827 17.9559C17.7278 18.7398 17.6829 19.349 16.2898 19.349H13.0841C11.691 19.349 11.6461 18.7398 11.5912 17.9559L11.2666 12.9277" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-    //         <path d="M13.853 16.6035H15.5158" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-    //         <path d="M13.4385 14.6055H15.9351" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-    //         </g>
-    //         </svg>
-    //         `;
-
-    //         fabric.loadSVGFromString(trashIconSVG, function (objects, options) {
-    //             const trashIcon = fabric.util.groupSVGElements(objects, options);
-    //             trashIcon.set({
-    //                 left: textbox.left + textbox.width * textbox.scaleX - 20,
-    //                 top: textbox.top - 20,
-    //                 selectable: false,
-    //                 evented: true,
-    //                 hasControls: false,
-    //                 visible: true, // Initially hidden
-    //                 className: 'trash-icon',
-    //             });
-    //             textbox.trashIcon = trashIcon;
-
-    //             // Ensure the copyIcon is on top
-    //             canvas.bringToFront(trashIcon);
-    //             textbox.trashIcon.on('mousedown', function () {
-    //                 console.log('deleted icon');
-    //                 deleteTextbox(textbox);
-    //             });
-    //         })
-    //         // console.log('Updated Trash Icon Position:', textbox.trashIcon.left, textbox.trashIcon.top);
-    //     }
-
-    //     if (textbox.copyIcon) {
-    //         canvas.remove(textbox.copyIcon);
-    //         textbox.copyIcon = null; // Clear reference
-    //     }
-
-    //     // const copyIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 50 50"><path d="M5,5 L30,5 L30,30 L5,30 Z M35,5 L45,5 L45,35 L35,35 L35,5 Z" fill="#0000FF"/></svg>`;
-    //     const copyIconSVG = `<svg width="29" x="0px" y="0px" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
-    //         <g filter="url(#filter0_d_5633_67676)">
-    //         <rect x="2.64893" y="2.37207" width="23.9674" height="23.9674" rx="11.9837" fill="white" shape-rendering="crispEdges"/>
-    //         <path fill-rule="evenodd" clip-rule="evenodd" d="M17.6283 16.3538V10.3619C17.6283 9.81039 17.1812 9.36328 16.6297 9.36328H10.6378C10.0863 9.36328 9.63916 9.81039 9.63916 10.3619V16.3538C9.63916 16.9053 10.0863 17.3524 10.6378 17.3524H16.6297C17.1812 17.3524 17.6283 16.9053 17.6283 16.3538ZM10.6379 10.362H16.6298V16.3539H10.6379V10.362ZM18.6271 17.3525V11.3607C19.1786 11.3607 19.6257 11.8078 19.6257 12.3593V17.3525C19.6257 18.4556 18.7315 19.3498 17.6284 19.3498H12.6352C12.0837 19.3498 11.6366 18.9027 11.6366 18.3512H17.6284C18.1799 18.3512 18.6271 17.9041 18.6271 17.3525Z" fill="#0F172A"/>
-    //         </g>
-    //         </svg>`;
-
-    //     fabric.loadSVGFromString(copyIconSVG, function (objects, options) {
-    //         let copyIcon = fabric.util.groupSVGElements(objects, options);
-    //         copyIcon.set({
-    //             left: textbox.left - 25,
-    //             top: textbox.top - 20,
-    //             selectable: false,
-    //             evented: true,
-    //             hasControls: false,
-    //             visible: true, // Initially hidden
-    //             className: 'copy-icon',
-    //         });
-    //         // Add the copyIcon to the canvas
-    //         textbox.copyIcon = copyIcon
-
-    //         // Ensure the copyIcon is on top
-    //         canvas.bringToFront(copyIcon);
-
-    //         // Handle copy icon click
-    //         textbox.copyIcon.on('mousedown', function () {
-    //             console.log('Copy icon clicked1');
-    //             cloneTextbox(textbox);
-    //         });
-    //     })
-
-    //     canvas.renderAll(); // Re-render the canvas to apply the new positions
-    // }
 
     function updateIconPositions(textbox) {
         // Remove old trash and copy icons if they exist
@@ -1005,7 +918,7 @@ $(document).on("click", ".edit_design_tem", function (e) {
             </svg>`;
 
         // Load trash icon from SVG string and position
-        fabric.loadSVGFromString(trashIconSVG, function (objects, options) {
+        fabric.loadSVGFromString(trashIconSVG, function(objects, options) {
             const trashIcon = fabric.util.groupSVGElements(objects, options);
             trashIcon.set({
                 left: textbox.left + textbox.width * textbox.scaleX - 20,
@@ -1017,7 +930,7 @@ $(document).on("click", ".edit_design_tem", function (e) {
             textbox.trashIcon = trashIcon;
 
             // Attach delete functionality to trash icon
-            trashIcon.on("mousedown", function () {
+            trashIcon.on("mousedown", function() {
                 console.log("Trash icon clicked! Deleting textbox.");
                 deleteTextbox(textbox);
             });
@@ -1028,7 +941,7 @@ $(document).on("click", ".edit_design_tem", function (e) {
         });
 
         // Load copy icon from SVG string and position
-        fabric.loadSVGFromString(copyIconSVG, function (objects, options) {
+        fabric.loadSVGFromString(copyIconSVG, function(objects, options) {
             const copyIcon = fabric.util.groupSVGElements(objects, options);
             copyIcon.set({
                 left: textbox.left - 25,
@@ -1040,7 +953,7 @@ $(document).on("click", ".edit_design_tem", function (e) {
             textbox.copyIcon = copyIcon;
 
             // Attach clone functionality to copy icon
-            copyIcon.on("mousedown", function () {
+            copyIcon.on("mousedown", function() {
                 console.log("Copy icon clicked!");
                 cloneTextbox(textbox);
             });
@@ -1118,17 +1031,6 @@ $(document).on("click", ".edit_design_tem", function (e) {
     // Add event listener for keyboard events
     document.addEventListener("keydown", handleKeyboardEvents);
 
-    var start_date = "";
-    var end_date = "";
-    if (eventData.event_date.includes(" To ")) {
-        let [start, end] = eventData.event_date.split(" To ");
-        start_date = start;
-        end_date = end;
-    } else {
-        start_date = eventData.event_date;
-        end_date = eventData.event_date;
-    }
-
     function updateSelectedTextProperties() {
         var fontSize = parseInt(document.getElementById("fontSize").value, 10);
         var fontColor = document.getElementById("fontColor").value;
@@ -1154,11 +1056,11 @@ $(document).on("click", ".edit_design_tem", function (e) {
     // document.getElementById('fontSize').addEventListener('change', updateSelectedTextProperties);
     // document.getElementById('fontColor').addEventListener('input', updateSelectedTextProperties);
 
-    canvas.on("mouse:down", function (options) {
+    canvas.on("mouse:down", function(options) {
         if (options.target && options.target.type === "textbox") {
             canvas.setActiveObject(options.target);
         } else {
-            canvas.getObjects("textbox").forEach(function (tb) {
+            canvas.getObjects("textbox").forEach(function(tb) {
                 if (tb.trashIcon) tb.trashIcon.set("visible", false);
                 if (tb.copyIcon) tb.copyIcon.set("visible", false);
             });
@@ -1167,7 +1069,7 @@ $(document).on("click", ".edit_design_tem", function (e) {
 
     document
         .getElementById("addTextButton")
-        .addEventListener("click", function () {
+        .addEventListener("click", function() {
             addEditableTextbox(100, 100, "EditableText"); // You can set the initial position and default text
         });
 
@@ -1194,181 +1096,148 @@ $(document).on("click", ".edit_design_tem", function (e) {
         canvas.renderAll();
     }
 
-    // function saveTextDataToDatabase() {
-    //     hideStaticTextElements(); // Hide the text elements
-    //     var textData = getTextDataFromCanvas();
-    //     var imageURL = canvas.toDataURL('image/png');
-    //     var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content'); // Get CSRF token
-    //     // Get the canvas ID to associate the saved data with a specific record
-    //     var canvasElement = document.getElementById('imageEditor1');
-    //     var canvasId = canvasElement.getAttribute('data-canvas-id');
-    //     var imageName = 'image_' + Date.now() + '.png';
-    //     console.log(canvasId);
-    //     fetch('/saveTextData', {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json', // Set content type to JSON
-    //             'X-CSRF-TOKEN': csrfToken // Include CSRF token
-    //         },
-    //         body: JSON.stringify({
-    //             id: canvasId,
-    //             textElements: textData,
-
-    //         })
-    //     })
-    //         .then(response => response.json())
-    //         .then(data => {
-    //             console.log('Text data saved successfully', data);
-
-    //         })
-    //         .catch((error) => {
-    //             console.error('Error:', error);
-    //         });
-    //     showStaticTextElements();
-    // }
-
     document
         .getElementById("antaresiaButton")
-        .addEventListener("click", function () {
+        .addEventListener("click", function() {
             console.log("fontname");
 
             loadAndUse("Botanica Script");
         });
     document
         .getElementById("JosefinSansButton")
-        .addEventListener("click", function () {
+        .addEventListener("click", function() {
             console.log("fontname");
             loadAndUse("JosefinSans");
         });
     document
         .getElementById("AbrilFatfaceButton")
-        .addEventListener("click", function () {
+        .addEventListener("click", function() {
             console.log("fontname");
 
             loadAndUse("AbrilFatface");
         });
     document
         .getElementById("AgencyFBButton")
-        .addEventListener("click", function () {
+        .addEventListener("click", function() {
             console.log("fontname");
 
             loadAndUse("AgencyFB");
         });
     document
         .getElementById("AdleryProButton")
-        .addEventListener("click", function () {
+        .addEventListener("click", function() {
             console.log("fontname");
 
             loadAndUse("AdleryPro");
         });
     document
         .getElementById("AlexBrushButton")
-        .addEventListener("click", function () {
+        .addEventListener("click", function() {
             console.log("fontname");
 
             loadAndUse("AlexBrush");
         });
     document
         .getElementById("AlluraButton")
-        .addEventListener("click", function () {
+        .addEventListener("click", function() {
             console.log("fontname");
 
             loadAndUse("Allura");
         });
     document
         .getElementById("BotanicaScript-RegularButton")
-        .addEventListener("click", function () {
+        .addEventListener("click", function() {
             console.log("fontname");
 
             loadAndUse("BotanicaScript-Regular");
         });
     document
         .getElementById("ArcherButton")
-        .addEventListener("click", function () {
+        .addEventListener("click", function() {
             console.log("fontname");
 
             loadAndUse("Archer");
         });
     document
         .getElementById("Archer-BookButton")
-        .addEventListener("click", function () {
+        .addEventListener("click", function() {
             console.log("fontname");
 
             loadAndUse("Archer-Book");
         });
     document
         .getElementById("Archer-BookButton")
-        .addEventListener("click", function () {
+        .addEventListener("click", function() {
             console.log("fontname");
 
             loadAndUse("Archer-Book");
         });
     document
         .getElementById("Archer-BookItalicButton")
-        .addEventListener("click", function () {
+        .addEventListener("click", function() {
             console.log("fontname");
 
             loadAndUse("Archer-BookItalic");
         });
     document
         .getElementById("Archer-ExtraLightButton")
-        .addEventListener("click", function () {
+        .addEventListener("click", function() {
             console.log("fontname");
 
             loadAndUse("Archer-ExtraLight");
         });
     document
         .getElementById("Archer-HairlineButton")
-        .addEventListener("click", function () {
+        .addEventListener("click", function() {
             console.log("fontname");
 
             loadAndUse("Archer-Hairline");
         });
     document
         .getElementById("Bebas-RegularButton")
-        .addEventListener("click", function () {
+        .addEventListener("click", function() {
             console.log("fontname");
 
             loadAndUse("Bebas-Regular");
         });
     document
         .getElementById("BookAntiquaButton")
-        .addEventListener("click", function () {
+        .addEventListener("click", function() {
             console.log("fontname");
 
             loadAndUse("BookAntiqua");
         });
     document
         .getElementById("CandyCaneUnregisteredButton")
-        .addEventListener("click", function () {
+        .addEventListener("click", function() {
             console.log("fontname");
 
             loadAndUse("CandyCaneUnregistered");
         });
     document
         .getElementById("CarbonBl-RegularButton")
-        .addEventListener("click", function () {
+        .addEventListener("click", function() {
             console.log("fontname");
 
             loadAndUse("CarbonBl-Regular");
         });
     document
         .getElementById("CarmenSans-ExtraBoldButton")
-        .addEventListener("click", function () {
+        .addEventListener("click", function() {
             console.log("fontname");
 
             loadAndUse("CarmenSans-ExtraBold");
         });
     document
         .getElementById("CarmenSans-RegularButton")
-        .addEventListener("click", function () {
+        .addEventListener("click", function() {
             console.log("fontname");
 
             loadAndUse("CarmenSans-Regular");
         });
     document
         .getElementById("ChristmasCookiesButton")
-        .addEventListener("click", function () {
+        .addEventListener("click", function() {
             console.log("fontname");
 
             loadAndUse("ChristmasCookies");
@@ -1379,25 +1248,15 @@ $(document).on("click", ".edit_design_tem", function (e) {
         var myfont = new FontFaceObserver(font);
         myfont
             .load()
-            .then(function () {
+            .then(function() {
                 // When font is loaded, use it.
                 var activeObject = canvas.getActiveObject();
                 console.log(activeObject.type);
                 if (activeObject && activeObject.type === "textbox") {
-                    // Ensure it's a text object
-
-                    // Clear the font cache for the specific font family
-                    // fabric.Text.clearFabricFontCache(font);
-
-                    // Apply the font family
                     activeObject.set({
                         fontFamily: font,
                     });
-
-                    // Recalculate the text dimensions
                     activeObject.initDimensions();
-
-                    // Trigger a re-render to ensure the font is applied
                     canvas.requestRenderAll();
                     console.log("applied font" + font);
                     console.log(canvas.getActiveObject());
@@ -1405,7 +1264,7 @@ $(document).on("click", ".edit_design_tem", function (e) {
                     alert("No object selected");
                 }
             })
-            .catch(function (e) {
+            .catch(function(e) {
                 console.log(e);
                 alert("Font loading failed: " + font);
             });
@@ -1480,8 +1339,8 @@ $(document).on("click", ".edit_design_tem", function (e) {
         }
     }
 
-    document.querySelectorAll("[data-command]").forEach(function (button) {
-        button.addEventListener("click", function () {
+    document.querySelectorAll("[data-command]").forEach(function(button) {
+        button.addEventListener("click", function() {
             executeCommand(this.getAttribute("data-command"));
         });
     });
@@ -1516,135 +1375,387 @@ $(document).on("click", ".edit_design_tem", function (e) {
         .querySelector('[data-command="redo"]')
         .addEventListener("click", redo);
 
-     
-$(document).ready(function () {
-    $(".slider_photo").on("change", function (event) {
-        var file = event.target.files[0]; // Get the first file (the selected image)
-        if (file) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                $(".photo-slider-1").attr("src", e.target.result).show();
-            };
-            reader.readAsDataURL(file);
-            $(".design-sidebar").addClass("d-none");
-            $(".design-sidebar_7").removeClass("d-none");
-            $("#sidebar").addClass("design-sidebar_7");
-            $(".close-btn").attr("data-id", "design-sidebar_7");
-        }
-    });
 
-    $(".slider_photo_2").on("change", function (event) {
-        var file = event.target.files[0];
-        if (file) {
-            $(".photo-slider-2").show();
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                $(".photo-slider-2").attr("src", e.target.result).show();
-            };
-            reader.readAsDataURL(file);
-        }
-    });
-    $(".slider_photo_3").on("change", function (event) {
-        var file = event.target.files[0];
-        if (file) {
-            $(".photo-slider-3").show();
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                $(".photo-slider-3").attr("src", e.target.result).show();
-            };
-            reader.readAsDataURL(file);
-        }
-    });
-    // $(document).on("click", ".delete-slider-1", function () {
-    //     $(".photo-slider-1").hide();
-    // });
-    // $(document).on("click", ".delete-slider-2", function () {
-    //     $(".photo-slider-2").hide();
-    // });
-    // $(document).on("click", ".delete-slider-3", function () {
-    //     $(".photo-slider-3").hide();
-    // });
+    $(document).ready(function() {
+        $(".slider_photo").on("change", function(event) {
+            var file = event.target.files[0]; // Get the first file (the selected image)
+            if (file) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $(".photo-slider-1").attr("src", e.target.result).show();
+                };
+                reader.readAsDataURL(file);
+                $(".design-sidebar").addClass("d-none");
+                $(".design-sidebar_7").removeClass("d-none");
+                $("#sidebar").addClass("design-sidebar_7");
+                $(".close-btn").attr("data-id", "design-sidebar_7");
+            }
+        });
 
-    $(document).on("click", ".save-slider-image", function () {
-        var imageSources = [];
-        // $(".slider_img").each(function () {
-        //     imageSources.push($(this).attr("src"));
+        $(".slider_photo_2").on("change", function(event) {
+            var file = event.target.files[0];
+            if (file) {
+                $(".photo-slider-2").show();
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $(".photo-slider-2").attr("src", e.target.result).show();
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+        $(".slider_photo_3").on("change", function(event) {
+            var file = event.target.files[0];
+            if (file) {
+                $(".photo-slider-3").show();
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $(".photo-slider-3").attr("src", e.target.result).show();
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+        // $(document).on("click", ".delete-slider-1", function () {
+        //     $(".photo-slider-1").hide();
+        // });
+        // $(document).on("click", ".delete-slider-2", function () {
+        //     $(".photo-slider-2").hide();
+        // });
+        // $(document).on("click", ".delete-slider-3", function () {
+        //     $(".photo-slider-3").hide();
         // });
 
-        $(".slider_img").each(function () {
-            var src = $(this).attr("src");
-            if (src !== "") {
-            imageSources.push({
-                src: $(this).attr("src"),
-                deleteId: $(this).data("delete")
-            });
-        }
-        });
-        console.log(imageSources);
-        $('#loader').css('display','block');
-        $.ajax({
-            url: base_url + "event/save_slider_img",
-            method: "POST",
-            data: {
-                imageSources: imageSources,
-                _token: $('meta[name="csrf-token"]').attr("content"),
-            },
-            success: function (response) {
-                var savedImages = response.images;
-                eventData.slider_images = savedImages;
-                console.log(eventData);
-                $('#loader').css('display','none');
-                toastr.success('Slider Image saved Successfully');
-            },
-            error: function (xhr, status, error) {},
-        });
-    });
+        $(document).on("click", ".save-slider-image", function() {
+            var imageSources = [];
+            // $(".slider_img").each(function () {
+            //     imageSources.push($(this).attr("src"));
+            // });
 
-    $(document).on("click", ".delete_silder", function () {
-        var delete_id=$(this).parent().find('.slider_img').data("delete");
-        var src=$(this).parent().find('.slider_img').attr("src");
-        if(src!=""){
-            $('#loader').css('display','block');
-            var $this = $(this);
-            var check_slider_img=eventData.slider_images;
-            var matchFound = false; 
-            $.each(check_slider_img, function (index, slider) {
-                if (slider.deleteId == delete_id) {
-                    matchFound = true;
-                    return false; 
+            $(".slider_img").each(function() {
+                var src = $(this).attr("src");
+                if (src !== "") {
+                    imageSources.push({
+                        src: $(this).attr("src"),
+                        deleteId: $(this).data("delete")
+                    });
                 }
             });
-            if(matchFound){
-                $.ajax({
-                    url: base_url + "event/delete_slider_img",
-                    method: "POST",
-                    data: {
-                        delete_id: delete_id,
-                        _token: $('meta[name="csrf-token"]').attr("content"),
-                    },
-                    success: function (response) {
-                        $this.parent().find('.slider_img').attr('src', '');
-                        $(".photo-slider-"+delete_id).hide();
-                        toastr.success('Slider Image Deleted Successfully')
-                        $('#loader').css('display','none');
+            console.log(imageSources);
+            $('#loader').css('display', 'block');
+            $.ajax({
+                url: base_url + "event/save_slider_img",
+                method: "POST",
+                data: {
+                    imageSources: imageSources,
+                    _token: $('meta[name="csrf-token"]').attr("content"),
+                },
+                success: function(response) {
+                    var savedImages = response.images;
+                    eventData.slider_images = savedImages;
+                    console.log(eventData);
+                    $('#loader').css('display', 'none');
+                    toastr.success('Slider Image saved Successfully');
+                },
+                error: function(xhr, status, error) {},
+            });
+        });
 
-                    },
-                    error: function (xhr, status, error) {},
+        $(document).on("click", ".delete_silder", function() {
+            var delete_id = $(this).parent().find('.slider_img').data("delete");
+            var src = $(this).parent().find('.slider_img').attr("src");
+            if (src != "") {
+                $('#loader').css('display', 'block');
+                var $this = $(this);
+                var check_slider_img = eventData.slider_images;
+                var matchFound = false;
+                $.each(check_slider_img, function(index, slider) {
+                    if (slider.deleteId == delete_id) {
+                        matchFound = true;
+                        return false;
+                    }
                 });
-            }else{
-                $(this).parent().find('.slider_img').attr('src', '');
-                $(".photo-slider-"+delete_id).hide();
-                toastr.success('Slider Image Deleted Successfully')
-                $('#loader').css('display','none');
+                if (matchFound) {
+                    $.ajax({
+                        url: base_url + "event/delete_slider_img",
+                        method: "POST",
+                        data: {
+                            delete_id: delete_id,
+                            _token: $('meta[name="csrf-token"]').attr("content"),
+                        },
+                        success: function(response) {
+                            $this.parent().find('.slider_img').attr('src', '');
+                            $(".photo-slider-" + delete_id).hide();
+                            toastr.success('Slider Image Deleted Successfully')
+                            $('#loader').css('display', 'none');
+
+                        },
+                        error: function(xhr, status, error) {},
+                    });
+                } else {
+                    $(this).parent().find('.slider_img').attr('src', '');
+                    $(".photo-slider-" + delete_id).hide();
+                    toastr.success('Slider Image Deleted Successfully')
+                    $('#loader').css('display', 'none');
+
+                }
 
             }
-         
-        }
-    
+
+        });
     });
-});   
-   
+
+    const fileInput = document.getElementById('addShapeButton');
+    const userImageElement = document.getElementById('user_image');
+    const imageWrapper = document.getElementById('imageWrapper');
+    const canvasElement = new fabric.Canvas('imageEditor', {
+        width: 500, // Canvas width
+        height: 500, // Canvas height
+    });
+
+    const resizeHandles = {
+        topLeft: document.querySelector('.resize-handle.top-left'),
+        topRight: document.querySelector('.resize-handle.top-right'),
+        bottomLeft: document.querySelector('.resize-handle.bottom-left'),
+        bottomRight: document.querySelector('.resize-handle.bottom-right')
+    };
+
+    let isDragging = false;
+    let isResizing = false;
+    let startWidth, startHeight, startX, startY, activeHandle;
+    let offsetX, offsetY;
+    let shape = 'rectangle'; // Default shape
+    let shapeChangedDuringDrag = false; // Flag to track shape change
+    let imageUploaded = false; // Flag to track if image has been uploaded
+
+    function startResize(event, handle) {
+        isResizing = true;
+        startWidth = userImageElement.clientWidth;
+        startHeight = userImageElement.clientHeight;
+        startX = event.clientX;
+        startY = event.clientY;
+        activeHandle = handle;
+        event.stopPropagation();
     }
+
+    function resize(event) {
+        if (isResizing) {
+            let newWidth, newHeight;
+            if (activeHandle === resizeHandles.bottomRight) {
+                newWidth = startWidth + (event.clientX - startX);
+                newHeight = startHeight + (event.clientY - startY);
+            } else if (activeHandle === resizeHandles.bottomLeft) {
+                newWidth = startWidth - (event.clientX - startX);
+                newHeight = startHeight + (event.clientY - startY);
+                imageWrapper.style.left = `${event.clientX}px`;
+            } else if (activeHandle === resizeHandles.topRight) {
+                newWidth = startWidth + (event.clientX - startX);
+                newHeight = startHeight - (event.clientY - startY);
+                imageWrapper.style.top = `${event.clientY}px`;
+            } else if (activeHandle === resizeHandles.topLeft) {
+                newWidth = startWidth - (event.clientX - startX);
+                newHeight = startHeight - (event.clientY - startY);
+                imageWrapper.style.left = `${event.clientX}px`;
+                imageWrapper.style.top = `${event.clientY}px`;
+            }
+            userImageElement.style.width = `${newWidth}px`;
+            userImageElement.style.height = `${newHeight}px`;
+        }
+    }
+
+    function handleMouseDown(event) {
+        const canvas = document.querySelector('.new');
+        const canvasRect = canvas.getBoundingClientRect();
+
+        if (event.target.classList.contains('resize-handle')) {
+            startResize(event, event.target);
+        } else {
+            event.preventDefault(); // Prevent default behavior during dragging (text selection)
+            isDragging = true;
+            offsetX = event.clientX - imageWrapper.offsetLeft;
+            offsetY = event.clientY - imageWrapper.offsetTop;
+            shapeChangedDuringDrag = false; // Reset flag on new drag start
+        }
+    }
+
+    function handleMouseMove(event) {
+        if (isDragging) {
+            const canvas = document.querySelector('.new');
+            const canvasRect = canvas.getBoundingClientRect();
+            let newX = event.clientX - offsetX;
+            let newY = event.clientY - offsetY;
+
+            // Ensure the image stays within the canvas boundaries
+            if (newX < canvasRect.left) newX = canvasRect.left;
+            if (newX + userImageElement.clientWidth > canvasRect.right)
+                newX = canvasRect.right - userImageElement.clientWidth;
+            if (newY < canvasRect.top) newY = canvasRect.top;
+            if (newY + userImageElement.clientHeight > canvasRect.bottom)
+                newY = canvasRect.bottom - userImageElement.clientHeight;
+
+            imageWrapper.style.left = `${newX}px`;
+            imageWrapper.style.top = `${newY}px`;
+            shapeChangedDuringDrag = true; // Set flag if dragging occurs
+        } else if (isResizing) {
+            resize(event);
+        }
+    }
+
+    function handleMouseUp(event) {
+        if (event.target === userImageElement && !shapeChangedDuringDrag) {
+            // Cycle through shapes
+            const shapes = ['rectangle', 'circle', 'star', 'rounded-border', 'heart'];
+            const currentIndex = shapes.indexOf(shape);
+            shape = shapes[(currentIndex + 1) % shapes.length];
+            console.log(`Shape changed to: ${shape}`); // Log shape change
+
+            drawCanvas();
+        }
+
+        isDragging = false;
+        isResizing = false;
+    }
+
+    function drawCanvas() {
+        userImageElement.style.clipPath = '';
+
+        switch (shape) {
+            case 'rectangle':
+                break;
+            case 'circle':
+                userImageElement.style.clipPath = 'circle(50% at 50% 50%)';
+                break;
+            case 'star':
+                userImageElement.style.clipPath =
+                    'polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)';
+                break;
+            case 'rounded-border':
+                userImageElement.style.clipPath = 'inset(0 round 20px)';
+                break;
+            case 'heart':
+                userImageElement.style.clipPath = 'url(#heartClipPath)';
+                break;
+            default:
+                break;
+        }
+    }
+
+    fileInput.addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const formData = new FormData();
+            formData.append('image', file);
+            var id = $('#template_id').val();
+
+            // Include shape information in the form data
+            formData.append('shape', shape); // Send the current shape value
+
+            fetch(`/shape_image`, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
+                            .getAttribute('content')
+                    }
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Server response:', data);
+
+                    const imgElement = new Image();
+                    imgElement.src = data.imagePath;
+
+                    userImageElement.src = data.imagePath;
+                    imageWrapper.style.display = 'block';
+
+                    imgElement.onload = function() {
+                        console.log("Image loaded successfully.");
+                        const imgInstance = new fabric.Image(imgElement, {
+                            left: 0,
+                            top: 0,
+                            selectable: true,
+                            hasControls: true,
+                            hasBorders: true,
+                            cornerColor: 'red',
+                            cornerStrokeColor: 'blue',
+                            borderColor: 'blue',
+                            cornerSize: 10,
+                            transparentCorners: false,
+                            lockUniScaling: true,
+                            scaleX: 600 / imgElement.width,
+                            scaleY: 600 / imgElement.height
+                        });
+
+                        canvasElement.add(imgInstance);
+                        drawCanvas();
+                        console.log('Image loaded and added to canvas.');
+                        imageUploaded = true; // Set flag to true after image is uploaded
+                    };
+
+                    imgElement.onerror = function() {
+                        console.error("Failed to load image.");
+                    };
+                })
+                .catch(error => {
+                    console.error('There was a problem with the fetch operation:', error);
+                });
+        }
+    });
+
+    document.getElementById('saveButton').addEventListener('click', function() {
+        var id = $('#template_id').val();
+
+        // Check if the image was uploaded before saving the shape
+        if (imageUploaded) {
+            // Send AJAX request to save the shape
+            const left = imageWrapper.offsetLeft; // Get the new left position
+            const top = imageWrapper.offsetTop; // Get the new top position
+            fetch(`/save_shape/${id}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
+                            .getAttribute('content')
+                    },
+                    body: JSON.stringify({
+                        shape: shape,
+                        left: left,
+                        top: top // Send the current shape value
+                    })
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Shape saved successfully:', data);
+                    // alert('Shape saved successfully!');
+                })
+                .catch(error => {
+                    console.error('There was a problem with saving the shape:', error);
+                });
+        } else {
+            // alert("Please upload an image before saving the shape.");
+        }
+    });
+
+    Object.values(resizeHandles).forEach(handle => {
+        handle.addEventListener('mousedown', function(event) {
+            startResize(event, handle);
+        });
+    });
+
+    document.addEventListener('mousemove', resize);
+    document.addEventListener('mouseup', handleMouseUp);
+    imageWrapper.addEventListener('mousedown', handleMouseDown);
+    document.addEventListener('mousemove', handleMouseMove);
+
+}
     
 
 function getTextDataFromCanvas() {

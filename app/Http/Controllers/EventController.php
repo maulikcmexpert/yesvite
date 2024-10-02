@@ -1638,4 +1638,9 @@ class EventController extends Controller
     {
         return view('front.event.design.edit_design')->render();
     }
+
+    public function shape_image(Request $request)
+    {
+            dd($request);
+    }
 }

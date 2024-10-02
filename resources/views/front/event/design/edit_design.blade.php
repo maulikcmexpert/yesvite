@@ -24,7 +24,15 @@
             <div class="image-edit-inner-img">
                 <input type="file" id="image" accept="image/*" style="display: none" />
                 <canvas id="imageEditor1"></canvas>
+
                 {{-- <img src="{{ $textData->image}}" alt=""> --}}
+            </div>
+            <div id="imageWrapper" style="position:fixed; display:none;">
+                <img id="user_image" src="" style="height: 100px; width: 100px; background-color: black;" />
+                <div class="resize-handle top-left"></div>
+                <div class="resize-handle top-right"></div>
+                <div class="resize-handle bottom-left"></div>
+                <div class="resize-handle bottom-right"></div>
             </div>
         </div>
         <div class="edit-images-button-wrp">
