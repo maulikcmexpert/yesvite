@@ -162,18 +162,20 @@
 
                                 if (shape === 'circle') {
                                     clipPath = new fabric.Circle({
+                                        width: 200, // Set the calculated width
+                                        height: 150,
                                         radius: 75, // Define radius of the circle
                                         originX: 'center', // Set origin to center of the circle
                                         originY: 'center' // Set origin to center of the circle
                                     });
-                                } else if (newshape === 'rectangle') {
+                                } else if (shape === 'rectangle') {
                                     clipPath = new fabric.Rect({
                                         width: 150, // Set width of the rectangle
                                         height: 100, // Set height of the rectangle
                                         originX: 'center', // Set origin to center of the rectangle
                                         originY: 'center' // Set origin to center of the rectangle
                                     });
-                                } else if (newshape === 'star') {
+                                } else if (shape === 'star') {
                                     // Star shape path generation
                                     const starPoints = [];
                                     const spikes = 5;
@@ -194,7 +196,7 @@
                                         originX: 'center',
                                         originY: 'center'
                                     });
-                                } else if (newshape === 'heart') {
+                                } else if (shape === 'heart') {
                                     // Heart shape path
                                     const heartPath = [
                                         'M', 0, 0,
