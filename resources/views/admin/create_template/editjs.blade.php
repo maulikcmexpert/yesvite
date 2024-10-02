@@ -151,8 +151,8 @@
                                     top: 50,
                                     scaleX: 0.5, // Scale down the image
                                     scaleY: 0.5,
-                                    width: 200, // Set the calculated width
-                                    height: 150,
+                                    width: 100, // Set the calculated width
+                                    height: 100,
                                     selectable: true, // Make filed image draggable
                                     hasControls: true // Allow resizing controls
                                 });
@@ -162,8 +162,6 @@
 
                                 if (shape === 'circle') {
                                     clipPath = new fabric.Circle({
-                                        width: 200, // Set the calculated width
-                                        height: 150,
                                         radius: 75, // Define radius of the circle
                                         originX: 'center', // Set origin to center of the circle
                                         originY: 'center' // Set origin to center of the circle
