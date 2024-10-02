@@ -1587,29 +1587,29 @@ class EventController extends Controller
     public function saveSliderImg(Request $request)
     {
         $imageSources = $request->imageSources;
-        dd($imageSources);
-    $savedFiles = [];
-    $i = 0;
-    foreach ($imageSources as $imageSource) {
-        if (!empty($imageSource['src'])) {
-            list($type, $data) = explode(';', $imageSource['src']);
-            list(, $data) = explode(',', $data);
-            $imageData = base64_decode($data);
-            $fileName = time() . $i . '-' . uniqid() . '.jpg';
-            $i++;
-
-            $path = public_path('storage/event_images/') . $fileName;
-
-            file_put_contents($path, $imageData);
-            $savedFiles[] = [
-                'fileName' => $fileName,
-                'deleteId' => $imageSource['deleteId']
-            ];
+        $savedFiles = [];
+        $i = 0;
+        foreach ($imageSources as $imageSource) {
+            if (!empty($imageSource['src'])) {
+                list($type, $data) = explode(';', $imageSource['src']);
+                list(, $data) = explode(',', $data);
+                $imageData = base64_decode($data);
+                $fileName = time() . $i . '-' . uniqid() . '.jpg';
+                $i++;
+                
+                $path = public_path('storage/event_images/') . $fileName;
+                
+                file_put_contents($path, $imageData);
+                $savedFiles[] = [
+                    'fileName' => $fileName,
+                    'deleteId' => $imageSource['deleteId']
+                ];
+            }
         }
-    }
-    if (empty($savedFiles)) {
-        return response()->json(['status' => 'No valid images to save'], 400);
-    }
+        if (empty($savedFiles)) {
+            return response()->json(['status' => 'No valid images to save'], 400);
+        }
+        dd($savedFiles);
     session(['desgin_slider' => $savedFiles]);
     return response()->json(['success' => true, 'images' => $savedFiles]);
 }
