@@ -1572,7 +1572,6 @@ $(document).ready(function () {
         // });
 
         $(".slider_img").each(function () {
-            $(this).attr("data-delete", deleteCounter); 
             imageSources.push({
                 src: $(this).attr("src"),
                 deleteId: $(this).data("delete")
