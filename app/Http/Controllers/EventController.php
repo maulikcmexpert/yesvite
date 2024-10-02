@@ -85,14 +85,14 @@ class EventController extends Controller
                 unlink($imagePath);
             }
         }
-        if(isset($slider_image) && !empty($slider_image)){
+        if (isset($slider_image) && !empty($slider_image)) {
             foreach ($slider_image as $key => $value) {
-                    if (file_exists(public_path('storage/event_images/') . $value['fileName'])) {
-                        $imagePath = public_path('storage/event_images/') . $value['fileName'];
-                        unlink($imagePath);
-                    }
+                if (file_exists(public_path('storage/event_images/') . $value['fileName'])) {
+                    $imagePath = public_path('storage/event_images/') . $value['fileName'];
+                    unlink($imagePath);
+                }
             }
-}
+        }
 
         Session::forget('desgin');
         Session::forget('desgin_slider');
@@ -250,29 +250,28 @@ class EventController extends Controller
         ]);
         $eventId = $event_creation->id;
         $event_creation->step = (isset($request->step) && $request->step != '') ? $request->step : 0;
-        if(isset($request->temp_id) && $request->temp_id != ''){
-           
+        if (isset($request->temp_id) && $request->temp_id != '') {
         }
-        if(isset($request->textData) && json_encode($request->textData) != ''){
-            $tempData = TextData::where('id',$request->temp_id)->first();
-            if($tempData){
+        if (isset($request->textData) && json_encode($request->textData) != '') {
+            $tempData = TextData::where('id', $request->temp_id)->first();
+            if ($tempData) {
                 $sourceImagePath = asset('storage/canvas/' . $tempData->image);
-                $destinationDirectory = public_path('storage/event_images/'); 
+                $destinationDirectory = public_path('storage/event_images/');
                 $destinationImagePath = $destinationDirectory . $tempData->image;
                 if (file_exists(public_path('storage/canvas/') . $tempData->image)) {
-                    $newImageName = time() . '_' .uniqid() . '.' . pathinfo($tempData->image, PATHINFO_EXTENSION);
+                    $newImageName = time() . '_' . uniqid() . '.' . pathinfo($tempData->image, PATHINFO_EXTENSION);
                     $destinationImagePath = $destinationDirectory . $newImageName;
 
                     File::copy($sourceImagePath, $destinationImagePath);
                     $event_creation->design_image = $tempData->image;
                 }
             }
-            $textElemtents = $request->textData['textElements']; 
+            $textElemtents = $request->textData['textElements'];
             foreach ($textElemtents as $key => $textJson) {
-                if($textJson['fontSize']!=''){
+                if ($textJson['fontSize'] != '') {
                     $textElemtents[$key]['fontSize'] = (int)$textJson['fontSize'];
-                    $textElemtents[$key]['centerX'] = (double)$textJson['centerX'];
-                    $textElemtents[$key]['centerY'] = (double)$textJson['centerY'];
+                    $textElemtents[$key]['centerX'] = (float)$textJson['centerX'];
+                    $textElemtents[$key]['centerY'] = (float)$textJson['centerY'];
                 }
             }
             $static_data = [];
@@ -283,8 +282,8 @@ class EventController extends Controller
             $static_data['image'] = $tempData->image;
             $static_data['template_url'] = $sourceImagePath;
             $static_data['is_contain_image'] = true;
-            
-            $event_creation->static_information = json_encode($static_data);    
+
+            $event_creation->static_information = json_encode($static_data);
         }
         $event_creation->save();
         if ($eventId != "") {
@@ -484,18 +483,17 @@ class EventController extends Controller
                 ]);
             }
 
-            if(isset($request->slider_images) && !empty($request->slider_images)){
+            if (isset($request->slider_images) && !empty($request->slider_images)) {
                 foreach ($request->slider_images as $key => $value) {
-                     EventImage::create([
-                         'event_id' => $eventId,
-                         'image' => $value
-                     ]);
-                    
+                    EventImage::create([
+                        'event_id' => $eventId,
+                        'image' => $value['fileName'],
+                    ]);
                 }
-             }
-            
+            }
 
-            
+
+
 
             $checkUserInvited = Event::withCount('event_invited_user')->where('id', $eventId)->first();
             if ($request->is_update_event == '0') {
@@ -1572,7 +1570,7 @@ class EventController extends Controller
     //             $path = public_path('storage/event_images/') . $fileName;;
     //             file_put_contents($path, $imageData);
     //             $savedFiles[] = $fileName;
-                
+
     //         }
     //     }
     //     if (empty($savedFiles)) {
@@ -1596,9 +1594,9 @@ class EventController extends Controller
                 $imageData = base64_decode($data);
                 $fileName = time() . $i . '-' . uniqid() . '.jpg';
                 $i++;
-                
+
                 $path = public_path('storage/event_images/') . $fileName;
-                
+
                 file_put_contents($path, $imageData);
                 $savedFiles[] = [
                     'fileName' => $fileName,
@@ -1609,34 +1607,35 @@ class EventController extends Controller
         if (empty($savedFiles)) {
             return response()->json(['status' => 'No valid images to save'], 400);
         }
-    session(['desgin_slider' => $savedFiles]);
-    return response()->json(['success' => true, 'images' => $savedFiles]);
-}
+        session(['desgin_slider' => $savedFiles]);
+        return response()->json(['success' => true, 'images' => $savedFiles]);
+    }
 
-public function deleteSliderImg(Request $request)
-{
-    $delete_id = $request->delete_id;
-    $get_slider_data = Session::get('desgin_slider');
-    $filtered_slider_data = array_filter($get_slider_data, function ($slider) use ($delete_id) {
-        if ($slider['deleteId'] === $delete_id) {
-            $image = $slider['fileName'];
-            $imagePath = public_path('storage/event_images/') . $image;
-            if (file_exists($imagePath)) {
-                unlink($imagePath);
+    public function deleteSliderImg(Request $request)
+    {
+        $delete_id = $request->delete_id;
+        $get_slider_data = Session::get('desgin_slider');
+        $filtered_slider_data = array_filter($get_slider_data, function ($slider) use ($delete_id) {
+            if ($slider['deleteId'] === $delete_id) {
+                $image = $slider['fileName'];
+                $imagePath = public_path('storage/event_images/') . $image;
+                if (file_exists($imagePath)) {
+                    unlink($imagePath);
+                }
+                return false;
             }
-            return false;
-        }
-        return true; 
-    });
-    Session::put('desgin_slider', array_values($filtered_slider_data));
-    Session::save();
-    return response()->json(['success' => true, 'message' => 'Slider image deleted successfully.']);
-}
+            return true;
+        });
+        Session::put('desgin_slider', array_values($filtered_slider_data));
+        Session::save();
+        return response()->json(['success' => true, 'message' => 'Slider image deleted successfully.']);
+    }
 
 
 
 
-    public function get_design_edit_page(Request $request){
+    public function get_design_edit_page(Request $request)
+    {
         return view('front.event.design.edit_design')->render();
     }
 }
