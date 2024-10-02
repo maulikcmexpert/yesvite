@@ -32,14 +32,14 @@
 WebFontConfig = {
     custom: {
         families: [
-            "JosefinSans-Regular",
+            // "JosefinSans-Regular",
             "Botanica Script",
             "AbrilFatface-Regular",
             "AdleryPro-Regular",
             "AgencyFB-Bold",
             "AlexBrush-Regular",
             "Allura-Regular",
-            "Antaresia",
+            // "Antaresia",
             "BotanicaScript-Regular",
             "ArcherBold",
             "Archer-Book",
