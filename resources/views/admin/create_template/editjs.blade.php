@@ -1889,7 +1889,7 @@
 
         document.getElementById('saveButton').addEventListener('click', function() {
             // alert();
-            // saveTextDataToDatabase();
+            saveTextDataToDatabase();
             var id = $('#template_id').val();
             const width = userImageElement.clientWidth;
             const height = userImageElement.clientHeight;
@@ -1914,6 +1914,7 @@
                         })
                     })
                     .then(response => {
+                        alert(response);
                         if (!response.ok) {
                             throw new Error('Network response was not ok');
                         }
