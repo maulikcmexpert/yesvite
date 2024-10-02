@@ -173,10 +173,10 @@
                             Design <i class="fa-solid fa-angle-down"></i>
                         </div>
                         <ul class="dropdown-sub-menu">
-                            <li>
+                            <li class="pick-card">
                                 <a href="" class="dropdown-item">Pick Card</a>
                             </li>
-                            <li>
+                            <li class="edit-design">
                                 <a href="" class="dropdown-item">Edit Design</a>
                             </li>
                         </ul>
@@ -446,7 +446,7 @@
                     </div>
                 </div>
                 <div class="modal-btn">
-                    <button class="edit-btn edit_design_tem" >Edit Design</button>
+                    <button class="edit-btn edit_design_tem">Edit Design</button>
                     <button class="cmn-btn store_desgin_temp">Next: Guests</button>
                 </div>
             </div>
@@ -1083,7 +1083,7 @@
                     <label for="categoryName" id="categoryNameError"></label>
                     <input type="hidden" id="hidden_category_name" />
                     <input type="hidden" id="hidden_category_quantity" />
-                    <input type="hidden" id="hidden_potluck_key"/>
+                    <input type="hidden" id="hidden_potluck_key" />
                 </div>
                 <div class="qty-container">
                     <button class="qty-btn-minus-qty" type="button" onclick="clearError()"><i
