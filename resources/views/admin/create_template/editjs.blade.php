@@ -159,9 +159,9 @@
                             let imageUploaded = false; // Flag to track if image has been uploaded
 
                             const imgElement = new Image();
-                            imgElement.src = data.imagePath;
+                            imgElement.src = data.filedImagePath;
 
-                            userImageElement.src = data.imagePath;
+                            userImageElement.src = data.filedImagePath;
                             imageWrapper.style.display = 'block';
 
                             imgElement.onload = function() {
