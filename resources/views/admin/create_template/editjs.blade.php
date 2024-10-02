@@ -1268,12 +1268,12 @@
         //     console.log("fontname")
         //     loadAndUse("Antaresia");
         // });
-        document.getElementById('JosefinSansButton').addEventListener('click', function() {
-            console.log("fontname");
-            loadAndUse("JosefinSans-Regular");
+        // document.getElementById('JosefinSansButton').addEventListener('click', function() {
+        //     console.log("fontname");
+        //     loadAndUse("JosefinSans-Regular");
 
 
-        });
+        // });
         document.getElementById('AbrilFatfaceButton').addEventListener('click', function() {
             console.log("fontname")
             loadAndUse("AbrilFatface-Regular");
