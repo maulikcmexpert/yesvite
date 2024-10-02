@@ -1630,12 +1630,12 @@
 
 
         // Add event listener for the button (assuming your button has id="saveButton")
-        document.getElementById('saveButton').addEventListener('click', function() {
-            // alert()
+        // document.getElementById('saveButton').addEventListener('click', function() {
+        //     // alert()
 
-            saveTextDataToDatabase();
-            // window.location.href = '/templates/view';
-        });
+        //     // saveTextDataToDatabase();
+        //     // window.location.href = '/templates/view';
+        // });
 
         const fileInput = document.getElementById('fileInput');
         const userImageElement = document.getElementById('user_image');
@@ -1888,6 +1888,8 @@
             } else {
                 // alert("Please upload an image before saving the shape.");
             }
+            saveTextDataToDatabase();
+
         });
 
         Object.values(resizeHandles).forEach(handle => {

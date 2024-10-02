@@ -433,7 +433,7 @@ class ApiControllerv2 extends Controller
             if (count($paginatedEvents) != 0) {
 
                 foreach ($paginatedEvents as $value) {
-
+                    dd($value->event_settings);
 
                     $eventDetail['id'] = $value->id;
 
