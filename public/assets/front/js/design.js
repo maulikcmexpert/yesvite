@@ -578,101 +578,37 @@ function bindData() {
     }
 
     function addIconsToTextbox(textbox) {
-        // Trash icon SVG
-        // const trashIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 50 50"><path d="M20,30 L30,30 L30,40 L20,40 Z M25,10 L20,10 L20,7 L30,7 L30,10 Z M17,10 L33,10 L33,40 L17,40 Z" fill="#FF0000"/></svg>`;
-        const trashIconSVG = `<svg width="29" x="0px" y="0px" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g filter="url(#filter0_d_5633_67674)">
-            <rect x="2.70312" y="2.37207" width="23.9674" height="23.9674" rx="11.9837" fill="white" shape-rendering="crispEdges"/>
-            <path d="M19.1807 11.3502C17.5179 11.1855 15.8452 11.1006 14.1775 11.1006C13.1888 11.1006 12.2001 11.1505 11.2115 11.2504L10.1929 11.3502" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M12.939 10.8463L13.0488 10.1922C13.1287 9.7178 13.1886 9.36328 14.0325 9.36328H15.3407C16.1846 9.36328 16.2495 9.73777 16.3244 10.1971L16.4342 10.8463" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M18.1073 12.9277L17.7827 17.9559C17.7278 18.7398 17.6829 19.349 16.2898 19.349H13.0841C11.691 19.349 11.6461 18.7398 11.5912 17.9559L11.2666 12.9277" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M13.853 16.6035H15.5158" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M13.4385 14.6055H15.9351" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-            </g>
-            </svg>
-            `;
-
-        fabric.loadSVGFromString(trashIconSVG, function(objects, options) {
-            const trashIcon = fabric.util.groupSVGElements(objects, options);
-            trashIcon.set({
-                left: textbox.left + textbox.width * textbox.scaleX - 20,
-                top: textbox.top - 20,
-                selectable: false,
-                evented: true,
-                hasControls: false,
-                visible: false, // Initially hidden
-                className: "trash-icon",
-            });
-            textbox.trashIcon = trashIcon;
-
-            // Handle trash icon click
-            trashIcon.on("mousedown", function() {
-                console.log("Trash icon clicked");
-                deleteTextbox(textbox);
-            });
-
-            canvas.add(trashIcon);
-        });
-
-        // Copy icon SVG
-        // const copyIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 50 50"><path d="M5,5 L30,5 L30,30 L5,30 Z M35,5 L45,5 L45,35 L35,35 L35,5 Z" fill="#0000FF"/></svg>`;
-        const copyIconSVG = `<svg width="29" x="0px" y="0px" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g filter="url(#filter0_d_5633_67676)">
-            <rect x="2.64893" y="2.37207" width="23.9674" height="23.9674" rx="11.9837" fill="white" shape-rendering="crispEdges"/>
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M17.6283 16.3538V10.3619C17.6283 9.81039 17.1812 9.36328 16.6297 9.36328H10.6378C10.0863 9.36328 9.63916 9.81039 9.63916 10.3619V16.3538C9.63916 16.9053 10.0863 17.3524 10.6378 17.3524H16.6297C17.1812 17.3524 17.6283 16.9053 17.6283 16.3538ZM10.6379 10.362H16.6298V16.3539H10.6379V10.362ZM18.6271 17.3525V11.3607C19.1786 11.3607 19.6257 11.8078 19.6257 12.3593V17.3525C19.6257 18.4556 18.7315 19.3498 17.6284 19.3498H12.6352C12.0837 19.3498 11.6366 18.9027 11.6366 18.3512H17.6284C18.1799 18.3512 18.6271 17.9041 18.6271 17.3525Z" fill="#0F172A"/>
-            </g>
-            </svg>
-            `;
-        fabric.loadSVGFromString(copyIconSVG, function(objects, options) {
-            const copyIcon = fabric.util.groupSVGElements(objects, options);
-            copyIcon.set({
-                left: textbox.left - 25,
-                top: textbox.top - 20,
-                selectable: false,
-                evented: true,
-                hasControls: false,
-                visible: false, // Initially hidden
-                className: "copy-icon",
-            });
-            textbox.copyIcon = copyIcon;
-
-            // Handle copy icon click
-            copyIcon.on("mousedown", function() {
-                console.log("Copy icon clicked");
-                cloneTextbox(textbox);
-            });
-
-            canvas.add(copyIcon);
-        });
-
-        // Bind the updateIconPositions function to the moving and scaling events
-        textbox.on("moving", function() {
+        // Update icon positions and angles when textbox is moved, scaled, or rotated
+        textbox.on('moving', function () {
             updateIconPositions(textbox);
         });
-        textbox.on("scaling", function() {
+        textbox.on('scaling', function () {
             updateIconPositions(textbox);
         });
-
+        textbox.on('rotating', function () {
+            updateIconsPositions(textbox);
+        });
+    
         // Event listener to manage icon visibility when a textbox is clicked
-        textbox.on("mousedown", function() {
-            console.log(textbox);
-            canvas.getObjects("textbox").forEach(function(tb) {
-                if (tb.trashIcon) tb.trashIcon.set("visible", false); // Hide other icons
-                if (tb.copyIcon) tb.copyIcon.set("visible", false);
+        textbox.on('mousedown', function () {
+            canvas.getObjects('textbox').forEach(function (tb) {
+                if (tb.trashIcon) tb.trashIcon.set('visible', false); // Hide other icons
+                if (tb.copyIcon) tb.copyIcon.set('visible', false);
             });
-            if (textbox.trashIcon) textbox.trashIcon.set("visible", true); // Show current icons
-            if (textbox.copyIcon) textbox.copyIcon.set("visible", true);
+            if (textbox.trashIcon) textbox.trashIcon.set('visible', true); // Show current icons
+            if (textbox.copyIcon) textbox.copyIcon.set('visible', true);
             canvas.renderAll(); // Re-render the canvas
         });
-
+    
         // Initially hide all icons
-        canvas.getObjects("textbox").forEach(function(tb) {
-            if (tb.trashIcon) tb.trashIcon.set("visible", false);
-            if (tb.copyIcon) tb.copyIcon.set("visible", false);
+        canvas.getObjects('textbox').forEach(function (tb) {
+            if (tb.trashIcon) tb.trashIcon.set('visible', false);
+            if (tb.copyIcon) tb.copyIcon.set('visible', false);
         });
-
+    
         canvas.renderAll(); // Final render
     }
+    
 
     canvas = new fabric.Canvas("imageEditor1", {
         width: 345, // Canvas width
@@ -1030,6 +966,37 @@ function bindData() {
             y: centerY
         };
     }
+
+    // function updateIconsPositions(textbox) {
+    //     const angle = fabric.util.degreesToRadians(textbox.angle);
+    //     const boundingRect = textbox.getBoundingRect(true);
+    
+    //     // Calculate the new position for the trash icon
+    //     const trashOffsetX = +75;  // Offset for the trash icon
+    //     const trashOffsetY = - 30;  // Adjust icon's vertical position
+    //     const trashRotatedX = textbox.left + trashOffsetX  Math.cos(angle) - trashOffsetY  Math.sin(angle);
+    //     const trashRotatedY = textbox.top + trashOffsetX  Math.sin(angle) + trashOffsetY  Math.cos(angle);
+    
+    //     if (textbox.trashIcon) {
+    //         textbox.trashIcon.left = trashRotatedX;
+    //         textbox.trashIcon.top = trashRotatedY;
+    //         textbox.trashIcon.angle = textbox.angle;  // Sync icon rotation with textbox
+    //     }
+    
+    //     // Calculate the new position for the copy icon
+    //     const copyOffsetX = -4;  // Offset for the copy icon on the left
+    //     const copyOffsetY = -25;
+    //     const copyRotatedX = textbox.left + copyOffsetX  Math.cos(angle) - copyOffsetY  Math.sin(angle);
+    //     const copyRotatedY = textbox.top + copyOffsetX  Math.sin(angle) + copyOffsetY  Math.cos(angle);
+    
+    //     if (textbox.copyIcon) {
+    //         textbox.copyIcon.left = copyRotatedX;
+    //         textbox.copyIcon.top = copyRotatedY;
+    //         textbox.copyIcon.angle = textbox.angle;  // Sync icon rotation with textbox
+    //     }
+    
+    //     canvas.renderAll();  // Re-render canvas to update positions
+    // }
 
     function updateIconPositions(textbox) {
         // Remove old trash and copy icons if they exist
