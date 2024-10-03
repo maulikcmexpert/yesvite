@@ -440,6 +440,35 @@ function bindData() {
                         lockScalingFlip: true,
                         hasBorders: true,
                     });
+                    
+                    // Custom rendering of middle-left (ml) control as a rectangle
+                    textElement.controls.ml = new fabric.Control({
+                        x: -0.5, // Left side
+                        y: 0,
+                        offsetX: 0,
+                        offsetY: 0,
+                        cursorStyle: 'e-resize',
+                        actionHandler: fabric.controlsUtils.scalingX,
+                        render: function(ctx, left, top, styleOverride, fabricObject) {
+                            ctx.fillStyle = 'white'; // Rectangle color
+                            ctx.fillRect(left - 8, top - 8, 16, 16); // Draw a rectangle control for 'ml'
+                        }
+                    });
+
+                    // Custom rendering of middle-right (mr) control as a rectangle
+                    textElement.controls.mr = new fabric.Control({
+                        x: 0.5, // Right side
+                        y: 0,
+                        offsetX: 0,
+                        offsetY: 0,
+                        cursorStyle: 'e-resize',
+                        actionHandler: fabric.controlsUtils.scalingX,
+                        render: function(ctx, left, top, styleOverride, fabricObject) {
+                            ctx.fillStyle = 'white'; // Rectangle color
+                            ctx.fillRect(left - 8, top - 8, 16, 16); // Draw a rectangle control for 'mr'
+                        }
+                    });
+
 
                     switch (element.text) {
                         case "event_name":
