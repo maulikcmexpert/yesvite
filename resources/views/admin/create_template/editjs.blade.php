@@ -1362,11 +1362,6 @@
                     id: canvasId,
                     textElements: textData,
                     shapeImageData: shapeImageData,
-                    // shape: shape,
-                    // centerX: centerX,
-                    // centerY: centerY,
-                    // width: width,
-                    // height: height
                 },
                 // processData: false,
                 // contentType: false,
