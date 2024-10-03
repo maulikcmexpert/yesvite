@@ -329,8 +329,8 @@
         } else if (element.shape === 'star') {
             clipPath= new fabric.Path(
                         'M 50,0 L 61,35 L 98,35 L 68,57 L 79,91 L 50,70 L 21,91 L 32,57 L 2,35 L 39,35 z', {
-                        scaleX: (img.width * img.scaleX) / 100, // Adjust scaling
-                        scaleY: (img.height * img.scaleY) / 100,
+                        scaleX: (image.width * image.scaleX) / 100, // Adjust scaling
+                        scaleY: (image.height * image.scaleY) / 100,
                         originX: 'center',
                         originY: 'center'
                         })
