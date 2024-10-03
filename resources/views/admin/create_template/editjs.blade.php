@@ -105,10 +105,11 @@ document.addEventListener("DOMContentLoaded", function () {
                             console.log("Image loaded and added to canvas.");
                             imageUploaded = true; // Set flag to true after image is uploaded
 
-                            addIconsToImage(imgInstance);
                             if (shape) {
                                 updateClipPath(imgInstance, shape); // Update the shape with fetched data
                             }
+                            addIconsToImage(imgInstance);
+
                             imgInstance.on("mouseup", function (options) {
                                 if (options.target) {
                                     // Change to the next shape on click
@@ -272,14 +273,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function addIconsToImage(textbox) {
         console.log(textbox);
-        alert(0)
         // Remove existing trash icon if it exists
         if (textbox.trashIcon) {
             canvas.remove(textbox.trashIcon);
             textbox.trashIcon = null; // Clear reference
             canvas.renderAll();
         }
-        alert(1)
 
         const trashIconSVG = `<svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g filter="url(#filter0_d_5633_67674)">
@@ -302,7 +301,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 hasControls: false,
                 hoverCursor: "pointer",
             });
-            alert(2)
 
             // Attach delete functionality to the trash icon only once
             if (!trashIcon.deleteHandlerAttached) {
@@ -316,7 +314,6 @@ document.addEventListener("DOMContentLoaded", function () {
             canvas.add(trashIcon);
             canvas.bringToFront(trashIcon);
             textbox.trashIcon = trashIcon; // Store the reference of the trash icon
-            alert(3)
 
             // Update icon position on moving and scaling
             textbox.on("moving", function () {
@@ -330,7 +327,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     addIconsToImage(textbox);
                 }, 500);
             });
-        alert(4)
 
             textbox.on("scaling", function () {
                 if (textbox.trashIcon) {
