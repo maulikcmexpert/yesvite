@@ -368,28 +368,34 @@ function updateClipPath(imageUrl, element) {
                     originY: 'center'
                 });
                 break;
-            case 'star':
-                clipPath = new fabric.Path(
-                    'M 50,0 L 61,35 L 98,35 L 68,57 L 79,91 L 50,70 L 21,91 L 32,57 L 2,35 L 39,35 z',
-                    {
-                        scaleX: (image.width * image.scaleX) / 100,
-                        scaleY: (image.height * image.scaleY) / 100,
+                case 'star':
+                    // Create a star shape
+                    clipPath = new fabric.Path(
+                        'M 50,0 L 61,35 L 98,35 L 68,57 L 79,91 L 50,70 L 21,91 L 32,57 L 2,35 L 39,35 z',
+                        {
+                            scaleX: (containerWidth / 100) * 0.8, // Scale to 80% of container width
+                            scaleY: (containerHeight / 100) * 0.8, // Scale to 80% of container height
+                            originX: 'center',
+                            originY: 'center'
+                        }
+                    );
+                    break;
+
+                case 'heart':
+                    // Create a heart shape
+                    const heartPath = [
+                        'M', 0, 0,
+                        'C', -containerWidth / 4, -containerHeight / 4, -containerWidth / 4, containerHeight / 8, 0, containerHeight / 5,
+                        'C', containerWidth / 4, containerHeight / 8, containerWidth / 4, -containerHeight / 4, 0, 0
+                    ].join(' ');
+
+                    clipPath = new fabric.Path(heartPath, {
+                        scaleX: (containerWidth / 100) * 0.8, // Scale to 80% of container width
+                        scaleY: (containerHeight / 100) * 0.8, // Scale to 80% of container height
                         originX: 'center',
                         originY: 'center'
-                    }
-                );
-                break;
-            case 'heart':
-                const heartPath = [
-                    'M', 0, 0,
-                    'C', -containerWidth / 3, -containerHeight / 3, -containerWidth / 3, containerHeight / 6, 0, containerHeight / 5,
-                    'C', containerWidth / 3, containerHeight / 6, containerWidth / 3, -containerHeight / 3, 0, 0
-                ].join(' ');
-                clipPath = new fabric.Path(heartPath, {
-                    originX: 'center',
-                    originY: 'center'
-                });
-                break;
+                    });
+                    break;
           
             default:
               
