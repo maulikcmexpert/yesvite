@@ -481,15 +481,33 @@ function bindData() {
                         }
                     });
                     
+                    var rotateIcon = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAHqSURBVHgBtZW7S8NQFMZPxFXbzUGULIJPdHBwUAgWQamDj1msg0MXHQWXCiIdHFpQKupgrVR0sovgZBEfQx0UdHBLH9bVpv0DjueksRbb5Da2/uBrm4Z7vvvde5IrgQBEdNLXDGmQJJOcxq0c6YYUkyQpCX+BisukAOkTxcRJip36bLBaY/HfBIzkQgMf1odKkv/T4JsnrJaI/lSwsQSqmaiiUTktj6l0Fm2gcO0mw8ADxfY0RcsXYMw1D3cPCbCBrzxFXDQl78o6Otp6sbNrBEddc/p1jamcTYaPIprSQH83OFpbwL+5BqHgFnR2tMP0nAfSmQ/R0Bnhhvu3d3UxqfQ7hvYjpXvRswscGJ4QJQkKTXh5uLgZ7tlFvL1PWJU44uWSzXKmM1lwOFr0pTFdxr5uYTOwSRLqhPfKAs3ShBNoWoFm+mha4fLqmpqiByxI6p9o8SCGDiL65lZrV24IbmUBQ82G2zGUPzhleJcX9DTcrvybW5n36vQ8pt+PhncsU9BZ8ywZSfhlpsLPgVQBF947PIGX1zd9Gd1T4+CedIGAJTIJl67IaAMbi1phyWmw+IpuFHLVbFg8clWsHw9YUacRH9kK1AoW90i1YRBHq2NXkMqD5keBSgqKZi+BDYyZspKkHLVnrpZxX+O67qGyL3x/AAAAAElFTkSuQmCC";
+                    var img = document.createElement('img');
+                    img.src = rotateIcon;
+                
+                    // here's where your custom rotation control is defined
+                    // by changing the values you can customize the location, size, look, and behavior of the control
                     textElement.controls.mtr = new fabric.Control({
-                        x: 0,
-                        y: -0.5,
-                        hasBorders:false,
-                        offsetY: -40, // Adjust this as needed
-                        cursorStyle: 'crosshair',
-                        actionHandler: fabric.controlsUtils.rotationWithSnapping,
-                        render: renderIcon,
+                      x: 0,
+                      y: -0.5,
+                      offsetY: -40,
+                      cursorStyle: 'pointer',
+                      actionHandler: fabric.controlsUtils.rotationWithSnapping,
+                      actionName: 'rotate',
+                      render: renderIcon,
+                      cornerSize: 28,
+                      withConnection: true
                     });
+                
+                    // here's where the render action for the control is defined
+                    function renderIcon(ctx, left, top, styleOverride, fabricObject) {
+                      var size = this.cornerSize;
+                      ctx.save();
+                      ctx.translate(left, top);
+                      ctx.rotate(fabric.util.degreesToRadians(fabricObject.angle));
+                      ctx.drawImage(img, -size / 2, -size / 2, size, size);
+                      ctx.restore();
+                    }
 
                     // textElement.controls.mt = new fabric.Control({
                     //     x: 0.5, // Right side
