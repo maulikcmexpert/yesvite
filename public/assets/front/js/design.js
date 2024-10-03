@@ -451,7 +451,7 @@ function bindData() {
                         actionHandler: fabric.controlsUtils.scalingX,
                         render: function(ctx, left, top, styleOverride, fabricObject) {
                             ctx.fillStyle = 'white'; // Rectangle color
-                            ctx.fillRect(left - 4, top - 12, 4, 8); // Draw a rectangle control for 'ml'
+                            ctx.fillRect(left - 6, top - 16, 4, 8); // Draw a rectangle control for 'ml'
                         }
                     });
 
@@ -465,7 +465,7 @@ function bindData() {
                         actionHandler: fabric.controlsUtils.scalingX,
                         render: function(ctx, left, top, styleOverride, fabricObject) {
                             ctx.fillStyle = 'white'; // Rectangle color
-                            ctx.fillRect(left - 4, top - 12, 4, 8); // Draw a rectangle control for 'mr'
+                            ctx.fillRect(left - 6, top - 16, 4, 8); // Draw a rectangle control for 'mr'
                         }
                     });
 
