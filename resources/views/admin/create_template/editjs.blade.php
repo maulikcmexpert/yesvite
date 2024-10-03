@@ -296,6 +296,7 @@
     // Define the fixed container dimensions
     const containerWidth = 150;
     const containerHeight = 200;
+    let isDragging = false; // Track if the image is being dragged
 
     // Load the image from the URL
     fabric.Image.fromURL(imageUrl, function (image) {
@@ -355,21 +356,31 @@
         top: element.centerY, 
 
         }); 
+        image.on('moving', function () {
+            isDragging = true; // Set dragging flag to true
+        });
 
         image.on('mouseup', function (options) {
-            if (options.target) {
-                // Change to the next shape on click
+            if (isDragging) {
+                // Update the position after dragging
+                element.centerX = image.left;
+                element.centerY = image.top;
+                isDragging = false; // Reset dragging flag
+            } else {
+                // If not dragging, change to the next shape on click
                 currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
-                shape = shapes[currentShapeIndex];
-                udpatedOBJ = {
-                        "shape": shape,
-                        "centerX": 50,
-                        "centerY": 50,
-                        "width": 100,
-                        "height": 100
-                    }
+                const shape = shapes[currentShapeIndex];
+
+                const updatedOBJ = {
+                    shape: shape,
+                    centerX: image.left,
+                    centerY: image.top,
+                    width: 100,
+                    height: 100
+                };
+
                 // Update the clip path or shape (if needed)
-                updateClipPath(imageUrl, udpatedOBJ);
+                updateClipPath(imageUrl, updatedOBJ);
             }
         });
 
