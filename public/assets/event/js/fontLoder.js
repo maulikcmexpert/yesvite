@@ -11,7 +11,7 @@
 //     ];
 
 //     fonts.forEach(font => {
-//         console.log(font)
+// console.log(font)
 //         alert(1)
 //         const fontFace = new FontFace(font.family, `url(${font.urls.join('"), url(')})`, {
 //             weight: font.weight,
@@ -60,26 +60,26 @@ WebFontConfig = {
         ],
     },
     loading: function () {
-        console.log("loading");
+        // console.log("loading");
     },
     active: function () {
-        console.log("active");
+        // console.log("active");
     },
     inactive: function () {
-        console.log("inactive");
+        // console.log("inactive");
     },
     fontloading: function (fontFamily, fontDescription) {
-        console.log(
-            "fontloading: " + fontFamily + " (" + fontDescription + ")"
-        );
+        // console.log(
+        //     "fontloading: " + fontFamily + " (" + fontDescription + ")"
+        // );
     },
     fontactive: function (fontFamily, fontDescription) {
-        console.log("fontactive: " + fontFamily + " (" + fontDescription + ")");
+        // console.log("fontactive: " + fontFamily + " (" + fontDescription + ")");
     },
     fontinactive: function (fontFamily, fontDescription) {
-        console.log(
-            "fontinactive: " + fontFamily + " (" + fontDescription + ")"
-        );
+        // console.log(
+        //     "fontinactive: " + fontFamily + " (" + fontDescription + ")"
+        // );
     },
 };
 WebFont.load(WebFontConfig);
