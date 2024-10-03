@@ -368,14 +368,21 @@ function updateClipPath(imageUrl, element) {
                     originY: 'center'
                 });
                 break;
+              
                 case 'star':
+    // Star path definition
     const starPath = 'M 50,0 L 61,35 L 98,35 L 68,57 L 79,91 L 50,70 L 21,91 L 32,57 L 2,35 L 39,35 z';
-    const starScale = Math.min(containerWidth, containerHeight) / 100 * 0.9; // Scale to fit
+    
+    // Scale to fit within the container
+    const starScale = Math.min(containerWidth, containerHeight) / 100 * 0.9; // Adjust scaling factor
+
     clipPath = new fabric.Path(starPath, {
         scaleX: starScale,
         scaleY: starScale,
         originX: 'center',
-        originY: 'center'
+        originY: 'center',
+        left: containerWidth / 2,  // Center horizontally
+        top: containerHeight / 2    // Center vertically
     });
     break;
 
