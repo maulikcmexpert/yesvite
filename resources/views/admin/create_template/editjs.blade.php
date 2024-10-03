@@ -287,7 +287,7 @@
                 .catch(error => console.error('Error loading text data:', error));
         }
 
-        function updateClipPath(imageUrl, shape) {
+        function updateClipPath(imageUrl, element) {
     // Define the fixed container dimensions
     const containerWidth = 150;
     const containerHeight = 200;
@@ -313,20 +313,20 @@
         let clipPath;
 
         // Define the clipping path based on the shape
-        if (shape === 'circle') {
+        if (element.shape === 'circle') {
             clipPath = new fabric.Circle({
                 radius: Math.min(containerWidth, containerHeight) / 2, // Adjust radius based on the smaller container dimension
                 originX: 'center',
                 originY: 'center'
             });
-        } else if (shape === 'rectangle') {
+        } else if (element.shape === 'rectangle') {
             clipPath = new fabric.Rect({
                 width: containerWidth, // Use the fixed container dimensions
                 height: containerHeight,
                 originX: 'center',
                 originY: 'center'
             });
-        } else if (shape === 'star') {
+        } else if (element.shape === 'star') {
             const starPoints = [];
             const spikes = 5;
             const outerRadius = Math.min(containerWidth, containerHeight) / 2; // Scale outer radius based on the container size
@@ -344,7 +344,7 @@
                 originX: 'center',
                 originY: 'center'
             });
-        } else if (shape === 'heart') {
+        } else if (element.shape === 'heart') {
             const heartPath = [
                 'M', 0, 0,
                 'C', -containerWidth / 3, -containerHeight / 3, -containerWidth / 3, containerHeight / 6, 0, containerHeight / 5,
@@ -356,12 +356,12 @@
                 originY: 'center'
             });
         }
-
+        console.log(element)
         // Apply the clipping path to the image
         image.set({
             clipPath: clipPath,
-            left: 50,
-        top: 50, 
+            left: element.centerX,
+        top: element.centerY, 
 
         });
 
