@@ -447,6 +447,25 @@ function updateClipPath(imageUrl, element) {
                 updateClipPath(imageUrl, updatedOBJImage);
             }
         });
+
+         // Handle scaling/resizing (optional)
+         image.on('scaling', function () {
+            const scaleX = image.scaleX;
+            const scaleY = image.scaleY;
+
+            updatedOBJImage.width = image.width * scaleX;
+            updatedOBJImage.height = image.height * scaleY;
+
+            // Optionally update clip path scaling too
+            if (clipPath) {
+                clipPath.set({
+                    scaleX: scaleX,
+                    scaleY: scaleY
+                });
+            }
+
+            console.log("Updated image size:", updatedOBJImage);
+        });
         console.log(updatedOBJImage)
         isimageoncanvas = true;
         $('.photo-slider-wrp').hide()
