@@ -2726,6 +2726,7 @@ function savePage1Data(close = null) {
         if(close == 'next'){
             $(".step_1").hide();
             handleActiveClass('.li_design');
+            $('.pick-card').addClass('menu-success');
             $('.li_event_detail').find(".side-bar-list").addClass("menu-success");
         }
         // alert(description);
