@@ -108,7 +108,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             if (shape) {
                                 updateClipPath(imgInstance, shape); // Update the shape with fetched data
                             }
-                            addIconsToImage(imgInstance);
+                            addIconsToImage(imgElement);
 
                             imgInstance.on("mouseup", function (options) {
                                 if (options.target) {
