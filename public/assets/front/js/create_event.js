@@ -1638,7 +1638,7 @@ $(document).on("blur", "#ac-start-time", function () {
 
     if (activity_start_time != "" && start_time > activity_start_time) {
         var old_start_date = $("#start-time").val();
-        toastr.error("youuuu can`tttttttt");
+        toastr.error("you can not set activity start time greater than event start time");
         $(this).val(old_start_date);
         $("#start-time").val(old_start_date);
         return;
