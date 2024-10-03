@@ -3091,7 +3091,7 @@ $(document).on("click", ".cancel-btn-createEvent", function () {
 
 function handleActiveClass(target) {
     $(".side-bar-list").removeClass("active");
-    if(target == 'li_design'){
+    if(target == '.li_design'){
         $('pick-card').addClass("active");
     }else{
         $(target).find(".side-bar-list").addClass("active");
