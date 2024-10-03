@@ -1356,31 +1356,25 @@
             console.log(textData);
             $.ajax({
                 headers: {
-                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
-                        "content"
-                    ),
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
                 },
                 url: base_url + "/saveTextData",
                 type: "POST",
-                dataType: 'JSON',
-                data: JSON.stringify({
-                    id: canvasId,
+                dataType: 'json', // Expect a JSON response
+                data: {
+                    id: canvasId, // Send as an object, not JSON string
                     textElements: textData,
                     shapeImageData: shapeImageData,
-                }),
-                // processData: false,
-                // contentType: false,
+                },
                 success: function(response) {
                     console.log('Text data saved successfully', response);
                     window.location.href = "{{URL::to('/admin/create_template')}}";
                 },
                 error: function(xhr, status, error) {
-                    console.error(
-                        "Failed Not Saved Data:",
-                        error
-                    );
+                    console.error("Failed Not Saved Data:", error);
                 },
             });
+
 
 
 
