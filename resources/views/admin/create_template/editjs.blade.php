@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             // });
 
                             // canvasElement.add(imgInstance);
-                            // addIconsToImage(imgInstance);
+                            addIconsToImage(imgElement);
 
                            // drawCanvas();
                             console.log("Image loaded and added to canvas.");
