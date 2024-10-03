@@ -1187,7 +1187,7 @@
         function getTextDataFromCanvas() {
             var objects = canvas.getObjects();
             var textData = [];
-            console.log(objects);
+            // console.log(objects);
             objects.forEach(function(obj) {
                 if (obj.type === 'textbox') {
                     var centerX = obj.left + (obj.width / 2);
@@ -1316,7 +1316,7 @@
             var canvasElement = document.getElementById('imageEditor1');
             var canvasId = canvasElement.getAttribute('data-canvas-id');
             var imageName = 'image_' + Date.now() + '.png';
-            console.log(canvasId);
+            console.log(textData);
 
             // fetch('/saveTextData', {
             //         method: 'POST',
