@@ -175,12 +175,15 @@ $(document).on("click", ".design-card", function () {
     
                 imgObj.onload = function () {
                     // Create the image object in fabric.js
-                    var img = new fabric.Image(imgObj, {
-                        left: element.centerX - element.width / 2, // Center horizontally
-                        top: element.centerY - element.height / 2, // Center vertically
-                        scaleX: element.width / imgObj.width, // Scale the image to fit shape dimensions
-                        scaleY: element.height / imgObj.height
+                    var img = new fabric.Image(imgObj);
+                    img.set({
+                        left: canvas.width / 2 - img.width / 2,
+                        top: canvas.height / 2 - img.height / 2,
+                        scaleX: 0.5,
+                        scaleY: 0.5
                     });
+                    canvas.add(img);
+                    canvas.renderAll();
     
                     // let clipPath;
     
@@ -242,8 +245,8 @@ $(document).on("click", ".design-card", function () {
                     // });
     
                     // Add the image to the canvas
-                    canvas.add(img);
-                    canvas.renderAll(); // Refresh the canvas
+                    // canvas.add(img);
+                    // canvas.renderAll(); // Refresh the canvas
                 };
             }
         });
