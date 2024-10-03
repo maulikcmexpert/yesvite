@@ -1160,8 +1160,7 @@ function updateClipPath(imageUrl, element) {
                 console.log(textbox)
 
             }
-            textbox.trashIcon = null; // Clear reference
-            canvas.set(textbox)
+            
             if (textbox.copyIcon) {
                 console.log("removing trash old copy icon")
 
