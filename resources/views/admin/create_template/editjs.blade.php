@@ -378,6 +378,14 @@
         
         image.on('moving', function () {
             isImageDragging = true; // Set dragging flag to true
+            updatedOBJImage = {
+                shape: element.shape,
+                centerX: image.offsetLeft,
+                centerY: image.offsetTop,
+                width: image.width,
+                height:  image.height
+            };
+            console.log(image.offsetLeft)
         });
 
         image.on('mouseup', function (options) {
