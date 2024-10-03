@@ -356,7 +356,7 @@
 
         }); 
 
-        image.on('mouseup', function (options) {
+        image.on('click', function (options) {
             if (options.target) {
                 // Change to the next shape on click
                 currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
