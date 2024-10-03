@@ -225,7 +225,7 @@
                                 });
                                 // Apply the shape from static information if available
                                 if (shape) {
-                                    updateClipPath(filedImg, shape); // Update the shape with fetched data
+                                    // updateClipPath(filedImg, shape); // Update the shape with fetched data
                                 }
 
 
