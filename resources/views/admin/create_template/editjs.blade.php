@@ -1362,6 +1362,7 @@
                 },
                 url: base_url + "/saveTextData",
                 type: "POST",
+                dataType: 'JSON',
                 data: JSON.stringify({
                     id: canvasId,
                     textElements: textData,
