@@ -225,7 +225,7 @@
                                 });
                                 // Apply the shape from static information if available
                                 if (shape) {
-                                    updateClipPath(filedImg, shape); // Update the shape with fetched data
+                                    // updateClipPath(filedImg, shape); // Update the shape with fetched data
                                 }
 
 
@@ -237,7 +237,7 @@
                                         currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
                                         shape = shapes[currentShapeIndex];
 
-                                        updateClipPath(filedImg, shape); // Update the shape
+                                        // updateClipPath(filedImg, shape); // Update the shape
                                     }
                                 });
 
