@@ -333,10 +333,12 @@
 let isImageDragging = false; // Track if the image is being dragged
 
 function updateClipPath(imageUrl, element) {
+    console.log(imageUrl)
     // Remove the previous image from the canvas if it exists
     if (currentImage) {
         canvas.remove(currentImage);
     }
+    console.log(1)
 
     // Define the fixed container dimensions
     const containerWidth = 150;
@@ -344,6 +346,8 @@ function updateClipPath(imageUrl, element) {
 
     // Load the image from the provided URL
     fabric.Image.fromURL(imageUrl, function (image) {
+    console.log(2)
+
         // Get the original dimensions of the image
         const originalWidth = image.width;
         const originalHeight = image.height;
@@ -402,6 +406,7 @@ function updateClipPath(imageUrl, element) {
             left: element.centerX,
             top: element.centerY
         });
+        console.log(5)
 
         // Track image position and update global object on moving
         image.on('moving', function () {
@@ -442,6 +447,7 @@ function updateClipPath(imageUrl, element) {
                 updateClipPath(imageUrl, updatedOBJImage);
             }
         });
+        console.log(updatedOBJImage)
 
         // Add the image to the canvas
         canvas.add(image);
@@ -1392,12 +1398,21 @@ function updateClipPath(imageUrl, element) {
 
 
         function discardIfMultipleObjects(options) {
-            console.log("comcas")
+            
             if (options.target !== undefined && options.target?._objects && options.target?._objects.length > 1) {
                 console.log('Multiple objects selected:', options.target);
                 canvas.discardActiveObject();
                 canvas.renderAll(); // Ensure the canvas is refreshed
             }
+
+            const activeObjects = canvas.getActiveObjects(); // Get all selected objects
+            console.log(activeObjects)
+            if (activeObjects.length > 1) {
+                console.log('Multiple objects selected:', activeObjects);
+                canvas.discardActiveObject(); // Discard active selection
+                canvas.renderAll(); // Refresh the canvas
+            }
+          
         }
 
         canvas.on('mouse:down', function(options) {
@@ -2239,45 +2254,45 @@ function updateClipPath(imageUrl, element) {
                     })
                     .then(data => {
                         console.log('Server response:', data);
+                        updateClipPath(data.imagePath, updatedOBJImage)
+                        // const imgElement = new Image();
+                        // imgElement.src = data.imagePath;
+                        // imgElement.addClass = 'image-element-prakash';
 
-                        const imgElement = new Image();
-                        imgElement.src = data.imagePath;
-                        imgElement.addClass = 'image-element-prakash';
+                        // userImageElement.src = data.imagePath;
+                        // imageWrapper.style.display = 'block';
 
-                        userImageElement.src = data.imagePath;
-                        imageWrapper.style.display = 'block';
+                        // imgElement.onload = function() {
+                        //     console.log("Image loaded successfully.");
+                        //     const imgInstance = new fabric.Image(imgElement, {
+                        //         left: 0,
+                        //         top: 0,
+                        //         selectable: true,
+                        //         hasControls: true,
+                        //         hasBorders: true,
+                        //         // cornerColor: 'red',
+                        //         cornerStrokeColor: 'blue',
+                        //         // borderColor: 'blue',
+                        //         borderColor: '#2DA9FC',
+                        //         // cornerColor: 'red',
+                        //         cornerColor: '#fff',
+                        //         cornerSize: 10,
+                        //         transparentCorners: false,
+                        //         lockUniScaling: true,
+                        //         scaleX: 600 / imgElement.width,
+                        //         scaleY: 600 / imgElement.height
+                        //     });
 
-                        imgElement.onload = function() {
-                            console.log("Image loaded successfully.");
-                            const imgInstance = new fabric.Image(imgElement, {
-                                left: 0,
-                                top: 0,
-                                selectable: true,
-                                hasControls: true,
-                                hasBorders: true,
-                                // cornerColor: 'red',
-                                cornerStrokeColor: 'blue',
-                                // borderColor: 'blue',
-                                borderColor: '#2DA9FC',
-                                // cornerColor: 'red',
-                                cornerColor: '#fff',
-                                cornerSize: 10,
-                                transparentCorners: false,
-                                lockUniScaling: true,
-                                scaleX: 600 / imgElement.width,
-                                scaleY: 600 / imgElement.height
-                            });
+                        //     canvasElement.add(imgInstance);
+                        //     canvasElement.bringToFront(imgInstance);
+                        //     drawCanvas();
+                        //     console.log('Image loaded and added to canvas.');
+                        //     imageUploaded = true; // Set flag to true after image is uploaded
+                        // };
 
-                            canvasElement.add(imgInstance);
-                            canvasElement.bringToFront(imgInstance);
-                            drawCanvas();
-                            console.log('Image loaded and added to canvas.');
-                            imageUploaded = true; // Set flag to true after image is uploaded
-                        };
-
-                        imgElement.onerror = function() {
-                            console.error("Failed to load image.");
-                        };
+                        // imgElement.onerror = function() {
+                        //     console.error("Failed to load image.");
+                        // };
                     })
                     .catch(error => {
                         console.error('There was a problem with the fetch operation:', error);
