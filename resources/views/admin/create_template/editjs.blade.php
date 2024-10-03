@@ -1277,13 +1277,7 @@
             console.log(textData);
             shapeImageData = [];
 
-            // shapeImageData.push({
-            //     shape: shape,
-            //     centerX: centerX,
-            //     centerY: centerY,
-            //     width: width,
-            //     height: height
-            // });
+
             fetch('/saveTextData', {
                     method: 'POST',
                     headers: {
@@ -1293,12 +1287,17 @@
                     body: JSON.stringify({
                         id: canvasId,
                         textElements: textData,
+                        shape: shape,
+                        centerX: centerX,
+                        centerY: centerY,
+                        width: width,
+                        height: height
                     })
                 })
                 .then(response => response.json())
                 .then(data => {
                     console.log('Text data saved successfully', data);
-                    window.location.href = "{{URL::to('/admin/create_template')}}";
+                    // window.location.href = "{{URL::to('/admin/create_template')}}";
 
                 })
                 .catch((error) => {
@@ -1906,45 +1905,45 @@
         document.getElementById('saveButton').addEventListener('click', function() {
             // alert();
             saveTextDataToDatabase();
-            // var id = $('#template_id').val();
-            // const width = userImageElement.clientWidth;
-            // const height = userImageElement.clientHeight;
-            // const left = imageWrapper.offsetLeft;
-            // const top = imageWrapper.offsetTop;
-            // const centerX = left + width / 2;
-            // const centerY = top + height / 2;
-            // if (imageUploaded) {
-            //     fetch(`/save_shape/${id}`, {
-            //             method: 'POST',
-            //             headers: {
-            //                 'Content-Type': 'application/json',
-            //                 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
-            //                     .getAttribute('content')
-            //             },
-            //             body: JSON.stringify({
-            //                 shape: shape,
-            //                 centerX: centerX,
-            //                 centerY: centerY,
-            //                 width: width,
-            //                 height: height
-            //             })
-            //         })
-            //         .then(response => {
-            //             alert(response);
-            //             if (!response.ok) {
-            //                 throw new Error('Network response was not ok');
-            //             }
-            //             return response.json();
-            //         })
-            //         .then(data => {
-            //             console.log('Shape saved successfully:', data);
-            //         })
-            //         .catch(error => {
-            //             console.error('There was a problem with saving the shape:', error);
-            //         });
-            // } else {
-            //     // alert("Please upload an image before saving the shape.");
-            // }
+            var id = $('#template_id').val();
+            const width = userImageElement.clientWidth;
+            const height = userImageElement.clientHeight;
+            const left = imageWrapper.offsetLeft;
+            const top = imageWrapper.offsetTop;
+            const centerX = left + width / 2;
+            const centerY = top + height / 2;
+            if (imageUploaded) {
+                fetch(`/save_shape/${id}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
+                                .getAttribute('content')
+                        },
+                        body: JSON.stringify({
+                            shape: shape,
+                            centerX: centerX,
+                            centerY: centerY,
+                            width: width,
+                            height: height
+                        })
+                    })
+                    .then(response => {
+                        alert(response);
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log('Shape saved successfully:', data);
+                    })
+                    .catch(error => {
+                        console.error('There was a problem with saving the shape:', error);
+                    });
+            } else {
+                // alert("Please upload an image before saving the shape.");
+            }
         });
 
         Object.values(resizeHandles).forEach(handle => {
