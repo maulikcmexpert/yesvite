@@ -488,16 +488,19 @@ function bindData() {
                     // here's where your custom rotation control is defined
                     // by changing the values you can customize the location, size, look, and behavior of the control
                     textElement.controls.mtr = new fabric.Control({
-                      x: 0,
-                      y: -0.5,
-                      offsetY: -40,
-                      cursorStyle: 'pointer',
-                      actionHandler: fabric.controlsUtils.rotationWithSnapping,
-                      actionName: 'rotate',
-                      render: renderIcon,
-                      cornerSize: 28,
-                      withConnection: true,
-                      hasBorders: false
+                        x: 0,
+                        y: -0.5,
+                        offsetY: -40, // Adjust this as needed
+                        cursorStyle: 'crosshair',
+                        actionHandler: fabric.controlsUtils.rotationWithSnapping,
+                        render: function(ctx, left, top, styleOverride, fabricObject) {
+                            ctx.fillStyle = 'red'; // Circle color for the mtr control
+                            ctx.beginPath();
+                            ctx.arc(left, top, 6, 0, 2 * Math.PI, false); // Draw a circle for 'mtr'
+                            ctx.fill();
+                            ctx.closePath();
+                        },
+                        hasBorders:false
                     });
                 
                     // here's where the render action for the control is defined
