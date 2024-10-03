@@ -163,13 +163,13 @@ $(document).on("click", ".design-card", function () {
         textElement.set({ width: textWidth });
         canvas.add(textElement);
     });
-
+    var shape = '';
     if (dbJson) {
         const staticInfo = dbJson;
         staticInfo?.shapeImageData?.forEach(element => {
             if (element.shape != undefined && element.centerX != undefined && element.centerY != undefined && element.height != undefined && element.width != undefined) {
                 console.log(element.shape);
-                var shape_type = element.shape;
+                shape = element.shape;
                 var shape_centerX = element.centerX;
                 var shape_centerY = element.centerY;
                 var shape_height = element.height;
@@ -198,8 +198,6 @@ $(document).on("click", ".design-card", function () {
                 cornerSize: 10,
                 transparentCorners: false,
                 lockUniScaling: true,
-                scaleX: 600 / imgElement.width,
-                scaleY: 600 / imgElement.height,
             });
             let clipPath;
 
@@ -267,7 +265,7 @@ $(document).on("click", ".design-card", function () {
             }
     
             // Apply the clipping path to the image
-            image.set({
+            img.set({
                 clipPath: clipPath,
             });
             canvas.renderAll(); // Refresh the canvas
