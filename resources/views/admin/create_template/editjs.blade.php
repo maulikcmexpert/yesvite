@@ -1742,32 +1742,92 @@
 
 
         // Undo and Redo actions (basic implementation)
+        // let undoStack = [];
+        // let redoStack = [];
+
+        // function addToUndoStack() {
+        //     undoStack.push(canvas.toJSON());
+        //     console.log(undoStack);
+        //     redoStack = []; // Clear redo stack on new action
+        // }
+
+        // function undo() {
+
+        //     if (undoStack.length >= 0) {
+        //         redoStack.push(canvas.toJSON());
+        //         canvas.loadFromJSON(undoStack.pop(), canvas.renderAll.bind(canvas));
+        //     }
+        // }
+
+        // function redo() {
+        //     if (redoStack.length >= 0) {
+        //         undoStack.push(canvas.toJSON());
+        //         canvas.loadFromJSON(redoStack.pop(), canvas.renderAll.bind(canvas));
+        //     }
+        // }
+
+        // document.querySelector('[data-command="undo"]').addEventListener('click', undo);
+        // document.querySelector('[data-command="redo"]').addEventListener('click', redo);
+
         let undoStack = [];
         let redoStack = [];
+        let isAddingToUndoStack = false;
 
         function addToUndoStack() {
-            undoStack.push(canvas.toJSON());
-            console.log(undoStack);
-            redoStack = []; // Clear redo stack on new action
+            if (isAddingToUndoStack) return; // Prevents multiple calls in rapid succession
+            isAddingToUndoStack = true;
+
+            // Delay the action slightly to allow for batch updates
+            setTimeout(() => {
+                undoStack.push(canvas.toJSON());
+                console.log(undoStack);
+                redoStack = []; // Clear redo stack on new action
+                isAddingToUndoStack = false; // Reset the flag
+            }, 200); // Adjust delay as necessary (200ms is an example)
         }
 
-        function undo() {
+        // Call this function whenever you modify the canvas
+        canvas.on('object:added', addToUndoStack);
+        canvas.on('object:modified', addToUndoStack);
+        canvas.on('object:removed', addToUndoStack);
+        canvas.on('object:scaled', addToUndoStack);
+        canvas.on('object:moved', addToUndoStack);
 
-            if (undoStack.length >= 0) {
-                redoStack.push(canvas.toJSON());
-                canvas.loadFromJSON(undoStack.pop(), canvas.renderAll.bind(canvas));
+        function undo() {
+            console.log(undoStack);
+            if (undoStack.length > 0) {
+                redoStack.push(canvas.toJSON()); // Save current state to redo stack
+                const lastState = undoStack.pop(); // Get the last state to undo
+                canvas.loadFromJSON(lastState, function() {
+                    canvas.renderAll(); // Render the canvas after loading state
+                    reattachIcons(); // Reattach the icons to the textboxes
+                });
             }
         }
 
         function redo() {
-            if (redoStack.length >= 0) {
-                undoStack.push(canvas.toJSON());
-                canvas.loadFromJSON(redoStack.pop(), canvas.renderAll.bind(canvas));
+            if (redoStack.length > 0) {
+                undoStack.push(canvas.toJSON()); // Save current state to undo stack
+                const nextState = redoStack.pop(); // Get the next state to redo
+                canvas.loadFromJSON(nextState, function() {
+                    canvas.renderAll(); // Render the canvas after loading state
+                    reattachIcons(); // Reattach the icons to the textboxes
+                });
             }
         }
 
+
+        function reattachIcons() {
+            // Loop through canvas objects and reattach icons to textboxes
+            canvas.getObjects().forEach(obj => {
+                if (obj.type === 'textbox') {
+                    addIconsToTextbox(obj); // Your existing function to add icons
+                }
+            });
+        }
         document.querySelector('[data-command="undo"]').addEventListener('click', undo);
         document.querySelector('[data-command="redo"]').addEventListener('click', redo);
+
 
         // Remove formatting
         // document.querySelector('[data-command="removeFormat"]').addEventListener('click', function () {
