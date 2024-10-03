@@ -1332,7 +1332,15 @@
             //     .catch((error) => {
             //         console.error('Error:', error);
             //     });
+            shapeImageData = [];
 
+            shapeImageData.push({
+                shape: shape,
+                centerX: centerX,
+                centerY: centerY,
+                width: width,
+                height: height
+            });
             $.ajax({
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
@@ -1341,24 +1349,25 @@
                 },
                 url: base_url + "/saveTextData",
                 type: "POST",
-                data: {
+                data: JSON.stringify({
                     id: canvasId,
-                    textElements: textData
-                },
-                // shape: shape,
-                // centerX: centerX,
-                // centerY: centerY,
-                // width: width,
-                // height: height
-                // processData: false,
-                // contentType: false,
+                    textElements: textData,
+                    shapeImageData: shapeImageData,
+                    // shape: shape,
+                    // centerX: centerX,
+                    // centerY: centerY,
+                    // width: width,
+                    // height: height
+                }),
+                processData: false,
+                contentType: false,
                 success: function(response) {
                     console.log('Text data saved successfully', data);
                     window.location.href = "{{URL::to('/admin/create_template')}}";
                 },
                 error: function(xhr, status, error) {
                     console.error(
-                        "Failed:",
+                        "Failed Not Saved Data:",
                         error
                     );
                 },
