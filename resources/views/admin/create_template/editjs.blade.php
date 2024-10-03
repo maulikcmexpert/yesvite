@@ -1392,11 +1392,19 @@ function updateClipPath(imageUrl, element) {
 
 
         function discardIfMultipleObjects(options) {
-           
+            
             if (options.target !== undefined && options.target?._objects && options.target?._objects.length > 1) {
                 console.log('Multiple objects selected:', options.target);
                 canvas.discardActiveObject();
                 canvas.renderAll(); // Ensure the canvas is refreshed
+            }
+
+            const activeObjects = canvas.getActiveObjects(); // Get all selected objects
+            console.log(activeObjects)
+            if (activeObjects.length > 1) {
+                console.log('Multiple objects selected:', activeObjects);
+                canvas.discardActiveObject(); // Discard active selection
+                canvas.renderAll(); // Refresh the canvas
             }
           
         }
