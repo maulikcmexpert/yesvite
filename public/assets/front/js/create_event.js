@@ -3182,6 +3182,7 @@ $(document).on("click", ".li_guest", function () {
         $(".step_final_checkout").css("display", "none");
         $(".step_3").show();
         $('.pick-card').addClass('menu-success');
+        $('.edit-design').addClass('menu-success');
         $('.event_create_percent').text('75%');
         $('.current_step').text('3 of 4');
     
