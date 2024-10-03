@@ -129,6 +129,7 @@ document.addEventListener("DOMContentLoaded", function () {
                   
                     // Load static information (text and shapes)
                     if (data.filedImagePath) {
+                        console.log("ytes")
                         fabric.Image.fromURL(data.filedImagePath, function (filedImg) {
                             // Set your preferred image properties
                             filedImg.set({
