@@ -56,77 +56,113 @@ document.addEventListener("DOMContentLoaded", function () {
                     }
 
                     // Load filed image (filedImagePath) as another image layer
+                    // if (data.filedImagePath) {
+                    //     const userImageElement =
+                    //         document.getElementById("user_image");
+                    //     const imageWrapper =
+                    //         document.getElementById("imageWrapper");
+                    //     canvasElement = new fabric.Canvas("imageEditor", {
+                    //         width: 500, // Canvas width
+                    //         height: 500, // Canvas height
+                    //     });
+                    //     let isDragging = false;
+                    //     let isResizing = false;
+                    //     let startWidth,
+                    //         startHeight,
+                    //         startX,
+                    //         startY,
+                    //         activeHandle;
+                    //     let offsetX, offsetY;
+                    //     let shapeChangedDuringDrag = false; // Flag to track shape change
+                    //     let imageUploaded = false; // Flag to track if image has been uploaded
+
+                    //     const imgElement = new Image();
+                    //     imgElement.src = data.filedImagePath;
+
+                    //     userImageElement.src = data.filedImagePath;
+                    //     imageWrapper.style.display = "block";
+
+                    //     imgElement.onload = function () {
+                    //         console.log("Image loaded successfully.");
+                    //         const imgInstance = new fabric.Image(imgElement, {
+                    //             left: 0,
+                    //             top: 0,
+                    //             selectable: true,
+                    //             hasControls: true,
+                    //             hasBorders: true,
+                    //             cornerColor: "red",
+                    //             cornerStrokeColor: "blue",
+                    //             borderColor: "blue",
+                    //             cornerSize: 10,
+                    //             transparentCorners: false,
+                    //             lockUniScaling: true,
+                    //             scaleX: 600 / imgElement.width,
+                    //             scaleY: 600 / imgElement.height,
+                    //         });
+
+                    //         canvasElement.add(imgInstance);
+                    //         addIconsToImage(imgInstance);
+
+                    //        drawCanvas();
+                    //         console.log("Image loaded and added to canvas.");
+                    //        imageUploaded = true; // Set flag to true after image is uploaded
+
+                    //         if (shape) {
+                    //            updateClipPath(imgInstance, shape); // Update the shape with fetched data
+                    //         }
+
+                    //         imgInstance.on("mouseup", function (options) {
+                    //             if (options.target) {
+                    //                 // Change to the next shape on click
+                    //                 currentShapeIndex =
+                    //                     (currentShapeIndex + 1) % shapes.length;
+                    //                 shape = shapes[currentShapeIndex];
+                    //                // updateClipPath(imgInstance, shape); // Update the shape
+                    //             }
+                    //         });
+                    //     };
+
+                    //     imgElement.onerror = function () {
+                    //         console.error("Failed to load image.");
+                    //     };
+                    // }
                     if (data.filedImagePath) {
-                        const userImageElement =
-                            document.getElementById("user_image");
-                        const imageWrapper =
-                            document.getElementById("imageWrapper");
-                        canvasElement = new fabric.Canvas("imageEditor", {
-                            width: 500, // Canvas width
-                            height: 500, // Canvas height
-                        });
-                        let isDragging = false;
-                        let isResizing = false;
-                        let startWidth,
-                            startHeight,
-                            startX,
-                            startY,
-                            activeHandle;
-                        let offsetX, offsetY;
-                        let shapeChangedDuringDrag = false; // Flag to track shape change
-                        let imageUploaded = false; // Flag to track if image has been uploaded
-
-                        const imgElement = new Image();
-                        imgElement.src = data.filedImagePath;
-
-                        userImageElement.src = data.filedImagePath;
-                        imageWrapper.style.display = "block";
-
-                        imgElement.onload = function () {
-                            console.log("Image loaded successfully.");
-                            const imgInstance = new fabric.Image(imgElement, {
-                                left: 0,
-                                top: 0,
+                        fabric.Image.fromURL(data.filedImagePath, function (filedImg) {
+                            // Set your preferred image properties
+                            filedImg.set({
+                                left: 50,
+                                top: 50,
+                                scaleX: 150/ filedImg.width,
+                                scaleY:  150/filedImg.height,
+                                height: 200,
+                                width: 150,
                                 selectable: true,
-                                hasControls: true,
-                                hasBorders: true,
-                                cornerColor: "red",
-                                cornerStrokeColor: "blue",
-                                borderColor: "blue",
-                                cornerSize: 10,
-                                transparentCorners: false,
-                                lockUniScaling: true,
-                                scaleX: 600 / imgElement.width,
-                                scaleY: 600 / imgElement.height,
+                                hasControls: true
                             });
-
-                            canvasElement.add(imgInstance);
-                            addIconsToImage(imgInstance);
-
-                           // drawCanvas();
-                            console.log("Image loaded and added to canvas.");
-                            imageUploaded = true; // Set flag to true after image is uploaded
-
+                            // Apply the shape from static information if available
                             if (shape) {
-                               //updateClipPath(imgInstance, shape); // Update the shape with fetched data
+                                updateClipPath(filedImg, shape); // Update the shape with fetched data
                             }
 
-                            imgInstance.on("mouseup", function (options) {
+
+                            // Inside your loadTextDataFromDatabase function
+
+                            filedImg.on('mouseup', function (options) {
                                 if (options.target) {
                                     // Change to the next shape on click
-                                    currentShapeIndex =
-                                        (currentShapeIndex + 1) % shapes.length;
+                                    currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
                                     shape = shapes[currentShapeIndex];
-                                    updateClipPath(imgInstance, shape); // Update the shape
+
+                                    updateClipPath(filedImg, shape); // Update the shape
                                 }
                             });
-                        };
 
-                        imgElement.onerror = function () {
-                            console.error("Failed to load image.");
-                        };
+
+                            canvas.add(filedImg);
+                            addIconsToImage(filedImg); // Add the filed image to the canvas
+                            canvas.renderAll();  // Ensure the canvas is updated
+                        });
                     }
-
                     // Load static information (text and shapes)
                     if (data.static_information) {
                         // hideStaticTextElements(); // Hide static text elements if static information is present
@@ -274,14 +310,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function addIconsToImage(textbox) {
         console.log(textbox);
-        canvasElement.remove(textbox)
-        canvasElement.renderAll();
+        canvas.remove(textbox)
+        canvas.renderAll();
         // alert(1)
         // Remove existing trash icon if it exists
         if (textbox?.trashIcon) {
-            canvasElement.remove(textbox.trashIcon);
+            canvas.remove(textbox.trashIcon);
             textbox.trashIcon = null; // Clear reference
-            canvasElement.renderAll();
+            canvas.renderAll();
         }
 
         const trashIconSVG = `<svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -315,16 +351,16 @@ document.addEventListener("DOMContentLoaded", function () {
                 trashIcon.deleteHandlerAttached = true; // Mark that the handler is attached
             }
 
-            canvasElement.add(trashIcon);
-            canvasElement.bringToFront(trashIcon);
+            canvas.add(trashIcon);
+            canvas.bringToFront(trashIcon);
             textbox.trashIcon = trashIcon; // Store the reference of the trash icon
 
             // Update icon position on moving and scaling
             textbox.on("moving", function () {
                 if (textbox.trashIcon) {
-                    canvasElement.remove(textbox.trashIcon);
+                    canvas.remove(textbox.trashIcon);
                     textbox.trashIcon = null; // Clear reference
-                    canvasElement.renderAll();
+                    canvas.renderAll();
                 }
                 clearTimeout(updateTimeout);
                 updateTimeout = setTimeout(() => {
@@ -334,16 +370,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
             textbox.on("scaling", function () {
                 if (textbox.trashIcon) {
-                    canvasElement.remove(textbox.trashIcon);
+                    canvas.remove(textbox.trashIcon);
                     textbox.trashIcon = null; // Clear reference
-                    canvasElement.renderAll();
+                    canvas.renderAll();
                 }
                 clearTimeout(updateTimeout);
                 updateTimeout = setTimeout(() => {
                     addIconsToImage(textbox);
                 }, 500);
             });
-            canvasElement.renderAll();
             canvas.renderAll();
 
         });
@@ -1610,6 +1645,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         canvasElement.add(imgInstance);
                         canvasElement.bringToFront(imgInstance);
                         drawCanvas();
+                        addIconsToImage(imgElement)
                         console.log("Image loaded and added to canvas.");
                         imageUploaded = true; // Set flag to true after image is uploaded
                     };
