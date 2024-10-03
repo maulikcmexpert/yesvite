@@ -3095,6 +3095,7 @@ function handleActiveClass(target) {
     $('.edit-design').removeClass('active');
     if(target == '.li_design'){
         $('.pick-card').addClass("active");
+        $('.pick-card').removeClass("menu-success");
     }else{
         $(target).find(".side-bar-list").addClass("active");
     }
