@@ -2248,45 +2248,45 @@ function updateClipPath(imageUrl, element) {
                     })
                     .then(data => {
                         console.log('Server response:', data);
+                        updateClipPath(data.imagePath, updatedOBJImage)
+                        // const imgElement = new Image();
+                        // imgElement.src = data.imagePath;
+                        // imgElement.addClass = 'image-element-prakash';
 
-                        const imgElement = new Image();
-                        imgElement.src = data.imagePath;
-                        imgElement.addClass = 'image-element-prakash';
+                        // userImageElement.src = data.imagePath;
+                        // imageWrapper.style.display = 'block';
 
-                        userImageElement.src = data.imagePath;
-                        imageWrapper.style.display = 'block';
+                        // imgElement.onload = function() {
+                        //     console.log("Image loaded successfully.");
+                        //     const imgInstance = new fabric.Image(imgElement, {
+                        //         left: 0,
+                        //         top: 0,
+                        //         selectable: true,
+                        //         hasControls: true,
+                        //         hasBorders: true,
+                        //         // cornerColor: 'red',
+                        //         cornerStrokeColor: 'blue',
+                        //         // borderColor: 'blue',
+                        //         borderColor: '#2DA9FC',
+                        //         // cornerColor: 'red',
+                        //         cornerColor: '#fff',
+                        //         cornerSize: 10,
+                        //         transparentCorners: false,
+                        //         lockUniScaling: true,
+                        //         scaleX: 600 / imgElement.width,
+                        //         scaleY: 600 / imgElement.height
+                        //     });
 
-                        imgElement.onload = function() {
-                            console.log("Image loaded successfully.");
-                            const imgInstance = new fabric.Image(imgElement, {
-                                left: 0,
-                                top: 0,
-                                selectable: true,
-                                hasControls: true,
-                                hasBorders: true,
-                                // cornerColor: 'red',
-                                cornerStrokeColor: 'blue',
-                                // borderColor: 'blue',
-                                borderColor: '#2DA9FC',
-                                // cornerColor: 'red',
-                                cornerColor: '#fff',
-                                cornerSize: 10,
-                                transparentCorners: false,
-                                lockUniScaling: true,
-                                scaleX: 600 / imgElement.width,
-                                scaleY: 600 / imgElement.height
-                            });
+                        //     canvasElement.add(imgInstance);
+                        //     canvasElement.bringToFront(imgInstance);
+                        //     drawCanvas();
+                        //     console.log('Image loaded and added to canvas.');
+                        //     imageUploaded = true; // Set flag to true after image is uploaded
+                        // };
 
-                            canvasElement.add(imgInstance);
-                            canvasElement.bringToFront(imgInstance);
-                            drawCanvas();
-                            console.log('Image loaded and added to canvas.');
-                            imageUploaded = true; // Set flag to true after image is uploaded
-                        };
-
-                        imgElement.onerror = function() {
-                            console.error("Failed to load image.");
-                        };
+                        // imgElement.onerror = function() {
+                        //     console.error("Failed to load image.");
+                        // };
                     })
                     .catch(error => {
                         console.error('There was a problem with the fetch operation:', error);
