@@ -296,6 +296,7 @@
     // Define the fixed container dimensions
     const containerWidth = 150;
     const containerHeight = 200;
+    let isDragging = false; // Track if the image is being dragged
 
     // Load the image from the URL
     fabric.Image.fromURL(imageUrl, function (image) {
@@ -327,23 +328,14 @@
         } else if (element.shape === 'rectangle') {
             // clipPath = '';
         } else if (element.shape === 'star') {
-            const starPoints = [];
-            const spikes = 5;
-            const outerRadius = Math.min(containerWidth, containerHeight) / 2; // Scale outer radius based on the container size
-            const innerRadius = outerRadius / 2;
-
-            for (let i = 0; i < spikes * 2; i++) {
-                const angle = (i * Math.PI) / spikes;
-                const radius = i % 2 === 0 ? outerRadius : innerRadius;
-                starPoints.push(
-                    Math.cos(angle) * radius,
-                    Math.sin(angle) * radius
-                );
-            }
-            clipPath = new fabric.Polygon(starPoints, {
-                originX: 'center',
-                originY: 'center'
-            });
+            clipPath= new fabric.Path(
+                        'M 50,0 L 61,35 L 98,35 L 68,57 L 79,91 L 50,70 L 21,91 L 32,57 L 2,35 L 39,35 z', {
+                        scaleX: (image.width * image.scaleX) / 100, // Adjust scaling
+                        scaleY: (image.height * image.scaleY) / 100,
+                        originX: 'center',
+                        originY: 'center'
+                        })
+                
         } else if (element.shape === 'heart') {
             const heartPath = [
                 'M', 0, 0,
@@ -364,21 +356,31 @@
         top: element.centerY, 
 
         }); 
+        image.on('moving', function () {
+            isDragging = true; // Set dragging flag to true
+        });
 
         image.on('mouseup', function (options) {
-            if (options.target) {
-                // Change to the next shape on click
+            if (isDragging) {
+                // Update the position after dragging
+                element.centerX = image.left;
+                element.centerY = image.top;
+                isDragging = false; // Reset dragging flag
+            } else {
+                // If not dragging, change to the next shape on click
                 currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
-                shape = shapes[currentShapeIndex];
-                udpatedOBJ = {
-                        "shape": shape,
-                        "centerX": 50,
-                        "centerY": 50,
-                        "width": 100,
-                        "height": 100
-                    }
+                const shape = shapes[currentShapeIndex];
+
+                const updatedOBJ = {
+                    shape: shape,
+                    centerX: image.left,
+                    centerY: image.top,
+                    width: 100,
+                    height: 100
+                };
+
                 // Update the clip path or shape (if needed)
-                updateClipPath(imageUrl, udpatedOBJ);
+                updateClipPath(imageUrl, updatedOBJ);
             }
         });
 
