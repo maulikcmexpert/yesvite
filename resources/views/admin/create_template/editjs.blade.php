@@ -1392,14 +1392,13 @@ function updateClipPath(imageUrl, element) {
 
 
         function discardIfMultipleObjects(options) {
-            console.log("comcas",options)
-            setTimeout(function(){         
-                if (options.target !== undefined && options.target?._objects && options.target?._objects.length > 1) {
-                    console.log('Multiple objects selected:', options.target);
-                    canvas.discardActiveObject();
-                    canvas.renderAll(); // Ensure the canvas is refreshed
-                }
-            },500);
+           
+            if (options.target !== undefined && options.target?._objects && options.target?._objects.length > 1) {
+                console.log('Multiple objects selected:', options.target);
+                canvas.discardActiveObject();
+                canvas.renderAll(); // Ensure the canvas is refreshed
+            }
+          
         }
 
         canvas.on('mouse:down', function(options) {
