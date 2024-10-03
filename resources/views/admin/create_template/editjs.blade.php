@@ -321,10 +321,8 @@
             });
         } else if (element.shape === 'rectangle') {
             clipPath = new fabric.Rect({
-                width: containerWidth, // Use the fixed container dimensions
-                height: containerHeight,
-                originX: 'center',
-                originY: 'center'
+                selectable: true,
+            hasControls: true,
             });
         } else if (element.shape === 'star') {
             const starPoints = [];
