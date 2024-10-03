@@ -320,7 +320,7 @@
                 originY: 'center'
             });
         } else if (element.shape === 'rectangle') {
-            clipPath = {};
+            // clipPath = '';
         } else if (element.shape === 'star') {
             const starPoints = [];
             const spikes = 5;
