@@ -176,10 +176,90 @@ $(document).on("click", ".design-card", function () {
                     var img = new fabric.Image(imgObj);
                 
                     img.set({
-                        left: 0,
-                        top: 0,
+                        left: canvas.width / 2 - img.width / 2,
+                        top: canvas.height / 2 - img.height / 2,
                         scaleX: 0.5, // Scaling the image
                         scaleY: 0.5
+                    });
+                
+                    // Function to switch between different shapes
+                    function changeShape(shape) {
+                        switch (shape) {
+                            case 'rectangle':
+                                img.set({
+                                    clipPath: new fabric.Rect({
+                                        width: img.width * img.scaleX, // Match the scaled image width
+                                        height: img.height * img.scaleY, // Match the scaled image height
+                                        originX: 'center',
+                                        originY: 'center'
+                                    })
+                                });
+                                break;
+                
+                            case 'circle':
+                                img.set({
+                                    clipPath: new fabric.Circle({
+                                        radius: (img.width * img.scaleX) / 2, // Scale to match image size
+                                        originX: 'center',
+                                        originY: 'center'
+                                    })
+                                });
+                                break;
+                
+                            case 'star':
+                                img.set({
+                                    clipPath: new fabric.Path(
+                                        'M 50,0 L 61,35 L 98,35 L 68,57 L 79,91 L 50,70 L 21,91 L 32,57 L 2,35 L 39,35 z', {
+                                        scaleX: (img.width * img.scaleX) / 100, // Adjust scaling
+                                        scaleY: (img.height * img.scaleY) / 100,
+                                        originX: 'center',
+                                        originY: 'center'
+                                    })
+                                });
+                                break;
+                
+                            case 'rounded-border':
+                                img.set({
+                                    clipPath: new fabric.Rect({
+                                        width: img.width * img.scaleX,
+                                        height: img.height * img.scaleY,
+                                        rx: 20, // Rounded corners
+                                        ry: 20, // Rounded corners
+                                        originX: 'center',
+                                        originY: 'center'
+                                    })
+                                });
+                                break;
+                
+                            case 'heart':
+                                img.set({
+                                    clipPath: new fabric.Path(
+                                        'M 50,30 A 20,20 0 0 1 100,30 Q 100,60 50,90 Q 0,60 0,30 A 20,20 0 0 1 50,30 z', {
+                                        scaleX: (img.width * img.scaleX) / 100,
+                                        scaleY: (img.height * img.scaleY) / 100,
+                                        originX: 'center',
+                                        originY: 'center'
+                                    })
+                                });
+                                break;
+                
+                            default:
+                                img.set({
+                                    clipPath: null // Remove any clipping path
+                                });
+                                break;
+                        }
+                
+                        // Re-render the canvas after changing the shape
+                        canvas.renderAll();
+                    }
+                
+                    // Add event listener to change shape on click
+                    img.on('mousedown', function() {
+                        // Example: Toggle through shapes on each click (you can adjust this logic)
+                        var shapes = ['rectangle', 'circle', 'star', 'rounded-border', 'heart'];
+                        var currentShape = shapes[Math.floor(Math.random() * shapes.length)]; // Random shape for demo
+                        changeShape(currentShape);
                     });
                 
                     // Add the image to the canvas
@@ -572,9 +652,6 @@ function bindData() {
         textbox.on("scaling", function() {
             updateIconPositions(textbox);
         });
-        textbox.on('rotating', function () {
-            updateIconsPositions(textbox);
-        });
 
         // Event listener to manage icon visibility when a textbox is clicked
         textbox.on("mousedown", function() {
@@ -954,39 +1031,8 @@ function bindData() {
         };
     }
 
-    function updateIconsPositions(textbox) {
-        const angle = fabric.util.degreesToRadians(textbox.angle);
-        const boundingRect = textbox.getBoundingRect(true);
-
-        // Calculate the new position for the trash icon
-        const trashOffsetX = +75;  // Offset for the trash icon
-        const trashOffsetY = - 30;  // Adjust icon's vertical position
-        const trashRotatedX = textbox.left + trashOffsetX  Math.cos(angle) - trashOffsetY  Math.sin(angle);
-        const trashRotatedY = textbox.top + trashOffsetX  Math.sin(angle) + trashOffsetY  Math.cos(angle);
-
-        if (textbox.trashIcon) {
-            textbox.trashIcon.left = trashRotatedX;
-            textbox.trashIcon.top = trashRotatedY;
-            textbox.trashIcon.angle = textbox.angle;  // Sync icon rotation with textbox
-        }
-
-        // Calculate the new position for the copy icon
-        const copyOffsetX = -4;  // Offset for the copy icon on the left
-        const copyOffsetY = -25;
-        const copyRotatedX = textbox.left + copyOffsetX  Math.cos(angle) - copyOffsetY  Math.sin(angle);
-        const copyRotatedY = textbox.top + copyOffsetX  Math.sin(angle) + copyOffsetY  Math.cos(angle);
-
-        if (textbox.copyIcon) {
-            textbox.copyIcon.left = copyRotatedX;
-            textbox.copyIcon.top = copyRotatedY;
-            textbox.copyIcon.angle = textbox.angle;  // Sync icon rotation with textbox
-        }
-
-        canvas.renderAll();  // Re-render canvas to update positions
-    } 
-
     function updateIconPositions(textbox) {
-        // Check if icons exist, and remove them if necessary
+        // Remove old trash and copy icons if they exist
         if (textbox.trashIcon) {
             canvas.remove(textbox.trashIcon);
             textbox.trashIcon = null; // Clear reference
@@ -1016,7 +1062,7 @@ function bindData() {
             </svg>`;
 
         // Load trash icon from SVG string and position
-        fabric.loadSVGFromString(trashIconSVG, function (objects, options) {
+        fabric.loadSVGFromString(trashIconSVG, function(objects, options) {
             const trashIcon = fabric.util.groupSVGElements(objects, options);
             trashIcon.set({
                 left: textbox.left + textbox.width * textbox.scaleX - 20,
@@ -1024,13 +1070,12 @@ function bindData() {
                 selectable: false,
                 evented: true,
                 hasControls: false,
-                angle: textbox.angle // Set the initial angle to match the textbox
             });
             textbox.trashIcon = trashIcon;
 
             // Attach delete functionality to trash icon
-            trashIcon.on('mousedown', function () {
-                console.log('Trash icon clicked! Deleting textbox.');
+            trashIcon.on("mousedown", function() {
+                console.log("Trash icon clicked! Deleting textbox.");
                 deleteTextbox(textbox);
             });
 
@@ -1040,7 +1085,7 @@ function bindData() {
         });
 
         // Load copy icon from SVG string and position
-        fabric.loadSVGFromString(copyIconSVG, function (objects, options) {
+        fabric.loadSVGFromString(copyIconSVG, function(objects, options) {
             const copyIcon = fabric.util.groupSVGElements(objects, options);
             copyIcon.set({
                 left: textbox.left - 25,
@@ -1048,13 +1093,12 @@ function bindData() {
                 selectable: false,
                 evented: true,
                 hasControls: false,
-                angle: textbox.angle // Set the initial angle to match the textbox
             });
             textbox.copyIcon = copyIcon;
 
             // Attach clone functionality to copy icon
-            copyIcon.on('mousedown', function () {
-                console.log('Copy icon clicked!');
+            copyIcon.on("mousedown", function() {
+                console.log("Copy icon clicked!");
                 cloneTextbox(textbox);
             });
 
