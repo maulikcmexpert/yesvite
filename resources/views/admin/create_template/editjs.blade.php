@@ -101,6 +101,8 @@ document.addEventListener("DOMContentLoaded", function () {
                             });
 
                             canvasElement.add(imgInstance);
+                            addIconsToImage(imgInstance);
+
                             drawCanvas();
                             console.log("Image loaded and added to canvas.");
                             imageUploaded = true; // Set flag to true after image is uploaded
@@ -108,7 +110,6 @@ document.addEventListener("DOMContentLoaded", function () {
                             if (shape) {
                                 updateClipPath(imgInstance, shape); // Update the shape with fetched data
                             }
-                            addIconsToImage(imgElement);
 
                             imgInstance.on("mouseup", function (options) {
                                 if (options.target) {
@@ -273,6 +274,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function addIconsToImage(textbox) {
         console.log(textbox);
+        alert(1)
         // Remove existing trash icon if it exists
         if (textbox.trashIcon) {
             canvas.remove(textbox.trashIcon);
