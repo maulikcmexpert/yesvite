@@ -286,8 +286,13 @@
                 })
                 .catch(error => console.error('Error loading text data:', error));
         }
-
+        let currentImage = null; 
         function updateClipPath(imageUrl, element) {
+
+            if (currentImage) {
+        canvas.remove(currentImage);
+    }
+            // canvas.remove(image);
     // Define the fixed container dimensions
     const containerWidth = 150;
     const containerHeight = 200;
@@ -358,11 +363,28 @@
             left: element.centerX,
         top: element.centerY, 
 
+        }); 
+
+        image.on('mouseup', function (options) {
+            if (options.target) {
+                // Change to the next shape on click
+                currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
+                shape = shapes[currentShapeIndex];
+                udpatedOBJ = {
+                        "shape": shape,
+                        "centerX": 50,
+                        "centerY": 50,
+                        "width": 100,
+                        "height": 100
+                    }
+                // Update the clip path or shape (if needed)
+                updateClipPath(imageUrl, udpatedOBJ);
+            }
         });
 
         // Add the image to the canvas
         canvas.add(image);
-
+        currentImage = image;
         // Refresh the canvas
         canvas.renderAll();
     });
