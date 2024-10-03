@@ -183,10 +183,10 @@
                                 });
 
                                 canvasElement.add(imgInstance);
-                                addIconsToImage(imgInstance)
                                 drawCanvas();
                                 console.log('Image loaded and added to canvas.');
                                 imageUploaded = true; // Set flag to true after image is uploaded
+                                addIconsToImage(imgInstance);
                             };
 
                             imgElement.onerror = function() {
