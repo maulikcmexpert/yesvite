@@ -216,8 +216,8 @@
                                 filedImg.set({
                                     left: 50,
                                     top: 50,
-                                    scaleX: filedImg.width / 150,
-                                    scaleY:  filedImg.height / 200,
+                                    scaleX: 1,
+                                    scaleY: 1,
                                     height: 200,
                                     width: 150,
                                     selectable: true,
@@ -225,7 +225,7 @@
                                 });
                                 // Apply the shape from static information if available
                                 if (shape) {
-                                    // updateClipPath(filedImg, shape); // Update the shape with fetched data
+                                    updateClipPath(filedImg, shape); // Update the shape with fetched data
                                 }
 
 
@@ -335,8 +335,12 @@
                 });
             } else if (shape === 'rectangle') {
                 clipPath = new fabric.Rect({
-                    width: 150, // Set width of the rectangle
-                    height: 100, // Set height of the rectangle
+                    scaleX: 1,
+                    scaleY: 1,
+                    height: 200,
+                    width: 150,
+                    selectable: true,
+                    hasControls: true,
                     originX: 'center', // Set origin to center of the rectangle
                     originY: 'center' // Set origin to center of the rectangle
                 });
