@@ -188,20 +188,20 @@ $(document).on("click", ".design-card", function () {
                     let clipPath;
 
                     // Define the clipping path based on the shape
-                    if (shape === "circle") {
+                    if (element.shape === "circle") {
                         clipPath = new fabric.Circle({
                             radius: 75, // Define radius of the circle
                             originX: "center", // Set origin to center of the circle
                             originY: "center", // Set origin to center of the circle
                         });
-                    } else if (shape === "rectangle") {
+                    } else if (element.shape === "rectangle") {
                         clipPath = new fabric.Rect({
                             width: 150, // Set width of the rectangle
                             height: 100, // Set height of the rectangle
                             originX: "center", // Set origin to center of the rectangle
                             originY: "center", // Set origin to center of the rectangle
                         });
-                    } else if (shape === "star") {
+                    } else if (element.shape === "star") {
                         const starPoints = [];
                         const spikes = 5;
                         const outerRadius = 75; // Outer radius of the star
@@ -221,7 +221,7 @@ $(document).on("click", ".design-card", function () {
                             originX: "center",
                             originY: "center",
                         });
-                    } else if (shape === "heart") {
+                    } else if (element.shape === "heart") {
                         const heartPath = [
                             "M",
                             0,
@@ -254,6 +254,7 @@ $(document).on("click", ".design-card", function () {
                     img.set({
                         clipPath: clipPath,
                     });
+                    canvas.add(img);
                     canvas.renderAll(); // Refresh the canvas
                 };
 
