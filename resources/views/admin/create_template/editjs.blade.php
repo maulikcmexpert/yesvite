@@ -1989,7 +1989,7 @@ function updateClipPath(imageUrl, element) {
             const lastState = undoStack.pop(); // Get the last state to undo
             canvas.loadFromJSON(lastState, function () {
                 canvas.renderAll(); // Render the canvas after loading state
-                reattachIcons(); // Reattach the icons to the textboxes
+              //  reattachIcons(); // Reattach the icons to the textboxes
             });
         }
     }
@@ -1999,7 +1999,7 @@ function updateClipPath(imageUrl, element) {
             const nextState = redoStack.pop(); // Get the next state to redo
             canvas.loadFromJSON(nextState, function () {
                 canvas.renderAll(); // Render the canvas after loading state
-                reattachIcons(); // Reattach the icons to the textboxes
+              //  reattachIcons(); // Reattach the icons to the textboxes
             });
         }
     }
