@@ -496,7 +496,8 @@ function bindData() {
                       actionName: 'rotate',
                       render: renderIcon,
                       cornerSize: 28,
-                      withConnection: true
+                      withConnection: true,
+                      hasBorders: false
                     });
                 
                     // here's where the render action for the control is defined
