@@ -2254,6 +2254,13 @@ function updateClipPath(imageUrl, element) {
                     })
                     .then(data => {
                         console.log('Server response:', data);
+                        updatedOBJImage = {
+                            shape: 'rectangle',
+                            centerX: 0,
+                            centerY: 0,
+                            width: 100,
+                            height: 100
+                        };
                         updateClipPath(data.imagePath, updatedOBJImage)
                         // const imgElement = new Image();
                         // imgElement.src = data.imagePath;
