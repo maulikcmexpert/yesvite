@@ -447,7 +447,7 @@ function updateClipPath(imageUrl, element) {
                 updateClipPath(imageUrl, updatedOBJImage);
             }
         });
-        console.log(6)
+        console.log(updatedOBJImage)
 
         // Add the image to the canvas
         canvas.add(image);
