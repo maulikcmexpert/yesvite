@@ -176,8 +176,8 @@ $(document).on("click", ".design-card", function () {
                     var img = new fabric.Image(imgObj);
                 
                     img.set({
-                        left: canvas.width / 2 - img.width / 2,
-                        top: canvas.height / 2 - img.height / 2,
+                        left: 0,
+                        top: 0,
                         scaleX: 0.5, // Scaling the image
                         scaleY: 0.5
                     });
