@@ -126,6 +126,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     //         console.error("Failed to load image.");
                     //     };
                     // }
+                  
+                    // Load static information (text and shapes)
                     if (data.filedImagePath) {
                         fabric.Image.fromURL(data.filedImagePath, function (filedImg) {
                             // Set your preferred image properties
@@ -166,7 +168,6 @@ document.addEventListener("DOMContentLoaded", function () {
                             console.log("imageadded")
                         });
                     }
-                    // Load static information (text and shapes)
                     if (data.static_information) {
                         // hideStaticTextElements(); // Hide static text elements if static information is present
                         const staticInfo = JSON.parse(data.static_information);
