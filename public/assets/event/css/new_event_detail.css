@@ -157,6 +157,11 @@
     transform: translate(-50%, -50%);
 }
 
+.new-event-sidebar-menu ul li span.active{
+    background: var(--primaryColor);
+}
+
+
 
 .new-event-sidebar-menu ul li .menu-circle-wrp {
     display: flex;
