@@ -327,23 +327,14 @@
         } else if (element.shape === 'rectangle') {
             // clipPath = '';
         } else if (element.shape === 'star') {
-            const starPoints = [];
-            const spikes = 5;
-            const outerRadius = Math.min(containerWidth, containerHeight) / 2; // Scale outer radius based on the container size
-            const innerRadius = outerRadius / 2;
-
-            for (let i = 0; i < spikes * 2; i++) {
-                const angle = (i * Math.PI) / spikes;
-                const radius = i % 2 === 0 ? outerRadius : innerRadius;
-                starPoints.push(
-                    Math.cos(angle) * radius,
-                    Math.sin(angle) * radius
-                );
-            }
-            clipPath = new fabric.Polygon(starPoints, {
-                originX: 'center',
-                originY: 'center'
-            });
+            clipPath= new fabric.Path(
+                        'M 50,0 L 61,35 L 98,35 L 68,57 L 79,91 L 50,70 L 21,91 L 32,57 L 2,35 L 39,35 z', {
+                        scaleX: (img.width * img.scaleX) / 100, // Adjust scaling
+                        scaleY: (img.height * img.scaleY) / 100,
+                        originX: 'center',
+                        originY: 'center'
+                        })
+                
         } else if (element.shape === 'heart') {
             const heartPath = [
                 'M', 0, 0,
