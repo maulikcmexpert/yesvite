@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
         width: 345, // Canvas width
         height: 490, // Canvas height
     });
-
+    var canvasElement = ""
     var newshape = "";
     const shapes = ["circle", "rectangle", "star", "heart"]; // Array of available shapes
     let currentShapeIndex = 0; // Track the current shape index
@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
             .then((data) => {
                 if (data) {
                     // console.log(data);
-                    var canvasElement = document.getElementById("imageEditor1");
+                    canvasElement = document.getElementById("imageEditor1");
                     canvasElement.setAttribute("data-canvas-id", data.id);
                     // Load background image (imagePath)
                     if (data.imagePath) {
@@ -108,7 +108,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             imageUploaded = true; // Set flag to true after image is uploaded
 
                             if (shape) {
-                                updateClipPath(imgInstance, shape); // Update the shape with fetched data
+                               updateClipPath(imgInstance, shape); // Update the shape with fetched data
                             }
 
                             imgInstance.on("mouseup", function (options) {
@@ -274,79 +274,79 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function addIconsToImage(textbox) {
         console.log(textbox);
-        canvas.remove(textbox)
-        canvas.renderAll();
+        canvasElement.remove(textbox)
+        canvasElement.renderAll();
         // alert(1)
-        // // Remove existing trash icon if it exists
-        // if (textbox?.trashIcon) {
-        //     canvas.remove(textbox.trashIcon);
-        //     textbox.trashIcon = null; // Clear reference
-        //     canvas.renderAll();
-        // }
+        // Remove existing trash icon if it exists
+        if (textbox?.trashIcon) {
+            canvasElement.remove(textbox.trashIcon);
+            textbox.trashIcon = null; // Clear reference
+            canvasElement.renderAll();
+        }
 
-        // const trashIconSVG = `<svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
-        //     <g filter="url(#filter0_d_5633_67674)">
-        //         <rect x="2.70312" y="2.37207" width="23.9674" height="23.9674" rx="11.9837" fill="white" shape-rendering="crispEdges"/>
-        //         <path d="M19.1807 11.3502C17.5179 11.1855 15.8452 11.1006 14.1775 11.1006C13.1888 11.1006 12.2001 11.1505 11.2115 11.2504L10.1929 11.3502" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-        //         <path d="M12.939 10.8463L13.0488 10.1922C13.1287 9.7178 13.1886 9.36328 14.0325 9.36328H15.3407C16.1846 9.36328 16.2495 9.73777 16.3244 10.1971L16.4342 10.8463" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-        //         <path d="M18.1073 12.9277L17.7827 17.9559C17.7278 18.7398 17.6829 19.349 16.2898 19.349H13.0841C11.691 19.349 11.6461 18.7398 11.5912 17.9559L11.2666 12.9277" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-        //         <path d="M13.853 16.6035H15.5158" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-        //         <path d="M13.4385 14.6055H15.9351" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-        //     </g>
-        // </svg>`;
+        const trashIconSVG = `<svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g filter="url(#filter0_d_5633_67674)">
+                <rect x="2.70312" y="2.37207" width="23.9674" height="23.9674" rx="11.9837" fill="white" shape-rendering="crispEdges"/>
+                <path d="M19.1807 11.3502C17.5179 11.1855 15.8452 11.1006 14.1775 11.1006C13.1888 11.1006 12.2001 11.1505 11.2115 11.2504L10.1929 11.3502" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M12.939 10.8463L13.0488 10.1922C13.1287 9.7178 13.1886 9.36328 14.0325 9.36328H15.3407C16.1846 9.36328 16.2495 9.73777 16.3244 10.1971L16.4342 10.8463" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M18.1073 12.9277L17.7827 17.9559C17.7278 18.7398 17.6829 19.349 16.2898 19.349H13.0841C11.691 19.349 11.6461 18.7398 11.5912 17.9559L11.2666 12.9277" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M13.853 16.6035H15.5158" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M13.4385 14.6055H15.9351" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
+            </g>
+        </svg>`;
 
-        // fabric.loadSVGFromString(trashIconSVG, function (objects, options) {
-        //     const trashIcon = fabric.util.groupSVGElements(objects, options);
-        //     trashIcon.set({
-        //         left: textbox.left + textbox.width * textbox.scaleX - 20,
-        //         top: textbox.top - 30,
-        //         selectable: true,
-        //         evented: true,
-        //         hasControls: false,
-        //         hoverCursor: "pointer",
-        //     });
+        fabric.loadSVGFromString(trashIconSVG, function (objects, options) {
+            const trashIcon = fabric.util.groupSVGElements(objects, options);
+            trashIcon.set({
+                left: textbox.left + textbox.width * textbox.scaleX - 20,
+                top: textbox.top - 30,
+                selectable: true,
+                evented: true,
+                hasControls: false,
+                hoverCursor: "pointer",
+            });
 
-        //     // Attach delete functionality to the trash icon only once
-        //     if (!trashIcon.deleteHandlerAttached) {
-        //         trashIcon.on("mousedown", function () {
-        //             console.log("Trash icon clicked! Deleting textbox.");
-        //             deleteTextbox(textbox); // Function to delete the textbox
-        //         });
-        //         trashIcon.deleteHandlerAttached = true; // Mark that the handler is attached
-        //     }
+            // Attach delete functionality to the trash icon only once
+            if (!trashIcon.deleteHandlerAttached) {
+                trashIcon.on("mousedown", function () {
+                    console.log("Trash icon clicked! Deleting textbox.");
+                    deleteTextbox(textbox); // Function to delete the textbox
+                });
+                trashIcon.deleteHandlerAttached = true; // Mark that the handler is attached
+            }
 
-        //     canvas.add(trashIcon);
-        //     canvas.bringToFront(trashIcon);
-        //     textbox.trashIcon = trashIcon; // Store the reference of the trash icon
+            canvasElement.add(trashIcon);
+            canvasElement.bringToFront(trashIcon);
+            textbox.trashIcon = trashIcon; // Store the reference of the trash icon
 
-        //     // Update icon position on moving and scaling
-        //     textbox.on("moving", function () {
-        //         if (textbox.trashIcon) {
-        //             canvas.remove(textbox.trashIcon);
-        //             textbox.trashIcon = null; // Clear reference
-        //             canvas.renderAll();
-        //         }
-        //         clearTimeout(updateTimeout);
-        //         updateTimeout = setTimeout(() => {
-        //             addIconsToImage(textbox);
-        //         }, 500);
-        //     });
+            // Update icon position on moving and scaling
+            textbox.on("moving", function () {
+                if (textbox.trashIcon) {
+                    canvasElement.remove(textbox.trashIcon);
+                    textbox.trashIcon = null; // Clear reference
+                    canvasElement.renderAll();
+                }
+                clearTimeout(updateTimeout);
+                updateTimeout = setTimeout(() => {
+                    addIconsToImage(textbox);
+                }, 500);
+            });
 
-        //     textbox.on("scaling", function () {
-        //         if (textbox.trashIcon) {
-        //             canvas.remove(textbox.trashIcon);
-        //             textbox.trashIcon = null; // Clear reference
-        //             canvas.renderAll();
-        //         }
-        //         clearTimeout(updateTimeout);
-        //         updateTimeout = setTimeout(() => {
-        //             addIconsToImage(textbox);
-        //         }, 500);
-        //     });
-        //     canvas.renderAll();
-        // });
-        // console.log(textbox);
-        // console.log("=========================");
+            textbox.on("scaling", function () {
+                if (textbox.trashIcon) {
+                    canvasElement.remove(textbox.trashIcon);
+                    textbox.trashIcon = null; // Clear reference
+                    canvasElement.renderAll();
+                }
+                clearTimeout(updateTimeout);
+                updateTimeout = setTimeout(() => {
+                    addIconsToImage(textbox);
+                }, 500);
+            });
+            canvasElement.renderAll();
+        });
+        console.log(textbox);
+        console.log("=========================");
     }
 
     // Call function to load data when the page loads
