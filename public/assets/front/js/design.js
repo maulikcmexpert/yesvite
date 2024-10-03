@@ -494,6 +494,9 @@ function bindData() {
                         cursorStyle: 'crosshair',
                         actionHandler: fabric.controlsUtils.rotationWithSnapping,
                         render: function(ctx, left, top, styleOverride, fabricObject) {
+                            var size = this.cornerSize;
+                            ctx.translate(left, top);
+                            ctx.rotate(fabric.util.degreesToRadians(fabricObject.angle));
                             ctx.fillStyle = 'red'; // Circle color for the mtr control
                             ctx.beginPath();
                             ctx.drawImage(img, -size / 2, -size / 2, size, size);
