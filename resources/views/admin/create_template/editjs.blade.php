@@ -11,15 +11,19 @@ document.addEventListener("DOMContentLoaded", function () {
     let currentShapeIndex = 0; // Track the current shape index
 
     function loadTextDataFromDatabase() {
-        var id = $("#template_id").val();
+        const id = $("#template_id").val();
 
         fetch(`/loadTextData/${id}`) // API endpoint to load data from your database
             .then((response) => response.json())
             .then((data) => {
                 if (data) {
-                    // console.log(data);
-                    canvasElement = document.getElementById("imageEditor1");
+                    console.log(data);
+
+                    // Initialize canvas if not already initialized
+                    const canvasElement = document.getElementById("imageEditor1");
+                    let canvas = new fabric.Canvas(canvasElement);
                     canvasElement.setAttribute("data-canvas-id", data.id);
+
                     // Load background image (imagePath)
                     if (data.imagePath) {
                         fabric.Image.fromURL(data.imagePath, function (img) {
@@ -29,15 +33,16 @@ document.addEventListener("DOMContentLoaded", function () {
                                 selectable: false, // Non-draggable background image
                                 hasControls: false, // Disable resizing controls
                             });
-                            canvas.setBackgroundImage(
-                                img,
-                                canvas.renderAll.bind(canvas)
-                            );
+                            // Set background image and render
+                            canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
+                            canvas.sendToBack(img); // Ensure it's set behind other elements
                         });
                     }
+
+                    // Load static information (text and shapes)
                     if (data.static_information) {
                         const staticInfo = JSON.parse(data.static_information);
-                        staticInfo?.shapeImageData?.forEach((element) => {
+                        staticInfo.shapeImageData?.forEach((element) => {
                             if (
                                 element.shape != undefined &&
                                 element.centerX != undefined &&
@@ -45,7 +50,6 @@ document.addEventListener("DOMContentLoaded", function () {
                                 element.height != undefined &&
                                 element.width != undefined
                             ) {
-                                console.log(element.shape);
                                 shape = element.shape;
                                 centerX = element.centerX;
                                 centerY = element.centerY;
@@ -56,101 +60,27 @@ document.addEventListener("DOMContentLoaded", function () {
                     }
 
                     // Load filed image (filedImagePath) as another image layer
-                    // if (data.filedImagePath) {
-                    //     const userImageElement =
-                    //         document.getElementById("user_image");
-                    //     const imageWrapper =
-                    //         document.getElementById("imageWrapper");
-                    //     canvasElement = new fabric.Canvas("imageEditor", {
-                    //         width: 500, // Canvas width
-                    //         height: 500, // Canvas height
-                    //     });
-                    //     let isDragging = false;
-                    //     let isResizing = false;
-                    //     let startWidth,
-                    //         startHeight,
-                    //         startX,
-                    //         startY,
-                    //         activeHandle;
-                    //     let offsetX, offsetY;
-                    //     let shapeChangedDuringDrag = false; // Flag to track shape change
-                    //     let imageUploaded = false; // Flag to track if image has been uploaded
-
-                    //     const imgElement = new Image();
-                    //     imgElement.src = data.filedImagePath;
-
-                    //     userImageElement.src = data.filedImagePath;
-                    //     imageWrapper.style.display = "block";
-
-                    //     imgElement.onload = function () {
-                    //         console.log("Image loaded successfully.");
-                    //         const imgInstance = new fabric.Image(imgElement, {
-                    //             left: 0,
-                    //             top: 0,
-                    //             selectable: true,
-                    //             hasControls: true,
-                    //             hasBorders: true,
-                    //             cornerColor: "red",
-                    //             cornerStrokeColor: "blue",
-                    //             borderColor: "blue",
-                    //             cornerSize: 10,
-                    //             transparentCorners: false,
-                    //             lockUniScaling: true,
-                    //             scaleX: 600 / imgElement.width,
-                    //             scaleY: 600 / imgElement.height,
-                    //         });
-
-                    //         canvasElement.add(imgInstance);
-                    //         addIconsToImage(imgInstance);
-
-                    //        drawCanvas();
-                    //         console.log("Image loaded and added to canvas.");
-                    //        imageUploaded = true; // Set flag to true after image is uploaded
-
-                    //         if (shape) {
-                    //            updateClipPath(imgInstance, shape); // Update the shape with fetched data
-                    //         }
-
-                    //         imgInstance.on("mouseup", function (options) {
-                    //             if (options.target) {
-                    //                 // Change to the next shape on click
-                    //                 currentShapeIndex =
-                    //                     (currentShapeIndex + 1) % shapes.length;
-                    //                 shape = shapes[currentShapeIndex];
-                    //                // updateClipPath(imgInstance, shape); // Update the shape
-                    //             }
-                    //         });
-                    //     };
-
-                    //     imgElement.onerror = function () {
-                    //         console.error("Failed to load image.");
-                    //     };
-                    // }
-                  
-                    // Load static information (text and shapes)
                     if (data.filedImagePath) {
-                        console.log("ytes")
                         fabric.Image.fromURL(data.filedImagePath, function (filedImg) {
-                            // Set your preferred image properties
+                            // Set image properties and ensure correct scaling
                             filedImg.set({
                                 left: 50,
                                 top: 50,
-                                scaleX: 150/ filedImg.width,
-                                scaleY:  150/filedImg.height,
+                                scaleX: 150 / filedImg.width,
+                                scaleY: 150 / filedImg.height,
                                 height: 200,
                                 width: 150,
                                 selectable: true,
-                                hasControls: true
+                                hasControls: true,
                             });
+
                             // Apply the shape from static information if available
                             if (shape) {
                                 updateClipPath(filedImg, shape); // Update the shape with fetched data
                             }
 
-
-                            // Inside your loadTextDataFromDatabase function
-
-                            filedImg.on('mouseup', function (options) {
+                            // Click event to change shape on click
+                            filedImg.on("mouseup", function (options) {
                                 if (options.target) {
                                     // Change to the next shape on click
                                     currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
@@ -160,71 +90,55 @@ document.addEventListener("DOMContentLoaded", function () {
                                 }
                             });
 
-
+                            // Add image to canvas
                             canvas.add(filedImg);
                             canvas.bringToFront(filedImg);
 
-                            addIconsToImage(filedImg); // Add the filed image to the canvas
-                            canvas.renderAll();  // Ensure the canvas is updated
-                            console.log("imageadded")
+                            addIconsToImage(filedImg); // Add any icons if necessary
+                            canvas.renderAll(); // Ensure the canvas is updated
                         });
                     }
-                    if (data.static_information) {
-                        // hideStaticTextElements(); // Hide static text elements if static information is present
-                        const staticInfo = JSON.parse(data.static_information);
 
-                        // Render text elements or shapes on canvas
+                    // Load text elements if present
+                    if (data.static_information) {
+                        const staticInfo = JSON.parse(data.static_information);
                         staticInfo.textElements.forEach((element) => {
                             if (element.text) {
-                                let textElement = new fabric.Textbox(
-                                    element.text,
-                                    {
-                                        left: element.left,
-                                        top: element.top,
-                                        width: element.width || 200,
-                                        fontSize: element.fontSize,
-                                        fill: element.fill,
-                                        fontFamily: element.fontFamily,
-                                        fontWeight: element.fontWeight,
-                                        fontStyle: element.fontStyle,
-                                        underline: element.underline,
-                                        linethrough: element.linethrough,
-                                        backgroundColor:
-                                            element.backgroundColor,
-                                        textAlign: element.textAlign,
-                                        editable: true,
-                                        hasControls: true,
-                                        // borderColor: 'blue',
-                                        // cornerColor: 'red',
-                                        borderColor: "#2DA9FC",
-                                        // cornerColor: 'red',
-                                        cornerColor: "#fff",
-                                        cornerSize: 6,
-                                        transparentCorners: false,
-                                        isStatic: true,
-                                    }
-                                );
-
-                                const textWidth = textElement.calcTextWidth();
-                                textElement.set({
-                                    width: textWidth,
+                                let textElement = new fabric.Textbox(element.text, {
+                                    left: element.left,
+                                    top: element.top,
+                                    width: element.width || 200,
+                                    fontSize: element.fontSize,
+                                    fill: element.fill,
+                                    fontFamily: element.fontFamily,
+                                    fontWeight: element.fontWeight,
+                                    fontStyle: element.fontStyle,
+                                    underline: element.underline,
+                                    linethrough: element.linethrough,
+                                    backgroundColor: element.backgroundColor,
+                                    textAlign: element.textAlign,
+                                    editable: true,
+                                    hasControls: true,
+                                    borderColor: "#2DA9FC",
+                                    cornerColor: "#fff",
+                                    cornerSize: 6,
+                                    transparentCorners: false,
+                                    isStatic: true,
                                 });
 
-                                // textElement.on('scaling', function() {
-                                //     var updatedFontSize = textElement.fontSize * (textElement.scaleX + textElement.scaleY) / 2;
-                                //     textElement.set('fontSize', updatedFontSize);
-                                //     canvas.renderAll();
-                                // });
+                                const textWidth = textElement.calcTextWidth();
+                                textElement.set({ width: textWidth });
 
                                 addIconsToTextbox(textElement);
                                 canvas.add(textElement);
                                 console.log(textElement);
-                                canvas.renderAll();
+                                canvas.renderAll(); // Ensure the canvas is updated after adding text
                             }
                         });
                     } else {
                         showStaticTextElements();
-                        addDraggableText(150, 50, "event_name", "xyz"); // Position this outside the image area
+                        // Add default draggable text
+                        addDraggableText(150, 50, "event_name", "xyz");
                         addDraggableText(150, 100, "host_name", "abc");
                         addDraggableText(150, 150, "start_time", "5:00PM");
                         addDraggableText(150, 200, "rsvp_end_time", "6:00PM");
@@ -233,11 +147,12 @@ document.addEventListener("DOMContentLoaded", function () {
                         addDraggableText(150, 350, "Location", "fdf");
                     }
 
-                    canvas.renderAll(); // Ensure all elements are rendered
+                    canvas.renderAll(); // Ensure all elements are rendered at the end
                 }
-            })
-            .catch((error) => console.error("Error loading text data:", error));
-    }
+        })
+        .catch((error) => console.error("Error loading text data:", error));
+}
+
 
     function updateClipPath(image, shape) {
         let clipPath;
