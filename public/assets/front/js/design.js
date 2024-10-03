@@ -168,126 +168,105 @@ $(document).on("click", ".design-card", function () {
         const staticInfo = dbJson;
         staticInfo?.shapeImageData?.forEach(element => {
             if (element.shape && element.centerX && element.centerY && element.height && element.width) {
-                console.log(element.shape);
-    
                 var imgObj = new Image();
                 imgObj.src = shapeImageUrl; // Set your image URL
-    
+                
                 imgObj.onload = function () {
                     // Create the image object in fabric.js
                     var img = new fabric.Image(imgObj);
+                
                     img.set({
                         left: canvas.width / 2 - img.width / 2,
                         top: canvas.height / 2 - img.height / 2,
-                        scaleX: 0.5,
+                        scaleX: 0.5, // Scaling the image
                         scaleY: 0.5
                     });
-
-                    // Function to change the clipping shape on click
-                    function changeShape() {
-                        // Toggle between different shapes
-                        var currentClip = img.clipPath;
-
-                        if (!currentClip || currentClip instanceof fabric.Rect) {
-                            // Set to a circle
-                            img.set({
-                                clipPath: new fabric.Circle({
-                                    radius: 100, // Adjust as needed
-                                    originX: 'center',
-                                    originY: 'center'
-                                })
-                            });
-                        } else if (currentClip instanceof fabric.Circle) {
-                            // Set to a rectangle
-                            img.set({
-                                clipPath: new fabric.Rect({
-                                    width: 200,  // Adjust width
-                                    height: 150, // Adjust height
-                                    originX: 'center',
-                                    originY: 'center'
-                                })
-                            });
-                        } else if (currentClip instanceof fabric.Path) {
-                            // Set back to no clip (or choose another shape)
-                            img.set({
-                                clipPath: null // Remove clipping
-                            });
+                
+                    // Function to switch between different shapes
+                    function changeShape(shape) {
+                        switch (shape) {
+                            case 'rectangle':
+                                img.set({
+                                    clipPath: new fabric.Rect({
+                                        width: img.width * img.scaleX, // Match the scaled image width
+                                        height: img.height * img.scaleY, // Match the scaled image height
+                                        originX: 'center',
+                                        originY: 'center'
+                                    })
+                                });
+                                break;
+                
+                            case 'circle':
+                                img.set({
+                                    clipPath: new fabric.Circle({
+                                        radius: (img.width * img.scaleX) / 2, // Scale to match image size
+                                        originX: 'center',
+                                        originY: 'center'
+                                    })
+                                });
+                                break;
+                
+                            case 'star':
+                                img.set({
+                                    clipPath: new fabric.Path(
+                                        'M 50,0 L 61,35 L 98,35 L 68,57 L 79,91 L 50,70 L 21,91 L 32,57 L 2,35 L 39,35 z', {
+                                        scaleX: (img.width * img.scaleX) / 100, // Adjust scaling
+                                        scaleY: (img.height * img.scaleY) / 100,
+                                        originX: 'center',
+                                        originY: 'center'
+                                    })
+                                });
+                                break;
+                
+                            case 'rounded-border':
+                                img.set({
+                                    clipPath: new fabric.Rect({
+                                        width: img.width * img.scaleX,
+                                        height: img.height * img.scaleY,
+                                        rx: 20, // Rounded corners
+                                        ry: 20, // Rounded corners
+                                        originX: 'center',
+                                        originY: 'center'
+                                    })
+                                });
+                                break;
+                
+                            case 'heart':
+                                img.set({
+                                    clipPath: new fabric.Path(
+                                        'M 50,30 A 20,20 0 0 1 100,30 Q 100,60 50,90 Q 0,60 0,30 A 20,20 0 0 1 50,30 z', {
+                                        scaleX: (img.width * img.scaleX) / 100,
+                                        scaleY: (img.height * img.scaleY) / 100,
+                                        originX: 'center',
+                                        originY: 'center'
+                                    })
+                                });
+                                break;
+                
+                            default:
+                                img.set({
+                                    clipPath: null // Remove any clipping path
+                                });
+                                break;
                         }
-
-                        // Re-render the canvas after changing shape
+                
+                        // Re-render the canvas after changing the shape
                         canvas.renderAll();
                     }
-
-                    // Add a 'mouse:down' event listener to the image for the click
+                
+                    // Add event listener to change shape on click
                     img.on('mousedown', function() {
-                        changeShape();
+                        // Example: Toggle through shapes on each click (you can adjust this logic)
+                        var shapes = ['rectangle', 'circle', 'star', 'rounded-border', 'heart'];
+                        var currentShape = shapes[Math.floor(Math.random() * shapes.length)]; // Random shape for demo
+                        changeShape(currentShape);
                     });
+                
+                    // Add the image to the canvas
                     canvas.add(img);
                     canvas.renderAll();
-    
-                    // let clipPath;
-    
-                    // // Define the clipping path based on the shape
-                    // if (element.shape === "circle") {
-                    //     clipPath = new fabric.Circle({
-                    //         radius: element.width / 2, // Radius should be half of width
-                    //         originX: "center",
-                    //         originY: "center",
-                    //     });
-                    // } else if (element.shape === "rectangle") {
-                    //     clipPath = new fabric.Rect({
-                    //         width: element.width, // Use provided width
-                    //         height: element.height, // Use provided height
-                    //         originX: "center",
-                    //         originY: "center",
-                    //     });
-                    // } else if (element.shape === "star") {
-                    //     const starPoints = [];
-                    //     const spikes = 5;
-                    //     const outerRadius = element.width / 2;
-                    //     const innerRadius = outerRadius / 2;
-    
-                    //     // Create the points of the star
-                    //     for (let i = 0; i < spikes * 2; i++) {
-                    //         const angle = (i * Math.PI) / spikes;
-                    //         const radius = i % 2 === 0 ? outerRadius : innerRadius;
-                    //         starPoints.push(
-                    //             Math.cos(angle) * radius,
-                    //             Math.sin(angle) * radius
-                    //         );
-                    //     }
-    
-                    //     clipPath = new fabric.Polygon(starPoints, {
-                    //         originX: "center",
-                    //         originY: "center",
-                    //     });
-                    // } else if (element.shape === "heart") {
-                    //     const heartPath = [
-                    //         "M", 0, 0,
-                    //         "C", -element.width / 2, -element.height / 1.5,
-                    //         -element.width / 2, element.height / 3,
-                    //         0, element.height / 2,
-                    //         "C", element.width / 2, element.height / 3,
-                    //         element.width / 2, -element.height / 1.5,
-                    //         0, 0
-                    //     ].join(" ");
-    
-                    //     clipPath = new fabric.Path(heartPath, {
-                    //         originX: "center",
-                    //         originY: "center",
-                    //     });
-                    // }
-    
-                    // // Set the clip path to the image
-                    // img.set({
-                    //     clipPath: clipPath,
-                    //     clipPathUnits: 'objectBoundingBox', // Ensures the clip path scales with the object
-                    // });
-    
-                    // Add the image to the canvas
-                    // canvas.add(img);
-                    // canvas.renderAll(); // Refresh the canvas
                 };
+                
             }
         });
     }
