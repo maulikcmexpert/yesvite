@@ -414,7 +414,7 @@
                 };
 
                 // Update the clip path or shape (if needed)
-                updateClipPath(imageUrl, updatedOBJ);
+                updateClipPath(imageUrl, updatedOBJImage);
             }
         });
 
