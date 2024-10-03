@@ -216,8 +216,8 @@
                                 filedImg.set({
                                     left: 50,
                                     top: 50,
-                                    scaleX: 150/ filedImg.width,
-                                    scaleY:  150/filedImg.height,
+                                    scaleX: filedImg.width / 150,
+                                    scaleY:  filedImg.height / 200,
                                     height: 200,
                                     width: 150,
                                     selectable: true,
