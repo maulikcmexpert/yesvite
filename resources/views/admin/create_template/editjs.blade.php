@@ -1411,7 +1411,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const fileInput = document.getElementById("fileInput");
     const userImageElement = document.getElementById("user_image");
     const imageWrapper = document.getElementById("imageWrapper");
-    const canvasElement = new fabric.Canvas("imageEditor", {
+    canvasElement = new fabric.Canvas("imageEditor", {
         width: 500, // Canvas width
         height: 500, // Canvas height
     });
