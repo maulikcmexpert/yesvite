@@ -103,12 +103,12 @@ document.addEventListener("DOMContentLoaded", function () {
                             canvasElement.add(imgInstance);
                             addIconsToImage(imgInstance);
 
-                            drawCanvas();
+                           // drawCanvas();
                             console.log("Image loaded and added to canvas.");
                             imageUploaded = true; // Set flag to true after image is uploaded
 
                             if (shape) {
-                               updateClipPath(imgInstance, shape); // Update the shape with fetched data
+                               //updateClipPath(imgInstance, shape); // Update the shape with fetched data
                             }
 
                             imgInstance.on("mouseup", function (options) {
