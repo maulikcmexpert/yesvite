@@ -1353,6 +1353,7 @@
                 height: height
             });
             console.log(shapeImageData);
+            console.log(textData);
             $.ajax({
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
