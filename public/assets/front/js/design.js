@@ -439,6 +439,7 @@ function bindData() {
                         transparentCorners: false,
                         lockScalingFlip: true,
                         hasBorders: true,
+                        centeredRotation:true,
                     });
 
                     // textElement.setControlsVisibility({
@@ -479,7 +480,7 @@ function bindData() {
                             ctx.fillRect(left - 2, top - 7, 4, 8); // Draw a rectangle control for 'mr'
                         }
                     });
-
+                    
                     textElement.controls.mtr = new fabric.Control({
                         x: 0,
                         y: -0.5,
@@ -487,13 +488,7 @@ function bindData() {
                         offsetY: -40, // Adjust this as needed
                         cursorStyle: 'crosshair',
                         actionHandler: fabric.controlsUtils.rotationWithSnapping,
-                        render: function(ctx, left, top, styleOverride, fabricObject) {
-                            ctx.fillStyle = 'red'; // Circle color for the mtr control
-                            ctx.beginPath();
-                            ctx.arc(left, top, 6, 0, 2 * Math.PI, false); // Draw a circle for 'mtr'
-                            ctx.fill();
-                            ctx.closePath();
-                        }
+                        render: renderIcon,
                     });
 
                     // textElement.controls.mt = new fabric.Control({
