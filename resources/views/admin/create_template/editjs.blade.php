@@ -367,7 +367,7 @@ function updateClipPath(imageUrl, element) {
         switch (element.shape) {
             case 'circle':
                 clipPath = new fabric.Circle({
-                    radius: Math.min(containerWidth, containerHeight) / 2,
+                    radius: Math.min(containerWidth, containerHeight),
                     originX: 'center',
                     originY: 'center'
                 });
