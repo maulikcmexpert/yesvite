@@ -1429,7 +1429,7 @@ function updateClipPath(imageUrl, element) {
         });
         canvas.on('mouse:move', function(options) {
             if(options.target!=undefined){
-
+                console.log(options.target)
                if(options.target._objects.length > 1){
                 console.log(options)
                 canvas.discardActiveObject();
