@@ -113,7 +113,7 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data) {
-                        console.log(data);
+                        // console.log(data);
                         var canvasElement = document.getElementById('imageEditor1');
                         canvasElement.setAttribute('data-canvas-id', data.id);
                         // Load background image (imagePath)
@@ -128,20 +128,20 @@
                                 canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
                             });
                         }
-                        if (data.static_information) {
-                            const staticInfo = JSON.parse(data.static_information);
-                            staticInfo?.shapeImageData?.forEach(element => {
-                                if (element.shape != undefined && element.centerX != undefined && element.centerY != undefined && element.height != undefined && element.width != undefined) {
-                                    console.log(element.shape);
-                                    shape = element.shape;
-                                    centerX = element.centerX;
-                                    centerY = element.centerY;
-                                    height = element.height;
-                                    width = element.width;
+                        // if (data.static_information) {
+                        //     const staticInfo = JSON.parse(data.static_information);
+                        //     staticInfo?.shapeImageData?.forEach(element => {
+                        //         if (element.shape != undefined && element.centerX != undefined && element.centerY != undefined && element.height != undefined && element.width != undefined) {
+                        //             console.log(element.shape);
+                        //             shape = element.shape;
+                        //             centerX = element.centerX;
+                        //             centerY = element.centerY;
+                        //             height = element.height;
+                        //             width = element.width;
 
-                                }
-                            })
-                        }
+                        //         }
+                        //     })
+                        // }
 
                         // Load filed image (filedImagePath) as another image layer
                         if (data.filedImagePath) {
