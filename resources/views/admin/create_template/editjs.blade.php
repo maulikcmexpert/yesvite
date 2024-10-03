@@ -1318,7 +1318,7 @@
             var canvasElement = document.getElementById('imageEditor1');
             var canvasId = canvasElement.getAttribute('data-canvas-id');
             var imageName = 'image_' + Date.now() + '.png';
-            console.log(textData);
+
 
 
             var id = $('#template_id').val();
@@ -1343,7 +1343,7 @@
             //     .catch((error) => {
             //         console.error('Error:', error);
             //     });
-            shapeImageData = [];
+            var shapeImageData = [];
 
             shapeImageData.push({
                 shape: shape,
@@ -1352,6 +1352,7 @@
                 width: width,
                 height: height
             });
+            console.log(shapeImageData);
             $.ajax({
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
