@@ -1318,6 +1318,8 @@
             var canvasId = canvasElement.getAttribute('data-canvas-id');
             var imageName = 'image_' + Date.now() + '.png';
             console.log(canvasId);
+            console.log(textData);
+
             fetch('/saveTextData', {
                     method: 'POST',
                     headers: {
