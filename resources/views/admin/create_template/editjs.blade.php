@@ -377,15 +377,21 @@
         }); 
         
         image.on('moving', function () {
+            
             isImageDragging = true; // Set dragging flag to true
+            var obj = canvas.getActiveObject();
+            var obj = [];
+            // console.log(objects);
+            var centerX = obj.left + (obj.width / 2);
+            var centerY = obj.top + (obj.height / 2);
             updatedOBJImage = {
                 shape: element.shape,
-                centerX: image.offsetLeft,
-                centerY: image.offsetTop,
+                centerX,
+                centerY,
                 width: image.width,
                 height:  image.height
             };
-            console.log(image.offsetLeft)
+            console.log(centerX)
         });
 
         image.on('mouseup', function (options) {
