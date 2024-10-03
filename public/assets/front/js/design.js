@@ -503,12 +503,17 @@ function bindData() {
                     // here's where the render action for the control is defined
                     function renderIcon(ctx, left, top, styleOverride, fabricObject) {
                       var size = this.cornerSize;
-                      ctx.save();
-                      ctx.translate(left, top);
-                      ctx.rotate(fabric.util.degreesToRadians(fabricObject.angle));
-                      ctx.drawImage(img, -size / 2, -size / 2, size, size);
-                      ctx.fill();
-                      ctx.restore();
+                    //   ctx.save();
+                    //   ctx.translate(left, top);
+                    //   ctx.rotate(fabric.util.degreesToRadians(fabricObject.angle));
+                    //   ctx.drawImage(img, -size / 2, -size / 2, size, size);
+                    //   ctx.fill();
+                    //   ctx.restore();
+                        ctx.fillStyle = 'red'; // Circle color for the mtr control
+                        ctx.beginPath();
+                        ctx.arc(left, top, 6, 0, 2 * Math.PI, false); // Draw a circle for 'mtr'
+                        ctx.fill();
+                        ctx.closePath();
                     }
 
                     // textElement.controls.mt = new fabric.Control({
