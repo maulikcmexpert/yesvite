@@ -1566,7 +1566,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         canvasElement.add(imgInstance);
                         canvasElement.bringToFront(imgInstance);
                         drawCanvas();
-                        addIconsToImage(imgElement)
+                        // addIconsToImage(imgElement)
                         console.log("Image loaded and added to canvas.");
                         imageUploaded = true; // Set flag to true after image is uploaded
                     };
