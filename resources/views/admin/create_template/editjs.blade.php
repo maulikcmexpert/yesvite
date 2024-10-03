@@ -360,8 +360,8 @@
         // Apply the clipping path to the image
         image.set({
             clipPath: clipPath,
-            left: element.centerX,
-        top: element.centerY, 
+            left: 50,
+        top: 50, 
 
         });
 
