@@ -3090,6 +3090,7 @@ $(document).on("click", ".cancel-btn-createEvent", function () {
 });
 
 function handleActiveClass(target) {
+    console.log(target);
     $(".side-bar-list").removeClass("active");
     if(target == '.li_design'){
         $('pick-card').addClass("active");
