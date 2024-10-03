@@ -274,9 +274,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function addIconsToImage(textbox) {
         console.log(textbox);
+        textbox.remove()
+        canvas.renderAll();
         // alert(1)
-        canvas.remove(textbox);
-        // Remove existing trash icon if it exists
+        // // Remove existing trash icon if it exists
         // if (textbox?.trashIcon) {
         //     canvas.remove(textbox.trashIcon);
         //     textbox.trashIcon = null; // Clear reference
@@ -345,7 +346,7 @@ document.addEventListener("DOMContentLoaded", function () {
         //     canvas.renderAll();
         // });
         // console.log(textbox);
-        console.log("=========================");
+        // console.log("=========================");
     }
 
     // Call function to load data when the page loads
