@@ -304,7 +304,7 @@
 
         
         let currentImage = null; 
-    let isDragging = false; // Track if the image is being dragged
+    let isImageDragging = false; // Track if the image is being dragged
     
 
         function updateClipPath(imageUrl, element) {
@@ -377,15 +377,15 @@
         }); 
         
         image.on('moving', function () {
-            isDragging = true; // Set dragging flag to true
+            isImageDragging = true; // Set dragging flag to true
         });
 
         image.on('mouseup', function (options) {
-            if (isDragging) {
+            if (isImageDragging) {
                 // Update the position after dragging
                 element.centerX = image.left;
                 element.centerY = image.top;
-                isDragging = false; // Reset dragging flag
+                isImageDragging = false; // Reset dragging flag
             } else {
                 // If not dragging, change to the next shape on click
                 currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
