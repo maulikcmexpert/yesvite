@@ -20,7 +20,9 @@ $(document).on("click", ".design-card", function () {
         console.log(dbJson);
         temp_id = eventData.temp_id; 
     }else{
-        dbJson = json;
+        dbJson = {
+            textElements: eventData.textData
+        };
         temp_id = id;
     }
 
