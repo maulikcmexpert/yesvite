@@ -250,12 +250,12 @@
                             <h3>Design</h3>
                         </div>
                         <ul class="new-event-sidebar-sub-menu">
-                            <li>
+                            <li class="pick-card">
                                 <div class="side-bar-sub-list">
                                     <h3>Pick Design</h3>
                                 </div>
                             </li>
-                            <li>
+                            <li class="edit-design">
                                 <div class="side-bar-sub-list">
                                     <h3>Edit Design</h3>
                                 </div>
