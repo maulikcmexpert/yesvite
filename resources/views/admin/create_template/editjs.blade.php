@@ -340,7 +340,7 @@
                     height: 200,
                     width: 150,
                     selectable: true,
-                    hasControls: true
+                    hasControls: true,
                     originX: 'center', // Set origin to center of the rectangle
                     originY: 'center' // Set origin to center of the rectangle
                 });
