@@ -310,14 +310,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function addIconsToImage(textbox) {
         console.log(textbox);
-        canvasElement.remove(textbox)
-        canvasElement.renderAll();
+        canvas.remove(textbox)
+        canvas.renderAll();
         // alert(1)
         // Remove existing trash icon if it exists
         if (textbox?.trashIcon) {
-            canvasElement.remove(textbox.trashIcon);
+            canvas.remove(textbox.trashIcon);
             textbox.trashIcon = null; // Clear reference
-            canvasElement.renderAll();
+            canvas.renderAll();
         }
 
         const trashIconSVG = `<svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -351,16 +351,16 @@ document.addEventListener("DOMContentLoaded", function () {
                 trashIcon.deleteHandlerAttached = true; // Mark that the handler is attached
             }
 
-            canvasElement.add(trashIcon);
-            canvasElement.bringToFront(trashIcon);
+            canvas.add(trashIcon);
+            canvas.bringToFront(trashIcon);
             textbox.trashIcon = trashIcon; // Store the reference of the trash icon
 
             // Update icon position on moving and scaling
             textbox.on("moving", function () {
                 if (textbox.trashIcon) {
-                    canvasElement.remove(textbox.trashIcon);
+                    canvas.remove(textbox.trashIcon);
                     textbox.trashIcon = null; // Clear reference
-                    canvasElement.renderAll();
+                    canvas.renderAll();
                 }
                 clearTimeout(updateTimeout);
                 updateTimeout = setTimeout(() => {
@@ -370,16 +370,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
             textbox.on("scaling", function () {
                 if (textbox.trashIcon) {
-                    canvasElement.remove(textbox.trashIcon);
+                    canvas.remove(textbox.trashIcon);
                     textbox.trashIcon = null; // Clear reference
-                    canvasElement.renderAll();
+                    canvas.renderAll();
                 }
                 clearTimeout(updateTimeout);
                 updateTimeout = setTimeout(() => {
                     addIconsToImage(textbox);
                 }, 500);
             });
-            canvasElement.renderAll();
             canvas.renderAll();
 
         });
