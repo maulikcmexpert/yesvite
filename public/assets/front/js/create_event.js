@@ -3153,12 +3153,19 @@ $(document).on("click", ".li_event_detail", function () {
     $(".step_3").css("display", "none");
     $(".step_4").css("display", "none");
     $(".step_final_checkout").css("display", "none");
-
+    
     $('.event_create_percent').text('25%');
     $('.current_step').text('1 of 4');
-
-
+    
+    
     handleActiveClass(this);
+    var design = eventData.desgin_selected;
+    if( design == undefined || design == ''){
+
+    }else{
+        $('.pick-card').addClass('menu-success');
+        $('.edit-design').addClass('menu-success');
+    }
 });
 
 $(document).on("click", ".li_guest", function () {
@@ -3194,6 +3201,12 @@ $(document).on("click", ".li_setting", function () {
         $('.event_create_percent').text('99%');
         $('.current_step').text('4 of 4');
         handleActiveClass(this);
+        if( design == undefined || design == ''){
+
+        }else{
+            $('.pick-card').addClass('menu-success');
+            $('.edit-design').addClass('menu-success');
+        }
     }
 });
 
