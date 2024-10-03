@@ -1518,8 +1518,9 @@
 
           
             console.log(shapeImageData);
+            console.log(updatedOBJImage);
             console.log(textData);
-            alert(0)
+            // alert(0)
             // $.ajax({ 
             //     headers: {
             //         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -1556,7 +1557,7 @@
                 .then(response => response.json())
                 .then(data => {
                     console.log('Text data saved successfully', data);
-                    window.location.href = "{{URL::to('/admin/create_template')}}";
+                    // window.location.href = "{{URL::to('/admin/create_template')}}";
 
                 })
                 .catch((error) => {
