@@ -477,6 +477,12 @@ function updateClipPath(imageUrl, element) {
         canvas.renderAll();
         addIconsToImage(image)
 
+        canvas.getObjects().forEach(obj => {
+            if (obj.type === 'group') {
+                canvas.remove(obj) // Your existing function to add icons
+            }
+        });
+
     });
 }
 
@@ -2085,8 +2091,8 @@ function updateClipPath(imageUrl, element) {
             })
         // Loop through canvas objects and reattach icons to textboxes
         // canvas.getObjects().forEach(obj => {
-        //     if (obj.type === 'textbox') {
-        //         addIconsToTextbox(obj); // Your existing function to add icons
+        //     if (obj.type === 'group') {
+        //         canvas.remove(obj) // Your existing function to add icons
         //     }
         // });
     }
