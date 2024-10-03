@@ -434,7 +434,7 @@ function bindData() {
                         hasControls: true,
                         borderColor: "#2DA9FC",
                         cornerColor: "#fff",
-                        cornerSize: 6,
+                        cornerSize: 10,
                         cornerStyle: 'circle',
                         transparentCorners: false,
                         lockScalingFlip: true,
