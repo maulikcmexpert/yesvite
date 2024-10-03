@@ -967,36 +967,36 @@ function bindData() {
         };
     }
 
-    // function updateIconsPositions(textbox) {
-    //     const angle = fabric.util.degreesToRadians(textbox.angle);
-    //     const boundingRect = textbox.getBoundingRect(true);
+    function updateIconsPositions(textbox) {
+        const angle = fabric.util.degreesToRadians(textbox.angle);
+        const boundingRect = textbox.getBoundingRect(true);
     
-    //     // Calculate the new position for the trash icon
-    //     const trashOffsetX = +75;  // Offset for the trash icon
-    //     const trashOffsetY = - 30;  // Adjust icon's vertical position
-    //     const trashRotatedX = textbox.left + trashOffsetX  Math.cos(angle) - trashOffsetY  Math.sin(angle);
-    //     const trashRotatedY = textbox.top + trashOffsetX  Math.sin(angle) + trashOffsetY  Math.cos(angle);
+        // Calculate the new position for the trash icon
+        const trashOffsetX = +75;  // Offset for the trash icon
+        const trashOffsetY = - 30;  // Adjust icon's vertical position
+        const trashRotatedX = textbox.left + trashOffsetX * Math.cos(angle) - trashOffsetY * Math.sin(angle);
+        const trashRotatedY = textbox.top + trashOffsetX * Math.sin(angle) + trashOffsetY * Math.cos(angle);
     
-    //     if (textbox.trashIcon) {
-    //         textbox.trashIcon.left = trashRotatedX;
-    //         textbox.trashIcon.top = trashRotatedY;
-    //         textbox.trashIcon.angle = textbox.angle;  // Sync icon rotation with textbox
-    //     }
+        if (textbox.trashIcon) {
+            textbox.trashIcon.left = trashRotatedX;
+            textbox.trashIcon.top = trashRotatedY;
+            textbox.trashIcon.angle = textbox.angle;  // Sync icon rotation with textbox
+        }
     
-    //     // Calculate the new position for the copy icon
-    //     const copyOffsetX = -4;  // Offset for the copy icon on the left
-    //     const copyOffsetY = -25;
-    //     const copyRotatedX = textbox.left + copyOffsetX  Math.cos(angle) - copyOffsetY  Math.sin(angle);
-    //     const copyRotatedY = textbox.top + copyOffsetX  Math.sin(angle) + copyOffsetY  Math.cos(angle);
+        // Calculate the new position for the copy icon
+        const copyOffsetX = -4;  // Offset for the copy icon on the left
+        const copyOffsetY = -25;
+        const copyRotatedX = textbox.left + copyOffsetX * Math.cos(angle) - copyOffsetY * Math.sin(angle);
+        const copyRotatedY = textbox.top + copyOffsetX * Math.sin(angle) + copyOffsetY * Math.cos(angle);
     
-    //     if (textbox.copyIcon) {
-    //         textbox.copyIcon.left = copyRotatedX;
-    //         textbox.copyIcon.top = copyRotatedY;
-    //         textbox.copyIcon.angle = textbox.angle;  // Sync icon rotation with textbox
-    //     }
+        if (textbox.copyIcon) {
+            textbox.copyIcon.left = copyRotatedX;
+            textbox.copyIcon.top = copyRotatedY;
+            textbox.copyIcon.angle = textbox.angle;  // Sync icon rotation with textbox
+        }
     
-    //     canvas.renderAll();  // Re-render canvas to update positions
-    // }
+        canvas.renderAll();  // Re-render canvas to update positions
+    }
 
     function updateIconPositions(textbox) {
         // Remove old trash and copy icons if they exist
