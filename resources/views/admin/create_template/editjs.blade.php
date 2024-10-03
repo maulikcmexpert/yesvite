@@ -107,7 +107,13 @@
         var newshape = "";
         const shapes = ['circle', 'rectangle', 'star', 'heart']; // Array of available shapes
         let currentShapeIndex = 0; // Track the current shape index
-
+        const updatedOBJImage = {
+                    shape: shape,
+                    centerX: image.left,
+                    centerY: image.top,
+                    width: 100,
+                    height: 100
+                };
         function loadTextDataFromDatabase() {
             var id = $('#template_id').val();
 
@@ -140,6 +146,14 @@
                                     centerY = element.centerY;
                                     height = element.height;
                                     width = element.width;
+
+                                    updatedOBJImage = {
+                                        shape: shape,
+                                        centerX: element.centerX,
+                                        centerY: element.centerY,
+                                        width: element.height,
+                                        height: element.width
+                                    };
                                     updateClipPath(data.filedImagePath, element);
 
                                 }
@@ -286,7 +300,13 @@
                 })
                 .catch(error => console.error('Error loading text data:', error));
         }
+
+
+        
         let currentImage = null; 
+    let isDragging = false; // Track if the image is being dragged
+    
+
         function updateClipPath(imageUrl, element) {
 
             if (currentImage) {
@@ -296,7 +316,6 @@
     // Define the fixed container dimensions
     const containerWidth = 150;
     const containerHeight = 200;
-    let isDragging = false; // Track if the image is being dragged
 
     // Load the image from the URL
     fabric.Image.fromURL(imageUrl, function (image) {
@@ -356,6 +375,7 @@
         top: element.centerY, 
 
         }); 
+        
         image.on('moving', function () {
             isDragging = true; // Set dragging flag to true
         });
@@ -371,12 +391,12 @@
                 currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
                 const shape = shapes[currentShapeIndex];
 
-                const updatedOBJ = {
+                updatedOBJImage = {
                     shape: shape,
                     centerX: image.left,
                     centerY: image.top,
-                    width: 100,
-                    height: 100
+                    width: image.width,
+                    height:  image.height
                 };
 
                 // Update the clip path or shape (if needed)
@@ -1494,16 +1514,13 @@
             //     });
             var shapeImageData = [];
 
-            shapeImageData.push({
-                shape: shape,
-                centerX: centerX,
-                centerY: centerY,
-                width: width,
-                height: height
-            });
+            shapeImageData.push(updatedOBJImage);
+
+          
             console.log(shapeImageData);
             console.log(textData);
-            // $.ajax({
+            alert(0)
+            // $.ajax({ 
             //     headers: {
             //         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             //     },
