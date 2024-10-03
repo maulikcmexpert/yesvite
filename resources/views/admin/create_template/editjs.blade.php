@@ -358,7 +358,9 @@
 
                     // Apply the clipping path to the image
                     image.set({
-                        clipPath: clipPath
+                        clipPath: clipPath,
+                        left: element.centerX,
+                        top: element.centerY, 
                     });
 
                     // Add the image to the canvas
