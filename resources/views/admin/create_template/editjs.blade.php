@@ -1354,26 +1354,48 @@
             });
             console.log(shapeImageData);
             console.log(textData);
-            $.ajax({
-                headers: {
-                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-                },
-                url: base_url + "/saveTextData",
-                type: "POST",
-                dataType: 'json', // Expect a JSON response
-                data: {
-                    id: canvasId, // Send as an object, not JSON string
-                    textElements: textData,
-                    shapeImageData: shapeImageData,
-                },
-                success: function(response) {
-                    console.log('Text data saved successfully', response);
-                    window.location.href = "{{URL::to('/admin/create_template')}}";
-                },
-                error: function(xhr, status, error) {
-                    console.error("Failed Not Saved Data:", error);
-                },
-            });
+            // $.ajax({
+            //     headers: {
+            //         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            //     },
+            //     url: base_url + "/saveTextData",
+            //     type: "POST",
+            //     dataType: 'json', // Expect a JSON response
+            //     data: {
+            //         id: canvasId, // Send as an object, not JSON string
+            //         textElements: textData,
+            //         shapeImageData: shapeImageData,
+            //     },
+            //     success: function(response) {
+            //         console.log('Text data saved successfully', response);
+            //         window.location.href = "{{URL::to('/admin/create_template')}}";
+            //     },
+            //     error: function(xhr, status, error) {
+            //         console.error("Failed Not Saved Data:", error);
+            //     },
+            // });
+
+            fetch('/saveTextData', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json', // Set content type to JSON
+                        'X-CSRF-TOKEN': csrfToken // Include CSRF token
+                    },
+                    body: JSON.stringify({
+                        id: canvasId,
+                        textElements: textData,
+                        shapeImageData: shapeImageData
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Text data saved successfully', data);
+                    // window.location.href = "{{URL::to('/admin/create_template')}}";
+
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
 
 
 
