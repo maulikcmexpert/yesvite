@@ -441,16 +441,16 @@ function bindData() {
                         hasBorders: true,
                     });
 
-                    textElement.setControlsVisibility({
-                        mt: false, // Hide middle top control
-                        mb: false, // Hide middle bottom control
-                        bl: true, // Hide bottom left control
-                        br: true, // Hide bottom right control
-                        tl: true, // Hide top left control
-                        tr: true, // Hide top right control
-                        ml: true,  // Show middle left control
-                        mr: true   // Show middle right control
-                    });
+                    // textElement.setControlsVisibility({
+                    //     mt: false, // Hide middle top control
+                    //     mb: false, // Hide middle bottom control
+                    //     bl: false, // Hide bottom left control
+                    //     br: false, // Hide bottom right control
+                    //     tl: false, // Hide top left control
+                    //     tr: false, // Hide top right control
+                    //     ml: true,  // Show middle left control
+                    //     mr: true   // Show middle right control
+                    // });
                     
                     // Custom rendering of middle-left (ml) control as a rectangle
                     textElement.controls.ml = new fabric.Control({
@@ -468,6 +468,32 @@ function bindData() {
 
                     // Custom rendering of middle-right (mr) control as a rectangle
                     textElement.controls.mr = new fabric.Control({
+                        x: 0.5, // Right side
+                        y: 0,
+                        offsetX: 0,
+                        offsetY: 0,
+                        cursorStyle: 'e-resize',
+                        actionHandler: fabric.controlsUtils.scalingX,
+                        render: function(ctx, left, top, styleOverride, fabricObject) {
+                            ctx.fillStyle = 'white'; // Rectangle color
+                            ctx.fillRect(left - 2, top - 7, 4, 8); // Draw a rectangle control for 'mr'
+                        }
+                    });
+
+                    textElement.controls.mt = new fabric.Control({
+                        x: 0.5, // Right side
+                        y: 0,
+                        offsetX: 0,
+                        offsetY: 0,
+                        cursorStyle: 'e-resize',
+                        actionHandler: fabric.controlsUtils.scalingX,
+                        render: function(ctx, left, top, styleOverride, fabricObject) {
+                            ctx.fillStyle = 'white'; // Rectangle color
+                            ctx.fillRect(left - 2, top - 7, 4, 8); // Draw a rectangle control for 'mr'
+                        }
+                    });
+                    
+                    textElement.controls.bt = new fabric.Control({
                         x: 0.5, // Right side
                         y: 0,
                         offsetX: 0,
