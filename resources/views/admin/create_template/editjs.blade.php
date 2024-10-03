@@ -357,7 +357,7 @@ function updateClipPath(imageUrl, element) {
         } else {
             image.scaleToHeight(containerHeight);
         }
-
+        const scale = 0.9;
         // Define the clipping path based on the shape
         let clipPath;
         switch (element.shape) {
@@ -370,20 +370,19 @@ function updateClipPath(imageUrl, element) {
                 break;
               
                 case 'star':
-    // Star path definition
-    const starPath = 'M 50,0 L 61,35 L 98,35 L 68,57 L 79,91 L 50,70 L 21,91 L 32,57 L 2,35 L 39,35 z';
-    
-    // Scale to fit within the container
-    const starScale = Math.min(containerWidth, containerHeight) / 100 * 0.9; // Adjust scaling factor
+                const starPath = 'M 50,0 L 61,35 L 98,35 L 68,57 L 79,91 L 50,70 L 21,91 L 32,57 L 2,35 L 39,35 z';
+            clipPath = new fabric.Path(starPath, {
+                scaleX: scale,
+                scaleY: scale,
+                originX: 'center',
+                originY: 'center'
+            });
 
-    clipPath = new fabric.Path(starPath, {
-        scaleX: starScale,
-        scaleY: starScale,
-        originX: 'center',
-        originY: 'center',
-        left: containerWidth / 2,  // Center horizontally
-        top: containerHeight / 2    // Center vertically
-    });
+            // Centering the star
+            clipPath.set({
+                left: containerWidth / 2,
+                top: containerHeight / 2
+            });
     break;
 
 case 'heart':
