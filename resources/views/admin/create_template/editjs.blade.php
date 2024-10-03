@@ -344,6 +344,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 }, 500);
             });
             canvasElement.renderAll();
+            canvas.renderAll();
+
         });
         console.log(textbox);
         console.log("=========================");
