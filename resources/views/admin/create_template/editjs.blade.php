@@ -294,12 +294,9 @@
 
             // Load the image from the URL
             fabric.Image.fromURL(imageUrl, function (image) {
-                // Get the original dimensions of the image
-                const containerWidth = 150;
-                const containerHeight = 200;
-
-                const originalWidth = filedImg.width;
-                const originalHeight = filedImg.height;
+              
+                const originalWidth = image.width;
+                const originalHeight = image.height;
 
                 // Calculate the aspect ratio of the image
                 const aspectRatio = originalWidth / originalHeight;
