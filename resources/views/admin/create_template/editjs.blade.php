@@ -1396,6 +1396,7 @@ function updateClipPath(imageUrl, element) {
         canvas.on('mouse:down', function(options) {
             if (options.target && options.target.type === 'textbox') {
                 canvas.setActiveObject(options.target);
+                addIconsToTextbox(options.target)
             } else {
                 // alert();
                 canvas.getObjects('textbox').forEach(function(tb) {
@@ -2031,13 +2032,13 @@ function updateClipPath(imageUrl, element) {
             }
             })
         // Loop through canvas objects and reattach icons to textboxes
-        canvas.getObjects().forEach(obj => {
-            if (obj.type === 'textbox') {
-                addIconsToTextbox(obj); // Your existing function to add icons
-            }
-        });
+        // canvas.getObjects().forEach(obj => {
+        //     if (obj.type === 'textbox') {
+        //         addIconsToTextbox(obj); // Your existing function to add icons
+        //     }
+        // });
     }
-
+ 
 
   document.querySelector('[data-command="undo"]').addEventListener('click', undo);
     document.querySelector('[data-command="redo"]').addEventListener('click', redo);
