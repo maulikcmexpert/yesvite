@@ -61,6 +61,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     // Load filed image (filedImagePath) as another image layer
                     if (data.filedImagePath) {
+                        console.log(data.filedImagePath)
                         fabric.Image.fromURL(data.filedImagePath, function (filedImg) {
                             // Set image properties and ensure correct scaling
                             filedImg.set({
