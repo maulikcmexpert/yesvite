@@ -1427,6 +1427,18 @@ function updateClipPath(imageUrl, element) {
             }
            
         });
+        canvas.on('mouse:move', function(options) {
+            if(options.target!=undefined){
+
+               if(options.target._objects.length > 1){
+                console.log(options)
+                canvas.discardActiveObject();
+                    return
+               }
+
+            }
+           
+        });
 
         function getTextDataFromCanvas() {
             var objects = canvas.getObjects();
