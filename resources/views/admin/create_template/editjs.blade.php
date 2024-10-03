@@ -113,7 +113,7 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data) {
-                        console.log(data);
+                        console.log(data.textElements);
                         var canvasElement = document.getElementById('imageEditor1');
                         canvasElement.setAttribute('data-canvas-id', data.id);
                         // Load background image (imagePath)
