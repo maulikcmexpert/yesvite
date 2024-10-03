@@ -1318,6 +1318,15 @@
             var imageName = 'image_' + Date.now() + '.png';
             console.log(textData);
 
+
+            var id = $('#template_id').val();
+            const width = userImageElement.clientWidth;
+            const height = userImageElement.clientHeight;
+            const left = imageWrapper.offsetLeft;
+            const top = imageWrapper.offsetTop;
+            const centerX = left + width / 2;
+            const centerY = top + height / 2;
+
             // fetch('/saveTextData', {
             //         method: 'POST',
             //         headers: {
