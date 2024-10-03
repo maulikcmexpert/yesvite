@@ -108,9 +108,9 @@
         const shapes = ['circle', 'rectangle', 'star', 'heart']; // Array of available shapes
         let currentShapeIndex = 0; // Track the current shape index
         const updatedOBJImage = {
-                    shape: shape,
-                    centerX: image.left,
-                    centerY: image.top,
+                    shape: 'rectangle',
+                    centerX: 0,
+                    centerY: 0,
                     width: 100,
                     height: 100
                 };
