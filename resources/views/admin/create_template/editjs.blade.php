@@ -331,7 +331,6 @@
         
         let currentImage = null;
 let isImageDragging = false; // Track if the image is being dragged
-let updatedOBJImage = null; // Global variable for storing updated image data
 
 function updateClipPath(imageUrl, element) {
     // Remove the previous image from the canvas if it exists
