@@ -1394,6 +1394,7 @@ function updateClipPath(imageUrl, element) {
 
 
         canvas.on('mouse:down', function(options) {
+            console.log(options.target.type)
             if (options.target && options.target.type === 'textbox') {
                 canvas.setActiveObject(options.target);
                 addIconsToTextbox(options.target)
