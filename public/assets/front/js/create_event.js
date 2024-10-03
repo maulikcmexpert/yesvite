@@ -4333,6 +4333,7 @@ function save_image_design(downloadImage,textData){
                     $("#exampleModal").modal("hide");
                     $("#loader").css("display", "none");
                     $('.store_desgin_temp').prop("disabled", false);
+                    $('.btn-close').prop("disabled", false);
                     $(".main-content-wrp").removeClass("blurred");
                     $(".step_2").hide();
                     $('#edit-design-temp').hide();
