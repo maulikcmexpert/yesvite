@@ -1336,15 +1336,51 @@ function bindData() {
     // document.getElementById('fontSize').addEventListener('change', updateSelectedTextProperties);
     // document.getElementById('fontColor').addEventListener('input', updateSelectedTextProperties);
 
-    canvas.on("mouse:down", function(options) {
-        if (options.target && options.target.type === "textbox") {
+    // canvas.on("mouse:down", function(options) {
+    //     if (options.target && options.target.type === "textbox") {
+    //         canvas.setActiveObject(options.target);
+    //     } else {
+    //         canvas.getObjects("textbox").forEach(function(tb) {
+    //             if (tb.trashIcon) tb.trashIcon.set("visible", false);
+    //             if (tb.copyIcon) tb.copyIcon.set("visible", false);
+    //         });
+    //     }
+    // });
+
+    function discardIfMultipleObjects(options) {
+            
+        if (options.target !== undefined && options.target?._objects && options.target?._objects.length > 1) {
+            console.log('Multiple objects selected:', options.target);
+            canvas.discardActiveObject();
+            canvas.renderAll(); // Ensure the canvas is refreshed
+        }
+
+        const activeObjects = canvas.getActiveObjects(); // Get all selected objects
+        console.log(activeObjects)
+        if (activeObjects.length > 1) {
+            console.log('Multiple objects selected:', activeObjects);
+            canvas.discardActiveObject(); // Discard active selection
+            canvas.renderAll(); // Refresh the canvas
+        }
+      
+    }
+
+    canvas.on('mouse:down', function(options) {
+        discardIfMultipleObjects(options);
+        if (options.target && options.target.type === 'textbox') {
             canvas.setActiveObject(options.target);
+            addIconsToTextbox(options.target)
         } else {
-            canvas.getObjects("textbox").forEach(function(tb) {
-                if (tb.trashIcon) tb.trashIcon.set("visible", false);
-                if (tb.copyIcon) tb.copyIcon.set("visible", false);
+            // alert();
+            canvas.getObjects('textbox').forEach(function(tb) {
+                if (tb.trashIcon) tb.trashIcon.set('visible', false);
+                if (tb.copyIcon) tb.copyIcon.set('visible', false);
             });
         }
+    });
+
+    canvas.on('mouse:up', function(options) {
+        discardIfMultipleObjects(options);           
     });
 
     document
