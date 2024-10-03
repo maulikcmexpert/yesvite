@@ -1369,7 +1369,7 @@ function updateClipPath(imageUrl, element) {
                 console.log('Updated Font Color: ' + activeObject.fill);
 
                 canvas.renderAll();
-                // addToUndoStack(); // Save state after updating properties
+                addToUndoStack(); // Save state after updating properties
             }
         }
 
@@ -1820,7 +1820,7 @@ function updateClipPath(imageUrl, element) {
             if (commands[command]) {
                 commands[command](font); // Pass font to fontName if needed
                 canvas.renderAll(); // Re-render canvas after change
-                // addToUndoStack(); // Save state for undo/redo functionality
+                addToUndoStack(); // Save state for undo/redo functionality
             }
         }
 
@@ -1969,7 +1969,7 @@ function updateClipPath(imageUrl, element) {
 
     // Call this function whenever you modify the canvas
     // canvas.on('object:added', addToUndoStack);
-    canvas.on('object:modified', addToUndoStack);
+    // canvas.on('object:modified', addToUndoStack);
     // canvas.on('object:removed', addToUndoStack);
     // canvas.on('object:scaled', addToUndoStack);
     // canvas.on('object:moved', addToUndoStack);
