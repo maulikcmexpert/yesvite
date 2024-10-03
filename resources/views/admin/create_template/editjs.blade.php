@@ -105,7 +105,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                            // drawCanvas();
                             console.log("Image loaded and added to canvas.");
-                            imageUploaded = true; // Set flag to true after image is uploaded
+                           // imageUploaded = true; // Set flag to true after image is uploaded
 
                             if (shape) {
                                //updateClipPath(imgInstance, shape); // Update the shape with fetched data
@@ -1610,6 +1610,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         canvasElement.add(imgInstance);
                         canvasElement.bringToFront(imgInstance);
                         drawCanvas();
+                        addIconsToImage()
                         console.log("Image loaded and added to canvas.");
                         imageUploaded = true; // Set flag to true after image is uploaded
                     };
