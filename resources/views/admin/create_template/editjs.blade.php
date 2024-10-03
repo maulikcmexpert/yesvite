@@ -1169,6 +1169,10 @@ function updateClipPath(imageUrl, element) {
 
             }
             canvas.renderAll()
+            console.log("updated")
+            console.log(textbox)
+
+
             const trashIconSVG = `<svg width="29" x="0px" y="0px" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g filter="url(#filter0_d_5633_67674)">
                 <rect x="2.70312" y="2.37207" width="23.9674" height="23.9674" rx="11.9837" fill="white" shape-rendering="crispEdges"/>
