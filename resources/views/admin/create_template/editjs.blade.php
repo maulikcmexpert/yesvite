@@ -145,120 +145,107 @@
                             })
                         }
 
-                        // Load filed image (filedImagePath) as another image layer
+                        // // Load filed image (filedImagePath) as another image layer
+                        // if (data.filedImagePath) {
+                        //     const userImageElement = document.getElementById('user_image');
+                        //     const imageWrapper = document.getElementById('imageWrapper');
+                        //     const canvasElement = new fabric.Canvas('imageEditor', {
+                        //         width: 500, // Canvas width
+                        //         height: 500, // Canvas height
+                        //     });
+                        //     let isDragging = false;
+                        //     let isResizing = false;
+                        //     let startWidth, startHeight, startX, startY, activeHandle;
+                        //     let offsetX, offsetY;
+                        //     let shapeChangedDuringDrag = false; // Flag to track shape change
+                        //     let imageUploaded = false; // Flag to track if image has been uploaded
+
+                        //     const imgElement = new Image();
+                        //     imgElement.src = data.filedImagePath;
+
+                        //     userImageElement.src = data.filedImagePath;
+                        //     imageWrapper.style.display = 'block';
+
+                        //     imgElement.onload = function() {
+                        //         console.log("Image loaded successfully.");
+                        //         const imgInstance = new fabric.Image(imgElement, {
+                        //             left: 0,
+                        //             top: 0,
+                        //             selectable: true,
+                        //             hasControls: true,
+                        //             hasBorders: true,
+                        //             cornerColor: 'red',
+                        //             cornerStrokeColor: 'blue',
+                        //             borderColor: 'blue',
+                        //             cornerSize: 10,
+                        //             transparentCorners: false,
+                        //             lockUniScaling: true,
+                        //             scaleX: 600 / imgElement.width,
+                        //             scaleY: 600 / imgElement.height
+                        //         });
+
+                        //         canvasElement.add(imgInstance);
+                        //         drawCanvas();
+                        //         console.log('Image loaded and added to canvas.');
+                        //         imageUploaded = true; // Set flag to true after image is uploaded
+
+
+                        //         addIconsToImage(imgInstance);
+                        //         if (shape) {
+                        //             updateClipPath(imgInstance, shape); // Update the shape with fetched data
+                        //         }
+                        //         imgInstance.on('mouseup', function(options) {
+                        //             if (options.target) {
+                        //                 // Change to the next shape on click
+                        //                 currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
+                        //                 shape = shapes[currentShapeIndex];
+                        //                 updateClipPath(imgInstance, shape); // Update the shape
+                        //             }
+                        //         });
+                        //     };
+
+                        //     imgElement.onerror = function() {
+                        //         console.error("Failed to load image.");
+                        //     };
+
+                        // }
+
                         if (data.filedImagePath) {
-                            const userImageElement = document.getElementById('user_image');
-                            const imageWrapper = document.getElementById('imageWrapper');
-                            const canvasElement = new fabric.Canvas('imageEditor', {
-                                width: 500, // Canvas width
-                                height: 500, // Canvas height
-                            });
-                            let isDragging = false;
-                            let isResizing = false;
-                            let startWidth, startHeight, startX, startY, activeHandle;
-                            let offsetX, offsetY;
-                            let shapeChangedDuringDrag = false; // Flag to track shape change
-                            let imageUploaded = false; // Flag to track if image has been uploaded
-
-                            const imgElement = new Image();
-                            imgElement.src = data.filedImagePath;
-
-                            userImageElement.src = data.filedImagePath;
-                            imageWrapper.style.display = 'block';
-
-                            imgElement.onload = function() {
-                                console.log("Image loaded successfully.");
-                                const imgInstance = new fabric.Image(imgElement, {
-                                    left: 0,
-                                    top: 0,
+                            fabric.Image.fromURL(data.filedImagePath, function (filedImg) {
+                                // Set your preferred image properties
+                                filedImg.set({
+                                    left: 50,
+                                    top: 50,
+                                    scaleX: 150/ filedImg.width,
+                                    scaleY:  150/filedImg.height,
+                                    height: 200,
+                                    width: 150,
                                     selectable: true,
-                                    hasControls: true,
-                                    hasBorders: true,
-                                    cornerColor: 'red',
-                                    cornerStrokeColor: 'blue',
-                                    borderColor: 'blue',
-                                    cornerSize: 10,
-                                    transparentCorners: false,
-                                    lockUniScaling: true,
-                                    scaleX: 600 / imgElement.width,
-                                    scaleY: 600 / imgElement.height
+                                    hasControls: true
                                 });
-
-                                canvasElement.add(imgInstance);
-                                drawCanvas();
-                                console.log('Image loaded and added to canvas.');
-                                imageUploaded = true; // Set flag to true after image is uploaded
-
-
-                                addIconsToImage(imgInstance);
+                                // Apply the shape from static information if available
                                 if (shape) {
-                                    updateClipPath(imgInstance, shape); // Update the shape with fetched data
+                                    updateClipPath(filedImg, shape); // Update the shape with fetched data
                                 }
-                                imgInstance.on('mouseup', function(options) {
+
+
+                                // Inside your loadTextDataFromDatabase function
+
+                                filedImg.on('mouseup', function (options) {
                                     if (options.target) {
                                         // Change to the next shape on click
                                         currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
                                         shape = shapes[currentShapeIndex];
-                                        updateClipPath(imgInstance, shape); // Update the shape
+
+                                        updateClipPath(filedImg, shape); // Update the shape
                                     }
                                 });
-                            };
 
-                            imgElement.onerror = function() {
-                                console.error("Failed to load image.");
-                            };
 
-                            // let clipPath;
-
-                            // if (shape === 'circle') {
-                            //     clipPath = new fabric.Circle({
-                            //         radius: 75, // Define radius of the circle
-                            //         originX: 'center', // Set origin to center of the circle
-                            //         originY: 'center' // Set origin to center of the circle
-                            //     });
-                            // } else if (shape === 'rectangle') {
-                            //     clipPath = new fabric.Rect({
-                            //         width: 150, // Set width of the rectangle
-                            //         height: 100, // Set height of the rectangle
-                            //         originX: 'center', // Set origin to center of the rectangle
-                            //         originY: 'center' // Set origin to center of the rectangle
-                            //     });
-                            // } else if (shape === 'star') {
-                            //     // Star shape path generation
-                            //     const starPoints = [];
-                            //     const spikes = 5;
-                            //     const outerRadius = 75; // Outer radius of the star
-                            //     const innerRadius = outerRadius / 2;
-
-                            //     for (let i = 0; i < spikes * 2; i++) {
-                            //         const angle = (i * Math.PI) / spikes;
-                            //         const radius = i % 2 === 0 ? outerRadius : innerRadius;
-                            //         starPoints.push(
-                            //             Math.cos(angle) * radius,
-                            //             Math.sin(angle) * radius
-                            //         );
-                            //     }
-                            //     clipPath = new fabric.Polygon(starPoints, {
-                            //         left: 0,
-                            //         top: 0,
-                            //         originX: 'center',
-                            //         originY: 'center'
-                            //     });
-                            // } else if (shape === 'heart') {
-                            //     // Heart shape path
-                            //     const heartPath = [
-                            //         'M', 0, 0,
-                            //         'C', -50, -60, -50, 10, 0, 30,
-                            //         'C', 50, 10, 50, -60, 0, 0
-                            //     ].join(' ');
-
-                            //     clipPath = new fabric.Path(heartPath, {
-                            //         left: 0,
-                            //         top: 0,
-                            //         originX: 'center',
-                            //         originY: 'center'
-                            //     });
-                            // }
+                                canvas.add(filedImg);
+                                addIconsToImage(filedImg); // Add the filed image to the canvas
+                                canvas.renderAll();  // Ensure the canvas is updated
+                            });
                         }
 
                         // Load static information (text and shapes)
