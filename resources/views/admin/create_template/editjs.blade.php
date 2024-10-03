@@ -1109,7 +1109,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 console.error("Error:", error);
             });
 
-        hideStaticTextElements();
+        // hideStaticTextElements();
         showStaticTextElements();
     }
 
