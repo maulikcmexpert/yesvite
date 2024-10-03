@@ -1986,16 +1986,18 @@ function updateClipPath(imageUrl, element) {
     function undo() {
         console.log(undoStack);
         if (undoStack.length > 0) {
+            reattachIcons();
             redoStack.push(canvas.toJSON()); // Save current state to redo stack
             const lastState = undoStack.pop(); // Get the last state to undo
             canvas.loadFromJSON(lastState, function () {
                 canvas.renderAll(); // Render the canvas after loading state
-                reattachIcons(); // Reattach the icons to the textboxes
+                // Reattach the icons to the textboxes
             });
         }
     }
     function redo() {
         if (redoStack.length > 0) {
+            reattachIcons();
             undoStack.push(canvas.toJSON()); // Save current state to undo stack
             const nextState = redoStack.pop(); // Get the next state to redo
             canvas.loadFromJSON(nextState, function () {
@@ -2017,6 +2019,17 @@ function updateClipPath(imageUrl, element) {
                 undoStack.splice(index, 1);  // Remove the empty state from undoStack
             }
         })
+
+        redoStack.forEach(ob => {
+
+            ob.objects = ob.objects.filter(obj => obj.type !== 'group');
+
+            // If all objects in a state were 'group', you can also remove that entire state from undoStack
+            if (ob.objects.length === 0) {
+                console.log("Removed from undoStack");
+                undoStack.splice(index, 1);  // Remove the empty state from undoStack
+            }
+            })
         // Loop through canvas objects and reattach icons to textboxes
         canvas.getObjects().forEach(obj => {
             if (obj.type === 'textbox') {
