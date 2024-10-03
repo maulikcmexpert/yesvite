@@ -441,9 +441,16 @@
             <div class="modal-body">
                 <div class="modal-choose-design-wrp" id="download_image">
                     <div class="modal-design-card">
-                        <canvas id="imageEditor2"></canvas>
+                        <canvas id="imageEditor2" class="canvas new"></canvas>
                         {{-- <img id="modalImage" src="" alt="Design Image" class="img-fluid" /> --}}
                     </div>
+                </div>
+                <div id="imageWrapper" style="position:fixed; display:none;">
+                    <img id="user_image" src="" style="height: 100px; width: 100px; background-color: black;" />
+                    <div class="resize-handle top-left"></div>
+                    <div class="resize-handle top-right"></div>
+                    <div class="resize-handle bottom-left"></div>
+                    <div class="resize-handle bottom-right"></div>
                 </div>
                 <div class="modal-btn">
                     <button class="edit-btn edit_design_tem">Edit Design</button>
