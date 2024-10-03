@@ -237,7 +237,7 @@
                                         currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
                                         shape = shapes[currentShapeIndex];
 
-                                        updateClipPath(filedImg, shape); // Update the shape
+                                        // updateClipPath(filedImg, shape); // Update the shape
                                     }
                                 });
 
