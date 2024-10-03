@@ -1398,8 +1398,7 @@ function updateClipPath(imageUrl, element) {
 
                if(options.target._objects.length > 1){
                 console.log(options)
-                    options.target.selectable = false;  // Disable selection
-                    options.target.evented = false;   
+                canvas.discardActiveObject();
                     return
                }
 
