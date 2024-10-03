@@ -84,24 +84,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
                         imgElement.onload = function () {
                             console.log("Image loaded successfully.");
-                            const imgInstance = new fabric.Image(imgElement, {
-                                left: 0,
-                                top: 0,
-                                selectable: true,
-                                hasControls: true,
-                                hasBorders: true,
-                                cornerColor: "red",
-                                cornerStrokeColor: "blue",
-                                borderColor: "blue",
-                                cornerSize: 10,
-                                transparentCorners: false,
-                                lockUniScaling: true,
-                                scaleX: 600 / imgElement.width,
-                                scaleY: 600 / imgElement.height,
-                            });
+                            // const imgInstance = new fabric.Image(imgElement, {
+                            //     left: 0,
+                            //     top: 0,
+                            //     selectable: true,
+                            //     hasControls: true,
+                            //     hasBorders: true,
+                            //     cornerColor: "red",
+                            //     cornerStrokeColor: "blue",
+                            //     borderColor: "blue",
+                            //     cornerSize: 10,
+                            //     transparentCorners: false,
+                            //     lockUniScaling: true,
+                            //     scaleX: 600 / imgElement.width,
+                            //     scaleY: 600 / imgElement.height,
+                            // });
 
-                            canvasElement.add(imgInstance);
-                            addIconsToImage(imgInstance);
+                            // canvasElement.add(imgInstance);
+                            // addIconsToImage(imgInstance);
 
                            // drawCanvas();
                             console.log("Image loaded and added to canvas.");
@@ -117,7 +117,7 @@ document.addEventListener("DOMContentLoaded", function () {
                                     currentShapeIndex =
                                         (currentShapeIndex + 1) % shapes.length;
                                     shape = shapes[currentShapeIndex];
-                                    updateClipPath(imgInstance, shape); // Update the shape
+                                   // updateClipPath(imgInstance, shape); // Update the shape
                                 }
                             });
                         };
