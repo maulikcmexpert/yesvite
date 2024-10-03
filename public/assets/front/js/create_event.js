@@ -3090,10 +3090,11 @@ $(document).on("click", ".cancel-btn-createEvent", function () {
 });
 
 function handleActiveClass(target) {
-    console.log(target);
     $(".side-bar-list").removeClass("active");
+    $('.pick-card').removeClass('active');
+    $('.edit-design').removeClass('active');
     if(target == '.li_design'){
-        $('pick-card').addClass("active");
+        $('.pick-card').addClass("active");
     }else{
         $(target).find(".side-bar-list").addClass("active");
     }
@@ -3109,8 +3110,6 @@ function handleActivePlan(target) {
 }
 $(document).on("click", ".li_design", function () {
     console.log(eventData);
-    $('.edit-design').removeClass('active');
-    $('.pick-card').addClass('active');
     if (
         eventData.event_type != "" &&
         eventData.event_name != "" &&
@@ -4334,6 +4333,7 @@ function save_image_design(downloadImage,textData){
                     $("#exampleModal").modal("hide");
                     $("#loader").css("display", "none");
                     $('.store_desgin_temp').prop("disabled", false);
+                    $('.btn-close').prop("disabled", false);
                     $(".main-content-wrp").removeClass("blurred");
                     $(".step_2").hide();
                     $('#edit-design-temp').hide();
