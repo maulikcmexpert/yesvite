@@ -331,7 +331,7 @@
         
         let currentImage = null;
 let isImageDragging = false; // Track if the image is being dragged
-
+let isimageoncanvas = false;
 function updateClipPath(imageUrl, element) {
     console.log(imageUrl)
     // Remove the previous image from the canvas if it exists
@@ -448,13 +448,16 @@ function updateClipPath(imageUrl, element) {
             }
         });
         console.log(updatedOBJImage)
-
+        isimageoncanvas = true;
+        $('.photo-slider-wrp').hide()
         // Add the image to the canvas
         canvas.add(image);
         currentImage = image; // Store the current image
 
         // Refresh the canvas to apply changes
         canvas.renderAll();
+        addIconsToImage(image)
+
     });
 }
 
@@ -498,6 +501,9 @@ function updateClipPath(imageUrl, element) {
                 if (!trashIcon.deleteHandlerAttached) {
                     trashIcon.on('mousedown', function() {
                         console.log('Trash icon clicked! Deleting textbox.');
+                        isimageoncanvas = false;
+                        $('.photo-slider-wrp').show()
+
                         deleteTextbox(textbox); // Function to delete the textbox
                     });
                     trashIcon.deleteHandlerAttached = true; // Mark that the handler is attached
