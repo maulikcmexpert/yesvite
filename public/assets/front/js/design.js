@@ -182,6 +182,46 @@ $(document).on("click", ".design-card", function () {
                         scaleX: 0.5,
                         scaleY: 0.5
                     });
+
+                    // Function to change the clipping shape on click
+                    function changeShape() {
+                        // Toggle between different shapes
+                        var currentClip = img.clipPath;
+
+                        if (!currentClip || currentClip instanceof fabric.Rect) {
+                            // Set to a circle
+                            img.set({
+                                clipPath: new fabric.Circle({
+                                    radius: 100, // Adjust as needed
+                                    originX: 'center',
+                                    originY: 'center'
+                                })
+                            });
+                        } else if (currentClip instanceof fabric.Circle) {
+                            // Set to a rectangle
+                            img.set({
+                                clipPath: new fabric.Rect({
+                                    width: 200,  // Adjust width
+                                    height: 150, // Adjust height
+                                    originX: 'center',
+                                    originY: 'center'
+                                })
+                            });
+                        } else if (currentClip instanceof fabric.Path) {
+                            // Set back to no clip (or choose another shape)
+                            img.set({
+                                clipPath: null // Remove clipping
+                            });
+                        }
+
+                        // Re-render the canvas after changing shape
+                        canvas.renderAll();
+                    }
+
+                    // Add a 'mouse:down' event listener to the image for the click
+                    img.on('mousedown', function() {
+                        changeShape();
+                    });
                     canvas.add(img);
                     canvas.renderAll();
     
