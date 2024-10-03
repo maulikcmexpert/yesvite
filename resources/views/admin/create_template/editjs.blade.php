@@ -1586,7 +1586,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document
         .getElementById("saveButton")
-        .addEventListener("click", function () {
+        .addEventListener("click", function (e) {
+            e.preventDefault()
             saveTextDataToDatabase();
         });
 
