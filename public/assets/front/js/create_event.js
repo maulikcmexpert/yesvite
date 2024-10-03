@@ -3091,7 +3091,11 @@ $(document).on("click", ".cancel-btn-createEvent", function () {
 
 function handleActiveClass(target) {
     $(".side-bar-list").removeClass("active");
-    $(target).find(".side-bar-list").addClass("active");
+    if(target == 'li_design'){
+        $('pick-card').addClass("active");
+    }else{
+        $(target).find(".side-bar-list").addClass("active");
+    }
 
 }
 
@@ -4332,6 +4336,9 @@ function save_image_design(downloadImage,textData){
                     $(".step_2").hide();
                     $('#edit-design-temp').hide();
                     handleActiveClass('.li_guest');
+                    $('.pick-card').addClass('menu-success');
+                    $('.edit-design').addClass('menu-success');
+                    $('.edit-design').removeClass('active');
                     $('.li_design').find(".side-bar-list").addClass("menu-success");
 
                     $('.event_create_percent').text('75%');
