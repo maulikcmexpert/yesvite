@@ -105,6 +105,8 @@
 
 
         var newshape = "";
+        const shapes = ['circle', 'rectangle', 'star', 'heart']; // Array of available shapes
+        let currentShapeIndex = 0; // Track the current shape index
 
         function loadTextDataFromDatabase() {
             var id = $('#template_id').val();
@@ -186,23 +188,26 @@
                                 drawCanvas();
                                 console.log('Image loaded and added to canvas.');
                                 imageUploaded = true; // Set flag to true after image is uploaded
+
+
                                 addIconsToImage(imgInstance);
+                                if (shape) {
+                                    updateClipPath(imgInstance, shape); // Update the shape with fetched data
+                                }
+                                imgInstance.on('mouseup', function(options) {
+                                    if (options.target) {
+                                        // Change to the next shape on click
+                                        currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
+                                        shape = shapes[currentShapeIndex];
+                                        updateClipPath(imgInstance, shape); // Update the shape
+                                    }
+                                });
                             };
 
                             imgElement.onerror = function() {
                                 console.error("Failed to load image.");
                             };
-                            if (shape) {
-                                updateClipPath(imgInstance, shape); // Update the shape with fetched data
-                            }
-                            imgInstance.on('mouseup', function(options) {
-                                if (options.target) {
-                                    // Change to the next shape on click
-                                    currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
-                                    shape = shapes[currentShapeIndex];
-                                    updateClipPath(imgInstance, shape); // Update the shape
-                                }
-                            });
+
                             // let clipPath;
 
                             // if (shape === 'circle') {
