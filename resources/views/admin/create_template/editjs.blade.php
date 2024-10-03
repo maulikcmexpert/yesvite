@@ -1318,22 +1318,54 @@
             var imageName = 'image_' + Date.now() + '.png';
             console.log(textData);
 
-            fetch('/saveTextData', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json', // Set content type to JSON
-                        'X-CSRF-TOKEN': csrfToken // Include CSRF token
-                    },
-                    body: canvasId
-                })
-                .then(response => response.json())
-                .then(data => {
+            // fetch('/saveTextData', {
+            //         method: 'POST',
+            //         headers: {
+            //             'X-CSRF-TOKEN': csrfToken // Include CSRF token
+            //         },
+            //         body: canvasId
+            //     })
+            //     .then(response => response.json())
+            //     .then(data => {
+
+            //     })
+            //     .catch((error) => {
+            //         console.error('Error:', error);
+            //     });
+
+            $.ajax({
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                        "content"
+                    ),
+                },
+                url: base_url + "/saveTextData",
+                type: "POST",
+                data: JSON.stringify({
+                    id: canvasId,
+                    textElements: textData,
+                    // shape: shape,
+                    // centerX: centerX,
+                    // centerY: centerY,
+                    // width: width,
+                    // height: height
+                }),
+                processData: false,
+                contentType: false,
+                success: function(response) {
                     console.log('Text data saved successfully', data);
                     window.location.href = "{{URL::to('/admin/create_template')}}";
-                })
-                .catch((error) => {
-                    console.error('Error:', error);
-                });
+                },
+                error: function(xhr, status, error) {
+                    console.error(
+                        "Failed to upload and save the image:",
+                        error
+                    );
+                },
+            });
+
+
+
 
             hideStaticTextElements();
             showStaticTextElements();
