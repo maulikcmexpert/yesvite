@@ -209,44 +209,54 @@
                         //     };
 
                         // }
-
                         if (data.filedImagePath) {
-                            fabric.Image.fromURL(data.filedImagePath, function (filedImg) {
-                                // Set your preferred image properties
-                                filedImg.set({
-                                    left: 50,
-                                    top: 50,
-                                    scaleX: 1,
-                                    scaleY: 1,
-                                    // height: 200,
-                                    // width: 150,
-                                    selectable: true,
-                                    hasControls: true
-                                });
-                                // Apply the shape from static information if available
-                                if (shape) {
-                                    // updateClipPath(filedImg, shape); // Update the shape with fetched data
-                                }
+                                fabric.Image.fromURL(data.filedImagePath, function (filedImg) {
+                                    // Set the fixed container dimensions (for example, 150x200)
+                                    const containerWidth = 150;
+                                    const containerHeight = 200;
 
+                                    // Get the original dimensions of the image
+                                    const originalWidth = filedImg.width;
+                                    const originalHeight = filedImg.height;
 
-                                // Inside your loadTextDataFromDatabase function
+                                    // Calculate the aspect ratio of the image
+                                    const aspectRatio = originalWidth / originalHeight;
 
-                                filedImg.on('mouseup', function (options) {
-                                    if (options.target) {
-                                        // Change to the next shape on click
-                                        currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
-                                        shape = shapes[currentShapeIndex];
-
-                                        // updateClipPath(filedImg, shape); // Update the shape
+                                    // Calculate the scaling factor to fit the image within the container
+                                    if (aspectRatio > containerWidth / containerHeight) {
+                                        // Image is wider than the container, scale based on width
+                                        filedImg.scaleToWidth(containerWidth);
+                                    } else {
+                                        // Image is taller than the container, scale based on height
+                                        filedImg.scaleToHeight(containerHeight);
                                     }
+
+                                    // Set the image properties and positioning
+                                    filedImg.set({
+                                        left: 50, // Position the image (you can adjust this)
+                                        top: 50,  // Position the image (you can adjust this)
+                                        selectable: true,
+                                        hasControls: true,
+                                    });
+
+                                    // Add event listener for changing shapes on mouseup
+                                    filedImg.on('mouseup', function (options) {
+                                        if (options.target) {
+                                            // Change to the next shape on click
+                                            currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
+                                            shape = shapes[currentShapeIndex];
+
+                                            // Update the clip path or shape (if needed)
+                                            // updateClipPath(filedImg, shape);
+                                        }
+                                    });
+
+                                    // Add the image to the canvas
+                                    canvas.add(filedImg);
+                                    addIconsToImage(filedImg); // Add icons or any other elements if necessary
+                                    canvas.renderAll();  // Ensure the canvas is updated
                                 });
-
-
-                                canvas.add(filedImg);
-                                addIconsToImage(filedImg); // Add the filed image to the canvas
-                                canvas.renderAll();  // Ensure the canvas is updated
-                            });
-                        }
+                                                    }
 
                         // Load static information (text and shapes)
                         if (data.static_information) {
