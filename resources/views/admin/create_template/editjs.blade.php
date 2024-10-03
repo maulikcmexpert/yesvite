@@ -159,8 +159,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
                             canvas.add(filedImg);
+                            canvas.bringToFront(filedImg);
+
                             addIconsToImage(filedImg); // Add the filed image to the canvas
                             canvas.renderAll();  // Ensure the canvas is updated
+                            console.log("imageadded")
                         });
                     }
                     // Load static information (text and shapes)
