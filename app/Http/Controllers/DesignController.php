@@ -222,6 +222,7 @@ class DesignController extends Controller
 
     public function saveTextData(Request $request)
     {
+        dd(1);
         // Validate incoming request data
         $validated = $request->validate([
             'id' => 'required|integer',
