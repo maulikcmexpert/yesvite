@@ -216,8 +216,8 @@
                                 filedImg.set({
                                     left: 50,
                                     top: 50,
-                                    scaleX: filedImg.width,
-                                    scaleY:  filedImg.height,
+                                    scaleX: 1,
+                                    scaleY: 1,
                                     height: 200,
                                     width: 150,
                                     selectable: true,
