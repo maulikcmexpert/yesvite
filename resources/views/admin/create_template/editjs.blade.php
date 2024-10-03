@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
         width: 345, // Canvas width
         height: 490, // Canvas height
     });
-
+    var canvasElement = ""
     var newshape = "";
     const shapes = ["circle", "rectangle", "star", "heart"]; // Array of available shapes
     let currentShapeIndex = 0; // Track the current shape index
@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
             .then((data) => {
                 if (data) {
                     // console.log(data);
-                    var canvasElement = document.getElementById("imageEditor1");
+                    canvasElement = document.getElementById("imageEditor1");
                     canvasElement.setAttribute("data-canvas-id", data.id);
                     // Load background image (imagePath)
                     if (data.imagePath) {
@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             document.getElementById("user_image");
                         const imageWrapper =
                             document.getElementById("imageWrapper");
-                        const canvasElement = new fabric.Canvas("imageEditor", {
+                        canvasElement = new fabric.Canvas("imageEditor", {
                             width: 500, // Canvas width
                             height: 500, // Canvas height
                         });
@@ -103,12 +103,12 @@ document.addEventListener("DOMContentLoaded", function () {
                             canvasElement.add(imgInstance);
                             addIconsToImage(imgInstance);
 
-                            drawCanvas();
+                           // drawCanvas();
                             console.log("Image loaded and added to canvas.");
                             imageUploaded = true; // Set flag to true after image is uploaded
 
                             if (shape) {
-                                updateClipPath(imgInstance, shape); // Update the shape with fetched data
+                               //updateClipPath(imgInstance, shape); // Update the shape with fetched data
                             }
 
                             imgInstance.on("mouseup", function (options) {
@@ -274,12 +274,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function addIconsToImage(textbox) {
         console.log(textbox);
+        canvasElement.remove(textbox)
+        canvasElement.renderAll();
         // alert(1)
         // Remove existing trash icon if it exists
         if (textbox?.trashIcon) {
-            canvas.remove(textbox.trashIcon);
+            canvasElement.remove(textbox.trashIcon);
             textbox.trashIcon = null; // Clear reference
-            canvas.renderAll();
+            canvasElement.renderAll();
         }
 
         const trashIconSVG = `<svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -313,16 +315,16 @@ document.addEventListener("DOMContentLoaded", function () {
                 trashIcon.deleteHandlerAttached = true; // Mark that the handler is attached
             }
 
-            canvas.add(trashIcon);
-            canvas.bringToFront(trashIcon);
+            canvasElement.add(trashIcon);
+            canvasElement.bringToFront(trashIcon);
             textbox.trashIcon = trashIcon; // Store the reference of the trash icon
 
             // Update icon position on moving and scaling
             textbox.on("moving", function () {
                 if (textbox.trashIcon) {
-                    canvas.remove(textbox.trashIcon);
+                    canvasElement.remove(textbox.trashIcon);
                     textbox.trashIcon = null; // Clear reference
-                    canvas.renderAll();
+                    canvasElement.renderAll();
                 }
                 clearTimeout(updateTimeout);
                 updateTimeout = setTimeout(() => {
@@ -332,16 +334,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
             textbox.on("scaling", function () {
                 if (textbox.trashIcon) {
-                    canvas.remove(textbox.trashIcon);
+                    canvasElement.remove(textbox.trashIcon);
                     textbox.trashIcon = null; // Clear reference
-                    canvas.renderAll();
+                    canvasElement.renderAll();
                 }
                 clearTimeout(updateTimeout);
                 updateTimeout = setTimeout(() => {
                     addIconsToImage(textbox);
                 }, 500);
             });
+            canvasElement.renderAll();
             canvas.renderAll();
+
         });
         console.log(textbox);
         console.log("=========================");
@@ -1409,7 +1413,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const fileInput = document.getElementById("fileInput");
     const userImageElement = document.getElementById("user_image");
     const imageWrapper = document.getElementById("imageWrapper");
-    const canvasElement = new fabric.Canvas("imageEditor", {
+    canvasElement = new fabric.Canvas("imageEditor", {
         width: 500, // Canvas width
         height: 500, // Canvas height
     });
