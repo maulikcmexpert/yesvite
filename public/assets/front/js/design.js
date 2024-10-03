@@ -481,7 +481,19 @@ function bindData() {
                     });
 
                     textElement.controls.mtr = new fabric.Control({
-                       hasBorders:false
+                        x: 0,
+                        y: -0.5,
+                        hasBorders:false,
+                        offsetY: -40, // Adjust this as needed
+                        cursorStyle: 'crosshair',
+                        actionHandler: fabric.controlsUtils.rotationWithSnapping,
+                        render: function(ctx, left, top, styleOverride, fabricObject) {
+                            ctx.fillStyle = 'red'; // Circle color for the mtr control
+                            ctx.beginPath();
+                            ctx.arc(left, top, 6, 0, 2 * Math.PI, false); // Draw a circle for 'mtr'
+                            ctx.fill();
+                            ctx.closePath();
+                        }
                     });
 
                     // textElement.controls.mt = new fabric.Control({
