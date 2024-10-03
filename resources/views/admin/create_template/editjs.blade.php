@@ -1360,11 +1360,11 @@
                 },
                 url: base_url + "/saveTextData",
                 type: "POST",
-                data: {
+                data: JSON.stringify({
                     id: canvasId,
                     textElements: textData,
                     shapeImageData: shapeImageData,
-                },
+                }),
                 // processData: false,
                 // contentType: false,
                 success: function(response) {
