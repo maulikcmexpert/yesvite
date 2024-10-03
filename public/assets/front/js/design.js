@@ -187,15 +187,6 @@ $(document).on("click", ".design-card", function () {
         imgObj.onload = function() {
             var img = new fabric.Image(imgObj);
             img.set({
-                selectable: true,
-                hasControls: true,
-                hasBorders: true,
-                cornerColor: "red",
-                cornerStrokeColor: "blue",
-                borderColor: "blue",
-                cornerSize: 10,
-                transparentCorners: false,
-                lockUniScaling: true,
                 left: canvas.width / 2 - img.width / 2,
                 top: canvas.height / 2 - img.height / 2,
                 scaleX: 0.5,
