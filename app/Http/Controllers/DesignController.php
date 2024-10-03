@@ -243,7 +243,7 @@ class DesignController extends Controller
         // Convert text elements array to JSON
         $staticInformation = [
             'textElements' => $validated['textElements'],
-            'shapeImageData' => $validated['shapeImageData'],
+            // 'shapeImageData' => $validated['shapeImageData'],
         ];
 
         // Update the template record
