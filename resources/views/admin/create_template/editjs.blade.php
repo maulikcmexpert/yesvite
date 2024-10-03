@@ -1277,13 +1277,13 @@
             console.log(textData);
             shapeImageData = [];
 
-            shapeImageData.push({
-                shape: shape,
-                centerX: centerX,
-                centerY: centerY,
-                width: width,
-                height: height
-            });
+            // shapeImageData.push({
+            //     shape: shape,
+            //     centerX: centerX,
+            //     centerY: centerY,
+            //     width: width,
+            //     height: height
+            // });
             fetch('/saveTextData', {
                     method: 'POST',
                     headers: {
@@ -1293,7 +1293,6 @@
                     body: JSON.stringify({
                         id: canvasId,
                         textElements: textData,
-                        shapeImageData: shapeImageData
                     })
                 })
                 .then(response => response.json())
