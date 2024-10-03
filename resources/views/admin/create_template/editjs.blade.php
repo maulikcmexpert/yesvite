@@ -331,7 +331,7 @@
         
         let currentImage = null;
 let isImageDragging = false; // Track if the image is being dragged
-
+let isimageoncanvas = false;
 function updateClipPath(imageUrl, element) {
     console.log(imageUrl)
     // Remove the previous image from the canvas if it exists
@@ -448,13 +448,15 @@ function updateClipPath(imageUrl, element) {
             }
         });
         console.log(updatedOBJImage)
-
+        isimageoncanvas = true;
         // Add the image to the canvas
         canvas.add(image);
         currentImage = image; // Store the current image
 
         // Refresh the canvas to apply changes
         canvas.renderAll();
+        addIconsToImage(image)
+
     });
 }
 
