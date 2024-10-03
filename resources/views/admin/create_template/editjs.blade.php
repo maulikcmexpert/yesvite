@@ -399,6 +399,7 @@
 
 
         function addIconsToImage(textbox) {
+            console.log(textbox);
             // Remove existing trash icon if it exists
             if (textbox.trashIcon) {
                 canvas.remove(textbox.trashIcon);
