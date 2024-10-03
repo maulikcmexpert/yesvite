@@ -326,7 +326,8 @@ $(document).on("click", ".edit_design_tem", function (e) {
     $(".step_2").hide();
     $(".step_3").hide();
     $('.pick-card').removeClass('active');
-    $('.pick-card').addClass('menu-success')
+    $('.pick-card').addClass('menu-success');
+    $('.edit-design').removeClass('menu-success')
     $('.edit-design').addClass('active');
     $(".event_create_percent").text("50%");
     $(".current_step").text("2 of 4");
@@ -433,11 +434,89 @@ function bindData() {
                         hasControls: true,
                         borderColor: "#2DA9FC",
                         cornerColor: "#fff",
-                        cornerSize: 6,
+                        cornerSize: 10,
+                        cornerStyle: 'circle',
                         transparentCorners: false,
                         lockScalingFlip: true,
                         hasBorders: true,
+                        centeredRotation:true,
                     });
+
+                    // textElement.setControlsVisibility({
+                    //     mt: false, // Hide middle top control
+                    //     mb: false, // Hide middle bottom control
+                    //     bl: false, // Hide bottom left control
+                    //     br: false, // Hide bottom right control
+                    //     tl: false, // Hide top left control
+                    //     tr: false, // Hide top right control
+                    //     ml: true,  // Show middle left control
+                    //     mr: true   // Show middle right control
+                    // });
+                    
+                    // Custom rendering of middle-left (ml) control as a rectangle
+                    textElement.controls.ml = new fabric.Control({
+                        x: -0.5, // Left side
+                        y: 0,
+                        offsetX: 0,
+                        offsetY: 0,
+                        cursorStyle: 'e-resize',
+                        actionHandler: fabric.controlsUtils.scalingX,
+                        render: function(ctx, left, top, styleOverride, fabricObject) {
+                            ctx.fillStyle = 'white'; // Rectangle color
+                            ctx.fillRect(left - 2, top - 7, 4, 8); // Draw a rectangle control for 'ml'
+                        }
+                    });
+
+                    // Custom rendering of middle-right (mr) control as a rectangle
+                    textElement.controls.mr = new fabric.Control({
+                        x: 0.5, // Right side
+                        y: 0,
+                        offsetX: 0,
+                        offsetY: 0,
+                        cursorStyle: 'e-resize',
+                        actionHandler: fabric.controlsUtils.scalingX,
+                        render: function(ctx, left, top, styleOverride, fabricObject) {
+                            ctx.fillStyle = 'white'; // Rectangle color
+                            ctx.fillRect(left - 2, top - 7, 4, 8); // Draw a rectangle control for 'mr'
+                        }
+                    });
+                    
+                    textElement.controls.mtr = new fabric.Control({
+                        x: 0,
+                        y: -0.5,
+                        hasBorders:false,
+                        offsetY: -40, // Adjust this as needed
+                        cursorStyle: 'crosshair',
+                        actionHandler: fabric.controlsUtils.rotationWithSnapping,
+                        render: renderIcon,
+                    });
+
+                    // textElement.controls.mt = new fabric.Control({
+                    //     x: 0.5, // Right side
+                    //     y: 0,
+                    //     offsetX: 0,
+                    //     offsetY: 0,
+                    //     cursorStyle: 'e-resize',
+                    //     actionHandler: fabric.controlsUtils.scalingX,
+                    //     render: function(ctx, left, top, styleOverride, fabricObject) {
+                    //         ctx.fillStyle = 'white'; // Rectangle color
+                    //         ctx.fillRect(left - 2, top - 7, 4, 8); // Draw a rectangle control for 'mr'
+                    //     }
+                    // });
+
+                    // textElement.controls.mb = new fabric.Control({
+                    //     x: 0.5, // Right side
+                    //     y: 0,
+                    //     offsetX: 0,
+                    //     offsetY: 0,
+                    //     cursorStyle: 'e-resize',
+                    //     actionHandler: fabric.controlsUtils.scalingX,
+                    //     render: function(ctx, left, top, styleOverride, fabricObject) {
+                    //         ctx.fillStyle = 'white'; // Rectangle color
+                    //         ctx.fillRect(left - 2, top - 7, 4, 8); // Draw a rectangle control for 'mr'
+                    //     }
+                    // });
+
 
                     switch (element.text) {
                         case "event_name":

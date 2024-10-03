@@ -2349,7 +2349,7 @@ $(document).on("click", "#next_setting", function () {
     savePage3Data();
     checkbox_count();
     $("#loader").css('display','none');
-    $('.li_guest').find(".side-bar-list").addClass("menu-success");
+    
 
 });
 
@@ -2727,6 +2727,7 @@ function savePage1Data(close = null) {
             $(".step_1").hide();
             handleActiveClass('.li_design');
             $('.pick-card').addClass('active');
+            $('.design-span').addClass('active');
             $('.li_event_detail').find(".side-bar-list").addClass("menu-success");
         }
         // alert(description);
@@ -2791,6 +2792,7 @@ function savePage3Data() {
             $('.event_create_percent').text('99%');
             $('.current_step').text('4 of 4');
             $(".step_4").show();
+            $('.li_guest').find(".side-bar-list").addClass("menu-success");
             if(final_step == 3){
                 final_step = 4;
             }
@@ -3111,6 +3113,7 @@ function handleActivePlan(target) {
 }
 $(document).on("click", ".li_design", function () {
     console.log(eventData);
+    $('.design-span').addClass('active');
     if (
         eventData.event_type != "" &&
         eventData.event_name != "" &&
@@ -3153,12 +3156,19 @@ $(document).on("click", ".li_event_detail", function () {
     $(".step_3").css("display", "none");
     $(".step_4").css("display", "none");
     $(".step_final_checkout").css("display", "none");
-
+    
     $('.event_create_percent').text('25%');
     $('.current_step').text('1 of 4');
-
-
+    
+    
     handleActiveClass(this);
+    var design = eventData.desgin_selected;
+    if( design == undefined || design == ''){
+
+    }else{
+        $('.pick-card').addClass('menu-success');
+        $('.edit-design').addClass('menu-success');
+    }
 });
 
 $(document).on("click", ".li_guest", function () {
@@ -3172,7 +3182,8 @@ $(document).on("click", ".li_guest", function () {
         $(".step_4").css("display", "none");
         $(".step_final_checkout").css("display", "none");
         $(".step_3").show();
-
+        $('.pick-card').addClass('menu-success');
+        $('.edit-design').addClass('menu-success');
         $('.event_create_percent').text('75%');
         $('.current_step').text('3 of 4');
     
@@ -3194,6 +3205,12 @@ $(document).on("click", ".li_setting", function () {
         $('.event_create_percent').text('99%');
         $('.current_step').text('4 of 4');
         handleActiveClass(this);
+        if( design == undefined || design == ''){
+
+        }else{
+            $('.pick-card').addClass('menu-success');
+            $('.edit-design').addClass('menu-success');
+        }
     }
 });
 
