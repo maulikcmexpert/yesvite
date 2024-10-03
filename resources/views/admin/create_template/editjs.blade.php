@@ -107,7 +107,7 @@
         var newshape = "";
         const shapes = ['circle', 'rectangle', 'star', 'heart']; // Array of available shapes
         let currentShapeIndex = 0; // Track the current shape index
-        const updatedOBJImage = {
+        let updatedOBJImage = {
                     shape: 'rectangle',
                     centerX: 0,
                     centerY: 0,
