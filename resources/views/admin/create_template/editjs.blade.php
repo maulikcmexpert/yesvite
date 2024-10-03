@@ -284,15 +284,16 @@
                                         width: textWidth
                                     });
 
-                                    textElement.on('scaling', function() {
-                                        var updatedFontSize = textElement.fontSize * (textElement.scaleX + textElement.scaleY) / 2;
-                                        textElement.set('fontSize', updatedFontSize);
-                                        canvas.renderAll();
-                                    });
+                                    // textElement.on('scaling', function() {
+                                    //     var updatedFontSize = textElement.fontSize * (textElement.scaleX + textElement.scaleY) / 2;
+                                    //     textElement.set('fontSize', updatedFontSize);
+                                    //     canvas.renderAll();
+                                    // });
 
                                     addIconsToTextbox(textElement);
                                     canvas.add(textElement);
                                     console.log(textElement);
+                                    canvas.renderAll();
                                 }
 
 
