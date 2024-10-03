@@ -434,6 +434,7 @@ function bindData() {
                         borderColor: "#2DA9FC",
                         cornerColor: "#fff",
                         cornerSize: 6,
+                        cornerStyle: 'circle',
                         transparentCorners: false,
                         lockScalingFlip: true,
                         hasBorders: true,

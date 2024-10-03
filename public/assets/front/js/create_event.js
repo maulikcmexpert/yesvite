@@ -3111,6 +3111,7 @@ function handleActivePlan(target) {
 }
 $(document).on("click", ".li_design", function () {
     console.log(eventData);
+    $('.design-span').addClass('active');
     if (
         eventData.event_type != "" &&
         eventData.event_name != "" &&
