@@ -301,23 +301,48 @@
                 .catch(error => console.error('Error loading text data:', error));
         }
 
-
+        var rotateIcon = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAHqSURBVHgBtZW7S8NQFMZPxFXbzUGULIJPdHBwUAgWQamDj1msg0MXHQWXCiIdHFpQKupgrVR0sovgZBEfQx0UdHBLH9bVpv0DjueksRbb5Da2/uBrm4Z7vvvde5IrgQBEdNLXDGmQJJOcxq0c6YYUkyQpCX+BisukAOkTxcRJip36bLBaY/HfBIzkQgMf1odKkv/T4JsnrJaI/lSwsQSqmaiiUTktj6l0Fm2gcO0mw8ADxfY0RcsXYMw1D3cPCbCBrzxFXDQl78o6Otp6sbNrBEddc/p1jamcTYaPIprSQH83OFpbwL+5BqHgFnR2tMP0nAfSmQ/R0Bnhhvu3d3UxqfQ7hvYjpXvRswscGJ4QJQkKTXh5uLgZ7tlFvL1PWJU44uWSzXKmM1lwOFr0pTFdxr5uYTOwSRLqhPfKAs3ShBNoWoFm+mha4fLqmpqiByxI6p9o8SCGDiL65lZrV24IbmUBQ82G2zGUPzhleJcX9DTcrvybW5n36vQ8pt+PhncsU9BZ8ywZSfhlpsLPgVQBF947PIGX1zd9Gd1T4+CedIGAJTIJl67IaAMbi1phyWmw+IpuFHLVbFg8clWsHw9YUacRH9kK1AoW90i1YRBHq2NXkMqD5keBSgqKZi+BDYyZspKkHLVnrpZxX+O67qGyL3x/AAAAAElFTkSuQmCC";
+            var img = document.createElement('img');
+            img.src = rotateIcon;
         
-        let currentImage = null; 
-    let isImageDragging = false; // Track if the image is being dragged
-    
+            // here's where your custom rotation control is defined
+            // by changing the values you can customize the location, size, look, and behavior of the control
+            fabric.Textbox.prototype.controls.mtr = new fabric.Control({
+              x: 0,
+              y: -0.5,
+              offsetY: -40,
+              cursorStyle: 'pointer',
+              actionHandler: fabric.controlsUtils.rotationWithSnapping,
+              actionName: 'rotate',
+              render: renderIcon,
+              cornerSize: 28,
+              withConnection: true
+            });
+        
+            // here's where the render action for the control is defined
+            function renderIcon(ctx, left, top, styleOverride, fabricObject) {
+              var size = this.cornerSize;
+              ctx.save();
+              ctx.translate(left, top);
+              ctx.rotate(fabric.util.degreesToRadians(fabricObject.angle));
+              ctx.drawImage(img, -size / 2, -size / 2, size, size);
+              ctx.restore();
+            }
+        
+        let currentImage = null;
+let isImageDragging = false; // Track if the image is being dragged
 
-        function updateClipPath(imageUrl, element) {
-
-            if (currentImage) {
+function updateClipPath(imageUrl, element) {
+    // Remove the previous image from the canvas if it exists
+    if (currentImage) {
         canvas.remove(currentImage);
     }
-            // canvas.remove(image);
+
     // Define the fixed container dimensions
     const containerWidth = 150;
     const containerHeight = 200;
 
-    // Load the image from the URL
+    // Load the image from the provided URL
     fabric.Image.fromURL(imageUrl, function (image) {
         // Get the original dimensions of the image
         const originalWidth = image.width;
@@ -326,91 +351,107 @@
         // Calculate the aspect ratio of the image
         const aspectRatio = originalWidth / originalHeight;
 
-        // Calculate scaling factor to fit the image inside the container
+        // Scale the image to fit the container
         if (aspectRatio > containerWidth / containerHeight) {
-            // Image is wider, scale based on width
             image.scaleToWidth(containerWidth);
         } else {
-            // Image is taller, scale based on height
             image.scaleToHeight(containerHeight);
         }
 
-        let clipPath;
-
         // Define the clipping path based on the shape
-        if (element.shape === 'circle') {
-            clipPath = new fabric.Circle({
-                radius: Math.min(containerWidth, containerHeight) / 2, // Adjust radius based on the smaller container dimension
-                originX: 'center',
-                originY: 'center'
-            });
-        } else if (element.shape === 'rectangle') {
-            // clipPath = '';
-        } else if (element.shape === 'star') {
-            clipPath= new fabric.Path(
-                        'M 50,0 L 61,35 L 98,35 L 68,57 L 79,91 L 50,70 L 21,91 L 32,57 L 2,35 L 39,35 z', {
-                        scaleX: (image.width * image.scaleX) / 100, // Adjust scaling
+        let clipPath;
+        switch (element.shape) {
+            case 'circle':
+                clipPath = new fabric.Circle({
+                    radius: Math.min(containerWidth, containerHeight) / 2,
+                    originX: 'center',
+                    originY: 'center'
+                });
+                break;
+            case 'star':
+                clipPath = new fabric.Path(
+                    'M 50,0 L 61,35 L 98,35 L 68,57 L 79,91 L 50,70 L 21,91 L 32,57 L 2,35 L 39,35 z',
+                    {
+                        scaleX: (image.width * image.scaleX) / 100,
                         scaleY: (image.height * image.scaleY) / 100,
                         originX: 'center',
                         originY: 'center'
-                        })
-                
-        } else if (element.shape === 'heart') {
-            const heartPath = [
-                'M', 0, 0,
-                'C', -containerWidth / 3, -containerHeight / 3, -containerWidth / 3, containerHeight / 6, 0, containerHeight / 5,
-                'C', containerWidth / 3, containerHeight / 6, containerWidth / 3, -containerHeight / 3, 0, 0
-            ].join(' ');
-
-            clipPath = new fabric.Path(heartPath, {
-                originX: 'center',
-                originY: 'center'
-            });
+                    }
+                );
+                break;
+            case 'heart':
+                const heartPath = [
+                    'M', 0, 0,
+                    'C', -containerWidth / 3, -containerHeight / 3, -containerWidth / 3, containerHeight / 6, 0, containerHeight / 5,
+                    'C', containerWidth / 3, containerHeight / 6, containerWidth / 3, -containerHeight / 3, 0, 0
+                ].join(' ');
+                clipPath = new fabric.Path(heartPath, {
+                    originX: 'center',
+                    originY: 'center'
+                });
+                break;
+          
+            default:
+              
+                break;
         }
-        console.log(element)
-        // Apply the clipping path to the image
+
+        // Apply the clipping path and set initial position
         image.set({
             clipPath: clipPath,
             left: element.centerX,
-        top: element.centerY, 
-
-        }); 
-        
-        image.on('moving', function () {
-            isImageDragging = true; // Set dragging flag to true
+            top: element.centerY
         });
 
-        image.on('mouseup', function (options) {
+        // Track image position and update global object on moving
+        image.on('moving', function () {
+            isImageDragging = true; // Set dragging flag to true
+
+            updatedOBJImage = {
+                shape: element.shape,
+                centerX: image.left,
+                centerY: image.top,
+                width: image.width,
+                height: image.height
+            };
+
+            console.log("Updated image position:", updatedOBJImage);
+        });
+
+        // Handle mouseup event for both dragging and shape change
+        image.on('mouseup', function () {
             if (isImageDragging) {
-                // Update the position after dragging
+                // If dragged, just update the position
                 element.centerX = image.left;
                 element.centerY = image.top;
                 isImageDragging = false; // Reset dragging flag
             } else {
-                // If not dragging, change to the next shape on click
+                // If clicked without dragging, change shape
                 currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
-                const shape = shapes[currentShapeIndex];
+                const nextShape = shapes[currentShapeIndex];
 
                 updatedOBJImage = {
-                    shape: shape,
+                    shape: nextShape,
                     centerX: image.left,
                     centerY: image.top,
                     width: image.width,
-                    height:  image.height
+                    height: image.height
                 };
 
-                // Update the clip path or shape (if needed)
-                updateClipPath(imageUrl, updatedOBJ);
+                // Recursively update the image with the new shape
+                updateClipPath(imageUrl, updatedOBJImage);
             }
         });
 
         // Add the image to the canvas
         canvas.add(image);
-        currentImage = image;
-        // Refresh the canvas
+        currentImage = image; // Store the current image
+
+        // Refresh the canvas to apply changes
         canvas.renderAll();
     });
 }
+
 
        
         let updateTimeout; // Variable to store the timeout reference
@@ -1518,8 +1559,9 @@
 
           
             console.log(shapeImageData);
+            console.log(updatedOBJImage);
             console.log(textData);
-            alert(0)
+            // alert(0)
             // $.ajax({ 
             //     headers: {
             //         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -1556,7 +1598,7 @@
                 .then(response => response.json())
                 .then(data => {
                     console.log('Text data saved successfully', data);
-                    window.location.href = "{{URL::to('/admin/create_template')}}";
+                    // window.location.href = "{{URL::to('/admin/create_template')}}";
 
                 })
                 .catch((error) => {
