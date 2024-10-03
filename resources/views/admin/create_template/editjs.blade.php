@@ -274,7 +274,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function addIconsToImage(textbox) {
         console.log(textbox);
-        textbox.remove()
+        canvas.remove(textbox)
         canvas.renderAll();
         // alert(1)
         // // Remove existing trash icon if it exists
