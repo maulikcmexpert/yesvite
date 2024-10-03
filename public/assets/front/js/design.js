@@ -326,7 +326,8 @@ $(document).on("click", ".edit_design_tem", function (e) {
     $(".step_2").hide();
     $(".step_3").hide();
     $('.pick-card').removeClass('active');
-    $('.pick-card').addClass('menu-success')
+    $('.pick-card').addClass('menu-success');
+    $('.edit-design').removeClass('menu-success')
     $('.edit-design').addClass('active');
     $(".event_create_percent").text("50%");
     $(".current_step").text("2 of 4");
