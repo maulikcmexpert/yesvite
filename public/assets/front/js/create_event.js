@@ -2349,7 +2349,7 @@ $(document).on("click", "#next_setting", function () {
     savePage3Data();
     checkbox_count();
     $("#loader").css('display','none');
-    $('.li_guest').find(".side-bar-list").addClass("menu-success");
+    
 
 });
 
@@ -2792,6 +2792,7 @@ function savePage3Data() {
             $('.event_create_percent').text('99%');
             $('.current_step').text('4 of 4');
             $(".step_4").show();
+            $('.li_guest').find(".side-bar-list").addClass("menu-success");
             if(final_step == 3){
                 final_step = 4;
             }
