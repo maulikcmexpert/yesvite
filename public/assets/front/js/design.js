@@ -20,10 +20,9 @@ $(document).on("click", ".design-card", function () {
         console.log(dbJson);
         temp_id = eventData.temp_id; 
     }else{
-        dbJson = {
-            textElements: eventData.textData
-        };
-        temp_id = id;
+        console.log(json);
+        // dbJson = json;
+        // temp_id = id;
     }
 
     // Set the image URL in the modal's image tag
