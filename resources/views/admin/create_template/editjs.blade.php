@@ -386,8 +386,8 @@
             var centerY = obj.top + (obj.height / 2);
             updatedOBJImage = {
                 shape: element.shape,
-                centerX,
-                centerY,
+                centerX:obj.left,
+                centerY:obj.top,
                 width: image.width,
                 height:  image.height
             };
