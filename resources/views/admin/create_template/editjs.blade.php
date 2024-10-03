@@ -974,7 +974,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function getTextDataFromCanvas() {
         var objects = canvas.getObjects();
         var textData = [];
-        // console.log(objects);
+        console.log(objects);
         objects.forEach(function (obj) {
             if (obj.type === "textbox") {
                 var centerX = obj.left + obj.width / 2;
