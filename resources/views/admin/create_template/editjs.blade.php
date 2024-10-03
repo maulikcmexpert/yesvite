@@ -111,15 +111,15 @@ document.addEventListener("DOMContentLoaded", function () {
                                //updateClipPath(imgInstance, shape); // Update the shape with fetched data
                             }
 
-                            imgInstance.on("mouseup", function (options) {
-                                if (options.target) {
-                                    // Change to the next shape on click
-                                    currentShapeIndex =
-                                        (currentShapeIndex + 1) % shapes.length;
-                                    shape = shapes[currentShapeIndex];
-                                   // updateClipPath(imgInstance, shape); // Update the shape
-                                }
-                            });
+                            // imgInstance.on("mouseup", function (options) {
+                            //     if (options.target) {
+                            //         // Change to the next shape on click
+                            //         currentShapeIndex =
+                            //             (currentShapeIndex + 1) % shapes.length;
+                            //         shape = shapes[currentShapeIndex];
+                            //        // updateClipPath(imgInstance, shape); // Update the shape
+                            //     }
+                            // });
                         };
 
                         imgElement.onerror = function () {
