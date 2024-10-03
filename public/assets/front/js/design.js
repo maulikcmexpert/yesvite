@@ -248,7 +248,7 @@ $(document).on("click", ".design-card", function () {
                     img.set({
                         clipPath: clipPath,
                     });
-    
+                    console.log(img);
                     canvas.add(img);
                     canvas.renderAll(); // Refresh the canvas
                 };
