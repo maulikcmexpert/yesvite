@@ -480,31 +480,31 @@ function bindData() {
                         }
                     });
 
-                    textElement.controls.mt = new fabric.Control({
-                        x: 0.5, // Right side
-                        y: 0,
-                        offsetX: 0,
-                        offsetY: 0,
-                        cursorStyle: 'e-resize',
-                        actionHandler: fabric.controlsUtils.scalingX,
-                        render: function(ctx, left, top, styleOverride, fabricObject) {
-                            ctx.fillStyle = 'white'; // Rectangle color
-                            ctx.fillRect(left - 2, top - 7, 4, 8); // Draw a rectangle control for 'mr'
-                        }
-                    });
+                    // textElement.controls.mt = new fabric.Control({
+                    //     x: 0.5, // Right side
+                    //     y: 0,
+                    //     offsetX: 0,
+                    //     offsetY: 0,
+                    //     cursorStyle: 'e-resize',
+                    //     actionHandler: fabric.controlsUtils.scalingX,
+                    //     render: function(ctx, left, top, styleOverride, fabricObject) {
+                    //         ctx.fillStyle = 'white'; // Rectangle color
+                    //         ctx.fillRect(left - 2, top - 7, 4, 8); // Draw a rectangle control for 'mr'
+                    //     }
+                    // });
 
-                    textElement.controls.mb = new fabric.Control({
-                        x: 0.5, // Right side
-                        y: 0,
-                        offsetX: 0,
-                        offsetY: 0,
-                        cursorStyle: 'e-resize',
-                        actionHandler: fabric.controlsUtils.scalingX,
-                        render: function(ctx, left, top, styleOverride, fabricObject) {
-                            ctx.fillStyle = 'white'; // Rectangle color
-                            ctx.fillRect(left - 2, top - 7, 4, 8); // Draw a rectangle control for 'mr'
-                        }
-                    });
+                    // textElement.controls.mb = new fabric.Control({
+                    //     x: 0.5, // Right side
+                    //     y: 0,
+                    //     offsetX: 0,
+                    //     offsetY: 0,
+                    //     cursorStyle: 'e-resize',
+                    //     actionHandler: fabric.controlsUtils.scalingX,
+                    //     render: function(ctx, left, top, styleOverride, fabricObject) {
+                    //         ctx.fillStyle = 'white'; // Rectangle color
+                    //         ctx.fillRect(left - 2, top - 7, 4, 8); // Draw a rectangle control for 'mr'
+                    //     }
+                    // });
 
 
                     switch (element.text) {
