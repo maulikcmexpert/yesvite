@@ -237,7 +237,7 @@
                         // Load static information (text and shapes)
                         if (data.static_information) {
                             // hideStaticTextElements(); // Hide static text elements if static information is present
-                            const staticInfo = JSON.parse(data.static_information);
+                            const staticInfo = data.static_information;
                             // console.log(staticInfo);
 
                             // Render text elements or shapes on canvas
