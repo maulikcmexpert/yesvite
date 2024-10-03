@@ -54,7 +54,7 @@
                     <h6 >+ Text Box</h6>
                 </button>
             </div>
-            <div class="edit-images-button-inner text-box-wrp" >
+            {{-- <div class="edit-images-button-inner text-box-wrp" >
                 <input type="file" id="addShapeButton" > 
                 <button class="design-sidebar-action" >
                     <span>
@@ -72,7 +72,7 @@
                     </span>
                     <h6 >+ Shape Image</h6>
                 </button>
-            </div>
+            </div> --}}
             <div class="edit-images-button-inner fonts-edit-wrp">
                 <button class="design-sidebar-action" design-id="2" onclick="toggleSidebar('sidebar')">
                     <span>
