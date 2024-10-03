@@ -335,8 +335,12 @@
                 });
             } else if (shape === 'rectangle') {
                 clipPath = new fabric.Rect({
-                    width: 150, // Set width of the rectangle
-                    height: 100, // Set height of the rectangle
+                    scaleX: 1,
+                    scaleY: 1,
+                    height: 200,
+                    width: 150,
+                    selectable: true,
+                    hasControls: true
                     originX: 'center', // Set origin to center of the rectangle
                     originY: 'center' // Set origin to center of the rectangle
                 });
