@@ -218,8 +218,8 @@
                                     top: 50,
                                     scaleX: 1,
                                     scaleY: 1,
-                                    height: 200,
-                                    width: 150,
+                                    // height: 200,
+                                    // width: 150,
                                     selectable: true,
                                     hasControls: true
                                 });
