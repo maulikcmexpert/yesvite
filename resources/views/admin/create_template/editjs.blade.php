@@ -241,65 +241,50 @@
                             // console.log(staticInfo);
 
                             // Render text elements or shapes on canvas
-                            staticInfo.textElements.forEach(element => {
+                            staticInfo.textElements.forEach((element) => {
+                                console.log(element);
+                                let textElement = new fabric.Textbox(element.text, {
+                                    left: element.left,
+                                    top: element.top,
+                                    width: element.width || 200,
+                                    fontSize: element.fontSize,
+                                    fill: element.fill,
+                                    fontFamily: element.fontFamily,
+                                    fontWeight: element.fontWeight,
+                                    fontStyle: element.fontStyle,
+                                    underline: element.underline,
+                                    linethrough: element.linethrough,
+                                    backgroundColor: element.backgroundColor,
+                                    textAlign: element.textAlign,
+                                    editable: false,
+                                    selectable: false,
+                                    hasControls: false,
+                                    borderColor: "#2DA9FC",
+                                    cornerColor: "#fff",
+                                    cornerSize: 6,
+                                    transparentCorners: false,
+                                    isStatic: true,
+                                });
 
-                                if (element.text) {
-
-                                    let textElement = new fabric.Textbox(element.text, {
-                                        left: element.left,
-                                        top: element.top,
-                                        width: element.width || 200,
-                                        fontSize: element.fontSize,
-                                        fill: element.fill,
-                                        fontFamily: element.fontFamily,
-                                        fontWeight: element.fontWeight,
-                                        fontStyle: element.fontStyle,
-                                        underline: element.underline,
-                                        linethrough: element.linethrough,
-                                        backgroundColor: element.backgroundColor,
-                                        textAlign: element.textAlign,
-                                        editable: true,
-                                        hasControls: true,
-                                        // borderColor: 'blue',
-                                        // cornerColor: 'red',
-                                        borderColor: '#2DA9FC',
-                                        // cornerColor: 'red',
-                                        cornerColor: '#fff',
-                                        cornerSize: 6,
-                                        transparentCorners: false,
-                                        isStatic: true
-                                    });
-
-                                    const textWidth = textElement.calcTextWidth();
-                                    textElement.set({
-                                        width: textWidth
-                                    });
-
-                                    // textElement.on('scaling', function() {
-                                    //     var updatedFontSize = textElement.fontSize * (textElement.scaleX + textElement.scaleY) / 2;
-                                    //     textElement.set('fontSize', updatedFontSize);
-                                    // });
-                                    console.log(textElement);
-                                    addIconsToTextbox(textElement);
-                                    canvas.add(textElement);
-                                }
-
-
-
+                                const textWidth = textElement.calcTextWidth();
+                                textElement.set({
+                                    width: textWidth
+                                });
+                                canvas.add(textElement);
                             });
 
-                            const staticInfo2 = JSON.parse(data.static_information);
-                            staticInfo2?.shapeImageData?.forEach(element => {
-                                if (element.shape != undefined && element.centerX != undefined && element.centerY != undefined && element.height != undefined && element.width != undefined) {
-                                    console.log(element.shape);
-                                    shape = element.shape;
-                                    centerX = element.centerX;
-                                    centerY = element.centerY;
-                                    height = element.height;
-                                    width = element.width;
+                            // const staticInfo2 = JSON.parse(data.static_information);
+                            // staticInfo2?.shapeImageData?.forEach(element => {
+                            //     if (element.shape != undefined && element.centerX != undefined && element.centerY != undefined && element.height != undefined && element.width != undefined) {
+                            //         console.log(element.shape);
+                            //         shape = element.shape;
+                            //         centerX = element.centerX;
+                            //         centerY = element.centerY;
+                            //         height = element.height;
+                            //         width = element.width;
 
-                                }
-                            })
+                            //     }
+                            // })
                         } else {
                             showStaticTextElements();
                             addDraggableText(150, 50, 'event_name', 'xyz'); // Position this outside the image area
