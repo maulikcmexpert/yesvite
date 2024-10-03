@@ -174,39 +174,43 @@ $(document).on("click", ".design-card", function () {
                 var shape_centerY = element.centerY;
                 var shape_height = element.height;
                 var shape_width = element.width;
-
+    
                 var imgObj = new Image();
-                imgObj.src = shapeImageUrl;
-                imgObj.onload = function() {
-                    var img = new fabric.Image(imgObj);
-                    img.set({
-                        left: canvas.width / 2 - img.width / 2,
-                        top: canvas.height / 2 - img.height / 2,
-                        scaleX: 0.5,
-                        scaleY: 0.5
+                imgObj.src = shapeImageUrl; // Load your image URL
+                imgObj.onload = function () {
+                    var img = new fabric.Image(imgObj, {
+                        left: shape_centerX, // Position the image
+                        top: shape_centerY,
+                        scaleX: shape_width / imgObj.width, // Scale the image to fit the shape
+                        scaleY: shape_height / imgObj.height
                     });
+    
                     let clipPath;
-
+    
                     // Define the clipping path based on the shape
                     if (element.shape === "circle") {
                         clipPath = new fabric.Circle({
-                            radius: 75, // Define radius of the circle
-                            originX: "center", // Set origin to center of the circle
-                            originY: "center", // Set origin to center of the circle
+                            radius: shape_width / 2, // Use shape's width as the diameter
+                            originX: "center",
+                            originY: "center",
+                            left: shape_centerX,
+                            top: shape_centerY,
                         });
                     } else if (element.shape === "rectangle") {
                         clipPath = new fabric.Rect({
-                            width: 150, // Set width of the rectangle
-                            height: 100, // Set height of the rectangle
-                            originX: "center", // Set origin to center of the rectangle
-                            originY: "center", // Set origin to center of the rectangle
+                            width: shape_width,
+                            height: shape_height,
+                            originX: "center",
+                            originY: "center",
+                            left: shape_centerX,
+                            top: shape_centerY,
                         });
                     } else if (element.shape === "star") {
                         const starPoints = [];
                         const spikes = 5;
-                        const outerRadius = 75; // Outer radius of the star
+                        const outerRadius = shape_width / 2; // Use width as outer radius
                         const innerRadius = outerRadius / 2;
-            
+    
                         for (let i = 0; i < spikes * 2; i++) {
                             const angle = (i * Math.PI) / spikes;
                             const radius = i % 2 === 0 ? outerRadius : innerRadius;
@@ -216,51 +220,42 @@ $(document).on("click", ".design-card", function () {
                             );
                         }
                         clipPath = new fabric.Polygon(starPoints, {
-                            left: 0,
-                            top: 0,
                             originX: "center",
                             originY: "center",
+                            left: shape_centerX,
+                            top: shape_centerY,
                         });
                     } else if (element.shape === "heart") {
                         const heartPath = [
-                            "M",
-                            0,
-                            0,
-                            "C",
-                            -50,
-                            -60,
-                            -50,
-                            10,
-                            0,
-                            30,
-                            "C",
-                            50,
-                            10,
-                            50,
-                            -60,
-                            0,
-                            0,
+                            "M", 0, 0,
+                            "C", -shape_width / 2, -shape_height / 1.5,
+                            -shape_width / 2, shape_height / 3,
+                            0, shape_height / 2,
+                            "C", shape_width / 2, shape_height / 3,
+                            shape_width / 2, -shape_height / 1.5,
+                            0, 0
                         ].join(" ");
-            
+    
                         clipPath = new fabric.Path(heartPath, {
-                            left: 0,
-                            top: 0,
                             originX: "center",
                             originY: "center",
+                            left: shape_centerX,
+                            top: shape_centerY,
                         });
                     }
-            
+    
                     // Apply the clipping path to the image
                     img.set({
                         clipPath: clipPath,
                     });
+    
                     canvas.add(img);
                     canvas.renderAll(); // Refresh the canvas
                 };
-
             }
-        })
+        });
     }
+    
 
     // Load filed image (filedImagePath) as another image layer
     if (shapeImageUrl) {
