@@ -997,7 +997,6 @@ function bindData() {
     
         canvas.renderAll();  // Re-render canvas to update positions
     }
-
     function updateIconPositions(textbox) {
         // Remove old trash and copy icons if they exist
         if (textbox.trashIcon) {
@@ -1008,7 +1007,7 @@ function bindData() {
             canvas.remove(textbox.copyIcon);
             textbox.copyIcon = null; // Clear reference
         }
-
+    
         // Define SVG strings for trash and copy icons
         const trashIconSVG = `<svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g filter="url(#filter0_d_5633_67674)">
@@ -1020,65 +1019,69 @@ function bindData() {
             <path d="M13.4385 14.6055H15.9351" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
             </g>
             </svg>`;
-
+    
         const copyIconSVG = `<svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g filter="url(#filter0_d_5633_67676)">
             <rect x="2.64893" y="2.37207" width="23.9674" height="23.9674" rx="11.9837" fill="white" shape-rendering="crispEdges"/>
             <path fill-rule="evenodd" clip-rule="evenodd" d="M17.6283 16.3538V10.3619C17.6283 9.81039 17.1812 9.36328 16.6297 9.36328H10.6378C10.0863 9.36328 9.63916 9.81039 9.63916 10.3619V16.3538C9.63916 16.9053 10.0863 17.3524 10.6378 17.3524H16.6297C17.1812 17.3524 17.6283 16.9053 17.6283 16.3538ZM10.6379 10.362H16.6298V16.3539H10.6379V10.362ZM18.6271 17.3525V11.3607C19.1786 11.3607 19.6257 11.8078 19.6257 12.3593V17.3525C19.6257 18.4556 18.7315 19.3498 17.6284 19.3498H12.6352C12.0837 19.3498 11.6366 18.9027 11.6366 18.3512H17.6284C18.1799 18.3512 18.6271 17.9041 18.6271 17.3525Z" fill="#0F172A"/>
             </g>
             </svg>`;
-
+    
+        // Calculate positions based on scaled width/height of the textbox
+        const textboxWidth = textbox.width * textbox.scaleX;
+        const textboxHeight = textbox.height * textbox.scaleY;
+    
         // Load trash icon from SVG string and position
         fabric.loadSVGFromString(trashIconSVG, function(objects, options) {
             const trashIcon = fabric.util.groupSVGElements(objects, options);
             trashIcon.set({
-                left: textbox.left + textbox.width * textbox.scaleX - 20,
-                top: textbox.top - 20,
+                left: textbox.left + textboxWidth + 10, // Position to the right of textbox
+                top: textbox.top - 10, // Slightly above the textbox
                 selectable: false,
                 evented: true,
                 hasControls: false,
             });
             textbox.trashIcon = trashIcon;
-
+    
             // Attach delete functionality to trash icon
             trashIcon.on("mousedown", function() {
                 console.log("Trash icon clicked! Deleting textbox.");
                 deleteTextbox(textbox);
             });
-
+    
             // Add trash icon to canvas
             canvas.add(trashIcon);
             canvas.bringToFront(trashIcon);
         });
-
+    
         // Load copy icon from SVG string and position
         fabric.loadSVGFromString(copyIconSVG, function(objects, options) {
             const copyIcon = fabric.util.groupSVGElements(objects, options);
             copyIcon.set({
-                left: textbox.left - 25,
-                top: textbox.top - 20,
+                left: textbox.left - 35, // Position to the left of textbox
+                top: textbox.top - 10, // Slightly above the textbox
                 selectable: false,
                 evented: true,
                 hasControls: false,
             });
             textbox.copyIcon = copyIcon;
-
+    
             // Attach clone functionality to copy icon
             copyIcon.on("mousedown", function() {
                 console.log("Copy icon clicked!");
                 cloneTextbox(textbox);
             });
-
+    
             // Add copy icon to canvas
             canvas.add(copyIcon);
             canvas.bringToFront(copyIcon);
         });
-
+    
         // Ensure textbox and icons stay visible
         canvas.bringToFront(textbox);
         canvas.renderAll();
     }
-
+    
     // Function to add icons to a textbox
 
     // Function to delete a textbox
