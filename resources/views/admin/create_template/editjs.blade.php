@@ -1366,7 +1366,7 @@
                 // processData: false,
                 // contentType: false,
                 success: function(response) {
-                    console.log('Text data saved successfully', data);
+                    console.log('Text data saved successfully', response);
                     window.location.href = "{{URL::to('/admin/create_template')}}";
                 },
                 error: function(xhr, status, error) {
