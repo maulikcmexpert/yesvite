@@ -1392,7 +1392,7 @@ function updateClipPath(imageUrl, element) {
 
 
         function discardIfMultipleObjects(options) {
-            console.lof("comcas")
+            console.log("comcas")
             if (options.target !== undefined && options.target?._objects && options.target?._objects.length > 1) {
                 console.log('Multiple objects selected:', options.target);
                 canvas.discardActiveObject();
