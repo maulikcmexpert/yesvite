@@ -507,6 +507,7 @@ function bindData() {
                       ctx.translate(left, top);
                       ctx.rotate(fabric.util.degreesToRadians(fabricObject.angle));
                       ctx.drawImage(img, -size / 2, -size / 2, size, size);
+                      ctx.fillStyle = 'transparent';
                       ctx.restore();
                     }
 
