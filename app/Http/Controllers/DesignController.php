@@ -222,12 +222,10 @@ class DesignController extends Controller
 
     public function saveTextData(Request $request)
     {
-        dd($request);
         // Validate incoming request data
         $validated = $request->validate([
             'id' => 'required|integer',
             'textElements' => 'required|array',
-
         ]);
 
 
@@ -242,7 +240,7 @@ class DesignController extends Controller
         // Convert text elements array to JSON
         $staticInformation = [
             'textElements' => $validated['textElements'],
-
+            'shapeImageData' => $validated['shapeImageData'],
         ];
 
         // Update the template record
