@@ -239,7 +239,7 @@
                                         hasControls: true,
                                     });
                                     if (shape) {
-                                        updateClipPath(filedImg, shape); // Update the shape with fetched data
+                                        updateClipPath(data.filedImagePath, shape); // Update the shape with fetched data
                                     }
 
                                     // Add event listener for changing shapes on mouseup
@@ -250,7 +250,7 @@
                                             shape = shapes[currentShapeIndex];
 
                                             // Update the clip path or shape (if needed)
-                                            updateClipPath(filedImg, shape);
+                                            updateClipPath(data.filedImagePath, shape);
                                         }
                                     });
 
@@ -336,80 +336,89 @@
                 .catch(error => console.error('Error loading text data:', error));
         }
 
-        function updateClipPath(image, shape) {
-                let clipPath;
+        function updateClipPath(imageUrl, shape) {
+    // Define the fixed container dimensions
+    const containerWidth = 150;
+    const containerHeight = 200;
 
-                // Define the fixed container dimensions (for example, 150x200)
-                const containerWidth = 150;
-                const containerHeight = 200;
+    // Load the image from the URL
+    fabric.Image.fromURL(imageUrl, function (image) {
+        // Get the original dimensions of the image
+        const originalWidth = image.width;
+        const originalHeight = image.height;
 
-                // Get the original dimensions of the image
-                const originalWidth = image.width;
-                const originalHeight = image.height;
+        // Calculate the aspect ratio of the image
+        const aspectRatio = originalWidth / originalHeight;
 
-                // Calculate the aspect ratio of the image
-                const aspectRatio = originalWidth / originalHeight;
+        // Calculate scaling factor to fit the image inside the container
+        if (aspectRatio > containerWidth / containerHeight) {
+            // Image is wider, scale based on width
+            image.scaleToWidth(containerWidth);
+        } else {
+            // Image is taller, scale based on height
+            image.scaleToHeight(containerHeight);
+        }
 
-                // Calculate scaling factor to fit the image inside the container
-                if (aspectRatio > containerWidth / containerHeight) {
-                    // Image is wider, scale based on width
-                    image.scaleToWidth(containerWidth);
-                } else {
-                    // Image is taller, scale based on height
-                    image.scaleToHeight(containerHeight);
-                }
+        let clipPath;
 
-                // Define the clipping path based on the shape
-                if (shape === 'circle') {
-                    clipPath = new fabric.Circle({
-                        radius: Math.min(containerWidth, containerHeight) / 2, // Adjust radius based on the smaller container dimension
-                        originX: 'center',
-                        originY: 'center'
-                    });
-                } else if (shape === 'rectangle') {
-                    clipPath = new fabric.Rect({
-                        width: containerWidth, // Use the fixed container dimensions
-                        height: containerHeight,
-                        originX: 'center',
-                        originY: 'center'
-                    });
-                } else if (shape === 'star') {
-                    const starPoints = [];
-                    const spikes = 5;
-                    const outerRadius = Math.min(containerWidth, containerHeight) / 2; // Scale outer radius based on the container size
-                    const innerRadius = outerRadius / 2;
+        // Define the clipping path based on the shape
+        if (shape === 'circle') {
+            clipPath = new fabric.Circle({
+                radius: Math.min(containerWidth, containerHeight) / 2, // Adjust radius based on the smaller container dimension
+                originX: 'center',
+                originY: 'center'
+            });
+        } else if (shape === 'rectangle') {
+            clipPath = new fabric.Rect({
+                width: containerWidth, // Use the fixed container dimensions
+                height: containerHeight,
+                originX: 'center',
+                originY: 'center'
+            });
+        } else if (shape === 'star') {
+            const starPoints = [];
+            const spikes = 5;
+            const outerRadius = Math.min(containerWidth, containerHeight) / 2; // Scale outer radius based on the container size
+            const innerRadius = outerRadius / 2;
 
-                    for (let i = 0; i < spikes * 2; i++) {
-                        const angle = (i * Math.PI) / spikes;
-                        const radius = i % 2 === 0 ? outerRadius : innerRadius;
-                        starPoints.push(
-                            Math.cos(angle) * radius,
-                            Math.sin(angle) * radius
-                        );
-                    }
-                    clipPath = new fabric.Polygon(starPoints, {
-                        originX: 'center',
-                        originY: 'center'
-                    });
-                } else if (shape === 'heart') {
-                    const heartPath = [
-                        'M', 0, 0,
-                        'C', -containerWidth / 3, -containerHeight / 3, -containerWidth / 3, containerHeight / 6, 0, containerHeight / 5,
-                        'C', containerWidth / 3, containerHeight / 6, containerWidth / 3, -containerHeight / 3, 0, 0
-                    ].join(' ');
-
-                    clipPath = new fabric.Path(heartPath, {
-                        originX: 'center',
-                        originY: 'center'
-                    });
-                }
-
-                // Apply the clipping path to the image
-                image.set({
-                    clipPath: clipPath
-                });
-                canvas.renderAll(); // Refresh the canvas
+            for (let i = 0; i < spikes * 2; i++) {
+                const angle = (i * Math.PI) / spikes;
+                const radius = i % 2 === 0 ? outerRadius : innerRadius;
+                starPoints.push(
+                    Math.cos(angle) * radius,
+                    Math.sin(angle) * radius
+                );
             }
+            clipPath = new fabric.Polygon(starPoints, {
+                originX: 'center',
+                originY: 'center'
+            });
+        } else if (shape === 'heart') {
+            const heartPath = [
+                'M', 0, 0,
+                'C', -containerWidth / 3, -containerHeight / 3, -containerWidth / 3, containerHeight / 6, 0, containerHeight / 5,
+                'C', containerWidth / 3, containerHeight / 6, containerWidth / 3, -containerHeight / 3, 0, 0
+            ].join(' ');
+
+            clipPath = new fabric.Path(heartPath, {
+                originX: 'center',
+                originY: 'center'
+            });
+        }
+
+        // Apply the clipping path to the image
+        image.set({
+            clipPath: clipPath
+        });
+
+        // Add the image to the canvas
+        canvas.add(image);
+
+        // Refresh the canvas
+        canvas.renderAll();
+    });
+}
+
 
         let updateTimeout; // Variable to store the timeout reference
 
