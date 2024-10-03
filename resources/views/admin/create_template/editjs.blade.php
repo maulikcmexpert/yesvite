@@ -1254,9 +1254,62 @@
         }
 
 
+        // function saveTextDataToDatabase() {
+
+        //     // Hide the text elements
+        //     var textData = getTextDataFromCanvas();
+        //     var imageURL = canvas.toDataURL('image/png');
+        //     var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content'); // Get CSRF token
+        //     // Get the canvas ID to associate the saved data with a specific record
+        //     var canvasElement = document.getElementById('imageEditor1');
+        //     var canvasId = canvasElement.getAttribute('data-canvas-id');
+        //     var imageName = 'image_' + Date.now() + '.png';
+
+        //     var id = $('#template_id').val();
+        //     const width = userImageElement.clientWidth;
+        //     const height = userImageElement.clientHeight;
+        //     const left = imageWrapper.offsetLeft;
+        //     const top = imageWrapper.offsetTop;
+        //     const centerX = left + width / 2;
+        //     const centerY = top + height / 2;
+
+        //     console.log(canvasId);
+        //     console.log(textData);
+        //     shapeImageData = [];
+
+
+        //     fetch('/saveTextData', {
+        //             method: 'POST',
+        //             headers: {
+        //                 'Content-Type': 'application/json', // Set content type to JSON
+        //                 'X-CSRF-TOKEN': csrfToken // Include CSRF token
+        //             },
+        //             body: JSON.stringify({
+        //                 id: canvasId,
+        //                 textElements: textData,
+        //                 shape: shape,
+        //                 centerX: centerX,
+        //                 centerY: centerY,
+        //                 width: width,
+        //                 height: height
+        //             })
+        //         })
+        //         .then(response => response.json())
+        //         .then(data => {
+        //             console.log('Text data saved successfully', data);
+        //             // window.location.href = "{{URL::to('/admin/create_template')}}";
+
+        //         })
+        //         .catch((error) => {
+        //             console.error('Error:', error);
+        //         });
+        //     hideStaticTextElements();
+        //     showStaticTextElements();
+        // }
+
         function saveTextDataToDatabase() {
 
-            // Hide the text elements
+            hideStaticTextElements(); // Hide the text elements
             var textData = getTextDataFromCanvas();
             var imageURL = canvas.toDataURL('image/png');
             var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content'); // Get CSRF token
@@ -1264,20 +1317,7 @@
             var canvasElement = document.getElementById('imageEditor1');
             var canvasId = canvasElement.getAttribute('data-canvas-id');
             var imageName = 'image_' + Date.now() + '.png';
-
-            var id = $('#template_id').val();
-            const width = userImageElement.clientWidth;
-            const height = userImageElement.clientHeight;
-            const left = imageWrapper.offsetLeft;
-            const top = imageWrapper.offsetTop;
-            const centerX = left + width / 2;
-            const centerY = top + height / 2;
-
             console.log(canvasId);
-            console.log(textData);
-            shapeImageData = [];
-
-
             fetch('/saveTextData', {
                     method: 'POST',
                     headers: {
@@ -1287,26 +1327,20 @@
                     body: JSON.stringify({
                         id: canvasId,
                         textElements: textData,
-                        shape: shape,
-                        centerX: centerX,
-                        centerY: centerY,
-                        width: width,
-                        height: height
                     })
                 })
                 .then(response => response.json())
                 .then(data => {
                     console.log('Text data saved successfully', data);
-                    // window.location.href = "{{URL::to('/admin/create_template')}}";
-
+                    window.location.href = "{{URL::to('/admin/create_template')}}";
                 })
                 .catch((error) => {
                     console.error('Error:', error);
                 });
+
             hideStaticTextElements();
             showStaticTextElements();
         }
-
 
 
 
