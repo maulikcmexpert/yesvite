@@ -1391,18 +1391,16 @@ function updateClipPath(imageUrl, element) {
 
 
 
-
+        function discardIfMultipleObjects(options) {
+            if (options.target !== undefined && options.target._objects && options.target._objects.length > 1) {
+                console.log('Multiple objects selected:', options.target);
+                canvas.discardActiveObject();
+                canvas.renderAll(); // Ensure the canvas is refreshed
+            }
+        }
 
         canvas.on('mouse:down', function(options) {
-            if(options.target!=undefined){
-
-               if(options.target._objects.length > 1){
-                console.log(options)
-                canvas.discardActiveObject();
-                    return
-               }
-
-            }
+            discardIfMultipleObjects(options);
             if (options.target && options.target.type === 'textbox') {
                 canvas.setActiveObject(options.target);
                 addIconsToTextbox(options.target)
@@ -1416,30 +1414,9 @@ function updateClipPath(imageUrl, element) {
         });
 
         canvas.on('mouse:up', function(options) {
-            if(options.target!=undefined){
-
-               if(options.target._objects.length > 1){
-                console.log(options)
-                canvas.discardActiveObject();
-                    return
-               }
-
-            }
-           
+            discardIfMultipleObjects(options);           
         });
-        canvas.on('mouse:move', function(options) {
-            if(options.target!=undefined){
-                console.log(options.target)
-               if(options.target._objects.length > 1){
-                console.log(options)
-                canvas.discardActiveObject();
-                    return
-               }
-
-            }
-           
-        });
-
+     
         function getTextDataFromCanvas() {
             var objects = canvas.getObjects();
             var textData = [];
