@@ -1968,11 +1968,11 @@ function updateClipPath(imageUrl, element) {
     }
 
     // Call this function whenever you modify the canvas
-    canvas.on('object:added', addToUndoStack);
+    // canvas.on('object:added', addToUndoStack);
     canvas.on('object:modified', addToUndoStack);
-    canvas.on('object:removed', addToUndoStack);
-    canvas.on('object:scaled', addToUndoStack);
-    canvas.on('object:moved', addToUndoStack);
+    // canvas.on('object:removed', addToUndoStack);
+    // canvas.on('object:scaled', addToUndoStack);
+    // canvas.on('object:moved', addToUndoStack);
 
     function undo() {
         console.log(undoStack);
