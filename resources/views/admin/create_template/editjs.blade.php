@@ -380,7 +380,7 @@
             
             isImageDragging = true; // Set dragging flag to true
             var obj = canvas.getActiveObject();
-            var obj = [];
+           
             // console.log(objects);
             var centerX = obj.left + (obj.width / 2);
             var centerY = obj.top + (obj.height / 2);
