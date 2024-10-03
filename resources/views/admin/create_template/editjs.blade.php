@@ -1341,24 +1341,24 @@
                 },
                 url: base_url + "/saveTextData",
                 type: "POST",
-                data: JSON.stringify({
+                data: {
                     id: canvasId,
-                    textElements: textData,
-                    // shape: shape,
-                    // centerX: centerX,
-                    // centerY: centerY,
-                    // width: width,
-                    // height: height
-                }),
-                processData: false,
-                contentType: false,
+                    textElements: textData
+                },
+                // shape: shape,
+                // centerX: centerX,
+                // centerY: centerY,
+                // width: width,
+                // height: height
+                // processData: false,
+                // contentType: false,
                 success: function(response) {
                     console.log('Text data saved successfully', data);
                     window.location.href = "{{URL::to('/admin/create_template')}}";
                 },
                 error: function(xhr, status, error) {
                     console.error(
-                        "Failed to upload and save the image:",
+                        "Failed:",
                         error
                     );
                 },
