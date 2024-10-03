@@ -272,6 +272,9 @@ class EventController extends Controller
                     $textElemtents[$key]['fontSize'] = (int)$textJson['fontSize'];
                     $textElemtents[$key]['centerX'] = (float)$textJson['centerX'];
                     $textElemtents[$key]['centerY'] = (float)$textJson['centerY'];
+                    $textElemtents[$key]['letterSpacing'] = (int)$textJson['letterSpacing'];
+                    $textElemtents[$key]['letterSpacing'] = (int)$textJson['letterSpacing'];
+                    $textElemtents[$key]['underline'] = (bool)$textJson['underline'];   
                 }
             }
             $static_data = [];
