@@ -135,6 +135,7 @@ class DesignController extends Controller
 
     public function save_shape(Request $request)
     {
+
         $id = $request->id;
         $shape = $request->shape;
         $centerX = $request->centerX;
@@ -222,6 +223,8 @@ class DesignController extends Controller
 
     public function saveTextData(Request $request)
     {
+
+        dd($request);
         // Validate incoming request data
         $validated = $request->validate([
             'id' => 'required|integer',
