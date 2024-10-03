@@ -496,7 +496,7 @@ function bindData() {
                         render: function(ctx, left, top, styleOverride, fabricObject) {
                             ctx.fillStyle = 'red'; // Circle color for the mtr control
                             ctx.beginPath();
-                            ctx.arc(left, top, 6, 0, 2 * Math.PI, false); // Draw a circle for 'mtr'
+                            ctx.drawImage(img, -size / 2, -size / 2, size, size);
                             ctx.fill();
                             ctx.closePath();
                         },
