@@ -333,10 +333,12 @@
 let isImageDragging = false; // Track if the image is being dragged
 
 function updateClipPath(imageUrl, element) {
+    console.log(imageUrl)
     // Remove the previous image from the canvas if it exists
     if (currentImage) {
         canvas.remove(currentImage);
     }
+    console.log(1)
 
     // Define the fixed container dimensions
     const containerWidth = 150;
@@ -344,6 +346,8 @@ function updateClipPath(imageUrl, element) {
 
     // Load the image from the provided URL
     fabric.Image.fromURL(imageUrl, function (image) {
+    console.log(2)
+
         // Get the original dimensions of the image
         const originalWidth = image.width;
         const originalHeight = image.height;
@@ -402,6 +406,7 @@ function updateClipPath(imageUrl, element) {
             left: element.centerX,
             top: element.centerY
         });
+        console.log(5)
 
         // Track image position and update global object on moving
         image.on('moving', function () {
@@ -442,6 +447,7 @@ function updateClipPath(imageUrl, element) {
                 updateClipPath(imageUrl, updatedOBJImage);
             }
         });
+        console.log(6)
 
         // Add the image to the canvas
         canvas.add(image);
