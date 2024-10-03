@@ -1368,8 +1368,8 @@
                     // width: width,
                     // height: height
                 },
-                processData: false,
-                contentType: false,
+                // processData: false,
+                // contentType: false,
                 success: function(response) {
                     console.log('Text data saved successfully', data);
                     window.location.href = "{{URL::to('/admin/create_template')}}";
