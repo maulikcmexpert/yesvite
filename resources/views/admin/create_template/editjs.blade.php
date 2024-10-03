@@ -1154,13 +1154,21 @@ function updateClipPath(imageUrl, element) {
             // const trashIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M135.2 17.7L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-7.2-14.3C307.4 6.8 296.3 0 284.2 0L163.8 0c-12.1 0-23.2 6.8-28.6 17.7zM416 128L32 128 53.2 467c1.6 25.3 22.6 45 47.9 45l245.8 0c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>`;
 
             if (textbox.trashIcon) {
+                console.log("removing trash old icon")
                 canvas.remove(textbox.trashIcon);
                 textbox.trashIcon = null; // Clear reference
+                console.log(textbox)
+
             }
             if (textbox.copyIcon) {
+                console.log("removing trash old copy icon")
+
                 canvas.remove(textbox.copyIcon);
                 textbox.copyIcon = null; // Clear reference
+                console.log(textbox)
+
             }
+            canvas.renderAll()
             const trashIconSVG = `<svg width="29" x="0px" y="0px" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g filter="url(#filter0_d_5633_67674)">
                 <rect x="2.70312" y="2.37207" width="23.9674" height="23.9674" rx="11.9837" fill="white" shape-rendering="crispEdges"/>
@@ -1989,7 +1997,7 @@ function updateClipPath(imageUrl, element) {
             const lastState = undoStack.pop(); // Get the last state to undo
             canvas.loadFromJSON(lastState, function () {
                 canvas.renderAll(); // Render the canvas after loading state
-              //  reattachIcons(); // Reattach the icons to the textboxes
+                reattachIcons(); // Reattach the icons to the textboxes
             });
         }
     }
@@ -1999,7 +2007,7 @@ function updateClipPath(imageUrl, element) {
             const nextState = redoStack.pop(); // Get the next state to redo
             canvas.loadFromJSON(nextState, function () {
                 canvas.renderAll(); // Render the canvas after loading state
-              //  reattachIcons(); // Reattach the icons to the textboxes
+                reattachIcons(); // Reattach the icons to the textboxes
             });
         }
     }
