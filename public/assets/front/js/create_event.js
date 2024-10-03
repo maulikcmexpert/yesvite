@@ -3109,7 +3109,8 @@ function handleActivePlan(target) {
 }
 $(document).on("click", ".li_design", function () {
     console.log(eventData);
-    
+    $('.edit-design').removeClass('active');
+    $('.pick-card').addClass('active');
     if (
         eventData.event_type != "" &&
         eventData.event_name != "" &&
