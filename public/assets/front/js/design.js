@@ -480,6 +480,10 @@ function bindData() {
                         }
                     });
 
+                    textElement.controls.mtr = new fabric.Control({
+                       hasBorders:false
+                    });
+
                     // textElement.controls.mt = new fabric.Control({
                     //     x: 0.5, // Right side
                     //     y: 0,
