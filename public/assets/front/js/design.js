@@ -4,8 +4,6 @@ var image = null;
 var base_url = $("#base_url").text();
 var canvas;
 var shapeImageUrl = null;
-var userImageElement;
-var imageWrapper;
 $(document).on("click", ".design-card", function () {
     var url = $(this).data("url");
     var template = $(this).data("template");
@@ -171,8 +169,6 @@ $(document).on("click", ".design-card", function () {
         let element = staticInfo?.shapeImageData;
             if (element.shape && element.centerX && element.centerY && element.height && element.width) {
                 $('.resize-handle').hide();
-                userImageElement = document.getElementById('user_image2');
-                imageWrapper = document.getElementById('imageWrapper2');
                 updateClipPath(shapeImageUrl, element);
             }
     }
@@ -664,8 +660,6 @@ function bindData() {
         width: 345, // Canvas width
         height: 490, // Canvas height
     });
-    userImageElement = document.getElementById('user_image');
-    imageWrapper = document.getElementById('imageWrapper');
     const ctx = canvas.getContext("2d");
     const defaultSettings = {
         fontSize: 20,
@@ -1747,7 +1741,8 @@ let updatedOBJImage = {
     width: 100,
     height: 100
 };
-
+const userImageElement = document.getElementById('user_image');
+const imageWrapper = document.getElementById('imageWrapper');
 let shape = 'rectangle'; // Default shape
 
 const canvasElement = new fabric.Canvas('imageEditor', {
@@ -1760,8 +1755,9 @@ const canvasElement = new fabric.Canvas('imageEditor', {
 
 function updateClipPath(imageUrl, element) {
     console.log(element)
-    // const imageWrapper = document.getElementById('imageWrapper');
-    // const imgElement = document.getElementById('user_image');
+    const imageWrapper = document.getElementById('imageWrapper');
+   
+    const imgElement = document.getElementById('user_image');
     imgElement.src = imageUrl;
 
     // If a current image exists on canvas, remove it
