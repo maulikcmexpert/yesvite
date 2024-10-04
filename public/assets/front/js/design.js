@@ -4,6 +4,7 @@ var image = null;
 var base_url = $("#base_url").text();
 var canvas;
 var shapeImageUrl;
+var shape;
 $(document).on("click", ".design-card", function () {
     var url = $(this).data("url");
     var template = $(this).data("template");
@@ -2027,15 +2028,15 @@ function applyClipPath(image, element) {
         // });
 
         const resizeHandles = {
-    topLeft: document.querySelector('.resize-handle.top-left'),
-    topRight: document.querySelector('.resize-handle.top-right'),
-    bottomLeft: document.querySelector('.resize-handle.bottom-left'),
-    bottomRight: document.querySelector('.resize-handle.bottom-right'),
-    topCenter: document.querySelector('.resize-handle.top-center'),
-    bottomCenter: document.querySelector('.resize-handle.bottom-center'),
-    leftCenter: document.querySelector('.resize-handle.left-center'),
-    rightCenter: document.querySelector('.resize-handle.right-center')
-};
+            topLeft: document.querySelector('.resize-handle.top-left'),
+            topRight: document.querySelector('.resize-handle.top-right'),
+            bottomLeft: document.querySelector('.resize-handle.bottom-left'),
+            bottomRight: document.querySelector('.resize-handle.bottom-right'),
+            topCenter: document.querySelector('.resize-handle.top-center'),
+            bottomCenter: document.querySelector('.resize-handle.bottom-center'),
+            leftCenter: document.querySelector('.resize-handle.left-center'),
+            rightCenter: document.querySelector('.resize-handle.right-center')
+        };
 
 let isDragging = false;
 let isResizing = false;
@@ -2132,47 +2133,47 @@ function handleMouseMove(event) {
 }
 
 
-        function handleMouseUp(event) {
-            if (event.target === userImageElement && !shapeChangedDuringDrag) {
-                // Cycle through shapes
-                const shapes = ['rectangle', 'circle', 'star', 'rounded-border', 'heart'];
-                const currentIndex = shapes.indexOf(shape);
-                shape = shapes[(currentIndex + 1) % shapes.length];
-                console.log(`Shape changed to: ${shape}`); // Log shape change
+function handleMouseUp(event) {
+    if (event.target === userImageElement && !shapeChangedDuringDrag) {
+        // Cycle through shapes
+        const shapes = ['rectangle', 'circle', 'star', 'rounded-border', 'heart'];
+        const currentIndex = shapes.indexOf(shape);
+        shape = shapes[(currentIndex + 1) % shapes.length];
+        console.log(`Shape changed to: ${shape}`); // Log shape change
 
-                drawCanvas();
-            }
+        drawCanvas();
+    }
 
-            isDragging = false;
-            isResizing = false;
-        }
+    isDragging = false;
+    isResizing = false;
+}
 
-        function drawCanvas() {
-const userImageElement = document.getElementById('user_image');
+function drawCanvas() {
+    const userImageElement = document.getElementById('user_image');
 
-            console.log(userImageElement);
-            userImageElement.style.clipPath = '';
+    console.log(userImageElement);
+    userImageElement.style.clipPath = '';
 
-            switch (shape) {
-                case 'rectangle':
-                    break;
-                case 'circle':
-                    userImageElement.style.clipPath = 'circle(50% at 50% 50%)';
-                    break;
-                case 'star':
-                    userImageElement.style.clipPath =
-                        'polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)';
-                    break;
-                case 'rounded-border':
-                    userImageElement.style.clipPath = 'inset(0 round 20px)';
-                    break;
-                case 'heart':
-                    userImageElement.style.clipPath = 'url(#heartClipPath)';
-                    break;
-                default:
-                    break;
-            }
-        }
+    switch (shape) {
+        case 'rectangle':
+            break;
+        case 'circle':
+            userImageElement.style.clipPath = 'circle(50% at 50% 50%)';
+            break;
+        case 'star':
+            userImageElement.style.clipPath =
+                'polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)';
+            break;
+        case 'rounded-border':
+            userImageElement.style.clipPath = 'inset(0 round 20px)';
+            break;
+        case 'heart':
+            userImageElement.style.clipPath = 'url(#heartClipPath)';
+            break;
+        default:
+            break;
+    }
+}
 
         document.addEventListener('mousemove', resize);
         document.addEventListener('mouseup', handleMouseUp);
