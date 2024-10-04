@@ -625,6 +625,13 @@ function bindData() {
                     addIconsToTextbox(textElement);
                     canvas.add(textElement);
                 });
+                if (shapeImageUrl) {
+                    let element = staticInfo?.shapeImageData;
+                    if (element.shape && element.centerX && element.centerY && element.height && element.width) {
+                        updateClipPath(shapeImageUrl, element);
+                    }
+                }
+                
             } else {
                 showStaticTextElements();
             }
@@ -639,12 +646,7 @@ function bindData() {
         }
     }
 
-    if (shapeImageUrl) {
-        let element = staticInfo?.shapeImageData;
-        if (element.shape && element.centerX && element.centerY && element.height && element.width) {
-            updateClipPath(shapeImageUrl, element);
-        }
-    }
+    
 
     function getWidth(element, text) {
         const textMeasurement = new fabric.Text(text, {
