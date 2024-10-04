@@ -201,7 +201,7 @@ function updateClipPath(imageUrl, element) {
             cornerColor: 'red',
             cornerStrokeColor: 'blue',
             borderColor: 'blue',
-            cornerSize: 10,
+            cornerSize: 6,
             transparentCorners: false,
             lockUniScaling: true,
             scaleX: 600 / imgElement.width,
