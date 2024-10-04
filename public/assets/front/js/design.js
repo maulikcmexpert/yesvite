@@ -2146,7 +2146,8 @@ function handleMouseMove(event) {
         }
 
         function drawCanvas() {
-            userImageElement.style.clipPath = '';
+            console.log(userImageElement)
+            userImageElement?.style?.clipPath = '';
 
             switch (shape) {
                 case 'rectangle':
