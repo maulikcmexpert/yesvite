@@ -3,9 +3,7 @@ var temp_id = null;
 var image = null;
 var base_url = $("#base_url").text();
 var canvas;
-var shapeImageUrl = null;
-var userImageElement;
-var imageWrapper;
+var shapeImageUrl;
 $(document).on("click", ".design-card", function () {
     var url = $(this).data("url");
     var template = $(this).data("template");
@@ -166,15 +164,122 @@ $(document).on("click", ".design-card", function () {
         textElement.set({ width: textWidth });
         canvas.add(textElement);
     });
+    var shape = '';
+    if (dbJson) {
+        // const staticInfo = dbJson;
+        // staticInfo?.shapeImageData?.forEach(element => {
+        //     if (element.shape && element.centerX && element.centerY && element.height && element.width) {
+        //         var imgObj = new Image();
+        //         imgObj.src = shapeImageUrl; // Set your image URL
+                
+        //         imgObj.onload = function () {
+        //             // Create the image object in fabric.js
+        //             var img = new fabric.Image(imgObj);
+                
+        //             img.set({
+        //                 left: canvas.width / 2 - img.width / 2,
+        //                 top: canvas.height / 2 - img.height / 2,
+        //                 scaleX: 0.5, // Scaling the image
+        //                 scaleY: 0.5
+        //             });
+                
+        //             // Function to switch between different shapes
+        //             function changeShape(shape) {
+        //                 switch (shape) {
+        //                     case 'rectangle':
+        //                         img.set({
+        //                             clipPath: new fabric.Rect({
+        //                                 width: img.width * img.scaleX, // Match the scaled image width
+        //                                 height: img.height * img.scaleY, // Match the scaled image height
+        //                                 originX: 'center',
+        //                                 originY: 'center'
+        //                             })
+        //                         });
+        //                         break;
+                
+        //                     case 'circle':
+        //                         img.set({
+        //                             clipPath: new fabric.Circle({
+        //                                 radius: (img.width * img.scaleX) / 2, // Scale to match image size
+        //                                 originX: 'center',
+        //                                 originY: 'center'
+        //                             })
+        //                         });
+        //                         break;
+                
+        //                     case 'star':
+        //                         img.set({
+        //                             clipPath: new fabric.Path(
+        //                                 'M 50,0 L 61,35 L 98,35 L 68,57 L 79,91 L 50,70 L 21,91 L 32,57 L 2,35 L 39,35 z', {
+        //                                 scaleX: (img.width * img.scaleX) / 100, // Adjust scaling
+        //                                 scaleY: (img.height * img.scaleY) / 100,
+        //                                 originX: 'center',
+        //                                 originY: 'center'
+        //                             })
+        //                         });
+        //                         break;
+                
+        //                     case 'rounded-border':
+        //                         img.set({
+        //                             clipPath: new fabric.Rect({
+        //                                 width: img.width * img.scaleX,
+        //                                 height: img.height * img.scaleY,
+        //                                 rx: 20, // Rounded corners
+        //                                 ry: 20, // Rounded corners
+        //                                 originX: 'center',
+        //                                 originY: 'center'
+        //                             })
+        //                         });
+        //                         break;
+                
+        //                     case 'heart':
+        //                         img.set({
+        //                             clipPath: new fabric.Path(
+        //                                 'M 50,30 A 20,20 0 0 1 100,30 Q 100,60 50,90 Q 0,60 0,30 A 20,20 0 0 1 50,30 z', {
+        //                                 scaleX: (img.width * img.scaleX) / 100,
+        //                                 scaleY: (img.height * img.scaleY) / 100,
+        //                                 originX: 'center',
+        //                                 originY: 'center'
+        //                             })
+        //                         });
+        //                         break;
+                
+        //                     default:
+        //                         img.set({
+        //                             clipPath: null // Remove any clipping path
+        //                         });
+        //                         break;
+        //                 }
+                
+        //                 // Re-render the canvas after changing the shape
+        //                 canvas.renderAll();
+        //             }
+                
+        //             // Add event listener to change shape on click
+        //             img.on('mousedown', function() {
+        //                 // Example: Toggle through shapes on each click (you can adjust this logic)
+        //                 var shapes = ['rectangle', 'circle', 'star', 'rounded-border', 'heart'];
+        //                 var currentShape = shapes[Math.floor(Math.random() * shapes.length)]; // Random shape for demo
+        //                 changeShape(currentShape);
+        //             });
+                
+        //             // Add the image to the canvas
+        //             canvas.add(img);
+        //             canvas.renderAll();
+        //         };
+                
+        //     }
+        // });
+    }
+    
+    
+
     // Load filed image (filedImagePath) as another image layer
     if (shapeImageUrl) {
         let element = staticInfo?.shapeImageData;
-            if (element.shape && element.centerX && element.centerY && element.height && element.width) {
-                $('.resize-handle').hide();
-                userImageElement = document.getElementById('user_image2');
-                imageWrapper = document.getElementById('imageWrapper2');
-                updateClipPath(shapeImageUrl, element,'modal');
-            }
+        if (element.shape && element.centerX && element.centerY && element.height && element.width) {
+            updateClipPath(shapeImageUrl, element);
+        }
     }
 
 });
@@ -310,7 +415,7 @@ function bindData() {
                     });
 
                     const textWidth = textMeasurement.width;
-                  
+                    
                     let textElement = new fabric.Textbox(element.text, {
                         // Use Textbox for editable text
                         left: element.left,
@@ -378,7 +483,9 @@ function bindData() {
                     var rotateIcon = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAHqSURBVHgBtZW7S8NQFMZPxFXbzUGULIJPdHBwUAgWQamDj1msg0MXHQWXCiIdHFpQKupgrVR0sovgZBEfQx0UdHBLH9bVpv0DjueksRbb5Da2/uBrm4Z7vvvde5IrgQBEdNLXDGmQJJOcxq0c6YYUkyQpCX+BisukAOkTxcRJip36bLBaY/HfBIzkQgMf1odKkv/T4JsnrJaI/lSwsQSqmaiiUTktj6l0Fm2gcO0mw8ADxfY0RcsXYMw1D3cPCbCBrzxFXDQl78o6Otp6sbNrBEddc/p1jamcTYaPIprSQH83OFpbwL+5BqHgFnR2tMP0nAfSmQ/R0Bnhhvu3d3UxqfQ7hvYjpXvRswscGJ4QJQkKTXh5uLgZ7tlFvL1PWJU44uWSzXKmM1lwOFr0pTFdxr5uYTOwSRLqhPfKAs3ShBNoWoFm+mha4fLqmpqiByxI6p9o8SCGDiL65lZrV24IbmUBQ82G2zGUPzhleJcX9DTcrvybW5n36vQ8pt+PhncsU9BZ8ywZSfhlpsLPgVQBF947PIGX1zd9Gd1T4+CedIGAJTIJl67IaAMbi1phyWmw+IpuFHLVbFg8clWsHw9YUacRH9kK1AoW90i1YRBHq2NXkMqD5keBSgqKZi+BDYyZspKkHLVnrpZxX+O67qGyL3x/AAAAAElFTkSuQmCC";
                     var img = document.createElement('img');
                     img.src = rotateIcon;
-
+                
+                    // here's where your custom rotation control is defined
+                    // by changing the values you can customize the location, size, look, and behavior of the control
                     textElement.controls.mtr = new fabric.Control({
                       x: 0,
                       y: -0.5,
@@ -403,6 +510,7 @@ function bindData() {
                       ctx.restore();
                     }
 
+                  
                     switch (element.text) {
                         case "event_name":
                             if (eventData.event_name) {
@@ -517,25 +625,24 @@ function bindData() {
                     addIconsToTextbox(textElement);
                     canvas.add(textElement);
                 });
-
-                if (shapeImageUrl) {
-                    let element = staticInfo?.shapeImageData;
-                        if (element.shape && element.centerX && element.centerY && element.height && element.width) {
-                            userImageElement = document.getElementById('user_image');
-                            imageWrapper = document.getElementById('imageWrapper');
-                            updateClipPath(shapeImageUrl, element);
-                        }
-                    
-                }
             } else {
                 showStaticTextElements();
             }
+
 
             // Set custom attribute with the fetched ID
             var canvasElement = document.getElementById("imageEditor1");
             canvasElement.setAttribute("data-canvas-id", temp_id);
 
             canvas.renderAll(); // Ensure all elements are rendered
+
+        }
+    }
+
+    if (shapeImageUrl) {
+        let element = staticInfo?.shapeImageData;
+        if (element.shape && element.centerX && element.centerY && element.height && element.width) {
+            updateClipPath(shapeImageUrl, element);
         }
     }
 
@@ -1740,62 +1847,47 @@ let currentImage = null;
 let isImageDragging = false; // Track if the image is being dragged
 let isimageoncanvas = false;
 let oldImage = null;
-let updatedOBJImage = {
-    shape: 'rectangle',
-    centerX: 0,
-    centerY: 0,
-    width: 100,
-    height: 100
-};
-
-
-
-let shape = 'rectangle'; // Default shape
-
-const canvasElement2 = new fabric.Canvas('imageEditor', {
+const canvasElement = new fabric.Canvas('imageEditor', {
     width: 500, // Canvas width
     height: 500, // Canvas height
     cornerSize: 6,
 });
-
-
-
-function updateClipPath(imageUrl, element,modal =null) {
-    var imgElement;
-    var imageWrapper;
-    var canvasEL;
-    if(modal){
-        console.log(modal);
-        imageWrapper = document.getElementById('imageWrapper2');
-        imgElement = document.getElementById('user_image2');
-        canvasEL = document.getElementById('imageEditor2')
-        console.log(imgElement)
-    }else{
-        imageWrapper = document.getElementById('imageWrapper');
-        imgElement = document.getElementById('user_image');
-        canvasEL = document.getElementById('imageEditor1')
-        console.log(imgElement);
-    }
-     imgElement.src = imageUrl;
+function updateClipPath(imageUrl, element) {
+    console.log(imageUrl)
+    const imageWrapper = document.getElementById('imageWrapper');
+    const imgElement = document.getElementById('user_image');
+    imgElement.src = imageUrl;
 
     // If a current image exists on canvas, remove it
     if (currentImage) {
-        canvasElement2.remove(currentImage);
+        canvasElement.remove(currentImage);
     }
 
     // Handle previous image and trash icon
     if (oldImage != null) {
-        canvasElement2.remove(oldImage.trashIcon);
+        canvasElement.remove(oldImage.trashIcon);
         oldImage.trashIcon = null;
-        canvasElement2.renderAll();
+        canvasElement.renderAll();
     }
-    const canvasRect = canvasEL.getBoundingClientRect();
 
     imageWrapper.style.display = 'block';
     // imageWrapper.style.left = element.left;
     // imageWrapper.style.top = element.top;
+
+    let canvasEL = document.getElementById('imageEditor1')
+    const canvasRect = canvasEL.getBoundingClientRect();
+
+    console.log(canvasRect.left)
+    console.log(canvasRect.top)
+    console.log(element.centerX)
+    console.log(element.centerY)
+    console.log(element.height)
+    console.log(element.height)
+    
     let left = element.centerX !== undefined ? `${element.centerX  + canvasRect.left}px` : '50%';
     let top = element.centerY !== undefined ? `${element.centerY + canvasRect.top}px` : '50%';
+    console.log({left})
+    console.log({top})
 
     // Set the calculated position to imageWrapper
     imageWrapper.style.left = left;
@@ -1818,12 +1910,12 @@ function updateClipPath(imageUrl, element,modal =null) {
             cornerStyle: 'circle',
         });
         shape = element.shape;
-        canvasElement2.add(imgInstance);
+        canvasElement.add(imgInstance);
         // addIconsToImage(imgInstance);
         drawCanvas();
         
         // Refresh canvas
-        canvasElement2.renderAll();
+        canvasElement.renderAll();
 
         // Update the image with the shape based on the provided element data
         if (element.shape) {
@@ -1874,30 +1966,6 @@ function updateClipPath(imageUrl, element,modal =null) {
     };
 }
 
-function drawCanvas() {
-    userImageElement.style.clipPath = '';
-
-    switch (shape) {
-        case 'rectangle':
-            break;
-        case 'circle':
-            userImageElement.style.clipPath = 'circle(50% at 50% 50%)';
-            break;
-        case 'star':
-            userImageElement.style.clipPath =
-                'polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)';
-            break;
-        case 'rounded-border':
-            userImageElement.style.clipPath = 'inset(0 round 20px)';
-            break;
-        case 'heart':
-            userImageElement.style.clipPath = 'url(#heartClipPath)';
-            break;
-        default:
-            break;
-    }
-}
-
 // Helper function to apply clip path based on shape
 function applyClipPath(image, element) {
     const containerWidth = 150;
@@ -1943,18 +2011,17 @@ function applyClipPath(image, element) {
         clipPath: clipPath
     });
 
-    canvasElement2.renderAll();
+    canvasElement.renderAll();
 }
 
+const userImageElement = document.getElementById('user_image');
+        const imageWrapper = document.getElementById('imageWrapper');
+        // const canvasElement = new fabric.Canvas('imageEditor', {
+        //     width: 500, // Canvas width
+        //     height: 500, // Canvas height
+        // });
 
-$(".removeShapImage").click(function(){
-    $("#imageWrapper").hide();
-    $("#user_image").attr("src","");
-    $('.photo-slider-wrp').show()
-
-})
-
-const resizeHandles = {
+        const resizeHandles = {
     topLeft: document.querySelector('.resize-handle.top-left'),
     topRight: document.querySelector('.resize-handle.top-right'),
     bottomLeft: document.querySelector('.resize-handle.bottom-left'),
@@ -1965,18 +2032,13 @@ const resizeHandles = {
     rightCenter: document.querySelector('.resize-handle.right-center')
 };
 
-
 let isDragging = false;
 let isResizing = false;
 let startWidth, startHeight, startX, startY, activeHandle;
 let offsetX, offsetY;
+let shape = 'rectangle'; // Default shape
 let shapeChangedDuringDrag = false; // Flag to track shape change
 let imageUploaded = false; // Flag to track if image has been uploaded
-
-document.addEventListener('mousemove', resize);
-document.addEventListener('mouseup', handleMouseUp);
-imageWrapper.addEventListener('mousedown', handleMouseDown);
-document.addEventListener('mousemove', handleMouseMove);
 
 function startResize(event, handle) {
     isResizing = true;
@@ -1989,7 +2051,6 @@ function startResize(event, handle) {
 }
 
 function resize(event) {
-
     if (isResizing) {
         let newWidth, newHeight;
 
@@ -2026,29 +2087,13 @@ function resize(event) {
     }
 }
 
-function handleMouseUp(event) {
-    if (event.target === userImageElement && !shapeChangedDuringDrag) {
-        // Cycle through shapes
-        const shapes = ['rectangle', 'circle', 'star', 'rounded-border', 'heart'];
-        const currentIndex = shapes.indexOf(shape);
-        shape = shapes[(currentIndex + 1) % shapes.length];
-        console.log(`Shape changed to: ${shape}`); // Log shape change
-
-        drawCanvas();
-    }
-
-    isDragging = false;
-    isResizing = false;
-}
-
 function handleMouseDown(event) {
-    // const canvas = document.querySelector('.new');
-    // const canvasRect = canvas.getBoundingClientRect();
+    const canvas = document.querySelector('.new');
+    const canvasRect = canvas.getBoundingClientRect();
 
     if (event.target.classList.contains('resize-handle')) {
         startResize(event, event.target);
     } else {
-        console.log(event);
         event.preventDefault(); // Prevent default behavior during dragging (text selection)
         isDragging = true;
         offsetX = event.clientX - imageWrapper.offsetLeft;
@@ -2059,8 +2104,7 @@ function handleMouseDown(event) {
 
 function handleMouseMove(event) {
     if (isDragging) {
-        console.log(canvas);
-        // const canvas = document.querySelector('.new');
+        const canvas = document.querySelector('.new');
         const canvasRect = canvas.getBoundingClientRect();
         let newX = event.clientX - offsetX;
         let newY = event.clientY - offsetY;
@@ -2080,6 +2124,52 @@ function handleMouseMove(event) {
         resize(event);
     }
 }
+
+
+        function handleMouseUp(event) {
+            if (event.target === userImageElement && !shapeChangedDuringDrag) {
+                // Cycle through shapes
+                const shapes = ['rectangle', 'circle', 'star', 'rounded-border', 'heart'];
+                const currentIndex = shapes.indexOf(shape);
+                shape = shapes[(currentIndex + 1) % shapes.length];
+                console.log(`Shape changed to: ${shape}`); // Log shape change
+
+                drawCanvas();
+            }
+
+            isDragging = false;
+            isResizing = false;
+        }
+
+        function drawCanvas() {
+            userImageElement.style.clipPath = '';
+
+            switch (shape) {
+                case 'rectangle':
+                    break;
+                case 'circle':
+                    userImageElement.style.clipPath = 'circle(50% at 50% 50%)';
+                    break;
+                case 'star':
+                    userImageElement.style.clipPath =
+                        'polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)';
+                    break;
+                case 'rounded-border':
+                    userImageElement.style.clipPath = 'inset(0 round 20px)';
+                    break;
+                case 'heart':
+                    userImageElement.style.clipPath = 'url(#heartClipPath)';
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        document.addEventListener('mousemove', resize);
+        document.addEventListener('mouseup', handleMouseUp);
+        imageWrapper.addEventListener('mousedown', handleMouseDown);
+        document.addEventListener('mousemove', handleMouseMove);
+    
 
 function getTextDataFromCanvas() {
     var objects = canvas.getObjects();
