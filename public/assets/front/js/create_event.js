@@ -415,7 +415,7 @@ $(function () {
     );
 
     $("#event-date").on('apply.daterangepicker', function(ev, picker) {
-        picker.show();
+        picker.hide();
         $('#event-date').next().addClass('floatingfocus');
     });
     $('#event-date').on('hide.daterangepicker', function(ev, picker) {
