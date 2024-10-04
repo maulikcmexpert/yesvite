@@ -174,6 +174,7 @@ const canvasElement = new fabric.Canvas('imageEditor', {
                                 cornerSize: 6,
                             });
 function updateClipPath(imageUrl, element) {
+    console.log(imageUrl)
     const imageWrapper = document.getElementById('imageWrapper');
    
     const imgElement = document.getElementById('user_image');
@@ -269,8 +270,8 @@ function updateClipPath(imageUrl, element) {
         $('.photo-slider-wrp').hide()
     };
 
-    imgElement.onerror = function () {
-        console.error("Failed to load image.");
+    imgElement.onerror = function (e) {
+        console.error("Failed to load image.",e);
     };
 }
 
@@ -1883,8 +1884,8 @@ function handleMouseMove(event) {
                         console.log('Server response:', data);
                         updatedOBJImage = {
                             shape: 'rectangle',
-                            centerX: 0,
-                            centerY: 0,
+                            centerX: 500,
+                            centerY: 500,
                             width: 100,
                             height: 100
                         };
