@@ -13029,7 +13029,9 @@ class ApiControllerv2 extends Controller
                 'template_id' => 'required|integer'
             ]);
             // Retrieve the text data by template ID
-            $textData = TextData::find($validatedData['template_id']);
+            $textData = TextData::where('id', $validatedData['template_id'])
+                ->where('static_information', '!=', null)
+                ->get();
             if (!$textData) {
                 return response()->json(['message' => 'Data not found'], 404);
             }
