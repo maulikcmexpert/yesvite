@@ -2126,6 +2126,7 @@ function handleMouseDown(event) {
 
 function handleMouseMove(event) {
     if (isDragging) {
+        console.log(canvas);
         // const canvas = document.querySelector('.new');
         const canvasRect = canvas.getBoundingClientRect();
         let newX = event.clientX - offsetX;
