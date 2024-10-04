@@ -13042,11 +13042,10 @@ class ApiControllerv2 extends Controller
             // $template_url  = url("assets/images/{$image}");
             $template_url = asset('storage/canvas/' . $image);
             $shape_img_url = asset('storage/canvas/' . $shape_image);
-            foreach ($resp['textElements'] as $k => $value) {
+            $udpated = $resp['textElements'];
+            foreach ($udpated as $k => $value) {
                 foreach ($value as $key => $val) {
-                    print_r($request->event_name);
-                    print_r($request);
-                    die;
+
                     switch ($val) {
                         case 'event_name':
                             if (!empty($request->event_name)) {
@@ -13103,7 +13102,7 @@ class ApiControllerv2 extends Controller
                 }
             }
             return response()->json([
-                'textData' => $resp['textElements'],
+                'textData' => $udpated,
                 'shapeImageData' => $resp['shapeImageData'],
                 'image' => $image,
                 'event_design_sub_category_id' => $design_id,
