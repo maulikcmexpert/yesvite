@@ -1752,7 +1752,7 @@ let updatedOBJImage = {
 
 let shape = 'rectangle'; // Default shape
 
-const canvasElement = new fabric.Canvas('imageEditor', {
+const canvasElement2 = new fabric.Canvas('imageEditor', {
     width: 500, // Canvas width
     height: 500, // Canvas height
     cornerSize: 6,
@@ -1777,14 +1777,14 @@ function updateClipPath(imageUrl, element,modal =null) {
 
     // If a current image exists on canvas, remove it
     if (currentImage) {
-        canvasElement.remove(currentImage);
+        canvasElement2.remove(currentImage);
     }
 
     // Handle previous image and trash icon
     if (oldImage != null) {
-        canvasElement.remove(oldImage.trashIcon);
+        canvasElement2.remove(oldImage.trashIcon);
         oldImage.trashIcon = null;
-        canvasElement.renderAll();
+        canvasElement2.renderAll();
     }
 
     imageWrapper.style.display = 'block';
@@ -1814,12 +1814,12 @@ function updateClipPath(imageUrl, element,modal =null) {
             cornerStyle: 'circle',
         });
         shape = element.shape;
-        canvasElement.add(imgInstance);
+        canvasElement2.add(imgInstance);
         // addIconsToImage(imgInstance);
         drawCanvas();
         
         // Refresh canvas
-        canvasElement.renderAll();
+        canvasElement2.renderAll();
 
         // Update the image with the shape based on the provided element data
         if (element.shape) {
@@ -1939,7 +1939,7 @@ function applyClipPath(image, element) {
         clipPath: clipPath
     });
 
-    canvasElement.renderAll();
+    canvasElement2.renderAll();
 }
 
 
