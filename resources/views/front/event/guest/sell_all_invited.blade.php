@@ -1,4 +1,3 @@
-{{dd($userEntry)}}
 @foreach ( $data as $guest_user)
 {{-- @php
     if($guest_user['is_duplicate'] == 1){
@@ -6,7 +5,7 @@
     }
 @endphp --}}
 @if($guest_user['prefer_by']=="email")
-<div class="users-data invited_user_see_all" data-id={{$guest_user['id']}} id="user-{{$guest_user['id']}}">
+<div class="users-data invited_use_see_all" data-id={{$guest_user['id']}} id="user-{{$guest_user['id']}}">
     {{-- <input type="hidden" class="duplicate" value="{{$is_duplicate}}"/> --}}
     <div class="d-flex align-items-start">
         <div class="contact-img">

@@ -5306,9 +5306,9 @@ $(document).on('click','.all_user_list',function(){
         url: base_url+"event/see_all",
         method: "POST",
         success: function (response) {
-            // console.log(response);
+            console.log(response);
             $('.see-all-invite-member-wrp').empty();
-            $('.see-all-invite-member-wrp').html(response);
+            $('.see-all-invite-member-wrp').html(response.view);
             toggleSidebar('sidebar_see_all_invite');
 
         },

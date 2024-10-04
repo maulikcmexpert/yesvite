@@ -5,7 +5,7 @@ var base_url = $("#base_url").text();
 var canvas;
 var shapeImageUrl = null;
 var userImageElement;
-var imageWrapper;
+
 $(document).on("click", ".design-card", function () {
     var url = $(this).data("url");
     var template = $(this).data("template");
@@ -1762,15 +1762,18 @@ const canvasElement2 = new fabric.Canvas('imageEditor', {
 
 function updateClipPath(imageUrl, element,modal =null) {
     var imgElement;
-    var imageWrapper;
+    const imageWrapper = document.getElementById('imageWrapper');
+    var canvasEL;
     if(modal){
         console.log(modal);
-        imageWrapper = document.getElementById('imageWrapper2');
+      
         imgElement = document.getElementById('user_image2');
+        canvasEL = document.getElementById('imageEditor2')
         console.log(imgElement)
     }else{
-        imageWrapper = document.getElementById('imageWrapper');
+        
         imgElement = document.getElementById('user_image');
+        canvasEL = document.getElementById('imageEditor1')
         console.log(imgElement);
     }
      imgElement.src = imageUrl;
@@ -1786,7 +1789,6 @@ function updateClipPath(imageUrl, element,modal =null) {
         oldImage.trashIcon = null;
         canvasElement2.renderAll();
     }
-    let canvasEL = document.getElementById('imageEditor1')
     const canvasRect = canvasEL.getBoundingClientRect();
 
     imageWrapper.style.display = 'block';
@@ -1966,6 +1968,16 @@ document.addEventListener('mouseup', handleMouseUp);
 imageWrapper.addEventListener('mousedown', handleMouseDown);
 document.addEventListener('mousemove', handleMouseMove);
 
+function startResize(event, handle) {
+    isResizing = true;
+    startWidth = userImageElement.clientWidth;
+    startHeight = userImageElement.clientHeight;
+    startX = event.clientX;
+    startY = event.clientY;
+    activeHandle = handle;
+    event.stopPropagation();
+}
+
 function resize(event) {
 
     if (isResizing) {
@@ -2026,6 +2038,7 @@ function handleMouseDown(event) {
     if (event.target.classList.contains('resize-handle')) {
         startResize(event, event.target);
     } else {
+        console.log(event);
         event.preventDefault(); // Prevent default behavior during dragging (text selection)
         isDragging = true;
         offsetX = event.clientX - imageWrapper.offsetLeft;
