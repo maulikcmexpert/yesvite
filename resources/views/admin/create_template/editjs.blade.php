@@ -1427,7 +1427,7 @@ $(".removeShapImage").click(function(){
                 .then(response => response.json())
                 .then(data => {
                     console.log('Text data saved successfully', data);
-                    window.location.href = "{{URL::to('/admin/create_template')}}";
+                    // window.location.href = "{{URL::to('/admin/create_template')}}";
 
                 })
                 .catch((error) => {
@@ -1696,7 +1696,7 @@ $(".removeShapImage").click(function(){
             ob.objects = ob.objects.filter(obj => obj.type !== 'group');
             ob.objects.forEach(obj => {
             console.log(obj);
-
+            // obj.borderColor
             // Check if obj is a fabric object by checking for the existence of 'set' method
             if (typeof obj.set === 'function') {
                 // Update border and corner styling
