@@ -23,7 +23,6 @@
         <div class="image-edit-section-wrp">
             <div class="image-edit-inner-img">
                 <div class="canvas-container" id="border">
-
                     <input type="file" id="image" accept="image/*" style="display: none" />
                     <canvas id="imageEditor1" class="canvas new"></canvas>
                 </div>
