@@ -1968,6 +1968,16 @@ document.addEventListener('mouseup', handleMouseUp);
 imageWrapper.addEventListener('mousedown', handleMouseDown);
 document.addEventListener('mousemove', handleMouseMove);
 
+function startResize(event, handle) {
+    isResizing = true;
+    startWidth = userImageElement.clientWidth;
+    startHeight = userImageElement.clientHeight;
+    startX = event.clientX;
+    startY = event.clientY;
+    activeHandle = handle;
+    event.stopPropagation();
+}
+
 function resize(event) {
 
     if (isResizing) {
