@@ -4,7 +4,6 @@ var image = null;
 var base_url = $("#base_url").text();
 var canvas;
 var shapeImageUrl;
-const userImageElement = document.getElementById('user_image');
 $(document).on("click", ".design-card", function () {
     var url = $(this).data("url");
     var template = $(this).data("template");
@@ -1856,6 +1855,7 @@ const canvasElement = new fabric.Canvas('imageEditor', {
     height: 500, // Canvas height
     cornerSize: 6,
 });
+const userImageElement = document.getElementById('user_image');
 function updateClipPath(imageUrl, element) {
     const imageWrapper = document.getElementById('imageWrapper');
     const imgElement = document.getElementById('user_image');
@@ -2146,8 +2146,7 @@ function handleMouseMove(event) {
         }
 
         function drawCanvas() {
-            console.log({userImageElement})
-            userImageElement?.style?.clipPath = '';
+            userImageElement.style.clipPath = '';
 
             switch (shape) {
                 case 'rectangle':
