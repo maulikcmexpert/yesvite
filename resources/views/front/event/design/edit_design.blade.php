@@ -664,12 +664,12 @@
                         Font Color
                     </label>
                 </div>
-                <div class="form-check">
+                {{-- <div class="form-check">
                     <input type="radio" name="colorType" value="background" class="form-check-input colorTypeInp" id="flexRadioDefaultss"/>
                     <label class="form-check-label" for="flexRadioDefaultss">
                         Background Color
                     </label>
-                </div>
+                </div> --}}
             </div>
 
             <!-- Color Picker -->
