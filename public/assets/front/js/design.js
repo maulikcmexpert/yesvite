@@ -3,7 +3,7 @@ var temp_id = null;
 var image = null;
 var base_url = $("#base_url").text();
 var canvas;
-var shapeImageUrl = null;
+var shapeImageUrl;
 $(document).on("click", ".design-card", function () {
     var url = $(this).data("url");
     var template = $(this).data("template");
@@ -276,12 +276,10 @@ $(document).on("click", ".design-card", function () {
 
     // Load filed image (filedImagePath) as another image layer
     if (shapeImageUrl) {
-        staticInfo?.shapeImageData?.forEach(element => {
-            if (element.shape && element.centerX && element.centerY && element.height && element.width) {
-                $('.resize-handle').hide();
-                updateClipPath(shapeImageUrl, element);
-            }
-        });
+        let element = staticInfo?.shapeImageData;
+        if (element.shape && element.centerX && element.centerY && element.height && element.width) {
+            updateClipPath(shapeImageUrl, element);
+        }
     }
 
 });
@@ -516,6 +514,31 @@ function bindData() {
                       ctx.restore();
                     }
 
+                    // textElement.controls.mt = new fabric.Control({
+                    //     x: 0.5, // Right side
+                    //     y: 0,
+                    //     offsetX: 0,
+                    //     offsetY: 0,
+                    //     cursorStyle: 'e-resize',
+                    //     actionHandler: fabric.controlsUtils.scalingX,
+                    //     render: function(ctx, left, top, styleOverride, fabricObject) {
+                    //         ctx.fillStyle = 'white'; // Rectangle color
+                    //         ctx.fillRect(left - 2, top - 7, 4, 8); // Draw a rectangle control for 'mr'
+                    //     }
+                    // });
+
+                    // textElement.controls.mb = new fabric.Control({
+                    //     x: 0.5, // Right side
+                    //     y: 0,
+                    //     offsetX: 0,
+                    //     offsetY: 0,
+                    //     cursorStyle: 'e-resize',
+                    //     actionHandler: fabric.controlsUtils.scalingX,
+                    //     render: function(ctx, left, top, styleOverride, fabricObject) {
+                    //         ctx.fillStyle = 'white'; // Rectangle color
+                    //         ctx.fillRect(left - 2, top - 7, 4, 8); // Draw a rectangle control for 'mr'
+                    //     }
+                    // });
 
 
                     switch (element.text) {
@@ -1845,25 +1868,13 @@ let currentImage = null;
 let isImageDragging = false; // Track if the image is being dragged
 let isimageoncanvas = false;
 let oldImage = null;
-let updatedOBJImage = {
-    shape: 'rectangle',
-    centerX: 0,
-    centerY: 0,
-    width: 100,
-    height: 100
-};
-const userImageElement = document.getElementById('user_image');
-const imageWrapper = document.getElementById('imageWrapper');
-let shape = 'rectangle'; // Default shape
-
 const canvasElement = new fabric.Canvas('imageEditor', {
     width: 500, // Canvas width
     height: 500, // Canvas height
     cornerSize: 6,
 });
-
 function updateClipPath(imageUrl, element) {
-    console.log(element)
+    console.log(imageUrl)
     const imageWrapper = document.getElementById('imageWrapper');
    
     const imgElement = document.getElementById('user_image');
@@ -1884,8 +1895,21 @@ function updateClipPath(imageUrl, element) {
     imageWrapper.style.display = 'block';
     // imageWrapper.style.left = element.left;
     // imageWrapper.style.top = element.top;
-    let left = element.centerX!=undefined?`${element.centerX - (element.width / 2)}px`:'50%';
-    let top = element.centerX!=undefined?`${element.centerY - (element.height / 2)}px`:'50%';
+
+    let canvasEL = document.getElementById('imageEditor1')
+    const canvasRect = canvasEL.getBoundingClientRect();
+
+    console.log(canvasRect.left)
+    console.log(canvasRect.top)
+    console.log(element.centerX)
+    console.log(element.centerY)
+    console.log(element.height)
+    console.log(element.height)
+    
+    let left = element.centerX !== undefined ? `${element.centerX  + canvasRect.left}px` : '50%';
+    let top = element.centerY !== undefined ? `${element.centerY + canvasRect.top}px` : '50%';
+    console.log({left})
+    console.log({top})
 
     // Set the calculated position to imageWrapper
     imageWrapper.style.left = left;
@@ -1964,30 +1988,6 @@ function updateClipPath(imageUrl, element) {
     };
 }
 
-function drawCanvas() {
-    userImageElement.style.clipPath = '';
-
-    switch (shape) {
-        case 'rectangle':
-            break;
-        case 'circle':
-            userImageElement.style.clipPath = 'circle(50% at 50% 50%)';
-            break;
-        case 'star':
-            userImageElement.style.clipPath =
-                'polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)';
-            break;
-        case 'rounded-border':
-            userImageElement.style.clipPath = 'inset(0 round 20px)';
-            break;
-        case 'heart':
-            userImageElement.style.clipPath = 'url(#heartClipPath)';
-            break;
-        default:
-            break;
-    }
-}
-
 // Helper function to apply clip path based on shape
 function applyClipPath(image, element) {
     const containerWidth = 150;
@@ -2036,13 +2036,161 @@ function applyClipPath(image, element) {
     canvasElement.renderAll();
 }
 
+const userImageElement = document.getElementById('user_image');
+        const imageWrapper = document.getElementById('imageWrapper');
+        // const canvasElement = new fabric.Canvas('imageEditor', {
+        //     width: 500, // Canvas width
+        //     height: 500, // Canvas height
+        // });
 
-$(".removeShapImage").click(function(){
-    $("#imageWrapper").hide();
-    $("#user_image").attr("src","");
-    $('.photo-slider-wrp').show()
+        const resizeHandles = {
+    topLeft: document.querySelector('.resize-handle.top-left'),
+    topRight: document.querySelector('.resize-handle.top-right'),
+    bottomLeft: document.querySelector('.resize-handle.bottom-left'),
+    bottomRight: document.querySelector('.resize-handle.bottom-right'),
+    topCenter: document.querySelector('.resize-handle.top-center'),
+    bottomCenter: document.querySelector('.resize-handle.bottom-center'),
+    leftCenter: document.querySelector('.resize-handle.left-center'),
+    rightCenter: document.querySelector('.resize-handle.right-center')
+};
 
-})
+let isDragging = false;
+let isResizing = false;
+let startWidth, startHeight, startX, startY, activeHandle;
+let offsetX, offsetY;
+let shape = 'rectangle'; // Default shape
+let shapeChangedDuringDrag = false; // Flag to track shape change
+let imageUploaded = false; // Flag to track if image has been uploaded
+
+function startResize(event, handle) {
+    isResizing = true;
+    startWidth = userImageElement.clientWidth;
+    startHeight = userImageElement.clientHeight;
+    startX = event.clientX;
+    startY = event.clientY;
+    activeHandle = handle;
+    event.stopPropagation();
+}
+
+function resize(event) {
+    if (isResizing) {
+        let newWidth, newHeight;
+
+        if (activeHandle === resizeHandles.bottomRight) {
+            newWidth = startWidth + (event.clientX - startX);
+            newHeight = startHeight + (event.clientY - startY);
+        } else if (activeHandle === resizeHandles.bottomLeft) {
+            newWidth = startWidth - (event.clientX - startX);
+            newHeight = startHeight + (event.clientY - startY);
+            imageWrapper.style.left = `${event.clientX}px`;
+        } else if (activeHandle === resizeHandles.topRight) {
+            newWidth = startWidth + (event.clientX - startX);
+            newHeight = startHeight - (event.clientY - startY);
+            imageWrapper.style.top = `${event.clientY}px`;
+        } else if (activeHandle === resizeHandles.topLeft) {
+            newWidth = startWidth - (event.clientX - startX);
+            newHeight = startHeight - (event.clientY - startY);
+            imageWrapper.style.left = `${event.clientX}px`;
+            imageWrapper.style.top = `${event.clientY}px`;
+        } else if (activeHandle === resizeHandles.topCenter) {
+            newHeight = startHeight - (event.clientY - startY);
+            imageWrapper.style.top = `${event.clientY}px`;
+        } else if (activeHandle === resizeHandles.bottomCenter) {
+            newHeight = startHeight + (event.clientY - startY);
+        } else if (activeHandle === resizeHandles.leftCenter) {
+            newWidth = startWidth - (event.clientX - startX);
+            imageWrapper.style.left = `${event.clientX}px`;
+        } else if (activeHandle === resizeHandles.rightCenter) {
+            newWidth = startWidth + (event.clientX - startX);
+        }
+
+        if (newWidth) userImageElement.style.width = `${newWidth}px`;
+        if (newHeight) userImageElement.style.height = `${newHeight}px`;
+    }
+}
+
+function handleMouseDown(event) {
+    const canvas = document.querySelector('.new');
+    const canvasRect = canvas.getBoundingClientRect();
+
+    if (event.target.classList.contains('resize-handle')) {
+        startResize(event, event.target);
+    } else {
+        event.preventDefault(); // Prevent default behavior during dragging (text selection)
+        isDragging = true;
+        offsetX = event.clientX - imageWrapper.offsetLeft;
+        offsetY = event.clientY - imageWrapper.offsetTop;
+        shapeChangedDuringDrag = false; // Reset flag on new drag start
+    }
+}
+
+function handleMouseMove(event) {
+    if (isDragging) {
+        const canvas = document.querySelector('.new');
+        const canvasRect = canvas.getBoundingClientRect();
+        let newX = event.clientX - offsetX;
+        let newY = event.clientY - offsetY;
+
+        // Ensure the image stays within the canvas boundaries
+        if (newX < canvasRect.left) newX = canvasRect.left;
+        if (newX + userImageElement.clientWidth > canvasRect.right)
+            newX = canvasRect.right - userImageElement.clientWidth;
+        if (newY < canvasRect.top) newY = canvasRect.top;
+        if (newY + userImageElement.clientHeight > canvasRect.bottom)
+            newY = canvasRect.bottom - userImageElement.clientHeight;
+
+        imageWrapper.style.left = `${newX}px`;
+        imageWrapper.style.top = `${newY}px`;
+        shapeChangedDuringDrag = true; // Set flag if dragging occurs
+    } else if (isResizing) {
+        resize(event);
+    }
+}
+
+
+        function handleMouseUp(event) {
+            if (event.target === userImageElement && !shapeChangedDuringDrag) {
+                // Cycle through shapes
+                const shapes = ['rectangle', 'circle', 'star', 'rounded-border', 'heart'];
+                const currentIndex = shapes.indexOf(shape);
+                shape = shapes[(currentIndex + 1) % shapes.length];
+                console.log(`Shape changed to: ${shape}`); // Log shape change
+
+                drawCanvas();
+            }
+
+            isDragging = false;
+            isResizing = false;
+        }
+
+        function drawCanvas() {
+            userImageElement.style.clipPath = '';
+
+            switch (shape) {
+                case 'rectangle':
+                    break;
+                case 'circle':
+                    userImageElement.style.clipPath = 'circle(50% at 50% 50%)';
+                    break;
+                case 'star':
+                    userImageElement.style.clipPath =
+                        'polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)';
+                    break;
+                case 'rounded-border':
+                    userImageElement.style.clipPath = 'inset(0 round 20px)';
+                    break;
+                case 'heart':
+                    userImageElement.style.clipPath = 'url(#heartClipPath)';
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        document.addEventListener('mousemove', resize);
+        document.addEventListener('mouseup', handleMouseUp);
+        imageWrapper.addEventListener('mousedown', handleMouseDown);
+        document.addEventListener('mousemove', handleMouseMove);
     
 
 function getTextDataFromCanvas() {
