@@ -2094,6 +2094,8 @@ function bindData() {
 
     function resize(event) {
         if (isResizing) {
+        const userImageElement = document.getElementById('user_image');
+
             let newWidth, newHeight;
 
             if (activeHandle === resizeHandles.bottomRight) {
