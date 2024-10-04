@@ -4,8 +4,8 @@ var image = null;
 var base_url = $("#base_url").text();
 var canvas;
 var shapeImageUrl = null;
-var userImageElement; = document.getElementById('user_image');
-var imageWrapper; = document.getElementById('imageWrapper');
+var userImageElement;
+var imageWrapper;
 $(document).on("click", ".design-card", function () {
     var url = $(this).data("url");
     var template = $(this).data("template");
