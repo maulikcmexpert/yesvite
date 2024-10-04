@@ -191,6 +191,8 @@ function updateClipPath(imageUrl, element) {
         canvasElement.renderAll();
     }
     imageWrapper.style.display = 'block';
+    imageWrapper.style.left = element.centerX;
+    imageWrapper.style.top = element.centerY;
 
     
     imgElement.onload = function () {
