@@ -2111,7 +2111,7 @@ function handleMouseUp(event) {
 
 function handleMouseDown(event) {
     const canvas = document.querySelector('.new');
-    const canvasRect = canvas.getBoundingClientRect();
+    // const canvasRect = canvas.getBoundingClientRect();
 
     if (event.target.classList.contains('resize-handle')) {
         startResize(event, event.target);
