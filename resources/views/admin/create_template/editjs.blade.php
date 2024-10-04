@@ -1379,7 +1379,7 @@ $(".removeShapImage").click(function(){
             $('.removeShapImage').hide();
             const imageWrapperRect = imageWrapper.getBoundingClientRect();
             var id = $('#template_id').val();
-            const width = userImageElement.clientWidth - 15;
+            const width = parseInt(userImageElement.clientWidth) - 15;
             const height = userImageElement.clientHeight;
             const left = imageWrapperRect.left - canvasRect.left;
             const top = imageWrapperRect.top - canvasRect.top;
