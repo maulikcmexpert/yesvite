@@ -3,12 +3,12 @@ var temp_id = null;
 var image = null;
 var base_url = $("#base_url").text();
 var canvas;
-
+var shapeImageUrl;
 $(document).on("click", ".design-card", function () {
     var url = $(this).data("url");
     var template = $(this).data("template");
     var imageUrl = $(this).data("image");
-    var shapeImageUrl = $(this).data('shape_image');
+    shapeImageUrl = $(this).data('shape_image');
     var json = $(this).data("json");
     console.log(json);
     var id = $(this).data("id");
