@@ -196,8 +196,13 @@ function updateClipPath(imageUrl, element) {
     imageWrapper.style.display = 'block';
     // imageWrapper.style.left = element.left;
     // imageWrapper.style.top = element.top;
-    let left = element.centerX!=undefined?`${element.centerX - (element.width / 2)}px`:'50%';
-    let top = element.centerX!=undefined?`${element.centerY - (element.height / 2)}px`:'50%';
+
+
+    const canvasRect = canvasElement.getBoundingClientRect();
+
+
+    let left = element.centerX!=undefined?`${element.centerX - (element.width / 2) + canvasRect.left}px`:'50%';
+    let top = element.centerX!=undefined?`${element.centerY - (element.height / 2) + canvasRect.top}px`:'50%';
 
     // Set the calculated position to imageWrapper
     imageWrapper.style.left = left;
