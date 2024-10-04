@@ -1704,6 +1704,10 @@ $(".removeShapImage").click(function(){
         const resizeHandles = {
             topLeft: document.querySelector('.resize-handle.top-left'),
             topRight: document.querySelector('.resize-handle.top-right'),
+            topCenter: document.querySelector('.resize-handle.top-center'),
+            leftCenter: document.querySelector('.resize-handle.left-center'),
+            rightCenter: document.querySelector('.resize-handle.right-center'),
+            bottomCenter: document.querySelector('.resize-handle.bottom-center'),
             bottomLeft: document.querySelector('.resize-handle.bottom-left'),
             bottomRight: document.querySelector('.resize-handle.bottom-right')
         };
