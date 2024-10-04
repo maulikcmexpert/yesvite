@@ -1847,7 +1847,7 @@ function handleMouseMove(event) {
         function handleMouseUp(event) {
             if (event.target === userImageElement && !shapeChangedDuringDrag) {
                 // Cycle through shapes
-                const shapes = ['rectangle', 'circle', 'star', 'rounded-border', 'heart','triangle','square','oval'];
+                const shapes = ['rectangle', 'circle', 'star', 'rounded-border', 'heart'];
                 const currentIndex = shapes.indexOf(shape);
                 shape = shapes[(currentIndex + 1) % shapes.length];
                 console.log(`Shape changed to: ${shape}`); // Log shape change
