@@ -1828,7 +1828,6 @@ function resize(event) {
 }
 
 function handleMouseDown(event) {
-    alert(0)
     const canvas = document.querySelector('.new');
     const canvasRect = canvas.getBoundingClientRect();
 
@@ -1970,10 +1969,7 @@ function handleMouseMove(event) {
 
         document.addEventListener('mousemove', resize);
         document.addEventListener('mouseup', handleMouseUp);
-        // imageWrapper.addEventListener('mousedown', handleMouseDown);
-        let iw = document.getElementById('imageWrapper')
-        console.log({iw})
-        $(iw).on('mousedown', handleMouseDown);
+        imageWrapper.addEventListener('mousedown', handleMouseDown);        
         document.addEventListener('mousemove', handleMouseMove);
      
 
