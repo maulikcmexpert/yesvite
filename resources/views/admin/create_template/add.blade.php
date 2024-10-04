@@ -42,7 +42,7 @@
 
                             <select class="form-control design_id" id="event_design_category_id" name="event_design_category_id">
 
-                                <option value="">Select Design</option>
+                                <option value="">Select Category</option>
 
                                 @foreach($getDesignData as $cat)
 

@@ -93,12 +93,12 @@
                     <p>Sub Category</p>
                   </a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                   <a href="{{URL::to('/admin/design_style')}}" class="nav-link {{ (Request::segment(2) == 'design_style')? 'active':'' }}">
                     <span class="dot"></span>
                     <p>Design Style</p>
                   </a>
-                </li>
+                </li> -->
                 <li class="nav-item">
                   <a href="{{URL::to('/admin/create_template')}}" class="nav-link {{ (Request::segment(2) == 'create_template')? 'active':'' }}">
                     <span class="dot"></span>

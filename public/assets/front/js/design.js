@@ -2026,16 +2026,16 @@ function applyClipPath(image, element) {
         //     height: 500, // Canvas height
         // });
 
-        const resizeHandles = {
-            topLeft: document.querySelector('.resize-handle.top-left'),
-            topRight: document.querySelector('.resize-handle.top-right'),
-            bottomLeft: document.querySelector('.resize-handle.bottom-left'),
-            bottomRight: document.querySelector('.resize-handle.bottom-right'),
-            topCenter: document.querySelector('.resize-handle.top-center'),
-            bottomCenter: document.querySelector('.resize-handle.bottom-center'),
-            leftCenter: document.querySelector('.resize-handle.left-center'),
-            rightCenter: document.querySelector('.resize-handle.right-center')
-        };
+const resizeHandles = {
+    topLeft: document.querySelector('.resize-handle.top-left'),
+    topRight: document.querySelector('.resize-handle.top-right'),
+    bottomLeft: document.querySelector('.resize-handle.bottom-left'),
+    bottomRight: document.querySelector('.resize-handle.bottom-right'),
+    topCenter: document.querySelector('.resize-handle.top-center'),
+    bottomCenter: document.querySelector('.resize-handle.bottom-center'),
+    leftCenter: document.querySelector('.resize-handle.left-center'),
+    rightCenter: document.querySelector('.resize-handle.right-center')
+};
 
 let isDragging = false;
 let isResizing = false;
@@ -2175,16 +2175,12 @@ function drawCanvas() {
     }
 }
 
-Object.values(resizeHandles).forEach(handle => {
-    handle.addEventListener('mousedown', function(event) {
-        startResize(event, handle);
-    });
-});
 
-        document.addEventListener('mousemove', resize);
-        document.addEventListener('mouseup', handleMouseUp);
-        imageWrapper.addEventListener('mousedown', handleMouseDown);
-        document.addEventListener('mousemove', handleMouseMove);
+
+imageWrapper.addEventListener('mousemove', resize);
+imageWrapper.addEventListener('mouseup', handleMouseUp);
+document.addEventListener('mouseup', handleMouseUp);
+imageWrapper.addEventListener('mousemove', handleMouseMove);
     
 
 function getTextDataFromCanvas() {
