@@ -692,7 +692,7 @@
 .resize-handle {
     width: 10px;
     height: 10px;
-    background-color: red;
+    background-color: white;
     position: absolute;
     cursor: se-resize;
 }
@@ -719,6 +719,37 @@
     bottom: -5px;
     right: -5px;
     cursor: nwse-resize;
+}
+/* Left-center handle */
+.resize-handle.left-center {
+    left: -5px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: ew-resize;
+}
+
+/* Right-center handle */
+.resize-handle.right-center {
+    right: -5px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: ew-resize;
+}
+
+/* Top-center handle */
+.resize-handle.top-center {
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: ns-resize;
+}
+
+/* Bottom-center handle */
+.resize-handle.bottom-center {
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: ns-resize;
 }
 
 @media only screen and (max-width: 1199px) {
