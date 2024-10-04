@@ -1178,8 +1178,8 @@
 
 @media only screen and (min-width: 1800px) and (max-width: 3000px) {
     .image-edit-inner-img {
-        width: 460px;
-        height: 55\0px;
+        width: 345px;
+        height: 490px;
         margin: 0px auto;
     }
 }
@@ -1187,7 +1187,7 @@
 
 @media only screen and (min-width: 1600px) and (max-width: 1799px) {
     .image-edit-inner-img {
-        width: 380px;
+        width: 345px;
         height: 460px;
         margin: 0px auto;
     }
