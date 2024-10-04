@@ -2094,8 +2094,8 @@ function resize(event) {
 
 function handleMouseDown(event) {
     console.log(event);
-    const canvas = document.querySelector('.new');
-    const canvasRect = canvas.getBoundingClientRect();
+    
+     canvasRect = canvas.getBoundingClientRect();
 
     if (event.target.classList.contains('resize-handle')) {
         startResize(event, event.target);
@@ -2111,7 +2111,7 @@ function handleMouseDown(event) {
 function handleMouseMove(event) {
     console.log(event);
     if (isDragging) {
-        const canvas = document.querySelector('.new');
+        
         const canvasRect = canvas.getBoundingClientRect();
         let newX = event.clientX - offsetX;
         let newY = event.clientY - offsetY;
