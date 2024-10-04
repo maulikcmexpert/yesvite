@@ -1,16 +1,16 @@
 @foreach ($users as $user )
 @php
 if ($user->email_verified_at == NULL && $user->app_user == '1'){
-    continue;
+continue;
 }
 $email_checked = '';
 $phone_checked = '';
 if($selected_co_host == $user->id){
-    if($selected_co_host_prefer_by == 'email'){
-        $email_checked = 'checked'; 
-    }elseif ($selected_co_host_prefer_by == 'phone') {
-        $phone_checked = 'checked'; 
-    }
+if($selected_co_host_prefer_by == 'email'){
+$email_checked = 'checked';
+}elseif ($selected_co_host_prefer_by == 'phone') {
+$phone_checked = 'checked';
+}
 }
 @endphp
 
@@ -18,17 +18,17 @@ if($selected_co_host == $user->id){
     <div class="d-flex align-items-start">
         <div class="contact-img">
             @php
-                $profile_photo = '';
-                $photo_text = '';
-                $firstInitial = !empty($user->firstname) ? strtoupper($user->firstname[0]) : '';
-                $lastInitial = !empty($user->lastname) ? strtoupper($user->lastname[0]) : '';
-                $initials = $firstInitial . $lastInitial;
+            $profile_photo = '';
+            $photo_text = '';
+            $firstInitial = !empty($user->firstname) ? strtoupper($user->firstname[0]) : '';
+            $lastInitial = !empty($user->lastname) ? strtoupper($user->lastname[0]) : '';
+            $initials = $firstInitial . $lastInitial;
             @endphp
             @if ($user->profile != '')
             <img src="{{asset('storage/profile/' .$user->profile)}}" alt="user-img">
-            @php 
-                $profile_photo = asset('storage/profile/' .$user->profile);
-                $photo_text = 1;
+            @php
+            $profile_photo = asset('storage/profile/' .$user->profile);
+            $photo_text = 1;
             @endphp
             @else
             @php
@@ -39,13 +39,13 @@ if($selected_co_host == $user->id){
             @endphp
             <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
             @php
-                $profile_photo = '<h5 class="'.$fontColor.' add-item-under-text">'.$initials.'</h5>';
-                $photo_text = 0;
+            $profile_photo = '<h5 class="'.$fontColor.' add-item-under-text">'.$initials.'</h5>';
+            $photo_text = 0;
             @endphp
             @endif
 
         </div>
-        <div class="text-start">
+        <!-- <div class="text-start">
             <h5>{{ $user->firstname }}
                 {{ $user->lastname }}
             </h5>
@@ -81,20 +81,20 @@ if($selected_co_host == $user->id){
             </div>
             @endif
 
-        </div>
+        </div> -->
     </div>
-    <div class="d-flex flex-column user_choice_group" data-id="user-{{$user->id}}">
+    <!-- <div class="d-flex flex-column user_choice_group" data-id="user-{{$user->id}}">
         @if(isset($user->email)&&$user->email!="")
         <div class="right-note d-flex mb-2">
             @if (isset($user->app_user) && $user->app_user == '1')
             <span>Member</span>
             <span class="mx-3">
                 <img src="{{ asset('assets/event/image/small-logo.svg') }}"
-                alt="logo">
+                    alt="logo">
             </span>
             @endif
             <input class="form-check-input user-{{$user->id}} user_choice" type="checkbox"
-                name="guest_list[]" data-id="user-{{$user->id}}" data-username="{{ $user->firstname }} {{ $user->lastname }}" data-profile_or_text ="{{$photo_text}}" data-profile="{{ $profile_photo }}" data-email="{{ $user->email }}"
+                name="guest_list[]" data-id="user-{{$user->id}}" data-username="{{ $user->firstname }} {{ $user->lastname }}" data-profile_or_text="{{$photo_text}}" data-profile="{{ $profile_photo }}" data-email="{{ $user->email }}"
                 value="{{ $user->id }}" data-prefer_by="email" data-initial="{{$initials}}" {{$email_checked}}>
         </div>
         @endif
@@ -103,10 +103,10 @@ if($selected_co_host == $user->id){
             <input class="form-check-input user_tel-{{$user->id}} user_choice" type="checkbox"
                 name="guest_list[]" data-mobile="{{$user->phone_number}}" data-prefer_by="phone"
                 data-username="{{ $user->firstname }} {{ $user->lastname }}" data-initial="{{$initials}}"
-                data-profile_or_text ="{{$photo_text}}" data-profile="{{ $profile_photo }}"
-                value="{{ $user->id }}" {{$phone_checked}} >
+                data-profile_or_text="{{$photo_text}}" data-profile="{{ $profile_photo }}"
+                value="{{ $user->id }}" {{$phone_checked}}>
         </div>
         @endif
-    </div>
+    </div> -->
 </div>
 @endforeach
