@@ -1228,6 +1228,7 @@
         height: 90% !important;
         bottom: 0;
         left: 0;
+        z-index: 10;
     }
 
     .edit-image-main-wrp {
