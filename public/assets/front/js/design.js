@@ -165,7 +165,7 @@ $(document).on("click", ".design-card", function () {
         textElement.set({ width: textWidth });
         canvas.add(textElement);
     });
-    var shape = '';
+    
     if (dbJson) {
         // const staticInfo = dbJson;
         // staticInfo?.shapeImageData?.forEach(element => {
