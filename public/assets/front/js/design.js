@@ -5,7 +5,6 @@ var base_url = $("#base_url").text();
 var canvas;
 var shapeImageUrl = null;
 var userImageElement;
-var imageWrapper;
 $(document).on("click", ".design-card", function () {
     var url = $(this).data("url");
     var template = $(this).data("template");
@@ -172,7 +171,6 @@ $(document).on("click", ".design-card", function () {
             if (element.shape && element.centerX && element.centerY && element.height && element.width) {
                 $('.resize-handle').hide();
                 userImageElement = document.getElementById('user_image2');
-                imageWrapper = document.getElementById('imageWrapper2');
                 updateClipPath(shapeImageUrl, element,'modal');
             }
     }
@@ -522,7 +520,6 @@ function bindData() {
                     let element = staticInfo?.shapeImageData;
                         if (element.shape && element.centerX && element.centerY && element.height && element.width) {
                             userImageElement = document.getElementById('user_image');
-                            imageWrapper = document.getElementById('imageWrapper');
                             updateClipPath(shapeImageUrl, element);
                         }
                     
@@ -1978,7 +1975,7 @@ let imageUploaded = false; // Flag to track if image has been uploaded
 
 document.addEventListener('mousemove', resize);
 document.addEventListener('mouseup', handleMouseUp);
-imageWrapper.addEventListener('mousedown', handleMouseDown);
+imageWrapper?.addEventListener('mousedown', handleMouseDown);
 document.addEventListener('mousemove', handleMouseMove);
 
 function startResize(event, handle) {
@@ -2002,24 +1999,24 @@ function resize(event) {
         } else if (activeHandle === resizeHandles.bottomLeft) {
             newWidth = startWidth - (event.clientX - startX);
             newHeight = startHeight + (event.clientY - startY);
-            imageWrapper.style.left = `${event.clientX}px`;
+            imageWrapper?.style.left = `${event.clientX}px`;
         } else if (activeHandle === resizeHandles.topRight) {
             newWidth = startWidth + (event.clientX - startX);
             newHeight = startHeight - (event.clientY - startY);
-            imageWrapper.style.top = `${event.clientY}px`;
+            imageWrapper?.style.top = `${event.clientY}px`;
         } else if (activeHandle === resizeHandles.topLeft) {
             newWidth = startWidth - (event.clientX - startX);
             newHeight = startHeight - (event.clientY - startY);
-            imageWrapper.style.left = `${event.clientX}px`;
-            imageWrapper.style.top = `${event.clientY}px`;
+            imageWrapper?.style.left = `${event.clientX}px`;
+            imageWrapper?.style.top = `${event.clientY}px`;
         } else if (activeHandle === resizeHandles.topCenter) {
             newHeight = startHeight - (event.clientY - startY);
-            imageWrapper.style.top = `${event.clientY}px`;
+            imageWrapper?.style.top = `${event.clientY}px`;
         } else if (activeHandle === resizeHandles.bottomCenter) {
             newHeight = startHeight + (event.clientY - startY);
         } else if (activeHandle === resizeHandles.leftCenter) {
             newWidth = startWidth - (event.clientX - startX);
-            imageWrapper.style.left = `${event.clientX}px`;
+            imageWrapper?.style.left = `${event.clientX}px`;
         } else if (activeHandle === resizeHandles.rightCenter) {
             newWidth = startWidth + (event.clientX - startX);
         }
@@ -2054,8 +2051,8 @@ function handleMouseDown(event) {
         console.log(event);
         event.preventDefault(); // Prevent default behavior during dragging (text selection)
         isDragging = true;
-        offsetX = event.clientX - imageWrapper.offsetLeft;
-        offsetY = event.clientY - imageWrapper.offsetTop;
+        offsetX = event.clientX - imageWrapper?.offsetLeft;
+        offsetY = event.clientY - imageWrapper?.offsetTop;
         shapeChangedDuringDrag = false; // Reset flag on new drag start
     }
 }
@@ -2076,8 +2073,8 @@ function handleMouseMove(event) {
         if (newY + userImageElement.clientHeight > canvasRect.bottom)
             newY = canvasRect.bottom - userImageElement.clientHeight;
 
-        imageWrapper.style.left = `${newX}px`;
-        imageWrapper.style.top = `${newY}px`;
+        imageWrapper?.style.left = `${newX}px`;
+        imageWrapper?.style.top = `${newY}px`;
         shapeChangedDuringDrag = true; // Set flag if dragging occurs
     } else if (isResizing) {
         resize(event);
