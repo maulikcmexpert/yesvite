@@ -1387,7 +1387,6 @@ $(".removeShapImage").click(function(){
             $('.removeShapImage').hide();
             const imageWrapperRect = imageWrapper.getBoundingClientRect();
             var id = $('#template_id').val();
-            console.log(userImageElement)
             const width = userImageElement.clientWidth;
             const height = userImageElement.clientHeight;
             const left = imageWrapperRect.left - canvasRect.left;
@@ -1395,14 +1394,7 @@ $(".removeShapImage").click(function(){
             const centerX = left + width / 2;
             const centerY = top + height / 2;
 
-            console.log("===================")
-            console.log(width)
-            console.log(height)
-            console.log(left)
-            console.log(top)
-            console.log(centerY)
-            console.log(centerX)
-            console.log("===================")
+           
 
             var shapeImageData = [];
 
@@ -1435,7 +1427,7 @@ $(".removeShapImage").click(function(){
                 .then(response => response.json())
                 .then(data => {
                     console.log('Text data saved successfully', data);
-                    // window.location.href = "{{URL::to('/admin/create_template')}}";
+                    window.location.href = "{{URL::to('/admin/create_template')}}";
 
                 })
                 .catch((error) => {
