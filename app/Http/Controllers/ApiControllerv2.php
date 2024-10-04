@@ -13046,7 +13046,7 @@ class ApiControllerv2 extends Controller
                 foreach ($value as $key => $val) {
                     print_r($request->event_name);
                     print_r($request);
-                    // die;
+                    die;
                     switch ($val) {
                         case 'event_name':
                             if (!empty($request->event_name)) {
