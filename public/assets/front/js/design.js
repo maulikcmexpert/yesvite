@@ -945,23 +945,22 @@ function bindData() {
     setLineHeight();
 
     // Initialize the color picker
-    $("#color-picker").spectrum({
+    $('#color-picker').spectrum({
         type: "flat",
         color: "#000000", // Default font color
         showInput: true,
         allowEmpty: true, // Allows setting background to transparent
         showAlpha: true, // Allows transparency adjustment
-        preferredFormat: "rgba", // Ensure it handles RGBA
+        preferredFormat: "hex",
         change: function(color) {
             if (color) {
-                console.log("color");
-                changeColor(color.toRgbString()); // Use RGB string for color changes
+                console.log("color")
+                changeColor(color.toHexString()); // Use RGB string for color changes
             } else {
-                console.log("rgba");
-
-                changeColor("rgba(0, 0, 0, 0)"); // Handle transparency by default
+                console.log("rgba")
+                changeColor('#000000'); // Handle transparency by default
             }
-        },
+        }
     });
 
     // Function to change font or background color
@@ -1338,7 +1337,7 @@ function bindData() {
             console.log("Updated Font Color: " + activeObject.fill);
 
             canvas.renderAll();
-            // addToUndoStack(); // Save state after updating properties
+             addToUndoStack(); // Save state after updating properties
         }
     }
 
@@ -1643,7 +1642,7 @@ function bindData() {
             if (commands[command]) {
                 commands[command]();
                 canvas.renderAll();
-                // addToUndoStack(); // Save state after executing the command
+                addToUndoStack(); // Save state after executing the command
             }
         }
     }
@@ -1704,7 +1703,7 @@ function bindData() {
             // If all objects in a state were 'group', you can also remove that entire state from undoStack
             if (ob.objects.length === 0) {
                 console.log("Removed from undoStack");
-                undoStack.splice(index, 1);  // Remove the empty state from undoStack
+                // undoStack.splice(index, 1);  // Remove the empty state from undoStack
             }
         })
 
@@ -1715,17 +1714,17 @@ function bindData() {
             // If all objects in a state were 'group', you can also remove that entire state from undoStack
             if (ob.objects.length === 0) {
                 console.log("Removed from undoStack");
-                undoStack.splice(index, 1);  // Remove the empty state from undoStack
+                // undoStack.splice(index, 1);  // Remove the empty state from undoStack
             }
             })
       
     }
 
-    canvas.on('object:added', addToUndoStack);
-    canvas.on('object:modified', addToUndoStack);
-    canvas.on('object:removed', addToUndoStack);
-    canvas.on('object:scaled', addToUndoStack);
-    canvas.on('object:moved', addToUndoStack);
+    // canvas.on('object:added', addToUndoStack);
+    // canvas.on('object:modified', addToUndoStack);
+    // canvas.on('object:removed', addToUndoStack);
+    // canvas.on('object:scaled', addToUndoStack);
+    // canvas.on('object:moved', addToUndoStack);
 
     document
         .querySelector('[data-command="undo"]')
