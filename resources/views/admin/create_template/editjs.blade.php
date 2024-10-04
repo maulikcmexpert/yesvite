@@ -939,9 +939,9 @@ $(".removeShapImage").click(function(){
             //     findTextboxCenter(text);
             // });
 
-            text.on('moving', function() {
-                findTextboxCenter(text);
-            });
+            // text.on('moving', function() {
+            //     findTextboxCenter(text);
+            // });
             canvas.add(text);
             addIconsToTextbox(text);
             canvas.renderAll();
