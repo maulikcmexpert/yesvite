@@ -1871,7 +1871,7 @@ let isimageoncanvas = false;
 let oldImage = null;
 
 function updateClipPath(imageUrl, element) {
-    console.log(imageUrl)
+    console.log(element)
     const imageWrapper = document.getElementById('imageWrapper');
    
     const imgElement = document.getElementById('user_image');
