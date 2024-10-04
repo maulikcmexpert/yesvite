@@ -1762,19 +1762,17 @@ const canvasElement2 = new fabric.Canvas('imageEditor', {
 
 function updateClipPath(imageUrl, element,modal =null) {
     var imgElement;
-    var imageWrapper;
     var canvasEL;
+    const imageWrapper = document.getElementById('imageWrapper');
+    const imageWrapper2 = document.getElementById('imageWrapper2');
     if(modal){
-        console.log(modal);
-        imageWrapper = document.getElementById('imageWrapper2');
+      
         imgElement = document.getElementById('user_image2');
         canvasEL = document.getElementById('imageEditor2')
         console.log(imgElement)
     }else{
-        imageWrapper = document.getElementById('imageWrapper');
         imgElement = document.getElementById('user_image');
-        canvasEL = document.getElementById('imageEditor1')
-        console.log(imgElement);
+        canvasEL = document.getElementById('imageEditor1');
     }
      imgElement.src = imageUrl;
 
@@ -1791,15 +1789,19 @@ function updateClipPath(imageUrl, element,modal =null) {
     }
     const canvasRect = canvasEL.getBoundingClientRect();
 
-    imageWrapper.style.display = 'block';
+    imageWrapper?.style.display = 'block';
+    imageWrapper2?.style.display = 'block';
     // imageWrapper.style.left = element.left;
     // imageWrapper.style.top = element.top;
     let left = element.centerX !== undefined ? `${element.centerX  + canvasRect.left}px` : '50%';
     let top = element.centerY !== undefined ? `${element.centerY + canvasRect.top}px` : '50%';
 
     // Set the calculated position to imageWrapper
-    imageWrapper.style.left = left;
-    imageWrapper.style.top = top;
+    imageWrapper?.style.left = left;
+    imageWrapper?.style.top = top;
+   
+    imageWrapper2?.style.left = left;
+    imageWrapper2?.style.top = top;
     
     imgElement.onload = function () {
         // Get image dimensions and scale it
@@ -1964,7 +1966,8 @@ const resizeHandles = {
     leftCenter: document.querySelector('.resize-handle.left-center'),
     rightCenter: document.querySelector('.resize-handle.right-center')
 };
-
+const imageWrapper = document.getElementById('imageWrapper');
+const imageWrapper2 = document.getElementById('imageWrapper2');
 
 let isDragging = false;
 let isResizing = false;
