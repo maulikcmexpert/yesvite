@@ -460,7 +460,7 @@ function applyClipPath(image, element) {
 //     });
 // }
 
-$("removeShapImage").click(function(){
+$("#removeShapImage").click(function(){
     $("#imageWrapper").hide();
     $("#user_image").attr("src","");
     $('.photo-slider-wrp').show()
