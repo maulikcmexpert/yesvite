@@ -1931,7 +1931,7 @@ function updateClipPath(imageUrl, element) {
             cornerSize: 10,
             cornerStyle: 'circle',
         });
-       
+        shape = element.shape;
         canvasElement.add(imgInstance);
         // addIconsToImage(imgInstance);
         drawCanvas();
