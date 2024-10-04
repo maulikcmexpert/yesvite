@@ -1427,7 +1427,7 @@ $(".removeShapImage").click(function(){
                 .then(response => response.json())
                 .then(data => {
                     console.log('Text data saved successfully', data);
-                    // window.location.href = "{{URL::to('/admin/create_template')}}";
+                    window.location.href = "{{URL::to('/admin/create_template')}}";
 
                 })
                 .catch((error) => {
