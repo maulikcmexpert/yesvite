@@ -665,7 +665,7 @@ function bindData() {
                     cornerSize: 6,
                 });
                 const userImageElement = document.getElementById('user_image');
-                
+
                 if (shapeImageUrl) {
                     let element = staticInfo?.shapeImageData;
                     if (element.shape && element.centerX && element.centerY && element.height && element.width) {
@@ -2128,7 +2128,8 @@ function bindData() {
     }
 
     function handleMouseDown(event) {
-        console.log(event);
+        console.log(event);  
+        const canvas = document.querySelector('.new');
 
         canvasRect = canvas.getBoundingClientRect();
 
@@ -2146,7 +2147,7 @@ function bindData() {
     function handleMouseMove(event) {
         console.log(event);
         if (isDragging) {
-
+            const canvas = document.querySelector('.new');
             const canvasRect = canvas.getBoundingClientRect();
             let newX = event.clientX - offsetX;
             let newY = event.clientY - offsetY;
