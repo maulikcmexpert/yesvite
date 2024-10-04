@@ -3,12 +3,12 @@ var temp_id = null;
 var image = null;
 var base_url = $("#base_url").text();
 var canvas;
-
+var shapeImageUrl = null;
 $(document).on("click", ".design-card", function () {
     var url = $(this).data("url");
     var template = $(this).data("template");
     var imageUrl = $(this).data("image");
-    var shapeImageUrl = $(this).data('shape_image');
+    shapeImageUrl = $(this).data('shape_image');
     var json = $(this).data("json");
     console.log(json);
     var id = $(this).data("id");
@@ -417,11 +417,7 @@ function bindData() {
                     });
 
                     const textWidth = textMeasurement.width;
-                    // console.log(`Width of '${element.text}':`, textWidth);
-
-                    // Calculate the width of the text
-
-                    // console.log(element);
+                  
                     let textElement = new fabric.Textbox(element.text, {
                         // Use Textbox for editable text
                         left: element.left,
@@ -489,9 +485,7 @@ function bindData() {
                     var rotateIcon = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAHqSURBVHgBtZW7S8NQFMZPxFXbzUGULIJPdHBwUAgWQamDj1msg0MXHQWXCiIdHFpQKupgrVR0sovgZBEfQx0UdHBLH9bVpv0DjueksRbb5Da2/uBrm4Z7vvvde5IrgQBEdNLXDGmQJJOcxq0c6YYUkyQpCX+BisukAOkTxcRJip36bLBaY/HfBIzkQgMf1odKkv/T4JsnrJaI/lSwsQSqmaiiUTktj6l0Fm2gcO0mw8ADxfY0RcsXYMw1D3cPCbCBrzxFXDQl78o6Otp6sbNrBEddc/p1jamcTYaPIprSQH83OFpbwL+5BqHgFnR2tMP0nAfSmQ/R0Bnhhvu3d3UxqfQ7hvYjpXvRswscGJ4QJQkKTXh5uLgZ7tlFvL1PWJU44uWSzXKmM1lwOFr0pTFdxr5uYTOwSRLqhPfKAs3ShBNoWoFm+mha4fLqmpqiByxI6p9o8SCGDiL65lZrV24IbmUBQ82G2zGUPzhleJcX9DTcrvybW5n36vQ8pt+PhncsU9BZ8ywZSfhlpsLPgVQBF947PIGX1zd9Gd1T4+CedIGAJTIJl67IaAMbi1phyWmw+IpuFHLVbFg8clWsHw9YUacRH9kK1AoW90i1YRBHq2NXkMqD5keBSgqKZi+BDYyZspKkHLVnrpZxX+O67qGyL3x/AAAAAElFTkSuQmCC";
                     var img = document.createElement('img');
                     img.src = rotateIcon;
-                
-                    // here's where your custom rotation control is defined
-                    // by changing the values you can customize the location, size, look, and behavior of the control
+
                     textElement.controls.mtr = new fabric.Control({
                       x: 0,
                       y: -0.5,
@@ -515,33 +509,6 @@ function bindData() {
                       ctx.fill();
                       ctx.restore();
                     }
-
-                    // textElement.controls.mt = new fabric.Control({
-                    //     x: 0.5, // Right side
-                    //     y: 0,
-                    //     offsetX: 0,
-                    //     offsetY: 0,
-                    //     cursorStyle: 'e-resize',
-                    //     actionHandler: fabric.controlsUtils.scalingX,
-                    //     render: function(ctx, left, top, styleOverride, fabricObject) {
-                    //         ctx.fillStyle = 'white'; // Rectangle color
-                    //         ctx.fillRect(left - 2, top - 7, 4, 8); // Draw a rectangle control for 'mr'
-                    //     }
-                    // });
-
-                    // textElement.controls.mb = new fabric.Control({
-                    //     x: 0.5, // Right side
-                    //     y: 0,
-                    //     offsetX: 0,
-                    //     offsetY: 0,
-                    //     cursorStyle: 'e-resize',
-                    //     actionHandler: fabric.controlsUtils.scalingX,
-                    //     render: function(ctx, left, top, styleOverride, fabricObject) {
-                    //         ctx.fillStyle = 'white'; // Rectangle color
-                    //         ctx.fillRect(left - 2, top - 7, 4, 8); // Draw a rectangle control for 'mr'
-                    //     }
-                    // });
-
 
                     switch (element.text) {
                         case "event_name":
@@ -657,6 +624,14 @@ function bindData() {
                     addIconsToTextbox(textElement);
                     canvas.add(textElement);
                 });
+
+                if (shapeImageUrl) {
+                    staticInfo?.shapeImageData?.forEach(element => {
+                        if (element.shape && element.centerX && element.centerY && element.height && element.width) {
+                            updateClipPath(shapeImageUrl, element);
+                        }
+                    });
+                }
             } else {
                 showStaticTextElements();
             }
