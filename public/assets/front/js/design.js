@@ -669,6 +669,8 @@ function bindData() {
                 if (shapeImageUrl) {
                     let element = staticInfo?.shapeImageData;
                     if (element.shape && element.centerX && element.centerY && element.height && element.width) {
+console.log(2)
+
                         updateClipPath(shapeImageUrl, element);
                     }
                 }
@@ -1906,6 +1908,7 @@ function bindData() {
 
         //console.log(imageWrapper);
         // If a current image exists on canvas, remove it
+        console.log(canvasElement)
         if (currentImage) {
             canvasElement.remove(currentImage);
         }
@@ -1980,7 +1983,7 @@ function bindData() {
                     currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
                     const nextShape = shapes[currentShapeIndex];
                     element.shape = nextShape;
-
+console.log(1)
                     updateClipPath(data, element); // Update the image with the new shape
                 }
             });
