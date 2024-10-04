@@ -1400,8 +1400,8 @@ $(".removeShapImage").click(function(){
 
             shapeImageData ={
                 shape: shape,
-                centerX: centerX,
-                centerY: centerY,
+                centerX: left,
+                centerY: top,
                 width: width,
                 height: height,
             };
