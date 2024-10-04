@@ -1164,6 +1164,12 @@
     cursor: ns-resize;
 }
 
+.main-footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
 
 @media only screen and (max-width: 1199px) {
     .image-edit-inner-img {
