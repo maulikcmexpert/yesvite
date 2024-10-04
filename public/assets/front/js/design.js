@@ -654,6 +654,18 @@ function bindData() {
                     addIconsToTextbox(textElement);
                     canvas.add(textElement);
                 });
+
+                let currentImage = null;
+                let isImageDragging = false; // Track if the image is being dragged
+                let isimageoncanvas = false;
+                let oldImage = null;
+                const canvasElement = new fabric.Canvas('imageEditor', {
+                    width: 500, // Canvas width
+                    height: 500, // Canvas height
+                    cornerSize: 6,
+                });
+                const userImageElement = document.getElementById('user_image');
+                
                 if (shapeImageUrl) {
                     let element = staticInfo?.shapeImageData;
                     if (element.shape && element.centerX && element.centerY && element.height && element.width) {
@@ -1874,16 +1886,7 @@ function bindData() {
    
 
 
-    let currentImage = null;
-    let isImageDragging = false; // Track if the image is being dragged
-    let isimageoncanvas = false;
-    let oldImage = null;
-    const canvasElement = new fabric.Canvas('imageEditor', {
-        width: 500, // Canvas width
-        height: 500, // Canvas height
-        cornerSize: 6,
-    });
-    const userImageElement = document.getElementById('user_image');
+   
 
     function updateClipPath(imageUrl, element) {
 
