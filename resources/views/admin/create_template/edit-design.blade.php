@@ -66,10 +66,7 @@
                     </div>
 
                     <img id="user_image" src="" style="height: 100px; width: 100px; background-color: black;" />
-                    <div class="resize-handle top-left"></div>
-                    <div class="resize-handle top-right"></div>
-                    <div class="resize-handle bottom-left"></div>
-                    <div class="resize-handle bottom-right"></div>
+                   
                 </div>
 
                 <!-- SVG heart clip path for potential clipping -->
