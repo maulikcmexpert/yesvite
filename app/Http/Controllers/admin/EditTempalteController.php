@@ -184,7 +184,7 @@ class EditTempalteController extends Controller
         // Save the updated record
         $template->save();
 
-        return response()->json(['message' => 'Data saved successfully'], 200);
+        return response()->json(['message' => 'Data saved successfullysss'], 200);
     }
     public function loadTextData($id)
     {

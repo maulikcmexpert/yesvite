@@ -1694,17 +1694,22 @@ $(".removeShapImage").click(function(){
        
         undoStack.forEach((ob, index) => {
             ob.objects = ob.objects.filter(obj => obj.type !== 'group');
-            ob.objects.forEach(obj=>{
-            console.log(obj)
-
+            ob.objects.forEach(obj => {
+            console.log(obj);
+            // obj.borderColor
+            // Check if obj is a fabric object by checking for the existence of 'set' method
+            if (typeof obj.set === 'function') {
+                // Update border and corner styling
                 obj.set({
                     borderColor: "#2DA9FC",
                     cornerColor: "#fff",
                     cornerSize: 6
                 });
-            console.log(obj)
-
-            })
+                console.log("Updated object:", obj);
+            } else {
+                console.warn("Object is not a fabric instance:", obj);
+            }
+        });
            
 
 
