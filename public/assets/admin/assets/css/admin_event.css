@@ -1304,11 +1304,6 @@
     }
 }
 
-@media only screen and (max-width: 370px) {
-    .image-edit-inner-img {
-        width: 100%;
-    }
-}
 
 @media only screen and (max-width: 350px) {
     .uploaded-img-card-edit {
