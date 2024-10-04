@@ -1754,10 +1754,11 @@ const canvasElement = new fabric.Canvas('imageEditor', {
 
 
 function updateClipPath(imageUrl, element,modal =null) {
-    console.log(modal)
     if(modal){
+        console.log(modal);
         const imageWrapper = document.getElementById('imageWrapper2');
         const imgElement = document.getElementById('user_image2');
+        console.log(imgElement)
     }else{
         const imageWrapper = document.getElementById('imageWrapper');
         const imgElement = document.getElementById('user_image');
