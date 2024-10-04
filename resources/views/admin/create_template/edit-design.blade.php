@@ -70,6 +70,7 @@
                     <div class="resize-handle top-center"></div>
                     <div class="resize-handle top-right"></div>
                     <div class="resize-handle bottom-left"></div>
+                    <div class="resize-handle bottom-center"></div>
                     <div class="resize-handle bottom-right"></div>
                 </div>
 
