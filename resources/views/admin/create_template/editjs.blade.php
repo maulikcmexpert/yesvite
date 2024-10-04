@@ -167,6 +167,7 @@
         let currentImage = null;
 let isImageDragging = false; // Track if the image is being dragged
 let isimageoncanvas = false;
+let oldImage = null;
 function updateClipPath(imageUrl, element) {
     console.log(imageUrl)
     // Remove the previous image from the canvas if it exists
@@ -178,7 +179,13 @@ function updateClipPath(imageUrl, element) {
     // Define the fixed container dimensions
     const containerWidth = 150;
     const containerHeight = 200;
-
+    if(oldImage!=null){
+      
+        canvas.remove(oldImage.trashIcon);
+        oldImage.trashIcon = null; // Clear reference
+        canvas.renderAll();
+         
+    }
     // Load the image from the provided URL
     fabric.Image.fromURL(imageUrl, function (image) {
     console.log(2)
@@ -310,6 +317,7 @@ function updateClipPath(imageUrl, element) {
 
         // Refresh the canvas to apply changes
         canvas.renderAll();
+        oldImage = image
         addIconsToImage(image)
 
         canvas.getObjects().forEach(obj => {
