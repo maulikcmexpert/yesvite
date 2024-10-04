@@ -278,6 +278,7 @@ $(document).on("click", ".design-card", function () {
     if (shapeImageUrl) {
         let element = staticInfo?.shapeImageData;
         if (element.shape && element.centerX && element.centerY && element.height && element.width) {
+            console.log(shapeImageUrl);
             updateClipPath(shapeImageUrl, element);
         }
     }
