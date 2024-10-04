@@ -1768,6 +1768,7 @@ function updateClipPath(imageUrl, element,modal =null) {
     }else{
         imageWrapper = document.getElementById('imageWrapper');
         imgElement = document.getElementById('user_image');
+        console.log(imgElement);
     }
      imgElement.src = imageUrl;
 
