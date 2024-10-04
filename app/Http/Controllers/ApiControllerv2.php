@@ -13117,7 +13117,8 @@ class ApiControllerv2 extends Controller
             $shape_img_url = asset('storage/canvas/' . $shape_image);
             // Return the final response
             return response()->json([
-                'textData' => $resp, // Updated text data
+                'textData' => $resp->textElements, // Updated text data
+                'shapeImageData' => $resp->shapeImageData, // Updated text data
                 'image' => $image,
                 'event_design_sub_category_id' => $design_id,
                 'height' => $height,
