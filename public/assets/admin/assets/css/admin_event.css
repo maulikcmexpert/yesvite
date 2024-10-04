@@ -1298,8 +1298,8 @@
 
 @media only screen and (max-width: 424px) {
     .image-edit-inner-img {
-        width: 300px;
-        height: 360px;
+        width: 250px;
+        height: 350px;
         margin: 0px auto;
     }
 }
