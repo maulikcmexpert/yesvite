@@ -13035,6 +13035,7 @@ class ApiControllerv2 extends Controller
                 ->where('static_information', '!=', '')
                 ->get();
             if (!$textData) {
+                print_r($textData);
                 return response()->json(['message' => 'Data not found'], 404);
             }
             $resp = $textData->static_information;
