@@ -1160,8 +1160,8 @@ function bindData() {
         var centerX = textbox.left + textbox.width / 2;
         var centerY = textbox.top + textbox.height / 2;
         //console.log(
-            `Center of textbox '${textbox.text}' is at (${centerX}, ${centerY})`
-        );
+          //  `Center of textbox '${textbox.text}' is at (${centerX}, ${centerY})`
+       // );
         return {
             x: centerX,
             y: centerY
@@ -1733,7 +1733,7 @@ function bindData() {
             // Check if obj is a fabric object by checking for the existence of 'set' method
            
         });
-           
+
 
 
             if (ob.objects.length === 0) {
@@ -1934,11 +1934,11 @@ function bindData() {
         let left = element.centerX !== undefined ? `${element.centerX  + canvasRect.left}px` : '50%';
         let top = element.centerY !== undefined ? `${element.centerY + canvasRect.top}px` : '50%';
         //console.log({
-            left
-        })
+        //     left
+        // })
         //console.log({
-            imageWrapper
-        })
+        //     imageWrapper
+        // })
 
         // Set the calculated position to imageWrapper
         imageWrapper.style.left = left;
@@ -2142,7 +2142,7 @@ function bindData() {
     }
 
     function handleMouseDown(event) {
-        //console.log(event);  
+        ////console.logevent);  
         const canvas = document.querySelector('.new');
 
         canvasRect = canvas.getBoundingClientRect();
@@ -2159,7 +2159,7 @@ function bindData() {
     }
 
     function handleMouseMove(event) {
-        //console.log(event);
+        ////console.logevent);
         if (isDragging) {
         const userImageElement = document.getElementById('user_image');
 
@@ -2193,7 +2193,7 @@ function bindData() {
             const shapes = ['rectangle', 'circle', 'star', 'rounded-border', 'heart'];
             const currentIndex = shapes.indexOf(shape);
             shape = shapes[(currentIndex + 1) % shapes.length];
-            //console.log(`Shape changed to: ${shape}`); // Log shape change
+            ////console.log`Shape changed to: ${shape}`); // Log shape change
 
             drawCanvas();
         }
@@ -2205,7 +2205,7 @@ function bindData() {
     function drawCanvas() {
         const userImageElement = document.getElementById('user_image');
 
-        //console.log(userImageElement);
+        ////console.loguserImageElement);
         userImageElement.style.clipPath = '';
 
         switch (shape) {
