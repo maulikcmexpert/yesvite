@@ -2179,7 +2179,7 @@ function drawCanvas() {
 
 imageWrapper.addEventListener('mousemove', resize);
 imageWrapper.addEventListener('mouseup', handleMouseUp);
-imageWrapper.addEventListener('mousedown', handleMouseDown);
+document.addEventListener('mouseup', handleMouseUp);
 imageWrapper.addEventListener('mousemove', handleMouseMove);
     
 
