@@ -192,7 +192,16 @@ function updateClipPath(imageUrl, element) {
     }
     imageWrapper.style.display = 'block';
 
-   
+    imgElement.setControlsVisibility({
+            mt: true, // Hide middle top control
+            mb: true, // Hide middle bottom control
+            bl: true, // Hide bottom left control
+            br: true, // Hide bottom right control
+            tl: true, // Hide top left control
+            tr: true, // Hide top right control
+            ml: true,  // Show middle left control
+            mr: true   // Show middle right control
+        });
     imgElement.onload = function () {
         // Get image dimensions and scale it
         const imgInstance = new fabric.Image(imgElement, {
@@ -211,16 +220,7 @@ function updateClipPath(imageUrl, element) {
             cornerSize: 10,
             cornerStyle: 'circle',
         });
-        imgElement.setControlsVisibility({
-            mt: true, // Hide middle top control
-            mb: true, // Hide middle bottom control
-            bl: true, // Hide bottom left control
-            br: true, // Hide bottom right control
-            tl: true, // Hide top left control
-            tr: true, // Hide top right control
-            ml: true,  // Show middle left control
-            mr: true   // Show middle right control
-        });
+       
         canvasElement.add(imgInstance);
         addIconsToImage(imgInstance);
         drawCanvas();
