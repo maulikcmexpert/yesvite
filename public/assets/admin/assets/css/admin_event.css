@@ -540,7 +540,7 @@
 }
 
 .edit-imag-main-content-wrp .choose-design-sidebar {
-    height: 100vh;
+    height: calc(100vh - 21vh) !important;
     padding: 0px !important;
     margin: 0px !important;
     scrollbar-color: none !important;
