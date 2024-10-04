@@ -1954,6 +1954,16 @@ $(".removeShapImage").click(function(){
 
 })
 
+const resizeHandles = {
+    topLeft: document.querySelector('.resize-handle.top-left'),
+    topRight: document.querySelector('.resize-handle.top-right'),
+    bottomLeft: document.querySelector('.resize-handle.bottom-left'),
+    bottomRight: document.querySelector('.resize-handle.bottom-right'),
+    topCenter: document.querySelector('.resize-handle.top-center'),
+    bottomCenter: document.querySelector('.resize-handle.bottom-center'),
+    leftCenter: document.querySelector('.resize-handle.left-center'),
+    rightCenter: document.querySelector('.resize-handle.right-center')
+};
 
 
 let isDragging = false;
