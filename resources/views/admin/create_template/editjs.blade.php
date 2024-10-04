@@ -932,16 +932,16 @@ $(".removeShapImage").click(function(){
 
             text.set('width', text.get('text').length * 10);
 
-            text.on('scaling', function() {
-                var updatedFontSize = text.fontSize * (text.scaleX + text.scaleY) / 2;
-                text.set('fontSize', updatedFontSize);
-                canvas.renderAll();
-                findTextboxCenter(text);
-            });
+            // text.on('scaling', function() {
+            //     var updatedFontSize = text.fontSize * (text.scaleX + text.scaleY) / 2;
+            //     text.set('fontSize', updatedFontSize);
+            //     canvas.renderAll();
+            //     findTextboxCenter(text);
+            // });
 
-            text.on('moving', function() {
-                findTextboxCenter(text);
-            });
+            // text.on('moving', function() {
+            //     findTextboxCenter(text);
+            // });
             canvas.add(text);
             addIconsToTextbox(text);
             canvas.renderAll();
