@@ -200,9 +200,10 @@ function updateClipPath(imageUrl, element) {
     let canvasEL = document.getElementById('imageEditor1')
     const canvasRect = canvasEL.getBoundingClientRect();
 
+    
+    let left = element.centerX !== undefined ? `${element.centerX  + canvasRect.left}px` : '50%';
+    let top = element.centerY !== undefined ? `${element.centerY + canvasRect.top}px` : '50%';
 
-    let left = element.centerX!=undefined?`${element.centerX - (element.width / 2) + canvasRect.left}px`:'50%';
-    let top = element.centerX!=undefined?`${element.centerY - (element.height / 2) + canvasRect.top}px`:'50%';
 
     // Set the calculated position to imageWrapper
     imageWrapper.style.left = left;
