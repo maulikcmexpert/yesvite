@@ -202,8 +202,6 @@ function updateClipPath(imageUrl, element) {
             left: element.centerX - (imgElement.width * element.width) / 2, // Set left based on centerX
             top: element.centerY - (imgElement.height * element.height) / 2,  // Set top based on centerY
            
-            left: 0,
-            top: 0,
             selectable: true,
             hasControls: true,
             hasBorders: true,
@@ -1386,8 +1384,6 @@ $(".removeShapImage").click(function(){
                 centerY: centerY,
                 width: width,
                 height: height,
-                left,
-                top
             });
 
           
