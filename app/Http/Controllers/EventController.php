@@ -1664,6 +1664,7 @@ class EventController extends Controller
     public function see_all(Request $request)
     {
         $data = Session::get('user_ids');
-        return response()->json(['view' => view('front.event.guest.addGuest', compact('data'))->render(), 'responsive_view' => view('front.event.guest.addGuest', compact('data'))->render(), 'success' => true]);
+
+        return response()->json(['view' => view('front.event.guest.addGuest', compact('data'))->render(), 'success' => true]);
     }
 }
