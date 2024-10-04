@@ -171,6 +171,7 @@ let oldImage = null;
 const canvasElement = new fabric.Canvas('imageEditor', {
                                 width: 500, // Canvas width
                                 height: 500, // Canvas height
+                                cornerSize: 6,
                             });
 function updateClipPath(imageUrl, element) {
     const imageWrapper = document.getElementById('imageWrapper');
@@ -189,7 +190,11 @@ function updateClipPath(imageUrl, element) {
         oldImage.trashIcon = null;
         canvasElement.renderAll();
     }
+    imageWrapper.style.display = 'block';
+    imageWrapper.style.left = element.centerX;
+    imageWrapper.style.top = element.centerY;
 
+    
     imgElement.onload = function () {
         // Get image dimensions and scale it
         const imgInstance = new fabric.Image(imgElement, {
@@ -198,16 +203,17 @@ function updateClipPath(imageUrl, element) {
             selectable: true,
             hasControls: true,
             hasBorders: true,
-            cornerColor: 'red',
-            cornerStrokeColor: 'blue',
-            borderColor: 'blue',
-            cornerSize: 10,
+            
+            borderColor: "#2DA9FC",
+            cornerColor: "#fff",
             transparentCorners: false,
             lockUniScaling: true,
             scaleX: 600 / imgElement.width,
-            scaleY: 600 / imgElement.height
+            scaleY: 600 / imgElement.height,
+            cornerSize: 10,
+            cornerStyle: 'circle',
         });
-
+       
         canvasElement.add(imgInstance);
         addIconsToImage(imgInstance);
         drawCanvas();
@@ -237,15 +243,26 @@ function updateClipPath(imageUrl, element) {
             isImageDragging = true;
             element.centerX = imgInstance.left;
             element.centerY = imgInstance.top;
+
+            updatedOBJImage = {               
+                centerX: imgInstance.left,
+                centerY: imgInstance.top,                
+            };
         });
 
         imgInstance.on('scaling', function () {
             element.width = imgInstance.width * imgInstance.scaleX;
             element.height = imgInstance.height * imgInstance.scaleY;
+
+            updatedOBJImage = {               
+                width:  imgInstance.width * imgInstance.scaleX,
+                height: imgInstance.height * imgInstance.scaleY
+            };
         });
 
         currentImage = imgInstance; // Track current image on canvas
         oldImage = imgInstance;
+        $('.photo-slider-wrp').hide()
     };
 
     imgElement.onerror = function () {
@@ -459,7 +476,12 @@ function applyClipPath(image, element) {
 //     });
 // }
 
+$(".removeShapImage").click(function(){
+    $("#imageWrapper").hide();
+    $("#user_image").attr("src","");
+    $('.photo-slider-wrp').show()
 
+})
        
         let updateTimeout; // Variable to store the timeout reference
 
@@ -1312,7 +1334,8 @@ function applyClipPath(image, element) {
                 borderColor: '#2DA9FC',
                 cornerColor: '#fff',
                 cornerSize: 6,
-                transparentCorners: false
+                transparentCorners: false,
+                textAlign:'center',
             });
 
             textbox.on('scaling', function() {
@@ -1376,7 +1399,7 @@ function applyClipPath(image, element) {
                 .then(response => response.json())
                 .then(data => {
                     console.log('Text data saved successfully', data);
-                    window.location.href = "{{URL::to('/admin/create_template')}}";
+                    // window.location.href = "{{URL::to('/admin/create_template')}}";
 
                 })
                 .catch((error) => {
