@@ -189,7 +189,7 @@ function updateClipPath(imageUrl, element) {
         oldImage.trashIcon = null;
         canvasElement.renderAll();
     }
-
+    imageWrapper.style.display = 'block';
     imgElement.onload = function () {
         // Get image dimensions and scale it
         const imgInstance = new fabric.Image(imgElement, {
