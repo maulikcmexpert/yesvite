@@ -1694,7 +1694,15 @@ $(".removeShapImage").click(function(){
        
         undoStack.forEach((ob, index) => {
             ob.objects = ob.objects.filter(obj => obj.type !== 'group');
-            // console.log
+            console.log(obj)
+            obj.set({
+                    borderColor: "#2DA9FC",
+                    cornerColor: "#fff",
+                    cornerSize: 6
+                });
+
+            console.log(obj)
+
             if (ob.objects.length === 0) {
                 console.log("Removed from undoStack");
            
