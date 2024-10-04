@@ -1763,14 +1763,17 @@ const canvasElement2 = new fabric.Canvas('imageEditor', {
 function updateClipPath(imageUrl, element,modal =null) {
     var imgElement;
     var imageWrapper;
+    var canvasEL;
     if(modal){
         console.log(modal);
         imageWrapper = document.getElementById('imageWrapper2');
         imgElement = document.getElementById('user_image2');
+        canvasEL = document.getElementById('imageEditor2')
         console.log(imgElement)
     }else{
         imageWrapper = document.getElementById('imageWrapper');
         imgElement = document.getElementById('user_image');
+        canvasEL = document.getElementById('imageEditor1')
         console.log(imgElement);
     }
      imgElement.src = imageUrl;
@@ -1786,7 +1789,6 @@ function updateClipPath(imageUrl, element,modal =null) {
         oldImage.trashIcon = null;
         canvasElement2.renderAll();
     }
-    let canvasEL = document.getElementById('imageEditor1')
     const canvasRect = canvasEL.getBoundingClientRect();
 
     imageWrapper.style.display = 'block';
