@@ -237,11 +237,21 @@ function updateClipPath(imageUrl, element) {
             isImageDragging = true;
             element.centerX = imgInstance.left;
             element.centerY = imgInstance.top;
+
+            updatedOBJImage = {               
+                centerX: imgInstance.left,
+                centerY: imgInstance.top,                
+            };
         });
 
         imgInstance.on('scaling', function () {
             element.width = imgInstance.width * imgInstance.scaleX;
             element.height = imgInstance.height * imgInstance.scaleY;
+
+            updatedOBJImage = {               
+                width: imgInstance.width,
+                height: imgInstance.height
+            };
         });
 
         currentImage = imgInstance; // Track current image on canvas
