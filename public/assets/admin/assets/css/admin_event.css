@@ -139,8 +139,8 @@
 }
 
 .image-edit-inner-img {
-    width: 460px;
-    height: 648px;
+    width: 300px;
+    height: 400px;
     margin: 0px auto
 }
 
@@ -1131,6 +1131,7 @@
     right: -5px;
     cursor: nwse-resize;
 }
+
 /* Left-center handle */
 .resize-handle.left-center {
     left: -5px;
