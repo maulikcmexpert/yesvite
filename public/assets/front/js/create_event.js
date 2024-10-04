@@ -1324,8 +1324,8 @@ $(document).on("click", ".edit_category", function () {
 $(document).on("click", ".add_potluck_item", function () {
     var potluckkey = $(this).data('id');
     var categoryName = $('.category_name-'+potluckkey);
-    toggleSidebar('sidebar_addcategoryitem'); 
     setPotluckActivekey(potluckkey,categoryName);
+    toggleSidebar('sidebar_addcategoryitem'); 
 })
 
 $(document).on("click", ".add_category_item_btn", function () {
