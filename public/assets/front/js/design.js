@@ -279,7 +279,7 @@ $(document).on("click", ".design-card", function () {
         let element = staticInfo?.shapeImageData;
         if (element.shape && element.centerX && element.centerY && element.height && element.width) {
             console.log(shapeImageUrl);
-            updateClipPath(shapeImageUrl, element);
+            // updateClipPath(shapeImageUrl, element);
         }
     }
 
@@ -1892,7 +1892,7 @@ function updateClipPath(imageUrl, element) {
     let left = element.centerX !== undefined ? `${element.centerX  + canvasRect.left}px` : '50%';
     let top = element.centerY !== undefined ? `${element.centerY + canvasRect.top}px` : '50%';
     console.log({left})
-    console.log({top})
+    console.log({imageWrapper})
 
     // Set the calculated position to imageWrapper
     imageWrapper.style.left = left;
@@ -2109,6 +2109,7 @@ function handleMouseDown(event) {
 }
 
 function handleMouseMove(event) {
+    console.log(event);
     if (isDragging) {
         const canvas = document.querySelector('.new');
         const canvasRect = canvas.getBoundingClientRect();
