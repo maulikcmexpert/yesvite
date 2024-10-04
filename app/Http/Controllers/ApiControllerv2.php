@@ -13033,12 +13033,12 @@ class ApiControllerv2 extends Controller
             // Retrieve the text data by template ID
             $textData = TextData::where('id', $validatedData['template_id'])
                 ->where('static_information', '!=', '')
-                ->get();
+                ->first();
             if (!$textData) {
-               
+
                 return response()->json(['message' => 'Data not found'], 404);
             }
-           
+
             $resp = $textData->static_information;
             $image = $textData->image;
             $shape_image = $textData->shape_image;
