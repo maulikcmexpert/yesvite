@@ -681,8 +681,8 @@ console.log(2)
 
 
             // Set custom attribute with the fetched ID
-            // var canvasElement = document.getElementById("imageEditor1");
-            // canvasElement.setAttribute("data-canvas-id", temp_id);
+            var canvasElement = document.getElementById("imageEditor1");
+            canvasElement.setAttribute("data-canvas-id", temp_id);
 
             canvas.renderAll(); // Ensure all elements are rendered
 
