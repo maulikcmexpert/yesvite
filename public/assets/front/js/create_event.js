@@ -2765,7 +2765,7 @@ function savePage3Data() {
     var checkedCheckbox = parseInt($('.invite-count').text());
 
     if (checkedCheckbox == 0) {
-        toastr.error("Please select invited user");
+        toastr.error("please first select at list one guest to invite");
         return;
     }
 
