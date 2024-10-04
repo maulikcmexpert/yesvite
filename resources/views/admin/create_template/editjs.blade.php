@@ -220,6 +220,8 @@ function updateClipPath(imageUrl, element) {
     // Set the calculated position to imageWrapper
     imageWrapper.style.left = left;
     imageWrapper.style.top = top;
+    imgElement.style.width = element.width + 'px';
+    imgElement.style.height = element.height + 'px';
     
     imgElement.onload = function () {
         // Get image dimensions and scale it
