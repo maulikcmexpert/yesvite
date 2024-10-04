@@ -5,6 +5,14 @@ var base_url = $("#base_url").text();
 var canvas;
 var shapeImageUrl;
 
+let isDragging = false;
+let isResizing = false;
+let startWidth, startHeight, startX, startY, activeHandle;
+let offsetX, offsetY;
+let shape = 'rectangle'; // Default shape
+let shapeChangedDuringDrag = false; // Flag to track shape change
+let imageUploaded = false; // Flag to track if image has been uploaded
+
 document.addEventListener('mousemove', resize);
 document.addEventListener('mouseup', handleMouseUp);
 imageWrapper.addEventListener('mousedown', handleMouseDown);
@@ -2042,13 +2050,7 @@ function applyClipPath(image, element) {
             rightCenter: document.querySelector('.resize-handle.right-center')
         };
 
-let isDragging = false;
-let isResizing = false;
-let startWidth, startHeight, startX, startY, activeHandle;
-let offsetX, offsetY;
-let shape = 'rectangle'; // Default shape
-let shapeChangedDuringDrag = false; // Flag to track shape change
-let imageUploaded = false; // Flag to track if image has been uploaded
+
 
 function startResize(event, handle) {
     isResizing = true;
