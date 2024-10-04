@@ -1668,6 +1668,6 @@ class EventController extends Controller
         // $data[] = ['userdata' => $userEntry];
 
         // dd($data);
-        return response()->json(['view' => view('front.event.guest.sell_all_invited', compact('data '))->render()]);
+        return response()->json(['view' => view('front.event.guest.sell_all_invited', compact('data'))->render()]);
     }
 }
