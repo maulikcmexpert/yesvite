@@ -962,7 +962,13 @@ $(".removeShapImage").click(function(){
                 canvas.remove(textbox.copyIcon);
                 textbox.copyIcon = null;
             }
-
+            canvas.renderAll()
+            let degree = false;
+            if (textbox.angle >= 120 && textbox.angle <= 300) {
+                degree = true
+            } else {
+                degree = false
+            }
             const trashIconSVG = `<svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g filter="url(#filter0_d_5633_67674)">
         <rect x="2.70312" y="2.37207" width="23.9674" height="23.9674" rx="11.9837" fill="white" shape-rendering="crispEdges"/>
@@ -981,11 +987,25 @@ $(".removeShapImage").click(function(){
         </g>
         </svg>`;
 
+            // Calculate corners of the rotated object
+            const objectCorners = textbox.oCoords; // Get coordinates of corners after rotation and scaling
+
+            // Calculate icon positions based on the corners of the textbox
+            const iconOffset = 20; // Adjust this value to position icons closer or farther
+
+            // Top-left corner (for copy icon)
+            const topLeftX = objectCorners.tl.x - iconOffset;
+            const topLeftY = objectCorners.tl.y - iconOffset;
+
+            // Top-right corner (for trash icon)
+            const topRightX = objectCorners.tr.x - iconOffset; // Subtract icon width and offset
+            const topRightY = objectCorners.tr.y - iconOffset;
+
             fabric.loadSVGFromString(trashIconSVG, function(objects, options) {
                 const trashIcon = fabric.util.groupSVGElements(objects, options);
                 trashIcon.set({
-                    left: textbox.left + textbox.width * textbox.scaleX - 20,
-                    top: textbox.top - 20,
+                    left: topRightX + 6,
+                    top: (degree == true) ? topRightY + 20 : topRightY - 6,
                     selectable: false,
                     evented: true,
                     hasControls: false,
@@ -1002,8 +1022,8 @@ $(".removeShapImage").click(function(){
             fabric.loadSVGFromString(copyIconSVG, function(objects, options) {
                 const copyIcon = fabric.util.groupSVGElements(objects, options);
                 copyIcon.set({
-                    left: textbox.left - 25,
-                    top: textbox.top - 20,
+                   left: topLeftX + 6,
+                    top: (degree == true) ? topLeftY + 15 : topLeftY - 6,
                     selectable: false,
                     evented: true,
                     hasControls: false,
