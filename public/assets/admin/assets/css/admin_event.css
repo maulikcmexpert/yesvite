@@ -192,7 +192,7 @@
     text-align: center;
     text-transform: capitalize;
     color: var(--secondryColor);
-    margin-bottom: 0px;
+    margin-bottom: 0px !important;
 }
 
 .common-font-wrp {
