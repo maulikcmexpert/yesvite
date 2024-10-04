@@ -1786,6 +1786,8 @@ function updateClipPath(imageUrl, element,modal =null) {
         oldImage.trashIcon = null;
         canvasElement2.renderAll();
     }
+    let canvasEL = document.getElementById('imageEditor1')
+    const canvasRect = canvasEL.getBoundingClientRect();
 
     imageWrapper.style.display = 'block';
     // imageWrapper.style.left = element.left;
