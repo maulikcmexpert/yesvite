@@ -1056,9 +1056,6 @@ function delete_invited_user(userId) {
             
             $(".user-list-responsive").empty();
             $(".user-list-responsive").html(response.responsive_view);
-            
-            $(".see-all-invite-member-wrp").empty();
-            $(".see-all-invite-member-wrp").html(response.responsive_view);
 
             // if(currentInviteCount < 15){
             //     $('.user_choice').prop('disabled',false);

@@ -272,14 +272,14 @@ class EventController extends Controller
                     $textElemtents[$key]['fontSize'] = (int)$textJson['fontSize'];
                     $textElemtents[$key]['centerX'] = (float)$textJson['centerX'];
                     $textElemtents[$key]['centerY'] = (float)$textJson['centerY'];
-                    if(isset($textJson['letterSpacing'])){
+                    if (isset($textJson['letterSpacing'])) {
                         $textElemtents[$key]['letterSpacing'] = (int)$textJson['letterSpacing'];
                     }
-                    if(isset($textJson['lineHeight'])){
+                    if (isset($textJson['lineHeight'])) {
                         $textElemtents[$key]['lineHeight'] = (float)$textJson['lineHeight'];
                     }
-                    if(isset($textJson['underline'])){
-                        $textElemtents[$key]['underline'] = (bool)$textJson['underline'];   
+                    if (isset($textJson['underline'])) {
+                        $textElemtents[$key]['underline'] = (bool)$textJson['underline'];
                     }
                 }
             }
@@ -1650,14 +1650,13 @@ class EventController extends Controller
 
     public function shape_image(Request $request)
     {
-            // dd($request);
-            $file = $request->file('image');
-            $shape = $request->shape;
-            $imageName = 'shape_image' . time() . '.' . $file->getClientOriginalExtension(); 
-            $file->move(public_path('storage/canvas'), $imageName);
-            $imagePath = asset('storage/canvas/' . $imageName);
+        // dd($request);
+        $file = $request->file('image');
+        $shape = $request->shape;
+        $imageName = 'shape_image' . time() . '.' . $file->getClientOriginalExtension();
+        $file->move(public_path('storage/canvas'), $imageName);
+        $imagePath = asset('storage/canvas/' . $imageName);
 
-            return response()->json(['success' => true, 'imagePath' => $imagePath,'shape_image' => $imageName,'shape_name'=>$shape]);
-
+        return response()->json(['success' => true, 'imagePath' => $imagePath, 'shape_image' => $imageName, 'shape_name' => $shape]);
     }
 }
