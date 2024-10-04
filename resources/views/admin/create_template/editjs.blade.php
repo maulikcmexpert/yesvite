@@ -9,101 +9,6 @@
         });
 
 
-        // function loadTextDataFromDatabase() {
-        //     var id = $('#template_id').val();
-        //     // let urlParams = new URLSearchParams(window.location.search);
-
-
-        //     // let id = urlParams.get('id');
-
-
-        //     fetch(`/loadTextData/${id}`) // API endpoint to load data from your database
-        //         .then(response => response.json())
-        //         .then(data => {
-        //             if (data) {
-        //                 // Load background image
-        //                 var canvasElement = document.getElementById('imageEditor1');
-        //                 canvasElement.setAttribute('data-canvas-id', data.id);
-        //                 fabric.Image.fromURL(data.imagePath, function(img) {
-        //                     img.set({
-        //                         left: 0,
-        //                         top: 0,
-        //                         selectable: false, // Non-draggable background image
-        //                         hasControls: false // Disable resizing controls
-        //                     });
-        //                     canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
-
-        //                 });
-
-        //                 // Load static information (text elements)
-        //                 if (data.static_information) {
-        //                     hideStaticTextElements(); // Hide static text elements if static information is present
-        //                     const staticInfo = JSON.parse(data.static_information);
-        //                     console.log(staticInfo);
-
-        //                     // Render text elements on canvas
-        //                     staticInfo.textElements.forEach(element => {
-        //                         // alert();
-        //                         let textElement = new fabric.Textbox(element.text, { // Use Textbox for editable text
-        //                             left: element.left,
-        //                             top: element.top,
-        //                             width: element.width || 200, // Default width if not provided
-        //                             fontSize: element.fontSize,
-        //                             fill: element.fill,
-        //                             fontFamily: element.fontFamily,
-        //                             fontWeight: element.fontWeight,
-        //                             fontStyle: element.fontStyle,
-        //                             underline: element.underline,
-        //                             linethrough: element.linethrough,
-        //                             backgroundColor: element.backgroundColor,
-        //                             textAlign: element.textAlign,
-        //                             editable: true,
-        //                             hasControls: true,
-        //                             // borderColor: 'blue',
-        //                             borderColor: '#2DA9FC',
-        //                             // cornerColor: 'red',
-        //                             cornerColor: '#fff',
-        //                             cornerSize: 6,
-        //                             transparentCorners: false,
-        //                             isStatic: true
-        //                         });
-        //                         const textWidth = textElement.calcTextWidth();
-        //                         textElement.set({
-        //                             width: textWidth
-        //                         });
-
-        //                         textElement.on('scaling', function() {
-        //                             // Calculate the updated font size based on scaling factors
-        //                             var updatedFontSize = textElement.fontSize * (textElement.scaleX + textElement.scaleY) / 2;
-        //                             textElement.set('fontSize', updatedFontSize); // Update the font size
-        //                             canvas.renderAll(); // Re-render the canvas to reflect changes
-        //                         });
-
-        //                         addIconsToTextbox(textElement);
-        //                         canvas.add(textElement);
-
-        //                     });
-        //                 } else {
-        //                     showStaticTextElements();
-        //                     addDraggableText(150, 50, 'event_name', 'xyz'); // Position this outside the image area
-        //                     addDraggableText(150, 100, 'host_name', 'abc');
-        //                     addDraggableText(150, 150, 'start_time', '5:00PM');
-        //                     addDraggableText(150, 200, 'rsvp_end_time', '6:00PM');
-        //                     addDraggableText(150, 250, 'start_date', '2024-07-27');
-        //                     addDraggableText(150, 300, 'end_date', '2024-07-27');
-        //                     addDraggableText(150, 350, 'Location', 'fdf');
-
-        //                 }
-
-        //                 // Set custom attribute with the fetched ID
-
-        //                 canvas.renderAll(); // Ensure all elements are rendered
-        //             }
-        //         })
-        //         .catch(error => console.error('Error loading text data:', error));
-        // }
-
-
         var newshape = "";
         const shapes = ['circle', 'rectangle', 'star', 'heart']; // Array of available shapes
         let currentShapeIndex = 0; // Track the current shape index
@@ -158,72 +63,7 @@
 
                                 }
                             })
-                        }
-
-                        // // Load filed image (filedImagePath) as another image layer
-                        // if (data.filedImagePath) {
-                        //     const userImageElement = document.getElementById('user_image');
-                        //     const imageWrapper = document.getElementById('imageWrapper');
-                        //     const canvasElement = new fabric.Canvas('imageEditor', {
-                        //         width: 500, // Canvas width
-                        //         height: 500, // Canvas height
-                        //     });
-                        //     let isDragging = false;
-                        //     let isResizing = false;
-                        //     let startWidth, startHeight, startX, startY, activeHandle;
-                        //     let offsetX, offsetY;
-                        //     let shapeChangedDuringDrag = false; // Flag to track shape change
-                        //     let imageUploaded = false; // Flag to track if image has been uploaded
-
-                        //     const imgElement = new Image();
-                        //     imgElement.src = data.filedImagePath;
-
-                        //     userImageElement.src = data.filedImagePath;
-                        //     imageWrapper.style.display = 'block';
-
-                        //     imgElement.onload = function() {
-                        //         console.log("Image loaded successfully.");
-                        //         const imgInstance = new fabric.Image(imgElement, {
-                        //             left: 0,
-                        //             top: 0,
-                        //             selectable: true,
-                        //             hasControls: true,
-                        //             hasBorders: true,
-                        //             cornerColor: 'red',
-                        //             cornerStrokeColor: 'blue',
-                        //             borderColor: 'blue',
-                        //             cornerSize: 10,
-                        //             transparentCorners: false,
-                        //             lockUniScaling: true,
-                        //             scaleX: 600 / imgElement.width,
-                        //             scaleY: 600 / imgElement.height
-                        //         });
-
-                        //         canvasElement.add(imgInstance);
-                        //         drawCanvas();
-                        //         console.log('Image loaded and added to canvas.');
-                        //         imageUploaded = true; // Set flag to true after image is uploaded
-
-
-                        //         addIconsToImage(imgInstance);
-                        //         if (shape) {
-                        //             updateClipPath(imgInstance, shape); // Update the shape with fetched data
-                        //         }
-                        //         imgInstance.on('mouseup', function(options) {
-                        //             if (options.target) {
-                        //                 // Change to the next shape on click
-                        //                 currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
-                        //                 shape = shapes[currentShapeIndex];
-                        //                 updateClipPath(imgInstance, shape); // Update the shape
-                        //             }
-                        //         });
-                        //     };
-
-                        //     imgElement.onerror = function() {
-                        //         console.error("Failed to load image.");
-                        //     };
-
-                        // }
+                        }                      
                        
 
                         // Load static information (text and shapes)
@@ -264,12 +104,7 @@
                                         width: textWidth
                                     });
 
-                                    // textElement.on('scaling', function() {
-                                    //     var updatedFontSize = textElement.fontSize * (textElement.scaleX + textElement.scaleY) / 2;
-                                    //     textElement.set('fontSize', updatedFontSize);
-                                    //     canvas.renderAll();
-                                    // });
-
+                                 
                                     addIconsToTextbox(textElement);
                                     canvas.add(textElement);
                                     console.log(textElement);
@@ -731,72 +566,7 @@ function updateClipPath(imageUrl, element) {
         setLineHeight();
 
         // // Initialize the color picker
-        // $('#color-picker').spectrum({
-        //     type: "flat",
-        //     color: "#000000", // Default font color
-        //     showInput: true,
-        //     allowEmpty: true, // Allows setting background to transparent
-        //     showAlpha: true, // Allows transparency adjustment
-        //     preferredFormat: "rgba", // Ensure it handles RGBA
-        //     change: function(color) {
-        //         if (color) {
-        //             changeColor(color.toRgbString()); // Use RGB string for color changes
-        //         } else {
-        //             changeColor('rgba(0, 0, 0, 0)'); // Handle transparency by default
-        //         }
-        //     }
-        // });
-        // // Change event for radio buttons to update the color picker
-        // $('input[name="colorType"]').on('change', function() {
-        //     updateColorPicker(); // Update color picker when radio button changes
-        // });
-        // // Update color picker when object is selected
-        // canvas.on('selection:created', function() {
-        //     updateColorPicker(); // Update color picker when a new object is selected
-        // });
-        // canvas.on('selection:updated', function() {
-        //     updateColorPicker(); // Update color picker when selection is updated
-        // });
-        // // Function to change font or background color
-        // function changeColor(selectedColor) {
-        //     const selectedColorType = document.querySelector('input[name="colorType"]:checked').value;
-        //     const activeObject = canvas.getActiveObject();
-
-        //     if (!activeObject) {
-        //         // alert('No object selected');
-        //         return;
-        //     }
-
-        //     if (activeObject.type === 'textbox') {
-        //         if (selectedColorType === 'font') {
-        //             activeObject.set('fill', selectedColor); // Change font color
-        //         } else if (selectedColorType === 'background') {
-        //             activeObject.set('backgroundColor', selectedColor); // Change background color
-        //         }
-        //         canvas.renderAll(); // Re-render the canvas after color change
-        //     }
-        // }
-        // // Function to update the color picker based on the selected object's current font or background color
-        // function updateColorPicker() {
-        //     const activeObject = canvas.getActiveObject();
-        //     const selectedColorType = document.querySelector('input[name="colorType"]:checked').value;
-
-        //     if (activeObject && activeObject.type === 'textbox') {
-        //         if (selectedColorType === 'font') {
-        //             $('#color-picker').spectrum('set', activeObject.fill || '#000000'); // Set font color in picker
-        //         } else if (selectedColorType === 'background') {
-        //             const bgColor = activeObject.backgroundColor || 'rgba(0, 0, 0, 0)'; // Default to transparent background
-        //             $('#color-picker').spectrum('set', bgColor); // Set current background color in picker
-        //         }
-        //     }
-        // }
-        // // Update the color picker when the color type changes (font or background)
-        // $('input[name="colorType"]').change(function() {
-        //     const activeObject = canvas.getActiveObject();
-        //     if (activeObject && activeObject.type === 'textbox') {
-        //         updateColorPicker(); // Update picker when the selected color type changes
-        //     }
-        // });
+       
         // Initialize the color picker
         $('#color-picker').spectrum({
             type: "flat",
@@ -1002,120 +772,7 @@ function updateClipPath(imageUrl, element) {
             };
         }
 
-        // function updateIconPositions(textbox) {
-
-        //     if (textbox.trashIcon) {
-        //         canvas.remove(textbox.trashIcon);
-        //         textbox.trashIcon = null; // Clear reference
-        //         // const trashIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 50 50"><path d="M20,30 L30,30 L30,40 L20,40 Z M25,10 L20,10 L20,7 L30,7 L30,10 Z M17,10 L33,10 L33,40 L17,40 Z" fill="#FF0000"/></svg>`;
-        //         // const trashIconSVG = `<svg width="23px" height="23px" style="background-color: #fff; color:#000; padding: 10px; border-radius: 50%;" strock=""  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M135.2 17.7L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-7.2-14.3C307.4 6.8 296.3 0 284.2 0L163.8 0c-12.1 0-23.2 6.8-28.6 17.7zM416 128L32 128 53.2 467c1.6 25.3 22.6 45 47.9 45l245.8 0c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>`;
-
-
-        //         const trashIconSVG = `<svg width="29" x="0px" y="0px" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
-        //         <g filter="url(#filter0_d_5633_67674)">
-        //         <rect x="2.70312" y="2.37207" width="23.9674" height="23.9674" rx="11.9837" fill="white" shape-rendering="crispEdges"/>
-        //         <path d="M19.1807 11.3502C17.5179 11.1855 15.8452 11.1006 14.1775 11.1006C13.1888 11.1006 12.2001 11.1505 11.2115 11.2504L10.1929 11.3502" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-        //         <path d="M12.939 10.8463L13.0488 10.1922C13.1287 9.7178 13.1886 9.36328 14.0325 9.36328H15.3407C16.1846 9.36328 16.2495 9.73777 16.3244 10.1971L16.4342 10.8463" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-        //         <path d="M18.1073 12.9277L17.7827 17.9559C17.7278 18.7398 17.6829 19.349 16.2898 19.349H13.0841C11.691 19.349 11.6461 18.7398 11.5912 17.9559L11.2666 12.9277" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-        //         <path d="M13.853 16.6035H15.5158" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-        //         <path d="M13.4385 14.6055H15.9351" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-        //         </g>
-        //         <defs>
-        //         <filter id="filter0_d_5633_67674" x="0.705839" y="0.374784" width="27.9619" height="27.9623" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-        //         <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-        //         <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-        //         <feOffset/>
-        //         <feGaussianBlur stdDeviation="0.998643"/>
-        //         <feComposite in2="hardAlpha" operator="out"/>
-        //         <feColorMatrix type="matrix" values="0 0 0 0 0.309804 0 0 0 0 0.368627 0 0 0 0 0.443137 0 0 0 0.12 0"/>
-        //         <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_5633_67674"/>
-        //         <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_5633_67674" result="shape"/>
-        //         </filter>
-        //         </defs>
-        //         </svg>
-        //         `;
-        //         fabric.loadSVGFromString(trashIconSVG, function(objects, options) {
-        //             const trashIcon = fabric.util.groupSVGElements(objects, options);
-        //             trashIcon.set({
-        //                 left: textbox.left + textbox.width * textbox.scaleX - 20,
-        //                 top: textbox.top - 20,
-        //                 selectable: false,
-        //                 evented: true,
-        //                 hasControls: false,
-        //                 visible: false, // Initially hidden
-        //                 className: 'trash-icon',
-        //             });
-        //             textbox.trashIcon = trashIcon;
-
-
-        //             // Ensure the copyIcon is on top
-        //             canvas.bringToFront(trashIcon);
-        //             textbox.trashIcon.on('mousedown', function() {
-        //                 console.log('deleted icon');
-        //                 deleteTextbox(textbox);
-        //             });
-        //         })
-        //         // console.log('Updated Trash Icon Position:', textbox.trashIcon.left, textbox.trashIcon.top);
-        //     }
-
-        //     if (textbox.copyIcon) {
-        //         canvas.remove(textbox.copyIcon);
-        //         textbox.copyIcon = null; // Clear reference
-        //     }
-
-
-        //     // const copyIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"  x="0px" y="0px" width="20" height="20"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M384 336l-192 0c-8.8 0-16-7.2-16-16l0-256c0-8.8 7.2-16 16-16l140.1 0L400 115.9 400 320c0 8.8-7.2 16-16 16zM192 384l192 0c35.3 0 64-28.7 64-64l0-204.1c0-12.7-5.1-24.9-14.1-33.9L366.1 14.1c-9-9-21.2-14.1-33.9-14.1L192 0c-35.3 0-64 28.7-64 64l0 256c0 35.3 28.7 64 64 64zM64 128c-35.3 0-64 28.7-64 64L0 448c0 35.3 28.7 64 64 64l192 0c35.3 0 64-28.7 64-64l0-32-48 0 0 32c0 8.8-7.2 16-16 16L64 464c-8.8 0-16-7.2-16-16l0-256c0-8.8 7.2-16 16-16l32 0 0-48-32 0z"/></svg>`;
-        //     //             const copyIconSVG = `<svg x="0px" y="0px" width="29" height="19" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
-        //     // <path fill-rule="evenodd" clip-rule="evenodd" d="M9.6283 8.35281V2.36095C9.6283 1.80941 9.1812 1.3623 8.62966 1.3623H2.6378C2.08627 1.3623 1.63916 1.80941 1.63916 2.36095V8.35281C1.63916 8.90434 2.08627 9.35145 2.6378 9.35145H8.62966C9.1812 9.35145 9.6283 8.90434 9.6283 8.35281ZM2.6378 2.36095H8.62966V8.35281H2.6378V2.36095ZM10.6269 9.35145V3.35959C11.1785 3.35959 11.6256 3.8067 11.6256 4.35823V9.35145C11.6256 10.4545 10.7314 11.3487 9.6283 11.3487H4.63509C4.08355 11.3487 3.63645 10.9016 3.63645 10.3501H9.6283C10.1798 10.3501 10.6269 9.90298 10.6269 9.35145Z" fill="#0F172A"/>
-        //     // </svg>`;
-        //     const copyIconSVG = `<svg width="29" x="0px" y="0px" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
-        //     <g filter="url(#filter0_d_5633_67676)">
-        //     <rect x="2.64893" y="2.37207" width="23.9674" height="23.9674" rx="11.9837" fill="white" shape-rendering="crispEdges"/>
-        //     <path fill-rule="evenodd" clip-rule="evenodd" d="M17.6283 16.3538V10.3619C17.6283 9.81039 17.1812 9.36328 16.6297 9.36328H10.6378C10.0863 9.36328 9.63916 9.81039 9.63916 10.3619V16.3538C9.63916 16.9053 10.0863 17.3524 10.6378 17.3524H16.6297C17.1812 17.3524 17.6283 16.9053 17.6283 16.3538ZM10.6379 10.362H16.6298V16.3539H10.6379V10.362ZM18.6271 17.3525V11.3607C19.1786 11.3607 19.6257 11.8078 19.6257 12.3593V17.3525C19.6257 18.4556 18.7315 19.3498 17.6284 19.3498H12.6352C12.0837 19.3498 11.6366 18.9027 11.6366 18.3512H17.6284C18.1799 18.3512 18.6271 17.9041 18.6271 17.3525Z" fill="#0F172A"/>
-        //     </g>
-        //     <defs>
-        //     <filter id="filter0_d_5633_67676" x="0.651639" y="0.374784" width="27.9619" height="27.9623" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-        //     <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-        //     <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-        //     <feOffset/>
-        //     <feGaussianBlur stdDeviation="0.998643"/>
-        //     <feComposite in2="hardAlpha" operator="out"/>
-        //     <feColorMatrix type="matrix" values="0 0 0 0 0.309804 0 0 0 0 0.368627 0 0 0 0 0.443137 0 0 0 0.12 0"/>
-        //     <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_5633_67676"/>
-        //     <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_5633_67676" result="shape"/>
-        //     </filter>
-        //     </defs>
-        //     </svg>
-        //     `;
-
-        //     fabric.loadSVGFromString(copyIconSVG, function(objects, options) {
-        //         let copyIcon = fabric.util.groupSVGElements(objects, options);
-        //         copyIcon.set({
-        //             left: textbox.left - 25,
-        //             top: textbox.top - 20,
-        //             selectable: false,
-        //             evented: true,
-        //             hasControls: false,
-        //             visible: true, // Initially hidden
-        //             className: 'copy-icon',
-        //         });
-        //         // Add the copyIcon to the canvas
-        //         textbox.copyIcon = copyIcon
-
-        //         // Ensure the copyIcon is on top
-        //         canvas.bringToFront(copyIcon);
-
-        //         // Handle copy icon click
-        //         textbox.copyIcon.on('mousedown', function() {
-        //             console.log('Copy icon clicked1');
-        //             cloneTextbox(textbox);
-        //         });
-        //     })
-        //     // console.log('Updated Copy Icon Position:', textbox.copyIcon.left, textbox.copyIcon.top);
-
-
-        //     canvas.renderAll(); // Re-render the canvas to apply the new positions
-        // }
+       
 
         function updateIconPositions(textbox) {
             if (textbox.trashIcon) {
@@ -1534,58 +1191,6 @@ function updateClipPath(imageUrl, element) {
         }
 
 
-        // function saveTextDataToDatabase() {
-
-        //     // Hide the text elements
-        //     var textData = getTextDataFromCanvas();
-        //     var imageURL = canvas.toDataURL('image/png');
-        //     var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content'); // Get CSRF token
-        //     // Get the canvas ID to associate the saved data with a specific record
-        //     var canvasElement = document.getElementById('imageEditor1');
-        //     var canvasId = canvasElement.getAttribute('data-canvas-id');
-        //     var imageName = 'image_' + Date.now() + '.png';
-
-        //     var id = $('#template_id').val();
-        //     const width = userImageElement.clientWidth;
-        //     const height = userImageElement.clientHeight;
-        //     const left = imageWrapper.offsetLeft;
-        //     const top = imageWrapper.offsetTop;
-        //     const centerX = left + width / 2;
-        //     const centerY = top + height / 2;
-
-        //     console.log(canvasId);
-        //     console.log(textData);
-        //     shapeImageData = [];
-
-
-        //     fetch('/saveTextData', {
-        //             method: 'POST',
-        //             headers: {
-        //                 'Content-Type': 'application/json', // Set content type to JSON
-        //                 'X-CSRF-TOKEN': csrfToken // Include CSRF token
-        //             },
-        //             body: JSON.stringify({
-        //                 id: canvasId,
-        //                 textElements: textData,
-        //                 shape: shape,
-        //                 centerX: centerX,
-        //                 centerY: centerY,
-        //                 width: width,
-        //                 height: height
-        //             })
-        //         })
-        //         .then(response => response.json())
-        //         .then(data => {
-        //             console.log('Text data saved successfully', data);
-        //             // window.location.href = "{{URL::to('/admin/create_template')}}";
-
-        //         })
-        //         .catch((error) => {
-        //             console.error('Error:', error);
-        //         });
-        //     hideStaticTextElements();
-        //     showStaticTextElements();
-        // }
 
         function saveTextDataToDatabase() {
 
@@ -1607,20 +1212,7 @@ function updateClipPath(imageUrl, element) {
             const centerX = left + width / 2;
             const centerY = top + height / 2;
 
-            // fetch('/saveTextData', {
-            //         method: 'POST',
-            //         headers: {
-            //             'X-CSRF-TOKEN': csrfToken // Include CSRF token
-            //         },
-            //         body: canvasId
-            //     })
-            //     .then(response => response.json())
-            //     .then(data => {
-
-            //     })
-            //     .catch((error) => {
-            //         console.error('Error:', error);
-            //     });
+           
             var shapeImageData = [];
 
             shapeImageData.push(updatedOBJImage);
@@ -1629,27 +1221,7 @@ function updateClipPath(imageUrl, element) {
             console.log(shapeImageData);
             console.log(updatedOBJImage);
             console.log(textData);
-            // alert(0)
-            // $.ajax({ 
-            //     headers: {
-            //         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-            //     },
-            //     url: base_url + "/saveTextData",
-            //     type: "POST",
-            //     dataType: 'json', // Expect a JSON response
-            //     data: {
-            //         id: canvasId, // Send as an object, not JSON string
-            //         textElements: textData,
-            //         shapeImageData: shapeImageData,
-            //     },
-            //     success: function(response) {
-            //         console.log('Text data saved successfully', response);
-            //         window.location.href = "{{URL::to('/admin/create_template')}}";
-            //     },
-            //     error: function(xhr, status, error) {
-            //         console.error("Failed Not Saved Data:", error);
-            //     },
-            // });
+           
 
             fetch('/saveTextData', {
                     method: 'POST',
@@ -1683,17 +1255,6 @@ function updateClipPath(imageUrl, element) {
 
 
 
-
-        // document.getElementById('antaresiaButton').addEventListener('click', function() {
-        //     console.log("fontname")
-        //     loadAndUse("Antaresia");
-        // });
-        // document.getElementById('JosefinSansButton').addEventListener('click', function() {
-        //     console.log("fontname");
-        //     loadAndUse("JosefinSans-Regular");
-
-
-        // });
         document.getElementById('AbrilFatfaceButton').addEventListener('click', function() {
             console.log("fontname")
             loadAndUse("AbrilFatface-Regular");
@@ -1726,13 +1287,7 @@ function updateClipPath(imageUrl, element) {
 
 
         });
-        // document.getElementById('BotanicaScript-RegularButton').addEventListener('click', function() {
-        //     console.log("fontname")
-
-        //     loadAndUse("BotanicaScript-Regular");
-
-
-        // });
+      
         document.getElementById('ArcherButton').addEventListener('click', function() {
             console.log("fontname")
 
@@ -1893,130 +1448,14 @@ function updateClipPath(imageUrl, element) {
         }
 
 
-        // function executeCommand(command) {
-        //     var activeObject = canvas.getActiveObject();
-        //     if (!activeObject) {
-        //         alert('No object selected');
-        //         return;
-        //     }
-        //     if (activeObject && activeObject.type === 'textbox') {
-
-        //         const commands = {
-        //             bold: () => activeObject.set('fontWeight', activeObject.fontWeight === 'bold' ? '' : 'bold'),
-        //             italic: () => activeObject.set('fontStyle', activeObject.fontStyle === 'italic' ? '' : 'italic'),
-        //             underline: () => {
-        //                 activeObject.set('underline', !activeObject.underline);
-        //                 // Update line height after toggling underline
-        //                 const currentLineHeight = activeObject.lineHeight || 1.2; // Default line height
-        //                 activeObject.set('lineHeight', currentLineHeight); // Reapply the line height
-        //             },
-        //             setLineHeight: (value) => {
-        //                 activeObject.set('lineHeight', value);
-        //             },
-        //             strikeThrough: () => activeObject.set('linethrough', !activeObject.linethrough),
-        //             removeFormat: () => {
-        //                 activeObject.set({
-        //                     fontWeight: '',
-        //                     fontStyle: '',
-        //                     underline: false,
-        //                     linethrough: false,
-        //                     fontFamily: 'Arial'
-        //                 });
-        //             },
-        //             fontName: () => {
-        //                 var selectedFont = document.querySelector('[data-command="fontName"]').value;
-        //                 activeObject.set('fontFamily', selectedFont);
-        //             },
-
-        //             justifyLeft: () => activeObject.set('textAlign', 'left'),
-        //             justifyCenter: () => activeObject.set('textAlign', 'center'),
-        //             justifyRight: () => activeObject.set('textAlign', 'right'),
-        //             justifyFull: () => activeObject.set('textAlign', 'justify'),
-
-        //             uppercase: () => activeObject.set('text', activeObject.text.toUpperCase()),
-        //             lowercase: () => activeObject.set('text', activeObject.text.toLowerCase()),
-        //             capitalize: () => {
-        //                 const capitalizedText = activeObject.text.replace(/\b\w/g, char => char.toUpperCase());
-        //                 activeObject.set('text', capitalizedText);
-        //             }
-
-        //         };
-        //         if (commands[command]) {
-        //             commands[command]();
-        //             canvas.renderAll();
-        //             addToUndoStack(); // Save state after executing the command
-        //         }
-        //     }
-        // }
+      
 
         document.querySelectorAll('[data-command]').forEach(function(button) {
             button.addEventListener('click', function() {
                 executeCommand(this.getAttribute('data-command'));
             });
         });
-        // document.getElementById('fontFamilySelect').addEventListener('change', function () {
-        //     executeCommand('fontName');
-        // });
-
-
-        // document.getElementById('dateFormatSelect').addEventListener('change', function () {
-        //     // Get the selected date format
-        //     var selectedFormat = this.value;
-
-        //     // Get the active object from the canvas (assuming it's a textbox)
-        //     var activeObject = canvas.getActiveObject();
-        //     if (activeObject && activeObject.type === 'textbox') {
-        //         // Extract the date text from the active object
-        //         var dateText = activeObject.text;
-
-        //         // Optional: You can use regex to identify a date within the text if it's not the whole text
-        //         // Assuming the whole text is the date for simplicity
-        //         var formattedDate = formatDate(dateText, selectedFormat);
-
-        //         // Update the active object's text with the formatted date
-        //         activeObject.set('text', formattedDate);
-        //         activeObject.set('date_formate', selectedFormat);
-        //         canvas.renderAll(); // Re-render the canvas
-        //     }
-        // });
-
-        // function formatDate(dateStr, format) {
-        //     // Parse the existing date (e.g., in YYYY-MM-DD format)
-        //     var dateParts = dateStr.split(/[-\/]/); // Adjust the regex if date separators are different
-
-        //     var year, month, day;
-        //     if (dateParts.length === 3) {
-        //         if (dateParts[0].length === 4) {
-        //             // Assume YYYY-MM-DD format
-        //             year = dateParts[0];
-        //             month = dateParts[1];
-        //             day = dateParts[2];
-        //         } else {
-        //             // Assume DD-MM-YYYY or MM-DD-YYYY
-        //             day = dateParts[0];
-        //             month = dateParts[1];
-        //             year = dateParts[2];
-        //         }
-        //     } else {
-        //         return dateStr; // Return original text if not a valid date
-        //     }
-
-        //     // Reformat date based on the selected format
-        //     switch (format) {
-        //         case 'd-m-Y':
-        //             return `${day}-${month}-${year}`;
-        //         case 'Y-m-d':
-        //             return `${year}-${month}-${day}`;
-        //         case 'm/d/Y':
-        //             return `${month}/${day}/${year}`;
-        //         case 'd/m/Y':
-        //             return `${day}/${month}/${year}`;
-        //         default:
-        //             return dateStr; // Return original if no valid format is found
-        //     }
-        // }
-
-
+        
         // Undo and Redo actions (basic implementation)
         let undoStack = [];
     let redoStack = [];
@@ -2035,12 +1474,7 @@ function updateClipPath(imageUrl, element) {
         }, 200); // Adjust delay as necessary (200ms is an example)
     }
 
-    // Call this function whenever you modify the canvas
-    // canvas.on('object:added', addToUndoStack);
-    // canvas.on('object:modified', addToUndoStack);
-    // canvas.on('object:removed', addToUndoStack);
-    // canvas.on('object:scaled', addToUndoStack);
-    // canvas.on('object:moved', addToUndoStack);
+  
 
     function undo() {
         console.log(undoStack);
@@ -2089,40 +1523,14 @@ function updateClipPath(imageUrl, element) {
                 undoStack.splice(index, 1);  // Remove the empty state from undoStack
             }
             })
-        // Loop through canvas objects and reattach icons to textboxes
-        // canvas.getObjects().forEach(obj => {
-        //     if (obj.type === 'group') {
-        //         canvas.remove(obj) // Your existing function to add icons
-        //     }
-        // });
+      
     }
  
 
   document.querySelector('[data-command="undo"]').addEventListener('click', undo);
     document.querySelector('[data-command="redo"]').addEventListener('click', redo);
 
-        // Remove formatting
-        // document.querySelector('[data-command="removeFormat"]').addEventListener('click', function () {
-        //     executeCommand('removeFormat');
-        // });
-
-        // Delete all textboxes
-        // document.getElementById('deleteAllBtn').addEventListener('click', function () {
-        //     canvas.getObjects('textbox').forEach(function (textbox) {
-        //         canvas.remove(textbox);
-
-        //     });
-        //     canvas.renderAll();
-        // });
-
-
-        // Add event listener for the button (assuming your button has id="saveButton")
-        // document.getElementById('saveButton').addEventListener('click', function() {
-        //     // alert()
-
-        //     // saveTextDataToDatabase();
-        //     // window.location.href = '/templates/view';
-        // });
+       
 
         const fileInput = document.getElementById('fileInput');
         const userImageElement = document.getElementById('user_image');
@@ -2293,44 +1701,7 @@ function updateClipPath(imageUrl, element) {
                             height: 100
                         };
                         updateClipPath(data.imagePath, updatedOBJImage)
-                        // const imgElement = new Image();
-                        // imgElement.src = data.imagePath;
-                        // imgElement.addClass = 'image-element-prakash';
-
-                        // userImageElement.src = data.imagePath;
-                        // imageWrapper.style.display = 'block';
-
-                        // imgElement.onload = function() {
-                        //     console.log("Image loaded successfully.");
-                        //     const imgInstance = new fabric.Image(imgElement, {
-                        //         left: 0,
-                        //         top: 0,
-                        //         selectable: true,
-                        //         hasControls: true,
-                        //         hasBorders: true,
-                        //         // cornerColor: 'red',
-                        //         cornerStrokeColor: 'blue',
-                        //         // borderColor: 'blue',
-                        //         borderColor: '#2DA9FC',
-                        //         // cornerColor: 'red',
-                        //         cornerColor: '#fff',
-                        //         cornerSize: 10,
-                        //         transparentCorners: false,
-                        //         lockUniScaling: true,
-                        //         scaleX: 600 / imgElement.width,
-                        //         scaleY: 600 / imgElement.height
-                        //     });
-
-                        //     canvasElement.add(imgInstance);
-                        //     canvasElement.bringToFront(imgInstance);
-                        //     drawCanvas();
-                        //     console.log('Image loaded and added to canvas.');
-                        //     imageUploaded = true; // Set flag to true after image is uploaded
-                        // };
-
-                        // imgElement.onerror = function() {
-                        //     console.error("Failed to load image.");
-                        // };
+                      
                     })
                     .catch(error => {
                         console.error('There was a problem with the fetch operation:', error);
@@ -2341,45 +1712,7 @@ function updateClipPath(imageUrl, element) {
         document.getElementById('saveButton').addEventListener('click', function() {
             // alert();
             saveTextDataToDatabase();
-            // var id = $('#template_id').val();
-            // const width = userImageElement.clientWidth;
-            // const height = userImageElement.clientHeight;
-            // const left = imageWrapper.offsetLeft;
-            // const top = imageWrapper.offsetTop;
-            // const centerX = left + width / 2;
-            // const centerY = top + height / 2;
-            // if (imageUploaded) {
-            //     fetch(`/save_shape/${id}`, {
-            //             method: 'POST',
-            //             headers: {
-            //                 'Content-Type': 'application/json',
-            //                 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
-            //                     .getAttribute('content')
-            //             },
-            //             body: JSON.stringify({
-            //                 shape: shape,
-            //                 centerX: centerX,
-            //                 centerY: centerY,
-            //                 width: width,
-            //                 height: height
-            //             })
-            //         })
-            //         .then(response => {
-            //             alert(response);
-            //             if (!response.ok) {
-            //                 throw new Error('Network response was not ok');
-            //             }
-            //             return response.json();
-            //         })
-            //         .then(data => {
-            //             console.log('Shape saved successfully:', data);
-            //         })
-            //         .catch(error => {
-            //             console.error('There was a problem with saving the shape:', error);
-            //         });
-            // } else {
-            //     // alert("Please upload an image before saving the shape.");
-            // }
+          
         });
 
         Object.values(resizeHandles).forEach(handle => {
@@ -2453,5 +1786,4 @@ function updateClipPath(imageUrl, element) {
     })
 
 
-    //  =========================
 </script>
