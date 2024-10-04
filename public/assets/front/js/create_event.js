@@ -1266,6 +1266,7 @@ $(document).on("click", ".add_category_btn", function () {
             $("#category_quantity_error").css("display", "none");
             $("#category_quantity").val(1);
             if (response.status == 1) {
+                console.log(response);
                 $("#hidden_category_name").val(categoryName);
                 $("#hidden_category_quantity").val(categoryQuantity);
                 if(edit_category_id == ''){
