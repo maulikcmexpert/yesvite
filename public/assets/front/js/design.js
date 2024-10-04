@@ -4,7 +4,11 @@ var image = null;
 var base_url = $("#base_url").text();
 var canvas;
 var shapeImageUrl;
-$(document).on("click", ".design-card", function () {
+let currentImage = null;
+let isImageDragging = false; // Track if the image is being dragged
+let isimageoncanvas = false;
+let oldImage = null;
+$(document).on("click", ".design-card", function() {
     var url = $(this).data("url");
     var template = $(this).data("template");
     var imageUrl = $(this).data("image");
@@ -13,13 +17,13 @@ $(document).on("click", ".design-card", function () {
     console.log(json);
     var id = $(this).data("id");
     $(".edit_design_tem").attr("data-image", imageUrl);
-    if(eventData.textData != null && eventData.temp_id != null && eventData.temp_id == id){
+    if (eventData.textData != null && eventData.temp_id != null && eventData.temp_id == id) {
         dbJson = {
             textElements: eventData.textData.textElements
         };
         console.log(dbJson);
-        temp_id = eventData.temp_id; 
-    }else{
+        temp_id = eventData.temp_id;
+    } else {
         console.log(json);
         dbJson = json;
         temp_id = id;
@@ -57,7 +61,7 @@ $(document).on("click", ".design-card", function () {
         lineHeight: 1.2,
     };
 
-    fabric.Image.fromURL(image, function (img) {
+    fabric.Image.fromURL(image, function(img) {
         img.set({
             left: 0,
             top: 0,
@@ -96,35 +100,45 @@ $(document).on("click", ".design-card", function () {
         switch (element.text) {
             case "event_name":
                 if (eventData.event_name) {
-                    textElement.set({ text: eventData.event_name });
+                    textElement.set({
+                        text: eventData.event_name
+                    });
                 } else {
                     return; // Skip adding the element if event_name is empty
                 }
                 break;
             case "host_name":
                 if (eventData.hosted_by) {
-                    textElement.set({ text: eventData.hosted_by });
+                    textElement.set({
+                        text: eventData.hosted_by
+                    });
                 } else {
                     return; // Skip adding the element if host_name is empty
                 }
                 break;
             case "Location":
                 if (eventData.event_location) {
-                    textElement.set({ text: eventData.event_location });
+                    textElement.set({
+                        text: eventData.event_location
+                    });
                 } else {
                     return; // Skip adding the element if event_location_name is empty
                 }
                 break;
             case "start_time":
                 if (eventData.start_time) {
-                    textElement.set({ text: eventData.start_time });
+                    textElement.set({
+                        text: eventData.start_time
+                    });
                 } else {
                     return; // Skip adding the element if start_time is empty
                 }
                 break;
             case "rsvp_end_time":
                 if (eventData.rsvp_end_time) {
-                    textElement.set({ text: eventData.rsvp_end_time });
+                    textElement.set({
+                        text: eventData.rsvp_end_time
+                    });
                 } else {
                     return; // Skip adding the element if rsvp_end_time is empty
                 }
@@ -139,7 +153,9 @@ $(document).on("click", ".design-card", function () {
                         start_date = eventData.event_date;
                     }
 
-                    textElement.set({ text: start_date });
+                    textElement.set({
+                        text: start_date
+                    });
                 } else {
                     return; // Skip adding the element if start_date is empty
                 }
@@ -154,14 +170,18 @@ $(document).on("click", ".design-card", function () {
                         end_date = eventData.event_date;
                     }
 
-                    textElement.set({ text: end_date });
+                    textElement.set({
+                        text: end_date
+                    });
                 } else {
                     return; // Skip adding the element if end_date is empty
                 }
                 break;
         }
         const textWidth = textElement.calcTextWidth();
-        textElement.set({ width: textWidth });
+        textElement.set({
+            width: textWidth
+        });
         canvas.add(textElement);
     });
     var shape = '';
@@ -171,18 +191,18 @@ $(document).on("click", ".design-card", function () {
         //     if (element.shape && element.centerX && element.centerY && element.height && element.width) {
         //         var imgObj = new Image();
         //         imgObj.src = shapeImageUrl; // Set your image URL
-                
+
         //         imgObj.onload = function () {
         //             // Create the image object in fabric.js
         //             var img = new fabric.Image(imgObj);
-                
+
         //             img.set({
         //                 left: canvas.width / 2 - img.width / 2,
         //                 top: canvas.height / 2 - img.height / 2,
         //                 scaleX: 0.5, // Scaling the image
         //                 scaleY: 0.5
         //             });
-                
+
         //             // Function to switch between different shapes
         //             function changeShape(shape) {
         //                 switch (shape) {
@@ -196,7 +216,7 @@ $(document).on("click", ".design-card", function () {
         //                             })
         //                         });
         //                         break;
-                
+
         //                     case 'circle':
         //                         img.set({
         //                             clipPath: new fabric.Circle({
@@ -206,7 +226,7 @@ $(document).on("click", ".design-card", function () {
         //                             })
         //                         });
         //                         break;
-                
+
         //                     case 'star':
         //                         img.set({
         //                             clipPath: new fabric.Path(
@@ -218,7 +238,7 @@ $(document).on("click", ".design-card", function () {
         //                             })
         //                         });
         //                         break;
-                
+
         //                     case 'rounded-border':
         //                         img.set({
         //                             clipPath: new fabric.Rect({
@@ -231,7 +251,7 @@ $(document).on("click", ".design-card", function () {
         //                             })
         //                         });
         //                         break;
-                
+
         //                     case 'heart':
         //                         img.set({
         //                             clipPath: new fabric.Path(
@@ -243,18 +263,18 @@ $(document).on("click", ".design-card", function () {
         //                             })
         //                         });
         //                         break;
-                
+
         //                     default:
         //                         img.set({
         //                             clipPath: null // Remove any clipping path
         //                         });
         //                         break;
         //                 }
-                
+
         //                 // Re-render the canvas after changing the shape
         //                 canvas.renderAll();
         //             }
-                
+
         //             // Add event listener to change shape on click
         //             img.on('mousedown', function() {
         //                 // Example: Toggle through shapes on each click (you can adjust this logic)
@@ -262,17 +282,17 @@ $(document).on("click", ".design-card", function () {
         //                 var currentShape = shapes[Math.floor(Math.random() * shapes.length)]; // Random shape for demo
         //                 changeShape(currentShape);
         //             });
-                
+
         //             // Add the image to the canvas
         //             canvas.add(img);
         //             canvas.renderAll();
         //         };
-                
+
         //     }
         // });
     }
-    
-    
+
+
 
     // Load filed image (filedImagePath) as another image layer
     if (shapeImageUrl) {
@@ -284,17 +304,17 @@ $(document).on("click", ".design-card", function () {
     }
 
 });
-$(document).on("click", ".modal-design-card", function (e) {
+$(document).on("click", ".modal-design-card", function(e) {
     e.stopPropagation();
 });
 
-$(document).on("click", ".close-btn", function () {
+$(document).on("click", ".close-btn", function() {
     toggleSidebar();
     var id = $(this).data("id");
     $("#sidebar").removeClass(id);
 });
 
-$(document).on("click", ".design-sidebar-action", function () {
+$(document).on("click", ".design-sidebar-action", function() {
     let designId = $(this).attr("design-id");
     if (designId) {
         if (designId == "6") {
@@ -321,7 +341,7 @@ $(document).on("click", ".design-sidebar-action", function () {
     }
 });
 
-$(document).on("click", ".edit_design_tem", function (e) {
+$(document).on("click", ".edit_design_tem", function(e) {
     e.preventDefault();
     // console.log(dbJson);
     // console.log(image);
@@ -342,16 +362,16 @@ $(document).on("click", ".edit_design_tem", function (e) {
     $.ajax({
         url: base_url + "event/get_design_edit_page",
         method: "POST",
-        dataType:'html',
+        dataType: 'html',
         data: {
             _token: $('meta[name="csrf-token"]').attr("content"),
         },
-        success: function (response) {
+        success: function(response) {
             console.log(response);
             $("#edit-design-temp").html(response).show();
             bindData();
         },
-        error: function (xhr, status, error) {},
+        error: function(xhr, status, error) {},
     });
 
 });
@@ -385,29 +405,29 @@ function bindData() {
             var rotateIcon = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAHqSURBVHgBtZW7S8NQFMZPxFXbzUGULIJPdHBwUAgWQamDj1msg0MXHQWXCiIdHFpQKupgrVR0sovgZBEfQx0UdHBLH9bVpv0DjueksRbb5Da2/uBrm4Z7vvvde5IrgQBEdNLXDGmQJJOcxq0c6YYUkyQpCX+BisukAOkTxcRJip36bLBaY/HfBIzkQgMf1odKkv/T4JsnrJaI/lSwsQSqmaiiUTktj6l0Fm2gcO0mw8ADxfY0RcsXYMw1D3cPCbCBrzxFXDQl78o6Otp6sbNrBEddc/p1jamcTYaPIprSQH83OFpbwL+5BqHgFnR2tMP0nAfSmQ/R0Bnhhvu3d3UxqfQ7hvYjpXvRswscGJ4QJQkKTXh5uLgZ7tlFvL1PWJU44uWSzXKmM1lwOFr0pTFdxr5uYTOwSRLqhPfKAs3ShBNoWoFm+mha4fLqmpqiByxI6p9o8SCGDiL65lZrV24IbmUBQ82G2zGUPzhleJcX9DTcrvybW5n36vQ8pt+PhncsU9BZ8ywZSfhlpsLPgVQBF947PIGX1zd9Gd1T4+CedIGAJTIJl67IaAMbi1phyWmw+IpuFHLVbFg8clWsHw9YUacRH9kK1AoW90i1YRBHq2NXkMqD5keBSgqKZi+BDYyZspKkHLVnrpZxX+O67qGyL3x/AAAAAElFTkSuQmCC";
             var img = document.createElement('img');
             img.src = rotateIcon;
-        
+
             // here's where your custom rotation control is defined
             // by changing the values you can customize the location, size, look, and behavior of the control
             fabric.Textbox.prototype.controls.mtr = new fabric.Control({
-              x: 0,
-              y: -0.5,
-              offsetY: -40,
-              cursorStyle: 'pointer',
-              actionHandler: fabric.controlsUtils.rotationWithSnapping,
-              actionName: 'rotate',
-              render: renderIcon,
-              cornerSize: 28,
-              withConnection: true
+                x: 0,
+                y: -0.5,
+                offsetY: -40,
+                cursorStyle: 'pointer',
+                actionHandler: fabric.controlsUtils.rotationWithSnapping,
+                actionName: 'rotate',
+                render: renderIcon,
+                cornerSize: 28,
+                withConnection: true
             });
-        
+
             // here's where the render action for the control is defined
             function renderIcon(ctx, left, top, styleOverride, fabricObject) {
-              var size = this.cornerSize;
-              ctx.save();
-              ctx.translate(left, top);
-              ctx.rotate(fabric.util.degreesToRadians(fabricObject.angle));
-              ctx.drawImage(img, -size / 2, -size / 2, size, size);
-              ctx.restore();
+                var size = this.cornerSize;
+                ctx.save();
+                ctx.translate(left, top);
+                ctx.rotate(fabric.util.degreesToRadians(fabricObject.angle));
+                ctx.drawImage(img, -size / 2, -size / 2, size, size);
+                ctx.restore();
             }
 
             // Load static information (text elements)
@@ -424,7 +444,7 @@ function bindData() {
                     });
 
                     const textWidth = textMeasurement.width;
-                    
+
                     let textElement = new fabric.Textbox(element.text, {
                         // Use Textbox for editable text
                         left: element.left,
@@ -447,7 +467,7 @@ function bindData() {
                         transparentCorners: false,
                         lockScalingFlip: true,
                         hasBorders: true,
-                        centeredRotation:true,
+                        centeredRotation: true,
                     });
 
                     // textElement.setControlsVisibility({
@@ -460,7 +480,7 @@ function bindData() {
                     //     ml: true,  // Show middle left control
                     //     mr: true   // Show middle right control
                     // });
-                    
+
                     // Custom rendering of middle-left (ml) control as a rectangle
                     textElement.controls.ml = new fabric.Control({
                         x: -0.5, // Left side
@@ -488,38 +508,38 @@ function bindData() {
                             ctx.fillRect(left - 2, top - 7, 4, 8); // Draw a rectangle control for 'mr'
                         }
                     });
-                    
+
                     var rotateIcon = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAHqSURBVHgBtZW7S8NQFMZPxFXbzUGULIJPdHBwUAgWQamDj1msg0MXHQWXCiIdHFpQKupgrVR0sovgZBEfQx0UdHBLH9bVpv0DjueksRbb5Da2/uBrm4Z7vvvde5IrgQBEdNLXDGmQJJOcxq0c6YYUkyQpCX+BisukAOkTxcRJip36bLBaY/HfBIzkQgMf1odKkv/T4JsnrJaI/lSwsQSqmaiiUTktj6l0Fm2gcO0mw8ADxfY0RcsXYMw1D3cPCbCBrzxFXDQl78o6Otp6sbNrBEddc/p1jamcTYaPIprSQH83OFpbwL+5BqHgFnR2tMP0nAfSmQ/R0Bnhhvu3d3UxqfQ7hvYjpXvRswscGJ4QJQkKTXh5uLgZ7tlFvL1PWJU44uWSzXKmM1lwOFr0pTFdxr5uYTOwSRLqhPfKAs3ShBNoWoFm+mha4fLqmpqiByxI6p9o8SCGDiL65lZrV24IbmUBQ82G2zGUPzhleJcX9DTcrvybW5n36vQ8pt+PhncsU9BZ8ywZSfhlpsLPgVQBF947PIGX1zd9Gd1T4+CedIGAJTIJl67IaAMbi1phyWmw+IpuFHLVbFg8clWsHw9YUacRH9kK1AoW90i1YRBHq2NXkMqD5keBSgqKZi+BDYyZspKkHLVnrpZxX+O67qGyL3x/AAAAAElFTkSuQmCC";
                     var img = document.createElement('img');
                     img.src = rotateIcon;
-                
+
                     // here's where your custom rotation control is defined
                     // by changing the values you can customize the location, size, look, and behavior of the control
                     textElement.controls.mtr = new fabric.Control({
-                      x: 0,
-                      y: -0.5,
-                      offsetY: -40,
-                      cursorStyle: 'pointer',
-                      actionHandler: fabric.controlsUtils.rotationWithSnapping,
-                      actionName: 'rotate',
-                      render: renderIcon,
-                      cornerSize: 28,
-                      withConnection: true,
-                      hasBorders: false
+                        x: 0,
+                        y: -0.5,
+                        offsetY: -40,
+                        cursorStyle: 'pointer',
+                        actionHandler: fabric.controlsUtils.rotationWithSnapping,
+                        actionName: 'rotate',
+                        render: renderIcon,
+                        cornerSize: 28,
+                        withConnection: true,
+                        hasBorders: false
                     });
-                
+
                     // here's where the render action for the control is defined
                     function renderIcon(ctx, left, top, styleOverride, fabricObject) {
-                      var size = this.cornerSize;
-                      ctx.save();
-                      ctx.translate(left, top);
-                      ctx.rotate(fabric.util.degreesToRadians(fabricObject.angle));
-                      ctx.drawImage(img, -size / 2, -size / 2, size, size);
-                      ctx.fill();
-                      ctx.restore();
+                        var size = this.cornerSize;
+                        ctx.save();
+                        ctx.translate(left, top);
+                        ctx.rotate(fabric.util.degreesToRadians(fabricObject.angle));
+                        ctx.drawImage(img, -size / 2, -size / 2, size, size);
+                        ctx.fill();
+                        ctx.restore();
                     }
 
-                  
+
                     switch (element.text) {
                         case "event_name":
                             if (eventData.event_name) {
@@ -630,7 +650,7 @@ function bindData() {
                             }
                             break;
                     }
-                   
+
                     addIconsToTextbox(textElement);
                     canvas.add(textElement);
                 });
@@ -640,7 +660,7 @@ function bindData() {
                         updateClipPath(shapeImageUrl, element);
                     }
                 }
-                
+
             } else {
                 showStaticTextElements();
             }
@@ -655,7 +675,7 @@ function bindData() {
         }
     }
 
-    
+
 
     function getWidth(element, text) {
         const textMeasurement = new fabric.Text(text, {
@@ -755,7 +775,7 @@ function bindData() {
         textbox.on("scaling", function() {
             updateIconPositions(textbox);
         });
-        textbox.on('rotating', function () {
+        textbox.on('rotating', function() {
             updateIconsPositions(textbox);
         });
 
@@ -1007,7 +1027,7 @@ function bindData() {
                 ); // Set font color in picker
             } else if (selectedColorType === "background") {
                 const bgColor =
-                    activeObject.backgroundColor || 'rgba(0, 0, 0, 0)';// Default to transparent background
+                    activeObject.backgroundColor || 'rgba(0, 0, 0, 0)'; // Default to transparent background
                 $("#color-picker").spectrum("set", bgColor); // Set current background color in picker
             }
 
@@ -1139,32 +1159,32 @@ function bindData() {
     function updateIconsPositions(textbox) {
         const angle = fabric.util.degreesToRadians(textbox.angle);
         const boundingRect = textbox.getBoundingRect(true);
-    
+
         // Calculate the new position for the trash icon
-        const trashOffsetX = +75;  // Offset for the trash icon
-        const trashOffsetY = - 30;  // Adjust icon's vertical position
+        const trashOffsetX = +75; // Offset for the trash icon
+        const trashOffsetY = -30; // Adjust icon's vertical position
         const trashRotatedX = textbox.left + trashOffsetX * Math.cos(angle) - trashOffsetY * Math.sin(angle);
         const trashRotatedY = textbox.top + trashOffsetX * Math.sin(angle) + trashOffsetY * Math.cos(angle);
-    
+
         if (textbox.trashIcon) {
             textbox.trashIcon.left = trashRotatedX;
             textbox.trashIcon.top = trashRotatedY;
-            textbox.trashIcon.angle = textbox.angle;  // Sync icon rotation with textbox
+            textbox.trashIcon.angle = textbox.angle; // Sync icon rotation with textbox
         }
-    
+
         // Calculate the new position for the copy icon
-        const copyOffsetX = -4;  // Offset for the copy icon on the left
+        const copyOffsetX = -4; // Offset for the copy icon on the left
         const copyOffsetY = -25;
         const copyRotatedX = textbox.left + copyOffsetX * Math.cos(angle) - copyOffsetY * Math.sin(angle);
         const copyRotatedY = textbox.top + copyOffsetX * Math.sin(angle) + copyOffsetY * Math.cos(angle);
-    
+
         if (textbox.copyIcon) {
             textbox.copyIcon.left = copyRotatedX;
             textbox.copyIcon.top = copyRotatedY;
-            textbox.copyIcon.angle = textbox.angle;  // Sync icon rotation with textbox
+            textbox.copyIcon.angle = textbox.angle; // Sync icon rotation with textbox
         }
-    
-        canvas.renderAll();  // Re-render canvas to update positions
+
+        canvas.renderAll(); // Re-render canvas to update positions
     }
 
     function updateIconPositions(textbox) {
@@ -1329,7 +1349,7 @@ function bindData() {
             console.log("Updated Font Color: " + activeObject.fill);
 
             canvas.renderAll();
-             addToUndoStack(); // Save state after updating properties
+            addToUndoStack(); // Save state after updating properties
         }
     }
 
@@ -1348,7 +1368,7 @@ function bindData() {
     // });
 
     function discardIfMultipleObjects(options) {
-            
+
         if (options.target !== undefined && options.target?._objects && options.target?._objects.length > 1) {
             console.log('Multiple objects selected:', options.target);
             canvas.discardActiveObject();
@@ -1362,7 +1382,7 @@ function bindData() {
             canvas.discardActiveObject(); // Discard active selection
             canvas.renderAll(); // Refresh the canvas
         }
-      
+
     }
 
     canvas.on('mouse:down', function(options) {
@@ -1380,7 +1400,7 @@ function bindData() {
     });
 
     canvas.on('mouse:up', function(options) {
-        discardIfMultipleObjects(options);           
+        discardIfMultipleObjects(options);
     });
 
     document
@@ -1396,7 +1416,7 @@ function bindData() {
             width: 200,
             fontSize: 20,
             backgroundColor: 'rgba(0, 0, 0, 0)', // Set background to transparent
-            textAlign:'center',
+            textAlign: 'center',
             fill: "#000000",
             editable: true,
             selectable: true,
@@ -1669,18 +1689,19 @@ function bindData() {
             reattachIcons();
             redoStack.push(canvas.toJSON()); // Save current state to redo stack
             const lastState = undoStack.pop(); // Get the last state to undo
-            canvas.loadFromJSON(lastState, function () {
+            canvas.loadFromJSON(lastState, function() {
                 canvas.renderAll(); // Render the canvas after loading state
                 // Reattach the icons to the textboxes
             });
         }
     }
+
     function redo() {
         if (redoStack.length > 0) {
             reattachIcons();
             undoStack.push(canvas.toJSON()); // Save current state to undo stack
             const nextState = redoStack.pop(); // Get the next state to redo
-            canvas.loadFromJSON(nextState, function () {
+            canvas.loadFromJSON(nextState, function() {
                 canvas.renderAll(); // Render the canvas after loading state
                 reattachIcons(); // Reattach the icons to the textboxes
             });
@@ -1708,8 +1729,8 @@ function bindData() {
                 console.log("Removed from undoStack");
                 // undoStack.splice(index, 1);  // Remove the empty state from undoStack
             }
-            })
-      
+        })
+
     }
 
     // canvas.on('object:added', addToUndoStack);
@@ -1726,7 +1747,6 @@ function bindData() {
         .addEventListener("click", redo);
 
 
-    $(document).ready(function() {
         $(".slider_photo").on("change", function(event) {
             var file = event.target.files[0]; // Get the first file (the selected image)
             if (file) {
@@ -1851,349 +1871,353 @@ function bindData() {
             }
 
         });
+   
+
+
+    let currentImage = null;
+    let isImageDragging = false; // Track if the image is being dragged
+    let isimageoncanvas = false;
+    let oldImage = null;
+    const canvasElement = new fabric.Canvas('imageEditor', {
+        width: 500, // Canvas width
+        height: 500, // Canvas height
+        cornerSize: 6,
     });
-
-
-let currentImage = null;
-let isImageDragging = false; // Track if the image is being dragged
-let isimageoncanvas = false;
-let oldImage = null;
-const canvasElement = new fabric.Canvas('imageEditor', {
-    width: 500, // Canvas width
-    height: 500, // Canvas height
-    cornerSize: 6,
-});
-const userImageElement = document.getElementById('user_image');
-function updateClipPath(imageUrl, element) {
-    
-    const imageWrapper = document.getElementById('imageWrapper');
-    const imgElement = document.getElementById('user_image');
-    imgElement.src = imageUrl;
-    
-    console.log(imageWrapper);
-    // If a current image exists on canvas, remove it
-    if (currentImage) {
-        canvasElement.remove(currentImage);
-    }
-
-    // Handle previous image and trash icon
-    if (oldImage != null) {
-        canvasElement.remove(oldImage.trashIcon);
-        oldImage.trashIcon = null;
-        canvasElement.renderAll();
-    }
-
-    imageWrapper.style.display = 'block';
-    // imageWrapper.style.left = element.left;
-    // imageWrapper.style.top = element.top;
-
-    let canvasEL = document.getElementById('imageEditor1')
-    const canvasRect = canvasEL.getBoundingClientRect();
-
-    console.log(canvasRect.left)
-    console.log(canvasRect.top)
-    console.log(element.centerX)
-    console.log(element.centerY)
-    console.log(element.height)
-    console.log(element.height)
-    
-    let left = element.centerX !== undefined ? `${element.centerX  + canvasRect.left}px` : '50%';
-    let top = element.centerY !== undefined ? `${element.centerY + canvasRect.top}px` : '50%';
-    console.log({left})
-    console.log({imageWrapper})
-
-    // Set the calculated position to imageWrapper
-    imageWrapper.style.left = left;
-    imageWrapper.style.top = top;
-    
-    imgElement.onload = function () {
-        // Get image dimensions and scale it
-        const imgInstance = new fabric.Image(imgElement, {           
-            selectable: true,
-            hasControls: true,
-            hasBorders: true,
-            
-            borderColor: "#2DA9FC",
-            cornerColor: "#fff",
-            transparentCorners: false,
-            lockUniScaling: true,
-            scaleX: 600 / imgElement.width,
-            scaleY: 600 / imgElement.height,
-            cornerSize: 10,
-            cornerStyle: 'circle',
-        });
-        shape = element.shape;
-        canvasElement.add(imgInstance);
-        // addIconsToImage(imgInstance);
-        drawCanvas();
-        
-        // Refresh canvas
-        canvasElement.renderAll();
-
-        // Update the image with the shape based on the provided element data
-        if (element.shape) {
-            applyClipPath(imgInstance, element);
-        }
-
-        // Image mouseup event to change shape or update position
-        imgInstance.on('mouseup', function (options) {
-            if (options.target) {
-                // Change shape logic
-                currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
-                const nextShape = shapes[currentShapeIndex];
-                element.shape = nextShape;
-
-                updateClipPath(data, element); // Update the image with the new shape
-            }
-        });
-
-        // Update canvas on movement or scaling
-        imgInstance.on('moving', function () {
-            isImageDragging = true;
-            element.centerX = imgInstance.left;
-            element.centerY = imgInstance.top;
-
-            updatedOBJImage = {               
-                centerX: imgInstance.left,
-                centerY: imgInstance.top,                
-            };
-        });
-
-        imgInstance.on('scaling', function () {
-            element.width = imgInstance.width * imgInstance.scaleX;
-            element.height = imgInstance.height * imgInstance.scaleY;
-
-            updatedOBJImage = {               
-                width:  imgInstance.width * imgInstance.scaleX,
-                height: imgInstance.height * imgInstance.scaleY
-            };
-        });
-
-        currentImage = imgInstance; // Track current image on canvas
-        oldImage = imgInstance;
-        $('.photo-slider-wrp').hide()
-    };
-
-    imgElement.onerror = function (e) {
-        console.error("Failed to load image.",e);
-    };
-}
-
-// Helper function to apply clip path based on shape
-function applyClipPath(image, element) {
-    const containerWidth = 150;
-    const containerHeight = 200;
-
-    let clipPath;
-    switch (element.shape) {
-        case 'circle':
-            clipPath = new fabric.Circle({
-                radius: Math.min(containerWidth, containerHeight) / 2,
-                originX: 'center',
-                originY: 'center'
-            });
-            break;
-        case 'star':
-            clipPath = new fabric.Path(
-                'M 50,0 L 61,35 L 98,35 L 68,57 L 79,91 L 50,70 L 21,91 L 32,57 L 2,35 L 39,35 z',
-                {
-                    scaleX: (image.width * image.scaleX) / 100,
-                    scaleY: (image.height * image.scaleY) / 100,
-                    originX: 'center',
-                    originY: 'center'
-                }
-            );
-            break;
-        case 'heart':
-            const heartPath = [
-                'M', 0, 0,
-                'C', -containerWidth / 3, -containerHeight / 3, -containerWidth / 3, containerHeight / 6, 0, containerHeight / 5,
-                'C', containerWidth / 3, containerHeight / 6, containerWidth / 3, -containerHeight / 3, 0, 0
-            ].join(' ');
-            clipPath = new fabric.Path(heartPath, {
-                originX: 'center',
-                originY: 'center'
-            });
-            break;
-        default:
-            break;
-    }
-
-    // Set clipping path for the image
-    image.set({
-        clipPath: clipPath
-    });
-
-    canvasElement.renderAll();
-}
-
-    
-    const imageWrapper = document.getElementById('imageWrapper');
-        // const canvasElement = new fabric.Canvas('imageEditor', {
-        //     width: 500, // Canvas width
-        //     height: 500, // Canvas height
-        // });
-
-const resizeHandles = {
-    topLeft: document.querySelector('.resize-handle.top-left'),
-    topRight: document.querySelector('.resize-handle.top-right'),
-    bottomLeft: document.querySelector('.resize-handle.bottom-left'),
-    bottomRight: document.querySelector('.resize-handle.bottom-right'),
-    topCenter: document.querySelector('.resize-handle.top-center'),
-    bottomCenter: document.querySelector('.resize-handle.bottom-center'),
-    leftCenter: document.querySelector('.resize-handle.left-center'),
-    rightCenter: document.querySelector('.resize-handle.right-center')
-};
-
-let isDragging = false;
-let isResizing = false;
-let startWidth, startHeight, startX, startY, activeHandle;
-let offsetX, offsetY;
-let shape = 'rectangle'; // Default shape
-let shapeChangedDuringDrag = false; // Flag to track shape change
-let imageUploaded = false; // Flag to track if image has been uploaded
-
-function startResize(event, handle) {
-    isResizing = true;
-    startWidth = userImageElement.clientWidth;
-    startHeight = userImageElement.clientHeight;
-    startX = event.clientX;
-    startY = event.clientY;
-    activeHandle = handle;
-    event.stopPropagation();
-}
-
-function resize(event) {
-    if (isResizing) {
-        let newWidth, newHeight;
-
-        if (activeHandle === resizeHandles.bottomRight) {
-            newWidth = startWidth + (event.clientX - startX);
-            newHeight = startHeight + (event.clientY - startY);
-        } else if (activeHandle === resizeHandles.bottomLeft) {
-            newWidth = startWidth - (event.clientX - startX);
-            newHeight = startHeight + (event.clientY - startY);
-            imageWrapper.style.left = `${event.clientX}px`;
-        } else if (activeHandle === resizeHandles.topRight) {
-            newWidth = startWidth + (event.clientX - startX);
-            newHeight = startHeight - (event.clientY - startY);
-            imageWrapper.style.top = `${event.clientY}px`;
-        } else if (activeHandle === resizeHandles.topLeft) {
-            newWidth = startWidth - (event.clientX - startX);
-            newHeight = startHeight - (event.clientY - startY);
-            imageWrapper.style.left = `${event.clientX}px`;
-            imageWrapper.style.top = `${event.clientY}px`;
-        } else if (activeHandle === resizeHandles.topCenter) {
-            newHeight = startHeight - (event.clientY - startY);
-            imageWrapper.style.top = `${event.clientY}px`;
-        } else if (activeHandle === resizeHandles.bottomCenter) {
-            newHeight = startHeight + (event.clientY - startY);
-        } else if (activeHandle === resizeHandles.leftCenter) {
-            newWidth = startWidth - (event.clientX - startX);
-            imageWrapper.style.left = `${event.clientX}px`;
-        } else if (activeHandle === resizeHandles.rightCenter) {
-            newWidth = startWidth + (event.clientX - startX);
-        }
-
-        if (newWidth) userImageElement.style.width = `${newWidth}px`;
-        if (newHeight) userImageElement.style.height = `${newHeight}px`;
-    }
-}
-
-function handleMouseDown(event) {
-    console.log(event);
-    
-     canvasRect = canvas.getBoundingClientRect();
-
-    if (event.target.classList.contains('resize-handle')) {
-        startResize(event, event.target);
-    } else {
-        event.preventDefault(); // Prevent default behavior during dragging (text selection)
-        isDragging = true;
-        offsetX = event.clientX - imageWrapper.offsetLeft;
-        offsetY = event.clientY - imageWrapper.offsetTop;
-        shapeChangedDuringDrag = false; // Reset flag on new drag start
-    }
-}
-
-function handleMouseMove(event) {
-    console.log(event);
-    if (isDragging) {
-        
-        const canvasRect = canvas.getBoundingClientRect();
-        let newX = event.clientX - offsetX;
-        let newY = event.clientY - offsetY;
-
-        // Ensure the image stays within the canvas boundaries
-        if (newX < canvasRect.left) newX = canvasRect.left;
-        if (newX + userImageElement.clientWidth > canvasRect.right)
-            newX = canvasRect.right - userImageElement.clientWidth;
-        if (newY < canvasRect.top) newY = canvasRect.top;
-        if (newY + userImageElement.clientHeight > canvasRect.bottom)
-            newY = canvasRect.bottom - userImageElement.clientHeight;
-
-        imageWrapper.style.left = `${newX}px`;
-        imageWrapper.style.top = `${newY}px`;
-        shapeChangedDuringDrag = true; // Set flag if dragging occurs
-    } else if (isResizing) {
-        resize(event);
-    }
-}
-
-
-function handleMouseUp(event) {
-    if (event.target === userImageElement && !shapeChangedDuringDrag) {
-        // Cycle through shapes
-        const shapes = ['rectangle', 'circle', 'star', 'rounded-border', 'heart'];
-        const currentIndex = shapes.indexOf(shape);
-        shape = shapes[(currentIndex + 1) % shapes.length];
-        console.log(`Shape changed to: ${shape}`); // Log shape change
-
-        drawCanvas();
-    }
-
-    isDragging = false;
-    isResizing = false;
-}
-
-function drawCanvas() {
     const userImageElement = document.getElementById('user_image');
 
-    console.log(userImageElement);
-    userImageElement.style.clipPath = '';
+    function updateClipPath(imageUrl, element) {
 
-    switch (shape) {
-        case 'rectangle':
-            break;
-        case 'circle':
-            userImageElement.style.clipPath = 'circle(50% at 50% 50%)';
-            break;
-        case 'star':
-            userImageElement.style.clipPath =
-                'polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)';
-            break;
-        case 'rounded-border':
-            userImageElement.style.clipPath = 'inset(0 round 20px)';
-            break;
-        case 'heart':
-            userImageElement.style.clipPath = 'url(#heartClipPath)';
-            break;
-        default:
-            break;
+        const imageWrapper = document.getElementById('imageWrapper');
+        const imgElement = document.getElementById('user_image');
+        imgElement.src = imageUrl;
+
+        console.log(imageWrapper);
+        // If a current image exists on canvas, remove it
+        if (currentImage) {
+            canvasElement.remove(currentImage);
+        }
+
+        // Handle previous image and trash icon
+        if (oldImage != null) {
+            canvasElement.remove(oldImage.trashIcon);
+            oldImage.trashIcon = null;
+            canvasElement.renderAll();
+        }
+
+        imageWrapper.style.display = 'block';
+        // imageWrapper.style.left = element.left;
+        // imageWrapper.style.top = element.top;
+
+        let canvasEL = document.getElementById('imageEditor1')
+        const canvasRect = canvasEL.getBoundingClientRect();
+
+        console.log(canvasRect.left)
+        console.log(canvasRect.top)
+        console.log(element.centerX)
+        console.log(element.centerY)
+        console.log(element.height)
+        console.log(element.height)
+
+        let left = element.centerX !== undefined ? `${element.centerX  + canvasRect.left}px` : '50%';
+        let top = element.centerY !== undefined ? `${element.centerY + canvasRect.top}px` : '50%';
+        console.log({
+            left
+        })
+        console.log({
+            imageWrapper
+        })
+
+        // Set the calculated position to imageWrapper
+        imageWrapper.style.left = left;
+        imageWrapper.style.top = top;
+
+        imgElement.onload = function() {
+            // Get image dimensions and scale it
+            const imgInstance = new fabric.Image(imgElement, {
+                selectable: true,
+                hasControls: true,
+                hasBorders: true,
+
+                borderColor: "#2DA9FC",
+                cornerColor: "#fff",
+                transparentCorners: false,
+                lockUniScaling: true,
+                scaleX: 600 / imgElement.width,
+                scaleY: 600 / imgElement.height,
+                cornerSize: 10,
+                cornerStyle: 'circle',
+            });
+            shape = element.shape;
+            canvasElement.add(imgInstance);
+            // addIconsToImage(imgInstance);
+            drawCanvas();
+
+            // Refresh canvas
+            canvasElement.renderAll();
+
+            // Update the image with the shape based on the provided element data
+            if (element.shape) {
+                applyClipPath(imgInstance, element);
+            }
+
+            // Image mouseup event to change shape or update position
+            imgInstance.on('mouseup', function(options) {
+                if (options.target) {
+                    // Change shape logic
+                    currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
+                    const nextShape = shapes[currentShapeIndex];
+                    element.shape = nextShape;
+
+                    updateClipPath(data, element); // Update the image with the new shape
+                }
+            });
+
+            // Update canvas on movement or scaling
+            imgInstance.on('moving', function() {
+                isImageDragging = true;
+                element.centerX = imgInstance.left;
+                element.centerY = imgInstance.top;
+
+                updatedOBJImage = {
+                    centerX: imgInstance.left,
+                    centerY: imgInstance.top,
+                };
+            });
+
+            imgInstance.on('scaling', function() {
+                element.width = imgInstance.width * imgInstance.scaleX;
+                element.height = imgInstance.height * imgInstance.scaleY;
+
+                updatedOBJImage = {
+                    width: imgInstance.width * imgInstance.scaleX,
+                    height: imgInstance.height * imgInstance.scaleY
+                };
+            });
+
+            currentImage = imgInstance; // Track current image on canvas
+            oldImage = imgInstance;
+            $('.photo-slider-wrp').hide()
+        };
+
+        imgElement.onerror = function(e) {
+            console.error("Failed to load image.", e);
+        };
     }
-}
+
+    // Helper function to apply clip path based on shape
+    function applyClipPath(image, element) {
+        const containerWidth = 150;
+        const containerHeight = 200;
+
+        let clipPath;
+        switch (element.shape) {
+            case 'circle':
+                clipPath = new fabric.Circle({
+                    radius: Math.min(containerWidth, containerHeight) / 2,
+                    originX: 'center',
+                    originY: 'center'
+                });
+                break;
+            case 'star':
+                clipPath = new fabric.Path(
+                    'M 50,0 L 61,35 L 98,35 L 68,57 L 79,91 L 50,70 L 21,91 L 32,57 L 2,35 L 39,35 z', {
+                        scaleX: (image.width * image.scaleX) / 100,
+                        scaleY: (image.height * image.scaleY) / 100,
+                        originX: 'center',
+                        originY: 'center'
+                    }
+                );
+                break;
+            case 'heart':
+                const heartPath = [
+                    'M', 0, 0,
+                    'C', -containerWidth / 3, -containerHeight / 3, -containerWidth / 3, containerHeight / 6, 0, containerHeight / 5,
+                    'C', containerWidth / 3, containerHeight / 6, containerWidth / 3, -containerHeight / 3, 0, 0
+                ].join(' ');
+                clipPath = new fabric.Path(heartPath, {
+                    originX: 'center',
+                    originY: 'center'
+                });
+                break;
+            default:
+                break;
+        }
+
+        // Set clipping path for the image
+        image.set({
+            clipPath: clipPath
+        });
+
+        canvasElement.renderAll();
+    }
+
+
+    const imageWrapper = document.getElementById('imageWrapper');
+    // const canvasElement = new fabric.Canvas('imageEditor', {
+    //     width: 500, // Canvas width
+    //     height: 500, // Canvas height
+    // });
+
+    const resizeHandles = {
+        topLeft: document.querySelector('.resize-handle.top-left'),
+        topRight: document.querySelector('.resize-handle.top-right'),
+        bottomLeft: document.querySelector('.resize-handle.bottom-left'),
+        bottomRight: document.querySelector('.resize-handle.bottom-right'),
+        topCenter: document.querySelector('.resize-handle.top-center'),
+        bottomCenter: document.querySelector('.resize-handle.bottom-center'),
+        leftCenter: document.querySelector('.resize-handle.left-center'),
+        rightCenter: document.querySelector('.resize-handle.right-center')
+    };
+
+    let isDragging = false;
+    let isResizing = false;
+    let startWidth, startHeight, startX, startY, activeHandle;
+    let offsetX, offsetY;
+    let shape = 'rectangle'; // Default shape
+    let shapeChangedDuringDrag = false; // Flag to track shape change
+    let imageUploaded = false; // Flag to track if image has been uploaded
+
+    function startResize(event, handle) {
+        isResizing = true;
+        startWidth = userImageElement.clientWidth;
+        startHeight = userImageElement.clientHeight;
+        startX = event.clientX;
+        startY = event.clientY;
+        activeHandle = handle;
+        event.stopPropagation();
+    }
+
+    function resize(event) {
+        if (isResizing) {
+            let newWidth, newHeight;
+
+            if (activeHandle === resizeHandles.bottomRight) {
+                newWidth = startWidth + (event.clientX - startX);
+                newHeight = startHeight + (event.clientY - startY);
+            } else if (activeHandle === resizeHandles.bottomLeft) {
+                newWidth = startWidth - (event.clientX - startX);
+                newHeight = startHeight + (event.clientY - startY);
+                imageWrapper.style.left = `${event.clientX}px`;
+            } else if (activeHandle === resizeHandles.topRight) {
+                newWidth = startWidth + (event.clientX - startX);
+                newHeight = startHeight - (event.clientY - startY);
+                imageWrapper.style.top = `${event.clientY}px`;
+            } else if (activeHandle === resizeHandles.topLeft) {
+                newWidth = startWidth - (event.clientX - startX);
+                newHeight = startHeight - (event.clientY - startY);
+                imageWrapper.style.left = `${event.clientX}px`;
+                imageWrapper.style.top = `${event.clientY}px`;
+            } else if (activeHandle === resizeHandles.topCenter) {
+                newHeight = startHeight - (event.clientY - startY);
+                imageWrapper.style.top = `${event.clientY}px`;
+            } else if (activeHandle === resizeHandles.bottomCenter) {
+                newHeight = startHeight + (event.clientY - startY);
+            } else if (activeHandle === resizeHandles.leftCenter) {
+                newWidth = startWidth - (event.clientX - startX);
+                imageWrapper.style.left = `${event.clientX}px`;
+            } else if (activeHandle === resizeHandles.rightCenter) {
+                newWidth = startWidth + (event.clientX - startX);
+            }
+
+            if (newWidth) userImageElement.style.width = `${newWidth}px`;
+            if (newHeight) userImageElement.style.height = `${newHeight}px`;
+        }
+    }
+
+    function handleMouseDown(event) {
+        console.log(event);
+
+        canvasRect = canvas.getBoundingClientRect();
+
+        if (event.target.classList.contains('resize-handle')) {
+            startResize(event, event.target);
+        } else {
+            event.preventDefault(); // Prevent default behavior during dragging (text selection)
+            isDragging = true;
+            offsetX = event.clientX - imageWrapper.offsetLeft;
+            offsetY = event.clientY - imageWrapper.offsetTop;
+            shapeChangedDuringDrag = false; // Reset flag on new drag start
+        }
+    }
+
+    function handleMouseMove(event) {
+        console.log(event);
+        if (isDragging) {
+
+            const canvasRect = canvas.getBoundingClientRect();
+            let newX = event.clientX - offsetX;
+            let newY = event.clientY - offsetY;
+
+            // Ensure the image stays within the canvas boundaries
+            if (newX < canvasRect.left) newX = canvasRect.left;
+            if (newX + userImageElement.clientWidth > canvasRect.right)
+                newX = canvasRect.right - userImageElement.clientWidth;
+            if (newY < canvasRect.top) newY = canvasRect.top;
+            if (newY + userImageElement.clientHeight > canvasRect.bottom)
+                newY = canvasRect.bottom - userImageElement.clientHeight;
+
+            imageWrapper.style.left = `${newX}px`;
+            imageWrapper.style.top = `${newY}px`;
+            shapeChangedDuringDrag = true; // Set flag if dragging occurs
+        } else if (isResizing) {
+            resize(event);
+        }
+    }
+
+
+    function handleMouseUp(event) {
+        if (event.target === userImageElement && !shapeChangedDuringDrag) {
+            // Cycle through shapes
+            const shapes = ['rectangle', 'circle', 'star', 'rounded-border', 'heart'];
+            const currentIndex = shapes.indexOf(shape);
+            shape = shapes[(currentIndex + 1) % shapes.length];
+            console.log(`Shape changed to: ${shape}`); // Log shape change
+
+            drawCanvas();
+        }
+
+        isDragging = false;
+        isResizing = false;
+    }
+
+    function drawCanvas() {
+        const userImageElement = document.getElementById('user_image');
+
+        console.log(userImageElement);
+        userImageElement.style.clipPath = '';
+
+        switch (shape) {
+            case 'rectangle':
+                break;
+            case 'circle':
+                userImageElement.style.clipPath = 'circle(50% at 50% 50%)';
+                break;
+            case 'star':
+                userImageElement.style.clipPath =
+                    'polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)';
+                break;
+            case 'rounded-border':
+                userImageElement.style.clipPath = 'inset(0 round 20px)';
+                break;
+            case 'heart':
+                userImageElement.style.clipPath = 'url(#heartClipPath)';
+                break;
+            default:
+                break;
+        }
+    }
 
 }
 
 
-    
+
 
 function getTextDataFromCanvas() {
     var objects = canvas.getObjects();
 
     var textData = [];
 
-    objects.forEach(function (obj) {
+    objects.forEach(function(obj) {
         if (obj.type === "textbox") {
             var centerX = obj.left + obj.width / 2;
             var centerY = obj.top + obj.height / 2;
@@ -2221,4 +2245,3 @@ function getTextDataFromCanvas() {
 
     return textData;
 }
-
