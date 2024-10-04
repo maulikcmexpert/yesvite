@@ -1664,10 +1664,10 @@ class EventController extends Controller
     public function see_all(Request $request)
     {
         // dd($request);
-        $userEntry = Session::get('user_ids');
+        $data  = Session::get('user_ids');
         // $data[] = ['userdata' => $userEntry];
 
         // dd($data);
-        return response()->json(['view' => view('front.event.guest.sell_all_invited', compact('userEntry'))->render()]);
+        return response()->json(['view' => view('front.event.guest.sell_all_invited', compact('data '))->render()]);
     }
 }
