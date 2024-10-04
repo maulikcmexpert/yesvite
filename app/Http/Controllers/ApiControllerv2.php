@@ -13050,52 +13050,52 @@ class ApiControllerv2 extends Controller
                         case 'event_name':
                             if (!empty($request->event_name)) {
 
-                                $resp[$k][$key] = $request->event_name;
+                                $udpated[$k][$key] = $request->event_name;
                             } else {
 
-                                unset($resp[$k]); // Remove entry if event_name is empty
+                                unset($udpated[$k]); // Remove entry if event_name is empty
                             }
                             break;
                         case 'host_name':
                             if (!empty($request->host_name)) {
-                                $resp[$k][$key] = $request->host_name;
+                                $udpated[$k][$key] = $request->host_name;
                             } else {
-                                unset($resp[$k]); // Remove entry if host_name is empty
+                                unset($udpated[$k]); // Remove entry if host_name is empty
                             }
                             break;
                         case 'Location':
                             if (!empty($request->event_location_name)) {
-                                $resp[$k][$key] = $request->event_location_name;
+                                $udpated[$k][$key] = $request->event_location_name;
                             } else {
-                                unset($resp[$k]); // Remove entry if event_location_name is empty
+                                unset($udpated[$k]); // Remove entry if event_location_name is empty
                             }
                             break;
                         case 'start_time':
                             if (!empty($request->start_time)) {
-                                $resp[$k][$key] = $request->start_time;
+                                $udpated[$k][$key] = $request->start_time;
                             } else {
-                                unset($resp[$k]); // Remove entry if start_time is empty
+                                unset($udpated[$k]); // Remove entry if start_time is empty
                             }
                             break;
                         case 'rsvp_end_time':
                             if (!empty($request->rsvp_end_time)) {
-                                $resp[$k][$key] = $request->rsvp_end_time;
+                                $udpated[$k][$key] = $request->rsvp_end_time;
                             } else {
-                                unset($resp[$k]); // Remove entry if rsvp_end_time is empty
+                                unset($udpated[$k]); // Remove entry if rsvp_end_time is empty
                             }
                             break;
                         case 'start_date':
                             if (!empty($request->start_date)) {
-                                $resp[$k][$key] = $request->start_date;
+                                $udpated[$k][$key] = $request->start_date;
                             } else {
-                                unset($resp[$k]); // Remove entry if start_date is empty
+                                unset($udpated[$k]); // Remove entry if start_date is empty
                             }
                             break;
                         case 'end_date':
                             if (!empty($request->end_date)) {
-                                $resp[$k][$key] = $request->end_date;
+                                $udpated[$k][$key] = $request->end_date;
                             } else {
-                                unset($resp[$k]); // Remove entry if end_date is empty
+                                unset($udpated[$k]); // Remove entry if end_date is empty
                             }
                             break;
                     }
