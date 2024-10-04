@@ -1922,7 +1922,7 @@ function updateClipPath(imageUrl, element) {
         });
        
         canvasElement.add(imgInstance);
-        addIconsToImage(imgInstance);
+        // addIconsToImage(imgInstance);
         drawCanvas();
         
         // Refresh canvas
@@ -1975,6 +1975,30 @@ function updateClipPath(imageUrl, element) {
     imgElement.onerror = function (e) {
         console.error("Failed to load image.",e);
     };
+}
+
+function drawCanvas() {
+    userImageElement.style.clipPath = '';
+
+    switch (shape) {
+        case 'rectangle':
+            break;
+        case 'circle':
+            userImageElement.style.clipPath = 'circle(50% at 50% 50%)';
+            break;
+        case 'star':
+            userImageElement.style.clipPath =
+                'polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)';
+            break;
+        case 'rounded-border':
+            userImageElement.style.clipPath = 'inset(0 round 20px)';
+            break;
+        case 'heart':
+            userImageElement.style.clipPath = 'url(#heartClipPath)';
+            break;
+        default:
+            break;
+    }
 }
 
 // Helper function to apply clip path based on shape
