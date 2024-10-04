@@ -334,7 +334,7 @@ $(function() {
 
     $('#rsvp-by-date').daterangepicker({
       singleDatePicker: true,
-      autoUpdateInput: false,  
+      autoUpdateInput: true,  
     //   showDropdowns: true,
       minYear: 1901,
       maxDate: current_event_date, 
