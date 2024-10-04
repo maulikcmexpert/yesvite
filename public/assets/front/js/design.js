@@ -4,6 +4,11 @@ var image = null;
 var base_url = $("#base_url").text();
 var canvas;
 var shapeImageUrl;
+
+document.addEventListener('mousemove', resize);
+document.addEventListener('mouseup', handleMouseUp);
+imageWrapper.addEventListener('mousedown', handleMouseDown);
+document.addEventListener('mousemove', handleMouseMove);
 $(document).on("click", ".design-card", function () {
     var url = $(this).data("url");
     var template = $(this).data("template");
@@ -2175,10 +2180,7 @@ function drawCanvas() {
     }
 }
 
-        document.addEventListener('mousemove', resize);
-        document.addEventListener('mouseup', handleMouseUp);
-        imageWrapper.addEventListener('mousedown', handleMouseDown);
-        document.addEventListener('mousemove', handleMouseMove);
+        
     
 
 function getTextDataFromCanvas() {
