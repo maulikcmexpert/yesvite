@@ -2081,6 +2081,8 @@ function bindData() {
     let imageUploaded = false; // Flag to track if image has been uploaded
 
     function startResize(event, handle) {
+        const userImageElement = document.getElementById('user_image');
+
         isResizing = true;
         startWidth = userImageElement.clientWidth;
         startHeight = userImageElement.clientHeight;
