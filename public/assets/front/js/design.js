@@ -276,8 +276,10 @@ $(document).on("click", ".design-card", function () {
 
     // Load filed image (filedImagePath) as another image layer
     if (shapeImageUrl) {
-        
-        
+        let element = staticInfo?.shapeImageData;
+        if (element.shape && element.centerX && element.centerY && element.height && element.width) {
+            updateClipPath(imageUrl, element);
+        }
     }
 
 });
