@@ -22,9 +22,10 @@
         </div>
         <div class="image-edit-section-wrp">
             <div class="image-edit-inner-img">
-                <input type="file" id="image" accept="image/*" style="display: none" />
-                <canvas id="imageEditor1" class="canvas new"></canvas>
-
+                <div class="canvas-container" id="border">
+                    <input type="file" id="image" accept="image/*" style="display: none" />
+                    <canvas id="imageEditor1" class="canvas new"></canvas>
+                </div>
                 {{-- <img src="{{ $textData->image}}" alt=""> --}}
             </div>
             <div id="imageWrapper" style="position:fixed; display:none;">

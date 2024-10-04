@@ -1857,6 +1857,7 @@ const canvasElement = new fabric.Canvas('imageEditor', {
 });
 const userImageElement = document.getElementById('user_image');
 function updateClipPath(imageUrl, element) {
+    
     const imageWrapper = document.getElementById('imageWrapper');
     const imgElement = document.getElementById('user_image');
     imgElement.src = imageUrl;
@@ -2092,6 +2093,7 @@ function resize(event) {
 }
 
 function handleMouseDown(event) {
+    console.log(event);
     const canvas = document.querySelector('.new');
     const canvasRect = canvas.getBoundingClientRect();
 
@@ -2146,6 +2148,9 @@ function handleMouseMove(event) {
         }
 
         function drawCanvas() {
+const userImageElement = document.getElementById('user_image');
+
+            console.log(userImageElement);
             userImageElement.style.clipPath = '';
 
             switch (shape) {
