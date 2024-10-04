@@ -4,7 +4,6 @@ var image = null;
 var base_url = $("#base_url").text();
 var canvas;
 var shapeImageUrl;
-var shape;
 $(document).on("click", ".design-card", function () {
     var url = $(this).data("url");
     var template = $(this).data("template");
@@ -165,7 +164,7 @@ $(document).on("click", ".design-card", function () {
         textElement.set({ width: textWidth });
         canvas.add(textElement);
     });
-    
+    var shape = '';
     if (dbJson) {
         // const staticInfo = dbJson;
         // staticInfo?.shapeImageData?.forEach(element => {
