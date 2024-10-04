@@ -72,6 +72,9 @@
                     <div class="resize-handle bottom-left"></div>
                     <div class="resize-handle bottom-center"></div>
                     <div class="resize-handle bottom-right"></div>
+                    <div class="resize-handle left-center"></div> <!-- Left-center handle -->
+                    <div class="resize-handle right-center"></div> <!-- Right-center handle -->
+
                 </div>
 
                 <!-- SVG heart clip path for potential clipping -->
