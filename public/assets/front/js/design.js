@@ -14,17 +14,17 @@ $(document).on("click", ".design-card", function() {
     var imageUrl = $(this).data("image");
     shapeImageUrl = $(this).data('shape_image');
     var json = $(this).data("json");
-    console.log(json);
+    //console.log(json);
     var id = $(this).data("id");
     $(".edit_design_tem").attr("data-image", imageUrl);
     if (eventData.textData != null && eventData.temp_id != null && eventData.temp_id == id) {
         dbJson = {
             textElements: eventData.textData.textElements
         };
-        console.log(dbJson);
+        //console.log(dbJson);
         temp_id = eventData.temp_id;
     } else {
-        console.log(json);
+        //console.log(json);
         dbJson = json;
         temp_id = id;
     }
@@ -74,7 +74,7 @@ $(document).on("click", ".design-card", function() {
     const staticInfo = dbJson;
 
     staticInfo.textElements.forEach((element) => {
-        console.log(element);
+        //console.log(element);
         let textElement = new fabric.Textbox(element.text, {
             left: element.left,
             top: element.top,
@@ -298,7 +298,7 @@ $(document).on("click", ".design-card", function() {
     if (shapeImageUrl) {
         let element = staticInfo?.shapeImageData;
         if (element.shape && element.centerX && element.centerY && element.height && element.width) {
-            console.log(shapeImageUrl);
+            //console.log(shapeImageUrl);
             // updateClipPath(shapeImageUrl, element);
         }
     }
@@ -343,8 +343,8 @@ $(document).on("click", ".design-sidebar-action", function() {
 
 $(document).on("click", ".edit_design_tem", function(e) {
     e.preventDefault();
-    // console.log(dbJson);
-    // console.log(image);
+    // //console.log(dbJson);
+    // //console.log(image);
 
     $("step_1").hide();
     $(".step_2").hide();
@@ -367,7 +367,7 @@ $(document).on("click", ".edit_design_tem", function(e) {
             _token: $('meta[name="csrf-token"]').attr("content"),
         },
         success: function(response) {
-            console.log(response);
+            //console.log(response);
             $("#edit-design-temp").html(response).show();
             bindData();
         },
@@ -390,7 +390,7 @@ function bindData() {
 
     function loadTextDataFromDatabase() {
         if (image) {
-            // console.log(image);
+            // //console.log(image);
 
             // Load background image
             fabric.Image.fromURL(image, function(img) {
@@ -699,7 +699,7 @@ function bindData() {
             linethrough: element.linethrough,
         });
         const textWidth = textMeasurement.width;
-        console.log(`Width of '${text}':`, textWidth);
+        //console.log(`Width of '${text}':`, textWidth);
         return textWidth;
     }
 
@@ -742,7 +742,7 @@ function bindData() {
 
             // Handle trash icon click
             trashIcon.on("mousedown", function() {
-                console.log("Trash icon clicked");
+                //console.log("Trash icon clicked");
                 deleteTextbox(textbox);
             });
 
@@ -773,7 +773,7 @@ function bindData() {
 
             // Handle copy icon click
             copyIcon.on("mousedown", function() {
-                console.log("Copy icon clicked");
+                //console.log("Copy icon clicked");
                 cloneTextbox(textbox);
             });
 
@@ -793,7 +793,7 @@ function bindData() {
 
         // Event listener to manage icon visibility when a textbox is clicked
         textbox.on("mousedown", function() {
-            console.log(textbox);
+            //console.log(textbox);
             canvas.getObjects("textbox").forEach(function(tb) {
                 if (tb.trashIcon) tb.trashIcon.set("visible", false); // Hide other icons
                 if (tb.copyIcon) tb.copyIcon.set("visible", false);
@@ -935,7 +935,7 @@ function bindData() {
     };
     // Reset button functionality
     document.querySelector(".reset-btn").addEventListener("click", function() {
-        console.log("Reset button clicked!");
+        //console.log("Reset button clicked!");
         const activeObject = canvas.getActiveObject();
         if (activeObject && activeObject.type === "textbox") {
             resetTextboxProperties(activeObject); // Use the reset function
@@ -978,10 +978,10 @@ function bindData() {
         preferredFormat: "hex",
         change: function(color) {
             if (color) {
-                console.log("color")
+                //console.log("color")
                 changeColor(color.toHexString()); // Use RGB string for color changes
             } else {
-                console.log("rgba")
+                //console.log("rgba")
                 changeColor('#000000'); // Handle transparency by default
             }
         }
@@ -993,35 +993,35 @@ function bindData() {
             'input[name="colorType"]:checked'
         ).value;
         const activeObject = canvas.getActiveObject();
-        console.log("before update");
+        //console.log("before update");
 
-        console.log(activeObject);
+        //console.log(activeObject);
         if (!activeObject) {
-            console.log("No object selected");
+            //console.log("No object selected");
             return;
         }
 
         if (activeObject.type == "textbox") {
-            console.log(activeObject.type);
-            console.log(activeObject.fill);
+            //console.log(activeObject.type);
+            //console.log(activeObject.fill);
             if (selectedColorType == "font") {
-                console.log("update fill");
-                console.log(activeObject.fill);
-                console.log(activeObject.backgroundColor);
+                //console.log("update fill");
+                //console.log(activeObject.fill);
+                //console.log(activeObject.backgroundColor);
                 activeObject.set("fill", selectedColor); // Change font color
-                console.log(activeObject.fill);
-                console.log(activeObject.backgroundColor);
+                //console.log(activeObject.fill);
+                //console.log(activeObject.backgroundColor);
             } else if (selectedColorType == "background") {
-                console.log("update background");
+                //console.log("update background");
                 activeObject.set("backgroundColor", selectedColor); // Change background color
             }
             canvas.renderAll(); // Re-render the canvas after color change
         }
 
         const activeObjec = canvas.getActiveObject();
-        console.log("ater update");
+        //console.log("ater update");
 
-        console.log(activeObjec);
+        //console.log(activeObjec);
     }
 
     // Update color picker based on the selected object's current font or background color
@@ -1043,15 +1043,15 @@ function bindData() {
                 $("#color-picker").spectrum("set", bgColor); // Set current background color in picker
             }
 
-            console.log(selectedColorType);
-            console.log(activeObject.type);
-            console.log(activeObject.fill);
-            console.log(activeObject.backgroundColor);
+            //console.log(selectedColorType);
+            //console.log(activeObject.type);
+            //console.log(activeObject.fill);
+            //console.log(activeObject.backgroundColor);
 
             const activeObjec = canvas.getActiveObject();
 
-            console.log(activeObjec.fill);
-            console.log(activeObjec.backgroundColor);
+            //console.log(activeObjec.fill);
+            //console.log(activeObjec.backgroundColor);
         }
     }
 
@@ -1062,10 +1062,10 @@ function bindData() {
     // Update the color picker when the color type (font/background) changes
     $(".colorTypeInp").click(function(e) {
         e.stopPropagation();
-        console.log(123);
+        //console.log(123);
         const activeObject = canvas.getActiveObject();
         if (activeObject && activeObject.type === "textbox") {
-            console.log(activeObject.type);
+            //console.log(activeObject.type);
             updateColorPicker(); // Update picker when the selected color type changes
         }
     });
@@ -1159,7 +1159,7 @@ function bindData() {
     function findTextboxCenter(textbox) {
         var centerX = textbox.left + textbox.width / 2;
         var centerY = textbox.top + textbox.height / 2;
-        console.log(
+        //console.log(
             `Center of textbox '${textbox.text}' is at (${centerX}, ${centerY})`
         );
         return {
@@ -1243,7 +1243,7 @@ function bindData() {
 
             // Attach delete functionality to trash icon
             trashIcon.on("mousedown", function() {
-                console.log("Trash icon clicked! Deleting textbox.");
+                //console.log("Trash icon clicked! Deleting textbox.");
                 deleteTextbox(textbox);
             });
 
@@ -1266,7 +1266,7 @@ function bindData() {
 
             // Attach clone functionality to copy icon
             copyIcon.on("mousedown", function() {
-                console.log("Copy icon clicked!");
+                //console.log("Copy icon clicked!");
                 cloneTextbox(textbox);
             });
 
@@ -1357,8 +1357,8 @@ function bindData() {
             activeObject.setCoords(); // Update coordinates
 
             // Log the updated properties
-            console.log("Updated Font Size: " + activeObject.fontSize);
-            console.log("Updated Font Color: " + activeObject.fill);
+            //console.log("Updated Font Size: " + activeObject.fontSize);
+            //console.log("Updated Font Color: " + activeObject.fill);
 
             canvas.renderAll();
             addToUndoStack(); // Save state after updating properties
@@ -1382,15 +1382,15 @@ function bindData() {
     function discardIfMultipleObjects(options) {
 
         if (options.target !== undefined && options.target?._objects && options.target?._objects.length > 1) {
-            console.log('Multiple objects selected:', options.target);
+            //console.log('Multiple objects selected:', options.target);
             canvas.discardActiveObject();
             canvas.renderAll(); // Ensure the canvas is refreshed
         }
 
         const activeObjects = canvas.getActiveObjects(); // Get all selected objects
-        console.log(activeObjects)
+        //console.log(activeObjects)
         if (activeObjects.length > 1) {
-            console.log('Multiple objects selected:', activeObjects);
+            //console.log('Multiple objects selected:', activeObjects);
             canvas.discardActiveObject(); // Discard active selection
             canvas.renderAll(); // Refresh the canvas
         }
@@ -1445,130 +1445,130 @@ function bindData() {
     }
 
     document.getElementById('AbrilFatfaceButton').addEventListener('click', function() {
-        console.log("fontname")
+        //console.log("fontname")
         loadAndUse("AbrilFatface-Regular");
     });
     document.getElementById('AdleryProButton').addEventListener('click', function() {
-        console.log("fontname")
+        //console.log("fontname")
 
         loadAndUse("AdleryPro-Regular");
 
 
     });
     document.getElementById('AgencyFBButton').addEventListener('click', function() {
-        console.log("fontname")
+        //console.log("fontname")
 
         loadAndUse("AgencyFB-Bold");
 
 
     });
     document.getElementById('AlexBrushButton').addEventListener('click', function() {
-        console.log("fontname")
+        //console.log("fontname")
 
         loadAndUse("AlexBrush-Regular");
 
 
     });
     document.getElementById('AlluraButton').addEventListener('click', function() {
-        console.log("fontname")
+        //console.log("fontname")
 
         loadAndUse("Allura-Regular");
 
 
     });
     // document.getElementById('BotanicaScript-RegularButton').addEventListener('click', function() {
-    //     console.log("fontname")
+    //     //console.log("fontname")
 
     //     loadAndUse("BotanicaScript-Regular");
 
 
     // });
     document.getElementById('ArcherButton').addEventListener('click', function() {
-        console.log("fontname")
+        //console.log("fontname")
 
         loadAndUse("ArcherBold");
 
 
     });
     document.getElementById('Archer-BookButton').addEventListener('click', function() {
-        console.log("fontname")
+        //console.log("fontname")
 
         loadAndUse("Archer-Book");
 
 
     });
     document.getElementById('Archer-BookItalicButton').addEventListener('click', function() {
-        console.log("fontname")
+        //console.log("fontname")
 
         loadAndUse("Archer-BookItalic");
 
 
     });
     document.getElementById('Archer-ExtraLightButton').addEventListener('click', function() {
-        console.log("fontname")
+        //console.log("fontname")
 
         loadAndUse("Archer-ExtraLight");
 
 
     });
     document.getElementById('Archer-HairlineButton').addEventListener('click', function() {
-        console.log("fontname")
+        //console.log("fontname")
 
         loadAndUse("Archer-Hairline");
 
 
     });
     document.getElementById('Bebas-RegularButton').addEventListener('click', function() {
-        console.log("fontname")
+        //console.log("fontname")
 
         loadAndUse("Bebas-Regular");
 
 
     });
     document.getElementById('BookAntiquaButton').addEventListener('click', function() {
-        console.log("fontname")
+        //console.log("fontname")
 
         loadAndUse("BookAntiqua");
 
 
     });
     document.getElementById('CandyCaneUnregisteredButton').addEventListener('click', function() {
-        console.log("fontname")
+        //console.log("fontname")
 
         loadAndUse("CandyCaneUnregistered");
 
 
     });
     document.getElementById('CarbonBl-RegularButton').addEventListener('click', function() {
-        console.log("fontname")
+        //console.log("fontname")
 
         loadAndUse("CarbonBl-Regular");
 
 
     });
     document.getElementById('CarmenSans-ExtraBoldButton').addEventListener('click', function() {
-        console.log("fontname")
+        //console.log("fontname")
 
         loadAndUse("CarmenSans-ExtraBold");
 
 
     });
     document.getElementById('CarmenSans-RegularButton').addEventListener('click', function() {
-        console.log("fontname")
+        //console.log("fontname")
 
         loadAndUse("CarmenSans-Regular");
 
 
     });
     document.getElementById('ChristmasCookiesButton').addEventListener('click', function() {
-        console.log("fontname")
+        //console.log("fontname")
 
         loadAndUse("ChristmasCookies");
 
 
     });
     document.getElementById('Bungee-RegularButton').addEventListener('click', function() {
-        console.log("fontname")
+        //console.log("fontname")
 
         loadAndUse("Bungee-Regular");
 
@@ -1583,21 +1583,21 @@ function bindData() {
             .then(function() {
                 // When font is loaded, use it.
                 var activeObject = canvas.getActiveObject();
-                console.log(activeObject.type);
+                //console.log(activeObject.type);
                 if (activeObject && activeObject.type === "textbox") {
                     activeObject.set({
                         fontFamily: font,
                     });
                     activeObject.initDimensions();
                     canvas.requestRenderAll();
-                    console.log("applied font" + font);
-                    console.log(canvas.getActiveObject());
+                    //console.log("applied font" + font);
+                    //console.log(canvas.getActiveObject());
                 } else {
                     alert("No object selected");
                 }
             })
             .catch(function(e) {
-                console.log(e);
+                //console.log(e);
                 alert("Font loading failed: " + font);
             });
     }
@@ -1689,14 +1689,14 @@ function bindData() {
         // Delay the action slightly to allow for batch updates
         setTimeout(() => {
             undoStack.push(canvas.toJSON());
-            console.log(undoStack);
+            //console.log(undoStack);
             redoStack = []; // Clear redo stack on new action
             isAddingToUndoStack = false; // Reset the flag
         }, 200); // Adjust delay as necessary (200ms is an example)
     }
 
     function undo() {
-        console.log(undoStack);
+        //console.log(undoStack);
         if (undoStack.length > 0) {
             reattachIcons();
             redoStack.push(canvas.toJSON()); // Save current state to redo stack
@@ -1727,7 +1727,7 @@ function bindData() {
 
             // If all objects in a state were 'group', you can also remove that entire state from undoStack
             if (ob.objects.length === 0) {
-                console.log("Removed from undoStack");
+                //console.log("Removed from undoStack");
                 // undoStack.splice(index, 1);  // Remove the empty state from undoStack
             }
         })
@@ -1738,7 +1738,7 @@ function bindData() {
 
             // If all objects in a state were 'group', you can also remove that entire state from undoStack
             if (ob.objects.length === 0) {
-                console.log("Removed from undoStack");
+                //console.log("Removed from undoStack");
                 // undoStack.splice(index, 1);  // Remove the empty state from undoStack
             }
         })
@@ -1821,7 +1821,7 @@ function bindData() {
                     });
                 }
             });
-            console.log(imageSources);
+            //console.log(imageSources);
             $('#loader').css('display', 'block');
             $.ajax({
                 url: base_url + "event/save_slider_img",
@@ -1833,7 +1833,7 @@ function bindData() {
                 success: function(response) {
                     var savedImages = response.images;
                     eventData.slider_images = savedImages;
-                    console.log(eventData);
+                    //console.log(eventData);
                     $('#loader').css('display', 'none');
                     toastr.success('Slider Image saved Successfully');
                 },
@@ -1894,7 +1894,7 @@ function bindData() {
         const imgElement = document.getElementById('user_image');
         imgElement.src = imageUrl;
 
-        console.log(imageWrapper);
+        //console.log(imageWrapper);
         // If a current image exists on canvas, remove it
         if (currentImage) {
             canvasElement.remove(currentImage);
@@ -1914,19 +1914,19 @@ function bindData() {
         let canvasEL = document.getElementById('imageEditor1')
         const canvasRect = canvasEL.getBoundingClientRect();
 
-        console.log(canvasRect.left)
-        console.log(canvasRect.top)
-        console.log(element.centerX)
-        console.log(element.centerY)
-        console.log(element.height)
-        console.log(element.height)
+        //console.log(canvasRect.left)
+        //console.log(canvasRect.top)
+        //console.log(element.centerX)
+        //console.log(element.centerY)
+        //console.log(element.height)
+        //console.log(element.height)
 
         let left = element.centerX !== undefined ? `${element.centerX  + canvasRect.left}px` : '50%';
         let top = element.centerY !== undefined ? `${element.centerY + canvasRect.top}px` : '50%';
-        console.log({
+        //console.log({
             left
         })
-        console.log({
+        //console.log({
             imageWrapper
         })
 
@@ -2132,7 +2132,7 @@ function bindData() {
     }
 
     function handleMouseDown(event) {
-        console.log(event);  
+        //console.log(event);  
         const canvas = document.querySelector('.new');
 
         canvasRect = canvas.getBoundingClientRect();
@@ -2149,7 +2149,7 @@ function bindData() {
     }
 
     function handleMouseMove(event) {
-        console.log(event);
+        //console.log(event);
         if (isDragging) {
         const userImageElement = document.getElementById('user_image');
 
@@ -2183,7 +2183,7 @@ function bindData() {
             const shapes = ['rectangle', 'circle', 'star', 'rounded-border', 'heart'];
             const currentIndex = shapes.indexOf(shape);
             shape = shapes[(currentIndex + 1) % shapes.length];
-            console.log(`Shape changed to: ${shape}`); // Log shape change
+            //console.log(`Shape changed to: ${shape}`); // Log shape change
 
             drawCanvas();
         }
@@ -2195,7 +2195,7 @@ function bindData() {
     function drawCanvas() {
         const userImageElement = document.getElementById('user_image');
 
-        console.log(userImageElement);
+        //console.log(userImageElement);
         userImageElement.style.clipPath = '';
 
         switch (shape) {
