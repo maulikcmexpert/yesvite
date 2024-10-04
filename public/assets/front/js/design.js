@@ -661,7 +661,7 @@ function bindData() {
                 let oldImage = null;
                 
                 const userImageElement = document.getElementById('user_image');
-                const canvasElement = new fabric.Canvas('imageEditor', {
+                var canvasElement = new fabric.Canvas('imageEditor', {
                     width: 500, // Canvas width
                     height: 500, // Canvas height
                     cornerSize: 6,
@@ -1899,13 +1899,23 @@ console.log(2)
 
 
    
-
+        var canvasElement = new fabric.Canvas('imageEditor', {
+            width: 500, // Canvas width
+            height: 500, // Canvas height
+            cornerSize: 6,
+        });
     function updateClipPath(imageUrl, element) {
 
         const imageWrapper = document.getElementById('imageWrapper');
         const imgElement = document.getElementById('user_image');
         imgElement.src = imageUrl;
-
+if(!canvasElement){
+    var canvasElement = new fabric.Canvas('imageEditor', {
+        width: 500, // Canvas width
+        height: 500, // Canvas height
+        cornerSize: 6,
+    });
+}
         //console.log(imageWrapper);
         // If a current image exists on canvas, remove it
         console.log(canvasElement)
