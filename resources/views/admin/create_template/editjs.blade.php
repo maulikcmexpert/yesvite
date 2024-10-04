@@ -168,10 +168,13 @@
 let isImageDragging = false; // Track if the image is being dragged
 let isimageoncanvas = false;
 let oldImage = null;
-
+const canvasElement = new fabric.Canvas('imageEditor', {
+                                width: 500, // Canvas width
+                                height: 500, // Canvas height
+                            });
 function updateClipPath(imageUrl, element) {
     const imageWrapper = document.getElementById('imageWrapper');
-    var canvasElement = document.getElementById('imageEditor1');
+   
     const imgElement = new Image();
     imgElement.src = imageUrl;
 
@@ -207,6 +210,7 @@ function updateClipPath(imageUrl, element) {
 
         canvasElement.add(imgInstance);
         addIconsToImage(imgInstance);
+        drawCanvas();
         
         // Refresh canvas
         canvasElement.renderAll();
@@ -1669,10 +1673,10 @@ function applyClipPath(image, element) {
         const fileInput = document.getElementById('fileInput');
         const userImageElement = document.getElementById('user_image');
         const imageWrapper = document.getElementById('imageWrapper');
-        const canvasElement = new fabric.Canvas('imageEditor', {
-            width: 500, // Canvas width
-            height: 500, // Canvas height
-        });
+        // const canvasElement = new fabric.Canvas('imageEditor', {
+        //     width: 500, // Canvas width
+        //     height: 500, // Canvas height
+        // });
 
         const resizeHandles = {
             topLeft: document.querySelector('.resize-handle.top-left'),
