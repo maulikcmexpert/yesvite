@@ -1379,7 +1379,8 @@ $(".removeShapImage").click(function(){
             $('.removeShapImage').hide();
             const imageWrapperRect = imageWrapper.getBoundingClientRect();
             var id = $('#template_id').val();
-            const width = parseInt(userImageElement.clientWidth) - 15;
+            console.log(userImageElement)
+            const width = userImageElement.clientWidth;
             const height = userImageElement.clientHeight;
             const left = imageWrapperRect.left - canvasRect.left;
             const top = imageWrapperRect.top - canvasRect.top;
@@ -1399,8 +1400,8 @@ $(".removeShapImage").click(function(){
 
             shapeImageData ={
                 shape: shape,
-                centerX: centerX,
-                centerY: centerY,
+                centerX: left,
+                centerY: top,
                 width: width,
                 height: height,
             };

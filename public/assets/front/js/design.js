@@ -169,7 +169,7 @@ $(document).on("click", ".design-card", function () {
         let element = staticInfo?.shapeImageData;
             if (element.shape && element.centerX && element.centerY && element.height && element.width) {
                 $('.resize-handle').hide();
-                updateClipPath(shapeImageUrl, element);
+                updateClipPath(shapeImageUrl, element,'modal');
             }
     }
 
@@ -1753,11 +1753,15 @@ const canvasElement = new fabric.Canvas('imageEditor', {
 
 
 
-function updateClipPath(imageUrl, element) {
-    console.log(element)
-    const imageWrapper = document.getElementById('imageWrapper');
-   
-    const imgElement = document.getElementById('user_image');
+function updateClipPath(imageUrl, element,modal =null) {
+    console.log(modal)
+    if(modal){
+        const imageWrapper = document.getElementById('imageWrapper2');
+        const imgElement = document.getElementById('user_image2');
+    }else{
+        const imageWrapper = document.getElementById('imageWrapper');
+        const imgElement = document.getElementById('user_image');
+    }
     imgElement.src = imageUrl;
 
     // If a current image exists on canvas, remove it
@@ -1935,10 +1939,7 @@ $(".removeShapImage").click(function(){
 
 })
 
-document.addEventListener('mousemove', resize);
-document.addEventListener('mouseup', handleMouseUp);
-imageWrapper.addEventListener('mousedown', handleMouseDown);
-document.addEventListener('mousemove', handleMouseMove);
+
 
 let isDragging = false;
 let isResizing = false;
@@ -1947,7 +1948,13 @@ let offsetX, offsetY;
 let shapeChangedDuringDrag = false; // Flag to track shape change
 let imageUploaded = false; // Flag to track if image has been uploaded
 
+document.addEventListener('mousemove', resize);
+document.addEventListener('mouseup', handleMouseUp);
+imageWrapper.addEventListener('mousedown', handleMouseDown);
+document.addEventListener('mousemove', handleMouseMove);
+
 function resize(event) {
+
     if (isResizing) {
         let newWidth, newHeight;
 
