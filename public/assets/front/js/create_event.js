@@ -4291,8 +4291,15 @@ var offset = 0;
 var page = '';
 
 $(document).on("click", ".store_desgin_temp", function () {
+    
     canvas.discardActiveObject();
+    canvas.getObjects().forEach(obj => {
+        if (obj.type === 'group') {
+            canvas.remove(obj) // Your existing function to add icons
+        }
+    });
     canvas.renderAll();
+
     setTimeout(() => {
         var downloadImage = document.getElementById("download_image");
         $("#loader").show();
@@ -4312,6 +4319,12 @@ $(document).on("click", ".store_desgin_temp", function () {
 
 $(document).on("click", ".next_guest_step", function () {
     canvas.discardActiveObject();
+    canvas.getObjects().forEach(obj => {
+        if (obj.type === 'group') {
+            canvas.remove(obj) // Your existing function to add icons
+        }
+    });
+
     canvas.renderAll();
     setTimeout(() => {
         var downloadImage = document.getElementById("imageEditor1");
