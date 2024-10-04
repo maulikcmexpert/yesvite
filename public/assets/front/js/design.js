@@ -680,6 +680,15 @@ function bindData() {
     }
 
     function addIconsToTextbox(textbox) {
+        if (textbox.trashIcon) {
+            canvas.remove(textbox.trashIcon);
+            textbox.trashIcon = null; // Clear reference
+        }
+        if (textbox.copyIcon) {
+            canvas.remove(textbox.copyIcon);
+            textbox.copyIcon = null; // Clear reference
+        }
+        canvas.renderAll();
         // Trash icon SVG
         // const trashIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 50 50"><path d="M20,30 L30,30 L30,40 L20,40 Z M25,10 L20,10 L20,7 L30,7 L30,10 Z M17,10 L33,10 L33,40 L17,40 Z" fill="#FF0000"/></svg>`;
         const trashIconSVG = `<svg width="29" x="0px" y="0px" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
