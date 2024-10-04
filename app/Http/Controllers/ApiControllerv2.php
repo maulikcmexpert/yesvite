@@ -3084,7 +3084,9 @@ class ApiControllerv2 extends Controller
         }
         try {
 
-            $event_design = TextData::get();
+            $event_design = TextData::where('static_information', '!=', null)->get();
+
+
             if ($input['category_id'] != 0) {
 
                 $event_design = TextData::where('event_design_sub_category_id', $input['category_id'])->get();
