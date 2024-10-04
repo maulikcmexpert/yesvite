@@ -13023,9 +13023,7 @@ class ApiControllerv2 extends Controller
     public function getSingleTemplateData(Request $request)
     {
         try {
-            // Static dimensions
-            $staticHeight = 490;
-            $staticWidth = 345;
+
             // Validate the incoming request
             $validatedData = $request->validate([
                 'template_id' => 'required|integer'
@@ -13035,74 +13033,7 @@ class ApiControllerv2 extends Controller
             if (!$textData) {
                 return response()->json(['message' => 'Data not found'], 404);
             }
-            // Get the existing text elements from the static information
             $resp = $textData->static_information;
-            // Replace placeholders with the provided request data
-            // foreach ($resp as $k => $value) {
-            //     foreach ($value as $key => $val) {
-            //         if (isset($resp[$k]['backgroundColor'])) {
-            //             $resp[$k]['backgroundColor'] = substr($resp[$k]['backgroundColor'], 0, 7);
-            //         }
-            //         switch ($val) {
-            //             case 'event_name':
-            //                 if (!empty($request->event_name)) {
-
-            //                     $resp[$k][$key] = $request->event_name;
-            //                 } else {
-
-            //                     unset($resp[$k]); // Remove entry if event_name is empty
-            //                 }
-            //                 break;
-            //             case 'host_name':
-            //                 if (!empty($request->host_name)) {
-            //                     $resp[$k][$key] = $request->host_name;
-            //                 } else {
-            //                     unset($resp[$k]); // Remove entry if host_name is empty
-            //                 }
-            //                 break;
-            //             case 'Location':
-            //                 if (!empty($request->event_location_name)) {
-            //                     $resp[$k][$key] = $request->event_location_name;
-            //                 } else {
-            //                     unset($resp[$k]); // Remove entry if event_location_name is empty
-            //                 }
-            //                 break;
-            //             case 'start_time':
-            //                 if (!empty($request->start_time)) {
-            //                     $resp[$k][$key] = $request->start_time;
-            //                 } else {
-            //                     unset($resp[$k]); // Remove entry if start_time is empty
-            //                 }
-            //                 break;
-            //             case 'rsvp_end_time':
-            //                 if (!empty($request->rsvp_end_time)) {
-            //                     $resp[$k][$key] = $request->rsvp_end_time;
-            //                 } else {
-            //                     unset($resp[$k]); // Remove entry if rsvp_end_time is empty
-            //                 }
-            //                 break;
-            //             case 'start_date':
-            //                 if (!empty($request->start_date)) {
-            //                     $resp[$k][$key] = $request->start_date;
-            //                 } else {
-            //                     unset($resp[$k]); // Remove entry if start_date is empty
-            //                 }
-            //                 break;
-            //             case 'end_date':
-            //                 if (!empty($request->end_date)) {
-            //                     $resp[$k][$key] = $request->end_date;
-            //                 } else {
-            //                     unset($resp[$k]); // Remove entry if end_date is empty
-            //                 }
-            //                 break;
-            //         }
-            //     }
-            // }
-            // $resp = array_values($resp);
-
-            $textData->width = $staticWidth;
-            $textData->height = $staticHeight;
-            $textData->save();
             $image = $textData->image;
             $shape_image = $textData->shape_image;
             $height = $textData->height;
