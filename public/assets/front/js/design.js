@@ -1961,12 +1961,12 @@ function bindData() {
                 cornerStyle: 'circle',
             });
             shape = element.shape;
-            canvasElement.add(imgInstance);
+            canvasEL.add(imgInstance);
             // addIconsToImage(imgInstance);
             drawCanvas();
 
             // Refresh canvas
-            canvasElement.renderAll();
+            canvasEL.renderAll();
 
             // Update the image with the shape based on the provided element data
             if (element.shape) {
