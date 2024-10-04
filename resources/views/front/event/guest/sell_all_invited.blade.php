@@ -1,4 +1,3 @@
-{{dd($userEntry)}}
 @foreach ( $data as $guest_user)
 {{-- @php
     if($guest_user['is_duplicate'] == 1){
