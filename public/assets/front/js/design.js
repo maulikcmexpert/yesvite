@@ -659,13 +659,13 @@ function bindData() {
                 let isImageDragging = false; // Track if the image is being dragged
                 let isimageoncanvas = false;
                 let oldImage = null;
+                
+                const userImageElement = document.getElementById('user_image');
                 const canvasElement = new fabric.Canvas('imageEditor', {
                     width: 500, // Canvas width
                     height: 500, // Canvas height
                     cornerSize: 6,
                 });
-                const userImageElement = document.getElementById('user_image');
-
                 if (shapeImageUrl) {
                     let element = staticInfo?.shapeImageData;
                     if (element.shape && element.centerX && element.centerY && element.height && element.width) {
@@ -679,8 +679,8 @@ function bindData() {
 
 
             // Set custom attribute with the fetched ID
-            var canvasElement = document.getElementById("imageEditor1");
-            canvasElement.setAttribute("data-canvas-id", temp_id);
+            // var canvasElement = document.getElementById("imageEditor1");
+            // canvasElement.setAttribute("data-canvas-id", temp_id);
 
             canvas.renderAll(); // Ensure all elements are rendered
 
@@ -1961,12 +1961,12 @@ function bindData() {
                 cornerStyle: 'circle',
             });
             shape = element.shape;
-            canvasEL.add(imgInstance);
+            canvasElement.add(imgInstance);
             // addIconsToImage(imgInstance);
             drawCanvas();
 
             // Refresh canvas
-            canvasEL.renderAll();
+            canvasElement.renderAll();
 
             // Update the image with the shape based on the provided element data
             if (element.shape) {
