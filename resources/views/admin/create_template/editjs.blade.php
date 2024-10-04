@@ -1847,7 +1847,7 @@ function handleMouseMove(event) {
         function handleMouseUp(event) {
             if (event.target === userImageElement && !shapeChangedDuringDrag) {
                 // Cycle through shapes
-                const shapes = ['rectangle', 'circle', 'star', 'rounded-border', 'heart'];
+                const shapes = ['orignal', 'circle', 'star', 'rounded-border', 'heart','triangle','square','oval'];
                 const currentIndex = shapes.indexOf(shape);
                 shape = shapes[(currentIndex + 1) % shapes.length];
                 console.log(`Shape changed to: ${shape}`); // Log shape change
@@ -1863,25 +1863,37 @@ function handleMouseMove(event) {
             userImageElement.style.clipPath = '';
 
             switch (shape) {
-                case 'rectangle':
+                case 'orignal':
+                    // No need for a clip path, the default rectangle is used
                     break;
                 case 'circle':
                     userImageElement.style.clipPath = 'circle(50% at 50% 50%)';
                     break;
                 case 'star':
-                    userImageElement.style.clipPath =
+                    userImageElement.style.clipPath = 
                         'polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)';
                     break;
                 case 'rounded-border':
                     userImageElement.style.clipPath = 'inset(0 round 20px)';
                     break;
                 case 'heart':
-                    userImageElement.style.clipPath = 'url(#heartClipPath)';
+                    userImageElement.style.clipPath = 
+                        'path("M150 30 A30 30 0 1 1 120 30 A30 30 0 1 1 90 30 Q90 60 150 120 Q210 60 210 30 Z")';
+                    break;
+                case 'triangle':
+                    userImageElement.style.clipPath = 'polygon(50% 0%, 0% 100%, 100% 100%)';
+                    break;
+                case 'square':
+                    userImageElement.style.clipPath = 'inset(0)'; // Or no clipPath since the image is a square
+                    break;
+                case 'oval':
+                    userImageElement.style.clipPath = 'ellipse(50% 40% at 50% 50%)';
                     break;
                 default:
                     break;
             }
         }
+
 
         fileInput.addEventListener('change', function(event) {
             const file = event.target.files[0];
