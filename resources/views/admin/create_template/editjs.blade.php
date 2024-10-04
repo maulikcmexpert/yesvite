@@ -1376,11 +1376,20 @@ $(".removeShapImage").click(function(){
             const width = userImageElement.clientWidth;
             const height = userImageElement.clientHeight;
             const left = imageWrapper.offsetLeft;
+           
             const top = imageWrapper.offsetTop;
             const centerX = left + width / 2;
             const centerY = top + height / 2;
 
-           
+            console.log("===================")
+            console.log(width)
+            console.log(height)
+            console.log(left)
+            console.log(top)
+            console.log(centerY)
+            console.log(centerX)
+            console.log("===================")
+
             var shapeImageData = [];
 
             shapeImageData ={
@@ -1679,7 +1688,7 @@ $(".removeShapImage").click(function(){
        
         undoStack.forEach((ob, index) => {
             ob.objects = ob.objects.filter(obj => obj.type !== 'group');
-         
+            // console.log
             if (ob.objects.length === 0) {
                 console.log("Removed from undoStack");
            
