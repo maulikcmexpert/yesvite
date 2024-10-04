@@ -2175,6 +2175,12 @@ function drawCanvas() {
     }
 }
 
+Object.values(resizeHandles).forEach(handle => {
+    handle.addEventListener('mousedown', function(event) {
+        startResize(event, handle);
+    });
+});
+
         document.addEventListener('mousemove', resize);
         document.addEventListener('mouseup', handleMouseUp);
         imageWrapper.addEventListener('mousedown', handleMouseDown);
