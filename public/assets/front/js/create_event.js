@@ -4291,35 +4291,43 @@ var offset = 0;
 var page = '';
 
 $(document).on("click", ".store_desgin_temp", function () {
-    var downloadImage = document.getElementById("download_image");
-    $("#loader").show();
-    $(this).prop("disabled", true);
-    $('.btn-close').prop("disabled", true);
-    var textData = getTextDataFromCanvas();
-    dbJson = {
-        textElements: textData
-    };
-    console.log(dbJson);
-    eventData.textData = dbJson;
-    eventData.temp_id = temp_id;
-    save_image_design(downloadImage);
-    $(".main-content-wrp").addClass("blurred");
+    canvas.discardActiveObject();
+    canvas.renderAll();
+    setTimeout(() => {
+        var downloadImage = document.getElementById("download_image");
+        $("#loader").show();
+        $(this).prop("disabled", true);
+        $('.btn-close').prop("disabled", true);
+        var textData = getTextDataFromCanvas();
+        dbJson = {
+            textElements: textData
+        };
+        console.log(dbJson);
+        eventData.textData = dbJson;
+        eventData.temp_id = temp_id;
+        save_image_design(downloadImage);
+        $(".main-content-wrp").addClass("blurred");
+    }, 500);
 });
 
 $(document).on("click", ".next_guest_step", function () {
-    var downloadImage = document.getElementById("imageEditor1");
-    $("#loader").show();
-    $(this).prop("disabled", true);
-    $('.btn-close').prop("disabled", true);
-    var textData = getTextDataFromCanvas();
-    // console.log(textData);
-    dbJson = {
-        textElements: textData
-    };
-    eventData.textData = dbJson;
-    eventData.temp_id = temp_id;
-    save_image_design(downloadImage);
-    $(".main-content-wrp").addClass("blurred");
+    canvas.discardActiveObject();
+    canvas.renderAll();
+    setTimeout(() => {
+        var downloadImage = document.getElementById("imageEditor1");
+        $("#loader").show();
+        $(this).prop("disabled", true);
+        $('.btn-close').prop("disabled", true);
+        var textData = getTextDataFromCanvas();
+        // console.log(textData);
+        dbJson = {
+            textElements: textData
+        };
+        eventData.textData = dbJson;
+        eventData.temp_id = temp_id;
+        save_image_design(downloadImage);
+        $(".main-content-wrp").addClass("blurred");
+    }, 500);
 });
 
 function save_image_design(downloadImage,textData){
