@@ -1376,7 +1376,13 @@ $(".removeShapImage").click(function(){
            
             var shapeImageData = [];
 
-            shapeImageData.push(updatedOBJImage);
+            shapeImageData.push({
+                shape: shape,
+                centerX: centerX,
+                centerY: centerY,
+                width: width,
+                height: height
+            });
 
           
             console.log(shapeImageData);
