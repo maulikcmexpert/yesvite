@@ -1510,27 +1510,27 @@ function updateClipPath(imageUrl, element) {
 
 
     function reattachIcons() {
-        undoStack.forEach(ob => {
+        undoStack.forEach((ob, index) => {
+            // Filter out 'group' type objects from the 'objects' array
+            ob.objects = ob.objects.filter(obj => obj.type !== 'group');
+            
+            // If all objects in a state were 'group', you can also remove that entire state from undoStack
+            if (ob.objects.length === 0) {
+                console.log("Removed from undoStack");
+               // undoStack.splice(index, 1);  // Remove the empty state from undoStack
+            }
+        });
+
+        redoStack.forEach((ob, index) => {
 
             ob.objects = ob.objects.filter(obj => obj.type !== 'group');
 
             // If all objects in a state were 'group', you can also remove that entire state from undoStack
             if (ob.objects.length === 0) {
                 console.log("Removed from undoStack");
-                undoStack.splice(index, 1);  // Remove the empty state from undoStack
+               // redoStack.splice(index, 1);  // Remove the empty state from undoStack
             }
         })
-
-        redoStack.forEach(ob => {
-
-            ob.objects = ob.objects.filter(obj => obj.type !== 'group');
-
-            // If all objects in a state were 'group', you can also remove that entire state from undoStack
-            if (ob.objects.length === 0) {
-                console.log("Removed from undoStack");
-                undoStack.splice(index, 1);  // Remove the empty state from undoStack
-            }
-            })
       
     }
  
