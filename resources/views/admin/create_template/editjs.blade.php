@@ -199,6 +199,9 @@ function updateClipPath(imageUrl, element) {
     imgElement.onload = function () {
         // Get image dimensions and scale it
         const imgInstance = new fabric.Image(imgElement, {
+            left: element.centerX - (imgElement.width * element.width) / 2, // Set left based on centerX
+            top: element.centerY - (imgElement.height * element.height) / 2,  // Set top based on centerY
+           
             left: 0,
             top: 0,
             selectable: true,
