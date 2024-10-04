@@ -191,6 +191,8 @@ function updateClipPath(imageUrl, element) {
         canvasElement.renderAll();
     }
     imageWrapper.style.display = 'block';
+
+   
     imgElement.onload = function () {
         // Get image dimensions and scale it
         const imgInstance = new fabric.Image(imgElement, {
@@ -199,15 +201,26 @@ function updateClipPath(imageUrl, element) {
             selectable: true,
             hasControls: true,
             hasBorders: true,
-            cornerSize: 6,
+            
             borderColor: "#2DA9FC",
             cornerColor: "#fff",
             transparentCorners: false,
             lockUniScaling: true,
             scaleX: 600 / imgElement.width,
-            scaleY: 600 / imgElement.height
+            scaleY: 600 / imgElement.height,
+            cornerSize: 10,
+            cornerStyle: 'circle',
         });
-
+        imgElement.setControlsVisibility({
+            mt: true, // Hide middle top control
+            mb: true, // Hide middle bottom control
+            bl: true, // Hide bottom left control
+            br: true, // Hide bottom right control
+            tl: true, // Hide top left control
+            tr: true, // Hide top right control
+            ml: true,  // Show middle left control
+            mr: true   // Show middle right control
+        });
         canvasElement.add(imgInstance);
         addIconsToImage(imgInstance);
         drawCanvas();
@@ -249,8 +262,8 @@ function updateClipPath(imageUrl, element) {
             element.height = imgInstance.height * imgInstance.scaleY;
 
             updatedOBJImage = {               
-                width: imgInstance.width,
-                height: imgInstance.height
+                width:  imgInstance.width * imgInstance.scaleX,
+                height: imgInstance.height * imgInstance.scaleY
             };
         });
 
