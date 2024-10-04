@@ -1763,6 +1763,7 @@ const canvasElement2 = new fabric.Canvas('imageEditor', {
 function updateClipPath(imageUrl, element,modal =null) {
     var imgElement;
     const imageWrapper = document.getElementById('imageWrapper');
+    const imageWrapper2 = document.getElementById('imageWrapper2');
     var canvasEL;
     if(modal){
         console.log(modal);
@@ -1792,6 +1793,7 @@ function updateClipPath(imageUrl, element,modal =null) {
     const canvasRect = canvasEL.getBoundingClientRect();
 
     imageWrapper.style.display = 'block';
+    imageWrapper2.style.display = 'block';
     // imageWrapper.style.left = element.left;
     // imageWrapper.style.top = element.top;
     let left = element.centerX !== undefined ? `${element.centerX  + canvasRect.left}px` : '50%';
@@ -1800,6 +1802,8 @@ function updateClipPath(imageUrl, element,modal =null) {
     // Set the calculated position to imageWrapper
     imageWrapper.style.left = left;
     imageWrapper.style.top = top;
+    imageWrapper2.style.left = left;
+    imageWrapper2.style.top = top;
     
     imgElement.onload = function () {
         // Get image dimensions and scale it
