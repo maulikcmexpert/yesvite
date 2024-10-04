@@ -1681,6 +1681,8 @@ $(".removeShapImage").click(function(){
 
             console.log(obj)
         });
+        console.log(2)
+        console.log(undoStack)
         undoStack.forEach((ob, index) => {
             // Filter out 'group' type objects from the 'objects' array
             ob.objects = ob.objects.filter(obj => obj.type !== 'group');
