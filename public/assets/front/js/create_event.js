@@ -5296,6 +5296,25 @@ $(document).ready(function () {
     });
 });
 
+$(document).on('click','.all_user_list',function(){
+    $.ajax({
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                "content"
+            ),
+        },
+        url: base_url+"event/see_all",
+        method: "POST",
+        success: function (response) {
+            // console.log(response);
+            $('.see-all-invite-member-wrp').empty();
+            $('.see-all-invite-member-wrp').html(response);
+            toggleSidebar('sidebar_see_all_invite');
+
+        },
+    });
+})
+
 // $(document).on("click", ".new-temp", function () {
 //     // Get the image URL from the data-image attribute
 //     var imageUrl = $(this).data("image");
