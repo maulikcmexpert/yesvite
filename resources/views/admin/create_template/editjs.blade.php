@@ -1313,7 +1313,8 @@ function applyClipPath(image, element) {
                 borderColor: '#2DA9FC',
                 cornerColor: '#fff',
                 cornerSize: 6,
-                transparentCorners: false
+                transparentCorners: false,
+                textAlign:'center',
             });
 
             textbox.on('scaling', function() {
