@@ -1699,18 +1699,9 @@ $(".removeShapImage").click(function(){
             obj.borderColor = "#2DA9FC"
             obj.cornerColor = "#fff"
             obj.cornerSize = 6
+            obj.textAlign = 'center'
             // Check if obj is a fabric object by checking for the existence of 'set' method
-            if (typeof obj.set === 'function') {
-                // Update border and corner styling
-                obj.set({
-                    borderColor: "#2DA9FC",
-                    cornerColor: "#fff",
-                    cornerSize: 6
-                });
-                console.log("Updated");
-               
-            } 
-            console.log("Updated object:", obj);
+           
         });
            
 
