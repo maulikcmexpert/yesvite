@@ -28,7 +28,7 @@
                 </div>
                 {{-- <img src="{{ $textData->image}}" alt=""> --}}
             </div>
-            <div id="imageWrapper" style="position:fixed; display:none;">
+            <div id="imageWrapper" style="position:fixed;">
                 <img id="user_image" src="" style="height: 100px; width: 100px; background-color: black;" />
                 <div class="resize-handle top-left"></div>
                 <div class="resize-handle top-center"></div>
