@@ -276,12 +276,11 @@ $(document).on("click", ".design-card", function () {
 
     // Load filed image (filedImagePath) as another image layer
     if (shapeImageUrl) {
-        staticInfo?.shapeImageData?.forEach(element => {
+        let element = staticInfo?.shapeImageData;
             if (element.shape && element.centerX && element.centerY && element.height && element.width) {
                 $('.resize-handle').hide();
                 updateClipPath(shapeImageUrl, element);
             }
-        });
     }
 
 });
@@ -626,11 +625,11 @@ function bindData() {
                 });
 
                 if (shapeImageUrl) {
-                    staticInfo?.shapeImageData?.forEach(element => {
+                    let element = staticInfo?.shapeImageData;
                         if (element.shape && element.centerX && element.centerY && element.height && element.width) {
                             updateClipPath(shapeImageUrl, element);
                         }
-                    });
+                    
                 }
             } else {
                 showStaticTextElements();
