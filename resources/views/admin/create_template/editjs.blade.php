@@ -171,7 +171,7 @@ let oldImage = null;
 
 function updateClipPath(imageUrl, element) {
     const imageWrapper = document.getElementById('imageWrapper');
-    const canvasElement = new fabric.Canvas('imageEditor', { width: 500, height: 500 });
+    var canvasElement = document.getElementById('imageEditor1');
     const imgElement = new Image();
     imgElement.src = imageUrl;
 
