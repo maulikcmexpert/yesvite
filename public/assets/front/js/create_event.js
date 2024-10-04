@@ -5305,12 +5305,12 @@ $(document).on('click','.all_user_list',function(){
                 "content"
             ),
         },
-        url: base_url+"event/see_all",
+        url: base_url+"event/get_all_invited_guest",
         method: "POST",
         success: function (response) {
             toggleSidebar('sidebar_see_all_invite');
             $('.see-all-invite-member-wrp').empty();
-            $('.see-all-invite-member-wrp').html(response.view);
+            $('.see-all-invite-member-wrp').html(response);
         },
 
 });
