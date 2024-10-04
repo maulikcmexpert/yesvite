@@ -1368,7 +1368,8 @@ $(".removeShapImage").click(function(){
             var canvasId = canvasElement.getAttribute('data-canvas-id');
             var imageName = 'image_' + Date.now() + '.png';
 
-
+            $('.resize-handle').hide();
+            $('.removeShapImage').hide();
 
             var id = $('#template_id').val();
             const width = userImageElement.clientWidth;
@@ -1410,7 +1411,7 @@ $(".removeShapImage").click(function(){
                 .then(response => response.json())
                 .then(data => {
                     console.log('Text data saved successfully', data);
-                    // window.location.href = "{{URL::to('/admin/create_template')}}";
+                    window.location.href = "{{URL::to('/admin/create_template')}}";
 
                 })
                 .catch((error) => {

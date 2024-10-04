@@ -276,8 +276,12 @@ $(document).on("click", ".design-card", function () {
 
     // Load filed image (filedImagePath) as another image layer
     if (shapeImageUrl) {
-        
-        
+        staticInfo?.shapeImageData?.forEach(element => {
+            if (element.shape && element.centerX && element.centerY && element.height && element.width) {
+                $('.resize-handle').hide();
+                updateClipPath(shapeImageUrl, element);
+            }
+        });
     }
 
 });
@@ -1861,6 +1865,209 @@ function bindData() {
         });
     });
 }
+
+let currentImage = null;
+let isImageDragging = false; // Track if the image is being dragged
+let isimageoncanvas = false;
+let oldImage = null;
+let updatedOBJImage = {
+    shape: 'rectangle',
+    centerX: 0,
+    centerY: 0,
+    width: 100,
+    height: 100
+};
+const userImageElement = document.getElementById('user_image');
+const imageWrapper = document.getElementById('imageWrapper');
+let shape = 'rectangle'; // Default shape
+
+const canvasElement = new fabric.Canvas('imageEditor', {
+    width: 500, // Canvas width
+    height: 500, // Canvas height
+    cornerSize: 6,
+});
+
+function updateClipPath(imageUrl, element) {
+    console.log(element)
+    const imageWrapper = document.getElementById('imageWrapper');
+   
+    const imgElement = document.getElementById('user_image');
+    imgElement.src = imageUrl;
+
+    // If a current image exists on canvas, remove it
+    if (currentImage) {
+        canvasElement.remove(currentImage);
+    }
+
+    // Handle previous image and trash icon
+    if (oldImage != null) {
+        canvasElement.remove(oldImage.trashIcon);
+        oldImage.trashIcon = null;
+        canvasElement.renderAll();
+    }
+
+    imageWrapper.style.display = 'block';
+    // imageWrapper.style.left = element.left;
+    // imageWrapper.style.top = element.top;
+    let left = element.centerX!=undefined?`${element.centerX - (element.width / 2)}px`:'50%';
+    let top = element.centerX!=undefined?`${element.centerY - (element.height / 2)}px`:'50%';
+
+    // Set the calculated position to imageWrapper
+    imageWrapper.style.left = left;
+    imageWrapper.style.top = top;
+    
+    imgElement.onload = function () {
+        // Get image dimensions and scale it
+        const imgInstance = new fabric.Image(imgElement, {           
+            selectable: true,
+            hasControls: true,
+            hasBorders: true,
+            
+            borderColor: "#2DA9FC",
+            cornerColor: "#fff",
+            transparentCorners: false,
+            lockUniScaling: true,
+            scaleX: 600 / imgElement.width,
+            scaleY: 600 / imgElement.height,
+            cornerSize: 10,
+            cornerStyle: 'circle',
+        });
+        shape = element.shape;
+        canvasElement.add(imgInstance);
+        // addIconsToImage(imgInstance);
+        drawCanvas();
+        
+        // Refresh canvas
+        canvasElement.renderAll();
+
+        // Update the image with the shape based on the provided element data
+        if (element.shape) {
+            applyClipPath(imgInstance, element);
+        }
+
+        // Image mouseup event to change shape or update position
+        imgInstance.on('mouseup', function (options) {
+            if (options.target) {
+                // Change shape logic
+                currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
+                const nextShape = shapes[currentShapeIndex];
+                element.shape = nextShape;
+
+                updateClipPath(data, element); // Update the image with the new shape
+            }
+        });
+
+        // Update canvas on movement or scaling
+        imgInstance.on('moving', function () {
+            isImageDragging = true;
+            element.centerX = imgInstance.left;
+            element.centerY = imgInstance.top;
+
+            updatedOBJImage = {               
+                centerX: imgInstance.left,
+                centerY: imgInstance.top,                
+            };
+        });
+
+        imgInstance.on('scaling', function () {
+            element.width = imgInstance.width * imgInstance.scaleX;
+            element.height = imgInstance.height * imgInstance.scaleY;
+
+            updatedOBJImage = {               
+                width:  imgInstance.width * imgInstance.scaleX,
+                height: imgInstance.height * imgInstance.scaleY
+            };
+        });
+
+        currentImage = imgInstance; // Track current image on canvas
+        oldImage = imgInstance;
+        $('.photo-slider-wrp').hide()
+    };
+
+    imgElement.onerror = function (e) {
+        console.error("Failed to load image.",e);
+    };
+}
+
+function drawCanvas() {
+    userImageElement.style.clipPath = '';
+
+    switch (shape) {
+        case 'rectangle':
+            break;
+        case 'circle':
+            userImageElement.style.clipPath = 'circle(50% at 50% 50%)';
+            break;
+        case 'star':
+            userImageElement.style.clipPath =
+                'polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)';
+            break;
+        case 'rounded-border':
+            userImageElement.style.clipPath = 'inset(0 round 20px)';
+            break;
+        case 'heart':
+            userImageElement.style.clipPath = 'url(#heartClipPath)';
+            break;
+        default:
+            break;
+    }
+}
+
+// Helper function to apply clip path based on shape
+function applyClipPath(image, element) {
+    const containerWidth = 150;
+    const containerHeight = 200;
+
+    let clipPath;
+    switch (element.shape) {
+        case 'circle':
+            clipPath = new fabric.Circle({
+                radius: Math.min(containerWidth, containerHeight) / 2,
+                originX: 'center',
+                originY: 'center'
+            });
+            break;
+        case 'star':
+            clipPath = new fabric.Path(
+                'M 50,0 L 61,35 L 98,35 L 68,57 L 79,91 L 50,70 L 21,91 L 32,57 L 2,35 L 39,35 z',
+                {
+                    scaleX: (image.width * image.scaleX) / 100,
+                    scaleY: (image.height * image.scaleY) / 100,
+                    originX: 'center',
+                    originY: 'center'
+                }
+            );
+            break;
+        case 'heart':
+            const heartPath = [
+                'M', 0, 0,
+                'C', -containerWidth / 3, -containerHeight / 3, -containerWidth / 3, containerHeight / 6, 0, containerHeight / 5,
+                'C', containerWidth / 3, containerHeight / 6, containerWidth / 3, -containerHeight / 3, 0, 0
+            ].join(' ');
+            clipPath = new fabric.Path(heartPath, {
+                originX: 'center',
+                originY: 'center'
+            });
+            break;
+        default:
+            break;
+    }
+
+    // Set clipping path for the image
+    image.set({
+        clipPath: clipPath
+    });
+
+    canvasElement.renderAll();
+}
+
+
+$(".removeShapImage").click(function(){
+    $("#imageWrapper").hide();
+    $("#user_image").attr("src","");
+    $('.photo-slider-wrp').show()
+
+})
     
 
 function getTextDataFromCanvas() {
