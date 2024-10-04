@@ -5,6 +5,7 @@ var base_url = $("#base_url").text();
 var canvas;
 var shapeImageUrl = null;
 var userImageElement;
+var imageWrapper;
 $(document).on("click", ".design-card", function () {
     var url = $(this).data("url");
     var template = $(this).data("template");
@@ -171,6 +172,7 @@ $(document).on("click", ".design-card", function () {
             if (element.shape && element.centerX && element.centerY && element.height && element.width) {
                 $('.resize-handle').hide();
                 userImageElement = document.getElementById('user_image2');
+                imageWrapper = document.getElementById('imageWrapper2');
                 updateClipPath(shapeImageUrl, element,'modal');
             }
     }
@@ -520,6 +522,7 @@ function bindData() {
                     let element = staticInfo?.shapeImageData;
                         if (element.shape && element.centerX && element.centerY && element.height && element.width) {
                             userImageElement = document.getElementById('user_image');
+                            imageWrapper = document.getElementById('imageWrapper');
                             updateClipPath(shapeImageUrl, element);
                         }
                     
@@ -1746,7 +1749,7 @@ let updatedOBJImage = {
 };
 
 
-const imageWrapper = document.getElementById('imageWrapper');
+
 let shape = 'rectangle'; // Default shape
 
 const canvasElement = new fabric.Canvas('imageEditor', {
