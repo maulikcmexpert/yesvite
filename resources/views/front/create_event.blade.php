@@ -2303,7 +2303,7 @@
                 </button>
             </div>
             <div class="guest-group-name">
-                <div class="user-contacts-sidebar sell-all-invite-member-wrp">
+                <div class="user-contacts-sidebar see-all-invite-member-wrp">
 
                 </div>
             </div>

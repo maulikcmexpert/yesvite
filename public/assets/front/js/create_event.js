@@ -972,6 +972,9 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
 
                 // } else {
                     $(".inivted_user_list").append(response.view);
+                    $(".see-all-invite-member-wrp").append(response.view);
+
+
                     // var length = responsive_invite_user();
                     // if(length < 4){
                         $('.all_user_list').remove();
@@ -1107,6 +1110,8 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
                 // }
 
                 $(".inivted_user_list").append(response.view);
+                $(".see-all-invite-member-wrp").append(response.view);
+
                 $(".user-list-responsive").empty();
                 $(".user-list-responsive").html(response.responsive_view);
                 // var length = responsive_invite_user();
@@ -4683,6 +4688,8 @@ $(document).on("click", ".invite_group_member", function () {
             $(".user-list-responsive").html(response.responsive_view);
             console.log(response);
             $(".inivted_user_list").append(response.view);
+            $(".see-all-invite-member-wrp").append(response.view);
+
             // var length = responsive_invite_user();
             // $(".user-list-responsive").html(response.responsive_view);
             // if(length < 4){
