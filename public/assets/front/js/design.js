@@ -1935,10 +1935,7 @@ $(".removeShapImage").click(function(){
 
 })
 
-document.addEventListener('mousemove', resize);
-document.addEventListener('mouseup', handleMouseUp);
-imageWrapper.addEventListener('mousedown', handleMouseDown);
-document.addEventListener('mousemove', handleMouseMove);
+
 
 let isDragging = false;
 let isResizing = false;
@@ -1947,8 +1944,13 @@ let offsetX, offsetY;
 let shapeChangedDuringDrag = false; // Flag to track shape change
 let imageUploaded = false; // Flag to track if image has been uploaded
 
+document.addEventListener('mousemove', resize);
+document.addEventListener('mouseup', handleMouseUp);
+imageWrapper.addEventListener('mousedown', handleMouseDown);
+document.addEventListener('mousemove', handleMouseMove);
+
 function resize(event) {
-    console.log(isResizing);
+
     if (isResizing) {
         let newWidth, newHeight;
 
