@@ -367,7 +367,7 @@ $(function () {
 
     $("#event-date").daterangepicker(
         {
-            autoUpdateInput: false,
+            autoUpdateInput: true,
             locale: {
                 format: "MM/DD/YYYY",
             },
