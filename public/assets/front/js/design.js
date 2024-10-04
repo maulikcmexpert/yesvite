@@ -1948,6 +1948,7 @@ let shapeChangedDuringDrag = false; // Flag to track shape change
 let imageUploaded = false; // Flag to track if image has been uploaded
 
 function resize(event) {
+    console.log(isResizing);
     if (isResizing) {
         let newWidth, newHeight;
 
