@@ -1702,96 +1702,109 @@ $(".removeShapImage").click(function(){
         // });
 
         const resizeHandles = {
-            topLeft: document.querySelector('.resize-handle.top-left'),
-            topRight: document.querySelector('.resize-handle.top-right'),
-            topCenter: document.querySelector('.resize-handle.top-center'),
-            leftCenter: document.querySelector('.resize-handle.left-center'),
-            rightCenter: document.querySelector('.resize-handle.right-center'),
-            bottomCenter: document.querySelector('.resize-handle.bottom-center'),
-            bottomLeft: document.querySelector('.resize-handle.bottom-left'),
-            bottomRight: document.querySelector('.resize-handle.bottom-right')
-        };
+    topLeft: document.querySelector('.resize-handle.top-left'),
+    topRight: document.querySelector('.resize-handle.top-right'),
+    bottomLeft: document.querySelector('.resize-handle.bottom-left'),
+    bottomRight: document.querySelector('.resize-handle.bottom-right'),
+    topCenter: document.querySelector('.resize-handle.top-center'),
+    bottomCenter: document.querySelector('.resize-handle.bottom-center'),
+    leftCenter: document.querySelector('.resize-handle.left-center'),
+    rightCenter: document.querySelector('.resize-handle.right-center')
+};
 
-        let isDragging = false;
-        let isResizing = false;
-        let startWidth, startHeight, startX, startY, activeHandle;
-        let offsetX, offsetY;
-        let shape = 'rectangle'; // Default shape
-        let shapeChangedDuringDrag = false; // Flag to track shape change
-        let imageUploaded = false; // Flag to track if image has been uploaded
+let isDragging = false;
+let isResizing = false;
+let startWidth, startHeight, startX, startY, activeHandle;
+let offsetX, offsetY;
+let shape = 'rectangle'; // Default shape
+let shapeChangedDuringDrag = false; // Flag to track shape change
+let imageUploaded = false; // Flag to track if image has been uploaded
 
-        function startResize(event, handle) {
-            isResizing = true;
-            startWidth = userImageElement.clientWidth;
-            startHeight = userImageElement.clientHeight;
-            startX = event.clientX;
-            startY = event.clientY;
-            activeHandle = handle;
-            event.stopPropagation();
+function startResize(event, handle) {
+    isResizing = true;
+    startWidth = userImageElement.clientWidth;
+    startHeight = userImageElement.clientHeight;
+    startX = event.clientX;
+    startY = event.clientY;
+    activeHandle = handle;
+    event.stopPropagation();
+}
+
+function resize(event) {
+    if (isResizing) {
+        let newWidth, newHeight;
+
+        if (activeHandle === resizeHandles.bottomRight) {
+            newWidth = startWidth + (event.clientX - startX);
+            newHeight = startHeight + (event.clientY - startY);
+        } else if (activeHandle === resizeHandles.bottomLeft) {
+            newWidth = startWidth - (event.clientX - startX);
+            newHeight = startHeight + (event.clientY - startY);
+            imageWrapper.style.left = `${event.clientX}px`;
+        } else if (activeHandle === resizeHandles.topRight) {
+            newWidth = startWidth + (event.clientX - startX);
+            newHeight = startHeight - (event.clientY - startY);
+            imageWrapper.style.top = `${event.clientY}px`;
+        } else if (activeHandle === resizeHandles.topLeft) {
+            newWidth = startWidth - (event.clientX - startX);
+            newHeight = startHeight - (event.clientY - startY);
+            imageWrapper.style.left = `${event.clientX}px`;
+            imageWrapper.style.top = `${event.clientY}px`;
+        } else if (activeHandle === resizeHandles.topCenter) {
+            newHeight = startHeight - (event.clientY - startY);
+            imageWrapper.style.top = `${event.clientY}px`;
+        } else if (activeHandle === resizeHandles.bottomCenter) {
+            newHeight = startHeight + (event.clientY - startY);
+        } else if (activeHandle === resizeHandles.leftCenter) {
+            newWidth = startWidth - (event.clientX - startX);
+            imageWrapper.style.left = `${event.clientX}px`;
+        } else if (activeHandle === resizeHandles.rightCenter) {
+            newWidth = startWidth + (event.clientX - startX);
         }
 
-        function resize(event) {
-            if (isResizing) {
-                let newWidth, newHeight;
-                if (activeHandle === resizeHandles.bottomRight) {
-                    newWidth = startWidth + (event.clientX - startX);
-                    newHeight = startHeight + (event.clientY - startY);
-                } else if (activeHandle === resizeHandles.bottomLeft) {
-                    newWidth = startWidth - (event.clientX - startX);
-                    newHeight = startHeight + (event.clientY - startY);
-                    imageWrapper.style.left = `${event.clientX}px`;
-                } else if (activeHandle === resizeHandles.topRight) {
-                    newWidth = startWidth + (event.clientX - startX);
-                    newHeight = startHeight - (event.clientY - startY);
-                    imageWrapper.style.top = `${event.clientY}px`;
-                } else if (activeHandle === resizeHandles.topLeft) {
-                    newWidth = startWidth - (event.clientX - startX);
-                    newHeight = startHeight - (event.clientY - startY);
-                    imageWrapper.style.left = `${event.clientX}px`;
-                    imageWrapper.style.top = `${event.clientY}px`;
-                }
-                userImageElement.style.width = `${newWidth}px`;
-                userImageElement.style.height = `${newHeight}px`;
-            }
-        }
+        if (newWidth) userImageElement.style.width = `${newWidth}px`;
+        if (newHeight) userImageElement.style.height = `${newHeight}px`;
+    }
+}
 
-        function handleMouseDown(event) {
-            const canvas = document.querySelector('.new');
-            const canvasRect = canvas.getBoundingClientRect();
+function handleMouseDown(event) {
+    const canvas = document.querySelector('.new');
+    const canvasRect = canvas.getBoundingClientRect();
 
-            if (event.target.classList.contains('resize-handle')) {
-                startResize(event, event.target);
-            } else {
-                event.preventDefault(); // Prevent default behavior during dragging (text selection)
-                isDragging = true;
-                offsetX = event.clientX - imageWrapper.offsetLeft;
-                offsetY = event.clientY - imageWrapper.offsetTop;
-                shapeChangedDuringDrag = false; // Reset flag on new drag start
-            }
-        }
+    if (event.target.classList.contains('resize-handle')) {
+        startResize(event, event.target);
+    } else {
+        event.preventDefault(); // Prevent default behavior during dragging (text selection)
+        isDragging = true;
+        offsetX = event.clientX - imageWrapper.offsetLeft;
+        offsetY = event.clientY - imageWrapper.offsetTop;
+        shapeChangedDuringDrag = false; // Reset flag on new drag start
+    }
+}
 
-        function handleMouseMove(event) {
-            if (isDragging) {
-                const canvas = document.querySelector('.new');
-                const canvasRect = canvas.getBoundingClientRect();
-                let newX = event.clientX - offsetX;
-                let newY = event.clientY - offsetY;
+function handleMouseMove(event) {
+    if (isDragging) {
+        const canvas = document.querySelector('.new');
+        const canvasRect = canvas.getBoundingClientRect();
+        let newX = event.clientX - offsetX;
+        let newY = event.clientY - offsetY;
 
-                // Ensure the image stays within the canvas boundaries
-                if (newX < canvasRect.left) newX = canvasRect.left;
-                if (newX + userImageElement.clientWidth > canvasRect.right)
-                    newX = canvasRect.right - userImageElement.clientWidth;
-                if (newY < canvasRect.top) newY = canvasRect.top;
-                if (newY + userImageElement.clientHeight > canvasRect.bottom)
-                    newY = canvasRect.bottom - userImageElement.clientHeight;
+        // Ensure the image stays within the canvas boundaries
+        if (newX < canvasRect.left) newX = canvasRect.left;
+        if (newX + userImageElement.clientWidth > canvasRect.right)
+            newX = canvasRect.right - userImageElement.clientWidth;
+        if (newY < canvasRect.top) newY = canvasRect.top;
+        if (newY + userImageElement.clientHeight > canvasRect.bottom)
+            newY = canvasRect.bottom - userImageElement.clientHeight;
 
-                imageWrapper.style.left = `${newX}px`;
-                imageWrapper.style.top = `${newY}px`;
-                shapeChangedDuringDrag = true; // Set flag if dragging occurs
-            } else if (isResizing) {
-                resize(event);
-            }
-        }
+        imageWrapper.style.left = `${newX}px`;
+        imageWrapper.style.top = `${newY}px`;
+        shapeChangedDuringDrag = true; // Set flag if dragging occurs
+    } else if (isResizing) {
+        resize(event);
+    }
+}
+
 
         function handleMouseUp(event) {
             if (event.target === userImageElement && !shapeChangedDuringDrag) {
