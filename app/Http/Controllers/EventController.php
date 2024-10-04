@@ -1659,4 +1659,13 @@ class EventController extends Controller
 
         return response()->json(['success' => true, 'imagePath' => $imagePath, 'shape_image' => $imageName, 'shape_name' => $shape]);
     }
+
+
+    public function see_all(Request $request)
+    {
+        // dd($request);
+        $userEntry = Session::get('user_ids');
+        $data[] = ['userdata' => $userEntry];
+        return response()->json(['view' => view('front.event.guest.addGuest', compact('data'))->render()]);
+    }
 }
