@@ -1865,6 +1865,11 @@ function bindData() {
     });
 }
 
+let currentImage = null;
+let isImageDragging = false; // Track if the image is being dragged
+let isimageoncanvas = false;
+let oldImage = null;
+
 function updateClipPath(imageUrl, element) {
     console.log(imageUrl)
     const imageWrapper = document.getElementById('imageWrapper');
