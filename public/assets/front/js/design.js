@@ -1878,6 +1878,8 @@ let updatedOBJImage = {
 };
 const userImageElement = document.getElementById('user_image');
 const imageWrapper = document.getElementById('imageWrapper');
+let shape = 'rectangle'; // Default shape
+
 const canvasElement = new fabric.Canvas('imageEditor', {
     width: 500, // Canvas width
     height: 500, // Canvas height
