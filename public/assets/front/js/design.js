@@ -2146,7 +2146,7 @@ function handleMouseMove(event) {
         }
 
         function drawCanvas() {
-            console.log(userImageElement)
+            console.log({userImageElement})
             userImageElement?.style?.clipPath = '';
 
             switch (shape) {
