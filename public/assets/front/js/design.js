@@ -2093,6 +2093,7 @@ function resize(event) {
 }
 
 function handleMouseDown(event) {
+    console.log(event);
     const canvas = document.querySelector('.new');
     const canvasRect = canvas.getBoundingClientRect();
 
