@@ -358,7 +358,15 @@ $(document).on("click", ".edit_design_tem", function (e) {
 
 function bindData() {
 
+    let iw = document.getElementById('imageWrapper')
+    $(iw).on('mousedown', handleMouseDown);
+    $(iw).on('mousemove', handleMouseMove);
+    $(iw).on('mouseup', handleMouseUp);
 
+    // imageWrapper.addEventListener('mousemove', resize);
+    // imageWrapper.addEventListener('mouseup', handleMouseUp);
+    // document.addEventListener('mouseup', handleMouseUp);
+    // imageWrapper.addEventListener('mousemove', handleMouseMove);
 
     function loadTextDataFromDatabase() {
         if (image) {
@@ -1844,7 +1852,7 @@ function bindData() {
 
         });
     });
-}
+
 
 let currentImage = null;
 let isImageDragging = false; // Track if the image is being dragged
@@ -2175,12 +2183,9 @@ function drawCanvas() {
     }
 }
 
+}
 
 
-imageWrapper.addEventListener('mousemove', resize);
-imageWrapper.addEventListener('mouseup', handleMouseUp);
-document.addEventListener('mouseup', handleMouseUp);
-imageWrapper.addEventListener('mousemove', handleMouseMove);
     
 
 function getTextDataFromCanvas() {
