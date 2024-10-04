@@ -1416,14 +1416,14 @@ $(".removeShapImage").click(function(){
             const centerX = left + width / 2;
             const centerY = top + height / 2;
 
-           
+         
 
             var shapeImageData = [];
 
             shapeImageData ={
                 shape: shape,
-                centerX: left,
-                centerY: top,
+                centerX: centerX,
+                centerY: centerY,
                 width: width,
                 height: height,
             };
