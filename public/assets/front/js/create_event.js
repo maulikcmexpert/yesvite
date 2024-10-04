@@ -5296,6 +5296,12 @@ $(document).ready(function () {
     });
 });
 
+
+
+$(document).on('click','.all_user_list',function(){
+    toggleSidebar('sidebar_see_all_invite');
+});
+
 // $(document).on("click", ".new-temp", function () {
 //     // Get the image URL from the data-image attribute
 //     var imageUrl = $(this).data("image");

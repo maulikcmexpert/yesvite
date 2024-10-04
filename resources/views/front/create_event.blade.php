@@ -2275,6 +2275,45 @@
     </div>
 </div>
 
+
+<div id="sidebar_see_all_invite" class="sidebar setting-side-wrp">
+    <div class="sidebar-content guest-sidebar">
+        <div class="groupsidebar">
+            <div class="d-flex align-items-center justify-content-between toggle-wrp">
+                <div class="d-flex align-items-center">
+                    <a href="#" class="me-3 group_toggle_close_btn" onclick="toggleSidebar('sidebar_groups')">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9.57 5.92969L3.5 11.9997L9.57 18.0697" stroke="#64748B" stroke-width="1.5"
+                                stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
+                            <path d="M20.4999 12H3.66992" stroke="#64748B" stroke-width="1.5"
+                                stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                    </a>
+                    <h5>All Invites</h5>
+                </div>
+                <button class="close-btn group_toggle_close_btn" onclick="toggleSidebar()">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5.00098 5L19 18.9991" stroke="#64748B" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path d="M4.99996 18.9991L18.999 5" stroke="#64748B" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </button>
+            </div>
+            <div class="guest-group-name">
+                <div class="user-contacts-sidebar sell-all-invite-member-wrp">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="new-event-btn">
+        <a href="#" class="cmn-btn invite_group_member">Invite member</a>
+    </div> -->
+</div>
+
 <!-- Modal -->
 <div class="modal fade" id="myCustomModal" tabindex="-1" aria-labelledby="myCustomModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -2315,6 +2354,7 @@
 <div id="sidebar_invite_group_member_overlay" class="overlay" onclick="toggleSidebar()"></div>
 <div id="sidebar_editcategory_overlay" class="overlay" onclick="toggleSidebar()"></div>
 <div id="sidebar_select_design_category_overlay" class="overlay" onclick="toggleSidebar()"></div>
+<div id="sidebar_see_all_invite_overlay" class="overlay" onclick="toggleSidebar()"></div>
 
 
 
