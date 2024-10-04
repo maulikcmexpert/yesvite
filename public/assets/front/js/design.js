@@ -1016,7 +1016,7 @@ function bindData() {
                 ); // Set font color in picker
             } else if (selectedColorType === "background") {
                 const bgColor =
-                    activeObject.backgroundColor || "rgba(0, 0, 0, 0)"; // Default to transparent background
+                    activeObject.backgroundColor || "#000000"; // Default to transparent background
                 $("#color-picker").spectrum("set", bgColor); // Set current background color in picker
             }
 
@@ -1097,7 +1097,7 @@ function bindData() {
             left: left,
             top: top,
             fontSize: 20,
-            backgroundColor: "rgba(0, 0, 0, 0)", // Set background to transparent
+            backgroundColor: "#000000", // Set background to transparent
             fill: "#000000", // Default text color (black)
             editable: true,
             selectable: true,
@@ -1404,7 +1404,7 @@ function bindData() {
             top: top,
             width: 200,
             fontSize: 20,
-            backgroundColor: "rgba(0, 0, 0, 0)", // Set background to transparent
+            backgroundColor: "#000000", // Set background to transparent
 
             fill: "#000000",
             editable: true,
@@ -1697,7 +1697,7 @@ function bindData() {
     }
 
     function reattachIcons() {
-        undoStack.forEach(ob => {
+        undoStack.forEach((ob, index) => {
 
             ob.objects = ob.objects.filter(obj => obj.type !== 'group');
 
@@ -1708,7 +1708,7 @@ function bindData() {
             }
         })
 
-        redoStack.forEach(ob => {
+        redoStack.forEach((ob, index) => {
 
             ob.objects = ob.objects.filter(obj => obj.type !== 'group');
 
