@@ -972,9 +972,6 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
 
                 // } else {
                     $(".inivted_user_list").append(response.view);
-                    $(".see-all-invite-member-wrp").append(response.view);
-
-
                     // var length = responsive_invite_user();
                     // if(length < 4){
                         $('.all_user_list').remove();
@@ -1056,7 +1053,6 @@ function delete_invited_user(userId) {
             
             $(".user-list-responsive").empty();
             $(".user-list-responsive").html(response.responsive_view);
-            
             // if(currentInviteCount < 15){
             //     $('.user_choice').prop('disabled',false);
             // }
@@ -1111,8 +1107,6 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
                 // }
 
                 $(".inivted_user_list").append(response.view);
-                $(".see-all-invite-member-wrp").append(response.view);
-
                 $(".user-list-responsive").empty();
                 $(".user-list-responsive").html(response.responsive_view);
                 // var length = responsive_invite_user();
@@ -4689,8 +4683,6 @@ $(document).on("click", ".invite_group_member", function () {
             $(".user-list-responsive").html(response.responsive_view);
             console.log(response);
             $(".inivted_user_list").append(response.view);
-            $(".see-all-invite-member-wrp").append(response.view);
-
             // var length = responsive_invite_user();
             // $(".user-list-responsive").html(response.responsive_view);
             // if(length < 4){
@@ -5307,7 +5299,21 @@ $(document).ready(function () {
 
 
 $(document).on('click','.all_user_list',function(){
-    toggleSidebar('sidebar_see_all_invite');
+    $.ajax({
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                "content"
+            ),
+        },
+        url: base_url+"event/see_all",
+        method: "POST",
+        success: function (response) {
+            toggleSidebar('sidebar_see_all_invite');
+            $('.see-all-invite-member-wrp').empty();
+            $('.see-all-invite-member-wrp').html(response.view);
+        },
+
+});
 });
 
 // $(document).on("click", ".new-temp", function () {

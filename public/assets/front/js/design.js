@@ -276,12 +276,11 @@ $(document).on("click", ".design-card", function () {
 
     // Load filed image (filedImagePath) as another image layer
     if (shapeImageUrl) {
-        staticInfo?.shapeImageData?.forEach(element => {
+        let element = staticInfo?.shapeImageData;
             if (element.shape && element.centerX && element.centerY && element.height && element.width) {
                 $('.resize-handle').hide();
                 updateClipPath(shapeImageUrl, element);
             }
-        });
     }
 
 });
@@ -626,11 +625,11 @@ function bindData() {
                 });
 
                 if (shapeImageUrl) {
-                    staticInfo?.shapeImageData?.forEach(element => {
+                    let element = staticInfo?.shapeImageData;
                         if (element.shape && element.centerX && element.centerY && element.height && element.width) {
                             updateClipPath(shapeImageUrl, element);
                         }
-                    });
+                    
                 }
             } else {
                 showStaticTextElements();
@@ -2051,6 +2050,13 @@ document.addEventListener('mouseup', handleMouseUp);
 imageWrapper.addEventListener('mousedown', handleMouseDown);
 document.addEventListener('mousemove', handleMouseMove);
 
+let isDragging = false;
+let isResizing = false;
+let startWidth, startHeight, startX, startY, activeHandle;
+let offsetX, offsetY;
+let shapeChangedDuringDrag = false; // Flag to track shape change
+let imageUploaded = false; // Flag to track if image has been uploaded
+
 function resize(event) {
     if (isResizing) {
         let newWidth, newHeight;
@@ -2104,8 +2110,8 @@ function handleMouseUp(event) {
 }
 
 function handleMouseDown(event) {
-    const canvas = document.querySelector('.new');
-    const canvasRect = canvas.getBoundingClientRect();
+    // const canvas = document.querySelector('.new');
+    // const canvasRect = canvas.getBoundingClientRect();
 
     if (event.target.classList.contains('resize-handle')) {
         startResize(event, event.target);
@@ -2120,7 +2126,7 @@ function handleMouseDown(event) {
 
 function handleMouseMove(event) {
     if (isDragging) {
-        const canvas = document.querySelector('.new');
+        // const canvas = document.querySelector('.new');
         const canvasRect = canvas.getBoundingClientRect();
         let newX = event.clientX - offsetX;
         let newY = event.clientY - offsetY;
