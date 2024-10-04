@@ -272,15 +272,15 @@ class EventController extends Controller
                     $textElemtents[$key]['fontSize'] = (int)$textJson['fontSize'];
                     $textElemtents[$key]['centerX'] = (float)$textJson['centerX'];
                     $textElemtents[$key]['centerY'] = (float)$textJson['centerY'];
-                    if (isset($textJson['letterSpacing'])) {
-                        $textElemtents[$key]['letterSpacing'] = (int)$textJson['letterSpacing'];
-                    }
-                    if (isset($textJson['lineHeight'])) {
-                        $textElemtents[$key]['lineHeight'] = (float)$textJson['lineHeight'];
-                    }
-                    if (isset($textJson['underline'])) {
-                        $textElemtents[$key]['underline'] = (bool)$textJson['underline'];
-                    }
+                }
+                if (isset($textJson['letterSpacing'])) {
+                    $textElemtents[$key]['letterSpacing'] = (int)$textJson['letterSpacing'];
+                }
+                if (isset($textJson['lineHeight'])) {
+                    $textElemtents[$key]['lineHeight'] = (float)$textJson['lineHeight'];
+                }
+                if (isset($textJson['underline'])) {
+                    $textElemtents[$key]['underline'] = (bool)$textJson['underline'];
                 }
             }
             $static_data = [];
@@ -644,12 +644,14 @@ class EventController extends Controller
         $selected_user = session('user_ids');
         $user_id =  Auth::guard('web')->user()->id;
         $alreadyselectedUser =  collect($selected_user)->pluck('id')->toArray();
+        $selected_co_host = (isset($request->selected_co_host) && $request->selected_co_host != '') ? $request->selected_co_host : '';
+        $selected_co_host_prefer_by = (isset($request->selected_co_host_prefer_by) && $request->selected_co_host_prefer_by != '') ? $request->selected_co_host_prefer_by : '';
 
         $users = User::select('id', 'firstname', 'lastname', 'phone_number', 'email', 'profile')
             ->whereNotIn('id', $alreadyselectedUser)
             ->where('id', '!=', $user_id)->where(['is_user_phone_contact' => '0'])->orderBy('firstname')
             ->get();
-        return  view('front.event.guest.allGuestList', compact('users'));
+        return  view('front.event.guest.allGuestList', compact('users', 'selected_co_host', 'selected_co_host_prefer_by'));
     }
 
     public function removeUserId(Request $request)

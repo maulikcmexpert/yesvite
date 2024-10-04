@@ -169,7 +169,7 @@ $(document).on("click", ".design-card", function () {
         let element = staticInfo?.shapeImageData;
             if (element.shape && element.centerX && element.centerY && element.height && element.width) {
                 $('.resize-handle').hide();
-                updateClipPath(shapeImageUrl, element);
+                updateClipPath(shapeImageUrl, element,'modal');
             }
     }
 
@@ -1753,12 +1753,19 @@ const canvasElement = new fabric.Canvas('imageEditor', {
 
 
 
-function updateClipPath(imageUrl, element) {
-    console.log(element)
-    const imageWrapper = document.getElementById('imageWrapper');
-   
-    const imgElement = document.getElementById('user_image');
-    imgElement.src = imageUrl;
+function updateClipPath(imageUrl, element,modal =null) {
+    var imgElement;
+    var imageWrapper;
+    if(modal){
+        console.log(modal);
+        imageWrapper = document.getElementById('imageWrapper2');
+        imgElement = document.getElementById('user_image2');
+        console.log(imgElement)
+    }else{
+        imageWrapper = document.getElementById('imageWrapper');
+        imgElement = document.getElementById('user_image');
+    }
+     imgElement.src = imageUrl;
 
     // If a current image exists on canvas, remove it
     if (currentImage) {
