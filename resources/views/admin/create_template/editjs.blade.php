@@ -460,7 +460,12 @@ function applyClipPath(image, element) {
 //     });
 // }
 
+$("removeShapImage").click(function(){
+    $("#imageWrapper").hide();
+    $("#user_image").attr("src","");
+    $('.photo-slider-wrp').show()
 
+})
        
         let updateTimeout; // Variable to store the timeout reference
 
