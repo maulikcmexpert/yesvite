@@ -278,6 +278,7 @@ $(document).on("click", ".design-card", function () {
     if (shapeImageUrl) {
         staticInfo?.shapeImageData?.forEach(element => {
             if (element.shape && element.centerX && element.centerY && element.height && element.width) {
+                $('.resize-handle').hide();
                 updateClipPath(shapeImageUrl, element);
             }
         });
@@ -627,7 +628,6 @@ function bindData() {
                 if (shapeImageUrl) {
                     staticInfo?.shapeImageData?.forEach(element => {
                         if (element.shape && element.centerX && element.centerY && element.height && element.width) {
-                            $('.resize-handle').hide();
                             updateClipPath(shapeImageUrl, element);
                         }
                     });
