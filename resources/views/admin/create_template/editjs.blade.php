@@ -207,8 +207,13 @@ function updateClipPath(imageUrl, element) {
     console.log(element.height)
     console.log(element.height)
     
-    let left = element.centerX !== undefined ? `${element.centerX  + canvasRect.left}px` : '50%';
-    let top = element.centerY !== undefined ? `${element.centerY + canvasRect.top}px` : '50%';
+    // let left = element.centerX !== undefined ? `${element.centerX  + canvasRect.left}px` : '50%';
+    // let top = element.centerY !== undefined ? `${element.centerY + canvasRect.top}px` : '50%';
+
+    let left = element.centerX!=undefined?`${element.centerX - (element.width / 2) + canvasRect.left}px`:'50%';
+    let top = element.centerX!=undefined?`${element.centerY - (element.height / 2) + canvasRect.top}px`:'50%';
+
+
     console.log({left})
     console.log({top})
 
@@ -1416,14 +1421,14 @@ $(".removeShapImage").click(function(){
             const centerX = left + width / 2;
             const centerY = top + height / 2;
 
-           
+         
 
             var shapeImageData = [];
 
             shapeImageData ={
                 shape: shape,
-                centerX: left,
-                centerY: top,
+                centerX: centerX,
+                centerY: centerY,
                 width: width,
                 height: height,
             };
@@ -1828,7 +1833,6 @@ function resize(event) {
 }
 
 function handleMouseDown(event) {
-    alert(0)
     const canvas = document.querySelector('.new');
     const canvasRect = canvas.getBoundingClientRect();
 
@@ -1970,10 +1974,7 @@ function handleMouseMove(event) {
 
         document.addEventListener('mousemove', resize);
         document.addEventListener('mouseup', handleMouseUp);
-        // imageWrapper.addEventListener('mousedown', handleMouseDown);
-        let iw = document.getElementById('imageWrapper')
-        console.log({iw})
-        $(iw).on('mousedown', handleMouseDown);
+        imageWrapper.addEventListener('mousedown', handleMouseDown);        
         document.addEventListener('mousemove', handleMouseMove);
      
 
