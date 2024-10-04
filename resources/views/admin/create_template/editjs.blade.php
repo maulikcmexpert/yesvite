@@ -218,9 +218,9 @@ function updateClipPath(imageUrl, element) {
             cornerSize: 10,
             cornerStyle: 'circle',
         });
-       
+        shape = element.shape;
         canvasElement.add(imgInstance);
-        addIconsToImage(imgInstance);
+        // addIconsToImage(imgInstance);
         drawCanvas();
         
         // Refresh canvas
@@ -1675,6 +1675,14 @@ $(".removeShapImage").click(function(){
 
 
     function reattachIcons() {
+        console.log(1)
+
+        canvas.getObjects('textbox').forEach(function(obj) {
+
+            console.log(obj)
+        });
+        console.log(2)
+        console.log(undoStack)
         undoStack.forEach((ob, index) => {
             // Filter out 'group' type objects from the 'objects' array
             ob.objects = ob.objects.filter(obj => obj.type !== 'group');
