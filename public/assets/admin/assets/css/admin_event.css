@@ -1252,6 +1252,10 @@
     .edit-image-main-wrp .design-seting {
         display: flex;
     }
+
+    .edit-images-button-wrp {
+        max-width: 450px;
+    }
 }
 
 @media only screen and (max-width: 575px) {
