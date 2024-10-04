@@ -13100,31 +13100,28 @@ class ApiControllerv2 extends Controller
             // }
             // $resp = array_values($resp);
 
-            // Set static width and height
             $textData->width = $staticWidth;
             $textData->height = $staticHeight;
-            // Save the updated data to the database
             $textData->save();
-            // Retrieve image, height, and width from the updated model
             $image = $textData->image;
             $shape_image = $textData->shape_image;
             $height = $textData->height;
             $width = $textData->width;
-
             $design_id = $textData->event_design_sub_category_id;
             // $template_url  = url("assets/images/{$image}");
             $template_url = asset('storage/canvas/' . $image);
             $shape_img_url = asset('storage/canvas/' . $shape_image);
-            // Return the final response
+
             return response()->json([
-                'textData' => $resp, // Updated text data
+                'textData' => $resp['textElements'],
+                'shapeImageData' => $resp['shapeImageData'],
                 'image' => $image,
                 'event_design_sub_category_id' => $design_id,
                 'height' => $height,
                 'width' => $width,
                 'template_url' => $template_url,
                 'shape_img_url' => $shape_img_url,
-                'is_contain_image' => true // Static flag indicating that the image exists
+                'is_contain_image' => true
             ]);
         } catch (Exception  $e) {
             return response()->json(['status' => 0, 'message' => 'something went wrong']);
