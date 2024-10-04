@@ -5299,21 +5299,18 @@ $(document).ready(function () {
 
 
 $(document).on('click','.all_user_list',function(){
-    
     $.ajax({
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
                 "content"
             ),
         },
-        url: base_url+"event/close_tip",
+        url: base_url+"event/see_all",
         method: "POST",
-        data: {
-            closed: true,
-            tip:type
-        },
         success: function (response) {
             toggleSidebar('sidebar_see_all_invite');
+            $('.see-all-invite-member-wrp').empty();
+            $('.see-all-invite-member-wrp').html(response.view);
         },
 
 });
