@@ -5,7 +5,7 @@ var base_url = $("#base_url").text();
 var canvas;
 var shapeImageUrl = null;
 var userImageElement;
-
+var imageWrapper;
 $(document).on("click", ".design-card", function () {
     var url = $(this).data("url");
     var template = $(this).data("template");
@@ -172,6 +172,7 @@ $(document).on("click", ".design-card", function () {
             if (element.shape && element.centerX && element.centerY && element.height && element.width) {
                 $('.resize-handle').hide();
                 userImageElement = document.getElementById('user_image2');
+                imageWrapper = document.getElementById('imageWrapper2');
                 updateClipPath(shapeImageUrl, element,'modal');
             }
     }
@@ -521,6 +522,7 @@ function bindData() {
                     let element = staticInfo?.shapeImageData;
                         if (element.shape && element.centerX && element.centerY && element.height && element.width) {
                             userImageElement = document.getElementById('user_image');
+                            imageWrapper = document.getElementById('imageWrapper');
                             updateClipPath(shapeImageUrl, element);
                         }
                     
@@ -1760,17 +1762,16 @@ const canvasElement2 = new fabric.Canvas('imageEditor', {
 
 function updateClipPath(imageUrl, element,modal =null) {
     var imgElement;
-    const imageWrapper = document.getElementById('imageWrapper');
-    const imageWrapper2 = document.getElementById('imageWrapper2');
+    var imageWrapper;
     var canvasEL;
     if(modal){
         console.log(modal);
-      
+        imageWrapper = document.getElementById('imageWrapper2');
         imgElement = document.getElementById('user_image2');
         canvasEL = document.getElementById('imageEditor2')
         console.log(imgElement)
     }else{
-        
+        imageWrapper = document.getElementById('imageWrapper');
         imgElement = document.getElementById('user_image');
         canvasEL = document.getElementById('imageEditor1')
         console.log(imgElement);
@@ -1790,18 +1791,15 @@ function updateClipPath(imageUrl, element,modal =null) {
     }
     const canvasRect = canvasEL.getBoundingClientRect();
 
-    imageWrapper?.style.display = 'block';
-    imageWrapper2?.style.display = 'block';
+    imageWrapper.style.display = 'block';
     // imageWrapper.style.left = element.left;
     // imageWrapper.style.top = element.top;
     let left = element.centerX !== undefined ? `${element.centerX  + canvasRect.left}px` : '50%';
     let top = element.centerY !== undefined ? `${element.centerY + canvasRect.top}px` : '50%';
 
     // Set the calculated position to imageWrapper
-    imageWrapper?.style.left = left;
-    imageWrapper?.style.top = top;
-    imageWrapper2?.style.left = left;
-    imageWrapper2?.style.top = top;
+    imageWrapper.style.left = left;
+    imageWrapper.style.top = top;
     
     imgElement.onload = function () {
         // Get image dimensions and scale it
@@ -1956,16 +1954,6 @@ $(".removeShapImage").click(function(){
 
 })
 
-const resizeHandles = {
-    topLeft: document.querySelector('.resize-handle.top-left'),
-    topRight: document.querySelector('.resize-handle.top-right'),
-    bottomLeft: document.querySelector('.resize-handle.bottom-left'),
-    bottomRight: document.querySelector('.resize-handle.bottom-right'),
-    topCenter: document.querySelector('.resize-handle.top-center'),
-    bottomCenter: document.querySelector('.resize-handle.bottom-center'),
-    leftCenter: document.querySelector('.resize-handle.left-center'),
-    rightCenter: document.querySelector('.resize-handle.right-center')
-};
 
 
 let isDragging = false;
