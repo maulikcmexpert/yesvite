@@ -5308,7 +5308,7 @@ $(document).on('click','.all_user_list',function(){
         success: function (response) {
             console.log(response);
             $('.see-all-invite-member-wrp').empty();
-            $('.see-all-invite-member-wrp').html(response);
+            $('.see-all-invite-member-wrp').html(response.view);
             toggleSidebar('sidebar_see_all_invite');
 
         },
