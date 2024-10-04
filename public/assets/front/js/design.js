@@ -1892,7 +1892,7 @@ function updateClipPath(imageUrl, element) {
     let left = element.centerX !== undefined ? `${element.centerX  + canvasRect.left}px` : '50%';
     let top = element.centerY !== undefined ? `${element.centerY + canvasRect.top}px` : '50%';
     console.log({left})
-    console.log({top})
+    console.log({imageWrapper})
 
     // Set the calculated position to imageWrapper
     imageWrapper.style.left = left;
