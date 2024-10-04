@@ -334,7 +334,7 @@ $(function() {
 
     $('#rsvp-by-date').daterangepicker({
       singleDatePicker: true,
-      autoUpdateInput: true,  
+      autoUpdateInput: false,  
     //   showDropdowns: true,
       minYear: 1901,
       maxDate: current_event_date, 
@@ -367,7 +367,7 @@ $(function () {
 
     $("#event-date").daterangepicker(
         {
-            autoUpdateInput: true,
+            autoUpdateInput: false,
             locale: {
                 format: "MM/DD/YYYY",
             },
@@ -415,7 +415,7 @@ $(function () {
     );
 
     $("#event-date").on('apply.daterangepicker', function(ev, picker) {
-        picker.show();
+        picker.hide();
         $('#event-date').next().addClass('floatingfocus');
     });
     $('#event-date').on('hide.daterangepicker', function(ev, picker) {
