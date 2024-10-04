@@ -445,8 +445,8 @@
                         {{-- <img id="modalImage" src="" alt="Design Image" class="img-fluid" /> --}}
                     </div>
                 </div>
-                <div id="imageWrapper" style="position:fixed; display:none;">
-                    <img id="user_image" src="" style="height: 100px; width: 100px; background-color: black;" />
+                <div id="imageWrapper2" style="position:fixed; display:none;">
+                    <img id="user_image2" src="" style="height: 100px; width: 100px; background-color: black;" />
                     <div class="resize-handle top-left"></div>
                     <div class="resize-handle top-right"></div>
                     <div class="resize-handle bottom-left"></div>
