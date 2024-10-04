@@ -1096,7 +1096,7 @@ function bindData() {
             left: left,
             top: top,
             fontSize: 20,
-            backgroundColor: rgba(0, 0, 0, 0), // Set background to transparent
+            backgroundColor: 'rgba(0, 0, 0, 0)', // Set background to transparent
             fill: "#000000", // Default text color (black)
             editable: true,
             selectable: true,
@@ -1403,7 +1403,7 @@ function bindData() {
             top: top,
             width: 200,
             fontSize: 20,
-            backgroundColor: rgba(0, 0, 0, 0), // Set background to transparent
+            backgroundColor: 'rgba(0, 0, 0, 0)', // Set background to transparent
             textAlign:'center',
             fill: "#000000",
             editable: true,
