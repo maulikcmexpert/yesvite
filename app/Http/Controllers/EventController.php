@@ -1665,9 +1665,9 @@ class EventController extends Controller
     {
         // dd($request);
         $userEntry = Session::get('user_ids');
-        $data[] = ['userdata' => $userEntry];
+        // $data[] = ['userdata' => $userEntry];
 
         // dd($data);
-        return response()->json(['view' => view('front.event.guest.addGuest', compact('data'))->render()]);
+        return response()->json(['view' => view('front.event.guest.sell_all_invited', compact('userEntry'))->render()]);
     }
 }
