@@ -2028,6 +2028,7 @@ function handleMouseDown(event) {
     if (event.target.classList.contains('resize-handle')) {
         startResize(event, event.target);
     } else {
+        console.log(event);
         event.preventDefault(); // Prevent default behavior during dragging (text selection)
         isDragging = true;
         offsetX = event.clientX - imageWrapper.offsetLeft;
