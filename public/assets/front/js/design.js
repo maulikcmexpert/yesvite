@@ -680,6 +680,15 @@ function bindData() {
     }
 
     function addIconsToTextbox(textbox) {
+        if (textbox.trashIcon) {
+            canvas.remove(textbox.trashIcon);
+            textbox.trashIcon = null; // Clear reference
+        }
+        if (textbox.copyIcon) {
+            canvas.remove(textbox.copyIcon);
+            textbox.copyIcon = null; // Clear reference
+        }
+        canvas.renderAll();
         // Trash icon SVG
         // const trashIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 50 50"><path d="M20,30 L30,30 L30,40 L20,40 Z M25,10 L20,10 L20,7 L30,7 L30,10 Z M17,10 L33,10 L33,40 L17,40 Z" fill="#FF0000"/></svg>`;
         const trashIconSVG = `<svg width="29" x="0px" y="0px" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1007,7 +1016,7 @@ function bindData() {
                 ); // Set font color in picker
             } else if (selectedColorType === "background") {
                 const bgColor =
-                    activeObject.backgroundColor || "rgba(0, 0, 0, 0)"; // Default to transparent background
+                    activeObject.backgroundColor || "#000000"; // Default to transparent background
                 $("#color-picker").spectrum("set", bgColor); // Set current background color in picker
             }
 
@@ -1088,7 +1097,7 @@ function bindData() {
             left: left,
             top: top,
             fontSize: 20,
-            backgroundColor: "rgba(0, 0, 0, 0)", // Set background to transparent
+            backgroundColor: "#000000", // Set background to transparent
             fill: "#000000", // Default text color (black)
             editable: true,
             selectable: true,
@@ -1329,7 +1338,7 @@ function bindData() {
             console.log("Updated Font Color: " + activeObject.fill);
 
             canvas.renderAll();
-            addToUndoStack(); // Save state after updating properties
+            // addToUndoStack(); // Save state after updating properties
         }
     }
 
@@ -1395,7 +1404,7 @@ function bindData() {
             top: top,
             width: 200,
             fontSize: 20,
-            backgroundColor: "rgba(0, 0, 0, 0)", // Set background to transparent
+            backgroundColor: "#000000", // Set background to transparent
 
             fill: "#000000",
             editable: true,
@@ -1634,7 +1643,7 @@ function bindData() {
             if (commands[command]) {
                 commands[command]();
                 canvas.renderAll();
-                addToUndoStack(); // Save state after executing the command
+                // addToUndoStack(); // Save state after executing the command
             }
         }
     }
@@ -1648,25 +1657,75 @@ function bindData() {
     // Undo and Redo actions (basic implementation)
     let undoStack = [];
     let redoStack = [];
+    let isAddingToUndoStack = false;
 
     function addToUndoStack() {
-        undoStack.push(canvas.toJSON());
-        redoStack = []; // Clear redo stack on new action
+        if (isAddingToUndoStack) return; // Prevents multiple calls in rapid succession
+        isAddingToUndoStack = true;
+
+        // Delay the action slightly to allow for batch updates
+        setTimeout(() => {
+            undoStack.push(canvas.toJSON());
+            console.log(undoStack);
+            redoStack = []; // Clear redo stack on new action
+            isAddingToUndoStack = false; // Reset the flag
+        }, 200); // Adjust delay as necessary (200ms is an example)
     }
 
     function undo() {
+        console.log(undoStack);
         if (undoStack.length > 0) {
-            redoStack.push(canvas.toJSON());
-            canvas.loadFromJSON(undoStack.pop(), canvas.renderAll.bind(canvas));
+            reattachIcons();
+            redoStack.push(canvas.toJSON()); // Save current state to redo stack
+            const lastState = undoStack.pop(); // Get the last state to undo
+            canvas.loadFromJSON(lastState, function () {
+                canvas.renderAll(); // Render the canvas after loading state
+                // Reattach the icons to the textboxes
+            });
+        }
+    }
+    function redo() {
+        if (redoStack.length > 0) {
+            reattachIcons();
+            undoStack.push(canvas.toJSON()); // Save current state to undo stack
+            const nextState = redoStack.pop(); // Get the next state to redo
+            canvas.loadFromJSON(nextState, function () {
+                canvas.renderAll(); // Render the canvas after loading state
+                reattachIcons(); // Reattach the icons to the textboxes
+            });
         }
     }
 
-    function redo() {
-        if (redoStack.length > 0) {
-            undoStack.push(canvas.toJSON());
-            canvas.loadFromJSON(redoStack.pop(), canvas.renderAll.bind(canvas));
-        }
+    function reattachIcons() {
+        undoStack.forEach((ob, index) => {
+
+            ob.objects = ob.objects.filter(obj => obj.type !== 'group');
+
+            // If all objects in a state were 'group', you can also remove that entire state from undoStack
+            if (ob.objects.length === 0) {
+                console.log("Removed from undoStack");
+                undoStack.splice(index, 1);  // Remove the empty state from undoStack
+            }
+        })
+
+        redoStack.forEach((ob, index) => {
+
+            ob.objects = ob.objects.filter(obj => obj.type !== 'group');
+
+            // If all objects in a state were 'group', you can also remove that entire state from undoStack
+            if (ob.objects.length === 0) {
+                console.log("Removed from undoStack");
+                undoStack.splice(index, 1);  // Remove the empty state from undoStack
+            }
+            })
+      
     }
+
+    canvas.on('object:added', addToUndoStack);
+    canvas.on('object:modified', addToUndoStack);
+    canvas.on('object:removed', addToUndoStack);
+    canvas.on('object:scaled', addToUndoStack);
+    canvas.on('object:moved', addToUndoStack);
 
     document
         .querySelector('[data-command="undo"]')
