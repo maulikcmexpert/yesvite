@@ -13044,7 +13044,8 @@ class ApiControllerv2 extends Controller
             $shape_img_url = asset('storage/canvas/' . $shape_image);
             foreach ($resp['textElements'] as $k => $value) {
                 foreach ($value as $key => $val) {
-
+                    print_r($val);
+                    die;
                     switch ($val) {
                         case 'event_name':
                             if (!empty($request->event_name)) {
