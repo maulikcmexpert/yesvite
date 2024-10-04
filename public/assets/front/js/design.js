@@ -415,11 +415,7 @@ function bindData() {
                     });
 
                     const textWidth = textMeasurement.width;
-                    // console.log(`Width of '${element.text}':`, textWidth);
-
-                    // Calculate the width of the text
-
-                    // console.log(element);
+                    
                     let textElement = new fabric.Textbox(element.text, {
                         // Use Textbox for editable text
                         left: element.left,
@@ -514,33 +510,7 @@ function bindData() {
                       ctx.restore();
                     }
 
-                    // textElement.controls.mt = new fabric.Control({
-                    //     x: 0.5, // Right side
-                    //     y: 0,
-                    //     offsetX: 0,
-                    //     offsetY: 0,
-                    //     cursorStyle: 'e-resize',
-                    //     actionHandler: fabric.controlsUtils.scalingX,
-                    //     render: function(ctx, left, top, styleOverride, fabricObject) {
-                    //         ctx.fillStyle = 'white'; // Rectangle color
-                    //         ctx.fillRect(left - 2, top - 7, 4, 8); // Draw a rectangle control for 'mr'
-                    //     }
-                    // });
-
-                    // textElement.controls.mb = new fabric.Control({
-                    //     x: 0.5, // Right side
-                    //     y: 0,
-                    //     offsetX: 0,
-                    //     offsetY: 0,
-                    //     cursorStyle: 'e-resize',
-                    //     actionHandler: fabric.controlsUtils.scalingX,
-                    //     render: function(ctx, left, top, styleOverride, fabricObject) {
-                    //         ctx.fillStyle = 'white'; // Rectangle color
-                    //         ctx.fillRect(left - 2, top - 7, 4, 8); // Draw a rectangle control for 'mr'
-                    //     }
-                    // });
-
-
+                  
                     switch (element.text) {
                         case "event_name":
                             if (eventData.event_name) {
@@ -655,17 +625,28 @@ function bindData() {
                     addIconsToTextbox(textElement);
                     canvas.add(textElement);
                 });
+                if (shapeImageUrl) {
+                    let element = staticInfo?.shapeImageData;
+                    if (element.shape && element.centerX && element.centerY && element.height && element.width) {
+                        updateClipPath(shapeImageUrl, element);
+                    }
+                }
+                
             } else {
                 showStaticTextElements();
             }
+
 
             // Set custom attribute with the fetched ID
             var canvasElement = document.getElementById("imageEditor1");
             canvasElement.setAttribute("data-canvas-id", temp_id);
 
             canvas.renderAll(); // Ensure all elements are rendered
+
         }
     }
+
+    
 
     function getWidth(element, text) {
         const textMeasurement = new fabric.Text(text, {
@@ -1876,7 +1857,6 @@ const canvasElement = new fabric.Canvas('imageEditor', {
 function updateClipPath(imageUrl, element) {
     console.log(imageUrl)
     const imageWrapper = document.getElementById('imageWrapper');
-   
     const imgElement = document.getElementById('user_image');
     imgElement.src = imageUrl;
 

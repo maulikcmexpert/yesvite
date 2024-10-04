@@ -1696,7 +1696,9 @@ $(".removeShapImage").click(function(){
             ob.objects = ob.objects.filter(obj => obj.type !== 'group');
             ob.objects.forEach(obj => {
             console.log(obj);
-            // obj.borderColor
+            obj.borderColor = "#2DA9FC"
+            obj.cornerColor = "#fff"
+            obj.cornerSize = 6
             // Check if obj is a fabric object by checking for the existence of 'set' method
             if (typeof obj.set === 'function') {
                 // Update border and corner styling
@@ -1705,10 +1707,10 @@ $(".removeShapImage").click(function(){
                     cornerColor: "#fff",
                     cornerSize: 6
                 });
-                console.log("Updated object:", obj);
-            } else {
-                console.warn("Object is not a fabric instance:", obj);
-            }
+                console.log("Updated");
+               
+            } 
+            console.log("Updated object:", obj);
         });
            
 
