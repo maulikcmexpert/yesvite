@@ -197,7 +197,7 @@ function updateClipPath(imageUrl, element) {
     // imageWrapper.style.left = element.left;
     // imageWrapper.style.top = element.top;
 
-    let canvasEL = document.getElementById('imageEditor')
+    let canvasEL = document.getElementById('imageEditor1')
     const canvasRect = canvasEL.getBoundingClientRect();
 
 
