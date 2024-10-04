@@ -2147,6 +2147,8 @@ function bindData() {
     function handleMouseMove(event) {
         console.log(event);
         if (isDragging) {
+        const userImageElement = document.getElementById('user_image');
+
             const canvas = document.querySelector('.new');
             const canvasRect = canvas.getBoundingClientRect();
             let newX = event.clientX - offsetX;
@@ -2170,6 +2172,8 @@ function bindData() {
 
 
     function handleMouseUp(event) {
+        const userImageElement = document.getElementById('user_image');
+
         if (event.target === userImageElement && !shapeChangedDuringDrag) {
             // Cycle through shapes
             const shapes = ['rectangle', 'circle', 'star', 'rounded-border', 'heart'];
