@@ -1869,6 +1869,11 @@ let currentImage = null;
 let isImageDragging = false; // Track if the image is being dragged
 let isimageoncanvas = false;
 let oldImage = null;
+const canvasElement = new fabric.Canvas('imageEditor', {
+    width: 500, // Canvas width
+    height: 500, // Canvas height
+    cornerSize: 6,
+});
 
 function updateClipPath(imageUrl, element) {
     console.log(element)
