@@ -107,7 +107,7 @@
                                             type="button" data-template="template_1" data-image="{{ asset('storage/canvas/'.$temp->image) }}" 
                                             data-shape_image="{{ ($temp->shape_image!='')?asset('storage/canvas/'.$temp->shape_image):'' }}"
                                             data-json="{{json_encode($temp->static_information)}}" data-id="{{$temp->id}}">
-                                            <img src="{{ asset('storage/canvas/'.$temp->image) }}" alt="">
+                                            <img src="{{ asset('storage/canvas/'.$temp->filled_image) }}" alt="">
                                         </div>
                                     @endforeach
                                     @endif
