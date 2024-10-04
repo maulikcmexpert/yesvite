@@ -1869,6 +1869,13 @@ let currentImage = null;
 let isImageDragging = false; // Track if the image is being dragged
 let isimageoncanvas = false;
 let oldImage = null;
+let updatedOBJImage = {
+    shape: 'rectangle',
+    centerX: 0,
+    centerY: 0,
+    width: 100,
+    height: 100
+};
 const canvasElement = new fabric.Canvas('imageEditor', {
     width: 500, // Canvas width
     height: 500, // Canvas height
