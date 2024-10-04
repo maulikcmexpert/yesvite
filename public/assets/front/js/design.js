@@ -1721,28 +1721,38 @@ function bindData() {
     }
 
     function reattachIcons() {
+       
         undoStack.forEach((ob, index) => {
-
             ob.objects = ob.objects.filter(obj => obj.type !== 'group');
+            ob.objects.forEach(obj => {
+            console.log(obj);
+            obj.borderColor = "#2DA9FC"
+            obj.cornerColor = "#fff"
+            obj.cornerSize = 6
+            obj.textAlign = 'center'
+            // Check if obj is a fabric object by checking for the existence of 'set' method
+           
+        });
+           
 
-            // If all objects in a state were 'group', you can also remove that entire state from undoStack
+
             if (ob.objects.length === 0) {
-                //console.log("Removed from undoStack");
-                // undoStack.splice(index, 1);  // Remove the empty state from undoStack
+                console.log("Removed from undoStack");
+           
             }
-        })
+        });
 
         redoStack.forEach((ob, index) => {
 
             ob.objects = ob.objects.filter(obj => obj.type !== 'group');
 
-            // If all objects in a state were 'group', you can also remove that entire state from undoStack
+        
             if (ob.objects.length === 0) {
-                //console.log("Removed from undoStack");
-                // undoStack.splice(index, 1);  // Remove the empty state from undoStack
+                console.log("Removed from undoStack");
+            
             }
         })
-
+      
     }
 
     // canvas.on('object:added', addToUndoStack);
