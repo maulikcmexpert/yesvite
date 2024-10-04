@@ -1876,8 +1876,7 @@ const canvasElement = new fabric.Canvas('imageEditor', {
 function updateClipPath(imageUrl, element) {
     console.log(imageUrl)
     const imageWrapper = document.getElementById('imageWrapper');
-   
-    const imgElement = document.getElementById('user_image');
+    const imgElement = document.getElementById('user_image2');
     imgElement.src = imageUrl;
 
     // If a current image exists on canvas, remove it
