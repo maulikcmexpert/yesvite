@@ -45,11 +45,11 @@ $phone_checked = 'checked';
             @endif
 
         </div>
-        <!-- <div class="text-start">
+        <div class="text-start">
             <h5>{{ $user->firstname }}
                 {{ $user->lastname }}
             </h5>
-            @if(isset($user->email)&&$user->email!="")
+            <!-- @if(isset($user->email)&&$user->email!="")
             <div>
                 <a href="mailto:{{$user->email}}">
                     <svg class="me-1" width="14" height="14"
@@ -79,9 +79,9 @@ $phone_checked = 'checked';
                     </svg>
                     {{ $user->phone_number }}</a>
             </div>
-            @endif
+            @endif -->
 
-        </div> -->
+        </div>
     </div>
     <!-- <div class="d-flex flex-column user_choice_group" data-id="user-{{$user->id}}">
         @if(isset($user->email)&&$user->email!="")
