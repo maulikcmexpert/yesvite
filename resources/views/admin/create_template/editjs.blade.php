@@ -1368,16 +1368,16 @@ $(".removeShapImage").click(function(){
             var canvasElement = document.getElementById('imageEditor1');
             var canvasId = canvasElement.getAttribute('data-canvas-id');
             var imageName = 'image_' + Date.now() + '.png';
+            const canvasRect = canvasElement.getBoundingClientRect();
 
             $('.resize-handle').hide();
             $('.removeShapImage').hide();
-
+            const imageWrapperRect = imageWrapper.getBoundingClientRect();
             var id = $('#template_id').val();
             const width = userImageElement.clientWidth;
             const height = userImageElement.clientHeight;
-            const left = imageWrapper.offsetLeft;
-           
-            const top = imageWrapper.offsetTop;
+            const left = imageWrapperRect.left - canvasRect.left;
+            const top = imageWrapperRect.top - canvasRect.top;
             const centerX = left + width / 2;
             const centerY = top + height / 2;
 
