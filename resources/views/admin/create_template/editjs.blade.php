@@ -1155,7 +1155,10 @@ $(".removeShapImage").click(function(){
             textbox.on('scaling', function() {
                 updateIconPositions(textbox);
             });
+            textbox.on('rotating', function () {
+                updateIconPositions(textbox); // Call the function to reposition icons
 
+            });
             // Event listener to manage icon visibility when a textbox is clicked
             textbox.on('mousedown', function() {
                 canvas.getObjects('textbox').forEach(function(tb) {
