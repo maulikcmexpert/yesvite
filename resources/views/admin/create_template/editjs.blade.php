@@ -210,8 +210,8 @@ function updateClipPath(imageUrl, element) {
     // let left = element.centerX !== undefined ? `${element.centerX  + canvasRect.left}px` : '50%';
     // let top = element.centerY !== undefined ? `${element.centerY + canvasRect.top}px` : '50%';
 
-    let left = element.centerX!=undefined?${element.centerX - (element.width / 2) + canvasRect.left}px:'50%';
-    let top = element.centerX!=undefined?${element.centerY - (element.height / 2) + canvasRect.top}px:'50%';
+    let left = element.centerX!=undefined?`${element.centerX - (element.width / 2) + canvasRect.left}px`:'50%';
+    let top = element.centerX!=undefined?`${element.centerY - (element.height / 2) + canvasRect.top}px`:'50%';
 
 
     console.log({left})
