@@ -4,6 +4,7 @@ var image = null;
 var base_url = $("#base_url").text();
 var canvas;
 var shapeImageUrl;
+const userImageElement = document.getElementById('user_image');
 $(document).on("click", ".design-card", function () {
     var url = $(this).data("url");
     var template = $(this).data("template");
@@ -2017,8 +2018,8 @@ function applyClipPath(image, element) {
     canvasElement.renderAll();
 }
 
-const userImageElement = document.getElementById('user_image');
-        const imageWrapper = document.getElementById('imageWrapper');
+    
+    const imageWrapper = document.getElementById('imageWrapper');
         // const canvasElement = new fabric.Canvas('imageEditor', {
         //     width: 500, // Canvas width
         //     height: 500, // Canvas height
