@@ -56,7 +56,9 @@ WebFontConfig = {
             "ChristmasCookies",
         ],
         urls: [
-            "https://yesvite.cmexpertiseinfotech.in/assets/event/css/stylesheet.css",
+            // "https://yesvite.cmexpertiseinfotech.in/assets/event/css/stylesheet.css",
+            "http://18.190.81.164/assets/event/css/stylesheet.css",
+
         ],
     },
     loading: function () {
