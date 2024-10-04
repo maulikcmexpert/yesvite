@@ -190,12 +190,12 @@ function updateClipPath(imageUrl, element) {
         oldImage.trashIcon = null;
         canvasElement.renderAll();
     }
-    console.log(element)
+
     imageWrapper.style.display = 'block';
     // imageWrapper.style.left = element.left;
     // imageWrapper.style.top = element.top;
-    const left = element.centerX - (element.width / 2);
-    const top = element.centerY - (element.height / 2);
+    let left = element.centerX!=undefined?element.centerX - (element.width / 2):500;
+    let top = element.centerX!=undefined?element.centerY - (element.height / 2):500;
 
     // Set the calculated position to imageWrapper
     imageWrapper.style.left = `${left}px`;
@@ -203,10 +203,7 @@ function updateClipPath(imageUrl, element) {
     
     imgElement.onload = function () {
         // Get image dimensions and scale it
-        const imgInstance = new fabric.Image(imgElement, {
-            left: element.centerX - (imgElement.width * element.width) / 2, // Set left based on centerX
-            top: element.centerY - (imgElement.height * element.height) / 2,  // Set top based on centerY
-           
+        const imgInstance = new fabric.Image(imgElement, {           
             selectable: true,
             hasControls: true,
             hasBorders: true,
