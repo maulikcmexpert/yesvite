@@ -945,23 +945,22 @@ function bindData() {
     setLineHeight();
 
     // Initialize the color picker
-    $("#color-picker").spectrum({
+    $('#color-picker').spectrum({
         type: "flat",
         color: "#000000", // Default font color
         showInput: true,
         allowEmpty: true, // Allows setting background to transparent
         showAlpha: true, // Allows transparency adjustment
-        preferredFormat: "rgba", // Ensure it handles RGBA
+        preferredFormat: "hex",
         change: function(color) {
             if (color) {
-                console.log("color");
-                changeColor(color.toRgbString()); // Use RGB string for color changes
+                console.log("color")
+                changeColor(color.toHexString()); // Use RGB string for color changes
             } else {
-                console.log("rgba");
-
-                changeColor("rgba(0, 0, 0, 0)"); // Handle transparency by default
+                console.log("rgba")
+                changeColor('#000000'); // Handle transparency by default
             }
-        },
+        }
     });
 
     // Function to change font or background color
