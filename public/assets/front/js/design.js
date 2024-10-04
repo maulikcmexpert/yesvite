@@ -1338,7 +1338,7 @@ function bindData() {
             console.log("Updated Font Color: " + activeObject.fill);
 
             canvas.renderAll();
-            // addToUndoStack(); // Save state after updating properties
+             addToUndoStack(); // Save state after updating properties
         }
     }
 
@@ -1643,7 +1643,7 @@ function bindData() {
             if (commands[command]) {
                 commands[command]();
                 canvas.renderAll();
-                // addToUndoStack(); // Save state after executing the command
+                addToUndoStack(); // Save state after executing the command
             }
         }
     }
@@ -1704,7 +1704,7 @@ function bindData() {
             // If all objects in a state were 'group', you can also remove that entire state from undoStack
             if (ob.objects.length === 0) {
                 console.log("Removed from undoStack");
-                undoStack.splice(index, 1);  // Remove the empty state from undoStack
+                // undoStack.splice(index, 1);  // Remove the empty state from undoStack
             }
         })
 
@@ -1715,17 +1715,17 @@ function bindData() {
             // If all objects in a state were 'group', you can also remove that entire state from undoStack
             if (ob.objects.length === 0) {
                 console.log("Removed from undoStack");
-                undoStack.splice(index, 1);  // Remove the empty state from undoStack
+                // undoStack.splice(index, 1);  // Remove the empty state from undoStack
             }
             })
       
     }
 
-    canvas.on('object:added', addToUndoStack);
-    canvas.on('object:modified', addToUndoStack);
-    canvas.on('object:removed', addToUndoStack);
-    canvas.on('object:scaled', addToUndoStack);
-    canvas.on('object:moved', addToUndoStack);
+    // canvas.on('object:added', addToUndoStack);
+    // canvas.on('object:modified', addToUndoStack);
+    // canvas.on('object:removed', addToUndoStack);
+    // canvas.on('object:scaled', addToUndoStack);
+    // canvas.on('object:moved', addToUndoStack);
 
     document
         .querySelector('[data-command="undo"]')
