@@ -179,7 +179,8 @@ class EditTempalteController extends Controller
 
         // Update the template record
         $template->static_information = $staticInformation;
-
+        $template->width = 345;
+        $template->height = 490;
         // Save the updated record
         $template->save();
 
