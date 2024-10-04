@@ -13107,12 +13107,14 @@ class ApiControllerv2 extends Controller
             $textData->save();
             // Retrieve image, height, and width from the updated model
             $image = $textData->image;
+            $shape_image = $textData->shape_image;
             $height = $textData->height;
             $width = $textData->width;
 
             $design_id = $textData->event_design_sub_category_id;
             // $template_url  = url("assets/images/{$image}");
             $template_url = asset('storage/canvas/' . $image);
+            $shape_img_url = asset('storage/canvas/' . $shape_image);
             // Return the final response
             return response()->json([
                 'textData' => $resp, // Updated text data
@@ -13121,6 +13123,7 @@ class ApiControllerv2 extends Controller
                 'height' => $height,
                 'width' => $width,
                 'template_url' => $template_url,
+                'shape_img_url' => $shape_img_url,
                 'is_contain_image' => true // Static flag indicating that the image exists
             ]);
         } catch (Exception  $e) {
