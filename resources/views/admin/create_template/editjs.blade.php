@@ -192,8 +192,8 @@ function updateClipPath(imageUrl, element) {
     }
     console.log(element)
     imageWrapper.style.display = 'block';
-    imageWrapper.style.left = element.left;
-    imageWrapper.style.top = element.top;
+    // imageWrapper.style.left = element.left;
+    // imageWrapper.style.top = element.top;
 
     
     imgElement.onload = function () {
