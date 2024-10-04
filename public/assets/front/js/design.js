@@ -5,7 +5,7 @@ var base_url = $("#base_url").text();
 var canvas;
 var shapeImageUrl = null;
 var userImageElement;
-var imageWrapper;
+
 $(document).on("click", ".design-card", function () {
     var url = $(this).data("url");
     var template = $(this).data("template");
@@ -1762,16 +1762,16 @@ const canvasElement2 = new fabric.Canvas('imageEditor', {
 
 function updateClipPath(imageUrl, element,modal =null) {
     var imgElement;
-    var imageWrapper;
+    const imageWrapper = document.getElementById('imageWrapper');
     var canvasEL;
     if(modal){
         console.log(modal);
-        imageWrapper = document.getElementById('imageWrapper2');
+      
         imgElement = document.getElementById('user_image2');
         canvasEL = document.getElementById('imageEditor2')
         console.log(imgElement)
     }else{
-        imageWrapper = document.getElementById('imageWrapper');
+        
         imgElement = document.getElementById('user_image');
         canvasEL = document.getElementById('imageEditor1')
         console.log(imgElement);
