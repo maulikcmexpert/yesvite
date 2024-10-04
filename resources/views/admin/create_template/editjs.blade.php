@@ -1382,13 +1382,13 @@ $(".removeShapImage").click(function(){
            
             var shapeImageData = [];
 
-            shapeImageData.push({
+            shapeImageData ={
                 shape: shape,
                 centerX: centerX,
                 centerY: centerY,
                 width: width,
                 height: height,
-            });
+            };
 
           
             console.log(shapeImageData);
@@ -1675,22 +1675,13 @@ $(".removeShapImage").click(function(){
 
 
     function reattachIcons() {
-        console.log(1)
-
-        canvas.getObjects('textbox').forEach(function(obj) {
-
-            console.log(obj)
-        });
-        console.log(2)
-        console.log(undoStack)
+       
         undoStack.forEach((ob, index) => {
-            // Filter out 'group' type objects from the 'objects' array
             ob.objects = ob.objects.filter(obj => obj.type !== 'group');
-            
-            // If all objects in a state were 'group', you can also remove that entire state from undoStack
+         
             if (ob.objects.length === 0) {
                 console.log("Removed from undoStack");
-               // undoStack.splice(index, 1);  // Remove the empty state from undoStack
+           
             }
         });
 
@@ -1698,10 +1689,10 @@ $(".removeShapImage").click(function(){
 
             ob.objects = ob.objects.filter(obj => obj.type !== 'group');
 
-            // If all objects in a state were 'group', you can also remove that entire state from undoStack
+        
             if (ob.objects.length === 0) {
                 console.log("Removed from undoStack");
-               // redoStack.splice(index, 1);  // Remove the empty state from undoStack
+            
             }
         })
       
