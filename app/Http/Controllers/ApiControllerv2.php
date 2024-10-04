@@ -3084,12 +3084,12 @@ class ApiControllerv2 extends Controller
         }
         try {
 
-            $event_design = TextData::where('static_information', '!=', null)->get();
+            $event_design = TextData::where('static_information', '!=', '')->get();
 
 
             if ($input['category_id'] != 0) {
 
-                $event_design = TextData::where('event_design_sub_category_id', $input['category_id'])->get();
+                $event_design = TextData::where('event_design_sub_category_id', $input['category_id'])->where('static_information', '!=', '')->get();
             }
 
             $designList = [];
@@ -12995,7 +12995,7 @@ class ApiControllerv2 extends Controller
     public function getAllTemplateData(Request $request)
     {
         try {
-            $get_data = TextData::get();
+            $get_data = TextData::where('static_information', '!=', '')->get();
             $templates = [];
 
             if ($get_data->isNotEmpty()) {
@@ -13032,7 +13032,7 @@ class ApiControllerv2 extends Controller
             ]);
             // Retrieve the text data by template ID
             $textData = TextData::where('id', $validatedData['template_id'])
-                ->where('static_information', '!=', null)
+                ->where('static_information', '!=', '')
                 ->get();
             if (!$textData) {
                 return response()->json(['message' => 'Data not found'], 404);
