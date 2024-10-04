@@ -246,6 +246,7 @@ function updateClipPath(imageUrl, element) {
 
         currentImage = imgInstance; // Track current image on canvas
         oldImage = imgInstance;
+        $('.photo-slider-wrp').hide()
     };
 
     imgElement.onerror = function () {
