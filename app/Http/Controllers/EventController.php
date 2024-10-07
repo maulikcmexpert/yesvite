@@ -1019,17 +1019,40 @@ class EventController extends Controller
         $fileNames = '';
         $fileName = '';
         $i = 0;
-        if (!empty($request->design_inner_image)) {
-            list($type, $data) = explode(';', $request->design_inner_image);
-            list(, $data) = explode(',', $data);
-            dd($data);
-            $imageData = base64_decode($data);
-            $fileNames = time() . $i . '-' . uniqid() . '.jpg';
-            $i++;
+        if (isset($request->design_inner_image) && isset($request->shapeImageUrl)) {
+            if($request->shapeImageUrl != $request->design_inner_image){
+                list($type, $data) = explode(';', $request->design_inner_image);
+                list(, $data) = explode(',', $data);
+                dd($data);
+                $imageData = base64_decode($data);
+                $fileNames = time() . $i . '-' . uniqid() . '.jpg';
+                $i++;
+    
+                $path = public_path('storage/event_images/') . $fileNames;
+    
+                file_put_contents($path, $imageData);
 
-            $path = public_path('storage/event_images/') . $fileNames;
+            }else{
+                if ($request->shapeImageUrl) {
+                    $sourceImagePath = $request->shapeImageUrl;
+                    $destinationDirectory = public_path('storage/event_images/');
+                    
+                    $parts = explode('canvas/', $request->shapeImageUrl);
+                    $imageName = end($parts); // 'user_image_1728283348.png'
 
-            file_put_contents($path, $imageData);
+                    dd($imageName);
+
+                    // $destinationImagePath = $destinationDirectory . $tempData->image;
+                    // if (file_exists(public_path('storage/canvas/') . $tempData->image)) {
+                    //     $newImageName = time() . '_' . uniqid() . '.' . pathinfo($tempData->image, PATHINFO_EXTENSION);
+                    //     $destinationImagePath = $destinationDirectory . $newImageName;
+    
+                    //     File::copy($sourceImagePath, $destinationImagePath);
+                    //     $event_creation->design_image = $tempData->image;
+                    // }
+                }
+            }
+            
             
         }
         if ($request->hasFile('image')) {
