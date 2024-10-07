@@ -1038,6 +1038,7 @@ class EventController extends Controller
                     $imageName = end($parts);
                     $destinationImagePath = $destinationDirectory . $imageName;
                     if (file_exists($request->shapeImageUrl)) {
+                        dd($request->shapeImageUrl);
                         $newImageName = time() . '_' . uniqid() . '.' . pathinfo($imageName, PATHINFO_EXTENSION);
                         $destinationImagePath = $destinationDirectory . $newImageName;
                         File::copy($sourceImagePath, $destinationImagePath);
