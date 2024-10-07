@@ -1486,7 +1486,6 @@ $(".removeShapImage").click(function(){
                 canvas.setActiveObject(options.target);
                 addIconsToTextbox(options.target)
                 updateIconPositions(options.target)
-                setFontSize();
             } else {
                 // alert();
                 canvas.getObjects('textbox').forEach(function(tb) {
