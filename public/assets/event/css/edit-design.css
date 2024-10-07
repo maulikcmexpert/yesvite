@@ -786,6 +786,10 @@
     margin-left: auto;
 }
 
+.sp-alpha-enabled .sp-alpha {
+    display: none !important;
+}
+
 @media only screen and (max-width: 1199px) {
     .image-edit-inner-img {
         width: 400px;
