@@ -1916,10 +1916,10 @@ function updateIconPositions(textbox) {
         });
     }
  
-    $("#undo").click(function(){
+    $("#undoButton").click(function(){
         undo();
     })
-    $("#redo").click(function(){
+    $("#redoButton").click(function(){
         redo();
     })
     // document.getElementById('undo').addEventListener('click', undo);
