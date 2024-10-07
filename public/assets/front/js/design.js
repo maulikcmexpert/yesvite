@@ -2282,5 +2282,32 @@ function getTextDataFromCanvas() {
         }
     });
 
-    return textData;
+    const imageWrapperRect = imageWrapper.getBoundingClientRect();
+    var id = $('#template_id').val();
+    const width = userImageElement.clientWidth;
+    const height = userImageElement.clientHeight;
+    const left = imageWrapperRect.left - canvasRect.left;
+    const top = imageWrapperRect.top - canvasRect.top;
+    const centerX = left + width / 2;
+    const centerY = top + height / 2;
+
+ 
+
+    var shapeImageData = [];
+
+    shapeImageData ={
+        shape: shape,
+        centerX: centerX,
+        centerY: centerY,
+        width: width,
+        height: height,
+    };
+
+    dbJson = {
+        textElements: textData,
+        shapeImageData : shapeImageData
+    };
+    console.log(dbJson);
+
+    return dbJson;
 }

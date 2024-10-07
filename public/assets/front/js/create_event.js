@@ -4327,11 +4327,11 @@ $(document).on("click", ".store_desgin_temp", function () {
         $("#loader").show();
         $(this).prop("disabled", true);
         $('.btn-close').prop("disabled", true);
-        var textData = getTextDataFromCanvas();
-        dbJson = {
-            textElements: textData
-        };
-        console.log(dbJson);
+        dbJson = getTextDataFromCanvas();
+        // dbJson = {
+        //     textElements: textData
+        // };
+        // console.log(dbJson);
         eventData.textData = dbJson;
         eventData.temp_id = temp_id;
         save_image_design(downloadImage);
