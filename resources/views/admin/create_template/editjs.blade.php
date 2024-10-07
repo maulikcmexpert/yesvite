@@ -1907,13 +1907,6 @@ $(".removeShapImage").click(function(){
           
             undoStack.push(canvas.toJSON());
             console.log("after {undoStack}");
-            if(undoStack.length > 0){
-                console.log($('#undoButton').html());
-                $('#undoButton').find('svg path').attr('fill', '#0F172A');
-            }else{
-                $('#undoButton').find('svg path').attr('fill', '#CBD5E1');  
-            }
-            console.log(undoStack.length);
 
             redoStack = []; // Clear redo stack on new action
         // }, 10);
@@ -1929,7 +1922,9 @@ $(".removeShapImage").click(function(){
                 canvas.renderAll(); // Render the canvas after loading state
                 reattachIcons(); // Reattach the icons to the textboxes
             });
-          
+            $('#undoButton').find('svg path').attr('fill', '#0F172A');
+        }else{
+            $('#undoButton').find('svg path').attr('fill', '#CBD5E1');  
         }
     }
 
