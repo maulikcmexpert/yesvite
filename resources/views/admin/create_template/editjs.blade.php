@@ -1111,7 +1111,7 @@ $(".removeShapImage").click(function(){
         });     
     }
     const addCustomIcons = (textbox) => {
-     
+        removeIcons(textbox);
         const rotateControl = textbox.oCoords.mtr;
         const { x, y } = rotateControl;
 
@@ -1119,12 +1119,10 @@ $(".removeShapImage").click(function(){
         const iconOffset = 20; 
 
         const copyIconPosition = { left: x + iconOffset, top: y }; 
-        const trashIconPosition = { left: x - iconOffset, top: y }; 
-
-        console.log(copyIconPosition)
+        const trashIconPosition = { left: x - iconOffset, top: y };        
 
         fabric.loadSVGFromString(copyIconSVG, function(objects, options) {
-            const icon = fabric.util.groupSVGElements(objects, options);
+            let icon = fabric.util.groupSVGElements(objects, options);
             icon.set({
                 left: copyIconPosition.left,
                 top: copyIconPosition.top,
@@ -1143,9 +1141,30 @@ $(".removeShapImage").click(function(){
             canvas.add(icon);
             canvas.bringToFront(icon);
         });
-        
-        // addIconToCanvas(copyIconPosition, 'copy');      
-        // addIconToCanvas(trashIconPosition, 'trash');
+
+
+        fabric.loadSVGFromString(trashIconSVG, function(objects, options) {
+            let icon = fabric.util.groupSVGElements(objects, options);
+            icon.set({
+                left: trashIconPosition.left,
+                top: trashIconPosition.top+20,
+                selectable: false,
+                evented: true,
+                hasControls: false,
+                originX: 'center',
+                originY: 'center',
+            });
+            textbox['trashIcon'] = icon;
+            
+            icon.on('mousedown', function() {
+                console.log('Copy icon clicked!');
+                deleteTextbox(textbox);
+            });
+            canvas.add(icon);
+            canvas.bringToFront(icon);
+        });
+
+
     };
         // function updateIconPositions(textbox) {
         //     if (textbox.trashIcon) {
