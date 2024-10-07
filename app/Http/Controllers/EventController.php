@@ -1043,8 +1043,6 @@ class EventController extends Controller
                         File::copy($sourceImagePath, $destinationImagePath);
                         session(['shape_image' => $newImageName]);
                     }
-                    dd($newImageName);
-                    
             }else{
                 list($type, $data) = explode(';', $request->design_inner_image);
                 list(, $data) = explode(',', $data);
@@ -1056,7 +1054,6 @@ class EventController extends Controller
                 session(['shape_image' => $newImageName]);
             }
         }
-        dd($newImageName);
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $fileName = time() . '-' . $file->getClientOriginalName();
