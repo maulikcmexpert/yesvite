@@ -856,8 +856,8 @@ $(".removeShapImage").click(function(){
         }
 
         // Update color picker when object selection changes
-        canvas.on('selection:created', updateColorPicker);
-        canvas.on('selection:updated', updateColorPicker);
+        // canvas.on('selection:created', updateColorPicker);
+        // canvas.on('selection:updated', updateColorPicker);
 
         // Update the color picker when the color type (font/background) changes
         $('.colorTypeInp').click(function(e) {
@@ -1879,11 +1879,11 @@ function updateIconPositions(textbox) {
             reattachIcons();
             redoStack.push(canvas.toJSON()); // Save current state to redo stack
             const lastState = undoStack.pop(); // Get the last state to undo
-            const lastState2 = undoStack.pop(); // Get the last state to undo
-            canvas.loadFromJSON(lastState2, function () {
+            canvas.loadFromJSON(lastState, function () {
                 canvas.renderAll(); // Render the canvas after loading state
                 reattachIcons(); // Reattach the icons to the textboxes
             });
+          
         }
     }
 
