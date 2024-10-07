@@ -795,8 +795,10 @@ $(".removeShapImage").click(function(){
                 console.log('No object selected');
                 return;
             }
-
+            
             if (activeObject.type == 'textbox') {
+                console.log("added to undo")
+                addToUndoStack(canvas)
                 console.log(activeObject.type);
                 console.log(activeObject.fill);
                 if (selectedColorType == 'font') {
@@ -818,14 +820,17 @@ $(".removeShapImage").click(function(){
 
             console.log(activeObjec)
         }
+      
 
         // Update color picker based on the selected object's current font or background color
         function updateColorPicker() {
-            addToUndoStack(canvas)
+           
             const activeObject = canvas.getActiveObject();
             const selectedColorType = document.querySelector('input[name="colorType"]:checked').value;
 
             if (activeObject && activeObject.type === 'textbox') {
+                
+
                 if (selectedColorType === 'font') {
 
                     $('#color-picker').spectrum('set', activeObject.fill || '#000000'); // Set font color in picker
@@ -1854,10 +1859,15 @@ function updateIconPositions(textbox) {
         console.log(canvas.toJSON());
         
         // isAddingToUndoStack = setTimeout(function() {
+            console.log({undoStack});
+
+            console.log("beofre {undoStack}");
+
           
             undoStack.push(canvas.toJSON());
+            console.log("after {undoStack}");
+
             console.log({undoStack});
-            console.log("{undoStack}");
 
             redoStack = []; // Clear redo stack on new action
         // }, 10);
@@ -1869,7 +1879,8 @@ function updateIconPositions(textbox) {
             reattachIcons();
             redoStack.push(canvas.toJSON()); // Save current state to redo stack
             const lastState = undoStack.pop(); // Get the last state to undo
-            canvas.loadFromJSON(lastState, function () {
+            const lastState2 = undoStack.pop(); // Get the last state to undo
+            canvas.loadFromJSON(lastState2, function () {
                 canvas.renderAll(); // Render the canvas after loading state
                 reattachIcons(); // Reattach the icons to the textboxes
             });

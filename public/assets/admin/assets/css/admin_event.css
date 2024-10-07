@@ -1173,8 +1173,15 @@
 
 .removeShapImage {
     text-align: right;
+    width: 24px;
+    height: 24px;
+    margin-left: auto;
 }
 
+
+.sp-alpha-enabled .sp-alpha {
+    display: none !important;
+}
 
 @media only screen and (min-width: 1800px) and (max-width: 3000px) {
     .image-edit-inner-img {
