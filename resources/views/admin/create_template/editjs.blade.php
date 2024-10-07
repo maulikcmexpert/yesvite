@@ -165,6 +165,7 @@
             offsetY: -20,
             cursorStyle: 'pointer',            
             actionHandler: (eventData, transform, x, y) => {
+                console.log(eventData)
                 const target = transform.target;
                 canvas.remove(target); // Remove object on trash icon click
                 canvas.requestRenderAll();
