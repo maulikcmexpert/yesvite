@@ -946,7 +946,8 @@ $(".removeShapImage").click(function(){
                 cornerColor: '#fff',
                 cornerSize: 6,
                 transparentCorners: false,
-                rotatingPointOffset:30
+                rotatingPointOffset:30,
+                padding: 5,
             })
 
             text.set('width', text.get('text').length * 10);
