@@ -1124,7 +1124,7 @@ $(".removeShapImage").click(function(){
             });
             if (textbox.trashIcon) textbox.trashIcon.set('visible', true); // Show current icons
             if (textbox.copyIcon) textbox.copyIcon.set('visible', true);
-            canvas.renderAll(); // Re-render the canvas
+            // canvas.renderAll(); // Re-render the canvas
         });     
     }
    
