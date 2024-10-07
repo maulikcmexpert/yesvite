@@ -1019,7 +1019,7 @@ $(".removeShapImage").click(function(){
     // Function to update the icon positions
     function updateIconPositions(textbox) {
         removeIcons(textbox);
-        
+        console.log(textbox.angle)
         let degreeOffset = (textbox.angle >= 120 && textbox.angle <= 300) ? 20 : -6;
        
         const iconOffset = 20;
@@ -1421,7 +1421,7 @@ $(".removeShapImage").click(function(){
             }
 
             const activeObjects = canvas.getActiveObjects(); // Get all selected objects
-            console.log(activeObjects)
+            // console.log(activeObjects)
             if (activeObjects.length > 1) {
                 console.log('Multiple objects selected:', activeObjects);
                 canvas.discardActiveObject(); // Discard active selection
