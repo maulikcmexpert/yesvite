@@ -1016,21 +1016,38 @@ class EventController extends Controller
 
     public function saveTempDesign(Request $request)
     {
-        $fileNames = '';
+        $newImageName = '';
         $fileName = '';
         $i = 0;
-        if (!empty($request->design_inner_image)) {
-            list($type, $data) = explode(';', $request->design_inner_image);
-            list(, $data) = explode(',', $data);
-            dd($data);
-            $imageData = base64_decode($data);
-            $fileNames = time() . $i . '-' . uniqid() . '.jpg';
-            $i++;
+        if (isset($request->design_inner_image) && isset($request->shapeImageUrl)) {
+            if($request->shapeImageUrl != $request->design_inner_image){
+                list($type, $data) = explode(';', $request->design_inner_image);
+                list(, $data) = explode(',', $data);
+                dd($data);
+                $imageData = base64_decode($data);
+                $fileNames = time() . $i . '-' . uniqid() . '.jpg';
+                $i++;
+    
+                $path = public_path('storage/event_images/') . $fileNames;
+    
+                file_put_contents($path, $imageData);
 
-            $path = public_path('storage/event_images/') . $fileNames;
-
-            file_put_contents($path, $imageData);
-            
+            }else{
+                if ($request->shapeImageUrl) {
+                    $sourceImagePath = $request->shapeImageUrl;
+                    $destinationDirectory = public_path('storage/event_images/');
+                    $parts = explode('canvas/', $request->shapeImageUrl);
+                    $imageName = end($parts); // 'user_image_1728283348.png'
+                    if($imageName){
+                        $destinationImagePath = $destinationDirectory . $imageName;
+                        if (file_exists($request->shapeImageUrl)) {
+                            $newImageName = time() . '_' . uniqid() . '.' . pathinfo($imageName, PATHINFO_EXTENSION);
+                            $destinationImagePath = $destinationDirectory . $newImageName;
+                            File::copy($sourceImagePath, $destinationImagePath);
+                        }
+                    }
+                }
+            }
         }
         if ($request->hasFile('image')) {
             $file = $request->file('image');
@@ -1039,7 +1056,7 @@ class EventController extends Controller
             session(['desgin' => $fileName]);
         }
         if($fileName != ''){
-            return response()->json(['status' => 'Image saved successfully', 'image' => $fileName,'shape_image' => $fileNames ]);
+            return response()->json(['status' => 'Image saved successfully', 'image' => $fileName,'shape_image' => $newImageName ]);
         }else{
             return response()->json(['status' => 'No image uploaded'], 400);
         }
