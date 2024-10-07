@@ -1060,7 +1060,7 @@ $(".removeShapImage").click(function(){
 
     // Helper function to calculate top-center icon positions
     function calculateIconPositions(textbox, iconOffset = 30) {
-        const rotateControl = textbox.oCoords.mtr; // Get the middle top rotate control
+        const rotateControl = textbox.oCoords?.mtr; // Get the middle top rotate control
         const { x, y } = rotateControl;     
         const copyIconPosition = { left: x + iconOffset, top: y }; // Right of the rotate control
         const trashIconPosition = { left: x - iconOffset, top: y }; // Left of the rotate control
@@ -1388,8 +1388,8 @@ $(".removeShapImage").click(function(){
             canvas.add(clonedTextbox);
 
             // Add icons to the cloned textbox
-            updateIconPositions(cloneTextbox)
-            addIconsToTextbox(clonedTextbox);
+            // updateIconPositions(cloneTextbox)
+            // addIconsToTextbox(clonedTextbox);
 
             canvas.renderAll();
         }
