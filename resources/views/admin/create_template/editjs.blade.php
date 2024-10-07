@@ -1808,7 +1808,7 @@ function updateIconPositions(textbox) {
                 commands[command](font); // Pass font to fontName if needed
                 console.log('add to undo')
 
-                //addToUndoStack(); // Save state for undo/redo functionality
+                addToUndoStack(); // Save state for undo/redo functionality
                 canvas.renderAll(); // Re-render canvas after change
             }
         }
@@ -1825,16 +1825,15 @@ function updateIconPositions(textbox) {
         // Undo and Redo actions (basic implementation)
         let undoStack = [];
     let redoStack = [];
-    let isAddingToUndoStack = false;
+    let isAddingToUndoStack = 0;
 
     function addToUndoStack() {
-      
-        isAddingToUndoStack = true;      
-        undoStack.push(canvas.toJSON());
-        console.log(undoStack);
-        redoStack = []; // Clear redo stack on new action
-       
-       
+        clearTimeout(isAddingToUndoStack)      
+        isAddingToUndoStack = setTimeout(function(){
+            undoStack.push(canvas.toJSON());
+            console.log(undoStack);
+            redoStack = []; // Clear redo stack on new action
+        },200);
     }
 
   
