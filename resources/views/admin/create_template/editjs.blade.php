@@ -1397,6 +1397,8 @@ function updateIconPositions(textbox) {
         function updateSelectedTextProperties() {
             var fontSize = parseInt(document.getElementById('fontSize').value, 10);
             var fontColor = document.getElementById('fontColor').value;
+            console.log('add to undo')
+            addToUndoStack(canvas); // Save state after updating properties
             var activeObject = canvas.getActiveObject();
 
             if (activeObject && activeObject.type === 'textbox') {
@@ -1412,8 +1414,7 @@ function updateIconPositions(textbox) {
                 console.log('Updated Font Color: ' + activeObject.fill);
 
                 canvas.renderAll();
-                console.log('add to undo')
-                addToUndoStack(); // Save state after updating properties
+                
             }
         }
 
@@ -1746,7 +1747,7 @@ function updateIconPositions(textbox) {
             myfont.load().then(function() {
                 console.log('add to undo')
 
-                addToUndoStack(2);
+                addToUndoStack(canvas);
 
                 // When font is loaded, use it.
                 var activeObject = canvas.getActiveObject();
@@ -1808,7 +1809,7 @@ function updateIconPositions(textbox) {
                 commands[command](font); // Pass font to fontName if needed
                 console.log('add to undo')
 
-                addToUndoStack(1); // Save state for undo/redo functionality
+                addToUndoStack(canvas); // Save state for undo/redo functionality
                 canvas.renderAll(); // Re-render canvas after change
             }
         }
@@ -1832,7 +1833,7 @@ function updateIconPositions(textbox) {
     let isAddingToUndoStack = 0;
     let isInitialLoad = true; // Add a flag to check initial load
 
-    function addToUndoStack(taget = null) {
+    function addToUndoStack(canvas) {
         clearTimeout(isAddingToUndoStack);
         
         isAddingToUndoStack = setTimeout(function() {
@@ -1848,7 +1849,7 @@ function updateIconPositions(textbox) {
             console.log({undoStack});
             console.log(canvas.toJSON());
             redoStack = []; // Clear redo stack on new action
-        }, 200);
+        }, 10);
     }
 
     function undo() {
