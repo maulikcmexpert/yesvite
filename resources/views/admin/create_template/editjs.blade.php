@@ -143,30 +143,57 @@
         
             // here's where your custom rotation control is defined
             // by changing the values you can customize the location, size, look, and behavior of the control
-            fabric.Textbox.prototype.controls.mtr = new fabric.Control({
-              x: 0,
-              y: -0.5,
-              offsetY: -30,
-              cursorStyle: 'pointer',
-              actionHandler: fabric.controlsUtils.rotationWithSnapping,
-              actionName: 'rotate',
-              render: renderIcon,
-              cornerSize: 28,
-              withConnection: true
-            });
+            // fabric.Textbox.prototype.controls.mtr = new fabric.Control({
+            //   x: 0,
+            //   y: -0.5,
+            //   offsetY: -30,
+            //   cursorStyle: 'pointer',
+            //   actionHandler: fabric.controlsUtils.rotationWithSnapping,
+            //   actionName: 'rotate',
+            //   render: renderIcon,
+            //   cornerSize: 28,
+            //   withConnection: true
+            // });
 
 
-            fabric.Textbox.prototype.controls.mtr = new fabric.Control({
-              x: 0,
-              y: -0.8,
-              offsetY: -30,
-              cursorStyle: 'pointer',
-              actionHandler: fabric.controlsUtils.rotationWithSnapping,
-              actionName: 'rotate',
-              render: trashIconSVG,
-              cornerSize: 28,
-              withConnection: true
-            });
+            // Custom icon rendering function
+function renderIcon(ctx, left, top, styleOverride, fabricObject) {
+    var size = this.cornerSize;
+    ctx.save();
+    ctx.translate(left, top);
+    ctx.rotate(fabric.util.degreesToRadians(fabricObject.angle));
+    var img = new Image();
+    img.src = this.render === 'rotate' ? rotateIcon : trashIconSVG; // Choose rotate or trash icon
+    ctx.drawImage(img, -size / 2, -size / 2, size, size);
+    ctx.restore();
+}
+
+// Adding custom controls to the fabric.Textbox prototype
+fabric.Textbox.prototype.controls.mtr = new fabric.Control({
+    x: 0,
+    y: -0.5,
+    offsetY: -40, // Adjust offset for icon position
+    cursorStyle: 'pointer',
+    actionHandler: fabric.controlsUtils.rotationWithSnapping,
+    actionName: 'rotate',
+    render: renderIcon.bind({ render: 'rotate' })
+});
+
+fabric.Textbox.prototype.controls.deleteControl = new fabric.Control({
+    x: 0.5,
+    y: -0.5,
+    offsetX: 40,
+    offsetY: -40, // Adjust offset for icon position
+    cursorStyle: 'pointer',
+    actionHandler: (eventData, transform, x, y) => {
+        const target = transform.target;
+        canvas.remove(target); // Remove object on trash icon click
+        canvas.requestRenderAll();
+    },
+    actionName: 'delete',
+    render: renderIcon.bind({ render: 'delete' })
+});
+
         
         
             // here's where the render action for the control is defined
