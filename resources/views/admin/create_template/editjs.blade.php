@@ -1924,6 +1924,9 @@ $(".removeShapImage").click(function(){
                 canvas.renderAll(); // Render the canvas after loading state
                 reattachIcons(); // Reattach the icons to the textboxes
             });
+            if(redoStack.length > 0){
+                $('#redoButton').find('svg path').attr('fill', '#0F172A');  
+            }
         }else{
             $('#undoButton').find('svg path').attr('fill', '#CBD5E1');  
         }
