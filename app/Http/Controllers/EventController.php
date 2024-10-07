@@ -1028,22 +1028,20 @@ class EventController extends Controller
         $newImageName = '';
         $fileName = '';
         $i = 0;
-        dd($request->shapeImageUrl."====".$request->design_inner_image);
-        dd($request->design_inner_image);
+   
         if (isset($request->design_inner_image) && isset($request->shapeImageUrl)) {
             if($request->shapeImageUrl == $request->design_inner_image){
                     $sourceImagePath = $request->shapeImageUrl;
+
                     $destinationDirectory = public_path('storage/event_images/');
                     $parts = explode('canvas/', $request->shapeImageUrl);
                     $imageName = end($parts);
-                    if($imageName){
-                        $destinationImagePath = $destinationDirectory . $imageName;
-                        if (file_exists($request->shapeImageUrl)) {
-                            $newImageName = time() . '_' . uniqid() . '.' . pathinfo($imageName, PATHINFO_EXTENSION);
-                            $destinationImagePath = $destinationDirectory . $newImageName;
-                            File::copy($sourceImagePath, $destinationImagePath);
-                            session(['shape_image' => $newImageName]);
-                        }
+                    $destinationImagePath = $destinationDirectory . $imageName;
+                    if (file_exists(public_path('storage/canvas/') . $imageName)) {
+                        $newImageName = time() . '_' . uniqid() . '.' . pathinfo($imageName, PATHINFO_EXTENSION);
+                        $destinationImagePath = $destinationDirectory . $newImageName;
+                        File::copy($sourceImagePath, $destinationImagePath);
+                        session(['shape_image' => $newImageName]);
                     }
             }else{
                 list($type, $data) = explode(';', $request->design_inner_image);
@@ -1056,7 +1054,6 @@ class EventController extends Controller
                 session(['shape_image' => $newImageName]);
             }
         }
-        dd($newImageName);
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $fileName = time() . '-' . $file->getClientOriginalName();
