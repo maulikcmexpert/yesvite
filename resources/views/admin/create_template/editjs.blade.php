@@ -1907,7 +1907,9 @@ $(".removeShapImage").click(function(){
           
             undoStack.push(canvas.toJSON());
             console.log("after {undoStack}");
-
+            if(undoStack.length > 0){
+                console.log($('#undoButton').html());
+            }
             console.log({undoStack});
 
             redoStack = []; // Clear redo stack on new action
