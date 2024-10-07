@@ -136,7 +136,7 @@
                 })
                 .catch(error => console.error('Error loading text data:', error));
         }
-
+        const trashIconSVG = `data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADEAAAAxCAYAAABznEEcAAAACXBIWXMAACxLAAAsSwGlPZapAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAASrSURBVHgB7VrNUtxGEO4eLbvLj41cicE5oRxSBeSQzS03lieIrznhN3D8BLafwMkxJ8gbkFtuJk/A5mJyQ7k5OFXRhrIRC5p29/6AZlhpd7SSzcFfFbXSaGakT9M/37QA+IRPKA0IFWDp8/W28rwWEPl5/Qioc3pytA8zolQS/oP1gAh3edq2w7BQa3h++ubVHhREqSSWVzeP+SeAAkDU29Hrvw6gABSUhDsrGw+hIAEBr+BTKIgalAQE/N5soQ4/2G/ZIyhAxJ3UDG3fD/woCiNwRHkkEANx1etzetL95+ggb8zyytffAFJrdJ7U59v84+zopZkT20PLOI/jzsQhoP9MnyMWM8dCKyHLHkPTr9UgQIX+8OZGONX1hRd3VzZvDkaKgLDbP0RaMy4BbHF47hAmUXLhRU2Io2nMKzc6+fc3W1rRDt9UHrQ1fNAAPjxC/mMyFLGfhUTwRzokZ5Lw/ZZPjd4hfJyHnggm8vz/k1fP5DjbJ+beBnBLCQjYFLdGx9k+cbEYQuM85O7BjWvES4uyvBgOlljOqctmN7BftnuFONaWtUgRNk+reW3wYMN7SR/MN12N9OvoON8nWEZw7xYouakOQWwzns7ZykT/Oa4IqUCepWh2v7XwwBGL979qNRZW1nvv/g2hYkgory09+G6hvhSxAcRZ/ZySHcf9pzU1d+h56iUf70KF6Cvi+uKx3IsaC4dCKKuvEwnOFY/Sx3kTzwpN6kcOEKP5g2Ru4WFW35lkRzw/vwxVYcKGKo3ytFPJYFVsviCRKxlwJCF54RpNoi+hKqCZSzxVFgkyJ0o0VuYTnFDNuZMkk4STiuWNfRfT+fFm5u1HFU34eNy1sXNaYu4KaPpEXKv9lzWHmxS3pAQq80Z90Ui9lyjZdcrdu0Q5DtfBSMxdQVYiNUfz7KyblSgczQnMJbXfdkHRmBZz142mOeVJHTcSdoSwlrwvGoFCcERazAlkRa0uuVrNyZyUxojStMkMg1HUidgntkHDUDROAx2e2mKuGbPSNd5veSQSkdhpQ0W6Z/dhdRnCYCdWGJeXEHiGqstfXSdzIm2aE9OpLmM7wIkEFwZCswUDqABomSIXgrp5/UurO9ngIsMjjbCV2aG/+6Ofh+ZnwOOoR+kQTZiZIwRuJOJmBI1eumWs8woB9svd/FSBkuikgrJtX2HygTX277yZnMxJoo/VNJYEh8w2TAWn6nkmiqjYMH3S/GJj7cakivZgKtB+RntgnFF+tKvEJ2QTz/mCFa5q53aMz5zrruPgTkLKMnhdOG5eXt6Lx9js0GH3oAAQ1Vq6OO15/UpLJtzNCa3s6XnVyfEp4UyCSBtvPUmkDlQ2TJ+IEY/zet/O7am1IRIZnte9AAlzi8p7ihaUiL6CdZDhAmcSygp38plrWGYsBbpxvmM1dSaNcY9OF/V9qPdepN5WQNo7XF7dkG90IcwA3uW1wdpUcY6YSKLQJ+C7q5s/8cDHUDV4J4lKfztOX6VRyLHVef0ZTPGGZsKAwJNJBATOBWVBHL+Oz9+++WX+zmcSbtmxyy7d0AES/hCdHP0+Te9S/qNAvu2Bp/3Bt4MZkPDqXrwLP/T3j1uB9yIQqsDDkeJyAAAAAElFTkSuQmCC`;
         var rotateIcon = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAHqSURBVHgBtZW7S8NQFMZPxFXbzUGULIJPdHBwUAgWQamDj1msg0MXHQWXCiIdHFpQKupgrVR0sovgZBEfQx0UdHBLH9bVpv0DjueksRbb5Da2/uBrm4Z7vvvde5IrgQBEdNLXDGmQJJOcxq0c6YYUkyQpCX+BisukAOkTxcRJip36bLBaY/HfBIzkQgMf1odKkv/T4JsnrJaI/lSwsQSqmaiiUTktj6l0Fm2gcO0mw8ADxfY0RcsXYMw1D3cPCbCBrzxFXDQl78o6Otp6sbNrBEddc/p1jamcTYaPIprSQH83OFpbwL+5BqHgFnR2tMP0nAfSmQ/R0Bnhhvu3d3UxqfQ7hvYjpXvRswscGJ4QJQkKTXh5uLgZ7tlFvL1PWJU44uWSzXKmM1lwOFr0pTFdxr5uYTOwSRLqhPfKAs3ShBNoWoFm+mha4fLqmpqiByxI6p9o8SCGDiL65lZrV24IbmUBQ82G2zGUPzhleJcX9DTcrvybW5n36vQ8pt+PhncsU9BZ8ywZSfhlpsLPgVQBF947PIGX1zd9Gd1T4+CedIGAJTIJl67IaAMbi1phyWmw+IpuFHLVbFg8clWsHw9YUacRH9kK1AoW90i1YRBHq2NXkMqD5keBSgqKZi+BDYyZspKkHLVnrpZxX+O67qGyL3x/AAAAAElFTkSuQmCC";
             var img = document.createElement('img');
             img.src = rotateIcon;
@@ -993,16 +993,7 @@ $(".removeShapImage").click(function(){
             };
         }
 
-    const trashIconSVG = `<svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g filter="url(#filter0_d_5633_67674)">
-            <rect x="2.70312" y="2.37207" width="23.9674" height="23.9674" rx="11.9837" fill="white" shape-rendering="crispEdges"/>
-            <path d="M19.1807 11.3502C17.5179 11.1855 15.8452 11.1006 14.1775 11.1006C13.1888 11.1006 12.2001 11.1505 11.2115 11.2504L10.1929 11.3502" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M12.939 10.8463L13.0488 10.1922C13.1287 9.7178 13.1886 9.36328 14.0325 9.36328H15.3407C16.1846 9.36328 16.2495 9.73777 16.3244 10.1971L16.4342 10.8463" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M18.1073 12.9277L17.7827 17.9559C17.7278 18.7398 17.6829 19.349 16.2898 19.349H13.0841C11.691 19.349 11.6461 18.7398 11.5912 17.9559L11.2666 12.9277" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M13.853 16.6035H15.5158" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M13.4385 14.6055H15.9351" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-            </g>
-            </svg>`;
+   
 
     const copyIconSVG = `<svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g filter="url(#filter0_d_5633_67676)">
