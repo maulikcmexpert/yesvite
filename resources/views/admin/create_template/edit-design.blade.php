@@ -348,7 +348,7 @@
                 <div class="font-selector form-check">
 
                     <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="AbrilFatface-Regular" id="AbrilFatfaceButton">
-                    <label class="form-check-label AbrilFatface" for="AbrilFatfaceButton">
+                    <label class="form-check-label font-change AbrilFatface" for="AbrilFatfaceButton">
                         AbrilFatface
                     </label>
 
@@ -356,7 +356,7 @@
                 <div class="font-selector form-check">
 
                     <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="AdleryPro-Regular" id="AdleryProButton">
-                    <label class="form-check-label AdleryPro" for="AdleryProButton">
+                    <label class="form-check-label font-change AdleryPro" for="AdleryProButton">
                         AdleryPro
                     </label>
 
@@ -364,7 +364,7 @@
                 <div class="font-selector form-check">
 
                     <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="AgencyFB-Bold" id="AgencyFBButton">
-                    <label class="form-check-label AgencyFB" for="AgencyFBButton">
+                    <label class="form-check-label font-change AgencyFB" for="AgencyFBButton">
                         AgencyFB
                     </label>
 
@@ -372,7 +372,7 @@
                 <div class="font-selector form-check">
 
                     <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="AlexBrush-Regular" id="AlexBrushButton">
-                    <label class="form-check-label AlexBrush" for="AlexBrushButton">
+                    <label class="form-check-label font-change AlexBrush" for="AlexBrushButton">
                         AlexBrush
                     </label>
 
@@ -380,28 +380,28 @@
                 <div class="font-selector form-check">
 
                     <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="Allura-Regular" id="AlluraButton">
-                    <label class="form-check-label Allura" for="AlluraButton">
+                    <label class="form-check-label font-change Allura" for="AlluraButton">
                         Allura
                     </label>
 
                 </div>
                 <!-- <div class="font-selector form-check">
                     <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="Antaresia" id="antaresiaButton">
-                    <label class="form-check-label Antaresia" for="antaresiaButton">
+                    <label class="form-check-label font-change Antaresia" for="antaresiaButton">
                         Antaresia
                     </label>
 
                 </div> -->
                 <!-- <div class="font-selector form-check">
                     <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="BotanicaScript-Regular" id="BotanicaScript-RegularButton">
-                    <label class="form-check-label BotanicaScript-Regular" for="BotanicaScript">
+                    <label class="form-check-label font-change BotanicaScript-Regular" for="BotanicaScript">
                         BotanicaScript-Regular
                     </label>
                 </div> -->
                 <div class="font-selector form-check">
 
                     <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="ArcherBold" id="ArcherButton">
-                    <label class="form-check-label Archer" for="ArcherButton">
+                    <label class="form-check-label font-change Archer" for="ArcherButton">
                         Archer
                     </label>
 
@@ -409,7 +409,7 @@
                 <div class="font-selector form-check">
 
                     <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="Archer-Book" id="Archer-BookButton">
-                    <label class="form-check-label Archer-Book" for="Archer-BookButton">
+                    <label class="form-check-label font-change Archer-Book" for="Archer-BookButton">
                         Archer-Book
                     </label>
 
@@ -417,7 +417,7 @@
                 <div class="font-selector form-check">
 
                     <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="Archer-BookItalic" id="Archer-BookItalicButton">
-                    <label class="form-check-label Archer-BookItalic" for="Archer-BookItalicButton">
+                    <label class="form-check-label font-change Archer-BookItalic" for="Archer-BookItalicButton">
                         Archer-BookItalic
                     </label>
 
@@ -425,7 +425,7 @@
                 <div class="font-selector form-check">
 
                     <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="Archer-ExtraLight" id="Archer-ExtraLightButton">
-                    <label class="form-check-label Archer-ExtraLight" for="Archer-ExtraLightButton">
+                    <label class="form-check-label font-change Archer-ExtraLight" for="Archer-ExtraLightButton">
                         Archer-ExtraLight
                     </label>
 
@@ -433,7 +433,7 @@
                 <div class="font-selector form-check">
 
                     <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="Archer-Hairline" id="Archer-HairlineButton">
-                    <label class="form-check-label Archer-Hairline" for="Archer-HairlineButton">
+                    <label class="form-check-label font-change Archer-Hairline" for="Archer-HairlineButton">
                         Archer-Hairline
                     </label>
 
@@ -441,7 +441,7 @@
                 <div class="font-selector form-check">
 
                     <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="Bebas-Regular" id="Bebas-RegularButton">
-                    <label class="form-check-label Bebas-Regular" for="Bebas-RegularButton">
+                    <label class="form-check-label font-change Bebas-Regular" for="Bebas-RegularButton">
                         Bebas-Regular
                     </label>
 
@@ -449,7 +449,7 @@
                 <div class="font-selector form-check">
 
                     <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="BookAntiqua" id="BookAntiquaButton">
-                    <label class="form-check-label BookAntiqua" for="BookAntiquaButton">
+                    <label class="form-check-label font-change BookAntiqua" for="BookAntiquaButton">
                         BookAntiqua
                     </label>
 
@@ -457,7 +457,7 @@
                 <div class="font-selector form-check">
 
                     <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="Bungee-Regular" id="Bungee-RegularButton">
-                    <label class="form-check-label Bungee-Regular" for="Bungee-RegularButton">
+                    <label class="form-check-label font-change Bungee-Regular" for="Bungee-RegularButton">
                         Bungee-Regular
                     </label>
 
@@ -465,7 +465,7 @@
                 <div class="font-selector form-check">
 
                     <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="CandyCaneUnregistered" id="CandyCaneUnregisteredButton">
-                    <label class="form-check-label CandyCaneUnregistered" for="CandyCaneUnregisteredButton">
+                    <label class="form-check-label font-change CandyCaneUnregistered" for="CandyCaneUnregisteredButton">
                         CandyCaneUnregistered
                     </label>
 
@@ -473,7 +473,7 @@
                 <div class="font-selector form-check">
 
                     <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="CarbonBl-Regular" id="CarbonBl-RegularButton">
-                    <label class="form-check-label CarbonBl-Regular" for="CarbonBl-RegularButton">
+                    <label class="form-check-label font-change CarbonBl-Regular" for="CarbonBl-RegularButton">
                         CarbonBl-Regular
                     </label>
 
@@ -481,7 +481,7 @@
                 <div class="font-selector form-check">
 
                     <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="CarmenSans-ExtraBold" id="CarmenSans-ExtraBoldButton">
-                    <label class="form-check-label CarmenSans-ExtraBold" for="CarmenSans-ExtraBoldButton">
+                    <label class="form-check-label font-change CarmenSans-ExtraBold" for="CarmenSans-ExtraBoldButton">
                         CarmenSans-ExtraBold
                     </label>
 
@@ -489,7 +489,7 @@
                 <div class="font-selector form-check">
 
                     <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="CarmenSans-Regular" id="CarmenSans-RegularButton">
-                    <label class="form-check-label CarmenSans-Regular" for="CarmenSans-RegularButton">
+                    <label class="form-check-label font-change CarmenSans-Regular" for="CarmenSans-RegularButton">
                         CarmenSans-Regular
                     </label>
 
@@ -497,7 +497,7 @@
                 <div class="font-selector form-check">
 
                     <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="ChristmasCookies" id="ChristmasCookiesButton">
-                    <label class="form-check-label ChristmasCookies" for="ChristmasCookiesButton">
+                    <label class="form-check-label font-change ChristmasCookies" for="ChristmasCookiesButton">
                         ChristmasCookies
                     </label>
 
