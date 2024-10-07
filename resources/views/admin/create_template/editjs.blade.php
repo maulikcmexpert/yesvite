@@ -1848,7 +1848,7 @@ function updateIconPositions(textbox) {
 
     function undo() {
         console.log(undoStack);
-        if (undoStack.length > 1) {  // Ensure at least one previous state exists
+        if (undoStack.length > 0) {  // Ensure at least one previous state exists
             reattachIcons();
             redoStack.push(canvas.toJSON()); // Save current state to redo stack
             const lastState = undoStack.pop(); // Get the last state to undo
