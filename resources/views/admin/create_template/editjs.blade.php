@@ -1097,7 +1097,7 @@ $(".removeShapImage").click(function(){
         textbox.on('rotating', function () {
             addCustomIcons(textbox)
 
-            updateIconPositions(textbox); // Call the function to reposition icons
+            // updateIconPositions(textbox); // Call the function to reposition icons
         });
         // Event listener to manage icon visibility when a textbox is clicked
         textbox.on('mousedown', function() {
@@ -1122,6 +1122,27 @@ $(".removeShapImage").click(function(){
         const trashIconPosition = { left: x - iconOffset, top: y }; 
 
         console.log(copyIconPosition)
+
+        fabric.loadSVGFromString(copyIconSVG, function(objects, options) {
+            const icon = fabric.util.groupSVGElements(objects, options);
+            icon.set({
+                left: copyIconPosition.left,
+                top: copyIconPosition.top,
+                selectable: false,
+                evented: true,
+                hasControls: false,
+                originX: 'center',
+                originY: 'center',
+            });
+            textbox['copyIcon'] = icon;
+            
+            icon.on('mousedown', function() {
+                console.log('Copy icon clicked!');
+                cloneTextbox(textbox);
+            });
+            canvas.add(icon);
+            canvas.bringToFront(icon);
+        });
         
         // addIconToCanvas(copyIconPosition, 'copy');      
         // addIconToCanvas(trashIconPosition, 'trash');
