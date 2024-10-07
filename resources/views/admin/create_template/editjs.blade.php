@@ -1006,63 +1006,67 @@ $(".removeShapImage").click(function(){
         });
     }
 
-    // Helper function to calculate icon positions
-    function calculateIconPosition(objectCorners, iconOffset, angle) {
-            const radians = fabric.util.degreesToRadians(angle);
-            
-            const copyIconPos = {
-                x: objectCorners.tl.x - iconOffset * Math.cos(radians),
-                y: objectCorners.tl.y - iconOffset * Math.sin(radians)
-            };
+    // Helper function to calculate top-center icon positions
+function calculateTopCenterIconPosition(object, iconOffset) {
+    const radians = fabric.util.degreesToRadians(object.angle);
 
-            const trashIconPos = {
-                x: objectCorners.tr.x + iconOffset * Math.cos(radians),
-                y: objectCorners.tr.y - iconOffset * Math.sin(radians)
-            };
+    // Get the top-center point of the object
+    const centerX = (object.oCoords.tl.x + object.oCoords.tr.x) / 2;
+    const centerY = (object.oCoords.tl.y + object.oCoords.tr.y) / 2;
 
-            return { copyIconPos, trashIconPos };
-        }
+    // Calculate positions of icons relative to the top center
+    const deleteIconPos = {
+        x: centerX - iconOffset * Math.cos(radians), // Left of the center
+        y: centerY - iconOffset * Math.sin(radians) // Slightly above the object
+    };
 
-    // Function to update the icon positions
-    function updateIconPositions(textbox) {
-        removeIcons(textbox);
+    const copyIconPos = {
+        x: centerX + iconOffset * Math.cos(radians), // Right of the center
+        y: centerY - iconOffset * Math.sin(radians) // Slightly above the object
+    };
+
+    return { deleteIconPos, copyIconPos };
+}
+
+// Function to update the icon positions
+function updateIconPositions(textbox) {
+    removeIcons(textbox);
     
-        const angle = textbox.angle;
-        console.log((angle))
-        let degreeOffset = (textbox.angle >= 120 && textbox.angle <= 300) ? 20 : -6;
-       
-        const iconOffset = 30;
+    const iconOffset = 40; // Adjust to move the icons farther from the center
+    const objectCorners = textbox.oCoords; // Get the coordinates of the object corners
 
-        const objectCorners = textbox.oCoords; // Get the coordinates of the textbox corners
-        const { copyIconPos, trashIconPos } = calculateIconPosition(objectCorners, iconOffset,angle);
-        
-        loadIcon(
-            textbox,
-            trashIconSVG,
-            trashIconPos,
-            'trashIcon',
-            function() {
-                console.log('Trash icon clicked! Deleting textbox.');
-                deleteTextbox(textbox);
-            },
-            0
-        );
-        
-        loadIcon(
-            textbox,
-            copyIconSVG,
-            copyIconPos,
-            'copyIcon',
-            function() {
-                console.log('Copy icon clicked!');
-                cloneTextbox(textbox);
-            },
-            0
-        );
+    // Calculate icon positions based on top-center alignment
+    const { deleteIconPos, copyIconPos } = calculateTopCenterIconPosition(textbox, iconOffset);
 
-        canvas.bringToFront(textbox);
-        canvas.renderAll();
-    }
+    // Add Delete icon to the left of the top center
+    loadIcon(
+        textbox,
+        trashIconSVG,
+        deleteIconPos,
+        'trashIcon',
+        function() {
+            console.log('Trash icon clicked! Deleting textbox.');
+            deleteTextbox(textbox);
+        },
+        0 // No degree offset for positioning
+    );
+
+    // Add Copy icon to the right of the top center
+    loadIcon(
+        textbox,
+        copyIconSVG,
+        copyIconPos,
+        'copyIcon',
+        function() {
+            console.log('Copy icon clicked!');
+            cloneTextbox(textbox);
+        },
+        0 // No degree offset for positioning
+    );
+
+    canvas.bringToFront(textbox);
+    canvas.renderAll();
+}
 
     // Function to add icons to a new textbox
     function addIconsToTextbox(textbox) {
