@@ -4367,7 +4367,6 @@ $(document).on("click", ".next_guest_step", function () {
 
 var design_inner_image = '';
 function save_image_design(downloadImage,textData){
-    console.log(shapeImageUrl);
     if($('#user_image').attr("src")){
         design_inner_image = $('#user_image').attr("src");
     } 
