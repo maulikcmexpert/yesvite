@@ -1818,6 +1818,10 @@ function updateIconPositions(textbox) {
 
         document.querySelectorAll('[data-command]').forEach(function(button) {
             button.addEventListener('click', function() {
+                const command = button.getAttribute('data-command');
+                if(command=="fontName"){
+                    return;
+                }
                 executeCommand(this.getAttribute('data-command'));
             });
         });
