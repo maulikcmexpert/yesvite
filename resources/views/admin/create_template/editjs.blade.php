@@ -983,6 +983,8 @@ $(".removeShapImage").click(function(){
                 textbox[iconType] = null; // Clear reference
             }
         });
+        canvas.remove(textbox.copyIcon);
+        textbox.copyIcon = null
         canvas.renderAll();
     }
 
