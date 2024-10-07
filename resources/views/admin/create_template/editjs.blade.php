@@ -1006,19 +1006,21 @@ $(".removeShapImage").click(function(){
     }
 
     // Helper function to load an SVG icon and place it on the canvas
-    function loadIcon(textbox, iconSVG, iconPosition, iconType, eventHandler, degreeOffset = 0) {
+    function loadIcon(textbox, iconSVG, iconPosition, iconType, eventHandler) {
         fabric.loadSVGFromString(iconSVG, function(objects, options) {
             const icon = fabric.util.groupSVGElements(objects, options);
             icon.set({
-                left: iconPosition.x + 6,
-                top: iconPosition.y + degreeOffset,
+                left: iconPosition.left,
+                top: iconPosition.top,
                 selectable: false,
                 evented: true,
                 hasControls: false,
+                originX: 'center',
+                originY: 'center',
             });
             textbox[iconType] = icon;
-            
-            icon.on('mousedown', eventHandler);
+
+            icon.on('mousedown', eventHandler); // Attach click event
             canvas.add(icon);
             canvas.bringToFront(icon);
         });
@@ -1026,64 +1028,45 @@ $(".removeShapImage").click(function(){
 
     // Helper function to calculate top-center icon positions
     function calculateTopCenterIconPosition(object, iconOffset) {
-        const radians = fabric.util.degreesToRadians(object.angle);
+        const rotateControl = textbox.oCoords.mtr; // Get the middle top rotate control
+        const { x, y } = rotateControl;
 
-        // Get the top-center point of the object
-        const centerX = (object.oCoords.tl.x + object.oCoords.tr.x) / 2;
-        const centerY = (object.oCoords.tl.y + object.oCoords.tr.y) / 2;
+        const iconOffset = 20; // Adjust as needed to position the icons
+        const copyIconPosition = { left: x + iconOffset, top: y }; // Right of the rotate control
+        const trashIconPosition = { left: x - iconOffset, top: y }; // Left of the rotate control
 
-        // Calculate positions of icons relative to the top center
-        const deleteIconPos = {
-            x: centerX - iconOffset * Math.cos(radians), // Left of the center
-            y: centerY - iconOffset * Math.sin(radians) // Slightly above the object
-        };
-
-        const copyIconPos = {
-            x: centerX + iconOffset * Math.cos(radians), // Right of the center
-            y: centerY - iconOffset * Math.sin(radians) // Slightly above the object
-        };
-
-        return { deleteIconPos, copyIconPos };
+        return { copyIconPosition, trashIconPosition };
     }
 
     // Function to update the icon positions
     function updateIconPositions(textbox) {
-        removeIcons(textbox);
-        
-        const iconOffset = 40; // Adjust to move the icons farther from the center
-        const objectCorners = textbox.oCoords; // Get the coordinates of the object corners
+        removeIcons(textbox); // Remove existing icons
 
-        // Calculate icon positions based on top-center alignment
-        const { deleteIconPos, copyIconPos } = calculateTopCenterIconPosition(textbox, iconOffset);
+        const { copyIconPosition, trashIconPosition } = calculateIconPositions(textbox);
 
-        // Add Delete icon to the left of the top center
-        loadIcon(
-            textbox,
-            trashIconSVG,
-            deleteIconPos,
-            'trashIcon',
-            function() {
-                console.log('Trash icon clicked! Deleting textbox.');
-                deleteTextbox(textbox);
-            },
-            0 // No degree offset for positioning
-        );
-
-        // Add Copy icon to the right of the top center
+        // Add Copy icon to the canvas
         loadIcon(
             textbox,
             copyIconSVG,
-            copyIconPos,
+            copyIconPosition,
             'copyIcon',
             function() {
                 console.log('Copy icon clicked!');
                 cloneTextbox(textbox);
-            },
-            0 // No degree offset for positioning
+            }
         );
 
-        canvas.bringToFront(textbox);
-        canvas.renderAll();
+        // Add Trash icon to the canvas
+        loadIcon(
+            textbox,
+            trashIconSVG,
+            trashIconPosition,
+            'trashIcon',
+            function() {
+                console.log('Trash icon clicked!');
+                deleteTextbox(textbox);
+            }
+        );
     }
 
     // Function to add icons to a new textbox
@@ -1095,8 +1078,7 @@ $(".removeShapImage").click(function(){
             updateIconPositions(textbox);
         });
         textbox.on('rotating', function () {
-            addCustomIcons(textbox)
-
+            updateIconPositions(textbox);
             // updateIconPositions(textbox); // Call the function to reposition icons
         });
         // Event listener to manage icon visibility when a textbox is clicked
@@ -1110,62 +1092,7 @@ $(".removeShapImage").click(function(){
             canvas.renderAll(); // Re-render the canvas
         });     
     }
-    const addCustomIcons = (textbox) => {
-        removeIcons(textbox);
-        const rotateControl = textbox.oCoords.mtr;
-        const { x, y } = rotateControl;
-
-       
-        const iconOffset = 20; 
-
-        const copyIconPosition = { left: x + iconOffset, top: y }; 
-        const trashIconPosition = { left: x - iconOffset, top: y };        
-
-        fabric.loadSVGFromString(copyIconSVG, function(objects, options) {
-            let icon = fabric.util.groupSVGElements(objects, options);
-            icon.set({
-                left: copyIconPosition.left,
-                top: copyIconPosition.top,
-                selectable: false,
-                evented: true,
-                hasControls: false,
-                originX: 'center',
-                originY: 'center',
-            });
-            textbox['copyIcon'] = icon;
-            
-            icon.on('mousedown', function() {
-                console.log('Copy icon clicked!');
-                cloneTextbox(textbox);
-            });
-            canvas.add(icon);
-            canvas.bringToFront(icon);
-        });
-
-
-        fabric.loadSVGFromString(trashIconSVG, function(objects, options) {
-            let icon = fabric.util.groupSVGElements(objects, options);
-            icon.set({
-                left: trashIconPosition.left,
-                top: trashIconPosition.top+20,
-                selectable: false,
-                evented: true,
-                hasControls: false,
-                originX: 'center',
-                originY: 'center',
-            });
-            textbox['trashIcon'] = icon;
-            
-            icon.on('mousedown', function() {
-                console.log('Copy icon clicked!');
-                deleteTextbox(textbox);
-            });
-            canvas.add(icon);
-            canvas.bringToFront(icon);
-        });
-
-
-    };
+   
         // function updateIconPositions(textbox) {
         //     if (textbox.trashIcon) {
         //         canvas.remove(textbox.trashIcon);
