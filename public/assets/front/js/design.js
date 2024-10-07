@@ -2020,7 +2020,7 @@ console.log(1)
 
             currentImage = imgInstance; // Track current image on canvas
             oldImage = imgInstance;
-            $('.photo-slider-wrp').hide()
+            // $('.photo-slider-wrp').hide()
         };
 
         imgElement.onerror = function(e) {
