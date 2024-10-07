@@ -636,19 +636,48 @@ $(".removeShapImage").click(function(){
         };
 
         // Set letter spacing function
+        // const setLetterSpacing = () => {
+        //     const newValue = letterSpacingRange.value;
+        //     console.log(newValue);
+        //     letterSpacingInput.value = newValue;
+        //     letterSpacingTooltip.innerHTML = `<span>${newValue}</span>`;
+
+        //     const activeObject = canvas.getActiveObject();
+        //     if (activeObject && activeObject.type === 'textbox') {
+        //         activeObject.set('charSpacing', newValue * 10); // Convert spacing to match Fabric.js scale
+        //         updateTextboxWidth(activeObject);
+        //     }
+        // };
         const setLetterSpacing = () => {
-            const newValue = letterSpacingRange.value;
-            console.log(newValue);
+            const newValue = parseFloat(letterSpacingRange.value); // Ensure it's a number
             letterSpacingInput.value = newValue;
             letterSpacingTooltip.innerHTML = `<span>${newValue}</span>`;
 
             const activeObject = canvas.getActiveObject();
             if (activeObject && activeObject.type === 'textbox') {
-                activeObject.set('charSpacing', newValue * 10); // Convert spacing to match Fabric.js scale
-                updateTextboxWidth(activeObject);
+                activeObject.set('charSpacing', newValue); // Update letter spacing
+
+                // Calculate the text width including letter spacing
+                const text = activeObject.text || ""; // Get current text
+                const fontSize = activeObject.fontSize || defaultSettings.fontSize; // Get current font size
+                const fontFamily = activeObject.fontFamily || 'Arial'; // Default font family
+
+                const ctx = canvas.getContext('2d');
+                ctx.font = `${fontSize}px ${fontFamily}`;
+                const measuredTextWidth = ctx.measureText(text).width; // Measure text width
+
+                // Calculate the total width with letter spacing
+                const totalWidth = measuredTextWidth + (newValue * (text.length - 1)); // Add letter spacing for all but the last character
+
+                // Set a maximum width to prevent the textbox from getting too wide
+                const MAX_TEXTBOX_WIDTH = 200; // Adjust this value as necessary
+                activeObject.set('width', Math.min(totalWidth, MAX_TEXTBOX_WIDTH)); // Limit the width if needed
+
+                // Ensure the textbox reflects the new width in the canvas
+                activeObject.setCoords();
+                canvas.renderAll();
             }
         };
-
         // Function to update line height
         const setLineHeight = () => {
             const newValue = parseFloat(lineHeightRange.value);
