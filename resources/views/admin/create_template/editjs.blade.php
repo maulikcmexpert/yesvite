@@ -161,12 +161,11 @@
         });
 
 
-        fabric.Textbox.prototype.controls.mtr = new fabric.Control({
+        fabric.Textbox.prototype.controls.deleteControl = new fabric.Control({
             x: 0.5,
             y: -0.5,
             offsetY: -30,
-            cursorStyle: 'pointer',
-            actionHandler: fabric.controlsUtils.rotationWithSnapping,
+            cursorStyle: 'pointer',            
             actionHandler: (eventData, transform, x, y) => {
                 const target = transform.target;
                 canvas.remove(target); // Remove object on trash icon click
