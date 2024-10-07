@@ -1290,6 +1290,13 @@ console.log(2)
         canvas.renderAll();
     }
 
+    $(".removeShapImage").click(function(){
+        $("#imageWrapper").hide();
+        $("#user_image").attr("src","");
+        $('.photo-slider-wrp').show()
+    
+    })
+
     // Function to clone a textbox
     function cloneTextbox(originalTextbox) {
         const clonedTextbox = new fabric.Textbox(originalTextbox.text, {
