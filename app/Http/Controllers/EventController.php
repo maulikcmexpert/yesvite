@@ -78,7 +78,14 @@ class EventController extends Controller
         Session::forget('thankyou_card_data');
         $image = Session::get('desgin');
         $slider_image = Session::get('desgin_slider');
+        $shape = Session::get('shape_image');
 
+        if (isset($shape) && $shape != "" || $shape != NULL) {
+            if (file_exists(public_path('storage/event_images/') . $shape)) {
+                $shapePath = public_path('storage/event_images/') . $shape;
+                unlink($shapePath);
+            }
+        }
         if (isset($image) && $image != "" || $image != NULL) {
             if (file_exists(public_path('storage/event_design_template/') . $image)) {
                 $imagePath = public_path('storage/event_design_template/') . $image;
@@ -1025,25 +1032,25 @@ class EventController extends Controller
                 list(, $data) = explode(',', $data);
                 dd($data);
                 $imageData = base64_decode($data);
-                $fileNames = time() . $i . '-' . uniqid() . '.jpg';
+                $newImageName = time() . $i . '-' . uniqid() . '.jpg';
                 $i++;
-    
-                $path = public_path('storage/event_images/') . $fileNames;
-    
+                $path = public_path('storage/event_images/') . $newImageName;
                 file_put_contents($path, $imageData);
+                session(['shape_image' => $newImageName]);
 
             }else{
                 if ($request->shapeImageUrl) {
                     $sourceImagePath = $request->shapeImageUrl;
                     $destinationDirectory = public_path('storage/event_images/');
                     $parts = explode('canvas/', $request->shapeImageUrl);
-                    $imageName = end($parts); // 'user_image_1728283348.png'
+                    $imageName = end($parts);
                     if($imageName){
                         $destinationImagePath = $destinationDirectory . $imageName;
                         if (file_exists($request->shapeImageUrl)) {
                             $newImageName = time() . '_' . uniqid() . '.' . pathinfo($imageName, PATHINFO_EXTENSION);
                             $destinationImagePath = $destinationDirectory . $newImageName;
                             File::copy($sourceImagePath, $destinationImagePath);
+                            session(['shape_image' => $newImageName]);
                         }
                     }
                 }
