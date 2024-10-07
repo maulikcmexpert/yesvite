@@ -146,7 +146,7 @@
             fabric.Textbox.prototype.controls.mtr = new fabric.Control({
               x: 0,
               y: -0.5,
-              offsetY: -40,
+              offsetY: -30,
               cursorStyle: 'pointer',
               actionHandler: fabric.controlsUtils.rotationWithSnapping,
               actionName: 'rotate',
@@ -946,6 +946,8 @@ $(".removeShapImage").click(function(){
                 cornerColor: '#fff',
                 cornerSize: 6,
                 transparentCorners: false,
+                rotatingPointOffset:30,
+                padding: 5,
             })
 
             text.set('width', text.get('text').length * 10);
