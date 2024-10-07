@@ -616,12 +616,12 @@ $(".removeShapImage").click(function(){
             ctx.font = `${fontSize}px ${fontFamily}`;
 
             const measuredTextWidth = ctx.measureText(text).width;
-            const calculatedWidth = measuredTextWidth + (charSpacing * (text.length - 1));
+            const calculatedWidth = measuredTextWidth + (charSpacing / 1000 * fontSize * (text.length - 1));
 
             // Define a maximum width to avoid large textboxes
             const maxWidth = 400; // Adjust this value based on your layout
             const width = Math.min(calculatedWidth, maxWidth); // Cap the width
-
+            console.log(width)
 
                 // Handle text wrapping for large texts
                 textbox.set('width', width);
