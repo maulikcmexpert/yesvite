@@ -4365,75 +4365,79 @@ $(document).on("click", ".next_guest_step", function () {
     }, 500);
 });
 
+var design_inner_image = '';
 function save_image_design(downloadImage,textData){
     console.log( $('#user_image').attr("src"));
+    if($('#user_image').attr("src")){
+        design_inner_image = $('#user_image').attr("src");
+    } 
 
+    domtoimage
+        .toBlob(downloadImage)
+        .then(function (blob) {
+            var formData = new FormData();
+            formData.append("image", blob, "design.png");
+            formData.append('design_inner_image',design_inner_image)
+            $.ajax({
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                        "content"
+                    ),
+                },
+                url: base_url + "event/store_temp_design",
+                type: "POST",
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    let image = response.image;
+                    eventData.desgin_selected = image;
+                    // if(eventData.step == '1'){
+                    //     eventData.step = '2';
+                    // }
+                    console.log(final_step);
+                    if(final_step == 2){
+                        final_step = 3;
+                    }
+                    console.log(eventData);
+                    eventData.step = final_step;
+                    console.log("Image uploaded and saved successfully");
+                    $("#myCustomModal").modal("hide");
+                    $("#exampleModal").modal("hide");
+                    $("#loader").css("display", "none");
+                    $('.store_desgin_temp').prop("disabled", false);
+                    $('.btn-close').prop("disabled", false);
+                    $(".main-content-wrp").removeClass("blurred");
+                    $(".step_2").hide();
+                    $('#edit-design-temp').hide();
+                    handleActiveClass('.li_guest');
+                    $('.pick-card').addClass('menu-success');
+                    $('.edit-design').addClass('menu-success');
+                    $('.edit-design').removeClass('active');
+                    $('.li_design').find(".side-bar-list").addClass("menu-success");
 
-    // domtoimage
-    //     .toBlob(downloadImage)
-    //     .then(function (blob) {
-    //         var formData = new FormData();
-    //         formData.append("image", blob, "design.png");
-    //         $.ajax({
-    //             headers: {
-    //                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
-    //                     "content"
-    //                 ),
-    //             },
-    //             url: base_url + "event/store_temp_design",
-    //             type: "POST",
-    //             data: formData,
-    //             processData: false,
-    //             contentType: false,
-    //             success: function (response) {
-    //                 let image = response.image;
-    //                 eventData.desgin_selected = image;
-    //                 // if(eventData.step == '1'){
-    //                 //     eventData.step = '2';
-    //                 // }
-    //                 console.log(final_step);
-    //                 if(final_step == 2){
-    //                     final_step = 3;
-    //                 }
-    //                 console.log(eventData);
-    //                 eventData.step = final_step;
-    //                 console.log("Image uploaded and saved successfully");
-    //                 $("#myCustomModal").modal("hide");
-    //                 $("#exampleModal").modal("hide");
-    //                 $("#loader").css("display", "none");
-    //                 $('.store_desgin_temp').prop("disabled", false);
-    //                 $('.btn-close').prop("disabled", false);
-    //                 $(".main-content-wrp").removeClass("blurred");
-    //                 $(".step_2").hide();
-    //                 $('#edit-design-temp').hide();
-    //                 handleActiveClass('.li_guest');
-    //                 $('.pick-card').addClass('menu-success');
-    //                 $('.edit-design').addClass('menu-success');
-    //                 $('.edit-design').removeClass('active');
-    //                 $('.li_design').find(".side-bar-list").addClass("menu-success");
-
-    //                 $('.event_create_percent').text('75%');
-    //                 $('.current_step').text('3 of 4');
+                    $('.event_create_percent').text('75%');
+                    $('.current_step').text('3 of 4');
                     
-    //                 $(".step_3").show();
-    //                 console.log(eventData);
+                    $(".step_3").show();
+                    console.log(eventData);
                     
-    //                 var type="all"
-    //                 get_user(type);
+                    var type="all"
+                    get_user(type);
                     
 
-    //             },
-    //             error: function (xhr, status, error) {
-    //                 console.error(
-    //                     "Failed to upload and save the image:",
-    //                     error
-    //                 );
-    //             },
-    //         });
-    //     })
-    //     .catch(function (error) {
-    //         console.error("Error capturing image:", error);
-    //     });
+                },
+                error: function (xhr, status, error) {
+                    console.error(
+                        "Failed to upload and save the image:",
+                        error
+                    );
+                },
+            });
+        })
+        .catch(function (error) {
+            console.error("Error capturing image:", error);
+        });
 }
 
 function get_user(type){
