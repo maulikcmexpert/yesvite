@@ -1907,7 +1907,9 @@ $(".removeShapImage").click(function(){
           
             undoStack.push(canvas.toJSON());
             console.log("after {undoStack}");
-
+            if(undoStack.length > 0){
+                $('#undoButton').find('svg path').attr('fill', '#0F172A');
+            }
             redoStack = []; // Clear redo stack on new action
         // }, 10);
     }
@@ -1922,7 +1924,6 @@ $(".removeShapImage").click(function(){
                 canvas.renderAll(); // Render the canvas after loading state
                 reattachIcons(); // Reattach the icons to the textboxes
             });
-            $('#undoButton').find('svg path').attr('fill', '#0F172A');
         }else{
             $('#undoButton').find('svg path').attr('fill', '#CBD5E1');  
         }
