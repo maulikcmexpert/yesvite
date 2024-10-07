@@ -3134,7 +3134,7 @@ $(document).on("click", ".li_design", function (e) {
 
 
 function li_design_click(){
-    $('.design-span').addClass('active');
+    
     if (
         eventData.event_type != "" &&
         eventData.event_name != "" &&
@@ -3155,6 +3155,7 @@ function li_design_click(){
         eventData.state != undefined &&
         eventData.zipcode != undefined
     ) {
+        $('.design-span').addClass('active');
         $(".step_1").css("display", "none");
         $(".step_2").show();
         $(".step_3").css("display", "none");
