@@ -1815,16 +1815,13 @@ function updateIconPositions(textbox) {
     let isAddingToUndoStack = false;
 
     function addToUndoStack() {
-        if (isAddingToUndoStack) return; // Prevents multiple calls in rapid succession
-        isAddingToUndoStack = true;
-
-        // Delay the action slightly to allow for batch updates
-        setTimeout(() => {
-            undoStack.push(canvas.toJSON());
-            console.log(undoStack);
-            redoStack = []; // Clear redo stack on new action
-            isAddingToUndoStack = false; // Reset the flag
-        }, 200); // Adjust delay as necessary (200ms is an example)
+      
+        isAddingToUndoStack = true;      
+        undoStack.push(canvas.toJSON());
+        console.log(undoStack);
+        redoStack = []; // Clear redo stack on new action
+       
+       
     }
 
   
