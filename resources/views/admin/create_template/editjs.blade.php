@@ -1412,6 +1412,7 @@ function updateIconPositions(textbox) {
                 console.log('Updated Font Color: ' + activeObject.fill);
 
                 canvas.renderAll();
+                console.log('add to undo')
                 addToUndoStack(); // Save state after updating properties
             }
         }
@@ -1743,6 +1744,8 @@ function updateIconPositions(textbox) {
             var myfont = new FontFaceObserver(font);
             console.log(font);
             myfont.load().then(function() {
+                console.log('add to undo')
+
                 addToUndoStack();
 
                 // When font is loaded, use it.
@@ -1785,7 +1788,7 @@ function updateIconPositions(textbox) {
                 fontName: (font) => {
                     if (font) {
                         console.log('load and use command')
-                        loadAndUse(font);
+                        // loadAndUse(font);
                     }
                 },
                 justifyLeft: () => activeObject.set('textAlign', 'left'),
@@ -1803,6 +1806,8 @@ function updateIconPositions(textbox) {
             // Execute the corresponding command
             if (commands[command]) {
                 commands[command](font); // Pass font to fontName if needed
+                console.log('add to undo')
+
                 addToUndoStack(); // Save state for undo/redo functionality
                 canvas.renderAll(); // Re-render canvas after change
             }
