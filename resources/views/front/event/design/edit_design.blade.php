@@ -41,7 +41,7 @@
                         </g>
                     </svg>
                 </div>
-
+                <input type="file" name="selectShapeImage" accept="image/*">
                 <img id="user_image" src="" style="height: 100px; width: 100px; background-color: black;" />
                 <div class="resize-handle top-left"></div>
                 <div class="resize-handle top-center"></div>
