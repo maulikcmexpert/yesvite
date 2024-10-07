@@ -1826,31 +1826,39 @@ function updateIconPositions(textbox) {
         let undoStack = [];
     let redoStack = [];
     let isAddingToUndoStack = 0;
+    let isInitialLoad = true; // Add a flag to check initial load
 
     function addToUndoStack() {
-        clearTimeout(isAddingToUndoStack)      
-        isAddingToUndoStack = setTimeout(function(){
-            console.log("adding stack");            
+        clearTimeout(isAddingToUndoStack);
+        
+        isAddingToUndoStack = setTimeout(function() {
+            console.log("adding to stack");
+
+            // Add the initial state if it's the first time
+            if (isInitialLoad) {
+                undoStack.push(canvas.toJSON());
+                isInitialLoad = false; // Set to false after the first load
+            }
+
             undoStack.push(canvas.toJSON());
             console.log(undoStack);
             redoStack = []; // Clear redo stack on new action
-        },200);
+        }, 200);
     }
-
-  
 
     function undo() {
         console.log(undoStack);
-        if (undoStack.length > 0) {
+        if (undoStack.length > 1) {  // Ensure at least one previous state exists
             reattachIcons();
             redoStack.push(canvas.toJSON()); // Save current state to redo stack
             const lastState = undoStack.pop(); // Get the last state to undo
             canvas.loadFromJSON(lastState, function () {
                 canvas.renderAll(); // Render the canvas after loading state
-                // Reattach the icons to the textboxes
+                reattachIcons(); // Reattach the icons to the textboxes
             });
         }
     }
+
     function redo() {
         if (redoStack.length > 0) {
             reattachIcons();
@@ -1863,40 +1871,21 @@ function updateIconPositions(textbox) {
         }
     }
 
-
     function reattachIcons() {
-       
         undoStack.forEach((ob, index) => {
             ob.objects = ob.objects.filter(obj => obj.type !== 'group');
             ob.objects.forEach(obj => {
-            console.log(obj);
-            obj.borderColor = "#2DA9FC"
-            obj.cornerColor = "#fff"
-            obj.cornerSize = 6
-            obj.textAlign = 'center'
-            // Check if obj is a fabric object by checking for the existence of 'set' method
-           
-        });
-           
-
-
-            if (ob.objects.length === 0) {
-                console.log("Removed from undoStack");
-           
-            }
+                console.log(obj);
+                obj.borderColor = "#2DA9FC";
+                obj.cornerColor = "#fff";
+                obj.cornerSize = 6;
+                obj.textAlign = 'center';
+            });
         });
 
         redoStack.forEach((ob, index) => {
-
             ob.objects = ob.objects.filter(obj => obj.type !== 'group');
-
-        
-            if (ob.objects.length === 0) {
-                console.log("Removed from undoStack");
-            
-            }
-        })
-      
+        });
     }
  
 
