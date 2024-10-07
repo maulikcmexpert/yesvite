@@ -1842,7 +1842,7 @@ function updateIconPositions(textbox) {
         document.querySelectorAll('[data-command]').forEach(function(button) {
             button.addEventListener('click', function() {
                 const command = button.getAttribute('data-command');
-                if(command=="fontName"){
+                if(command=="fontName" || command=="undo" || command=="redo"){
                     return;
                 }
                 executeCommand(this.getAttribute('data-command'));
@@ -1917,8 +1917,8 @@ function updateIconPositions(textbox) {
     }
  
 
-  document.querySelector('[data-command="undo"]').addEventListener('click', undo);
-    document.querySelector('[data-command="redo"]').addEventListener('click', redo);
+    document.getElementById('undo').addEventListener('click', undo);
+    document.getElementById('redo').addEventListener('click', redo);
 
        
 
