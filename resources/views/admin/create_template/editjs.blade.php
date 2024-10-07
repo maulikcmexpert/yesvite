@@ -1093,9 +1093,10 @@ $(".removeShapImage").click(function(){
         });
         textbox.on('scaling', function() {
             updateIconPositions(textbox);
-            addCustomIcons(textbox)
         });
         textbox.on('rotating', function () {
+            addCustomIcons(textbox)
+
             updateIconPositions(textbox); // Call the function to reposition icons
         });
         // Event listener to manage icon visibility when a textbox is clicked
