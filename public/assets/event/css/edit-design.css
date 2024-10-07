@@ -798,6 +798,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
 }
 
 .uploadShapImage svg{
@@ -810,6 +811,7 @@
     height: 100%;
     position: absolute;
     display: block !important;
+    opacity: 0;
 }
 
 .canvas-top-icon-wrp{
