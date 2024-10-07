@@ -30,7 +30,7 @@
 
       <tr>
         <th>No</th>
-        <th>Design Name</th>
+        <th>Category Name</th>
         <th>SubCategory Name</th>
         <th>Image</th>
         <th>Filled Image</th>
