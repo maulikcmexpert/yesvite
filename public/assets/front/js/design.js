@@ -8,6 +8,7 @@ let currentImage = null;
 let isImageDragging = false; // Track if the image is being dragged
 let isimageoncanvas = false;
 let oldImage = null;
+var current_shape;
 $(document).on("click", ".design-card", function() {
     var url = $(this).data("url");
     var template = $(this).data("template");
@@ -1978,6 +1979,7 @@ if(!canvasElement){
                 cornerStyle: 'circle',
             });
             shape = element.shape;
+            current_shape = shape;
             canvasElement.add(imgInstance);
             // addIconsToImage(imgInstance);
             drawCanvas();
@@ -2104,6 +2106,7 @@ console.log(1)
     let startWidth, startHeight, startX, startY, activeHandle;
     let offsetX, offsetY;
     let shape = 'rectangle'; // Default shape
+    current_shape = shape;
     let shapeChangedDuringDrag = false; // Flag to track shape change
     let imageUploaded = false; // Flag to track if image has been uploaded
 
@@ -2210,6 +2213,7 @@ console.log(1)
             const shapes = ['rectangle', 'circle', 'star', 'rounded-border', 'heart'];
             const currentIndex = shapes.indexOf(shape);
             shape = shapes[(currentIndex + 1) % shapes.length];
+            current_shape = shape;
             ////console.log`Shape changed to: ${shape}`); // Log shape change
 
             drawCanvas();
@@ -2253,7 +2257,7 @@ console.log(1)
 
 function getTextDataFromCanvas() {
     var objects = canvas.getObjects();
-    console.log(shape);
+    console.log(current_shape);
     var textData = [];
 
     objects.forEach(function(obj) {
@@ -2299,7 +2303,7 @@ function getTextDataFromCanvas() {
     var shapeImageData = [];
 
     shapeImageData ={
-        shape: shape,
+        shape: current_shape,
         centerX: centerX,
         centerY: centerY,
         width: width,
