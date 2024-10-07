@@ -1879,7 +1879,8 @@ function updateIconPositions(textbox) {
             reattachIcons();
             redoStack.push(canvas.toJSON()); // Save current state to redo stack
             const lastState = undoStack.pop(); // Get the last state to undo
-            canvas.loadFromJSON(lastState, function () {
+            const lastState2 = undoStack.pop(); // Get the last state to undo
+            canvas.loadFromJSON(lastState2, function () {
                 canvas.renderAll(); // Render the canvas after loading state
                 reattachIcons(); // Reattach the icons to the textboxes
             });
