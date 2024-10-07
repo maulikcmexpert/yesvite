@@ -27,13 +27,13 @@
         </div> -->
         <div class="edit-image-main-top">
             <div class="edit-image-main-top-icons">
-                <button id="undoButton" data-command="undo">
+                <button id="undoButton">
                     <svg width="14" height="7" viewBox="0 0 14 7" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M7.3335 1.33366C5.56683 1.33366 3.96683 1.99366 2.7335 3.06699L0.333496 0.666992V6.66699H6.3335L3.92016 4.25366C4.84683 3.48033 6.02683 3.00033 7.3335 3.00033C9.6935 3.00033 11.7002 4.54033 12.4002 6.66699L13.9802 6.14699C13.0535 3.35366 10.4335 1.33366 7.3335 1.33366Z"
                             fill="#0F172A" />
                     </svg>
                 </button>
-                <button id="redoButton" data-command="redo">
+                <button id="redoButton">
                     <svg width="14" height="7" viewBox="0 0 14 7" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M11.2669 3.06699C10.0335 1.99366 8.43352 1.33366 6.66686 1.33366C3.56686 1.33366 0.946855 3.35366 0.0268555 6.14699L1.60019 6.66699C1.95131 5.60032 2.63009 4.67166 3.53983 4.01329C4.44958 3.35492 5.54388 3.00044 6.66686 3.00033C7.96686 3.00033 9.15352 3.48033 10.0802 4.25366L7.66686 6.66699H13.6669V0.666992L11.2669 3.06699Z"
                             fill="#CBD5E1" />
