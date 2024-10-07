@@ -1037,8 +1037,7 @@ class EventController extends Controller
                     $parts = explode('canvas/', $request->shapeImageUrl);
                     $imageName = end($parts);
                     $destinationImagePath = $destinationDirectory . $imageName;
-                    if (file_exists($request->shapeImageUrl)) {
-                        dd($request->shapeImageUrl);
+                    if (file_exists(public_path('storage/canvas/') . $imageName)) {
                         $newImageName = time() . '_' . uniqid() . '.' . pathinfo($imageName, PATHINFO_EXTENSION);
                         $destinationImagePath = $destinationDirectory . $newImageName;
                         File::copy($sourceImagePath, $destinationImagePath);
