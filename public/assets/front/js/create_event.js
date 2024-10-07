@@ -4323,7 +4323,7 @@ $(document).on("click", ".store_desgin_temp", function () {
     canvas.renderAll();
 
     setTimeout(() => {
-        var downloadImage = document.getElementById("download_image");
+        var downloadImage = document.getElementsByClassName("image-edit-section-wrp");
         $("#loader").show();
         $(this).prop("disabled", true);
         $('.btn-close').prop("disabled", true);
@@ -4349,7 +4349,7 @@ $(document).on("click", ".next_guest_step", function () {
 
     canvas.renderAll();
     setTimeout(() => {
-        var downloadImage = document.getElementById("imageEditor1");
+        var downloadImage = document.getElementsByClassName("image-edit-section-wrp");
         $("#loader").show();
         $(this).prop("disabled", true);
         $('.btn-close').prop("disabled", true);
