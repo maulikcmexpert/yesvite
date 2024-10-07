@@ -1028,6 +1028,7 @@ class EventController extends Controller
         $newImageName = '';
         $fileName = '';
         $i = 0;
+        print_r($request->shapeImageUrl);
         dd($request->design_inner_image);
         if (isset($request->design_inner_image) && isset($request->shapeImageUrl)) {
             if($request->shapeImageUrl == $request->design_inner_image){
