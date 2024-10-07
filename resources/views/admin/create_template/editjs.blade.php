@@ -1785,6 +1785,7 @@ function updateIconPositions(textbox) {
             if (!activeObject || activeObject.type !== 'textbox') {
                 return; // No object or not a textbox, so do nothing
             }
+            addToUndoStack(canvas); // Save state for undo/redo functionality
 
             // Commands object to handle various styles and operations
             const commands = {
@@ -1825,7 +1826,6 @@ function updateIconPositions(textbox) {
                 commands[command](font); // Pass font to fontName if needed
                 console.log('add to undo')
 
-                addToUndoStack(canvas); // Save state for undo/redo functionality
                 canvas.renderAll(); // Re-render canvas after change
             }
         }
