@@ -790,6 +790,25 @@
     display: none !important;
 }
 
+.uploadShapImage{
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: #fff;
+    position: relative;
+}
+
+.uploadShapImage svg{
+    width: 15px;
+    height: 15px;
+}
+
+.uploadShapImage input{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
 @media only screen and (max-width: 1199px) {
     .image-edit-inner-img {
         width: 400px;
