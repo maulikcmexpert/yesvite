@@ -1737,6 +1737,8 @@ function updateIconPositions(textbox) {
             var myfont = new FontFaceObserver(font);
             console.log(font);
             myfont.load().then(function() {
+                addToUndoStack();
+
                 // When font is loaded, use it.
                 var activeObject = canvas.getActiveObject();
                 if (activeObject) {
@@ -1776,7 +1778,7 @@ function updateIconPositions(textbox) {
                 },
                 fontName: (font) => {
                     if (font) {
-                        addToUndoStack();
+                        
                         loadAndUse(font);
                     }
                 },
