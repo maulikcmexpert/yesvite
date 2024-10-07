@@ -809,6 +809,7 @@ $(".removeShapImage").click(function(){
 
         // Update color picker based on the selected object's current font or background color
         function updateColorPicker() {
+            addToUndoStack(canvas)
             const activeObject = canvas.getActiveObject();
             const selectedColorType = document.querySelector('input[name="colorType"]:checked').value;
 
