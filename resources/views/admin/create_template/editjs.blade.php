@@ -1059,28 +1059,28 @@ $(".removeShapImage").click(function(){
         const { copyIconPosition, trashIconPosition } = calculateIconPositions(textbox);
 
         // Add Copy icon to the canvas
-        loadIcon(
-            textbox,
-            copyIconSVG,
-            copyIconPosition,
-            'copyIcon',
-            function() {
-                console.log('Copy icon clicked!');
-                cloneTextbox(textbox);
-            }
-        );
+        // loadIcon(
+        //     textbox,
+        //     copyIconSVG,
+        //     copyIconPosition,
+        //     'copyIcon',
+        //     function() {
+        //         console.log('Copy icon clicked!');
+        //         cloneTextbox(textbox);
+        //     }
+        // );
 
-        // Add Trash icon to the canvas
-        loadIcon(
-            textbox,
-            trashIconSVG,
-            trashIconPosition,
-            'trashIcon',
-            function() {
-                console.log('Trash icon clicked!');
-                deleteTextbox(textbox);
-            }
-        );
+        // // Add Trash icon to the canvas
+        // loadIcon(
+        //     textbox,
+        //     trashIconSVG,
+        //     trashIconPosition,
+        //     'trashIcon',
+        //     function() {
+        //         console.log('Trash icon clicked!');
+        //         deleteTextbox(textbox);
+        //     }
+        // );
     }
 
     // Function to add icons to a new textbox
