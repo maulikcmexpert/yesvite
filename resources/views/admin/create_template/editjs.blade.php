@@ -309,7 +309,7 @@ function updateClipPath(imageUrl, element) {
         imgInstance.on('scaling', function () {
             element.width = imgInstance.width * imgInstance.scaleX;
             element.height = imgInstance.height * imgInstance.scaleY;
-
+            
             updatedOBJImage = {               
                 width:  imgInstance.width * imgInstance.scaleX,
                 height: imgInstance.height * imgInstance.scaleY
@@ -1486,6 +1486,7 @@ $(".removeShapImage").click(function(){
                 canvas.setActiveObject(options.target);
                 addIconsToTextbox(options.target)
                 updateIconPositions(options.target)
+                setFontSize();
             } else {
                 // alert();
                 canvas.getObjects('textbox').forEach(function(tb) {
