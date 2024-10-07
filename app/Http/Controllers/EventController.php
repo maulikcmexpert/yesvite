@@ -1054,6 +1054,7 @@ class EventController extends Controller
                 session(['shape_image' => $newImageName]);
             }
         }
+        dd($newImageName);
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $fileName = time() . '-' . $file->getClientOriginalName();
