@@ -1909,6 +1909,9 @@ $(".removeShapImage").click(function(){
             console.log("after {undoStack}");
             if(undoStack.length > 0){
                 console.log($('#undoButton').html());
+                $('#undoButton').find('svg path').attr('fill', '#0F172A');
+            }else{
+                $('#undoButton').find('svg path').attr('fill', '#CBD5E1');  
             }
             console.log({undoStack});
 
