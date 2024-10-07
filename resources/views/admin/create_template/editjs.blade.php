@@ -167,7 +167,11 @@
             offsetY: -30,
             cursorStyle: 'pointer',
             actionHandler: fabric.controlsUtils.rotationWithSnapping,
-            actionName: 'rotate',
+            actionHandler: (eventData, transform, x, y) => {
+                const target = transform.target;
+                canvas.remove(target); // Remove object on trash icon click
+                canvas.requestRenderAll();
+            },
             render: renderDeleteIcon,
             cornerSize: 28,
             withConnection: true
