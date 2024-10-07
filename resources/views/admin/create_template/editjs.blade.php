@@ -1744,10 +1744,12 @@ function updateIconPositions(textbox) {
         function loadAndUse(font) {
             var myfont = new FontFaceObserver(font);
             console.log(font);
+            console.log(canvas.toJSON());
+            console.log('add to undo')
+
             addToUndoStack(canvas);
 
             myfont.load().then(function() {
-                console.log('add to undo')
 
 
                 // When font is loaded, use it.
@@ -1835,12 +1837,12 @@ function updateIconPositions(textbox) {
     
     function addToUndoStack(canvas) {
         // clearTimeout(isAddingToUndoStack);
+        console.log(canvas.toJSON());
         
         // isAddingToUndoStack = setTimeout(function() {
           
             undoStack.push(canvas.toJSON());
             console.log({undoStack});
-            console.log(canvas.toJSON());
             redoStack = []; // Clear redo stack on new action
         // }, 10);
     }
