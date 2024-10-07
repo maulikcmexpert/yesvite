@@ -1746,7 +1746,7 @@ function updateIconPositions(textbox) {
             myfont.load().then(function() {
                 console.log('add to undo')
 
-                addToUndoStack();
+                addToUndoStack(2);
 
                 // When font is loaded, use it.
                 var activeObject = canvas.getActiveObject();
@@ -1808,7 +1808,7 @@ function updateIconPositions(textbox) {
                 commands[command](font); // Pass font to fontName if needed
                 console.log('add to undo')
 
-                addToUndoStack(); // Save state for undo/redo functionality
+                addToUndoStack(1); // Save state for undo/redo functionality
                 canvas.renderAll(); // Re-render canvas after change
             }
         }
@@ -1828,11 +1828,11 @@ function updateIconPositions(textbox) {
     let isAddingToUndoStack = 0;
     let isInitialLoad = true; // Add a flag to check initial load
 
-    function addToUndoStack() {
+    function addToUndoStack(taget = null) {
         clearTimeout(isAddingToUndoStack);
         
         isAddingToUndoStack = setTimeout(function() {
-            console.log("adding to stack");
+            console.log("adding to stack",taget);
 
             // Add the initial state if it's the first time
             if (isInitialLoad) {
