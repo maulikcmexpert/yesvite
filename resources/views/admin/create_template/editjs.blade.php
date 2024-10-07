@@ -194,7 +194,7 @@ fabric.Textbox.prototype.controls.deleteControl = new fabric.Control({
         canvas.requestRenderAll();
     },
     actionName: 'delete',
-    render: trashIconSVG
+    render: rotateIcon
 });
 
         
