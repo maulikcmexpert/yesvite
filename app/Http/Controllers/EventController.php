@@ -1032,7 +1032,6 @@ class EventController extends Controller
             if($request->shapeImageUrl != $request->design_inner_image){
                 list($type, $data) = explode(';', $request->design_inner_image);
                 list(, $data) = explode(',', $data);
-                dd($data);
                 $imageData = base64_decode($data);
                 $newImageName = time() . $i . '-' . uniqid() . '.jpg';
                 $i++;
