@@ -1496,6 +1496,7 @@ $(".removeShapImage").click(function(){
             const pointer = canvas.getPointer(event.e);
             const activeObject = canvas.getActiveObject();
             if (activeObject && activeObject.controls && activeObject.controls.deleteControl) {
+                
                 const deleteControl = activeObject.controls.deleteControl;
 
                 // Calculate the bounding box of the control
@@ -1509,7 +1510,7 @@ $(".removeShapImage").click(function(){
                     pointer.y >= controlY - controlSize / 2 &&
                     pointer.y <= controlY + controlSize / 2
                 );
-
+                console.log({isWithinDeleteControl})
                 if (isWithinDeleteControl) {
                     canvas.remove(activeObject); // Remove the active object when delete icon is clicked
                     canvas.requestRenderAll();
