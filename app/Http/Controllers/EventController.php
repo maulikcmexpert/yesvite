@@ -1029,18 +1029,7 @@ class EventController extends Controller
         $fileName = '';
         $i = 0;
         if (isset($request->design_inner_image) && isset($request->shapeImageUrl)) {
-            if($request->shapeImageUrl != $request->design_inner_image){
-                list($type, $data) = explode(';', $request->design_inner_image);
-                list(, $data) = explode(',', $data);
-                $imageData = base64_decode($data);
-                $newImageName = time() . $i . '-' . uniqid() . '.jpg';
-                $i++;
-                $path = public_path('storage/event_images/') . $newImageName;
-                file_put_contents($path, $imageData);
-                session(['shape_image' => $newImageName]);
-
-            }else{
-                if ($request->shapeImageUrl) {
+            if($request->shapeImageUrl == $request->design_inner_image){
                     $sourceImagePath = $request->shapeImageUrl;
                     $destinationDirectory = public_path('storage/event_images/');
                     $parts = explode('canvas/', $request->shapeImageUrl);
@@ -1054,7 +1043,15 @@ class EventController extends Controller
                             session(['shape_image' => $newImageName]);
                         }
                     }
-                }
+            }else{
+                list($type, $data) = explode(';', $request->design_inner_image);
+                list(, $data) = explode(',', $data);
+                $imageData = base64_decode($data);
+                $newImageName = time() . $i . '-' . uniqid() . '.jpg';
+                $i++;
+                $path = public_path('storage/event_images/') . $newImageName;
+                file_put_contents($path, $imageData);
+                session(['shape_image' => $newImageName]);
             }
         }
         if ($request->hasFile('image')) {
