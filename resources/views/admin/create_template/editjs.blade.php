@@ -1027,11 +1027,9 @@ $(".removeShapImage").click(function(){
     }
 
     // Helper function to calculate top-center icon positions
-    function calculateTopCenterIconPosition(object, iconOffset) {
+    function calculateTopCenterIconPosition(object, iconOffset = 20) {
         const rotateControl = textbox.oCoords.mtr; // Get the middle top rotate control
-        const { x, y } = rotateControl;
-
-        const iconOffset = 20; // Adjust as needed to position the icons
+        const { x, y } = rotateControl;     
         const copyIconPosition = { left: x + iconOffset, top: y }; // Right of the rotate control
         const trashIconPosition = { left: x - iconOffset, top: y }; // Left of the rotate control
 
