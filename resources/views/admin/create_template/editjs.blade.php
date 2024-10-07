@@ -1075,7 +1075,7 @@ $(".removeShapImage").click(function(){
 
     // Function to update the icon positions
     function updateIconPositions(textbox) {
-        removeIcons(textbox); // Remove existing icons
+        // removeIcons(textbox); // Remove existing icons
 
         const { copyIconPosition, trashIconPosition } = calculateIconPositions(textbox);
 
