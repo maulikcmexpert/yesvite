@@ -607,20 +607,31 @@ $(".removeShapImage").click(function(){
 
         // Function to update textbox width dynamically
         const updateTextboxWidth = (textbox) => {
-            const text = textbox.text;
-            const fontSize = textbox.fontSize;
-            const fontFamily = textbox.fontFamily;
-            const charSpacing = textbox.charSpacing || 0;
+                const text = textbox.text;
+                const fontSize = textbox.fontSize;
+                const fontFamily = textbox.fontFamily;
+                const charSpacing = textbox.charSpacing || 0;
 
-            const ctx = canvas.getContext('2d');
-            ctx.font = `${fontSize}px ${fontFamily}`;
-            const measuredTextWidth = ctx.measureText(text).width;
-            const width = measuredTextWidth + (charSpacing * (text.length - 1));
-            console.log(width)
-            textbox.set('width', width);
-            textbox.setCoords();
-            canvas.renderAll();
-        };
+                const ctx = canvas.getContext('2d');
+                ctx.font = `${fontSize}px ${fontFamily}`;
+
+                const measuredTextWidth = ctx.measureText(text).width;
+                const calculatedWidth = measuredTextWidth + (charSpacing * (text.length - 1));
+
+                // Define a maximum width to avoid large textboxes
+                const maxWidth = 400; // Adjust this value based on your layout
+                const width = Math.min(calculatedWidth, maxWidth); // Cap the width
+
+                // Handle text wrapping for large texts
+                textbox.set('width', width);
+                textbox.set('textAlign', 'left'); // Ensure text wraps within the textbox
+                textbox.setCoords();
+                
+                // Set to 'clipTo' or 'overflow' if necessary based on design
+                textbox.set('noScaleCache', false); // Redraw the text after resizing
+                canvas.renderAll();
+            };
+
 
         // Set font size function
         const setFontSize = () => {
