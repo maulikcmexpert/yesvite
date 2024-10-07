@@ -1016,33 +1016,34 @@ class EventController extends Controller
 
     public function saveTempDesign(Request $request)
     {
-        dd($request->design_inner_image);
+        $fileNames = '';
+        $fileName = '';
         $i = 0;
         if (!empty($request->design_inner_image)) {
             list($type, $data) = explode(';', $request->design_inner_image);
             list(, $data) = explode(',', $data);
+            dd($data);
             $imageData = base64_decode($data);
-            $fileName = time() . $i . '-' . uniqid() . '.jpg';
+            $fileNames = time() . $i . '-' . uniqid() . '.jpg';
             $i++;
 
-            $path = public_path('storage/event_images/') . $fileName;
+            $path = public_path('storage/event_images/') . $fileNames;
 
             file_put_contents($path, $imageData);
-            $savedFiles[] = [
-                'fileName' => $fileName,
-                'deleteId' => $imageSource['deleteId']
-            ];
+            
         }
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $fileName = time() . '-' . $file->getClientOriginalName();
             $path = $file->move(public_path('storage/event_images'), $fileName);
             session(['desgin' => $fileName]);
-            // dd(session::get('user_ids'));
-            return response()->json(['status' => 'Image saved successfully', 'image' => $fileName]);
+        }
+        if($fileName != ''){
+            return response()->json(['status' => 'Image saved successfully', 'image' => $fileName,'shape_image' => $fileNames ]);
+        }else{
+            return response()->json(['status' => 'No image uploaded'], 400);
         }
 
-        return response()->json(['status' => 'No image uploaded'], 400);
     }
 
     public function addNewGroup(Request $request)
