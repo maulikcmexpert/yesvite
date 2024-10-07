@@ -1796,7 +1796,6 @@ function updateIconPositions(textbox) {
             if (commands[command]) {
                 commands[command](font); // Pass font to fontName if needed
                 addToUndoStack(); // Save state for undo/redo functionality
-
                 canvas.renderAll(); // Re-render canvas after change
             }
         }
