@@ -1016,6 +1016,23 @@ class EventController extends Controller
 
     public function saveTempDesign(Request $request)
     {
+        dd($request->design_inner_image);
+        $i = 0;
+        if (!empty($request->design_inner_image)) {
+            list($type, $data) = explode(';', $request->design_inner_image);
+            list(, $data) = explode(',', $data);
+            $imageData = base64_decode($data);
+            $fileName = time() . $i . '-' . uniqid() . '.jpg';
+            $i++;
+
+            $path = public_path('storage/event_images/') . $fileName;
+
+            file_put_contents($path, $imageData);
+            $savedFiles[] = [
+                'fileName' => $fileName,
+                'deleteId' => $imageSource['deleteId']
+            ];
+        }
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $fileName = time() . '-' . $file->getClientOriginalName();
