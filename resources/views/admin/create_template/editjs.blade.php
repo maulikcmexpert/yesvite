@@ -1857,6 +1857,8 @@ function updateIconPositions(textbox) {
           
             undoStack.push(canvas.toJSON());
             console.log({undoStack});
+            console.log("{undoStack})";
+
             redoStack = []; // Clear redo stack on new action
         // }, 10);
     }
