@@ -1916,9 +1916,14 @@ function updateIconPositions(textbox) {
         });
     }
  
-
-    document.getElementById('undo').addEventListener('click', undo);
-    document.getElementById('redo').addEventListener('click', redo);
+    $("#undo").click(function(){
+        undo();
+    })
+    $("#redo").click(function(){
+        redo();
+    })
+    // document.getElementById('undo').addEventListener('click', undo);
+    // document.getElementById('redo').addEventListener('click', redo);
 
        
 
