@@ -1808,7 +1808,7 @@ function updateIconPositions(textbox) {
                 commands[command](font); // Pass font to fontName if needed
                 console.log('add to undo')
 
-                addToUndoStack(); // Save state for undo/redo functionality
+                //addToUndoStack(); // Save state for undo/redo functionality
                 canvas.renderAll(); // Re-render canvas after change
             }
         }
