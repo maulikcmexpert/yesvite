@@ -1561,10 +1561,11 @@ $(".removeShapImage").click(function(){
         });
 
         function addEditableTextbox(left, top, textContent) {
+
             var textbox = new fabric.Textbox(textContent, {
                 left: left,
                 top: top,
-                width: 200,
+                // width: 100,
                 fontSize: 20,
                 backgroundColor: 'rgba(0, 0, 0, 0)', // Set background to transparent
                 textAlign: 'center',
