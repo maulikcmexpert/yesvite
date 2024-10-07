@@ -1032,7 +1032,6 @@ class EventController extends Controller
         if (isset($request->design_inner_image) && isset($request->shapeImageUrl)) {
             if($request->shapeImageUrl == $request->design_inner_image){
                     $sourceImagePath = $request->shapeImageUrl;
-
                     $destinationDirectory = public_path('storage/event_images/');
                     $parts = explode('canvas/', $request->shapeImageUrl);
                     $imageName = end($parts);
