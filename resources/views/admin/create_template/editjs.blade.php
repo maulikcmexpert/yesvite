@@ -1830,6 +1830,7 @@ function updateIconPositions(textbox) {
     function addToUndoStack() {
         clearTimeout(isAddingToUndoStack)      
         isAddingToUndoStack = setTimeout(function(){
+            console.log("adding stack");            
             undoStack.push(canvas.toJSON());
             console.log(undoStack);
             redoStack = []; // Clear redo stack on new action
