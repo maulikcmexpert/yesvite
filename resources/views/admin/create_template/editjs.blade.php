@@ -1913,7 +1913,7 @@ $(".removeShapImage").click(function(){
             }else{
                 $('#undoButton').find('svg path').attr('fill', '#CBD5E1');  
             }
-            console.log({undoStack});
+            console.log(undoStack.length);
 
             redoStack = []; // Clear redo stack on new action
         // }, 10);
