@@ -958,38 +958,6 @@ $(".removeShapImage").click(function(){
             };
         }
 
-    function removeIcons(textbox) {
-        if (textbox.trashIcon) {
-            canvas.remove(textbox.trashIcon);
-            textbox.trashIcon = null;
-        }
-        if (textbox.copyIcon) {
-            canvas.remove(textbox.copyIcon);
-            textbox.copyIcon = null;
-        }
-    }
-
-    function calculateIconPosition(corner, offset, degreeOffset) {
-        const adjustedX = corner.x - offset;
-        const adjustedY = degreeOffset ? corner.y + degreeOffset : corner.y - offset;
-        return { left: adjustedX, top: adjustedY };
-    }
-
-    function createIcon(iconSVG, position, eventHandler) {
-        fabric.loadSVGFromString(iconSVG, function (objects, options) {
-            const icon = fabric.util.groupSVGElements(objects, options);
-            icon.set({
-                left: position.left,
-                top: position.top,
-                selectable: false,
-                evented: true,
-                hasControls: false,
-            });
-            icon.on('mousedown', eventHandler);
-            canvas.add(icon);
-            return icon;
-        });
-    }
     const trashIconSVG = `<svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g filter="url(#filter0_d_5633_67674)">
             <rect x="2.70312" y="2.37207" width="23.9674" height="23.9674" rx="11.9837" fill="white" shape-rendering="crispEdges"/>
@@ -1007,56 +975,115 @@ $(".removeShapImage").click(function(){
         <path fill-rule="evenodd" clip-rule="evenodd" d="M17.6283 16.3538V10.3619C17.6283 9.81039 17.1812 9.36328 16.6297 9.36328H10.6378C10.0863 9.36328 9.63916 9.81039 9.63916 10.3619V16.3538C9.63916 16.9053 10.0863 17.3524 10.6378 17.3524H16.6297C17.1812 17.3524 17.6283 16.9053 17.6283 16.3538ZM10.6379 10.362H16.6298V16.3539H10.6379V10.362ZM18.6271 17.3525V11.3607C19.1786 11.3607 19.6257 11.8078 19.6257 12.3593V17.3525C19.6257 18.4556 18.7315 19.3498 17.6284 19.3498H12.6352C12.0837 19.3498 11.6366 18.9027 11.6366 18.3512H17.6284C18.1799 18.3512 18.6271 17.9041 18.6271 17.3525Z" fill="#0F172A"/>
         </g>
         </svg>`;
+    // Helper function to remove existing icons
+    function removeIcons(textbox, iconTypes = ['trashIcon', 'copyIcon']) {
+        iconTypes.forEach(iconType => {
+            if (textbox[iconType]) {
+                canvas.remove(textbox[iconType]);
+                textbox[iconType] = null; // Clear reference
+            }
+        });
+        canvas.renderAll();
+    }
+
+    // Helper function to load an SVG icon and place it on the canvas
+    function loadIcon(textbox, iconSVG, iconPosition, iconType, eventHandler, degreeOffset = 0) {
+        fabric.loadSVGFromString(iconSVG, function(objects, options) {
+            const icon = fabric.util.groupSVGElements(objects, options);
+            icon.set({
+                left: iconPosition.x + 6,
+                top: iconPosition.y + degreeOffset,
+                selectable: false,
+                evented: true,
+                hasControls: false,
+            });
+            textbox[iconType] = icon;
+            
+            icon.on('mousedown', eventHandler);
+            canvas.add(icon);
+            canvas.bringToFront(icon);
+        });
+    }
+
+    // Helper function to calculate icon positions
+    function calculateIconPosition(objectCorners, iconOffset) {
+        return {
+            copyIconPos: { x: objectCorners.tl.x - iconOffset, y: objectCorners.tl.y - iconOffset },
+            trashIconPos: { x: objectCorners.tr.x - iconOffset, y: objectCorners.tr.y - iconOffset },
+        };
+    }
+
+    // Function to update the icon positions
     function updateIconPositions(textbox) {
         removeIcons(textbox);
-        canvas.renderAll();
-
-        let degree = textbox.angle >= 120 && textbox.angle <= 300;
-        const iconOffset = 20;
-        const degreeOffset = degree ? 20 : -6;
-
         
+        let degreeOffset = (textbox.angle >= 120 && textbox.angle <= 300) ? 20 : -6;
+       
+        const iconOffset = 20;
 
-        const objectCorners = textbox.oCoords;
-        const trashIconPosition = calculateIconPosition(objectCorners.tr, iconOffset, degreeOffset);
-        const copyIconPosition = calculateIconPosition(objectCorners.tl, iconOffset, degreeOffset);
-
-        textbox.trashIcon = createIcon(trashIconSVG, trashIconPosition, () => {
-            console.log('Trash icon clicked! Deleting textbox.');
-            deleteTextbox(textbox);
-        });
-
-        textbox.copyIcon = createIcon(copyIconSVG, copyIconPosition, () => {
-            console.log('Copy icon clicked!');
-            cloneTextbox(textbox);
-        });
+        const objectCorners = textbox.oCoords; // Get the coordinates of the textbox corners
+        const { copyIconPos, trashIconPos } = calculateIconPosition(objectCorners, iconOffset);
+        
+        loadIcon(
+            textbox,
+            trashIconSVG,
+            trashIconPos,
+            'trashIcon',
+            function() {
+                console.log('Trash icon clicked! Deleting textbox.');
+                deleteTextbox(textbox);
+            },
+            degreeOffset
+        );
+        
+        loadIcon(
+            textbox,
+            copyIconSVG,
+            copyIconPos,
+            'copyIcon',
+            function() {
+                console.log('Copy icon clicked!');
+                cloneTextbox(textbox);
+            },
+            degreeOffset
+        );
 
         canvas.bringToFront(textbox);
         canvas.renderAll();
     }
 
+    // Function to add icons to a new textbox
     function addIconsToTextbox(textbox) {
-        removeIcons(textbox);
-        canvas.renderAll();
-
+        removeIcons(textbox); // Clear any previous icons     
         const iconOffset = 20;
 
-        const trashIconPosition = { left: textbox.left + textbox.width * textbox.scaleX - iconOffset, top: textbox.top - iconOffset };
-        const copyIconPosition = { left: textbox.left - iconOffset, top: textbox.top - iconOffset };
+        const objectCorners = textbox.oCoords; // Get the coordinates of the textbox corners
+        const { copyIconPos, trashIconPos } = calculateIconPosition(objectCorners, iconOffset);
+        
+        loadIcon(
+            textbox,
+            trashIconSVG,
+            trashIconPos,
+            'trashIcon',
+            function() {
+                console.log('Trash icon clicked! Deleting textbox.');
+                deleteTextbox(textbox);
+            }
+        );
 
-        textbox.trashIcon = createIcon(trashIconSVG, trashIconPosition, () => {
-            console.log('Trash icon clicked');
-            deleteTextbox(textbox);
-        });
-
-        textbox.copyIcon = createIcon(copyIconSVG, copyIconPosition, () => {
-            console.log('Copy icon clicked');
-            cloneTextbox(textbox);
-        });
-
+        loadIcon(
+            textbox,
+            copyIconSVG,
+            copyIconPos,
+            'copyIcon',
+            function() {
+                console.log('Copy icon clicked!');
+                cloneTextbox(textbox);
+            }
+        );
+        
         canvas.renderAll();
     }
-
 
         // function updateIconPositions(textbox) {
         //     if (textbox.trashIcon) {
