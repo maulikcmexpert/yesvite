@@ -150,13 +150,12 @@
         fabric.Textbox.prototype.controls.mtr = new fabric.Control({
             x: 0,
             y: -0.5,
-            offsetY: -30,
+            offsetY: -20,
             cursorStyle: 'pointer',
             actionHandler: fabric.controlsUtils.rotationWithSnapping,
             actionName: 'rotate',
             render: renderIcon,
             cornerSize: 28,
-            withConnection: true
         });
 
 
@@ -172,7 +171,7 @@
             },
             render: renderDeleteIcon,
             cornerSize: 28,
-            withConnection: true
+            withConnection: false // Disable the line connection
         });
         
         
