@@ -616,7 +616,7 @@ $(".removeShapImage").click(function(){
             ctx.font = `${fontSize}px ${fontFamily}`;
             const measuredTextWidth = ctx.measureText(text).width;
             const width = measuredTextWidth + (charSpacing * (text.length - 1));
-
+            console.log(width)
             textbox.set('width', width);
             textbox.setCoords();
             canvas.renderAll();
