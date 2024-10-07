@@ -1293,7 +1293,6 @@ console.log(2)
     $(".removeShapImage").click(function(){
         $("#imageWrapper").hide();
         $("#user_image").attr("src","");
-        $('.photo-slider-wrp').show()
     
     })
 
