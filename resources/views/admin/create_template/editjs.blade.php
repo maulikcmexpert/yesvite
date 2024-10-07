@@ -1776,8 +1776,8 @@ function updateIconPositions(textbox) {
                 },
                 fontName: (font) => {
                     if (font) {
-                        loadAndUse(font);
                         addToUndoStack();
+                        loadAndUse(font);
                     }
                 },
                 justifyLeft: () => activeObject.set('textAlign', 'left'),
@@ -1795,8 +1795,9 @@ function updateIconPositions(textbox) {
             // Execute the corresponding command
             if (commands[command]) {
                 commands[command](font); // Pass font to fontName if needed
-                canvas.renderAll(); // Re-render canvas after change
                 addToUndoStack(); // Save state for undo/redo functionality
+
+                canvas.renderAll(); // Re-render canvas after change
             }
         }
 
