@@ -138,9 +138,9 @@
     background: none !important;
 }
 
-/* .edit-image-main-top-icons button svg path {
+.edit-image-main-top-icons button svg path {
     fill: var(--secondryColor);
-} */
+}
 
 .image-edit-inner-img {
     width: 300px;
