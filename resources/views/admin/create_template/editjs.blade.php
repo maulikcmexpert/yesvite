@@ -1119,9 +1119,7 @@ $(".removeShapImage").click(function(){
         const iconOffset = 20; 
 
         const copyIconPosition = { left: x + iconOffset, top: y }; 
-        const trashIconPosition = { left: x - iconOffset, top: y }; 
-
-        console.log(copyIconPosition)
+        const trashIconPosition = { left: x - iconOffset, top: y };        
 
         fabric.loadSVGFromString(copyIconSVG, function(objects, options) {
             let icon = fabric.util.groupSVGElements(objects, options);
@@ -1149,7 +1147,7 @@ $(".removeShapImage").click(function(){
             let icon = fabric.util.groupSVGElements(objects, options);
             icon.set({
                 left: trashIconPosition.left,
-                top: trashIconPosition.top,
+                top: trashIconPosition.top+20,
                 selectable: false,
                 evented: true,
                 hasControls: false,
