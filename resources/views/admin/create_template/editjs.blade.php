@@ -983,9 +983,7 @@ $(".removeShapImage").click(function(){
                 canvas.remove(textbox[iconType]);
                 textbox[iconType] = null; // Clear reference
             }
-        });
-        // canvas.remove(textbox.copyIcon);
-        // textbox.copyIcon = null
+        });      
         canvas.renderAll();
     }
 
@@ -1009,23 +1007,34 @@ $(".removeShapImage").click(function(){
     }
 
     // Helper function to calculate icon positions
-    function calculateIconPosition(objectCorners, iconOffset) {
-        return {
-            copyIconPos: { x: objectCorners.tl.x - iconOffset, y: objectCorners.tl.y - iconOffset },
-            trashIconPos: { x: objectCorners.tr.x - iconOffset, y: objectCorners.tr.y - iconOffset },
-        };
-    }
+    function calculateIconPosition(objectCorners, iconOffset, angle) {
+            const radians = fabric.util.degreesToRadians(angle);
+            
+            const copyIconPos = {
+                x: objectCorners.tl.x - iconOffset * Math.cos(radians),
+                y: objectCorners.tl.y - iconOffset * Math.sin(radians)
+            };
+
+            const trashIconPos = {
+                x: objectCorners.tr.x + iconOffset * Math.cos(radians),
+                y: objectCorners.tr.y - iconOffset * Math.sin(radians)
+            };
+
+            return { copyIconPos, trashIconPos };
+        }
 
     // Function to update the icon positions
     function updateIconPositions(textbox) {
         removeIcons(textbox);
-        console.log(textbox.angle)
+    
+        const angle = textbox.angle;
+        console.log((angle))
         let degreeOffset = (textbox.angle >= 120 && textbox.angle <= 300) ? 20 : -6;
        
-        const iconOffset = 20;
+        const iconOffset = 30;
 
         const objectCorners = textbox.oCoords; // Get the coordinates of the textbox corners
-        const { copyIconPos, trashIconPos } = calculateIconPosition(objectCorners, iconOffset);
+        const { copyIconPos, trashIconPos } = calculateIconPosition(objectCorners, iconOffset,angle);
         
         loadIcon(
             textbox,
@@ -1036,7 +1045,7 @@ $(".removeShapImage").click(function(){
                 console.log('Trash icon clicked! Deleting textbox.');
                 deleteTextbox(textbox);
             },
-            degreeOffset
+            0
         );
         
         loadIcon(
@@ -1048,7 +1057,7 @@ $(".removeShapImage").click(function(){
                 console.log('Copy icon clicked!');
                 cloneTextbox(textbox);
             },
-            degreeOffset
+            0
         );
 
         canvas.bringToFront(textbox);
