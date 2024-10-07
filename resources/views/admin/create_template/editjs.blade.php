@@ -943,6 +943,7 @@ $(".removeShapImage").click(function(){
             //     findTextboxCenter(text);
             // });
             canvas.add(text);
+            updateIconPositions(text)
             addIconsToTextbox(text);
             canvas.renderAll();
             findTextboxCenter(text);
@@ -1056,35 +1057,25 @@ $(".removeShapImage").click(function(){
 
     // Function to add icons to a new textbox
     function addIconsToTextbox(textbox) {
-        removeIcons(textbox); // Clear any previous icons     
-        const iconOffset = 20;
-
-        const objectCorners = textbox.oCoords; // Get the coordinates of the textbox corners
-        const { copyIconPos, trashIconPos } = calculateIconPosition(objectCorners, iconOffset);
-        
-        loadIcon(
-            textbox,
-            trashIconSVG,
-            trashIconPos,
-            'trashIcon',
-            function() {
-                console.log('Trash icon clicked! Deleting textbox.');
-                deleteTextbox(textbox);
-            }
-        );
-
-        loadIcon(
-            textbox,
-            copyIconSVG,
-            copyIconPos,
-            'copyIcon',
-            function() {
-                console.log('Copy icon clicked!');
-                cloneTextbox(textbox);
-            }
-        );
-        
-        canvas.renderAll();
+        textbox.on('moving', function() {
+            updateIconPositions(textbox);
+        });
+        textbox.on('scaling', function() {
+            updateIconPositions(textbox);
+        });
+        textbox.on('rotating', function () {
+            updateIconPositions(textbox); // Call the function to reposition icons
+        });
+        // Event listener to manage icon visibility when a textbox is clicked
+        textbox.on('mousedown', function() {
+            canvas.getObjects('textbox').forEach(function(tb) {
+                if (tb.trashIcon) tb.trashIcon.set('visible', false); // Hide other icons
+                if (tb.copyIcon) tb.copyIcon.set('visible', false);
+            });
+            if (textbox.trashIcon) textbox.trashIcon.set('visible', true); // Show current icons
+            if (textbox.copyIcon) textbox.copyIcon.set('visible', true);
+            canvas.renderAll(); // Re-render the canvas
+        });     
     }
 
         // function updateIconPositions(textbox) {
@@ -1349,6 +1340,7 @@ $(".removeShapImage").click(function(){
             canvas.add(clonedTextbox);
 
             // Add icons to the cloned textbox
+            updateIconPositions(cloneTextbox)
             addIconsToTextbox(clonedTextbox);
 
             canvas.renderAll();
@@ -1443,6 +1435,7 @@ $(".removeShapImage").click(function(){
             if (options.target && options.target.type === 'textbox') {
                 canvas.setActiveObject(options.target);
                 addIconsToTextbox(options.target)
+                updateIconPositions(options.target)
             } else {
                 // alert();
                 canvas.getObjects('textbox').forEach(function(tb) {
@@ -1522,6 +1515,7 @@ $(".removeShapImage").click(function(){
 
             canvas.add(textbox);
             canvas.setActiveObject(textbox);
+            updateIconPositions(textbox)
             addIconsToTextbox(textbox); // Make it the active object for editing
             canvas.renderAll();
         }
