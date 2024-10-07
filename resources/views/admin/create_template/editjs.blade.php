@@ -1777,6 +1777,7 @@ function updateIconPositions(textbox) {
                 fontName: (font) => {
                     if (font) {
                         loadAndUse(font);
+                        addToUndoStack();
                     }
                 },
                 justifyLeft: () => activeObject.set('textAlign', 'left'),
