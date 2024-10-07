@@ -19,7 +19,7 @@ $(document).on("click", ".design-card", function() {
     var id = $(this).data("id");
     $(".edit_design_tem").attr("data-image", imageUrl);
     if (eventData.textData != null && eventData.temp_id != null && eventData.temp_id == id) {
-
+        dbJson = eventData.textData;
     } else {
         //console.log(json);
         dbJson = json;
