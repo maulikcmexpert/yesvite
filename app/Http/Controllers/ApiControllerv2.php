@@ -13049,7 +13049,7 @@ class ApiControllerv2 extends Controller
             $template_url = asset('storage/canvas/' . $image);
             $shape_img_url = '';
             $shapeImageData = '';
-            if($shape_image!=''){
+            if ($shape_image != '') {
                 $shape_img_url = asset('storage/canvas/' . $shape_image);
                 $shapeImageData = $resp['shapeImageData'];
             }
@@ -13057,7 +13057,7 @@ class ApiControllerv2 extends Controller
             $udpated = $resp['textElements'];
             foreach ($udpated as $k => $value) {
                 foreach ($value as $key => $val) {
-
+                    $val = strtolower($val);
                     switch ($val) {
                         case 'event_name':
                             if (!empty($request->event_name)) {
