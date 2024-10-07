@@ -1493,6 +1493,17 @@ $(".removeShapImage").click(function(){
                     if (tb.copyIcon) tb.copyIcon.set('visible', false);
                 });
             }
+
+            const activeObject = canvas.getActiveObject();
+            if (activeObject && activeObject.controls && activeObject.controls.deleteControl) {
+                const deleteControl = activeObject.controls.deleteControl;
+                const isWithinDeleteControl = deleteControl.hitTest(pointer.x, pointer.y);
+
+                if (isWithinDeleteControl) {
+                    canvas.remove(activeObject); // Remove the active object when delete icon is clicked
+                    canvas.requestRenderAll();
+                }
+            }
         });
 
         canvas.on('mouse:up', function(options) {
