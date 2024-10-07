@@ -1497,7 +1497,18 @@ $(".removeShapImage").click(function(){
             const activeObject = canvas.getActiveObject();
             if (activeObject && activeObject.controls && activeObject.controls.deleteControl) {
                 const deleteControl = activeObject.controls.deleteControl;
-                const isWithinDeleteControl = deleteControl.hitTest(pointer.x, pointer.y);
+
+                // Calculate the bounding box of the control
+                const controlSize = deleteControl.cornerSize; // Assuming cornerSize is the size of your icon
+                const controlX = activeObject.left + deleteControl.x * activeObject.width + deleteControl.offsetX;
+                const controlY = activeObject.top + deleteControl.y * activeObject.height + deleteControl.offsetY;
+
+                const isWithinDeleteControl = (
+                    pointer.x >= controlX - controlSize / 2 &&
+                    pointer.x <= controlX + controlSize / 2 &&
+                    pointer.y >= controlY - controlSize / 2 &&
+                    pointer.y <= controlY + controlSize / 2
+                );
 
                 if (isWithinDeleteControl) {
                     canvas.remove(activeObject); // Remove the active object when delete icon is clicked
