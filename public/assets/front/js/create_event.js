@@ -3115,11 +3115,21 @@ function handleActivePlan(target) {
     $(target).addClass('active');
     $(target).find('.plan_check').prop('checked', true); 
 }
-$(document).on("click", ".li_design", function () {
-    console.log(eventData);
+$(document).on("click", ".li_design .edit-design", function (e) {
+    e.preventDefault();
     if($('.edit-design').hasClass('active')){
         return;
     }
+});
+
+$(document).on("click", ".li_design .pick-card", function (e) {
+    e.preventDefault();
+    li_design_click();
+});
+
+
+
+function li_design_click(){
     $('.design-span').addClass('active');
     if (
         eventData.event_type != "" &&
@@ -3154,7 +3164,7 @@ $(document).on("click", ".li_design", function () {
         var subclass = ".side-bar-sub-list";
         handleActiveClass('.li_design');
     }
-});
+}
 
 $(document).on("click", ".li_event_detail", function () {
     $(".step_1").show();
