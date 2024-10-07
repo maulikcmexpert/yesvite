@@ -821,11 +821,14 @@ $(".removeShapImage").click(function(){
 
         // Update color picker based on the selected object's current font or background color
         function updateColorPicker() {
-            addToUndoStack(canvas)
+           
             const activeObject = canvas.getActiveObject();
             const selectedColorType = document.querySelector('input[name="colorType"]:checked').value;
 
             if (activeObject && activeObject.type === 'textbox') {
+                console.log("added to undo")
+                addToUndoStack(canvas)
+
                 if (selectedColorType === 'font') {
 
                     $('#color-picker').spectrum('set', activeObject.fill || '#000000'); // Set font color in picker
@@ -1854,10 +1857,15 @@ function updateIconPositions(textbox) {
         console.log(canvas.toJSON());
         
         // isAddingToUndoStack = setTimeout(function() {
+            console.log({undoStack});
+
+            console.log("beofre {undoStack}");
+
           
             undoStack.push(canvas.toJSON());
+            console.log("after {undoStack}");
+
             console.log({undoStack});
-            console.log("{undoStack}");
 
             redoStack = []; // Clear redo stack on new action
         // }, 10);
