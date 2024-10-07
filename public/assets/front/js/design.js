@@ -2253,7 +2253,7 @@ console.log(1)
 
 function getTextDataFromCanvas() {
     var objects = canvas.getObjects();
-
+    console.log(objects);
     var textData = [];
 
     objects.forEach(function(obj) {
@@ -2281,7 +2281,7 @@ function getTextDataFromCanvas() {
             });
         }
     });
-
+    
     const imageWrapperRect = imageWrapper.getBoundingClientRect();
     var id = $('#template_id').val();
     const width = userImageElement.clientWidth;
