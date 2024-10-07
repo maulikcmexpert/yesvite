@@ -1025,66 +1025,66 @@ $(".removeShapImage").click(function(){
     }
 
     // Helper function to calculate top-center icon positions
-function calculateTopCenterIconPosition(object, iconOffset) {
-    const radians = fabric.util.degreesToRadians(object.angle);
+    function calculateTopCenterIconPosition(object, iconOffset) {
+        const radians = fabric.util.degreesToRadians(object.angle);
 
-    // Get the top-center point of the object
-    const centerX = (object.oCoords.tl.x + object.oCoords.tr.x) / 2;
-    const centerY = (object.oCoords.tl.y + object.oCoords.tr.y) / 2;
+        // Get the top-center point of the object
+        const centerX = (object.oCoords.tl.x + object.oCoords.tr.x) / 2;
+        const centerY = (object.oCoords.tl.y + object.oCoords.tr.y) / 2;
 
-    // Calculate positions of icons relative to the top center
-    const deleteIconPos = {
-        x: centerX - iconOffset * Math.cos(radians), // Left of the center
-        y: centerY - iconOffset * Math.sin(radians) // Slightly above the object
-    };
+        // Calculate positions of icons relative to the top center
+        const deleteIconPos = {
+            x: centerX - iconOffset * Math.cos(radians), // Left of the center
+            y: centerY - iconOffset * Math.sin(radians) // Slightly above the object
+        };
 
-    const copyIconPos = {
-        x: centerX + iconOffset * Math.cos(radians), // Right of the center
-        y: centerY - iconOffset * Math.sin(radians) // Slightly above the object
-    };
+        const copyIconPos = {
+            x: centerX + iconOffset * Math.cos(radians), // Right of the center
+            y: centerY - iconOffset * Math.sin(radians) // Slightly above the object
+        };
 
-    return { deleteIconPos, copyIconPos };
-}
+        return { deleteIconPos, copyIconPos };
+    }
 
-// Function to update the icon positions
-function updateIconPositions(textbox) {
-    removeIcons(textbox);
-    
-    const iconOffset = 40; // Adjust to move the icons farther from the center
-    const objectCorners = textbox.oCoords; // Get the coordinates of the object corners
+    // Function to update the icon positions
+    function updateIconPositions(textbox) {
+        removeIcons(textbox);
+        
+        const iconOffset = 40; // Adjust to move the icons farther from the center
+        const objectCorners = textbox.oCoords; // Get the coordinates of the object corners
 
-    // Calculate icon positions based on top-center alignment
-    const { deleteIconPos, copyIconPos } = calculateTopCenterIconPosition(textbox, iconOffset);
+        // Calculate icon positions based on top-center alignment
+        const { deleteIconPos, copyIconPos } = calculateTopCenterIconPosition(textbox, iconOffset);
 
-    // Add Delete icon to the left of the top center
-    loadIcon(
-        textbox,
-        trashIconSVG,
-        deleteIconPos,
-        'trashIcon',
-        function() {
-            console.log('Trash icon clicked! Deleting textbox.');
-            deleteTextbox(textbox);
-        },
-        0 // No degree offset for positioning
-    );
+        // Add Delete icon to the left of the top center
+        loadIcon(
+            textbox,
+            trashIconSVG,
+            deleteIconPos,
+            'trashIcon',
+            function() {
+                console.log('Trash icon clicked! Deleting textbox.');
+                deleteTextbox(textbox);
+            },
+            0 // No degree offset for positioning
+        );
 
-    // Add Copy icon to the right of the top center
-    loadIcon(
-        textbox,
-        copyIconSVG,
-        copyIconPos,
-        'copyIcon',
-        function() {
-            console.log('Copy icon clicked!');
-            cloneTextbox(textbox);
-        },
-        0 // No degree offset for positioning
-    );
+        // Add Copy icon to the right of the top center
+        loadIcon(
+            textbox,
+            copyIconSVG,
+            copyIconPos,
+            'copyIcon',
+            function() {
+                console.log('Copy icon clicked!');
+                cloneTextbox(textbox);
+            },
+            0 // No degree offset for positioning
+        );
 
-    canvas.bringToFront(textbox);
-    canvas.renderAll();
-}
+        canvas.bringToFront(textbox);
+        canvas.renderAll();
+    }
 
     // Function to add icons to a new textbox
     function addIconsToTextbox(textbox) {
@@ -1093,6 +1093,7 @@ function updateIconPositions(textbox) {
         });
         textbox.on('scaling', function() {
             updateIconPositions(textbox);
+            addCustomIcons(textbox)
         });
         textbox.on('rotating', function () {
             updateIconPositions(textbox); // Call the function to reposition icons
@@ -1108,7 +1109,22 @@ function updateIconPositions(textbox) {
             canvas.renderAll(); // Re-render the canvas
         });     
     }
+    const addCustomIcons = (textbox) => {
+     
+        const rotateControl = textbox.oCoords.mtr;
+        const { x, y } = rotateControl;
 
+       
+        const iconOffset = 20; 
+
+        const copyIconPosition = { left: x + iconOffset, top: y }; 
+        const trashIconPosition = { left: x - iconOffset, top: y }; 
+
+        console.log(copyIconPosition)
+        
+        // addIconToCanvas(copyIconPosition, 'copy');      
+        // addIconToCanvas(trashIconPosition, 'trash');
+    };
         // function updateIconPositions(textbox) {
         //     if (textbox.trashIcon) {
         //         canvas.remove(textbox.trashIcon);
