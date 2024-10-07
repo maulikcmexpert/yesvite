@@ -1744,10 +1744,11 @@ function updateIconPositions(textbox) {
         function loadAndUse(font) {
             var myfont = new FontFaceObserver(font);
             console.log(font);
+            addToUndoStack(canvas);
+
             myfont.load().then(function() {
                 console.log('add to undo')
 
-                addToUndoStack(canvas);
 
                 // When font is loaded, use it.
                 var activeObject = canvas.getActiveObject();
@@ -1831,25 +1832,17 @@ function updateIconPositions(textbox) {
         let undoStack = [];
     let redoStack = [];
     let isAddingToUndoStack = 0;
-    let isInitialLoad = true; // Add a flag to check initial load
-
+    
     function addToUndoStack(canvas) {
-        clearTimeout(isAddingToUndoStack);
+        // clearTimeout(isAddingToUndoStack);
         
-        isAddingToUndoStack = setTimeout(function() {
-            console.log("adding to stack");
-
-            // Add the initial state if it's the first time
-            if (isInitialLoad) {
-                undoStack.push(canvas.toJSON());
-                isInitialLoad = false; // Set to false after the first load
-            }
-
+        // isAddingToUndoStack = setTimeout(function() {
+          
             undoStack.push(canvas.toJSON());
             console.log({undoStack});
             console.log(canvas.toJSON());
             redoStack = []; // Clear redo stack on new action
-        }, 10);
+        // }, 10);
     }
 
     function undo() {
