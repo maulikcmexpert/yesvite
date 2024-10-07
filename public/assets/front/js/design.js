@@ -2253,7 +2253,7 @@ console.log(1)
 
 function getTextDataFromCanvas() {
     var objects = canvas.getObjects();
-    console.log(objects);
+    console.log(shape);
     var textData = [];
 
     objects.forEach(function(obj) {
@@ -2281,11 +2281,14 @@ function getTextDataFromCanvas() {
             });
         }
     });
-    
+    const imageWrapper = document.getElementById('imageWrapper');
+    const imgElement = document.getElementById('user_image');
+    let canvasEL = document.getElementById('imageEditor1')
+    const canvasRect = canvasEL.getBoundingClientRect();
+
     const imageWrapperRect = imageWrapper.getBoundingClientRect();
-    var id = $('#template_id').val();
-    const width = userImageElement.clientWidth;
-    const height = userImageElement.clientHeight;
+    const width = imgElement.clientWidth;
+    const height = imgElement.clientHeight;
     const left = imageWrapperRect.left - canvasRect.left;
     const top = imageWrapperRect.top - canvasRect.top;
     const centerX = left + width / 2;
