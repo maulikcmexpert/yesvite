@@ -31,7 +31,7 @@
             <div id="imageWrapper" style="position:fixed; display:none;">
                 <div class="canvas-top-icon-wrp">
                     
-                    <div class="removeShapImage">
+                    <div class="removeShapImage" style="display: none">
                         <svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g filter="url(#filter0_d_5633_67674)">
                                 <rect x="2.70312" y="2.37207" width="23.9674" height="23.9674" rx="11.9837" fill="white" shape-rendering="crispEdges"/>

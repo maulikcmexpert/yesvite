@@ -1288,6 +1288,8 @@ function bindData() {
     $(".removeShapImage").click(function(){
         // $('.resize-handle').hide();
         // $("#imageWrapper").hide();
+        $(this).hide();
+        $('.uploadShapImage').show();
         $("#user_image").attr("src",shapeImageUrl);
     })
 
@@ -1301,6 +1303,8 @@ function bindData() {
                 $("#user_image").attr("src", e.target.result).show();
             };
             reader.readAsDataURL(file);
+            $('.uploadShapImage').hide();
+            $('.removeShapImage').show();
             
         }
     })
