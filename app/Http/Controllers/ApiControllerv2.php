@@ -13114,9 +13114,9 @@ class ApiControllerv2 extends Controller
                 }
             }
             $udpated = array_values($udpated);
-            return response()->json([
+
+            $responseData = [
                 'textData' => $udpated,
-                'shapeImageData' => $shapeImageData,
                 'image' => $image,
                 'event_design_sub_category_id' => $design_id,
                 'height' => $height,
@@ -13124,7 +13124,13 @@ class ApiControllerv2 extends Controller
                 'template_url' => $template_url,
                 'shape_img_url' => $shape_img_url,
                 'is_contain_image' => true
-            ]);
+            ];
+
+            if (!empty($shapeImageData)) {
+                $responseData['shapeImageData'] = $shapeImageData;
+            }
+
+            return response()->json($responseData);
         } catch (Exception  $e) {
             return response()->json(['status' => 0, 'message' => 'something went wrong']);
         }
