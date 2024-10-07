@@ -13115,6 +13115,19 @@ class ApiControllerv2 extends Controller
             }
             $udpated = array_values($udpated);
 
+
+            // return response()->json([
+            //     'textData' => $udpated,
+            //     'shapeImageData' => $shapeImageData,
+            //     'image' => $image,
+            //     'event_design_sub_category_id' => $design_id,
+            //     'height' => $height,
+            //     'width' => $width,
+            //     'template_url' => $template_url,
+            //     'shape_img_url' => $shape_img_url,
+            //     'is_contain_image' => true
+            // ]);
+
             $responseData = [
                 'textData' => $udpated,
                 'image' => $image,
