@@ -138,46 +138,60 @@
         }
 
         var rotateIcon = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAHqSURBVHgBtZW7S8NQFMZPxFXbzUGULIJPdHBwUAgWQamDj1msg0MXHQWXCiIdHFpQKupgrVR0sovgZBEfQx0UdHBLH9bVpv0DjueksRbb5Da2/uBrm4Z7vvvde5IrgQBEdNLXDGmQJJOcxq0c6YYUkyQpCX+BisukAOkTxcRJip36bLBaY/HfBIzkQgMf1odKkv/T4JsnrJaI/lSwsQSqmaiiUTktj6l0Fm2gcO0mw8ADxfY0RcsXYMw1D3cPCbCBrzxFXDQl78o6Otp6sbNrBEddc/p1jamcTYaPIprSQH83OFpbwL+5BqHgFnR2tMP0nAfSmQ/R0Bnhhvu3d3UxqfQ7hvYjpXvRswscGJ4QJQkKTXh5uLgZ7tlFvL1PWJU44uWSzXKmM1lwOFr0pTFdxr5uYTOwSRLqhPfKAs3ShBNoWoFm+mha4fLqmpqiByxI6p9o8SCGDiL65lZrV24IbmUBQ82G2zGUPzhleJcX9DTcrvybW5n36vQ8pt+PhncsU9BZ8ywZSfhlpsLPgVQBF947PIGX1zd9Gd1T4+CedIGAJTIJl67IaAMbi1phyWmw+IpuFHLVbFg8clWsHw9YUacRH9kK1AoW90i1YRBHq2NXkMqD5keBSgqKZi+BDYyZspKkHLVnrpZxX+O67qGyL3x/AAAAAElFTkSuQmCC";
-            var img = document.createElement('img');
-            img.src = rotateIcon;
-        
-            // here's where your custom rotation control is defined
-            // by changing the values you can customize the location, size, look, and behavior of the control
-            fabric.Textbox.prototype.controls.mtr = new fabric.Control({
-              x: 0,
-              y: -0.5,
-              offsetY: -30,
-              cursorStyle: 'pointer',
-              actionHandler: fabric.controlsUtils.rotationWithSnapping,
-              actionName: 'rotate',
-              render: renderIcon,
-              cornerSize: 28,
-              withConnection: true
-            });
+        var img = document.createElement('img');
+        img.src = rotateIcon;
 
 
-            fabric.Textbox.prototype.controls.mtr = new fabric.Control({
-              x: 0,
-              y: -0.8,
-              offsetY: -30,
-              cursorStyle: 'pointer',
-              actionHandler: fabric.controlsUtils.rotationWithSnapping,
-              actionName: 'rotate',
-              render: renderIcon,
-              cornerSize: 28,
-              withConnection: true
-            });
+        var deleteIcon = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADEAAAAxCAYAAABznEEcAAAACXBIWXMAACxLAAAsSwGlPZapAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAASrSURBVHgB7VrNUtxGEO4eLbvLj41cicE5oRxSBeSQzS03lieIrznhN3D8BLafwMkxJ8gbkFtuJk/A5mJyQ7k5OFXRhrIRC5p29/6AZlhpd7SSzcFfFbXSaGakT9M/37QA+IRPKA0IFWDp8/W28rwWEPl5/Qioc3pytA8zolQS/oP1gAh3edq2w7BQa3h++ubVHhREqSSWVzeP+SeAAkDU29Hrvw6gABSUhDsrGw+hIAEBr+BTKIgalAQE/N5soQ4/2G/ZIyhAxJ3UDG3fD/woCiNwRHkkEANx1etzetL95+ggb8zyytffAFJrdJ7U59v84+zopZkT20PLOI/jzsQhoP9MnyMWM8dCKyHLHkPTr9UgQIX+8OZGONX1hRd3VzZvDkaKgLDbP0RaMy4BbHF47hAmUXLhRU2Io2nMKzc6+fc3W1rRDt9UHrQ1fNAAPjxC/mMyFLGfhUTwRzokZ5Lw/ZZPjd4hfJyHnggm8vz/k1fP5DjbJ+beBnBLCQjYFLdGx9k+cbEYQuM85O7BjWvES4uyvBgOlljOqctmN7BftnuFONaWtUgRNk+reW3wYMN7SR/MN12N9OvoON8nWEZw7xYouakOQWwzns7ZykT/Oa4IqUCepWh2v7XwwBGL979qNRZW1nvv/g2hYkgory09+G6hvhSxAcRZ/ZySHcf9pzU1d+h56iUf70KF6Cvi+uKx3IsaC4dCKKuvEwnOFY/Sx3kTzwpN6kcOEKP5g2Ru4WFW35lkRzw/vwxVYcKGKo3ytFPJYFVsviCRKxlwJCF54RpNoi+hKqCZSzxVFgkyJ0o0VuYTnFDNuZMkk4STiuWNfRfT+fFm5u1HFU34eNy1sXNaYu4KaPpEXKv9lzWHmxS3pAQq80Z90Ui9lyjZdcrdu0Q5DtfBSMxdQVYiNUfz7KyblSgczQnMJbXfdkHRmBZz142mOeVJHTcSdoSwlrwvGoFCcERazAlkRa0uuVrNyZyUxojStMkMg1HUidgntkHDUDROAx2e2mKuGbPSNd5veSQSkdhpQ0W6Z/dhdRnCYCdWGJeXEHiGqstfXSdzIm2aE9OpLmM7wIkEFwZCswUDqABomSIXgrp5/UurO9ngIsMjjbCV2aG/+6Ofh+ZnwOOoR+kQTZiZIwRuJOJmBI1eumWs8woB9svd/FSBkuikgrJtX2HygTX277yZnMxJoo/VNJYEh8w2TAWn6nkmiqjYMH3S/GJj7cakivZgKtB+RntgnFF+tKvEJ2QTz/mCFa5q53aMz5zrruPgTkLKMnhdOG5eXt6Lx9js0GH3oAAQ1Vq6OO15/UpLJtzNCa3s6XnVyfEp4UyCSBtvPUmkDlQ2TJ+IEY/zet/O7am1IRIZnte9AAlzi8p7ihaUiL6CdZDhAmcSygp38plrWGYsBbpxvmM1dSaNcY9OF/V9qPdepN5WQNo7XF7dkG90IcwA3uW1wdpUcY6YSKLQJ+C7q5s/8cDHUDV4J4lKfztOX6VRyLHVef0ZTPGGZsKAwJNJBATOBWVBHL+Oz9+++WX+zmcSbtmxyy7d0AES/hCdHP0+Te9S/qNAvu2Bp/3Bt4MZkPDqXrwLP/T3j1uB9yIQqsDDkeJyAAAAAElFTkSuQmCC";
+        var img1 = document.createElement('img');
+        img1.src = deleteIcon;
+    
+        // here's where your custom rotation control is defined
+        // by changing the values you can customize the location, size, look, and behavior of the control
+        fabric.Textbox.prototype.controls.mtr = new fabric.Control({
+            x: 0,
+            y: -0.5,
+            offsetY: -30,
+            cursorStyle: 'pointer',
+            actionHandler: fabric.controlsUtils.rotationWithSnapping,
+            actionName: 'rotate',
+            render: renderIcon,
+            cornerSize: 28,
+            withConnection: true
+        });
+
+
+        fabric.Textbox.prototype.controls.mtr = new fabric.Control({
+            x: 0.5,
+            y: -0.5,
+            offsetY: -30,
+            cursorStyle: 'pointer',
+            actionHandler: fabric.controlsUtils.rotationWithSnapping,
+            actionName: 'rotate',
+            render: renderDeleteIcon,
+            cornerSize: 28,
+            withConnection: true
+        });
         
         
             // here's where the render action for the control is defined
-            function renderIcon(ctx, left, top, styleOverride, fabricObject) {
-              var size = this.cornerSize;
-              ctx.save();
-              ctx.translate(left, top);
-              ctx.rotate(fabric.util.degreesToRadians(fabricObject.angle));
-              ctx.drawImage(img, -size / 2, -size / 2, size, size);
-              ctx.restore();
-            }
+        function renderIcon(ctx, left, top, styleOverride, fabricObject) {
+            var size = this.cornerSize;
+            ctx.save();
+            ctx.translate(left, top);
+            ctx.rotate(fabric.util.degreesToRadians(fabricObject.angle));
+            ctx.drawImage(img, -size / 2, -size / 2, size, size);
+            ctx.restore();
+        }
+
+        function renderDeleteIcon(ctx, left, top, styleOverride, fabricObject) {
+            var size = this.cornerSize;
+            ctx.save();
+            ctx.translate(left, top);
+            ctx.rotate(fabric.util.degreesToRadians(fabricObject.angle));
+            ctx.drawImage(img1, -size / 2, -size / 2, size, size);
+            ctx.restore();
+        }
         
         let currentImage = null;
 let isImageDragging = false; // Track if the image is being dragged
@@ -1054,6 +1068,8 @@ $(".removeShapImage").click(function(){
 
     // Function to update the icon positions
     function updateIconPositions(textbox) {
+        return
+
         removeIcons(textbox); // Remove existing icons
 
         const { copyIconPosition, trashIconPosition } = calculateIconPositions(textbox);
@@ -1085,6 +1101,7 @@ $(".removeShapImage").click(function(){
 
     // Function to add icons to a new textbox
     function addIconsToTextbox(textbox) {
+        return
         textbox.on('moving', function() {
             updateIconPositions(textbox);
         });
