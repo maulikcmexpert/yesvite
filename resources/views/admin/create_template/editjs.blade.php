@@ -146,8 +146,7 @@
         var img1 = document.createElement('img');
         img1.src = deleteIcon;
     
-        // here's where your custom rotation control is defined
-        // by changing the values you can customize the location, size, look, and behavior of the control
+        
         fabric.Textbox.prototype.controls.mtr = new fabric.Control({
             x: 0,
             y: -0.5,
@@ -162,9 +161,9 @@
 
 
         fabric.Textbox.prototype.controls.deleteControl = new fabric.Control({
-            x: 0.5,
+            x: 0.3,
             y: -0.5,
-            offsetY: -30,
+            offsetY: -20,
             cursorStyle: 'pointer',            
             actionHandler: (eventData, transform, x, y) => {
                 const target = transform.target;
