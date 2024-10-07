@@ -664,8 +664,6 @@ function bindData() {
                 if (shapeImageUrl) {
                     let element = staticInfo?.shapeImageData;
                     if (element.shape && element.centerX && element.centerY && element.height && element.width) {
-console.log(2)
-
                         updateClipPath(shapeImageUrl, element);
                     }
                 }
@@ -1288,9 +1286,27 @@ console.log(2)
     }
 
     $(".removeShapImage").click(function(){
-        $("#imageWrapper").hide();
-        $("#user_image").attr("src","");
-    
+        // $('.resize-handle').hide();
+        // $("#imageWrapper").hide();
+        $(this).hide();
+        $('.uploadShapImage').show();
+        $("#user_image").attr("src",shapeImageUrl);
+    })
+
+    $(document).on('change','.uploadShapImage',function(event){
+        event.preventDefault();
+
+        var file = event.target.files[0]; // Get the first file (the selected image)
+        if (file) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $("#user_image").attr("src", e.target.result).show();
+            };
+            reader.readAsDataURL(file);
+            $('.uploadShapImage').hide();
+            $('.removeShapImage').show();
+            
+        }
     })
 
     // Function to clone a textbox
