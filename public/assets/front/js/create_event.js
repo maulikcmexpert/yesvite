@@ -3126,6 +3126,10 @@ $(document).on("click", ".li_design .pick-card", function (e) {
     e.preventDefault();
     li_design_click();
 });
+$(document).on("click", ".li_design", function (e) {
+    e.preventDefault();
+    li_design_click();
+});
 
 
 
