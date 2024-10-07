@@ -607,20 +607,21 @@ $(".removeShapImage").click(function(){
 
         // Function to update textbox width dynamically
         const updateTextboxWidth = (textbox) => {
-                const text = textbox.text;
-                const fontSize = textbox.fontSize;
-                const fontFamily = textbox.fontFamily;
-                const charSpacing = textbox.charSpacing || 0;
+            const text = textbox.text || ""; // Get current text
+            const fontSize = textbox.fontSize || defaultSettings.fontSize; // Get current font size
+            const fontFamily = textbox.fontFamily || 'Arial'; // Default font family
+            const charSpacing = textbox.charSpacing || 0;
 
-                const ctx = canvas.getContext('2d');
-                ctx.font = `${fontSize}px ${fontFamily}`;
+            const ctx = canvas.getContext('2d');
+            ctx.font = `${fontSize}px ${fontFamily}`;
 
-                const measuredTextWidth = ctx.measureText(text).width;
-                const calculatedWidth = measuredTextWidth + (charSpacing * (text.length - 1));
+            const measuredTextWidth = ctx.measureText(text).width;
+            const calculatedWidth = measuredTextWidth + (charSpacing * (text.length - 1));
 
-                // Define a maximum width to avoid large textboxes
-                const maxWidth = 400; // Adjust this value based on your layout
-                const width = Math.min(calculatedWidth, maxWidth); // Cap the width
+            // Define a maximum width to avoid large textboxes
+            const maxWidth = 400; // Adjust this value based on your layout
+            const width = Math.min(calculatedWidth, maxWidth); // Cap the width
+
 
                 // Handle text wrapping for large texts
                 textbox.set('width', width);
@@ -633,62 +634,33 @@ $(".removeShapImage").click(function(){
             };
 
 
-        // Set font size function
-        const setFontSize = () => {
-            const newValue = fontSizeRange.value;
-            fontSizeInput.value = newValue;
-            fontSizeTooltip.innerHTML = `<span>${newValue}px</span>`;
+            const setLetterSpacing = () => {
+                const newValue = parseFloat(letterSpacingRange.value); // Ensure it's a number
+                letterSpacingInput.value = newValue;
+                letterSpacingTooltip.innerHTML = `<span>${newValue}</span>`;
 
-            const activeObject = canvas.getActiveObject();
-            if (activeObject && activeObject.type === 'textbox') {
-                activeObject.set('fontSize', newValue);
-                updateTextboxWidth(activeObject);
-            }
-        };
+                const activeObject = canvas.getActiveObject();
+                if (activeObject && activeObject.type === 'textbox') {
+                    activeObject.set('charSpacing', newValue); // Update letter spacing
 
-        // Set letter spacing function
-        // const setLetterSpacing = () => {
-        //     const newValue = letterSpacingRange.value;
-        //     console.log(newValue);
-        //     letterSpacingInput.value = newValue;
-        //     letterSpacingTooltip.innerHTML = `<span>${newValue}</span>`;
+                    // Now call updateTextboxWidth to handle width adjustments
+                    updateTextboxWidth(activeObject);
+                }
+            };
 
-        //     const activeObject = canvas.getActiveObject();
-        //     if (activeObject && activeObject.type === 'textbox') {
-        //         activeObject.set('charSpacing', newValue * 10); // Convert spacing to match Fabric.js scale
-        //         updateTextboxWidth(activeObject);
-        //     }
-        // };
-        const setLetterSpacing = () => {
-            const newValue = parseFloat(letterSpacingRange.value); // Ensure it's a number
-            letterSpacingInput.value = newValue;
-            letterSpacingTooltip.innerHTML = `<span>${newValue}</span>`;
+            const setFontSize = () => {
+                const newValue = fontSizeRange.value;
+                fontSizeInput.value = newValue;
+                fontSizeTooltip.innerHTML = `<span>${newValue}px</span>`;
 
-            const activeObject = canvas.getActiveObject();
-            if (activeObject && activeObject.type === 'textbox') {
-                activeObject.set('charSpacing', newValue); // Update letter spacing
+                const activeObject = canvas.getActiveObject();
+                if (activeObject && activeObject.type === 'textbox') {
+                    activeObject.set('fontSize', newValue); // Update font size
 
-                // Calculate the text width including letter spacing
-                const text = activeObject.text || ""; // Get current text
-                const fontSize = activeObject.fontSize || defaultSettings.fontSize; // Get current font size
-                const fontFamily = activeObject.fontFamily || 'Arial'; // Default font family
-
-                const ctx = canvas.getContext('2d');
-                ctx.font = `${fontSize}px ${fontFamily}`;
-                const measuredTextWidth = ctx.measureText(text).width; // Measure text width
-
-                // Calculate the total width with letter spacing
-                const totalWidth = measuredTextWidth + (newValue * (text.length - 1)); // Add letter spacing for all but the last character
-
-                // Set a maximum width to prevent the textbox from getting too wide
-                const MAX_TEXTBOX_WIDTH = 200; // Adjust this value as necessary
-                activeObject.set('width', Math.min(totalWidth, MAX_TEXTBOX_WIDTH)); // Limit the width if needed
-
-                // Ensure the textbox reflects the new width in the canvas
-                activeObject.setCoords();
-                canvas.renderAll();
-            }
-        };
+                    // Call updateTextboxWidth to adjust textbox width accordingly
+                    updateTextboxWidth(activeObject);
+                }
+            };
         // Function to update line height
         const setLineHeight = () => {
             const newValue = parseFloat(lineHeightRange.value);
