@@ -1028,11 +1028,11 @@ class EventController extends Controller
         $newImageName = '';
         $fileName = '';
         $i = 0;
-        dd($request->shapeImageUrl."====".$request->design_inner_image);
-        dd($request->design_inner_image);
+   
         if (isset($request->design_inner_image) && isset($request->shapeImageUrl)) {
             if($request->shapeImageUrl == $request->design_inner_image){
                     $sourceImagePath = $request->shapeImageUrl;
+
                     $destinationDirectory = public_path('storage/event_images/');
                     $parts = explode('canvas/', $request->shapeImageUrl);
                     $imageName = end($parts);
@@ -1040,6 +1040,7 @@ class EventController extends Controller
                         $destinationImagePath = $destinationDirectory . $imageName;
                         if (file_exists($request->shapeImageUrl)) {
                             $newImageName = time() . '_' . uniqid() . '.' . pathinfo($imageName, PATHINFO_EXTENSION);
+                            dd($newImageName);
                             $destinationImagePath = $destinationDirectory . $newImageName;
                             File::copy($sourceImagePath, $destinationImagePath);
                             session(['shape_image' => $newImageName]);
