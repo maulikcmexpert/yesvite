@@ -1837,7 +1837,7 @@ function updateIconPositions(textbox) {
         clearTimeout(isAddingToUndoStack);
         
         isAddingToUndoStack = setTimeout(function() {
-            console.log("adding to stack",taget);
+            console.log("adding to stack");
 
             // Add the initial state if it's the first time
             if (isInitialLoad) {
