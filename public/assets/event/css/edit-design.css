@@ -783,7 +783,6 @@
     text-align: right;
     width: 24px;
     height: 24px;
-    margin-left: auto;
 }
 
 .sp-alpha-enabled .sp-alpha {
@@ -796,6 +795,9 @@
     border-radius: 50%;
     background-color: #fff;
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .uploadShapImage svg{
@@ -808,6 +810,13 @@
     height: 100%;
     position: absolute;
 }
+
+.canvas-top-icon-wrp{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 
 @media only screen and (max-width: 1199px) {
     .image-edit-inner-img {
