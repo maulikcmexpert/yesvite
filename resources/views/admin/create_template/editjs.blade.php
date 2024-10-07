@@ -795,8 +795,10 @@ $(".removeShapImage").click(function(){
                 console.log('No object selected');
                 return;
             }
-
+            
             if (activeObject.type == 'textbox') {
+                console.log("added to undo")
+                addToUndoStack(canvas)
                 console.log(activeObject.type);
                 console.log(activeObject.fill);
                 if (selectedColorType == 'font') {
@@ -818,11 +820,7 @@ $(".removeShapImage").click(function(){
 
             console.log(activeObjec)
         }
-        let choosecolor = document.getElementsByClassName('sp-choose')
-        $(choosecolor).click(function(){
-            console.log("added to undo")
-            addToUndoStack(canvas)
-        })
+      
 
         // Update color picker based on the selected object's current font or background color
         function updateColorPicker() {
