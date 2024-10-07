@@ -4377,7 +4377,8 @@ function save_image_design(downloadImage,textData){
         .then(function (blob) {
             var formData = new FormData();
             formData.append("image", blob, "design.png");
-            formData.append('design_inner_image',design_inner_image)
+            formData.append('design_inner_image',design_inner_image);
+            formData.append('shapeImageUrl',shapeImageUrl);
             $.ajax({
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
