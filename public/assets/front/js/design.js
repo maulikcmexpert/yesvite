@@ -1165,11 +1165,8 @@ function bindData() {
 
     // Function to add icons to a textbox
 
-    // Function to delete a textbox
-    function deleteTextbox(textbox) {
-        canvas.remove(textbox);
-        if (textbox.trashIcon) canvas.remove(textbox.trashIcon); // Remove the trash icon
-        if (textbox.copyIcon) canvas.remove(textbox.copyIcon); // Remove the copy icon
+    function deleteTextbox() {            
+        canvas.remove(canvas.getActiveObject());           
         canvas.renderAll();
     }
 
