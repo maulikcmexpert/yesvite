@@ -663,6 +663,15 @@ function bindData() {
                     let element = staticInfo?.shapeImageData;
                     if (element.shape && element.centerX && element.centerY && element.height && element.width) {
                         // updateClipPath(shapeImageUrl, element);
+
+                        let isDragging = false;
+                        let isResizing = false;
+                        let startWidth, startHeight, startX, startY, activeHandle;
+                        let offsetX, offsetY;
+                        let shape = 'rectangle'; // Default shape
+                        current_shape = shape;
+                        let shapeChangedDuringDrag = false; // Flag to track shape change
+                        let imageUploaded = false; // Flag to track if image has been uploaded
                         const shapeImageInstance = fabric.Image.fromURL(shapeImageUrl, function(img) {
                             var oImg = img.set({ left: element.centerX, top: element.centerY}).scale(0.25);
                             canvas.add(oImg);
@@ -2117,14 +2126,7 @@ function bindData() {
         rightCenter: document.querySelector('.resize-handle.right-center')
     };
 
-    let isDragging = false;
-    let isResizing = false;
-    let startWidth, startHeight, startX, startY, activeHandle;
-    let offsetX, offsetY;
-    let shape = 'rectangle'; // Default shape
-    current_shape = shape;
-    let shapeChangedDuringDrag = false; // Flag to track shape change
-    let imageUploaded = false; // Flag to track if image has been uploaded
+   
 
     function startResize(event, handle) {
         const userImageElement = document.getElementById('user_image');
