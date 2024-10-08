@@ -2081,18 +2081,9 @@ $(".removeShapImage").click(function(){
                 obj.borderColor = "#2DA9FC";
                 obj.cornerColor = "#fff";               
                 obj.textAlign = 'center';
-                obj.setControlsVisibility({
-                        mt: false, // Hide middle top control
-                        mb: false, // Hide middle bottom control
-                        bl: true, // Hide bottom left control
-                        br: true, // Hide bottom right control
-                        tl: true, // Hide top left control
-                        tr: true, // Hide top right control
-                        ml: true,  // Show middle left control
-                        mr: true   // Show middle right control
-                    });
+                
             });
-        });
+        });     
 
         redoStack.forEach((ob, index) => {
             ob.objects = ob.objects.filter(obj => obj.type !== 'group');
@@ -2102,11 +2093,6 @@ $(".removeShapImage").click(function(){
                 obj.cornerColor = "#fff";            
                 obj.textAlign = 'center';
             });
-        });
-
-
-        redoStack.forEach((ob, index) => {
-            ob.objects = ob.objects.filter(obj => obj.type !== 'group');
         });
     }
  
