@@ -987,6 +987,7 @@ $(".removeShapImage").click(function(){
 
             text.on('scaling', function() {
                 var updatedFontSize = text.fontSize * (text.scaleX + text.scaleY) / 2;
+                console.log(updatedFontSize);
                 text.set('fontSize', updatedFontSize);
                 canvas.renderAll();
                 // findTextboxCenter(text);
