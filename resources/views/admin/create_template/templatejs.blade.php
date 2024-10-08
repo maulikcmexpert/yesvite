@@ -1,4 +1,5 @@
 <script type="text/javascript">
+    var base_url = $('#base_url').val();
     $(function() {
 
         var table = $("#template_table").DataTable({
