@@ -884,12 +884,13 @@ $(".removeShapImage").click(function(){
                 alert('Please select a textbox to reset the settings.');
             }
         });
-        let clrcanvas = {}
 
         // Initialize tooltips and values on page load
         setFontSize();
         setLetterSpacing();
         setLineHeight();
+
+        let clrcanvas = {}
         setTimeout(function(){
             let spchoose = document.getElementsByClassName('sp-choose');
             console.log({spchoose})
@@ -902,7 +903,6 @@ $(".removeShapImage").click(function(){
             })
         },1000)
        
-        // // Initialize the color picker
         // Initialize the color picker
         $('#color-picker').spectrum({
             type: "flat",
@@ -936,7 +936,7 @@ $(".removeShapImage").click(function(){
             
             if (activeObject.type == 'textbox') {
                 console.log("added to undo")
-                clrcanvas = canvas;
+                clrcanvas = JSON.parse(JSON.stringify(canvas));
                 console.log({clrcanvas})
                 console.log(activeObject.type);
                 console.log(activeObject.fill);
