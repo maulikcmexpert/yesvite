@@ -664,19 +664,15 @@ $(".removeShapImage").click(function(){
         // Initialize the color picker
         $('#color-picker').spectrum({
             type: "flat",
-            color: "#000100", // Default font color
+            color: "#0a0808", // Default font color
             showInput: true,
             allowEmpty: true, // Allows setting background to transparent
             showAlpha: true, // Allows transparency adjustment
             preferredFormat: "hex",
-            change: function(color) {
-                console.log({color})
-
-                if (color) {
-                    console.log("color")
+            change: function(color) { 
+                if (color) {                    
                     changeColor(color.toHexString()); // Use RGB string for color changes
                 } else {
-                    console.log("rgba")
                     changeColor('#000000'); // Handle transparency by default
                 }
             }
@@ -686,39 +682,30 @@ $(".removeShapImage").click(function(){
         function changeColor(selectedColor) {
             const selectedColorType = document.querySelector('input[name="colorType"]:checked').value;
             const activeObject = canvas.getActiveObject();
-            console.log("before update")
+           
 
             console.log(activeObject)
             if (!activeObject) {
-                console.log('No object selected');
+             
                 return;
             }
             
             if (activeObject.type == 'textbox') {
-                console.log("added to undo")
+              
                 clrcanvas = canvas.toJSON(); // Store the current state of the canvas
 
-                console.log({clrcanvas})
-                console.log(activeObject.type);
-                console.log(activeObject.fill);
+              
                 if (selectedColorType == 'font') {
-                    console.log("update fill")
-                    console.log(activeObject.fill);
-                    console.log(activeObject.backgroundColor);
+                   
                     activeObject.set('fill', selectedColor); // Change font color
-                    console.log(activeObject.fill);
-                    console.log(activeObject.backgroundColor);
+                    
                 } else if (selectedColorType == 'background') {
-                    console.log("update background")
+                   
                     activeObject.set('backgroundColor', selectedColor); // Change background color
                 }
                 canvas.renderAll(); // Re-render the canvas after color change
             }
 
-            const activeObjec = canvas.getActiveObject();
-            console.log("ater update")
-
-            console.log(activeObjec)
         }
       
 
