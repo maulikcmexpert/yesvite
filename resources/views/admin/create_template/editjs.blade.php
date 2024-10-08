@@ -1307,13 +1307,16 @@ $(".removeShapImage").click(function(){
             redoStack.push(canvas.toJSON()); // Save current state to redo stack
             const lastState = undoStack.pop(); // Get the last state to undo
             canvas.loadFromJSON(lastState, function () {
+
                 canvas.renderAll(); // Render the canvas after loading state
                 reattachIcons(); // Reattach the icons to the textboxes
             });            
             if(redoStack.length > 0){
                 $('#redoButton').find('svg path').attr('fill', '#0F172A');  
             }
-            setControlVisibilityForAll()
+            setTimeout(function(){
+                setControlVisibilityForAll()
+            },1000)
         }else{
             $('#undoButton').find('svg path').attr('fill', '#CBD5E1');  
         }
