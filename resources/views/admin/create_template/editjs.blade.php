@@ -1316,7 +1316,7 @@ $(".removeShapImage").click(function(){
             if(redoStack.length > 0){
                 $('#redoButton').find('svg path').attr('fill', '#0F172A');  
             }
-            etControlVisibilityForAll()
+            setControlVisibilityForAll()
         }else{
             $('#undoButton').find('svg path').attr('fill', '#CBD5E1');  
         }
@@ -1335,7 +1335,7 @@ $(".removeShapImage").click(function(){
                 $('#undoButton').find('svg path').attr('fill', '#0F172A');
             }
             $('#redoButton').find('svg path').attr('fill', '#0F172A');  
-            etControlVisibilityForAll()
+            setControlVisibilityForAll()
         }else{
             $('#redoButton').find('svg path').attr('fill', '#CBD5E1');  
         }
