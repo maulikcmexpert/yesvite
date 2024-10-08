@@ -376,10 +376,10 @@ function bindData() {
     let iw = document.getElementById('imageWrapper')
     $(iw).on('mousedown', handleMouseDown);
    
-    document.addEventListener('mousemove', resize);
-    document.addEventListener('mouseup', handleMouseUp);
+    // document.addEventListener('mousemove', resize);
+    // document.addEventListener('mouseup', handleMouseUp);
     
-    document.addEventListener('mousemove', handleMouseMove);
+    // document.addEventListener('mousemove', handleMouseMove);
 
     function loadTextDataFromDatabase() {
         if (image) {
