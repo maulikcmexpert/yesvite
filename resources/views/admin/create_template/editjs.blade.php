@@ -838,19 +838,10 @@ $(".removeShapImage").click(function(){
             };
         }
 
-  
-  
-
-
-    // Function to add icons to a new textbox
-   
-   
-        // Function to delete a textbox
         function deleteTextbox() {            
             canvas.remove(canvas.getActiveObject());           
             canvas.renderAll();
         }
-
 
         // Function to clone a textbox
         function cloneTextbox() {
@@ -870,7 +861,6 @@ $(".removeShapImage").click(function(){
                 lockScalingFlip: true,
                 editable: true,
                 borderColor: '#2DA9FC',
-                // cornerColor: 'red',
                 cornerColor: '#fff',
                 cornerSize: 6,
                 transparentCorners: false,
@@ -905,11 +895,6 @@ $(".removeShapImage").click(function(){
         // Add event listener for keyboard events
         document.addEventListener('keydown', handleKeyboardEvents);
 
-
-
-     
-
-
         function updateSelectedTextProperties() {
             var fontSize = parseInt(document.getElementById('fontSize').value, 10);
             var fontColor = document.getElementById('fontColor').value;
@@ -921,7 +906,7 @@ $(".removeShapImage").click(function(){
                 // Update text properties
                 activeObject.set({
                     fontSize: fontSize,
-                    fill: fontColor
+                    // fill: fontColor
                 });
                 activeObject.setCoords(); // Update coordinates
 
