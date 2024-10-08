@@ -96,7 +96,7 @@
                                         cornerSize: 6,
                                         transparentCorners: false,
                                         isStatic: true,
-                                        // angle: element.rotation
+                                        angle: element?.rotation ? element?.rotation : 0
                                     });
 
                                     const textWidth = textElement.calcTextWidth();
@@ -1050,7 +1050,7 @@ $(".removeShapImage").click(function(){
                         date_formate: obj.date_formate,
                         letterSpacing: obj.charSpacing / 10, // Divide by 10 to convert to standard spacing
                         lineHeight: obj.lineHeight, // Line height of the tex// Include date_formate if set
-                        // rotation: obj.angle
+                        rotation: obj.angle  
                     });
                 }
             });
