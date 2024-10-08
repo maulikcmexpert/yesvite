@@ -1355,7 +1355,9 @@ $(".removeShapImage").click(function(){
                 $('#undoButton').find('svg path').attr('fill', '#0F172A');
             }
             $('#redoButton').find('svg path').attr('fill', '#0F172A');  
-            setControlVisibilityForAll()
+            setTimeout(function(){
+                setControlVisibilityForAll()
+            },1000)
         }else{
             $('#redoButton').find('svg path').attr('fill', '#CBD5E1');  
         }
