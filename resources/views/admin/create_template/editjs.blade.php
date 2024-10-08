@@ -96,7 +96,7 @@
                                         cornerSize: 6,
                                         transparentCorners: false,
                                         isStatic: true,
-                                        angle: element.rotation
+                                        // angle: element.rotation
                                     });
 
                                     const textWidth = textElement.calcTextWidth();
