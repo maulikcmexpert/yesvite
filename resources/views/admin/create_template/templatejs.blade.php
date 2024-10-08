@@ -109,7 +109,7 @@
                 formData.append('category_id', category_id);
 
                 fetch('/get_all_subcategory', {
-                        method: 'POST',
+                        // method: 'POST',
                         headers: {
                             // 'Content-Type': 'application/json', // Set content type to JSON
                             'X-CSRF-TOKEN': csrfToken // Include CSRF token
