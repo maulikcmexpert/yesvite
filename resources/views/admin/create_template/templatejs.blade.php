@@ -104,15 +104,15 @@
 
 
                 var category_id = $(this).val();
-                fetch('/get_all_subcategory', {
-                        method: 'GET',
+                fetch(`/get_all_subcategory/${category_id}`, {
+                        method: 'POST',
                         headers: {
                             // 'Content-Type': 'application/json', // Set content type to JSON
                             'X-CSRF-TOKEN': csrfToken // Include CSRF token
                         },
-                        body: {
-                            category_id: category_id
-                        }
+                        // body: {
+                        //     category_id: category_id
+                        // }
                     })
                     .then(response => response.json())
                     .then(data => {

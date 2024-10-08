@@ -235,7 +235,7 @@ class EditTempalteController extends Controller
         return response()->json($data);
     }
 
-    public function get_all_subcategory(Request $request)
+    public function get_all_subcategory($id)
     {
         dd(1);
         $category_id = $request->input('category_id');
