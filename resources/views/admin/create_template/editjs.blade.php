@@ -1278,24 +1278,21 @@ $(".removeShapImage").click(function(){
     let undoStack = [];
     let redoStack = [];
     let isAddingToUndoStack = 0;
-    function setControlVisibilityForAll() {
-    // Get all objects on the canvas
-    canvas.getObjects().forEach((obj) => {
-        obj.setControlsVisibility({
-            mt: false, // Hide middle top control
-            mb: false, // Hide middle bottom control
-            bl: true,  // Show bottom left control
-            br: true,  // Show bottom right control
-            tl: true,  // Show top left control
-            tr: true,  // Show top right control
-            ml: true,  // Show middle left control
-            mr: true   // Show middle right control
-        });
-    });
-
-    // Re-render the canvas to apply changes
-    canvas.renderAll();
-}
+    function setControlVisibilityForAll() {  
+        canvas.getObjects().forEach((obj) => {
+            obj.setControlsVisibility({
+                mt: false, 
+                mb: false, 
+                bl: true,  
+                br: true,  
+                tl: true, 
+                tr: true, 
+                ml: true,  
+                mr: true   
+            });
+        });    
+        canvas.renderAll();
+    }
     function addToUndoStack(canvas) {          
         undoStack.push(canvas.toJSON());          
         if(undoStack.length > 0){
@@ -1342,6 +1339,7 @@ $(".removeShapImage").click(function(){
     }
 
     function reattachIcons() {
+        console.log(undoStack)
         undoStack.forEach((ob, index) => {
             ob.objects = ob.objects.filter(obj => obj.type !== 'group');
             ob.objects.forEach(obj => {
