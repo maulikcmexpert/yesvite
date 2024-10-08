@@ -662,15 +662,8 @@ function bindData() {
                 if (shapeImageUrl) {
                     let element = staticInfo?.shapeImageData;
                     if (element.shape && element.centerX && element.centerY && element.height && element.width) {
-                        // updateClipPath(shapeImageUrl, element);
-                        current_shape = element.shape;
-                        console.log(element.shape);
-                        const shapeImageInstance = fabric.Image.fromURL(shapeImageUrl, function(img) {
-                            var oImg = img.set({ left: element.centerX, top: element.centerY}).scale(0.25);
-                            canvas.add(oImg);
-                        });
-
-                        applyClipPath(shapeImageInstance, element);
+                        updateClipPath(shapeImageUrl, element);
+                       
                     }
                 }
 
@@ -1929,89 +1922,30 @@ function bindData() {
         });
     function updateClipPath(imageUrl, element) {
 
-        const imageWrapper = document.getElementById('imageWrapper');
-        const imgElement = document.getElementById('user_image');
-        imgElement.src = imageUrl;
-        if(!canvasElement){
-        var canvasElement = new fabric.Canvas('imageEditor', {
-                    width: 500, // Canvas width
-                    height: 500, // Canvas height
-                    cornerSize: 6,
-    });
-}
-        //console.log(imageWrapper);
-        // If a current image exists on canvas, remove it
-        console.log(canvasElement)
-        if (currentImage) {
-            canvasElement.remove(currentImage);
-        }
-
-        // Handle previous image and trash icon
-        if (oldImage != null) {
-            canvasElement.remove(oldImage.trashIcon);
-            oldImage.trashIcon = null;
-            canvasElement.renderAll();
-        }
-
-        imageWrapper.style.display = 'block';
-        // imageWrapper.style.left = element.left;
-        // imageWrapper.style.top = element.top;
-
+        current_shape = element.shape;
+        console.log(element.shape);
+        const shapeImageInstance = fabric.Image.fromURL(imageUrl, function(img) {
+            var oImg = img.set({ left: element.centerX, top: element.centerY}).scale(0.25);
+            canvas.add(oImg);
+        });
         let canvasEL = document.getElementById('imageEditor1')
         const canvasRect = canvasEL.getBoundingClientRect();
 
-        //console.log(canvasRect.left)
-        //console.log(canvasRect.top)
-        //console.log(element.centerX)
-        //console.log(element.centerY)
-        //console.log(element.height)
-        //console.log(element.height)
-
         let left = element.centerX !== undefined ? `${element.centerX  + canvasRect.left}px` : '50%';
         let top = element.centerY !== undefined ? `${element.centerY + canvasRect.top}px` : '50%';
-        //console.log({
-        //     left
-        // })
-        //console.log({
-        //     imageWrapper
-        // })
-
-        // Set the calculated position to imageWrapper
-        imageWrapper.style.left = left;
-        imageWrapper.style.top = top;
-
-        imgElement.onload = function() {
-            // Get image dimensions and scale it
-            const imgInstance = new fabric.Image(imgElement, {
-                selectable: true,
-                hasControls: true,
-                hasBorders: true,
-
-                borderColor: "#2DA9FC",
-                cornerColor: "#fff",
-                transparentCorners: false,
-                lockUniScaling: true,
-                scaleX: 600 / imgElement.width,
-                scaleY: 600 / imgElement.height,
-                cornerSize: 10,
-                cornerStyle: 'circle',
-            });
-            shape = element.shape;
-            current_shape = shape;
-            canvasElement.add(imgInstance);
-            // addIconsToImage(imgInstance);
-            drawCanvas();
+       
+        drawCanvas();
 
             // Refresh canvas
             canvasElement.renderAll();
 
             // Update the image with the shape based on the provided element data
             if (element.shape) {
-                applyClipPath(imgInstance, element);
+                applyClipPath(shapeImageInstance, element);
             }
 
             // Image mouseup event to change shape or update position
-            imgInstance.on('mouseup', function(options) {
+            shapeImageInstance.on('mouseup', function(options) {
                 if (options.target) {
                     // Change shape logic
                     currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
@@ -2023,35 +1957,30 @@ function bindData() {
             });
 
             // Update canvas on movement or scaling
-            imgInstance.on('moving', function() {
+            shapeImageInstance.on('moving', function() {
                 isImageDragging = true;
-                element.centerX = imgInstance.left;
-                element.centerY = imgInstance.top;
+                element.centerX = shapeImageInstance.left;
+                element.centerY = shapeImageInstance.top;
 
                 updatedOBJImage = {
-                    centerX: imgInstance.left,
-                    centerY: imgInstance.top,
+                    centerX: shapeImageInstance.left,
+                    centerY: shapeImageInstance.top,
                 };
             });
 
-            imgInstance.on('scaling', function() {
-                element.width = imgInstance.width * imgInstance.scaleX;
-                element.height = imgInstance.height * imgInstance.scaleY;
+            shapeImageInstance.on('scaling', function() {
+                element.width = shapeImageInstance.width * shapeImageInstance.scaleX;
+                element.height = shapeImageInstance.height * shapeImageInstance.scaleY;
 
                 updatedOBJImage = {
-                    width: imgInstance.width * imgInstance.scaleX,
-                    height: imgInstance.height * imgInstance.scaleY
+                    width: shapeImageInstance.width * shapeImageInstance.scaleX,
+                    height: shapeImageInstance.height * shapeImageInstance.scaleY
                 };
             });
 
-            currentImage = imgInstance; // Track current image on canvas
-            oldImage = imgInstance;
-            // $('.photo-slider-wrp').hide()
-        };
-
-        imgElement.onerror = function(e) {
-            console.error("Failed to load image.", e);
-        };
+            currentImage = shapeImageInstance; // Track current image on canvas
+            oldImage = shapeImageInstance;
+          
     }
 
     // Helper function to apply clip path based on shape
