@@ -1518,7 +1518,7 @@ $(".removeShapImage").click(function(){
             }
             var pointClicked = options.target.canvas.getPointer(options.e);
             console.log(pointClicked);
-            console.log(options.target.id)
+            console.log(options)
             const pointer = canvas.getPointer(event.e);
             const activeObject = canvas.getActiveObject();
             if (activeObject && activeObject.controls && activeObject.controls.deleteControl) {
@@ -1542,7 +1542,9 @@ $(".removeShapImage").click(function(){
 
                 // Calculate control size
                 const controlSize = deleteControl.cornerSize || 28;
-
+                console.log({finalControlX})
+                console.log({controlSize})
+                console.log({pointer})
                 // Check if the pointer is within the control's bounds
                 const isWithinDeleteControl = (
                     pointer.x >= finalControlX - controlSize / 2 &&
