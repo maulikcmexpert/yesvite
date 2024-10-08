@@ -1481,6 +1481,17 @@ $(".removeShapImage").click(function(){
                 backgroundColor: 'rgba(0, 0, 0, 0)',
             });
 
+            clonedTextbox.setControlsVisibility({
+                mt: false, // Hide middle top control
+                mb: false, // Hide middle bottom control
+                bl: true, // Hide bottom left control
+                br: true, // Hide bottom right control
+                tl: true, // Hide top left control
+                tr: true, // Hide top right control
+                ml: true,  // Show middle left control
+                mr: true   // Show middle right control
+            });
+
             canvas.add(clonedTextbox);
 
             // Add icons to the cloned textbox
@@ -1653,7 +1664,7 @@ $(".removeShapImage").click(function(){
                 transparentCorners: false,
                 textAlign:'center',
             });
-            textElement.setControlsVisibility({
+            textbox.setControlsVisibility({
                 mt: false, // Hide middle top control
                 mb: false, // Hide middle bottom control
                 bl: true, // Hide bottom left control
