@@ -60,11 +60,11 @@
 
                                 <option value="">Select subcategory</option>
 
-                                @foreach($getsubcatData as $cat)
+                                <!-- @foreach($getsubcatData as $cat) -->
 
-                                <option value="{{$cat->id}}">{{$cat->subcategory_name}}</option>
+                                <!-- <option value="{{$cat->id}}">{{$cat->subcategory_name}}</option> -->
 
-                                @endforeach
+                                <!-- @endforeach -->
                             </select>
                             <span class="text-danger">{{ $errors->first('event_design_sub_category_id.*') }}</span>
                         </div>
