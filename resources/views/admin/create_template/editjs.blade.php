@@ -107,31 +107,53 @@
 
                                     
 
-                                    textElement.on('scaling', function () {
-                                        // Update the font size based on scaling
-                                        var updatedFontSize = textElement.fontSize * textElement.scaleX; 
-                                        // textElement.set('fontSize', updatedFontSize);
-                                        const textMeasurement = new fabric.Text(textElement.text, {
-                                            fontSize: updatedFontSize,
-                                            fontFamily: element.fontFamily,
-                                            fontWeight: element.fontWeight,
-                                            fontStyle: element.fontStyle,
-                                            underline: element.underline,
-                                            linethrough: element.linethrough,
-                                        });
-                                        const textWidth = textMeasurement.width;
-                                        textElement.set({
-                                            width:textWidth,
-                                            fontSize:updatedFontSize
-                                        });
-                                        canvas.renderAll();
-                                    });
+                                    // textElement.on('scaling', function () {
+                                    //     // Update the font size based on scaling
+                                    //     var updatedFontSize = textElement.fontSize * textElement.scaleX; 
+                                    //     // textElement.set('fontSize', updatedFontSize);
+                                    //     const textMeasurement = new fabric.Text(textElement.text, {
+                                    //         fontSize: updatedFontSize,
+                                    //         fontFamily: element.fontFamily,
+                                    //         fontWeight: element.fontWeight,
+                                    //         fontStyle: element.fontStyle,
+                                    //         underline: element.underline,
+                                    //         linethrough: element.linethrough,
+                                    //     });
+                                    //     const textWidth = textMeasurement.width;
+                                    //     textElement.set({
+                                    //         width:textWidth,
+                                    //         fontSize:updatedFontSize
+                                    //     });
+                                    //     canvas.renderAll();
+                                    // });
 
                                  
                                     //addIconsToTextbox(textElement);
                                     canvas.add(textElement);
                                     console.log(textElement);
                                     canvas.renderAll();
+
+                                    // Event Listener to get and update the fontSize during dragging/moving
+                                    canvas.on('object:moving', function (e) {
+                                        var activeObject = e.target;
+
+                                        // Check if the moved object is the textbox
+                                        if (activeObject && activeObject.type === 'textbox') {
+                                            // Get the current font size
+                                            var currentFontSize = activeObject.fontSize;
+                                            console.log("Current font size: " + currentFontSize);
+                                            // Set the new font size (for example, let's increment by 1px when moving)
+                                            var newFontSize = currentFontSize + 1; // Or any logic to determine the new font size
+                                            // Update the font size of the textbox
+                                            activeObject.set({
+                                                fontSize: newFontSize
+                                            });
+                                            // Re-render the canvas to apply the changes
+                                            canvas.renderAll();
+                                            console.log("Updated font size: " + newFontSize);
+                                        }
+                                    });
+
                                 }
 
 
