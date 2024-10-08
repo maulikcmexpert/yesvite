@@ -95,8 +95,7 @@
                                         cornerColor: '#fff',
                                         cornerSize: 6,
                                         transparentCorners: false,
-                                        isStatic: true,
-                                        angle: element.rotation
+                                        isStatic: true
                                     });
 
                                     const textWidth = textElement.calcTextWidth();
@@ -115,14 +114,7 @@
                                     });
                                     
 
-                                    textElement.on('rotating', function () {
-                                    // Get the bounding rectangle of the textboxbox
-                                        var boundingRect = textElement.getBoundingRect();
-                                        var centerX = boundingRect.left + boundingRect.width / 2;
-                                        var centerY = boundingRect.top + boundingRect.height / 2;
-                                        var rotationAngle = textElement.angle;
-                                        console.log('Rotated Position:', { centerX: centerX, centerY: centerY, rotation: rotationAngle });
-                                    });
+
                                  
                                     canvas.add(textElement);
                                     console.log(textElement);
@@ -863,14 +855,6 @@ $(".removeShapImage").click(function(){
                 canvas.renderAll();
                 // findTextboxCenter(text);
             });
-            text.on('rotating', function () {
-            // Get the bounding rectangle of the textboxbox
-                var boundingRect = text.getBoundingRect();
-                var centerX = boundingRect.left + boundingRect.width / 2;
-                var centerY = boundingRect.top + boundingRect.height / 2;
-                var rotationAngle = text.angle;
-                console.log('Rotated Position:', { centerX: centerX, centerY: centerY, rotation: rotationAngle });
-            });
 
             // text.on('moving', function() {
             //     findTextboxCenter(text);
@@ -1065,8 +1049,7 @@ $(".removeShapImage").click(function(){
                         linethrough: obj.linethrough,
                         date_formate: obj.date_formate,
                         letterSpacing: obj.charSpacing / 10, // Divide by 10 to convert to standard spacing
-                        lineHeight: obj.lineHeight,
-                        rotation: obj.angle  // Line height of the tex// Include date_formate if set
+                        lineHeight: obj.lineHeight // Line height of the tex// Include date_formate if set
                     });
                 }
             });
