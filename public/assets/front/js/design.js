@@ -662,125 +662,7 @@ function bindData() {
                 if (shapeImageUrl) {
                     let element = staticInfo?.shapeImageData;
                     if (element.shape && element.centerX && element.centerY && element.height && element.width) {
-                        // updateClipPath(shapeImageUrl, element);
-                        fabric.Image.fromURL(shapeImageUrl, function(img) {
-                            // Set the position and scale of the image
-                            img.set({ left: element.centerX, top: element.centerY }).scale(0.25);
-                            let shapeIndex = 0; // Track the current shape
-
-            // Define a function to change the clipping shape
-            function changeShape() {
-                shapeIndex = (shapeIndex + 1) % 7; // Cycle through shapes
-
-                const width = img.width;
-                const height = img.height;
-
-                switch (shapeIndex) {
-                    case 0: // Rectangle (default)
-                        img.set({
-                            clipPath: null // No clipPath means it's a rectangle by default
-                        });
-                        break;
-                    case 1: // Circle
-                        img.set({
-                            clipPath: new fabric.Circle({
-                                radius: Math.min(width, height) / 2,
-                                originX: 'center',
-                                originY: 'center',
-                                left: img.left + width / 2,
-                                top: img.top + height / 2
-                            })
-                        });
-                        break;
-                    case 2: // Star
-                        img.set({
-                            clipPath: new fabric.Polygon([
-                                {x: width / 2, y: 0},
-                                {x: width * 0.61, y: height * 0.35},
-                                {x: width, y: height * 0.35},
-                                {x: width * 0.68, y: height * 0.57},
-                                {x: width * 0.79, y: height * 0.91},
-                                {x: width / 2, y: height * 0.70},
-                                {x: width * 0.21, y: height * 0.91},
-                                {x: width * 0.32, y: height * 0.57},
-                                {x: 0, y: height * 0.35},
-                                {x: width * 0.39, y: height * 0.35}
-                            ], {
-                                originX: 'center',
-                                originY: 'center',
-                                left: img.left + width / 2,
-                                top: img.top + height / 2
-                            })
-                        });
-                        break;
-                    case 3: // Rounded rectangle
-                        img.set({
-                            clipPath: new fabric.Rect({
-                                rx: 20, // Corner radius
-                                ry: 20,
-                                width: width,
-                                height: height,
-                                originX: 'center',
-                                originY: 'center',
-                                left: img.left + width / 2,
-                                top: img.top + height / 2
-                            })
-                        });
-                        break;
-                    case 4: // Heart
-                        img.set({
-                            clipPath: new fabric.Path('M 0 0 A 30 30 0 0 1 60 0 Q 60 35 30 60 Q 0 35 0 0 Z', {
-                                originX: 'center',
-                                originY: 'center',
-                                scaleX: Math.min(width, height) / 60, // Scale based on image size
-                                scaleY: Math.min(width, height) / 60,
-                                left: img.left + width / 2,
-                                top: img.top + height / 2
-                            })
-                        });
-                        break;
-                    case 5: // Triangle
-                        img.set({
-                            clipPath: new fabric.Polygon([
-                                {x: width / 2, y: 0},
-                                {x: 0, y: height},
-                                {x: width, y: height}
-                            ], {
-                                originX: 'center',
-                                originY: 'center',
-                                left: img.left + width / 2,
-                                top: img.top + height / 2
-                            })
-                        });
-                        break;
-                    case 6: // Oval
-                        img.set({
-                            clipPath: new fabric.Ellipse({
-                                rx: width / 2,
-                                ry: height / 2,
-                                originX: 'center',
-                                originY: 'center',
-                                left: img.left + width / 2,
-                                top: img.top + height / 2
-                            })
-                        });
-                        break;
-                    default:
-                        break;
-                }
-
-                canvas.renderAll(); // Re-render the canvas to apply the new shape
-            }
-
-            // Add event listener for image click
-            img.on('mousedown', function() {
-                changeShape();
-            });
-                
-                            // Add the image to the canvas
-                            canvas.add(img);
-                            canvas.renderAll();
-                        });
+                        updateClipPath(shapeImageUrl, element);
                        
                     }
                 }
@@ -2040,34 +1922,89 @@ function bindData() {
         });
     function updateClipPath(imageUrl, element) {
 
-        current_shape = element.shape;
-        // const shapeImageInstance = fabric.Image.fromURL(imageUrl, function(img) {
-        //     var oImg = img.set({ left: element.centerX, top: element.centerY}).scale(0.25);
-        //     canvas.add(oImg);
-        // });
+        const imageWrapper = document.getElementById('imageWrapper');
+        const imgElement = document.getElementById('user_image');
+        imgElement.src = imageUrl;
+        if(!canvasElement){
+                var canvasElement = new fabric.Canvas('imageEditor1', {
+                            width: 500, // Canvas width
+                            height: 500, // Canvas height
+                            cornerSize: 6,
+            });
+        }
+        //console.log(imageWrapper);
+        // If a current image exists on canvas, remove it
+        console.log(canvasElement)
+        if (currentImage) {
+            canvasElement.remove(currentImage);
+        }
 
-        // Load the image from URL
-        
+        // Handle previous image and trash icon
+        if (oldImage != null) {
+            canvasElement.remove(oldImage.trashIcon);
+            oldImage.trashIcon = null;
+            canvasElement.renderAll();
+        }
 
+        imageWrapper.style.display = 'block';
+        // imageWrapper.style.left = element.left;
+        // imageWrapper.style.top = element.top;
 
         let canvasEL = document.getElementById('imageEditor1')
         const canvasRect = canvasEL.getBoundingClientRect();
 
+        //console.log(canvasRect.left)
+        //console.log(canvasRect.top)
+        //console.log(element.centerX)
+        //console.log(element.centerY)
+        //console.log(element.height)
+        //console.log(element.height)
+
         let left = element.centerX !== undefined ? `${element.centerX  + canvasRect.left}px` : '50%';
         let top = element.centerY !== undefined ? `${element.centerY + canvasRect.top}px` : '50%';
-       
-        drawCanvas(shapeImageInstance);
+        //console.log({
+        //     left
+        // })
+        //console.log({
+        //     imageWrapper
+        // })
+
+        // Set the calculated position to imageWrapper
+        imageWrapper.style.left = left;
+        imageWrapper.style.top = top;
+
+        imgElement.onload = function() {
+            // Get image dimensions and scale it
+            const imgInstance = new fabric.Image(imgElement, {
+                selectable: true,
+                hasControls: true,
+                hasBorders: true,
+
+                borderColor: "#2DA9FC",
+                cornerColor: "#fff",
+                transparentCorners: false,
+                lockUniScaling: true,
+                scaleX: 600 / imgElement.width,
+                scaleY: 600 / imgElement.height,
+                cornerSize: 10,
+                cornerStyle: 'circle',
+            });
+            shape = element.shape;
+            current_shape = shape;
+            canvasElement.add(imgInstance);
+            // addIconsToImage(imgInstance);
+            drawCanvas();
 
             // Refresh canvas
             canvasElement.renderAll();
 
             // Update the image with the shape based on the provided element data
             if (element.shape) {
-                applyClipPath(shapeImageInstance, element);
+                applyClipPath(imgInstance, element);
             }
 
             // Image mouseup event to change shape or update position
-            shapeImageInstance.on('mouseup', function(options) {
+            imgInstance.on('mouseup', function(options) {
                 if (options.target) {
                     // Change shape logic
                     currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
@@ -2079,30 +2016,35 @@ function bindData() {
             });
 
             // Update canvas on movement or scaling
-            shapeImageInstance.on('moving', function() {
+            imgInstance.on('moving', function() {
                 isImageDragging = true;
-                element.centerX = shapeImageInstance.left;
-                element.centerY = shapeImageInstance.top;
+                element.centerX = imgInstance.left;
+                element.centerY = imgInstance.top;
 
                 updatedOBJImage = {
-                    centerX: shapeImageInstance.left,
-                    centerY: shapeImageInstance.top,
+                    centerX: imgInstance.left,
+                    centerY: imgInstance.top,
                 };
             });
 
-            shapeImageInstance.on('scaling', function() {
-                element.width = shapeImageInstance.width * shapeImageInstance.scaleX;
-                element.height = shapeImageInstance.height * shapeImageInstance.scaleY;
+            imgInstance.on('scaling', function() {
+                element.width = imgInstance.width * imgInstance.scaleX;
+                element.height = imgInstance.height * imgInstance.scaleY;
 
                 updatedOBJImage = {
-                    width: shapeImageInstance.width * shapeImageInstance.scaleX,
-                    height: shapeImageInstance.height * shapeImageInstance.scaleY
+                    width: imgInstance.width * imgInstance.scaleX,
+                    height: imgInstance.height * imgInstance.scaleY
                 };
             });
 
-            currentImage = shapeImageInstance; // Track current image on canvas
-            oldImage = shapeImageInstance;
-          
+            currentImage = imgInstance; // Track current image on canvas
+            oldImage = imgInstance;
+            // $('.photo-slider-wrp').hide()
+        };
+
+        imgElement.onerror = function(e) {
+            console.error("Failed to load image.", e);
+        };
     }
 
     // Helper function to apply clip path based on shape
@@ -2291,8 +2233,8 @@ function bindData() {
         isResizing = false;
     }
 
-    function drawCanvas(shapeImageInstance) {
-        const userImageElement = shapeImageInstance;
+    function drawCanvas() {
+        const userImageElement = document.getElementById('user_image');
 
         ////console.loguserImageElement);
         userImageElement.style.clipPath = '';
