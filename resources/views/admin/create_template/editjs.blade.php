@@ -105,6 +105,13 @@
                                         width: textWidth
                                     });
 
+                                    textElement.on('scaling', function () {
+                                        // Update the font size based on scaling
+                                        var updatedFontSize = textElement.fontSize * (textElement.scaleX + textElement.scaleY) / 2;
+                                        textElement.set('fontSize', updatedFontSize);
+                                        canvas.renderAll();
+                                    });
+
                                  
                                     //addIconsToTextbox(textElement);
                                     canvas.add(textElement);
