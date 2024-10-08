@@ -100,17 +100,29 @@
                                         isStatic: true
                                     });
 
-                                    const textWidth = textElement.calcTextWidth();
-                                    textElement.set({
-                                        width: textWidth
-                                    });
-
-                                    // textElement.on('scaling', function () {
-                                    //     // Update the font size based on scaling
-                                    //     var updatedFontSize = textElement.fontSize * (textElement.scaleX + textElement.scaleY) / 2;
-                                    //     textElement.set('fontSize', updatedFontSize);
-                                    //     canvas.renderAll();
+                                    // const textWidth = textElement.calcTextWidth();
+                                    // textElement.set({
+                                    //     width: textWidth
                                     // });
+
+                                    
+
+                                    textElement.on('scaling', function () {
+                                        // Update the font size based on scaling
+                                        var updatedFontSize = textElement.fontSize * (textElement.scaleX + textElement.scaleY) / 2;
+                                        textElement.set('fontSize', updatedFontSize);
+                                        const textMeasurement = new fabric.Text(textElement.text, {
+                                            fontSize: updatedFontSize,
+                                            fontFamily: element.fontFamily,
+                                            fontWeight: element.fontWeight,
+                                            fontStyle: element.fontStyle,
+                                            underline: element.underline,
+                                            linethrough: element.linethrough,
+                                        });
+                                        const textWidth = textMeasurement.width;
+                                        textElement.set('width', textWidth);
+                                        canvas.renderAll();
+                                    });
 
                                  
                                     //addIconsToTextbox(textElement);
