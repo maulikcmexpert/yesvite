@@ -937,6 +937,7 @@ $(".removeShapImage").click(function(){
             if (activeObject.type == 'textbox') {
                 console.log("added to undo")
                 clrcanvas = canvas;
+                console.log({clrcanvas})
                 console.log(activeObject.type);
                 console.log(activeObject.fill);
                 if (selectedColorType == 'font') {
