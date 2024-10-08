@@ -168,7 +168,7 @@
         
         fabric.Textbox.prototype.controls.mtr = new fabric.Control({
             x: 0,
-            y: 1,
+            y: 2,
             offsetY: -20,
             cursorStyle: 'pointer',
             actionHandler: fabric.controlsUtils.rotationWithSnapping,
