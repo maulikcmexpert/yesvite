@@ -874,8 +874,9 @@ $(".removeShapImage").click(function(){
                 lineHeightInput.value = defaultSettings.lineHeight;
                 lineHeightRange.value = defaultSettings.lineHeight;
                 lineHeightTooltip.innerHTML = `<span>${defaultSettings.lineHeight}</span>`;
+                updateTextboxWidth(activeObject);
 
-                updateTextboxWidth(activeObject); // Update the textbox width to fit the default settings
+                 // Update the textbox width to fit the default settings
                 canvas.renderAll(); // Refresh the canvas to apply changes
 
                 alert('Settings have been reset to default.');
@@ -889,8 +890,15 @@ $(".removeShapImage").click(function(){
         setLetterSpacing();
         setLineHeight();
 
+        let spchoose = document.getElementByClassName('sp-choose');
+        $(spchoose).click(function(){
+            alert('clicked')
+            setTimeout(function(){
+                addToUndoStack(clrcanvas)
+            },1000)
+        })
         // // Initialize the color picker
-       
+       let clrcanvas = {}
         // Initialize the color picker
         $('#color-picker').spectrum({
             type: "flat",
@@ -924,7 +932,7 @@ $(".removeShapImage").click(function(){
             
             if (activeObject.type == 'textbox') {
                 console.log("added to undo")
-                addToUndoStack(canvas)
+                clrcanvas = canvas;
                 console.log(activeObject.type);
                 console.log(activeObject.fill);
                 if (selectedColorType == 'font') {
