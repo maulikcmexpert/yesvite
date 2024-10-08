@@ -108,24 +108,44 @@
                 const formData = new FormData();
                 formData.append('category_id', category_id);
 
-                fetch(`/get_all_subcategory/${category_id}`, {
-                        // method: 'POST',
-                        headers: {
-                            // 'Content-Type': 'application/json', // Set content type to JSON
-                            'X-CSRF-TOKEN': csrfToken // Include CSRF token
-                        },
-                        // body: formData // Set the body to formData
+                // fetch(`/get_all_subcategory/${category_id}`, {
+                //         // method: 'POST',
+                //         headers: {
+                //             // 'Content-Type': 'application/json', // Set content type to JSON
+                //             'X-CSRF-TOKEN': csrfToken // Include CSRF token
+                //         },
+                //         body: formData // Set the body to formData
 
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log('Text data saved successfully', data);
-                        // window.location.href = "{{URL::to('/admin/create_template')}}";
+                //     })
+                //     .then(response => response.json())
+                //     .then(data => {
+                //         console.log('Text data saved successfully', data);
+                //         // window.location.href = "{{URL::to('/admin/create_template')}}";
 
-                    })
-                    .catch((error) => {
-                        console.error('Error:', error);
-                    });
+                //     })
+                //     .catch((error) => {
+                //         console.error('Error:', error);
+                //     });
+
+                $.ajax({
+                    headers: {
+                        "X-CSRF-TOKEN": $(
+                                'meta[name="csrf-token"]')
+                            .attr("content"),
+                    },
+                    type: "POST",
+                    url: "{{ URL::to('admin/create_template/get_all_subcategory') }}",
+
+                    data: {
+                        category_id: category_id
+                    },
+                    success: function(output) {
+
+                    },
+                    error: function() {
+                        reject("Error occurred");
+                    }
+                });
 
 
 
