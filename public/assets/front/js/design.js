@@ -665,7 +665,16 @@ function bindData() {
                         // updateClipPath(shapeImageUrl, element);
                         fabric.Image.fromURL(shapeImageUrl, function(img) {
                             // Set the position and scale of the image
-                            img.set({ left: element.centerX, top: element.centerY }).scale(0.25);
+                            img.set({ 
+                                left: element.centerX, 
+                                top: element.centerY,
+                                clipPath: new fabric.Rect({
+                                    width: 200, // Adjust width
+                                    height: 150, // Adjust height
+                                    originX: 'center',
+                                    originY: 'center'
+                                }) 
+                            }).scale(0.25);
                 
                             // Create a clip path based on the selected shape
                             let clipPath;
@@ -731,12 +740,12 @@ function bindData() {
                                     break;
                             }
                 
-                            if (clipPath) {
-                                // Set the clip path to the image
-                                img.set({
-                                    clipPath : clipPath
-                                })
-                            }
+                            // if (clipPath) {
+                            //     // Set the clip path to the image
+                            //     img.set({
+                            //         clipPath : clipPath
+                            //     })
+                            // }
                 
                             // Add the image to the canvas
                             canvas.add(img);
