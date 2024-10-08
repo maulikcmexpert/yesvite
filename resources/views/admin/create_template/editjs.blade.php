@@ -109,8 +109,8 @@
 
                                     textElement.on('scaling', function () {
                                         // Update the font size based on scaling
-                                        var updatedFontSize = textElement.fontSize * (textElement.scaleX + textElement.scaleY) / 2;
-                                        textElement.set('fontSize', updatedFontSize);
+                                        var updatedFontSize = textElement.fontSize * textElement.scaleX; 
+                                        // textElement.set('fontSize', updatedFontSize);
                                         const textMeasurement = new fabric.Text(textElement.text, {
                                             fontSize: updatedFontSize,
                                             fontFamily: element.fontFamily,
@@ -120,7 +120,10 @@
                                             linethrough: element.linethrough,
                                         });
                                         const textWidth = textMeasurement.width;
-                                        textElement.set('width', textWidth);
+                                        textElement.set({
+                                            width:textWidth,
+                                            fontSize:updatedFontSize
+                                        });
                                         canvas.renderAll();
                                     });
 
