@@ -657,7 +657,7 @@
                     </div>
                     <div class="range-slider">
                         <div id="lineHeightTooltip" class="tooltip"></div>
-                        <input id="lineHeightRange" type="range" class="range" step="0.1" value="0" min="0" max="3">
+                        <input id="lineHeightRange" type="range" class="range" step="0.1" value="0" min="0.5" max="3">
                     </div>
                 </div>
             </div>
