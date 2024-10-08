@@ -4349,7 +4349,7 @@ $(document).on("click", ".next_guest_step", function () {
 
     canvas.renderAll();
     setTimeout(() => {
-        var downloadImage = document.getElementById("border");
+        var downloadImage = document.getElementById("imageEditor1");
         $("#loader").show();
         $(this).prop("disabled", true);
         $('.btn-close').prop("disabled", true);
