@@ -653,11 +653,11 @@
                 <div class="size-spacing-inner font-size-wrp">
                     <div class="size-spacing-inner-top">
                         <h3>Line Height</h3>
-                        <input type="hidden" id="lineHeightInput" value="1.2">
+                        <input type="hidden" id="lineHeightInput" value="0">
                     </div>
                     <div class="range-slider">
                         <div id="lineHeightTooltip" class="tooltip"></div>
-                        <input id="lineHeightRange" type="range" class="range" step="0.1" value="1.2" min="0.5" max="3">
+                        <input id="lineHeightRange" type="range" class="range" step="0.1" value="0" min="0" max="3">
                     </div>
                 </div>
             </div>

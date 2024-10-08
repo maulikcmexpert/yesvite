@@ -1227,7 +1227,7 @@ function bindData() {
         canvas.add(clonedTextbox);
 
         // Add icons to the cloned textbox
-        addIconsToTextbox(clonedTextbox);
+        // addIconsToTextbox(clonedTextbox);
 
         canvas.renderAll();
     }
@@ -1507,6 +1507,41 @@ function bindData() {
                 //console.log(e);
                 alert("Font loading failed: " + font);
             });
+    }
+
+    function setControlVisibilityForAll() {  
+        canvas.getObjects().forEach((obj) => {
+          
+            obj.setControlsVisibility({
+                mt: false, 
+                mb: false, 
+                bl: true,  
+                br: true,  
+                tl: true, 
+                tr: true, 
+                ml: true,  
+                mr: true   
+            });
+            
+            obj.set('transparentCorners', false);
+            obj.set('borderColor', "#2DA9FC");
+            obj.set('cornerSize', 6);
+            obj.set('cornerColor', "#fff");
+            // Set text alignment if the object is a text-based object
+            if (obj.type === 'textbox' || obj.type === 'text') {
+                obj.set('textAlign', 'center');  // Set text alignment to center
+            }
+
+            obj.on('rotating', function () {
+                // Get the bounding rectangle of the textboxbox
+                var boundingRect = obj.getBoundingRect();
+                var centerX = boundingRect.left + boundingRect.width / 2;
+                var centerY = boundingRect.top + boundingRect.height / 2;
+                var rotationAngle = obj.angle;
+                // console.log('Rotated Position:', { centerX: centerX, centerY: centerY, rotation: rotationAngle });
+            });
+        });    
+        canvas.renderAll();
     }
 
     function executeCommand(command, font = null) {
