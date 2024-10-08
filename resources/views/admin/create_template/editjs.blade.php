@@ -2045,6 +2045,8 @@ $(".removeShapImage").click(function(){
                 canvas.renderAll(); // Render the canvas after loading state
                 reattachIcons(); // Reattach the icons to the textboxes
             });
+
+            
             if(redoStack.length > 0){
                 $('#redoButton').find('svg path').attr('fill', '#0F172A');  
             }
@@ -2077,9 +2079,18 @@ $(".removeShapImage").click(function(){
             ob.objects.forEach(obj => {
                 console.log(obj);
                 obj.borderColor = "#2DA9FC";
-                obj.cornerColor = "#fff";
-               
+                obj.cornerColor = "#fff";               
                 obj.textAlign = 'center';
+                obj.setControlsVisibility({
+                        mt: false, // Hide middle top control
+                        mb: false, // Hide middle bottom control
+                        bl: true, // Hide bottom left control
+                        br: true, // Hide bottom right control
+                        tl: true, // Hide top left control
+                        tr: true, // Hide top right control
+                        ml: true,  // Show middle left control
+                        mr: true   // Show middle right control
+                    });
             });
         });
 
@@ -2088,8 +2099,7 @@ $(".removeShapImage").click(function(){
             ob.objects.forEach(obj => {
                 console.log(obj);
                 obj.borderColor = "#2DA9FC";
-                obj.cornerColor = "#fff";
-            
+                obj.cornerColor = "#fff";            
                 obj.textAlign = 'center';
             });
         });
