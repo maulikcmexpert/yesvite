@@ -1359,7 +1359,7 @@ function bindData() {
         discardIfMultipleObjects(options);
         if (options.target && options.target.type === 'textbox') {
             canvas.setActiveObject(options.target);
-            addIconsToTextbox(options.target)
+            // addIconsToTextbox(options.target)
         } else {
             // alert();
             canvas.getObjects('textbox').forEach(function(tb) {
