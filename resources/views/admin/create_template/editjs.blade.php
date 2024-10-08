@@ -762,14 +762,6 @@ $(".removeShapImage").click(function(){
             }
         });
 
-        canvas.on('mouse:down', function (event) {
-            const activeObject = canvas.getActiveObject();
-            if (activeObject && activeObject.type === 'textbox') {
-                updateColorPicker();
-            }
-        });
-
-
         // Load background image and make it non-draggable
         document.getElementById('image').addEventListener('change', function(event) {
             var file = event.target.files[0];
