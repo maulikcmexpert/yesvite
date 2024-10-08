@@ -189,12 +189,15 @@
                  canvas.remove(target); // Remove object on trash icon click
                  canvas.requestRenderAll();
             },
-             render: renderDeleteIcon,
-             cornerSize: 28,
-             withConnection: false // Disable the line connection
+            mouseUpHandler: cancelDelte,
+            render: renderDeleteIcon,
+            cornerSize: 28,
+            withConnection: false // Disable the line connection
         });
         
-        
+        function cancelDelte(){
+            console.log("adasdasd")
+        }
             // here's where the render action for the control is defined
         function renderIcon(ctx, left, top, styleOverride, fabricObject) {
             var size = this.cornerSize;
