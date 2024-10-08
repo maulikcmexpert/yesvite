@@ -904,7 +904,7 @@ $(".removeShapImage").click(function(){
                         $('#undoButton').find('svg path').attr('fill', '#0F172A');
                     }
                     redoStack = []; // Clear redo stack on new action
-                },2000)
+                },1000)
             })
         },1000)
        
@@ -2082,6 +2082,18 @@ $(".removeShapImage").click(function(){
                 obj.textAlign = 'center';
             });
         });
+
+        redoStack.forEach((ob, index) => {
+            ob.objects = ob.objects.filter(obj => obj.type !== 'group');
+            ob.objects.forEach(obj => {
+                console.log(obj);
+                obj.borderColor = "#2DA9FC";
+                obj.cornerColor = "#fff";
+                obj.cornerSize = 6;
+                obj.textAlign = 'center';
+            });
+        });
+
 
         redoStack.forEach((ob, index) => {
             ob.objects = ob.objects.filter(obj => obj.type !== 'group');
