@@ -140,7 +140,7 @@
                         category_id: category_id
                     },
                     success: function(output) {
-
+                        console.log(output);
                     },
                     error: function() {
                         reject("Error occurred");

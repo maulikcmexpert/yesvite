@@ -279,6 +279,15 @@ class TemplateController extends Controller
         $category_id = $request->input('category_id');
         $sub_category = EventDesignSubCategory::where('event_design_category_id', $category_id)->get();
 
-        dd($sub_category);
+        $response = [];
+
+        foreach ($sub_category as $subcategory) {
+            $response[] = [
+                'id' => $subcategory->id,
+                'name' => $subcategory->name,
+            ];
+        }
+
+        return response()->json($response);
     }
 }
