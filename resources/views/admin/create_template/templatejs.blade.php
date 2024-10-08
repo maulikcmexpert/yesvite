@@ -105,9 +105,9 @@
                 $.ajax({
                     url: base_url + "template/get_all_subcategory",
                     type: "POST",
-                    headers: {
-                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-                    },
+                    // headers: {
+                    //     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                    // },
                     data: {
                         category_id: category_id,
                     },
