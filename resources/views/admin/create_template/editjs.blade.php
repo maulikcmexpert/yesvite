@@ -1275,31 +1275,36 @@ $(".removeShapImage").click(function(){
         });
         
         // Undo and Redo actions (basic implementation)
-        let undoStack = [];
+    let undoStack = [];
     let redoStack = [];
     let isAddingToUndoStack = 0;
-    
-    function addToUndoStack(canvas) {
-        // clearTimeout(isAddingToUndoStack);
-        console.log(canvas.toJSON());
-        
-        // isAddingToUndoStack = setTimeout(function() {
-            console.log({undoStack});
+    function setControlVisibilityForAll() {
+    // Get all objects on the canvas
+    canvas.getObjects().forEach((obj) => {
+        obj.setControlsVisibility({
+            mt: false, // Hide middle top control
+            mb: false, // Hide middle bottom control
+            bl: true,  // Show bottom left control
+            br: true,  // Show bottom right control
+            tl: true,  // Show top left control
+            tr: true,  // Show top right control
+            ml: true,  // Show middle left control
+            mr: true   // Show middle right control
+        });
+    });
 
-            console.log("beofre {undoStack}");
-
-          
-            undoStack.push(canvas.toJSON());
-            console.log("after {undoStack}");
-            if(undoStack.length > 0){
-                $('#undoButton').find('svg path').attr('fill', '#0F172A');
-            }
-            redoStack = []; // Clear redo stack on new action
-        // }, 10);
+    // Re-render the canvas to apply changes
+    canvas.renderAll();
+}
+    function addToUndoStack(canvas) {          
+        undoStack.push(canvas.toJSON());          
+        if(undoStack.length > 0){
+            $('#undoButton').find('svg path').attr('fill', '#0F172A');
+        }
+        redoStack = [];        
     }
 
-    function undo() {
-        console.log(undoStack);
+    function undo() {        
         if (undoStack.length > 0) {  // Ensure at least one previous state exists
             reattachIcons();
             redoStack.push(canvas.toJSON()); // Save current state to redo stack
@@ -1307,12 +1312,11 @@ $(".removeShapImage").click(function(){
             canvas.loadFromJSON(lastState, function () {
                 canvas.renderAll(); // Render the canvas after loading state
                 reattachIcons(); // Reattach the icons to the textboxes
-            });
-
-            
+            });            
             if(redoStack.length > 0){
                 $('#redoButton').find('svg path').attr('fill', '#0F172A');  
             }
+            etControlVisibilityForAll()
         }else{
             $('#undoButton').find('svg path').attr('fill', '#CBD5E1');  
         }
@@ -1331,6 +1335,7 @@ $(".removeShapImage").click(function(){
                 $('#undoButton').find('svg path').attr('fill', '#0F172A');
             }
             $('#redoButton').find('svg path').attr('fill', '#0F172A');  
+            etControlVisibilityForAll()
         }else{
             $('#redoButton').find('svg path').attr('fill', '#CBD5E1');  
         }
