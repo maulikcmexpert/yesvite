@@ -104,7 +104,16 @@
                                     textElement.set({
                                         width: textWidth
                                     });
-
+                                    textElement.setControlsVisibility({
+                                        mt: false, // Hide middle top control
+                                        mb: false, // Hide middle bottom control
+                                        bl: true, // Hide bottom left control
+                                        br: true, // Hide bottom right control
+                                        tl: true, // Hide top left control
+                                        tr: true, // Hide top right control
+                                        ml: true,  // Show middle left control
+                                        mr: true   // Show middle right control
+                                    });
                                     
 
                                     // textElement.on('scaling', function () {
