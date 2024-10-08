@@ -100,10 +100,10 @@
                                         isStatic: true
                                     });
 
-                                    const textWidth = textElement.calcTextWidth();
-                                    textElement.set({
-                                        width: textWidth
-                                    });
+                                    // const textWidth = textElement.calcTextWidth();
+                                    // textElement.set({
+                                    //     width: textWidth
+                                    // });
 
                                     textElement.on('scaling', function () {
                                         // Update the font size based on scaling
