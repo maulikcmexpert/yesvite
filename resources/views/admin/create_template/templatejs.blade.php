@@ -140,6 +140,7 @@
                         category_id: category_id
                     },
                     success: function(output) {
+                        console.log(output);
                         $('#event_design_sub_category_id').empty();
                         $('#event_design_sub_category_id').append('<option value="">Select subcategory</option>');
                         output.forEach(function(subcategory) {
