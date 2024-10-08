@@ -277,7 +277,7 @@ class TemplateController extends Controller
     public function get_all_subcategory(Request $request)
     {
         $category_id = $request->input('category_id');
-        $sub_category = EventDesignSubCategory::where('category', $category_id)->get();
+        $sub_category = EventDesignSubCategory::where('category_id', $category_id)->get();
 
         dd($sub_category);
     }
