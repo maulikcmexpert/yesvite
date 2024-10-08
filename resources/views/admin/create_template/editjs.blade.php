@@ -936,7 +936,7 @@ $(".removeShapImage").click(function(){
             
             if (activeObject.type == 'textbox') {
                 console.log("added to undo")
-                clrcanvas = canvas.toJSON(); // Store the current state of the canvas
+                clrcanvas = canvas.clone(); // Store the current state of the canvas
 
                 console.log({clrcanvas})
                 console.log(activeObject.type);
