@@ -613,6 +613,8 @@ $(".removeShapImage").click(function(){
                     updateTimeout = setTimeout(() => {
                         addIconsToImage(textbox)
                     }, 500);
+                    var updatedFontSize = textbox.fontSize * (textbox.scaleX + textbox.scaleY) / 2;
+                    textbox.set('fontSize', updatedFontSize);
                 });
                 canvas.renderAll();
             });
