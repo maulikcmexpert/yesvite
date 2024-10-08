@@ -143,10 +143,9 @@
                                             var currentFontSize = activeObject.fontSize;
                                             console.log("Current font size: " + currentFontSize);
 
-                                            // Update the font size (for demonstration, let's say you want to increment it)
-                                            var newFontSize = currentFontSize + 0; // Adjust this logic as needed
-
-                                            // Set the new font size
+                                            // Example logic to dynamically adjust font size based on position
+                                            // Here, we increase the font size based on the left position of the textbox
+                                            var newFontSize = 20 + Math.floor(activeObject.left / 50); // Adjust divisor for sensitivity
                                             activeObject.set({
                                                 fontSize: newFontSize
                                             });
