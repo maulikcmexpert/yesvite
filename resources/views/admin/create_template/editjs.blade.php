@@ -838,7 +838,7 @@ $(".removeShapImage").click(function(){
             
             if (activeObject.type == 'textbox') {
                 console.log("added to undo")
-                // addToUndoStack(canvas)
+                addToUndoStack(canvas)
                 console.log(activeObject.type);
                 console.log(activeObject.fill);
                 if (selectedColorType == 'font') {
@@ -896,8 +896,8 @@ $(".removeShapImage").click(function(){
         }
 
         // Update color picker when object selection changes
-        // canvas.on('selection:created', updateColorPicker);
-        // canvas.on('selection:updated', updateColorPicker);
+        canvas.on('selection:created', updateColorPicker);
+        canvas.on('selection:updated', updateColorPicker);
 
         // Update the color picker when the color type (font/background) changes
         $('.colorTypeInp').click(function(e) {
