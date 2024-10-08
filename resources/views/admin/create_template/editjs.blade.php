@@ -2085,6 +2085,18 @@ $(".removeShapImage").click(function(){
 
         redoStack.forEach((ob, index) => {
             ob.objects = ob.objects.filter(obj => obj.type !== 'group');
+            ob.objects.forEach(obj => {
+                console.log(obj);
+                obj.borderColor = "#2DA9FC";
+                obj.cornerColor = "#fff";
+                obj.cornerSize = 6;
+                obj.textAlign = 'center';
+            });
+        });
+
+
+        redoStack.forEach((ob, index) => {
+            ob.objects = ob.objects.filter(obj => obj.type !== 'group');
         });
     }
  
