@@ -904,7 +904,7 @@ $(".removeShapImage").click(function(){
                         $('#undoButton').find('svg path').attr('fill', '#0F172A');
                     }
                     redoStack = []; // Clear redo stack on new action
-                },2000)
+                },1000)
             })
         },1000)
        
