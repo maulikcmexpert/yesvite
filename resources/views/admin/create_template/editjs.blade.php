@@ -683,33 +683,19 @@ $(".removeShapImage").click(function(){
             const selectedColorType = document.querySelector('input[name="colorType"]:checked').value;
             const activeObject = canvas.getActiveObject();
            
-
-            console.log(activeObject)
-            if (!activeObject) {
-             
+            if (!activeObject) {             
                 return;
             }
             
-            if (activeObject.type == 'textbox') {
-              
-                clrcanvas = canvas.toJSON(); // Store the current state of the canvas
-
-              
-                if (selectedColorType == 'font') {
-                   
-                    activeObject.set('fill', selectedColor); // Change font color
-                    
-                } else if (selectedColorType == 'background') {
-                   
+            if (activeObject.type == 'textbox') {              
+                clrcanvas = canvas.toJSON(); // Store the current state of the canvas              
+                if (selectedColorType == 'font') {                   
+                    activeObject.set('fill', selectedColor); // Change font color                    
+                } else if (selectedColorType == 'background') {                   
                     activeObject.set('backgroundColor', selectedColor); // Change background color
                 }
                 canvas.renderAll(); // Re-render the canvas after color change
-            }
-
-            const activeObjec = canvas.getActiveObject();
-           
-
-            console.log(activeObjec)
+            }            
         }
       
 
@@ -721,26 +707,12 @@ $(".removeShapImage").click(function(){
 
             if (activeObject && activeObject.type === 'textbox') {
                 console.log({selectedColorType})
-
-
                 if (selectedColorType === 'font') {
-
                     $('#color-picker').spectrum('set', activeObject.fill || '#0a0b0a'); // Set font color in picker
                 } else if (selectedColorType === 'background') {
                     const bgColor = activeObject.backgroundColor || 'rgba(0, 0, 0, 0)'; // Default to transparent background
                     $('#color-picker').spectrum('set', bgColor); // Set current background color in picker
                 }
-
-
-                console.log(selectedColorType);
-                console.log(activeObject.type);
-                console.log(activeObject.fill);
-                console.log(activeObject.backgroundColor);
-
-                const activeObjec = canvas.getActiveObject();
-
-                console.log(activeObjec.fill);
-                console.log(activeObjec.backgroundColor);
 
             }
 
@@ -790,14 +762,10 @@ $(".removeShapImage").click(function(){
 
         function hideStaticTextElements() {
             canvas.getObjects('textbox').forEach(function(obj) {
-
                 if (obj.isStatic) {
                     canvas.remove(obj);
                 }
             });
-
-
-
             canvas.renderAll();
         }
 
