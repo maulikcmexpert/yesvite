@@ -145,6 +145,7 @@
                         if (Array.isArray(output) && output.length === 0) {
                             $('#event_design_sub_category_id').empty();
                             $('#event_design_sub_category_id').append('<option value="">No SubCategory Found</option>');
+                            return;
                         }
                         console.log(output);
                         $('#event_design_sub_category_id').empty();
