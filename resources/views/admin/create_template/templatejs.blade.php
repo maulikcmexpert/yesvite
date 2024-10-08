@@ -104,8 +104,16 @@
 
 
                 var category_id = $(this).val();
-
-                fetch(`/get_all_subcategory/${category_id}`)
+                fetch('/get_all_subcategory', {
+                        method: 'POST',
+                        headers: {
+                            // 'Content-Type': 'application/json', // Set content type to JSON
+                            'X-CSRF-TOKEN': csrfToken // Include CSRF token
+                        },
+                        body: {
+                            category_id: category_id
+                        }
+                    })
                     .then(response => response.json())
                     .then(data => {
                         // console.log('Text data saved successfully', data);
