@@ -103,22 +103,29 @@
 
                 var category_id = $(this).val();
                 console.log(base_url + "template/get_all_subcategory");
-                $.ajax({
-                    url: base_url + "template/get_all_subcategory",
-                    type: "POST",
-                    headers: {
-                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-                    },
-                    data: {
-                        category_id: category_id,
-                    },
-                    success: function(response) {
 
-                    },
-                    error: function(xhr, status, error) {
-                        console.log("AJAX error: " + error);
-                    },
-                });
+                fetch('/template/get_all_subcategory', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json', // Set content type to JSON
+                            'X-CSRF-TOKEN': csrfToken // Include CSRF token
+                        },
+                        body: JSON.stringify({
+                            category_id: category_id
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        // console.log('Text data saved successfully', data);
+                        // window.location.href = "{{URL::to('/admin/create_template')}}";
+
+                    })
+                    .catch((error) => {
+                        console.error('Error:', error);
+                    });
+
+
+
             });
 
             $(document).on('change', '#event_design_sub_category_id', function() {
