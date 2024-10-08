@@ -663,10 +663,12 @@ function bindData() {
                     let element = staticInfo?.shapeImageData;
                     if (element.shape && element.centerX && element.centerY && element.height && element.width) {
                         // updateClipPath(shapeImageUrl, element);
-                        fabric.Image.fromURL(shapeImageUrl, function(img) {
+                        const shapeImageInstance = fabric.Image.fromURL(shapeImageUrl, function(img) {
                             var oImg = img.set({ left: element.centerX, top: element.centerY}).scale(0.25);
                             canvas.add(oImg);
                         });
+
+                        applyClipPath(shapeImageInstance, element);
                     }
                 }
 
