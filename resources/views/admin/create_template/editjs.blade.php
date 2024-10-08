@@ -1376,10 +1376,9 @@ $(".removeShapImage").click(function(){
         // }
 
         // Function to delete a textbox
-        function deleteTextbox(textbox) {
-            alert('clicked')
-            console.log(textbox)
-            canvas.remove(textbox);           
+        function deleteTextbox() {
+            
+            canvas.remove(canvas.getActiveObject());           
             canvas.renderAll();
         }
 
