@@ -102,6 +102,7 @@
                 }
 
                 var category_id = $(this).val();
+                console.log(base_url + "template/get_all_subcategory");
                 $.ajax({
                     url: base_url + "template/get_all_subcategory",
                     type: "POST",
