@@ -145,12 +145,21 @@
 
                                             // Calculate new font size based on scale factor
                                             var newFontSize = currentFontSize * activeObject.scaleX; // Adjust the font size based on the horizontal scaling factor
-
+                                            const textMeasurement = new fabric.Text(activeObject.text, {
+                                                fontSize: updatedFontSize,
+                                                fontFamily: element.fontFamily,
+                                                fontWeight: element.fontWeight,
+                                                fontStyle: element.fontStyle,
+                                                underline: element.underline,
+                                                linethrough: element.linethrough,
+                                            });
+                                            const textWidth = textMeasurement.width;
                                             // Set the new font size and reset scale
                                             activeObject.set({
                                                 fontSize: newFontSize,
                                                 scaleX: 1, // Reset scaleX to 1 to prevent cumulative scaling
-                                                scaleY: 1  // Reset scaleY to 1 if you want to keep uniform scaling
+                                                scaleY: 1,  // Reset scaleY to 1 if you want to keep uniform scaling
+                                                width: textWidth
                                             });
 
                                             // Re-render the canvas to apply the changes
