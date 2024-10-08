@@ -146,7 +146,7 @@
                                             // Calculate new font size based on scale factor
                                             var newFontSize = currentFontSize * activeObject.scaleX; // Adjust the font size based on the horizontal scaling factor
                                             const textMeasurement = new fabric.Text(activeObject.text, {
-                                                fontSize: updatedFontSize,
+                                                fontSize: newFontSize,
                                                 fontFamily: element.fontFamily,
                                                 fontWeight: element.fontWeight,
                                                 fontStyle: element.fontStyle,
