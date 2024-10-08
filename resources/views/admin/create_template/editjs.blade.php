@@ -898,7 +898,12 @@ $(".removeShapImage").click(function(){
                 // alert('clicked')
                 setTimeout(function(){
                     console.log({clrcanvas})
-                    addToUndoStack(clrcanvas)
+                    undoStack.push(clrcanvas);
+          
+                    if(undoStack.length > 0){
+                        $('#undoButton').find('svg path').attr('fill', '#0F172A');
+                    }
+                    redoStack = []; // Clear redo stack on new action
                 },2000)
             })
         },1000)
@@ -936,7 +941,7 @@ $(".removeShapImage").click(function(){
             
             if (activeObject.type == 'textbox') {
                 console.log("added to undo")
-                clrcanvas = canvas.clone(); // Store the current state of the canvas
+                clrcanvas = canvas.toJSON(); // Store the current state of the canvas
 
                 console.log({clrcanvas})
                 console.log(activeObject.type);
