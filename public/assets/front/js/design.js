@@ -1934,7 +1934,7 @@ function bindData() {
         let left = element.centerX !== undefined ? `${element.centerX  + canvasRect.left}px` : '50%';
         let top = element.centerY !== undefined ? `${element.centerY + canvasRect.top}px` : '50%';
        
-        drawCanvas();
+        drawCanvas(shapeImageInstance);
 
             // Refresh canvas
             canvasElement.renderAll();
@@ -2169,8 +2169,8 @@ function bindData() {
         isResizing = false;
     }
 
-    function drawCanvas() {
-        const userImageElement = document.getElementById('user_image');
+    function drawCanvas(shapeImageInstance) {
+        const userImageElement = shapeImageInstance;
 
         ////console.loguserImageElement);
         userImageElement.style.clipPath = '';
