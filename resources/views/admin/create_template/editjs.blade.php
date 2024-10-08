@@ -2078,7 +2078,7 @@ $(".removeShapImage").click(function(){
                 console.log(obj);
                 obj.borderColor = "#2DA9FC";
                 obj.cornerColor = "#fff";
-                obj.cornerSize = 6;
+               
                 obj.textAlign = 'center';
             });
         });
@@ -2089,7 +2089,7 @@ $(".removeShapImage").click(function(){
                 console.log(obj);
                 obj.borderColor = "#2DA9FC";
                 obj.cornerColor = "#fff";
-                obj.cornerSize = 6;
+            
                 obj.textAlign = 'center';
             });
         });
