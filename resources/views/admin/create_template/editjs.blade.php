@@ -890,7 +890,7 @@ $(".removeShapImage").click(function(){
         setLetterSpacing();
         setLineHeight();
 
-        let spchoose = document.getElementByClassName('sp-choose');
+        let spchoose = document.getElementsByClassName('sp-choose');
         $(spchoose).click(function(){
             alert('clicked')
             setTimeout(function(){
