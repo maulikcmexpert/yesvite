@@ -99,6 +99,9 @@
                 if ($(this).val() !== '') {
                     $(this).next('.text-danger').text("");
                 }
+
+                var category = $(this).val();
+                console.log(category);
             });
 
             $(document).on('change', '#event_design_sub_category_id', function() {
