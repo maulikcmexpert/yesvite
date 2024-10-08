@@ -104,16 +104,17 @@
 
 
                 var category_id = $(this).val();
+
                 const formData = new FormData();
                 formData.append('category_id', category_id);
 
                 fetch('/get_all_subcategory', {
-                        method: 'POST',
+                        // method: 'POST',
                         headers: {
                             // 'Content-Type': 'application/json', // Set content type to JSON
                             'X-CSRF-TOKEN': csrfToken // Include CSRF token
                         },
-                        // body: formData // Set the body to formData
+                        body: formData // Set the body to formData
 
                     })
                     .then(response => response.json())
