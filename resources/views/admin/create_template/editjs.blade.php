@@ -189,15 +189,13 @@
                  canvas.remove(target); // Remove object on trash icon click
                  canvas.requestRenderAll();
             },
-            mouseUpHandler: cancelDelte,
+            mouseUpHandler: deleteTextbox,
             render: renderDeleteIcon,
             cornerSize: 28,
             withConnection: false // Disable the line connection
         });
         
-        function cancelDelte(){
-            console.log("adasdasd")
-        }
+        
             // here's where the render action for the control is defined
         function renderIcon(ctx, left, top, styleOverride, fabricObject) {
             var size = this.cornerSize;
@@ -1129,7 +1127,7 @@ $(".removeShapImage").click(function(){
 
     // Function to add icons to a new textbox
     function addIconsToTextbox(textbox) {
-        return
+      
         textbox.on('moving', function() {
             updateIconPositions(textbox);
         });
