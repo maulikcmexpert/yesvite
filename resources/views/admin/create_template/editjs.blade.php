@@ -1291,9 +1291,10 @@ $(".removeShapImage").click(function(){
                 ml: true,  
                 mr: true   
             });
-
+            
             obj.set('transparentCorners', false);
             obj.set('borderColor', "#2DA9FC");
+            obj.set('cornerSize', 6);
             obj.set('cornerColor', "#fff");
             // Set text alignment if the object is a text-based object
             if (obj.type === 'textbox' || obj.type === 'text') {
@@ -1312,13 +1313,13 @@ $(".removeShapImage").click(function(){
 
     function undo() {        
         if (undoStack.length > 0) {  // Ensure at least one previous state exists
-            reattachIcons();
+           
             redoStack.push(canvas.toJSON()); // Save current state to redo stack
             const lastState = undoStack.pop(); // Get the last state to undo
             canvas.loadFromJSON(lastState, function () {
 
                 canvas.renderAll(); // Render the canvas after loading state
-                reattachIcons(); // Reattach the icons to the textboxes
+              
             });            
             if(redoStack.length > 0){
                 $('#redoButton').find('svg path').attr('fill', '#0F172A');  
@@ -1333,12 +1334,12 @@ $(".removeShapImage").click(function(){
 
     function redo() {
         if (redoStack.length > 0) {
-            reattachIcons();
+          
             undoStack.push(canvas.toJSON()); // Save current state to undo stack
             const nextState = redoStack.pop(); // Get the next state to redo
             canvas.loadFromJSON(nextState, function () {
                 canvas.renderAll(); // Render the canvas after loading state
-                reattachIcons(); // Reattach the icons to the textboxes
+               
             });
             if(undoStack.length > 0 ){
                 $('#undoButton').find('svg path').attr('fill', '#0F172A');
@@ -1350,29 +1351,7 @@ $(".removeShapImage").click(function(){
         }
     }
 
-    function reattachIcons() {
-        console.log(undoStack)
-        undoStack.forEach((ob, index) => {
-            ob.objects = ob.objects.filter(obj => obj.type !== 'group');
-            ob.objects.forEach(obj => {
-                console.log(obj);
-                obj.borderColor = "#2DA9FC";
-                obj.cornerColor = "#fff";               
-                obj.textAlign = 'center';
-                
-            });
-        });     
 
-        redoStack.forEach((ob, index) => {
-            ob.objects = ob.objects.filter(obj => obj.type !== 'group');
-            ob.objects.forEach(obj => {
-                console.log(obj);
-                obj.borderColor = "#2DA9FC";
-                obj.cornerColor = "#fff";            
-                obj.textAlign = 'center';
-            });
-        });
-    }
  
     $("#undoButton").click(function(){
         undo();
