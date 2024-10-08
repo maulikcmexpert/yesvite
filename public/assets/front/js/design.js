@@ -669,7 +669,7 @@ function bindData() {
                 
                             // Create a clip path based on the selected shape
                             let clipPath;
-                
+                            console.log(element.shape);
                             switch (element.shape) {
                                 case 'rectangle':
                                     // No clip path needed for rectangle
