@@ -851,6 +851,24 @@ function bindData() {
     setLetterSpacing();
     setLineHeight();
 
+    let clrcanvas = {}
+    setTimeout(function(){
+        let spchoose = document.getElementsByClassName('sp-choose');
+        console.log({spchoose})
+            $(spchoose).click(function(){
+            // alert('clicked')
+            setTimeout(function(){
+                console.log({clrcanvas})
+                undoStack.push(clrcanvas);
+      
+                if(undoStack.length > 0){
+                    $('#undoButton').find('svg path').attr('fill', '#0F172A');
+                }
+                redoStack = []; // Clear redo stack on new action
+            },1000)
+        })
+    },1000)
+
     // Initialize the color picker
     $('#color-picker').spectrum({
         type: "flat",
@@ -885,6 +903,7 @@ function bindData() {
         }
 
         if (activeObject.type == "textbox") {
+            clrcanvas = canvas.toJSON();
             //console.log(activeObject.type);
             //console.log(activeObject.fill);
             if (selectedColorType == "font") {
@@ -1509,6 +1528,24 @@ function bindData() {
 
     function setControlVisibilityForAll() {  
         canvas.getObjects().forEach((obj) => {
+
+            var currentFontSize = obj.fontSize;
+            console.log("Current font size: " + currentFontSize);
+
+            // Calculate new font size based on scale factor
+            var newFontSize = currentFontSize * obj.scaleX; // Adjust the font size based on the horizontal scaling factor
+            const textMeasurement = new fabric.Text(obj.text, {
+                fontSize: newFontSize,
+                fontFamily: obj.fontFamily,
+                fontWeight: obj.fontWeight,
+                fontStyle: obj.fontStyle,
+                underline: obj.underline,
+                linethrough: obj.linethrough,
+            });
+            const textWidth = textMeasurement.width;
+
+            obj.set('width',textWidth);
+            obj.set('fontSize',newFontSize);
           
             obj.setControlsVisibility({
                 mt: false, 
@@ -1544,76 +1581,63 @@ function bindData() {
 
     function executeCommand(command, font = null) {
         var activeObject = canvas.getActiveObject();
-        if (!activeObject) {
-            // alert('No object selected');
-            return;
+
+        if (!activeObject || activeObject.type !== 'textbox') {
+            return; // No object or not a textbox, so do nothing
         }
-        addToUndoStack(canvas);
-        if (activeObject && activeObject.type === "textbox") {
-            const commands = {
-                bold: () =>
-                    activeObject.set(
-                        "fontWeight",
-                        activeObject.fontWeight === "bold" ? "" : "bold"
-                    ),
-                italic: () =>
-                    activeObject.set(
-                        "fontStyle",
-                        activeObject.fontStyle === "italic" ? "" : "italic"
-                    ),
-                underline: () => {
-                    activeObject.set("underline", !activeObject.underline);
-                    // Update line height after toggling underline
-                    const currentLineHeight = activeObject.lineHeight || 1.2; // Default line height
-                    activeObject.set("lineHeight", currentLineHeight); // Reapply the line height
-                },
-                setLineHeight: (value) => {
-                    activeObject.set("lineHeight", value);
-                },
-                strikeThrough: () =>
-                    activeObject.set("linethrough", !activeObject.linethrough),
-                removeFormat: () => {
-                    activeObject.set({
-                        fontWeight: "",
-                        fontStyle: "",
-                        underline: false,
-                        linethrough: false,
-                        fontFamily: "Arial",
-                    });
-                },
-                fontName: () => {
-                    if (font != null) {
-                        loadAndUse(font);
-                    }
-                },
+        console.log('add to undo')
+        addToUndoStack(canvas); // Save state for undo/redo functionality
 
-                justifyLeft: () => activeObject.set("textAlign", "left"),
-                justifyCenter: () => activeObject.set("textAlign", "center"),
-                justifyRight: () => activeObject.set("textAlign", "right"),
-                justifyFull: () => activeObject.set("textAlign", "justify"),
-
-                uppercase: () =>
-                    activeObject.set("text", activeObject.text.toUpperCase()),
-                lowercase: () =>
-                    activeObject.set("text", activeObject.text.toLowerCase()),
-                capitalize: () => {
-                    const capitalizedText = activeObject.text.replace(
-                        /\b\w/g,
-                        (char) => char.toUpperCase()
-                    );
-                    activeObject.set("text", capitalizedText);
-                },
-            };
-            if (commands[command]) {
-                commands[command]();
-                canvas.renderAll();
+        // Commands object to handle various styles and operations
+        const commands = {
+            bold: () => activeObject.set('fontWeight', activeObject.fontWeight === 'bold' ? '' : 'bold'),
+            italic: () => activeObject.set('fontStyle', activeObject.fontStyle === 'italic' ? '' : 'italic'),
+            underline: () => activeObject.set('underline', !activeObject.underline),
+            setLineHeight: (value) => activeObject.set('lineHeight', value),
+            strikeThrough: () => activeObject.set('linethrough', !activeObject.linethrough),
+            removeFormat: () => {
+                activeObject.set({
+                    fontWeight: '',
+                    fontStyle: '',
+                    underline: false,
+                    linethrough: false,
+                    fontFamily: 'Arial'
+                });
+            },
+            fontName: (font) => {
+                if (font) {
+                    console.log('load and use command')
+                    // loadAndUse(font);
+                }
+            },
+            justifyLeft: () => activeObject.set('textAlign', 'left'),
+            justifyCenter: () => activeObject.set('textAlign', 'center'),
+            justifyRight: () => activeObject.set('textAlign', 'right'),
+            justifyFull: () => activeObject.set('textAlign', 'justify'),
+            uppercase: () => activeObject.set('text', activeObject.text.toUpperCase()),
+            lowercase: () => activeObject.set('text', activeObject.text.toLowerCase()),
+            capitalize: () => {
+                const capitalizedText = activeObject.text.replace(/\b\w/g, char => char.toUpperCase());
+                activeObject.set('text', capitalizedText);
             }
+        };
+
+        // Execute the corresponding command
+        if (commands[command]) {
+            commands[command](font); // Pass font to fontName if needed
+           
+
+            canvas.renderAll(); // Re-render canvas after change
         }
     }
 
-    document.querySelectorAll("[data-command]").forEach(function(button) {
-        button.addEventListener("click", function() {
-            executeCommand(this.getAttribute("data-command"));
+    document.querySelectorAll('[data-command]').forEach(function(button) {
+        button.addEventListener('click', function() {
+            const command = button.getAttribute('data-command');
+            if(command=="fontName" || command=="undo" || command=="redo"){
+                return;
+            }
+            executeCommand(this.getAttribute('data-command'));
         });
     });
 
