@@ -1516,32 +1516,45 @@ $(".removeShapImage").click(function(){
                     if (tb.copyIcon) tb.copyIcon.set('visible', false);
                 });
             }
-            const pointer = canvas.getPointer(event.e);
-            const activeObject = canvas.getActiveObject();
             if (activeObject && activeObject.controls && activeObject.controls.deleteControl) {
-                
-                const deleteControl = activeObject.controls.deleteControl;
+                    const deleteControl = activeObject.controls.deleteControl;
 
-                // Calculate the bounding box of the control
-                const controlSize = deleteControl.cornerSize; // Assuming cornerSize is the size of your icon
-                const controlX = activeObject.left + deleteControl.x * activeObject.width + deleteControl.offsetX;
-                const controlY = activeObject.top + deleteControl.y * activeObject.height + deleteControl.offsetY;
+                    // Get the current object's dimensions (including scale)
+                    const objectWidth = activeObject.getScaledWidth();
+                    const objectHeight = activeObject.getScaledHeight();
 
-                const isWithinDeleteControl = (
-                    pointer.x >= controlX - controlSize / 2 &&
-                    pointer.x <= controlX + controlSize / 2 &&
-                    pointer.y >= controlY - controlSize / 2 &&
-                    pointer.y <= controlY + controlSize / 2
-                );
-                console.log({isWithinDeleteControl})
-                if (isWithinDeleteControl) {
-                    canvas.remove(activeObject); // Remove the active object when delete icon is clicked
-                    canvas.requestRenderAll();
+                    // Calculate the control's actual position
+                    const controlX = activeObject.left + deleteControl.x * objectWidth + deleteControl.offsetX;
+                    const controlY = activeObject.top + deleteControl.y * objectHeight + deleteControl.offsetY;
+
+                    // Convert the control position based on the object's rotation
+                    const radian = fabric.util.degreesToRadians(activeObject.angle);
+                    const rotatedX = controlX - activeObject.left;
+                    const rotatedY = controlY - activeObject.top;
+
+                    const finalControlX = activeObject.left + (rotatedX * Math.cos(radian) - rotatedY * Math.sin(radian));
+                    const finalControlY = activeObject.top + (rotatedX * Math.sin(radian) + rotatedY * Math.cos(radian));
+
+                    // Calculate control size
+                    const controlSize = deleteControl.cornerSize || 28;
+
+                    // Check if the pointer is within the control's bounds
+                    const isWithinDeleteControl = (
+                        pointer.x >= finalControlX - controlSize / 2 &&
+                        pointer.x <= finalControlX + controlSize / 2 &&
+                        pointer.y >= finalControlY - controlSize / 2 &&
+                        pointer.y <= finalControlY + controlSize / 2
+                    );
+                    console.log({isWithinDeleteControl})
+                    if (isWithinDeleteControl) {
+                        canvas.remove(activeObject); // Remove the active object when delete icon is clicked
+                        canvas.requestRenderAll();
+                    }
                 }
-            }
         });
 
-        canvas.on('mouse:up', function(options) {
+        canvas.on('mous
+        e:up', function(options) {
             discardIfMultipleObjects(options);           
         });
      
