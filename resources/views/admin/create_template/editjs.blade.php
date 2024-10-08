@@ -1308,7 +1308,7 @@ $(".removeShapImage").click(function(){
                 var centerX = boundingRect.left + boundingRect.width / 2;
                 var centerY = boundingRect.top + boundingRect.height / 2;
                 var rotationAngle = obj.angle;
-                console.log('Rotated Position:', { centerX: centerX, centerY: centerY, rotation: rotationAngle });
+                // console.log('Rotated Position:', { centerX: centerX, centerY: centerY, rotation: rotationAngle });
             });
         });    
         canvas.renderAll();
