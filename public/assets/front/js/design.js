@@ -733,7 +733,9 @@ function bindData() {
                 
                             if (clipPath) {
                                 // Set the clip path to the image
-                                img.clipPath = clipPath;
+                                img.set({
+                                    clipPath : clipPath
+                                })
                             }
                 
                             // Add the image to the canvas
