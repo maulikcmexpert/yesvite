@@ -1,4 +1,4 @@
-@font-face {
+/* @font-face {
     font-family: 'JosefinSans-Regular';
     src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/JosefinSans-Regular.woff2') format('woff2');
     font-weight: normal;
@@ -180,8 +180,8 @@
     --AgencyFB-Bold: "AgencyFB-Bold";
     --AgencyFB-Reg: "AgencyFB-Reg";
 
-}
-/* @font-face {
+} */
+@font-face {
     font-family: 'JosefinSans-Regular';
     src: url('http://18.190.81.164/assets/fonts/JosefinSans-Regular.woff2') format('woff2');
     font-weight: normal;
@@ -363,4 +363,4 @@
     --AgencyFB-Bold: "AgencyFB-Bold";
     --AgencyFB-Reg: "AgencyFB-Reg";
 
-} */
+}
