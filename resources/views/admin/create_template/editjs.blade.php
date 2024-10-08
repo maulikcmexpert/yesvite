@@ -1553,8 +1553,7 @@ $(".removeShapImage").click(function(){
                 }
         });
 
-        canvas.on('mous
-        e:up', function(options) {
+        canvas.on('mouse:up', function(options) {
             discardIfMultipleObjects(options);           
         });
      
