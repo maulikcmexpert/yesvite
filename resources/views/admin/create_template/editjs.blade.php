@@ -102,25 +102,25 @@
                                     textElement.set({
                                         width: textWidth
                                     });
-                                    textElement.setControlsVisibility({
-                                        mt: false, 
-                                        mb: false,
-                                        bl: true, 
-                                        br: true, 
-                                        tl: true, 
-                                        tr: true,
-                                        ml: true, 
-                                        mr: true  
-                                    });
+                                    // textElement.setControlsVisibility({
+                                    //     mt: false, 
+                                    //     mb: false,
+                                    //     bl: true, 
+                                    //     br: true, 
+                                    //     tl: true, 
+                                    //     tr: true,
+                                    //     ml: true, 
+                                    //     mr: true  
+                                    // });
                                     
-                                    textElement.on('rotating', function () {
-                                        // Get the bounding rectangle of the textboxbox
-                                        var boundingRect = textElement.getBoundingRect();
-                                        var centerX = boundingRect.left + boundingRect.width / 2;
-                                        var centerY = boundingRect.top + boundingRect.height / 2;
-                                        var rotationAngle = textElement.angle;
-                                        console.log('Rotated Position:', { centerX: centerX, centerY: centerY, rotation: rotationAngle });
-                                    });
+                                    // textElement.on('rotating', function () {
+                                    //     // Get the bounding rectangle of the textboxbox
+                                    //     var boundingRect = textElement.getBoundingRect();
+                                    //     var centerX = boundingRect.left + boundingRect.width / 2;
+                                    //     var centerY = boundingRect.top + boundingRect.height / 2;
+                                    //     var rotationAngle = textElement.angle;
+                                    //     console.log('Rotated Position:', { centerX: centerX, centerY: centerY, rotation: rotationAngle });
+                                    // });
 
                                  
                                     canvas.add(textElement);
@@ -185,6 +185,7 @@
                         // canvasElement.setAttribute('data-canvas-id', data.id);
 
                         canvas.renderAll(); // Ensure all elements are rendered
+                        setControlVisibilityForAll();
                     }
                 })
                 .catch(error => console.error('Error loading text data:', error));
@@ -921,23 +922,14 @@ $(".removeShapImage").click(function(){
                 isStatic: true,
                 backgroundColor: 'rgba(0, 0, 0, 0)',
             });
-
-            clonedTextbox.setControlsVisibility({
-                mt: false, // Hide middle top control
-                mb: false, // Hide middle bottom control
-                bl: true, // Hide bottom left control
-                br: true, // Hide bottom right control
-                tl: true, // Hide top left control
-                tr: true, // Hide top right control
-                ml: true,  // Show middle left control
-                mr: true   // Show middle right control
-            });
+ 
 
             canvas.add(clonedTextbox);
 
             // Add icons to the cloned textbox
 
             canvas.renderAll();
+            setControlVisibilityForAll()
         }
 
         // Handle keyboard events for delete and copy
@@ -1307,6 +1299,15 @@ $(".removeShapImage").click(function(){
             if (obj.type === 'textbox' || obj.type === 'text') {
                 obj.set('textAlign', 'center');  // Set text alignment to center
             }
+
+            obj.on('rotating', function () {
+                // Get the bounding rectangle of the textboxbox
+                var boundingRect = obj.getBoundingRect();
+                var centerX = boundingRect.left + boundingRect.width / 2;
+                var centerY = boundingRect.top + boundingRect.height / 2;
+                var rotationAngle = obj.angle;
+                console.log('Rotated Position:', { centerX: centerX, centerY: centerY, rotation: rotationAngle });
+            });
         });    
         canvas.renderAll();
     }
