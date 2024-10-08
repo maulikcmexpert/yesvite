@@ -670,32 +670,102 @@ function bindData() {
 
             // Define a function to change the clipping shape
             function changeShape() {
-                shapeIndex = (shapeIndex + 1) % 3; // Cycle through 3 shapes
+                shapeIndex = (shapeIndex + 1) % 7; // Cycle through shapes
+
+                const width = img.width;
+                const height = img.height;
 
                 switch (shapeIndex) {
-                    case 0: // Rectangle
+                    case 0: // Rectangle (default)
                         img.set({
-                            clipPath: null // No clipping for rectangle (default)
+                            clipPath: null // No clipPath means it's a rectangle by default
                         });
                         break;
                     case 1: // Circle
                         img.set({
                             clipPath: new fabric.Circle({
-                                radius: 75,
+                                radius: Math.min(width, height) / 2,
                                 originX: 'center',
                                 originY: 'center',
+                                left: img.left + width / 2,
+                                top: img.top + height / 2
                             })
                         });
                         break;
-                    case 2: // Triangle
+                    case 2: // Star
                         img.set({
-                            clipPath: new fabric.Triangle({
-                                width: 150,
-                                height: 150,
+                            clipPath: new fabric.Polygon([
+                                {x: width / 2, y: 0},
+                                {x: width * 0.61, y: height * 0.35},
+                                {x: width, y: height * 0.35},
+                                {x: width * 0.68, y: height * 0.57},
+                                {x: width * 0.79, y: height * 0.91},
+                                {x: width / 2, y: height * 0.70},
+                                {x: width * 0.21, y: height * 0.91},
+                                {x: width * 0.32, y: height * 0.57},
+                                {x: 0, y: height * 0.35},
+                                {x: width * 0.39, y: height * 0.35}
+                            ], {
                                 originX: 'center',
-                                originY: 'center'
+                                originY: 'center',
+                                left: img.left + width / 2,
+                                top: img.top + height / 2
                             })
                         });
+                        break;
+                    case 3: // Rounded rectangle
+                        img.set({
+                            clipPath: new fabric.Rect({
+                                rx: 20, // Corner radius
+                                ry: 20,
+                                width: width,
+                                height: height,
+                                originX: 'center',
+                                originY: 'center',
+                                left: img.left + width / 2,
+                                top: img.top + height / 2
+                            })
+                        });
+                        break;
+                    case 4: // Heart
+                        img.set({
+                            clipPath: new fabric.Path('M 0 0 A 30 30 0 0 1 60 0 Q 60 35 30 60 Q 0 35 0 0 Z', {
+                                originX: 'center',
+                                originY: 'center',
+                                scaleX: Math.min(width, height) / 60, // Scale based on image size
+                                scaleY: Math.min(width, height) / 60,
+                                left: img.left + width / 2,
+                                top: img.top + height / 2
+                            })
+                        });
+                        break;
+                    case 5: // Triangle
+                        img.set({
+                            clipPath: new fabric.Polygon([
+                                {x: width / 2, y: 0},
+                                {x: 0, y: height},
+                                {x: width, y: height}
+                            ], {
+                                originX: 'center',
+                                originY: 'center',
+                                left: img.left + width / 2,
+                                top: img.top + height / 2
+                            })
+                        });
+                        break;
+                    case 6: // Oval
+                        img.set({
+                            clipPath: new fabric.Ellipse({
+                                rx: width / 2,
+                                ry: height / 2,
+                                originX: 'center',
+                                originY: 'center',
+                                left: img.left + width / 2,
+                                top: img.top + height / 2
+                            })
+                        });
+                        break;
+                    default:
                         break;
                 }
 
