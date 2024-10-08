@@ -74,23 +74,11 @@
 
                             // Render text elements or shapes on canvas
                             staticInfo.textElements.forEach(element => {
-
-                                
                                 if (element.text) {
-                                    const textMeasurement = new fabric.Text(element.text, {
-                                        fontSize: element.fontSize,
-                                        fontFamily: element.fontFamily,
-                                        fontWeight: element.fontWeight,
-                                        fontStyle: element.fontStyle,
-                                        underline: element.underline,
-                                        linethrough: element.linethrough,
-                                    });
-    
-                                    const textWidth = textMeasurement.width;
                                     let textElement = new fabric.Textbox(element.text, {
                                         left: element.left,
                                         top: element.top,
-                                        width: element.width || textWidth,
+                                        width: element.width || 200,
                                         fontSize: element.fontSize,
                                         fill: element.fill,
                                         fontFamily: element.fontFamily,
