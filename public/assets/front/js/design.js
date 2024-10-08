@@ -670,7 +670,7 @@ function bindData() {
                             // Create a clip path based on the selected shape
                             let clipPath;
                 
-                            switch (current_shape) {
+                            switch (element.shape) {
                                 case 'rectangle':
                                     // No clip path needed for rectangle
                                     clipPath = new fabric.Rect({
