@@ -662,7 +662,11 @@ function bindData() {
                 if (shapeImageUrl) {
                     let element = staticInfo?.shapeImageData;
                     if (element.shape && element.centerX && element.centerY && element.height && element.width) {
-                        updateClipPath(shapeImageUrl, element);
+                        // updateClipPath(shapeImageUrl, element);
+                        fabric.Image.fromURL(shapeImageUrl, function(img) {
+                            var oImg = img.set({ left: element.centerX, top: element.centerY}).scale(0.25);
+                            canvas.add(oImg);
+                        });
                     }
                 }
 
@@ -1924,11 +1928,11 @@ function bindData() {
         const imageWrapper = document.getElementById('imageWrapper');
         const imgElement = document.getElementById('user_image');
         imgElement.src = imageUrl;
-if(!canvasElement){
-    var canvasElement = new fabric.Canvas('imageEditor', {
-        width: 500, // Canvas width
-        height: 500, // Canvas height
-        cornerSize: 6,
+        if(!canvasElement){
+        var canvasElement = new fabric.Canvas('imageEditor', {
+                    width: 500, // Canvas width
+                    height: 500, // Canvas height
+                    cornerSize: 6,
     });
 }
         //console.log(imageWrapper);
@@ -2009,7 +2013,7 @@ if(!canvasElement){
                     currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
                     const nextShape = shapes[currentShapeIndex];
                     element.shape = nextShape;
-console.log(1)
+                    console.log(1)
                     updateClipPath(data, element); // Update the image with the new shape
                 }
             });
