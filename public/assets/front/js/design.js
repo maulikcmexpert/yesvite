@@ -1528,6 +1528,24 @@ function bindData() {
 
     function setControlVisibilityForAll() {  
         canvas.getObjects().forEach((obj) => {
+
+            var currentFontSize = obj.fontSize;
+            console.log("Current font size: " + currentFontSize);
+
+            // Calculate new font size based on scale factor
+            var newFontSize = currentFontSize * obj.scaleX; // Adjust the font size based on the horizontal scaling factor
+            const textMeasurement = new fabric.Text(obj.text, {
+                fontSize: newFontSize,
+                fontFamily: obj.fontFamily,
+                fontWeight: obj.fontWeight,
+                fontStyle: obj.fontStyle,
+                underline: obj.underline,
+                linethrough: obj.linethrough,
+            });
+            const textWidth = textMeasurement.width;
+
+            obj.set('width',textWidth);
+            obj.set('fontSize',newFontSize);
           
             obj.setControlsVisibility({
                 mt: false, 
