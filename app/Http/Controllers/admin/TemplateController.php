@@ -105,14 +105,14 @@ class TemplateController extends Controller
             $i = 0;
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
-                $imageName = time() .$i. '.' . $image->getClientOriginalExtension();
+                $imageName = time() . $i . '.' . $image->getClientOriginalExtension();
                 $image->move(public_path('storage/canvas'), $imageName);
                 $i++;
             }
             if ($request->hasFile('filled_image')) {
                 $i++;
                 $filled_image = $request->file('filled_image');
-                $filledImage = time() .$i. '.' . $filled_image->getClientOriginalExtension();
+                $filledImage = time() . $i . '.' . $filled_image->getClientOriginalExtension();
                 $filled_image->move(public_path('storage/canvas'), $filledImage);
             }
             $textData = TextData::create([
@@ -201,7 +201,7 @@ class TemplateController extends Controller
                 if ($template->image && file_exists(public_path('storage/canvas/' . $template->image))) {
                     unlink(public_path('storage/canvas/' . $template->image));
                 }
-                $imageName = time() .$i.'.' . $request->image->extension();
+                $imageName = time() . $i . '.' . $request->image->extension();
                 $i++;
                 $request->image->move(public_path('storage/canvas'), $imageName);
                 $template->image = $imageName;
@@ -211,7 +211,7 @@ class TemplateController extends Controller
                 if ($template->filled_image && file_exists(public_path('storage/canvas/' . $template->filled_image))) {
                     unlink(public_path('storage/canvas/' . $template->filled_image));
                 }
-                $FilledimageName = time() .$i. '.' . $request->filled_image->extension();
+                $FilledimageName = time() . $i . '.' . $request->filled_image->extension();
                 $request->filled_image->move(public_path('storage/canvas'), $FilledimageName);
                 $template->filled_image = $FilledimageName;
             }
@@ -272,5 +272,11 @@ class TemplateController extends Controller
 
         // Return the view to display the template
         return view('template.view', compact('template'));
+    }
+
+    public function get_all_subcategory(Request $request)
+    {
+        $category_id = $request->input('category_id');
+        dd($category_id);
     }
 }
