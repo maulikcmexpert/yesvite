@@ -1653,7 +1653,7 @@ $(".removeShapImage").click(function(){
                 transparentCorners: false,
                 textAlign:'center',
             });
-            textElement.setControlsVisibility({
+            textbox.setControlsVisibility({
                 mt: false, // Hide middle top control
                 mb: false, // Hide middle bottom control
                 bl: true, // Hide bottom left control
