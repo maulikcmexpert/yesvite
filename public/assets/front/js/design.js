@@ -1197,8 +1197,8 @@ function bindData() {
         }
     })
 
-    // Function to clone a textbox
-    function cloneTextbox(originalTextbox) {
+    function cloneTextbox() {
+        let originalTextbox = canvas.getActiveObject()
         const clonedTextbox = new fabric.Textbox(originalTextbox.text, {
             left: originalTextbox.left + 30, // Offset position
             top: originalTextbox.top + 30, // Offset position
@@ -1212,24 +1212,23 @@ function bindData() {
             hasControls: true,
             hasBorders: true,
             lockScalingFlip: true,
-            fontWeight: originalTextbox.fontWeight,
-            fontStyle: originalTextbox.fontStyle,
-            underline: originalTextbox.underline,
-            linethrough: originalTextbox.linethrough,
-            backgroundColor: originalTextbox.backgroundColor,
-            textAlign: originalTextbox.textAlign,
-            borderColor: "#2DA9FC",
-            cornerColor: "#fff",
+            editable: true,
+            borderColor: '#2DA9FC',
+            // cornerColor: 'red',
+            cornerColor: '#fff',
             cornerSize: 6,
             transparentCorners: false,
+            isStatic: true,
+            backgroundColor: 'rgba(0, 0, 0, 0)',
         });
+
 
         canvas.add(clonedTextbox);
 
         // Add icons to the cloned textbox
-        // addIconsToTextbox(clonedTextbox);
 
         canvas.renderAll();
+        setControlVisibilityForAll()
     }
 
     // Handle keyboard events for delete and copy
