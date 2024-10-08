@@ -134,20 +134,23 @@
                                     canvas.renderAll();
 
                                     // Event Listener to get and update the fontSize during dragging/moving
-                                    canvas.on('object:moving', function (e) {
+                                    canvas.on('object:scaling', function (e) {
                                         var activeObject = e.target;
 
-                                        // Check if the moved object is the textbox
+                                        // Check if the scaled object is the textbox
                                         if (activeObject && activeObject.type === 'textbox') {
                                             // Get the current font size
                                             var currentFontSize = activeObject.fontSize;
                                             console.log("Current font size: " + currentFontSize);
 
-                                            // Example logic to dynamically adjust font size based on position
-                                            // Here, we increase the font size based on the left position of the textbox
-                                            var newFontSize = 20 + Math.floor(activeObject.left / 50); // Adjust divisor for sensitivity
+                                            // Calculate new font size based on scale factor
+                                            var newFontSize = currentFontSize * activeObject.scaleX; // Adjust the font size based on the horizontal scaling factor
+
+                                            // Set the new font size and reset scale
                                             activeObject.set({
-                                                fontSize: newFontSize
+                                                fontSize: newFontSize,
+                                                scaleX: 1, // Reset scaleX to 1 to prevent cumulative scaling
+                                                scaleY: 1  // Reset scaleY to 1 if you want to keep uniform scaling
                                             });
 
                                             // Re-render the canvas to apply the changes
@@ -155,7 +158,7 @@
 
                                             console.log("Updated font size: " + newFontSize);
                                         }
-                                    });
+                                    });                                    
 
                                 }
 
