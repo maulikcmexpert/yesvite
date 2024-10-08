@@ -663,15 +663,7 @@ function bindData() {
                     let element = staticInfo?.shapeImageData;
                     if (element.shape && element.centerX && element.centerY && element.height && element.width) {
                         // updateClipPath(shapeImageUrl, element);
-
-                        let isDragging = false;
-                        let isResizing = false;
-                        let startWidth, startHeight, startX, startY, activeHandle;
-                        let offsetX, offsetY;
-                        let shape = 'rectangle'; // Default shape
                         current_shape = shape;
-                        let shapeChangedDuringDrag = false; // Flag to track shape change
-                        let imageUploaded = false; // Flag to track if image has been uploaded
                         const shapeImageInstance = fabric.Image.fromURL(shapeImageUrl, function(img) {
                             var oImg = img.set({ left: element.centerX, top: element.centerY}).scale(0.25);
                             canvas.add(oImg);
@@ -2065,7 +2057,7 @@ function bindData() {
     function applyClipPath(image, element) {
         const containerWidth = 150;
         const containerHeight = 200;
-
+    
         let clipPath;
         switch (element.shape) {
             case 'circle':
@@ -2075,16 +2067,18 @@ function bindData() {
                     originY: 'center'
                 });
                 break;
+    
             case 'star':
                 clipPath = new fabric.Path(
                     'M 50,0 L 61,35 L 98,35 L 68,57 L 79,91 L 50,70 L 21,91 L 32,57 L 2,35 L 39,35 z', {
-                        scaleX: (image.width * image.scaleX) / 100,
-                        scaleY: (image.height * image.scaleY) / 100,
+                        scaleX: containerWidth / 100,
+                        scaleY: containerHeight / 100,
                         originX: 'center',
                         originY: 'center'
                     }
                 );
                 break;
+    
             case 'heart':
                 const heartPath = [
                     'M', 0, 0,
@@ -2096,16 +2090,20 @@ function bindData() {
                     originY: 'center'
                 });
                 break;
+    
             default:
                 break;
         }
-
-        // Set clipping path for the image
-        image.set({
-            clipPath: clipPath
-        });
-
-        canvasElement.renderAll();
+    
+        if (clipPath) {
+            // Ensure that the clip path is applied after the image is loaded
+            image.set({
+                clipPath: clipPath
+            });
+    
+            // Rerender the canvas to apply the clipping
+            canvas.renderAll();
+        }
     }
 
 
