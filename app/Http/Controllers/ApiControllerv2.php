@@ -13075,7 +13075,7 @@ class ApiControllerv2 extends Controller
                                 unset($udpated[$k]); // Remove entry if host_name is empty
                             }
                             break;
-                        case 'Location':
+                        case 'location':
                             if (!empty($request->event_location_name)) {
                                 $udpated[$k][$key] = $request->event_location_name;
                             } else {
