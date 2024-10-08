@@ -585,7 +585,7 @@ function bindData() {
                             break;
                     }
 
-                    addIconsToTextbox(textElement);
+                    // addIconsToTextbox(textElement);
                     canvas.add(textElement);
                 });
 
