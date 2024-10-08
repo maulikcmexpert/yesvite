@@ -1,5 +1,5 @@
 <script type="text/javascript">
-    var base_url = $('#base_url').val();
+    var base_url = "{{ url('/') }}/";
     $(function() {
 
         var table = $("#template_table").DataTable({
@@ -104,10 +104,10 @@
                 var category_id = $(this).val();
                 $.ajax({
                     url: base_url + "template/get_all_subcategory",
-                    type: "POST",
-                    // headers: {
-                    //     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-                    // },
+                    type: "GET",
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                    },
                     data: {
                         category_id: category_id,
                     },
