@@ -884,6 +884,7 @@ $(".removeShapImage").click(function(){
                 alert('Please select a textbox to reset the settings.');
             }
         });
+        let clrcanvas = {}
 
         // Initialize tooltips and values on page load
         setFontSize();
@@ -895,13 +896,13 @@ $(".removeShapImage").click(function(){
                 $(spchoose).click(function(){
                 alert('clicked')
                 setTimeout(function(){
+                    console.log({clrcanvas})
                     addToUndoStack(clrcanvas)
-                },1000)
+                },2000)
             })
         },1000)
        
         // // Initialize the color picker
-       let clrcanvas = {}
         // Initialize the color picker
         $('#color-picker').spectrum({
             type: "flat",
