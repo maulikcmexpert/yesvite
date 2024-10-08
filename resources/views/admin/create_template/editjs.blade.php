@@ -1516,6 +1516,8 @@ $(".removeShapImage").click(function(){
                     if (tb.copyIcon) tb.copyIcon.set('visible', false);
                 });
             }
+            const pointer = canvas.getPointer(event.e);
+            const activeObject = canvas.getActiveObject();
             if (activeObject && activeObject.controls && activeObject.controls.deleteControl) {
                     const deleteControl = activeObject.controls.deleteControl;
 
