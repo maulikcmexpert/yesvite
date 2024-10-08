@@ -100,10 +100,10 @@
                                         isStatic: true
                                     });
 
-                                    // const textWidth = textElement.calcTextWidth();
-                                    // textElement.set({
-                                    //     width: textWidth
-                                    // });
+                                    const textWidth = textElement.calcTextWidth();
+                                    textElement.set({
+                                        width: textWidth
+                                    });
 
                                     
 
