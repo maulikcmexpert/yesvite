@@ -168,8 +168,8 @@
         
         fabric.Textbox.prototype.controls.mtr = new fabric.Control({
             x: 0,
-            y: -0.5,
-            offsetY: -30,
+            y: 0.5,
+            offsetY: -20,
             cursorStyle: 'pointer',
             actionHandler: fabric.controlsUtils.rotationWithSnapping,
             actionName: 'rotate',
@@ -190,6 +190,18 @@
                  canvas.requestRenderAll();
             },
             mouseUpHandler: deleteTextbox,
+            render: renderDeleteIcon,
+            cornerSize: 28,
+            withConnection: false // Disable the line connection
+        });
+
+
+        fabric.Textbox.prototype.controls.copyControl = new fabric.Control({
+            x: -0.3,
+            y: -0.5,
+            offsetY: -20,
+            cursorStyle: 'pointer', 
+            mouseUpHandler: cloneTextbox,
             render: renderDeleteIcon,
             cornerSize: 28,
             withConnection: false // Disable the line connection
@@ -1376,16 +1388,15 @@ $(".removeShapImage").click(function(){
         // }
 
         // Function to delete a textbox
-        function deleteTextbox(textbox) {
-            alert('clicked')
-            console.log(textbox)
-            canvas.remove(textbox);           
+        function deleteTextbox() {            
+            canvas.remove(canvas.getActiveObject());           
             canvas.renderAll();
         }
 
 
         // Function to clone a textbox
-        function cloneTextbox(originalTextbox) {
+        function cloneTextbox() {
+            let originalTextbox = canvas.getActiveObject()
             const clonedTextbox = new fabric.Textbox(originalTextbox.text, {
                 left: originalTextbox.left + 30, // Offset position
                 top: originalTextbox.top + 30, // Offset position
