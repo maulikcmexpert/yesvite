@@ -601,7 +601,7 @@ $(".removeShapImage").click(function(){
                 lineHeight: defaultSettings.lineHeight,
                 fontFamily: 'Arial',
                 // textAlign: 'left',
-                fill: '#0a0808', // Optional: Reset text color
+                fill: '#000000', // Optional: Reset text color
             });
 
             updateTextboxWidth(object);
@@ -669,11 +669,15 @@ $(".removeShapImage").click(function(){
             allowEmpty: true, // Allows setting background to transparent
             showAlpha: true, // Allows transparency adjustment
             preferredFormat: "hex",
-            change: function(color) { 
-                if (color) {                    
+            change: function(color) {
+                console.log({color})
+
+                if (color) {
+                    console.log("color")
                     changeColor(color.toHexString()); // Use RGB string for color changes
                 } else {
-                    changeColor('#0a0808'); // Handle transparency by default
+                    console.log("rgba")
+                    changeColor('#000000'); // Handle transparency by default
                 }
             }
         });
@@ -682,30 +686,39 @@ $(".removeShapImage").click(function(){
         function changeColor(selectedColor) {
             const selectedColorType = document.querySelector('input[name="colorType"]:checked').value;
             const activeObject = canvas.getActiveObject();
-           
+            console.log("before update")
 
             console.log(activeObject)
             if (!activeObject) {
-             
+                console.log('No object selected');
                 return;
             }
             
             if (activeObject.type == 'textbox') {
-              
+                console.log("added to undo")
                 clrcanvas = canvas.toJSON(); // Store the current state of the canvas
 
-              
+                console.log({clrcanvas})
+                console.log(activeObject.type);
+                console.log(activeObject.fill);
                 if (selectedColorType == 'font') {
-                   
+                    console.log("update fill")
+                    console.log(activeObject.fill);
+                    console.log(activeObject.backgroundColor);
                     activeObject.set('fill', selectedColor); // Change font color
-                    
+                    console.log(activeObject.fill);
+                    console.log(activeObject.backgroundColor);
                 } else if (selectedColorType == 'background') {
-                   
+                    console.log("update background")
                     activeObject.set('backgroundColor', selectedColor); // Change background color
                 }
                 canvas.renderAll(); // Re-render the canvas after color change
             }
 
+            const activeObjec = canvas.getActiveObject();
+            console.log("ater update")
+
+            console.log(activeObjec)
         }
       
 
@@ -720,7 +733,7 @@ $(".removeShapImage").click(function(){
 
                 if (selectedColorType === 'font') {
 
-                    $('#color-picker').spectrum('set', activeObject.fill || '#0a0808'); // Set font color in picker
+                    $('#color-picker').spectrum('set', activeObject.fill || '#000000'); // Set font color in picker
                 } else if (selectedColorType === 'background') {
                     const bgColor = activeObject.backgroundColor || 'rgba(0, 0, 0, 0)'; // Default to transparent background
                     $('#color-picker').spectrum('set', bgColor); // Set current background color in picker
@@ -828,7 +841,7 @@ $(".removeShapImage").click(function(){
                 top: top,
                 fontSize: 20,
                 backgroundColor: 'rgba(0, 0, 0, 0)', // Set background to transparent
-                fill: '#0a0808', // Default text color (black)
+                fill: '#000000', // Default text color (black)
                 editable: false,
                 selectable: true,
                 isStatic: false,
@@ -1059,7 +1072,7 @@ $(".removeShapImage").click(function(){
                 fontSize: 20,
                 backgroundColor: 'rgba(0, 0, 0, 0)', // Set background to transparent
                 textAlign: 'center',
-                fill: '#0a0808',
+                fill: '#000000',
                 editable: true,
                 selectable: true,
                 hasControls: true,
