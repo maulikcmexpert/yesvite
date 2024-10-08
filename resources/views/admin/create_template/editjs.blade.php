@@ -895,7 +895,7 @@ $(".removeShapImage").click(function(){
             let spchoose = document.getElementsByClassName('sp-choose');
             console.log({spchoose})
                 $(spchoose).click(function(){
-                alert('clicked')
+                // alert('clicked')
                 setTimeout(function(){
                     console.log({clrcanvas})
                     addToUndoStack(clrcanvas)
