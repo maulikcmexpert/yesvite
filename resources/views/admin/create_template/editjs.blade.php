@@ -601,7 +601,7 @@ $(".removeShapImage").click(function(){
                 lineHeight: defaultSettings.lineHeight,
                 fontFamily: 'Arial',
                 // textAlign: 'left',
-                fill: '#0a0808', // Optional: Reset text color
+                fill: '#000000', // Optional: Reset text color
             });
 
             updateTextboxWidth(object);
@@ -673,7 +673,7 @@ $(".removeShapImage").click(function(){
                 if (color) {                    
                     changeColor(color.toHexString()); // Use RGB string for color changes
                 } else {
-                    changeColor('#0a0808'); // Handle transparency by default
+                    changeColor('#000000'); // Handle transparency by default
                 }
             }
         });
@@ -706,6 +706,10 @@ $(".removeShapImage").click(function(){
                 canvas.renderAll(); // Re-render the canvas after color change
             }
 
+            const activeObjec = canvas.getActiveObject();
+           
+
+            console.log(activeObjec)
         }
       
 
@@ -720,7 +724,7 @@ $(".removeShapImage").click(function(){
 
                 if (selectedColorType === 'font') {
 
-                    $('#color-picker').spectrum('set', activeObject.fill || '#0a0808'); // Set font color in picker
+                    $('#color-picker').spectrum('set', activeObject.fill || '#000000'); // Set font color in picker
                 } else if (selectedColorType === 'background') {
                     const bgColor = activeObject.backgroundColor || 'rgba(0, 0, 0, 0)'; // Default to transparent background
                     $('#color-picker').spectrum('set', bgColor); // Set current background color in picker
@@ -828,7 +832,7 @@ $(".removeShapImage").click(function(){
                 top: top,
                 fontSize: 20,
                 backgroundColor: 'rgba(0, 0, 0, 0)', // Set background to transparent
-                fill: '#0a0808', // Default text color (black)
+                fill: '#000000', // Default text color (black)
                 editable: false,
                 selectable: true,
                 isStatic: false,
@@ -1059,7 +1063,7 @@ $(".removeShapImage").click(function(){
                 fontSize: 20,
                 backgroundColor: 'rgba(0, 0, 0, 0)', // Set background to transparent
                 textAlign: 'center',
-                fill: '#0a0808',
+                fill: '#000000',
                 editable: true,
                 selectable: true,
                 hasControls: true,
