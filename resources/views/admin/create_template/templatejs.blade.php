@@ -100,6 +100,8 @@
                 if ($(this).val() !== '') {
                     $(this).next('.text-danger').text("");
                 }
+                var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content'); // Get CSRF token
+
 
                 var category_id = $(this).val();
                 console.log(base_url + "template/get_all_subcategory");
