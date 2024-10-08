@@ -1291,9 +1291,9 @@ $(".removeShapImage").click(function(){
                 ml: true,  
                 mr: true   
             });
-            obj.borderColor = "#2DA9FC";  // Set border color
-            obj.cornerColor = "#fff";     // Set corner color
-            
+
+            obj.set('borderColor', "#2DA9FC");
+            obj.set('cornerColor', "#fff");
             // Set text alignment if the object is a text-based object
             if (obj.type === 'textbox' || obj.type === 'text') {
                 obj.set('textAlign', 'center');  // Set text alignment to center
