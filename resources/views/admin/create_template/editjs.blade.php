@@ -664,7 +664,7 @@ $(".removeShapImage").click(function(){
         // Initialize the color picker
         $('#color-picker').spectrum({
             type: "flat",
-            color: "#000000", // Default font color
+            color: "#000100", // Default font color
             showInput: true,
             allowEmpty: true, // Allows setting background to transparent
             showAlpha: true, // Allows transparency adjustment
