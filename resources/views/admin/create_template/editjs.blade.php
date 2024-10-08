@@ -895,7 +895,7 @@ $(".removeShapImage").click(function(){
             let spchoose = document.getElementsByClassName('sp-choose');
             console.log({spchoose})
                 $(spchoose).click(function(){
-                alert('clicked')
+                // alert('clicked')
                 setTimeout(function(){
                     console.log({clrcanvas})
                     addToUndoStack(clrcanvas)
@@ -936,7 +936,8 @@ $(".removeShapImage").click(function(){
             
             if (activeObject.type == 'textbox') {
                 console.log("added to undo")
-                clrcanvas = JSON.parse(JSON.stringify(canvas));
+                clrcanvas = canvas.toJSON(); // Store the current state of the canvas
+
                 console.log({clrcanvas})
                 console.log(activeObject.type);
                 console.log(activeObject.fill);
