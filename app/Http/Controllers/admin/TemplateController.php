@@ -273,11 +273,4 @@ class TemplateController extends Controller
         // Return the view to display the template
         return view('template.view', compact('template'));
     }
-
-    public function get_all_subcategory(Request $request)
-    {
-        dd(1);
-        $category_id = $request->input('category_id');
-        dd($category_id);
-    }
 }
