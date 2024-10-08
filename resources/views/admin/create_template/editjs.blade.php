@@ -906,7 +906,7 @@ $(".removeShapImage").click(function(){
                 // Update text properties
                 activeObject.set({
                     fontSize: fontSize,
-                    // fill: fontColor
+                    fill: fontColor
                 });
                 activeObject.setCoords(); // Update coordinates
 
