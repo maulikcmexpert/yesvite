@@ -1249,6 +1249,7 @@ function bindData() {
     function updateSelectedTextProperties() {
         var fontSize = parseInt(document.getElementById("fontSize").value, 10);
         var fontColor = document.getElementById("fontColor").value;
+        addToUndoStack(canvas);
         var activeObject = canvas.getActiveObject();
 
         if (activeObject && activeObject.type === "textbox") {
@@ -1264,7 +1265,7 @@ function bindData() {
             //console.log("Updated Font Color: " + activeObject.fill);
 
             canvas.renderAll();
-            addToUndoStack(); // Save state after updating properties
+             // Save state after updating properties
         }
     }
 
@@ -1481,6 +1482,7 @@ function bindData() {
     // });
     function loadAndUse(font) {
         var myfont = new FontFaceObserver(font);
+        addToUndoStack(canvas);
         myfont
             .load()
             .then(function() {
@@ -1546,6 +1548,7 @@ function bindData() {
             // alert('No object selected');
             return;
         }
+        addToUndoStack(canvas);
         if (activeObject && activeObject.type === "textbox") {
             const commands = {
                 bold: () =>
@@ -1604,7 +1607,6 @@ function bindData() {
             if (commands[command]) {
                 commands[command]();
                 canvas.renderAll();
-                addToUndoStack(); // Save state after executing the command
             }
         }
     }
@@ -1615,96 +1617,101 @@ function bindData() {
         });
     });
 
-    // Undo and Redo actions (basic implementation)
     let undoStack = [];
     let redoStack = [];
-    let isAddingToUndoStack = false;
+    let isAddingToUndoStack = 0;
+    function setControlVisibilityForAll() {  
+        canvas.getObjects().forEach((obj) => {
+          
+            obj.setControlsVisibility({
+                mt: false, 
+                mb: false, 
+                bl: true,  
+                br: true,  
+                tl: true, 
+                tr: true, 
+                ml: true,  
+                mr: true   
+            });
+            
+            obj.set('transparentCorners', false);
+            obj.set('borderColor', "#2DA9FC");
+            obj.set('cornerSize', 6);
+            obj.set('cornerColor', "#fff");
+            // Set text alignment if the object is a text-based object
+            if (obj.type === 'textbox' || obj.type === 'text') {
+                obj.set('textAlign', 'center');  // Set text alignment to center
+            }
 
-    function addToUndoStack() {
-        if (isAddingToUndoStack) return; // Prevents multiple calls in rapid succession
-        isAddingToUndoStack = true;
-
-        // Delay the action slightly to allow for batch updates
-        setTimeout(() => {
-            undoStack.push(canvas.toJSON());
-            //console.log(undoStack);
-            redoStack = []; // Clear redo stack on new action
-            isAddingToUndoStack = false; // Reset the flag
-        }, 200); // Adjust delay as necessary (200ms is an example)
+            obj.on('rotating', function () {
+                // Get the bounding rectangle of the textboxbox
+                var boundingRect = obj.getBoundingRect();
+                var centerX = boundingRect.left + boundingRect.width / 2;
+                var centerY = boundingRect.top + boundingRect.height / 2;
+                var rotationAngle = obj.angle;
+                // console.log('Rotated Position:', { centerX: centerX, centerY: centerY, rotation: rotationAngle });
+            });
+        });    
+        canvas.renderAll();
+    }
+    function addToUndoStack(canvas) {          
+        undoStack.push(canvas.toJSON());          
+        if(undoStack.length > 0){
+            $('#undoButton').find('svg path').attr('fill', '#0F172A');
+        }
+        redoStack = [];        
     }
 
-    function undo() {
-        //console.log(undoStack);
-        if (undoStack.length > 0) {
-            reattachIcons();
+    function undo() {        
+        if (undoStack.length > 0) {  // Ensure at least one previous state exists
+           
             redoStack.push(canvas.toJSON()); // Save current state to redo stack
             const lastState = undoStack.pop(); // Get the last state to undo
-            canvas.loadFromJSON(lastState, function() {
+            canvas.loadFromJSON(lastState, function () {
+
                 canvas.renderAll(); // Render the canvas after loading state
-                // Reattach the icons to the textboxes
-            });
+              
+            });            
+            if(redoStack.length > 0){
+                $('#redoButton').find('svg path').attr('fill', '#0F172A');  
+            }
+            setTimeout(function(){
+                setControlVisibilityForAll()
+            },1000)
+        }else{
+            $('#undoButton').find('svg path').attr('fill', '#CBD5E1');  
         }
     }
 
     function redo() {
         if (redoStack.length > 0) {
-            reattachIcons();
+          
             undoStack.push(canvas.toJSON()); // Save current state to undo stack
             const nextState = redoStack.pop(); // Get the next state to redo
-            canvas.loadFromJSON(nextState, function() {
+            canvas.loadFromJSON(nextState, function () {
                 canvas.renderAll(); // Render the canvas after loading state
-                reattachIcons(); // Reattach the icons to the textboxes
+               
             });
+            if(undoStack.length > 0 ){
+                $('#undoButton').find('svg path').attr('fill', '#0F172A');
+            }
+            $('#redoButton').find('svg path').attr('fill', '#0F172A');  
+            setTimeout(function(){
+                setControlVisibilityForAll()
+            },1000)
+        }else{
+            $('#redoButton').find('svg path').attr('fill', '#CBD5E1');  
         }
     }
 
-    function reattachIcons() {
-       
-        undoStack.forEach((ob, index) => {
-            ob.objects = ob.objects.filter(obj => obj.type !== 'group');
-            ob.objects.forEach(obj => {
-            console.log(obj);
-            obj.borderColor = "#2DA9FC"
-            obj.cornerColor = "#fff"
-            obj.cornerSize = 6
-            obj.textAlign = 'center'
-            // Check if obj is a fabric object by checking for the existence of 'set' method
-           
-        });
 
-
-
-            if (ob.objects.length === 0) {
-                console.log("Removed from undoStack");
-           
-            }
-        });
-
-        redoStack.forEach((ob, index) => {
-
-            ob.objects = ob.objects.filter(obj => obj.type !== 'group');
-
-        
-            if (ob.objects.length === 0) {
-                console.log("Removed from undoStack");
-            
-            }
-        })
-      
-    }
-
-    // canvas.on('object:added', addToUndoStack);
-    // canvas.on('object:modified', addToUndoStack);
-    // canvas.on('object:removed', addToUndoStack);
-    // canvas.on('object:scaled', addToUndoStack);
-    // canvas.on('object:moved', addToUndoStack);
-
-    document
-        .querySelector('[data-command="undo"]')
-        .addEventListener("click", undo);
-    document
-        .querySelector('[data-command="redo"]')
-        .addEventListener("click", redo);
+ 
+    $("#undoButton").click(function(){
+        undo();
+    })
+    $("#redoButton").click(function(){
+        redo();
+    })
 
 
         $(".slider_photo").on("change", function(event) {
