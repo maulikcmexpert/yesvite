@@ -670,6 +670,8 @@ $(".removeShapImage").click(function(){
             showAlpha: true, // Allows transparency adjustment
             preferredFormat: "hex",
             change: function(color) {
+                console.log({color})
+
                 if (color) {
                     console.log("color")
                     changeColor(color.toHexString()); // Use RGB string for color changes
