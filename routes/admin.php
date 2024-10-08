@@ -91,6 +91,7 @@ Route::group(['middleware' => adminAuth::Class], function () {
     // routes/web.php
     Route::post('/saveImagePath', action: [EditTempalteController::class, 'storeImagePath']);
 
+    Route::post('create_template/get_all_subcategory', [TemplateController::class, 'get_all_subcategory'])->name('get_all_subcategory');
 
 
     Route::post('user/check_new_contactemail', [UserController::class, 'checkNewContactEmail']);
