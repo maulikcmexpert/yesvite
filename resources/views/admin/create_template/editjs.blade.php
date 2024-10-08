@@ -1516,7 +1516,7 @@ $(".removeShapImage").click(function(){
                     if (tb.copyIcon) tb.copyIcon.set('visible', false);
                 });
             }
-            var pointClicked = opt.target.canvas.getPointer(opt.e);
+            var pointClicked = options.target.canvas.getPointer(options.e);
             console.log(pointClicked);
             console.log(options.target.id)
             const pointer = canvas.getPointer(event.e);
