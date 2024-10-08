@@ -75,7 +75,7 @@ Route::group(['middleware' => adminAuth::Class], function () {
 
     ]);
     Route::get('template/view/{id}', [TemplateController::class, 'View_template'])->name('template.view');
-    // Route::post('template/get_all_subcategory', [TemplateController::class, 'get_all_subcategory'])->name('template.get_all_subcategory');
+    Route::get('template/get_all_subcategory', [TemplateController::class, 'get_all_subcategory'])->name('template.get_all_subcategory');
 
     Route::get('template/edit_template/{id}', [EditTempalteController::class, 'index'])->name('create_template.edit_template');
     Route::post('/saveTextData', [EditTempalteController::class, 'saveTextData'])->name('saveTextData');
