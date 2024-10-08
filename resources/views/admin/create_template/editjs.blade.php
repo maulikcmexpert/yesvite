@@ -154,7 +154,8 @@
                                                 fontSize: newFontSize,
                                                 scaleX: 1, // Reset scaleX to 1 to prevent cumulative scaling
                                                 scaleY: 1,  // Reset scaleY to 1 if you want to keep uniform scaling
-                                                width: textWidth
+                                                width: textWidth,
+                                                textAlign:element.textAlign,
                                             });
 
                                             // Re-render the canvas to apply the changes
