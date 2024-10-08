@@ -663,7 +663,7 @@ function bindData() {
                     let element = staticInfo?.shapeImageData;
                     if (element.shape && element.centerX && element.centerY && element.height && element.width) {
                         // updateClipPath(shapeImageUrl, element);
-                        current_shape = shape;
+                        current_shape = element.shape;
                         const shapeImageInstance = fabric.Image.fromURL(shapeImageUrl, function(img) {
                             var oImg = img.set({ left: element.centerX, top: element.centerY}).scale(0.25);
                             canvas.add(oImg);
