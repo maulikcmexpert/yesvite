@@ -604,6 +604,9 @@ $(".removeShapImage").click(function(){
                     }, 500);
                 });
                 textbox.on('scaling', function() {
+                    var updatedFontSize = textbox.fontSize * (textbox.scaleX + textbox.scaleY) / 2;
+                    console.log(updatedFontSize);
+                    textbox.set('fontSize', updatedFontSize);
                     if (textbox.trashIcon) {
                         canvas.remove(textbox.trashIcon);
                         textbox.trashIcon = null; // Clear reference
@@ -612,9 +615,6 @@ $(".removeShapImage").click(function(){
                     clearTimeout(updateTimeout);
                     updateTimeout = setTimeout(() => {
                         addIconsToImage(textbox)
-                        var updatedFontSize = textbox.fontSize * (textbox.scaleX + textbox.scaleY) / 2;
-                        console.log(updatedFontSize);
-                        textbox.set('fontSize', updatedFontSize);
                     }, 500);
                 });
                 canvas.renderAll();
@@ -985,12 +985,12 @@ $(".removeShapImage").click(function(){
 
             text.set('width', text.get('text').length * 10);
 
-            // text.on('scaling', function() {
-            //     var updatedFontSize = text.fontSize * (text.scaleX + text.scaleY) / 2;
-            //     text.set('fontSize', updatedFontSize);
-            //     canvas.renderAll();
-            //     findTextboxCenter(text);
-            // });
+            text.on('scaling', function() {
+                var updatedFontSize = text.fontSize * (text.scaleX + text.scaleY) / 2;
+                text.set('fontSize', updatedFontSize);
+                canvas.renderAll();
+                // findTextboxCenter(text);
+            });
 
             // text.on('moving', function() {
             //     findTextboxCenter(text);
@@ -999,7 +999,7 @@ $(".removeShapImage").click(function(){
             updateIconPositions(text)
             addIconsToTextbox(text);
             canvas.renderAll();
-            findTextboxCenter(text);
+            // findTextboxCenter(text);
         }
 
         function findTextboxCenter(textbox) {
