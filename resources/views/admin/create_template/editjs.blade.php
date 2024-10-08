@@ -142,14 +142,18 @@
                                             // Get the current font size
                                             var currentFontSize = activeObject.fontSize;
                                             console.log("Current font size: " + currentFontSize);
-                                            // Set the new font size (for example, let's increment by 1px when moving)
-                                            var newFontSize = currentFontSize + 1; // Or any logic to determine the new font size
-                                            // Update the font size of the textbox
+
+                                            // Update the font size (for demonstration, let's say you want to increment it)
+                                            var newFontSize = currentFontSize + 0; // Adjust this logic as needed
+
+                                            // Set the new font size
                                             activeObject.set({
                                                 fontSize: newFontSize
                                             });
+
                                             // Re-render the canvas to apply the changes
                                             canvas.renderAll();
+
                                             console.log("Updated font size: " + newFontSize);
                                         }
                                     });
