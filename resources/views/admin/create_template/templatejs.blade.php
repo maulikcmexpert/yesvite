@@ -106,7 +106,7 @@
                 var category_id = $(this).val();
                 console.log(base_url + "template/get_all_subcategory");
 
-                fetch('/template/get_all_subcategory', {
+                fetch('/get_all_subcategory', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json', // Set content type to JSON
