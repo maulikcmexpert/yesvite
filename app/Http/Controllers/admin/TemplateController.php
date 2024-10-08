@@ -283,8 +283,8 @@ class TemplateController extends Controller
 
         foreach ($sub_category as $subcategory) {
             $response[] = [
-                'id' => $subcategory->id,
-                'name' => $subcategory->name,
+                'sub_category_id' => $subcategory->id,
+                'sub_category_name' => $subcategory->subcategory_name,
             ];
         }
 
