@@ -851,6 +851,24 @@ function bindData() {
     setLetterSpacing();
     setLineHeight();
 
+    let clrcanvas = {}
+    setTimeout(function(){
+        let spchoose = document.getElementsByClassName('sp-choose');
+        console.log({spchoose})
+            $(spchoose).click(function(){
+            // alert('clicked')
+            setTimeout(function(){
+                console.log({clrcanvas})
+                undoStack.push(clrcanvas);
+      
+                if(undoStack.length > 0){
+                    $('#undoButton').find('svg path').attr('fill', '#0F172A');
+                }
+                redoStack = []; // Clear redo stack on new action
+            },1000)
+        })
+    },1000)
+
     // Initialize the color picker
     $('#color-picker').spectrum({
         type: "flat",
@@ -885,6 +903,7 @@ function bindData() {
         }
 
         if (activeObject.type == "textbox") {
+            clrcanvas = canvas.toJSON();
             //console.log(activeObject.type);
             //console.log(activeObject.fill);
             if (selectedColorType == "font") {
