@@ -104,6 +104,7 @@
 
 
                 var category_id = $(this).val();
+
                 fetch(`/get_all_subcategory/${category_id}`)
                     .then(response => response.json())
                     .then(data => {
