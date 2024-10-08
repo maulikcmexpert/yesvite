@@ -113,7 +113,14 @@
                                         mr: true  
                                     });
                                     
-
+                                    textElement.on('rotating', function () {
+                                        // Get the bounding rectangle of the textboxbox
+                                        var boundingRect = textElement.getBoundingRect();
+                                        var centerX = boundingRect.left + boundingRect.width / 2;
+                                        var centerY = boundingRect.top + boundingRect.height / 2;
+                                        var rotationAngle = textElement.angle;
+                                        console.log('Rotated Position:', { centerX: centerX, centerY: centerY, rotation: rotationAngle });
+                                    });
 
                                  
                                     canvas.add(textElement);
