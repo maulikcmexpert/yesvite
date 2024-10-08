@@ -889,14 +889,17 @@ $(".removeShapImage").click(function(){
         setFontSize();
         setLetterSpacing();
         setLineHeight();
-
-        let spchoose = document.getElementsByClassName('sp-choose');
-        $(spchoose).click(function(){
-            alert('clicked')
-            setTimeout(function(){
-                addToUndoStack(clrcanvas)
-            },1000)
-        })
+        setTimeout(function(){
+            let spchoose = document.getElementsByClassName('sp-choose');
+            console.log({spchoose})
+                $(spchoose).click(function(){
+                alert('clicked')
+                setTimeout(function(){
+                    addToUndoStack(clrcanvas)
+                },1000)
+            })
+        },1000)
+       
         // // Initialize the color picker
        let clrcanvas = {}
         // Initialize the color picker
