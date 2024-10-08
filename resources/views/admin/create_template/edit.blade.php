@@ -49,9 +49,11 @@
                             <select class="form-control event_design_subcategory_id" id="event_design_sub_category_id" name="event_design_sub_category_id">
                                 <!-- <option value="">Select Subcategory</option> -->
                                 @foreach($getSubCatDetail as $subcategory)
-                                <option value="{{ $subcategory->id }}" {{ $subcategory->id == $getTemData->event_design_sub_category_id ? 'selected' : '' }}>
+                                @if ($subcategory->id == $getTemData->event_design_sub_category_id)
+                                <option value="{{ $subcategory->id }}" selected>
                                     {{ $subcategory->subcategory_name }}
                                 </option>
+                                @endif
                                 @endforeach
                             </select>
                             <span class="text-danger">{{ $errors->first('event_design_sub_category_id') }}</span>
