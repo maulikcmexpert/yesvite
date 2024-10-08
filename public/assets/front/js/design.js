@@ -289,8 +289,6 @@ $(document).on("click", ".design-card", function() {
         // });
     }
 
-
-
     // Load filed image (filedImagePath) as another image layer
     if (shapeImageUrl) {
         let element = staticInfo?.shapeImageData;
@@ -664,7 +662,18 @@ function bindData() {
                 if (shapeImageUrl) {
                     let element = staticInfo?.shapeImageData;
                     if (element.shape && element.centerX && element.centerY && element.height && element.width) {
-                        updateClipPath(shapeImageUrl, element);
+                        // updateClipPath(shapeImageUrl, element);
+                        fabric.Image.fromURL(shapeImageUrl, function(img) {
+                            img.set({
+                                left: 0,
+                                top: 0,
+                                selectable: false, // Non-draggable background image
+                                hasControls: false, // Disable resizing controls
+                            });
+                            canvas.add(img, canvas.renderAll.bind(canvas));
+                        });
+                        // Refresh canvas
+                        canvas.renderAll();
                     }
                 }
 
