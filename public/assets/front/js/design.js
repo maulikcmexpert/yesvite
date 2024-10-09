@@ -745,11 +745,11 @@ function bindData() {
                                             canvas.remove(...canvas.getObjects().filter(obj => obj !== newImg)); // Remove any additional objects (optional)
 
                                             newImg.set({
-                                                left: element.left,
-                                                top: element.top,
+                                                left: 100,
+                                                top: 100,
                                                 selectable: true,
-                                                scaleX: element.centerX,
-                                                scaleY: element.centerY,
+                                                scaleX: 0.5,
+                                                scaleY: 0.5,
                                                 hasControls: true,
                                                 hasBorders: true,
                                                 lockUniScaling: false
