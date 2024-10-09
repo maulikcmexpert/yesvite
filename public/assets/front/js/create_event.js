@@ -4368,16 +4368,16 @@ $(document).on("click", ".next_guest_step", function () {
 var design_inner_image = '';
 function save_image_design(downloadImage,textData){
 
-    if($('#user_image').attr("src")){
-        design_inner_image = $('#user_image').attr("src");
-    } 
+    // if($('#user_image').attr("src")){
+    //     design_inner_image = $('#user_image').attr("src");
+    // } 
 
     domtoimage.toBlob(downloadImage, { useCORS: true })
         .then(function (blob) {
             var formData = new FormData();
             formData.append("image", blob, "design.png");
-            formData.append('design_inner_image',design_inner_image);
-            formData.append('shapeImageUrl',shapeImageUrl);
+            // formData.append('design_inner_image',design_inner_image);
+            // formData.append('shapeImageUrl',shapeImageUrl);
             $.ajax({
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
