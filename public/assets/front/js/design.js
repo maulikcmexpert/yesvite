@@ -653,11 +653,14 @@ function bindData() {
                     let element = staticInfo?.shapeImageData;
                     if (element.shape && element.centerX && element.centerY && element.height && element.width) {
                         // updateClipPath(shapeImageUrl, element);
+                        const canvas = new fabric.Canvas('canvas');
                         const imageInput = document.getElementById('image');
 
             // Load the initial image
                         fabric.Image.fromURL(shapeImageUrl, function (img) {
                             img.set({
+                                left: element.left,
+                                top: element.top,
                                 selectable: true,
                                 scaleX: element.centerX,
                                 scaleY: element.centerY,
@@ -740,6 +743,8 @@ function bindData() {
                                             canvas.remove(...canvas.getObjects().filter(obj => obj !== newImg)); // Remove any additional objects (optional)
 
                                             newImg.set({
+                                                left: element.left,
+                                                top: element.top,
                                                 selectable: true,
                                                 scaleX: element.centerX,
                                                 scaleY: element.centerY,
