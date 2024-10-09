@@ -185,6 +185,8 @@ function sendNotification($notificationType, $postData)
                             }
 
                             $eventData = [
+                                'event_id' => $value->event->id,
+                                'user_id' => $value->user->id,
                                 'event_name' => $value->event->event_name,
                                 'hosted_by' => $value->event->user->firstname . ' ' . $value->event->user->lastname,
                                 'profileUser' => ($value->event->user->profile != NULL || $value->event->user->profile != "") ? $value->event->user->profile : "no_profile.png",
@@ -211,6 +213,8 @@ function sendNotification($notificationType, $postData)
                             }
 
                             $eventData = [
+                                'event_id' => $value->event->id,
+                                'user_id' => $value->user->id,
                                 'event_name' => $value->event->event_name,
                                 'hosted_by' => $value->event->user->firstname . ' ' . $value->event->user->lastname,
                                 'profileUser' => ($value->event->user->profile != NULL || $value->event->user->profile != "") ? $value->event->user->profile : "no_profile.png",
