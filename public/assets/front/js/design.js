@@ -727,7 +727,9 @@ function bindData() {
                                 },
                                 render: function (ctx, left, top, styleOverride, fabricObject) {
                                     const imgIcon = document.createElement('img');
+
                                     imgIcon.src = 'https://cdn-icons-png.flaticon.com/512/992/992700.png'; // Upload icon
+                                    imgIcon.crossOrigin = "anonymous";
                                     imgIcon.width = 24;
                                     imgIcon.height = 24;
 
