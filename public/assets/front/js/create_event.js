@@ -4372,7 +4372,7 @@ function save_image_design(downloadImage,textData){
     //     design_inner_image = $('#user_image').attr("src");
     // } 
 
-    domtoimage.toBlob(downloadImage, { useCORS: true })
+    domtoimage.toBlob(downloadImage)
         .then(function (blob) {
             var formData = new FormData();
             formData.append("image", blob, "design.png");
