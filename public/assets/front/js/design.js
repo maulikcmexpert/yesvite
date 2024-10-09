@@ -670,6 +670,7 @@ function bindData() {
                                 hasBorders: true,
                                 lockUniScaling: false
                             });
+                            img.crossOrigin = "anonymous";
 
                             const shapes = [
                                 new fabric.Rect({ width: element.width, height: element.height, originX: 'center', originY: 'center', angle: 0 }),
@@ -754,7 +755,7 @@ function bindData() {
                                                 hasBorders: true,
                                                 lockUniScaling: false
                                             });
-
+                                            newImg.crossOrigin = "anonymous";
                                             canvas.add(newImg);
 
                                             // Event listener for image click on the new image
