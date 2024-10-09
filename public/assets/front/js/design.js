@@ -745,7 +745,7 @@ function bindData() {
                                     reader.onload = function () {
                                         fabric.Image.fromURL(reader.result, function (newImg) {
                                             canvas.remove(img); // Remove the old image and clip path
-                                            canvas.remove(...canvas.getObjects().filter(obj => obj !== newImg)); // Remove any additional objects (optional)
+                                            // canvas.remove(...canvas.getObjects().filter(obj => obj !== newImg)); // Remove any additional objects (optional)
 
                                             newImg.set({
                                                 left: 100,
