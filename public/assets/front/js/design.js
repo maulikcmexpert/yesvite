@@ -649,17 +649,11 @@ function bindData() {
                 let isimageoncanvas = false;
                 let oldImage = null;
                 
-                const userImageElement = document.getElementById('user_image');
-                var canvasElement = new fabric.Canvas('imageEditor', {
-                    width: 500, // Canvas width
-                    height: 500, // Canvas height
-                    cornerSize: 6,
-                });
                 if (shapeImageUrl) {
                     let element = staticInfo?.shapeImageData;
                     if (element.shape && element.centerX && element.centerY && element.height && element.width) {
                         // updateClipPath(shapeImageUrl, element);
-                        const imageInput = document.getElementById('imageInput');
+                        const imageInput = document.getElementById('image');
 
             // Load the initial image
                         fabric.Image.fromURL(shapeImageUrl, function (img) {
