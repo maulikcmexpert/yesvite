@@ -653,7 +653,9 @@ function bindData() {
                     let element = staticInfo?.shapeImageData;
                     if (element.shape && element.centerX && element.centerY && element.height && element.width) {
                         // updateClipPath(shapeImageUrl, element);
-                        const canvas = new fabric.Canvas('canvas');
+                        console.log({canvas});
+                        console.log(shapeImageUrl);
+                        
                         const imageInput = document.getElementById('image');
 
             // Load the initial image
