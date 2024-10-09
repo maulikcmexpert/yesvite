@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use App\Models\EventGiftRegistry;
 use App\Models\EventInvitedUser;
+use App\Models\EventPost;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -154,6 +155,25 @@ class RsvpController extends Controller
             $rsvpSent->event_view_date = date('Y-m-d');
 
             $rsvpSent->save();
+
+            if ($rsvpSent->save()) {
+                $postMessage = [];
+                $postMessage = [
+                    'status' => ($request->rsvp_status == '0') ? '2' : '1',
+                    'adults' => $request->adults,
+                    'kids' => $request->kids
+                ];
+                $creatEventPost = new EventPost();
+                $creatEventPost->event_id = $request->event_id;
+                $creatEventPost->user_id = $request->user_id;
+                $creatEventPost->post_message = json_encode($postMessage);
+                $creatEventPost->post_privacy = "1";
+                $creatEventPost->post_type = "4";
+                $creatEventPost->commenting_on_off = "0";
+                $creatEventPost->is_in_photo_moudle = "0";
+                $creatEventPost->save();
+                // dd($creatEventPost);
+            }
 
             $notificationParam = [
 
