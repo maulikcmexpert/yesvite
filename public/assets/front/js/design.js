@@ -731,7 +731,7 @@ function bindData() {
                             canvas.on('mouse:down', function(event) {
                                 console.log(event);
                                 const target = event.target;
-                                if (target && target.isControl) {
+                                if (event.subTargets.length > 0) {
 
                                 }else{
                                     currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
