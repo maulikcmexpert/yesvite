@@ -776,9 +776,29 @@ function bindData() {
                                     imgIcon.crossOrigin = "anonymous";
                                     imgIcon.width = 24;
                                     imgIcon.height = 24;
-                                    imgIcon.backgroundColor = '#fff';
             
                                     ctx.drawImage(imgIcon, left - 12, top - 12, 24, 24);
+
+
+                                     // Set the background color, border radius, and padding
+                                    const padding = 10; // Set your desired padding
+                                    const borderRadius = 10; // Set your desired border radius
+                                    const bgColor = 'rgba(255, 255, 255, 0.8)'; // Set your desired background color
+
+                                    // Draw a rounded rectangle for the background
+                                    ctx.fillStyle = bgColor;
+                                    ctx.beginPath();
+                                    ctx.moveTo(left - padding + borderRadius, top - padding);
+                                    ctx.lineTo(left + 24 + padding - borderRadius, top - padding);
+                                    ctx.quadraticCurveTo(left + 24 + padding, top - padding, left + 24 + padding, top - padding + borderRadius);
+                                    ctx.lineTo(left + 24 + padding, top + 24 + padding - borderRadius);
+                                    ctx.quadraticCurveTo(left + 24 + padding, top + 24 + padding, left + 24 + padding - borderRadius, top + 24 + padding);
+                                    ctx.lineTo(left - padding + borderRadius, top + 24 + padding);
+                                    ctx.quadraticCurveTo(left - padding, top + 24 + padding, left - padding, top + 24 + padding - borderRadius);
+                                    ctx.lineTo(left - padding, top - padding + borderRadius);
+                                    ctx.quadraticCurveTo(left - padding, top - padding, left - padding + borderRadius, top - padding);
+                                    ctx.closePath();
+                                    ctx.fill();
                                 }
                             });
             
