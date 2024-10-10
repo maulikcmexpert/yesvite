@@ -730,9 +730,9 @@ function bindData() {
 
                             canvas.on('mouse:down', function(event) {
                                 console.log(event);
-                                const target = event.target;
-                                if (event.subTargets.length > 0) {
-
+                                const target = canvas.findTarget(event.e);
+                                if (target && target.type === 'activeSelection') {
+                                    console.log('controls');
                                 }else{
                                     currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
                                     img.set({ clipPath: shapes[currentShapeIndex] });
