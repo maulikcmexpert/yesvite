@@ -293,7 +293,7 @@ class EventController extends Controller
                     $textElemtents[$key]['underline'] = (bool)$textJson['underline'];
                 }
             }
-
+           
             
             $static_data = [];
             $static_data['textData'] = $textElemtents;
@@ -304,7 +304,13 @@ class EventController extends Controller
             $static_data['template_url'] = $sourceImagePath;
             $static_data['is_contain_image'] = true;
             if(isset($request->textData['shapeImageData'])){
-                $static_data['shapeImageData'] = $request->textData['shapeImageData'];
+                $shapeImageData = [];
+                $shapeImageData['shape'] = $request->textData['shapeImageData']['shape'];
+                $shapeImageData['centerX'] = (float)$request->textData['shapeImageData']['centerX'];
+                $shapeImageData['centerY'] = (float)$request->textData['shapeImageData']['centerY'];
+                $shapeImageData['width'] = (float)$request->textData['shapeImageData']['width'];
+                $shapeImageData['height'] = (float)$request->textData['shapeImageData']['height'];
+                $static_data['shapeImageData'] = $shapeImageData;
             }
 
             $event_creation->static_information = json_encode($static_data);
