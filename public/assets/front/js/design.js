@@ -814,7 +814,7 @@ function bindData() {
                                             canvas.add(newImg);
                                             currentImage = newImg; 
                                             shapeImageUrl = newImg.src;
-                                            console.log(newImg);
+                                            console.log(newImg.src);
                                             // Reset shape index for the new image based on the default shape
                                             currentShapeIndex = shapeIndexMap[defaultShape] || 0; // Default to rectangle if not found
                                             newImg.set({ clipPath: shapes[currentShapeIndex] });
