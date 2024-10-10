@@ -2448,7 +2448,7 @@ function getTextDataFromCanvas() {
             };
             var design_inner_image = $('#image').attr("src"); 
             console.log({design_inner_image});
-            console.log(obj.src);
+            console.log(obj);
             
         }
     });
