@@ -111,13 +111,13 @@
     <div style="width: 100%;max-width: 650px; height:100%; padding: 0px 10px; margin: 50px auto 0px" class="ui-sortable">
         <table style="border-radius: 5px;box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);width: 100%;height:100%;background: #fff;box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);padding: 30px;border-radius: 20px;" class="full selected-table" border="0" cellpadding="0" cellspacing="0">
             <tbody>
-                <tr>
+                <!-- <tr>
                     <td>
                         <div style="width: 100%;max-width: 150px;height:40px">
                             <img src="{{asset('public/storage/yesvitelogo.png')}}" style="width: 100%;max-width: 150px;height:40px" alt="logo">
                         </div>
                     </td>
-                </tr>
+                </tr> -->
                 <!-- -------------- -->
                 <tr>
                     <td height="30" style="font-size:0px">&nbsp;</td>
@@ -143,7 +143,7 @@
                         </div>
                         <h5 style="font-size: 32px;line-height: 44px;font-weight: 400;color: #0A090B;margin: 0px 0px;">has invited you to:</h5>
                         <h2 style="font-size: 32px;line-height: 44px;font-weight: 700;color: #0A090B;margin: 0px 0px;">{{ @$eventData['event_name'] }}</h2>
-                        <p style="font-size: 18px;line-height: 27px;font-weight: 400;color: #0F172A;margin: 10px 0px;"> {{ @$eventData['date'] .'@'. @$eventData['time'] }}</p>
+                        <p style="font-size: 18px;line-height: 27px;font-weight: 400;color: #0F172A;margin: 10px 0px;"> {{ @$eventData['date'] .' @'. @$eventData['time'] }}</p>
                     </td>
                 </tr>
                 <!-- -------------- -->
