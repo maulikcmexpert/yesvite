@@ -1038,7 +1038,7 @@ class EventController extends Controller
         if (isset($request->design_inner_image) && isset($request->shapeImageUrl)) {
             if($request->shapeImageUrl == $request->design_inner_image){
                     $sourceImagePath = $request->shapeImageUrl;
-                    $destinationDirectory = public_path('storage/event_images/');
+                    $destinationDirectory = public_path('storage/canvas/');
                     $parts = explode('canvas/', $request->shapeImageUrl);
                     $imageName = end($parts);
                     $destinationImagePath = $destinationDirectory . $imageName;
@@ -1054,7 +1054,7 @@ class EventController extends Controller
                 $imageData = base64_decode($data);
                 $newImageName = time() . $i . '-' . uniqid() . '.jpg';
                 $i++;
-                $path = public_path('storage/event_images/') . $newImageName;
+                $path = public_path('storage/canvas/') . $newImageName;
                 file_put_contents($path, $imageData);
                 session(['shape_image' => $newImageName]);
             }
