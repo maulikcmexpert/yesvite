@@ -728,7 +728,7 @@ function bindData() {
                             img.set({ clipPath: shapes[currentShapeIndex] });
                             img.crossOrigin = "anonymous";
 
-                            img.on('mousedown', function (event) {
+                            canvas.on('mouse:down', function(event) {
                                 console.log(event);
                                 const target = event.target;
                                 if (target && target.isControl) {
