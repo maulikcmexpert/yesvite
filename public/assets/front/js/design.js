@@ -654,14 +654,14 @@ function bindData() {
                     if (element.shape && element.centerX && element.centerY && element.height && element.width) {
                         console.log(shapeImageUrl);
                         const imageInput = document.getElementById('image');
-                        const canvasRect = canvas.getBoundingClientRect();
+                        // const canvasRect = canvas.getBoundingClientRect();
 
-                        console.log(canvasRect.left)
-                        console.log(canvasRect.top)
-                        console.log(element.centerX)
-                        console.log(element.centerY)
-                        console.log(element.height)
-                        console.log(element.height)
+                        // console.log(canvasRect.left)
+                        // console.log(canvasRect.top)
+                        // console.log(element.centerX)
+                        // console.log(element.centerY)
+                        // console.log(element.height)
+                        // console.log(element.height)
 
                         imageInput.style.width = element.width + 'px';
                         imageInput.style.height = element.height + 'px';
@@ -723,6 +723,8 @@ function bindData() {
                                 scaleY: 600 / img.height,
                                 cornerSize: 10,
                                 cornerStyle: 'circle',
+                                left: element.centerX, // Set the position based on centerX
+                                top: element.centerY  
                             });
             
                             let shapes = createShapes(img);
