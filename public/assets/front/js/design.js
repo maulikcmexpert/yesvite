@@ -813,11 +813,7 @@ function bindData() {
                                             shapes = createShapes(newImg);
                                             canvas.add(newImg);
                                             currentImage = newImg; 
-                                            shapeImageUrl = newImg.src;
-                                            console.log(newImg);
-                                            newImg.forEach(function(obj) {
-                                                console.log(obj);
-                                            })
+                                          
                                             // Reset shape index for the new image based on the default shape
                                             currentShapeIndex = shapeIndexMap[defaultShape] || 0; // Default to rectangle if not found
                                             newImg.set({ clipPath: shapes[currentShapeIndex] });
@@ -2440,6 +2436,8 @@ function getTextDataFromCanvas() {
             });
         }
         if(obj.type==="image"){
+
+            console.log(obj);
             var centerX = obj.left + obj.width / 2;
             var centerY = obj.top + obj.height / 2;
             shapeImageData ={
