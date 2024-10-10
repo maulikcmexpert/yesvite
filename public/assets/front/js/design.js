@@ -654,6 +654,13 @@ function bindData() {
                     if (element.shape && element.centerX && element.centerY && element.height && element.width) {
                         console.log(shapeImageUrl);
                         const imageInput = document.getElementById('image');
+                        const canvasRect = canvas.getBoundingClientRect();
+
+                        let left = element.centerX!=undefined?`${element.centerX - (element.width / 2) + canvasRect.left}px`:'50%';
+                        let top = element.centerX!=undefined?`${element.centerY - (element.height / 2) + canvasRect.top}px`:'50%';
+
+                        imageInput.style.width = element.width + 'px';
+                        imageInput.style.height = element.height + 'px';
                         
                         let currentImage = null; // Variable to hold the current image
                         let isScaling = false; // Flag to check if the image is scaling
@@ -700,14 +707,17 @@ function bindData() {
                         // Load the initial image
                         fabric.Image.fromURL(shapeImageUrl, function (img) {
                             img.set({
-                                left: 100,
-                                top: 100,
                                 selectable: true,
-                                scaleX: 0.5,
-                                scaleY: 0.5,
                                 hasControls: true,
                                 hasBorders: true,
-                                lockUniScaling: false
+                                borderColor: "#2DA9FC",
+                                cornerColor: "#fff",
+                                transparentCorners: false,
+                                lockUniScaling: true,
+                                scaleX: 600 / img.width,
+                                scaleY: 600 / img.height,
+                                cornerSize: 10,
+                                cornerStyle: 'circle',
                             });
             
                             let shapes = createShapes(img);
@@ -771,14 +781,17 @@ function bindData() {
                                             }
             
                                             newImg.set({
-                                                left: 100,
-                                                top: 100,
                                                 selectable: true,
-                                                scaleX: 0.5,
-                                                scaleY: 0.5,
                                                 hasControls: true,
                                                 hasBorders: true,
-                                                lockUniScaling: false
+                                                borderColor: "#2DA9FC",
+                                                cornerColor: "#fff",
+                                                transparentCorners: false,
+                                                lockUniScaling: true,
+                                                scaleX: 600 / newImg.width,
+                                                scaleY: 600 / newImg.height,
+                                                cornerSize: 10,
+                                                cornerStyle: 'circle',
                                             });
             
                                             shapes = createShapes(newImg);
