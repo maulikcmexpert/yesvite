@@ -1028,31 +1028,32 @@ class EventController extends Controller
         $newImageName = '';
         $fileName = '';
         $i = 0;
+        dd($request);
    
-        // if (isset($request->design_inner_image) && isset($request->shapeImageUrl)) {
-        //     if($request->shapeImageUrl == $request->design_inner_image){
-        //             $sourceImagePath = $request->shapeImageUrl;
-        //             $destinationDirectory = public_path('storage/event_images/');
-        //             $parts = explode('canvas/', $request->shapeImageUrl);
-        //             $imageName = end($parts);
-        //             $destinationImagePath = $destinationDirectory . $imageName;
-        //             if (file_exists(public_path('storage/canvas/') . $imageName)) {
-        //                 $newImageName = time() . '_' . uniqid() . '.' . pathinfo($imageName, PATHINFO_EXTENSION);
-        //                 $destinationImagePath = $destinationDirectory . $newImageName;
-        //                 File::copy($sourceImagePath, $destinationImagePath);
-        //                 session(['shape_image' => $newImageName]);
-        //             }
-        //     }else{
-        //         list($type, $data) = explode(';', $request->design_inner_image);
-        //         list(, $data) = explode(',', $data);
-        //         $imageData = base64_decode($data);
-        //         $newImageName = time() . $i . '-' . uniqid() . '.jpg';
-        //         $i++;
-        //         $path = public_path('storage/event_images/') . $newImageName;
-        //         file_put_contents($path, $imageData);
-        //         session(['shape_image' => $newImageName]);
-        //     }
-        // }
+        if (isset($request->design_inner_image) && isset($request->shapeImageUrl)) {
+            if($request->shapeImageUrl == $request->design_inner_image){
+                    $sourceImagePath = $request->shapeImageUrl;
+                    $destinationDirectory = public_path('storage/event_images/');
+                    $parts = explode('canvas/', $request->shapeImageUrl);
+                    $imageName = end($parts);
+                    $destinationImagePath = $destinationDirectory . $imageName;
+                    if (file_exists(public_path('storage/canvas/') . $imageName)) {
+                        $newImageName = time() . '_' . uniqid() . '.' . pathinfo($imageName, PATHINFO_EXTENSION);
+                        $destinationImagePath = $destinationDirectory . $newImageName;
+                        File::copy($sourceImagePath, $destinationImagePath);
+                        session(['shape_image' => $newImageName]);
+                    }
+            }else{
+                list($type, $data) = explode(';', $request->design_inner_image);
+                list(, $data) = explode(',', $data);
+                $imageData = base64_decode($data);
+                $newImageName = time() . $i . '-' . uniqid() . '.jpg';
+                $i++;
+                $path = public_path('storage/event_images/') . $newImageName;
+                file_put_contents($path, $imageData);
+                session(['shape_image' => $newImageName]);
+            }
+        }
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $fileName = time() . '-' . $file->getClientOriginalName();
