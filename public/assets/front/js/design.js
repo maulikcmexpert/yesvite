@@ -734,7 +734,8 @@ function bindData() {
                             currentShapeIndex = shapeIndexMap[defaultShape] || 0; // Default to rectangle if not found
             
                             img.set({ clipPath: shapes[currentShapeIndex] });
-            
+                            img.crossOrigin = "anonymous";
+
                             img.on('mouseup', function () {
                                 if (!isScaling) { // Only change shape if not scaling
                                     currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
@@ -817,7 +818,8 @@ function bindData() {
                                             // Reset shape index for the new image based on the default shape
                                             currentShapeIndex = shapeIndexMap[defaultShape] || 0; // Default to rectangle if not found
                                             newImg.set({ clipPath: shapes[currentShapeIndex] });
-            
+                                            newImg.crossOrigin = "anonymous";
+
                                             newImg.on('mousedown', function () {
                                                 // if (!isScaling) { // Only change shape if not scaling
                                                     currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
@@ -2448,7 +2450,7 @@ function getTextDataFromCanvas() {
             };
             var design_inner_image = $('#image').attr("src"); 
             console.log({design_inner_image});
-            console.log(obj.left);
+            console.log(obj.src);
             
         }
     });
