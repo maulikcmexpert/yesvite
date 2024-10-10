@@ -968,8 +968,8 @@ $(".removeShapImage").click(function(){
             // console.log(objects);
             objects.forEach(function(obj) {
                 if (obj.type === 'textbox') {
-                    // var centerX = obj.left + (obj.width / 2);
-                    // var centerY = obj.top + (obj.height / 2);
+                    var centerX = obj.left + (obj.width / 2);
+                    var centerY = obj.top + (obj.height / 2);
 
                     var controlCoords = obj.oCoords; 
                     var mtrControl = controlCoords.mtr;
@@ -978,13 +978,13 @@ $(".removeShapImage").click(function(){
                         obj.calcTransformMatrix() // apply object transformations
                     );
                     console.log('Transformed rotation control position (mtr):', transformedMtr);
-                    var centerX =transformedMtr.x / 2;
-                    var centerY = (transformedMtr.y / 2) - 20;
-                    console.log(transformedMtr.x)
-                    console.log(transformedMtr.y)
+                    // var centerX =transformedMtr.x / 2;
+                    // var centerY = (transformedMtr.y / 2) - 20;
+                    // console.log(transformedMtr.x)
+                    // console.log(transformedMtr.y)
 
-                    console.log({centerX})
-                    console.log({centerY})
+                    // console.log({centerX})
+                    // console.log({centerY})
                     textData.push({
                         text: obj.text,
                         left: obj.left,
@@ -1116,7 +1116,7 @@ $(".removeShapImage").click(function(){
                 .then(response => response.json())
                 .then(data => {
                     console.log('Text data saved successfully', data);
-                    // window.location.href = "{{URL::to('/admin/create_template')}}";
+                    window.location.href = "{{URL::to('/admin/create_template')}}";
 
                 })
                 .catch((error) => {
