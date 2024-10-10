@@ -728,7 +728,7 @@ function bindData() {
                             img.set({ clipPath: shapes[currentShapeIndex] });
                             img.crossOrigin = "anonymous";
 
-                            img.on('mouse:up', function(event) {
+                            img.on('mouseup', function(event) {
                                 console.log(event);
                                 if(event?.transform?.action === 'drag' && event.transform.actionPerformed === undefined){
                                     currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
