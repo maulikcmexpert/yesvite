@@ -730,7 +730,7 @@ function bindData() {
 
                             canvas.on('mouse:up', function(event) {
                                 console.log(event);
-                                if(event.transform.action === 'drag' && event.transform.actionPerformed === undefined){
+                                if(event?.transform?.action === 'drag' && event.transform.actionPerformed === undefined){
                                     currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
                                     img.set({ clipPath: shapes[currentShapeIndex] });
                                     canvas.renderAll();
@@ -828,7 +828,7 @@ function bindData() {
 
                                             canvas.on('mouse:up', function(event) {
                                                 console.log(event);
-                                                if(event.transform.action === 'drag' && event.transform.actionPerformed === undefined){
+                                                if(event?.transform?.action === 'drag' && event.transform.actionPerformed === undefined){
                                                     currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
                                                     img.set({ clipPath: shapes[currentShapeIndex] });
                                                     canvas.renderAll();
