@@ -756,6 +756,8 @@ function bindData() {
                             canvas.add(img);
                             currentImage = img; // Store the image reference
                             $("#shape_img").attr("src",shapeImageUrl);
+                            $("#first_shape_img").attr("src",shapeImageUrl);
+
                             // Custom control for the upload button (centered)
                             fabric.Object.prototype.controls.uploadControl = new fabric.Control({
                                 x: 0,
