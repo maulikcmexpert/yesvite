@@ -729,7 +729,7 @@ function bindData() {
                             img.crossOrigin = "anonymous";
 
                             canvas.on('mouse:down', function(event) {
-                                console.log(event.transform.action);
+                                console.log(event);
                                 if(event.transform.action == 'drag'){
                                     currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
                                     img.set({ clipPath: shapes[currentShapeIndex] });
