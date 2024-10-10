@@ -111,13 +111,13 @@
     <div style="width: 100%;max-width: 650px; height:100%; padding: 0px 10px; margin: 50px auto 0px" class="ui-sortable">
         <table style="border-radius: 5px;box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);width: 100%;height:100%;background: #fff;box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);padding: 30px;border-radius: 20px;" class="full selected-table" border="0" cellpadding="0" cellspacing="0">
             <tbody>
-                <!-- <tr>
+                <tr>
                     <td>
                         <div style="width: 100%;max-width: 150px;height:40px">
                             <img src="{{asset('public/storage/yesvitelogo.png')}}" style="width: 100%;max-width: 150px;height:40px" alt="logo">
                         </div>
                     </td>
-                </tr> -->
+                </tr>
                 <!-- -------------- -->
                 <tr>
                     <td height="30" style="font-size:0px">&nbsp;</td>
@@ -136,9 +136,9 @@
                 <tr>
                     <td>
                         <div class="user-name" style="display: flex;align-items: center;gap: 15px;margin-bottom: 15px;">
-                            <span style="display: block; width:50px; height: 50px; max-width:100%; margin-right:10px; margin-top:9px">
+                            <!-- <span style="display: block; width:50px; height: 50px; max-width:100%; margin-right:10px; margin-top:9px">
                                 <img src="{{ asset('public/storage/profile/'.$eventData['profileUser'])}}" style="width: 100%;height: 100%; border-radius:50%; margin-right:10px; object-fit:cover; display:block" alt="user-img">
-                            </span>
+                            </span> -->
                             <h3 style="text-transform: capitalize;font-size: 32px;line-height: 44px;font-weight: 700;color: #0A090B;margin: 0px 0px;text-transform: capitalize;margin-left: 15px;width:85%; word-wrap:break-word;">{{ @$eventData['hosted_by']}}</h3>
                         </div>
                         <h5 style="font-size: 32px;line-height: 44px;font-weight: 400;color: #0A090B;margin: 0px 0px;">has invited you to:</h5>
