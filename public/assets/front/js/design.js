@@ -723,7 +723,7 @@ function bindData() {
                                 lockUniScaling: true,
                                 scaleX: scaledWidth / img.width,  // Scale based on element's width
                                 scaleY: scaledHeight / img.height, // Scale based on element's height
-                                cornerSize: 10,
+                                cornerSize: 6,
                                 cornerStyle: 'circle',
                                 left: element.centerX - scaledWidth / 2, // Center the image horizontally
                                 top: element.centerY - scaledHeight / 2  
@@ -731,7 +731,6 @@ function bindData() {
             
                             let shapes = createShapes(img);
             
-                            // Set the current shape index based on the default shape
                             currentShapeIndex = shapeIndexMap[defaultShape] || 0; // Default to rectangle if not found
             
                             img.set({ clipPath: shapes[currentShapeIndex] });
@@ -2409,7 +2408,7 @@ function bindData() {
 
 function getTextDataFromCanvas() {
     var objects = canvas.getObjects();
-    console.log(current_shape);
+    console.log(objects);
     var textData = [];
 
     objects.forEach(function(obj) {
@@ -2437,8 +2436,8 @@ function getTextDataFromCanvas() {
             });
         }
     });
-    const imageWrapper = document.getElementById('imageWrapper');
-    const imgElement = document.getElementById('user_image');
+    const imageWrapper = document.getElementById('imageEditor1');
+    const imgElement = document.getElementById('image');
     let canvasEL = document.getElementById('imageEditor1')
     const canvasRect = canvasEL.getBoundingClientRect();
 
