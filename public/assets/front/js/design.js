@@ -798,10 +798,12 @@ function bindData() {
 
                                         fabric.Image.fromURL(reader.result, function (newImg) {
                                             // Remove the old image if it exists
+                                            const newWidth = img.width;
+                                            const newHeight = img.height;
                                             if (currentImage) {
                                                 canvas.remove(currentImage);
                                             }
-            
+                        
                                             newImg.set({
                                                 selectable: true,
                                                 hasControls: true,
@@ -810,10 +812,12 @@ function bindData() {
                                                 cornerColor: "#fff",
                                                 transparentCorners: false,
                                                 lockUniScaling: true,
-                                                scaleX: 600 / newImg.width,
-                                                scaleY: 600 / newImg.height,
-                                                cornerSize: 10,
+                                                scaleX: scaledWidth / newWidth,  // Scale based on element's width
+                                                scaleY: scaledHeight / newHeight, // Scale based on element's height
+                                                cornerSize: 6,
                                                 cornerStyle: 'circle',
+                                                left: element.centerX - scaledWidth / 2, // Center the image horizontally
+                                                top: element.centerY - scaledHeight / 2  
                                             });
             
                                             shapes = createShapes(newImg);
