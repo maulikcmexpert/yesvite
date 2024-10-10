@@ -654,10 +654,6 @@ function bindData() {
                     if (element.shape && element.centerX && element.centerY && element.height && element.width) {
                         console.log(shapeImageUrl);
                         const imageInput = document.getElementById('image');
-                        const canvasRect = canvas.getBoundingClientRect();
-
-                        let left = element.centerX!=undefined?`${element.centerX - (element.width / 2) + canvasRect.left}px`:'50%';
-                        let top = element.centerX!=undefined?`${element.centerY - (element.height / 2) + canvasRect.top}px`:'50%';
 
                         imageInput.style.width = element.width + 'px';
                         imageInput.style.height = element.height + 'px';
