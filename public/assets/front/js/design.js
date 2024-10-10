@@ -2438,14 +2438,13 @@ function getTextDataFromCanvas() {
         if(obj.type==="image"){
             var centerX = obj.left + obj.width / 2;
             var centerY = obj.top + obj.height / 2;
-            console.log(obj.clipPath.type);
-            // shapeImageData ={
-            //     shape: clipPath.type,
-            //     centerX: centerX,
-            //     centerY: centerY,
-            //     width: obj.width,
-            //     height: obj.height,
-            // };
+            shapeImageData ={
+                shape: obj.clipPath.type,
+                centerX: centerX,
+                centerY: centerY,
+                width: obj.width,
+                height: obj.height,
+            };
         }
     });
     // const imageWrapper = document.getElementById('imageEditor1');
@@ -2460,8 +2459,6 @@ function getTextDataFromCanvas() {
     // const top = imageWrapperRect.top - canvasRect.top;
     // const centerX = left + width / 2;
     // const centerY = top + height / 2;
-
- 
 
     // var shapeImageData = [];
 
