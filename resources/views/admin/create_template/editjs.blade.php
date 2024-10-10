@@ -979,7 +979,7 @@ $(".removeShapImage").click(function(){
                     );
                     console.log('Transformed rotation control position (mtr):', transformedMtr);
                     var centerX =transformedMtr.x / 2;
-                    var centerY = transformedMtr.y / 2;
+                    var centerY = (transformedMtr.y / 2) - 20;
                     console.log(transformedMtr.x)
                     console.log(transformedMtr.y)
 
