@@ -728,15 +728,13 @@ function bindData() {
                             img.set({ clipPath: shapes[currentShapeIndex] });
                             img.crossOrigin = "anonymous";
 
-                            img.on('mouse:up', function(event) {
+                            canvas.on('mouse:up', function(event) {
                                 console.log(event);
                                 if(event.transform.action === 'drag' && event.transform.actionPerformed === undefined){
                                     currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
                                     img.set({ clipPath: shapes[currentShapeIndex] });
+                                    canvas.renderAll();
                                 }
-                                    
-                        
-                                canvas.renderAll();
                             });
             
                             const fixClipPath = () => {
@@ -828,14 +826,15 @@ function bindData() {
                                             newImg.set({ clipPath: shapes[currentShapeIndex] });
                                             newImg.crossOrigin = "anonymous";
 
-                                            newImg.on('mouse:up', function(event) {
+                                            canvas.on('mouse:up', function(event) {
                                                 console.log(event);
                                                 if(event.transform.action === 'drag' && event.transform.actionPerformed === undefined){
                                                     currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
-                                                    newImg.set({ clipPath: shapes[currentShapeIndex] });
+                                                    img.set({ clipPath: shapes[currentShapeIndex] });
+                                                    canvas.renderAll();
                                                 }
-                                                                                            
-                                                canvas.renderAll();
+                                                    
+                                        
                                             });
             
                                             const fixClipPath = () => {
