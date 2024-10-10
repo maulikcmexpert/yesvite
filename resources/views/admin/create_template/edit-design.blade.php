@@ -310,7 +310,7 @@
         <div class="design-sidebar design-sidebar_2 setting-category-wrp choose-design-form activity-schedule-inner">
             <div class="d-flex align-items-center justify-content-between toggle-wrp new-event-sidebar-head">
                 <h5>Change Font</h5>
-                <button class="close-btn" data-id="design-sidebar_2">
+                {{-- <button class="close-btn" data-id="design-sidebar_2">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path d="M5.00098 5L19 18.9991" stroke="#64748B" stroke-width="1.5" stroke-linecap="round"
@@ -318,7 +318,7 @@
                         <path d="M4.99996 18.9991L18.999 5" stroke="#64748B" stroke-width="1.5"
                             stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                </button>
+                </button> --}}
             </div>
 
             <!-- <div class="position-relative mb-3">
