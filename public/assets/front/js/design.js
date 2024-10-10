@@ -654,6 +654,8 @@ function bindData() {
                     if (element.shape && element.centerX && element.centerY && element.height && element.width) {
                         console.log(shapeImageUrl);
                         const imageInput = document.getElementById('image');
+                        const scaledWidth = element.width;  // Use element's width
+                        const scaledHeight = element.height;
                         // const canvasRect = canvas.getBoundingClientRect();
 
                         // console.log(canvasRect.left)
@@ -719,12 +721,12 @@ function bindData() {
                                 cornerColor: "#fff",
                                 transparentCorners: false,
                                 lockUniScaling: true,
-                                scaleX: 600 / img.width,
-                                scaleY: 600 / img.height,
+                                scaleX: scaledWidth / img.width,  // Scale based on element's width
+                                scaleY: scaledHeight / img.height, // Scale based on element's height
                                 cornerSize: 10,
                                 cornerStyle: 'circle',
-                                left: element.centerX, // Set the position based on centerX
-                                top: element.centerY  
+                                left: element.centerX - scaledWidth / 2, // Center the image horizontally
+                                top: element.centerY - scaledHeight / 2  
                             });
             
                             let shapes = createShapes(img);
