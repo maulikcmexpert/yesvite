@@ -2443,16 +2443,16 @@ function getTextDataFromCanvas() {
                 date_formate: obj.date_formate, // Include date_formate if set
             });
         }
-        if(obj.type==="image"){
+        if (obj.type === "image") {
+            var centerX = obj.left + obj.getScaledWidth() / 2; // Use getScaledWidth()
+            var centerY = obj.top + obj.getScaledHeight() / 2; // Use getScaledHeight()
 
-            var centerX = obj.left + obj.width / 2;
-            var centerY = obj.top + obj.height / 2;
-            shapeImageData ={
-                shape: obj.clipPath.type,
+            shapeImageData = {
+                shape: obj.clipPath ? obj.clipPath.type : 'none', // Handle case when clipPath is null
                 centerX: centerX,
                 centerY: centerY,
-                width: obj.clipPath.width,
-                height: obj.clipPath.height,
+                width: obj.getScaledWidth(), // Get the scaled width
+                height: obj.getScaledHeight(), // Get the scaled height
             };
         }
     });
