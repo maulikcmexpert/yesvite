@@ -657,6 +657,18 @@ function bindData() {
                         
                         let currentImage = null; // Variable to hold the current image
                         let isScaling = false; // Flag to check if the image is scaling
+                        let currentShapeIndex = 0; // Index to track the current shape
+            
+                        // Define default shape variable (can be changed as needed)
+                        const defaultShape = element.shape; // Set the desired default shape here
+            
+                        // Create a mapping of shape names to their indices
+                        const shapeIndexMap = {
+                            'rectangle': 0,
+                            'circle': 1,
+                            'triangle': 2,
+                            'star': 3
+                        };
             
                         function createShapes(img) {
                             const imgWidth = img.width;
@@ -699,33 +711,28 @@ function bindData() {
                             });
             
                             let shapes = createShapes(img);
-                            let currentShapeIndex = 0;
-                            let lastShapeIndex = currentShapeIndex;
+            
+                            // Set the current shape index based on the default shape
+                            currentShapeIndex = shapeIndexMap[defaultShape] || 0; // Default to rectangle if not found
+            
+                            img.set({ clipPath: shapes[currentShapeIndex] });
             
                             img.on('mouseup', function () {
-                                // if (!isScaling) { // Only change shape if not scaling
-                                lastShapeIndex = currentShapeIndex;
-                                currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
-                                img.set({
-                                    clipPath: shapes[currentShapeIndex]
-                                });
-                                console.log(currentShapeIndex);
-                                canvas.renderAll();
-                                // }
+                                if (!isScaling) { // Only change shape if not scaling
+                                    currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
+                                    img.set({ clipPath: shapes[currentShapeIndex] });
+                                    canvas.renderAll();
+                                }
                             });
             
                             const fixClipPath = () => {
-                                console.log('last_one ' + currentShapeIndex);
-                                img.set({ clipPath: shapes[lastShapeIndex] });
+                                img.set({ clipPath: shapes[currentShapeIndex] });
                                 canvas.renderAll();
                             };
             
                             img.on('scaling', function () {
-                                // isScaling = true; // Set scaling flag
                                 fixClipPath();
                             });
-            
-            
             
                             canvas.add(img);
                             currentImage = img; // Store the image reference
@@ -778,16 +785,16 @@ function bindData() {
                                             canvas.add(newImg);
                                             currentImage = newImg; // Update the reference
             
-                                            // Reset shape index for the new image
-                                            currentShapeIndex = 0;
+                                            // Reset shape index for the new image based on the default shape
+                                            currentShapeIndex = shapeIndexMap[defaultShape] || 0; // Default to rectangle if not found
                                             newImg.set({ clipPath: shapes[currentShapeIndex] });
             
                                             newImg.on('mousedown', function () {
-                                                // if (!isScaling) { // Only change shape if not scaling
+                                                if (!isScaling) { // Only change shape if not scaling
                                                     currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
                                                     newImg.set({ clipPath: shapes[currentShapeIndex] });
                                                     canvas.renderAll();
-                                                // }
+                                                }
                                             });
             
                                             const fixClipPath = () => {
@@ -796,12 +803,12 @@ function bindData() {
                                             };
             
                                             newImg.on('scaling', function () {
-                                                // isScaling = true; // Set scaling flag
+                                                isScaling = true; // Set scaling flag
                                                 fixClipPath();
                                             });
             
                                             newImg.on('scaling:end', function () {
-                                                // isScaling = false; // Reset scaling flag after scaling ends
+                                                isScaling = false; // Reset scaling flag after scaling ends
                                             });
                                         });
                                     };
