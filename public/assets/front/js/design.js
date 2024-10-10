@@ -2408,7 +2408,7 @@ function bindData() {
 
 function getTextDataFromCanvas() {
     var objects = canvas.getObjects();
-    console.log(objects);
+    // console.log(objects);
     var textData = [];
     var shapeImageData = [];
     objects.forEach(function(obj) {
@@ -2438,7 +2438,7 @@ function getTextDataFromCanvas() {
         if(obj.type==="image"){
             var centerX = obj.left + obj.width / 2;
             var centerY = obj.top + obj.height / 2;
-            console.log(obj.clipPath);
+            console.log(obj.clipPath.type);
             // shapeImageData ={
             //     shape: clipPath.type,
             //     centerX: centerX,
