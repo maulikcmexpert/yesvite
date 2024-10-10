@@ -2416,7 +2416,7 @@ function bindData() {
 
 function getTextDataFromCanvas() {
     var objects = canvas.getObjects();
-    // console.log(objects);
+    console.log(objects);
     var textData = [];
     var shapeImageData = [];
     objects.forEach(function(obj) {
