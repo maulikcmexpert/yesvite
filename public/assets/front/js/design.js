@@ -729,7 +729,6 @@ function bindData() {
                             img.crossOrigin = "anonymous";
 
                             canvas.on('mouse:up', function(event) {
-                                console.log(event);
                                 if(event?.transform?.action === 'drag' && event.transform.actionPerformed === undefined){
                                     currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
                                     img.set({ clipPath: shapes[currentShapeIndex] });
@@ -830,11 +829,9 @@ function bindData() {
                                                 console.log(event);
                                                 if(event?.transform?.action === 'drag' && event.transform.actionPerformed === undefined){
                                                     currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
-                                                    img.set({ clipPath: shapes[currentShapeIndex] });
+                                                    newImg.set({ clipPath: shapes[currentShapeIndex] });
                                                     canvas.renderAll();
                                                 }
-                                                    
-                                        
                                             });
             
                                             const fixClipPath = () => {
@@ -845,10 +842,6 @@ function bindData() {
                                             newImg.on('scaling', function () {
                                                 // isScaling = true; // Set scaling flag
                                                 fixClipPath();
-                                            });
-            
-                                            newImg.on('scaling:end', function () {
-                                                // isScaling = false; // Reset scaling flag after scaling ends
                                             });
                                         });
                                     };
