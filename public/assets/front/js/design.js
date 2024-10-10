@@ -820,7 +820,7 @@ function bindData() {
                                             canvas.add(newImg);
                                             currentImage = newImg; 
                                             // $("#shape_img").attr("src",shapeImageUrl);
-
+                                            shapeImageUrl = $("#shape_img").attr("src");
                                             // Reset shape index for the new image based on the default shape
                                             currentShapeIndex = shapeIndexMap[defaultShape] || 0; // Default to rectangle if not found
                                             newImg.set({ clipPath: shapes[currentShapeIndex] });
