@@ -828,12 +828,14 @@ function bindData() {
                                             newImg.set({ clipPath: shapes[currentShapeIndex] });
                                             newImg.crossOrigin = "anonymous";
 
-                                            newImg.on('mousedown', function () {
-                                                // if (!isScaling) { // Only change shape if not scaling
+                                            canvas.on('mouse:up', function(event) {
+                                                console.log(event);
+                                                if(event.transform.action === 'drag' && event.transform.actionPerformed === undefined){
                                                     currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
                                                     newImg.set({ clipPath: shapes[currentShapeIndex] });
-                                                    canvas.renderAll();
-                                                // }
+                                                }
+                                                                                            
+                                                canvas.renderAll();
                                             });
             
                                             const fixClipPath = () => {
