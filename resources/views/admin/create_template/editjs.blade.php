@@ -983,8 +983,8 @@ $(".removeShapImage").click(function(){
                     console.log(transformedMtr.x)
                     console.log(transformedMtr.y)
 
-                    // console.log({centerX})
-                    // console.log({centerY})
+                    console.log({centerX})
+                    console.log({centerY})
                     textData.push({
                         text: obj.text,
                         left: obj.left,
