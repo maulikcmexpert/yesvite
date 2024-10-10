@@ -181,7 +181,7 @@ class EventController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request->textData);
+        // dd($request);
         // $potluck = session('category');
         // dd(session()->get('gift_registry_data'));
 
@@ -259,7 +259,8 @@ class EventController extends Controller
         ]);
         $eventId = $event_creation->id;
         $event_creation->step = (isset($request->step) && $request->step != '') ? $request->step : 0;
-        if (isset($request->temp_id) && $request->temp_id != '') {
+        if (isset($request->shape_image) && $request->shape_image != '') {
+            $event_creation->design_inner_image = $request->shape_image;
         }
         if (isset($request->textData) && json_encode($request->textData) != '') {
             $tempData = TextData::where('id', $request->temp_id)->first();

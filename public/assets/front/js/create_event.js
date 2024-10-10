@@ -4392,6 +4392,8 @@ function save_image_design(downloadImage,textData){
                 success: function (response) {
                     let image = response.image;
                     eventData.desgin_selected = image;
+                    
+                    
                     // if(eventData.step == '1'){
                     //     eventData.step = '2';
                     // }
@@ -4424,8 +4426,9 @@ function save_image_design(downloadImage,textData){
                     
                     var type="all"
                     get_user(type);
-                    
-
+                    if(response.shape_image){
+                        eventData.shape_image = response.shape_image;
+                    }
                 },
                 error: function (xhr, status, error) {
                     console.error(
