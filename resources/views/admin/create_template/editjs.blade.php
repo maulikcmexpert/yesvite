@@ -971,11 +971,11 @@ $(".removeShapImage").click(function(){
                     // var centerX = obj.left + (obj.width / 2);
                     // var centerY = obj.top + (obj.height / 2);
 
-                    var controlCoords = object.oCoords; 
+                    var controlCoords = obj.oCoords; 
                     var mtrControl = controlCoords.mtr;
                     var transformedMtr = fabric.util.transformPoint(
                         new fabric.Point(mtrControl.x, mtrControl.y),
-                        object.calcTransformMatrix() // apply object transformations
+                        obj.calcTransformMatrix() // apply object transformations
                     );
                     console.log('Transformed rotation control position (mtr):', transformedMtr);
                     var centerX =transformedMtr.x;
