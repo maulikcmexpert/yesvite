@@ -656,14 +656,6 @@ function bindData() {
                         const imageInput = document.getElementById('image');
                         const scaledWidth = element.width;  // Use element's width
                         const scaledHeight = element.height;
-                        // const canvasRect = canvas.getBoundingClientRect();
-
-                        // console.log(canvasRect.left)
-                        // console.log(canvasRect.top)
-                        // console.log(element.centerX)
-                        // console.log(element.centerY)
-                        // console.log(element.height)
-                        // console.log(element.height)
 
                         imageInput.style.width = element.width + 'px';
                         imageInput.style.height = element.height + 'px';
@@ -736,12 +728,17 @@ function bindData() {
                             img.set({ clipPath: shapes[currentShapeIndex] });
                             img.crossOrigin = "anonymous";
 
-                            img.on('mouseup', function () {
-                                if (!isScaling) { // Only change shape if not scaling
+                            img.on('mouseup', function (event) {
+
+                                const target = event.target;
+                                if (target && target.isControl) {
+                                    
+                                }else{
                                     currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
                                     img.set({ clipPath: shapes[currentShapeIndex] });
-                                    canvas.renderAll();
+                                    
                                 }
+                                canvas.renderAll();
                             });
             
                             const fixClipPath = () => {
