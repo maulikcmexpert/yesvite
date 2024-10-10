@@ -729,10 +729,10 @@ function bindData() {
                             img.crossOrigin = "anonymous";
 
                             img.on('mouseup', function (event) {
-
+                                console.log(event);
                                 const target = event.target;
                                 if (target && target.isControl) {
-                                    
+
                                 }else{
                                     currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
                                     img.set({ clipPath: shapes[currentShapeIndex] });
