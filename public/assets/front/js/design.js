@@ -729,15 +729,12 @@ function bindData() {
                             img.crossOrigin = "anonymous";
 
                             canvas.on('mouse:down', function(event) {
-                                console.log(event);
-                                const target = canvas.findTarget(event.e);
-                                if (target && target.type === 'activeSelection') {
-                                    console.log('controls');
-                                }else{
+                                console.log(event.transform.action);
+                                
                                     currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
                                     img.set({ clipPath: shapes[currentShapeIndex] });
                                     
-                                }
+                        
                                 canvas.renderAll();
                             });
             
