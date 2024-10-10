@@ -710,8 +710,8 @@ function bindData() {
                                 cornerColor: "#fff",
                                 transparentCorners: false,
                                 lockUniScaling: true,
-                                scaleX: 600 / img.width,
-                                scaleY: 600 / img.height,
+                                scaleX: 600 / element.width,
+                                scaleY: 600 / element.height,
                                 cornerSize: 10,
                                 cornerStyle: 'circle',
                             });
