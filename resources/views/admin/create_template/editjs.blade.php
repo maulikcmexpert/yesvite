@@ -819,7 +819,7 @@ $(".removeShapImage").click(function(){
                 canvas.renderAll();
                 // findTextboxCenter(text);
             });
-
+            calculateControlPositions(text)
             // text.on('moving', function() {
             //     findTextboxCenter(text);
             // });
@@ -968,8 +968,19 @@ $(".removeShapImage").click(function(){
             // console.log(objects);
             objects.forEach(function(obj) {
                 if (obj.type === 'textbox') {
-                    var centerX = obj.left + (obj.width / 2);
-                    var centerY = obj.top + (obj.height / 2);
+                    // var centerX = obj.left + (obj.width / 2);
+                    // var centerY = obj.top + (obj.height / 2);
+
+                    var controlCoords = object.oCoords; 
+                    var mtrControl = controlCoords.mtr;
+                    var transformedMtr = fabric.util.transformPoint(
+                        new fabric.Point(mtrControl.x, mtrControl.y),
+                        object.calcTransformMatrix() // apply object transformations
+                    );
+                    console.log('Transformed rotation control position (mtr):', transformedMtr);
+                    var centerX =transformedMtr.x;
+                    var centerY = transformedMtr.y;
+                    console.log(centerX)
                     textData.push({
                         text: obj.text,
                         left: obj.left,
