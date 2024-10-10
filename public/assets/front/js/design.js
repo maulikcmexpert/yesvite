@@ -820,11 +820,11 @@ function bindData() {
                                             newImg.set({ clipPath: shapes[currentShapeIndex] });
             
                                             newImg.on('mousedown', function () {
-                                                if (!isScaling) { // Only change shape if not scaling
+                                                // if (!isScaling) { // Only change shape if not scaling
                                                     currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
                                                     newImg.set({ clipPath: shapes[currentShapeIndex] });
                                                     canvas.renderAll();
-                                                }
+                                                // }
                                             });
             
                                             const fixClipPath = () => {
@@ -833,12 +833,12 @@ function bindData() {
                                             };
             
                                             newImg.on('scaling', function () {
-                                                isScaling = true; // Set scaling flag
+                                                // isScaling = true; // Set scaling flag
                                                 fixClipPath();
                                             });
             
                                             newImg.on('scaling:end', function () {
-                                                isScaling = false; // Reset scaling flag after scaling ends
+                                                // isScaling = false; // Reset scaling flag after scaling ends
                                             });
                                         });
                                     };
