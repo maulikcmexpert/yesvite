@@ -746,8 +746,11 @@ function bindData() {
                                 canvas.renderAll();
                             };
             
-                            img.on('scaling', function () {
-                                fixClipPath();
+                            img.on('scaling', function (event) {
+                                const target = event.target;
+                                if (target && target.isControl) {
+                                    fixClipPath();
+                                }
                             });
             
                             canvas.add(img);
