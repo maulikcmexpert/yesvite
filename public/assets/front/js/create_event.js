@@ -4370,14 +4370,15 @@ function save_image_design(downloadImage,textData){
 
     if($('#shape_img').attr("src")){
         design_inner_image = $('#shape_img').attr("src");
-    } 
+    }
+    var old_shape_url = $("#first_shape_img").attr("src"); 
 
     domtoimage.toBlob(downloadImage)
         .then(function (blob) {
             var formData = new FormData();
             formData.append("image", blob, "design.png");
             formData.append('design_inner_image',design_inner_image);
-            formData.append('shapeImageUrl',shapeImageUrl);
+            formData.append('shapeImageUrl',old_shape_url);
             $.ajax({
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
