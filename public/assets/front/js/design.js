@@ -2451,13 +2451,9 @@ function getTextDataFromCanvas() {
                 shape: obj.clipPath.type,
                 centerX: centerX,
                 centerY: centerY,
-                width: obj.width,
-                height: obj.height,
+                width: obj.clipPath.width,
+                height: obj.clipPath.height,
             };
-            var design_inner_image = $('#image').attr("src"); 
-            console.log({design_inner_image});
-            console.log(obj.src);
-            
         }
     });
     // const imageWrapper = document.getElementById('imageEditor1');
