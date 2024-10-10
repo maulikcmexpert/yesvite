@@ -652,7 +652,7 @@ function bindData() {
                 if (shapeImageUrl) {
                     let element = staticInfo?.shapeImageData;
                     if (element.shape && element.centerX && element.centerY && element.height && element.width) {
-                        console.log(shapeImageUrl);
+                        
                         const imageInput = document.getElementById('image');
                         const scaledWidth = element.width;  // Use element's width
                         const scaledHeight = element.height;
@@ -755,7 +755,7 @@ function bindData() {
             
                             canvas.add(img);
                             currentImage = img; // Store the image reference
-            
+                            $("#shape_img").attr("src",shapeImageUrl);
                             // Custom control for the upload button (centered)
                             fabric.Object.prototype.controls.uploadControl = new fabric.Control({
                                 x: 0,
@@ -791,6 +791,9 @@ function bindData() {
                                 if (file) {
                                     const reader = new FileReader();
                                     reader.onload = function () {
+
+                                        $("#shape_img").attr("src", reader.result);
+
                                         fabric.Image.fromURL(reader.result, function (newImg) {
                                             // Remove the old image if it exists
                                             if (currentImage) {
@@ -814,7 +817,8 @@ function bindData() {
                                             shapes = createShapes(newImg);
                                             canvas.add(newImg);
                                             currentImage = newImg; 
-                                          
+                                            // $("#shape_img").attr("src",shapeImageUrl);
+
                                             // Reset shape index for the new image based on the default shape
                                             currentShapeIndex = shapeIndexMap[defaultShape] || 0; // Default to rectangle if not found
                                             newImg.set({ clipPath: shapes[currentShapeIndex] });
@@ -1385,7 +1389,7 @@ function bindData() {
         // $("#imageWrapper").hide();
         $(this).hide();
         $('.uploadShapImage').show();
-        $("#user_image").attr("src",shapeImageUrl);
+        $("#image").attr("src",shapeImageUrl);
     })
 
     $(document).on('change','.uploadShapImage',function(event){

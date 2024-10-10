@@ -56,6 +56,7 @@
                         <div class="resize-handle right-center"></div> <!-- Right-center handle -->
                     </div>
                     <input type="file" id="image" accept="image/*" style="display: none" />
+                    <img id="shape_img" src="" style="display: none;" >
                     <canvas id="imageEditor1" class="canvas new"></canvas>
                 </div>
                 {{-- <img src="{{ $textData->image}}" alt=""> --}}
