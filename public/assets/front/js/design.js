@@ -2410,7 +2410,7 @@ function getTextDataFromCanvas() {
     var objects = canvas.getObjects();
     console.log(objects);
     var textData = [];
-
+    var shapeImageData = [];
     objects.forEach(function(obj) {
         if (obj.type === "textbox") {
             var centerX = obj.left + obj.width / 2;
@@ -2435,31 +2435,43 @@ function getTextDataFromCanvas() {
                 date_formate: obj.date_formate, // Include date_formate if set
             });
         }
+        if(obj.type==="image"){
+            var centerX = obj.left + obj.width / 2;
+            var centerY = obj.top + obj.height / 2;
+            console.log(obj.clipPath);
+            // shapeImageData ={
+            //     shape: clipPath.type,
+            //     centerX: centerX,
+            //     centerY: centerY,
+            //     width: obj.width,
+            //     height: obj.height,
+            // };
+        }
     });
-    const imageWrapper = document.getElementById('imageEditor1');
-    const imgElement = document.getElementById('image');
-    let canvasEL = document.getElementById('imageEditor1')
-    const canvasRect = canvasEL.getBoundingClientRect();
+    // const imageWrapper = document.getElementById('imageEditor1');
+    // const imgElement = document.getElementById('image');
+    // let canvasEL = document.getElementById('imageEditor1')
+    // const canvasRect = canvasEL.getBoundingClientRect();
 
-    const imageWrapperRect = imageWrapper.getBoundingClientRect();
-    const width = imgElement.clientWidth;
-    const height = imgElement.clientHeight;
-    const left = imageWrapperRect.left - canvasRect.left;
-    const top = imageWrapperRect.top - canvasRect.top;
-    const centerX = left + width / 2;
-    const centerY = top + height / 2;
+    // const imageWrapperRect = imageWrapper.getBoundingClientRect();
+    // const width = imgElement.clientWidth;
+    // const height = imgElement.clientHeight;
+    // const left = imageWrapperRect.left - canvasRect.left;
+    // const top = imageWrapperRect.top - canvasRect.top;
+    // const centerX = left + width / 2;
+    // const centerY = top + height / 2;
 
  
 
-    var shapeImageData = [];
+    // var shapeImageData = [];
 
-    shapeImageData ={
-        shape: current_shape,
-        centerX: centerX,
-        centerY: centerY,
-        width: width,
-        height: height,
-    };
+    // shapeImageData ={
+    //     shape: current_shape,
+    //     centerX: centerX,
+    //     centerY: centerY,
+    //     width: width,
+    //     height: height,
+    // };
 
     dbJson = {
         textElements: textData,
