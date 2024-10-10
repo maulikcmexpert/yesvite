@@ -730,7 +730,7 @@ function bindData() {
 
                             canvas.on('mouse:down', function(event) {
                                 console.log(event);
-                                if(event.transform.action == 'drag'){
+                                if (event.transform.action === 'drag' && !event.transform.actionPerformed) {
                                     currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
                                     img.set({ clipPath: shapes[currentShapeIndex] });
                                 }
