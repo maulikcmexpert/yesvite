@@ -813,7 +813,7 @@ function bindData() {
                                             shapes = createShapes(newImg);
                                             canvas.add(newImg);
                                             currentImage = newImg; 
-                                            shapeImageUrl = newImg;
+                                            shapeImageUrl = newImg.src;
                                             console.log(shapeImageUrl);
                                             // Reset shape index for the new image based on the default shape
                                             currentShapeIndex = shapeIndexMap[defaultShape] || 0; // Default to rectangle if not found
