@@ -769,7 +769,7 @@ function bindData() {
                                 render: function (ctx, left, top, styleOverride, fabricObject) {
                                     const imgIcon = document.createElement('img');
 
-                                    const svgString = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M246.6 9.4c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 109.3 192 320c0 17.7 14.3 32 32 32s32-14.3 32-32l0-210.7 73.4 73.4c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-128-128zM64 352c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 64c0 53 43 96 96 96l256 0c53 0 96-43 96-96l0-64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 64c0 17.7-14.3 32-32 32L96 448c-17.7 0-32-14.3-32-32l0-64z"></path></svg>`;
+                                    const svgString = `<div style="background: red;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M246.6 9.4c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 109.3 192 320c0 17.7 14.3 32 32 32s32-14.3 32-32l0-210.7 73.4 73.4c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-128-128zM64 352c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 64c0 53 43 96 96 96l256 0c53 0 96-43 96-96l0-64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 64c0 17.7-14.3 32-32 32L96 448c-17.7 0-32-14.3-32-32l0-64z"></path></svg></div>`;
                                     const encodedSvg = encodeURIComponent(svgString);
                                     const imgSrc = `data:image/svg+xml;charset=utf-8,${encodedSvg}`;
                                     imgIcon.src = imgSrc;
@@ -778,27 +778,6 @@ function bindData() {
                                     imgIcon.height = 24;
             
                                     ctx.drawImage(imgIcon, left - 12, top - 12, 24, 24);
-
-
-                                     // Set the background color, border radius, and padding
-                                    const padding = 10; // Set your desired padding
-                                    const borderRadius = 10; // Set your desired border radius
-                                    const bgColor = 'rgba(255, 255, 255, 0.8)'; // Set your desired background color
-
-                                    // Draw a rounded rectangle for the background
-                                    ctx.fillStyle = bgColor;
-                                    ctx.beginPath();
-                                    ctx.moveTo(left - padding + borderRadius, top - padding);
-                                    ctx.lineTo(left + 24 + padding - borderRadius, top - padding);
-                                    ctx.quadraticCurveTo(left + 24 + padding, top - padding, left + 24 + padding, top - padding + borderRadius);
-                                    ctx.lineTo(left + 24 + padding, top + 24 + padding - borderRadius);
-                                    ctx.quadraticCurveTo(left + 24 + padding, top + 24 + padding, left + 24 + padding - borderRadius, top + 24 + padding);
-                                    ctx.lineTo(left - padding + borderRadius, top + 24 + padding);
-                                    ctx.quadraticCurveTo(left - padding, top + 24 + padding, left - padding, top + 24 + padding - borderRadius);
-                                    ctx.lineTo(left - padding, top - padding + borderRadius);
-                                    ctx.quadraticCurveTo(left - padding, top - padding, left - padding + borderRadius, top - padding);
-                                    ctx.closePath();
-                                    ctx.fill();
                                 }
                             });
             
