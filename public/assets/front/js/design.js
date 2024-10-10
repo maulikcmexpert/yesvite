@@ -652,131 +652,164 @@ function bindData() {
                 if (shapeImageUrl) {
                     let element = staticInfo?.shapeImageData;
                     if (element.shape && element.centerX && element.centerY && element.height && element.width) {
-                        // updateClipPath(shapeImageUrl, element);
-                        console.log({canvas});
-                        console.log(shapeImageUrl);
-                        
                         const imageInput = document.getElementById('image');
+                        const canvas = new fabric.Canvas('canvas');
+            const imageInput = document.getElementById('imageInput');
+            let currentImage = null; // Variable to hold the current image
+            let isScaling = false; // Flag to check if the image is scaling
+
+            function createShapes(img) {
+                const imgWidth = img.width;
+                const imgHeight = img.height;
+                const starScale = Math.min(imgWidth, imgHeight) / 2; // Adjust the star size based on the image
+
+                // Proper 5-point star shape
+                const starPoints = [
+                    { x: 0, y: -starScale }, // Top point
+                    { x: starScale * 0.23, y: -starScale * 0.31 }, // Top-right
+                    { x: starScale, y: -starScale * 0.31 }, // Right
+                    { x: starScale * 0.38, y: starScale * 0.12 }, // Bottom-right
+                    { x: starScale * 0.58, y: starScale }, // Bottom
+                    { x: 0, y: starScale * 0.5 }, // Center-bottom
+                    { x: -starScale * 0.58, y: starScale }, // Bottom-left
+                    { x: -starScale * 0.38, y: starScale * 0.12 }, // Top-left
+                    { x: -starScale, y: -starScale * 0.31 }, // Left
+                    { x: -starScale * 0.23, y: -starScale * 0.31 } // Top-left
+                ];
+
+                return [
+                    new fabric.Rect({ width: imgWidth, height: imgHeight, originX: 'center', originY: 'center', angle: 0 }),
+                    new fabric.Circle({ radius: Math.min(imgWidth, imgHeight) / 2, originX: 'center', originY: 'center', angle: 0 }),
+                    new fabric.Triangle({ width: imgWidth, height: imgHeight, originX: 'center', originY: 'center', angle: 0 }),
+                    new fabric.Polygon(starPoints, { originX: 'center', originY: 'center', angle: 0 })
+                ];
+            }
 
             // Load the initial image
-                        fabric.Image.fromURL(shapeImageUrl, function (img) {
-                            img.set({
-                                left: 100,
-                                top: 100,
-                                selectable: true,
-                                scaleX: 0.5,
-                                scaleY: 0.5,
-                                hasControls: true,
-                                hasBorders: true,
-                                lockUniScaling: false
-                            });
-                            img.crossOrigin = "anonymous";
+            fabric.Image.fromURL(shapeImageUrl, function (img) {
+                img.set({
+                    left: 100,
+                    top: 100,
+                    selectable: true,
+                    scaleX: 0.5,
+                    scaleY: 0.5,
+                    hasControls: true,
+                    hasBorders: true,
+                    lockUniScaling: false
+                });
 
-                            const shapes = [
-                                new fabric.Rect({ width: element.width, height: element.height, originX: 'center', originY: 'center', angle: 0 }),
-                                new fabric.Circle({ radius: 180, originX: 'center', originY: 'center', angle: 0 }),
-                                new fabric.Triangle({ width: element.width, height: element.height, originX: 'center', originY: 'center', angle: 0 }),
-                                new fabric.Polygon([
-                                    { x: 0, y: -180 },
-                                    { x: 60, y: -60 },
-                                    { x: 180, y: -60 },
-                                    { x: 90, y: 0 },
-                                    { x: 110, y: 120 },
-                                    { x: 0, y: 75 },
-                                    { x: -110, y: 120 },
-                                    { x: -90, y: 0 },
-                                    { x: -180, y: -60 },
-                                    { x: -60, y: -60 }
-                                ], {
-                                    originX: 'center',
-                                    originY: 'center',
-                                    angle: 0
-                                })
-                            ];
+                let shapes = createShapes(img);
+                let currentShapeIndex = 0;
+                let lastShapeIndex = currentShapeIndex;
 
-                            let currentShapeIndex = 0;
+                img.on('mouseup', function () {
+                    // if (!isScaling) { // Only change shape if not scaling
+                    lastShapeIndex = currentShapeIndex;
+                    currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
+                    img.set({
+                        clipPath: shapes[currentShapeIndex]
+                    });
+                    console.log(currentShapeIndex);
+                    canvas.renderAll();
+                    // }
+                });
 
-                            // Event listener for image click to change shape
-                            img.on('mousedown', function () {
-                                img.set({
-                                    clipPath: shapes[currentShapeIndex]
+                const fixClipPath = () => {
+                    console.log('last_one ' + currentShapeIndex);
+                    img.set({ clipPath: shapes[lastShapeIndex] });
+                    canvas.renderAll();
+                };
+
+                img.on('scaling', function () {
+                    // isScaling = true; // Set scaling flag
+                    fixClipPath();
+                });
+
+
+
+                canvas.add(img);
+                currentImage = img; // Store the image reference
+
+                // Custom control for the upload button (centered)
+                fabric.Object.prototype.controls.uploadControl = new fabric.Control({
+                    x: 0,
+                    y: 0,
+                    offsetX: 0,
+                    offsetY: 0,
+                    cursorStyle: 'pointer',
+                    mouseUpHandler: function () {
+                        imageInput.click();
+                    },
+                    render: function (ctx, left, top, styleOverride, fabricObject) {
+                        const imgIcon = document.createElement('img');
+                        imgIcon.src = 'https://cdn-icons-png.flaticon.com/512/992/992700.png';
+                        imgIcon.crossOrigin = "anonymous";
+                        imgIcon.width = 24;
+                        imgIcon.height = 24;
+
+                        ctx.drawImage(imgIcon, left - 12, top - 12, 24, 24);
+                    }
+                });
+
+                // Event listener for image selection (file input)
+                imageInput.addEventListener('change', function (event) {
+                    const file = event.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = function () {
+                            fabric.Image.fromURL(reader.result, function (newImg) {
+                                // Remove the old image if it exists
+                                if (currentImage) {
+                                    canvas.remove(currentImage);
+                                }
+
+                                newImg.set({
+                                    left: 100,
+                                    top: 100,
+                                    selectable: true,
+                                    scaleX: 0.5,
+                                    scaleY: 0.5,
+                                    hasControls: true,
+                                    hasBorders: true,
+                                    lockUniScaling: false
                                 });
-                                canvas.renderAll();
-                                currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
+
+                                shapes = createShapes(newImg);
+                                canvas.add(newImg);
+                                currentImage = newImg; // Update the reference
+
+                                // Reset shape index for the new image
+                                currentShapeIndex = 0;
+                                newImg.set({ clipPath: shapes[currentShapeIndex] });
+
+                                newImg.on('mousedown', function () {
+                                    if (!isScaling) { // Only change shape if not scaling
+                                        currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
+                                        newImg.set({ clipPath: shapes[currentShapeIndex] });
+                                        canvas.renderAll();
+                                    }
+                                });
+
+                                const fixClipPath = () => {
+                                    newImg.set({ clipPath: shapes[currentShapeIndex] });
+                                    canvas.renderAll();
+                                };
+
+                                newImg.on('scaling', function () {
+                                    isScaling = true; // Set scaling flag
+                                    fixClipPath();
+                                });
+
+                                newImg.on('scaling:end', function () {
+                                    isScaling = false; // Reset scaling flag after scaling ends
+                                });
                             });
-
-                            // Ensure clip path remains fixed during scaling and moving
-                            const fixClipPath = () => {
-                                img.set({ clipPath: shapes[0] });
-                                canvas.renderAll();
-                            };
-                            img.on('scaling', fixClipPath);
-                            img.on('moving', fixClipPath);
-
-                            canvas.add(img);
-
-                            // Define custom control for the upload button (centered)
-                            fabric.Object.prototype.controls.uploadControl = new fabric.Control({
-                                x: 0, // Center of the image horizontally
-                                y: 0, // Center of the image vertically
-                                offsetX: 0,
-                                offsetY: 0,
-                                cursorStyle: 'pointer',
-                                mouseUpHandler: function () {
-                                    imageInput.click(); // Trigger the file input click when this control is clicked
-                                },
-                                render: function (ctx, left, top, styleOverride, fabricObject) {
-                                    const imgIcon = document.createElement('img');
-
-                                    imgIcon.src = 'https://cdn-icons-png.flaticon.com/512/992/992700.png'; // Upload icon
-                                    imgIcon.crossOrigin = "anonymous";
-                                    imgIcon.width = 24;
-                                    imgIcon.height = 24;
-
-                                    ctx.drawImage(imgIcon, left - 12, top - 12, 24, 24); // Adjust the icon size and position
-                                }
-                            });
-
-                            // Event listener for image selection (file input)
-                            imageInput.addEventListener('change', function (event) {
-                                const file = event.target.files[0];
-                                if (file) {
-                                    const reader = new FileReader();
-                                    reader.onload = function () {
-                                        fabric.Image.fromURL(reader.result, function (newImg) {
-                                            canvas.remove(img); // Remove the old image and clip path
-                                            // canvas.remove(...canvas.getObjects().filter(obj => obj !== newImg)); // Remove any additional objects (optional)
-
-                                            newImg.set({
-                                                left: 100,
-                                                top: 100,
-                                                selectable: true,
-                                                scaleX: 0.5,
-                                                scaleY: 0.5,
-                                                hasControls: true,
-                                                hasBorders: true,
-                                                lockUniScaling: false
-                                            });
-                                            newImg.crossOrigin = "anonymous";
-                                            canvas.add(newImg);
-
-                                            // Event listener for image click on the new image
-                                            newImg.on('mousedown', function () {
-                                                newImg.set({
-                                                    clipPath: shapes[currentShapeIndex]
-                                                });
-                                                canvas.renderAll();
-                                                currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
-                                            });
-
-                                            newImg.on('scaling', fixClipPath);
-                                            newImg.on('moving', fixClipPath);
-                                        });
-                                    };
-                                    reader.readAsDataURL(file);
-                                }
-                            });
-                        });
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
+            });
+                        
                     }
                 }
 
