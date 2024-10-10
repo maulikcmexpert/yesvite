@@ -2437,7 +2437,6 @@ function getTextDataFromCanvas() {
         }
         if(obj.type==="image"){
 
-            console.log(obj);
             var centerX = obj.left + obj.width / 2;
             var centerY = obj.top + obj.height / 2;
             shapeImageData ={
@@ -2447,6 +2446,10 @@ function getTextDataFromCanvas() {
                 width: obj.width,
                 height: obj.height,
             };
+            var design_inner_image = $('#image').attr("src"); 
+            console.log({design_inner_image});
+            console.log(obj.src);
+            
         }
     });
     // const imageWrapper = document.getElementById('imageEditor1');
