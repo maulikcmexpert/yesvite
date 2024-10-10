@@ -554,6 +554,7 @@ class EventController extends Controller
             // }     
             // return  Redirect::to('event')->with('success', 'Event Created successfully');
             Session::forget('desgin');
+            Session::forget('shape_image');
         }
         if ($event_creation && $request->isdraft == "1") {
             return 1;
