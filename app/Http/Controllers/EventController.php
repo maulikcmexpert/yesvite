@@ -290,7 +290,7 @@ class EventController extends Controller
                     $textElemtents[$key]['lineHeight'] = (float)$textJson['lineHeight'];
                 }
                 if (isset($textJson['underline'])) {
-                    $textElemtents[$key]['underline'] = (bool)$textJson['underline'];
+                    $textElemtents[$key]['underline'] = $textJson['underline'];
                 }
             }
            

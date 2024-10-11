@@ -2602,6 +2602,7 @@ function getTextDataFromCanvas() {
     var shapeImageData = [];
     objects.forEach(function(obj) {
         if (obj.type === "textbox") {
+            console.log(obj.underline);
             var centerX = obj.left + obj.width / 2;
             var centerY = obj.top + obj.height / 2;
             textData.push({
