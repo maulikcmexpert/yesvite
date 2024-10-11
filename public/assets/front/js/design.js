@@ -93,6 +93,7 @@ $(document).on("click", ".design-card", function() {
             cornerSize: 10,
             transparentCorners: false,
             isStatic: true,
+            angle: element?.rotation ? element?.rotation : 0
         });
         switch (element.text) {
             case "event_name":
