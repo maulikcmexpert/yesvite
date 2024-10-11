@@ -66,11 +66,11 @@
                 <!-- -------------- -->
                 <tr>
                     <td>
-                        <p>Reporter Username : {{$userData['reporter_username']}}</p>
-                        <p>Reported Username : {{$userData['reported_username']}}</p>
-                        <p>Report Type : {{$userData['report_type']}}</p>
-                        <p>Report Description : {{$userData['report_description']}}</p>
-                        <p>Report Time : {{$userData['report_time']}}</p>
+                        <p>Reporter Username : {{$userdata['reporter_username']}}</p>
+                        <p>Reported Username : {{$userdata['reported_username']}}</p>
+                        <p>Report Type : {{$userdata['report_type']}}</p>
+                        <p>Report Description : {{$userdata['report_description']}}</p>
+                        <p>Report Time : {{$userdata['report_time']}}</p>
                     </td>
                 </tr>
                 <!-- -------------- -->
