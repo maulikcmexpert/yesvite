@@ -125,7 +125,7 @@
                 <!-- -------------- -->
                 <tr>
                     <td>
-                        <h4 style="font-size: 20px;line-height: 28px;font-weight: 700;color: #0F172A;margin: 0px 0px;">You’re Invited! 🎉</h4>
+                        <h4 style="font-size: 32px;line-height: 28px;font-weight: 700;color: #0F172A;margin: 0px 0px;">You’re Invited! 🎉</h4>
                     </td>
                 </tr>
                 <!-- -------------- -->
@@ -139,7 +139,7 @@
                             <!-- <span style="display: block; width:50px; height: 50px; max-width:100%; margin-right:10px; margin-top:9px">
                                 <img src="{{ asset('public/storage/profile/'.$eventData['profileUser'])}}" style="width: 100%;height: 100%; border-radius:50%; margin-right:10px; object-fit:cover; display:block" alt="user-img">
                             </span> -->
-                            <h3 style="text-transform: capitalize;font-size: 32px;line-height: 44px;font-weight: 700;color: #0A090B;margin: 0px 0px;text-transform: capitalize;margin-left: 7px;width:85%; word-wrap:break-word;">{{ @$eventData['hosted_by']}}</h3>
+                            <h3 style="text-transform: capitalize;font-size: 32px;line-height: 44px;font-weight: 700;color: #0A090B;margin: 0px 0px;text-transform: capitalize;margin-left: 0px;width:85%; word-wrap:break-word;">{{ @$eventData['hosted_by']}}</h3>
                         </div>
                         <h5 style="font-size: 32px;line-height: 44px;font-weight: 400;color: #0A090B;margin: 0px 0px;">has invited you to:</h5>
                         <h2 style="font-size: 32px;line-height: 44px;font-weight: 700;color: #0A090B;margin: 0px 0px;">{{ @$eventData['event_name'] }}</h2>
