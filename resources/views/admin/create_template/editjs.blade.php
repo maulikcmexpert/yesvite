@@ -997,15 +997,15 @@ $(".removeShapImage").click(function(){
                     //     obj.calcTransformMatrix() // apply object transformations
                     // );
 
-                    var transformedMtr = calculateControlPositions(obj)
-                    console.log('Transformed rotation control position (mtr):', transformedMtr);
-                    var centerX =transformedMtr.x / 2;
-                    var centerY = (transformedMtr.y / 2) - 20;
-                    console.log(transformedMtr.x)
-                    console.log(transformedMtr.y)
+                    // var transformedMtr = calculateControlPositions(obj)
+                    // console.log('Transformed rotation control position (mtr):', transformedMtr);
+                    // var centerX =transformedMtr.x / 2;
+                    // var centerY = (transformedMtr.y / 2) - 20;
+                    // console.log(transformedMtr.x)
+                    // console.log(transformedMtr.y)
 
-                    console.log({centerX})
-                    console.log({centerY})
+                    // console.log({centerX})
+                    // console.log({centerY})
                     textData.push({
                         text: obj.text,
                         left: obj.left,
