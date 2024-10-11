@@ -1659,6 +1659,7 @@ function bindData() {
             hasControls: true,
             borderColor: "#2DA9FC",
             cornerColor: "#fff",
+            cornerStyle: 'circle',
             cornerSize: 10,
             transparentCorners: false,
         });
