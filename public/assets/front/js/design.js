@@ -939,13 +939,15 @@ function bindData() {
 
     // Set letter spacing function
     const setLetterSpacing = () => {
-        const newValue = letterSpacingRange.value;
+        const newValue = parseFloat(letterSpacingRange.value); // Ensure it's a number
         letterSpacingInput.value = newValue;
         letterSpacingTooltip.innerHTML = `<span>${newValue}</span>`;
 
         const activeObject = canvas.getActiveObject();
-        if (activeObject && activeObject.type === "textbox") {
-            activeObject.set("charSpacing", newValue * 10); // Convert spacing to match Fabric.js scale
+        if (activeObject && activeObject.type === 'textbox') {
+            activeObject.set('charSpacing', newValue); // Update letter spacing
+
+            // Now call updateTextboxWidth to handle width adjustments
             updateTextboxWidth(activeObject);
         }
     };
