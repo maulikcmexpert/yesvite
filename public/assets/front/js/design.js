@@ -90,7 +90,7 @@ $(document).on("click", ".design-card", function() {
             hasControls: false,
             borderColor: "#2DA9FC",
             cornerColor: "#fff",
-            cornerSize: 6,
+            cornerSize: 10,
             transparentCorners: false,
             isStatic: true,
         });
@@ -253,7 +253,7 @@ $(document).on("click", ".design-card", function() {
                     lockUniScaling: true,
                     scaleX: scaledWidth / img.width,  // Scale based on element's width
                     scaleY: scaledHeight / img.height, // Scale based on element's height
-                    cornerSize: 6,
+                    cornerSize: 10,
                     cornerStyle: 'circle',
                     left: element.centerX - scaledWidth / 2, // Center the image horizontally
                     top: element.centerY - scaledHeight / 2  
@@ -348,7 +348,7 @@ $(document).on("click", ".design-card", function() {
                                     lockUniScaling: true,
                                     scaleX: scaledWidth / newWidth,  // Scale based on element's width
                                     scaleY: scaledHeight / newHeight, // Scale based on element's height
-                                    cornerSize: 6,
+                                    cornerSize: 10,
                                     cornerStyle: 'circle',
                                     left: element.centerX - scaledWidth / 2, // Center the image horizontally
                                     top: element.centerY - scaledHeight / 2  
@@ -809,7 +809,7 @@ function bindData() {
                                 lockUniScaling: true,
                                 scaleX: scaledWidth / img.width,  // Scale based on element's width
                                 scaleY: scaledHeight / img.height, // Scale based on element's height
-                                cornerSize: 6,
+                                cornerSize: 10,
                                 cornerStyle: 'circle',
                                 left: element.centerX - scaledWidth / 2, // Center the image horizontally
                                 top: element.centerY - scaledHeight / 2  
@@ -904,7 +904,7 @@ function bindData() {
                                                 lockUniScaling: true,
                                                 scaleX: scaledWidth / newWidth,  // Scale based on element's width
                                                 scaleY: scaledHeight / newHeight, // Scale based on element's height
-                                                cornerSize: 6,
+                                                cornerSize: 10,
                                                 cornerStyle: 'circle',
                                                 left: element.centerX - scaledWidth / 2, // Center the image horizontally
                                                 top: element.centerY - scaledHeight / 2  
@@ -1533,7 +1533,7 @@ function bindData() {
             borderColor: '#2DA9FC',
             // cornerColor: 'red',
             cornerColor: '#fff',
-            cornerSize: 6,
+            cornerSize: 10,
             transparentCorners: false,
             isStatic: true,
             backgroundColor: 'rgba(0, 0, 0, 0)',
@@ -1659,7 +1659,7 @@ function bindData() {
             hasControls: true,
             borderColor: "#2DA9FC",
             cornerColor: "#fff",
-            cornerSize: 6,
+            cornerSize: 10,
             transparentCorners: false,
         });
         canvas.add(textbox);
@@ -1861,7 +1861,7 @@ function bindData() {
             
             obj.set('transparentCorners', false);
             obj.set('borderColor', "#2DA9FC");
-            obj.set('cornerSize', 6);
+            obj.set('cornerSize', 10);
             obj.set('cornerColor', "#fff");
             // Set text alignment if the object is a text-based object
             if (obj.type === 'textbox' || obj.type === 'text') {
@@ -1961,8 +1961,9 @@ function bindData() {
             
             obj.set('transparentCorners', false);
             obj.set('borderColor', "#2DA9FC");
-            obj.set('cornerSize', 6);
+            obj.set('cornerSize', 10);
             obj.set('cornerColor', "#fff");
+            obj.set('cornerStyle', "circle");
             // Set text alignment if the object is a text-based object
             if (obj.type === 'textbox' || obj.type === 'text') {
                 obj.set('textAlign', 'center');  // Set text alignment to center
