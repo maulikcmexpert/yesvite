@@ -31,20 +31,20 @@ class UserChatReportDataTable extends DataTable
             ->addColumn('no', function () use (&$counter) {
                 return $counter++;
             })
-            ->filter(function ($query) {
-                if ($this->request->has('search')) {
-                    $keyword = $this->request->get('search');
-                    $keyword = $keyword['value'];
-                    $query->where(function ($q) use ($keyword) {
-                        $q->whereHas('users', function ($q) use ($keyword) {
-                            $q->where('firstname', 'LIKE', "%{$keyword}%")
-                                ->orWhere('lastname', 'LIKE', "%{$keyword}%");
-                        })->orWhereHas('events', function ($q) use ($keyword) {
-                            $q->where('event_name', 'LIKE', "%{$keyword}%");
-                        });
-                    });
-                }
-            })
+            // ->filter(function ($query) {
+            //     if ($this->request->has('search')) {
+            //         $keyword = $this->request->get('search');
+            //         $keyword = $keyword['value'];
+            //         $query->where(function ($q) use ($keyword) {
+            //             $q->whereHas('users', function ($q) use ($keyword) {
+            //                 $q->where('firstname', 'LIKE', "%{$keyword}%")
+            //                     ->orWhere('lastname', 'LIKE', "%{$keyword}%");
+            //             })->orWhereHas('events', function ($q) use ($keyword) {
+            //                 $q->where('event_name', 'LIKE', "%{$keyword}%");
+            //             });
+            //         });
+            //     }
+            // })
 
             ->addColumn('number', function ($row) {
                 static $count = 1;
@@ -62,13 +62,13 @@ class UserChatReportDataTable extends DataTable
 
 
             ->addColumn('report_type', function ($row) {
-                return $row->post_type;
+                return $row->report_type;
             })
 
 
 
             ->addColumn('report_description', function ($row) {
-                return $row->post_type;
+                return $row->report_description;
             })
 
             ->addColumn('action', function ($row) {
