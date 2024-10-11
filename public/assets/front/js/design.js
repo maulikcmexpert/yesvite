@@ -1645,47 +1645,49 @@ function bindData() {
             addEditableTextbox(100, 100, "EditableText"); // You can set the initial position and default text
         });
 
-    function addEditableTextbox(left, top, textContent) {
-        var textbox = new fabric.Textbox(textContent, {
-            left: left,
-            top: top,
-            // width: 200,
-            fontSize: 20,
-            backgroundColor: 'rgba(0, 0, 0, 0)', // Set background to transparent
-            textAlign: 'center',
-            fill: "#000000",
-            editable: true,
-            selectable: true,
-            hasControls: true,
-            borderColor: "#2DA9FC",
-            cornerColor: "#fff",
-            cornerStyle: 'circle',
-            cornerSize: 10,
-            transparentCorners: false,
-        });
+        function addEditableTextbox(left, top, textContent) {
 
-        textbox.setControlsVisibility({
-            mt: false, // Hide middle top control
-            mb: false, // Hide middle bottom control
-            bl: true, // Hide bottom left control
-            br: true, // Hide bottom right control
-            tl: true, // Hide top left control
-            tr: true, // Hide top right control
-            ml: true,  // Show middle left control
-            mr: true   // Show middle right control
-        });
+            var textbox = new fabric.Textbox(textContent, {
+                left: left,
+                top: top,
+                // width: 100,
+                fontSize: 20,
+                backgroundColor: 'rgba(0, 0, 0, 0)', // Set background to transparent
+                textAlign: 'center',
+                fill: '#0a0b0a',
+                editable: true,
+                selectable: true,
+                hasControls: true,
+                borderColor: '#2DA9FC',
+                cornerColor: '#fff',
+                cornerStyle:'circle',
+                cornerSize: 10,
+                transparentCorners: false,
+                textAlign:'center',
+            });
+            textbox.setControlsVisibility({
+                mt: false, // Hide middle top control
+                mb: false, // Hide middle bottom control
+                bl: true, // Hide bottom left control
+                br: true, // Hide bottom right control
+                tl: true, // Hide top left control
+                tr: true, // Hide top right control
+                ml: true,  // Show middle left control
+                mr: true   // Show middle right control
+            });
 
-        textbox.on('scaling', function() {
-            // Update the font size based on scaling
-            var updatedFontSize = textbox.fontSize * (textbox.scaleX + textbox.scaleY) / 2;
-            textbox.set('fontSize', updatedFontSize);
+            textbox.on('scaling', function() {
+                // Update the font size based on scaling
+                var updatedFontSize = textbox.fontSize * (textbox.scaleX + textbox.scaleY) / 2;
+                textbox.set('fontSize', updatedFontSize);
+                canvas.renderAll();
+            });
+
+            canvas.add(textbox);
+            canvas.setActiveObject(textbox);
+            
             canvas.renderAll();
-        });
-        canvas.add(textbox);
-        canvas.setActiveObject(textbox);
-        // addIconsToTextbox(textbox);
-        canvas.renderAll();
-    }
+        }
 
     document.getElementById('AbrilFatfaceButton').addEventListener('click', function() {
         //console.log("fontname")
