@@ -895,9 +895,24 @@ function bindData() {
                                             // Remove the old image if it exists
                                             const newWidth = img.width;
                                             const newHeight = img.height;
-                                            if (currentImage) {
-                                                canvas.remove(currentImage);
-                                            }
+                                            let canvasState = canvas.toJSON();
+    
+                                            canvasState.objects = canvasState.objects.filter(function (obj) {
+                                                // Check if the object is of type 'image'
+                                                if (obj.type === 'image') {
+                                                    // Find the corresponding Fabric.js image object on the canvas
+                                                    const fabricImage = canvas.getObjects().find(image => image.toObject().src === obj.src);
+                                                    // Remove the Fabric.js image from the canvas if found
+                                                    if (fabricImage) {
+                                                        canvas.remove(fabricImage);
+                                                    }
+                                                    return false; // Exclude this image object from the filtered array
+                                                }
+                                                return true; // Include other objects
+                                            });
+                                            
+                                            // Render the updated canvas state
+                                            canvas.renderAll();
                         
                                             newImg.set({
                                                 selectable: true,
