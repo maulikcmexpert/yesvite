@@ -819,7 +819,9 @@ $(".removeShapImage").click(function(){
                 canvas.renderAll();
                 // findTextboxCenter(text);
             });
-            calculateControlPositions(text)
+            text.on('rotating', function() {
+                calculateControlPositions(text); // Update control position during rotation
+            });
             // text.on('moving', function() {
             //     findTextboxCenter(text);
             // });
@@ -828,7 +830,24 @@ $(".removeShapImage").click(function(){
             canvas.renderAll();
             // findTextboxCenter(text);
         }
+        function calculateControlPositions(object) {
+            var controlCoords = object.oCoords; // Get object control coordinates
 
+            // Get the position of the 'mtr' control
+            var mtrControl = controlCoords.mtr; // 'mtr' control (rotate)
+
+            // Log the untransformed mtr control position
+            console.log('Rotation control position (mtr):', mtrControl);
+
+            // Transform mtr control position to apply rotation and scaling
+            var transformedMtr = fabric.util.transformPoint(
+                new fabric.Point(mtrControl.x, mtrControl.y),
+                object.calcTransformMatrix() // apply object transformations (rotation, scaling)
+            );
+
+         
+            return transformedMtr;
+        } 
         function findTextboxCenter(textbox) {
             var centerX = textbox.left + (textbox.width / 2);
             var centerY = textbox.top + (textbox.height / 2);
@@ -971,20 +990,22 @@ $(".removeShapImage").click(function(){
                     var centerX = obj.left + (obj.width / 2);
                     var centerY = obj.top + (obj.height / 2);
 
-                    var controlCoords = obj.oCoords; 
-                    var mtrControl = controlCoords.mtr;
-                    var transformedMtr = fabric.util.transformPoint(
-                        new fabric.Point(mtrControl.x, mtrControl.y),
-                        obj.calcTransformMatrix() // apply object transformations
-                    );
-                    console.log('Transformed rotation control position (mtr):', transformedMtr);
-                    // var centerX =transformedMtr.x / 2;
-                    // var centerY = (transformedMtr.y / 2) - 20;
-                    // console.log(transformedMtr.x)
-                    // console.log(transformedMtr.y)
+                    // var controlCoords = obj.oCoords; 
+                    // var mtrControl = controlCoords.mtr;
+                    // var transformedMtr = fabric.util.transformPoint(
+                    //     new fabric.Point(mtrControl.x, mtrControl.y),
+                    //     obj.calcTransformMatrix() // apply object transformations
+                    // );
 
-                    // console.log({centerX})
-                    // console.log({centerY})
+                    var transformedMtr = calculateControlPositions(obj)
+                    console.log('Transformed rotation control position (mtr):', transformedMtr);
+                    var centerX =transformedMtr.x / 2;
+                    var centerY = (transformedMtr.y / 2) - 20;
+                    console.log(transformedMtr.x)
+                    console.log(transformedMtr.y)
+
+                    console.log({centerX})
+                    console.log({centerY})
                     textData.push({
                         text: obj.text,
                         left: obj.left,
