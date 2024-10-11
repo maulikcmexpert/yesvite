@@ -12776,6 +12776,12 @@ class ApiControllerv2 extends Controller
             DB::commit();
             $message = "Reported to admin for this user";
 
+
+            Mail::send('emails.reportEmail', function ($message) {
+                $message->to('prakash.m.cmexpertise@gmail.com');
+                $message->subject('Email Verification Mail');
+            });
+
             return response()->json(['status' => 1, 'message' => $message]);
         } catch (QueryException $e) {
 
