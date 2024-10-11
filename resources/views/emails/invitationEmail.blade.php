@@ -125,7 +125,7 @@
                 <!-- -------------- -->
                 <tr>
                     <td>
-                        <h4 style="font-size: 24px;line-height: 28px;font-weight: 700;color: #0F172A;margin: 0px 0px;">You’re Invited! 🎉</h4>
+                        <h4 style="font-size: 32px;line-height: 28px;font-weight: 700;color: #0F172A;margin: 0px 0px;">You’re Invited! 🎉</h4>
                     </td>
                 </tr>
                 <!-- -------------- -->
