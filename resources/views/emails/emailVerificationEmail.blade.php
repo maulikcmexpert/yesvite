@@ -55,6 +55,13 @@
                 <tr>
                     <td>
                         <p style="font-size: 16px;line-height: 25px;font-weight: 400;color: #0F172A ;margin: 0px 0px;font-family: 'SF Pro Display'">
+                            Welcome to Yesvite!</p>
+                        <p style="font-size: 16px;line-height: 25px;font-weight: 400;color: #0F172A ;margin: 0px 0px;font-family: 'SF Pro Display'">
+                            Your email address: {{$userData['email']}} was added to your Yesvite account..</p>
+                        <p style="font-size: 16px;line-height: 25px;font-weight: 400;color: #0F172A ;margin: 0px 0px;font-family: 'SF Pro Display'">
+                            To verify your email address and secure your account, click the button below.</p>
+
+                        <p style="font-size: 16px;line-height: 25px;font-weight: 400;color: #0F172A ;margin: 0px 0px;font-family: 'SF Pro Display'">
                             "Please verify your email address : {{$userData['email']}} first before you can login to your
                             account".</p>
                     </td>
