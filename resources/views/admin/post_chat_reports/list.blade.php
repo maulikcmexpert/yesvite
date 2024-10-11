@@ -32,8 +32,8 @@
             <tr>
 
                 <th>No</th>
-                <th>Username (Reported By)</th>
-                <th>Username (Reported To)</th>
+                <th>Reporter Username (Reported By)</th>
+                <th>Reported Username (Reported To)</th>
                 <th>Report Type</th>
                 <th>Report Description</th>
                 <th>Action</th>

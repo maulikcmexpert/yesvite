@@ -51,11 +51,11 @@ class UserChatReportDataTable extends DataTable
                 return $count++;
             })
 
-            ->addColumn('username', function ($row) {
+            ->addColumn('reporter_username', function ($row) {
                 return $row->reporter_user->firstname;
             })
 
-            ->addColumn('username', function ($row) {
+            ->addColumn('reporter_username', function ($row) {
                 return $row->to_reporter_user->firstname;
             })
 
@@ -63,8 +63,6 @@ class UserChatReportDataTable extends DataTable
             ->addColumn('report_type', function ($row) {
                 return $row->report_type;
             })
-
-
 
             ->addColumn('report_description', function ($row) {
                 return $row->report_description;
@@ -78,7 +76,7 @@ class UserChatReportDataTable extends DataTable
                 return $actionBtn;
             })
 
-            ->rawColumns(['number', 'username', 'username', 'report_type', 'report_description', 'action']);
+            ->rawColumns(['number', 'reporter_username', 'reported_username', 'report_type', 'report_description', 'action']);
     }
 
     /**
