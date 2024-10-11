@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Yajra\DataTables\Services\DataTable;
 
-class UserPostReportController extends Controller
+class UserChatReportController extends Controller
 {
     /**
      * Display a listing of the resource.
