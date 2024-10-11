@@ -8224,7 +8224,7 @@ class ApiControllerv2 extends Controller
 
             $postsDetail['post_message'] =  empty($eventDetails->post_message) ? "" :  $eventDetails->post_message;
 
-            $postsDetail['location'] = ($eventDetails->user->city != NULL) ? $eventDetails->user->city : "";
+            $postsDetail['location'] = $eventDetails->user->city != "" ? $eventDetails->user->city .($eventDetails->user->state != "" ? ', ' . $eventDetails->user->state : ''): "";
             $postsDetail['posttime'] = setpostTime($eventDetails->created_at);
             if ($eventDetails->post_type == '1') { // Image
                 $postsDetail['post_image'] = [];
