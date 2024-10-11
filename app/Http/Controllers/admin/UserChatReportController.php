@@ -174,11 +174,6 @@ class UserChatReportController extends Controller
      */
     public function destroy(string $id)
     {
-        //
-    }
-
-    public function deleteChatReport(string $id)
-    {
         try {
             DB::beginTransaction();
             $chat_report_id = decrypt($id);
@@ -190,4 +185,6 @@ class UserChatReportController extends Controller
             DB::rollBack();
         }
     }
+
+    public function deleteChatReport(string $id) {}
 }

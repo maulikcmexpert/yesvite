@@ -63,7 +63,7 @@ class UserChatReportDataTable extends DataTable
             })
             ->addColumn('action', function ($row) {
                 $cryptId = encrypt($row->id);
-                $view_url = route('user_chat_report.deleteChatReport', $cryptId);
+                $view_url = route('user_chat_report.delete', $cryptId);
                 $actionBtn = '<div class="action-icon">
                     <a class="" href="' . $view_url . '" title="View"><i class="fa fa-eye"></i></a>';
                 return $actionBtn;
