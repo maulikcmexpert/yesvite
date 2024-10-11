@@ -128,8 +128,7 @@
                     <td>
                         <p
                             style="font-size: 16px;line-height: 25px;font-weight: 400;color: #0F172A ;margin: 0px 0px;font-family: 'SF Pro Display'">
-                            This email expires after 3 hours. But no worries, if your email expires you can request
-                            another one from support.</p>
+                            If you didn't make this request, please feel free to ignore this email. If you still need additional help please visit our Help Center.</p>
                     </td>
                 </tr>
                 <!-- -------------- -->
