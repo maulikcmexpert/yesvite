@@ -12782,7 +12782,7 @@ class ApiControllerv2 extends Controller
             $support_email = 'prakash.m.cmexpertise@gmail.com';
 
             $getName = UserReportChat::with(['reporter_user', 'to_reporter_user'])->where('id', $savedReportId)->get();
-            dd($getName);
+            dd($getName->reporter_user->firstname);
             $data = [
                 'reporter_username' => $getName->reporter_user->firstname . ' ' . $getName->reporter_user->lastname,
                 'reported_username' => $getName->to_reporter_user->firstname . ' ' . $getName->to_reporter_user->lastname,
