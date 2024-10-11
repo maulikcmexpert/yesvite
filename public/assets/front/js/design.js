@@ -191,7 +191,7 @@ $(document).on("click", ".design-card", function() {
         let element = staticInfo?.shapeImageData;
         if (element.shape && element.centerX && element.centerY && element.height && element.width) {
             
-            const imageInput = document.getElementById('image');
+            const imageInput = document.getElementById('image1');
             const scaledWidth = element.width;  // Use element's width
             const scaledHeight = element.height;
 
