@@ -7574,7 +7574,7 @@ class ApiControllerv2 extends Controller
                     $postsNormalDetail['rsvp_status'] = (string)$rsvpstatus;
                     $postsNormalDetail['kids'] = (int)$kids;
                     $postsNormalDetail['adults'] = (int)$adults;
-                    $postsNormalDetail['location'] = $value->user->city != "" ? $value->user->city .($value->user->state != "" ? ',' . $value->user->state : ''): "";
+                    $postsNormalDetail['location'] = $value->user->city != "" ? $value->user->city .($value->user->state != "" ? ', ' . $value->user->state : ''): "";
                     $postsNormalDetail['post_type'] = $value->post_type;
                     $postsNormalDetail['post_privacy'] = $value->post_privacy;
                     $postsNormalDetail['created_at'] = $value->created_at;
