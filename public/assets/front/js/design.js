@@ -1649,7 +1649,7 @@ function bindData() {
         var textbox = new fabric.Textbox(textContent, {
             left: left,
             top: top,
-            width: 200,
+            // width: 200,
             fontSize: 20,
             backgroundColor: 'rgba(0, 0, 0, 0)', // Set background to transparent
             textAlign: 'center',
@@ -1662,6 +1662,13 @@ function bindData() {
             cornerStyle: 'circle',
             cornerSize: 10,
             transparentCorners: false,
+        });
+
+        textbox.on('scaling', function() {
+            // Update the font size based on scaling
+            var updatedFontSize = textbox.fontSize * (textbox.scaleX + textbox.scaleY) / 2;
+            textbox.set('fontSize', updatedFontSize);
+            canvas.renderAll();
         });
         canvas.add(textbox);
         canvas.setActiveObject(textbox);
