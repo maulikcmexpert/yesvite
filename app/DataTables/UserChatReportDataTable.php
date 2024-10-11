@@ -52,12 +52,13 @@ class UserChatReportDataTable extends DataTable
             })
 
             ->addColumn('reporter_username', function ($row) {
-                dd($row->reporter_user->firstname);
-                return $row->reporter_user->firstname;
+                // dd($row->reporter_user->firstname);
+                // return $row->reporter_user->firstname;
+                return (isset($row->reporter_user->firstname) && $row->reporter_user->firstname != "") ? $row->reporter_user->firstname : "";
             })
 
             ->addColumn('reported_username', function ($row) {
-                return $row->to_reporter_user->firstname;
+                return (isset($row->to_reporter_user->firstname) && $row->to_reporter_user->firstname != "") ? $row->to_reporter_user->firstname : "";
             })
 
 
