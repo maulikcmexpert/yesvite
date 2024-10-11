@@ -45,39 +45,29 @@ class UserChatReportDataTable extends DataTable
             //         });
             //     }
             // })
-
             ->addColumn('number', function ($row) {
                 static $count = 1;
                 return $count++;
             })
-
             ->addColumn('reporter_username', function ($row) {
-                // dd($row->reporter_user->firstname);
-                // return $row->reporter_user->firstname;
                 return (isset($row->reporter_user->firstname) && $row->reporter_user->firstname != "") ? $row->reporter_user->firstname : "";
             })
-
             ->addColumn('reported_username', function ($row) {
                 return (isset($row->to_reporter_user->firstname) && $row->to_reporter_user->firstname != "") ? $row->to_reporter_user->firstname : "";
             })
-
-
             ->addColumn('report_type', function ($row) {
                 return $row->report_type;
             })
-
             ->addColumn('report_description', function ($row) {
                 return $row->report_description;
             })
-
             ->addColumn('action', function ($row) {
                 $cryptId = encrypt($row->id);
-                $view_url = route('user_post_report.show', $cryptId);
+                $view_url = route('user_chat_report.deleteChatReport', $cryptId);
                 $actionBtn = '<div class="action-icon">
                     <a class="" href="' . $view_url . '" title="View"><i class="fa fa-eye"></i></a>';
                 return $actionBtn;
             })
-
             ->rawColumns(['number', 'reporter_username', 'reported_username', 'report_type', 'report_description', 'action']);
     }
 

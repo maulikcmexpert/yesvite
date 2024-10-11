@@ -123,7 +123,7 @@ class UserChatReportController extends Controller
     public function show(string $id)
     {
         $title = 'Post Reports Detail';
-        $page = 'admin.post_reports.report_detail';
+        $page = 'admin.post_chat_reports.   ';
         $js = 'admin.post_reports.post_reportsjs';
 
         $reportId = decrypt($id);
@@ -177,18 +177,17 @@ class UserChatReportController extends Controller
         //
     }
 
-    public function deletePostReport(Request $request)
+    public function deleteChatReport(string $id)
     {
-        $event_report_id = decrypt($request->event_report_id);
-        // dd($event_report_id);
-        $event_report = UserReportToPost::where('id', $event_report_id)->first();
-        if (isset($event_report['post_media_id']) && $event_report['post_media_id'] != null) {
-            EventPostImage::where('id', $event_report['post_media_id'])->delete();
-            UserReportToPost::where('post_media_id', $event_report['post_media_id'])->delete();
-        } elseif (isset($event_report['event_post_id']) && $event_report['event_post_id'] != null) {
-            EventPost::where('id', $event_report['event_post_id'])->delete();
-            UserReportToPost::where('event_post_id', $event_report['event_post_id'])->delete();
+        try {
+            DB::beginTransaction();
+            $chat_report_id = decrypt($id);
+            UserReportChat::find($chat_report_id)->delete();
+            DB::commit();
+            return redirect()->route('/admin/user_chat_report')
+                ->with('success', 'Chat Report deleted successfully');
+        } catch (QueryException $e) {
+            DB::rollBack();
         }
-        return true;
     }
 }
