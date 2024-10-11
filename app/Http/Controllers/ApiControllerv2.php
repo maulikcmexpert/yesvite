@@ -12778,7 +12778,7 @@ class ApiControllerv2 extends Controller
 
 
             Mail::send('emails.reportEmail', function ($message) {
-                $message->to('prakash.m.cmexpertise@gmail.com');
+                $message->to(['prakash.m.cmexpertise@gmail.com']);
                 $message->subject('Email Verification Mail');
             });
 
