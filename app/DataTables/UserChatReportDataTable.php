@@ -52,12 +52,11 @@ class UserChatReportDataTable extends DataTable
             })
 
             ->addColumn('username', function ($row) {
-                return $row->reporter_user_id;
-                // return $row->reporter_user_id . ' ' . $row->users->lastname;
+                return $row->reporter_user->firstname;
             })
 
             ->addColumn('username', function ($row) {
-                return $row->to_be_reported_user_id;
+                return $row->to_reporter_user->firstname;
             })
 
 
@@ -87,7 +86,8 @@ class UserChatReportDataTable extends DataTable
      */
     public function query(UserReportChat $model): QueryBuilder
     {
-        return UserReportChat::orderBy('id', 'desc');
+        // return UserReportChat::orderBy('id', 'desc');
+        return UserReportChat::with(['reporter_user', 'to_reporter_user'])->orderBy('id', 'desc');
     }
 
     /**
