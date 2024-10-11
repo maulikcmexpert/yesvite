@@ -2657,6 +2657,8 @@ function getTextDataFromCanvas() {
                 underline: obj.underline,
                 linethrough: obj.linethrough,
                 date_formate: obj.date_formate, // Include date_formate if set
+                rotation: obj.angle
+
             });
         }
         if (obj.type === "image") {
