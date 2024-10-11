@@ -149,6 +149,12 @@
                 <p>Users Post Reports</p>
               </a>
             </li>
+            <li class="nav-item">
+              <a href="{{URL::to('/admin/user_chat_report')}}" class="nav-link {{ (Request::segment(2) == 'user_chat_report')? 'active':'' }}">
+                <i class="fas fa-user-tie nav-icon"></i>
+                <p>Users Chat Reports</p>
+              </a>
+            </li>
           </ul>
         </li>
 

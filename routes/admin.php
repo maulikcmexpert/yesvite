@@ -72,6 +72,7 @@ Route::group(['middleware' => adminAuth::Class], function () {
         'event_type' => EventTypeController::class,
         'user_post_report' => UserPostReportController::class,
         'create_template' => TemplateController::class,
+        'user_chat_report' => UserPostReportController::class,
 
     ]);
     Route::get('template/view/{id}', [TemplateController::class, 'View_template'])->name('template.view');
