@@ -61,6 +61,10 @@ class UserChatReportDataTable extends DataTable
             ->addColumn('report_description', function ($row) {
                 return $row->report_description;
             })
+
+            ->addColumn('report_time', function ($row) {
+                return $row->created_at;
+            })
             // ->addColumn('action', function ($row) {
             //     $cryptId = encrypt($row->id);
             //     $view_url = route('user_chat_report.destroy', $cryptId);
@@ -68,7 +72,7 @@ class UserChatReportDataTable extends DataTable
             //         <a class="" href="' . $view_url . '" title="View"><i class="fa fa-eye"></i></a>';
             //     return $actionBtn;
             // })
-            ->rawColumns(['number', 'reporter_username', 'reported_username', 'report_type', 'report_description']);
+            ->rawColumns(['number', 'reporter_username', 'reported_username', 'report_type', 'report_description', 'report_time']);
     }
 
     /**
@@ -113,6 +117,7 @@ class UserChatReportDataTable extends DataTable
             Column::make('reported_username')->title("Reported Username (Reported To)"),
             Column::make('report_type')->title("Report Type"),
             Column::make('report_description')->title("Report Description"),
+            Column::make('report_time')->title("Report Time"),
             // Column::make('action')->title("Action"),
         ];
     }

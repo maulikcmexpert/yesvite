@@ -36,6 +36,7 @@
                 <th>Reported Username (Reported To)</th>
                 <th>Report Type</th>
                 <th>Report Description</th>
+                <th>Report Time</th>
                 <!-- <th>Action</th> -->
 
             </tr>
