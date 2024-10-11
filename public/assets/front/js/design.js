@@ -2057,12 +2057,25 @@ function bindData() {
         });    
         canvas.renderAll();
     }
-    function addToUndoStack(canvas) {          
-        undoStack.push(canvas.toJSON());          
+    function addToUndoStack(canvas) {     
+
+        undoStack.push(getFilteredCanvasState(canvas));          
         if(undoStack.length > 0){
             $('#undoButton').find('svg path').attr('fill', '#0F172A');
         }
         redoStack = [];        
+    }
+
+    function getFilteredCanvasState(canvas) {
+        // Clone the canvas state excluding objects of type 'image'
+        let canvasState = canvas.toJSON();
+        
+        // Filter out objects with type 'image'
+        canvasState.objects = canvasState.objects.filter(function (obj) {
+            return obj.type !== 'image';
+        });
+    
+        return canvasState;
     }
 
     function undo() {        
