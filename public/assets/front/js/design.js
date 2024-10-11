@@ -529,6 +529,7 @@ function bindData() {
                         lockScalingFlip: true,
                         hasBorders: true,
                         centeredRotation: true,
+                        angle: element?.rotation ? element?.rotation : 0
                     });
 
                     textElement.setControlsVisibility({
@@ -1398,6 +1399,25 @@ function bindData() {
         // Initial center calculation
         findTextboxCenter(text);
     }
+
+    function calculateControlPositions(object) {
+        var controlCoords = object.oCoords; // Get object control coordinates
+
+        // Get the position of the 'mtr' control
+        var mtrControl = controlCoords.mtr; // 'mtr' control (rotate)
+
+        // Log the untransformed mtr control position
+        console.log('Rotation control position (mtr):', mtrControl);
+
+        // Transform mtr control position to apply rotation and scaling
+        var transformedMtr = fabric.util.transformPoint(
+            new fabric.Point(mtrControl.x, mtrControl.y),
+            object.calcTransformMatrix() // apply object transformations (rotation, scaling)
+        );
+
+     
+        return transformedMtr;
+    } 
 
     function findTextboxCenter(textbox) {
         var centerX = textbox.left + textbox.width / 2;
