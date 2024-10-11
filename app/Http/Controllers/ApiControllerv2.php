@@ -9041,7 +9041,7 @@ class ApiControllerv2 extends Controller
 
                 Mail::send('emails.reportEmail', ['userdata' => $data], function ($messages) use ($support_email) {
                     $messages->to($support_email)
-                        ->subject('Email Verification Mail');
+                        ->subject('Post Report Mail');
                 });
             }
             return response()->json(['status' => 1, 'type' => $input['post_control'], 'message' => $message]);
