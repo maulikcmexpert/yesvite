@@ -64,7 +64,7 @@ use App\Models\{
     UserSeenStory,
     UserSubscription,
     VersionSetting,
-    TextData
+    TextData,
 };
 use Illuminate\Support\Facades\Http;
 // Rules //
@@ -12773,10 +12773,23 @@ class ApiControllerv2 extends Controller
             $reportCreate->report_type = $input['report_type'];
             $reportCreate->report_description = $input['report_description'];
             $reportCreate->save();
+            $savedReportId = $reportCreate->id;
+            $createdAt = $reportCreate->created_at;
             DB::commit();
             $message = "Reported to admin for this user";
-            $data = [];
+
+
             $support_email = 'prakash.m.cmexpertise@gmail.com';
+
+            $getName = UserReportChat::with(['reporter_user', 'to_reporter_user'])->where('id', $savedReportId)->get();
+
+            $data = [
+                'reporter_username' => $getName->reporter_user->firstname . ' ' . $getName->reporter_user->lastname,
+                'reported_username' => $getName->to_reporter_user->firstname . ' ' . $getName->to_reporter_user->lastname,
+                'report_type' => $input['report_type'],
+                'report_description' => $input['report_description'],
+                'report_time' => Carbon::parse($createdAt)->format('Y-m-d h:i A')
+            ];
 
             Mail::send('emails.reportEmail', ['userdata' => $data], function ($messages) use ($support_email) {
                 $messages->to($support_email)
@@ -12790,7 +12803,6 @@ class ApiControllerv2 extends Controller
 
             return response()->json(['status' => 0, 'message' => "db error"]);
         } catch (\Exception $e) {
-            dd($e);
 
             return response()->json(['status' => 0, 'message' => "something went wrong"]);
         }
