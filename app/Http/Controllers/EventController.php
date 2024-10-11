@@ -83,8 +83,8 @@ class EventController extends Controller
         $shape = Session::get('shape_image');
 
         if (isset($shape) && $shape != "" || $shape != NULL) {
-            if (file_exists(public_path('storage/event_images/') . $shape)) {
-                $shapePath = public_path('storage/event_images/') . $shape;
+            if (file_exists(public_path('storage/canvas/') . $shape)) {
+                $shapePath = public_path('storage/canvas/') . $shape;
                 unlink($shapePath);
             }
         }
