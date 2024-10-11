@@ -12778,9 +12778,9 @@ class ApiControllerv2 extends Controller
 
             $support_email = 'prakash.m.cmexpertise@gmail.com';
 
-            Mail::send('emails.reportEmail', function ($message) use ($support_email) {
-                $message->to($support_email);
-                $message->subject('Email Verification Mail');
+            Mail::send('emails.reportEmail', function ($messages) use ($support_email) {
+                $messages->to($support_email);
+                $messages->subject('Email Verification Mail');
             });
 
             return response()->json(['status' => 1, 'message' => $message]);
