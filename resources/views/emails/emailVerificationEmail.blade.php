@@ -60,10 +60,14 @@
                             "Please verify your email address : {{$userData['email']}} first before you can login to your
                             account".</p> -->
                     </td>
+                </tr>
+                <tr>
                     <td>
                         <p style="font-size: 16px;line-height: 25px;font-weight: 400;color: #0F172A ;margin-bottom: 10px !important;margin: 0px 0px;font-family: 'SF Pro Display'">
                             Your email address: {{$userData['email']}} was added to your Yesvite account..</p>
                     </td>
+                </tr>
+                <tr>
                     <td>
                         <p style="font-size: 16px;line-height: 25px;font-weight: 400;color: #0F172A ;margin-bottom: 10px !important;margin: 0px 0px;font-family: 'SF Pro Display'">
                             To verify your email address and secure your account, click the button below.</p>
