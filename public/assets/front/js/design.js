@@ -1961,8 +1961,9 @@ function bindData() {
             
             obj.set('transparentCorners', false);
             obj.set('borderColor', "#2DA9FC");
-            obj.set('cornerSize', 6);
+            obj.set('cornerSize', 10);
             obj.set('cornerColor', "#fff");
+            obj.set('cornerStyle', "circle");
             // Set text alignment if the object is a text-based object
             if (obj.type === 'textbox' || obj.type === 'text') {
                 obj.set('textAlign', 'center');  // Set text alignment to center
