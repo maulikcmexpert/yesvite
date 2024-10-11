@@ -1067,12 +1067,12 @@ $(".removeShapImage").click(function(){
                 mr: true   // Show middle right control
             });
 
-            textbox.on('scaling', function() {
-                // Update the font size based on scaling
-                var updatedFontSize = textbox.fontSize * (textbox.scaleX + textbox.scaleY) / 2;
-                textbox.set('fontSize', updatedFontSize);
-                canvas.renderAll();
-            });
+            // textbox.on('scaling', function() {
+            //     // Update the font size based on scaling
+            //     var updatedFontSize = textbox.fontSize * (textbox.scaleX + textbox.scaleY) / 2;
+            //     textbox.set('fontSize', updatedFontSize);
+            //     canvas.renderAll();
+            // });
 
             canvas.add(textbox);
             canvas.setActiveObject(textbox);
