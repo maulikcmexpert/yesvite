@@ -11,6 +11,7 @@ use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
+use Carbon\Carbon;
 
 use App\Models\{
     UserReportChat
@@ -63,7 +64,7 @@ class UserChatReportDataTable extends DataTable
             })
 
             ->addColumn('report_time', function ($row) {
-                return $row->created_at;
+                return Carbon::parse($row->created_at)->format('Y-m-d h:i A');
             })
             // ->addColumn('action', function ($row) {
             //     $cryptId = encrypt($row->id);
