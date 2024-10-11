@@ -542,7 +542,7 @@ function bindData() {
                         mr: true   // Show middle right control
                     });
 
-                    textElement.on('scaling', function(e) {
+                    textElement.on('mouseup', function(e) {
                         var activeObject = e.target;
         
                         // Check if the scaled object is the textbox
