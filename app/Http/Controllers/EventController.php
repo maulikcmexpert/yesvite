@@ -184,6 +184,29 @@ class EventController extends Controller
         // dd($request);
         // $potluck = session('category');
         // dd(session()->get('gift_registry_data'));
+        $textElemtents = $request->textData['textElements'];
+            foreach ($textElemtents as $key => $textJson) {
+                if ($textJson['fontSize'] != '') {
+                    $textElemtents[$key]['fontSize'] = (int)$textJson['fontSize'];
+                    $textElemtents[$key]['centerX'] = (float)$textJson['centerX'];
+                    $textElemtents[$key]['centerY'] = (float)$textJson['centerY'];
+                }
+                if (isset($textJson['letterSpacing'])) {
+                    $textElemtents[$key]['letterSpacing'] = (int)$textJson['letterSpacing'];
+                }
+                if (isset($textJson['lineHeight'])) {
+                    $textElemtents[$key]['lineHeight'] = (float)$textJson['lineHeight'];
+                }
+                $abc = '';
+                if (isset($textJson['underline'])) {
+                dd($textJson['underline']);
+                    if($textJson['underline'] == true || $textJson['underline'] == "true" ){
+                        $abc = '0';
+                    }
+                    $textElemtents[$key]['underline'] = (bool)$abc;
+                }
+
+            }
 
         $user_id =  Auth::guard('web')->user()->id;
         $dateString = (isset($request->event_date)) ? $request->event_date : "";
