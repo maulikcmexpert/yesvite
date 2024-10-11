@@ -9028,7 +9028,8 @@ class ApiControllerv2 extends Controller
                 $createdAt = $reportCreate->created_at;
                 $message = "Reported to admin for this post";
 
-                $support_email = 'prakash.m.cmexpertise@gmail.com';
+                $support_email = env('SUPPORT_MAIL');
+
                 $getName = UserReportToPost::with(['users', 'events'])->where('id', $savedReportId)->first();
                 $data = [
                     'reporter_username' => $getName->users->firstname . ' ' . $getName->users->lastname,
@@ -12819,7 +12820,7 @@ class ApiControllerv2 extends Controller
             $message = "Reported to admin for this user";
 
 
-            $support_email = 'prakash.m.cmexpertise@gmail.com';
+            $support_email = env('SUPPORT_MAIL');
 
             $getName = UserReportChat::with(['reporter_user', 'to_reporter_user'])->where('id', $savedReportId)->first();
             $data = [
