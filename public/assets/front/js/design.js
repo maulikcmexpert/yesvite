@@ -542,6 +542,42 @@ function bindData() {
                         mr: true   // Show middle right control
                     });
 
+                    textElement.on('scaling', function(e) {
+                        var activeObject = e.target;
+        
+                        // Check if the scaled object is the textbox
+                        if (activeObject && activeObject.type === 'textbox') {
+                            // Get the current font size
+                            var currentFontSize = activeObject.fontSize;
+                            console.log("Current font size: " + currentFontSize);
+        
+                            // Calculate new font size based on scale factor
+                            var newFontSize = currentFontSize * activeObject.scaleX; // Adjust the font size based on the horizontal scaling factor
+                            const textMeasurement = new fabric.Text(activeObject.text, {
+                                fontSize: newFontSize,
+                                fontFamily: element.fontFamily,
+                                fontWeight: element.fontWeight,
+                                fontStyle: element.fontStyle,
+                                underline: element.underline,
+                                linethrough: element.linethrough,
+                            });
+                            const textWidth = textMeasurement.width;
+                            // Set the new font size and reset scale
+                            activeObject.set({
+                                fontSize: newFontSize,
+                                scaleX: 1, // Reset scaleX to 1 to prevent cumulative scaling
+                                scaleY: 1,  // Reset scaleY to 1 if you want to keep uniform scaling
+                                width: textWidth,
+                                textAlign:element.textAlign,
+                            });
+        
+                            // Re-render the canvas to apply the changes
+                            canvas.renderAll();
+        
+                            console.log("Updated font size: " + newFontSize);
+                        }
+                    });  
+
                     switch (element.text) {
                         case "event_name":
                             if (eventData.event_name) {
@@ -963,41 +999,7 @@ function bindData() {
 
             canvas.renderAll(); // Ensure all elements are rendered
 
-            canvas.on('object:scaling', function (e) {
-                var activeObject = e.target;
-
-                // Check if the scaled object is the textbox
-                if (activeObject && activeObject.type === 'textbox') {
-                    // Get the current font size
-                    var currentFontSize = activeObject.fontSize;
-                    console.log("Current font size: " + currentFontSize);
-
-                    // Calculate new font size based on scale factor
-                    var newFontSize = currentFontSize * activeObject.scaleX; // Adjust the font size based on the horizontal scaling factor
-                    const textMeasurement = new fabric.Text(activeObject.text, {
-                        fontSize: newFontSize,
-                        fontFamily: element.fontFamily,
-                        fontWeight: element.fontWeight,
-                        fontStyle: element.fontStyle,
-                        underline: element.underline,
-                        linethrough: element.linethrough,
-                    });
-                    const textWidth = textMeasurement.width;
-                    // Set the new font size and reset scale
-                    activeObject.set({
-                        fontSize: newFontSize,
-                        scaleX: 1, // Reset scaleX to 1 to prevent cumulative scaling
-                        scaleY: 1,  // Reset scaleY to 1 if you want to keep uniform scaling
-                        width: textWidth,
-                        textAlign:element.textAlign,
-                    });
-
-                    // Re-render the canvas to apply the changes
-                    canvas.renderAll();
-
-                    console.log("Updated font size: " + newFontSize);
-                }
-            });  
+            
 
         }
     }
