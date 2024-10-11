@@ -191,7 +191,7 @@ $(document).on("click", ".design-card", function() {
         let element = staticInfo?.shapeImageData;
         if (element.shape && element.centerX && element.centerY && element.height && element.width) {
             
-            const imageInput = document.getElementById('image');
+            const imageInput = document.getElementById('image1');
             const scaledWidth = element.width;  // Use element's width
             const scaledHeight = element.height;
 
@@ -244,9 +244,9 @@ $(document).on("click", ".design-card", function() {
             fabric.Image.fromURL(shapeImageUrl, function (img) {
                 img.set({
 
-                    selectable: true,
-                    hasControls: true,
-                    hasBorders: true,
+                    selectable: false,
+                    hasControls: false,
+                    hasBorders: false,
                     borderColor: "#2DA9FC",
                     cornerColor: "#fff",
                     transparentCorners: false,
@@ -339,9 +339,9 @@ $(document).on("click", ".design-card", function() {
                                 }
             
                                 newImg.set({
-                                    selectable: true,
-                                    hasControls: true,
-                                    hasBorders: true,
+                                    selectable: false,
+                                    hasControls: false,
+                                    hasBorders: false,
                                     borderColor: "#2DA9FC",
                                     cornerColor: "#fff",
                                     transparentCorners: false,

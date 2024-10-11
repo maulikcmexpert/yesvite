@@ -445,6 +445,7 @@
                         {{-- <img id="modalImage" src="" alt="Design Image" class="img-fluid" /> --}}
                     </div>
                 </div>
+                <input type="file" id="image1" accept="image/*" style="display: none" />
                 <div id="imageWrapper2" style="position:fixed; display:none;">
                     <img id="user_image2" src="" style="height: 100px; width: 100px; background-color: black;" />
                     <div class="resize-handle top-left"></div>
