@@ -62,10 +62,16 @@
                     </td>
                 </tr>
                 <tr>
+                    <td height="20" style="font-size:0px">&nbsp;</td>
+                </tr>
+                <tr>
                     <td>
                         <p style="font-size: 16px;line-height: 25px;font-weight: 400;color: #0F172A ;margin-bottom: 10px !important;margin: 0px 0px;font-family: 'SF Pro Display'">
                             Your email address: {{$userData['email']}} was added to your Yesvite account..</p>
                     </td>
+                </tr>
+                <tr>
+                    <td height="20" style="font-size:0px">&nbsp;</td>
                 </tr>
                 <tr>
                     <td>
