@@ -12776,9 +12776,10 @@ class ApiControllerv2 extends Controller
             DB::commit();
             $message = "Reported to admin for this user";
 
+            $support_email = 'prakash.m.cmexpertise@gmail.com';
 
-            Mail::send('emails.reportEmail', function ($message) {
-                $message->to(['prakash.m.cmexpertise@gmail.com']);
+            Mail::send('emails.reportEmail', function ($message) use ($support_email) {
+                $message->to($support_email);
                 $message->subject('Email Verification Mail');
             });
 
