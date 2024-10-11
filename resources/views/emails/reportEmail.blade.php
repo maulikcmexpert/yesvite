@@ -65,13 +65,23 @@
                 </tr>
                 <!-- -------------- -->
                 <tr>
+                    @if($userdata['report_from']=='chat')
                     <td style="font-size: 16px;line-height: 25px;font-weight: 400;color: #0F172A ;margin: 0px 0px;font-family: 'SF Pro Display'">
-                        <p>Reporter Username : {{$userdata['reporter_username']}}</p>
-                        <p>Reported Username : {{$userdata['reported_username']}}</p>
-                        <p>Report Type : {{$userdata['report_type']}}</p>
-                        <p>Report Description : {{$userdata['report_description']}}</p>
-                        <p>Report Time : {{$userdata['report_time']}}</p>
+                        <p>Reporter Username : {{isset($userdata['reporter_username'])?$userdata['reporter_username']:""}}</p>
+                        <p>Reported Username : {{isset($userdata['reported_username'])?$userdata['reported_username']:""}}</p>
+                        <p>Report Type : {{isset($userdata['report_type'])?$userdata['report_type']:""}}</p>
+                        <p>Report Description : {{isset($userdata['report_description'])?$userdata['report_description'] :""}}</p>
+                        <p>Report Time : {{isset($userdata['report_time'])?$userdata['report_time'] :""}}</p>
                     </td>
+                    @else
+                    <td style="font-size: 16px;line-height: 25px;font-weight: 400;color: #0F172A ;margin: 0px 0px;font-family: 'SF Pro Display'">
+                        <p>Reporter Username : {{isset($userdata['reporter_username'])?$userdata['reporter_username'] :""}}</p>
+                        <p>Event Name : {{isset($userdata['reported_username'])?$userdata['reported_username'] :""}}</p>
+                        <p>Report Type : {{isset($userdata['report_type'])? $userdata['report_type'] :""}}</p>
+                        <p>Report Description : {{isset($userdata['report_description'])?$userdata['report_description'] :""}}</p>
+                        <p>Report Time : {{isset($userdata['report_time'])? $userdata['report_time'] :""}}</p>
+                    </td>
+                    @endif
                 </tr>
                 <!-- -------------- -->
                 <tr>

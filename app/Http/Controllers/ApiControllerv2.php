@@ -9079,8 +9079,29 @@ class ApiControllerv2 extends Controller
             $reportCreate->report_description = $input['report_description'];
             $reportCreate->specific_report = '1';
             $reportCreate->save();
+            $savedReportId =  $reportCreate->id;
+            $createdAt = $reportCreate->created_at;
             DB::commit();
             $message = "Reported to admin for this media";
+
+            $support_email = 'prakash.m.cmexpertise@gmail.com';
+
+            $getName = UserReportToPost::with(['users', 'events'])->where('id', $savedReportId)->first();
+            $data = [
+                'reporter_username' => $getName->users->firstname . ' ' . $getName->users->lastname,
+                'event_name' => $getName->events->event_name,
+                'report_type' => $getName->report_type,
+                'report_description' => ($getName->report_description != "") ? $getName->report_description : "",
+                'report_time' => Carbon::parse($createdAt)->format('Y-m-d h:i A'),
+                'report_from' => "post"
+            ];
+
+            Mail::send('emails.reportEmail', ['userdata' => $data], function ($messages) use ($support_email) {
+                $messages->to($support_email)
+                    ->subject('Email Verification Mail');
+            });
+
+
 
             return response()->json(['status' => 1, 'message' => $message]);
         } catch (QueryException $e) {
@@ -12788,7 +12809,7 @@ class ApiControllerv2 extends Controller
                 'report_type' => $input['report_type'],
                 'report_description' => $input['report_description'],
                 'report_time' => Carbon::parse($createdAt)->format('Y-m-d h:i A'),
-                'report_from'=>"chat"
+                'report_from' => "chat"
             ];
 
             Mail::send('emails.reportEmail', ['userdata' => $data], function ($messages) use ($support_email) {
