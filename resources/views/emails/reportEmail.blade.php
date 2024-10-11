@@ -55,7 +55,7 @@
                 <tr>
                     <td>
                         <p style="font-size: 16px;line-height: 25px;font-weight: 400;color: #0F172A ;margin: 0px 0px;font-family: 'SF Pro Display'">
-                            I am writing to report an inappropriate [chat/post] that I encountered on your platform. The content violates the platform's community guidelines, and I would appreciate your prompt attention to this matter.
+                            I am writing to report an inappropriate {{$userdata['report_from']}} that I encountered on your platform. The content violates the platform's community guidelines, and I would appreciate your prompt attention to this matter.
                         </p>
                     </td>
                 </tr>
@@ -65,7 +65,7 @@
                 </tr>
                 <!-- -------------- -->
                 <tr>
-                    <td>
+                    <td style="font-size: 16px;line-height: 25px;font-weight: 400;color: #0F172A ;margin: 0px 0px;font-family: 'SF Pro Display'">
                         <p>Reporter Username : {{$userdata['reporter_username']}}</p>
                         <p>Reported Username : {{$userdata['reported_username']}}</p>
                         <p>Report Type : {{$userdata['report_type']}}</p>
@@ -86,9 +86,11 @@
                 <tr>
                     <td>
                         <p style="font-family: 'SF Pro Display';font-size: 16px;line-height: 20px;font-weight: 700;color: #0F172A;margin-bottom: 5px;">
-                            Thank you,</p>
+                            Best regards,
+                        </p>
                         <p style="font-family: 'SF Pro Display';font-size: 16px;line-height: 20px;font-weight: 700;color: #0F172A;margin: 0px;">
-                            The Yesvite Team</p>
+                            {{$userdata['reporter_username']}}
+                        </p>
                     </td>
                 </tr>
                 <!-- -------------- -->

@@ -12787,7 +12787,8 @@ class ApiControllerv2 extends Controller
                 'reported_username' => $getName->to_reporter_user->firstname . ' ' . $getName->to_reporter_user->lastname,
                 'report_type' => $input['report_type'],
                 'report_description' => $input['report_description'],
-                'report_time' => Carbon::parse($createdAt)->format('Y-m-d h:i A')
+                'report_time' => Carbon::parse($createdAt)->format('Y-m-d h:i A'),
+                'report_from'=>"chat"
             ];
 
             Mail::send('emails.reportEmail', ['userdata' => $data], function ($messages) use ($support_email) {
