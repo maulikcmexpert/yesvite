@@ -31,20 +31,20 @@ class UserChatReportDataTable extends DataTable
             ->addColumn('no', function () use (&$counter) {
                 return $counter++;
             })
-            ->filter(function ($query) {
-                if ($this->request->has('search')) {
-                    $keyword = $this->request->get('search');
-                    $keyword = $keyword['value'];
-                    $query->where(function ($q) use ($keyword) {
-                        $q->whereHas('users', function ($q) use ($keyword) {
-                            $q->where('firstname', 'LIKE', "%{$keyword}%")
-                                ->orWhere('lastname', 'LIKE', "%{$keyword}%");
-                        })->orWhereHas('events', function ($q) use ($keyword) {
-                            $q->where('event_name', 'LIKE', "%{$keyword}%");
-                        });
-                    });
-                }
-            })
+            // ->filter(function ($query) {
+            //     if ($this->request->has('search')) {
+            //         $keyword = $this->request->get('search');
+            //         $keyword = $keyword['value'];
+            //         $query->where(function ($q) use ($keyword) {
+            //             $q->whereHas('users', function ($q) use ($keyword) {
+            //                 $q->where('firstname', 'LIKE', "%{$keyword}%")
+            //                     ->orWhere('lastname', 'LIKE', "%{$keyword}%");
+            //             })->orWhereHas('events', function ($q) use ($keyword) {
+            //                 $q->where('event_name', 'LIKE', "%{$keyword}%");
+            //             });
+            //         });
+            //     }
+            // })
 
             ->addColumn('number', function ($row) {
                 static $count = 1;
