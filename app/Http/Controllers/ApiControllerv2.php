@@ -9023,15 +9023,13 @@ class ApiControllerv2 extends Controller
                 $reportCreate->report_description = $input['report_description'];
                 $reportCreate->event_post_id = $input['event_post_id'];
                 $reportCreate->save();
+
                 $savedReportId =  $reportCreate->id;
                 $createdAt = $reportCreate->created_at;
                 $message = "Reported to admin for this post";
 
-
                 $support_email = 'prakash.m.cmexpertise@gmail.com';
-
                 $getName = UserReportToPost::with(['users', 'events'])->where('id', $savedReportId)->first();
-                dd($getName);
                 $data = [
                     'reporter_username' => $getName->users->firstname . ' ' . $getName->users->lastname,
                     'event_name' => $getName->events->event_name,
