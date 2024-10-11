@@ -56,7 +56,7 @@ class UserChatReportDataTable extends DataTable
             })
 
             ->addColumn('reported_username', function ($row) {
-                dd($row);
+                dd($row->to_reporter_user->firstname);
                 return $row->to_reporter_user->firstname;
             })
 
