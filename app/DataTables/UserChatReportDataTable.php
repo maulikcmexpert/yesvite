@@ -87,7 +87,7 @@ class UserChatReportDataTable extends DataTable
      */
     public function query(UserReportChat $model): QueryBuilder
     {
-        return UserReportChat::get()->orderBy('id', 'desc');
+        return UserReportChat::orderBy('id', 'desc')->get();
     }
 
     /**
