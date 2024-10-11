@@ -12781,7 +12781,7 @@ class ApiControllerv2 extends Controller
 
             $support_email = 'prakash.m.cmexpertise@gmail.com';
 
-            $getName = UserReportChat::with(['reporter_user', 'to_reporter_user'])->where('id', $savedReportId)->first();;
+            $getName = UserReportChat::with(['reporter_user', 'to_reporter_user'])->where('id', $savedReportId)->first();
             $data = [
                 'reporter_username' => $getName->reporter_user->firstname . ' ' . $getName->reporter_user->lastname,
                 'reported_username' => $getName->to_reporter_user->firstname . ' ' . $getName->to_reporter_user->lastname,
@@ -12802,7 +12802,7 @@ class ApiControllerv2 extends Controller
 
             return response()->json(['status' => 0, 'message' => "db error"]);
         } catch (\Exception $e) {
-            dd($e)
+            dd($e);
             return response()->json(['status' => 0, 'message' => "something went wrong"]);
         }
     }
