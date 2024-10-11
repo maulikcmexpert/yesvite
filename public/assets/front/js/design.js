@@ -1873,6 +1873,42 @@ function bindData() {
 
 
     });
+
+    canvas.on('object:scaling', function (e) {
+        var activeObject = e.target;
+
+        // Check if the scaled object is the textbox
+        if (activeObject && activeObject.type === 'textbox') {
+            // Get the current font size
+            var currentFontSize = activeObject.fontSize;
+            console.log("Current font size: " + currentFontSize);
+
+            // Calculate new font size based on scale factor
+            var newFontSize = currentFontSize * activeObject.scaleX; // Adjust the font size based on the horizontal scaling factor
+            const textMeasurement = new fabric.Text(activeObject.text, {
+                fontSize: newFontSize,
+                fontFamily: activeObject.fontFamily,
+                fontWeight: activeObject.fontWeight,
+                fontStyle: activeObject.fontStyle,
+                underline: activeObject.underline,
+                linethrough: activeObject.linethrough,
+            });
+            const textWidth = textMeasurement.width;
+            // Set the new font size and reset scale
+            activeObject.set({
+                fontSize: newFontSize,
+                scaleX: 1, // Reset scaleX to 1 to prevent cumulative scaling
+                scaleY: 1,  // Reset scaleY to 1 if you want to keep uniform scaling
+                width: textWidth,
+                textAlign:activeObject.textAlign,
+            });
+
+            // Re-render the canvas to apply the changes
+            canvas.renderAll();
+
+            console.log("Updated font size: " + newFontSize);
+        }
+    }); 
     //     textElement.style.fontFamily = 'Allura'; // Change to Allura font
     // });
     function loadAndUse(font) {
