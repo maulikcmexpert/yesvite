@@ -9031,6 +9031,7 @@ class ApiControllerv2 extends Controller
                 $support_email = 'prakash.m.cmexpertise@gmail.com';
 
                 $getName = UserReportToPost::with(['users', 'events'])->where('id', $savedReportId)->first();
+                dd($getName)
                 $data = [
                     'reporter_username' => $getName->users->firstname . ' ' . $getName->users->lastname,
                     'event_name' => $getName->events->event_name,
