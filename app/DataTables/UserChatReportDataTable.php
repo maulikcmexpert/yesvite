@@ -61,14 +61,14 @@ class UserChatReportDataTable extends DataTable
             ->addColumn('report_description', function ($row) {
                 return $row->report_description;
             })
-            ->addColumn('action', function ($row) {
-                $cryptId = encrypt($row->id);
-                $view_url = route('user_chat_report.destroy', $cryptId);
-                $actionBtn = '<div class="action-icon">
-                    <a class="" href="' . $view_url . '" title="View"><i class="fa fa-eye"></i></a>';
-                return $actionBtn;
-            })
-            ->rawColumns(['number', 'reporter_username', 'reported_username', 'report_type', 'report_description', 'action']);
+            // ->addColumn('action', function ($row) {
+            //     $cryptId = encrypt($row->id);
+            //     $view_url = route('user_chat_report.destroy', $cryptId);
+            //     $actionBtn = '<div class="action-icon">
+            //         <a class="" href="' . $view_url . '" title="View"><i class="fa fa-eye"></i></a>';
+            //     return $actionBtn;
+            // })
+            ->rawColumns(['number', 'reporter_username', 'reported_username', 'report_type', 'report_description']);
     }
 
     /**
@@ -113,7 +113,7 @@ class UserChatReportDataTable extends DataTable
             Column::make('reported_username')->title("Reported Username (Reported To)"),
             Column::make('report_type')->title("Report Type"),
             Column::make('report_description')->title("Report Description"),
-            Column::make('action')->title("Action"),
+            // Column::make('action')->title("Action"),
         ];
     }
 
