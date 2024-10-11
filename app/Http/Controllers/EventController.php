@@ -291,7 +291,7 @@ class EventController extends Controller
                 }
                 $abc = '';
                 if (isset($textJson['underline'])) {
-                    if($textJson['underline'] == 'true'){
+                    if($textJson['underline'] == true){
                         $abc = '0';
                     }
                     $textElemtents[$key]['underline'] = (bool)$abc;
