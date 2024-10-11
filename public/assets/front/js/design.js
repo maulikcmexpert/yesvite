@@ -1963,6 +1963,7 @@ function bindData() {
             return; // No object or not a textbox, so do nothing
         }
         console.log('add to undo')
+        console.log(canvas)
         addToUndoStack(canvas); // Save state for undo/redo functionality
 
         // Commands object to handle various styles and operations
@@ -2091,6 +2092,7 @@ function bindData() {
             undoStack.push(canvas.toJSON()); // Save current state to undo stack
             const nextState = redoStack.pop(); // Get the next state to redo
             canvas.loadFromJSON(nextState, function () {
+
                 canvas.renderAll(); // Render the canvas after loading state
                
             });
