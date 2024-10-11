@@ -178,7 +178,8 @@ class AuthController extends Controller
             $userDetails = User::where('id', $storeUser->id)->first();
 
             $userData = [
-                'username' => $userDetails->firstname . ' ' . $userDetails->lastname,
+                // 'username' => $userDetails->firstname . ' ' . $userDetails->lastname,
+                'username' => $userDetails->firstname,
                 'email' => $userDetails->email,
                 'token' => $randomString
             ];
