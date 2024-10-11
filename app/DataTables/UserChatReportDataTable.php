@@ -117,8 +117,8 @@ class UserChatReportDataTable extends DataTable
     {
         return [
             Column::make('no')->title('No')->render('meta.row + meta.settings._iDisplayStart + 1;'),
-            Column::make('username')->title('Username(Reported By)'),
-            Column::make('username')->title("Username (Reported To)"),
+            Column::make('reporter_username')->title('Reporter Username (Reported By)'),
+            Column::make('reported_username')->title("Reported Username (Reported To)"),
             Column::make('report_type')->title("Report Type"),
             Column::make('report_description')->title("Report Description"),
             Column::make('action')->title("Action"),
