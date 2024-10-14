@@ -197,11 +197,13 @@ function validateRsvpForm() {
     const kids =$('#kidsInput').val();
 
     if (!rsvpStatus) {
+        alert();
         toastr.error('Please select RSVP');
         return false;
     }
 
     if (adults == "0" && kids == "0") {
+        alert();
         toastr.error('Please select at least one adult or kid');
         return false;
     }
