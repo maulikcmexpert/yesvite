@@ -3680,7 +3680,7 @@ class ApiControllerv2 extends Controller
 
             if ($eventData['event_setting']['events_schedule'] == '1') {
 
-                $eventsScheduleList = $eventData['events_schedule_list'];
+                $eventsScheduleList = (isset($eventData['events_schedule_list']) && !empty($eventData['events_schedule_list'])) ? $eventData['events_schedule_list'] : [''];
 
                 if (!empty($eventsScheduleList)) {
 
@@ -7574,7 +7574,7 @@ class ApiControllerv2 extends Controller
                     $postsNormalDetail['rsvp_status'] = (string)$rsvpstatus;
                     $postsNormalDetail['kids'] = (int)$kids;
                     $postsNormalDetail['adults'] = (int)$adults;
-                    $postsNormalDetail['location'] = $value->user->city != "" ? trim($value->user->city) .($value->user->state != "" ? ', ' . $value->user->state : ''): "";
+                    $postsNormalDetail['location'] = $value->user->city != "" ? trim($value->user->city) . ($value->user->state != "" ? ', ' . $value->user->state : '') : "";
                     $postsNormalDetail['post_type'] = $value->post_type;
                     $postsNormalDetail['post_privacy'] = $value->post_privacy;
                     $postsNormalDetail['created_at'] = $value->created_at;
@@ -8224,7 +8224,7 @@ class ApiControllerv2 extends Controller
 
             $postsDetail['post_message'] =  empty($eventDetails->post_message) ? "" :  $eventDetails->post_message;
 
-            $postsDetail['location'] = $eventDetails->user->city != "" ? trim($eventDetails->user->city) .($eventDetails->user->state != "" ? ', ' . $eventDetails->user->state : ''): "";
+            $postsDetail['location'] = $eventDetails->user->city != "" ? trim($eventDetails->user->city) . ($eventDetails->user->state != "" ? ', ' . $eventDetails->user->state : '') : "";
             $postsDetail['posttime'] = setpostTime($eventDetails->created_at);
             if ($eventDetails->post_type == '1') { // Image
                 $postsDetail['post_image'] = [];
