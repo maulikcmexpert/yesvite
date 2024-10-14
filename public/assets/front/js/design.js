@@ -2107,7 +2107,7 @@ function bindData() {
                     obj.on('mouseup', function(event) {
                     if(event?.transform?.action === 'drag' && event.transform.actionPerformed === undefined){
                         currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
-                        img.set({ clipPath: shapes[currentShapeIndex] });
+                        obj.set({ clipPath: shapes[currentShapeIndex] });
                         canvas.renderAll();
                     }
                 });
