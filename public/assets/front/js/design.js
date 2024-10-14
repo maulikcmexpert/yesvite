@@ -2036,23 +2036,21 @@ function bindData() {
     let undoStack = [];
     let redoStack = [];
     let isAddingToUndoStack = 0;
-      function createShapes(img) {
+    function createShapes(img) {
                 const imgWidth = img.width;
                 const imgHeight = img.height;
-                const starScale = Math.min(imgWidth, imgHeight) / 2; // Adjust the star size based on the image
-
-                // Proper 5-point star shape
+                const starScale = Math.min(imgWidth, imgHeight) / 2;
                 const starPoints = [
-                    { x: 0, y: -starScale }, // Top point
-                    { x: starScale * 0.23, y: -starScale * 0.31 }, // Top-right
-                    { x: starScale, y: -starScale * 0.31 }, // Right
-                    { x: starScale * 0.38, y: starScale * 0.12 }, // Bottom-right
-                    { x: starScale * 0.58, y: starScale }, // Bottom
-                    { x: 0, y: starScale * 0.5 }, // Center-bottom
-                    { x: -starScale * 0.58, y: starScale }, // Bottom-left
-                    { x: -starScale * 0.38, y: starScale * 0.12 }, // Top-left
-                    { x: -starScale, y: -starScale * 0.31 }, // Left
-                    { x: -starScale * 0.23, y: -starScale * 0.31 } // Top-left
+                    { x: 0, y: -starScale },
+                    { x: starScale * 0.23, y: -starScale * 0.31 }, 
+                    { x: starScale, y: -starScale * 0.31 }, 
+                    { x: starScale * 0.38, y: starScale * 0.12 }, 
+                    { x: starScale * 0.58, y: starScale }, 
+                    { x: 0, y: starScale * 0.5 }, 
+                    { x: -starScale * 0.58, y: starScale }, 
+                    { x: -starScale * 0.38, y: starScale * 0.12 }, 
+                    { x: -starScale, y: -starScale * 0.31 }, 
+                    { x: -starScale * 0.23, y: -starScale * 0.31 } 
                 ];
 
                 return [
@@ -2086,24 +2084,19 @@ function bindData() {
                 obj.set('textAlign', 'center');  // Set text alignment to center
             }
             if (obj.type === 'image') {
-                let currentShapeIndex = 0;
-                obj.crossOrigin = "anonymous";
-                // createShapes(obj)
-                const defaultShape = 'circle'; // Set the desired default shape here
-            
-                        // Create a mapping of shape names to their indices
+                console.log(obj);
+                        let currentShapeIndex = 0;
+                        obj.crossOrigin = "anonymous";
+                        const defaultShape = 'circle'; 
                         const shapeIndexMap = {
                             'rectangle': 0,
                             'circle': 1,
                             'triangle': 2,
                             'star': 3
                         };
-                        
-
-                        currentShapeIndex = shapeIndexMap[defaultShape] || 0; // Default to rectangle if not found
-                        shapes = createShapes(obj);
-                        obj.set({ clipPath: shapes[currentShapeIndex] });
-
+                    currentShapeIndex = shapeIndexMap[defaultShape] || 0; 
+                    shapes = createShapes(obj);
+                    obj.set({ clipPath: shapes[currentShapeIndex] });
                     obj.on('mouseup', function(event) {
                     if(event?.transform?.action === 'drag' && event.transform.actionPerformed === undefined){
                         currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
