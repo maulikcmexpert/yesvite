@@ -1043,7 +1043,6 @@
                     <input class="form-control" type="text" id="registry_link" name="registry_link"
                         onkeyup="clearError(this)">
                     <label for="registry_link" class="floating-label">Registry Link <span>*</span></label>
-
                 </div>
                 <label id="registry_link_error"></label>
             </form>
