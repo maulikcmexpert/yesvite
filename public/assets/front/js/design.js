@@ -2200,8 +2200,10 @@ function bindData() {
                 $(".design-sidebar_7").removeClass("d-none");
                 $("#sidebar").addClass("design-sidebar_7");
                 $(".close-btn").attr("data-id", "design-sidebar_7");
-                getLengthofSliderImage();
             }
+            setTimeout(() => {
+                getLengthofSliderImage();
+            }, 500);
         });
 
         $(".slider_photo_2").on("change", function(event) {
@@ -2213,8 +2215,10 @@ function bindData() {
                     $(".photo-slider-2").attr("src", e.target.result).show();
                 };
                 reader.readAsDataURL(file);
-                getLengthofSliderImage();
             }
+            setTimeout(() => {
+                getLengthofSliderImage();
+            }, 500);
         });
         $(".slider_photo_3").on("change", function(event) {
             var file = event.target.files[0];
@@ -2225,14 +2229,17 @@ function bindData() {
                     $(".photo-slider-3").attr("src", e.target.result).show();
                 };
                 reader.readAsDataURL(file);
-                getLengthofSliderImage();
             }
+            setTimeout(() => {
+                getLengthofSliderImage();
+            }, 500);
         });
 
         function getLengthofSliderImage(){
             var i = 0; 
             $(".slider_img").each(function() {
                 var src = $(this).attr("src");
+                // console.log(src);
                 if (src !== "") {
                    i++;
                 }
@@ -2327,6 +2334,9 @@ function bindData() {
                 }
 
             }
+            setTimeout(() => {
+                getLengthofSliderImage();
+            }, 500);
 
         });
    
