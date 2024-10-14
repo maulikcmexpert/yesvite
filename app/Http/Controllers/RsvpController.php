@@ -39,7 +39,7 @@ class RsvpController extends Controller
                     $eventData = [];
 
                     if ($event->event_settings->allow_for_1_more == '1') {
-                        $eventData[] = "Can Bring Guests ( limit " . $event->event_settings->allow_limit . ")";
+                        $eventData[] = "1+ limit ( limit " . $event->event_settings->allow_limit . ")";
                     }
                     if ($event->event_settings->adult_only_party == '1') {
                         $eventData[] = "Adults Only";
@@ -52,6 +52,13 @@ class RsvpController extends Controller
                     }
                     if ($event->event_settings->gift_registry == '1') {
                         $eventData[] = "Gift Registry";
+                    }
+                    if ($event->event_settings->events_schedule == '1') {
+                        $eventData[] = "Event has Schedule";
+                    }
+
+                    if ($event->start_date != $event->end_date) {
+                        $eventData[] = "Multiple Day Event";
                     }
                     if (empty($eventData)) {
                         $eventData[] = date('F d, Y', strtotime($event->start_date));
