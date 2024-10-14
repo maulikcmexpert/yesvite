@@ -207,5 +207,5 @@ document.getElementById('rsvpForm').onsubmit = function(event) {
         return false;
     }
 
-    return true; // Validation passed
+    // return true; // Validation passed
 };
