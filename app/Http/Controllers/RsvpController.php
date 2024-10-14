@@ -109,7 +109,7 @@ class RsvpController extends Controller
         $userId =   $request->user_id;
         $eventId = $request->event_id;
         //    try {
-
+        dd($request);
         $checkEvent = Event::where(['id' => $eventId])->first();
         dd($checkEvent);
 
