@@ -78,7 +78,7 @@ class RsvpController extends Controller
                     }
                 }
 
-                dd($event);
+                dd($event->event_settings);
                 return view('layout', compact(
                     'title',
                     'page',
