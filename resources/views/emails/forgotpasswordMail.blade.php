@@ -52,7 +52,7 @@
             <!-- -------------- -->
             <tr>
                <td>
-                  <p style="font-size: 16px;line-height: 25px;font-weight: 400;color: #0F172A ;margin: 0px 0px;font-family: 'SF Pro Display'">Hello {{$userData[0]['username']}},</p>
+                  <p style="font-size: 16px;line-height: 25px;font-weight: 400;color: #0F172A ;margin: 0px 0px;font-family: 'SF Pro Display'">Hi {{$userData[0]['username']}},</p>
                </td>
             </tr>
             <!-- -------------- -->
@@ -62,7 +62,7 @@
             <!-- -------------- -->
             <tr>
                <td>
-                  <p style="font-size: 16px;line-height: 25px;font-weight: 400;color: #0F172A ;margin: 0px 0px;font-family: 'SF Pro Display'">Please enter the following TOKEN on the Yeswite App to verify that it is you who requested the password reset:</p>
+                  <p style="font-size: 16px;line-height: 25px;font-weight: 400;color: #0F172A ;margin: 0px 0px;font-family: 'SF Pro Display'"> We received a request to reset your password. Here's your verification code: </p>
                </td>
             </tr>
             <!-- -------------- -->
@@ -85,7 +85,17 @@
             </tr>
             <tr>
                <td>
-                  <p style="font-size: 16px;line-height: 25px;font-weight: 400;color: #0F172A ;margin: 0px 0px;font-family: 'SF Pro Display'">Please note that the token is only valid for 5 minutes. If it expires please request another by requesting another password reset.</p>
+                  <p style="font-size: 16px;line-height: 25px;font-weight: 400;color: #0F172A ;margin: 0px 0px;font-family: 'SF Pro Display'">  Please enter this code on the website to finish resetting your password. The code will expire in 15 minutes, so be sure to use it soon!</p>
+               </td>
+            </tr>
+            <tr>
+               <td>
+                  <p style="font-size: 16px;line-height: 25px;font-weight: 400;color: #0F172A ;margin: 0px 0px;font-family: 'SF Pro Display'">  If it expires you can always request a new one on the same forgot password page.</p>
+               </td>
+            </tr>
+            <tr>
+               <td>
+                  <p style="font-size: 16px;line-height: 25px;font-weight: 400;color: #0F172A ;margin: 0px 0px;font-family: 'SF Pro Display'"> If you didn't request a password reset, you can safely ignore this email.</p>
                </td>
             </tr>
             <!-- -------------- -->
@@ -95,7 +105,7 @@
             <!-- -------------- -->
             <tr>
                <td>
-                  <p style="font-family: 'SF Pro Display';font-size: 16px;line-height: 20px;font-weight: 700;color: #0F172A;margin-bottom: 5px;">Thank you,</p>
+                  <p style="font-family: 'SF Pro Display';font-size: 16px;line-height: 20px;font-weight: 700;color: #0F172A;margin-bottom: 5px;">Thanks,</p>
                   <p style="font-family: 'SF Pro Display';font-size: 16px;line-height: 20px;font-weight: 700;color: #0F172A;margin: 0px;">The Yesvite Team</p>
                </td>
             </tr>
