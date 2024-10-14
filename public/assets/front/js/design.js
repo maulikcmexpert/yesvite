@@ -2036,39 +2036,6 @@ function bindData() {
     let undoStack = [];
     let redoStack = [];
     let isAddingToUndoStack = 0;
-    const shapeIndexMap = {
-        'rectangle': 0,
-        'circle': 1,
-        'triangle': 2,
-        'star': 3
-    };
-
-    function createShapes(img) {
-        const imgWidth = img.width;
-        const imgHeight = img.height;
-        const starScale = Math.min(imgWidth, imgHeight) / 2; // Adjust the star size based on the image
-
-        // Proper 5-point star shape
-        const starPoints = [
-            { x: 0, y: -starScale }, // Top point
-            { x: starScale * 0.23, y: -starScale * 0.31 }, // Top-right
-            { x: starScale, y: -starScale * 0.31 }, // Right
-            { x: starScale * 0.38, y: starScale * 0.12 }, // Bottom-right
-            { x: starScale * 0.58, y: starScale }, // Bottom
-            { x: 0, y: starScale * 0.5 }, // Center-bottom
-            { x: -starScale * 0.58, y: starScale }, // Bottom-left
-            { x: -starScale * 0.38, y: starScale * 0.12 }, // Top-left
-            { x: -starScale, y: -starScale * 0.31 }, // Left
-            { x: -starScale * 0.23, y: -starScale * 0.31 } // Top-left
-        ];
-
-        return [
-            new fabric.Rect({ width: imgWidth, height: imgHeight, originX: 'center', originY: 'center', angle: 0 }),
-            new fabric.Circle({ radius: Math.min(imgWidth, imgHeight) / 2, originX: 'center', originY: 'center', angle: 0 }),
-            new fabric.Triangle({ width: imgWidth, height: imgHeight, originX: 'center', originY: 'center', angle: 0 }),
-            new fabric.Polygon(starPoints, { originX: 'center', originY: 'center', angle: 0 })
-        ];
-    }
     function setControlVisibilityForAll() {  
         canvas.getObjects().forEach((obj) => {
             console.log(obj);
@@ -2092,16 +2059,11 @@ function bindData() {
             if (obj.type === 'textbox' || obj.type === 'text') {
                 obj.set('textAlign', 'center');  // Set text alignment to center
             }
-            // if (obj.type === 'image') {
-            //     createShapes(obj);  // Set text alignment to center
-            // }
-
             if (obj.type === 'image') {
-                if (!obj.shapeApplied) {  // Check if the shape has already been applied
-                    createShapes(obj);  // Reapply the shape
-                    obj.shapeApplied = true;  // Flag to avoid reapplying the shape unnecessarily
-                }
+                createShapes(obj);  // Set text alignment to center
             }
+
+            
             obj.on('rotating', function () {
                 // Get the bounding rectangle of the textboxbox
                 var boundingRect = obj.getBoundingRect();
@@ -2133,8 +2095,14 @@ function bindData() {
             canvas.loadFromJSON(lastState, function () {
 
                 canvas.renderAll(); // Render the canvas after loading state
-              
+                canvas.getObjects().forEach((obj) => {
+                    if (obj.type === 'image') {
+                        applyShapeChangeHandler(obj); // Apply shape change handler for image
+                    }
+                });
             });            
+
+            
             if(redoStack.length > 0){
                 $('#redoButton').find('svg path').attr('fill', '#0F172A');  
             }
@@ -2154,7 +2122,12 @@ function bindData() {
             canvas.loadFromJSON(nextState, function () {
                 
                 canvas.renderAll(); // Render the canvas after loading state
-               
+               // Reapply shape change functionality to image objects
+            canvas.getObjects().forEach((obj) => {
+                if (obj.type === 'image') {
+                    applyShapeChangeHandler(obj); // Apply shape change handler for image
+                }
+            });
             });
             if(undoStack.length > 0 ){
                 $('#undoButton').find('svg path').attr('fill', '#0F172A');
@@ -2177,6 +2150,37 @@ function bindData() {
         redo();
     })
 
+
+    function applyShapeChangeHandler(imageObj) {
+        imageObj.on('mousedown', function () {
+            // Logic to change the shape of the image on click
+            changeImageShape(imageObj);
+        });
+    }
+    
+    function changeImageShape(imageObj) {
+        // Add your logic to switch the shape of the image here
+        // Example: You can apply a new clipping path or mask to the image
+        const currentShape = imageObj.customShape || 'rectangle';  // Store shape in a custom property
+    
+        switch (currentShape) {
+            case 'rectangle':
+                imageObj.customShape = 'circle';
+                // Code to clip the image into a circle
+                break;
+            case 'circle':
+                imageObj.customShape = 'star';
+                // Code to clip the image into a star
+                break;
+            case 'star':
+                imageObj.customShape = 'rectangle';
+                // Code to revert the image back to a rectangle
+                break;
+        }
+    
+        canvas.renderAll();  // Re-render the canvas to apply the changes
+    }
+    
 
         $(".slider_photo").on("change", function(event) {
             var file = event.target.files[0]; // Get the first file (the selected image)
