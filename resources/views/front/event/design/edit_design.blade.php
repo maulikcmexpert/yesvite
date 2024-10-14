@@ -1193,8 +1193,8 @@
                 </div>
             </div>
 
-            <div class="footer-buttons" style="display: none">
-                <button class="cmn-btn save-slider-image">Save</button>
+            <div class="footer-buttons" >
+                <button class="cmn-btn save-slider-image" style="display: none">Save</button>
             </div>
         </div>
     </div>

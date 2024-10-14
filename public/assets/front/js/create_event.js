@@ -5198,6 +5198,7 @@ $(document).on('click','.add-activity-schedule',function(){
 })
 
 $(document).on('click','.thank_you_card_toggle',function(){
+    
     $.ajax({
         url: base_url + "event/get_thank_you_card",
         type: "POST",
