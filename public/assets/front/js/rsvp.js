@@ -1,3 +1,4 @@
+
 $(document).ready(function() {
     $('#rsvpForm').on('submit', function(e) {
         var adultsCount = parseInt($('#adultsInput').val()) || 0; 
@@ -5,7 +6,7 @@ $(document).ready(function() {
 
         if (adultsCount === 0 && kidsCount === 0) {
             e.preventDefault();
-            alert("Please add at least one adult or kid."); 
+            toastr.error("Please add at least one adult or kid."); 
         }
     });
 });
