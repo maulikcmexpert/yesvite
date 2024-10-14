@@ -80,7 +80,10 @@ class RsvpController extends Controller
                     }
                 }
 
-                $is_podluck = (isset($event->event_settings->podluck) ? $event->event_settings->podluck : "");
+                $is_podluck = (isset($event->event_settings->adult_only_party) ? $event->event_settings->adult_only_party : "");
+
+                $is_adultOnly = (isset($event->event_settings->adult_only_party) ? $event->event_settings->adult_only_party : "");
+
                 return view('layout', compact(
                     'title',
                     'page',
@@ -90,7 +93,8 @@ class RsvpController extends Controller
                     'isInvited',
                     'event_id',
                     'user_id',
-                    'is_podluck'
+                    'is_podluck',
+                    'is_adultOnly'
                 ));
             }
             return redirect('home')->with('error', 'You are not connect with this event');
