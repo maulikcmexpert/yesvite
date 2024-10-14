@@ -10432,6 +10432,8 @@ class ApiControllerv2 extends Controller
 
                     $eventInfo = Event::with(['user', 'event_image'])->where('id', $input['event_id'])->first();
                     $eventData = [
+                        'event_id' => $eventInfo->id,
+                        'user_id' => $user->id,
                         'event_name' => $eventInfo->event_name,
                         'hosted_by' => $eventInfo->hosted_by,
                         'profileUser' => ($eventInfo->user->profile != NULL || $eventInfo->user->profile != "") ? $eventInfo->user->profile : "no_profile.png",
