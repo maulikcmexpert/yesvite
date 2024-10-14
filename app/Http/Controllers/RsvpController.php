@@ -22,6 +22,8 @@ class RsvpController extends Controller
     {
         $title = 'RSVP';
         $page = 'front.rsvp';
+        $js = ['rsvp'];
+
 
 
         $event_id =  $eventId;
@@ -82,6 +84,7 @@ class RsvpController extends Controller
                 return view('layout', compact(
                     'title',
                     'page',
+                    'js',
                     'event',
                     'giftRegistryDetails',
                     'isInvited',
