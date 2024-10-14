@@ -24,6 +24,7 @@ $(document).ready(function() {
     function toggleGuestCount() {
         const isNoSelected = $('#no').is(':checked');
         $('.rsvp_count_member input').prop('disabled', isNoSelected);
+        $('.qty-btn-minus, .qty-btn-plus').prop('disabled', isNoSelected);
         $('.rsvp_count_member').css('opacity', isNoSelected ? '0.5' : '1');
     }
 
