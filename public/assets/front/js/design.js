@@ -1920,7 +1920,7 @@ function bindData() {
 
     function setControlVisibilityForAll() {  
         canvas.getObjects().forEach((obj) => {
-
+            console.log(obj);
             var currentFontSize = obj.fontSize;
             console.log("Current font size: " + currentFontSize);
 
@@ -1957,10 +1957,6 @@ function bindData() {
             // Set text alignment if the object is a text-based object
             if (obj.type === 'textbox' || obj.type === 'text') {
                 obj.set('textAlign', 'center');  // Set text alignment to center
-            }
-
-            if(obj.type ==='image'){
-                console.log(obj);
             }
 
             obj.on('rotating', function () {
