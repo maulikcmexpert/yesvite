@@ -277,7 +277,7 @@ class AuthController extends Controller
 
                 Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($user) {
                     $message->to($user->email);
-                    $message->subject('Email Verification Mail');
+                    $message->subject('Verify your Yesvite email address');
                 });
 
                 return  Redirect::to('login')->with('success', 'Please check and verify your email address.');
