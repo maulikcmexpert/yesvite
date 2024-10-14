@@ -2061,9 +2061,13 @@ function bindData() {
             }
             if (obj.type === 'image') {
                 createShapes(obj);  // Set text alignment to center
+
+                
+
+
+
             }
 
-            
             obj.on('rotating', function () {
                 // Get the bounding rectangle of the textboxbox
                 var boundingRect = obj.getBoundingRect();
@@ -2095,14 +2099,8 @@ function bindData() {
             canvas.loadFromJSON(lastState, function () {
 
                 canvas.renderAll(); // Render the canvas after loading state
-                canvas.getObjects().forEach((obj) => {
-                    if (obj.type === 'image') {
-                        applyShapeChangeHandler(obj); // Apply shape change handler for image
-                    }
-                });
+              
             });            
-
-            
             if(redoStack.length > 0){
                 $('#redoButton').find('svg path').attr('fill', '#0F172A');  
             }
@@ -2122,12 +2120,7 @@ function bindData() {
             canvas.loadFromJSON(nextState, function () {
                 
                 canvas.renderAll(); // Render the canvas after loading state
-               // Reapply shape change functionality to image objects
-            canvas.getObjects().forEach((obj) => {
-                if (obj.type === 'image') {
-                    applyShapeChangeHandler(obj); // Apply shape change handler for image
-                }
-            });
+               
             });
             if(undoStack.length > 0 ){
                 $('#undoButton').find('svg path').attr('fill', '#0F172A');
@@ -2150,37 +2143,6 @@ function bindData() {
         redo();
     })
 
-
-    function applyShapeChangeHandler(imageObj) {
-        imageObj.on('mousedown', function () {
-            // Logic to change the shape of the image on click
-            changeImageShape(imageObj);
-        });
-    }
-    
-    function changeImageShape(imageObj) {
-        // Add your logic to switch the shape of the image here
-        // Example: You can apply a new clipping path or mask to the image
-        const currentShape = imageObj.customShape || 'rectangle';  // Store shape in a custom property
-    
-        switch (currentShape) {
-            case 'rectangle':
-                imageObj.customShape = 'circle';
-                // Code to clip the image into a circle
-                break;
-            case 'circle':
-                imageObj.customShape = 'star';
-                // Code to clip the image into a star
-                break;
-            case 'star':
-                imageObj.customShape = 'rectangle';
-                // Code to revert the image back to a rectangle
-                break;
-        }
-    
-        canvas.renderAll();  // Re-render the canvas to apply the changes
-    }
-    
 
         $(".slider_photo").on("change", function(event) {
             var file = event.target.files[0]; // Get the first file (the selected image)
