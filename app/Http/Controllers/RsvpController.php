@@ -78,7 +78,7 @@ class RsvpController extends Controller
                     }
                 }
 
-                dd($event->event_settings);
+                dd($event->event_settings->podluck);
                 return view('layout', compact(
                     'title',
                     'page',
