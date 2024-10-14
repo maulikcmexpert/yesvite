@@ -209,5 +209,5 @@ function validateRsvpForm() {
     }
 
    
-    return true;
+    $('#rsvpForm').submit();
  }
