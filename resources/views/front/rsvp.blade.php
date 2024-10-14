@@ -130,7 +130,9 @@
                         @endif
                     </div>
                     <div class="note-wrp">
+                        @if($is_podluck=="1")
                         <h5><span>Note:</span> This is a Potluck Event</h5>
+                        @endif
                         <p>Sign Up on iOS or Android Apps to let them know what you will be brining.</p>
                     </div>
                 </div>
