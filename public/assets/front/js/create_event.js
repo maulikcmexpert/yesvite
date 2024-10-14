@@ -3908,6 +3908,15 @@ $(document).on("click", ".edit_gift_registry", function () {
     $("#registry_item_id").val(id);
     $('.gift_registry_heading').text('Edit Gift Registry');
     toggleSidebar("sidebar_gift_registry_item");
+
+    $(".form-control").each(function () {
+        var text = $(this).val();
+        if (text === "") {
+            $(this).next().removeClass("floatingfocus");
+        } else {
+            $(this).next().addClass("floatingfocus");
+        }
+    });
 });
 
 
@@ -4026,9 +4035,7 @@ $(document).on("click", ".edit_thankyou_card", function () {
     var message = $thankYouCard.find("#edit_thankyou_message").text();
     var when_to_send = $thankYouCard.find("#edit_when_to_send").val();
 
-    console.log(templateName);
-    console.log(message);
-    console.log(message);
+
 
     $("#thankyou_templatename").val(templateName);
     $("#thankyou_when_to_send").val(when_to_send);
@@ -4036,6 +4043,15 @@ $(document).on("click", ".edit_thankyou_card", function () {
     $("#edit_template_id").val(id);
 
     toggleSidebar("sidebar_add_thankyou_card");
+
+    $(".form-control").each(function () {
+        var text = $(this).val();
+        if (text === "") {
+            $(this).next().removeClass("floatingfocus");
+        } else {
+            $(this).next().addClass("floatingfocus");
+        }
+    });
 });
 
 $(document).on("change", 'input[name="select_thankyou[]"]', function () {
