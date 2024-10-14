@@ -1959,6 +1959,38 @@ function bindData() {
                 obj.set('textAlign', 'center');  // Set text alignment to center
             }
 
+            if(obj.type ==='image'){
+                
+                function createShapes(img) {
+                    const imgWidth = img.width;
+                    const imgHeight = img.height;
+                    const starScale = Math.min(imgWidth, imgHeight) / 2; // Adjust the star size based on the image
+    
+                    // Proper 5-point star shape
+                    const starPoints = [
+                        { x: 0, y: -starScale }, // Top point
+                        { x: starScale * 0.23, y: -starScale * 0.31 }, // Top-right
+                        { x: starScale, y: -starScale * 0.31 }, // Right
+                        { x: starScale * 0.38, y: starScale * 0.12 }, // Bottom-right
+                        { x: starScale * 0.58, y: starScale }, // Bottom
+                        { x: 0, y: starScale * 0.5 }, // Center-bottom
+                        { x: -starScale * 0.58, y: starScale }, // Bottom-left
+                        { x: -starScale * 0.38, y: starScale * 0.12 }, // Top-left
+                        { x: -starScale, y: -starScale * 0.31 }, // Left
+                        { x: -starScale * 0.23, y: -starScale * 0.31 } // Top-left
+                    ];
+    
+                    return [
+                        new fabric.Rect({ width: imgWidth, height: imgHeight, originX: 'center', originY: 'center', angle: 0 }),
+                        new fabric.Circle({ radius: Math.min(imgWidth, imgHeight) / 2, originX: 'center', originY: 'center', angle: 0 }),
+                        new fabric.Triangle({ width: imgWidth, height: imgHeight, originX: 'center', originY: 'center', angle: 0 }),
+                        new fabric.Polygon(starPoints, { originX: 'center', originY: 'center', angle: 0 })
+                    ];
+                }
+
+                createShapes(obj);
+            }
+
             obj.on('rotating', function () {
                 // Get the bounding rectangle of the textboxbox
                 var boundingRect = obj.getBoundingRect();
