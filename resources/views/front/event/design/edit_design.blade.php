@@ -1194,7 +1194,7 @@
             </div>
 
             <div class="footer-buttons" >
-                <button class="cmn-btn save-slider-image" style="display: none">Save</button>
+                <button class="cmn-btn save-slider-image">Save</button>
             </div>
         </div>
     </div>
