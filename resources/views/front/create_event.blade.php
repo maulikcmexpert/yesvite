@@ -1034,18 +1034,18 @@
                 <div class="input-form">
                     <input class="form-control" type="text" id="recipient_name" maxlength="30" onkeyup="clearError(this)"
                         name="recipient_name">
-                    <label for="email" class="floating-label">Recipients name <span>*</span></label>
+                    <label for="recipient_name" class="floating-label">Recipients name <span>*</span></label>
                     <span class="sub-con recipient-name-con">0/30</span>
                 </div>
                 <input type="hidden" id="registry_item_id" />
-                <label for="email" id="recipient_name_error" class="common_error"></label>
+                <label id="recipient_name_error" class="common_error"></label>
                 <div class="input-form">
                     <input class="form-control" type="text" id="registry_link" name="registry_link"
                         onkeyup="clearError(this)">
-                    <label for="email" class="floating-label">Registry Link <span>*</span></label>
+                    <label for="registry_link" class="floating-label">Registry Link <span>*</span></label>
 
                 </div>
-                <label for="email" id="registry_link_error"></label>
+                <label id="registry_link_error"></label>
             </form>
         </div>
     </div>
