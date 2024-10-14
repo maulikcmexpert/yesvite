@@ -94,6 +94,8 @@ function getGuestPendingRsvpCount($eventId)
 function sendNotification($notificationType, $postData)
 {
     //'invite', 'upload_post', 'like_post', 'comment', 'reply', 'poll', 'rsvp'
+    $user  = Auth::guard('api')->user();
+
     $senderData = User::where('id', $postData['sender_id'])->first();
     if ($notificationType == 'owner_notify') {
         $event = Event::with('event_image', 'event_schedule')->where('id', $postData['event_id'])->first();
@@ -186,7 +188,7 @@ function sendNotification($notificationType, $postData)
 
                             $eventData = [
                                 'event_id' => (int)$postData['event_id'],
-                                'user_id' => $value->user->id,
+                                'user_id' => $user->id,
                                 'event_name' => $value->event->event_name,
                                 'hosted_by' => $value->event->user->firstname . ' ' . $value->event->user->lastname,
                                 'profileUser' => ($value->event->user->profile != NULL || $value->event->user->profile != "") ? $value->event->user->profile : "no_profile.png",
@@ -214,7 +216,7 @@ function sendNotification($notificationType, $postData)
 
                             $eventData = [
                                 'event_id' => (int)$postData['event_id'],
-                                'user_id' => $value->user->id,
+                                'user_id' => $user->id,
                                 'event_name' => $value->event->event_name,
                                 'hosted_by' => $value->event->user->firstname . ' ' . $value->event->user->lastname,
                                 'profileUser' => ($value->event->user->profile != NULL || $value->event->user->profile != "") ? $value->event->user->profile : "no_profile.png",
