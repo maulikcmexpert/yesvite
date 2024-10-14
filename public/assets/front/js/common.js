@@ -190,24 +190,22 @@ $(document).ready(function () {
     });
 });
 
-function validateRsvpForm() {
-    const rsvpStatus = $('input[name="rsvp_status"]:checked');
-
-    const adults =$('#adultsInput').val();
-    const kids =$('#kidsInput').val();
+document.getElementById('rsvpForm').onsubmit = function(event) {
+    const rsvpStatus = document.querySelector('input[name="rsvp_status"]:checked');
+    const adults = parseInt(document.getElementById('adultsInput').value, 10);
+    const kids = parseInt(document.getElementById('kidsInput').value, 10);
 
     if (!rsvpStatus) {
-        alert();
         toastr.error('Please select RSVP');
+        event.preventDefault(); // Prevent form submission
         return false;
     }
 
-    if (adults == "0" && kids == "0") {
-        alert();
+    if (adults <= 0 && kids <= 0) {
         toastr.error('Please select at least one adult or kid');
+        event.preventDefault(); // Prevent form submission
         return false;
     }
 
-   
-    $('#rsvpForm').submit();
- }
+    return true; // Validation passed
+};
