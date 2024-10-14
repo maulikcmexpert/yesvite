@@ -2086,8 +2086,8 @@ function bindData() {
                 console.log(obj);
                         let currentShapeIndex = 0;
                         obj.crossOrigin = "anonymous";
-                        const defaultShape = obj.clipPath.type; 
-
+                        
+                        let defaultShape = obj.clipPath.type; 
                         if (defaultShape === 'polygon') {
                             defaultShape = 'star'; 
                         }
