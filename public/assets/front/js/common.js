@@ -1,4 +1,7 @@
 // alert();
+
+const toastr = require("toastr");
+
 //  ===== focusinput =====
 var base_url = $("#base_url").val();
 
@@ -188,12 +191,23 @@ $(document).ready(function () {
 });
 
 function validateRsvpForm() {
+    const rsvpStatus = $('input[name="rsvp_status"]:checked');
+
     const adults =$('#adultsInput').val();
     const kids =$('#kidsInput').val();
 
-    if (adults == "0" && kids == "0") {
-        alert('Please enter at least one guest (Adult or Kid).');
-        return false; // Prevent form submission
+    if (!rsvpStatus) {
+        alert();
+        toastr.error('Please select RSVP');
+        return false;
     }
-    return true; // Allow form submission
-}
+
+    if (adults == "0" && kids == "0") {
+        alert();
+        toastr.error('Please select at least one adult or kid');
+        return false;
+    }
+
+   
+    return true;
+ }
