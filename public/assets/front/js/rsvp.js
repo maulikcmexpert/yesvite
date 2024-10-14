@@ -7,7 +7,7 @@ $(document).ready(function() {
 
         if (adultsCount === 0 && kidsCount === 0) {
             e.preventDefault();
-            toastr.success('Please select at least one adult or kid');
+           alert();
         }
     });
 });
