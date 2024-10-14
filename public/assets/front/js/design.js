@@ -2038,7 +2038,7 @@ function bindData() {
     let isAddingToUndoStack = 0;
     function setControlVisibilityForAll() {  
         canvas.getObjects().forEach((obj) => {
-          
+            console.log(obj);
             obj.setControlsVisibility({
                 mt: false, 
                 mb: false, 
