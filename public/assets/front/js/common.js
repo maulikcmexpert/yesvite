@@ -186,3 +186,14 @@ $(document).ready(function () {
         });
     });
 });
+
+function validateRsvpForm() {
+    const adults =$('#adultsInput').val();
+    const kids =$('#kidsInput').val();
+
+    if (adults == "0" && kids == "0") {
+        alert('Please enter at least one guest (Adult or Kid).');
+        return false; // Prevent form submission
+    }
+    return true; // Allow form submission
+}
