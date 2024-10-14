@@ -258,9 +258,9 @@
 }
 
 .rsvp-radio input[type=radio]:checked~label[for="no"]:after {
-    background-color: #23AA26 !important;
+    background-color: red !important;
     padding: 0.3em;
-    border-color: #23AA26 !important;
+    border-color: red !important;
 }
 
 .rsvp-radio input[type=radio]:checked~label[for="no"] {
