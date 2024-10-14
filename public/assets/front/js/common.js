@@ -190,22 +190,27 @@ $(document).ready(function () {
     });
 });
 
-document.getElementById('rsvpForm').onsubmit = function(event) {
-    const rsvpStatus = document.querySelector('input[name="rsvp_status"]:checked');
-    const adults = parseInt(document.getElementById('adultsInput').value, 10);
-    const kids = parseInt(document.getElementById('kidsInput').value, 10);
+    document.getElementById('rsvpForm').addEventListener('submit', function(event) {
+        const rsvpStatus = document.querySelector('input[name="rsvp_status"]:checked');
+        const adults = parseInt(document.getElementById('adultsInput').value, 10) || 0; // Default to 0 if NaN
+        const kids = parseInt(document.getElementById('kidsInput').value, 10) || 0; // Default to 0 if NaN
 
-    if (!rsvpStatus) {
-        toastr.error('Please select RSVP');
-        event.preventDefault(); // Prevent form submission
-        return false;
-    }
+        let valid = true; // Track validation status
 
-    if (adults <= 0 && kids <= 0) {
-        toastr.error('Please select at least one adult or kid');
-        event.preventDefault(); // Prevent form submission
-        return false;
-    }
+        // Check if RSVP status is selected
+        if (!rsvpStatus) {
+            toastr.error('Please select RSVP');
+            valid = false;
+        }
 
-    return true; // Validation passed
-};
+        // Check if at least one adult or kid is selected
+        if (adults <= 0 && kids <= 0) {
+            toastr.error('Please select at least one adult or kid');
+            valid = false;
+        }
+
+        // If validation fails, prevent form submission
+        if (!valid) {
+            event.preventDefault();
+        }
+    });
