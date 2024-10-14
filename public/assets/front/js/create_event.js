@@ -3844,7 +3844,7 @@ $(document).on("click", ".add_gift_item_btn", function () {
             data: {
                 registry_item: registry_edit_item
                     ? registry_edit_item
-                    : registry_item,
+                    : '',
                 recipient_name: recipient_name,
                 registry_link: registry_link,
             },
