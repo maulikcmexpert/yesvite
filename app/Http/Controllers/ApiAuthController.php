@@ -661,7 +661,7 @@ class ApiAuthController extends Controller
                 $verifyUser->status = '1';
                 $verifyUser->remember_token = NULL;
                 $verifyUser->save();
-                $message = "'Email Verification Succesful'.You may now log into your Yesvite account here.";
+                $message = "Email Verification Successful\nYou may now log into your Yesvite account here";
                 return view('emailVarification', compact('message', 'faild'));
             } else {
                 $message = "Verification Already Succesful Your email has been verified. you may now log into your account.";
