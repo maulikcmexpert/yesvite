@@ -1959,6 +1959,10 @@ function bindData() {
                 obj.set('textAlign', 'center');  // Set text alignment to center
             }
 
+            if(obj.type ==='image'){
+                console.log(obj);
+            }
+
             obj.on('rotating', function () {
                 // Get the bounding rectangle of the textboxbox
                 var boundingRect = obj.getBoundingRect();
