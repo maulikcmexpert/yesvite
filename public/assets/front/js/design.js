@@ -2086,7 +2086,7 @@ function bindData() {
                 console.log(obj);
                         let currentShapeIndex = 0;
                         obj.crossOrigin = "anonymous";
-                        const defaultShape = 'circle'; 
+                        const defaultShape = obj.clipPath.type; 
                         const shapeIndexMap = {
                             'rectangle': 0,
                             'circle': 1,
