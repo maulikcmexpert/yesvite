@@ -2334,6 +2334,9 @@ function bindData() {
                 }
 
             }
+            setTimeout(() => {
+                getLengthofSliderImage();
+            }, 500);
 
         });
    
