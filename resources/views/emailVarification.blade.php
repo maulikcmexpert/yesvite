@@ -80,6 +80,34 @@
             margin: 15px auto 0;
             color: #5c5555;
         }
+
+        .email-login-btn {
+            background-color: #F73C71 !important;
+            border: 1px solid #F73C71 !important;
+            color: #fff;
+            border-radius: 16px;
+            -webkit-border-radius: 16px;
+            -moz-border-radius: 16px;
+            -ms-border-radius: 16px;
+            -o-border-radius: 16px;
+            padding: 12px 30px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.5s;
+            -webkit-transition: 0.5s;
+            -moz-transition: 0.5s;
+            -ms-transition: 0.5s;
+            -o-transition: 0.5s;
+            text-transform: capitalize;
+
+        }
+
+        .email-login-btn-wrp {
+            display: block;
+            width: 100%;
+            text-align: center;
+            margin-top: 20px !important;
+        }
     </style>
 
 </head>
@@ -106,7 +134,7 @@
                 @endif
                 <p>{{$message}}</p>
 
-                <a href="{{route('auth.login')}}"><button type="button" class="send-btn">Login</button></a>
+                <a href="{{route('auth.login')}}" class="email-login-btn-wrp"><button type="button" class="email-login-btn">Login</button></a>
 
             </div>
         </div>
