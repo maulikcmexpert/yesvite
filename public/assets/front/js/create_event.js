@@ -3908,6 +3908,15 @@ $(document).on("click", ".edit_gift_registry", function () {
     $("#registry_item_id").val(id);
     $('.gift_registry_heading').text('Edit Gift Registry');
     toggleSidebar("sidebar_gift_registry_item");
+
+    $(".form-control").each(function () {
+        var text = $(this).val();
+        if (text === "") {
+            $(this).next().removeClass("floatingfocus");
+        } else {
+            $(this).next().addClass("floatingfocus");
+        }
+    });
 });
 
 
