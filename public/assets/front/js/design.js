@@ -2101,8 +2101,8 @@ function bindData() {
                         
 
                         currentShapeIndex = shapeIndexMap[defaultShape] || 0; // Default to rectangle if not found
-                        obj.set({ clipPath: shapes[currentShapeIndex] });
                         shapes = createShapes(obj);
+                        obj.set({ clipPath: shapes[currentShapeIndex] });
 
                     obj.on('mouseup', function(event) {
                     if(event?.transform?.action === 'drag' && event.transform.actionPerformed === undefined){
