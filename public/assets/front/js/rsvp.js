@@ -12,7 +12,7 @@ $(document).ready(function() {
 
         if (!rsvpStatus) {
             e.preventDefault(); 
-            alert("Please select RSVP"); 
+            toastr.error("Please select RSVP"); 
         }
     });
 });
