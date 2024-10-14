@@ -106,12 +106,11 @@ class RsvpController extends Controller
     public function store(Request $request)
     {
 
-        $userId =   $request->user_id;
-        $eventId = $request->event_id;
+        $userId = decrypt($request->user_id);
+        $eventId = decrypt($request->event_id);
         //    try {
-        dd($request);
+
         $checkEvent = Event::where(['id' => $eventId])->first();
-        dd($checkEvent);
 
         if ($checkEvent->end_date < date('Y-m-d')) {
             return redirect('rsvp/' . $request->user_id . '/' . $request->event_id)->with('error', "Event is past , you can't attempt RSVP");
@@ -165,8 +164,8 @@ class RsvpController extends Controller
                     'kids' => $request->kids
                 ];
                 $creatEventPost = new EventPost();
-                $creatEventPost->event_id = $request->event_id;
-                $creatEventPost->user_id = $request->user_id;
+                $creatEventPost->event_id = $eventId;
+                $creatEventPost->user_id =  $userId;
                 $creatEventPost->post_message = json_encode($postMessage);
                 $creatEventPost->post_privacy = "1";
                 $creatEventPost->post_type = "4";
