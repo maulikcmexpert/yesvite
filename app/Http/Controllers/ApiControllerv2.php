@@ -7111,7 +7111,8 @@ class ApiControllerv2 extends Controller
                 $eventData = [];
 
                 if ($eventDetail->event_settings->allow_for_1_more == '1') {
-                    $eventData[] = "Can Bring Guests ( limit " . $eventDetail->event_settings->allow_limit . ")";
+                    // $eventData[] = "Can Bring Guests ( limit " . $eventDetail->event_settings->allow_limit . ")";
+                    $eventData[] = "+1 Limit (" . $eventDetail->event_settings->allow_limit . ")";
                 }
                 if ($eventDetail->event_settings->adult_only_party == '1') {
                     $eventData[] = "Adults Only";
