@@ -408,7 +408,7 @@ $(document).on("click", ".design-sidebar-action", function() {
     let designId = $(this).attr("design-id");
     if (designId) {
         if (designId == "6") {
-
+            
             var imgSrc1 = $(".photo-slider-1").attr("src");
             var imgSrc2 = $(".photo-slider-2").attr("src");
             var imgSrc3 = $(".photo-slider-3").attr("src");
@@ -417,7 +417,6 @@ $(document).on("click", ".design-sidebar-action", function() {
                 $(".design-sidebar_7").removeClass("d-none");
                 $("#sidebar").addClass("design-sidebar_7");
                 $(".close-btn").attr("data-id", "design-sidebar_7");
-                $('.save-slider-image').css('display','block');
             } else {
                 $(".design-sidebar").addClass("d-none");
                 $(".design-sidebar_" + designId).removeClass("d-none");
@@ -2309,7 +2308,7 @@ function bindData() {
                     $(this).parent().find('.slider_img').attr('src', '');
                     $(".photo-slider-" + delete_id).hide();
                     $('#loader').css('display', 'none');
-                    // toastr.success('Slider Image Deleted Successfully')
+                    toastr.success('Slider Image Deleted Successfully')
 
                 }
 
