@@ -257,6 +257,12 @@
     border-color: #23AA26 !important;
 }
 
+.rsvp-radio input[type=radio]:checked~label[for="no"]:after {
+    background-color: #23AA26 !important;
+    padding: 0.3em;
+    border-color: #23AA26 !important;
+}
+
 .rsvp-radio input[type=radio]:checked~label[for="no"] {
     border: 1px solid red;
 }
