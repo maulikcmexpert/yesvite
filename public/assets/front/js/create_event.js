@@ -3906,6 +3906,7 @@ $(document).on("click", ".edit_gift_registry", function () {
     $("#recipient_name").val(recipientName);
     $("#registry_link").val(registryLink);
     $("#registry_item_id").val(id);
+    $('.gift_registry_heading').text('Edit Gift Registry');
     toggleSidebar("sidebar_gift_registry_item");
 });
 
@@ -5030,6 +5031,7 @@ $(document).on('click','.add_new_gift_registry',function () {
     $('#recipient_name').val('');
     $('#registry_link').val('');
     $('.recipient-name-con').text('0/30');
+    $('.gift_registry_heading').text('Create Gift Registry');
     toggleSidebar('sidebar_gift_registry_item')
 })
 
