@@ -568,7 +568,7 @@
                 <input class="form-control" oninput="clearError(this)" type="text" id="thankyou_templatename"
                     name="text1">
                 {{-- <label for="email" class="floating-label">Template Name <span>*</span></label> --}}
-                <label for="code" class="form-label input-field floating-label about-label">Template Name </label>
+                <label class="form-label input-field floating-label about-label">Template Name </label>
 
             </div>
             <label for="thankyou_templatename" id="template_name_error" class="common_error"></label>
@@ -577,17 +577,17 @@
                 <input class="form-control" oninput="clearError(this)" type="number" id="thankyou_when_to_send"
                     name="text2">
                 {{-- <label for="email" class="floating-label">When to send (Hours after event) <span>*</span></label> --}}
-                <label for="code" class="form-label input-field floating-label about-label">When to send (Hours
+                <label class="form-label input-field floating-label about-label">When to send (Hours
                     after event) </label>
             </div>
                 <label for="thankyou_when_to_send" id="when_to_send_error" class="common_error"></label>
             <div class="input-form message-textarea mb-0">
                 <textarea name="" oninput="clearError(this)" class="inputText" id="message_for_thankyou" rows="5"
                     cols="50"></textarea>
-                <label for="code" class="form-label input-field floating-label about-label">message</label>
-                <label for="message_for_thankyou" id="thankyou_message_error" class="common_error"></label>
-
+                <label class="form-label input-field floating-label about-label">message</label>
+                
             </div>
+            <label for="message_for_thankyou" id="thankyou_message_error" class="common_error"></label>
         </form>
     </div>
     <div class="new-event-btn">

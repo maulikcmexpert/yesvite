@@ -4036,14 +4036,13 @@ $(document).on("click", ".edit_thankyou_card", function () {
     var when_to_send = $thankYouCard.find("#edit_when_to_send").val();
 
 
-
     $("#thankyou_templatename").val(templateName);
     $("#thankyou_when_to_send").val(when_to_send);
     $("#message_for_thankyou").val(message);
     $("#edit_template_id").val(id);
 
     toggleSidebar("sidebar_add_thankyou_card");
-    ('.thankyoucard_heading').text('Edit thank you card');
+    $('.thankyoucard_heading').text('Edit thank you card');
 
     $(".form-control").each(function () {
         var text = $(this).val();
@@ -5042,7 +5041,7 @@ $(document).on('click','.thankyou_card_add_form',function () {
     $('#thankyou_when_to_send').val('');
     $('#message_for_thankyou').val('');
     toggleSidebar('sidebar_add_thankyou_card');
-    ('.thankyoucard_heading').text('Create new thank you card');
+    $('.thankyoucard_heading').text('Create new thank you card');
 })
 
 $(document).on('click','.add_new_gift_registry',function () {
