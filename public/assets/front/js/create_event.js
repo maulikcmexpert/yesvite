@@ -5041,7 +5041,7 @@ $(document).on('click','.thankyou_card_add_form',function () {
     $('#thankyou_when_to_send').val('');
     $('#message_for_thankyou').val('');
     toggleSidebar('sidebar_add_thankyou_card');
-    ('.thankyoucard_heading').text('Create new thank you card');
+    $('.thankyoucard_heading').text('Create new thank you card');
 })
 
 $(document).on('click','.add_new_gift_registry',function () {
