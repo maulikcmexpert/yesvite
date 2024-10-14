@@ -94,7 +94,7 @@
                                         <button class="qty-btn-plus" type="button"><i class="fa fa-plus"></i></button>
                                     </div>
                                 </div>
-                                @if(is_adultOnly!="1")
+                                @if($is_adultOnly!="1")
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                                     <h6>Kids</h6>
                                     <div class="qty-container">
