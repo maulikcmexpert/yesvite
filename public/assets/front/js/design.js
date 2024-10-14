@@ -2200,6 +2200,7 @@ function bindData() {
                 $(".design-sidebar_7").removeClass("d-none");
                 $("#sidebar").addClass("design-sidebar_7");
                 $(".close-btn").attr("data-id", "design-sidebar_7");
+                getLengthofSliderImage();
             }
         });
 
@@ -2212,6 +2213,7 @@ function bindData() {
                     $(".photo-slider-2").attr("src", e.target.result).show();
                 };
                 reader.readAsDataURL(file);
+                getLengthofSliderImage();
             }
         });
         $(".slider_photo_3").on("change", function(event) {
@@ -2223,8 +2225,20 @@ function bindData() {
                     $(".photo-slider-3").attr("src", e.target.result).show();
                 };
                 reader.readAsDataURL(file);
+                getLengthofSliderImage();
             }
         });
+
+        function getLengthofSliderImage(){
+            var i = 0; 
+            $(".slider_img").each(function() {
+                var src = $(this).attr("src");
+                if (src !== "") {
+                   i++;
+                }
+            });
+            $('.slider_image_count').text(i+'/3 Photos');
+        }
         // $(document).on("click", ".delete-slider-1", function () {
         //     $(".photo-slider-1").hide();
         // });

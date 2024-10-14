@@ -1018,7 +1018,7 @@
 
                 <div class="uploaded-images-inner">
                     <div class="total-upload-img">
-                        <h3>1/3 Photos</h3>
+                        <h3 class="slider_image_count">1/3 Photos</h3>
                     </div>
 
                     <div class="uploaded-images-detail">
