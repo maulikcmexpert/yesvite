@@ -55,7 +55,7 @@
 
                         </div>
                     </div>
-                    <form method="POST" action="{{ route('rsvp.store') }}" id="rsvpForm" onsubmit="return validateRsvpForm()">
+                    <form method="POST" action="{{ route('rsvp.store') }}" id="rsvpForm">
                         @csrf
                         <input type="hidden" name="event_id" value="{{ $event_id }}">
                         <input type="hidden" name="user_id" value="{{ $user_id }}">
