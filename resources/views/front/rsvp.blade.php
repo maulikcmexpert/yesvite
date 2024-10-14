@@ -25,7 +25,19 @@
                     <h5 class="title">RSVP</h5>
                     <div class="author-wrp">
                         <div class="author-img">
+                            <!-- <img src="{{ $event->profile}}" alt=""> -->
+
+                            @if ($event->profile != '')
                             <img src="{{ $event->profile}}" alt="">
+                            @else
+                            @php
+                            $firstInitial = !empty($event->user->firstname) ? strtoupper($event->user->firstname[0]) : '';
+                            $lastInitial = !empty($event->user->lastname) ? strtoupper($event->user->lastname[0]) : '';
+                            $initials = $firstInitial . $lastInitial;
+                            $fontColor = 'fontcolor' . $firstInitial;
+                            @endphp
+                            <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
+                            @endif
                         </div>
                         <div class="author-title">
                             <h4>{{$event->event_name}}</h4>
