@@ -2036,98 +2036,18 @@ function bindData() {
     let undoStack = [];
     let redoStack = [];
     let isAddingToUndoStack = 0;
-    // const shapeIndexMap = {
-    //     'rectangle': 0,
-    //     'circle': 1,
-    //     'triangle': 2,
-    //     'star': 3
-    // };
-
-    // function createShapes(img) {
-    //     const imgWidth = img.width;
-    //     const imgHeight = img.height;
-    //     const starScale = Math.min(imgWidth, imgHeight) / 2; // Adjust the star size based on the image
-
-    //     // Proper 5-point star shape
-    //     const starPoints = [
-    //         { x: 0, y: -starScale }, // Top point
-    //         { x: starScale * 0.23, y: -starScale * 0.31 }, // Top-right
-    //         { x: starScale, y: -starScale * 0.31 }, // Right
-    //         { x: starScale * 0.38, y: starScale * 0.12 }, // Bottom-right
-    //         { x: starScale * 0.58, y: starScale }, // Bottom
-    //         { x: 0, y: starScale * 0.5 }, // Center-bottom
-    //         { x: -starScale * 0.58, y: starScale }, // Bottom-left
-    //         { x: -starScale * 0.38, y: starScale * 0.12 }, // Top-left
-    //         { x: -starScale, y: -starScale * 0.31 }, // Left
-    //         { x: -starScale * 0.23, y: -starScale * 0.31 } // Top-left
-    //     ];
-
-    //     return [
-    //         new fabric.Rect({ width: imgWidth, height: imgHeight, originX: 'center', originY: 'center', angle: 0 }),
-    //         new fabric.Circle({ radius: Math.min(imgWidth, imgHeight) / 2, originX: 'center', originY: 'center', angle: 0 }),
-    //         new fabric.Triangle({ width: imgWidth, height: imgHeight, originX: 'center', originY: 'center', angle: 0 }),
-    //         new fabric.Polygon(starPoints, { originX: 'center', originY: 'center', angle: 0 })
-    //     ];
-    // }
-    // function setControlVisibilityForAll() {  
-    //     canvas.getObjects().forEach((obj) => {
-    //         console.log(obj);
-    //         obj.setControlsVisibility({
-    //             mt: false, 
-    //             mb: false, 
-    //             bl: true,  
-    //             br: true,  
-    //             tl: true, 
-    //             tr: true, 
-    //             ml: true,  
-    //             mr: true   
-    //         });
-            
-    //         obj.set('transparentCorners', false);
-    //         obj.set('borderColor', "#2DA9FC");
-    //         obj.set('cornerSize', 10);
-    //         obj.set('cornerColor', "#fff");
-    //         obj.set('cornerStyle', "circle");
-    //         // Set text alignment if the object is a text-based object
-    //         if (obj.type === 'textbox' || obj.type === 'text') {
-    //             obj.set('textAlign', 'center');  // Set text alignment to center
-    //         }
-    //         // if (obj.type === 'image') {
-    //         //     createShapes(obj);  // Set text alignment to center
-    //         // }
-
-    //         if (obj.type === 'image') {
-    //             if (!obj.shapeApplied) {  // Check if the shape has already been applied
-    //                 createShapes(obj);  // Reapply the shape
-    //                 obj.shapeApplied = true;  // Flag to avoid reapplying the shape unnecessarily
-    //             }
-    //         }
-    //         obj.on('rotating', function () {
-    //             // Get the bounding rectangle of the textboxbox
-    //             var boundingRect = obj.getBoundingRect();
-    //             var centerX = boundingRect.left + boundingRect.width / 2;
-    //             var centerY = boundingRect.top + boundingRect.height / 2;
-    //             var rotationAngle = obj.angle;
-    //             // console.log('Rotated Position:', { centerX: centerX, centerY: centerY, rotation: rotationAngle });
-    //         });
-
-            
-    //     });    
-    //     canvas.renderAll();
-    // }
-
     const shapeIndexMap = {
         'rectangle': 0,
         'circle': 1,
         'triangle': 2,
         'star': 3
     };
-    
+
     function createShapes(img) {
         const imgWidth = img.width;
         const imgHeight = img.height;
         const starScale = Math.min(imgWidth, imgHeight) / 2; // Adjust the star size based on the image
-    
+
         // Proper 5-point star shape
         const starPoints = [
             { x: 0, y: -starScale }, // Top point
@@ -2141,7 +2061,7 @@ function bindData() {
             { x: -starScale, y: -starScale * 0.31 }, // Left
             { x: -starScale * 0.23, y: -starScale * 0.31 } // Top-left
         ];
-    
+
         return [
             new fabric.Rect({ width: imgWidth, height: imgHeight, originX: 'center', originY: 'center', angle: 0 }),
             new fabric.Circle({ radius: Math.min(imgWidth, imgHeight) / 2, originX: 'center', originY: 'center', angle: 0 }),
@@ -2149,30 +2069,9 @@ function bindData() {
             new fabric.Polygon(starPoints, { originX: 'center', originY: 'center', angle: 0 })
         ];
     }
-    
-    function applyShapeToImage(obj, shapeType) {
-        const shapes = createShapes(obj);
-        const shape = shapes[shapeIndexMap[shapeType]];
-    
-        // Replace the image with the shape while keeping image properties
-        shape.set({
-            left: obj.left,
-            top: obj.top,
-            scaleX: obj.scaleX,
-            scaleY: obj.scaleY,
-            angle: obj.angle
-        });
-    
-        canvas.remove(obj); // Remove the image
-        canvas.add(shape);  // Add the new shape
-        canvas.setActiveObject(shape);
-        canvas.renderAll();
-    }
-    
     function setControlVisibilityForAll() {  
         canvas.getObjects().forEach((obj) => {
             console.log(obj);
-    
             obj.setControlsVisibility({
                 mt: false, 
                 mb: false, 
@@ -2183,39 +2082,41 @@ function bindData() {
                 ml: true,  
                 mr: true   
             });
-    
+            
             obj.set('transparentCorners', false);
             obj.set('borderColor', "#2DA9FC");
             obj.set('cornerSize', 10);
             obj.set('cornerColor', "#fff");
             obj.set('cornerStyle', "circle");
-    
             // Set text alignment if the object is a text-based object
             if (obj.type === 'textbox' || obj.type === 'text') {
                 obj.set('textAlign', 'center');  // Set text alignment to center
             }
-    
-            // Reapply the shape on click if it's an image
+            // if (obj.type === 'image') {
+            //     createShapes(obj);  // Set text alignment to center
+            // }
+
             if (obj.type === 'image') {
-                obj.on('mousedown', function () {
-                    // You can use any shape type here based on your requirement
-                    applyShapeToImage(obj, 'star');  // Apply the star shape on click
-                });
+                if (!obj.shapeApplied) {  // Check if the shape has already been applied
+                    createShapes(obj);  // Reapply the shape
+                    obj.shapeApplied = true;  // Flag to avoid reapplying the shape unnecessarily
+                }
             }
-    
             obj.on('rotating', function () {
-                // Get the bounding rectangle of the object
+                // Get the bounding rectangle of the textboxbox
                 var boundingRect = obj.getBoundingRect();
                 var centerX = boundingRect.left + boundingRect.width / 2;
                 var centerY = boundingRect.top + boundingRect.height / 2;
                 var rotationAngle = obj.angle;
-                // Use the rotated position data as needed
                 // console.log('Rotated Position:', { centerX: centerX, centerY: centerY, rotation: rotationAngle });
             });
+
+            
         });    
         canvas.renderAll();
     }
-    
+
+  
     function addToUndoStack(canvas) {          
         undoStack.push(canvas.toJSON());          
         if(undoStack.length > 0){
