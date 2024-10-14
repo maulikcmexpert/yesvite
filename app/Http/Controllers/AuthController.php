@@ -622,7 +622,8 @@ class AuthController extends Controller
 
 
         $userData = [
-            'username' => $userDetails->firstname . ' ' . $userDetails->lastname,
+            'username' => $userDetails->firstname,
+            // 'username' => $userDetails->firstname . ' ' . $userDetails->lastname,
             'email' => $userDetails->email,
             'digit1' => $digit1,
             'digit2' => $digit2,
