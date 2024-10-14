@@ -928,7 +928,7 @@ class EventController extends Controller
 
             $gr = EventGiftRegistry::where('id', $registry_item)->first();
             if ($gr != null) {
-                $gr->recipient_name = $recipient_name;
+                $gr->registry_recipient_name = $recipient_name;
                 $gr->registry_link = $registry_link;
                 $gr->save();
             }
