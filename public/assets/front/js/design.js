@@ -1403,6 +1403,7 @@ function bindData() {
     function findTextboxCenter(textbox) {
         var centerX = textbox.left + textbox.width / 2;
         var centerY = textbox.top + textbox.height / 2;
+        var centerPoint = textbox.getCenterPoint();
         //console.log(
           //  `Center of textbox '${textbox.text}' is at (${centerX}, ${centerY})`
        // );
@@ -2086,7 +2087,7 @@ function bindData() {
                 console.log(obj);
                         let currentShapeIndex = 0;
                         obj.crossOrigin = "anonymous";
-                        
+
                         let defaultShape = obj.clipPath.type; 
                         if (defaultShape === 'polygon') {
                             defaultShape = 'star'; 
@@ -2673,16 +2674,15 @@ function getTextDataFromCanvas() {
     objects.forEach(function(obj) {
         if (obj.type === "textbox") {
             console.log(obj.underline);
-            var centerX = obj.left + obj.width / 2;
-            var centerY = obj.top + obj.height / 2;
+            var centerPoint = obj.getCenterPoint();     
             textData.push({
                 text: obj.text,
                 left: obj.left,
                 top: obj.top,
                 fontSize: parseInt(obj.fontSize),
                 fill: obj.fill,
-                centerX: centerX, // Include centerX in the data
-                centerY: centerY, // Include centerY in the data
+                centerX: centerPoint.x, // Use the center point from getCenterPoint()
+                centerY: centerPoint.y,
                 dx: obj.left, // Calculate dx
                 dy: obj.top, // Calculate dy
                 backgroundColor: obj.backgroundColor,
