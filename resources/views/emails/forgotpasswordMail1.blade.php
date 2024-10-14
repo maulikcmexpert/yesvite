@@ -78,12 +78,12 @@
                         </tr>
                         <tr>
                             <td style="color: #524d4d; text-align: left; font-family: 'Poppins-Regular'; font-size: 15px; line-height: 28px; padding-bottom: 5px;">
-                                Hello {{$userData[0]['username']}},
+                                Hi {{$userData[0]['username']}},
                             </td>
                         </tr>
                         <tr>
                             <td style="color: #524d4d; text-align:left; font-family: 'Poppins-Regular'; font-size: 15px; line-height: 19px;">
-                                Please enter the following TOKEN on the Yeswite App to verify that it is you who requested the password reset:
+                                We received a request to reset your password. Here's your verification code: 
                             </td>
                         </tr>
                         <tr>
@@ -99,12 +99,21 @@
                         </tr>
                         <tr>
                             <td style="color: #524d4d; text-align:left; font-family: 'Poppins-Regular'; font-size: 15px; line-height: 19px; padding-bottom: 15px;">
-                                Please note that the token is only valid for 5 minutes. If it expires please request another by requesting another password reset.
+                                Please enter this code on the website to finish resetting your password. The code will expire in 15 minutes, so be sure to use it soon!
+                            </td>
+                        </tr>
+                            <td style="color: #524d4d; text-align:left; font-family: 'Poppins-Regular'; font-size: 15px; line-height: 19px; padding-bottom: 15px;">
+                                If it expires you can always request a new one on the same forgot password page.
+                            </td>
+                        </tr>
+                        </tr>
+                            <td style="color: #524d4d; text-align:left; font-family: 'Poppins-Regular'; font-size: 15px; line-height: 19px; padding-bottom: 15px;">
+                                If you didn't request a password reset, you can safely ignore this email.
                             </td>
                         </tr>
                         <tr>
-                            <td style="color: #524d4d; font-family: 'Poppins-Regular' ; font-size: 14px; line-height: 20px;">Thank you,<br />
-                                The Yesvite Team</td>
+                            <td style="color: #524d4d; font-family: 'Poppins-Regular' ; font-size: 14px; line-height: 20px;">Thanks,<br />
+                                Yesvite Support Team</td>
                         </tr>
                     </tbody>
                 </table>
