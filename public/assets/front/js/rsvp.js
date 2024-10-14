@@ -8,11 +8,13 @@ $(document).ready(function() {
         if (adultsCount === 0 && kidsCount === 0) {
             e.preventDefault();
             toastr.error("Please add at least one adult or kid."); 
+            return;
         }
 
         if (!rsvpStatus) {
             e.preventDefault(); 
             toastr.error("Please select RSVP"); 
+            return;
         }
     });
 });
