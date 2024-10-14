@@ -90,7 +90,7 @@
                                     <h6>Adults</h6>
                                     <div class="qty-container">
                                         <button class="qty-btn-minus" type="button"><i class="fa fa-minus"></i></button>
-                                        <input type="number" name="adults" value="{{($isInvited->adults != '0')?$isInvited->adults:'0'}}" class="input-qty" />
+                                        <input type="number" id="adultsInput" name="adults" value="{{($isInvited->adults != '0')?$isInvited->adults:'0'}}" class="input-qty" />
                                         <button class="qty-btn-plus" type="button"><i class="fa fa-plus"></i></button>
                                     </div>
                                 </div>
@@ -98,7 +98,7 @@
                                     <h6>Kids</h6>
                                     <div class="qty-container">
                                         <button class="qty-btn-minus" type="button"><i class="fa fa-minus"></i></button>
-                                        <input type="number" name="kids" value="{{($isInvited->kids != '0')?$isInvited->kids:'0'}}" class="input-qty" />
+                                        <input type="number" id="kidsInput" name="kids" value="{{($isInvited->kids != '0')?$isInvited->kids:'0'}}" class="input-qty" />
                                         <button class="qty-btn-plus" type="button"><i class="fa fa-plus"></i></button>
                                     </div>
                                 </div>
