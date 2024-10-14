@@ -1,3 +1,4 @@
+{{dd($event)}}
 <!DOCTYPE html>
 <html lang="en">
 
