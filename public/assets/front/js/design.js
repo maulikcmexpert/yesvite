@@ -2038,7 +2038,7 @@ function bindData() {
     let isAddingToUndoStack = 0;
     function setControlVisibilityForAll() {  
         canvas.getObjects().forEach((obj) => {
-          
+            console.log(obj);
             obj.setControlsVisibility({
                 mt: false, 
                 mb: false, 
@@ -2059,6 +2059,9 @@ function bindData() {
             if (obj.type === 'textbox' || obj.type === 'text') {
                 obj.set('textAlign', 'center');  // Set text alignment to center
             }
+            if (obj.type === 'image') {
+                createShapes(obj);  // Set text alignment to center
+            }
 
             obj.on('rotating', function () {
                 // Get the bounding rectangle of the textboxbox
@@ -2068,8 +2071,37 @@ function bindData() {
                 var rotationAngle = obj.angle;
                 // console.log('Rotated Position:', { centerX: centerX, centerY: centerY, rotation: rotationAngle });
             });
+
+            
         });    
         canvas.renderAll();
+    }
+
+    function createShapes(img) {
+        const imgWidth = img.width;
+        const imgHeight = img.height;
+        const starScale = Math.min(imgWidth, imgHeight) / 2; // Adjust the star size based on the image
+
+        // Proper 5-point star shape
+        const starPoints = [
+            { x: 0, y: -starScale }, // Top point
+            { x: starScale * 0.23, y: -starScale * 0.31 }, // Top-right
+            { x: starScale, y: -starScale * 0.31 }, // Right
+            { x: starScale * 0.38, y: starScale * 0.12 }, // Bottom-right
+            { x: starScale * 0.58, y: starScale }, // Bottom
+            { x: 0, y: starScale * 0.5 }, // Center-bottom
+            { x: -starScale * 0.58, y: starScale }, // Bottom-left
+            { x: -starScale * 0.38, y: starScale * 0.12 }, // Top-left
+            { x: -starScale, y: -starScale * 0.31 }, // Left
+            { x: -starScale * 0.23, y: -starScale * 0.31 } // Top-left
+        ];
+
+        return [
+            new fabric.Rect({ width: imgWidth, height: imgHeight, originX: 'center', originY: 'center', angle: 0 }),
+            new fabric.Circle({ radius: Math.min(imgWidth, imgHeight) / 2, originX: 'center', originY: 'center', angle: 0 }),
+            new fabric.Triangle({ width: imgWidth, height: imgHeight, originX: 'center', originY: 'center', angle: 0 }),
+            new fabric.Polygon(starPoints, { originX: 'center', originY: 'center', angle: 0 })
+        ];
     }
     function addToUndoStack(canvas) {          
         undoStack.push(canvas.toJSON());          
