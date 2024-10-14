@@ -987,8 +987,9 @@ $(".removeShapImage").click(function(){
             // console.log(objects);
             objects.forEach(function(obj) {
                 if (obj.type === 'textbox') {
-                    var centerX = obj.left + (obj.width / 2);
-                    var centerY = obj.top + (obj.height / 2);
+                    var centerPoint = obj.getCenterPoint(); 
+                    var centerX =  centerPoint.x;
+                    var centerY = centerPoint.y;
 
                     // var controlCoords = obj.oCoords; 
                     // var mtrControl = controlCoords.mtr;
