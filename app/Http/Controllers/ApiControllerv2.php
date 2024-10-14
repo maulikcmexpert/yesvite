@@ -8352,7 +8352,10 @@ class ApiControllerv2 extends Controller
                 $commentInfo['username'] = $commentVal->user->firstname . ' ' . $commentVal->user->lastname;
 
                 $commentInfo['profile'] = (!empty($commentVal->user->profile)) ? asset('storage/profile/' . $commentVal->user->profile) : "";
-                $commentInfo['location'] = ($commentVal->user->city != NULL) ? $commentVal->user->city : "";
+                // $postsNormalDetail['location'] = $value->user->city != "" ? trim($value->user->city) .($value->user->state != "" ? ', ' . $value->user->state : ''): "";
+                // $commentInfo['location'] = ($commentVal->user->city != NULL) ? $commentVal->user->city : "";
+                $commentInfo['location'] = $commentVal->user->city != "" ? trim($commentVal->user->city) . ($commentVal->user->state != "" ? ', ' . $commentVal->user->state : '') : "";
+
                 $commentInfo['comment_total_likes'] = $commentVal->post_comment_reaction_count;
 
                 $commentInfo['is_like'] = checkUserIsLike($commentVal->id, $user->id);
@@ -8380,7 +8383,9 @@ class ApiControllerv2 extends Controller
 
                     $replyCommentInfo['profile'] = (!empty($reply->user->profile)) ? asset('storage/profile/' . $reply->user->profile) : "";
 
-                    $replyCommentInfo['location'] = ($reply->user->city != NULL) ? $reply->user->city : "";
+                    // $replyCommentInfo['location'] = ($reply->user->city != NULL) ? $reply->user->city : "";
+                    $replyCommentInfo['location'] =  $reply->user->city != "" ? trim($reply->user->city) . ($reply->user->state != "" ? ', ' . $reply->user->state : '') : "";
+
                     $replyCommentInfo['comment_total_likes'] = $reply->post_comment_reaction_count;
 
                     $replyCommentInfo['is_like'] = checkUserIsLike($reply->id, $user->id);
