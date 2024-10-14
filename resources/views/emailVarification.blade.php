@@ -106,7 +106,7 @@
                 @endif
                 <p>{{$message}}</p>
 
-                <a class="send-btn" href="{{route('auth.login')}}">Sign In</a>
+                <a href="{{route('auth.login')}}"><button type="button" class="send-btn">Login</button></a>
 
             </div>
         </div>
