@@ -3680,8 +3680,7 @@ class ApiControllerv2 extends Controller
 
             if ($eventData['event_setting']['events_schedule'] == '1') {
                 if (isset($eventData['events_schedule_list'])) {
-
-                $eventsScheduleList = $eventData['events_schedule_list'];
+                    $eventsScheduleList = $eventData['events_schedule_list'];
                     if (isset($eventsScheduleList) && !empty($eventsScheduleList)) {
                         $addStartschedule =  new EventSchedule();
                         $addStartschedule->event_id = $eventId;
@@ -3692,14 +3691,12 @@ class ApiControllerv2 extends Controller
 
                         foreach ($eventsScheduleList['data'] as $value) {
                             EventSchedule::create([
-
                                 'event_id' => $eventId,
                                 'activity_title' => $value['activity_title'],
                                 'start_time' => $value['start_time'],
                                 'end_time' => $value['end_time'],
                                 'event_date' => $value['event_date'],
                                 'type' => '2',
-
                             ]);
                         }
 
@@ -3713,12 +3710,8 @@ class ApiControllerv2 extends Controller
                 }
             }
 
-
             if (isset($eventData['podluck_category_list']) && is_array($eventData['podluck_category_list']) && $eventData['event_setting']['podluck'] == '1') {
-
-
                 $podluckCategoryList = $eventData['podluck_category_list'];
-
                 if (!empty($podluckCategoryList)) {
                     foreach ($podluckCategoryList as $value) {
                         $eventPodluck = EventPotluckCategory::create([
