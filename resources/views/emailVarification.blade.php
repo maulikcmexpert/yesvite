@@ -106,6 +106,8 @@
                 @endif
                 <p>{{$message}}</p>
 
+                <a class="signIn-btn" href="{{route('auth.login')}}">Sign In</a>
+
             </div>
         </div>
     </div>
