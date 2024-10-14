@@ -2250,26 +2250,29 @@ function bindData() {
                 }
             });
             //console.log(imageSources);
-            $('#loader').css('display', 'block');
-            $.ajax({
-                url: base_url + "event/save_slider_img",
-                method: "POST",
-                data: {
-                    imageSources: imageSources,
-                    _token: $('meta[name="csrf-token"]').attr("content"),
-                },
-                success: function(response) {
-                    var savedImages = response.images;
-                    eventData.slider_images = savedImages;
-                    //console.log(eventData);
-                    $('#loader').css('display', 'none');
-                    toastr.success('Slider Image saved Successfully');
-                },
-                error: function(xhr, status, error) {},
-            });
+            if(imageSources.length > 0){
+                $('#loader').css('display', 'block');
+                $.ajax({
+                    url: base_url + "event/save_slider_img",
+                    method: "POST",
+                    data: {
+                        imageSources: imageSources,
+                        _token: $('meta[name="csrf-token"]').attr("content"),
+                    },
+                    success: function(response) {
+                        var savedImages = response.images;
+                        eventData.slider_images = savedImages;
+                        //console.log(eventData);
+                        $('#loader').css('display', 'none');
+                        toastr.success('Slider Image saved Successfully');
+                    },
+                    error: function(xhr, status, error) {},
+                });
+            }
         });
 
-        $(document).on("click", ".delete_silder", function() {
+        $(document).on("click", ".delete_silder", function(e) {
+            e.preventDefault();
             var delete_id = $(this).parent().find('.slider_img').data("delete");
             var src = $(this).parent().find('.slider_img').attr("src");
             if (src != "") {
@@ -2303,8 +2306,8 @@ function bindData() {
                 } else {
                     $(this).parent().find('.slider_img').attr('src', '');
                     $(".photo-slider-" + delete_id).hide();
-                    toastr.success('Slider Image Deleted Successfully')
                     $('#loader').css('display', 'none');
+                    toastr.success('Slider Image Deleted Successfully')
 
                 }
 
