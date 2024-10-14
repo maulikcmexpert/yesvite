@@ -550,7 +550,7 @@
                         stroke-linecap="round" stroke-linejoin="round" />
                 </svg>
             </a>
-            <h5>Create new thank you card </h5>
+            <h5 class="thankyoucard_heading">Create new thank you card </h5>
         </div>
         <button class="close-btn" onclick="toggleSidebar('')">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
