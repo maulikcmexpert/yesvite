@@ -85,7 +85,7 @@
                         </div>
                         <div class="count-wrp">
                             <h5>Guest Count:</h5>
-                            <div class="row">
+                            <div class="row rsvp_count_member">
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                                     <h6>Adults</h6>
                                     <div class="qty-container">
@@ -94,6 +94,7 @@
                                         <button class="qty-btn-plus" type="button"><i class="fa fa-plus"></i></button>
                                     </div>
                                 </div>
+                                @if($is_adultOnly!="1")
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                                     <h6>Kids</h6>
                                     <div class="qty-container">
@@ -102,6 +103,7 @@
                                         <button class="qty-btn-plus" type="button"><i class="fa fa-plus"></i></button>
                                     </div>
                                 </div>
+                                @endif
                             </div>
                         </div>
                         <div class="massage-box">
