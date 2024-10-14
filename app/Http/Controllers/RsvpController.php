@@ -77,6 +77,8 @@ class RsvpController extends Controller
                         }
                     }
                 }
+
+                $is_podluck = (isset($event->event_settings->podluck) ? $event->event_settings->podluck : "");
                 return view('layout', compact(
                     'title',
                     'page',
@@ -84,7 +86,8 @@ class RsvpController extends Controller
                     'giftRegistryDetails',
                     'isInvited',
                     'event_id',
-                    'user_id'
+                    'user_id',
+                    'is_podluck'
                 ));
             }
             return redirect('home')->with('error', 'You are not connect with this event');
