@@ -11,7 +11,7 @@ $(document).ready(function() {
             return;
         }
 
-        if (adultsCount == 0 && kidsCount == 0) {
+        if (rsvpStatus === '1'&& adultsCount == 0 && kidsCount == 0) {
             e.preventDefault();
             toastr.error("Please add at least one adult or kid."); 
             return;
