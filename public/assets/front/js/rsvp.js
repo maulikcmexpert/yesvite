@@ -26,6 +26,10 @@ $(document).ready(function() {
         $('.rsvp_count_member input').prop('disabled', isNoSelected);
         $('.qty-btn-minus, .qty-btn-plus').prop('disabled', isNoSelected);
         $('.rsvp_count_member').css('opacity', isNoSelected ? '0.5' : '1');
+        if (isNoSelected) {
+            $('#adultsInput').val(0);
+            $('#kidsInput').val(0);
+        }
     }
 
     $('input[name="rsvp_status"]').change(function() {
