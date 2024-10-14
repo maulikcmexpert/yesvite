@@ -924,11 +924,8 @@ class EventController extends Controller
 
         $giftRegistryData = session()->get('gift_registry_data', []);
 
-        if (array_key_exists($registry_item, $giftRegistryData) != null || array_key_exists($registry_item, $giftRegistryData) != "") {
-            $giftRegistryData[$registry_item]['recipient_name'] = $recipient_name;
-            $giftRegistryData[$registry_item]['registry_link'] = $registry_link;
+        if ($registry_item != null) {
 
-            session(['gift_registry_data' => $giftRegistryData]);
             $gr = EventGiftRegistry::where('id', $registry_item)->first();
             if ($gr != null) {
                 $gr->recipient_name = $recipient_name;
@@ -936,11 +933,8 @@ class EventController extends Controller
                 $gr->save();
             }
             return response()->json(['message' => "registry updated", 'status' => '1']);
-        } else {
-            $giftRegistryData[$registry_item] = [
-                'recipient_name' => $recipient_name,
-                'registry_link' => $registry_link,
-            ];
+        
+        }else{
             $gr = new EventGiftRegistry();
             $gr->user_id = $user_id;
             $gr->registry_recipient_name = $recipient_name;
@@ -952,6 +946,20 @@ class EventController extends Controller
             // $data = ['recipient_name' => $recipient_name, 'registry_link' => $registry_link, 'registry_item' => $registry_item];
             return response()->json(['view' => view('front.event.gift_registry.add_gift_registry', compact('gift_registry'))->render()]);
         }
+
+        // if (array_key_exists($registry_item, $giftRegistryData) != null || array_key_exists($registry_item, $giftRegistryData) != "") {
+        //     $giftRegistryData[$registry_item]['recipient_name'] = $recipient_name;
+        //     $giftRegistryData[$registry_item]['registry_link'] = $registry_link;
+
+        //     session(['gift_registry_data' => $giftRegistryData]);
+           
+        // } else {
+        //     $giftRegistryData[$registry_item] = [
+        //         'recipient_name' => $recipient_name,
+        //         'registry_link' => $registry_link,
+        //     ];
+           
+        // }
     }
 
     public function removeGiftRegistry(Request $request)
