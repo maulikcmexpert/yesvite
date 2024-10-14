@@ -2233,8 +2233,7 @@
 </div>
 </div>
 <div class="new-event-btn">
-    <a href="#" class="cmn-btn add_new_group_member">Add new
-        Group</a>
+    <a href="#" class="cmn-btn add_new_group_member">Add group member</a>
 </div>
 </div>
 
