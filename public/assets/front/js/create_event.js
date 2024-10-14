@@ -3902,6 +3902,7 @@ $(document).on("click", ".edit_gift_registry", function () {
     var recipientName = registryContent.find("#added_recipient_name").text();
     var registryLink = registryContent.find("#added_registry_link").text();
 
+    $('.recipient-name-con').text(recipientName.length+'/30');
     $("#recipient_name").val(recipientName);
     $("#registry_link").val(registryLink);
     $("#registry_item_id").val(id);
