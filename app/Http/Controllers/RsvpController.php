@@ -106,8 +106,8 @@ class RsvpController extends Controller
     public function store(Request $request)
     {
 
-        $userId = decrypt($request->user_id);
-        $eventId = decrypt($request->event_id);
+        $userId =   $request->user_id;
+        $eventId = $request->event_id;
         //    try {
 
         $checkEvent = Event::where(['id' => $eventId])->first();
