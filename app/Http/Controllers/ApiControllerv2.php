@@ -3682,34 +3682,37 @@ class ApiControllerv2 extends Controller
 
                 $eventsScheduleList = $eventData['events_schedule_list'];
 
-                if (isset($eventsScheduleList) && !empty($eventsScheduleList)) {
+                if (isset($eventData['events_schedule_list'])) {
 
-                    $addStartschedule =  new EventSchedule();
-                    $addStartschedule->event_id = $eventId;
-                    $addStartschedule->start_time = $eventsScheduleList['start_time'];
-                    $addStartschedule->event_date = $eventsScheduleList['event_start_date'];
-                    $addStartschedule->type = '1';
-                    $addStartschedule->save();
+                    if (isset($eventsScheduleList) && !empty($eventsScheduleList)) {
 
-                    foreach ($eventsScheduleList['data'] as $value) {
-                        EventSchedule::create([
+                        $addStartschedule =  new EventSchedule();
+                        $addStartschedule->event_id = $eventId;
+                        $addStartschedule->start_time = $eventsScheduleList['start_time'];
+                        $addStartschedule->event_date = $eventsScheduleList['event_start_date'];
+                        $addStartschedule->type = '1';
+                        $addStartschedule->save();
 
-                            'event_id' => $eventId,
-                            'activity_title' => $value['activity_title'],
-                            'start_time' => $value['start_time'],
-                            'end_time' => $value['end_time'],
-                            'event_date' => $value['event_date'],
-                            'type' => '2',
+                        foreach ($eventsScheduleList['data'] as $value) {
+                            EventSchedule::create([
 
-                        ]);
+                                'event_id' => $eventId,
+                                'activity_title' => $value['activity_title'],
+                                'start_time' => $value['start_time'],
+                                'end_time' => $value['end_time'],
+                                'event_date' => $value['event_date'],
+                                'type' => '2',
+
+                            ]);
+                        }
+
+                        $addEndschedule =  new EventSchedule();
+                        $addEndschedule->event_id = $eventId;
+                        $addEndschedule->end_time = $eventsScheduleList['end_time'];
+                        $addEndschedule->event_date = $eventsScheduleList['event_end_date'];
+                        $addEndschedule->type = '3';
+                        $addEndschedule->save();
                     }
-
-                    $addEndschedule =  new EventSchedule();
-                    $addEndschedule->event_id = $eventId;
-                    $addEndschedule->end_time = $eventsScheduleList['end_time'];
-                    $addEndschedule->event_date = $eventsScheduleList['event_end_date'];
-                    $addEndschedule->type = '3';
-                    $addEndschedule->save();
                 }
             }
 
