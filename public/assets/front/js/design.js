@@ -2239,7 +2239,7 @@ function bindData() {
             var i = 0; 
             $(".slider_img").each(function() {
                 var src = $(this).attr("src");
-                console.log(src);
+                // console.log(src);
                 if (src !== "") {
                    i++;
                 }
