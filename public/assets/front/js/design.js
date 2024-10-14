@@ -2306,8 +2306,8 @@ function bindData() {
                 } else {
                     $(this).parent().find('.slider_img').attr('src', '');
                     $(".photo-slider-" + delete_id).hide();
-                    toastr.success('Slider Image Deleted Successfully')
                     $('#loader').css('display', 'none');
+                    toastr.success('Slider Image Deleted Successfully')
 
                 }
 
