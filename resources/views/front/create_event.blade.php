@@ -570,19 +570,17 @@
                 {{-- <label for="email" class="floating-label">Template Name <span>*</span></label> --}}
                 <label for="code" class="form-label input-field floating-label about-label">Template Name </label>
 
-                <label for="thankyou_templatename" id="template_name_error" class="common_error"></label>
-                <input type="hidden" id="edit_template_id">
             </div>
+            <label for="thankyou_templatename" id="template_name_error" class="common_error"></label>
+            <input type="hidden" id="edit_template_id">
             <div class="input-form">
                 <input class="form-control" oninput="clearError(this)" type="number" id="thankyou_when_to_send"
                     name="text2">
                 {{-- <label for="email" class="floating-label">When to send (Hours after event) <span>*</span></label> --}}
                 <label for="code" class="form-label input-field floating-label about-label">When to send (Hours
                     after event) </label>
-
-                <label for="thankyou_when_to_send" id="when_to_send_error" class="common_error"></label>
-
             </div>
+                <label for="thankyou_when_to_send" id="when_to_send_error" class="common_error"></label>
             <div class="input-form message-textarea mb-0">
                 <textarea name="" oninput="clearError(this)" class="inputText" id="message_for_thankyou" rows="5"
                     cols="50"></textarea>
