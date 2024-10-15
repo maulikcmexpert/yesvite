@@ -128,8 +128,12 @@ $(document).on("click", ".add_new_group_member", function () {
                         </div>
                     `;
 
+                    swiper[0].appendSlide(newItem);
+                    swiper[0].update(); // Update Swiper after adding the new slide
                     swiper[1].appendSlide(newItem);
                     swiper[1].update(); // Update Swiper after adding the new slide
+                    swiper[2].appendSlide(newItem);
+                    swiper[2].update(); // Update Swiper after adding the new slide
 
                     toggleSidebar("sidebar_groups");
                 }
