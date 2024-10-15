@@ -109,7 +109,7 @@ function sendNotification($notificationType, $postData)
             'event_name' => $event->event_name,
             'event_image' => ($event->event_image->isNotEmpty()) ? $event->event_image[0]->image : "no_image.png",
             'date' =>   date('l - M jS, Y', strtotime($event->start_date)),
-            'time' => $event_time,
+            'time' => $event->rsvp_start_time,
         ];
 
         $invitation_email = new OwnInvitationEmail($eventData);
