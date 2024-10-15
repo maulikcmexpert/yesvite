@@ -78,13 +78,13 @@
         <img src="{{asset('assets/front/loader.gif')}}" alt="loader" style="width:146px;height:146px;z-index:1000">
     </div>
     @include($page)
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
    
     <x-front.footer :js="$js ?? []" />
     <script src="{{ asset('assets/event/js/script.js') }}"></script>
     <script src="{{ asset('assets/event/js/common.js') }}"></script>
     <script src="{{ asset('assets/event/js/wow.min.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     
 </body>
 
