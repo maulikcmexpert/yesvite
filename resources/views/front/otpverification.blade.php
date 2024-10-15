@@ -69,8 +69,8 @@
 
         <p>Didn't receive the code? First, check your SPAM folder</p>
 
-        <p>Click here to resend the code in case you didn't get it." </p>
-        <button type="button" id="resend_otp">Resend</button>
+        <p>Click here to<a href="#" id="resend_otp">Resend link</a>resend the code in case you didn't get it." </p>
+        <!-- <button type="button" id="resend_otp">Resend</button> -->
 
 
     </div>
