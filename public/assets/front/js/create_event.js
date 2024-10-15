@@ -1222,10 +1222,10 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
                 // if(currentInviteCount >= 15){
                 //     $('.user_choice').prop('disabled',true);
                 // }
-                guest_counter(0,15);
                 $(".inivted_user_list").append(response.view);
                 $(".user-list-responsive").empty();
                 $(".user-list-responsive").html(response.responsive_view);
+                guest_counter(0,15);
                 // var length = responsive_invite_user();
                 // if(length < 4){
                 //     $('.all_user_list').remove();
@@ -1235,13 +1235,13 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
                 // }else{
                 //     // add_user_counter();
                 // }
-                if(remainingCount < 0){
-                    $(".invite-left_d").text("Invites | 0 Left");
-                }else{
-                    $(".invite-left_d").text("Invites | " + remainingCount + " Left");
+                // if(remainingCount < 0){
+                //     $(".invite-left_d").text("Invites | 0 Left");
+                // }else{
+                //     $(".invite-left_d").text("Invites | " + remainingCount + " Left");
 
-                }
-                $("#event_guest_left_count").val(remainingCount);
+                // }
+                // $("#event_guest_left_count").val(remainingCount);
             },
             error: function (xhr, status, error) {},
         });
