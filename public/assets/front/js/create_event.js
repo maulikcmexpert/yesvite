@@ -58,11 +58,6 @@ var swiper = new Swiper(".mySwiper", {
         prevEl: ".swiper-button-prev",
     }
 });
-$(document).ready(function () {
-    // Swiper initialization
-    
-
-});
 
 // Delete Group functionality
 $(document).on("click", "#delete_group", function () {
@@ -133,7 +128,7 @@ $(document).on("click", ".add_new_group_member", function () {
                         </div>
                     `;
 
-                    swiper.appendSlide(newItem);
+                    swiper[1].appendSlide(newItem);
                     swiper.update(); // Update Swiper after adding the new slide
 
                     toggleSidebar("sidebar_groups");
