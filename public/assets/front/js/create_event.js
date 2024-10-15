@@ -151,8 +151,7 @@ $(document).ready(function () {
                         `;
                         
                         if (typeof swiper !== 'undefined') {
-                            $('.swiper-wrapper').append(newItem);  // Add the new slide to the Swiper
-                            swiper.update(); // Refresh the Swiper
+                            swiper.appendSlide(newItem)  // Add the new slide to the Swiper
                         } else {
                             console.error('Swiper instance is undefined.');
                         }
