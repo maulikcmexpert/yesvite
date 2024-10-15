@@ -68,9 +68,10 @@
         </div>
 
         <p>Didn't receive the code? First, check your SPAM folder</p>
-        <a id="resend_otp">
-            <p>Click here to resend the code in case you didn't get it." </p>
-        </a>
+
+        <p>Click here to resend the code in case you didn't get it." </p>
+        <button type="button" id="resend_otp">Resend</button>
+
 
     </div>
 </section>
