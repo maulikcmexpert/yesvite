@@ -124,3 +124,21 @@ document.getElementById("otpform").addEventListener("submit", function (event) {
         }
     }
 });
+
+$(document).on('click', '#resend_otp', function() {
+    var email = $('#useremail').val();
+    $.ajax({
+        url: base_url + "auth.otpverification",
+        type: "POST",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        data: {
+            email: email
+        },
+        success: function(response) {},
+        error: function(xhr, status, error) {
+            console.log("AJAX error: " + error);
+        },
+    });
+})
