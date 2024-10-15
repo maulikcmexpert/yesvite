@@ -183,14 +183,14 @@ $(document).on("click", ".add_new_group_member", function () {
 
                     if (typeof swiper !== 'undefined') {
                         console.log(swiper);
-                        swiper.appendSlide(newItem);  // Add the new slide to the Swiper
+                        $('.swiper-wrapper').append(newItem);  // Add the new slide to the Swiper
                         swiper.update();
                     } else {
                     console.error('Swiper instance is undefined.');
                     }
                                     // $('.owl-carousel').trigger('add.owl.carousel', [$(newItem)]).trigger('refresh.owl.carousel');
 
-                // $('.swiper-wrapper').append(newItem);
+                // 
                 // $('.swiper-wrapper').trigger('refresh.owl.carousel');
                 toggleSidebar("sidebar_groups");
 
