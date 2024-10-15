@@ -49,6 +49,40 @@ $(document).ready(function () {
         
 });
 
+$(document).ready(function () {
+    var swiper = new Swiper(".mySwiper", {
+      slidesPerView: 3.5,
+      spaceBetween: 20,
+      loop: true,
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+      breakpoints: {
+        320: {
+            slidesPerView: 1.5,
+            spaceBetween: 20,
+        },
+        576: {
+            slidesPerView: 2.5,
+            spaceBetween: 20,
+        },
+        768: {
+            slidesPerView: 2.5,
+            spaceBetween: 20,
+          },
+        1200: {
+          slidesPerView: 2.5,
+          spaceBetween: 20,
+        },
+        1400: {
+          slidesPerView: 3.5,
+          spaceBetween: 20,
+        },
+      },
+    });
+});
+
 
 
 
@@ -5339,39 +5373,7 @@ function getStartEndTimeZone(){
 }
 
 
-$(document).ready(function () {
-    var swiper = new Swiper(".mySwiper", {
-      slidesPerView: 3.5,
-      spaceBetween: 20,
-      loop: true,
-      navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-      },
-      breakpoints: {
-        320: {
-            slidesPerView: 1.5,
-            spaceBetween: 20,
-        },
-        576: {
-            slidesPerView: 2.5,
-            spaceBetween: 20,
-        },
-        768: {
-            slidesPerView: 2.5,
-            spaceBetween: 20,
-          },
-        1200: {
-          slidesPerView: 2.5,
-          spaceBetween: 20,
-        },
-        1400: {
-          slidesPerView: 3.5,
-          spaceBetween: 20,
-        },
-      },
-    });
-});
+
 
 $(document).on('click','.all_user_list',function(){
     $.ajax({
