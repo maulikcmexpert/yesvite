@@ -78,7 +78,7 @@
         <img src="{{asset('assets/front/loader.gif')}}" alt="loader" style="width:146px;height:146px;z-index:1000">
     </div>
     @include($page)
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+   
 
    
     <x-front.footer :js="$js ?? []" />
