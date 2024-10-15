@@ -4657,20 +4657,33 @@ $(document).on("click", ".add_new_group_member", function () {
                 //         </div>
                 //     </div>
                 // </div>`);
+            //     <div class="item">
+            //     <div class="group-card view_members" data-id="${response.data.group_id}">
+            //         <div>
+            //         <h4>${response.data.groupname}</h4>
+            //         <p>${response.data.member_count} Guests</p>
+            //         </div>
+            //         <span class="ms-auto">
+            //             <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+            //                 <path d="M5.93994 13.7797L10.2866 9.43306C10.7999 8.91973 10.7999 8.07973 10.2866 7.56639L5.93994 3.21973" stroke="#E2E8F0" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
+            //             </svg>
+            //         </span>
+            //     </div>
+            // </div>
                 var newItem = `
-                    <div class="item">
-                        <div class="group-card view_members" data-id="${response.data.group_id}">
-                            <div>
+                    <div class="swiper-slide">
+                    <div class="group-card view_members" data-id="${response.data.group_id}">
+                        <div>
                             <h4>${response.data.groupname}</h4>
                             <p>${response.data.member_count} Guests</p>
-                            </div>
-                            <span class="ms-auto">
-                                <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M5.93994 13.7797L10.2866 9.43306C10.7999 8.91973 10.7999 8.07973 10.2866 7.56639L5.93994 3.21973" stroke="#E2E8F0" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
-                                </svg>
-                            </span>
                         </div>
+                        <span class="ms-auto">
+                            <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5.93994 13.7797L10.2866 9.43306C10.7999 8.91973 10.7999 8.07973 10.2866 7.56639L5.93994 3.21973" stroke="#E2E8F0" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </span>
                     </div>
+                </div>
                     `;
 
                 $('.owl-carousel').trigger('add.owl.carousel', [$(newItem)]).trigger('refresh.owl.carousel');
