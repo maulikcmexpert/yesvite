@@ -80,7 +80,7 @@
                         <input type="hidden" class="category-item-quantity" value="{{$itemdata['quantity']}}">
                         <input type="hidden" class="item-quantity-minus" value="{{($self_bring_qty == 0 )?0:1}}">
                         <button class="qty-btn-minus" type="button"><i class="fa fa-minus"></i></button>
-                        <input type="number" name="qty" value="{{$self_bring_qty}}" class="input-qty" />
+                        <input type="number" name="qty" value="{{$self_bring_qty}}" class="input-qty" readonly/>
                         <button class="qty-btn-plus" type="button"><i class="fa fa-plus"></i></button>
                     </div>
                     <div class="d-flex">

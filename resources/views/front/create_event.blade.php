@@ -26,7 +26,7 @@
     <div class="container-fluid">
         <nav class="navbar navbar-expand-md navbar-dark">
             <div class="event-detail-logo">
-                <a class="navbar-brand" href="home.html">
+                <a class="navbar-brand" href="{{(Auth::guard('web')->check())?route('profile'):route('front.home')}}">
                     <svg width="35" height="36" viewBox="0 0 35 36" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd"
@@ -61,7 +61,7 @@
                 </a>
                 <span>Create New Event</span>
             </div>
-            <a class="navbar-brand mobile-header-logo" href="home.html">
+            <a class="navbar-brand mobile-header-logo" href="#">
                 <svg width="129" height="36" viewBox="0 0 129 36" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" clip-rule="evenodd"
@@ -483,7 +483,7 @@
             <div class="qty-container">
                 {{-- <button class="qty-btn-minus allow_limit_btn_minus" type="button"><i class="fa fa-minus"></i></button> --}}
                 <button class="allow_limit_btn_minus" type="button"><i class="fa fa-minus"></i></button>
-                <input type="number" name="qty" id="allow_limit_count" value="0" class="input-qty" />
+                <input type="number" name="qty" id="allow_limit_count" value="0" class="input-qty" readonly/>
                 <button class="allow_limit_btn_plus" type="button"><i class="fa fa-plus"></i></button>
                 {{-- <button class="qty-btn-plus allow_limit_btn_plus" type="button"><i class="fa fa-plus"></i></button> --}}
             </div>
@@ -1093,7 +1093,7 @@
                 <div class="qty-container">
                     <button class="qty-btn-minus-qty" type="button" onclick="clearError()"><i
                             class="fa fa-minus"></i></button>
-                    <input type="number" name="qty" id="category_quantity" value="1" class="input-qty">
+                    <input type="number" name="qty" id="category_quantity" value="1" class="input-qty" readonly>
                     <button class="qty-btn-plus-qty" type="button" onclick="clearError()"><i
                             class="fa fa-plus"></i></button>
                 </div>
@@ -1149,7 +1149,7 @@
                 <div class="qty-container">
                     <button class="qty-btn-minus-qty" type="button" onclick="clearError()"><i
                             class="fa fa-minus"></i></button>
-                    <input type="number" name="qty" id="category_quantity" value="1" class="input-qty">
+                    <input type="number" name="qty" id="category_quantity" value="1" class="input-qty" readonly>
                     <button class="qty-btn-plus-qty" type="button" onclick="clearError()"><i
                             class="fa fa-plus"></i></button>
                 </div>
