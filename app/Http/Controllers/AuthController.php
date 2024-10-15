@@ -635,6 +635,7 @@ class AuthController extends Controller
 
         Mail::to($request->email)->send(new forgotpasswordMail(array($userData)));
 
+        dd($otp);
         $page = 'front/otpverification';
         $title = "Verify Otp";
         $js = ['forget_password'];
