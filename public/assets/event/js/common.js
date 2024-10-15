@@ -268,7 +268,7 @@ $( window ).on( "load", function() {
 
 $(document).ready(function(){
     $('.toggleButton').on('click', function() {
-        alert();
+        
         const $details = $('.details');
         const $button = $('.toggleButton');
         
