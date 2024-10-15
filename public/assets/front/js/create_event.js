@@ -4954,6 +4954,8 @@ function countGiftRegestry(){
     $("input[name='gift_registry[]']" ).each(function (index) {
         if ($(this).is(':checked')) {
             checkedCount++;
+        }else{
+            $(this).blur();
         }
         i++;
     });
