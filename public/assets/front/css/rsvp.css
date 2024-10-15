@@ -103,6 +103,16 @@
     height: 56px;
 }
 
+.rsvp-form .author-img h5 {
+    width: 56px;
+    height: 56px;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 
 .rsvp-form .author-title h4 {
     font-size: 32px;
