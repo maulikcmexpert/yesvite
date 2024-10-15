@@ -635,13 +635,13 @@ class AuthController extends Controller
 
         Mail::to($request->email)->send(new forgotpasswordMail(array($userData)));
 
-        dd($otp);
+        // dd($otp);
         $page = 'front/otpverification';
         $title = "Verify Otp";
         $js = ['forget_password'];
 
         if ($request->ajax()) {
-            return response()->json(['success' => '1', 'opt' => $otp]);
+            return response()->json(['success' => '1', 'otp' => $otp]);
         }
         return view('layout', compact('page', 'title', 'js', 'otp', 'user_id', 'useremail'));
     }
