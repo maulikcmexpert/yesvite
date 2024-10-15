@@ -18,7 +18,9 @@
 
             </a>
             <h1>Welcome Back to Yesvite!</h1>
-            <p>Otp verification</p>
+            <p>Enter Your Verification Code</p>
+            <p>We've just sent a code to your email (it may take a minute to arrive). Please enter the code here to reset your password.</p>
+
         </div>
         <div class="login-form-wrap">
             <form method="POST" id="otpform" action="{{route('auth.checkOtp')}}" autocomplete="off">
@@ -27,27 +29,27 @@
                 <div class="input-form">
                     <!-- <input type="email" class="form-control inputText" id="email" name="email">
                         <label for="email" class="form-label input-field floating-label">Email Address <span class="required">*</span></label> -->
-                    
-                <div class="otp-varification-wrp">
-                    <input type="text" class="form-control otp__digit" id="otp1" name="number1"  autocomplete="off">
-                    <input type="text" class="form-control otp__digit" id="otp2" name="number2"  autocomplete="off">
-                    <input type="text" class="form-control otp__digit" id="otp3" name="number3"  autocomplete="off">
-                    <input type="text" class="form-control otp__digit" id="otp4" name="number4"  autocomplete="off">
-                </div>
-                <label id="otp-error" class="error" for="email"></label>
 
-                    
-                    <input type="hidden" id="generated_otp" name="generated_otp" value="{{$otp}}"/>
-                    <input type="hidden" name="user_id" value="{{$user_id}}"/>
+                    <div class="otp-varification-wrp">
+                        <input type="text" class="form-control otp__digit" id="otp1" name="number1" autocomplete="off">
+                        <input type="text" class="form-control otp__digit" id="otp2" name="number2" autocomplete="off">
+                        <input type="text" class="form-control otp__digit" id="otp3" name="number3" autocomplete="off">
+                        <input type="text" class="form-control otp__digit" id="otp4" name="number4" autocomplete="off">
+                    </div>
+                    <label id="otp-error" class="error" for="email"></label>
+
+
+                    <input type="hidden" id="generated_otp" name="generated_otp" value="{{$otp}}" />
+                    <input type="hidden" name="user_id" value="{{$user_id}}" />
 
                     {{-- <label for="email" class="floating-label">Enter Otp <span>*</span></label> --}}
                     {{-- <div class="label-error">
                     </div> --}}
                 </div>
 
-             
+
                 <div class="form-check mb-3">
-                
+
                 </div>
                 @if ($errors->any())
                 <div class="alert alert-danger">
@@ -60,8 +62,11 @@
                 @endif
                 <button type="submit" class="btn btn-primary" id="otpverify">Verify Otp</button>
             </form>
-            
+
         </div>
-      
+
+        <p>Didn't receive the code? First, check your SPAM folder</p>
+        <p>Click here [Resend it link] to resend the code in case you didn't get it."</p>
+
     </div>
 </section>

@@ -134,18 +134,23 @@
                             @foreach($giftRegistryDetails as $value)
                             @if (strpos($value['registry_link'], 'amazon.com') !== false)
                             <div class="col-lg-6 col-md-6 col-sm-6 col-6">
-                                <div class="target d-flex gap-3 align-items-center">
-                                    <img src="{{asset('assets/amazon.jpg')}}" alt="">
-                                    <h5>{{$value['registry_recipient_name']}}</h5>
-                                </div>
+                                <a href="$value['registry_link']">
+                                    <div class="target d-flex gap-3 align-items-center">
+                                        <img src="{{asset('assets/amazon.jpg')}}" alt="">
+                                        <h5>{{$value['registry_recipient_name']}}</h5>
+                                    </div>
+                                </a>
                             </div>
                             @endif
                             @if (strpos($value['registry_link'], 'target.com') !== false)
                             <div class="col-lg-6 col-md-6 col-sm-6 col-6">
-                                <div class="target d-flex gap-3 align-items-center">
-                                    <img src="{{asset('assets/target.jpg')}}" alt="">
-                                    <h5>{{$value['registry_recipient_name']}}</h5>
-                                </div>
+                                <a href="$value['registry_link']">
+                                    <div class="target d-flex gap-3 align-items-center">
+                                        <img src="{{asset('assets/target.jpg')}}" alt="">
+                                        <h5>{{$value['registry_recipient_name']}}</h5>
+                                    </div>
+                                </a>
+
                             </div>
                             @endif
                             @endforeach
