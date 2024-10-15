@@ -1412,7 +1412,7 @@ function sendSMS($receiverNumber, $message)
     }
 }
 
-function validateAndFormatPhoneNumber($receiverNumber, $defaultCountryCode = 'US')
+function validateAndFormatPhoneNumber($receiverNumber, $defaultCountryCode = 'IN')
 {
     $phoneUtil = PhoneNumberUtil::getInstance();
 
