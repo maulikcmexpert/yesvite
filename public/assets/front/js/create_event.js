@@ -183,6 +183,7 @@ $(document).on("click", ".add_new_group_member", function () {
 
                     if (typeof swiper !== 'undefined') {
                         console.log(swiper);
+                        swiper.reInit()
                         $('.swiper-wrapper').append(newItem);  // Add the new slide to the Swiper
                         swiper.update();
                     } else {
