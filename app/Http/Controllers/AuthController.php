@@ -607,7 +607,7 @@ class AuthController extends Controller
 
     public function otpverification(Request $request)
     {
-        // dd($request);
+        dd($request);
         $token = str_pad(random_int(0, 9999), 4, '0', STR_PAD_LEFT);
 
         $userDetails = User::where('email', $request->email)->first();
