@@ -4872,7 +4872,9 @@ $(document).on('click','.free_plan',function () {
     var selected = $('input[name="gift_registry[]"]:checked');
         if (selected.length > 2) {
         $(this).prop('checked', false);
+        $(this).blur();
        toastr.error('Maximum two gift registry can select');
+
        selected_gift = [];
         $('input[name="gift_registry[]"]:checked').each(function() {
             var registry_name = $(this).data('item');
