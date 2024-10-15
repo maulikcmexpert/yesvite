@@ -1159,9 +1159,20 @@ function delete_invited_user(userId) {
 
             $('#user-'+userId).remove();
             $('#user_tel-'+userId).remove();
-            // if(currentInviteCount < 15){
-            //     $('.user_choice').prop('disabled',false);
-            // }
+            var total_guest = $(".users-data.invited_user").length;
+            $("#event_guest_count").text(total_guest + " Guests");
+            $(".invite-count").text(total_guest);
+
+            var max_guest = 15;
+            var remainingCount = max_guest - total_guest;
+
+            if(remainingCount < 0){
+                $(".invite-left_d").text("Invites | 0 Left");
+            }else{
+                $(".invite-left_d").text("Invites | " + remainingCount + " Left");
+
+            }
+            $("#event_guest_left_count").val(remainingCount);
             console.log("User ID deleted successfully.");
         },
         error: function (xhr, status, error) {
@@ -1246,14 +1257,9 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
                 var currentInviteCount = $('#currentInviteCount').val();
                 currentInviteCount--;
                 $('#currentInviteCount').val(currentInviteCount);
-
-                // if(currentInviteCount < 15){
-                //     $('.user_choice').prop('disabled',false);
-                // }
-
                 $('#user_tel-'+userId).remove();
                 $('.user_id_tel-'+userId).remove();
-                total_guest = $(".users-data.invited_user").length;
+                var total_guest = $(".users-data.invited_user").length;
                 $("#event_guest_count").text(total_guest + " Guests");
                 $(".invite-count").text(total_guest);
 
