@@ -137,7 +137,8 @@ $(document).on('click', '#resend_otp', function() {
             email: email
         },
         success: function(response) {
-            console.log(response);
+            if(response.success=="1"){}
+            toastr.success('Otp Resend Sucessfully')
         },
         error: function(xhr, status, error) {
             console.log("AJAX error: " + error);
