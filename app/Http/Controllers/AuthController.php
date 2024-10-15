@@ -607,7 +607,7 @@ class AuthController extends Controller
 
     public function otpverification(Request $request)
     {
-
+        dd($request);
         $token = str_pad(random_int(0, 9999), 4, '0', STR_PAD_LEFT);
 
         $userDetails = User::where('email', $request->email)->first();
@@ -619,7 +619,7 @@ class AuthController extends Controller
         $digit3 = substr($token, 2, 1);
         $digit4 = substr($token, 3, 1);
 
-
+        $useremail = $request->email;
 
         $userData = [
             'username' => $userDetails->firstname,
@@ -638,7 +638,7 @@ class AuthController extends Controller
         $page = 'front/otpverification';
         $title = "Verify Otp";
         $js = ['forget_password'];
-        return view('layout', compact('page', 'title', 'js', 'otp', 'user_id'));
+        return view('layout', compact('page', 'title', 'js', 'otp', 'user_id', 'useremail'));
     }
 
     public function checkOtp(Request $request)

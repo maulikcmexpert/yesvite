@@ -41,6 +41,8 @@
 
                     <input type="hidden" id="generated_otp" name="generated_otp" value="{{$otp}}" />
                     <input type="hidden" name="user_id" value="{{$user_id}}" />
+                    <input type="hidden" id="useremail" name="useremail" value="{{$useremail}}" />
+
 
                     {{-- <label for="email" class="floating-label">Enter Otp <span>*</span></label> --}}
                     {{-- <div class="label-error">
@@ -66,7 +68,31 @@
         </div>
 
         <p>Didn't receive the code? First, check your SPAM folder</p>
-        <p>Click here [Resend it link] to resend the code in case you didn't get it."</p>
+        <p>Click here <a id="resend_otp">resend Otp</a> to resend the code in case you didn't get it." </p>
 
     </div>
 </section>
+<script>
+    $(document).ready(function() {
+
+        $(document).on('click', '#resend_otp', function() {
+
+            var email = $('#useremail').val();
+            $.ajax({
+                url: base_url + "auth.otpverification",
+                type: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+                data: {
+                    email: email
+                },
+                success: function(response) {},
+                error: function(xhr, status, error) {
+                    console.log("AJAX error: " + error);
+                },
+            });
+        })
+
+    });
+</script>
