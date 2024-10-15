@@ -1419,7 +1419,7 @@ function validateAndFormatPhoneNumber($receiverNumber, $defaultCountryCode = 'US
     try {
         $parsedNumber = $phoneUtil->parse($receiverNumber, $defaultCountryCode);
 
-        dd($parsedNumber);
+        dd($phoneUtil);
         if (!$phoneUtil->isValidNumber($parsedNumber)) {
             throw new \Exception("Invalid phone number.");
         }
