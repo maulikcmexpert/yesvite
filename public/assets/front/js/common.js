@@ -20,7 +20,7 @@ $(".form-control").on("focusin", function () {
 
 $(document).ready(function(){
     $('.toggleButton').on('click', function() {
-        alert();
+        
         const $details = $('.details');
         const $button = $('.toggleButton');
         
