@@ -50,38 +50,40 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
-    swiper = new Swiper(".mySwiper", {
-      slidesPerView: 3.5,
-      spaceBetween: 20,
-      loop: true,
-      navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-      },
-      breakpoints: {
-        320: {
-            slidesPerView: 1.5,
-            spaceBetween: 20,
+    // Swiper initialization
+    var swiper = new Swiper(".mySwiper", {
+        slidesPerView: 3.5,
+        spaceBetween: 20,
+        loop: true,
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
         },
-        576: {
-            slidesPerView: 2.5,
-            spaceBetween: 20,
+        breakpoints: {
+            320: {
+                slidesPerView: 1.5,
+                spaceBetween: 20,
+            },
+            576: {
+                slidesPerView: 2.5,
+                spaceBetween: 20,
+            },
+            768: {
+                slidesPerView: 2.5,
+                spaceBetween: 20,
+            },
+            1200: {
+                slidesPerView: 2.5,
+                spaceBetween: 20,
+            },
+            1400: {
+                slidesPerView: 3.5,
+                spaceBetween: 20,
+            },
         },
-        768: {
-            slidesPerView: 2.5,
-            spaceBetween: 20,
-          },
-        1200: {
-          slidesPerView: 2.5,
-          spaceBetween: 20,
-        },
-        1400: {
-          slidesPerView: 3.5,
-          spaceBetween: 20,
-        },
-      },
     });
 
+    // Delete Group functionality
     $(document).on("click", "#delete_group", function () {
         var group_id = $(this).data("id");
         $.ajax({
@@ -96,8 +98,9 @@ $(document).ready(function () {
             success: function (response) {
                 if (response.status == "1") {
                     $(".added_group" + group_id).remove();
-                    $('.group-card.view_members[data-id="'+group_id+'"]').remove();
+                    $('.group-card.view_members[data-id="' + group_id + '"]').remove();
                     $('.owl-carousel').trigger('refresh.owl.carousel');
+                    swiper.update(); // Update Swiper after removing the slide
                 }
             },
             error: function (xhr, status, error) {
@@ -105,10 +108,10 @@ $(document).ready(function () {
             },
         });
     });
-    
+
+    // Add New Group functionality
     $(document).on("click", ".add_new_group_member", function () {
         var group_name = $("#new_group_name").val();
-        console.log(group_name);
         var selectedValues = [];
         $(".user_group_member:checked").each(function () {
             selectedValues.push({
@@ -116,9 +119,8 @@ $(document).ready(function () {
                 prefer_by: $(this).data("preferby"),
             });
         });
-        $('.user_group_member').prop('checked',false);
-        console.log(selectedValues);
-        
+        $('.user_group_member').prop('checked', false);
+
         if (selectedValues.length > 0) {
             $.ajax({
                 url: base_url + "event/add_new_group",
@@ -133,7 +135,7 @@ $(document).ready(function () {
                 success: function (response) {
                     if (response.status == "1") {
                         $(".group_list").append(response.view);
-                        console.log(response.data);
+
                         var newItem = `
                             <div class="swiper-slide">
                                 <div class="group-card view_members" data-id="${response.data.group_id}">
@@ -149,13 +151,10 @@ $(document).ready(function () {
                                 </div>
                             </div>
                         `;
-                        
-                        if (typeof swiper !== 'undefined') {
-                            swiper.appendSlide(newItem)  // Add the new slide to the Swiper
-                        } else {
-                            console.error('Swiper instance is undefined.');
-                        }
-    
+
+                        swiper.appendSlide(newItem);
+                        swiper.update(); // Update Swiper after adding the new slide
+
                         toggleSidebar("sidebar_groups");
                     }
                 },
@@ -167,9 +166,7 @@ $(document).ready(function () {
             toastr.error('Please select Member');
         }
     });
-
 });
-
 
 
 $(document).on('focus','.inputText',function(){
