@@ -638,6 +638,10 @@ class AuthController extends Controller
         $page = 'front/otpverification';
         $title = "Verify Otp";
         $js = ['forget_password'];
+
+        if ($request->ajax()) {
+            return response()->json(['success' => '1']);
+        }
         return view('layout', compact('page', 'title', 'js', 'otp', 'user_id', 'useremail'));
     }
 
