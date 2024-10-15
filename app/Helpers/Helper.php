@@ -1415,6 +1415,7 @@ function sendSMS($receiverNumber, $message)
 function validateAndFormatPhoneNumber($receiverNumber, $defaultCountryCode = 'IN')
 {
     $phoneUtil = PhoneNumberUtil::getInstance();
+    dd($phoneUtil);
 
     try {
         $parsedNumber = $phoneUtil->parse($receiverNumber, $defaultCountryCode);
