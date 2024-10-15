@@ -1436,8 +1436,6 @@ function sendSMSForApplication($receiverNumber, $message)
     try {
 
         $formattedNumber = validateAndFormatPhoneNumber($receiverNumber);
-
-        dd($formattedNumber);
         $serverKeys = ServerKey::first();
         $client = new Client($serverKeys->twilio_account_sid, $serverKeys->twilio_auth_token);
         $client->messages->create($formattedNumber, [
