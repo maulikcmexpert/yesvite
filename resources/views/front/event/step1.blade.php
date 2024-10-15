@@ -16,8 +16,8 @@
                             <label for="select-label"
                                 class="form-label input-field floating-label select-label floatingfocus">Event
                                 Type</label>
-                            <lable for="event-type" id="event-type-error" class="error"></lable>
                         </div>
+                            <lable for="event-type" id="event-type-error" class="error"></lable>
                     </div>
                     <div class="col-12 mb-4">
                         <div class="input-form">
@@ -25,9 +25,9 @@
                                 name="event-name" oninput="clearError(this)" required="">
                             <label for="event-name" class="form-label input-field floating-label">Event Name
                                 *</label>
-                            <lable for="event-name" id="event-name-error" class="error"></lable>
-
+                                
                         </div>
+                            <lable for="event-name" id="event-name-error" class="error"></lable>
                     </div>
                     <div class="col-12 mb-4">
                         <div class="input-form">
@@ -36,18 +36,15 @@
                                 value="{{ $user->firstname }} {{ $user->lastname }}">
                             <label for="hostedby" class="form-label input-field floating-label">Hosted By
                                 *</label>
-                            <lable for="hostedby" id="event-host-error" class="error"></lable>
-
                         </div>
+                            <lable for="hostedby" id="event-host-error" class="error"></lable>
                     </div>
                     <div class="col-lg-12 mb-4">
                         <div class="input-form">
                             <input type="text" class="form-control inputText" id="event-date" name="event-date" onblur="clearError(this)" readonly>
                             <label for="birthday" class="form-label input-field floating-label select-label">Date of event</label>
-                            <lable for="event-date" id="event-date-error" class="error"></lable>
-
-
                         </div>
+                        <lable for="event-date" id="event-date-error" class="error"></lable>
                     </div>
                     <div class="col-6 mb-4">
                         {{-- <div class="input-form">
@@ -153,8 +150,8 @@
                             <label for="select-label"
                                 class="form-label input-field floating-label select-label floatingfocus">Time
                                 Zone *</label>
-                            <label for="end-time-zone" id="end-time-zone-error" class="error"></label>
                         </div>
+                        <label for="end-time-zone" id="end-time-zone-error" class="error"></label>
                     </div>
                     <div class="col-12 mb-4">
                         <div class="d-flex align-items-center justify-content-between">
@@ -176,10 +173,8 @@
                                 name="rsvp-by-date" onblur="clearError(this)" readonly autocomplete="off">
                             <label for="birthday" class="form-label input-field floating-label select-label">Rsvp
                                 By Date</label>
-                            <lable for="event-rsvpby" id="event-rsvpby-error" class="error"></lable>
-
-
                         </div>
+                            <lable for="event-rsvpby" id="event-rsvpby-error" class="error"></lable>
                     </div>
                     <div class="col-12 mb-4">
                         <div class="input-form">
@@ -213,18 +208,18 @@
                                 <input type="hidden" id="latitude" />
                                 <input type="hidden" id="longitude" />
                                 <div id="map"></div>
-                            <lable for="address1" id="event-address1-error" class="error"></lable>
-
-                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
                                     d="M9.99999 11.1917C11.4359 11.1917 12.6 10.0276 12.6 8.5917C12.6 7.15576 11.4359 5.9917 9.99999 5.9917C8.56405 5.9917 7.39999 7.15576 7.39999 8.5917C7.39999 10.0276 8.56405 11.1917 9.99999 11.1917Z"
                                     stroke="#64748B" stroke-width="1.5" />
-                                <path
+                                    <path
                                     d="M3.01666 7.07484C4.65832 -0.141827 15.35 -0.133494 16.9833 7.08317C17.9417 11.3165 15.3083 14.8998 13 17.1165C11.325 18.7332 8.67499 18.7332 6.99166 17.1165C4.69166 14.8998 2.05832 11.3082 3.01666 7.07484Z"
                                     stroke="#64748B" stroke-width="1.5" />
-                            </svg>
+                                </svg>
                         </div>
+                            <lable for="address1" id="event-address1-error" class="error"></lable>
                     </div>
                     <div class="col-12 mb-4">
                         <div class="input-form location-icon">
@@ -255,9 +250,9 @@
                             <label for="select-label"
                                 class="form-label input-field floating-label select-label">City
                                 *</label>
+                                
+                            </div>
                             <lable for="city" id="event-city-error" class="error"></lable>
-
-                        </div>
                     </div>
                     <div class="col-6 mb-4">
                         <div class="input-form">
@@ -272,9 +267,9 @@
                             <label for="select-label"
                                 class="form-label input-field floating-label select-label">State
                                 *</label>
+                                
+                            </div>
                             <lable for="city" id="event-state-error" class="error"></lable>
-
-                        </div>
                     </div>
                     <div class="col-6 mb-4">
                         <div class="input-form">
@@ -289,9 +284,9 @@
                             <label for="select-label"
                                 class="form-label input-field floating-label select-label">Zip
                                 Code *</label>
+                                
+                            </div>
                             <lable for="city" id="event-zipcode-error" class="error"></lable>
-
-                        </div>
                     </div>
                     <div class="col-lg-12">
                         <div class="input-form">
