@@ -49,7 +49,39 @@ $(document).ready(function () {
         
 });
 
-
+$(document).ready(function () {
+    var swiper = new Swiper(".mySwiper", {
+      slidesPerView: 3.5,
+      spaceBetween: 20,
+      loop: true,
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+      breakpoints: {
+        320: {
+            slidesPerView: 1.5,
+            spaceBetween: 20,
+        },
+        576: {
+            slidesPerView: 2.5,
+            spaceBetween: 20,
+        },
+        768: {
+            slidesPerView: 2.5,
+            spaceBetween: 20,
+          },
+        1200: {
+          slidesPerView: 2.5,
+          spaceBetween: 20,
+        },
+        1400: {
+          slidesPerView: 3.5,
+          spaceBetween: 20,
+        },
+      },
+    });
+});
 
 
 $(document).on('focus','.inputText',function(){
@@ -4614,7 +4646,7 @@ $(document).on("click", ".add_new_group", function () {
 
 $(document).on("click", ".add_new_group_member", function () {
     var group_name = $("#new_group_name").val();
-    console.log(group_name);
+    console.log(swiper);
     var selectedValues = [];
     $(".user_group_member:checked").each(function () {
         selectedValues.push({
@@ -4685,11 +4717,11 @@ $(document).on("click", ".add_new_group_member", function () {
                     </div>
                 </div>
                     `;
-                    swiper
+                    
 
-                    if (typeof mySwiper !== 'undefined') {
+                    if (typeof swiper !== 'undefined') {
                     // Proceed with Swiper operations
-                    mySwiper.appendSlide(newItem);
+                    swiper.appendSlide(newItem);
                     } else {
                     console.error('Swiper instance is undefined.');
                     }
@@ -5338,39 +5370,7 @@ function getStartEndTimeZone(){
 }
 
 
-$(document).ready(function () {
-    var swiper = new Swiper(".mySwiper", {
-      slidesPerView: 3.5,
-      spaceBetween: 20,
-      loop: true,
-      navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-      },
-      breakpoints: {
-        320: {
-            slidesPerView: 1.5,
-            spaceBetween: 20,
-        },
-        576: {
-            slidesPerView: 2.5,
-            spaceBetween: 20,
-        },
-        768: {
-            slidesPerView: 2.5,
-            spaceBetween: 20,
-          },
-        1200: {
-          slidesPerView: 2.5,
-          spaceBetween: 20,
-        },
-        1400: {
-          slidesPerView: 3.5,
-          spaceBetween: 20,
-        },
-      },
-    });
-});
+
 
 $(document).on('click','.all_user_list',function(){
     $.ajax({
