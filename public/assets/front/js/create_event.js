@@ -3685,6 +3685,7 @@ function update_self_bring(
                     .find(".accordion-item")
                     .addClass("green-border");
                     $('#missing-category-h6-'+categoryIndexKey).css('color','#34C05C');
+                    console.log($('#missing-category-h6-'+categoryIndexKey).html());
                 $("#success-svg-" + categoryItemKey + "-" + categoryIndexKey).show();
                 $("#danger-svg-" + categoryItemKey + "-" + categoryIndexKey).hide();
                 // var missingCategory = $('#missing-category-'+categoryIndexKey).text();
@@ -3715,6 +3716,7 @@ function update_self_bring(
                     .addClass("red-border");
 
                     $('#missing-category-h6-'+categoryIndexKey).css('color','#E20B0B');    
+                    console.log($('#missing-category-h6-'+categoryIndexKey).html());
                 $(
                     "#success-svg-" + categoryItemKey + "-" + categoryIndexKey
                 ).hide();
