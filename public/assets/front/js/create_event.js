@@ -101,8 +101,6 @@ $(document).on("click", "#delete_group", function () {
                 $('.owl-carousel').trigger('refresh.owl.carousel');
 
             }
-
-
         },
         error: function (xhr, status, error) {
             console.log("AJAX error: " + error);
@@ -137,38 +135,6 @@ $(document).on("click", ".add_new_group_member", function () {
             success: function (response) {
                 if (response.status == "1") {
                     $(".group_list").append(response.view);
-                    var swiper = new Swiper(".mySwiper", {
-                        slidesPerView: 3.5,
-                        spaceBetween: 20,
-                        loop: true,
-                        navigation: {
-                          nextEl: ".swiper-button-next",
-                          prevEl: ".swiper-button-prev",
-                        },
-                        breakpoints: {
-                          320: {
-                              slidesPerView: 1.5,
-                              spaceBetween: 20,
-                          },
-                          576: {
-                              slidesPerView: 2.5,
-                              spaceBetween: 20,
-                          },
-                          768: {
-                              slidesPerView: 2.5,
-                              spaceBetween: 20,
-                            },
-                          1200: {
-                            slidesPerView: 2.5,
-                            spaceBetween: 20,
-                          },
-                          1400: {
-                            slidesPerView: 3.5,
-                            spaceBetween: 20,
-                          },
-                        },
-                    });
-
                     console.log(response.data);
                 //     $(".owl-stage").append(`<div class="owl-item cloned">
                 //     <div class="item" style="width: 1100px; margin-right: 10px;">
@@ -217,8 +183,8 @@ $(document).on("click", ".add_new_group_member", function () {
 
                     if (typeof swiper !== 'undefined') {
                         console.log(swiper);
-                    // Proceed with Swiper operations
-                    // swiper.appendSlide(newItem);
+                        swiper.appendSlide(newItem);  // Add the new slide to the Swiper
+                        swiper.update();
                     } else {
                     console.error('Swiper instance is undefined.');
                     }
