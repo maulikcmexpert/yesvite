@@ -74,7 +74,8 @@ $(document).on("click", "#delete_group", function () {
         success: function (response) {
             if (response.status == "1") {
                 $(".added_group" + group_id).remove();
-                console.log($('.group-card.view_members[data-id="' + group_id + '"]').parent().parent().html());
+                var sliderIndex = $('.group-card.view_members[data-id="' + group_id + '"]').parent().parent().attr('data-swiper-slide-index');
+                console.log(sliderIndex);
                 swiper[0].update(); // Update Swiper after removing the slide
                 swiper[1].update(); // Update Swiper after removing the slide
                 swiper[2].update(); // Update Swiper after removing the slide
