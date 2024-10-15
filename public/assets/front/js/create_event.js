@@ -4668,11 +4668,12 @@ function displayRecords(lim, off,type,search = null,) {
     },
     });
 }
-
+var search_user_ajax_timer = 0;
 $(document).on('keyup','.search_user_ajax',function(){
     search_name = $(this).val();
     offset = 0;
-    setTimeout(function () {
+    clearTimeout(search_user_ajax_timer);
+    search_user_ajax_timer = setTimeout(function () {
         $('#loader').css('display','block');
         displayRecords(limit,offset,'all',search_name);
         // $('#loader').css('display','none');
