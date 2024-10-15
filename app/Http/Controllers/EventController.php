@@ -579,6 +579,83 @@ class EventController extends Controller
         ]);
     }
 
+    // public function storeUserId(Request $request)
+    // {
+    //     $userId = $request->input('user_id');
+
+    //     $user = User::where('id', $userId)->first();
+    //     // $userimage = asset('storage/profile/' . $user->profile);
+    //     $userimage = $user->profile;
+    //     $useremail = $request->input('email');
+    //     $phone = $request->input('mobile');
+    //     // dd($userProfile);
+    //     $isChecked = $request->input('is_checked');
+    //     $userIds = session()->get('user_ids', []);
+    //     // if ($isChecked == true || $isChecked == "true") {
+    //     //     if (!in_array($userId, $userIds)) {
+    //     //         $userIds[] = ['id' => $userId, 'firstname' => $user->firstname, 'lastname' => $user->lastname, 'phonenumber' => ($user->phone_number != "") ? $user->phone_number : '', 'email' => $useremail, 'profile' => (isset($userimage) && $userimage != '') ? $userimage : ''];
+    //     //         session()->put('user_ids', $userIds);
+    //     //         return response()->json(['success' => true, 'data' => $userIds]);
+    //     //     }
+    //     // }
+    //     if (isset($useremail) && $useremail != "") {
+    //         $user_invited_by = $useremail;
+    //         $prefer_by = "email";
+    //     }
+    //     if (isset($phone) && $phone != "") {
+    //         $user_invited_by = $user->phone_number;
+    //         $prefer_by = "phone";
+    //     }
+
+    //     $userEntry = [
+    //         'id' => $userId,
+    //         'firstname' => $user->firstname,
+    //         'lastname' => $user->lastname,
+    //         // 'phonenumber' => ($user->phone_number != "") ? $user->phone_number : '',
+    //         // 'email' => $useremail,
+    //         'invited_by' => $user_invited_by,
+    //         'prefer_by' => $prefer_by,
+    //         'profile' => (isset($userimage) && $userimage != '') ? $userimage : ''
+    //     ];
+
+    //     // if ($isChecked == true || $isChecked == "true") {
+    //     //     // Remove any existing entry with the same user ID
+    //     //     $userIds = array_filter($userIds, function ($entry) use ($userId) {
+    //     //         return $entry['id'] !== $userId;
+    //     //     });
+
+    //     //     // Add the latest user entry
+    //     //     $userIds[] = $userEntry;
+
+    //     //     // Save updated array to session
+    //     //     session()->put('user_ids', $userIds);
+
+
+    //     //     // Return only the latest entry
+    //     //     return response()->json(['success' => true, 'data' => $userEntry]);
+    //     // }
+    //     // dd($userIds);
+
+    //     if ($isChecked == true || $isChecked == "true") {
+    //         $userExists = array_filter($userIds, function ($entry) use ($userId) {
+    //             return $entry['id'] === $userId;
+    //         });
+
+    //         $userIds = array_filter($userIds, function ($entry) use ($userId) {
+    //             return $entry['id'] !== $userId;
+    //         });
+    //         $userIds[] = $userEntry;
+    //         session()->put('user_ids', $userIds);
+    //         if (!empty($userExists)) {
+    //             // return response()->json(['success' => false, 'data' => $userEntry, 'is_duplicate' => 1]);
+    //             $data[] = ['userdata' => $userEntry, 'is_duplicate' => 1];
+    //             return response()->json(['view' => view('front.event.guest.addGuest', compact('data'))->render(),  'responsive_view' => view('front.event.guest.addguest_responsive', compact('data', 'user_list'))->render(), 'is_duplicate' => 1]);
+    //         }
+    //         $data[] = ['userdata' => $userEntry, 'is_duplicate' => 0];
+    //         return response()->json(['view' => view('front.event.guest.addGuest', compact('data'))->render(), 'responsive_view' => view('front.event.guest.addguest_responsive', compact('data', 'user_list'))->render(), 'success' => true, 'data' => $userEntry, 'is_duplicate' => 0]);
+    //     }
+    // }
+
     public function storeUserId(Request $request)
     {
         $userId = $request->input('user_id');
@@ -591,6 +668,8 @@ class EventController extends Controller
         // dd($userProfile);
         $isChecked = $request->input('is_checked');
         $userIds = session()->get('user_ids', []);
+
+
         // if ($isChecked == true || $isChecked == "true") {
         //     if (!in_array($userId, $userIds)) {
         //         $userIds[] = ['id' => $userId, 'firstname' => $user->firstname, 'lastname' => $user->lastname, 'phonenumber' => ($user->phone_number != "") ? $user->phone_number : '', 'email' => $useremail, 'profile' => (isset($userimage) && $userimage != '') ? $userimage : ''];
@@ -646,12 +725,9 @@ class EventController extends Controller
             });
             $userIds[] = $userEntry;
             session()->put('user_ids', $userIds);
-<<<<<<< Updated upstream
             Session::save();
             $user_list = Session::get('user_ids');
             // dd($user_list);
-=======
->>>>>>> Stashed changes
             if (!empty($userExists)) {
                 // return response()->json(['success' => false, 'data' => $userEntry, 'is_duplicate' => 1]);
                 $data[] = ['userdata' => $userEntry, 'is_duplicate' => 1];
