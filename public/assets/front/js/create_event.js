@@ -1201,7 +1201,7 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
                     // $(".user-list-responsive").html(response.responsive_view);
                 }
                 
-                total_guest = $(".users-data.invited_user").length;
+                var total_guest = $(".users-data.invited_user").length;
                 $("#event_guest_count").text(total_guest + " Guests");
                 $(".invite-count").text(total_guest);
                 
