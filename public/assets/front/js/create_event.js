@@ -98,7 +98,6 @@ $(document).ready(function () {
                     $(".added_group" + group_id).remove();
                     $('.group-card.view_members[data-id="'+group_id+'"]').remove();
                     $('.owl-carousel').trigger('refresh.owl.carousel');
-    
                 }
             },
             error: function (xhr, status, error) {
@@ -118,9 +117,9 @@ $(document).ready(function () {
             });
         });
         $('.user_group_member').prop('checked',false);
-        // console.log(group_name);
         console.log(selectedValues);
-        if(selectedValues.length > 0){
+        
+        if (selectedValues.length > 0) {
             $.ajax({
                 url: base_url + "event/add_new_group",
                 type: "POST",
@@ -135,49 +134,43 @@ $(document).ready(function () {
                     if (response.status == "1") {
                         $(".group_list").append(response.view);
                         console.log(response.data);
-                    var newItem = `
-                        <div class="swiper-slide">
-                        <div class="group-card view_members" data-id="${response.data.group_id}">
-                            <div>
-                                <h4>${response.data.groupname}</h4>
-                                <p>${response.data.member_count} Guests</p>
+                        var newItem = `
+                            <div class="swiper-slide">
+                                <div class="group-card view_members" data-id="${response.data.group_id}">
+                                    <div>
+                                        <h4>${response.data.groupname}</h4>
+                                        <p>${response.data.member_count} Guests</p>
+                                    </div>
+                                    <span class="ms-auto">
+                                        <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M5.93994 13.7797L10.2866 9.43306C10.7999 8.91973 10.7999 8.07973 10.2866 7.56639L5.93994 3.21973" stroke="#E2E8F0" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                    </span>
+                                </div>
                             </div>
-                            <span class="ms-auto">
-                                <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M5.93994 13.7797L10.2866 9.43306C10.7999 8.91973 10.7999 8.07973 10.2866 7.56639L5.93994 3.21973" stroke="#E2E8F0" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                            </span>
-                        </div>
-                    </div>
                         `;
                         
-    
                         if (typeof swiper !== 'undefined') {
-                            console.log(swiper);
-                            swiper.reInit()
                             $('.swiper-wrapper').append(newItem);  // Add the new slide to the Swiper
-                            swiper.update();
+                            swiper.update(); // Refresh the Swiper
                         } else {
-                        console.error('Swiper instance is undefined.');
+                            console.error('Swiper instance is undefined.');
                         }
-                                        // $('.owl-carousel').trigger('add.owl.carousel', [$(newItem)]).trigger('refresh.owl.carousel');
     
-                    // 
-                    // $('.swiper-wrapper').trigger('refresh.owl.carousel');
-                    toggleSidebar("sidebar_groups");
-    
+                        toggleSidebar("sidebar_groups");
                     }
                 },
                 error: function (xhr, status, error) {
                     console.log("AJAX error: " + error);
                 },
             });
-        }else{
+        } else {
             toastr.error('Please select Member');
         }
     });
 
 });
+
 
 
 $(document).on('focus','.inputText',function(){
