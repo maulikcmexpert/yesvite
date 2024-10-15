@@ -4640,6 +4640,8 @@ $(document).on("click", ".add_new_group_member", function () {
                 if (response.status == "1") {
                     $(".group_list").append(response.view);
                     console.log('slider');
+
+                    console.log(response.data);
                 //     $(".owl-stage").append(`<div class="owl-item cloned">
                 //     <div class="item" style="width: 1100px; margin-right: 10px;">
                 //         <div class="group-card view_members" data-id="${response.data.group_id}">
