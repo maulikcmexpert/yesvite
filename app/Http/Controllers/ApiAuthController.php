@@ -656,6 +656,16 @@ class ApiAuthController extends Controller
         if (!is_null($verifyUser)) {
             $faild = "";
 
+            $faild = "";
+            $tokenCreationTime = strtotime($verifyUser->created_at);
+            $currentTime = time(); // Current timestamp
+    
+            if (($currentTime - $tokenCreationTime) > 60) { // 900 seconds = 15 minutes
+                $message = "The token has expired. Please request a new verification link.";
+                $faild = "faild";
+                return view('emailVarification', compact('message', 'faild'));
+            }
+
             if ($verifyUser->email_verified_at == NULL) {
                 $verifyUser->email_verified_at = strtotime(date('Y-m-d  h:i:s'));
                 $verifyUser->status = '1';
