@@ -129,7 +129,7 @@ $(document).on("click", ".add_new_group_member", function () {
                     `;
 
                     swiper[1].appendSlide(newItem);
-                    swiper.update(); // Update Swiper after adding the new slide
+                    swiper[1].update(); // Update Swiper after adding the new slide
 
                     toggleSidebar("sidebar_groups");
                 }
