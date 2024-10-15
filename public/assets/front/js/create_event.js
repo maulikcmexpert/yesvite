@@ -1210,7 +1210,7 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
                 // if(currentInviteCount >= 15){
                 //     $('.user_choice').prop('disabled',true);
                 // }
-
+                guest_counter(0,15);
                 $(".inivted_user_list").append(response.view);
                 $(".user-list-responsive").empty();
                 $(".user-list-responsive").html(response.responsive_view);
