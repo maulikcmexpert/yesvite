@@ -1,9 +1,21 @@
+<style>
+    .login-content h3 {
+        margin-bottom: 15px;
+        font-size: 24px;
+        line-height: 30px;
+        color: var(--secondryColor);
+        font-weight: 500;
+    }
+
+    .login-content p {
+        max-width: 500px;
+        margin: 0px auto;
+    }
+</style>
 <x-front.advertise />
 <section class="login-wrapper fadeIn" data-wow-duration="2s" data-wow-delay="1s" data-wow-offset="0">
     <div class="container">
-        <div class="login-content text-center">
-            <a href="#" class="logo">
-                <svg width="54" height="56" viewBox="0 0 54 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <div class="login-content text-center"><a href="#" class="logo"><svg width="54" height="56" viewBox="0 0 54 56" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M13.8037 10.6052H13.2024C12.8471 10.5779 12.9975 10.2362 12.9975 10.2362C13.2298 9.68961 13.4074 9.48463 13.1204 9.25232C12.6012 8.84236 12.1639 8.3914 11.8086 7.91311C10.0047 5.48068 10.4557 2.46063 12.1365 1.29908C13.1068 0.629474 14.528 0.629474 15.4982 1.29908C17.1791 2.46063 17.6163 5.48068 15.8262 7.91311C15.4709 8.3914 15.0473 8.84236 14.5143 9.25232C14.2137 9.48463 14.405 9.67594 14.6373 10.2362C14.6373 10.2362 14.7876 10.5642 14.4323 10.6052H13.831H13.8037Z" fill="#ECB015" />
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M40.3252 15.1695C40.3252 14.0763 40.7078 13.0787 41.3637 12.3134C42.1837 11.3295 43.4135 10.7146 44.7937 10.7146C47.2535 10.7146 49.2623 12.7097 49.2623 15.1831H53.9222C53.9222 10.1406 49.8363 6.05469 44.7937 6.05469C41.5414 6.05469 38.699 7.74919 37.0728 10.3046C36.9908 10.4413 36.9088 10.5779 36.8268 10.7146C36.0889 12.0401 35.6653 13.557 35.6653 15.1831H40.3252V15.1695Z" fill="black" />
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M47.2268 34.465C46.2428 42.8556 39.1232 49.3603 30.473 49.3603C21.8229 49.3603 14.4846 42.6643 13.6783 34.0961L18.6935 33.2078L17.5319 26.6758L0.0129395 29.7778L1.1745 36.3099L7.11893 35.2576C8.48546 46.9415 18.4202 56.0016 30.473 56.0016C42.5259 56.0016 52.8979 46.5315 53.9091 34.465C53.9638 33.8091 53.9911 33.1532 53.9911 32.4836C53.9911 31.814 53.9638 31.1853 53.9091 30.5567H47.2268C47.2951 31.1853 47.3361 31.8276 47.3361 32.4836C47.3361 33.1395 47.2951 33.8091 47.2268 34.465Z" fill="black" />
@@ -14,64 +26,42 @@
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M9.38575 9.80831H8.78447C8.42917 9.78098 8.57949 9.43935 8.57949 9.43935C8.8118 8.89273 8.98945 8.68775 8.70248 8.45544C8.18319 8.04548 7.7459 7.59452 7.3906 7.11624C5.58678 4.6838 6.03773 1.66376 7.71857 0.502202C8.68881 -0.167401 10.11 -0.167401 11.0803 0.502202C12.7611 1.66376 13.1984 4.6838 11.4082 7.11624C11.0529 7.59452 10.6293 8.04548 10.0963 8.45544C9.79571 8.68775 9.98702 8.87907 10.2193 9.43935C10.2193 9.43935 10.3697 9.76732 10.0144 9.80831H9.41308H9.38575Z" fill="#ECB015" />
                     <path d="M9.8527 17.0664H9.68872V23.7488H9.8527V17.0664Z" fill="#ECB015" />
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M6.68153 14.8511C7.61078 15.63 8.52636 16.3133 9.22329 16.8189C9.61958 17.1195 9.38727 17.3792 9.1003 18.1171C9.1003 18.1171 8.92265 18.5544 9.38727 18.5954H10.3302C10.8085 18.568 10.6172 18.1171 10.6172 18.1171C10.3165 17.3792 10.0842 17.1195 10.4942 16.8189C11.1911 16.3133 12.1067 15.63 13.0359 14.8511C14.4298 13.6622 15.9603 12.2273 16.7666 10.5738C18.953 6.13257 14.7714 -0.0168447 9.86556 3.83679C4.9597 -0.0168447 0.764432 6.13257 2.95089 10.5738C3.75715 12.2137 5.30133 13.6622 6.6952 14.8511H6.68153Z" fill="#EA555C" />
-                </svg>
-
-            </a>
-            <h1>Welcome Back to Yesvite!</h1>
-            <p>Enter Your Verification Code</p>
+                </svg></a>
+            <h1>Welcome Back to Yesvite !</h1>
+            <h3>Enter Your Verification Code</h3>
             <p>We've just sent a code to your email (it may take a minute to arrive). Please enter the code here to reset your password.</p>
+
 
         </div>
         <div class="login-form-wrap">
-            <form method="POST" id="otpform" action="{{route('auth.checkOtp')}}" autocomplete="off">
-                @csrf
+            <form method="POST" id="otpform" action="{{route('auth.checkOtp')}}" autocomplete="off">@csrf <div class="input-form">
+                    < !-- <input type="email" class="form-control inputText" id="email" name="email"><label for="email" class="form-label input-field floating-label">Email Address <span class="required">*</span></label>--><div class="otp-varification-wrp"><input type="text" class="form-control otp__digit" id="otp1" name="number1" autocomplete="off"><input type="text" class="form-control otp__digit" id="otp2" name="number2" autocomplete="off"><input type="text" class="form-control otp__digit" id="otp3" name="number3" autocomplete="off"><input type="text" class="form-control otp__digit" id="otp4" name="number4" autocomplete="off"></div><label id="otp-error" class="error" for="email"></label><input type="hidden" id="generated_otp" name="generated_otp" value="{{$otp}}" /><input type="hidden" name="user_id" value="{{$user_id}}" /><input type="hidden" id="useremail" name="useremail" value="{{$useremail}}" /> {
+                        {
+                        -- <label for="email" class="floating-label">Enter Otp <span>*</span></label>--
+                        }
+                        }
 
-                <div class="input-form">
-                    <!-- <input type="email" class="form-control inputText" id="email" name="email">
-                        <label for="email" class="form-label input-field floating-label">Email Address <span class="required">*</span></label> -->
-
-                    <div class="otp-varification-wrp">
-                        <input type="text" class="form-control otp__digit" id="otp1" name="number1" autocomplete="off">
-                        <input type="text" class="form-control otp__digit" id="otp2" name="number2" autocomplete="off">
-                        <input type="text" class="form-control otp__digit" id="otp3" name="number3" autocomplete="off">
-                        <input type="text" class="form-control otp__digit" id="otp4" name="number4" autocomplete="off">
-                    </div>
-                    <label id="otp-error" class="error" for="email"></label>
-
-
-                    <input type="hidden" id="generated_otp" name="generated_otp" value="{{$otp}}" />
-                    <input type="hidden" name="user_id" value="{{$user_id}}" />
-                    <input type="hidden" id="useremail" name="useremail" value="{{$useremail}}" />
-
-
-                    {{-- <label for="email" class="floating-label">Enter Otp <span>*</span></label> --}}
-                    {{-- <div class="label-error">
-                    </div> --}}
-                </div>
-
-
-                <div class="form-check mb-3">
+                        {
+                        {
+                        -- <div class="label-error"></div>--
+                        }
+                        }
 
                 </div>
-                @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-                @endif
-                <button type="submit" class="btn btn-primary" id="otpverify">Verify Otp</button>
+                <div class="form-check mb-3"></div>@if ($errors->any()) <div class="alert alert-danger">
+                    <ul>@foreach ($errors->all() as $error) <li> {
+                            {
+                            $error
+                            }
+                            }
+
+                        </li>@endforeach </ul>
+                </div>@endif <button type="submit" class="btn btn-primary" id="otpverify">Verify Otp</button>
             </form>
-
         </div>
+        <p class="text-center">Didn't receive the code? First, check your SPAM folder</p>
 
-        <p>Didn't receive the code? First, check your SPAM folder</p>
-
-        <p>Click here to<a href="#" id="resend_otp">Resend link</a>resend the code in case you didn't get it." </p>
-        <!-- <button type="button" id="resend_otp">Resend</button> -->
-
-
+        <p class="text-center">Click here to <a href="#" id="resend_otp" style="color: #F73C71;">Resend link</a> resend the code in case you didn't get it." </p>
+        < !-- <button type="button" id="resend_otp">Resend</button>-->
     </div>
 </section>
