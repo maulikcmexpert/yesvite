@@ -1122,9 +1122,10 @@ function add_user_counter(){
 }
 
 function guest_counter(total_guest,max_guest){
-    total_guest = $(".users-data.invited_user").length;
+    var total_guest = $(".users-data.invited_user").length;
     $("#event_guest_count").text(total_guest + " Guests");
     $(".invite-count").text(total_guest);
+    console.log(total_guest);
     console.log(max_guest);
     
     var remainingCount = max_guest - total_guest;
