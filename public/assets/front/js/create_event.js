@@ -216,8 +216,9 @@ $(document).on("click", ".add_new_group_member", function () {
                     
 
                     if (typeof swiper !== 'undefined') {
+                        console.log(swiper);
                     // Proceed with Swiper operations
-                    swiper.appendSlide(newItem);
+                    // swiper.appendSlide(newItem);
                     } else {
                     console.error('Swiper instance is undefined.');
                     }
