@@ -640,7 +640,7 @@ class AuthController extends Controller
         $js = ['forget_password'];
 
         if ($request->ajax()) {
-            return response()->json(['success' => '1']);
+            return response()->json(['success' => '1', 'opt' => $otp]);
         }
         return view('layout', compact('page', 'title', 'js', 'otp', 'user_id', 'useremail'));
     }
