@@ -128,7 +128,7 @@ document.getElementById("otpform").addEventListener("submit", function (event) {
 $(document).on('click', '#resend_otp', function() {
     var email = $('#useremail').val();
     $.ajax({
-        url: base_url + "auth.otpverification",
+        url: base_url + "otp_verify",
         type: "POST",
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
