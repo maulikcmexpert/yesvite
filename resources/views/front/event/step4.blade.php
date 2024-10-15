@@ -639,7 +639,7 @@
             </div>
             <div class="qty-container">
                 <button class="qty-btn-minus-qty" type="button" onclick="clearError()"><i class="fa fa-minus"></i></button>
-                <input type="number" name="qty" id="item_quantity" value="1" class="input-qty" />
+                <input type="number" name="qty" id="item_quantity" value="1" class="input-qty" readonly/>
                 <input type="hidden" name="category_index" id="category_index">
                 <button class="qty-btn-plus-qty" type="button" onclick="clearError()"><i class="fa fa-plus"></i></button>
                 <label for="item_quantity" id="item_quantity_error"></label>
