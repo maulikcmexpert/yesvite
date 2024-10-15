@@ -49,39 +49,194 @@ $(document).ready(function () {
         
 });
 
-// $(document).ready(function () {
-//     var swiper = new Swiper(".mySwiper", {
-//       slidesPerView: 3.5,
-//       spaceBetween: 20,
-//       loop: true,
-//       navigation: {
-//         nextEl: ".swiper-button-next",
-//         prevEl: ".swiper-button-prev",
-//       },
-//       breakpoints: {
-//         320: {
-//             slidesPerView: 1.5,
-//             spaceBetween: 20,
-//         },
-//         576: {
-//             slidesPerView: 2.5,
-//             spaceBetween: 20,
-//         },
-//         768: {
-//             slidesPerView: 2.5,
-//             spaceBetween: 20,
-//           },
-//         1200: {
-//           slidesPerView: 2.5,
-//           spaceBetween: 20,
-//         },
-//         1400: {
-//           slidesPerView: 3.5,
-//           spaceBetween: 20,
-//         },
-//       },
-//     });
-// });
+$(document).ready(function () {
+    var swiper = new Swiper(".mySwiper", {
+      slidesPerView: 3.5,
+      spaceBetween: 20,
+      loop: true,
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+      breakpoints: {
+        320: {
+            slidesPerView: 1.5,
+            spaceBetween: 20,
+        },
+        576: {
+            slidesPerView: 2.5,
+            spaceBetween: 20,
+        },
+        768: {
+            slidesPerView: 2.5,
+            spaceBetween: 20,
+          },
+        1200: {
+          slidesPerView: 2.5,
+          spaceBetween: 20,
+        },
+        1400: {
+          slidesPerView: 3.5,
+          spaceBetween: 20,
+        },
+      },
+    });
+
+    $(document).on("click", "#delete_group", function () {
+        var group_id = $(this).data("id");
+        $.ajax({
+            url: base_url + "event/delete_group",
+            type: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            data: {
+                group_id: group_id,
+            },
+            success: function (response) {
+                if (response.status == "1") {
+                    $(".added_group" + group_id).remove();
+                    $('.group-card.view_members[data-id="'+group_id+'"]').remove();
+                    $('.owl-carousel').trigger('refresh.owl.carousel');
+    
+                }
+    
+    
+            },
+            error: function (xhr, status, error) {
+                console.log("AJAX error: " + error);
+            },
+        });
+    });
+
+    $(document).on("click", ".add_new_group_member", function () {
+        var group_name = $("#new_group_name").val();
+        console.log(group_name);
+        var selectedValues = [];
+        $(".user_group_member:checked").each(function () {
+            selectedValues.push({
+                id: $(this).val(),
+                prefer_by: $(this).data("preferby"),
+            });
+        });
+        $('.user_group_member').prop('checked',false);
+        // console.log(group_name);
+        console.log(selectedValues);
+        if(selectedValues.length > 0){
+            $.ajax({
+                url: base_url + "event/add_new_group",
+                type: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+                data: {
+                    groupmember: selectedValues,
+                    groupname: group_name,
+                },
+                success: function (response) {
+                    if (response.status == "1") {
+                        $(".group_list").append(response.view);
+                        var swiper = new Swiper(".mySwiper", {
+                            slidesPerView: 3.5,
+                            spaceBetween: 20,
+                            loop: true,
+                            navigation: {
+                              nextEl: ".swiper-button-next",
+                              prevEl: ".swiper-button-prev",
+                            },
+                            breakpoints: {
+                              320: {
+                                  slidesPerView: 1.5,
+                                  spaceBetween: 20,
+                              },
+                              576: {
+                                  slidesPerView: 2.5,
+                                  spaceBetween: 20,
+                              },
+                              768: {
+                                  slidesPerView: 2.5,
+                                  spaceBetween: 20,
+                                },
+                              1200: {
+                                slidesPerView: 2.5,
+                                spaceBetween: 20,
+                              },
+                              1400: {
+                                slidesPerView: 3.5,
+                                spaceBetween: 20,
+                              },
+                            },
+                        });
+    
+                        console.log(response.data);
+                    //     $(".owl-stage").append(`<div class="owl-item cloned">
+                    //     <div class="item" style="width: 1100px; margin-right: 10px;">
+                    //         <div class="group-card view_members" data-id="${response.data.group_id}">
+                    //             <div>
+                    //                 <h4>${response.data.groupname}</h4>
+                    //                 <p>${response.data.member_count} Guests</p>
+                    //             </div>
+                    //             <span class="ms-auto">
+                    //                 <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    //                     <path d="M5.93994 13.7797L10.2866 9.43306C10.7999 8.91973 10.7999 8.07973 10.2866 7.56639L5.93994 3.21973" stroke="#E2E8F0" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                    //                 </svg>
+                    //             </span>
+                    //         </div>
+                    //     </div>
+                    // </div>`);
+                //     <div class="item">
+                //     <div class="group-card view_members" data-id="${response.data.group_id}">
+                //         <div>
+                //         <h4>${response.data.groupname}</h4>
+                //         <p>${response.data.member_count} Guests</p>
+                //         </div>
+                //         <span class="ms-auto">
+                //             <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                //                 <path d="M5.93994 13.7797L10.2866 9.43306C10.7999 8.91973 10.7999 8.07973 10.2866 7.56639L5.93994 3.21973" stroke="#E2E8F0" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
+                //             </svg>
+                //         </span>
+                //     </div>
+                // </div>
+                    var newItem = `
+                        <div class="swiper-slide">
+                        <div class="group-card view_members" data-id="${response.data.group_id}">
+                            <div>
+                                <h4>${response.data.groupname}</h4>
+                                <p>${response.data.member_count} Guests</p>
+                            </div>
+                            <span class="ms-auto">
+                                <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5.93994 13.7797L10.2866 9.43306C10.7999 8.91973 10.7999 8.07973 10.2866 7.56639L5.93994 3.21973" stroke="#E2E8F0" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
+                        `;
+                        
+    
+                        if (typeof swiper !== 'undefined') {
+                        // Proceed with Swiper operations
+                        swiper.appendSlide(newItem);
+                        } else {
+                        console.error('Swiper instance is undefined.');
+                        }
+                                        // $('.owl-carousel').trigger('add.owl.carousel', [$(newItem)]).trigger('refresh.owl.carousel');
+    
+                    // $('.swiper-wrapper').append(newItem);
+                    // $('.swiper-wrapper').trigger('refresh.owl.carousel');
+                    toggleSidebar("sidebar_groups");
+    
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.log("AJAX error: " + error);
+                },
+            });
+        }else{
+            toastr.error('Please select Member');
+        }
+    });
+});
 
 
 $(document).on('focus','.inputText',function(){
@@ -4644,133 +4799,7 @@ $(document).on("click", ".add_new_group", function () {
     }
 });
 
-$(document).on("click", ".add_new_group_member", function () {
-    var group_name = $("#new_group_name").val();
-    console.log(group_name);
-    var selectedValues = [];
-    $(".user_group_member:checked").each(function () {
-        selectedValues.push({
-            id: $(this).val(),
-            prefer_by: $(this).data("preferby"),
-        });
-    });
-    $('.user_group_member').prop('checked',false);
-    // console.log(group_name);
-    console.log(selectedValues);
-    if(selectedValues.length > 0){
-        $.ajax({
-            url: base_url + "event/add_new_group",
-            type: "POST",
-            headers: {
-                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-            },
-            data: {
-                groupmember: selectedValues,
-                groupname: group_name,
-            },
-            success: function (response) {
-                if (response.status == "1") {
-                    $(".group_list").append(response.view);
-                    var swiper = new Swiper(".mySwiper", {
-                        slidesPerView: 3.5,
-                        spaceBetween: 20,
-                        loop: true,
-                        navigation: {
-                          nextEl: ".swiper-button-next",
-                          prevEl: ".swiper-button-prev",
-                        },
-                        breakpoints: {
-                          320: {
-                              slidesPerView: 1.5,
-                              spaceBetween: 20,
-                          },
-                          576: {
-                              slidesPerView: 2.5,
-                              spaceBetween: 20,
-                          },
-                          768: {
-                              slidesPerView: 2.5,
-                              spaceBetween: 20,
-                            },
-                          1200: {
-                            slidesPerView: 2.5,
-                            spaceBetween: 20,
-                          },
-                          1400: {
-                            slidesPerView: 3.5,
-                            spaceBetween: 20,
-                          },
-                        },
-                    });
 
-                    console.log(response.data);
-                //     $(".owl-stage").append(`<div class="owl-item cloned">
-                //     <div class="item" style="width: 1100px; margin-right: 10px;">
-                //         <div class="group-card view_members" data-id="${response.data.group_id}">
-                //             <div>
-                //                 <h4>${response.data.groupname}</h4>
-                //                 <p>${response.data.member_count} Guests</p>
-                //             </div>
-                //             <span class="ms-auto">
-                //                 <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                //                     <path d="M5.93994 13.7797L10.2866 9.43306C10.7999 8.91973 10.7999 8.07973 10.2866 7.56639L5.93994 3.21973" stroke="#E2E8F0" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                //                 </svg>
-                //             </span>
-                //         </div>
-                //     </div>
-                // </div>`);
-            //     <div class="item">
-            //     <div class="group-card view_members" data-id="${response.data.group_id}">
-            //         <div>
-            //         <h4>${response.data.groupname}</h4>
-            //         <p>${response.data.member_count} Guests</p>
-            //         </div>
-            //         <span class="ms-auto">
-            //             <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-            //                 <path d="M5.93994 13.7797L10.2866 9.43306C10.7999 8.91973 10.7999 8.07973 10.2866 7.56639L5.93994 3.21973" stroke="#E2E8F0" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
-            //             </svg>
-            //         </span>
-            //     </div>
-            // </div>
-                var newItem = `
-                    <div class="swiper-slide">
-                    <div class="group-card view_members" data-id="${response.data.group_id}">
-                        <div>
-                            <h4>${response.data.groupname}</h4>
-                            <p>${response.data.member_count} Guests</p>
-                        </div>
-                        <span class="ms-auto">
-                            <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M5.93994 13.7797L10.2866 9.43306C10.7999 8.91973 10.7999 8.07973 10.2866 7.56639L5.93994 3.21973" stroke="#E2E8F0" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                        </span>
-                    </div>
-                </div>
-                    `;
-                    
-
-                    if (typeof swiper !== 'undefined') {
-                    // Proceed with Swiper operations
-                    swiper.appendSlide(newItem);
-                    } else {
-                    console.error('Swiper instance is undefined.');
-                    }
-                                    // $('.owl-carousel').trigger('add.owl.carousel', [$(newItem)]).trigger('refresh.owl.carousel');
-
-                // $('.swiper-wrapper').append(newItem);
-                // $('.swiper-wrapper').trigger('refresh.owl.carousel');
-                toggleSidebar("sidebar_groups");
-
-                }
-            },
-            error: function (xhr, status, error) {
-                console.log("AJAX error: " + error);
-            },
-        });
-    }else{
-        toastr.error('Please select Member');
-    }
-});
 
 $(document).on("click", ".invite_group_member", function () {
     $('#loader').css('display','block');
@@ -4843,32 +4872,7 @@ $(document).on("click", ".invite_group_member", function () {
     });
 });
 
-$(document).on("click", "#delete_group", function () {
-    var group_id = $(this).data("id");
-    $.ajax({
-        url: base_url + "event/delete_group",
-        type: "POST",
-        headers: {
-            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-        },
-        data: {
-            group_id: group_id,
-        },
-        success: function (response) {
-            if (response.status == "1") {
-                $(".added_group" + group_id).remove();
-                $('.group-card.view_members[data-id="'+group_id+'"]').remove();
-                $('.owl-carousel').trigger('refresh.owl.carousel');
 
-            }
-
-
-        },
-        error: function (xhr, status, error) {
-            console.log("AJAX error: " + error);
-        },
-    });
-});
 
 $(document).on("click", ".view_members", function () {
     var group_id = $(this).data("id");
