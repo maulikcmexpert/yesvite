@@ -76,7 +76,9 @@ $(document).on("click", "#delete_group", function () {
                 $(".added_group" + group_id).remove();
                 $('.group-card.view_members[data-id="' + group_id + '"]').remove();
                 $('.owl-carousel').trigger('refresh.owl.carousel');
-                swiper.update(); // Update Swiper after removing the slide
+                swiper[0].update(); // Update Swiper after removing the slide
+                swiper[1].update(); // Update Swiper after removing the slide
+                swiper[2].update(); // Update Swiper after removing the slide
             }
         },
         error: function (xhr, status, error) {
