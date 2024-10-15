@@ -4686,8 +4686,9 @@ $(document).on("click", ".add_new_group_member", function () {
                 </div>
                     `;
 
-                $('.owl-carousel').trigger('add.owl.carousel', [$(newItem)]).trigger('refresh.owl.carousel');
+                // $('.owl-carousel').trigger('add.owl.carousel', [$(newItem)]).trigger('refresh.owl.carousel');
 
+                $('.swiper-wrapper').append(newItem);
                 // $('.owl-carousel').trigger('refresh.owl.carousel');
                 toggleSidebar("sidebar_groups");
 
