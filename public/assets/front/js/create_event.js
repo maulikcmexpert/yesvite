@@ -4685,13 +4685,15 @@ $(document).on("click", ".add_new_group_member", function () {
                     </div>
                 </div>
                     `;
-
-                    var swiperInstance = $('.swiper-container')[0].swiper;
-                    // Append the new slide
-                    swiperInstance.appendSlide(newItem);
-                    // Update the Swiper instance after appending
-                    swiperInstance.update();
                     
+
+                    if (typeof swiper !== 'undefined') {
+                        // Proceed with Swiper operations
+                        swiper.appendSlide(newItem);
+                      } else {
+                        console.error('Swiper instance is undefined.');
+                      }
+                   
                 // $('.owl-carousel').trigger('add.owl.carousel', [$(newItem)]).trigger('refresh.owl.carousel');
 
                 // $('.swiper-wrapper').append(newItem);
