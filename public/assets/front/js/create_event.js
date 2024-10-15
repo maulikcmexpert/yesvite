@@ -4669,7 +4669,7 @@ $(document).on('keyup','.search_user_ajax',function(){
         $('#loader').css('display','block');
         displayRecords(limit,offset,'all',search_name);
         // $('#loader').css('display','none');
-    }, 1000);
+    }, 750);
 })
 
 function loadSearchUser(search_name) {
