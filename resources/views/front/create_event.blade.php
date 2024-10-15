@@ -483,7 +483,7 @@
             <div class="qty-container">
                 {{-- <button class="qty-btn-minus allow_limit_btn_minus" type="button"><i class="fa fa-minus"></i></button> --}}
                 <button class="allow_limit_btn_minus" type="button"><i class="fa fa-minus"></i></button>
-                <input type="number" name="qty" id="allow_limit_count" value="0" class="input-qty" />
+                <input type="number" name="qty" id="allow_limit_count" value="0" class="input-qty" readonly/>
                 <button class="allow_limit_btn_plus" type="button"><i class="fa fa-plus"></i></button>
                 {{-- <button class="qty-btn-plus allow_limit_btn_plus" type="button"><i class="fa fa-plus"></i></button> --}}
             </div>
@@ -1093,7 +1093,7 @@
                 <div class="qty-container">
                     <button class="qty-btn-minus-qty" type="button" onclick="clearError()"><i
                             class="fa fa-minus"></i></button>
-                    <input type="number" name="qty" id="category_quantity" value="1" class="input-qty">
+                    <input type="number" name="qty" id="category_quantity" value="1" class="input-qty" readonly>
                     <button class="qty-btn-plus-qty" type="button" onclick="clearError()"><i
                             class="fa fa-plus"></i></button>
                 </div>
@@ -1149,7 +1149,7 @@
                 <div class="qty-container">
                     <button class="qty-btn-minus-qty" type="button" onclick="clearError()"><i
                             class="fa fa-minus"></i></button>
-                    <input type="number" name="qty" id="category_quantity" value="1" class="input-qty">
+                    <input type="number" name="qty" id="category_quantity" value="1" class="input-qty" readonly>
                     <button class="qty-btn-plus-qty" type="button" onclick="clearError()"><i
                             class="fa fa-plus"></i></button>
                 </div>

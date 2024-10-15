@@ -605,7 +605,7 @@
             <h5>{{$user->firstname.' '.$user->lastname}}</h5>
             <div class="qty-container ms-auto">
                 <button class=" self_bring_quantity" data-type="minus" type="button"><i class="fa fa-minus"></i></button>
-                <input type="number" name="qty" id="self_bring_qty" value="0" class="input-qty" />
+                <input type="number" name="qty" id="self_bring_qty" value="0" class="input-qty" readonly/>
                 <button class=" self_bring_quantity" data-type="plus" type="button"><i class="fa fa-plus"></i></button>
             </div>
             <div class="d-flex">
