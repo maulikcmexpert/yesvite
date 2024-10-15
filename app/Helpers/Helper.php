@@ -1433,7 +1433,7 @@ function validateAndFormatPhoneNumber($receiverNumber, $defaultCountryCode = 'US
 function sendSMSForApplication($receiverNumber, $message)
 {
 
-    dd($receiverNumber);
+    dd($message);
     try {
 
         $formattedNumber = validateAndFormatPhoneNumber($receiverNumber);
