@@ -4646,7 +4646,7 @@ $(document).on("click", ".add_new_group", function () {
 
 $(document).on("click", ".add_new_group_member", function () {
     var group_name = $("#new_group_name").val();
-    console.log(swiper);
+    console.log(group_name);
     var selectedValues = [];
     $(".user_group_member:checked").each(function () {
         selectedValues.push({
@@ -4671,7 +4671,37 @@ $(document).on("click", ".add_new_group_member", function () {
             success: function (response) {
                 if (response.status == "1") {
                     $(".group_list").append(response.view);
-                    console.log('slider');
+                    var swiper = new Swiper(".mySwiper", {
+                        slidesPerView: 3.5,
+                        spaceBetween: 20,
+                        loop: true,
+                        navigation: {
+                          nextEl: ".swiper-button-next",
+                          prevEl: ".swiper-button-prev",
+                        },
+                        breakpoints: {
+                          320: {
+                              slidesPerView: 1.5,
+                              spaceBetween: 20,
+                          },
+                          576: {
+                              slidesPerView: 2.5,
+                              spaceBetween: 20,
+                          },
+                          768: {
+                              slidesPerView: 2.5,
+                              spaceBetween: 20,
+                            },
+                          1200: {
+                            slidesPerView: 2.5,
+                            spaceBetween: 20,
+                          },
+                          1400: {
+                            slidesPerView: 3.5,
+                            spaceBetween: 20,
+                          },
+                        },
+                    });
 
                     console.log(response.data);
                 //     $(".owl-stage").append(`<div class="owl-item cloned">
