@@ -62,6 +62,5 @@
         <p class="text-center">Didn't receive the code? First, check your SPAM folder</p>
 
         <p class="text-center">Click here to <a href="#" id="resend_otp" style="color: #F73C71;">Resend link</a> resend the code in case you didn't get it." </p>
-        < !-- <button type="button" id="resend_otp">Resend</button>-->
     </div>
 </section>
