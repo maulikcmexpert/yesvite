@@ -138,6 +138,7 @@ $(document).on('click', '#resend_otp', function() {
         },
         success: function(response) {
             if(response.success=="1"){
+                console.log(response.otp);
                 $('#generated_otp').val(response.otp);
                 toastr.success('Otp Resend Sucessfully')
             }
