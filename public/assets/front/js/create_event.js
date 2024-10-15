@@ -4665,11 +4665,11 @@ function displayRecords(lim, off,type,search = null,) {
 $(document).on('keyup','.search_user_ajax',function(){
     search_name = $(this).val();
     offset = 0;
-    $('#loader').css('display','block');
     setTimeout(function () {
+        $('#loader').css('display','block');
         displayRecords(limit,offset,'all',search_name);
         // $('#loader').css('display','none');
-    }, 500);
+    }, 1000);
 })
 
 function loadSearchUser(search_name) {
