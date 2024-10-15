@@ -136,7 +136,9 @@ $(document).on('click', '#resend_otp', function() {
         data: {
             email: email
         },
-        success: function(response) {},
+        success: function(response) {
+            console.log(response);
+        },
         error: function(xhr, status, error) {
             console.log("AJAX error: " + error);
         },
