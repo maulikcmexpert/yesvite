@@ -1432,6 +1432,8 @@ function validateAndFormatPhoneNumber($receiverNumber, $defaultCountryCode = 'US
 
 function sendSMSForApplication($receiverNumber, $message)
 {
+
+    dd($receiverNumber);
     try {
 
         $formattedNumber = validateAndFormatPhoneNumber($receiverNumber);
