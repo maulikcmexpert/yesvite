@@ -21,5 +21,6 @@
 
     <x-front.footer :js="$js ?? []" />
 </body>
+<script src="{{ asset('assets/event/js/common.js') }}"></script>
 
 </html>

@@ -95,3 +95,4 @@ defer
 @endif
 
 @stack('scripts')
+
