@@ -4686,10 +4686,16 @@ $(document).on("click", ".add_new_group_member", function () {
                 </div>
                     `;
 
+                    var swiperInstance = $('.swiper-container')[0].swiper;
+                    // Append the new slide
+                    swiperInstance.appendSlide(newItem);
+                    // Update the Swiper instance after appending
+                    swiperInstance.update();
+                    
                 // $('.owl-carousel').trigger('add.owl.carousel', [$(newItem)]).trigger('refresh.owl.carousel');
 
-                $('.swiper-wrapper').append(newItem);
-                // $('.owl-carousel').trigger('refresh.owl.carousel');
+                // $('.swiper-wrapper').append(newItem);
+                // $('.swiper-wrapper').trigger('refresh.owl.carousel');
                 toggleSidebar("sidebar_groups");
 
                 }
