@@ -36,9 +36,10 @@ class UserResendEmailVerify extends Controller
     
     public function re_send_email(string $id)
     {
+        try {
+        DB::beginTransaction();
         $user_id=decrypt($id);
         $userDetails = User::where('id', $user_id)->first();
-
         $userData = [
             'username' => $userDetails->firstname . ' ' . $userDetails->lastname,
             'email' => $userDetails->email,
@@ -48,12 +49,13 @@ class UserResendEmailVerify extends Controller
             $message->to($userDetails->email);
             $message->subject('Verify your Yesvite email address');
         });
-
         $userDetails->resend_verification_mail="0";
         $userDetails->save();
-        
+        DB::commit();
         return redirect()->route('user_resend_verification.index')->with('success', 'Verification Mail sent Successfully !');
-
+    } catch (QueryException $e) {
+        DB::rollBack();
+    }
     }
     /**
      * Show the form for creating a new resource.
