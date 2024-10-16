@@ -286,15 +286,15 @@ class UserController extends Controller
             'password' => $request->password
         ];
 
-        Mail::send('emails.temporary_password_email', ['userData' => $userData], function ($message) use ($update_password) {
+        $mail=Mail::send('emails.temporary_password_email', ['userData' => $userData], function ($message) use ($update_password) {
             $message->to($update_password->email);
             $message->subject('Temporary Password Mail');
         });
-        // dd($mail);
+        dd($mail);
 
         if (count(Mail::failures()) > 0) {
             DB::rollBack(); // Rollback the transaction if email fails
-            // return redirect()->back()->with('error', 'Failed to send email. Please try again.');
+            return redirect()->back()->with('error', 'Failed to send email. Please try again.');
         }
 
         DB::commit();
@@ -302,7 +302,7 @@ class UserController extends Controller
 
     } catch (\Exception $e) {
         DB::rollBack();
-        // return redirect()->back()->with('error', 'Error: ' . $e->getMessage());
+        return redirect()->back()->with('error', 'Error: ' . $e->getMessage());
     }
 }
 
