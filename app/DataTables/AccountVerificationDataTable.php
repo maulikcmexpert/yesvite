@@ -58,7 +58,7 @@ class AccountVerificationDataTable extends DataTable
             ->addColumn('action', function ($row) {
                 $cryptId = encrypt($row->id);
                 $edit_url = route('account_verify', $cryptId);
-                $verify_url=route('account_verify',$cryptId);
+                $verify_url=route('account_verification.edit',$cryptId);
                 $actionBtn = '<div class="action-icon">
                 <a class="" href="' . $edit_url . '" title="Edit"><i class="fa fa-edit"></i></a>
                 <a class="" href="' . $verify_url . '" title="Delete"><button type="submit" class="btn btn-danger">Verify</button></form>

@@ -78,7 +78,7 @@ class AccountVerification extends Controller
      */
     public function edit(string $id)
     {
-        //
+            dd(1);
     }
 
     /**
