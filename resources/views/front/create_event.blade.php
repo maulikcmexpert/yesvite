@@ -131,7 +131,7 @@
                     <span id="close_createEvent"><i class="fa-solid fa-xmark"></i></span>
                 </div>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li class="li_event_detail  ">
+                    <li class="li_event_detail">
                         <a class="dropdown-item drop-down-event-detail active" href="#">
                             <span>
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
