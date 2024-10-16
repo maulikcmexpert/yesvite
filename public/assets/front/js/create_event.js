@@ -4158,9 +4158,9 @@ $(document).on("click", ".edit_thankyou_card", function () {
     });
 });
 
-$(document).on("change", 'input[name="select_thankyou[]"]', function () {
-    $('input[name="select_thankyou[]"]').not(this).prop("checked", false);
-});
+// $(document).on("change", 'input[name="select_thankyou[]"]', function () {
+//     $('input[name="select_thankyou[]"]').not(this).prop("checked", false);
+// });
 
 $(document).on("click", "#close_thankyou_card_popup", function () {
     $("#thankyou_card_popup").remove();
@@ -4917,16 +4917,17 @@ $(document).on('click','#guest_list_visible_to_guest',function () {
 });
 
 $(document).on('click','input[name="select_thankyou[]"]',function () { 
+    $('input[name="select_thankyou[]"]').not(this).prop("checked", false);
     var i = 0;
     var checkedCount = 0;
-    $("input[name='select_thankyou[]']" ).each(function (index) {
+    // $("input[name='select_thankyou[]']" ).each(function (index) {
         if ($(this).is(':checked')) {
             checkedCount++;
             eventData.thank_you_card_id = $(this).data('id');
             console.log(eventData.thank_you_card_id);
+            i++;
         }
-        i++;
-    });
+    // });
     if(i>=1 && checkedCount > 0){
         if(i==1){
             $('.add_new_thankyou_card').html(`<span class="me-3"></span>
