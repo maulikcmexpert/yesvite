@@ -277,6 +277,9 @@ class UserController extends Controller
                 $update_password->isTemporary_password="1";
             }
             $update_password->save();
+
+            return redirect()->route('users.create')->with('error', 'User Passsword Updated!');
+
         } catch (\Exception $e) {
             DB::rollBack();
         }
