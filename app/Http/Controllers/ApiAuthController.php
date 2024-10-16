@@ -684,4 +684,5 @@ class ApiAuthController extends Controller
             return view('emailVarification', compact('message', 'faild'));
         }
     }
+    
 }

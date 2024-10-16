@@ -102,6 +102,9 @@ Route::group(['middleware' => adminAuth::Class], function () {
 
     Route::post('user/check_new_contactnumber', [UserController::class, 'checkNewContactNumber']);
 
+    Route::post('user/ResendVerificationMail', [UserController::class, 'ResendVerificationMail']);
+
+
 
     Route::post('category/check_category_is_exist', [CategoryController::class, 'checkCategoryIsExist'])->name('category_check_exist');
     Route::get('delete_post_report', [UserPostReportController::class, 'deletePostReport'])->name('delete_post_report');

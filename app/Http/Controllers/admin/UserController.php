@@ -276,4 +276,24 @@ class UserController extends Controller
     {
         //
     }
+
+    public function ResendVerificationMail(Request $request){
+        dd(1);
+
+        $userDetails = User::where('id',  $id)->first();
+
+        $userData = [
+            // 'username' => $userDetails->firstname . ' ' . $userDetails->lastname,
+            'username' => $userDetails->firstname,
+            'email' => $userDetails->email,
+            'token' => $userDetails->remember_token,
+        ];
+    Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($userDetails) {
+            $message->to($userDetails->email);
+            $message->subject('Email Verification Mail');
+        });
+
+        return redirect()->route('design.index')->with("success", "Email Resend Successfully !");
+
+    }
 }
