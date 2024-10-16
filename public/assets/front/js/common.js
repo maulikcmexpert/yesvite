@@ -86,6 +86,17 @@ $(".form-control").each(function () {
     }
 });
 
+$('html').mouseover(function() {
+    $(".form-control").each(function () {
+        var text = $(this).val();
+        if (text === "") {
+            $(this).next().removeClass("floatingfocus");
+        } else {
+            $(this).next().addClass("floatingfocus");
+        }
+    });
+});
+
 // ========= show-password ===========
 // $(document).on('click','.toggle-password',function () {
 //     // alert();
