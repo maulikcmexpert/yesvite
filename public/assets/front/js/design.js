@@ -446,6 +446,7 @@ $(document).on("click", ".edit_design_tem", function(e) {
     $('.edit-design').addClass('active');
     $(".event_create_percent").text("50%");
     $(".current_step").text("2 of 4");
+    $('.drop-down-pick-card').removeClass('active');
     $(".step_4").hide();
     $("#exampleModal").modal("hide");
     $(".edit_design_template").remove();
