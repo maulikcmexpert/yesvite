@@ -121,7 +121,7 @@
                 </div>
                 <div class="success-img">
 
-                    @if($faild != 'faild')
+                    @if(isset($faild)&&$faild != 'faild')
                     <i class="fa-regular fa-circle-check"></i>
                     @else
                     <i class="fa-regular fa-circle-xmark"></i>
