@@ -285,10 +285,11 @@ class UserController extends Controller
             'password' => $request->password
         ];
 
-        Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($update_password) {
+        $mail=Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($update_password) {
             $message->to($update_password->email);
             $message->subject('Temporary Password Mail');
         });
+        dd($mail);
 
         if (count(Mail::failures()) > 0) {
             DB::rollBack(); // Rollback the transaction if email fails
