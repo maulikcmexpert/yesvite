@@ -40,7 +40,10 @@ class AccountVerification extends Controller
     {
         //
     }
-
+    public function verify(string $id)
+    {
+        dd(1);
+    }
     /**
      * Store a newly created resource in storage.
      */

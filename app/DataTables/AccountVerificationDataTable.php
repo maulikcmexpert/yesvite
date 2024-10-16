@@ -57,7 +57,8 @@ class AccountVerificationDataTable extends DataTable
             })
             ->addColumn('action', function ($row) {
                 $cryptId = encrypt($row->id);
-                $edit_url = route('subcategory.edit', $cryptId);
+                $edit_url = route('', $cryptId);
+                $verify_url=route('account_verify',$cryptId);
                 $actionBtn = '<div class="action-icon">
                 <a class="" href="' . $edit_url . '" title="Edit"><i class="fa fa-edit"></i></a>
                 <form action="' . $edit_url . '" method="POST">' .
