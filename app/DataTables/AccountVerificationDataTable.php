@@ -57,14 +57,11 @@ class AccountVerificationDataTable extends DataTable
             })
             ->addColumn('action', function ($row) {
                 $cryptId = encrypt($row->id);
-                $edit_url = route('', $cryptId);
+                $edit_url = route('account_verify', $cryptId);
                 $verify_url=route('account_verify',$cryptId);
                 $actionBtn = '<div class="action-icon">
                 <a class="" href="' . $edit_url . '" title="Edit"><i class="fa fa-edit"></i></a>
-                <form action="' . $edit_url . '" method="POST">' .
-                csrf_field() . // Changed from @csrf to csrf_field()
-                method_field("DELETE") . // Changed from @method to method_field()
-                '<button type="submit" class="btn btn-danger">Verify</button></form>
+                <a class="" href="' . $verify_url . '" title="Delete"><button type="submit" class="btn btn-danger">Verify</button></form>
                 </div>';
 
                 return $actionBtn;
