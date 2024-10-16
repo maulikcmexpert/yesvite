@@ -43,7 +43,7 @@
 
                             <label for="exampleInputEmail1">Password</label>
 
-                            <input type="text" class="form-control subcategory_name" name="password " placeholder="Enter Subcategory Name" value="">
+                            <input type="text" class="form-control subcategory_name" name="password " placeholder="Enter Temporary Password" value="">
 
                             <span class="text-danger"></span>
 
