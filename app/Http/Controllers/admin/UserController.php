@@ -287,7 +287,7 @@ class UserController extends Controller
         ];
 
         try {
-            Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($update_password) {
+            Mail::send('emails.temporary_password_email', ['userData' => $userData], function ($message) use ($update_password) {
                 $message->to($update_password->email);
                 $message->subject('Temporary Password Mail');
             });
