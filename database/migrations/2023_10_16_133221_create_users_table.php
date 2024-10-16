@@ -70,7 +70,9 @@ return new class extends Migration
             $table->foreign('parent_user_phone_contact')->references('id')->on('users')->onDelete('cascade');
             $table->enum('message_privacy', ['1', '2', '3'])->default('1')->comment('1 = Only guests from event 2 = Anyone 3 = No One - Disable DM');
             $table->date('password_updated_date')->nullable();
-            $table->enum('resend_verification_mail', ['0', '1'])->default('0')->comment('1 = user requested verification mail 0 =  user not requested verification mail');
+            $table->enum('resend_verification_mail', allowed: ['0', '1'])->default('0')->comment('1 = user requested verification mail 0 =  user not requested verification mail');
+            $table->enum('isTemporary_password', allowed: ['0', '1'])->default('0')->comment('0= if it not temp password,1= if it is temp password');
+
             $table->timestamps();
         });
     }

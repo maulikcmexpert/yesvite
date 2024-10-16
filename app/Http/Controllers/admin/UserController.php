@@ -273,7 +273,9 @@ class UserController extends Controller
             $user_id=decrypt($id);
             $update_password=User::where('id',$user_id)->first();
             $update_password->password= $request->password;
-            $update_password->isTemporary_password="1";
+            if($requireNewPassword=="true"){
+                $update_password->isTemporary_password="1";
+            }
             $update_password->save();
         } catch (\Exception $e) {
             DB::rollBack();
