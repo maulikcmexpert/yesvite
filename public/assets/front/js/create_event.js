@@ -370,14 +370,11 @@ if (/Mobi/.test(navigator.userAgent)) {
     
 }
 
-$(document).on('click','.timepicker', function(){
-   datepicker();
-})
+// $(document).on('click','.timepicker', function(){
+//    datepicker();
+// })
 datepicker();
 function datepicker() {
-
-    
-    
     $(".timepicker").datetimepicker({
         format: "LT",
         icons: {
