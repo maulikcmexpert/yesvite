@@ -2849,9 +2849,7 @@ function savePage1Data(close = null) {
         $(".step_2").show();
         $('.event_create_percent').text('50%');
         $('.current_step').text('2 of 4');
-        $('.drop-down-event-detail').removeClass('active');
-        $('.drop-down-event-design').addClass('active');
-        $('.drop-down-pick-card').addClass('active');
+        active_responsive_dropdown('drop-down-event-design','drop-down-pick-card');
         if(final_step == 1){
             final_step = 2;
         }
@@ -2906,8 +2904,7 @@ function savePage3Data() {
             $('.current_step').text('4 of 4');
             $(".step_4").show();
             $('.li_guest').find(".side-bar-list").addClass("menu-success");
-            $('.drop-down-event-guest').removeClass('active');
-            $('.drop-down-event-setting').addClass('active');
+            active_responsive_dropdown('drop-down-event-setting');
             if(final_step == 3){
                 final_step = 4;
             }
@@ -3303,6 +3300,19 @@ $(document).on("click", ".li_event_detail", function () {
         $('.edit-design').addClass('menu-success');
     }
 });
+
+function active_responsive_dropdown(current_page,design_page = null){
+    $('.drop-down-event-detail').removeClass('active');
+    $('.drop-down-event-design').removeClass('active');
+    $('.drop-down-pick-card').removeClass('active');
+    $('.drop-down-edit-design').removeClass('active');
+    $('.drop-down-event-guest').removeClass('active');
+    $('.drop-down-event-setting').removeClass('active');
+    $('.'+current_page).addClass('active');
+    if(design_page){
+        $('.'+design_page).addClass('active');
+    }
+}
 
 $(document).on("click", ".li_guest", function () {
     var design = eventData.desgin_selected;
@@ -4545,10 +4555,8 @@ function save_image_design(downloadImage,textData){
                     $('.edit-design').addClass('menu-success');
                     $('.edit-design').removeClass('active');
                     $('.li_design').find(".side-bar-list").addClass("menu-success");
-                    $('.drop-down-edit-design').removeClass('active');
-                    $('.drop-down-pick-card').removeClass('active');
-                    $('.drop-down-event-design').removeClass('active');
-                    $('.drop-down-event-guest').addClass('active');
+
+                    active_responsive_dropdown('drop-down-event-guest');
 
                     $('.event_create_percent').text('75%');
                     $('.current_step').text('3 of 4');
