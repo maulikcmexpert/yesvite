@@ -280,21 +280,24 @@ class UserController extends Controller
             $update_password->isTemporary_password = 1; // Save as temporary
         }
         $update_password->save();
-        DB::commit();
 
         $userData = [
             'username' => $update_password->firstname,
             'password' => $request->password
         ];
 
-
+        try {
             Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($update_password) {
                 $message->to($update_password->email);
                 $message->subject('Temporary Password Mail');
             });
-            return redirect()->route('users.index')->with('success', 'User password updated and email sent successfully!');
-         
-        
+        } catch (\Exception $e) {
+            DB::rollBack();
+            dd($e->getMessage());
+            return redirect()->back()->with('error', 'Failed to send email: ' . $e->getMessage());
+        }
+        DB::commit();
+        return redirect()->route('users.index')->with('success', 'User password updated and email sent successfully!');
 
     } catch (\Exception $e) {
         DB::rollBack();
