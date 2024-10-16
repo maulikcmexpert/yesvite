@@ -21,7 +21,8 @@ use App\Http\Controllers\admin\{
     UserChatReportController,
     TemplateController,
     EditTempalteController,
-    UserResendEmailVerify
+    UserResendEmailVerify,
+    AccountVerification
 };
 
 use Illuminate\Support\Facades\Session;
@@ -75,7 +76,8 @@ Route::group(['middleware' => adminAuth::Class], function () {
         'user_post_report' => UserPostReportController::class,
         'create_template' => TemplateController::class,
         'user_chat_report' => UserChatReportController::class,
-        'user_resend_verification'=>UserResendEmailVerify::class
+        'user_resend_verification'=>UserResendEmailVerify::class,
+        'account_verification'=>AccountVerification::class,
 
     ]);
     Route::get('template/view/{id}', [TemplateController::class, 'View_template'])->name('template.view');
