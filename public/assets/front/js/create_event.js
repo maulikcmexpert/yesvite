@@ -3533,7 +3533,7 @@ $(document).on("change", "#YesviteUserAll input[name='mobile[]']", function () {
     }
 });
 
-$(document).on("change", ".user_choice", function () {
+$(document).on("change", "#YesviteUserAll .user_choice", function () {
     var groupId = $(this).closest(".user_choice_group").data("id");
     if ($(this).is(":checked")) {
         $('.user_choice_group[data-id="' + groupId + '"] .user_choice')
