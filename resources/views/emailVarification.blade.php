@@ -152,7 +152,7 @@
     var base_url=$('#url').val();
     $('#requestEmail').on('click',function(){
     $.ajax({
-        url: base_url + "ResendVerificationMail",
+        url: base_url + "/ResendVerificationMail",
         type: "POST",
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
