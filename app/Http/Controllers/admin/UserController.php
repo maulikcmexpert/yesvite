@@ -280,15 +280,15 @@ class UserController extends Controller
             }
             $update_password->save();
 
-            $userData = [
-                'username' => $update_password->firstname,
-                'password'=>$request->password
+            // $userData = [
+            //     'username' => $update_password->firstname,
+            //     'password'=>$request->password
              
-            ];
-            Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($update_password) {
-                $message->to($update_password->email);
-                $message->subject('Temporary Password Mail');
-            });
+            // ];
+            // Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($update_password) {
+            //     $message->to($update_password->email);
+            //     $message->subject('Temporary Password Mail');
+            // });
             DB::commit();
 
             return redirect()->route('users.index')->with('success', 'User Password Updated successfully !');
