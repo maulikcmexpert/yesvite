@@ -63,7 +63,7 @@ class AccountVerificationDataTable extends DataTable
                 <form action="' . $edit_url . '" method="POST">' .
                 csrf_field() . // Changed from @csrf to csrf_field()
                 method_field("DELETE") . // Changed from @method to method_field()
-                '<button type="submit" class="btn bg-transparent"><i class="fas fa-trash"></i></button></form>
+                '<button type="submit" class="btn btn-danger">Verify</button></form>
                 </div>';
 
                 return $actionBtn;
