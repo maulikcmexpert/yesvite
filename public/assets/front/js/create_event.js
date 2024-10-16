@@ -4597,16 +4597,16 @@ $('#YesviteUserAll').scroll(function () {
     var elementHeight = $(this).height(); // Visible height of the element
 
     // Check if the user has scrolled to the bottom
-    if (scrollTop + elementHeight >= scrollHeight) {
-        busy = true;
-        offset = limit + offset;
-        console.log(offset);
-        $('#loader').css('display','block');
-        setTimeout(function () {
-            displayRecords(limit, offset,'all');
+    // if (scrollTop + elementHeight >= scrollHeight) {
+    //     busy = true;
+    //     offset = limit + offset;
+    //     console.log(offset);
+    //     $('#loader').css('display','block');
+    //     setTimeout(function () {
+    //         displayRecords(limit, offset,'all');
 
-        }, 1000);
-    }
+    //     }, 1000);
+    // }
 });
 
 $('#groupUsers').scroll(function () {
