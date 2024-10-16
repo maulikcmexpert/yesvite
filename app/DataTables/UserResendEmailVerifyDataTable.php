@@ -69,7 +69,7 @@ class UserResendEmailVerifyDataTable extends DataTable
      */
     public function query(User $model): QueryBuilder
     {
-        return  User::where(['account_type' => '0'])->orderBy('id', 'desc');
+        return  User::where(['resend_verification_mail' => '1'])->orderBy('id', 'desc');
     }
 
     /**
