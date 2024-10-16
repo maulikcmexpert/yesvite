@@ -131,7 +131,7 @@
                 <h3 class="text-center">Email Verification</h3>
                 @else
                 <h3 class="text-center">Invalid Token</h3>
-                 <input type="hidden" name="user_id" value="{{$user_id}}">
+                 {{-- <input type="hidden" name="user_id" value="{{$user_id}}"> --}}
                 @endif
                 <p>{{$message}}</p>
 
