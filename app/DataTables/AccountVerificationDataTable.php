@@ -55,7 +55,7 @@ class AccountVerificationDataTable extends DataTable
             ->addColumn('username', function ($row) {
                 return $row->firstname . ' ' . $row->lastname;
             })
-            ->addColumn('resend_mail', function ($row) {
+            ->addColumn('action', function ($row) {
                 $cryptId = encrypt($row->id);
                 $edit_url = route('subcategory.edit', $cryptId);
                 $actionBtn = '<div class="action-icon">
@@ -74,7 +74,7 @@ class AccountVerificationDataTable extends DataTable
             })
             
 
-            ->rawColumns(['profile','username','resend_mail']);
+            ->rawColumns(['profile','username','action']);
     }
 
 
@@ -117,7 +117,7 @@ class AccountVerificationDataTable extends DataTable
             Column::make('no')->title('#')->render('meta.row + meta.settings._iDisplayStart + 1;'),
             Column::make('profile'),
             Column::make('username'),
-            Column::make('resend_mail')->title('Resend Email'),
+            Column::make('action')->title('Action'),
         ];
     }
 
