@@ -57,7 +57,7 @@ class UserResendEmailVerifyDataTable extends DataTable
                 return $row->firstname . ' ' . $row->lastname;
             })
             ->addColumn('resend_mail', function ($row) {
-                return '<button class="btn-btn danger">Send Mail</button>'
+                return '<button class="btn-btn danger">Send Mail</button>';
             })
 
             ->rawColumns(['profile', 'app_user']);
