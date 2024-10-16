@@ -3487,7 +3487,7 @@ function toggleSidebar(id = null) {
     }
 }
 
-$(document).on("change", "input[name='email_invite[]']", function () {
+$(document).on("change", "#YesviteUserAll input[name='email_invite[]']", function () {
     // enforceCheckboxLimit();
     if (!$(this).is(":checked")) {
         var check = $(this).data("id");
@@ -3510,7 +3510,7 @@ $(document).on("change", "input[name='email_invite[]']", function () {
     }
 });
 
-$(document).on("change", "input[name='mobile[]']", function () {
+$(document).on("change", "#YesviteUserAll input[name='mobile[]']", function () {
     // enforceCheckboxLimit();
     if (!$(this).is(":checked")) {
         var check = $(this).data("id");
