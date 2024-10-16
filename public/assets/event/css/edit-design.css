@@ -887,7 +887,7 @@
     }
 
     .choose-design-sidebar.design-sidebar_5 {
-        height: 70vh;
+        height: 55vh !important;
     }
 
     .edit-imag-main-content-wrp .choose-design-sidebar {
@@ -966,6 +966,11 @@
 
     .edit-image-main-wrp {
         height: 80vh;
+    }
+
+    .format-text-inner-options {
+
+        justify-content: space-between;
     }
 }
 
