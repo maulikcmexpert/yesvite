@@ -3349,6 +3349,7 @@ $(document).on("click", ".li_setting", function () {
         $('.event_create_percent').text('99%');
         $('.current_step').text('4 of 4');
         handleActiveClass(this);
+        active_responsive_dropdown('drop-down-event-setting');
         if( design == undefined || design == ''){
 
         }else{
