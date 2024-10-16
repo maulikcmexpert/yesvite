@@ -691,7 +691,7 @@ class AuthController extends Controller
         return response()->json(['access_token' => $accessToken]);
     }
 
-    public function ResendVerificationMail(){
+    public function ResendVerificationMail(Request $request){
         dd(1);
 
         $userDetails = User::where('id',  $id)->first();
