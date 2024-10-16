@@ -39,7 +39,7 @@ use Illuminate\Support\Facades\Auth;
 
 
 Route::get('/', [HomeFrontController::class, 'index'])->name('front.home')->middleware('isAuthenticate');
-Route::get('/ResendVerificationMail/{id}', [HomeFrontController::class, 'ResendVerificationMail'])->name('ResendVerificationMail');
+Route::get('/ResendVerificationMail/{id}', [HomeFrontController::class, 'ResendVerificationMail'])->name('ResendVerificationMail')->middleware('isAuthenticate');
 Route::get('about-us', [AboutController::class, 'index'])->name('about');
 Route::get('privacy_policy', [PrivacyPolicyController::class, 'index'])->name('privacy_policy');
 Route::get('term_and_condition', [TermsAndConditionController::class, 'index'])->name('term_and_condition');
