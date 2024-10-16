@@ -4923,6 +4923,7 @@ $(document).on('click','input[name="select_thankyou[]"]',function () {
         if ($(this).is(':checked')) {
             checkedCount++;
             eventData.thank_you_card_id = $(this).data('id');
+            console.log(eventData.thank_you_card_id);
         }
         i++;
     });
