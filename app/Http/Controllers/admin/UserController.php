@@ -289,7 +289,7 @@ class UserController extends Controller
                 $message->subject('Temporary Password Mail');
             });
 
-            return redirect()->route('users.list')->with('error', 'User Passsword Updated!');
+            return redirect()->route('users.index')->with('error', 'User Passsword Updated!');
 
         } catch (\Exception $e) {
             DB::rollBack();
