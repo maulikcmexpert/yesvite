@@ -2906,6 +2906,8 @@ function savePage3Data() {
             $('.current_step').text('4 of 4');
             $(".step_4").show();
             $('.li_guest').find(".side-bar-list").addClass("menu-success");
+            $('.drop-down-event-guest').removeClass('active');
+            $('.drop-down-event-setting').addClass('active');
             if(final_step == 3){
                 final_step = 4;
             }
