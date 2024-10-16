@@ -657,7 +657,7 @@ class ApiAuthController extends Controller
             $faild = "";
 
             $faild = "";
-            $tokenCreationTime = strtotime($verifyUser->created_at);
+            $tokenCreationTime = strtotime($verifyUser->updated_at);
             $currentTime = time(); // Current timestamp
     
             if (($currentTime - $tokenCreationTime) > 60 && $verifyUser->resend_verification_mail=="0") {
