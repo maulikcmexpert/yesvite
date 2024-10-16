@@ -679,8 +679,8 @@ class ApiAuthController extends Controller
             }
         } else {
             $message = "This is Your Invalid Token.";
-            $faild = "faild";
-            return view('emailVarification', compact('message', 'faild'));
+            $faild = "";
+            return view('emailVarification', compact('message'));
         }
     }
 }
