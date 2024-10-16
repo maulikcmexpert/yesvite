@@ -97,14 +97,11 @@ Route::group(['middleware' => adminAuth::Class], function () {
 
     Route::post('create_template/get_all_subcategory', [TemplateController::class, 'get_all_subcategory'])->name('get_all_subcategory');
 
-
     Route::post('user/check_new_contactemail', [UserController::class, 'checkNewContactEmail']);
 
     Route::post('user/check_new_contactnumber', [UserController::class, 'checkNewContactNumber']);
 
-    Route::post('user/ResendVerificationMail', [UserController::class, 'ResendVerificationMail'])->name('ResendVerificationMail');
-
-
+    Route::post('user/ResendVerificationMail', action: [UserController::class, 'ResendVerificationMail'])->name('ResendVerificationMail');
 
     Route::post('category/check_category_is_exist', [CategoryController::class, 'checkCategoryIsExist'])->name('category_check_exist');
     Route::get('delete_post_report', [UserPostReportController::class, 'deletePostReport'])->name('delete_post_report');
