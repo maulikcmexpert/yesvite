@@ -273,6 +273,7 @@ class UserController extends Controller
         $requireNewPassword = $request->has('require_new_password') ? true : false;
         $user_id = decrypt($id);
         $update_password = User::where('id', $user_id)->first();
+        dd($update_password);
         $update_password->password = Hash::make($request->password); // Use bcrypt for password hashing
         
         if ($requireNewPassword) {
@@ -289,7 +290,7 @@ class UserController extends Controller
             $message->to($update_password->email);
             $message->subject('Temporary Password Mail');
         });
-        dd($mail);
+        // dd($mail);
 
         if (count(Mail::failures()) > 0) {
             DB::rollBack(); // Rollback the transaction if email fails
