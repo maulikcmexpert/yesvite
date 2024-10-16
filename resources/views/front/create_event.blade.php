@@ -131,8 +131,8 @@
                     <span id="close_createEvent"><i class="fa-solid fa-xmark"></i></span>
                 </div>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li class="li_event_detail drop-down-event-detail active">
-                        <a class="dropdown-item" href="#">
+                    <li class="li_event_detail">
+                        <a class="dropdown-item drop-down-event-detail active" href="#">
                             <span>
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -149,7 +149,7 @@
                         </a>
                     </li>
                     <li class="li_design">
-                        <div class="dropdown-item">
+                        <div class="dropdown-item drop-down-event-design ">
                             <span>
                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -174,15 +174,15 @@
                         </div>
                         <ul class="dropdown-sub-menu">
                             <li class="pick-card">
-                                <a href="" class="dropdown-item">Pick Card</a>
+                                <a href="" class="dropdown-item drop-down-pick-card">Pick Card</a>
                             </li>
                             <li class="edit-design">
-                                <a href="" class="dropdown-item">Edit Design</a>
+                                <a href="" class="dropdown-item drop-down-edit-design">Edit Design</a>
                             </li>
                         </ul>
                     </li>
                     <li class="li_guest">
-                        <a class="dropdown-item" href="#">
+                        <a class="dropdown-item drop-down-event-guest" href="#">
                             <span>
                                 <svg width="18" height="20" viewBox="0 0 18 20" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -208,7 +208,7 @@
                         </a>
                     </li>
                     <li class="li_setting">
-                        <a class="dropdown-item" href="#">
+                        <a class="dropdown-item drop-down-event-setting" href="#">
                             <span>
                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">

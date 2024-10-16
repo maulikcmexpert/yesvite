@@ -2849,6 +2849,9 @@ function savePage1Data(close = null) {
         $(".step_2").show();
         $('.event_create_percent').text('50%');
         $('.current_step').text('2 of 4');
+        $('.drop-down-event-detail').removeClass('active');
+        $('.drop-down-event-design').addClass('active');
+        $('.drop-down-pick-card').addClass('active');
         if(final_step == 1){
             final_step = 2;
         }
@@ -4540,6 +4543,10 @@ function save_image_design(downloadImage,textData){
                     $('.edit-design').addClass('menu-success');
                     $('.edit-design').removeClass('active');
                     $('.li_design').find(".side-bar-list").addClass("menu-success");
+                    $('.drop-down-edit-design').removeClass('active');
+                    $('.drop-down-pick-card').removeClass('active');
+                    $('.drop-down-event-design').removeClass('active');
+                    $('.drop-down-event-guest').addClass('active');
 
                     $('.event_create_percent').text('75%');
                     $('.current_step').text('3 of 4');
