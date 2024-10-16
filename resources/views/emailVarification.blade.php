@@ -144,8 +144,7 @@
             </div>
         </div>
     </div>
-</body>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5/0hA2+1z1a08SKo5Vxri1A11P8RciS4QHRFX72A" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5/0hA2+1z1a08SKo5Vxri1A11P8RciS4QHRFX72A" crossorigin="anonymous"></script>
 <script>
     $('#requestEmail').on('click',function(){
     $.ajax({
@@ -167,4 +166,6 @@
     });
 })
 </script>
+</body>
+
 </html>
