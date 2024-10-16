@@ -57,7 +57,16 @@ class UserResendEmailVerifyDataTable extends DataTable
                 return $row->firstname . ' ' . $row->lastname;
             })
             ->addColumn('resend_mail', function ($row) {
-                return '<button class="btn btn-danger">Send Mail</button>';
+                $cryptId = encrypt($row->id);
+                $view_url = route('re_send_email', $cryptId);
+                $actionBtn = '
+                    <a class="" href="' . $view_url . '" title="View"><button class="btn btn-danger">Send Mail</button></a>';
+
+                return $actionBtn;
+
+
+
+
             })
             
 

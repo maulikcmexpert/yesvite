@@ -104,6 +104,8 @@ Route::group(['middleware' => adminAuth::Class], function () {
 
     Route::post('category/check_category_is_exist', [CategoryController::class, 'checkCategoryIsExist'])->name('category_check_exist');
     Route::get('delete_post_report', [UserPostReportController::class, 'deletePostReport'])->name('delete_post_report');
+    Route::get('re_send_email/{id}', [UserResendEmailVerify::class, 're_send_email'])->name('re_send_email');
+
 
     Route::post('subcategory/check_subcategory_is_exist', [SubCategoryController::class, 'checkSubCategoryIsExist'])->name('category_check_exist');
     Route::post('design_style/check_design_style_is_exist', [DesignStyleController::class, 'checkDesignStyleIsExist'])->name('category_check_exist');
