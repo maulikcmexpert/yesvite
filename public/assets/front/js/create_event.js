@@ -3330,7 +3330,7 @@ $(document).on("click", ".li_guest", function () {
         $('.edit-design').addClass('menu-success');
         $('.event_create_percent').text('75%');
         $('.current_step').text('3 of 4');
-    
+        active_responsive_dropdown('drop-down-event-guest');
         handleActiveClass('.li_guest');
     }
 });
