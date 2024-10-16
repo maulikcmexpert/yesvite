@@ -652,10 +652,9 @@ class ApiAuthController extends Controller
 
 
         $verifyUser = User::where('remember_token', $token)->first();
-
+        $faild = "";    
         if (!is_null($verifyUser)) {
 
-            $faild = "";
             $tokenCreationTime = strtotime($verifyUser->updated_at);
             $currentTime = time(); // Current timestamp
 
