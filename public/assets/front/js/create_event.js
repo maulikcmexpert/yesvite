@@ -96,13 +96,13 @@ $(document).on("click", "#delete_group", function () {
 $(document).on("click", ".add_new_group_member", function () {
     var group_name = $("#new_group_name").val();
     var selectedValues = [];
-    $(".user_group_member:checked").each(function () {
+    $("#groupUsers .user_group_member:checked").each(function () {
         selectedValues.push({
             id: $(this).val(),
             prefer_by: $(this).data("preferby"),
         });
     });
-    $('.user_group_member').prop('checked', false);
+    $('#groupUsers .user_group_member').prop('checked', false);
 
     if (selectedValues.length > 0) {
         $.ajax({
