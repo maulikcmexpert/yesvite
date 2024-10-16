@@ -42,7 +42,20 @@ class AccountVerification extends Controller
     }
     public function verify(string $id)
     {
-        dd(1);
+        try{
+        $user_id=decrypt($id);
+
+        $verify=User::where('id',$user_id)->first();
+        if($verify){
+            $verify->email_verified_at= time();
+            $verify->save();
+        }
+
+        return redirect()->route('account_verification.index')->with("success", "User Verified Successfully !");
+    } catch (QueryException $e) {
+        DB::rollBack();
+       
+    }
     }
     /**
      * Store a newly created resource in storage.
