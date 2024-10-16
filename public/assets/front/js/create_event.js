@@ -102,8 +102,6 @@ $(document).on("click", ".add_new_group_member", function () {
             prefer_by: $(this).data("preferby"),
         });
     });
-    $('#groupUsers .user_group_member').prop('checked', false);
-
     if (selectedValues.length > 0) {
         $.ajax({
             url: base_url + "event/add_new_group",
