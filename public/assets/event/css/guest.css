@@ -190,10 +190,10 @@
 }
 
 .guest-pro h5 {
-    color: #e73c8e;
-    font-size: 20px;
-    font-weight: 700;
-    line-height: 24px;
+    color: #e73c8e !important;
+    font-size: 20px !important;
+    font-weight: 700 !important;
+    line-height: 24px !important;
 }
 
 .guest-pro h6 {
@@ -208,6 +208,7 @@
     padding: 10px 10px 10px 10px;
     display: flex;
     align-items: center;
+    justify-content: center;
     box-shadow: 0px 10px 20px 0px #0000001A;
 }
 
