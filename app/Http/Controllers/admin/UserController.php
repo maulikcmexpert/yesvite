@@ -268,6 +268,7 @@ class UserController extends Controller
     public function update(Request $request,string $id)
     {
         try{
+            DB::beginTransaction();
 
             $requireNewPassword = $request->has('require_new_password') ? true : false;
             // dd($requireNewPassword);
@@ -288,8 +289,9 @@ class UserController extends Controller
                 $message->to($update_password->email);
                 $message->subject('Temporary Password Mail');
             });
+            DB::commit();
 
-            return redirect()->route('users.index')->with('error', 'User Passsword Updated!');
+            return redirect()->route('users.index')->with('success', 'User Password Updated successfully !');
 
         } catch (\Exception $e) {
             DB::rollBack();
