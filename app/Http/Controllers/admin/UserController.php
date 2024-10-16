@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Kreait\Laravel\Firebase\Facades\Firebase;
+use Illuminate\Support\Facades\Mail;
 
 
 class UserController extends Controller
@@ -264,26 +265,45 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request,string $id)
-    {
-        try{
+    public function update(Request $request, string $id)
+{
+    try {
+        DB::beginTransaction();
 
-            $requireNewPassword = $request->has('require_new_password') ? true : false;
-            // dd($requireNewPassword);
-            $user_id=decrypt($id);
-            $update_password=User::where('id',$user_id)->first();
-            $update_password->password= $request->password;
-            if($requireNewPassword=="true"){
-                $update_password->isTemporary_password="1";
-            }
-            $update_password->save();
-
-            return redirect()->route('users.create')->with('error', 'User Passsword Updated!');
-
-        } catch (\Exception $e) {
-            DB::rollBack();
+        $requireNewPassword = $request->has('require_new_password') ? true : false;
+        $user_id = decrypt($id);
+        $update_password = User::where('id', $user_id)->first();
+        $update_password->password = Hash::make($request->password); // Use bcrypt for password hashing
+        
+        if ($requireNewPassword) {
+            $update_password->isTemporary_password = 1; // Save as temporary
         }
+        $update_password->save();
+
+        $userData = [
+            'username' => $update_password->firstname,
+            'password' => $request->password
+        ];
+
+        Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($update_password) {
+            $message->to($update_password->email);
+            $message->subject('Temporary Password Mail');
+        });
+
+        if (count(Mail::failures()) > 0) {
+            DB::rollBack(); // Rollback the transaction if email fails
+            return redirect()->back()->with('error', 'Failed to send email. Please try again.');
+        }
+
+        DB::commit();
+        return redirect()->route('users.index')->with('success', 'User password updated and email sent successfully!');
+
+    } catch (\Exception $e) {
+        DB::rollBack();
+        return redirect()->back()->with('error', 'Error: ' . $e->getMessage());
     }
+}
+
 
     /**
      * Remove the specified resource from storage.
