@@ -273,7 +273,7 @@ class UserController extends Controller
         $requireNewPassword = $request->has('require_new_password') ? true : false;
         $user_id = decrypt($id);
         $update_password = User::where('id', $user_id)->first();
-        dd($update_password);
+        
         $update_password->password = Hash::make($request->password); // Use bcrypt for password hashing
         
         if ($requireNewPassword) {
@@ -286,7 +286,7 @@ class UserController extends Controller
             'password' => $request->password
         ];
 
-        $mail=Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($update_password) {
+        Mail::send('emails.temporary_password_email', ['userData' => $userData], function ($message) use ($update_password) {
             $message->to($update_password->email);
             $message->subject('Temporary Password Mail');
         });
