@@ -967,6 +967,12 @@
     z-index: 2;
 }
 
+
+#categoryName{
+    padding-right: 55px !important;
+}
+
+
 /* ============ responsive ============ */
 @media only screen and (max-width:991px) {
     .guest-checkout-respo {
