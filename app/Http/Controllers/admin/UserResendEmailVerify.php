@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 use App\Models\{
     EventPost,
     EventPostImage,
-    UserReportToPost
+    UserReportToPost,
+    User
 };
 use Carbon\Carbon;
 use Yajra\DataTables\DataTables;
@@ -16,6 +17,8 @@ use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Yajra\DataTables\Services\DataTable;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\forgotpasswordMail;
 
 
 class UserResendEmailVerify extends Controller
@@ -33,7 +36,24 @@ class UserResendEmailVerify extends Controller
     
     public function re_send_email(string $id)
     {
-        dd(1);
+        $user_id=decrypt($id);
+        $userDetails = User::where('id', $user_id)->first();
+
+        $userData = [
+            'username' => $userDetails->firstname . ' ' . $userDetails->lastname,
+            'email' => $userDetails->email,
+            'token' => $userDetails->remember_token,
+        ];
+        Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($userDetails) {
+            $message->to($userDetails->email);
+            $message->subject('Verify your Yesvite email address');
+        });
+
+        $userDetails->user_resend_verification="0";
+        $userDetails->save();
+        
+        return redirect()->route('user_resend_verification.index')->with('success', 'Verification Mail sent Successfully !');
+
     }
     /**
      * Show the form for creating a new resource.
