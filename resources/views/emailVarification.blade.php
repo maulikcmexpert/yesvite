@@ -127,14 +127,14 @@
                     <i class="fa-regular fa-circle-xmark"></i>
                     @endif
                 </div>
-                @if($faild != 'faild')
+                @if(isset($faild)&&$faild != 'faild')
                 <h3 class="text-center">Email Verification</h3>
                 <p>{{$message}}</p>
                 <a href="{{route('auth.login')}}" class="email-login-btn-wrp"><button type="button" class="email-login-btn">Login</button></a>
                 @else
                 <p>{{$message}}</p>
                 @endif
-                @if($faild == 'faild')
+                @if(isset($faild)&&$faild == 'faild')
                 <h3 class="text-center">Invalid Token</h3>
                 <p>{{$message}}</p>
                 <a href="{{route('ResendVerificationMail',$user_id)}}" class="email-login-btn-wrp" id="requestEmail"><button type="button" class="email-login-btn">Request Another Email</button></a>
