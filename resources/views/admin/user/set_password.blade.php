@@ -26,7 +26,7 @@
 
             </div>
 
-            <form method="post" action="{{route('users.update',11)}}" id="updateSubCatForm">
+            <form method="post" action="{{route('users.update',$user_id)}}" id="updatePasswordForm">
 
                 @csrf
 
