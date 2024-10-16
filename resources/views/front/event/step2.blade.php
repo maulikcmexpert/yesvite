@@ -97,7 +97,7 @@
                                         <li class="breadcrumb-item"><a href="#">Birthday</a></li>
                                         <li class="breadcrumb-item active" aria-current="page">Kids Birthday</li>
                                     </ol>
-                                    <h6>11 Designs</h6>
+                                    <h6>{{(isset($textData))?count($textData):0}} Designs</h6>
                                 </nav>
 
                                 <div class="choose-design-cards">
