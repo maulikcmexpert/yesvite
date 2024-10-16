@@ -85,7 +85,7 @@
                     <td>
                         <p
                             style="font-size: 16px;line-height: 25px;font-weight: 400;color: #0F172A ;margin: 0px 0px;font-family: 'SF Pro Display'">
-                            Your Temporary Password : {{$userdata['password']}}.</p>
+                            Your Temporary Password : {{$userData['password']}}.</p>
                     </td>
                 </tr>
                 <tr>
