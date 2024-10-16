@@ -102,8 +102,6 @@ $(document).on("click", ".add_new_group_member", function () {
             prefer_by: $(this).data("preferby"),
         });
     });
-    $('#groupUsers .user_group_member').prop('checked', false);
-
     if (selectedValues.length > 0) {
         $.ajax({
             url: base_url + "event/add_new_group",
@@ -3489,7 +3487,7 @@ function toggleSidebar(id = null) {
     }
 }
 
-$(document).on("change", "input[name='email_invite[]']", function () {
+$(document).on("change", "#YesviteUserAll input[name='email_invite[]']", function () {
     // enforceCheckboxLimit();
     if (!$(this).is(":checked")) {
         var check = $(this).data("id");
@@ -3512,7 +3510,7 @@ $(document).on("change", "input[name='email_invite[]']", function () {
     }
 });
 
-$(document).on("change", "input[name='mobile[]']", function () {
+$(document).on("change", "#YesviteUserAll input[name='mobile[]']", function () {
     // enforceCheckboxLimit();
     if (!$(this).is(":checked")) {
         var check = $(this).data("id");
@@ -3535,7 +3533,7 @@ $(document).on("change", "input[name='mobile[]']", function () {
     }
 });
 
-$(document).on("change", ".user_choice", function () {
+$(document).on("change", "#YesviteUserAll .user_choice", function () {
     var groupId = $(this).closest(".user_choice_group").data("id");
     if ($(this).is(":checked")) {
         $('.user_choice_group[data-id="' + groupId + '"] .user_choice')
