@@ -512,6 +512,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 0px !important;
 }
 
 /* ============ responsive ============ */
@@ -661,9 +662,18 @@
     }
 
     .guest-wrapper .invite-pro {
-        max-width: 300px;
-        min-width: 300px;
+        max-width: 350px;
+        min-width: 350px;
         position: fixed;
+    }
+
+    .invite-left {
+        max-width: 150px;
+    }
+    .invite-right span {
+        font-size: 14px;
+        color: var(--secondryColor);
+        line-height: 15px;
     }
 
     .new-sidebar-group-wrp,
@@ -698,5 +708,13 @@
     .swiper-button-next,
     .swiper-button-prev {
         display: none !important;
+    }
+}
+
+@media only screen and (max-width: 424px) {
+    .guest-wrapper .invite-pro {
+        max-width: 280px;
+        min-width: 280px;
+        position: fixed;
     }
 }
