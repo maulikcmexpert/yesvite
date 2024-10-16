@@ -664,7 +664,7 @@ class ApiAuthController extends Controller
                 $message = "The token has expired. Please request a new verification link.";
                 $faild = "faild";
                 $user_id= $verifyUser->id;
-                return view('emailVarification', compact('message', 'faild'));
+                return view('emailVarification', compact('message', 'faild','user_id'));
             }
 
             if ($verifyUser->email_verified_at == NULL) {
