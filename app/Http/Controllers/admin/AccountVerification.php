@@ -98,4 +98,11 @@ class AccountVerification extends Controller
     {
         //
     }
+
+    public function SetPassword(string $id){
+        dd(1);
+
+        return redirect()->route('design.index')->with("success", "Email Resend Successfully !");
+
+    }
 }
