@@ -58,7 +58,7 @@ class UserResendEmailVerifyDataTable extends DataTable
             })
             ->addColumn('resend_mail', function ($row) {
                 $cryptId = encrypt($row->id);
-                $view_url = route('user_resend_verification.re_send_email', $cryptId);
+                $view_url = route('re_send_email', $cryptId);
                 $actionBtn = '
                     <a class="" href="' . $view_url . '" title="View"><button class="btn btn-danger">Send Mail</button></a>';
 
