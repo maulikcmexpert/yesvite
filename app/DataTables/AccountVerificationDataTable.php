@@ -57,10 +57,14 @@ class AccountVerificationDataTable extends DataTable
             })
             ->addColumn('resend_mail', function ($row) {
                 $cryptId = encrypt($row->id);
-                $view_url = route('re_send_email', $cryptId);
-                $actionBtn = '
-                                            <a class="" href="' . $view_url . '" title="Edit"><i class="fa fa-edit"></i></a>';
-
+                $edit_url = route('subcategory.edit', $cryptId);
+                $actionBtn = '<div class="action-icon">
+                <a class="" href="' . $edit_url . '" title="Edit"><i class="fa fa-edit"></i></a>
+                <form action="' . $edit_url . '" method="POST">' .
+                csrf_field() . // Changed from @csrf to csrf_field()
+                method_field("DELETE") . // Changed from @method to method_field()
+                '<button type="submit" class="btn bg-transparent"><i class="fas fa-trash"></i></button></form>
+                </div>';
 
                 return $actionBtn;
 
