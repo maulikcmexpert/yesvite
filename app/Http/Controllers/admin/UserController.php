@@ -264,9 +264,20 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(string $id)
+    public function update(Request $request,string $id)
     {
-        dd(1);
+        try{
+
+            $requireNewPassword = $request->has('require_new_password') ? true : false;
+            dd($requireNewPassword);
+            $user_id=decrypt($id);
+            $update_password=User::where('id',$user_id)->first();
+            $update_password->password= $request->password;
+            $update_password->isTemporary_password="1";
+            $update_password->save();
+        } catch (\Exception $e) {
+            DB::rollBack();
+        }
     }
 
     /**
