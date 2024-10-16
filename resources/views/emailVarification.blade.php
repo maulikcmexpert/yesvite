@@ -138,7 +138,7 @@
                 {{-- <a href="{{route('ResendVerificationMail')}}" class="email-login-btn-wrp"><button type="button" class="email-login-btn">Request Another Email</button></a> --}}
                 <form action="{{ route('ResendVerificationMail') }}" method="POST" class="email-login-btn-wrp">
                     @csrf
-                    <button type="button" class="email-login-btn">Request Another Email</button>
+                    <button type="submit" class="email-login-btn">Request Another Email</button>
                 </form>
                  {{-- <input type="hidden" name="user_id" value="{{$user_id}}"> --}}
                 @endif
