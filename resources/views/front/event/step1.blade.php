@@ -290,7 +290,7 @@
                     </div>
                     <div class="col-lg-12">
                         <div class="input-form">
-                            <textarea name="message_to_guests" class="inputText" id="message_to_guests"></textarea>
+                            <textarea name="message_to_guests" class="form-control inputText" id="message_to_guests"></textarea>
                             <label for="code"
                                 class="form-label input-field floating-label textarea-label">Message
                                 to Guests</label>
