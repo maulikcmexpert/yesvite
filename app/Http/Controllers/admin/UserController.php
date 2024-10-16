@@ -278,6 +278,8 @@ class UserController extends Controller
     }
 
     public function ResendVerificationMail(Request $request){
+        Log::info('ResendVerificationMail method called.');
+
         dd(1);
 
         $userDetails = User::where('id',  $id)->first();
