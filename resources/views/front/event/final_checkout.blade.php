@@ -37,7 +37,7 @@
                     </div>
                     <div class="align-items-center editable-links editable-responsive">
                         <div>
-                            <a href="#" class="d-flex align-items-center">
+                            <a href="#" class="d-flex align-items-center li_guest">
                                 <span class="me-2">
                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M11.05 4.66603L4.20829 11.9077C3.94996 12.1827 3.69996 12.7244 3.64996 13.0994L3.34162 15.7994C3.23329 16.7744 3.93329 17.441 4.89996 17.2744L7.58329 16.816C7.95829 16.7494 8.48329 16.4744 8.74162 16.191L15.5833 8.94937C16.7666 7.69937 17.3 6.27437 15.4583 4.5327C13.625 2.8077 12.2333 3.41603 11.05 4.66603Z" stroke="#94A3B8" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
