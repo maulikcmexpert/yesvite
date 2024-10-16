@@ -692,7 +692,8 @@ class AuthController extends Controller
     }
 
     public function ResendVerificationMail(string $id){
-        dd(1);
+        // dd(1);
+        return redirect()->route('auth.login')
 
     //     $userDetails = User::where('id',  $id)->first();
 
