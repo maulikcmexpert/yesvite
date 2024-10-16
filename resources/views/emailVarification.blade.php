@@ -144,9 +144,12 @@
             </div>
         </div>
     </div>
+    <input type="hidden" name="url" id="url" value="{{ url('/') }}">
+    @endphp
 <!-- Google-hosted jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
+    var base_url=$('#url').val();
     $('#requestEmail').on('click',function(){
     $.ajax({
         url: base_url + "ResendVerificationMail",
