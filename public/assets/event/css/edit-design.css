@@ -870,6 +870,7 @@
     .footer-buttons {
         bottom: 0px;
         justify-content: center;
+        z-index: 1000000000000000;
     }
 
     .footer-buttons .cmn-btn {
