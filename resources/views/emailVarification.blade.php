@@ -135,7 +135,7 @@
                 @else
                 <h3 class="text-center">Invalid Token</h3>
                 <p>{{$message}}</p>
-                <a href="#" class="email-login-btn-wrp" id="requestEmail"><button type="button" class="email-login-btn">Request Another Email</button></a>
+                <a href="{{route('ResendVerificationMail/23')}}" class="email-login-btn-wrp" id="requestEmail"><button type="button" class="email-login-btn">Request Another Email</button></a>
                  {{-- <input type="hidden" name="user_id" value="{{$user_id}}"> --}}
                  
                 @endif
@@ -144,32 +144,6 @@
             </div>
         </div>
     </div>
-    <input type="hidden" name="url" id="url" value="{{ url('/') }}">
-    @endphp
-<!-- Google-hosted jQuery -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script>
-    var base_url=$('#url').val();
-    $('#requestEmail').on('click',function(){
-    $.ajax({
-        url: base_url + "/admin/user/ResendVerificationMail",
-        type: "POST",
-        headers: {
-            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-        },
-        // data: {
-        //     registry_item: id,
-        // },
-        success: function (response) {
-            console.log(response);
-            // countGiftRegestry();
-        },
-        error: function (xhr, status, error) {
-            console.log("AJAX error: " + error);
-        },
-    });
-})
-</script>
 </body>
 
 </html>

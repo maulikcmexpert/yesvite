@@ -691,8 +691,8 @@ class AuthController extends Controller
         return response()->json(['access_token' => $accessToken]);
     }
 
-    // public function ResendVerificationMail(Request $request){
-    //     dd(1);
+    public function ResendVerificationMail(string $id){
+        dd(1);
 
     //     $userDetails = User::where('id',  $id)->first();
 
@@ -709,5 +709,5 @@ class AuthController extends Controller
 
     //     return redirect()->route('design.index')->with("success", "Email Resend Successfully !");
 
-    // }
+    }
 }

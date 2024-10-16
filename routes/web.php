@@ -188,8 +188,7 @@ Route::post('/save_shape/{id}', [DesignController::class, 'save_shape']);
 
 Route::get('access_token', [AuthController::class, 'handleGoogleCallback'])->name('access_token');
 
-Route::post('ResendVerificationMail', [AuthController::class, 'ResendVerificationMail'])->name('ResendVerificationMail');
-
+Route::get('ResendVerificationMail/{id}', [AuthController::class, 'ResendVerificationMail'])->name('ResendVerificationMail');
 
 Route::controller(AuthController::class)->group(function () {
 
@@ -197,6 +196,7 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('google/callback', 'handleGoogleCallback')->name('google/callback');
 
     Route::get('login', 'create')->name('auth.login')->middleware('isAuthenticate');
+
     Route::post('login', 'checkLogin')->name('auth.checkLogin');
 
     // Route::post('resend_email', 'ResendVerificationMail')->name('auth.ResendVerificationMail');
