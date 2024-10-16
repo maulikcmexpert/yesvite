@@ -68,7 +68,7 @@ $(document).ready(function(){
 //         $(this).next().addClass("floatingfocus");
 //     }
 // });
-$(".form-control").on("focusout change keyup", function () {
+$(".form-control").on("focusout change keyup focus", function () {
     var text_val = $(this).val();
     if (text_val === "") {
         $(this).next().removeClass("floatingfocus");
