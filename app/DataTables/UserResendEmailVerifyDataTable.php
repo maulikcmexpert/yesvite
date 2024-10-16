@@ -61,7 +61,7 @@ class UserResendEmailVerifyDataTable extends DataTable
             })
             
 
-            ->rawColumns(['profile', 'app_user']);
+            ->rawColumns(['profile','username','resend_mail']);
     }
 
     /**
