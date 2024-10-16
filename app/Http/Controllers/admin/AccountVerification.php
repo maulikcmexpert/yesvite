@@ -78,8 +78,10 @@ class AccountVerification extends Controller
      */
     public function edit(string $id)
     {
-            dd(1);
-    }
+        $title = 'Edit User Information';
+        $page = 'admin.account_verification.edit';
+        // $js = 'admin.post_reports.post_reportsjs';
+        return view('admin.includes.layout', compact('title', 'page'));    }
 
     /**
      * Update the specified resource in storage.

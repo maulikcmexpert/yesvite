@@ -1,6 +1,6 @@
 <div class="container-fluid">
     
-    <h1 class="m-0 ProductTitle"></h1>
+    <h1 class="m-0 ProductTitle">{{$title}}</h1>
     <div class="content-header p-0">
         <div class="container-fluid">
             <div class="row">
@@ -9,7 +9,7 @@
                         <li class="breadcrumb-item"><a href="{{URL::to('/admin/dashboard')}}">Dashboard</a></li>
                         <li class="breadcrumb-item"><a href="{{URL::to('/admin/category')}}">Category List</a></li>
                         
-                        <li class="breadcrumb-item active"></li>
+                        <li class="breadcrumb-item active">{{$title}}</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
