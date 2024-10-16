@@ -144,7 +144,8 @@
             </div>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5/0hA2+1z1a08SKo5Vxri1A11P8RciS4QHRFX72A" crossorigin="anonymous"></script>
+<!-- Google-hosted jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
     $('#requestEmail').on('click',function(){
     $.ajax({
