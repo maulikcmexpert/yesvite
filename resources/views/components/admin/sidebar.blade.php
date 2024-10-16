@@ -164,7 +164,7 @@
             </li>
 
             <li class="nav-item">
-              <a href="{{URL::to('/admin/account_verify')}}" class="nav-link {{ (Request::segment(2) == 'account_verify')? 'active':'' }}">
+              <a href="{{URL::to('/admin/account_verification')}}" class="nav-link {{ (Request::segment(2) == 'account_verification')? 'active':'' }}">
                 <i class="fas fa-user-tie nav-icon"></i>
                 <p>Account Verification</p>
               </a>
