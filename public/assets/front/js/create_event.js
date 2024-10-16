@@ -3270,7 +3270,7 @@ function li_design_click(){
         $(".step_4").css("display", "none");
         $("#edit-design-temp").css("display", "none");
         $(".step_final_checkout").css("display", "none");
-
+        active_responsive_dropdown('drop-down-event-design','drop-down-pick-card');
         $('.event_create_percent').text('50%');
         $('.current_step').text('2 of 4');
 
