@@ -654,20 +654,20 @@ class ApiAuthController extends Controller
         $verifyUser = User::where('remember_token', $token)->first();
 
         if (!is_null($verifyUser)) {
-            $faild = "";
 
             $faild = "";
             $tokenCreationTime = strtotime($verifyUser->updated_at);
             $currentTime = time(); // Current timestamp
-    
-            if (($currentTime - $tokenCreationTime) > 60 && $verifyUser->resend_verification_mail=="0") {
+
+            if (($currentTime - $tokenCreationTime) > 60 && $verifyUser->resend_verification_mail == "0") {
                 $message = "The token has expired. Please request a new verification link.";
                 $faild = "faild";
-                $user_id= $verifyUser->id;
-                return view('emailVarification', compact('message', 'faild','user_id'));
+                $user_id = $verifyUser->id;
+                return view('emailVarification', compact('message', 'faild', 'user_id'));
             }
 
             if ($verifyUser->email_verified_at == NULL) {
+
                 $verifyUser->email_verified_at = strtotime(date('Y-m-d  h:i:s'));
                 $verifyUser->status = '1';
                 $verifyUser->remember_token = NULL;
@@ -684,5 +684,4 @@ class ApiAuthController extends Controller
             return view('emailVarification', compact('message', 'faild'));
         }
     }
-    
 }
