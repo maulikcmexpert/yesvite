@@ -73,7 +73,7 @@ class UserDataTable extends DataTable
 
             ->addColumn('setpassword', function ($row) {
                 $cryptId = encrypt(value: $row->id);
-                $pwd_url = route('user/SetPassword', $cryptId);
+                $pwd_url = route('SetPassword', $cryptId);
                 return '<a class="" href="' . $pwd_url . '" title="View"><i class="fa fa-key"></i></a>';
 ;
             })
