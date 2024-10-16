@@ -25,7 +25,7 @@
 
             <div class="card-header">
 
-                <h3 class="card-title">Edit Category</h3>
+                <h3 class="card-title">Edit Account Information</h3>
 
             </div>
 

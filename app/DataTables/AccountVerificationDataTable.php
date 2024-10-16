@@ -60,7 +60,6 @@ class AccountVerificationDataTable extends DataTable
                 $edit_url = route('account_verification.edit', $cryptId);
                 $verify_url=route('account_verify',$cryptId);
                 $actionBtn = '<div class="action-icon">
-                <a class="" href="' . $edit_url . '" title="Edit"><i class="fa fa-edit"></i></a>
                 <a class="" href="' . $verify_url . '" title="Delete"><button type="submit" class="btn btn-danger">Verify</button></form>
                 </div>';
 
@@ -72,6 +71,7 @@ class AccountVerificationDataTable extends DataTable
             })
             
 
+            // <a class="" href="' . $edit_url . '" title="Edit"><i class="fa fa-edit"></i></a>
             ->rawColumns(['profile','username','action']);
     }
 
