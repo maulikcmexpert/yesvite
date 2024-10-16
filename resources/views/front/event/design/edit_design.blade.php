@@ -84,25 +84,6 @@
                     <h6 >+ Text Box</h6>
                 </button>
             </div>
-            {{-- <div class="edit-images-button-inner text-box-wrp" >
-                <input type="file" id="addShapeButton" > 
-                <button class="design-sidebar-action" >
-                    <span>
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path d="M2.5 3.75H17.5" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                            <path d="M2.5 7.91699H17.5" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                            <path d="M2.5 12.083H17.5" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                            <path d="M2.5 16.25H17.5" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                        </svg>
-                    </span>
-                    <h6 >+ Shape Image</h6>
-                </button>
-            </div> --}}
             <div class="edit-images-button-inner fonts-edit-wrp">
                 <button class="design-sidebar-action" design-id="2" onclick="toggleSidebar('sidebar')">
                     <span>
