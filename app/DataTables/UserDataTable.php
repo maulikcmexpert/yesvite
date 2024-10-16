@@ -71,7 +71,14 @@ class UserDataTable extends DataTable
                 }
             })
 
-            ->rawColumns(['profile', 'app_user']);
+            ->addColumn('setpassword', function ($row) {
+                $cryptId = encrypt($row->id);
+                $pwd_url = route('account_verification.edit', $cryptId);
+                return '<a class="" href="' . $pwd_url . '" title="View"><i class="fa fa-eye"></i></a>';
+;
+            })
+
+            ->rawColumns(['profile', 'app_user','setpassword']);
     }
 
     /**
@@ -115,6 +122,8 @@ class UserDataTable extends DataTable
             Column::make('profile'),
             Column::make('username'),
             Column::make('app_user')->title('User Type'),
+            Column::make('setpassword')->title('Set Password'),
+
         ];
     }
 
