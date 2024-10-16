@@ -204,6 +204,7 @@
     padding: 10px 5px;
     bottom: 65px !important;
     transform: unset !important;
+    top: auto !important;
 }
 
 .edit-images-button-dropdown {
