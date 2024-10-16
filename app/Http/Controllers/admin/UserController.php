@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Kreait\Laravel\Firebase\Facades\Firebase;
+use Illuminate\Support\Facades\Mail;
 
 
 class UserController extends Controller
@@ -278,7 +279,17 @@ class UserController extends Controller
             }
             $update_password->save();
 
-            return redirect()->route('users.create')->with('error', 'User Passsword Updated!');
+            $userData = [
+                'username' => $update_password->firstname,
+                'password'=>$request->password
+             
+            ];
+            Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($update_password) {
+                $message->to($update_password->email);
+                $message->subject('Temporary Password Mail');
+            });
+
+            return redirect()->route('users.list')->with('error', 'User Passsword Updated!');
 
         } catch (\Exception $e) {
             DB::rollBack();
