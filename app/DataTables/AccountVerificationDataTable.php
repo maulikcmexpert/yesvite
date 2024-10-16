@@ -61,9 +61,7 @@ class AccountVerificationDataTable extends DataTable
                 $verify_url=route('account_verify',$cryptId);
                 $actionBtn = '<div class="action-icon">
                 <a class="" href="' . $edit_url . '" title="Edit"><i class="fa fa-edit"></i></a>
-                <form action="' . $verify_url . '" method="POST">' .
-                csrf_field() . // Changed from @csrf to csrf_field()
-                '<button type="submit" class="btn btn-danger">Verify</button></form>
+                <a class="" href="' . $verify_url . '" title="Delete"><button type="submit" class="btn btn-danger">Verify</button></form>
                 </div>';
 
                 return $actionBtn;
