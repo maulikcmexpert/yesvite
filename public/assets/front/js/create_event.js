@@ -4720,6 +4720,13 @@ $(document).on("click", ".add_new_group", function () {
     }
 });
 
+$('#new_group_name').on('keydown', function (e) {
+    if (e.key === "Enter" || e.keyCode === 13) {
+        e.preventDefault();  // Prevents the default action of submitting the form or adding a new line
+    }
+});
+
+
 
 
 $(document).on("click", ".invite_group_member", function () {
