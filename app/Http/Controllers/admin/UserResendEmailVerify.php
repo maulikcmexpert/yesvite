@@ -30,7 +30,11 @@ class UserResendEmailVerify extends Controller
         // $js = 'admin.post_reports.post_reportsjs';
         return $DataTable->render('admin.includes.layout', compact('title', 'page'));
     }
-
+    
+    public function re_send_email(string $id)
+    {
+        dd(1);
+    }
     /**
      * Show the form for creating a new resource.
      */
