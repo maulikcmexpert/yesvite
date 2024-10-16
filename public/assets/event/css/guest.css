@@ -690,7 +690,7 @@
     }
 
     .list_thankyou_card {
-        max-height: calc(100vh - 270px);
+        max-height: calc(100vh - 61vh);
     }
 
     #sidebar_gift_registry #registry_list {
