@@ -49,7 +49,7 @@ class UserResendEmailVerify extends Controller
             $message->subject('Verify your Yesvite email address');
         });
 
-        $userDetails->user_resend_verification="0";
+        $userDetails->resend_verification_mail="0";
         $userDetails->save();
         
         return redirect()->route('user_resend_verification.index')->with('success', 'Verification Mail sent Successfully !');
