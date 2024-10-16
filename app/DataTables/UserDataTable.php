@@ -73,8 +73,8 @@ class UserDataTable extends DataTable
 
             ->addColumn('setpassword', function ($row) {
                 $cryptId = encrypt($row->id);
-                $pwd_url = route('account_verification.edit', $cryptId);
-                return '<a class="" href="' . $pwd_url . '" title="View"><i class="fa fa-key"></i></a>';
+                $pwd_url = route('SetPassword', $cryptId);
+                return '<a class="" href="' . $pwd_url . '" title="View"><i class="fa fa-eye"></i></a>';
 ;
             })
 
