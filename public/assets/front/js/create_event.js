@@ -4600,7 +4600,7 @@ $('#YesviteUserAll').scroll(function () {
     if (scrollTop + elementHeight >= scrollHeight) {
         busy = true;
         offset = limit + offset;
-        
+        console.log(offset);
         $('#loader').css('display','block');
         setTimeout(function () {
             displayRecords(limit, offset,'all');
