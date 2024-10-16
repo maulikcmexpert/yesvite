@@ -356,19 +356,7 @@
                     </label>
 
                 </div>
-                <!-- <div class="font-selector form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="Antaresia" id="antaresiaButton">
-                    <label class="form-check-label Antaresia" for="antaresiaButton">
-                        Antaresia
-                    </label>
-
-                </div> -->
-                <!-- <div class="font-selector form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="BotanicaScript-Regular" id="BotanicaScript-RegularButton">
-                    <label class="form-check-label BotanicaScript-Regular" for="BotanicaScript">
-                        BotanicaScript-Regular
-                    </label>
-                </div> -->
+              
                 <div class="font-selector form-check">
 
                     <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="ArcherBold" id="ArcherButton">
@@ -474,134 +462,7 @@
 
                 </div>
             </div>
-{{-- 
-            <div class="position-relative mb-3">
-                <input type="search" placeholder="Search name" class="form-control">
-                <span>
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M11.5 21C16.7467 21 21 16.7467 21 11.5C21 6.25329 16.7467 2 11.5 2C6.25329 2 2 6.25329 2 11.5C2 16.7467 6.25329 21 11.5 21Z"
-                            stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M22 22L20 20" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round"
-                            stroke-linejoin="round" />
-                    </svg>
-                </span>
-            </div>
 
-            <div class="used-fonts-wrp common-font-wrp">
-                <h3>Font Used</h3>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                    <label class="form-check-label" for="flexRadioDefault1">
-                        Default Fonts
-                    </label>
-                </div>
-            </div>
-
-            <div class="recommendation-fonts-wrp common-font-wrp">
-                <h3>Recommendation Fonts</h3>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
-                    <label class="form-check-label" for="flexRadioDefault2">
-                        Default Fonts
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3">
-                    <label class="form-check-label" for="flexRadioDefault3">
-                        Default Fonts
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault4">
-                    <label class="form-check-label" for="flexRadioDefault4">
-                        Default Fonts
-                    </label>
-                </div>
-            </div>
-
-            <div class="recommendation-fonts-wrp common-font-wrp">
-                <h3>Recommendation Fonts</h3>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault5">
-                    <label class="form-check-label" for="flexRadioDefault5">
-                        Default Fonts
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault6">
-                    <label class="form-check-label" for="flexRadioDefault6">
-                        Default Fonts
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault7">
-                    <label class="form-check-label" for="flexRadioDefault7">
-                        Default Fonts
-                    </label>
-                </div>
-            </div>
-
-            <div class="all-fonts-wrp common-font-wrp">
-                <h3>All Fonts</h3>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault8">
-                    <label class="form-check-label" for="flexRadioDefault8">
-                        Fonts
-                    </label>
-                </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault9">
-                    <label class="form-check-label" for="flexRadioDefault9">
-                        Fonts
-                    </label>
-                </div>
-
-                <div class="accordion" id="accordionExample">
-                    <div class="accordion-item">
-                        <div class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseOne">
-                                <div>
-                                    Fonts
-                                </div>
-                                <i class="fa-solid fa-angle-down"></i>
-                            </button>
-                        </div>
-                        <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                        id="flexRadioDefault10">
-                                    <label class="form-check-label" for="flexRadioDefault10">
-                                        Fonts
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                        id="flexRadioDefault11">
-                                    <label class="form-check-label" for="flexRadioDefault11">
-                                        Fonts
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault12">
-                    <label class="form-check-label" for="flexRadioDefault12">
-                        Fonts
-                    </label>
-                </div>
-
-            </div> --}}
             <div class="footer-buttons">
                 <button class="cmn-btn reset-btn">Reset</button>
                 <button class="cmn-btn">Save</button>
