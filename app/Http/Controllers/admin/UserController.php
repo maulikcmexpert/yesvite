@@ -269,7 +269,7 @@ class UserController extends Controller
         try{
 
             $requireNewPassword = $request->has('require_new_password') ? true : false;
-            dd($requireNewPassword);
+            // dd($requireNewPassword);
             $user_id=decrypt($id);
             $update_password=User::where('id',$user_id)->first();
             $update_password->password= $request->password;
