@@ -100,9 +100,11 @@ class AccountVerification extends Controller
     }
 
     public function SetPassword(string $id){
-        dd(1);
-
-        return redirect()->route('design.index')->with("success", "Email Resend Successfully !");
+        $title = 'Set User Temporary Password';
+        $page = 'admin.user.set_password';
+        // $js = 'admin.post_reports.post_reportsjs';
+        return view('admin.includes.layout', compact('title', 'page'));
+        // return redirect()->route('design.index')->with("success", "Email Resend Successfully !");
 
     }
 }
