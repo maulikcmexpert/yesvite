@@ -132,7 +132,7 @@
                 <p>{{$message}}</p>
                 <a href="{{route('auth.login')}}" class="email-login-btn-wrp"><button type="button" class="email-login-btn">Login</button></a>
                 @endif
-                @if($faild == 'reSendfaild')
+                @if($faild == 'faild')
                 <h3 class="text-center">Invalid Token</h3>
                 <p>{{$message}}</p>
                 <a href="{{route('ResendVerificationMail',$user_id)}}" class="email-login-btn-wrp" id="requestEmail"><button type="button" class="email-login-btn">Request Another Email</button></a>
