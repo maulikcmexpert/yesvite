@@ -136,7 +136,7 @@
                 <h3 class="text-center">Invalid Token</h3>
                 <p>{{$message}}</p>
                 {{-- <a href="{{route('ResendVerificationMail')}}" class="email-login-btn-wrp"><button type="button" class="email-login-btn">Request Another Email</button></a> --}}
-                <form action="{{ route('user/ResendVerificationMail') }}" method="POST" class="email-login-btn-wrp">
+                <form action="{{ route('ResendVerificationMail') }}" method="POST" class="email-login-btn-wrp">
                     @csrf
                     <button type="submit" class="email-login-btn">Request Another Email</button>
                 </form>

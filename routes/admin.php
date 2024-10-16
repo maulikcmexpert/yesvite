@@ -102,7 +102,7 @@ Route::group(['middleware' => adminAuth::Class], function () {
 
     Route::post('user/check_new_contactnumber', [UserController::class, 'checkNewContactNumber']);
 
-    Route::post('user/ResendVerificationMail', [UserController::class, 'ResendVerificationMail']);
+    Route::post('user/ResendVerificationMail', [UserController::class, 'ResendVerificationMail'])->name('ResendVerificationMail');
 
 
 
