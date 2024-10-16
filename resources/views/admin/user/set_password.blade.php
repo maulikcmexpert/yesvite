@@ -41,12 +41,20 @@
                     <div class="col-lg-3">
                         <div class="form-group">
 
-                            <label for="exampleInputEmail1">Subcategory Name</label>
+                            <label for="exampleInputEmail1">Password</label>
 
-                            <input type="text" class="form-control subcategory_name" name="subcategory_name" placeholder="Enter Subcategory Name" value="">
+                            <input type="text" class="form-control subcategory_name" name="password " placeholder="Enter Subcategory Name" value="">
 
                             <span class="text-danger"></span>
 
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label for="require_new_password">
+                                <input type="checkbox" name="require_new_password" id="require_new_password">
+                                Require New Password on Login
+                            </label>
                         </div>
                     </div>
 
