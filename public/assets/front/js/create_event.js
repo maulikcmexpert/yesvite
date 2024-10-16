@@ -565,6 +565,7 @@ $("#schedule").on("change", function () {
 
 
 function set_activity_html(selectedDates) {
+    alert();
     $(".activity_bar").html('');
     var activities = {};
     eventData.activity = {};
