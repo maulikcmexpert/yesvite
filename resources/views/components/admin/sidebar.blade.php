@@ -159,7 +159,7 @@
             <li class="nav-item">
               <a href="{{URL::to('/admin/user_resend_verification')}}" class="nav-link {{ (Request::segment(2) == 'user_resend_verification')? 'active':'' }}">
                 <i class="fas fa-user-tie nav-icon"></i>
-                <p>Users Resend Verification Requests</p>
+                <p>Resend Email Verification</p>
               </a>
             </li>
 
