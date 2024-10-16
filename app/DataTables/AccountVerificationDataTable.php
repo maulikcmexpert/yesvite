@@ -109,15 +109,10 @@ class AccountVerificationDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
-            Column::make('id'),
-            Column::make('add your columns'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
+            Column::make('no')->title('#')->render('meta.row + meta.settings._iDisplayStart + 1;'),
+            Column::make('profile'),
+            Column::make('username'),
+            Column::make('resend_mail')->title('Resend Email'),
         ];
     }
 
