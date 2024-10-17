@@ -383,6 +383,7 @@ function datepicker() {
         },
         useCurrent: false, 
         ignoreReadonly: true,
+        autoclose:false,
         stepping: 15, // Set stepping to 15 minutes
         // defaultDate: now
     });
