@@ -266,26 +266,23 @@ class UserController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
-{
+    {
     try {
         DB::beginTransaction();
-
         $requireNewPassword = $request->has('require_new_password') ? true : false;
         $user_id = decrypt($id);
         $update_password = User::where('id', $user_id)->first();
-        
+ 
         $update_password->password = Hash::make($request->password); // Use bcrypt for password hashing
-        
+
         if ($requireNewPassword) {
             $update_password->isTemporary_password = 1; // Save as temporary
         }
         $update_password->save();
-
         $userData = [
             'username' => $update_password->firstname,
             'password' => $request->password
         ];
-
         try {
             Mail::send('emails.temporary_password_email', ['userData' => $userData], function ($message) use ($update_password) {
                 $message->to($update_password->email);
