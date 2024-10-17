@@ -289,7 +289,7 @@ class AuthController extends Controller
                 $user->save();
 
                 $userData = [
-                    'username' => $user->firstname . ' ' . $user->lastname,
+                    'username' => $user->firstname ,
                     'email' => $user->email,
                     'token' => $randomString,
                     'is_first_login' => $user->is_first_login

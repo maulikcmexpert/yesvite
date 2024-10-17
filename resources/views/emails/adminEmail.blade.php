@@ -67,7 +67,7 @@
                         <p style="font-size: 16px;line-height: 25px;font-weight: 400;color: #0F172A ;margin: 0px 0px;font-family: 'SF Pro Display'">
                             " {{$userData['message']}}".</p>
                     </td>
-                </tr>
+                </tr>   
                 <!-- -------------- -->
                 <tr>
                     <td height="20" style="font-size:0px">&nbsp;</td>

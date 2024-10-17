@@ -175,7 +175,7 @@ class ApiAuthController extends Controller
             $userDetails = User::where('id', $usersignup->id)->first();
 
             $userData = [
-                'username' => $userDetails->firstname . ' ' . $userDetails->lastname,
+                'username' => $userDetails->firstname,
                 'email' => $userDetails->email,
                 'token' => $randomString
             ];
@@ -311,7 +311,7 @@ class ApiAuthController extends Controller
                 $userDetails = User::where('id', $user->id)->first();
 
                 $userData = [
-                    'username' => $userDetails->firstname . ' ' . $userDetails->lastname,
+                    'username' => $userDetails->firstname,
                     'email' => $userDetails->email,
                     'token' => $randomString,
                     'is_first_login' => $userDetails->is_first_login
