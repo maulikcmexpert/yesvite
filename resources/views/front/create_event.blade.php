@@ -1,3 +1,4 @@
+{{dd($design_category)}}
 {{-- {{dd(session()->get('user_ids'))}} --}}
 {{-- {{dd($inviteduser)}} --}}
 {{-- <!DOCTYPE html>
