@@ -751,6 +751,7 @@
     line-height: 56px;
     padding: 0;
     width: 100%;
+    text-align: center;
 }
 
 .bootstrap-datetimepicker-widget.dropdown-menu .timepicker-picker table td span {
