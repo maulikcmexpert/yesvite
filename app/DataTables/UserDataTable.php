@@ -21,7 +21,6 @@ class UserDataTable extends DataTable
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
-        dd($query);
         $counter = 1;
         return datatables()
             ->eloquent($query)
@@ -108,6 +107,7 @@ class UserDataTable extends DataTable
             })
 
             ->addColumn('package_name', function ($row) {
+                dd($row->user_subscriptions);
                 return $row->user_subscriptions->type;
             })
 
