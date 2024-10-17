@@ -312,6 +312,7 @@
             <div class="accordion" id="accordionExample">
                 @if(isset($design_category))
                     @foreach ($design_category as $key => $category)
+                    @if(isset($category->subcategory) && $category->subcategory->isNotEmpty())
                     <div class="accordion-item">
                         <div class="accordion-header">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -333,6 +334,7 @@
                             </div>
                         </div>
                     </div>
+                    @endif
                     @endforeach
                 @endif
                 {{-- <div class="accordion-item">
