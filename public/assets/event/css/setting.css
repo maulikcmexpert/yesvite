@@ -972,6 +972,12 @@
     padding-right: 55px !important;
 }
 
+.total-quantity .qty-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 
 /* ============ responsive ============ */
 @media only screen and (max-width:991px) {

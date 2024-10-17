@@ -808,7 +808,7 @@
     overflow: hidden;
     overflow-y: scroll;
     padding-bottom: 20px;
-    height: calc(100vh - 180px);
+    height: calc(100vh - 190px);
     padding: 10px;
 }
 
