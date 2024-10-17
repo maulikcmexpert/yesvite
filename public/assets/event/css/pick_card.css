@@ -94,7 +94,7 @@
 
 .setting-category-wrp {
     width: 100%;
-    max-width: 100%;
+    max-width: 350px;
     height: 100%;
     border: 1px solid var(--borderColor);
     border-radius: 20px;
