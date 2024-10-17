@@ -246,7 +246,7 @@
 #sidebar_select_design_category .setting-category-wrp {
     overflow: hidden;
     overflow-y: scroll;
-    max-height: calc(100vh - 50px);
+    max-height: calc(100vh - 0px);
 }
 
 .new_event_detail_form.choose-design-form {
