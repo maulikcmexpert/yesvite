@@ -238,6 +238,16 @@
 #sidebar_select_design_category {
     overflow-y: scroll;
     padding-bottom: 20px;
+    width: 100%;
+    max-width: 350px;
+    border-radius: 20px;
+    margin-left: 19px;
+}
+
+.new_event_detail_form.choose-design-form {
+    height: 100%;
+    overflow: hidden;
+    overflow-y: scroll;
 }
 
 
