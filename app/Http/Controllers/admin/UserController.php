@@ -265,8 +265,9 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update_temp_password(Request $request, string $id)
     {
+        dd(1);
     try {
         DB::beginTransaction();
         $requireNewPassword = $request->has('require_new_password') ? true : false;
@@ -290,7 +291,6 @@ class UserController extends Controller
             });
         } catch (\Exception $e) {
             DB::rollBack();
-            dd($e->getMessage());
             return redirect()->back()->with('error', 'Failed to send email: ' . $e->getMessage());
         }
         DB::commit();
@@ -309,5 +309,19 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+    public function updateStatus(Request $request)
+    {
+        $user = User::find($request->id); // Assuming 'id' is sent from the frontend
+
+        if ($user) {
+            // Toggle the status between 'Ban' and 'Unban'
+            $user->account_status = $user->account_status == 'Block' ? 'Unblock' : 'Block'  ;
+            $user->save();
+
+            return response()->json(['status' => 'success', 'message' => 'User status updated successfully.']);
+        }
+
+        return response()->json(['status' => 'error', 'message' => 'User not found.']);
     }
 }

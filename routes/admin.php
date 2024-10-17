@@ -25,6 +25,7 @@ use App\Http\Controllers\admin\{
     AccountVerification,
     LoginHistory
 };
+use App\Http\Controllers\SendNotificationController;
 
 use Illuminate\Support\Facades\Session;
 
@@ -84,6 +85,7 @@ Route::group(['middleware' => adminAuth::Class], function () {
     ]);
 
     Route::post('/update-status', [UserController::class, 'updateStatus'])->name('update.status');
+    Route::post('/update_temp_password/{id}', [UserController::class, 'update_temp_password'])->name('update.update_temp_password');
 
     Route::get('template/view/{id}', [TemplateController::class, 'View_template'])->name('template.view');
 

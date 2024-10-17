@@ -1224,7 +1224,106 @@ function emailChecker($email)
 }
 
 
+function adminNotification($notificationType, $postData)
+{
+    if ($notificationType == 'broadcast_message') {
 
+        // // Get all users
+        // $users = User::all();
+
+
+        // foreach ($users as $user) {
+        //     // Fetch the device data for each user
+        //     $deviceData = Device::where('user_id', $user->id)->first();
+
+        //     // Check if device data exists and contains a valid device token
+        //     if ($deviceData && !empty($deviceData->device_token)) {
+
+        //         // Prepare the notification data for each user (inside the loop)
+        //         $notificationData = [
+        //             'message' => $postData['message'],
+        //             'type' => $notificationType,
+        //         ];
+        //         // Add the device token to the list
+        //         $deviceTokens[] = $deviceData->device_token;
+        //         $randomString = Str::random(30);
+        //         // $userDetails = User::where('id', $user->id)->first();
+        //         // $userDetails =  User::all();
+
+        //         try {
+        //             $userData = [
+        //                 'username' => $user->firstname . ' ' . $user->lastname,
+        //                 'email' => $user->email,
+        //                 // 'token' => $randomString,
+        //                 // 'is_first_login' => $user->is_first_login
+        //             ];
+
+
+        //             Mail::send('emails.adminEmail', ['userData' => $userData], function ($message) use ($user) {
+        //                 $message->to($user->email);
+        //                 $message->subject('Email Verification Mail');
+        //             });
+
+        //         } catch (\Exception $e) {
+        //             dd($e->getMessage());
+        //             // \Log::error('Email sending failed: ' . $e->getMessage());
+        //             return response()->json(['error' => 'Failed to send email.'], 500);
+        //         }
+
+        //         // Send the notification to the current user
+        //         // send_notification_FCM_and($deviceData->device_token, $notificationData);
+        //     }
+        // }
+
+        try {
+            $users = User::all();
+            $deviceTokens = [];
+            $userEmails = [];
+            $userDataList = [];
+
+            foreach ($users as $user) {
+                $deviceData = Device::where('user_id', $user->id)->first();
+
+                if ($deviceData && !empty($deviceData->device_token)) {
+                    $notificationData = [
+                        'message' => $postData['message'],
+                        'type' => $notificationType,
+                    ];
+
+                    $deviceTokens[] = $deviceData->device_token;
+                   // send_notification_FCM_and($deviceData->device_token, $notificationData);
+                    $userEmails[] = $user->email;
+                    $userDataList[] = [
+                        'username' => $user->firstname . ' ' . $user->lastname,
+                        'email' => $user->email,
+                        'message' => $postData['message'],
+                        // 'token' => $randomString,
+                        // 'is_first_login' => $user->is_first_login
+                    ];
+                }
+            }
+
+            foreach ($userDataList as $userData) {
+                Mail::send('emails.adminEmail', ['userData' => $userData], function ($message) use ($userData) {
+                    $message->to($userData['email']);
+                    $message->subject('Send Broadcast Mail');
+                });
+            }
+
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Failed to send emails.'], 500);
+        }
+
+        // if (!empty($deviceTokens)) {
+        //     // Send notification to all collected device tokens if you prefer bulk sending
+        //     send_notification_FCM_and($deviceTokens, [
+
+        //         'message' => $postData['message'],
+        //         'type' => $notificationType,
+        //     ]);
+        // }
+    }
+}
 function send_notification_FCM($deviceToken, $notifyData)
 {
 
