@@ -46,7 +46,7 @@
                     @foreach ($design_category as $category)
                     @foreach ($category->subcategory as $subcategory)
                     @if(isset($subcategory->textdatas) && $subcategory->textdatas->isNotEmpty())
-                        <div class="col-12 subcategory-section" id="subcategory_{{$subcategory->subcategory_name}}">
+                        <div class="col-12 subcategory-section" id="subcategory_{{$subcategory->id}}">
                             <div class="choose-design-cards-wrp">
                                 <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                                     <ol class="breadcrumb">

@@ -328,7 +328,7 @@
                             <div class="accordion-body">
                                 <ul>
                                     @foreach ($category->subcategory as $k => $subcategory)
-                                    <li data-subcategory="{{$subcategory->subcategory_name}}">{{$subcategory->subcategory_name}}</li>
+                                    <li data-subcategory="{{$subcategory->id}}">{{$subcategory->subcategory_name}}</li>
                                     @endforeach
                                 </ul>
                             </div>
