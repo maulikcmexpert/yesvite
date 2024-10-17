@@ -157,7 +157,7 @@
     transform: translate(-50%, -50%);
 }
 
-.new-event-sidebar-menu ul li span.active{
+.new-event-sidebar-menu ul li span.active {
     background: var(--primaryColor);
 }
 
@@ -887,41 +887,42 @@
     transform: translate(-50%, -50%);
 }
 
-.trash-icon svg path{
-    fill: green;
-    stroke: green;
-    color: green;
-}
-.trash-icon{
+.trash-icon svg path {
     fill: green;
     stroke: green;
     color: green;
 }
 
-.trash-icon path{
+.trash-icon {
     fill: green;
     stroke: green;
     color: green;
 }
- 
-.modal-design-card .upper-canvas{
+
+.trash-icon path {
+    fill: green;
+    stroke: green;
+    color: green;
+}
+
+.modal-design-card .upper-canvas {
     position: relative !important;
 }
 
-.modal-design-card canvas{
+.modal-design-card canvas {
     width: 100% !important;
     height: 100% !important;
 }
 
 
 
-.step_2{
+.step_2 {
     width: 100%;
     height: 100vh;
 }
 
 
-.menu-success .side-bar-sub-list h3{
+.menu-success .side-bar-sub-list h3 {
     position: relative;
 }
 
@@ -1021,16 +1022,16 @@
     font-family: 'ChristmasCookies';
 }
 
-#edit-design-temp{
+#edit-design-temp {
     width: 100%;
 }
 
-.edit-images-button-inner{
+.edit-images-button-inner {
     position: relative;
     z-index: 2;
 }
 
-.edit-images-button-inner [type="file"]{
+.edit-images-button-inner [type="file"] {
     display: block;
     width: 100% !important;
     height: 100% !important;
@@ -1180,13 +1181,14 @@
 
     .new_event_detail_form .input-group.time .input-group-text {
 
-        right: -5px;
+        right: 0px;
     }
-    .timepicker{
+
+    .timepicker {
         padding-left: 10px !important;
     }
-    
-    .timepicker::placeholder{
+
+    .timepicker::placeholder {
         font-size: 11px !important;
     }
 }
@@ -1206,10 +1208,11 @@
         gap: 15px;
     }
 
-    .timepicker::placeholder{
+    .timepicker::placeholder {
         font-size: 11px !important;
     }
-    .timepicker{
+
+    .timepicker {
         padding-left: 10px !important;
     }
 }
