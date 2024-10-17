@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('startDate')->nullable();
             $table->string('endDate')->nullable();
             $table->text('purchaseToken')->nullable();
+            $table->string('device_type')->nullable();
             $table->timestamps();
         });
     }
