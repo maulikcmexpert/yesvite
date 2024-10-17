@@ -364,8 +364,11 @@
     }
 
     #sidebar_select_design_category {
-        height: 70vh;
+        height: 70vh !important;
         bottom: 0 !important;
+        top: auto !important;
+        max-width: 100%;
+        border-radius: 10px 10px 10px 10px;
     }
 }
 
