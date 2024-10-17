@@ -386,7 +386,7 @@ function datepicker() {
         ignoreReadonly: true,
         stepping: 15, // Set stepping to 15 minutes
         // defaultDate: now
-        //  debug: true
+         debug: true
     });
 }
 
