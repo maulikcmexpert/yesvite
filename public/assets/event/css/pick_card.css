@@ -335,7 +335,7 @@
     }
 
     .choose-design-cards {
-        justify-content: space-evenly;
+        justify-content: start;
     }
 
 }
