@@ -138,11 +138,18 @@
               </a>
             </li>
             <li class="nav-item">
+              <a href="{{URL::to('/admin/sendNotification')}}" class="nav-link {{ (Request::segment(3) == 'sendNotification')? 'active':'' }}">
+                <i class="fas fa-user-tie nav-icon"></i>
+                <p>Send Notification</p>
+              </a>
+            </li>
+            <li class="nav-item">
               <a href="{{URL::to('/admin/professional_users')}}" class="nav-link {{ (Request::segment(2) == 'professional_users')? 'active':'' }}">
                 <i class="fas fa-user-tie nav-icon"></i>
                 <p>Professional Users</p>
               </a>
             </li>
+
             <li class="nav-item">
               <a href="{{URL::to('/admin/user_post_report')}}" class="nav-link {{ (Request::segment(2) == 'user_post_report')? 'active':'' }}">
                 <i class="fas fa-user-tie nav-icon"></i>

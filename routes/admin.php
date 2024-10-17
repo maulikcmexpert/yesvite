@@ -77,12 +77,18 @@ Route::group(['middleware' => adminAuth::Class], function () {
         'user_post_report' => UserPostReportController::class,
         'create_template' => TemplateController::class,
         'user_chat_report' => UserChatReportController::class,
-        'user_resend_verification'=>UserResendEmailVerify::class,
-        'account_verification'=>AccountVerification::class,
-        'login_history'=>LoginHistory::class
+        'user_resend_verification' => UserResendEmailVerify::class,
+        'account_verification' => AccountVerification::class,
+        'login_history' => LoginHistory::class
 
     ]);
+
+    Route::post('/update-status', [UserController::class, 'updateStatus'])->name('update.status');
+
     Route::get('template/view/{id}', [TemplateController::class, 'View_template'])->name('template.view');
+
+    Route::get('/sendNotification', [SendNotificationController::class, 'index']);
+    Route::post('/sendNotification/send', [SendNotificationController::class, 'send'])->name('send.notification');
 
     // Route::post('/get_all_subcategory', [EditTempalteController::class, 'get_all_subcategory'])->name('get_all_subcategory');
 
