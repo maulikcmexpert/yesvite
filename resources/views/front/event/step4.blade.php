@@ -642,8 +642,8 @@
                 <input type="number" name="qty" id="item_quantity" value="1" class="input-qty" readonly/>
                 <input type="hidden" name="category_index" id="category_index">
                 <button class="qty-btn-plus-qty" type="button" onclick="clearError()"><i class="fa fa-plus"></i></button>
-                <label for="item_quantity" id="item_quantity_error"></label>
             </div>
+            <label for="item_quantity" id="item_quantity_error"></label>
         </div>
         <div class="new-event-btn">
             <a href="#" class="cmn-btn add_category_item_btn">Save</a>
