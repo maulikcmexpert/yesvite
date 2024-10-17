@@ -21,6 +21,7 @@ class UserDataTable extends DataTable
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
+        dd($query);
         $counter = 1;
         return datatables()
             ->eloquent($query)
