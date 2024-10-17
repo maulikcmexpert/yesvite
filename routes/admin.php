@@ -25,7 +25,7 @@ use App\Http\Controllers\admin\{
     AccountVerification,
     LoginHistory
 };
-use App\Http\Controllers\SendNotificationController;
+use App\Http\Controllers\sendNotificationController;
 
 use Illuminate\Support\Facades\Session;
 
@@ -89,8 +89,8 @@ Route::group(['middleware' => adminAuth::Class], function () {
 
     Route::get('template/view/{id}', [TemplateController::class, 'View_template'])->name('template.view');
 
-    Route::get('/sendNotification', [SendNotificationController::class, 'index']);
-    Route::post('/sendNotification/send', [SendNotificationController::class, 'send'])->name('send.notification');
+    Route::get('/sendNotification', [sendNotificationController::class, 'index']);
+    Route::post('/sendNotification/send', [sendNotificationController::class, 'send'])->name('send.notification');
 
     // Route::post('/get_all_subcategory', [EditTempalteController::class, 'get_all_subcategory'])->name('get_all_subcategory');
 
