@@ -22,7 +22,8 @@ use App\Http\Controllers\admin\{
     TemplateController,
     EditTempalteController,
     UserResendEmailVerify,
-    AccountVerification
+    AccountVerification,
+    LoginHistory
 };
 
 use Illuminate\Support\Facades\Session;
@@ -78,6 +79,7 @@ Route::group(['middleware' => adminAuth::Class], function () {
         'user_chat_report' => UserChatReportController::class,
         'user_resend_verification'=>UserResendEmailVerify::class,
         'account_verification'=>AccountVerification::class,
+        'login_history'=>LoginHistory::class
 
     ]);
     Route::get('template/view/{id}', [TemplateController::class, 'View_template'])->name('template.view');
