@@ -238,6 +238,8 @@
 #sidebar_select_design_category {
     overflow-y: scroll;
     padding-bottom: 20px;
+    width: 350px;
+    border-radius: 20px;
 }
 
 
