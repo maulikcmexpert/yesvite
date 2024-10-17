@@ -724,7 +724,7 @@ ul.cost-list li span {
 }
 
 .bootstrap-datetimepicker-widget.dropdown-menu {
-    min-width: 190px !important;
+    min-width: 150px !important;
     z-index: 100 !important;
     background-color: #fff !important;
     height: 80px !important;
