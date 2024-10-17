@@ -1369,7 +1369,8 @@ function adminNotification($notificationType, $postData)
 
             // Send emails to all users
             foreach ($userDataList as $userData) {
-                dd($userData['email']);
+                print_r($userData['email']);
+                die;
                 Mail::send('emails.adminEmail', ['userData' => $userData], function ($message) use ($userData) {
                     $message->to($userData['email']);
                     $message->subject('Broadcast Message');
