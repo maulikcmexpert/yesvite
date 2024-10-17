@@ -43,6 +43,7 @@
                         </div>
                     </div>
                     <div class="col-12">
+
                         <div class="choose-design-cards-wrp">
                             <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                                 <ol class="breadcrumb">
@@ -51,6 +52,7 @@
                                 </ol>
                                 <h6>{{(isset($textData))?count($textData):0}} Designs</h6>
                             </nav>
+
                             <div class="choose-design-cards">
                                 @if(isset($textData) && $textData->isNotEmpty())
                                 @foreach ($textData as $temp)
