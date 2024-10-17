@@ -13,14 +13,14 @@ use Illuminate\Support\Facades\Mail;
 class SendBroadcastEmailJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-    protected $user;
+    protected $email;
     protected $details;
     /**
      * Create a new job instance.
      */
-    public function __construct($user, $details)
+    public function __construct($email, $details)
     {
-        $this->user = $user;
+        $this->email = $email;
         $this->details = $details;
     }
 
@@ -31,6 +31,6 @@ class SendBroadcastEmailJob implements ShouldQueue
      */
     public function handle()
     {
-        Mail::to($this->user)->send(new BulkEmail($this->details));
+        Mail::to($this->email)->send(new BulkEmail($this->details));
     }
 }

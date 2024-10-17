@@ -1313,8 +1313,8 @@ function adminNotification($notificationType, $postData)
                     'subject' => 'Send Broadcast Mail',
                     'message' => $postData['message'],
                 ];
-                
-                SendBroadcastEmailJob::dispatch($user->email, $details);
+                $email = $user->email;
+                SendBroadcastEmailJob::dispatch($email, $details);
             }
             dd('send all mail');
 
