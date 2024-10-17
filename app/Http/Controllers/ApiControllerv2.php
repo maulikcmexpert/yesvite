@@ -4922,7 +4922,7 @@ class ApiControllerv2 extends Controller
                         EventPotluckCategory::where('event_id', $eventData['event_id'])->delete();
                     }
                 }
-                if (isset($eventData['update_potluck']) && $eventData['update_potluck'] != '1') {
+                if (!isset($eventData['update_potluck']) || (isset($eventData['update_potluck']) && $eventData['update_potluck'] != '1')) {
 
                     if (isset($eventData['addr_change']) && $eventData['addr_change'] == '1') {
 
