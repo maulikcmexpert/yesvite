@@ -170,6 +170,13 @@
               </a>
             </li>
 
+            <li class="nav-item">
+              <a href="{{URL::to('/admin/login_history')}}" class="nav-link {{ (Request::segment(2) == 'login_history')? 'active':'' }}">
+                <i class="fas fa-user-tie nav-icon"></i>
+                <p>Login History</p>
+              </a>
+            </li>
+
           </ul>
         </li>
 
