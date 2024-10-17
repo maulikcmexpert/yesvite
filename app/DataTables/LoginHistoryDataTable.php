@@ -106,7 +106,7 @@ class LoginHistoryDataTable extends DataTable
     {
         return [
             Column::make('no')->title('No')->render('meta.row + meta.settings._iDisplayStart + 1;'),
-            // Column::make('username')->title('Username'),
+            Column::make('username')->title('Username'),
             Column::make('ip_address')->title("Ip Address"),
             Column::make('login_count')->title("Login Count"),
             // Column::make('action')->title("Action"),
