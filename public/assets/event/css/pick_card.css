@@ -244,6 +244,12 @@
     margin-left: 19px;
 }
 
+.new_event_detail_form.choose-design-form {
+    height: 100%;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
 
 @media only screen and (max-width: 1399px) {
     .design-card {
