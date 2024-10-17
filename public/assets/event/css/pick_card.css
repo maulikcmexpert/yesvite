@@ -241,6 +241,9 @@
     border-radius: 20px;
     margin-left: 19px;
     height: 100vh;
+}
+
+#sidebar_select_design_category .setting-category-wrp {
     overflow: hidden;
     overflow-y: scroll;
     max-height: calc(100vh - 50px);
