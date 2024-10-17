@@ -295,6 +295,12 @@
     .choose-design-cards {
         gap: 24px;
     }
+
+    #sidebar_select_design_category {
+        position: fixed;
+        top: 0;
+        right: 0;
+    }
 }
 
 @media only screen and (max-width: 767px) {
