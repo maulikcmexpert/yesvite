@@ -684,7 +684,7 @@ class ApiAuthController extends Controller
             }
 
             if ($verifyUser->email_verified_at == NULL) {
-
+                $faild="verified";
                 $verifyUser->email_verified_at = strtotime(date('Y-m-d  h:i:s'));
                 $verifyUser->status = '1';
                 $verifyUser->remember_token = NULL;
@@ -698,7 +698,7 @@ class ApiAuthController extends Controller
         } else {
             $message = "This is Your Invalid Token.";
             $faild = "";
-            return view('emailVarification', compact('message'));
+            return view('emailVarification', data: compact('message'));
         }
     }
 }

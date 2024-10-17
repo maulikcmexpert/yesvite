@@ -106,9 +106,9 @@ class UserDataTable extends DataTable
                 return '<a class="" href="' . $pwd_url . '" title="View"><i class="fa fa-key"></i></a>';;
             })
 
-            ->addColumn('package_name', function ($row) {
-                return $row->user_subscriptions->type;
-            })
+            // ->addColumn('package_name', function ($row) {
+            //     return $row->user_subscriptions->type;
+            // })
 
 
             ->addColumn('action', function ($row) {
@@ -150,22 +150,22 @@ class UserDataTable extends DataTable
      */
     public function query(User $model): QueryBuilder
     {
-        // return  User::where(['account_type' => '0'])->orderBy('id', 'desc');
-        $dateOnly = Carbon::now()->toDateString();
+        return  User::where(['account_type' => '0'])->orderBy('id', 'desc');
+        // $dateOnly = Carbon::now()->toDateString();
         // dd($dateOnly);
         // return User::with(relations: ['user_subscriptions' => function ($query) use ($dateOnly): void {
         //     $query->where('endDate', '>=', $dateOnly);
         // }])
-        return User::with(relations: ['user_subscriptions' => function ($query) use ($dateOnly): void {
-            $query->where('endDate', '>=', $dateOnly);
-        }])
-            ->where('account_type', '0')
-            ->orderBy('id', 'desc');
+        // return User::with(relations: ['user_subscriptions' => function ($query) use ($dateOnly): void {
+        //     $query->where('endDate', '>=', $dateOnly);
+        // }])
+        //     ->where('account_type', '0')
+        //     ->orderBy('id', 'desc');
 
 
-            return User::with(['user_subscriptions'])
-            ->where('account_type', '0')
-            ->orderBy('id', 'desc');
+        //     return User::with(['user_subscriptions'])
+        //     ->where('account_type', '0')
+        //     ->orderBy('id', 'desc');
 
     }
 
@@ -205,7 +205,7 @@ class UserDataTable extends DataTable
             Column::make('email'),
             Column::make('app_user')->title('User Type'),
             Column::make('setpassword')->title('Set Password'),
-            Column::make('package_name')->title('Plan'),
+            // Column::make('package_name')->title('Plan'),
             Column::make('action'),
             Column::make('status')
 
