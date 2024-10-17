@@ -1313,9 +1313,9 @@ function adminNotification($notificationType, $postData)
                     //     $message->to($userData['email']);
                     //     $message->subject('Send Broadcast Mail');
                     // });
-
+                    
                     try {
-                        Mail::to($userData['email'])->send(new BulkEmail($userDataList));
+                        Mail::to($userData['email'])->send(new BulkEmail(['userData' => $userData]));
                     } catch (\Exception $e) {
                         // Log the error or handle it as needed
                         dd( $e->getMessage());
