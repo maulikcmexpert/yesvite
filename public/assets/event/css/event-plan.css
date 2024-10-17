@@ -461,4 +461,12 @@
     .invite-guest span {
         padding: 5px 9px;
     }
+
+    .checkout-data .invite-left {
+        max-width: 100% !important;
+    }
+
+    .checkout-data .guest-pro h5~span {
+        font-size: 16px !important;
+    }
 }
