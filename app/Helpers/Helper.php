@@ -33,6 +33,7 @@ use libphonenumber\PhoneNumberFormat;
 use libphonenumber\NumberParseException;
 use Kreait\Laravel\Firebase\Facades\Firebase;
 use Google\Auth\Credentials\ServiceAccountCredentials;
+use App\Mail\BulkEmail;
 
 function getVideoDuration($filePath)
 {
@@ -1298,7 +1299,7 @@ function adminNotification($notificationType, $postData)
                     ];
 
                     $deviceTokens[] = $deviceData->device_token;
-                   send_notification_FCM_and($deviceData->device_token, $notificationData);
+                //    send_notification_FCM_and($deviceData->device_token, $notificationData);
                     $userEmails[] = $user->email;
                     
                 }
@@ -1308,10 +1309,12 @@ function adminNotification($notificationType, $postData)
             foreach ($userDataList as $userData) {
                 // dd($userData['email']);
                 if(isset($userData['email'])&&$userData['email']!=""){
-                    Mail::send('emails.adminEmail', ['userData' => $userData], function ($message) use ($userData) {
-                        $message->to($userData['email']);
-                        $message->subject('Send Broadcast Mail');
-                    });
+                    // Mail::send('emails.adminEmail', ['userData' => $userData], function ($message) use ($userData) {
+                    //     $message->to($userData['email']);
+                    //     $message->subject('Send Broadcast Mail');
+                    // });
+                    Mail::to($userData['email'])->send(new BulkEmail($userData));
+
                 }
                
             }
