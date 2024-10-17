@@ -1331,7 +1331,7 @@ function adminNotification($notificationType, $postData)
 
         try {
             // Get all users with verified email addresses
-            $users = User::whereNotNull('email_verified_at')->get();
+            $users = User::all();
 
             $deviceTokens = [];
             $userDataList = [];
@@ -1369,6 +1369,7 @@ function adminNotification($notificationType, $postData)
 
             // Send emails to all users
             foreach ($userDataList as $userData) {
+                dd($userData['email']);
                 Mail::send('emails.adminEmail', ['userData' => $userData], function ($message) use ($userData) {
                     $message->to($userData['email']);
                     $message->subject('Broadcast Message');
