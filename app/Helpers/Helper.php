@@ -1313,8 +1313,12 @@ function adminNotification($notificationType, $postData)
                     //     $message->to($userData['email']);
                     //     $message->subject('Send Broadcast Mail');
                     // });
-                    Mail::to($userData['email'])->send(new BulkEmail($userData));
-
+                    try {
+                        Mail::to($userData['email'])->send(new BulkEmail($userData));
+                    } catch (\Exception $e) {
+                        // Log the error or handle it as needed
+                        dd( $e->getMessage());
+                    }
                 }
                
             }
