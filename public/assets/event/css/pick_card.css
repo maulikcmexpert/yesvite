@@ -255,6 +255,9 @@
     overflow-y: scroll;
 }
 
+.subcategory-section {
+    margin-top: 30px !important;
+}
 
 @media only screen and (max-width: 1399px) {
     .design-card {
