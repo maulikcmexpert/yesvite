@@ -142,7 +142,7 @@ class UserDataTable extends DataTable
                 ';
             })
 
-            ->rawColumns(['profile', 'app_user', 'setpassword', 'action', 'status','package_name']);
+            ->rawColumns(['profile', 'app_user', 'setpassword', 'action', 'status', 'package_name']);
     }
 
     /**
@@ -151,12 +151,13 @@ class UserDataTable extends DataTable
     public function query(User $model): QueryBuilder
     {
         // return  User::where(['account_type' => '0'])->orderBy('id', 'desc');
-        dd(Carbon::today());
+        $dateOnly = Carbon::now()->toDateString();
+        dd($dateOnly);
         return User::with(relations: ['user_subscriptions' => function ($query) {
             $query->where('endDate', '>=', Carbon::now());
         }])
-        ->where('account_type', '0')
-        ->orderBy('id', 'desc');
+            ->where('account_type', '0')
+            ->orderBy('id', 'desc');
     }
 
     /**
