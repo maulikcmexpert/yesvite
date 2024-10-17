@@ -1,5 +1,5 @@
-{{dd($design_category)}}
 <div class="step_2" style="display: none;">
+    {{dd($design_category)}}
     <div class="main-content-right">
         <div class="new_event_detail_form choose-design-form">
             <form action="">
