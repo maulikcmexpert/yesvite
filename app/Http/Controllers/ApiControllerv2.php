@@ -9454,6 +9454,7 @@ class ApiControllerv2 extends Controller
 
                 'comment_total_likes' => $letestComment->post_comment_reaction_count,
 
+                'location' => $letestComment->user->city != "" ? trim($letestComment->user->city) . ($letestComment->user->state != "" ? ', ' . $letestComment->user->state : '') : "",
                 // 'is_like' => checkUserPhotoIsLike($letestComment->id, $user->id),
                 'is_like' => 0,
 
@@ -9599,6 +9600,7 @@ class ApiControllerv2 extends Controller
             $commentInfo['comment'] = $replyList->comment_text;
             $commentInfo['user_id'] = $replyList->user_id;
             $commentInfo['username'] = $replyList->user->firstname . ' ' . $replyList->user->lastname;
+            $commentInfo['location'] = $replyList->user->city != "" ? trim($replyList->user->city) . ($replyList->user->state != "" ? ', ' . $replyList->user->state : '') : "";
             $commentInfo['profile'] = (!empty($replyList->user->profile)) ? asset('storage/profile/' . $replyList->user->profile) : "";
             $commentInfo['comment_total_likes'] = $replyList->post_comment_reaction_count;
             $commentInfo['is_like'] = checkUserIsLike($replyList->id, $user->id);
@@ -9616,7 +9618,8 @@ class ApiControllerv2 extends Controller
                     $commentReply['user_id'] = $replyVal->user_id;
                     $commentReply['username'] = $replyVal->user->firstname . ' ' . $replyVal->user->lastname;
                     $commentReply['profile'] = (!empty($replyVal->user->profile)) ? asset('storage/profile/' . $replyVal->user->profile) : "";
-                    $commentReply['location'] = (!empty($replyVal->user->city)) ? $replyVal->user->city : "";
+                    // $commentReply['location'] = (!empty($replyVal->user->city)) ? $replyVal->user->city : "";
+                    $commentReply['location'] = $replyVal->user->city != "" ? trim($replyVal->user->city) . ($replyVal->user->state != "" ? ', ' . $replyVal->user->state : '') : "";
                     $commentReply['comment_total_likes'] = $replyVal->post_comment_reaction_count;
                     $commentReply['main_comment_id'] = $replyVal->main_parent_comment_id;
                     $commentReply['is_like'] = checkUserIsLike($replyVal->id, $user->id);
@@ -9635,7 +9638,7 @@ class ApiControllerv2 extends Controller
                             $commentChildReply['user_id'] = $childReplyVal->user_id;
                             $commentChildReply['username'] = $childReplyVal->user->firstname . ' ' . $childReplyVal->user->lastname;
                             $commentChildReply['profile'] = (!empty($childReplyVal->user->profile)) ? asset('storage/profile/' . $childReplyVal->user->profile) : "";
-                            $commentChildReply['location'] = (!empty($childReplyVal->user->city)) ? $childReplyVal->user->city : "";
+                            $commentChildReply['location'] = $childReplyVal->user->city != "" ? trim($childReplyVal->user->city) . ($childReplyVal->user->state != "" ? ', ' . $childReplyVal->user->state : '') : "";
                             $commentChildReply['comment_total_likes'] = $childReplyVal->post_comment_reaction_count;
                             $commentReply['main_comment_id'] = $childReplyVal->main_parent_comment_id;
                             $commentChildReply['is_like'] = checkUserIsLike($childReplyVal->id, $user->id);
