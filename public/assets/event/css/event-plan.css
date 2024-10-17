@@ -414,6 +414,10 @@
     border-radius: 10px !important;
 }
 
+.checkout-data .setting-img img {
+    border-radius: 10px !important;
+}
+
 @media only screen and (max-width:991px) {
     .editable-links {
         display: none;
