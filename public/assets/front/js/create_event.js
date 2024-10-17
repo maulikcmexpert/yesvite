@@ -5385,7 +5385,7 @@ $(document).on('click','.cursor-pointer',function(){
 
 
 $(document).on('click','.select_design_category_close',function(){
-    $('#sidebar_select_design_category').addClass('d-none');
+    $('#sidebar_select_design_category').css('display','none');
 })
   
 
