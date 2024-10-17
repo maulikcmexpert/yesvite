@@ -31,7 +31,7 @@ class LoginHistoryDataTable extends DataTable
                 if ($this->request->has('search')) {
                     $keyword = $this->request->get('search');
                     $keyword = $keyword['value'];
-                    $query->where(function ($q) use ($keyword) {
+                    $query->whereHas('user', function ($q) use ($keyword) {
                         $q->where('firstname', 'LIKE', "%{$keyword}%")
                             ->orWhere('lastname', 'LIKE', "%{$keyword}%");
                     });
