@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('ip_address')->nullable();
-            $table->text('login_count')->nullable();
+            $table->integer('login_count')->nullable();
             $table->timestamp('login_at');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
