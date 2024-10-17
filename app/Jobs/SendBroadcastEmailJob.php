@@ -31,6 +31,6 @@ class SendBroadcastEmailJob implements ShouldQueue
      */
     public function handle()
     {
-        Mail::to($this->user->email)->send(new BulkEmail($this->details));
+        Mail::to($this->user)->send(new BulkEmail($this->details));
     }
 }

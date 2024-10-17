@@ -1314,7 +1314,7 @@ function adminNotification($notificationType, $postData)
                     'message' => $postData['message'],
                 ];
                 
-                SendBroadcastEmailJob::dispatch($user, $details);
+                SendBroadcastEmailJob::dispatch($user->email, $details);
             }
             dd('send all mail');
 
