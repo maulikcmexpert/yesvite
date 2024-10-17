@@ -5379,7 +5379,7 @@ $(document).on('click','.all_user_list',function(){
 
 
 $(document).on('click','.cursor-pointer',function(){
-  $('#sidebar_select_design_category').removeClass('d-none');
+  $('#sidebar_select_design_category').toggle(); 
 })
 
 
