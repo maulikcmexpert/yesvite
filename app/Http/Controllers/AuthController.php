@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\URL;
 use Cookie;
 use App\Models\User;
+use App\Models\LoginHistory;
+
 use App\Rules\EmailExists;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
@@ -220,6 +222,8 @@ class AuthController extends Controller
         $remember = $request->has('remember'); // Check if "Remember Me" checkbox is checked
 
         if (Auth::attempt($credentials, $remember)) {
+            $userIpAddress = request()->ip();
+
             $user = Auth::guard('web')->user();
             if ($user->email_verified_at != NULL) {
 
@@ -254,6 +258,13 @@ class AuthController extends Controller
                     event(new \App\Events\UserRegistered($user));
 
                     add_user_firebase($user->id, 'Online');
+
+
+                    LoginHistory::create([
+                        'user_id' => $user->id,
+                        'ip_address' => $userIpAddress,
+                        'login_at' => now(),
+                    ]);
 
                     return redirect()->route('profile');
                 } else {
