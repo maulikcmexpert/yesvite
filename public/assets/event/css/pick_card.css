@@ -373,7 +373,7 @@
 
     #sidebar_select_design_category,
     #sidebar_select_design_category .setting-category-wrp {
-        border-radius: 0px 10px 0px 10px;
+        border-radius: 20px 20px 0px 0px !important;
     }
 }
 
