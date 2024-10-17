@@ -3277,6 +3277,7 @@ $(document).on("click", ".li_design .pick-card", function (e) {
 });
 $(document).on("click", ".li_design", function (e) {
     e.preventDefault();
+    $('.subcategory-section').show();
     li_design_click();
 });
 
