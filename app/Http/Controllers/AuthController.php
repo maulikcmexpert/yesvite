@@ -265,12 +265,15 @@ class AuthController extends Controller
                         $loginHistory->update([
                             'ip_address' => $userIpAddress,
                             'login_at' => now(),
+                            'login_count' => $loginHistory->login_count + 1,
+
                         ]);
                     } else {
                         LoginHistory::create([
                             'user_id' => $user->id,
                             'ip_address' => $userIpAddress,
                             'login_at' => now(),
+                            'login_count' => 1,
                         ]);
                     }
 
