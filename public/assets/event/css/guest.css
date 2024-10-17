@@ -715,6 +715,18 @@
     .swiper-button-prev {
         display: none !important;
     }
+
+    #YesviteUserAll .users-data .text-start {
+        max-width: 100px;
+    }
+
+    #YesviteUserAll .users-data .text-start h5 {
+        word-break: break-all;
+    }
+
+    #YesviteUserAll .users-data .text-start a {
+        word-break: break-all;
+    }
 }
 
 @media only screen and (max-width: 424px) {
