@@ -107,7 +107,7 @@ class UserDataTable extends DataTable
             })
 
             ->addColumn('package_name', function ($row) {
-                dd($row->user_subscriptions);
+                dd($row);
                 return $row->user_subscriptions->type;
             })
 
