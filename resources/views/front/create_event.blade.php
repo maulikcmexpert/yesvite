@@ -297,8 +297,8 @@
 
 
 
-<!-- <div id="sidebar_select_design_category" class="sidebar setting-side-wrp"> -->
-<div id="sidebar_select_design_category" class="setting-category-wrp choose-design-form activity-schedule-inner sidebar setting-side-wrp">
+<div id="sidebar_select_design_category" class="sidebar setting-side-wrp">
+    <!-- <div class="setting-category-wrp choose-design-form activity-schedule-inner "> -->
     <div class="d-flex align-items-center justify-content-between toggle-wrp new-event-sidebar-head">
         <h5>Category</h5>
         <button class="close-btn" onclick="toggleSidebar()">
@@ -404,9 +404,9 @@
                 </div>
             </div>
         </div>
+        <!-- </div> -->
     </div>
 </div>
-<!-- </div> -->
 
 <div style="display:none;" class="modal fade choose-design-modal" id="exampleModal" tabindex="-1"
     aria-labelledby="exampleModalLabel" aria-hidden="true">
