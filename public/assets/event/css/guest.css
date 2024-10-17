@@ -717,7 +717,7 @@
     }
 
     #YesviteUserAll .users-data .text-start {
-        max-width: 100px;
+        max-width: 200px;
     }
 
     #YesviteUserAll .users-data .text-start h5 {
@@ -734,5 +734,9 @@
         max-width: 280px;
         min-width: 280px;
         position: fixed;
+    }
+
+    #YesviteUserAll .users-data .text-start {
+        max-width: 100px;
     }
 }
