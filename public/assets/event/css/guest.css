@@ -566,7 +566,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 10px;
+        gap: 15px;
         margin-top: 20px;
     }
 
@@ -624,6 +624,10 @@
     .guest-content .user-contacts {
         max-height: calc(100vh - 250px);
     }
+
+    .responsive_invite_user {
+        min-width: 47px;
+    }
 }
 
 @media only screen and (max-width:768px) {
@@ -671,6 +675,7 @@
     .invite-left {
         max-width: 150px;
     }
+
     .invite-right span {
         font-size: 14px;
         color: var(--secondryColor);
@@ -686,7 +691,7 @@
         height: 90vh;
     }
 
-    #sidebar_thankyou_card{
+    #sidebar_thankyou_card {
         height: 70vh;
     }
 

@@ -135,12 +135,12 @@ class EventController extends Controller
             ->get();
         $textData = [];
         $design_category = [];
-        $design_category = EventDesignCategory::with(['subcategory' => function ($query) {
-            $query->select('*');
-        }, 'textdatas' => function ($query) {
-            $query->select('*');
+        $design_category = EventDesignSubCategory::with(['category' => function ($query) {
+            $query->with(['textdatas' => function ($que) {
+                $que->select('*');
+            }])->select('*');
         }])->orderBy('id', 'DESC')->get();
-        // dd($design_category);
+        dd($design_category);
         $textData = TextData::select('*')
             ->orderBy('id', 'desc')
             ->get();
@@ -290,11 +290,11 @@ class EventController extends Controller
                     $textElemtents[$key]['lineHeight'] = (float)$textJson['lineHeight'];
                 }
                 if (isset($textJson['underline'])) {
-                    $textElemtents[$key]['underline'] = ($textJson['underline'] === "true" || $textJson['underline'] === true)?true:false;
+                    $textElemtents[$key]['underline'] = ($textJson['underline'] === "true" || $textJson['underline'] === true) ? true : false;
                 }
             }
-           
-            
+
+
             $static_data = [];
             $static_data['textData'] = $textElemtents;
             $static_data['event_design_sub_category_id'] = (int)$request->temp_id;
@@ -303,7 +303,7 @@ class EventController extends Controller
             $static_data['image'] = $tempData->image;
             $static_data['template_url'] = $sourceImagePath;
             $static_data['is_contain_image'] = true;
-            if(isset($request->textData['shapeImageData'])){
+            if (isset($request->textData['shapeImageData'])) {
                 $shapeImageData = [];
                 $shapeImageData['shape'] = $request->textData['shapeImageData']['shape'];
                 $shapeImageData['centerX'] = (float)$request->textData['shapeImageData']['centerX'];
@@ -1010,8 +1010,7 @@ class EventController extends Controller
                 $gr->save();
             }
             return response()->json(['message' => "registry updated", 'status' => '1']);
-        
-        }else{
+        } else {
             $gr = new EventGiftRegistry();
             $gr->user_id = $user_id;
             $gr->registry_recipient_name = $recipient_name;
@@ -1019,7 +1018,7 @@ class EventController extends Controller
             $gr->save();
             $gift_registry = EventGiftRegistry::where('id', $gr->id)->get();
             session(['gift_registry_data' => $giftRegistryData]);
-    
+
             // $data = ['recipient_name' => $recipient_name, 'registry_link' => $registry_link, 'registry_item' => $registry_item];
             return response()->json(['view' => view('front.event.gift_registry.add_gift_registry', compact('gift_registry'))->render()]);
         }
@@ -1029,13 +1028,13 @@ class EventController extends Controller
         //     $giftRegistryData[$registry_item]['registry_link'] = $registry_link;
 
         //     session(['gift_registry_data' => $giftRegistryData]);
-           
+
         // } else {
         //     $giftRegistryData[$registry_item] = [
         //         'recipient_name' => $recipient_name,
         //         'registry_link' => $registry_link,
         //     ];
-           
+
         // }
     }
 
@@ -1126,19 +1125,19 @@ class EventController extends Controller
         $fileName = '';
         $i = 0;
         if (isset($request->design_inner_image) && isset($request->shapeImageUrl)) {
-            if($request->shapeImageUrl == $request->design_inner_image){
-                    $sourceImagePath = $request->shapeImageUrl;
-                    $destinationDirectory = public_path('storage/canvas/');
-                    $parts = explode('canvas/', $request->shapeImageUrl);
-                    $imageName = end($parts);
-                    $destinationImagePath = $destinationDirectory . $imageName;
-                    if (file_exists(public_path('storage/canvas/') . $imageName)) {
-                        $newImageName = time() . '_' . uniqid() . '.' . pathinfo($imageName, PATHINFO_EXTENSION);
-                        $destinationImagePath = $destinationDirectory . $newImageName;
-                        File::copy($sourceImagePath, $destinationImagePath);
-                        session(['shape_image' => $newImageName]);
-                    }
-            }else{
+            if ($request->shapeImageUrl == $request->design_inner_image) {
+                $sourceImagePath = $request->shapeImageUrl;
+                $destinationDirectory = public_path('storage/canvas/');
+                $parts = explode('canvas/', $request->shapeImageUrl);
+                $imageName = end($parts);
+                $destinationImagePath = $destinationDirectory . $imageName;
+                if (file_exists(public_path('storage/canvas/') . $imageName)) {
+                    $newImageName = time() . '_' . uniqid() . '.' . pathinfo($imageName, PATHINFO_EXTENSION);
+                    $destinationImagePath = $destinationDirectory . $newImageName;
+                    File::copy($sourceImagePath, $destinationImagePath);
+                    session(['shape_image' => $newImageName]);
+                }
+            } else {
                 list($type, $data) = explode(';', $request->design_inner_image);
                 list(, $data) = explode(',', $data);
                 $imageData = base64_decode($data);
@@ -1155,12 +1154,11 @@ class EventController extends Controller
             $path = $file->move(public_path('storage/event_images'), $fileName);
             session(['desgin' => $fileName]);
         }
-        if($fileName != ''){
-            return response()->json(['status' => 'Image saved successfully', 'image' => $fileName,'shape_image' => $newImageName ]);
-        }else{
+        if ($fileName != '') {
+            return response()->json(['status' => 'Image saved successfully', 'image' => $fileName, 'shape_image' => $newImageName]);
+        } else {
             return response()->json(['status' => 'No image uploaded'], 400);
         }
-
     }
 
     public function addNewGroup(Request $request)
