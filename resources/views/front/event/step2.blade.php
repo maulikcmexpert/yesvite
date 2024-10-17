@@ -45,6 +45,7 @@
                     @if(isset($design_category))
                     @foreach ($design_category as $category)
                     @foreach ($category->subcategory as $subcategory)
+                    @if(isset($subcategory->textdatas) && $subcategory->textdatas->isNotEmpty())
                         <div class="col-12">
                             <div class="choose-design-cards-wrp">
                                 <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
@@ -55,7 +56,6 @@
                                     <h6>{{(isset($subcategory->textdatas))?count($subcategory->textdatas):0}} Designs</h6>
                                 </nav>
                                 <div class="choose-design-cards">
-                                    @if(isset($subcategory->textdatas) && $subcategory->textdatas->isNotEmpty())
                                     @foreach ($subcategory->textdatas as $temp)
                                         <div class="design-card" data-bs-toggle="modal"
                                         type="button" data-template="template_1" data-image="{{ asset('storage/canvas/'.$temp->image) }}"
@@ -64,11 +64,11 @@
                                             <img src="{{ asset('storage/canvas/'.$temp->filled_image) }}" alt="">
                                         </div>
                                     @endforeach
-                                    @endif
                                 </div>
                             </div>
                             
                         </div>
+                    @endif
                     @endforeach
                     @endforeach
                     @endif
