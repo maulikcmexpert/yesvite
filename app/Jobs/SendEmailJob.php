@@ -20,6 +20,8 @@ class SendEmailJob implements ShouldQueue
      */
     public function __construct($user, $details)
     {
+        
+        dd(1);
         $this->user = $user;
         $this->details = $details;
     }
@@ -29,7 +31,6 @@ class SendEmailJob implements ShouldQueue
      */
     public function handle(): void
     {
-        dd(1);
         Mail::to($this->user->email)->send(new BulkEmail($this->details));
     }
 }
