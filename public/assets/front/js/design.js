@@ -896,8 +896,8 @@ function bindData() {
 
                                         fabric.Image.fromURL(reader.result, function (newImg) {
                                             // Remove the old image if it exists
-                                            const newWidth = img.width;
-                                            const newHeight = img.height;
+                                            const newWidth = newImg.width;
+                                            const newHeight = newImg.height;
                                             let canvasState = canvas.toJSON();
     
                                             canvasState.objects = canvasState.objects.filter(function (obj) {
@@ -925,8 +925,8 @@ function bindData() {
                                                 cornerColor: "#fff",
                                                 transparentCorners: false,
                                                 lockUniScaling: true,
-                                                scaleX: scaledWidth / element.width,  // Scale based on element's width
-                                                scaleY: scaledHeight / element.height, // Scale based on element's height
+                                                scaleX: scaledWidth / newWidth,  // Scale based on element's width
+                                                scaleY: scaledHeight / newHeight, // Scale based on element's height
                                                 cornerSize: 10,
                                                 cornerStyle: 'circle',
                                                 left: element.centerX - scaledWidth / 2, // Center the image horizontally
