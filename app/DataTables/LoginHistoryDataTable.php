@@ -38,9 +38,9 @@ class LoginHistoryDataTable extends DataTable
                 }
             })
            
-            ->addColumn('username', function ($row) {
-                return $row->user->firstname . ' ' . $row->user->lastname;
-            })
+            // ->addColumn('username', function ($row) {
+            //     return $row->user->firstname . ' ' . $row->user->lastname;
+            // })
 
             ->addColumn('ip_address', function ($row) {
                 return $row->ip_address;
@@ -74,7 +74,7 @@ class LoginHistoryDataTable extends DataTable
      */
     public function query(LoginHistory $model): QueryBuilder
     {
-        return LoginHistory::with(relations: ['user'])->orderBy('id', 'desc');
+        return LoginHistory::with(['user'])->orderBy('id', 'desc');
     }
 
     /**
@@ -106,7 +106,7 @@ class LoginHistoryDataTable extends DataTable
     {
         return [
             Column::make('no')->title('No')->render('meta.row + meta.settings._iDisplayStart + 1;'),
-            Column::make('username')->title('Username'),
+            // Column::make('username')->title('Username'),
             Column::make('ip_address')->title("Ip Address"),
             Column::make('login_count')->title("Login Count"),
             // Column::make('action')->title("Action"),
