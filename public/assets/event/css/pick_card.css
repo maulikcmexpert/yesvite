@@ -236,12 +236,14 @@
 }
 
 #sidebar_select_design_category {
-    overflow-y: scroll;
-    padding-bottom: 20px;
     width: 100%;
     max-width: 350px;
     border-radius: 20px;
     margin-left: 19px;
+    height: 100vh;
+    overflow: hidden;
+    overflow-y: scroll;
+    max-height: calc(100vh - 50px);
 }
 
 .new_event_detail_form.choose-design-form {
