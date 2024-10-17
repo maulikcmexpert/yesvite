@@ -860,6 +860,17 @@ $("#rsvp_by_date").on("change", function () {
     }
 });
 
+$(document).ready(function() {
+    $('li').click(function() {
+        var selectedSubcategory = $(this).data('subcategory');
+
+        // Hide all subcategory sections
+        $('.subcategory-section').hide();
+
+        // Show the selected subcategory section
+        $('#subcategory_' + selectedSubcategory).show();
+    });
+});
 
 
 
