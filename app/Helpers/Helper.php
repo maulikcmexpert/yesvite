@@ -1,5 +1,6 @@
 <?php
 
+use App\Jobs\SendBroadcastEmailJob;
 use App\Jobs\SendEmailJob;
 use App\Models\EventPost;
 use App\Models\Event;
@@ -1278,39 +1279,42 @@ function adminNotification($notificationType, $postData)
         // }
 
         try {
-            $users = User::all();
+            // $users = User::all();
             $deviceTokens = [];
             $userEmails = [];
             $userDataList = [];
 
+            $users = User::where('email','!=',null)
+                ->get();
+
             foreach ($users as $user) { 
-                $deviceData = Device::where('user_id', $user->id)->first();
+                // $deviceData = Device::where('user_id', $user->id)->first();
 
-                $userDataList = [
-                    'username' => $user->firstname,
-                    'email' => $user->email,
-                    'message' => $postData['message'],
-                    // 'token' => $randomString,
-                    // 'is_first_login' => $user->is_first_login
-                ];
-                if ($deviceData && !empty($deviceData->device_token)) {
-                    $notificationData = [
-                        'message' => $postData['message'],
-                        'type' => $notificationType,
-                    ];
+                // $userDataList = [
+                //     'username' => $user->firstname,
+                //     'email' => $user->email,
+                //     'message' => $postData['message'],
+                //     // 'token' => $randomString,
+                //     // 'is_first_login' => $user->is_first_login
+                // ];
+                // if ($deviceData && !empty($deviceData->device_token)) {
+                //     $notificationData = [
+                //         'message' => $postData['message'],
+                //         'type' => $notificationType,
+                //     ];
 
-                    $deviceTokens[] = $deviceData->device_token;
-                //    send_notification_FCM_and($deviceData->device_token, $notificationData);
-                    $userEmails[] = $user->email;
+                //     $deviceTokens[] = $deviceData->device_token;
+                // //    send_notification_FCM_and($deviceData->device_token, $notificationData);
+                //     $userEmails[] = $user->email;
                     
-                }
+                // }
 
                 $details = [
                     'subject' => 'Send Broadcast Mail',
                     'message' => $postData['message'],
                 ];
                 
-                SendEmailJob::dispatch($user, $details);
+                SendBroadcastEmailJob::dispatch($user, $details);
             }
             dd('send all mail');
 
