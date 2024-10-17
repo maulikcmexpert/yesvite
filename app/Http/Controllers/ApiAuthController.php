@@ -35,11 +35,7 @@ class ApiAuthController extends Controller
 {
     public function signup(Request $request)
     {
-        dd(1);
-
         $rawData = $request->getContent();
-
-
         $input = json_decode($rawData, true);
         if ($input == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
@@ -204,7 +200,6 @@ class ApiAuthController extends Controller
 
     public function login(Request $request)
     {
-
         $rawData = $request->getContent();
 
         $input = json_decode($rawData, true);
