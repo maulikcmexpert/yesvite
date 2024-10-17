@@ -18,20 +18,22 @@ class SendEmailJob implements ShouldQueue
     protected $details;
     /**
      * Create a new job instance.
+     *
+     * @return void
      */
     public function __construct($user, $details)
     {
-        
         $this->user = $user;
         $this->details = $details;
     }
 
     /**
      * Execute the job.
+     *
+     * @return void
      */
     public function handle()
     {
         Mail::to($this->user->email)->send(new BulkEmail($this->details));
-        dd(1);
     }
 }
