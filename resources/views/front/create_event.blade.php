@@ -2350,7 +2350,7 @@
 <div id="sidebar_add_group_member_overlay" class="overlay" onclick="toggleSidebar()"></div>
 <div id="sidebar_invite_group_member_overlay" class="overlay" onclick="toggleSidebar()"></div>
 <div id="sidebar_editcategory_overlay" class="overlay" onclick="toggleSidebar()"></div>
-<div id="sidebar_select_design_category_overlay" class="overlay" onclick="toggleSidebar()"></div>
+<!-- <div id="sidebar_select_design_category_overlay" class="overlay" onclick="toggleSidebar()"></div> -->
 <div id="sidebar_see_all_invite_overlay" class="overlay" onclick="toggleSidebar()"></div>
 
 
