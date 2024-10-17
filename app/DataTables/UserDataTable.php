@@ -107,7 +107,6 @@ class UserDataTable extends DataTable
             })
 
             ->addColumn('package_name', function ($row) {
-                dd($row);
                 return $row->user_subscriptions->type;
             })
 
@@ -157,11 +156,11 @@ class UserDataTable extends DataTable
         // return User::with(relations: ['user_subscriptions' => function ($query) use ($dateOnly): void {
         //     $query->where('endDate', '>=', $dateOnly);
         // }])
-        // return User::with(relations: ['user_subscriptions' => function ($query) use ($dateOnly): void {
-        //     $query->where('endDate', '>=', $dateOnly);
-        // }])
-        //     ->where('account_type', '0')
-        //     ->orderBy('id', 'desc');
+        return User::with(relations: ['user_subscriptions' => function ($query) use ($dateOnly): void {
+            $query->where('endDate', '>=', $dateOnly);
+        }])
+            ->where('account_type', '0')
+            ->orderBy('id', 'desc');
 
 
             return User::with(['user_subscriptions'])

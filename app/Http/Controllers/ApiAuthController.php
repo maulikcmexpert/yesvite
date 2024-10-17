@@ -678,13 +678,13 @@ class ApiAuthController extends Controller
 
             if (($currentTime - $tokenCreationTime) > 60 && $verifyUser->resend_verification_mail == "0") {
                 $message = "The token has expired. Please request a new verification link.";
-                $faild = "faild";
+                $faild = "resend";
                 $user_id = $verifyUser->id;
                 return view('emailVarification', compact('message', 'faild', 'user_id'));
             }
 
             if ($verifyUser->email_verified_at == NULL) {
-
+                $faild="success";
                 $verifyUser->email_verified_at = strtotime(date('Y-m-d  h:i:s'));
                 $verifyUser->status = '1';
                 $verifyUser->remember_token = NULL;
@@ -697,7 +697,7 @@ class ApiAuthController extends Controller
             }
         } else {
             $message = "This is Your Invalid Token.";
-            $faild = "";
+            $faild = "faild";
             return view('emailVarification', compact('message'));
         }
     }
