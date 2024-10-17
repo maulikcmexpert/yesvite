@@ -12,43 +12,56 @@ use Illuminate\Queue\SerializesModels;
 class BulkEmail extends Mailable
 {
     use Queueable, SerializesModels;
-    public $userData; // Declare the public property
+    public $details;
 
     /**
      * Create a new message instance.
+     *
+     * @return void
      */
-    public function __construct($userData)
+    public function __construct($details)
     {
-        $this->userData = $userData; // Assign user data to the property
+        $this->details = $details;
     }
 
     /**
      * Get the message envelope.
+     *
+     * @return \Illuminate\Mail\Mailables\Envelope
      */
-    public function envelope(): Envelope
+    public function envelope()
     {
         return new Envelope(
-            subject: 'Send Broadcast Mail',
+            subject: $this->details['subject'],
         );
     }
 
     /**
      * Get the message content definition.
+     *
+     * @return \Illuminate\Mail\Mailables\Content
      */
-    public function content(): Content
+    public function content()
     {
         return new Content(
             view: 'emails.adminEmail',
+            with: ['details' => $this->details]
         );
     }
 
     /**
      * Get the attachments for the message.
      *
-     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
+     * @return array
      */
-    public function attachments(): array
+    public function attachments()
     {
         return [];
+    }
+
+    public function build()
+    {
+        return $this->view('emails.adminEmail')
+                    ->with('details', $this->details);
     }
 }

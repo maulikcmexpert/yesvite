@@ -1,5 +1,6 @@
 <?php
 
+use App\Jobs\SendEmailJob;
 use App\Models\EventPost;
 use App\Models\Event;
 use App\Models\Device;
@@ -1303,26 +1304,13 @@ function adminNotification($notificationType, $postData)
                     $userEmails[] = $user->email;
                     
                 }
+
+                $details = [
+                    'subject' => 'Send Broadcast Mail'
+                ];
+                SendEmailJob::dispatch($user, $details);
             }
 
-            // dd($userDataList);
-            foreach ($userDataList as $userData) {
-                // dd($userData['email']);
-                if(isset($userData['email'])&&$userData['email']!=""){
-                    // Mail::send('emails.adminEmail', ['userData' => $userData], function ($message) use ($userData) {
-                    //     $message->to($userData['email']);
-                    //     $message->subject('Send Broadcast Mail');
-                    // });
-                    
-                    try {
-                        Mail::to($userData['email'])->send(new BulkEmail($userData));
-                    } catch (\Exception $e) {
-                        // Log the error or handle it as needed
-                        dd( $e->getMessage());
-                    }
-                }
-               
-            }
 
         } catch (\Exception $e) {
             return response()->json(['error' => 'Failed to send emails.'], 500);

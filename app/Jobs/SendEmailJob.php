@@ -2,11 +2,13 @@
 
 namespace App\Jobs;
 
+use App\Mail\BulkEmail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Mail;
 
 class SendEmailJob implements ShouldQueue
 {
@@ -27,7 +29,7 @@ class SendEmailJob implements ShouldQueue
      */
     public function handle(): void
     {
-        Mail::to($this->user->email)->send(new SendMail($this->details));
+        Mail::to($this->user->email)->send(new BulkEmail($this->details));
 
     }
 }
