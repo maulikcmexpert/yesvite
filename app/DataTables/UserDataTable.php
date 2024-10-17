@@ -10,6 +10,7 @@ use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
 use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
 
 class UserDataTable extends DataTable
 {
@@ -104,7 +105,9 @@ class UserDataTable extends DataTable
                 $pwd_url = route('SetPassword', $cryptId);
                 return '<a class="" href="' . $pwd_url . '" title="View"><i class="fa fa-key"></i></a>';;
             })
-
+            ->addColumn('package_name', function ($row) {
+                return $row->user_subscriptions->pluck('type')->join(', ') ?: 'No Subscription';
+            })
 
 
             ->addColumn('action', function ($row) {
@@ -138,7 +141,7 @@ class UserDataTable extends DataTable
                 ';
             })
 
-            ->rawColumns(['profile', 'app_user', 'setpassword', 'action', 'status']);
+            ->rawColumns(['profile', 'app_user', 'setpassword', 'action', 'status','package_name']);
     }
 
     /**
@@ -146,7 +149,14 @@ class UserDataTable extends DataTable
      */
     public function query(User $model): QueryBuilder
     {
-        return  User::where(['account_type' => '0'])->orderBy('id', 'desc');
+        // return  User::where(['account_type' => '0'])->orderBy('id', 'desc');
+
+        return User::with(['user_subscriptions' => function ($query) {
+            // Filter where the subscription's end_date is greater than today
+            $query->where('endDate', '>=', Carbon::now());
+        }])
+        ->where('account_type', '0')
+        ->orderBy('id', 'desc');
     }
 
     /**
@@ -185,6 +195,7 @@ class UserDataTable extends DataTable
             Column::make('email'),
             Column::make('app_user')->title('User Type'),
             Column::make('setpassword')->title('Set Password'),
+            Column::make('package_name')->title('Plan'),
             Column::make('action'),
             Column::make('status')
 
