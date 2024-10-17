@@ -869,6 +869,7 @@ $(document).ready(function() {
 
         // Show the selected subcategory section
         $('#subcategory_' + selectedSubcategory).show();
+        console.log(selectedSubcategory);
     });
 });
 
