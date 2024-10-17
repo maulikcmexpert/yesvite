@@ -27,20 +27,20 @@ class LoginHistoryDataTable extends DataTable
             ->addColumn('no', function () use (&$counter) {
                 return $counter++;
             })
-            ->filter(function ($query) {
-                if ($this->request->has('search')) {
-                    $keyword = $this->request->get('search');
-                    $keyword = $keyword['value'];
-                    $query->where(function ($q) use ($keyword) {
-                        $q->where('firstname', 'LIKE', "%{$keyword}%")
-                            ->orWhere('lastname', 'LIKE', "%{$keyword}%");
-                    });
-                }
-            })
-           
-            // ->addColumn('username', function ($row) {
-            //     return $row->user->firstname . ' ' . $row->user->lastname;
+            // ->filter(function ($query) {
+            //     if ($this->request->has('search')) {
+            //         $keyword = $this->request->get('search');
+            //         $keyword = $keyword['value'];
+            //         $query->where(function ($q) use ($keyword) {
+            //             $q->where('firstname', 'LIKE', "%{$keyword}%")
+            //                 ->orWhere('lastname', 'LIKE', "%{$keyword}%");
+            //         });
+            //     }
             // })
+           
+            ->addColumn('username', function ($row) {
+                return $row->user->firstname . ' ' . $row->user->lastname;
+            })
 
             ->addColumn('ip_address', function ($row) {
                 return $row->ip_address;
