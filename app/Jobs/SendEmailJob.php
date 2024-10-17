@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\Mail\BulkEmail;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
@@ -20,7 +21,7 @@ class SendEmailJob implements ShouldQueue
      */
     public function __construct($user, $details)
     {
-        dd($user);
+        
         $this->user = $user;
         $this->details = $details;
     }
@@ -31,5 +32,6 @@ class SendEmailJob implements ShouldQueue
     public function handle(): void
     {
         Mail::to($this->user->email)->send(new BulkEmail($this->details));
+        dd(1);
     }
 }
