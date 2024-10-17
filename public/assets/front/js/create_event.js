@@ -3273,6 +3273,7 @@ $(document).on("click", ".li_design .edit-design", function (e) {
 
 $(document).on("click", ".li_design .pick-card", function (e) {
     e.preventDefault();
+    $('.subcategory-section').show();
     li_design_click();
 });
 $(document).on("click", ".li_design", function (e) {
