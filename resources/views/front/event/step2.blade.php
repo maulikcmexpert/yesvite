@@ -1,5 +1,5 @@
 <div class="step_2" style="display: none;">
-    {{dd($design_category)}}
+    
     <div class="main-content-right">
         <div class="new_event_detail_form choose-design-form">
             <form action="">
@@ -43,81 +43,31 @@
                         </div>
                     </div>
                     <div class="col-12">
-
-                        {{-- <div class="choose-design-cards-wrp">
+                        <div class="choose-design-cards-wrp">
                             <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="#">Birthday</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">Kids Birthday</li>
                                 </ol>
-                                <h6>11 Designs</h6>
+                                <h6>{{(isset($textData))?count($textData):0}} Designs</h6>
                             </nav>
                             <div class="choose-design-cards">
+                                @if(isset($textData) && $textData->isNotEmpty())
+                                @foreach ($textData as $temp)
                                 <div class="design-card" data-bs-toggle="modal"
-                                    type="button" data-url ="{{route('template_post_temp_1')}}" data-template="template_1">
-                        <img src="{{ asset('assets/event/image/Templates/post_temp_1.png') }}" alt="">
-                    </div>
-                    <div class="design-card" type="button" data-url="{{route('template_post_temp_2')}}" data-template="template_2">
-                        <img src="{{ asset('assets/event/image/Templates/post_temp_2.png') }}" alt="">
-                    </div>
-                    <div class="design-card" type="button" data-url="{{route('template_post_temp_3')}}" data-template="template_3">
-                        <img src="{{ asset('assets/event/image/Templates/post_temp_3.png') }}" alt="">
-                    </div>
-                    <div class="design-card" type="button" data-url="{{route('template_post_temp_4')}}" data-template="template_4">
-                        <img src="{{ asset('assets/event/image/Templates/post_temp_4.png') }}" alt="">
-                    </div>
-                    <div class="design-card" type="button" data-url="{{route('template_post_temp_5')}}" data-template="template_5">
-                        <img src="{{ asset('assets/event/image/Templates/post_temp_5.png') }}" alt="">
-                    </div>
-                    <div class="design-card" type="button" data-url="{{route('template_post_temp_6')}}" data-template="template_6">
-                        <img src="{{ asset('assets/event/image/Templates/post_temp_6.png') }}" alt="">
-                    </div>
-                    <div class="design-card" type="button" data-url="{{route('template_post_temp_7')}}" data-template="template_7">
-                        <img src="{{ asset('assets/event/image/Templates/post_temp_7.png') }}" alt="">
-                    </div>
-                    <div class="design-card" type="button" data-url="{{route('template_post_temp_8')}}" data-template="template_8">
-                        <img src="{{ asset('assets/event/image/Templates/post_temp_8.png') }}" alt="">
-                    </div>
-                    <div class="design-card" type="button" data-url="{{route('template_post_temp_9')}}" data-template="template_9">
-                        <img src="{{ asset('assets/event/image/Templates/post_temp_9.png') }}" alt="">
-                    </div>
-                    <div class="design-card" type="button" data-url="{{route('template_post_temp_10')}}" data-template="template_10">
-                        <img src="{{ asset('assets/event/image/Templates/post_temp_10.png') }}" alt="">
-                    </div>
-                    <div class="design-card" type="button" data-url="{{route('template_post_temp_11')}}" data-template="template_11">
-                        <img src="{{ asset('assets/event/image/Templates/post_temp_11.png') }}" alt="">
-                    </div>
+                                    type="button" data-template="template_1" data-image="{{ asset('storage/canvas/'.$temp->image) }}"
+                                    data-shape_image="{{ ($temp->shape_image!='')?asset('storage/canvas/'.$temp->shape_image):'' }}"
+                                    data-json="{{json_encode($temp->static_information)}}" data-id="{{$temp->id}}">
+                                    <img src="{{ asset('storage/canvas/'.$temp->filled_image) }}" alt="">
+                                </div>
+                                @endforeach
+                                @endif
+                            </div>
+                        </div>
 
+                    </div>
                 </div>
-        </div> --}}
-
-
-        <div class="choose-design-cards-wrp">
-            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Birthday</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Kids Birthday</li>
-                </ol>
-                <h6>{{(isset($textData))?count($textData):0}} Designs</h6>
-            </nav>
-
-            <div class="choose-design-cards">
-                @if(isset($textData) && $textData->isNotEmpty())
-                @foreach ($textData as $temp)
-                <div class="design-card" data-bs-toggle="modal"
-                    type="button" data-template="template_1" data-image="{{ asset('storage/canvas/'.$temp->image) }}"
-                    data-shape_image="{{ ($temp->shape_image!='')?asset('storage/canvas/'.$temp->shape_image):'' }}"
-                    data-json="{{json_encode($temp->static_information)}}" data-id="{{$temp->id}}">
-                    <img src="{{ asset('storage/canvas/'.$temp->filled_image) }}" alt="">
-                </div>
-                @endforeach
-                @endif
-            </div>
+            </form>
         </div>
-
     </div>
-</div>
-</form>
-</div>
-</div>
 </div>
