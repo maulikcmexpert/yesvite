@@ -263,7 +263,6 @@ class AuthController extends Controller
 
                     if ($loginHistory) {
                             $new_count=$loginHistory->login_count + 1;
-                            dd($new_count);
                             $loginHistory->ip_address = $userIpAddress;
                             $loginHistory->login_at = now();
                             $loginHistory->login_count = $new_count;
