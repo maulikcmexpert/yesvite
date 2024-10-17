@@ -188,7 +188,7 @@ class AuthController extends Controller
             $this->addInFirebase($storeUser->id);
             Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($request) {
                 $message->to($request->email);
-                $message->subject('Email Verification Mail');
+                $message->subject('Verify your Yesvite email address');
             });
 
 
@@ -472,7 +472,7 @@ class AuthController extends Controller
                 ];
                 Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($secondUser) {
                     $message->to($secondUser->email);
-                    $message->subject('Email Verification Mail');
+                    $message->subject('Verify your Yesvite email address');
                 });
 
                 return  Redirect::to('add_account')->with('success', 'Please check and verify your email address.');

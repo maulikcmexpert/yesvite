@@ -99,7 +99,7 @@ class ApiAuthController extends Controller
                 ];
                 Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($input) {
                     $message->to($input['email']);
-                    $message->subject('Email Verification Mail');
+                    $message->subject('Verify your Yesvite email address');
                 });
 
                 return response()->json(['status' => 1, 'message' => "Account successfully created, please verify your email before you can log in"]);
