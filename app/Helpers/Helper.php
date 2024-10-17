@@ -1315,7 +1315,7 @@ function adminNotification($notificationType, $postData)
                     // });
                     
                     try {
-                        Mail::to($userData['email'])->send(new BulkEmail(['userData' => $userData]));
+                        Mail::to($userData['email'])->send(new BulkEmail($userData));
                     } catch (\Exception $e) {
                         // Log the error or handle it as needed
                         dd( $e->getMessage());

@@ -12,13 +12,14 @@ use Illuminate\Queue\SerializesModels;
 class BulkEmail extends Mailable
 {
     use Queueable, SerializesModels;
+    public $userData; // Declare the public property
 
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct($userData)
     {
-        //
+        $this->userData = $userData; // Assign user data to the property
     }
 
     /**
