@@ -1282,6 +1282,7 @@ function adminNotification($notificationType, $postData)
             $userDataList = [];
 
             foreach ($users as $user) {
+                dd($user);
                 $deviceData = Device::where('user_id', $user->id)->first();
 
                 dd($deviceData);
