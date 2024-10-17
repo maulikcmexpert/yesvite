@@ -35,6 +35,7 @@ class ApiAuthController extends Controller
 {
     public function signup(Request $request)
     {
+        dd(1);
 
         $rawData = $request->getContent();
 
