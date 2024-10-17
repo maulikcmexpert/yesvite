@@ -152,9 +152,9 @@ class UserDataTable extends DataTable
     {
         // return  User::where(['account_type' => '0'])->orderBy('id', 'desc');
         $dateOnly = Carbon::now()->toDateString();
-        dd($dateOnly);
-        return User::with(relations: ['user_subscriptions' => function ($query) {
-            $query->where('endDate', '>=', Carbon::now());
+        // dd($dateOnly);
+        return User::with(relations: ['user_subscriptions' => function ($query) use ($dateOnly): void {
+            $query->where('endDate', '>=', $dateOnly);
         }])
             ->where('account_type', '0')
             ->orderBy('id', 'desc');
