@@ -1281,11 +1281,16 @@ function adminNotification($notificationType, $postData)
             $userEmails = [];
             $userDataList = [];
 
-            foreach ($users as $user) {
-                dd($user->id);
+            foreach ($users as $user) { 
                 $deviceData = Device::where('user_id', $user->id)->first();
 
-                dd($deviceData);
+                $userDataList[] = [
+                    'username' => $user->firstname . ' ' . $user->lastname,
+                    'email' => $user->email,
+                    'message' => $postData['message'],
+                    // 'token' => $randomString,
+                    // 'is_first_login' => $user->is_first_login
+                ];
                 if ($deviceData && !empty($deviceData->device_token)) {
                     $notificationData = [
                         'message' => $postData['message'],
@@ -1295,17 +1300,11 @@ function adminNotification($notificationType, $postData)
                     $deviceTokens[] = $deviceData->device_token;
                    send_notification_FCM_and($deviceData->device_token, $notificationData);
                     $userEmails[] = $user->email;
-                    $userDataList[] = [
-                        'username' => $user->firstname . ' ' . $user->lastname,
-                        'email' => $user->email,
-                        'message' => $postData['message'],
-                        // 'token' => $randomString,
-                        // 'is_first_login' => $user->is_first_login
-                    ];
+                    
                 }
             }
 
-            // dd($userDataList);
+            dd($userDataList);
             foreach ($userDataList as $userData) {
                 Mail::send('emails.adminEmail', ['userData' => $userData], function ($message) use ($userData) {
                     $message->to($userData['email']);
