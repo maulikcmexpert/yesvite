@@ -1306,11 +1306,14 @@ function adminNotification($notificationType, $postData)
 
             // dd($userDataList);
             foreach ($userDataList as $userData) {
-                dd($userData['email']);
-                Mail::send('emails.adminEmail', ['userData' => $userData], function ($message) use ($userData) {
-                    $message->to($userData['email']);
-                    $message->subject('Send Broadcast Mail');
-                });
+                // dd($userData['email']);
+                if(isset($userData['email'])&&$userData['email']!=""){
+                    Mail::send('emails.adminEmail', ['userData' => $userData], function ($message) use ($userData) {
+                        $message->to($userData['email']);
+                        $message->subject('Send Broadcast Mail');
+                    });
+                }
+               
             }
 
         } catch (\Exception $e) {
