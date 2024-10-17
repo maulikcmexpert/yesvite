@@ -5377,6 +5377,11 @@ $(document).on('click','.all_user_list',function(){
     });
 })
 
+
+$(document).on('click','.cursor-pointer',function(){
+  $('#sidebar_select_design_category').css('display','block');
+})
+
 // $(document).on("click", ".new-temp", function () {
 //     // Get the image URL from the data-image attribute
 //     var imageUrl = $(this).data("image");
