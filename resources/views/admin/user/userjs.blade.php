@@ -253,7 +253,48 @@
             }
 
         });
+        $(document).on('click', '.dropdown-item.block-user, .dropdown-item.unblock-user', function(e) {
+            e.preventDefault();
 
+            var userId = $(this).data('id'); // Get user ID
+            var $button = $(this).closest('.dropdown').find(
+            '.dropdown-toggle'); // The button to update text
+            var isBlockAction = $(this).hasClass('block-user'); // Check if the action is to block
+
+            $.ajax({
+                url: "{{ route('update.status') }}", // Your route for updating the status
+                type: "POST",
+                data: {
+                    id: userId,
+                    _token: "{{ csrf_token() }}" // Ensure you send the CSRF token
+                },
+                success: function(response) {
+                    if (response.status === 'success') {
+                        // Determine new button text and dropdown item text based on action
+                        var newButtonText = isBlockAction ? 'Block' : 'Unblock';
+                        var newDropdownText = isBlockAction ? 'Unblock' : 'Block';
+
+                        // Update the button text
+                        $button.text(newButtonText);
+
+                        // Update the dropdown item's text and class
+                        var $dropdownItem = $(this);
+                        if (isBlockAction) {
+                            $dropdownItem.text(newDropdownText).removeClass('block-user')
+                                .addClass('unblock-user');
+                        } else {
+                            $dropdownItem.text(newDropdownText).removeClass('unblock-user')
+                                .addClass('block-user');
+                        }
+                    } else {
+                        alert(response.message);
+                    }
+                }.bind(this), // Bind 'this' to ensure the correct context
+                error: function() {
+                    alert('An error occurred while updating the status.');
+                }
+            });
+        });
 
     });
 </script>
