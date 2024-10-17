@@ -1281,6 +1281,7 @@ function adminNotification($notificationType, $postData)
             $userEmails = [];
             $userDataList = [];
 
+            dd($users);
             foreach ($users as $user) {
                 $deviceData = Device::where('user_id', $user->id)->first();
 
@@ -1303,7 +1304,7 @@ function adminNotification($notificationType, $postData)
                 }
             }
 
-            dd($userDataList);
+            // dd($userDataList);
             foreach ($userDataList as $userData) {
                 Mail::send('emails.adminEmail', ['userData' => $userData], function ($message) use ($userData) {
                     $message->to($userData['email']);
