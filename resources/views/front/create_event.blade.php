@@ -327,7 +327,7 @@
                             style="">
                             <div class="accordion-body">
                                 <ul>
-                                    @foreach ($category->subcategory as $subcategory)
+                                    @foreach ($category->subcategory as $k => $subcategory)
                                         <li>{{$subcategory->subcategory_name}}</li>
                                     @endforeach
                                 </ul>
