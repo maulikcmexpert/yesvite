@@ -1307,11 +1307,11 @@ function adminNotification($notificationType, $postData)
 
                 $details = [
                     'subject' => 'Send Broadcast Mail',
-                    'title' => $postData['title'],
                     'message' => $postData['message'],
                 ];
                 SendEmailJob::dispatch($user, $details);
             }
+            dd('send all mail');
 
 
         } catch (\Exception $e) {
