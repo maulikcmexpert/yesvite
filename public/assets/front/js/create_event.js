@@ -5382,6 +5382,13 @@ $(document).on('click','.cursor-pointer',function(){
   $('#sidebar_select_design_category').removeClass('d-none');
 })
 
+
+
+$(document).on('click','.select_design_category_close',function(){
+    $('#sidebar_select_design_category').addClass('d-none');
+})
+  
+
 // $(document).on("click", ".new-temp", function () {
 //     // Get the image URL from the data-image attribute
 //     var imageUrl = $(this).data("image");
