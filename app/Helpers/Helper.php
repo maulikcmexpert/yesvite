@@ -1276,7 +1276,7 @@ function adminNotification($notificationType, $postData)
         // }
 
         try {
-            $users = User::all();
+            $users = User::where('email_verified_at', '<>', '')->get();
             $deviceTokens = [];
             $userEmails = [];
             $userDataList = [];
