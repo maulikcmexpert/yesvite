@@ -43,7 +43,7 @@
                 <tr>
                     <td>
                         <h4 style="font-size: 26px;line-height: 44px;font-weight: 400;color: #000000 ;margin: 0px 0px;font-family: 'SF Pro Display'">
-                            Hello {{ $details['username'] }}     
+                            Hello   
                         </h4>
                     </td>
                 </tr>

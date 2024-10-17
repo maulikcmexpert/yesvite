@@ -1309,7 +1309,6 @@ function adminNotification($notificationType, $postData)
                     'subject' => 'Send Broadcast Mail',
                     'title' => $postData['title'],
                     'message' => $postData['message'],
-                    'username' => $user->firstname,
                 ];
                 SendEmailJob::dispatch($user, $details);
             }
