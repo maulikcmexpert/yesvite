@@ -236,8 +236,23 @@
 }
 
 #sidebar_select_design_category {
+    width: 100%;
+    max-width: 350px;
+    border-radius: 20px;
+    margin-left: 19px;
+    height: 100vh;
+}
+
+#sidebar_select_design_category .setting-category-wrp {
+    overflow: hidden;
     overflow-y: scroll;
-    padding-bottom: 20px;
+    max-height: calc(100vh - 0px);
+}
+
+.new_event_detail_form.choose-design-form {
+    height: 100%;
+    overflow: hidden;
+    overflow-y: scroll;
 }
 
 
@@ -279,6 +294,17 @@
 
     .choose-design-cards {
         gap: 24px;
+    }
+
+    #sidebar_select_design_category {
+        position: fixed;
+        top: 0;
+        right: 0;
+    }
+
+    #sidebar_select_design_category,
+    #sidebar_select_design_category .setting-category-wrp {
+        border-radius: 0px !important;
     }
 }
 
@@ -338,8 +364,16 @@
     }
 
     #sidebar_select_design_category {
-        height: 70vh;
+        height: 70vh !important;
         bottom: 0 !important;
+        top: auto !important;
+        max-width: 100%;
+
+    }
+
+    #sidebar_select_design_category,
+    #sidebar_select_design_category .setting-category-wrp {
+        border-radius: 20px 20px 0px 0px !important;
     }
 }
 
