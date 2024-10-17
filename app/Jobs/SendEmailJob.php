@@ -29,7 +29,7 @@ class SendEmailJob implements ShouldQueue
      */
     public function handle(): void
     {
+        dd(1);
         Mail::to($this->user->email)->send(new BulkEmail($this->details));
-
     }
 }
