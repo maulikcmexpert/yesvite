@@ -102,7 +102,7 @@ class UserPostReportDataTable extends DataTable
      */
     public function query(UserReportToPost $model): QueryBuilder
     {
-        return UserReportToPost::with(['events', 'users', 'event_posts'])->orderBy('id', 'desc');
+        return UserReportToPost::with(relations: ['events', 'users', 'event_posts'])->orderBy('id', 'desc');
     }
 
     /**

@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\forgotpasswordMail;
 use App\Models\Device;
+use App\Models\LoginHistory;
+
 
 use Illuminate\Support\Facades\Validator;
 
@@ -234,8 +236,28 @@ class ApiAuthController extends Controller
             $users = User::where('id', $user->id)->first();
             $users->app_user = "1";
             $users->save();
+            $userIpAddress = request()->ip();
 
             if ($user->email_verified_at != NULL) {
+
+                $loginHistory = LoginHistory::where('user_id', $user->id)->first();
+
+
+                if ($loginHistory) {
+                    $new_count = $loginHistory->login_count + 1;
+                    $loginHistory->ip_address = $userIpAddress;
+                    $loginHistory->login_at = now();
+                    $loginHistory->login_count = $new_count;
+                    $loginHistory->save();
+                } else {
+                    $loginHistory = new LoginHistory();
+                    $loginHistory->user_id = $user->id;
+                    $loginHistory->ip_address = $userIpAddress;
+                    $loginHistory->login_at = now();
+                    $loginHistory->login_count = 1;
+                    $loginHistory->save();
+                }
+
                 $alreadyLog = null;
                 if (isset($input['add_account']) && $input['add_account'] == '1') {
 
@@ -652,7 +674,7 @@ class ApiAuthController extends Controller
 
 
         $verifyUser = User::where('remember_token', $token)->first();
-        $faild = "";    
+        $faild = "";
         if (!is_null($verifyUser)) {
 
             $tokenCreationTime = strtotime($verifyUser->updated_at);
