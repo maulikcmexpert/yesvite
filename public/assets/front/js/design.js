@@ -925,8 +925,8 @@ function bindData() {
                                                 cornerColor: "#fff",
                                                 transparentCorners: false,
                                                 lockUniScaling: true,
-                                                scaleX: scaledWidth / newWidth,  // Scale based on element's width
-                                                scaleY: scaledHeight / newHeight, // Scale based on element's height
+                                                scaleX: scaledWidth / element.width,  // Scale based on element's width
+                                                scaleY: scaledHeight / element.height, // Scale based on element's height
                                                 cornerSize: 10,
                                                 cornerStyle: 'circle',
                                                 left: element.centerX - scaledWidth / 2, // Center the image horizontally
