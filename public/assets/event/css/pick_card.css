@@ -235,6 +235,11 @@
     
 }
 
+#sidebar_select_design_category{
+    overflow-y: scroll;
+    padding-bottom: 20px;
+}
+
 
 @media only screen and (max-width: 1399px) {
     .design-card {
