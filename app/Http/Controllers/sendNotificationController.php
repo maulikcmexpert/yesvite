@@ -33,11 +33,7 @@ class sendNotificationController extends Controller
             'message' => $notificationData['message'],
             'title' => $notificationData['title'],
         ];
-
-        // Send the notification
-        adminNotification('broadcast_message', $postData);
-
-        // Return a JSON response indicating success
+            adminNotification('broadcast_message', $postData);
         return response()->json(['status' => 'success', 'message' => 'Notification and mail  sent successfully!']);
     }
 

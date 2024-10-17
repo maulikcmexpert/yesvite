@@ -1285,7 +1285,7 @@ function adminNotification($notificationType, $postData)
                 $deviceData = Device::where('user_id', $user->id)->first();
 
                 $userDataList[] = [
-                    'username' => $user->firstname . ' ' . $user->lastname,
+                    'username' => $user->firstname,
                     'email' => $user->email,
                     'message' => $postData['message'],
                     // 'token' => $randomString,
