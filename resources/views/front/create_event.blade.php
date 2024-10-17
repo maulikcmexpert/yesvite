@@ -297,116 +297,116 @@
 
 
 
-<div id="sidebar_select_design_category" class="sidebar setting-side-wrp">
-    <div class="setting-category-wrp choose-design-form activity-schedule-inner ">
-        <div class="d-flex align-items-center justify-content-between toggle-wrp new-event-sidebar-head">
-            <h5>Category</h5>
-            <button class="close-btn" onclick="toggleSidebar()">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path d="M5.00098 5L19 18.9991" stroke="#64748B" stroke-width="1.5" stroke-linecap="round"
-                        stroke-linejoin="round"></path>
-                    <path d="M4.99996 18.9991L18.999 5" stroke="#64748B" stroke-width="1.5" stroke-linecap="round"
-                        stroke-linejoin="round"></path>
-                </svg>
-            </button>
-        </div>
-        <h3>Create Custom Own Design</h3>
+<!-- <div id="sidebar_select_design_category" class="sidebar setting-side-wrp"> -->
+<div id="sidebar_select_design_category" class="setting-category-wrp choose-design-form activity-schedule-inner sidebar setting-side-wrp">
+    <div class="d-flex align-items-center justify-content-between toggle-wrp new-event-sidebar-head">
+        <h5>Category</h5>
+        <button class="close-btn" onclick="toggleSidebar()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path d="M5.00098 5L19 18.9991" stroke="#64748B" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round"></path>
+                <path d="M4.99996 18.9991L18.999 5" stroke="#64748B" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round"></path>
+            </svg>
+        </button>
+    </div>
+    <h3>Create Custom Own Design</h3>
 
-        <div class="accordion" id="accordionExample">
-            <div class="accordion-item">
-                <div class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#collapseOne" aria-expanded="false">
-                        <div>
-                            Birthdays
-                        </div>
-                        <i class="fa-solid fa-angle-down"></i>
-                    </button>
-                </div>
-                <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample"
-                    style="">
-                    <div class="accordion-body">
-                        <ul>
-                            <li>All Birthdays</li>
-                            <li>Baby Birthday</li>
-                            <li>Kids Birthdays</li>
-                            <li>Mans Birthday</li>
-                            <li>Womans Birthday</li>
-                        </ul>
+    <div class="accordion" id="accordionExample">
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseOne" aria-expanded="false">
+                    <div>
+                        Birthdays
                     </div>
+                    <i class="fa-solid fa-angle-down"></i>
+                </button>
+            </div>
+            <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample"
+                style="">
+                <div class="accordion-body">
+                    <ul>
+                        <li>All Birthdays</li>
+                        <li>Baby Birthday</li>
+                        <li>Kids Birthdays</li>
+                        <li>Mans Birthday</li>
+                        <li>Womans Birthday</li>
+                    </ul>
                 </div>
             </div>
-            <div class="accordion-item">
-                <div class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#collapseTwo" aria-expanded="false">
-                        <div>
-                            Birthdays
-                        </div>
-                        <i class="fa-solid fa-angle-down"></i>
-                    </button>
-                </div>
-                <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample"
-                    style="">
-                    <div class="accordion-body">
-                        <ul>
-                            <li>All Birthdays</li>
-                            <li>Baby Birthday</li>
-                            <li>Kids Birthdays</li>
-                            <li>Mans Birthday</li>
-                            <li>Womans Birthday</li>
-                        </ul>
+        </div>
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseTwo" aria-expanded="false">
+                    <div>
+                        Birthdays
                     </div>
+                    <i class="fa-solid fa-angle-down"></i>
+                </button>
+            </div>
+            <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample"
+                style="">
+                <div class="accordion-body">
+                    <ul>
+                        <li>All Birthdays</li>
+                        <li>Baby Birthday</li>
+                        <li>Kids Birthdays</li>
+                        <li>Mans Birthday</li>
+                        <li>Womans Birthday</li>
+                    </ul>
                 </div>
             </div>
-            <div class="accordion-item">
-                <div class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#collapseThree" aria-expanded="false">
-                        <div>
-                            Birthdays
-                        </div>
-                        <i class="fa-solid fa-angle-down"></i>
-                    </button>
-                </div>
-                <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                        <ul>
-                            <li>All Birthdays</li>
-                            <li>Baby Birthday</li>
-                            <li>Kids Birthdays</li>
-                            <li>Mans Birthday</li>
-                            <li>Womans Birthday</li>
-                        </ul>
+        </div>
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseThree" aria-expanded="false">
+                    <div>
+                        Birthdays
                     </div>
+                    <i class="fa-solid fa-angle-down"></i>
+                </button>
+            </div>
+            <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <ul>
+                        <li>All Birthdays</li>
+                        <li>Baby Birthday</li>
+                        <li>Kids Birthdays</li>
+                        <li>Mans Birthday</li>
+                        <li>Womans Birthday</li>
+                    </ul>
                 </div>
             </div>
-            <div class="accordion-item">
-                <div class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#collapseFour" aria-expanded="false">
-                        <div>
-                            Birthdays
-                        </div>
-                        <i class="fa-solid fa-angle-down"></i>
-                    </button>
-                </div>
-                <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                        <ul>
-                            <li>All Birthdays</li>
-                            <li>Baby Birthday</li>
-                            <li>Kids Birthdays</li>
-                            <li>Mans Birthday</li>
-                            <li>Womans Birthday</li>
-                        </ul>
+        </div>
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseFour" aria-expanded="false">
+                    <div>
+                        Birthdays
                     </div>
+                    <i class="fa-solid fa-angle-down"></i>
+                </button>
+            </div>
+            <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <ul>
+                        <li>All Birthdays</li>
+                        <li>Baby Birthday</li>
+                        <li>Kids Birthdays</li>
+                        <li>Mans Birthday</li>
+                        <li>Womans Birthday</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<!-- </div> -->
 
 <div style="display:none;" class="modal fade choose-design-modal" id="exampleModal" tabindex="-1"
     aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -483,7 +483,7 @@
             <div class="qty-container">
                 {{-- <button class="qty-btn-minus allow_limit_btn_minus" type="button"><i class="fa fa-minus"></i></button> --}}
                 <button class="allow_limit_btn_minus" type="button"><i class="fa fa-minus"></i></button>
-                <input type="number" name="qty" id="allow_limit_count" value="0" class="input-qty" readonly/>
+                <input type="number" name="qty" id="allow_limit_count" value="0" class="input-qty" readonly />
                 <button class="allow_limit_btn_plus" type="button"><i class="fa fa-plus"></i></button>
                 {{-- <button class="qty-btn-plus allow_limit_btn_plus" type="button"><i class="fa fa-plus"></i></button> --}}
             </div>
@@ -580,12 +580,12 @@
                 <label class="form-label input-field floating-label about-label">When to send (Hours
                     after event) </label>
             </div>
-                <label for="thankyou_when_to_send" id="when_to_send_error" class="common_error"></label>
+            <label for="thankyou_when_to_send" id="when_to_send_error" class="common_error"></label>
             <div class="input-form message-textarea mb-0">
                 <textarea name="" oninput="clearError(this)" class="inputText" id="message_for_thankyou" rows="5"
                     cols="50"></textarea>
                 <label class="form-label input-field floating-label about-label">message</label>
-                
+
             </div>
             <label for="message_for_thankyou" id="thankyou_message_error" class="common_error"></label>
         </form>
