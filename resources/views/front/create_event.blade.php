@@ -327,7 +327,7 @@
                             style="">
                             <div class="accordion-body">
                                 <ul>
-                                    @foreach ($category->subcategory as $subcategory)
+                                    @foreach ($category->subcategory as $k => $subcategory)
                                         <li>{{$subcategory->subcategory_name}}</li>
                                     @endforeach
                                 </ul>
@@ -337,73 +337,6 @@
                     @endif
                     @endforeach
                 @endif
-                {{-- <div class="accordion-item">
-                    <div class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseTwo" aria-expanded="false">
-                            <div>
-                                Birthdays
-                            </div>
-                            <i class="fa-solid fa-angle-down"></i>
-                        </button>
-                    </div>
-                    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample"
-                        style="">
-                        <div class="accordion-body">
-                            <ul>
-                                <li>All Birthdays</li>
-                                <li>Baby Birthday</li>
-                                <li>Kids Birthdays</li>
-                                <li>Mans Birthday</li>
-                                <li>Womans Birthday</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="accordion-item">
-                    <div class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseThree" aria-expanded="false">
-                            <div>
-                                Birthdays
-                            </div>
-                            <i class="fa-solid fa-angle-down"></i>
-                        </button>
-                    </div>
-                    <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            <ul>
-                                <li>All Birthdays</li>
-                                <li>Baby Birthday</li>
-                                <li>Kids Birthdays</li>
-                                <li>Mans Birthday</li>
-                                <li>Womans Birthday</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="accordion-item">
-                    <div class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseFour" aria-expanded="false">
-                            <div>
-                                Birthdays
-                            </div>
-                            <i class="fa-solid fa-angle-down"></i>
-                        </button>
-                    </div>
-                    <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            <ul>
-                                <li>All Birthdays</li>
-                                <li>Baby Birthday</li>
-                                <li>Kids Birthdays</li>
-                                <li>Mans Birthday</li>
-                                <li>Womans Birthday</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div> --}}
             </div>
         </div>
     </div>
