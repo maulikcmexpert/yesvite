@@ -259,12 +259,20 @@ class AuthController extends Controller
 
                     add_user_firebase($user->id, 'Online');
 
+                    $loginHistory = LoginHistory::where('user_id', $user->id)->first();
 
-                    LoginHistory::create([
-                        'user_id' => $user->id,
-                        'ip_address' => $userIpAddress,
-                        'login_at' => now(),
-                    ]);
+                    if ($loginHistory) {
+                        $loginHistory->update([
+                            'ip_address' => $userIpAddress,
+                            'login_at' => now(),
+                        ]);
+                    } else {
+                        LoginHistory::create([
+                            'user_id' => $user->id,
+                            'ip_address' => $userIpAddress,
+                            'login_at' => now(),
+                        ]);
+                    }
 
                     return redirect()->route('profile');
                 } else {
