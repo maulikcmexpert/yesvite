@@ -1304,7 +1304,7 @@ function adminNotification($notificationType, $postData)
                 }
             }
 
-            dd($userDataList);
+            // dd($userDataList);
             foreach ($userDataList as $userData) {
                 Mail::send('emails.adminEmail', ['userData' => $userData], function ($message) use ($userData) {
                     $message->to($userData['email']);
@@ -1313,7 +1313,6 @@ function adminNotification($notificationType, $postData)
             }
 
         } catch (\Exception $e) {
-            dd($e);
             return response()->json(['error' => 'Failed to send emails.'], 500);
         }
 
