@@ -105,8 +105,9 @@ class UserDataTable extends DataTable
                 $pwd_url = route('SetPassword', $cryptId);
                 return '<a class="" href="' . $pwd_url . '" title="View"><i class="fa fa-key"></i></a>';;
             })
+
             ->addColumn('package_name', function ($row) {
-                return $row->user_subscriptions->pluck('type')->join(', ') ?: 'No Subscription';
+                return $row->user_subscriptions->type;
             })
 
 
