@@ -293,7 +293,7 @@
 
     </div>
 
-    <div id="sidebar_select_design_category" class="setting-side-wrp d-none">
+    <div id="sidebar_select_design_category" class="setting-side-wrp" style="display: none;">
         <div class="setting-category-wrp choose-design-form activity-schedule-inner ">
             <div class="d-flex align-items-center justify-content-between toggle-wrp new-event-sidebar-head">
                 <h5>Category</h5>
