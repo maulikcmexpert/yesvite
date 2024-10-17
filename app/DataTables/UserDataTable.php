@@ -151,9 +151,8 @@ class UserDataTable extends DataTable
     public function query(User $model): QueryBuilder
     {
         // return  User::where(['account_type' => '0'])->orderBy('id', 'desc');
-
+        dd(Carbon::now());
         return User::with(['user_subscriptions' => function ($query) {
-            // Filter where the subscription's end_date is greater than today
             $query->where('endDate', '>=', Carbon::now());
         }])
         ->where('account_type', '0')
