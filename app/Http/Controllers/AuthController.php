@@ -268,12 +268,12 @@ class AuthController extends Controller
                             $loginHistory->login_count = $new_count;
                             $loginHistory->save();
                     } else {
-                        LoginHistory::create([
-                            'user_id' => $user->id,
-                            'ip_address' => $userIpAddress,
-                            'login_at' => now(),
-                            'login_count' => 1,
-                        ]);
+                        $loginHistory = new LoginHistory();
+                        $loginHistory->user_id = $user->id;
+                        $loginHistory->ip_address = $userIpAddress;
+                        $loginHistory->login_at = now();
+                        $loginHistory->login_count = 1;
+                        $loginHistory->save();
                     }
 
                     return redirect()->route('profile');
