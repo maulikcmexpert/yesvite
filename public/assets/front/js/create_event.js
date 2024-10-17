@@ -56,7 +56,18 @@ var swiper = new Swiper(".mySwiper", {
     navigation: {
         nextEl: ".swiper-button-next",
         prevEl: ".swiper-button-prev",
-    }
+    },
+    breakpoints: {
+        
+        1200: {
+            slidesPerView: 2,
+        },
+
+        1400: {
+            slidesPerView: 3.5,
+        },
+        
+    },
 });
 
 // Delete Group functionality
