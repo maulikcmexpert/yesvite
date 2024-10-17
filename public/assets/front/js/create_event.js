@@ -376,7 +376,7 @@ if (/Mobi/.test(navigator.userAgent)) {
 datepicker();
 function datepicker() {
     $(".timepicker").datetimepicker({
-        //  keepOpen: true,
+         keepOpen: true,
         format: "LT",
         icons: {
             up: "fa fa-chevron-up",
