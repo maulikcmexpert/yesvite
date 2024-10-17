@@ -376,6 +376,7 @@ if (/Mobi/.test(navigator.userAgent)) {
 datepicker();
 function datepicker() {
     $(".timepicker").datetimepicker({
+         keepOpen: true,
         format: "LT",
         icons: {
             up: "fa fa-chevron-up",
@@ -385,6 +386,7 @@ function datepicker() {
         ignoreReadonly: true,
         stepping: 15, // Set stepping to 15 minutes
         // defaultDate: now
+         debug: true
     });
 }
 
