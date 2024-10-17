@@ -27,16 +27,16 @@ class LoginHistoryDataTable extends DataTable
             ->addColumn('no', function () use (&$counter) {
                 return $counter++;
             })
-            ->filter(function ($query) {
-                if ($this->request->has('search')) {
-                    $keyword = $this->request->get('search');
-                    $keyword = $keyword['value'];
-                    $query->where(function ($q) use ($keyword) {
-                        $q->where('firstname', 'LIKE', "%{$keyword}%")
-                            ->orWhere('lastname', 'LIKE', "%{$keyword}%");
-                    });
-                }
-            })
+            // ->filter(function ($query) {
+            //     if ($this->request->has('search')) {
+            //         $keyword = $this->request->get('search');
+            //         $keyword = $keyword['value'];
+            //         $query->where(function ($q) use ($keyword) {
+            //             $q->where('firstname', 'LIKE', "%{$keyword}%")
+            //                 ->orWhere('lastname', 'LIKE', "%{$keyword}%");
+            //         });
+            //     }
+            // })
            
             ->addColumn('username', function ($row) {
                 return $row->user->firstname . ' ' . $row->user->lastname;
@@ -74,7 +74,7 @@ class LoginHistoryDataTable extends DataTable
      */
     public function query(LoginHistory $model): QueryBuilder
     {
-        return LoginHistory::with(relations: ['user'])->orderBy('id', 'desc');
+        return LoginHistory::with(['user'])->orderBy('id', 'desc');
     }
 
     /**
