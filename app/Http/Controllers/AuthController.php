@@ -262,12 +262,12 @@ class AuthController extends Controller
                     $loginHistory = LoginHistory::where('user_id', $user->id)->first();
 
                     if ($loginHistory) {
-                        $loginHistory->update([
-                            'ip_address' => $userIpAddress,
-                            'login_at' => now(),
-                            'login_count' => $loginHistory->login_count + 1,
-
-                        ]);
+                            $new_count=$loginHistory->login_count + 1;
+                            dd($new_count);
+                            $loginHistory->ip_address = $userIpAddress;
+                            $loginHistory->login_at = now();
+                            $loginHistory->login_count = $new_count;
+                            $loginHistory->save();
                     } else {
                         LoginHistory::create([
                             'user_id' => $user->id,
