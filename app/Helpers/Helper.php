@@ -1286,7 +1286,7 @@ function adminNotification($notificationType, $postData)
             foreach ($users as $user) { 
                 $deviceData = Device::where('user_id', $user->id)->first();
 
-                $userDataList[] = [
+                $userDataList = [
                     'username' => $user->firstname,
                     'email' => $user->email,
                     'message' => $postData['message'],
@@ -1308,7 +1308,8 @@ function adminNotification($notificationType, $postData)
                 $details = [
                     'subject' => 'Send Broadcast Mail',
                     'title' => $postData['title'],
-                    'message' => $postData['message']
+                    'message' => $postData['message'],
+                    'username' => $user->firstname,
                 ];
                 SendEmailJob::dispatch($user, $details);
             }

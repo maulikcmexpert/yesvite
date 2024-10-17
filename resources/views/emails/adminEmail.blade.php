@@ -43,7 +43,7 @@
                 <tr>
                     <td>
                         <h4 style="font-size: 26px;line-height: 44px;font-weight: 400;color: #000000 ;margin: 0px 0px;font-family: 'SF Pro Display'">
-                            Hello {{$userData['username']}}     
+                            Hello {{ $details['username'] }}     
                         </h4>
                     </td>
                 </tr>
@@ -65,7 +65,7 @@
 
                     <td>
                         <p style="font-size: 16px;line-height: 25px;font-weight: 400;color: #0F172A ;margin: 0px 0px;font-family: 'SF Pro Display'">
-                            " {{$userData['message']}}".</p>
+                            " {{ $details['body'] }}".</p>
                     </td>
                 </tr>   
                 <!-- -------------- -->
