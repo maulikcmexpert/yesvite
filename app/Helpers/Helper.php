@@ -1360,12 +1360,12 @@ function adminNotification($notificationType, $postData)
             }
 
             // Send notifications to all device tokens (if send_notification_FCM_and supports bulk sending)
-            if (!empty($deviceTokens)) {
-                send_notification_FCM_and($deviceTokens, [
-                    'message' => $postData['message'],
-                    'type' => $notificationType,
-                ]);
-            }
+            // if (!empty($deviceTokens)) {
+            //     send_notification_FCM_and($deviceTokens, [
+            //         'message' => $postData['message'],
+            //         'type' => $notificationType,
+            //     ]);
+            // }
 
             // Send emails to all users
             foreach ($userDataList as $userData) {
