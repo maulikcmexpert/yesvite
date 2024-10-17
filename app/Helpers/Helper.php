@@ -1291,7 +1291,7 @@ function adminNotification($notificationType, $postData)
                     ];
 
                     $deviceTokens[] = $deviceData->device_token;
-                   // send_notification_FCM_and($deviceData->device_token, $notificationData);
+                   send_notification_FCM_and($deviceData->device_token, $notificationData);
                     $userEmails[] = $user->email;
                     $userDataList[] = [
                         'username' => $user->firstname . ' ' . $user->lastname,

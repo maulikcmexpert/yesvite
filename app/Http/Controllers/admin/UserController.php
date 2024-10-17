@@ -259,7 +259,66 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $user_id = decrypt($id);
+
+        // Get the template data by ID
+        $getTemData = User::findOrFail($user_id);
+
+        $title = 'Edit user';
+        $page = 'admin.user.edit';
+        $js = 'admin.user.userjs';
+        $subcatId = $id;
+
+
+
+
+        // Pass the data to the view
+        return view('admin.includes.layout', compact(
+            'title',
+            'page',
+            'js',
+            'getTemData',
+
+        ));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        // Decrypt the user ID if needed
+        $user = user::findOrFail($id);
+
+        // Validate the incoming request data
+        $request->validate([
+            'firstname' => 'required|string|max:255',
+            'lastname' => 'required|string|max:255',
+            'email' => 'required|email',
+            'phone_number' => 'nullable|numeric',
+            'address' => 'nullable|string|max:255',
+        ]);
+
+
+
+
+        // Update user data
+        $user->firstname = $request->input('firstname');
+        $user->lastname = $request->input('lastname');
+        $user->email = $request->input('email');
+        $user->phone_number = $request->input('phone_number');
+        $user->address = $request->input('address');
+        $user->address_2 = $request->input('address_2');
+
+        // Save the updated user details
+        $user->save();
+
+        // Redirect back to the user list or show a success message
+        return redirect()->route('users.index')
+            ->with('success', 'User updated successfully.');
     }
 
     /**
@@ -267,40 +326,38 @@ class UserController extends Controller
      */
     public function update_temp_password(Request $request, string $id)
     {
-        dd(1);
-    try {
-        DB::beginTransaction();
-        $requireNewPassword = $request->has('require_new_password') ? true : false;
-        $user_id = decrypt($id);
-        $update_password = User::where('id', $user_id)->first();
- 
-        $update_password->password = Hash::make($request->password); // Use bcrypt for password hashing
-
-        if ($requireNewPassword) {
-            $update_password->isTemporary_password = 1; // Save as temporary
-        }
-        $update_password->save();
-        $userData = [
-            'username' => $update_password->firstname,
-            'password' => $request->password
-        ];
         try {
-            Mail::send('emails.temporary_password_email', ['userData' => $userData], function ($message) use ($update_password) {
-                $message->to($update_password->email);
-                $message->subject('Temporary Password Mail');
-            });
+            DB::beginTransaction();
+            $requireNewPassword = $request->has('require_new_password') ? true : false;
+            $user_id = decrypt($id);
+            $update_password = User::where('id', $user_id)->first();
+
+            $update_password->password = Hash::make($request->password); // Use bcrypt for password hashing
+
+            if ($requireNewPassword) {
+                $update_password->isTemporary_password = 1; // Save as temporary
+            }
+            $update_password->save();
+            $userData = [
+                'username' => $update_password->firstname,
+                'password' => $request->password
+            ];
+            try {
+                Mail::send('emails.temporary_password_email', ['userData' => $userData], function ($message) use ($update_password) {
+                    $message->to($update_password->email);
+                    $message->subject('Temporary Password Mail');
+                });
+            } catch (\Exception $e) {
+                DB::rollBack();
+                return redirect()->back()->with('error', 'Failed to send email: ' . $e->getMessage());
+            }
+            DB::commit();
+            return redirect()->route('users.index')->with('success', 'User password updated and email sent successfully!');
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->with('error', 'Failed to send email: ' . $e->getMessage());
+            return redirect()->back();
         }
-        DB::commit();
-        return redirect()->route('users.index')->with('success', 'User password updated and email sent successfully!');
-
-    } catch (\Exception $e) {
-        DB::rollBack();
-        return redirect()->back();
     }
-}
 
 
     /**
@@ -316,7 +373,7 @@ class UserController extends Controller
 
         if ($user) {
             // Toggle the status between 'Ban' and 'Unban'
-            $user->account_status = $user->account_status == 'Block' ? 'Unblock' : 'Block'  ;
+            $user->account_status = $user->account_status == 'Block' ? 'Unblock' : 'Block';
             $user->save();
 
             return response()->json(['status' => 'success', 'message' => 'User status updated successfully.']);
