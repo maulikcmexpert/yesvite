@@ -1309,12 +1309,20 @@ function adminNotification($notificationType, $postData)
                     
                 // }
 
-                $details = [
-                    'subject' => 'Send Broadcast Mail',
-                    'message' => $postData['message'],
-                ];
-                $email = $user->email;
-                SendBroadcastEmailJob::dispatch($email, $details);
+                try{
+                    $details = [
+                        'subject' => 'Send Broadcast Mail',
+                        'message' => $postData['message'],
+                    ];
+                    $email = $user->email;
+                    SendBroadcastEmailJob::dispatch($email, $details);
+        
+            } catch (\Exception $e) {
+                dd($e);
+                return response()->json(['error' => 'Failed to send emails.'], 500);
+            }
+
+  
             }
             dd('send all mail');
 
