@@ -12376,6 +12376,7 @@ class ApiControllerv3 extends Controller
             'purchaseTime' => 'required',
             'purchaseToken' => 'required|string',
             'autoRenewing' => 'required',
+            'device_type' => 'required'
         ]);
 
 
@@ -12390,39 +12391,74 @@ class ApiControllerv3 extends Controller
 
 
         try {
-            $app_id = $input['packageName'];
-            $product_id = $input['productId'];
             $user_id = $this->user->id;
             $purchaseToken = $input['purchaseToken'];
 
-            $responce =  $this->set_android_iap($app_id, $product_id, $purchaseToken, 'subscribe');
-            if (!isset($responce['error'])) {
-                if (isset($responce['autoRenewing']) && ($responce['autoRenewing'] == false || $responce['autoRenewing'] == "")) {
-                    $exp_date =  date('Y-m-d H:i:s', ($responce['expiryTimeMillis'] /  1000));
-                    $current_date = date('Y-m-d H:i:s');
-                    if (strtotime($current_date) > strtotime($exp_date)) {
-                        return response()->json(['status' => 0, 'message' => "subscription package expired"]);
+            if(isset($input['device_type']) && $input['device_type'] =='ios'){
+                $responce =  $this->set_apple_iap($purchaseToken);
+                if(isset($responce->latest_receipt_info[0]->expires_date_ms)){
+                    foreach ($responce->latest_receipt_info as $key => $value) {
+                       if(isset($value->expires_date_ms) && $value->expires_date_ms != null && date('Y-m-d H:i', ($value->expires_date_ms /  1000)) >= date('Y-m-d H:i') ){
+                            $enddate =  date('Y-m-d H:i:s', ($value->expires_date_ms /  1000));
+                        }
                     }
+                }else{
+                    $enddate = date('Y-m-d H:i:s',strtotime("-1 days"));
                 }
-                $enddate = date('Y-m-d H:i:s', ($responce['expiryTimeMillis'] / 1000));
-                $new_subscription = new UserSubscription();
-                $new_subscription->user_id = $user_id;
-                $new_subscription->orderId = $input['orderId'];
-                $new_subscription->packageName = $input['packageName'];
-                $new_subscription->priceCurrencyCode = $responce['priceCurrencyCode'];
-                $new_subscription->price = $responce['priceAmountMicros'];
-                $new_subscription->countryCode = $responce['countryCode'];
-                $new_subscription->startDate = now();
-                $new_subscription->endDate = $enddate;
-                $new_subscription->productId = $input['productId'];
-                $new_subscription->type = 'subscribe';
-                $new_subscription->purchaseToken = $input['purchaseToken'];
-                $new_subscription->save();
-
-                return response()->json(['status' => 1, 'message' => "subscription sucessfully"]);
-            } else {
-                return response()->json(['status' => 0, 'message' => $responce['error_description']]);
+                if (!isset($responce['error'])) {
+                    $new_subscription = new UserSubscription();
+                    $new_subscription->user_id = $user_id;
+                    // $new_subscription->orderId = $input['orderId'];
+                    $new_subscription->packageName = $input['packageName'];
+                    // $new_subscription->priceCurrencyCode = $responce['priceCurrencyCode'];
+                    // $new_subscription->price = $responce['priceAmountMicros'];
+                    // $new_subscription->countryCode = $responce['countryCode'];
+                    $new_subscription->startDate = now();
+                    $new_subscription->endDate = $enddate;
+                    // $new_subscription->productId = $input['productId'];
+                    $new_subscription->type = 'subscribe';
+                    $new_subscription->purchaseToken = $input['purchaseToken'];
+                    $new_subscription->save();
+    
+                    return response()->json(['status' => 1, 'message' => "subscription sucessfully"]);
+                } else {
+                    return response()->json(['status' => 0, 'message' => $responce['error_description']]);
+                }
+                
+            }else{
+                $app_id = $input['packageName'];
+                $product_id = $input['productId'];
+                $responce =  $this->set_android_iap($app_id, $product_id, $purchaseToken, 'subscribe');
+                if (!isset($responce['error'])) {
+                    if (isset($responce['autoRenewing']) && ($responce['autoRenewing'] == false || $responce['autoRenewing'] == "")) {
+                        $exp_date =  date('Y-m-d H:i:s', ($responce['expiryTimeMillis'] /  1000));
+                        $current_date = date('Y-m-d H:i:s');
+                        if (strtotime($current_date) > strtotime($exp_date)) {
+                            return response()->json(['status' => 0, 'message' => "subscription package expired"]);
+                        }
+                    }
+                    $enddate = date('Y-m-d H:i:s', ($responce['expiryTimeMillis'] / 1000));
+                    $new_subscription = new UserSubscription();
+                    $new_subscription->user_id = $user_id;
+                    $new_subscription->orderId = $input['orderId'];
+                    $new_subscription->packageName = $input['packageName'];
+                    $new_subscription->priceCurrencyCode = $responce['priceCurrencyCode'];
+                    $new_subscription->price = $responce['priceAmountMicros'];
+                    $new_subscription->countryCode = $responce['countryCode'];
+                    $new_subscription->startDate = now();
+                    $new_subscription->endDate = $enddate;
+                    $new_subscription->productId = $input['productId'];
+                    $new_subscription->type = 'subscribe';
+                    $new_subscription->purchaseToken = $input['purchaseToken'];
+                    $new_subscription->save();
+    
+                    return response()->json(['status' => 1, 'message' => "subscription sucessfully"]);
+                } else {
+                    return response()->json(['status' => 0, 'message' => $responce['error_description']]);
+                }
             }
+           
+
         } catch (QueryException $e) {
             return response()->json(['status' => 0, 'message' => "db error"]);
         } catch (Exception  $e) {
@@ -12607,6 +12643,40 @@ class ApiControllerv3 extends Controller
         }
 
         return $result1;
+    }
+    public function set_apple_iap($receipt){
+        $data = array(
+              'receipt-data' => $receipt,
+              'password' => '8332b027388d480a87ceaf088658f362',
+              'exclude-old-transactions' => 'true'
+        );
+
+        $payload = json_encode($data);
+
+        // Prepare new cURL resource
+        $ch = curl_init('https://buy.itunes.apple.com/verifyReceipt');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLINFO_HEADER_OUT, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+
+        // Set HTTP Header for POST request 
+        curl_setopt(
+          $ch,
+          CURLOPT_HTTPHEADER,
+          array(
+            'Content-Type: application/json',
+            'Content-Length: ' . strlen($payload)
+          )
+        );
+
+        // Submit the POST request
+        $result = curl_exec($ch);
+
+        // Close cURL session handle
+        curl_close($ch);
+        $userReceiptData = json_decode($result);
+        return $userReceiptData;
     }
 
 
