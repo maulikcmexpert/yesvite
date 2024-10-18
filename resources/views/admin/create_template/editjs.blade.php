@@ -146,8 +146,15 @@
                     canvas.renderAll();
                 };
 
-                canvas.add(img);
+                img.on('scaling', function (event) {
+                    const target = event.target;
+                    if (target && target.isControl) {
+                        fixClipPath();
+                    }
+                });
 
+                canvas.add(img);
+                currentImage = img; 
             });
                                     
 
