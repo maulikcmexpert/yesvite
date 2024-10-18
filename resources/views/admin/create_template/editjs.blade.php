@@ -125,7 +125,7 @@
                     top: element.centerY - scaledHeight / 2  
                 });
 
-                let shapes = createShapes(img);
+                let shapes = createShapes(data.filedImagePath);
 
                 currentShapeIndex = shapeIndexMap[defaultShape] || 0; // Default to rectangle if not found
 
