@@ -861,7 +861,7 @@ $("#rsvp_by_date").on("change", function () {
 });
 
 $(document).ready(function() {
-    $('li').click(function() {
+    $('.design-category').click(function() {
         var selectedSubcategory = $(this).data('subcategory');
 
         // Hide all subcategory sections
