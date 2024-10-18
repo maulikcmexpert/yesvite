@@ -12651,14 +12651,14 @@ class ApiControllerv3 extends Controller
     public function set_apple_iap($receipt){
         $data = array(
               'receipt-data' => $receipt,
-              'password' => '8332b027388d480a87ceaf088658f362',
+              'password' => 'e26c3c7903f74a89a2103d424cd33d4b',
               'exclude-old-transactions' => 'true'
         );
 
         $payload = json_encode($data);
 
         // Prepare new cURL resource
-        $ch = curl_init('https://buy.itunes.apple.com/verifyReceipt');
+        $ch = curl_init('https://sandbox.itunes.apple.com/verifyReceipt');
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLINFO_HEADER_OUT, true);
         curl_setopt($ch, CURLOPT_POST, true);
