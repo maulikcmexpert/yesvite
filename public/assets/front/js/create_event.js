@@ -3318,6 +3318,7 @@ function li_design_click(){
 }
 
 $(document).on("click", ".li_event_detail", function () {
+    $('#sidebar_select_design_category').css('display','none');
     $(".step_1").show();
     $(".step_2").css("display", "none");
     $("#edit-design-temp").css("display", "none");
@@ -3368,8 +3369,10 @@ $(document).on("click", ".li_guest", function () {
         $('.edit-design').addClass('menu-success');
         $('.event_create_percent').text('75%');
         $('.current_step').text('3 of 4');
+        $('#sidebar_select_design_category').css('display','none');
         active_responsive_dropdown('drop-down-event-guest');
         handleActiveClass('.li_guest');
+
     }
 });
 
@@ -3378,6 +3381,7 @@ $(document).on("click", ".li_setting", function () {
     var step3 = eventData.step;
     console.log(step3);
     if(step3 > 3 ){
+        $('#sidebar_select_design_category').css('display','none');
         $(".step_1").css("display", "none");
         $(".step_2").css("display", "none");
         $("#edit-design-temp").css("display", "none");
@@ -3386,6 +3390,7 @@ $(document).on("click", ".li_setting", function () {
         $(".step_4").show();
         $('.event_create_percent').text('99%');
         $('.current_step').text('4 of 4');
+
         handleActiveClass(this);
         active_responsive_dropdown('drop-down-event-setting');
         if( design == undefined || design == ''){
