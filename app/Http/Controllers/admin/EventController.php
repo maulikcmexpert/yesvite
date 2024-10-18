@@ -157,7 +157,7 @@ class EventController extends Controller
                 ->make(true);
         }
 
-
+        
 
         $title = 'Event Lists';
 
