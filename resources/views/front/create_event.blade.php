@@ -328,7 +328,9 @@
                             <div class="accordion-body">
                                 <ul>
                                     @foreach ($category->subcategory as $k => $subcategory)
+                                    @if (isset($subcategory->textdatas) && $subcategory->textdatas->isNotEmpty())
                                     <li class="design-category" data-subcategory="{{$subcategory->id}}">{{$subcategory->subcategory_name}}</li>
+                                    @endif
                                     @endforeach
                                 </ul>
                             </div>
