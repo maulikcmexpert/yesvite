@@ -23,7 +23,7 @@ class SendBroadcastEmailJob implements ShouldQueue
         $this->email = $email;
         $this->message = $message;
 
-        dd
+        
     }
     // /**
     //  * Execute the job.
