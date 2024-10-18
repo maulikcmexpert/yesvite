@@ -1187,6 +1187,13 @@
     display: none !important;
 }
 
+.image-edit-section-inner-wrp{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
 @media only screen and (min-width: 1800px) and (max-width: 3000px) {
     .image-edit-inner-img {
         width: 345px;
