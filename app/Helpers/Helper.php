@@ -1287,10 +1287,10 @@ function adminNotification($notificationType, $postData)
             $users = User::where('email','!=',null)
                 ->get();
                 // SendBroadcastEmailJob::dispatch('vimal.cmexpertise@gmail.com', 'This is test mail from yesvite support team');
-                SendBroadcastEmailJob::dispatch('prakash.m.cmexpertise@gmail.com', 'This is test mail from yesvite support team');
-
-            foreach ($users as $user) { 
-                // // dd($user);
+                
+                foreach ($users as $user) { 
+                    dd($user['email']);
+                    // SendBroadcastEmailJob::dispatch($user, $postData['message']);
                 // $userData = [
                 //         'username' => $user->firstname,
                 //         'email' => $user->email,
