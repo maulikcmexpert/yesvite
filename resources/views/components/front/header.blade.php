@@ -29,8 +29,11 @@
 
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 {{-- <link rel="stylesheet" href="http://fabricjs.com/css/googlefonts.css"> --}}
+@if(config('app.url') == 'https://yesvite.cmexpertiseinfotech.in')
 <link rel="stylesheet" href="{{ asset('assets/event/css/stylesheet.css') }}">
-
+@else
+<link rel="stylesheet" href="{{ asset('assets/event/css/stylesheet_live.css') }}">
+@endif
 @php
 if(isset($page) && $page=="front.profile"){
 @endphp
