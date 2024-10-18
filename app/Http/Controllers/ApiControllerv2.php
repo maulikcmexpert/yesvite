@@ -12302,11 +12302,12 @@ class ApiControllerv2 extends Controller
 
         // $validator = Validator::make($input, [
 
-        //     'orderId' => 'required',
-        //     'packageName' => 'required',
-        //     'productId' => 'required',
-        //     'purchaseTime' => 'required',
-        //     'purchaseToken' => 'required|string',
+        //      'orderId' => 'required',
+        //      'packageName' => 'required',
+        //      'productId' => 'required',
+        //      'purchaseTime' => 'required',
+        //      'purchaseToken' => 'required|string',
+        //      'event_id' => 'required'
         // ]);
 
 
