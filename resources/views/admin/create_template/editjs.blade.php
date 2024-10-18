@@ -107,7 +107,7 @@
                 ];
             }
 
-            fabric.Image.fromURL(shapeImageUrl, function (img) {
+            fabric.Image.fromURL(data.filedImagePath, function (img) {
                 img.set({
 
                     selectable: false,
