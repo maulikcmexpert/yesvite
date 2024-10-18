@@ -24,11 +24,11 @@ class SendBroadcastEmailJob implements ShouldQueue
         $this->message = $message;
 
     }
-    /**
-     * Execute the job.
-     *
-     * @return void
-     */
+    // /**
+    //  * Execute the job.
+    //  *
+    //  * @return void
+    //  */
     public function handle()
     {
         dd($this->email,$this->message);    
