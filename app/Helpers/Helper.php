@@ -1290,7 +1290,6 @@ function adminNotification($notificationType, $postData)
                 
                 $batchSize = 30; 
                 $usersChunked = array_chunk($users->toArray(), $batchSize); 
-                dd($usersChunked);
                 foreach ($usersChunked as $userBatch) {
                     foreach ($userBatch as $user) {
                         try {
