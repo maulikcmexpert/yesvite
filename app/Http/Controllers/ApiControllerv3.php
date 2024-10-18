@@ -12394,18 +12394,19 @@ class ApiControllerv3 extends Controller
             $user_id = $this->user->id;
             $purchaseToken = $input['purchaseToken'];
 
-            if(isset($input['device_type']) && $input['device_type'] =='ios'){
+            if (isset($input['device_type']) && $input['device_type'] == 'ios') {
                 $responce =  $this->set_apple_iap($purchaseToken);
                 dd($responce);
-                if(isset($responce->latest_receipt_info[0]->expires_date_ms)){
+                if (isset($responce->latest_receipt_info[0]->expires_date_ms)) {
                     foreach ($responce->latest_receipt_info as $key => $value) {
-                       if(isset($value->expires_date_ms) && $value->expires_date_ms != null && date('Y-m-d H:i', ($value->expires_date_ms /  1000)) >= date('Y-m-d H:i') ){
+                        if (isset($value->expires_date_ms) && $value->expires_date_ms != null && date('Y-m-d H:i', ($value->expires_date_ms /  1000)) >= date('Y-m-d H:i')) {
                             $enddate =  date('Y-m-d H:i:s', ($value->expires_date_ms /  1000));
                         }
                     }
-                }else{
-                    $enddate = date('Y-m-d H:i:s',strtotime("-1 days"));
+                } else {
+                    $enddate = date('Y-m-d H:i:s', strtotime("-1 days"));
                 }
+
                 if (!isset($responce['error'])) {
                     $new_subscription = new UserSubscription();
                     $new_subscription->user_id = $user_id;
@@ -12422,13 +12423,12 @@ class ApiControllerv3 extends Controller
                     // $new_subscription->countryCode = $responce['countryCode'];
                     // $new_subscription->productId = $input['productId'];
                     $new_subscription->save();
-    
+
                     return response()->json(['status' => 1, 'message' => "subscription sucessfully"]);
                 } else {
                     return response()->json(['status' => 0, 'message' => $responce['error_description']]);
                 }
-                
-            }else{
+            } else {
                 $app_id = $input['packageName'];
                 $product_id = $input['productId'];
                 $responce =  $this->set_android_iap($app_id, $product_id, $purchaseToken, 'subscribe');
@@ -12455,14 +12455,12 @@ class ApiControllerv3 extends Controller
                     $new_subscription->purchaseToken = $input['purchaseToken'];
                     $new_subscription->device_type = $input['device_type'];
                     $new_subscription->save();
-    
+
                     return response()->json(['status' => 1, 'message' => "subscription sucessfully"]);
                 } else {
                     return response()->json(['status' => 0, 'message' => $responce['error_description']]);
                 }
             }
-           
-
         } catch (QueryException $e) {
             return response()->json(['status' => 0, 'message' => "db error"]);
         } catch (Exception  $e) {
@@ -12648,11 +12646,12 @@ class ApiControllerv3 extends Controller
 
         return $result1;
     }
-    public function set_apple_iap($receipt){
+    public function set_apple_iap($receipt)
+    {
         $data = array(
-              'receipt-data' => $receipt,
-              'password' => 'e26c3c7903f74a89a2103d424cd33d4b',
-              'exclude-old-transactions' => 'true'
+            'receipt-data' => $receipt,
+            'password' => 'e26c3c7903f74a89a2103d424cd33d4b',
+            'exclude-old-transactions' => 'true'
         );
 
         $payload = json_encode($data);
@@ -12666,12 +12665,12 @@ class ApiControllerv3 extends Controller
 
         // Set HTTP Header for POST request 
         curl_setopt(
-          $ch,
-          CURLOPT_HTTPHEADER,
-          array(
-            'Content-Type: application/json',
-            'Content-Length: ' . strlen($payload)
-          )
+            $ch,
+            CURLOPT_HTTPHEADER,
+            array(
+                'Content-Type: application/json',
+                'Content-Length: ' . strlen($payload)
+            )
         );
 
         // Submit the POST request
