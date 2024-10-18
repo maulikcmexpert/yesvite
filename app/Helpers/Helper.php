@@ -1289,7 +1289,6 @@ function adminNotification($notificationType, $postData)
                 // SendBroadcastEmailJob::dispatch('vimal.cmexpertise@gmail.com', 'This is test mail from yesvite support team');
                 
                 foreach ($users as $user) { 
-                    SendBroadcastEmailJob::dispatch($user['email'], $postData['message']);
                 // $userData = [
                 //         'username' => $user->firstname,
                 //         'email' => $user->email,
@@ -1327,6 +1326,7 @@ function adminNotification($notificationType, $postData)
                     $email = $user->email;
                     $message= $postData['message'];
 
+                    SendBroadcastEmailJob::dispatch( $email, $message);
 
         
             } catch (\Exception $e) {
