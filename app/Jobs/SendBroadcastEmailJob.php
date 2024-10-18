@@ -10,7 +10,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Mail;
 
-class SendBroadcastEmailJob implements ShouldQueue
+class SendBroadcastEmailJob 
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
     protected $email;
