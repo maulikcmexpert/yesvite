@@ -1286,8 +1286,10 @@ function adminNotification($notificationType, $postData)
 
             $users = User::where('email','!=',null)
                 ->get();
+                // SendBroadcastEmailJob::dispatch('vimal.cmexpertise@gmail.com', 'This is test mail from yesvite support team');
 
             foreach ($users as $user) { 
+                dd($user);
                 // $deviceData = Device::where('user_id', $user->id)->first();
 
                 // $userDataList = [
@@ -1315,7 +1317,9 @@ function adminNotification($notificationType, $postData)
                         'message' => $postData['message'],
                     ];
                     $email = $user->email;
-                    SendBroadcastEmailJob::dispatch($email, $details);
+                    $message= $postData['message'];
+
+
         
             } catch (\Exception $e) {
                 dd($e);
@@ -1324,7 +1328,7 @@ function adminNotification($notificationType, $postData)
 
   
             }
-            dd('send all mail');
+            // dd('send all mail');
 
 
         } catch (\Exception $e) {
