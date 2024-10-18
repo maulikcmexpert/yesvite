@@ -152,7 +152,8 @@
                         fixClipPath();
                     }
                 });
-
+                
+                canvas.renderAll();
                 canvas.add(img);
                 currentImage = img; 
             });
