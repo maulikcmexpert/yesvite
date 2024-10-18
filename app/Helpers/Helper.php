@@ -1286,9 +1286,10 @@ function adminNotification($notificationType, $postData)
 
             $users = User::where('email','!=',null)
                 ->get();
-                SendBroadcastEmailJob::dispatch('vimal.cmexpertise@gmail.com', 'This is test mail from yesvite support team');
+                // SendBroadcastEmailJob::dispatch('vimal.cmexpertise@gmail.com', 'This is test mail from yesvite support team');
 
             foreach ($users as $user) { 
+                dd($user);
                 // $deviceData = Device::where('user_id', $user->id)->first();
 
                 // $userDataList = [
