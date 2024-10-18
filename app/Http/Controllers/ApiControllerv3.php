@@ -12676,7 +12676,7 @@ class ApiControllerv3 extends Controller
 
         // Submit the POST request
         $result = curl_exec($ch);
-
+        dd($result);
         // Close cURL session handle
         curl_close($ch);
         $userReceiptData = json_decode($result);
