@@ -44,21 +44,21 @@
                             let element = staticInfo?.shapeImageData;
                             console.log(element)
                             if (element.shape != undefined && element.centerX != undefined && element.centerY != undefined && element.height != undefined && element.width != undefined) {
-                                    console.log(element.shape);
-                                    shape = element.shape;
-                                    centerX = element.centerX;
-                                    centerY = element.centerY;
-                                    height = element.height;
-                                    width = element.width;
+                                    // console.log(element.shape);
+                                    // shape = element.shape;
+                                    // centerX = element.centerX;
+                                    // centerY = element.centerY;
+                                    // height = element.height;
+                                    // width = element.width;
 
-                                    updatedOBJImage = {
-                                        shape: shape,
-                                        centerX: element.centerX,
-                                        centerY: element.centerY,
-                                        width: element.height,
-                                        height: element.width
-                                    };
-                                    updateClipPath(data.filedImagePath, element);
+                                    // updatedOBJImage = {
+                                    //     shape: shape,
+                                    //     centerX: element.centerX,
+                                    //     centerY: element.centerY,
+                                    //     width: element.height,
+                                    //     height: element.width
+                                    // };
+                                    // updateClipPath(data.filedImagePath, element);
 
                             }
                             
