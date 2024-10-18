@@ -157,7 +157,7 @@ class EventController extends Controller
                 ->make(true);
         }
 
-        dd(config('app.url'));
+        
 
         $title = 'Event Lists';
 

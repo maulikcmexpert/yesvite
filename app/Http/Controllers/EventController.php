@@ -71,7 +71,7 @@ class EventController extends Controller
 {
     public function index()
     {
-
+        dd(config('app.url'));
         // dd(Session::get('shape_image'));
         Session::forget('user_ids');
         Session::forget('category');
