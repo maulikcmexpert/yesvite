@@ -45,119 +45,20 @@
                             console.log(element)
                             if (element.shape != undefined && element.centerX != undefined && element.centerY != undefined && element.height != undefined && element.width != undefined) {
                                     console.log(element.shape);
-                                    // shape = element.shape;
-                                    // centerX = element.centerX;
-                                    // centerY = element.centerY;
-                                    // height = element.height;
-                                    // width = element.width;
+                                    shape = element.shape;
+                                    centerX = element.centerX;
+                                    centerY = element.centerY;
+                                    height = element.height;
+                                    width = element.width;
 
-                                    // updatedOBJImage = {
-                                    //     shape: shape,
-                                    //     centerX: element.centerX,
-                                    //     centerY: element.centerY,
-                                    //     width: element.height,
-                                    //     height: element.width
-                                    // };
-                                    // updateClipPath(data.filedImagePath, element);
-
-                                    const scaledWidth = element.width;  // Use element's width
-                                    const scaledHeight = element.height;
-
-            // imageInput.style.width = element.width + 'px';
-            // imageInput.style.height = element.height + 'px';
-            
-            let currentImage = null; // Variable to hold the current image
-            let isScaling = false; // Flag to check if the image is scaling
-            let currentShapeIndex = 0; // Index to track the current shape
-
-            // Define default shape variable (can be changed as needed)
-            const defaultShape = element.shape; // Set the desired default shape here
-
-            // Create a mapping of shape names to their indices
-            const shapeIndexMap = {
-                'rectangle': 0,
-                'circle': 1,
-                'triangle': 2,
-                'star': 3
-            };
-            function createShapes(img) {
-                const imgWidth = img.width;
-                const imgHeight = img.height;
-                const starScale = Math.min(imgWidth, imgHeight) / 2; // Adjust the star size based on the image
-
-                // Proper 5-point star shape
-                const starPoints = [
-                    { x: 0, y: -starScale }, // Top point
-                    { x: starScale * 0.23, y: -starScale * 0.31 }, // Top-right
-                    { x: starScale, y: -starScale * 0.31 }, // Right
-                    { x: starScale * 0.38, y: starScale * 0.12 }, // Bottom-right
-                    { x: starScale * 0.58, y: starScale }, // Bottom
-                    { x: 0, y: starScale * 0.5 }, // Center-bottom
-                    { x: -starScale * 0.58, y: starScale }, // Bottom-left
-                    { x: -starScale * 0.38, y: starScale * 0.12 }, // Top-left
-                    { x: -starScale, y: -starScale * 0.31 }, // Left
-                    { x: -starScale * 0.23, y: -starScale * 0.31 } // Top-left
-                ];
-
-                return [
-                    new fabric.Rect({ width: imgWidth, height: imgHeight, originX: 'center', originY: 'center', angle: 0 }),
-                    new fabric.Circle({ radius: Math.min(imgWidth, imgHeight) / 2, originX: 'center', originY: 'center', angle: 0 }),
-                    new fabric.Triangle({ width: imgWidth, height: imgHeight, originX: 'center', originY: 'center', angle: 0 }),
-                    new fabric.Polygon(starPoints, { originX: 'center', originY: 'center', angle: 0 })
-                ];
-            }
-
-            fabric.Image.fromURL(data.filedImagePath, function (img) {
-                img.set({
-
-                    selectable: false,
-                    hasControls: false,
-                    hasBorders: false,
-                    borderColor: "#2DA9FC",
-                    cornerColor: "#fff",
-                    transparentCorners: false,
-                    lockUniScaling: true,
-                    scaleX: scaledWidth / img.width,  // Scale based on element's width
-                    scaleY: scaledHeight / img.height, // Scale based on element's height
-                    cornerSize: 10,
-                    cornerStyle: 'circle',
-                    left: element.centerX - scaledWidth / 2, // Center the image horizontally
-                    top: element.centerY - scaledHeight / 2  
-                });
-
-                let shapes = createShapes(img);
-
-                currentShapeIndex = shapeIndexMap[defaultShape] || 0; // Default to rectangle if not found
-
-                img.set({ clipPath: shapes[currentShapeIndex] });
-                img.crossOrigin = "anonymous";
-
-                img.on('mouseup', function(event) {
-                    console.log(event);
-                    if(event?.transform?.action === 'drag' && event.transform.actionPerformed === undefined){
-                        currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
-                        img.set({ clipPath: shapes[currentShapeIndex] });
-                        canvas.renderAll();
-                    }
-                });
-
-                const fixClipPath = () => {
-                    img.set({ clipPath: shapes[currentShapeIndex] });
-                    canvas.renderAll();
-                };
-
-                img.on('scaling', function (event) {
-                    const target = event.target;
-                    if (target && target.isControl) {
-                        fixClipPath();
-                    }
-                });
-                
-                canvas.renderAll();
-                canvas.add(img);
-                currentImage = img; 
-            });
-                                    
+                                    updatedOBJImage = {
+                                        shape: shape,
+                                        centerX: element.centerX,
+                                        centerY: element.centerY,
+                                        width: element.height,
+                                        height: element.width
+                                    };
+                                    updateClipPath(data.filedImagePath, element);
 
                             }
                             
