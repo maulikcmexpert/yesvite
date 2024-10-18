@@ -22,14 +22,16 @@ class SendBroadcastEmailJob implements ShouldQueue
     {
         $this->email = $email;
         $this->message = $message;
+
     }
-    /**
-     * Execute the job.
-     *
-     * @return void
-     */
+    // /**
+    //  * Execute the job.
+    //  *
+    //  * @return void
+    //  */
     public function handle()
     {
+        dd($this->email,$this->message);    
         Mail::to($this->email)->send(new BulkEmail($this->message));
     }
 }
