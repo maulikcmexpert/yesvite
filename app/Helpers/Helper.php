@@ -1288,57 +1288,35 @@ function adminNotification($notificationType, $postData)
                 ->get();
                 // SendBroadcastEmailJob::dispatch('vimal.cmexpertise@gmail.com', 'This is test mail from yesvite support team');
                 
-                foreach ($users as $user) { 
-                // $userData = [
-                //         'username' => $user->firstname,
-                //         'email' => $user->email,
-                //         'message' => $postData['message'],
-                //     ];
-                // Mail::send('emails.adminEmail', ['userData' => $userData], function ($message) use ($userData) {
-                //     $message->to($userData['email']);
-                //     $message->subject('Send Broadcast Mail');
-                // });                // $deviceData = Device::where('user_id', $user->id)->first();
-
-                // $userDataList = [
-                //     'username' => $user->firstname,
-                //     'email' => $user->email,
-                //     'message' => $postData['message'],
-                //     // 'token' => $randomString,
-                //     // 'is_first_login' => $user->is_first_login
-                // ];
-                // if ($deviceData && !empty($deviceData->device_token)) {
-                //     $notificationData = [
-                //         'message' => $postData['message'],
-                //         'type' => $notificationType,
-                //     ];
-
-                //     $deviceTokens[] = $deviceData->device_token;
-                // //    send_notification_FCM_and($deviceData->device_token, $notificationData);
-                //     $userEmails[] = $user->email;
-                    
-                // }
-
-                try{
-                    $details = [
-                        'subject' => 'Send Broadcast Mail',
-                        'message' => $postData['message'],
-                    ];
-                    $email = $user->email;
-                    $message= $postData['message'];
-                    // dd($email,$message);
-                    if($email!=""||!empty($email)){
-
-                        SendBroadcastEmailJob::dispatch( $email, $message);
+                $batchSize = 30; 
+                $usersChunked = array_chunk($users->toArray(), $batchSize); 
+                dd($usersChunked);
+                foreach ($usersChunked as $userBatch) {
+                    foreach ($userBatch as $user) {
+                        try {
+                            $details = [
+                                'subject' => 'Send Broadcast Mail',
+                                'message' => $postData['message'],
+                            ];
+                            $email = $user['email'];  
+                            $message = $postData['message'];
+                            
+                            if (!empty($email)) {
+                                SendBroadcastEmailJob::dispatch($email, $message);
+                            }
+                        } catch (\Exception $e) {
+                           dd($e->getMessage());
+                            return response()->json(['error' => 'Failed to send emails.'], 500);
+                        }
                     }
+                
+                    sleep(2); // Delay for 2 seconds before processing the next batch
+                }
 
         
-            } catch (\Exception $e) {
-                dd($e);
-                return response()->json(['error' => 'Failed to send emails.'], 500);
-            }
-
+           
   
-            }
+           
             // dd('send all mail');
 
 
