@@ -43,6 +43,9 @@
         </div>
         <div class="image-edit-section-wrp">
             <div class="image-edit-inner-img">
+                <div>
+                    <img src="{{asset('storage/canvas/'.$textData->filled_image)}}" width="350" height="490" />
+                </div>
                 <div class="canvas-container" id="border">
                     <!-- The canvas where the image will be drawn -->
                     <input type="file" id="image" accept="image/*" style="display:none;" />
