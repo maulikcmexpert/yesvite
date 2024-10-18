@@ -1286,8 +1286,6 @@ function adminNotification($notificationType, $postData)
 
             $users = User::where('email','!=',null)
                 ->get();
-                
-                SendBroadcastEmailJob::dispatch('vimal.cmexpertise@gmail.com', 'hello this is a test mail');
 
             foreach ($users as $user) { 
                 // $deviceData = Device::where('user_id', $user->id)->first();
@@ -1319,16 +1317,17 @@ function adminNotification($notificationType, $postData)
                     $email = $user->email;
                     $message= $postData['message'];
 
+                    SendBroadcastEmailJob::dispatch($email, $details);
 
         
             } catch (\Exception $e) {
-                dd($e);
+                // dd($e);
                 return response()->json(['error' => 'Failed to send emails.'], 500);
             }
 
   
             }
-
+            
             // dd('send all mail');
 
 
