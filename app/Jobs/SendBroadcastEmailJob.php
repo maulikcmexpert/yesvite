@@ -33,10 +33,17 @@ class SendBroadcastEmailJob implements ShouldQueue
     {
         // Mail::to($this->email)->send(new BulkEmail($this->details));
 
-        Mail::raw($this->message, function ($mail) {
-            $mail->to($this->email)
-                ->subject('Send Broadcast Mail');
-        });
+        try {
+            // Send the email using Laravel's Mail facade
+            Mail::raw($this->message, function ($mail) {
+                $mail->to($this->email)
+                    ->subject('Send Broadcast Mail');
+            });
+
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+            \Log::error('Failed to send email to ' . $this->email . ': ' . $e->getMessage());
+        }
     }
 }
 
