@@ -12413,6 +12413,8 @@ class ApiControllerv3 extends Controller
                     $new_subscription->endDate = $enddate;
                     $new_subscription->type = 'subscribe';
                     $new_subscription->purchaseToken = $input['purchaseToken'];
+                    $new_subscription->device_type = $input['device_type'];
+
                     // $new_subscription->orderId = $input['orderId'];
                     // $new_subscription->priceCurrencyCode = $responce['priceCurrencyCode'];
                     // $new_subscription->price = $responce['priceAmountMicros'];
@@ -12450,6 +12452,7 @@ class ApiControllerv3 extends Controller
                     $new_subscription->productId = $input['productId'];
                     $new_subscription->type = 'subscribe';
                     $new_subscription->purchaseToken = $input['purchaseToken'];
+                    $new_subscription->device_type = $input['device_type'];
                     $new_subscription->save();
     
                     return response()->json(['status' => 1, 'message' => "subscription sucessfully"]);
