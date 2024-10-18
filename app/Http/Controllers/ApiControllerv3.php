@@ -12572,12 +12572,12 @@ class ApiControllerv3 extends Controller
                         if (strtotime($current_date) > strtotime($enddate)) {
                             $userSubscription->endDate = $enddate;
                             $userSubscription->save();
-                            return response()->json(['status' => 0, 'message' => "subscription is not active", 'type' => 'Free']);
+                            return response()->json(['status' => 0, 'message' => "subscription is not active", 'type' => 'Free','enddate' => $enddate]);
                         }
                         if (isset($responce->error)) {
-                            return response()->json(['status' => 0, 'message' => "subscription is not active", 'type' => 'Free']);
+                            return response()->json(['status' => 0, 'message' => "subscription is not active", 'type' => 'Free','enddate' => '']);
                         }
-                        return response()->json(['status' => 1, 'message' => "subscription is active", 'type' => 'Pro-Year']); 
+                        return response()->json(['status' => 1, 'message' => "subscription is active", 'type' => 'Pro-Year','enddate' => $enddate]); 
                     }
                 }
             }else{
@@ -12590,19 +12590,19 @@ class ApiControllerv3 extends Controller
                         if (strtotime($current_date) > strtotime($exp_date)) {
                             $userSubscription->endDate = $exp_date;
                             $userSubscription->save();
-                            return response()->json(['status' => 0, 'message' => "subscription is not active", 'type' => 'Free']);
+                            return response()->json(['status' => 0, 'message' => "subscription is not active", 'type' => 'Free','enddate' => $exp_date]);
                         }
                     }
                     if (isset($responce['userCancellationTimeMillis'])) {
                         $cancellationdate =  date('Y-m-d H:i:s', ($responce['userCancellationTimeMillis'] /  1000));
                         $userSubscription->cancellationdate = $cancellationdate;
                         $userSubscription->save();
-                        return response()->json(['status' => 0, 'message' => "subscription is not active", 'type' => 'Free']);
+                        return response()->json(['status' => 0, 'message' => "subscription is not active", 'type' => 'Free','enddate' => '']);
                     }
                     if (isset($responce['error'])) {
-                        return response()->json(['status' => 0, 'message' => "subscription is not active", 'type' => 'Free']);
+                        return response()->json(['status' => 0, 'message' => "subscription is not active", 'type' => 'Free','enddate' => '']);
                     }
-                    return response()->json(['status' => 1, 'message' => "subscription is active", 'type' => 'Pro-Year']);
+                    return response()->json(['status' => 1, 'message' => "subscription is active", 'type' => 'Pro-Year','enddate' => $exp_date]);
                 }
             }
         }
