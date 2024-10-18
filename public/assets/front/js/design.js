@@ -446,6 +446,7 @@ $(document).on("click", ".edit_design_tem", function(e) {
     $('.edit-design').addClass('active');
     $(".event_create_percent").text("50%");
     $(".current_step").text("2 of 4");
+    $('.select-design-category').hide();
 
     active_responsive_dropdown('drop-down-event-design','drop-down-edit-design');
     $(".step_4").hide();
