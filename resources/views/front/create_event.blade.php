@@ -293,55 +293,7 @@
 
     </div>
 
-    <div id="sidebar_select_design_category" class="setting-side-wrp" style="display: none;">
-        <div class="setting-category-wrp choose-design-form activity-schedule-inner select-design-category">
-            <div class="d-flex align-items-center justify-content-between toggle-wrp new-event-sidebar-head">
-                <h5>Category</h5>
-                <button class="close-btn select_design_category_close" onclick="toggleSidebar()">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path d="M5.00098 5L19 18.9991" stroke="#64748B" stroke-width="1.5" stroke-linecap="round"
-                            stroke-linejoin="round"></path>
-                        <path d="M4.99996 18.9991L18.999 5" stroke="#64748B" stroke-width="1.5" stroke-linecap="round"
-                            stroke-linejoin="round"></path>
-                    </svg>
-                </button>
-            </div>
-            {{-- <h3>Create Custom Own Design</h3> --}}
-
-            <div class="accordion" id="accordionExample">
-                @if(isset($design_category))
-                    @foreach ($design_category as $key => $category)
-                    @if(isset($category->subcategory) && $category->subcategory->isNotEmpty())    
-                    <div class="accordion-item">
-                        <div class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapse{{$key}}" aria-expanded="false">
-                                <div>
-                                    {{$category->category_name}}
-                                </div>
-                                <i class="fa-solid fa-angle-down"></i>
-                            </button>
-                        </div>
-                        <div id="collapse{{$key}}" class="accordion-collapse collapse" data-bs-parent="#accordionExample"
-                            style="">
-                            <div class="accordion-body">
-                                <ul>
-                                    @foreach ($category->subcategory as $k => $subcategory)
-                                    @if (isset($subcategory->textdatas) && $subcategory->textdatas->isNotEmpty())
-                                    <li class="design-category" data-subcategory="{{$subcategory->id}}">{{$subcategory->subcategory_name}}</li>
-                                    @endif
-                                    @endforeach
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    @endif
-                    @endforeach
-                @endif
-            </div>
-        </div>
-    </div>
+  
 </main>
 
 
