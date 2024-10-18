@@ -1295,6 +1295,8 @@ function adminNotification($notificationType, $postData)
                         'email' => $user->email,
                         'message' => $postData['message'],
                     ];
+
+                    dd($userData);
                 Mail::send('emails.adminEmail', ['details' => $userData], function ($message) use ($userData) {
                     $message->to($userData['email']);
                     $message->subject('Send Broadcast Mail');
