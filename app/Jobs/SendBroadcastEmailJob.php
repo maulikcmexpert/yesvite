@@ -10,7 +10,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Mail;
 
-class SendBroadcastEmailJob 
+class SendBroadcastEmailJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
     protected $email;
@@ -22,6 +22,8 @@ class SendBroadcastEmailJob
     {
         $this->email = $email;
         $this->message = $message;
+
+        dd
     }
     // /**
     //  * Execute the job.
