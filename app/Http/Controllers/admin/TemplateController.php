@@ -124,7 +124,7 @@ class TemplateController extends Controller
             $textData->save();
             DB::commit();
 
-            return redirect()->route('create_template.index')->with('success', 'Template added successfully!');
+            return redirect()->route('create_template.edit_template', encrypt($textData->id))->with('success', 'Template added successfully!');
         } catch (QueryException $e) {
             DB::rollBack();
             Log::error('Database query error: ' . $e->getMessage());
