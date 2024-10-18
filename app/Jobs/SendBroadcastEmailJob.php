@@ -23,7 +23,6 @@ class SendBroadcastEmailJob implements ShouldQueue
         $this->email = $email;
         $this->message = $message;
 
-        dd($email,$message);
     }
     /**
      * Execute the job.
@@ -32,6 +31,7 @@ class SendBroadcastEmailJob implements ShouldQueue
      */
     public function handle()
     {
+        dd($this->email,$this->message);    
         Mail::to($this->email)->send(new BulkEmail($this->message));
     }
 }
