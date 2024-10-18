@@ -1325,6 +1325,7 @@ function adminNotification($notificationType, $postData)
                     ];
                     $email = $user->email;
                     $message= $postData['message'];
+                    dd($email,$message);
 
                     SendBroadcastEmailJob::dispatch( $email, $message);
 
