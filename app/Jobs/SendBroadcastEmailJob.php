@@ -39,3 +39,44 @@ class SendBroadcastEmailJob implements ShouldQueue
         });
     }
 }
+
+
+// class SendBroadcastEmailJob implements ShouldQueue
+// {
+//     use Queueable, InteractsWithQueue, SerializesModels;
+
+//     protected $email;
+//     protected $message;
+
+//     /**
+//      * Create a new job instance.
+//      *
+//      * @param string $email
+//      * @param string $message
+//      */
+//     public function __construct($email, $message)
+//     {
+//         $this->email = $email;
+//         $this->message = $message;
+//     }
+
+//     /**
+//      * Execute the job.
+//      *
+//      * @return void
+//      */
+//     public function handle()
+//     {
+//         try {
+//             // Send the email using Laravel's Mail facade
+//             Mail::raw($this->message, function ($mail) {
+//                 $mail->to($this->email)
+//                     ->subject('Send Broadcast Mail');
+//             });
+
+//         } catch (\Exception $e) {
+//             dd($e->getMessage());
+//             Log::error('Failed to send email to ' . $this->email . ': ' . $e->getMessage());
+//         }
+//     }
+// }
