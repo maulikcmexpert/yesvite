@@ -12396,7 +12396,7 @@ class ApiControllerv3 extends Controller
 
             if (isset($input['device_type']) && $input['device_type'] == 'ios') {
                 $responce =  $this->set_apple_iap($purchaseToken);
-                dd($responce);
+                // dd($responce);
                 if (isset($responce->latest_receipt_info[0]->expires_date_ms)) {
                     foreach ($responce->latest_receipt_info as $key => $value) {
                         if (isset($value->expires_date_ms) && $value->expires_date_ms != null && date('Y-m-d H:i', ($value->expires_date_ms /  1000)) >= date('Y-m-d H:i')) {
