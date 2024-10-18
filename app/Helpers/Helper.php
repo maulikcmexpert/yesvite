@@ -1290,9 +1290,7 @@ function adminNotification($notificationType, $postData)
 
             foreach ($users as $user) { 
                 // dd($user);
-                echo '<pre>';
-                echo(count($user));
-                die;
+                dd(count($user));
                 // $deviceData = Device::where('user_id', $user->id)->first();
 
                 // $userDataList = [
