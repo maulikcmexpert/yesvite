@@ -12407,7 +12407,7 @@ class ApiControllerv3 extends Controller
                     $enddate = date('Y-m-d H:i:s', strtotime("-1 days"));
                 }
 
-                if (!isset($responce['error'])) {
+                if (!isset($responce->error)) {
                     $new_subscription = new UserSubscription();
                     $new_subscription->user_id = $user_id;
                     $new_subscription->packageName = $input['packageName'];
