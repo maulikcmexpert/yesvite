@@ -61,7 +61,7 @@
                                     // updateClipPath(data.filedImagePath, element);
 
                                     const scaledWidth = element.width;  // Use element's width
-            const scaledHeight = element.height;
+                                    const scaledHeight = element.height;
 
             // imageInput.style.width = element.width + 'px';
             // imageInput.style.height = element.height + 'px';
@@ -125,7 +125,7 @@
                     top: element.centerY - scaledHeight / 2  
                 });
 
-                let shapes = createShapes(data.filedImagePath);
+                let shapes = createShapes(img);
 
                 currentShapeIndex = shapeIndexMap[defaultShape] || 0; // Default to rectangle if not found
 
