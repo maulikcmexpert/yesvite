@@ -12,11 +12,18 @@ use Illuminate\Support\Facades\Mail;
 
 class SendBroadcastEmailJob implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    // ... (rest of the code remains the same)
+
+    use Queueable, InteractsWithQueue, SerializesModels;
+
     protected $email;
     protected $message;
+
     /**
      * Create a new job instance.
+     *
+     * @param string $email
+     * @param string $message
      */
     public function __construct($email, $message)
     {
@@ -31,18 +38,39 @@ class SendBroadcastEmailJob implements ShouldQueue
      */
     public function handle()
     {
-        // Mail::to($this->email)->send(new BulkEmail($this->details));
+        
+        // Validate email address
+        // $validator = Validator::make(['email' => $this->email], [
+        //     'email' => 'required|email',
+        // ]);
 
-        try {
-            // Send the email using Laravel's Mail facade
-            Mail::raw($this->message, function ($mail) {
-                $mail->to($this->email)
-                    ->subject('Send Broadcast Mail');
-            });
+        // if ($validator->fails()) {
+        //     \Log::error('Invalid email address: ' . $this->email);
+        //     return;
+        // }
 
-        } catch (\Exception $e) {
-            dd($e->getMessage());
-            \Log::error('Failed to send email to ' . $this->email . ': ' . $e->getMessage());
+        // Retry logic (optional)
+        $retries = 0;
+        $maxRetries = 3;
+        while ($retries < $maxRetries) {
+            try {
+                // Send the email using Laravel's Mail facade
+                Mail::raw($this->message, function ($mail) {
+                    $mail->to($this->email)
+                         ->subject('Send Broadcast Mail');
+                });
+
+                break; // Exit the loop if successful
+            } catch (\Exception $e) {
+                // dd($e->getMessage());
+                \Log::error('Failed to send email to ' . $this->email . ': ' . $e->getMessage());
+                $retries++;
+                sleep(60); // Wait for 60 seconds before retrying
+            }
+        }
+
+        if ($retries >= $maxRetries) {
+            \Log::error('Failed to send email to ' . $this->email . ' after ' . $maxRetries . ' attempts');
         }
     }
 }
