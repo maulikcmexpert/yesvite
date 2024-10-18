@@ -134,10 +134,11 @@
 
                 img.on('mouseup', function(event) {
                     console.log(event);
-                    if(event?.transform?.action === 'drag' && event.transform.actionPerformed === undefined){
-                        currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
+                     currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
                         img.set({ clipPath: shapes[currentShapeIndex] });
                         canvas.renderAll();
+                    if(event?.transform?.action === 'drag' && event.transform.actionPerformed === undefined){
+                       
                     }
                 });
 
@@ -148,11 +149,12 @@
 
                 img.on('scaling', function (event) {
                     const target = event.target;
-                    if (target && target.isControl) {
                         fixClipPath();
+                    if (target && target.isControl) {
                     }
                 });
-
+                
+                canvas.renderAll();
                 canvas.add(img);
                 currentImage = img; 
             });
