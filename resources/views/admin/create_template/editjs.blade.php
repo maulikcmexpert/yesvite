@@ -145,6 +145,9 @@
                     img.set({ clipPath: shapes[currentShapeIndex] });
                     canvas.renderAll();
                 };
+
+                canvas.add(img);
+
             });
                                     
 
