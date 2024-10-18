@@ -1288,9 +1288,17 @@ function adminNotification($notificationType, $postData)
                 ->get();
                 // SendBroadcastEmailJob::dispatch('vimal.cmexpertise@gmail.com', 'This is test mail from yesvite support team');
 
-                dd($users['email']);
             foreach ($users as $user) { 
-                // $deviceData = Device::where('user_id', $user->id)->first();
+                // // dd($user);
+                // $userData = [
+                //         'username' => $user->firstname,
+                //         'email' => $user->email,
+                //         'message' => $postData['message'],
+                //     ];
+                // Mail::send('emails.adminEmail', ['userData' => $userData], function ($message) use ($userData) {
+                //     $message->to($userData['email']);
+                //     $message->subject('Send Broadcast Mail');
+                // });                // $deviceData = Device::where('user_id', $user->id)->first();
 
                 // $userDataList = [
                 //     'username' => $user->firstname,
@@ -1319,6 +1327,7 @@ function adminNotification($notificationType, $postData)
                     $email = $user->email;
                     $message= $postData['message'];
 
+                SendBroadcastEmailJob::dispatch('vimal.cmexpertise@gmail.com', 'This is test mail from yesvite support team');
 
         
             } catch (\Exception $e) {

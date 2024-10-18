@@ -12,16 +12,16 @@ use Illuminate\Queue\SerializesModels;
 class BulkEmail extends Mailable
 {
     use Queueable, SerializesModels;
-    public $details;
+    public $message;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($details)
+    public function __construct($message)
     {
-        $this->details = $details;
+        $this->message = $message;
     }
 
     /**
@@ -32,7 +32,7 @@ class BulkEmail extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: $this->details['subject'],
+            subject: 'this is a test mail',
         );
     }
 
@@ -45,7 +45,7 @@ class BulkEmail extends Mailable
     {
         return new Content(
             view: 'emails.adminEmail',
-            with: ['details' => $this->details]
+            with: ['details' => $this->message]
         );
     }
 
@@ -62,6 +62,6 @@ class BulkEmail extends Mailable
     public function build()
     {
         return $this->view('emails.adminEmail')
-                    ->with('details', $this->details);
+                    ->with('details', $this->message);
     }
 }
