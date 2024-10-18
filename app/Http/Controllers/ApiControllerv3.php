@@ -12408,16 +12408,16 @@ class ApiControllerv3 extends Controller
                 if (!isset($responce['error'])) {
                     $new_subscription = new UserSubscription();
                     $new_subscription->user_id = $user_id;
-                    // $new_subscription->orderId = $input['orderId'];
                     $new_subscription->packageName = $input['packageName'];
+                    $new_subscription->startDate = now();
+                    $new_subscription->endDate = $enddate;
+                    $new_subscription->type = 'subscribe';
+                    $new_subscription->purchaseToken = $input['purchaseToken'];
+                    // $new_subscription->orderId = $input['orderId'];
                     // $new_subscription->priceCurrencyCode = $responce['priceCurrencyCode'];
                     // $new_subscription->price = $responce['priceAmountMicros'];
                     // $new_subscription->countryCode = $responce['countryCode'];
-                    $new_subscription->startDate = now();
-                    $new_subscription->endDate = $enddate;
                     // $new_subscription->productId = $input['productId'];
-                    $new_subscription->type = 'subscribe';
-                    $new_subscription->purchaseToken = $input['purchaseToken'];
                     $new_subscription->save();
     
                     return response()->json(['status' => 1, 'message' => "subscription sucessfully"]);
