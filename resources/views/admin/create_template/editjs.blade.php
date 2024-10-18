@@ -110,8 +110,9 @@
             fabric.Image.fromURL(data.filedImagePath, function (img) {
                 img.set({
 
-                    selectable: false,
-                    hasControls: false,
+                    selectable: true,
+                     hasControls: true,
+                    // hasControls: false,
                     hasBorders: false,
                     borderColor: "#2DA9FC",
                     cornerColor: "#fff",
@@ -154,7 +155,7 @@
                     }
                 });
                 
-                canvas.renderAll();
+                // canvas.renderAll();
                 canvas.add(img);
                 currentImage = img; 
             });
