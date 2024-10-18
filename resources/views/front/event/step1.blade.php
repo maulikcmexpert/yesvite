@@ -339,7 +339,7 @@
 
 
 
-                    <div class="col-lg-12">
+                    <div class="col-lg-12 mt-3">
                         <div class="design-seting">
                             <a href="#" class="d-flex">
                                 {{-- <span>
