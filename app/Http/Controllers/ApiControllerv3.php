@@ -12561,29 +12561,49 @@ class ApiControllerv3 extends Controller
             $app_id = $userSubscription->packageName;
             $product_id = $userSubscription->productId;
             $purchaseToken = $userSubscription->purchaseToken;
+            if($userSubscription->device_type == 'ios'){
+                $responce =  $this->set_apple_iap($purchaseToken);
+                foreach ($responce->latest_receipt_info as $key => $value) {
+                    if(isset($value->expires_date_ms) && $value->expires_date_ms != null && date('Y-m-d H:i', ($value->expires_date_ms /  1000)) >= date('Y-m-d H:i') ){
+                     // print_r($value->expires_date_ms);die;
+                        $enddate =  date('Y-m-d H:i:s', ($value->expires_date_ms /  1000));
 
-            $responce =  $this->set_android_iap($app_id, $product_id, $purchaseToken, 'subscribe');
-
-            if (isset($responce) && !empty($responce)) {
-                if (isset($responce['expiryTimeMillis']) && $responce['expiryTimeMillis'] != null) {
-                    $exp_date =  date('Y-m-d H:i:s', ($responce['expiryTimeMillis'] /  1000));
-                    $current_date = date('Y-m-d H:i:s');
-                    if (strtotime($current_date) > strtotime($exp_date)) {
-                        $userSubscription->endDate = $exp_date;
+                        $current_date = date('Y-m-d H:i:s');
+                        if (strtotime($current_date) > strtotime($enddate)) {
+                            $userSubscription->endDate = $enddate;
+                            $userSubscription->save();
+                            return response()->json(['status' => 0, 'message' => "subscription is not active", 'type' => 'Free']);
+                        }
+                        if (isset($responce->error)) {
+                            return response()->json(['status' => 0, 'message' => "subscription is not active", 'type' => 'Free']);
+                        }
+                        return response()->json(['status' => 1, 'message' => "subscription is active", 'type' => 'Pro-Year']); 
+                    }
+                }
+            }else{
+                $responce =  $this->set_android_iap($app_id, $product_id, $purchaseToken, 'subscribe');
+    
+                if (isset($responce) && !empty($responce)) {
+                    if (isset($responce['expiryTimeMillis']) && $responce['expiryTimeMillis'] != null) {
+                        $exp_date =  date('Y-m-d H:i:s', ($responce['expiryTimeMillis'] /  1000));
+                        $current_date = date('Y-m-d H:i:s');
+                        if (strtotime($current_date) > strtotime($exp_date)) {
+                            $userSubscription->endDate = $exp_date;
+                            $userSubscription->save();
+                            return response()->json(['status' => 0, 'message' => "subscription is not active", 'type' => 'Free']);
+                        }
+                    }
+                    if (isset($responce['userCancellationTimeMillis'])) {
+                        $cancellationdate =  date('Y-m-d H:i:s', ($responce['userCancellationTimeMillis'] /  1000));
+                        $userSubscription->cancellationdate = $cancellationdate;
                         $userSubscription->save();
                         return response()->json(['status' => 0, 'message' => "subscription is not active", 'type' => 'Free']);
                     }
+                    if (isset($responce['error'])) {
+                        return response()->json(['status' => 0, 'message' => "subscription is not active", 'type' => 'Free']);
+                    }
+                    return response()->json(['status' => 1, 'message' => "subscription is active", 'type' => 'Pro-Year']);
                 }
-                if (isset($responce['userCancellationTimeMillis'])) {
-                    $cancellationdate =  date('Y-m-d H:i:s', ($responce['userCancellationTimeMillis'] /  1000));
-                    $userSubscription->cancellationdate = $cancellationdate;
-                    $userSubscription->save();
-                    return response()->json(['status' => 0, 'message' => "subscription is not active", 'type' => 'Free']);
-                }
-                if (isset($responce['error'])) {
-                    return response()->json(['status' => 0, 'message' => "subscription is not active", 'type' => 'Free']);
-                }
-                return response()->json(['status' => 1, 'message' => "subscription is active", 'type' => 'Pro-Year']);
             }
         }
         return response()->json(['status' => 0, 'message' => "No subscribe", 'type' => 'Free']);
