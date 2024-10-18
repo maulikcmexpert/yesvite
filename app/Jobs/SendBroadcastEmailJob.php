@@ -9,21 +9,16 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
+
 
 class SendBroadcastEmailJob implements ShouldQueue
 {
-    // ... (rest of the code remains the same)
-
-    use Queueable, InteractsWithQueue, SerializesModels;
-
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
     protected $email;
     protected $message;
-
     /**
      * Create a new job instance.
-     *
-     * @param string $email
-     * @param string $message
      */
     public function __construct($email, $message)
     {
@@ -36,18 +31,22 @@ class SendBroadcastEmailJob implements ShouldQueue
      *
      * @return void
      */
+    // public function handle()
+    // {
+        // Mail::to($this->email)->send(new BulkEmail($this->details));
+
+       
     public function handle()
     {
-        
         // Validate email address
-        // $validator = Validator::make(['email' => $this->email], [
-        //     'email' => 'required|email',
-        // ]);
+        $validator = Validator::make(['email' => $this->email], [
+            'email' => 'required|email',
+        ]);
 
-        // if ($validator->fails()) {
-        //     \Log::error('Invalid email address: ' . $this->email);
-        //     return;
-        // }
+        if ($validator->fails()) {
+            \Log::error('Invalid email address: ' . $this->email);
+            return;
+        }
 
         // Retry logic (optional)
         $retries = 0;
@@ -62,7 +61,6 @@ class SendBroadcastEmailJob implements ShouldQueue
 
                 break; // Exit the loop if successful
             } catch (\Exception $e) {
-                // dd($e->getMessage());
                 \Log::error('Failed to send email to ' . $this->email . ': ' . $e->getMessage());
                 $retries++;
                 sleep(60); // Wait for 60 seconds before retrying
@@ -74,44 +72,3 @@ class SendBroadcastEmailJob implements ShouldQueue
         }
     }
 }
-
-
-// class SendBroadcastEmailJob implements ShouldQueue
-// {
-//     use Queueable, InteractsWithQueue, SerializesModels;
-
-//     protected $email;
-//     protected $message;
-
-//     /**
-//      * Create a new job instance.
-//      *
-//      * @param string $email
-//      * @param string $message
-//      */
-//     public function __construct($email, $message)
-//     {
-//         $this->email = $email;
-//         $this->message = $message;
-//     }
-
-//     /**
-//      * Execute the job.
-//      *
-//      * @return void
-//      */
-//     public function handle()
-//     {
-//         try {
-//             // Send the email using Laravel's Mail facade
-//             Mail::raw($this->message, function ($mail) {
-//                 $mail->to($this->email)
-//                     ->subject('Send Broadcast Mail');
-//             });
-
-//         } catch (\Exception $e) {
-//             dd($e->getMessage());
-//             Log::error('Failed to send email to ' . $this->email . ': ' . $e->getMessage());
-//         }
-//     }
-// }
