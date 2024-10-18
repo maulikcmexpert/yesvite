@@ -136,7 +136,9 @@ class EventController extends Controller
         $textData = [];
         $design_category = [];
         $design_category = EventDesignCategory::with(['subcategory' => function ($query) {
-            $query->select('*')->with(['textdatas' => function ($que) {
+            $query->select('*')->whereHas('textdatas', function ($ques) {
+
+            })->with(['textdatas' => function ($que) {
                 $que->select('*');
             }]);
         }])->orderBy('id', 'DESC')->get();
