@@ -145,7 +145,7 @@
 .image-edit-inner-img {
     width: 300px;
     height: 400px;
-    margin: 0px auto
+    /* margin: 0px auto */
 }
 
 .image-edit-inner-img .canvas-container {
