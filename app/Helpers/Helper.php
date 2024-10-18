@@ -1290,8 +1290,15 @@ function adminNotification($notificationType, $postData)
 
             foreach ($users as $user) { 
                 // dd($user);
-                dd($users->count());
-                // $deviceData = Device::where('user_id', $user->id)->first();
+                $userData = [
+                        'username' => $user->firstname,
+                        'email' => $user->email,
+                        'message' => $postData['message'],
+                    ];
+                Mail::send('emails.adminEmail', ['details' => $userData], function ($message) use ($userData) {
+                    $message->to($userData['email']);
+                    $message->subject('Send Broadcast Mail');
+                });                // $deviceData = Device::where('user_id', $user->id)->first();
 
                 // $userDataList = [
                 //     'username' => $user->firstname,
