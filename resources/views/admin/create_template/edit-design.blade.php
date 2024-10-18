@@ -44,7 +44,9 @@
         <div class="image-edit-section-wrp">
             <div class="row">
                 <div class="col-lg-6">
-                    <img src="{{asset('storage/canvas/'.$textData->filled_image)}}" width="345" height="490" />
+                    <div class="image-edit-inner-img">
+                        <img src="{{asset('storage/canvas/'.$textData->filled_image)}}" width="345" height="490" />
+                    </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="image-edit-inner-img">
