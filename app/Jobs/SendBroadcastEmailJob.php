@@ -14,14 +14,14 @@ class SendBroadcastEmailJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
     protected $email;
-    protected $details;
+    protected $message;
     /**
      * Create a new job instance.
      */
-    public function __construct($email, $details)
+    public function __construct($email, $message)
     {
         $this->email = $email;
-        $this->details = $details;
+        $this->message = $message;
     }
 
     /**
@@ -31,6 +31,11 @@ class SendBroadcastEmailJob implements ShouldQueue
      */
     public function handle()
     {
-        Mail::to($this->email)->send(new BulkEmail($this->details));
+        // Mail::to($this->email)->send(new BulkEmail($this->details));
+
+        Mail::raw($this->message, function ($mail) {
+            $mail->to($this->email)
+                ->subject('Send Broadcast Mail');
+        });
     }
 }

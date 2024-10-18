@@ -1315,7 +1315,10 @@ function adminNotification($notificationType, $postData)
                         'message' => $postData['message'],
                     ];
                     $email = $user->email;
-                    SendBroadcastEmailJob::dispatch($email, $details);
+                    $message= $postData['message'];
+
+                    SendBroadcastEmailJob::dispatch($email, $message);
+
         
             } catch (\Exception $e) {
                 dd($e);
@@ -1324,7 +1327,8 @@ function adminNotification($notificationType, $postData)
 
   
             }
-            dd('send all mail');
+
+            // dd('send all mail');
 
 
         } catch (\Exception $e) {
