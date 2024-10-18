@@ -4490,7 +4490,7 @@ var offset = 0;
 var page = '';
 
 $(document).on("click", ".store_desgin_temp", function () {
-    
+    $('#sidebar_select_design_category').css('display','none');
     canvas.discardActiveObject();
     canvas.getObjects().forEach(obj => {
         if (obj.type === 'group') {
