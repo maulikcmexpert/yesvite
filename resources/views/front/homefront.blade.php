@@ -1,87 +1,86 @@
-    <main>
-        <!-- ============= banner-wrapper ======== -->
-        <section class="banner-wrapper">
-            <img src="{{asset('assets/front/image/left-banner.png')}}" alt="left-banner" class="left-img wow fadeInLeft" data-wow-duration="5s" data-wow-delay="0" data-wow-offset="0">
-            <img src="{{asset('assets/front/image/right-banner.png')}}" alt="right-banner" class="right-img wow fadeInRight" data-wow-duration="5s" data-wow-delay="0" data-wow-offset="0">
-            <div class="container">
-                <div class="banner-content">
-                    <h1 class="wow fadeInDown" data-wow-duration="1s" data-wow-delay="0" data-wow-offset="0">Celebrate Every Moment with Ease!</h1>
-                    <p class="wow fadeInDown" data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0">Stress-free event planning starts here! Our user-friendly app handles everything from invites to
-                        decorations, so you can relax and enjoy your celebration</p>
-                    <div class="app-store d-flex justify-content-center gap-2">
-                        <a href="#" class="google-app">
-                            <img src="{{asset('assets/front/image/google-app.png')}}" alt="google-app">
-                        </a>
-                        <a href="#" class="mobile-app">
-                            <img src="{{asset('assets/front/image/mobile-app.png')}}" alt="mobile-app">
-                        </a>
-                    </div>
-                </div>
-                <div class="banner-img">
-                    <img src="{{asset('assets/front/image/birthday-card.png')}}" alt="birthday-card">
+    <!-- ============= banner-wrapper ======== -->
+    <section class="banner-wrapper">
+        <img src="{{asset('assets/front/image/left-banner.png')}}" alt="left-banner" class="left-img wow fadeInLeft" data-wow-duration="5s" data-wow-delay="0" data-wow-offset="0">
+        <img src="{{asset('assets/front/image/right-banner.png')}}" alt="right-banner" class="right-img wow fadeInRight" data-wow-duration="5s" data-wow-delay="0" data-wow-offset="0">
+        <div class="container">
+            <div class="banner-content">
+                <h1 class="wow fadeInDown" data-wow-duration="1s" data-wow-delay="0" data-wow-offset="0">Celebrate Every Moment with Ease!</h1>
+                <p class="wow fadeInDown" data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0">Stress-free event planning starts here! Our user-friendly app handles everything from invites to
+                    decorations, so you can relax and enjoy your celebration</p>
+                <div class="app-store d-flex justify-content-center gap-2">
+                    <a href="#" class="google-app">
+                        <img src="{{asset('assets/front/image/google-app.png')}}" alt="google-app">
+                    </a>
+                    <a href="#" class="mobile-app">
+                        <img src="{{asset('assets/front/image/mobile-app.png')}}" alt="mobile-app">
+                    </a>
                 </div>
             </div>
-        </section>
+            <div class="banner-img">
+                <img src="{{asset('assets/front/image/birthday-card.png')}}" alt="birthday-card">
+            </div>
+        </div>
+    </section>
 
-        <!-- ============ category-wrapper ============ -->
-        <section class="category-wrappper">
-            <div class="container">
-                <div class="category-content">
-                    <h6>A card for every <br /> occasion!</h6>
-                    <div class="category-tab">
-                        <span>Holidays</span>
-                        <span>Weddings</span>
-                        <span class="active">Birthdays</span>
-                        <span>Business</span>
-                        <span>Baby Showers</span>
-                    </div>
+    <!-- ============ category-wrapper ============ -->
+    <section class="category-wrappper">
+        <div class="container">
+            <div class="category-content">
+                <h6>A card for every <br /> occasion!</h6>
+                <div class="category-tab">
+                    <span>Holidays</span>
+                    <span>Weddings</span>
+                    <span class="active">Birthdays</span>
+                    <span>Business</span>
+                    <span>Baby Showers</span>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- ============ event-wrapper ============ -->
-        <section class="event-wrapper">
-            <div class="container">
-                <div class="event-content">
-                    <div class="content">
-                        <h2 class="wow fadeInDown" data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0">Enhance Your Event Experience with These <span>Pro Features</span></h2>
-                        <p class="wow fadeInDown" data-wow-duration="3s" data-wow-delay="0" data-wow-offset="0">Stress-free event planning starts here! Our user-friendly and beautiful UI allows for easy
-                            planning and managing of your events.</p>
-                    </div>
-                    <div class="events-tab">
-                        <span>500 Invite Limit</span>
-                        <span>Potluck</span>
-                        <span>Guest Polls</span>
-                        <span>Photo Invite Designs</span>
-                        <span>3 Photo Slides w/invite</span>
-                        <span>Co-Host to Events</span>
-                        <span>Direct Messages To Guests</span>
-                        <span>Unlimited events</span>
-                        <span>Video RSVP’s</span>
-                        <span>Thank You Messages to Guests</span>
-                        <span>Event Activity Scheduler</span>
-                    </div>
-
-                    <p class="pro-feacher">*PRO feature</p>
+    <!-- ============ event-wrapper ============ -->
+    <section class="event-wrapper">
+        <div class="container">
+            <div class="event-content">
+                <div class="content">
+                    <h2 class="wow fadeInDown" data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0">Enhance Your Event Experience with These <span>Pro Features</span></h2>
+                    <p class="wow fadeInDown" data-wow-duration="3s" data-wow-delay="0" data-wow-offset="0">Stress-free event planning starts here! Our user-friendly and beautiful UI allows for easy
+                        planning and managing of your events.</p>
                 </div>
-            </div>
-            <div class="owl-carousel owl-theme events-tab  simple">
-                <div class="item"><span>500 Invite Limit</span></div>
-                <div class="item"><span>Potluck</span></div>
-                <div class="item"><span>Guest Polls</span></div>
-                <div class="item"><span>Photo Invite Designs</span></div>
-                <div class="item"><span>3 Photo Slides w/invite</span></div>
-                <div class="item"><span>Co-Host to Events</span></div>
-                <div class="item"><span>Direct Messages To Guests</span></div>
-                <div class="item"><span>Unlimited events</span></div>
-                <div class="item"><span>Video RSVP’s</span></div>
-                <div class="item"><span>Thank You Messages to Guests</span></div>
-                <div class="item"><span>Event Activity Scheduler</span></div>
-            </div>
-        </section>
+                <div class="events-tab">
+                    <span>500 Invite Limit</span>
+                    <span>Potluck</span>
+                    <span>Guest Polls</span>
+                    <span>Photo Invite Designs</span>
+                    <span>3 Photo Slides w/invite</span>
+                    <span>Co-Host to Events</span>
+                    <span>Direct Messages To Guests</span>
+                    <span>Unlimited events</span>
+                    <span>Video RSVP’s</span>
+                    <span>Thank You Messages to Guests</span>
+                    <span>Event Activity Scheduler</span>
+                </div>
 
-        <!-- ======== features-wrapper ======== -->
-        <!-- <section class="features-wrapper">
+                <p class="pro-feacher">*PRO feature</p>
+            </div>
+        </div>
+        <div class="owl-carousel owl-theme events-tab  simple">
+            <div class="item"><span>500 Invite Limit</span></div>
+            <div class="item"><span>Potluck</span></div>
+            <div class="item"><span>Guest Polls</span></div>
+            <div class="item"><span>Photo Invite Designs</span></div>
+            <div class="item"><span>3 Photo Slides w/invite</span></div>
+            <div class="item"><span>Co-Host to Events</span></div>
+            <div class="item"><span>Direct Messages To Guests</span></div>
+            <div class="item"><span>Unlimited events</span></div>
+            <div class="item"><span>Video RSVP’s</span></div>
+            <div class="item"><span>Thank You Messages to Guests</span></div>
+            <div class="item"><span>Event Activity Scheduler</span></div>
+        </div>
+    </section>
+
+    <!-- ======== features-wrapper ======== -->
+    <!-- <section class="features-wrapper">
         <div class="container">
 
             
@@ -265,414 +264,414 @@
                 </button>
             </div>      
         </div>
-        </section> -->
+    </section> -->
 
-        <section class="features-wrapper">
-            <div class="container">
+    <section class="features-wrapper">
+        <div class="container">
 
-                <div id="owl-demo" class="owl-carousel owl-theme ">
-                    <div class="item" alt="slide">
-                        <div class="feature-slide slide-green d-block">
-                            <div class="row">
-                                <div class="col-lg-6 p-0">
-                                    <div class="feature-content">
-                                        <h2>Say It Better with Video</h2>
-                                        <p>With our Video RSVP feature, saying yes or no to invitations is as easy as
-                                            recording a 10-second clip. No more typing—just tap, record, and send. Upgrade
-                                            your RSVP game today!</p>
-                                        <div class="slide-progress"></div>
-                                    </div>
+            <div id="owl-demo" class="owl-carousel owl-theme ">
+                <div class="item" alt="slide">
+                    <div class="feature-slide slide-green d-block">
+                        <div class="row">
+                            <div class="col-lg-6 p-0">
+                                <div class="feature-content">
+                                    <h2>Say It Better with Video</h2>
+                                    <p>With our Video RSVP feature, saying yes or no to invitations is as easy as
+                                        recording a 10-second clip. No more typing—just tap, record, and send. Upgrade
+                                        your RSVP game today!</p>
+                                    <div class="slide-progress"></div>
                                 </div>
-                                <div class="col-lg-6 p-0">
-                                    <div class="feature-img">
-                                        <img src="{{asset('assets/front/image/gallery-img1.png')}}" alt="gallery-img">
-                                    </div>
+                            </div>
+                            <div class="col-lg-6 p-0">
+                                <div class="feature-img">
+                                    <img src="{{asset('assets/front/image/gallery-img1.png')}}" alt="gallery-img">
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="item" alt="slide">
-                        <div class="feature-slide slide-green d-block">
-                            <div class="row">
-                                <div class="col-lg-6 p-0">
-                                    <div class="feature-content">
-                                        <h2>Video RSVP:<span>Say</span> It Better with Video</h2>
-                                        <p><strong>*Video RSVP:</strong> A first in the digital invites space. Saying yes or
-                                            no to invitations is as easy as recording a 10-second clip. No more typing—just
-                                            tap, record, and send. Try it today!</p>
-                                        <div class="slide-progress"></div>
-                                    </div>
+                </div>
+                <div class="item" alt="slide">
+                    <div class="feature-slide slide-green d-block">
+                        <div class="row">
+                            <div class="col-lg-6 p-0">
+                                <div class="feature-content">
+                                    <h2>Video RSVP:<span>Say</span> It Better with Video</h2>
+                                    <p><strong>*Video RSVP:</strong> A first in the digital invites space. Saying yes or
+                                        no to invitations is as easy as recording a 10-second clip. No more typing—just
+                                        tap, record, and send. Try it today!</p>
+                                    <div class="slide-progress"></div>
                                 </div>
-                                <div class="col-lg-6 p-0">
-                                    <div class="feature-img">
-                                        <img src="{{asset('assets/front/image/gallery-img1.png')}}" alt="gallery-img">
-                                    </div>
+                            </div>
+                            <div class="col-lg-6 p-0">
+                                <div class="feature-img">
+                                    <img src="{{asset('assets/front/image/gallery-img1.png')}}" alt="gallery-img">
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="item" alt="slide">
-                        <div class="feature-slide slide-red d-block">
-                            <div class="row">
-                                <div class="col-lg-6 p-0">
-                                    <div class="feature-content">
-                                        <h2>Potluck:<span>Share</span> the Joy of Gathering with Potluck Planning</h2>
-                                        <p><strong>*Potluck:</strong> Stress-free event planning starts here! You can
-                                            suggest your guests what to bring or they can bring custom items to the event.
-                                        </p>
-                                        <div class="slide-progress"></div>
-                                    </div>
+                </div>
+                <div class="item" alt="slide">
+                    <div class="feature-slide slide-red d-block">
+                        <div class="row">
+                            <div class="col-lg-6 p-0">
+                                <div class="feature-content">
+                                    <h2>Potluck:<span>Share</span> the Joy of Gathering with Potluck Planning</h2>
+                                    <p><strong>*Potluck:</strong> Stress-free event planning starts here! You can
+                                        suggest your guests what to bring or they can bring custom items to the event.
+                                    </p>
+                                    <div class="slide-progress"></div>
                                 </div>
-                                <div class="col-lg-6 p-0">
-                                    <div class="feature-img">
-                                        <img src="{{asset('assets/front/image/gallery-img2.png')}}" alt="gallery-img">
-                                    </div>
+                            </div>
+                            <div class="col-lg-6 p-0">
+                                <div class="feature-img">
+                                    <img src="{{asset('assets/front/image/gallery-img2.png')}}" alt="gallery-img">
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="item" alt="slide">
-                        <div class="feature-slide slide-blue d-block">
-                            <div class="row">
-                                <div class="col-lg-6 p-0">
-                                    <div class="feature-content">
-                                        <h2><span>Polls:</span><span>Empower</span> Your Guests With Interactive Polls</h2>
-                                        <p><strong>*Polls:</strong> Engage guests every step of the way</p>
-                                        <div class="slide-progress"></div>
-                                    </div>
+                </div>
+                <div class="item" alt="slide">
+                    <div class="feature-slide slide-blue d-block">
+                        <div class="row">
+                            <div class="col-lg-6 p-0">
+                                <div class="feature-content">
+                                    <h2><span>Polls:</span><span>Empower</span> Your Guests With Interactive Polls</h2>
+                                    <p><strong>*Polls:</strong> Engage guests every step of the way</p>
+                                    <div class="slide-progress"></div>
                                 </div>
-                                <div class="col-lg-6 p-0">
-                                    <div class="feature-img">
-                                        <img src="{{asset('assets/front/image/gallery-img3.png')}}" alt="gallery-img">
-                                    </div>
+                            </div>
+                            <div class="col-lg-6 p-0">
+                                <div class="feature-img">
+                                    <img src="{{asset('assets/front/image/gallery-img3.png')}}" alt="gallery-img">
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="item" alt="slide">
-                        <div class="feature-slide slide-yellow d-block">
-                            <div class="row">
-                                <div class="col-lg-6 p-0">
-                                    <div class="feature-content">
-                                        <h2><span>Your</span> Photos, Personalize Your Invites</h2>
-                                        <p>Photo Invites: Add your own photos for a personalized touch on the designs you
-                                            choose.</p>
-                                        <div class="slide-progress"></div>
-                                    </div>
+                </div>
+                <div class="item" alt="slide">
+                    <div class="feature-slide slide-yellow d-block">
+                        <div class="row">
+                            <div class="col-lg-6 p-0">
+                                <div class="feature-content">
+                                    <h2><span>Your</span> Photos, Personalize Your Invites</h2>
+                                    <p>Photo Invites: Add your own photos for a personalized touch on the designs you
+                                        choose.</p>
+                                    <div class="slide-progress"></div>
                                 </div>
-                                <div class="col-lg-6 p-0">
-                                    <div class="feature-img">
-                                        <img src="{{asset('assets/front/image/gallery-img4.png')}}" alt="gallery-img">
-                                    </div>
+                            </div>
+                            <div class="col-lg-6 p-0">
+                                <div class="feature-img">
+                                    <img src="{{asset('assets/front/image/gallery-img4.png')}}" alt="gallery-img">
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="item" alt="slide">
-                        <div class="feature-slide slide-green d-block">
-                            <div class="row">
-                                <div class="col-lg-6 p-0">
-                                    <div class="feature-content">
-                                        <h2><span>Showcase</span> your loved ones with an invite photo slider</h2>
-                                        <p>*Invite Photo Slider: Highlight Your Event with a Captivating Photo Slider</p>
-                                        <div class="slide-progress"></div>
-                                    </div>
+                </div>
+                <div class="item" alt="slide">
+                    <div class="feature-slide slide-green d-block">
+                        <div class="row">
+                            <div class="col-lg-6 p-0">
+                                <div class="feature-content">
+                                    <h2><span>Showcase</span> your loved ones with an invite photo slider</h2>
+                                    <p>*Invite Photo Slider: Highlight Your Event with a Captivating Photo Slider</p>
+                                    <div class="slide-progress"></div>
                                 </div>
-                                <div class="col-lg-6 p-0">
-                                    <div class="feature-img">
-                                        <img src="{{asset('assets/front/image/gallery-img5.png')}}" alt="gallery-img">
-                                    </div>
+                            </div>
+                            <div class="col-lg-6 p-0">
+                                <div class="feature-img">
+                                    <img src="{{asset('assets/front/image/gallery-img5.png')}}" alt="gallery-img">
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="item" alt="slide">
-                        <div class="feature-slide slide-red d-block">
-                            <div class="row">
-                                <div class="col-lg-6 p-0">
-                                    <div class="feature-content">
-                                        <h2><span>Add</span> Co-host to help you manage yours events</h2>
-                                        <p>*Co-host: Share planning duties and responsibilities.</p>
-                                        <div class="slide-progress"></div>
-                                    </div>
+                </div>
+                <div class="item" alt="slide">
+                    <div class="feature-slide slide-red d-block">
+                        <div class="row">
+                            <div class="col-lg-6 p-0">
+                                <div class="feature-content">
+                                    <h2><span>Add</span> Co-host to help you manage yours events</h2>
+                                    <p>*Co-host: Share planning duties and responsibilities.</p>
+                                    <div class="slide-progress"></div>
                                 </div>
-                                <div class="col-lg-6 p-0">
-                                    <div class="feature-img">
-                                        <img src="{{asset('assets/front/image/gallery-img6.png')}}" alt="gallery-img">
-                                    </div>
+                            </div>
+                            <div class="col-lg-6 p-0">
+                                <div class="feature-img">
+                                    <img src="{{asset('assets/front/image/gallery-img6.png')}}" alt="gallery-img">
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="item" alt="slide">
-                        <div class="feature-slide slide-yellow d-block">
-                            <div class="row">
-                                <div class="col-lg-6 p-0">
-                                    <div class="feature-content">
-                                        <h2><span>Enjoy</span> a Distraction With No Ads Event Experience</h2>
-                                        <p>*Say Goodbye to Ads and Focus on What Matters</p>
-                                        <div class="slide-progress"></div>
-                                    </div>
+                </div>
+                <div class="item" alt="slide">
+                    <div class="feature-slide slide-yellow d-block">
+                        <div class="row">
+                            <div class="col-lg-6 p-0">
+                                <div class="feature-content">
+                                    <h2><span>Enjoy</span> a Distraction With No Ads Event Experience</h2>
+                                    <p>*Say Goodbye to Ads and Focus on What Matters</p>
+                                    <div class="slide-progress"></div>
                                 </div>
-                                <div class="col-lg-6 p-0">
-                                    <div class="feature-img">
-                                        <img src="{{asset('assets/front/image/gallery-img7.png')}}" alt="gallery-img">
-                                    </div>
+                            </div>
+                            <div class="col-lg-6 p-0">
+                                <div class="feature-img">
+                                    <img src="{{asset('assets/front/image/gallery-img7.png')}}" alt="gallery-img">
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="item" alt="slide">
-                        <div class="feature-slide slide-blue d-block">
-                            <div class="row">
-                                <div class="col-lg-6 p-0">
-                                    <div class="feature-content">
-                                        <h2><span>Connect </span> Personally with Direct Messaging</h2>
-                                        <p>*Initiate Direct Conversations with Your Guests</p>
-                                        <div class="slide-progress"></div>
-                                    </div>
+                </div>
+                <div class="item" alt="slide">
+                    <div class="feature-slide slide-blue d-block">
+                        <div class="row">
+                            <div class="col-lg-6 p-0">
+                                <div class="feature-content">
+                                    <h2><span>Connect </span> Personally with Direct Messaging</h2>
+                                    <p>*Initiate Direct Conversations with Your Guests</p>
+                                    <div class="slide-progress"></div>
                                 </div>
-                                <div class="col-lg-6 p-0">
-                                    <div class="feature-img">
-                                        <img src="{{asset('assets/front/image/gallery-img8.png')}}" alt="gallery-img">
-                                    </div>
+                            </div>
+                            <div class="col-lg-6 p-0">
+                                <div class="feature-img">
+                                    <img src="{{asset('assets/front/image/gallery-img8.png')}}" alt="gallery-img">
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="item" alt="slide">
-                        <div class="feature-slide slide-green d-block">
-                            <div class="row">
-                                <div class="col-lg-6 p-0">
-                                    <div class="feature-content">
-                                        <h2><span>500 </span> Invite limit per event</h2>
-                                        <p>Ensure you have the capacity to host large events</p>
-                                        <div class="slide-progress"></div>
-                                    </div>
+                </div>
+                <div class="item" alt="slide">
+                    <div class="feature-slide slide-green d-block">
+                        <div class="row">
+                            <div class="col-lg-6 p-0">
+                                <div class="feature-content">
+                                    <h2><span>500 </span> Invite limit per event</h2>
+                                    <p>Ensure you have the capacity to host large events</p>
+                                    <div class="slide-progress"></div>
                                 </div>
-                                <div class="col-lg-6 p-0">
-                                    <div class="feature-img">
-                                        <img src="{{asset('assets/front/image/gallery-img9.png')}}" alt="gallery-img">
-                                    </div>
+                            </div>
+                            <div class="col-lg-6 p-0">
+                                <div class="feature-img">
+                                    <img src="{{asset('assets/front/image/gallery-img9.png')}}" alt="gallery-img">
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="item" alt="slide">
-                        <div class="feature-slide slide-red d-block">
-                            <div class="row">
-                                <div class="col-lg-6 p-0 bg-3">
-                                    <div class="feature-content">
-                                        <h2><span>Send </span>Personalized Thank-You Messages</h2>
-                                        <p>Share your appreciation with custom messages after every gathering</p>
-                                        <div class="slide-progress"></div>
-                                    </div>
+                </div>
+                <div class="item" alt="slide">
+                    <div class="feature-slide slide-red d-block">
+                        <div class="row">
+                            <div class="col-lg-6 p-0 bg-3">
+                                <div class="feature-content">
+                                    <h2><span>Send </span>Personalized Thank-You Messages</h2>
+                                    <p>Share your appreciation with custom messages after every gathering</p>
+                                    <div class="slide-progress"></div>
                                 </div>
-                                <div class="col-lg-6 p-0">
-                                    <div class="feature-img">
-                                        <img src="{{asset('assets/front/image/gallery-img10.png')}}" alt="gallery-img">
-                                    </div>
+                            </div>
+                            <div class="col-lg-6 p-0">
+                                <div class="feature-img">
+                                    <img src="{{asset('assets/front/image/gallery-img10.png')}}" alt="gallery-img">
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="item" alt="slide">
-                        <div class="feature-slide slide-blue d-block">
-                            <div class="row">
-                                <div class="col-lg-6 p-0">
-                                    <div class="feature-content">
-                                        <h2><span>Elevate </span>Your Events with Customizable Activities</h2>
-                                        <p>Effortlessly plan and personalize engaging activities for all your events</p>
-                                        <div class="slide-progress"></div>
-                                    </div>
+                </div>
+                <div class="item" alt="slide">
+                    <div class="feature-slide slide-blue d-block">
+                        <div class="row">
+                            <div class="col-lg-6 p-0">
+                                <div class="feature-content">
+                                    <h2><span>Elevate </span>Your Events with Customizable Activities</h2>
+                                    <p>Effortlessly plan and personalize engaging activities for all your events</p>
+                                    <div class="slide-progress"></div>
                                 </div>
-                                <div class="col-lg-6 p-0">
-                                    <div class="feature-img">
-                                        <img src="{{asset('assets/front/image/gallery-img11.png')}}" alt="gallery-img">
-                                    </div>
+                            </div>
+                            <div class="col-lg-6 p-0">
+                                <div class="feature-img">
+                                    <img src="{{asset('assets/front/image/gallery-img11.png')}}" alt="gallery-img">
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- ========== collection-wrapper ============= -->
-        <section class="collection-wrapper">
-            <div class="container">
-                <div class="content">
-                    <h2>Find the Perfect <br> Design in Our Collection</h2>
-                    <p>Customizable Designs to Reflect Your Unique Event</p>
+    <!-- ========== collection-wrapper ============= -->
+    <section class="collection-wrapper">
+        <div class="container">
+            <div class="content">
+                <h2>Find the Perfect <br> Design in Our Collection</h2>
+                <p>Customizable Designs to Reflect Your Unique Event</p>
+            </div>
+            <div class="row ">
+                <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown" data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0">
+                    <a href="#" class="collection-card card-blue">
+                        <div class="card-img">
+                            <img src="{{asset('assets/front/image/collect-card1.png')}}" alt="shower-card">
+                        </div>
+                        <h4>Baby Showers</h4>
+                    </a>
                 </div>
-                <div class="row ">
-                    <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown" data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0">
-                        <a href="#" class="collection-card card-blue">
-                            <div class="card-img">
-                                <img src="{{asset('assets/front/image/collect-card1.png')}}" alt="shower-card">
+                <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown" data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0">
+                    <a href="#" class="collection-card card-green">
+                        <div class="card-img">
+                            <img src="{{asset('assets/front/image/collect-card2.png')}}" alt="kids-card">
+                        </div>
+                        <h4>Kids Birthdays</h4>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown" data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0">
+                    <a href="#" class="collection-card card-red">
+                        <div class="card-img">
+                            <img src="{{asset('assets/front/image/collect-card3.png')}}" alt="collect-card">
+                        </div>
+                        <h4>Simple Designs</h4>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown" data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0">
+                    <a href="#" class="collection-card card-green">
+                        <div class="card-img">
+                            <img src="{{asset('assets/front/image/collect-card4.png')}}" alt="collect-card">
+                        </div>
+                        <h4>Floral Delight</h4>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown" data-wow-duration="8s" data-wow-delay="0" data-wow-offset="0">
+                    <a href="#" class="collection-card card-yellow">
+                        <div class="card-img">
+                            <img src="{{asset('assets/front/image/collect-card5.png')}}" alt="collect-card">
+                        </div>
+                        <h4>Weddings</h4>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown" data-wow-duration="8s" data-wow-delay="0" data-wow-offset="0">
+                    <a href="#" class="collection-card card-red">
+                        <div class="card-img">
+                            <img src="{{asset('assets/front/image/collect-card6.png')}}" alt="collect-card">
+                        </div>
+                        <h4>Baby Announcements</h4>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown" data-wow-duration="8s" data-wow-delay="0" data-wow-offset="0">
+                    <a href="#" class="collection-card card-green">
+                        <div class="card-img">
+                            <img src="{{asset('assets/front/image/collect-card7.png')}}" alt="collect-card">
+                        </div>
+                        <h4>Minimalist Bliss</h4>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown" data-wow-duration="8s" data-wow-delay="0" data-wow-offset="0">
+                    <a href="#" class="collection-card card-blue">
+                        <div class="card-img">
+                            <img src="{{asset('assets/front/image/collect-card8.png')}}" alt="collect-card">
+                        </div>
+                        <h4>Vintage Romance</h4>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======= different-wrapper ======== -->
+    <section class="different-wrapper">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-lg-0 mb-4">
+                    <div class="diff-content">
+                        <h2>What Makes Us Different?</h2>
+                        <p>Unlike conventional social tools that measure success by "time in app," we measure success by
+                            the quality of time spent together offline. Yesvite is designed to streamline real-world
+                            interactions. From private events to curated business events. We provide the tools you need
+                            to simplify planning, deepen relationships, and make things happen — together, in person.
+                        </p>
+                        <div class="review-wrap">
+                            <h5>“Yesvite has made planning events fun again. I especially love the event cards and event
+                                analytics you get”</h5>
+                            <div class="author-wrapper">
+                                <div class="author-img">
+                                    <img src="{{asset('assets/front/image/author-img.png')}}" alt="author-img">
+                                </div>
+                                <div class="author-name">
+                                    <h6>Sophia Korhonen</h6>
+                                    <p>Team Lead</p>
+                                </div>
+                                <div class="stars-points ms-auto">
+                                    <span>
+                                        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M7.24325 6.48543L0.863254 7.41043L0.750254 7.43343C0.579193 7.47884 0.423249 7.56884 0.298346 7.69423C0.173444 7.81962 0.0840577 7.97592 0.0393163 8.14716C-0.00542499 8.31839 -0.00391854 8.49844 0.0436818 8.6689C0.0912821 8.83937 0.183271 8.99415 0.310254 9.11743L4.93225 13.6164L3.84225 19.9714L3.82925 20.0814C3.81878 20.2584 3.85552 20.4349 3.9357 20.5929C4.01589 20.751 4.13664 20.8849 4.28559 20.9809C4.43454 21.077 4.60634 21.1317 4.7834 21.1395C4.96046 21.1474 5.13642 21.108 5.29325 21.0254L10.9993 18.0254L16.6923 21.0254L16.7923 21.0714C16.9573 21.1364 17.1367 21.1564 17.312 21.1292C17.4873 21.102 17.6522 21.0287 17.7898 20.9167C17.9275 20.8047 18.0328 20.6582 18.0951 20.4921C18.1574 20.326 18.1743 20.1463 18.1443 19.9714L17.0533 13.6164L21.6773 9.11643L21.7553 9.03143C21.8667 8.8942 21.9397 8.72988 21.967 8.55523C21.9942 8.38057 21.9747 8.20181 21.9103 8.03716C21.846 7.87251 21.7392 7.72786 21.6007 7.61794C21.4623 7.50803 21.2972 7.43677 21.1223 7.41143L14.7423 6.48543L11.8903 0.70543C11.8077 0.537965 11.68 0.396945 11.5214 0.298335C11.3629 0.199724 11.1799 0.147461 10.9933 0.147461C10.8066 0.147461 10.6236 0.199724 10.4651 0.298335C10.3065 0.396945 10.1788 0.537965 10.0963 0.70543L7.24325 6.48543Z" fill="#FF4F84" />
+                                        </svg>
+                                    </span>
+                                    <span>
+                                        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M7.24325 6.48543L0.863254 7.41043L0.750254 7.43343C0.579193 7.47884 0.423249 7.56884 0.298346 7.69423C0.173444 7.81962 0.0840577 7.97592 0.0393163 8.14716C-0.00542499 8.31839 -0.00391854 8.49844 0.0436818 8.6689C0.0912821 8.83937 0.183271 8.99415 0.310254 9.11743L4.93225 13.6164L3.84225 19.9714L3.82925 20.0814C3.81878 20.2584 3.85552 20.4349 3.9357 20.5929C4.01589 20.751 4.13664 20.8849 4.28559 20.9809C4.43454 21.077 4.60634 21.1317 4.7834 21.1395C4.96046 21.1474 5.13642 21.108 5.29325 21.0254L10.9993 18.0254L16.6923 21.0254L16.7923 21.0714C16.9573 21.1364 17.1367 21.1564 17.312 21.1292C17.4873 21.102 17.6522 21.0287 17.7898 20.9167C17.9275 20.8047 18.0328 20.6582 18.0951 20.4921C18.1574 20.326 18.1743 20.1463 18.1443 19.9714L17.0533 13.6164L21.6773 9.11643L21.7553 9.03143C21.8667 8.8942 21.9397 8.72988 21.967 8.55523C21.9942 8.38057 21.9747 8.20181 21.9103 8.03716C21.846 7.87251 21.7392 7.72786 21.6007 7.61794C21.4623 7.50803 21.2972 7.43677 21.1223 7.41143L14.7423 6.48543L11.8903 0.70543C11.8077 0.537965 11.68 0.396945 11.5214 0.298335C11.3629 0.199724 11.1799 0.147461 10.9933 0.147461C10.8066 0.147461 10.6236 0.199724 10.4651 0.298335C10.3065 0.396945 10.1788 0.537965 10.0963 0.70543L7.24325 6.48543Z" fill="#FF4F84" />
+                                        </svg>
+                                    </span>
+                                    <span>
+                                        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M7.24325 6.48543L0.863254 7.41043L0.750254 7.43343C0.579193 7.47884 0.423249 7.56884 0.298346 7.69423C0.173444 7.81962 0.0840577 7.97592 0.0393163 8.14716C-0.00542499 8.31839 -0.00391854 8.49844 0.0436818 8.6689C0.0912821 8.83937 0.183271 8.99415 0.310254 9.11743L4.93225 13.6164L3.84225 19.9714L3.82925 20.0814C3.81878 20.2584 3.85552 20.4349 3.9357 20.5929C4.01589 20.751 4.13664 20.8849 4.28559 20.9809C4.43454 21.077 4.60634 21.1317 4.7834 21.1395C4.96046 21.1474 5.13642 21.108 5.29325 21.0254L10.9993 18.0254L16.6923 21.0254L16.7923 21.0714C16.9573 21.1364 17.1367 21.1564 17.312 21.1292C17.4873 21.102 17.6522 21.0287 17.7898 20.9167C17.9275 20.8047 18.0328 20.6582 18.0951 20.4921C18.1574 20.326 18.1743 20.1463 18.1443 19.9714L17.0533 13.6164L21.6773 9.11643L21.7553 9.03143C21.8667 8.8942 21.9397 8.72988 21.967 8.55523C21.9942 8.38057 21.9747 8.20181 21.9103 8.03716C21.846 7.87251 21.7392 7.72786 21.6007 7.61794C21.4623 7.50803 21.2972 7.43677 21.1223 7.41143L14.7423 6.48543L11.8903 0.70543C11.8077 0.537965 11.68 0.396945 11.5214 0.298335C11.3629 0.199724 11.1799 0.147461 10.9933 0.147461C10.8066 0.147461 10.6236 0.199724 10.4651 0.298335C10.3065 0.396945 10.1788 0.537965 10.0963 0.70543L7.24325 6.48543Z" fill="#FF4F84" />
+                                        </svg>
+                                    </span>
+                                    <span>
+                                        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M7.24325 6.48543L0.863254 7.41043L0.750254 7.43343C0.579193 7.47884 0.423249 7.56884 0.298346 7.69423C0.173444 7.81962 0.0840577 7.97592 0.0393163 8.14716C-0.00542499 8.31839 -0.00391854 8.49844 0.0436818 8.6689C0.0912821 8.83937 0.183271 8.99415 0.310254 9.11743L4.93225 13.6164L3.84225 19.9714L3.82925 20.0814C3.81878 20.2584 3.85552 20.4349 3.9357 20.5929C4.01589 20.751 4.13664 20.8849 4.28559 20.9809C4.43454 21.077 4.60634 21.1317 4.7834 21.1395C4.96046 21.1474 5.13642 21.108 5.29325 21.0254L10.9993 18.0254L16.6923 21.0254L16.7923 21.0714C16.9573 21.1364 17.1367 21.1564 17.312 21.1292C17.4873 21.102 17.6522 21.0287 17.7898 20.9167C17.9275 20.8047 18.0328 20.6582 18.0951 20.4921C18.1574 20.326 18.1743 20.1463 18.1443 19.9714L17.0533 13.6164L21.6773 9.11643L21.7553 9.03143C21.8667 8.8942 21.9397 8.72988 21.967 8.55523C21.9942 8.38057 21.9747 8.20181 21.9103 8.03716C21.846 7.87251 21.7392 7.72786 21.6007 7.61794C21.4623 7.50803 21.2972 7.43677 21.1223 7.41143L14.7423 6.48543L11.8903 0.70543C11.8077 0.537965 11.68 0.396945 11.5214 0.298335C11.3629 0.199724 11.1799 0.147461 10.9933 0.147461C10.8066 0.147461 10.6236 0.199724 10.4651 0.298335C10.3065 0.396945 10.1788 0.537965 10.0963 0.70543L7.24325 6.48543Z" fill="#FF4F84" />
+                                        </svg>
+                                    </span>
+                                    <span>
+                                        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M7.24325 6.48543L0.863254 7.41043L0.750254 7.43343C0.579193 7.47884 0.423249 7.56884 0.298346 7.69423C0.173444 7.81962 0.0840577 7.97592 0.0393163 8.14716C-0.00542499 8.31839 -0.00391854 8.49844 0.0436818 8.6689C0.0912821 8.83937 0.183271 8.99415 0.310254 9.11743L4.93225 13.6164L3.84225 19.9714L3.82925 20.0814C3.81878 20.2584 3.85552 20.4349 3.9357 20.5929C4.01589 20.751 4.13664 20.8849 4.28559 20.9809C4.43454 21.077 4.60634 21.1317 4.7834 21.1395C4.96046 21.1474 5.13642 21.108 5.29325 21.0254L10.9993 18.0254L16.6923 21.0254L16.7923 21.0714C16.9573 21.1364 17.1367 21.1564 17.312 21.1292C17.4873 21.102 17.6522 21.0287 17.7898 20.9167C17.9275 20.8047 18.0328 20.6582 18.0951 20.4921C18.1574 20.326 18.1743 20.1463 18.1443 19.9714L17.0533 13.6164L21.6773 9.11643L21.7553 9.03143C21.8667 8.8942 21.9397 8.72988 21.967 8.55523C21.9942 8.38057 21.9747 8.20181 21.9103 8.03716C21.846 7.87251 21.7392 7.72786 21.6007 7.61794C21.4623 7.50803 21.2972 7.43677 21.1223 7.41143L14.7423 6.48543L11.8903 0.70543C11.8077 0.537965 11.68 0.396945 11.5214 0.298335C11.3629 0.199724 11.1799 0.147461 10.9933 0.147461C10.8066 0.147461 10.6236 0.199724 10.4651 0.298335C10.3065 0.396945 10.1788 0.537965 10.0963 0.70543L7.24325 6.48543Z" fill="#FF4F84" />
+                                        </svg>
+                                    </span>
+                                </div>
                             </div>
-                            <h4>Baby Showers</h4>
-                        </a>
+                        </div>
                     </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown" data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0">
-                        <a href="#" class="collection-card card-green">
-                            <div class="card-img">
-                                <img src="{{asset('assets/front/image/collect-card2.png')}}" alt="kids-card">
-                            </div>
-                            <h4>Kids Birthdays</h4>
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown" data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0">
-                        <a href="#" class="collection-card card-red">
-                            <div class="card-img">
-                                <img src="{{asset('assets/front/image/collect-card3.png')}}" alt="collect-card">
-                            </div>
-                            <h4>Simple Designs</h4>
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown" data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0">
-                        <a href="#" class="collection-card card-green">
-                            <div class="card-img">
-                                <img src="{{asset('assets/front/image/collect-card4.png')}}" alt="collect-card">
-                            </div>
-                            <h4>Floral Delight</h4>
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown" data-wow-duration="8s" data-wow-delay="0" data-wow-offset="0">
-                        <a href="#" class="collection-card card-yellow">
-                            <div class="card-img">
-                                <img src="{{asset('assets/front/image/collect-card5.png')}}" alt="collect-card">
-                            </div>
-                            <h4>Weddings</h4>
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown" data-wow-duration="8s" data-wow-delay="0" data-wow-offset="0">
-                        <a href="#" class="collection-card card-red">
-                            <div class="card-img">
-                                <img src="{{asset('assets/front/image/collect-card6.png')}}" alt="collect-card">
-                            </div>
-                            <h4>Baby Announcements</h4>
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown" data-wow-duration="8s" data-wow-delay="0" data-wow-offset="0">
-                        <a href="#" class="collection-card card-green">
-                            <div class="card-img">
-                                <img src="{{asset('assets/front/image/collect-card7.png')}}" alt="collect-card">
-                            </div>
-                            <h4>Minimalist Bliss</h4>
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown" data-wow-duration="8s" data-wow-delay="0" data-wow-offset="0">
-                        <a href="#" class="collection-card card-blue">
-                            <div class="card-img">
-                                <img src="{{asset('assets/front/image/collect-card8.png')}}" alt="collect-card">
-                            </div>
-                            <h4>Vintage Romance</h4>
-                        </a>
+                </div>
+                <div class="col-lg-6">
+                    <div class="diff-img">
+                        <img class="wow fadeInRight" src="{{asset('assets/front/image/diff-img.png')}}" alt="diff-img" data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0">
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- ======= different-wrapper ======== -->
-        <section class="different-wrapper">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-6 mb-lg-0 mb-4">
-                        <div class="diff-content">
-                            <h2>What Makes Us Different?</h2>
-                            <p>Unlike conventional social tools that measure success by "time in app," we measure success by
-                                the quality of time spent together offline. Yesvite is designed to streamline real-world
-                                interactions. From private events to curated business events. We provide the tools you need
-                                to simplify planning, deepen relationships, and make things happen — together, in person.
-                            </p>
-                            <div class="review-wrap">
-                                <h5>“Yesvite has made planning events fun again. I especially love the event cards and event
-                                    analytics you get”</h5>
-                                <div class="author-wrapper">
-                                    <div class="author-img">
-                                        <img src="{{asset('assets/front/image/author-img.png')}}" alt="author-img">
-                                    </div>
-                                    <div class="author-name">
-                                        <h6>Sophia Korhonen</h6>
-                                        <p>Team Lead</p>
-                                    </div>
-                                    <div class="stars-points ms-auto">
-                                        <span>
-                                            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M7.24325 6.48543L0.863254 7.41043L0.750254 7.43343C0.579193 7.47884 0.423249 7.56884 0.298346 7.69423C0.173444 7.81962 0.0840577 7.97592 0.0393163 8.14716C-0.00542499 8.31839 -0.00391854 8.49844 0.0436818 8.6689C0.0912821 8.83937 0.183271 8.99415 0.310254 9.11743L4.93225 13.6164L3.84225 19.9714L3.82925 20.0814C3.81878 20.2584 3.85552 20.4349 3.9357 20.5929C4.01589 20.751 4.13664 20.8849 4.28559 20.9809C4.43454 21.077 4.60634 21.1317 4.7834 21.1395C4.96046 21.1474 5.13642 21.108 5.29325 21.0254L10.9993 18.0254L16.6923 21.0254L16.7923 21.0714C16.9573 21.1364 17.1367 21.1564 17.312 21.1292C17.4873 21.102 17.6522 21.0287 17.7898 20.9167C17.9275 20.8047 18.0328 20.6582 18.0951 20.4921C18.1574 20.326 18.1743 20.1463 18.1443 19.9714L17.0533 13.6164L21.6773 9.11643L21.7553 9.03143C21.8667 8.8942 21.9397 8.72988 21.967 8.55523C21.9942 8.38057 21.9747 8.20181 21.9103 8.03716C21.846 7.87251 21.7392 7.72786 21.6007 7.61794C21.4623 7.50803 21.2972 7.43677 21.1223 7.41143L14.7423 6.48543L11.8903 0.70543C11.8077 0.537965 11.68 0.396945 11.5214 0.298335C11.3629 0.199724 11.1799 0.147461 10.9933 0.147461C10.8066 0.147461 10.6236 0.199724 10.4651 0.298335C10.3065 0.396945 10.1788 0.537965 10.0963 0.70543L7.24325 6.48543Z" fill="#FF4F84" />
-                                            </svg>
-                                        </span>
-                                        <span>
-                                            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M7.24325 6.48543L0.863254 7.41043L0.750254 7.43343C0.579193 7.47884 0.423249 7.56884 0.298346 7.69423C0.173444 7.81962 0.0840577 7.97592 0.0393163 8.14716C-0.00542499 8.31839 -0.00391854 8.49844 0.0436818 8.6689C0.0912821 8.83937 0.183271 8.99415 0.310254 9.11743L4.93225 13.6164L3.84225 19.9714L3.82925 20.0814C3.81878 20.2584 3.85552 20.4349 3.9357 20.5929C4.01589 20.751 4.13664 20.8849 4.28559 20.9809C4.43454 21.077 4.60634 21.1317 4.7834 21.1395C4.96046 21.1474 5.13642 21.108 5.29325 21.0254L10.9993 18.0254L16.6923 21.0254L16.7923 21.0714C16.9573 21.1364 17.1367 21.1564 17.312 21.1292C17.4873 21.102 17.6522 21.0287 17.7898 20.9167C17.9275 20.8047 18.0328 20.6582 18.0951 20.4921C18.1574 20.326 18.1743 20.1463 18.1443 19.9714L17.0533 13.6164L21.6773 9.11643L21.7553 9.03143C21.8667 8.8942 21.9397 8.72988 21.967 8.55523C21.9942 8.38057 21.9747 8.20181 21.9103 8.03716C21.846 7.87251 21.7392 7.72786 21.6007 7.61794C21.4623 7.50803 21.2972 7.43677 21.1223 7.41143L14.7423 6.48543L11.8903 0.70543C11.8077 0.537965 11.68 0.396945 11.5214 0.298335C11.3629 0.199724 11.1799 0.147461 10.9933 0.147461C10.8066 0.147461 10.6236 0.199724 10.4651 0.298335C10.3065 0.396945 10.1788 0.537965 10.0963 0.70543L7.24325 6.48543Z" fill="#FF4F84" />
-                                            </svg>
-                                        </span>
-                                        <span>
-                                            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M7.24325 6.48543L0.863254 7.41043L0.750254 7.43343C0.579193 7.47884 0.423249 7.56884 0.298346 7.69423C0.173444 7.81962 0.0840577 7.97592 0.0393163 8.14716C-0.00542499 8.31839 -0.00391854 8.49844 0.0436818 8.6689C0.0912821 8.83937 0.183271 8.99415 0.310254 9.11743L4.93225 13.6164L3.84225 19.9714L3.82925 20.0814C3.81878 20.2584 3.85552 20.4349 3.9357 20.5929C4.01589 20.751 4.13664 20.8849 4.28559 20.9809C4.43454 21.077 4.60634 21.1317 4.7834 21.1395C4.96046 21.1474 5.13642 21.108 5.29325 21.0254L10.9993 18.0254L16.6923 21.0254L16.7923 21.0714C16.9573 21.1364 17.1367 21.1564 17.312 21.1292C17.4873 21.102 17.6522 21.0287 17.7898 20.9167C17.9275 20.8047 18.0328 20.6582 18.0951 20.4921C18.1574 20.326 18.1743 20.1463 18.1443 19.9714L17.0533 13.6164L21.6773 9.11643L21.7553 9.03143C21.8667 8.8942 21.9397 8.72988 21.967 8.55523C21.9942 8.38057 21.9747 8.20181 21.9103 8.03716C21.846 7.87251 21.7392 7.72786 21.6007 7.61794C21.4623 7.50803 21.2972 7.43677 21.1223 7.41143L14.7423 6.48543L11.8903 0.70543C11.8077 0.537965 11.68 0.396945 11.5214 0.298335C11.3629 0.199724 11.1799 0.147461 10.9933 0.147461C10.8066 0.147461 10.6236 0.199724 10.4651 0.298335C10.3065 0.396945 10.1788 0.537965 10.0963 0.70543L7.24325 6.48543Z" fill="#FF4F84" />
-                                            </svg>
-                                        </span>
-                                        <span>
-                                            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M7.24325 6.48543L0.863254 7.41043L0.750254 7.43343C0.579193 7.47884 0.423249 7.56884 0.298346 7.69423C0.173444 7.81962 0.0840577 7.97592 0.0393163 8.14716C-0.00542499 8.31839 -0.00391854 8.49844 0.0436818 8.6689C0.0912821 8.83937 0.183271 8.99415 0.310254 9.11743L4.93225 13.6164L3.84225 19.9714L3.82925 20.0814C3.81878 20.2584 3.85552 20.4349 3.9357 20.5929C4.01589 20.751 4.13664 20.8849 4.28559 20.9809C4.43454 21.077 4.60634 21.1317 4.7834 21.1395C4.96046 21.1474 5.13642 21.108 5.29325 21.0254L10.9993 18.0254L16.6923 21.0254L16.7923 21.0714C16.9573 21.1364 17.1367 21.1564 17.312 21.1292C17.4873 21.102 17.6522 21.0287 17.7898 20.9167C17.9275 20.8047 18.0328 20.6582 18.0951 20.4921C18.1574 20.326 18.1743 20.1463 18.1443 19.9714L17.0533 13.6164L21.6773 9.11643L21.7553 9.03143C21.8667 8.8942 21.9397 8.72988 21.967 8.55523C21.9942 8.38057 21.9747 8.20181 21.9103 8.03716C21.846 7.87251 21.7392 7.72786 21.6007 7.61794C21.4623 7.50803 21.2972 7.43677 21.1223 7.41143L14.7423 6.48543L11.8903 0.70543C11.8077 0.537965 11.68 0.396945 11.5214 0.298335C11.3629 0.199724 11.1799 0.147461 10.9933 0.147461C10.8066 0.147461 10.6236 0.199724 10.4651 0.298335C10.3065 0.396945 10.1788 0.537965 10.0963 0.70543L7.24325 6.48543Z" fill="#FF4F84" />
-                                            </svg>
-                                        </span>
-                                        <span>
-                                            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M7.24325 6.48543L0.863254 7.41043L0.750254 7.43343C0.579193 7.47884 0.423249 7.56884 0.298346 7.69423C0.173444 7.81962 0.0840577 7.97592 0.0393163 8.14716C-0.00542499 8.31839 -0.00391854 8.49844 0.0436818 8.6689C0.0912821 8.83937 0.183271 8.99415 0.310254 9.11743L4.93225 13.6164L3.84225 19.9714L3.82925 20.0814C3.81878 20.2584 3.85552 20.4349 3.9357 20.5929C4.01589 20.751 4.13664 20.8849 4.28559 20.9809C4.43454 21.077 4.60634 21.1317 4.7834 21.1395C4.96046 21.1474 5.13642 21.108 5.29325 21.0254L10.9993 18.0254L16.6923 21.0254L16.7923 21.0714C16.9573 21.1364 17.1367 21.1564 17.312 21.1292C17.4873 21.102 17.6522 21.0287 17.7898 20.9167C17.9275 20.8047 18.0328 20.6582 18.0951 20.4921C18.1574 20.326 18.1743 20.1463 18.1443 19.9714L17.0533 13.6164L21.6773 9.11643L21.7553 9.03143C21.8667 8.8942 21.9397 8.72988 21.967 8.55523C21.9942 8.38057 21.9747 8.20181 21.9103 8.03716C21.846 7.87251 21.7392 7.72786 21.6007 7.61794C21.4623 7.50803 21.2972 7.43677 21.1223 7.41143L14.7423 6.48543L11.8903 0.70543C11.8077 0.537965 11.68 0.396945 11.5214 0.298335C11.3629 0.199724 11.1799 0.147461 10.9933 0.147461C10.8066 0.147461 10.6236 0.199724 10.4651 0.298335C10.3065 0.396945 10.1788 0.537965 10.0963 0.70543L7.24325 6.48543Z" fill="#FF4F84" />
-                                            </svg>
-                                        </span>
-                                    </div>
-                                </div>
+
+    <section class="landing-footer">
+        <div class="container-fluid">
+            <div class="platform-wrp">
+                <div class="row">
+                    <div class="col-lg-7 mb-lg-0 mb-4">
+                        <div class="platform-content">
+                            <h2>The best platform to manage all your events</h2>
+                            <p>Customizable Designs to Reflect Your Unique Event</p>
+                            <div class="app-store d-flex gap-2">
+                                <a href="#" class="google-app">
+                                    <img src="{{asset('assets/front/image/google-app.png')}}" alt="google-app">
+                                </a>
+                                <a href="#" class="mobile-app">
+                                    <img src="{{asset('assets/front/image/mobile-app.png')}}" alt="mobile-app">
+                                </a>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6">
-                        <div class="diff-img">
-                            <img class="wow fadeInRight" src="{{asset('assets/front/image/diff-img.png')}}" alt="diff-img" data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
-        <section class="landing-footer">
-            <div class="container-fluid">
-                <div class="platform-wrp">
-                    <div class="row">
-                        <div class="col-lg-7 mb-lg-0 mb-4">
-                            <div class="platform-content">
-                                <h2>The best platform to manage all your events</h2>
-                                <p>Customizable Designs to Reflect Your Unique Event</p>
-                                <div class="app-store d-flex gap-2">
-                                    <a href="#" class="google-app">
-                                        <img src="{{asset('assets/front/image/google-app.png')}}" alt="google-app">
-                                    </a>
-                                    <a href="#" class="mobile-app">
-                                        <img src="{{asset('assets/front/image/mobile-app.png')}}" alt="mobile-app">
-                                    </a>
+                    <div class="col-lg-5">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                                <div class="platform-img">
+                                    <img src="{{asset('assets/front/image/platform-img1.png')}}" alt="platform-img">
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-5">
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-6">
-                                    <div class="platform-img">
-                                        <img src="{{asset('assets/front/image/platform-img1.png')}}" alt="platform-img">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-6">
-                                    <div class="platform-img"></div>
-                                    <img src="{{asset('assets/front/image/platform-img2.png')}}" alt="platform-img">
-                                </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                                <div class="platform-img"></div>
+                                <img src="{{asset('assets/front/image/platform-img2.png')}}" alt="platform-img">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- <div class="footer-content d-flex justify-content-between">
+        </div>
+        <!-- <div class="footer-content d-flex justify-content-between">
                 <a href="" class="footer-logo">
                     <svg width="129" height="36" viewBox="0 0 129 36" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M8.86965 6.81981H8.48313C8.25473 6.80224 8.35136 6.58262 8.35136 6.58262C8.5007 6.23124 8.6149 6.09947 8.43042 5.95013C8.0966 5.68659 7.8155 5.3967 7.5871 5.08924C6.42753 3.52558 6.71742 1.58418 7.79793 0.837483C8.42163 0.407037 9.33524 0.407037 9.95894 0.837483C11.0395 1.58418 11.3206 3.52558 10.1698 5.08924C9.94137 5.3967 9.66905 5.68659 9.32645 5.95013C9.13319 6.09947 9.25617 6.22245 9.40551 6.58262C9.40551 6.58262 9.50214 6.79345 9.27374 6.81981H8.88722H8.86965Z" fill="#ECB015"/>
@@ -772,6 +771,5 @@
                     </ul>
                 </div>
             </div> -->
-            </div>
-        </section>
-    </main>
+        </div>
+    </section>
