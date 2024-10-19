@@ -12396,11 +12396,14 @@ class ApiControllerv3 extends Controller
 
             if (isset($input['device_type']) && $input['device_type'] == 'ios') {
                 $responce =  $this->set_apple_iap($purchaseToken);
-                dd($responce);
+                $order_id = '';
+                $productID = '';
                 if (isset($responce->latest_receipt_info[0]->expires_date_ms)) {
                     foreach ($responce->latest_receipt_info as $key => $value) {
                         if (isset($value->expires_date_ms) && $value->expires_date_ms != null && date('Y-m-d H:i', ($value->expires_date_ms /  1000)) >= date('Y-m-d H:i')) {
                             $enddate =  date('Y-m-d H:i:s', ($value->expires_date_ms /  1000));
+                            $order_id = (isset($value->transaction_id) && $value->transaction_id != null)?$value->transaction_id:'';
+                            $productID = (isset($value->product_id) && $value->product_id != null)?$value->product_id:'';
                         }
                     }
                 } else {
@@ -12413,15 +12416,16 @@ class ApiControllerv3 extends Controller
                     $new_subscription->packageName = $input['packageName'];
                     $new_subscription->startDate = now();
                     $new_subscription->endDate = $enddate;
+                    $new_subscription->orderId = $order_id;
                     $new_subscription->type = 'subscribe';
                     $new_subscription->purchaseToken = $input['purchaseToken'];
                     $new_subscription->device_type = $input['device_type'];
+                    $new_subscription->price = 150;
+                    $new_subscription->productId = $productID;
 
                     // $new_subscription->orderId = $input['orderId'];
                     // $new_subscription->priceCurrencyCode = $responce['priceCurrencyCode'];
-                    // $new_subscription->price = $responce['priceAmountMicros'];
                     // $new_subscription->countryCode = $responce['countryCode'];
-                    // $new_subscription->productId = $input['productId'];
                     $new_subscription->save();
 
                     return response()->json(['status' => 1, 'message' => "subscription sucessfully"]);
