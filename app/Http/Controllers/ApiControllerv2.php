@@ -5479,7 +5479,7 @@ class ApiControllerv2 extends Controller
                         'post_id' => ""
                     ];
 
-                    // sendNotification('invite', $notificationParam);
+                    sendNotification('invite', $notificationParam);
                 }
                 if ($checkUserInvited->is_draft_save == '0') {
                     $notificationParam = [
@@ -5487,7 +5487,7 @@ class ApiControllerv2 extends Controller
                         'event_id' => $input['event_id'],
                         'post_id' => ""
                     ];
-                    // sendNotification('owner_notify', $notificationParam);
+                    sendNotification('owner_notify', $notificationParam);
                 }
             }
             return response()->json(['status' => 1, 'message' => "Event images stored successfully"]);
