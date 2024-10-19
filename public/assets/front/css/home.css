@@ -1,10 +1,4 @@
 /* =========== banner-wrapper ============= */
-html,
-body,
-main {
-    height: 100%;
-}
-
 .banner-wrapper {
     padding: 48px 0 0;
     border-radius: 35px;
