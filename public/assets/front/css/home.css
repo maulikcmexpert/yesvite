@@ -1,5 +1,6 @@
 /* =========== banner-wrapper ============= */
 html,
+body,
 main {
     height: -webkit-fill-available;
 }
