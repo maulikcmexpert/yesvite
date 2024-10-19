@@ -12742,17 +12742,13 @@ class ApiControllerv3 extends Controller
         if ($usercreatedList) {
             foreach ($usercreatedList as $value) {
                 $eventDetail['id'] = $value->id;
-
                 $eventDetail['event_name'] = $value->event_name;
                 $eventDetail['is_event_owner'] = ($value->user->id == $user->id) ? 1 : 0;
                 $isCoHost =     EventInvitedUser::where(['event_id' => $value->id, 'user_id' => $user->id])->first();
                 $eventDetail['is_notification_on_off']  = "";
                 if ($value->user->id == $user->id) {
-
                     $eventDetail['is_notification_on_off'] =  $value->notification_on_off;
                 } else {
-
-
                     $eventDetail['is_notification_on_off'] =  $isCoHost->notification_on_off;
                 }
                 $eventDetail['is_co_host'] = "0";
@@ -12763,16 +12759,11 @@ class ApiControllerv3 extends Controller
                 $eventDetail['event_wall'] = $value->event_settings->event_wall;
                 $eventDetail['guest_list_visible_to_guests'] = $value->event_settings->guest_list_visible_to_guests;
                 $eventDetail['event_potluck'] = $value->event_settings->podluck;
-
-
                 $eventDetail['guest_pending_count'] = getGuestRsvpPendingCount($value->id);
                 $eventDetail['adult_only_party'] = $value->event_settings->adult_only_party;
                 $eventDetail['post_time'] =  $this->setpostTime($value->updated_at);
-
-
                 $rsvp_status = "";
                 $checkUserrsvp = EventInvitedUser::whereHas('user', function ($query) {
-
                     $query->where('app_user', '1');
                 })->where(['user_id' => $user->id, 'event_id' => $value->id])->first();
 
