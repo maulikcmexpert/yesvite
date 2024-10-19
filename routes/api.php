@@ -346,7 +346,7 @@ Route::prefix('user/v3/')->middleware('checkUser')->group(function () {
     Route::post('notification_on_off', [ApiControllerv3::class, 'notificationOnOff']);
     Route::post('add_subscription', [ApiControllerv3::class, 'addSubscription']);
     Route::post('add_product_subscription', [ApiControllerv3::class, 'addProductSubscription']);
-    Route::get('check_subscription', [ApiControllerv3::class, 'checkSubscription']);
+    Route::post('check_subscription', [ApiControllerv3::class, 'checkSubscription']);
 
 
 
