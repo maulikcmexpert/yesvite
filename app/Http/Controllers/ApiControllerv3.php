@@ -12539,7 +12539,6 @@ class ApiControllerv3 extends Controller
                 $new_subscription->packageName = $input['packageName'];
                 $new_subscription->countryCode = $responce['regionCode'];
                 $new_subscription->startDate = $startDate;
-    
                 $new_subscription->productId = $input['productId'];
                 $new_subscription->type = 'product';
                 $new_subscription->purchaseToken = $input['purchaseToken'];
