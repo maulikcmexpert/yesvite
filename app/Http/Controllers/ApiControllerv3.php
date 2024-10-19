@@ -12582,7 +12582,7 @@ class ApiControllerv3 extends Controller
             $purchaseToken = $userSubscription->purchaseToken;
             if($userSubscription->device_type == 'ios'){
                 $responce =  $this->set_apple_iap($purchaseToken);
-                dd($responce);
+                // dd($responce);
                 foreach ($responce->latest_receipt_info as $key => $value) {
                     if(isset($value->expires_date_ms) && $value->expires_date_ms != null && date('Y-m-d H:i', ($value->expires_date_ms /  1000)) >= date('Y-m-d H:i') ){
                      // print_r($value->expires_date_ms);die;
