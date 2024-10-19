@@ -1,7 +1,10 @@
 /* =========== banner-wrapper ============= */
 html,
-body,
 main {
+    height: 100%;
+}
+
+body {
     height: -webkit-fill-available;
 }
 
