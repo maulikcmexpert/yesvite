@@ -12400,6 +12400,7 @@ class ApiControllerv3 extends Controller
                 $productID = '';
                 if (isset($responce->latest_receipt_info[0]->expires_date_ms)) {
                     foreach ($responce->latest_receipt_info as $key => $value) {
+                        $enddate = date('Y-m-d H:i:s', strtotime("-1 days"));
                         if (isset($value->expires_date_ms) && $value->expires_date_ms != null && date('Y-m-d H:i', ($value->expires_date_ms /  1000)) >= date('Y-m-d H:i')) {
                             $enddate =  date('Y-m-d H:i:s', ($value->expires_date_ms /  1000));
                             $order_id = (isset($value->transaction_id) && $value->transaction_id != null)?$value->transaction_id:'';
