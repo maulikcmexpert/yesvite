@@ -95,7 +95,7 @@ $(document).on("click", ".design-card", function() {
             isStatic: true,
             angle: element?.rotation ? element?.rotation : 0
         });
-        switch (element.text) {
+        switch (element.text.toLowerCase()) {
             case "event_name":
                 if (eventData.event_name) {
                     textElement.set({
@@ -114,7 +114,7 @@ $(document).on("click", ".design-card", function() {
                     return; // Skip adding the element if host_name is empty
                 }
                 break;
-            case "Location":
+            case "location":
                 if (eventData.event_location) {
                     textElement.set({
                         text: eventData.event_location
@@ -549,7 +549,7 @@ function bindData() {
                         mr: true   // Show middle right control
                     });
 
-                    switch (element.text) {
+                    switch (element.text.toLowerCase()) {
                         case "event_name":
                             if (eventData.event_name) {
                                 let textWidth = getWidth(
@@ -578,7 +578,7 @@ function bindData() {
                                 return; // Skip adding the element if host_name is empty
                             }
                             break;
-                        case "Location":
+                        case "location":
                             if (eventData.event_location) {
                                 let textWidth = getWidth(
                                     element,
