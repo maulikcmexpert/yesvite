@@ -12490,10 +12490,10 @@ class ApiControllerv3 extends Controller
 
         $validator = Validator::make($input, [
 
-            'orderId' => 'required',
+            // 'orderId' => 'required',
             'packageName' => 'required',
-            'productId' => 'required',
-            'purchaseTime' => 'required',
+            // 'productId' => 'required',
+            // 'purchaseTime' => 'required',
             'purchaseToken' => 'required|string',
             'event_id' => 'required'
         ]);
@@ -12510,26 +12510,40 @@ class ApiControllerv3 extends Controller
 
 
         try {
-            $app_id = $input['packageName'];
-            $product_id = $input['productId'];
             $user_id = $this->user->id;
             $purchaseToken = $input['purchaseToken'];
-
-            $responce =  $this->set_android_iap($app_id, $product_id, $purchaseToken, 'product');
-            if (!isset($responce['purchaseTimeMillis'])) {
-                return response()->json(['status' => 0, 'message' => 'Refresh token expired']);
+            if (isset($input['device_type']) && $input['device_type'] == 'ios') {
+                $startDate = date('Y-m-d H:i:s');
+                $new_subscription = new UserSubscription();
+                $new_subscription->user_id = $user_id;
+                $new_subscription->packageName = $input['packageName'];
+                $new_subscription->startDate = $startDate;
+                $new_subscription->device_type = 'ios';
+                $new_subscription->type = 'product';
+                $new_subscription->purchaseToken = $input['purchaseToken'];
+                // $new_subscription->orderId = $input['orderId'];
+                // $new_subscription->countryCode = $responce['regionCode'];
+                // $new_subscription->productId = $input['productId'];
+            }else{
+                $app_id = $input['packageName'];
+                $product_id = $input['productId'];
+                $responce =  $this->set_android_iap($app_id, $product_id, $purchaseToken, 'product');
+                if (!isset($responce['purchaseTimeMillis'])) {
+                    return response()->json(['status' => 0, 'message' => 'Refresh token expired']);
+                }
+                $startDate = date('Y-m-d H:i:s', ($responce['purchaseTimeMillis'] / 1000));
+                $new_subscription = new UserSubscription();
+                $new_subscription->user_id = $user_id;
+                $new_subscription->orderId = $input['orderId'];
+                $new_subscription->packageName = $input['packageName'];
+                $new_subscription->countryCode = $responce['regionCode'];
+                $new_subscription->startDate = $startDate;
+    
+                $new_subscription->productId = $input['productId'];
+                $new_subscription->type = 'product';
+                $new_subscription->purchaseToken = $input['purchaseToken'];
             }
-            $startDate = date('Y-m-d H:i:s', ($responce['purchaseTimeMillis'] / 1000));
-            $new_subscription = new UserSubscription();
-            $new_subscription->user_id = $user_id;
-            $new_subscription->orderId = $input['orderId'];
-            $new_subscription->packageName = $input['packageName'];
-            $new_subscription->countryCode = $responce['regionCode'];
-            $new_subscription->startDate = $startDate;
 
-            $new_subscription->productId = $input['productId'];
-            $new_subscription->type = 'product';
-            $new_subscription->purchaseToken = $input['purchaseToken'];
             if ($new_subscription->save()) {
                 // Event::where('id', $input['event_id'])
                 //     ->update([
