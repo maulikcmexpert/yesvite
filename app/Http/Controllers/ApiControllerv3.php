@@ -12495,7 +12495,8 @@ class ApiControllerv3 extends Controller
             // 'productId' => 'required',
             // 'purchaseTime' => 'required',
             'purchaseToken' => 'required|string',
-            'event_id' => 'required'
+            'event_id' => 'required',
+            'subscription_invite_count' => 'required'
         ]);
 
 
@@ -12557,7 +12558,7 @@ class ApiControllerv3 extends Controller
                     $updateEvent->is_draft_save = '0';
                     $updateEvent->product_payment_id = $new_subscription->id;
                     if ($updateEvent->subscription_plan_name != 'Free') {
-                        $updateEvent->subscription_invite_count = $updateEvent->subscription_invite_count + $invite_count;
+                        $updateEvent->subscription_invite_count = $updateEvent->subscription_invite_count + (int)$invite_count;
                     } else {
                         $updateEvent->subscription_invite_count = $invite_count;
                     }
