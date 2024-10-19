@@ -5,10 +5,6 @@ main {
     height: 100%;
 }
 
-html {
-    overflow-y: scroll;
-}
-
 .banner-wrapper {
     padding: 48px 0 0;
     border-radius: 35px;
