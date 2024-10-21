@@ -9,6 +9,8 @@ use App\Models\User;
 class Device extends Model
 {
     use HasFactory;
+    protected $fillable = ['device_token', 'model']; // Add 'model' to fillable attributes
+
 
     public function user()
     {
