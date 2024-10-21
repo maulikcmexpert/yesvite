@@ -593,6 +593,7 @@ table.table tbody tr{
 
 .content-wrapper {
     padding-top: 10px;
+    min-height: 900px !important;
 }
 .small-box>.inner {
     padding: 20px;
