@@ -4427,6 +4427,9 @@ class ApiControllerv2 extends Controller
                 if ($updateEvent->is_draft_save != '0') {
                     $updateEvent->is_draft_save = $eventData['is_draft_save'];
                 }
+                if(isset($eventData['subscription_plan_name']) && $eventData['subscription_plan_name'] == 'Pro-Year'){
+                    $updateEvent->is_draft_save = $eventData['is_draft_save'];
+                }
                 $updateEvent->subscription_plan_name = (!empty($eventData['subscription_plan_name'])) ? $eventData['subscription_plan_name'] : "";
                 if (isset($eventData['static_information']) && $eventData['static_information'] != '') {
                     $updateEvent->static_information = $eventData['static_information'];
