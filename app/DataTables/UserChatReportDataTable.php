@@ -33,16 +33,21 @@ class UserChatReportDataTable extends DataTable
                 return $counter++;
             })
             ->filter(function ($query) {
-                if ($this->request->has('search')) {
-                    $keyword = $this->request->get('search');
-                    $keyword = $keyword['value'];
+                $search = $this->request->get('search');
+                $keyword = $search['value'] ?? null;
+    
+                if (!empty($keyword)) {
                     $query->where(function ($q) use ($keyword) {
-                        $q->whereHas('users', function ($q) use ($keyword) {
+                        $q->whereHas('reporter_user', function ($q) use ($keyword) {
                             $q->where('firstname', 'LIKE', "%{$keyword}%")
-                                ->orWhere('lastname', 'LIKE', "%{$keyword}%");
-                        })->orWhereHas('events', function ($q) use ($keyword) {
-                            $q->where('event_name', 'LIKE', "%{$keyword}%");
-                        });
+                              ->orWhere('lastname', 'LIKE', "%{$keyword}%");
+                        })
+                        ->orWhereHas('to_reporter_user', function ($q) use ($keyword) {
+                            $q->where('firstname', 'LIKE', "%{$keyword}%")
+                              ->orWhere('lastname', 'LIKE', "%{$keyword}%");
+                        })
+                        ->orWhere('report_type', 'LIKE', "%{$keyword}%")
+                        ->orWhere('report_description', 'LIKE', "%{$keyword}%");
                     });
                 }
             })
