@@ -1284,33 +1284,39 @@ function adminNotification($notificationType, $postData)
             $userEmails = [];
             $userDataList = [];
 
-            $users = User::select('firstname','email')->where('email','!=',null)
-                ->get();
+            // $users = User::select('firstname','email')->where('email','!=',null)
+                // ->get();
                 // SendBroadcastEmailJob::dispatch('vimal.cmexpertise@gmail.com', 'This is test mail from yesvite support team');
-                
-                $batchSize = 30; 
-                $usersChunked = array_chunk($users->toArray(), $batchSize); 
-                foreach ($usersChunked as $userBatch) {
-                    foreach ($userBatch as $user) {
-                        try {
-                            $details = [
-                                'subject' => 'Send Broadcast Mail',
-                                'message' => $postData['message'],
-                            ];
-                            $email = $user['email'];  
-                            $message = $postData['message'];
-                            
-                            if (!empty($email)) {
-                                SendBroadcastEmailJob::dispatch($email, $message);
-                            }
+                $users = User::select('email')->whereNotNull('email')->get();
+                $emails = $users->pluck('email')->toArray();
+                $message = $postData['message'];
+
+                try {
+                    SendBroadcastEmailJob::dispatch($emails, $message);
                         } catch (\Exception $e) {
                            dd($e->getMessage());
                             return response()->json(['error' => 'Failed to send emails.'], 500);
                         }
-                    }
+
+                    // foreach ($users as $user) {
+                    //     try {
+                    //         $details = [
+                    //             'subject' => 'Send Broadcast Mail',
+                    //             'message' => $postData['message'],
+                    //         ];
+                    //         $email = $user['email'];  
+                            
+                    //         if (!empty($email)) {
+                    //             SendBroadcastEmailJob::dispatch($email, $message);
+                    //         }
+                    //     } catch (\Exception $e) {
+                    //        dd($e->getMessage());
+                    //         return response()->json(['error' => 'Failed to send emails.'], 500);
+                    //     }
+                    // }
                 
-                    sleep(2); // Delay for 2 seconds before processing the next batch
-                }
+                    // sleep(1); // Delay for 2 seconds before processing the next batch
+                
 
         
            

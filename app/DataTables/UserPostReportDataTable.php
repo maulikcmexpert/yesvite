@@ -56,7 +56,13 @@ class UserPostReportDataTable extends DataTable
 
                 return $row->users->firstname . ' ' . $row->users->lastname;
             })
+            ->addColumn('report_type', function ($row) {
 
+                return $row->report_type;
+            }) ->addColumn('report_description', function ($row) {
+
+                return $row->report_description;
+            })
             ->addColumn('event_name', function ($row) {
 
                 return $row->events->event_name;
@@ -94,7 +100,7 @@ class UserPostReportDataTable extends DataTable
                 return $actionBtn;
             })
 
-            ->rawColumns(['number', 'username', 'event_name', 'post_type', 'action']);
+            ->rawColumns(['number', 'username','report_type','report_description','event_name', 'post_type', 'action']);
     }
 
     /**
@@ -136,6 +142,8 @@ class UserPostReportDataTable extends DataTable
         return [
             Column::make('no')->title('No')->render('meta.row + meta.settings._iDisplayStart + 1;'),
             Column::make('username')->title('Username(Reported By)'),
+            Column::make('report_type')->title('Report Type'),
+            Column::make('report_description')->title('Report Description'),
             Column::make('event_name')->title("Event Name"),
             Column::make('post_type')->title("Post Type"),
             Column::make('action')->title("Action"),
