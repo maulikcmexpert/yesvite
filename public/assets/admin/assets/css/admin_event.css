@@ -1193,7 +1193,9 @@
     justify-content: center;
     gap: 20px;
 }
-
+.report-description-td{
+    word-break: break-all;
+}
 @media only screen and (min-width: 1800px) and (max-width: 3000px) {
     .image-edit-inner-img {
         width: 345px;
