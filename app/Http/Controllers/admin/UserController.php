@@ -167,11 +167,21 @@ class UserController extends Controller
                 'password_updated_date' => Carbon::now()->format('Y-m-d'),
             ];
 
+            
             if (!empty($request['phone_number'])) {
                 $data['phone_number'] = $request['phone_number'];
             }
             $addUser = User::create($data);
 
+            $userData = [
+                'username' => $request['firstname'] . ' ' . $request['lastname'],
+                'email' => $request['email'],
+            ];
+            
+            Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($request) {
+                $message->to($request['email']);
+                $message->subject('Verify your Yesvite email address');
+            });
 
             DB::commit();
             $this->addInFirebase($addUser->id);
