@@ -127,9 +127,9 @@ class ProfessionalUserDataTable extends DataTable
     {
         return [
             Column::make('no')->title('#')->render('meta.row + meta.settings._iDisplayStart + 1;')->orderable(true),
-            Column::make('profile'),
-            Column::make('username'),
-            Column::make('app_user')->title('App User'),
+            Column::make('profile')->orderable(true),
+            Column::make('username')->orderable(true),
+            Column::make('app_user')->title('App User')->orderable(true),
         ];
     }
 
