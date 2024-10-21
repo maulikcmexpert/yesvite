@@ -28,16 +28,16 @@ class UserResendEmailVerifyDataTable extends DataTable
             ->addColumn('no', function () use (&$counter) {
                 return $counter++;
             })
-            // ->filter(function ($query) {
-            //     if ($this->request->has('search')) {
-            //         $keyword = $this->request->get('search');
-            //         $keyword = $keyword['value'];
-            //         $query->where(function ($q) use ($keyword) {
-            //             $q->where('firstname', 'LIKE', "%{$keyword}%")
-            //                 ->orWhere('lastname', 'LIKE', "%{$keyword}%");
-            //         });
-            //     }
-            // })
+            ->filter(function ($query) {
+                if ($this->request->has('search')) {
+                    $keyword = $this->request->get('search');
+                    $keyword = $keyword['value'];
+                    $query->where(function ($q) use ($keyword) {
+                        $q->where('firstname', 'LIKE', "%{$keyword}%")
+                            ->orWhere('lastname', 'LIKE', "%{$keyword}%");
+                    });
+                }
+            })
             ->addColumn('profile', function ($row) {
 
                 if (trim($row->profile) != "" || trim($row->profile) != NULL) {
