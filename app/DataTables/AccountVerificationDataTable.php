@@ -67,6 +67,9 @@ class AccountVerificationDataTable extends DataTable
             ->addColumn('username', function ($row) {
                 return $row->firstname . ' ' . $row->lastname;
             })
+            ->addColumn('email', function ($row) {
+                return $row->email;
+            })
             ->addColumn('action', function ($row) {
                 $cryptId = encrypt($row->id);
                 $edit_url = route('account_verification.edit', $cryptId);
@@ -84,7 +87,7 @@ class AccountVerificationDataTable extends DataTable
             
 
             // <a class="" href="' . $edit_url . '" title="Edit"><i class="fa fa-edit"></i></a>
-            ->rawColumns(['profile','username','action']);
+            ->rawColumns(['profile','username','email','action']);
     }
 
 
@@ -125,8 +128,9 @@ class AccountVerificationDataTable extends DataTable
     {
         return [
             Column::make('no')->title('#')->render('meta.row + meta.settings._iDisplayStart + 1;'),
-            Column::make('profile'),
-            Column::make('username'),
+            Column::make('profile')->title('Profile'),
+            Column::make('username')->title('Username'),
+            Column::make('email')->title('Email'),
             Column::make('action')->title('Action'),
         ];
     }
