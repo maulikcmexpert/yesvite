@@ -32,9 +32,20 @@ class UserResendEmailVerifyDataTable extends DataTable
                 if ($this->request->has('search')) {
                     $keyword = $this->request->get('search');
                     $keyword = $keyword['value'];
-                    $query->where(function ($q) use ($keyword) {
-                        $q->where('firstname', 'LIKE', "%{$keyword}%")
-                            ->orWhere('lastname', 'LIKE', "%{$keyword}%");
+            
+                    // Split the keyword by spaces
+                    $nameParts = explode(' ', $keyword);
+            
+                    $query->where(function ($q) use ($nameParts) {
+                        if (count($nameParts) === 2) {
+                            // If there are two parts, assume it's first name and last name
+                            $q->where('firstname', 'LIKE', "%{$nameParts[0]}%")
+                              ->where('lastname', 'LIKE', "%{$nameParts[1]}%");
+                        } else {
+                            // If only one part, search both firstname and lastname individually
+                            $q->where('firstname', 'LIKE', "%{$nameParts[0]}%")
+                              ->orWhere('lastname', 'LIKE', "%{$nameParts[0]}%");
+                        }
                     });
                 }
             })
