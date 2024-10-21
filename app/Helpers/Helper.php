@@ -1247,23 +1247,25 @@ function adminNotification($notificationType, $postData)
             // }
 
 
-             foreach ($users as $user) {
+            foreach ($users as $user) {
                 $deviceData = Device::where('user_id', $user->id)->first();
-
-                if ($deviceData && !empty($deviceData->device_token)) {
-
-                $notificationData = [
-                    'message' => $message,
-                    'type' => $notificationType,
-                ];
-                $deviceTokens[] = $deviceData->device_token;
-                // $randomString = Str::random(30);
             
+                if ($deviceData && !empty($deviceData->device_token)) {
+                    $notificationData = [
+                        'message' => $message,
+                        'type' => $notificationType,
+                    ];
+            
+                    // Send the notification to the current user
+                                try {
 
-                // Send the notification to the current user
-                send_notification_FCM_and($deviceData->device_token, $notificationData);
+                    send_notification_FCM_and($deviceData->device_token, $notificationData);
+                    } catch (\Exception $e) {
+                dd($e->getMessage());
+                return response()->json(['error' => 'Failed to send emails.'], 500);
             }
-        }
+                }
+            }
         } catch (\Exception $e) {
             return response()->json(['error' => 'Failed to send emails.'], 500);
         }
