@@ -49,6 +49,17 @@ class ProfessionalUserDataTable extends DataTable
                         }
                     });
                 }
+                if ($this->request->has('order')) {
+                    $order = $this->request->get('order')[0]; // Get the first order column
+                    $columnIndex = $order['column']; // The index of the column to order
+                    $direction = $order['dir']; // The direction of the order (asc or desc)
+                
+                    $columns = ['no','profile','username','app_user']; // Adjust according to your columns
+                
+                    if (isset($columns[$columnIndex])) {
+                        $query->orderBy($columns[$columnIndex], $direction);
+                    }
+                }
             })
             
             ->addColumn('profile', function ($row) {
