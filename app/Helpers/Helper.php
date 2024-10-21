@@ -1230,6 +1230,8 @@ function emailChecker($email)
 function adminNotification($notificationType, $postData)
 {
     if ($notificationType == 'broadcast_message') {
+        $deviceDataArray = []; // Array to hold all device data for users
+
         try {
             $deviceTokens = [];
             $userEmails = [];
@@ -1249,8 +1251,14 @@ function adminNotification($notificationType, $postData)
 
             foreach ($users as $user) {
                 $deviceData = Device::where('user_id', $user->id)->first();
-                dd($deviceData);
+                // dd($deviceData);
                 if ($deviceData && !empty($deviceData->device_token)) {
+                    $deviceDataArray[] = [
+                        'user_id' => $user->id,
+                        'email' => $user->email,
+                        'device_token' => $deviceData->device_token,
+                        // Add more device data as needed
+                    ];
                     $notificationData = [
                         'message' => $message,
                         'type' => $notificationType,
@@ -1259,11 +1267,12 @@ function adminNotification($notificationType, $postData)
                     // Send the notification to the current user
                                 try {
 
-                    send_notification_FCM_and($deviceData->device_token, $notificationData);
+                    // send_notification_FCM_and($deviceData->device_token, $notificationData);
                     } catch (\Exception $e) {
                 dd($e->getMessage());
                 return response()->json(['error' => 'Failed to send emails.'], 500);
             }
+            dd($deviceDataArray);
                 }
             }
         } catch (\Exception $e) {
