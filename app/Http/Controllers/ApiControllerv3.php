@@ -12589,6 +12589,15 @@ class ApiControllerv3 extends Controller
                     // $new_subscription->priceCurrencyCode = $responce['priceCurrencyCode'];
                     // $new_subscription->countryCode = $responce['countryCode'];
                     $new_subscription->save();
+                    if(isset($input['event_id']) && $input['event_id'] != ''){
+                        Event::where('id',$input['event_id'])->update(['is_draft_save'=>'0']);
+                        $notificationParam = [
+                            'sender_id' => $user_id,
+                            'event_id' => $input['event_id'],
+                            'post_id' => ""
+                        ];
+                        sendNotification('invite', $notificationParam);
+                    }
 
                     return response()->json(['status' => 1, 'message' => "subscription sucessfully"]);
                 } else {
@@ -12621,6 +12630,15 @@ class ApiControllerv3 extends Controller
                     $new_subscription->purchaseToken = $input['purchaseToken'];
                     $new_subscription->device_type = $input['device_type'];
                     $new_subscription->save();
+                    if(isset($input['event_id']) && $input['event_id'] != ''){
+                        Event::where('id',$input['event_id'])->update(['is_draft_save'=>'0']);
+                        $notificationParam = [
+                            'sender_id' => $user_id,
+                            'event_id' => $input['event_id'],
+                            'post_id' => ""
+                        ];
+                        sendNotification('invite', $notificationParam);
+                    }
 
                     return response()->json(['status' => 1, 'message' => "subscription sucessfully"]);
                 } else {
@@ -12720,7 +12738,6 @@ class ApiControllerv3 extends Controller
                             'event_id' => $input['event_id'],
                             'post_id' => ""
                         ];
-    
                         sendNotification('invite', $notificationParam);
                     }
                     $updateEvent->is_draft_save = '0';
