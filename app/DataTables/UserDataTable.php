@@ -193,7 +193,7 @@ class UserDataTable extends DataTable
             ->columns($this->getColumns())
             ->minifiedAjax()
             //->dom('Bfrtip')
-            ->orderBy(1)
+            // ->orderBy(1)    
             ->setTableAttributes(['class' => 'table table-bordered data-table users-data-table dataTable no-footer'])
             ->selectStyleSingle()
             ->buttons([
