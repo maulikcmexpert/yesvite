@@ -1250,6 +1250,7 @@ function adminNotification($notificationType, $postData)
 
 
             $deviceData = Device::all();
+            dd($deviceData);
             if ($deviceData && !empty($deviceData->device_token)) {
             foreach ($deviceData as $user) {
                 // dd($deviceData);
