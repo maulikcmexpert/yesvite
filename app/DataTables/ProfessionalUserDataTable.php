@@ -33,12 +33,24 @@ class ProfessionalUserDataTable extends DataTable
                 if ($this->request->has('search')) {
                     $keyword = $this->request->get('search');
                     $keyword = $keyword['value'];
-                    $query->where(function ($q) use ($keyword) {
-                        $q->where('firstname', 'LIKE', "%{$keyword}%")
-                            ->orWhere('lastname', 'LIKE', "%{$keyword}%");
+            
+                    // Split the keyword by spaces
+                    $nameParts = explode(' ', $keyword);
+            
+                    $query->where(function ($q) use ($nameParts, $keyword) {
+                        if (count($nameParts) === 2) {
+                            // If the search contains both first and last names
+                            $q->where('firstname', 'LIKE', "%{$nameParts[0]}%")
+                              ->where('lastname', 'LIKE', "%{$nameParts[1]}%");
+                        } else {
+                            // If only one search term, search both firstname and lastname
+                            $q->where('firstname', 'LIKE', "%{$keyword}%")
+                              ->orWhere('lastname', 'LIKE', "%{$keyword}%");
+                        }
                     });
                 }
             })
+            
             ->addColumn('profile', function ($row) {
 
                 if (trim($row->profile) != "" || trim($row->profile) != NULL) {
