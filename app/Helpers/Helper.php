@@ -1229,6 +1229,7 @@ function emailChecker($email)
 
 function adminNotification($notificationType, $postData)
 {
+    
     if ($notificationType == 'broadcast_message') {
         $deviceDataArray = []; // Array to hold all device data for users
 
@@ -1250,32 +1251,31 @@ function adminNotification($notificationType, $postData)
 
 
             $deviceData = Device::all();
-            // dd($deviceData);
-            // if ($deviceData && !empty($deviceData->device_token)) {
-            foreach ($deviceData as $user) {
-                // dd($deviceData);
-                    $deviceDataArray[] = [
-                        // 'user_id' => $user->id,
-                        // 'email' => $user->email,
-                        'device_token' => $user->device_token,
-                        // Add more device data as needed
-                    ];
-                    $notificationData = [
-                        'message' => $message,
-                        'type' => $notificationType,
-                    ];
+            $notificationData=[];
+            $notificationData = [
+                'message' => $message,
+                'type' => $notificationType,
+            ];
             
-                    // Send the notification to the current user
-                                try {
+            foreach ($deviceData as $device) {
+                    $deviceDataArray[] = [
+                        'device_token' => $device->device_token,
+                        'device_model'=>$device->model
+                    ];
+                          
+                    // if ($device->model == "user") {
+                    //     send_notification_FCM_and($device->device_token, $notificationData);
+                    // } else {
+                    //     send_notification_FCM($device->device_token, $notificationData);
+                    // }
 
-                    send_notification_FCM_and($user->device_token, $notificationData);
-                    } catch (\Exception $e) {
-                dd($e->getMessage());
-                return response()->json(['error' => 'Failed to send emails.'], 500);
-            }
+            //         } catch (\Exception $e) {
+            //     dd($e->getMessage());
+            //     return response()->json(['error' => 'Failed to send emails.'], 500);
+            // }
         }
     // }
-    // dd($deviceDataArray);
+    dd($deviceDataArray);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Failed to send emails.'], 500);
         }
