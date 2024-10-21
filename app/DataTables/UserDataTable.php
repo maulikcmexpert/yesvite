@@ -34,9 +34,9 @@ class UserDataTable extends DataTable
                         $q->where('firstname', 'LIKE', "%{$keyword}%")
                           ->orWhere('lastname', 'LIKE', "%{$keyword}%")
                           ->orWhere('phone_number', 'LIKE', "%{$keyword}%")
-                          ->orWhere('email', 'LIKE', "%{$keyword}%")
-                          ->orWhere('user_type', 'LIKE', "%{$keyword}%")
-                          ->orWhere('status', 'LIKE', "%{$keyword}%");
+                          ->orWhere('email', 'LIKE', "%{$keyword}%");
+                        //   ->orWhere('user_type', 'LIKE', "%{$keyword}%")
+                        //   ->orWhere('status', 'LIKE', "%{$keyword}%");
                     });
                 }
             })
