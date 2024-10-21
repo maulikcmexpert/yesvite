@@ -29,11 +29,14 @@ class UserDataTable extends DataTable
             })
             ->filter(function ($query) {
                 if ($this->request->has('search')) {
-                    $keyword = $this->request->get('search');
-                    $keyword = $keyword['value'];
+                    $keyword = $this->request->get('search')['value'];
                     $query->where(function ($q) use ($keyword) {
                         $q->where('firstname', 'LIKE', "%{$keyword}%")
-                            ->orWhere('lastname', 'LIKE', "%{$keyword}%");
+                          ->orWhere('lastname', 'LIKE', "%{$keyword}%")
+                          ->orWhere('phone_number', 'LIKE', "%{$keyword}%")
+                          ->orWhere('email', 'LIKE', "%{$keyword}%")
+                          ->orWhere('user_type', 'LIKE', "%{$keyword}%")
+                          ->orWhere('status', 'LIKE', "%{$keyword}%");
                     });
                 }
             })
