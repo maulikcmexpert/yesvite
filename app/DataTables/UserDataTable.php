@@ -30,14 +30,25 @@ class UserDataTable extends DataTable
             ->filter(function ($query) {
                 if ($this->request->has('search')) {
                     $keyword = $this->request->get('search')['value'];
-                    $query->where(function ($q) use ($keyword) {
-                        $q->where('firstname', 'LIKE', "%{$keyword}%")
-                          ->orWhere('lastname', 'LIKE', "%{$keyword}%")
-                          ->orWhere('phone_number', 'LIKE', "%{$keyword}%")
+                    
+                    // Split the search keyword into words
+                    $keywords = explode(' ', $keyword);
+    
+                    // Adjust the query to search for firstname and lastname together
+                    $query->where(function ($q) use ($keywords) {
+                        foreach ($keywords as $word) {
+                            $q->where(function ($query) use ($word) {
+                                $query->where('firstname', 'LIKE', "%{$word}%")
+                                      ->orWhere('lastname', 'LIKE', "%{$word}%");
+                            });
+                        }
+                    });
+    
+                    // Also add filters for phone_number, email, user_type, and status
+                    $query->orWhere('phone_number', 'LIKE', "%{$keyword}%")
                           ->orWhere('email', 'LIKE', "%{$keyword}%");
                         //   ->orWhere('user_type', 'LIKE', "%{$keyword}%")
                         //   ->orWhere('status', 'LIKE', "%{$keyword}%");
-                    });
                 }
             })
             ->addColumn('profile', function ($row) {
