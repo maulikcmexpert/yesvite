@@ -177,7 +177,7 @@ class UserController extends Controller
                 'username' => $request['firstname'] . ' ' . $request['lastname'],
                 'email' => $request['email'],
             ];
-            
+
             Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($request) {
                 $message->to($request['email']);
                 $message->subject('Verify your Yesvite email address');
@@ -187,6 +187,7 @@ class UserController extends Controller
             $this->addInFirebase($addUser->id);
             return redirect()->route('users.index')->with('success', 'User Add successfully !');
         } catch (\Exception $e) {
+            dd($e);
             // Rollback transaction on error
             DB::rollBack();
             return redirect()->route('users.create')->with('error', 'User creation failed!');
