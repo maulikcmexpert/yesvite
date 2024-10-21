@@ -10335,20 +10335,14 @@ class ApiControllerv2 extends Controller
             foreach ($sendFaildInvites as $value) {
 
                 $userDetail['id'] = $value->user->id;
-
                 $userDetail['first_name'] = (!empty($value->user->firstname) || $value->user->firstname != NULL) ? $value->user->firstname : "";
                 $userDetail['last_name'] = (!empty($value->user->lastname) || $value->user->lastname != NULL) ? $value->user->lastname : "";
-
                 $userDetail['profile'] = (!empty($value->user->profile) || $value->user->profile != NULL) ? asset('storage/profile/' . $value->user->profile) : "";
-
                 $userDetail['email'] = (!empty($value->user->email)) ? $value->user->email : "";
-
                 $userDetail['country_code'] = (string)$value->user->country_code;
                 $userDetail['phone_number'] = (!empty($value->user->phone_number)) ? $value->user->phone_number : "";
                 $userDetail['app_user'] = $value->user->app_user;
-
                 $userDetail['prefer_by'] = $value->prefer_by;
-
                 $faildInviteList[] = $userDetail;
             }
 
