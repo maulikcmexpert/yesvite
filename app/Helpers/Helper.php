@@ -1260,16 +1260,9 @@ function adminNotification($notificationType, $postData)
             foreach ($deviceData as $device) {
                     $deviceDataArray[] = [
                         'device_token' => $device->device_token,
-                        'device_model'=>$device->model
                     ];
                        try{
-
-                    if ($device->model == "user") {
-                        send_notification_FCM_and($device->device_token, $notificationData);
-                    } else {
                         send_notification_FCM($device->device_token, $notificationData);
-                    }
-
                     } catch (\Exception $e) {
                 // dd($e->getMessage());
                 return response()->json(['error' => 'Failed to send emails.'], 500);
