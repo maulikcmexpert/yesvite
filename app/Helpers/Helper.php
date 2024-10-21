@@ -1250,13 +1250,13 @@ function adminNotification($notificationType, $postData)
 
 
             $deviceData = Device::all();
-            dd($deviceData);
+            // dd($deviceData);
             if ($deviceData && !empty($deviceData->device_token)) {
             foreach ($deviceData as $user) {
                 // dd($deviceData);
                     $deviceDataArray[] = [
-                        'user_id' => $user->id,
-                        'email' => $user->email,
+                        // 'user_id' => $user->id,
+                        // 'email' => $user->email,
                         'device_token' => $user->device_token,
                         // Add more device data as needed
                     ];
