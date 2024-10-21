@@ -108,7 +108,7 @@ class ProfessionalUserDataTable extends DataTable
             ->columns($this->getColumns())
             ->minifiedAjax()
             //->dom('Bfrtip')
-            ->orderBy(2)
+            ->orderBy(1)
             ->setTableAttributes(['class' => 'table table-bordered data-table users-data-table dataTable no-footer'])
             ->selectStyleSingle()
             ->buttons([
@@ -127,10 +127,10 @@ class ProfessionalUserDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('no')->title('#')->render('meta.row + meta.settings._iDisplayStart + 1;')->orderable(true),
-            Column::make('profile')->orderable(true),
-            Column::make('username')->orderable(true),
-            Column::make('app_user')->title('App User')->orderable(true),
+            Column::make('no')->title('#')->render('meta.row + meta.settings._iDisplayStart + 1;'),
+            Column::make('profile'),
+            Column::make('username'),
+            Column::make('app_user')->title('App User'),
         ];
     }
 
