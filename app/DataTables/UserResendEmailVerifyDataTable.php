@@ -67,6 +67,9 @@ class UserResendEmailVerifyDataTable extends DataTable
             ->addColumn('username', function ($row) {
                 return $row->firstname . ' ' . $row->lastname;
             })
+            ->addColumn('email', function ($row) {
+                return $row->email;
+            })
             ->addColumn('resend_mail', function ($row) {
                 $cryptId = encrypt($row->id);
                 $view_url = route('re_send_email', $cryptId);
@@ -81,7 +84,7 @@ class UserResendEmailVerifyDataTable extends DataTable
             })
             
 
-            ->rawColumns(['profile','username','resend_mail']);
+            ->rawColumns(['profile','username','email','resend_mail']);
     }
 
     /**
@@ -121,8 +124,9 @@ class UserResendEmailVerifyDataTable extends DataTable
     {
         return [
             Column::make('no')->title('#')->render('meta.row + meta.settings._iDisplayStart + 1;'),
-            Column::make('profile'),
-            Column::make('username'),
+            Column::make('profile')->title('Profile'),
+            Column::make('username')->title('Username'),
+            Column::make('email')->title('Email'),
             Column::make('resend_mail')->title('Resend Email'),
         ];
     }
