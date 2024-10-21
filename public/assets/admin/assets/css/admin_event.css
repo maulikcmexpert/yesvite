@@ -1195,6 +1195,7 @@
 }
 .report-description-td{
     word-break: break-all;
+    min-width: 500px;
 }
 @media only screen and (min-width: 1800px) and (max-width: 3000px) {
     .image-edit-inner-img {
