@@ -31,16 +31,32 @@ class LoginHistoryDataTable extends DataTable
                 if ($this->request->has('search')) {
                     $keyword = $this->request->get('search');
                     $keyword = $keyword['value'];
-                    $query->where(function ($q) use ($keyword) {
-                        $q->whereHas('user', function ($q) use ($keyword) {
-                            $q->where('firstname', 'LIKE', "%{$keyword}%")
-                              ->orWhere('lastname', 'LIKE', "%{$keyword}%");
-                        })
-                        ->orWhere('login_count', 'LIKE', "%{$keyword}%")
-                        ->orWhere('ip_address', 'LIKE', "%{$keyword}%");
+            
+                    // Split the search term by space to separate firstname and lastname
+                    $nameParts = explode(' ', $keyword);
+            
+                    $query->where(function ($q) use ($nameParts, $keyword) {
+                        if (count($nameParts) > 1) {
+                            // Search for firstname and lastname separately
+                            $q->whereHas('user', function ($q) use ($nameParts) {
+                                $q->where('firstname', 'LIKE', "%{$nameParts[0]}%")
+                                  ->where('lastname', 'LIKE', "%{$nameParts[1]}%");
+                            });
+                        } else {
+                            // Search for firstname or lastname if only one term is provided
+                            $q->whereHas('user', function ($q) use ($keyword) {
+                                $q->where('firstname', 'LIKE', "%{$keyword}%")
+                                  ->orWhere('lastname', 'LIKE', "%{$keyword}%");
+                            });
+                        }
+            
+                        // Search other fields (e.g., login_count and ip_address)
+                        $q->orWhere('login_count', 'LIKE', "%{$keyword}%")
+                          ->orWhere('ip_address', 'LIKE', "%{$keyword}%");
                     });
                 }
             })
+            
            
             ->addColumn('username', function ($row) {
                 return $row->user->firstname . ' ' . $row->user->lastname;
