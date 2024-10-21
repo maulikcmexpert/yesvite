@@ -1249,7 +1249,7 @@ function adminNotification($notificationType, $postData)
 
             foreach ($users as $user) {
                 $deviceData = Device::where('user_id', $user->id)->first();
-            
+                dd($deviceData);
                 if ($deviceData && !empty($deviceData->device_token)) {
                     $notificationData = [
                         'message' => $message,
