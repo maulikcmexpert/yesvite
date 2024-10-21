@@ -173,15 +173,16 @@ class UserController extends Controller
             }
             $addUser = User::create($data);
 
-            $userData = [
-                'username' => $request['firstname'] . ' ' . $request['lastname'],
-                'email' => $request['email'],
-            ];
+            // $userData = [
+            //     'username' => $request['firstname'] . ' ' . $request['lastname'],
+            //     'email' => $request['email'],
+                
+            // ];
 
-            Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($request) {
-                $message->to($request['email']);
-                $message->subject('Verify your Yesvite email address');
-            });
+            // Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($request) {
+            //     $message->to($request['email']);
+            //     $message->subject('Verify your Yesvite email address');
+            // });
 
             DB::commit();
             $this->addInFirebase($addUser->id);
