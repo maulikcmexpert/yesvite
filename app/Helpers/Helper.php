@@ -1230,17 +1230,14 @@ function emailChecker($email)
 function adminNotification($notificationType, $postData)
 {
     if ($notificationType == 'broadcast_message') {
-        $deviceDataArray = []; // Array to hold all device data for users
-
+        $deviceDataArray = []; 
         try {
             $deviceTokens = [];
             $userEmails = [];
             $userDataList = [];
-
             $users = User::select('email')->whereNotNull('email')->get();
             $emails = $users->pluck('email')->toArray();
             $message = $postData['message'];
-
             // try {
             //     SendBroadcastEmailJob::dispatch($emails, $message);
             // } catch (\Exception $e) {
@@ -1248,45 +1245,25 @@ function adminNotification($notificationType, $postData)
             //     return response()->json(['error' => 'Failed to send emails.'], 500);
             // }
 
-
             $deviceData = Device::all();
-            // dd($deviceData);
-            // if ($deviceData && !empty($deviceData->device_token)) {
             foreach ($deviceData as $device) {
-                // dd($deviceData);
-                    $deviceDataArray[] = [
-                        // 'user_id' => $user->id,
-                        // 'email' => $user->email,
-                        'device_token' => $device->device_token,
-                        // Add more device data as needed
-                    ];
-                    $notificationData = [
-                        'message' => $message,
-                        'type' => $notificationType,
-                    ];
-            
-                    // Send the notification to the current user
-                                try {
+                $deviceDataArray[] = [
+                    'device_token' => $device->device_token,
+                ];
+                $notificationData = [
+                    'message' => $message,
+                    'type' => $notificationType,
+                ];
+                try {
                     send_notification_FCM_and($device->device_token, $notificationData);
-                    } catch (\Exception $e) {
-                dd($e->getMessage());
-                return response()->json(['error' => 'Failed to send emails.'], 500);
+                } catch (\Exception $e) {
+                    return response()->json(['error' => 'Failed to send emails.'], 500);
+                }
             }
-        }
-    // }
-    // dd($deviceDataArray);
+          
         } catch (\Exception $e) {
             return response()->json(['error' => 'Failed to send emails.'], 500);
         }
-
-        // if (!empty($deviceTokens)) {
-        //     // Send notification to all collected device tokens if you prefer bulk sending
-        //     send_notification_FCM_and($deviceTokens, [
-
-        //         'message' => $postData['message'],
-        //         'type' => $notificationType,
-        //     ]);
-        // }
     }
 }
 function send_notification_FCM($deviceToken, $notifyData)

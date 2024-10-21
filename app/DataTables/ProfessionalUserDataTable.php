@@ -68,6 +68,7 @@ class ProfessionalUserDataTable extends DataTable
             })
             ->addColumn('username', function ($row) {
                 return $row->firstname . ' ' . $row->lastname;
+
             })
             ->addColumn('app_user', function ($row) {
                 if ($row->app_user == '1') {
