@@ -54,7 +54,7 @@ class ProfessionalUserDataTable extends DataTable
                     $columnIndex = $order['column']; // The index of the column to order
                     $direction = $order['dir']; // The direction of the order (asc or desc)
                 
-                    $columns = ['firstname', 'lastname', 'username', 'app_user', 'profile']; // Adjust according to your columns
+                    $columns = ['firstname', 'lastname', 'app_user', 'profile']; // Adjust according to your columns
                 
                     if (isset($columns[$columnIndex])) {
                         $query->orderBy($columns[$columnIndex], $direction);
