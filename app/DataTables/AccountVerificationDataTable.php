@@ -35,15 +35,16 @@ class AccountVerificationDataTable extends DataTable
                     // Split the search term by spaces to handle first and last name separately
                     $nameParts = explode(' ', $keyword);
             
-                    $query->where(function ($q) use ($nameParts, $keyword) {
+                    $query->where(function ($q) use ($nameParts) {
                         if (count($nameParts) > 1) {
-                            // If search contains both first and last names
-                            $q->where('firstname', 'LIKE', "%{$nameParts[0]}%")
-                              ->where('lastname', 'LIKE', "%{$nameParts[1]}%");
+                            // If the search contains both first and last names
+                            // We check for an exact match of both
+                            $q->where('firstname', '=', $nameParts[0])
+                              ->where('lastname', '=', $nameParts[1]);
                         } else {
-                            // If only one search term, search both firstname and lastname
-                            $q->where('firstname', 'LIKE', "%{$keyword}%")
-                              ->orWhere('lastname', 'LIKE', "%{$keyword}%");
+                            // If only one search term, check for an exact match in both firstname and lastname
+                            $q->where('firstname', '=', $nameParts[0])
+                              ->orWhere('lastname', '=', $nameParts[0]);
                         }
                     });
                 }
