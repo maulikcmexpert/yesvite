@@ -117,7 +117,7 @@ class UserChatReportDataTable extends DataTable
             Column::make('reporter_username')->title('Reporter Username (Reported By)'),
             Column::make('reported_username')->title("Reported Username (Reported To)"),
             Column::make('report_type')->title("Report Type"),
-            Column::make('report_description')->title("Report Description")->width('250px'),
+            Column::make('report_description')->title("Report Description")->width('250px')->className('report-description-td'),
             Column::make('report_time')->title("Report Time"),
             // Column::make('action')->title("Action"),
         ];
