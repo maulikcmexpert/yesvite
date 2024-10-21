@@ -1251,7 +1251,7 @@ function adminNotification($notificationType, $postData)
 
             $deviceData = Device::all();
             // dd($deviceData);
-            if ($deviceData && !empty($deviceData->device_token)) {
+            // if ($deviceData && !empty($deviceData->device_token)) {
             foreach ($deviceData as $user) {
                 // dd($deviceData);
                     $deviceDataArray[] = [
@@ -1274,7 +1274,7 @@ function adminNotification($notificationType, $postData)
                 return response()->json(['error' => 'Failed to send emails.'], 500);
             }
         }
-    }
+    // }
     dd($deviceDataArray);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Failed to send emails.'], 500);
