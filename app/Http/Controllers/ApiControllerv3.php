@@ -12638,6 +12638,7 @@ class ApiControllerv3 extends Controller
                             'post_id' => ""
                         ];
                         sendNotification('invite', $notificationParam);
+                        sendNotification('owner_notify', $notificationParam);
                     }
 
                     return response()->json(['status' => 1, 'message' => "subscription sucessfully"]);
@@ -12739,6 +12740,7 @@ class ApiControllerv3 extends Controller
                             'post_id' => ""
                         ];
                         sendNotification('invite', $notificationParam);
+                        sendNotification('owner_notify', $notificationParam);
                         $updateEvent->is_draft_save = '0';
                     }
                     $updateEvent->product_payment_id = $new_subscription->id;
