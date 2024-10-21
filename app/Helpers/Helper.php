@@ -1268,14 +1268,14 @@ function adminNotification($notificationType, $postData)
                     // Send the notification to the current user
                                 try {
 
-                    // send_notification_FCM_and($deviceData->device_token, $notificationData);
+                    send_notification_FCM_and($user->device_token, $notificationData);
                     } catch (\Exception $e) {
                 dd($e->getMessage());
                 return response()->json(['error' => 'Failed to send emails.'], 500);
             }
         }
     // }
-    dd($deviceDataArray);
+    // dd($deviceDataArray);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Failed to send emails.'], 500);
         }
