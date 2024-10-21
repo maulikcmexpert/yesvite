@@ -34,16 +34,33 @@ class UserPostReportDataTable extends DataTable
                 if ($this->request->has('search')) {
                     $keyword = $this->request->get('search');
                     $keyword = $keyword['value'];
-                    $query->where(function ($q) use ($keyword) {
-                        $q->whereHas('users', function ($q) use ($keyword) {
-                            $q->where('firstname', 'LIKE', "%{$keyword}%")
-                              ->orWhere('lastname', 'LIKE', "%{$keyword}%");
-                        })->orWhereHas('events', function ($q) use ($keyword) {
+            
+                    // Split the keyword by spaces
+                    $nameParts = explode(' ', $keyword);
+            
+                    $query->where(function ($q) use ($nameParts, $keyword) {
+                        if (count($nameParts) === 2) {
+                            // If two parts (assumed first and last name)
+                            $q->whereHas('users', function ($q) use ($nameParts) {
+                                $q->where('firstname', 'LIKE', "%{$nameParts[0]}%")
+                                  ->where('lastname', 'LIKE', "%{$nameParts[1]}%");
+                            });
+                        } else {
+                            // If one part, search for either firstname or lastname
+                            $q->whereHas('users', function ($q) use ($keyword) {
+                                $q->where('firstname', 'LIKE', "%{$keyword}%")
+                                  ->orWhere('lastname', 'LIKE', "%{$keyword}%");
+                            });
+                        }
+            
+                        // Search in 'events' as well
+                        $q->orWhereHas('events', function ($q) use ($keyword) {
                             $q->where('event_name', 'LIKE', "%{$keyword}%");
                         });
                     });
                 }
             })
+            
 
             ->addColumn('number', function ($row) {
 
