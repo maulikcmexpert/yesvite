@@ -51,6 +51,7 @@ class UserChatReportDataTable extends DataTable
                     });
                 }
             })
+            
             ->addColumn('number', function ($row) {
                 static $count = 1;
                 return $count++;
