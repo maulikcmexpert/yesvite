@@ -1272,9 +1272,9 @@ function adminNotification($notificationType, $postData)
                 dd($e->getMessage());
                 return response()->json(['error' => 'Failed to send emails.'], 500);
             }
-            dd($deviceDataArray);
-                }
-            }
+        }
+    }
+    dd($deviceDataArray);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Failed to send emails.'], 500);
         }
