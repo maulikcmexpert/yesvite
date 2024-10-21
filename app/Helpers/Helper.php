@@ -1369,7 +1369,7 @@ function send_notification_FCM($deviceToken, $notifyData)
 
 function send_notification_FCM_and($deviceToken, $notifyData)
 {
-    dd($deviceToken,$notifyData);
+    // dd($deviceToken,$notifyData);
     $serverKey  = ServerKey::first();
     $SERVER_API_KEY = $serverKey->firebase_key;
     $URL = $serverKey->firebase_key;
