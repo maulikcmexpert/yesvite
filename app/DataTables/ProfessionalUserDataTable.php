@@ -94,8 +94,15 @@ class ProfessionalUserDataTable extends DataTable
             
             
             ->orderColumn('username', function ($query, $order) {
-                $query->orderBy('firstname', $order);
+                $orderBy="desc";
+                if($order=="desc"){
+                    $orderBy="asc";
+                }
+                $query->orderBy('firstname', $orderBy);
+
+
             })
+
             ->rawColumns(['profile', 'app_user']);
             
     }
