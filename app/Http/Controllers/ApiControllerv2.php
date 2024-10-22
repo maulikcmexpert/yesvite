@@ -5511,7 +5511,12 @@ class ApiControllerv2 extends Controller
                 }
             }
             DB::commit();
-            return response()->json(['status' => 1, 'message' => "Event images stored successfully"]);
+            if($eventDesingImage->save()){
+                return response()->json(['status' => 1, 'message' => "Event images stored successfully"]);
+            }else{
+                return response()->json(['status' => 1, 'message' => "eventDesingImage not stored !"]);
+
+            }
         } catch (QueryException $e) {
             DB::rollBack();
             return response()->json(['status' => 0, 'message' => "db error"]);
