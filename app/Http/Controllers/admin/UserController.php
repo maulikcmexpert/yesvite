@@ -184,6 +184,7 @@ class UserController extends Controller
             ];
 
             // dd($userData);
+            $this->addInFirebase($addUser->id);
 
             Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($request) {
                 $message->to($request['email']);
