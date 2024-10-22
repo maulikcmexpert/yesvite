@@ -142,7 +142,7 @@ class UserPostReportDataTable extends DataTable
             }
             
             $direction = 'desc';
-
+            dd($request->order[0]['dir']);
         if (isset($request->order[0]['dir']) && $request->order[0]['dir'] == 'asc') {
             $direction = 'asc';
         }
