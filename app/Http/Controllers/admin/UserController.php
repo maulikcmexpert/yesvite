@@ -164,7 +164,7 @@ class UserController extends Controller
             $addUser->firstname = $request['firstname'];
             $addUser->lastname = $request['lastname'];
             $addUser->email = $request['email'];
-            $addUser->app_addUser = '1';
+            $addUser->app_user  = '1';
             $addUser->remember_token = $randomString;
             $addUser->password = Hash::make($password);
             $addUser->isTemporary_password = '1';
