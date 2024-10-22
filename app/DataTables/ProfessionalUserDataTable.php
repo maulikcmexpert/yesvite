@@ -13,6 +13,7 @@ use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
+use Illuminate\Http\Request;
 
 class ProfessionalUserDataTable extends DataTable
 {
@@ -89,15 +90,15 @@ class ProfessionalUserDataTable extends DataTable
             })
             
             
-            ->orderColumn('username', function ($query, $order) {
-                $orderBy="desc";
-                if($order=="desc"){
-                    $orderBy="asc";
-                }
-                $query->orderBy('id', $orderBy);
+            // ->orderColumn('username', function ($query, $order) {
+            //     $orderBy="desc";
+            //     if($order=="desc"){
+            //         $orderBy="asc";
+            //     }
+            //     $query->orderBy('id', $orderBy);
 
 
-            })
+            // })
 
             ->rawColumns(['profile', 'app_user']);
             
@@ -106,9 +107,25 @@ class ProfessionalUserDataTable extends DataTable
     /**
      * Get the query source of dataTable.
      */
-    public function query(User $model): QueryBuilder
+    public function query(User $model,Request $request): QueryBuilder
     {
-        return  User::where(['account_type' => '1'])->orderBy('id','desc');
+
+        if($request->order[0]['column'] == '0')
+        {
+            $column = 'id';
+        } else if($request->order[0]['column'] == '2')
+        {
+            $column = 'firstname';
+        }
+
+        if($request->order[0]['dir'] == 'asc')
+        {
+            return  User::where(['account_type' => '1'])->orderBy('id','asc');
+            // dd('a');
+
+        }else{
+            return  User::where(['account_type' => '1'])->orderBy('id','desc');
+        }
     }
 
     
