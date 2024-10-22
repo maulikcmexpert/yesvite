@@ -171,7 +171,7 @@ class UserDataTable extends DataTable
 
         if (isset($request->order[0]['column'])) {
             if ($request->order[0]['column'] == '0') {
-                $column = 'firstname';
+                $column = 'id';
             }
             if ($request->order[0]['column'] == '2') {
                 $column = 'firstname';
@@ -215,7 +215,7 @@ class UserDataTable extends DataTable
             ->columns($this->getColumns())
             ->minifiedAjax()
             //->dom('Bfrtip')
-            ->orderBy(1)    
+            ->orderBy(0)    
             ->setTableAttributes(['class' => 'table table-bordered data-table users-data-table dataTable no-footer'])
             ->selectStyleSingle()
             ->buttons([
@@ -234,7 +234,7 @@ class UserDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('no')->title('#')->render('meta.row + meta.settings._iDisplayStart + 1;')->orderable(true),
+            Column::make('no')->title('#')->render('meta.row + meta.settings._iDisplayStart + 1;')->orderable(false),
             Column::make('profile')->orderable(false),
             Column::make('name')->orderable(true),
             Column::make('phone_number')->orderable(false),
