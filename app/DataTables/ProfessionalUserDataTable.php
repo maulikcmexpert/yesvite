@@ -113,6 +113,9 @@ class ProfessionalUserDataTable extends DataTable
             if ($request->order[0]['column'] == '0') {
                 $column = 'firstname';
             }
+            if ($request->order[0]['column'] == '1') {
+                $column = 'firstname';
+            }
             if ($request->order[0]['column'] == '2') {
                 $column = 'firstname';
             }
@@ -160,7 +163,7 @@ class ProfessionalUserDataTable extends DataTable
     {
         return [
             Column::make('no')->title('#')->render('meta.row + meta.settings._iDisplayStart + 1;')->orderable(true),
-            Column::make('profile')->orderable(false),
+            Column::make('profile')->orderable(true),
             Column::make('username')->orderable(true),
             Column::make('app_user')->title('App User')->orderable(false),
         ];
