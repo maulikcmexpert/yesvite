@@ -451,7 +451,7 @@ class AuthController extends Controller
                     }
                     event(new \App\Events\UserRegistered($secondUser));
                     $this->logoutFromApplication($secondUser->id);
-                    // return redirect()->route('profile')->with('success', 'Logged in successfully!');
+                    return redirect()->route('profile')->with('success', 'Logged in successfully!');
                 } else {
 
                     return  Redirect::to('login')->with('error', 'Invalid credentials!');
