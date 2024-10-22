@@ -74,7 +74,7 @@
                                 </div>
 
                             </div>
-                            <a href="#">Forgot Password</a>
+                            {{-- <a href="#">Forgot Password</a> --}}
                         </form>
                     </div>
                 </div>
