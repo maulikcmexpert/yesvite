@@ -1238,12 +1238,12 @@ function adminNotification($notificationType, $postData)
             $users = User::select('email')->whereNotNull('email')->get();
             $emails = $users->pluck('email')->toArray();
             $message = $postData['message'];
-            try {
-                SendBroadcastEmailJob::dispatch($emails, $message);
-            } catch (\Exception $e) {
-                // dd($e->getMessage());
-                return response()->json(['error' => 'Failed to send emails.'], 500);
-            }
+            // try {
+            //     SendBroadcastEmailJob::dispatch($emails, $message);
+            // } catch (\Exception $e) {
+            //     // dd($e->getMessage());
+            //     return response()->json(['error' => 'Failed to send emails.'], 500);
+            // }
 
             $deviceData = Device::all();
             foreach ($deviceData as $device) {
