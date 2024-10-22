@@ -176,13 +176,13 @@ class UserPostReportDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('no')->title('No')->render('meta.row + meta.settings._iDisplayStart + 1;'),
-            Column::make('username')->title('Username(Reported By)'),
-            Column::make('report_type')->title('Report Type'),
-            Column::make('report_description')->title("Report Description")->width('250px')->className('report-description-td'),
-            Column::make('event_name')->title("Event Name"),
-            Column::make('post_type')->title("Post Type"),
-            Column::make('action')->title("Action"),
+            Column::make('no')->title('No')->render('meta.row + meta.settings._iDisplayStart + 1;')->orderable(true),
+            Column::make('username')->title('Username(Reported By)')->orderable(true),
+            Column::make('report_type')->title('Report Type')->orderable(false),
+            Column::make('report_description')->title("Report Description")->width('250px')->className('report-description-td')->orderable(false),
+            Column::make('event_name')->title("Event Name")->orderable(false),
+            Column::make('post_type')->title("Post Type")->orderable(false),
+            Column::make('action')->title("Action")->orderable(false),
         ];
     }
 
