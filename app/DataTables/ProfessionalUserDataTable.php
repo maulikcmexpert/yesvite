@@ -91,10 +91,13 @@ class ProfessionalUserDataTable extends DataTable
                         </svg>';
                 }
             })
+            
+            
             ->orderColumn('username', function ($query, $order) {
                 $query->orderBy('firstname', $order);
             })
             ->rawColumns(['profile', 'app_user']);
+            
     }
 
     /**
@@ -104,6 +107,8 @@ class ProfessionalUserDataTable extends DataTable
     {
         return  User::where(['account_type' => '1'])->orderBy('id','desc');
     }
+
+    
 
     /**
      * Optional method if you want to use the html builder.

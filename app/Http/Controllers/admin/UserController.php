@@ -6,7 +6,7 @@ use App\DataTables\UserDataTable;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
-
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\DataTables;
 use Illuminate\Database\QueryException;
@@ -156,12 +156,14 @@ class UserController extends Controller
         DB::beginTransaction();
         try {
             $password = $request['firstname'] . '123';
+            $randomString = Str::random(30);
 
             $data = [
                 'firstname' => $request['firstname'],
                 'lastname' => $request['lastname'],
                 'email' => $request['email'],
-                'app_user' => '0',
+                'app_user' => '1',
+                'remeber_token'=> $randomString,
                 'password' => Hash::make($password),
                 'email_verified_at' => Carbon::now()->toDateTimeString(),
                 'password_updated_date' => Carbon::now()->format('Y-m-d'),
@@ -173,16 +175,17 @@ class UserController extends Controller
             }
             $addUser = User::create($data);
 
-            // $userData = [
-            //     'username' => $request['firstname'] . ' ' . $request['lastname'],
-            //     'email' => $request['email'],
-                
-            // ];
+            $userData = [
+                'username' => $request['firstname'] . ' ' . $request['lastname'],
+                'email' => $request['email'],
+                'remember_token'=> $randomString,
+                'password'=>$password
+            ];
 
-            // Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($request) {
-            //     $message->to($request['email']);
-            //     $message->subject('Verify your Yesvite email address');
-            // });
+            Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($request) {
+                $message->to($request['email']);
+                $message->subject('Verify your Yesvite email address');
+            });
 
             DB::commit();
             $this->addInFirebase($addUser->id);
