@@ -149,7 +149,7 @@ class AccountVerificationDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('no')->title('#')->render('meta.row + meta.settings._iDisplayStart + 1;')->orderable(true),
+            Column::make('no')->title('#')->render('meta.row + meta.settings._iDisplayStart + 1;')->orderable(false),
             Column::make('profile')->title('Profile')->orderable(false),
             Column::make('username')->title('Username')->orderable(true),
             Column::make('email')->title('Email')->orderable(true),
