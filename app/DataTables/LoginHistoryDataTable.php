@@ -103,9 +103,7 @@ class LoginHistoryDataTable extends DataTable
             $column = User::select('firstname')
                 ->whereColumn('users.id', 'login_histories.user_id');
         }
-        if ($request->order[0]['column'] == '0') {
-            $column = User::select('firstname')
-            ->whereColumn('users.id', 'login_histories.user_id');        }
+
     }
     $direction = 'desc';  
     if (isset($request->order[0]['dir']) && $request->order[0]['dir'] == 'asc') {
@@ -126,7 +124,7 @@ class LoginHistoryDataTable extends DataTable
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     //->dom('Bfrtip')
-                    ->orderBy(0)
+                    ->orderBy(1)
                     ->selectStyleSingle()
                     ->buttons([
                         Button::make('excel'),
