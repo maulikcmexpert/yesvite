@@ -170,9 +170,9 @@ class UserDataTable extends DataTable
         $column = 'id';
 
         if (isset($request->order[0]['column'])) {
-            // if ($request->order[0]['column'] == '0') {
-            //     $column = 'firstname';
-            // }
+            if ($request->order[0]['column'] == '0') {
+                $column = 'firstname';
+            }
             if ($request->order[0]['column'] == '2') {
                 $column = 'firstname';
             }else if ($request->order[0]['column'] == '4'){
@@ -234,8 +234,8 @@ class UserDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('no')->title('#')->render('meta.row + meta.settings._iDisplayStart + 1;'),
-            Column::make('profile'),
+            Column::make('no')->title('#')->render('meta.row + meta.settings._iDisplayStart + 1;')->orderable(true),
+            Column::make('profile')->orderable(false),
             Column::make('name')->orderable(true),
             Column::make('phone_number')->orderable(false),
             Column::make('email')->orderable(true),
