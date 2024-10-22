@@ -131,10 +131,10 @@ class UserPostReportDataTable extends DataTable
 
         if (isset($request->order[0]['column'])) {
             if ($request->order[0]['column'] == '0') {
-                $column = 'firstname';
+                $column = 'users.firstname';
             }
             if ($request->order[0]['column'] == '1') {
-                $column = 'firstname';
+                $column = 'users.firstname';
             }
         }
 
