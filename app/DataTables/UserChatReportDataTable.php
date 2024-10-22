@@ -88,28 +88,31 @@ class UserChatReportDataTable extends DataTable
     /**
      * Get the query source of dataTable.
      */
-    public function query(UserReportChat $model,Request $request): QueryBuilder
+    public function query(UserReportChat $model, Request $request): QueryBuilder
     {
-        $column = 'id';
-        // return UserReportChat::orderBy('id', 'desc');
+        $column = 'id';  // Default column
+    
         if (isset($request->order[0]['column'])) {
-            
             if ($request->order[0]['column'] == '1') {
+                // Sorting by the reporter user's firstname from the users table
                 $column = User::select('firstname')
-                ->whereColumn('users.id', 'user_report_chats.user_id');
+                    ->whereColumn('users.id', 'user_report_chats.user_id');
+            } elseif ($request->order[0]['column'] == '2') {
+                // Sorting by the 'to' reporter user's firstname (assuming another user field)
+                $column = User::select('firstname')
+                    ->whereColumn('users.id', 'user_report_chats.to_user_id');
             }
-
-            if ($request->order[0]['column'] == '2') {
-                $column = User::select('firstname')
-                ->whereColumn('users.id', 'user_report_chats.user_id');            }
         }
-        
-        $direction = 'desc';
-    if (isset($request->order[0]['dir']) && $request->order[0]['dir'] == 'asc') {
-        $direction = 'asc';
-    }
+    
+        $direction = 'desc';  // Default direction
+    
+        if (isset($request->order[0]['dir']) && $request->order[0]['dir'] == 'asc') {
+            $direction = 'asc';
+        }
+    
         return UserReportChat::with(['reporter_user', 'to_reporter_user'])->orderBy($column, $direction);
     }
+    
 
     /**
      * Optional method if you want to use the html builder.
