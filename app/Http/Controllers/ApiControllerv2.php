@@ -3752,20 +3752,20 @@ class ApiControllerv2 extends Controller
                 ->orderBy('id', 'DESC')
                 ->limit(1)
                 ->first();
-                if ($userSubscription != null) {
-                    $eventCreation->is_draft_save = '0';
-                    $purchase_status = true;
-                }else{
-                    $checkProductSubscribe =  Event::where('id', $eventCreation->id)->first();
-                    $purchase_status = true;
-                    if ($checkProductSubscribe->subscription_plan_name == 'Pro' && $checkProductSubscribe->product_payment_id == NULL) {
-                        $purchase_status = false;
-                        $eventCreation->is_draft_save = '1';
-                    }elseif($checkProductSubscribe->subscription_plan_name == 'Pro-Year'){
-                        $purchase_status = false;
-                        $eventCreation->is_draft_save = '1';
-                    }
+            if ($userSubscription != null) {
+                $eventCreation->is_draft_save = '0';
+                $purchase_status = true;
+            }else{
+                $checkProductSubscribe =  Event::where('id', $eventCreation->id)->first();
+                $purchase_status = true;
+                if ($checkProductSubscribe->subscription_plan_name == 'Pro' && $checkProductSubscribe->product_payment_id == NULL) {
+                    $purchase_status = false;
+                    $eventCreation->is_draft_save = '1';
+                }elseif($checkProductSubscribe->subscription_plan_name == 'Pro-Year'){
+                    $purchase_status = false;
+                    $eventCreation->is_draft_save = '1';
                 }
+            }
             $eventCreation->save();
         }
         DB::commit();
