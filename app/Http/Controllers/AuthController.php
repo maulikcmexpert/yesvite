@@ -225,6 +225,7 @@ class AuthController extends Controller
             $userIpAddress = request()->ip();
 
             $user = Auth::guard('web')->user();
+            dd($user);
             if ($user->email_verified_at != NULL) {
 
                 Session::regenerate();
@@ -275,8 +276,9 @@ class AuthController extends Controller
                         $loginHistory->login_count = 1;
                         $loginHistory->save();
                     }
-
+                    if()
                     return redirect()->route('profile');
+
                 } else {
                     return redirect()->back()->withErrors([
                         'email' => 'Invalid credentials!',
