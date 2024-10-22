@@ -166,7 +166,7 @@ class UserPostReportDataTable extends DataTable
             ->minifiedAjax()
             //->dom('Bfrtip')
             ->setTableAttributes(['class' => 'table table-bordered data-table users-data-table dataTable no-footer'])
-            ->orderBy(0)
+            // ->orderBy(0)
             ->selectStyleSingle()
             ->buttons([
                 Button::make('excel'),
