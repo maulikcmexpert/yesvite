@@ -126,29 +126,34 @@ class UserPostReportDataTable extends DataTable
     /**
      * Get the query source of dataTable.
      */
-    public function query(UserReportToPost $model,Request $request): QueryBuilder
+    public function query(UserReportToPost $model, Request $request): QueryBuilder
     {
+        // Default sorting column
         $column = 'id';
-        $direction = 'desc';
-
+    
+        // Check the request for a column to sort by
         if (isset($request->order[0]['column'])) {
-            // if ($request->order[0]['column'] == '0') {
-            //     $column = 'users.firstname';
-            // }
-            // if ($request->order[0]['column'] == '1') {
-            //     $column = User::select('firstname')
-            //     ->whereColumn('users.id', 'user_report_to_posts.user_id');
-            //     // ->limit(1);         
-            //    }
+            if ($request->order[0]['column'] == '0' || $request->order[0]['column'] == '1') {
+                // Set column to a subquery that selects 'firstname' from the 'users' table
+                $column = User::select('firstname')
+                    ->whereColumn('users.id', 'user_report_to_posts.user_id')
+                    ->limit(1);
+            }
         }
-
-
+    
+        // Default to descending order
+        $direction = 'desc';
+    
+        // Check for sorting direction in the request
         if (isset($request->order[0]['dir']) && $request->order[0]['dir'] == 'asc') {
             $direction = 'asc';
         }
-
-        return UserReportToPost::with(['events', 'users', 'event_posts'])->orderBy($column, $direction);
+    
+        // Perform the query with eager loading and sorting by subquery on users' firstname
+        return UserReportToPost::with(['events', 'users', 'event_posts'])
+            ->orderBy($column, $direction);
     }
+    
 
     /**
      * Optional method if you want to use the html builder.
