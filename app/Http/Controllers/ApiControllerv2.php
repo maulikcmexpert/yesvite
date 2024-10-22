@@ -3746,25 +3746,28 @@ class ApiControllerv2 extends Controller
                     }
                 }
             }
+            $userSubscription = UserSubscription::where('user_id', $this->user->id)
+                ->where('endDate','>',date('Y-m-d H:i:s'))
+                ->where('type','subscribe')
+                ->orderBy('id', 'DESC')
+                ->limit(1)
+                ->first();
+                if ($userSubscription != null) {
+                    $eventCreation->is_draft_save = '0';
+                    $purchase_status = true;
+                }else{
+                    $checkProductSubscribe =  Event::where('id', $eventCreation->id)->first();
+                    $purchase_status = true;
+                    if ($checkProductSubscribe->subscription_plan_name == 'Pro' && $checkProductSubscribe->product_payment_id == NULL) {
+                        $purchase_status = false;
+                        $eventCreation->is_draft_save = '1';
+                    }elseif($checkProductSubscribe->subscription_plan_name == 'Pro-Year'){
+                        $purchase_status = false;
+                        $eventCreation->is_draft_save = '1';
+                    }
+                }
             $eventCreation->save();
         }
-        $userSubscription = UserSubscription::where('user_id', $this->user->id)
-            ->where('endDate','>',date('Y-m-d H:i:s'))
-            ->where('type','subscribe')
-            ->orderBy('id', 'DESC')
-            ->limit(1)
-            ->first();
-            if ($userSubscription != null) {
-                $purchase_status = true;
-            }else{
-                $checkProductSubscribe =  Event::where('id', $eventCreation->id)->first();
-                $purchase_status = true;
-                if ($checkProductSubscribe->subscription_plan_name == 'Pro' && $checkProductSubscribe->product_payment_id == NULL) {
-                    $purchase_status = false;
-                }elseif($checkProductSubscribe->subscription_plan_name == 'Pro-Year'){
-                    $purchase_status = false;
-                }
-            }
         DB::commit();
         return response()->json(['status' => 1, 'event_id' => $eventCreation->id, 'event_name' => $eventData['event_name'], 'message' => "Event Created Successfully", 'guest_pending_count' => getGuestRsvpPendingCount($eventCreation->id),'purchase_status' => $purchase_status]);
         // } catch (QueryException $e) {
