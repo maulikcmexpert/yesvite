@@ -97,7 +97,7 @@ class ProfessionalUserDataTable extends DataTable
                         </svg>';
                 }
             })
-            ->orderColumns(['firstname', 'lastname'], '-:column $1') // Enables sorting for these columns
+            ->orderColumn('username', 'firstname $1, lastname $1') // Sorting by full name
 
             ->rawColumns(['profile', 'app_user']);
     }
