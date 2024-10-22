@@ -129,6 +129,7 @@ class UserPostReportDataTable extends DataTable
     public function query(UserReportToPost $model,Request $request): QueryBuilder
     {
         $column = 'id';
+        $direction = 'desc';
 
         if (isset($request->order[0]['column'])) {
             // if ($request->order[0]['column'] == '0') {
@@ -141,7 +142,6 @@ class UserPostReportDataTable extends DataTable
                }
         }
 
-        $direction = 'desc';
 
         if (isset($request->order[0]['dir']) && $request->order[0]['dir'] == 'asc') {
             $direction = 'asc';
