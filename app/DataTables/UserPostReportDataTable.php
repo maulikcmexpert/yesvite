@@ -15,7 +15,8 @@ use Illuminate\Http\Request;
 
 use App\Models\{
     UserReportToPost,
-    User
+    User,
+    Event
 };
 
 class UserPostReportDataTable extends DataTable
@@ -137,7 +138,12 @@ class UserPostReportDataTable extends DataTable
                 if ($request->order[0]['column'] == '1') {
                     $column = User::select('firstname')
                     ->whereColumn('users.id', 'user_report_to_posts.user_id');
-                    // ->limit(1);         
+                }
+
+                if ($request->order[0]['column'] == '4') {
+                    $column = Event::select('event_name')
+                    ->whereColumn('events.id', 'user_report_to_posts.event_id');
+    
                 }
             }
             
@@ -183,7 +189,7 @@ class UserPostReportDataTable extends DataTable
             Column::make('username')->title('Username(Reported By)')->orderable(true),
             Column::make('report_type')->title('Report Type')->orderable(false  ),
             Column::make('report_description')->title("Report Description")->width('250px')->className('report-description-td')->orderable(false),
-            Column::make('event_name')->title("Event Name")->orderable(false),
+            Column::make('event_name')->title("Event Name")->orderable(true),
             Column::make('post_type')->title("Post Type")->orderable(false),
             Column::make('action')->title("Action")->orderable(false),
         ];
