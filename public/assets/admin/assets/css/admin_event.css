@@ -1202,6 +1202,10 @@ table.dataTable thead>tr>th:nth-child(1).sorting_desc:after{
     display: none !important;
 }
 
+table.dataTable thead>tr>th:nth-child(1).sorting_desc:before{
+    display: none !important;
+}
+
 @media only screen and (min-width: 1800px) and (max-width: 3000px) {
     .image-edit-inner-img {
         width: 345px;
