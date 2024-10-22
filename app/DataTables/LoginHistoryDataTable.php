@@ -11,6 +11,8 @@ use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
+use Illuminate\Http\Request;
+
 
 class LoginHistoryDataTable extends DataTable
 {
@@ -92,9 +94,24 @@ class LoginHistoryDataTable extends DataTable
     /**
      * Get the query source of dataTable.
      */
-    public function query(LoginHistory $model): QueryBuilder
+    public function query(LoginHistory $model,Request $request): QueryBuilder
     {
-        return LoginHistory::with(['user'])->orderBy('id', 'desc');
+
+        $column = 'id';  // Default column
+    
+        if (isset($request->order[0]['column'])) {
+            if ($request->order[0]['column'] == '1') {
+                // Sorting by the reporter user's firstname from the users table
+                $column = User::select('firstname')
+                ->whereColumn('users.id', 'login_histories.user_id');            } 
+        }
+    
+        $direction = 'desc';  // Default direction
+    
+        if (isset($request->order[0]['dir']) && $request->order[0]['dir'] == 'asc') {
+            $direction = 'asc';
+        }
+        return LoginHistory::with(['user'])->orderBy($column, $direction);
     }
 
     /**
@@ -107,7 +124,7 @@ class LoginHistoryDataTable extends DataTable
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     //->dom('Bfrtip')
-                    ->orderBy(1)
+                    ->orderBy(0)
                     ->selectStyleSingle()
                     ->buttons([
                         Button::make('excel'),
@@ -125,10 +142,10 @@ class LoginHistoryDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('no')->title('No')->render('meta.row + meta.settings._iDisplayStart + 1;'),
-            Column::make('username')->title('Username'),
-            Column::make('ip_address')->title("Ip Address"),
-            Column::make('login_count')->title("Login Count"),
+            Column::make('no')->title('No')->render('meta.row + meta.settings._iDisplayStart + 1;')->orderable(false),
+            Column::make('username')->title('Username')->orderable(true),
+            Column::make('ip_address')->title("Ip Address")->orderable(false),
+            Column::make('login_count')->title("Login Count")->orderable(false),
             // Column::make('action')->title("Action"),
         ];
     }

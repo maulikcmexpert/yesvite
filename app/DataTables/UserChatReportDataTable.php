@@ -12,9 +12,12 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
+
 
 use App\Models\{
-    UserReportChat
+    UserReportChat,
+    User
 };
 
 class UserChatReportDataTable extends DataTable
@@ -85,11 +88,35 @@ class UserChatReportDataTable extends DataTable
     /**
      * Get the query source of dataTable.
      */
-    public function query(UserReportChat $model): QueryBuilder
+    public function query(UserReportChat $model, Request $request): QueryBuilder
     {
-        // return UserReportChat::orderBy('id', 'desc');
-        return UserReportChat::with(['reporter_user', 'to_reporter_user'])->orderBy('id', 'desc');
+        $column = 'id';  // Default column
+    
+        if (isset($request->order[0]['column'])) {
+            if ($request->order[0]['column'] == '1') {
+                // Sorting by the reporter user's firstname from the users table
+                $column = User::select('firstname')
+                    ->whereColumn('users.id', 'user_report_chats.reporter_user_id');
+            } elseif ($request->order[0]['column'] == '2') {
+                // Sorting by the 'to' reporter user's firstname (assuming another user field)
+                $column = User::select('firstname')
+                    ->whereColumn('users.id', 'user_report_chats.to_be_reported_user_id');
+            }else if($request->order[0]['column'] == '3'){
+                $column="report_type";
+            }else if($request->order[0]['column'] == '5'){
+                $column="created_at";
+            }
+        }
+    
+        $direction = 'desc';  // Default direction
+    
+        if (isset($request->order[0]['dir']) && $request->order[0]['dir'] == 'asc') {
+            $direction = 'asc';
+        }
+    
+        return UserReportChat::with(['reporter_user', 'to_reporter_user'])->orderBy($column, $direction);
     }
+    
 
     /**
      * Optional method if you want to use the html builder.
@@ -101,7 +128,7 @@ class UserChatReportDataTable extends DataTable
             ->columns($this->getColumns())
             ->minifiedAjax()
             //->dom('Bfrtip')
-            ->orderBy(1)
+            ->orderBy(0)
             ->selectStyleSingle()
             ->buttons([
                 Button::make('excel'),
@@ -119,12 +146,12 @@ class UserChatReportDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('no')->title('No')->render('meta.row + meta.settings._iDisplayStart + 1;'),
-            Column::make('reporter_username')->title('Reporter Username (Reported By)'),
-            Column::make('reported_username')->title("Reported Username (Reported To)"),
-            Column::make('report_type')->title("Report Type"),
-            Column::make('report_description')->title("Report Description")->width('250px')->className('report-description-td'),
-            Column::make('report_time')->title("Report Time"),
+            Column::make('no')->title('No')->render('meta.row + meta.settings._iDisplayStart + 1;')->orderable(false),
+            Column::make('reporter_username')->title('Reporter Username (Reported By)')->orderable(true),
+            Column::make('reported_username')->title("Reported Username (Reported To)")->orderable(true),
+            Column::make('report_type')->title("Report Type")->orderable(true),
+            Column::make('report_description')->title("Report Description")->width('250px')->className('report-description-td')->orderable(false),
+            Column::make('report_time')->title("Report Time")->orderable(true),
             // Column::make('action')->title("Action"),
         ];
     }
