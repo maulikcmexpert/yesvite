@@ -81,6 +81,11 @@ class ProfessionalUserDataTable extends DataTable
                 return $row->firstname . ' ' . $row->lastname;
 
             })
+
+            ->orderColumn('username', function ($query, $order) {
+                $query->orderBy('firstname', $order)->orderBy('lastname', $order);
+            })
+            
             ->addColumn('app_user', function ($row) {
                 if ($row->app_user == '1') {
                     return '<svg width="16" height="26" viewBox="0 0 16 26" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -97,9 +102,7 @@ class ProfessionalUserDataTable extends DataTable
                         </svg>';
                 }
             })
-            ->orderColumn('username', function ($query, $order) {
-                $query->orderBy('firstname', $order)->orderBy('lastname', $order);
-            })
+           
             ->rawColumns(['profile', 'app_user']);
     }
 
