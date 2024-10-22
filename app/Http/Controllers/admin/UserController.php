@@ -165,6 +165,7 @@ class UserController extends Controller
                 'app_user' => '1',
                 'remeber_token'=> $randomString,
                 'password' => Hash::make($password),
+                'isTemporary_password'=>'1',
                 'email_verified_at' => Carbon::now()->toDateTimeString(),
                 'password_updated_date' => Carbon::now()->format('Y-m-d'),
             ];
