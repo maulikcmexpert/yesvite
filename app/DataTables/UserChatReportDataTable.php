@@ -101,6 +101,8 @@ class UserChatReportDataTable extends DataTable
                 // Sorting by the 'to' reporter user's firstname (assuming another user field)
                 $column = User::select('firstname')
                     ->whereColumn('users.id', 'user_report_chats.to_be_reported_user_id');
+            }else if($request->order[0]['column'] == '3'){
+                $column="report_type";
             }
         }
     
@@ -145,7 +147,7 @@ class UserChatReportDataTable extends DataTable
             Column::make('no')->title('No')->render('meta.row + meta.settings._iDisplayStart + 1;')->orderable(false),
             Column::make('reporter_username')->title('Reporter Username (Reported By)')->orderable(true),
             Column::make('reported_username')->title("Reported Username (Reported To)")->orderable(true),
-            Column::make('report_type')->title("Report Type")->orderable(false),
+            Column::make('report_type')->title("Report Type")->orderable(true),
             Column::make('report_description')->title("Report Description")->width('250px')->className('report-description-td')->orderable(false),
             Column::make('report_time')->title("Report Time")->orderable(false),
             // Column::make('action')->title("Action"),
