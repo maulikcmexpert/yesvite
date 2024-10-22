@@ -129,30 +129,32 @@ class UserPostReportDataTable extends DataTable
     public function query(UserReportToPost $model, Request $request): QueryBuilder
     {
         // Default sorting column
-        $column = 'id';
+        $column = 'id'; // This is the default, it will be used if no specific column is requested.
     
-        // Determine if a sorting column has been specified in the request
+        // Check if the DataTables request has specified a column for sorting
         if (isset($request->order[0]['column'])) {
-            if ($request->order[0]['column'] == '0' || $request->order[0]['column'] == '1') {
-                // If sorting on column 0 or 1, sort by 'users.firstname'
-                $column = User::select('firstname')
-                    ->whereColumn('users.id', 'user_report_to_posts.user_id')
-                    ->limit(1);
+            $requestedColumn = $request->order[0]['column'];
+    
+            // Determine the column to sort by based on the requested column index
+            if ($requestedColumn == '0') {
+                $column = 'user_report_to_posts.id'; // Default to primary key
+            } elseif ($requestedColumn == '1') {
+                $column = 'users.firstname'; // Assuming column 1 maps to firstname
             }
         }
     
         // Default sorting direction is descending
         $direction = 'desc';
     
-        // If the request specifies an ascending direction, update the direction
+        // Check if the direction has been specified and is ascending
         if (isset($request->order[0]['dir']) && $request->order[0]['dir'] == 'asc') {
             $direction = 'asc';
         }
     
-        // Query to fetch the data with relationships and dynamic sorting only if specified
+        // Build the query with necessary relationships
         $query = UserReportToPost::with(['events', 'users', 'event_posts']);
     
-        // Apply orderBy only if a valid column and direction is set from the request
+        // Apply the dynamic ordering only if a specific column and direction were specified
         if (isset($request->order[0]['column'])) {
             $query->orderBy($column, $direction);
         }
