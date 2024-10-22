@@ -13,6 +13,7 @@
         </div><!-- /.container-fluid -->
     </div>
 
+    
     <div class="col-md-12">
         <div class="card card-primary categoryCard">
             <div class="card-header">
