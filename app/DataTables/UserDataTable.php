@@ -175,6 +175,8 @@ class UserDataTable extends DataTable
             // }
             if ($request->order[0]['column'] == '2') {
                 $column = 'firstname';
+            }else if ($request->order[0]['column'] == '4'){
+                $column = 'firstname';
             }
         }
 
@@ -235,13 +237,13 @@ class UserDataTable extends DataTable
             Column::make('no')->title('#')->render('meta.row + meta.settings._iDisplayStart + 1;'),
             Column::make('profile'),
             Column::make('name')->orderable(true),
-            Column::make('phone_number'),
-            Column::make('email'),
-            Column::make('app_user')->title('User Type'),
-            Column::make('setpassword')->title('Set Password'),
+            Column::make('phone_number')->orderable(false),
+            Column::make('email')->orderable(true),
+            Column::make('app_user')->title('User Type')->orderable(false),
+            Column::make('setpassword')->title('Set Password')->orderable(false),
             // Column::make('package_name')->title('Plan'),
-            Column::make('action'),
-            Column::make('status')
+            Column::make('action')->orderable(false),
+            Column::make('status')->orderable(false)
 
         ];
     }
