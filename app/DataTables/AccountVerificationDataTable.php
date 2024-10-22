@@ -129,7 +129,7 @@ class AccountVerificationDataTable extends DataTable
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     //->dom('Bfrtip')
-                    ->orderBy("")
+                    ->orderBy(3)   
                     ->selectStyleSingle()
                     ->buttons([
                         Button::make('excel'),
