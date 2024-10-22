@@ -49,18 +49,6 @@ class ProfessionalUserDataTable extends DataTable
                         }
                     });
                 }
-                if ($this->request->has('order')) {
-                    $order = $this->request->get('order')[0]; // Get the first order column
-                    $columnIndex = $order['column']; // The index of the column to order
-                    $direction = $order['dir']; // The direction of the order (asc or desc)
-                
-                    // Map column indexes to database columns
-                    $columns = ['firstname', 'lastname']; // Adjust this array according to your columns
-                
-                    if (isset($columns[$columnIndex])) {
-                        $query->orderBy($columns[$columnIndex], $direction);
-                    }
-                }
             })
             
             ->addColumn('profile', function ($row) {
@@ -103,7 +91,8 @@ class ProfessionalUserDataTable extends DataTable
                         </svg>';
                 }
             })
-           
+            ->orderColumn('username', 'firstname $1') // Sorting by full name
+
             ->rawColumns(['profile', 'app_user']);
     }
 
@@ -144,7 +133,7 @@ class ProfessionalUserDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('no')->title('#')->render('meta.row + meta.settings._iDisplayStart + 1;')->orderable(true),
+            Column::make('no')->title('#')->render('meta.row + meta.settings._iDisplayStart + 1;'),
             Column::make('profile'),
             Column::make('username')->orderable(true),
             Column::make('app_user')->title('App User'),
