@@ -11,6 +11,8 @@ use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
+use Illuminate\Http\Request;
+
 
 class AccountVerificationDataTable extends DataTable
 {
@@ -94,9 +96,27 @@ class AccountVerificationDataTable extends DataTable
     /**
      * Get the query source of dataTable.
      */
-    public function query(User $model): QueryBuilder
+    public function query(User $model,Request $request): QueryBuilder
     {
-        return  User::where(['email_verified_at' => Null])->orderBy('id', 'desc');
+        $column = 'id';  // Default column
+    
+        if (isset($request->order[0]['column'])) {
+            if ($request->order[0]['column'] == '2') {
+                // Sorting by the reporter user's firstname from the users table
+                $column = "firstname";
+            } elseif ($request->order[0]['column'] == '2') {
+                // Sorting by the 'to' reporter user's firstname (assuming another user field)
+                $column = "email";
+            }
+        }
+    
+        $direction = 'desc';  // Default direction
+    
+        if (isset($request->order[0]['dir']) && $request->order[0]['dir'] == 'asc') {
+            $direction = 'asc';
+        }
+
+        return  User::where(['email_verified_at' => Null])->orderBy($column, $direction);
     }
 
     /**
@@ -109,7 +129,7 @@ class AccountVerificationDataTable extends DataTable
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     //->dom('Bfrtip')
-                    ->orderBy(1)
+                    ->orderBy(0)
                     ->selectStyleSingle()
                     ->buttons([
                         Button::make('excel'),
@@ -129,8 +149,8 @@ class AccountVerificationDataTable extends DataTable
         return [
             Column::make('no')->title('#')->render('meta.row + meta.settings._iDisplayStart + 1;'),
             Column::make('profile')->title('Profile'),
-            Column::make('username')->title('Username'),
-            Column::make('email')->title('Email'),
+            Column::make('username')->title('Username')->orderable(true),
+            Column::make('email')->title('Email')->orderable(true),
             Column::make('action')->title('Action'),
         ];
     }
