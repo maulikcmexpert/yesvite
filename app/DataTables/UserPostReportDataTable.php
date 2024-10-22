@@ -144,7 +144,7 @@ class UserPostReportDataTable extends DataTable
             $direction = 'asc';
         }
 
-        return UserReportToPost::with(relations: ['events', 'users', 'event_posts'])->orderBy($column, $direction);
+        return UserReportToPost::with(['events', 'users', 'event_posts'])->orderBy($column, $direction);
     }
 
     /**
@@ -178,11 +178,11 @@ class UserPostReportDataTable extends DataTable
         return [
             Column::make('no')->title('No')->render('meta.row + meta.settings._iDisplayStart + 1;')->orderable(true),
             Column::make('username')->title('Username(Reported By)')->orderable(true),
-            Column::make('report_type')->title('Report Type')->orderable(false),
-            Column::make('report_description')->title("Report Description")->width('250px')->className('report-description-td')->orderable(false),
-            Column::make('event_name')->title("Event Name")->orderable(false),
-            Column::make('post_type')->title("Post Type")->orderable(false),
-            Column::make('action')->title("Action")->orderable(false),
+            Column::make('report_type')->title('Report Type')->orderable(),
+            Column::make('report_description')->title("Report Description")->width('250px')->className('report-description-td')->orderable(),
+            Column::make('event_name')->title("Event Name")->orderable(),
+            Column::make('post_type')->title("Post Type")->orderable(),
+            Column::make('action')->title("Action")->orderable(),
         ];
     }
 
