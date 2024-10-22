@@ -114,7 +114,10 @@ class ProfessionalUserDataTable extends DataTable
             $column = 'id'; 
         } else if ($request->order[0]['column'] == '2') {
             $column = 'firstname';
-        } 
+        }
+        else if ($request->order[0]['column'] == '1') {
+            $column = 'firstname';
+        }
     }
 
     $direction = 'desc';
