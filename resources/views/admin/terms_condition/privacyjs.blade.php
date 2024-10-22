@@ -181,7 +181,7 @@
         document.querySelectorAll('.description').forEach(function(textarea) {
             ClassicEditor
                 .create(textarea)
-
+                textarea.ui.view.editable.element.style.height = '350px';
                 .catch(error => {
                     console.error(error);
                 });
