@@ -1238,12 +1238,18 @@ function adminNotification($notificationType, $postData)
             $users = User::select('email')->whereNotNull('email')->get();
             $emails = $users->pluck('email')->toArray();
             $message = $postData['message'];
-            try {
-                SendBroadcastEmailJob::dispatch($emails, $message);
-            } catch (\Exception $e) {
-                // dd($e->getMessage());
-                return response()->json(['error' => 'Failed to send emails.'], 500);
-            }
+
+            // try {
+            //     // foreach ($emails as $email) {
+            //         Mail::to("prakashmanat24@gmail.com")->send(new BulkEmail($message));
+            //     // }
+        
+            //     return response()->json(['success' => 'Emails sent successfully.']);
+            // } catch (\Exception $e) {
+            //     // dd($e);
+            //     return response()->json(['error' => 'Failed to send emails: ' . $e->getMessage()], 500);
+            // }
+       
 
             $deviceData = Device::all();
             foreach ($deviceData as $device) {
@@ -1259,6 +1265,13 @@ function adminNotification($notificationType, $postData)
                 } catch (\Exception $e) {
                     return response()->json(['error' => 'Failed to send emails.'], 500);
                 }
+            }
+
+            try {
+                SendBroadcastEmailJob::dispatch($emails, $message);
+            } catch (\Exception $e) {
+                // dd($e->getMessage());
+                return response()->json(['error' => 'Failed to send emails.'], 500);
             }
           
         } catch (\Exception $e) {
