@@ -138,7 +138,7 @@ class UserPostReportDataTable extends DataTable
             if ($request->order[0]['column'] == '1') {
                 $column = User::select('firstname')
                 ->whereColumn('users.id', 'user_report_to_posts.user_id')
-                ->limit(1);         
+                // ->limit(1);         
                }
         }
 
