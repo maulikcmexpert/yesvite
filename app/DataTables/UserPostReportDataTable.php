@@ -129,19 +129,19 @@ class UserPostReportDataTable extends DataTable
     public function query(UserReportToPost $model,Request $request): QueryBuilder
     {
         $column = 'id';
-        $direction = 'desc';
-
+        
         if (isset($request->order[0]['column'])) {
             // if ($request->order[0]['column'] == '0') {
-            //     $column = 'users.firstname';
-            // }
-            if ($request->order[0]['column'] == '1') {
-                $column = User::select('firstname')
-                ->whereColumn('users.id', 'user_report_to_posts.user_id');
-                // ->limit(1);         
-               }
-        }
-
+                //     $column = 'users.firstname';
+                // }
+                if ($request->order[0]['column'] == '1') {
+                    $column = User::select('firstname')
+                    ->whereColumn('users.id', 'user_report_to_posts.user_id');
+                    // ->limit(1);         
+                }
+            }
+            
+            $direction = 'desc';
 
         if (isset($request->order[0]['dir']) && $request->order[0]['dir'] == 'asc') {
             $direction = 'asc';
