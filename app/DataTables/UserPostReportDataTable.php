@@ -14,7 +14,8 @@ use Yajra\DataTables\Services\DataTable;
 use Illuminate\Http\Request;
 
 use App\Models\{
-    UserReportToPost
+    UserReportToPost,
+    User
 };
 
 class UserPostReportDataTable extends DataTable
@@ -134,8 +135,10 @@ class UserPostReportDataTable extends DataTable
                 $column = 'users.firstname';
             }
             if ($request->order[0]['column'] == '1') {
-                $column = 'users.firstname';
-            }
+                $column = User::select('firstname')
+                ->whereColumn('users.id', 'user_report_to_posts.user_id')
+                ->limit(1);         
+               }
         }
 
         $direction = 'desc';
