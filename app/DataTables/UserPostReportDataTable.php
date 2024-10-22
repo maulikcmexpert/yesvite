@@ -143,9 +143,9 @@ class UserPostReportDataTable extends DataTable
 
         $direction = 'desc';
 
-        if (isset($request->order[0]['dir']) && $request->order[0]['dir'] == 'asc') {
-            $direction = 'asc';
-        }
+        // if (isset($request->order[0]['dir']) && $request->order[0]['dir'] == 'asc') {
+        //     $direction = 'asc';
+        // }
 
         return UserReportToPost::with(['events', 'users', 'event_posts'])->orderBy($column, $direction);
     }
