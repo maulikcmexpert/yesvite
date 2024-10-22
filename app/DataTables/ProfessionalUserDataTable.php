@@ -107,7 +107,7 @@ class ProfessionalUserDataTable extends DataTable
      */
     public function query(User $model, Request $request): QueryBuilder
     {
-        $column = 'id';
+        // $column = 'id';
 
         if (isset($request->order[0]['column'])) {
             if ($request->order[0]['column'] == '0') {
