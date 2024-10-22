@@ -124,7 +124,7 @@ class LoginHistoryDataTable extends DataTable
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     //->dom('Bfrtip')
-                    ->orderBy(1)
+                    ->orderBy(0)
                     ->selectStyleSingle()
                     ->buttons([
                         Button::make('excel'),
@@ -142,10 +142,10 @@ class LoginHistoryDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('no')->title('No')->render('meta.row + meta.settings._iDisplayStart + 1;'),
+            Column::make('no')->title('No')->render('meta.row + meta.settings._iDisplayStart + 1;')->orderable(false),
             Column::make('username')->title('Username')->orderable(true),
-            Column::make('ip_address')->title("Ip Address"),
-            Column::make('login_count')->title("Login Count"),
+            Column::make('ip_address')->title("Ip Address")->orderable(false),
+            Column::make('login_count')->title("Login Count")->orderable(false),
             // Column::make('action')->title("Action"),
         ];
     }
