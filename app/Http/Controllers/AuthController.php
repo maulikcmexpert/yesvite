@@ -276,7 +276,7 @@ class AuthController extends Controller
                         $loginHistory->save();
                     }
 
-                    // return redirect()->route('profile');
+                    return redirect()->route('profile');
                 } else {
                     return redirect()->back()->withErrors([
                         'email' => 'Invalid credentials!',
