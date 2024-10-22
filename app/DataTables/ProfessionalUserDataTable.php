@@ -49,17 +49,17 @@ class ProfessionalUserDataTable extends DataTable
                         }
                     });
                 }
-                if ($this->request->has('order')) {
-                    $order = $this->request->get('order')[0]; // Get the first order column
-                    $columnIndex = $order['column']; // The index of the column to order
-                    $direction = $order['dir']; // The direction of the order (asc or desc)
+                // if ($this->request->has('order')) {
+                //     $order = $this->request->get('order')[0]; // Get the first order column
+                //     $columnIndex = $order['column']; // The index of the column to order
+                //     $direction = $order['dir']; // The direction of the order (asc or desc)
                 
-                    $columns = ['firstname', 'firstname', 'firstname', 'firstname']; // Adjust according to your columns
+                //     $columns = ['firstname', 'firstname', 'firstname', 'firstname']; // Adjust according to your columns
                 
-                    if (isset($columns[$columnIndex])) {
-                        $query->orderBy($columns[$columnIndex], $direction);
-                    }
-                }
+                //     if (isset($columns[$columnIndex])) {
+                //         $query->orderBy($columns[$columnIndex], $direction);
+                //     }
+                // }
             })
             
             ->addColumn('profile', function ($row) {
@@ -97,6 +97,7 @@ class ProfessionalUserDataTable extends DataTable
                         </svg>';
                 }
             })
+            ->orderColumns(['firstname', 'lastname', 'username'], '-:column $1') // Enables sorting for these columns
 
             ->rawColumns(['profile', 'app_user']);
     }
@@ -119,7 +120,7 @@ class ProfessionalUserDataTable extends DataTable
             ->columns($this->getColumns())
             ->minifiedAjax()
             //->dom('Bfrtip')
-            ->orderBy(2)
+            ->orderBy(0)
             ->setTableAttributes(['class' => 'table table-bordered data-table users-data-table dataTable no-footer'])
             ->selectStyleSingle()
             ->buttons([
@@ -138,9 +139,9 @@ class ProfessionalUserDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('no')->title('#')->render('meta.row + meta.settings._iDisplayStart + 1;'),
+            Column::make('no')->title('#')->render('meta.row + meta.settings._iDisplayStart + 1;')->orderable(true),
             Column::make('profile'),
-            Column::make('username'),
+            Column::make('username')->orderable(true),
             Column::make('app_user')->title('App User'),
         ];
     }
