@@ -164,10 +164,14 @@ class UserController extends Controller
             $addUser->firstname = $request['firstname'];
             $addUser->lastname = $request['lastname'];
             $addUser->email = $request['email'];
+            $requireNewPassword = $request->has('require_new_password') ? true : false;
+            if ($requireNewPassword) {
+                $addUser->isTemporary_password = '1';
+            }
             $addUser->app_user  = '1';
             $addUser->remember_token = $randomString;
             $addUser->password = Hash::make($password);
-            $addUser->isTemporary_password = '1';
+            // $addUser->isTemporary_password = '1';
             $addUser->email_verified_at = Carbon::now()->toDateTimeString();
             $addUser->password_updated_date = Carbon::now()->format('Y-m-d');
 
