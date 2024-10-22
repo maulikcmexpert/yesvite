@@ -91,8 +91,9 @@ class ProfessionalUserDataTable extends DataTable
                         </svg>';
                 }
             })
-            ->orderColumn('username', 'firstname $1') // Sorting by full name
-
+            ->orderColumn('username', function ($query, $order) {
+                $query->orderBy('firstname', $order);
+            })
             ->rawColumns(['profile', 'app_user']);
     }
 
