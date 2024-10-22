@@ -132,10 +132,7 @@ class UserPostReportDataTable extends DataTable
         $column = 'id';
         
         if (isset($request->order[0]['column'])) {
-            if ($request->order[0]['column'] == '0') {
-                $column = User::select('firstname')
-                ->whereColumn('users.id', 'user_report_to_posts.user_id');
-                            }
+        
                 if ($request->order[0]['column'] == '1') {
                     $column = User::select('firstname')
                     ->whereColumn('users.id', 'user_report_to_posts.user_id');
@@ -184,7 +181,7 @@ class UserPostReportDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('no')->title('No')->render('meta.row + meta.settings._iDisplayStart + 1;')->orderable(true),
+            Column::make('no')->title('No')->render('meta.row + meta.settings._iDisplayStart + 1;')->orderable(false),
             Column::make('username')->title('Username(Reported By)')->orderable(true),
             Column::make('report_type')->title('Report Type')->orderable(false  ),
             Column::make('report_description')->title("Report Description")->width('250px')->className('report-description-td')->orderable(false),
