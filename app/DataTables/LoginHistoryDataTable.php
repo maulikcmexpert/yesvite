@@ -99,18 +99,18 @@ class LoginHistoryDataTable extends DataTable
 
         $column = 'id';  // Default column
     
-        // if (isset($request->order[0]['column'])) {
-        //     if ($request->order[0]['column'] == '1') {
-        //         // Sorting by the reporter user's firstname from the users table
-        //         $column = User::select('firstname')
-        //         ->whereColumn('users.id', 'login_histories.user_id');            } 
+        if (isset($request->order[0]['column'])) {
+            if ($request->order[0]['column'] == '1') {
+                // Sorting by the reporter user's firstname from the users table
+                $column = User::select('firstname')
+                ->whereColumn('users.id', 'login_histories.user_id');            } 
 
-        //         if ($request->order[0]['column'] == '0') {
-        //             // Sorting by the reporter user's firstname from the users table
-        //             $column = User::select('firstname')
-        //             ->whereColumn('users.id', 'login_histories.user_id'); 
-        //                    } 
-        // }
+                if ($request->order[0]['column'] == '0') {
+                    // Sorting by the reporter user's firstname from the users table
+                    $column = User::select('firstname')
+                    ->whereColumn('users.id', 'login_histories.user_id'); 
+                           } 
+        }
        
     
 
@@ -132,7 +132,7 @@ class LoginHistoryDataTable extends DataTable
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     //->dom('Bfrtip')
-                    ->orderBy(1)
+                    ->orderBy(0)
                     ->selectStyleSingle()
                     ->buttons([
                         Button::make('excel'),
