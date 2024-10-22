@@ -101,7 +101,7 @@ class AccountVerificationDataTable extends DataTable
         $column = 'id';  // Default column
     
         if (isset($request->order[0]['column'])) {
-            if ($request->order[0]['column'] == '2') {
+            if ($request->order[0]['column'] == '1') {
                 // Sorting by the reporter user's firstname from the users table
                 $column = "firstname";
             } elseif ($request->order[0]['column'] == '2') {
