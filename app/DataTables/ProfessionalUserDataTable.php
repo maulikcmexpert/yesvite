@@ -49,17 +49,18 @@ class ProfessionalUserDataTable extends DataTable
                         }
                     });
                 }
-                // if ($this->request->has('order')) {
-                //     $order = $this->request->get('order')[0]; // Get the first order column
-                //     $columnIndex = $order['column']; // The index of the column to order
-                //     $direction = $order['dir']; // The direction of the order (asc or desc)
+                if ($this->request->has('order')) {
+                    $order = $this->request->get('order')[0]; // Get the first order column
+                    $columnIndex = $order['column']; // The index of the column to order
+                    $direction = $order['dir']; // The direction of the order (asc or desc)
                 
-                //     $columns = ['firstname', 'firstname', 'firstname', 'firstname']; // Adjust according to your columns
+                    // Map column indexes to database columns
+                    $columns = ['firstname', 'lastname']; // Adjust this array according to your columns
                 
-                //     if (isset($columns[$columnIndex])) {
-                //         $query->orderBy($columns[$columnIndex], $direction);
-                //     }
-                // }
+                    if (isset($columns[$columnIndex])) {
+                        $query->orderBy($columns[$columnIndex], $direction);
+                    }
+                }
             })
             
             ->addColumn('profile', function ($row) {
