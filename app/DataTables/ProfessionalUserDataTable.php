@@ -102,7 +102,7 @@ class ProfessionalUserDataTable extends DataTable
      */
     public function query(User $model): QueryBuilder
     {
-        return  User::where(['account_type' => '1'])->orderBy('id', 'desc');
+        return  User::where(['account_type' => '1']);
     }
 
     /**
