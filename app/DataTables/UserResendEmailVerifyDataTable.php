@@ -145,7 +145,7 @@ class UserResendEmailVerifyDataTable extends DataTable
             Column::make('no')->title('#')->render('meta.row + meta.settings._iDisplayStart + 1;')->orderable(false),
             Column::make('profile')->title('Profile')->orderable(false),
             Column::make('username')->title('Username')->orderable(true),
-            Column::make('email')->title('Email')->orderable(false),
+            Column::make('email')->title('Email')->orderable(true),
             Column::make('resend_mail')->title('Resend Email')->orderable(false),
         ];
     }
