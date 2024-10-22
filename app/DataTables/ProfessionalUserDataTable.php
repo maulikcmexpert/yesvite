@@ -104,23 +104,32 @@ class ProfessionalUserDataTable extends DataTable
 
     /**
      * Get the query source of dataTable.
-     */
-    public function query(User $model, Request $request): QueryBuilder
-    {
-        if ($request->order[0]['column'] == '0') {
-            $column = 'id';
-        } else if ($request->order[0]['column'] == '2') {
-            $column = 'id';
-        } else {
-            $column = 'id';
-        }
-        $direction = 'desc';
+     */public function query(User $model, Request $request): QueryBuilder
+{
+    // Default column to sort by
+    $column = 'id'; // You can set this to the default column you want
 
-        if (isset($request->order[0]['dir']) && $request->order[0]['dir'] == 'asc') {
-            $direction = 'asc';
-        }
-        return User::where(['account_type' => '1'])->orderBy($column, $direction);
+    // Check the column from the request
+    if (isset($request->order[0]['column'])) {
+        if ($request->order[0]['column'] == '0') {
+            $column = 'id'; // Sorting by ID
+        } else if ($request->order[0]['column'] == '2') {
+            $column = 'firstname'; // Sorting by firstname
+        } 
+        // You can add more conditions for additional columns if needed
     }
+
+    // Default to descending order
+    $direction = 'desc';
+
+    // Check the sorting direction from the request
+    if (isset($request->order[0]['dir']) && $request->order[0]['dir'] == 'asc') {
+        $direction = 'asc'; // Change to ascending if specified
+    }
+
+    // Execute the query with the determined column and direction
+    return User::where(['account_type' => '1'])->orderBy($column, $direction);
+}
 
 
 
