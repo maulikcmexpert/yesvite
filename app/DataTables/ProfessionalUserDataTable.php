@@ -98,7 +98,7 @@ class ProfessionalUserDataTable extends DataTable
                 if($order=="desc"){
                     $orderBy="asc";
                 }
-                $query->orderBy('firstname', $orderBy);
+                $query->orderBy('id', $orderBy);
 
 
             })
@@ -112,7 +112,7 @@ class ProfessionalUserDataTable extends DataTable
      */
     public function query(User $model): QueryBuilder
     {
-        return  User::where(['account_type' => '1']);
+        return  User::where(['account_type' => '1'])->orderBy('id','desc');
     }
 
     
