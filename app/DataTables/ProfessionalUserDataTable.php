@@ -78,12 +78,12 @@ class ProfessionalUserDataTable extends DataTable
             </div>';
             })
             ->addColumn('username', function ($row) {
-                return $row->firstname . ' ' . $row->lastname;
+                return $row->firstname ;
 
             })
 
             ->orderColumn('username', function ($query, $order) {
-                $query->orderBy('firstname', $order)->orderBy('lastname', $order);
+                $query->orderBy('firstname', $order);
             })
             
             ->addColumn('app_user', function ($row) {
