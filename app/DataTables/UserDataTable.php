@@ -234,7 +234,7 @@ class UserDataTable extends DataTable
         return [
             Column::make('no')->title('#')->render('meta.row + meta.settings._iDisplayStart + 1;'),
             Column::make('profile'),
-            Column::make('name'),
+            Column::make('name')->orderable(true),
             Column::make('phone_number'),
             Column::make('email'),
             Column::make('app_user')->title('User Type'),
