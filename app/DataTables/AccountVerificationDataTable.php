@@ -107,8 +107,6 @@ class AccountVerificationDataTable extends DataTable
             } elseif ($request->order[0]['column'] == '3') {
                 // Sorting by the 'to' reporter user's firstname (assuming another user field)
                 $column = "email";
-            }elseif ($request->order[0]['column'] == '0'){
-                $column = "id";
             }
         }
     
