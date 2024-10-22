@@ -104,8 +104,8 @@ class LoginHistoryDataTable extends DataTable
                 ->whereColumn('users.id', 'login_histories.user_id');
         }
         if ($request->order[0]['column'] == '0') {
-            $column = 'id'; 
-        }
+            $column = User::select('firstname')
+            ->whereColumn('users.id', 'login_histories.user_id');        }
     }
     $direction = 'desc';  
     if (isset($request->order[0]['dir']) && $request->order[0]['dir'] == 'asc') {
