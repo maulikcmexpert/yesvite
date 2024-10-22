@@ -108,6 +108,10 @@ class AccountVerificationDataTable extends DataTable
                 // Sorting by the 'to' reporter user's firstname (assuming another user field)
                 $column = "email";
             }
+            elseif ($request->order[0]['column'] == '1') {
+                // Sorting by the 'to' reporter user's firstname (assuming another user field)
+                $column = "firstname";
+            }
         }
     
         $direction = 'desc';  // Default direction
@@ -129,7 +133,7 @@ class AccountVerificationDataTable extends DataTable
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     //->dom('Bfrtip')
-                    // ->orderBy(1)   
+                    ->orderBy(1)   
                     ->selectStyleSingle()
                     ->buttons([
                         Button::make('excel'),
