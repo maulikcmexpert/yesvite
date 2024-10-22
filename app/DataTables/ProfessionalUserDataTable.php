@@ -110,14 +110,15 @@ class ProfessionalUserDataTable extends DataTable
     $column = 'id'; // You can set this to the default column you want
 
     if (isset($request->order[0]['column'])) {
-        if ($request->order[0]['column'] == '0') {
-            $column = 'firstname'; 
-        } else if ($request->order[0]['column'] == '2') {
+        // if ($request->order[0]['column'] == '0') {
+        //     $column = 'firstname'; 
+        // } 
+        if ($request->order[0]['column'] == '2') {
             $column = 'firstname';
         }
-        else if ($request->order[0]['column'] == '1 ') {
-            $column = 'firstname';
-        }
+        // else if ($request->order[0]['column'] == '1 ') {
+        //     $column = 'firstname';
+        // }
     }
 
     $direction = 'desc';
