@@ -102,14 +102,9 @@ class AccountVerificationDataTable extends DataTable
     
         if (isset($request->order[0]['column'])) {
             if ($request->order[0]['column'] == '2') {
-                // Sorting by the reporter user's firstname from the users table
                 $column = "firstname";
             } elseif ($request->order[0]['column'] == '3') {
-                // Sorting by the 'to' reporter user's firstname (assuming another user field)
                 $column = "email";
-            }if ($request->order[0]['column'] == '0') {
-                // Sorting by the reporter user's firstname from the users table
-                $column = "firstname";
             }
         }
     
@@ -150,7 +145,7 @@ class AccountVerificationDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('no')->title('#')->render('meta.row + meta.settings._iDisplayStart + 1;')->orderable(true),
+            Column::make('no')->title('#')->render('meta.row + meta.settings._iDisplayStart + 1;')->orderable(false),
             Column::make('profile')->title('Profile')->orderable(false),
             Column::make('username')->title('Username')->orderable(true),
             Column::make('email')->title('Email')->orderable(true),
