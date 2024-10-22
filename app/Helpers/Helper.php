@@ -1660,14 +1660,16 @@ function set_android_iap($appid, $productID, $purchaseToken, $type)
     $result = curl_exec($ch);
     $result = json_decode($result, true);
 
-    if (!$result || (isset($result["access_token"]) && !$result["access_token"])) {
-        //error  
-        // return;
+    if (!isset($result["access_token"])) {
+        // Handle missing access_token
+        return 'Error: Access token is not available';
     }
+    
+    $accessToken = $result["access_token"];
 
 
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $VALIDATE_URL . "?access_token=" . (isset($result["access_token"]) && $result["access_token"] != null)?$result["access_token"]:'');
+    curl_setopt($ch, CURLOPT_URL, $VALIDATE_URL . "?access_token=" . $accessToken);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     $result1 = curl_exec($ch);
     $result1 = json_decode($result1, true);
