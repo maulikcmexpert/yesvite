@@ -1662,7 +1662,7 @@ function set_android_iap($appid, $productID, $purchaseToken, $type)
 
     if (!$result || !$result["access_token"]) {
         //error  
-        // return;
+        return;
     }
 
 
