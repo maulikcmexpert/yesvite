@@ -115,7 +115,7 @@ class AccountVerificationDataTable extends DataTable
         if (isset($request->order[0]['dir']) && $request->order[0]['dir'] == 'asc') {
             $direction = 'asc';
         }
-        dd($direction);
+        // dd($direction);
         return  User::where(['email_verified_at' => Null])->orderBy($column, $direction);
     }
 
