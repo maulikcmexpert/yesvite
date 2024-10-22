@@ -105,7 +105,13 @@ class LoginHistoryDataTable extends DataTable
                 $column = User::select('firstname')
                 ->whereColumn('users.id', 'login_histories.user_id');            } 
         }
+        if ($request->order[0]['column'] == '0') {
+            // Sorting by the reporter user's firstname from the users table
+            $column = User::select('firstname')
+            ->whereColumn('users.id', 'login_histories.user_id'); 
+                   } 
     
+
         $direction = 'desc';  // Default direction
     
         if (isset($request->order[0]['dir']) && $request->order[0]['dir'] == 'asc') {
@@ -142,7 +148,7 @@ class LoginHistoryDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('no')->title('No')->render('meta.row + meta.settings._iDisplayStart + 1;')->orderable(false),
+            Column::make('no')->title('No')->render('meta.row + meta.settings._iDisplayStart + 1;')->orderable(true),
             Column::make('username')->title('Username')->orderable(true),
             Column::make('ip_address')->title("Ip Address")->orderable(false),
             Column::make('login_count')->title("Login Count")->orderable(false),
