@@ -133,7 +133,7 @@ class UserPostReportDataTable extends DataTable
             if ($request->order[0]['column'] == '0') {
                 $column = 'firstname';
             }
-            if ($request->order[0]['column'] == '2') {
+            if ($request->order[0]['column'] == '1') {
                 $column = 'firstname';
             }
         }
@@ -144,7 +144,7 @@ class UserPostReportDataTable extends DataTable
             $direction = 'asc';
         }
 
-        return UserReportToPost::with(relations: ['events', 'users', 'event_posts'])->orderBy('id', 'desc');
+        return UserReportToPost::with(relations: ['events', 'users', 'event_posts'])->orderBy($column, $direction);
     }
 
     /**
