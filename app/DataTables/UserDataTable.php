@@ -11,6 +11,8 @@ use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
 use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
+
 
 class UserDataTable extends DataTable
 {
@@ -162,9 +164,27 @@ class UserDataTable extends DataTable
     /**
      * Get the query source of dataTable.
      */
-    public function query(User $model): QueryBuilder
+    public function query(User $model,Request $request): QueryBuilder
     {
-        return  User::where(['account_type' => '0'])->orderBy('id', 'desc');
+
+        $column = 'id';
+
+        if (isset($request->order[0]['column'])) {
+            // if ($request->order[0]['column'] == '0') {
+            //     $column = 'firstname';
+            // }
+            if ($request->order[0]['column'] == '2') {
+                $column = 'firstname';
+            }
+        }
+
+        $direction = 'desc';
+
+        if (isset($request->order[0]['dir']) && $request->order[0]['dir'] == 'asc') {
+            $direction = 'asc';
+        }
+
+        return  User::where(['account_type' => '0'])->orderBy($column, $direction);
         // $dateOnly = Carbon::now()->toDateString();
         // dd($dateOnly);
         // return User::with(relations: ['user_subscriptions' => function ($query) use ($dateOnly): void {
@@ -193,7 +213,7 @@ class UserDataTable extends DataTable
             ->columns($this->getColumns())
             ->minifiedAjax()
             //->dom('Bfrtip')
-            // ->orderBy(1)    
+            ->orderBy(1)    
             ->setTableAttributes(['class' => 'table table-bordered data-table users-data-table dataTable no-footer'])
             ->selectStyleSingle()
             ->buttons([
