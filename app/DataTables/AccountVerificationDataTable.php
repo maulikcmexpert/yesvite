@@ -104,9 +104,11 @@ class AccountVerificationDataTable extends DataTable
             if ($request->order[0]['column'] == '2') {
                 // Sorting by the reporter user's firstname from the users table
                 $column = "firstname";
-            } elseif ($request->order[0]['column'] == '2') {
+            } elseif ($request->order[0]['column'] == '3') {
                 // Sorting by the 'to' reporter user's firstname (assuming another user field)
                 $column = "email";
+            }elseif ($request->order[0]['column'] == '0'){
+                $column = "firstname";
             }
         }
     
@@ -129,7 +131,7 @@ class AccountVerificationDataTable extends DataTable
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     //->dom('Bfrtip')
-                    ->orderBy(0)
+                    ->orderBy(1)
                     ->selectStyleSingle()
                     ->buttons([
                         Button::make('excel'),
@@ -147,11 +149,11 @@ class AccountVerificationDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('no')->title('#')->render('meta.row + meta.settings._iDisplayStart + 1;'),
-            Column::make('profile')->title('Profile'),
+            Column::make('no')->title('#')->render('meta.row + meta.settings._iDisplayStart + 1;')->orderable(true),
+            Column::make('profile')->title('Profile')->orderable(false),
             Column::make('username')->title('Username')->orderable(true),
             Column::make('email')->title('Email')->orderable(true),
-            Column::make('action')->title('Action'),
+            Column::make('action')->title('Action')->orderable(false),
         ];
     }
 

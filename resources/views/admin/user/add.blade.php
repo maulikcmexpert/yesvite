@@ -56,7 +56,7 @@
                     <div class="col-lg-3 col-md-6 mb-3">
                         <div class="form-group">
                             <label for="phone_number">Phone Number</label>
-                            <input type="text" class="form-control phone_number" name="phone_number" placeholder="Enter Email Address" value="">
+                            <input type="text" class="form-control phone_number" name="phone_number" placeholder="Enter Phone Number" value="">
                             <span class="text-danger">{{ $errors->first('phone_number') }}</span>
                         </div>
                     </div>
