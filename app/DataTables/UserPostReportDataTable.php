@@ -131,28 +131,35 @@ class UserPostReportDataTable extends DataTable
         // Default sorting column
         $column = 'id';
     
-        // Check the request for a column to sort by
+        // Determine if a sorting column has been specified in the request
         if (isset($request->order[0]['column'])) {
             if ($request->order[0]['column'] == '0' || $request->order[0]['column'] == '1') {
-                // Set column to a subquery that selects 'firstname' from the 'users' table
+                // If sorting on column 0 or 1, sort by 'users.firstname'
                 $column = User::select('firstname')
                     ->whereColumn('users.id', 'user_report_to_posts.user_id')
                     ->limit(1);
             }
         }
     
-        // Default to descending order
+        // Default sorting direction is descending
         $direction = 'desc';
     
-        // Check for sorting direction in the request
+        // If the request specifies an ascending direction, update the direction
         if (isset($request->order[0]['dir']) && $request->order[0]['dir'] == 'asc') {
             $direction = 'asc';
         }
     
-        // Perform the query with eager loading and sorting by subquery on users' firstname
-        return UserReportToPost::with(['events', 'users', 'event_posts'])
-            ->orderBy($column, $direction);
+        // Query to fetch the data with relationships and dynamic sorting only if specified
+        $query = UserReportToPost::with(['events', 'users', 'event_posts']);
+    
+        // Apply orderBy only if a valid column and direction is set from the request
+        if (isset($request->order[0]['column'])) {
+            $query->orderBy($column, $direction);
+        }
+    
+        return $query;
     }
+    
     
 
     /**
