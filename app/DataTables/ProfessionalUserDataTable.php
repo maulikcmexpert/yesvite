@@ -110,9 +110,9 @@ class ProfessionalUserDataTable extends DataTable
         $column = 'id';
 
         if (isset($request->order[0]['column'])) {
-            // if ($request->order[0]['column'] == '0') {
-            //     $column = 'firstname';
-            // }
+            if ($request->order[0]['column'] == '0') {
+                $column = 'id';
+            }
             
             if ($request->order[0]['column'] == '2') {
                 $column = 'firstname';
@@ -141,7 +141,7 @@ class ProfessionalUserDataTable extends DataTable
             ->columns($this->getColumns())
             ->minifiedAjax()
             // ->dom('Bfrtip')
-            ->orderBy(1)
+            ->orderBy(0)
             ->setTableAttributes(['class' => 'table table-bordered data-table users-data-table dataTable no-footer'])
             ->selectStyleSingle()
             ->buttons([
