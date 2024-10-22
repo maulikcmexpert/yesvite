@@ -3761,6 +3761,8 @@ class ApiControllerv2 extends Controller
                 $purchase_status = true;
                 if ($checkProductSubscribe->subscription_plan_name == 'Pro' && $checkProductSubscribe->product_payment_id == NULL) {
                     $purchase_status = false;
+                }elseif($checkProductSubscribe->subscription_plan_name == 'Pro-Year'){
+                    $purchase_status = false;
                 }
             }
         DB::commit();
