@@ -3750,6 +3750,7 @@ class ApiControllerv2 extends Controller
         }
         $checkProductSubscribe =  Event::where('id', $eventCreation->id)->first();
         $purchase_status = true;
+        
         if ($checkProductSubscribe->subscription_plan_name == 'Pro' && $checkProductSubscribe->product_payment_id == NULL) {
             $purchase_status = false;
         }
