@@ -3759,7 +3759,6 @@ class ApiControllerv2 extends Controller
             }else{
                 $checkProductSubscribe =  Event::where('id', $eventCreation->id)->first();
                 $purchase_status = true;
-                
                 if ($checkProductSubscribe->subscription_plan_name == 'Pro' && $checkProductSubscribe->product_payment_id == NULL) {
                     $purchase_status = false;
                 }
@@ -5491,7 +5490,6 @@ class ApiControllerv2 extends Controller
             if((isset($input['subscription_plan_name']) && $input['subscription_plan_name'] =='Free') || (isset($input['subscription_plan_name']) && $input['subscription_plan_name'] =='Pro-year' && $userSubscription != null)){
                 $user  = Auth::guard('api')->user();
                 $checkUserInvited = Event::withCount('event_invited_user')->where('id', $input['event_id'])->first();
-                DB::commit();
                 if ($request->is_update_event == '0') {
                     if ($checkUserInvited->event_invited_user_count != '0' && $checkUserInvited->is_draft_save == '0') {
                         $notificationParam = [
@@ -5512,6 +5510,7 @@ class ApiControllerv2 extends Controller
                     }
                 }
             }
+            DB::commit();
             return response()->json(['status' => 1, 'message' => "Event images stored successfully"]);
         } catch (QueryException $e) {
             DB::rollBack();
