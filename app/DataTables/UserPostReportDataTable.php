@@ -143,6 +143,11 @@ class UserPostReportDataTable extends DataTable
                     ->whereColumn('events.id', 'user_report_to_posts.event_id');
     
                 }
+
+                if ($request->order[0]['column'] == '2') {
+                    $column = 'report_type';
+    
+                }
             }
             
             $direction = 'desc';
@@ -183,7 +188,7 @@ class UserPostReportDataTable extends DataTable
         return [
             Column::make('no')->title('No')->render('meta.row + meta.settings._iDisplayStart + 1;')->orderable(false),
             Column::make('username')->title('Username(Reported By)')->orderable(true),
-            Column::make('report_type')->title('Report Type')->orderable(false  ),
+            Column::make('report_type')->title('Report Type')->orderable(true),
             Column::make('report_description')->title("Report Description")->width('250px')->className('report-description-td')->orderable(false),
             Column::make('event_name')->title("Event Name")->orderable(true),
             Column::make('post_type')->title("Post Type")->orderable(false),
