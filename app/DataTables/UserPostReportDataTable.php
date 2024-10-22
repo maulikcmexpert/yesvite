@@ -11,6 +11,8 @@ use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
+use Illuminate\Http\Request;
+
 use App\Models\{
     UserReportToPost
 };
@@ -123,8 +125,25 @@ class UserPostReportDataTable extends DataTable
     /**
      * Get the query source of dataTable.
      */
-    public function query(UserReportToPost $model): QueryBuilder
+    public function query(UserReportToPost $model,Request $request): QueryBuilder
     {
+        $column = 'id';
+
+        if (isset($request->order[0]['column'])) {
+            if ($request->order[0]['column'] == '0') {
+                $column = 'firstname';
+            }
+            if ($request->order[0]['column'] == '2') {
+                $column = 'firstname';
+            }
+        }
+
+        $direction = 'desc';
+
+        if (isset($request->order[0]['dir']) && $request->order[0]['dir'] == 'asc') {
+            $direction = 'asc';
+        }
+
         return UserReportToPost::with(relations: ['events', 'users', 'event_posts'])->orderBy('id', 'desc');
     }
 
