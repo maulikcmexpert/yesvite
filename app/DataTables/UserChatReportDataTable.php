@@ -103,6 +103,8 @@ class UserChatReportDataTable extends DataTable
                     ->whereColumn('users.id', 'user_report_chats.to_be_reported_user_id');
             }else if($request->order[0]['column'] == '3'){
                 $column="report_type";
+            }else if($request->order[0]['column'] == '5'){
+                $column="created_at";
             }
         }
     
@@ -149,7 +151,7 @@ class UserChatReportDataTable extends DataTable
             Column::make('reported_username')->title("Reported Username (Reported To)")->orderable(true),
             Column::make('report_type')->title("Report Type")->orderable(true),
             Column::make('report_description')->title("Report Description")->width('250px')->className('report-description-td')->orderable(false),
-            Column::make('report_time')->title("Report Time")->orderable(false),
+            Column::make('report_time')->title("Report Time")->orderable(true),
             // Column::make('action')->title("Action"),
         ];
     }
