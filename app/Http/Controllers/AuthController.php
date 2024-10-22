@@ -276,7 +276,7 @@ class AuthController extends Controller
                         $loginHistory->login_count = 1;
                         $loginHistory->save();
                     }
-                    if()
+                    
                     return redirect()->route('profile');
 
                 } else {
