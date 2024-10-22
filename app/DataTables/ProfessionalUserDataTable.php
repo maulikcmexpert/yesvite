@@ -109,22 +109,23 @@ class ProfessionalUserDataTable extends DataTable
     // Default column to sort by
     $column = 'id'; // You can set this to the default column you want
 
-    // Check the column from the request
     if (isset($request->order[0]['column'])) {
         if ($request->order[0]['column'] == '0') {
-            $column = 'id'; // Sorting by ID
-        } else if ($request->order[0]['column'] == '2') {
-            $column = 'firstname'; // Sorting by firstname
+            $column = 'firstname'; 
+        }else if ($request->order[0]['column'] == '1') {
+            $column = 'firstname';
+        }  else if ($request->order[0]['column'] == '2') {
+            $column = 'firstname';
         } 
-        // You can add more conditions for additional columns if needed
+        else if ($request->order[0]['column'] == '3') {
+            $column = 'firstname';
+        } 
     }
 
-    // Default to descending order
     $direction = 'desc';
 
-    // Check the sorting direction from the request
     if (isset($request->order[0]['dir']) && $request->order[0]['dir'] == 'asc') {
-        $direction = 'asc'; // Change to ascending if specified
+        $direction = 'asc'; 
     }
 
     // Execute the query with the determined column and direction
