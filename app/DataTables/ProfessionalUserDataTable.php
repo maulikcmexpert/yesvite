@@ -70,10 +70,6 @@ class ProfessionalUserDataTable extends DataTable
                 return $row->firstname ;
 
             })
-
-            ->orderColumn('username', function ($query, $order) {
-                $query->orderBy('firstname', $order);
-            })
             
             ->addColumn('app_user', function ($row) {
                 if ($row->app_user == '1') {
@@ -112,7 +108,7 @@ class ProfessionalUserDataTable extends DataTable
      */
     public function query(User $model): QueryBuilder
     {
-        return  User::where(['account_type' => '1'])->orderBy('id','desc');
+        return  User::where(['account_type' => '1']);
     }
 
     
