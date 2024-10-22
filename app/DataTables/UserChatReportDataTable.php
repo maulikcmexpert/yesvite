@@ -90,6 +90,7 @@ class UserChatReportDataTable extends DataTable
      */
     public function query(UserReportChat $model,Request $request): QueryBuilder
     {
+        $column = 'id';
         // return UserReportChat::orderBy('id', 'desc');
         if (isset($request->order[0]['column'])) {
             
@@ -107,7 +108,7 @@ class UserChatReportDataTable extends DataTable
     if (isset($request->order[0]['dir']) && $request->order[0]['dir'] == 'asc') {
         $direction = 'asc';
     }
-        return UserReportChat::with(['reporter_user', 'to_reporter_user'])->orderBy($column, $direction);
+        return UserReportChat::with(['reporter_user', 'to_reporter_user'])->->orderBy($column, $direction);
     }
 
     /**
