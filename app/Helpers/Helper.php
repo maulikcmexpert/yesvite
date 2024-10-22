@@ -1624,59 +1624,59 @@ function checkSubscription($userId)
 
 function set_android_iap($appid, $productID, $purchaseToken, $type)
 {
-    $ch = curl_init();
-    $clientId = env('InGOOGLE_CLIENT_ID');
+    // $ch = curl_init();
+    // $clientId = env('InGOOGLE_CLIENT_ID');
 
-    $clientSecret = env('InGOOGLE_CLIENT_SECRET');
-    $redirectUri = 'https://yesvite.cmexpertiseinfotech.in/google/callback';
+    // $clientSecret = env('InGOOGLE_CLIENT_SECRET');
+    // $redirectUri = 'https://yesvite.cmexpertiseinfotech.in/google/callback';
 
-    $refreshToken = '1//0gHYN_Ai3rfAnCgYIARAAGBASNwF-L9IrdP-JOsDTkXeH-yqO_Z252HkBEfW7oqRZqcbTrsTQ_u_8eeif8HSml-a-i0Foi6iVH4Q';
-
-
-    $TOKEN_URL = "https://accounts.google.com/o/oauth2/token";
-
-    $VALIDATE_URL = "https://www.googleapis.com/androidpublisher/v3/applications/" .
-        $appid . "/purchases/subscriptions/" .
-        $productID . "/tokens/" . $purchaseToken;
-    if ($type == 'product') {
-
-        $VALIDATE_URL = "https://www.googleapis.com/androidpublisher/v3/applications/" .
-            $appid . "/purchases/products/" .
-            $productID . "/tokens/" . $purchaseToken;
-    }
+    // $refreshToken = '1//0gHYN_Ai3rfAnCgYIARAAGBASNwF-L9IrdP-JOsDTkXeH-yqO_Z252HkBEfW7oqRZqcbTrsTQ_u_8eeif8HSml-a-i0Foi6iVH4Q';
 
 
-    $input_fields = 'refresh_token=' . $refreshToken .
-        '&client_secret=' . $clientSecret .
-        '&client_id=' . $clientId .
-        '&redirect_uri=' . $redirectUri .
-        '&grant_type=refresh_token';
+    // $TOKEN_URL = "https://accounts.google.com/o/oauth2/token";
 
-    //Request to google oauth for authentication
-    curl_setopt($ch, CURLOPT_URL, $TOKEN_URL);
-    curl_setopt($ch, CURLOPT_POST, 1);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $input_fields);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    $result = curl_exec($ch);
-    $result = json_decode($result, true);
+    // $VALIDATE_URL = "https://www.googleapis.com/androidpublisher/v3/applications/" .
+    //     $appid . "/purchases/subscriptions/" .
+    //     $productID . "/tokens/" . $purchaseToken;
+    // if ($type == 'product') {
 
-    if (!$result || (isset($result["access_token"]) && !$result["access_token"])) {
-        //error  
-        // return;
-    }
+    //     $VALIDATE_URL = "https://www.googleapis.com/androidpublisher/v3/applications/" .
+    //         $appid . "/purchases/products/" .
+    //         $productID . "/tokens/" . $purchaseToken;
+    // }
 
 
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $VALIDATE_URL . "?access_token=" . (isset($result["access_token"]) && $result["access_token"] != null)?$result["access_token"]:'');
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    $result1 = curl_exec($ch);
-    $result1 = json_decode($result1, true);
-    if (!$result1 || (isset($result1["error"]) && $result1["error"] != null)) {
-        //error
-        // return;
-    }
+    // $input_fields = 'refresh_token=' . $refreshToken .
+    //     '&client_secret=' . $clientSecret .
+    //     '&client_id=' . $clientId .
+    //     '&redirect_uri=' . $redirectUri .
+    //     '&grant_type=refresh_token';
 
-    return $result1;
+    // //Request to google oauth for authentication
+    // curl_setopt($ch, CURLOPT_URL, $TOKEN_URL);
+    // curl_setopt($ch, CURLOPT_POST, 1);
+    // curl_setopt($ch, CURLOPT_POSTFIELDS, $input_fields);
+    // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    // $result = curl_exec($ch);
+    // $result = json_decode($result, true);
+
+    // if (!$result || (isset($result["access_token"]) && !$result["access_token"])) {
+    //     //error  
+    //     // return;
+    // }
+
+
+    // $ch = curl_init();
+    // curl_setopt($ch, CURLOPT_URL, $VALIDATE_URL . "?access_token=" . (isset($result["access_token"]) && $result["access_token"] != null)?$result["access_token"]:'');
+    // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    // $result1 = curl_exec($ch);
+    // $result1 = json_decode($result1, true);
+    // if (!$result1 || (isset($result1["error"]) && $result1["error"] != null)) {
+    //     //error
+    //     // return;
+    // }
+
+    // return $result1;
 }
 
 function add_user_firebase($userId, $userStatus = null)
