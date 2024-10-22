@@ -108,7 +108,7 @@ class ProfessionalUserDataTable extends DataTable
      */
     public function query(User $model): QueryBuilder
     {
-        return  User::where(['account_type' => '1']);
+        return  User::where(['account_type' => '1'])->orderBy('id','desc');
     }
 
     
@@ -123,7 +123,7 @@ class ProfessionalUserDataTable extends DataTable
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->dom('Bfrtip')
-            ->orderBy(0)
+            // ->orderBy(0)
             ->setTableAttributes(['class' => 'table table-bordered data-table users-data-table dataTable no-footer'])
             ->selectStyleSingle()
             ->buttons([
