@@ -96,11 +96,11 @@ class UserChatReportDataTable extends DataTable
             if ($request->order[0]['column'] == '1') {
                 // Sorting by the reporter user's firstname from the users table
                 $column = User::select('firstname')
-                    ->whereColumn('users.id', 'user_report_chats.user_id');
+                    ->whereColumn('users.id', 'user_report_chats.reporter_user_id');
             } elseif ($request->order[0]['column'] == '2') {
                 // Sorting by the 'to' reporter user's firstname (assuming another user field)
                 $column = User::select('firstname')
-                    ->whereColumn('users.id', 'user_report_chats.to_user_id');
+                    ->whereColumn('users.id', 'user_report_chats.to_be_reported_user_id');
             }
         }
     
