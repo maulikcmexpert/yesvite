@@ -155,32 +155,38 @@ class UserController extends Controller
 
         DB::beginTransaction();
         try {
-            $password = $request['firstname'] . '123';
-            $randomString = Str::random(30);
+            $addUser = new User();
 
-            $data = [
-                'firstname' => $request['firstname'],
-                'lastname' => $request['lastname'],
-                'email' => $request['email'],
-                'app_user' => '1',
-                'remeber_token'=> $randomString,
-                'password' => Hash::make($password),
-                'isTemporary_password'=>'1',
-                'email_verified_at' => Carbon::now()->toDateTimeString(),
-                'password_updated_date' => Carbon::now()->format('Y-m-d'),
-            ];
+            // Set the addUser attributes
+            $password = $request['firstname'] . '123';  // Generate temporary password
+            $randomString = Str::random(30);  // Generate random remember token
 
-            
-            if (!empty($request['phone_number'])) {
-                $data['phone_number'] = $request['phone_number'];
+            $addUser->firstname = $request['firstname'];
+            $addUser->lastname = $request['lastname'];
+            $addUser->email = $request['email'];
+            $requireNewPassword = $request->has('require_new_password') ? true : false;
+            if ($requireNewPassword) {
+                $addUser->isTemporary_password = '1';
             }
-            $addUser = User::create($data);
+            $addUser->app_user  = '1';
+            $addUser->remember_token = $randomString;
+            $addUser->password = Hash::make($password);
+            // $addUser->isTemporary_password = '1';
+            $addUser->email_verified_at = Carbon::now()->toDateTimeString();
+            $addUser->password_updated_date = Carbon::now()->format('Y-m-d');
 
+            // Add phone number if provided
+            if (!empty($request['phone_number'])) {
+                $addUser->phone_number = $request['phone_number'];
+            }
+
+            // Save the addUser to the database
+            $addUser->save();
             $userData = [
                 'username' => $request['firstname'] . ' ' . $request['lastname'],
                 'email' => $request['email'],
-                'token'=> $randomString,
-                'password'=>$password
+                'token' => $randomString,
+                'password' => $password
             ];
 
             // dd($userData);

@@ -61,6 +61,14 @@
                         </div>
                     </div>
 
+                    <div class="col-lg-3 col-md-6 mb-3">
+                        <div class="form-group">
+                            <label for="require_new_password">
+                                <input type="checkbox" name="require_new_password" id="require_new_password">
+                                Require New Password on Login
+                            </label>
+                        </div>
+                    </div>
 
 
 

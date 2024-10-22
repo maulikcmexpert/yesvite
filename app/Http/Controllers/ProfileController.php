@@ -413,6 +413,9 @@ class ProfileController extends Controller
         $userUpdate = User::where('id', $id)->first();
         $userUpdate->password = Hash::make($request->new_password);
         $userUpdate->password_updated_date = date('Y-m-d');
+        if($userUpdate->isTemporary_password=="1"){
+            $userUpdate->isTemporary_password = "0";
+        }
         $userUpdate->save();
 
         DB::commit();

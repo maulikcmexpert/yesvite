@@ -11,8 +11,12 @@ use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
+use Illuminate\Http\Request;
+
 use App\Models\{
-    UserReportToPost
+    UserReportToPost,
+    User,
+    Event
 };
 
 class UserPostReportDataTable extends DataTable
@@ -123,9 +127,32 @@ class UserPostReportDataTable extends DataTable
     /**
      * Get the query source of dataTable.
      */
-    public function query(UserReportToPost $model): QueryBuilder
+    public function query(UserReportToPost $model,Request $request): QueryBuilder
     {
-        return UserReportToPost::with(relations: ['events', 'users', 'event_posts'])->orderBy('id', 'desc');
+        $column = 'id';
+        
+        if (isset($request->order[0]['column'])) {
+            if ($request->order[0]['column'] == '0') {
+                $column = User::select('firstname')
+                ->whereColumn('users.id', 'user_report_to_posts.user_id');
+                            }
+                if ($request->order[0]['column'] == '1') {
+                    $column = User::select('firstname')
+                    ->whereColumn('users.id', 'user_report_to_posts.user_id');
+                }
+
+                if ($request->order[0]['column'] == '4') {
+                    $column = Event::select('event_name')
+                    ->whereColumn('events.id', 'user_report_to_posts.event_id');
+    
+                }
+            }
+            
+            $direction = 'desc';
+        if (isset($request->order[0]['dir']) && $request->order[0]['dir'] == 'asc') {
+            $direction = 'asc';
+        }
+        return UserReportToPost::with(['events', 'users', 'event_posts'])->orderBy($column, $direction);
     }
 
     /**
@@ -139,7 +166,7 @@ class UserPostReportDataTable extends DataTable
             ->minifiedAjax()
             //->dom('Bfrtip')
             ->setTableAttributes(['class' => 'table table-bordered data-table users-data-table dataTable no-footer'])
-            ->orderBy(1)
+            ->orderBy(0)
             ->selectStyleSingle()
             ->buttons([
                 Button::make('excel'),
@@ -157,13 +184,13 @@ class UserPostReportDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('no')->title('No')->render('meta.row + meta.settings._iDisplayStart + 1;'),
-            Column::make('username')->title('Username(Reported By)'),
-            Column::make('report_type')->title('Report Type'),
-            Column::make('report_description')->title("Report Description")->width('250px')->className('report-description-td'),
-            Column::make('event_name')->title("Event Name"),
-            Column::make('post_type')->title("Post Type"),
-            Column::make('action')->title("Action"),
+            Column::make('no')->title('No')->render('meta.row + meta.settings._iDisplayStart + 1;')->orderable(true),
+            Column::make('username')->title('Username(Reported By)')->orderable(true),
+            Column::make('report_type')->title('Report Type')->orderable(false  ),
+            Column::make('report_description')->title("Report Description")->width('250px')->className('report-description-td')->orderable(false),
+            Column::make('event_name')->title("Event Name")->orderable(true),
+            Column::make('post_type')->title("Post Type")->orderable(false),
+            Column::make('action')->title("Action")->orderable(false),
         ];
     }
 
