@@ -183,12 +183,12 @@ class UserController extends Controller
                 'password'=>$password
             ];
 
-            dd($userData);
+            // dd($userData);
 
-            // Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($request) {
-            //     $message->to($request['email']);
-            //     $message->subject('Verify your Yesvite email address');
-            // });
+            Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($request) {
+                $message->to($request['email']);
+                $message->subject('Verify your Yesvite email address');
+            });
 
             DB::commit();
             $this->addInFirebase($addUser->id);
