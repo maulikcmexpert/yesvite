@@ -1241,7 +1241,7 @@ function adminNotification($notificationType, $postData)
             // try {
             //     SendBroadcastEmailJob::dispatch($emails, $message);
             // } catch (\Exception $e) {
-            //     dd($e->getMessage());
+            //     // dd($e->getMessage());
             //     return response()->json(['error' => 'Failed to send emails.'], 500);
             // }
 
