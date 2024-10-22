@@ -163,10 +163,10 @@ class ProfessionalUserDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('no')->title('#')->render('meta.row + meta.settings._iDisplayStart + 1;'),
+            Column::make('no')->title('#')->render('meta.row + meta.settings._iDisplayStart + 1;')->orderable(true),
             Column::make('profile')->orderable(false),
             Column::make('username')->orderable(true),
-            Column::make('app_user')->title('App User'),
+            Column::make('app_user')->title('App User')->orderable(false),
         ];
     }
 
