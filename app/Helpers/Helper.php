@@ -1660,6 +1660,11 @@ function set_android_iap($appid, $productID, $purchaseToken, $type)
     $result = curl_exec($ch);
     $result = json_decode($result, true);
 
+    if (isset($result['error'])) {
+        // Handle Google OAuth error
+        return 'Error: ' . $result['error'] . ' - ' . $result['error_description'];
+    }
+
     if (!isset($result["access_token"])) {
         // Handle missing access_token
         return 'Error: Access token is not available';
