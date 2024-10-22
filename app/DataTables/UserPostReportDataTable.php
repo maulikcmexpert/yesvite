@@ -132,7 +132,7 @@ class UserPostReportDataTable extends DataTable
         $column = 'id';
         
         if (isset($request->order[0]['column'])) {
-        
+            
                 if ($request->order[0]['column'] == '1') {
                     $column = User::select('firstname')
                     ->whereColumn('users.id', 'user_report_to_posts.user_id');
@@ -163,7 +163,7 @@ class UserPostReportDataTable extends DataTable
             ->minifiedAjax()
             //->dom('Bfrtip')
             ->setTableAttributes(['class' => 'table table-bordered data-table users-data-table dataTable no-footer'])
-            ->orderBy(1)
+            ->orderBy(0)
             ->selectStyleSingle()
             ->buttons([
                 Button::make('excel'),
