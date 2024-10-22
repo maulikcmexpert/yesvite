@@ -225,7 +225,6 @@ class AuthController extends Controller
             $userIpAddress = request()->ip();
 
             $user = Auth::guard('web')->user();
-            dd($user);
             if ($user->email_verified_at != NULL) {
 
                 Session::regenerate();
@@ -276,8 +275,11 @@ class AuthController extends Controller
                         $loginHistory->login_count = 1;
                         $loginHistory->save();
                     }
-                    
-                    return redirect()->route('profile');
+                    if($user->isTemporary_password=="1"){
+                        return redirect()->route('profile.change_password');
+                    }else{
+                        return redirect()->route('profile');
+                    }
 
                 } else {
                     return redirect()->back()->withErrors([
