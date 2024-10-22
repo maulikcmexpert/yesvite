@@ -3430,7 +3430,7 @@ class ApiControllerv2 extends Controller
             'message_to_guests' => (!empty($eventData['message_to_guests'])) ? $eventData['message_to_guests'] : "",
             'subscription_plan_name' => (!empty($eventData['subscription_plan_name'])) ? $eventData['subscription_plan_name'] : "",
             'subscription_invite_count' => (!empty($eventData['subscription_invite_count'])) ? $eventData['subscription_invite_count'] : 0,
-            'is_draft_save' => $eventData['is_draft_save'],
+            'is_draft_save' => (!empty($eventData['subscription_plan_name']) && $eventData['subscription_plan_name'] == 'Pro') ? "1" : $eventData['is_draft_save']
             // 'static_information' => $staticInformation,
             // 'design_image' => (!empty($eventData['design_image'])) ? $eventData['design_image'] : "",
 
