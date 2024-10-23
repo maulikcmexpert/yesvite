@@ -91,7 +91,7 @@
 </section>
 
 
-<script>
+{{-- <script>
     document.addEventListener('DOMContentLoaded', function() {
         function clearGeneratedOtp() {
             const generatedOtpField = document.getElementById('generated_otp');
@@ -101,4 +101,4 @@
         }
         setInterval(clearGeneratedOtp, 120);
     });
-</script>
+</script> --}}
