@@ -21,6 +21,8 @@
                 url: "{{ URL::to('admin/sendNotification/send') }}",
                 data: formData,
                 success: function(response) {
+                    console.log(response);
+                    
                     // Handle success (e.g., show a success message)
                     // Optional: Display a success message
                     if(response.status=="success"){
