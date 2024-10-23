@@ -1975,7 +1975,6 @@ $(".removeShapImage").click(function(){
             })
            console.log(shapeImageData);
             console.log('final'+finalArray);
-            alert();
             return finalArray;
         }
         document.getElementById('addTextButton').addEventListener('click', function() {
@@ -2031,8 +2030,8 @@ $(".removeShapImage").click(function(){
 
             // hideStaticTextElements(); 
             var textData = getTextDataFromCanvas();
-            console.log(textData);
             var textElements = textData[0].textElements;
+            console.log(textElements);
             // Accessing the text elements
             if(textData[1]){
                 var shapeImageData = textData[1].shapeImageData;
