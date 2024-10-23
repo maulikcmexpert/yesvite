@@ -12591,7 +12591,6 @@ class ApiControllerv3 extends Controller
                     $new_subscription->save();
                     if(isset($input['event_id']) && $input['event_id'] != ''){
                         if(isset($input['is_draft']) && $input['is_draft'] =='0'){
-                            dd(1);
                             $notificationParam = [
                                 'sender_id' => $user_id,
                                 'event_id' => $input['event_id'],
