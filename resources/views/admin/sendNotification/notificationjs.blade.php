@@ -22,7 +22,7 @@
                 url: "{{ URL::to('admin/sendNotification/send') }}",
                 data: formData,
                 success: function(response) {
-                    console.log(response);.
+                    console.log(response);
                     console.log(response.status);
 
                     
