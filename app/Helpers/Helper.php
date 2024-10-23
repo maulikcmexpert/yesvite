@@ -1253,21 +1253,21 @@ function adminNotification($notificationType, $postData)
             // }
        
 
-            $deviceData = Device::all();
-            foreach ($deviceData as $device) {
-                $deviceDataArray[] = [
-                    'device_token' => $device->device_token,
-                ];
-                $notificationData = [
-                    'message' => $message,
-                    'type' => $notificationType,
-                ];
-                try {
-                    send_notification_FCM_and($device->device_token, $notificationData);
-                } catch (\Exception $e) {
-                    return response()->json(['error' => 'Failed to send emails.'], 500);
-                }
-            }
+            // $deviceData = Device::all();
+            // foreach ($deviceData as $device) {
+            //     $deviceDataArray[] = [
+            //         'device_token' => $device->device_token,
+            //     ];
+            //     $notificationData = [
+            //         'message' => $message,
+            //         'type' => $notificationType,
+            //     ];
+            //     try {
+            //         send_notification_FCM_and($device->device_token, $notificationData);
+            //     } catch (\Exception $e) {
+            //         return response()->json(['error' => 'Failed to send emails.'], 500);
+            //     }
+            // }
 
             try {
                 SendBroadcastEmailJob::dispatch($emails, $message);
