@@ -44,7 +44,11 @@
                         if (data.static_information) {
                             const staticInfo = JSON.parse(data.static_information);
                             let element = staticInfo?.shapeImageData;
+                            
                             console.log(element)
+                            if(element!=undefined){
+
+                            
                             if (element.shape != undefined && element.centerX != undefined && element
                                 .centerY != undefined && element.height != undefined && element.width !=
                                 undefined) {
@@ -433,7 +437,7 @@
                                 /////////////////
 
                             }
-
+                        }
                         } else {
                             const defaultShape = 'rectangle'; // Set the desired default shape here
 
