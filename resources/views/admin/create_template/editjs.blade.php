@@ -1974,8 +1974,8 @@ $(".removeShapImage").click(function(){
                 'textElements': textData
             })
            
-            console.log(finalArray);
-
+            console.log('final'+finalArray);
+            alert();
             return finalArray;
         }
         document.getElementById('addTextButton').addEventListener('click', function() {
