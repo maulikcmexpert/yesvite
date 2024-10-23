@@ -179,16 +179,13 @@
         });
 
         document.querySelectorAll('.description').forEach(function(textarea) {
-    ClassicEditor
-        .create(textarea)
-        .then(editor => {
-            editor.ui.view.editable.element.style.height = '350px'; // Set the height to 350px or your desired value
-        })
-        .catch(error => {
-            console.error(error);
-        });
-});
+            ClassicEditor
+                .create(textarea)
 
+                .catch(error => {
+                    console.error(error);
+                });
+        });
 
     });
 </script>
