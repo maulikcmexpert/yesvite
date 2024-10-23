@@ -12590,13 +12590,16 @@ class ApiControllerv3 extends Controller
                     // $new_subscription->countryCode = $responce['countryCode'];
                     $new_subscription->save();
                     if(isset($input['event_id']) && $input['event_id'] != ''){
-                        Event::where('id',$input['event_id'])->update(['is_draft_save'=>'0']);
-                        $notificationParam = [
-                            'sender_id' => $user_id,
-                            'event_id' => $input['event_id'],
-                            'post_id' => ""
-                        ];
-                        sendNotification('invite', $notificationParam);
+                        if(isset($request->is_draft) && $request->is_draft=='0'){
+                            Event::where('id',$input['event_id'])->update(['is_draft_save'=>'0']);
+                            $notificationParam = [
+                                'sender_id' => $user_id,
+                                'event_id' => $input['event_id'],
+                                'post_id' => ""
+                            ];
+                            sendNotification('invite', $notificationParam);
+                            sendNotification('owner_notify', $notificationParam);
+                        }
                     }
 
                     return response()->json(['status' => 1, 'message' => "subscription sucessfully"]);
@@ -12631,14 +12634,16 @@ class ApiControllerv3 extends Controller
                     $new_subscription->device_type = $input['device_type'];
                     $new_subscription->save();
                     if(isset($input['event_id']) && $input['event_id'] != ''){
-                        Event::where('id',$input['event_id'])->update(['is_draft_save'=>'0']);
-                        $notificationParam = [
-                            'sender_id' => $user_id,
-                            'event_id' => $input['event_id'],
-                            'post_id' => ""
-                        ];
-                        sendNotification('invite', $notificationParam);
-                        sendNotification('owner_notify', $notificationParam);
+                        if(isset($request->is_draft) && $request->is_draft=='0'){
+                            Event::where('id',$input['event_id'])->update(['is_draft_save'=>'0']);
+                            $notificationParam = [
+                                'sender_id' => $user_id,
+                                'event_id' => $input['event_id'],
+                                'post_id' => ""
+                            ];
+                            sendNotification('invite', $notificationParam);
+                            sendNotification('owner_notify', $notificationParam);
+                        }
                     }
 
                     return response()->json(['status' => 1, 'message' => "subscription sucessfully"]);
@@ -12730,28 +12735,30 @@ class ApiControllerv3 extends Controller
                 //         'is_draft_save' => '0',
                 //         'product_payment_id' => $new_subscription->id,
                 //     ]);
-                $updateEvent = Event::where('id', $input['event_id'])->first();
-                if ($updateEvent != null) {
-                    $invite_count = (isset($input['subscription_invite_count']) && $input['subscription_invite_count'] != null) ? $input['subscription_invite_count'] : 0;
-                    if($updateEvent->is_draft_save == '1'){
-                        $notificationParam = [
-                            'sender_id' => $user_id,
-                            'event_id' => $input['event_id'],
-                            'post_id' => ""
-                        ];
-                        sendNotification('invite', $notificationParam);
-                        sendNotification('owner_notify', $notificationParam);
-                        $updateEvent->is_draft_save = '0';
-                    }
-                    $updateEvent->product_payment_id = $new_subscription->id;
-                    if ($updateEvent->subscription_plan_name != 'Free') {
-                        $updateEvent->subscription_invite_count = $updateEvent->subscription_invite_count + (int)$invite_count;
-                    } else {
-                        $updateEvent->subscription_invite_count = $invite_count;
-                    }
-                    $updateEvent->subscription_plan_name = 'Pro';
-                    $updateEvent->save();
+                if(isset($request->is_draft) && $request->is_draft=='0'){
+                    $updateEvent = Event::where('id', $input['event_id'])->first();
+                    if ($updateEvent != null) {
+                        $invite_count = (isset($input['subscription_invite_count']) && $input['subscription_invite_count'] != null) ? $input['subscription_invite_count'] : 0;
+                        if($updateEvent->is_draft_save == '1'){
+                            $notificationParam = [
+                                'sender_id' => $user_id,
+                                'event_id' => $input['event_id'],
+                                'post_id' => ""
+                            ];
+                            sendNotification('invite', $notificationParam);
+                            sendNotification('owner_notify', $notificationParam);
+                            $updateEvent->is_draft_save = '0';
+                        }
+                        $updateEvent->product_payment_id = $new_subscription->id;
+                        if ($updateEvent->subscription_plan_name != 'Free') {
+                            $updateEvent->subscription_invite_count = $updateEvent->subscription_invite_count + (int)$invite_count;
+                        } else {
+                            $updateEvent->subscription_invite_count = $invite_count;
+                        }
+                        $updateEvent->subscription_plan_name = 'Pro';
+                        $updateEvent->save();
 
+                    }
                 }
             }
             return response()->json(['status' => 1, 'message' => "purchase sucessfully"]);
