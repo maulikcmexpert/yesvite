@@ -7,6 +7,7 @@ var selected_co_host = '';
 var selected_co_host_prefer_by = '';
 var final_step = 1;
 var swiper;
+alert();
 $(document).ready(function () {
     if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
         //  alert(design);
@@ -87,7 +88,6 @@ var swiper = new Swiper(".mySwiper", {
 });
 
 $(document).on("click", ".create-event-btn", function () {
-    alert();
     toggleSidebar('sidebar_create_event');
 })
 
