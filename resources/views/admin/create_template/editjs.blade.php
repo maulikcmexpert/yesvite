@@ -1962,17 +1962,18 @@ $(".removeShapImage").click(function(){
                         width: obj.getScaledWidth(), // Get the scaled width
                         height: obj.getScaledHeight(), // Get the scaled height
                     };
-                    if (shapeImageData) {
-                finalArray.push({
-                    shapeImageData: shapeImageData
-                 });
-                }
+                
              
             }
             });
             finalArray.push({
                 'textElements': textData
             })
+            if (shapeImageData!=undefined) {
+                finalArray.push({
+                    shapeImageData: shapeImageData
+                 });
+                }
         //    console.log(shapeImageData);
             console.log('final'+finalArray);
             return finalArray;
