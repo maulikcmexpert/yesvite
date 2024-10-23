@@ -94,44 +94,44 @@ $(document).on('click', '#Next_btn_otp', function () {
     alert();
     var now = new Date();
     var formattedTime = now.toLocaleTimeString();
-    alert(formattedTime);
+    // alert(formattedTime);
     $('#forgetpasswordemail').submit();
 
 });
 
-document.getElementById("otpform").addEventListener("submit", function (event) {
-    const otpFields = document.querySelectorAll(".otp__digit");
-    let isValid = true;
-    let errorMessage = "";
+// document.getElementById("otpform").addEventListener("submit", function (event) {
+//     const otpFields = document.querySelectorAll(".otp__digit");
+//     let isValid = true;
+//     let errorMessage = "";
 
-    otpFields.forEach((field) => {
-        if (field.value.trim() === "") {
-            isValid = false;
-        }
-    });
+//     otpFields.forEach((field) => {
+//         if (field.value.trim() === "") {
+//             isValid = false;
+//         }
+//     });
 
-    if (!isValid) {
-        errorMessage = "Please enter the OTP.";
-        document.getElementById("otp-error").textContent = errorMessage;
-        event.preventDefault();
-    } else {
-        document.getElementById("otp-error").textContent = "";
-        var otp1 = $("#otp1").val();
-        var otp2 = $("#otp2").val();
-        var otp3 = $("#otp3").val();
-        var otp4 = $("#otp4").val();
+//     if (!isValid) {
+//         errorMessage = "Please enter the OTP.";
+//         document.getElementById("otp-error").textContent = errorMessage;
+//         event.preventDefault();
+//     } else {
+//         document.getElementById("otp-error").textContent = "";
+//         var otp1 = $("#otp1").val();
+//         var otp2 = $("#otp2").val();
+//         var otp3 = $("#otp3").val();
+//         var otp4 = $("#otp4").val();
 
-        var otp = otp1 + otp2 + otp3 + otp4;
-        var generated_otp = $("#generated_otp").val();
+//         var otp = otp1 + otp2 + otp3 + otp4;
+//         var generated_otp = $("#generated_otp").val();
 
-        if (otp == generated_otp) {
-            $("#otp-error").text("");
-        } else {
-            $("#otp-error").text("OTP is incorrect");
-            event.preventDefault();
-        }
-    }
-});
+//         if (otp == generated_otp) {
+//             $("#otp-error").text("");
+//         } else {
+//             $("#otp-error").text("OTP is incorrect");
+//             event.preventDefault();
+//         }
+//     }
+// });
 
 $(document).on("click", "#resend_otp", function () {
     var email = $("#useremail").val();
