@@ -5534,30 +5534,30 @@ class ApiControllerv2 extends Controller
                 ->first();
 
                 // dd($input['subscription_plan_name']);
-                if(isset($input['subscription_plan_name']) &&  ($input['subscription_plan_name'] =='Free'  || $input['subscription_plan_name'] =='Pro-year')){
+                if(isset($request->subscription_plan_name) &&  ($request->subscription_plan_name == 'Free'  || $request->subscription_plan_name == 'Pro-year' )){
                     $user  = Auth::guard('api')->user();
                     dd($userSubscription);
-                $checkUserInvited = Event::withCount('event_invited_user')->where('id', $input['event_id'])->first();
-                if ($request->is_update_event == '0') {
-                    if ($checkUserInvited->event_invited_user_count != '0' && $checkUserInvited->is_draft_save == '0') {
-                        $notificationParam = [
-                            'sender_id' => $user->id,
-                            'event_id' => $input['event_id'],
-                            'post_id' => ""
-                        ];
-    
-                        sendNotification('invite', $notificationParam);
-                    }
-                    if ($checkUserInvited->is_draft_save == '0') {
-                        $notificationParam = [
-                            'sender_id' => $user->id,
-                            'event_id' => $input['event_id'],
-                            'post_id' => ""
-                        ];
-                        sendNotification('owner_notify', $notificationParam);
+                    $checkUserInvited = Event::withCount('event_invited_user')->where('id', $input['event_id'])->first();
+                    if ($request->is_update_event == '0') {
+                        if ($checkUserInvited->event_invited_user_count != '0' && $checkUserInvited->is_draft_save == '0') {
+                            $notificationParam = [
+                                'sender_id' => $user->id,
+                                'event_id' => $input['event_id'],
+                                'post_id' => ""
+                            ];
+        
+                            sendNotification('invite', $notificationParam);
+                        }
+                        if ($checkUserInvited->is_draft_save == '0') {
+                            $notificationParam = [
+                                'sender_id' => $user->id,
+                                'event_id' => $input['event_id'],
+                                'post_id' => ""
+                            ];
+                            sendNotification('owner_notify', $notificationParam);
+                        }
                     }
                 }
-            }
             DB::commit();
             return response()->json(['status' => 1, 'message' => "Event images stored successfully"]);
         } catch (QueryException $e) {
