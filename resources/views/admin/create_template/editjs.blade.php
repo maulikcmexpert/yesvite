@@ -1880,6 +1880,7 @@ $(".removeShapImage").click(function(){
             var objects = canvas.getObjects();
             var textData = [];
             var finalArray = [];
+            var shapeImageData = null;
             // console.log(objects);
 
             objects.forEach(function(obj) {
@@ -1969,11 +1970,11 @@ $(".removeShapImage").click(function(){
             finalArray.push({
                 'textElements': textData
             })
-            if (shapeImageData!=undefined) {
-                finalArray.push({
-                    shapeImageData: shapeImageData
-                 });
-                }
+            if (shapeImageData) {
+        finalArray.push({
+            shapeImageData: shapeImageData
+        });
+    }
         //    console.log(shapeImageData);
             console.log('final'+finalArray);
             return finalArray;
