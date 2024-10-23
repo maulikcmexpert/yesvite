@@ -24,6 +24,7 @@
                     // Handle success (e.g., show a success message)
                     // Optional: Display a success message
                     if(response.status=="success"){
+                        alert();
                         $('#loader').css('display','block');
                     }
 
