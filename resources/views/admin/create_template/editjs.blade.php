@@ -1973,7 +1973,7 @@ $(".removeShapImage").click(function(){
             finalArray.push({
                 'textElements': textData
             })
-           console.log(textData);
+           console.log(shapeImageData);
             console.log('final'+finalArray);
             alert();
             return finalArray;
