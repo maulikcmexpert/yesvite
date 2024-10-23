@@ -437,6 +437,262 @@
                                 /////////////////
 
                             }
+                        }else{
+                            const defaultShape = 'rectangle'; // Set the desired default shape here
+
+                            const shapeIndexMap = {
+                                'rectangle': 0,
+                                'circle': 1,
+                                'triangle': 2,
+                                'star': 3
+                            };
+
+                            function createShapes(img) {
+
+                                const imgWidth = img.width;
+                                const imgHeight = img.height;
+                                const starScale = Math.min(imgWidth, imgHeight) / 2;
+                                const starPoints = [{
+                                        x: 0,
+                                        y: -starScale
+                                    }, // Top point
+                                    {
+                                        x: starScale * 0.23,
+                                        y: -starScale * 0.31
+                                    }, // Top-right
+                                    {
+                                        x: starScale,
+                                        y: -starScale * 0.31
+                                    }, // Right
+                                    {
+                                        x: starScale * 0.38,
+                                        y: starScale * 0.12
+                                    }, // Bottom-right
+                                    {
+                                        x: starScale * 0.58,
+                                        y: starScale
+                                    }, // Bottom
+                                    {
+                                        x: 0,
+                                        y: starScale * 0.5
+                                    }, // Center-bottom
+                                    {
+                                        x: -starScale * 0.58,
+                                        y: starScale
+                                    }, // Bottom-left
+                                    {
+                                        x: -starScale * 0.38,
+                                        y: starScale * 0.12
+                                    }, // Top-left
+                                    {
+                                        x: -starScale,
+                                        y: -starScale * 0.31
+                                    }, // Left
+                                    {
+                                        x: -starScale * 0.23,
+                                        y: -starScale * 0.31
+                                    } // Top-left
+                                ];
+
+                                return [
+                                    new fabric.Rect({
+                                        width: imgWidth,
+                                        height: imgHeight,
+                                        originX: 'center',
+                                        originY: 'center',
+                                        angle: 0
+                                    }),
+                                    new fabric.Circle({
+                                        radius: Math.min(imgWidth, imgHeight) / 2,
+                                        originX: 'center',
+                                        originY: 'center',
+                                        angle: 0
+                                    }),
+                                    new fabric.Triangle({
+                                        width: imgWidth,
+                                        height: imgHeight,
+                                        originX: 'center',
+                                        originY: 'center',
+                                        angle: 0
+                                    }),
+                                    new fabric.Polygon(starPoints, {
+                                        originX: 'center',
+                                        originY: 'center',
+                                        angle: 0
+                                    })
+                                ];
+                            }
+                            const fileInput = document.getElementById('fileInput');
+
+                            fileInput.addEventListener('change', function(event) {
+                                const file = event.target.files[0];
+                                if (file) {
+                                    const reader = new FileReader();
+
+                                    reader.onload = function() {
+                                        // Set the image source
+                                        $("#shape_img").attr("src", reader.result);
+
+                                    };
+
+                                    reader.readAsDataURL(file);
+
+                                    // AJAX call to upload the image and shape data
+                                    const formData = new FormData();
+                                    formData.append('image',
+                                        file); // Append the file from file input
+                                    formData.append('shape',
+                                        shape
+                                    ); // Append shape data (assuming `shape` is defined)
+
+                                    const id = $('#template_id')
+                                        .val(); // Assuming you have a template ID
+
+                                    // Send the form data via AJAX
+                                    fetch(`/user_image/${id}`, {
+                                            method: 'POST',
+                                            body: formData,
+                                            headers: {
+                                                'X-CSRF-TOKEN': document.querySelector(
+                                                        'meta[name="csrf-token"]')
+                                                    .getAttribute('content')
+                                            }
+                                        })
+                                        .then(response => {
+                                            if (!response.ok) {
+                                                throw new Error(
+                                                    'Network response was not ok');
+                                            }
+                                            return response.json();
+                                        })
+                                        .then(data => {
+                                            updatedOBJImage = {
+                                                shape: 'rectangle',
+                                                width: 40,
+                                                height: 40
+                                            };
+                                            fabric.Image.fromURL(data.imagePath,
+                                                function(img) {
+                                                    console.log('Server response:',
+                                                        img);
+                                                    var filedimage = data.imagePath;
+                                                    // console.log({
+                                                    //     filedimage
+                                                    // });  
+
+                                                    img.set({
+
+                                                        selectable: true,
+                                                        hasControls: true,
+                                                        // width:100,
+                                                        // height:100,
+                                                        // hasControls: false,
+                                                        hasBorders: false,
+                                                        borderColor: "#2DA9FC",
+                                                        cornerColor: "#fff",
+                                                        transparentCorners: false,
+                                                        lockUniScaling: true,
+                                                        // scaleX:10, // Scale based on element's width
+                                                        // scaleY:10, // Scale based on element's height
+                                                        cornerSize: 10,
+                                                        cornerStyle: 'circle',
+                                                        left: 0, // Center the image horizontally
+                                                        top: 0
+                                                    });
+
+                                                    let shapes = createShapes(img);
+
+                                                    currentShapeIndex = shapeIndexMap[
+                                                            defaultShape] ||
+                                                        0; // Default to rectangle if not found
+
+                                                    img.set({
+                                                        clipPath: shapes[
+                                                            currentShapeIndex
+                                                        ]
+                                                    });
+                                                    img.crossOrigin = "anonymous";
+
+                                                    img.on('mouseup', function(event) {
+                                                        console.log(event);
+                                                        if (event?.transform
+                                                            ?.action ===
+                                                            'drag' && event
+                                                            .transform
+                                                            .actionPerformed ===
+                                                            undefined) {
+                                                            currentShapeIndex =
+                                                                (currentShapeIndex +
+                                                                    1) %
+                                                                shapes.length;
+                                                            img.set({
+                                                                clipPath: shapes[
+                                                                    currentShapeIndex
+                                                                ]
+                                                            });
+                                                            canvas.renderAll();
+
+                                                        }
+                                                    });
+
+                                                    const fixClipPath = () => {
+                                                        img.set({
+                                                            clipPath: shapes[
+                                                                currentShapeIndex
+                                                            ]
+                                                        });
+                                                        canvas.renderAll();
+                                                    };
+
+                                                    img.on('scaling', function(event) {
+                                                        const target = event
+                                                            .target;
+                                                        if (target && target
+                                                            .isControl) {
+                                                            fixClipPath();
+                                                        }
+                                                    });
+                                                    fabric.Image.prototype.controls
+                                                        .deleteControl = new fabric
+                                                        .Control({
+                                                            x: 0.3,
+                                                            y: -0.5,
+                                                            offsetY: -20,
+                                                            cursorStyle: 'pointer',
+                                                            actionHandler: (
+                                                                eventData,
+                                                                transform, x, y
+                                                            ) => {
+                                                                console.log(
+                                                                    eventData
+                                                                )
+                                                                const target =
+                                                                    transform
+                                                                    .target;
+                                                                canvas.remove(
+                                                                    target
+                                                                ); // Remove object on trash icon click
+                                                                canvas
+                                                                    .requestRenderAll();
+                                                            },
+                                                            mouseUpHandler: deleteTextbox,
+                                                            render: renderDeleteIcon,
+                                                            cornerSize: 28,
+                                                            withConnection: false // Disable the line connection
+                                                        });
+
+                                                    // canvas.renderAll();
+                                                    canvas.add(img);
+                                                    currentImage = img;
+                                                });
+                                            // updateClipPath(data.imagePath, updatedOBJImage);
+                                        })
+                                        .catch(error => {
+                                            console.error(
+                                                'There was a problem with the fetch operation:',error);
+                                        });
+                                }
+                            });
                         }
                         } else {
                             const defaultShape = 'rectangle'; // Set the desired default shape here
