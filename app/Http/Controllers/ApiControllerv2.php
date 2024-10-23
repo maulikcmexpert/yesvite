@@ -5444,6 +5444,7 @@ class ApiControllerv2 extends Controller
 
     public function storeEventImage(Request $request)
     {
+        $user  = Auth::guard('api')->user();
         $input = $request->all();
         $validator = Validator::make($input, [
             'event_id' => ['required', 'exists:events,id']
@@ -5502,7 +5503,7 @@ class ApiControllerv2 extends Controller
                 $eventDesingInnerImage->save();
             }
             if(isset($request->is_draft) && $request->is_draft=='1'){
-                $user  = Auth::guard('api')->user();
+               
                 $checkUserInvited = Event::withCount('event_invited_user')->where('id', $input['event_id'])->first();
                 if ($request->is_update_event == '0') {
                     if ($checkUserInvited->event_invited_user_count != '0' && $checkUserInvited->is_draft_save == '0') {
@@ -5525,7 +5526,7 @@ class ApiControllerv2 extends Controller
                 }
             }
 
-            $userSubscription = UserSubscription::where('user_id', $this->user->id)
+            $userSubscription = UserSubscription::where('user_id', $user->id)
                 ->where('endDate','>',date('Y-m-d H:i:s'))
                 ->where('type','subscribe')
                 ->orderBy('id', 'DESC')
