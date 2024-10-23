@@ -91,14 +91,17 @@
 </section>
 
 
-{{-- <script>
+<script>
     document.addEventListener('DOMContentLoaded', function() {
+        // Function to clear the generated_otp field
         function clearGeneratedOtp() {
             const generatedOtpField = document.getElementById('generated_otp');
             if (generatedOtpField) {
-                generatedOtpField.value = '';
+                generatedOtpField.value = ''; // Clear the value
             }
         }
-        setInterval(clearGeneratedOtp, 120);
+
+        // Set a timeout to clear the field after 2 minutes (120000 milliseconds)
+        setTimeout(clearGeneratedOtp, 120000);
     });
-</script> --}}
+</script>
