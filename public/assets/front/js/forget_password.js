@@ -149,7 +149,7 @@ $(document).on("click", "#resend_otp", function () {
     });
 });
 
-$(document).on("click", "#Next_btn_otp", function () {
+$(document).on('click', '#Next_btn_otp', function () {
     alert();
     var now = new Date();
     var formattedTime = now.toLocaleTimeString();
