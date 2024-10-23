@@ -1,6 +1,7 @@
 <script type="text/javascript">
     $(document).ready(function() {
-        $('#UserAdd').on('click', function(e) {
+        $('#send_bluk_message').on('click', function(e) {
+            alert();
             e.preventDefault();
 
             // Clear previous errors
