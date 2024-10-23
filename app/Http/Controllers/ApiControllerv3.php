@@ -12634,8 +12634,7 @@ class ApiControllerv3 extends Controller
                     $new_subscription->device_type = $input['device_type'];
                     $new_subscription->save();
                     if(isset($input['event_id']) && $input['event_id'] != ''){
-                        if(isset($request->is_draft) && $request->is_draft=='0'){
-                            Event::where('id',$input['event_id'])->update(['is_draft_save'=>'0']);
+                        if(isset($request->is_draft) && $request->is_draft =='0'){
                             $notificationParam = [
                                 'sender_id' => $user_id,
                                 'event_id' => $input['event_id'],
@@ -12643,6 +12642,7 @@ class ApiControllerv3 extends Controller
                             ];
                             sendNotification('invite', $notificationParam);
                             sendNotification('owner_notify', $notificationParam);
+                            Event::where('id',$input['event_id'])->update(['is_draft_save'=>'0']);
                         }
                     }
 
