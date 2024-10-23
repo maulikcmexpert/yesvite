@@ -302,7 +302,7 @@ class DesignController extends Controller
 
         // Find the template record by ID
         $template = TextData::find($validated['id']);
-        $img= public_path('storage/canvas/').$template->shape_image;
+        $img= asset('storage/canvas/').$template->shape_image;
         dd($img);
 
         if (!$template) {
