@@ -202,9 +202,9 @@
           <p class="asideTitle">Privacy & Terms</p>
           <ul class="pl-0">
               <li
-                  class="nav-item {{ Request::segment(2) == 'privacypolicy' || Request::segment(2) == 'terms&condition' ? 'menu-open' : '' }}">
+                  class="nav-item {{ Request::segment(2) == 'privacy_policy' || Request::segment(2) == 'terms_condition' ? 'menu-open' : '' }}">
                   <a href="#"
-                      class="nav-link  {{ Request::segment(2) == 'privacypolicy' || Request::segment(2) == 'terms&condition' ? 'active' : '' }}">
+                      class="nav-link  {{ Request::segment(2) == 'privacy_policy' || Request::segment(2) == 'terms_condition' ? 'active' : '' }}">
                       <i class="nav-icon fas fa-copy"></i>
                       <p>
                           Privacy setup
@@ -215,14 +215,14 @@
                   <ul class="nav nav-treeview">
                       <li class="nav-item">
                           <a href="{{ URL::to('/admin/privacy_policy') }}"
-                              class="nav-link  {{ Request::segment(2) == 'privacypolicy' ? 'active' : '' }}">
+                              class="nav-link  {{ Request::segment(2) == 'privacy_policy' ? 'active' : '' }}">
                               <span class="dot"></span>
                               <p>Privacy Policy</p>
                           </a>
                       </li>
                       <li class="nav-item">
                           <a href="{{ URL::to('/admin/terms_condition') }}"
-                              class="nav-link {{ Request::segment(2) == 'terms&condition' ? 'active' : '' }}">
+                              class="nav-link {{ Request::segment(2) == 'terms_condition' ? 'active' : '' }}">
                               <span class="dot"></span>
                               <p>Terms & condition </p>
                           </a>
