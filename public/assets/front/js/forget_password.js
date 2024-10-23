@@ -125,8 +125,8 @@ document.getElementById("otpform").addEventListener("submit", function (event) {
     }
 });
 
-$(document).on('click', '#resend_otp', function() {
-    var email = $('#useremail').val();
+$(document).on("click", "#resend_otp", function () {
+    var email = $("#useremail").val();
     $.ajax({
         url: base_url + "otp_verify",
         type: "POST",
@@ -134,18 +134,23 @@ $(document).on('click', '#resend_otp', function() {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
         data: {
-            email: email
+            email: email,
         },
-        success: function(response) {
-            if(response.success=="1"){
+        success: function (response) {
+            if (response.success == "1") {
                 console.log(response.otp);
-                $('#generated_otp').val(response.otp);
-                toastr.success('Otp Resend Sucessfully')
+                $("#generated_otp").val(response.otp);
+                toastr.success("Otp Resend Sucessfully");
             }
-
         },
-        error: function(xhr, status, error) {
+        error: function (xhr, status, error) {
             console.log("AJAX error: " + error);
         },
     });
-})
+});
+
+$(document).on("click", "#Next_btn_otp", function () {
+    const now = new Date();
+    const formattedTime = now.toLocaleTimeString();
+    alert(formattedTime);
+});

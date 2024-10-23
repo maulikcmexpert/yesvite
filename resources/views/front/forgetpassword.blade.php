@@ -66,7 +66,7 @@
                     </ul>
                 </div>
                 @endif
-                <button type="submit" class="btn btn-primary loaderbtn" id="loginUser">Next</button>
+                <button type="submit" class="btn btn-primary loaderbtn" id="Next_btn_otp">Next</button>
             </form>
 
         </div>
