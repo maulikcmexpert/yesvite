@@ -5503,12 +5503,19 @@ class ApiControllerv2 extends Controller
                 $eventDesingInnerImage->save();
             }
             $counter = 0;
-            if(isset($request->is_draft) && $request->is_draft=='1'){
-                
+            
+
+            $userSubscription = UserSubscription::where('user_id', $user->id)
+                ->where('endDate','>',date('Y-m-d H:i:s'))
+                ->where('type','subscribe')
+                ->orderBy('id', 'DESC')
+                ->limit(1)
+                ->first();
+            if((isset($input['subscription_plan_name']) && $input['subscription_plan_name'] =='Free') || (isset($input['subscription_plan_name']) && $input['subscription_plan_name'] =='Pro-Year' && isset($userSubscription->id))){
+                $user  = Auth::guard('api')->user();
                 $checkUserInvited = Event::withCount('event_invited_user')->where('id', $input['event_id'])->first();
                 if ($request->is_update_event == '0') {
                     if ($checkUserInvited->event_invited_user_count != '0' && $checkUserInvited->is_draft_save == '0') {
-                        $counter++;
                         $notificationParam = [
                             'sender_id' => $user->id,
                             'event_id' => $input['event_id'],
@@ -5526,26 +5533,18 @@ class ApiControllerv2 extends Controller
                         sendNotification('owner_notify', $notificationParam);
                     }
                 }
-            }
-
-            $userSubscription = UserSubscription::where('user_id', $user->id)
-                ->where('endDate','>',date('Y-m-d H:i:s'))
-                ->where('type','subscribe')
-                ->orderBy('id', 'DESC')
-                ->limit(1)
-                ->first();
-            if((isset($input['subscription_plan_name']) && $input['subscription_plan_name'] =='Free') || (isset($input['subscription_plan_name']) && $input['subscription_plan_name'] =='Pro-Year' && isset($userSubscription->id))){
-                if($counter == 0){
-                    $user  = Auth::guard('api')->user();
+            }else{
+                if(isset($request->is_draft) && $request->is_draft=='1'){
+                
                     $checkUserInvited = Event::withCount('event_invited_user')->where('id', $input['event_id'])->first();
                     if ($request->is_update_event == '0') {
                         if ($checkUserInvited->event_invited_user_count != '0' && $checkUserInvited->is_draft_save == '0') {
+                            $counter++;
                             $notificationParam = [
                                 'sender_id' => $user->id,
                                 'event_id' => $input['event_id'],
                                 'post_id' => ""
                             ];
-        
                             sendNotification('invite', $notificationParam);
                         }
                         if ($checkUserInvited->is_draft_save == '0') {
