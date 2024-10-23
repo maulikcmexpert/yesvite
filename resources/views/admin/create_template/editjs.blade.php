@@ -163,6 +163,7 @@
                                         })
                                     ];
                                 }
+                                $("#shape_img").attr("src", data.filedImagePath);
 
                                 fabric.Image.fromURL(data.filedImagePath, function(img) {
                                     if (!img) {
