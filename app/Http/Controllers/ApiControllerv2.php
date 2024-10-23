@@ -5528,8 +5528,8 @@ class ApiControllerv2 extends Controller
 
             $userSubscription = UserSubscription::where('user_id', $user->id)
                 // ->where('endDate','>',date('Y-m-d H:i:s'))
-                ->where('type','subscribe')
-                ->orderBy('id', 'DESC')
+                // ->where('type','subscribe')
+                // ->orderBy('id', 'DESC')
                 ->first();
 
                 dd($userSubscription);
