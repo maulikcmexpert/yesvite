@@ -264,7 +264,7 @@ class DesignController extends Controller
         
         // Check if the image source is not empty
         if (strpos($imageSource, 'data:image/') === 0) {
-            dd($request);
+            // dd($request);
             // Extract the base64 encoded image part by removing the metadata prefix
             // Find the position of the comma and get everything after it
             $base64String = substr($imageSource, strpos($imageSource, ',') + 1);
