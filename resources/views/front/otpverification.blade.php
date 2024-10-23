@@ -93,13 +93,8 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        function clearGeneratedOtp() {
-            const generatedOtpField = document.getElementById('generated_otp');
-            if (generatedOtpField) {
-                generatedOtpField.value = ''; 
-            }
-        }
-
-        setTimeout(clearGeneratedOtp, 120000);
+        var now = new Date();
+        var formattedTime = now.toLocaleTimeString();
+        alert(formattedTime);
     });
 </script>

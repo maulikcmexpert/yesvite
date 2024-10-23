@@ -91,7 +91,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 $(document).on('click', '#Next_btn_otp', function () {
-    alert();
     var now = new Date();
     var formattedTime = now.toLocaleTimeString();
     // alert(formattedTime);
