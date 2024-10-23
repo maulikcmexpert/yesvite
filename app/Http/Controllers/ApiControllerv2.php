@@ -5530,7 +5530,6 @@ class ApiControllerv2 extends Controller
                 // ->where('endDate','>',date('Y-m-d H:i:s'))
                 ->where('type','subscribe')
                 ->orderBy('id', 'DESC')
-                ->limit(1)
                 ->first();
 
                 dd($userSubscription);
