@@ -153,4 +153,6 @@ $(document).on("click", "#Next_btn_otp", function () {
     const now = new Date();
     const formattedTime = now.toLocaleTimeString();
     alert(formattedTime);
+    $('#forgetpasswordemail').submit();
+
 });

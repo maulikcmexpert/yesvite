@@ -39,7 +39,7 @@
             <p>Forget Password</p>
         </div>
         <div class="login-form-wrap">
-            <form method="POST" id="forgetpassword" action="{{ route('auth.otpverification') }}" autocomplete="off">
+            <form method="POST" id="forgetpasswordemail" action="{{ route('auth.otpverification') }}" autocomplete="off">
                 @csrf
 
                 <div class="input-form">
@@ -66,7 +66,7 @@
                     </ul>
                 </div>
                 @endif
-                <button type="submit" class="btn btn-primary loaderbtn" id="Next_btn_otp">Next</button>
+                <button type="button" class="btn btn-primary loaderbtn" id="Next_btn_otp">Next</button>
             </form>
 
         </div>
