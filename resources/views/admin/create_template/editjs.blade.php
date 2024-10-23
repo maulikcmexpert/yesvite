@@ -2031,7 +2031,7 @@ $(".removeShapImage").click(function(){
             // hideStaticTextElements(); 
             var textData = getTextDataFromCanvas();
             var textElements = textData[0].textElements;
-            console.log(textElements);
+            console.log(textData[0].textElements);
             // Accessing the text elements
             if(textData[1]){
                 var shapeImageData = textData[1].shapeImageData;
