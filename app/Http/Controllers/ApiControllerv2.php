@@ -5527,12 +5527,12 @@ class ApiControllerv2 extends Controller
             }
 
             $userSubscription = UserSubscription::where('user_id', $user->id)
-                // ->where('endDate','>',date('Y-m-d H:i:s'))
-                // ->where('type','subscribe')
-                // ->orderBy('id', 'DESC')
+                ->where('endDate','>',date('Y-m-d H:i:s'))
+                ->where('type','subscribe')
+                ->orderBy('id', 'DESC')
+                ->limit(1)
                 ->first();
 
-                dd($userSubscription);
             if((isset($input['subscription_plan_name']) && $input['subscription_plan_name'] =='Free') || (isset($input['subscription_plan_name']) && $input['subscription_plan_name'] =='Pro-year' && $userSubscription != null)){
                 $user  = Auth::guard('api')->user();
                 $checkUserInvited = Event::withCount('event_invited_user')->where('id', $input['event_id'])->first();
