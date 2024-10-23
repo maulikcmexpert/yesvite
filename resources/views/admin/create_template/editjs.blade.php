@@ -45,7 +45,7 @@
                             const staticInfo = JSON.parse(data.static_information);
                             let element = staticInfo?.shapeImageData;
                             
-                            console.log(element)
+                            // console.log(element)
                             if(element!=undefined){
 
                             
