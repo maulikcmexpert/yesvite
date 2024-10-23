@@ -5533,8 +5533,8 @@ class ApiControllerv2 extends Controller
                 ->limit(1)
                 ->first();
 
-                dd($input['subscription_plan_name']);
-                if((isset($input['subscription_plan_name']) && $input['subscription_plan_name'] =='Free') || (isset($input['subscription_plan_name']) && $input['subscription_plan_name'] =='Pro-year' && isset($userSubscription->id))){
+                // dd($input['subscription_plan_name']);
+                if((isset($input['subscription_plan_name']) && $input['subscription_plan_name'] =='Free') || (isset($input['subscription_plan_name']) && $input['subscription_plan_name'] =='Pro-year' )){
                     $user  = Auth::guard('api')->user();
                     dd($userSubscription);
                 $checkUserInvited = Event::withCount('event_invited_user')->where('id', $input['event_id'])->first();
