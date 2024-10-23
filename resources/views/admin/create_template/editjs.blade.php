@@ -565,8 +565,8 @@
                                         .then(data => {
                                             updatedOBJImage = {
                                                 shape: 'rectangle',
-                                                width: 100,
-                                                height: 100
+                                                width: 40,
+                                                height: 40
                                             };
                                             fabric.Image.fromURL(data.imagePath,
                                                 function(img) {
@@ -581,6 +581,8 @@
 
                                                         selectable: true,
                                                         hasControls: true,
+                                                        width:50,
+                                                        height:50,
                                                         // hasControls: false,
                                                         hasBorders: false,
                                                         borderColor: "#2DA9FC",
