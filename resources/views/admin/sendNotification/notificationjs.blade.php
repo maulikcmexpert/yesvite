@@ -17,7 +17,7 @@
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
                 },
-                dataType: 'json',
+                // dataType: 'json',
                 type: "POST",
                 url: "{{ URL::to('admin/sendNotification/send') }}",
                 data: formData,
