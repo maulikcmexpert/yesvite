@@ -258,7 +258,7 @@ class DesignController extends Controller
     // }
     public function saveTextData(Request $request)
     {
-        dd($request);
+        // dd($request);
 
         $shapeImagePath = null;
         $imageSource = $request->shape_image; // Expecting a single string
@@ -307,9 +307,10 @@ class DesignController extends Controller
 
 
         // Convert text elements array to JSON
+
         $staticInformation = [
             'textElements' => $validated['textElements'],
-             'shapeImageData' => $validated['shapeImageData'],
+             'shapeImageData' => isset($validated['shapeImageData'])?$validated['shapeImageData']:NULL,
         ];
         // $staticInformation = $validated['textElements'];
         // $staticInformation = $validated['shapeImageData'];
