@@ -575,14 +575,14 @@
                                                     var filedimage = data.imagePath;
                                                     // console.log({
                                                     //     filedimage
-                                                    // });
+                                                    // });  
 
                                                     img.set({
 
                                                         selectable: true,
                                                         hasControls: true,
-                                                        width:50,
-                                                        height:50,
+                                                        // width:50,
+                                                        // height:50,
                                                         // hasControls: false,
                                                         hasBorders: false,
                                                         borderColor: "#2DA9FC",
