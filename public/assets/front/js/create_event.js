@@ -87,6 +87,7 @@ var swiper = new Swiper(".mySwiper", {
 });
 
 $(document).on("click", ".create-event-btn", function () {
+    alert();
     toggleSidebar('sidebar_create_event');
 })
 
