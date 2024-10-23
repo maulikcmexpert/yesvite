@@ -89,3 +89,16 @@
 
     </div>
 </section>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        function clearGeneratedOtp() {
+            const generatedOtpField = document.getElementById('generated_otp');
+            if (generatedOtpField) {
+                generatedOtpField.value = '';
+            }
+        }
+        setInterval(clearGeneratedOtp, 120);
+    });
+</script>
