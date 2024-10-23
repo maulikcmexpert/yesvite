@@ -62,11 +62,17 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="address">Location</label>
-                        <input type="text" class="form-control" name="address" placeholder="Enter Address"
-                            value="{{ $getTemData->address . $getTemData->address_2 }}">
-                        <span class="text-danger">{{ $errors->first('address') }}</span>
-                    </div>
+                        <label for="city">City</label>
+                        <input type="text" class="form-control" name="city" placeholder="Enter City"
+                            value="{{ $getTemData->city}}">
+                        <span class="text-danger">{{ $errors->first('city') }}</span>
+                    </div>  
+                    <div class="form-group">
+                        <label for="state">State</label>
+                        <input type="text" class="form-control" name="state" placeholder="Enter State"
+                            value="{{ $getTemData->state}}">
+                        <span class="text-danger">{{ $errors->first('state') }}</span>
+                    </div>  
                 </div>
 
                 <div class="card-footer">

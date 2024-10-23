@@ -325,6 +325,8 @@ class UserController extends Controller
             'email' => 'required|email',
             'phone_number' => 'nullable|numeric',
             'address' => 'nullable|string|max:255',
+            // 'ci' => 'required|string|max:255',
+            // 'lastname' => 'required|string|max:255',
         ]);
 
 
@@ -335,8 +337,12 @@ class UserController extends Controller
         $user->lastname = $request->input('lastname');
         $user->email = $request->input('email');
         $user->phone_number = $request->input('phone_number');
-        $user->address = $request->input('address');
-        $user->address_2 = $request->input('address_2');
+        // $user->address = $request->input('address');
+        // $user->address_2 = $request->input('address_2');
+        $user->city = $request->input('city');
+        $user->state = $request->input('state');
+
+
 
         // Save the updated user details
         $user->save();
