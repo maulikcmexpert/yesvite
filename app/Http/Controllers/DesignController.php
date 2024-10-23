@@ -302,7 +302,7 @@ class DesignController extends Controller
 
         // Find the template record by ID
         $template = TextData::find($validated['id']);
-        $img=public_path('storage/canvas/').$template->shape_image;
+        $img= public_path('storage/canvas/').$template->shape_image;
         dd($img);
 
         if (!$template) {
@@ -334,7 +334,6 @@ class DesignController extends Controller
         $template->height = 490;
 
         // Store the shape image path in the database
-        if($imageSource==)
         $template->shape_image = $shapeImagePath;
 
         // Save the updated record
