@@ -18,6 +18,7 @@ use App\Http\Controllers\{
     TermsAndConditionController,
     DesignController
 };
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -37,6 +38,10 @@ use Illuminate\Support\Facades\Auth;
 //     return view('welcome');
 // });
 
+Route::post('/start-queue', function () {
+    Artisan::call('queue:work');
+    return response()->json(['message' => 'Queue worker started']);
+});
 
 Route::get('/', [HomeFrontController::class, 'index'])->name('front.home')->middleware('isAuthenticate');
 Route::get('/ResendVerificationMail/{id}', [HomeFrontController::class, 'ResendVerificationMail'])->name('ResendVerificationMail')->middleware('isAuthenticate');
