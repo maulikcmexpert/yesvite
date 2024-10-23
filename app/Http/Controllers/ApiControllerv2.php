@@ -5501,7 +5501,29 @@ class ApiControllerv2 extends Controller
                 $eventDesingInnerImage->design_inner_image = $DesignInnerImageName;
                 $eventDesingInnerImage->save();
             }
-
+            if(isset($request->is_draft) && $request->is_draft=='1'){
+                $user  = Auth::guard('api')->user();
+                $checkUserInvited = Event::withCount('event_invited_user')->where('id', $input['event_id'])->first();
+                if ($request->is_update_event == '0') {
+                    if ($checkUserInvited->event_invited_user_count != '0' && $checkUserInvited->is_draft_save == '0') {
+                        $notificationParam = [
+                            'sender_id' => $user->id,
+                            'event_id' => $input['event_id'],
+                            'post_id' => ""
+                        ];
+    
+                        sendNotification('invite', $notificationParam);
+                    }
+                    if ($checkUserInvited->is_draft_save == '0') {
+                        $notificationParam = [
+                            'sender_id' => $user->id,
+                            'event_id' => $input['event_id'],
+                            'post_id' => ""
+                        ];
+                        sendNotification('owner_notify', $notificationParam);
+                    }
+                }
+            }
             $userSubscription = UserSubscription::where('user_id', $this->user->id)->where('type','subscribe')->orderBy('id', 'DESC')->limit(1)->first();
             if((isset($input['subscription_plan_name']) && $input['subscription_plan_name'] =='Free') || (isset($input['subscription_plan_name']) && $input['subscription_plan_name'] =='Pro-year' && $userSubscription != null)){
                 $user  = Auth::guard('api')->user();
