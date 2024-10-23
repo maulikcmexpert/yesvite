@@ -290,6 +290,8 @@ class DesignController extends Controller
 
         // dd($request->fil);
         // Validate incoming request data
+
+        
         $validated = $request->validate([
             'id' => 'required|integer',
             'textElements' => 'required|array',
@@ -308,10 +310,18 @@ class DesignController extends Controller
 
         // Convert text elements array to JSON
 
-        $staticInformation = [
-            'textElements' => $validated['textElements'],
-             'shapeImageData' => isset($validated['shapeImageData'])?$validated['shapeImageData']:NULL,
-        ];
+        if(isset($validated['shapeImageData'])){
+            $staticInformation = [
+                'textElements' => $validated['textElements'],
+                 'shapeImageData' => $validated['shapeImageData'],
+            ];
+        }else{
+            $staticInformation = [
+                'textElements' => $validated['textElements'],
+                //  'shapeImageData' => $validated['shapeImageData'],
+            ];  
+        }
+       
         // $staticInformation = $validated['textElements'];
         // $staticInformation = $validated['shapeImageData'];
 
