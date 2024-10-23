@@ -293,7 +293,7 @@ class DesignController extends Controller
         $validated = $request->validate([
             'id' => 'required|integer',
             'textElements' => 'required|array',
-            'shapeImageData' => 'required|array',
+            // 'shapeImageData' => 'required|array',
             // 'shape_image' => 'image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
