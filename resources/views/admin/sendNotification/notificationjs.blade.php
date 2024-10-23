@@ -1,7 +1,7 @@
 <script type="text/javascript">
     $(document).ready(function() {
         $('#send_bluk_message').on('click', function(e) {
-            alert();
+            // alert();
             e.preventDefault();
 
             // Clear previous errors
@@ -11,7 +11,7 @@
                 title: $('#title').val(),
                 message: $('#message').val(),
             };
-
+            $('#loader').css('display','none')
             $.ajax({
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -23,7 +23,9 @@
                 success: function(response) {
                     // Handle success (e.g., show a success message)
                     // Optional: Display a success message
-                    alert(response.message);
+                    if(response.status=="success"){
+                        $('#loader').css('display','block');
+                    }
 
                     // Clear form fields after successful submission
                     $('#title').val('');
