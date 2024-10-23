@@ -258,13 +258,13 @@ class DesignController extends Controller
     // }
     public function saveTextData(Request $request)
     {
-        dd($request);
-
+        
         $shapeImagePath = null;
         $imageSource = $request->shape_image; // Expecting a single string
-
+        
         // Check if the image source is not empty
         if (strpos($imageSource, 'data:image/') === 0) {
+            dd($request);
             // Extract the base64 encoded image part by removing the metadata prefix
             // Find the position of the comma and get everything after it
             $base64String = substr($imageSource, strpos($imageSource, ',') + 1);
