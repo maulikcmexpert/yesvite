@@ -1774,8 +1774,10 @@ $(".removeShapImage").click(function(){
             console.log(textData);
             var textElements = textData[0].textElements;
             // Accessing the text elements
-            var shapeImageData = textData[1].shapeImageData;
-            console.log(shapeImageData);
+            if(textData[1]){
+                var shapeImageData = textData[1].shapeImageData;
+            }
+            // console.log(shapeImageData);
             var imageURL = canvas.toDataURL('image/png');
             var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content'); // Get CSRF token
             var canvasElement = document.getElementById('imageEditor1');
