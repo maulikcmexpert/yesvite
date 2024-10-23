@@ -581,8 +581,8 @@
 
                                                         selectable: true,
                                                         hasControls: true,
-                                                        width:100,
-                                                        height:100,
+                                                        // width:100,
+                                                        // height:100,
                                                         // hasControls: false,
                                                         hasBorders: false,
                                                         borderColor: "#2DA9FC",
@@ -1702,17 +1702,18 @@ $(".removeShapImage").click(function(){
                         width: obj.getScaledWidth(), // Get the scaled width
                         height: obj.getScaledHeight(), // Get the scaled height
                     };
+                    if (shapeImageData) {
+                finalArray.push({
+                    shapeImageData: shapeImageData
+                 });
                 }
-
+             
+            }
             });
             finalArray.push({
                 'textElements': textData
             })
-            if (shapeImageData) {
-                finalArray.push({
-                    shapeImageData: shapeImageData
-                });
-            }
+           
             // console.log(finalArray);
 
             return finalArray;
