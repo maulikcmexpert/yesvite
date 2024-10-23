@@ -235,7 +235,7 @@
 
 
           </ul>
-      </li>    ///slide bar
+      </li>  
         <!-- <li class="nav-item">
             <a href="{{URL::to('/admin/users')}}" class="nav-link {{ (Request::segment(2) == 'users')? 'active':'' }}">
               <i class="fas fa-users nav-icon"></i>
