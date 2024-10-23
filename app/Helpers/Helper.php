@@ -1229,56 +1229,59 @@ function emailChecker($email)
 
 function adminNotification($notificationType, $postData)
 {
-    return;
-    // if ($notificationType == 'broadcast_message') {
-    //     $deviceDataArray = []; 
-    //     try {
-    //         $deviceTokens = [];
-    //         $userEmails = [];
-    //         $userDataList = [];
-    //         $users = User::select('email')->whereNotNull('email')->get();
-    //         $emails = $users->pluck('email')->toArray();
-    //         $message = $postData['message'];
+    if ($notificationType == 'broadcast_message') {
+        $deviceDataArray = []; 
+        $emailsSent = false; 
+        $notificationsSent = false; 
+        try {
+            $deviceTokens = [];
+            $userEmails = [];
+            $userDataList = [];
+            $users = User::select('email')->whereNotNull('email')->get();
+            $emails = $users->pluck('email')->toArray();
+            $message = $postData['message'];
 
-    //         // try {
-    //         //     // foreach ($emails as $email) {
-    //         //         Mail::to("prakashmanat24@gmail.com")->send(new BulkEmail($message));
-    //         //     // }
+            // try {
+            //     // foreach ($emails as $email) {
+            //         Mail::to("prakashmanat24@gmail.com")->send(new BulkEmail($message));
+            //     // }
         
-    //         //     return response()->json(['success' => 'Emails sent successfully.']);
-    //         // } catch (\Exception $e) {
-    //         //     // dd($e);
-    //         //     return response()->json(['error' => 'Failed to send emails: ' . $e->getMessage()], 500);
-    //         // }
+            //     return response()->json(['success' => 'Emails sent successfully.']);
+            // } catch (\Exception $e) {
+            //     // dd($e);
+            //     return response()->json(['error' => 'Failed to send emails: ' . $e->getMessage()], 500);
+            // }
        
 
-    //         $deviceData = Device::all();
-    //         foreach ($deviceData as $device) {
-    //             $deviceDataArray[] = [
-    //                 'device_token' => $device->device_token,
-    //             ];
-    //             $notificationData = [
-    //                 'message' => $message,
-    //                 'type' => $notificationType,
-    //             ];
-    //             try {
-    //                 send_notification_FCM_and($device->device_token, $notificationData);
-    //             } catch (\Exception $e) {
-    //                 return response()->json(['error' => 'Failed to send emails.'], 500);
-    //             }
-    //         }
+            $deviceData = Device::all();
+            foreach ($deviceData as $device) {
+                $deviceDataArray[] = [
+                    'device_token' => $device->device_token,
+                ];
+                $notificationData = [
+                    'message' => $message,
+                    'type' => $notificationType,
+                ];
+                try {
+                    send_notification_FCM_and($device->device_token, $notificationData);
+                } catch (\Exception $e) {
+                    return response()->json(['error' => 'Failed to send emails.'], 500);
+                }
+            }
 
-    //         try {
-    //             SendBroadcastEmailJob::dispatch($emails, $message);
-    //         } catch (\Exception $e) {
-    //             // dd($e->getMessage());
-    //             return response()->json(['error' => 'Failed to send emails.'], 500);
-    //         }
+            try {
+                SendBroadcastEmailJob::dispatch($emails, $message);
+                $emailsSent = true; 
+
+            } catch (\Exception $e) {
+                // dd($e->getMessage());
+                return response()->json(['error' => 'Failed to send emails.'], 500);
+            }
           
-    //     } catch (\Exception $e) {
-    //         return response()->json(['error' => 'Failed to send emails.'], 500);
-    //     }
-    // }
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Failed to send emails.'], 500);
+        }
+    }
 }
 function send_notification_FCM($deviceToken, $notifyData)
 {
