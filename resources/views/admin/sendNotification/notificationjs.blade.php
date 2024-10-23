@@ -11,6 +11,7 @@
                 title: $('#title').val(),
                 message: $('#message').val(),
             };
+            console.log(formData);
             $('#loader').css('display','none')
             $.ajax({
                 headers: {
