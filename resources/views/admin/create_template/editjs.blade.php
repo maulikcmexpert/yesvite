@@ -581,8 +581,8 @@
 
                                                         selectable: true,
                                                         hasControls: true,
-                                                        // width:50,
-                                                        // height:50,
+                                                        width:100,
+                                                        height:100,
                                                         // hasControls: false,
                                                         hasBorders: false,
                                                         borderColor: "#2DA9FC",
