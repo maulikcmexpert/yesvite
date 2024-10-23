@@ -5532,6 +5532,8 @@ class ApiControllerv2 extends Controller
                 ->orderBy('id', 'DESC')
                 ->limit(1)
                 ->first();
+
+                dd($input['subscription_plan_name']);
                 if((isset($input['subscription_plan_name']) && $input['subscription_plan_name'] =='Free') || (isset($input['subscription_plan_name']) && $input['subscription_plan_name'] =='Pro-year' && isset($userSubscription->id))){
                     $user  = Auth::guard('api')->user();
                     dd($userSubscription);
