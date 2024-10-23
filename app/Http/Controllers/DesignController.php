@@ -304,7 +304,7 @@ class DesignController extends Controller
         $template = TextData::find($validated['id']);
         
         $img= asset('storage/canvas/').$template->shape_image;
-    //    dd($img,$imageSource);
+       dd($img,$imageSource);
 
         if (!$template) {
             return response()->json(['message' => 'Template not found'], 404);
