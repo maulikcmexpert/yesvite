@@ -3753,7 +3753,7 @@ class ApiControllerv2 extends Controller
                 ->limit(1)
                 ->first();
             if ($userSubscription != null) {
-                $eventCreation->is_draft_save = '0';
+                // $eventCreation->is_draft_save = '0';
                 $purchase_status = true;
             }else{
                 $checkProductSubscribe =  Event::where('id', $eventCreation->id)->first();
