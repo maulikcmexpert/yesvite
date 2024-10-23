@@ -25,7 +25,7 @@ class Privacy_policyController extends Controller
 
     public function index()
 {
-    $title = 'Privacy &amp; Policy';
+    $title = 'Privacy Policy';
     $page = 'admin.privacy_policy.add';
     $js = 'admin.privacy_policy.privacyjs';
 
