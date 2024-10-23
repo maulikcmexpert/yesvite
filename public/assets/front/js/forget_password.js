@@ -108,8 +108,11 @@ document.getElementById("otpform").addEventListener("submit", function (event) {
     const diffInMinutes = Math.floor(timeDiff / (1000 * 60));
 
     // Check if the time difference is greater than or equal to 15 minutes
-    if (diffInMinutes >= 1) {
-        alert('OTP expired');
+    if (diffInMinutes >= 15) {
+        var generated_otp = $("#generated_otp").val('');
+        // alert('OTP expired');
+        toastr.error("Your Otp is Expired Please click on Resend Link to get new Otp");
+ 
     }
 
     
@@ -162,7 +165,9 @@ $(document).on("click", "#resend_otp", function () {
                 console.log(response.otp);
                 $("#generated_otp").val(response.otp);
                 toastr.success("Otp Resend Sucessfully");
-            }
+                // location.reload();
+                submitotptime = new Date();
+            }   
         },
         error: function (xhr, status, error) {
             console.log("AJAX error: " + error);
