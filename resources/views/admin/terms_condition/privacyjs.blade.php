@@ -178,17 +178,27 @@
             });
         });
 
-        document.querySelectorAll('.description').forEach(function(textarea) {
-    ClassicEditor
-        .create(textarea)
-        .then(editor => {
-            editor.ui.view.editable.element.style.height = '350px'; // Set the height to 350px or your desired value
-        })
-        .catch(error => {
-            console.error(error);
+//         document.querySelectorAll('.description').forEach(function(textarea) {
+//     ClassicEditor
+//         .create(textarea)
+//         .then(editor => {
+//             editor.ui.view.editable.element.style.height = '350px'; // Set the height to 350px or your desired value
+//         })
+//         .catch(error => {
+//             console.error(error);
+//         });
+// });
+
+document.querySelectorAll('.description').forEach(function(textarea) {
+            ClassicEditor
+                .create(textarea)
+                .then(editor => {
+                    // Access the editor's editing view container
+                    editor.ui.view.editable.element.style.height = '300px'; // Set the desired height here
+                })
+                .catch(error => {
+                    console.error(error);
+                });
         });
-});
-
-
     });
 </script>

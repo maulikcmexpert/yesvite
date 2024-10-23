@@ -178,10 +178,21 @@
             });
         });
 
+        // document.querySelectorAll('.description').forEach(function(textarea) {
+        //     ClassicEditor
+        //         .create(textarea)
+
+        //         .catch(error => {
+        //             console.error(error);
+        //         });
+        // });
+
         document.querySelectorAll('.description').forEach(function(textarea) {
             ClassicEditor
                 .create(textarea)
-
+                .then(editor => {
+                    editor.ui.view.editable.element.style.height = '300px'; // Set the desired height here
+                })
                 .catch(error => {
                     console.error(error);
                 });

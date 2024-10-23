@@ -122,9 +122,22 @@ class UserDataTable extends DataTable
                 return '<a class="" href="' . $pwd_url . '" title="View"><i class="fa fa-key"></i></a>';;
             })
 
-            // ->addColumn('package_name', function ($row) {
-            //     return $row->user_subscriptions->type;
-            // })
+            ->addColumn('package_name', function ($row) {
+                if ($row->user_subscriptions->isNotEmpty()) {
+                    // Iterate through the subscriptions and handle each 'type'
+                    return $row->user_subscriptions->map(function ($subscription) {
+                        if ($subscription->type == 'product') {
+                            return 'Free Year';
+                        } elseif ($subscription->type == 'subscribe') {
+                            return 'Pro Year';
+                        } else {
+                            return 'Unknown Type'; // Handle other types if necessary
+                        }
+                    })->implode(', '); // Join the results if there are multiple subscriptions
+                } else {
+                    return 'Expired';
+                }
+            })
 
 
             ->addColumn('action', function ($row) {
@@ -186,7 +199,18 @@ class UserDataTable extends DataTable
             $direction = 'asc';
         }
 
-        return  User::where(['account_type' => '0'])->orderBy($column, $direction);
+        // return  User::where(['account_type' => '0'])->orderBy($column, $direction);
+
+
+        $dateOnly = Carbon::now()->toDateString();
+    
+            return User::with(['user_subscriptions' => function ($query) use ($dateOnly): void {
+                $query->where('endDate', '>=', $dateOnly);
+            }])
+                ->where('account_type', '0')
+                ->orderBy('id', 'desc');
+
+    
         // $dateOnly = Carbon::now()->toDateString();
         // dd($dateOnly);
         // return User::with(relations: ['user_subscriptions' => function ($query) use ($dateOnly): void {
