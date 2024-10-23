@@ -264,29 +264,29 @@ class DesignController extends Controller
         $imageSource = $request->shape_image; // Expecting a single string
         
         // Check if the image source is not empty
-        if (strpos($imageSource, 'data:image/') === 0) {
-            // dd($request);
-            // Extract the base64 encoded image part by removing the metadata prefix
-            // Find the position of the comma and get everything after it
-            $base64String = substr($imageSource, strpos($imageSource, ',') + 1);
+        // if (strpos($imageSource, 'data:image/') === 0) {
+        //     // dd($request);
+        //     // Extract the base64 encoded image part by removing the metadata prefix
+        //     // Find the position of the comma and get everything after it
+        //     $base64String = substr($imageSource, strpos($imageSource, ',') + 1);
 
-            // Decode the base64 string
-            $imageData = base64_decode($base64String);
+        //     // Decode the base64 string
+        //     $imageData = base64_decode($base64String);
 
-            // Create a unique file name (with proper file extension based on MIME type)
-            $mime = substr($imageSource, 11, strpos($imageSource, ';') - 11); // Get the image MIME type (e.g., jpeg, png)
-            $fileName = time() . '-' . uniqid() . '.' . $mime;
+        //     // Create a unique file name (with proper file extension based on MIME type)
+        //     $mime = substr($imageSource, 11, strpos($imageSource, ';') - 11); // Get the image MIME type (e.g., jpeg, png)
+        //     $fileName = time() . '-' . uniqid() . '.' . $mime;
 
-            // Define the path where the image will be saved
-            $path = public_path('storage/canvas/') . $fileName;
+        //     // Define the path where the image will be saved
+        //     $path = public_path('storage/canvas/') . $fileName;
 
-            // Save the image data to the specified path
-            file_put_contents($path, $imageData);
+        //     // Save the image data to the specified path
+        //     file_put_contents($path, $imageData);
 
-            // Prepare the response data
+        //     // Prepare the response data
 
-            $shapeImagePath = $fileName;
-        }
+        //     $shapeImagePath = $fileName;
+        // }
         // dd($savedFile);
 
         // dd($request->fil);
@@ -302,6 +302,8 @@ class DesignController extends Controller
 
         // Find the template record by ID
         $template = TextData::find($validated['id']);
+        $img=public_path('storage/canvas/').$template->shape_image;
+        dd($img);
 
         if (!$template) {
             return response()->json(['message' => 'Template not found'], 404);
@@ -332,6 +334,7 @@ class DesignController extends Controller
         $template->height = 490;
 
         // Store the shape image path in the database
+        if($imageSource==)
         $template->shape_image = $shapeImagePath;
 
         // Save the updated record
