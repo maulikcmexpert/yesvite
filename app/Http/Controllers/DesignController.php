@@ -303,8 +303,8 @@ class DesignController extends Controller
         // Find the template record by ID
         $template = TextData::find($validated['id']);
         
-        $img= asset('storage/canvas/').$template->shape_image;
-       dd($img,$imageSource);
+        $img = asset('storage/canvas/' . $template->shape_image);
+        // dd($img,$imageSource);
 
         if (!$template) {
             return response()->json(['message' => 'Template not found'], 404);
