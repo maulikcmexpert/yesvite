@@ -258,7 +258,7 @@ class DesignController extends Controller
     // }
     public function saveTextData(Request $request)
     {
-        dd($request);
+        // dd($request);
 
         $shapeImagePath = null;
         $imageSource = $request->shape_image; // Expecting a single string

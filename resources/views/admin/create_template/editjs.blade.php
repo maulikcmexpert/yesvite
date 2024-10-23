@@ -1880,7 +1880,7 @@ $(".removeShapImage").click(function(){
             var objects = canvas.getObjects();
             var textData = [];
             var finalArray = [];
-            var shapeImageData = null;
+            var shapeImageData = null;  
             // console.log(objects);
 
             objects.forEach(function(obj) {
