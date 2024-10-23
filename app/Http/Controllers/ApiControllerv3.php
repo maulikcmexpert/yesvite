@@ -12735,7 +12735,7 @@ class ApiControllerv3 extends Controller
                 //         'is_draft_save' => '0',
                 //         'product_payment_id' => $new_subscription->id,
                 //     ]);
-                if(isset($request->is_draft) && $request->is_draft=='0'){
+                // if(isset($request->is_draft) && $request->is_draft=='0'){
                     $updateEvent = Event::where('id', $input['event_id'])->first();
                     if ($updateEvent != null) {
                         $invite_count = (isset($input['subscription_invite_count']) && $input['subscription_invite_count'] != null) ? $input['subscription_invite_count'] : 0;
@@ -12759,7 +12759,7 @@ class ApiControllerv3 extends Controller
                         $updateEvent->save();
 
                     }
-                }
+                // }
             }
             return response()->json(['status' => 1, 'message' => "purchase sucessfully"]);
         } catch (QueryException $e) {
