@@ -92,9 +92,10 @@
 
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var now = new Date();
-        var formattedTime = now.toLocaleTimeString();
-        alert(formattedTime);
-    });
+   var submitotptime; // This will hold the time when OTP was submitted
+
+document.addEventListener('DOMContentLoaded', function() {
+    var now = new Date();
+    submitotptime = now; // Set the current time as the submission time
+});
 </script>
