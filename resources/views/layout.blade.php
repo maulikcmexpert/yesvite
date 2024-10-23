@@ -19,7 +19,7 @@
 
     <x-front.bodyfooter page={{$page}} />
 
-    {{-- <x-front.footer :js="$js ?? []" /> --}}
+    <x-front.footer :js="$js ?? []" />
 </body>
 
 </html>
