@@ -1229,7 +1229,7 @@ function emailChecker($email)
 
 function adminNotification($notificationType, $postData)
 {
-    dd(1)
+    // dd(1);
     // if ($notificationType == 'broadcast_message') {
     //     $deviceDataArray = []; 
     //     try {
