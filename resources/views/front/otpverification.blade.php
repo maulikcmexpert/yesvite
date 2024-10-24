@@ -95,7 +95,7 @@
    var submitotptime; // This will hold the time when OTP was submitted
 
 document.addEventListener('DOMContentLoaded', function() {
-    var now = new Date();
-    submitotptime = now; // Set the current time as the submission time
+    var snow = new Date();
+    submitotptime = snow; // Set the current time as the submission time
 });
 </script>
