@@ -98,7 +98,7 @@ $(document).on('click', '#Next_btn_otp', function () {
 
 });
 
-document.getElementById("otpform").addEventListener("submit", function (event) {
+document.getElementById("otpverify").addEventListener("click", function (event) {
 
     const now = new Date();
     console.log(submitotptime+""+now)
@@ -112,7 +112,7 @@ document.getElementById("otpform").addEventListener("submit", function (event) {
         var generated_otp = $("#generated_otp").val('');
         // alert('OTP expired');
         toastr.error("Your Otp is Expired Please click on Resend Link to get new Otp");
- 
+        return;
     }else{
         const otpFields = document.querySelectorAll(".otp__digit");
         let isValid = true;
@@ -140,6 +140,7 @@ document.getElementById("otpform").addEventListener("submit", function (event) {
     
             if (otp == generated_otp) {
                 $("#otp-error").text("");
+                $('#otpform ').submit();
             } else {
                 $("#otp-error").text("OTP is incorrect");
                 event.preventDefault();
