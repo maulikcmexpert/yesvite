@@ -1237,7 +1237,9 @@ function adminNotification($notificationType, $postData)
             $deviceTokens = [];
             $userEmails = [];
             $userDataList = [];
-            $users = User::select('email')->whereNotNull('email')->get();
+            $users = User::select('email')->whereNotNull('email')
+            ->whereNotNull('email_verified_at')
+            ->get();
             $emails = $users->pluck('email')->toArray();
             $message = $postData['message'];
 
