@@ -76,7 +76,7 @@
                     </ul>
                 </div>
                 @endif
-                <button type="submit" class="btn btn-primary" id="otpverify">Verify Otp</button>
+                <button type="button" class="btn btn-primary" id="otpverify">Verify Otp</button>
             </form>
 
         </div>
