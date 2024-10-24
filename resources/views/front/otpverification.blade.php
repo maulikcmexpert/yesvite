@@ -13,6 +13,9 @@
     }
 </style>
 <x-front.advertise />
+<div id="loader" style="display: none;">
+    <img src="{{asset('assets/front/loader.gif')}}" alt="loader" style="width:146px;height:146px;z-index:1000">
+</div>
 <section class="login-wrapper fadeIn" data-wow-duration="2s" data-wow-delay="1s" data-wow-offset="0">
     <div class="container">
         <div class="login-content text-center">
