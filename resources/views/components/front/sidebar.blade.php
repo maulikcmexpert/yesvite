@@ -22,7 +22,7 @@
                 <h3>{{$profileData->firstname.' '.$profileData->lastname }}</h3>
 
                 @if($profileData->subscribe_status == false)
-                <span class="free">Free</span>
+                {{-- <span class="free">Free</span> --}}
                 @else
                 <span>Pro Year</span>
                 @endif
