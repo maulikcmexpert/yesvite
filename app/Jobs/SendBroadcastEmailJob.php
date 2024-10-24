@@ -67,7 +67,7 @@ class SendBroadcastEmailJob implements ShouldQueue
 
     public $tries = 5;
     // public $timeout = 300;
-        public $timeout = 300; // Set timeout in seconds (10 minutes)
+    public $timeout = 300; // Set timeout in seconds (10 minutes)
 
     protected $email;
     protected $message;
