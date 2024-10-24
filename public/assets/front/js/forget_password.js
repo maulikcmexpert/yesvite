@@ -99,7 +99,6 @@ $(document).on('click', '#Next_btn_otp', function () {
 });
 
 document.getElementById("otpverify").addEventListener("click", function (event) {
-    event.preventDefault();
 
     const now = new Date();
     console.log(submitotptime+""+now)
