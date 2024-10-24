@@ -65,14 +65,14 @@ class SendBroadcastEmailJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    public $tries = 3;
+    public $tries = 1;
     // public $timeout = 300;
     public $timeout = 300; // Set timeout in seconds (10 minutes)
 
     protected $email;
     protected $message;
     
-    // protected $batchSize = 30; // Adjust the batch size as needed
+    // protected $batchSize = 3 0; // Adjust the batch size as needed
 
     public function __construct($email, $message)
     {
