@@ -72,7 +72,7 @@ class SendBroadcastEmailJob implements ShouldQueue
     protected $email;
     protected $message;
     
-    protected $batchSize = 30; // Adjust the batch size as needed
+    // protected $batchSize = 30; // Adjust the batch size as needed
 
     public function __construct($email, $message)
     {
