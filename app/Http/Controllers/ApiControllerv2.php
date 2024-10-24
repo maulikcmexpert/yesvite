@@ -5502,9 +5502,7 @@ class ApiControllerv2 extends Controller
                 $eventDesingInnerImage->design_inner_image = $DesignInnerImageName;
                 $eventDesingInnerImage->save();
             }
-            $counter = 0;
             
-
             $userSubscription = UserSubscription::where('user_id', $user->id)
                 ->where('endDate','>',date('Y-m-d H:i:s'))
                 ->where('type','subscribe')
@@ -5539,7 +5537,7 @@ class ApiControllerv2 extends Controller
                     $checkUserInvited = Event::withCount('event_invited_user')->where('id', $input['event_id'])->first();
                     if ($request->is_update_event == '0') {
                         if ($checkUserInvited->event_invited_user_count != '0' && $checkUserInvited->is_draft_save == '0') {
-                            $counter++;
+
                             $notificationParam = [
                                 'sender_id' => $user->id,
                                 'event_id' => $input['event_id'],
