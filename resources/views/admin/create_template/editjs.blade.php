@@ -34,6 +34,8 @@
                                 img.set({
                                     left: 0,
                                     top: 0,
+                                    width:345,
+                                    height:490,
                                     selectable: false, // Non-draggable background image
                                     hasControls: false // Disable resizing controls
                                 });
