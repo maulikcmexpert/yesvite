@@ -108,7 +108,7 @@ document.getElementById("otpverify").addEventListener("click", function (event) 
     const diffInMinutes = Math.floor(timeDiff / (1000 * 60));
 
     // Check if the time difference is greater than or equal to 15 minutes
-    if (diffInMinutes >= 1) {
+    if (diffInMinutes >= 5) {
         var generated_otp = $("#generated_otp").val('');
         // alert('OTP expired');
         toastr.error("Your Otp is Expired Please click on Resend Link to get new Otp");
