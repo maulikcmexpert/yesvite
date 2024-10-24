@@ -59,9 +59,16 @@ $(document).on("click", ".design-card", function() {
     };
 
     fabric.Image.fromURL(image, function(img) {
+        var canvasWidth = canvas.getWidth();
+        var canvasHeight = canvas.getHeight();
+
+        // Calculate scale to maintain aspect ratio
+        var scaleFactor = Math.min(canvasWidth / img.width, canvasHeight / img.height);
         img.set({
             left: 0,
             top: 0,
+            scaleX: scaleFactor,
+            scaleY: scaleFactor,
             selectable: false,
             hasControls: false,
         });
@@ -486,11 +493,18 @@ function bindData() {
 
             // Load background image
             fabric.Image.fromURL(image, function(img) {
+                var canvasWidth = canvas.getWidth();
+                var canvasHeight = canvas.getHeight();
+
+                // Calculate scale to maintain aspect ratio
+                var scaleFactor = Math.min(canvasWidth / img.width, canvasHeight / img.height);
                 img.set({
                     left: 0,
                     top: 0,
-                    selectable: false, // Non-draggable background image
-                    hasControls: false, // Disable resizing controls
+                    scaleX: scaleFactor,
+                    scaleY: scaleFactor,
+                    selectable: false,
+                    hasControls: false,
                 });
                 canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
             });
