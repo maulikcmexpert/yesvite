@@ -101,7 +101,7 @@ $(document).on('click', '#Next_btn_otp', function () {
 document.getElementById("otpform").addEventListener("submit", function (event) {
 
     const now = new Date();
-
+    console.log(submitotptime+""+now)
     const timeDiff = now - submitotptime; // Difference in milliseconds
 
     // Convert milliseconds to minutes
