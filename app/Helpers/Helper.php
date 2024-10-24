@@ -1607,32 +1607,56 @@ function updateSubscriptionStatus($userId, $response)
 function checkSubscription($userId)
 {
 
-    $userSubscription = UserSubscription::where('user_id', $userId)->orderBy('id', 'DESC')->limit(1)->first();
+    $userSubscription = UserSubscription::where('user_id', $userId)
+        ->where('type','subscribe')
+        ->orderBy('id', 'DESC')
+        ->limit(1)
+        ->first();
     if ($userSubscription != null) {
         $app_id = $userSubscription->packageName;
         $product_id = $userSubscription->productId;
         $purchaseToken = $userSubscription->purchaseToken;
+        if($userSubscription->device_type == 'ios'){
+            $responce = set_apple_iap($purchaseToken);
 
-        $responce =  set_android_iap($app_id, $product_id, $purchaseToken, 'subscribe');
+            foreach ($responce->latest_receipt_info as $key => $value) {
+                if(isset($value->expires_date_ms) && $value->expires_date_ms != null && date('Y-m-d H:i', ($value->expires_date_ms /  1000)) >= date('Y-m-d H:i') ){
+                    $enddate =  date('Y-m-d H:i:s', ($value->expires_date_ms /  1000));
+                    $current_date = date('Y-m-d H:i:s');
+                    if (strtotime($current_date) > strtotime($enddate)) {
+                        $userSubscription->endDate = $enddate;
+                        $userSubscription->save();
+                        return false;
+                    }
+                    if (isset($responce->error)) {
+                        return false;
+                    }
+                    return true; 
+                }
+            }
+        }else{
 
-
-        $exp_date =  date('Y-m-d H:i:s', ($responce['expiryTimeMillis'] /  1000));
-
-
-        $current_date = date('Y-m-d H:i:s');
-
-        if (strtotime($current_date) > strtotime($exp_date)) {
-
-            $userSubscription->endDate = $exp_date;
-            $userSubscription->save();
-            return false;
-        }
-        if (isset($responce['userCancellationTimeMillis'])) {
-
-            $cancellationdate =  date('Y-m-d H:i:s', ($responce['userCancellationTimeMillis'] /  1000));
-            $userSubscription->cancellationdate = $cancellationdate;
-            $userSubscription->save();
-            return false;
+            $responce =  set_android_iap($app_id, $product_id, $purchaseToken, 'subscribe');
+    
+    
+            $exp_date =  date('Y-m-d H:i:s', ($responce['expiryTimeMillis'] /  1000));
+    
+    
+            $current_date = date('Y-m-d H:i:s');
+    
+            if (strtotime($current_date) > strtotime($exp_date)) {
+    
+                $userSubscription->endDate = $exp_date;
+                $userSubscription->save();
+                return false;
+            }
+            if (isset($responce['userCancellationTimeMillis'])) {
+    
+                $cancellationdate =  date('Y-m-d H:i:s', ($responce['userCancellationTimeMillis'] /  1000));
+                $userSubscription->cancellationdate = $cancellationdate;
+                $userSubscription->save();
+                return false;
+            }
         }
         return true;
     }
@@ -1701,6 +1725,41 @@ function set_android_iap($appid, $productID, $purchaseToken, $type)
     }
 
     return $result1;
+}
+
+function set_apple_iap($receipt)
+{
+    $data = array(
+        'receipt-data' => $receipt,
+        'password' => 'e26c3c7903f74a89a2103d424cd33d4b',
+        'exclude-old-transactions' => 'true'
+    );
+
+    $payload = json_encode($data);
+
+    // Prepare new cURL resource
+    $ch = curl_init('https://sandbox.itunes.apple.com/verifyReceipt');
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLINFO_HEADER_OUT, true);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+
+    // Set HTTP Header for POST request 
+    curl_setopt(
+        $ch,
+        CURLOPT_HTTPHEADER,
+        array(
+            'Content-Type: application/json',
+            'Content-Length: ' . strlen($payload)
+        )
+    );
+
+    // Submit the POST request
+    $result = curl_exec($ch);
+    // Close cURL session handle
+    curl_close($ch);
+    $userReceiptData = json_decode($result);
+    return $userReceiptData;
 }
 
 function add_user_firebase($userId, $userStatus = null)
