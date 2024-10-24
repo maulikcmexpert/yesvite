@@ -12558,12 +12558,12 @@ class ApiControllerv3 extends Controller
                     foreach ($responce->latest_receipt_info as $key => $value) {
                         $enddate = date('Y-m-d H:i:s', strtotime("-1 days"));
                         if (isset($value->expires_date_ms) && $value->expires_date_ms != null && date('Y-m-d H:i', ($value->expires_date_ms /  1000)) >= date('Y-m-d H:i')) {
-                            $check_transactionid = UserSubscription::where('orderId',$value->transaction_id)->first();
+                            $check_transactionid = UserSubscription::where('orderId',$value->original_transaction_id)->first();
                             if($check_transactionid){
                                 return response()->json(['status' => 0, 'message' => "trasaction order id already exist"]);
                             }else{
                                 $enddate =  date('Y-m-d H:i:s', ($value->expires_date_ms /  1000));
-                                $order_id = (isset($value->transaction_id) && $value->transaction_id != null)?$value->transaction_id:'';
+                                $order_id = (isset($value->original_transaction_id) && $value->original_transaction_id != null)?$value->original_transaction_id:'';
                                 $productID = (isset($value->product_id) && $value->product_id != null)?$value->product_id:'';
                             }
                         }
