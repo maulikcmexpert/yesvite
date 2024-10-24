@@ -153,6 +153,7 @@ document.getElementById("otpverify").addEventListener("click", function (event) 
 
 $(document).on("click", "#resend_otp", function () {
     var email = $("#useremail").val();
+    $('#loader').css('display','block');
     $.ajax({
         url: base_url + "otp_verify",
         type: "POST",
@@ -166,6 +167,11 @@ $(document).on("click", "#resend_otp", function () {
             if (response.success == "1") {
                 console.log(response.otp);
                 $("#generated_otp").val(response.otp);
+                $('#otp1').val('');
+                $('#otp2').val('');
+                $('#otp3').val('');
+                $('#otp4').val('');
+                $('#loader').css('display','none');
                 toastr.success("Otp Resend Sucessfully");
                 // location.reload();
                 submitotptime = new Date();
