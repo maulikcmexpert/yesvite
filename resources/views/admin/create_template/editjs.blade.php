@@ -31,11 +31,17 @@
                         // Load background image (imagePath)
                         if (data.imagePath) {
                             fabric.Image.fromURL(data.imagePath, function(img) {
+                                var canvasWidth = canvas.getWidth();
+                                var canvasHeight = canvas.getHeight();
+
+                                // Calculate scale to maintain aspect ratio
+                                var scaleFactor = Math.min(canvasWidth / img.width, canvasHeight / img.height);
+
                                 img.set({
                                     left: 0,
                                     top: 0,
-                                    width:345,
-                                    height:490,
+                                    scaleX: scaleFactor,
+                                    scaleY: scaleFactor,
                                     selectable: false, // Non-draggable background image
                                     hasControls: false // Disable resizing controls
                                 });
