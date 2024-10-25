@@ -3247,10 +3247,10 @@ class ApiControllerv2 extends Controller
                 $eventCategory = EventDesignCategory::with(['subcategory', 'textdatas'])->withCount(['subcategory', 'textdatas'])->get();
             }
 
-
+            dd($eventCategory);
             $categoryList = [];
             foreach ($eventCategory as $value) {
-                if ($value->subcategory_count != 0) {
+                if ($value->subcategory_count != 0  ) {
                     $categoryInfo['id'] = $value->id;
                     $categoryInfo['category_name'] = $value->category_name;
                     $subcategoryList = [];
