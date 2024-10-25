@@ -6,7 +6,7 @@ use App\DataTables\UserDataTable;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
-
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\DataTables;
 use Illuminate\Database\QueryException;
@@ -155,28 +155,53 @@ class UserController extends Controller
 
         DB::beginTransaction();
         try {
-            $password = $request['firstname'] . '123';
+            $addUser = new User();
 
-            $data = [
-                'firstname' => $request['firstname'],
-                'lastname' => $request['lastname'],
+            // Set the addUser attributes
+            $password = $request['firstname'] . '123';  // Generate temporary password
+            $randomString = Str::random(30);  // Generate random remember token
+
+            $addUser->firstname = $request['firstname'];
+            $addUser->lastname = $request['lastname'];
+            $addUser->email = $request['email'];
+            $requireNewPassword = $request->has('require_new_password') ? true : false;
+            if ($requireNewPassword) {
+                $addUser->isTemporary_password = '1';
+            }
+            $addUser->app_user  = '1';
+            $addUser->remember_token = $randomString;
+            $addUser->password = Hash::make($password);
+            // $addUser->isTemporary_password = '1';
+            $addUser->email_verified_at = Carbon::now()->toDateTimeString();
+            $addUser->password_updated_date = Carbon::now()->format('Y-m-d');
+
+            // Add phone number if provided
+            if (!empty($request['phone_number'])) {
+                $addUser->phone_number = $request['phone_number'];
+            }
+
+            // Save the addUser to the database
+            $addUser->save();
+            $userData = [
+                'username' => $request['firstname'] . ' ' . $request['lastname'],
                 'email' => $request['email'],
-                'app_user' => '0',
-                'password' => Hash::make($password),
-                'email_verified_at' => Carbon::now()->toDateTimeString(),
-                'password_updated_date' => Carbon::now()->format('Y-m-d'),
+                'token' => $randomString,
+                'password' => $password
             ];
 
-            if (!empty($request['phone_number'])) {
-                $data['phone_number'] = $request['phone_number'];
-            }
-            $addUser = User::create($data);
+            // dd($userData);
+            $this->addInFirebase($addUser->id);
 
+            Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($request) {
+                $message->to($request['email']);
+                $message->subject('Verify your Yesvite email address');
+            });
 
             DB::commit();
             $this->addInFirebase($addUser->id);
             return redirect()->route('users.index')->with('success', 'User Add successfully !');
         } catch (\Exception $e) {
+            dd($e);
             // Rollback transaction on error
             DB::rollBack();
             return redirect()->route('users.create')->with('error', 'User creation failed!');
@@ -300,6 +325,8 @@ class UserController extends Controller
             'email' => 'required|email',
             'phone_number' => 'nullable|numeric',
             'address' => 'nullable|string|max:255',
+            // 'ci' => 'required|string|max:255',
+            // 'lastname' => 'required|string|max:255',
         ]);
 
 
@@ -310,8 +337,12 @@ class UserController extends Controller
         $user->lastname = $request->input('lastname');
         $user->email = $request->input('email');
         $user->phone_number = $request->input('phone_number');
-        $user->address = $request->input('address');
-        $user->address_2 = $request->input('address_2');
+        // $user->address = $request->input('address');
+        // $user->address_2 = $request->input('address_2');
+        $user->city = $request->input('city');
+        $user->state = $request->input('state');
+
+
 
         // Save the updated user details
         $user->save();

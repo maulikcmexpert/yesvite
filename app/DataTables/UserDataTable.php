@@ -11,6 +11,8 @@ use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
 use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
+
 
 class UserDataTable extends DataTable
 {
@@ -29,12 +31,26 @@ class UserDataTable extends DataTable
             })
             ->filter(function ($query) {
                 if ($this->request->has('search')) {
-                    $keyword = $this->request->get('search');
-                    $keyword = $keyword['value'];
-                    $query->where(function ($q) use ($keyword) {
-                        $q->where('firstname', 'LIKE', "%{$keyword}%")
-                            ->orWhere('lastname', 'LIKE', "%{$keyword}%");
+                    $keyword = $this->request->get('search')['value'];
+                    
+                    // Split the search keyword into words
+                    $keywords = explode(' ', $keyword);
+    
+                    // Adjust the query to search for firstname and lastname together
+                    $query->where(function ($q) use ($keywords) {
+                        foreach ($keywords as $word) {
+                            $q->where(function ($query) use ($word) {
+                                $query->where('firstname', 'LIKE', "%{$word}%")
+                                      ->orWhere('lastname', 'LIKE', "%{$word}%");
+                            });
+                        }
                     });
+    
+                    // Also add filters for phone_number, email, user_type, and status
+                    $query->orWhere('phone_number', 'LIKE', "%{$keyword}%")
+                          ->orWhere('email', 'LIKE', "%{$keyword}%");
+                        //   ->orWhere('user_type', 'LIKE', "%{$keyword}%")
+                        //   ->orWhere('status', 'LIKE', "%{$keyword}%");
                 }
             })
             ->addColumn('profile', function ($row) {
@@ -106,9 +122,22 @@ class UserDataTable extends DataTable
                 return '<a class="" href="' . $pwd_url . '" title="View"><i class="fa fa-key"></i></a>';;
             })
 
-            // ->addColumn('package_name', function ($row) {
-            //     return $row->user_subscriptions->type;
-            // })
+            ->addColumn('package_name', function ($row) {
+                if ($row->user_subscriptions->isNotEmpty()) {
+                    // Iterate through the subscriptions and handle each 'type'
+                    return $row->user_subscriptions->map(function ($subscription) {
+                        if ($subscription->type == 'product') {
+                            return 'Free Year';
+                        } elseif ($subscription->type == 'subscribe') {
+                            return 'Pro Year';
+                        } else {
+                            return 'Unknown Type'; // Handle other types if necessary
+                        }
+                    })->implode(', '); // Join the results if there are multiple subscriptions
+                } else {
+                    return 'Expired';
+                }
+            })
 
 
             ->addColumn('action', function ($row) {
@@ -148,9 +177,40 @@ class UserDataTable extends DataTable
     /**
      * Get the query source of dataTable.
      */
-    public function query(User $model): QueryBuilder
+    public function query(User $model,Request $request): QueryBuilder
     {
-        return  User::where(['account_type' => '0'])->orderBy('id', 'desc');
+
+        $column = 'id';
+
+        if (isset($request->order[0]['column'])) {
+            if ($request->order[0]['column'] == '0') {
+                $column = 'id';
+            }
+            if ($request->order[0]['column'] == '2') {
+                $column = 'firstname';
+            }else if ($request->order[0]['column'] == '4'){
+                $column = 'email';
+            }
+        }
+
+        $direction = 'desc';
+
+        if (isset($request->order[0]['dir']) && $request->order[0]['dir'] == 'asc') {
+            $direction = 'asc';
+        }
+
+        // return  User::where(['account_type' => '0'])->orderBy($column, $direction);
+
+
+        $dateOnly = Carbon::now()->toDateString();
+    
+            return User::with(['user_subscriptions' => function ($query) use ($dateOnly): void {
+                $query->where('endDate', '>=', $dateOnly);
+            }])
+                ->where('account_type', '0')
+                ->orderBy('id', 'desc');
+
+    
         // $dateOnly = Carbon::now()->toDateString();
         // dd($dateOnly);
         // return User::with(relations: ['user_subscriptions' => function ($query) use ($dateOnly): void {
@@ -179,7 +239,7 @@ class UserDataTable extends DataTable
             ->columns($this->getColumns())
             ->minifiedAjax()
             //->dom('Bfrtip')
-            // ->orderBy(1)
+            ->orderBy(0)    
             ->setTableAttributes(['class' => 'table table-bordered data-table users-data-table dataTable no-footer'])
             ->selectStyleSingle()
             ->buttons([
@@ -198,16 +258,16 @@ class UserDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('no')->title('#')->render('meta.row + meta.settings._iDisplayStart + 1;'),
-            Column::make('profile'),
-            Column::make('name'),
-            Column::make('phone_number'),
-            Column::make('email'),
-            Column::make('app_user')->title('User Type'),
-            Column::make('setpassword')->title('Set Password'),
-            // Column::make('package_name')->title('Plan'),
-            Column::make('action'),
-            Column::make('status')
+            Column::make('no')->title('#')->render('meta.row + meta.settings._iDisplayStart + 1;')->orderable(false),
+            Column::make('profile')->orderable(false),
+            Column::make('name')->orderable(true),
+            Column::make('phone_number')->orderable(false),
+            Column::make('email')->orderable(true),
+            Column::make('app_user')->title('User Type')->orderable(false),
+            Column::make('setpassword')->title('Set Password')->orderable(false),
+            Column::make('package_name')->title('Plan')->orderable(false),
+            Column::make('action')->orderable(false),
+            Column::make('status')->orderable(false)
 
         ];
     }

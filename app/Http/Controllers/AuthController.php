@@ -70,13 +70,17 @@ class AuthController extends Controller
 
         $client->authenticate($request->input('code'));
         $accessToken = $client->getAccessToken();
-        dd($accessToken);
-
-        // Save the refresh token
-        $refreshToken = $accessToken['refresh_token'];
-        dd($refreshToken);
-        // Save this refresh token securely, e.g., in the database
-        // User::update(['google_refresh_token' => $refreshToken]);
+        if (!empty($accessToken['refresh_token'])) {
+            // Save the refresh token
+            $refreshToken = $accessToken['refresh_token'];
+    
+            // Save this refresh token securely, e.g., in the database
+            // User::update(['google_refresh_token' => $refreshToken]);
+    
+            return 'Refresh token saved!';
+        } else {
+            return 'Refresh token not found!';
+        }
 
         return 'Refresh token saved!';
     }
@@ -275,8 +279,12 @@ class AuthController extends Controller
                         $loginHistory->login_count = 1;
                         $loginHistory->save();
                     }
+                    if($user->isTemporary_password=="1"){
+                        return redirect()->route('profile.change_password');
+                    }else{
+                        return redirect()->route('profile');
+                    }
 
-                    return redirect()->route('profile');
                 } else {
                     return redirect()->back()->withErrors([
                         'email' => 'Invalid credentials!',

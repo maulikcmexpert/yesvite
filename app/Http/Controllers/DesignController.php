@@ -221,36 +221,124 @@ class DesignController extends Controller
     // }
 
 
+    // public function saveTextData(Request $request)
+    // {
+
+
+    //     // Validate incoming request data
+    //     $validated = $request->validate([
+    //         'id' => 'required|integer',
+    //         'textElements' => 'required|array',
+    //         'shapeImageData' => 'required|array',
+    //     ]);
+
+
+
+    //     // Find the template record by ID
+    //     $template = TextData::find($validated['id']);
+
+    //     if (!$template) {
+    //         return response()->json(['message' => 'Template not found'], 404);
+    //     }
+
+    //     // Convert text elements array to JSON
+    //     $staticInformation = [
+    //         'textElements' => $validated['textElements'],
+    //         'shapeImageData' => $validated['shapeImageData'],
+    //     ];
+
+    //     // Update the template record
+    //     $template->static_information = $staticInformation;
+    //     $template->width = 345;
+    //     $template->height = 490;
+    //     // Save the updated record
+    //     $template->save();
+
+    //     return response()->json(['message' => 'Data saved successfully'], 200);
+    // }
     public function saveTextData(Request $request)
     {
+                    // dd($request);
 
+        $shapeImagePath = null;
+        $imageSource = $request->shape_image; // Expecting a single string
+        
+        // Check if the image source is not empty
+        if (strpos($imageSource, 'data:image/') === 0) {
+            // dd($request);
+            // Extract the base64 encoded image part by removing the metadata prefix
+            // Find the position of the comma and get everything after it
+            $base64String = substr($imageSource, strpos($imageSource, ',') + 1);
 
+            // Decode the base64 string
+            $imageData = base64_decode($base64String);
+
+            // Create a unique file name (with proper file extension based on MIME type)
+            $mime = substr($imageSource, 11, strpos($imageSource, ';') - 11); // Get the image MIME type (e.g., jpeg, png)
+            $fileName = time() . '-' . uniqid() . '.' . $mime;
+
+            // Define the path where the image will be saved
+            $path = public_path('storage/canvas/') . $fileName;
+
+            // Save the image data to the specified path
+            file_put_contents($path, $imageData);
+
+            // Prepare the response data
+
+            $shapeImagePath = $fileName;
+        }
+        // dd($savedFile);
+
+        // dd($request->fil);
         // Validate incoming request data
+
+        
         $validated = $request->validate([
             'id' => 'required|integer',
             'textElements' => 'required|array',
-            'shapeImageData' => 'required|array',
+            'shapeImageData' => 'nullable|array',
+            // 'shape_image' => 'image|mimes:jpg,jpeg,png|max:2048',
         ]);
-
-
 
         // Find the template record by ID
         $template = TextData::find($validated['id']);
+        
+        $img = asset('storage/canvas/' . $template->shape_image);
+        // dd($img,$imageSource);
 
         if (!$template) {
             return response()->json(['message' => 'Template not found'], 404);
         }
 
+
+
         // Convert text elements array to JSON
-        $staticInformation = [
-            'textElements' => $validated['textElements'],
-            'shapeImageData' => $validated['shapeImageData'],
-        ];
+
+        if(isset($validated['shapeImageData'])){
+            $staticInformation = [
+                'textElements' => $validated['textElements'],
+                 'shapeImageData' => $validated['shapeImageData'],
+            ];
+        }else{
+            $staticInformation = [
+                'textElements' => $validated['textElements'],
+                //  'shapeImageData' => $validated['shapeImageData'],
+            ];  
+        }
+       
+        // $staticInformation = $validated['textElements'];
+        // $staticInformation = $validated['shapeImageData'];
 
         // Update the template record
         $template->static_information = $staticInformation;
         $template->width = 345;
         $template->height = 490;
+
+        // Store the shape image path in the database
+        if($img!=$imageSource){
+            $template->shape_image = $shapeImagePath;
+        }
+
         // Save the updated record
         $template->save();
 

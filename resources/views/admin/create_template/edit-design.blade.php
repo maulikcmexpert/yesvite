@@ -53,7 +53,7 @@
                     <div class="canvas-container" id="border">
                         <!-- The canvas where the image will be drawn -->
                         <input type="file" id="image" accept="image/*" style="display:none;" />
-
+                        <img id="shape_img" src="" style="display: none;" >
                         <canvas id="imageEditor1" class="canvas new"></canvas>
                     </div>
 

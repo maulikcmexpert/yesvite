@@ -23,7 +23,9 @@ use App\Http\Controllers\admin\{
     EditTempalteController,
     UserResendEmailVerify,
     AccountVerification,
-    LoginHistory
+    LoginHistory,
+    Privacy_policyController,
+    Terms_ConditionController
 };
 use App\Http\Controllers\sendNotificationController;
 
@@ -80,7 +82,9 @@ Route::group(['middleware' => adminAuth::Class], function () {
         'user_chat_report' => UserChatReportController::class,
         'user_resend_verification' => UserResendEmailVerify::class,
         'account_verification' => AccountVerification::class,
-        'login_history' => LoginHistory::class
+        'login_history' => LoginHistory::class,
+        'privacy_policy'=>Privacy_policyController::class,
+        'terms_condition'=>Terms_ConditionController::class
 
     ]);
 

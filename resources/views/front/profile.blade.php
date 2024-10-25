@@ -19,8 +19,7 @@
                                 Edit Profile</a> -->
                         <a href="{{route('profile.edit')}}" class="cmn-btn edit-btn">
                             Edit Profile</a>
-                        <a href="#" class="cmn-btn edit-btn sidebar-btn"
-                            onclick="toggleSidebar('sidebar_create_event')">
+                        <a href="#" class="cmn-btn edit-btn sidebar-btn create-event-btn" >
                             Create Event</a>
                     </div>
                     <div class="profile-wrapper">

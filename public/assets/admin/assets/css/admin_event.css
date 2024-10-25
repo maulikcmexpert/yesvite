@@ -1193,7 +1193,22 @@
     justify-content: center;
     gap: 20px;
 }
+.report-description-td{
+    word-break: break-all;
+    min-width: 500px;
+}
 
+table.dataTable thead>tr>th:nth-child(1).sorting_desc:after{
+    display: none !important;
+}
+
+table.dataTable thead>tr>th:nth-child(1).sorting_desc:before{
+    display: none !important;
+}
+
+.ck-editor__editable {
+    height: 350px !important;
+}
 @media only screen and (min-width: 1800px) and (max-width: 3000px) {
     .image-edit-inner-img {
         width: 345px;

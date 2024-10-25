@@ -17,53 +17,952 @@
                     width: 100,
                     height: 100
                 };
-        function loadTextDataFromDatabase() {
+       
+                function loadTextDataFromDatabase() {
             var id = $('#template_id').val();
 
             fetch(`/loadTextData/${id}`) // API endpoint to load data from your database
                 .then(response => response.json())
                 .then(data => {
                     if (data) {
-                        // console.log(data);
+                        console.log(data);
                         var canvasElement = document.getElementById('imageEditor1');
                         canvasElement.setAttribute('data-canvas-id', data.id);
                         // Load background image (imagePath)
                         if (data.imagePath) {
                             fabric.Image.fromURL(data.imagePath, function(img) {
+                                var canvasWidth = canvas.getWidth();
+                                var canvasHeight = canvas.getHeight();
+
+                                // Calculate scale to maintain aspect ratio
+                                var scaleFactor = Math.min(canvasWidth / img.width, canvasHeight / img.height);
+
                                 img.set({
                                     left: 0,
                                     top: 0,
+                                    scaleX: scaleFactor,
+                                    scaleY: scaleFactor,
                                     selectable: false, // Non-draggable background image
                                     hasControls: false // Disable resizing controls
                                 });
                                 canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
                             });
                         }
+
                         if (data.static_information) {
                             const staticInfo = JSON.parse(data.static_information);
                             let element = staticInfo?.shapeImageData;
-                            console.log(element)
-                            if (element.shape != undefined && element.centerX != undefined && element.centerY != undefined && element.height != undefined && element.width != undefined) {
-                                    console.log(element.shape);
-                                    shape = element.shape;
-                                    centerX = element.centerX;
-                                    centerY = element.centerY;
-                                    height = element.height;
-                                    width = element.width;
+                            
+                            // console.log(element)
+                            if(element!=undefined){
 
-                                    updatedOBJImage = {
-                                        shape: shape,
-                                        centerX: element.centerX,
-                                        centerY: element.centerY,
-                                        width: element.height,
-                                        height: element.width
+                            
+                            if (element.shape != undefined && element.centerX != undefined && element
+                                .centerY != undefined && element.height != undefined && element.width !=
+                                undefined) {
+                                console.log(element.shape);
+                                // shape = element.shape;
+                                // centerX = element.centerX;
+                                // centerY = element.centerY;
+                                // height = element.height;
+                                // width = element.width;
+
+                                // updatedOBJImage = {
+                                //     shape: shape,
+                                //     centerX: element.centerX,
+                                //     centerY: element.centerY,
+                                //     width: element.height,
+                                //     height: element.width
+                                // };
+                                // updateClipPath(data.filedImagePath, element);
+
+                                ////////////////
+                                // const imageInput = document.getElementById('image1');
+                                const scaledWidth = element.width; // Use element's width
+                                const scaledHeight = element.height;
+                                // imageInput.style.width = element.width + 'px';
+                                // imageInput.style.height = element.height + 'px';
+
+                                let currentImage = null; // Variable to hold the current image
+                                let isScaling = false; // Flag to check if the image is scaling
+                                let currentShapeIndex = 0; // Index to track the current shape
+
+                                const defaultShape = element.shape; // Set the desired default shape here
+
+                                const shapeIndexMap = {
+                                    'rectangle': 0,
+                                    'circle': 1,
+                                    'triangle': 2,
+                                    'star': 3
+                                };
+
+                                function createShapes(img) {
+
+                                    const imgWidth = img.width;
+                                    const imgHeight = img.height;
+                                    const starScale = Math.min(imgWidth, imgHeight) / 2;
+                                    const starPoints = [{
+                                            x: 0,
+                                            y: -starScale
+                                        }, // Top point
+                                        {
+                                            x: starScale * 0.23,
+                                            y: -starScale * 0.31
+                                        }, // Top-right
+                                        {
+                                            x: starScale,
+                                            y: -starScale * 0.31
+                                        }, // Right
+                                        {
+                                            x: starScale * 0.38,
+                                            y: starScale * 0.12
+                                        }, // Bottom-right
+                                        {
+                                            x: starScale * 0.58,
+                                            y: starScale
+                                        }, // Bottom
+                                        {
+                                            x: 0,
+                                            y: starScale * 0.5
+                                        }, // Center-bottom
+                                        {
+                                            x: -starScale * 0.58,
+                                            y: starScale
+                                        }, // Bottom-left
+                                        {
+                                            x: -starScale * 0.38,
+                                            y: starScale * 0.12
+                                        }, // Top-left
+                                        {
+                                            x: -starScale,
+                                            y: -starScale * 0.31
+                                        }, // Left
+                                        {
+                                            x: -starScale * 0.23,
+                                            y: -starScale * 0.31
+                                        } // Top-left
+                                    ];
+
+                                    return [
+                                        new fabric.Rect({
+                                            width: imgWidth,
+                                            height: imgHeight,
+                                            originX: 'center',
+                                            originY: 'center',
+                                            angle: 0
+                                        }),
+                                        new fabric.Circle({
+                                            radius: Math.min(imgWidth, imgHeight) / 2,
+                                            originX: 'center',
+                                            originY: 'center',
+                                            angle: 0
+                                        }),
+                                        new fabric.Triangle({
+                                            width: imgWidth,
+                                            height: imgHeight,
+                                            originX: 'center',
+                                            originY: 'center',
+                                            angle: 0
+                                        }),
+                                        new fabric.Polygon(starPoints, {
+                                            originX: 'center',
+                                            originY: 'center',
+                                            angle: 0
+                                        })
+                                    ];
+                                }
+                                $("#shape_img").attr("src", data.filedImagePath);
+
+                                fabric.Image.fromURL(data.filedImagePath, function(img) {
+                                    if (!img) {
+                                        console.error('Image could not be loaded.');
+                                        return;
+                                    }
+                                    var filedimage = data.filedImagePath;
+                                    console.log({
+                                        filedimage
+                                    });
+
+                                    img.set({
+
+                                        selectable: true,
+                                        hasControls: true,
+
+                                        hasBorders: false,
+                                        borderColor: "#2DA9FC",
+                                        cornerColor: "#fff",
+                                        transparentCorners: false,
+                                        lockUniScaling: true,
+                                        scaleX: scaledWidth / img.width ||
+                                            1, // Default to 1 if img.width is undefined
+                                        scaleY: scaledHeight / img.height || 1,
+                                        // scaleX: scaledWidth / img
+                                        //     .width, // Scale based on element's width
+                                        // scaleY: scaledHeight / img
+                                        //     .height, // Scale based on element's height
+                                        cornerSize: 10,
+                                        cornerStyle: 'circle',
+                                        left: element.centerX - scaledWidth /
+                                            2, // Center the image horizontally
+                                        top: element.centerY - scaledHeight / 2
+                                    });
+
+                                    let shapes = createShapes(img);
+
+                                    currentShapeIndex = shapeIndexMap[defaultShape] ||
+                                        0; // Default to rectangle if not found
+
+                                    img.set({
+                                        clipPath: shapes[currentShapeIndex]
+                                    });
+                                    img.crossOrigin = "anonymous";
+
+                                    img.on('mouseup', function(event) {
+                                        console.log(event);
+                                        if (event?.transform?.action === 'drag' && event
+                                            .transform.actionPerformed === undefined) {
+                                            currentShapeIndex = (currentShapeIndex + 1) %
+                                                shapes.length;
+                                            img.set({
+                                                clipPath: shapes[currentShapeIndex]
+                                            });
+                                            canvas.renderAll();
+
+                                        }
+                                    });
+
+                                    const fixClipPath = () => {
+                                        img.set({
+                                            clipPath: shapes[currentShapeIndex]
+                                        });
+                                        canvas.renderAll();
                                     };
-                                    updateClipPath(data.filedImagePath, element);
+
+                                    img.on('scaling', function(event) {
+                                        const target = event.target;
+                                        if (target && target.isControl) {
+                                            fixClipPath();
+                                        }
+                                    });
+                                    fabric.Image.prototype.controls.deleteControl = new fabric
+                                        .Control({
+                                            x: 0.3,
+                                            y: -0.5,
+                                            offsetY: -20,
+                                            cursorStyle: 'pointer',
+                                            actionHandler: (eventData, transform, x, y) => {
+                                                console.log(eventData)
+                                                const target = transform.target;
+                                                canvas.remove(
+                                                    target
+                                                ); // Remove object on trash icon click
+                                                canvas.requestRenderAll();
+                                            },
+                                            mouseUpHandler: deleteTextbox,
+                                            render: renderDeleteIcon,
+                                            cornerSize: 28,
+                                            withConnection: false // Disable the line connection
+                                        });
+
+                                    // canvas.renderAll();
+                                    canvas.add(img);
+                                    currentImage = img;
+                                    canvas.renderAll();
+                                });
+
+
+                                const fileInput = document.getElementById('fileInput');
+
+                                fileInput.addEventListener('change', function(event) {
+                                    const file = event.target.files[0];
+                                    if (file) {
+                                        const reader = new FileReader();
+
+                                        reader.onload = function() {
+                                            // Set the image source
+                                            $("#shape_img").attr("src", reader.result);
+
+                                        };
+
+                                        reader.readAsDataURL(file);
+
+                                        // AJAX call to upload the image and shape data
+                                        const formData = new FormData();
+                                        formData.append('image',
+                                            file); // Append the file from file input
+                                        formData.append('shape',
+                                            shape
+                                        ); // Append shape data (assuming `shape` is defined)
+
+                                        const id = $('#template_id')
+                                            .val(); // Assuming you have a template ID
+
+                                        // Send the form data via AJAX
+                                        fetch(`/user_image/${id}`, {
+                                                method: 'POST',
+                                                body: formData,
+                                                headers: {
+                                                    'X-CSRF-TOKEN': document.querySelector(
+                                                            'meta[name="csrf-token"]')
+                                                        .getAttribute('content')
+                                                }
+                                            })
+                                            .then(response => {
+                                                if (!response.ok) {
+                                                    throw new Error(
+                                                        'Network response was not ok');
+                                                }
+                                                return response.json();
+                                            })
+                                            .then(data => {
+                                                updatedOBJImage = {
+                                                    shape: 'rectangle',
+                                                    width: 100,
+                                                    height: 100
+                                                };
+                                                fabric.Image.fromURL(data.imagePath,
+                                                    function(img) {
+                                                        console.log('Server response:',
+                                                            img);
+                                                        var filedimage = data.imagePath;
+                                                        // console.log({
+                                                        //     filedimage
+                                                        // });
+
+                                                        img.set({
+
+                                                            selectable: true,
+                                                            hasControls: true,
+                                                            // hasControls: false,
+                                                            hasBorders: false,
+                                                            borderColor: "#2DA9FC",
+                                                            cornerColor: "#fff",
+                                                            transparentCorners: false,
+                                                            lockUniScaling: true,
+                                                            // scaleX:10, // Scale based on element's width
+                                                            // scaleY:10, // Scale based on element's height
+                                                            cornerSize: 10,
+                                                            cornerStyle: 'circle',
+                                                            left: 0, // Center the image horizontally
+                                                            top: 0
+                                                        });
+
+                                                        let shapes = createShapes(img);
+
+                                                        currentShapeIndex = shapeIndexMap[
+                                                                defaultShape] ||
+                                                            0; // Default to rectangle if not found
+
+                                                        img.set({
+                                                            clipPath: shapes[
+                                                                currentShapeIndex
+                                                            ]
+                                                        });
+                                                        img.crossOrigin = "anonymous";
+
+                                                        img.on('mouseup', function(event) {
+                                                            console.log(event);
+                                                            if (event?.transform
+                                                                ?.action ===
+                                                                'drag' && event
+                                                                .transform
+                                                                .actionPerformed ===
+                                                                undefined) {
+                                                                currentShapeIndex =
+                                                                    (currentShapeIndex +
+                                                                        1) %
+                                                                    shapes.length;
+                                                                img.set({
+                                                                    clipPath: shapes[
+                                                                        currentShapeIndex
+                                                                    ]
+                                                                });
+                                                                canvas.renderAll();
+
+                                                            }
+                                                        });
+
+                                                        const fixClipPath = () => {
+                                                            img.set({
+                                                                clipPath: shapes[
+                                                                    currentShapeIndex
+                                                                ]
+                                                            });
+                                                            canvas.renderAll();
+                                                        };
+
+                                                        img.on('scaling', function(event) {
+                                                            const target = event
+                                                                .target;
+                                                            if (target && target
+                                                                .isControl) {
+                                                                fixClipPath();
+                                                            }
+                                                        });
+                                                        fabric.Image.prototype.controls
+                                                            .deleteControl = new fabric
+                                                            .Control({
+                                                                x: 0.3,
+                                                                y: -0.5,
+                                                                offsetY: -20,
+                                                                cursorStyle: 'pointer',
+                                                                actionHandler: (
+                                                                    eventData,
+                                                                    transform, x, y
+                                                                ) => {
+                                                                    console.log(
+                                                                        eventData
+                                                                    )
+                                                                    const target =
+                                                                        transform
+                                                                        .target;
+                                                                    canvas.remove(
+                                                                        target
+                                                                    ); // Remove object on trash icon click
+                                                                    canvas
+                                                                        .requestRenderAll();
+                                                                },
+                                                                mouseUpHandler: deleteTextbox,
+                                                                render: renderDeleteIcon,
+                                                                cornerSize: 28,
+                                                                withConnection: false // Disable the line connection
+                                                            });
+
+                                                        // canvas.renderAll();
+                                                        canvas.add(img);
+                                                        currentImage = img;
+                                                    });
+                                                // updateClipPath(data.imagePath, updatedOBJImage);
+                                            })
+                                            .catch(error => {
+                                                console.error(
+                                                    'There was a problem with the fetch operation:',
+                                                    error);
+                                            });
+                                    }
+                                });
+
+
+                                /////////////////
 
                             }
-                            
-                        }                      
-                       
+                        }else{
+                            const defaultShape = 'rectangle'; // Set the desired default shape here
+
+                            const shapeIndexMap = {
+                                'rectangle': 0,
+                                'circle': 1,
+                                'triangle': 2,
+                                'star': 3
+                            };
+
+                            function createShapes(img) {
+
+                                const imgWidth = img.width;
+                                const imgHeight = img.height;
+                                const starScale = Math.min(imgWidth, imgHeight) / 2;
+                                const starPoints = [{
+                                        x: 0,
+                                        y: -starScale
+                                    }, // Top point
+                                    {
+                                        x: starScale * 0.23,
+                                        y: -starScale * 0.31
+                                    }, // Top-right
+                                    {
+                                        x: starScale,
+                                        y: -starScale * 0.31
+                                    }, // Right
+                                    {
+                                        x: starScale * 0.38,
+                                        y: starScale * 0.12
+                                    }, // Bottom-right
+                                    {
+                                        x: starScale * 0.58,
+                                        y: starScale
+                                    }, // Bottom
+                                    {
+                                        x: 0,
+                                        y: starScale * 0.5
+                                    }, // Center-bottom
+                                    {
+                                        x: -starScale * 0.58,
+                                        y: starScale
+                                    }, // Bottom-left
+                                    {
+                                        x: -starScale * 0.38,
+                                        y: starScale * 0.12
+                                    }, // Top-left
+                                    {
+                                        x: -starScale,
+                                        y: -starScale * 0.31
+                                    }, // Left
+                                    {
+                                        x: -starScale * 0.23,
+                                        y: -starScale * 0.31
+                                    } // Top-left
+                                ];
+
+                                return [
+                                    new fabric.Rect({
+                                        width: imgWidth,
+                                        height: imgHeight,
+                                        originX: 'center',
+                                        originY: 'center',
+                                        angle: 0
+                                    }),
+                                    new fabric.Circle({
+                                        radius: Math.min(imgWidth, imgHeight) / 2,
+                                        originX: 'center',
+                                        originY: 'center',
+                                        angle: 0
+                                    }),
+                                    new fabric.Triangle({
+                                        width: imgWidth,
+                                        height: imgHeight,
+                                        originX: 'center',
+                                        originY: 'center',
+                                        angle: 0
+                                    }),
+                                    new fabric.Polygon(starPoints, {
+                                        originX: 'center',
+                                        originY: 'center',
+                                        angle: 0
+                                    })
+                                ];
+                            }
+                            const fileInput = document.getElementById('fileInput');
+
+                            fileInput.addEventListener('change', function(event) {
+                                const file = event.target.files[0];
+                                if (file) {
+                                    const reader = new FileReader();
+
+                                    reader.onload = function() {
+                                        // Set the image source
+                                        $("#shape_img").attr("src", reader.result);
+
+                                    };
+
+                                    reader.readAsDataURL(file);
+
+                                    // AJAX call to upload the image and shape data
+                                    const formData = new FormData();
+                                    formData.append('image',
+                                        file); // Append the file from file input
+                                    formData.append('shape',
+                                        shape
+                                    ); // Append shape data (assuming `shape` is defined)
+
+                                    const id = $('#template_id')
+                                        .val(); // Assuming you have a template ID
+
+                                    // Send the form data via AJAX
+                                    fetch(`/user_image/${id}`, {
+                                            method: 'POST',
+                                            body: formData,
+                                            headers: {
+                                                'X-CSRF-TOKEN': document.querySelector(
+                                                        'meta[name="csrf-token"]')
+                                                    .getAttribute('content')
+                                            }
+                                        })
+                                        .then(response => {
+                                            if (!response.ok) {
+                                                throw new Error(
+                                                    'Network response was not ok');
+                                            }
+                                            return response.json();
+                                        })
+                                        .then(data => {
+                                            updatedOBJImage = {
+                                                shape: 'rectangle',
+                                                width: 40,
+                                                height: 40
+                                            };
+                                            fabric.Image.fromURL(data.imagePath,
+                                                function(img) {
+                                                    console.log('Server response:',
+                                                        img);
+                                                    var filedimage = data.imagePath;
+                                                    // console.log({
+                                                    //     filedimage
+                                                    // });  
+
+                                                    img.set({
+
+                                                        selectable: true,
+                                                        hasControls: true,
+                                                        // width:100,
+                                                        // height:100,
+                                                        // hasControls: false,
+                                                        hasBorders: false,
+                                                        borderColor: "#2DA9FC",
+                                                        cornerColor: "#fff",
+                                                        transparentCorners: false,
+                                                        lockUniScaling: true,
+                                                        // scaleX:10, // Scale based on element's width
+                                                        // scaleY:10, // Scale based on element's height
+                                                        cornerSize: 10,
+                                                        cornerStyle: 'circle',
+                                                        left: 0, // Center the image horizontally
+                                                        top: 0
+                                                    });
+
+                                                    let shapes = createShapes(img);
+
+                                                    currentShapeIndex = shapeIndexMap[
+                                                            defaultShape] ||
+                                                        0; // Default to rectangle if not found
+
+                                                    img.set({
+                                                        clipPath: shapes[
+                                                            currentShapeIndex
+                                                        ]
+                                                    });
+                                                    img.crossOrigin = "anonymous";
+
+                                                    img.on('mouseup', function(event) {
+                                                        console.log(event);
+                                                        if (event?.transform
+                                                            ?.action ===
+                                                            'drag' && event
+                                                            .transform
+                                                            .actionPerformed ===
+                                                            undefined) {
+                                                            currentShapeIndex =
+                                                                (currentShapeIndex +
+                                                                    1) %
+                                                                shapes.length;
+                                                            img.set({
+                                                                clipPath: shapes[
+                                                                    currentShapeIndex
+                                                                ]
+                                                            });
+                                                            canvas.renderAll();
+
+                                                        }
+                                                    });
+
+                                                    const fixClipPath = () => {
+                                                        img.set({
+                                                            clipPath: shapes[
+                                                                currentShapeIndex
+                                                            ]
+                                                        });
+                                                        canvas.renderAll();
+                                                    };
+
+                                                    img.on('scaling', function(event) {
+                                                        const target = event
+                                                            .target;
+                                                        if (target && target
+                                                            .isControl) {
+                                                            fixClipPath();
+                                                        }
+                                                    });
+                                                    fabric.Image.prototype.controls
+                                                        .deleteControl = new fabric
+                                                        .Control({
+                                                            x: 0.3,
+                                                            y: -0.5,
+                                                            offsetY: -20,
+                                                            cursorStyle: 'pointer',
+                                                            actionHandler: (
+                                                                eventData,
+                                                                transform, x, y
+                                                            ) => {
+                                                                console.log(
+                                                                    eventData
+                                                                )
+                                                                const target =
+                                                                    transform
+                                                                    .target;
+                                                                canvas.remove(
+                                                                    target
+                                                                ); // Remove object on trash icon click
+                                                                canvas
+                                                                    .requestRenderAll();
+                                                            },
+                                                            mouseUpHandler: deleteTextbox,
+                                                            render: renderDeleteIcon,
+                                                            cornerSize: 28,
+                                                            withConnection: false // Disable the line connection
+                                                        });
+
+                                                    // canvas.renderAll();
+                                                    canvas.add(img);
+                                                    currentImage = img;
+                                                });
+                                            // updateClipPath(data.imagePath, updatedOBJImage);
+                                        })
+                                        .catch(error => {
+                                            console.error(
+                                                'There was a problem with the fetch operation:',error);
+                                        });
+                                }
+                            });
+                        }
+                        } else {
+                            const defaultShape = 'rectangle'; // Set the desired default shape here
+
+                            const shapeIndexMap = {
+                                'rectangle': 0,
+                                'circle': 1,
+                                'triangle': 2,
+                                'star': 3
+                            };
+
+                            function createShapes(img) {
+
+                                const imgWidth = img.width;
+                                const imgHeight = img.height;
+                                const starScale = Math.min(imgWidth, imgHeight) / 2;
+                                const starPoints = [{
+                                        x: 0,
+                                        y: -starScale
+                                    }, // Top point
+                                    {
+                                        x: starScale * 0.23,
+                                        y: -starScale * 0.31
+                                    }, // Top-right
+                                    {
+                                        x: starScale,
+                                        y: -starScale * 0.31
+                                    }, // Right
+                                    {
+                                        x: starScale * 0.38,
+                                        y: starScale * 0.12
+                                    }, // Bottom-right
+                                    {
+                                        x: starScale * 0.58,
+                                        y: starScale
+                                    }, // Bottom
+                                    {
+                                        x: 0,
+                                        y: starScale * 0.5
+                                    }, // Center-bottom
+                                    {
+                                        x: -starScale * 0.58,
+                                        y: starScale
+                                    }, // Bottom-left
+                                    {
+                                        x: -starScale * 0.38,
+                                        y: starScale * 0.12
+                                    }, // Top-left
+                                    {
+                                        x: -starScale,
+                                        y: -starScale * 0.31
+                                    }, // Left
+                                    {
+                                        x: -starScale * 0.23,
+                                        y: -starScale * 0.31
+                                    } // Top-left
+                                ];
+
+                                return [
+                                    new fabric.Rect({
+                                        width: imgWidth,
+                                        height: imgHeight,
+                                        originX: 'center',
+                                        originY: 'center',
+                                        angle: 0
+                                    }),
+                                    new fabric.Circle({
+                                        radius: Math.min(imgWidth, imgHeight) / 2,
+                                        originX: 'center',
+                                        originY: 'center',
+                                        angle: 0
+                                    }),
+                                    new fabric.Triangle({
+                                        width: imgWidth,
+                                        height: imgHeight,
+                                        originX: 'center',
+                                        originY: 'center',
+                                        angle: 0
+                                    }),
+                                    new fabric.Polygon(starPoints, {
+                                        originX: 'center',
+                                        originY: 'center',
+                                        angle: 0
+                                    })
+                                ];
+                            }
+                            const fileInput = document.getElementById('fileInput');
+
+                            fileInput.addEventListener('change', function(event) {
+                                const file = event.target.files[0];
+                                if (file) {
+                                    const reader = new FileReader();
+
+                                    reader.onload = function() {
+                                        // Set the image source
+                                        $("#shape_img").attr("src", reader.result);
+
+                                    };
+
+                                    reader.readAsDataURL(file);
+
+                                    // AJAX call to upload the image and shape data
+                                    const formData = new FormData();
+                                    formData.append('image',
+                                        file); // Append the file from file input
+                                    formData.append('shape',
+                                        shape
+                                    ); // Append shape data (assuming `shape` is defined)
+
+                                    const id = $('#template_id')
+                                        .val(); // Assuming you have a template ID
+
+                                    // Send the form data via AJAX
+                                    fetch(`/user_image/${id}`, {
+                                            method: 'POST',
+                                            body: formData,
+                                            headers: {
+                                                'X-CSRF-TOKEN': document.querySelector(
+                                                        'meta[name="csrf-token"]')
+                                                    .getAttribute('content')
+                                            }
+                                        })
+                                        .then(response => {
+                                            if (!response.ok) {
+                                                throw new Error(
+                                                    'Network response was not ok');
+                                            }
+                                            return response.json();
+                                        })
+                                        .then(data => {
+                                            updatedOBJImage = {
+                                                shape: 'rectangle',
+                                                width: 40,
+                                                height: 40
+                                            };
+                                            fabric.Image.fromURL(data.imagePath,
+                                                function(img) {
+                                                    console.log('Server response:',
+                                                        img);
+                                                    var filedimage = data.imagePath;
+                                                    // console.log({
+                                                    //     filedimage
+                                                    // });  
+
+                                                    img.set({
+
+                                                        selectable: true,
+                                                        hasControls: true,
+                                                        // width:100,
+                                                        // height:100,
+                                                        // hasControls: false,
+                                                        hasBorders: false,
+                                                        borderColor: "#2DA9FC",
+                                                        cornerColor: "#fff",
+                                                        transparentCorners: false,
+                                                        lockUniScaling: true,
+                                                        // scaleX:10, // Scale based on element's width
+                                                        // scaleY:10, // Scale based on element's height
+                                                        cornerSize: 10,
+                                                        cornerStyle: 'circle',
+                                                        left: 0, // Center the image horizontally
+                                                        top: 0
+                                                    });
+
+                                                    let shapes = createShapes(img);
+
+                                                    currentShapeIndex = shapeIndexMap[
+                                                            defaultShape] ||
+                                                        0; // Default to rectangle if not found
+
+                                                    img.set({
+                                                        clipPath: shapes[
+                                                            currentShapeIndex
+                                                        ]
+                                                    });
+                                                    img.crossOrigin = "anonymous";
+
+                                                    img.on('mouseup', function(event) {
+                                                        console.log(event);
+                                                        if (event?.transform
+                                                            ?.action ===
+                                                            'drag' && event
+                                                            .transform
+                                                            .actionPerformed ===
+                                                            undefined) {
+                                                            currentShapeIndex =
+                                                                (currentShapeIndex +
+                                                                    1) %
+                                                                shapes.length;
+                                                            img.set({
+                                                                clipPath: shapes[
+                                                                    currentShapeIndex
+                                                                ]
+                                                            });
+                                                            canvas.renderAll();
+
+                                                        }
+                                                    });
+
+                                                    const fixClipPath = () => {
+                                                        img.set({
+                                                            clipPath: shapes[
+                                                                currentShapeIndex
+                                                            ]
+                                                        });
+                                                        canvas.renderAll();
+                                                    };
+
+                                                    img.on('scaling', function(event) {
+                                                        const target = event
+                                                            .target;
+                                                        if (target && target
+                                                            .isControl) {
+                                                            fixClipPath();
+                                                        }
+                                                    });
+                                                    fabric.Image.prototype.controls
+                                                        .deleteControl = new fabric
+                                                        .Control({
+                                                            x: 0.3,
+                                                            y: -0.5,
+                                                            offsetY: -20,
+                                                            cursorStyle: 'pointer',
+                                                            actionHandler: (
+                                                                eventData,
+                                                                transform, x, y
+                                                            ) => {
+                                                                console.log(
+                                                                    eventData
+                                                                )
+                                                                const target =
+                                                                    transform
+                                                                    .target;
+                                                                canvas.remove(
+                                                                    target
+                                                                ); // Remove object on trash icon click
+                                                                canvas
+                                                                    .requestRenderAll();
+                                                            },
+                                                            mouseUpHandler: deleteTextbox,
+                                                            render: renderDeleteIcon,
+                                                            cornerSize: 28,
+                                                            withConnection: false // Disable the line connection
+                                                        });
+
+                                                    // canvas.renderAll();
+                                                    canvas.add(img);
+                                                    currentImage = img;
+                                                });
+                                            // updateClipPath(data.imagePath, updatedOBJImage);
+                                        })
+                                        .catch(error => {
+                                            console.error(
+                                                'There was a problem with the fetch operation:',error);
+                                        });
+                                }
+                            });
+
+                        }
+
+
 
                         // Load static information (text and shapes)
                         if (data.static_information) {
@@ -104,16 +1003,16 @@
                                         width: textWidth
                                     });
                                     // textElement.setControlsVisibility({
-                                    //     mt: false, 
+                                    //     mt: false,
                                     //     mb: false,
-                                    //     bl: true, 
-                                    //     br: true, 
-                                    //     tl: true, 
+                                    //     bl: true,
+                                    //     br: true,
+                                    //     tl: true,
                                     //     tr: true,
-                                    //     ml: true, 
-                                    //     mr: true  
+                                    //     ml: true,
+                                    //     mr: true
                                     // });
-                                    
+
                                     // textElement.on('rotating', function () {
                                     //     // Get the bounding rectangle of the textboxbox
                                     //     var boundingRect = textElement.getBoundingRect();
@@ -123,47 +1022,52 @@
                                     //     console.log('Rotated Position:', { centerX: centerX, centerY: centerY, rotation: rotationAngle });
                                     // });
 
-                                 
+
                                     canvas.add(textElement);
                                     console.log(textElement);
                                     canvas.renderAll();
 
                                     // Event Listener to get and update the fontSize during dragging/moving
-                                    canvas.on('object:scaling', function (e) {
+                                    canvas.on('object:scaling', function(e) {
                                         var activeObject = e.target;
 
                                         // Check if the scaled object is the textbox
-                                        if (activeObject && activeObject.type === 'textbox') {
+                                        if (activeObject && activeObject.type ===
+                                            'textbox') {
                                             // Get the current font size
                                             var currentFontSize = activeObject.fontSize;
-                                            console.log("Current font size: " + currentFontSize);
+                                            console.log("Current font size: " +
+                                                currentFontSize);
 
                                             // Calculate new font size based on scale factor
-                                            var newFontSize = currentFontSize * activeObject.scaleX; // Adjust the font size based on the horizontal scaling factor
-                                            const textMeasurement = new fabric.Text(activeObject.text, {
-                                                fontSize: newFontSize,
-                                                fontFamily: element.fontFamily,
-                                                fontWeight: element.fontWeight,
-                                                fontStyle: element.fontStyle,
-                                                underline: element.underline,
-                                                linethrough: element.linethrough,
-                                            });
+                                            var newFontSize = currentFontSize * activeObject
+                                                .scaleX; // Adjust the font size based on the horizontal scaling factor
+                                            const textMeasurement = new fabric.Text(
+                                                activeObject.text, {
+                                                    fontSize: newFontSize,
+                                                    fontFamily: element.fontFamily,
+                                                    fontWeight: element.fontWeight,
+                                                    fontStyle: element.fontStyle,
+                                                    underline: element.underline,
+                                                    linethrough: element.linethrough,
+                                                });
                                             const textWidth = textMeasurement.width;
                                             // Set the new font size and reset scale
                                             activeObject.set({
                                                 fontSize: newFontSize,
                                                 scaleX: 1, // Reset scaleX to 1 to prevent cumulative scaling
-                                                scaleY: 1,  // Reset scaleY to 1 if you want to keep uniform scaling
+                                                scaleY: 1, // Reset scaleY to 1 if you want to keep uniform scaling
                                                 width: textWidth,
-                                                textAlign:element.textAlign,
+                                                textAlign: element.textAlign,
                                             });
 
                                             // Re-render the canvas to apply the changes
                                             canvas.renderAll();
 
-                                            console.log("Updated font size: " + newFontSize);
+                                            console.log("Updated font size: " +
+                                                newFontSize);
                                         }
-                                    });                                    
+                                    });
 
                                 }
 
@@ -984,14 +1888,17 @@ $(".removeShapImage").click(function(){
         function getTextDataFromCanvas() {
             var objects = canvas.getObjects();
             var textData = [];
+            var finalArray = [];
+            var shapeImageData = null;  
             // console.log(objects);
+
             objects.forEach(function(obj) {
                 if (obj.type === 'textbox') {
-                    var centerPoint = obj.getCenterPoint(); 
-                    var centerX =  centerPoint.x;
+                    var centerPoint = obj.getCenterPoint();
+                    var centerX = centerPoint.x;
                     var centerY = centerPoint.y;
 
-                    // var controlCoords = obj.oCoords; 
+                    // var controlCoords = obj.oCoords;
                     // var mtrControl = controlCoords.mtr;
                     // var transformedMtr = fabric.util.transformPoint(
                     //     new fabric.Point(mtrControl.x, mtrControl.y),
@@ -1025,14 +1932,61 @@ $(".removeShapImage").click(function(){
                         underline: obj.underline,
                         linethrough: obj.linethrough,
                         date_formate: obj.date_formate,
-                        letterSpacing: obj.charSpacing / 10, // Divide by 10 to convert to standard spacing
-                        lineHeight: obj.lineHeight, // Line height of the tex// Include date_formate if set
-                        rotation: obj.angle  
+                        letterSpacing: obj.charSpacing /
+                            10, // Divide by 10 to convert to standard spacing
+                        lineHeight: obj
+                            .lineHeight, // Line height of the tex// Include date_formate if set
+                        rotation: obj.angle
                     });
                 }
-            });
 
-            return textData;
+                // if (obj.type === "image") {
+                //     var centerX = obj.left + obj.getScaledWidth() / 2; // Use getScaledWidth()
+                //     var centerY = obj.top + obj.getScaledHeight() / 2; // Use getScaledHeight()
+
+                //     console.log(centerX, centerY);
+
+                //     shapeImageData = {
+                //         shape: obj.clipPath ? obj.clipPath.type :
+                //         'none', // Handle case when clipPath is null
+                //         centerX: centerX,
+                //         centerY: centerY,
+                //         width: obj.getScaledWidth(), // Get the scaled width
+                //         height: obj.getScaledHeight(), // Get the scaled height
+                //     };
+
+                //     textData.push({
+                //         shapeImageData: shapeImageData
+                //     });
+                // }
+
+                if (obj.type === "image") {
+                    var centerX = obj.left + obj.getScaledWidth() / 2; // Use getScaledWidth()
+                    var centerY = obj.top + obj.getScaledHeight() / 2; // Use getScaledHeight()
+
+                    shapeImageData = {
+                        shape: obj.clipPath ? obj.clipPath.type :
+                        'none', // Handle case when clipPath is null
+                        centerX: centerX,
+                        centerY: centerY,
+                        width: obj.getScaledWidth(), // Get the scaled width
+                        height: obj.getScaledHeight(), // Get the scaled height
+                    };
+                
+             
+            }
+            });
+            finalArray.push({
+                'textElements': textData
+            })
+            if (shapeImageData) {
+        finalArray.push({
+            shapeImageData: shapeImageData
+        });
+    }
+        //    console.log(shapeImageData);
+            console.log('final'+finalArray);
+            return finalArray;
         }
         document.getElementById('addTextButton').addEventListener('click', function() {
             addEditableTextbox(100, 100, 'EditableText'); // You can set the initial position and default text
@@ -1087,6 +2041,13 @@ $(".removeShapImage").click(function(){
 
             // hideStaticTextElements(); 
             var textData = getTextDataFromCanvas();
+            var textElements = textData[0].textElements;
+            console.log(textData[0].textElements);
+            // Accessing the text elements
+            if(textData[1]){
+                var shapeImageData = textData[1].shapeImageData;
+            }
+            // console.log(shapeImageData);
             var imageURL = canvas.toDataURL('image/png');
             var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content'); // Get CSRF token
             var canvasElement = document.getElementById('imageEditor1');
@@ -1098,29 +2059,29 @@ $(".removeShapImage").click(function(){
             $('.removeShapImage').hide();
             const imageWrapperRect = imageWrapper.getBoundingClientRect();
             var id = $('#template_id').val();
-            const width = userImageElement.clientWidth;
-            const height = userImageElement.clientHeight;
-            const left = imageWrapperRect.left - canvasRect.left;
-            const top = imageWrapperRect.top - canvasRect.top;
-            const centerX = left + width / 2;
-            const centerY = top + height / 2;
-
+            // const width = userImageElement.clientWidth;
+            // const height = userImageElement.clientHeight;
+            // const left = imageWrapperRect.left - canvasRect.left;
+            // const top = imageWrapperRect.top - canvasRect.top;
+            // const centerX = left + width / 2;
+            // const centerY = top + height / 2;
+            const shapePath = $('#shape_img').attr('src');
          
 
-            var shapeImageData = [];
+            // var shapeImageData = [];
 
-            shapeImageData ={
-                shape: shape,
-                centerX: centerX,
-                centerY: centerY,
-                width: width,
-                height: height,
-            };
+            // shapeImageData ={
+            //     shape: shape,
+            //     centerX: centerX,
+            //     centerY: centerY,
+            //     width: width,
+            //     height: height,
+            // };
 
           
-            console.log(shapeImageData);
-            console.log(updatedOBJImage);
-            console.log(textData);
+            // console.log(shapeImageData);
+            // console.log(updatedOBJImage);
+            // console.log(textData);
            
 
             fetch('/saveTextData', {
@@ -1131,8 +2092,10 @@ $(".removeShapImage").click(function(){
                     },
                     body: JSON.stringify({
                         id: canvasId,
-                        textElements: textData,
-                        shapeImageData: shapeImageData
+                        textElements: textElements,
+                        shapeImageData: shapeImageData,
+                        shape_image: shapePath,
+
                     })
                 })
                 .then(response => response.json())
@@ -1514,46 +2477,46 @@ function handleMouseMove(event) {
             }
         }
 
-        fileInput.addEventListener('change', function(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const formData = new FormData();
-                formData.append('image', file);
-                var id = $('#template_id').val();
-                // console.log(formData);
-                // Include shape information in the form data
-                formData.append('shape', shape); // Send the current shape value
+        // fileInput.addEventListener('change', function(event) {
+        //     const file = event.target.files[0];
+        //     if (file) {
+        //         const formData = new FormData();
+        //         formData.append('image', file);
+        //         var id = $('#template_id').val();
+        //         // console.log(formData);
+        //         // Include shape information in the form data
+        //         formData.append('shape', shape); // Send the current shape value
 
-                fetch(`/user_image/${id}`, {
-                        method: 'POST',
-                        body: formData,
-                        headers: {
-                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
-                                .getAttribute('content')
-                        }
-                    })
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Network response was not ok');
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        console.log('Server response:', data);
-                        updatedOBJImage = {
-                            shape: 'rectangle',
+        //         fetch(`/user_image/${id}`, {
+        //                 method: 'POST',
+        //                 body: formData,
+        //                 headers: {
+        //                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
+        //                         .getAttribute('content')
+        //                 }
+        //             })
+        //             .then(response => {
+        //                 if (!response.ok) {
+        //                     throw new Error('Network response was not ok');
+        //                 }
+        //                 return response.json();
+        //             })
+        //             .then(data => {
+        //                 console.log('Server response:', data);
+        //                 updatedOBJImage = {
+        //                     shape: 'rectangle',
                             
-                            width: 100,
-                            height: 100
-                        };
-                        updateClipPath(data.imagePath, updatedOBJImage)
+        //                     width: 100,
+        //                     height: 100
+        //                 };
+        //                 updateClipPath(data.imagePath, updatedOBJImage)
                       
-                    })
-                    .catch(error => {
-                        console.error('There was a problem with the fetch operation:', error);
-                    });
-            }
-        });
+        //             })
+        //             .catch(error => {
+        //                 console.error('There was a problem with the fetch operation:', error);
+        //             });
+        //     }
+        // });
 
         document.getElementById('saveButton').addEventListener('click', function() {
             // alert();

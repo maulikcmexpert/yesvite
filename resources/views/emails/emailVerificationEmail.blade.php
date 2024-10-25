@@ -83,6 +83,56 @@
                 <tr>
                     <td height="7" style="font-size:0px">&nbsp;</td>
                 </tr>
+                @if(isset($userData['password'])&& $userData['password']!="")
+                <tr>
+                    <td>
+                        <p
+                            style="font-size: 16px;line-height: 25px;font-weight: 400;color: #0F172A ;margin: 0px 0px;font-family: 'SF Pro Display'">
+                            Your Email have been verified, click the button below to login.</p>
+                    </td>
+                </tr>
+                <!-- -------------- -->
+                <tr>
+                    <td height="10" style="font-size:0px">&nbsp;</td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <p
+                            style="font-size: 16px;line-height: 25px;font-weight: 400;color: #0F172A ;margin: 0px 0px;font-family: 'SF Pro Display'">
+                            Your Temporary password for login is : {{$userData['password']}}. </br>After login Please make sure to Change this temporary password for your security</p>
+                    </td>
+                </tr>
+                <!-- -------------- -->
+                <tr>
+                    <td height="10" style="font-size:0px">&nbsp;</td>
+                </tr>
+
+
+                <!-- -------------- -->
+                <tr>
+                    <td>
+                        <div class="view-btn" style="display: flex;align-items: center;gap: 15px;">
+                            <a href="{{ route('auth.login') }}"><button
+                                    style="font-family: 'SF Pro Display', sans-serif;font-size: 14px;line-height: 20px;font-weight: 500;color: #fff;background: #F73C71;border: 1px solid #F73C71;border-radius: 10px; padding: 10px 30px 10px 30px;width: 100%;max-width: 325px;text-transform: capitalize;">Login here</button></a>
+                            <!-- <a href="{{ route('user.verify',$userData['token']) }}" style="font-family: 'SF Pro Display', sans-serif;font-size: 14px;line-height: 20px;font-weight: 500;color: #fff;background: #F73C71;border: 1px solid #F73C71;border-radius: 10px; padding: 10px 30px 10px 30px;width: 100%;max-width: 325px;text-transform: capitalize;">
+                                Verify Account
+                            </a> -->
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td height="15" style="font-size:0px">&nbsp;</td>
+                </tr>
+                {{-- <tr>
+                    <td>
+                        <p
+                            style="font-size: 16px;line-height: 25px;font-weight: 400;color: #0F172A ;margin: 0px 0px;font-family: 'SF Pro Display'">
+                            This email expires after 3 hours. But no worries, if your email expires you can request
+                            another one from support.</p>
+                    </td>
+                </tr> --}}
+                @else
                 <tr>
                     <td>
                         <p
@@ -120,7 +170,7 @@
                             another one from support.</p>
                     </td>
                 </tr>
-
+                @endif
                 <tr>
                     <td height="7" style="font-size:0px">&nbsp;</td>
                 </tr>

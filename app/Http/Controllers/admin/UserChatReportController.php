@@ -95,7 +95,7 @@ class UserChatReportController extends Controller
 
         //         ->make(true);
         // }
-        $title = 'Post Reports';
+        $title = 'Users Chat Reports';
         $page = 'admin.post_chat_reports.list';
         $js = 'admin.post_reports.post_reportsjs';
         return $DataTable->render('admin.includes.layout', compact('title', 'page', 'js'));

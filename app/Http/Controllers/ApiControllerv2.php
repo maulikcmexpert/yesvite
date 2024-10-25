@@ -3430,7 +3430,7 @@ class ApiControllerv2 extends Controller
             'message_to_guests' => (!empty($eventData['message_to_guests'])) ? $eventData['message_to_guests'] : "",
             'subscription_plan_name' => (!empty($eventData['subscription_plan_name'])) ? $eventData['subscription_plan_name'] : "",
             'subscription_invite_count' => (!empty($eventData['subscription_invite_count'])) ? $eventData['subscription_invite_count'] : 0,
-            'is_draft_save' => $eventData['is_draft_save'],
+            'is_draft_save' => (!empty($eventData['subscription_plan_name']) && $eventData['subscription_plan_name'] == 'Pro') ? "1" : $eventData['is_draft_save']
             // 'static_information' => $staticInformation,
             // 'design_image' => (!empty($eventData['design_image'])) ? $eventData['design_image'] : "",
 
@@ -3746,10 +3746,30 @@ class ApiControllerv2 extends Controller
                     }
                 }
             }
+            $userSubscription = UserSubscription::where('user_id', $this->user->id)
+                ->where('endDate','>',date('Y-m-d H:i:s'))
+                ->where('type','subscribe')
+                ->orderBy('id', 'DESC')
+                ->limit(1)
+                ->first();
+            if ($userSubscription != null) {
+                // $eventCreation->is_draft_save = '0';
+                $purchase_status = true;
+            }else{
+                $checkProductSubscribe =  Event::where('id', $eventCreation->id)->first();
+                $purchase_status = true;
+                if ($checkProductSubscribe->subscription_plan_name == 'Pro' && $checkProductSubscribe->product_payment_id == NULL) {
+                    $purchase_status = false;
+                    $eventCreation->is_draft_save = '1';
+                }elseif($checkProductSubscribe->subscription_plan_name == 'Pro-Year'){
+                    $purchase_status = false;
+                    $eventCreation->is_draft_save = '1';
+                }
+            }
             $eventCreation->save();
         }
         DB::commit();
-        return response()->json(['status' => 1, 'event_id' => $eventCreation->id, 'event_name' => $eventData['event_name'], 'message' => "Event Created Successfully", 'guest_pending_count' => getGuestRsvpPendingCount($eventCreation->id)]);
+        return response()->json(['status' => 1, 'event_id' => $eventCreation->id, 'event_name' => $eventData['event_name'], 'message' => "Event Created Successfully", 'guest_pending_count' => getGuestRsvpPendingCount($eventCreation->id),'purchase_status' => $purchase_status]);
         // } catch (QueryException $e) {
         //     DB::rollBack();
 
@@ -4295,7 +4315,18 @@ class ApiControllerv2 extends Controller
                     }
                 }
 
-
+                $userSubscription = UserSubscription::where('user_id', $user->id)
+                    ->where('endDate','>',date('Y-m-d H:i:s'))
+                    ->where('type','subscribe')
+                    ->orderBy('id', 'DESC')
+                    ->limit(1)
+                    ->first();
+            if ($userSubscription != null) {
+                $purchase_status = true;
+            }else{
+                $purchase_status = false;
+            }
+            $eventDetail['purchase_status'] = $purchase_status;
 
                 return response()->json(['status' => 1, 'message' => "Event data", "data" => $eventDetail]);
             } else {
@@ -4425,6 +4456,9 @@ class ApiControllerv2 extends Controller
                 $updateEvent->city = (!empty($eventData['city'])) ? $eventData['city'] : "";
                 $updateEvent->message_to_guests = (!empty($eventData['message_to_guests'])) ? $eventData['message_to_guests'] : "";
                 if ($updateEvent->is_draft_save != '0') {
+                    $updateEvent->is_draft_save = $eventData['is_draft_save'];
+                }
+                if(isset($eventData['subscription_plan_name']) && $eventData['subscription_plan_name'] == 'Pro-Year'){
                     $updateEvent->is_draft_save = $eventData['is_draft_save'];
                 }
                 $updateEvent->subscription_plan_name = (!empty($eventData['subscription_plan_name'])) ? $eventData['subscription_plan_name'] : "";
@@ -5410,6 +5444,7 @@ class ApiControllerv2 extends Controller
 
     public function storeEventImage(Request $request)
     {
+        $user  = Auth::guard('api')->user();
         $input = $request->all();
         $validator = Validator::make($input, [
             'event_id' => ['required', 'exists:events,id']
@@ -5467,35 +5502,67 @@ class ApiControllerv2 extends Controller
                 $eventDesingInnerImage->design_inner_image = $DesignInnerImageName;
                 $eventDesingInnerImage->save();
             }
-
-            $user  = Auth::guard('api')->user();
-            $checkUserInvited = Event::withCount('event_invited_user')->where('id', $input['event_id'])->first();
-            DB::commit();
-            if ($request->is_update_event == '0') {
-                if ($checkUserInvited->event_invited_user_count != '0' && $checkUserInvited->is_draft_save == '0') {
-                    $notificationParam = [
-                        'sender_id' => $user->id,
-                        'event_id' => $input['event_id'],
-                        'post_id' => ""
-                    ];
-
-                    sendNotification('invite', $notificationParam);
+            
+            $userSubscription = UserSubscription::where('user_id', $user->id)
+                ->where('endDate','>',date('Y-m-d H:i:s'))
+                ->where('type','subscribe')
+                ->orderBy('id', 'DESC')
+                ->limit(1)
+                ->first();
+            if((isset($input['subscription_plan_name']) && $input['subscription_plan_name'] =='Free') || (isset($input['subscription_plan_name']) && $input['subscription_plan_name'] =='Pro-Year' && isset($userSubscription->id))){
+                $user  = Auth::guard('api')->user();
+                $checkUserInvited = Event::withCount('event_invited_user')->where('id', $input['event_id'])->first();
+                if ($request->is_update_event == '0') {
+                    if ($checkUserInvited->event_invited_user_count != '0' && $checkUserInvited->is_draft_save == '0') {
+                        $notificationParam = [
+                            'sender_id' => $user->id,
+                            'event_id' => $input['event_id'],
+                            'post_id' => ""
+                        ];
+    
+                        sendNotification('invite', $notificationParam);
+                    }
+                    if ($checkUserInvited->is_draft_save == '0') {
+                        $notificationParam = [
+                            'sender_id' => $user->id,
+                            'event_id' => $input['event_id'],
+                            'post_id' => ""
+                        ];
+                        sendNotification('owner_notify', $notificationParam);
+                    }
                 }
-                if ($checkUserInvited->is_draft_save == '0') {
-                    $notificationParam = [
-                        'sender_id' => $user->id,
-                        'event_id' => $input['event_id'],
-                        'post_id' => ""
-                    ];
-                    sendNotification('owner_notify', $notificationParam);
+            }else{
+                if(isset($request->is_draft) && $request->is_draft=='1'){
+                
+                    $checkUserInvited = Event::withCount('event_invited_user')->where('id', $input['event_id'])->first();
+                    if ($request->is_update_event == '0') {
+                        if ($checkUserInvited->event_invited_user_count != '0' && $checkUserInvited->is_draft_save == '0') {
+
+                            $notificationParam = [
+                                'sender_id' => $user->id,
+                                'event_id' => $input['event_id'],
+                                'post_id' => ""
+                            ];
+                            sendNotification('invite', $notificationParam);
+                        }
+                        if ($checkUserInvited->is_draft_save == '0') {
+                            $notificationParam = [
+                                'sender_id' => $user->id,
+                                'event_id' => $input['event_id'],
+                                'post_id' => ""
+                            ];
+                            sendNotification('owner_notify', $notificationParam);
+                        }
+                    }
                 }
             }
+            DB::commit();
             return response()->json(['status' => 1, 'message' => "Event images stored successfully"]);
         } catch (QueryException $e) {
             DB::rollBack();
             return response()->json(['status' => 0, 'message' => "db error"]);
         } catch (\Exception $e) {
-            // dd($e);
+            dd($e);
             // return response()->json(['status' => 1, 'message' => "Event images stored successfully"]);
             return response()->json(['status' => 0, 'message' => "something went wrong"]);
         }
@@ -10332,20 +10399,14 @@ class ApiControllerv2 extends Controller
             foreach ($sendFaildInvites as $value) {
 
                 $userDetail['id'] = $value->user->id;
-
                 $userDetail['first_name'] = (!empty($value->user->firstname) || $value->user->firstname != NULL) ? $value->user->firstname : "";
                 $userDetail['last_name'] = (!empty($value->user->lastname) || $value->user->lastname != NULL) ? $value->user->lastname : "";
-
                 $userDetail['profile'] = (!empty($value->user->profile) || $value->user->profile != NULL) ? asset('storage/profile/' . $value->user->profile) : "";
-
                 $userDetail['email'] = (!empty($value->user->email)) ? $value->user->email : "";
-
                 $userDetail['country_code'] = (string)$value->user->country_code;
                 $userDetail['phone_number'] = (!empty($value->user->phone_number)) ? $value->user->phone_number : "";
                 $userDetail['app_user'] = $value->user->app_user;
-
                 $userDetail['prefer_by'] = $value->prefer_by;
-
                 $faildInviteList[] = $userDetail;
             }
 

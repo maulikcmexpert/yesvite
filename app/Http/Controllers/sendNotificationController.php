@@ -1,17 +1,19 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\user;
 
 use Illuminate\Http\Request;
 
 class sendNotificationController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $title = 'send notification';
         $page = 'admin.sendNotification.sendData';
         $js = 'admin.sendNotification.notificationjs';
-        return view('admin.includes.layout', compact('title', 'page','js'));
+        return view('admin.includes.layout', compact('title', 'page', 'js'));
         // return view('admin.includes.layout', compact('title', 'page', 'js'));
     }
 
@@ -33,8 +35,13 @@ class sendNotificationController extends Controller
             'message' => $notificationData['message'],
             'title' => $notificationData['title'],
         ];
-            adminNotification('broadcast_message', $postData);
-        // return response()->json(['status' => 'success', 'message' => 'Notification and mail  sent successfully!']);
-    }
+        adminNotification('broadcast_message', $postData);
 
+        return response()->json(
+            [
+                'status' => 'success',
+                'message' => 'Notification and mail  sent successfully!'
+            ],
+        );
+    }
 }

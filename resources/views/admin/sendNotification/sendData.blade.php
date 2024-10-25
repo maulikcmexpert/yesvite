@@ -29,7 +29,7 @@
 
             </div>
 
-            <form method="post" action="{{ URL::to('/admin/sendNotification') }}" id="notificationForm" enctype="multipart/form-data">
+            <form method="post" action="" id="notificationForm" enctype="multipart/form-data">
 
                 @csrf
 
@@ -51,18 +51,10 @@
                         </div>
                     </div>
 
-
-
-
-
-
-
-
-
                 </div>
 
                 <div class="card-footer">
-                    <input type="button" class="btn btn-primary" id="UserAdd" value="Send">
+                    <input type="button" class="btn btn-primary" id="send_bluk_message" value="Send">
                 </div>
 
             </form>

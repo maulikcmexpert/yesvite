@@ -12,6 +12,8 @@ use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
+use Illuminate\Http\Request;
+
 
 class UserResendEmailVerifyDataTable extends DataTable
 {
@@ -28,16 +30,27 @@ class UserResendEmailVerifyDataTable extends DataTable
             ->addColumn('no', function () use (&$counter) {
                 return $counter++;
             })
-            // ->filter(function ($query) {
-            //     if ($this->request->has('search')) {
-            //         $keyword = $this->request->get('search');
-            //         $keyword = $keyword['value'];
-            //         $query->where(function ($q) use ($keyword) {
-            //             $q->where('firstname', 'LIKE', "%{$keyword}%")
-            //                 ->orWhere('lastname', 'LIKE', "%{$keyword}%");
-            //         });
-            //     }
-            // })
+            ->filter(function ($query) {
+                if ($this->request->has('search')) {
+                    $keyword = $this->request->get('search');
+                    $keyword = $keyword['value'];
+            
+                    // Split the keyword by spaces
+                    $nameParts = explode(' ', $keyword);
+            
+                    $query->where(function ($q) use ($nameParts) {
+                        if (count($nameParts) === 2) {
+                            // If there are two parts, assume it's first name and last name
+                            $q->where('firstname', 'LIKE', "%{$nameParts[0]}%")
+                              ->where('lastname', 'LIKE', "%{$nameParts[1]}%");
+                        } else {
+                            // If only one part, search both firstname and lastname individually
+                            $q->where('firstname', 'LIKE', "%{$nameParts[0]}%")
+                              ->orWhere('lastname', 'LIKE', "%{$nameParts[0]}%");
+                        }
+                    });
+                }
+            })
             ->addColumn('profile', function ($row) {
 
                 if (trim($row->profile) != "" || trim($row->profile) != NULL) {
@@ -56,6 +69,9 @@ class UserResendEmailVerifyDataTable extends DataTable
             ->addColumn('username', function ($row) {
                 return $row->firstname . ' ' . $row->lastname;
             })
+            ->addColumn('email', function ($row) {
+                return $row->email;
+            })
             ->addColumn('resend_mail', function ($row) {
                 $cryptId = encrypt($row->id);
                 $view_url = route('re_send_email', $cryptId);
@@ -70,15 +86,32 @@ class UserResendEmailVerifyDataTable extends DataTable
             })
             
 
-            ->rawColumns(['profile','username','resend_mail']);
+            ->rawColumns(['profile','username','email','resend_mail']);
     }
 
     /**
      * Get the query source of dataTable.
      */
-    public function query(User $model): QueryBuilder
+    public function query(User $model,Request $request): QueryBuilder
     {
-        return  User::where(['resend_verification_mail' => '1'])->orderBy('id', 'desc');
+        $column = 'id';  // Default column
+    
+        if (isset($request->order[0]['column'])) {
+            if ($request->order[0]['column'] == '2') {
+                // Sorting by the reporter user's firstname from the users table
+                $column = "firstname";
+            } elseif ($request->order[0]['column'] == '3') {
+                // Sorting by the 'to' reporter user's firstname (assuming another user field)
+                $column = "email";
+            }
+        }
+    
+        $direction = 'desc';  // Default direction
+    
+        if (isset($request->order[0]['dir']) && $request->order[0]['dir'] == 'asc') {
+            $direction = 'asc';
+        }
+        return  User::where(['resend_verification_mail' => '1'])->orderBy($column, $direction);
     }
 
     /**
@@ -91,7 +124,7 @@ class UserResendEmailVerifyDataTable extends DataTable
             ->columns($this->getColumns())
             ->minifiedAjax()
             //->dom('Bfrtip')
-            ->orderBy(1)
+            ->orderBy(0)
             ->selectStyleSingle()
             ->buttons([
                 Button::make('excel'),
@@ -109,10 +142,11 @@ class UserResendEmailVerifyDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('no')->title('#')->render('meta.row + meta.settings._iDisplayStart + 1;'),
-            Column::make('profile'),
-            Column::make('username'),
-            Column::make('resend_mail')->title('Resend Email'),
+            Column::make('no')->title('#')->render('meta.row + meta.settings._iDisplayStart + 1;')->orderable(false),
+            Column::make('profile')->title('Profile')->orderable(false),
+            Column::make('username')->title('Username')->orderable(true),
+            Column::make('email')->title('Email')->orderable(true),
+            Column::make('resend_mail')->title('Resend Email')->orderable(false),
         ];
     }
 

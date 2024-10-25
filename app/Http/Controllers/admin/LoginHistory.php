@@ -28,7 +28,7 @@ class LoginHistory extends Controller
      */
     public function index(Request $request, LoginHistoryDataTable $DataTable)
     {
-        $title = 'User Login History';
+        $title = 'Login History';
         $page = 'admin.login_history.list';
         // $js = 'admin.post_reports.post_reportsjs';
         return $DataTable->render('admin.includes.layout', compact('title', 'page'));

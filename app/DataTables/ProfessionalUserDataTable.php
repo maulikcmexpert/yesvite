@@ -13,6 +13,7 @@ use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
+use Illuminate\Http\Request;
 
 class ProfessionalUserDataTable extends DataTable
 {
@@ -33,12 +34,24 @@ class ProfessionalUserDataTable extends DataTable
                 if ($this->request->has('search')) {
                     $keyword = $this->request->get('search');
                     $keyword = $keyword['value'];
-                    $query->where(function ($q) use ($keyword) {
-                        $q->where('firstname', 'LIKE', "%{$keyword}%")
-                            ->orWhere('lastname', 'LIKE', "%{$keyword}%");
+
+                    // Split the keyword by spaces
+                    $nameParts = explode(' ', $keyword);
+
+                    $query->where(function ($q) use ($nameParts, $keyword) {
+                        if (count($nameParts) === 2) {
+                            // If the search contains both first and last names
+                            $q->where('firstname', 'LIKE', "%{$nameParts[0]}%")
+                                ->where('lastname', 'LIKE', "%{$nameParts[1]}%");
+                        } else {
+                            // If only one search term, search both firstname and lastname
+                            $q->where('firstname', 'LIKE', "%{$keyword}%")
+                                ->orWhere('lastname', 'LIKE', "%{$keyword}%");
+                        }
                     });
                 }
             })
+
             ->addColumn('profile', function ($row) {
 
                 if (trim($row->profile) != "" || trim($row->profile) != NULL) {
@@ -55,8 +68,9 @@ class ProfessionalUserDataTable extends DataTable
             </div>';
             })
             ->addColumn('username', function ($row) {
-                return $row->firstname . ' ' . $row->lastname;
+                return $row->firstname;
             })
+
             ->addColumn('app_user', function ($row) {
                 if ($row->app_user == '1') {
                     return '<svg width="16" height="26" viewBox="0 0 16 26" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -74,16 +88,48 @@ class ProfessionalUserDataTable extends DataTable
                 }
             })
 
+
+            // ->orderColumn('username', function ($query, $order) {
+            //     $orderBy="desc";
+            //     if($order=="desc"){
+            //         $orderBy="asc";
+            //     }
+            //     $query->orderBy('id', $orderBy);
+
+
+            // })
+
             ->rawColumns(['profile', 'app_user']);
     }
 
     /**
      * Get the query source of dataTable.
      */
-    public function query(User $model): QueryBuilder
+    public function query(User $model, Request $request): QueryBuilder
     {
-        return  User::where(['account_type' => '1'])->orderBy('id', 'desc');
+        $column = 'id';
+
+        if (isset($request->order[0]['column'])) {
+            if ($request->order[0]['column'] == '0') {
+                $column = 'id';
+            }
+            
+            if ($request->order[0]['column'] == '2') {
+                $column = 'firstname';
+            }
+        }
+
+        $direction = 'desc';
+
+        if (isset($request->order[0]['dir']) && $request->order[0]['dir'] == 'asc') {
+            $direction = 'asc';
+        }
+
+        return User::where(['account_type' => '1'])->orderBy($column, $direction);
     }
+
+
+
 
     /**
      * Optional method if you want to use the html builder.
@@ -94,8 +140,8 @@ class ProfessionalUserDataTable extends DataTable
             ->setTableId('professionaluser-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
-            //->dom('Bfrtip')
-            // ->orderBy(1)
+            // ->dom('Bfrtip')
+            ->orderBy(0)
             ->setTableAttributes(['class' => 'table table-bordered data-table users-data-table dataTable no-footer'])
             ->selectStyleSingle()
             ->buttons([
@@ -114,10 +160,10 @@ class ProfessionalUserDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('no')->title('#')->render('meta.row + meta.settings._iDisplayStart + 1;'),
-            Column::make('profile'),
-            Column::make('username'),
-            Column::make('app_user')->title('App User'),
+            Column::make('no')->title('#')->render('meta.row + meta.settings._iDisplayStart + 1;')->orderable(false),
+            Column::make('profile')->orderable(false),
+            Column::make('username')->orderable(true),
+            Column::make('app_user')->title('App User')->orderable(false),
         ];
     }
 

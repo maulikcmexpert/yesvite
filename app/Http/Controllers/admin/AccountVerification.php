@@ -27,7 +27,7 @@ class AccountVerification extends Controller
      */
     public function index(Request $request, AccountVerificationDataTable $DataTable)
     {
-        $title = 'User Account Verification';
+        $title = 'Account Verification';
         $page = 'admin.account_verification.list';
         // $js = 'admin.post_reports.post_reportsjs';
         return $DataTable->render('admin.includes.layout', compact('title', 'page'));

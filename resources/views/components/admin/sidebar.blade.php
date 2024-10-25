@@ -198,7 +198,44 @@
             </li>
           </ul>
         </li>
+        <li class="nav-item">
+          <p class="asideTitle">Privacy & Terms</p>
+          <ul class="pl-0">
+              <li
+                  class="nav-item {{ Request::segment(2) == 'privacy_policy' || Request::segment(2) == 'terms_condition' ? 'menu-open' : '' }}">
+                  <a href="#"
+                      class="nav-link  {{ Request::segment(2) == 'privacy_policy' || Request::segment(2) == 'terms_condition' ? 'active' : '' }}">
+                      <i class="nav-icon fas fa-copy"></i>
+                      <p>
+                          Privacy setup
+                          <i class="fas fa-angle-right right"></i>
+                          <!-- <span class="badge badge-info right">6</span> -->
+                      </p>
+                  </a>
+                  <ul class="nav nav-treeview">
+                      <li class="nav-item">
+                          <a href="{{ URL::to('/admin/privacy_policy') }}"
+                              class="nav-link  {{ Request::segment(2) == 'privacy_policy' ? 'active' : '' }}">
+                              <span class="dot"></span>
+                              <p>Privacy Policy</p>
+                          </a>
+                      </li>
+                      <li class="nav-item">
+                          <a href="{{ URL::to('/admin/terms_condition') }}"
+                              class="nav-link {{ Request::segment(2) == 'terms_condition' ? 'active' : '' }}">
+                              <span class="dot"></span>
+                              <p>Terms & condition </p>
+                          </a>
+                      </li>
 
+
+                  </ul>
+              </li>
+
+
+
+          </ul>
+      </li>  
         <!-- <li class="nav-item">
             <a href="{{URL::to('/admin/users')}}" class="nav-link {{ (Request::segment(2) == 'users')? 'active':'' }}">
               <i class="fas fa-users nav-icon"></i>

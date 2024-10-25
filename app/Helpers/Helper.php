@@ -1230,107 +1230,59 @@ function emailChecker($email)
 function adminNotification($notificationType, $postData)
 {
     if ($notificationType == 'broadcast_message') {
-
-        // // Get all users
-        // $users = User::all();
-
-
-        // foreach ($users as $user) {
-        //     // Fetch the device data for each user
-        //     $deviceData = Device::where('user_id', $user->id)->first();
-
-        //     // Check if device data exists and contains a valid device token
-        //     if ($deviceData && !empty($deviceData->device_token)) {
-
-        //         // Prepare the notification data for each user (inside the loop)
-        //         $notificationData = [
-        //             'message' => $postData['message'],
-        //             'type' => $notificationType,
-        //         ];
-        //         // Add the device token to the list
-        //         $deviceTokens[] = $deviceData->device_token;
-        //         $randomString = Str::random(30);
-        //         // $userDetails = User::where('id', $user->id)->first();
-        //         // $userDetails =  User::all();
-
-        //         try {
-        //             $userData = [
-        //                 'username' => $user->firstname . ' ' . $user->lastname,
-        //                 'email' => $user->email,
-        //                 // 'token' => $randomString,
-        //                 // 'is_first_login' => $user->is_first_login
-        //             ];
-
-
-        //             Mail::send('emails.adminEmail', ['userData' => $userData], function ($message) use ($user) {
-        //                 $message->to($user->email);
-        //                 $message->subject('Email Verification Mail');
-        //             });
-
-        //         } catch (\Exception $e) {
-        //             dd($e->getMessage());
-        //             // \Log::error('Email sending failed: ' . $e->getMessage());
-        //             return response()->json(['error' => 'Failed to send email.'], 500);
-        //         }
-
-        //         // Send the notification to the current user
-        //         // send_notification_FCM_and($deviceData->device_token, $notificationData);
-        //     }
-        // }
-
+        $deviceDataArray = []; 
+        $emailsSent = false; 
+        $notificationsSent = false; 
         try {
-            // $users = User::all();
             $deviceTokens = [];
             $userEmails = [];
             $userDataList = [];
+            $users = User::select('email')->whereNotNull('email')
+            ->whereNotNull('email_verified_at')
+            ->get();
+            $emails = $users->pluck('email')->toArray();
+            $message = $postData['message'];
 
-            $users = User::select('firstname','email')->where('email','!=',null)
-                ->get();
-                // SendBroadcastEmailJob::dispatch('vimal.cmexpertise@gmail.com', 'This is test mail from yesvite support team');
-                
-                $batchSize = 30; 
-                $usersChunked = array_chunk($users->toArray(), $batchSize); 
-                foreach ($usersChunked as $userBatch) {
-                    foreach ($userBatch as $user) {
-                        try {
-                            $details = [
-                                'subject' => 'Send Broadcast Mail',
-                                'message' => $postData['message'],
-                            ];
-                            $email = $user['email'];  
-                            $message = $postData['message'];
-                            
-                            if (!empty($email)) {
-                                SendBroadcastEmailJob::dispatch($email, $message);
-                            }
-                        } catch (\Exception $e) {
-                           dd($e->getMessage());
-                            return response()->json(['error' => 'Failed to send emails.'], 500);
-                        }
-                    }
-                
-                    sleep(2); // Delay for 2 seconds before processing the next batch
-                }
-
+            // try {
+            //     // foreach ($emails as $email) {
+            //         Mail::to("prakashmanat24@gmail.com")->send(new BulkEmail($message));
+            //     // }
         
-           
-  
-           
-            // dd('send all mail');
+            //     return response()->json(['success' => 'Emails sent successfully.']);
+            // } catch (\Exception $e) {
+            //     // dd($e);
+            //     return response()->json(['error' => 'Failed to send emails: ' . $e->getMessage()], 500);
+            // }
+       
 
+            // $deviceData = Device::all();
+            // foreach ($deviceData as $device) {
+            //     $deviceDataArray[] = [
+            //         'device_token' => $device->device_token,
+            //     ];
+            //     $notificationData = [
+            //         'message' => $message,
+            //         'type' => $notificationType,
+            //     ];
+            //     try {
+            //         send_notification_FCM_and($device->device_token, $notificationData);
+            //     } catch (\Exception $e) {
+            //         return response()->json(['error' => 'Failed to send emails.'], 500);
+            //     }
+            // }
 
+            try {
+                SendBroadcastEmailJob::dispatch($emails, $message);
+                $emailsSent = true; 
+
+            } catch (\Exception $e) {
+                // dd($e->getMessage());
+                return response()->json(['error' => 'Failed to send emails.'], 500);
+            }
+          
         } catch (\Exception $e) {
             return response()->json(['error' => 'Failed to send emails.'], 500);
         }
-
-        // if (!empty($deviceTokens)) {
-        //     // Send notification to all collected device tokens if you prefer bulk sending
-        //     send_notification_FCM_and($deviceTokens, [
-
-        //         'message' => $postData['message'],
-        //         'type' => $notificationType,
-        //     ]);
-        // }
     }
 }
 function send_notification_FCM($deviceToken, $notifyData)
@@ -1422,6 +1374,7 @@ function send_notification_FCM($deviceToken, $notifyData)
 
 function send_notification_FCM_and($deviceToken, $notifyData)
 {
+    // dd($deviceToken,$notifyData);
     $serverKey  = ServerKey::first();
     $SERVER_API_KEY = $serverKey->firebase_key;
     $URL = $serverKey->firebase_key;
@@ -1656,32 +1609,56 @@ function updateSubscriptionStatus($userId, $response)
 function checkSubscription($userId)
 {
 
-    $userSubscription = UserSubscription::where('user_id', $userId)->orderBy('id', 'DESC')->limit(1)->first();
+    $userSubscription = UserSubscription::where('user_id', $userId)
+        ->where('type','subscribe')
+        ->orderBy('id', 'DESC')
+        ->limit(1)
+        ->first();
     if ($userSubscription != null) {
         $app_id = $userSubscription->packageName;
         $product_id = $userSubscription->productId;
         $purchaseToken = $userSubscription->purchaseToken;
+        if($userSubscription->device_type == 'ios'){
+            $responce = set_apple_iap($purchaseToken);
 
-        $responce =  set_android_iap($app_id, $product_id, $purchaseToken, 'subscribe');
+            foreach ($responce->latest_receipt_info as $key => $value) {
+                if(isset($value->expires_date_ms) && $value->expires_date_ms != null && date('Y-m-d H:i', ($value->expires_date_ms /  1000)) >= date('Y-m-d H:i') ){
+                    $enddate =  date('Y-m-d H:i:s', ($value->expires_date_ms /  1000));
+                    $current_date = date('Y-m-d H:i:s');
+                    if (strtotime($current_date) > strtotime($enddate)) {
+                        $userSubscription->endDate = $enddate;
+                        $userSubscription->save();
+                        return false;
+                    }
+                    if (isset($responce->error)) {
+                        return false;
+                    }
+                    return true; 
+                }
+            }
+        }else{
 
-
-        $exp_date =  date('Y-m-d H:i:s', ($responce['expiryTimeMillis'] /  1000));
-
-
-        $current_date = date('Y-m-d H:i:s');
-
-        if (strtotime($current_date) > strtotime($exp_date)) {
-
-            $userSubscription->endDate = $exp_date;
-            $userSubscription->save();
-            return false;
-        }
-        if (isset($responce['userCancellationTimeMillis'])) {
-
-            $cancellationdate =  date('Y-m-d H:i:s', ($responce['userCancellationTimeMillis'] /  1000));
-            $userSubscription->cancellationdate = $cancellationdate;
-            $userSubscription->save();
-            return false;
+            $responce =  set_android_iap($app_id, $product_id, $purchaseToken, 'subscribe');
+    
+    
+            $exp_date =  date('Y-m-d H:i:s', ($responce['expiryTimeMillis'] /  1000));
+    
+    
+            $current_date = date('Y-m-d H:i:s');
+    
+            if (strtotime($current_date) > strtotime($exp_date)) {
+    
+                $userSubscription->endDate = $exp_date;
+                $userSubscription->save();
+                return false;
+            }
+            if (isset($responce['userCancellationTimeMillis'])) {
+    
+                $cancellationdate =  date('Y-m-d H:i:s', ($responce['userCancellationTimeMillis'] /  1000));
+                $userSubscription->cancellationdate = $cancellationdate;
+                $userSubscription->save();
+                return false;
+            }
         }
         return true;
     }
@@ -1726,14 +1703,21 @@ function set_android_iap($appid, $productID, $purchaseToken, $type)
     $result = curl_exec($ch);
     $result = json_decode($result, true);
 
-    if (!$result || !$result["access_token"]) {
-        //error  
-        // return;
+    if (isset($result['error'])) {
+        // Handle Google OAuth error
+        return 'Error: ' . $result['error'] . ' - ' . $result['error_description'];
     }
+
+    if (!isset($result["access_token"])) {
+        // Handle missing access_token
+        return 'Error: Access token is not available';
+    }
+    
+    $accessToken = $result["access_token"];
 
 
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $VALIDATE_URL . "?access_token=" . $result["access_token"]);
+    curl_setopt($ch, CURLOPT_URL, $VALIDATE_URL . "?access_token=" . $accessToken);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     $result1 = curl_exec($ch);
     $result1 = json_decode($result1, true);
@@ -1743,6 +1727,41 @@ function set_android_iap($appid, $productID, $purchaseToken, $type)
     }
 
     return $result1;
+}
+
+function set_apple_iap($receipt)
+{
+    $data = array(
+        'receipt-data' => $receipt,
+        'password' => 'e26c3c7903f74a89a2103d424cd33d4b',
+        'exclude-old-transactions' => 'true'
+    );
+
+    $payload = json_encode($data);
+
+    // Prepare new cURL resource
+    $ch = curl_init('https://sandbox.itunes.apple.com/verifyReceipt');
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLINFO_HEADER_OUT, true);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+
+    // Set HTTP Header for POST request 
+    curl_setopt(
+        $ch,
+        CURLOPT_HTTPHEADER,
+        array(
+            'Content-Type: application/json',
+            'Content-Length: ' . strlen($payload)
+        )
+    );
+
+    // Submit the POST request
+    $result = curl_exec($ch);
+    // Close cURL session handle
+    curl_close($ch);
+    $userReceiptData = json_decode($result);
+    return $userReceiptData;
 }
 
 function add_user_firebase($userId, $userStatus = null)

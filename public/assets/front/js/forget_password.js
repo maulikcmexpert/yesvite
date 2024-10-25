@@ -90,43 +90,70 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+$(document).on('click', '#Next_btn_otp', function () {
+    // var now = new Date();
+    // var formattedTime = now.toLocaleTimeString();
+    // // alert(formattedTime);
+    $('#forgetpasswordemail').submit();
 
-document.getElementById("otpform").addEventListener("submit", function (event) {
-    const otpFields = document.querySelectorAll(".otp__digit");
-    let isValid = true;
-    let errorMessage = "";
-
-    otpFields.forEach((field) => {
-        if (field.value.trim() === "") {
-            isValid = false;
-        }
-    });
-
-    if (!isValid) {
-        errorMessage = "Please enter the OTP.";
-        document.getElementById("otp-error").textContent = errorMessage;
-        event.preventDefault();
-    } else {
-        document.getElementById("otp-error").textContent = "";
-        var otp1 = $("#otp1").val();
-        var otp2 = $("#otp2").val();
-        var otp3 = $("#otp3").val();
-        var otp4 = $("#otp4").val();
-
-        var otp = otp1 + otp2 + otp3 + otp4;
-        var generated_otp = $("#generated_otp").val();
-
-        if (otp == generated_otp) {
-            $("#otp-error").text("");
-        } else {
-            $("#otp-error").text("OTP is incorrect");
-            event.preventDefault();
-        }
-    }
 });
 
-$(document).on('click', '#resend_otp', function() {
-    var email = $('#useremail').val();
+document.getElementById("otpverify").addEventListener("click", function (event) {
+
+    const now = new Date();
+    console.log(submitotptime+""+now)
+    const timeDiff = now - submitotptime; // Difference in milliseconds
+
+    // Convert milliseconds to minutes
+    const diffInMinutes = Math.floor(timeDiff / (1000 * 60));
+
+    // Check if the time difference is greater than or equal to 15 minutes
+    if (diffInMinutes >= 5) {
+        var generated_otp = $("#generated_otp").val('');
+        // alert('OTP expired');
+        toastr.error("Your Otp is Expired Please click on Resend Link to get new Otp");
+        return;
+    }else{
+        const otpFields = document.querySelectorAll(".otp__digit");
+        let isValid = true;
+        let errorMessage = "";
+    
+        otpFields.forEach((field) => {
+            if (field.value.trim() === "") {
+                isValid = false;
+            }
+        });
+    
+        if (!isValid) {
+            errorMessage = "Please enter the OTP.";
+            document.getElementById("otp-error").textContent = errorMessage;
+            event.preventDefault();
+        } else {
+            document.getElementById("otp-error").textContent = "";
+            var otp1 = $("#otp1").val();
+            var otp2 = $("#otp2").val();
+            var otp3 = $("#otp3").val();
+            var otp4 = $("#otp4").val();
+    
+            var otp = otp1 + otp2 + otp3 + otp4;
+            var generated_otp = $("#generated_otp").val();
+    
+            if (otp == generated_otp) {
+                $("#otp-error").text("");
+                $('#otpform ').submit();
+            } else {
+                $("#otp-error").text("OTP is incorrect");
+                event.preventDefault();
+            }
+        }
+
+    }
+   
+});
+
+$(document).on("click", "#resend_otp", function () {
+    var email = $("#useremail").val();
+    $('#loader').css('display','block');
     $.ajax({
         url: base_url + "otp_verify",
         type: "POST",
@@ -134,18 +161,26 @@ $(document).on('click', '#resend_otp', function() {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
         data: {
-            email: email
+            email: email,
         },
-        success: function(response) {
-            if(response.success=="1"){
+        success: function (response) {
+            if (response.success == "1") {
                 console.log(response.otp);
-                $('#generated_otp').val(response.otp);
-                toastr.success('Otp Resend Sucessfully')
-            }
-
+                $("#generated_otp").val(response.otp);
+                $('#otp1').val('');
+                $('#otp2').val('');
+                $('#otp3').val('');
+                $('#otp4').val('');
+                $('#loader').css('display','none');
+                toastr.success("Otp Resend Sucessfully");
+                // location.reload();
+                submitotptime = new Date();
+            }   
         },
-        error: function(xhr, status, error) {
+        error: function (xhr, status, error) {
             console.log("AJAX error: " + error);
         },
     });
-})
+});
+
+

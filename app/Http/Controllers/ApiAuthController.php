@@ -676,7 +676,7 @@ class ApiAuthController extends Controller
             $tokenCreationTime = strtotime($verifyUser->updated_at);
             $currentTime = time(); // Current timestamp
 
-            if (($currentTime - $tokenCreationTime) > 60 && $verifyUser->resend_verification_mail == "0") {
+            if (($currentTime - $tokenCreationTime) > 300 && $verifyUser->resend_verification_mail == "0") {
                 $message = "The token has expired. Please request a new verification link.";
                 $faild = "faild";
                 $user_id = $verifyUser->id;

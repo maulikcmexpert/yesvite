@@ -11,6 +11,8 @@ use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
+use Illuminate\Http\Request;
+
 
 class LoginHistoryDataTable extends DataTable
 {
@@ -31,16 +33,32 @@ class LoginHistoryDataTable extends DataTable
                 if ($this->request->has('search')) {
                     $keyword = $this->request->get('search');
                     $keyword = $keyword['value'];
-                    $query->where(function ($q) use ($keyword) {
-                        $q->whereHas('user', function ($q) use ($keyword) {
-                            $q->where('firstname', 'LIKE', "%{$keyword}%")
-                              ->orWhere('lastname', 'LIKE', "%{$keyword}%");
-                        })
-                        ->orWhere('login_count', 'LIKE', "%{$keyword}%")
-                        ->orWhere('ip_address', 'LIKE', "%{$keyword}%");
+            
+                    // Split the search term by space to separate firstname and lastname
+                    $nameParts = explode(' ', $keyword);
+            
+                    $query->where(function ($q) use ($nameParts, $keyword) {
+                        if (count($nameParts) > 1) {
+                            // Search for firstname and lastname separately
+                            $q->whereHas('user', function ($q) use ($nameParts) {
+                                $q->where('firstname', 'LIKE', "%{$nameParts[0]}%")
+                                  ->where('lastname', 'LIKE', "%{$nameParts[1]}%");
+                            });
+                        } else {
+                            // Search for firstname or lastname if only one term is provided
+                            $q->whereHas('user', function ($q) use ($keyword) {
+                                $q->where('firstname', 'LIKE', "%{$keyword}%")
+                                  ->orWhere('lastname', 'LIKE', "%{$keyword}%");
+                            });
+                        }
+            
+                        // Search other fields (e.g., login_count and ip_address)
+                        $q->orWhere('login_count', 'LIKE', "%{$keyword}%")
+                          ->orWhere('ip_address', 'LIKE', "%{$keyword}%");
                     });
                 }
             })
+            
            
             ->addColumn('username', function ($row) {
                 return $row->user->firstname . ' ' . $row->user->lastname;
@@ -76,10 +94,25 @@ class LoginHistoryDataTable extends DataTable
     /**
      * Get the query source of dataTable.
      */
-    public function query(LoginHistory $model): QueryBuilder
-    {
-        return LoginHistory::with(['user'])->orderBy('id', 'desc');
+    public function query(LoginHistory $model, Request $request): QueryBuilder
+{
+    $column = 'id';  // Default column
+
+    if (isset($request->order[0]['column'])) {
+        if ($request->order[0]['column'] == '1') {
+            $column = User::select('firstname')
+                ->whereColumn('users.id', 'login_histories.user_id');
+        }
+
     }
+    $direction = 'desc';  
+    if (isset($request->order[0]['dir']) && $request->order[0]['dir'] == 'asc') {
+        $direction = 'asc';
+    }
+
+    return LoginHistory::with(['user'])->orderBy($column, $direction);
+}
+
 
     /**
      * Optional method if you want to use the html builder.
@@ -109,10 +142,10 @@ class LoginHistoryDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('no')->title('No')->render('meta.row + meta.settings._iDisplayStart + 1;'),
-            Column::make('username')->title('Username'),
-            Column::make('ip_address')->title("Ip Address"),
-            Column::make('login_count')->title("Login Count"),
+            Column::make('no')->title('No')->render('meta.row + meta.settings._iDisplayStart + 1;')->orderable(false),
+            Column::make('username')->title('Username')->orderable(true),
+            Column::make('ip_address')->title("Ip Address")->orderable(false),
+            Column::make('login_count')->title("Login Count")->orderable(false),
             // Column::make('action')->title("Action"),
         ];
     }

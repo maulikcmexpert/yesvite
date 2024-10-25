@@ -59,9 +59,16 @@ $(document).on("click", ".design-card", function() {
     };
 
     fabric.Image.fromURL(image, function(img) {
+        var canvasWidth = canvas.getWidth();
+        var canvasHeight = canvas.getHeight();
+
+        // Calculate scale to maintain aspect ratio
+        var scaleFactor = Math.min(canvasWidth / img.width, canvasHeight / img.height);
         img.set({
             left: 0,
             top: 0,
+            scaleX: scaleFactor,
+            scaleY: scaleFactor,
             selectable: false,
             hasControls: false,
         });
@@ -95,7 +102,7 @@ $(document).on("click", ".design-card", function() {
             isStatic: true,
             angle: element?.rotation ? element?.rotation : 0
         });
-        switch (element.text) {
+        switch (element.text.toLowerCase()) {
             case "event_name":
                 if (eventData.event_name) {
                     textElement.set({
@@ -114,7 +121,7 @@ $(document).on("click", ".design-card", function() {
                     return; // Skip adding the element if host_name is empty
                 }
                 break;
-            case "Location":
+            case "location":
                 if (eventData.event_location) {
                     textElement.set({
                         text: eventData.event_location
@@ -486,11 +493,18 @@ function bindData() {
 
             // Load background image
             fabric.Image.fromURL(image, function(img) {
+                var canvasWidth = canvas.getWidth();
+                var canvasHeight = canvas.getHeight();
+
+                // Calculate scale to maintain aspect ratio
+                var scaleFactor = Math.min(canvasWidth / img.width, canvasHeight / img.height);
                 img.set({
                     left: 0,
                     top: 0,
-                    selectable: false, // Non-draggable background image
-                    hasControls: false, // Disable resizing controls
+                    scaleX: scaleFactor,
+                    scaleY: scaleFactor,
+                    selectable: false,
+                    hasControls: false,
                 });
                 canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
             });
@@ -549,7 +563,7 @@ function bindData() {
                         mr: true   // Show middle right control
                     });
 
-                    switch (element.text) {
+                    switch (element.text.toLowerCase()) {
                         case "event_name":
                             if (eventData.event_name) {
                                 let textWidth = getWidth(
@@ -578,7 +592,7 @@ function bindData() {
                                 return; // Skip adding the element if host_name is empty
                             }
                             break;
-                        case "Location":
+                        case "location":
                             if (eventData.event_location) {
                                 let textWidth = getWidth(
                                     element,

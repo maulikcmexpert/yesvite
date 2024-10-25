@@ -28,7 +28,7 @@ class UserResendEmailVerify extends Controller
      */
     public function index(Request $request, UserResendEmailVerifyDataTable $DataTable)
     {
-        $title = 'User Resend Verification Mail';
+        $title = 'Expired Verification Mail';
         $page = 'admin.resend_email_verification.list';
         // $js = 'admin.post_reports.post_reportsjs';
         return $DataTable->render('admin.includes.layout', compact('title', 'page'));

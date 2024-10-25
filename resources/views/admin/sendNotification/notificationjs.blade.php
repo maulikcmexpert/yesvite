@@ -1,6 +1,7 @@
 <script type="text/javascript">
     $(document).ready(function() {
-        $('#UserAdd').on('click', function(e) {
+        $('#send_bluk_message').on('click', function(e) {
+            // alert();
             e.preventDefault();
 
             // Clear previous errors
@@ -10,7 +11,8 @@
                 title: $('#title').val(),
                 message: $('#message').val(),
             };
-
+            console.log(formData);
+            $('#loader').css('display','none')
             $.ajax({
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -20,9 +22,16 @@
                 url: "{{ URL::to('admin/sendNotification/send') }}",
                 data: formData,
                 success: function(response) {
+                    console.log(response);
+                    console.log(response.status);
+
+                    
                     // Handle success (e.g., show a success message)
                     // Optional: Display a success message
-                    alert(response.message);
+                    if(response.status=="success"){
+                        // alert();
+                        $('#loader').css('display','block');
+                    }
 
                     // Clear form fields after successful submission
                     $('#title').val('');
