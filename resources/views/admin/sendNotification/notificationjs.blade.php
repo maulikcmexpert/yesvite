@@ -12,7 +12,7 @@
                 message: $('#message').val(),
             };
             console.log(formData);
-            $('#loader').css('display','none')
+            $('#loader').css('display','block')
             $.ajax({
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -30,7 +30,11 @@
                     // Optional: Display a success message
                     if(response.status=="success"){
                         // alert();
-                        $('#loader').css('display','block');
+                        $('#loader').css('display','none');
+
+                        const dashboardUrl = "{{ URL::to('/admin/dashboard') }}";
+                        window.location.href = dashboardUrl;
+                        // window.location.href="";
                     }
 
                     // Clear form fields after successful submission
