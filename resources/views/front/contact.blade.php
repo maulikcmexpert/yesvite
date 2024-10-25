@@ -89,6 +89,11 @@
                             </div>
                             <div class="product-scroll" id="product-scroll-groups">
                                 <div class="user-contacts" id="yesvitePhones">
+                                    <div class="mb-3">
+                                        <a href="{{ asset('assets/front/csv/demo.csv') }}" class="cmn-btn" download>
+                                            Download Demo CSV
+                                        </a>
+                                    </div>
                                     @if($yesvitePhones->isEmpty())
                                     <form action="{{ route('import.csv') }}" method="POST" enctype="multipart/form-data">
                                         @csrf

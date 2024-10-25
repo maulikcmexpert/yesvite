@@ -60,7 +60,7 @@
 
 
                                     @if($user->subscribe_status == false)
-                                    <h5>Free</h5>
+                                    <h5>No Plan Found</h5>
                                     @else
                                     <h5>Pro Account</h5>
                                     @endif
