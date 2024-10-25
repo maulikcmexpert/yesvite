@@ -13260,7 +13260,7 @@ class ApiControllerv2 extends Controller
                 'width' => $width,
                 'template_url' => $template_url,
                 'shape_img_url' => $shape_img_url,
-                'is_contain_image' => true
+                'is_contain_image' => ($shape_img_url != '') ? true : false,
             ];
 
             if (!empty($shapeImageData)) {
