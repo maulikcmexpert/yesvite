@@ -23,11 +23,12 @@ class HomeFrontController extends Controller
     }
 
 
-    public function ResendVerificationMail(string $id){
+    public function ResendVerificationMail(string $id)
+    {
         $userDetails = User::where('id',  $id)->first();
         if ($userDetails) {
             $userDetails->resend_verification_mail = "1";
-            $userDetails->save(); 
+            $userDetails->save();
         }
         // $userData = [
         //     'username' => $userDetails->firstname,
@@ -47,6 +48,35 @@ class HomeFrontController extends Controller
         // ));
 
         return redirect()->route('auth.login')->with("success", value: "Request sent for verification mail !");
+    }
 
+    public function triggerQueueWork()
+    {
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => config('app.url') . '/run-queue-work',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_HTTPHEADER => array(
+                'Content-Type: application/json',
+                // 'Authorization: Bearer your_token_if_needed'
+            ),
+        ));
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        if ($err) {
+            return response()->json(['error' => $err]);
+        } else {
+            return response()->json(['response' => $response]);
+        }
     }
 }
