@@ -90,12 +90,12 @@ class SendBroadcastEmailJob implements ShouldQueue
 
     public function handle()
     {
-        foreach ($this->email as $emails) {
+        // foreach ($this->email as $emails) {
             try {
                 // Send the email using the BulkEmail Mailable
-                if($emails!=""){
-                    Mail::to($emails)->send(new BulkEmail($this->message));
-                }
+                // if($emails!=""){
+                    Mail::to('allen@yopmail.com')->send(new BulkEmail($this->message));
+                // }
 
                 // Mail::to('prakashmanat24@gmail.com')
                 // ->bcc($emails) // Send to each batch of 30 via BCC
@@ -108,6 +108,6 @@ class SendBroadcastEmailJob implements ShouldQueue
                 // Optionally, you can store failed emails or implement a retry mechanism
             }
         }
-    }
+    // }
 }
 
