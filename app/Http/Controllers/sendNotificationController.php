@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\user;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 
 class sendNotificationController extends Controller
 {
@@ -35,6 +36,7 @@ class sendNotificationController extends Controller
             'message' => $notificationData['message'],
             'title' => $notificationData['title'],
         ];
+        Artisan::call('queue:work');
         adminNotification('broadcast_message', $postData);
 
         return response()->json(

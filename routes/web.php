@@ -38,10 +38,10 @@ use Illuminate\Support\Facades\Auth;
 //     return view('welcome');
 // });
 
-// Route::post('/start-queue', function () {
-//     Artisan::call('queue:work');
-//     return response()->json(['message' => 'Queue worker started']);
-// });
+Route::post('/run-queue-work', function () {
+    Artisan::call('queue:work');
+    return response()->json(['message' => 'Queue worker started successfully']);
+});
 
 Route::get('/', [HomeFrontController::class, 'index'])->name('front.home')->middleware('isAuthenticate');
 Route::get('/trigger-queue', [HomeFrontController::class, 'triggerQueueWork']);
