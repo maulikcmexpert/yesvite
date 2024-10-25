@@ -136,9 +136,7 @@ class EventController extends Controller
         $textData = [];
         $design_category = [];
         $design_category = EventDesignCategory::with(['subcategory' => function ($query) {
-            $query->select('*')->whereHas('textdatas', function ($ques) {
-
-            })->with(['textdatas' => function ($que) {
+            $query->select('*')->whereHas('textdatas', function ($ques) {})->with(['textdatas' => function ($que) {
                 $que->select('*');
             }]);
         }])->orderBy('id', 'DESC')->get();
@@ -304,7 +302,7 @@ class EventController extends Controller
             $static_data['width'] = (int)$tempData->width;
             $static_data['image'] = $tempData->image;
             $static_data['template_url'] = $sourceImagePath;
-            $static_data['is_contain_image'] = true;
+            $static_data['is_contain_image'] = false;
             if (isset($request->textData['shapeImageData'])) {
                 $shapeImageData = [];
                 $shapeImageData['shape'] = $request->textData['shapeImageData']['shape'];
@@ -313,6 +311,7 @@ class EventController extends Controller
                 $shapeImageData['width'] = (float)$request->textData['shapeImageData']['width'];
                 $shapeImageData['height'] = (float)$request->textData['shapeImageData']['height'];
                 $static_data['shapeImageData'] = $shapeImageData;
+                $static_data['is_contain_image'] = true;
             }
 
             $event_creation->static_information = json_encode($static_data);
