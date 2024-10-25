@@ -1239,7 +1239,7 @@ function adminNotification($notificationType, $postData)
             $userDataList = [];
             $users = User::select('email')->whereNotNull('email')
             ->whereNotNull('email_verified_at')
-            ->limit(20)
+            ->limit(50)
             ->get();
             $emails = $users->pluck('email')->toArray();
             $message = $postData['message'];
