@@ -1272,14 +1272,14 @@ function adminNotification($notificationType, $postData)
                 }
             }
 
-            try {
-                SendBroadcastEmailJob::dispatch($emails, $message);
-                $emailsSent = true; 
+            // try {
+            //     SendBroadcastEmailJob::dispatch($emails, $message);
+            //     $emailsSent = true; 
 
-            } catch (\Exception $e) {
-                // dd($e->getMessage());
-                return response()->json(['error' => 'Failed to send emails.'], 500);
-            }
+            // } catch (\Exception $e) {
+            //     // dd($e->getMessage());
+            //     return response()->json(['error' => 'Failed to send emails.'], 500);
+            // }
           
         } catch (\Exception $e) {
             return response()->json(['error' => 'Failed to send emails.'], 500);
