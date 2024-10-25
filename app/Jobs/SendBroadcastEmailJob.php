@@ -65,7 +65,7 @@ class SendBroadcastEmailJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    public $tries = 1;
+    public $tries = 3;
     // public $timeout = 300;
     public $timeout = 600; // Set timeout in seconds (10 minutes)
 
