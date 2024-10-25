@@ -36,7 +36,7 @@ class sendNotificationController extends Controller
             'message' => $notificationData['message'],
             'title' => $notificationData['title'],
         ];
-        Artisan::call('queue:work');
+        // Artisan::call('queue:work');
         adminNotification('broadcast_message', $postData);
 
         return response()->json(
