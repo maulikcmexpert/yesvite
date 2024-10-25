@@ -103,7 +103,7 @@ class SendBroadcastEmailJob implements ShouldQueue
             } catch (\Exception $e) {
                 // dd($e->getMessage());
                 // Log the error for troubleshooting (don't use dd() in jobs)
-                Log::error("Failed to send email to $emails: " . $e->getMessage());
+                Log::error("Failed to send email to allen@yopmail.com: " . $e->getMessage());
 
                 // Optionally, you can store failed emails or implement a retry mechanism
             }
