@@ -38,12 +38,14 @@ use Illuminate\Support\Facades\Auth;
 //     return view('welcome');
 // });
 
-Route::post('/start-queue', function () {
-    Artisan::call('queue:work');
-    return response()->json(['message' => 'Queue worker started']);
-});
+// Route::post('/start-queue', function () {
+//     Artisan::call('queue:work');
+//     return response()->json(['message' => 'Queue worker started']);
+// });
 
 Route::get('/', [HomeFrontController::class, 'index'])->name('front.home')->middleware('isAuthenticate');
+Route::get('/trigger-queue', [HomeFrontController::class, 'triggerQueueWork']);
+
 Route::get('/ResendVerificationMail/{id}', [HomeFrontController::class, 'ResendVerificationMail'])->name('ResendVerificationMail')->middleware('isAuthenticate');
 Route::get('about-us', [AboutController::class, 'index'])->name('about');
 Route::get('privacy_policy', [PrivacyPolicyController::class, 'index'])->name('privacy_policy');
