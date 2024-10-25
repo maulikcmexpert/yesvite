@@ -3247,10 +3247,10 @@ class ApiControllerv2 extends Controller
                 $eventCategory = EventDesignCategory::with(['subcategory', 'textdatas'])->withCount(['subcategory', 'textdatas'])->get();
             }
 
-            dd($eventCategory);
+            // dd($eventCategory);
             $categoryList = [];
             foreach ($eventCategory as $value) {
-                if ($value->subcategory_count != 0  ) {
+                if ($value->subcategory_count != 0 && $value->textdatas_count != 0) {
                     $categoryInfo['id'] = $value->id;
                     $categoryInfo['category_name'] = $value->category_name;
                     $subcategoryList = [];
@@ -3747,21 +3747,21 @@ class ApiControllerv2 extends Controller
                 }
             }
             $userSubscription = UserSubscription::where('user_id', $this->user->id)
-                ->where('endDate','>',date('Y-m-d H:i:s'))
-                ->where('type','subscribe')
+                ->where('endDate', '>', date('Y-m-d H:i:s'))
+                ->where('type', 'subscribe')
                 ->orderBy('id', 'DESC')
                 ->limit(1)
                 ->first();
             if ($userSubscription != null) {
                 // $eventCreation->is_draft_save = '0';
                 $purchase_status = true;
-            }else{
+            } else {
                 $checkProductSubscribe =  Event::where('id', $eventCreation->id)->first();
                 $purchase_status = true;
                 if ($checkProductSubscribe->subscription_plan_name == 'Pro' && $checkProductSubscribe->product_payment_id == NULL) {
                     $purchase_status = false;
                     $eventCreation->is_draft_save = '1';
-                }elseif($checkProductSubscribe->subscription_plan_name == 'Pro-Year'){
+                } elseif ($checkProductSubscribe->subscription_plan_name == 'Pro-Year') {
                     $purchase_status = false;
                     $eventCreation->is_draft_save = '1';
                 }
@@ -3769,7 +3769,7 @@ class ApiControllerv2 extends Controller
             $eventCreation->save();
         }
         DB::commit();
-        return response()->json(['status' => 1, 'event_id' => $eventCreation->id, 'event_name' => $eventData['event_name'], 'message' => "Event Created Successfully", 'guest_pending_count' => getGuestRsvpPendingCount($eventCreation->id),'purchase_status' => $purchase_status]);
+        return response()->json(['status' => 1, 'event_id' => $eventCreation->id, 'event_name' => $eventData['event_name'], 'message' => "Event Created Successfully", 'guest_pending_count' => getGuestRsvpPendingCount($eventCreation->id), 'purchase_status' => $purchase_status]);
         // } catch (QueryException $e) {
         //     DB::rollBack();
 
@@ -4316,17 +4316,17 @@ class ApiControllerv2 extends Controller
                 }
 
                 $userSubscription = UserSubscription::where('user_id', $user->id)
-                    ->where('endDate','>',date('Y-m-d H:i:s'))
-                    ->where('type','subscribe')
+                    ->where('endDate', '>', date('Y-m-d H:i:s'))
+                    ->where('type', 'subscribe')
                     ->orderBy('id', 'DESC')
                     ->limit(1)
                     ->first();
-            if ($userSubscription != null) {
-                $purchase_status = true;
-            }else{
-                $purchase_status = false;
-            }
-            $eventDetail['purchase_status'] = $purchase_status;
+                if ($userSubscription != null) {
+                    $purchase_status = true;
+                } else {
+                    $purchase_status = false;
+                }
+                $eventDetail['purchase_status'] = $purchase_status;
 
                 return response()->json(['status' => 1, 'message' => "Event data", "data" => $eventDetail]);
             } else {
@@ -4458,7 +4458,7 @@ class ApiControllerv2 extends Controller
                 if ($updateEvent->is_draft_save != '0') {
                     $updateEvent->is_draft_save = $eventData['is_draft_save'];
                 }
-                if(isset($eventData['subscription_plan_name']) && $eventData['subscription_plan_name'] == 'Pro-Year'){
+                if (isset($eventData['subscription_plan_name']) && $eventData['subscription_plan_name'] == 'Pro-Year') {
                     $updateEvent->is_draft_save = $eventData['is_draft_save'];
                 }
                 $updateEvent->subscription_plan_name = (!empty($eventData['subscription_plan_name'])) ? $eventData['subscription_plan_name'] : "";
@@ -5502,14 +5502,14 @@ class ApiControllerv2 extends Controller
                 $eventDesingInnerImage->design_inner_image = $DesignInnerImageName;
                 $eventDesingInnerImage->save();
             }
-            
+
             $userSubscription = UserSubscription::where('user_id', $user->id)
-                ->where('endDate','>',date('Y-m-d H:i:s'))
-                ->where('type','subscribe')
+                ->where('endDate', '>', date('Y-m-d H:i:s'))
+                ->where('type', 'subscribe')
                 ->orderBy('id', 'DESC')
                 ->limit(1)
                 ->first();
-            if((isset($input['subscription_plan_name']) && $input['subscription_plan_name'] =='Free') || (isset($input['subscription_plan_name']) && $input['subscription_plan_name'] =='Pro-Year' && isset($userSubscription->id))){
+            if ((isset($input['subscription_plan_name']) && $input['subscription_plan_name'] == 'Free') || (isset($input['subscription_plan_name']) && $input['subscription_plan_name'] == 'Pro-Year' && isset($userSubscription->id))) {
                 $user  = Auth::guard('api')->user();
                 $checkUserInvited = Event::withCount('event_invited_user')->where('id', $input['event_id'])->first();
                 if ($request->is_update_event == '0') {
@@ -5519,7 +5519,7 @@ class ApiControllerv2 extends Controller
                             'event_id' => $input['event_id'],
                             'post_id' => ""
                         ];
-    
+
                         sendNotification('invite', $notificationParam);
                     }
                     if ($checkUserInvited->is_draft_save == '0') {
@@ -5531,9 +5531,9 @@ class ApiControllerv2 extends Controller
                         sendNotification('owner_notify', $notificationParam);
                     }
                 }
-            }else{
-                if(isset($request->is_draft) && $request->is_draft=='1'){
-                
+            } else {
+                if (isset($request->is_draft) && $request->is_draft == '1') {
+
                     $checkUserInvited = Event::withCount('event_invited_user')->where('id', $input['event_id'])->first();
                     if ($request->is_update_event == '0') {
                         if ($checkUserInvited->event_invited_user_count != '0' && $checkUserInvited->is_draft_save == '0') {
@@ -12275,20 +12275,21 @@ class ApiControllerv2 extends Controller
     }
 
 
-    public function addSubscription(Request $request){
+    public function addSubscription(Request $request)
+    {
 
         $rawData = $request->getContent();
-    
+
         $input = json_decode($rawData, true);
-    
+
         if ($input == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
         }
-    
-    
-    
+
+
+
         $validator = Validator::make($input, [
-    
+
             'orderId' => 'required',
             'packageName' => 'required',
             'productId' => 'required',
@@ -12296,8 +12297,8 @@ class ApiControllerv2 extends Controller
             'purchaseToken' => 'required|string',
             'autoRenewing' => 'required',
         ]);
-    
-    
+
+
         if ($validator->fails()) {
             return response()->json(
                 [
@@ -12306,14 +12307,14 @@ class ApiControllerv2 extends Controller
                 ],
             );
         }
-    
-    
+
+
         try {
             $app_id = $input['packageName'];
             $product_id = $input['productId'];
             $user_id = $this->user->id;
             $purchaseToken = $input['purchaseToken'];
-    
+
             $responce =  $this->set_android_iap($app_id, $product_id, $purchaseToken, 'subscribe');
             if (!isset($responce['error'])) {
                 if (isset($responce['autoRenewing']) && ($responce['autoRenewing'] == false || $responce['autoRenewing'] == "")) {
@@ -12337,7 +12338,7 @@ class ApiControllerv2 extends Controller
                 $new_subscription->type = 'subscribe';
                 $new_subscription->purchaseToken = $input['purchaseToken'];
                 $new_subscription->save();
-    
+
                 return response()->json(['status' => 1, 'message' => "subscription sucessfully"]);
             } else {
                 return response()->json(['status' => 0, 'message' => $responce['error_description']]);
@@ -12348,8 +12349,9 @@ class ApiControllerv2 extends Controller
             return response()->json(['status' => 0, 'message' => 'something went wrong']);
         }
     }
-    
-    public function addProductSubscription(Request $request){
+
+    public function addProductSubscription(Request $request)
+    {
 
         $rawData = $request->getContent();
 
@@ -12426,19 +12428,19 @@ class ApiControllerv2 extends Controller
             return response()->json(['status' => 0, 'message' => 'something went wrong']);
         }
     }
-    
-    
+
+
     public function checkSubscription()
     {
         $userSubscription = UserSubscription::where('user_id', $this->user->id)->orderBy('id', 'DESC')->limit(1)->first();
-    
+
         if ($userSubscription != null) {
             $app_id = $userSubscription->packageName;
             $product_id = $userSubscription->productId;
             $purchaseToken = $userSubscription->purchaseToken;
-    
+
             $responce =  $this->set_android_iap($app_id, $product_id, $purchaseToken, 'subscribe');
-    
+
             if (isset($responce) && !empty($responce)) {
                 if (isset($responce['expiryTimeMillis']) && $responce['expiryTimeMillis'] != null) {
                     $exp_date =  date('Y-m-d H:i:s', ($responce['expiryTimeMillis'] /  1000));
@@ -12465,33 +12467,33 @@ class ApiControllerv2 extends Controller
     }
     public function set_android_iap($appid, $productID, $purchaseToken, $type)
     {
-    
+
         $ch = curl_init();
         $clientId = env('InGOOGLE_CLIENT_ID');
-    
+
         $clientSecret = env('InGOOGLE_CLIENT_SECRET');
         $redirectUri = 'https://yesvite.cmexpertiseinfotech.in/google/callback';
-    
+
         $refreshToken = '1//0gHZPawBGjoQ4CgYIARAAGBASNwF-L9IrZT9Hzb4z5DpT1bUdoSXosX2JZjiA_2TKQZ9uqoUfYTvgD0OA2RvL4SQ7Ecdei1ooEZs';
         $TOKEN_URL = "https://accounts.google.com/o/oauth2/token";
-    
+
         $VALIDATE_URL = "https://www.googleapis.com/androidpublisher/v3/applications/" .
             $appid . "/purchases/subscriptions/" .
             $productID . "/tokens/" . $purchaseToken;
         if ($type == 'product') {
-    
+
             $VALIDATE_URL = "https://www.googleapis.com/androidpublisher/v3/applications/" .
                 $appid . "/purchases/products/" .
                 $productID . "/tokens/" . $purchaseToken;
         }
-    
-    
+
+
         $input_fields = 'refresh_token=' . $refreshToken .
             '&client_secret=' . $clientSecret .
             '&client_id=' . $clientId .
             '&redirect_uri=' . $redirectUri .
             '&grant_type=refresh_token';
-    
+
         //Request to google oauth for authentication
         curl_setopt($ch, CURLOPT_URL, $TOKEN_URL);
         curl_setopt($ch, CURLOPT_POST, 1);
@@ -12499,13 +12501,13 @@ class ApiControllerv2 extends Controller
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $result = curl_exec($ch);
         $result = json_decode($result, true);
-    
+
         // if (!$result || !$result["access_token"]) {
         //     //error  
         //     // return;
         // }
         if (isset($result['access_token']) && $result['access_token'] != null) {
-    
+
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $VALIDATE_URL . "?access_token=" . $result["access_token"]);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -12518,7 +12520,7 @@ class ApiControllerv2 extends Controller
         } else {
             $result1 = $result;
         }
-    
+
         return $result1;
     }
 
@@ -13300,6 +13302,4 @@ class ApiControllerv2 extends Controller
             return response()->json(['status' => 0, 'message' => 'something went wrong']);
         }
     }
-
-
 }
