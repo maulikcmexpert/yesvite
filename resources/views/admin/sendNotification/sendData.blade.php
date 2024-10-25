@@ -1,7 +1,5 @@
 <div class="container-fluid">
-    <div id="loader" style="display: none;">
-        <img src="{{asset('assets/front/loader.gif')}}" alt="loader" style="width:146px;height:146px;z-index:1000">
-    </div>
+
     <h1 class="m-0 ProductTitle">{{ $title }}</h1>
     <div class="content-header p-0">
         <div class="container-fluid">
@@ -30,7 +28,9 @@
                 <h3 class="card-title">{{ $title }}</h3>
 
             </div>
-
+            <div id="loader" style="display: none;">
+                <img src="{{asset('assets/front/loader.gif')}}" alt="loader" style="width:146px;height:146px;z-index:1000">
+            </div>
             <form method="post" action="" id="notificationForm" enctype="multipart/form-data">
 
                 @csrf
