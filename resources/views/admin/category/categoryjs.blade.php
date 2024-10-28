@@ -187,6 +187,7 @@ Swal.fire({
     confirmButtonText: "Yes, delete it!"
 }).then((result) => {
     if (result.isConfirmed) {
+        alert();
         $('#delete_category_form').submit();
         // $.ajax({
         //     headers: {
