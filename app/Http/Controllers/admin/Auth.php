@@ -84,11 +84,10 @@ class Auth extends Controller
 
         // $role=$checkOtp->role;
         if ($checkOtp != null) {
-
+            dd($checkOtp);
             $sessionArray = ['id' => $checkOtp->id, 'name' => $checkOtp->name,'role'=>$checkOtp->role];
             Session::put(['admin' => $sessionArray]);
             if (Session::has('admin') && $checkOtp=="admin") {
-
                 return Redirect::to(URL::to('/admin/dashboard'))->with('success', 'Loggedin successfully!');;
             }
 
