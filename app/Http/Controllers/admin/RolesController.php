@@ -12,7 +12,7 @@ class RolesController extends Controller
      */
     public function index()
     {
-        $title = 'Category';
+        $title = 'Roles';
 
         $page = 'admin.roles.list';
 
