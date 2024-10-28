@@ -17,7 +17,7 @@ class PrivacyPolicyController extends Controller
         $title = 'Privacy Policy';
         $page = 'front.privacy_policy';
 
-        $privacy = Privacy::where('type', 0)->first();
+        $privacy = Privacy::where('type', '0')->first();
 
         dd($privacy);
         return view('layout', compact(
