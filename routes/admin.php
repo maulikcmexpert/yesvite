@@ -25,7 +25,8 @@ use App\Http\Controllers\admin\{
     AccountVerification,
     LoginHistory,
     Privacy_policyController,
-    Terms_ConditionController
+    Terms_ConditionController,
+    RolesController
 };
 use App\Http\Controllers\sendNotificationController;
 
@@ -84,7 +85,9 @@ Route::group(['middleware' => adminAuth::Class], function () {
         'account_verification' => AccountVerification::class,
         'login_history' => LoginHistory::class,
         'privacy_policy'=>Privacy_policyController::class,
-        'terms_condition'=>Terms_ConditionController::class
+        'terms_condition'=>Terms_ConditionController::class,
+        'roles'=>RolesController::class
+
 
     ]);
 

@@ -242,7 +242,7 @@
         <p class="asideTitle">Roles</p>
         <ul class="nav">
           <li class="nav-item">
-            <a href="{{URL::to('/admin/roles')}}" class="nav-link {{ (Request::segment(2) == 'events')? 'active':'' }}">
+            <a href="{{URL::to('/admin/roles')}}" class="nav-link {{ (Request::segment(2) == 'roles')? 'active':'' }}">
               <i class="fas fa-list nav-icon"></i>
               <p>Roles list</p>
             </a>
