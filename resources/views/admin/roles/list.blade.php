@@ -48,5 +48,7 @@
         </tbody>
 
     </table> --}}
+    {{ $dataTable->table() }}
 
 </div>
+{{ $dataTable->scripts(attributes: ['type' => 'module']) }}
