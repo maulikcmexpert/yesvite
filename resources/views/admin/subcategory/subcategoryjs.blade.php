@@ -246,69 +246,69 @@
 
 
 
-        $(document).on("click", ".delete_subcategory", function(event) {
+        // $(document).on("click", ".delete_subcategory", function(event) {
 
-            var userURL = $(this).data("url");
+        //     var userURL = $(this).data("url");
 
-            event.preventDefault();
+        //     event.preventDefault();
 
-            swal({
+        //     swal({
 
-                title: `Are you sure you want to delete this record?`,
+        //         title: `Are you sure you want to delete this record?`,
 
-                text: "If you delete this, it will be gone forever.",
+        //         text: "If you delete this, it will be gone forever.",
 
-                icon: "warning",
+        //         icon: "warning",
 
-                buttons: true,
+        //         buttons: true,
 
-                dangerMode: true,
+        //         dangerMode: true,
 
-            }).then((willDelete) => {
+        //     }).then((willDelete) => {
 
-                if (willDelete) {
+        //         if (willDelete) {
 
-                    $.ajax({
+        //             $.ajax({
 
-                        headers: {
+        //                 headers: {
 
-                            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+        //                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
 
-                                "content"
+        //                         "content"
 
-                            ),
+        //                     ),
 
-                        },
+        //                 },
 
-                        method: "DELETE",
+        //                 method: "DELETE",
 
-                        url: userURL,
+        //                 url: userURL,
 
-                        dataType: "json",
+        //                 dataType: "json",
 
-                        success: function(output) {
+        //                 success: function(output) {
 
-                            if (output == true) {
+        //                     if (output == true) {
 
-                                table.ajax.reload();
+        //                         table.ajax.reload();
 
-                                toastr.success("SubCategory Deleted successfully !");
+        //                         toastr.success("SubCategory Deleted successfully !");
 
-                            } else {
+        //                     } else {
 
-                                toastr.error("SubCategory don't Deleted !");
+        //                         toastr.error("SubCategory don't Deleted !");
 
-                            }
+        //                     }
 
-                        },
+        //                 },
 
-                    });
+        //             });
 
-                }
+        //         }
 
-            });
+        //     });
 
-        });
+        // });
 
 
 
