@@ -19,7 +19,7 @@ class PrivacyPolicyController extends Controller
 
         $privacy = Privacy::where('type', 0)->first();
 
-
+        dd($privacy);
         return view('layout', compact(
             'title',
             'page',
