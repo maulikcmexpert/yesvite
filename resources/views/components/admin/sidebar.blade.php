@@ -58,7 +58,7 @@
     <!-- Sidebar Menu -->
     <nav class="mt-4">
 
-
+      @if($check_role['role']=='admin')
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <!-- Add icons to the links using the .nav-icon class
              with font-awesome or any other icon font library -->
@@ -307,6 +307,67 @@
         </li> -->
 
       </ul>
+      @elseif ($check_role['role']=="designer")
+      <li class="nav-item">
+        <p class="asideTitle">Design Template</p>
+        <ul class="pl-0">
+          <li class="nav-item {{ (Request::segment(2) == 'category' || Request::segment(2) == 'subcategory' || Request::segment(2) == 'create_template' || Request::segment(2) == 'design_style')? 'menu-open':'' }}">
+            <a href="#" class="nav-link  {{ (Request::segment(2) == 'category' || Request::segment(2) == 'subcategory' || Request::segment(2) == 'design_style' || Request::segment(2) == 'create_template')? 'active':'' }}">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+                Category Setup
+                <i class="fas fa-angle-right right"></i>
+                <!-- <span class="badge badge-info right">6</span> -->
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{URL::to('/admin/category')}}" class="nav-link  {{ (Request::segment(2) == 'category')? 'active':'' }}">
+                  <span class="dot"></span>
+                  <p>Category</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{URL::to('/admin/subcategory')}}" class="nav-link {{ (Request::segment(2) == 'subcategory')? 'active':'' }}">
+                  <span class="dot"></span>
+                  <p>Sub Category</p>
+                </a>
+              </li>
+              <!-- <li class="nav-item">
+                <a href="{{URL::to('/admin/design_style')}}" class="nav-link {{ (Request::segment(2) == 'design_style')? 'active':'' }}">
+                  <span class="dot"></span>
+                  <p>Design Style</p>
+                </a>
+              </li> -->
+              <li class="nav-item">
+                <a href="{{URL::to('/admin/create_template')}}" class="nav-link {{ (Request::segment(2) == 'create_template')? 'active':'' }}">
+                  <span class="dot"></span>
+                  <p>Create Template</p>
+                </a>
+              </li>
+
+            </ul>
+          </li>
+          <!-- <li class="nav-item">
+            <a href="{{URL::to('/admin/design')}}" class="nav-link {{ (Request::segment(2) == 'design')? 'active':'' }}">
+              <i class="fas fa-layer-group"></i>
+              <p>
+                Design
+              </p>
+            </a>
+          </li> -->
+
+          <li class="nav-item">
+            <a href="{{URL::to('/admin/event_type')}}" class="nav-link {{ (Request::segment(2) == 'event_type')? 'active':'' }}">
+              <i class="fas fa-layer-group"></i>
+              <p>
+                Event Type
+              </p>
+            </a>
+          </li>
+        </ul>
+      </li>
+      @endif
     </nav>
     <!-- /.sidebar-menu -->
   </div>
