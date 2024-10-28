@@ -1215,6 +1215,11 @@ table.dataTable thead>tr>th:nth-child(1).sorting_desc:before{
         height: 980px;
         /* margin: 0px auto; */
     }
+
+    .image-edit-inner-img img{
+        width: 100% !important;
+        height: 100% !important;
+    }
 }
 
 
