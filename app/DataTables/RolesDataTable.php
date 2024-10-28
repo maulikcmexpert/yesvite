@@ -48,7 +48,7 @@ class RolesDataTable extends DataTable
     public function query(Admin $model): QueryBuilder
     {
         // return $model->newQuery();
-        return Admin::orderBy('id', 'desc');
+        return Admin::where('is_admin','0')->orderBy('id', 'desc');
 
     }
 
