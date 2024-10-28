@@ -1216,7 +1216,7 @@ table.dataTable thead>tr>th:nth-child(1).sorting_desc:before{
 }
 
 
-@media only screen and (min-width: 2000px) and (max-width: 3000px) {
+@media only screen and (min-width: 2000px) and (max-width: 6000px) {
     .image-edit-inner-img {
         width: 690px;
         height: 980px;
@@ -1236,7 +1236,7 @@ table.dataTable thead>tr>th:nth-child(1).sorting_desc:before{
 
     .edit-images-button-wrp {
         width: 100%;
-        max-width: 600px;
+        max-width: 800px;
     }
     .edit-images-button-inner button span {
         width: 40px;
