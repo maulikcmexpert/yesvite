@@ -12,9 +12,10 @@
                 message: $('#message').val(),
             };
 
-            if($('#title').val()!="" && $('#message').val(!="")){
-                $('#loader').css('display','block')
+            if ($('#title').val() != "" && $('#message').val() != "") {
+                $('#loader').css('display', 'block');
             }
+
             console.log(formData);
             $.ajax({
                 headers: {
@@ -28,12 +29,12 @@
                     console.log(response);
                     console.log(response.status);
 
-                    
+
                     // Handle success (e.g., show a success message)
                     // Optional: Display a success message
-                    if(response.status=="success"){
+                    if (response.status == "success") {
                         // alert();
-                        $('#loader').css('display','none');
+                        $('#loader').css('display', 'none');
 
                         const dashboardUrl = "{{ URL::to('/admin/dashboard') }}";
                         window.location.href = dashboardUrl;
