@@ -1,6 +1,5 @@
 <script type="text/javascript">
-    import Swal from 'sweetalert2';
-
+    
     document.addEventListener('DOMContentLoaded', function() {
         // Initialize fabric canvas
         var canvas = new fabric.Canvas('imageEditor1', {
