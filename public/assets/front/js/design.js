@@ -1742,137 +1742,143 @@ function bindData() {
             canvas.renderAll();
         }
 
-    document.getElementById('AbrilFatfaceButton').addEventListener('click', function() {
-        //console.log("fontname")
-        loadAndUse("AbrilFatface-Regular");
-    });
-    document.getElementById('AdleryProButton').addEventListener('click', function() {
-        //console.log("fontname")
-
-        loadAndUse("AdleryPro-Regular");
-
-
-    });
-    document.getElementById('AgencyFBButton').addEventListener('click', function() {
-        //console.log("fontname")
-
-        loadAndUse("AgencyFB-Bold");
-
-
-    });
-    document.getElementById('AlexBrushButton').addEventListener('click', function() {
-        //console.log("fontname")
-
-        loadAndUse("AlexBrush-Regular");
-
-
-    });
-    document.getElementById('AlluraButton').addEventListener('click', function() {
-        //console.log("fontname")
-
-        loadAndUse("Allura-Regular");
-
-
-    });
-    // document.getElementById('BotanicaScript-RegularButton').addEventListener('click', function() {
+    // document.getElementById('AbrilFatfaceButton').addEventListener('click', function() {
+    //     //console.log("fontname")
+    //     loadAndUse("AbrilFatface-Regular");
+    // });
+    // document.getElementById('AdleryProButton').addEventListener('click', function() {
     //     //console.log("fontname")
 
-    //     loadAndUse("BotanicaScript-Regular");
+    //     loadAndUse("AdleryPro-Regular");
 
 
     // });
-    document.getElementById('ArcherButton').addEventListener('click', function() {
-        //console.log("fontname")
+    // document.getElementById('AgencyFBButton').addEventListener('click', function() {
+    //     //console.log("fontname")
 
-        loadAndUse("ArcherBold");
+    //     loadAndUse("AgencyFB-Bold");
 
 
+    // });
+    // document.getElementById('AlexBrushButton').addEventListener('click', function() {
+    //     //console.log("fontname")
+
+    //     loadAndUse("AlexBrush-Regular");
+
+
+    // });
+    // document.getElementById('AlluraButton').addEventListener('click', function() {
+    //     //console.log("fontname")
+
+    //     loadAndUse("Allura-Regular");
+
+
+    // });
+    // // document.getElementById('BotanicaScript-RegularButton').addEventListener('click', function() {
+    // //     //console.log("fontname")
+
+    // //     loadAndUse("BotanicaScript-Regular");
+
+
+    // // });
+    // document.getElementById('ArcherButton').addEventListener('click', function() {
+    //     //console.log("fontname")
+
+    //     loadAndUse("ArcherBold");
+
+
+    // });
+    // document.getElementById('Archer-BookButton').addEventListener('click', function() {
+    //     //console.log("fontname")
+
+    //     loadAndUse("Archer-Book");
+
+
+    // });
+    // document.getElementById('Archer-BookItalicButton').addEventListener('click', function() {
+    //     //console.log("fontname")
+
+    //     loadAndUse("Archer-BookItalic");
+
+
+    // });
+    // document.getElementById('Archer-ExtraLightButton').addEventListener('click', function() {
+    //     //console.log("fontname")
+
+    //     loadAndUse("Archer-ExtraLight");
+
+
+    // });
+    // document.getElementById('Archer-HairlineButton').addEventListener('click', function() {
+    //     //console.log("fontname")
+
+    //     loadAndUse("Archer-Hairline");
+
+
+    // });
+    // document.getElementById('Bebas-RegularButton').addEventListener('click', function() {
+    //     //console.log("fontname")
+
+    //     loadAndUse("Bebas-Regular");
+
+
+    // });
+    // document.getElementById('BookAntiquaButton').addEventListener('click', function() {
+    //     //console.log("fontname")
+
+    //     loadAndUse("BookAntiqua");
+
+
+    // });
+    // document.getElementById('CandyCaneUnregisteredButton').addEventListener('click', function() {
+    //     //console.log("fontname")
+
+    //     loadAndUse("CandyCaneUnregistered");
+
+
+    // });
+    // document.getElementById('CarbonBl-RegularButton').addEventListener('click', function() {
+    //     //console.log("fontname")
+
+    //     loadAndUse("CarbonBl-Regular");
+
+
+    // });
+    // document.getElementById('CarmenSans-ExtraBoldButton').addEventListener('click', function() {
+    //     //console.log("fontname")
+
+    //     loadAndUse("CarmenSans-ExtraBold");
+
+
+    // });
+    // document.getElementById('CarmenSans-RegularButton').addEventListener('click', function() {
+    //     //console.log("fontname")
+
+    //     loadAndUse("CarmenSans-Regular");
+
+
+    // });
+    // document.getElementById('ChristmasCookiesButton').addEventListener('click', function() {
+    //     //console.log("fontname")
+
+    //     loadAndUse("ChristmasCookies");
+
+
+    // });
+    // document.getElementById('Bungee-RegularButton').addEventListener('click', function() {
+    //     //console.log("fontname")
+
+    //     loadAndUse("Bungee-Regular");
+
+
+    // });
+    document.querySelectorAll('.form-check-input').forEach(function(input) {
+        input.addEventListener('click', function() {
+            const font = this.getAttribute('data-font');
+            console.log("Selected font:", font);
+            loadAndUse(font); // Call loadAndUse function with the selected font
+        });
     });
-    document.getElementById('Archer-BookButton').addEventListener('click', function() {
-        //console.log("fontname")
-
-        loadAndUse("Archer-Book");
-
-
-    });
-    document.getElementById('Archer-BookItalicButton').addEventListener('click', function() {
-        //console.log("fontname")
-
-        loadAndUse("Archer-BookItalic");
-
-
-    });
-    document.getElementById('Archer-ExtraLightButton').addEventListener('click', function() {
-        //console.log("fontname")
-
-        loadAndUse("Archer-ExtraLight");
-
-
-    });
-    document.getElementById('Archer-HairlineButton').addEventListener('click', function() {
-        //console.log("fontname")
-
-        loadAndUse("Archer-Hairline");
-
-
-    });
-    document.getElementById('Bebas-RegularButton').addEventListener('click', function() {
-        //console.log("fontname")
-
-        loadAndUse("Bebas-Regular");
-
-
-    });
-    document.getElementById('BookAntiquaButton').addEventListener('click', function() {
-        //console.log("fontname")
-
-        loadAndUse("BookAntiqua");
-
-
-    });
-    document.getElementById('CandyCaneUnregisteredButton').addEventListener('click', function() {
-        //console.log("fontname")
-
-        loadAndUse("CandyCaneUnregistered");
-
-
-    });
-    document.getElementById('CarbonBl-RegularButton').addEventListener('click', function() {
-        //console.log("fontname")
-
-        loadAndUse("CarbonBl-Regular");
-
-
-    });
-    document.getElementById('CarmenSans-ExtraBoldButton').addEventListener('click', function() {
-        //console.log("fontname")
-
-        loadAndUse("CarmenSans-ExtraBold");
-
-
-    });
-    document.getElementById('CarmenSans-RegularButton').addEventListener('click', function() {
-        //console.log("fontname")
-
-        loadAndUse("CarmenSans-Regular");
-
-
-    });
-    document.getElementById('ChristmasCookiesButton').addEventListener('click', function() {
-        //console.log("fontname")
-
-        loadAndUse("ChristmasCookies");
-
-
-    });
-    document.getElementById('Bungee-RegularButton').addEventListener('click', function() {
-        //console.log("fontname")
-
-        loadAndUse("Bungee-Regular");
-
-
-    });
-
     canvas.on('object:scaling', function (e) {
         var activeObject = e.target;
 
