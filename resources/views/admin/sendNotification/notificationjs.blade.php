@@ -11,8 +11,11 @@
                 title: $('#title').val(),
                 message: $('#message').val(),
             };
+
+            if($('#title').val()!="" && $('#message').val(!="")){
+                $('#loader').css('display','block')
+            }
             console.log(formData);
-            $('#loader').css('display','block')
             $.ajax({
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
