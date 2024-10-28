@@ -1211,8 +1211,8 @@ table.dataTable thead>tr>th:nth-child(1).sorting_desc:before{
 }
 @media only screen and (min-width: 1800px) and (max-width: 3000px) {
     .image-edit-inner-img {
-        width: 345px;
-        height: 490px;
+        width: 690px;
+        height: 980px;
         /* margin: 0px auto; */
     }
 }
