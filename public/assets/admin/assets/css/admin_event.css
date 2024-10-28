@@ -1239,11 +1239,11 @@ table.dataTable thead>tr>th:nth-child(1).sorting_desc:before{
         max-width: 600px;
     }
     .edit-images-button-inner button span {
-        width: 30px;
-        height: 30px;
+        width: 40px;
+        height: 40px;
     }
     .edit-images-button-inner button h6 {
-        font-size: 14px;
+        font-size: 16px;
     }
 }
 
