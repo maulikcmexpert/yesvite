@@ -12,7 +12,7 @@
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <div class="text-right">
-                        <a class="btn btn-primary" href="{{URL::to('admin/category/create')}}">Add</a>
+                        <a class="btn btn-primary" href="{{URL::to('admin/roles/create')}}">Add</a>
                     </div>
                 </div><!-- /.col -->
             </div><!-- /.row -->
