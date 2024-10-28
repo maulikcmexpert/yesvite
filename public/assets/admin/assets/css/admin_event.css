@@ -1233,6 +1233,11 @@ table.dataTable thead>tr>th:nth-child(1).sorting_desc:before{
     .edit-imag-main-content-wrp .choose-design-sidebar {
         height: calc(100vh - 0vh) !important;
     }
+
+    .edit-images-button-wrp {
+        width: 100%;
+        max-width: 600px;
+    }
 }
 
 @media only screen and (min-width: 1800px) and (max-width: 1999px) {
