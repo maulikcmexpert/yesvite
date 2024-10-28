@@ -14,9 +14,9 @@ class RolesController extends Controller
     {
         $title = 'Category';
 
-        $page = 'admin.category.list';
+        $page = 'admin.roles.list';
 
-        $js = 'admin.category.categoryjs';
+        $js = 'admin.roles.rolejs';
 
         return view('admin.includes.layout', compact('title', 'page', 'js'));
     }
