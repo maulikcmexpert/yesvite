@@ -1022,438 +1022,213 @@
     font-family: 'ChristmasCookies';
 }
 
-@font-face {
+.AdleryPro {
     font-family: 'AdleryPro';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/AdleryPro.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
 }
 
-@font-face {
+.ArialRoundedMTBold {
     font-family: 'ArialRoundedMTBold';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/ArialRoundedMTBold.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
 }
 
-@font-face {
+.BebasNeue-Regular {
     font-family: 'BebasNeue-Regular';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/BebasNeue-Regular.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
 }
 
-@font-face {
+.Calibri {
     font-family: 'Calibri';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/Calibri.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
 }
 
-@font-face {
+.CCHammerHorror-BoldItalic {
     font-family: 'CCHammerHorror-BoldItalic';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/CCHammerHorror-BoldItalic.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
 }
 
-@font-face {
+.CCThatsAllFolks-Bold {
     font-family: 'CCThatsAllFolks-Bold';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/CCThatsAllFolks-Bold.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
 }
 
-@font-face {
+.Changa-ExtraBold {
     font-family: 'Changa-ExtraBold';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/Changa-ExtraBold.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
 }
 
-@font-face {
+.ChristmasMint-Regular {
     font-family: 'ChristmasMint-Regular';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/ChristmasMint-Regular.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
 }
 
-@font-face {
+.CinderelaPersonalUse-Regular {
     font-family: 'CinderelaPersonalUse-Regular';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/CinderelaPersonalUse-Regular.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
 }
 
-@font-face {
+.Claiborne {
     font-family: 'Claiborne';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/Claiborne.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
 }
 
-@font-face {
+.Corporative-Regular {
     font-family: 'Corporative-Regular';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/Corporative-Regular.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
 }
 
-@font-face {
+.foolish-Regular {
     font-family: 'foolish-Regular';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/foolish-Regular.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
 }
 
-@font-face {
+.GrandHotel-Regular {
     font-family: 'GrandHotel-Regular';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/GrandHotel-Regular.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
 }
 
-@font-face {
+.Joshico-Regular {
     font-family: 'Joshico-Regular';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/Joshico-Regular.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
 }
 
-@font-face {
+.KaffeesatzEF-Schwarz {
     font-family: 'KaffeesatzEF-Schwarz';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/KaffeesatzEF-Schwarz.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
 }
 
-@font-face {
+.KanedaGothic-Bold {
     font-family: 'KanedaGothic-Bold';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/KanedaGothic-Bold.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
 }
 
-@font-face {
+.KanedaGothic-Medium {
     font-family: 'KanedaGothic-Medium';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/KanedaGothic-Medium.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
 }
 
-@font-face {
+.KavarianSerif {
     font-family: 'KavarianSerif';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/KavarianSerif.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
 }
 
-@font-face {
+.MelonScriptW00-CondRegular {
     font-family: 'MelonScriptW00-CondRegular';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/MelonScriptW00-CondRegular.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
 }
 
-@font-face {
+.Montserrat-Regular {
     font-family: 'Montserrat-Regular';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/Montserrat-Regular.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
 }
 
-@font-face {
+.NautilusPompilius {
     font-family: 'NautilusPompilius';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/NautilusPompilius.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
 }
 
-@font-face {
+.OvinkRegular {
     font-family: 'OvinkRegular';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/OvinkRegular.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
 }
 
-@font-face {
+.Rither {
     font-family: 'Rither';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/Rither.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
 }
 
-@font-face {
+.Semringah {
     font-family: 'Semringah';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/Semringah.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
 }
 
-@font-face {
+.SittingDuckDEMO-Regular {
     font-family: 'SittingDuckDEMO-Regular';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/SittingDuckDEMO-Regular.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
 }
 
-@font-face {
+.SundayBest-Regular {
     font-family: 'SundayBest-Regular';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/SundayBest-Regular.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
 }
 
-@font-face {
-    font-family: 'YippieYeah-Sans';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/YippieYeah-Sans.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
+.AdleryPro-Regular {
     font-family: 'AdleryPro-Regular';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/AdleryPro-Regular.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
 }
 
-@font-face {
+.Arboria-Bold {
     font-family: 'Arboria-Bold';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/Arboria-Bold.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
 }
 
-@font-face {
+.Arboria-Book {
     font-family: 'Arboria-Book';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/Arboria-Book.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
 }
 
-@font-face {
+.Arboria-Light {
     font-family: 'Arboria-Light';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/Arboria-Light.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
 }
 
-@font-face {
-    font-family: 'Arboria-Thin';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/Arboria-Thin.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
+.Arboria-Medium {
     font-family: 'Arboria-Medium';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/Arboria-Medium.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
 }
 
-@font-face {
+.Cabin-Regular {
     font-family: 'Cabin-Regular';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/Cabin-Regular.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
 }
 
-@font-face {
+.Candara-Bold {
     font-family: 'Candara-Bold';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/Candara-Bold.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
 }
 
-@font-face {
+.Candara {
     font-family: 'Candara';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/Candara.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
 }
 
-@font-face {
+.CrimsonText-Bold {
     font-family: 'CrimsonText-Bold';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/CrimsonText-Bold.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
 }
 
-@font-face {
+.CrimsonText-BoldItalic {
     font-family: 'CrimsonText-BoldItalic';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/CrimsonText-BoldItalic.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
 }
 
-@font-face {
+.CrimsonText-Italic {
     font-family: 'CrimsonText-Italic';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/CrimsonText-Italic.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
 }
 
-@font-face {
+.CrimsonText-Regular {
     font-family: 'CrimsonText-Regular';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/CrimsonText-Regular.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
 }
 
-@font-face {
+.CrimsonText-SemiBold {
     font-family: 'CrimsonText-SemiBold';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/CrimsonText-SemiBold.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
 }
 
-@font-face {
+.CrimsonText-SemiBoldItalic {
     font-family: 'CrimsonText-SemiBoldItalic';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/CrimsonText-SemiBoldItalic.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
 }
 
-@font-face {
+.QTMerryScript {
     font-family: 'QTMerryScript';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/QTMerryScript.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
 }
 
-@font-face {
+.Rockwell-Condensed {
     font-family: 'Rockwell-Condensed';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/Rockwell-Condensed.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
 }
 
-@font-face {
+.Rockwell-CondensedBold {
     font-family: 'Rockwell-CondensedBold';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/Rockwell-CondensedBold.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
 }
 
-@font-face {
-    font-family: 'Tangerine-Regular';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/Tangerine-Regular.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
+.Tangerine-Bold {
     font-family: 'Tangerine-Bold';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/Tangerine-Bold.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
 }
 
-@font-face {
+.Tangerine-Regular {
+    font-family: 'Tangerine-Regular';
+}
+
+.AlternateGotNo2D {
     font-family: 'AlternateGotNo2D';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/AlternateGotNo2D.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
 }
 
-@font-face {
+.CaveatBrush-Regular {
     font-family: 'CaveatBrush-Regular';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/CaveatBrush-Regular.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
 }
 
-@font-face {
+.ModernLove-Regular {
     font-family: 'ModernLove-Regular';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/ModernLove-Regular.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
 }
 
-@font-face {
+.NeueHaasGroteskText-Bold {
     font-family: 'NeueHaasGroteskText-Bold';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/NeueHaasGroteskText-Bold.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
 }
 
-@font-face {
+.NeueHaasGroteskText-Medium {
     font-family: 'NeueHaasGroteskText-Medium';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/NeueHaasGroteskText-Medium.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
 }
 
-@font-face {
+.NeueHaasGroteskText-Regular {
     font-family: 'NeueHaasGroteskText-Regular';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/NeueHaasGroteskText-Regular.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
 }
 
-@font-face {
+.PTSansPro-Regular {
     font-family: 'PTSansPro-Regular';
-    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/PTSansPro-Regular.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
 }
-
 
 #edit-design-temp {
     width: 100%;
