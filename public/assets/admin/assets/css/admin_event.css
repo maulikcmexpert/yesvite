@@ -1220,6 +1220,9 @@ table.dataTable thead>tr>th:nth-child(1).sorting_desc:before{
         width: 100% !important;
         height: 100% !important;
     }
+    .edit-images-button-wrp{
+        margin-bottom: 100px;
+    }
 }
 
 
