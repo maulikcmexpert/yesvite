@@ -41,10 +41,10 @@ class SubCategoryController extends Controller
                     $delete_url = route('subcategory.destroy', $cryptId);
                     $actionBtn = '<div class="action-icon">
                         <a class="" href="' . $edit_url . '" title="Edit"><i class="fa fa-edit"></i></a>
-                        <form action="' . $delete_url . '" method="POST">' .
+                        <form id="delete_sub_category_form" action="' . $delete_url . '" method="POST">' .
                         csrf_field() . // Changed from @csrf to csrf_field()
                         method_field("DELETE") . // Changed from @method to method_field()
-                        '<button type="submit" class="btn bg-transparent"><i class="fas fa-trash"></i></button></form>
+                        '<button type="button" class="btn bg-transparent delete_sub_category"><i class="fas fa-trash"></i></button></form>
                         </div>';
                     return $actionBtn;
                 })
