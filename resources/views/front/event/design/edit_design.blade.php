@@ -10,7 +10,7 @@
                             fill="#0F172A" />
                     </svg>
                 </button>
-                <button  id="redoButton">
+                <button id="redoButton">
                     <svg width="14" height="7" viewBox="0 0 14 7" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -25,26 +25,28 @@
                 <div class="canvas-container" id="border">
                     <div id="imageWrapper" style="position:fixed; display:none;z-index:10000">
                         <div class="canvas-top-icon-wrp">
-                            
+
                             <div class="removeShapImage" style="display: none">
                                 <svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <g filter="url(#filter0_d_5633_67674)">
-                                        <rect x="2.70312" y="2.37207" width="23.9674" height="23.9674" rx="11.9837" fill="white" shape-rendering="crispEdges"/>
-                                        <path d="M19.1807 11.3502C17.5179 11.1855 15.8452 11.1006 14.1775 11.1006C13.1888 11.1006 12.2001 11.1505 11.2115 11.2504L10.1929 11.3502" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path d="M12.939 10.8463L13.0488 10.1922C13.1287 9.7178 13.1886 9.36328 14.0325 9.36328H15.3407C16.1846 9.36328 16.2495 9.73777 16.3244 10.1971L16.4342 10.8463" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path d="M18.1073 12.9277L17.7827 17.9559C17.7278 18.7398 17.6829 19.349 16.2898 19.349H13.0841C11.691 19.349 11.6461 18.7398 11.5912 17.9559L11.2666 12.9277" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path d="M13.853 16.6035H15.5158" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path d="M13.4385 14.6055H15.9351" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <rect x="2.70312" y="2.37207" width="23.9674" height="23.9674" rx="11.9837" fill="white" shape-rendering="crispEdges" />
+                                        <path d="M19.1807 11.3502C17.5179 11.1855 15.8452 11.1006 14.1775 11.1006C13.1888 11.1006 12.2001 11.1505 11.2115 11.2504L10.1929 11.3502" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M12.939 10.8463L13.0488 10.1922C13.1287 9.7178 13.1886 9.36328 14.0325 9.36328H15.3407C16.1846 9.36328 16.2495 9.73777 16.3244 10.1971L16.4342 10.8463" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M18.1073 12.9277L17.7827 17.9559C17.7278 18.7398 17.6829 19.349 16.2898 19.349H13.0841C11.691 19.349 11.6461 18.7398 11.5912 17.9559L11.2666 12.9277" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M13.853 16.6035H15.5158" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M13.4385 14.6055H15.9351" stroke="#0F172A" stroke-width="0.998643" stroke-linecap="round" stroke-linejoin="round" />
                                     </g>
                                 </svg>
                             </div>
                         </div>
-        
+
                         <div class="uploadShapImage">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M246.6 9.4c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 109.3 192 320c0 17.7 14.3 32 32 32s32-14.3 32-32l0-210.7 73.4 73.4c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-128-128zM64 352c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 64c0 53 43 96 96 96l256 0c53 0 96-43 96-96l0-64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 64c0 17.7-14.3 32-32 32L96 448c-17.7 0-32-14.3-32-32l0-64z"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                <path d="M246.6 9.4c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 109.3 192 320c0 17.7 14.3 32 32 32s32-14.3 32-32l0-210.7 73.4 73.4c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-128-128zM64 352c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 64c0 53 43 96 96 96l256 0c53 0 96-43 96-96l0-64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 64c0 17.7-14.3 32-32 32L96 448c-17.7 0-32-14.3-32-32l0-64z" />
+                            </svg>
                             <input type="file" name="selectShapeImage" accept="image/*">
                         </div>
-                        
+
                         <img id="user_image" src="" style="height: 100px; width: 100px; background-color: black;" />
                         <div class="resize-handle top-left"></div>
                         <div class="resize-handle top-center"></div>
@@ -56,18 +58,18 @@
                         <div class="resize-handle right-center"></div> <!-- Right-center handle -->
                     </div>
                     <input type="file" id="image" accept="image/*" style="display: none" />
-                    <img id="first_shape_img" src="" style="display: none;" >
+                    <img id="first_shape_img" src="" style="display: none;">
 
-                    <img id="shape_img" src="" style="display: none;" >
+                    <img id="shape_img" src="" style="display: none;">
                     <canvas id="imageEditor1" class="canvas new"></canvas>
                 </div>
                 {{-- <img src="{{ $textData->image}}" alt=""> --}}
             </div>
-            
+
         </div>
         <div class="edit-images-button-wrp">
-            <div class="edit-images-button-inner text-box-wrp" >
-                <button class="design-sidebar-action"  id="addTextButton">
+            <div class="edit-images-button-inner text-box-wrp">
+                <button class="design-sidebar-action" id="addTextButton">
                     <span>
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -81,7 +83,7 @@
                                 stroke-linejoin="round" />
                         </svg>
                     </span>
-                    <h6 >+ Text Box</h6>
+                    <h6>+ Text Box</h6>
                 </button>
             </div>
             <div class="edit-images-button-inner fonts-edit-wrp">
@@ -285,7 +287,7 @@
         <div class="design-sidebar design-sidebar_2 setting-category-wrp choose-design-form activity-schedule-inner ">
             <div class="d-flex align-items-center justify-content-between toggle-wrp new-event-sidebar-head">
                 <h5>Change Font</h5>
-                <button class="close-btn" >
+                <button class="close-btn">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path d="M5.00098 5L19 18.9991" stroke="#64748B" stroke-width="1.5" stroke-linecap="round"
@@ -337,7 +339,7 @@
                     </label>
 
                 </div>
-              
+
                 <div class="font-selector form-check">
 
                     <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="ArcherBold" id="ArcherButton">
@@ -442,6 +444,438 @@
                     </label>
 
                 </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="ArialRoundedMTBold" id="ArialRoundedMTBoldButton">
+                    <label class="form-check-label font-change ArialRoundedMTBold" for="ArialRoundedMTBoldButton">
+                        ArialRoundedMTBold
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="BebasNeue-Regular" id="BebasNeue-RegularButton">
+                    <label class="form-check-label font-change BebasNeue-Regular" for="BebasNeue-RegularButton">
+                        BebasNeue-Regular
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="Calibri" id="CalibriButton">
+                    <label class="form-check-label font-change Calibri" for="CalibriButton">
+                        Calibri
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="CCHammerHorror-BoldItalic" id="CCHammerHorror-BoldItalicButton">
+                    <label class="form-check-label font-change CCHammerHorror-BoldItalic" for="CCHammerHorror-BoldItalicButton">
+                        CCHammerHorror-BoldItalic
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="CCThatsAllFolks-Bold" id="CCThatsAllFolks-BoldButton">
+                    <label class="form-check-label font-change CCThatsAllFolks-Bold" for="CCThatsAllFolks-BoldButton">
+                        CCThatsAllFolks-Bold
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="Changa-ExtraBold" id="Changa-ExtraBoldButton">
+                    <label class="form-check-label font-change Changa-ExtraBold" for="Changa-ExtraBoldButton">
+                        Changa-ExtraBold
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="ChristmasMint-Regular" id="ChristmasMint-RegularButton">
+                    <label class="form-check-label font-change ChristmasMint-Regular" for="ChristmasMint-RegularButton">
+                        ChristmasMint-Regular
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="CinderelaPersonalUse-Regular" id="CinderelaPersonalUse-RegularButton">
+                    <label class="form-check-label font-change CinderelaPersonalUse-Regular" for="CinderelaPersonalUse-RegularButton">
+                        CinderelaPersonalUse-Regular
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="Claiborne" id="ClaiborneButton">
+                    <label class="form-check-label font-change Claiborne" for="ClaiborneButton">
+                        Claiborne
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="Corporative-Regular" id="Corporative-RegularButton">
+                    <label class="form-check-label font-change Corporative-Regular" for="Corporative-RegularButton">
+                        Corporative-Regular
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="foolish-Regular" id="foolish-RegularButton">
+                    <label class="form-check-label font-change foolish-Regular" for="foolish-RegularButton">
+                        foolish-Regular
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="GrandHotel-Regular" id="GrandHotel-RegularButton">
+                    <label class="form-check-label font-change GrandHotel-Regular" for="GrandHotel-RegularButton">
+                        GrandHotel-Regular
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="foolish-Regular" id="foolish-RegularButton">
+                    <label class="form-check-label font-change foolish-Regular" for="foolish-RegularButton">
+                        foolish-Regular
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="Joshico-Regular" id="Joshico-RegularButton">
+                    <label class="form-check-label font-change Joshico-Regular" for="Joshico-RegularButton">
+                        Joshico-Regular
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="KaffeesatzEF-Schwarz" id="KaffeesatzEF-SchwarzButton">
+                    <label class="form-check-label font-change KaffeesatzEF-Schwarz" for="KaffeesatzEF-SchwarzButton">
+                        KaffeesatzEF-Schwarz
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="KanedaGothic-Bold" id="KanedaGothic-BoldButton">
+                    <label class="form-check-label font-change KanedaGothic-Bold" for="KanedaGothic-BoldButton">
+                        KanedaGothic-Bold
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="KanedaGothic-Medium" id="KanedaGothic-MediumButton">
+                    <label class="form-check-label font-change KanedaGothic-Medium" for="KanedaGothic-MediumButton">
+                        KanedaGothic-Medium
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="KavarianSerif" id="KavarianSerifButton">
+                    <label class="form-check-label font-change KavarianSerif" for="KavarianSerifButton">
+                        KavarianSerif
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="MelonScriptW00-CondRegular" id="MelonScriptW00-CondRegularButton">
+                    <label class="form-check-label font-change MelonScriptW00-CondRegular" for="MelonScriptW00-CondRegularButton">
+                        MelonScriptW00-CondRegular
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="Montserrat-Regular" id="Montserrat-RegularButton">
+                    <label class="form-check-label font-change Montserrat-Regular" for="Montserrat-RegularButton">
+                        Montserrat-Regular
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="NautilusPompilius" id="NautilusPompiliusButton">
+                    <label class="form-check-label font-change NautilusPompilius" for="NautilusPompiliusButton">
+                        NautilusPompilius
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="OvinkRegular" id="OvinkRegularButton">
+                    <label class="form-check-label font-change OvinkRegular" for="OvinkRegularButton">
+                        OvinkRegular
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="Rither" id="RitherButton">
+                    <label class="form-check-label font-change Rither" for="RitherButton">
+                        Rither
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="Semringah" id="SemringahButton">
+                    <label class="form-check-label font-change Semringah" for="SemringahButton">
+                        Semringah
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="SittingDuckDEMO-Regular" id="SittingDuckDEMO-RegularButton">
+                    <label class="form-check-label font-change SittingDuckDEMO-Regular" for="SittingDuckDEMO-RegularButton">
+                        SittingDuckDEMO-Regular
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="SundayBest-Regular" id="SundayBest-RegularButton">
+                    <label class="form-check-label font-change SundayBest-Regular" for="SundayBest-RegularButton">
+                        SundayBest-Regular
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="YippieYeah-Sans" id="YippieYeah-SansButton">
+                    <label class="form-check-label font-change YippieYeah-Sans" for="YippieYeah-SansButton">
+                        YippieYeah-Sans
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="AdleryPro-Regular" id="AdleryPro-RegularButton">
+                    <label class="form-check-label font-change AdleryPro-Regular" for="AdleryPro-RegularButton">
+                        AdleryPro-Regular
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="Arboria-Bold" id="Arboria-BoldButton">
+                    <label class="form-check-label font-change Arboria-Bold" for="Arboria-BoldButton">
+                        Arboria-Bold
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="Arboria-Book" id="Arboria-BookButton">
+                    <label class="form-check-label font-change Arboria-Book" for="Arboria-BookButton">
+                        Arboria-Book
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="Arboria-Light" id="Arboria-LightButton">
+                    <label class="form-check-label font-change Arboria-Light" for="Arboria-LightButton">
+                        Arboria-Light
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="Arboria-Medium" id="Arboria-MediumButton">
+                    <label class="form-check-label font-change Arboria-Medium" for="Arboria-MediumButton">
+                        Arboria-Medium
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="Arboria-Thin" id="Arboria-ThinButton">
+                    <label class="form-check-label font-change Arboria-Thin" for="Arboria-ThinButton">
+                        Arboria-Thin
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="Cabin-Regular" id="Cabin-RegularButton">
+                    <label class="form-check-label font-change Cabin-Regular" for="Cabin-RegularButton">
+                        Cabin-Regular
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="Candara-Bold" id="Candara-BoldButton">
+                    <label class="form-check-label font-change Candara-Bold" for="Candara-BoldButton">
+                        Candara-Bold
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="Candara" id="CandaraButton">
+                    <label class="form-check-label font-change Candara" for="CandaraButton">
+                        Candara
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="CrimsonText-Bold" id="CrimsonText-BoldButton">
+                    <label class="form-check-label font-change CrimsonText-Bold" for="CrimsonText-BoldButton">
+                        CrimsonText-Bold
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="CrimsonText-BoldItalic" id="CrimsonText-BoldItalicButton">
+                    <label class="form-check-label font-change CrimsonText-BoldItalic" for="CrimsonText-BoldItalicButton">
+                        CrimsonText-BoldItalic
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="CrimsonText-Italic" id="CrimsonText-ItalicButton">
+                    <label class="form-check-label font-change CrimsonText-Italic" for="CrimsonText-ItalicButton">
+                        CrimsonText-Italic
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="CrimsonText-Regular" id="CrimsonText-RegularButton">
+                    <label class="form-check-label font-change CrimsonText-Regular" for="CrimsonText-RegularButton">
+                        CrimsonText-Regular
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="CrimsonText-SemiBold" id="CrimsonText-SemiBoldButton">
+                    <label class="form-check-label font-change CrimsonText-SemiBold" for="CrimsonText-SemiBoldButton">
+                        CrimsonText-SemiBold
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="CrimsonText-SemiBoldItalic" id="CrimsonText-SemiBoldItalicButton">
+                    <label class="form-check-label font-change CrimsonText-SemiBoldItalic" for="CrimsonText-SemiBoldItalicButton">
+                        CrimsonText-SemiBoldItalic
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="QTMerryScript" id="QTMerryScriptButton">
+                    <label class="form-check-label font-change QTMerryScript" for="QTMerryScriptButton">
+                        QTMerryScript
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="Rockwell-Condensed" id="Rockwell-CondensedButton">
+                    <label class="form-check-label font-change Rockwell-Condensed" for="Rockwell-CondensedButton">
+                        Rockwell-Condensed
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="Rockwell-CondensedBold" id="Rockwell-CondensedBoldButton">
+                    <label class="form-check-label font-change Rockwell-CondensedBold" for="Rockwell-CondensedBoldButton">
+                        Rockwell-CondensedBold
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="Tangerine-Bold" id="Tangerine-BoldButton">
+                    <label class="form-check-label font-change Tangerine-Bold" for="Tangerine-BoldButton">
+                        Tangerine-Bold
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="Tangerine-Regular" id="Tangerine-RegularButton">
+                    <label class="form-check-label font-change Tangerine-Regular" for="Tangerine-RegularButton">
+                        Tangerine-Regular
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="AlternateGotNo2D" id="AlternateGotNo2DButton">
+                    <label class="form-check-label font-change AlternateGotNo2D" for="AlternateGotNo2DButton">
+                        AlternateGotNo2D
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="CaveatBrush-Regular" id="CaveatBrush-RegularButton">
+                    <label class="form-check-label font-change CaveatBrush-Regular" for="CaveatBrush-RegularButton">
+                        CaveatBrush-Regular
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="ModernLove-Regular" id="ModernLove-RegularButton">
+                    <label class="form-check-label font-change ModernLove-Regular" for="ModernLove-RegularButton">
+                        ModernLove-Regular
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="NeueHaasGroteskText-Bold" id="NeueHaasGroteskText-BoldButton">
+                    <label class="form-check-label font-change NeueHaasGroteskText-Bold" for="NeueHaasGroteskText-BoldButton">
+                        NeueHaasGroteskText-Bold
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="NeueHaasGroteskText-Medium" id="NeueHaasGroteskText-MediumButton">
+                    <label class="form-check-label font-change NeueHaasGroteskText-Medium" for="NeueHaasGroteskText-MediumButton">
+                        NeueHaasGroteskText-Medium
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="NeueHaasGroteskText-Regular" id="NeueHaasGroteskText-RegularButton">
+                    <label class="form-check-label font-change NeueHaasGroteskText-Regular" for="NeueHaasGroteskText-RegularButton">
+                        NeueHaasGroteskText-Regular
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="PTSansPro-Regular" id="PTSansPro-RegularButton">
+                    <label class="form-check-label font-change PTSansPro-Regular" for="PTSansPro-RegularButton">
+                        PTSansPro-Regular
+                    </label>
+
+                </div>
             </div>
 
             <div class="footer-buttons">
@@ -454,7 +888,7 @@
         <div class="design-sidebar design-sidebar_3 setting-category-wrp choose-design-form activity-schedule-inner ">
             <div class="d-flex align-items-center justify-content-between toggle-wrp new-event-sidebar-head">
                 <h5>Size & Spacing</h5>
-                <button class="close-btn" >
+                <button class="close-btn">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M5.00098 5L19 18.9991" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                         <path d="M4.99996 18.9991L18.999 5" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -467,7 +901,7 @@
                 <div class="size-spacing-inner font-size-wrp">
                     <div class="size-spacing-inner-top">
                         <h3>Font Size</h3>
-                        <input type="hidden" id="fontSizeInput" value="20" >
+                        <input type="hidden" id="fontSizeInput" value="20">
                     </div>
                     <div class="range-slider">
                         <div id="fontSizeTooltip" class="tooltip"></div>
@@ -511,7 +945,7 @@
         <div class="design-sidebar design-sidebar_4 setting-category-wrp choose-design-form activity-schedule-inner">
             <div class="d-flex align-items-center justify-content-between toggle-wrp new-event-sidebar-head">
                 <h5>Change Color</h5>
-                <button class="close-btn" >
+                <button class="close-btn">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M5.00098 5L19 18.9991" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                         <path d="M4.99996 18.9991L18.999 5" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -531,7 +965,7 @@
 
             <div class="used-fonts-wrp common-font-wrp">
                 <div class="form-check">
-                    <input type="radio" name="colorType" value="font" checked class="form-check-input colorTypeInp" id="flexRadioDefaults"/> 
+                    <input type="radio" name="colorType" value="font" checked class="form-check-input colorTypeInp" id="flexRadioDefaults" />
                     <label class="form-check-label" for="flexRadioDefaults">
                         Font Color
                     </label>
@@ -559,7 +993,7 @@
         <div class="design-sidebar design-sidebar_5 setting-category-wrp choose-design-form activity-schedule-inner ">
             <div class="d-flex align-items-center justify-content-between toggle-wrp new-event-sidebar-head">
                 <h5>Format Text</h5>
-                <button class="close-btn" >
+                <button class="close-btn">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path d="M5.00098 5L19 18.9991" stroke="#64748B" stroke-width="1.5" stroke-linecap="round"
@@ -574,9 +1008,9 @@
                 <div class="format-text-inner format-type-wrp">
                     <h3>Type</h3>
                     <div class="format-text-inner-options">
-                        <button data-command="bold"  >
+                        <button data-command="bold">
                             <svg width="25" height="24" viewBox="0 0 25 24" fill="none"
-                                xmlns="http://www.w3.org/2000/svg" >
+                                xmlns="http://www.w3.org/2000/svg">
                                 <path
                                     d="M5.21338 4.5C5.21338 3.4 6.11338 2.5 7.21338 2.5H12.3334C14.9534 2.5 17.0834 4.63 17.0834 7.25C17.0834 9.87 14.9534 12 12.3334 12H5.21338V4.5Z"
                                     stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"
@@ -598,7 +1032,7 @@
                                     stroke-linejoin="round" />
                             </svg>
                         </button>
-                        <button data-command="underline" >
+                        <button data-command="underline">
                             <svg width="25" height="30" viewBox="0 0 25 30" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <g filter="url(#filter0_d_5633_68294)">
@@ -634,13 +1068,13 @@
                 <div class="format-text-inner font-tranform-wrp">
                     <h3>Font Size</h3>
                     <div class="format-text-inner-options">
-                        <button data-command="uppercase"  >
+                        <button data-command="uppercase">
                             AA
                         </button>
-                        <button  data-command="lowercase" >
+                        <button data-command="lowercase">
                             aa
                         </button>
-                        <button data-command="capitalize"  >
+                        <button data-command="capitalize">
                             Aa
                         </button>
                     </div>
@@ -648,7 +1082,7 @@
                 <div class="format-text-inner font-alignment-wrp">
                     <h3>Alignment</h3>
                     <div class="format-text-inner-options">
-                        <button  data-command="justifyLeft"  >
+                        <button data-command="justifyLeft">
                             <svg width="25" height="24" viewBox="0 0 25 24" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path d="M12.5 4.5H3.5" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"
@@ -661,7 +1095,7 @@
                                     stroke-linejoin="round" />
                             </svg>
                         </button>
-                        <button data-command="justifyCenter" >
+                        <button data-command="justifyCenter">
                             <svg width="25" height="24" viewBox="0 0 25 24" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path d="M3.5 4.5H21.5" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"
@@ -687,7 +1121,7 @@
                                     stroke-linejoin="round" />
                             </svg>
                         </button>
-                        <button data-command="justifyFull" >
+                        <button data-command="justifyFull">
                             <svg width="29" height="29" viewBox="0 0 29 29" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <g filter="url(#filter0_d_5633_68315)">
@@ -733,7 +1167,7 @@
         <div class="design-sidebar design-sidebar_6 setting-category-wrp choose-design-form activity-schedule-inner ">
             <div class="d-flex align-items-center justify-content-between toggle-wrp new-event-sidebar-head">
                 <h5>Photo Slider</h5>
-                <button class="close-btn" >
+                <button class="close-btn">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path d="M5.00098 5L19 18.9991" stroke="#64748B" stroke-width="1.5" stroke-linecap="round"
@@ -938,7 +1372,7 @@
                                     stroke="#64748B" stroke-width="1.5" stroke-linecap="round"
                                     stroke-linejoin="round" />
                             </svg>
-                            
+
                             <img class="photo-slider-2 slider_img" data-delete="2" src="" alt="" style="display: none">
                             <button class="uploaded-img-card-edit">
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
@@ -951,7 +1385,7 @@
                                         stroke="#64748B" stroke-width="1.5" stroke-miterlimit="10"
                                         stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
-                            <input type="file" class="slider_photo_2 " accept="image/png, image/jpeg">
+                                <input type="file" class="slider_photo_2 " accept="image/png, image/jpeg">
 
                             </button>
                             <button class="uploaded-img-card-delete delete-slider-2 delete_silder">
@@ -1035,7 +1469,7 @@
                 </div>
             </div>
 
-            <div class="footer-buttons" >
+            <div class="footer-buttons">
                 <button class="cmn-btn save-slider-image">Save</button>
             </div>
         </div>
