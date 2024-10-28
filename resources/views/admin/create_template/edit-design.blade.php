@@ -591,6 +591,142 @@
                     </label>
 
                 </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="foolish-Regular" id="foolish-RegularButton">
+                    <label class="form-check-label font-change foolish-Regular" for="foolish-RegularButton">
+                        foolish-Regular
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="GrandHotel-Regular" id="GrandHotel-RegularButton">
+                    <label class="form-check-label font-change GrandHotel-Regular" for="GrandHotel-RegularButton">
+                        GrandHotel-Regular
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="foolish-Regular" id="foolish-RegularButton">
+                    <label class="form-check-label font-change foolish-Regular" for="foolish-RegularButton">
+                        foolish-Regular
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="Joshico-Regular" id="Joshico-RegularButton">
+                    <label class="form-check-label font-change Joshico-Regular" for="Joshico-RegularButton">
+                        Joshico-Regular
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="KaffeesatzEF-Schwarz" id="KaffeesatzEF-SchwarzButton">
+                    <label class="form-check-label font-change KaffeesatzEF-Schwarz" for="KaffeesatzEF-SchwarzButton">
+                        KaffeesatzEF-Schwarz
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="KanedaGothic-Bold" id="KanedaGothic-BoldButton">
+                    <label class="form-check-label font-change KanedaGothic-Bold" for="KanedaGothic-BoldButton">
+                        KanedaGothic-Bold
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="KanedaGothic-Medium" id="KanedaGothic-MediumButton">
+                    <label class="form-check-label font-change KanedaGothic-Medium" for="KanedaGothic-MediumButton">
+                        KanedaGothic-Medium
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="KavarianSerif" id="KavarianSerifButton">
+                    <label class="form-check-label font-change KavarianSerif" for="KavarianSerifButton">
+                        KavarianSerif
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="MelonScriptW00-CondRegular" id="MelonScriptW00-CondRegularButton">
+                    <label class="form-check-label font-change MelonScriptW00-CondRegular" for="MelonScriptW00-CondRegularButton">
+                        MelonScriptW00-CondRegular
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="Montserrat-Regular" id="Montserrat-RegularButton">
+                    <label class="form-check-label font-change Montserrat-Regular" for="Montserrat-RegularButton">
+                        Montserrat-Regular
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="NautilusPompilius" id="NautilusPompiliusButton">
+                    <label class="form-check-label font-change NautilusPompilius" for="NautilusPompiliusButton">
+                        NautilusPompilius
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="OvinkRegular" id="OvinkRegularButton">
+                    <label class="form-check-label font-change OvinkRegular" for="OvinkRegularButton">
+                        OvinkRegular
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="Rither" id="RitherButton">
+                    <label class="form-check-label font-change Rither" for="RitherButton">
+                        Rither
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="Semringah" id="SemringahButton">
+                    <label class="form-check-label font-change Semringah" for="SemringahButton">
+                        Semringah
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="SittingDuckDEMO-Regular" id="SittingDuckDEMO-RegularButton">
+                    <label class="form-check-label font-change SittingDuckDEMO-Regular" for="SittingDuckDEMO-RegularButton">
+                        SittingDuckDEMO-Regular
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="SundayBest-Regular" id="SundayBest-RegularButton">
+                    <label class="form-check-label font-change SundayBest-Regular" for="SundayBest-RegularButton">
+                        SundayBest-Regular
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="YippieYeah-Sans" id="YippieYeah-SansButton">
+                    <label class="form-check-label font-change YippieYeah-Sans" for="YippieYeah-SansButton">
+                        YippieYeah-Sans
+                    </label>
+
+                </div>
             </div>
 
             <!-- <div class="recommendation-fonts-wrp common-font-wrp">
