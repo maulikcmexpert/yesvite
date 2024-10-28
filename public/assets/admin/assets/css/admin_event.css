@@ -1209,6 +1209,13 @@ table.dataTable thead>tr>th:nth-child(1).sorting_desc:before{
 .ck-editor__editable {
     height: 350px !important;
 }
+
+.image-edit-inner-img img{
+    width: 100% !important;
+    height: 100% !important;
+}
+
+
 @media only screen and (min-width: 2000px) and (max-width: 3000px) {
     .image-edit-inner-img {
         width: 690px;
@@ -1247,8 +1254,8 @@ table.dataTable thead>tr>th:nth-child(1).sorting_desc:before{
 
 @media only screen and (min-width: 1600px) and (max-width: 1799px) {
     .image-edit-inner-img {
-        width: 345px;
-        height: 460px;
+        width: 490px;
+        height: 680px;
         /* margin: 0px auto; */
     }
 }
