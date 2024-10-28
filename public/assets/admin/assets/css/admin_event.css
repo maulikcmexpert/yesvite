@@ -84,7 +84,7 @@
 .edit-imag-main-content-wrp {
     overflow: hidden;
     display: flex;
-    align-items: center;
+    align-items: start;
 }
 
 .edit-image-main-wrp {
