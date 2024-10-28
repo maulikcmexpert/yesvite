@@ -85,6 +85,7 @@ WebFontConfig = {
             "Arboria-Bold",
             "Arboria-Book",
             "Arboria-Light",
+            "Arboria-Thin",
             "Arboria-Medium",
             "Cabin-Regular",
             "Candara",
