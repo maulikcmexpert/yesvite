@@ -170,4 +170,53 @@
 
 
     });
+
+
+
+    $(document).on('click', '.delete_category', function() {
+
+// var event_report_id = $(this).data('id');
+
+Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, delete it!"
+}).then((result) => {
+    if (result.isConfirmed) {
+        $('#delete_category_form').submit();
+        // $.ajax({
+        //     headers: {
+        //         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+        //             "content"),
+        //     },
+        //     // dataType: 'Json',
+        //     type: "GET",
+        //     url: "{{ route('delete_post_report') }}",
+        //     data: {
+        //         event_report_id: event_report_id
+        //     },
+        //     success: function(output) {
+        //         if (output == true) {
+        //             Swal.fire({
+        //                 title: "Deleted!",
+        //                 text: "Your Reported Post has been deleted",
+        //                 icon: "success"
+        //             }).then((result) => {
+        //                 if (result.isConfirmed) {
+        //                     window.location.href = "{{URL::to('/admin/user_post_report')}}";
+        //                 }
+        //             });
+        //         }
+        //     },
+        //     error: function() {}
+        // });
+
+
+    }
+});
+})
 </script>
