@@ -58,10 +58,10 @@ class TemplateController extends Controller
                     $template_url = route('create_template.edit_template', $cryptId);
                     $actionBtn = '<div class="action-icon">
                         <a class="" href="' . $edit_url . '" title="Edit"><i class="fa fa-edit"></i></a>
-                        <form action="' . $delete_url . '" method="POST">' .
+                        <form id="delete_template_form" action="' . $delete_url . '" method="POST">' .
                         csrf_field() . // Changed from @csrf to csrf_field()
                         method_field("DELETE") . // Changed from @method to method_field()
-                        '<button type="submit" class="btn bg-transparent"><i class="fas fa-trash"></i></button></form>
+                        '<button type="button" class="btn bg-transparent delete_template"><i class="fas fa-trash"></i></button></form>
                       <a class="" href="' . $template_url . '" title="Edit"><i class="fa fa-eye"></i></a>
                         </div>';
                     return $actionBtn;
