@@ -545,7 +545,7 @@
 }
 
 .edit-imag-main-content-wrp .choose-design-sidebar {
-    height: calc(100vh - 0vh) !important;
+    height: calc(100vh - 21vh) !important;
     padding: 0px !important;
     margin: 0px !important;
     scrollbar-color: none !important;
@@ -1222,6 +1222,9 @@ table.dataTable thead>tr>th:nth-child(1).sorting_desc:before{
     }
     .edit-images-button-wrp{
         margin-bottom: 100px;
+    }
+    .edit-imag-main-content-wrp .choose-design-sidebar {
+        height: calc(100vh - 0vh) !important;
     }
 }
 
