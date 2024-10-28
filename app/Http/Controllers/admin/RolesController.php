@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\admin;
+use App\DataTables\RolesDataTable;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -17,7 +18,7 @@ class RolesController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(RolesDataTable $DataTable)
     {
         $title = 'Roles';
 
@@ -25,7 +26,10 @@ class RolesController extends Controller
 
         $js = 'admin.roles.rolejs';
 
-        return view('admin.includes.layout', compact('title', 'page', 'js'));
+        // return view('admin.includes.layout', compact('title', 'page', 'js'));
+
+        return $DataTable->render('admin.includes.layout', compact('title', 'page', 'js'));
+
     }
 
     /**
