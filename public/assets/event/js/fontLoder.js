@@ -64,7 +64,24 @@ WebFontConfig = {
             "ChristmasMint-Regular",
             "CinderelaPersonalUse-Regular",
             "Claiborne",
-            "Corporative-Regular"
+            "Corporative-Regular",
+            "foolish-Regular",
+            "GrandHotel-Regular",
+            "Joshico-Regular",
+            "KaffeesatzEF-Schwarz",
+            "KanedaGothic-Bold",
+            "KanedaGothic-Medium",
+            "KavarianSerif",
+            "MelonScriptW00-CondRegular",
+            "Montserrat-Regular",
+            "NautilusPompilius",
+            "OvinkRegular",
+            "Rither",
+            "Semringah",
+            "SittingDuckDEMO-Regular",
+            "SundayBest-Regular",
+            "YippieYeah-Sans"
+
 
         ],
         urls: [
