@@ -168,6 +168,94 @@
     font-display: swap;
 }
 
+@font-face {
+    font-family: 'AdleryPro';
+    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/AdleryPro.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'ArialRoundedMTBold';
+    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/ArialRoundedMTBold.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'BebasNeue-Regular';
+    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/BebasNeue-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Calibri';
+    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/Calibri.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'CCHammerHorror-BoldItalic';
+    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/CCHammerHorror-BoldItalic.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'CCThatsAllFolks-Bold';
+    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/CCThatsAllFolks-Bold.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Changa-ExtraBold';
+    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/Changa-ExtraBold.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'ChristmasMint-Regular';
+    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/ChristmasMint-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'CinderelaPersonalUse-Regular';
+    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/CinderelaPersonalUse-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Claiborne';
+    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/Claiborne.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Corporative-Regular';
+    src: url('https://yesvite.cmexpertiseinfotech.in/assets/fonts/new/Corporative-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
 
 :root {
     --AbrilFatface-Regular: "AbrilFatface-Regular";
@@ -181,6 +269,7 @@
     --AgencyFB-Reg: "AgencyFB-Reg";
 
 }
+
 /* @font-face {
     font-family: 'JosefinSans-Regular';
     src: url('http://18.190.81.164/assets/fonts/JosefinSans-Regular.woff2') format('woff2');
@@ -198,7 +287,7 @@
 }
 
 @font-face {
-    font-family: 'AdleryPro-Regular';
+    font-family: 'Corporative-Regular-Regular';
     src: url('http://18.190.81.164/assets/fonts/AdleryPro-Regular.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
