@@ -887,6 +887,62 @@
                     </label>
 
                 </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="AlternateGotNo2D" id="AlternateGotNo2DButton">
+                    <label class="form-check-label font-change AlternateGotNo2D" for="AlternateGotNo2DButton">
+                        AlternateGotNo2D
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="CaveatBrush-Regular" id="CaveatBrush-RegularButton">
+                    <label class="form-check-label font-change CaveatBrush-Regular" for="CaveatBrush-RegularButton">
+                        CaveatBrush-Regular
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="ModernLove-Regular" id="ModernLove-RegularButton">
+                    <label class="form-check-label font-change ModernLove-Regular" for="ModernLove-RegularButton">
+                        ModernLove-Regular
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="NeueHaasGroteskText-Bold" id="NeueHaasGroteskText-BoldButton">
+                    <label class="form-check-label font-change NeueHaasGroteskText-Bold" for="NeueHaasGroteskText-BoldButton">
+                        NeueHaasGroteskText-Bold
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="NeueHaasGroteskText-Medium" id="NeueHaasGroteskText-MediumButton">
+                    <label class="form-check-label font-change NeueHaasGroteskText-Medium" for="NeueHaasGroteskText-MediumButton">
+                        NeueHaasGroteskText-Medium
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="NeueHaasGroteskText-Regular" id="NeueHaasGroteskText-RegularButton">
+                    <label class="form-check-label font-change NeueHaasGroteskText-Regular" for="NeueHaasGroteskText-RegularButton">
+                        NeueHaasGroteskText-Regular
+                    </label>
+
+                </div>
+                <div class="font-selector form-check">
+
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="PTSansPro-Regular" id="PTSansPro-RegularButton">
+                    <label class="form-check-label font-change PTSansPro-Regular" for="PTSansPro-RegularButton">
+                        PTSansPro-Regular
+                    </label>
+
+                </div>
             </div>
 
             <!-- <div class="recommendation-fonts-wrp common-font-wrp">
