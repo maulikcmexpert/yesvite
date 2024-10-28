@@ -84,7 +84,7 @@
 .edit-imag-main-content-wrp {
     overflow: hidden;
     display: flex;
-    align-items: center;
+    align-items: start;
 }
 
 .edit-image-main-wrp {
@@ -545,7 +545,7 @@
 }
 
 .edit-imag-main-content-wrp .choose-design-sidebar {
-    height: calc(100vh - 21vh) !important;
+    height: calc(100vh - 0vh) !important;
     padding: 0px !important;
     margin: 0px !important;
     scrollbar-color: none !important;
@@ -1219,6 +1219,9 @@ table.dataTable thead>tr>th:nth-child(1).sorting_desc:before{
     .image-edit-inner-img img{
         width: 100% !important;
         height: 100% !important;
+    }
+    .edit-images-button-wrp{
+        margin-bottom: 100px;
     }
 }
 
