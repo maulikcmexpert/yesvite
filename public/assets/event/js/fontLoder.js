@@ -54,6 +54,18 @@ WebFontConfig = {
             "CarmenSans-ExtraBold",
             "CarmenSans-Regular",
             "ChristmasCookies",
+            "AdleryPro",
+            "ArialRoundedMTBold",
+            "BebasNeue-Regular",
+            "Calibri",
+            "CCHammerHorror-BoldItalic",
+            "CCThatsAllFolks-Bold",
+            "Changa-ExtraBold",
+            "ChristmasMint-Regular",
+            "CinderelaPersonalUse-Regular",
+            "Claiborne",
+            "Corporative-Regular"
+
         ],
         urls: [
             "https://yesvite.cmexpertiseinfotech.in/assets/event/css/stylesheet.css",
