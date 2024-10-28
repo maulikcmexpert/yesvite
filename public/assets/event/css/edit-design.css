@@ -852,6 +852,9 @@
     .edit-images-button-inner button h6 {
         font-size: 18px;
     }
+    .edit-images-button-wrp{
+        max-width: 600px;
+    }
 }
 
 @media only screen and (min-width: 1800px) and (max-width: 1999px) {
@@ -876,6 +879,9 @@
     .edit-images-button-inner button span svg{
         width: 100% !important;
         height: 100% !important;
+    }
+    .edit-images-button-wrp{
+        max-width: 500px;
     }
 }
 
