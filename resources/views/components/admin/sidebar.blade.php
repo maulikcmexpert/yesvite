@@ -1,6 +1,5 @@
 @php
   $check_role=Session::get('admin');
-  dd($check_role['role'])
 @endphp
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <!-- Brand Logo -->
