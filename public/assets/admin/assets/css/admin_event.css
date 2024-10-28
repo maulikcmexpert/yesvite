@@ -1239,8 +1239,8 @@ table.dataTable thead>tr>th:nth-child(1).sorting_desc:before{
         max-width: 800px;
     }
     .edit-images-button-inner button span {
-        width: 50px;
-        height: 50px;
+        width: 40px;
+        height: 40px;
     }
 
     .edit-images-button-inner button span svg{
