@@ -379,72 +379,88 @@
         }
 
 
-        $(document).on("click", ".delete_template", function(event) {
+        // $(document).on("click", ".delete_template", function(event) {
 
-            var userURL = $(this).data("url");
+        //     var userURL = $(this).data("url");
 
-            event.preventDefault();
+        //     event.preventDefault();
 
-            swal({
+        //     swal({
 
-                title: `Are you sure you want to delete this record?`,
+        //         title: `Are you sure you want to delete this record?`,
 
-                text: "If you delete this, it will be gone forever.",
+        //         text: "If you delete this, it will be gone forever.",
 
+        //         icon: "warning",
+
+        //         buttons: true,
+
+        //         dangerMode: true,
+
+        //     }).then((willDelete) => {
+
+        //         if (willDelete) {
+
+        //             $.ajax({
+
+        //                 headers: {
+
+        //                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+
+        //                         "content"
+
+        //                     ),
+
+        //                 },
+
+        //                 method: "DELETE",
+
+        //                 url: userURL,
+
+        //                 dataType: "json",
+
+        //                 success: function(output) {
+
+        //                     if (output == true) {
+
+        //                         table.ajax.reload();
+
+        //                         toastr.success("template Deleted successfully !");
+
+        //                     } else {
+
+        //                         toastr.error("template don't Deleted !");
+
+        //                     }
+
+        //                 },
+
+        //             });
+
+        //         }
+
+        //     });
+
+        // });
+
+
+        $(document).on('click', '.delete_template', function() {
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
                 icon: "warning",
-
-                buttons: true,
-
-                dangerMode: true,
-
-            }).then((willDelete) => {
-
-                if (willDelete) {
-
-                    $.ajax({
-
-                        headers: {
-
-                            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
-
-                                "content"
-
-                            ),
-
-                        },
-
-                        method: "DELETE",
-
-                        url: userURL,
-
-                        dataType: "json",
-
-                        success: function(output) {
-
-                            if (output == true) {
-
-                                table.ajax.reload();
-
-                                toastr.success("template Deleted successfully !");
-
-                            } else {
-
-                                toastr.error("template don't Deleted !");
-
-                            }
-
-                        },
-
-                    });
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // alert();
+                    $('#delete_template_form').submit();
 
                 }
-
             });
-
-        });
-
-
-
+        })
 
 
     });
