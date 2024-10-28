@@ -8,6 +8,8 @@ use App\Models\User;
 use App\Models\Event;
 use App\Models\EventInvitedUser;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Session;
+
 
 class Dashboard extends Controller
 {
@@ -41,8 +43,8 @@ class Dashboard extends Controller
         $title = 'Dashboard';
         $page = 'admin.dashboard.dashboard';
 
-
-        $lastWeekStart = Carbon::now()->subWeek()->startOfWeek();
+        // dd(Session::get('admin'));
+                $lastWeekStart = Carbon::now()->subWeek()->startOfWeek();
         $lastWeekEnd = Carbon::now()->subWeek()->endOfWeek();
 
         $normalUsersLastWeek = User::where('account_type', '0')
