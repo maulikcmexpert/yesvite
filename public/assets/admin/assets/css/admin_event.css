@@ -545,7 +545,7 @@
 }
 
 .edit-imag-main-content-wrp .choose-design-sidebar {
-    height: calc(100vh - 0vh) !important;
+    height: calc(100vh - 21vh) !important;
     padding: 0px !important;
     margin: 0px !important;
     scrollbar-color: none !important;
@@ -1209,10 +1209,29 @@ table.dataTable thead>tr>th:nth-child(1).sorting_desc:before{
 .ck-editor__editable {
     height: 350px !important;
 }
-@media only screen and (min-width: 1800px) and (max-width: 3000px) {
+@media only screen and (min-width: 2000px) and (max-width: 3000px) {
     .image-edit-inner-img {
         width: 690px;
         height: 980px;
+        /* margin: 0px auto; */
+    }
+
+    .image-edit-inner-img img{
+        width: 100% !important;
+        height: 100% !important;
+    }
+    .edit-images-button-wrp{
+        margin-bottom: 100px;
+    }
+    .edit-imag-main-content-wrp .choose-design-sidebar {
+        height: calc(100vh - 0vh) !important;
+    }
+}
+
+@media only screen and (min-width: 1800px) and (max-width: 1999px) {
+    .image-edit-inner-img {
+        width: 590px;
+        height: 880px;
         /* margin: 0px auto; */
     }
 
