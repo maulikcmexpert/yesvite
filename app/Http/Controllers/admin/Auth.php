@@ -82,6 +82,7 @@ class Auth extends Controller
 
         $checkOtp = Admin::where(['id' => $id, 'otp' => $request->verification_otp])->first();
 
+        // $role=$checkOtp->role;
         if ($checkOtp != null) {
 
             $sessionArray = ['id' => $checkOtp->id, 'name' => $checkOtp->name];

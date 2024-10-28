@@ -41,7 +41,7 @@ class Dashboard extends Controller
         $title = 'Dashboard';
         $page = 'admin.dashboard.dashboard';
 
-
+        dd($_SESSION);
         $lastWeekStart = Carbon::now()->subWeek()->startOfWeek();
         $lastWeekEnd = Carbon::now()->subWeek()->endOfWeek();
 
