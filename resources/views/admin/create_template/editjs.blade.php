@@ -1,5 +1,22 @@
 <script type="text/javascript">
-    
+    $(document).on('click', '.delete_template', function() {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // alert();
+                $('#delete_template_form').submit();
+
+            }
+        });
+    });
+
     document.addEventListener('DOMContentLoaded', function() {
         // Initialize fabric canvas
         var canvas = new fabric.Canvas('imageEditor1', {
@@ -2607,24 +2624,5 @@
         toggleSidebar();
         var id = $(this).data('id');
         $('#sidebar').removeClass(id);
-    })
-
-
-    $(document).on('click', '.delete_template', function() {
-        Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // alert();
-                $('#delete_template_form').submit();
-
-            }
-        });
     })
 </script>
