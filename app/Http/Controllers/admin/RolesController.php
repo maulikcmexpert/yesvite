@@ -4,6 +4,13 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
+use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Hash;
+
+use App\Models\Admin;
 
 class RolesController extends Controller
 {
@@ -41,7 +48,22 @@ class RolesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        DB::beginTransaction();
+
+        dd($request->name);
+
+        $password = $request->name . '123';  // Generate temporary password
+
+        $storerole = new Admin;
+        $storerole->name=$request->name;
+        $storerole->email=$request->email;
+        $storerole->password= Hash::make($password);;
+        $storerole->is_admin='0';
+        
+        $storerole->save();
+
+
+        DB::commit();
     }
 
     /**

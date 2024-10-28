@@ -26,7 +26,7 @@
             </div>
 
 
-            <form method="post" action="{{ route('event_type.store')}}" id="eventTypeForm">
+            <form method="post" action="{{ route('roles.store')}}" id="eventTypeForm">
 
                 @csrf
 
