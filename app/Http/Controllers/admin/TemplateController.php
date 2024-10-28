@@ -252,12 +252,12 @@ class TemplateController extends Controller
             DB::commit();
 
             return redirect()->route('create_template.index')
-                ->with('success', 'create_template deleted successfully');
+                ->with('success', 'Template deleted successfully');
         } catch (QueryException $e) {
 
             DB::rollBack();
             return redirect()->route('create_template.index')
-                ->with('danger', 'create_template not deleted');
+                ->with('danger', 'Template not deleted');
         }
     }
     public function View_template($id)
