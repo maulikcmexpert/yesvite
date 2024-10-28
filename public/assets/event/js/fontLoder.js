@@ -80,7 +80,25 @@ WebFontConfig = {
             "Semringah",
             "SittingDuckDEMO-Regular",
             "SundayBest-Regular",
-            "YippieYeah-Sans"
+            "YippieYeah-Sans",
+            "AdleryPro-Regular",
+            "Arboria-Bold",
+            "Arboria-Book",
+            "Arboria-Light",
+            "Arboria-Medium",
+            "Cabin-Regular",
+            "Candara",
+            "Candara-Bold",
+            "CrimsonText-Bold",
+            "CrimsonText-BoldItalic",
+            "CrimsonText-Italic",
+            "CrimsonText-Regular",
+            "CrimsonText-SemiBold",
+            "QTMerryScript",
+            "Rockwell-Condensed",
+            "Rockwell-CondensedBold",
+            "Tangerine-Bold",
+            "Tangerine-Regular"
 
 
         ],
