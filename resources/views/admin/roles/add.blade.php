@@ -35,9 +35,34 @@
                     <div class="col-lg-4">
                         <div class="form-group">
 
-                            <label for="exampleInputEmail1">Event Type</label>
+                            <label for="exampleInputEmail1">Name</label>
 
-                            <input type="text" class="form-control event_type" name="event_type[]" placeholder="Enter Event Type" value="{{ old('event_type.*')}}">
+                            <input type="text" class="form-control" name="name" placeholder="Enter Name" value="{{ old('event_type.*')}}">
+
+                            <span class="text-danger">{{ $errors->first('event_type.*') }}</span>
+
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-4">
+                        <div class="form-group">
+
+                            <label for="exampleInputEmail1">Email</label>
+
+                            <input type="text" class="form-control" name="email" placeholder="Enter Email" value="{{ old('event_type.*')}}">
+
+                            <span class="text-danger">{{ $errors->first('event_type.*') }}</span>
+
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="form-group">
+
+                            <label for="exampleInputEmail1">Password</label>
+
+                            <input type="password" class="form-control" name="password" placeholder="Enter Password" value="{{ old('event_type.*')}}">
 
                             <span class="text-danger">{{ $errors->first('event_type.*') }}</span>
 
