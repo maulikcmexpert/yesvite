@@ -99,7 +99,14 @@ WebFontConfig = {
             "Rockwell-Condensed",
             "Rockwell-CondensedBold",
             "Tangerine-Bold",
-            "Tangerine-Regular"
+            "Tangerine-Regular",
+            "AlternateGotNo2D",
+            "CaveatBrush-Regular",
+            "ModernLove-Regular",
+            "NeueHaasGroteskText-Bold",
+            "NeueHaasGroteskText-Medium",
+            "NeueHaasGroteskText-Regular",
+            "PTSansPro-Regular"
 
 
         ],
