@@ -1357,225 +1357,212 @@ class EventController extends Controller
     public function editEvent(Request $request)
     {
         $userid = Auth::guard('web')->user()->id;
-
-        try {
-            $getEventData = Event::with('event_schedule')->where('id', $request->event_id)->first();
-            if ($getEventData != null) {
-                $eventDetail['id'] = (!empty($getEventData->id) && $getEventData->id != NULL) ? $getEventData->id : "";
-                $eventDetail['event_type_id'] = (!empty($getEventData->event_type_id) && $getEventData->event_type_id != NULL) ? $getEventData->event_type_id : "";
-                $eventDetail['event_name'] = (!empty($getEventData->event_name) && $getEventData->event_name != NULL) ? $getEventData->event_name : "";
-                $eventDetail['hosted_by'] = (!empty($getEventData->hosted_by) && $getEventData->hosted_by != NULL) ? $getEventData->hosted_by : "";
-                $eventDetail['start_date'] = (!empty($getEventData->start_date) && $getEventData->start_date != NULL) ? $getEventData->start_date : "";
-                $eventDetail['end_date'] = (!empty($getEventData->end_date) && $getEventData->end_date != NULL) ? $getEventData->end_date : "";
-                $eventDetail['rsvp_by_date_set'] =  $getEventData->rsvp_by_date_set;
-                $eventDetail['rsvp_by_date'] = (!empty($getEventData->rsvp_by_date) && $getEventData->rsvp_by_date != NULL) ? $getEventData->rsvp_by_date : "";
-                $eventDetail['rsvp_start_time'] = (!empty($getEventData->rsvp_start_time) && $getEventData->rsvp_start_time != NULL) ? $getEventData->rsvp_start_time : "";
-                $eventDetail['rsvp_start_timezone'] = (!empty($getEventData->rsvp_start_timezone) && $getEventData->rsvp_start_timezone != NULL) ? $getEventData->rsvp_start_timezone : "";
-                $eventDetail['rsvp_end_time_set'] = $getEventData->rsvp_end_time_set;
-                $eventDetail['rsvp_end_time'] = (!empty($getEventData->rsvp_end_time) && $getEventData->rsvp_end_time != NULL) ? $getEventData->rsvp_end_time : "";
-                $eventDetail['rsvp_end_timezone'] = (!empty($getEventData->rsvp_end_timezone) & $getEventData->rsvp_end_timezone != NULL) ? $getEventData->rsvp_end_timezone : "";
-                $eventDetail['event_location_name'] = (!empty($getEventData->event_location_name) & $getEventData->event_location_name != NULL) ? $getEventData->event_location_name : "";
-                $eventDetail['latitude'] = (!empty($getEventData->latitude) & $getEventData->latitude != NULL) ? $getEventData->latitude : "";
-                $eventDetail['longitude'] = (!empty($getEventData->longitude) & $getEventData->longitude != NULL) ? $getEventData->longitude : "";
-                $eventDetail['address_1'] = (!empty($getEventData->address_1) & $getEventData->address_1 != NULL) ? $getEventData->address_1 : "";
-                $eventDetail['address_2'] = (!empty($getEventData->address_2) & $getEventData->address_2 != NULL) ? $getEventData->address_2 : "";
-                $eventDetail['state'] = (!empty($getEventData->state) & $getEventData->state != NULL) ? $getEventData->state : "";
-                $eventDetail['zip_code'] = (!empty($getEventData->zip_code) & $getEventData->zip_code != NULL) ? $getEventData->zip_code : "";
-                $eventDetail['city'] = (!empty($getEventData->city) & $getEventData->city != NULL) ? $getEventData->city : "";
-                $eventDetail['message_to_guests'] = (!empty($getEventData->message_to_guests) & $getEventData->message_to_guests != NULL) ? $getEventData->message_to_guests : "";
-                $eventDetail['is_draft_save'] = $getEventData->is_draft_save;
-                $eventDetail['step'] = ($getEventData->step != NULL) ? $getEventData->step : 0;
-                $eventDetail['subscription_plan_name'] = ($getEventData->subscription_plan_name != NULL) ? $getEventData->subscription_plan_name : "";
-                $eventDetail['subscription_invite_count'] = ($getEventData->subscription_invite_count != NULL) ? $getEventData->subscription_invite_count : 0;
-                $eventDetail['event_images'] = [];
-                $getEventImages = EventImage::where('event_id', $getEventData->id)->get();
-                if (!empty($getEventImages)) {
-                    foreach ($getEventImages as $imgVal) {
-                        $eventImageData['id'] = $imgVal->id;
-                        $eventImageData['image'] = asset('public/storage/event_images/' . $imgVal->image);
-                        $eventDetail['event_images'][] = $eventImageData;
-                    }
+        $getEventData = Event::with('event_schedule')->where('id', $request->event_id)->first();
+        if ($getEventData != null) {
+            $eventDetail['id'] = (!empty($getEventData->id) && $getEventData->id != NULL) ? $getEventData->id : "";
+            $eventDetail['event_type_id'] = (!empty($getEventData->event_type_id) && $getEventData->event_type_id != NULL) ? $getEventData->event_type_id : "";
+            $eventDetail['event_name'] = (!empty($getEventData->event_name) && $getEventData->event_name != NULL) ? $getEventData->event_name : "";
+            $eventDetail['hosted_by'] = (!empty($getEventData->hosted_by) && $getEventData->hosted_by != NULL) ? $getEventData->hosted_by : "";
+            $eventDetail['start_date'] = (!empty($getEventData->start_date) && $getEventData->start_date != NULL) ? $getEventData->start_date : "";
+            $eventDetail['end_date'] = (!empty($getEventData->end_date) && $getEventData->end_date != NULL) ? $getEventData->end_date : "";
+            $eventDetail['rsvp_by_date_set'] =  $getEventData->rsvp_by_date_set;
+            $eventDetail['rsvp_by_date'] = (!empty($getEventData->rsvp_by_date) && $getEventData->rsvp_by_date != NULL) ? $getEventData->rsvp_by_date : "";
+            $eventDetail['rsvp_start_time'] = (!empty($getEventData->rsvp_start_time) && $getEventData->rsvp_start_time != NULL) ? $getEventData->rsvp_start_time : "";
+            $eventDetail['rsvp_start_timezone'] = (!empty($getEventData->rsvp_start_timezone) && $getEventData->rsvp_start_timezone != NULL) ? $getEventData->rsvp_start_timezone : "";
+            $eventDetail['rsvp_end_time_set'] = $getEventData->rsvp_end_time_set;
+            $eventDetail['rsvp_end_time'] = (!empty($getEventData->rsvp_end_time) && $getEventData->rsvp_end_time != NULL) ? $getEventData->rsvp_end_time : "";
+            $eventDetail['rsvp_end_timezone'] = (!empty($getEventData->rsvp_end_timezone) && $getEventData->rsvp_end_timezone != NULL) ? $getEventData->rsvp_end_timezone : "";
+            $eventDetail['event_location_name'] = (!empty($getEventData->event_location_name) && $getEventData->event_location_name != NULL) ? $getEventData->event_location_name : "";
+            $eventDetail['latitude'] = (!empty($getEventData->latitude) && $getEventData->latitude != NULL) ? $getEventData->latitude : "";
+            $eventDetail['longitude'] = (!empty($getEventData->longitude) && $getEventData->longitude != NULL) ? $getEventData->longitude : "";
+            $eventDetail['address_1'] = (!empty($getEventData->address_1) && $getEventData->address_1 != NULL) ? $getEventData->address_1 : "";
+            $eventDetail['address_2'] = (!empty($getEventData->address_2) && $getEventData->address_2 != NULL) ? $getEventData->address_2 : "";
+            $eventDetail['state'] = (!empty($getEventData->state) && $getEventData->state != NULL) ? $getEventData->state : "";
+            $eventDetail['zip_code'] = (!empty($getEventData->zip_code) && $getEventData->zip_code != NULL) ? $getEventData->zip_code : "";
+            $eventDetail['city'] = (!empty($getEventData->city) && $getEventData->city != NULL) ? $getEventData->city : "";
+            $eventDetail['message_to_guests'] = (!empty($getEventData->message_to_guests) && $getEventData->message_to_guests != NULL) ? $getEventData->message_to_guests : "";
+            $eventDetail['is_draft_save'] = $getEventData->is_draft_save;
+            $eventDetail['step'] = ($getEventData->step != NULL) ? $getEventData->step : 0;
+            $eventDetail['subscription_plan_name'] = ($getEventData->subscription_plan_name != NULL) ? $getEventData->subscription_plan_name : "";
+            $eventDetail['subscription_invite_count'] = ($getEventData->subscription_invite_count != NULL) ? $getEventData->subscription_invite_count : 0;
+            $eventDetail['event_images'] = [];
+            $getEventImages = EventImage::where('event_id', $getEventData->id)->get();
+            if (!empty($getEventImages)) {
+                foreach ($getEventImages as $imgVal) {
+                    $eventImageData['id'] = $imgVal->id;
+                    $eventImageData['image'] = asset('public/storage/event_images/' . $imgVal->image);
+                    $eventDetail['event_images'][] = $eventImageData;
                 }
-                $eventDetail['invited_user_id'] = [];
-                $eventDetail['co_host_list'] = [];
-                $eventDetail['invited_guests'] = [];
-                $eventDetail['guest_co_host_list'] = [];
-
-                $invitedUser = EventInvitedUser::with('user')->where(['event_id' => $getEventData->id])->get();
-
-                if (!empty($invitedUser)) {
-                    foreach ($invitedUser as $guestVal) {
-                        if ($guestVal->is_co_host == '0') {
-                            if ($guestVal->user->is_user_phone_contact == '1') {
-                                $invitedGuestDetail['first_name'] = (!empty($guestVal->user->firstname) && $guestVal->user->firstname != NULL) ? $guestVal->user->firstname : "";
-                                $invitedGuestDetail['last_name'] = (!empty($guestVal->user->lastname) && $guestVal->user->lastname != NULL) ? $guestVal->user->lastname : "";
-                                $invitedGuestDetail['email'] = (!empty($guestVal->user->email) && $guestVal->user->email != NULL) ? $guestVal->user->email : "";
-                                $invitedGuestDetail['country_code'] = (!empty($guestVal->user->country_code) && $guestVal->user->country_code != NULL) ? strval($guestVal->user->country_code) : "";
-                                $invitedGuestDetail['phone_number'] = (!empty($guestVal->user->phone_number) && $guestVal->user->phone_number != NULL) ? $guestVal->user->phone_number : "";
-                                $invitedGuestDetail['prefer_by'] = (!empty($guestVal->prefer_by) && $guestVal->prefer_by != NULL) ? $guestVal->prefer_by : "";
-                                $eventDetail['invited_guests'][] = $invitedGuestDetail;
-                            } elseif ($guestVal->user->is_user_phone_contact == '0') {
-                                $invitedUserIdDetail['user_id'] = (!empty($guestVal->user_id) && $guestVal->user_id != NULL) ? $guestVal->user_id : "";
-                                $invitedUserIdDetail['prefer_by'] = (!empty($guestVal->prefer_by) && $guestVal->prefer_by != NULL) ? $guestVal->prefer_by : "";
-                                $eventDetail['invited_user_id'][] = $invitedUserIdDetail;
-                            }
-                        } else if ($guestVal->is_co_host == '1') {
-                            if ($guestVal->user->is_user_phone_contact == '1') {
-                                $guestCoHostDetail['first_name'] = (!empty($guestVal->user->firstname) && $guestVal->user->firstname != NULL) ? $guestVal->user->firstname : "";
-                                $guestCoHostDetail['last_name'] = (!empty($guestVal->user->lastname) && $guestVal->user->lastname != NULL) ? $guestVal->user->lastname : "";
-                                $guestCoHostDetail['email'] = (!empty($guestVal->user->email) && $guestVal->user->email != NULL) ? $guestVal->user->email : "";
-                                $guestCoHostDetail['country_code'] = (!empty($guestVal->user->country_code) && $guestVal->user->country_code != NULL) ? strval($guestVal->user->country_code) : "";
-                                $guestCoHostDetail['phone_number'] = (!empty($guestVal->user->phone_number) && $guestVal->user->phone_number != NULL) ? $guestVal->user->phone_number : "";
-                                $guestCoHostDetail['prefer_by'] = (!empty($guestVal->prefer_by) && $guestVal->prefer_by != NULL) ? $guestVal->prefer_by : "";
-                                $eventDetail['guest_co_host_list'][] = $guestCoHostDetail;
-                            } elseif ($guestVal->user->is_user_phone_contact == '0') {
-                                $coHostDetail['user_id'] = (!empty($guestVal->user_id) && $guestVal->user_id != NULL) ? $guestVal->user_id : "";
-                                $coHostDetail['prefer_by'] = (!empty($guestVal->prefer_by) && $guestVal->prefer_by != NULL) ? $guestVal->prefer_by : "";
-                                $eventDetail['co_host_list'][] = $coHostDetail;
-                            }
-                        }
-                    }
-                    $eventDetail['remaining_invite_count'] = ($getEventData->subscription_invite_count != NULL) ? ($getEventData->subscription_invite_count - (count($eventDetail['invited_user_id']) + count($eventDetail['invited_guests']))) : 0;
-                }
-                // $eventDetail['events_schedule_list'] = [];
-                $eventDetail['events_schedule_list'] = null;
-                if ($getEventData->event_schedule->isNotEmpty()) {
-
-                    $eventDetail['events_schedule_list'] = new stdClass();
-                    if ($getEventData->event_schedule->first()->type == '1') {
-
-
-                        $eventDetail['events_schedule_list']->start_time =  ($getEventData->event_schedule->first()->start_time != NULL) ? $getEventData->event_schedule->first()->start_time : "";
-
-                        $eventDetail['events_schedule_list']->event_start_date = ($getEventData->event_schedule->first()->event_date != null) ? $getEventData->event_schedule->first()->event_date : "";
-                    }
-
-                    $eventDetail['events_schedule_list']->data = [];
-                    foreach ($getEventData->event_schedule as $eventsScheduleVal) {
-                        if ($eventsScheduleVal->type == '2') {
-
-                            $eventscheduleData["id"] = $eventsScheduleVal->id;
-                            $eventscheduleData["activity_title"] = $eventsScheduleVal->activity_title;
-                            $eventscheduleData["start_time"] = ($eventsScheduleVal->start_time !== null) ? $eventsScheduleVal->start_time : "";
-                            $eventscheduleData["end_time"] = ($eventsScheduleVal->end_time !== null) ? $eventsScheduleVal->end_time : "";
-                            $eventscheduleData['event_date'] = ($eventsScheduleVal->event_date != null) ? $eventsScheduleVal->event_date : "";
-                            $eventscheduleData["type"] = $eventsScheduleVal->type;
-                            $eventDetail['events_schedule_list']->data[] = $eventscheduleData;
-                        }
-                    }
-                    if ($getEventData->event_schedule->last()->type == '3') {
-
-                        $eventDetail['events_schedule_list']->end_time =  ($getEventData->event_schedule->last()->end_time !== null) ? $getEventData->event_schedule->last()->end_time : "";
-                        $eventDetail['events_schedule_list']->event_end_date = ($getEventData->event_schedule->last()->event_date != null) ? $getEventData->event_schedule->last()->event_date : "";
-                    }
-                }
-                $eventDetail['greeting_card_list'] = [];
-                if (!empty($getEventData->greeting_card_id) && $getEventData->greeting_card_id != NULL) {
-
-
-                    $greeting_card_ids = array_map('intval', explode(',', $getEventData->greeting_card_id));
-
-                    $eventDetail['greeting_card_list'] = $greeting_card_ids;
-                }
-
-                $eventDetail['gift_registry_list'] = [];
-                if (!empty($getEventData->gift_registry_id) && $getEventData->gift_registry_id != NULL) {
-
-                    $gift_registry_ids = array_map('intval', explode(',', $getEventData->gift_registry_id));
-
-                    $eventDetail['gift_registry_list'] = $gift_registry_ids;
-                }
-
-                $eventDetail['event_setting'] = "";
-
-                $eventSettings = EventSetting::where('event_id', $getEventData->id)->first();
-
-                if ($eventSettings != NULL) {
-                    $eventDetail['event_setting'] = [
-
-                        "allow_for_1_more" => $eventSettings->allow_for_1_more,
-                        "allow_limit" => strval($eventSettings->allow_limit),
-                        "adult_only_party" => $eventSettings->adult_only_party,
-
-                        "rsvp_by_date" => $getEventData->rsvp_by_date,
-                        "thank_you_cards" => $eventSettings->thank_you_cards,
-                        "add_co_host" => $eventSettings->add_co_host,
-                        "gift_registry" => $eventSettings->gift_registry,
-                        "events_schedule" => $eventSettings->events_schedule,
-                        "event_wall" => $eventSettings->event_wall,
-                        "guest_list_visible_to_guests" => $eventSettings->guest_list_visible_to_guests,
-                        "podluck" => $eventSettings->podluck,
-                        "rsvp_updates" => $eventSettings->rsvp_updates,
-                        "event_wall_post" => $eventSettings->event_wall_post,
-                        "send_event_dater_reminders" => $eventSettings->send_event_dater_reminders,
-                        "request_event_photos_from_guests" => $eventSettings->request_event_photos_from_guests
-                    ];
-                }
-
-
-                $eventDetail['podluck_category_list'] = [];
-
-
-
-                $eventpotluckData =  EventPotluckCategory::with(['users', 'event_potluck_category_item' => function ($query) {
-                    $query->with(['users', 'user_potluck_items' => function ($subquery) {
-                        $subquery->with('users')->sum('quantity');
-                    }]);
-                }])->withCount('event_potluck_category_item')->where('event_id', $getEventData->id)->get();
-
-                if (!empty($eventpotluckData)) {
-                    $potluckCategoryData = [];
-                    $potluckDetail['total_potluck_item'] = EventPotluckCategoryItem::where('event_id', $getEventData->id)->count();
-
-                    foreach ($eventpotluckData as $value) {
-                        $potluckCategory['id'] = $value->id;
-                        $potluckCategory['category'] = $value->category;
-                        $potluckCategory['created_by'] = $value->users->firstname . ' ' . $value->users->lastname;
-                        $potluckCategory['quantity'] = $value->quantity;
-                        $potluckCategory['items'] = [];
-                        if (!empty($value->event_potluck_category_item) || $value->event_potluck_category_item != null) {
-
-                            foreach ($value->event_potluck_category_item as $itemValue) {
-
-                                $potluckItem['id'] =  $itemValue->id;
-                                $potluckItem['description'] =  $itemValue->description;
-                                $potluckItem['is_host'] = ($itemValue->user_id == $userid) ? 1 : 0;
-                                $potluckItem['requested_by'] =  $itemValue->users->firstname . ' ' . $itemValue->users->lastname;
-                                $potluckItem['quantity'] =  $itemValue->quantity;
-                                $potluckItem['self_bring_item'] =  $itemValue->self_bring_item;
-                                $spoken_for = UserPotluckItem::where('event_potluck_item_id', $itemValue->id)->sum('quantity');
-                                $potluckItem['spoken_quantity'] =  $spoken_for;
-                                $potluckItem['item_carry_users'] = [];
-
-                                foreach ($itemValue->user_potluck_items as $itemcarryUser) {
-                                    $userPotluckItem['id'] = $itemcarryUser->id;
-                                    $userPotluckItem['user_id'] = $itemcarryUser->user_id;
-                                    $userPotluckItem['is_host'] = ($itemcarryUser->user_id == $userid) ? 1 : 0;
-                                    $userPotluckItem['profile'] =  empty($itemcarryUser->users->profile) ?  "" : asset('public/storage/profile/' . $itemcarryUser->users->profile);
-                                    $userPotluckItem['first_name'] = $itemcarryUser->users->firstname;
-                                    $userPotluckItem['quantity'] = (!empty($itemcarryUser->quantity) || $itemcarryUser->quantity != NULL) ? $itemcarryUser->quantity : "0";
-                                    $userPotluckItem['last_name'] = $itemcarryUser->users->lastname;
-                                    $potluckItem['item_carry_users'][] = $userPotluckItem;
-                                }
-                                $potluckCategory['items'][] = $potluckItem;
-                            }
-                        }
-                        $eventDetail['podluck_category_list'][] = $potluckCategory;
-                    }
-                }
-
-
-
-                return response()->json(['status' => 1, 'message' => "Event data", "data" => $eventDetail]);
-            } else {
-                return response()->json(['status' => 0, 'message' => "data not found"]);
             }
-        } catch (QueryException $e) {
-            return response()->json(['status' => 0, 'message' => 'Db error']);
-        } catch (Exception $e) {
+            $eventDetail['invited_user_id'] = [];
+            $eventDetail['co_host_list'] = [];
+            $eventDetail['invited_guests'] = [];
+            $eventDetail['guest_co_host_list'] = [];
 
-            return response()->json(['status' => 0, 'message' => 'Something went wrong']);
+            $invitedUser = EventInvitedUser::with('user')->where(['event_id' => $getEventData->id])->get();
+
+            if (!empty($invitedUser)) {
+                foreach ($invitedUser as $guestVal) {
+                    if ($guestVal->is_co_host == '0') {
+                        if ($guestVal->user->is_user_phone_contact == '1') {
+                            $invitedGuestDetail['first_name'] = (!empty($guestVal->user->firstname) && $guestVal->user->firstname != NULL) ? $guestVal->user->firstname : "";
+                            $invitedGuestDetail['last_name'] = (!empty($guestVal->user->lastname) && $guestVal->user->lastname != NULL) ? $guestVal->user->lastname : "";
+                            $invitedGuestDetail['email'] = (!empty($guestVal->user->email) && $guestVal->user->email != NULL) ? $guestVal->user->email : "";
+                            $invitedGuestDetail['country_code'] = (!empty($guestVal->user->country_code) && $guestVal->user->country_code != NULL) ? strval($guestVal->user->country_code) : "";
+                            $invitedGuestDetail['phone_number'] = (!empty($guestVal->user->phone_number) && $guestVal->user->phone_number != NULL) ? $guestVal->user->phone_number : "";
+                            $invitedGuestDetail['prefer_by'] = (!empty($guestVal->prefer_by) && $guestVal->prefer_by != NULL) ? $guestVal->prefer_by : "";
+                            $eventDetail['invited_guests'][] = $invitedGuestDetail;
+                        } elseif ($guestVal->user->is_user_phone_contact == '0') {
+                            $invitedUserIdDetail['user_id'] = (!empty($guestVal->user_id) && $guestVal->user_id != NULL) ? $guestVal->user_id : "";
+                            $invitedUserIdDetail['prefer_by'] = (!empty($guestVal->prefer_by) && $guestVal->prefer_by != NULL) ? $guestVal->prefer_by : "";
+                            $eventDetail['invited_user_id'][] = $invitedUserIdDetail;
+                        }
+                    } else if ($guestVal->is_co_host == '1') {
+                        if ($guestVal->user->is_user_phone_contact == '1') {
+                            $guestCoHostDetail['first_name'] = (!empty($guestVal->user->firstname) && $guestVal->user->firstname != NULL) ? $guestVal->user->firstname : "";
+                            $guestCoHostDetail['last_name'] = (!empty($guestVal->user->lastname) && $guestVal->user->lastname != NULL) ? $guestVal->user->lastname : "";
+                            $guestCoHostDetail['email'] = (!empty($guestVal->user->email) && $guestVal->user->email != NULL) ? $guestVal->user->email : "";
+                            $guestCoHostDetail['country_code'] = (!empty($guestVal->user->country_code) && $guestVal->user->country_code != NULL) ? strval($guestVal->user->country_code) : "";
+                            $guestCoHostDetail['phone_number'] = (!empty($guestVal->user->phone_number) && $guestVal->user->phone_number != NULL) ? $guestVal->user->phone_number : "";
+                            $guestCoHostDetail['prefer_by'] = (!empty($guestVal->prefer_by) && $guestVal->prefer_by != NULL) ? $guestVal->prefer_by : "";
+                            $eventDetail['guest_co_host_list'][] = $guestCoHostDetail;
+                        } elseif ($guestVal->user->is_user_phone_contact == '0') {
+                            $coHostDetail['user_id'] = (!empty($guestVal->user_id) && $guestVal->user_id != NULL) ? $guestVal->user_id : "";
+                            $coHostDetail['prefer_by'] = (!empty($guestVal->prefer_by) && $guestVal->prefer_by != NULL) ? $guestVal->prefer_by : "";
+                            $eventDetail['co_host_list'][] = $coHostDetail;
+                        }
+                    }
+                }
+                $eventDetail['remaining_invite_count'] = ($getEventData->subscription_invite_count != NULL) ? ($getEventData->subscription_invite_count - (count($eventDetail['invited_user_id']) + count($eventDetail['invited_guests']))) : 0;
+            }
+            // $eventDetail['events_schedule_list'] = [];
+            $eventDetail['events_schedule_list'] = null;
+            if ($getEventData->event_schedule->isNotEmpty()) {
+
+                $eventDetail['events_schedule_list'] = new stdClass();
+                if ($getEventData->event_schedule->first()->type == '1') {
+
+
+                    $eventDetail['events_schedule_list']->start_time =  ($getEventData->event_schedule->first()->start_time != NULL) ? $getEventData->event_schedule->first()->start_time : "";
+
+                    $eventDetail['events_schedule_list']->event_start_date = ($getEventData->event_schedule->first()->event_date != null) ? $getEventData->event_schedule->first()->event_date : "";
+                }
+
+                $eventDetail['events_schedule_list']->data = [];
+                foreach ($getEventData->event_schedule as $eventsScheduleVal) {
+                    if ($eventsScheduleVal->type == '2') {
+
+                        $eventscheduleData["id"] = $eventsScheduleVal->id;
+                        $eventscheduleData["activity_title"] = $eventsScheduleVal->activity_title;
+                        $eventscheduleData["start_time"] = ($eventsScheduleVal->start_time !== null) ? $eventsScheduleVal->start_time : "";
+                        $eventscheduleData["end_time"] = ($eventsScheduleVal->end_time !== null) ? $eventsScheduleVal->end_time : "";
+                        $eventscheduleData['event_date'] = ($eventsScheduleVal->event_date != null) ? $eventsScheduleVal->event_date : "";
+                        $eventscheduleData["type"] = $eventsScheduleVal->type;
+                        $eventDetail['events_schedule_list']->data[] = $eventscheduleData;
+                    }
+                }
+                if ($getEventData->event_schedule->last()->type == '3') {
+
+                    $eventDetail['events_schedule_list']->end_time =  ($getEventData->event_schedule->last()->end_time !== null) ? $getEventData->event_schedule->last()->end_time : "";
+                    $eventDetail['events_schedule_list']->event_end_date = ($getEventData->event_schedule->last()->event_date != null) ? $getEventData->event_schedule->last()->event_date : "";
+                }
+            }
+            $eventDetail['greeting_card_list'] = [];
+            if (!empty($getEventData->greeting_card_id) && $getEventData->greeting_card_id != NULL) {
+
+
+                $greeting_card_ids = array_map('intval', explode(',', $getEventData->greeting_card_id));
+
+                $eventDetail['greeting_card_list'] = $greeting_card_ids;
+            }
+
+            $eventDetail['gift_registry_list'] = [];
+            if (!empty($getEventData->gift_registry_id) && $getEventData->gift_registry_id != NULL) {
+
+                $gift_registry_ids = array_map('intval', explode(',', $getEventData->gift_registry_id));
+
+                $eventDetail['gift_registry_list'] = $gift_registry_ids;
+            }
+
+            $eventDetail['event_setting'] = "";
+
+            $eventSettings = EventSetting::where('event_id', $getEventData->id)->first();
+
+            if ($eventSettings != NULL) {
+                $eventDetail['event_setting'] = [
+
+                    "allow_for_1_more" => $eventSettings->allow_for_1_more,
+                    "allow_limit" => strval($eventSettings->allow_limit),
+                    "adult_only_party" => $eventSettings->adult_only_party,
+
+                    "rsvp_by_date" => $getEventData->rsvp_by_date,
+                    "thank_you_cards" => $eventSettings->thank_you_cards,
+                    "add_co_host" => $eventSettings->add_co_host,
+                    "gift_registry" => $eventSettings->gift_registry,
+                    "events_schedule" => $eventSettings->events_schedule,
+                    "event_wall" => $eventSettings->event_wall,
+                    "guest_list_visible_to_guests" => $eventSettings->guest_list_visible_to_guests,
+                    "podluck" => $eventSettings->podluck,
+                    "rsvp_updates" => $eventSettings->rsvp_updates,
+                    "event_wall_post" => $eventSettings->event_wall_post,
+                    "send_event_dater_reminders" => $eventSettings->send_event_dater_reminders,
+                    "request_event_photos_from_guests" => $eventSettings->request_event_photos_from_guests
+                ];
+            }
+
+
+            $eventDetail['podluck_category_list'] = [];
+
+
+
+            $eventpotluckData =  EventPotluckCategory::with(['users', 'event_potluck_category_item' => function ($query) {
+                $query->with(['users', 'user_potluck_items' => function ($subquery) {
+                    $subquery->with('users')->sum('quantity');
+                }]);
+            }])->withCount('event_potluck_category_item')->where('event_id', $getEventData->id)->get();
+
+            if (!empty($eventpotluckData)) {
+                $potluckCategoryData = [];
+                $potluckDetail['total_potluck_item'] = EventPotluckCategoryItem::where('event_id', $getEventData->id)->count();
+
+                foreach ($eventpotluckData as $value) {
+                    $potluckCategory['id'] = $value->id;
+                    $potluckCategory['category'] = $value->category;
+                    $potluckCategory['created_by'] = $value->users->firstname . ' ' . $value->users->lastname;
+                    $potluckCategory['quantity'] = $value->quantity;
+                    $potluckCategory['items'] = [];
+                    if (!empty($value->event_potluck_category_item) || $value->event_potluck_category_item != null) {
+
+                        foreach ($value->event_potluck_category_item as $itemValue) {
+
+                            $potluckItem['id'] =  $itemValue->id;
+                            $potluckItem['description'] =  $itemValue->description;
+                            $potluckItem['is_host'] = ($itemValue->user_id == $userid) ? 1 : 0;
+                            $potluckItem['requested_by'] =  $itemValue->users->firstname . ' ' . $itemValue->users->lastname;
+                            $potluckItem['quantity'] =  $itemValue->quantity;
+                            $potluckItem['self_bring_item'] =  $itemValue->self_bring_item;
+                            $spoken_for = UserPotluckItem::where('event_potluck_item_id', $itemValue->id)->sum('quantity');
+                            $potluckItem['spoken_quantity'] =  $spoken_for;
+                            $potluckItem['item_carry_users'] = [];
+
+                            foreach ($itemValue->user_potluck_items as $itemcarryUser) {
+                                $userPotluckItem['id'] = $itemcarryUser->id;
+                                $userPotluckItem['user_id'] = $itemcarryUser->user_id;
+                                $userPotluckItem['is_host'] = ($itemcarryUser->user_id == $userid) ? 1 : 0;
+                                $userPotluckItem['profile'] =  empty($itemcarryUser->users->profile) ?  "" : asset('public/storage/profile/' . $itemcarryUser->users->profile);
+                                $userPotluckItem['first_name'] = $itemcarryUser->users->firstname;
+                                $userPotluckItem['quantity'] = (!empty($itemcarryUser->quantity) || $itemcarryUser->quantity != NULL) ? $itemcarryUser->quantity : "0";
+                                $userPotluckItem['last_name'] = $itemcarryUser->users->lastname;
+                                $potluckItem['item_carry_users'][] = $userPotluckItem;
+                            }
+                            $potluckCategory['items'][] = $potluckItem;
+                        }
+                    }
+                    $eventDetail['podluck_category_list'][] = $potluckCategory;
+                }
+            }
         }
+        
     }
 
 
