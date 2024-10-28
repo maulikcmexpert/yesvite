@@ -50,14 +50,12 @@ class RolesController extends Controller
     {
         DB::beginTransaction();
 
-        dd($request->name);
 
-        $password = $request->name . '123';  // Generate temporary password
 
         $storerole = new Admin;
         $storerole->name=$request->name;
         $storerole->email=$request->email;
-        $storerole->password= Hash::make($password);;
+        $storerole->password= Hash::make($request->password);;
         $storerole->is_admin='0';
         
         $storerole->save();
