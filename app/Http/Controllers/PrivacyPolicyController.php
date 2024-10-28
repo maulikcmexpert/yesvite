@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\LegalAgreement;
+use App\Models\Privacy;
 use Illuminate\Http\Request;
 
 class PrivacyPolicyController extends Controller
@@ -15,9 +16,14 @@ class PrivacyPolicyController extends Controller
 
         $title = 'Privacy Policy';
         $page = 'front.privacy_policy';
+
+        $privacy = Privacy::where('type', 0)->first();
+
+
         return view('layout', compact(
             'title',
             'page',
+            'privacy'
         ));
     }
 
