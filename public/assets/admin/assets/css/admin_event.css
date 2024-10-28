@@ -1238,6 +1238,13 @@ table.dataTable thead>tr>th:nth-child(1).sorting_desc:before{
         width: 100%;
         max-width: 600px;
     }
+    .edit-images-button-inner button span {
+        width: 30px;
+        height: 30px;
+    }
+    .edit-images-button-inner button h6 {
+        font-size: 14px;
+    }
 }
 
 @media only screen and (min-width: 1800px) and (max-width: 1999px) {
@@ -1257,6 +1264,13 @@ table.dataTable thead>tr>th:nth-child(1).sorting_desc:before{
     .edit-images-button-wrp {
         width: 100%;
         max-width: 600px;
+    }
+    .edit-images-button-inner button span {
+        width: 30px;
+        height: 30px;
+    }
+    .edit-images-button-inner button h6 {
+        font-size: 14px;
     }
 }
 
