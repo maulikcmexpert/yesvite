@@ -369,6 +369,7 @@
           </ul>
         </li>
         <ul>
+          @endif
     </nav>
     <!-- /.sidebar-menu -->
   </div>
