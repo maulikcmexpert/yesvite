@@ -48,6 +48,8 @@ class RolesController extends Controller
      */
     public function store(Request $request)
     {
+        try {
+
         DB::beginTransaction();
 
 
@@ -62,6 +64,15 @@ class RolesController extends Controller
 
 
         DB::commit();
+        return redirect()->route('roles.index')->with('success', 'Role Added successfully !');
+    } catch (QueryException $e) {
+
+        DB::rollBack();
+
+        Log::error('Database query error' . $e->getMessage());
+
+        return redirect()->route('roles.create')->with('danger', 'Role not added' . $e->getMessage());
+    }
     }
 
     /**
