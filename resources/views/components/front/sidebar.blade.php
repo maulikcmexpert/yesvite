@@ -84,7 +84,7 @@
                 </a>
             </li>
             <li>
-                <a href="#" class="d-flex align-items-center">
+                <a href="#" class="d-flex align-items-center create-event-btn">
                     <span>
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M6.66602 4.7915C6.32435 4.7915 6.04102 4.50817 6.04102 4.1665V1.6665C6.04102 1.32484 6.32435 1.0415 6.66602 1.0415C7.00768 1.0415 7.29102 1.32484 7.29102 1.6665V4.1665C7.29102 4.50817 7.00768 4.7915 6.66602 4.7915Z" fill="#64748B" />
