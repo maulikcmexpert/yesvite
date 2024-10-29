@@ -1,16 +1,28 @@
 var base_url = $("#base_url").val();
 $(document).ready(function () {
     // Add a custom validation method for the password
+    // $.validator.addMethod(
+    //     "passwordCheck",
+    //     function (value, element) {
+    //         return (
+    //             this.optional(element) ||
+    //             /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(value)
+    //         );
+    //     },
+    //     "At least 8 characters with a combination of letters and numbers"
+    // );
+
     $.validator.addMethod(
         "passwordCheck",
         function (value, element) {
             return (
                 this.optional(element) ||
-                /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(value)
+                /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/.test(value)
             );
         },
-        "At least 8 characters with a combination of letters and numbers"
+        "At least 6 characters with a combination of letters, numbers, and a special character"
     );
+    
 
     $("#register").validate({
         rules: {
@@ -154,8 +166,9 @@ $(document).ready(function () {
             },
             businesspassword: {
                 required: "Please enter your password",
-                passwordCheck:
-                    "At least 8 characters with a combination of letters and numbers",
+                // passwordCheck:
+                //     "At least 8 characters with a combination of letters and numbers",
+                    passwordCheck:"At least 6 characters with a combination of letters, numbers, and a special character",
             },
             businesscpassword: {
                 required: "Please confirm your password",
