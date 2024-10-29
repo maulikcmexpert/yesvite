@@ -80,7 +80,7 @@ $(document).ready(function () {
             password: {
                 required: "Please enter your password",
                 passwordCheck:
-                    "At least 8 characters with a combination of letters and numbers",
+                    "At least 6 characters with a combination of letters, numbers, and a special character",
             },
             cpassword: {
                 required: "Please confirm your password",
@@ -168,7 +168,8 @@ $(document).ready(function () {
                 required: "Please enter your password",
                 // passwordCheck:
                 //     "At least 8 characters with a combination of letters and numbers",
-                    passwordCheck:"At least 6 characters with a combination of letters, numbers, and a special character",
+                    passwordCheck:
+                    "At least 8 characters with a combination of letters, numbers, and a special character",
             },
             businesscpassword: {
                 required: "Please confirm your password",
