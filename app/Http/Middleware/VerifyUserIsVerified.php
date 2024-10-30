@@ -30,7 +30,10 @@ class VerifyUserIsVerified
 
             $user = Auth::user();
             $currentSessionId = Session::getId();
-            dd($user);
+            echo "<pre>";
+            print_r($currentSessionId);
+            print_r($user);
+            die;
             if ($user->current_session_id && $user->current_session_id !== $currentSessionId) {
                 Auth::guard('web')->logout();
                 return redirect('/')->with('error', 'You have been logged out because your account was logged in from another device.');
