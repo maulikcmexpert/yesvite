@@ -225,7 +225,7 @@ $(document).ready(function () {
                     },
                 });
 
-                $("#profileIm").attr("src", base64);
+                // $("#profileIm").attr("src", base64);
             })
             .catch(function (error) {
                 console.error("Croppie error:", error);
