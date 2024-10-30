@@ -66,7 +66,7 @@ class AuthController extends Controller
 
         $client = new Client();
         $client->setAuthConfig(storage_path('app/google-play-service-account.json'));
-        $client->setRedirectUri('https://yesvite.com/google/callback');
+        $client->setRedirectUri('https://yesvite.cmexpertiseinfotech.in/google/callback');
 
         $client->authenticate($request->input('code'));
         $accessToken = $client->getAccessToken();
