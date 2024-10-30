@@ -5,6 +5,7 @@
                 <h3>Detail Pages</h3>
                 <div class="row">
                     <input type="hidden" value="{{ $user->id }}" id="user_id">
+                    <input type="hidden" value="{{ (isset($eventDetail['id']))?$eventDetail['id']?''}}" id="event_id">
                     <div class="col-12 mb-4">
                         <div class="input-form">
                             <select class="form-select" id="event-type" onchange="clearError(this)">
