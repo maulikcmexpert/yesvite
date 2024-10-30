@@ -33,12 +33,12 @@ class SocialController extends Controller
      */
     public function handleProviderCallback($provider)
     {
-        dd(1);
         try {
-
+            
             $user = Socialite::driver($provider)->user();
         } catch (Exception $e) {
-            return redirect('/login');
+            dd($e);
+            // return redirect('/login');
         }
 
         // Check if the user already exists
