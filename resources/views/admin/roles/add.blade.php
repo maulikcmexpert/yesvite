@@ -21,7 +21,7 @@
 
             <div class="card-header">
 
-                <h3 class="card-title">Add Tole</h3>
+                <h3 class="card-title">Add Role</h3>
 
             </div>
 
