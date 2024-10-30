@@ -11,7 +11,13 @@
                             <select class="form-select" id="event-type" onchange="clearError(this)">
                                 <option value="">Select Event Type</option>
                                 @foreach ($event_type as $type)
-                                <option value="{{ $type->id }}">{{ $type->event_type }}</option>
+                                @php
+                                    $event_type_id = '';
+                                    if(isset($eventDetail['event_type_id']) && $eventDetail['event_type_id']!=''){
+                                        $event_type_id = $eventDetail['event_type_id']; 
+                                    }
+                                @endphp
+                                <option value="{{ $type->id }}" {{($event_type_id == $type->id)?'selected':''}}>{{ $type->event_type }}</option>
                                 @endforeach
                             </select>
                             <label for="select-label"
