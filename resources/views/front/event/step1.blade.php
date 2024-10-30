@@ -223,11 +223,11 @@
                     <div class="col-12 mb-4">
                         <div class="input-form location-icon">
                             <input type="text" class="form-control inputText" id="address1" name="address1"
-                                oninput="clearError(this)" required="">
+                                oninput="clearError(this)" value="{{(isset($eventDetail['address_1']) && $eventDetail['address_1'] != '')?$eventDetail['address_1']:''}}" required="">
                             <label for="address1" class="form-label input-field floating-label">Address 1
                                     *</label>
-                                <input type="hidden" id="latitude" />
-                                <input type="hidden" id="longitude" />
+                                <input type="hidden" id="latitude" value="{{(isset($eventDetail['latitude']) && $eventDetail['latitude'] !='')?$eventDetail['latitude']:''}}"/>
+                                <input type="hidden" id="longitude" value="{{(isset($eventDetail['longitude']) && $eventDetail['longitude'] !='')?$eventDetail['longitude']:''}}" />
                                 <div id="map"></div>
                                 
                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
@@ -245,7 +245,7 @@
                     <div class="col-12 mb-4">
                         <div class="input-form location-icon">
                             <input type="text" class="form-control inputText" id="address2" name="address2"
-                                required="">
+                                required="" value="{{(isset($eventDetail['address_2']) && $eventDetail['address_2'] != '')?$eventDetail['address_2']:''}}">
                             <label for="address2" class="form-label input-field floating-label">Address
                                 2</label>
                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
@@ -261,13 +261,8 @@
                     </div>
                     <div class="col-12 mb-4">
                         <div class="input-form">
-                            {{-- <select class="form-select">
-                                <option value="1">New York</option>
-                                <option value="2">New York</option>
-                                <option value="3">New York</option>
-                            </select> --}}
                             <input type="text" class="form-control inputText" id="city" name="city"
-                                oninput="clearError(this)" required="">
+                                oninput="clearError(this)" required="" value="{{(isset($eventDetail['city']) && $eventDetail['city'] != '')?$eventDetail['city']:''}}">
                             <label for="select-label"
                                 class="form-label input-field floating-label select-label">City
                                 *</label>
@@ -277,13 +272,8 @@
                     </div>
                     <div class="col-6 mb-4">
                         <div class="input-form">
-                            {{-- <select class="form-select">
-                                <option value="1">NY</option>
-                                <option value="2">NY</option>
-                                <option value="3">NY</option>
-                            </select> --}}
                             <input type="text" class="form-control inputText" id="state" name="state"
-                                oninput="clearError(this)" required="">
+                                oninput="clearError(this)" value="{{(isset($eventDetail['state']) && $eventDetail['state'] != '')?$eventDetail['state']:''}}" required="">
 
                             <label for="select-label"
                                 class="form-label input-field floating-label select-label">State
@@ -294,13 +284,8 @@
                     </div>
                     <div class="col-6 mb-4">
                         <div class="input-form">
-                            {{-- <select class="form-select">
-                                <option value="1">8479</option>
-                                <option value="2">8479</option>
-                                <option value="3">8479</option>
-                            </select> --}}
                             <input type="number" class="form-control inputText" id="zipcode" name="zipcode"
-                                oninput="clearError(this)" required="">
+                                oninput="clearError(this)" required="" value="{{(isset($eventDetail['zip_code']) && $eventDetail['zip_code'] != '')?$eventDetail['zip_code']:''}}">
 
                             <label for="select-label"
                                 class="form-label input-field floating-label select-label">Zip
@@ -311,7 +296,7 @@
                     </div>
                     <div class="col-lg-12">
                         <div class="input-form">
-                            <textarea name="message_to_guests" class="form-control inputText" id="message_to_guests"></textarea>
+                            <textarea name="message_to_guests" class="form-control inputText" id="message_to_guests">value="{{(isset($eventDetail['message_to_guests']) && $eventDetail['message_to_guests'] != '')?$eventDetail['message_to_guests']:''}}"</textarea>
                             <label for="code"
                                 class="form-label input-field floating-label textarea-label">Message
                                 to Guests</label>
