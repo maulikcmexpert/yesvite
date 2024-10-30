@@ -109,7 +109,7 @@
                             <div class="toggle-button-cover ">
                                 <div class="button-cover">
                                     <div class="button r" id="button-1">
-                                        <input type="checkbox" class="checkbox" id="schedule">
+                                        <input type="checkbox" class="checkbox" id="schedule" checked>
                                         <div class="knobs"></div>
                                         <div class="layer"></div>
                                     </div>
