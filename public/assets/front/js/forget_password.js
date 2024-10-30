@@ -85,7 +85,7 @@ $("#change_forgetpassword").validate({
         if (element.attr("name") === "new_password") {
             error.appendTo(".passworderr"); // Place error in .passworderr label for new_password
         } else if (element.attr("name") === "conform_password") {
-            error.appendTo("#conform_password-error"); // Add another error label ID for conform_password if needed
+            error.appendTo(".c_passworderr"); // Add another error label ID for conform_password if needed
         }
     }
 });
