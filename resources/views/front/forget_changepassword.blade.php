@@ -57,6 +57,7 @@
                             <label id="password-error" class="passworderr error" for="password"></label>
                         </div> --}}
                     </div>
+                    <label id="new_password-error" class="error" for="new_password"></label>
                 </div>
                 <div class="input-form">
                     <input type="password" class="form-control inputText" id="conform_password" name="conform_password"
