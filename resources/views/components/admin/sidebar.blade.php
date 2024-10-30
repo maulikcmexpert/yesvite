@@ -307,7 +307,7 @@
         </li> -->
 
       </ul>
-      @elseif ($check_role['role']=="designer")
+      @elseif ($check_role['role']=="designer"||$check_role['role']=="Designer")
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <li class="nav-item">
           <p class="asideTitle">Design Template</p>
