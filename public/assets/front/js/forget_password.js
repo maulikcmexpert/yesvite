@@ -86,10 +86,10 @@ $("#change_forgetpassword").validate({
             $("#new_password-error").text(error.text()); // Only append error text to .passworderr
 
         }
-        //  else if (element.attr("name") === "conform_password") {
-        //     $(".c_passworderr").text(error.text()); // Adjust for conform_password error if needed
+         else if (element.attr("name") === "conform_password") {
+            $("#cpassword-error").text(error.text()); // Adjust for conform_password error if needed
  
-        // }
+        }
     }
 });
 

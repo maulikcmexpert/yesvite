@@ -60,15 +60,20 @@
                     <label id="new_password-error" class="error" for="new_password"></label>
                 </div>
                 <div class="input-form">
-                    <input type="password" class="form-control inputText" id="conform_password" name="conform_password"
-                        autocomplete="new-password">
-                    <label for="password" class="form-label input-field floating-label">conform-Password <span
-                            class="required">*</span></label>
-                    <span toggle="#password-field"
-                        class="fa-regular fa-fw fa-eye-slash field-icon toggle-password"></span>
-                    <div class="label-error">
-                        <label id="password-error" class="c_passworderr error" for="password"></label>
+                    <div class="position-relative">
+
+                        <input type="password" class="form-control inputText" id="conform_password" name="conform_password"
+                            autocomplete="new-password">
+                        <label for="password" class="form-label input-field floating-label">conform-Password <span
+                                class="required">*</span></label>
+                        <span toggle="#password-field"
+                            class="fa-regular fa-fw fa-eye-slash field-icon toggle-password"></span>
+                        {{-- <div class="label-error">
+                            <label id="password-error" class="c_passworderr error" for="password"></label>
+                        </div> --}}
                     </div>
+                    <label id="cpassword-error" class="error" for="password"></label>
+
                 </div>
                 <div class="form-check mb-3">
                 </div>
