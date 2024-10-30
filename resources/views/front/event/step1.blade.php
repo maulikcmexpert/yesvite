@@ -129,7 +129,7 @@
                             <div class="toggle-button-cover ">
                                 <div class="button-cover">
                                     <div class="button r" id="button-1">
-                                        <input type="checkbox" class="checkbox" id="end_time">
+                                        <input type="checkbox" class="checkbox" id="end_time" {{(isset($eventDetail['rsvp_end_time_set']) && $eventDetail['rsvp_end_time_set']=='1')?'checked':''}}>
                                         <div class="knobs"></div>
                                         <div class="layer"></div>
                                     </div>
@@ -199,8 +199,8 @@
                     </div>
                     <div class="col-12 mb-4">
                         <div class="input-form">
-                            <input type="text" class="form-control inputText" id="description"
-                                name="description" required="">
+                            <input type="text" class="form-control inputText" id="description" name="description" 
+                                value="{{(isset($eventDetail['event_location_name']) && $eventDetail['event_location_name'] != '')?$eventDetail['event_location_name']:''}}">
                             <label for="description" class="form-label input-field floating-label">Event
                                 Location
                                 Description</label>
