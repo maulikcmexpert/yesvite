@@ -111,7 +111,7 @@ WebFontConfig = {
 
         ],
         urls: [
-            "http://18.190.81.164/assets/event/css/stylesheet_live.css",
+            "https://yesvite.com/assets/event/css/stylesheet_live.css",
         ],
     },
     loading: function () {
