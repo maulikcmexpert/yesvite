@@ -75,11 +75,7 @@ class SocialController extends Controller
 
             $user->current_session_id = Session::getId();
             $user->save();
-            echo "<pre>";
-            print_r(Session::getId());
-            print_r($user);
-            die;
-            dd($user);
+           
             $sessionArray = [
                 'id' => encrypt($user->id),
                 'first_name' => $user->firstname,
