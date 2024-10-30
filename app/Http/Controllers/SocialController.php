@@ -37,6 +37,7 @@ class SocialController extends Controller
 
             $user = Socialite::driver($provider)->user();
         } catch (Exception $e) {
+            dd($e);
             return redirect('/login');
         }
 
