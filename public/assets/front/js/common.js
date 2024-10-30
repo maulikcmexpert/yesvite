@@ -114,9 +114,10 @@ $(".toggle-password").click(function () {
     $(this).toggleClass("fa-eye-slash fa-eye");
     var input = $(this).prev().prev();
     if (input.attr("type") == "password") {
-        alert();
+        console.log('text'+input);
         input.attr("type", "text");
     } else {
+        console.log('pass'+input);
         input.attr("type", "password");
     }
 });
