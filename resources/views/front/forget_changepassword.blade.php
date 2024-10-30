@@ -61,7 +61,6 @@
                 </div>
                 <div class="input-form">
                     <div class="position-relative">
-
                         <input type="password" class="form-control inputText" id="conform_password" name="conform_password"
                             autocomplete="new-password">
                         <label for="password" class="form-label input-field floating-label">conform-Password <span

@@ -81,16 +81,16 @@ $("#change_forgetpassword").validate({
     },
     },
 
-    errorPlacement: function(error, element) {
-        if (element.attr("name") === "new_password") {
-            $("#new_password-error").text(error.text()); // Only append error text to .passworderr
+    // errorPlacement: function(error, element) {
+    //     if (element.attr("name") === "new_password") {
+    //         $("#new_password-error").text(error.text()); // Only append error text to .passworderr
 
-        }
-         else if (element.attr("name") === "conform_password") {
-            $("#cpassword-error").text(error.text()); // Adjust for conform_password error if needed
+    //     }
+    //      else if (element.attr("name") === "conform_password") {
+    //         $("#cpassword-error").text(error.text()); // Adjust for conform_password error if needed
  
-        }
-    }
+    //     }
+    // }
 });
 
 document.addEventListener("DOMContentLoaded", function () {
