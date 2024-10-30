@@ -126,10 +126,7 @@ $('html').mouseover(function() {
 
 $(".toggle-password").click(function () {
     $(this).toggleClass("fa-eye-slash fa-eye");
-    
-    // Find the closest password input
-    var input = $(this).siblings('input[type="password"], input[type="text"]');
-    
+        var input = $(this).siblings('input[type="password"], input[type="text"]');
     if (input.attr("type") === "password") {
         input.attr("type", "text");
     } else {
