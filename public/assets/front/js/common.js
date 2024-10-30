@@ -113,6 +113,8 @@ $('html').mouseover(function() {
 $(".toggle-password").click(function () {
     $(this).toggleClass("fa-eye-slash fa-eye");
     var input = $(this).prev().prev().html();
+    console.log(input);
+    
     if (input.attr("type") == "password") {
         console.log('text'+input);
         input.attr("type", "text");
