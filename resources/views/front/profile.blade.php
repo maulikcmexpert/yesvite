@@ -271,7 +271,7 @@
 
 
 
-                <div class="{{ $progress }}" data-id="{{$draft->id}}">
+                <div class="{{ $progress }}" data-id="{{encrypt($draft->id)}}">
                     <div class="d-flex align-items-center">
                         <span class="me-3">
                             <svg width="44" height="44" viewBox="0 0 44 44" fill="none"
