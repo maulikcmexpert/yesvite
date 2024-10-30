@@ -69,7 +69,7 @@ use Illuminate\Support\Facades\File;
 
 class EventController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         // dd(config('app.url'));
         // dd(Session::get('shape_image'));
@@ -110,7 +110,6 @@ class EventController extends Controller
         if(isset($request->id) && $request->id != ''){
             $title = 'Edit Event';
                 $getEventData = Event::with('event_schedule')->where('id',decrypt($request->id))->first();
-                
                 if ($getEventData != null) {
                     $eventDetail['id'] = (!empty($getEventData->id) && $getEventData->id != NULL) ? $getEventData->id : "";
                     $eventDetail['event_type_id'] = (!empty($getEventData->event_type_id) && $getEventData->event_type_id != NULL) ? $getEventData->event_type_id : "";
@@ -318,7 +317,6 @@ class EventController extends Controller
         }else{
             $title = 'Create Event';
         }
-
         dd($eventDetail);
         $page = 'front.create_event';
        
