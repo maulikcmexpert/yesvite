@@ -71,8 +71,7 @@
                             <label id="password-error" class="c_passworderr error" for="password"></label>
                         </div> --}}
                     </div>
-                    <label id="cpassword-error" class="error" for="password"></label>
-
+                    <label id="conform_password-error" class="error" for="conform_password"></label>
                 </div>
                 <div class="form-check mb-3">
                 </div>
