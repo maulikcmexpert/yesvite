@@ -28,8 +28,8 @@
                     </div>
                     <div class="col-12 mb-4">
                         <div class="input-form">
-                            <input type="text" class="form-control inputText" id="event-name"
-                                name="event-name" oninput="clearError(this)" required="">
+                            <input type="text" class="form-control inputText" value="{{(isset($eventDetail['event_name']) && $eventDetail['event_name'] != NULL)?$eventDetail['event_name']:''}}" 
+                                id="event-name" name="event-name" oninput="clearError(this)" required="">
                             <label for="event-name" class="form-label input-field floating-label">Event Name
                                 *</label>
                                 
