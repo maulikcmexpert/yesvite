@@ -317,7 +317,7 @@ class EventController extends Controller
         }else{
             $title = 'Create Event';
         }
-        dd($eventDetail);
+        // dd($eventDetail);
         $page = 'front.create_event';
        
 
@@ -374,7 +374,8 @@ class EventController extends Controller
             'yesvite_user',
             'groups',
             'textData',
-            'design_category'
+            'design_category',
+            'eventDetail'
         ));
     }
 

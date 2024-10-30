@@ -5,13 +5,19 @@
                 <h3>Detail Pages</h3>
                 <div class="row">
                     <input type="hidden" value="{{ $user->id }}" id="user_id">
-                    <input type="hidden" value="{{ (isset($eventDetail['id']))?$eventDetail['id']?''}}" id="event_id">
+                    <input type="hidden" value="{{(isset($eventDetail['id']) && $eventDetail['id'] != NULL)?$eventDetail['id']:''}}" id="event_id">
                     <div class="col-12 mb-4">
                         <div class="input-form">
                             <select class="form-select" id="event-type" onchange="clearError(this)">
                                 <option value="">Select Event Type</option>
                                 @foreach ($event_type as $type)
-                                <option value="{{ $type->id }}">{{ $type->event_type }}</option>
+                                @php
+                                    $event_type_id = '';
+                                    if(isset($eventDetail['event_type_id']) && $eventDetail['event_type_id']!=''){
+                                        $event_type_id = $eventDetail['event_type_id']; 
+                                    }
+                                @endphp
+                                <option value="{{ $type->id }}" {{($event_type_id == $type->id)?'selected':''}}>{{ $type->event_type }}</option>
                                 @endforeach
                             </select>
                             <label for="select-label"
@@ -22,19 +28,17 @@
                     </div>
                     <div class="col-12 mb-4">
                         <div class="input-form">
-                            <input type="text" class="form-control inputText" id="event-name"
-                                name="event-name" oninput="clearError(this)" required="">
+                            <input type="text" class="form-control inputText" value="{{(isset($eventDetail['event_name']) && $eventDetail['event_name'] != NULL)?$eventDetail['event_name']:''}}" 
+                                id="event-name" name="event-name" oninput="clearError(this)" required="">
                             <label for="event-name" class="form-label input-field floating-label">Event Name
                                 *</label>
-                                
                         </div>
                             <lable for="event-name" id="event-name-error" class="error"></lable>
                     </div>
                     <div class="col-12 mb-4">
                         <div class="input-form">
-                            <input type="text" class="form-control inputText" id="hostedby" name="hostedby"
-                                oninput="clearError(this)" required=""
-                                value="{{ $user->firstname }} {{ $user->lastname }}">
+                            <input type="text" class="form-control inputText" id="hostedby" name="hostedby" oninput="clearError(this)" required=""
+                                value="{{(isset($eventDetail['hosted_by']) && $eventDetail['hosted_by'] != NULL)?$eventDetail['hosted_by']:$user->firstname.' '.$user->lastname}}">
                             <label for="hostedby" class="form-label input-field floating-label">Hosted By
                                 *</label>
                         </div>
