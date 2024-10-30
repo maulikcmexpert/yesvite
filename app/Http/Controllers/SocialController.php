@@ -36,9 +36,9 @@ class SocialController extends Controller
         try {
             
             $user = Socialite::driver($provider)->user();
+            dd($user);
         } catch (Exception $e) {
-            dd($e);
-            // return redirect('/login');
+            return redirect('/login');
         }
 
         // Check if the user already exists
