@@ -69,7 +69,7 @@ use Illuminate\Support\Facades\File;
 
 class EventController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         // dd(config('app.url'));
         // dd(Session::get('shape_image'));
