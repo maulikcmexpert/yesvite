@@ -60,6 +60,7 @@ class SocialController extends Controller
     {
         $user = User::where('email', $socialUser->getEmail())->first();
         Session::regenerate();
+        dd($user);
         if ($user) {
             if ($provider == 'google') {
 
