@@ -304,3 +304,7 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.getElementById('birth_date').max = new Date().toISOString().split("T")[0];
+</script>
