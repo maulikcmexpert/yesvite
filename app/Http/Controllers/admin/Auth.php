@@ -88,13 +88,15 @@ class Auth extends Controller
             $sessionArray = ['id' => $checkOtp->id, 'name' => $checkOtp->name,'role'=>$checkOtp->role];
             Session::put(['admin' => $sessionArray]);
             if (Session::has('admin') && $checkOtp->role=="admin") {
-                return Redirect::to(URL::to('/admin/dashboard'))->with('success', 'Loggedin successfully!');;
+                return Redirect::to(URL::to('/admin/dashboard'))->with('success', 'Loggedin successfully!');
+            }else{
+
+                return Redirect::to(URL::to('/admin/create_template'))->with('success', 'Loggedin successfully!');
             }
 
-            if (Session::has('admin') && $checkOtp->role=="designer") {
+            // if (Session::has('admin') && $checkOtp->role=="designer") {
 
-                return Redirect::to(URL::to('/admin/create_template'))->with('success', 'Loggedin successfully!');;
-            }
+            // }
 
             return Redirect::to(URL::to('/admin'))->with('error', 'Invalid credentials!');;
         }
