@@ -4,7 +4,7 @@
         rules: {
             name: {
                 required: true,
-                minlength: 3
+                // minlength: 3
             },
             email: {
                 required: true,
@@ -16,13 +16,13 @@
             },
             role: {
                 required: true,
-                minlength: 3
+                // minlength: 3
             }
         },
         messages: {
             name: {
                 required: "Please enter a name",
-                minlength: "Name must be at least 3 characters long"
+                // minlength: "Name must be at least 3 characters long"
             },
             email: {
                 required: "Please enter an email",
@@ -34,7 +34,7 @@
             },
             role: {
                 required: "Please enter a role",
-                minlength: "Role must be at least 3 characters long"
+                // minlength: "Role must be at least 3 characters long"
             }
         },
         submitHandler: function (form) {
