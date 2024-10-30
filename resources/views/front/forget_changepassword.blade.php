@@ -53,7 +53,7 @@
                     <span toggle="#password-field"
                         class="fa-regular fa-fw fa-eye-slash field-icon toggle-password"></span>
                     <div class="label-error">
-                        <label id="password-error" class="error" for="password"></label>
+                        <label id="password-error" class="passworderr error" for="password"></label>
                     </div>
                 </div>
                 <div class="input-form">

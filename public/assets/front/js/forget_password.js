@@ -80,6 +80,14 @@ $("#change_forgetpassword").validate({
             "At least 6 characters with a combination of letters, numbers, and a special character",
     },
     },
+
+    errorPlacement: function(error, element) {
+        if (element.attr("name") === "new_password") {
+            error.appendTo(".passworderr"); // Place error in .passworderr label for new_password
+        } else if (element.attr("name") === "conform_password") {
+            error.appendTo("#conform_password-error"); // Add another error label ID for conform_password if needed
+        }
+    }
 });
 
 document.addEventListener("DOMContentLoaded", function () {
