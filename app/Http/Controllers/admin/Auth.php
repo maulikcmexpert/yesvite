@@ -89,9 +89,11 @@ class Auth extends Controller
             Session::put(['admin' => $sessionArray]);
             if (Session::has('admin') && $checkOtp->role=="admin") {
                 return Redirect::to(URL::to('/admin/dashboard'))->with('success', 'Loggedin successfully!');;
+            }else{
+                
             }
 
-            if (Session::has('admin') && $checkOtp->role=="designer") {
+            if (Session::has('admin') && ($checkOtp->role=="designer"||$checkOtp->role=="Designer")) {
 
                 return Redirect::to(URL::to('/admin/create_template'))->with('success', 'Loggedin successfully!');;
             }

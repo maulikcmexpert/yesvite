@@ -63,6 +63,7 @@ class RolesController extends Controller
         $storerole->email=$request->email;
         $storerole->password= Hash::make($request->password);;
         $storerole->is_admin='0';
+        $storerole->role=$request->role;
         
         $storerole->save();
 

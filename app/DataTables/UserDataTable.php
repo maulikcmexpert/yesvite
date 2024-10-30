@@ -208,7 +208,7 @@ class UserDataTable extends DataTable
                 $query->where('endDate', '>=', $dateOnly);
             }])
                 ->where('account_type', '0')
-                ->orderBy('id', 'desc');
+                ->orderBy($column,  $direction);
 
     
         // $dateOnly = Carbon::now()->toDateString();
