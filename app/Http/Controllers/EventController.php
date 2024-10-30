@@ -113,7 +113,6 @@ class EventController extends Controller
         $js = ['create_event'];
 
         $user = User::withCount(
-
             [
                 'event' => function ($query) {
                     $query->where('is_draft_save', '0');
@@ -125,7 +124,6 @@ class EventController extends Controller
             ]
         )->findOrFail($id);
         $inviteduser = "";
-
 
         $event_type =   EventType::get();
         $yesvite_user = User::select('id', 'firstname', 'lastname', 'phone_number', 'email', 'profile')
@@ -140,31 +138,21 @@ class EventController extends Controller
                 $que->select('*');
             }]);
         }])->orderBy('id', 'DESC')->get();
-        // dd($design_category);
+
         $textData = TextData::select('*')
             ->orderBy('id', 'desc')
             ->get();
-        // dd($textData);
+
         $user['profile'] = ($user->profile != null) ? asset('storage/profile/' . $user->profile) : "";
         $user['bg_profile'] = ($user->bg_profile != null) ? asset('storage/bg_profile/' . $user->bg_profile) : asset('assets/front/image/Frame 1000005835.png');
         $date = Carbon::parse($user->created_at);
         $formatted_date = $date->format('F, Y');
         $user['join_date'] = $formatted_date;
-        // dd($textData);
-        // $groups = Group::whereHas('groupMembers',function($query) use ($id){
-        //     $query->where('user_id',$id);
-        // })
-        // ->withCount('groupMembers')
-        // ->get();
 
         $groups = Group::withCount('groupMembers')
             ->orderBy('name', 'ASC')
             ->where('user_id', $id)
             ->get();
-
-
-
-
 
         return view('event_layout', compact(
             'title',
