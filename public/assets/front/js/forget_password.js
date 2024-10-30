@@ -83,11 +83,9 @@ $("#change_forgetpassword").validate({
 
     errorPlacement: function(error, element) {
         if (element.attr("name") === "new_password") {
-            // error.appendTo(".passworderr"); 
             $(".passworderr").text(error.text()); // Only append error text to .passworderr
 
         } else if (element.attr("name") === "conform_password") {
-            error.appendTo(".c_passworderr");
             $(".c_passworderr").text(error.text()); // Adjust for conform_password error if needed
  
         }
