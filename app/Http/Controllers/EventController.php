@@ -105,7 +105,7 @@ class EventController extends Controller
         Session::forget('desgin');
         Session::forget('desgin_slider');
         Session::save();
-
+        $id = Auth::guard('web')->user()->id;
         $eventDetail = [];
         if(isset($request->id) && $request->id != ''){
             $title = 'Edit Event';
@@ -290,7 +290,7 @@ class EventController extends Controller
     
                                     $potluckItem['id'] =  $itemValue->id;
                                     $potluckItem['description'] =  $itemValue->description;
-                                    $potluckItem['is_host'] = ($itemValue->user_id == $userid) ? 1 : 0;
+                                    $potluckItem['is_host'] = ($itemValue->user_id == $id) ? 1 : 0;
                                     $potluckItem['requested_by'] =  $itemValue->users->firstname . ' ' . $itemValue->users->lastname;
                                     $potluckItem['quantity'] =  $itemValue->quantity;
                                     $potluckItem['self_bring_item'] =  $itemValue->self_bring_item;
@@ -301,7 +301,7 @@ class EventController extends Controller
                                     foreach ($itemValue->user_potluck_items as $itemcarryUser) {
                                         $userPotluckItem['id'] = $itemcarryUser->id;
                                         $userPotluckItem['user_id'] = $itemcarryUser->user_id;
-                                        $userPotluckItem['is_host'] = ($itemcarryUser->user_id == $userid) ? 1 : 0;
+                                        $userPotluckItem['is_host'] = ($itemcarryUser->user_id == $id) ? 1 : 0;
                                         $userPotluckItem['profile'] =  empty($itemcarryUser->users->profile) ?  "" : asset('public/storage/profile/' . $itemcarryUser->users->profile);
                                         $userPotluckItem['first_name'] = $itemcarryUser->users->firstname;
                                         $userPotluckItem['quantity'] = (!empty($itemcarryUser->quantity) || $itemcarryUser->quantity != NULL) ? $itemcarryUser->quantity : "0";
@@ -318,8 +318,10 @@ class EventController extends Controller
         }else{
             $title = 'Create Event';
         }
+
+        dd($eventDetail);
         $page = 'front.create_event';
-        $id = Auth::guard('web')->user()->id;
+       
 
         $js = ['create_event'];
 
