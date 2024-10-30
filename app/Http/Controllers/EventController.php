@@ -107,7 +107,6 @@ class EventController extends Controller
         Session::save();
         $id = Auth::guard('web')->user()->id;
         $eventDetail = [];
-        dd($request);
         if(isset($request->id) && $request->id != ''){
             $title = 'Edit Event';
                 $getEventData = Event::with('event_schedule')->where('id',decrypt($request->id))->first();
