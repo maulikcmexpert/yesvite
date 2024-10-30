@@ -374,7 +374,8 @@ class EventController extends Controller
             'yesvite_user',
             'groups',
             'textData',
-            'design_category'
+            'design_category',
+            'eventDetail'
         ));
     }
 
