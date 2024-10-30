@@ -45,15 +45,17 @@
 
 
                 <div class="input-form">
-                    <input type="hidden" name="user_id" value="{{$user_id}}"/>
-                    <input type="password" class="form-control inputText" id="new_password" name="new_password"
-                        autocomplete="new-password">
-                    <label for="password" class="form-label input-field floating-label">Password <span
-                            class="required">*</span></label>
-                    <span toggle="#password-field"
-                        class="fa-regular fa-fw fa-eye-slash field-icon toggle-password"></span>
-                    <div class="label-error">
-                        <label id="password-error" class="passworderr error" for="password"></label>
+                    <div class="position-relative">
+                        <input type="hidden" name="user_id" value="{{$user_id}}"/>
+                        <input type="password" class="form-control inputText" id="new_password" name="new_password"
+                            autocomplete="new-password">
+                        <label for="password" class="form-label input-field floating-label">Password <span
+                                class="required">*</span></label>
+                        <span toggle="#password-field"
+                            class="fa-regular fa-fw fa-eye-slash field-icon toggle-password"></span>
+                        {{-- <div class="label-error">
+                            <label id="password-error" class="passworderr error" for="password"></label>
+                        </div> --}}
                     </div>
                 </div>
                 <div class="input-form">
