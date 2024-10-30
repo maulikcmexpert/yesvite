@@ -83,12 +83,9 @@ $("#change_forgetpassword").validate({
 
     errorPlacement: function(error, element) {
         if (element.attr("name") === "new_password") {
-            // error.appendTo(".passworderr"); 
-            $(".passworderr").text(error);
+            error.appendTo(".passworderr"); 
         } else if (element.attr("name") === "conform_password") {
-            // error.appendTo(".c_passworderr");
-            $(".c_passworderr").text(error);
- 
+            error.appendTo(".c_passworderr"); 
         }
     }
 });
