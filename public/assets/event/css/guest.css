@@ -516,6 +516,16 @@
     margin-bottom: 0px !important;
 }
 
+.users-data.invited_user div a{
+    max-width: 200px;
+    word-break: break-word;
+}
+
+.users-data.invited_user a svg{
+    min-width: 14px;
+    height: auto;
+}
+
 /* ============ responsive ============ */
 @media only screen and (max-width:1800px) {
     .guest-wrapper {
