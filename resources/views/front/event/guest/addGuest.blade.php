@@ -62,7 +62,7 @@
             <h5>{{$guest_user['userdata']['firstname']}} {{$guest_user['userdata']['lastname']}}</h5>
             <div>
 
-                <a href="tel">
+                <a href="#">
                     <svg width="14" class="me-1" height="14"
                         viewBox="0 0 14 14" fill="none"
                         xmlns="http://www.w3.org/2000/svg">

@@ -231,7 +231,7 @@
                                 @endif
                                 @if(isset($user->phone_number)&&$user->phone_number!="")
                                 <div>
-                                    <a href="tel">
+                                    <a href="#">
                                         <svg class="me-1" width="14" height="14"
                                             viewBox="0 0 14 14" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
@@ -397,7 +397,7 @@
                             silvia@gmail.com</a>
                     </div>
                     <div>
-                        <a href="tel">
+                        <a href="#">
                             <svg width="14" class="me-1" height="14"
                                 viewBox="0 0 14 14" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
