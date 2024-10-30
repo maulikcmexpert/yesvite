@@ -44,28 +44,41 @@ $("#forgetpassword").validate({
 //     },
 // });
 
+$.validator.addMethod(
+    "passwordCheck",
+    function (value, element) {
+        return (
+            this.optional(element) ||
+            /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/.test(value)
+        );
+    },
+    "At least 6 characters with a combination of letters, numbers, and a special character"
+);
+
 $("#change_forgetpassword").validate({
     rules: {
         new_password: {
             required: true,
-            minlength: 8,
+            passwordCheck: true, 
         },
         conform_password: {
             required: true,
-            minlength: 8,
+            passwordCheck: true, 
             equalTo: "#new_password",
         },
     },
     messages: {
         new_password: {
             required: "Please enter your New password",
-            minlength: "Please enter minimum 8 character",
-        },
+            passwordCheck:
+            "At least 6 characters with a combination of letters, numbers, and a special character",
+    },
         conform_password: {
             required: "Please Re-type your New password",
-            minlength: "Please enter minimum 8 character",
-            equalTo: "Password did not matched",
-        },
+            // minlength: "Please enter minimum 8 character",
+            passwordCheck:
+            "At least 6 characters with a combination of letters, numbers, and a special character",
+    },
     },
 });
 
