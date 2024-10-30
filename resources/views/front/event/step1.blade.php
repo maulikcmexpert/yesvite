@@ -302,10 +302,6 @@
                                 to Guests</label>
                         </div>
                     </div>
-
-
-
-
                     <!-- Modal -->
                     <div class="modal fade deleteModal" id="deleteModal" tabindex="-1"
                         aria-labelledby="deleteModalLabel" aria-hidden="true">
@@ -325,7 +321,6 @@
                                                 stroke-linecap="round" stroke-linejoin="round" />
                                         </svg>
                                     </div>
-
                                     <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
                                 </div>
                                 <div class="modal-body">
