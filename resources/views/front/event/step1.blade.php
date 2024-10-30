@@ -86,10 +86,16 @@
                     <div class="col-6 mb-4">
                         <div class="input-form">
                             <select class="form-select" name="start_time_zone" id="start-time-zone" onchange="getStartEndTimeZone()">
-                                <option value="PST" selected>PST</option>
-                                <option value="MST">MST</option>
-                                <option value="CST">CST</option>
-                                <option value="EST">EST</option>
+                                @php
+                                    $start_time_zone = '';
+                                    if(isset($eventDetail['rsvp_start_timezone']) && $eventDetail['rsvp_start_timezone'] != ''){
+                                        $strat_time_zone = eventDetail['rsvp_start_timezone'];
+                                    }
+                                @endphp
+                                <option value="PST" {{($start_time_zone =='' || $start_time_zone == 'PST')?'selected':''}}>PST</option>
+                                <option value="MST" {{($start_time_zone == 'MST')?'selected':''}}>MST</option>
+                                <option value="CST" {{($start_time_zone == 'CST')?'selected':''}}>CST</option>
+                                <option value="EST" {{($start_time_zone == 'EST')?'selected':''}}>EST</option>
                             </select>
                             <label for="select-label"
                                 class="form-label input-field floating-label select-label floatingfocus">Time
