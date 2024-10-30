@@ -32,15 +32,13 @@
                                 id="event-name" name="event-name" oninput="clearError(this)" required="">
                             <label for="event-name" class="form-label input-field floating-label">Event Name
                                 *</label>
-                                
                         </div>
                             <lable for="event-name" id="event-name-error" class="error"></lable>
                     </div>
                     <div class="col-12 mb-4">
                         <div class="input-form">
-                            <input type="text" class="form-control inputText" id="hostedby" name="hostedby"
-                                oninput="clearError(this)" required=""
-                                value="{{ $user->firstname }} {{ $user->lastname }}">
+                            <input type="text" class="form-control inputText" id="hostedby" name="hostedby" oninput="clearError(this)" required=""
+                                value="{{(isset($eventDetail['hosted_by']) && $eventDetail['hosted_by'] != NULL)?$eventDetail['hosted_by']:$user->firstname.' '.$user->lastname}}">
                             <label for="hostedby" class="form-label input-field floating-label">Hosted By
                                 *</label>
                         </div>
