@@ -26,18 +26,20 @@ class EventController extends Controller
             $eventDate = $request->input('filter');
             $status = $request->input('status');
             $event_type = $request->input('event_type');
+            $event_by = $request->input('event_by');
+
             
-            $data = Event::with(['user'])->whereHas('user', function ($query) use ($event_type) {
+                if ($event_by) {
+                    $data = Event::with(['user'])->whereHas('user', function ($query) use ($event_type,$event_by) {
                 if ($event_type == 'normal_user_event') {
                     $query->where('account_type', '0');
                 }
                 if ($event_type == 'professional_event') {
                     $query->where('account_type', '1');
                 }
-
-                // if ($first_name) {
-                //     $query->where('firstname', 'like', '%' . $first_name . '%');
-                // }
+                if ($event_by) {
+                    $query->where('firstname', 'like', '%' . $event_by . '%');
+                }
             })->orderBy('id', 'desc');
             
             if ($eventDate && $status != 'past_events' ) {
@@ -62,7 +64,7 @@ class EventController extends Controller
                 $data->where('is_draft_save', '0');
             }
 
-                    dd($request);
+                    // dd($request);
 
             return Datatables::of($data)
                 ->addIndexColumn()
