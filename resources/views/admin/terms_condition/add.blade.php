@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <h1 class="m-0 ProductTitle">{!! $title !!}</h1>
+    <h1 class="m-0 ProductTitle">{{ $title }}</h1>
     <div class="content-header p-0">
         <div class="container-fluid">
             <div class="row">
