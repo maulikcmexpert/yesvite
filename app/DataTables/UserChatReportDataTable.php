@@ -89,13 +89,13 @@ class UserChatReportDataTable extends DataTable
                 return $count++;
             })
             ->addColumn('reporter_username', function ($row) {
-                // return (isset($row->reporter_user->firstname) && $row->reporter_user->firstname != "") ? $row->reporter_user->firstname : "";
-                return isset($row->reporter_user->firstname) && $row->reporter_user->firstname != ""? $row->reporter_user->firstname . (isset($row->reporter_user->lastname) && $row->reporter_user->lastname != "" ? " " . $row->reporter_user->lastname  : ""): "";
+                return (isset($row->reporter_user->firstname) && $row->reporter_user->firstname != "") ? $row->reporter_user->firstname : "";
+                // return isset($row->reporter_user->firstname) && $row->reporter_user->firstname != ""? $row->reporter_user->firstname . (isset($row->reporter_user->lastname) && $row->reporter_user->lastname != "" ? " " . $row->reporter_user->lastname  : ""): "";
 
             })
             ->addColumn('reported_username', function ($row) {
-                // return (isset($row->to_reporter_user->firstname) && $row->to_reporter_user->firstname != "") ? $row->to_reporter_user->firstname : "";
-                return isset($row->to_reporter_user->firstname) && $row->to_reporter_user->firstname != ""? $row->to_reporter_user->firstname . (isset($row->to_reporter_user->lastname) && $row->to_reporter_user->lastname != "" ? " " . $row->to_reporter_user->lastname  : ""): "";
+                return (isset($row->to_reporter_user->firstname) && $row->to_reporter_user->firstname != "") ? $row->to_reporter_user->firstname : "";
+                // return isset($row->to_reporter_user->firstname) && $row->to_reporter_user->firstname != ""? $row->to_reporter_user->firstname . (isset($row->to_reporter_user->lastname) && $row->to_reporter_user->lastname != "" ? " " . $row->to_reporter_user->lastname  : ""): "";
 
             })
             ->addColumn('report_type', function ($row) {
