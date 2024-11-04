@@ -119,7 +119,7 @@
                         <div class="add-activity-schedule" style="{{(isset($eventDetail['event_setting']['events_schedule']) && $eventDetail['event_setting']['events_schedule']=='0')?'display:none;':''}}">
                             <h5 class="step_1_activity">
                                 @if (isset($eventDetail['events_schedule_list']->data) && count($eventDetail['events_schedule_list']->data) > 0)
-                                    Setup activity schedule      
+                                    {{count($eventDetail['events_schedule_list']->data)}} Activity       
                                 @else
                                     <span><i class="fa-solid fa-triangle-exclamation"></i></span>Setup activity schedule
                                 @endif
