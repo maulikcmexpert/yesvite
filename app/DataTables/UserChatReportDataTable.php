@@ -146,7 +146,7 @@ class UserChatReportDataTable extends DataTable
             $direction = 'asc';
         }
     
-        return UserReportChat::with(['reporter_user', 'to_reporter_user'])->orderBy($column, $direction);
+        return UserReportChat::with(['reporter_user','users', 'to_reporter_user'])->orderBy($column, $direction);
     }
     
 

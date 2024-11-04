@@ -20,4 +20,8 @@ class UserReportChat extends Model
     {
         return $this->belongsTo(User::class, 'to_be_reported_user_id');
     }
+    public function users()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }
