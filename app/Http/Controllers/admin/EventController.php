@@ -29,8 +29,7 @@ class EventController extends Controller
             $event_by = $request->input('event_by');
 
             
-                if ($event_by) {
-                    $data = Event::with(['user'])->whereHas('user', function ($query) use ($event_type,$event_by) {
+            $data = Event::with(['user'])->whereHas('user', function ($query) use ($event_type,$event_by) {
                 if ($event_type == 'normal_user_event') {
                     $query->where('account_type', '0');
                 }
