@@ -291,6 +291,8 @@ class AuthController extends Controller
                     ])->withInput();
                     // return  Redirect::to('login')->with('error', 'Invalid credentials!');
                 }
+            }elseif ($user->account_status == 'Block') {
+                return  Redirect::to('login')->with('error', 'Ban User: Temporarily or permanently suspend user.');
             } else {
                 $randomString = Str::random(30);
                 $user->remember_token = $randomString;
