@@ -39,19 +39,15 @@ class EventController extends Controller
             })->orderBy('id', 'desc');
             
             if ($eventDate && $status != 'past_events' ) {
-                
                 $data->where('start_date', $eventDate);
             }
-
             if ($status == 'upcoming_events') {
                 $data->where('start_date', '>', date('Y-m-d'));
             }
             if ($status == 'upcoming_events') {
                 $data->where('start_date', '>', date('Y-m-d'));
             }
-
-            if ($status == 'past_events') {
-                
+            if ($status == 'past_events') {   
                 $data->where('start_date', '<', date('Y-m-d'));
             }
             if ($status == 'draft_events') {
@@ -59,7 +55,6 @@ class EventController extends Controller
             } else {
                 $data->where('is_draft_save', '0');
             }
-
 
             return Datatables::of($data)
                 ->addIndexColumn()
