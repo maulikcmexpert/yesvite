@@ -37,6 +37,7 @@ class EventController extends Controller
                 if ($event_type == 'professional_event') {
                     $query->where('account_type', '1');
                 }
+
                 if ($event_by) {
                     $query->where('firstname', 'like', '%' . $event_by . '%');
                 }
