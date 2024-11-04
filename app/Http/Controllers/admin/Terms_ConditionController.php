@@ -13,7 +13,8 @@ class Terms_ConditionController extends Controller
      */
     public function index()
     {
-        $title = 'terms & condition';
+        // $title = 'terms & condition';
+        $title = 'terms &#38; condition';
         $page = 'admin.terms_condition.add';
         $js = 'admin.terms_condition.privacyjs';
 
