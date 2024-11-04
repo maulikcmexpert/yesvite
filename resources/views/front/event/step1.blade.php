@@ -150,7 +150,7 @@
                             <label for="end-time" id="end-time-error" class="error"></label>
                         </div>
                     </div>
-                    <div class="col-6 mb-4 end_time" style="display: none">
+                    <div class="col-6 mb-4 end_time" style="{{(isset($eventDetail['rsvp_end_time_set']) && $eventDetail['rsvp_end_time_set']=='0')?'display: none;':''}}">
                         <div class="input-form">
                             <select class="form-select" name="end-time-zone" onchange="getStartEndTimeZone()" id="end-time-zone">
                                 @php
