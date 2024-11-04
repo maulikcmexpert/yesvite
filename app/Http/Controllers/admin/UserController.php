@@ -227,7 +227,7 @@ class UserController extends Controller
     {
         $email = $request->input('email');
         $exists = Admin::where('email', $email)->first();
-        dd($exists);
+        dd($email);
         if ($exists) {
             return response()->json(false);
         } else {
