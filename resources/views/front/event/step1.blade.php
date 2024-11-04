@@ -116,7 +116,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="add-activity-schedule" style="display:none;">
+                        <div class="add-activity-schedule" style="{{(isset($eventDetail['event_setting']['events_schedule']) && $eventDetail['event_setting']['events_schedule']=='0')?'display:none;':''}}">
                             <h5 class="step_1_activity"><span><i class="fa-solid fa-triangle-exclamation"></i></span>Setup activity
                                 schedule
                             </h5>
@@ -190,15 +190,14 @@
                             <label for="birthday" class="form-label input-field floating-label select-label">Rsvp
                                 By Date</label>
                         </div>
-                            <lable for="event-rsvpby" id="event-rsvpby-error" class="error"></lable>
+                        <lable for="event-rsvpby" id="event-rsvpby-error" class="error"></lable>
                     </div>
                     <div class="col-12 mb-4">
                         <div class="input-form">
                             <input type="text" class="form-control inputText" id="description" name="description" 
                                 value="{{(isset($eventDetail['event_location_name']) && $eventDetail['event_location_name'] != '')?$eventDetail['event_location_name']:''}}">
                             <label for="description" class="form-label input-field floating-label">Event
-                                Location
-                                Description</label>
+                                Location Description</label>
                         </div>
                     </div>
                     <div class="col-12 mb-4">
