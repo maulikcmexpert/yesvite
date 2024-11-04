@@ -21,6 +21,7 @@ class EventController extends Controller
      */
     public function index(Request $request)
     {
+        dd($request);
         if ($request->ajax()) {
             $eventDate = $request->input('filter');
             $status = $request->input('status');
@@ -33,6 +34,10 @@ class EventController extends Controller
                 if ($event_type == 'professional_event') {
                     $query->where('account_type', '1');
                 }
+
+                // if ($first_name) {
+                //     $query->where('firstname', 'like', '%' . $first_name . '%');
+                // }
             })->orderBy('id', 'desc');
             
             if ($eventDate && $status != 'past_events' ) {
