@@ -258,7 +258,7 @@ class AuthController extends Controller
                         Cookie::forget('password');
                     }
 
-                    $this->logoutFromApplication($user->id);
+                    // $this->logoutFromApplication($user->id);
                     event(new \App\Events\UserRegistered($user));
 
                     add_user_firebase($user->id, 'Online');
