@@ -317,7 +317,7 @@ class EventController extends Controller
         }else{
             $title = 'Create Event';
         }
-        dd($eventDetail['events_schedule_list']);
+        dd($eventDetail['events_schedule_list']->data);
         $page = 'front.create_event';
        
 
