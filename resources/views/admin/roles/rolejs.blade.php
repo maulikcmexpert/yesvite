@@ -12,25 +12,18 @@
             // },
 
             email: {
-                    required: true,
-                    email: true,
-                    remote: {
-                        headers: {
-                            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
-                                "content"
-                            ),
-                        },
-                        url: "{{URL::to('admin/user/check_new_contactemail')}}",
-                        type: "POST",
-                        data: {
-                            email: function() {
-                                return $(".email").val();
-                            },
-
-                        },
-                    },
-
+            required: true,
+            email: true,
+            remote: {
+                type: "post",
+                url: base_url + "/admin/checkAdminEmail",
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                        "content"
+                    ),
                 },
+            },
+        },
             password: {
                 required: true,
                 minlength: 6
@@ -50,11 +43,10 @@
             //     email: "Please enter a valid email address"
             // },
             email: {
-                    required: "Please Enter Email",
-                    email: "Please Enter a Valid Email",
-                    remote: "Email is already exsits",
-
-                },
+            required: "Email is required ",
+            email: "Please enter valid email",
+            remote: "This email is already exist.",
+        },
             password: {
                 required: "Please provide a password",
                 minlength: "Password must be at least 6 characters long"

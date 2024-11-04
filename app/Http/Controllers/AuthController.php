@@ -600,6 +600,8 @@ class AuthController extends Controller
         return response()->json($exists);
     }
 
+    
+
     public function storeAdvertisementStatus(Request $request)
     {
         if (Auth::check()) {

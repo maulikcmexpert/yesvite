@@ -237,8 +237,11 @@ Route::controller(AuthController::class)->group(function () {
     // });
 
     Route::post('/checkEmail', 'checkEmail');
+    
+    Route::post('/checkAdminEmail', 'checkAdminEmail');
 
     Route::post('/register', 'registerAdmin');
+
 
     Route::get('/forgotpassword', function () {
 
