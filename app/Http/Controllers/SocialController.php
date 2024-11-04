@@ -46,7 +46,7 @@ class SocialController extends Controller
         if($authUser != 0){
             Auth::login($authUser, true);
         }else{
-            return redirect()->back()->withErrors([
+            return redirect('/login')->withErrors([
                 'email' => 'Ban User: Temporarily or permanently suspend user.',
             ])->withInput();
         }
