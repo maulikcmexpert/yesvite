@@ -60,7 +60,7 @@ class SocialController extends Controller
     {
         $user = User::where('email', $socialUser->getEmail())->first();
         if($user->account_status != 'Unblock'){
-            return redirect()->back()->withErrors([
+            return redirect('/login')->withErrors([
                 'email' => 'Ban User: Temporarily or permanently suspend user.',
             ])->withInput();
         }
