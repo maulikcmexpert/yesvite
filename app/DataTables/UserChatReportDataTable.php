@@ -36,21 +36,49 @@ class UserChatReportDataTable extends DataTable
                 return $counter++;
             })
             ->filter(function ($query) {
-                $search = $this->request->get('search');
-                $keyword = $search['value'] ?? null;
+                // $search = $this->request->get('search');
+                // $keyword = $search['value'] ?? null;
     
-                if (!empty($keyword)) {
-                    $query->where(function ($q) use ($keyword) {
-                        $q->whereHas('reporter_user', function ($q) use ($keyword) {
-                            $q->where('firstname', 'LIKE', "%{$keyword}%")
-                              ->orWhere('lastname', 'LIKE', "%{$keyword}%");
-                        })
-                        ->orWhereHas('to_reporter_user', function ($q) use ($keyword) {
-                            $q->where('firstname', 'LIKE', "%{$keyword}%")
-                              ->orWhere('lastname', 'LIKE', "%{$keyword}%");
-                        })
-                        ->orWhere('report_type', 'LIKE', "%{$keyword}%")
-                        ->orWhere('report_description', 'LIKE', "%{$keyword}%");
+                // if (!empty($keyword)) {
+                //     $query->where(function ($q) use ($keyword) {
+                //         $q->whereHas('reporter_user', function ($q) use ($keyword) {
+                //             $q->where('firstname', 'LIKE', "%{$keyword}%")
+                //               ->orWhere('lastname', 'LIKE', "%{$keyword}%");
+                //         })
+                //         ->orWhereHas('to_reporter_user', function ($q) use ($keyword) {
+                //             $q->where('firstname', 'LIKE', "%{$keyword}%")
+                //               ->orWhere('lastname', 'LIKE', "%{$keyword}%");
+                //         })
+                //         ->orWhere('report_type', 'LIKE', "%{$keyword}%")
+                //         ->orWhere('report_description', 'LIKE', "%{$keyword}%");
+                //     });
+                // }
+                if ($this->request->has('search')) {
+                    $keyword = $this->request->get('search');
+                    $keyword = $keyword['value'];
+            
+                    // Split the keyword by spaces
+                    $nameParts = explode(' ', $keyword);
+            
+                    $query->where(function ($q) use ($nameParts, $keyword) {
+                        if (count($nameParts) === 2) {
+                            // If two parts (assumed first and last name)
+                            $q->whereHas('users', function ($q) use ($nameParts) {
+                                $q->where('firstname', 'LIKE', "%{$nameParts[0]}%")
+                                  ->where('lastname', 'LIKE', "%{$nameParts[1]}%");
+                            });
+                        } else {
+                            // If one part, search for either firstname or lastname
+                            $q->whereHas('users', function ($q) use ($keyword) {
+                                $q->where('firstname', 'LIKE', "%{$keyword}%")
+                                  ->orWhere('lastname', 'LIKE', "%{$keyword}%");
+                            });
+                        }
+            
+                        // Search in 'events' as well
+                        $q->orWhereHas('events', function ($q) use ($keyword) {
+                            $q->where('event_name', 'LIKE', "%{$keyword}%");
+                        });
                     });
                 }
             })
