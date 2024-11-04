@@ -58,6 +58,16 @@ $(document).ready(function(){
             // ▲ for up, ▼ for down
         });
     });
+    setTimeout(() => {
+        $(".form-control").each(function () {
+            var text = $(this).val();
+            if (text === "") {
+                $(this).next().removeClass("floatingfocus");
+            } else {
+                $(this).next().addClass("floatingfocus");
+            }
+        });
+    }, 500);
 });
 
 // $(".form-control").on("focusout", function () {
