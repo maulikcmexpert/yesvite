@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\URL;
 use Cookie;
 use App\Models\User;
+use App\Models\Admin;
+
 use App\Models\LoginHistory;
 
 use App\Rules\EmailExists;
@@ -598,6 +600,18 @@ class AuthController extends Controller
         $exists = User::where('email', $email)->exists();
 
         return response()->json($exists);
+    }
+
+    public function checkAdminEmail(Request $request)
+    {
+        $email = $request->input('email');
+        $exists = Admin::where('email', $email)->exists();
+
+        if ($exists) {
+            return response()->json(false);
+        } else {
+            return response()->json(true);
+        }
     }
 
     public function storeAdvertisementStatus(Request $request)
