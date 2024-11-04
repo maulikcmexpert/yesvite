@@ -99,9 +99,7 @@ class LoginHistoryDataTable extends DataTable
     $column = 'id';  // Default column
 
     if (isset($request->order[0]['column'])) {
-        if ($request->order[0]['column'] == '0') {
-            $column = 'id';
-        }
+        
         if ($request->order[0]['column'] == '1') {
             $column = User::select('firstname')
                 ->whereColumn('users.id', 'login_histories.user_id');
@@ -112,7 +110,7 @@ class LoginHistoryDataTable extends DataTable
         $direction = 'asc';
     }
 
-    return LoginHistory::with(['user'])->orderBy($column, $direction);
+    return LoginHistory::with(['users'])->orderBy($column, $direction);
 }
 
 

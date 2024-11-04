@@ -12,8 +12,12 @@ class LoginHistory extends Model
 
     protected $fillable = ['user_id', 'ip_address', 'login_at', 'user_agent'];
 
-    public function user()
+    // public function user()
+    // {
+    //     return $this->belongsTo(User::class);
+    // }
+    public function users()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 }
