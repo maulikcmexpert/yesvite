@@ -89,7 +89,7 @@
                                 @php
                                     $start_time_zone = '';
                                     if(isset($eventDetail['rsvp_start_timezone']) && $eventDetail['rsvp_start_timezone'] != ''){
-                                        $strat_time_zone = eventDetail['rsvp_start_timezone'];
+                                        $start_time_zone = eventDetail['rsvp_start_timezone'];
                                     }
                                 @endphp
                                 <option value="PST" {{($start_time_zone =='' || $start_time_zone == 'PST')?'selected':''}}>PST</option>
@@ -153,10 +153,16 @@
                     <div class="col-6 mb-4 end_time" style="display: none">
                         <div class="input-form">
                             <select class="form-select" name="end-time-zone" onchange="getStartEndTimeZone()" id="end-time-zone">
-                                <option value="PST" selected>PST</option>
-                                <option value="MST">MST</option>
-                                <option value="CST">CST</option>
-                                <option value="EST">EST</option>
+                                @php
+                                    $end_time_zone = '';
+                                    if(isset($eventDetail['rsvp_end_time_set']) && $eventDetail['rsvp_end_time_set'] != ''){
+                                        $end_time_zone = eventDetail['rsvp_end_time_set'];
+                                    }
+                                @endphp
+                                <option value="PST" {{($end_time_zone =='' || $end_time_zone == 'PST')?'selected':''}}>PST</option>
+                                <option value="MST" {{($end_time_zone == 'MST')?'selected':''}}>MST</option>
+                                <option value="CST" {{($end_time_zone == 'CST')?'selected':''}}>CST</option>
+                                <option value="EST" {{($end_time_zone == 'EST')?'selected':''}}>EST</option>
                             </select>
                             <label for="select-label" class="form-label input-field floating-label select-label floatingfocus">Time
                                 Zone *</label>
