@@ -50,7 +50,7 @@
 
                             <label for="exampleInputEmail1">Email</label>
 
-                            <input type="text" class="form-control" name="email" placeholder="Enter Email" value="{{ old('event_type.*')}}">
+                            <input type="text" class="form-control email" name="email" placeholder="Enter Email" value="{{ old('event_type.*')}}">
 
                             <span class="text-danger">{{ $errors->first('event_type.*') }}</span>
 
