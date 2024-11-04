@@ -20,7 +20,7 @@ class RolesController extends Controller
      */
     public function index(RolesDataTable $DataTable)
     {
-        $title = 'Roles';
+        $title = 'Roles List';
 
         $page = 'admin.roles.list';
 
