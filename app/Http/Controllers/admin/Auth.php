@@ -144,6 +144,17 @@ class Auth extends Controller
         }
         return  Redirect::to('admin')->with('error', 'Error to registretion!');
     }
+    public function checkAdminEmail(Request $request)
+    {
+        $email = $request->input('email');
+        $exists = Admin::where('email', $email)->exists();
+
+        if ($exists) {
+            return response()->json(false);
+        } else {
+            return response()->json(true);
+        }
+    }
     public function forgotpassword(Request $req)
     {
         $req->validate(
