@@ -64,9 +64,7 @@ class SocialController extends Controller
     public function findOrCreateUser($socialUser, $provider)
     {
         $user = User::where('email', $socialUser->getEmail())->first();
-        if($user->account_status != 'Unblock'){
-            return [];
-        }
+      
         Session::regenerate();
         if ($user) {
             if ($provider == 'google') {
@@ -80,18 +78,19 @@ class SocialController extends Controller
                 $user->apple_token_id = $socialUser->getId();
             }
             
-
-            $user->current_session_id = Session::getId();
+            if($user->account_status == 'Unblock'){
+                $user->current_session_id = Session::getId();
+                $sessionArray = [
+                    'id' => encrypt($user->id),
+                    'first_name' => $user->firstname,
+                    'last_name' => $user->lastname,
+                    'username' => $user->firstname . ' ' . $user->lastname,
+                    'profile' => ($user->profile != NULL || $user->profile != "") ? asset('storage/profile/' . $user->profile) : ""
+                ];
+                Session::put(['user' => $sessionArray]);
+            }
             $user->save();
            
-            $sessionArray = [
-                'id' => encrypt($user->id),
-                'first_name' => $user->firstname,
-                'last_name' => $user->lastname,
-                'username' => $user->firstname . ' ' . $user->lastname,
-                'profile' => ($user->profile != NULL || $user->profile != "") ? asset('storage/profile/' . $user->profile) : ""
-            ];
-            Session::put(['user' => $sessionArray]);
 
             return  $user;
         }
