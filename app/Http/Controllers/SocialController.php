@@ -43,8 +43,13 @@ class SocialController extends Controller
 
         // Check if the user already exists
         $authUser = $this->findOrCreateUser($user, $provider);
-        
-        Auth::login($authUser, true);
+        if($authUser != 0){
+            Auth::login($authUser, true);
+        }else{
+            return redirect()->back()->withErrors([
+                'email' => 'Ban User: Temporarily or permanently suspend user.',
+            ])->withInput();
+        }
 
         return redirect()->intended('/profile')->with('success', 'Logged in successfully!');
     }
@@ -60,9 +65,7 @@ class SocialController extends Controller
     {
         $user = User::where('email', $socialUser->getEmail())->first();
         if($user->account_status != 'Unblock'){
-            return redirect('/login')->withErrors([
-                'email' => 'Ban User: Temporarily or permanently suspend user.',
-            ])->withInput();
+            return 0;
         }
         Session::regenerate();
         if ($user) {
