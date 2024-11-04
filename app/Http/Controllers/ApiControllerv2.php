@@ -8817,6 +8817,8 @@ class ApiControllerv2 extends Controller
                     $commentReply['reply_comment_total_likes'] = $replyVal->post_comment_reaction_count;
                     $commentReply['is_like'] = checkUserIsLike($replyVal->id, $user->id);
                     $commentReply['created_at'] = $replyVal->created_at;
+                    $commentReply['location'] = $replyVal->user->city != "" ? trim($replyVal->user->city) . ($replyVal->user->state != "" ? ', ' . $replyVal->user->state : '') : "";
+
                     $commentInfo[] = $commentReply;
                 }
             }

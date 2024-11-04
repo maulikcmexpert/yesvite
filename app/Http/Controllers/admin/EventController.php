@@ -58,6 +58,7 @@ class EventController extends Controller
             }
             return Datatables::of($data)
                 ->addIndexColumn()
+                
                 ->addColumn('number', function ($row) {
                     $page = request()->get('start') / request()->get('length') + 1;
                     $itemsPerPage = request()->get('length');
