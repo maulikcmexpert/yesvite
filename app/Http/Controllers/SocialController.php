@@ -48,7 +48,7 @@ class SocialController extends Controller
         }else{
             return redirect('/login')->withErrors([
                 'email' => 'Ban User: Temporarily or permanently suspend user.',
-            ])->withInput();
+            ]);
         }
 
         return redirect()->intended('/profile')->with('success', 'Logged in successfully!');
