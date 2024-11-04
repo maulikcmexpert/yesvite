@@ -59,6 +59,11 @@ class SocialController extends Controller
     public function findOrCreateUser($socialUser, $provider)
     {
         $user = User::where('email', $socialUser->getEmail())->first();
+        if($user->account_status != 'Unblock'){
+            return redirect()->back()->withErrors([
+                'email' => 'Ban User: Temporarily or permanently suspend user.',
+            ])->withInput();
+        }
         Session::regenerate();
         if ($user) {
             if ($provider == 'google') {
