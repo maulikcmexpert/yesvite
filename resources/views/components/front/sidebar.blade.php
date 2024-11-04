@@ -125,7 +125,7 @@
         </ul>
         <div class="d-flex align-items-center">
 
-            <a href="#" type="button" class="support-btn">
+            <a href="https://yesvitesupport.zendesk.com/" type="button" class="support-btn">
                 <svg class="me-1" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M11.334 12.2868H8.66732L5.70064 14.2601C5.26064 14.5535 4.66732 14.2402 4.66732 13.7068V12.2868C2.66732 12.2868 1.33398 10.9535 1.33398 8.95349V4.95345C1.33398 2.95345 2.66732 1.62012 4.66732 1.62012H11.334C13.334 1.62012 14.6673 2.95345 14.6673 4.95345V8.95349C14.6673 10.9535 13.334 12.2868 11.334 12.2868Z" stroke="#0F172A" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
                     <path d="M7.99923 7.57324V7.43327C7.99923 6.97993 8.27924 6.73992 8.55924 6.54659C8.83258 6.35992 9.10588 6.11993 9.10588 5.67993C9.10588 5.0666 8.61256 4.57324 7.99923 4.57324C7.38589 4.57324 6.89258 5.0666 6.89258 5.67993" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
