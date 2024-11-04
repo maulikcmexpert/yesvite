@@ -98,7 +98,7 @@ class LoginHistoryDataTable extends DataTable
 {
     $column = 'id';  // Default column
     $direction = 'desc';  
-dd($request);
+// dd($request);
     if (isset($request->order[0]['column'])) {
         if ($request->order[0]['column'] == '1') {
             $column = User::select('firstname')
@@ -123,7 +123,7 @@ dd($request);
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     //->dom('Bfrtip')
-                    ->orderBy(1)
+                    ->orderBy(0)
                     ->selectStyleSingle()
                     ->buttons([
                         Button::make('excel'),
