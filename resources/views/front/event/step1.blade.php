@@ -156,7 +156,7 @@
                                 @php
                                     $end_time_zone = '';
                                     if(isset($eventDetail['rsvp_end_time_set']) && $eventDetail['rsvp_end_time_set'] != ''){
-                                        $end_time_zone = $eventDetail['rsvp_end_time_set'];
+                                        $end_time_zone = $eventDetail['rsvp_end_timezone'];
                                     }
                                 @endphp
                                 <option value="PST" {{($end_time_zone =='' || $end_time_zone == 'PST')?'selected':''}}>PST</option>
