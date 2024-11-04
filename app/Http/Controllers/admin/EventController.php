@@ -61,6 +61,9 @@ class EventController extends Controller
             } else {
                 $data->where('is_draft_save', '0');
             }
+
+                    dd($request);
+
             return Datatables::of($data)
                 ->addIndexColumn()
                 
