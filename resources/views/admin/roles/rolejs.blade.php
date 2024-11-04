@@ -6,10 +6,31 @@
                 required: true,
                 // minlength: 3
             },
+            // email: {
+            //     required: true,
+            //     email: true
+            // },
+
             email: {
-                required: true,
-                email: true
-            },
+                    required: true,
+                    email: true,
+                    remote: {
+                        headers: {
+                            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                                "content"
+                            ),
+                        },
+                        url: "{{URL::to('admin/user/check_new_contactemail')}}",
+                        type: "POST",
+                        data: {
+                            email: function() {
+                                return $(".email").val();
+                            },
+
+                        },
+                    },
+
+                }
             password: {
                 required: true,
                 minlength: 6
@@ -24,10 +45,16 @@
                 required: "Please enter a name",
                 // minlength: "Name must be at least 3 characters long"
             },
+            // email: {
+            //     required: "Please enter an email",
+            //     email: "Please enter a valid email address"
+            // },
             email: {
-                required: "Please enter an email",
-                email: "Please enter a valid email address"
-            },
+                    required: "Please Enter Email",
+                    email: "Please Enter a Valid Email",
+                    remote: "Email is already exsits",
+
+                },
             password: {
                 required: "Please provide a password",
                 minlength: "Password must be at least 6 characters long"
