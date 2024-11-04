@@ -187,8 +187,7 @@
                         <div class="input-form">
                             <input type="text" class="form-control inputText" id="rsvp-by-date" name="rsvp-by-date" onblur="clearError(this)" 
                             value="{{(isset($eventDetail['rsvp_by_date']) && $eventDetail['rsvp_by_date'] != '')?$eventDetail['rsvp_by_date']:''}}" readonly autocomplete="off">
-                            <label for="birthday" class="form-label input-field floating-label select-label">Rsvp
-                                By Date</label>
+                            <label for="birthday" class="form-label input-field floating-label select-label">Rsvp By Date</label>
                         </div>
                         <lable for="event-rsvpby" id="event-rsvpby-error" class="error"></lable>
                     </div>
