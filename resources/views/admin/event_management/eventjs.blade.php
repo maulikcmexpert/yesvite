@@ -283,7 +283,9 @@
                     },
                     {
                         data: "event_by",
-                        name: "event_by"
+                        name: "event_by",
+                        orderable: true,
+                        searchable: true,
                     },
                     {
                         data: "email",
