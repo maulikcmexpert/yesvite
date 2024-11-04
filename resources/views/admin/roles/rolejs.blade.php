@@ -30,7 +30,7 @@
                         },
                     },
 
-                }
+                },
             password: {
                 required: true,
                 minlength: 6
