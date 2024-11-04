@@ -20,10 +20,16 @@
                                 "content"
                             ),
                         },
-                        url: base_url + "/admin/checkAdminEmail",
-                        type: "post",
+                        url: "{{URL::to('admin/user/checkAdminEmail')}}",
+                        type: "POST",
+                        data: {
+                            email: function() {
+                                return $(".email").val();
+                            },
 
+                        },
                     },
+
                 },
                 password: {
                     required: true,
@@ -44,9 +50,10 @@
                 //     email: "Please enter a valid email address"
                 // },
                 email: {
-                    required: "Email is required ",
-                    email: "Please enter valid email",
-                    remote: "This email is already exist.",
+                    required: "Please Enter Email",
+                    email: "Please Enter a Valid Email",
+                    remote: "Email is already exsits",
+
                 },
                 password: {
                     required: "Please provide a password",

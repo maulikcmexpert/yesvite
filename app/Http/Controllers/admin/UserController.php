@@ -6,6 +6,7 @@ use App\DataTables\UserDataTable;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Admin;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\DataTables;
@@ -213,6 +214,19 @@ class UserController extends Controller
     {
         $email = $request->input('email');
         $exists = User::where('email', $email)->exists();
+
+        if ($exists) {
+            return response()->json(false);
+        } else {
+            return response()->json(true);
+        }
+    }
+
+
+    public function checkAdminEmail(Request $request)
+    {
+        $email = $request->input('email');
+        $exists = Admin::where('email', $email)->exists();
 
         if ($exists) {
             return response()->json(false);
