@@ -96,7 +96,7 @@ class LoginHistoryDataTable extends DataTable
      */
     public function query(LoginHistory $model, Request $request): QueryBuilder
 {
-    $column = 'id';  // Default column
+    $column = 'updated_at';  // Default column
     $direction = 'desc';  
 // dd($request);
     if (isset($request->order[0]['column'])) {
