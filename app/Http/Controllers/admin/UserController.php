@@ -226,7 +226,7 @@ class UserController extends Controller
     public function checkAdminEmail(Request $request)
     {
         $email = $request->input('email');
-        $exists = Admin::where('email', $email)->exists();
+        $exists = Admin::where('email', $email)->first();
         dd($exists);
         if ($exists) {
             return response()->json(false);
