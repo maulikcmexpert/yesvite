@@ -175,7 +175,7 @@
                             <div class="toggle-button-cover ">
                                 <div class="button-cover">
                                     <div class="button r" id="button-1">
-                                        <input type="checkbox" class="checkbox" id="rsvp_by_date">
+                                        <input type="checkbox" class="checkbox" id="rsvp_by_date" {{(isset($eventDetail['rsvp_by_date_set']) && $eventDetail['rsvp_by_date_set']=='1')?'checked':''}}>
                                         <div class="knobs"></div>
                                         <div class="layer"></div>
                                     </div>
@@ -183,10 +183,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-12 mb-4 rsvp_by_date" style="display: none;">
+                    <div class="col-lg-12 mb-4 rsvp_by_date" style="{{(isset($eventDetail['rsvp_by_date_set']) && $eventDetail['rsvp_by_date_set']=='0')?'display: none;':''}}">
                         <div class="input-form">
-                            <input type="text" class="form-control inputText" id="rsvp-by-date"
-                                name="rsvp-by-date" onblur="clearError(this)" readonly autocomplete="off">
+                            <input type="text" class="form-control inputText" id="rsvp-by-date" name="rsvp-by-date" onblur="clearError(this)" 
+                            value="{{(isset($eventDetail['rsvp_by_date']) && $eventDetail['rsvp_by_date'] != '')?$eventDetail['rsvp_by_date']:''}}" readonly autocomplete="off">
                             <label for="birthday" class="form-label input-field floating-label select-label">Rsvp
                                 By Date</label>
                         </div>
