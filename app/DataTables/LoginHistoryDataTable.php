@@ -110,6 +110,7 @@ class LoginHistoryDataTable extends DataTable
     //     $direction = 'asc';
     // }
 
+    dd($column,$direction);
     return LoginHistory::with(['user'])->orderBy($column, $direction);
 }
 
