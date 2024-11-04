@@ -2,52 +2,52 @@
     $(function() {
 
 
-        var table = $("#events_table").DataTable({
-            processing: true,
-            serverSide: true,
+        // var table = $("#events_table").DataTable({
+        //     processing: true,
+        //     serverSide: true,
 
-            ajax: '{{ URL::to('/admin/events') }}',
-            columns: [{
-                    data: "number",
-                    name: "number"
-                },
-                {
-                    data: "event_name",
-                    name: "event_name"
-                },
-                {
-                    data: "event_by",
-                    name: "event_by"
-                },
-                {
-                    data: "email",
-                    name: "email"
-                },
-                {
-                    data: "start_date",
-                    name: "start_date"
-                },
+        //     ajax: '{{ URL::to('/admin/events') }}',
+        //     columns: [{
+        //             data: "number",
+        //             name: "number"
+        //         },
+        //         {
+        //             data: "event_name",
+        //             name: "event_name"
+        //         },
+        //         {
+        //             data: "event_by",
+        //             name: "event_by"
+        //         },
+        //         {
+        //             data: "email",
+        //             name: "email"
+        //         },
+        //         {
+        //             data: "start_date",
+        //             name: "start_date"
+        //         },
 
-                {
-                    data: "end_date",
-                    name: "end_date"
-                },
-                {
-                    data: "venue",
-                    name: "venue"
-                },
-                {
-                    data: "event_status",
-                    name: "event_status"
-                },
-                {
-                    data: "action",
-                    name: "action",
-                    orderable: false,
-                    searchable: true,
-                }
-            ],
-        });
+        //         {
+        //             data: "end_date",
+        //             name: "end_date"
+        //         },
+        //         {
+        //             data: "venue",
+        //             name: "venue"
+        //         },
+        //         {
+        //             data: "event_status",
+        //             name: "event_status"
+        //         },
+        //         {
+        //             data: "action",
+        //             name: "action",
+        //             orderable: false,
+        //             searchable: true,
+        //         }
+        //     ],
+        // });
 
 
 

@@ -29,16 +29,12 @@ class EventController extends Controller
             $event_by = $request->input('event_by');
 
             
-            $data = Event::with(['user'])->whereHas('user', function ($query) use ($event_type,$event_by) {
+            $data = Event::with(['user'])->whereHas('user', function ($query) use ($event_type) {
                 if ($event_type == 'normal_user_event') {
                     $query->where('account_type', '0');
                 }
                 if ($event_type == 'professional_event') {
                     $query->where('account_type', '1');
-                }
-
-                if ($event_by) {
-                    $query->where('firstname', 'like', '%' . $event_by . '%');
                 }
             })->orderBy('id', 'desc');
             
@@ -64,7 +60,6 @@ class EventController extends Controller
                 $data->where('is_draft_save', '0');
             }
 
-                    // dd($request);
 
             return Datatables::of($data)
                 ->addIndexColumn()
