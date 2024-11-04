@@ -5471,9 +5471,11 @@ class ApiControllerv2 extends Controller
                         EventImage::where('id', $oldImages->id)->delete();
                     }
                 }
+                $a = 0;
                 foreach ($images as $value) {
                     $image = $value;
-                    $imageName = time() . '_' . str_replace(' ', '_', $image->getClientOriginalName());
+                    $imageName = time() .$a. '_' . str_replace(' ', '_', $image->getClientOriginalName());
+                    $a++;
                     $image->move(public_path('storage/event_images'), $imageName);
                     EventImage::create([
                         'event_id' => $request->event_id,
