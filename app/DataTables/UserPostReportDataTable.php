@@ -146,7 +146,6 @@ class UserPostReportDataTable extends DataTable
 
                 if ($request->order[0]['column'] == '2') {
                     $column = 'report_type';
-    
                 }
             }
             
