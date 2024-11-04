@@ -117,8 +117,11 @@
                             </div>
                         </div>
                         <div class="add-activity-schedule" style="{{(isset($eventDetail['event_setting']['events_schedule']) && $eventDetail['event_setting']['events_schedule']=='0')?'display:none;':''}}">
-                            <h5 class="step_1_activity"><span><i class="fa-solid fa-triangle-exclamation"></i></span>Setup activity
-                                schedule
+                            <h5 class="step_1_activity">
+                                @if (isset($eventDetail['events_schedule_list']))
+                                    
+                                @endif
+                                <span><i class="fa-solid fa-triangle-exclamation"></i></span>Setup activity schedule
                             </h5>
                             <i class="fa-solid fa-angle-right"></i>
                         </div>
