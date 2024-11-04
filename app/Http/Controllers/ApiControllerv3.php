@@ -12571,6 +12571,8 @@ class ApiControllerv3 extends Controller
                     }
                 } else {
                     $enddate = date('Y-m-d H:i:s', strtotime("-1 days"));
+                    $purchaseToken = '';
+                    $order_id = '';
                 }
 
                 if (!isset($responce->error)) {
@@ -12581,7 +12583,7 @@ class ApiControllerv3 extends Controller
                     $new_subscription->endDate = $enddate;
                     $new_subscription->orderId = $order_id;
                     $new_subscription->type = 'subscribe';
-                    $new_subscription->purchaseToken = $input['purchaseToken'];
+                    $new_subscription->purchaseToken = $purchaseToken;
                     $new_subscription->device_type = $input['device_type'];
                     $new_subscription->price = 150;
                     $new_subscription->productId = $productID;
@@ -12779,16 +12781,16 @@ class ApiControllerv3 extends Controller
             $purchaseToken = $userSubscription->purchaseToken;
             if($userSubscription->device_type == 'ios'){
                 $responce =  $this->set_apple_iap($purchaseToken);
-                // dd($responce);
                 foreach ($responce->latest_receipt_info as $key => $value) {
                     if(isset($value->expires_date_ms) && $value->expires_date_ms != null && date('Y-m-d H:i', ($value->expires_date_ms /  1000)) >= date('Y-m-d H:i') ){
-                     // print_r($value->expires_date_ms);die;
                         $enddate =  date('Y-m-d H:i:s', ($value->expires_date_ms /  1000));
 
                         $current_date = date('Y-m-d H:i:s');
                         $date = Carbon::parse($enddate);
                         if (strtotime($current_date) > strtotime($enddate)) {
                             $userSubscription->endDate = $enddate;
+                            $userSubscription->purchaseToken = '';
+                            $userSubscription->orderId = '';
                             $userSubscription->save();
                             return response()->json(['status' => 0, 'message' => "subscription is not active", 'type' => 'Free','enddate' => $date->format('F d, Y')]);
                         }
