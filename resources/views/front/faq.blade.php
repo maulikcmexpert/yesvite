@@ -14,6 +14,14 @@
     .accordion-button:not(.collapsed) {
         background-color: white;
     }
+    .faqaccordion h2{
+        margin-bottom: 0px !important;
+    }
+
+    .faqaccordion .accordion-item{
+        margin-bottom: 30px;
+    }
+
     </style>
     <div class="container my-5">
         <h2 class="text-center mb-4">FAQ</h2>
