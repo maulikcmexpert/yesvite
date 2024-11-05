@@ -59,70 +59,38 @@
                 .remove(); // Remove the entire col-lg-3 div containing the input
         });
 
-        $(document).on("click", ".delete_template", function(event) {
-
+        $(document).on("click", ".delete_faq", function(event) {
             var userURL = $(this).data("url");
-
             event.preventDefault();
-
             swal({
-
                 title: `Are you sure you want to delete this record?`,
-
                 text: "If you delete this, it will be gone forever.",
-
                 icon: "warning",
-
                 buttons: true,
-
                 dangerMode: true,
-
             }).then((willDelete) => {
-
                 if (willDelete) {
-
                     $.ajax({
-
                         headers: {
-
                             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
-
                                 "content"
-
                             ),
-
                         },
-
                         method: "DELETE",
-
                         url: userURL,
-
                         dataType: "json",
-
                         success: function(output) {
-
                             if (output == true) {
-
                                 table.ajax.reload();
-
-                                toastr.success("template Deleted successfully !");
-
+                                toastr.success("Question Deleted successfully !");
                             } else {
-
-                                toastr.error("template don't Deleted !");
-
+                                toastr.error("Question is not Deleted !");
                             }
-
                         },
-
                     });
-
                 }
-
             });
-
         });
-
 
         document.querySelectorAll('.question').forEach(function(textarea) {
             ClassicEditor
