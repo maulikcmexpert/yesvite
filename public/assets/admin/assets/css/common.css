@@ -1072,6 +1072,12 @@ margin: -43px 0px 0px 8px;
     transform: translate(-50%, -50%);
 }
 
+.nav-sidebar .nav-item>.nav-link{
+    display: flex;
+    align-items: start;
+    gap: 3px;
+}
+
 /* ========Responsive====== */
 
 @media only screen and (max-width:768px){
