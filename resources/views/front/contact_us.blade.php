@@ -7,7 +7,7 @@
                     <h1>Contact Us</h1>
                     <form action="{{ route('contact.submit') }}" method="POST" class="mt-4">
                         @csrf
-                        <div class="form-group">
+                        <div class="form-group input-form">
                             {{-- <label for ="name">Name</label> --}}
                             <label for="firstname" class="floating-label">First Name <span>*</span></label>
                             <input type="text" class="form-control" id="name" name="name"
