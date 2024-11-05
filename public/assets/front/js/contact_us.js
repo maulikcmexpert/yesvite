@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    alert();
+    // alert();
 $("#contact_us_form").validate({
     rules: {
         name: "required",
