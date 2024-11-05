@@ -89,6 +89,8 @@ Route::post('check_add_account', [AuthController::class, 'checkAddAccount'])->na
 
 // Route::get('faq', [FaqController::class, 'index'])->name('faq');
 Route::get('contact-us', [ContactUsController::class, 'index'])->name('contact');
+Route::post('contact-submit', [ContactUsController::class, 'submit'])->name('contact.submit');
+
 
 Route::middleware('checkUserExist')->group(function () {
 
