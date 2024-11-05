@@ -70,8 +70,7 @@
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                // alert();
-                $('#delete_category_from').submit();
+                $('#delete_faq_from').submit();
 
             }
         });

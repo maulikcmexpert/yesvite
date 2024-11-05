@@ -40,7 +40,7 @@ class faqController extends Controller
 
                     $actionBtn = '<div class="action-icon">
                         <a class="" href="' . $edit_url . '" title="Edit"><i class="fa fa-edit"></i></a>
-                        <form action="' . $delete_url . '" method="POST">' .
+                        <form id="delete_faq_from"action="' . $delete_url . '" method="POST">' .
                         csrf_field() . // Changed from @csrf to csrf_field()
                         method_field("DELETE") . // Changed from @method to method_field()
                         '<button type="button" class="btn bg-transparent delete_faq"><i class="fas fa-trash"></i></button></form>
