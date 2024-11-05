@@ -7,7 +7,7 @@
                     <h1>Contact Us</h1>
                     <form action="{{ route('contact.submit') }}" method="POST" class="mt-4">
                         @csrf
-                        <div class="mb-3">
+                        <div class="mb-4">
                             <div class="form-group input-form">
                                 {{-- <label for ="name">Name</label> --}}
                                 
@@ -19,7 +19,7 @@
                             <span class="text-danger">{{ $errors->first('name') }}</span>
                         </div>
                         
-                        <div class="mb-3">
+                        <div class="mb-4">
                             <div class="form-group input-form">
                                 {{-- <label for ="mail">Email</label> --}}
                                 
