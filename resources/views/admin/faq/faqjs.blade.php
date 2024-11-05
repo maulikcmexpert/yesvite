@@ -59,38 +59,23 @@
                 .remove(); // Remove the entire col-lg-3 div containing the input
         });
 
-        $(document).on("click", ".delete_faq", function(event) {
-            var userURL = $(this).data("url");
-            event.preventDefault();
-            swal({
-                title: `Are you sure you want to delete this record?`,
-                text: "If you delete this, it will be gone forever.",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-            }).then((willDelete) => {
-                if (willDelete) {
-                    $.ajax({
-                        headers: {
-                            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
-                                "content"
-                            ),
-                        },
-                        method: "DELETE",
-                        url: userURL,
-                        dataType: "json",
-                        success: function(output) {
-                            if (output == true) {
-                                table.ajax.reload();
-                                toastr.success("Question Deleted successfully !");
-                            } else {
-                                toastr.error("Question is not Deleted !");
-                            }
-                        },
-                    });
-                }
-            });
+        $(document).on('click', '.delete_faq', function() {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // alert();
+                $('#delete_category_from').submit();
+
+            }
         });
+    })
 
         document.querySelectorAll('.question').forEach(function(textarea) {
             ClassicEditor
