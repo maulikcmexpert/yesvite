@@ -385,6 +385,10 @@ h1.ProductTitle{
     border-top: 1px solid #ccc;
 }
 
+.categoryCard .faq-footer{
+    margin-bottom: 70px;
+}
+
 .categoryCard .card-footer input{
    background-color: var(--ButtonColor);
    border-color: transparent;
