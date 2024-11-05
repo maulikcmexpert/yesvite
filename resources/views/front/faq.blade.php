@@ -20,6 +20,7 @@
 
     .faqaccordion .accordion-item{
         margin-bottom: 30px;
+        border-radius: 15px 15px 15px 15px;
     }
 
 
