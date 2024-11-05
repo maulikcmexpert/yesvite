@@ -385,8 +385,8 @@ h1.ProductTitle{
     border-top: 1px solid #ccc;
 }
 
-.categoryCard .faq-footer{
-    margin-bottom: 70px;
+.faq-footer{
+    margin-bottom: 70px !important;
 }
 
 .categoryCard .card-footer input{
