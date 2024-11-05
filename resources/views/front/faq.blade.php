@@ -30,6 +30,7 @@
     .accordion-body{
         border: 1px solid #dee2e6;
         border-radius: 0px 0px 15px 15px !important;
+        border-top: none !important;
     }
 
     .accordion-button P{
