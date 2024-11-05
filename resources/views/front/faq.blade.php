@@ -20,7 +20,10 @@
 
     .faqaccordion .accordion-item{
         margin-bottom: 30px;
+        border-radius: 15px;
+        overflow: hidden;
     }
+
 
     .accordion-button.collapsed{
         border-bottom: none !important;
