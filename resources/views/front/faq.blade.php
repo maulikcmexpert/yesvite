@@ -20,16 +20,10 @@
 
     .faqaccordion .accordion-item{
         margin-bottom: 30px;
-        border-radius: 15px 15px 15px 15px;
     }
-
 
     .accordion-button.collapsed{
         border-bottom: none !important;
-    }
-    .accordion-button{
-        border-radius: 15px 15px 15px 15px;
-        border: none !important;
     }
 
     .accordion-button P{
