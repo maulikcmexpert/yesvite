@@ -2,7 +2,7 @@
 <section class="about-banner">
     <div class="container">
         <div class="row align-items-center">
-            <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="col-lg-6 col-md-6 col-sm-12">
                 <div class="content">
                     <h1>Contact Us</h1>
                     <form action="{{ route('contact.submit') }}" method="POST" class="mt-5  mb-4 mb-sm-0">
@@ -45,7 +45,7 @@
                     </form>
                 </div>
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="col-lg-6 col-md-6 col-sm-12">
                 <div class="about-img wow fadeInRight text-center" data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0">
                     <img src="{{ asset('assets/front/image/about-img.png') }}" alt="about-img">
                 </div>
