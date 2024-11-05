@@ -1551,14 +1551,14 @@ function verifyApplePurchase($userId, $purchaseToken)
 
 function getGoogleAccessToken()
 {
-    $response = Http::asForm()->post('https://oauth2.googleapis.com/token', [
-        'client_id' => env('InGOOGLE_CLIENT_ID'),
-        'client_secret' => env('InGOOGLE_CLIENT_SECRET'),
-        'refresh_token' => '1//0guM_YHb1r6TSCgYIARAAGBASNwF-L9IrfGv1xcs97MEeTEsIiHyq_j2lKwgN6vjJawdN9ZilCq9bFdkOA7xz0X1_O1HCajiN2no',
-        'grant_type' => 'refresh_token',
-    ]);
+    // $response = Http::asForm()->post('https://oauth2.googleapis.com/token', [
+    //     'client_id' => env('InGOOGLE_CLIENT_ID'),
+    //     'client_secret' => env('InGOOGLE_CLIENT_SECRET'),
+    //     'refresh_token' => '1//0guM_YHb1r6TSCgYIARAAGBASNwF-L9IrfGv1xcs97MEeTEsIiHyq_j2lKwgN6vjJawdN9ZilCq9bFdkOA7xz0X1_O1HCajiN2no',
+    //     'grant_type' => 'refresh_token',
+    // ]);
 
-    return $response->json('access_token');
+    // return $response->json('access_token');
 }
 
 function verifyGooglePurchase($userId, $purchaseToken)
