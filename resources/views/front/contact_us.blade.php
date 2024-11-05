@@ -14,13 +14,13 @@
                                 placeholder="Your Name">
                         </div>
                         <span class="text-danger">{{ $errors->first('name') }}</span>
-                        <div class="form-group">
+                        <div class="form-group input-form">
                             <label for ="mail">Email</label>
                             <input type="email" class="form-control" id="email" name="email"
                                 placeholder="Your Email">
                             <span class="text-danger">{{ $errors->first('email') }}</span>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group input-form">
                             <label for="message">Message</label>
                             <textarea class="form-control" id="message" name="message" rows="4" placeholder="Your Message"></textarea>
                             <span class="text-danger">{{ $errors->first('message') }}</span>
