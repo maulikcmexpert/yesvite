@@ -1,5 +1,6 @@
 $(document).ready(function(){
     // alert();
+$('.error').removeClass('floatingfocus');
 $("#contact_us_form").validate({
     rules: {
         name: {
