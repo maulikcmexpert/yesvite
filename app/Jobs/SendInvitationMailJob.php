@@ -26,14 +26,14 @@ class SendInvitationMailJob implements ShouldQueue
         $this->data = $data;
         $this->email = $this->data[0];
         $this->templateData = $this->data[1];
-        $invitation_email = new InvitationEmail($this->templateData);
-        Mail::to($this->email)->send($invitation_email);
     }
-
+    
     /**
      * Execute the job.
      */
     public function handle(): void
     {
+        $invitation_email = new InvitationEmail($this->templateData);
+        Mail::to($this->email)->send($invitation_email);
     }
 }
