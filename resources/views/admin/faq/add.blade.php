@@ -19,7 +19,7 @@
 
 
 
-        <div class="card card-primary categoryCard">
+        <div class="card card-primary categoryCard faq-footer">
 
             <div class="card-header">
 
