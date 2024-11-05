@@ -22,6 +22,10 @@
         margin-bottom: 30px;
     }
 
+    .accordion-button{
+        border-bottom: none !important;
+    }
+
     .accordion-button P{
         font-size: 20px;
         font-weight: 600;
