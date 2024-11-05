@@ -26,7 +26,8 @@ use App\Http\Controllers\admin\{
     LoginHistory,
     Privacy_policyController,
     Terms_ConditionController,
-    RolesController
+    RolesController,
+    faqController
 };
 use App\Http\Controllers\sendNotificationController;
 
@@ -86,9 +87,8 @@ Route::group(['middleware' => adminAuth::Class], function () {
         'login_history' => LoginHistory::class,
         'privacy_policy'=>Privacy_policyController::class,
         'terms_condition'=>Terms_ConditionController::class,
-        'roles'=>RolesController::class
-
-
+        'roles'=>RolesController::class,
+        'faq'=>faqController::class
     ]);
 
     Route::post('/update-status', [UserController::class, 'updateStatus'])->name('update.status');

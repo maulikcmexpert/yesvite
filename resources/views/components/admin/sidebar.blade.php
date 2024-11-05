@@ -243,6 +243,33 @@
           </li>
         </ul>
       </li>
+
+
+      {{-- <li class="nav-item">
+        <ul class="nav">
+            <li class="nav-item">
+                <a href="{{ URL::to('/admin/faq') }}"
+                    class="nav-link {{ Request::segment(2) == 'faq' ? 'active' : '' }}">
+                    <i class="fa fa-question-circle" aria-hidden="true"></i>
+                    <p>FAQ</p>
+                </a>
+            </li>
+        </ul>F
+    </li> --}}
+
+
+    <li class="nav-item">
+      <p class="asideTitle">FAQ</p>
+      <ul class="nav">
+        <li class="nav-item">
+          <a href="{{ URL::to('/admin/faq') }}"
+          class="nav-link {{ Request::segment(2) == 'faq' ? 'active' : '' }}">
+          <i class="fa fa-question-circle" aria-hidden="true"></i>
+          <p>FAQ</p>
+      </a>
+        </li>
+      </ul>
+    </li>
         <!-- <li class="nav-item">
             <a href="{{URL::to('/admin/users')}}" class="nav-link {{ (Request::segment(2) == 'users')? 'active':'' }}">
               <i class="fas fa-users nav-icon"></i>
