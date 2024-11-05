@@ -17,7 +17,7 @@
     </style>
     <div class="container my-5">
         <h2 class="text-center mb-4">FAQ</h2>
-        <div class="accordion" id="faqAccordion">
+        <div class="accordion faqaccordion" id="faqAccordion">
             @foreach($faqs as $faq)
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="faqHeading{{ $loop->index }}">
