@@ -9,16 +9,20 @@
                         @csrf
                         <div class="mb-4">
                             <div class="form-group input-form">
-                                <input type="text" class="form-control" id="name" name="name">
-                                <label for="name" class="floating-label">Name<span>*</span></label>
+                                <div class="position-relative">
+                                    <input type="text" class="form-control" id="name" name="name">
+                                    <label for="name" class="floating-label">Name<span>*</span></label>
+                                </div>
                                 <label id="name-error" class="error" for="name"></label>
                             </div>
                             <span class="text-danger" style="font-size: 12px">{{ $errors->first('name') }}</span>
                         </div>
                         <div class="mb-4">
-                            <div class="form-group input-form">                                
-                                <input type="email" class="form-control" id="email" name="email">
-                                <label for="email" class="floating-label">Email<span>*</span></label>
+                            <div class="form-group input-form">   
+                                <div class="position-relative">
+                                    <input type="email" class="form-control" id="email" name="email">
+                                    <label for="email" class="floating-label">Email<span>*</span></label>
+                                </div>
                                 <label id="email-error" class="error" for="name"></label>
 
                             </div>
@@ -26,8 +30,10 @@
                         </div>
                         <div class="mb-3">
                             <div class="form-group input-form">
-                                <textarea class="form-control" id="message" name="message" rows="4"></textarea>
-                                <label for="message" class="floating-label">Message <span>*</span></label>
+                                <div class="position-relative">
+                                    <textarea class="form-control" id="message" name="message" rows="4"></textarea>
+                                    <label for="message" class="floating-label">Message <span>*</span></label>
+                                </div>
                                 <label id="message-error" class="error" for="name"></label>
 
                             </div>
