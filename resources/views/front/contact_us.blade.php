@@ -46,7 +46,7 @@
                 </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6">
-                <div class="about-img wow fadeInRight" data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0">
+                <div class="about-img wow fadeInRight text-center" data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0">
                     <img src="{{ asset('assets/front/image/about-img.png') }}" alt="about-img">
                 </div>
             </div>
