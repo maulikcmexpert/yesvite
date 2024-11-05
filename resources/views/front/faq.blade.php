@@ -16,7 +16,7 @@
     }
     </style>
     <div class="container my-5">
-        <h1 class="text-center mb-4">FAQ</h1>
+        <h2 class="text-center mb-4">FAQ</h2>
         <div class="accordion" id="faqAccordion">
             @foreach($faqs as $faq)
                 <div class="accordion-item">
