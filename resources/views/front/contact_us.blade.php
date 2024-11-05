@@ -7,26 +7,33 @@
                     <h1>Contact Us</h1>
                     <form action="{{ route('contact.submit') }}" method="POST" class="mt-4">
                         @csrf
-                        <div class="form-group input-form">
-                            {{-- <label for ="name">Name</label> --}}
-                            <label for="firstname" class="floating-label">First Name <span>*</span></label>
-                            <input type="text" class="form-control" id="name" name="name"
-                                placeholder="Your Name">
+                        <div class="mb-3">
+                            <div class="form-group input-form">
+                                {{-- <label for ="name">Name</label> --}}
+                                <label for="firstname" class="floating-label">First Name <span>*</span></label>
+                                <input type="text" class="form-control" id="name" name="name"
+                                    >
+                                
+                            </div>
                             <span class="text-danger">{{ $errors->first('name') }}</span>
                         </div>
                         
-                        <div class="form-group input-form">
-                            {{-- <label for ="mail">Email</label> --}}
-                            <label for="firstname" class="floating-label">First Name <span>*</span></label>
-                            <input type="email" class="form-control" id="email" name="email"
-                                placeholder="Your Email">
+                        <div class="mb-3">
+                            <div class="form-group input-form">
+                                {{-- <label for ="mail">Email</label> --}}
+                                <label for="firstname" class="floating-label">First Name <span>*</span></label>
+                                <input type="email" class="form-control" id="email" name="email"
+                                    >
+                            </div>
                             <span class="text-danger">{{ $errors->first('email') }}</span>
                         </div>
 
-                        <div class="form-group input-form">
-                            {{-- <label for="message">Message</label> --}}
-                            <label for="firstname" class="floating-label">First Name <span>*</span></label>
-                            <textarea class="form-control" id="message" name="message" rows="4" placeholder="Your Message"></textarea>
+                        <div class="mb-3">
+                            <div class="form-group input-form">
+                                {{-- <label for="message">Message</label> --}}
+                                <label for="firstname" class="floating-label">First Name <span>*</span></label>
+                                <textarea class="form-control" id="message" name="message" rows="4"></textarea>
+                            </div>
                             <span class="text-danger">{{ $errors->first('message') }}</span>
                         </div>
 
