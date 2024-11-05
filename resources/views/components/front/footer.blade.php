@@ -39,6 +39,9 @@
 <script src="{{ asset('assets/front/js/design.js') }}"></script>
 
 <script src="{{ asset('assets/front/js/map.js') }}"></script>
+<script src="{{ asset('assets/front/js/map.js') }}"></script>
+<script src="{{ asset('assets/front/js/contact_us.js') }}"></script>
+
 
 <script src="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.js"></script>
 
