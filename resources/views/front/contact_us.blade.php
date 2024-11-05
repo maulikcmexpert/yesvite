@@ -9,33 +9,22 @@
                         @csrf
                         <div class="mb-4">
                             <div class="form-group input-form">
-                                {{-- <label for ="name">Name</label> --}}
-                                
-                                <input type="text" class="form-control" id="name" name="name"
-                                    >
-                                    <label for="firstname" class="floating-label">First Name <span>*</span></label>
-                                
+                                <input type="text" class="form-control" id="name" name="name">
+                                <label for="name" class="floating-label">Name<span>*</span></label>
                             </div>
                             <span class="text-danger" style="font-size: 12px">{{ $errors->first('name') }}</span>
                         </div>
-                        
                         <div class="mb-4">
-                            <div class="form-group input-form">
-                                {{-- <label for ="mail">Email</label> --}}
-                                
-                                <input type="email" class="form-control" id="email" name="email"
-                                    >
-                                    <label for="firstname" class="floating-label">First Name <span>*</span></label>
+                            <div class="form-group input-form">                                
+                                <input type="email" class="form-control" id="email" name="email">
+                                <label for="email" class="floating-label">Email<span>*</span></label>
                             </div>
                             <span class="text-danger" style="font-size: 12px">{{ $errors->first('email') }}</span>
                         </div>
-
                         <div class="mb-3">
                             <div class="form-group input-form">
-                                {{-- <label for="message">Message</label> --}}
                                 <textarea class="form-control" id="message" name="message" rows="4"></textarea>
-                                <label for="firstname" class="floating-label">First Name <span>*</span></label>
-
+                                <label for="message" class="floating-label">First Name <span>*</span></label>
                             </div>
                             <span class="text-danger" style="font-size: 12px">{{ $errors->first('message') }}</span>
                         </div>
