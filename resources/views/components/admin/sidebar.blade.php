@@ -68,9 +68,6 @@
             <p>Dashboard</p>
           </a>
         </li>
-
-
-
         <li class="nav-item">
           <p class="asideTitle">Design Template</p>
           <ul class="pl-0">
@@ -130,7 +127,6 @@
             </li>
           </ul>
         </li>
-
         <li class="nav-item">
           <p class="asideTitle">User Management</p>
           <ul class="nav">
@@ -140,28 +136,24 @@
                 <p>Users</p>
               </a>
             </li>
-           
             <li class="nav-item">
               <a href="{{URL::to('/admin/professional_users')}}" class="nav-link {{ (Request::segment(2) == 'professional_users')? 'active':'' }}">
                 <i class="fas fa-user-tie nav-icon"></i>
                 <p>Professional Users</p>
               </a>
             </li>
-
             <li class="nav-item">
               <a href="{{URL::to('/admin/account_verification')}}" class="nav-link {{ (Request::segment(2) == 'account_verification')? 'active':'' }}">
                 <i class="fas fa-user-tie nav-icon"></i>
                 <p>Account Verification</p>
               </a>
             </li>
-
             <li class="nav-item">
               <a href="{{URL::to('/admin/user_resend_verification')}}" class="nav-link {{ (Request::segment(2) == 'user_resend_verification')? 'active':'' }}">
                 <i class="fas fa-user-tie nav-icon"></i>
                 <p>Expired Verification Emails</p>
               </a>
             </li>
-
             <li class="nav-item">
               <a href="{{URL::to('/admin/user_post_report')}}" class="nav-link {{ (Request::segment(2) == 'user_post_report')? 'active':'' }}">
                 <i class="fas fa-user-tie nav-icon"></i>
@@ -174,21 +166,18 @@
                 <p>Users Chat Reports</p>
               </a>
             </li>
-
             <li class="nav-item">
               <a href="{{URL::to('/admin/sendNotification')}}" class="nav-link {{ (Request::segment(3) == 'sendNotification')? 'active':'' }}">
                 <i class="fas fa-user-tie nav-icon"></i>
                 <p>Send Notification</p>
               </a>
             </li>
-
             <li class="nav-item">
               <a href="{{URL::to('/admin/login_history')}}" class="nav-link {{ (Request::segment(2) == 'login_history')? 'active':'' }}">
                 <i class="fas fa-user-tie nav-icon"></i>
                 <p>Login History</p>
               </a>
             </li>
-
           </ul>
         </li>
 
