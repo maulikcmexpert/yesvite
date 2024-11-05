@@ -22,6 +22,14 @@
         margin-bottom: 30px;
     }
 
+    .accordion-button P{
+        font-size: 24px;
+        font-weight: 600;
+        color: var(--headingColor);
+        line-height: 32px;
+        margin-bottom: 0;
+    }
+
     </style>
     <div class="container my-5">
         <h2 class="text-center mb-4">FAQ</h2>
