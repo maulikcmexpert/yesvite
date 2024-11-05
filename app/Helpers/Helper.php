@@ -115,7 +115,7 @@ function sendNotification($notificationType, $postData)
             'date' =>   date('l - M jS, Y', strtotime($event->start_date)),
             'time' => $event->rsvp_start_time,
         ];
-        dispatch(new SendOwnInvitationEmail(array($senderData->email, $eventData)));
+        // dispatch(new SendOwnInvitationEmail(array($senderData->email, $eventData)));
         // $invitation_email = new OwnInvitationEmail($eventData);
         // Mail::to($senderData->email)->send($invitation_email);
     }
