@@ -5,7 +5,7 @@
             <div class="col-lg-6 col-md-6 col-sm-6">
                 <div class="content">
                     <h1>Contact Us</h1>
-                    <form action="{{ route('contact.submit') }}" method="POST" class="mt-4">
+                    <form action="{{ route('contact.submit') }}" method="POST" class="mt-5">
                         @csrf
                         <div class="mb-4">
                             <div class="form-group input-form">
