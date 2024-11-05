@@ -103,12 +103,11 @@ function sendNotification($notificationType, $postData)
     $senderData = User::where('id', $postData['sender_id'])->first();
     if ($notificationType == 'owner_notify') {
         $event = Event::with('event_image', 'event_schedule')->where('id', $postData['event_id'])->first();
-        $event_time = "";
-        if ($event->event_schedule->isNotEmpty()) {
+        // $event_time = "";
+        // if ($event->event_schedule->isNotEmpty()) {
 
-            $event_time =  $event->event_schedule->first()->start_time;
-        }
-
+        //     $event_time =  $event->event_schedule->first()->start_time;
+        // }
         $eventData = [
             'event_name' => $event->event_name,
             'event_image' => ($event->event_image->isNotEmpty()) ? $event->event_image[0]->image : "no_image.png",

@@ -10462,7 +10462,7 @@ class ApiControllerv2 extends Controller
                 if ($value['id'] == "0") {
                     $addNewUser = new User;
                     $addNewUser->firstname = $value['first_name'];
-                    $addNewUser->email = $value['email'];
+                    $addNewUser->email = (isset($value['email']) && $value['email']!= '')?$value['email']:NULL;
                     $addNewUser->country_code = '1';
                     $addNewUser->app_user = '0';
                     $addNewUser->is_user_phone_contact = '1';
