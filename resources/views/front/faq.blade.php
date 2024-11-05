@@ -23,7 +23,7 @@
     }
 
     .accordion-button P{
-        font-size: 24px;
+        font-size: 20px;
         font-weight: 600;
         color: var(--headingColor);
         line-height: 32px;
