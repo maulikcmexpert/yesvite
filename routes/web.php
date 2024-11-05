@@ -16,7 +16,8 @@ use App\Http\Controllers\{
     ChatController,
     PrivacyPolicyController,
     TermsAndConditionController,
-    DesignController
+    DesignController,
+    ContactUsController
 };
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
@@ -82,6 +83,12 @@ Route::view('/template/post_temp_11', 'front.event.template.post_temp_11')->name
 
 Route::get('add_account', [AuthController::class, 'addAccount'])->name('auth.add_account');
 Route::post('check_add_account', [AuthController::class, 'checkAddAccount'])->name('auth.checkAddAccount');
+
+
+
+
+// Route::get('faq', [FaqController::class, 'index'])->name('faq');
+Route::get('contact-us', [ContactUsController::class, 'index'])->name('contact');
 
 Route::middleware('checkUserExist')->group(function () {
 
