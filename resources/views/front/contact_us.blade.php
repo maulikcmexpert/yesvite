@@ -5,14 +5,15 @@
             <div class="col-lg-6 col-md-6 col-sm-6">
                 <div class="content">
                     <h1>Contact Us</h1>
-                    <form action="{{ route('contact.submit') }}" method="POST">
+                    <form action="{{ route('contact.submit') }}" method="POST" class="mt-4">
                         @csrf
                         <div class="form-group">
-                            <label for ="name">Name</label>
+                            {{-- <label for ="name">Name</label> --}}
+                            <label for="firstname" class="floating-label">First Name <span>*</span></label>
                             <input type="text" class="form-control" id="name" name="name"
                                 placeholder="Your Name">
-                            <span class="text-danger">{{ $errors->first('name') }}</span>
                         </div>
+                        <span class="text-danger">{{ $errors->first('name') }}</span>
                         <div class="form-group">
                             <label for ="mail">Email</label>
                             <input type="email" class="form-control" id="email" name="email"
