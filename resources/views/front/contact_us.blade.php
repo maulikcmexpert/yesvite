@@ -16,7 +16,7 @@
                                     <label for="firstname" class="floating-label">First Name <span>*</span></label>
                                 
                             </div>
-                            <span class="text-danger">{{ $errors->first('name') }}</span>
+                            <span class="text-danger" style="font-size: 12px">{{ $errors->first('name') }}</span>
                         </div>
                         
                         <div class="mb-4">
@@ -27,7 +27,7 @@
                                     >
                                     <label for="firstname" class="floating-label">First Name <span>*</span></label>
                             </div>
-                            <span class="text-danger">{{ $errors->first('email') }}</span>
+                            <span class="text-danger" style="font-size: 12px">{{ $errors->first('email') }}</span>
                         </div>
 
                         <div class="mb-3">
@@ -37,7 +37,7 @@
                                 <label for="firstname" class="floating-label">First Name <span>*</span></label>
 
                             </div>
-                            <span class="text-danger">{{ $errors->first('message') }}</span>
+                            <span class="text-danger" style="font-size: 12px">{{ $errors->first('message') }}</span>
                         </div>
 
                         <br>
