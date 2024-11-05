@@ -12,8 +12,9 @@
                             <label for="firstname" class="floating-label">First Name <span>*</span></label>
                             <input type="text" class="form-control" id="name" name="name"
                                 placeholder="Your Name">
+                            <span class="text-danger">{{ $errors->first('name') }}</span>
                         </div>
-                        <span class="text-danger">{{ $errors->first('name') }}</span>
+                        
                         <div class="form-group input-form">
                             {{-- <label for ="mail">Email</label> --}}
                             <label for="firstname" class="floating-label">First Name <span>*</span></label>
@@ -21,6 +22,7 @@
                                 placeholder="Your Email">
                             <span class="text-danger">{{ $errors->first('email') }}</span>
                         </div>
+
                         <div class="form-group input-form">
                             {{-- <label for="message">Message</label> --}}
                             <label for="firstname" class="floating-label">First Name <span>*</span></label>
