@@ -115,8 +115,8 @@ function sendNotification($notificationType, $postData)
             'time' => $event->rsvp_start_time,
         ];
 
-        $invitation_email = new OwnInvitationEmail($eventData);
-        Mail::to($senderData->email)->send($invitation_email);
+        // $invitation_email = new OwnInvitationEmail($eventData);
+        // Mail::to($senderData->email)->send($invitation_email);
     }
     $notification_message = "";
 
@@ -132,8 +132,6 @@ function sendNotification($notificationType, $postData)
                 })->whereIn('user_id', $postData['newUser'])->where('event_id', $postData['event_id'])->get();
             }
             foreach ($invitedusers as $value) {
-
-                // user notification setting //
                 Notification::where(['user_id' => $value->user_id, 'sender_id' => $postData['sender_id'], 'event_id' => $postData['event_id']])->delete();
 
                 $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " have invited you to: " . $value->event->event_name;
@@ -174,7 +172,6 @@ function sendNotification($notificationType, $postData)
 
                         $checkNotificationSetting = checkNotificationSetting($value->user_id);
                         if ((count($checkNotificationSetting) && $checkNotificationSetting['invitations']['push'] == '1') &&  $value->notification_on_off == '1') {
-
                             send_notification_FCM_and($deviceData->device_token, $notificationData);
                         }
                     }
