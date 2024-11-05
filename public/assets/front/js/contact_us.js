@@ -13,24 +13,6 @@ $("#contact_us_form").validate({
     },
 });
 
-$(".form-control").on("focusout change keyup focus", function () {
-    var text_val = $(this).val();
-    if (text_val === "") {
-        $(this).next().removeClass("floatingfocus");
-    } else {
-        $(this).next().addClass("floatingfocus");
-    }
-});
-
-$(".form-control").each(function () {
-    var text = $(this).val();
-    if (text === "") {
-        $(this).next().removeClass("floatingfocus");
-    } else {
-        $(this).next().addClass("floatingfocus");
-    }
-});
-
 $('html').mouseover(function() {
     $(".form-control").each(function () {
         var text = $(this).val();
@@ -40,5 +22,5 @@ $('html').mouseover(function() {
             $(this).next().addClass("floatingfocus");
         }
     });
-});
+}); 
 });
