@@ -1660,7 +1660,7 @@ function set_android_iap($appid, $productID, $purchaseToken, $type)
     $clientSecret = env('InGOOGLE_CLIENT_SECRET');
     $redirectUri = 'https://yesvite.cmexpertiseinfotech.in/google/callback';
 
-    $refreshToken = '1//0gNUrRx3nx_asCgYIARAAGBASNwF-L9Ir-s8ZuTC1TOFWoOvWDbyzUtdTG6z40XfSaTLekuuEEGW43Pqb_WMyS5qdJcb0v7H4KEg';
+    $refreshToken = '1//0gHYN_Ai3rfAnCgYIARAAGBASNwF-L9IrdP-JOsDTkXeH-yqO_Z252HkBEfW7oqRZqcbTrsTQ_u_8eeif8HSml-a-i0Foi6iVH4Q';
 
 
     $TOKEN_URL = "https://accounts.google.com/o/oauth2/token";
@@ -1690,21 +1690,14 @@ function set_android_iap($appid, $productID, $purchaseToken, $type)
     $result = curl_exec($ch);
     $result = json_decode($result, true);
 
-    if (isset($result['error'])) {
-        // Handle Google OAuth error
-        return 'Error: ' . $result['error'] . ' - ' . $result['error_description'];
+    if (!$result || !$result["access_token"]) {
+        //error  
+        // return;
     }
-
-    if (!isset($result["access_token"])) {
-        // Handle missing access_token
-        return 'Error: Access token is not available';
-    }
-    
-    $accessToken = $result["access_token"];
 
 
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $VALIDATE_URL . "?access_token=" . $accessToken);
+    curl_setopt($ch, CURLOPT_URL, $VALIDATE_URL . "?access_token=" . $result["access_token"]);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     $result1 = curl_exec($ch);
     $result1 = json_decode($result1, true);

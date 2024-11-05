@@ -70,17 +70,13 @@ class AuthController extends Controller
 
         $client->authenticate($request->input('code'));
         $accessToken = $client->getAccessToken();
-        if (!empty($accessToken['refresh_token'])) {
-            // Save the refresh token
-            $refreshToken = $accessToken['refresh_token'];
-    
-            // Save this refresh token securely, e.g., in the database
-            // User::update(['google_refresh_token' => $refreshToken]);
-    
-            return 'Refresh token saved!';
-        } else {
-            return 'Refresh token not found!';
-        }
+        dd($accessToken);
+
+        // Save the refresh token
+        $refreshToken = $accessToken['refresh_token'];
+        dd($refreshToken);
+        // Save this refresh token securely, e.g., in the database
+        // User::update(['google_refresh_token' => $refreshToken]);
 
         return 'Refresh token saved!';
     }
