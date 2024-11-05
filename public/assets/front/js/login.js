@@ -3,7 +3,7 @@ console.log(base_url);
 $("#loginForm").validate({
     rules: {
         email: { required: true, email: true },
-        password: { required: true, minlength: 8 },
+        password: { required: true, minlength: 6 },
     },
     messages: {
         email: {
@@ -12,7 +12,7 @@ $("#loginForm").validate({
         },
         password: {
             required: "Please enter Password",
-            minlength: "Password must be at least 8 characters",
+            minlength: "Password must be at least 6 characters",
         },
         submitHandler: function (form) {
             loaderHandle("#loginUser", "Signing..");
