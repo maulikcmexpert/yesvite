@@ -29,6 +29,9 @@
         line-height: 32px;
         margin-bottom: 0;
     }
+    .accordion-button:focus{
+        box-shadow: none !important;
+    }
 
     </style>
     <div class="container my-5">
