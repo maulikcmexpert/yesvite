@@ -2,14 +2,28 @@ $(document).ready(function(){
     // alert();
 $("#contact_us_form").validate({
     rules: {
-        name: "required",
-        email: "required",
-        message:"required"
+        name: {
+            required: true,
+            },
+        email: {
+                required: true,
+                email: true,
+                },
+                        message:{
+                            required: true,
+                            }
     },
     messages: {
-        name: "Please enter your First name",
-        email: "Please enter your Email address",
-        message:"Please enter your Message"
+        name: {
+            required:"Please enter your First name"
+              },
+        email: {
+            required: "Please enter your Email address",
+            email: "Please enter a valid email address",
+            },
+        message:{
+            required:"Please enter your Message"
+              }
     },
 });
 
