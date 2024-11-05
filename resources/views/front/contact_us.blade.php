@@ -20,10 +20,10 @@
                         <div class="mb-4">
                             <div class="input-form">   
                                 <div class="position-relative">
-                                    <input type="email" class="form-control contact_us_email" id="email" name="email">
+                                    <input type="email" class="form-control" id="email" name="email">
                                     <label for="email" class="floating-label">Email<span>*</span></label>
                                 </div>
-                                <label id="email-error" class="error" for="email"></label>
+                                <label id="email-error" class="error contact_us_email_err" for="email"></label>
                             </div>
                             <span class="text-danger" style="font-size: 12px">{{ $errors->first('email') }}</span>
                         </div>
