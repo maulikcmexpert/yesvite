@@ -29,6 +29,7 @@
     }
     .accordion-button{
         border-radius: 15px 15px 15px 15px;
+        border: none !important;
     }
 
     .accordion-button P{
