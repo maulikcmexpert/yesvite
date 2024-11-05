@@ -4,7 +4,7 @@
         <div class="row align-items-center">
             <div class="col-lg-6 col-md-6 col-sm-12">
                 <div class="content">
-                    <h1>Contact Us</h1>
+                    <h1 class="contact-u-form-title">Contact Us</h1>
                     <form action="{{ route('contact.submit') }}" method="POST" class="mt-sm-4 mt-0 mb-5 mb-md-0">
                         @csrf
                         <div class="mb-4">
