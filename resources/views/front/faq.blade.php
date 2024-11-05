@@ -44,7 +44,7 @@
             @foreach($faqs as $faq)
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="faqHeading{{ $loop->index }}">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse{{ $loop->index }}" aria-expanded="true" aria-controls="faqCollapse{{ $loop->index }}">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse{{ $loop->index }}" aria-expanded="true" aria-controls="faqCollapse{{ $loop->index }}">
                             {!! $faq->question !!}
                         </button>
                     </h2>
