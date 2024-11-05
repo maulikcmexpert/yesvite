@@ -11,6 +11,7 @@
                             <div class="form-group input-form">
                                 <input type="text" class="form-control" id="name" name="name">
                                 <label for="name" class="floating-label">Name<span>*</span></label>
+                                <label id="name-error" class="error" for="name"></label>
                             </div>
                             <span class="text-danger" style="font-size: 12px">{{ $errors->first('name') }}</span>
                         </div>
@@ -18,6 +19,8 @@
                             <div class="form-group input-form">                                
                                 <input type="email" class="form-control" id="email" name="email">
                                 <label for="email" class="floating-label">Email<span>*</span></label>
+                                <label id="email-error" class="error" for="name"></label>
+
                             </div>
                             <span class="text-danger" style="font-size: 12px">{{ $errors->first('email') }}</span>
                         </div>
@@ -25,6 +28,8 @@
                             <div class="form-group input-form">
                                 <textarea class="form-control" id="message" name="message" rows="4"></textarea>
                                 <label for="message" class="floating-label">Message <span>*</span></label>
+                                <label id="message-error" class="error" for="name"></label>
+
                             </div>
                             <span class="text-danger" style="font-size: 12px">{{ $errors->first('message') }}</span>
                         </div>
