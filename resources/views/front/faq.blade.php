@@ -22,7 +22,7 @@
         margin-bottom: 30px;
     }
 
-    .accordion-button{
+    .accordion-button.collapsed{
         border-bottom: none !important;
     }
 
