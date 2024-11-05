@@ -24,7 +24,7 @@
                         <div class="mb-3">
                             <div class="form-group input-form">
                                 <textarea class="form-control" id="message" name="message" rows="4"></textarea>
-                                <label for="message" class="floating-label">First Name <span>*</span></label>
+                                <label for="message" class="floating-label">Message <span>*</span></label>
                             </div>
                             <span class="text-danger" style="font-size: 12px">{{ $errors->first('message') }}</span>
                         </div>
