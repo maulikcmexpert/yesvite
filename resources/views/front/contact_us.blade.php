@@ -12,6 +12,9 @@
                                 <input type="text" class="form-control" id="name" name="name">
                                 <label for="name" class="floating-label">Name<span>*</span></label>
                             </div>
+                            <div class="label-error">
+                                <label id="email-error" class="error" for="email">Please enter Email</label>
+                            </div>
                             <span class="text-danger" style="font-size: 12px">{{ $errors->first('name') }}</span>
                         </div>
                         <div class="mb-4">
