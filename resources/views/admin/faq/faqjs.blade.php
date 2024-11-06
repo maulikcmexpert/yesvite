@@ -26,12 +26,6 @@
             form.submit();
         }
     });
-
-    $('#add_faq').click(function(event) {
-        if (!$('#faq_add_form').valid()) {
-            event.preventDefault(); // Stop form submission if invalid
-        }
-    });
 });
 
 
