@@ -129,6 +129,15 @@
                             required: "Please enter the answer"
                         }
                     },
+                    errorElement: "span",
+        errorClass: "text-danger",
+        submitHandler: function(form) {
+            // Ensure all CKEditor instances update their corresponding textareas
+            document.querySelectorAll('.question, .answer').forEach(function(textarea) {
+                textarea.value = ClassicEditor.instances[textarea.id].getData();
+            });
+            form.submit();
+        }
         });
 
     });
