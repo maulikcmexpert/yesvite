@@ -3,7 +3,8 @@
     $(function() {
 
 
-
+        $(document).ready(function() {
+            alert();
     $('#faq_add_form').validate({
         rules:{
             question:{
@@ -22,6 +23,7 @@
             }
         }
     })
+});
 
 
 
