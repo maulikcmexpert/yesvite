@@ -26,15 +26,15 @@ class VerifyUserIsVerified
     {
 
 
-        if (Auth::guard('web')->check()) {
+        if (Auth::check()) {
 
-            $user = Auth::guard('web')->user();
+            $user = Auth::user();
             $currentSessionId = Session::getId();
             
-            if ($user->current_session_id && $user->current_session_id !== $currentSessionId) {
-                Auth::guard('web')->logout();
-                return redirect('/')->with('error', 'You have been logged out because your account was logged in from another device.');
-            }
+            // if ($user->current_session_id && $user->current_session_id !== $currentSessionId) {
+            //     Auth::guard('web')->logout();
+            //     return redirect('/')->with('error', 'You have been logged out because your account was logged in from another device.');
+            // }
 
             $user->current_session_id = $currentSessionId;
             $user->save();
