@@ -4,7 +4,6 @@
 
 
         $(document).ready(function() {
-            // alert();
             $('#faq_add_form').validate({
         rules: {
             question: {
@@ -22,8 +21,16 @@
                 required: "Please enter the answer"
             }
         },
-        errorElement: "span",
-        errorClass: "text-danger"
+
+        submitHandler: function(form) {
+            form.submit();
+        }
+    });
+
+    $('#add_faq').click(function(event) {
+        if (!$('#faq_add_form').valid()) {
+            event.preventDefault(); // Stop form submission if invalid
+        }
     });
 });
 
