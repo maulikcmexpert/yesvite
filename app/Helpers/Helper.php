@@ -171,7 +171,7 @@ function sendNotification($notificationType, $postData)
                             'rsvp_status' => '0',
                         ];
 
-                        // $checkNotificationSetting = checkNotificationSetting($value->user_id);
+                        $checkNotificationSetting = checkNotificationSetting($value->user_id);
                         if ((count($checkNotificationSetting) && $checkNotificationSetting['invitations']['push'] == '1') &&  $value->notification_on_off == '1') {
                             send_notification_FCM_and($deviceData->device_token, $notificationData);
                         }
