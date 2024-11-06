@@ -3,24 +3,7 @@
     $(function() {
 
 
-            $('#faq_add_form').validate({
-                    rules: {
-                        question: {
-                            required: true
-                        },
-                        answer: {
-                            required: true
-                        }
-                    },
-                    messages: { 
-                        question: {
-                            required: "Please enter the question"
-                        },
-                        answer: {
-                            required: "Please enter the answer"
-                        }
-                    },
-        });
+            
 
 
 
@@ -81,6 +64,26 @@
         $(document).on("click", ".remove", function() {
             $(this).closest('.col-lg-3')
                 .remove(); // Remove the entire col-lg-3 div containing the input
+        });
+
+
+        $('#faqAddForm').validate({
+                    rules: {
+                        question: {
+                            required: true
+                        },
+                        answer: {
+                            required: true
+                        }
+                    },
+                    messages: { 
+                        question: {
+                            required: "Please enter the question"
+                        },
+                        answer: {
+                            required: "Please enter the answer"
+                        }
+                    },
         });
 
         $(document).on('click', '.delete_faq', function() {

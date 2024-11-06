@@ -31,7 +31,7 @@
 
 
 
-            <form method="post" action="{{ route('faq.store') }}" id="faq_add_form" enctype="multipart/form-data">
+            <form method="post" action="{{ route('faq.store') }}" id="faqAddForm" enctype="multipart/form-data">
 
                 @csrf
 
