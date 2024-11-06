@@ -12601,16 +12601,15 @@ class ApiControllerv3 extends Controller
                                 'event_id' => $input['event_id'],
                                 'post_id' => ""
                             ];
-                            $checkUserInvited = Event::withCount('event_invited_user')->where('id', $input['event_id'])->first();
                             // dispatch(new SendNotificationJob(array('owner_notify', $notificationParam)));
-                            if ($checkUserInvited->event_invited_user_count != '0') {
-                                dispatch(new SendNotificationJob(array('invite', $notificationParam)));
-                            }
-                            if ($checkUserInvited->is_draft_save == '0') {
-                                dispatch(new SendNotificationJob(array('owner_notify', $notificationParam)));
-                            }
-                            // sendNotification('invite', $notificationParam);
-                            // sendNotification('owner_notify', $notificationParam);
+                            // if ($checkUserInvited->event_invited_user_count != '0') {
+                            //     dispatch(new SendNotificationJob(array('invite', $notificationParam)));
+                            // }
+                            // if ($checkUserInvited->is_draft_save == '0') {
+                            //     dispatch(new SendNotificationJob(array('owner_notify', $notificationParam)));
+                            // }
+                            sendNotification('invite', $notificationParam);
+                            sendNotification('owner_notify', $notificationParam);
                             Event::where('id',$input['event_id'])->update(['is_draft_save'=>'0']);
                         }
                     }
