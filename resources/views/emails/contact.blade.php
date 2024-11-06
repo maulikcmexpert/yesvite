@@ -55,26 +55,7 @@
                   <h4 style="font-size: 20px;line-height: 28px;font-weight: 700;color: #0F172A;margin: 0px 0px;">Contact Us Submission</h4>
                </td>
             </tr>
-            <!-- -------------- -->
-            <tr>
-               <td height="20" style="font-size:0px">&nbsp;</td>
-            </tr>
-            <!-- -------------- -->
-            <tr>
-               <td>
-
-                  <!-- <div class="invited-persons" style="display: flex;align-items: center;justify-content: space-between; width: 100%;max-width: 250px;background-color: #F0FFE8;border: 1px solid #23AA26;padding: 5px 10px 5px 10px;border-radius: 100px;margin-left: 50px;">
-                  <div class="persons-left">
-                     <h5 style="font-size: 10px;line-height: normal;font-weight: 600;color: #0F172A;margin: 0px;">RSVP’d <span style="color: #23AA26;">YES</span></h5>
-                  </div>
-                  <div class="persons-right" style="display: flex;align-items: center;gap: 15px;">
-                     <span class="person-span-1" style="font-size: 10px;line-height: normal;font-weight: 600;color: #0F172A;position: relative;"><i class="fa-solid fa-user-group" style="color: #DDE3E0;font-size: 8px;"></i> 3 Adults</span>
-                     <span style="font-size: 10px;line-height: normal;font-weight: 600;color: #0F172A;">2 Kids</span>
-                  </div>
-               </div>
-               <p style="font-size: 18px;line-height: 25px;font-weight: 400;color: #0F172A;margin: 0px 0px;margin-top: 15px !important;">“Thanks guys for the invite!  Can’t wait to see you guys”</p> -->
-               </td>
-            </tr>
+          
             <tr>
                <td height="30" style="font-size:0px">&nbsp;</td>
             </tr>
