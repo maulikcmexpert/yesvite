@@ -96,13 +96,13 @@
             .then(editor => {
                 questionEditor = editor;
             })
-            .catch(error => console.error(error));
+            // .catch(error => console.error(error));
 
         ClassicEditor.create(document.querySelector('#answer'))
             .then(editor => {
                 answerEditor = editor;
             })
-            .catch(error => console.error(error));
+            // .catch(error => console.error(error));
 
         // Form validation on submit
         $('#faqAddForm').on('submit', function(e) {
@@ -111,17 +111,18 @@
             let answerContent = answerEditor.getData().trim();
 
             // Clear previous error messages
-            $('.text-danger').text('');
+            $('.err_question').text('');
+            $('.err_answer').text('');
 
             // Check if question is empty
             if (!questionContent) {
-                $('#question').next('.text-danger').text('Question cannot be empty.');
+                $('.err_question').text('Question cannot be empty.');
                 isValid = false;
             }
 
             // Check if answer is empty
             if (!answerContent) {
-                $('#answer').next('.text-danger').text('Answer cannot be empty.');
+                $('.err_answer').text('Answer cannot be empty.');
                 isValid = false;
             }
 
