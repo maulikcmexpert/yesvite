@@ -26,9 +26,9 @@ class VerifyUserIsVerified
     {
 
 
-        if (Auth::check()) {
+        if (Auth::guard('web')->check()) {
 
-            $user = Auth::user();
+            $user = Auth::guard('web')->user();
             $currentSessionId = Session::getId();
             
             if ($user->current_session_id && $user->current_session_id !== $currentSessionId) {
