@@ -125,7 +125,7 @@ class RsvpController extends Controller
 
         $userId = decrypt($request->user_id);
         $eventId = decrypt($request->event_id);
-        //    try {
+           try {
 
         $checkEvent = Event::where(['id' => $eventId])->first();
 
@@ -213,14 +213,14 @@ class RsvpController extends Controller
             return  redirect()->route('home')->with('success', 'Rsvp sent Successfully');
         }
         return redirect('rsvp/' . $request->user_id . '/' . $request->event_id)->with('error', 'Rsvp not sent');
-        // } catch (QueryException $e) {
+        } catch (QueryException $e) {
 
-        //     return redirect('rsvp/' . $request->user_id . '/' . $request->event_id)->with('error', 'DB error');
-        //     DB::rollBack();
-        // } catch (\Exception $e) {
+            return redirect('rsvp/' . $request->user_id . '/' . $request->event_id)->with('error', 'DB error');
+            DB::rollBack();
+        } catch (\Exception $e) {
 
-        //     return redirect('rsvp/' . $request->user_id . '/' . $request->event_id)->with('error', 'Something went wrong');
-        // }
+            return redirect('rsvp/' . $request->user_id . '/' . $request->event_id)->with('error', 'Something went wrong');
+        }
     }
 
 
