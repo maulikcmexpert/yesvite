@@ -103,6 +103,7 @@ use Illuminate\Support\Facades\Mail;
 use LogicException;
 use Illuminate\Database\Query\Builder;
 use App\Jobs\SendInvitationMailJob as sendInvitation;
+use App\Jobs\SendNotificationJob;
 use App\Services\GooglePlayService;
 use Illuminate\Support\Facades\Session;
 use stdClass;
@@ -12599,8 +12600,10 @@ class ApiControllerv3 extends Controller
                                 'event_id' => $input['event_id'],
                                 'post_id' => ""
                             ];
-                            sendNotification('invite', $notificationParam);
-                            sendNotification('owner_notify', $notificationParam);
+                            dispatch(new SendNotificationJob(array('invite', $notificationParam)));
+                            dispatch(new SendNotificationJob(array('owner_notify', $notificationParam)));
+                            // sendNotification('invite', $notificationParam);
+                            // sendNotification('owner_notify', $notificationParam);
                             Event::where('id',$input['event_id'])->update(['is_draft_save'=>'0']);
                         }
                     }
@@ -12643,8 +12646,10 @@ class ApiControllerv3 extends Controller
                                 'event_id' => $input['event_id'],
                                 'post_id' => ""
                             ];
-                            sendNotification('invite', $notificationParam);
-                            sendNotification('owner_notify', $notificationParam);
+                            dispatch(new SendNotificationJob(array('invite', $notificationParam)));
+                            dispatch(new SendNotificationJob(array('owner_notify', $notificationParam)));
+                            // sendNotification('invite', $notificationParam);
+                            // sendNotification('owner_notify', $notificationParam);
                             Event::where('id',$input['event_id'])->update(['is_draft_save'=>'0']);
                         }
                     }
@@ -12748,8 +12753,10 @@ class ApiControllerv3 extends Controller
                                 'event_id' => $input['event_id'],
                                 'post_id' => ""
                             ];
-                            sendNotification('invite', $notificationParam);
-                            sendNotification('owner_notify', $notificationParam);
+                            dispatch(new SendNotificationJob(array('invite', $notificationParam)));
+                            dispatch(new SendNotificationJob(array('owner_notify', $notificationParam)));
+                            // sendNotification('invite', $notificationParam);
+                            // sendNotification('owner_notify', $notificationParam);
                             $updateEvent->is_draft_save = '0';
                         // }
                         $updateEvent->product_payment_id = $new_subscription->id;
