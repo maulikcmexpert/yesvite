@@ -44,9 +44,9 @@
         <p><strong>Email:</strong> {{ $data['email'] }}</p>
         <p><strong>Message:</strong>{{ $data['message'] }}</p>
 
-        <div class="footer">
+        {{-- <div class="footer">
             <p>Thank you for reaching out!</p>
-        </div>
+        </div> --}}
     </div>
 </body>
 </html>

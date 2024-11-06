@@ -29,7 +29,7 @@
                         <div class="form-group">
                             <label for="question">Question</label>
                             <textarea class="form-control question" id="question" name="question" placeholder="Enter question">{{ old('question', $getTemData->question) }}</textarea>
-                            <span class="text-danger">{{ $errors->first('question') }}</span>
+                            <span class="text-danger err_question">{{ $errors->first('question') }}</span>
                         </div>
                     </div>
 
@@ -37,7 +37,7 @@
                         <div class="form-group">
                             <label for="answer">Answer</label>
                             <textarea class="form-control answer" id="answer" name="answer" placeholder="Enter answer">{{ old('answer', $getTemData->answer) }}</textarea>
-                            <span class="text-danger">{{ $errors->first('answer') }}</span>
+                            <span class="text-danger err_answer">{{ $errors->first('answer') }}</span>
                         </div>
                     </div>
                 </div>
