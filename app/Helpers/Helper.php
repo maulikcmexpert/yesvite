@@ -173,6 +173,7 @@ function sendNotification($notificationType, $postData)
 
                         // $checkNotificationSetting = checkNotificationSetting($value->user_id);
                         if ((count($checkNotificationSetting) && $checkNotificationSetting['invitations']['push'] == '1') &&  $value->notification_on_off == '1') {
+                            
                             send_notification_FCM_and($deviceData->device_token, $notificationData);
                         }
                     }
