@@ -136,66 +136,54 @@
         // });
 
         $(document).ready(function() {
-    let questionEditor, answerEditor;
+            let questionEditor, answerEditor;
+            // Initialize CKEditors for question and answer
+            ClassicEditor.create(document.querySelector('#question'))
+                .then(editor => {
+                    questionEditor = editor;
+                    editor.model.document.on('change:data', function() {
+                        let questionContent = questionEditor.getData().trim();
+                        if (questionContent) {
+                            $('.err_question').text(''); 
+                        } else {
+                            $('.err_question').text('Please enter a question.'); 
+                        }
+                    });
+                })
+                .catch(error => console.error(error));
 
-    // Initialize CKEditors for question and answer
-    ClassicEditor.create(document.querySelector('#question'))
-        .then(editor => {
-            questionEditor = editor;
-            // Listen for changes in the question editor to remove errors if content is provided
-            editor.model.document.on('change:data', function() {
+            ClassicEditor.create(document.querySelector('#answer'))
+                .then(editor => {
+                    answerEditor = editor;
+                    editor.model.document.on('change:data', function() {
+                        let answerContent = answerEditor.getData().trim();
+                        if (answerContent) {
+                            $('.err_answer').text(''); 
+                        } else {
+                            $('.err_answer').text('Please enter an answer.'); 
+                        }
+                    });
+                })
+                .catch(error => console.error(error));
+
+            $('#faqAddForm').on('submit', function(e) {
+                let isValid = true;
                 let questionContent = questionEditor.getData().trim();
-                if (questionContent) {
-                    $('.err_question').text(''); // Clear error message if there's content
-                } else {
-                    $('.err_question').text('Please enter a question.'); // Show error if content is empty
-                }
-            });
-        })
-        .catch(error => console.error(error));
-
-    ClassicEditor.create(document.querySelector('#answer'))
-        .then(editor => {
-            answerEditor = editor;
-            // Listen for changes in the answer editor to remove errors if content is provided
-            editor.model.document.on('change:data', function() {
                 let answerContent = answerEditor.getData().trim();
-                if (answerContent) {
-                    $('.err_answer').text(''); // Clear error message if there's content
-                } else {
-                    $('.err_answer').text('Please enter an answer.'); // Show error if content is empty
+                $('.err_question').text('');
+                $('.err_answer').text('');
+                if (!questionContent) {
+                    $('.err_question').text('Please enter a question.');
+                    isValid = false;
+                }
+                if (!answerContent) {
+                    $('.err_answer').text('Please enter an answer.');
+                    isValid = false;
+                }
+                if (!isValid) {
+                    e.preventDefault();
                 }
             });
-        })
-        .catch(error => console.error(error));
-
-    // Form validation on submit
-    $('#faqAddForm').on('submit', function(e) {
-        let isValid = true;
-        let questionContent = questionEditor.getData().trim();
-        let answerContent = answerEditor.getData().trim();
-
-        // Clear any previous error messages
-        $('.err_question').text('');
-        $('.err_answer').text('');
-
-        // Check if the question field is empty
-        if (!questionContent) {
-            $('.err_question').text('Please enter a question.');
-            isValid = false;
-        }
-
-        // Check if the answer field is empty
-        if (!answerContent) {
-            $('.err_answer').text('Please enter an answer.');
-            isValid = false;
-        }
-
-        // Prevent form submission if validation fails
-        if (!isValid) {
-            e.preventDefault();
-        }
-    });
 });
 
 
