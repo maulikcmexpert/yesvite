@@ -136,11 +136,11 @@
                <td height="20" style="font-size:0px">&nbsp;</td>
             </tr>
             <!-- -------------- -->
-            <tr>
+            {{-- <tr>
                <td>
                   <p style="font-family:'Manrope';font-size: 12px;line-height: 20px;font-weight: 700;color: #0F172A;margin: 0px;">Invitee Email: <a href="mailto:crisilis@hotmail.com" style="font-family:'Manrope';font-size: 12px;line-height: 20px;font-weight: 500;color: #0F172A;">crisilis@hotmail.com</a></p>
                </td>
-            </tr>
+            </tr> --}}
             <!-- -------------- -->
          </tbody>
       </table>
