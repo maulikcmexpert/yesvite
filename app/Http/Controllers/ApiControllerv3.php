@@ -12600,8 +12600,8 @@ class ApiControllerv3 extends Controller
                                 'event_id' => $input['event_id'],
                                 'post_id' => ""
                             ];
-                            dispatch(new SendNotificationJob(array('invite', $notificationParam)));
                             dispatch(new SendNotificationJob(array('owner_notify', $notificationParam)));
+                            dispatch(new SendNotificationJob(array('invite', $notificationParam)));
                             // sendNotification('invite', $notificationParam);
                             // sendNotification('owner_notify', $notificationParam);
                             Event::where('id',$input['event_id'])->update(['is_draft_save'=>'0']);
