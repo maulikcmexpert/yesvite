@@ -109,6 +109,7 @@ use Illuminate\Support\Facades\Mail;
 use LogicException;
 use Illuminate\Database\Query\Builder;
 use App\Jobs\SendInvitationMailJob as sendInvitation;
+use App\Jobs\SendNotificationJob;
 use App\Services\GooglePlayService;
 use Illuminate\Support\Facades\Session;
 use stdClass;
@@ -5521,8 +5522,8 @@ class ApiControllerv2 extends Controller
                             'event_id' => $input['event_id'],
                             'post_id' => ""
                         ];
-
-                        sendNotification('invite', $notificationParam);
+                        dispatch(new SendNotificationJob(array('invite', $notificationParam)));
+                        // sendNotification('invite', $notificationParam);
                     }
                     if ($checkUserInvited->is_draft_save == '0') {
                         $notificationParam = [
@@ -5530,7 +5531,8 @@ class ApiControllerv2 extends Controller
                             'event_id' => $input['event_id'],
                             'post_id' => ""
                         ];
-                        sendNotification('owner_notify', $notificationParam);
+                        dispatch(new SendNotificationJob(array('owner_notify', $notificationParam)));
+                        // sendNotification('', $notificationParam);
                     }
                 }
             } else {
@@ -5545,7 +5547,8 @@ class ApiControllerv2 extends Controller
                                 'event_id' => $input['event_id'],
                                 'post_id' => ""
                             ];
-                            sendNotification('invite', $notificationParam);
+                            dispatch(new SendNotificationJob(array('invite', $notificationParam)));
+                            // sendNotification('invite', $notificationParam);
                         }
                         if ($checkUserInvited->is_draft_save == '0') {
                             $notificationParam = [
@@ -5553,7 +5556,8 @@ class ApiControllerv2 extends Controller
                                 'event_id' => $input['event_id'],
                                 'post_id' => ""
                             ];
-                            sendNotification('owner_notify', $notificationParam);
+                            dispatch(new SendNotificationJob(array('owner_notify', $notificationParam)));
+                            // sendNotification('owner_notify', $notificationParam);
                         }
                     }
                 }
