@@ -86,51 +86,6 @@
         });
     })
 
-        // document.querySelectorAll('.question').forEach(function(textarea) {
-        //     ClassicEditor
-        //         .create(textarea)
-        //         .then(editor => {
-        //             // Access the editor's editing view container
-        //             editor.ui.view.editable.element.style.height =
-        //             '100px'; // Set the desired height here
-        //         })
-        //         .catch(error => {
-        //             console.error(error);
-        //         });
-        // });
-        // document.querySelectorAll('.answer').forEach(function(textarea) {
-        //     ClassicEditor
-        //         .create(textarea)
-        //         .then(editor => {
-        //             // Access the editor's editing view container
-        //             editor.ui.view.editable.element.style.height = '100px';
-
-        //         })
-        //         .catch(error => {
-        //             console.error(error);
-        //         });
-        // });
-
-
-        // $('#faqAddForm').validate({
-        //             rules: {
-        //                 question: {
-        //                     required: true
-        //                 },
-        //                 answer: {
-        //                     required: true
-        //                 }
-        //             },
-        //             messages: { 
-        //                 question: {
-        //                     required: "Please enter the question"
-        //                 },
-        //                 answer: {
-        //                     required: "Please enter the answer"
-        //                 }
-        //             },
-                   
-        // });
 
 
         $(document).ready(function() {
