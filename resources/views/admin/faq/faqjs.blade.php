@@ -66,9 +66,7 @@
                 .remove(); // Remove the entire col-lg-3 div containing the input
         });
 
-        $(document).on('click','#add_faq',function(){
-alert();
-        
+
         $('#faqAddForm').validate({
                     rules: {
                         question: {
@@ -86,13 +84,7 @@ alert();
                             required: "Please enter the answer"
                         }
                     },
-
-                    submitHandler: function(form) {
-            form.submit();
-        }
         });
-
-    });
 
         $(document).on('click', '.delete_faq', function() {
         Swal.fire({
