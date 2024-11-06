@@ -10400,7 +10400,7 @@ class ApiControllerv2 extends Controller
         }
 
         try {
-            $sendFaildInvites = EventInvitedUser::where(['event_id' => $input['event_id'], 'invitation_sent' => '0'])->get();
+            $sendFaildInvites = EventInvitedUser::where(['event_id' => $input['event_id'], 'invitation_sent' => '9'])->get();
 
             $faildInviteList = [];
 
