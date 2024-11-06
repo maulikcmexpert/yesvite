@@ -4,25 +4,28 @@
 
 
         $(document).ready(function() {
-            alert();
-    $('#faq_add_form').validate({
-        rules:{
-            question:{
-                required:true
+            $('#faq_add_form').validate({
+        rules: {
+            question: {
+                required: true
             },
-            answer:{
-                required:true
+            answer: {
+                required: true
             }
         },
-        messages:{
-            question:{
-                required:"Please enter the question"
+        messages: {
+            question: {
+                required: "Please enter the question"
             },
-            answer:{
-                required:"Please enter the answer"
+            answer: {
+                required: "Please enter the answer"
             }
+        },
+
+        submitHandler: function(form) {
+            form.submit();
         }
-    })
+    });
 });
 
 

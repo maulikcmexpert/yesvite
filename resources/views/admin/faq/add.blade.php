@@ -67,7 +67,7 @@
 
 
                 <div class="card-footer">
-                    <input type="submit" class="btn btn-primary" id="templateAdd" value="Add">
+                    <input type="button" class="btn btn-primary" id="add_faq" value="Add">
                 </div>
 
             </form>
