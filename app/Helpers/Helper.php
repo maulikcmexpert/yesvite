@@ -208,12 +208,12 @@ function sendNotification($notificationType, $postData)
                                 $updateinvitation->save();
                             }
                         } else {
-                            $event_time = "";
-                            if ($value->event->event_schedule->isNotEmpty()) {
+                            // $event_time = "";
+                            // if ($value->event->event_schedule->isNotEmpty()) {
 
                                 // $event_time = $value->event->event_schedule->first()->start_time;
                                 // $event_time = $value->event->rsvp_start_time;
-                            }
+                            // }
 
                             $eventData = [
                                 'event_id' => (int)$postData['event_id'],
