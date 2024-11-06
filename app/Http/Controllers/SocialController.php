@@ -44,7 +44,7 @@ class SocialController extends Controller
         // Check if the user already exists
         $authUser = $this->findOrCreateUser($user, $provider);
         if($authUser->account_status == 'Unblock'){
-            Auth::guard('web')->login($authUser, true)
+            Auth::guard('web')->login($authUser, true);
         }else{
             return redirect('/login')->withErrors([
                 'email' => 'Ban User: Temporarily or permanently suspend user.',
