@@ -156,9 +156,9 @@ class RsvpController extends Controller
 
             $rsvpSent->rsvp_status = $request->rsvp_status;
 
-            $rsvpSent->adults = $request->adults;
+            $rsvpSent->adults = (int)$request->adults;
 
-            $rsvpSent->kids = $request->kids;
+            $rsvpSent->kids = (int)$request->kids;
 
             $rsvpSent->message_to_host = $request->message_to_host;
             $rsvpSent->rsvp_attempt = $rsvp_attempt;
@@ -174,8 +174,8 @@ class RsvpController extends Controller
                 $postMessage = [];
                 $postMessage = [
                     'status' => ($request->rsvp_status == '0') ? '2' : '1',
-                    'adults' => $request->adults,
-                    'kids' => $request->kids
+                    'adults' => (int)$request->adults,
+                    'kids' => (int)$request->kids
                 ];
                 $creatEventPost = new EventPost();
                 $creatEventPost->event_id = $eventId;
