@@ -12548,7 +12548,8 @@ class ApiControllerv3 extends Controller
 
 
         try {
-            $user_id = $this->user->id;
+            $user  = Auth::guard('api')->user();
+            $user_id = $user->id;
             $purchaseToken = $input['purchaseToken'];
 
             if (isset($input['device_type']) && $input['device_type'] == 'ios') {
