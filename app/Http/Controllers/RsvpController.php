@@ -134,15 +134,12 @@ class RsvpController extends Controller
         }
         DB::beginTransaction();
 
-
-
-
         $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {
             $query->where('app_user', '1');
         })->where(['user_id' => $userId, 'event_id' => $eventId])->first();
-        // $rsvpSentAttempt = $rsvpSent->rsvp_status;
+        
         $rsvpSentAttempt = $rsvpSent ? $rsvpSent->rsvp_status : "";
-        dd($rsvpSent);
+        
         if ($rsvpSent != null) {
             $rsvp_attempt = "";
             if ($rsvpSentAttempt == NULL) {
