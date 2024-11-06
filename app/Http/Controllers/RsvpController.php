@@ -127,19 +127,16 @@ class RsvpController extends Controller
         $eventId = decrypt($request->event_id);
 
         try {
-
         $checkEvent = Event::where(['id' => $eventId])->first();
         if ($checkEvent->end_date < date('Y-m-d')) {
             return redirect('rsvp/' . $request->user_id . '/' . $request->event_id)->with('error', "Event is past , you can't attempt RSVP");
         }
         DB::beginTransaction();
-
         $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {
             $query->where('app_user', '1');
         })->where(['user_id' => $userId, 'event_id' => $eventId])->first();
         // dd($rsvpSent);
-        $rsvpSentAttempt = $rsvpSent ? $rsvpSent->rsvp_status : "";
-        
+        $rsvpSentAttempt = $rsvpSent ? $rsvpSent->rsvp_status : "";   
         if ($rsvpSent != null) {
             $rsvp_attempt = "";
             if ($rsvpSentAttempt == NULL) {
