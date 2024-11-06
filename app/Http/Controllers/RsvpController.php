@@ -126,7 +126,7 @@ class RsvpController extends Controller
         $userId = decrypt($request->user_id);
         $eventId = decrypt($request->event_id);
 
-           try {
+        try {
 
         $checkEvent = Event::where(['id' => $eventId])->first();
         if ($checkEvent->end_date < date('Y-m-d')) {
