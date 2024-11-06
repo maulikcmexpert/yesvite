@@ -30,7 +30,7 @@ class ContactUsController extends Controller
             'message' => 'required|string',
         ]);
         
-        Mail::to(env('MAIL_USERNAME'))->send(new ContactMail($data));
+        Mail::to(env('MAIL_FROM_ADDRESS'))->send(new ContactMail($data));
         // Mail::to('hepin.k.cmexpertise@gmail.com')->send(new ContactMail($data));
         return back()->with('success', 'Your message has been sent successfully!');
     }
