@@ -3,30 +3,24 @@
     $(function() {
 
 
-        $(document).ready(function() {
             $('#faq_add_form').validate({
-        rules: {
-            question: {
-                required: true
-            },
-            answer: {
-                required: true
-            }
-        },
-        messages: {
-            question: {
-                required: "Please enter the question"
-            },
-            answer: {
-                required: "Please enter the answer"
-            }
-        },
-
-        submitHandler: function(form) {
-            form.submit();
-        }
-    });
-});
+                    rules: {
+                        question: {
+                            required: true
+                        },
+                        answer: {
+                            required: true
+                        }
+                    },
+                    messages: { 
+                        question: {
+                            required: "Please enter the question"
+                        },
+                        answer: {
+                            required: "Please enter the answer"
+                        }
+                    },
+        });
 
 
 
