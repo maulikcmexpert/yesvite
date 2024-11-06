@@ -147,6 +147,8 @@
                 let questionContent = questionEditor.getData().trim();
                 if (questionContent) {
                     $('.err_question').text(''); // Clear error message if there's content
+                } else {
+                    $('.err_question').text('Please enter a question.'); // Show error if content is empty
                 }
             });
         })
@@ -160,6 +162,8 @@
                 let answerContent = answerEditor.getData().trim();
                 if (answerContent) {
                     $('.err_answer').text(''); // Clear error message if there's content
+                } else {
+                    $('.err_answer').text('Please enter an answer.'); // Show error if content is empty
                 }
             });
         })
