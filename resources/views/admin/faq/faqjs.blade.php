@@ -67,24 +67,7 @@
         });
 
 
-        $('#faqAddForm').validate({
-                    rules: {
-                        question: {
-                            required: true
-                        },
-                        answer: {
-                            required: true
-                        }
-                    },
-                    messages: { 
-                        question: {
-                            required: "Please enter the question"
-                        },
-                        answer: {
-                            required: "Please enter the answer"
-                        }
-                    },
-        });
+       
 
         $(document).on('click', '.delete_faq', function() {
         Swal.fire({
@@ -126,6 +109,26 @@
                 .catch(error => {
                     console.error(error);
                 });
+        });
+
+
+        $('#faqAddForm').validate({
+                    rules: {
+                        question: {
+                            required: true
+                        },
+                        answer: {
+                            required: true
+                        }
+                    },
+                    messages: { 
+                        question: {
+                            required: "Please enter the question"
+                        },
+                        answer: {
+                            required: "Please enter the answer"
+                        }
+                    },
         });
 
     });
