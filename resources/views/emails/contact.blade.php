@@ -10,7 +10,6 @@
    <style>
       @import url('https://fonts.cdnfonts.com/css/sf-pro-display');
       @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
-
       .persons-right .person-span-1::after {
          content: "";
          position: absolute;
@@ -21,26 +20,21 @@
          right: -8px;
          transform: translate(-0%, -50%);
       }
-
       a {
          text-decoration: none;
       }
-
       .main-center,
       .m_-2106421672916089406main-center {
          justify-content: center !important;
       }
    </style>
 </head>
-
 <body style="font-family: 'SF Pro Display', sans-serif !important ;margin: 0px auto;background: #ffffff; display: flex; justify-content: center;  max-width:600px;" class="main-center">
-   <!-- partial:index.partial.html -->
    <div style="width: 100%;max-width: 650px;height:100%;padding: 0px 10px;" class="ui-sortable">
       <table style="border-radius: 5px;box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3); width: 100%; margin: 0px auto; max-width:600px; height:100%;background: #fff;box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);padding: 30px;border-radius: 20px;" class="full selected-table" border="0" cellpadding="0" cellspacing="0">
          <tbody>
             <tr>
                <td>
-                  {{-- <img src="./logo.svg" alt="logo"> --}}
                   <img src="{{ asset('public/storage/yesvitelogo.png')}}" style="width: 100%;max-width: 150px;height:40px" alt="logo">
 
                </td>
@@ -64,22 +58,21 @@
                <td>
                 <p style="font-family: 'Manrope', sans-serif; font-size: 12px; line-height: 20px; font-weight: 500; color: #0F172A;">
                     You have received a new message from the Contact Us form. Please find the details below:
-                 </p>
-           
-                 <p style="font-family: 'Manrope', sans-serif; font-size: 12px; line-height: 20px; font-weight: 500; color: #0F172A;">
+                </p>
+                <p style="font-family: 'Manrope', sans-serif; font-size: 12px; line-height: 20px; font-weight: 500; color: #0F172A;">
                     <strong>Name:</strong> {{ $data['name'] }}
-                 </p>
-           
-                 <p style="font-family: 'Manrope', sans-serif; font-size: 12px; line-height: 20px; font-weight: 500; color: #0F172A;">
+                </p>
+                <p style="font-family: 'Manrope', sans-serif; font-size: 12px; line-height: 20px; font-weight: 500; color: #0F172A;">
                     <strong>Email:</strong> {{ $data['email'] }}
-                 </p>
-           
-                 <p style="font-family: 'Manrope', sans-serif; font-size: 12px; line-height: 20px; font-weight: 500; color: #0F172A;">
+                </p>         
+                <p style="font-family: 'Manrope', sans-serif; font-size: 12px; line-height: 20px; font-weight: 500; color: #0F172A;">
                     <strong>Message:</strong> 
                     <br>
                     {{ $data['message'] }}
-                 </p>
-                  <p style="font-family:'Manrope';font-size: 12px;line-height: 20px;font-weight: 500;color: #0F172A;">© Yesvite 2024</p>
+                </p>
+                  <p style="font-family:'Manrope';font-size: 12px;line-height: 20px;font-weight: 500;color: #0F172A;">
+                    © Yesvite 2024
+                </p>
                </td>
             </tr>
             <!-- -------------- -->
