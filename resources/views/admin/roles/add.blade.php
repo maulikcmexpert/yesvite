@@ -74,7 +74,7 @@
 
                             <label for="exampleInputEmail1">Role</label>
 
-                            <input type="text" class="form-control" name="role" placeholder="Enter Role" value="{{ old('event_type.*')}}">
+                            <input type="text" class="form-control" name="role" value="Designer" placeholder="Enter Role" readonly/>
 
                             <span class="text-danger">{{ $errors->first('event_type.*') }}</span>
 
