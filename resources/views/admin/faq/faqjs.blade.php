@@ -2,6 +2,31 @@
     var base_url = "{{ url('/') }}/";
     $(function() {
 
+
+
+    $('#faq_add_form').validate({
+        rules:{
+            question:{
+                required:true
+            },
+            answer:{
+                required:true
+            }
+        },
+        messages:{
+            question:{
+                required:"Please enter the question"
+            },
+            answer:{
+                required:"Please enter the answer"
+            }
+        }
+    })
+
+
+
+
+
         var table = $("#template_table").DataTable({
             processing: true,
             serverSide: true,
