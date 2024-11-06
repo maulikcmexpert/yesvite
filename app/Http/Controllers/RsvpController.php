@@ -125,6 +125,8 @@ class RsvpController extends Controller
 
         $userId = decrypt($request->user_id);
         $eventId = decrypt($request->event_id);
+
+        dd($userId,$eventId);
            try {
 
         $checkEvent = Event::where(['id' => $eventId])->first();
@@ -138,7 +140,6 @@ class RsvpController extends Controller
 
 
         $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {
-
             $query->where('app_user', '1');
         })->where(['user_id' => $userId, 'event_id' => $eventId])->first();
         // $rsvpSentAttempt = $rsvpSent->rsvp_status;
