@@ -31,11 +31,11 @@
 
 
 
-            <form method="post" action="{{ route('faq.store') }}" id="faqAddForm">
+            <form method="post" action="{{ route('faq.store') }}" id="faqAddForm"  >
 
                 @csrf
 
-                <div class="card-body row" id="appendHtml">
+                <div class="card-body row">
                     <div class="col-lg-12 mb-3">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Question</label>
@@ -44,11 +44,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-body row" id="appendHtml">
+                <div class="card-body row">
                     <div class="col-lg-12 mb-3">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Answer</label>
-                            <textarea class="form-control answer" id="answer"name="answer" placeholder="Enter answer"></textarea>
+                            <textarea class="form-control answer" id="answer" name="answer" placeholder="Enter answer"></textarea>
                             <span class="text-danger">{{ $errors->first('answer') }}</span>
                         </div>
                     </div>
