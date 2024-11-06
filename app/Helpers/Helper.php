@@ -148,6 +148,7 @@ function sendNotification($notificationType, $postData)
                 if ($notification->save()) {
 
                     $deviceData = Device::where('user_id', $value->user_id)->first();
+                    $checkNotificationSetting = checkNotificationSetting($value->user_id);
                     if (!empty($deviceData)) {
 
                         $notificationImage = EventImage::where('event_id', $postData['event_id'])->first();
@@ -170,12 +171,12 @@ function sendNotification($notificationType, $postData)
                             'rsvp_status' => '0',
                         ];
 
-                        $checkNotificationSetting = checkNotificationSetting($value->user_id);
+                        // $checkNotificationSetting = checkNotificationSetting($value->user_id);
                         if ((count($checkNotificationSetting) && $checkNotificationSetting['invitations']['push'] == '1') &&  $value->notification_on_off == '1') {
                             send_notification_FCM_and($deviceData->device_token, $notificationData);
                         }
                     }
-                    $checkNotificationSetting = checkNotificationSetting($value->user_id);
+                    
                     if ($value->prefer_by == 'email') {
 
                         if ($value->user->app_user == '1' &&  count($checkNotificationSetting) != 0 && $checkNotificationSetting['invitations']['email'] == '1') {
