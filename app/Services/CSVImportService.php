@@ -5,6 +5,7 @@ namespace App\Services;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
 
 class CSVImportService
 {
@@ -12,7 +13,8 @@ class CSVImportService
     {
         $file = fopen($filePath, 'r');
         $header = fgetcsv($file); // Assuming the first row contains column headers
-        $parent_userid =  decrypt(Session::get('user')['id']);
+        $user = Auth::user();
+        $parent_userid = $user->id;
         while (($row = fgetcsv($file)) !== false) {
             $data = array_combine($header, $row);
             dd($row);
