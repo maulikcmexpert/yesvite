@@ -98,6 +98,7 @@ Route::middleware('checkUserExist')->group(function () {
 
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::post('/import-csv', [HomeController::class, 'importCSV'])->name('import.csv');
+    Route::post('/home1', [HomeController::class, 'home'])->name('home1');
     Route::get('profile',  [ProfileController::class, 'index'])->name('profile');
     Route::get('profile/edit',  [ProfileController::class, 'edit'])->name('profile.edit');
     Route::get('profile/change_password',  [ProfileController::class, 'changePassword'])->name('profile.change_password');
