@@ -256,6 +256,10 @@
                     remote: "Phone Number is already exsits",
                 }
             }
+            submitHandler: function(form) {
+                $('#UserAdd').prop('disabled', true); 
+                form.submit();
+    }
 
         });
         $(document).on('click', '.dropdown-item.block-user, .dropdown-item.unblock-user', function(e) {
