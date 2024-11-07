@@ -38,7 +38,7 @@ class HomeController extends Controller
     public function __construct()
     {
         $c_user = Auth::guard('web')->user();
-        dd($c_user->id);
+        dd($c_user);
         $this->perPage = 5;
         if ($this->user != null) {
             $this->upcomingEventCount = upcomingEventsCount($this->user->id);
