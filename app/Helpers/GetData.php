@@ -124,7 +124,15 @@ function hostingCount($userId)
     $totalHosting = Event::where(['is_draft_save' => '0', 'user_id' => $userId])->where('start_date', '>=', date('Y-m-d'))->count();
     return $totalHosting;
 }
+function hostingCountCurrentMonth($userId)
+{
 
+    $totalHosting = Event::where(['is_draft_save' => '0', 'user_id' => $userId])->where('start_date', '>=', date('Y-m-d'))
+    ->whereYear('start_date', date('Y'))   
+    ->whereMonth('start_date', date('m'))
+    ->count();
+    return $totalHosting;
+}
 function invitedToCount($userId)
 {
     $totalInvited = EventInvitedUser::whereHas('event', function ($query) {
