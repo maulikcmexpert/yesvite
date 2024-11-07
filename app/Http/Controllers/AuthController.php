@@ -165,8 +165,9 @@ class AuthController extends Controller
         }
 
         if ($validator->fails()) {
-            dd(1);
-            Redirect::to('register')->with('error', $validator->errors()->first());
+            toastr($validator->errors()->first(),'error');
+            return redirect()->back()->withErrors(['captcha' => 'reCAPTCHA verification failed. Please try again.']);
+            // Redirect::to('register')->with('error', $validator->errors()->first());
         }
 
         try {
