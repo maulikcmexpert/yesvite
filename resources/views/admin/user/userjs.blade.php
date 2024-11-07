@@ -164,6 +164,11 @@
 
         var base_url = $("#base_url").val();
 
+        $(document).on('click', '#UserAdd', function(e) {
+                    e.preventDefault();
+                    $(this).prop('disabled', true); 
+                    $('#addUser_form').submit();
+        });
 
         $('#addUser_form').validate({
 
