@@ -105,6 +105,7 @@ class SocialController extends Controller
         $users->email_verified_at = strtotime(date('Y-m-d  h:i:s'));;
 
         $user->current_session_id = Session::getId();
+        $user->register_type = 'web social signup';
         $users->save();
 
         $newUser = User::where('id', $users->id)->first();

@@ -171,6 +171,7 @@ class UserController extends Controller
             }
             $addUser->app_user  = '1';
             $addUser->remember_token = $randomString;
+            $addUser->register_type = 'Admin create user';
             $addUser->password = Hash::make($password);
             // $addUser->isTemporary_password = '1';
             $addUser->email_verified_at = Carbon::now()->toDateTimeString();

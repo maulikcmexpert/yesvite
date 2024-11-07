@@ -165,6 +165,7 @@ class ApiAuthController extends Controller
                     'password' => Hash::make($input['password']),
                     'password_updated_date' => date('Y-m-d'),
                     'remember_token' =>  $randomString,
+                    'register_type' => 'API Normal register',
 
                 ]);
             }
@@ -446,6 +447,7 @@ class ApiAuthController extends Controller
                 $usersignup->instagram_token_id = $input['instagram_token_id'];
             }
             $usersignup->email_verified_at = strtotime(date('Y-m-d  h:i:s'));
+            $usersignup->register_type = 'API Social signup';
             $usersignup->save();
 
             $userId = $usersignup->id;

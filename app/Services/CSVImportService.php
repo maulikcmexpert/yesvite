@@ -22,6 +22,7 @@ class CSVImportService
             $data['user_parent_id'] =  $parent_userid;
             $data['is_user_phone_contact'] =  '1';
             $data['parent_user_phone_contact'] =  $parent_userid;
+            $data['register_type'] =  'CSV import';
             $user_exist = User::where('email',$data['email'])->first();
             if($user_exist == null){
                 User::create($data);
