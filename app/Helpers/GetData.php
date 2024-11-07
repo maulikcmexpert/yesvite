@@ -105,6 +105,7 @@ function upcomingEventsCount($userId)
 
 function pendingRsvpCount($userId)
 {
+    dd(1);
     $total_need_rsvp_event_count = EventInvitedUser::whereHas('event', function ($query) {
         $query->where('is_draft_save', '0')->where('start_date', '>=', date('Y-m-d'));
     })->where(['user_id' => $userId, 'rsvp_status' => NULL])->count();
