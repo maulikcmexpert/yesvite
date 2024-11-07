@@ -28,25 +28,25 @@ use Carbon\Carbon;
 class HomeController extends Controller
 {
 
-    protected $perPage;
-    protected  $upcomingEventCount;
-    protected $user;
-    protected $pendingRsvpCount;
-    protected $hostingCount;
-    protected $invitedToCount;
+    // protected $perPage;
+    // protected  $upcomingEventCount;
+    // protected $user;
+    // protected $pendingRsvpCount;
+    // protected $hostingCount;
+    // protected $invitedToCount;
 
-    public function __construct()
-    {
-        $this->user = Auth::user();
-        dd($this->user);
-        $this->perPage = 5;
-        if ($this->user != null) {
-            $this->upcomingEventCount = upcomingEventsCount($this->user->id);
-            $this->pendingRsvpCount = pendingRsvpCount($this->user->id);
-            $this->hostingCount = hostingCount($this->user->id);
-            $this->invitedToCount = invitedToCount($this->user->id);
-        }
-    }
+    // public function __construct()
+    // {
+    //     $this->user = Auth::user();
+    //     dd($this->user);
+    //     $this->perPage = 5;
+    //     if ($this->user != null) {
+    //         $this->upcomingEventCount = upcomingEventsCount($this->user->id);
+    //         $this->pendingRsvpCount = pendingRsvpCount($this->user->id);
+    //         $this->hostingCount = hostingCount($this->user->id);
+    //         $this->invitedToCount = invitedToCount($this->user->id);
+    //     }
+    // }
     public function index()
     {
 
@@ -163,6 +163,11 @@ class HomeController extends Controller
             $getUserPrivacyPolicy = UserProfilePrivacy::select('profile_privacy', 'status')->where('user_id', $user->id)->get();
             $checkNotificationSetting =  UserNotificationType::where(['user_id' => $user->id, 'type' => 'private_message'])->first();
             // dd($checkNotificationSetting);
+
+            $upcomingEventCount = upcomingEventsCount($user->id);
+            $pendingRsvpCount = pendingRsvpCount($user->id);
+            $hostingCount = hostingCount($user->id);
+            $invitedToCount = invitedToCount($user->id);
             if (!empty($user)) {
 
                 $profileData = [
@@ -178,11 +183,11 @@ class HomeController extends Controller
                     // 'created_at' => empty($user->created_at) ? "" :   date('F Y', strtotime($user->created_at)),
                     'total_events' => $totalEvent,
                     'total_draft_events' => $totalDraftEvent,
-                    'total_upcoming_events' => $this->upcomingEventCount,
-                    'pending_rsvp_count' =>  $this->pendingRsvpCount['total_need_rsvp_event_count'],
-                    'Pending_rsvp_event_id' => $this->pendingRsvpCount['PendingRsvpEventId'],
-                    'hosting_count' => $this->hostingCount,
-                    'invitedTo_count' => $this->invitedToCount,
+                    'total_upcoming_events' => $upcomingEventCount,
+                    'pending_rsvp_count' =>  $pendingRsvpCount['total_need_rsvp_event_count'],
+                    'Pending_rsvp_event_id' => $pendingRsvpCount['PendingRsvpEventId'],
+                    'hosting_count' => $hostingCount,
+                    'invitedTo_count' => $invitedToCount,
                     'total_photos' => $totalEventPhotos,
                     'comments' => $postComments,
                     'gender' => empty($user->gender) ? "" : $user->gender,
