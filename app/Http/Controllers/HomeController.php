@@ -83,63 +83,68 @@ class HomeController extends Controller
 
 
 
-    public function setpostTime($dateTime)
-    {
-        $commentDateTime = $dateTime; 
-        $commentTime = Carbon::parse($commentDateTime);
-        $timeAgo = $commentTime->diffForHumans(); 
-        return $timeAgo;
-    }
-
 
     function upcomingEventsCount($userId)
-{
-    $usercreatedList = Event::with(['user', 'event_settings', 'event_schedule'])->where('start_date', '>', date('Y-m-d'))
-        ->where('user_id', $userId)
-        ->where('is_draft_save', '0')
-        ->orderBy('start_date', 'ASC')
-        ->get();
-    $invitedEvents = EventInvitedUser::whereHas('user', function ($query) {
-        $query->where('app_user', '1');
-    })->where('user_id', $userId)->get()->pluck('event_id');
-    $invitedEventsList = Event::with(['event_image', 'user', 'event_settings', 'event_schedule'])
-        ->whereIn('id', $invitedEvents)->where('start_date', '>', date('Y-m-d'))
-        ->where('is_draft_save', '0')
-        ->orderBy('start_date', 'ASC')
-        ->get();
-    $allEvents = $usercreatedList->merge($invitedEventsList)->sortBy('start_date');
-    return count($allEvents);
-}
-
-function pendingRsvpCount($userId)
-{
-    $total_need_rsvp_event_count = EventInvitedUser::whereHas('event', function ($query) {
-        $query->where('is_draft_save', '0')->where('start_date', '>=', date('Y-m-d'));
-    })->where(['user_id' => $userId, 'rsvp_status' => NULL])->count();
-    $PendingRsvpEventId = "";
-    if ($total_need_rsvp_event_count == 1) {
-        $res = EventInvitedUser::select('event_id')->whereHas('event', function ($query) {
-            $query->where('is_draft_save', '0')->where('start_date', '>=', date('Y-m-d'));
-        })->where(['user_id' => $userId, 'rsvp_status' => NULL])->first();
-        $PendingRsvpEventId = $res->event_id;
+    {
+        $usercreatedList = Event::with(['user', 'event_settings', 'event_schedule'])->where('start_date', '>', date('Y-m-d'))
+    
+            ->where('user_id', $userId)
+            ->where('is_draft_save', '0')
+            ->orderBy('start_date', 'ASC')
+    
+            ->get();
+    
+        $invitedEvents = EventInvitedUser::whereHas('user', function ($query) {
+    
+            $query->where('app_user', '1');
+        })->where('user_id', $userId)->get()->pluck('event_id');
+    
+    
+    
+        $invitedEventsList = Event::with(['event_image', 'user', 'event_settings', 'event_schedule'])
+    
+            ->whereIn('id', $invitedEvents)->where('start_date', '>', date('Y-m-d'))
+            ->where('is_draft_save', '0')
+            ->orderBy('start_date', 'ASC')
+            ->get();
+    
+        $allEvents = $usercreatedList->merge($invitedEventsList)->sortBy('start_date');
+    
+        return count($allEvents);
     }
-    return compact('total_need_rsvp_event_count', 'PendingRsvpEventId');
-}
-
-function hostingCount($userId)
-{
-    $totalHosting = Event::where(['is_draft_save' => '0', 'user_id' => $userId])->where('start_date', '>=', date('Y-m-d'))->count();
-    return $totalHosting;
-}
-
-function invitedToCount($userId)
-{
-    $totalInvited = EventInvitedUser::whereHas('event', function ($query) {
-        $query->where('is_draft_save', '0')->where('start_date', '>=', date('Y-m-d'));
-    })->where('user_id', $userId)->count();
-    return $totalInvited;
-}
-
+    
+    function pendingRsvpCount($userId)
+    {
+        dd(1);
+        $total_need_rsvp_event_count = EventInvitedUser::whereHas('event', function ($query) {
+            $query->where('is_draft_save', '0')->where('start_date', '>=', date('Y-m-d'));
+        })->where(['user_id' => $userId, 'rsvp_status' => NULL])->count();
+    
+        $PendingRsvpEventId = "";
+        if ($total_need_rsvp_event_count == 1) {
+            $res = EventInvitedUser::select('event_id')->whereHas('event', function ($query) {
+                $query->where('is_draft_save', '0')->where('start_date', '>=', date('Y-m-d'));
+            })->where(['user_id' => $userId, 'rsvp_status' => NULL])->first();
+            $PendingRsvpEventId = $res->event_id;
+        }
+        return compact('total_need_rsvp_event_count', 'PendingRsvpEventId');
+    }
+    
+    function hostingCount($userId)
+    {
+    
+        $totalHosting = Event::where(['is_draft_save' => '0', 'user_id' => $userId])->where('start_date', '>=', date('Y-m-d'))->count();
+        return $totalHosting;
+    }
+    
+    function invitedToCount($userId)
+    {
+    
+        $totalInvited = EventInvitedUser::whereHas('event', function ($query) {
+            $query->where('is_draft_save', '0')->where('start_date', '>=', date('Y-m-d'));
+        })->where('user_id', $userId)->count();
+        return $totalInvited;
+    }
     public function home()
     {
         $page='1';
