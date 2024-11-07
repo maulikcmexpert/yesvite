@@ -32,7 +32,7 @@
                       <a class="nav-link" href="{{ route('faq')}}">FAQ</a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link" href="{{ route('home1')}}">Help Center</a>
+                      <a class="nav-link" href="#">Help Center</a>
                   </li>
                   <li class="nav-item">
                       <a class="nav-link" href="{{ route('contact') }}">Contact Us</a>
