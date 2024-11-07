@@ -183,6 +183,7 @@ class HomeController extends Controller
             $pendingRsvpCount = pendingRsvpCount($user->id);
             $hostingCount = hostingCount($user->id);
             $invitedToCount = invitedToCount($user->id);
+            $invitedToCountCurrentMonth= invitedToCountCurrentMonth($user->id);
             if (!empty($user)) {
 
                 $profileData = [
@@ -205,6 +206,7 @@ class HomeController extends Controller
                     'Pending_rsvp_event_id' => $pendingRsvpCount['PendingRsvpEventId'],
                     'hosting_count' => $hostingCount,
                     'invitedTo_count' => $invitedToCount,
+                    'invitedTo_count_current_month' => $invitedToCountCurrentMonth,
                     'total_photos' => $totalEventPhotos,
                     'comments' => $postComments,
                     'gender' => empty($user->gender) ? "" : $user->gender,

@@ -127,14 +127,22 @@ function hostingCount($userId)
 
 function invitedToCount($userId)
 {
-
     $totalInvited = EventInvitedUser::whereHas('event', function ($query) {
         $query->where('is_draft_save', '0')->where('start_date', '>=', date('Y-m-d'));
     })->where('user_id', $userId)->count();
     return $totalInvited;
 }
 
-
+function invitedToCountCurrentMonth($userId)
+{
+    $totalInvited = EventInvitedUser::whereHas('event', function ($query) {
+        $query->where('is_draft_save', '0')->where('start_date', '>=', date('Y-m-d'));
+    })->where('user_id', $userId)
+    ->whereYear('start_date', date('Y')) // Filter by current year
+    ->whereMonth('start_date', date('m')) // Filter by current month
+    ->count();
+    return $totalInvited;
+}
 function getParentCommentUserData($parent_comment_id)
 {
 
