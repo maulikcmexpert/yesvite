@@ -164,6 +164,11 @@
 
         var base_url = $("#base_url").val();
 
+        $(document).on('click', '#UserAdd', function(e) {
+                    e.preventDefault();
+                    // $(this).prop('disabled', true); 
+                    $('#addUser_form').submit();
+        });
 
         $('#addUser_form').validate({
 
@@ -251,6 +256,10 @@
                     remote: "Phone Number is already exsits",
                 }
             }
+            submitHandler: function(form) {
+                $('#UserAdd').prop('disabled', true); 
+                form.submit();
+    }
 
         });
         $(document).on('click', '.dropdown-item.block-user, .dropdown-item.unblock-user', function(e) {
