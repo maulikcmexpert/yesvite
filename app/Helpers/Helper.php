@@ -185,11 +185,11 @@ function sendNotification($notificationType, $postData)
 
                         if ($value->user->app_user == '1' &&  count($checkNotificationSetting) != 0 && $checkNotificationSetting['invitations']['email'] == '1') {
 
-                            $event_time = "";
-                            if ($value->event->event_schedule->isNotEmpty()) {
+                            // $event_time = "";
+                            // if ($value->event->event_schedule->isNotEmpty()) {
 
-                                $event_time = $value->event->event_schedule->first()->start_time;
-                            }
+                            //     $event_time = $value->event->event_schedule->first()->start_time;
+                            // }
 
                             $eventData = [
                                 'event_id' => (int)$postData['event_id'],
