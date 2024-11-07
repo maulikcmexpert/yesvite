@@ -163,6 +163,15 @@ class HomeController extends Controller
             ])
             ->whereYear('start_date', date('Y')) 
             ->count();
+
+            $totalEventOfCurrentMonth = Event::where([
+                'user_id' => $user->id, 
+                'is_draft_save' => '0'
+            ])
+            ->whereYear('start_date', date('Y')) // Filter by current year
+            ->whereMonth('start_date', date('m')) // Filter by current month
+            ->count();
+
         // dd($totalEventOfYear);
             $totalDraftEvent =  Event::where(['user_id' => $user->id, 'is_draft_save' => '1'])->count();
             $totalEventPhotos = EventPost::where(['user_id' => $user->id, 'post_type' => '1'])->count();
@@ -189,6 +198,7 @@ class HomeController extends Controller
                     // 'created_at' => empty($user->created_at) ? "" :   date('F Y', strtotime($user->created_at)),
                     'total_events' => $totalEvent,
                     'total_events_of_year' => $totalEventOfYear,
+                    'total_events_of_current_month' => $totalEventOfCurrentMonth,
                     'total_draft_events' => $totalDraftEvent,
                     'total_upcoming_events' => $upcomingEventCount,
                     'pending_rsvp_count' =>  $pendingRsvpCount['total_need_rsvp_event_count'],
