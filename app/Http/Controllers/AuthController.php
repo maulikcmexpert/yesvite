@@ -115,7 +115,7 @@ class AuthController extends Controller
                 'lastname' => 'required|string|max:255',
                 'email' => ['required', 'email', new EmailExists], // Use the custom validation rule
                 'zip_code' => 'required|string|max:10',
-                'businesspassword' => 'required|string|min:8|regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/',
+                'businesspassword' => 'required|string|min:6|regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/',
                 'businesscpassword' => 'required|same:businesspassword',
             ], [
                 'firstname.required' => 'Please enter your first name',
@@ -124,7 +124,7 @@ class AuthController extends Controller
                 'email.email' => 'Please enter a valid email address',
                 'zip_code.required' => 'Please enter your zip code',
                 'businesspassword.required' => 'Please enter your password',
-                'businesspassword.regex' => 'Your password must be at least 8 characters long and contain both letters and numbers',
+                'businesspassword.regex' => 'Your password must be at least 6 characters long and contain both letters and numbers',
                 'businesscpassword.required' => 'Please confirm your password',
                 'businesscpassword.same' => 'Passwords do not match',
             ]);
@@ -134,7 +134,7 @@ class AuthController extends Controller
                 'lastname' => 'required|string|max:255',
                 'email' => ['required', 'email', new EmailExists], // Use the custom validation rule
                 'zip_code' => 'required|string|max:10',
-                'password' => 'required|string|min:8|regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/',
+                'password' => 'required|string|min:6|regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/',
                 'cpassword' => 'required|same:password',
 
             ], [
@@ -144,7 +144,7 @@ class AuthController extends Controller
                 'email.email' => 'Please enter a valid email address',
                 'zip_code.required' => 'Please enter your zip code',
                 'password.required' => 'Please enter your password',
-                'password.regex' => 'Your password must be at least 8 characters long and contain both letters and numbers',
+                'password.regex' => 'Your password must be at least 6 characters long and contain both letters and numbers',
                 'cpassword.required' => 'Please confirm your password',
                 'cpassword.same' => 'Passwords do not match',
 
