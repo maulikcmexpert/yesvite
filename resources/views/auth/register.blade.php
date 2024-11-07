@@ -120,7 +120,7 @@
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div class="g-recaptcha" data-sitekey="{{ env('RECAPTCHA_SITE_KEY') }}"></div>
-                                    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+                                    
 
                                 </div>
                                 <div class="col-lg-12">
