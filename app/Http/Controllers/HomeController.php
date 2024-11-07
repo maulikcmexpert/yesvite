@@ -163,7 +163,7 @@ class HomeController extends Controller
             ])
             ->whereYear('start_date', date('Y')) 
             ->count();
-        // dd($totalEventOfYear);
+        dd($totalEventOfYear);
             $totalDraftEvent =  Event::where(['user_id' => $user->id, 'is_draft_save' => '1'])->count();
             $totalEventPhotos = EventPost::where(['user_id' => $user->id, 'post_type' => '1'])->count();
             $postComments =  EventPostComment::where('user_id', $user->id)->count();
