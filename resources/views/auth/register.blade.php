@@ -1,5 +1,4 @@
 <x-front.advertise />
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 <section class="login-wrapper">
     <div class="container">
@@ -120,7 +119,9 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                                    {!! htmlFormSnippet() !!}
+                                    <div class="g-recaptcha" data-sitekey="{{ env('RECAPTCHA_SITE_KEY') }}"></div>
+                                    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
                                 </div>
                                 <div class="col-lg-12">
                                     <button type="submit" class="btn btn-primary loaderbtn" id="createUser">Create account</button>
