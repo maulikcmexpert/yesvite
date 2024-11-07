@@ -377,13 +377,12 @@ class HomeController extends Controller
                 if (!empty($draftEvents) && count($draftEvents) != 0) {
 
                     foreach ($draftEvents as $value) {
-                        $eventDetail['id'] = $value->id;
-                        $eventDetail['event_name'] = $value->event_name;
+                        $eventdraft['id'] = $value->id;
+                        $eventdraft['event_name'] = $value->event_name;
                         $formattedDate = Carbon::createFromFormat('Y-m-d H:i:s', $value->updated_at)->format('F j, Y');
-                        $eventDetail['saved_date'] = $formattedDate;
-                        $eventDetail['step'] = ($value->step != NULL) ? $value->step : 0;
-
-                        $draftEventArray[] = $eventDetail;
+                        $eventdraft['saved_date'] = $formattedDate;
+                        $eventdraft['step'] = ($value->step != NULL) ? $value->step : 0;
+                        $draftEventArray[] = $eventdraft;
                     }
                 }
 
