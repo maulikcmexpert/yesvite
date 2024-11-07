@@ -182,6 +182,7 @@ class HomeController extends Controller
             $upcomingEventCount = upcomingEventsCount($user->id);
             $pendingRsvpCount = pendingRsvpCount($user->id);
             $hostingCount = hostingCount($user->id);
+            $hostingCountCurrentMonth = hostingCountCurrentMonth($user->id);
             $invitedToCount = invitedToCount($user->id);
             $invitedToCountCurrentMonth= invitedToCountCurrentMonth($user->id);
             if (!empty($user)) {
@@ -205,6 +206,7 @@ class HomeController extends Controller
                     'pending_rsvp_count' =>  $pendingRsvpCount['total_need_rsvp_event_count'],
                     'Pending_rsvp_event_id' => $pendingRsvpCount['PendingRsvpEventId'],
                     'hosting_count' => $hostingCount,
+                    'hosting_count_current_month'=>$hostingCountCurrentMonth,
                     'invitedTo_count' => $invitedToCount,
                     'invitedTo_count_current_month' => $invitedToCountCurrentMonth,
                     'total_photos' => $totalEventPhotos,
