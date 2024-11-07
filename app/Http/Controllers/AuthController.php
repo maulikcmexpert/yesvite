@@ -30,6 +30,7 @@ use Laravel\Passport\Token;
 use Google\Client;
 use Google\Service\AndroidPublisher;
 use Laravel\Socialite\Facades\Socialite;
+use Biscolab\ReCaptcha\Facades\ReCaptcha;
 
 use Kreait\Laravel\Firebase\Facades\Firebase;
 
@@ -109,6 +110,7 @@ class AuthController extends Controller
 
         if ($request->account_type == '1') {
             $validator = Validator::make($request->all(), [
+                'g-recaptcha-response' => 'required|recaptcha',
                 'firstname' => 'required|string|max:255',
                 'lastname' => 'required|string|max:255',
                 'email' => ['required', 'email', new EmailExists], // Use the custom validation rule
@@ -128,6 +130,7 @@ class AuthController extends Controller
             ]);
         } else {
             $validator = Validator::make($request->all(), [
+                'g-recaptcha-response' => 'required|recaptcha',
                 'firstname' => 'required|string|max:255',
                 'lastname' => 'required|string|max:255',
                 'email' => ['required', 'email', new EmailExists], // Use the custom validation rule
