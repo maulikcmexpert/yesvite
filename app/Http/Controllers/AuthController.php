@@ -134,8 +134,8 @@ class AuthController extends Controller
                 'lastname' => 'required|string|max:255',
                 'email' => ['required', 'email', new EmailExists], // Use the custom validation rule
                 'zip_code' => 'required|string|max:10',
-                // 'password' => 'required|string|min:6|regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/',
-                'password' => 'required|string|min:6',
+                'password' => 'required|string|min:6|regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/',
+                // 'password' => 'required|string|min:6',
                 'cpassword' => 'required|same:password',
 
             ], [
@@ -165,6 +165,7 @@ class AuthController extends Controller
         }
 
         if ($validator->fails()) {
+            dd(1);
             Redirect::to('register')->with('error', $validator->errors()->first());
         }
 
