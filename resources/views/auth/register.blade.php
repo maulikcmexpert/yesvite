@@ -1,5 +1,5 @@
 <x-front.advertise />
-
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <section class="login-wrapper">
     <div class="container">
         <div class="login-content text-center">
