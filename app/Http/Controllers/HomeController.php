@@ -30,15 +30,15 @@ class HomeController extends Controller
 
     protected $perPage;
     protected  $upcomingEventCount;
-    protected $c_user;
+    protected $user;
     protected $pendingRsvpCount;
     protected $hostingCount;
     protected $invitedToCount;
 
     public function __construct()
     {
-        $c_user = Auth::guard('web')->user();
-        dd($c_user);
+        $this->user = Auth::guard('web')->user()->id;
+        dd($this->user);
         $this->perPage = 5;
         if ($this->user != null) {
             $this->upcomingEventCount = upcomingEventsCount($this->user->id);
