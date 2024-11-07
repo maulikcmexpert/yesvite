@@ -151,7 +151,6 @@ class AuthController extends Controller
             ]);
         }
 
-        // Verify reCAPTCHA response with Google API
         $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
             'secret' => env('RECAPTCHA_SECRET_KEY'),
             'response' => $request->input('g-recaptcha-response')
