@@ -77,7 +77,13 @@ class HomeController extends Controller
     }
 
 
-
+    public function setpostTime($dateTime)
+    {
+        $commentDateTime = $dateTime; 
+        $commentTime = Carbon::parse($commentDateTime);
+        $timeAgo = $commentTime->diffForHumans(); 
+        return $timeAgo;
+    }
 
     function upcomingEventsCount($userId)
     {
