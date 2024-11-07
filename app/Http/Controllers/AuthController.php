@@ -160,11 +160,11 @@ class AuthController extends Controller
         $responseBody = $response->json();
 
         if (!$responseBody['success']) {
-            return redirect()->back()->withErrors(['captcha' => 'reCAPTCHA verification failed. Please try again.']);
+            Redirect::to('register')->with('error', 'reCAPTCHA verification failed. Please try again.');
         }
 
         if ($validator->fails()) {
-            Redirect::to('register')->with('error', $validator->errors()->first());;
+            Redirect::to('register')->with('error', $validator->errors()->first());
         }
 
         try {
