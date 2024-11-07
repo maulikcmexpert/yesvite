@@ -30,7 +30,7 @@ class HomeController extends Controller
 
     protected $perPage;
     protected  $upcomingEventCount;
-    protected $user;
+    protected $c_user;
     protected $pendingRsvpCount;
     protected $hostingCount;
     protected $invitedToCount;
