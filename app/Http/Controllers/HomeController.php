@@ -157,13 +157,19 @@ class HomeController extends Controller
                 $userIsLogin->save();
             }
             $totalEvent =  Event::where(['user_id' => $user->id, 'is_draft_save' => '0'])->count();
+            $totalEventOfYear = Event::where([
+                'user_id' => $user->id, 
+                'is_draft_save' => '0'
+            ])
+            ->whereYear('start_date', date('Y')) 
+            ->count();
+        dd($totalEventOfYear);
             $totalDraftEvent =  Event::where(['user_id' => $user->id, 'is_draft_save' => '1'])->count();
             $totalEventPhotos = EventPost::where(['user_id' => $user->id, 'post_type' => '1'])->count();
             $postComments =  EventPostComment::where('user_id', $user->id)->count();
             $getUserPrivacyPolicy = UserProfilePrivacy::select('profile_privacy', 'status')->where('user_id', $user->id)->get();
             $checkNotificationSetting =  UserNotificationType::where(['user_id' => $user->id, 'type' => 'private_message'])->first();
             // dd($checkNotificationSetting);
-
             $upcomingEventCount = upcomingEventsCount($user->id);
             $pendingRsvpCount = pendingRsvpCount($user->id);
             $hostingCount = hostingCount($user->id);
@@ -349,11 +355,13 @@ class HomeController extends Controller
                     $eventDetail['event_plan_name'] = $value->subscription_plan_name;
                     $eventList[] = $eventDetail;
                 }
+
                 dd($profileData);
                 return response()->json(['status' => 1, 'count' => count($allEvents), 'total_page' => $total_page, 'data' => $eventList, 'message' => "Events Data"]);
             } else {
                 return response()->json(['status' => 0, 'data' => $eventList, 'message' => "No upcoming events found"]);
             }
+
         } catch (QueryException $e) {
             return response()->json(['status' => 0, 'message' => "Db error"]);
         } catch (Exception  $e) {
