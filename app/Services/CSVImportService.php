@@ -15,6 +15,7 @@ class CSVImportService
         $parent_userid =  decrypt(Session::get('user')['id']);
         while (($row = fgetcsv($file)) !== false) {
             $data = array_combine($header, $row);
+            dd($row);
             $data['app_user'] =  '0';
             $data['prefer_by'] =  'phone';
             $data['user_parent_id'] =  $parent_userid;
