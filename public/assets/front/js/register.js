@@ -61,6 +61,9 @@ $(document).ready(function () {
                 required: true,
                 equalTo: "#password",
             },
+            'g-recaptcha-response':{
+                required:true
+            }
         },
         messages: {
             firstname: {
@@ -148,6 +151,7 @@ $(document).ready(function () {
                 required: true,
                 equalTo: "#businesspassword",
             },
+            
         },
         messages: {
             firstname: {
