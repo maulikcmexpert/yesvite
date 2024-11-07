@@ -23,9 +23,10 @@ class CSVImportService
             $data['is_user_phone_contact'] =  '1';
             $data['parent_user_phone_contact'] =  $parent_userid;
             $user_exist = User::where('email',$data['email'])->first();
-            
-            dd($user_exist);
-            User::create($data);
+            if($user_exist == null){
+                dd($user_exist);
+                User::create($data);
+            }
         }
 
         fclose($file);
