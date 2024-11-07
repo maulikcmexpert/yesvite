@@ -166,7 +166,7 @@
 
         $(document).on('click', '#UserAdd', function(e) {
                     e.preventDefault();
-                    $(this).prop('disabled', true); 
+                    // $(this).prop('disabled', true); 
                     $('#addUser_form').submit();
         });
 
