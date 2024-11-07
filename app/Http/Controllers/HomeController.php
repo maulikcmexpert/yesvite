@@ -28,25 +28,19 @@ use Carbon\Carbon;
 class HomeController extends Controller
 {
 
-    // protected $perPage;
+    protected $perPage;
     // protected  $upcomingEventCount;
     // protected $user;
     // protected $pendingRsvpCount;
     // protected $hostingCount;
     // protected $invitedToCount;
 
-    // public function __construct()
-    // {
-    //     $this->user = Auth::user();
-    //     dd($this->user);
-    //     $this->perPage = 5;
-    //     if ($this->user != null) {
-    //         $this->upcomingEventCount = upcomingEventsCount($this->user->id);
-    //         $this->pendingRsvpCount = pendingRsvpCount($this->user->id);
-    //         $this->hostingCount = hostingCount($this->user->id);
-    //         $this->invitedToCount = invitedToCount($this->user->id);
-    //     }
-    // }
+    public function __construct()
+    {
+     
+        $this->perPage = 5;
+        
+    }
     public function index()
     {
 
