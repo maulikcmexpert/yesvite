@@ -23,7 +23,7 @@ class CSVImportService
             $data['is_user_phone_contact'] =  '1';
             $data['parent_user_phone_contact'] =  $parent_userid;
             
-            dd($data);
+            dd($data['email']);
             User::create($data);
         }
 
