@@ -85,6 +85,7 @@ Route::view('/template/post_temp_11', 'front.event.template.post_temp_11')->name
 Route::get('add_account', [AuthController::class, 'addAccount'])->name('auth.add_account');
 Route::post('check_add_account', [AuthController::class, 'checkAddAccount'])->name('auth.checkAddAccount');
 
+Route::get('/home1', [HomeController::class, 'home'])->name('home1');
 
 
 

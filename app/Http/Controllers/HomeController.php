@@ -290,6 +290,7 @@ class HomeController extends Controller
                     $eventList[] = $eventDetail;
                 }
 
+                dd($eventList);
                 return response()->json(['status' => 1, 'count' => count($allEvents), 'total_page' => $total_page, 'data' => $eventList, 'message' => "Events Data"]);
             } else {
 
