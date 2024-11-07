@@ -111,7 +111,7 @@ class AuthController extends Controller
             $validator = Validator::make($request->all(), [
                 'firstname' => 'required|string|max:255',
                 'lastname' => 'required|string|max:255',
-                'email' => ['required', 'email', 'unique:users'], // Use the custom validation rule
+                'email' => ['required', 'email', new EmailExists], // Use the custom validation rule
                 'zip_code' => 'required|string|max:10',
                 'businesspassword' => 'required|string|min:8|regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/',
                 'businesscpassword' => 'required|same:businesspassword',
@@ -130,7 +130,7 @@ class AuthController extends Controller
             $validator = Validator::make($request->all(), [
                 'firstname' => 'required|string|max:255',
                 'lastname' => 'required|string|max:255',
-                'email' => ['required', 'email', 'unique:users'], // Use the custom validation rule
+                'email' => ['required', 'email', new EmailExists], // Use the custom validation rule
                 'zip_code' => 'required|string|max:10',
                 'password' => 'required|string|min:8|regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/',
                 'cpassword' => 'required|same:password',
