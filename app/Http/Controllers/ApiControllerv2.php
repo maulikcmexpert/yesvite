@@ -5520,8 +5520,8 @@ class ApiControllerv2 extends Controller
                             'event_id' => $input['event_id'],
                             'post_id' => ""
                         ];
-                        dispatch(new SendNotificationJob(array('invite', $notificationParam)));
-                        // sendNotification('invite', $notificationParam);
+                        // dispatch(new SendNotificationJob(array('invite', $notificationParam)));
+                        sendNotification('invite', $notificationParam);
                     }
                     if ($checkUserInvited->is_draft_save == '0') {
                         $notificationParam = [
@@ -5529,8 +5529,8 @@ class ApiControllerv2 extends Controller
                             'event_id' => $input['event_id'],
                             'post_id' => ""
                         ];
-                        dispatch(new SendNotificationJob(array('owner_notify', $notificationParam)));
-                        // sendNotification('', $notificationParam);
+                        // dispatch(new SendNotificationJob(array('owner_notify', $notificationParam)));
+                        sendNotification('', $notificationParam);
                     }
                 }
             } else {
