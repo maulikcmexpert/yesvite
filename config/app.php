@@ -193,8 +193,8 @@ return [
         // 'Example' => App\Facades\Example::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
         'Flasher' => Flasher\Laravel\Facade\Flasher::class,
-        'ReCaptcha' => Biscolab\ReCaptcha\Facades\ReCaptcha::class,
         'Location' => 'Stevebauman\Location\Facades\Location',
+        'ReCaptcha' => Biscolab\ReCaptcha\Facades\ReCaptcha::class,
 
     ])->toArray(),
 
