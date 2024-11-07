@@ -136,10 +136,11 @@ function invitedToCount($userId)
 function invitedToCountCurrentMonth($userId)
 {
     $totalInvited = EventInvitedUser::whereHas('event', function ($query) {
-        $query->where('is_draft_save', '0')->where('start_date', '>=', date('Y-m-d'));
+        $query->where('is_draft_save', '0')->where('start_date', '>=', date('Y-m-d'))
+        ->whereYear('start_date', date('Y'))   
+        ->whereMonth('start_date', date('m'));
     })->where('user_id', $userId)
-    ->whereYear('start_date', date('Y')) // Filter by current year
-    ->whereMonth('start_date', date('m')) // Filter by current month
+  
     ->count();
     return $totalInvited;
 }
