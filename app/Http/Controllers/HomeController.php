@@ -371,7 +371,23 @@ class HomeController extends Controller
                     $eventList[] = $eventDetail;
                 }
 
-                dd($profileData);
+
+                $draftEvents = Event::where(['user_id' => $user->id, 'is_draft_save' => '1'])->orderBy('id', 'DESC')->get();
+                $draftEventArray = [];
+                if (!empty($draftEvents) && count($draftEvents) != 0) {
+
+                    foreach ($draftEvents as $value) {
+                        $eventDetail['id'] = $value->id;
+                        $eventDetail['event_name'] = $value->event_name;
+                        $formattedDate = Carbon::createFromFormat('Y-m-d H:i:s', $value->updated_at)->format('F j, Y');
+                        $eventDetail['saved_date'] = $formattedDate;
+                        $eventDetail['step'] = ($value->step != NULL) ? $value->step : 0;
+
+                        $draftEventArray[] = $eventDetail;
+                    }
+                }
+
+                dd($draftEventArray);
                 return response()->json(['status' => 1, 'count' => count($allEvents), 'total_page' => $total_page, 'data' => $eventList, 'message' => "Events Data"]);
             } else {
                 return response()->json(['status' => 0, 'data' => $eventList, 'message' => "No upcoming events found"]);
