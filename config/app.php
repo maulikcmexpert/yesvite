@@ -194,8 +194,6 @@ return [
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
         'Flasher' => Flasher\Laravel\Facade\Flasher::class,
         'Location' => 'Stevebauman\Location\Facades\Location',
-        'ReCaptcha' => Biscolab\ReCaptcha\Facades\ReCaptcha::class,
-
     ])->toArray(),
 
 ];
