@@ -31,6 +31,7 @@ use Google\Client;
 use Google\Service\AndroidPublisher;
 use Laravel\Socialite\Facades\Socialite;
 use Biscolab\ReCaptcha\Facades\ReCaptcha;
+use Illuminate\Support\Facades\Http;
 
 use Kreait\Laravel\Firebase\Facades\Firebase;
 
@@ -152,6 +153,17 @@ class AuthController extends Controller
             ]);
         }
 
+        // Verify reCAPTCHA response with Google API
+        $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+            'secret' => env('RECAPTCHA_SECRET_KEY'),
+            'response' => $request->input('g-recaptcha-response')
+        ]);
+
+        $responseBody = $response->json();
+
+        if (!$responseBody['success']) {
+            return redirect()->back()->withErrors(['captcha' => 'reCAPTCHA verification failed. Please try again.']);
+        }
 
         if ($validator->fails()) {
             Redirect::to('register')->with('error', $validator->errors()->first());;
