@@ -37,7 +37,7 @@ class HomeController extends Controller
 
     public function __construct()
     {
-        $this->user = Auth::guard('web')->user()->id;
+        $this->user = Auth::guard('web')->user();
         dd($this->user);
         $this->perPage = 5;
         if ($this->user != null) {
