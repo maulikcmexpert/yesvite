@@ -17,16 +17,13 @@ class CSVImportService
         $parent_userid = $user->id;
         while (($row = fgetcsv($file)) !== false) {
             $data = array_combine($header, $row);
-            dd($data);
             $data['app_user'] =  '0';
             $data['prefer_by'] =  'phone';
             $data['user_parent_id'] =  $parent_userid;
             $data['is_user_phone_contact'] =  '1';
             $data['parent_user_phone_contact'] =  $parent_userid;
-
-
-
-            // Insert data into the database
+            
+            dd($data);
             User::create($data);
         }
 
