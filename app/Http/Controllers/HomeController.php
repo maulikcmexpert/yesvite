@@ -21,6 +21,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as Exception;
+use Carbon\Carbon;
+
 class HomeController extends Controller
 {
 
@@ -79,6 +81,23 @@ class HomeController extends Controller
         return  redirect()->route('profile')->with('success', 'Contact imported successfully.');
     }
 
+
+
+    public function setpostTime($dateTime)
+    {
+
+        $commentDateTime = $dateTime; // Replace this with your actual timestamp
+
+        // Convert the timestamp to a Carbon instance
+        $commentTime = Carbon::parse($commentDateTime);
+
+        // Calculate the time difference
+        $timeAgo = $commentTime->diffForHumans(); // This will give the time ago format
+
+
+        // Display the time ago
+        return $timeAgo;
+    }
     public function home()
     {
         $page='1';
