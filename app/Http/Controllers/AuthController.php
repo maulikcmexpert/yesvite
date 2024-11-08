@@ -238,7 +238,7 @@ class AuthController extends Controller
 
         $remember = $request->has('remember'); // Check if "Remember Me" checkbox is checked
         $userData = User::where('email',$request->email)->first();
-        if($userData){
+        if($userData != NULL){
             if($userData->account_status != 'Unblock'){
                 return redirect()->back()->withErrors([
                     'email' => 'Ban User: Temporarily or permanently suspend user.',
