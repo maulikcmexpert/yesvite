@@ -66,7 +66,7 @@ class SocialController extends Controller
         $user = User::where('email', $socialUser->getEmail())->first();
 
         Session::regenerate();
-        dd(Session::getId());
+        $session_id = Session::getId();
         if ($user) {
             if ($provider == 'google') {
 
@@ -80,7 +80,7 @@ class SocialController extends Controller
             }
             
             if($user->account_status == 'Unblock'){
-                $user->current_session_id = Session::getId();
+                $user->current_session_id = $session_id;
                 $sessionArray = [
                     'id' => encrypt($user->id),
                     'first_name' => $user->firstname,
@@ -105,7 +105,7 @@ class SocialController extends Controller
         $users->apple_token_id = $socialUser->getId();
         $users->email_verified_at = strtotime(date('Y-m-d  h:i:s'));;
 
-        $user->current_session_id = Session::getId();
+        $user->current_session_id = $session_id;
         $user->register_type = 'web social signup';
         $users->save();
 
