@@ -110,7 +110,7 @@ class SocialController extends Controller
         $users->apple_token_id = $socialUser->getId();
         $users->remember_token =   $randomString;
 
-        $users->email_verified_at = strtotime(date('Y-m-d  h:i:s'));;
+        // $users->email_verified_at = strtotime(date('Y-m-d  h:i:s'));;
         $users->email_verified_at = strtotime(date('Y-m-d  h:i:s'));
         $users->account_status = 'Unblock';
         if(isset($session_id) && $session_id != null){
