@@ -247,7 +247,7 @@ class TemplateController extends Controller
 
             DB::beginTransaction();
             $id = decrypt($id);
-            dd($id);
+            // dd($id);
             $user = TextData::find($id)->delete();
 
             DB::commit();
