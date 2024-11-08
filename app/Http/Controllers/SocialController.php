@@ -45,16 +45,13 @@ class SocialController extends Controller
 
         // Check if the user already exists
         $authUser = $this->findOrCreateUser($user, $provider);
-        
-        if(isset($authUser->account_status) && $authUser->account_status == 'Unblock'){
+        // dd($user);
+        if($authUser){
             Auth::login($authUser, true);
-        }else{
-            return redirect('/login')->withErrors([
-                'email' => 'Ban User: Temporarily or permanently suspend user.',
-            ]);
+            return redirect()->intended('/profile')->with('success', 'Logged in successfully!');
         }
+     
 
-        return redirect()->intended('/profile')->with('success', 'Logged in successfully!');
     }
 
     /**
@@ -71,8 +68,12 @@ class SocialController extends Controller
         Session::regenerate();
         $session_id = Session::getId();
         if ($user) {
+            if(isset($user->account_status) && $user->account_status != 'Unblock'){
+                return redirect('/login')->withErrors([
+                    'email' => 'Ban User: Temporarily or permanently suspend user.',
+                ]);
+            }
             if ($provider == 'google') {
-
                 $user->gmail_token_id = $socialUser->getId();
             } elseif ($provider == 'facebook') {
                 $user->facebook_token_id = $socialUser->getId();
@@ -94,8 +95,6 @@ class SocialController extends Controller
                 Session::put(['user' => $sessionArray]);
             }
             $user->save();
-           
-
             return  $user;
         }
         $nameParts = explode(' ', $socialUser->getName());
@@ -109,11 +108,15 @@ class SocialController extends Controller
         $users->facebook_token_id = $socialUser->getId();
         $users->instagram_token_id = $socialUser->getId();
         $users->apple_token_id = $socialUser->getId();
+<<<<<<< HEAD
         $users->remember_token =   $randomString;
 
         $users->email_verified_at = strtotime(date('Y-m-d  h:i:s'));;
+=======
+        $users->email_verified_at = strtotime(date('Y-m-d  h:i:s'));
+        $users->account_status = 'Unblock';
+>>>>>>> 0875755090cd5686b113a79d4fde7953ef9e3431
         if(isset($session_id) && $session_id != null){
-            // dd($session_id);
             $users->current_session_id = (isset($session_id) && $session_id != null)?$session_id:'';
         }
         $users->register_type = 'web social signup';
@@ -130,17 +133,17 @@ class SocialController extends Controller
         Session::put(['user' => $sessionArray]);
 
 
-        // if (Session::has('user')) {
+        if (Session::has('user')) {
 
-        //     if ($remember != null) {
-        //         Cookie::queue('email', $newUser->email, 120);
-        //         Cookie::queue('password', $newUser->password, 120);
-        //     } else {
+            if (isset($remember) && $remember != null) {
+                Cookie::queue('email', $newUser->email, 120);
+                Cookie::queue('password', $newUser->password, 120);
+            } else {
 
-        //         Cookie::forget('email');
-        //         Cookie::forget('password');
-        //     }
-        //     return $newUser;
-        // }
+                Cookie::forget('email');
+                Cookie::forget('password');
+            }
+            return $newUser;
+        }
     }
 }
