@@ -5610,12 +5610,78 @@ class ApiControllerv2 extends Controller
 
             if (!empty($deleteEvent)) {
                 Notification::where('event_id', $input['event_id'])->delete();
-                
                 $deleteEvent->reason = $input['reason'];
-                if ($deleteEvent->save()) {
-
+                if ($deleteEvent->save()) {  
+                    if (file_exists(public_path('storage/canvas/') . $deleteEvent->design_image)) {
+                        $design_imagedesign_image_imagePath = public_path('storage/canvas/') . $deleteEvent->design_image;
+                        unlink($design_imagedesign_image_imagePath);
+                    }
+                    if (file_exists(public_path('storage/canvas/') . $deleteEvent->design_inner_image)) {
+                        $design_inner_image_imagePath = public_path('storage/canvas/') . $deleteEvent->design_inner_image;
+                        unlink($design_inner_image_imagePath);
+                    }
+                    
                     $deleteEvent->delete();
+
                     UserReportToPost::where('event_id', $input['event_id'])->delete();
+
+                    $event_images=EventImage::where('event_id', $input['event_id'])->get();
+                    if(isset($event_images)&&!empty($event_images)){
+                            foreach($event_images as $eventImage){
+                                if (file_exists(public_path('storage/event_images/') . $eventImage->image)) {
+                                    $imagePath = public_path('storage/event_images/') . $eventImage->image;
+                                    unlink($imagePath);
+                                }
+                            }
+                            EventImage::where('event_id', $input['event_id'])->delete();
+                    }
+
+                    $event_post_image=EventPostImage::where('event_id', $input['event_id'])->get();
+                    if(isset($event_post_image)&&!empty($event_post_image)){
+                            foreach($event_post_image as $postImage){
+                                    if($postImage->type=="video")
+                                    {
+                                        if (file_exists(public_path('storage/post_image/') . $postImage->post_image)) {
+                                            $videoPath = public_path('storage/post_image/') . $postImage->post_image;
+                                            unlink($videoPath);
+                                        }
+                                        if (file_exists(public_path('storage/thumbnails/') . $postImage->thumbnail)) {
+                                            $thumbnailPath = public_path('storage/thumbnails/') . $postImage->thumbnail;
+                                            unlink($thumbnailPath);
+                                        }
+                                    }elseif($postImage->type=="audio"){
+                                        if (file_exists(public_path('storage/event_post_recording') . $postImage->post_image)) {
+                                            $audioPath = public_path('storage/event_post_recording/') . $postImage->post_image;
+                                            unlink($audioPath);
+                                        }
+                                    }else{
+                                        if (file_exists(public_path('storage/post_image') . $postImage->post_image)) {
+                                            $postImagePath = public_path('storage/post_image/') . $postImage->post_image;
+                                            unlink($postImagePath);
+                                        } 
+                                    }
+                            }
+                            EventPostImage::where('event_id', $input['event_id'])->delete();
+                        }
+                        EventPost::where('event_id', $input['event_id'])->delete();
+                        EventInvitedUser::where('event_id', $input['event_id'])->delete();
+                        EventSchedule::where('event_id', $input['event_id'])->delete();
+                        EventGiftRegistry::where('event_id', $input['event_id'])->delete();
+                        EventGreeting::where('event_id', $input['event_id'])->delete();
+                        EventSetting::where('event_id', $input['event_id'])->delete();
+                        EventPotluckCategoryItem::where('event_id', $input['event_id'])->delete();
+                        EventPotluckCategory::where('event_id', $input['event_id'])->delete();
+                        EventPostCommentReaction::where('event_id', $input['event_id'])->delete();
+                        EventPostComment::where('event_id', $input['event_id'])->delete();
+                        EventPostPollOption::where('event_id', $input['event_id'])->delete();
+                        EventPostPoll::where('event_id', $input['event_id'])->delete();
+                        EventDesignCategory::where('event_id', $input['event_id'])->delete();
+                        EventDesign::where('event_id', $input['event_id'])->delete();
+                        EventPostPhotoComment::where('event_id', $input['event_id'])->delete();
+                        EventPostPhotoReaction::where('event_id', $input['event_id'])->delete();
+                        EventUserStory::where('event_id', $input['event_id'])->delete();
+                        EventPostReaction::where('event_id', $input['event_id'])->delete();
+
                 }
 
                 DB::commit();
