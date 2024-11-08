@@ -11,7 +11,7 @@ class sendNotificationController extends Controller
 {
     public function index()
     {
-        $title = 'send notification';
+        $title = 'Send Notification';
         $page = 'admin.sendNotification.sendData';
         $js = 'admin.sendNotification.notificationjs';
         return view('admin.includes.layout', compact('title', 'page', 'js'));
