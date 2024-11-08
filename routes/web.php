@@ -234,38 +234,36 @@ Route::controller(AuthController::class)->group(function () {
 
 
 
-    Route::get('login/{provider}', [SocialController::class, 'redirectToProvider']);
-    Route::get('login/{provider}/callback', [SocialController::class, 'handleProviderCallback']);
-
+    
     // Route::get('register', function () {
 
     //     $data['page'] = 'admin/auth/register';
-
+    
     //     $data['js'] = ['login'];
-
+    
     //     return view('admin/auth/main', $data);
     // });
-
+    
     Route::post('/checkEmail', 'checkEmail');
     
     Route::post('/checkAdminEmail', 'checkAdminEmail');
 
     Route::post('/register', 'registerAdmin');
-
-
+    
+    
     Route::get('/forgotpassword', function () {
-
+        
         $data['js'] = ['login'];
-
+        
         $data['page'] = 'admin.auth.forgotpassword';
-
+        
         return view('admin.auth.main', $data);
     });
-
+    
     Route::post('/forgotpassword', 'forgotpassword');
-
+    
     Route::get('/updatePassword/{id}', 'checkToken');
-
+    
     Route::post('/updatePassword/{id}', 'updatePassword');
 
     Route::get('switch_account/{id}', 'switchAccount')->name('switchAccount');
@@ -289,11 +287,16 @@ Route::controller(AuthController::class)->group(function () {
     })->name('logout');
 });
 
+Route::middleware(['web'])->group(function () {
+    Route::get('login/{provider}', [SocialController::class, 'redirectToProvider']);
+    Route::get('login/{provider}/callback', [SocialController::class, 'handleProviderCallback']);
+});
+
 Route::fallback(function () {
     $title = "No Found";
-
+    
     $page = 'not_found';
-
+    
     return view('layout', compact(
         'title',
         'page',

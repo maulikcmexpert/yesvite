@@ -64,8 +64,9 @@ class SocialController extends Controller
     public function findOrCreateUser($socialUser, $provider)
     {
         $user = User::where('email', $socialUser->getEmail())->first();
-      
+        Session::start();
         Session::regenerate();
+        $session_id = Session::getId();
         if ($user) {
             if ($provider == 'google') {
 
@@ -79,7 +80,7 @@ class SocialController extends Controller
             }
             
             if($user->account_status == 'Unblock'){
-                $user->current_session_id = Session::getId();
+                $user->current_session_id = (isset($session_id) && $session_id != null)?$session_id:'0';
                 $sessionArray = [
                     'id' => encrypt($user->id),
                     'first_name' => $user->firstname,
@@ -103,16 +104,18 @@ class SocialController extends Controller
         $users->instagram_token_id = $socialUser->getId();
         $users->apple_token_id = $socialUser->getId();
         $users->email_verified_at = strtotime(date('Y-m-d  h:i:s'));;
-
-        $user->current_session_id = Session::getId();
-        $user->register_type = 'web social signup';
+        if(isset($session_id) && $session_id != null){
+            // dd($session_id);
+            $users->current_session_id = (isset($session_id) && $session_id != null)?$session_id:'';
+        }
+        $users->register_type = 'web social signup';
         $users->save();
 
         $newUser = User::where('id', $users->id)->first();
         $sessionArray = [
             'id' => encrypt($newUser->id),
-            'first_name' => $user->firstname,
-            'last_name' => $user->lastname,
+            'first_name' => $newUser->firstname,
+            'last_name' => $newUser->lastname,
             'username' => $newUser->firstname . ' ' . $newUser->lastname,
             'profile' => ($newUser->profile != NULL || $newUser->profile != "") ? asset('storage/profile/' . $newUser->profile) : asset('public/storage/profile/no_profile.png')
         ];
