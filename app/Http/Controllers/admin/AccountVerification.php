@@ -48,6 +48,7 @@ class AccountVerification extends Controller
         $verify=User::where('id',$user_id)->first();
         if($verify){
             $verify->email_verified_at= time();
+            $verify->resend_verification_mail= '0';
             $verify->save();
         }
 
