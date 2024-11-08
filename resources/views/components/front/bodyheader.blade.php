@@ -66,7 +66,6 @@
 
              @php
              $userprofile = Auth::guard('web')->user();
-             
              @endphp
 
              @if($userprofile==null)
@@ -90,7 +89,11 @@
              @endif
 
 
-             @if($userprofile==null)
+             <?php if (Auth::guard('web')->check()) {
+
+                ?>
+
+
                  <div class="header-right">
                      <div class="header-dropdown dropdown">
                          <a type="button" class="btn btn-primary" href="{{route('message.list')}}">
@@ -130,31 +133,32 @@
                              <li><a class="dropdown-item" href="#">Link 3</a></li>
                          </ul> --}}
                      </div>
-                     @php
+                     <?php
                         $userProfile = "";
-                        if($userprofile==null){
+                        if (Auth::guard('web')->user()) {
 
-                            // $userprofile = Auth::guard('web')->user();
+                            $userprofile = Auth::guard('web')->user();
 
                             if ($userprofile->profile != NULL || $userprofile->profile != "") {
                                 $image = asset("storage/profile/" . $userprofile->profile);
                                 $userProfile =  '<img src="' . $image . '" class="UserImg" alt="">';
                             } else {
-                                dd($userprofile);
                                 $initials = strtoupper($userprofile->firstname[0]) . strtoupper($userprofile->lastname[0]);
                                 $fontColor = "fontcolor" . strtoupper($userprofile->firstname[0]);
                                 $userProfile = "<h5 class='<?= $fontColor ?>' >" . $initials . "</h5>";
-                           }
+                        ?>
+
+                     <?php   }
                         }
 
-                    @endphp
+                        ?>
                      <a href="{{ route('profile')}}" class="user-img">
 
                          {!! $userProfile !!}
 
                      </a>
                  </div>
-                 @else
+             <?php } else { ?>
                  <div class="collapse navbar-collapse" id="mynavbar">
                      <ul class="navbar-nav align-items-center ms-auto">
                          <li class="nav-item {{ (Request::segment(1) == '')? 'active':'' }}">
@@ -180,7 +184,7 @@
                          </li>
                      </ul>
                  </div>
-                 @endif
+             <?php } ?>
 
          </nav>
      </div>

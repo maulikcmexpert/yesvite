@@ -95,9 +95,10 @@ class SocialController extends Controller
 
             return  $user;
         }
-
+        $nameParts = explode(' ', $socialUser->getName());
         $users =  new User();
-        $users->firstname = $socialUser->getName();
+        $users->firstname = (isset($nameParts[0]) && $nameParts[0] != null)?$nameParts[0]:$socialUser->getName();
+        $users->lastname = (isset($nameParts[1]) && $nameParts[1] != null)?$nameParts[1]:$socialUser->getName();
         $users->email = $socialUser->getEmail();
         $users->gmail_token_id = $socialUser->getId();
         $users->facebook_token_id = $socialUser->getId();
