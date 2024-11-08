@@ -43,7 +43,8 @@ class SocialController extends Controller
 
         // Check if the user already exists
         $authUser = $this->findOrCreateUser($user, $provider);
-        if($authUser->account_status == 'Unblock'){
+        
+        if(isset($authUser->account_status) && $authUser->account_status == 'Unblock'){
             Auth::login($authUser, true);
         }else{
             return redirect('/login')->withErrors([
