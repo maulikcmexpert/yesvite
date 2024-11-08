@@ -114,8 +114,8 @@ class SocialController extends Controller
         $newUser = User::where('id', $users->id)->first();
         $sessionArray = [
             'id' => encrypt($newUser->id),
-            'first_name' => $user->firstname,
-            'last_name' => $user->lastname,
+            'first_name' => $newUser->firstname,
+            'last_name' => $newUser->lastname,
             'username' => $newUser->firstname . ' ' . $newUser->lastname,
             'profile' => ($newUser->profile != NULL || $newUser->profile != "") ? asset('storage/profile/' . $newUser->profile) : asset('public/storage/profile/no_profile.png')
         ];
