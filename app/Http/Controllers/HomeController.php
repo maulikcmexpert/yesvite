@@ -372,7 +372,7 @@ class HomeController extends Controller
                     $eventList[] = $eventDetail;
                 }
 
-                dd($eventDetail);
+                dd($eventList);
 
                 $draftEvents = Event::where(['user_id' => $user->id, 'is_draft_save' => '1'])->orderBy('id', 'DESC')->get();
                 $draftEventArray = [];
