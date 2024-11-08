@@ -8,7 +8,7 @@ class FaqController extends Controller
 {
     public function index()
     {
-        $title = 'faq';
+        $title = 'FAQ';
         $page = 'front.faq';
         $faqs = Faq::all();
         //    $js = ['contact'];

@@ -186,49 +186,49 @@ class HomeController extends Controller
             $invitedToCount = invitedToCount($user->id);
             $invitedToCountCurrentMonth= invitedToCountCurrentMonth($user->id);
             if (!empty($user)) {
-
                 $profileData = [
                     'id' =>  empty($user->id) ? "" : $user->id,
                     'profile' =>  empty($user->profile) ?  "" : asset('storage/profile/' . $user->profile),
                     'bg_profile' =>  empty($user->bg_profile) ? "" : asset('storage/bg_profile/' . $user->bg_profile),
                     'firstname' => empty($user->firstname) ? "" : $user->firstname,
                     'lastname' => empty($user->lastname) ? "" : $user->lastname,
-                    'birth_date' => empty($user->birth_date) ? "" : $user->birth_date,
-                    'email' => empty($user->email) ? "" : $user->email,
-                    'about_me' => empty($user->about_me) ? "" : $user->about_me,
                     'created_at' => empty($user->created_at) ? "" :   str_replace(' ', ', ', date('F Y', strtotime($user->created_at))),
-                    // 'created_at' => empty($user->created_at) ? "" :   date('F Y', strtotime($user->created_at)),
                     'total_events' => $totalEvent,
                     'total_events_of_year' => $totalEventOfYear,
                     'total_events_of_current_month' => $totalEventOfCurrentMonth,
-                    'total_draft_events' => $totalDraftEvent,
-                    'total_upcoming_events' => $upcomingEventCount,
-                    'pending_rsvp_count' =>  $pendingRsvpCount['total_need_rsvp_event_count'],
-                    'Pending_rsvp_event_id' => $pendingRsvpCount['PendingRsvpEventId'],
-                    'hosting_count' => $hostingCount,
-                    'hosting_count_current_month'=>$hostingCountCurrentMonth,
-                    'invitedTo_count' => $invitedToCount,
-                    'invitedTo_count_current_month' => $invitedToCountCurrentMonth,
                     'total_photos' => $totalEventPhotos,
                     'comments' => $postComments,
-                    'gender' => empty($user->gender) ? "" : $user->gender,
-                    'country_code' => empty($user->country_code) ? "" : strval($user->country_code),
-                    'phone_number' => empty($user->phone_number) ? "" : $user->phone_number,
-                    'visible' =>  $user->visible,
-                    'message_privacy' =>  $user->message_privacy,
-                    'photo_via_wifi' =>  $user->photo_via_wifi,
-                    'enable_face_id_login' =>  $user->enable_face_id_login,
-                    'profile_privacy' =>  $getUserPrivacyPolicy,
-                    'account_type' =>  $user->account_type,
-                    'company_name' => empty($user->company_name) ? "" : $user->company_name,
-                    'address' => empty($user->address) ? "" : $user->address,
-                    'address_2' => empty($user->address_2) ? "" : $user->address_2,
-                    'city' => empty($user->city) ? "" : $user->city,
-                    'state' => empty($user->state) ? "" : $user->state,
-                    'zip_code' => empty($user->zip_code) ? "" : $user->zip_code,
-                    'password_updated_date' => empty($user->password_updated_date) ? "" : $user->password_updated_date,
+                    'pending_rsvp_count' =>  $pendingRsvpCount['total_need_rsvp_event_count'],
+                    'Pending_rsvp_event_id' => $pendingRsvpCount['PendingRsvpEventId'],
+                    'total_upcoming_events' => $upcomingEventCount,
+                    'invitedTo_count' => $invitedToCount,
+                    'invitedTo_count_current_month' => $invitedToCountCurrentMonth,
+                    'hosting_count' => $hostingCount,
+                    'hosting_count_current_month'=>$hostingCountCurrentMonth,
+                    'total_draft_events' => $totalDraftEvent,
                     'total_notification' => Notification::where(['user_id' => $user->id, 'read' => '0'])->count(),
-                    'is_message_notification' => ($checkNotificationSetting->push != "" && isset($checkNotificationSetting->push)) ? $checkNotificationSetting->push : ""
+                    
+                    // 'is_message_notification' => ($checkNotificationSetting->push != "" && isset($checkNotificationSetting->push)) ? $checkNotificationSetting->push : ""
+                    // 'birth_date' => empty($user->birth_date) ? "" : $user->birth_date,
+                    // 'email' => empty($user->email) ? "" : $user->email,
+                    // 'about_me' => empty($user->about_me) ? "" : $user->about_me,
+                    // // 'created_at' => empty($user->created_at) ? "" :   date('F Y', strtotime($user->created_at)),
+                    // 'gender' => empty($user->gender) ? "" : $user->gender,
+                    // 'country_code' => empty($user->country_code) ? "" : strval($user->country_code),
+                    // 'phone_number' => empty($user->phone_number) ? "" : $user->phone_number,
+                    // 'visible' =>  $user->visible,
+                    // 'message_privacy' =>  $user->message_privacy,
+                    // 'photo_via_wifi' =>  $user->photo_via_wifi,
+                    // 'enable_face_id_login' =>  $user->enable_face_id_login,
+                    // 'profile_privacy' =>  $getUserPrivacyPolicy,
+                    // 'account_type' =>  $user->account_type,
+                    // 'company_name' => empty($user->company_name) ? "" : $user->company_name,
+                    // 'address' => empty($user->address) ? "" : $user->address,
+                    // 'address_2' => empty($user->address_2) ? "" : $user->address_2,
+                    // 'city' => empty($user->city) ? "" : $user->city,
+                    // 'state' => empty($user->state) ? "" : $user->state,
+                    // 'zip_code' => empty($user->zip_code) ? "" : $user->zip_code,
+                    // 'password_updated_date' => empty($user->password_updated_date) ? "" : $user->password_updated_date,
                 ];
             }
 
@@ -387,9 +387,9 @@ class HomeController extends Controller
                 }
 
                 dd($draftEventArray);
-                return response()->json(['status' => 1, 'count' => count($allEvents), 'total_page' => $total_page, 'data' => $eventList, 'message' => "Events Data"]);
+                // return response()->json(['status' => 1, 'count' => count($allEvents), 'total_page' => $total_page, 'data' => $eventList, 'message' => "Events Data"]);
             } else {
-                return response()->json(['status' => 0, 'data' => $eventList, 'message' => "No upcoming events found"]);
+                // return response()->json(['status' => 0, 'data' => $eventList, 'message' => "No upcoming events found"]);
             }
 
         } catch (QueryException $e) {
