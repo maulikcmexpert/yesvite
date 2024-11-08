@@ -130,25 +130,24 @@
                              <li><a class="dropdown-item" href="#">Link 3</a></li>
                          </ul> --}}
                      </div>
-                     <?php
+                     @php
                         $userProfile = "";
-                        if (Auth::guard('web')->user()) {
+                        if($userprofile==null){
 
-                            $userprofile = Auth::guard('web')->user();
+                            // $userprofile = Auth::guard('web')->user();
 
                             if ($userprofile->profile != NULL || $userprofile->profile != "") {
                                 $image = asset("storage/profile/" . $userprofile->profile);
                                 $userProfile =  '<img src="' . $image . '" class="UserImg" alt="">';
                             } else {
+                                dd($userprofile);
                                 $initials = strtoupper($userprofile->firstname[0]) . strtoupper($userprofile->lastname[0]);
                                 $fontColor = "fontcolor" . strtoupper($userprofile->firstname[0]);
                                 $userProfile = "<h5 class='<?= $fontColor ?>' >" . $initials . "</h5>";
-                        ?>
-
-                     <?php   }
+                           }
                         }
 
-                        ?>
+                    @endphp
                      <a href="{{ route('profile')}}" class="user-img">
 
                          {!! $userProfile !!}
