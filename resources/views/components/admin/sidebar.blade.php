@@ -218,7 +218,7 @@
                           <a href="{{ URL::to('/admin/terms_condition') }}"
                               class="nav-link {{ Request::segment(2) == 'terms_condition' ? 'active' : '' }}">
                               <span class="dot"></span>
-                              <p>Terms & condition </p>
+                              <p>Terms & Condition </p>
                           </a>
                       </li>
 
