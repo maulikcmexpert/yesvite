@@ -6,8 +6,7 @@
             <img src="{{$profileData->profile }}" alt="user-img" class="UserImg">
             @else
 
-            @php 
-            $initials = strtoupper($profileData->firstname[0]) . strtoupper($profileData->lastname[0]);
+            @php $initials = strtoupper($profileData->firstname[0]) . strtoupper($profileData->lastname[0]);
 
             $fontColor = "fontcolor".strtoupper($profileData->firstname[0])
             @endphp
