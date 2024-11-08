@@ -1,4 +1,4 @@
-{{                dd($is_adultOnly);}}
+{{-- {{                dd($is_adultOnly);}} --}}
 <x-front.advertise />
 <section class="rsvp-wrp">
     <div class="container">
