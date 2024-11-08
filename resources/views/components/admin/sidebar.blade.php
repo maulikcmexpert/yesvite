@@ -201,7 +201,7 @@
                       class="nav-link  {{ Request::segment(2) == 'privacy_policy' || Request::segment(2) == 'terms_condition' ? 'active' : '' }}">
                       <i class="nav-icon fas fa-copy"></i>
                       <p>
-                          Privacy setup
+                          Privacy Setup
                           <i class="fas fa-angle-right right"></i>
                           <!-- <span class="badge badge-info right">6</span> -->
                       </p>
@@ -238,7 +238,7 @@
           <li class="nav-item">
             <a href="{{URL::to('/admin/roles')}}" class="nav-link {{ (Request::segment(2) == 'roles')? 'active':'' }}">
               <i class="fas fa-list nav-icon"></i>
-              <p>Roles list</p>
+              <p>Roles List</p>
             </a>
           </li>
         </ul>
