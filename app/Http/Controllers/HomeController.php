@@ -148,7 +148,7 @@ class HomeController extends Controller
     }
     public function home()
     {
-        dd(1);
+        // dd(1);
         $page='1';
         try {
             $user  = Auth::guard('web')->user();
