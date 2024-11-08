@@ -445,6 +445,7 @@
 
 
         $(document).on('click', '.delete_template', function() {
+            var id=$(this).data('id');
             Swal.fire({
                 title: "Are you sure?",
                 text: "You won't be able to revert this!",
@@ -456,7 +457,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     // alert();
-                    $('#delete_template_form').submit();
+                    $('#delete_template_form'+id).submit();
 
                 }
             });
