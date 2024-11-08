@@ -91,6 +91,7 @@ class RsvpController extends Controller
 
                 $is_adultOnly = (isset($event->event_settings->adult_only_party) ? $event->event_settings->adult_only_party : "");
 
+
                 return view('layout', compact(
                     'title',
                     'page',
