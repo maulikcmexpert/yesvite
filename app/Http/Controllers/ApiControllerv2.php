@@ -5666,7 +5666,7 @@ class ApiControllerv2 extends Controller
                         EventPost::where('event_id', $input['event_id'])->delete();
                         EventInvitedUser::where('event_id', $input['event_id'])->delete();
                         EventSchedule::where('event_id', $input['event_id'])->delete();
-                        EventGiftRegistry::where('event_id', $input['event_id'])->delete();
+                        // EventGiftRegistry::where('event_id', $input['event_id'])->delete();
                         EventGreeting::where('event_id', $input['event_id'])->delete();
                         EventSetting::where('event_id', $input['event_id'])->delete();
                         EventPotluckCategoryItem::where('event_id', $input['event_id'])->delete();
