@@ -232,6 +232,7 @@ class HomeController extends Controller
                     // 'password_updated_date' => empty($user->password_updated_date) ? "" : $user->password_updated_date,
                 ];
             }
+            dd($profileData);
 
             $usercreatedList = Event::with(['user', 'event_settings', 'event_schedule'])->where('start_date', '>', date('Y-m-d'))
                 ->where('user_id', $user->id)
@@ -387,7 +388,6 @@ class HomeController extends Controller
                     }
                 }
 
-                dd($profileData);
                 // return response()->json(['status' => 1, 'count' => count($allEvents), 'total_page' => $total_page, 'data' => $eventList, 'message' => "Events Data"]);
             } else {
                 // return response()->json(['status' => 0, 'data' => $eventList, 'message' => "No upcoming events found"]);
