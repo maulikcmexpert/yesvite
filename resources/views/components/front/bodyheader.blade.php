@@ -66,7 +66,7 @@
 
              @php
              $userprofile = Auth::guard('web')->user();
-             dd($userprofile);
+             
              @endphp
 
              @if($userprofile==null)
@@ -90,11 +90,7 @@
              @endif
 
 
-             <?php if (Auth::guard('web')->check()) {
-
-                ?>
-
-
+             @if($userprofile==null)
                  <div class="header-right">
                      <div class="header-dropdown dropdown">
                          <a type="button" class="btn btn-primary" href="{{route('message.list')}}">
@@ -159,7 +155,7 @@
 
                      </a>
                  </div>
-             <?php } else { ?>
+                 @else
                  <div class="collapse navbar-collapse" id="mynavbar">
                      <ul class="navbar-nav align-items-center ms-auto">
                          <li class="nav-item {{ (Request::segment(1) == '')? 'active':'' }}">
@@ -185,7 +181,7 @@
                          </li>
                      </ul>
                  </div>
-             <?php } ?>
+                 @endif
 
          </nav>
      </div>
