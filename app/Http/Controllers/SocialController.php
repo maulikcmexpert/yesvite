@@ -43,14 +43,9 @@ class SocialController extends Controller
 
         // Check if the user already exists
         $authUser = $this->findOrCreateUser($user, $provider);
+        Auth::login($authUser, true);
         dd($authUser);
-        if(isset($authUser->account_status) && $authUser->account_status == 'Unblock'){
-            Auth::login($authUser, true);
-        }else{
-            return redirect('/login')->withErrors([
-                'email' => 'Ban User: Temporarily or permanently suspend user.',
-            ]);
-        }
+        
 
         return redirect()->intended('/profile')->with('success', 'Logged in successfully!');
     }
@@ -69,8 +64,12 @@ class SocialController extends Controller
         Session::regenerate();
         $session_id = Session::getId();
         if ($user) {
+            if(isset($user->account_status) && $user->account_status != 'Unblock'){
+                return redirect('/login')->withErrors([
+                    'email' => 'Ban User: Temporarily or permanently suspend user.',
+                ]);
+            }
             if ($provider == 'google') {
-
                 $user->gmail_token_id = $socialUser->getId();
             } elseif ($provider == 'facebook') {
                 $user->facebook_token_id = $socialUser->getId();
@@ -92,8 +91,6 @@ class SocialController extends Controller
                 Session::put(['user' => $sessionArray]);
             }
             $user->save();
-           
-
             return  $user;
         }
         $nameParts = explode(' ', $socialUser->getName());
