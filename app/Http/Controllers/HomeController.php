@@ -254,7 +254,7 @@ class HomeController extends Controller
             // Get paginated data using offset and take
             $paginatedEvents = $allEvents->slice($offset)->take($this->perPage);
             $eventList = [];
-            dd($paginatedEvents);
+            // dd($paginatedEvents);
             if (count($paginatedEvents) != 0) {
                 foreach ($paginatedEvents as $value) {
                     $eventDetail['id'] = $value->id;
@@ -392,6 +392,7 @@ class HomeController extends Controller
                 // return response()->json(['status' => 1, 'count' => count($allEvents), 'total_page' => $total_page, 'data' => $eventList, 'message' => "Events Data"]);
             } else {
                 // return response()->json(['status' => 0, 'data' => $eventList, 'message' => "No upcoming events found"]);
+                dd(1);
             }
 
         } catch (QueryException $e) {
