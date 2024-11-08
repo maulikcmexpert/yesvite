@@ -1,3 +1,4 @@
+{{dd($userData);}}
 <!DOCTYPE html>
 <html lang="en">
 
