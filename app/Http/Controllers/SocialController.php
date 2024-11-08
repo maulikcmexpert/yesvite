@@ -42,8 +42,8 @@ class SocialController extends Controller
         }
 
         // Check if the user already exists
-        dd($user);
         $authUser = $this->findOrCreateUser($user, $provider);
+        // dd($user);
         if($authUser){
             Auth::login($authUser, true);
             return redirect()->intended('/profile')->with('success', 'Logged in successfully!');
@@ -107,7 +107,6 @@ class SocialController extends Controller
         $users->email_verified_at = strtotime(date('Y-m-d  h:i:s'));
         $users->account_status = 'Unblock';
         if(isset($session_id) && $session_id != null){
-            // dd($session_id);
             $users->current_session_id = (isset($session_id) && $session_id != null)?$session_id:'';
         }
         $users->register_type = 'web social signup';
@@ -124,17 +123,17 @@ class SocialController extends Controller
         Session::put(['user' => $sessionArray]);
 
 
-        // if (Session::has('user')) {
+        if (Session::has('user')) {
 
-        //     if ($remember != null) {
-        //         Cookie::queue('email', $newUser->email, 120);
-        //         Cookie::queue('password', $newUser->password, 120);
-        //     } else {
+            if (isset($remember) && $remember != null) {
+                Cookie::queue('email', $newUser->email, 120);
+                Cookie::queue('password', $newUser->password, 120);
+            } else {
 
-        //         Cookie::forget('email');
-        //         Cookie::forget('password');
-        //     }
-        //     return $newUser;
-        // }
+                Cookie::forget('email');
+                Cookie::forget('password');
+            }
+            return $newUser;
+        }
     }
 }
