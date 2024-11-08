@@ -5616,10 +5616,10 @@ class ApiControllerv2 extends Controller
                         $design_imagedesign_image_imagePath = public_path('storage/canvas') . $deleteEvent->design_image;
                         unlink($design_imagedesign_image_imagePath);
                     }
-                    if (file_exists(public_path('storage/canvas') . $deleteEvent->design_inner_image)) {
-                        $design_inner_image_imagePath = public_path('storage/canvas') . $deleteEvent->design_inner_image;
-                        unlink($design_inner_image_imagePath);
-                    }
+                    // if (file_exists(public_path('storage/canvas') . $deleteEvent->design_inner_image)) {
+                    //     $design_inner_image_imagePath = public_path('storage/canvas') . $deleteEvent->design_inner_image;
+                    //     unlink($design_inner_image_imagePath);
+                    // }
                     
                     $deleteEvent->delete();
 
