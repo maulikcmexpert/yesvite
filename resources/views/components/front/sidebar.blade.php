@@ -7,7 +7,6 @@
             @else
 
             @php 
-            dd($profileData->firstname);
             $initials = strtoupper($profileData->firstname[0]) . strtoupper($profileData->lastname[0]);
 
             $fontColor = "fontcolor".strtoupper($profileData->firstname[0])
