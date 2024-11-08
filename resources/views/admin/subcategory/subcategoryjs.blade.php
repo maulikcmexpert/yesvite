@@ -319,6 +319,8 @@
 
 
     $(document).on('click', '.delete_sub_category', function() {
+        var id=$(this).data('id');
+
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -330,7 +332,7 @@
         }).then((result) => {
             if (result.isConfirmed) {
                 // alert();
-                $('#delete_sub_category_form').submit();
+                $('#delete_sub_category_form'+id).submit();
 
             }
         });
