@@ -115,7 +115,7 @@ class AccountVerificationDataTable extends DataTable
         }
 
         return  User::where(['email_verified_at' => Null])
-        ->where('is_user_phone_contact',0)
+        ->where('is_user_phone_contact','0')
         ->orderBy($column, $direction);
     }
 
