@@ -108,14 +108,11 @@ class SocialController extends Controller
         $users->facebook_token_id = $socialUser->getId();
         $users->instagram_token_id = $socialUser->getId();
         $users->apple_token_id = $socialUser->getId();
-<<<<<<< HEAD
         $users->remember_token =   $randomString;
 
         $users->email_verified_at = strtotime(date('Y-m-d  h:i:s'));;
-=======
         $users->email_verified_at = strtotime(date('Y-m-d  h:i:s'));
         $users->account_status = 'Unblock';
->>>>>>> 0875755090cd5686b113a79d4fde7953ef9e3431
         if(isset($session_id) && $session_id != null){
             $users->current_session_id = (isset($session_id) && $session_id != null)?$session_id:'';
         }
