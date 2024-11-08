@@ -123,17 +123,17 @@ class SocialController extends Controller
         Session::put(['user' => $sessionArray]);
 
 
-        if (Session::has('user')) {
+        // if (Session::has('user')) {
 
-            if ($remember != null) {
-                Cookie::queue('email', $newUser->email, 120);
-                Cookie::queue('password', $newUser->password, 120);
-            } else {
+        //     if ($remember != null) {
+        //         Cookie::queue('email', $newUser->email, 120);
+        //         Cookie::queue('password', $newUser->password, 120);
+        //     } else {
 
-                Cookie::forget('email');
-                Cookie::forget('password');
-            }
-            return $newUser;
-        }
+        //         Cookie::forget('email');
+        //         Cookie::forget('password');
+        //     }
+        //     return $newUser;
+        // }
     }
 }
