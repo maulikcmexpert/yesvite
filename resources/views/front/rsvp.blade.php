@@ -84,7 +84,6 @@
                                             </svg> YES</label>
                                     </div>
                                 </div>
-                                @if($is_adultOnly!="1")
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                                     <div class="input-form">
                                         <input type="radio" id="no" name="rsvp_status" value="0" {{($isInvited->rsvp_status == '0')?'checked':''}} name="foo" />
@@ -95,7 +94,6 @@
                                             </svg> NO</label>
                                     </div>
                                 </div>
-                                @endif
                             </div>
                         </div>
                         <div class="count-wrp">
