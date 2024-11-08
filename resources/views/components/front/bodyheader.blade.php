@@ -66,6 +66,7 @@
 
              @php
              $userprofile = Auth::guard('web')->user();
+             dd($userprofile);
              @endphp
 
              @if($userprofile==null)
