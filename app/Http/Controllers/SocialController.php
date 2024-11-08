@@ -105,6 +105,7 @@ class SocialController extends Controller
         $users->apple_token_id = $socialUser->getId();
         $users->email_verified_at = strtotime(date('Y-m-d  h:i:s'));;
         if(isset($session_id) && $session_id != null){
+            dd($session_id);
             $user->current_session_id = (isset($session_id) && $session_id != null)?$session_id:'';
         }
         $user->register_type = 'web social signup';
