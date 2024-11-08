@@ -114,7 +114,9 @@ class AccountVerificationDataTable extends DataTable
             $direction = 'asc';
         }
 
-        return  User::where(['email_verified_at' => Null])->orderBy($column, $direction);
+        return  User::where(['email_verified_at' => Null])
+        ->where('is_user_phone_contact',0)
+        ->orderBy($column, $direction);
     }
 
     /**
