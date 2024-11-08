@@ -52,8 +52,10 @@ class TemplateController extends Controller
                     return '<img src="' . asset('storage/canvas/' . $template->filled_image) . '" width="50" height="50" />';
                 })
                 ->addColumn('action', function ($row) {
+                  
                     $cryptId = encrypt($row->id);
                     $template_delete=decrypt($cryptId);
+
                     $edit_url = route('create_template.edit', $cryptId);
                     $delete_url = route('create_template.destroy', $cryptId);
                     $template_url = route('create_template.edit_template', $cryptId);
