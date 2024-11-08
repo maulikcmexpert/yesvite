@@ -9,6 +9,8 @@ use Cookie;
 use Illuminate\Support\Facades\Auth;
 use Exception;
 use App\Models\User;
+use Illuminate\Support\Str;
+
 
 class SocialController extends Controller
 {
@@ -98,6 +100,8 @@ class SocialController extends Controller
         }
         $nameParts = explode(' ', $socialUser->getName());
         $users =  new User();
+        $randomString = Str::random(30);
+
         $users->firstname = (isset($nameParts[0]) && $nameParts[0] != null)?$nameParts[0]:$socialUser->getName();
         $users->lastname = (isset($nameParts[1]) && $nameParts[1] != null)?$nameParts[1]:$socialUser->getName();
         $users->email = $socialUser->getEmail();
@@ -105,6 +109,8 @@ class SocialController extends Controller
         $users->facebook_token_id = $socialUser->getId();
         $users->instagram_token_id = $socialUser->getId();
         $users->apple_token_id = $socialUser->getId();
+        $users->remember_token =   $randomString;
+
         $users->email_verified_at = strtotime(date('Y-m-d  h:i:s'));;
         if(isset($session_id) && $session_id != null){
             // dd($session_id);
