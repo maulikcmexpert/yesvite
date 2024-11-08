@@ -140,7 +140,7 @@
                                 $image = asset("storage/profile/" . $userprofile->profile);
                                 $userProfile =  '<img src="' . $image . '" class="UserImg" alt="">';
                             } else {
-                                dd($userprofile);
+                                
                                 $initials = strtoupper($userprofile->firstname[0]) . strtoupper($userprofile->lastname[0]);
                                 $fontColor = "fontcolor" . strtoupper($userprofile->firstname[0]);
                                 $userProfile = "<h5 class='<?= $fontColor ?>' >" . $initials . "</h5>";
