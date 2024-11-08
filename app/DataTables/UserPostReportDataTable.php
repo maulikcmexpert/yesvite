@@ -86,7 +86,7 @@ class UserPostReportDataTable extends DataTable
             })
             ->addColumn('event_name', function ($row) {
 
-                return $row->events->event_name;
+                return (isset($row->events->event_name)&&$row->events->event_name!="")?$row->events->event_name:"";
             })
 
 
