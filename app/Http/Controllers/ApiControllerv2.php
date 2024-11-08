@@ -5612,12 +5612,12 @@ class ApiControllerv2 extends Controller
                 Notification::where('event_id', $input['event_id'])->delete();
                 $deleteEvent->reason = $input['reason'];
                 if ($deleteEvent->save()) {  
-                    if (file_exists(public_path('storage/canvas/') . $deleteEvent->design_image)) {
-                        $design_imagedesign_image_imagePath = public_path('storage/canvas/') . $deleteEvent->design_image;
+                    if (file_exists(public_path('storage/canvas') . $deleteEvent->design_image)) {
+                        $design_imagedesign_image_imagePath = public_path('storage/canvas') . $deleteEvent->design_image;
                         unlink($design_imagedesign_image_imagePath);
                     }
-                    if (file_exists(public_path('storage/canvas/') . $deleteEvent->design_inner_image)) {
-                        $design_inner_image_imagePath = public_path('storage/canvas/') . $deleteEvent->design_inner_image;
+                    if (file_exists(public_path('storage/canvas') . $deleteEvent->design_inner_image)) {
+                        $design_inner_image_imagePath = public_path('storage/canvas') . $deleteEvent->design_inner_image;
                         unlink($design_inner_image_imagePath);
                     }
                     
