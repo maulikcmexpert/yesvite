@@ -64,7 +64,7 @@ class SocialController extends Controller
     public function findOrCreateUser($socialUser, $provider)
     {
         $user = User::where('email', $socialUser->getEmail())->first();
-      
+        Session::start();
         Session::regenerate();
         if ($user) {
             if ($provider == 'google') {
