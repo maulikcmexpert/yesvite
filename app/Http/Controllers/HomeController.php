@@ -373,7 +373,7 @@ class HomeController extends Controller
                     $eventList[] = $eventDetail;
                 }
 
-                dd($eventList);
+                // dd($eventList);
 
                 $draftEvents = Event::where(['user_id' => $user->id, 'is_draft_save' => '1'])->orderBy('id', 'DESC')->get();
                 $draftEventArray = [];
@@ -392,7 +392,7 @@ class HomeController extends Controller
                 // return response()->json(['status' => 1, 'count' => count($allEvents), 'total_page' => $total_page, 'data' => $eventList, 'message' => "Events Data"]);
             } else {
                 // return response()->json(['status' => 0, 'data' => $eventList, 'message' => "No upcoming events found"]);
-                dd(1);
+                // dd(1);
             }
 
         } catch (QueryException $e) {

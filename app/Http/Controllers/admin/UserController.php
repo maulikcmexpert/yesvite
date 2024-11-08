@@ -129,7 +129,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        $title = 'Users';
+        $title = 'Add User';
 
         $page = 'admin.user.add';
 
