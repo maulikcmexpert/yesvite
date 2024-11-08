@@ -75,7 +75,7 @@ class TemplateController extends Controller
         }
 
 
-        $title = 'Design Style';
+        $title = 'Template';
 
         $page = 'admin.create_template.list';
 
