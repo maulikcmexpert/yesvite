@@ -43,7 +43,7 @@ class UserResendEmailVerify extends Controller
         $userData = [
             'username' => $userDetails->firstname . ' ' . $userDetails->lastname,
             'email' => $userDetails->email,
-            'token' => $userDetails->remember_token,
+            'token' => $userDetails->user_id,
         ];
         Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($userDetails) {
             $message->to($userDetails->email);
