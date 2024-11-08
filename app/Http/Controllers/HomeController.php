@@ -254,6 +254,7 @@ class HomeController extends Controller
             // Get paginated data using offset and take
             $paginatedEvents = $allEvents->slice($offset)->take($this->perPage);
             $eventList = [];
+            dd($paginatedEvents);
             if (count($paginatedEvents) != 0) {
                 foreach ($paginatedEvents as $value) {
                     $eventDetail['id'] = $value->id;
