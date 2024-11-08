@@ -5610,10 +5610,12 @@ class ApiControllerv2 extends Controller
 
             if (!empty($deleteEvent)) {
                 Notification::where('event_id', $input['event_id'])->delete();
+                
                 $deleteEvent->reason = $input['reason'];
                 if ($deleteEvent->save()) {
 
                     $deleteEvent->delete();
+                    UserReportToPost::where('event_id', $input['event_id'])->delete();
                 }
 
                 DB::commit();
