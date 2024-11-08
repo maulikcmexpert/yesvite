@@ -232,7 +232,6 @@ class HomeController extends Controller
                     // 'password_updated_date' => empty($user->password_updated_date) ? "" : $user->password_updated_date,
                 ];
             }
-            dd($profileData);
 
             $usercreatedList = Event::with(['user', 'event_settings', 'event_schedule'])->where('start_date', '>', date('Y-m-d'))
                 ->where('user_id', $user->id)
@@ -373,6 +372,7 @@ class HomeController extends Controller
                     $eventList[] = $eventDetail;
                 }
 
+                dd($eventDetail);
 
                 $draftEvents = Event::where(['user_id' => $user->id, 'is_draft_save' => '1'])->orderBy('id', 'DESC')->get();
                 $draftEventArray = [];
