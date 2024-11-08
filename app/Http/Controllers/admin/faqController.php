@@ -72,7 +72,7 @@ class faqController extends Controller
      */
     public function create()
     {
-        $title = 'Add Faq';
+        $title = 'Add FAQ';
         $page = 'admin.faq.add';
         // $js = ['admin.faq.faqjs', 'admin.faq.editiorjs'];
         $js = ['admin.faq.faqjs'];
@@ -130,7 +130,7 @@ class faqController extends Controller
         // Get the template data by ID
         $getTemData = faq::findOrFail($faq_id);
 
-        $title = 'Edit Faq';
+        $title = 'Edit FAQ';
         $page = 'admin.faq.edit';
         // $js = ['admin.faq.editiorjs', 'admin.faq.faqjs'];
         $js = ['admin.faq.faqjs'];
