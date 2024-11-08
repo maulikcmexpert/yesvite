@@ -207,7 +207,7 @@ class HomeController extends Controller
                     'hosting_count_current_month'=>$hostingCountCurrentMonth,
                     'total_draft_events' => $totalDraftEvent,
                     'total_notification' => Notification::where(['user_id' => $user->id, 'read' => '0'])->count(),
-                    
+
                     // 'is_message_notification' => ($checkNotificationSetting->push != "" && isset($checkNotificationSetting->push)) ? $checkNotificationSetting->push : ""
                     // 'birth_date' => empty($user->birth_date) ? "" : $user->birth_date,
                     // 'email' => empty($user->email) ? "" : $user->email,
@@ -386,7 +386,7 @@ class HomeController extends Controller
                     }
                 }
 
-                dd($draftEventArray);
+                dd($profileData);
                 // return response()->json(['status' => 1, 'count' => count($allEvents), 'total_page' => $total_page, 'data' => $eventList, 'message' => "Events Data"]);
             } else {
                 // return response()->json(['status' => 0, 'data' => $eventList, 'message' => "No upcoming events found"]);
