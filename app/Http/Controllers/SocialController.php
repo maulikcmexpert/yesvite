@@ -43,8 +43,8 @@ class SocialController extends Controller
 
         // Check if the user already exists
         $authUser = $this->findOrCreateUser($user, $provider);
+        dd($authUser);
         if($authUser){
-            dd($authUser);
             Auth::login($authUser, true);
             return redirect()->intended('/profile')->with('success', 'Logged in successfully!');
         }
