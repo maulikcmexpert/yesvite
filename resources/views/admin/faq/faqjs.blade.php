@@ -70,6 +70,8 @@
        
 
         $(document).on('click', '.delete_faq', function() {
+            var id=$(this).data('id');
+
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -80,7 +82,7 @@
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                $('#delete_faq_from').submit();
+                $('#delete_faq_from'+id).submit();
 
             }
         });
