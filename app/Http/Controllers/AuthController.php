@@ -238,96 +238,98 @@ class AuthController extends Controller
 
         $remember = $request->has('remember'); // Check if "Remember Me" checkbox is checked
         $userData = User::where('email',$request->email)->first();
-        if($userData->account_status != 'Unblock'){
-            return redirect()->back()->withErrors([
-                'email' => 'Ban User: Temporarily or permanently suspend user.',
-            ])->withInput();
-        }
-        if (Auth::attempt($credentials, $remember)) {
-            $userIpAddress = request()->ip();
-
-            $user = Auth::guard('web')->user();
-            if ($user->email_verified_at != NULL) {
-
-                Session::regenerate();
-                $user->current_session_id = Session::getId();
-                $user->save();
-
-                $sessionArray = [
-                    'id' => encrypt($user->id),
-                    'first_name' => $user->firstname,
-                    'last_name' => $user->lastname,
-                    'username' => $user->firstname . ' ' . $user->lastname,
-                    'email' => $user->email,
-
-                    'profile' => ($user->profile != NULL || $user->profile != "") ? asset('public/storage/profile/' . $user->profile) : asset('public/storage/profile/no_profile.png')
-                ];
-                Session::put(['user' => $sessionArray]);
-
-                if (Session::has('user')) {
-
-
-                    if ($remember) {
-                        Cookie::queue('email', $user->email, 120);
-                        Cookie::queue('password', $request->password, 120);
-                    } else {
-
-                        Cookie::forget('email');
-                        Cookie::forget('password');
-                    }
-
-                    $this->logoutFromApplication($user->id);
-                    event(new \App\Events\UserRegistered($user));
-
-                    add_user_firebase($user->id, 'Online');
-
-                    $loginHistory = LoginHistory::where('user_id', $user->id)->first();
-
-                    if ($loginHistory) {
-                            $new_count=$loginHistory->login_count + 1;
+        if($userData){
+            if($userData->account_status != 'Unblock'){
+                return redirect()->back()->withErrors([
+                    'email' => 'Ban User: Temporarily or permanently suspend user.',
+                ])->withInput();
+            }
+            if (Auth::attempt($credentials, $remember)) {
+                $userIpAddress = request()->ip();
+    
+                $user = Auth::guard('web')->user();
+                if ($user->email_verified_at != NULL) {
+    
+                    Session::regenerate();
+                    $user->current_session_id = Session::getId();
+                    $user->save();
+    
+                    $sessionArray = [
+                        'id' => encrypt($user->id),
+                        'first_name' => $user->firstname,
+                        'last_name' => $user->lastname,
+                        'username' => $user->firstname . ' ' . $user->lastname,
+                        'email' => $user->email,
+    
+                        'profile' => ($user->profile != NULL || $user->profile != "") ? asset('public/storage/profile/' . $user->profile) : asset('public/storage/profile/no_profile.png')
+                    ];
+                    Session::put(['user' => $sessionArray]);
+    
+                    if (Session::has('user')) {
+    
+    
+                        if ($remember) {
+                            Cookie::queue('email', $user->email, 120);
+                            Cookie::queue('password', $request->password, 120);
+                        } else {
+    
+                            Cookie::forget('email');
+                            Cookie::forget('password');
+                        }
+    
+                        $this->logoutFromApplication($user->id);
+                        event(new \App\Events\UserRegistered($user));
+    
+                        add_user_firebase($user->id, 'Online');
+    
+                        $loginHistory = LoginHistory::where('user_id', $user->id)->first();
+    
+                        if ($loginHistory) {
+                                $new_count=$loginHistory->login_count + 1;
+                                $loginHistory->ip_address = $userIpAddress;
+                                $loginHistory->login_at = now();
+                                $loginHistory->login_count = $new_count;
+                                $loginHistory->save();
+                        } else {
+                            $loginHistory = new LoginHistory();
+                            $loginHistory->user_id = $user->id;
                             $loginHistory->ip_address = $userIpAddress;
                             $loginHistory->login_at = now();
-                            $loginHistory->login_count = $new_count;
+                            $loginHistory->login_count = 1;
                             $loginHistory->save();
+                        }
+                        if($user->isTemporary_password=="1"){
+                            return redirect()->route('profile.change_password')->with('success', 'Please changer your temparory password.');
+                        }else{
+                            return redirect()->route('profile');
+                        }
+    
                     } else {
-                        $loginHistory = new LoginHistory();
-                        $loginHistory->user_id = $user->id;
-                        $loginHistory->ip_address = $userIpAddress;
-                        $loginHistory->login_at = now();
-                        $loginHistory->login_count = 1;
-                        $loginHistory->save();
+                        return redirect()->back()->withErrors([
+                            'email' => 'Invalid credentials!',
+                        ])->withInput();
+                        // return  Redirect::to('login')->with('error', 'Invalid credentials!');
                     }
-                    if($user->isTemporary_password=="1"){
-                        return redirect()->route('profile.change_password')->with('success', 'Please changer your temparory password.');
-                    }else{
-                        return redirect()->route('profile');
-                    }
-
-                } else {
-                    return redirect()->back()->withErrors([
-                        'email' => 'Invalid credentials!',
-                    ])->withInput();
-                    // return  Redirect::to('login')->with('error', 'Invalid credentials!');
+                }else {
+                    $randomString = Str::random(30);
+                    $user->remember_token = $randomString;
+                    $user->save();
+    
+                    $userData = [
+                        'username' => $user->firstname ,
+                        'email' => $user->email,
+                        'token' => $randomString,
+                        'is_first_login' => $user->is_first_login
+                    ];
+    
+    
+                    Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($user) {
+                        $message->to($user->email);
+                        $message->subject('Verify your Yesvite email address');
+                    });
+    
+                    return  Redirect::to('login')->with('success', 'Please check and verify your email address.');
                 }
-            }else {
-                $randomString = Str::random(30);
-                $user->remember_token = $randomString;
-                $user->save();
-
-                $userData = [
-                    'username' => $user->firstname ,
-                    'email' => $user->email,
-                    'token' => $randomString,
-                    'is_first_login' => $user->is_first_login
-                ];
-
-
-                Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($user) {
-                    $message->to($user->email);
-                    $message->subject('Verify your Yesvite email address');
-                });
-
-                return  Redirect::to('login')->with('success', 'Please check and verify your email address.');
             }
         }
         return redirect()->back()->withErrors([
