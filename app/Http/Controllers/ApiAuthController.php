@@ -84,6 +84,7 @@ class ApiAuthController extends Controller
                     'password' => Hash::make($input['password']),
                     'password_updated_date' => date('Y-m-d'),
                     'remember_token' =>  $randomString,
+                    'register_type' => 'API Normal register',
                     'app_user' => '1',
                 ]);
 
@@ -153,27 +154,38 @@ class ApiAuthController extends Controller
                 $checkUser->password = Hash::make($input['password']);
                 $checkUser->password_updated_date = date('Y-m-d');
                 $checkUser->remember_token =  $randomString;
+                $checkUser->register_type =  'API Normal register';
                 $checkUser->save();
             } else {
+                $checkUser = new User();
+                $checkUser->firstname = $input['firstname'];
+                $checkUser->lastname = $input['lastname'];
+                $checkUser->email = $input['email'];
+                $checkUser->account_type = $input['account_type'];
+                $checkUser->company_name = ($input['account_type'] == '1') ? $input['company_name'] : "";
+                $checkUser->password = Hash::make($input['password']);
+                $checkUser->password_updated_date = date('Y-m-d');
+                $checkUser->remember_token =  $randomString;
+                $checkUser->register_type =  'API Normal register';
+                $checkUser->save();
 
-                $usersignup =  User::create([
-                    'firstname' => $input['firstname'],
-                    'lastname' => $input['lastname'],
-                    'email' => $input['email'],
-                    'account_type' => $input['account_type'],
-                    'company_name' => ($input['account_type'] == '1') ? $input['company_name'] : "",
-                    'password' => Hash::make($input['password']),
-                    'password_updated_date' => date('Y-m-d'),
-                    'remember_token' =>  $randomString,
-                    'register_type' => 'API Normal register',
-
-                ]);
+                // $usersignup =  User::create([
+                //     'firstname' => $input['firstname'],
+                //     'lastname' => $input['lastname'],
+                //     'email' => $input['email'],
+                //     'account_type' => $input['account_type'],
+                //     'company_name' => ($input['account_type'] == '1') ? $input['company_name'] : "",
+                //     'password' => Hash::make($input['password']),
+                //     'password_updated_date' => date('Y-m-d'),
+                //     'remember_token' =>  $randomString,
+                //     'register_type' => 'API Normal register',
+                // ]);
             }
             // event(new \App\Events\UserRegistered($usersignup));
 
             DB::commit();
 
-            $userDetails = User::where('id', $usersignup->id)->first();
+            $userDetails = User::where('id', $checkUser->id)->first();
 
             $userData = [
                 'username' => $userDetails->firstname,
