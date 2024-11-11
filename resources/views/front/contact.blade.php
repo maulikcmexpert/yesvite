@@ -367,7 +367,7 @@
                             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                 <div class="input-form">
                                     <input type="email" class="form-control addnew_email" id="email" name="email" autocomplete="off">
-                                    <label for="email" class="floating-label">Work Email
+                                    <label for="email" class="floating-label">Email
                                         Address<span>*</span></label>
                                     <div class="label-error">
                                         <label id="email-error" class="error" for="email"></label>
@@ -375,7 +375,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                                <div class="input-form add-contact-selectbox">
+                                <div class="input-form add-contact-selectbox add-contact-country">
                                     <input type="text" class="phone_number border-0" name="countryCode" readonly>
                                     <input type="text" class="form-control addnew_contact" id="phone_number" name="phone_number">
                                     <label for="phone" class="floating-label">Phone
