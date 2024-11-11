@@ -99,7 +99,7 @@
                     <p>Design Style</p>
                   </a>
                 </li> -->
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                   <a href="{{URL::to('/admin/create_template')}}" class="nav-link {{ (Request::segment(2) == 'create_template')? 'active':'' }}">
                     <span class="dot"></span>
                     <p>Create Template</p>
@@ -107,24 +107,24 @@
                 </li>
 
               </ul>
-            </li>
-            <!-- <li class="nav-item">
-              <a href="{{URL::to('/admin/design')}}" class="nav-link {{ (Request::segment(2) == 'design')? 'active':'' }}">
-                <i class="fas fa-layer-group"></i>
-                <p>
-                  Design
-                </p>
-              </a>
-            </li> -->
+            </li> --}}
 
             <li class="nav-item">
+              <a href="{{URL::to('/admin/create_template')}}" class="nav-link {{ (Request::segment(2) == 'event_type')? 'active':'' }}">
+                <i class="fas fa-layer-group"></i>
+                <p>
+                  Create Template
+                </p>
+              </a>
+            </li>
+            {{-- <li class="nav-item">
               <a href="{{URL::to('/admin/event_type')}}" class="nav-link {{ (Request::segment(2) == 'event_type')? 'active':'' }}">
                 <i class="fas fa-layer-group"></i>
                 <p>
                   Event Type
                 </p>
               </a>
-            </li>
+            </li> --}}
           </ul>
         </li>
         <li class="nav-item">
