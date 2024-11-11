@@ -2115,6 +2115,7 @@
                 .then(response => response.json())
                 .then(data => {
                     console.log('Text data saved successfully', data);
+                    toastr.success('Save Successful')
                     window.location.href = "{{URL::to('/admin/create_template')}}";
 
                 })
