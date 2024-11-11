@@ -561,7 +561,6 @@ async function updateChat(user_id) {
     var selected_user = await getUser(user_id);
     if (!selected_user) {
 
-        $('.empty-massage').css('display','block');
         // $('.msg-head').css('display','none');
         // $('.msg-footer').css('display','none');
         try {
@@ -575,6 +574,9 @@ async function updateChat(user_id) {
             console.error(error);
             return;
         }
+
+        $('.empty-massage').css('display','block');
+
     }
 
 
