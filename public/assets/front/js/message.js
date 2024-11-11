@@ -549,7 +549,6 @@ setTimeout(() => {
 }, 3000);
 // Function to update the chat UI
 async function updateChat(user_id) {
-    $('.empty-massage').css('display','none');
     $(".msg-lists").html("");
     $(".member-lists").html("");
     $(".choosen-file").hide();
@@ -557,6 +556,8 @@ async function updateChat(user_id) {
 
     var selected_user = await getUser(user_id);
     if (!selected_user) {
+        $('.empty-massage').css('display','block');
+
         try {
             await updateUserInFirebase(user_id);
             selected_user = await getUser(user_id);
@@ -569,6 +570,8 @@ async function updateChat(user_id) {
             return;
         }
     }
+    $('.empty-massage').css('display','none');
+
     const messageTime = selected_user.userLastSeen
         ? new Date(selected_user.userLastSeen)
         : new Date();
