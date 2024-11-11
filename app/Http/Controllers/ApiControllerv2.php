@@ -10558,64 +10558,64 @@ class ApiControllerv2 extends Controller
                         $updateUser->save();
                     }
                 }
-                if ($value['prefer_by'] == 'email') {
+                // if ($value['prefer_by'] == 'email') {
 
-                    $email = $value['email'];
+                //     $email = $value['email'];
 
-                    $eventInfo = Event::with(['user', 'event_image'])->where('id', $input['event_id'])->first();
-                    $eventData = [
-                        'event_id' => $eventInfo->id,
-                        'user_id' => $user->id,
-                        'event_name' => $eventInfo->event_name,
-                        'hosted_by' => $eventInfo->hosted_by,
-                        'profileUser' => ($eventInfo->user->profile != NULL || $eventInfo->user->profile != "") ? $eventInfo->user->profile : "no_profile.png",
-                        'event_image' => ($eventInfo->event_image->isNotEmpty()) ? $eventInfo->event_image[0]->image : "no_image.png",
-                        'date' =>  date('l, M. jS', strtotime($eventInfo->start_date)),
-                        'time' => $eventInfo->rsvp_start_time,
-                        'address' => $eventInfo->event_location_name . ' ' . $eventInfo->address_1 . ' ' . $eventInfo->address_2 . ' ' . $eventInfo->state . ' ' . $eventInfo->city . ' - ' . $eventInfo->zip_code,
-                    ];
+                //     $eventInfo = Event::with(['user', 'event_image'])->where('id', $input['event_id'])->first();
+                //     $eventData = [
+                //         'event_id' => $eventInfo->id,
+                //         'user_id' => $user->id,
+                //         'event_name' => $eventInfo->event_name,
+                //         'hosted_by' => $eventInfo->hosted_by,
+                //         'profileUser' => ($eventInfo->user->profile != NULL || $eventInfo->user->profile != "") ? $eventInfo->user->profile : "no_profile.png",
+                //         'event_image' => ($eventInfo->event_image->isNotEmpty()) ? $eventInfo->event_image[0]->image : "no_image.png",
+                //         'date' =>  date('l, M. jS', strtotime($eventInfo->start_date)),
+                //         'time' => $eventInfo->rsvp_start_time,
+                //         'address' => $eventInfo->event_location_name . ' ' . $eventInfo->address_1 . ' ' . $eventInfo->address_2 . ' ' . $eventInfo->state . ' ' . $eventInfo->city . ' - ' . $eventInfo->zip_code,
+                //     ];
 
-                    // dd($eventData);
+                //     // dd($eventData);
 
-                    // $checkEmail =  emailChecker($email);
+                //     // $checkEmail =  emailChecker($email);
 
-                    // if ($checkEmail == 'ok') {
+                //     // if ($checkEmail == 'ok') {
 
-                    $invitation_sent_status =  EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $id])->first();
-                    $invitation_sent_status->invitation_sent = '1';
-                    $invitation_sent_status->save();
-                    if ($invitation_sent_status->user->app_user == '1') {
-                        Notification::where(['user_id' => $id, 'sender_id' => $user->id, 'event_id' => $input['event_id']])->delete();
-                        $notification_message = "You have invited in " . $eventInfo->event_name;
-                        $notification = new Notification;
-                        $notification->event_id = $input['event_id'];
-                        $notification->user_id = $id;
-                        $notification->notification_type = 'invite';
-                        $notification->sender_id = $user->id;
-                        $notification->notification_message = $notification_message;
-                        $notification->save();
-                    }
-                    // } else {
-                    //     $faildinvitation_sent_status =  EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $id])->first();
-                    //     $faildinvitation_sent_status->invitation_sent = '0';
-                    //     $faildinvitation_sent_status->save();
-                    // }
-                    dispatch(new sendInvitation(array($email, $eventData)));
-                }
+                //     $invitation_sent_status =  EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $id])->first();
+                //     $invitation_sent_status->invitation_sent = '1';
+                //     $invitation_sent_status->save();
+                //     if ($invitation_sent_status->user->app_user == '1') {
+                //         Notification::where(['user_id' => $id, 'sender_id' => $user->id, 'event_id' => $input['event_id']])->delete();
+                //         $notification_message = "You have invited in " . $eventInfo->event_name;
+                //         $notification = new Notification;
+                //         $notification->event_id = $input['event_id'];
+                //         $notification->user_id = $id;
+                //         $notification->notification_type = 'invite';
+                //         $notification->sender_id = $user->id;
+                //         $notification->notification_message = $notification_message;
+                //         $notification->save();
+                //     }
+                //     // } else {
+                //     //     $faildinvitation_sent_status =  EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $id])->first();
+                //     //     $faildinvitation_sent_status->invitation_sent = '0';
+                //     //     $faildinvitation_sent_status->save();
+                //     // }
+                //     dispatch(new sendInvitation(array($email, $eventData)));
+                // }
 
-                if ($value['prefer_by'] == 'phone') {
-                    $eventInfo = Event::with(['user', 'event_image'])->where('id', $input['event_id'])->first();
-                    $notification_message = " have invited you to: " . $eventInfo->event_name;
+                // if ($value['prefer_by'] == 'phone') {
+                //     $eventInfo = Event::with(['user', 'event_image'])->where('id', $input['event_id'])->first();
+                //     $notification_message = " have invited you to: " . $eventInfo->event_name;
 
 
-                    $sent = sendSMSForApplication($value['phone_number'], $notification_message);
+                //     $sent = sendSMSForApplication($value['phone_number'], $notification_message);
 
-                    if ($sent == true) {
-                        $invitation_sent_status =  EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $id])->first();
-                        $invitation_sent_status->invitation_sent = '1';
-                        $invitation_sent_status->save();
-                    }
-                }
+                //     if ($sent == true) {
+                //         $invitation_sent_status =  EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $id])->first();
+                //         $invitation_sent_status->invitation_sent = '1';
+                //         $invitation_sent_status->save();
+                //     }
+                // }
                 $ids[] = $id;
             }
 
