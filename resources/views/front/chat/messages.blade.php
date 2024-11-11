@@ -388,7 +388,7 @@ use Carbon\Carbon;
 
                             </ul>
                             <div id="msgbox"></div>
-                            <div class="empty-massage">
+                            <div class="empty-massage" style="display: none;">
                                 <div class="empty-img">
                                     <img src="{{asset('assets/front')}}/image/empty-img.png" alt="empty-img">
                                 </div>
