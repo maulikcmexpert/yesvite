@@ -71,7 +71,7 @@
         <li class="nav-item">
           <p class="asideTitle">Design Template</p>
           <ul class="pl-0">
-            <li class="nav-item {{ (Request::segment(2) == 'category' || Request::segment(2) == 'subcategory'|| Request::segment(2) == 'design_style')? 'menu-open':'' }}">
+            <li class="nav-item {{ (Request::segment(2) == 'category' || Request::segment(2) == 'subcategory' || Request::segment(2) == 'create_template' || Request::segment(2) == 'design_style')? 'menu-open':'' }}">
               <a href="#" class="nav-link  {{ (Request::segment(2) == 'category' || Request::segment(2) == 'subcategory' || Request::segment(2) == 'design_style') }}">
                 <i class="nav-icon fas fa-copy"></i>
                 <p>
@@ -112,19 +112,19 @@
               <a href="{{URL::to('/admin/create_template')}}" class="nav-link {{ (Request::segment(2) == 'create_template')? 'active':'' }}">
                 <i class="fas fa-layer-group"></i>
                 <p>
-                  Create Design Template
+                  Create Template
                 </p>
               </a>
             </li>
 
-            {{-- <li class="nav-item">
+            <li class="nav-item">
               <a href="{{URL::to('/admin/event_type')}}" class="nav-link {{ (Request::segment(2) == 'event_type')? 'active':'' }}">
                 <i class="fas fa-layer-group"></i>
                 <p>
                   Event Type
                 </p>
               </a>
-            </li> --}}
+            </li>
           </ul>
         </li>
         <li class="nav-item">
