@@ -133,7 +133,7 @@ $(document).ready(function () {
 
 
     $(document).on("input","#phone_number", function () {
-        alert();
+        // alert();
         let input = $(this).val().replace(/\D/g, ''); // Remove any non-numeric characters
         let formattedNumber = '';
     
