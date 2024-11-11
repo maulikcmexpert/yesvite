@@ -12898,7 +12898,7 @@ class ApiControllerv3 extends Controller
         } else {
             $result1 = $result;
         }
-        dd($result1);
+        
         return $result1;
     }
     public function set_apple_iap($receipt)
