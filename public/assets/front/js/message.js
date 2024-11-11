@@ -774,6 +774,7 @@ async function updateChatfromGroup(conversationId) {
 // Initialize event listeners
 $(document).on("click", ".msg-list", async function () {
     loader.show();
+    $('.empty-massage').css('display','block');
     removeSelectedMsg();
     closeMedia();
     $(this).addClass("active");
