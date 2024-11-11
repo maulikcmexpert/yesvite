@@ -79,10 +79,20 @@ $(document).on("click", ".design-card", function() {
 
     staticInfo.textElements.forEach((element) => {
         //console.log(element);
+        const textMeasurement = new fabric.Text(element.text, {
+            fontSize: element.fontSize,
+            fontFamily: element.fontFamily,
+            fontWeight: element.fontWeight,
+            fontStyle: element.fontStyle,
+            underline: element.underline,
+            linethrough: element.linethrough,
+        });
+        const textWidth1 = textMeasurement.width;
+
         let textElement = new fabric.Textbox(element.text, {
             left: element.left,
             top: element.top,
-            width: element.width || 200,
+            width: textWidth1,
             fontSize: element.fontSize,
             fill: element.fill,
             fontFamily: element.fontFamily,
@@ -102,11 +112,14 @@ $(document).on("click", ".design-card", function() {
             isStatic: true,
             angle: element?.rotation ? element?.rotation : 0
         });
+
         switch (element.text.toLowerCase()) {
             case "event_name":
                 if (eventData.event_name) {
+                   
                     textElement.set({
-                        text: eventData.event_name
+                        text: eventData.event_name,
+                        width: textWidth1,
                     });
                 } else {
                     return; // Skip adding the element if event_name is empty
@@ -114,17 +127,21 @@ $(document).on("click", ".design-card", function() {
                 break;
             case "host_name":
                 if (eventData.hosted_by) {
+                   
                     textElement.set({
-                        text: eventData.hosted_by
+                        text: eventData.hosted_by,
+                        width: textWidth1,
                     });
                 } else {
                     return; // Skip adding the element if host_name is empty
                 }
                 break;
-            case "location":
+            case "location_description":
                 if (eventData.event_location) {
+                   
                     textElement.set({
-                        text: eventData.event_location
+                        text: eventData.event_location,
+                        width: textWidth1,
                     });
                 } else {
                     return; // Skip adding the element if event_location_name is empty
@@ -132,17 +149,21 @@ $(document).on("click", ".design-card", function() {
                 break;
             case "start_time":
                 if (eventData.start_time) {
+                   
                     textElement.set({
-                        text: eventData.start_time
+                        text: eventData.start_time,
+                        width: textWidth1,
                     });
                 } else {
                     return; // Skip adding the element if start_time is empty
                 }
                 break;
-            case "rsvp_end_time":
+            case "end_time":
                 if (eventData.rsvp_end_time) {
+                   
                     textElement.set({
-                        text: eventData.rsvp_end_time
+                        text: eventData.rsvp_end_time,
+                        width: textWidth1,
                     });
                 } else {
                     return; // Skip adding the element if rsvp_end_time is empty
@@ -157,9 +178,9 @@ $(document).on("click", ".design-card", function() {
                     } else {
                         start_date = eventData.event_date;
                     }
-
+                    
                     textElement.set({
-                        text: start_date
+                        text: start_date,
                     });
                 } else {
                     return; // Skip adding the element if start_date is empty
@@ -176,17 +197,17 @@ $(document).on("click", ".design-card", function() {
                     }
 
                     textElement.set({
-                        text: end_date
+                        text: end_date,
                     });
                 } else {
                     return; // Skip adding the element if end_date is empty
                 }
                 break;
         }
-        const textWidth = textElement.calcTextWidth();
-        textElement.set({
-            width: textWidth
-        });
+        // const textWidth = textElement.calcTextWidth();
+        // textElement.set({
+        //     width: textWidth
+        // });
         canvas.add(textElement);
     });
     var shape = '';
@@ -592,7 +613,7 @@ function bindData() {
                                 return; // Skip adding the element if host_name is empty
                             }
                             break;
-                        case "location":
+                        case "location_description":
                             if (eventData.event_location) {
                                 let textWidth = getWidth(
                                     element,
@@ -620,7 +641,7 @@ function bindData() {
                                 return; // Skip adding the element if start_time is empty
                             }
                             break;
-                        case "rsvp_end_time":
+                        case "end_time":
                             if (eventData.rsvp_end_time) {
                                 let textWidth = getWidth(
                                     element,
