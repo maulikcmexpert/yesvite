@@ -1533,10 +1533,9 @@ $(".send-message").on("keypress", async function (e) {
             const receiverSnapshot = await get(
                 ref(database, `overview/${receiverId}/${conversationId}`)
             );
-
+            
             if (
                 receiverSnapshot.val() !== null &&
-                receiverSnapshot.val() !== undefined &&
                 receiverSnapshot.val().isMute == undefined ||
                 receiverSnapshot.val().isMute == 0 ||
                 receiverSnapshot.val().isMute == null
