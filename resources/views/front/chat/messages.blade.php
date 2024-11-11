@@ -388,15 +388,13 @@ use Carbon\Carbon;
 
                             </ul>
                             <div id="msgbox"></div>
-                            <!-- <div class="empty-massage">
+                            <div class="empty-massage">
                                 <div class="empty-img">
-                                    <img src="./assets/image/empty-img.png" alt="empty-img">
+                                    <img src="{{asset('assets/front')}}/image/empty-img.png" alt="empty-img">
                                 </div>
                                 <h5>Select Message First</h5>
                                 <p>Please select a message to see the details</p>
-                            </div> -->
-
-
+                            </div>
                         </div>
 
 
