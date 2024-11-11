@@ -204,10 +204,10 @@ $(document).on("click", ".design-card", function() {
                 }
                 break;
         }
-        const textWidth = textElement.calcTextWidth();
-        textElement.set({
-            width: textWidth
-        });
+        // const textWidth = textElement.calcTextWidth();
+        // textElement.set({
+        //     width: textWidth
+        // });
         canvas.add(textElement);
     });
     var shape = '';
