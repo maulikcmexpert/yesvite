@@ -2115,8 +2115,19 @@
                 .then(response => response.json())
                 .then(data => {
                     console.log('Text data saved successfully', data);
-                    toastr.success('Save Successful')
-                    window.location.href = "{{URL::to('/admin/create_template')}}";
+                    Swal.fire({
+                    title: "Save Successful",
+                    text: "",
+                    icon: "success",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Redirect after clicking "OK"
+                        window.location.href = "{{URL::to('/admin/create_template')}}";
+                    }
+                });
+          
+            
+            // window.location.href = "{{URL::to('/admin/create_template')}}";
 
                 })
                 .catch((error) => {
