@@ -3889,7 +3889,7 @@ function handleDelete() {
         $("#selected-user-lastseen").html("");
         $(".member-lists").html("");
         $(".selected-title").html("Start new chat");
-        $(".empty-massage").css('display','none');
+        $(".empty-massage").css('display','block');
     }
 }
 
