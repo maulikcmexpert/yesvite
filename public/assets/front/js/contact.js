@@ -148,6 +148,17 @@ $(document).ready(function () {
         $(this).val(formattedNumber);
     });
 
+
+    $.validator.addMethod("phoneUS", function (phone_number, element) {
+        phone_number = phone_number.replace(/\s+/g, "");
+        return (
+            this.optional(element) ||
+            phone_number.length == 10 &&
+            phone_number.match(/^(\d{3})(\d{3})(\d{4})$/)
+        );
+    }, "Please enter a valid US phone number");
+
+
     $("#add_contact").validate({
         rules: {
             Fname: "required",
@@ -173,7 +184,8 @@ $(document).ready(function () {
 
             phone_number: {
                 required: true,
-                digits: true,
+                // digits: true,
+                phoneUS: true,
                 minlength: 10,
                 maxlength: 15,
                 remote: {
@@ -205,7 +217,8 @@ $(document).ready(function () {
             },
             phone_number: {
                 required: "Please enter a Phone Number",
-                digits: "Please enter a valid Phone Number",
+                // digits: "Please enter a valid Phone Number",
+                phoneUS: "Please enter a valid phone number in the format 123-456-7890",
                 minlength: "Phone Number must be minimum 10 digit",
                 maxlength: "Phone Number must be maxmimum 15 digit",
                 remote: "Phone Number is already exsits",
@@ -243,6 +256,8 @@ $(document).ready(function () {
             });
         },
     });
+
+    
 
     $("#save_contact").click(function () {
         loaderHandle("#save_contact", "Saving");
