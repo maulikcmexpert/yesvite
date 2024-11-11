@@ -117,14 +117,14 @@
               </a>
             </li>
 
-            <li class="nav-item">
+            {{-- <li class="nav-item">
               <a href="{{URL::to('/admin/event_type')}}" class="nav-link {{ (Request::segment(2) == 'event_type')? 'active':'' }}">
                 <i class="fas fa-layer-group"></i>
                 <p>
                   Event Type
                 </p>
               </a>
-            </li>
+            </li> --}}
           </ul>
         </li>
         <li class="nav-item">
