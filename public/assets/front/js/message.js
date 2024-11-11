@@ -3898,7 +3898,8 @@ function handleDelete() {
         $(".conversationId").attr("conversationid", "");
         $(".selected_id").val("");
         $(".selected_message").val("");
-        $(".selected_conversasion").val("");
+        $(".selected_message").val("");
+
         $(".selected_name").val("");
         $("#isGroup").val("");
         $("#selected-user-name").html("Start new chat");
