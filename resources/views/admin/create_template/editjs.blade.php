@@ -978,6 +978,7 @@
                                         left: element.left,
                                         top: element.top,
                                         width: element.width,
+                                        // width: element.width || 200,
                                         fontSize: element.fontSize,
                                         fill: element.fill,
                                         fontFamily: element.fontFamily,
