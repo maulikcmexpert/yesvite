@@ -558,8 +558,8 @@ async function updateChat(user_id) {
     if (!selected_user) {
     
         $('.empty-massage').css('display','block');
-        $('.msg-head').css('display','block');
-        $('.msg-footer').css('display','block');
+        $('.msg-head').css('display','none');
+        $('.msg-footer').css('display','none');
         try {
             await updateUserInFirebase(user_id);
             selected_user = await getUser(user_id);
@@ -573,9 +573,10 @@ async function updateChat(user_id) {
         }
     }
 
+
         $('.empty-massage').css('display','none');
-        $('.msg-head').css('display','none');
-        $('.msg-footer').css('display','none');
+        $('.msg-head').css('display','block');
+        $('.msg-footer').css('display','block');
     const messageTime = selected_user.userLastSeen
         ? new Date(selected_user.userLastSeen)
         : new Date();
