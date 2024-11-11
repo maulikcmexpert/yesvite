@@ -154,7 +154,7 @@ $(document).ready(function () {
         return (
             this.optional(element) ||
             phone_number.length == 10 &&
-            phone_number.match(/^(\d{3})(\d{3})(\d{4})$/)
+            phone_number.match(/^(\d{3}-\d{3}-\d{4}|\d{10})$/) // Allows both 111-111-1111 and 1111111111 formats
         );
     }, "Please enter a valid US phone number");
 
