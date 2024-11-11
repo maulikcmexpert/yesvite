@@ -578,6 +578,7 @@ async function updateChat(user_id) {
         // $('.empty-massage').css('display','block');
 
     }
+
         $('.empty-massage').css('display','none');
         $('.msg-head').css('display','block');
         $('.msg-footer').css('display','block');
@@ -3903,6 +3904,9 @@ function handleDelete() {
         $("#selected-user-lastseen").html("");
         $(".member-lists").html("");
         $(".selected-title").html("Start new chat");
+        // $('.empty-massage').css('display','block');
+        $('.msg-head').css('display','none');
+        $('.msg-footer').css('display','none');
     }
 }
 
