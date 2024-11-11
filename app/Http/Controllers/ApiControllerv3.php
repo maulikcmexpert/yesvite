@@ -12850,7 +12850,7 @@ class ApiControllerv3 extends Controller
         $clientId = env('InGOOGLE_CLIENT_ID');
 
         $clientSecret = env('InGOOGLE_CLIENT_SECRET');
-        $redirectUri = 'https://yesvite.cmexpertiseinfotech.in/google/callback';
+        $redirectUri = env('INAPP_REDIRECT_URL');
 
         $refreshToken = env('INAPP_PURCHASE_REFRESH_TOKEN');
         $TOKEN_URL = "https://accounts.google.com/o/oauth2/token";
