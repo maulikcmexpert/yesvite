@@ -142,7 +142,7 @@ $(document).ready(function () {
         } else if (input.length <= 6) {
             formattedNumber = `${input.slice(0, 3)}-${input.slice(3)}`;
         } else {
-            formattedNumber = `${input.slice(0, 3)}-${input.slice(3, 6)}-${input.slice(6, 10)}`;
+            formattedNumber = `${input.slice(0, 3)}-${input.slice(3, 6)}-${input.slice(6, 15)}`;
         }
     
         $(this).val(formattedNumber);
