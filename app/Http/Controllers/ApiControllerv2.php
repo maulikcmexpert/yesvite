@@ -5530,7 +5530,7 @@ class ApiControllerv2 extends Controller
                             'post_id' => ""
                         ];
                         // dispatch(new SendNotificationJob(array('owner_notify', $notificationParam)));
-                        sendNotification('', $notificationParam);
+                        sendNotification('owner_notify', $notificationParam);
                     }
                 }
             } else {
