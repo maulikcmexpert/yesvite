@@ -1,4 +1,4 @@
-@if($yesviteUser->isEmpty())
+{{-- @if($yesviteUser->isEmpty())
 <div class="users-data">
     <div class="md-5">
         <h5>No Records Found..</h5>
@@ -49,4 +49,4 @@ if ($value->firstname !== null && $value->lastname !== null) {
     <a href="#" class="btn edit-contact edit_contact" id="edit_contact" data-bs-toggle="modal" data-bs-target="#myModal" data-id="{{$value->id}}">Edit Contact</a>
 </div>
 @endforeach
-@endif
+@endif --}}
