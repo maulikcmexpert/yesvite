@@ -132,14 +132,20 @@ $(document).ready(function () {
     });
 
 
-    $("#phone_number").on("keyup", function () {
-        let number = $(this).val().replace(/\D/g, ''); // Remove non-digit characters
-        if (number.length > 3 && number.length <= 6) {
-            number = number.replace(/(\d{3})(\d+)/, "$1-$2");
-        } else if (number.length > 6) {
-            number = number.replace(/(\d{3})(\d{3})(\d+)/, "$1-$2-$3");
+    $("#phone_number").on("input", function () {
+        alert();
+        let input = $(this).val().replace(/\D/g, ''); // Remove any non-numeric characters
+        let formattedNumber = '';
+    
+        if (input.length <= 3) {
+            formattedNumber = input;
+        } else if (input.length <= 6) {
+            formattedNumber = `${input.slice(0, 3)}-${input.slice(3)}`;
+        } else {
+            formattedNumber = `${input.slice(0, 3)}-${input.slice(3, 6)}-${input.slice(6, 10)}`;
         }
-        $(this).val(number);
+    
+        $(this).val(formattedNumber);
     });
 
     $("#add_contact").validate({
