@@ -131,6 +131,17 @@ $(document).ready(function () {
         $("#country_code").val(phoneNumber);
     });
 
+
+    $("#phone_number").on("keyup", function () {
+        let number = $(this).val().replace(/\D/g, ''); // Remove non-digit characters
+        if (number.length > 3 && number.length <= 6) {
+            number = number.replace(/(\d{3})(\d+)/, "$1-$2");
+        } else if (number.length > 6) {
+            number = number.replace(/(\d{3})(\d{3})(\d+)/, "$1-$2-$3");
+        }
+        $(this).val(number);
+    });
+
     $("#add_contact").validate({
         rules: {
             Fname: "required",
