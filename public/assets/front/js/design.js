@@ -116,13 +116,10 @@ $(document).on("click", ".design-card", function() {
         switch (element.text.toLowerCase()) {
             case "event_name":
                 if (eventData.event_name) {
-                    let textWidth = getWidth(
-                        element,
-                        eventData.event_name
-                    );
+                   
                     textElement.set({
                         text: eventData.event_name,
-                        width: textWidth,
+                        width: textWidth1,
                     });
                 } else {
                     return; // Skip adding the element if event_name is empty
@@ -130,13 +127,10 @@ $(document).on("click", ".design-card", function() {
                 break;
             case "host_name":
                 if (eventData.hosted_by) {
-                    let textWidth = getWidth(
-                        element,
-                        eventData.hosted_by
-                    );
+                   
                     textElement.set({
                         text: eventData.hosted_by,
-                        width: textWidth,
+                        width: textWidth1,
                     });
                 } else {
                     return; // Skip adding the element if host_name is empty
@@ -144,13 +138,10 @@ $(document).on("click", ".design-card", function() {
                 break;
             case "location_description":
                 if (eventData.event_location) {
-                    let textWidth = getWidth(
-                        element,
-                        eventData.event_location
-                    );
+                   
                     textElement.set({
                         text: eventData.event_location,
-                        width: textWidth,
+                        width: textWidth1,
                     });
                 } else {
                     return; // Skip adding the element if event_location_name is empty
@@ -158,13 +149,10 @@ $(document).on("click", ".design-card", function() {
                 break;
             case "start_time":
                 if (eventData.start_time) {
-                    let textWidth = getWidth(
-                        element,
-                        eventData.start_time
-                    );
+                   
                     textElement.set({
                         text: eventData.start_time,
-                        width: textWidth,
+                        width: textWidth1,
                     });
                 } else {
                     return; // Skip adding the element if start_time is empty
@@ -172,13 +160,10 @@ $(document).on("click", ".design-card", function() {
                 break;
             case "end_time":
                 if (eventData.rsvp_end_time) {
-                    let textWidth = getWidth(
-                        element,
-                        eventData.rsvp_end_time
-                    );
+                   
                     textElement.set({
                         text: eventData.rsvp_end_time,
-                        width: textWidth,
+                        width: textWidth1,
                     });
                 } else {
                     return; // Skip adding the element if rsvp_end_time is empty
@@ -193,13 +178,9 @@ $(document).on("click", ".design-card", function() {
                     } else {
                         start_date = eventData.event_date;
                     }
-                    let textWidth = getWidth(
-                        element,
-                        start_date
-                    );
+                    
                     textElement.set({
                         text: start_date,
-                        width: textWidth,
                     });
                 } else {
                     return; // Skip adding the element if start_date is empty
@@ -214,14 +195,9 @@ $(document).on("click", ".design-card", function() {
                     } else {
                         end_date = eventData.event_date;
                     }
-                    let textWidth = getWidth(
-                        element,
-                        end_date
-                    );
 
                     textElement.set({
                         text: end_date,
-                        width: textWidth,
                     });
                 } else {
                     return; // Skip adding the element if end_date is empty
