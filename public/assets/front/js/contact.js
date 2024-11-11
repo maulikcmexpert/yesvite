@@ -132,7 +132,7 @@ $(document).ready(function () {
     });
 
 
-    $("#phone_number").on("input", function () {
+    $(document).on("input","#phone_number", function () {
         alert();
         let input = $(this).val().replace(/\D/g, ''); // Remove any non-numeric characters
         let formattedNumber = '';
