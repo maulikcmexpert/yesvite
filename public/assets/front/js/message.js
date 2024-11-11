@@ -548,7 +548,7 @@ setTimeout(() => {
     loader.hide();
 }, 3000);
 // Function to update the chat UI
-$('.empty-massage').css('display','none');
+// $('.empty-massage').css('display','none');
 $('.msg-head').css('display','none');
 $('.msg-footer').css('display','none');
 
@@ -575,12 +575,10 @@ async function updateChat(user_id) {
             return;
         }
 
-        $('.empty-massage').css('display','block');
+        // $('.empty-massage').css('display','block');
 
     }
-
-
-        // $('.empty-massage').css('display','none');
+        $('.empty-massage').css('display','none');
         $('.msg-head').css('display','block');
         $('.msg-footer').css('display','block');
     const messageTime = selected_user.userLastSeen
