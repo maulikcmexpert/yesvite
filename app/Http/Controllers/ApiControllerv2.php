@@ -13267,7 +13267,7 @@ class ApiControllerv2 extends Controller
                                 unset($udpated[$k]); // Remove entry if host_name is empty
                             }
                             break;
-                        case 'location':
+                        case 'location_description':
                             if (!empty($request->event_location_name)) {
                                 $udpated[$k][$key] = $request->event_location_name;
                             } else {
@@ -13281,7 +13281,7 @@ class ApiControllerv2 extends Controller
                                 unset($udpated[$k]); // Remove entry if start_time is empty
                             }
                             break;
-                        case 'rsvp_end_time':
+                        case 'end_time':
                             if (!empty($request->rsvp_end_time)) {
                                 $udpated[$k][$key] = $request->rsvp_end_time;
                             } else {
