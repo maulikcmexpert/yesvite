@@ -549,6 +549,7 @@ setTimeout(() => {
 }, 3000);
 // Function to update the chat UI
 async function updateChat(user_id) {
+    $('.empty-massage').css('display','none');
     $(".msg-lists").html("");
     $(".member-lists").html("");
     $(".choosen-file").hide();
