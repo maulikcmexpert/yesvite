@@ -977,7 +977,7 @@
                                     let textElement = new fabric.Textbox(element.text, {
                                         left: element.left,
                                         top: element.top,
-                                        width: element.width || 200,
+                                        width: element.width,
                                         fontSize: element.fontSize,
                                         fill: element.fill,
                                         fontFamily: element.fontFamily,
