@@ -149,15 +149,18 @@ class ContactController extends Controller
             $validator = Validator::make($request->all(), [
                 'Fname' => 'required|string', // max 2MB
                 'Lname' => 'required|string', // max 2MB
-                'phone_number' => ['present', 'nullable', 'numeric', 'regex:/^\d{10,15}$/', Rule::unique('users')->ignore(decrypt($request->id))],
+                // 'phone_number' => ['present', 'nullable', 'numeric', 'regex:/^\d{10,15}$/', Rule::unique('users')->ignore(decrypt($request->id))],
+                'phone_number' => ['present', 'nullable', 'regex:/^\d{3}-\d{3}-\d{4}$/', Rule::unique('users', 'phone_number')->ignore(decrypt($request->id)),
+],
+
                 'email' => ['required', 'email', new EmailExists], // max 2MB
 
             ], [
                 'Fname.required' => 'Please enter First Name',
                 'Lname.required' => 'Please enter Last Name',
 
-                'phone_number.numeric' => 'Please enter Phone Number in digit',
-                'phone_number.regex' => 'Phone Number format is invalid.',
+                // 'phone_number.numeric' => 'Please enter Phone Number in digit',
+                'phone_number.regex' => 'Phone number must be in the format 123-123-1234.',
 
                 'email.required' => 'Please enter email',
                 'email.email' => 'Please enter a valid email address',

@@ -1,6 +1,6 @@
 @if(!session('advertisement_closed'))
 <div class="google-add">
-    <p>Full web functionality will be available in Q3 {{date('Y')}} - for full functionality use our apps</p>
+    <p>Full web functionality will be available in Q4 {{date('Y')}} - for full functionality use our apps</p>
     <div class="app-store ms-auto d-flex gap-2">
         <a href="#" class="google-app">
             <img src="{{asset('assets/front/image/google-app.png')}}" alt="google-app">
