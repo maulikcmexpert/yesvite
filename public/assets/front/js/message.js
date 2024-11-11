@@ -3877,7 +3877,6 @@ function handleDelete() {
 
         msgLists.first().click(); // Simulate a click event on the first msg-list element
     } else {
-        alert();
         $(".msg-lists").html("");
         $(".selected-user-name").html("Start new chat");
         updateProfileImg("", "Start New");
@@ -3890,7 +3889,6 @@ function handleDelete() {
         $("#selected-user-lastseen").html("");
         $(".member-lists").html("");
         $(".selected-title").html("Start new chat");
-        $(".empty-massage").css('display','block');
     }
 }
 
