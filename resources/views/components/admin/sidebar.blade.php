@@ -112,7 +112,7 @@
               <a href="{{URL::to('/admin/create_template')}}" class="nav-link {{ (Request::segment(2) == 'create_template')? 'active':'' }}">
                 <i class="fas fa-layer-group"></i>
                 <p>
-                  Create Template
+                  Create Design Template
                 </p>
               </a>
             </li>
