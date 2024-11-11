@@ -1469,7 +1469,7 @@ $(".send-message").on("keypress", async function (e) {
                     });
                     let image = messageData.url;
 
-                    if (receiverSnapshot.val() !== null &&
+                    if (
                         (receiverSnapshot.val().isMute == undefined ||
                             receiverSnapshot.val().isMute == 0) &&
                         receiverSnapshot.val().group == true
@@ -1533,9 +1533,9 @@ $(".send-message").on("keypress", async function (e) {
             const receiverSnapshot = await get(
                 ref(database, `overview/${receiverId}/${conversationId}`)
             );
-            
+
             if (
-                receiverSnapshot.val() !== null &&
+                
                 receiverSnapshot.val().isMute == undefined ||
                 receiverSnapshot.val().isMute == 0 ||
                 receiverSnapshot.val().isMute == null
