@@ -150,13 +150,12 @@ $(document).ready(function () {
 
 
     $.validator.addMethod("phoneUS", function (phone_number, element) {
-        phone_number = phone_number.replace(/\s+/g, "");
+        phone_number = phone_number.replace(/\D/g, ""); // Remove non-digits for validation
         return (
             this.optional(element) ||
-            phone_number.length == 10 &&
-            phone_number.match(/^(\d{3}-\d{3}-\d{4}|\d{10})$/) // Allows both 111-111-1111 and 1111111111 formats
+            (phone_number.length === 10 && phone_number.match(/^\d{10}$/))
         );
-    }, "Please enter a valid US phone number");
+    }, "Please enter a valid US phone number (e.g., 123-456-7890)");
 
 
     $("#add_contact").validate({
