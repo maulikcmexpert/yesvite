@@ -3877,6 +3877,7 @@ function handleDelete() {
 
         msgLists.first().click(); // Simulate a click event on the first msg-list element
     } else {
+        alert();
         $(".msg-lists").html("");
         $(".selected-user-name").html("Start new chat");
         updateProfileImg("", "Start New");
