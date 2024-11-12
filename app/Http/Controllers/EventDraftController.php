@@ -27,7 +27,18 @@ class EventDraftController extends Controller
 
         try {
             $user  = Auth::guard('web')->user();
-
+            $subscribe_status = checkSubscription($user->id);
+            dd($subscribe_status);
+            $profileData = [
+                'id' =>  empty($user->id) ? "" : $user->id,
+                'profile' =>  empty($user->profile) ?  "" : asset('storage/profile/' . $user->profile),
+                'bg_profile' =>  empty($user->bg_profile) ? "" : asset('storage/bg_profile/' . $user->bg_profile),
+                'firstname' => empty($user->firstname) ? "" : $user->firstname,        
+                'email' => empty($user->email) ? "" : $user->email,
+                'lastname' => empty($user->lastname) ? "" : $user->lastname,
+                'created_at' => empty($user->created_at) ? "" :   str_replace(' ', ', ', date('F Y', strtotime($user->created_at))),
+                
+            ];
             $draftEvents = Event::where(['user_id' => $user->id, 'is_draft_save' => '1'])->orderBy('id', 'DESC')->get();
             $draftEventArray = [];
             if (!empty($draftEvents) && count($draftEvents) != 0) {
