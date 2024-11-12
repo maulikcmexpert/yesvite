@@ -414,8 +414,7 @@
                             <div class="accordion" id="accordionExample">
                                 <div class="accordion-item">
                                     <div class="accordion-header">
-                                        <button class="accordion-button collapsed" type="button"
-                                            data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
                                             <div>
                                                 Activities <span>({{count($eventDetail['events_schedule_list']->data)}})</span>
                                             </div>
@@ -426,8 +425,8 @@
 
                                         </div>
                                     </div>
-                                    <div id="collapseOne" class="accordion-collapse collapse"
-                                        data-bs-parent="#accordionExample">
+                                    {{-- <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample"> --}}
+                                    <div id="collapseOne" class="accordion-collapse" data-bs-parent="#accordionExample">
                                         <div class="accordion-body">
                                             <div class="activity-main-wrp mb-3">
                                                 <h3>Activity 1
