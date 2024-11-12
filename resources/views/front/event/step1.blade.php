@@ -400,8 +400,8 @@
                         <div class="row">
                             <div class="col-12 mb-4">
                                 <div class="input-form">
-                                    <input class="form-control timepicker" placeholder="HH:MM AM/PM" id="ac-start-time" name="ac-start-time" 
-                                    oninput="clearError()" value="" required="" readonly/>
+                                    {{-- <input type="time" class="form-control inputText" name="start-time" required="" value=""> --}}
+                                    <input class="form-control timepicker inputText" placeholder="HH:MM AM/PM" id="ac-start-time" name="ac-start-time" oninput="clearError()" value="" required="" readonly/>
                                     <label for="start-time" class="form-label input-field floating-label select-label">Start *</label>
                                 </div>
                             </div>
