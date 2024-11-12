@@ -178,7 +178,35 @@ class EventListController extends Controller
                         ];
                         $eventDetail['event_plan_name'] = $value->subscription_plan_name;
 
+
+                        $totalInvited = EventInvitedUser::whereHas('event', function ($query) {
+                            $query->where('is_draft_save', '0')->where('start_date', '>=', date('Y-m-d'));
+                        })->where('user_id', $user->id)->count();
+                        $totalHosting = Event::where(['is_draft_save' => '0', 'user_id' => $user->id])->where('start_date', '>=', date('Y-m-d'))->count();
+
+
+                        $usercreatedAllPastEventCount = Event::where(['is_draft_save' => '0', 'user_id' => $user->id])->where('end_date', '<', date('Y-m-d'));
+                        $invitedPastEvents = EventInvitedUser::whereHas('user', function ($query) {
+                            $query->where('app_user', '1');
+                        })->where('user_id', $user->id)->get()->pluck('event_id');
+                        $total_past_event = Event::where('end_date', '<', date('Y-m-d'))->whereIn('id', $invitedPastEvents)->where('is_draft_save', '0');
+                        $allPastEventC = $usercreatedAllPastEventCount->union($total_past_event)->orderByDesc('id')->get();
+                        $totalPastEventCount = count($allPastEventC);
+
+                        $total_need_rsvp_event_count = EventInvitedUser::whereHas('event', function ($query) {
+                            $query->where('is_draft_save', '0')->where('start_date', '>=', date('Y-m-d'));
+                        })->where(['user_id' => $user->id, 'rsvp_status' => NULL])->count();
+
                         $eventList[] = $eventDetail;
+                        $filter = [
+                            'invited_to' => $totalInvited,
+                            'hosting' => $totalHosting,
+                            'need_to_rsvp' => $total_need_rsvp_event_count,
+                            'past_event'=>$totalPastEventCount
+                        ];
+                        
+                        dd($filter);
+                        
                     }
                 }
 
