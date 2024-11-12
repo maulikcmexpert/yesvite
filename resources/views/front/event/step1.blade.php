@@ -401,7 +401,9 @@
                 </div>
                 <div class="activity-schedule-inner new_event_detail_form">
                     <form action="" class="scheduleform">
-                        <h4>Event Start</h4>
+                        @if ($eventDetail['events_schedule_list']->event_start_date == $currentDate)
+                            <h4>Event Start</h4>
+                        @endif
                         <div class="row">
                             @if ($eventDetail['events_schedule_list']->event_start_date == $currentDate)
                                 <div class="col-12 mb-4">
