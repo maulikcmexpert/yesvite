@@ -422,7 +422,7 @@
                             <div class="accordion" id="accordionExample">
                                 <div class="accordion-item">
                                     <div class="accordion-header">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{Carbon::parse($currentDate)->format('Ymd')}}">
                                             <div>
                                                 Activities <span>({{count($eventDetail['events_schedule_list']->data)}})</span>
                                             </div>
@@ -434,7 +434,7 @@
                                         </div>
                                     </div>
                                     {{-- <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample"> --}}
-                                    <div id="collapseOne" class="accordion-collapse" data-bs-parent="#accordionExample">
+                                    <div id="collapse{{Carbon::parse($currentDate)->format('Ymd')}}" class="accordion-collapse" data-bs-parent="#accordionExample">
                                         <div class="accordion-body">
                                             @php
                                                 $i = 1;
