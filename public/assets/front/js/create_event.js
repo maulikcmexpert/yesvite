@@ -632,18 +632,16 @@ function set_activity_html(selectedDates) {
                             <div class="row">
                                 <div class="col-12 mb-4">
                                    <div class="form-group">
-                                      <label>Start Time</label>
-                                    <div class="input-group time ">
-                                    <input class="form-control timepicker" placeholder="HH:MM AM/PM" id="ac-start-time" name="ac-start-time" oninput="clearError()" value="${start_time}" required="" readonly/><span class="input-group-append input-group-addon"><span class="input-group-text"><svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                     <path d="M18.8334 9.99984C18.8334 14.5998 15.1 18.3332 10.5 18.3332C5.90002 18.3332 2.16669 14.5998 2.16669 9.99984C2.16669 5.39984 5.90002 1.6665 10.5 1.6665C15.1 1.6665 18.8334 5.39984 18.8334 9.99984Z" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M13.5917 12.65L11.0083 11.1083C10.5583 10.8416 10.1917 10.2 10.1917 9.67497V6.2583" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                     </svg></span></span>
+                                        <label>Start Time</label>
+                                        <div class="input-group time ">
+                                            <input class="form-control timepicker" placeholder="HH:MM AM/PM" id="ac-start-time" name="ac-start-time" oninput="clearError()" value="${start_time}" required="" readonly/><span class="input-group-append input-group-addon"><span class="input-group-text"><svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M18.8334 9.99984C18.8334 14.5998 15.1 18.3332 10.5 18.3332C5.90002 18.3332 2.16669 14.5998 2.16669 9.99984C2.16669 5.39984 5.90002 1.6665 10.5 1.6665C15.1 1.6665 18.8334 5.39984 18.8334 9.99984Z" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M13.5917 12.65L11.0083 11.1083C10.5583 10.8416 10.1917 10.2 10.1917 9.67497V6.2583" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg></span></span>
+                                        </div>
+                                    </div>
                                 </div>
-              </div>
-                                </div>
-                            </div>
-                            `
-                        : ""
+                            </div>`: ""
                 }
                 <div class="accordion" id="accordionExample">
                     <div class="accordion-item">
@@ -652,8 +650,7 @@ function set_activity_html(selectedDates) {
                                 class="accordion-button collapsed"
                                 type="button"
                                 data-bs-toggle="collapse"
-                                data-bs-target="#collapseOne${dateID}"
-                            >
+                                data-bs-target="#collapseOne${dateID}">
                                 <div>Activities <span class="total_activity-${dateID}">(0)</span></div>
                                 <i class="fa-solid fa-angle-down"></i>
                             </button>
@@ -664,36 +661,29 @@ function set_activity_html(selectedDates) {
                         <div
                             id="collapseOne${dateID}"
                             class="accordion-collapse collapse"
-                            data-bs-parent="#accordionExample"
-                        >
-                            <div class="accordion-body new_activity" id="${dateID}" data-id="${startDate.format(
-            "YYYY-MM-DD"
-        )}">
+                            data-bs-parent="#accordionExample">
+                            <div class="accordion-body new_activity" id="${dateID}" data-id="${startDate.format("YYYY-MM-DD")}">
                             </div>
                         </div>
                     </div>
                 </div>
                 ${
-                    startDate.isSame(
-                        moment(sortedDates[sortedDates.length - 1]),
-                        "day"
-                    )
-                        ? `
-                            <div class="ac-end-time" > 
-                            <input type="hidden" id="LastEndTime" value="${dateID}" />
-                            <h4 class="mt-3 ">Event Ends</h4>
-                            <div class="col-12 ac-end-time">
-                               <div class="form-group">
-                                      <label>End Time</label>
-                                    <div class="input-group time ">
+                    startDate.isSame(moment(sortedDates[sortedDates.length - 1]),"day")?`
+                        <div class="ac-end-time" > 
+                        <input type="hidden" id="LastEndTime" value="${dateID}" />
+                        <h4 class="mt-3 ">Event Ends</h4>
+                        <div class="col-12 ac-end-time">
+                            <div class="form-group">
+                                <label>End Time</label>
+                                <div class="input-group time ">
                                     <input class="form-control timepicker" placeholder="HH:MM AM/PM" id="ac-end-time" name="ac-end-time" oninput="clearError()" required="" readonly/><span class="input-group-append input-group-addon"><span class="input-group-text"><svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                     <path d="M18.8334 9.99984C18.8334 14.5998 15.1 18.3332 10.5 18.3332C5.90002 18.3332 2.16669 14.5998 2.16669 9.99984C2.16669 5.39984 5.90002 1.6665 10.5 1.6665C15.1 1.6665 18.8334 5.39984 18.8334 9.99984Z" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M18.8334 9.99984C18.8334 14.5998 15.1 18.3332 10.5 18.3332C5.90002 18.3332 2.16669 14.5998 2.16669 9.99984C2.16669 5.39984 5.90002 1.6665 10.5 1.6665C15.1 1.6665 18.8334 5.39984 18.8334 9.99984Z" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                     <path d="M13.5917 12.65L11.0083 11.1083C10.5583 10.8416 10.1917 10.2 10.1917 9.67497V6.2583" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                     </svg></span></span>
+                                    </svg></span></span>
+                                </div>
                             </div>
-                            </div>
-                            `
-                        : ""
+                        `
+                    : ""
                 }
             </form>
         </div>
