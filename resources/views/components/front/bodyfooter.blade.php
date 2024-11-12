@@ -81,8 +81,8 @@
           <div class="footer-bottom d-flex justify-content-between flex-wrap">
               <ul class="footer-social-link">
                   <li>
-                      <a href="{{ route('event.event_drafts') }}">
-                        {{-- <a href="#"> --}}
+                      {{-- <a href="{{ route('event.event_drafts') }}"> --}}
+                        <a href="#">
 
                           <span>
                               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -92,9 +92,9 @@
                       </a>
                   </li>
                   <li>
-                    <a href="{{ route('event.event_lists') }}">
+                    {{-- <a href="{{ route('event.event_lists') }}"> --}}
 
-                      {{-- <a href="#"> --}}
+                      <a href="#">
                           <span>
                               <svg width="14" height="24" viewBox="0 0 14 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                   <path d="M9.34922 13.8015H12.3492L13.5492 9.00146H9.34922V6.60147C9.34922 5.36547 9.34922 4.20147 11.7492 4.20147H13.5492V0.169465C13.158 0.117865 11.6808 0.00146484 10.1208 0.00146484C6.86282 0.00146484 4.54922 1.98986 4.54922 5.64146V9.00146H0.949219V13.8015H4.54922V24.0015H9.34922V13.8015Z" fill="#1877F2" />
@@ -103,7 +103,7 @@
                       </a>
                   </li>
                   <li>
-                      <a href="{{ route('home1') }}">
+                      <a href="#">
                           <span>
                               <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                   <g clip-path="url(#clip0_3391_343)">
