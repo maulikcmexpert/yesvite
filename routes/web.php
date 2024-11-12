@@ -19,7 +19,8 @@ use App\Http\Controllers\{
     DesignController,
     ContactUsController,
     FaqController,
-    EventDraftController
+    EventDraftController,
+    EventListController
 };
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
@@ -189,6 +190,8 @@ Route::middleware('checkUserExist')->group(function () {
     Route::post('event/see_all', [ControllersEventController::class, 'see_all']);
 
     Route::get('event_drafts',  [EventDraftController::class, 'index'])->name('event.event_drafts');
+    Route::get('event_lists',  [EventListController::class, 'index'])->name('event.event_lists');
+
 
 });
 
