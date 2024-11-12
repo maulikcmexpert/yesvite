@@ -1422,7 +1422,7 @@ ul.chat-list li.setpink{
     margin-bottom: 6px;
 }
 
-#selected-tags-container .close-btn {
+#selected-tags-container .close-user-btn {
     cursor: pointer;
     margin-left: 10px;
 }
