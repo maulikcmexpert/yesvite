@@ -184,4 +184,28 @@ class EventListController extends Controller
                 dd($eventList);
     }
 
+    public function evenGoneTime($enddate)
+    {
+
+        $eventEndDate = $enddate; 
+        // Get current date
+        $currentDate = Carbon::today();
+        // Get end date of the event
+        $endDateTime = Carbon::parse($eventEndDate);
+        // Calculate the difference in hours
+        $hoursElapsed = $endDateTime->diffInHours($currentDate, false); // Passing false for negative value
+        return $hoursElapsed;
+    }
+
+    function setpostTime($dateTime)
+    {
+        $commentDateTime = $dateTime; // Replace this with your actual timestamp
+        // Convert the timestamp to a Carbon instance
+        $commentTime = Carbon::parse($commentDateTime);
+        // Calculate the time difference
+        $timeAgo = $commentTime->diffForHumans(); // This will give the time ago format
+        // Display the time ago
+        return $timeAgo;
+    }
+
 }
