@@ -64,7 +64,7 @@ class EventDraftController extends Controller
             }
             return compact(
                     'eventDraftdata',
-                    'profile', 
+                    'profileData', 
                 );
 
         } catch (QueryException $e) {
