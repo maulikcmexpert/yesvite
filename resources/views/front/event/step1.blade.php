@@ -387,7 +387,7 @@
         <!-- Add your sidebar content here -->
         <div class="supportive-div activity_bar">
             @if (isset($eventDetail['events_schedule_list']) && !empty($eventDetail['events_schedule_list']))
-            @while (strtotime($eventDetail['events_schedule_list']->start_time) <= strtotime($eventDetail['events_schedule_list']->event_end_date))
+            @while (strtotime($eventDetail['events_schedule_list']->event_start_date) <= strtotime($eventDetail['events_schedule_list']->event_end_date))
             <div class="activity-schedule-wrp">
                 <div class="activity-schedule-head">
                     @php
