@@ -428,80 +428,71 @@
                                     {{-- <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample"> --}}
                                     <div id="collapseOne" class="accordion-collapse" data-bs-parent="#accordionExample">
                                         <div class="accordion-body">
-                                            @foreach ($eventDetail['events_schedule_list']->data as $data)    
-                                            <div class="activity-main-wrp mb-3">
-                                                <h3>Activity 1
-                                                    <span>
-                                                        <svg width="20" height="20" viewBox="0 0 20 20"
-                                                            fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M17.5 4.98356C14.725 4.70856 11.9333 4.56689 9.15 4.56689C7.5 4.56689 5.85 4.65023 4.2 4.81689L2.5 4.98356"
-                                                                stroke="#94A3B8" stroke-width="1.5"
-                                                                stroke-linecap="round" stroke-linejoin="round" />
-                                                            <path
-                                                                d="M7.08325 4.1415L7.26659 3.04984C7.39992 2.25817 7.49992 1.6665 8.90825 1.6665H11.0916C12.4999 1.6665 12.6083 2.2915 12.7333 3.05817L12.9166 4.1415"
-                                                                stroke="#94A3B8" stroke-width="1.5"
-                                                                stroke-linecap="round" stroke-linejoin="round" />
-                                                            <path
-                                                                d="M15.7084 7.6167L15.1667 16.0084C15.0751 17.3167 15.0001 18.3334 12.6751 18.3334H7.32508C5.00008 18.3334 4.92508 17.3167 4.83341 16.0084L4.29175 7.6167"
-                                                                stroke="#94A3B8" stroke-width="1.5"
-                                                                stroke-linecap="round" stroke-linejoin="round" />
-                                                            <path d="M8.6084 13.75H11.3834" stroke="#94A3B8"
-                                                                stroke-width="1.5" stroke-linecap="round"
-                                                                stroke-linejoin="round" />
-                                                            <path d="M7.91675 10.4165H12.0834" stroke="#94A3B8"
-                                                                stroke-width="1.5" stroke-linecap="round"
-                                                                stroke-linejoin="round" />
-                                                        </svg>
-                                                    </span>
-                                                </h3>
-                                                <div class="row">
-                                                    <div class="col-12 mb-4">
-                                                        <div class="input-form">
-                                                            <input type="text" class="form-control inputText"
-                                                                id="description" name="description" required="" value="{{$data['activity_title']}}">
-                                                            <label for="description"
-                                                                class="form-label input-field floating-label">Description</label>
+                                            @foreach ($eventDetail['events_schedule_list']->data as $data)  
+                                            @if ($eventDetail['events_schedule_list']->event_start_date == $data['event_date'])
+                                                <div class="activity-main-wrp mb-3">
+                                                    <h3>Activity 1
+                                                        <span>
+                                                            <svg width="20" height="20" viewBox="0 0 20 20"
+                                                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path
+                                                                    d="M17.5 4.98356C14.725 4.70856 11.9333 4.56689 9.15 4.56689C7.5 4.56689 5.85 4.65023 4.2 4.81689L2.5 4.98356"
+                                                                    stroke="#94A3B8" stroke-width="1.5"
+                                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                                                <path
+                                                                    d="M7.08325 4.1415L7.26659 3.04984C7.39992 2.25817 7.49992 1.6665 8.90825 1.6665H11.0916C12.4999 1.6665 12.6083 2.2915 12.7333 3.05817L12.9166 4.1415"
+                                                                    stroke="#94A3B8" stroke-width="1.5"
+                                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                                                <path
+                                                                    d="M15.7084 7.6167L15.1667 16.0084C15.0751 17.3167 15.0001 18.3334 12.6751 18.3334H7.32508C5.00008 18.3334 4.92508 17.3167 4.83341 16.0084L4.29175 7.6167"
+                                                                    stroke="#94A3B8" stroke-width="1.5"
+                                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                                                <path d="M8.6084 13.75H11.3834" stroke="#94A3B8"
+                                                                    stroke-width="1.5" stroke-linecap="round"
+                                                                    stroke-linejoin="round" />
+                                                                <path d="M7.91675 10.4165H12.0834" stroke="#94A3B8"
+                                                                    stroke-width="1.5" stroke-linecap="round"
+                                                                    stroke-linejoin="round" />
+                                                            </svg>
+                                                        </span>
+                                                    </h3>
+                                                    <div class="row">
+                                                        <div class="col-12 mb-4">
+                                                            <div class="input-form">
+                                                                <input type="text" class="form-control inputText"
+                                                                    id="description" name="description" required="" value="{{$data['activity_title']}}">
+                                                                <label for="description"
+                                                                    class="form-label input-field floating-label">Description</label>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-6 mb-4">
-                                                        <div class="input-form">
-                                                            <input type="text" class="form-control timepicker inputText" id="start-time" name="start-time" required="" value="{{$data['start_time']}}">
-                                                            <label for="start-time"
-                                                                class="form-label input-field floating-label select-label">Start
-                                                                Time</label>
+                                                        <div class="col-6 mb-4">
+                                                            <div class="input-form">
+                                                                <input type="text" class="form-control timepicker inputText" id="start-time" name="start-time" required="" value="{{$data['start_time']}}">
+                                                                <label for="start-time"
+                                                                    class="form-label input-field floating-label select-label">Start
+                                                                    Time</label>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-6 mb-4">
-                                                        <div class="input-form">
-                                                            <input type="text" class="form-control timepicker inputText"
-                                                                id="start-time" name="start-time" required="" value="{{$data['end_time']}}">
-                                                            <label for="start-time"
-                                                                class="form-label input-field floating-label select-label">End
-                                                                Time</label>
+                                                        <div class="col-6 mb-4">
+                                                            <div class="input-form">
+                                                                <input type="text" class="form-control timepicker inputText"
+                                                                    id="start-time" name="start-time" required="" value="{{$data['end_time']}}">
+                                                                <label for="start-time"
+                                                                    class="form-label input-field floating-label select-label">End
+                                                                    Time</label>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            @endif
                                             @endforeach
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-                            <h4 class="mt-3">Event Ends</h4>
-                            <div class="col-12">
-                                <div class="input-form">
-                                    <input type="time" class="form-control inputText" id="start-time"
-                                        name="start-time" required="">
-                                    <label for="start-time" class="form-label input-field floating-label select-label">End
-                                        Time</label>
-                                </div>
-                            </div>
-
                         </div>
 
-                        <div class="other-activity-schedule">
+                        {{-- <div class="other-activity-schedule">
                             <div class="extra-border"></div>
                             <div class="activity-schedule-head">
                                 <h3>Saturday - March 5, 2024</h3>
@@ -564,7 +555,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
 
                         <div class="activity-schedule-inner-btn">
                             <button class="cmn-btn">
