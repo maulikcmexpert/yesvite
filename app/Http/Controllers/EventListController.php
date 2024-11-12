@@ -189,7 +189,7 @@ class EventListController extends Controller
                        $sss[]=$detail->username; 
                     }
                 }
-                dd($sss);
+                dd($eventList);
     }
 
     public function evenGoneTime($enddate)
