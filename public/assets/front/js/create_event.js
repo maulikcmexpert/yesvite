@@ -5424,11 +5424,11 @@ $(document).on('click','.select_design_category_close',function(){
     $('#sidebar_select_design_category').css('display','none');
 })
   
-$(document).on('click','.brand-progress',function () { 
-    var event_id = $(this).data('id');
-    window.location.href="event?id="+event_id;
+// $(document).on('click','.brand-progress',function () { 
+//     var event_id = $(this).data('id');
+//     window.location.href="event?id="+event_id;
        
-});
+// });
 // $(document).on("click", ".new-temp", function () {
 //     // Get the image URL from the data-image attribute
 //     var imageUrl = $(this).data("image");
