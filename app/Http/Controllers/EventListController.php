@@ -181,7 +181,15 @@ class EventListController extends Controller
                         $eventList[] = $eventDetail;
                     }
                 }
-                dd($eventList);
+
+                foreach ($eventList as $event) {
+                    $eventDetails = $event['event_detail'];
+            
+                    foreach ($eventDetails as $detail) {
+                       $data[]=$detail[0]; 
+                    }
+                }
+                dd($data);
     }
 
     public function evenGoneTime($enddate)
