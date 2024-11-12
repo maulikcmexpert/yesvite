@@ -31,28 +31,25 @@ class EventDraftController extends Controller
             $draftEvents = Event::where(['user_id' => $user->id, 'is_draft_save' => '1'])->orderBy('id', 'DESC')->get();
             $draftEventArray = [];
             if (!empty($draftEvents) && count($draftEvents) != 0) {
-
                 foreach ($draftEvents as $value) {
                     $eventDetail['id'] = $value->id;
                     $eventDetail['event_name'] = $value->event_name;
                     $formattedDate = Carbon::createFromFormat('Y-m-d H:i:s', $value->updated_at)->format('F j, Y');
                     $eventDetail['saved_date'] = $formattedDate;
                     $eventDetail['step'] = ($value->step != NULL) ? $value->step : 0;
-
                     $draftEventArray[] = $eventDetail;
                 }
-    
                 // return response()->json(['status' => 1, 'message' => "Draft Events", "data" => $draftEventArray]);
+                $eventDraftdata= $draftEventArray;
             } else {
-                dd($draftEvents);
-
+                // dd($draftEvents);
                 // return response()->json(['status' => 0, 'message' => "No Draft Events", "data" => $draftEventArray]);
+                $eventDraftdata= "";
             }
         } catch (QueryException $e) {
-
-            // return response()->json(['status' => 0, 'message' => 'db error']);
+            return response()->json(['status' => 0, 'message' => 'db error']);
         } catch (Exception  $e) {
-            // return response()->json(['status' => 0, 'message' => 'something went wrong']);
+            return response()->json(['status' => 0, 'message' => 'something went wrong']);
         }
         // $title = 'faq';
         // $page = 'front.faq';
