@@ -27,7 +27,6 @@ class EventDraftController extends Controller
 
         try {
             $user  = Auth::guard('web')->user();
-            dd($user);
 
             $draftEvents = Event::where(['user_id' => $user->id, 'is_draft_save' => '1'])->orderBy('id', 'DESC')->get();
             $draftEventArray = [];
@@ -42,15 +41,16 @@ class EventDraftController extends Controller
 
                     $draftEventArray[] = $eventDetail;
                 }
-                return response()->json(['status' => 1, 'message' => "Draft Events", "data" => $draftEventArray]);
+                dd($draftEventArray);
+                // return response()->json(['status' => 1, 'message' => "Draft Events", "data" => $draftEventArray]);
             } else {
-                return response()->json(['status' => 0, 'message' => "No Draft Events", "data" => $draftEventArray]);
+                // return response()->json(['status' => 0, 'message' => "No Draft Events", "data" => $draftEventArray]);
             }
         } catch (QueryException $e) {
 
-            return response()->json(['status' => 0, 'message' => 'db error']);
+            // return response()->json(['status' => 0, 'message' => 'db error']);
         } catch (Exception  $e) {
-            return response()->json(['status' => 0, 'message' => 'something went wrong']);
+            // return response()->json(['status' => 0, 'message' => 'something went wrong']);
         }
         // $title = 'faq';
         // $page = 'front.faq';

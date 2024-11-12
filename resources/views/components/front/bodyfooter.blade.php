@@ -82,6 +82,8 @@
               <ul class="footer-social-link">
                   <li>
                       <a href="{{ route('event.event_drafts') }}">
+                        {{-- <a href="#"> --}}
+
                           <span>
                               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                   <path d="M18.901 1.15381H22.581L14.541 10.3438L24 22.8468H16.594L10.794 15.2628L4.156 22.8468H0.474L9.074 13.0168L0 1.15481H7.594L12.837 8.08681L18.901 1.15381ZM17.61 20.6448H19.649L6.486 3.24081H4.298L17.61 20.6448Z" fill="black" />
