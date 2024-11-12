@@ -198,27 +198,21 @@ class EventListController extends Controller
                         })->where(['user_id' => $user->id, 'rsvp_status' => NULL])->count();
 
                         $eventList[] = $eventDetail;
+                     
+                        
                         $filter = [
                             'invited_to' => $totalInvited,
                             'hosting' => $totalHosting,
                             'need_to_rsvp' => $total_need_rsvp_event_count,
                             'past_event'=>$totalPastEventCount
-                        ];
-                        
-                        dd($filter);
-                        
+                        ];                        
                     }
+                   
                 }
-
-                // foreach ($eventList as $event) {
-                //     $eventDetails = $event['user_profile'];
-                //     $sss[] = $event['user_profile']['username'];
-
-                //     // foreach ($eventDetails as $detail) {
-                //     // //    $sss[]=$detail->username; 
-                //     // }
-                // }
-                dd($eventList);
+            
+               
+                // dd($eventList);
+                return compact('filter','eventlist');
     }
 
     public function evenGoneTime($enddate)
