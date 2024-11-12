@@ -1,3 +1,6 @@
+@php
+    use Carbon\Carbon;
+@endphp
 <div class="step_1">
     <div class="main-content-right">
         <div class="new_event_detail_form">
@@ -382,11 +385,15 @@
             </button>
             <input type="hidden" id="firstActivityTime" value="">
         </div>
+        @if (isset($eventDetail['events_schedule_list']) && $eventDetail['events_schedule_list']->isNotEmpty())
         <!-- Add your sidebar content here -->
         <div class="supportive-div activity_bar">
             <div class="activity-schedule-wrp">
                 <div class="activity-schedule-head">
-                    <h3>Friday - March 4, 2024</h3>
+                    @php
+                        $date = Carbon::parse($eventDetail['events_schedule_list']->event_start_date);
+                    @endphp
+                    <h3>{{ $date->format('l - F j, Y') }}</h3>
                 </div>
                 <div class="activity-schedule-inner new_event_detail_form">
                     <form action="" class="scheduleform">
@@ -618,5 +625,6 @@
                 </div>
             </div>
         </div>
+        @endif
     </div>
 </div>
