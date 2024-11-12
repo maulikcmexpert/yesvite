@@ -45,7 +45,7 @@ class EventDraftController extends Controller
                 'created_at' => empty($user->created_at) ? "" :   str_replace(' ', ', ', date('F Y', strtotime($user->created_at))),
                 'subscribe_status'=>$plan
             ];
-            dd($profileData['firstname']);
+            // dd($profileData['firstname']);
             $draftEvents = Event::where(['user_id' => $user->id, 'is_draft_save' => '1'])->orderBy('id', 'DESC')->get();
             $draftEventArray = [];
             if (!empty($draftEvents) && count($draftEvents) != 0) {
@@ -64,6 +64,7 @@ class EventDraftController extends Controller
                 // return response()->json(['status' => 0, 'message' => "No Draft Events", "data" => $draftEventArray]);
                 $eventDraftdata= "";
             }
+            return $eventDraftdata;
         } catch (QueryException $e) {
             return response()->json(['status' => 0, 'message' => 'db error']);
         } catch (Exception  $e) {
