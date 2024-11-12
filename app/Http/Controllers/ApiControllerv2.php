@@ -4809,11 +4809,9 @@ class ApiControllerv2 extends Controller
 
 
                     if ($eventData['event_setting']['events_schedule'] == '1') {
-
-                        $eventsScheduleList = $eventData['events_schedule_list'];
-
-
-                        if (!empty($eventsScheduleList)) {
+                        if (isset($eventData['events_schedule_list']) && !empty($eventData['events_schedule_list'])) {
+                            
+                            $eventsScheduleList = $eventData['events_schedule_list'];
                             EventSchedule::where('event_id', $eventData['event_id'])->delete();
 
                             $addStartschedule =  new EventSchedule();
