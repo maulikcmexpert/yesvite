@@ -2143,7 +2143,7 @@ $("#search-user")
                 });
                 $tag.append(`<span class="names">${selectedUserName}</span>`);
                 $tag.append(
-                    $("<span>", { class: "close-btn" }).html(closeSpan)
+                    $("<span>", { class: "close-user-btn" }).html(closeSpan)
                 );
                 $tag.append($img);
                 $("#selected-tags-container").prepend($tag);
@@ -2178,7 +2178,7 @@ function updateSelectedUserIds() {
     $("#selected-user-id").val(selectedUserIds.join(","));
 }
 
-$(document).on("click", ".close-btn", function () {
+$(document).on("click", ".close-user-btn", function () {
     const $tag = $(this).parent(".tag");
     const userId = $tag.data("user-id");
 
