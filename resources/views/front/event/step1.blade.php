@@ -387,6 +387,7 @@
         <!-- Add your sidebar content here -->
         <div class="supportive-div activity_bar">
             @if (isset($eventDetail['events_schedule_list']) && !empty($eventDetail['events_schedule_list']))
+            @while (strtotime($eventDetail['events_schedule_list']->start_time) <= strtotime($eventDetail['events_schedule_list']->end_date))
             <div class="activity-schedule-wrp">
                 <div class="activity-schedule-head">
                     @php
@@ -492,7 +493,7 @@
                             </div>
                         </div>
 
-                        {{-- <div class="other-activity-schedule">
+                        <div class="other-activity-schedule">
                             <div class="extra-border"></div>
                             <div class="activity-schedule-head">
                                 <h3>Saturday - March 5, 2024</h3>
@@ -555,7 +556,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div> --}}
+                        </div>
 
                         <div class="activity-schedule-inner-btn">
                             <button class="cmn-btn">
@@ -564,7 +565,9 @@
                         </div>
                     </form>
                 </div>
-            </div>
+            </div>    
+            @endwhile
+            
             @endif
         </div>
     </div>
