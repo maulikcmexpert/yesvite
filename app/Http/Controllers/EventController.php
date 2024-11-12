@@ -200,7 +200,7 @@ class EventController extends Controller
                             $eventDetail['events_schedule_list']->event_start_date = ($getEventData->event_schedule->first()->event_date != null) ? $getEventData->event_schedule->first()->event_date : "";
                         }
     
-                        $eventDetail['events_schedule_list']->data = [];
+                        $events_schedule_list_data = [];
                         foreach ($getEventData->event_schedule as $eventsScheduleVal) {
                             if ($eventsScheduleVal->type == '2') {
     
@@ -210,9 +210,10 @@ class EventController extends Controller
                                 $eventscheduleData["end_time"] = ($eventsScheduleVal->end_time !== null) ? $eventsScheduleVal->end_time : "";
                                 $eventscheduleData['event_date'] = ($eventsScheduleVal->event_date != null) ? $eventsScheduleVal->event_date : "";
                                 $eventscheduleData["type"] = $eventsScheduleVal->type;
-                                $eventDetail['events_schedule_list']->data[] = $eventscheduleData;
+                                $events_schedule_list_data[] = $eventscheduleData;
                             }
                         }
+                        $eventDetail['events_schedule_list']->data = $events_schedule_list_data;
                         if ($getEventData->event_schedule->last()->type == '3') {
     
                             $eventDetail['events_schedule_list']->end_time =  ($getEventData->event_schedule->last()->end_time !== null) ? $getEventData->event_schedule->last()->end_time : "";
