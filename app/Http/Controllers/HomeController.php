@@ -172,14 +172,11 @@ class HomeController extends Controller
             ->whereYear('start_date', date('Y')) // Filter by current year
             ->whereMonth('start_date', date('m')) // Filter by current month
             ->count();
-
-            // dd($totalEventOfYear);
             $totalDraftEvent =  Event::where(['user_id' => $user->id, 'is_draft_save' => '1'])->count();
             $totalEventPhotos = EventPost::where(['user_id' => $user->id, 'post_type' => '1'])->count();
             $postComments =  EventPostComment::where('user_id', $user->id)->count();
             $getUserPrivacyPolicy = UserProfilePrivacy::select('profile_privacy', 'status')->where('user_id', $user->id)->get();
             $checkNotificationSetting =  UserNotificationType::where(['user_id' => $user->id, 'type' => 'private_message'])->first();
-            // dd($checkNotificationSetting);
             $upcomingEventCount = upcomingEventsCount($user->id);
             $pendingRsvpCount = pendingRsvpCount($user->id);
             $hostingCount = hostingCount($user->id);
@@ -388,11 +385,10 @@ class HomeController extends Controller
                         $draftEventArray[] = $eventdraft;
                     }
                 }
-
-                // return response()->json(['status' => 1, 'count' => count($allEvents), 'total_page' => $total_page, 'data' => $eventList, 'message' => "Events Data"]);
+                return compact('draftEventArray','profileData');
             } else {
-                // return response()->json(['status' => 0, 'data' => $eventList, 'message' => "No upcoming events found"]);
-                // dd(1);
+                $draftEventArray="";
+                return compact('draftEventArray','profileData');
             }
 
         } catch (QueryException $e) {

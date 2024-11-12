@@ -23,8 +23,6 @@ class EventDraftController extends Controller
 
     public function index()
     {
-
-
         try {
             $user  = Auth::guard('web')->user();
             $subscribe_status = checkSubscription($user->id);

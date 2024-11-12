@@ -23,7 +23,7 @@ class EventListController extends Controller
 {
     public function index()
     {
-        $user  = Auth::guard('web')->user();
+                $user  = Auth::guard('web')->user();
 
                 $usercreatedAllEventList = Event::query();
                 $usercreatedAllEventList->with(['event_image', 'event_settings', 'user', 'event_schedule'])
@@ -40,14 +40,9 @@ class EventListController extends Controller
                 $invitedEventsList->where('start_date', ">=", date('Y-m-d'));
                 $invitedEventsList->where('is_draft_save', '0')
                     ->orderBy('start_date', 'ASC');
-                // Use union to combine the results of the two queries
                 $allEvent = $usercreatedAllEventList->union($invitedEventsList)->get();
                 $totalCounts=0;
                 $totalCounts += count($allEvent);
-                // Calculate offset based on current page and perPage
-                // $offset = ($pages - 1) * $this->perPage;
-                // $paginatedEvents =  collect($allEvent)->sortBy('start_date')->forPage($page, $this->perPage);
-                // $paginatedEvents =  collect($allEvent)->sortBy('start_date');
                 if (count($allEvent) != 0) {
 
                     foreach ($allEvent as $value) {
@@ -111,7 +106,6 @@ class EventListController extends Controller
                                 $rsvp_status = '0'; // rsvp button//
                             }
                         }
-
 
                         $eventDetail['rsvp_status'] = $rsvp_status;
                         $total_accept_event_user = EventInvitedUser::whereHas('user', function ($query) {
@@ -178,12 +172,10 @@ class EventListController extends Controller
                         ];
                         $eventDetail['event_plan_name'] = $value->subscription_plan_name;
 
-
                         $totalInvited = EventInvitedUser::whereHas('event', function ($query) {
                             $query->where('is_draft_save', '0')->where('start_date', '>=', date('Y-m-d'));
                         })->where('user_id', $user->id)->count();
                         $totalHosting = Event::where(['is_draft_save' => '0', 'user_id' => $user->id])->where('start_date', '>=', date('Y-m-d'))->count();
-
 
                         $usercreatedAllPastEventCount = Event::where(['is_draft_save' => '0', 'user_id' => $user->id])->where('end_date', '<', date('Y-m-d'));
                         $invitedPastEvents = EventInvitedUser::whereHas('user', function ($query) {
@@ -198,8 +190,7 @@ class EventListController extends Controller
                         })->where(['user_id' => $user->id, 'rsvp_status' => NULL])->count();
 
                         $eventList[] = $eventDetail;
-                     
-                        
+                    
                         $filter = [
                             'invited_to' => $totalInvited,
                             'hosting' => $totalHosting,
@@ -209,33 +200,24 @@ class EventListController extends Controller
                     }
                    
                 }
-            
-               
                 // dd($eventList);
                 return compact('filter','eventList');
     }
 
     public function evenGoneTime($enddate)
     {
-
         $eventEndDate = $enddate; 
-        // Get current date
         $currentDate = Carbon::today();
-        // Get end date of the event
         $endDateTime = Carbon::parse($eventEndDate);
-        // Calculate the difference in hours
-        $hoursElapsed = $endDateTime->diffInHours($currentDate, false); // Passing false for negative value
+        $hoursElapsed = $endDateTime->diffInHours($currentDate, false); 
         return $hoursElapsed;
     }
 
     function setpostTime($dateTime)
     {
-        $commentDateTime = $dateTime; // Replace this with your actual timestamp
-        // Convert the timestamp to a Carbon instance
+        $commentDateTime = $dateTime; 
         $commentTime = Carbon::parse($commentDateTime);
-        // Calculate the time difference
-        $timeAgo = $commentTime->diffForHumans(); // This will give the time ago format
-        // Display the time ago
+        $timeAgo = $commentTime->diffForHumans();
         return $timeAgo;
     }
 
