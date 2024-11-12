@@ -416,7 +416,7 @@
                                         <button class="accordion-button collapsed" type="button"
                                             data-bs-toggle="collapse" data-bs-target="#collapseOne">
                                             <div>
-                                                Activities <span>(3)</span>
+                                                Activities <span>({{count($eventDetail['events_schedule_list']->data)}})</span>
                                             </div>
                                             <i class="fa-solid fa-angle-down"></i>
                                         </button>
