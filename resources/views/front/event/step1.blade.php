@@ -384,7 +384,7 @@
             </button>
             <input type="hidden" id="firstActivityTime" value="">
         </div>
-        @if (isset($eventDetail['events_schedule_list']) && $eventDetail['events_schedule_list']->isNotEmpty())
+        @if (isset($eventDetail['events_schedule_list']) && !empty($eventDetail['events_schedule_list']))
         <!-- Add your sidebar content here -->
         <div class="supportive-div activity_bar">
             <div class="activity-schedule-wrp">
