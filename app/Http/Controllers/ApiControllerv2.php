@@ -3260,10 +3260,11 @@ class ApiControllerv2 extends Controller
                     $categoryInfo['category_name'] = $value->category_name;
                     $subcategoryList = [];
                     foreach ($value->subcategory as $subCatval) {
-
-                        $subcategoryInfo['id'] = $subCatval->id;
-                        $subcategoryInfo['subcategory_name'] = $subCatval->subcategory_name;
-                        $subcategoryList[] = $subcategoryInfo;
+                        if(isset($subCatval->textdatas) && $subCatval->textdatas->isNotEmpty()){
+                            $subcategoryInfo['id'] = $subCatval->id;
+                            $subcategoryInfo['subcategory_name'] = $subCatval->subcategory_name;
+                            $subcategoryList[] = $subcategoryInfo;
+                        }
                     }
                     $categoryInfo['subcategory'] =  $subcategoryList;
                     $categoryList[] =  $categoryInfo;
