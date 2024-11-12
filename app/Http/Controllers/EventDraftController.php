@@ -42,9 +42,10 @@ class EventDraftController extends Controller
                     $draftEventArray[] = $eventDetail;
                 }
     
-                dd($draftEventArray);
                 // return response()->json(['status' => 1, 'message' => "Draft Events", "data" => $draftEventArray]);
             } else {
+                dd($draftEvents);
+
                 // return response()->json(['status' => 0, 'message' => "No Draft Events", "data" => $draftEventArray]);
             }
         } catch (QueryException $e) {
