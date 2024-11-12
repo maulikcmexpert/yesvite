@@ -496,7 +496,7 @@
                             </div>
                         </div>
 
-                        <div class="other-activity-schedule">
+                        {{-- <div class="other-activity-schedule">
                             <div class="extra-border"></div>
                             <div class="activity-schedule-head">
                                 <h3>Saturday - March 5, 2024</h3>
@@ -559,7 +559,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
 
                         <div class="activity-schedule-inner-btn">
                             <button class="cmn-btn">
