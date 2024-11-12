@@ -433,7 +433,7 @@
                                     <div id="collapseOne" class="accordion-collapse" data-bs-parent="#accordionExample">
                                         <div class="accordion-body">
                                             @foreach ($eventDetail['events_schedule_list']->data as $data)  
-                                            @if ($eventDetail['events_schedule_list']->event_start_date == $data['event_date'])
+                                            @if ($currentDate == $data['event_date'])
                                                 <div class="activity-main-wrp mb-3">
                                                     <h3>Activity 1
                                                         <span>
@@ -496,7 +496,7 @@
                             </div>
                         </div>
 
-                        <div class="other-activity-schedule">
+                        {{-- <div class="other-activity-schedule">
                             <div class="extra-border"></div>
                             <div class="activity-schedule-head">
                                 <h3>Saturday - March 5, 2024</h3>
@@ -559,7 +559,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
 
                         <div class="activity-schedule-inner-btn">
                             <button class="cmn-btn">
