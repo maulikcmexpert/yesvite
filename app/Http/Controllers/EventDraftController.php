@@ -62,7 +62,7 @@ class EventDraftController extends Controller
             } else {
                 // dd($draftEvents);
                 // return response()->json(['status' => 0, 'message' => "No Draft Events", "data" => $draftEventArray]);
-                $eventDraftdata= "";
+                $eventDraftdata= "empty";
             }
             return $eventDraftdata;
         } catch (QueryException $e) {
