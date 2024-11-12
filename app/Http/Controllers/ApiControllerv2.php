@@ -4841,6 +4841,8 @@ class ApiControllerv2 extends Controller
                             $addEndschedule->type = '3';
                             $addEndschedule->save();
                         }
+                    }else{
+                        EventSchedule::where('event_id', $eventData['event_id'])->delete();
                     }
 
                     if ($eventData['is_draft_save'] == '1') {
