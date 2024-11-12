@@ -436,10 +436,13 @@
                                     {{-- <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample"> --}}
                                     <div id="collapseOne" class="accordion-collapse" data-bs-parent="#accordionExample">
                                         <div class="accordion-body">
+                                            @php
+                                                $i = 1;
+                                            @endphp
                                             @foreach ($eventDetail['events_schedule_list']->data as $data)  
                                             @if ($currentDate == $data['event_date'])
                                                 <div class="activity-main-wrp mb-3">
-                                                    <h3>Activity 1
+                                                    <h3>Activity {{$i}}
                                                         <span>
                                                             <svg width="20" height="20" viewBox="0 0 20 20"
                                                                 fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -492,6 +495,9 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                @php
+                                                    $i++;
+                                                @endphp
                                             @endif
                                             @endforeach
                                         </div>
