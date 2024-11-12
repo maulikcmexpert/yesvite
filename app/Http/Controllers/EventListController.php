@@ -186,7 +186,7 @@ class EventListController extends Controller
                     $eventDetails = $event['event_detail'];
             
                     foreach ($eventDetails as $detail) {
-                       $data[]=$detail['0']; 
+                       $data[]=$detail; 
                     }
                 }
                 dd($data);
