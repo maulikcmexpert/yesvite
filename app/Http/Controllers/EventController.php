@@ -1959,10 +1959,6 @@ class EventController extends Controller
         Session::save();
         return response()->json(['success' => true, 'message' => 'Slider image deleted successfully.']);
     }
-
-
-
-
     public function get_design_edit_page(Request $request)
     {
         return view('front.event.design.edit_design')->render();
@@ -1979,8 +1975,6 @@ class EventController extends Controller
 
         return response()->json(['success' => true, 'imagePath' => $imagePath, 'shape_image' => $imageName, 'shape_name' => $shape]);
     }
-
-
     public function see_all(Request $request)
     {
         // dd($request);
