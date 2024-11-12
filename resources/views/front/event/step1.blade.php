@@ -50,7 +50,6 @@
                     <div class="col-lg-12 mb-4">
                         <div class="input-form">
                             @php
-                                use Carbon\Carbon;
                                 $start_date = '';
                                 $end_date = '';
                                 $event_date = '';
