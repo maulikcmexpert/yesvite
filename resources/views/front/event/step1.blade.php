@@ -466,8 +466,7 @@
                                                     </div>
                                                     <div class="col-6 mb-4">
                                                         <div class="input-form">
-                                                            <input type="time" class="form-control inputText"
-                                                                id="start-time" name="start-time" required="" value="{{$data['start_time']}}">
+                                                            <input type="text" class="form-control timepicker inputText" id="start-time" name="start-time" required="" value="{{$data['start_time']}}">
                                                             <label for="start-time"
                                                                 class="form-label input-field floating-label select-label">Start
                                                                 Time</label>
@@ -475,7 +474,7 @@
                                                     </div>
                                                     <div class="col-6 mb-4">
                                                         <div class="input-form">
-                                                            <input type="time" class="form-control inputText"
+                                                            <input type="text" class="form-control timepicker inputText"
                                                                 id="start-time" name="start-time" required="" value="{{$data['end_time']}}">
                                                             <label for="start-time"
                                                                 class="form-label input-field floating-label select-label">End
