@@ -94,11 +94,24 @@
 
           </div>
 
+          <!-- /.col -->
+
+          <div class="col-4">
+
+            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+
+          </div>
+
+          <!-- /.col -->
+
+        </div>
+        <div class="row">
+
           <div class="col-8">
 
             <div class="icheck-primary">
-{{-- 
-              <input type="checkbox" id="remember" name="remember"> --}}
+
+              {{-- <input type="checkbox" id="remember" name="remember" {{(Cookie::get('email')!='')?'CHECKED':''}}> --}}
 
               <label for="remember">
 
@@ -112,16 +125,10 @@
 
           <!-- /.col -->
 
-          <div class="col-4">
-
-            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
-
-          </div>
-
+    
           <!-- /.col -->
 
         </div>
-
       </form>
 
 
