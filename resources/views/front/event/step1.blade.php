@@ -382,7 +382,7 @@
                         stroke-linejoin="round" />
                 </svg>
             </button>
-            <input type="hidden" id="firstActivityTime" value="{{Carbon::parse($eventDetail['events_schedule_list']->event_start_date)->format('Ymd')}}">
+            <input type="hidden" id="firstActivityTime" value="{{(isset($eventDetail['events_schedule_list']->event_start_date) && $eventDetail['events_schedule_list']->event_start_date!= '')?Carbon::parse($eventDetail['events_schedule_list']->event_start_date)->format('Ymd'):''}}">
         </div>
         <!-- Add your sidebar content here -->
         <div class="supportive-div activity_bar">
@@ -397,6 +397,7 @@
                     @php
                         $date = Carbon::parse($eventDetail['events_schedule_list']->event_start_date);
                         $schedule_start_time = Carbon::parse($eventDetail['events_schedule_list']->start_time);
+                        $i++;
                     @endphp
                     <h3>{{ $date->format('l - F j, Y') }}</h3>
                 </div>
