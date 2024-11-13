@@ -362,7 +362,7 @@ class EventListController extends Controller
                     }
                    
                 }
-                dd($filter['need_to_rsvp']);
+                // dd($eventList);
                 return compact('filter','eventList','eventPasttList','eventDraftdata');
     }
 
