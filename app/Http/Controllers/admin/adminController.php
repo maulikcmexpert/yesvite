@@ -34,7 +34,7 @@ class adminController extends Controller
     {
 
         $admin=Session::get('admin');
-        dd($admin->id);
+        dd($admin['id']);
         // $validator = Validator::make($request->all(), [
         //     'current_password' => 'required|min:8',
         //     'new_password' => 'required|min:8',
