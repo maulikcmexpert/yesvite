@@ -105,30 +105,7 @@
           <!-- /.col -->
 
         </div>
-        <div class="row">
 
-          <div class="col-8">
-
-            <div class="icheck-primary">
-
-              {{-- <input type="checkbox" id="remember" name="remember" {{(Cookie::get('email')!='')?'CHECKED':''}}> --}}
-
-              <label for="remember">
-
-               <a href="#">change Password</a>
-
-              </label>
-
-            </div>
-
-          </div>
-
-          <!-- /.col -->
-
-    
-          <!-- /.col -->
-
-        </div>
       </form>
 
 
