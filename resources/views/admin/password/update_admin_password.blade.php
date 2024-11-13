@@ -78,20 +78,10 @@
 
 
 
-                <div class="text-center">
-
-                    <button type="button" class="btn btn-primary" id="addMoreCat">Add More </button>
-
-                </div>
-
 
 
                 <div class="card-footer">
-
-                    <input type="submit" class="btn btn-primary" id="cateAdd" value="Add">
-
-
-
+                    <input type="submit" class="btn btn-primary" id="admin_change_password" value="Update Password">
                 </div>
 
             </form>
