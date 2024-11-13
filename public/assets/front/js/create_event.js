@@ -1194,7 +1194,6 @@ function delete_invited_user(userId) {
                 $(".invite-left_d").text("Invites | 0 Left");
             }else{
                 $(".invite-left_d").text("Invites | " + remainingCount + " Left");
-
             }
             $("#event_guest_left_count").val(remainingCount);
             console.log("User ID deleted successfully.");
