@@ -346,8 +346,12 @@ class EventListController extends Controller
                                 $eventDraftDetail['step'] = ($value->step != NULL) ? $value->step : 0;
                                 $draftEventArray[] = $eventDraftDetail;
                             }
+                            $eventDraftdata= $draftEventArray;
+                        } else {
+                            $eventDraftdata= "";
+                        }
 
-
+                        
                         $filter = [
                             'invited_to' => $totalInvited,
                             'hosting' => $totalHosting,
@@ -359,7 +363,7 @@ class EventListController extends Controller
                    
                 }
                 // dd($eventList);
-                return compact('filter','eventList','eventPasttList','draftEventArray');
+                return compact('filter','eventList','eventPasttList','eventDraftdata');
     }
 
     public function evenGoneTime($enddate)
