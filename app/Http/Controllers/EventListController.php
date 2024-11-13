@@ -334,6 +334,20 @@ class EventListController extends Controller
 
                         $eventPasttList[] = $eventPastDetail;
                     
+                        $draftEvents = Event::where(['user_id' => $user->id, 'is_draft_save' => '1'])->orderBy('id', 'DESC')->get();
+                        $draftEventArray = [];
+                        if (!empty($draftEvents) && count($draftEvents) != 0) {
+                            foreach ($draftEvents as $value) {
+                                $eventDraftDetail['id'] = $value->id;
+                                $eventDraftDetail['event_name'] = $value->event_name;
+                                // $formattedDate = Carbon::createFromFormat('Y-m-d H:i:s', $value->updated_at)->format('F j, Y');
+                                $formattedDate = Carbon::createFromFormat('Y-m-d H:i:s', $value->updated_at)->format('F j, Y - g:i A');
+                                $eventDraftDetail['saved_date'] = $formattedDate;
+                                $eventDraftDetail['step'] = ($value->step != NULL) ? $value->step : 0;
+                                $draftEventArray[] = $eventDraftDetail;
+                            }
+
+
                         $filter = [
                             'invited_to' => $totalInvited,
                             'hosting' => $totalHosting,
@@ -345,7 +359,7 @@ class EventListController extends Controller
                    
                 }
                 // dd($eventList);
-                return compact('filter','eventList','eventPasttList');
+                return compact('filter','eventList','eventPasttList','draftEventArray');
     }
 
     public function evenGoneTime($enddate)
