@@ -175,21 +175,21 @@ class Auth extends Controller
         return  Redirect::to('admin')->with('success', 'Email send successfully!');
     }
 
-    public function checkToken($token)
+    public function checkToken()
     {
-        $adminData = Admin::where("remember_token", $token)->first();
-        if ($adminData == null) {
+        // $adminData = Admin::where("remember_token", $token)->first();
+        // if ($adminData == null) {
 
-            $userData = DB::table('password_resets')
-                ->where([
-                    'token' => $token
-                ])
-                ->first();
-            if ($userData == null) {
+        //     $userData = DB::table('password_resets')
+        //         ->where([
+        //             'token' => $token
+        //         ])
+        //         ->first();
+        //     if ($userData == null) {
 
-                return  Redirect::to('admin')->with('error', 'Invalid token!');
-            }
-        }
+        //         return  Redirect::to('admin')->with('error', 'Invalid token!');
+        //     }
+        // }
         $data['js'] = ['login'];
         $data['page'] = 'admin.auth.updatePassword';
         return view('admin.auth.main', $data);
