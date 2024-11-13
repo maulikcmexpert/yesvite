@@ -115,7 +115,7 @@
 
               <label for="remember">
 
-                Forget Password?
+               change Password
 
               </label>
 
