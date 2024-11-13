@@ -430,21 +430,22 @@
                                             </div>
                                             <i class="fa-solid fa-angle-down"></i>
                                         </button>
-                                        <div class="accordion-button-icons add_more_activity">
+                                        <div class="accordion-button-icons add_more_activity" data-activity="add_activity_{{$i}}" data-id="{{Carbon::parse($currentDate)->format('Ymd')}}">
                                             <i class="fa-solid fa-circle-plus"></i>
                                         </div>
                                     </div>
                                     {{-- <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample"> --}}
                                     <div id="collapse{{Carbon::parse($currentDate)->format('Ymd')}}" class="accordion-collapse" data-bs-parent="#accordionExample">
-                                        <div class="accordion-body">
+                                        <div class="accordion-body new_activity" id="{{Carbon::parse($currentDate)->format('Ymd')}}" data-id="{{Carbon::parse($currentDate)->format('Y-m-d')}}">
                                             @php
                                                 $i = 1;
+                                                $count = 0;
                                             @endphp
                                             @foreach ($eventDetail['events_schedule_list']->data as $data)  
                                             @if ($currentDate == $data['event_date'])
                                                 <div class="activity-main-wrp mb-3">
-                                                    <h3>Activity {{$i}}
-                                                        <span>
+                                                    <h3>Activity <span class="activity-count-{{ Carbon::parse($currentDate)->format('Y-m-d') }} activity-count">{{ $count }}</span>
+                                                        <span class="ms-auto">
                                                             <svg width="20" height="20" viewBox="0 0 20 20"
                                                                 fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                 <path
@@ -498,6 +499,7 @@
                                                 </div>
                                                 @php
                                                     $i++;
+                                                    $count++;
                                                 @endphp
                                             @endif
                                             @endforeach
