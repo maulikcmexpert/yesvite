@@ -34,7 +34,7 @@
             <form method="post" action="{{ route('changePassword')}}" id="ChangePasswordForm">
 
                 @csrf
-
+                
                 <div class="card-body row"  id="appendHtml">
 
                     <div class="col-3">
@@ -45,7 +45,7 @@
 
                             <input type="password" class="form-control current_password" name="current_password" placeholder="Enter Current Password" value="">
 
-                            <span class="text-danger">{{ $errors->first('current_password.*') }}</span>
+                            <span class="text-danger">{{ $errors->first('current_password') }}</span>
                         
                         </div>
 
@@ -55,7 +55,7 @@
 
                             <input type="password" class="form-control new_password" name="new_password" placeholder="Enter New Password" value="">
 
-                            <span class="text-danger">{{ $errors->first('new_password.*') }}</span>
+                            <span class="text-danger">{{ $errors->first('new_password') }}</span>
                         
                         </div>
 
@@ -65,7 +65,7 @@
 
                             <input type="password" class="form-control confirm_password" name="confirm_password" placeholder="Enter again new password" value="">
 
-                            <span class="text-danger">{{ $errors->first('confirm_password.*') }}</span>
+                            <span class="text-danger">{{ $errors->first('confirm_password') }}</span>
                         
                         </div>
 
