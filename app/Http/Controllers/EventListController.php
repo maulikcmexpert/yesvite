@@ -332,7 +332,7 @@ class EventListController extends Controller
                         }
                      
 
-                        $eventdraftList[] = $eventPastDetail;
+                        $eventPasttList[] = $eventPastDetail;
                     
                         $filter = [
                             'invited_to' => $totalInvited,
@@ -345,7 +345,7 @@ class EventListController extends Controller
                    
                 }
                 // dd($eventList);
-                return compact('filter','eventList','eventdraftList');
+                return compact('filter','eventList','eventPasttList');
     }
 
     public function evenGoneTime($enddate)
