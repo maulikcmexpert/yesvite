@@ -345,7 +345,7 @@ class EventListController extends Controller
                    
                 }
                 // dd($eventList);
-                return compact('filter','eventList');
+                return compact('filter','eventList','eventdraftList');
     }
 
     public function evenGoneTime($enddate)
