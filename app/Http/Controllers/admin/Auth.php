@@ -175,21 +175,21 @@ class Auth extends Controller
         return  Redirect::to('admin')->with('success', 'Email send successfully!');
     }
 
-    public function checkToken()
+    public function checkToken($token)
     {
-        // $adminData = Admin::where("remember_token", $token)->first();
-        // if ($adminData == null) {
+        $adminData = Admin::where("remember_token", $token)->first();
+        if ($adminData == null) {
 
-        //     $userData = DB::table('password_resets')
-        //         ->where([
-        //             'token' => $token
-        //         ])
-        //         ->first();
-        //     if ($userData == null) {
+            $userData = DB::table('password_resets')
+                ->where([
+                    'token' => $token
+                ])
+                ->first();
+            if ($userData == null) {
 
-        //         return  Redirect::to('admin')->with('error', 'Invalid token!');
-        //     }
-        // }
+                return  Redirect::to('admin')->with('error', 'Invalid token!');
+            }
+        }
         $data['js'] = ['login'];
         $data['page'] = 'admin.auth.updatePassword';
         return view('admin.auth.main', $data);
@@ -238,24 +238,42 @@ class Auth extends Controller
     }
 
 
-    public function password_change()
+    public function AdminPasswordChange()
     {
         $title = 'Change Password';
 
-        $page = 'admin.password.add';
+        $page = 'admin.password.update_admin_password';
         $js = 'admin.password.changepasswordjs';
 
         return view('admin.includes.layout', compact('title', 'page', 'js'));
     }
-    public function changePassword(Request $request,$id){
+  
 
-        DB::beginTransaction();
-        $Id = decrypt($id);
-        $updatePassword = Admin::findOrFail($Id);
-        $updatePassword->updatePassword = $request->conform_password;
-        $updatePassword->save();
-        DB::commit();
-        return  Redirect::to('admin')->with('success', 'Password Updated successfully!');
-    }
+    // public function changePassword(Request $request)
+    // {
+
+    //     $id=Session::get('admin');
+    //     dd($id);
+    //     // $validator = Validator::make($request->all(), [
+    //     //     'current_password' => 'required|min:8',
+    //     //     'new_password' => 'required|min:8',
+    //     //     'conform_password' => 'required|min:8|same:new_password',
+    //     // ]);
+
+    //     // if ($validator->fails()) {
+    //     //     return redirect()->route('profile.change_password')
+    //     //         ->withErrors($validator)
+    //     //         ->withInput();
+    //     // }
+    //     $id = decrypt(session()->get('user')['id']);
+    //     $userUpdate = Admin::where('id', $id)->first();
+    //     $userUpdate->password = Hash::make($request->new_password);
+    //     $userUpdate->save();
+
+    //     DB::commit();
+    //     toastr()->success('Password Changed');
+    //     return  redirect()->route('profile.edit');
+    // }
+
 
 }
