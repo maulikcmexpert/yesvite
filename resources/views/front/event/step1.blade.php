@@ -435,7 +435,7 @@
                                         </div>
                                     </div>
                                     {{-- <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample"> --}}
-                                    <div id="collapse{{Carbon::parse($currentDate)->format('Ymd')}}" class="accordion-collapse" data-bs-parent="#accordionExample">
+                                    <div id="collapse{{Carbon::parse($currentDate)->format('Ymd')}}" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                                         <div class="accordion-body new_activity" id="{{Carbon::parse($currentDate)->format('Ymd')}}" data-id="{{Carbon::parse($currentDate)->format('Y-m-d')}}">
                                             @php
                                                 $i = 1;
