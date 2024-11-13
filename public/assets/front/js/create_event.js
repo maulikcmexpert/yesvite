@@ -704,8 +704,6 @@ function set_activity_html(selectedDates) {
     $(".activity_bar").append(save_btn);
 }
 
-
-
 $(document).on("click", ".delete_activity", function () {
     var id = $(this).data("id");
     $("#" + id).remove();
