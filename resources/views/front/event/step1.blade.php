@@ -479,9 +479,9 @@
                                                     </h3>
                                                     <div class="row all_activity">
                                                         <div class="col-12 mb-4">
-                                                            <div class="input-form">
+                                                            <div class="input-form position-relative">
                                                                 <input type="text" class="form-control inputText" id="description" name="description[]" required="" value="{{$data['activity_title']}}" />
-                                                                <label for="description" class="form-label input-field floating-label select-label">Description</label>
+                                                                <label for="description" class="input-field floating-label select-label">Description</label>
                                                             </div>
                                                             <label class="error-message" id="desc-error-{{Carbon::parse($currentDate)->format('Y-m-d')}}"></label>
                                                         </div>
