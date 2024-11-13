@@ -47,8 +47,8 @@
         <i class="far fa-user"></i>
       </a>
       <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-        <a href="{{URL::to('/admin/logout')}}" class="dropdown-item">Logout</a>
         <a href="{{URL::to('/admin/AdminPasswordChange')}}" class="dropdown-item">Change Password</a>
+        <a href="{{URL::to('/admin/logout')}}" class="dropdown-item">Logout</a>
       </div>
      
     </li>
