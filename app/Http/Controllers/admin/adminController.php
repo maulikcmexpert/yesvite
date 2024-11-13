@@ -48,9 +48,9 @@ class adminController extends Controller
 
 
         $request->validate([
-            'current_password' => 'required|min:8',
-            'new_password' => 'required|min:8',
-            'confirm_password' => 'required|min:8|same:new_password',
+            'current_password' => 'required|min:5',
+            'new_password' => 'required|min:5',
+            'confirm_password' => 'required|min:5|same:new_password',
         ]);
 
         $id = $admin['id'];
@@ -63,6 +63,19 @@ class adminController extends Controller
         return  redirect()->route('profile.edit');
     }
 
+
+    public function verifyPassword(Request $request)
+    {
+        $admin=Session::get('admin');
+        $id = $admin['id'];
+        $password = $request->input('current_password');
+        $user = Admin::findOrFail($id);
+        if (Hash::check($password, $user->password)) {
+            return response()->json(true);
+        } else {
+            return response()->json(false);
+        }
+    }
     /**
      * Show the form for creating a new resource.
      */

@@ -43,7 +43,7 @@
 
                             <label for="exampleInputEmail1">Current Password</label>
 
-                            <input type="password" class="form-control current_password" name="current_password" placeholder="Enter Current Password" value="">
+                            <input type="password" class="form-control current_password" name="current_password" id="current_password" placeholder="Enter Current Password" value="">
 
                             <span class="text-danger">{{ $errors->first('current_password') }}</span>
                         
@@ -53,7 +53,7 @@
 
                             <label for="exampleInputEmail1">New Password</label>
 
-                            <input type="password" class="form-control new_password" name="new_password" placeholder="Enter New Password" value="">
+                            <input type="password" class="form-control new_password" name="new_password" id="new_password" placeholder="Enter New Password" value="">
 
                             <span class="text-danger">{{ $errors->first('new_password') }}</span>
                         
@@ -63,7 +63,7 @@
 
                             <label for="exampleInputEmail1">Confirm New Password</label>
 
-                            <input type="password" class="form-control confirm_password" name="confirm_password" placeholder="Enter again new password" value="">
+                            <input type="password" class="form-control confirm_password" name="confirm_password" id="confirm_password"placeholder="Enter again new password" value="">
 
                             <span class="text-danger">{{ $errors->first('confirm_password') }}</span>
                         
