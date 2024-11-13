@@ -355,8 +355,7 @@ class EventListController extends Controller
                             $eventDraftdata= "";
                         }
                         //draftEvent
-
-                        
+       
                         $filter = [
                             'invited_to' => $totalInvited,
                             'hosting' => $totalHosting,
