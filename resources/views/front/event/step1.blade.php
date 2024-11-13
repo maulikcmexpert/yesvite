@@ -120,7 +120,7 @@
                         </div>
                         @php
                             $style = 'display:none';
-                            if(isset($eventDetail['event_setting']['events_schedule']) && $eventDetail['event_setting']['events_schedule']=='0'){
+                            if(isset($eventDetail['event_setting']['events_schedule']) && $eventDetail['event_setting']['events_schedule']=='1'){
                                 $style ='';
                             }
                         @endphp
