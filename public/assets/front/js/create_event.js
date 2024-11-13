@@ -768,7 +768,7 @@ $(document).on("click", ".add_more_activity", function (e) {
     } else {
         count++;
     }
-
+    console.log(count);
     var id = $(this).data("id");
     $("#collapseOne" + id).addClass("show");
     // var activity = $("#" + id).length;
