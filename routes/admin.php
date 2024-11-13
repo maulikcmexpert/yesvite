@@ -143,7 +143,7 @@ Route::group(['middleware' => adminAuth::Class], function () {
     Route::get('events/event_posts/{event_id}', [EventController::class, 'eventPosts'])->name("eventPosts");
     Route::post('event_type/check_event_type_is_exist', [EventTypeController::class, 'checkEventTypeIsExist'])->name('category_check_exist');
 
-    // Route::get('/AdminPasswordChange',[adminController::class,'AdminPasswordChange'])->name('AdminPasswordChange');
+    Route::post('/changePassword',[adminController::class,'changePassword'])->name('changePassword');
 })->prefix('admin');
 
 
