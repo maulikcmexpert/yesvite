@@ -439,7 +439,7 @@
                                         <div class="accordion-body new_activity" id="{{Carbon::parse($currentDate)->format('Ymd')}}" data-id="{{Carbon::parse($currentDate)->format('Y-m-d')}}">
                                             @php
                                                 $i = 1;
-                                                $count = 0;
+                                                $count = 1;
                                             @endphp
                                             @foreach ($eventDetail['events_schedule_list']->data as $data)  
                                             @if ($currentDate == $data['event_date'])
