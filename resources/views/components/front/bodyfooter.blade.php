@@ -92,7 +92,7 @@
                       </a>
                   </li>
                   <li>
-                    <a href="{{ route('event.event_about') }}">
+                    <a href="{{ route('event.event_about/'.3762) }}">
 
                       {{-- <a href="#"> --}}
                           <span>

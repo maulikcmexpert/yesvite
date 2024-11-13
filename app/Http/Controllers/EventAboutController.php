@@ -23,13 +23,13 @@ use Illuminate\Http\Request;
 
 class EventAboutController extends Controller
 {
-    public function index()
+    public function index(String $id)
     {
         $user  = Auth::guard('web')->user();
         // $rawData = $request->getContent();
         // $input = json_decode($rawData, true);
-        $event_id=3762;
-        
+        $event_id=$id;
+
         if ($event_id == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
         }
