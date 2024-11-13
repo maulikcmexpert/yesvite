@@ -6,7 +6,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right w-100">
                         <li class="breadcrumb-item"><a href="{{URL::to('/admin/dashboard')}}">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="{{URL::to('/admin/category')}}">Category</a></li>
+                        {{-- <li class="breadcrumb-item"><a href="{{URL::to('/admin/category')}}">Category</a></li> --}}
                         <li class="breadcrumb-item active">{{$title}}</li>
                     </ol>
                 </div><!-- /.col -->
@@ -23,7 +23,7 @@
 
             <div class="card-header">
 
-                <h3 class="card-title">Add Category</h3>
+                <h3 class="card-title">Change Password</h3>
 
             </div>
 
@@ -31,7 +31,7 @@
 
 
 
-            <form method="post" action="{{ route('category.store')}}" id="categoryForm">
+            <form method="post" action="{{ route('category.store')}}" id="ChangePasswordForm">
 
                 @csrf
 
@@ -41,11 +41,31 @@
 
                         <div class="form-group">
 
-                            <label for="exampleInputEmail1">Category Name</label>
+                            <label for="exampleInputEmail1">Current Password</label>
 
-                            <input type="text" class="form-control category_name" name="category_name[]" placeholder="Enter Category Name" value="{{ old('category_name.*')}}">
+                            <input type="password" class="form-control current_password" name="current_password" placeholder="Enter Current Password" value="">
 
-                            <span class="text-danger">{{ $errors->first('category_name.*') }}</span>
+                            <span class="text-danger">{{ $errors->first('current_password.*') }}</span>
+                        
+                        </div>
+
+                        <div class="form-group">
+
+                            <label for="exampleInputEmail1">New Password</label>
+
+                            <input type="password" class="form-control new_password" name="new_password" placeholder="Enter New Password" value="">
+
+                            <span class="text-danger">{{ $errors->first('new_password.*') }}</span>
+                        
+                        </div>
+
+                        <div class="form-group">
+
+                            <label for="exampleInputEmail1">Confirm New Password</label>
+
+                            <input type="password" class="form-control confirm_password" name="confirm_password" placeholder="Enter again new password" value="">
+
+                            <span class="text-danger">{{ $errors->first('confirm_password.*') }}</span>
                         
                         </div>
 
