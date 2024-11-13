@@ -48,8 +48,9 @@
       </a>
       <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
         <a href="{{URL::to('/admin/logout')}}" class="dropdown-item">Logout</a>
-
-
+      </div>
+      <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+        <a href="{{URL::to('/admin/logout')}}" class="dropdown-item">Change Password</a>
       </div>
     </li>
   </ul>
