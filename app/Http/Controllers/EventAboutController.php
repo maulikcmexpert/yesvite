@@ -7,7 +7,8 @@ use App\Models\{
     EventInvitedUser,
     Notification,
     EventImage,
-    EventGiftRegistry
+    EventGiftRegistry,
+    EventPostImage
 };
 
 use Carbon\Carbon;
@@ -156,7 +157,7 @@ class EventAboutController extends Controller
                 if ($eventDetail->event_settings->events_schedule == '1') {
                     $eventData[] = "Event has Schedule";
                 }
-                if ($multidate == 1) {
+                if ($eventDetail->start_date!=$eventDetail->end_date) {
                     $eventData[] = "Multiple Day Event";
                 }
                 if (empty($eventData)) {
