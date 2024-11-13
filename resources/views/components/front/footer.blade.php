@@ -99,3 +99,8 @@ defer
 
 @stack('scripts')
 
+<script>
+    $(document).on("click", ".create-event-btn", function () {
+        toggleSidebar('sidebar_create_event');
+    })
+</script>
