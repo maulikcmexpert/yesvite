@@ -332,7 +332,7 @@ class EventListController extends Controller
                         }
                      
 
-                        $eventdraftList[] = count($eventPastDetail);
+                        $eventdraftList[] = $eventPastDetail;
                     
                         $filter = [
                             'invited_to' => $totalInvited,
