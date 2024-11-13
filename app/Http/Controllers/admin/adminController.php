@@ -33,8 +33,8 @@ class adminController extends Controller
     public function changePassword(Request $request)
     {
 
-        $id=Session::get('admin');
-        dd($id);
+        $admin=Session::get('admin');
+        dd($admin->id);
         // $validator = Validator::make($request->all(), [
         //     'current_password' => 'required|min:8',
         //     'new_password' => 'required|min:8',
