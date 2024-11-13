@@ -382,13 +382,14 @@
                         stroke-linejoin="round" />
                 </svg>
             </button>
-            <input type="hidden" id="firstActivityTime" value="">
+            <input type="hidden" id="firstActivityTime" value="{{Carbon::parse($eventDetail['events_schedule_list']->event_start_date)->format('Ymd')}}">
         </div>
         <!-- Add your sidebar content here -->
         <div class="supportive-div activity_bar">
             @if (isset($eventDetail['events_schedule_list']) && !empty($eventDetail['events_schedule_list']))
             @php
                 $currentDate = $eventDetail['events_schedule_list']->event_start_date; 
+                $i = 0;
             @endphp
             @while (strtotime($currentDate) <= strtotime($eventDetail['events_schedule_list']->event_end_date))
             <div class="activity-schedule-wrp">
@@ -424,13 +425,12 @@
                                     <div class="accordion-header">
                                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{Carbon::parse($currentDate)->format('Ymd')}}">
                                             <div>
-                                                Activities <span>({{count($eventDetail['events_schedule_list']->data)}})</span>
+                                                Activities <span class="total_activity-{{Carbon::parse($currentDate)->format('Ymd')}}">({{count($eventDetail['events_schedule_list']->data)}})</span>
                                             </div>
                                             <i class="fa-solid fa-angle-down"></i>
                                         </button>
-                                        <div class="accordion-button-icons">
+                                        <div class="accordion-button-icons add_more_activity">
                                             <i class="fa-solid fa-circle-plus"></i>
-
                                         </div>
                                     </div>
                                     {{-- <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample"> --}}
