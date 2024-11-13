@@ -139,4 +139,14 @@ class EventPhotoController extends Controller
             return response()->json(['status' => 0, 'message' => 'something went wrong']);
         }
     }
+
+
+    
+    function setpostTime($dateTime)
+    {
+        $commentDateTime = $dateTime; 
+        $commentTime = Carbon::parse($commentDateTime);
+        $timeAgo = $commentTime->diffForHumans();
+        return $timeAgo;
+    }
 }
