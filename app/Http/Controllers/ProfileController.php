@@ -382,7 +382,7 @@ class ProfileController extends Controller
 
         $password = $request->input('current_password');
 
-        $id = decrypt(session()->get('user')['id']);
+        $id = Auth::guard('web')->user()->id;
 
         $user = User::findOrFail($id);
 
@@ -408,7 +408,7 @@ class ProfileController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }
-        $id = decrypt(session()->get('user')['id']);
+        $id = Auth::guard('web')->user()->id;
 
         $userUpdate = User::where('id', $id)->first();
         $userUpdate->password = Hash::make($request->new_password);
@@ -425,7 +425,7 @@ class ProfileController extends Controller
 
     public function profilePrivacy()
     {
-        $id = decrypt(session()->get('user')['id']);
+        $id = Auth::guard('web')->user()->id;
         $user = User::with('user_profile_privacy')->withCount(
 
             [
