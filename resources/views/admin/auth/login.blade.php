@@ -94,6 +94,22 @@
 
           </div>
 
+          <div class="col-8">
+
+            <div class="icheck-primary">
+{{-- 
+              <input type="checkbox" id="remember" name="remember"> --}}
+
+              <label for="remember">
+
+                Forget Password?
+
+              </label>
+
+            </div>
+
+          </div>
+
           <!-- /.col -->
 
           <div class="col-4">
