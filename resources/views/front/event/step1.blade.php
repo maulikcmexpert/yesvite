@@ -444,7 +444,7 @@
                                             @foreach ($eventDetail['events_schedule_list']->data as $data)  
                                             @if ($currentDate == $data['event_date'])
                                                 <div class="activity-main-wrp mb-3">
-                                                    <h3>Activity <span class="activity-count-{{ {{Carbon::parse($currentDate)->format('Y-m-d')}} }} activity-count">{{ $count }}</span>
+                                                    <h3>Activity <span class="activity-count-{{ Carbon::parse($currentDate)->format('Y-m-d') }} activity-count">{{ $count }}</span>
                                                         <span class="ms-auto">
                                                             <svg width="20" height="20" viewBox="0 0 20 20"
                                                                 fill="none" xmlns="http://www.w3.org/2000/svg">
