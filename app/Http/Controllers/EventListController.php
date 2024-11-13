@@ -29,7 +29,7 @@ class EventListController extends Controller
                 $usercreatedAllEventList->with(['event_image', 'event_settings', 'user', 'event_schedule'])
                     ->where('user_id', $user->id)
                     ->where('is_draft_save', '0');
-                $usercreatedAllEventList->where('start_date', ">=", date('Y-m-d'));
+                $usercreatedAllEventList->where('start_date', "<", date('Y-m-d'));
                 $usercreatedAllEventList->orderBy('start_date', 'ASC');
                 $invitedEvents = EventInvitedUser::whereHas('user', function ($query) {
                     $query->where('app_user', '1');
