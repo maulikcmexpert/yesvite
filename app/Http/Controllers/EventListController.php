@@ -218,7 +218,7 @@ class EventListController extends Controller
                 $invitedEventsList->where('start_date', "<", date('Y-m-d'));
                 $invitedEventsList->where('is_draft_save', '0')
                     ->orderBy('start_date', 'ASC');
-                $allEvent = $usercreatedPastEventList->union($invitedEventsList)->get();
+                $allEvent = $usercreatedPastEventList->union($invitedEventsList)->get()->limit(10);
                 $totalCounts=0;
                 $totalCounts += count($allEvent);
                 if (count($allEvent) != 0) {
