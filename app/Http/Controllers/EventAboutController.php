@@ -26,22 +26,11 @@ class EventAboutController extends Controller
     public function index(String $id)
     {
         $user  = Auth::guard('web')->user();
-        // $rawData = $request->getContent();
-        // $input = json_decode($rawData, true);
         $event_id=$id;
-
         if ($event_id == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
         }
-        // $validator = Validator::make($input, [
-        //     'event_id' => ['required', 'exists:events,id']
-        // ]);
-        // if ($validator->fails()) {
-        //     return response()->json([
-        //         'status' => 0,
-        //         'message' => $validator->errors()->first()
-        //     ]);
-        // }
+      
         try {
             $eventDetail = Event::with(['user', 'event_image', 'event_schedule', 'event_settings', 'event_invited_user' => function ($query) {
                 $query->where('is_co_host', '1')->with('user');
