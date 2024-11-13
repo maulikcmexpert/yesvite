@@ -23,6 +23,7 @@ use App\Http\Controllers\admin\{
     EditTempalteController,
     UserResendEmailVerify,
     AccountVerification,
+    adminController,
     LoginHistory,
     Privacy_policyController,
     Terms_ConditionController,
@@ -88,7 +89,8 @@ Route::group(['middleware' => adminAuth::Class], function () {
         'privacy_policy'=>Privacy_policyController::class,
         'terms_condition'=>Terms_ConditionController::class,
         'roles'=>RolesController::class,
-        'faq'=>faqController::class
+        'faq'=>faqController::class,
+        'admin'=>adminController::class
     ]);
 
     Route::post('/update-status', [UserController::class, 'updateStatus'])->name('update.status');
@@ -139,8 +141,9 @@ Route::group(['middleware' => adminAuth::Class], function () {
     Route::post('events/get_events_by_date', [EventController::class, 'getEventsByDate']);
     Route::post('events/invited_users', [EventController::class, 'invitedUsers'])->name("invited_user_data");
     Route::get('events/event_posts/{event_id}', [EventController::class, 'eventPosts'])->name("eventPosts");
-
     Route::post('event_type/check_event_type_is_exist', [EventTypeController::class, 'checkEventTypeIsExist'])->name('category_check_exist');
+
+    Rout::get('/AdminPasswordChange',[adminController::class,'AdminPasswordChange'])->name('AdminPasswordChange');
 })->prefix('admin');
 
 
@@ -195,7 +198,6 @@ Route::controller(Auth::class)->group(function () {
     });
 
     Route::post('/forgotpassword', 'forgotpassword');
-    Route::post('/changePassword', 'changePassword');
 
     Route::get('/updatePasswords/{id}', 'checkToken');
     Route::get('/AdminPasswordChange', 'AdminPasswordChange');
