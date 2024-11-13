@@ -408,7 +408,7 @@
                     <h3>{{ $date->format('l - F j, Y') }}</h3>
                 </div>
                 <div class="activity-schedule-inner new_event_detail_form">
-                    <form>
+                    {{-- <form> --}}
                         @if ($eventDetail['events_schedule_list']->event_start_date == $currentDate)
                             <h4>Event Start</h4>
                         @endif
@@ -622,7 +622,7 @@
                                Save
                             </button>
                         </div>
-                    </form>
+                    {{-- </form> --}}
                 </div>
             </div>   
             @php
