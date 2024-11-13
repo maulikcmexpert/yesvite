@@ -443,7 +443,8 @@
                                             @endphp
                                             @foreach ($eventDetail['events_schedule_list']->data as $data)  
                                             @if ($currentDate == $data['event_date'])
-                                                <div class="activity-main-wrp mb-3">
+                                                <div class="activity-main-wrp mb-3 {{ Carbon::parse($currentDate)->format('Y-m-d') }}" data-id="{{Carbon::parse($currentDate)->format('Ymd')}}"
+                                                    id="{{Carbon::parse($currentDate)->format('Ymd')}}">
                                                     <h3>Activity <span class="activity-count-{{ Carbon::parse($currentDate)->format('Y-m-d') }} activity-count">{{ $count }}</span>
                                                         <span class="ms-auto">
                                                             <svg class="delete_activity" data-id="{{Carbon::parse($currentDate)->format('Y-m-d')}}" data-class="{{ Carbon::parse($currentDate)->format('Y-m-d') }}"
