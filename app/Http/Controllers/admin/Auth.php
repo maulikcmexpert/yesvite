@@ -237,6 +237,16 @@ class Auth extends Controller
         return  Redirect::to('admin')->with('success', 'Password Updated successfully!');
     }
 
+
+    public function password_change()
+    {
+        $title = 'Change Password';
+
+        $page = 'admin.password.add';
+        $js = 'admin.password.changepasswordjs';
+
+        return view('admin.includes.layout', compact('title', 'page', 'js'));
+    }
     public function changePassword(Request $request,$id){
 
         DB::beginTransaction();
