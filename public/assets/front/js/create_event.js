@@ -87,7 +87,9 @@ var swiper = new Swiper(".mySwiper", {
     },
 });
 
-
+$(document).on("click", ".create-event-btn", function () {
+    toggleSidebar('sidebar_create_event');
+})
 
 // Delete Group functionality
 $(document).on("click", "#delete_group", function () {
