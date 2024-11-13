@@ -247,15 +247,33 @@ class Auth extends Controller
 
         return view('admin.includes.layout', compact('title', 'page', 'js'));
     }
-    public function changePassword(Request $request,$id){
+  
 
-        DB::beginTransaction();
-        $Id = decrypt($id);
-        $updatePassword = Admin::findOrFail($Id);
-        $updatePassword->updatePassword = $request->conform_password;
-        $updatePassword->save();
+    public function changePassword(Request $request)
+    {
+
+        $id=Session::get('admin');
+        dd($id);
+        // $validator = Validator::make($request->all(), [
+        //     'current_password' => 'required|min:8',
+        //     'new_password' => 'required|min:8',
+        //     'conform_password' => 'required|min:8|same:new_password',
+        // ]);
+
+        // if ($validator->fails()) {
+        //     return redirect()->route('profile.change_password')
+        //         ->withErrors($validator)
+        //         ->withInput();
+        // }
+        $id = decrypt(session()->get('user')['id']);
+        $userUpdate = Admin::where('id', $id)->first();
+        $userUpdate->password = Hash::make($request->new_password);
+        $userUpdate->save();
+
         DB::commit();
-        return  Redirect::to('admin')->with('success', 'Password Updated successfully!');
+        toastr()->success('Password Changed');
+        return  redirect()->route('profile.edit');
     }
+
 
 }

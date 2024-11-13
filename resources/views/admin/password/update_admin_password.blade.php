@@ -31,7 +31,7 @@
 
 
 
-            <form method="post" action="{{ route('category.store')}}" id="ChangePasswordForm">
+            <form method="post" action="{{ route('auth.changePassword')}}" id="ChangePasswordForm">
 
                 @csrf
 
