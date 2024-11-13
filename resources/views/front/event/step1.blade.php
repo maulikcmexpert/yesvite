@@ -447,7 +447,7 @@
                                                     id="{{$data['id']}}">
                                                     <h3>Activity <span class="activity-count-{{ Carbon::parse($currentDate)->format('Y-m-d') }} activity-count">{{ $count }}</span>
                                                         <span class="ms-auto">
-                                                            <svg class="delete_activity" data-id="{{Carbon::parse($currentDate)->format('Y-m-d')}}" data-class="{{ Carbon::parse($currentDate)->format('Y-m-d') }}"
+                                                            <svg class="delete_activity" data-id="{{$data['id']}}" data-class="{{ Carbon::parse($currentDate)->format('Y-m-d') }}"
                                                             data-total_activity="{{Carbon::parse($currentDate)->format('Ymd')}}" width="20" height="20" viewBox="0 0 20 20"
                                                                 fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                 <path
