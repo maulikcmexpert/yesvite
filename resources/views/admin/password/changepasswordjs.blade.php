@@ -33,16 +33,16 @@
         messages: {
             current_password: {
                 required: "Please enter your Current password",
-                minlength: "Please enter minimum 8 character",
+                minlength: "Please enter minimum 6 character",
                 remote: "Please enter correct Current password",
             },
             new_password: {
                 required: "Please enter your New password",
-                minlength: "Please enter minimum 8 character",
+                minlength: "Please enter minimum 6 character",
             },
             confirm_password: {
                 required: "Please Re-type your New password",
-                minlength: "Please enter minimum 8 character",
+                minlength: "Please enter minimum 6 character",
                 equalTo: "New Password did not matched",
             },
         },
