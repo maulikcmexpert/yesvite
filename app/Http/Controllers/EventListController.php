@@ -25,6 +25,7 @@ class EventListController extends Controller
     {
                 $user  = Auth::guard('web')->user();
 
+                //upcoming_event
                 $usercreatedAllEventList = Event::query();
                 $usercreatedAllEventList->with(['event_image', 'event_settings', 'user', 'event_schedule'])
                     ->where('user_id', $user->id)
@@ -188,21 +189,20 @@ class EventListController extends Controller
                         $total_need_rsvp_event_count = EventInvitedUser::whereHas('event', function ($query) {
                             $query->where('is_draft_save', '0')->where('start_date', '>=', date('Y-m-d'));
                         })->where(['user_id' => $user->id, 'rsvp_status' => NULL])->count();
-
                         $eventList[] = $eventDetail;
-                    
+
                         $filter = [
                             'invited_to' => $totalInvited,
                             'hosting' => $totalHosting,
                             'need_to_rsvp' => $total_need_rsvp_event_count,
                             'past_event'=>$totalPastEventCount
-                        ];  
-                        
+                        ];     
                     }
-                   
                 }
+                //upcoming_event
 
 
+                //PastEvents
                 $usercreatedPastEventList = Event::query();
                 $usercreatedPastEventList->with(['event_image', 'event_settings', 'user', 'event_schedule'])
                     ->where('user_id', $user->id)
@@ -222,7 +222,6 @@ class EventListController extends Controller
                 $totalCounts=0;
                 $totalCounts += count($allEvent);
                 if (count($allEvent) != 0) {
-
                     foreach ($allEvent as $value) {
                         $eventPastDetail['id'] = $value->id;
                         $eventPastDetail['event_name'] = $value->event_name;
@@ -273,7 +272,6 @@ class EventListController extends Controller
                         $checkUserrsvp = EventInvitedUser::whereHas('user', function ($query) {
                             $query->where('app_user', '1');
                         })->where(['user_id' => $user->id, 'event_id' => $value->id])->first();
-
                         if ($checkUserrsvp != null) {
                             if ($checkUserrsvp->rsvp_status == '1') {
                                 $rsvp_status = '1'; // rsvp you'r going
@@ -284,7 +282,6 @@ class EventListController extends Controller
                                 $rsvp_status = '0'; // rsvp button//
                             }
                         }
-
                         $eventPastDetail['rsvp_status'] = $rsvp_status;
                         $total_accept_event_user = EventInvitedUser::whereHas('user', function ($query) {
                                 $query->where('app_user', '1');
@@ -330,10 +327,11 @@ class EventListController extends Controller
                             }
                             $eventPastDetail['event_detail'] = $eventData;
                         }
-                     
-
                         $eventPasttList[] = $eventPastDetail;
-                    
+                        //PastEvents
+
+
+                        //draftEvent
                         $draftEvents = Event::where(['user_id' => $user->id, 'is_draft_save' => '1'])->orderBy('id', 'DESC')->get();
                         $draftEventArray = [];
                         if (!empty($draftEvents) && count($draftEvents) != 0) {
@@ -344,12 +342,19 @@ class EventListController extends Controller
                                 $formattedDate = Carbon::createFromFormat('Y-m-d H:i:s', $value->updated_at)->format('F j, Y - g:i A');
                                 $eventDraftDetail['saved_date'] = $formattedDate;
                                 $eventDraftDetail['step'] = ($value->step != NULL) ? $value->step : 0;
+                                if($value->user_id==$user->id){
+                                    $eventDraftDetail['is_host'] = "hosting"; 
+                                }else{
+                                    $eventDraftDetail['is_host'] = ""; 
+                                }
+
                                 $draftEventArray[] = $eventDraftDetail;
                             }
                             $eventDraftdata= $draftEventArray;
                         } else {
                             $eventDraftdata= "";
                         }
+                        //draftEvent
 
                         
                         $filter = [
