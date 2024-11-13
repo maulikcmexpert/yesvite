@@ -118,7 +118,13 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="add-activity-schedule" style="{{(isset($eventDetail['event_setting']['events_schedule']) && $eventDetail['event_setting']['events_schedule']=='0')?'display:none;':''}}">
+                        @php
+                            $style = 'display:none';
+                            if(isset($eventDetail['event_setting']['events_schedule']) && $eventDetail['event_setting']['events_schedule']=='0'){
+                                $style ='';
+                            }
+                        @endphp
+                        <div class="add-activity-schedule" style="{{$style}}">
                             <h5 class="step_1_activity">
                                 @if (isset($eventDetail['events_schedule_list']->data) && count($eventDetail['events_schedule_list']->data) > 0)
                                     {{count($eventDetail['events_schedule_list']->data)}} Activity       
