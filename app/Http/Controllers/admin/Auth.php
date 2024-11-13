@@ -189,7 +189,7 @@ class Auth extends Controller
 
         //         return  Redirect::to('admin')->with('error', 'Invalid token!');
         //     }
-        // }
+        // }    
         $data['js'] = ['login'];
         $data['page'] = 'admin.auth.updatePassword';
         return view('admin.auth.main', $data);
