@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 use App\Models\Admin;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Database\QueryException;
 
 
 class adminController extends Controller
@@ -32,35 +36,27 @@ class adminController extends Controller
 
     public function changePassword(Request $request)
     {
-
-        $admin=Session::get('admin');
-        // $validator = Validator::make($request->all(), [
-        //     'current_password' => 'required|min:8',
-        //     'new_password' => 'required|min:8',
-        //     'conform_password' => 'required|min:8|same:new_password',
-        // ]);
-
-        // if ($validator->fails()) {
-        //     return redirect()->route('profile.change_password')
-        //         ->withErrors($validator)
-        //         ->withInput();
-        // }
-
-
-        $request->validate([
-            'current_password' => 'required|min:5',
-            'new_password' => 'required|min:5',
-            'confirm_password' => 'required|min:5|same:new_password',
-        ]);
-
-        $id = $admin['id'];
-        $userUpdate = Admin::where('id', $id)->first();
-        $userUpdate->password = Hash::make($request->new_password);
-        $userUpdate->save();
-
-        DB::commit();
-        toastr()->success('Password Changed');
-        return  redirect()->route('profile.edit');
+        try {
+            $admin=Session::get('admin');
+            $request->validate([
+                'current_password' => 'required|min:6',
+                'new_password' => 'required|min:6',
+                'confirm_password' => 'required|min:6|same:new_password',
+            ]);
+                
+            $id = $admin['id'];
+            DB::beginTransaction();
+            $userUpdate = Admin::where('id', $id)->first();
+            $userUpdate->password = Hash::make($request->new_password);
+            $userUpdate->save();
+            DB::commit();
+            return Redirect::to(URL::to(path: '/admin/dashboard'))->with('success', 'Password Updated Successfully!');;
+            } 
+        catch (QueryException $e) {
+            DB::rollBack();
+            Log::error('Database query error' . $e->getMessage());
+            return Redirect::to(URL::to(path: '/admin/dashboard'))->with('success', 'Password Not Updated!!');;
+            }
     }
 
 
