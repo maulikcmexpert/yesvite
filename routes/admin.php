@@ -196,10 +196,8 @@ Route::controller(Auth::class)->group(function () {
 
     Route::post('/forgotpassword', 'forgotpassword');
 
-    Route::get('/updatePasswords', 'checkToken');
-    // Route::get('/updatePasswords/{id}', 'checkToken');
-
-
+    Route::get('/updatePasswords/{id}', 'checkToken');
+    Route::get('/AdminPasswordChange', 'AdminPasswordChange');
     Route::post('/updatePassword/{id}', 'updatePassword');
 
     Route::get('/logout', function () {

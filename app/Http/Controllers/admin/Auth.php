@@ -175,21 +175,21 @@ class Auth extends Controller
         return  Redirect::to('admin')->with('success', 'Email send successfully!');
     }
 
-    public function checkToken()
+    public function checkToken($token)
     {
-        // $adminData = Admin::where("remember_token", $token)->first();
-        // if ($adminData == null) {
+        $adminData = Admin::where("remember_token", $token)->first();
+        if ($adminData == null) {
 
-        //     $userData = DB::table('password_resets')
-        //         ->where([
-        //             'token' => $token
-        //         ])
-        //         ->first();
-        //     if ($userData == null) {
+            $userData = DB::table('password_resets')
+                ->where([
+                    'token' => $token
+                ])
+                ->first();
+            if ($userData == null) {
 
-        //         return  Redirect::to('admin')->with('error', 'Invalid token!');
-        //     }
-        // }    
+                return  Redirect::to('admin')->with('error', 'Invalid token!');
+            }
+        }
         $data['js'] = ['login'];
         $data['page'] = 'admin.auth.updatePassword';
         return view('admin.auth.main', $data);
@@ -238,11 +238,11 @@ class Auth extends Controller
     }
 
 
-    public function password_change()
+    public function AdminPasswordChange()
     {
         $title = 'Change Password';
 
-        $page = 'admin.password.add';
+        $page = 'admin.password.update_admin_password';
         $js = 'admin.password.changepasswordjs';
 
         return view('admin.includes.layout', compact('title', 'page', 'js'));
