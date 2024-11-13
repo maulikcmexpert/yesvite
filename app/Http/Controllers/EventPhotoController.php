@@ -32,7 +32,7 @@ class EventPhotoController extends Controller
 {
     public function index(String $id){
         
-        $user  = Auth::guard('api')->user();
+        $user  = Auth::guard('web')->user();
         // $rawData = $request->getContent();
         // $input = json_decode($rawData, true);
         $event_id =$id;
