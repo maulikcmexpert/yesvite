@@ -611,8 +611,8 @@
                         </div> --}}
 
                         <div class="activity-schedule-inner-btn">
-                            <button class="cmn-btn">
-                                Create New Event
+                            <button class="cmn-btn" id="save_activity_schedule">
+                               Save
                             </button>
                         </div>
                     </form>
