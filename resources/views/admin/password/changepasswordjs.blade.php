@@ -11,7 +11,7 @@
                             "content"
                         ),
                     },
-                    url: base_url + "admin/verifyPassword",
+                    url: "{{URL::to('admin/verifyPassword')}}",
                     type: "post",
                     data: {
                         password: function () {
@@ -24,7 +24,7 @@
                 required: true,
                 minlength: 6,
             },
-            conform_password: {
+            confirm_password: {
                 required: true,
                 minlength: 6,
                 equalTo: "#new_password",
@@ -40,7 +40,7 @@
                 required: "Please enter your New password",
                 minlength: "Please enter minimum 8 character",
             },
-            conform_password: {
+            confirm_password: {
                 required: "Please Re-type your New password",
                 minlength: "Please enter minimum 8 character",
                 equalTo: "New Password did not matched",
