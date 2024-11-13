@@ -28,7 +28,8 @@ class EventAboutController extends Controller
         $user  = Auth::guard('web')->user();
         // $rawData = $request->getContent();
         // $input = json_decode($rawData, true);
-        $event_id=3760;
+        $event_id=3762;
+        
         if ($event_id == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
         }
