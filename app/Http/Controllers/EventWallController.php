@@ -176,7 +176,6 @@ use Illuminate\Support\Facades\DB;class EventWallController extends Controller
                                                 ->where('post_privacy', '4');
                                         })
                                         ->orWhere(function ($q) {
-                                            // This block is for post_privacy == 1
                                             $q->where('post_privacy', '1');
                                         });
                                 });
@@ -501,7 +500,6 @@ use Illuminate\Support\Facades\DB;class EventWallController extends Controller
             DB::rollBack();
             return response()->json(['status' => 0, 'message' => "db error"]);
         } catch (\Exception $e) {
-            dd($e);
             return response()->json(['status' => 0, 'message' => "something went wrong"]);
         }
     }
