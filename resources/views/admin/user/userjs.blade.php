@@ -1,7 +1,6 @@
 <script type="text/javascript">
     $(function() {
 
-        $('select[name="user-table_length"]').val(10);
 
         // var table = $("#users_table").DataTable({
         //     processing: true,
@@ -46,6 +45,8 @@
         });
 
         $(document).ready(function() {
+            $('select[name="user-table_length"]').val(10);
+
             // Function to validate category names
             $('#cateAdd').click(function(event) {
                 event.preventDefault();
