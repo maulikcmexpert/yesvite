@@ -24,7 +24,8 @@ use App\Http\Controllers\{
     EventAboutController,
     EventPotluckController,
     EventPhotoController,
-    EventGuestController
+    EventGuestController,
+    EventWallController
 };
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
@@ -199,6 +200,7 @@ Route::middleware('checkUserExist')->group(function () {
     Route::get('event_potluck/{id}',  [EventPotluckController::class, 'index'])->name('event.event_potluck');
     Route::get('event_photo/{id}',  [EventPhotoController::class, 'index'])->name('event.event_photo');
     Route::get('event_guest/{id}',  [EventGuestController::class, 'index'])->name('event.event_guest');
+    Route::get('event_wall/{id}',  [EventWallController::class, 'index'])->name('event.event_wall');
 
 
 });
