@@ -224,22 +224,18 @@ class UserController extends Controller
     }
 
     public function CheckExistingUserEmail(Request $request)
-    {
-        $email = $request->input('email');
-        $id = $request->input('id');
+{
+    $email = $request->input('email');
+    $id = $request->input('id');
+    $existsEmail = User::where('email', $email)
+                        ->where('id', '!=', $id)
+                        ->exists();
+    if ($existsEmail) {
+        return response()->json(false);
+    } 
+    return response()->json(true);
+}
 
-        $exists = User::where('email', $email)->where('id',$id)->exists();
-        if ($exists) {
-            return response()->json(false);
-        } 
-        
-        $existsEmail = User::where('email', $email)->exists();
-        if ($existsEmail) {
-            return response()->json(false);
-        } else {
-            return response()->json(true);
-        }
-    }
 
     public function checkAdminEmail(Request $request)
     {
