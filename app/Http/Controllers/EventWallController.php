@@ -132,7 +132,7 @@ use Illuminate\Support\Facades\DB;class EventWallController extends Controller
                 }
             }
             //  Posts List //
-            $selectedFilters = $request->input('filters');
+            // $selectedFilters = $request->input('filters');
             $eventCreator = Event::where('id', $event_id)->first();
             $eventPostList = EventPost::query();
             $eventPostList->with(['user', 'post_image'])
@@ -184,40 +184,40 @@ use Illuminate\Support\Facades\DB;class EventWallController extends Controller
                 });
             }
             $eventPostList->orderBy('id', 'DESC');
-            if (!empty($selectedFilters) && !in_array('all', $selectedFilters)) {
-                $eventPostList->where(function ($query) use ($selectedFilters, $eventCreator) {
-                    foreach ($selectedFilters as $filter) {
-                        switch ($filter) {
-                            case 'host_update':
-                                $query->orWhere('user_id', $eventCreator->user_id);
-                                break;
-                            case 'video_uploads':
-                                $query->orWhere(function ($qury) {
-                                    $qury->where('post_type', '1')
-                                        ->whereHas('post_image', function ($q) {
-                                            $q->where('type', 'video');
-                                        });
-                                });
-                                break;
-                            case 'photo_uploads':
-                                $query->orWhere(function ($qury) {
-                                    $qury->where('post_type', '1')
-                                        ->whereHas('post_image', function ($q) {
-                                            $q->where('type', 'image');
-                                        });
-                                });
-                                break;
-                            case 'polls':
-                                $query->orWhere('post_type', '2');
-                                break;
-                            case 'comments':
-                                $query->orWhere('post_type', '0');
-                                break;
-                                // Add more cases for other filters if needed
-                        }
-                    }
-                });
-            }
+            // if (!empty($selectedFilters) && !in_array('all', $selectedFilters)) {
+            //     $eventPostList->where(function ($query) use ($selectedFilters, $eventCreator) {
+            //         foreach ($selectedFilters as $filter) {
+            //             switch ($filter) {
+            //                 case 'host_update':
+            //                     $query->orWhere('user_id', $eventCreator->user_id);
+            //                     break;
+            //                 case 'video_uploads':
+            //                     $query->orWhere(function ($qury) {
+            //                         $qury->where('post_type', '1')
+            //                             ->whereHas('post_image', function ($q) {
+            //                                 $q->where('type', 'video');
+            //                             });
+            //                     });
+            //                     break;
+            //                 case 'photo_uploads':
+            //                     $query->orWhere(function ($qury) {
+            //                         $qury->where('post_type', '1')
+            //                             ->whereHas('post_image', function ($q) {
+            //                                 $q->where('type', 'image');
+            //                             });
+            //                     });
+            //                     break;
+            //                 case 'polls':
+            //                     $query->orWhere('post_type', '2');
+            //                     break;
+            //                 case 'comments':
+            //                     $query->orWhere('post_type', '0');
+            //                     break;
+            //                     // Add more cases for other filters if needed
+            //             }
+            //         }
+            //     });
+            // }
 
             $totalPostWalls = $eventPostList->count();
             $results = $eventPostList->paginate($this->perPage, ['*'], 'page', $page);
