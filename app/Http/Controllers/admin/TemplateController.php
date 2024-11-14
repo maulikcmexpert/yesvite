@@ -55,10 +55,9 @@ class TemplateController extends Controller
                   
                     $cryptId = encrypt($row->id);
                     $template_delete=decrypt($cryptId);
-
-
                     $Category_id = encrypt($row->categories->category_name);
 
+                    dd($Category_id);
 
                     $edit_url = route('create_template.edit', $cryptId,$Category_id);
                     $delete_url = route('create_template.destroy', $cryptId);
