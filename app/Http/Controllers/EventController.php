@@ -426,40 +426,79 @@ class EventController extends Controller
                 $gift_registry_id =  implode(',', $gift_registry_data);
             }
         }
-
-        $event_creation = Event::create([
-            'event_type_id' => (isset($request->event_type) && $request->event_type != "") ? (int)$request->event_type : "",
-            'user_id' => $user_id,
-            'event_name' => (isset($request->event_name) && $request->event_name != "") ? $request->event_name : "",
-            'hosted_by' => (isset($request->hosted_by) && $request->hosted_by) ? $request->hosted_by : "",
-            'start_date' => (isset($startDate) && $startDate != "") ? $startDateFormat : null,
-            'end_date' => (isset($endDate) && $endDate != "") ? $endDateFormat : null,
-            'rsvp_by_date_set' => (isset($request->rsvp_by_date_set) && $request->rsvp_by_date_set != "") ? $request->rsvp_by_date_set : "0",
-            'rsvp_by_date' => (isset($rsvp_by_date) && $rsvp_by_date != "") ? $rsvp_by_date : null,
-            'rsvp_start_time' => (isset($request->start_time) && $request->start_time != "") ? $request->start_time : "",
-            'rsvp_start_timezone' => (isset($request->rsvp_start_timezone) && $request->rsvp_start_timezone != "") ? $request->rsvp_start_timezone : "",
-            'rsvp_end_time' => (isset($request->rsvp_end_time) && $request->rsvp_end_time != "") ? $request->rsvp_end_time : "",
-            'rsvp_end_timezone' => (isset($request->rsvp_end_timezone) && $request->rsvp_end_timezone != "") ? $request->rsvp_end_timezone : "",
-            'rsvp_end_time_set' => (isset($request->rsvp_end_time_set) && $request->rsvp_end_time_set != "") ? $request->rsvp_end_time_set : "",
-            'event_location_name' => (isset($request->event_location) && $request->event_location != "") ? $request->event_location : "",
-            'address_1' => (isset($request->address1) && $request->address1 != "") ? $request->address1 : "",
-            'address_2' => (isset($request->address_2) && $request->address_2 != "") ? $request->address_2 : "",
-            'state' => (isset($request->state) && $request->state != "") ? $request->state : "",
-            'zip_code' => (isset($request->zipcode) && $request->zipcode) ? $request->zipcode : "",
-            'city' => (isset($request->city) && $request->city != "") ? $request->city : "",
-            'message_to_guests' => (isset($request->message_to_guests) && $request->message_to_guests != "") ? $request->message_to_guests : "",
-            'is_draft_save' => (isset($request->isdraft) && $request->isdraft != "") ? $request->isdraft : "0",
-            'latitude' => (isset($request->latitude) && $request->latitude != "") ? $request->latitude : "",
-            'longitude' => (isset($request->longitude) && $request->longitude != "") ? $request->longitude : "",
-            'greeting_card_id' => (isset($greeting_card_id) && $greeting_card_id != "") ? $greeting_card_id : "0",
-            'gift_registry_id' => (isset($gift_registry_id) && $gift_registry_id != "") ? $gift_registry_id : "0",
-            // 'rsvp_end_time_set' => "",
-            // 'address_2' => "",
-            'subscription_plan_name' => (isset($request->plan_selected) && $request->plan_selected != "") ? $request->plan_selected : "Pro",
-            'subscription_invite_count' => (isset($request->subscription_invite_count) && $request->subscription_invite_count != "") ? $request->subscription_invite_count : 15,
-        ]);
+        if(isset($request->event_id) && $request->event_id != NULL){
+            $event_creation = Event::where('id',$request->event_id)->first();
+        }else{
+            $event_creation = new Event();
+        }
+        $event_creation->event_type_id = (isset($request->event_type) && $request->event_type != "") ? (int)$request->event_type : "";
+        $event_creation->user_id = $user_id;
+        $event_creation->event_name = (isset($request->event_name) && $request->event_name != "") ? $request->event_name : "";
+        $event_creation->hosted_by = (isset($request->hosted_by) && $request->hosted_by) ? $request->hosted_by : "";
+        $event_creation->start_date = (isset($startDate) && $startDate != "") ? $startDateFormat : null;
+        $event_creation->end_date = (isset($endDate) && $endDate != "") ? $endDateFormat : null;
+        $event_creation->rsvp_by_date_set = (isset($request->rsvp_by_date_set) && $request->rsvp_by_date_set != "") ? $request->rsvp_by_date_set : "0";
+        $event_creation->rsvp_by_date = (isset($rsvp_by_date) && $rsvp_by_date != "") ? $rsvp_by_date : null;
+        $event_creation->rsvp_start_time = (isset($request->start_time) && $request->start_time != "") ? $request->start_time : "";
+        $event_creation->rsvp_start_timezone = (isset($request->rsvp_start_timezone) && $request->rsvp_start_timezone != "") ? $request->rsvp_start_timezone : "";
+        $event_creation->rsvp_end_time = (isset($request->rsvp_end_time) && $request->rsvp_end_time != "") ? $request->rsvp_end_time : "";
+        $event_creation->rsvp_end_timezone = (isset($request->rsvp_end_timezone) && $request->rsvp_end_timezone != "") ? $request->rsvp_end_timezone : "";
+        $event_creation->rsvp_end_time_set = (isset($request->rsvp_end_time_set) && $request->rsvp_end_time_set != "") ? $request->rsvp_end_time_set : "";
+        $event_creation->event_location_name = (isset($request->event_location) && $request->event_location != "") ? $request->event_location : "";
+        $event_creation->address_1 = (isset($request->address1) && $request->address1 != "") ? $request->address1 : "";
+        $event_creation->address_2 = (isset($request->address_2) && $request->address_2 != "") ? $request->address_2 : "";
+        $event_creation->state = (isset($request->state) && $request->state != "") ? $request->state : "";
+        $event_creation->zip_code = (isset($request->zipcode) && $request->zipcode) ? $request->zipcode : "";
+        $event_creation->city = (isset($request->city) && $request->city != "") ? $request->city : "";
+        $event_creation->message_to_guests = (isset($request->message_to_guests) && $request->message_to_guests != "") ? $request->message_to_guests : "";
+        $event_creation->is_draft_save = (isset($request->isdraft) && $request->isdraft != "") ? $request->isdraft : "0";
+        $event_creation->latitude = (isset($request->latitude) && $request->latitude != "") ? $request->latitude : "";
+        $event_creation->longitude = (isset($request->longitude) && $request->longitude != "") ? $request->longitude : "";
+        $event_creation->greeting_card_id = (isset($greeting_card_id) && $greeting_card_id != "") ? $greeting_card_id : "0";
+        $event_creation->gift_registry_id = (isset($gift_registry_id) && $gift_registry_id != "") ? $gift_registry_id : "0";
+        $event_creation->subscription_plan_name = (isset($request->plan_selected) && $request->plan_selected != "") ? $request->plan_selected : "Pro";
+        $event_creation->subscription_invite_count = (isset($request->subscription_invite_count) && $request->subscription_invite_count != "") ? $request->subscription_invite_count : 15;
+        $event_creation->save();
+        // $event_creation = Event::create([
+        //     'event_type_id' => (isset($request->event_type) && $request->event_type != "") ? (int)$request->event_type : "",
+        //     'user_id' => $user_id,
+        //     'event_name' => (isset($request->event_name) && $request->event_name != "") ? $request->event_name : "",
+        //     'hosted_by' => (isset($request->hosted_by) && $request->hosted_by) ? $request->hosted_by : "",
+        //     'start_date' => (isset($startDate) && $startDate != "") ? $startDateFormat : null,
+        //     'end_date' => (isset($endDate) && $endDate != "") ? $endDateFormat : null,
+        //     'rsvp_by_date_set' => (isset($request->rsvp_by_date_set) && $request->rsvp_by_date_set != "") ? $request->rsvp_by_date_set : "0",
+        //     'rsvp_by_date' => (isset($rsvp_by_date) && $rsvp_by_date != "") ? $rsvp_by_date : null,
+        //     'rsvp_start_time' => (isset($request->start_time) && $request->start_time != "") ? $request->start_time : "",
+        //     'rsvp_start_timezone' => (isset($request->rsvp_start_timezone) && $request->rsvp_start_timezone != "") ? $request->rsvp_start_timezone : "",
+        //     'rsvp_end_time' => (isset($request->rsvp_end_time) && $request->rsvp_end_time != "") ? $request->rsvp_end_time : "",
+        //     'rsvp_end_timezone' => (isset($request->rsvp_end_timezone) && $request->rsvp_end_timezone != "") ? $request->rsvp_end_timezone : "",
+        //     'rsvp_end_time_set' => (isset($request->rsvp_end_time_set) && $request->rsvp_end_time_set != "") ? $request->rsvp_end_time_set : "",
+        //     'event_location_name' => (isset($request->event_location) && $request->event_location != "") ? $request->event_location : "",
+        //     'address_1' => (isset($request->address1) && $request->address1 != "") ? $request->address1 : "",
+        //     'address_2' => (isset($request->address_2) && $request->address_2 != "") ? $request->address_2 : "",
+        //     'state' => (isset($request->state) && $request->state != "") ? $request->state : "",
+        //     'zip_code' => (isset($request->zipcode) && $request->zipcode) ? $request->zipcode : "",
+        //     'city' => (isset($request->city) && $request->city != "") ? $request->city : "",
+        //     'message_to_guests' => (isset($request->message_to_guests) && $request->message_to_guests != "") ? $request->message_to_guests : "",
+        //     'is_draft_save' => (isset($request->isdraft) && $request->isdraft != "") ? $request->isdraft : "0",
+        //     'latitude' => (isset($request->latitude) && $request->latitude != "") ? $request->latitude : "",
+        //     'longitude' => (isset($request->longitude) && $request->longitude != "") ? $request->longitude : "",
+        //     'greeting_card_id' => (isset($greeting_card_id) && $greeting_card_id != "") ? $greeting_card_id : "0",
+        //     'gift_registry_id' => (isset($gift_registry_id) && $gift_registry_id != "") ? $gift_registry_id : "0",
+        //     // 'rsvp_end_time_set' => "",
+        //     // 'address_2' => "",
+        //     'subscription_plan_name' => (isset($request->plan_selected) && $request->plan_selected != "") ? $request->plan_selected : "Pro",
+        //     'subscription_invite_count' => (isset($request->subscription_invite_count) && $request->subscription_invite_count != "") ? $request->subscription_invite_count : 15,
+        // ]);
         $eventId = $event_creation->id;
-        $event_creation->step = (isset($request->step) && $request->step != '') ? $request->step : 0;
+        if(isset($request->event_id) && $request->event_id != NULL){
+            $step = $event_creation->step;
+            if(isset($request->step) && $request->step != '' && $step < $request->step ){
+                $event_creation->step = $request->step;
+            }
+        }else{
+            $event_creation->step = (isset($request->step) && $request->step != '') ? $request->step : 0;
+        }
         if (isset($request->shape_image) && $request->shape_image != '') {
             $event_creation->design_inner_image = $request->shape_image;
         }
