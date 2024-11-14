@@ -1,5 +1,6 @@
 @php
     use Carbon\Carbon;
+    use DateTime;
 @endphp
 <div class="step_1">
     <div class="main-content-right">
@@ -198,7 +199,7 @@
                     <div class="col-lg-12 mb-4 rsvp_by_date" style="{{(isset($eventDetail['rsvp_by_date_set']) && $eventDetail['rsvp_by_date_set']=='0')?'display: none;':''}}">
                         <div class="input-form">
                             <input type="text" class="form-control inputText" id="rsvp-by-date" name="rsvp-by-date" onblur="clearError(this)" 
-                            value="{{(isset($eventDetail['rsvp_by_date']) && $eventDetail['rsvp_by_date'] != '')?$eventDetail['rsvp_by_date']:''}}" readonly autocomplete="off">
+                            value="{{(isset($eventDetail['rsvp_by_date']) && $eventDetail['rsvp_by_date'] != '')?DateTime::createFromFormat('m-d-Y', $eventDetail['rsvp_by_date'])->format('Y-m-d');:''}}" readonly autocomplete="off">
                             <label for="birthday" class="form-label input-field floating-label select-label">Rsvp By Date</label>
                         </div>
                         <lable for="event-rsvpby" id="event-rsvpby-error" class="error"></lable>
