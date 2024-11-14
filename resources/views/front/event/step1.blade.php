@@ -515,8 +515,8 @@
                                                             <div class="form-group">
                                                                 <label>End Time</label>
                                                                 <div class="input-group time ">
-                                                                    <input class="form-control timepicker activity_end_time" id="activity-end-time"
-                                                                        name="activity-end-time[]" placeholder="HH:MM AM/PM" required="" readonly value="{{$data['end_time']}}"/><span
+                                                                    <input class="form-control timepicker activity_end_time" name="activity-end-time[]" placeholder="HH:MM AM/PM"
+                                                                     required="" readonly value="{{$data['end_time']}}"/><span
                                                                         class="input-group-append input-group-addon"><span class="input-group-text"><svg width="21"
                                                                                 height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                                 <path
