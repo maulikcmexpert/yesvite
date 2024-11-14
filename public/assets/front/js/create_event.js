@@ -1939,8 +1939,8 @@ function convertTimeToMinutes(timeStr) {
 
 let blurExecutedEndTime = false;
 
-$(document).on("blur", 'input[name="activity-end-time[]"]', function () {
-
+$(document).on("blur", 'input[name="activity-end-time[]"]', function (e) {
+e.preventDefault();
     if (!blurExecutedEndTime) {
         blurExecutedEndTime = true;
 
@@ -1951,7 +1951,7 @@ $(document).on("blur", 'input[name="activity-end-time[]"]', function () {
                 .find('input[name="activity-start-time[]"]')
                 .val()
         );
-
+            console.log(newStartTime);
         if (
             newEndTime != "" &&
             newStartTime != "" &&
