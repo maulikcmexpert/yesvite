@@ -23,10 +23,12 @@
             new_password: {
                 required: true,
                 minlength: 6,
+                maxlength: 20,
             },
             confirm_password: {
                 required: true,
                 minlength: 6,
+                maxlength: 20,
                 equalTo: "#new_password",
             },
         },
@@ -39,10 +41,13 @@
             new_password: {
                 required: "Please enter your New password",
                 minlength: "Please enter minimum 6 character",
+                maxlength: "Please enter minimum 20 character",
+
             },
             confirm_password: {
-                required: "Please Re-type your New password",
+                required: "Please confirm your New password",
                 minlength: "Please enter minimum 6 character",
+                maxlength: "Please enter minimum 20 character",
                 equalTo: "New Password did not matched",
             },
         },
