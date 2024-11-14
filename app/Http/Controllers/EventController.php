@@ -695,6 +695,10 @@ class EventController extends Controller
                     }
                 }
             }
+
+            if(isset($request->event_id) && $request->event_id != null && isset($request->events_schedule) && $request->events_schedule == '0'){
+                EventSchedule::where('event_id',$request->event_id)->delete();
+            }
             
             if (isset($request->events_schedule) && $request->events_schedule == '1' && isset($request->activity) && !empty($request->activity)) {
                 $activities = $request->activity;
