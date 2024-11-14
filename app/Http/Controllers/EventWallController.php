@@ -501,6 +501,7 @@ use Illuminate\Support\Facades\DB;class EventWallController extends Controller
             DB::rollBack();
             return response()->json(['status' => 0, 'message' => "db error"]);
         } catch (\Exception $e) {
+            dd($e);
             return response()->json(['status' => 0, 'message' => "something went wrong"]);
         }
     }
