@@ -1,6 +1,7 @@
 <script type="text/javascript">
     $(function() {
 
+        $('select[name="user-table_length"]').val(10);
 
         // var table = $("#users_table").DataTable({
         //     processing: true,
