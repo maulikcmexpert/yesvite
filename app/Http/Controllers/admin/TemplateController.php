@@ -59,7 +59,7 @@ class TemplateController extends Controller
 
                     // dd($Category_id);
 
-                    $edit_url = route('editTemplateData', ['id' => $cryptId, 'category' => $category_id]);
+                    $edit_url = route('create_template.edit', ['id' => $cryptId, 'category' => $category_id]);
                     $delete_url = route('create_template.destroy', $cryptId);
                     $template_url = route('create_template.edit_template', $cryptId);
                     $actionBtn = '<div class="action-icon">
@@ -150,7 +150,7 @@ class TemplateController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function editTemplateData(string $id,string $category)
+    public function edit(string $id,string $category)
     {
         $template_id = decrypt($id);
         $category_id= decrypt($category);
