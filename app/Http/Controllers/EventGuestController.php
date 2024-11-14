@@ -59,20 +59,20 @@ class EventGuestController extends Controller
                 $query->where('app_user', '1');
             })->where(['event_id' => $eventDetail->id, 'rsvp_status' => '1', 'rsvp_d' => '1'])->sum('kids');
 
-            $eventAboutHost['is_event_owner'] = ($eventDetail->user_id == $user->id) ? 1 : 0;
-            $eventAboutHost['event_wall'] = $eventDetail->event_settings->event_wall;
-            $eventAboutHost['guest_list_visible_to_guests'] = $eventDetail->event_settings->guest_list_visible_to_guests;
-            $eventAboutHost['attending'] = $adults + $kids;
-            $eventAboutHost['total_invitation'] =  count(getEventInvitedUser($event_id));
-            $eventAboutHost['adults'] = (int)$adults;
-            $eventAboutHost['kids'] =  (int)$kids;
-            $eventAboutHost['not_attending'] = $eventNotComing;
-            $eventAboutHost['pending'] = $pendingUser;
-            $eventAboutHost['allow_limit'] = $eventDetail->event_settings->allow_limit;
-            $eventAboutHost['adult_only_party'] = $eventDetail->event_settings->adult_only_party;
-            $eventAboutHost['subscription_plan_name'] = ($eventDetail->subscription_plan_name != NULL) ? $eventDetail->subscription_plan_name : "";
-            $eventAboutHost['subscription_invite_count'] = ($eventDetail->subscription_invite_count != NULL) ? $eventDetail->subscription_invite_count : 0;
-            $eventAboutHost['is_past'] = ($eventDetail->end_date < date('Y-m-d')) ? true : false;
+            $eventGuest['is_event_owner'] = ($eventDetail->user_id == $user->id) ? 1 : 0;
+            $eventGuest['event_wall'] = $eventDetail->event_settings->event_wall;
+            $eventGuest['guest_list_visible_to_guests'] = $eventDetail->event_settings->guest_list_visible_to_guests;
+            $eventGuest['attending'] = $adults + $kids;
+            $eventGuest['total_invitation'] =  count(getEventInvitedUser($event_id));
+            $eventGuest['adults'] = (int)$adults;
+            $eventGuest['kids'] =  (int)$kids;
+            $eventGuest['not_attending'] = $eventNotComing;
+            $eventGuest['pending'] = $pendingUser;
+            $eventGuest['allow_limit'] = $eventDetail->event_settings->allow_limit;
+            $eventGuest['adult_only_party'] = $eventDetail->event_settings->adult_only_party;
+            $eventGuest['subscription_plan_name'] = ($eventDetail->subscription_plan_name != NULL) ? $eventDetail->subscription_plan_name : "";
+            $eventGuest['subscription_invite_count'] = ($eventDetail->subscription_invite_count != NULL) ? $eventDetail->subscription_invite_count : 0;
+            $eventGuest['is_past'] = ($eventDetail->end_date < date('Y-m-d')) ? true : false;
 
             $userRsvpStatusList = EventInvitedUser::query();
             $userRsvpStatusList->whereHas('user', function ($query) {
@@ -103,7 +103,7 @@ class EventGuestController extends Controller
             //     });
             // }
             $result = $userRsvpStatusList->get();
-            $eventAboutHost['rsvp_status_list'] = [];
+            $eventGuest['rsvp_status_list'] = [];
             if (count($result) != 0) {
                 foreach ($result as $value) {
                     $rsvpUserStatus = [];
@@ -146,15 +146,15 @@ class EventGuestController extends Controller
                         'comments' => $comments,
                         'message_privacy' =>  $value->user->message_privacy
                     ];
-                    $eventAboutHost['rsvp_status_list'][] = $rsvpUserStatus;
+                    $eventGuest['rsvp_status_list'][] = $rsvpUserStatus;
                 }
             }
             $getInvitedusers = getInvitedUsers($event_id);
-            $eventAboutHost['invited_user_id'] = $getInvitedusers['invited_user_id'];
-            $eventAboutHost['invited_guests'] = $getInvitedusers['invited_guests'];
+            $eventGuest['invited_user_id'] = $getInvitedusers['invited_user_id'];
+            $eventGuest['invited_guests'] = $getInvitedusers['invited_guests'];
             //  event about view //
             $getEventData = Event::with('event_schedule')->where('id', $event_id)->first();
-            $eventAboutHost['remaining_invite_count'] = ($getEventData->subscription_invite_count != NULL) ? ($getEventData->subscription_invite_count - (count($eventAboutHost['invited_user_id']) + count($eventAboutHost['invited_guests']))) : 0;
+            $eventGuest['remaining_invite_count'] = ($getEventData->subscription_invite_count != NULL) ? ($getEventData->subscription_invite_count - (count($eventGuest['invited_user_id']) + count($eventGuest['invited_guests']))) : 0;
            
             $totalEnvitedUser = EventInvitedUser::whereHas('user', function ($query) {
                 $query->where('app_user', '1');
@@ -166,8 +166,8 @@ class EventGuestController extends Controller
                 ->whereDate('created_at', '=', date('Y-m-d'))
                 ->count();
 
-            $eventAboutHost['total_invite'] =  count(getEventInvitedUser($event_id));
-            $eventAboutHost['invite_view_rate'] = EventInvitedUser::whereHas('user', function ($query) {
+            $eventGuest['total_invite'] =  count(getEventInvitedUser($event_id));
+            $eventGuest['invite_view_rate'] = EventInvitedUser::whereHas('user', function ($query) {
                 $query->where('app_user', '1');
             })->where(['event_id' => $eventDetail->id, 'read' => '1'])->count();
 
@@ -178,7 +178,7 @@ class EventGuestController extends Controller
                 })->where(['event_id' => $eventDetail->id, 'read' => '1'])->count() / $totalEnvitedUser * 100;
             }
 
-            $eventAboutHost['invite_view_percent'] = round($invite_view_percent, 2) . "%";
+            $eventGuest['invite_view_percent'] = round($invite_view_percent, 2) . "%";
             $today_invite_view_percent = 0;
             if ($totalEnvitedUser != 0) {
                 $today_invite_view_percent =   EventInvitedUser::whereHas('user', function ($query) {
@@ -186,13 +186,13 @@ class EventGuestController extends Controller
                 })->where(['event_id' => $eventDetail->id, 'read' => '1', 'event_view_date' => date('Y-m-d')])->count() / $totalEnvitedUser * 100;
             }
 
-            $eventAboutHost['today_invite_view_percent'] = round($today_invite_view_percent, 2)  . "%";
-            $eventAboutHost['rsvp_rate'] = $eventattending;
-            $eventAboutHost['rsvp_rate_percent'] = ($totalEnvitedUser != 0) ? $eventattending / $totalEnvitedUser * 100 . "%" : 0 . "%";
-            $eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0) ? $todayrsvprate / $totalEnvitedUser * 100 . "%" : 0 . "%";
+            $eventGuest['today_invite_view_percent'] = round($today_invite_view_percent, 2)  . "%";
+            $eventGuest['rsvp_rate'] = $eventattending;
+            $eventGuest['rsvp_rate_percent'] = ($totalEnvitedUser != 0) ? $eventattending / $totalEnvitedUser * 100 . "%" : 0 . "%";
+            $eventGuest['today_upstick'] = ($totalEnvitedUser != 0) ? $todayrsvprate / $totalEnvitedUser * 100 . "%" : 0 . "%";
             
-            return compact('eventAboutHost'); 
-        } catch (QueryException $e) {
+            return compact('eventGuest'); 
+        } catch (QueryException $e) {s
             DB::rollBack();
             return response()->json(['status' => 0, 'message' => "error"]);
         }
