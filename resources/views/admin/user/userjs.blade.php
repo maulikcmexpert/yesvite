@@ -288,7 +288,7 @@ rules: {
             type: "POST",
             data: {
                 email: function() {
-                    return $(".email").val();
+                    return $("#email").val();
                 },
                 id: function() {
                     return $("#user-id").val(); // Adjust selector to match your ID field

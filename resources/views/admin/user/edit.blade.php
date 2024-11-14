@@ -51,7 +51,7 @@
                     <div class="col-lg-3 col-md-6 mb-3">
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="text" class="form-control" name="email" placeholder="Enter Email Address"
+                            <input type="text" class="form-control" id="email" name="email" placeholder="Enter Email Address"
                                 value="{{ $getTemData->email }}">
                             <span class="text-danger">{{ $errors->first('email') }}</span>
                         </div>
