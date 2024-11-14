@@ -103,7 +103,7 @@ Route::group(['middleware' => adminAuth::Class], function () {
 
     // Route::post('/get_all_subcategory', [EditTempalteController::class, 'get_all_subcategory'])->name('get_all_subcategory');
 
-    Route::get('template/edit_template/{id}', [EditTempalteController::class, 'index'])->name('create_template.edit_template');
+    Route::get('template/edit_template/{id}/{id}', [EditTempalteController::class, 'index'])->name('create_template.edit_template');
     Route::post('/saveTextData', [EditTempalteController::class, 'saveTextData'])->name('saveTextData');
     // Route::post('/saveCanvasImage', [EditTempalteController::class, 'saveCanvasImage'])->name('saveCanvasImage');
     Route::post('/uploadImage', [EditTempalteController::class, 'uploadImage'])->name('uploadImage');
