@@ -148,6 +148,9 @@ Route::group(['middleware' => adminAuth::Class], function () {
     Route::post('/changePassword',[adminController::class,'changePassword'])->name('changePassword');
     Route::post('/verifyPassword',[adminController::class,'verifyPassword'])->name('verifyPassword');
 
+    Route::post('/editTemplateData/{id}/{category}',[TemplateController::class,'editTemplateData'])->name('editTemplateData');
+
+
 })->prefix('admin');
 
 
