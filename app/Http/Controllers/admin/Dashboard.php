@@ -125,6 +125,7 @@ class Dashboard extends Controller
                     }
                 ])
                 ->where('start_date', $eventdate)
+                ->orderBy('start_date','ASC')
                 ->paginate($perPage, ['*'], 'page', 1);
         } else {
             $totalUpcomingEvents = Event::where('start_date', '>', date('Y-m-d'))
@@ -147,6 +148,8 @@ class Dashboard extends Controller
                         })->where('rsvp_status', '1');
                     }
                 ])
+                ->orderBy('start_date','ASC')
+
                 ->paginate($perPage, ['*'], 'page', 1);
         }
 
