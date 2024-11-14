@@ -104,7 +104,7 @@ class Dashboard extends Controller
         if (isset($request->date)) {
             $eventdate = date('Y-m-d', strtotime($request->date));
 
-            $totalUpcomingEvents = Event::where('start_date', '>', date('Y-m-d'))
+            $totalUpcomingEvents = Event::where('start_date', '==', date('Y-m-d'))
                 ->with([
                     'event_invited_user' => function ($query) {
                         $query->whereHas('user', function ($q) {
@@ -128,7 +128,7 @@ class Dashboard extends Controller
                 ->orderBy('start_date','ASC')
                 ->paginate($perPage, ['*'], 'page', 1);
         } else {
-            $totalUpcomingEvents = Event::where('start_date', '>', date('Y-m-d'))
+            $totalUpcomingEvents = Event::where('start_date', '==', date('Y-m-d'))
                 ->with([
                     'event_invited_user' => function ($query) {
                         $query->whereHas('user', function ($q) {
