@@ -34,21 +34,21 @@
         },
         messages: {
             current_password: {
-                required: "Please enter your Current password",
+                required: "Please enter Current password",
                 minlength: "Please enter minimum 6 character",
                 remote: "Please enter correct Current password",
             },
             new_password: {
-                required: "Please enter your New password",
+                required: "Please enter New password",
                 minlength: "Please enter minimum 6 character",
                 maxlength: "Please enter minimum 20 character",
 
             },
             confirm_password: {
-                required: "Please confirm your New password",
+                required: "Please confirm password",
                 minlength: "Please enter minimum 6 character",
                 maxlength: "Please enter minimum 20 character",
-                equalTo: "New Password did not matched",
+                equalTo: "New Password and Confirm Password does not match",
             },
         },
     });
