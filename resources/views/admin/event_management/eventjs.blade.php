@@ -63,6 +63,9 @@
         });
 
         $(document).ready(function() {
+
+            $('select[name="events_table_length"]').val(10);
+
             // Function to validate category names
             $('#cateAdd').click(function(event) {
                 event.preventDefault();
