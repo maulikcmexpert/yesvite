@@ -153,7 +153,11 @@ class UserPostReportDataTable extends DataTable
         if (isset($request->order[0]['dir']) && $request->order[0]['dir'] == 'asc') {
             $direction = 'asc';
         }
-        return UserReportToPost::with(['events', 'users', 'event_posts'])->orderBy($column, $direction);
+        return UserReportToPost::with(['events', 'users', 'event_posts'])
+        ->whereHas('events', function ($q) {
+            $q->where('deleted_at',null);
+        })
+        ->orderBy($column, $direction);
     }
 
     /**
