@@ -1940,7 +1940,7 @@ function convertTimeToMinutes(timeStr) {
 let blurExecutedEndTime = false;
 
 $(document).on("blur", 'input[name="activity-end-time[]"]', function () {
-
+alert();
     if (!blurExecutedEndTime) {
         blurExecutedEndTime = true;
 
