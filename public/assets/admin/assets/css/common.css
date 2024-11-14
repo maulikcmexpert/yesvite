@@ -694,6 +694,7 @@ table.table tbody tr{
 .event-list-content h6{
     font-size: 15px;
     line-height: 1.6;
+    cursor: none;
 }
 .event-list-content h6 a{
     color: #000;
