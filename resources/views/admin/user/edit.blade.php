@@ -46,7 +46,7 @@
                             <span class="text-danger">{{ $errors->first('lastname') }}</span>
                         </div>
                     </div>
-
+                    <input type="hidden" id="user-id" value="{{$getTemData->id}}"/>
                     <!-- Email -->
                     <div class="col-lg-3 col-md-6 mb-3">
                         <div class="form-group">
