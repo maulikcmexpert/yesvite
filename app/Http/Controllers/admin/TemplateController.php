@@ -150,8 +150,9 @@ class TemplateController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id,string $category)
+    public function edit(Request $request)
     {
+        dd($request);
         $template_id = decrypt($id);
         $category_id= decrypt($category);
 
