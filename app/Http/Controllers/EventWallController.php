@@ -505,4 +505,20 @@ use Illuminate\Support\Facades\DB;class EventWallController extends Controller
             return response()->json(['status' => 0, 'message' => "something went wrong"]);
         }
     }
+
+    public function eventViewUser($user_id, $event_id)
+    {
+        $checkViewbyuser = EventInvitedUser::whereHas('user', function ($query) {
+            $query->where('app_user', '1');
+        })->where(['user_id' => $user_id, 'event_id' => $event_id])->first();
+        if ($checkViewbyuser != null) {
+            if ($checkViewbyuser->read == '0') {
+                $checkViewbyuser->read = '1';
+                $checkViewbyuser->event_view_date = date('Y-m-d');
+                $checkViewbyuser->save();
+                DB::commit();
+                return response()->json(['status' => 1, 'message' => "viewed invite"]);
+            }
+        }
+    }
 }
