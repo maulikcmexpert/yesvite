@@ -45,7 +45,7 @@
 
             },
             confirm_password: {
-                required: "Please confirm password",
+                required: "Please enter confirm password",
                 minlength: "Please enter minimum 6 character",
                 maxlength: "Please enter minimum 20 character",
                 equalTo: "New Password and Confirm Password does not match",
