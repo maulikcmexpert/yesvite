@@ -194,15 +194,13 @@
                                 "content"
                             ),
                         },
-                        url: "{{URL::to('admin/user/CheckExistingUserEmail')}}",
+                        url: "{{URL::to('admin/user/check_new_contactemail')}}",
                         type: "POST",
                         data: {
                             email: function() {
                                 return $(".email").val();
                             },
-                            id: function() {
-                            return $("#user-id").val(); // Adjust selector to match your ID field
-                            }
+
                         },
                     },
 
@@ -286,13 +284,15 @@ rules: {
                     "content"
                 ),
             },
-            url: "{{URL::to('admin/user/check_new_contactemail')}}",
+            url: "{{URL::to('admin/user/CheckExistingUserEmail')}}",
             type: "POST",
             data: {
                 email: function() {
                     return $(".email").val();
                 },
-
+                id: function() {
+                    return $("#user-id").val(); // Adjust selector to match your ID field
+                }
             },
         },
 
