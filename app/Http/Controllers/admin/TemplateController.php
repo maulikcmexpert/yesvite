@@ -55,11 +55,11 @@ class TemplateController extends Controller
                   
                     $cryptId = encrypt($row->id);
                     $template_delete=decrypt($cryptId);
-                    $Category_id = encrypt($row->categories->category_name);
+                    $category_id = encrypt($row->categories->category_name);
 
-                    dd($Category_id);
+                    // dd($Category_id);
 
-                    $edit_url = route('create_template.edit', $cryptId,$Category_id);
+                    $edit_url = route('create_template.edit', $cryptId,$category_id);
                     $delete_url = route('create_template.destroy', $cryptId);
                     $template_url = route('create_template.edit_template', $cryptId);
                     $actionBtn = '<div class="action-icon">
