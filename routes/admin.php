@@ -120,6 +120,8 @@ Route::group(['middleware' => adminAuth::Class], function () {
 
 
     Route::post('user/check_new_contactemail', [UserController::class, 'checkNewContactEmail']);
+    Route::post('user/CheckExistingUserEmail', [UserController::class, 'CheckExistingUserEmail']);
+
     Route::post('user/checkAdminEmail', [UserController::class, 'checkAdminEmail']);
 
 

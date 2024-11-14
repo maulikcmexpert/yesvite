@@ -194,7 +194,7 @@
                                 "content"
                             ),
                         },
-                        url: "{{URL::to('admin/user/check_new_contactemail')}}",
+                        url: "{{URL::to('admin/user/CheckExistingUserEmail')}}",
                         type: "POST",
                         data: {
                             email: function() {
