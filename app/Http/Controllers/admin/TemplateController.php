@@ -55,8 +55,11 @@ class TemplateController extends Controller
                   
                     $cryptId = encrypt($row->id);
                     $template_delete=decrypt($cryptId);
+                    $category_id = encrypt($row->categories->category_name);
 
-                    $edit_url = route('create_template.edit', $cryptId);
+                    // dd($Category_id);
+
+                    $edit_url = route('create_template.edit', $cryptId,$category_id);
                     $delete_url = route('create_template.destroy', $cryptId);
                     $template_url = route('create_template.edit_template', $cryptId);
                     $actionBtn = '<div class="action-icon">
@@ -147,9 +150,10 @@ class TemplateController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $id,string $category)
     {
         $template_id = decrypt($id);
+        $category_id= decrypt($category);
 
         // Get the template data by ID
         $getTemData = TextData::findOrFail($template_id);
@@ -161,7 +165,7 @@ class TemplateController extends Controller
 
         // Get all design and subcategory data
         $getDesignData = EventDesignCategory::all();
-        $getSubCatDetail = EventDesignSubCategory::all();
+        $getSubCatDetail = EventDesignSubCategory::where('event_design_category_id',$category_id)->get();
 
         // Pass the data to the view
         return view('admin.includes.layout', compact(
