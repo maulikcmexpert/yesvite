@@ -101,32 +101,9 @@
                     $(this).next('.text-danger').text("");
                 }
                 var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content'); // Get CSRF token
-
-
                 var category_id = $(this).val();
-
                 const formData = new FormData();
                 formData.append('category_id', category_id);
-
-                // fetch(`/get_all_subcategory/${category_id}`, {
-                //         // method: 'POST',
-                //         headers: {
-                //             // 'Content-Type': 'application/json', // Set content type to JSON
-                //             'X-CSRF-TOKEN': csrfToken // Include CSRF token
-                //         },
-                //         body: formData // Set the body to formData
-
-                //     })
-                //     .then(response => response.json())
-                //     .then(data => {
-                //         console.log('Text data saved successfully', data);
-                //         // window.location.href = "{{URL::to('/admin/create_template')}}";
-
-                //     })
-                //     .catch((error) => {
-                //         console.error('Error:', error);
-                //     });
-
                 $.ajax({
                     headers: {
                         "X-CSRF-TOKEN": $(
@@ -140,8 +117,6 @@
                         category_id: category_id
                     },
                     success: function(output) {
-
-
                         if (Array.isArray(output) && output.length === 0) {
                             $('#event_design_sub_category_id').empty();
                             $('#event_design_sub_category_id').append('<option value="">No SubCategory Found</option>');
@@ -160,11 +135,7 @@
                         reject("Error occurred");
                     }
                 });
-
-
-
             });
-
             $(document).on('change', '#event_design_sub_category_id', function() {
                 if ($(this).val() !== '') {
                     $(this).next('.text-danger').text("");
