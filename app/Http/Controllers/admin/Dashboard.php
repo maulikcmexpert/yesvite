@@ -100,7 +100,7 @@ class Dashboard extends Controller
     {
 
 
-        $perPage = 10;
+        $perPage = 30;
         if (isset($request->date)) {
             $eventdate = date('Y-m-d', strtotime($request->date));
 
