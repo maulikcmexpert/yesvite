@@ -170,7 +170,7 @@ class Dashboard extends Controller
                     <h5>' . date('D', strtotime($value->start_date)) . '</h5>
                 </div>
                 <div class="event-list-content">
-                    <h6 class=""><a class="text-black" href="">' . $value->event_name . '</a></h6>
+                    <h6 class=""><a class="text-black" href="#">' . $value->event_name . '</a></h6>
                     <ul class="d-flex justify-content-between">
                         <li>User RSVP</li>
                         <li>' . $value->total_adults + $value->total_kids . '/' . $totalInvited . '</li>
