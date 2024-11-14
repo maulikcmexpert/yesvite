@@ -192,7 +192,7 @@ class EventGuestController extends Controller
             $eventGuest['today_upstick'] = ($totalEnvitedUser != 0) ? $todayrsvprate / $totalEnvitedUser * 100 . "%" : 0 . "%";
             
             return compact('eventGuest'); 
-        } catch (QueryException $e) {s
+        } catch (QueryException $e) {
             DB::rollBack();
             return response()->json(['status' => 0, 'message' => "error"]);
         }
