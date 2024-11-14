@@ -21,7 +21,7 @@
             </div>
 
             <!-- Form for editing user -->
-            <form method="post" action="{{ route('users.update', $getTemData->id) }}" id="templateEditForm"
+            <form method="post" action="{{ route('users.update', $getTemData->id) }}" id="EditUserForm"
                 enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
