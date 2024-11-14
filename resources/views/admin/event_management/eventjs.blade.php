@@ -43,7 +43,7 @@
                 {
                     data: "action",
                     name: "action",
-                    orderable: false,
+                    orderable: true,
                     searchable: true,
                 }
             ],
