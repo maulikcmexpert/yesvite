@@ -225,6 +225,7 @@ class UserController extends Controller
 
     public function CheckExistingUserEmail(Request $request)
 {
+    dd($request);
     $email = $request->input('email');
     $id = $request->input('id');
     $existsEmail = User::where('email', $email)
