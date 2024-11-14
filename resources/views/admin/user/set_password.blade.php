@@ -26,7 +26,7 @@
 
             </div>
 
-            <form method="post" action="{{route('update_temp_password',encrypt($user_id))}}" id="updatePasswordForm">
+            <form method="post" action="{{route('update_temp_password',encrypt($user_id))}}" id="TempPasswordForm">
 
                 @csrf
 
