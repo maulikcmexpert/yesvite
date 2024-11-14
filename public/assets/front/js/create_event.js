@@ -2569,6 +2569,7 @@ $(document).on("click", "#close_createEvent", function () {
             }
 
             // eventData = {
+                eventData.event_id = $('#event_id').val();
                 eventData.event_type = event_type;
                 eventData.event_name = event_name;
                 eventData.hosted_by = hostedby;
