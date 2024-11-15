@@ -13310,14 +13310,14 @@ class ApiControllerv2 extends Controller
                             break;
                         case 'start_date':
                             if (!empty($request->start_date)) {
-                                $udpated[$k][$key] = $request->start_date;
+                                $udpated[$k][$key] = date('MM-DD-YYYY',strtotime($request->start_date));
                             } else {
                                 unset($udpated[$k]); // Remove entry if start_date is empty
                             }
                             break;
                         case 'end_date':
                             if (!empty($request->end_date)) {
-                                $udpated[$k][$key] = $request->end_date;
+                                $udpated[$k][$key] = date('MM-DD-YYYY',strtotime($request->end_date));
                             } else {
                                 unset($udpated[$k]); // Remove entry if end_date is empty
                             }
