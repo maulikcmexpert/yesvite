@@ -3281,7 +3281,6 @@ class ApiControllerv2 extends Controller
                             $subcategoryList[] = $subcategoryInfo;
                         }
                     }
-    
                     if (count($subcategoryList) > 0) {
                         $categoryInfo['subcategory'] = $subcategoryList;
                         $categoryList[] = $categoryInfo;
