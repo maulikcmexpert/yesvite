@@ -3232,22 +3232,19 @@ class ApiControllerv2 extends Controller
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
         }
         try {
-            // if (isset($input['search_category_name']) && $input['search_category_name'] != "") {
-            //     $catSearch = $input['search_category_name'];
-            //     $eventCategory = EventDesignCategory::with(['subcategory', 'textdatas'])->whereHas('textdatas', function ($ques) {   
-            // })->withCount(['subcategory', 'textdatas'])->where('category_name', 'like', "%$catSearch%")->get();
-            // } else {
-            //     // $eventCategory = EventDesignCategory::with(['subcategory', 'textdatas'])->whereHas('textdatas', function ($ques) {
-            //     // })->withCount(['subcategory', 'textdatas'])->get();
-
-            //     // $eventCategory = EventDesignCategory::with(['subcategory',])->withCount(['subcategory'])->get();
-
-            //     $eventCategory = EventDesignCategory::with(['subcategory', 'textdatas']) 
-            //                             ->whereHas('textdatas') 
-            //                             ->withCount(['subcategory', 'textdatas'])
-            //                             ->get();
-
-            // }
+            if (isset($input['search_category_name']) && $input['search_category_name'] != "") {
+                $catSearch = $input['search_category_name'];
+                $eventCategory = EventDesignCategory::with(['subcategory', 'textdatas'])
+                    ->whereHas('textdatas') 
+                    ->withCount(['subcategory', 'textdatas'])
+                    ->where('category_name', 'like', "%$catSearch%")
+                    ->get();
+            } else {
+                $eventCategory = EventDesignCategory::with(['subcategory', 'textdatas'])
+                    ->whereHas('textdatas') 
+                    ->withCount(['subcategory', 'textdatas'])
+                    ->get();
+            }
             // // dd($eventCategory);
             // $categoryList = [];
             // foreach ($eventCategory as $value) {
@@ -3267,21 +3264,6 @@ class ApiControllerv2 extends Controller
             //     }
             // }
 
-
-            if (isset($input['search_category_name']) && $input['search_category_name'] != "") {
-                $catSearch = $input['search_category_name'];
-                $eventCategory = EventDesignCategory::with(['subcategory', 'textdatas'])
-                    ->whereHas('textdatas') // Filter categories that have textdatas
-                    ->withCount(['subcategory', 'textdatas'])
-                    ->where('category_name', 'like', "%$catSearch%")
-                    ->get();
-            } else {
-                $eventCategory = EventDesignCategory::with(['subcategory', 'textdatas'])
-                    ->whereHas('textdatas') // Filter categories that have textdatas
-                    ->withCount(['subcategory', 'textdatas'])
-                    ->get();
-            }
-        
             $categoryList = [];
             foreach ($eventCategory as $value) {
                 if ($value->subcategory_count != 0 && $value->textdatas_count != 0) {
@@ -3289,17 +3271,14 @@ class ApiControllerv2 extends Controller
                     $categoryInfo['category_name'] = $value->category_name;
                     $subcategoryList = [];
         
-                    // Loop through subcategories and include only those with related textdatas
                     foreach ($value->subcategory as $subCatval) {
-                        // Check if the subcategory has related textdatas
-                        if ($subCatval->textdatas()->exists()) { // Ensure the subcategory has related textdatas
+                        if ($subCatval->textdatas()->exists()) {
                             $subcategoryInfo['id'] = $subCatval->id;
                             $subcategoryInfo['subcategory_name'] = $subCatval->subcategory_name;
                             $subcategoryList[] = $subcategoryInfo;
                         }
                     }
         
-                    // Only add the category if it has subcategories with textdatas
                     if (count($subcategoryList) > 0) {
                         $categoryInfo['subcategory'] = $subcategoryList;
                         $categoryList[] = $categoryInfo;
