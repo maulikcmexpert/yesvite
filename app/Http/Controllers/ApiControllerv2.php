@@ -3248,7 +3248,7 @@ class ApiControllerv2 extends Controller
                                         ->get();
 
             }
-            dd($eventCategory);
+            // dd($eventCategory);
             $categoryList = [];
             foreach ($eventCategory as $value) {
                 if ($value->subcategory_count != 0 && $value->textdatas_count != 0) {
