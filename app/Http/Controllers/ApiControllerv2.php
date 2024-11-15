@@ -3248,7 +3248,7 @@ class ApiControllerv2 extends Controller
                                         ->get();
 
             }
-            // dd($eventCategory);
+            dd($eventCategory);
             $categoryList = [];
             foreach ($eventCategory as $value) {
                 if ($value->subcategory_count != 0 && $value->textdatas_count != 0) {
@@ -3256,9 +3256,11 @@ class ApiControllerv2 extends Controller
                     $categoryInfo['category_name'] = $value->category_name;
                     $subcategoryList = [];
                     foreach ($value->subcategory as $subCatval) {
-                        $subcategoryInfo['id'] = $subCatval->id;
-                        $subcategoryInfo['subcategory_name'] = $subCatval->subcategory_name;
-                        $subcategoryList[] = $subcategoryInfo;
+                        if($subCatVal!=""){
+                            $subcategoryInfo['id'] = $subCatval->id;
+                            $subcategoryInfo['subcategory_name'] = $subCatval->subcategory_name;
+                            $subcategoryList[] = $subcategoryInfo;
+                        }
                     }
                     $categoryInfo['subcategory'] =  $subcategoryList;
                     $categoryList[] =  $categoryInfo;
