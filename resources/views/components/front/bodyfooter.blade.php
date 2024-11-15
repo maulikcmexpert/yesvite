@@ -81,8 +81,8 @@
           <div class="footer-bottom d-flex justify-content-between flex-wrap">
               <ul class="footer-social-link">
                   <li>
-                      {{-- <a href="{{ route('event.event_lists') }}"> --}}
-                        <a href="#">
+                      <a href="{{ route('event.event_detail', 3775 ) }}">
+                        {{-- <a href="#"> --}}
 
                           <span>
                               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
