@@ -135,7 +135,7 @@ class ApiControllerv2 extends Controller
 
         $this->user = Auth::guard('api')->user();
 
-        $this->perPage = 5;
+        $this->perPage = 3;
         if ($this->user != null) {
 
             $this->upcomingEventCount = upcomingEventsCount($this->user->id);
