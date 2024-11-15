@@ -3226,32 +3226,21 @@ class ApiControllerv2 extends Controller
     public function getDesignOptionDataList(Request $request)
     {
         $user  = Auth::guard('api')->user();
-
         $rawData = $request->getContent();
-
         $input = json_decode($rawData, true);
         if ($input == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
         }
-
-
         try {
-
             if (isset($input['search_category_name']) && $input['search_category_name'] != "") {
                 $catSearch = $input['search_category_name'];
-
-                $eventCategory = EventDesignCategory::with(['subcategory', 'textdatas'])->whereHas('textdatas', function ($ques) {
-                
-                })->withCount(['subcategory', 'textdatas'])->where('category_name', 'like', "%$catSearch%")->get();
+                $eventCategory = EventDesignCategory::with(['subcategory', 'textdatas'])->whereHas('textdatas', function ($ques) {   
+            })->withCount(['subcategory', 'textdatas'])->where('category_name', 'like', "%$catSearch%")->get();
             } else {
-
-
                 $eventCategory = EventDesignCategory::with(['subcategory', 'textdatas'])->whereHas('textdatas', function ($ques) {
-                
                 })->withCount(['subcategory', 'textdatas'])->get();
             }
-
-            // dd($eventCategory);
+            dd($eventCategory);
             $categoryList = [];
             foreach ($eventCategory as $value) {
                 if ($value->subcategory_count != 0 && $value->textdatas_count != 0) {
@@ -3259,7 +3248,6 @@ class ApiControllerv2 extends Controller
                     $categoryInfo['category_name'] = $value->category_name;
                     $subcategoryList = [];
                     foreach ($value->subcategory as $subCatval) {
-
                         $subcategoryInfo['id'] = $subCatval->id;
                         $subcategoryInfo['subcategory_name'] = $subCatval->subcategory_name;
                         $subcategoryList[] = $subcategoryInfo;
