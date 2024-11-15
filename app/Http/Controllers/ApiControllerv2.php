@@ -3267,7 +3267,6 @@ class ApiControllerv2 extends Controller
             //         $categoryList[] =  $categoryInfo;
             //     }
             // }
-
             $categoryList = [];
             foreach ($eventCategory as $value) {
                 if ($value->subcategory_count != 0 && $value->textdatas_count != 0) {
@@ -3289,7 +3288,6 @@ class ApiControllerv2 extends Controller
             }
             return response()->json(['status' => 1, 'message' => "Category list", "data" => $categoryList]);
         } catch (QueryException $e) {
-
             return response()->json(['status' => 0, 'message' => 'db error']);
         } catch (Exception  $e) {
             return response()->json(['status' => 0, 'message' => 'something went wrong']);
