@@ -24,6 +24,8 @@ class EventListController extends Controller
     public function index()
     {
                 $user  = Auth::guard('web')->user();
+                
+                // $pages = ($page != "") ? $page : 1;
 
                 //upcoming_event
                 $usercreatedAllEventList = Event::query();
@@ -44,6 +46,15 @@ class EventListController extends Controller
                 $allEvent = $usercreatedAllEventList->union($invitedEventsList)->get();
                 $totalCounts=0;
                 $totalCounts += count($allEvent);
+
+                // $totalCounts += count($allEvent);
+                // // Calculate offset based on current page and perPage
+                // $offset = ($pages - 1) * $this->perPage;
+
+                // $offset=$page*$this->perPage
+
+                // $paginatedEvents =  collect($allEvent)->sortBy('start_date')->forPage($page, $this->perPage);
+                // $paginatedEvents =  collect($allEvent)->sortBy('start_date');
                 if (count($allEvent) != 0) {
 
                     foreach ($allEvent as $value) {

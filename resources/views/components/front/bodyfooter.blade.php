@@ -81,7 +81,7 @@
           <div class="footer-bottom d-flex justify-content-between flex-wrap">
               <ul class="footer-social-link">
                   <li>
-                      <a href="{{ route('event.event_drafts') }}">
+                      <a href="{{ route('event.event_lists') }}">
                         {{-- <a href="#"> --}}
 
                           <span>

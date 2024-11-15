@@ -312,7 +312,6 @@ class ApiControllerv2 extends Controller
             $user->password = Hash::make($input['password']);
             $user->password_updated_date = date('Y-m-d');
             if ($user->save()) {
-
                 return response()->json(['status' => 1, 'message' => 'Password changed successful']);
             } else {
                 return response()->json(['status' => 0, 'message' => 'Password not updated please try again']);
