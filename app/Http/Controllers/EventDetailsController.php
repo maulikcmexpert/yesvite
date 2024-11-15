@@ -18,8 +18,6 @@ use App\Models\{
     EventUserStory,
     UserSeenStory,
     EventPostPoll,
-
-    
 };
 
 use Carbon\Carbon;
@@ -50,7 +48,7 @@ class EventDetailsController extends Controller
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
         }
         try {
-             //event_wall
+             //event_wall_data
             $page = (isset($input['page'])) ? $input['page'] : "1";
             $this->eventViewUser($user->id, $event_id);
             $currentDateTime = Carbon::now();
@@ -501,9 +499,12 @@ class EventDetailsController extends Controller
             Storage::append($filename, $commentnumber);
             
             // return compact('rsvp_status','total_page_of_stories','total_page_of_eventPosts','wallData');
-            //event_wall//
 
-            //event_about
+            //event_wall_data//
+
+
+
+            //event_about_data
             $eventDetail = Event::with(['user', 'event_image', 'event_schedule', 'event_settings', 'event_invited_user' => function ($query) {
                 $query->where('is_co_host', '1')->with('user');
             }])->where('id', $event_id)->first();
@@ -696,9 +697,9 @@ class EventDetailsController extends Controller
             $eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0) ? $todayrsvprate / $totalEnvitedUser * 100 . "%" : 0 . "%";
             $eventInfo['host_view'] = $eventAboutHost;
 
-            //event_about//
+            //event_about_data//
 
-            //event_guest
+            //event_guest_data
             $eventDetail = Event::with(['user', 'event_settings', 'event_image', 'event_schedule' => function ($query) {}])->where('id', $event_id)->first();
             $eventattending = EventInvitedUser::whereHas('user', function ($query) {
                 $query->where('app_user', '1');
@@ -853,9 +854,9 @@ class EventDetailsController extends Controller
             $eventGuest['today_upstick'] = ($totalEnvitedUser != 0) ? $todayrsvprate / $totalEnvitedUser * 100 . "%" : 0 . "%";
             
             // return compact('eventGuest'); 
-            //event_guest//
+            //event_guest_data//
 
-            //event_photo
+            //event_photo_data
                  // $selectedFilters = $request->input('filters');
                  $getPhotoList = EventPost::query();
                  $getPhotoList->with(['user', 'event_post_reaction', 'post_image'])->withCount(['event_post_reaction', 'post_image', 'event_post_comment' => function ($query) {
@@ -951,9 +952,9 @@ class EventDetailsController extends Controller
                 //      // return response()->json(['status' => 0, 'data' => $postPhotoList, 'message' => "Photo not found"]);
                 //  }
 
-                 //event_photo//
+                 //event_photo_data//
 
-                 //event_potluck
+                 //event_potluck_data
                  $eventpotluckData =  EventPotluckCategory::with(['users', 'event_potluck_category_item' => function ($query) {
                     $query->with(['users', 'user_potluck_items' => function ($subquery) {
                         $subquery->with('users')->sum('quantity');
@@ -1032,7 +1033,7 @@ class EventDetailsController extends Controller
                     $potluckDetail="";
                     // return response()->json(['status' => 0, 'message' => "No data in potluck"]);
                 }
-                //event_potluck//
+                //event_potluck_data//
 
                 return compact('wallData','postPhotoList','eventInfo','eventGuest','potluckDetail');
             // return response()->json(['status' => 1, 'rsvp_status' => $rsvp_status, 'total_page_of_stories' => $total_page_of_stories, 'total_page_of_eventPosts' => $total_page_of_eventPosts, 'data' => $wallData, 'message' => "Event wall data", 'subscription_plan_name' => $eventCreator->subscription_plan_name]);

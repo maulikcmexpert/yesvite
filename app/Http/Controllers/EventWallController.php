@@ -45,7 +45,8 @@ use Illuminate\Support\Facades\DB;class EventWallController extends Controller
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
         }
         try {
-            $page = (isset($input['page'])) ? $input['page'] : "1";
+            $page = "1";
+            // $page = (isset($input['page'])) ? $input['page'] : "1";
             $this->eventViewUser($user->id, $event_id);
             $currentDateTime = Carbon::now();
             $wallData = [];

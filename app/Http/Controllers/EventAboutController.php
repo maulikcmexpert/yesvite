@@ -19,6 +19,8 @@ use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as Exception;
 use Throwable;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 
 class EventAboutController extends Controller
@@ -232,7 +234,6 @@ class EventAboutController extends Controller
 
             return response()->json(['status' => 0, 'message' => "db error"]);
         } catch (\Exception $e) {
-            dd($e);
             return response()->json(['status' => 0, 'message' => 'something went wrong']);
         }
     }
