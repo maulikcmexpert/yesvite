@@ -3235,13 +3235,17 @@ class ApiControllerv2 extends Controller
             if (isset($input['search_category_name']) && $input['search_category_name'] != "") {
                 $catSearch = $input['search_category_name'];
                 $eventCategory = EventDesignCategory::with(['subcategory', 'textdatas'])
-                    ->whereHas('textdatas') 
+                    ->whereHas('textdatas', function ($ques){
+                        $ques->whereNotNull('static_information');
+                    }) 
                     ->withCount(['subcategory', 'textdatas'])
                     ->where('category_name', 'like', "%$catSearch%")
                     ->get();
             } else {
                 $eventCategory = EventDesignCategory::with(['subcategory', 'textdatas'])
-                    ->whereHas('textdatas') 
+                    ->whereHas('textdatas', function ($ques){
+                        $ques->whereNotNull('static_information');
+                    }) 
                     ->withCount(['subcategory', 'textdatas'])
                     ->get();
             }
