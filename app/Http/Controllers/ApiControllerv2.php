@@ -3270,7 +3270,6 @@ class ApiControllerv2 extends Controller
                     $categoryInfo['id'] = $value->id;
                     $categoryInfo['category_name'] = $value->category_name;
                     $subcategoryList = [];
-        
                     foreach ($value->subcategory as $subCatval) {
                         if ($subCatval->textdatas()->exists()) {
                             $subcategoryInfo['id'] = $subCatval->id;
@@ -3278,7 +3277,7 @@ class ApiControllerv2 extends Controller
                             $subcategoryList[] = $subcategoryInfo;
                         }
                     }
-        
+    
                     if (count($subcategoryList) > 0) {
                         $categoryInfo['subcategory'] = $subcategoryList;
                         $categoryList[] = $categoryInfo;
