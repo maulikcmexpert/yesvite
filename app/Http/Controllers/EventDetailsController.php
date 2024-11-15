@@ -941,7 +941,7 @@ class EventDetailsController extends Controller
                      $postPhotoList[] = $postPhotoDetail;
                  }
                  if (empty($postPhotoList)) {
-                    $postPhotoList="";
+                    $postPhotoList=[];
                  }
                 //  if (!empty($postPhotoList)) {
                 //     //  return compact('postPhotoList');
