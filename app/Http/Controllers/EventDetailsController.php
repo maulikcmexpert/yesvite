@@ -852,7 +852,6 @@ class EventDetailsController extends Controller
             $eventGuest['rsvp_rate'] = $eventattending;
             $eventGuest['rsvp_rate_percent'] = ($totalEnvitedUser != 0) ? $eventattending / $totalEnvitedUser * 100 . "%" : 0 . "%";
             $eventGuest['today_upstick'] = ($totalEnvitedUser != 0) ? $todayrsvprate / $totalEnvitedUser * 100 . "%" : 0 . "%";
-            
             // return compact('eventGuest'); 
             //event_guest_data//
 
