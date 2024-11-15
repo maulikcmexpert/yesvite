@@ -3240,9 +3240,14 @@ class ApiControllerv2 extends Controller
                 // $eventCategory = EventDesignCategory::with(['subcategory', 'textdatas'])->whereHas('textdatas', function ($ques) {
                 // })->withCount(['subcategory', 'textdatas'])->get();
 
-                $eventCategory = EventDesignCategory::with(['subcategory',])->withCount(['subcategory'])->get();
+                // $eventCategory = EventDesignCategory::with(['subcategory',])->withCount(['subcategory'])->get();
+
+                $eventCategory = EventDesignCategory::with(['subcategory', 'textdatas']) // Eager load subcategory and textdatas
+                                        ->whereHas('textdatas') // Only include categories that have related textdatas
+                                        ->get();
+
             }
-            dd($eventCategory);
+            // dd($eventCategory);
             $categoryList = [];
             foreach ($eventCategory as $value) {
                 if ($value->subcategory_count != 0 && $value->textdatas_count != 0) {
