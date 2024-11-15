@@ -544,7 +544,6 @@ use Illuminate\Support\Facades\DB;class EventWallController extends Controller
             if ($request->post_type == '1') {
                 if (!empty($request->post_image)) {
                     $postimages = $request->post_image;
-
                     foreach ($postimages as $key => $postImgValue) {
                         $postImage = $postImgValue;
                         $imageName = time() . $key . '_' . $postImage->getClientOriginalName();
