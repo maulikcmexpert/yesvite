@@ -6542,15 +6542,16 @@ class ApiControllerv2 extends Controller
 
             if ($acceptReject != null) {
 
-                
-                if ($input['status'] == '2') {
-                    $acceptReject->accept_as_co_host = '0';
-                //     $acceptReject->is_co_host = '1';
-                }
                 if($input['status'] == '1'){
                     $acceptReject->accept_as_co_host = '1';
                 }
                 $acceptReject->save();
+                
+                if ($input['status'] == '2') {
+                    EventInvitedUser::where(['user_id' => $user->id, 'event_id' => $input['event_id']])->delete();
+                    // $acceptReject->accept_as_co_host = '0';
+                //     $acceptReject->is_co_host = '1';
+                }
 
                 $notificationParam = [
 
