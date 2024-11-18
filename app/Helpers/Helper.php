@@ -403,9 +403,9 @@ function sendNotification($notificationType, $postData)
 
         $getEventOwner = Event::with('event_settings')->where('id', $postData['event_id'])->first();
         if ($postData['status'] == '1') {
-            $notification_message = $senderData->firstname . ' '  . $senderData->lastname . ' $accepted your invitation to co-host';
+            $notification_message = $senderData->firstname . ' '  . $senderData->lastname . ' accepted your invitation to co-host';
         } elseif ($postData['status'] == '2') {
-            $notification_message = $senderData->firstname . ' '  . $senderData->lastname . ' $rejected your invitation to co-host';
+            $notification_message = $senderData->firstname . ' '  . $senderData->lastname . ' rejected your invitation to co-host';
         }
         $notification = new Notification;
         $notification->event_id = $postData['event_id'];
