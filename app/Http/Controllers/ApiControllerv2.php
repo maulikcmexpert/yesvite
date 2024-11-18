@@ -6542,11 +6542,14 @@ class ApiControllerv2 extends Controller
 
             if ($acceptReject != null) {
 
-                $acceptReject->accept_as_co_host = $input['status'];
-
-                // if ($input['status'] == '2') {
+                
+                if ($input['status'] == '2') {
+                    $acceptReject->accept_as_co_host = '0';
                 //     $acceptReject->is_co_host = '1';
-                // }
+                }
+                if($input['status'] == '1'){
+                    $acceptReject->accept_as_co_host = '1';
+                }
                 $acceptReject->save();
 
                 $notificationParam = [
