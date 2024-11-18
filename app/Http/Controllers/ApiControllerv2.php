@@ -6548,7 +6548,7 @@ class ApiControllerv2 extends Controller
                 
                 if ($input['status'] == '2') {
                     // EventInvitedUser::where(['user_id' => $user->id, 'event_id' => $input['event_id']])->delete();
-                    $acceptReject->accept_as_co_host = '0';
+                    $acceptReject->accept_as_co_host = '2';
                     $acceptReject->is_co_host = '1';
                 }
                 $acceptReject->save();
