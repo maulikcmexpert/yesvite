@@ -225,10 +225,15 @@ function getYesviteContactListPage($id, $perPage, $page, $search_name)
 {
     $yesviteRegisteredUser = User::select('id', 'firstname', 'profile', 'lastname', 'email', 'country_code', 'phone_number', 'app_user', 'prefer_by', 'email_verified_at', 'parent_user_phone_contact', 'visible', 'message_privacy')
         ->where('id', '!=', $id)
-        ->where('is_user_phone_contact', '0')
+        ->where(function ($query) use ($id) {
+            $query->where('is_user_phone_contact', '=', '0')
+                  ->orWhere(function ($query) use ($id) {
+                      $query->where('is_user_phone_contact', '=', '1')
+                            ->where('user_parent_id', '=', $id);
+                  });
+        })
         ->where(function ($query) use($id) {
             $query->whereNull('email_verified_at')
-                // ->where('user_parent_id',$id)
                 ->where('app_user', '!=', '1')
                 ->orWhereNotNull('email_verified_at');
         })
