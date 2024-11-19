@@ -656,7 +656,7 @@
             <div class="activity-schedule-wrp">
                 <div class="activity-schedule-head">
                     @php
-                        $date = Carbon::parse($eventDetail['start_date']);
+                        $date = Carbon::parse($currentDate);
                         $schedule_start_time = Carbon::parse($eventDetail['rsvp_start_time']);
                         $i++;
                     @endphp
