@@ -13332,7 +13332,7 @@ class ApiControllerv2 extends Controller
                     }
                 }
             }
-            dd($udpated);
+            // dd($udpated);
             $udpated = array_values($udpated);
 
 
