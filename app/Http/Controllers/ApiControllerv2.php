@@ -8365,7 +8365,7 @@ class ApiControllerv2 extends Controller
             $checkUserIsReaction = EventPostReaction::where(['event_id' => $eventDetails->event_id, 'event_post_id' => $input['event_post_id'], 'user_id' => $user->id])->first();
             $ischeckEventOwner = Event::where(['id' => $eventDetails->event_id, 'user_id' => $eventDetails->user->id])->first();
 
-            $count_kids_adult = EventInvitedUser::where(['event_id' => $eventDetails->event_id, 'user_id' => $eventDetails->user->id])
+            $count_kids_adult = EventInvitedUser::where(['event_id' => $eventDetails->event_id, 'user_id' => $user->id])
                         ->select('kids', 'adults', 'event_id', 'rsvp_status', 'user_id')
                         ->first();
 
@@ -8489,11 +8489,20 @@ class ApiControllerv2 extends Controller
             $postsDetail['is_reaction'] = ($checkUserIsReaction != NULL) ? '1' : '0';
 
             $postsDetail['self_reaction'] = ($checkUserIsReaction != NULL) ? $checkUserIsReaction->reaction : "";
-            
-            $checkUserRsvp = checkUserAttendOrNot($eventDetails->event_id, $eventDetails->user->id);
-            $postsDetail['rsvp_status'] = (string) $checkUserRsvp;
-            $postsDetail['kids'] = (int) (isset($count_kids_adult->kids) && $count_kids_adult->kids != null)?$count_kids_adult->kids:0;
-            $postsDetail['adults'] = (int) (isset($count_kids_adult->adults) && $count_kids_adult->adults != null)?$count_kids_adult->adults:0;
+            $rsvp_status = 0;
+            $kids = 0;
+            $adults = 0;
+            if($eventDetails->post_message != null){
+                $rsvp = json_decode($eventDetails->post_message);
+                if($rsvp){
+                    $rsvp_status = (isset($rsvp['status']) && $rsvp['status'] != '')?$rsvp['status']:'0'; 
+                    $kids = (isset($rsvp['kids']) && $rsvp['kids'] != '')?$rsvp['kids']:0; 
+                    $adults = (isset($rsvp['adults']) && $rsvp['adults'] != '')?$rsvp['adults']:0; 
+                }
+            }
+            $postsDetail['rsvp_status'] = (string) $rsvp_status;
+            $postsDetail['kids'] = (int) $kids;
+            $postsDetail['adults'] = (int) $adults;
 
             $postCommentList = [];
 
