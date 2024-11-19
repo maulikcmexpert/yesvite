@@ -187,12 +187,6 @@ function getYesviteContactList($id)
     $yesviteRegisteredUser = User::select('id', 'firstname', 'profile', 'lastname', 'email', 'country_code', 'phone_number', 'app_user', 'prefer_by', 'email_verified_at', 'parent_user_phone_contact', 'visible', 'message_privacy')
         ->where('id', '!=', $id)
         ->where(['is_user_phone_contact' => '0'])
-        ->where(function ($query) use($id) {
-            $query->whereNull('email_verified_at')
-                ->where('app_user', '!=', '1')
-                ->orWhereNotNull('email_verified_at')
-                ->where('user_parent_id',$id);
-        })
         ->orderBy('firstname')
         ->get();
     $yesviteUser = [];
@@ -229,11 +223,16 @@ function getYesviteContactListPage($id, $perPage, $page, $search_name)
         ->where(function ($query) use($id) {
             $query->whereNull('email_verified_at')
                 ->where('app_user', '!=', '1')
-                ->orWhereNotNull('email_verified_at')
-                ->where('user_parent_id',$id);
+                ->orWhereNotNull('email_verified_at');
         })
-        ->where(DB::raw("CONCAT(firstname, ' ', lastname)"), 'like', "%{$search_name}%")
-        ->orderBy('firstname')
+        ->where(DB::raw("CONCAT(firstname, ' ', lastname)"), 'like', "%{$search_name}%");
+        $yesviteRegisteredUser->where(function ($query) use ($id) {
+            // Check for the condition where email_verified_at is NULL and app_user is not '1'
+            $query->whereNull('email_verified_at')
+                  ->where('app_user', '!=', '1')
+                  ->where('user_parent_id', $id); // Add condition to check user_parent_id
+        });
+        $yesviteRegisteredUser = $yesviteRegisteredUser->orderBy('firstname')
         ->paginate($perPage, ['*'], 'page', $page);
 
     $yesviteUser = [];
