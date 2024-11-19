@@ -8495,9 +8495,9 @@ class ApiControllerv2 extends Controller
             if($eventDetails->post_message != null){
                 $rsvp = json_decode($eventDetails->post_message);
                 if($rsvp){
-                    $rsvp_status = (isset($rsvp['status']) && $rsvp['status'] != '')?$rsvp['status']:'0'; 
-                    $kids = (isset($rsvp['kids']) && $rsvp['kids'] != '')?$rsvp['kids']:0; 
-                    $adults = (isset($rsvp['adults']) && $rsvp['adults'] != '')?$rsvp['adults']:0; 
+                    $rsvp_status = (isset($rsvp->status) && $rsvp->status != '')?$rsvp->status:'0'; 
+                    $kids = (isset($rsvp->kids) && $rsvp->kids != '')?$rsvp->kids:0; 
+                    $adults = (isset($rsvp->adults) && $rsvp->adults != '')?$rsvp->adults:0; 
                 }
             }
             $postsDetail['rsvp_status'] = (string) $rsvp_status;
