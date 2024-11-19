@@ -116,7 +116,7 @@ class ApiAuthController extends Controller
             'firstname' => 'required',
             'lastname' => 'required',
             'email' => 'required|email|unique:users',
-            'password' => 'required|min:8',
+            'password' => 'required|min:6',
             'account_type' => 'required|in:0,1',
             'company_name' => 'present'
         ]);
@@ -223,7 +223,7 @@ class ApiAuthController extends Controller
 
         $validator = Validator::make($input, [
             'email' => 'required|email',
-            'password' => 'required|min:8',
+            'password' => 'required|min:6',
             'device_id' => 'required',
             // 'device_token' => 'required',
             'model' => 'required'
@@ -654,7 +654,7 @@ class ApiAuthController extends Controller
 
         $validator = Validator::make($input, [
             'email' => ['required', 'email', 'exists:users,email'],
-            'password' => 'required|min:8',
+            'password' => 'required|min:6',
         ]);
         if ($validator->fails()) {
             return response()->json(
