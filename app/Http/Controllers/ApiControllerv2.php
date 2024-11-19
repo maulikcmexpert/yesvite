@@ -8365,6 +8365,10 @@ class ApiControllerv2 extends Controller
             $checkUserIsReaction = EventPostReaction::where(['event_id' => $eventDetails->event_id, 'event_post_id' => $input['event_post_id'], 'user_id' => $user->id])->first();
             $ischeckEventOwner = Event::where(['id' => $eventDetails->event_id, 'user_id' => $eventDetails->user->id])->first();
 
+            $count_kids_adult = EventInvitedUser::where(['event_id' => $eventDetails->event_id, 'user_id' => $user->id])
+                        ->select('kids', 'adults', 'event_id', 'rsvp_status', 'user_id')
+                        ->first();
+
             $postsDetail['id'] =  $eventDetails->id;
 
             $postsDetail['user_id'] =  $eventDetails->user->id;
@@ -8485,9 +8489,11 @@ class ApiControllerv2 extends Controller
             $postsDetail['is_reaction'] = ($checkUserIsReaction != NULL) ? '1' : '0';
 
             $postsDetail['self_reaction'] = ($checkUserIsReaction != NULL) ? $checkUserIsReaction->reaction : "";
-
-
-
+            
+            $checkUserRsvp = checkUserAttendOrNot($eventDetails->event_id, $user->id);
+            $postsDetail['rsvp_status'] = (string) $checkUserRsvp;
+            $postsDetail['kids'] = (int) $count_kids_adult->kids;
+            $postsDetail['adults'] = (int) $count_kids_adult->adults;
 
             $postCommentList = [];
 
