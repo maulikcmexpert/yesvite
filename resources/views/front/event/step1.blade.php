@@ -649,14 +649,14 @@
             @php
 
                 
-                $currentDate =  $start_date; 
+                $currentDate = $eventDetail['start_date']; 
                 $i = 0;
             @endphp
-            @while (strtotime($currentDate) <= strtotime($end_date))
+            @while (strtotime($currentDate) <= strtotime($eventDetail['end_date']))
             <div class="activity-schedule-wrp">
                 <div class="activity-schedule-head">
                     @php
-                        $date = Carbon::parse($start_date);
+                        $date = Carbon::parse($eventDetail['start_date']);
                         $schedule_start_time = Carbon::parse($eventDetail['rsvp_start_time']);
                         $i++;
                     @endphp
