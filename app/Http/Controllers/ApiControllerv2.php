@@ -6688,7 +6688,7 @@ class ApiControllerv2 extends Controller
                     $creatEventPost->post_message = json_encode($postMessage);
                     $creatEventPost->post_privacy = "1";
                     $creatEventPost->post_type = "4";
-                    $creatEventPost->commenting_on_off = "0";
+                    $creatEventPost->commenting_on_off = "1";
                     $creatEventPost->is_in_photo_moudle = "0";
                     $creatEventPost->save();
                     // dd($creatEventPost);
