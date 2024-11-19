@@ -13273,8 +13273,7 @@ class ApiControllerv2 extends Controller
             $udpated = $resp['textElements'];
             foreach ($udpated as $k => $value) {
                 if(isset($value['fontWeight'])){
-                    dd($udpated[$k]['fontWeight']);
-                    
+                    $udpated[$k]['fontWeight'] = ($value['fontWeight']!='')?$value['fontWeight']:'';
                 }
                 foreach ($value as $key => $val) {
                     $val = strtolower($val);
