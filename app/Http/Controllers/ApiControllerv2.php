@@ -2985,9 +2985,10 @@ class ApiControllerv2 extends Controller
             $user  = Auth::guard('api')->user();
             $groupList = getGroupList($user->id);
             $yesvitecontactList = getYesviteContactListPage($user->id, "10", $page, $search_name);
-            $yesviteRegisteredUser = User::where('id', '!=', $user->id)->where('is_user_phone_contact', '0')->where('user_parent_id',$user->id)->where(function ($query) {
+            $yesviteRegisteredUser = User::where('id', '!=', $user->id)->where('is_user_phone_contact', '0')->where(function ($query) use($user) {
                 $query->whereNull('email_verified_at')
                     ->where('app_user', '!=', '1')
+                    ->where('user_parent_id',$user->id)
                     ->orWhereNotNull('email_verified_at');
             })
                 ->orderBy('firstname', 'ASC')
