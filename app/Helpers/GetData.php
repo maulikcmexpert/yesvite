@@ -233,12 +233,10 @@ function getYesviteContactListPage($id, $perPage, $page, $search_name)
         // })
         ->where(function ($query) use ($id) {
             $query->where('is_user_phone_contact', '0')
-                //   ->where(function ($innerQuery) {
-                //       $innerQuery->whereNull('email_verified_at')
-                //                  ->where('app_user', '!=', '1')
-                //                  ->orWhereNotNull('email_verified_at');
-                //   })
-                  ->where(function ($query) use ($id) {
+                  ->where(function ($innerQuery) {
+                      $innerQuery->whereNotNull('email_verified_at');
+                  })
+                  ->orWhere(function ($query) use ($id) {
                       $query->where('is_user_phone_contact', '1')
                             ->where('user_parent_id', $id);
                   });
