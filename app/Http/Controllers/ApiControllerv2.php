@@ -2987,7 +2987,6 @@ class ApiControllerv2 extends Controller
             $yesvitecontactList = getYesviteContactListPage($user->id, "10", $page, $search_name);
             $yesviteRegisteredUser = User::where('id', '!=', $user->id)->where('is_user_phone_contact', '0')->where(function ($query) use($user) {
                 $query->whereNull('email_verified_at')
-                    // ->where('user_parent_id',$user->id)
                     ->where('app_user', '!=', '1')
                     ->orWhereNotNull('email_verified_at');
             })
