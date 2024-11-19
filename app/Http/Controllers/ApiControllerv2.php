@@ -293,8 +293,8 @@ class ApiControllerv2 extends Controller
         }
 
         $validator = Validator::make($input, [
-            'old_password' => ['required', 'min:8'],
-            'password' => ['required', 'min:8'],
+            'old_password' => ['required', 'min:6'],
+            'password' => ['required', 'min:6'],
         ]);
         if ($validator->fails()) {
             return response()->json(
