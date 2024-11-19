@@ -8490,7 +8490,7 @@ class ApiControllerv2 extends Controller
 
             $postsDetail['self_reaction'] = ($checkUserIsReaction != NULL) ? $checkUserIsReaction->reaction : "";
             
-            $checkUserRsvp = checkUserAttendOrNot($eventDetails->event_id, $user->id);
+            $checkUserRsvp = checkUserAttendOrNot($eventDetails->event_id, $eventDetails->user->id);
             $postsDetail['rsvp_status'] = (string) $checkUserRsvp;
             $postsDetail['kids'] = (int) (isset($count_kids_adult->kids) && $count_kids_adult->kids != null)?$count_kids_adult->kids:0;
             $postsDetail['adults'] = (int) (isset($count_kids_adult->adults) && $count_kids_adult->adults != null)?$count_kids_adult->adults:0;
