@@ -188,6 +188,7 @@ function getYesviteContactList($id)
         ->where('id', '!=', $id)
         ->where(function ($query) use ($id) {
             $query->where('is_user_phone_contact', '=', '0')
+                    ->where('app_user', '!=', '1')
                   ->orWhere(function ($query) use ($id) {
                       $query->where('is_user_phone_contact', '=', '1')
                             ->where('user_parent_id', '=', $id);
