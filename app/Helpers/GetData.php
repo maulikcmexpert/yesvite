@@ -219,10 +219,10 @@ function getYesviteContactListPage($id, $perPage, $page, $search_name)
         ->where('is_user_phone_contact', '0')
         ->where(function ($query) use($id) {
             $query->whereNotNull('email_verified_at')
-                ->where('app_user', '!=', '1')
+                ->where('app_user', '!=', '1');
                 // ->orWhereNotNull('email_verified_at')
-                ->orWhere('user_parent_id',$id);
-        })
+            })
+            ->orWhere('user_parent_id',$id)
         ->where(DB::raw("CONCAT(firstname, ' ', lastname)"), 'like', "%{$search_name}%")
         ->orderBy('firstname')
         ->paginate($perPage, ['*'], 'page', $page);
