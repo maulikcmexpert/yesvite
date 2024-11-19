@@ -13274,6 +13274,9 @@ class ApiControllerv2 extends Controller
             foreach ($udpated as $k => $value) {
       
                 $udpated[$k]['fontWeight'] = (isset($value['fontWeight'])&&$value['fontWeight']!='')?$value['fontWeight']:'';
+                $udpated[$k]['fontFamily'] = (isset($value['fontFamily'])&&$value['fontFamily']!='')?$value['fontFamily']:'';
+                $udpated[$k]['textAlign'] = (isset($value['textAlign'])&&$value['textAlign']!='')?$value['textAlign']:'';
+                $udpated[$k]['fontStyle'] = (isset($value['fontStyle'])&&$value['fontStyle']!='')?$value['fontStyle']:'';
                    
                 foreach ($value as $key => $val) {
                     $val = strtolower($val);
