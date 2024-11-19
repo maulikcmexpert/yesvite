@@ -8492,8 +8492,8 @@ class ApiControllerv2 extends Controller
             
             $checkUserRsvp = checkUserAttendOrNot($eventDetails->event_id, $user->id);
             $postsDetail['rsvp_status'] = (string) $checkUserRsvp;
-            $postsDetail['kids'] = (int) $count_kids_adult->kids;
-            $postsDetail['adults'] = (int) $count_kids_adult->adults;
+            $postsDetail['kids'] = (int) (isset($count_kids_adult->kids) && $count_kids_adult->kids != null)?$count_kids_adult->kids:0;
+            $postsDetail['adults'] = (int) (isset($count_kids_adult->adults) && $count_kids_adult->adults != null)?$count_kids_adult->adults:0;
 
             $postCommentList = [];
 
