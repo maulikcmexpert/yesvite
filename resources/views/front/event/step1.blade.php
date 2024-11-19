@@ -663,11 +663,11 @@
                     <h3>{{ $date->format('l - F j, Y') }}</h3>
                 </div>
                 <div class="activity-schedule-inner new_event_detail_form">
-                        @if ($start_date == $currentDate)
+                        @if ($eventDetail['start_date'] == $currentDate)
                             <h4>Event Start</h4>
                         @endif
                         <div class="row">
-                            @if ($start_date == $currentDate)
+                            @if ($eventDetail['start_date'] == $currentDate)
                                 <div class="col-12 mb-4">
                                     <div class="form-group">
                                         <label>Start Time</label>
