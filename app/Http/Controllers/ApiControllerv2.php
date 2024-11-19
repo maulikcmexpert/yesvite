@@ -13273,7 +13273,7 @@ class ApiControllerv2 extends Controller
             $udpated = $resp['textElements'];
             foreach ($udpated as $k => $value) {
                 if(isset($value['fontWeight'])){
-                    $udpated[$k]['fontWeight'] = ($value['fontWeight']!='')?$value['fontWeight']:'';
+                    $udpated[$k]['fontWeight'] = ($value['fontWeight']!='')?'123':'';
                     dd($udpated[$k]['fontWeight']);
                 }
                 foreach ($value as $key => $val) {
