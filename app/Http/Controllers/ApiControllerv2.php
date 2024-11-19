@@ -8365,7 +8365,7 @@ class ApiControllerv2 extends Controller
             $checkUserIsReaction = EventPostReaction::where(['event_id' => $eventDetails->event_id, 'event_post_id' => $input['event_post_id'], 'user_id' => $user->id])->first();
             $ischeckEventOwner = Event::where(['id' => $eventDetails->event_id, 'user_id' => $eventDetails->user->id])->first();
 
-            $count_kids_adult = EventInvitedUser::where(['event_id' => $eventDetails->event_id, 'user_id' => $user->id])
+            $count_kids_adult = EventInvitedUser::where(['event_id' => $eventDetails->event_id, 'user_id' => $eventDetails->user->id])
                         ->select('kids', 'adults', 'event_id', 'rsvp_status', 'user_id')
                         ->first();
 
