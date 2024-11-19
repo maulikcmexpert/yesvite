@@ -12662,7 +12662,7 @@ class ApiControllerv3 extends Controller
 
                     return response()->json(['status' => 1, 'message' => "subscription sucessfully"]);
                 } else {
-                    return response()->json(['status' => 0, 'message' => $responce['error_description']]);
+                    return response()->json(['status' => 0, 'message' => (isset($responce['error_description']) && $responce['error_description'] != NULL )?$responce['error_description']:'Something went wrong']);
                 }
             }
         } catch (QueryException $e) {
