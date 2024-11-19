@@ -13274,6 +13274,7 @@ class ApiControllerv2 extends Controller
             foreach ($udpated as $k => $value) {
                 if(isset($value['fontWeight'])){
                     $udpated[$k]['fontWeight'] = ($value['fontWeight']!='')?$value['fontWeight']:'';
+                    dd($udpated[$k]['fontWeight']);
                 }
                 foreach ($value as $key => $val) {
                     $val = strtolower($val);
