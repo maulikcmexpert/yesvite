@@ -486,7 +486,7 @@ function sendNotification($notificationType, $postData)
                     }
                 } elseif ($postData['image'] == 0 && $postData['video'] > 0) {
                     $video = ($postData['video'] > 1) ? 'videos' : 'video';
-                    $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " upload " . $postData['video'] . " " . $video . " to " . $ownerEvent->event_name . ' ' . $photo_module_type . '.';
+                    $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " uploaded " . $postData['video'] . " " . $video . " to " . $ownerEvent->event_name . ' ' . $photo_module_type . '.';
                 } else {
                     $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " upload new post.";
                 }
