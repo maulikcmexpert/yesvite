@@ -7178,18 +7178,18 @@ class ApiControllerv2 extends Controller
             
             foreach ($eventDetail->event_invited_user as $hostValues) {
 
-                $coHostDetail['id'] = $hostValues->user_id;
+                $coHostDetail1['id'] = $hostValues->user_id;
 
-                $coHostDetail['profile'] = (empty($hostValues->user->profile) || $hostValues->user->profile == NULL) ? "" : asset('storage/profile/' . $hostValues->user->profile);
+                $coHostDetail1['profile'] = (empty($hostValues->user->profile) || $hostValues->user->profile == NULL) ? "" : asset('storage/profile/' . $hostValues->user->profile);
 
-                $coHostDetail['name'] = $hostValues->user->firstname . ' ' . $hostValues->user->lastname;
+                $coHostDetail1['name'] = $hostValues->user->firstname . ' ' . $hostValues->user->lastname;
 
-                $coHostDetail['email'] = (empty($hostValues->user->email) || $hostValues->user->email == NULL) ? "" : $hostValues->user->email;
+                $coHostDetail1['email'] = (empty($hostValues->user->email) || $hostValues->user->email == NULL) ? "" : $hostValues->user->email;
 
-                $coHostDetail['phone_number'] = (empty($hostValues->user->phone_number) || $hostValues->user->phone_number == NULL) ? "" : $hostValues->user->phone_number;
+                $coHostDetail1['phone_number'] = (empty($hostValues->user->phone_number) || $hostValues->user->phone_number == NULL) ? "" : $hostValues->user->phone_number;
 
 
-                $coHosts = $coHostDetail;
+                $coHosts = $coHostDetail1;
             }
 
             $eventDetails['co_host_list'] = $coHosts;
