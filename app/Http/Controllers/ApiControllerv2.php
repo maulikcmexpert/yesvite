@@ -7174,6 +7174,26 @@ class ApiControllerv2 extends Controller
 
             $eventDetails['co_hosts'] = $coHostDetail;
 
+            $coHosts = [];
+
+            foreach ($eventDetail->event_invited_user as $hostValues) {
+
+                $coHostDetail['id'] = $hostValues->user_id;
+
+                $coHostDetail['profile'] = (empty($hostValues->user->profile) || $hostValues->user->profile == NULL) ? "" : asset('storage/profile/' . $hostValues->user->profile);
+
+                $coHostDetail['name'] = $hostValues->user->firstname . ' ' . $hostValues->user->lastname;
+
+                $coHostDetail['email'] = (empty($hostValues->user->email) || $hostValues->user->email == NULL) ? "" : $hostValues->user->email;
+
+                $coHostDetail['phone_number'] = (empty($hostValues->user->phone_number) || $hostValues->user->phone_number == NULL) ? "" : $hostValues->user->phone_number;
+
+
+                $coHosts[] = $coHostDetail;
+            }
+
+            $eventDetails['co_host_list'] = $coHosts;
+
             $eventDetails['event_location_name'] = $eventDetail->event_location_name;
 
             $eventDetails['address_1'] = $eventDetail->address_1;
