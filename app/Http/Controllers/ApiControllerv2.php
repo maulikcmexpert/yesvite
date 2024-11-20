@@ -7174,10 +7174,10 @@ class ApiControllerv2 extends Controller
 
             $eventDetails['co_hosts'] = $coHostDetail;
 
-            $coHosts = [];
+            $coHosts = '';
             
             foreach ($eventDetail->event_invited_user as $hostValues) {
-
+                
                 $coHostDetail1['id'] = $hostValues->user_id;
 
                 $coHostDetail1['profile'] = (empty($hostValues->user->profile) || $hostValues->user->profile == NULL) ? "" : asset('storage/profile/' . $hostValues->user->profile);
