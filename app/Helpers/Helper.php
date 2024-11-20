@@ -134,7 +134,7 @@ function sendNotification($notificationType, $postData)
             foreach ($invitedusers as $value) {
                 Notification::where(['user_id' => $value->user_id, 'sender_id' => $postData['sender_id'], 'event_id' => $postData['event_id']])->delete();
 
-                $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " has invited you to " . $value->event->event_name;
+                $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " has invited you to " . $value->event->event_name.' test data';
                 if ($value->is_co_host == '1') {
                     $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " invited you to be co-host in " . $value->event->event_name . ' Accept?';
                 }
@@ -173,11 +173,7 @@ function sendNotification($notificationType, $postData)
 
                         $checkNotificationSetting = checkNotificationSetting($value->user_id);
                         if ((count($checkNotificationSetting) && $checkNotificationSetting['invitations']['push'] == '1') &&  $value->notification_on_off == '1') {
-                            // if($user->id != $value->user_id){
-                                // if($user->id != $value->user_id){
-                                    send_notification_FCM_and($deviceData->device_token, $notificationData);
-                                // }
-                            // }
+                            send_notification_FCM_and($deviceData->device_token, $notificationData);
                         }
                     }
                     
@@ -262,7 +258,7 @@ function sendNotification($notificationType, $postData)
                         }
                     }
                 }
-                // }
+                
             }
         }
     }
