@@ -7174,7 +7174,7 @@ class ApiControllerv2 extends Controller
 
             $eventDetails['co_hosts'] = $coHostDetail;
 
-            $coHosts = '';
+            $coHosts = NULL;
             
             foreach ($eventDetail->event_invited_user as $hostValues) {
                 
