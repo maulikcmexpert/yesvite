@@ -129,7 +129,11 @@
                     <td>
                         <div class="user-name" style="display: flex; align-items: center; gap: 15px;margin-bottom: 15px;width:100%">
                             <span style="display: block; width:50px; height: 50px; max-width:100%; margin-right:10px; margin-top:9px">
-                                <img src="{{ asset('public/storage/profile/'.$eventData['profileUser'])}}" style="width: 100%;height: 100%; border-radius:50%; margin-right:10px; object-fit:cover; display:block" alt="user-img">
+                                @if(isset($eventData['profileUser']) && $eventData['profileUser'] != "")
+                                    <img src="{{ asset('public/storage/profile/'.$eventData['profileUser'])}}" style="width: 100%;height: 100%; border-radius:50%; margin-right:10px; object-fit:cover; display:block" alt="user-img">
+                                @else
+                                    <img src="{{ asset('public/storage/profile/no_profile.png')}}" style="width: 100%;height: 100%; border-radius:50%; margin-right:10px; object-fit:cover; display:block" alt="user-img">
+                                @endif
                             </span>
                             <div style="width:85%; word-wrap:break-word; ">
                                 <h3 style="font-size: 20px;line-height: 35px;font-weight: 700;color: #0A090B;margin: 0px 0px;">{{ $eventData['guest_name'] }} <span style="font-weight: 400;">RSVP'd</span> {{ ($eventData['rsvp_status'] == '1')?'YES':'NO' }} <span style="font-weight: 400;">for</span></h3>
@@ -155,7 +159,7 @@
                                     <h5 style="font-size: 10px;line-height: normal;font-weight: 600;color: #0F172A;margin: 0px;">RSVP’d <span style="color: #23AA26;">YES</span></h5>
                                 </div>
                                 <div class="persons-right" style="display: flex;align-items: center;gap: 15px; margin-left:auto">
-                                    <span class="person-span-1" style="font-size: 10px;line-height: normal;font-weight: 600;color: #0F172A;position: relative; border-right: 2px solid gray; padding-right:10px;"><img src="{{ asset('public/storage/profile-2user.svg')}}" alt="user-img"> <i class="fa-solid fa-user-group" style="color: #DDE3E0;font-size: 8px;"></i> {{ $eventData['adults'] }} Adults</span>
+                                    <span class="person-span-1" style="font-size: 10px;line-height: normal;font-weight: 600;color: #0F172A;position: relative; border-right: 2px solid gray; padding-right:10px;"><img src="{{ asset('public/storage/profile/no_profile.png')}}" alt="user-img"> <i class="fa-solid fa-user-group" style="color: #DDE3E0;font-size: 8px;"></i> {{ $eventData['adults'] }} Adults</span>
                                     <span style="font-size: 10px;line-height: normal;font-weight: 600;color: #0F172A; padding-left: 10px">{{ $eventData['kids'] }} Kids</span>
                                 </div>
                             </div>
@@ -166,7 +170,7 @@
                                     <h5 style="font-size: 10px;line-height: normal;font-weight: 600;color: #0F172A;margin: 0px;">RSVP’d <span style="color: #e52121;">NO</span></h5>
                                 </div>
                                 <div class="persons-right" style="display: flex;align-items: center;gap: 15px;margin-left:auto">
-                                    <span class="person-span-1" style="font-size: 10px;line-height: normal;font-weight: 600;color: #0F172A;position: relative; border-right: 2px solid red; padding-right:10px;"><img src="{{ asset('public/storage/profile-2user.svg')}}" alt="user-img"><i class="fa-solid fa-users-line" style="color: #DDE3E0;font-size: 8px;"></i> {{ $eventData['adults'] }} Adults</span>
+                                    <span class="person-span-1" style="font-size: 10px;line-height: normal;font-weight: 600;color: #0F172A;position: relative; border-right: 2px solid red; padding-right:10px;"><img src="{{ asset('public/storage/profile/no_profile.png')}}" alt="user-img"><i class="fa-solid fa-users-line" style="color: #DDE3E0;font-size: 8px;"></i> {{ $eventData['adults'] }} Adults</span>
                                     <span style="font-size: 10px;line-height: normal;font-weight: 600;color: #0F172A; padding-left: 10px">{{ $eventData['kids'] }} Kids</span>
                                 </div>
                             </div>
