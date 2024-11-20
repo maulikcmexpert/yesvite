@@ -10683,7 +10683,7 @@ class ApiControllerv3 extends Controller
                     $invitation_sent_status->save();
                     if ($invitation_sent_status->user->app_user == '1') {
                         Notification::where(['user_id' => $id, 'sender_id' => $user->id, 'event_id' => $input['event_id']])->delete();
-                        $notification_message = "You have invited in " . $eventInfo->event_name;
+                        $notification_message = "You has invited in " . $eventInfo->event_name;
                         $notification = new Notification;
                         $notification->event_id = $input['event_id'];
                         $notification->user_id = $id;
@@ -10702,7 +10702,7 @@ class ApiControllerv3 extends Controller
 
                 if ($value['prefer_by'] == 'phone') {
                     $eventInfo = Event::with(['user', 'event_image'])->where('id', $input['event_id'])->first();
-                    $notification_message = " have invited you to: " . $eventInfo->event_name;
+                    $notification_message = " has invited you to " . $eventInfo->event_name;
 
 
                     $sent = sendSMSForApplication($value['phone_number'], $notification_message);
