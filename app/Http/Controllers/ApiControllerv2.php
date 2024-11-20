@@ -10665,8 +10665,8 @@ class ApiControllerv2 extends Controller
                     'event_id' => $input['event_id'],
                     'newUser' => $ids
                 ];
-                dispatch(new SendNotificationJob(array('invite', $notificationParam)));
-                // sendNotification('invite', $notificationParam);
+                // dispatch(new SendNotificationJob(array('invite', $notificationParam)));
+                sendNotification('invite', $notificationParam);
             }
         }
 
