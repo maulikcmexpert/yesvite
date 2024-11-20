@@ -13292,6 +13292,7 @@ class ApiControllerv2 extends Controller
                 $udpated[$k]['fontFamily'] = (isset($value['fontFamily'])&&$value['fontFamily']!='')?$value['fontFamily']:'Times New Roman';
                 $udpated[$k]['textAlign'] = (isset($value['textAlign'])&&$value['textAlign']!='')?$value['textAlign']:'center';
                 $udpated[$k]['fontStyle'] = (isset($value['fontStyle'])&&$value['fontStyle']!='')?$value['fontStyle']:'normal';
+                $udpated[$k]['letterSpacing'] = (isset($value['letterSpacing'])&&$value['letterSpacing']!='')?(int)$value['letterSpacing']:0;
                    
                 foreach ($value as $key => $val) {
                     $val = strtolower($val);
