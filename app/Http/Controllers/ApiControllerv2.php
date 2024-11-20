@@ -3336,7 +3336,7 @@ class ApiControllerv2 extends Controller
         }
         if ($eventData['is_draft_save'] == '0') {
             $validator = Validator::make($eventData, [
-                'event_type_id' => ['required'],
+                // 'event_type_id' => ['required'],
                 'event_name' => ['required'],
                 'start_date' => ['required'],
                 'end_date' => ['required'],
@@ -3348,13 +3348,13 @@ class ApiControllerv2 extends Controller
                 'rsvp_end_time' => ['present'],
                 'rsvp_end_timezone' => ['present'],
                 // 'event_location_name' => ['required'],
-                'address_1' => ['required'],
+                // 'address_1' => ['required'],
                 // 'address_2' => ['required'],
-                'state' => ['required'],
-                'zip_code' => ['required'],
-                'city' => ['required'],
-                'latitude' => ['required'],
-                'longitude' => ['required'],
+                // 'state' => ['required'],
+                // 'zip_code' => ['required'],
+                // 'city' => ['required'],
+                // 'latitude' => ['required'],
+                // 'longitude' => ['required'],
                 'message_to_guests' => ['present'],
                 'invited_user_id' => ['array'],
                 'invited_guests' => ['present', 'array'],
@@ -3371,7 +3371,7 @@ class ApiControllerv2 extends Controller
 
             $validator = Validator::make($eventData, [
 
-                'event_type_id' => ['required'],
+                // 'event_type_id' => ['required'],
                 'event_name' => ['required'],
                 'start_date' => ['required'],
                 'end_date' => ['required'],
@@ -4376,7 +4376,7 @@ class ApiControllerv2 extends Controller
         if ($eventData['is_draft_save'] == '0') {
             $validator = Validator::make($eventData, [
                 'event_id' => ['required', 'exists:events,id', new checkIsUserEvent],
-                'event_type_id' => ['required'],
+                // 'event_type_id' => ['required'],
                 'event_name' => ['required'],
                 // 'hosted_by' => ['required'],
                 'start_date' => ['required'],
@@ -4389,13 +4389,13 @@ class ApiControllerv2 extends Controller
                 'rsvp_end_time' => ['present'],
                 'rsvp_end_timezone' => ['present'],
                 // 'event_location_name' => ['required'],
-                'address_1' => ['required'],
+                // 'address_1' => ['required'],
                 // 'address_2' => ['required'],
-                'state' => ['required'],
-                'zip_code' => ['required'],
-                'city' => ['required'],
-                'latitude' => ['required'],
-                'longitude' => ['required'],
+                // 'state' => ['required'],
+                // 'zip_code' => ['required'],
+                // 'city' => ['required'],
+                // 'latitude' => ['required'],
+                // 'longitude' => ['required'],
                 'message_to_guests' => ['present'],
                 'invited_user_id' => ['array'],
                 'invited_guests' => ['present', 'array'],
@@ -4411,7 +4411,7 @@ class ApiControllerv2 extends Controller
         } else {
             $validator = Validator::make($eventData, [
                 'event_id' => ['required', 'exists:events,id', new checkIsUserEvent],
-                'event_type_id' => ['required'],
+                // 'event_type_id' => ['required'],
                 'event_name' => ['required'],
                 'is_draft_save' => ['required', 'in:0,1'],
                 'invited_user_id' => ['present', 'array'],
