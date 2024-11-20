@@ -3423,7 +3423,7 @@ class ApiControllerv2 extends Controller
         $staticInformation = (isset($eventData['static_information']) && $eventData['static_information'] != '') ? $eventData['static_information'] : null;
 
         $eventCreation =  Event::create([
-            'event_type_id' => (!empty($eventData['event_type_id'])) ? $eventData['event_type_id'] : "",
+            'event_type_id' => (!empty($eventData['event_type_id'])) ? (int)$eventData['event_type_id'] : NULL,
             'event_name' => (!empty($eventData['event_name'])) ? $eventData['event_name'] : "",
             'user_id' => $user->id,
             'hosted_by' => (!empty($eventData['hosted_by'])) ? $eventData['hosted_by'] : $user->firstname . ' ' . $user->lastname,
@@ -4450,7 +4450,7 @@ class ApiControllerv2 extends Controller
                         $gift_registry_id =  implode(',', $eventData['gift_registry_list']);
                     }
                 }
-                $updateEvent->event_type_id = (!empty($eventData['event_type_id'])) ? $eventData['event_type_id'] : "";
+                $updateEvent->event_type_id = (!empty($eventData['event_type_id'])) ? (int)$eventData['event_type_id'] : NULL;
                 $updateEvent->event_name = (!empty($eventData['event_name'])) ? $eventData['event_name'] : "";
                 $updateEvent->hosted_by = (!empty($eventData['hosted_by'])) ? $eventData['hosted_by'] : $user->firstname . ' ' . $user->lastname;
                 $updateEvent->start_date = (!empty($eventData['start_date'])) ? $eventData['start_date'] : NULL;
