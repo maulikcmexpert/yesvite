@@ -720,6 +720,7 @@ class ApiControllerv2 extends Controller
 
                 $totalCounts += count($allEvent);
                 // Calculate offset based on current page and perPage
+                // $offset = ($pages - 1) * $this->perPage;
                 $offset = ($pages - 1) * 5;
 
                 // $paginatedEvents =  collect($allEvent)->sortBy('start_date')->forPage($page, $this->perPage);
