@@ -7175,7 +7175,7 @@ class ApiControllerv2 extends Controller
             $eventDetails['co_hosts'] = $coHostDetail;
 
             $coHosts = [];
-
+            
             foreach ($eventDetail->event_invited_user as $hostValues) {
 
                 $coHostDetail['id'] = $hostValues->user_id;
@@ -7189,7 +7189,7 @@ class ApiControllerv2 extends Controller
                 $coHostDetail['phone_number'] = (empty($hostValues->user->phone_number) || $hostValues->user->phone_number == NULL) ? "" : $hostValues->user->phone_number;
 
 
-                $coHosts[] = $coHostDetail;
+                $coHosts = $coHostDetail;
             }
 
             $eventDetails['co_host_list'] = $coHosts;
