@@ -12603,13 +12603,13 @@ class ApiControllerv3 extends Controller
                             ];
                             // dispatch(new SendNotificationJob(array('owner_notify', $notificationParam)));
                             // if ($checkUserInvited->event_invited_user_count != '0') {
-                                dispatch(new SendNotificationJob(array('invite', $notificationParam)));
+                                // dispatch(new SendNotificationJob(array('invite', $notificationParam)));
                             // }
                             // if ($checkUserInvited->is_draft_save == '0') {
-                                dispatch(new SendNotificationJob(array('owner_notify', $notificationParam)));
+                                // dispatch(new SendNotificationJob(array('owner_notify', $notificationParam)));
                             // }
-                            // sendNotification('invite', $notificationParam);
-                            // sendNotification('owner_notify', $notificationParam);
+                            sendNotification('invite', $notificationParam);
+                            sendNotification('owner_notify', $notificationParam);
                             Event::where('id',$input['event_id'])->update(['is_draft_save'=>'0']);
                         }
                     }
@@ -12652,10 +12652,10 @@ class ApiControllerv3 extends Controller
                                 'event_id' => $input['event_id'],
                                 'post_id' => ""
                             ];
-                            dispatch(new SendNotificationJob(array('invite', $notificationParam)));
-                            dispatch(new SendNotificationJob(array('owner_notify', $notificationParam)));
-                            // sendNotification('invite', $notificationParam);
-                            // sendNotification('owner_notify', $notificationParam);
+                            // dispatch(new SendNotificationJob(array('invite', $notificationParam)));
+                            // dispatch(new SendNotificationJob(array('owner_notify', $notificationParam)));
+                            sendNotification('invite', $notificationParam);
+                            sendNotification('owner_notify', $notificationParam);
                             Event::where('id',$input['event_id'])->update(['is_draft_save'=>'0']);
                         }
                     }
@@ -12666,7 +12666,7 @@ class ApiControllerv3 extends Controller
                 }
             }
         } catch (QueryException $e) {
-            dd($e);
+            // dd($e);
             return response()->json(['status' => 0, 'message' => "db error"]);
         } catch (Exception  $e) {
             return response()->json(['status' => 0, 'message' => 'something went wrong']);
@@ -12760,10 +12760,10 @@ class ApiControllerv3 extends Controller
                                 'event_id' => $input['event_id'],
                                 'post_id' => ""
                             ];
-                            dispatch(new SendNotificationJob(array('invite', $notificationParam)));
-                            dispatch(new SendNotificationJob(array('owner_notify', $notificationParam)));
-                            // sendNotification('invite', $notificationParam);
-                            // sendNotification('owner_notify', $notificationParam);
+                            // dispatch(new SendNotificationJob(array('invite', $notificationParam)));
+                            // dispatch(new SendNotificationJob(array('owner_notify', $notificationParam)));
+                            sendNotification('invite', $notificationParam);
+                            sendNotification('owner_notify', $notificationParam);
                             $updateEvent->is_draft_save = '0';
                         // }
                         $updateEvent->product_payment_id = $new_subscription->id;

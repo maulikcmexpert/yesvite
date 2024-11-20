@@ -134,7 +134,7 @@ function sendNotification($notificationType, $postData)
             foreach ($invitedusers as $value) {
                 Notification::where(['user_id' => $value->user_id, 'sender_id' => $postData['sender_id'], 'event_id' => $postData['event_id']])->delete();
 
-                $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " has invited you to " . $value->event->event_name.' test data';
+                $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " has invited you to " . $value->event->event_name;
                 if ($value->is_co_host == '1') {
                     $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " invited you to be co-host in " . $value->event->event_name . ' Accept?';
                 }
