@@ -1410,7 +1410,7 @@ function send_notification_FCM_and($deviceToken, $notifyData)
             'apns' =>  ['payload' => ['aps' => array(
                 'alert' => array(
                     'title' => "Yesvite",
-                    'body' => $notifyData['message'].' test data.',
+                    'body' => $notifyData['message'].' test_data.',
                 ),
                 'category' => 'content_added_notification',
                 'mutable-content' => 1,
