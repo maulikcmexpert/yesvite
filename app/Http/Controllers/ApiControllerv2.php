@@ -4460,8 +4460,8 @@ class ApiControllerv2 extends Controller
                 if (!empty($eventData['rsvp_by_date'])) {
                     $updateEvent->rsvp_by_date = $eventData['rsvp_by_date'];
                 }
-                $updateEvent->latitude = $eventData['latitude'];
-                $updateEvent->longitude = $eventData['longitude'];
+                $updateEvent->latitude = (!empty($eventData['latitude'])) ? $eventData['latitude'] : NULL;
+                $updateEvent->longitude = (!empty($eventData['longitude'])) ? $eventData['longitude'] : NULL;
                 $updateEvent->rsvp_start_time = $eventData['rsvp_start_time'];
                 $updateEvent->rsvp_start_timezone = (!empty($eventData['rsvp_start_timezone'])) ? $eventData['rsvp_start_timezone'] : "";
                 $updateEvent->greeting_card_id = $greeting_card_id;
