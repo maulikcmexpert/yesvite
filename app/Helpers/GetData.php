@@ -218,11 +218,14 @@ function getYesviteContactListPage($id, $perPage, $page, $search_name)
         ->where('id', '!=', $id)
         ->where('is_user_phone_contact', '0')
         ->where(function ($query) {
-            $query->whereNull('email_verified_at')
-                ->where('app_user', '!=', '1')
-                ->orWhereNotNull('email_verified_at');
+            // $query->whereNull('email_verified_at')
+            //     ->where('app_user', '!=', '1')
+            //     ->orWhereNotNull('email_verified_at');
+            $query->where('app_user', '!=', '1')
+                ->orWhereNotNull('email_verified_at')
+                ->orWhere('parent_user_phone_contact',$id);
         })
-        ->orWhere('parent_user_phone_contact',$id)
+        
         ->where(DB::raw("CONCAT(firstname, ' ', lastname)"), 'like', "%{$search_name}%")
         ->orderBy('firstname')
         ->paginate($perPage, ['*'], 'page', $page);
