@@ -3464,6 +3464,7 @@ class ApiControllerv2 extends Controller
 
             $eventId = $eventCreation->id;
             $eventCreation->static_information = $staticInformation;
+            $eventCreation->proplan_variant = (isset($eventData['proplan_variant']) && !empty($eventData['proplan_variant'])) ? (int)$eventData['proplan_variant'] : 0;
             if (!empty($eventData['invited_user_id'])) {
                 $invitedUsers = $eventData['invited_user_id'];
                 foreach ($invitedUsers as $value) {
@@ -4159,6 +4160,7 @@ class ApiControllerv2 extends Controller
                 $eventDetail['static_information'] = ($getEventData->static_information != NULL) ? $getEventData->static_information : "";
                 $eventDetail['design_image'] = ($getEventData->design_image != NULL) ? asset('storage/canvas/' . $getEventData->design_image) : "";
                 $eventDetail['design_inner_image'] = ($getEventData->design_inner_image != NULL) ? asset('storage/canvas/' . $getEventData->design_inner_image) : "";
+                $eventDetail['proplan_variant'] = ($getEventData->proplan_variant != NULL) ? $getEventData->proplan_variant :0;
                 $eventDetail['event_images'] = [];
                 $getEventImages = EventImage::where('event_id', $getEventData->id)->get();
                 if (!empty($getEventImages)) {
@@ -4479,6 +4481,7 @@ class ApiControllerv2 extends Controller
                 $updateEvent->zip_code = (!empty($eventData['zip_code'])) ? $eventData['zip_code'] : "";
                 $updateEvent->city = (!empty($eventData['city'])) ? $eventData['city'] : "";
                 $updateEvent->message_to_guests = (!empty($eventData['message_to_guests'])) ? $eventData['message_to_guests'] : "";
+                $updateEvent->proplan_variant = (isset($eventData['proplan_variant']) && !empty($eventData['proplan_variant'])) ? (int)$eventData['proplan_variant'] : 0;
                 if ($updateEvent->is_draft_save != '0') {
                     $updateEvent->is_draft_save = $eventData['is_draft_save'];
                 }
