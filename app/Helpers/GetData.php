@@ -220,7 +220,7 @@ function getYesviteContactListPage($id, $perPage, $page, $search_name)
         ->where(function ($query) use($id) {
             $query->whereNull('email_verified_at')
                 ->where('app_user', '!=', '1')
-                ->where('parent_user_phone_contact',$id)
+                ->orWhere('parent_user_phone_contact',$id)
                 ->orWhereNotNull('email_verified_at');
         })
         
