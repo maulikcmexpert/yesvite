@@ -217,12 +217,13 @@ function getYesviteContactListPage($id, $perPage, $page, $search_name)
     $yesviteRegisteredUser = User::select('id', 'firstname', 'profile', 'lastname', 'email', 'country_code', 'phone_number', 'app_user', 'prefer_by', 'email_verified_at', 'parent_user_phone_contact', 'visible', 'message_privacy')
         ->where('id', '!=', $id)
         ->where('is_user_phone_contact', '0')
-        ->where(function ($query) {
+        ->where(function ($query) use($id) {
             // $query->whereNull('email_verified_at')
             //     ->where('app_user', '!=', '1')
             //     ->orWhereNotNull('email_verified_at');
             $query->whereNotNull('email_verified_at')
-                ->where('app_user', '1');
+                ->where('app_user', '1')
+                ->orWhere('user_parent_id',$id);
                 // ->orWhereNotNull('email_verified_at');
         })
         ->where(DB::raw("CONCAT(firstname, ' ', lastname)"), 'like', "%{$search_name}%")
