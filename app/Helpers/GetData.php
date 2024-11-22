@@ -217,13 +217,20 @@ function getYesviteContactListPage($id, $perPage, $page, $search_name)
     $yesviteRegisteredUser = User::select('id', 'firstname', 'profile', 'lastname', 'email', 'country_code', 'phone_number', 'app_user', 'prefer_by', 'email_verified_at', 'parent_user_phone_contact', 'visible', 'message_privacy')
         ->where('id', '!=', $id)
         ->where('is_user_phone_contact', '0')
-        ->where(function ($query) use($id) {
-            $query->whereNull('email_verified_at')
-                ->where('app_user', '!=', '1')
-                ->orWhere('parent_user_phone_contact',$id)
-                ->orWhereNotNull('email_verified_at');
+        // ->where(function ($query) use($id) {
+        //     $query->whereNull('email_verified_at')
+        //         ->where('app_user', '!=', '1')
+        //         // ->orWhere('parent_user_phone_contact',$id)
+        //         ->orWhereNotNull('email_verified_at');
+        // })
+        ->where(function ($query) use ($id) {
+            $query->where(function ($subQuery) use ($id) {
+                $subQuery->whereNull('email_verified_at')
+                         ->where('app_user', '!=', '1')
+                         ->orWhere('parent_user_phone_contact', $id);
+            })
+            ->orWhereNotNull('email_verified_at');
         })
-        
         ->where(DB::raw("CONCAT(firstname, ' ', lastname)"), 'like', "%{$search_name}%")
         ->orderBy('firstname')
         ->paginate($perPage, ['*'], 'page', $page);
