@@ -222,10 +222,10 @@ function getYesviteContactListPage($id, $perPage, $page, $search_name)
             //     ->where('app_user', '!=', '1')
             //     ->orWhereNotNull('email_verified_at');
             $query->whereNotNull('email_verified_at')
-                ->where('app_user', '1')
-                ->orWhere('user_parent_id',$id);
+                ->where('app_user', '1');
+                // ->orWhere('user_parent_id',$id);
                 // ->orWhereNotNull('email_verified_at');
-        })
+        })->orWhere('user_parent_id',$id)
         ->where(DB::raw("CONCAT(firstname, ' ', lastname)"), 'like', "%{$search_name}%")
         ->orderBy('firstname')
         ->paginate($perPage, ['*'], 'page', $page);
