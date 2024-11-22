@@ -7190,7 +7190,9 @@ class ApiControllerv2 extends Controller
                 $coHostDetail1['email'] = (empty($hostValues->user->email) || $hostValues->user->email == NULL) ? "" : $hostValues->user->email;
 
                 $coHostDetail1['phone_number'] = (empty($hostValues->user->phone_number) || $hostValues->user->phone_number == NULL) ? "" : $hostValues->user->phone_number;
+               
                 $coHostDetail1['message_privacy'] =  $hostValues->user->message_privacy;
+               
                 $coHostDetail1['visible'] = (empty($hostValues->user->visible) || $hostValues->user->visible == NULL) ? "" : $hostValues->user->visible;
 
                 $coHosts = $coHostDetail1;
