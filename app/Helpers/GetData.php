@@ -221,7 +221,7 @@ function getYesviteContactListPage($id, $perPage, $page, $search_name)
             $query->whereNull('email_verified_at')
                 ->where('app_user', '!=', '1')
                 ->orWhereNotNull('email_verified_at')
-                ->orWhere('parent_user_phone_contact',$id);
+                ->where('parent_user_phone_contact',$id);
         })
         ->where(DB::raw("CONCAT(firstname, ' ', lastname)"), 'like', "%{$search_name}%")
         ->orderBy('firstname')
