@@ -3362,9 +3362,10 @@ function li_design_click(){
 function edit_design_modal() {
     var eventDetail2 = $('#eventDetail').val();
     eventDetail2 = JSON.parse(eventDetail2);
-
-    console.log(eventDetail2);
-    console.log(eventData);
+    if(eventDetail2.static_information != ''){
+        console.log(eventDetail2.static_information);
+        console.log(eventData);
+    }
 }
 
 $(document).on("click", ".li_event_detail", function () {
