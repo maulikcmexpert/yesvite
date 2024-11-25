@@ -3339,6 +3339,7 @@ function li_design_click(){
         eventData.state != undefined &&
         eventData.zipcode != undefined
     ) {
+        
         $('.design-span').addClass('active');
         $(".step_1").css("display", "none");
         $(".step_2").show();
@@ -3350,9 +3351,15 @@ function li_design_click(){
         $('.event_create_percent').text('50%');
         $('.current_step').text('2 of 4');
 
+        edit_design_modal();
+
         var subclass = ".side-bar-sub-list";
         handleActiveClass('.li_design');
     }
+}
+
+function edit_design_modal() {
+    console.log(eventDetail);
 }
 
 $(document).on("click", ".li_event_detail", function () {
