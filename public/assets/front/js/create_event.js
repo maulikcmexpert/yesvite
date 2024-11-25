@@ -49,7 +49,8 @@ $(document).ready(function () {
     if(event_id != '' && current_step != ''){
 
         var eventDetail = $('#eventDetail').val();
-        console.log(JSON.parse(eventDetail));
+        eventDetail = JSON.parse(eventDetail);
+        console.log(eventDetail);
         if(current_step == '2'){
             $(".step_1").hide();
             handleActiveClass('.li_design');
