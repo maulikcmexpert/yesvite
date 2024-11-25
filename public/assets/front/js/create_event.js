@@ -51,6 +51,7 @@ $(document).ready(function () {
         var eventDetail = $('#eventDetail').val();
         eventDetail = JSON.parse(eventDetail);
         console.log(eventDetail);
+
         eventData.event_type = eventDetail.event_type_id;
         eventData.event_name = eventDetail.event_name;
         eventData.hosted_by = eventDetail.hosted_by;
@@ -82,6 +83,7 @@ $(document).ready(function () {
             $('.event_create_percent').text('50%');
             $('.current_step').text('2 of 4');
             active_responsive_dropdown('drop-down-event-design','drop-down-pick-card');
+            console.log(eventData);
             if(final_step == 1){
                 final_step = 2;
             }
@@ -3359,6 +3361,8 @@ function li_design_click(){
 }
 
 function edit_design_modal() {
+    var eventDetail = $('#eventDetail').val();
+        eventDetail = JSON.parse(eventDetail);
     console.log(eventDetail);
 }
 
