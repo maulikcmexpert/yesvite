@@ -3360,10 +3360,10 @@ function li_design_click(){
 }
 
 function edit_design_modal() {
-    var eventDetail = $('#eventDetail').val();
-    eventDetail = JSON.parse(eventDetail);
+    var eventDetail2 = $('#eventDetail').val();
+    eventDetail2 = JSON.parse(eventDetail2);
 
-    console.log(eventDetail);
+    console.log(eventDetail2);
     console.log(eventData);
 }
 
