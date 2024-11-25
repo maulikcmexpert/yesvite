@@ -47,6 +47,9 @@ $(document).ready(function () {
     var current_step = $('#current_step').val();
     var event_id = $('#event_id').val();
     if(event_id != '' && current_step != '' ){
+
+        var eventDetail = $('#eventDetail').val();
+        console.log(eventDetail);
         if(current_step == '2'){
             $(".step_1").hide();
             handleActiveClass('.li_design');
