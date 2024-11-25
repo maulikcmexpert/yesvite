@@ -50,7 +50,7 @@ $(document).ready(function () {
 
         var eventDetail = $('#eventDetail').val();
         eventDetail = JSON.parse(eventDetail);
-        console.log(eventDetail);
+        console.log(eventDetail.id);
         if(current_step == '2'){
             $(".step_1").hide();
             handleActiveClass('.li_design');
