@@ -44,6 +44,24 @@ $(document).ready(function () {
             },
         });
     }
+    var current_step = $('#current_step').val();
+    var event_id = $('#event_id').val();
+    if(event_id != '' && current_step != '' ){
+        if(current_step == '2'){
+            $(".step_1").hide();
+            handleActiveClass('.li_design');
+            $('.pick-card').addClass('active');
+            $('.design-span').addClass('active');
+            $('.li_event_detail').find(".side-bar-list").addClass("menu-success");
+            $(".step_2").show();
+            $('.event_create_percent').text('50%');
+            $('.current_step').text('2 of 4');
+            active_responsive_dropdown('drop-down-event-design','drop-down-pick-card');
+            if(final_step == 1){
+                final_step = 2;
+            }
+        }
+    }
     $('#address1').attr('placeholder', '');
 
     $('.search_user').val('');
