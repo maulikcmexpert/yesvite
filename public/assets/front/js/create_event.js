@@ -64,7 +64,7 @@ $(document).ready(function () {
         eventData.rsvp_end_time = eventDetail.rsvp_end_time;
         eventData.rsvp_end_timezone = eventDetail.rsvp_end_timezone;
         eventData.event_location = eventDetail.event_location_name;
-        eventData.address1 = eventDetail.address1;
+        eventData.address1 = eventDetail.address_1;
         eventData.address_2 = eventDetail.address_2;
         eventData.state = eventDetail.state;
         eventData.zipcode = eventDetail.zip_code;
