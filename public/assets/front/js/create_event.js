@@ -3320,7 +3320,7 @@ $(document).on("click", ".li_design", function (e) {
 
 
 function li_design_click(){
-    console.log(eventData);
+    // console.log(eventData);
     if (
         eventData.event_type != "" &&
         eventData.event_name != "" &&
@@ -3363,7 +3363,7 @@ function li_design_click(){
 function edit_design_modal() {
     var eventDetail = $('#eventDetail').val();
         eventDetail = JSON.parse(eventDetail);
-    console.log(eventDetail);
+    console.log(eventData);
 }
 
 $(document).on("click", ".li_event_detail", function () {
