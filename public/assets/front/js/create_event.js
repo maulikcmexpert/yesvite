@@ -49,7 +49,29 @@ $(document).ready(function () {
     if(event_id != '' && current_step != ''){
 
         var eventDetail = $('#eventDetail').val();
-        eventData = JSON.parse(eventDetail);
+        eventDetail = JSON.parse(eventDetail);
+        console.log(eventDetail);
+        // eventData.event_type= eventDetail.event_type;
+        // eventData.event_name= event_name;
+        // eventData.hosted_by= hostedby;
+        // eventData.event_date= event_date;
+        // eventData.rsvp_by_date_set=rsvp_by_date_set;
+        // eventData.rsvp_by_date=rsvp_by_date;
+        // eventData.start_time= start_time;
+        // eventData.rsvp_start_timezone=start_time_zone;
+        // eventData.rsvp_end_time_set=rsvp_end_time_set;
+        // eventData.rsvp_end_time=rsvp_end_time;
+        // eventData.rsvp_end_timezone=end_time_zone;
+        // eventData.event_location=description;
+        // eventData.address1= address1;
+        // eventData.address_2= address_2;
+        // eventData.state= state;
+        // eventData.zipcode= zipcode;
+        // eventData.city= city;
+        // eventData.message_to_guests=message_to_guests;
+        // eventData.events_schedule=events_schedule;
+        // eventData.longitude=longitude;
+        // eventData.latitude=latitude;
         
         if(current_step == '2'){
             $(".step_1").hide();
