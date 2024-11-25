@@ -319,6 +319,7 @@
     </div>
     <input type="hidden" value="{{ $user->id }}" id="user_id">
     <input type="hidden" value="{{(isset($eventDetail['id']) && $eventDetail['id'] != NULL)?$eventDetail['id']:''}}" id="event_id">
+    <input type="hidden" value="{{(isset($eventDetail['step']) && $eventDetail['step'] != NULL)?$eventDetail['step']:''}}" id="current_step">
     @include('front.event.step1')
 
     @include('front.event.step2')
