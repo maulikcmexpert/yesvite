@@ -3320,7 +3320,7 @@ $(document).on("click", ".li_design", function (e) {
 
 
 function li_design_click(){
-    console.log(1);
+    console.log(eventData);
     if (
         eventData.event_type != "" &&
         eventData.event_name != "" &&
