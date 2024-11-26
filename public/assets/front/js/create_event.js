@@ -3418,7 +3418,7 @@ function edit_design_modal() {
 
         const staticInfo = dbJson;
         staticInfo.forEach((element) => {
-            console.log(element);
+            // console.log(element);
             const textMeasurement = new fabric.Text(element.text, {
                 fontSize: element.fontSize,
                 fontFamily: element.fontFamily,
@@ -3452,6 +3452,7 @@ function edit_design_modal() {
                 isStatic: true,
                 angle: element?.rotation ? element?.rotation : 0
             });
+            console.log(textElement);
             canvas.add(textElement);
         });
     }
