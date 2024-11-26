@@ -3431,7 +3431,7 @@ function edit_design_modal() {
             console.log(element);
             
             const textMeasurement = new fabric.Text(element.text, {
-                fontSize: element.fontSize,
+                fontSize: element.fontSize*2,
                 fontFamily: element.fontFamily,
                 fontWeight: element.fontWeight,
                 fontStyle: element.fontStyle,
