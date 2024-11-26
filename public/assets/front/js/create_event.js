@@ -50,7 +50,7 @@ $(document).ready(function () {
 
         var eventDetail = $('#eventDetail').val();
         eventDetail = JSON.parse(eventDetail);
-   
+        eventData.event_id = event_id;
         eventData.event_type = eventDetail.event_type_id;
         eventData.event_name = eventDetail.event_name;
         eventData.hosted_by = eventDetail.hosted_by;

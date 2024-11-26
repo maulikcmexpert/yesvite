@@ -583,116 +583,117 @@ function bindData() {
                         ml: true,  // Show middle left control
                         mr: true   // Show middle right control
                     });
-
-                    switch (element.text.toLowerCase()) {
-                        case "event_name":
-                            if (eventData.event_name) {
-                                let textWidth = getWidth(
-                                    element,
-                                    eventData.event_name
-                                );
-                                textElement.set({
-                                    text: eventData.event_name,
-                                    width: textWidth,
-                                });
-                            } else {
-                                return; // Skip adding the element if event_name is empty
-                            }
-                            break;
-                        case "host_name":
-                            if (eventData.hosted_by) {
-                                let textWidth = getWidth(
-                                    element,
-                                    eventData.hosted_by
-                                );
-                                textElement.set({
-                                    text: eventData.hosted_by,
-                                    width: textWidth,
-                                });
-                            } else {
-                                return; // Skip adding the element if host_name is empty
-                            }
-                            break;
-                        case "location_description":
-                            if (eventData.event_location) {
-                                let textWidth = getWidth(
-                                    element,
-                                    eventData.event_location
-                                );
-                                textElement.set({
-                                    text: eventData.event_location,
-                                    width: textWidth,
-                                });
-                            } else {
-                                return; // Skip adding the element if event_location_name is empty
-                            }
-                            break;
-                        case "start_time":
-                            if (eventData.start_time) {
-                                let textWidth = getWidth(
-                                    element,
-                                    eventData.start_time
-                                );
-                                textElement.set({
-                                    text: eventData.start_time,
-                                    width: textWidth,
-                                });
-                            } else {
-                                return; // Skip adding the element if start_time is empty
-                            }
-                            break;
-                        case "end_time":
-                            if (eventData.rsvp_end_time) {
-                                let textWidth = getWidth(
-                                    element,
-                                    eventData.rsvp_end_time
-                                );
-                                textElement.set({
-                                    text: eventData.rsvp_end_time,
-                                    width: textWidth,
-                                });
-                            } else {
-                                return; // Skip adding the element if rsvp_end_time is empty
-                            }
-                            break;
-                        case "start_date":
-                            if (eventData.event_date) {
-                                var start_date = "";
-                                if (eventData.event_date.includes(" To ")) {
-                                    let [start, end] =
-                                    eventData.event_date.split(" To ");
-                                    start_date = start;
+                    if(eventData.event_id == '' || eventData.event_id === undefined){
+                        switch (element.text.toLowerCase()) {
+                            case "event_name":
+                                if (eventData.event_name) {
+                                    let textWidth = getWidth(
+                                        element,
+                                        eventData.event_name
+                                    );
+                                    textElement.set({
+                                        text: eventData.event_name,
+                                        width: textWidth,
+                                    });
                                 } else {
-                                    start_date = eventData.event_date;
+                                    return; // Skip adding the element if event_name is empty
                                 }
-                                let textWidth = getWidth(element, start_date);
-                                textElement.set({
-                                    text: start_date,
-                                    width: textWidth,
-                                });
-                            } else {
-                                return; // Skip adding the element if start_date is empty
-                            }
-                            break;
-                        case "end_date":
-                            if (eventData.event_date) {
-                                var end_date = "";
-                                if (eventData.event_date.includes(" To ")) {
-                                    let [start, end] =
-                                    eventData.event_date.split(" To ");
-                                    end_date = end;
+                                break;
+                            case "host_name":
+                                if (eventData.hosted_by) {
+                                    let textWidth = getWidth(
+                                        element,
+                                        eventData.hosted_by
+                                    );
+                                    textElement.set({
+                                        text: eventData.hosted_by,
+                                        width: textWidth,
+                                    });
                                 } else {
-                                    end_date = eventData.event_date;
+                                    return; // Skip adding the element if host_name is empty
                                 }
-                                let textWidth = getWidth(element, end_date);
-                                textElement.set({
-                                    text: end_date,
-                                    width: textWidth,
-                                });
-                            } else {
-                                return; // Skip adding the element if end_date is empty
-                            }
-                            break;
+                                break;
+                            case "location_description":
+                                if (eventData.event_location) {
+                                    let textWidth = getWidth(
+                                        element,
+                                        eventData.event_location
+                                    );
+                                    textElement.set({
+                                        text: eventData.event_location,
+                                        width: textWidth,
+                                    });
+                                } else {
+                                    return; // Skip adding the element if event_location_name is empty
+                                }
+                                break;
+                            case "start_time":
+                                if (eventData.start_time) {
+                                    let textWidth = getWidth(
+                                        element,
+                                        eventData.start_time
+                                    );
+                                    textElement.set({
+                                        text: eventData.start_time,
+                                        width: textWidth,
+                                    });
+                                } else {
+                                    return; // Skip adding the element if start_time is empty
+                                }
+                                break;
+                            case "end_time":
+                                if (eventData.rsvp_end_time) {
+                                    let textWidth = getWidth(
+                                        element,
+                                        eventData.rsvp_end_time
+                                    );
+                                    textElement.set({
+                                        text: eventData.rsvp_end_time,
+                                        width: textWidth,
+                                    });
+                                } else {
+                                    return; // Skip adding the element if rsvp_end_time is empty
+                                }
+                                break;
+                            case "start_date":
+                                if (eventData.event_date) {
+                                    var start_date = "";
+                                    if (eventData.event_date.includes(" To ")) {
+                                        let [start, end] =
+                                        eventData.event_date.split(" To ");
+                                        start_date = start;
+                                    } else {
+                                        start_date = eventData.event_date;
+                                    }
+                                    let textWidth = getWidth(element, start_date);
+                                    textElement.set({
+                                        text: start_date,
+                                        width: textWidth,
+                                    });
+                                } else {
+                                    return; // Skip adding the element if start_date is empty
+                                }
+                                break;
+                            case "end_date":
+                                if (eventData.event_date) {
+                                    var end_date = "";
+                                    if (eventData.event_date.includes(" To ")) {
+                                        let [start, end] =
+                                        eventData.event_date.split(" To ");
+                                        end_date = end;
+                                    } else {
+                                        end_date = eventData.event_date;
+                                    }
+                                    let textWidth = getWidth(element, end_date);
+                                    textElement.set({
+                                        text: end_date,
+                                        width: textWidth,
+                                    });
+                                } else {
+                                    return; // Skip adding the element if end_date is empty
+                                }
+                                break;
+                        }
                     }
 
                     canvas.add(textElement);
